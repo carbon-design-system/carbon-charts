@@ -100,7 +100,6 @@ export class Area extends Component {
 					y2: "100%",
 					stops: GradientUtils.getStops(
 						domain,
-						dataset,
 						this.model.getFillColor(dataset.name)
 					)
 				});

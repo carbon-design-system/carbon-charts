@@ -26,16 +26,12 @@ export class GradientUtils extends Service {
 		}
 	}
 
-	static getOffsetRatio(dataset) {
-		const minAndMax = [
-			Math.min.apply(Math, dataset.map(function(o) { return o.value; })),
-			Math.max.apply(Math, dataset.map(function(o) { return o.value; }))
-		];
-		const offsetRatio = (Math.abs(minAndMax[1]) * 100 / Math.abs(minAndMax[0] - minAndMax[1])).toFixed(2) + "%";
+	static getOffsetRatio(domain) {
+		const offsetRatio = (Math.abs(domain[1]) * 100 / Math.abs(domain[0] - domain[1])).toFixed(2) + "%";
 		return offsetRatio;
 	}
 
-	static getStops(domain, dataset, color) {
+	static getStops(domain, color) {
 		const is3Stops = GradientUtils.need3Stops(domain);
 		let stops: object[] = [
 			{
@@ -58,7 +54,7 @@ export class GradientUtils extends Service {
 					opacity: "0.6"
 				},
 				{
-					offset: GradientUtils.getOffsetRatio(dataset.data),
+					offset: GradientUtils.getOffsetRatio(domain),
 					color: color,
 					opacity: "0"
 				},
