@@ -68,6 +68,7 @@ export class Axis extends Component {
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
+		const isAxisVisible = Tools.getProperty(options, "axes", axisPosition, "visible");
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
@@ -141,11 +142,26 @@ export class Axis extends Component {
 			.attr("aria-hidden", true)
 			.attr("aria-label", `invisible ${axisPosition} ticks`);
 
-		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const isTimeScaleType =
+			this.scaleType === ScaleTypes.TIME ||
+			axisOptions.scaleType === ScaleTypes.TIME;
+		const isVerticalAxis =
+			axisPosition === AxisPositions.LEFT ||
+			axisPosition === AxisPositions.RIGHT;
+
+		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
+		// update scale domain to zoomDomain.
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
+			scale.domain(zoomDomain);
+		}
+
+		if (!isAxisVisible) {
+			axisRef.attr("aria-hidden", true);
 			return;
 		}
 
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
 		const isDataLoading = Tools.getProperty(options, "data", "loading");
 		const numberOfTicksProvided = Tools.getProperty(
@@ -180,9 +196,6 @@ export class Axis extends Component {
 		);
 
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
-		const isVerticalAxis =
-			axisPosition === AxisPositions.LEFT ||
-			axisPosition === AxisPositions.RIGHT;
 		const timeScaleOptions = Tools.getProperty(options, "timeScale");
 
 		// Append to DOM a fake tick to get the right computed font height
@@ -195,18 +208,8 @@ export class Axis extends Component {
 		}).height;
 		fakeTick.remove();
 
-		const isTimeScaleType =
-			this.scaleType === ScaleTypes.TIME ||
-			axisOptions.scaleType === ScaleTypes.TIME;
 		const scaleType =
 			this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
-
-		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
-		// update scale domain to zoomDomain.
-		const zoomDomain = this.model.get("zoomDomain");
-		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
-			scale.domain(zoomDomain);
-		}
 
 		// Initialize axis object
 		const axis = axisFunction(scale).tickSizeOuter(0);
