@@ -10,6 +10,7 @@ import {
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
+import { TickRotations } from "../../interfaces/enums";
 import * as Configuration from "../../configuration";
 import {
 	computeTimeIntervalName,
@@ -29,9 +30,6 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
-	// Track whether zoom domain needs to update in a render
-	zoomDomainChanging = false;
-
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -40,29 +38,6 @@ export class Axis extends Component {
 		}
 
 		this.margins = this.configs.margins;
-		this.init();
-	}
-
-	init() {
-		this.services.events.addEventListener(
-			Events.ZoomBar.SELECTION_START,
-			this.handleZoomBarSelectionStart
-		);
-		this.services.events.addEventListener(
-			Events.ZoomBar.SELECTION_END,
-			this.handleZoomBarSelectionEnd
-		);
-	}
-
-	handleZoomBarSelectionStart = () => {
-		this.zoomDomainChanging = true;
-	}
-
-	handleZoomBarSelectionEnd = () => {
-		this.zoomDomainChanging = false;
-		// need another update after zoom bar selection is completed
-		// to make sure the tick rotation is calculated correctly
-		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	}
 
 	render(animate = true) {
@@ -130,6 +105,7 @@ export class Axis extends Component {
 			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
 			axisRef.attr("aria-label", `${axisPosition} ticks`);
 		}
+
 		// We draw the invisible axis because of the async nature of d3 transitions
 		// To be able to tell the final width & height of the axis when initiaing the transition
 		// The invisible axis is updated instantly and without a transition
@@ -445,41 +421,56 @@ export class Axis extends Component {
 			axisPosition === AxisPositions.BOTTOM ||
 			axisPosition === AxisPositions.TOP
 		) {
-			let rotateTicks = false;
+			let shouldRotateTicks = false;
+			// user could decide if tick rotation is required during zoom domain changing
+			const tickRotation = Tools.getProperty(
+				axisOptions,
+				"ticks",
+				"rotation"
+			);
 
-			// If we're dealing with a discrete scale type
-			// We're able to grab the spacing between the ticks
-			if (scale.step) {
-				const textNodes = invisibleAxisRef
-					.selectAll("g.tick text")
-					.nodes();
+			if (tickRotation === TickRotations.ALWAYS) {
+				shouldRotateTicks = true;
+			} else if (tickRotation === TickRotations.NEVER) {
+				shouldRotateTicks = false;
+			} else if (!tickRotation || tickRotation === TickRotations.AUTO) {
+				// if the option is not set or set to AUTO
 
-				// If any ticks are any larger than the scale step size
-				rotateTicks = textNodes.some(
-					(textNode) =>
-						DOMUtils.getSVGElementSize(textNode, { useBBox: true })
-							.width >= scale.step()
-				);
-			} else {
-				// When dealing with a continuous scale
-				// We need to calculate an estimated size of the ticks
-				const minTickSize =
-					Tools.getProperty(
-						axisOptions,
-						"ticks",
-						"rotateIfSmallerThan"
-					) || Configuration.axis.ticks.rotateIfSmallerThan;
-				const ticksNumber = isTimeScaleType
-					? axis.tickValues().length
-					: scale.ticks().length;
-				const estimatedTickSize = width / ticksNumber / 2;
-				rotateTicks = isTimeScaleType
-					? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-					: estimatedTickSize < minTickSize;
+				// depending on if tick rotation is necessary by calculating space
+				// If we're dealing with a discrete scale type
+				// We're able to grab the spacing between the ticks
+				if (scale.step) {
+					const textNodes = invisibleAxisRef
+						.selectAll("g.tick text")
+						.nodes();
+
+					// If any ticks are any larger than the scale step size
+					shouldRotateTicks = textNodes.some(
+						(textNode) =>
+							DOMUtils.getSVGElementSize(textNode, {
+								useBBox: true
+							}).width >= scale.step()
+					);
+				} else {
+					// When dealing with a continuous scale
+					// We need to calculate an estimated size of the ticks
+					const minTickSize =
+						Tools.getProperty(
+							axisOptions,
+							"ticks",
+							"rotateIfSmallerThan"
+						) || Configuration.axis.ticks.rotateIfSmallerThan;
+					const ticksNumber = isTimeScaleType
+						? axis.tickValues().length
+						: scale.ticks().length;
+					const estimatedTickSize = width / ticksNumber / 2;
+					shouldRotateTicks = isTimeScaleType
+						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+						: estimatedTickSize < minTickSize;
+				}
 			}
 
-			// always rotate ticks if zoomDomain is changing to avoid rotation flips during zoomDomain changing
-			if (rotateTicks || this.zoomDomainChanging) {
+			if (shouldRotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(
@@ -696,15 +687,5 @@ export class Axis extends Component {
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
-
-		// Remove zoom bar event listeners
-		this.services.events.removeEventListener(
-			Events.ZoomBar.SELECTION_START,
-			this.handleZoomBarSelectionStart
-		);
-		this.services.events.removeEventListener(
-			Events.ZoomBar.SELECTION_END,
-			this.handleZoomBarSelectionEnd
-		);
 	}
 }
