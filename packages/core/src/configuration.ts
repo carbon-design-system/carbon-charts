@@ -92,12 +92,12 @@ const axes: AxesOptions = {
 		truncation: standardTruncationOptions
 	},
 	bottom: {
-		visible: false,
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	left: {
-		visible: false,
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
