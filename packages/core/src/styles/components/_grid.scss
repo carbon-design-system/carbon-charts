@@ -7,6 +7,8 @@
 		} @else {
 			fill: $ui-background;
 		}
+	}
+	rect.chart-grid-backdrop.stroked {
 		stroke: $ui-03;
 	}
 
