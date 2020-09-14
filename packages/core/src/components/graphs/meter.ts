@@ -33,10 +33,10 @@ export class Meter extends Component {
 			.attr("height", Tools.getProperty(options, "meter", "height"));
 
 		// value larger than 100 will display as 100% on meter chart
-		const dataset = data.value <= 100 ? data : (data["value"] = 100);
+		const maximumBarWidth = data.value >= 100;
 
 		// rect with the value binded
-		const value = svg.selectAll("rect.value").data([dataset]);
+		const value = svg.selectAll("rect.value").data([data]);
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
@@ -50,14 +50,14 @@ export class Meter extends Component {
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", Tools.getProperty(options, "meter", "height"))
-			.classed(`status--${status}`, status != null && !userProvidedScale)
+			.attr("class", status != null && !userProvidedScale ? `value status--${status}` : "")
 			.transition(
 				this.services.transitions.getTransition(
 					"meter-bar-update",
 					animate
 				)
 			)
-			.attr("width", (d) => xScale(d.value))
+			.attr("width", (d) => maximumBarWidth ? xScale(100) : xScale(d.value))
 			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -69,11 +69,11 @@ export class Meter extends Component {
 
 		// update the peak if it is less than the value, it should be equal to the value
 		const updatedPeak =
-			peakValue !== null && peakValue < dataset.value
-				? dataset.value
+			peakValue !== null && peakValue < data.value
+				? data.value
 				: peakValue;
 		// dont display peak if there isnt one
-		const peakData = updatedPeak === null ? [] : [updatedPeak];
+		const peakData = updatedPeak === null || maximumBarWidth ? [] : [updatedPeak];
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak").data(peakData);
