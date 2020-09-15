@@ -49,16 +49,14 @@ export class Ruler extends Component {
 		this.drawBackdrop();
 
 		if (isRulerEnabled && !this.isEventListenerAdded) {
-			this.isEventListenerAdded = true;
 			this.addBackdropEventListeners();
 		} else if (!isRulerEnabled && this.isEventListenerAdded) {
-			this.isEventListenerAdded = false;
-			// remove backdrop event listeners
 			this.removeBackdropEventListeners();
 		}
 	}
 
 	removeBackdropEventListeners() {
+		this.isEventListenerAdded = false;
 		this.backdrop.on("mousemove mouseover mouseout", null);
 	}
 
@@ -223,6 +221,7 @@ export class Ruler extends Component {
 	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
 	 */
 	addBackdropEventListeners() {
+		this.isEventListenerAdded = true;
 		const self = this;
 		const displayData = this.model.getDisplayData();
 
