@@ -62,9 +62,13 @@ const legend: LegendOptions = {
  */
 export const grid: GridOptions = {
 	x: {
+		// set enable to false will not draw grid and stroke of grid backdrop
+		enabled: true,
 		numberOfTicks: 15
 	},
 	y: {
+		// set enable to false will not draw grid and stroke of grid backdrop
+		enabled: true,
 		numberOfTicks: 5
 	}
 };
@@ -195,13 +199,27 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 } as BarChartOptions);
 
 /**
+ * options specific to scatter charts
+ */
+const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
+	points: {
+		// default point radius to 4
+		radius: 4,
+		fillOpacity: 0.3,
+		filled: true,
+		enabled: true
+	}
+} as ScatterChartOptions);
+
+/**
  * options specific to line charts
  */
-const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
+const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
 	points: {
 		// default point radius to 3
 		radius: 3,
-		filled: false
+		filled: false,
+		enabled: true
 	}
 } as LineChartOptions);
 
@@ -220,18 +238,6 @@ const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
 const stackedAreaChart = areaChart;
 
 /**
- * options specific to scatter charts
- */
-const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
-	points: {
-		// default point radius to 4
-		radius: 4,
-		fillOpacity: 0.3,
-		filled: true
-	}
-} as ScatterChartOptions);
-
-/**
  * options specific to bubble charts
  */
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
@@ -247,7 +253,8 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 				(smallerChartDimension * 25) / 400
 			];
 		},
-		fillOpacity: 0.2
+		fillOpacity: 0.2,
+		enabled: true
 	}
 } as BubbleChartOptions);
 

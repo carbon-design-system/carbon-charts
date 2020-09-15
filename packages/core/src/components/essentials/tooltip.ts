@@ -41,11 +41,16 @@ export class Tooltip extends Component {
 				"customHTML"
 			)
 		) {
-			this.tooltipTextContainer.html(
-				this.model
-					.getOptions()
-					.tooltip.customHTML(data, defaultHTML)
-			);
+			if (e.detail.content) {
+						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+						this.tooltipTextContainer.html(labelHTML);
+					} else {
+						this.tooltipTextContainer.html(
+						this.model
+							.getOptions()
+							.tooltip.customHTML(data, defaultHTML)
+						);
+					}
 		} else {
 			// Use default tooltip
 			this.tooltipTextContainer.html(defaultHTML);
