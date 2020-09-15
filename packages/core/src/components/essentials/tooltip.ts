@@ -63,8 +63,6 @@ export class Tooltip extends Component {
 		this.tooltip.classed("hidden", false);
 	}
 
-	handleShowTooltipVar = (e) => this.handleShowTooltip(e);
-
 	handleHideTooltip = () => {
 		this.tooltip.classed("hidden", true);
 	}
@@ -81,7 +79,7 @@ export class Tooltip extends Component {
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(
 			Events.Tooltip.SHOW,
-			this.handleShowTooltipVar
+			this.handleShowTooltip
 		);
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
@@ -101,7 +99,7 @@ export class Tooltip extends Component {
 		// remove show-tooltip Custom Events
 		this.services.events.removeEventListener(
 			Events.Tooltip.SHOW,
-			this.handleShowTooltipVar
+			this.handleShowTooltip
 		);
 
 		// remove hide-tooltip Custom Events
