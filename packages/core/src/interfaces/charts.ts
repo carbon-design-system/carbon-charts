@@ -157,6 +157,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 		filled?: boolean;
+		enabled?: boolean;
 	};
 }
 
@@ -181,6 +182,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * Opacity of the fills used within each circle
 		 */
 		fillOpacity?: number;
+		/**
+		 * enabled scatter dot or not
+		 */
+		enabled?: boolean;
 	};
 }
 

@@ -14,6 +14,7 @@ import {
 	RadarChartOptions,
 	// Components
 	GridOptions,
+	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
@@ -74,6 +75,15 @@ export const grid: GridOptions = {
 };
 
 /**
+ * Ruler options
+ */
+export const ruler: RulerOptions = {
+	// enable or disable ruler
+	enabled: true
+};
+
+
+/**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
@@ -87,18 +97,22 @@ export const baseTooltip: TooltipOptions = {
 // and by TwoDimensionalAxes.
 const axes: AxesOptions = {
 	top: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	bottom: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	left: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	right: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	}
@@ -153,6 +167,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
+	ruler,
 	zoomBar: {
 		top: {
 			enabled: false,
@@ -201,13 +216,27 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 } as BarChartOptions);
 
 /**
+ * options specific to scatter charts
+ */
+const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
+	points: {
+		// default point radius to 4
+		radius: 4,
+		fillOpacity: 0.3,
+		filled: true,
+		enabled: true
+	}
+} as ScatterChartOptions);
+
+/**
  * options specific to line charts
  */
-const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
+const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
 	points: {
 		// default point radius to 3
 		radius: 3,
-		filled: false
+		filled: false,
+		enabled: true
 	}
 } as LineChartOptions);
 
@@ -226,18 +255,6 @@ const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
 const stackedAreaChart = areaChart;
 
 /**
- * options specific to scatter charts
- */
-const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
-	points: {
-		// default point radius to 4
-		radius: 4,
-		fillOpacity: 0.3,
-		filled: true
-	}
-} as ScatterChartOptions);
-
-/**
  * options specific to bubble charts
  */
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
@@ -253,7 +270,8 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 				(smallerChartDimension * 25) / 400
 			];
 		},
-		fillOpacity: 0.2
+		fillOpacity: 0.2,
+		enabled: true
 	}
 } as BubbleChartOptions);
 
