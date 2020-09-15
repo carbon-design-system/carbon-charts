@@ -88,6 +88,10 @@ export interface AxisOptions {
 		values?: any[];
 	};
 	truncation?: TruncationOptions;
+	/**
+	 * is axis visible or not
+	 */
+	visible?: boolean;
 }
 
 /**

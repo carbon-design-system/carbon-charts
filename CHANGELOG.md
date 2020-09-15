@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.37.1...v0.38.0) (2020-09-15)
+
+
+### Features
+
+* **core:** enable or disable ruler ([#765](https://github.com/carbon-design-system/carbon-charts/issues/765)) ([bef6daf](https://github.com/carbon-design-system/carbon-charts/commit/bef6daf53e2c7c825d39daa160e9f721ddec0b29))
+
+
+
+
+
+## [0.37.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.37.0...v0.37.1) (2020-09-14)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 # [0.37.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.4...v0.37.0) (2020-09-11)
 
 
