@@ -20,7 +20,6 @@ export class Tooltip extends Component {
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false;
 	tooltip: any;
-	tooltipTextContainer: any;
 	positionService = new Position();
 
 	constructor(model: ChartModel, services: any, configs?: any) {
@@ -33,6 +32,11 @@ export class Tooltip extends Component {
 		const data = e.detail.data || e.detail.items;
 		const defaultHTML = this.getTooltipHTML(e);
 
+		const tooltipTextContainer = DOMUtils.appendOrSelect(
+				this.tooltip,
+				"div.content-box"
+			);
+
 		// if there is a provided tooltip HTML function call it
 		if (
 			Tools.getProperty(
@@ -43,9 +47,9 @@ export class Tooltip extends Component {
 		) {
 			if (e.detail.content) {
 						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
-						this.tooltipTextContainer.html(labelHTML);
+						tooltipTextContainer.html(labelHTML);
 					} else {
-						this.tooltipTextContainer.html(
+						tooltipTextContainer.html(
 						this.model
 							.getOptions()
 							.tooltip.customHTML(data, defaultHTML)
@@ -53,7 +57,7 @@ export class Tooltip extends Component {
 					}
 		} else {
 			// Use default tooltip
-			this.tooltipTextContainer.html(defaultHTML);
+			tooltipTextContainer.html(defaultHTML);
 		}
 
 		// Position the tooltip
@@ -237,7 +241,7 @@ export class Tooltip extends Component {
 			);
 
 			// Apply html content to the tooltip
-			this.tooltipTextContainer = DOMUtils.appendOrSelect(
+			const tooltipTextContainer = DOMUtils.appendOrSelect(
 				this.tooltip,
 				"div.content-box"
 			);
