@@ -163,3 +163,12 @@ export enum Statuses {
 	WARNING = "warning",
 	DANGER = "danger"
 }
+
+/**
+ * enum of axis ticks rotation
+ */
+export enum TickRotations {
+	ALWAYS = "always",
+	AUTO = "auto",
+	NEVER = "never"
+}
