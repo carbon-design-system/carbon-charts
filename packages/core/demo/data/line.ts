@@ -228,7 +228,10 @@ export const lineTimeSeriesCustomDomainOptions = {
 			title: "2019 Annual Sales Figures",
 			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
 			mapsTo: "date",
-			scaleType: "time"
+			scaleType: "time",
+			ticks: {
+				values: [new Date(2019, 0, 11)]
+			}
 		},
 		left: {
 			mapsTo: "value",
