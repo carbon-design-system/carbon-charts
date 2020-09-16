@@ -54,26 +54,13 @@ export class Area extends Component {
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData();
 
-		// Should gradient style be applicable
-		const isGradientAllowed =
-			groupedData &&
-			groupedData.length === 1 &&
-			Tools.getProperty(
-				this.model.getOptions(),
-				"color",
-				"gradient",
-				"enabled"
-			);
+		// Is gradient enabled or not
+		const isGradientEnabled = Tools.getProperty(this.model.getOptions(), "color", "gradient", "enabled");
 
-		if (
-			groupedData.length > 1 &&
-			Tools.getProperty(
-				this.model.getOptions(),
-				"color",
-				"gradient",
-				"enabled"
-			)
-		) {
+		// Should gradient style be applicable
+		const isGradientAllowed = groupedData && groupedData.length === 1 && isGradientEnabled;
+
+		if (groupedData.length > 1 && isGradientEnabled) {
 			console.error(
 				"Gradients can only be enabled when having 1 single dataset"
 			);
@@ -168,7 +155,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -177,7 +164,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners
