@@ -106,7 +106,7 @@ export class ChartBrush extends Component {
 			};
 
 			// assume max range is [0, width]
-			const handleZoomDomain = (startPoint, endPoint) => {
+			const updateZoomDomain = (startPoint, endPoint) => {
 				// create xScale based on current zoomDomain
 				const xScale = scaleTime().range([0, width]).domain(zoomDomain);
 
@@ -135,8 +135,8 @@ export class ChartBrush extends Component {
 				const selection = event.selection;
 
 				if (selection !== null) {
-					// handleZoomDomain assumes max range is [0, width]
-					handleZoomDomain(selection[0], selection[1]);
+					// updateZoomDomain assumes max range is [0, width]
+					updateZoomDomain(selection[0], selection[1]);
 
 					// clear brush selection
 					brushArea.call(brush.move, null);
@@ -169,8 +169,8 @@ export class ChartBrush extends Component {
 					if (rightPoint > width) {
 						rightPoint = width;
 					}
-					// handleZoomDomain assumes max range is [0, width]
-					handleZoomDomain(leftPoint, rightPoint);
+					// updateZoomDomain assumes max range is [0, width]
+					updateZoomDomain(leftPoint, rightPoint);
 				}
 			});
 		}
