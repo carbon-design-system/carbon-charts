@@ -85,12 +85,22 @@ export interface ThresholdOptions {
 
 export interface GridOptions {
 	y?: {
+		enabled?: boolean;
 		numberOfTicks?: number;
 	};
 	x?: {
+		enabled?: boolean;
 		numberOfTicks?: number;
 	};
 }
+
+/**
+ * Ruler options
+ */
+export interface RulerOptions {
+	enabled?: boolean;
+}
+
 
 export interface BarOptions {
 	width?: number;

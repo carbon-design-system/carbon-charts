@@ -1,11 +1,18 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { Roles } from "../../interfaces";
+import { Tools } from "../../tools";
 
 export class StackedScatter extends Scatter {
 	type = "scatter-stacked";
 
 	render(animate: boolean) {
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
+		if (!this.configs.alwaysEnableScatterDot) {
+			if (!isScatterEnabled) {
+				return;
+			}
+		}
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
@@ -65,5 +72,49 @@ export class StackedScatter extends Scatter {
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
+	}
+
+	getTooltipData(hoveredX, hoveredY) {
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+		const percentage = Object.keys(options.axes).some(
+			(axis) => options.axes[axis].percentage
+		);
+		const stackedData = this.model.getStackedData({ percentage });
+		const tooltipData = [];
+		stackedData.forEach((groupData, groupDataIndex) => {
+			groupData.forEach((datum, dataIndex) => {
+				const group = datum[groupMapsTo];
+				const domainValue = datum["data"]["sharedStackKey"];
+				let rangeValue = datum["data"][group];
+				const stackedRangeValue = datum[1];
+				if (
+					rangeValue &&
+					hoveredX ===
+						this.services.cartesianScales.getDomainValue(
+							domainValue
+						) &&
+					hoveredY ===
+						this.services.cartesianScales.getRangeValue(
+							stackedRangeValue
+						)
+				) {
+					if (percentage) {
+						rangeValue = this.model.getStackedData()[
+							groupDataIndex
+						][dataIndex]["data"][group];
+					}
+
+					tooltipData.push({
+						[groupMapsTo]: group,
+						[domainIdentifier]: domainValue,
+						[rangeIdentifier]: rangeValue
+					});
+				}
+			});
+		});
+		return tooltipData;
 	}
 }

@@ -51,6 +51,11 @@ export class Scatter extends Component {
 	}
 
 	render(animate: boolean) {
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "points", "enabled") ||  Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+		if (!isScatterEnabled) {
+			return;
+		}
+
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
@@ -292,6 +297,15 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 	}
 
+	getTooltipData(hoveredX, hoveredY) {
+		return this.model.getDisplayData().filter((d) => {
+			return (
+				hoveredX === this.services.cartesianScales.getDomainValue(d) &&
+				hoveredY === this.services.cartesianScales.getRangeValue(d)
+			);
+		});
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = this.model.getOptions().data;
@@ -318,23 +332,11 @@ export class Scatter extends Component {
 				const hoveredY = self.services.cartesianScales.getRangeValue(
 					datum
 				);
-				const overlappingData = self.model
-					.getDisplayData()
-					.filter((d) => {
-						return (
-							hoveredX ===
-								self.services.cartesianScales.getDomainValue(
-									d
-								) &&
-							hoveredY ===
-								self.services.cartesianScales.getRangeValue(d)
-						);
-					});
-
+				const tooltipData = self.getTooltipData(hoveredX, hoveredY);
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: overlappingData
+					data: tooltipData
 				});
 
 				// Dispatch mouse event

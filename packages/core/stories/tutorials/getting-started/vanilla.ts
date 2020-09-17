@@ -12,13 +12,13 @@ consistent markup, styles, and behavior in prototype and production work.
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts d3
+yarn add @carbon/charts d3@5.x
 \`\`\`
 
 **with npm:**
 
 \`\`\`bash
-npm install --save @carbon/charts d3
+npm install --save @carbon/charts d3@5.x
 \`\`\`
 
 **Note:** you'd also need to install \`carbon-components\` if you're not using a bundled version of the library.
