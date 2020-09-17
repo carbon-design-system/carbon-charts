@@ -240,11 +240,6 @@ export class Tooltip extends Component {
 				`div.${settings.prefix}--${chartprefix}--tooltip`
 			);
 
-			// Apply html content to the tooltip
-			const tooltipTextContainer = DOMUtils.appendOrSelect(
-				this.tooltip,
-				"div.content-box"
-			);
 			this.tooltip.style("max-width", null);
 			if (!this.isEventListenerAdded) {
 				this.addTooltipEventListener();
