@@ -250,3 +250,13 @@ $color-map: ();
 		}
 	}
 }
+
+.#{$prefix}--#{$charts-prefix}--tooltip {
+	@include getThemeColors();
+
+	@each $token, $color in $color-map {
+		.tooltip-#{$token} {
+			background-color: $color;
+		}
+	}
+}

@@ -36,6 +36,7 @@ export class ChartModel {
 	protected colorScale: any = {};
 
 	protected colorClasses: any = {};
+	protected tooltipColorClasses: any = {};
 
 	constructor(services: any) {
 		this.services = services;
@@ -449,6 +450,10 @@ export class ChartModel {
 		return this.colorClasses;
 	}
 
+	getTooltipColorClasses() {
+		return this.tooltipColorClasses;
+	}
+
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
@@ -626,8 +631,11 @@ export class ChartModel {
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
 		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
-		const colorClassNames = this.allDataGroups.map((dataGroup, index) => 
+		const fillColorClassNames = this.allDataGroups.map((dataGroup, index) => 
 			`color-fill-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+		)
+		const tooltipColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
+			`tooltip-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
 		)
 
 		// If there is no valid user provided scale, use the default set of colors
@@ -636,7 +644,11 @@ export class ChartModel {
 			Object.keys(userProvidedScale).length === 0
 		) {
 			this.colorClasses = scaleOrdinal()
-				.range(colorClassNames)
+				.range(fillColorClassNames)
+				.domain(this.allDataGroups);
+
+			this.tooltipColorClasses = scaleOrdinal()
+				.range(tooltipColorClassesNames)
 				.domain(this.allDataGroups);
 
 			return;
