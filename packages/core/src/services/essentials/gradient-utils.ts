@@ -20,19 +20,13 @@ export class GradientUtils extends Service {
 		}
 	}
 
-	static need3Stops(domain) {
-		if (domain[0] < 0 && domain[1] > 0) {
-			return true;
-		}
-	}
-
 	static getOffsetRatio(domain) {
 		const offsetRatio = (Math.abs(domain[1]) * 100 / Math.abs(domain[0] - domain[1])).toFixed(2) + "%";
 		return offsetRatio;
 	}
 
 	static getStops(domain, color) {
-		const is3Stops = GradientUtils.need3Stops(domain);
+		const need3Stops = domain[0] < 0 && domain[1] > 0;
 		let stops: object[] = [
 			{
 				offset: "0%",
@@ -46,7 +40,7 @@ export class GradientUtils extends Service {
 			}
 		];
 
-		if (is3Stops) {
+		if (need3Stops) {
 			stops = [
 				{
 					offset: "0%",

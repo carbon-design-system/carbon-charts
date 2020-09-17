@@ -77,19 +77,17 @@ export class Area extends Component {
 		}
 
 		if (isGradientAllowed) {
-			groupedData.forEach((dataset) => {
-				GradientUtils.appendLinearGradient({
-					svg: this.parent,
-					id: dataset.name.replace(" ", "") + "_" + this.gradient_id,
-					x1: "0%",
-					x2: "0%",
-					y1: "0%",
-					y2: "100%",
-					stops: GradientUtils.getStops(
-						domain,
-						this.model.getFillColor(dataset.name)
-					)
-				});
+			GradientUtils.appendLinearGradient({
+				svg: this.parent,
+				id: groupedData[0].name.replace(" ", "") + "_" + this.gradient_id,
+				x1: "0%",
+				x2: "0%",
+				y1: "0%",
+				y2: "100%",
+				stops: GradientUtils.getStops(
+					domain,
+					this.model.getFillColor(groupedData[0].name)
+				)
 			});
 		}
 
