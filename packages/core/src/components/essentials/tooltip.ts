@@ -222,8 +222,9 @@ export class Tooltip extends Component {
 	}
 
 	render() {
+		const options = this.model.getOptions();
 		const isTooltipEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			"tooltip",
 			"enabled"
 		);
@@ -231,7 +232,7 @@ export class Tooltip extends Component {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder());
 			const chartprefix = Tools.getProperty(
-				this.model.getOptions(),
+				options,
 				"style",
 				"prefix"
 			);
@@ -256,8 +257,9 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
+		const options = this.model.getOptions();
 		const isTopZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			"zoomBar",
 			"top",
 			"enabled"
@@ -268,7 +270,7 @@ export class Tooltip extends Component {
 			mouseRelativePos = mouse(holder);
 		} else {
 			const zoombarType = Tools.getProperty(
-				this.model.getOptions(),
+				options,
 				"zoomBar",
 				"top",
 				"type"
