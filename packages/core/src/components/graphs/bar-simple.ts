@@ -43,7 +43,6 @@ export class SimpleBar extends Bar {
 
 		// Add the paths that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
-		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
 
 		barsEnter
 			.merge(bars)
@@ -55,12 +54,7 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr("class", (d) => {
-				if (paletteIndex) {
-					return `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
-				}
-			})
-			.attr("fill", (d) => !paletteIndex ? this.model.getFillColor(d[groupMapsTo]) : null)
+			.attr("class", (d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`)
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts

@@ -107,7 +107,7 @@ export class GroupedBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("class", (d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`)
 			.attr("d", (d) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
