@@ -66,17 +66,12 @@ export class Bubble extends Scatter {
 			)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
-			.attr("fill", (d) =>
-				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
-			)
+			.attr("class", (d) => 
+				`dot 
+				${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
+				${this.model.getColorClasses()(d[groupMapsTo])}
+				`)
 			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
-					d[groupMapsTo],
-					d[domainIdentifier],
-					d
-				)
-			)
 			.attr("opacity", 1);
 	}
 }

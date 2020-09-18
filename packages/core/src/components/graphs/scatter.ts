@@ -215,7 +215,8 @@ export class Scatter extends Component {
 			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("fill", (d) => {
+			.attr("class", (d) => `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])}`)
+			.attr("class", (d) => {
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -224,21 +225,12 @@ export class Scatter extends Component {
 						filled
 					)
 				) {
-					return this.model.getFillColor(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d
-					);
+					return `dot 
+						${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
+						${this.model.getColorClasses()(d[groupMapsTo])}`
 				}
 			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
-					d[groupMapsTo],
-					d[domainIdentifier],
-					d
-				)
-			)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -318,13 +310,7 @@ export class Scatter extends Component {
 
 				hoveredElement
 					.classed("hovered", true)
-					.style("fill", (d: any) =>
-						self.model.getFillColor(
-							d[groupMapsTo],
-							d[domainIdentifier],
-							d
-						)
-					);
+					.attr("class", (d) => `hovered ${this.model.getColorClasses()(d[groupMapsTo])}`)
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum

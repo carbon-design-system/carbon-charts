@@ -247,6 +247,11 @@ $color-map: ();
 				fill: darken($color, 7%);
 			}
 		}
+
+		.color-stroke-#{$token} {
+			stroke: $color;
+		}
+
 	}
 }
 

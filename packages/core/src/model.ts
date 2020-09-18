@@ -37,6 +37,7 @@ export class ChartModel {
 
 	protected colorClasses: any = {};
 	protected tooltipColorClasses: any = {};
+	protected strokeColorClasses: any = {};
 
 	constructor(services: any) {
 		this.services = services;
@@ -454,6 +455,10 @@ export class ChartModel {
 		return this.tooltipColorClasses;
 	}
 
+	getStrokeColorClasses() {
+		return this.strokeColorClasses;
+	}
+
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
@@ -637,6 +642,9 @@ export class ChartModel {
 		const tooltipColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
 			`tooltip-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
 		)
+		const strokeColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
+			`color-stroke-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+		)
 
 		// If there is no valid user provided scale, use the default set of colors
 		if (
@@ -649,6 +657,10 @@ export class ChartModel {
 
 			this.tooltipColorClasses = scaleOrdinal()
 				.range(tooltipColorClassesNames)
+				.domain(this.allDataGroups);
+
+			this.strokeColorClasses = scaleOrdinal()
+				.range(strokeColorClassesNames)
 				.domain(this.allDataGroups);
 
 			return;
