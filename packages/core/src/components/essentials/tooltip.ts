@@ -50,9 +50,9 @@ export class Tooltip extends Component {
 						tooltipTextContainer.html(labelHTML);
 					} else {
 						tooltipTextContainer.html(
-						this.model
-							.getOptions()
-							.tooltip.customHTML(data, defaultHTML)
+							this.model
+								.getOptions()
+								.tooltip.customHTML(data, defaultHTML)
 						);
 					}
 		} else {
@@ -150,6 +150,7 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
+				item.value = this.valueFormatter(item.value);
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
@@ -189,9 +190,9 @@ export class Tooltip extends Component {
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
 								${
 									item.color
-										? "<a style=\"background-color: " +
+										? '<a style="background-color: ' +
 										  item.color +
-										  "\" class=\"tooltip-color\"></a>"
+										  '" class="tooltip-color"></a>'
 										: ""
 								}
 								<p class="label">${item.label}</p>
