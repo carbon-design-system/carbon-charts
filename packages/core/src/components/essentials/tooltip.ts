@@ -33,17 +33,13 @@ export class Tooltip extends Component {
 		const defaultHTML = this.getTooltipHTML(e);
 
 		const tooltipTextContainer = DOMUtils.appendOrSelect(
-				this.tooltip,
-				"div.content-box"
-			);
+			this.tooltip,
+			"div.content-box"
+		);
 
 		// if there is a provided tooltip HTML function call it
 		if (
-			Tools.getProperty(
-				this.model.getOptions(),
-				"tooltip",
-				"customHTML"
-			)
+			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
 		) {
 			if (e.detail.content) {
 						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
@@ -64,12 +60,12 @@ export class Tooltip extends Component {
 		this.positionTooltip(e);
 
 		// Fade in
-		this.tooltip.classed("hidden", false);
-	}
+		this.tooltip.classed("hidden", false).attr("aria-hidden", false);
+	};
 
 	handleHideTooltip = () => {
-		this.tooltip.classed("hidden", true);
-	}
+		this.tooltip.classed("hidden", true).attr("aria-hidden", true);
+	};
 
 	addTooltipEventListener() {
 		// listen to move-tooltip Custom Events to move the tooltip
@@ -95,10 +91,7 @@ export class Tooltip extends Component {
 
 	removeTooltipEventListener() {
 		// remove move-tooltip Custom Events
-		this.services.events.removeEventListener(
-			Events.Tooltip.MOVE,
-			null
-		);
+		this.services.events.removeEventListener(Events.Tooltip.MOVE, null);
 
 		// remove show-tooltip Custom Events
 		this.services.events.removeEventListener(
@@ -232,11 +225,7 @@ export class Tooltip extends Component {
 		if (isTooltipEnabled) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder());
-			const chartprefix = Tools.getProperty(
-				options,
-				"style",
-				"prefix"
-			);
+			const chartprefix = Tools.getProperty(options, "style", "prefix");
 			this.tooltip = DOMUtils.appendOrSelect(
 				holder,
 				`div.${settings.prefix}--${chartprefix}--tooltip`
