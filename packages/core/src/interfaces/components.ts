@@ -116,6 +116,11 @@ export interface StackedBarOptions extends BarOptions {
  */
 export interface ZoomBarsOptions {
 	/**
+	 * a variable to handle default zoom in ratio (0 ~ 1.0)
+	 * ex: shift click zoom in ratio
+	 */
+	zoomRatio?: number;
+	/**
 	 * currently only the top position is supported
 	 */
 	top?: ZoomBarOptions;

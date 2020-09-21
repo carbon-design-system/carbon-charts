@@ -1,5 +1,5 @@
 // Internal Imports
-import { AxisPositions, ScaleTypes } from "../interfaces";
+import { AxisPositions, Events, ScaleTypes } from "../interfaces";
 import { Service } from "./service";
 import { Tools } from "../tools";
 
@@ -98,6 +98,21 @@ export class Zoom extends Service {
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
 			extent(zoomBarData, (d: any) => d[domainIdentifier])
+		);
+	}
+
+	handleDomainChange(newDomain) {
+		this.model.set({ zoomDomain: newDomain }, { animate: false });
+		this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+			newDomain
+		});
+	}
+
+	getZoomRatio() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"zoomRatio"
 		);
 	}
 
