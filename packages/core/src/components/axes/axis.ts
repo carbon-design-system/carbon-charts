@@ -295,24 +295,24 @@ export class Axis extends Component {
 
 		// prioritize using a custom array of values rather than number of ticks
 		// if both are provided. custom tick values need to be within the domain
+		const bounds = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
+		const lowerBound = bounds[0];
+		const upperBound = bounds[1];
+
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
 				// check the supplied ticks are within the domain
-				const bounds = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
-				const validTicks = userProvidedTickValues.filter((tick)=>{
+				const validTicks = userProvidedTickValues.filter((tick) => {
 					const result = new Date(tick).getTime();
-					const lowerBound = new Date(bounds[0]).getTime();
-					const upperBound = new Date(bounds[1]).getTime();
-
 					// if its within the range use it
-					if (result >= lowerBound && result <= upperBound) {
+					if (result >= new Date(lowerBound).getTime() && result <= new Date(upperBound).getTime()) {
 						return tick;
 					}
 				});
-
 				axis.tickValues(validTicks);
 			} else {
-				axis.tickValues(userProvidedTickValues);
+				const validTicks = userProvidedTickValues.filter((tick) => tick >= lowerBound && tick <= upperBound);
+				axis.tickValues(validTicks);
 			}
 		}
 
