@@ -294,26 +294,24 @@ export class Axis extends Component {
 		axis.tickFormat(formatter);
 
 		// prioritize using a custom array of values rather than number of ticks
-		// if both are provided. custom tick values need to be within the domain
-		const bounds = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
-		const lowerBound = bounds[0];
-		const upperBound = bounds[1];
-
+		// if both are provided. custom tick values need to be within the domain of the scale
+		const [lowerBound, upperBound] = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
+		let validTicks;
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
-				// check the supplied ticks are within the domain
-				const validTicks = userProvidedTickValues.filter((tick) => {
-					const result = new Date(tick).getTime();
-					// if its within the range use it
-					if (result >= new Date(lowerBound).getTime() && result <= new Date(upperBound).getTime()) {
-						return tick;
-					}
+				// check the supplied ticks are within the time domain
+				validTicks = userProvidedTickValues.filter((tick) => {
+					const tickTimestamp = new Date(tick).getTime();
+					return tickTimestamp >= new Date(lowerBound).getTime() && tickTimestamp <= new Date(upperBound).getTime();
 				});
-				axis.tickValues(validTicks);
+			} else if (axisScaleType === ScaleTypes.LABELS) {
+				const discreteDomain = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
+				validTicks = userProvidedTickValues.filter((tick) => discreteDomain.includes(tick));
 			} else {
-				const validTicks = userProvidedTickValues.filter((tick) => tick >= lowerBound && tick <= upperBound);
-				axis.tickValues(validTicks);
+				// continuous scales
+				validTicks = userProvidedTickValues.filter((tick) => tick >= lowerBound && tick <= upperBound);
 			}
+			axis.tickValues(validTicks);
 		}
 
 		// Position and transition the axis
