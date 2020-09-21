@@ -28,6 +28,13 @@ export enum ZoomBar {
 }
 
 /**
+ * enum of all events related to the zoom domain
+ */
+export enum ZoomDomain {
+	CHANGE = "zoom-domain-change"
+}
+
+/**
  * enum of all axis-related events
  */
 export enum Axis {

@@ -127,6 +127,16 @@ export class ChartModel {
 	}
 
 	getDataGroups() {
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			"data",
+			"loading"
+		);
+
+		// No data should be displayed while data is still loading
+		if (isDataLoading) {
+			return [];
+		}
 		return this.get("dataGroups");
 	}
 
