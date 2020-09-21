@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
+import { AxisPositions, Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
@@ -43,13 +43,13 @@ export class ZoomBar extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading("top");
-		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked("top");
+		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(AxisPositions.TOP);
+		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(AxisPositions.TOP);
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 
@@ -121,7 +121,7 @@ export class ZoomBar extends Component {
 			const newInitialZoomDomain = Tools.getProperty(
 				this.model.getOptions(),
 				"zoomBar",
-				"top",
+				AxisPositions.TOP,
 				"initialZoomDomain"
 			);
 
@@ -252,7 +252,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
@@ -320,7 +320,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const handleHeight = Configuration.zoomBar.height[zoombarType];
@@ -408,7 +408,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
@@ -468,7 +468,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];

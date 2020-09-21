@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "./service";
-import { Events } from "../interfaces";
+import { AxisPositions, Events } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 imports
@@ -19,7 +19,7 @@ export class Zoom extends Service {
 		const definedZoomBarData = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"data"
 		);
 		// if user already defines zoom bar data, use it

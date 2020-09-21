@@ -38,7 +38,7 @@ export class AxisChart extends Chart {
 		const isZoomBarEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"enabled"
 		);
 
@@ -57,7 +57,9 @@ export class AxisChart extends Chart {
 			mainXScaleType === ScaleTypes.TIME;
 
 		// @todo - should check if zoom bar in all axes are locked
-		const isZoomBarLocked = this.services.zoom.isZoomBarLocked("top");
+		const isZoomBarLocked = this.services.zoom.isZoomBarLocked(
+			AxisPositions.TOP
+		);
 
 		const titleComponent = {
 			id: "title",
