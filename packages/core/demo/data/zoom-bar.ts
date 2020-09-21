@@ -127,6 +127,10 @@ export const zoomBarLockedOptions = addZoomBarToOptions(
 		{
 			data: {
 				loading: true
+			},
+			// required for correct spacing after PR 785
+			legend: {
+				enabled: false
 			}
 		},
 		barChart.stackedBarTimeSeriesOptions
@@ -147,6 +151,10 @@ export const zoomBarSkeletonOptions = addZoomBarToOptions(
 		{
 			data: {
 				loading: true
+			},
+			// required for correct spacing after PR 785
+			legend: {
+				enabled: false
 			}
 		},
 		barChart.stackedBarTimeSeriesOptions
