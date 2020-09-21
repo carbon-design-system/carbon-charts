@@ -14,6 +14,7 @@ import {
 	RadarChartOptions,
 	// Components
 	GridOptions,
+	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
@@ -77,6 +78,15 @@ export const grid: GridOptions = {
 };
 
 /**
+ * Ruler options
+ */
+export const ruler: RulerOptions = {
+	// enable or disable ruler
+	enabled: true
+};
+
+
+/**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
@@ -90,18 +100,22 @@ export const baseTooltip: TooltipOptions = {
 // and by TwoDimensionalAxes.
 const axes: AxesOptions = {
 	top: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	bottom: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	left: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	right: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	}
@@ -153,6 +167,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
+	ruler,
 	zoomBar: {
 		zoomRatio: 0.4,
 		minZoomRatio: 0.01,

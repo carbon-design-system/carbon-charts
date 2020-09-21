@@ -74,6 +74,14 @@ export class Zoom extends Service {
 		});
 	}
 
+	getZoomRatio() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"zoomRatio"
+		);
+	}
+
 	zoomIn(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get("zoomDomain");
@@ -207,14 +215,6 @@ export class Zoom extends Service {
 		} else {
 			return false;
 		}
-	}
-
-	getZoomRatio() {
-		return Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			"zoomRatio"
-		);
 	}
 
 	isZoomBarEnabled() {

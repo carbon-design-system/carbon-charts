@@ -286,7 +286,7 @@ export class ZoomBar extends Component {
 				zoomDomain[0] !== newDomain[0] ||
 				zoomDomain[1] !== newDomain[1]
 			) {
-				this.model.set({ zoomDomain: newDomain }, { animate: false });
+				this.services.zoom.handleDomainChange(newDomain);
 			}
 
 			// dispatch selection events

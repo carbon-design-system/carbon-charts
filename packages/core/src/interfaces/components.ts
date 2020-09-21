@@ -94,6 +94,14 @@ export interface GridOptions {
 	};
 }
 
+/**
+ * Ruler options
+ */
+export interface RulerOptions {
+	enabled?: boolean;
+}
+
+
 export interface BarOptions {
 	width?: number;
 	maxWidth?: number;
@@ -145,7 +153,7 @@ export interface ToolbarOverflowMenuItemOptions {
  */
 export interface ZoomBarsOptions {
 	/**
-	 * a variable to handle default zoom-in ratio (0 ~ 1.0)
+	 * a variable to handle default zoom in ratio (0 ~ 1.0)
 	 * ex: shift click zoom in ratio
 	 */
 	zoomRatio?: number;
