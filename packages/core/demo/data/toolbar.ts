@@ -1,48 +1,59 @@
-import * as areaChart from "./area";
 import * as barChart from "./bar";
 import * as lineChart from "./line";
-import * as pieChart from "./pie";
+import { ToolbarControlTypes } from "../../src/interfaces";
 
-// utility function to update title and enable toolbar option
-const addToolbarOptions = (
-	options,
-	configs: any = { enableZoomBar: false, enableResetZoom: false }
-) => {
+// utility function to enable toolbar option
+const addToolbarOptions = (options, configs?) => {
 	options.experimental = true;
 
-	let titlePostfix = " - enable Toolbar";
 	options.toolbar = {
 		enabled: true
 	};
-	if (configs.enableZoomBar) {
-		titlePostfix += ", Zoom bar";
-		options.zoomBar = {
-			top: {
-				enabled: true
-			}
-		};
+	options.zoomBar = {
+		top: {
+			enabled: true
+		}
+	};
+	if (configs) {
+		if (configs.titlePostifx) {
+			options.title += configs.titlePostifx;
+		}
+		if (configs.maxIcons) {
+			options.toolbar.maxIcons = configs.maxIcons;
+		}
+		if (configs.controlsInOrder) {
+			options.toolbar.controlsInOrder = configs.controlsInOrder;
+		}
 	}
-	if (configs.enableResetZoom) {
-		titlePostfix += ", Reset Zoom";
-		options.toolbar.overflowMenuItems = {
-			resetZoom: {
-				enabled: true
-			}
-		};
-	}
-	options.title += titlePostfix;
+
 	return options;
 };
 
 export const toolbarStackedBarTimeSeriesData =
 	barChart.stackedBarTimeSeriesData;
 export const toolbarStackedBarTimeSeriesOptions = addToolbarOptions(
-	Object.assign({}, barChart.stackedBarTimeSeriesOptions),
-	{ enableZoomBar: true }
+	Object.assign({}, barChart.stackedBarTimeSeriesOptions)
 );
 
 export const toolbarLineTimeSeriesData = lineChart.lineTimeSeriesData;
 export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 	Object.assign({}, lineChart.lineTimeSeriesOptions),
-	{ enableZoomBar: true, enableResetZoom: true }
+	{
+		titlePostfix: " - two icons",
+		maxIcons: 2,
+		controlsInOrder: [
+			{
+				type: ToolbarControlTypes.RESET_ZOOM,
+				text: "Reset zoom"
+			},
+			{
+				type: ToolbarControlTypes.ZOOM_IN,
+				text: "Zoom in"
+			},
+			{
+				type: ToolbarControlTypes.ZOOM_OUT,
+				text: "Zoom out"
+			}
+		]
+	}
 );

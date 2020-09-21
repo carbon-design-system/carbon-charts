@@ -2,6 +2,7 @@ import {
 	LayoutGrowth,
 	LegendPositions,
 	Alignments,
+	ToolbarControlTypes,
 	ZoomBarTypes
 } from "./enums";
 import { Component } from "../components/component";
@@ -101,7 +102,6 @@ export interface RulerOptions {
 	enabled?: boolean;
 }
 
-
 export interface BarOptions {
 	width?: number;
 	maxWidth?: number;
@@ -120,30 +120,27 @@ export interface ToolbarOptions {
 	 */
 	enabled?: boolean;
 	/**
-	 * toolbar overflow menu options
+	 * the maximum toolbar controls to be displayed as icons
+	 * controls more than this number will appear in the overflow menu
+	 * minimum is 1. (all toolbar controls are in overflow menu)
 	 */
-	overflowMenuItems?: ToolbarOverflowMenuItems;
+	maxIcons?: number;
+	/**
+	 * toolbar controls which will be displayed following the array order
+	 */
+	controlsInOrder?: ToolbarControl[];
 }
 
 /**
- * set Toolbar overflow menu items
+ * options for each toolbar control
  */
-export interface ToolbarOverflowMenuItems {
-	resetZoom?: ToolbarOverflowMenuItems;
-
-	// add more overflow menu items here
-}
-
-/**
- * options for each toolbar overflow menu item
- */
-export interface ToolbarOverflowMenuItemOptions {
+export interface ToolbarControl {
 	/**
-	 * is the overflow menu item visible or not
+	 * the toolbar control type
 	 */
-	enabled?: boolean;
+	type: ToolbarControlTypes;
 	/**
-	 * the text to display in the overflow menu item
+	 * the text to display (if this control is displayed in overflow menu)
 	 */
 	text: string;
 }

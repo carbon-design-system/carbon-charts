@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { Events } from "../../interfaces";
+import { Events, ToolbarControlTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
@@ -24,10 +24,9 @@ export class Toolbar extends Component {
 	overflowMenuX = 0;
 	overflowMenuY = 0;
 
-	// Give every Reset zoom menu item an unique ID
-	// so they don't interfere the other Reset zoom menu item in a page
-	resetZoomMenuItemId =
-		"resetZoomMenuItem-" + Math.floor(Math.random() * 99999999999);
+	// Use a random number to create overflow menu item unique ID
+	// so they don't interfere the other overflow menu item in a page
+	overflowMenuItemId = Math.floor(Math.random() * 99999999999);
 
 	init() {
 		const options = this.model.getOptions();
@@ -101,10 +100,15 @@ export class Toolbar extends Component {
 		container.html(null);
 
 		// get the toolbar buttons
-		const toolbarButtonList = this.getToolbarButtons();
+		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
+
+		// overflow button is required only if overflow menu item list is valid
+		if (!!overflowMenuItemList) {
+			buttonList.push(this.getOverflowButtonConfig());
+		}
 
 		// loading or empty state
-		if (isDataLoading || toolbarButtonList.length === 0) {
+		if (isDataLoading || buttonList.length === 0) {
 			// put an empty rect to keep space unchanged
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-spacer")
 				.append("rect")
@@ -114,7 +118,7 @@ export class Toolbar extends Component {
 		} else {
 			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
-			toolbarButtonList.forEach((button) => {
+			buttonList.forEach((button) => {
 				// zoom in icon and event
 				const buttonContainer = DOMUtils.appendOrSelect(
 					container,
@@ -142,7 +146,7 @@ export class Toolbar extends Component {
 					.attr("y", Configuration.toolbar.iconPadding)
 					.attr("width", Configuration.toolbar.iconSize)
 					.attr("height", Configuration.toolbar.iconSize)
-					.attr("viewBox", "0 0 15 15");
+					.attr("viewBox", "0 0 32 32");
 
 				buttonIcon.html(button.iconSVGContent());
 				if (button.shouldBeDisabled()) {
@@ -213,7 +217,9 @@ export class Toolbar extends Component {
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem) => {
-				const element = document.getElementById(menuItem.elementId);
+				const element = document.getElementById(
+					menuItem.id + this.overflowMenuItemId
+				);
 				if (element !== null) {
 					element.addEventListener("click", () => {
 						// call the specified function
@@ -251,7 +257,7 @@ export class Toolbar extends Component {
 			overflowMenuHtml += `<li class="${menuItemClasses}">
 						<button class="bx--overflow-menu-options__btn" role="menuitem"
 							data-floating-menu-primary-focus
-							id="${menuItem.elementId}">
+							id="${menuItem.id + this.overflowMenuItemId}">
 							<div class="bx--overflow-menu-options__option-content">
 								${menuItem.text}
 							</div>
@@ -263,64 +269,81 @@ export class Toolbar extends Component {
 		return overflowMenuHtml;
 	}
 
+	getControlConfigs() {
+		const isZoomBarEnabled =
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
+
+		const maxIcons = Tools.getProperty(
+			this.model.getOptions(),
+			"toolbar",
+			"maxIcons"
+		);
+		const controlsInOrder = Tools.getProperty(
+			this.model.getOptions(),
+			"toolbar",
+			"controlsInOrder"
+		);
+		const controlList = [];
+		controlsInOrder.forEach((control) => {
+			let controlConfig;
+			switch (control.type) {
+				case ToolbarControlTypes.ZOOM_IN:
+					if (isZoomBarEnabled) {
+						controlConfig = this.getZoomInConfig();
+					}
+					break;
+				case ToolbarControlTypes.ZOOM_OUT:
+					if (isZoomBarEnabled) {
+						controlConfig = this.getZoomOutConfig();
+					}
+					break;
+				case ToolbarControlTypes.RESET_ZOOM:
+					if (isZoomBarEnabled) {
+						controlConfig = this.getResetZoomConfig();
+					}
+					break;
+
+				// add more toolbar controls here
+
+				default:
+					throw Error(
+						"Not supported toolbar control type: " + control.type
+					);
+			}
+
+			// add to list if config is valid
+			if (controlConfig) {
+				controlConfig.text = control.text;
+				controlList.push(controlConfig);
+			}
+		});
+
+		if (controlList.length <= maxIcons) {
+			return {
+				buttonList: controlList
+			};
+		} else {
+			return {
+				// leave one button for overflow button
+				buttonList: controlList.splice(0, maxIcons - 1),
+				overflowMenuItemList: controlList
+			};
+		}
+	}
+
 	getOverflowMenuItems() {
-		const overflowMenuItems = [];
-		const isZoomBarEnabled =
-			this.services.zoom.isZoomBarEnabled() &&
-			!this.services.zoom.isEmptyState();
-		const isResetZoomEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			"toolbar",
-			"overflowMenuItems",
-			"resetZoom",
-			"enabled"
-		);
-		if (isZoomBarEnabled && isResetZoomEnabled) {
-			overflowMenuItems.push(this.getResetZoomMenuItemConfig());
+		const { overflowMenuItemList } = this.getControlConfigs();
+		if (!!overflowMenuItemList) {
+			return overflowMenuItemList;
+		} else {
+			return [];
 		}
-
-		// add more overflow menu item configurations here
-
-		return overflowMenuItems;
 	}
 
-	getResetZoomMenuItemConfig() {
-		const resetZoomText = Tools.getProperty(
-			this.model.getOptions(),
-			"toolbar",
-			"overflowMenuItems",
-			"resetZoom",
-			"text"
-		);
-		return {
-			elementId: this.resetZoomMenuItemId, // this id needs to be unique in the whole web page
-			text: resetZoomText,
-			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
-			clickFunction: () => this.services.zoom.resetZoomDomain()
-		};
-	}
+	// add more toolbar control configuration here
 
-	getToolbarButtons() {
-		const toolbarButtonList = [];
-		const isZoomBarEnabled =
-			this.services.zoom.isZoomBarEnabled() &&
-			!this.services.zoom.isEmptyState();
-		// add zoom in/out button only if zoom bar is enabled
-		if (isZoomBarEnabled) {
-			toolbarButtonList.push(this.getZoomInButtonConfig());
-			toolbarButtonList.push(this.getZoomOutButtonConfig());
-		}
-		// add overflow icon button only if overflow menu item is available
-		if (this.getOverflowMenuItems().length > 0) {
-			toolbarButtonList.push(this.getOverflowButtonConfig());
-		}
-
-		// add more toolbar button configurations here
-
-		return toolbarButtonList;
-	}
-
-	getZoomInButtonConfig() {
+	getZoomInConfig() {
 		return {
 			id: "toolbar-zoomIn",
 			shouldBeDisabled: () => this.services.zoom.isMinZoomDomain(),
@@ -329,12 +352,21 @@ export class Toolbar extends Component {
 		};
 	}
 
-	getZoomOutButtonConfig() {
+	getZoomOutConfig() {
 		return {
 			id: "toolbar-zoomOut",
 			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
 			iconSVGContent: () => this.getZoomOutIconSVGContent(),
 			clickFunction: () => this.services.zoom.zoomOut()
+		};
+	}
+
+	getResetZoomConfig() {
+		return {
+			id: "toolbar-resetZoom",
+			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
+			iconSVGContent: () => this.getResetZoomIconSVGContent(),
+			clickFunction: () => this.services.zoom.resetZoomDomain()
 		};
 	}
 
@@ -349,21 +381,26 @@ export class Toolbar extends Component {
 		};
 	}
 
+	// add more icons here
+	// svg icon must be with 32x32 viewBox
+
+	getOverflowIconSVGContent() {
+		return `<circle cx="16" cy="8" r="2"></circle>
+				<circle cx="16" cy="16" r="2"></circle>
+				<circle cx="16" cy="24" r="2"></circle>`;
+	}
+
 	getZoomInIconSVGContent() {
-		return `<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7"/>
-					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
-						L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>`;
+		return `<polygon points="19 13 15 13 15 9 13 9 13 13 9 13 9 15 13 15 13 19 15 19 15 15 19 15 19 13"/>
+    			<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
 	}
 
 	getZoomOutIconSVGContent() {
-		return `<rect x="4" y="6" width="5" height="1"/>
-				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
-					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>`;
+		return `<rect x="9" y="13" width="10" height="2"/>
+				<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
 	}
 
-	getOverflowIconSVGContent() {
-		return `<circle cx="8" cy="3" r="1"/>
-				<circle cx="8" cy="8" r="1"/>
-				<circle cx="8" cy="13" r="1"/>`;
+	getResetZoomIconSVGContent() {
+		return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`;
 	}
 }

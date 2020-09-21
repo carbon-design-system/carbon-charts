@@ -22,14 +22,14 @@ import {
 	StackedBarOptions,
 	MeterChartOptions,
 	ToolbarOptions,
-	ToolbarOverflowMenuItems,
-	ToolbarOverflowMenuItemOptions,
+	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
 	GaugeTypes,
 	LegendPositions,
 	TruncationTypes,
+	ToolbarControlTypes,
 	ZoomBarTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
@@ -84,7 +84,6 @@ export const ruler: RulerOptions = {
 	// enable or disable ruler
 	enabled: true
 };
-
 
 /**
  * Tooltip options
@@ -178,12 +177,21 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
-		overflowMenuItems: {
-			resetZoom: {
-				enabled: false,
+		maxIcons: 3,
+		controlsInOrder: [
+			{
+				type: ToolbarControlTypes.ZOOM_IN,
+				text: "Zoom in"
+			} as ToolbarControl,
+			{
+				type: ToolbarControlTypes.ZOOM_OUT,
+				text: "Zoom out"
+			} as ToolbarControl,
+			{
+				type: ToolbarControlTypes.RESET_ZOOM,
 				text: "Reset zoom"
-			} as ToolbarOverflowMenuItemOptions
-		} as ToolbarOverflowMenuItems
+			} as ToolbarControl
+		]
 	} as ToolbarOptions
 } as AxisChartOptions);
 
