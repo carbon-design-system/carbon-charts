@@ -42,15 +42,15 @@ export class Tooltip extends Component {
 			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
 		) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
-				tooltipTextContainer.html(labelHTML);
-			} else {
-				tooltipTextContainer.html(
-					this.model
-						.getOptions()
-						.tooltip.customHTML(data, defaultHTML)
-				);
-			}
+						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+						tooltipTextContainer.html(labelHTML);
+					} else {
+						tooltipTextContainer.html(
+							this.model
+								.getOptions()
+								.tooltip.customHTML(data, defaultHTML)
+						);
+					}
 		} else {
 			// Use default tooltip
 			tooltipTextContainer.html(defaultHTML);
@@ -143,6 +143,7 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
+				item.value = this.valueFormatter(item.value);
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
