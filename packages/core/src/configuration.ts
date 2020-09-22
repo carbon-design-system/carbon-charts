@@ -87,6 +87,7 @@ export const ruler: RulerOptions = {
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	enabled: true,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
@@ -170,6 +171,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	ruler,
 	zoomBar: {
+		zoomRatio: 0.4,
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
