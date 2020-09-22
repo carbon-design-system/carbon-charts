@@ -70,14 +70,8 @@ export class Area extends Component {
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
 
-		if (!this.parent.selectAll("defs linearGradient").empty()) {
-			this.parent.selectAll("defs linearGradient").each(function () {
-				this.parentNode.remove();
-			});
-		}
-
 		if (isGradientAllowed) {
-			GradientUtils.appendLinearGradient({
+			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id: groupedData[0].name.replace(" ", "") + "_" + this.gradient_id,
 				x1: "0%",
@@ -89,6 +83,13 @@ export class Area extends Component {
 					this.model.getFillColor(groupedData[0].name)
 				)
 			});
+		} else {
+			// make sure there is no linearGradient if no gradient is allowed
+			if (!this.parent.selectAll("defs linearGradient").empty()) {
+				this.parent.selectAll("defs linearGradient").each(function () {
+					this.parentNode.remove();
+				});
+			}
 		}
 
 		// Remove elements that need to be exited
