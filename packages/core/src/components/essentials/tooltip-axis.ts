@@ -73,7 +73,7 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 				{
 					label: rangeLabel,
-					value: this.valueFormatter(datum[rangeIdentifier])
+					value: datum[rangeIdentifier]
 				},
 				{
 					label: "Group",
