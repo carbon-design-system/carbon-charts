@@ -37,14 +37,12 @@ g.#{$prefix}--#{$charts-prefix}--legend {
 		cursor: pointer;
 	}
 
-	g.extra-label {
-		g.icon > svg > g {
-			stroke: none;
-			stroke-width: 1;
+	g.extra-label > g.icon > svg > g {
+		stroke: none;
+		stroke-width: 1;
 
-			circle {
-				stroke: #8C8C8C;
-			}
+		circle {
+			stroke: #8C8C8C;
 		}
 	}
 }
