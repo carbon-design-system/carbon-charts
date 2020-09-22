@@ -310,7 +310,6 @@ export class Scatter extends Component {
 
 				hoveredElement
 					.classed("hovered", true)
-					.attr("class", (d) => `hovered ${this.model.getColorClasses()(d[groupMapsTo])}`)
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum
