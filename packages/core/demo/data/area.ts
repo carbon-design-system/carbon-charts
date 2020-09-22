@@ -124,6 +124,9 @@ export const sparklineOptions = {
 	},
 	points: {
 		enabled: false
+	},
+	legend: {
+		enabled: false
 	}
 };
 
