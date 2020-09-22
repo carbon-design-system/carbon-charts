@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.5...v0.38.6) (2020-09-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.38.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.4...v0.38.5) (2020-09-22)
+
+
+### Bug Fixes
+
+* do not dispatch zoom domain change event for all zoom bar behaviors ([#811](https://github.com/carbon-design-system/carbon-charts/issues/811)) ([5fd692f](https://github.com/carbon-design-system/carbon-charts/commit/5fd692f9e71dbf4b3e9052feb6c99cb25156c5da))
+
+
+
+
+
+## [0.38.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.3...v0.38.4) (2020-09-21)
+
+
+### Bug Fixes
+
+* **core:** fix valueFormatter not being called on non-axis tooltips ([#809](https://github.com/carbon-design-system/carbon-charts/issues/809)) ([b1ff24c](https://github.com/carbon-design-system/carbon-charts/commit/b1ff24c70c8291ef8dab5585866a12ef99fd6e6f))
+
+
+
+
+
 ## [0.38.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.2...v0.38.3) (2020-09-21)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

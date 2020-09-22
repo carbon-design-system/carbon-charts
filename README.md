@@ -38,22 +38,22 @@ Read the release change logs [here](./CHANGELOG.md)
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
-| Component   | Vanilla            | Angular                  | React | Vue |
-|-------------|--------------------|--------------------------|-------|-------|
-| Simple Bar  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Grouped Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Stacked Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Donut       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Line        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Area        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Gauge        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Meter        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Component   | Vanilla            | Angular                  | React | Vue | Svelte |
+|-------------|--------------------|--------------------------|-------|-------| --- |
+| Simple Bar  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: 
+| Grouped Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Stacked Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Donut       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Line        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Gauge        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Meter        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 

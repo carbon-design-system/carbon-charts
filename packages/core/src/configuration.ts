@@ -154,8 +154,12 @@ const chart: BaseChartOptions = {
 		selectedGroups: []
 	},
 	color: {
-		scale: null
-	}
+		scale: null,
+		gradient: {
+			enabled: false
+		}
+	},
+
 };
 
 /**
