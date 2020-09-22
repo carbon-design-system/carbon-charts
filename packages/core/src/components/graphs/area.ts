@@ -64,9 +64,8 @@ export class Area extends Component {
 		// Apply styles and datum
 		enteringAreas
 			.merge(areas)
-			.attr("fill", (group) => {
-				return this.model.getFillColor(group.name);
-			})
+			.attr("class", "area")
+			.attr("class", (group) => `area ${this.model.getColorClasses()(group.name)}`)
 			.transition(
 				this.services.transitions.getTransition(
 					"area-update-enter",
@@ -74,7 +73,6 @@ export class Area extends Component {
 				)
 			)
 			.attr("opacity", Configuration.area.opacity.selected)
-			.attr("class", "area")
 			.attr("d", (group) => {
 				const { data } = group;
 				return areaGenerator(data);
