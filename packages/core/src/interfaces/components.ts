@@ -47,6 +47,10 @@ export interface LegendOptions {
 
 export interface TooltipOptions {
 	/**
+	 * enable or disable tooltip
+	 */
+	enabled?: boolean;
+	/**
 	 * a function to format the tooltip values
 	 */
 	valueFormatter?: Function;
