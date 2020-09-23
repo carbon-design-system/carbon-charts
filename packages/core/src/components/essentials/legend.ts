@@ -396,8 +396,13 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
-			const { keyCode } = event;
-			if (keyCode === 32 || keyCode === 13) {
+			if (
+				(event.key && (event.key === "Enter" || event.key === " ")) ||
+				(event.keyCode &&
+					(event.keyCode === 32 || event.keyCode === 13)) ||
+				(event.code &&
+					(event.code === "Enter" || event.code === "Space"))
+			) {
 				event.preventDefault();
 
 				self.model.toggleDataLabel(d.name);

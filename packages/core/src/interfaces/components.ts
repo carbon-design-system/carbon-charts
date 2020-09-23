@@ -105,7 +105,6 @@ export interface RulerOptions {
 	enabled?: boolean;
 }
 
-
 export interface BarOptions {
 	width?: number;
 	maxWidth?: number;

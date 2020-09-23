@@ -42,15 +42,15 @@ export class Tooltip extends Component {
 			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
 		) {
 			if (e.detail.content) {
-						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
-						tooltipTextContainer.html(labelHTML);
-					} else {
-						tooltipTextContainer.html(
-							this.model
-								.getOptions()
-								.tooltip.customHTML(data, defaultHTML)
-						);
-					}
+				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				tooltipTextContainer.html(labelHTML);
+			} else {
+				tooltipTextContainer.html(
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
+				);
+			}
 		} else {
 			// Use default tooltip
 			tooltipTextContainer.html(defaultHTML);

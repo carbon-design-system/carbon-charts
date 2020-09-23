@@ -51,7 +51,9 @@ export class Scatter extends Component {
 	}
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "points", "enabled") ||  Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+		const isScatterEnabled =
+			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
 		if (!isScatterEnabled) {
 			return;
 		}
@@ -258,7 +260,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	}
+	};
 
 	handleChartHolderOnMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -269,7 +271,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 0);
-	}
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -284,7 +286,7 @@ export class Scatter extends Component {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -295,7 +297,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	}
+	};
 
 	getTooltipData(hoveredX, hoveredY) {
 		return this.model.getDisplayData().filter((d) => {

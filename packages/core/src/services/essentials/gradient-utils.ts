@@ -4,8 +4,7 @@ import { DOMUtils } from "../";
 
 export class GradientUtils extends Service {
 	static appendOrUpdateLinearGradient(configs) {
-		let lg = configs.svg
-			.select(`defs linearGradient#${configs.id}`);
+		let lg = configs.svg.select(`defs linearGradient#${configs.id}`);
 		if (lg.empty()) {
 			lg = configs.svg
 				.append("defs")
@@ -21,13 +20,17 @@ export class GradientUtils extends Service {
 			.data(configs.stops)
 			.enter()
 			.append("stop")
-			.attr("offset", d => d.offset)
-			.style("stop-color", d => d.color)
-			.style("stop-opacity", d => d.opacity);
+			.attr("offset", (d) => d.offset)
+			.style("stop-color", (d) => d.color)
+			.style("stop-opacity", (d) => d.opacity);
 	}
 
 	static getOffsetRatio(domain) {
-		const offsetRatio = (Math.abs(domain[1]) * 100 / Math.abs(domain[0] - domain[1])).toFixed(2) + "%";
+		const offsetRatio =
+			(
+				(Math.abs(domain[1]) * 100) /
+				Math.abs(domain[0] - domain[1])
+			).toFixed(2) + "%";
 		return offsetRatio;
 	}
 
