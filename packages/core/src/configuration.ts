@@ -82,7 +82,6 @@ export const ruler: RulerOptions = {
 	enabled: true
 };
 
-
 /**
  * Tooltip options
  */
@@ -158,8 +157,7 @@ const chart: BaseChartOptions = {
 		gradient: {
 			enabled: false
 		}
-	},
-
+	}
 };
 
 /**

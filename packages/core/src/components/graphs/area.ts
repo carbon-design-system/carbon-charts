@@ -55,10 +55,16 @@ export class Area extends Component {
 		const groupedData = this.model.getGroupedData();
 
 		// Is gradient enabled or not
-		const isGradientEnabled = Tools.getProperty(this.model.getOptions(), "color", "gradient", "enabled");
+		const isGradientEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"color",
+			"gradient",
+			"enabled"
+		);
 
 		// Should gradient style be applicable
-		const isGradientAllowed = groupedData && groupedData.length === 1 && isGradientEnabled;
+		const isGradientAllowed =
+			groupedData && groupedData.length === 1 && isGradientEnabled;
 
 		if (groupedData.length > 1 && isGradientEnabled) {
 			console.error(
@@ -73,7 +79,10 @@ export class Area extends Component {
 		if (isGradientAllowed) {
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
-				id: groupedData[0].name.replace(" ", "") + "_" + this.gradient_id,
+				id:
+					groupedData[0].name.replace(" ", "") +
+					"_" +
+					this.gradient_id,
 				x1: "0%",
 				x2: "0%",
 				y1: "0%",
@@ -154,7 +163,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -163,7 +172,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	}
+	};
 
 	destroy() {
 		// Remove event listeners
