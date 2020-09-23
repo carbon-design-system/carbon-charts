@@ -50,14 +50,21 @@ export class Meter extends Component {
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", Tools.getProperty(options, "meter", "height"))
-			.attr("class", status != null && !userProvidedScale ? `value status--${status}` : "")
+			.attr(
+				"class",
+				status != null && !userProvidedScale
+					? `value status--${status}`
+					: ""
+			)
 			.transition(
 				this.services.transitions.getTransition(
 					"meter-bar-update",
 					animate
 				)
 			)
-			.attr("width", (d) => maximumBarWidth ? xScale(100) : xScale(d.value))
+			.attr("width", (d) =>
+				maximumBarWidth ? xScale(100) : xScale(d.value)
+			)
 			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -73,7 +80,8 @@ export class Meter extends Component {
 				? data.value
 				: peakValue;
 		// dont display peak if there isnt one
-		const peakData = updatedPeak === null || maximumBarWidth ? [] : [updatedPeak];
+		const peakData =
+			updatedPeak === null || maximumBarWidth ? [] : [updatedPeak];
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak").data(peakData);
