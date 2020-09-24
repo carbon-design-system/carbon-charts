@@ -40,7 +40,7 @@ export class Ruler extends Component {
 	isEventListenerAdded = false;
 
 	render() {
-		const isRulerEnabled =  Tools.getProperty(
+		const isRulerEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"ruler",
 			"enabled"

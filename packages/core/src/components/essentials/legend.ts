@@ -11,16 +11,15 @@ import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select, event } from "d3-selection";
 
 export class Legend extends Component {
 	type = "legend";
 
 	render() {
-		const svg = this.getContainerSVG().attr(
-			"role",
-			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`
-		);
+		const svg = this.getContainerSVG()
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "legend-items");
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
 		let dataGroups = this.model.getDataGroups();
@@ -69,6 +68,13 @@ export class Legend extends Component {
 			.append("rect")
 			.classed("checkbox", true)
 			.merge(legendItems.select("rect.checkbox"))
+			.attr("role", Roles.CHECKBOX)
+			.attr("tabindex", 0)
+			.attr(
+				"aria-checked",
+				({ status }) =>
+					status === Configuration.legend.items.status.ACTIVE
+			)
 			.attr("width", checkboxRadius * 2)
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
@@ -388,5 +394,13 @@ export class Legend extends Component {
 					}
 				);
 			});
+
+		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
+			if (event.key && event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+
+				self.model.toggleDataLabel(d.name);
+			}
+		});
 	}
 }

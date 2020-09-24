@@ -43,7 +43,12 @@ export class Axis extends Component {
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
-		const isAxisVisible = Tools.getProperty(options, "axes", axisPosition, "visible");
+		const isAxisVisible = Tools.getProperty(
+			options,
+			"axes",
+			axisPosition,
+			"visible"
+		);
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
@@ -295,21 +300,35 @@ export class Axis extends Component {
 
 		// prioritize using a custom array of values rather than number of ticks
 		// if both are provided. custom tick values need to be within the domain of the scale
-		const [lowerBound, upperBound] = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
+		const [
+			lowerBound,
+			upperBound
+		] = this.services.cartesianScales
+			.getScaleByPosition(axisPosition)
+			.domain();
 		let validTicks;
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
 				// check the supplied ticks are within the time domain
 				validTicks = userProvidedTickValues.filter((tick) => {
 					const tickTimestamp = new Date(tick).getTime();
-					return tickTimestamp >= new Date(lowerBound).getTime() && tickTimestamp <= new Date(upperBound).getTime();
+					return (
+						tickTimestamp >= new Date(lowerBound).getTime() &&
+						tickTimestamp <= new Date(upperBound).getTime()
+					);
 				});
 			} else if (axisScaleType === ScaleTypes.LABELS) {
-				const discreteDomain = this.services.cartesianScales.getScaleByPosition(axisPosition).domain();
-				validTicks = userProvidedTickValues.filter((tick) => discreteDomain.includes(tick));
+				const discreteDomain = this.services.cartesianScales
+					.getScaleByPosition(axisPosition)
+					.domain();
+				validTicks = userProvidedTickValues.filter((tick) =>
+					discreteDomain.includes(tick)
+				);
 			} else {
 				// continuous scales
-				validTicks = userProvidedTickValues.filter((tick) => tick >= lowerBound && tick <= upperBound);
+				validTicks = userProvidedTickValues.filter(
+					(tick) => tick >= lowerBound && tick <= upperBound
+				);
 			}
 			axis.tickValues(validTicks);
 		}

@@ -7,7 +7,11 @@ export class StackedScatter extends Scatter {
 	type = "scatter-stacked";
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "points", "enabled");
+		const isScatterEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"points",
+			"enabled"
+		);
 		if (!isScatterEnabled) {
 			return;
 		}
