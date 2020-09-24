@@ -635,15 +635,30 @@ export class ChartModel {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
-		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
+		let paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
+		const paletteAvailableChoices = {
+			"1-color": 4,
+			"2-color": 5,
+			"3-color": 5,
+			"4-color": 3,
+			"5-color": 2,
+			"14-color": 1
+		};
+		const numberOfDataGroups = this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
+		// Use default palette if user choice is not in range
+		paletteIndex = paletteIndex <= paletteAvailableChoices[`${numberOfDataGroups}-color`]
+			? paletteIndex
+			: 1;
+
+		// Create color classes for graph, tooltip and stroke use
 		const fillColorClassNames = this.allDataGroups.map((dataGroup, index) => 
-			`color-fill-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+			`color-fill-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
 		)
 		const tooltipColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
-			`tooltip-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+			`tooltip-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
 		)
 		const strokeColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
-			`color-stroke-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+			`color-stroke-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
 		)
 
 		// If there is no valid user provided scale, use the default set of colors
