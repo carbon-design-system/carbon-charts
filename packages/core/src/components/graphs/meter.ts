@@ -40,6 +40,8 @@ export class Meter extends Component {
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+		const className = status != null && !userProvidedScale ? `value status--${status}` : "";
 
 		// draw the value bar
 		value
@@ -52,9 +54,9 @@ export class Meter extends Component {
 			.attr("height", Tools.getProperty(options, "meter", "height"))
 			.attr(
 				"class",
-				status != null && !userProvidedScale
-					? `value status--${status}`
-					: ""
+				(d) => noProvidedColorScale
+					? `${className} ${self.model.getColorClasses()(d[groupMapsTo])}`
+					: className
 			)
 			.transition(
 				this.services.transitions.getTransition(
@@ -65,7 +67,7 @@ export class Meter extends Component {
 			.attr("width", (d) =>
 				maximumBarWidth ? xScale(100) : xScale(d.value)
 			)
-			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
+			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")
