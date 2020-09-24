@@ -21,13 +21,14 @@ import {
 import { Tools } from "./tools";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
+import { DOMUtils, Events, GradientUtils, Transitions } from "./services/index";
 
 export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
+		gradientUtils: GradientUtils,
 		transitions: Transitions
 	};
 	model: ChartModel = new ChartModel(this.services);

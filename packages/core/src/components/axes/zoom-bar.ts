@@ -286,7 +286,11 @@ export class ZoomBar extends Component {
 				zoomDomain[0] !== newDomain[0] ||
 				zoomDomain[1] !== newDomain[1]
 			) {
-				this.services.zoom.handleDomainChange(newDomain);
+				// don't dispatch event for all event types
+				// let the following code to dispatch necessary events
+				this.services.zoom.handleDomainChange(newDomain, {
+					dispatchEvent: false
+				});
 			}
 
 			// dispatch selection events
