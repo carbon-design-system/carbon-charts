@@ -73,7 +73,7 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 				{
 					label: rangeLabel,
-					value: this.valueFormatter(datum[rangeIdentifier])
+					value: datum[rangeIdentifier]
 				},
 				{
 					label: "Group",
@@ -91,7 +91,7 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map(datum => ({
+					.map((datum) => ({
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
 						color: this.model.getStrokeColor(datum[groupMapsTo])

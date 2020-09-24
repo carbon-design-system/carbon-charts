@@ -1,5 +1,6 @@
 // Internal Imports
 import { Service } from "./service";
+import { Events } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 imports
@@ -62,6 +63,22 @@ export class Zoom extends Service {
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
 			extent(zoomBarData, (d: any) => d[domainIdentifier])
+		);
+	}
+
+	handleDomainChange(newDomain, configs = { dispatchEvent: true }) {
+		this.model.set({ zoomDomain: newDomain }, { animate: false });
+		if (configs.dispatchEvent) {
+			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+				newDomain
+			});
+		}
+	}
+	getZoomRatio() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"zoomRatio"
 		);
 	}
 }

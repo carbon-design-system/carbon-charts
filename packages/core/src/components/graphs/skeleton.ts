@@ -207,9 +207,7 @@ export class Skeleton extends Component {
 			.attr("width", width)
 			.attr("height", height);
 
-		const optionName = innerRadius === 0
-			? "pie"
-			: "donut";
+		const optionName = innerRadius === 0 ? "pie" : "donut";
 
 		const alignment = Tools.getProperty(
 			this.model.getOptions(),
@@ -217,10 +215,7 @@ export class Skeleton extends Component {
 			"alignment"
 		);
 
-		DOMUtils.appendOrSelect(
-			container,
-			"rect.chart-skeleton-area-container"
-		)
+		DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
 			.attr("width", width)
 			.attr("height", height)
 			.attr("fill", "none");
@@ -242,7 +237,7 @@ export class Skeleton extends Component {
 			.attr("d", arcPathGenerator)
 			.classed("shimmer-effect-areas", shimmer)
 			.classed("empty-state-areas", !shimmer);
-		
+
 		// Position skeleton
 		let translateX = outerRadius + Configuration.pie.xOffset;
 		if (alignment === Alignments.CENTER) {
