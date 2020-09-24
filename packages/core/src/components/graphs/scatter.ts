@@ -304,8 +304,6 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const { groupMapsTo } = this.model.getOptions().data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent
 			.selectAll("circle")

@@ -446,17 +446,26 @@ export class Radar extends Component {
 		const blobUpdate = blobs
 			.selectAll("path")
 			.data(this.groupedDataNormalized, (group) => group.name);
+
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+
 		blobUpdate.join(
 			(enter) =>
 				enter
 					.append("path")
-					.attr("class", "blob")
+					.attr(
+						"class",
+						(group) => noProvidedColorScale
+							? `blob ${this.model.getColorClasses()(group.name)}`
+							: "blob"
+					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
-					.attr("fill", (group) => colorScale(group.name))
+					.attr("fill", (group) => noProvidedColorScale ? null : colorScale(group.name))
 					.style("fill-opacity", Configuration.radar.opacity.selected)
-					.attr("stroke", (group) => colorScale(group.name))
+					.attr("stroke", (group) => noProvidedColorScale ? null : colorScale(group.name))
 					.attr("d", (group) => oldRadialLineGenerator(group.data))
 					.call((selection) =>
 						selection

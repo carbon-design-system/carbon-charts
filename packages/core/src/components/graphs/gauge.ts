@@ -121,14 +121,21 @@ export class Gauge extends Component {
 
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground").data([value]);
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		arcValue
 			.enter()
 			.append("path")
-			.attr("class", "arc-foreground")
+			.attr(
+				"class",
+				(d) => noProvidedColorScale
+					? `arc-foreground ${self.model.getColorClasses()(d[groupMapsTo])}`
+					: "arc-foreground"
+			)
+			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[groupMapsTo]))
 			.merge(arcValue)
 			.attr("d", this.arc)
-			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")
