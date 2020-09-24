@@ -1,6 +1,5 @@
 import * as barChart from "./bar";
 import * as lineChart from "./line";
-import { ToolbarControlTypes } from "../../src/interfaces";
 
 // utility function to enable toolbar option
 const addToolbarOptions = (options, configs?) => {
@@ -43,15 +42,15 @@ export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 		maxIcons: 2,
 		controlsInOrder: [
 			{
-				type: ToolbarControlTypes.RESET_ZOOM,
+				type: "Reset zoom",
 				text: "Reset zoom"
 			},
 			{
-				type: ToolbarControlTypes.ZOOM_IN,
+				type: "Zoom in",
 				text: "Zoom in"
 			},
 			{
-				type: ToolbarControlTypes.ZOOM_OUT,
+				type: "Zoom out",
 				text: "Zoom out"
 			}
 		]
