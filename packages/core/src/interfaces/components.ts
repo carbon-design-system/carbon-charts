@@ -46,6 +46,10 @@ export interface LegendOptions {
 
 export interface TooltipOptions {
 	/**
+	 * enable or disable tooltip
+	 */
+	enabled?: boolean;
+	/**
 	 * a function to format the tooltip values
 	 */
 	valueFormatter?: Function;
@@ -100,7 +104,6 @@ export interface GridOptions {
 export interface RulerOptions {
 	enabled?: boolean;
 }
-
 
 export interface BarOptions {
 	width?: number;

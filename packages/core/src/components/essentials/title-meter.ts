@@ -73,7 +73,10 @@ export class MeterTitle extends Title {
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
-			.attr("class", status !== null ? `status-indicator status--${status}` : "")
+			.attr(
+				"class",
+				status !== null ? `status-indicator status--${status}` : ""
+			)
 			.attr("transform", `translate(${containerWidth - radius}, 0)`);
 
 		const data = status ? [status] : [];

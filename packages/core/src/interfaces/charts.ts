@@ -113,6 +113,11 @@ export interface BaseChartOptions {
 			 */
 			index: number;
 		}
+		/*
+		 * options related to gradient
+		 * e.g. { enabled: true }
+		 */
+		gradient?: object;
 	};
 }
 

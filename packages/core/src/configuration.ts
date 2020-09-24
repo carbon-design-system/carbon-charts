@@ -82,11 +82,11 @@ export const ruler: RulerOptions = {
 	enabled: true
 };
 
-
 /**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	enabled: true,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
@@ -156,6 +156,9 @@ const chart: BaseChartOptions = {
 		scale: null,
 		presetPalette: {
 			index: 1
+		},
+		gradient: {
+			enabled: false
 		}
 	}
 };
