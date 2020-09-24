@@ -53,7 +53,10 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr("class", (d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`)
+			.attr(
+				"class",
+				(d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+			)
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -126,12 +129,11 @@ export class SimpleBar extends Bar {
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
+				);
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
@@ -165,12 +167,11 @@ export class SimpleBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseout_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseout_fill_update"
 					)
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

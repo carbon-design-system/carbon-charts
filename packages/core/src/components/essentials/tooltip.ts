@@ -179,14 +179,10 @@ export class Tooltip extends Component {
 				`<ul class='multi-tooltip'>` +
 				formattedItems
 					.map(
-						(item) => 
-						`<li>
+						(item) =>
+							`<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
-								${
-									item.class
-										? `<a class="tooltip-color ${item.class}"></a>`
-										: ""
-								}
+								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								<p class="label">${item.label}</p>
 								<p class="value">${item.value}</p>
 							</div>

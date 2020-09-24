@@ -78,7 +78,10 @@ export class StackedBar extends Bar {
 					animate
 				)
 			)
-			.attr("class", (d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`)
+			.attr(
+				"class",
+				(d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+			)
 			.attr("d", (d, i) => {
 				const key = d.data.sharedStackKey;
 
@@ -164,12 +167,11 @@ export class StackedBar extends Bar {
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {

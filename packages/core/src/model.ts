@@ -635,7 +635,12 @@ export class ChartModel {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
-		let paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
+		let paletteIndex = Tools.getProperty(
+			options,
+			"color",
+			"presetPalette",
+			"index"
+		);
 		const paletteAvailableChoices = {
 			"1-color": 4,
 			"2-color": 5,
@@ -644,22 +649,30 @@ export class ChartModel {
 			"5-color": 2,
 			"14-color": 1
 		};
-		const numberOfDataGroups = this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
+		const numberOfDataGroups =
+			this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
 		// Use default palette if user choice is not in range
-		paletteIndex = paletteIndex <= paletteAvailableChoices[`${numberOfDataGroups}-color`]
-			? paletteIndex
-			: 1;
+		paletteIndex =
+			paletteIndex <=
+			paletteAvailableChoices[`${numberOfDataGroups}-color`]
+				? paletteIndex
+				: 1;
 
 		// Create color classes for graph, tooltip and stroke use
-		const fillColorClassNames = this.allDataGroups.map((dataGroup, index) => 
-			`color-fill-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
-		)
-		const tooltipColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
-			`tooltip-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
-		)
-		const strokeColorClassesNames = this.allDataGroups.map((dataGroup, index) => 
-			`color-stroke-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
-		)
+		const fillColorClassNames = this.allDataGroups.map(
+			(dataGroup, index) =>
+				`color-fill-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
+		);
+		const tooltipColorClassesNames = this.allDataGroups.map(
+			(dataGroup, index) =>
+				`tooltip-${numberOfDataGroups}-${paletteIndex}-${index + 1}`
+		);
+		const strokeColorClassesNames = this.allDataGroups.map(
+			(dataGroup, index) =>
+				`color-stroke-${numberOfDataGroups}-${paletteIndex}-${
+					index + 1
+				}`
+		);
 
 		// If there is no valid user provided scale, use the default set of colors
 		if (

@@ -112,7 +112,7 @@ export interface BaseChartOptions {
 			 * the number of the preset
 			 */
 			index: number;
-		}
+		};
 		/*
 		 * options related to gradient
 		 * e.g. { enabled: true }

@@ -200,9 +200,11 @@ export class Scatter extends Component {
 				) {
 					return `dot 
 					${this.model.getColorClasses()(d[groupMapsTo])} 
-					${this.model.getStrokeColorClasses()(d[groupMapsTo])}`
+					${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
 				}
-				return `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])} `;
+				return `dot ${this.model.getStrokeColorClasses()(
+					d[groupMapsTo]
+				)} `;
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
@@ -310,8 +312,7 @@ export class Scatter extends Component {
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement
-					.classed("hovered", true)
+				hoveredElement.classed("hovered", true);
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum

@@ -64,7 +64,12 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 
-		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
+		const paletteIndex = Tools.getProperty(
+			options,
+			"color",
+			"presetPalette",
+			"index"
+		);
 
 		addedLegendItems
 			.append("rect")
@@ -87,7 +92,8 @@ export class Legend extends Component {
 				}
 			})
 			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE && !paletteIndex
+				return d.status === Configuration.legend.items.status.ACTIVE &&
+					!paletteIndex
 					? this.model.getStrokeColor(d.name)
 					: null;
 			})
@@ -403,7 +409,7 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
-			if (event.key && event.key === "Enter" || event.key === " ") {
+			if ((event.key && event.key === "Enter") || event.key === " ") {
 				event.preventDefault();
 
 				self.model.toggleDataLabel(d.name);

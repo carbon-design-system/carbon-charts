@@ -129,7 +129,11 @@ export class Area extends Component {
 				.attr("opacity", 0)
 				.merge(areas)
 				.attr("class", "area")
-				.attr("class", (group) => `area ${self.model.getColorClasses()(group.name)}`)
+				.attr(
+					"class",
+					(group) =>
+						`area ${self.model.getColorClasses()(group.name)}`
+				)
 				.transition(
 					this.services.transitions.getTransition(
 						"area-update-enter",
