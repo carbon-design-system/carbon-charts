@@ -187,6 +187,21 @@ export class Scatter extends Component {
 		selection
 			.raise()
 			.classed("dot", true)
+			.attr("class", (d) => {
+				if (
+					this.model.getIsFilled(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d,
+						filled
+					)
+				) {
+					return `dot 
+					${this.model.getColorClasses()(d[groupMapsTo])} 
+					${this.model.getStrokeColorClasses()(d[groupMapsTo])}`
+				}
+				return `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])} `;
+			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
@@ -215,21 +230,6 @@ export class Scatter extends Component {
 			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("class", (d) => `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])}`)
-			.attr("class", (d) => {
-				if (
-					this.model.getIsFilled(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d,
-						filled
-					)
-				) {
-					return `dot 
-						${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
-						${this.model.getColorClasses()(d[groupMapsTo])}`
-				}
-			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
