@@ -72,7 +72,7 @@ export const chartTypes = {
 		vue: "ccv-stacked-area-chart"
 	},
 	ScatterChart: {
-		vanilla: "ScatterChart",
+		vanilla: "LollipopChart",
 		angular: "ibm-scatter-chart",
 		vue: "ccv-scatter-chart"
 	},

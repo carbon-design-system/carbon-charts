@@ -8,6 +8,7 @@ import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
+	scatterData: any;
 
 	init() {
 		const { events } = this.services;
@@ -68,14 +69,13 @@ export class Scatter extends Component {
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const { stacked } = this.configs;
-		let scatterData;
 		if (stacked) {
 			const percentage = Object.keys(options.axes).some(
 				(axis) => options.axes[axis].percentage
 			);
-			scatterData = this.model.getStackedData({ percentage });
+			this.scatterData = this.model.getStackedData({ percentage });
 		} else {
-			scatterData = this.model
+			this.scatterData = this.model
 				.getDisplayData()
 				.filter(
 					(d) =>
@@ -85,13 +85,13 @@ export class Scatter extends Component {
 		}
 
 		// filter out datapoints that aren't part of the zoomed domain
-		scatterData = this.filterBasedOnZoomDomain(scatterData);
+		this.scatterData = this.filterBasedOnZoomDomain(this.scatterData);
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
 			.data(
-				scatterData,
+				this.scatterData,
 				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 

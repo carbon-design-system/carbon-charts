@@ -5,6 +5,7 @@ export * from "./bar-grouped";
 export * from "./bar-stacked";
 export * from "./bubble";
 export * from "./line";
+export * from "./lollipop";
 export * from "./scatter";
 export * from "./pie";
 export * from "./donut";
