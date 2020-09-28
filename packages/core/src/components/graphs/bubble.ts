@@ -2,6 +2,7 @@
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
 import { Roles } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { Selection } from "d3-selection";
@@ -47,6 +48,8 @@ export class Bubble extends Scatter {
 
 		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		selection
 			.raise()
@@ -68,12 +71,24 @@ export class Bubble extends Scatter {
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
 			.attr(
 				"class",
-				(d) =>
-					`dot 
-				${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
-				${this.model.getColorClasses()(d[groupMapsTo])}
-				`
+				(d) => noProvidedColorScale
+					? `dot
+					${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
+					${this.model.getColorClasses()(d[groupMapsTo])}
+					`
+					: "dot"
 			)
+			.attr("fill", (d) => noProvidedColorScale
+				? null
+				: this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			)
+			.attr("stoke", (d) => noProvidedColorScale
+				? null
+				: this.model.getStrokeColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				))
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);
 	}

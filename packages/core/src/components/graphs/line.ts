@@ -95,14 +95,18 @@ export class Line extends Component {
 			.classed("line", true)
 			.attr("opacity", 0);
 
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
 			.data(data, (group) => group.name)
 			.attr(
 				"class",
-				(group) =>
-					`line ${this.model.getStrokeColorClasses()(group.name)}`
+				(group) => noProvidedColorScale
+					? `line ${this.model.getStrokeColorClasses()(group.name)}`
+					: "line"
 			)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -122,6 +126,10 @@ export class Line extends Component {
 				)
 			)
 			.attr("opacity", (d) => (d.hidden ? 0 : 1))
+			.attr("stroke", (group) => noProvidedColorScale
+				? null
+				: this.model.getStrokeColor(group.name)
+			)
 			.attr("d", (group) => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);

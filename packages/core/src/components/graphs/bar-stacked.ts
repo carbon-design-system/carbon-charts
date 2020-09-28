@@ -68,6 +68,9 @@ export class StackedBar extends Bar {
 		// Remove bars that need to be removed
 		bars.exit().remove();
 
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+
 		bars.enter()
 			.append("path")
 			.merge(bars)
@@ -80,8 +83,11 @@ export class StackedBar extends Bar {
 			)
 			.attr(
 				"class",
-				(d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				(d) => noProvidedColorScale
+				? `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				: "bar"
 			)
+			.attr("fill", (d) => noProvidedColorScale ? null : this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = d.data.sharedStackKey;
 

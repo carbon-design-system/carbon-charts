@@ -96,6 +96,9 @@ export class Pie extends Component {
 			.append("path")
 			.classed("slice", true)
 			.attr("opacity", 0);
+		
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		// Update styles & position on existing and entering slices
 		enteringPaths

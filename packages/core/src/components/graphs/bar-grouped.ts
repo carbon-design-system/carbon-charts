@@ -96,6 +96,9 @@ export class GroupedBar extends Bar {
 		// Add the circles that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
 
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+
 		// code for vertical grouped bar charts
 		barsEnter
 			.merge(bars)
@@ -108,8 +111,11 @@ export class GroupedBar extends Bar {
 			)
 			.attr(
 				"class",
-				(d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				(d) => noProvidedColorScale
+				? `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				: "bar"
 			)
+			.attr("fill", (d) => noProvidedColorScale ? null : this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts

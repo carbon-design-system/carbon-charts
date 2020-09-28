@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { Roles, ScaleTypes, Events } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { area } from "d3-shape";
@@ -67,6 +68,8 @@ export class StackedArea extends Component {
 		areas.exit().attr("opacity", 0).remove();
 
 		const enteringAreas = areas.enter().append("path").attr("opacity", 0);
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		enteringAreas
 			.merge(areas)
@@ -74,8 +77,11 @@ export class StackedArea extends Component {
 			.attr("class", "area")
 			.attr(
 				"class",
-				(d) => `area ${this.model.getColorClasses()(d[0][groupMapsTo])}`
+				(d) => noProvidedColorScale
+				? `area ${this.model.getColorClasses()(d[0][groupMapsTo])}`
+				: "area"
 			)
+			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[0][groupMapsTo]))
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
 			.transition(

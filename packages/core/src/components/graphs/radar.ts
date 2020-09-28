@@ -523,7 +523,9 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			.attr("class", (d) => Tools.kebabCase(d[angle]))
+			.attr("class", (d) => noProvidedColorScale 
+				? `${Tools.kebabCase(d[angle])} ${this.model.getColorClasses()(d[groupMapsTo])}`
+				: Tools.kebabCase(d[angle]))
 			.attr(
 				"cx",
 				(d) =>
@@ -544,7 +546,7 @@ export class Radar extends Component {
 			)
 			.attr("r", 0)
 			.attr("opacity", 0)
-			.attr("fill", (d) => colorScale(d[groupMapsTo]));
+			.attr("fill", (d) => noProvidedColorScale ? null : colorScale(d[groupMapsTo]));
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect").attr(

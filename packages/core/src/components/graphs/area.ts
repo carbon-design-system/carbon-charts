@@ -125,15 +125,20 @@ export class Area extends Component {
 					return areaGenerator(data);
 				});
 		} else {
+			const userProvidedScale = Tools.getProperty(self.model.getOptions(), "color", "scale");
+			const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
+
 			enteringAreas
 				.attr("opacity", 0)
 				.merge(areas)
 				.attr("class", "area")
 				.attr(
 					"class",
-					(group) =>
-						`area ${self.model.getColorClasses()(group.name)}`
+					(group) => noProvidedColorScale
+						? `area ${self.model.getColorClasses()(group.name)}`
+						: "area"
 				)
+				.attr("fill", (group) => noProvidedColorScale ? null : self.model.getFillColor(group.name))
 				.transition(
 					this.services.transitions.getTransition(
 						"area-update-enter",

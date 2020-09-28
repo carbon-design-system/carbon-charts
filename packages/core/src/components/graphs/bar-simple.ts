@@ -42,6 +42,8 @@ export class SimpleBar extends Bar {
 
 		// Add the paths that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		barsEnter
 			.merge(bars)
@@ -55,8 +57,11 @@ export class SimpleBar extends Bar {
 			)
 			.attr(
 				"class",
-				(d) => `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				(d) => noProvidedColorScale
+					? `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+					: "bar"
 			)
+			.attr("fill", (d) => noProvidedColorScale ? null : this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts

@@ -173,6 +173,8 @@ export class Scatter extends Component {
 		const { groupMapsTo } = options.data;
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = cartesianScales.getRangeIdentifier();
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
@@ -190,6 +192,7 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.attr("class", (d) => {
+				let className = `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -198,13 +201,11 @@ export class Scatter extends Component {
 						filled
 					)
 				) {
-					return `dot 
-					${this.model.getColorClasses()(d[groupMapsTo])} 
-					${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
+					className = `dot 
+						${this.model.getColorClasses()(d[groupMapsTo])} 
+						${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
 				}
-				return `dot ${this.model.getStrokeColorClasses()(
-					d[groupMapsTo]
-				)} `;
+				return noProvidedColorScale ? className : "dot";
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
@@ -234,7 +235,31 @@ export class Scatter extends Component {
 			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
+			.attr("fill", (d) => {
+				if (
+					this.model.getIsFilled(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d,
+						filled
+					)
+					&& !noProvidedColorScale
+				) {
+					return this.model.getFillColor(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d
+					)
+				}
+			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
+			.attr("stroke", (d) => noProvidedColorScale
+				? null
+				: this.model.getStrokeColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				))
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
