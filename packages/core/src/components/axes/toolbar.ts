@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { Events, ToolbarControlTypes } from "../../interfaces";
+import { Events, Roles, ToolbarControlTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
@@ -119,7 +119,7 @@ export class Toolbar extends Component {
 			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
 			buttonList.forEach((button) => {
-				// zoom in icon and event
+				// button container
 				const buttonContainer = DOMUtils.appendOrSelect(
 					container,
 					`svg.${button.id}`
@@ -146,25 +146,45 @@ export class Toolbar extends Component {
 					.attr("y", Configuration.toolbar.iconPadding)
 					.attr("width", Configuration.toolbar.iconSize)
 					.attr("height", Configuration.toolbar.iconSize)
-					.attr("viewBox", "0 0 32 32");
+					.attr("viewBox", "0 0 32 32")
+					.attr("role", Roles.IMG);
 
 				buttonIcon.html(button.iconSVGContent());
 				if (button.shouldBeDisabled()) {
-					buttonContainer.classed("toolbar-button--disabled", true);
+					buttonContainer
+						.classed("toolbar-button--disabled", true)
+						.classed("toolbar-button--focusable", false)
+						.attr("tabindex", -1)
+						.attr("role", null);
 					buttonIcon.classed("toolbar-button-icon--disabled", true);
 					buttonBackground.classed(
 						"toolbar-button-background--disabled",
 						true
 					);
-					buttonContainer.on("click", null);
+					buttonContainer.on("click", null).on("keyup", null);
 				} else {
-					buttonContainer.classed("toolbar-button--disabled", false);
+					buttonContainer
+						.classed("toolbar-button--disabled", false)
+						.classed("toolbar-button--focusable", true)
+						.attr("tabindex", 0)
+						.attr("role", Roles.BUTTON);
 					buttonIcon.classed("toolbar-button-icon--disabled", false);
 					buttonBackground.classed(
 						"toolbar-button-background--disabled",
 						false
 					);
-					buttonContainer.on("click", button.clickFunction);
+					buttonContainer
+						.on("click", button.clickFunction)
+						.on("keyup", () => {
+							if (
+								(event.key && event.key === "Enter") ||
+								event.key === " "
+							) {
+								event.preventDefault();
+
+								button.clickFunction();
+							}
+						});
 				}
 				buttonXPosition += buttonSize;
 			});
@@ -244,25 +264,28 @@ export class Toolbar extends Component {
 		let overflowMenuHtml;
 		overflowMenuHtml = `<div data-floating-menu-container="true" data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
-				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
+				tabindex="-1" role="${Roles.MENU}" aria-label="Menu" data-floating-menu-direction="bottom"
 				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
 
 		// generate html for each overflow menu items
-		overflowMenuItems.forEach((menuItem) => {
+		overflowMenuItems.forEach((menuItem, index) => {
 			const menuItemClasses = "bx--overflow-menu-options__option".concat(
 				menuItem.shouldBeDisabled()
 					? " bx--overflow-menu-options__option--disabled" // class for disabled menu item
 					: ""
 			);
-			overflowMenuHtml += `<li class="${menuItemClasses}">
-						<button class="bx--overflow-menu-options__btn" role="menuitem"
-							data-floating-menu-primary-focus
-							id="${menuItem.id + this.overflowMenuItemId}">
-							<div class="bx--overflow-menu-options__option-content">
-								${menuItem.text}
-							</div>
-						</button>
-					</li>`;
+			overflowMenuHtml += `<li class="${menuItemClasses}" role="${
+				Roles.MENU_ITEM
+			}">
+				<button class="bx--overflow-menu-options__btn"
+					data-floating-menu-primary-focus="${index === 0}"
+					tabindex="-1" index="${index}" title="${menuItem.text}"
+					id="${menuItem.id + this.overflowMenuItemId}">
+					<div class="bx--overflow-menu-options__option-content">
+						${menuItem.text}
+					</div>
+				</button>
+			</li>`;
 		});
 
 		overflowMenuHtml += `</ul></div>`;

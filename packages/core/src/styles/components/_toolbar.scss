@@ -17,6 +17,16 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 				}
 			}
 
+			&--focusable {
+				&:focus {
+					.toolbar-button-background {
+						stroke: $icon-02;
+						stroke-width: 2;
+						stroke-dasharray: 2;
+					}
+				}
+			}
+
 			&-icon {
 				pointer-events: visible;
 				circle {
