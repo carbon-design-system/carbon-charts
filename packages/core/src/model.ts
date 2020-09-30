@@ -66,7 +66,7 @@ export class ChartModel {
 
 				// Check for custom domain
 				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
-					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
+					if (scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
