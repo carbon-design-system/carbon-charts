@@ -52,12 +52,20 @@ export class ChartModel {
 
 		const axesOptions = this.getOptions().axes;
 
-		// Check for custom domain
+
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
-				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
-					const mapsTo = axesOptions[axis].mapsTo;
+				const mapsTo = axesOptions[axis].mapsTo;
+				const scaleType = axesOptions[axis].scaleType;
+				// make sure linear/log values are numbers
+				if (scaleType === ScaleTypes.LINEAR || scaleType === ScaleTypes.LOG) {
+					displayData = displayData.map(datum => {
+						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
+					});
+				}
 
+				// Check for custom domain
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
 					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
