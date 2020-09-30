@@ -43,8 +43,10 @@ export class Scatter extends Component {
 		if (zoomDomain !== undefined) {
 			return data.filter(
 				(d) =>
-					d[domainIdentifier] > zoomDomain[0] &&
-					d[domainIdentifier] < zoomDomain[1]
+					new Date(d[domainIdentifier]).getTime() >
+						zoomDomain[0].getTime() &&
+					new Date(d[domainIdentifier]).getTime() <
+						zoomDomain[1].getTime()
 			);
 		}
 		return data;
