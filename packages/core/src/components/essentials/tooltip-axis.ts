@@ -76,7 +76,7 @@ export class AxisChartsTooltip extends Tooltip {
 					value: datum[rangeIdentifier]
 				},
 				{
-					label: "Group",
+					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
 					color: this.model.getStrokeColor(datum[groupMapsTo]),
 					class: this.model.getTooltipColorClasses()(
@@ -107,7 +107,7 @@ export class AxisChartsTooltip extends Tooltip {
 
 			if (Tools.getProperty(options, "tooltip", "showTotal") === true) {
 				items.push({
-					label: "Total",
+					label: options.tooltip.totalLabel || "Total",
 					value: this.valueFormatter(
 						data.reduce(
 							(accumulator, datum) =>
