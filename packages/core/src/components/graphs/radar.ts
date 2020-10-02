@@ -834,7 +834,7 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
-							color: self.model.getStrokeColor(datum[groupMapsTo])
+							class: self.model.getTooltipColorClass(datum[groupMapsTo])
 						}))
 				});
 			})
