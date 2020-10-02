@@ -92,8 +92,10 @@ export class StackedScatter extends Scatter {
 				const domainValue = datum["data"]["sharedStackKey"];
 				let rangeValue = datum["data"][group];
 				const stackedRangeValue = datum[1];
+
 				if (
-					rangeValue &&
+					rangeValue !== null &&
+					rangeValue !== undefined &&
 					hoveredX ===
 						this.services.cartesianScales.getDomainValue(
 							domainValue
@@ -109,11 +111,13 @@ export class StackedScatter extends Scatter {
 						][dataIndex]["data"][group];
 					}
 
-					tooltipData.push({
-						[groupMapsTo]: group,
-						[domainIdentifier]: domainValue,
-						[rangeIdentifier]: rangeValue
-					});
+					if (rangeValue !== null) {
+						tooltipData.push({
+							[groupMapsTo]: group,
+							[domainIdentifier]: domainValue,
+							[rangeIdentifier]: rangeValue
+						});
+					}
 				}
 			});
 		});
