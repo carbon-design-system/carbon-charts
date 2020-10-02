@@ -78,7 +78,7 @@ export class Area extends Component {
 
 		// the fill value of area has been overwrited, get color value from stroke color class instead
 		const areaElement = document.getElementsByClassName(
-			`${this.model.getStrokeColorClasses()(groupedData[0].name)}`
+			`${this.model.getStrokeColorClass(groupedData[0].name)}`
 		)[0];
 
 		if (isGradientAllowed && areaElement) {
@@ -128,7 +128,7 @@ export class Area extends Component {
 				.attr(
 					"class",
 					(group) => noProvidedColorScale
-						? `area ${self.model.getColorClasses()(group.name)}`
+						? `area ${self.model.getColorClass(group.name)}`
 						: "area"
 				)
 				.attr("d", (group) => {
@@ -143,7 +143,7 @@ export class Area extends Component {
 				.attr(
 					"class",
 					(group) => noProvidedColorScale
-						? `area ${self.model.getColorClasses()(group.name)}`
+						? `area ${self.model.getColorClass(group.name)}`
 						: "area"
 				)
 				.attr("fill", (group) => noProvidedColorScale ? null : self.model.getFillColor(group.name))

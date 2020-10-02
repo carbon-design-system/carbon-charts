@@ -194,7 +194,7 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.attr("class", (d) => {
-				let className = `dot ${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
+				let className = `dot ${this.model.getStrokeColorClass(d[groupMapsTo])}`;
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -204,8 +204,8 @@ export class Scatter extends Component {
 					)
 				) {
 					className = `dot 
-						${this.model.getColorClasses()(d[groupMapsTo])} 
-						${this.model.getStrokeColorClasses()(d[groupMapsTo])}`;
+						${this.model.getColorClass(d[groupMapsTo])} 
+						${this.model.getStrokeColorClass(d[groupMapsTo])}`;
 				}
 				return noProvidedColorScale ? className : "dot";
 			})
@@ -341,7 +341,7 @@ export class Scatter extends Component {
 				hoveredElement.classed("hovered", true)
 					.attr("class", (d) => 
 						`${hoveredElement.attr("class")} 
-						${self.model.getColorClasses()(d[groupMapsTo])}`
+						${self.model.getColorClass(d[groupMapsTo])}`
 					)
 					.classed("unfilled", false);
 

@@ -73,8 +73,8 @@ export class Bubble extends Scatter {
 				"class",
 				(d) => noProvidedColorScale
 					? `dot
-					${this.model.getStrokeColorClasses()(d[groupMapsTo])} 
-					${this.model.getColorClasses()(d[groupMapsTo])}
+					${this.model.getStrokeColorClass(d[groupMapsTo])} 
+					${this.model.getColorClass(d[groupMapsTo])}
 					`
 					: "dot"
 			)

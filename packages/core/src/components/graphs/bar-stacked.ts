@@ -84,7 +84,7 @@ export class StackedBar extends Bar {
 			.attr(
 				"class",
 				(d) => noProvidedColorScale
-				? `bar ${this.model.getColorClasses()(d[groupMapsTo])}`
+				? `bar ${this.model.getColorClass(d[groupMapsTo])}`
 				: "bar"
 			)
 			.attr("fill", (d) => noProvidedColorScale ? null : this.model.getFillColor(d[groupMapsTo]))

@@ -78,7 +78,7 @@ export class StackedArea extends Component {
 			.attr(
 				"class",
 				(d) => noProvidedColorScale
-				? `area ${this.model.getColorClasses()(d[0][groupMapsTo])}`
+				? `area ${this.model.getColorClass(d[0][groupMapsTo])}`
 				: "area"
 			)
 			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[0][groupMapsTo]))

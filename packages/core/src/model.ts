@@ -1,7 +1,6 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import * as colorPalettes from "./services/colorPalettes";
 import { Events, ScaleTypes } from "./interfaces";
 
 // D3
@@ -330,9 +329,8 @@ export class ChartModel {
 
 		this.updateAllDataGroups();
 
-		this.setColorScale();
+		this.setUserProvidedColorScale();
 		this.setColorClasses();
-
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
@@ -455,16 +453,16 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
-	getColorClasses() {
-		return this.colorClasses;
+	getColorClass(group: any) {
+		return this.colorClasses(group);
 	}
 
-	getTooltipColorClasses() {
-		return this.tooltipColorClasses;
+	getTooltipColorClass(group: any) {
+		return this.tooltipColorClasses(group);
 	}
 
-	getStrokeColorClasses() {
-		return this.strokeColorClasses;
+	getStrokeColorClass(group: any) {
+		return this.strokeColorClasses(group);
 	}
 
 	/**
@@ -597,8 +595,7 @@ export class ChartModel {
 	/*
 	 * Fill scales
 	 */
-	protected setColorScale() {
-		const defaultColors = colorPalettes.DEFAULT;
+	protected setUserProvidedColorScale() {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
@@ -606,31 +603,17 @@ export class ChartModel {
 			userProvidedScale === null ||
 			Object.keys(userProvidedScale).length === 0
 		) {
-			// If there is no valid user provided scale, use the default set of colors
-			this.colorScale = scaleOrdinal()
-				.range(defaultColors)
-				.domain(this.allDataGroups);
 			return;
 		}
 
 		/**
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
-		 * If not, add a default color
 		 */
 		const colorRange = [];
-		let colorIndex = 0;
 		this.allDataGroups.forEach((dataGroup) => {
 			if (userProvidedScale[dataGroup]) {
 				colorRange.push(userProvidedScale[dataGroup]);
-			} else {
-				colorRange.push(defaultColors[colorIndex]);
-			}
-
-			if (colorIndex === defaultColors.length - 1) {
-				colorIndex = 0;
-			} else {
-				colorIndex++;
 			}
 		});
 
@@ -639,6 +622,9 @@ export class ChartModel {
 			.domain(this.allDataGroups);
 	}
 
+	/* 
+	 * Color palette
+	 */
 	protected setColorClasses() {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");

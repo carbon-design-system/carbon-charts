@@ -130,7 +130,7 @@ export class Gauge extends Component {
 			.attr(
 				"class",
 				(d) => noProvidedColorScale
-					? `arc-foreground ${self.model.getColorClasses()(d[groupMapsTo])}`
+					? `arc-foreground ${self.model.getColorClass(d[groupMapsTo])}`
 					: "arc-foreground"
 			)
 			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[groupMapsTo]))

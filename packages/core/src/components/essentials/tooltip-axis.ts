@@ -78,10 +78,7 @@ export class AxisChartsTooltip extends Tooltip {
 				{
 					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
-					color: this.model.getStrokeColor(datum[groupMapsTo]),
-					class: this.model.getTooltipColorClasses()(
-						datum[groupMapsTo]
-					)
+					class: this.model.getTooltipColorClass(datum[groupMapsTo])
 				}
 			];
 		} else if (data.length > 1) {
@@ -97,10 +94,7 @@ export class AxisChartsTooltip extends Tooltip {
 					.map((datum) => ({
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
-						color: this.model.getStrokeColor(datum[groupMapsTo]),
-						class: this.model.getTooltipColorClasses()(
-							datum[groupMapsTo]
-						)
+						class: this.model.getTooltipColorClass(datum[groupMapsTo])
 					}))
 					.sort((a, b) => b.value - a.value)
 			);

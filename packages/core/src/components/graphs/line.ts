@@ -105,7 +105,7 @@ export class Line extends Component {
 			.attr(
 				"class",
 				(group) => noProvidedColorScale
-					? `line ${this.model.getStrokeColorClasses()(group.name)}`
+					? `line ${this.model.getStrokeColorClass(group.name)}`
 					: "line"
 			)
 			// a11y

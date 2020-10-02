@@ -457,7 +457,7 @@ export class Radar extends Component {
 					.attr(
 						"class",
 						(group) => noProvidedColorScale
-							? `blob ${this.model.getColorClasses()(group.name)}`
+							? `blob ${this.model.getColorClass(group.name)}`
 							: "blob"
 					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -524,7 +524,7 @@ export class Radar extends Component {
 				(exit) => exit.remove()
 			)
 			.attr("class", (d) => noProvidedColorScale 
-				? `${Tools.kebabCase(d[angle])} ${this.model.getColorClasses()(d[groupMapsTo])}`
+				? `${Tools.kebabCase(d[angle])} ${this.model.getColorClass(d[groupMapsTo])}`
 				: Tools.kebabCase(d[angle]))
 			.attr(
 				"cx",

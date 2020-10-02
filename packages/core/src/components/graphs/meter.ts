@@ -55,7 +55,7 @@ export class Meter extends Component {
 			.attr(
 				"class",
 				(d) => noProvidedColorScale
-					? `${className} ${self.model.getColorClasses()(d[groupMapsTo])}`
+					? `${className} ${self.model.getColorClass(d[groupMapsTo])}`
 					: className
 			)
 			.transition(

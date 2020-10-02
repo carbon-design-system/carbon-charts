@@ -105,10 +105,11 @@ export class Pie extends Component {
 			.merge(paths)
 			.attr(
 				"class",
-				(d) =>
-					`slice ${this.model.getColorClasses()(d.data[groupMapsTo])}`
+				(d) => noProvidedColorScale
+					? `slice ${this.model.getColorClass(d.data[groupMapsTo])}`
+					: "slice"
 			)
-			// .attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
+			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
 				this.services.transitions.getTransition(
