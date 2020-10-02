@@ -76,7 +76,14 @@ export class Area extends Component {
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
 
-		if (isGradientAllowed) {
+		// the fill value of area has been overwrited, get color value from stroke color class instead
+		const areaElement = document.getElementsByClassName(
+			`${this.model.getStrokeColorClasses()(groupedData[0].name)}`
+		)[0];
+
+		if (isGradientAllowed && areaElement) {
+			const colorValue = getComputedStyle(areaElement, null).getPropertyValue("stroke");
+
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id:
@@ -89,7 +96,7 @@ export class Area extends Component {
 				y2: "100%",
 				stops: GradientUtils.getStops(
 					domain,
-					this.model.getFillColor(groupedData[0].name)
+					colorValue
 				)
 			});
 		} else {
@@ -108,26 +115,27 @@ export class Area extends Component {
 		areas.exit().attr("opacity", 0).remove();
 
 		const self = this;
+		const userProvidedScale = Tools.getProperty(self.model.getOptions(), "color", "scale");
+		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		// Enter paths that need to be introduced
 		const enteringAreas = areas.enter().append("path");
 		if (isGradientAllowed) {
 			enteringAreas
 				.merge(areas)
-				.style("fill", (group) => {
-					return `url(#${group.name.replace(" ", "")}_${
-						this.gradient_id
-					})`;
-				})
+				.style("fill", (group) => `url(#${group.name.replace(" ", "")}_${this.gradient_id})`)
 				.attr("class", "area")
+				.attr(
+					"class",
+					(group) => noProvidedColorScale
+						? `area ${self.model.getColorClasses()(group.name)}`
+						: "area"
+				)
 				.attr("d", (group) => {
 					const { data } = group;
 					return areaGenerator(data);
 				});
 		} else {
-			const userProvidedScale = Tools.getProperty(self.model.getOptions(), "color", "scale");
-			const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
-
 			enteringAreas
 				.attr("opacity", 0)
 				.merge(areas)
