@@ -272,7 +272,6 @@ $color-map: ();
 					@include color-property("#{$name}-#{$category}", $value);
 				}
 			} @else {
-				#{$name}-#{$category}: $value;
 				$color-map: map-merge(
 					$color-map,
 					(
@@ -282,7 +281,7 @@ $color-map: ();
 			}
 		}
 	} @else {
-		#{$name}: #{$theme-colors};
+		#{$name}: $theme-colors;
 	}
 }
 

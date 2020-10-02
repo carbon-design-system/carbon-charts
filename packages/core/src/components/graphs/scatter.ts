@@ -336,8 +336,14 @@ export class Scatter extends Component {
 			.selectAll("circle")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
+				const { groupMapsTo } = self.model.getOptions().data;
 
-				hoveredElement.classed("hovered", true);
+				hoveredElement.classed("hovered", true)
+					.attr("class", (d) => 
+						`${hoveredElement.attr("class")} 
+						${self.model.getColorClasses()(d[groupMapsTo])}`
+					)
+					.classed("unfilled", false);
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum
@@ -387,11 +393,8 @@ export class Scatter extends Component {
 			})
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false);
-
-				if (!self.configs.filled) {
-					hoveredElement.style("fill", null);
-				}
+				hoveredElement.classed("hovered", false)
+					.classed("unfilled", true);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
