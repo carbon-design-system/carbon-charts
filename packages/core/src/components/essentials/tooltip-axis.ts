@@ -77,7 +77,8 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 				{
 					label: options.tooltip.groupLabel || "Group",
-					value: datum[groupMapsTo]
+					value: datum[groupMapsTo],
+					class: this.model.getTooltipColorClass(datum[groupMapsTo])
 				}
 			];
 		} else if (data.length > 1) {
