@@ -337,7 +337,7 @@ export class Toolbar extends Component {
 
 			// add to list if config is valid
 			if (controlConfig) {
-				controlConfig.text = control.text;
+				controlConfig.text = control.text ? control.text : control.type;
 				controlList.push(controlConfig);
 			}
 		});

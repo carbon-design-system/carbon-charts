@@ -182,20 +182,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	toolbar: {
 		enabled: false,
 		numberOfIcons: 3,
-		controls: [
-			{
-				type: ToolbarControlTypes.ZOOM_IN,
-				text: "Zoom in"
-			} as ToolbarControl,
-			{
-				type: ToolbarControlTypes.ZOOM_OUT,
-				text: "Zoom out"
-			} as ToolbarControl,
-			{
-				type: ToolbarControlTypes.RESET_ZOOM,
-				text: "Reset zoom"
-			} as ToolbarControl
-		]
+		controls: []
 	} as ToolbarOptions
 } as AxisChartOptions);
 
