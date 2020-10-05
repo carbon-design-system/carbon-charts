@@ -29,18 +29,11 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 
 			&-icon {
 				pointer-events: visible;
-				circle {
+
+				circle,	rect, path,	polygon {
 					fill: $icon-02;
 				}
-				rect {
-					fill: $icon-02;
-				}
-				path {
-					fill: $icon-02;
-				}
-				polygon {
-					fill: $icon-02;
-				}
+
 				&:hover {
 					cursor: pointer;
 					pointer-events: visible;
@@ -49,18 +42,11 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 
 			&-icon--disabled {
 				pointer-events: auto;
-				circle {
+
+				circle, rect, path,	polygon {
 					fill: $disabled-03;
 				}
-				rect {
-					fill: $disabled-03;
-				}
-				path {
-					fill: $disabled-03;
-				}
-				polygon {
-					fill: $disabled-03;
-				}
+
 				&:hover {
 					cursor: auto;
 					pointer-events: auto;
@@ -70,6 +56,7 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 			&--hovered {
 				fill: $hover-ui;
 			}
+
 			&--disabled {
 				cursor: auto;
 			}
