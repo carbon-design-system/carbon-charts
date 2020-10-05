@@ -17,11 +17,11 @@ const addToolbarOptions = (options, configs?) => {
 		if (configs.titlePostifx) {
 			options.title += configs.titlePostifx;
 		}
-		if (configs.maxIcons) {
-			options.toolbar.maxIcons = configs.maxIcons;
+		if (configs.numberOfIcons) {
+			options.toolbar.numberOfIcons = configs.numberOfIcons;
 		}
-		if (configs.controlsInOrder) {
-			options.toolbar.controlsInOrder = configs.controlsInOrder;
+		if (configs.controls) {
+			options.toolbar.controls = configs.controls;
 		}
 	}
 
@@ -39,8 +39,8 @@ export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 	Object.assign({}, lineChart.lineTimeSeriesOptions),
 	{
 		titlePostfix: " - two icons",
-		maxIcons: 2,
-		controlsInOrder: [
+		numberOfIcons: 2,
+		controls: [
 			{
 				type: "Reset zoom",
 				text: "Reset zoom"

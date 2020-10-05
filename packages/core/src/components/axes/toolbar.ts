@@ -297,18 +297,18 @@ export class Toolbar extends Component {
 			this.services.zoom.isZoomBarEnabled() &&
 			!this.services.zoom.isEmptyState();
 
-		const maxIcons = Tools.getProperty(
+		const numberOfIcons = Tools.getProperty(
 			this.model.getOptions(),
 			"toolbar",
-			"maxIcons"
+			"numberOfIcons"
 		);
-		const controlsInOrder = Tools.getProperty(
+		const controls = Tools.getProperty(
 			this.model.getOptions(),
 			"toolbar",
-			"controlsInOrder"
+			"controls"
 		);
 		const controlList = [];
-		controlsInOrder.forEach((control) => {
+		controls.forEach((control) => {
 			let controlConfig;
 			switch (control.type) {
 				case ToolbarControlTypes.ZOOM_IN:
@@ -342,14 +342,14 @@ export class Toolbar extends Component {
 			}
 		});
 
-		if (controlList.length <= maxIcons) {
+		if (controlList.length <= numberOfIcons) {
 			return {
 				buttonList: controlList
 			};
 		} else {
 			return {
 				// leave one button for overflow button
-				buttonList: controlList.splice(0, maxIcons - 1),
+				buttonList: controlList.splice(0, numberOfIcons - 1),
 				overflowMenuItemList: controlList
 			};
 		}

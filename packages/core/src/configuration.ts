@@ -181,8 +181,8 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
-		maxIcons: 3,
-		controlsInOrder: [
+		numberOfIcons: 3,
+		controls: [
 			{
 				type: ToolbarControlTypes.ZOOM_IN,
 				text: "Zoom in"
