@@ -59,9 +59,17 @@ export interface TooltipOptions {
 	 */
 	customHTML?: Function;
 	/**
+	 * customizes the `Group` label shown inside tooltips
+	 */
+	groupLabel?: string;
+	/**
 	 * show total of items
 	 */
 	showTotal?: boolean;
+	/**
+	 * customizes the `Total` label shown inside tooltips
+	 */
+	totalLabel?: string;
 	truncation?: TruncationOptions;
 }
 
