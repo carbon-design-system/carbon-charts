@@ -123,7 +123,15 @@ export class ZoomBar extends Component {
 				"top",
 				"initialZoomDomain"
 			);
-
+			// change string date to Date object if necessary
+			if (
+				newInitialZoomDomain &&
+				newInitialZoomDomain[0] &&
+				newInitialZoomDomain[1]
+			) {
+				newInitialZoomDomain[0] = new Date(newInitialZoomDomain[0]);
+				newInitialZoomDomain[1] = new Date(newInitialZoomDomain[1]);
+			}
 			// update initialZoomDomain and set zoomDomain in model only if the option is changed
 			// not the same object, and both start date and end date are not equal
 			if (
