@@ -225,6 +225,48 @@ export class Toolbar extends Component {
 		}
 	}
 
+	focusOnPreviousEnabledMenuItem(currentItemIndex) {
+		const overflowMenuItems = this.getOverflowMenuItems();
+		let previousItemIndex = overflowMenuItems.length;
+		for (let i = currentItemIndex - 1; i >= 0; i--) {
+			const previousOverflowMenuItem = overflowMenuItems[i];
+			if (!previousOverflowMenuItem.shouldBeDisabled()) {
+				previousItemIndex = i;
+				break;
+			}
+		}
+		// only if previous enabled menu item found
+		if (previousItemIndex < overflowMenuItems.length) {
+			document
+				.getElementById(
+					overflowMenuItems[previousItemIndex].id +
+						this.overflowMenuItemId
+				)
+				.focus();
+		}
+	}
+
+	focusOnNextEnabledMenuItem(currentItemIndex) {
+		const overflowMenuItems = this.getOverflowMenuItems();
+		let nextItemIndex = -1;
+		for (let i = currentItemIndex + 1; i < overflowMenuItems.length; i++) {
+			const nextOverflowMenuItem = overflowMenuItems[i];
+			if (!nextOverflowMenuItem.shouldBeDisabled()) {
+				nextItemIndex = i;
+				break;
+			}
+		}
+		// only if next enabled menu item found
+		if (nextItemIndex > -1) {
+			document
+				.getElementById(
+					overflowMenuItems[nextItemIndex].id +
+						this.overflowMenuItemId
+				)
+				.focus();
+		}
+	}
+
 	toggleOverflowMenu() {
 		if (this.isOverflowMenuOpen()) {
 			// hide overflow menu
@@ -236,7 +278,7 @@ export class Toolbar extends Component {
 			// setup overflow menu item event listener
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
-			overflowMenuItems.forEach((menuItem) => {
+			overflowMenuItems.forEach((menuItem, index) => {
 				const element = document.getElementById(
 					menuItem.id + this.overflowMenuItemId
 				);
@@ -248,8 +290,24 @@ export class Toolbar extends Component {
 						// hide overflow menu
 						self.showOverflowMenu(false);
 					});
+					element.addEventListener("keyup", (e) => {
+						if (e.key === "Enter") {
+							// call the specified function
+							menuItem.clickFunction();
+						} else if (e.key === "ArrowUp") {
+							// focus on previous menu item
+							self.focusOnPreviousEnabledMenuItem(index);
+						} else if (e.key === "ArrowDown") {
+							// focus on next menu item
+							self.focusOnNextEnabledMenuItem(index);
+						}
+						// Not hide overflow menu by keyboard arrow up/down event
+					});
 				}
 			});
+
+			// default to focus on the first enabled menu item
+			self.focusOnNextEnabledMenuItem(-1);
 		}
 		event.stopImmediatePropagation();
 	}
