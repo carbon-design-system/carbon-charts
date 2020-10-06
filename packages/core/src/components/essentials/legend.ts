@@ -82,7 +82,7 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.style("fill", (d) => {
 				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getStrokeColor(d.name)
+					? this.model.getColorForGroup(d.name)
 					: null;
 			})
 			.classed("active", function (d, i) {
