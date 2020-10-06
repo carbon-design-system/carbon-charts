@@ -2,7 +2,6 @@
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
 import { Roles } from "../../interfaces";
-import { Tools } from "../../tools";
 
 // D3 Imports
 import { Selection } from "d3-selection";

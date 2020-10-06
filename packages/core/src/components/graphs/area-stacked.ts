@@ -2,7 +2,6 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { Roles, ScaleTypes, Events } from "../../interfaces";
-import { Tools } from "../../tools";
 
 // D3 Imports
 import { area } from "d3-shape";
