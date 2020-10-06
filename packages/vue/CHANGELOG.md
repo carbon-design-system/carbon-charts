@@ -3,109 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.38.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.1...v0.38.2) (2020-09-17)
+## [0.39.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.39.0...v0.39.1) (2020-10-05)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
 
 
 
+
+# [0.39.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.8...v0.39.0) (2020-10-01)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.38.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.7...v0.38.8) (2020-09-30)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.38.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.6...v0.38.7) (2020-09-23)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.38.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.5...v0.38.6) (2020-09-22)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+## [0.38.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.4...v0.38.5) (2020-09-22)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+## [0.38.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.3...v0.38.4) (2020-09-21)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+## [0.38.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.2...v0.38.3) (2020-09-21)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+## [0.38.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.1...v0.38.2) (2020-09-17)
+
+**Note:** Version bump only for package @carbon/charts-vue
 
 ## [0.38.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.0...v0.38.1) (2020-09-17)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 # [0.38.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.37.1...v0.38.0) (2020-09-15)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.37.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.37.0...v0.37.1) (2020-09-14)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 # [0.37.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.4...v0.37.0) (2020-09-11)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.36.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.3...v0.36.4) (2020-09-10)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.36.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.2...v0.36.3) (2020-09-10)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.36.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.1...v0.36.2) (2020-09-02)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.36.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.0...v0.36.1) (2020-09-01)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 # [0.36.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.35.3...v0.36.0) (2020-08-25)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.35.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.35.2...v0.35.3) (2020-08-21)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.35.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.35.1...v0.35.2) (2020-08-21)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.35.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.35.0...v0.35.1) (2020-08-18)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 # [0.35.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.11...v0.35.0) (2020-08-13)
 

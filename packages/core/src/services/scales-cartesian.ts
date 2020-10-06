@@ -424,6 +424,8 @@ export class CartesianScales extends Service {
 			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
 				sum(values(dataValues) as any)
 			);
+		} else if (scaleType === ScaleTypes.TIME) {
+			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]));
 		} else {
 			allDataValues = this.services.zoom
 				.filterDataForRangeAxis(displayData)
