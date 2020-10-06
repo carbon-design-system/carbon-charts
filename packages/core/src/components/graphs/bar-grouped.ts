@@ -64,7 +64,7 @@ export class GroupedBar extends Bar {
 			.append("g")
 			.classed("bars", true)
 			.attr("role", Roles.GROUP)
-			.attr("aria-labelledby", (d) => d);
+			.attr("data-name", "bars");
 
 		// Update data on all bars
 		const bars = barGroupsEnter

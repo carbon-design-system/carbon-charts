@@ -77,6 +77,7 @@ export class Legend extends Component {
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
 			.attr("tabindex", 0)
+			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
 				({ status }) =>
@@ -409,7 +410,7 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
-			if ((event.key && event.key === "Enter") || event.key === " ") {
+			if (event.key && (event.key === "Enter" || event.key === " ")) {
 				event.preventDefault();
 
 				self.model.toggleDataLabel(d.name);

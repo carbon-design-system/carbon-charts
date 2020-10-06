@@ -55,14 +55,16 @@ export class ChartModel {
 
 		const axesOptions = this.getOptions().axes;
 
-
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
 				const mapsTo = axesOptions[axis].mapsTo;
 				const scaleType = axesOptions[axis].scaleType;
 				// make sure linear/log values are numbers
-				if (scaleType === ScaleTypes.LINEAR || scaleType === ScaleTypes.LOG) {
-					displayData = displayData.map(datum => {
+				if (
+					scaleType === ScaleTypes.LINEAR ||
+					scaleType === ScaleTypes.LOG
+				) {
+					displayData = displayData.map((datum) => {
 						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
 					});
 				}
@@ -261,7 +263,11 @@ export class ChartModel {
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
-					d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					if (maxByKey[d.sharedStackKey]) {
+						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					} else {
+						d[name] = 0;
+					}
 				});
 			});
 		}
