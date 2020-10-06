@@ -200,7 +200,7 @@ export class Scatter extends Component {
 						filled
 					)
 				) {
-					return this.model.getColorClassName(["fill", "stoke"], d[groupMapsTo], "dot")
+					return this.model.getColorClassName(["fill", "stroke"], d[groupMapsTo], "dot")
 				}
 				return this.model.getColorClassName(["stroke"], d[groupMapsTo], "dot")
 			})
@@ -253,7 +253,8 @@ export class Scatter extends Component {
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
-				))
+				)
+			)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -323,12 +324,13 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
+		const { groupMapsTo } = self.model.getOptions().data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent
 			.selectAll("circle")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
-				const { groupMapsTo } = self.model.getOptions().data;
 
 				hoveredElement.classed("hovered", true)
 					.attr("class", (d) => self.model.getColorClassName(
@@ -337,6 +339,11 @@ export class Scatter extends Component {
 							hoveredElement.attr("class")
 						)
 					)
+					.style("fill", (d) => self.model.getFillColor(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d
+					))
 					.classed("unfilled", false);
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
@@ -388,7 +395,11 @@ export class Scatter extends Component {
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
-					.classed("unfilled", true);
+
+				if (!self.configs.filled && hoveredElement.attr("fill-opacity") == "1") {
+					hoveredElement.classed("unfilled", true);
+				}
+					
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
