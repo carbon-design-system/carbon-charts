@@ -447,25 +447,20 @@ export class Radar extends Component {
 			.selectAll("path")
 			.data(this.groupedDataNormalized, (group) => group.name);
 
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
-
 		blobUpdate.join(
 			(enter) =>
 				enter
 					.append("path")
 					.attr(
 						"class",
-						(group) => noProvidedColorScale
-							? `blob ${this.model.getColorClass(group.name)}`
-							: "blob"
+						(group) => this.model.getColorClassName(["fill"], group.name, "blob")
 					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
-					.attr("fill", (group) => noProvidedColorScale ? null : colorScale(group.name))
+					.attr("fill", (group) => colorScale(group.name))
 					.style("fill-opacity", Configuration.radar.opacity.selected)
-					.attr("stroke", (group) => noProvidedColorScale ? null : colorScale(group.name))
+					.attr("stroke", (group) => colorScale(group.name))
 					.attr("d", (group) => oldRadialLineGenerator(group.data))
 					.call((selection) =>
 						selection
@@ -523,9 +518,11 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			.attr("class", (d) => noProvidedColorScale 
-				? `${Tools.kebabCase(d[angle])} ${this.model.getColorClass(d[groupMapsTo])}`
-				: Tools.kebabCase(d[angle]))
+			.attr("class", (d) => this.model.getColorClassName(
+				["fill"],
+				d[groupMapsTo],
+				Tools.kebabCase(d[angle])
+			))
 			.attr(
 				"cx",
 				(d) =>
@@ -546,7 +543,7 @@ export class Radar extends Component {
 			)
 			.attr("r", 0)
 			.attr("opacity", 0)
-			.attr("fill", (d) => noProvidedColorScale ? null : colorScale(d[groupMapsTo]));
+			.attr("fill", (d) => colorScale(d[groupMapsTo]));
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect").attr(
@@ -834,7 +831,7 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
-							class: self.model.getTooltipColorClass(datum[groupMapsTo])
+							class: self.model.getColorClassName(["tooltip"], datum[groupMapsTo])
 						}))
 				});
 			})

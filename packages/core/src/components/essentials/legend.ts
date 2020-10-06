@@ -67,7 +67,7 @@ export class Legend extends Component {
 		const paletteIndex = Tools.getProperty(
 			options,
 			"color",
-			"presetPalette",
+			"paring",
 			"index"
 		);
 
@@ -89,7 +89,7 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.attr("class", (d, i) => {
 				if (paletteIndex) {
-					return `checkbox ${this.model.getColorClass(d.name)}`;
+					return this.model.getColorClassName(["fill"], d.name, "checkbox")
 				}
 			})
 			.style("fill", (d) => {

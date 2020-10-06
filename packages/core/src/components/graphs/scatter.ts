@@ -175,8 +175,6 @@ export class Scatter extends Component {
 		const { groupMapsTo } = options.data;
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = cartesianScales.getRangeIdentifier();
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
@@ -194,7 +192,6 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.attr("class", (d) => {
-				let className = `dot ${this.model.getStrokeColorClass(d[groupMapsTo])}`;
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -203,11 +200,9 @@ export class Scatter extends Component {
 						filled
 					)
 				) {
-					className = `dot 
-						${this.model.getColorClass(d[groupMapsTo])} 
-						${this.model.getStrokeColorClass(d[groupMapsTo])}`;
+					return this.model.getColorClassName(["fill", "stoke"], d[groupMapsTo], "dot")
 				}
-				return noProvidedColorScale ? className : "dot";
+				return this.model.getColorClassName(["stroke"], d[groupMapsTo], "dot")
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
@@ -245,7 +240,6 @@ export class Scatter extends Component {
 						d,
 						filled
 					)
-					&& !noProvidedColorScale
 				) {
 					return this.model.getFillColor(
 						d[groupMapsTo],
@@ -255,9 +249,7 @@ export class Scatter extends Component {
 				}
 			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) => noProvidedColorScale
-				? null
-				: this.model.getStrokeColor(
+			.attr("stroke", (d) => this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
@@ -339,9 +331,11 @@ export class Scatter extends Component {
 				const { groupMapsTo } = self.model.getOptions().data;
 
 				hoveredElement.classed("hovered", true)
-					.attr("class", (d) => 
-						`${hoveredElement.attr("class")} 
-						${self.model.getColorClass(d[groupMapsTo])}`
+					.attr("class", (d) => self.model.getColorClassName(
+							["fill"],
+							d[groupMapsTo],
+							hoveredElement.attr("class")
+						)
 					)
 					.classed("unfilled", false);
 

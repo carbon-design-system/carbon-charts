@@ -92,7 +92,7 @@ export const simpleBarOptions = {
 		}
 	},
 	color: {
-		presetPalette: {
+		paring: {
 			index: 1
 		}
 	}

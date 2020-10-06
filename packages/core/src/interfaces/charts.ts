@@ -107,7 +107,7 @@ export interface BaseChartOptions {
 		 * use a carbon dataviz preset color palette
 		 * put the index (selection of which variant)
 		 */
-		presetPalette?: {
+		paring?: {
 			/**
 			 * the number of the preset
 			 */

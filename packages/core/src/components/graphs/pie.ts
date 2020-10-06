@@ -96,20 +96,15 @@ export class Pie extends Component {
 			.append("path")
 			.classed("slice", true)
 			.attr("opacity", 0);
-		
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
 			.attr(
 				"class",
-				(d) => noProvidedColorScale
-					? `slice ${this.model.getColorClass(d.data[groupMapsTo])}`
-					: "slice"
+				(d) => this.model.getColorClassName(["fill"], d.data[groupMapsTo], "slice")
 			)
-			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d.data[groupMapsTo]))
+			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
 				this.services.transitions.getTransition(

@@ -68,8 +68,6 @@ export class StackedArea extends Component {
 		areas.exit().attr("opacity", 0).remove();
 
 		const enteringAreas = areas.enter().append("path").attr("opacity", 0);
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		enteringAreas
 			.merge(areas)
@@ -77,11 +75,9 @@ export class StackedArea extends Component {
 			.attr("class", "area")
 			.attr(
 				"class",
-				(d) => noProvidedColorScale
-				? `area ${this.model.getColorClass(d[0][groupMapsTo])}`
-				: "area"
+				(d) => this.model.getColorClassName(["fill"], d[0][groupMapsTo], "area")
 			)
-			.attr("fill", (d) => noProvidedColorScale ? null : self.model.getFillColor(d[0][groupMapsTo]))
+			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
 			.transition(

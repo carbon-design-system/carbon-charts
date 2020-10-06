@@ -48,8 +48,6 @@ export class Bubble extends Scatter {
 
 		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		selection
 			.raise()
@@ -71,24 +69,18 @@ export class Bubble extends Scatter {
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
 			.attr(
 				"class",
-				(d) => noProvidedColorScale
-					? `dot
-					${this.model.getStrokeColorClass(d[groupMapsTo])} 
-					${this.model.getColorClass(d[groupMapsTo])}
-					`
-					: "dot"
+				(d) => this.model.getColorClassName(["fill", "stroke"], d[groupMapsTo], "dot")
 			)
-			.attr("fill", (d) => noProvidedColorScale
-				? null
-				: this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			.attr("fill", (d) => this.model.getFillColor(
+				d[groupMapsTo],
+				d[domainIdentifier],
+				d)
 			)
-			.attr("stoke", (d) => noProvidedColorScale
-				? null
-				: this.model.getStrokeColor(
-					d[groupMapsTo],
-					d[domainIdentifier],
-					d
-				))
+			.attr("stoke", (d) => this.model.getStrokeColor(
+				d[groupMapsTo],
+				d[domainIdentifier],
+				d
+			))
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);
 	}

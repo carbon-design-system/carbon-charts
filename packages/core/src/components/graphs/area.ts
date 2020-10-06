@@ -78,7 +78,7 @@ export class Area extends Component {
 
 		// the fill value of area has been overwrited, get color value from stroke color class instead
 		const areaElement = document.getElementsByClassName(
-			`${this.model.getStrokeColorClass(groupedData[0].name)}`
+			this.model.getColorClassName(["stroke"], groupedData[0].name)
 		)[0];
 
 		if (isGradientAllowed && areaElement) {
@@ -115,8 +115,6 @@ export class Area extends Component {
 		areas.exit().attr("opacity", 0).remove();
 
 		const self = this;
-		const userProvidedScale = Tools.getProperty(self.model.getOptions(), "color", "scale");
-		const noProvidedColorScale = userProvidedScale === null || Object.keys(userProvidedScale).length === 0;
 
 		// Enter paths that need to be introduced
 		const enteringAreas = areas.enter().append("path");
@@ -127,9 +125,7 @@ export class Area extends Component {
 				.attr("class", "area")
 				.attr(
 					"class",
-					(group) => noProvidedColorScale
-						? `area ${self.model.getColorClass(group.name)}`
-						: "area"
+					(group) => this.model.getColorClassName(["fill"], group.name, "area")
 				)
 				.attr("d", (group) => {
 					const { data } = group;
@@ -142,11 +138,9 @@ export class Area extends Component {
 				.attr("class", "area")
 				.attr(
 					"class",
-					(group) => noProvidedColorScale
-						? `area ${self.model.getColorClass(group.name)}`
-						: "area"
+					(group) => this.model.getColorClassName(["fill"], group.name, "area")
 				)
-				.attr("fill", (group) => noProvidedColorScale ? null : self.model.getFillColor(group.name))
+				.attr("fill", (group) => self.model.getFillColor(group.name))
 				.transition(
 					this.services.transitions.getTransition(
 						"area-update-enter",

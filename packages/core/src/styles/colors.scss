@@ -289,14 +289,14 @@ $color-map: ();
 	@include getThemeColors();
 
 	@each $token, $color in $color-map {
-		.color-fill-#{$token} {
+		.fill-#{$token} {
 			fill: $color;
 			&:hover {
 				fill: darken($color, 7%);
 			}
 		}
 
-		.color-stroke-#{$token} {
+		.stroke-#{$token} {
 			stroke: $color;
 		}
 	}
