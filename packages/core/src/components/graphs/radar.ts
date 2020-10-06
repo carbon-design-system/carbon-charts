@@ -451,9 +451,12 @@ export class Radar extends Component {
 			(enter) =>
 				enter
 					.append("path")
-					.attr(
-						"class",
-						(group) => this.model.getColorClassName(["fill"], group.name, "blob")
+					.attr("class", (group) =>
+						this.model.getColorClassName(
+							["fill"],
+							group.name,
+							"blob"
+						)
 					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
@@ -518,11 +521,13 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			.attr("class", (d) => this.model.getColorClassName(
-				["fill"],
-				d[groupMapsTo],
-				Tools.kebabCase(d[angle])
-			))
+			.attr("class", (d) =>
+				this.model.getColorClassName(
+					["fill"],
+					d[groupMapsTo],
+					Tools.kebabCase(d[angle])
+				)
+			)
 			.attr(
 				"cx",
 				(d) =>
@@ -831,7 +836,10 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
-							class: self.model.getColorClassName(["tooltip"], datum[groupMapsTo])
+							class: self.model.getColorClassName(
+								["tooltip"],
+								datum[groupMapsTo]
+							)
 						}))
 				});
 			})

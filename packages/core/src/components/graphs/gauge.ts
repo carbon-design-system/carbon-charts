@@ -125,9 +125,12 @@ export class Gauge extends Component {
 		arcValue
 			.enter()
 			.append("path")
-			.attr(
-				"class",
-				(d) => this.model.getColorClassName(["fill"], d[groupMapsTo], "arc-foreground")
+			.attr("class", (d) =>
+				this.model.getColorClassName(
+					["fill"],
+					d[groupMapsTo],
+					"arc-foreground"
+				)
 			)
 			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
 			.merge(arcValue)

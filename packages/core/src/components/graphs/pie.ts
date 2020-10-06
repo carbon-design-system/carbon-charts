@@ -100,9 +100,12 @@ export class Pie extends Component {
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
-			.attr(
-				"class",
-				(d) => this.model.getColorClassName(["fill"], d.data[groupMapsTo], "slice")
+			.attr("class", (d) =>
+				this.model.getColorClassName(
+					["fill"],
+					d.data[groupMapsTo],
+					"slice"
+				)
 			)
 			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)

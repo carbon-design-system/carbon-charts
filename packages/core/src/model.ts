@@ -471,19 +471,25 @@ export class ChartModel {
 			"scale"
 		);
 
-		return userProvidedScale !== null && Object.keys(userProvidedScale).length > 0;
+		return (
+			userProvidedScale !== null &&
+			Object.keys(userProvidedScale).length > 0
+		);
 	}
 
-	getColorClassName(types: string[], group: any, originalClassName?: any, ) {
+	getColorClassName(types: string[], group: any, originalClassName?: any) {
 		if (this.colorIsProvided()) {
 			return originalClassName;
 		}
 
 		const colorParingTag = this.colorClassNames(group);
 		let className = originalClassName;
-		types.forEach(type => className = originalClassName 
-			? `${className} ${type}-${colorParingTag}`
-			: `${type}-${colorParingTag}`);
+		types.forEach(
+			(type) =>
+				(className = originalClassName
+					? `${className} ${type}-${colorParingTag}`
+					: `${type}-${colorParingTag}`)
+		);
 		return className;
 	}
 
@@ -641,7 +647,7 @@ export class ChartModel {
 			.domain(this.allDataGroups);
 	}
 
-	/* 
+	/*
 	 * Color palette
 	 */
 	protected setColorClasses() {
@@ -664,13 +670,15 @@ export class ChartModel {
 		const numberOfColors =
 			this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
 		// Use default palette if user choice is not in range
-		paringIndex = paringIndex <= availableColorPairings[`${numberOfColors}-color`]
+		paringIndex =
+			paringIndex <= availableColorPairings[`${numberOfColors}-color`]
 				? paringIndex
 				: 1;
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorParing = this.allDataGroups.map(
-			(dataGroup, index) => `${numberOfColors}-${paringIndex}-${index + 1}`
+			(dataGroup, index) =>
+				`${numberOfColors}-${paringIndex}-${index + 1}`
 		);
 
 		// If there is no valid user provided scale, use the default set of colors

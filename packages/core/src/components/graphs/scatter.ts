@@ -200,9 +200,17 @@ export class Scatter extends Component {
 						filled
 					)
 				) {
-					return this.model.getColorClassName(["fill", "stroke"], d[groupMapsTo], "dot")
+					return this.model.getColorClassName(
+						["fill", "stroke"],
+						d[groupMapsTo],
+						"dot"
+					);
 				}
-				return this.model.getColorClassName(["stroke"], d[groupMapsTo], "dot")
+				return this.model.getColorClassName(
+					["stroke"],
+					d[groupMapsTo],
+					"dot"
+				);
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
@@ -245,11 +253,12 @@ export class Scatter extends Component {
 						d[groupMapsTo],
 						d[domainIdentifier],
 						d
-					)
+					);
 				}
 			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) => this.model.getStrokeColor(
+			.attr("stroke", (d) =>
+				this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
@@ -332,18 +341,22 @@ export class Scatter extends Component {
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement.classed("hovered", true)
-					.attr("class", (d) => self.model.getColorClassName(
+				hoveredElement
+					.classed("hovered", true)
+					.attr("class", (d) =>
+						self.model.getColorClassName(
 							["fill"],
 							d[groupMapsTo],
 							hoveredElement.attr("class")
 						)
 					)
-					.style("fill", (d) => self.model.getFillColor(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d
-					))
+					.style("fill", (d) =>
+						self.model.getFillColor(
+							d[groupMapsTo],
+							d[domainIdentifier],
+							d
+						)
+					)
 					.classed("unfilled", false);
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
@@ -394,12 +407,14 @@ export class Scatter extends Component {
 			})
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false)
+				hoveredElement.classed("hovered", false);
 
-				if (!self.configs.filled && hoveredElement.attr("fill-opacity") == "1") {
+				if (
+					!self.configs.filled &&
+					hoveredElement.attr("fill-opacity") == "1"
+				) {
 					hoveredElement.classed("unfilled", true);
 				}
-					
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(

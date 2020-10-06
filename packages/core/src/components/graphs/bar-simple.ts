@@ -53,9 +53,8 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr(
-				"class",
-				(d) => this.model.getColorClassName(["fill"], d[groupMapsTo], "bar")
+			.attr("class", (d) =>
+				this.model.getColorClassName(["fill"], d[groupMapsTo], "bar")
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {

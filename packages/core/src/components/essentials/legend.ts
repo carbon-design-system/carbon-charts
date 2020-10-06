@@ -89,7 +89,11 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.attr("class", (d, i) => {
 				if (paletteIndex) {
-					return this.model.getColorClassName(["fill"], d.name, "checkbox")
+					return this.model.getColorClassName(
+						["fill"],
+						d.name,
+						"checkbox"
+					);
 				}
 			})
 			.style("fill", (d) => {

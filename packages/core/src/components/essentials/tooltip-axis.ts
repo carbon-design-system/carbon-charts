@@ -3,7 +3,7 @@ import { AxisPositions, ScaleTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 import { format } from "date-fns";
-import { group } from 'console';
+import { group } from "console";
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
@@ -79,7 +79,10 @@ export class AxisChartsTooltip extends Tooltip {
 				{
 					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
-					class: this.model.getColorClassName(["tooltip"], datum[groupMapsTo])
+					class: this.model.getColorClassName(
+						["tooltip"],
+						datum[groupMapsTo]
+					)
 				}
 			];
 		} else if (data.length > 1) {
@@ -95,7 +98,10 @@ export class AxisChartsTooltip extends Tooltip {
 					.map((datum) => ({
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
-						class: this.model.getColorClassName(["tooltip"], datum[groupMapsTo])
+						class: this.model.getColorClassName(
+							["tooltip"],
+							datum[groupMapsTo]
+						)
 					}))
 					.sort((a, b) => b.value - a.value)
 			);
