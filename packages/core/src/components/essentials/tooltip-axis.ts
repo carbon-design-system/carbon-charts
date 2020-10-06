@@ -3,7 +3,6 @@ import { AxisPositions, ScaleTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 import { format } from "date-fns";
-import { group } from "console";
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
