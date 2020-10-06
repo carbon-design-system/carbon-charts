@@ -92,10 +92,6 @@ export interface AxisOptions {
 	 * is axis visible or not
 	 */
 	visible?: boolean;
-	/**
-	 * whether keep updating axis in real time while zoom domain is changing
-	 */
-	updateWhenZooming?: boolean;
 }
 
 /**

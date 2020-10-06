@@ -126,9 +126,8 @@ export class Zoom extends Service {
 		);
 		const shouldUpdateRangeAxis = Tools.getProperty(
 			this.model.getOptions(),
-			"axes",
-			this.services.cartesianScales.getMainYAxisPosition(),
-			"updateWhenZooming"
+			"zoomBar",
+			"updateRangeAxis"
 		);
 		if (this.isZoomBarEnabled() && shouldUpdateRangeAxis && zoomDomain) {
 			const domainIdentifier = mergedConfigs.stacked
