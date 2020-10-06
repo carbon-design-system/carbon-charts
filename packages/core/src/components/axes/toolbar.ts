@@ -72,8 +72,18 @@ export class Toolbar extends Component {
 
 		// size of toolbar button with background
 		const buttonSize = Configuration.toolbar.buttonSize;
+		const parentY = parseFloat(this.parent.node().getAttribute("y"));
 
 		const svg = this.getContainerSVG();
+
+		// TODO -- adjust toolbar Y position to align title component
+		// before layout component supports vertical alignment center
+		const VERTICAL_ALIGNMENT_Y = -6;
+		svg.attr(
+			"transform",
+			`translate(0, ${parentY + VERTICAL_ALIGNMENT_Y})`
+		);
+
 		const { width } = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
 			{
@@ -88,9 +98,7 @@ export class Toolbar extends Component {
 		// parent x doesn't work well
 		// assume the overflow icon has right alignment in layout
 		this.overflowMenuX = width - overflowMenuWidth;
-		this.overflowMenuY =
-			parseFloat(this.parent.node().getAttribute("y")) + buttonSize;
-
+		this.overflowMenuY = parentY + VERTICAL_ALIGNMENT_Y + buttonSize;
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
 			.attr("height", Configuration.toolbar.height)

@@ -209,7 +209,7 @@ export class AxisChart extends Chart {
 					new Spacer(
 						this.model,
 						this.services,
-						toolbarEnabled ? { size: 10 } : undefined
+						toolbarEnabled ? { size: 15 } : undefined
 					)
 				],
 				growth: {
