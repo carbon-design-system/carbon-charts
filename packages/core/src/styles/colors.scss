@@ -41,9 +41,9 @@ $white-theme-colors: (
 	),
 	"3": (
 		"1": (
-			"1": map-get(map-get($ibm-color-map, "purple"), 50),
-			"2": map-get(map-get($ibm-color-map, "teal"), 70),
-			"3": map-get(map-get($ibm-color-map, "magenta"), 70)
+			"1": map-get(map-get($ibm-color-map, "magenta"), 50),
+			"2": map-get(map-get($ibm-color-map, "cyan"), 50),
+			"3": map-get(map-get($ibm-color-map, "purple"), 70)
 		),
 		"2": (
 			"1": map-get(map-get($ibm-color-map, "magenta"), 70),
@@ -56,9 +56,9 @@ $white-theme-colors: (
 			"3": map-get(map-get($ibm-color-map, "blue"), 80)
 		),
 		"4": (
-			"1": map-get(map-get($ibm-color-map, "magenta"), 50),
-			"2": map-get(map-get($ibm-color-map, "cyan"), 50),
-			"3": map-get(map-get($ibm-color-map, "purple"), 70)
+			"1": map-get(map-get($ibm-color-map, "purple"), 50),
+			"2": map-get(map-get($ibm-color-map, "teal"), 70),
+			"3": map-get(map-get($ibm-color-map, "magenta"), 70)
 		),
 		"5": (
 			"1": map-get(map-get($ibm-color-map, "cyan"), 90),
@@ -68,16 +68,16 @@ $white-theme-colors: (
 	),
 	"4": (
 		"1": (
-			"1": map-get(map-get($ibm-color-map, "magenta"), 70),
-			"2": map-get(map-get($ibm-color-map, "red"), 50),
-			"3": map-get(map-get($ibm-color-map, "red"), 90),
-			"4": map-get(map-get($ibm-color-map, "purple"), 50)
-		),
-		"2": (
 			"1": map-get(map-get($ibm-color-map, "purple"), 70),
 			"2": map-get(map-get($ibm-color-map, "cyan"), 90),
 			"3": map-get(map-get($ibm-color-map, "teal"), 50),
 			"4": map-get(map-get($ibm-color-map, "magenta"), 50)
+		),
+		"2": (
+			"1": map-get(map-get($ibm-color-map, "magenta"), 70),
+			"2": map-get(map-get($ibm-color-map, "red"), 50),
+			"3": map-get(map-get($ibm-color-map, "red"), 90),
+			"4": map-get(map-get($ibm-color-map, "purple"), 50)
 		),
 		"3": (
 			"1": map-get(map-get($ibm-color-map, "teal"), 50),
