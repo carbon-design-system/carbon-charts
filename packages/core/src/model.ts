@@ -454,6 +454,16 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
+	getColorForGroup(group: any, key?: any, data?: any) {
+		const options = this.getOptions()
+		const shouldUseFillColorForGroup = !!options.getFillColor && !options.getStrokeColor
+		if (shouldUseFillColorForGroup) {
+			return this.getFillColor(group, key, data)
+		} else {
+			return this.getStrokeColor(group, key, data)
+		}
+	}
+
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
