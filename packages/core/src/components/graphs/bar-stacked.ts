@@ -55,7 +55,7 @@ export class StackedBar extends Bar {
 			.append("g")
 			.classed("bars", true)
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "bars");
+			.attr("data-name", "bars");
 
 		// Update data on all bars
 		const bars = svg
