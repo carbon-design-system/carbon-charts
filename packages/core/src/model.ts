@@ -454,16 +454,6 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
-	getColorForGroup(group: any, key?: any, data?: any) {
-		const options = this.getOptions()
-		const shouldUseFillColorForGroup = options.getFillColor && !options.getStrokeColor
-		if (shouldUseFillColorForGroup) {
-			return this.getFillColor(group, key, data)
-		} else {
-			return this.getStrokeColor(group, key, data)
-		}
-	}
-
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
@@ -581,7 +571,7 @@ export class ChartModel {
 		// Get group status based on items in selected groups
 		const getStatus = (groupName) =>
 			!options.data.selectedGroups.length ||
-				options.data.selectedGroups.includes(groupName)
+			options.data.selectedGroups.includes(groupName)
 				? ACTIVE
 				: DISABLED;
 
