@@ -727,21 +727,23 @@ export class Radar extends Component {
 					return Configuration.radar.opacity.unselected;
 				}
 				return Configuration.radar.opacity.selected;
+			})
+			.style("stroke-opacity", (group) => {
+				if (group.name !== hoveredElement.datum().name) {
+					return Configuration.radar.opacity.unselected;
+				}
+				return 1;
 			});
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		const opacity = Tools.getProperty(
-			this.model.getOptions(),
-			"radar",
-			"opacity"
-		);
 		this.parent
 			.selectAll("g.blobs path")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-blob")
 			)
-			.style("fill-opacity", Tools.getProperty(opacity, "selected"));
+			.style("fill-opacity", Configuration.radar.opacity.selected)
+			.style("stroke-opacity", 1);
 	};
 
 	destroy() {
