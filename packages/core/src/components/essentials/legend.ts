@@ -231,8 +231,8 @@ export class Legend extends Component {
 
 					if (
 						startingPoint +
-						spaceNeededForCheckbox +
-						legendItemTextDimensions.width >
+							spaceNeededForCheckbox +
+							legendItemTextDimensions.width >
 						svgDimensions.width
 					) {
 						lineNumber++;

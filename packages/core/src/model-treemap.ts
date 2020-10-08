@@ -18,24 +18,4 @@ export class TreemapChartModel extends ChartModel {
 	constructor(services: any) {
 		super(services);
 	}
-
-	getDisplayData() {
-		if (!this.get("data")) {
-			return null;
-		}
-
-		const { ACTIVE } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups();
-		const { groupMapsTo } = this.getOptions().data;
-		const allDataFromDomain = this.getAllDataFromDomain();
-		console.log("fewg", allDataFromDomain)
-
-		return allDataFromDomain.filter((datum) => {
-			return dataGroups.find(
-				(dataGroup) =>
-					dataGroup.name === datum[groupMapsTo] &&
-					dataGroup.status === ACTIVE
-			);
-		});
-	}
 }
