@@ -1,12 +1,47 @@
 // Internal Imports
+import { AxisPositions, Events, ScaleTypes } from "../interfaces";
 import { Service } from "./service";
-import { Events } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 imports
 import { extent } from "d3-array";
 
 export class Zoom extends Service {
+	isZoomBarEnabled() {
+		// CartesianScales service is only available in axis charts
+		if (!this.services.cartesianScales) {
+			return false;
+		}
+
+		// @todo - need to update this if zoom bar in other position (bottom, left, right) is supported
+		// check configuration
+		if (
+			!Tools.getProperty(
+				this.model.getOptions(),
+				"zoomBar",
+				"top",
+				"enabled"
+			)
+		) {
+			return false;
+		}
+
+		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
+		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
+		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
+		const mainXScaleType = Tools.getProperty(
+			this.model.getOptions(),
+			"axes",
+			mainXAxisPosition,
+			"scaleType"
+		);
+
+		return (
+			mainXAxisPosition === AxisPositions.BOTTOM &&
+			mainXScaleType === ScaleTypes.TIME
+		);
+	}
+
 	// get display data for zoom bar
 	// basically it's sum of value grouped by time
 	getZoomBarData() {
@@ -84,5 +119,37 @@ export class Zoom extends Service {
 			"zoomBar",
 			"zoomRatio"
 		);
+	}
+
+	// filter out data not inside zoom domain
+	// to get better range value for axis label
+	filterDataForRangeAxis(displayData: object[], configs?: any) {
+		const zoomDomain = this.model.get("zoomDomain");
+		const mergedConfigs = Object.assign(
+			{ stacked: false }, // default configs
+			configs
+		);
+		const shouldUpdateRangeAxis = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"updateRangeAxis"
+		);
+		if (this.isZoomBarEnabled() && shouldUpdateRangeAxis && zoomDomain) {
+			const domainIdentifier = mergedConfigs.stacked
+				? "sharedStackKey"
+				: this.services.cartesianScales.getDomainIdentifier();
+			const filteredData = displayData.filter(
+				(datum) =>
+					new Date(datum[domainIdentifier]) >= zoomDomain[0] &&
+					new Date(datum[domainIdentifier]) <= zoomDomain[1]
+			);
+			// if no data in zoom domain, use all data to get full range value
+			// so only return filteredData if length > 0
+			if (filteredData.length > 0) {
+				return filteredData;
+			}
+		}
+		// return original data by default
+		return displayData;
 	}
 }
