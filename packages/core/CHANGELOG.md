@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.40.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.39.1...v0.40.0) (2020-10-08)
+
+
+### Bug Fixes
+
+* **core:** fix Legend and Tooltip group color ([#834](https://github.com/carbon-design-system/carbon-charts/issues/834)) ([da4c9f4](https://github.com/carbon-design-system/carbon-charts/commit/da4c9f4d5da605f19db87fde9ab4caa45056373d)), closes [#828](https://github.com/carbon-design-system/carbon-charts/issues/828) [#828](https://github.com/carbon-design-system/carbon-charts/issues/828)
+
+
+### Features
+
+* provide option to refresh range axis label ([#766](https://github.com/carbon-design-system/carbon-charts/issues/766)) ([070f9e3](https://github.com/carbon-design-system/carbon-charts/commit/070f9e38481362e1ad55f036915deb66d8a16648))
+
+
+
+
+
 ## [0.39.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.39.0...v0.39.1) (2020-10-05)
 
 
