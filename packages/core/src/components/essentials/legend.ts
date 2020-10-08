@@ -99,7 +99,7 @@ export class Legend extends Component {
 			.style("fill", (d) => {
 				return d.status === Configuration.legend.items.status.ACTIVE &&
 					!paletteIndex
-					? this.model.getStrokeColor(d.name)
+					? this.model.getFillColor(d.name)
 					: null;
 			})
 			.classed("active", function (d, i) {
@@ -248,8 +248,8 @@ export class Legend extends Component {
 
 					if (
 						startingPoint +
-							spaceNeededForCheckbox +
-							legendItemTextDimensions.width >
+						spaceNeededForCheckbox +
+						legendItemTextDimensions.width >
 						svgDimensions.width
 					) {
 						lineNumber++;
