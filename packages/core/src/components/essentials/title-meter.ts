@@ -3,6 +3,7 @@ import { Title } from "./title";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
 import { Statuses } from "./../../interfaces/enums";
+import * as Configuration from "../../configuration";
 
 export class MeterTitle extends Title {
 	type = "meter-title";
@@ -68,12 +69,14 @@ export class MeterTitle extends Title {
 
 		// get the status from the model
 		const status = this.model.getStatus();
-		const radius =
-			Tools.getProperty(options, "meter", "status", "indicatorSize") / 2;
+		const radius = Configuration.meter.status.indicatorSize / 2;
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
-			.classed(`status--${status}`, status !== null)
+			.attr(
+				"class",
+				status !== null ? `status-indicator status--${status}` : ""
+			)
 			.attr("transform", `translate(${containerWidth - radius}, 0)`);
 
 		const data = status ? [status] : [];
@@ -127,12 +130,7 @@ export class MeterTitle extends Title {
 		const percentage = svg.selectAll("text.percent-value").data(data);
 
 		// the horizontal offset of the percentage value from the title
-		const offset = Tools.getProperty(
-			this.model.getOptions(),
-			"meter",
-			"statusBar",
-			"paddingRight"
-		);
+		const offset = Configuration.meter.statusBar.paddingRight;
 
 		percentage
 			.enter()
@@ -160,12 +158,7 @@ export class MeterTitle extends Title {
 
 		// update the position on the percentage to be inline with the title
 		const tspan = DOMUtils.appendOrSelect(this.parent, "tspan");
-		const offset = Tools.getProperty(
-			this.model.getOptions(),
-			"meter",
-			"statusBar",
-			"paddingRight"
-		);
+		const offset = Configuration.meter.statusBar.paddingRight;
 		const tspanLength = Math.ceil(tspan.node().getComputedTextLength());
 
 		const percentage = DOMUtils.appendOrSelect(
@@ -199,12 +192,7 @@ export class MeterTitle extends Title {
 			"text.percent-value"
 		);
 		// the title needs to fit the width of the container without crowding the status, and percentage value
-		const offset = Tools.getProperty(
-			this.model.getOptions(),
-			"meter",
-			"statusBar",
-			"paddingRight"
-		);
+		const offset = Configuration.meter.statusBar.paddingRight;
 		const percentageWidth = percentage.node().getComputedTextLength();
 
 		const statusGroup = DOMUtils.appendOrSelect(
@@ -213,12 +201,7 @@ export class MeterTitle extends Title {
 		).node();
 		const statusWidth =
 			DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
-			Tools.getProperty(
-				this.model.getOptions(),
-				"meter",
-				"status",
-				"paddingLeft"
-			);
+			Configuration.meter.status.paddingLeft;
 
 		return containerWidth - percentageWidth - offset - statusWidth;
 	}

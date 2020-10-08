@@ -3,7 +3,8 @@ import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions
+	AxesOptions,
+	ZoomBarsOptions
 } from "./index";
 import { BarOptions, StackedBarOptions } from "./components";
 import { TimeScaleOptions } from "./axis-scales";
@@ -87,7 +88,7 @@ export interface BaseChartOptions {
 		/**
 		 * used to simulate data loading
 		 */
-		loading?: Boolean;
+		loading?: boolean;
 		/**
 		 * options related to pre-selected data groups
 		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
@@ -102,6 +103,11 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * options related to gradient
+		 * e.g. { enabled: true }
+		 */
+		gradient?: object;
 	};
 }
 
@@ -112,6 +118,10 @@ export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
 	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarsOptions;
 }
 
 /**
@@ -142,6 +152,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 		filled?: boolean;
+		enabled?: boolean;
 	};
 }
 
@@ -166,6 +177,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * Opacity of the fills used within each circle
 		 */
 		fillOpacity?: number;
+		/**
+		 * enabled scatter dot or not
+		 */
+		enabled?: boolean;
 	};
 }
 
@@ -216,22 +231,6 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
  */
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
-		radiusOffset?: number;
-		innerRadius?: number;
-		padAngle?: number;
-		hoverArc?: {
-			outerRadiusOffset?: number;
-		};
-		xOffset?: number;
-		yOffset?: number;
-		yOffsetCallout?: number;
-		callout?: {
-			minSliceDegree?: number;
-			offsetX?: number;
-			offsetY?: number;
-			horizontalLineLength?: number;
-			textMargin?: number;
-		};
 		labels?: {
 			formatter?: Function;
 		};
@@ -279,20 +278,12 @@ export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
 		height?: number;
 		title?: {
-			/**
-			 * offsets the percentage value from the title
-			 */
-			paddingRight?: number;
 			percentageIndicator?: {
 				/**
 				 * rendering of the percentage value relative to the dataset within title
 				 */
 				enabled?: boolean;
 			};
-		};
-		status?: {
-			indicatorSize?: number;
-			paddingLeft?: number;
 		};
 	};
 }
@@ -302,20 +293,10 @@ export interface MeterChartOptions extends BaseChartOptions {
  */
 export interface RadarChartOptions extends BaseChartOptions {
 	radar?: {
-		opacity: {
-			unselected: number;
-			selected: number;
-		};
 		axes: {
 			angle: string;
 			value: string;
 		};
-		xLabelPadding: number;
-		yLabelPadding: number;
-		yTicksNumber: number;
-		minRange: number;
-		xAxisRectHeight: number;
-		dotsRadius: number;
 		alignment?: Alignments;
 	};
 }

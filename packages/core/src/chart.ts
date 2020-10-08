@@ -21,13 +21,14 @@ import {
 import { Tools } from "./tools";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
+import { DOMUtils, Events, GradientUtils, Transitions } from "./services/index";
 
 export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
+		gradientUtils: GradientUtils,
 		transitions: Transitions
 	};
 	model: ChartModel = new ChartModel(this.services);
@@ -37,7 +38,7 @@ export class Chart {
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
-		this.model.set({ holder }, true);
+		this.model.set({ holder }, { skipUpdate: true });
 
 		// Initialize all services
 		Object.keys(this.services).forEach((serviceName) => {
@@ -49,8 +50,9 @@ export class Chart {
 		});
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, () => {
-			this.update(true);
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
+			const animate = !!Tools.getProperty(e, "detail", "animate");
+			this.update(animate);
 		});
 
 		// Set model data & options
@@ -110,7 +112,7 @@ export class Chart {
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
 
-		this.model.set({ destroyed: true }, true);
+		this.model.set({ destroyed: true }, { skipUpdate: true });
 	}
 
 	protected getChartComponents(graphFrameComponents: any[]) {

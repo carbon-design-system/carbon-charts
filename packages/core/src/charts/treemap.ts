@@ -1,4 +1,5 @@
 // Internal Imports
+import { TreemapChartModel } from "../model-treemap";
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import { ChartConfig, PieChartOptions } from "../interfaces/index";
@@ -14,6 +15,8 @@ import {
 } from "../components/index";
 
 export class TreemapChart extends Chart {
+	model = new TreemapChartModel(this.services);
+
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -21,7 +24,7 @@ export class TreemapChart extends Chart {
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.pieChart,
+				Configuration.options.treemapChart,
 				chartConfigs.options
 			)
 		);
@@ -29,10 +32,6 @@ export class TreemapChart extends Chart {
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
 	}
-
-	// getChartComponents(graphFrameComponents) {
-	// 	return graphFrameComponents;
-	// }
 
 	getComponents() {
 		// Specify what to render inside the graph-frame

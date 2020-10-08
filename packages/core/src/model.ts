@@ -5,8 +5,8 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Events, ScaleTypes } from "./interfaces";
 
 // D3
-import { scaleOrdinal } from "d3-scale";
 import { map } from "d3-collection";
+import { scaleOrdinal } from "d3-scale";
 import { stack } from "d3-shape";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -52,13 +52,23 @@ export class ChartModel {
 
 		const axesOptions = this.getOptions().axes;
 
-		// Check for custom domain
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
-				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
-					const mapsTo = axesOptions[axis].mapsTo;
+				const mapsTo = axesOptions[axis].mapsTo;
+				const scaleType = axesOptions[axis].scaleType;
+				// make sure linear/log values are numbers
+				if (
+					scaleType === ScaleTypes.LINEAR ||
+					scaleType === ScaleTypes.LOG
+				) {
+					displayData = displayData.map((datum) => {
+						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
+					});
+				}
 
-					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
+				// Check for custom domain
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
+					if (scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
@@ -94,11 +104,11 @@ export class ChartModel {
 		const allDataFromDomain = this.getAllDataFromDomain();
 
 		return allDataFromDomain.filter((datum) => {
-			const group = dataGroups.find(
-				(group) => group.name === datum[groupMapsTo]
+			return dataGroups.find(
+				(dataGroup) =>
+					dataGroup.name === datum[groupMapsTo] &&
+					dataGroup.status === ACTIVE
 			);
-
-			return group.status === ACTIVE;
 		});
 	}
 
@@ -117,7 +127,7 @@ export class ChartModel {
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataGroups = this.generateDataGroups(sanitizedData);
-
+		console.log("dataGroups", dataGroups)
 		this.set({
 			data: sanitizedData,
 			dataGroups
@@ -127,6 +137,16 @@ export class ChartModel {
 	}
 
 	getDataGroups() {
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			"data",
+			"loading"
+		);
+
+		// No data should be displayed while data is still loading
+		if (isDataLoading) {
+			return [];
+		}
 		return this.get("dataGroups");
 	}
 
@@ -240,7 +260,11 @@ export class ChartModel {
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
-					d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					if (maxByKey[d.sharedStackKey]) {
+						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					} else {
+						d[name] = 0;
+					}
 				});
 			});
 		}
@@ -267,11 +291,14 @@ export class ChartModel {
 		return this.state.options;
 	}
 
-	set(newState: any, skipUpdate = false) {
+	set(newState: any, configs?: any) {
 		this.state = Object.assign({}, this.state, newState);
-
-		if (!skipUpdate) {
-			this.update();
+		const newConfig = Object.assign(
+			{ skipUpdate: false, animate: true }, // default configs
+			configs
+		);
+		if (!newConfig.skipUpdate) {
+			this.update(newConfig.animate);
 		}
 	}
 
@@ -298,7 +325,7 @@ export class ChartModel {
 	 * Updates miscellanous information within the model
 	 * such as the color scales, or the legend data labels
 	 */
-	update() {
+	update(animate = true) {
 		if (!this.getDisplayData()) {
 			return;
 		}
@@ -306,7 +333,7 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setColorScale();
-		this.services.events.dispatchEvent(Events.Model.UPDATE);
+		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
 	setUpdateCallback(cb: Function) {

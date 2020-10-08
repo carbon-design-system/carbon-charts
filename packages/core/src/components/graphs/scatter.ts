@@ -37,9 +37,31 @@ export class Scatter extends Component {
 		}
 	}
 
+	filterBasedOnZoomDomain(data) {
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain !== undefined) {
+			return data.filter(
+				(d) =>
+					new Date(d[domainIdentifier]).getTime() >
+						zoomDomain[0].getTime() &&
+					new Date(d[domainIdentifier]).getTime() <
+						zoomDomain[1].getTime()
+			);
+		}
+		return data;
+	}
+
 	render(animate: boolean) {
+		const isScatterEnabled =
+			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+		if (!isScatterEnabled) {
+			return;
+		}
+
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
@@ -63,6 +85,9 @@ export class Scatter extends Component {
 						d[rangeIdentifier] !== null
 				);
 		}
+
+		// filter out datapoints that aren't part of the zoomed domain
+		scatterData = this.filterBasedOnZoomDomain(scatterData);
 
 		// Update data on dot groups
 		const circles = svg
@@ -276,6 +301,15 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 	};
 
+	getTooltipData(hoveredX, hoveredY) {
+		return this.model.getDisplayData().filter((d) => {
+			return (
+				hoveredX === this.services.cartesianScales.getDomainValue(d) &&
+				hoveredY === this.services.cartesianScales.getRangeValue(d)
+			);
+		});
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = this.model.getOptions().data;
@@ -302,23 +336,11 @@ export class Scatter extends Component {
 				const hoveredY = self.services.cartesianScales.getRangeValue(
 					datum
 				);
-				const overlappingData = self.model
-					.getDisplayData()
-					.filter((d) => {
-						return (
-							hoveredX ===
-								self.services.cartesianScales.getDomainValue(
-									d
-								) &&
-							hoveredY ===
-								self.services.cartesianScales.getRangeValue(d)
-						);
-					});
-
+				const tooltipData = self.getTooltipData(hoveredX, hoveredY);
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: overlappingData
+					data: tooltipData
 				});
 
 				// Dispatch mouse event

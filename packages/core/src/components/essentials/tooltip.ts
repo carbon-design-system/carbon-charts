@@ -2,6 +2,8 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
+import { Events, TruncationTypes } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -11,11 +13,12 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse } from "d3-selection";
-import { TooltipPosition, Events, TruncationTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
 
+	// flag for checking whether tooltip event listener is added or not
+	isEventListenerAdded = false;
 	tooltip: any;
 	positionService = new Position();
 
@@ -25,26 +28,46 @@ export class Tooltip extends Component {
 		this.init();
 	}
 
-	init() {
-		// Grab the tooltip element
-		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
-		this.tooltip = DOMUtils.appendOrSelect(
-			holder,
-			`div.${settings.prefix}--${chartprefix}--tooltip`
-		);
+	handleShowTooltip = (e) => {
+		const data = e.detail.data || e.detail.items;
+		const defaultHTML = this.getTooltipHTML(e);
 
-		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(
 			this.tooltip,
 			"div.content-box"
 		);
-		this.tooltip.style("max-width", null);
 
+		// if there is a provided tooltip HTML function call it
+		if (
+			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
+		) {
+			if (e.detail.content) {
+				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				tooltipTextContainer.html(labelHTML);
+			} else {
+				tooltipTextContainer.html(
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
+				);
+			}
+		} else {
+			// Use default tooltip
+			tooltipTextContainer.html(defaultHTML);
+		}
+
+		// Position the tooltip
+		this.positionTooltip(e);
+
+		// Fade in
+		this.tooltip.classed("hidden", false).attr("aria-hidden", false);
+	};
+
+	handleHideTooltip = () => {
+		this.tooltip.classed("hidden", true).attr("aria-hidden", true);
+	};
+
+	addTooltipEventListener() {
 		// listen to move-tooltip Custom Events to move the tooltip
 		this.services.events.addEventListener(
 			Events.Tooltip.MOVE,
@@ -56,40 +79,31 @@ export class Tooltip extends Component {
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(
 			Events.Tooltip.SHOW,
-			(e: CustomEvent) => {
-				const data = e.detail.data;
-				const defaultHTML = this.getTooltipHTML(e);
-
-				// if there is a provided tooltip HTML function call it
-				if (
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"customHTML"
-					)
-				) {
-					tooltipTextContainer.html(
-						this.model
-							.getOptions()
-							.tooltip.customHTML(data, defaultHTML)
-					);
-				} else {
-					// Use default tooltip
-					tooltipTextContainer.html(defaultHTML);
-				}
-
-				// Position the tooltip
-				this.positionTooltip(e);
-
-				// Fade in
-				this.tooltip.classed("hidden", false);
-			}
+			this.handleShowTooltip
 		);
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
-			this.tooltip.classed("hidden", true);
-		});
+		this.services.events.addEventListener(
+			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
+	}
+
+	removeTooltipEventListener() {
+		// remove move-tooltip Custom Events
+		this.services.events.removeEventListener(Events.Tooltip.MOVE, null);
+
+		// remove show-tooltip Custom Events
+		this.services.events.removeEventListener(
+			Events.Tooltip.SHOW,
+			this.handleShowTooltip
+		);
+
+		// remove hide-tooltip Custom Events
+		this.services.events.removeEventListener(
+			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
 	}
 
 	getItems(e: CustomEvent) {
@@ -129,6 +143,7 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
+				item.value = this.valueFormatter(item.value);
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
@@ -201,16 +216,65 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		this.tooltip.classed("hidden", true);
+		const options = this.model.getOptions();
+		const isTooltipEnabled = Tools.getProperty(
+			options,
+			"tooltip",
+			"enabled"
+		);
+		if (isTooltipEnabled) {
+			// Grab the tooltip element
+			const holder = select(this.services.domUtils.getHolder());
+			const chartprefix = Tools.getProperty(options, "style", "prefix");
+			this.tooltip = DOMUtils.appendOrSelect(
+				holder,
+				`div.${settings.prefix}--${chartprefix}--tooltip`
+			);
+
+			this.tooltip.style("max-width", null);
+			if (!this.isEventListenerAdded) {
+				this.addTooltipEventListener();
+				this.isEventListenerAdded = true;
+			}
+			this.tooltip.classed("hidden", true);
+		} else if (!isTooltipEnabled && this.isEventListenerAdded) {
+			// remove tooltip eventListener
+			this.removeTooltipEventListener();
+			this.isEventListenerAdded = false;
+		}
 	}
 
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
+		const options = this.model.getOptions();
+		const isTopZoomBarEnabled = Tools.getProperty(
+			options,
+			"zoomBar",
+			"top",
+			"enabled"
+		);
 
 		let mouseRelativePos = Tools.getProperty(e, "detail", "mousePosition");
 		if (!mouseRelativePos) {
 			mouseRelativePos = mouse(holder);
+		} else {
+			const zoombarType = Tools.getProperty(
+				options,
+				"zoomBar",
+				"top",
+				"type"
+			);
+			const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+
+			// if the mouse position is from event (ruler)
+			// we need add zoom bar height
+			if (isTopZoomBarEnabled) {
+				mouseRelativePos[1] +=
+					zoombarHeight + Configuration.zoomBar.spacerHeight;
+
+				// TODO - we need to add toolbar height when toolbar is available
+			}
 		}
 
 		let pos;
@@ -234,7 +298,7 @@ export class Tooltip extends Component {
 			})
 		);
 
-		let { horizontalOffset } = this.model.getOptions().tooltip;
+		let { horizontalOffset } = Configuration.tooltips;
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1;
 		}

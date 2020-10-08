@@ -2,7 +2,12 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { Skeletons, CartesianOrientations } from "../../interfaces/enums";
+import {
+	Skeletons,
+	CartesianOrientations,
+	Alignments
+} from "../../interfaces/enums";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { scaleLinear } from "d3-scale";
@@ -201,12 +206,16 @@ export class Skeleton extends Component {
 		const container = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton")
 			.attr("width", width)
 			.attr("height", height);
-		const options = this.model.getOptions().pie;
 
-		const skeletonAreaContainer = DOMUtils.appendOrSelect(
-			container,
-			"rect.chart-skeleton-area-container"
-		)
+		const optionName = innerRadius === 0 ? "pie" : "donut";
+
+		const alignment = Tools.getProperty(
+			this.model.getOptions(),
+			optionName,
+			"alignment"
+		);
+
+		DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
 			.attr("width", width)
 			.attr("height", height)
 			.attr("fill", "none");
@@ -218,27 +227,40 @@ export class Skeleton extends Component {
 			.endAngle(Math.PI * 2);
 
 		// centering circle inside the container
-		const tcx = outerRadius + Math.abs(options.radiusOffset);
+		const tcx = outerRadius + Math.abs(Configuration.pie.radiusOffset);
 		const tcy =
 			outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
 
-		DOMUtils.appendOrSelect(container, "path")
+		const skeletonAreaShape = DOMUtils.appendOrSelect(container, "path")
 			.attr("class", "skeleton-area-shape")
 			.attr("transform", `translate(${tcx}, ${tcy})`)
 			.attr("d", arcPathGenerator)
 			.classed("shimmer-effect-areas", shimmer)
 			.classed("empty-state-areas", !shimmer);
+
+		// Position skeleton
+		let translateX = outerRadius + Configuration.pie.xOffset;
+		if (alignment === Alignments.CENTER) {
+			translateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			translateX = width - outerRadius - Configuration.pie.xOffset;
+		}
+
+		const translateY = outerRadius + Configuration.pie.yOffset;
+		skeletonAreaShape.attr(
+			"transform",
+			`translate(${translateX}, ${translateY})`
+		);
 	}
 
 	// same logic in pie
 	computeOuterRadius() {
-		const options = this.model.getOptions();
 		const { width, height } = DOMUtils.getSVGElementSize(
 			this.parent.node().parentNode,
 			{ useAttrs: true }
 		);
 		const radius = Math.min(width, height) / 2;
-		return radius + options.pie.radiusOffset;
+		return radius + Configuration.pie.radiusOffset;
 	}
 
 	// same logic in donut

@@ -24,10 +24,40 @@ export class Ruler extends Component {
 		domainValue: number;
 		originalData: any;
 	}[];
+	isXGridEnabled = Tools.getProperty(
+		this.model.getOptions(),
+		"grid",
+		"x",
+		"enabled"
+	);
+	isYGridEnabled = Tools.getProperty(
+		this.model.getOptions(),
+		"grid",
+		"y",
+		"enabled"
+	);
+	// flag for checking whether ruler event listener is added or not
+	isEventListenerAdded = false;
 
 	render() {
+		const isRulerEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"ruler",
+			"enabled"
+		);
+
 		this.drawBackdrop();
-		this.addBackdropEventListeners();
+
+		if (isRulerEnabled && !this.isEventListenerAdded) {
+			this.addBackdropEventListeners();
+		} else if (!isRulerEnabled && this.isEventListenerAdded) {
+			this.removeBackdropEventListeners();
+		}
+	}
+
+	removeBackdropEventListeners() {
+		this.isEventListenerAdded = false;
+		this.backdrop.on("mousemove mouseover mouseout", null);
 	}
 
 	formatTooltipData(tooltipData) {
@@ -191,6 +221,7 @@ export class Ruler extends Component {
 	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
 	 */
 	addBackdropEventListeners() {
+		this.isEventListenerAdded = true;
 		const self = this;
 		const displayData = this.model.getDisplayData();
 
@@ -231,17 +262,9 @@ export class Ruler extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
-			"rect.chart-grid-backdrop"
+			this.isXGridEnabled || this.isYGridEnabled
+				? "rect.chart-grid-backdrop.stroked"
+				: "rect.chart-grid-backdrop"
 		);
-
-		this.backdrop
-			.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
-			.lower();
-
-		backdropRect.attr("width", "100%").attr("height", "100%");
 	}
 }

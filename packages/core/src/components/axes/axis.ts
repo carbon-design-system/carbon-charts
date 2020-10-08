@@ -10,6 +10,7 @@ import {
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
+import { TickRotations } from "../../interfaces/enums";
 import * as Configuration from "../../configuration";
 import {
 	computeTimeIntervalName,
@@ -42,51 +43,22 @@ export class Axis extends Component {
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
-		const isDataLoading = Tools.getProperty(options, "data", "loading");
-		const numberOfTicksProvided = Tools.getProperty(
-			axisOptions,
-			"ticks",
-			"number"
+		const isAxisVisible = Tools.getProperty(
+			options,
+			"axes",
+			axisPosition,
+			"visible"
 		);
-
-		// user can provide custom ticks to be displayed
-		// ticks need to be in the domain of the axis data
-		const userProvidedTickValues = Tools.getProperty(
-			axisOptions,
-			"ticks",
-			"values"
-		);
-
-		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"type"
-		);
-		const truncationThreshold = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"threshold"
-		);
-		const truncationNumCharacter = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"numCharacter"
-		);
-
-		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
-		const isVerticalAxis =
-			axisPosition === AxisPositions.LEFT ||
-			axisPosition === AxisPositions.RIGHT;
-		const timeScaleOptions = Tools.getProperty(options, "timeScale");
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
-
+		// Add axis into the parent
+		const container = DOMUtils.appendOrSelect(
+			svg,
+			`g.axis.${axisPosition}`
+		);
 		let startPosition, endPosition;
 		if (
 			axisPosition === AxisPositions.BOTTOM ||
@@ -131,11 +103,6 @@ export class Axis extends Component {
 				break;
 		}
 
-		// Add axis into the parent
-		const container = DOMUtils.appendOrSelect(
-			svg,
-			`g.axis.${axisPosition}`
-		);
 		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
@@ -156,6 +123,62 @@ export class Axis extends Component {
 			.attr("aria-hidden", true)
 			.attr("aria-label", `invisible ${axisPosition} ticks`);
 
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const isTimeScaleType =
+			this.scaleType === ScaleTypes.TIME ||
+			axisOptions.scaleType === ScaleTypes.TIME;
+		const isVerticalAxis =
+			axisPosition === AxisPositions.LEFT ||
+			axisPosition === AxisPositions.RIGHT;
+
+		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
+		// update scale domain to zoomDomain.
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
+			scale.domain(zoomDomain);
+		}
+
+		if (!isAxisVisible) {
+			axisRef.attr("aria-hidden", true);
+			return;
+		}
+
+		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
+		const isDataLoading = Tools.getProperty(options, "data", "loading");
+		const numberOfTicksProvided = Tools.getProperty(
+			axisOptions,
+			"ticks",
+			"number"
+		);
+
+		// user can provide custom ticks to be displayed
+		// ticks need to be in the domain of the axis data
+		const userProvidedTickValues = Tools.getProperty(
+			axisOptions,
+			"ticks",
+			"values"
+		);
+
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"type"
+		);
+		const truncationThreshold = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"threshold"
+		);
+		const truncationNumCharacter = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"numCharacter"
+		);
+
+		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
+		const timeScaleOptions = Tools.getProperty(options, "timeScale");
+
 		// Append to DOM a fake tick to get the right computed font height
 		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
 		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text(
@@ -166,9 +189,6 @@ export class Axis extends Component {
 		}).height;
 		fakeTick.remove();
 
-		const isTimeScaleType =
-			this.scaleType === ScaleTypes.TIME ||
-			axisOptions.scaleType === ScaleTypes.TIME;
 		const scaleType =
 			this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
 
@@ -187,7 +207,7 @@ export class Axis extends Component {
 					numberOfTicks = this.getNumberOfFittingTicks(
 						height,
 						tickHeight,
-						Configuration.tickSpaceRatioVertical
+						Configuration.axis.ticks.verticalSpaceRatio
 					);
 				}
 			}
@@ -218,10 +238,13 @@ export class Axis extends Component {
 					);
 
 					let tickValues;
+					// scale.nice() will change scale domain which causes extra space near chart edge
+					// so use another scale instance to avoid impacts to original scale
+					const tempScale = scale.copy();
 					if (addSpaceOnEdges && !customDomain) {
-						tickValues = scale.nice(numberOfTicks);
+						tempScale.nice(numberOfTicks);
 					}
-					tickValues = scale.ticks(numberOfTicks);
+					tickValues = tempScale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
@@ -276,9 +299,38 @@ export class Axis extends Component {
 		axis.tickFormat(formatter);
 
 		// prioritize using a custom array of values rather than number of ticks
-		// if both are provided. custom tick values need to be within the domain
+		// if both are provided. custom tick values need to be within the domain of the scale
+		const [
+			lowerBound,
+			upperBound
+		] = this.services.cartesianScales
+			.getScaleByPosition(axisPosition)
+			.domain();
+		let validTicks;
 		if (userProvidedTickValues) {
-			axis.tickValues(userProvidedTickValues);
+			if (isTimeScaleType) {
+				// check the supplied ticks are within the time domain
+				validTicks = userProvidedTickValues.filter((tick) => {
+					const tickTimestamp = new Date(tick).getTime();
+					return (
+						tickTimestamp >= new Date(lowerBound).getTime() &&
+						tickTimestamp <= new Date(upperBound).getTime()
+					);
+				});
+			} else if (axisScaleType === ScaleTypes.LABELS) {
+				const discreteDomain = this.services.cartesianScales
+					.getScaleByPosition(axisPosition)
+					.domain();
+				validTicks = userProvidedTickValues.filter((tick) =>
+					discreteDomain.includes(tick)
+				);
+			} else {
+				// continuous scales
+				validTicks = userProvidedTickValues.filter(
+					(tick) => tick >= lowerBound && tick <= upperBound
+				);
+			}
+			axis.tickValues(validTicks);
 		}
 
 		// Position and transition the axis
@@ -403,45 +455,62 @@ export class Axis extends Component {
 			axisPosition === AxisPositions.BOTTOM ||
 			axisPosition === AxisPositions.TOP
 		) {
-			let rotateTicks = false;
+			let shouldRotateTicks = false;
+			// user could decide if tick rotation is required during zoom domain changing
+			const tickRotation = Tools.getProperty(
+				axisOptions,
+				"ticks",
+				"rotation"
+			);
 
-			// If we're dealing with a discrete scale type
-			// We're able to grab the spacing between the ticks
-			if (scale.step) {
-				const textNodes = invisibleAxisRef
-					.selectAll("g.tick text")
-					.nodes();
+			if (tickRotation === TickRotations.ALWAYS) {
+				shouldRotateTicks = true;
+			} else if (tickRotation === TickRotations.NEVER) {
+				shouldRotateTicks = false;
+			} else if (!tickRotation || tickRotation === TickRotations.AUTO) {
+				// if the option is not set or set to AUTO
 
-				// If any ticks are any larger than the scale step size
-				rotateTicks = textNodes.some(
-					(textNode) =>
-						DOMUtils.getSVGElementSize(textNode, { useBBox: true })
-							.width >= scale.step()
-				);
-			} else {
-				// When dealing with a continuous scale
-				// We need to calculate an estimated size of the ticks
-				const minTickSize =
-					Tools.getProperty(
-						axisOptions,
-						"ticks",
-						"rotateIfSmallerThan"
-					) || Configuration.axis.ticks.rotateIfSmallerThan;
-				const ticksNumber = isTimeScaleType
-					? axis.tickValues().length
-					: scale.ticks().length;
-				const estimatedTickSize = width / ticksNumber / 2;
+				// depending on if tick rotation is necessary by calculating space
+				// If we're dealing with a discrete scale type
+				// We're able to grab the spacing between the ticks
+				if (scale.step) {
+					const textNodes = invisibleAxisRef
+						.selectAll("g.tick text")
+						.nodes();
 
-				rotateTicks = estimatedTickSize < minTickSize;
+					// If any ticks are any larger than the scale step size
+					shouldRotateTicks = textNodes.some(
+						(textNode) =>
+							DOMUtils.getSVGElementSize(textNode, {
+								useBBox: true
+							}).width >= scale.step()
+					);
+				} else {
+					// When dealing with a continuous scale
+					// We need to calculate an estimated size of the ticks
+					const minTickSize =
+						Tools.getProperty(
+							axisOptions,
+							"ticks",
+							"rotateIfSmallerThan"
+						) || Configuration.axis.ticks.rotateIfSmallerThan;
+					const ticksNumber = isTimeScaleType
+						? axis.tickValues().length
+						: scale.ticks().length;
+					const estimatedTickSize = width / ticksNumber / 2;
+					shouldRotateTicks = isTimeScaleType
+						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+						: estimatedTickSize < minTickSize;
+				}
 			}
 
-			if (rotateTicks) {
+			if (shouldRotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(
 							width,
 							tickHeight,
-							Configuration.tickSpaceRatioHorizontal
+							Configuration.axis.ticks.horizontalSpaceRatio
 						)
 					);
 
@@ -468,6 +537,8 @@ export class Axis extends Component {
 		// because the Skeleton component draws them
 		if (isDataLoading) {
 			container.attr("opacity", 0);
+		} else {
+			container.attr("opacity", 1);
 		}
 
 		axisRef.selectAll("g.tick").attr("aria-label", (d) => d);

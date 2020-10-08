@@ -8,12 +8,12 @@ export const lineTimeSeriesData15seconds = {
 			label: "Dataset 1",
 			data: [
 				{ date: new Date(2020, 11, 10, 23, 59, 15), value: 10 },
-				{ date: new Date(2020, 11, 10, 23, 59, 30), value: 10 },
-				{ date: new Date(2020, 11, 10, 23, 59, 45), value: 10 },
-				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 10 },
-				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 10 },
-				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 10 }
+				{ date: new Date(2020, 11, 10, 23, 59, 30), value: 15 },
+				{ date: new Date(2020, 11, 10, 23, 59, 45), value: 7 },
+				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 2 },
+				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 9 },
+				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 13 },
+				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 }
 			]
 		}
 	]

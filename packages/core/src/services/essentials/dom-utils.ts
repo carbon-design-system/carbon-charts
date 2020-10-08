@@ -229,10 +229,6 @@ export class DOMUtils extends Service {
 			.attr("height", "100%")
 			.attr("width", "100%");
 
-		svg.append("title").text(
-			Tools.getProperty(options, "title") || "Chart"
-		);
-
 		this.svg = svg.node();
 	}
 
