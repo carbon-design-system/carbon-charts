@@ -2,12 +2,11 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, Events, Alignments } from "../../interfaces";
-import { colorPalettes } from "../../index";
+import { Events } from "../../interfaces";
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from "d3-hierarchy";
-import { scaleOrdinal } from "d3-scale";
+import { sum } from "d3-array";
 
 var count = 0;
 
@@ -23,13 +22,6 @@ function Id(id) {
 Id.prototype.toString = function () {
 	return "url(" + this.href + ")";
 };
-
-const defaultColors = colorPalettes.DEFAULT;
-const colorScale = scaleOrdinal()
-	.domain(["Asia", "Africa", "America", "Europe", "Middle east", "Oceania"])
-	.range(defaultColors as any);
-
-let rerender = false;
 
 export class Treemap extends Component {
 	type = "treemap";
@@ -53,38 +45,28 @@ export class Treemap extends Component {
 
 		svg.html("");
 
+		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
 
-		const treemap = (data) => {
-			const hierarchy = d3Hierarchy(data)
-				.sum((d: any) => d.value)
-				.sort((a, b) => b.value - a.value);
-
-			console.log(
-				"width, height, displayData",
-				width,
-				height,
-				displayData,
-				hierarchy
-			);
-
-			return (
-				d3Treemap()
-					// .tile(tile)
-					.size([width, height])
-					.padding(1)
-					.round(true)(hierarchy)
-			);
-		};
-
-		const root = treemap({
+		const hierarchy = d3Hierarchy({
 			name: "flare",
 			children: displayData
-		});
-		console.log("root", root.leaves());
+		})
+			.sum((d: any) => d.value)
+			.sort((a, b) => b.value - a.value);
+
+		const total = sum(allData, (d: any) =>
+			sum(d.children, (child: any) => child.value)
+		);
+
+		const root = d3Treemap()
+			// .tile(tile)
+			.size([width, height])
+			.padding(1)
+			.round(true)(hierarchy);
 		const { transitions } = this.services;
 		const leafs = svg
 			.selectAll("g[data-name='leaf']")
@@ -148,7 +130,9 @@ export class Treemap extends Component {
 			.data((d) => {
 				if (!d.data.name) return "";
 				return `${d.data.name}
-				20%`.split(/(?=[A-Z][a-z])|\s+/g);
+				${((d.data.value / total) * 100).toPrecision(2)}%`.split(
+					/(?=[A-Z][a-z])|\s+/g
+				);
 			})
 			.join("tspan")
 			.attr("x", 7)
