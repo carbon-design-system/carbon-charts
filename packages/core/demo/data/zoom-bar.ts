@@ -121,6 +121,88 @@ export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 zoomBarLineTimeSeriesInitDomainOptions.title += " (initial zoomed domain)";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
+export const zoomBarStringDateData = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{
+					date: "2020-12-10T15:59:15.000Z",
+					value: 10
+				},
+				{
+					date: "2020-12-10T15:59:30.000Z",
+					value: 15
+				},
+				{
+					date: "2020-12-10T15:59:45.000Z",
+					value: 7
+				},
+				{
+					date: "2020-12-10T16:00:00.000Z",
+					value: 2
+				},
+				{
+					date: "2020-12-10T16:00:15.000Z",
+					value: 9
+				},
+				{
+					date: "2020-12-10T16:00:30.000Z",
+					value: 13
+				},
+				{
+					date: "2020-12-10T16:00:45.000Z",
+					value: 8
+				}
+			]
+		}
+	]
+};
+export const zoomBarStringDateOptions = addZoomBarToOptions({
+	title: "String dates",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	}
+});
+zoomBarStringDateOptions.zoomBar.top.initialZoomDomain = [
+	"2020-12-10T15:59:25.000Z",
+	"2020-12-10T16:00:25.000Z"
+];
+zoomBarStringDateOptions.zoomBar.top.data = [
+	{
+		date: "2020-12-10T15:59:15.000Z",
+		value: 15
+	},
+	{
+		date: "2020-12-10T15:59:30.000Z",
+		value: 10
+	},
+	{
+		date: "2020-12-10T15:59:45.000Z",
+		value: 2
+	},
+	{
+		date: "2020-12-10T16:00:00.000Z",
+		value: 15
+	},
+	{
+		date: "2020-12-10T16:00:15.000Z",
+		value: 13
+	},
+	{
+		date: "2020-12-10T16:00:30.000Z",
+		value: 3
+	},
+	{
+		date: "2020-12-10T16:00:45.000Z",
+		value: 10
+	}
+];
+
 export const zoomBarLockedData = [];
 export const zoomBarLockedOptions = addZoomBarToOptions(
 	Object.assign(

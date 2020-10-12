@@ -124,7 +124,15 @@ export class ZoomBar extends Component {
 				AxisPositions.TOP,
 				"initialZoomDomain"
 			);
-
+			// change string date to Date object if necessary
+			if (
+				newInitialZoomDomain &&
+				newInitialZoomDomain[0] &&
+				newInitialZoomDomain[1]
+			) {
+				newInitialZoomDomain[0] = new Date(newInitialZoomDomain[0]);
+				newInitialZoomDomain[1] = new Date(newInitialZoomDomain[1]);
+			}
 			// update initialZoomDomain and set zoomDomain in model only if the option is changed
 			// not the same object, and both start date and end date are not equal
 			if (
@@ -294,7 +302,11 @@ export class ZoomBar extends Component {
 				zoomDomain[0] !== newDomain[0] ||
 				zoomDomain[1] !== newDomain[1]
 			) {
-				this.services.zoom.handleDomainChange(newDomain);
+				// don't dispatch event for all event types
+				// let the following code to dispatch necessary events
+				this.services.zoom.handleDomainChange(newDomain, {
+					dispatchEvent: false
+				});
 			}
 
 			// dispatch selection events

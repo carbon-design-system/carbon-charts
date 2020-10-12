@@ -7,11 +7,13 @@ export class StackedScatter extends Scatter {
 	type = "scatter-stacked";
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
-		if (!this.configs.alwaysEnableScatterDot) {
-			if (!isScatterEnabled) {
-				return;
-			}
+		const isScatterEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"points",
+			"enabled"
+		);
+		if (!isScatterEnabled) {
+			return;
 		}
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
@@ -90,8 +92,10 @@ export class StackedScatter extends Scatter {
 				const domainValue = datum["data"]["sharedStackKey"];
 				let rangeValue = datum["data"][group];
 				const stackedRangeValue = datum[1];
+
 				if (
-					rangeValue &&
+					rangeValue !== null &&
+					rangeValue !== undefined &&
 					hoveredX ===
 						this.services.cartesianScales.getDomainValue(
 							domainValue
@@ -107,11 +111,13 @@ export class StackedScatter extends Scatter {
 						][dataIndex]["data"][group];
 					}
 
-					tooltipData.push({
-						[groupMapsTo]: group,
-						[domainIdentifier]: domainValue,
-						[rangeIdentifier]: rangeValue
-					});
+					if (rangeValue !== null) {
+						tooltipData.push({
+							[groupMapsTo]: group,
+							[domainIdentifier]: domainValue,
+							[rangeIdentifier]: rangeValue
+						});
+					}
 				}
 			});
 		});

@@ -81,7 +81,7 @@ export class Pie extends Component {
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "slices");
+			.attr("data-name", "slices");
 
 		const paths = slicesGroup
 			.selectAll("path.slice")
@@ -131,7 +131,7 @@ export class Pie extends Component {
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "labels");
+			.attr("data-name", "labels");
 
 		const labels = labelsGroup
 			.selectAll("text.pie-label")
@@ -260,7 +260,7 @@ export class Pie extends Component {
 			"g.callouts"
 		)
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "callouts");
+			.attr("data-name", "callouts");
 
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);

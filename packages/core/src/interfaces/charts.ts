@@ -103,6 +103,11 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * options related to gradient
+		 * e.g. { enabled: true }
+		 */
+		gradient?: object;
 	};
 }
 

@@ -82,11 +82,11 @@ export const ruler: RulerOptions = {
 	enabled: true
 };
 
-
 /**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	enabled: true,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
@@ -153,7 +153,10 @@ const chart: BaseChartOptions = {
 		selectedGroups: []
 	},
 	color: {
-		scale: null
+		scale: null,
+		gradient: {
+			enabled: false
+		}
 	}
 };
 
@@ -170,7 +173,8 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		}
+		},
+		updateRangeAxis: false
 	} as ZoomBarsOptions
 } as AxisChartOptions);
 

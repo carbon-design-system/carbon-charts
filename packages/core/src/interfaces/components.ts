@@ -46,6 +46,10 @@ export interface LegendOptions {
 
 export interface TooltipOptions {
 	/**
+	 * enable or disable tooltip
+	 */
+	enabled?: boolean;
+	/**
 	 * a function to format the tooltip values
 	 */
 	valueFormatter?: Function;
@@ -55,9 +59,17 @@ export interface TooltipOptions {
 	 */
 	customHTML?: Function;
 	/**
+	 * customizes the `Group` label shown inside tooltips
+	 */
+	groupLabel?: string;
+	/**
 	 * show total of items
 	 */
 	showTotal?: boolean;
+	/**
+	 * customizes the `Total` label shown inside tooltips
+	 */
+	totalLabel?: string;
 	truncation?: TruncationOptions;
 }
 
@@ -101,7 +113,6 @@ export interface RulerOptions {
 	enabled?: boolean;
 }
 
-
 export interface BarOptions {
 	width?: number;
 	maxWidth?: number;
@@ -124,6 +135,10 @@ export interface ZoomBarsOptions {
 	 * currently only the top position is supported
 	 */
 	top?: ZoomBarOptions;
+	/**
+	 * whether keep updating range axis in real time while zoom domain is changing
+	 */
+	updateRangeAxis?: boolean;
 }
 
 /**

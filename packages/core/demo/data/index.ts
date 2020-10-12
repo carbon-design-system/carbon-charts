@@ -136,6 +136,12 @@ let allDemoGroups = [
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
 				isDemoExample: true
+			},
+			{
+				options: areaDemos.sparklineOptions,
+				data: areaDemos.sparklineTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -822,6 +828,12 @@ let allDemoGroups = [
 			{
 				options: zoomBarDemos.zoomBarLineTimeSeriesInitDomainOptions,
 				data: zoomBarDemos.zoomBarLineTimeSeriesInitDomainData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarStringDateOptions,
+				data: zoomBarDemos.zoomBarStringDateData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},

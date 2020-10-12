@@ -416,12 +416,20 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
+			const dataValuesGroupedByKeys = this.services.zoom.filterDataForRangeAxis(
+				this.model.getDataValuesGroupedByKeys(),
+				{ stacked: true }
+			);
+
 			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
 				sum(values(dataValues) as any)
 			);
+		} else if (scaleType === ScaleTypes.TIME) {
+			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]));
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			allDataValues = this.services.zoom
+				.filterDataForRangeAxis(displayData)
+				.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
