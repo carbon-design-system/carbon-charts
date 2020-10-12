@@ -173,7 +173,8 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		}
+		},
+		updateRangeAxis: false
 	} as ZoomBarsOptions
 } as AxisChartOptions);
 

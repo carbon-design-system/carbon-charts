@@ -70,6 +70,7 @@ export class Legend extends Component {
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
 			.attr("tabindex", 0)
+			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
 				({ status }) =>
@@ -81,7 +82,7 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.style("fill", (d) => {
 				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getStrokeColor(d.name)
+					? this.model.getFillColor(d.name)
 					: null;
 			})
 			.classed("active", function (d, i) {
@@ -230,8 +231,8 @@ export class Legend extends Component {
 
 					if (
 						startingPoint +
-							spaceNeededForCheckbox +
-							legendItemTextDimensions.width >
+						spaceNeededForCheckbox +
+						legendItemTextDimensions.width >
 						svgDimensions.width
 					) {
 						lineNumber++;
@@ -396,7 +397,7 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
-			if (event.key && event.key === "Enter" || event.key === " ") {
+			if (event.key && (event.key === "Enter" || event.key === " ")) {
 				event.preventDefault();
 
 				self.model.toggleDataLabel(d.name);
