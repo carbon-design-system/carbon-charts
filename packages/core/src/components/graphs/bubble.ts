@@ -44,9 +44,7 @@ export class Bubble extends Scatter {
 		const { radiusMapsTo } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);
-
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		selection
 			.raise()
@@ -66,17 +64,20 @@ export class Bubble extends Scatter {
 			)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
-			.attr("fill", (d) =>
-				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			.attr("fill", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
+			}
 			)
 			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
+			.attr("stroke", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
-				)
-			)
+				);
+			})
 			.attr("opacity", 1);
 	}
 }

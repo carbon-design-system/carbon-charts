@@ -13,3 +13,4 @@ export * from "./pie-chart.component";
 export * from "./scatter-chart.component";
 export * from "./meter-chart.component";
 export * from "./radar-chart.component";
+export * from "./combo-chart.component";

@@ -422,3 +422,43 @@ export const lineSkeletonOptions = {
 		loading: true
 	}
 };
+
+
+
+
+export const lineTimeSeriesDualAxesData = [
+	{ group: "Temperature", date: new Date(2019, 0, 1), temp: 23 },
+	{ group: "Temperature", date: new Date(2019, 1, 1), temp: 35 },
+	{ group: "Temperature", date: new Date(2019, 2, 1), temp: 24 },
+	{ group: "Temperature", date: new Date(2019, 3, 1), temp: 30 },
+	{ group: "Temperature", date: new Date(2019, 4, 1), temp: 23 },
+	{ group: "Rainfall", date: new Date(2019, 0, 1), rainfall: 50 },
+	{ group: "Rainfall", date: new Date(2019, 1, 1), rainfall: 65 },
+	{ group: "Rainfall", date: new Date(2019, 2, 1), rainfall: 45 },
+	{ group: "Rainfall", date: new Date(2019, 3, 1), rainfall: 43 },
+	{ group: "Rainfall", date: new Date(2019, 4, 1), rainfall: 53 }
+];
+
+
+export const dualLine = {
+	title: "Combo Line + Line (dual axes)",
+	axes: {
+		left: {
+			title: "Temperature (°C)",
+			mapsTo: "temp"
+		},
+		bottom: {
+			scaleType: "time",
+			mapsTo: "date",
+			title: "Date"
+		},
+		right: {
+			title: "Rainfall (mm)",
+			mapsTo: "rainfall",
+			datasets: [
+				"Rainfall"
+			]
+		}
+	},
+	curve: "curveMonotoneX"
+};

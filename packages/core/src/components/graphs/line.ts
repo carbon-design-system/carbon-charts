@@ -46,7 +46,7 @@ export class Line extends Component {
 			.y(getYValue)
 			.curve(curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
 				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
@@ -60,21 +60,23 @@ export class Line extends Component {
 				(axis) => options.axes[axis].percentage
 			);
 			const { groupMapsTo } = options.data;
-			const stackedData = this.model.getStackedData({ percentage });
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const stackedData = this.model.getStackedData(this.configs.groups, { percentage });
 
-			data = stackedData.map((d) => ({
-				name: d[0][groupMapsTo],
-				data: d.map((datum) => ({
-					[domainIdentifier]: datum.data.sharedStackKey,
-					[groupMapsTo]: datum[groupMapsTo],
-					[rangeIdentifier]: datum[1]
-				})),
-				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
-			}));
+			data = stackedData.map((d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
+				return ({
+					name: d[0][groupMapsTo],
+					data: d.map((datum) => ({
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[groupMapsTo]: datum[groupMapsTo],
+						[rangeIdentifier]: datum[1]
+					})),
+					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+				});
+			});
 		} else {
-			data = this.model.getGroupedData();
+			data = this.model.getGroupedData(this.configs.groups);
 		}
 
 		// Update the bound data on lines

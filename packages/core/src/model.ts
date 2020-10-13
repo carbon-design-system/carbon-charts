@@ -39,18 +39,16 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getAllDataFromDomain() {
-		if (!this.get("data")) {
+	getAllDataFromDomain(groups?) {
+		if (!this.getData()) {
 			return null;
 		}
-
-		const dataGroups = this.getDataGroups();
-
+		const options = this.getOptions();
 		// Remove datasets that have been disabled
-		let displayData = Tools.clone(this.get("data"));
-		const { groupMapsTo } = this.getOptions().data;
-
-		const axesOptions = this.getOptions().axes;
+		let allData = this.getData();
+		const dataGroups = this.getDataGroups();
+		const { groupMapsTo } = Tools.getProperty(options, "data");
+		const axesOptions = Tools.getProperty( options, "axes");
 
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
@@ -61,7 +59,7 @@ export class ChartModel {
 					scaleType === ScaleTypes.LINEAR ||
 					scaleType === ScaleTypes.LOG
 				) {
-					displayData = displayData.map((datum) => {
+					allData = allData.map((datum) => {
 						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
 					});
 				}
@@ -69,14 +67,14 @@ export class ChartModel {
 				// Check for custom domain
 				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						displayData = displayData.filter((datum) =>
+						allData = allData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
 
 						// Filter out data outside domain
-						displayData = displayData.filter(
+						allData = allData.filter(
 							(datum) =>
 								datum[mapsTo] >= start && datum[mapsTo] <= end
 						);
@@ -85,23 +83,33 @@ export class ChartModel {
 			});
 		}
 
-		return displayData.filter((datum) => {
+		return allData.filter((datum) => {
 			return dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);
 		});
 	}
 
-	getDisplayData() {
+	/**
+	 * Charts that have group configs passed into them, only want to retrieve the display data relevant to that chart
+	 * @param groups the included datasets for the particular chart
+	 */
+	getDisplayData(groups?) {
 		if (!this.get("data")) {
 			return null;
 		}
 
 		const { ACTIVE } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups();
+		const dataGroups = this.getDataGroups(groups);
 		const { groupMapsTo } = this.getOptions().data;
 
-		const allDataFromDomain = this.getAllDataFromDomain();
+		let allDataFromDomain = this.getAllDataFromDomain(groups);
+
+		if (groups) {
+			allDataFromDomain = allDataFromDomain.filter(item => {
+				return groups.includes(item.group);
+			});
+		}
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
@@ -110,6 +118,16 @@ export class ChartModel {
 					dataGroup.status === ACTIVE
 			);
 		});
+	}
+
+	setStackedGroups(groups) {
+		this.set({
+			stackedGroups: groups
+		});
+	}
+
+	getStackedGroups() {
+		return this.get("stackedGroups");
 	}
 
 	getData() {
@@ -136,7 +154,7 @@ export class ChartModel {
 		return sanitizedData;
 	}
 
-	getDataGroups() {
+	getDataGroups(groups?) {
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
 			"data",
@@ -147,27 +165,34 @@ export class ChartModel {
 		if (isDataLoading) {
 			return [];
 		}
+
+		// if its a combo chart, the specific chart will pass the model the groups it needs
+		if (groups) {
+			return this.get("dataGroups").filter(dataGroup => groups.includes(dataGroup.name));
+		}
 		return this.get("dataGroups");
 	}
 
-	getActiveDataGroups() {
+	getActiveDataGroups(groups?) {
 		const { ACTIVE } = Configuration.legend.items.status;
 
-		return this.getDataGroups().filter(
+		return this.getDataGroups(groups).filter(
 			(dataGroup) => dataGroup.status === ACTIVE
 		);
 	}
 
-	getDataGroupNames() {
-		return this.getDataGroups().map((dataGroup) => dataGroup.name);
+	getDataGroupNames(groups?) {
+		const dataGroups = this.getDataGroups(groups);
+		return dataGroups.map(dataGroup => dataGroup.name);
 	}
 
-	getActiveDataGroupNames() {
-		return this.getActiveDataGroups().map((dataGroup) => dataGroup.name);
+	getActiveDataGroupNames(groups?) {
+		const activeDataGroups = this.getActiveDataGroups(groups);
+		return activeDataGroups.map(dataGroup => dataGroup.name);
 	}
 
-	getGroupedData() {
-		const displayData = this.getDisplayData();
+	getGroupedData(groups?) {
+		const displayData = this.getDisplayData(groups);
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
@@ -189,17 +214,17 @@ export class ChartModel {
 		}));
 	}
 
-	getDataValuesGroupedByKeys() {
+	getDataValuesGroupedByKeys(groups?) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
-
-		const displayData = this.getDisplayData();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const displayData = this.getDisplayData(groups);
 
 		const stackKeys = map(
 			displayData,
-			(datum) => datum[domainIdentifier]
+			(datum) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+				return datum[domainIdentifier];
+			}
 		).keys();
 
 		const axisPosition = this.services.cartesianScales.domainAxisPosition;
@@ -225,12 +250,14 @@ export class ChartModel {
 			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach((dataGroupName) => {
 				const correspondingDatum = displayData.find((datum) => {
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
 					return (
 						datum[groupMapsTo] === dataGroupName &&
 						datum[domainIdentifier].toString() === key
 					);
 				});
 
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(correspondingValues);
 				correspondingValues[dataGroupName] = correspondingDatum
 					? correspondingDatum[rangeIdentifier]
 					: null;
@@ -239,12 +266,12 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData({ percentage } = { percentage: false }) {
+	getStackedData(groups?: string[], { percentage } = { percentage: false }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const dataGroupNames = this.getDataGroupNames();
-		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+		const dataGroupNames = this.getDataGroupNames(groups);
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys(groups);
 
 		if (percentage) {
 			const maxByKey = Tools.fromPairs(

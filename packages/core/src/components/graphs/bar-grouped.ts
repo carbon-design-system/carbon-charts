@@ -34,11 +34,9 @@ export class GroupedBar extends Bar {
 
 	render(animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
-
+		const displayData = this.model.getDisplayData(this.configs.groups);
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Get unique labels
 		this.setGroupScale();
@@ -46,10 +44,10 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const allDataLabels = map(
-			displayData,
-			(datum) => datum[domainIdentifier]
-		).keys();
+		const allDataLabels = map(displayData, (datum) => {
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+			return datum[domainIdentifier];
+		}).keys();
 
 		// Update data on bar groups
 		const barGroups = svg
@@ -94,7 +92,7 @@ export class GroupedBar extends Bar {
 		// Remove bars that are no longer needed
 		bars.exit().attr("opacity", 0).remove();
 
-		// Add the circles that need to be introduced
+		// Add the bars that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
 
 		// code for vertical grouped bar charts
@@ -120,8 +118,9 @@ export class GroupedBar extends Bar {
 
 				const x0 = startX;
 				const x1 = startX + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(0);
-				const y1 = this.services.cartesianScales.getRangeValue(d.value);
+				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition(d);
+				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(rangeAxis, 0);
+				const y1 = this.services.cartesianScales.getRangeValue(d);
 
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {
@@ -224,7 +223,6 @@ export class GroupedBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				const { groupMapsTo } = self.model.getOptions().data;
 				hoveredElement
 					.transition(
 						self.services.transitions.getTransition(
@@ -269,32 +267,32 @@ export class GroupedBar extends Bar {
 	}
 
 	protected getDataCorrespondingToLabel(label: string) {
-		const displayData = this.model.getDisplayData();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const displayData = this.model.getDisplayData(this.configs.groups);
 
-		return displayData.filter((datum) => datum[domainIdentifier] === label);
+		return displayData.filter((datum) => {
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+			return datum[domainIdentifier] === label;
+		});
 	}
 
 	protected getGroupWidth() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames()
-			.length;
+		const activeData = this.model.getGroupedData(this.configs.groups);
 		const totalGroupPadding = this.getTotalGroupPadding();
 
-		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
+		return this.getBarWidth() * activeData.length + totalGroupPadding;
 	}
 
 	protected getTotalGroupPadding() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames()
-			.length;
+		const activeData = this.model.getGroupedData(this.configs.groups);
 
-		if (numOfActiveDataGroups === 1) {
+		if (activeData.length === 1) {
 			return 0;
 		}
 
 		const domainScale = this.services.cartesianScales.getDomainScale();
 		const padding = Math.min(5, 5 * (domainScale.step() / 70));
 
-		return padding * (numOfActiveDataGroups - 1);
+		return padding * (activeData.length - 1);
 	}
 
 	// Gets the correct width for bars based on options & configurations
@@ -313,8 +311,8 @@ export class GroupedBar extends Bar {
 			}
 		}
 
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames()
-			.length;
+		const activeData = this.model.getGroupedData(this.configs.groups);
+		const numOfActiveDataGroups = activeData.length;
 		const totalGroupPadding = this.getTotalGroupPadding();
 
 		const domainScale = this.services.cartesianScales.getDomainScale();
@@ -325,8 +323,10 @@ export class GroupedBar extends Bar {
 	}
 
 	protected setGroupScale() {
+		const activeData = this.model.getActiveDataGroupNames(this.configs.groups);
+
 		this.groupScale = scaleBand()
-			.domain(this.model.getActiveDataGroupNames())
+			.domain(activeData)
 			.rangeRound([0, this.getGroupWidth()]);
 	}
 }

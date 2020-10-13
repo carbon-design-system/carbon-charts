@@ -33,10 +33,13 @@ export class SimpleBar extends Bar {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
+
+		const data = this.model.getDisplayData(this.configs.groups);
+
 		// Update data on all bars
 		const bars = svg
 			.selectAll("path.bar")
-			.data(this.model.getDisplayData(), (datum) => datum[groupMapsTo]);
+			.data(data, (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit().attr("opacity", 0).remove();

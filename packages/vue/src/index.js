@@ -11,6 +11,7 @@ import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
 import CcvMeterChart from './ccv-meter-chart.vue';
 import CcvRadarChart from './ccv-radar-chart.vue';
+import CcvComboChart from './ccv-combo-chart.vue';
 
 const components = [
 	CcvAreaChart,
@@ -26,6 +27,7 @@ const components = [
 	CcvScatterChart,
 	CcvMeterChart,
 	CcvRadarChart,
+	CcvComboChart
 ];
 
 /*
@@ -74,4 +76,5 @@ export {
 	CcvScatterChart,
 	CcvMeterChart,
 	CcvRadarChart,
+	CcvComboChart
 };

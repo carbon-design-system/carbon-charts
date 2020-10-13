@@ -1,4 +1,4 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments } from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections, Alignments, ComboChartTypes } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -298,5 +298,18 @@ export interface RadarChartOptions extends BaseChartOptions {
 			value: string;
 		};
 		alignment?: Alignments;
+	};
+}
+
+/**
+ * options specific to combo bar charts
+ */
+export interface ComboChartOptions extends AxisChartOptions {
+	chartTypes?: {
+		[ComboChartTypes.LINE]?: [],
+		[ComboChartTypes.STACKED_BAR]?: [],
+		[ComboChartTypes.GROUPED_BAR]?: [],
+		[ComboChartTypes.SIMPLE_BAR]?: [],
+		[ComboChartTypes.SCATTER]?: []
 	};
 }

@@ -66,8 +66,6 @@ export class Scatter extends Component {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const { stacked } = this.configs;
 		let scatterData;
@@ -75,14 +73,14 @@ export class Scatter extends Component {
 			const percentage = Object.keys(options.axes).some(
 				(axis) => options.axes[axis].percentage
 			);
-			scatterData = this.model.getStackedData({ percentage });
+			scatterData = this.model.getStackedData(this.configs.groups, { percentage });
 		} else {
-			scatterData = this.model
-				.getDisplayData()
+			scatterData = this.model.getDisplayData(this.configs.groups)
 				.filter(
-					(d) =>
-						d[rangeIdentifier] !== undefined &&
-						d[rangeIdentifier] !== null
+					(d) => {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
+						return d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null;
+					}
 				);
 		}
 
@@ -94,7 +92,10 @@ export class Scatter extends Component {
 			.selectAll("circle.dot")
 			.data(
 				scatterData,
-				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+				(datum) => {
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+					return `${datum[groupMapsTo]}-${datum[domainIdentifier]}`;
+				}
 			);
 
 		// Remove circles that need to be removed
@@ -139,8 +140,8 @@ export class Scatter extends Component {
 			getXValue,
 			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
-			(d, i) => cartesianScales.getDomainValue(d, i),
-			(d, i) => cartesianScales.getRangeValue(d, i),
+			(d, i) => this.services.cartesianScales.getDomainValue(d, i),
+			(d, i) => this.services.cartesianScales.getRangeValue(d, i),
 			orientation
 		);
 
@@ -173,8 +174,6 @@ export class Scatter extends Component {
 		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
@@ -195,23 +194,27 @@ export class Scatter extends Component {
 			.classed("threshold-anomaly", (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
 			)
-			.classed("filled", (d) =>
-				this.model.getIsFilled(
+			.classed("filled", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				return this.model.getIsFilled(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d,
 					filled
-				)
+					);
+				}
 			)
 			.classed(
 				"unfilled",
-				(d) =>
-					!this.model.getIsFilled(
+				(d) => {
+					const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+					return !this.model.getIsFilled(
 						d[groupMapsTo],
 						d[domainIdentifier],
 						d,
 						filled
-					)
+					);
+				}
 			)
 			.transition(
 				transitions.getTransition("scatter-update-enter", animate)
@@ -220,6 +223,7 @@ export class Scatter extends Component {
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
 			.attr("fill", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -236,18 +240,23 @@ export class Scatter extends Component {
 				}
 			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
-					d[groupMapsTo],
-					d[domainIdentifier],
-					d
-				)
+			.attr("stroke", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				return this.model.getStrokeColor(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d
+					);
+				}
 			)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
-			.attr("aria-label", (d) => d[rangeIdentifier]);
+			.attr("aria-label", (d) => {
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(d);
+				return d[rangeIdentifier];
+			});
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -313,7 +322,6 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = this.model.getOptions().data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent
 			.selectAll("circle")
@@ -322,13 +330,14 @@ export class Scatter extends Component {
 
 				hoveredElement
 					.classed("hovered", true)
-					.style("fill", (d: any) =>
-						self.model.getFillColor(
+					.style("fill", (d: any) => {
+						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
+						return self.model.getFillColor(
 							d[groupMapsTo],
 							d[domainIdentifier],
 							d
-						)
-					);
+						);
+				});
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum

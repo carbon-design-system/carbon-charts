@@ -11,6 +11,7 @@ import PieChart from "./pie-chart";
 import ScatterChart from "./scatter-chart";
 import MeterChart from "./meter-chart";
 import RadarChart from "./radar-chart";
+import ComboChart from "./combo-chart";
 
 export {
 	AreaChart,
@@ -25,5 +26,6 @@ export {
 	PieChart,
 	ScatterChart,
 	MeterChart,
-	RadarChart
+	RadarChart,
+	ComboChart
 };

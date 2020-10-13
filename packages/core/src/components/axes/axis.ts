@@ -552,11 +552,8 @@ export class Axis extends Component {
 			axisScaleType === ScaleTypes.LABELS &&
 			!userProvidedTickValues
 		) {
-			const dataGroups = this.model.getDataValuesGroupedByKeys();
+			const dataGroups = this.services.cartesianScales.getScaleDomain(axisPosition);
 			if (dataGroups.length > 0) {
-				const activeDataGroups = dataGroups.map(
-					(d) => d.sharedStackKey
-				);
 				const tick_html = svg
 					.select(`g.axis.${axisPosition} g.ticks g.tick`)
 					.html();
@@ -565,7 +562,7 @@ export class Axis extends Component {
 
 				container
 					.selectAll("g.tick text")
-					.data(activeDataGroups)
+					.data(dataGroups)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
@@ -580,7 +577,7 @@ export class Axis extends Component {
 
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
-					.data(activeDataGroups)
+					.data(dataGroups)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
@@ -597,7 +594,7 @@ export class Axis extends Component {
 					.selectAll("g.ticks")
 					.html(this.getInvisibleAxisRef().html());
 
-				container.selectAll("g.tick text").data(activeDataGroups);
+				container.selectAll("g.tick text").data(dataGroups);
 			}
 		}
 		// Add event listeners to elements drawn

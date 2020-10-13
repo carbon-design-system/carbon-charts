@@ -12,6 +12,7 @@ export class StackedBar extends Bar {
 
 	init() {
 		const eventsFragment = this.services.events;
+		this.model.setStackedGroups(this.model.getDataGroupNames());
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener(
@@ -31,14 +32,11 @@ export class StackedBar extends Bar {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData();
+		const stackData = this.model.getStackedData(this.configs.groups);
 
 		// Update data on all bar groups
 		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
@@ -183,21 +181,23 @@ export class StackedBar extends Bar {
 					datum
 				});
 
-				const displayData = self.model.getDisplayData();
-
-				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+				const displayData = self.model.getDisplayData(self.configs.groups);
 
 				let matchingDataPoint = displayData.find((d) => {
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(d);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
-							datum.data.sharedStackKey &&
+						datum.data.sharedStackKey &&
 						d[groupMapsTo] === datum.group
 					);
 				});
 
 				if (matchingDataPoint === undefined) {
+					// use the primary range and domain ids
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],

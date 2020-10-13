@@ -12,6 +12,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
+	ComboChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -173,8 +174,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		},
-		updateRangeAxis: false
+		}
 	} as ZoomBarsOptions
 } as AxisChartOptions);
 
@@ -364,6 +364,11 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	}
 } as RadarChartOptions);
 
+/**
+ * options specific to combo charts
+*/
+const comboChart: ComboChartOptions = baseBarChart;
+
 export const options = {
 	chart,
 	axisChart,
@@ -379,7 +384,8 @@ export const options = {
 	donutChart,
 	meterChart,
 	radarChart,
-	gaugeChart
+	gaugeChart,
+	comboChart
 };
 
 export * from "./configuration-non-customizable";
