@@ -181,6 +181,28 @@ export const lineSelectedGroupsOptions = {
 	}
 };
 
+export const lineColorPaletteOptions = {
+	title: "Line (color palette)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	color: {
+		pairing: {
+			numberOfGroups: 5,
+			index: 2
+		}
+	}
+};
+
 export const lineTimeSeriesData = [
 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 50000 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },

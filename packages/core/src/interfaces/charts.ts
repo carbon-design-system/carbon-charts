@@ -109,9 +109,13 @@ export interface BaseChartOptions {
 		 */
 		pairing?: {
 			/**
+			 * the number of data groups/categories, only if differ from given data
+			 */
+			numberOfGroups?: number;
+			/**
 			 * the number of the preset
 			 */
-			index: number;
+			index?: number;
 		};
 		/*
 		 * options related to gradient

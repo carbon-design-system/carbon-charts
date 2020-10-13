@@ -651,12 +651,19 @@ export class ChartModel {
 	 * Color palette
 	 */
 	protected setColorClasses() {
-		let pairingIndex = Tools.getProperty(
+		const colorPairingOptions = Tools.getProperty(
 			this.getOptions(),
 			"color",
-			"pairing",
-			"index"
+			"pairing"
 		);
+
+		// Check if user has defined numberOfGroups (differ from given data)
+		let numberOfGroups = Tools.getProperty(colorPairingOptions, "numberOfGroups");
+		if (!numberOfGroups || numberOfGroups < this.allDataGroups.length) {
+			numberOfGroups = this.allDataGroups.length;
+		}
+
+		let pairingIndex = Tools.getProperty(colorPairingOptions,"index");
 		const availableColorPairings = {
 			"1-color": 4,
 			"2-color": 5,
@@ -667,8 +674,8 @@ export class ChartModel {
 		};
 
 		// If number of dataGroups is greater than 5, user 14-color palette
-		const numberOfColors =
-			this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
+		const numberOfColors = numberOfGroups > 5 ? 14 : numberOfGroups;
+
 		// Use default palette if user choice is not in range
 		pairingIndex =
 			pairingIndex <= availableColorPairings[`${numberOfColors}-color`]
@@ -678,7 +685,7 @@ export class ChartModel {
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
 			(dataGroup, index) =>
-				`${numberOfColors}-${pairingIndex}-${index + 1}`
+				`${numberOfColors}-${pairingIndex}-${index % 14 + 1}`
 		);
 
 		// If there is no valid user provided scale, use the default set of colors
