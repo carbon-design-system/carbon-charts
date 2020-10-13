@@ -92,7 +92,7 @@ export const simpleBarOptions = {
 		}
 	},
 	color: {
-		paring: {
+		pairing: {
 			index: 1
 		}
 	}

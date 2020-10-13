@@ -67,7 +67,7 @@ export class Legend extends Component {
 		const paletteIndex = Tools.getProperty(
 			options,
 			"color",
-			"paring",
+			"pairing",
 			"index"
 		);
 

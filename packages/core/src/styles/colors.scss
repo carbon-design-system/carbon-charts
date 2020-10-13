@@ -113,13 +113,11 @@ $white-theme-colors: (
 			"7": map-get(map-get($ibm-color-map, "green"), 60),
 			"8": map-get(map-get($ibm-color-map, "blue"), 80),
 			"9": map-get(map-get($ibm-color-map, "magenta"), 50),
-			"10": #b28600,
-			//yellow 50, update when available in carbon color
-				"11": map-get(map-get($ibm-color-map, "teal"), 50),
+			"10": #b28600, //yellow 50, update when available in carbon color
+			"11": map-get(map-get($ibm-color-map, "teal"), 50),
 			"12": map-get(map-get($ibm-color-map, "cyan"), 90),
-			"13": #8a3800,
-			//orange 70, update when available in carbon color
-				"14": map-get(map-get($ibm-color-map, "purple"), 50)
+			"13": #8a3800, //orange 70, update when available in carbon color
+			"14": map-get(map-get($ibm-color-map, "purple"), 50)
 		)
 	)
 );
@@ -235,13 +233,11 @@ $dark-theme-colors: (
 			"7": map-get(map-get($ibm-color-map, "green"), 30),
 			"8": map-get(map-get($ibm-color-map, "blue"), 50),
 			"9": map-get(map-get($ibm-color-map, "magenta"), 60),
-			"10": #d2a106,
-			//yellow 40, update when available in carbon color
-				"11": map-get(map-get($ibm-color-map, "teal"), 40),
+			"10": #d2a106, //yellow 40, update when available in carbon color
+			"11": map-get(map-get($ibm-color-map, "teal"), 40),
 			"12": map-get(map-get($ibm-color-map, "cyan"), 20),
-			"13": #ba4e00,
-			//orange 60, update when available in carbon color
-				"14": map-get(map-get($ibm-color-map, "purple"), 30)
+			"13": #ba4e00, //orange 60, update when available in carbon color
+			"14": map-get(map-get($ibm-color-map, "purple"), 30)
 		)
 	)
 );

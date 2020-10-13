@@ -482,13 +482,13 @@ export class ChartModel {
 			return originalClassName;
 		}
 
-		const colorParingTag = this.colorClassNames(group);
+		const colorPairingTag = this.colorClassNames(group);
 		let className = originalClassName;
 		types.forEach(
 			(type) =>
 				(className = originalClassName
-					? `${className} ${type}-${colorParingTag}`
-					: `${type}-${colorParingTag}`)
+					? `${className} ${type}-${colorPairingTag}`
+					: `${type}-${colorPairingTag}`)
 		);
 		return className;
 	}
@@ -651,10 +651,10 @@ export class ChartModel {
 	 * Color palette
 	 */
 	protected setColorClasses() {
-		let paringIndex = Tools.getProperty(
+		let pairingIndex = Tools.getProperty(
 			this.getOptions(),
 			"color",
-			"paring",
+			"pairing",
 			"index"
 		);
 		const availableColorPairings = {
@@ -670,21 +670,21 @@ export class ChartModel {
 		const numberOfColors =
 			this.allDataGroups.length > 5 ? 14 : this.allDataGroups.length;
 		// Use default palette if user choice is not in range
-		paringIndex =
-			paringIndex <= availableColorPairings[`${numberOfColors}-color`]
-				? paringIndex
+		pairingIndex =
+			pairingIndex <= availableColorPairings[`${numberOfColors}-color`]
+				? pairingIndex
 				: 1;
 
 		// Create color classes for graph, tooltip and stroke use
-		const colorParing = this.allDataGroups.map(
+		const colorPairing = this.allDataGroups.map(
 			(dataGroup, index) =>
-				`${numberOfColors}-${paringIndex}-${index + 1}`
+				`${numberOfColors}-${pairingIndex}-${index + 1}`
 		);
 
 		// If there is no valid user provided scale, use the default set of colors
 		if (!this.colorIsProvided()) {
 			this.colorClassNames = scaleOrdinal()
-				.range(colorParing)
+				.range(colorPairing)
 				.domain(this.allDataGroups);
 
 			return;
