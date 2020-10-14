@@ -601,6 +601,12 @@ let allDemoGroups = [
 				data: scatterDemos.scatterSkeletonData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: false
+			},
+			{
+				options: scatterDemos.scatterDualAxesOptions,
+				data: scatterDemos.scatterDualAxesData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
 			}
 		]
 	},
