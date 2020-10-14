@@ -153,8 +153,9 @@ export interface ToolbarControl {
 	type: ToolbarControlTypes;
 	/**
 	 * the text to display (if this control is displayed in overflow menu)
+	 * type value will be displayed if text is not available
 	 */
-	text: string;
+	text?: string;
 }
 
 /**
