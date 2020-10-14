@@ -29,8 +29,8 @@ const addToolbarOptions = (options, configs?) => {
 	];
 
 	if (configs) {
-		if (configs.titlePostifx) {
-			options.title += configs.titlePostifx;
+		if (configs.titlePostfix) {
+			options.title += configs.titlePostfix;
 		}
 		if (configs.numberOfIcons) {
 			options.toolbar.numberOfIcons = configs.numberOfIcons;

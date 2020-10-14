@@ -136,11 +136,11 @@ export interface ToolbarOptions {
 	 * controls more than this number will appear in the overflow menu
 	 * minimum is 1. (all toolbar controls are in overflow menu)
 	 */
-	maxIcons?: number;
+	numberOfIcons?: number;
 	/**
 	 * toolbar controls which will be displayed following the array order
 	 */
-	controlsInOrder?: ToolbarControl[];
+	controls?: ToolbarControl[];
 }
 
 /**

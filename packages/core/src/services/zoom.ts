@@ -265,9 +265,9 @@ export class Zoom extends Service {
 		// if current zoom domain is already smaller than minZoomRatio
 		if (currentZoomDomainPeriod / maxZoomDomainPeriod < minZoomRatio) {
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	// check if current zoom domain is already the max zoom domain
@@ -284,9 +284,9 @@ export class Zoom extends Service {
 			currentZoomDomain[1].valueOf() === maxZoomDomain[1].valueOf()
 		) {
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	isEmptyState() {

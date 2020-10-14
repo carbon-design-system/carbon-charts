@@ -412,13 +412,13 @@ export class Toolbar extends Component {
 			return {
 				buttonList: controlList
 			};
-		} else {
-			return {
-				// leave one button for overflow button
-				buttonList: controlList.splice(0, numberOfIcons - 1),
-				overflowMenuItemList: controlList
-			};
 		}
+
+		return {
+			// leave one button for overflow button
+			buttonList: controlList.splice(0, numberOfIcons - 1),
+			overflowMenuItemList: controlList
+		};
 	}
 
 	getOverflowMenuItems() {
