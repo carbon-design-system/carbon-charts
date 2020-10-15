@@ -160,11 +160,24 @@ export class CartesianScales extends Service {
 		}
 	}
 
-	getDualAxesRangePosition(datum) {
+	/**
+	 * Returns the position of the range axis for the data item or the datagroups provided
+	 * @param datum
+	 * @param groups
+	 */
+	getDualAxesRangePosition(datum, groups?) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 		const axisOptions = Tools.getProperty(options, "axes", this.secondaryRangeAxisPosition);
-		const dataset = datum[groupMapsTo];
+		let dataset;
+		if (datum) {
+			dataset = datum[groupMapsTo];
+		} else if (groups && groups.length > 0) {
+			dataset = groups[0];
+		} else {
+			return this.rangeAxisPosition;
+		}
+
 		if (axisOptions?.datasets && axisOptions.datasets.includes(dataset)) {
 			return this.secondaryRangeAxisPosition;
 		}
@@ -172,6 +185,10 @@ export class CartesianScales extends Service {
 	}
 
 
+	/**
+	 * Returns the position of the domain axis that the datum is mapped with
+	 * @param datum
+	 */
 	getDualAxesDomainPosition(datum) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
