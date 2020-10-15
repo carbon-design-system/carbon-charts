@@ -157,7 +157,7 @@ export class Toolbar extends Component {
 					.attr("viewBox", "0 0 32 32")
 					.attr("role", Roles.IMG);
 
-				buttonIcon.html(button.iconSVGContent());
+				buttonIcon.html(button.iconSVGContent);
 				if (button.shouldBeDisabled()) {
 					buttonContainer
 						.classed("toolbar-button--disabled", true)
@@ -359,10 +359,6 @@ export class Toolbar extends Component {
 	}
 
 	getControlConfigs() {
-		const isZoomBarEnabled =
-			this.services.zoom.isZoomBarEnabled() &&
-			!this.services.zoom.isEmptyState();
-
 		const numberOfIcons = Tools.getProperty(
 			this.model.getOptions(),
 			"toolbar",
@@ -375,31 +371,7 @@ export class Toolbar extends Component {
 		);
 		const controlList = [];
 		controls.forEach((control) => {
-			let controlConfig;
-			switch (control.type) {
-				case ToolbarControlTypes.ZOOM_IN:
-					if (isZoomBarEnabled) {
-						controlConfig = this.getZoomInConfig();
-					}
-					break;
-				case ToolbarControlTypes.ZOOM_OUT:
-					if (isZoomBarEnabled) {
-						controlConfig = this.getZoomOutConfig();
-					}
-					break;
-				case ToolbarControlTypes.RESET_ZOOM:
-					if (isZoomBarEnabled) {
-						controlConfig = this.getResetZoomConfig();
-					}
-					break;
-
-				// add more toolbar controls here
-
-				default:
-					throw Error(
-						"Not supported toolbar control type: " + control.type
-					);
-			}
+			const controlConfig = this.getControlConfigByType(control.type);
 
 			// add to list if config is valid
 			if (controlConfig) {
@@ -430,66 +402,88 @@ export class Toolbar extends Component {
 		}
 	}
 
-	// add more toolbar control configuration here
-
-	getZoomInConfig() {
-		return {
-			id: "toolbar-zoomIn",
-			shouldBeDisabled: () => this.services.zoom.isMinZoomDomain(),
-			iconSVGContent: () => this.getZoomInIconSVGContent(),
-			clickFunction: () => this.services.zoom.zoomIn()
-		};
-	}
-
-	getZoomOutConfig() {
-		return {
-			id: "toolbar-zoomOut",
-			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
-			iconSVGContent: () => this.getZoomOutIconSVGContent(),
-			clickFunction: () => this.services.zoom.zoomOut()
-		};
-	}
-
-	getResetZoomConfig() {
-		return {
-			id: "toolbar-resetZoom",
-			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
-			iconSVGContent: () => this.getResetZoomIconSVGContent(),
-			clickFunction: () => this.services.zoom.resetZoomDomain()
-		};
-	}
-
+	// special button config for overflow button
 	getOverflowButtonConfig() {
 		return {
 			id: "toolbar-overflow-menu",
-			shouldBeDisabled: () => {
-				return false;
-			},
-			iconSVGContent: () => this.getOverflowIconSVGContent(),
+			shouldBeDisabled: () => false,
+			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
+							 <circle cx="16" cy="16" r="2"></circle>
+							 <circle cx="16" cy="24" r="2"></circle>`,
 			clickFunction: () => this.toggleOverflowMenu()
 		};
 	}
 
-	// add more icons here
-	// svg icon must be with 32x32 viewBox
+	getControlConfigByType(controlType: ToolbarControlTypes) {
+		const isZoomBarEnabled =
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
 
-	getOverflowIconSVGContent() {
-		return `<circle cx="16" cy="8" r="2"></circle>
-				<circle cx="16" cy="16" r="2"></circle>
-				<circle cx="16" cy="24" r="2"></circle>`;
+		let controlConfig;
+		switch (controlType) {
+			case ToolbarControlTypes.ZOOM_IN:
+				if (isZoomBarEnabled) {
+					controlConfig = {
+						id: "toolbar-zoomIn",
+						shouldBeDisabled: () =>
+							this.services.zoom.isMinZoomDomain(),
+						iconSVGContent: this.getControlIconByType(controlType),
+						clickFunction: () => this.services.zoom.zoomIn()
+					};
+				}
+				break;
+			case ToolbarControlTypes.ZOOM_OUT:
+				if (isZoomBarEnabled) {
+					controlConfig = {
+						id: "toolbar-zoomOut",
+						shouldBeDisabled: () =>
+							this.services.zoom.isMaxZoomDomain(),
+						iconSVGContent: this.getControlIconByType(controlType),
+						clickFunction: () => this.services.zoom.zoomOut()
+					};
+				}
+				break;
+			case ToolbarControlTypes.RESET_ZOOM:
+				if (isZoomBarEnabled) {
+					controlConfig = {
+						id: "toolbar-resetZoom",
+						shouldBeDisabled: () =>
+							this.services.zoom.isMaxZoomDomain(),
+						iconSVGContent: this.getControlIconByType(controlType),
+						clickFunction: () =>
+							this.services.zoom.resetZoomDomain()
+					};
+				}
+				break;
+
+			// add more toolbar control configuration here
+
+			default:
+				throw Error(
+					"Not supported toolbar control type: " + controlType
+				);
+		}
+		return controlConfig;
 	}
 
-	getZoomInIconSVGContent() {
-		return `<polygon points="19 13 15 13 15 9 13 9 13 13 9 13 9 15 13 15 13 19 15 19 15 15 19 15 19 13"/>
-    			<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
-	}
+	getControlIconByType(controlType: ToolbarControlTypes) {
+		switch (controlType) {
+			case ToolbarControlTypes.ZOOM_IN:
+				return `<polygon points="19 13 15 13 15 9 13 9 13 13 9 13 9 15 13 15 13 19 15 19 15 15 19 15 19 13"/>
+    					<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
+			case ToolbarControlTypes.ZOOM_OUT:
+				return `<rect x="9" y="13" width="10" height="2"/>
+						<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
+			case ToolbarControlTypes.RESET_ZOOM:
+				return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`;
 
-	getZoomOutIconSVGContent() {
-		return `<rect x="9" y="13" width="10" height="2"/>
-				<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
-	}
+			// add more icons here
+			// svg icon must be with 32x32 viewBox
 
-	getResetZoomIconSVGContent() {
-		return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`;
+			default:
+				throw Error(
+					"Not supported toolbar control type: " + controlType
+				);
+		}
 	}
 }
