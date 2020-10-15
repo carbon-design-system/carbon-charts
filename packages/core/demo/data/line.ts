@@ -105,7 +105,9 @@ export const sparklineLoadingOptions = {
 	points: {
 		enabled: false
 	},
-	sparklineLoading: true
+	data: {
+		sparklineLoading: true
+	}
 };
 
 export const lineCenteredLegendData = lineData;

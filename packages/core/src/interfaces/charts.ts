@@ -86,7 +86,7 @@ export interface BaseChartOptions {
 		 */
 		groupMapsTo?: string;
 		/**
-		 * used to simulate data loading
+		 * used to simulate data loading in skeleton way
 		 */
 		loading?: boolean;
 		/**
@@ -94,6 +94,10 @@ export interface BaseChartOptions {
 		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
 		 */
 		selectedGroups?: string[];
+		/**
+		 * used to simulate data loading in sparkline way
+		 */
+		sparklineLoading?: boolean;
 	};
 	/**
 	 * options related to color scales
@@ -188,10 +192,6 @@ export interface BubbleChartOptions extends AxisChartOptions {
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
-	/**
-	 * sparkline loading
-	 */
-	sparklineLoading?: boolean;
 	/**
 	 * options for the curve of the line
 	 */

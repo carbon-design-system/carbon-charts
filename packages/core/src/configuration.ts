@@ -234,7 +234,6 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
  * options specific to line charts
  */
 const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
-	sparklineLoading: false,
 	points: {
 		// default point radius to 3
 		radius: 3,

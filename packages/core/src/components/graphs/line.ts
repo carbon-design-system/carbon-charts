@@ -90,7 +90,7 @@ export class Line extends Component {
 
 		const isSparklineLoading =
 			this.configs.allowSparklineLoading
-			&& Tools.getProperty(options, "sparklineLoading")
+			&& Tools.getProperty(options, "data", "sparklineLoading")
 			&& data.length === 1;
 
 		// Add lines that need to be introduced
