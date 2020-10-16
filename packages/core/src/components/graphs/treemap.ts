@@ -7,6 +7,8 @@ import { Events } from "../../interfaces";
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from "d3-hierarchy";
 import { sum } from "d3-array";
+import { hsl, color } from "d3-color";
+import { select } from "d3-selection";
 
 var count = 0;
 
@@ -43,8 +45,6 @@ export class Treemap extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		// svg.html("");
-
 		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
@@ -63,35 +63,25 @@ export class Treemap extends Component {
 			sum(d.children, (child: any) => child.value)
 		);
 
-		const root = d3Treemap()
-			// .tile(tile)
-			.size([width, height])
-			.padding(1)
-			.round(true)(hierarchy);
+		const root = d3Treemap().size([width, height]).padding(1).round(true)(
+			hierarchy
+		);
 		const { transitions } = this.services;
 
-		console.log(
-			"this.model.getDataGroupNames()",
-			this.model.getDataGroupNames(),
-			root.descendants()
-		);
-		const leafGroupData = this.model
-			.getDataGroupNames()
-			.map((dataGroup) => {
-				const correspondingLeaf = root
-					.descendants()
-					.find((leaf: any) => leaf.data.name === dataGroup);
-
-				return correspondingLeaf;
-			});
 		const leafGroups = svg
 			.selectAll("g[data-name='leaf']")
-			.data(leafGroupData, (d) => d);
+			.data(root.leaves(), (leaf) => leaf.data.name);
 
 		// Remove leaf groups that need to be removed
-		leafGroups.exit().attr("opacity", 0).remove();
+		leafGroups
+			.exit()
+			.transition(
+				transitions.getTransition("treemap-group-exit", animate)
+			)
+			.attr("opacity", 0)
+			.remove();
 
-		// Add the dot groups that need to be introduced
+		// Add the leaf groups that need to be introduced
 		const enteringLeafGroups = leafGroups
 			.enter()
 			.append("g")
@@ -100,22 +90,11 @@ export class Treemap extends Component {
 
 		const rects = enteringLeafGroups
 			.merge(leafGroups)
-			// .transition(transitions.getTransition("treemap-update", animate))
 			.attr("data-name", "leaf")
-			.each(function (d) {
-				console.log("d", d);
-				this.dataGroupName = d;
-			})
 			.attr("transform", (d) => `translate(${d.x0},${d.y0})`)
 			.attr("opacity", 1)
 			.selectAll("rect.leaf")
-			.data(function (d) {
-				return root.leaves().filter((leaf: any) => {
-					while (leaf.depth > 1) leaf = leaf.parent;
-
-					return leaf.data.name === d.data.name;
-				});
-			});
+			.data((d) => [d]);
 
 		rects.exit().attr("opacity", 0).remove();
 
@@ -127,6 +106,8 @@ export class Treemap extends Component {
 
 		enteringRects
 			.merge(rects)
+			.attr("width", 0)
+			.attr("height", 0)
 			.transition(
 				this.services.transitions.getTransition(
 					"treemap-leaf-update-enter",
@@ -137,88 +118,174 @@ export class Treemap extends Component {
 			.attr("fill", (d) => {
 				while (d.depth > 1) d = d.parent;
 
-				console.log(
-					"fill",
-					d.data.name,
-					this.model.getFillColor(d.data.name)
-				);
-
 				return this.model.getFillColor(d.data.name);
 			})
 			.attr("width", (d) => d.x1 - d.x0)
 			.attr("height", (d) => d.y1 - d.y0)
 			.attr("opacity", 1);
 
-		const texts = enteringRects
-			.append("text")
-			.attr("x", 7)
-			.attr("y", (d, i, nodes) => {
-				return `${0.5 + 1.1 + i * 1.2}em`;
+		// Update all titles
+		enteringLeafGroups
+			.merge(leafGroups)
+			.selectAll("title")
+			.data(
+				(d) => [
+					`${d
+						.ancestors()
+						.reverse()
+						.map((d) => d.data.name)
+						.join("/")}\n${d.value}`
+				],
+				(d) => d
+			)
+			.join(
+				(enter) => enter.append("title").text((d) => d),
+				(update) => update.text((d) => d)
+			);
+
+		// Update all titles
+		enteringLeafGroups
+			.merge(leafGroups)
+			.selectAll("text")
+			.data(
+				(d) => {
+					if (d.data.showLabel === false) {
+						return [];
+					}
+
+					let parent = d;
+					while (parent.depth > 1) parent = parent.parent;
+					const color = hsl(
+						this.model.getFillColor(parent.data.name)
+					);
+					return [
+						{
+							text: d.data.name,
+							color: color.l < 0.5 ? "white" : "black"
+						}
+					];
+				},
+				(d) => d
+			)
+			.join(
+				(enter) =>
+					enter
+						.append("text")
+						.text((d) => d.text)
+						.style("fill", (d) => d.color)
+						.attr("x", 7)
+						.attr("y", 18),
+				(update) =>
+					update.text((d) => d.text).style("fill", (d) => d.color)
+			);
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	addEventListeners() {
+		const self = this;
+		this.parent
+			.selectAll("rect.leaf")
+			.on("mouseover", function (datum) {
+				const hoveredElement = select(this);
+
+				let parent = datum;
+				while (parent.depth > 1) parent = parent.parent;
+
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseover_fill_update"
+						)
+					)
+					.attr("fill", (d: any) =>
+						color(hoveredElement.attr("fill"))
+							.darker(0.7)
+							.toString()
+					);
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							color: hoveredElement.attr("fill"),
+							label: parent.data.name,
+							bold: true
+						},
+						{
+							label: datum.data.name,
+							value: datum.data.value
+						}
+					]
+				});
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Treemap.LEAF_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
 			})
-			.attr("fill", "white")
-			.text((d) => {
-				if (!d.noLabel) return d;
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Treemap.LEAF_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			})
+			.on("click", function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Treemap.LEAF_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", false);
+
+				let parent = datum;
+				while (parent.depth > 1) parent = parent.parent;
+
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseout_fill_update"
+						)
+					)
+					.attr("fill", (d: any) =>
+						self.model.getFillColor(parent.data.name)
+					);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Treemap.LEAF_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+
+				// Hide tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement
+				});
 			});
-
-		// enteringLeafs.append("title").text(
-		// 	(d) =>
-		// 		`${d
-		// 			.ancestors()
-		// 			.reverse()
-		// 			.map((d) => d.data.name)
-		// 			.join("/")}\n${d.value}`
-		// );
-
-		// const rects = svg.selectAll("g[data-name='leaf'] rect");
-
-		// const enteringRects = enteringLeafs.enter().append("rect");
-
-		// enteringRects
-		// 	// .merge(leafs.selectAll("rect"))
-		// 	.each(() => {
-		// 		console.log("Rect");
-		// 	})
-		// 	.attr("id", (d) => (d.leafUid = domUID("leaf")).id)
-		// 	.attr("fill", (d) => {
-		// 		while (d.depth > 1) d = d.parent;
-		// 		return this.model.getFillColor(d.data.name);
-		// 	})
-		// 	.attr("width", (d) => d.x1 - d.x0)
-		// 	.attr("height", (d) => d.y1 - d.y0);
-
-		// enteringLeafs
-		// 	.append("clipPath")
-		// 	.attr("id", (d) => (d.clipUid = domUID("clip")).id)
-		// 	.append("use");
-		// // .attr("xlink:href", (d) => d.leafUid.href);
-
-		// enteringLeafs
-		// 	.append("text")
-		// 	.attr("clip-path", (d) => d.clipUid)
-		// 	.selectAll("tspan")
-		// 	.data((d) => {
-		// 		if (!d.data.name) return "";
-		// 		return `${d.data.name}
-		// 		${((d.data.value / total) * 100).toPrecision(2)}%`.split(/(?=[A-Z][a-z])|\s+/g);
-		// 	})
-		// 	.join("tspan")
-		// 	.attr("x", 7)
-		// 	.attr("y", (d, i, nodes) => {
-		// 		return `${0.5 + 1.1 + i * 1.2}em`;
-		// 	})
-		// 	.text((d) => {
-		// 		if (!d.noLabel) return d;
-		// 	})
-		// 	.attr("fill", (d) => {
-		// 		// console.log("d", d)
-		// 		return "white";
-		// 	});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-
-		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent
 			.selectAll("g[data-name='leaf']")
