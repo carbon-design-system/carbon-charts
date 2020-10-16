@@ -109,10 +109,11 @@ export class Line extends Component {
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", (group) => {
 				const { data: groupData } = group;
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				return groupData
-					.map((datum) => datum[rangeIdentifier])
-					.join(",");
+					.map((datum) =>  {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datum);
+						return datum[rangeIdentifier];
+					}).join(",");
 			})
 			// Transition
 			.transition(

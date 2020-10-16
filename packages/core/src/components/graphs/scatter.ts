@@ -38,7 +38,7 @@ export class Scatter extends Component {
 	}
 
 	filterBasedOnZoomDomain(data) {
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(data);
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain !== undefined) {
 			return data.filter(

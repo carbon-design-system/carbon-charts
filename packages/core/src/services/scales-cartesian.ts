@@ -323,7 +323,7 @@ export class CartesianScales extends Service {
 		return this.getScaleTypeByPosition(this.getMainYAxisPosition());
 	}
 
-	getDomainIdentifier(data?: string) {
+	getDomainIdentifier(data?: any) {
 		const options = this.model.getOptions();
 		return Tools.getProperty(
 			options,
@@ -333,7 +333,7 @@ export class CartesianScales extends Service {
 		);
 	}
 
-	getRangeIdentifier(data?: string) {
+	getRangeIdentifier(data?: any) {
 		const options = this.model.getOptions();
 		return Tools.getProperty(
 			options,
