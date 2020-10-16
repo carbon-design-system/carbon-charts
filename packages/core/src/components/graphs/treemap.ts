@@ -63,9 +63,11 @@ export class Treemap extends Component {
 			sum(d.children, (child: any) => child.value)
 		);
 
-		const root = d3Treemap().size([width, height]).padding(1).round(true)(
-			hierarchy
-		);
+		const root = d3Treemap()
+			.size([width, height])
+			.paddingInner(1)
+			.paddingOuter(0)
+			.round(true)(hierarchy);
 		const { transitions } = this.services;
 
 		const leafGroups = svg

@@ -143,7 +143,9 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
-				item.value = item.value ? this.valueFormatter(item.value) : item.value;
+				item.value = item.value
+					? this.valueFormatter(item.value)
+					: item.value;
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
