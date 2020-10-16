@@ -43,16 +43,17 @@ export class Treemap extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		svg.html("");
+		// svg.html("");
 
 		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();
+		const options = this.model.getOptions();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
 
 		const hierarchy = d3Hierarchy({
-			name: "flare",
+			name: options.title || "Treemap",
 			children: displayData
 		})
 			.sum((d: any) => d.value)
@@ -68,35 +69,96 @@ export class Treemap extends Component {
 			.padding(1)
 			.round(true)(hierarchy);
 		const { transitions } = this.services;
-		const leafs = svg
-			.selectAll("g[data-name='leaf']")
-			.data(root.leaves(), (d) => {
-				// console.log("d", d);
-				return d.data.name || Tools.getProperty(d, "leafUid", "id");
-			});
 
-		// Remove leafs that need to be removed
-		leafs
-			.exit()
-			.each(() => {
-				console.log("each");
-			})
-			.attr("opacity", 0)
-			.remove();
+		console.log(
+			"this.model.getDataGroupNames()",
+			this.model.getDataGroupNames(),
+			root.descendants()
+		);
+		const leafGroupData = this.model
+			.getDataGroupNames()
+			.map((dataGroup) => {
+				const correspondingLeaf = root
+					.descendants()
+					.find((leaf: any) => leaf.data.name === dataGroup);
+
+				return correspondingLeaf;
+			});
+		const leafGroups = svg
+			.selectAll("g[data-name='leaf']")
+			.data(leafGroupData, (d) => d);
+
+		// Remove leaf groups that need to be removed
+		leafGroups.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
-		const enteringLeafs = leafs
+		const enteringLeafGroups = leafGroups
 			.enter()
 			.append("g")
 			.attr("data-name", "leaf")
 			.attr("opacity", 0);
 
-		enteringLeafs
-			.merge(leafs)
-			.transition(transitions.getTransition("treemap-update", animate))
+		const rects = enteringLeafGroups
+			.merge(leafGroups)
+			// .transition(transitions.getTransition("treemap-update", animate))
 			.attr("data-name", "leaf")
+			.each(function (d) {
+				console.log("d", d);
+				this.dataGroupName = d;
+			})
 			.attr("transform", (d) => `translate(${d.x0},${d.y0})`)
+			.attr("opacity", 1)
+			.selectAll("rect.leaf")
+			.data(function (d) {
+				return root.leaves().filter((leaf: any) => {
+					while (leaf.depth > 1) leaf = leaf.parent;
+
+					return leaf.data.name === d.data.name;
+				});
+			});
+
+		rects.exit().attr("opacity", 0).remove();
+
+		const enteringRects = rects
+			.enter()
+			.append("rect")
+			.classed("leaf", true)
+			.attr("opacity", 0);
+
+		enteringRects
+			.merge(rects)
+			.transition(
+				this.services.transitions.getTransition(
+					"treemap-leaf-update-enter",
+					animate
+				)
+			)
+			// .attr("id", (d) => (d.leafUid = domUID("leaf")).id)
+			.attr("fill", (d) => {
+				while (d.depth > 1) d = d.parent;
+
+				console.log(
+					"fill",
+					d.data.name,
+					this.model.getFillColor(d.data.name)
+				);
+
+				return this.model.getFillColor(d.data.name);
+			})
+			.attr("width", (d) => d.x1 - d.x0)
+			.attr("height", (d) => d.y1 - d.y0)
 			.attr("opacity", 1);
+
+		const texts = enteringRects
+			.append("text")
+			.attr("x", 7)
+			.attr("y", (d, i, nodes) => {
+				return `${0.5 + 1.1 + i * 1.2}em`;
+			})
+			.attr("fill", "white")
+			.text((d) => {
+				if (!d.noLabel) return d;
+			});
 
 		// enteringLeafs.append("title").text(
 		// 	(d) =>
@@ -107,49 +169,50 @@ export class Treemap extends Component {
 		// 			.join("/")}\n${d.value}`
 		// );
 
-		enteringLeafs
-			.append("rect")
-			.attr("id", (d) => (d.leafUid = domUID("leaf")).id)
-			.attr("fill", (d) => {
-				while (d.depth > 1) d = d.parent;
-				return this.model.getFillColor(d.data.name);
-			})
-			.attr("width", (d) => d.x1 - d.x0)
-			.attr("height", (d) => d.y1 - d.y0);
+		// const rects = svg.selectAll("g[data-name='leaf'] rect");
 
-		enteringLeafs
-			.append("clipPath")
-			.attr("id", (d) => (d.clipUid = domUID("clip")).id)
-			.append("use")
-			.attr("xlink:href", (d) => d.leafUid.href);
+		// const enteringRects = enteringLeafs.enter().append("rect");
 
-		enteringLeafs
-			.append("text")
-			.attr("clip-path", (d) => d.clipUid)
-			.selectAll("tspan")
-			.data((d) => {
-				if (!d.data.name) return "";
-				return `${d.data.name}
-				${((d.data.value / total) * 100).toPrecision(2)}%`.split(
-					/(?=[A-Z][a-z])|\s+/g
-				);
-			})
-			.join("tspan")
-			.attr("x", 7)
-			.attr("y", (d, i, nodes) => {
-				return `${0.5 + 1.1 + i * 1.2}em`;
-			})
-			.text((d) => {
-				if (!d.noLabel) return d;
-			})
-			.attr("fill", (d) => {
-				// console.log("d", d)
-				// if (d === "Iran" || d === "Nigeria") {
-				// 	return "black";
-				// }
+		// enteringRects
+		// 	// .merge(leafs.selectAll("rect"))
+		// 	.each(() => {
+		// 		console.log("Rect");
+		// 	})
+		// 	.attr("id", (d) => (d.leafUid = domUID("leaf")).id)
+		// 	.attr("fill", (d) => {
+		// 		while (d.depth > 1) d = d.parent;
+		// 		return this.model.getFillColor(d.data.name);
+		// 	})
+		// 	.attr("width", (d) => d.x1 - d.x0)
+		// 	.attr("height", (d) => d.y1 - d.y0);
 
-				return "white";
-			});
+		// enteringLeafs
+		// 	.append("clipPath")
+		// 	.attr("id", (d) => (d.clipUid = domUID("clip")).id)
+		// 	.append("use");
+		// // .attr("xlink:href", (d) => d.leafUid.href);
+
+		// enteringLeafs
+		// 	.append("text")
+		// 	.attr("clip-path", (d) => d.clipUid)
+		// 	.selectAll("tspan")
+		// 	.data((d) => {
+		// 		if (!d.data.name) return "";
+		// 		return `${d.data.name}
+		// 		${((d.data.value / total) * 100).toPrecision(2)}%`.split(/(?=[A-Z][a-z])|\s+/g);
+		// 	})
+		// 	.join("tspan")
+		// 	.attr("x", 7)
+		// 	.attr("y", (d, i, nodes) => {
+		// 		return `${0.5 + 1.1 + i * 1.2}em`;
+		// 	})
+		// 	.text((d) => {
+		// 		if (!d.noLabel) return d;
+		// 	})
+		// 	.attr("fill", (d) => {
+		// 		// console.log("d", d)
+		// 		return "white";
+		// 	});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {

@@ -127,7 +127,7 @@ export class ChartModel {
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataGroups = this.generateDataGroups(sanitizedData);
-		console.log("dataGroups", dataGroups);
+
 		this.set({
 			data: sanitizedData,
 			dataGroups
