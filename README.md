@@ -119,3 +119,4 @@ See our [release change logs](https://github.com/carbon-design-system/carbon-cha
 
 ## Code of Conduct
 Read our code of conduct [here](./CODE_OF_CONDUCT.md)
+[![Run on Repl.it](https://repl.it/badge/github/carbon-design-system/carbon-charts)](https://repl.it/github/carbon-design-system/carbon-charts)
