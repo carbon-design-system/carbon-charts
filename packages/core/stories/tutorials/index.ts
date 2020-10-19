@@ -7,3 +7,4 @@ export * from "./getting-started/vanilla";
 // other tutorials
 export * from "./tabular-data-format";
 export * from "./event-listeners";
+export * from "./color-palette";
