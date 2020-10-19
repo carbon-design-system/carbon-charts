@@ -78,10 +78,7 @@ export class Area extends Component {
 
 		// The fill value of area has been overwritten, get color value from stroke color class instead
 		const areaElement = document.getElementsByClassName(
-			this.model.getColorClassName(
-				["stroke"],
-				groupedData[0].name
-			)
+			this.model.getColorClassName(["stroke"], groupedData[0].name)
 		)[0];
 
 		if (isGradientAllowed && areaElement) {

@@ -658,12 +658,15 @@ export class ChartModel {
 		);
 
 		// Check if user has defined numberOfVariants (differ from given data)
-		let numberOfVariants = Tools.getProperty(colorPairingOptions, "numberOfVariants");
+		let numberOfVariants = Tools.getProperty(
+			colorPairingOptions,
+			"numberOfVariants"
+		);
 		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
 			numberOfVariants = this.allDataGroups.length;
 		}
 
-		let pairingIndex = Tools.getProperty(colorPairingOptions,"index");
+		let pairingIndex = Tools.getProperty(colorPairingOptions, "index");
 		const availableColorPairings = {
 			"1-color": 4,
 			"2-color": 5,
@@ -685,7 +688,7 @@ export class ChartModel {
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
 			(dataGroup, index) =>
-				`${numberOfColors}-${pairingIndex}-${index % 14 + 1}`
+				`${numberOfColors}-${pairingIndex}-${(index % 14) + 1}`
 		);
 
 		// If there is no valid user provided scale, use the default set of colors
