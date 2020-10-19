@@ -334,7 +334,7 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setUserProvidedColorScale();
-		this.setColorClasses();
+		this.setColorClassNames();
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
@@ -650,7 +650,7 @@ export class ChartModel {
 	/*
 	 * Color palette
 	 */
-	protected setColorClasses() {
+	protected setColorClassNames() {
 		const colorPairingOptions = Tools.getProperty(
 			this.getOptions(),
 			"color",
