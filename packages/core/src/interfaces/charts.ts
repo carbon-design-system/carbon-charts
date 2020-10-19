@@ -111,7 +111,7 @@ export interface BaseChartOptions {
 			/**
 			 * the number of data groups/categories, only if differ from given data
 			 */
-			numberOfGroups?: number;
+			numberOfVariants?: number;
 			/**
 			 * the number of the preset
 			 */

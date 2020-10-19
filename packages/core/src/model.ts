@@ -657,10 +657,10 @@ export class ChartModel {
 			"pairing"
 		);
 
-		// Check if user has defined numberOfGroups (differ from given data)
-		let numberOfGroups = Tools.getProperty(colorPairingOptions, "numberOfGroups");
-		if (!numberOfGroups || numberOfGroups < this.allDataGroups.length) {
-			numberOfGroups = this.allDataGroups.length;
+		// Check if user has defined numberOfVariants (differ from given data)
+		let numberOfVariants = Tools.getProperty(colorPairingOptions, "numberOfVariants");
+		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
+			numberOfVariants = this.allDataGroups.length;
 		}
 
 		let pairingIndex = Tools.getProperty(colorPairingOptions,"index");
@@ -674,7 +674,7 @@ export class ChartModel {
 		};
 
 		// If number of dataGroups is greater than 5, user 14-color palette
-		const numberOfColors = numberOfGroups > 5 ? 14 : numberOfGroups;
+		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;
 
 		// Use default palette if user choice is not in range
 		pairingIndex =

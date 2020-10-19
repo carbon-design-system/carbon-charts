@@ -197,7 +197,7 @@ export const lineColorPaletteOptions = {
 	},
 	color: {
 		pairing: {
-			numberOfGroups: 5,
+			numberOfVariants: 5,
 			index: 2
 		}
 	}

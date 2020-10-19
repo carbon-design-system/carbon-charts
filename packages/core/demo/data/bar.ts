@@ -111,7 +111,7 @@ export const simpleBarColorPaletteOptions = {
 	},
 	color: {
 		pairing: {
-			numberOfGroups: 7,
+			numberOfVariants: 7,
 			index: 2
 		}
 	}
