@@ -5,6 +5,7 @@ import * as lineChart from "./line";
 import * as scatterChart from "./scatter";
 import * as stepChart from "./step";
 import * as timeSeriesAxisChart from "./time-series-axis";
+import * as confidenceIntervalChart from "./confidence-interval";
 
 const initialZoomDomain = [
 	new Date(2020, 11, 10, 23, 59, 25),
@@ -110,6 +111,12 @@ export const zoomBarLineTimeSeries15secondsData =
 	timeSeriesAxisChart.lineTimeSeriesData15seconds;
 export const zoomBarLineTimeSeries15secondsOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
+);
+
+export const zoomBarConfidenceIntervalTimeSeriesData =
+	confidenceIntervalChart.confidenceIntervalTimeSeriesCurvedData;
+export const zoomBarConfidenceIntervalTimeSeriesOptions = addZoomBarToOptions(
+	Object.assign({}, confidenceIntervalChart.confidenceIntervalTimeSeriesCurvedOptions)
 );
 
 export const zoomBarLineTimeSeriesInitDomainData =

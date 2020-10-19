@@ -12,6 +12,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
+	ConfidenceIntervalChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -364,6 +365,15 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	}
 } as RadarChartOptions);
 
+/**
+ * options specific to confidence interval charts
+ */
+const confidenceIntervalChart: ConfidenceIntervalChartOptions = Tools.merge({},	lineChart, {
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0
+	} as TimeScaleOptions)
+} as LineChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -379,7 +389,8 @@ export const options = {
 	donutChart,
 	meterChart,
 	radarChart,
-	gaugeChart
+	gaugeChart,
+	confidenceIntervalChart
 };
 
 export * from "./configuration-non-customizable";

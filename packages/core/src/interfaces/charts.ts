@@ -300,3 +300,23 @@ export interface RadarChartOptions extends BaseChartOptions {
 		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to confidence interval charts
+ */
+export interface ConfidenceIntervalChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+
+	confidence?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
+	}
+
+}

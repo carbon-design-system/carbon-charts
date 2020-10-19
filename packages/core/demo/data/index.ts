@@ -11,6 +11,7 @@ import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
 import * as zoomBarDemos from "./zoom-bar";
+import * as confidenceIntervalDemos from "./confidence-interval";
 
 export * from "./area";
 export * from "./bar";
@@ -23,6 +24,7 @@ export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
+export * from "./confidence-interval";
 
 import {
 	createChartSandbox,
@@ -100,6 +102,11 @@ export const chartTypes = {
 		vanilla: "RadarChart",
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
+	},
+	ConfidenceIntervalChart: {
+		vanilla: "ConfidenceIntervalChart",
+		angular: "ibm-confidence-interval-chart",
+		vue: "ccv-confidence-interval-chart"
 	}
 };
 
@@ -842,6 +849,32 @@ let allDemoGroups = [
 				data: zoomBarDemos.zoomBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarConfidenceIntervalTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarConfidenceIntervalTimeSeriesData,
+				chartType: chartTypes.ConfidenceIntervalChart,
+				isDemoExample: false
+			}
+		]
+	},
+	{
+		title: "Confidence Interval",
+		description:
+			"Confidence Interval charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
+		demos: [
+			{
+				options:
+					confidenceIntervalDemos.confidenceIntervalTimeSeriesCurvedOptions,
+				data:
+					confidenceIntervalDemos.confidenceIntervalTimeSeriesCurvedData,
+				chartType: chartTypes.ConfidenceIntervalChart
+			},
+			{
+				options:
+					confidenceIntervalDemos.confidenceIntervalTimeSeriesOptions,
+				data: confidenceIntervalDemos.confidenceIntervalTimeSeriesData,
+				chartType: chartTypes.ConfidenceIntervalChart
 			}
 		]
 	}

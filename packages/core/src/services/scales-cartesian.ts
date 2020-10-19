@@ -185,7 +185,8 @@ export class CartesianScales extends Service {
 		scaleType: ScaleTypes,
 		axisPosition: AxisPositions,
 		datum: any,
-		index?: number
+		index?: number,
+		hasConfidence?: boolean
 	) {
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, "axes");
@@ -201,7 +202,16 @@ export class CartesianScales extends Service {
 				scaledValue = scale(new Date(value));
 				break;
 			default:
-				scaledValue = scale(value);
+				if (hasConfidence) {
+					const confidence = Tools.getProperty(options, "confidence");
+					scaledValue = [
+						scale(value),
+						scale(datum[confidence.upperBoundMapsTo]),
+						scale(datum[confidence.lowerBoundMapsTo])
+					];
+				} else {
+					scaledValue = scale(value);
+				}
 		}
 		return scaledValue;
 	}
@@ -209,7 +219,8 @@ export class CartesianScales extends Service {
 	getValueThroughAxisPosition(
 		axisPosition: AxisPositions,
 		datum: any,
-		index?: number
+		index?: number,
+		hasConfidence?: boolean
 	) {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
@@ -219,7 +230,8 @@ export class CartesianScales extends Service {
 			scaleType,
 			axisPosition,
 			datum,
-			index
+			index,
+			hasConfidence
 		);
 	}
 
@@ -227,8 +239,8 @@ export class CartesianScales extends Service {
 		return this.getValueThroughAxisPosition(this.domainAxisPosition, d, i);
 	}
 
-	getRangeValue(d, i) {
-		return this.getValueThroughAxisPosition(this.rangeAxisPosition, d, i);
+	getRangeValue(d, i, c) {
+		return this.getValueThroughAxisPosition(this.rangeAxisPosition, d, i,c);
 	}
 
 	getMainXScaleType() {
@@ -381,6 +393,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const confidence = Tools.getProperty(options, "confidence");
 		const { includeZero } = axisOptions;
 		const scaleType =
 			Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
@@ -426,6 +439,13 @@ export class CartesianScales extends Service {
 			);
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]));
+		} else if (confidence) {
+			allDataValues = [];
+			displayData.forEach((datum) => {
+				allDataValues.push(datum[mapsTo]);
+				allDataValues.push(datum[confidence.upperBoundMapsTo]);
+				allDataValues.push(datum[confidence.lowerBoundMapsTo]);
+			});
 		} else {
 			allDataValues = this.services.zoom
 				.filterDataForRangeAxis(displayData)
