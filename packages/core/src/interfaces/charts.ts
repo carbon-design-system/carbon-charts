@@ -109,7 +109,7 @@ export interface BaseChartOptions {
 		 */
 		pairing?: {
 			/**
-			 * the number of data groups/categories, only if differ from given data
+			 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
 			 */
 			numberOfVariants?: number;
 			/**
