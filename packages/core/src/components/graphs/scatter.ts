@@ -56,6 +56,7 @@ export class Scatter extends Component {
 		const isScatterEnabled =
 			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
 			Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+
 		if (!isScatterEnabled) {
 			return;
 		}
@@ -311,7 +312,7 @@ export class Scatter extends Component {
 	};
 
 	getTooltipData(hoveredX, hoveredY) {
-		return this.model.getDisplayData().filter((d) => {
+		return this.model.getDisplayData(this.configs.groups).filter((d) => {
 			return (
 				hoveredX === this.services.cartesianScales.getDomainValue(d) &&
 				hoveredY === this.services.cartesianScales.getRangeValue(d)

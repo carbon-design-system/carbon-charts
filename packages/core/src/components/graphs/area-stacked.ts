@@ -42,11 +42,6 @@ export class StackedArea extends Component {
 			domainAxisPosition
 		);
 		const isTimeSeries = domainScaleType === ScaleTypes.TIME;
-
-		if (!isTimeSeries) {
-			return;
-		}
-
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
@@ -60,7 +55,7 @@ export class StackedArea extends Component {
 		// D3 area generator function
 		this.areaGenerator = area()
 			// @ts-ignore
-			.x((d) => mainXScale(new Date(d.data.sharedStackKey)))
+			.x((d) => mainXScale(isTimeSeries ? new Date(d.data.sharedStackKey) : d.data.sharedStackKey))
 			.y0((d) => mainYScale(d[0]))
 			.y1((d) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());

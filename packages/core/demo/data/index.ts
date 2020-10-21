@@ -124,6 +124,12 @@ let allDemoGroups = [
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: false
+			},
+			{
+				options: areaDemos.areaDiscreteDomainOptions,
+				data: areaDemos.areaDiscreteDomain,
 				chartType: chartTypes.AreaChart
 			},
 			{

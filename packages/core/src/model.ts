@@ -39,7 +39,7 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getAllDataFromDomain(groups?) {
+	getAllDataFromDomain() {
 		if (!this.getData()) {
 			return null;
 		}
@@ -65,7 +65,7 @@ export class ChartModel {
 				}
 
 				// Check for custom domain
-				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
+				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
 						allData = allData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
@@ -103,7 +103,7 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups(groups);
 		const { groupMapsTo } = this.getOptions().data;
 
-		let allDataFromDomain = this.getAllDataFromDomain(groups);
+		let allDataFromDomain = this.getAllDataFromDomain();
 
 		if (groups) {
 			allDataFromDomain = allDataFromDomain.filter(item => {

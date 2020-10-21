@@ -38,21 +38,22 @@ export class Area extends Component {
 		const areaGenerator = area().curve(this.services.curves.getD3Curve());
 
 		if (orientation === CartesianOrientations.VERTICAL) {
+			domain = this.services.cartesianScales.getMainYScale().domain();
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
-				.y0(cartesianScales.getRangeValue(0))
+				.y0(cartesianScales.getRangeValue(domain[0]))
 				.y1((d, i) => cartesianScales.getRangeValue(d, i));
-			domain = this.services.cartesianScales.getMainYScale().domain();
+
 		} else {
+			domain = this.services.cartesianScales.getMainXScale().domain();
 			areaGenerator
-				.x0(cartesianScales.getRangeValue(0))
+				.x0(cartesianScales.getRangeValue(domain[0]))
 				.x1((d, i) => cartesianScales.getRangeValue(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
-			domain = this.services.cartesianScales.getMainXScale().domain();
 		}
 
 		// Update the bound data on area groups
-		const groupedData = this.model.getGroupedData();
+		const groupedData = this.model.getGroupedData(this.configs.groups);
 
 		// Is gradient enabled or not
 		const isGradientEnabled = Tools.getProperty(

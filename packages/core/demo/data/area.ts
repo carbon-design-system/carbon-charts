@@ -16,6 +16,102 @@ export const areaTimeSeriesData = [
 	{ group: "Dataset 3", date: new Date(2019, 0, 19), value: 31300 }
 ];
 
+
+export const areaDiscreteDomain = [
+	{
+		group: "Dataset 1",
+		value: 10000,
+		key: "a"
+	},
+	{
+		group: "Dataset 1",
+		value: 65000,
+		key: "b"
+	},
+	{
+		group: "Dataset 1",
+		value: 10000,
+		key: "c"
+	},
+	{
+		group: "Dataset 1",
+		value: 49213,
+		key: "d"
+	},
+	{
+		group: "Dataset 1",
+		value: 51213,
+		key: "e"
+	},
+	{
+		group: "Dataset 2",
+		value: 20000,
+		key: "a"
+	},
+	{
+		group: "Dataset 2",
+		value: 25000,
+		key: "b"
+	},
+	{
+		group: "Dataset 2",
+		value: 60000,
+		key: "c"
+	},
+	{
+		group: "Dataset 2",
+		value: 30213,
+		key: "d"
+	},
+	{
+		group: "Dataset 2",
+		value: 55213,
+		key: "e"
+	},
+	{
+		group: "Dataset 3",
+		value: 30000,
+		key: "a"
+	},
+	{
+		group: "Dataset 3",
+		value: 20000,
+		key: "b"
+	},
+	{
+		group: "Dataset 3",
+		value: 40000,
+		key: "c"
+	},
+	{
+		group: "Dataset 3",
+		value: 60213,
+		key: "d"
+	},
+	{
+		group: "Dataset 3",
+		value: 25213,
+		key: "e"
+	}
+];
+
+export const areaDiscreteDomainOptions = {
+	title: "Area (discrete domain)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	}
+};
+
+
 export const areaTimeSeriesOptions = {
 	title: "Area (time series)",
 	axes: {
@@ -130,32 +226,128 @@ export const sparklineOptions = {
 	}
 };
 
+// export const stackedAreaTimeSeriesData = [
+// 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+// 	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
+// 	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: 10000 },
+// 	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
+// 	{ group: "Dataset 1", date: new Date(2019, 0, 17), value: 51213 },
+// 	{ group: "Dataset 2", date: new Date(2019, 0, 1), value: 20000 },
+// 	{ group: "Dataset 2", date: new Date(2019, 0, 5), value: 25000 },
+// 	{ group: "Dataset 2", date: new Date(2019, 0, 8), value: 60000 },
+// 	{ group: "Dataset 2", date: new Date(2019, 0, 13), value: 30213 },
+// 	{ group: "Dataset 2", date: new Date(2019, 0, 17), value: 55213 },
+// 	{ group: "Dataset 3", date: new Date(2019, 0, 1), value: 30000 },
+// 	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: 20000 },
+// 	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 40000 },
+// 	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 60213 },
+// 	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 25213 }
+// ];
+
 export const stackedAreaTimeSeriesData = [
-	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
-	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
-	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: 10000 },
-	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
-	{ group: "Dataset 1", date: new Date(2019, 0, 17), value: 51213 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 1), value: 20000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 5), value: 25000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 8), value: 60000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 13), value: 30213 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 17), value: 55213 },
-	{ group: "Dataset 3", date: new Date(2019, 0, 1), value: 30000 },
-	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: 20000 },
-	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 40000 },
-	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 60213 },
-	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 25213 }
+	{
+		"group": "Dataset 1",
+		"date": "2019-01-01T05:00:00.000Z",
+		"value": 10000,
+		"key": "a"
+	},
+	{
+		"group": "Dataset 1",
+		"date": "2019-01-05T05:00:00.000Z",
+		"value": 65000,
+		"key": "b"
+	},
+	{
+		"group": "Dataset 1",
+		"date": "2019-01-08T05:00:00.000Z",
+		"value": 10000,
+		"key": "c"
+	},
+	{
+		"group": "Dataset 1",
+		"date": "2019-01-13T05:00:00.000Z",
+		"value": 49213,
+		"key": "d"
+	},
+	{
+		"group": "Dataset 1",
+		"date": "2019-01-17T05:00:00.000Z",
+		"value": 51213,
+		"key": "e"
+	},
+	{
+		"group": "Dataset 2",
+		"date": "2019-01-01T05:00:00.000Z",
+		"value": 20000,
+		"key": "a"
+	},
+	{
+		"group": "Dataset 2",
+		"date": "2019-01-05T05:00:00.000Z",
+		"value": 25000,
+		"key": "b"
+	},
+	{
+		"group": "Dataset 2",
+		"date": "2019-01-08T05:00:00.000Z",
+		"value": 60000,
+		"key": "c"
+	},
+	{
+		"group": "Dataset 2",
+		"date": "2019-01-13T05:00:00.000Z",
+		"value": 30213,
+		"key": "d"
+	},
+	{
+		"group": "Dataset 2",
+		"date": "2019-01-17T05:00:00.000Z",
+		"value": 55213,
+		"key": "e"
+	},
+	{
+		"group": "Dataset 3",
+		"date": "2019-01-01T05:00:00.000Z",
+		"value": 30000,
+		"key": "a"
+	},
+	{
+		"group": "Dataset 3",
+		"date": "2019-01-05T05:00:00.000Z",
+		"value": 20000,
+		"key": "b"
+	},
+	{
+		"group": "Dataset 3",
+		"date": "2019-01-08T05:00:00.000Z",
+		"value": 40000,
+		"key": "c"
+	},
+	{
+		"group": "Dataset 3",
+		"date": "2019-01-13T05:00:00.000Z",
+		"value": 60213,
+		"key": "d"
+	},
+	{
+		"group": "Dataset 3",
+		"date": "2019-01-17T05:00:00.000Z",
+		"value": 25213,
+		"key": "e"
+	}
 ];
 
 export const stackedAreaTimeSeriesOptions = {
 	title: "Stacked area (time series)",
 	axes: {
 		left: {
-			stacked: true
+			stacked: true,
+			scale: "linear",
+			mapsTo: "value"
 		},
 		bottom: {
-			scaleType: "time"
+			scaleType: "labels",
+			mapsTo: "key"
 		}
 	},
 	curve: "curveMonotoneX"
