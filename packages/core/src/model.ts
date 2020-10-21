@@ -473,7 +473,7 @@ export class ChartModel {
 
 		return (
 			userProvidedScale !== null &&
-			Object.keys(userProvidedScale).length > 0
+			Object.keys(userProvidedScale).length >= this.getDataGroups().length
 		);
 	}
 

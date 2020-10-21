@@ -410,10 +410,11 @@ export class Scatter extends Component {
 				hoveredElement.classed("hovered", false);
 
 				if (
-					!self.configs.filled &&
-					hoveredElement.attr("fill-opacity") == "1"
+					(!self.configs.filled &&
+					hoveredElement.attr("fill-opacity") == "1")
 				) {
 					hoveredElement.classed("unfilled", true);
+					hoveredElement.style("fill", null);
 				}
 
 				// Dispatch mouse event

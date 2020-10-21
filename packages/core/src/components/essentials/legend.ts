@@ -97,8 +97,7 @@ export class Legend extends Component {
 				}
 			})
 			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE &&
-					!paletteIndex
+				return d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name)
 					: null;
 			})

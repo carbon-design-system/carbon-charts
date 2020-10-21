@@ -196,9 +196,11 @@ export const lineColorPaletteOptions = {
 		}
 	},
 	color: {
-		pairing: {
-			numberOfVariants: 5,
-			index: 2
+		scale: {
+			"Dataset 1": "#925699",
+			"Dataset 2": "#525669",
+			"Dataset 3": "#725699",
+			"Dataset 4": "#ccc"
 		}
 	}
 };
