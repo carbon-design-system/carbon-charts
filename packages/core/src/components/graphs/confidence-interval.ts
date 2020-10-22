@@ -2,11 +2,9 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { CartesianOrientations, Events } from "../../interfaces";
-import { GradientUtils } from "../../services";
-import { Tools } from "../../tools";
 
 // D3 Imports
-import { area } from "d3-shape";
+import { area, line } from "d3-shape";
 
 export class ConfidenceInterval extends Component {
 	type = "area";
@@ -31,9 +29,10 @@ export class ConfidenceInterval extends Component {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 		let domain = [0, 0];
 
-		const { cartesianScales } = this.services;
+		const { cartesianScales, curves } = this.services;
 
 		const orientation = cartesianScales.getOrientation();
+
 		const areaGenerator = area().curve(this.services.curves.getD3Curve());
 
 		// Update the bound data on area groups
@@ -56,8 +55,14 @@ export class ConfidenceInterval extends Component {
 			domain = this.services.cartesianScales.getMainYScale().domain();
 		} else {
 			areaGenerator
-				.x0(cartesianScales.getRangeValue(0))
-				.x1((d, i) => cartesianScales.getRangeValue(d, i))
+				.x0((d, i) =>
+					confidence
+						? cartesianScales.getRangeValue(d, i, confidence)[2]
+						: cartesianScales.getRangeValue(d, i, confidence))
+				.x1((d, i) =>
+					confidence
+						? cartesianScales.getRangeValue(d, i, confidence)[1]
+						: cartesianScales.getRangeValue(d, i, confidence))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
 			domain = this.services.cartesianScales.getMainXScale().domain();
 		}
@@ -65,12 +70,6 @@ export class ConfidenceInterval extends Component {
 		const areas = svg
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
-
-		if (!this.parent.selectAll("defs linearGradient").empty()) {
-			this.parent.selectAll("defs linearGradient").each(function () {
-				this.parentNode.remove();
-			});
-		}
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -94,14 +93,18 @@ export class ConfidenceInterval extends Component {
 					animate
 				)
 			)
-			.attr("opacity", Configuration.area.opacity.selected)
+			.attr("opacity", 1)
+			.style("fill-opacity", Configuration.area.opacity.selected)
 			.attr("class", "area")
 			.attr("d", (group) => {
 				const { data } = group;
 				return areaGenerator(data);
-			});
-
-		// Apply shared styles and datum
+			})
+			.attr("stroke", (group) => {
+				return this.model.getStrokeColor(group.name);
+			})
+			.style("stroke-dasharray", ("2, 2"))
+			.attr("stroke-width", 0.7 + "px");
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
