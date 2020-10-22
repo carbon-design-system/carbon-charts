@@ -26,11 +26,11 @@
 </a>
 
 ## Design specifications
-<a href="https://www.carbondesignsystem.com/resources#data-visualization" target="_blank">
+<a href="https://www.carbondesignsystem.com/data-visualization/getting-started" target="_blank">
   <img src="./assets/dv_dark_theme.png" width=700 />
 </a>
 
-Carbon data visualization design specifications can be found [here](https://www.carbondesignsystem.com/resources#data-visualization).
+Carbon data visualization design specifications can be found [here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
 Read the release change logs [here](./CHANGELOG.md)
