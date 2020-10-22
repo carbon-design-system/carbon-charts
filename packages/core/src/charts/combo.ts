@@ -4,7 +4,8 @@ import * as Configuration from "../configuration";
 import {
 	ChartConfig,
 	ComboChartOptions,
-	ComboChartTypes
+	ComboChartTypes,
+	Skeletons
 } from "../interfaces/index";
 import { Tools } from "../tools";
 import { ChartModel } from "../model";
@@ -19,17 +20,23 @@ import {
 	TwoDimensionalAxes,
 	ZeroLine,
 	Scatter,
+	StackedScatter,
+	Area,
+	StackedArea,
 	Ruler,
 	StackedBarRuler,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Component
+	Component,
+	Skeleton
 } from "../components/index";
 
 const graphComponentsMap = {
 	[ComboChartTypes.LINE]: [Line, Scatter],
 	[ComboChartTypes.SCATTER]: [Scatter],
+	[ComboChartTypes.AREA]: [Area, Line, Scatter],
+	[ComboChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
 	[ComboChartTypes.SIMPLE_BAR]: [SimpleBar, ZeroLine],
 	[ComboChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
 	[ComboChartTypes.STACKED_BAR]: [StackedBar, StackedBarRuler]
@@ -71,14 +78,36 @@ export class ComboChart extends AxisChart {
 	}
 
 	getComponentsByChartType(graph: string) {
-		const { chartTypes } = this.model.getOptions();
-		return graphComponentsMap[graph].map(Component => new Component(this.model, this.services, {groups: chartTypes[graph]}));
+		const groups = this.getGroupsByChartType(graph);
+		return graphComponentsMap[graph].map(Component => new Component(this.model, this.services, {groups: groups}));
 	}
 
 	getGraphComponents() {
 		const { chartTypes } = this.model.getOptions();
 		const graphsComponents = Object.keys(chartTypes).map(graph => this.getComponentsByChartType(graph));
 		return Tools.removeArrayDuplicates(Tools.flatten(graphsComponents));
+	}
+
+	// returns the groups that the chart type should add into the configs
+	getGroupsByChartType(chart) {
+		const { chartTypes } = this.model.getOptions();
+		let groups = chartTypes[chart];
+		if (chart === ComboChartTypes.LINE) {
+			if (chartTypes[ComboChartTypes.AREA]) {
+				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
+			}
+			if (chartTypes[ComboChartTypes.SCATTER]) {
+				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
+			}
+		} else if (chart === ComboChartTypes.SCATTER) {
+			if (chartTypes[ComboChartTypes.AREA]) {
+				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
+			}
+			if (chartTypes[ComboChartTypes.LINE]) {
+				groups = groups.concat(chartTypes[ComboChartTypes.LINE]);
+			}
+		}
+		return groups;
 	}
 
 	getComponents() {
@@ -90,6 +119,9 @@ export class ComboChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.GRID
+			}),
 			...(stackedRulerEnabled ? [] : [new Ruler(this.model, this.services)]),
 			...this.getGraphComponents()
 		];

@@ -423,9 +423,6 @@ export const lineSkeletonOptions = {
 	}
 };
 
-
-
-
 export const lineTimeSeriesDualAxesData = [
 	{ group: "Temperature", date: new Date(2019, 0, 1), temp: 23 },
 	{ group: "Temperature", date: new Date(2019, 1, 1), temp: 35 },
@@ -438,7 +435,6 @@ export const lineTimeSeriesDualAxesData = [
 	{ group: "Rainfall", date: new Date(2019, 3, 1), rainfall: 43 },
 	{ group: "Rainfall", date: new Date(2019, 4, 1), rainfall: 53 }
 ];
-
 
 export const dualLine = {
 	title: "Combo Line + Line (dual axes)",

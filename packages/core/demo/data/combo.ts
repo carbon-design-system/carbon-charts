@@ -180,3 +180,117 @@ export const comboGroupedOptions = {
 		]
 	}
 };
+
+
+export const comboAreaLineData = [
+	{ group: "Health", key: "January", value: 312 },
+	{ group: "Health", key: "February", value: 232 },
+	{ group: "Health", key: "March", value: 432 },
+	{ group: "Health", key: "April", value: 712 },
+	{ group: "Health", key: "May", value: 834 },
+	{ group: "Health", key: "June", value: 800 },
+	{ group: "Health", key: "July", value: 612 },
+	{ group: "Health", key: "August", value: 442 },
+	{ group: "Temperature", key: "January", temp: -20 },
+	{ group: "Temperature", key: "February", temp: -12 },
+	{ group: "Temperature", key: "March", temp: 3 },
+	{ group: "Temperature", key: "April", temp: 18 },
+	{ group: "Temperature", key: "May", temp: 24 },
+	{ group: "Temperature", key: "June", temp: 34 },
+	{ group: "Temperature", key: "July", temp: 37 },
+	{ group: "Temperature", key: "August", temp: 30 }
+
+];
+
+export const comboAreaLineOptions = {
+	title: "Combo Line + Area",
+	axes: {
+		left: {
+			title: "Score",
+			mapsTo: "value"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		right: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			datasets: [
+				"Temperature"
+			]
+		}
+	},
+	chartTypes: {
+		"area": [
+			"Health"
+		],
+		"line": [
+			"Temperature"
+		]
+	},
+	curve: "curveNatural"
+};
+
+
+
+export const comboLineScatterData = [
+	{ group: "High", key: "Monday", temp: 20 },
+	{ group: "High", key: "Tuesday", temp: 33 },
+	{ group: "High", key: "Wednesday", temp: 23 },
+	{ group: "High", key: "Thursday", temp: 23 },
+	{ group: "High", key: "Friday", temp: 32 },
+	{ group: "Low", key: "Monday", temp: 12 },
+	{ group: "Low", key: "Tuesday", temp: 22 },
+	{ group: "Low", key: "Wednesday", temp: 20 },
+	{ group: "Low", key: "Thursday", temp: 22 },
+	{ group: "Low", key: "Friday", temp: 25 },
+	{ group: "Temperature", key: "Monday", temp: 24 },
+	{ group: "Temperature", key: "Tuesday", temp: 28 },
+	{ group: "Temperature", key: "Wednesday", temp: 30 },
+	{ group: "Temperature", key: "Thursday", temp: 29 },
+	{ group: "Temperature", key: "Friday", temp: 24 },
+	{ group: "Attendance", key: "Monday", value: 2650 },
+	{ group: "Attendance", key: "Tuesday", value: 2553 },
+	{ group: "Attendance", key: "Wednesday", value: 3433 },
+	{ group: "Attendance", key: "Thursday", value: 3754 },
+	{ group: "Attendance", key: "Friday", value: 3744 }
+];
+
+export const comboLineScatterOptions = {
+	title: "Combo Line + Scatter + Bar",
+	axes: {
+		left: {
+			mapsTo: "value",
+			title: "Attendance"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		right: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			scaleType: "linear",
+			datasets: [
+				"Temperature",
+				"High",
+				"Low"
+			]
+		}
+	},
+	chartTypes: {
+		"simple-bar": [
+			"Attendance"
+		],
+		"line": [
+			"Temperature"
+		],
+		"scatter": [
+			"High",
+			"Low"
+		]
+	}
+};
+
+

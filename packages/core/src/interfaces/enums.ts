@@ -181,5 +181,7 @@ export enum ComboChartTypes {
 	LINE = "line",
 	SIMPLE_BAR = "simple-bar",
 	STACKED_BAR = "stacked-bar",
-	GROUPED_BAR = "grouped-bar"
+	GROUPED_BAR = "grouped-bar",
+	AREA = "area",
+	STACKED_AREA = "stacked-area"
 }

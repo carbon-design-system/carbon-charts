@@ -169,9 +169,7 @@ export const scatterSkeletonOptions = {
 	}
 };
 
-
-
-// scatter - skeleton
+// scatter - dual axes
 export const scatterDualAxesData = [
 	{ group: "Orders", date: "January", orderCount: 121 },
 	{ group: "Orders", date: "February", orderCount: 321 },
@@ -184,6 +182,7 @@ export const scatterDualAxesData = [
 	{ group: "Products", date: "April", productCount: 15900 },
 	{ group: "Products", date: "May", productCount: 34100 }
 ];
+
 export const scatterDualAxesOptions = {
 	title: "Scatter (dual axes)",
 	axes: {

@@ -825,6 +825,18 @@ let allDemoGroups = [
 				data: comboDemos.comboHorizontalData,
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboAreaLineOptions,
+				data: comboDemos.comboAreaLineData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboLineScatterOptions,
+				data: comboDemos.comboLineScatterData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
 			}
 		]
 	},
