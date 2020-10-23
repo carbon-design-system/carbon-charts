@@ -106,7 +106,7 @@ export const sparklineLoadingOptions = {
 		enabled: false
 	},
 	data: {
-		sparklineLoading: true
+		loading: true
 	}
 };
 
