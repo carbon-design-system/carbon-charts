@@ -120,6 +120,17 @@ export class StackedScatter extends Scatter {
 				}
 			});
 		});
-		return tooltipData;
+
+		return this.model.getDisplayData().filter((datapoint) => {
+			return (
+				tooltipData.find((tooltipDatapoint) => {
+					return (
+						tooltipDatapoint[groupMapsTo] == datapoint[groupMapsTo] &&
+						tooltipDatapoint[domainIdentifier] == datapoint[domainIdentifier] &&
+						tooltipDatapoint[rangeIdentifier] == datapoint[rangeIdentifier]
+					);
+				}) !== undefined
+			);
+		});
 	}
 }
