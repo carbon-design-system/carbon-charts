@@ -2,11 +2,13 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { CartesianOrientations, Events } from "../../interfaces";
-import { GradientUtils } from "../../services";
+import { GradientUtils, DOMUtils } from "../../services";
 import { Tools } from "../../tools";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { area } from "d3-shape";
+import { select } from "d3-selection";
 
 export class Area extends Component {
 	type = "area";
@@ -76,17 +78,24 @@ export class Area extends Component {
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
 
+		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const chartSVG = DOMUtils.appendOrSelect(
+			select(this.services.domUtils.getHolder()), 
+			`svg.${settings.prefix}--${chartprefix}--chart-svg`
+		);
+
 		// The fill value of area has been overwritten, get color value from stroke color class instead
-		const areaElement = document.getElementsByClassName(
-			this.model.getColorClassName(["stroke"], groupedData[0].name)
-		)[0];
-
-		if (isGradientAllowed && areaElement) {
-			const colorValue = getComputedStyle(
-				areaElement,
+		const strokePathElement = chartSVG.select(
+			`path.${this.model.getColorClassName(["stroke"], groupedData[0].name)}`
+		).node();
+		const colorValue = strokePathElement
+			? getComputedStyle(
+				strokePathElement,
 				null
-			).getPropertyValue("stroke");
+			).getPropertyValue("stroke")
+			: null;
 
+		if (isGradientAllowed && colorValue) {
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id:
