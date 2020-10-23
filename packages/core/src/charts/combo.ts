@@ -77,29 +77,23 @@ export class ComboChart extends AxisChart {
 		this.init(holder, chartConfigs);
 	}
 
-	getComponentsByChartType(graph: string) {
-		const groups = this.getGroupsByChartType(graph);
-		return graphComponentsMap[graph].map(Component => new Component(this.model, this.services, {groups: groups}));
-	}
-
 	getGraphComponents() {
 		const { chartTypes } = this.model.getOptions();
-		const graphsComponents = Object.keys(chartTypes).map(graph => this.getComponentsByChartType(graph));
-		return Tools.removeArrayDuplicates(Tools.flatten(graphsComponents));
+		const graphComponents = Object.keys(chartTypes).map(graph => {
+			return graphComponentsMap[graph].map(Component => new Component(this.model, this.services, {groups: this.getGroupsByChartType(graph)}));
+		});
+		return Tools.removeArrayDuplicates(Tools.flatten(graphComponents));
 	}
 
 	// returns the groups that the chart type should add into the configs
 	getGroupsByChartType(chart) {
 		const { chartTypes } = this.model.getOptions();
 		let groups = chartTypes[chart];
-		if (chart === ComboChartTypes.LINE) {
-			if (chartTypes[ComboChartTypes.AREA]) {
-				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
-			}
-			if (chartTypes[ComboChartTypes.SCATTER]) {
-				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
-			}
+		if (chart === ComboChartTypes.LINE && chartTypes[ComboChartTypes.AREA]) {
+			// groups that use area chart need to also use line
+			groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
 		} else if (chart === ComboChartTypes.SCATTER) {
+			// groups that use area or line chart, need to use scatter
 			if (chartTypes[ComboChartTypes.AREA]) {
 				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
 			}
