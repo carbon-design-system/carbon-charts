@@ -415,7 +415,7 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: lineDemos.lineColorPaletteOptions,
+				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			},

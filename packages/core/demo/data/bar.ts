@@ -90,11 +90,6 @@ export const simpleBarOptions = {
 			mapsTo: "group",
 			scaleType: "labels"
 		}
-	},
-	color: {
-		pairing: {
-			index: 1
-		}
 	}
 };
 
@@ -112,7 +107,7 @@ export const simpleBarColorPaletteOptions = {
 	color: {
 		pairing: {
 			numberOfVariants: 7,
-			index: 2
+			option: 2
 		}
 	}
 };

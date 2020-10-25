@@ -666,7 +666,7 @@ export class ChartModel {
 			numberOfVariants = this.allDataGroups.length;
 		}
 
-		let pairingIndex = Tools.getProperty(colorPairingOptions, "index");
+		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
 		const availableColorPairings = {
 			"1-color": 4,
 			"2-color": 5,
@@ -680,15 +680,15 @@ export class ChartModel {
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;
 
 		// Use default palette if user choice is not in range
-		pairingIndex =
-			pairingIndex <= availableColorPairings[`${numberOfColors}-color`]
-				? pairingIndex
+		pairingOption =
+			pairingOption <= availableColorPairings[`${numberOfColors}-color`]
+				? pairingOption
 				: 1;
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
 			(dataGroup, index) =>
-				`${numberOfColors}-${pairingIndex}-${(index % 14) + 1}`
+				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
 		);
 
 		// If there is no valid user provided scale, use the default set of colors

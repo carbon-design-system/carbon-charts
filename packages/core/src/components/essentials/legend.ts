@@ -64,11 +64,11 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 
-		const paletteIndex = Tools.getProperty(
+		const paletteOption = Tools.getProperty(
 			options,
 			"color",
 			"pairing",
-			"index"
+			"option"
 		);
 
 		addedLegendItems
@@ -88,7 +88,7 @@ export class Legend extends Component {
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.attr("class", (d, i) => {
-				if (paletteIndex) {
+				if (paletteOption) {
 					return this.model.getColorClassName(
 						["fill"],
 						d.name,

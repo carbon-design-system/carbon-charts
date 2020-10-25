@@ -181,8 +181,8 @@ export const lineSelectedGroupsOptions = {
 	}
 };
 
-export const lineColorPaletteOptions = {
-	title: "Line (color palette)",
+export const lineCustomColorOptions = {
+	title: "Line (custom colors)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",

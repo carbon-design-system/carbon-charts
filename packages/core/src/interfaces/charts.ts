@@ -113,9 +113,9 @@ export interface BaseChartOptions {
 			 */
 			numberOfVariants?: number;
 			/**
-			 * the number of the preset
+			 * the option number of the color paring
 			 */
-			index?: number;
+			option?: number;
 		};
 		/*
 		 * options related to gradient
