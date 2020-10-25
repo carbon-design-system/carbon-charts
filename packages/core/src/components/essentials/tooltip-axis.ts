@@ -78,7 +78,7 @@ export class AxisChartsTooltip extends Tooltip {
 				{
 					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
-					color: this.model.colorIsProvided() ? this.model.getFillColor(datum[groupMapsTo]) : null,
+					color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
 					class: this.model.getColorClassName(
 						["tooltip"],
 						datum[groupMapsTo]
@@ -98,7 +98,7 @@ export class AxisChartsTooltip extends Tooltip {
 					.map((datum) => ({
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
-						color: this.model.colorIsProvided() ? this.model.getFillColor(datum[groupMapsTo]) : null,
+						color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
 						class: this.model.getColorClassName(
 							["tooltip"],
 							datum[groupMapsTo]

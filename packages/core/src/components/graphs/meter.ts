@@ -40,7 +40,7 @@ export class Meter extends Component {
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const className =
-			status != null && !self.model.colorIsProvided()
+			status != null && !self.model.isCustomColorValid()
 				? `value status--${status}`
 				: "";
 

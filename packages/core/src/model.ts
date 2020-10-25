@@ -333,7 +333,7 @@ export class ChartModel {
 
 		this.updateAllDataGroups();
 
-		this.setUserProvidedColorScale();
+		this.setCustomColorScale();
 		this.setColorClassNames();
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
@@ -433,7 +433,7 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		if (!this.colorIsProvided()) {
+		if (!this.isCustomColorValid()) {
 			return null;
 		}
 		const options = this.getOptions();
@@ -447,7 +447,7 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		if (!this.colorIsProvided()) {
+		if (!this.isCustomColorValid()) {
 			return null;
 		}
 
@@ -464,21 +464,25 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
-	colorIsProvided() {
+	isCustomColorValid() {
 		const userProvidedScale = Tools.getProperty(
 			this.getOptions(),
 			"color",
 			"scale"
 		);
+		const dataGroups = this.getDataGroups();
 
-		return (
-			userProvidedScale !== null &&
-			Object.keys(userProvidedScale).length >= this.getDataGroups().length
-		);
+		if (userProvidedScale == null ||
+			Object.keys(userProvidedScale).length < dataGroups.length
+		) {
+			return false;
+		}
+
+		return dataGroups.every(dataGroup => Object.keys(userProvidedScale).includes(dataGroup.name));
 	}
 
 	getColorClassName(types: string[], group: any, originalClassName?: any) {
-		if (this.colorIsProvided()) {
+		if (this.isCustomColorValid()) {
 			return originalClassName;
 		}
 
@@ -623,8 +627,8 @@ export class ChartModel {
 	/*
 	 * Fill scales
 	 */
-	protected setUserProvidedColorScale() {
-		if (!this.colorIsProvided()) {
+	protected setCustomColorScale() {
+		if (!this.isCustomColorValid()) {
 			return;
 		}
 
@@ -692,7 +696,7 @@ export class ChartModel {
 		);
 
 		// If there is no valid user provided scale, use the default set of colors
-		if (!this.colorIsProvided()) {
+		if (!this.isCustomColorValid()) {
 			this.colorClassNames = scaleOrdinal()
 				.range(colorPairing)
 				.domain(this.allDataGroups);
