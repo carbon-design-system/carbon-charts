@@ -49,7 +49,7 @@ const lineOptions = {
 	color: {
 		pairing: {
 			numberOfVariants: 3; // use a palette with 3 color variants
-			index: 2 // use the 2nd option of 3 color charts
+			option: 2 // use the 2nd option of 3 color charts
 		}
 	}
 };
