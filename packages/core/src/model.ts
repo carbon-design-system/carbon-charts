@@ -2,6 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import { Events, ScaleTypes } from "./interfaces";
+import { ColorClassNameTypes } from "./interfaces/enums";
 
 // D3
 import { map } from "d3-collection";
@@ -481,7 +482,7 @@ export class ChartModel {
 		return dataGroups.every(dataGroup => Object.keys(userProvidedScale).includes(dataGroup.name));
 	}
 
-	getColorClassName(types: string[], group: any, originalClassName?: any) {
+	getColorClassName(types: ColorClassNameTypes[], group: any, originalClassName?: any) {
 		if (this.isCustomColorValid()) {
 			return originalClassName;
 		}
@@ -671,7 +672,7 @@ export class ChartModel {
 		}
 
 		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
-		const availableColorPairings = {
+		const colorPairingCounts = {
 			"1-color": 4,
 			"2-color": 5,
 			"3-color": 5,
@@ -685,7 +686,7 @@ export class ChartModel {
 
 		// Use default palette if user choice is not in range
 		pairingOption =
-			pairingOption <= availableColorPairings[`${numberOfColors}-color`]
+			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
 				? pairingOption
 				: 1;
 

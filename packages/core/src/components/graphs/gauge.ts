@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Roles, Events, GaugeTypes, ArrowDirections } from "../../interfaces";
+import { Roles, Events, GaugeTypes, ArrowDirections, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -127,7 +127,7 @@ export class Gauge extends Component {
 			.append("path")
 			.attr("class", (d) =>
 				this.model.getColorClassName(
-					["fill"],
+					[ColorClassNameTypes.FILL],
 					d[groupMapsTo],
 					"arc-foreground"
 				)

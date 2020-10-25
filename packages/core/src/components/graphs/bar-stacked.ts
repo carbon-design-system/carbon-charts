@@ -1,7 +1,7 @@
 // Internal Imports
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
-import { Roles, Events, CartesianOrientations } from "../../interfaces";
+import { Roles, Events, CartesianOrientations, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -79,7 +79,7 @@ export class StackedBar extends Bar {
 				)
 			)
 			.attr("class", (d) =>
-				this.model.getColorClassName(["fill"], d[groupMapsTo], "bar")
+				this.model.getColorClassName([ColorClassNameTypes.FILL], d[groupMapsTo], "bar")
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {

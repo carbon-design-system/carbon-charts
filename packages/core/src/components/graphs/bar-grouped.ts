@@ -1,7 +1,12 @@
 // Internal Imports
 import { Bar } from "./bar";
 import { Tools } from "../../tools";
-import { CartesianOrientations, Events, Roles } from "../../interfaces";
+import {
+	CartesianOrientations,
+	ColorClassNameTypes,
+	Events,
+	Roles
+} from "../../interfaces";
 
 // D3 Imports
 import { map } from "d3-collection";
@@ -107,7 +112,7 @@ export class GroupedBar extends Bar {
 				)
 			)
 			.attr("class", (d) =>
-				this.model.getColorClassName(["fill"], d[groupMapsTo], "bar")
+				this.model.getColorClassName([ColorClassNameTypes.FILL], d[groupMapsTo], "bar")
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d) => {
@@ -297,9 +302,7 @@ export class GroupedBar extends Bar {
 		// If there's a provided width, compare with maxWidth and
 		// Determine which to return
 		if (providedWidth !== null) {
-			if (providedMaxWidth === null) {
-				return providedWidth;
-			} else if (providedWidth <= providedMaxWidth) {
+			if (providedMaxWidth === null || providedWidth <= providedMaxWidth) {
 				return providedWidth;
 			}
 		}

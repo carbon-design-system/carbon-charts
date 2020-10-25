@@ -1,7 +1,11 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { CartesianOrientations, Events } from "../../interfaces";
+import {
+	CartesianOrientations,
+	Events,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { GradientUtils, DOMUtils } from "../../services";
 import { Tools } from "../../tools";
 import settings from "carbon-components/es/globals/js/settings";
@@ -86,7 +90,7 @@ export class Area extends Component {
 
 		// The fill value of area has been overwritten, get color value from stroke color class instead
 		const strokePathElement = chartSVG.select(
-			`path.${this.model.getColorClassName(["stroke"], groupedData[0].name)}`
+			`path.${this.model.getColorClassName([ColorClassNameTypes.STROKE], groupedData[0].name)}`
 		).node();
 		const colorValue = strokePathElement
 			? getComputedStyle(
@@ -139,7 +143,7 @@ export class Area extends Component {
 				)
 				.attr("class", "area")
 				.attr("class", (group) =>
-					this.model.getColorClassName(["fill"], group.name, "area")
+					this.model.getColorClassName([ColorClassNameTypes.FILL], group.name, "area")
 				)
 				.attr("d", (group) => {
 					const { data } = group;
@@ -151,7 +155,7 @@ export class Area extends Component {
 				.merge(areas)
 				.attr("class", "area")
 				.attr("class", (group) =>
-					this.model.getColorClassName(["fill"], group.name, "area")
+					this.model.getColorClassName([ColorClassNameTypes.FILL], group.name, "area")
 				)
 				.attr("fill", (group) => self.model.getFillColor(group.name))
 				.transition(

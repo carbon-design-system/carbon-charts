@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Events, Roles } from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import {
 	Point,
@@ -453,7 +453,7 @@ export class Radar extends Component {
 					.append("path")
 					.attr("class", (group) =>
 						this.model.getColorClassName(
-							["fill"],
+							[ColorClassNameTypes.FILL],
 							group.name,
 							"blob"
 						)
@@ -523,7 +523,7 @@ export class Radar extends Component {
 			)
 			.attr("class", (d) =>
 				this.model.getColorClassName(
-					["fill"],
+					[ColorClassNameTypes.FILL],
 					d[groupMapsTo],
 					Tools.kebabCase(d[angle])
 				)
@@ -839,7 +839,7 @@ export class Radar extends Component {
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
 							class: self.model.getColorClassName(
-								["tooltip"],
+								[ColorClassNameTypes.TOOLTIP],
 								datum[groupMapsTo]
 							)
 						}))

@@ -1,5 +1,9 @@
 import { Tooltip } from "./tooltip";
-import { AxisPositions, ScaleTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	ScaleTypes,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 
 import { format } from "date-fns";
@@ -80,7 +84,7 @@ export class AxisChartsTooltip extends Tooltip {
 					value: datum[groupMapsTo],
 					color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
 					class: this.model.getColorClassName(
-						["tooltip"],
+						[ColorClassNameTypes.TOOLTIP],
 						datum[groupMapsTo]
 					)
 				}
@@ -100,7 +104,7 @@ export class AxisChartsTooltip extends Tooltip {
 						value: this.valueFormatter(datum[rangeIdentifier]),
 						color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
 						class: this.model.getColorClassName(
-							["tooltip"],
+							[ColorClassNameTypes.TOOLTIP],
 							datum[groupMapsTo]
 						)
 					}))

@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { Roles, Events } from "../../interfaces";
+import { Roles, Events, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -201,13 +201,13 @@ export class Scatter extends Component {
 					)
 				) {
 					return this.model.getColorClassName(
-						["fill", "stroke"],
+						[ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 						d[groupMapsTo],
 						"dot"
 					);
 				}
 				return this.model.getColorClassName(
-					["stroke"],
+					[ColorClassNameTypes.STROKE],
 					d[groupMapsTo],
 					"dot"
 				);
@@ -345,7 +345,7 @@ export class Scatter extends Component {
 					.classed("hovered", true)
 					.attr("class", (d) =>
 						self.model.getColorClassName(
-							["fill"],
+							[ColorClassNameTypes.FILL],
 							d[groupMapsTo],
 							hoveredElement.attr("class")
 						)
@@ -411,7 +411,7 @@ export class Scatter extends Component {
 
 				if (
 					(!self.configs.filled &&
-					hoveredElement.attr("fill-opacity") == "1")
+					hoveredElement.attr("fill-opacity") === "1")
 				) {
 					hoveredElement.classed("unfilled", true);
 					hoveredElement.style("fill", null);

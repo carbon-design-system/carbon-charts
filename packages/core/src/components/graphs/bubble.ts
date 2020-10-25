@@ -1,7 +1,7 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
-import { Roles } from "../../interfaces";
+import { Roles, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { Selection } from "d3-selection";
@@ -68,7 +68,7 @@ export class Bubble extends Scatter {
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
 			.attr("class", (d) =>
 				this.model.getColorClassName(
-					["fill", "stroke"],
+					[ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 					d[groupMapsTo],
 					"dot"
 				)

@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, Events } from "../../interfaces";
+import { Roles, Events, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -100,7 +100,7 @@ export class Line extends Component {
 			.merge(lines)
 			.data(data, (group) => group.name)
 			.attr("class", (group) =>
-				this.model.getColorClassName(["stroke"], group.name, "line")
+				this.model.getColorClassName([ColorClassNameTypes.STROKE], group.name, "line")
 			)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)

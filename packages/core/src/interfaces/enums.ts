@@ -12,6 +12,15 @@ export enum ChartTheme {
 }
 
 /**
+ * 
+ */
+export enum ColorClassNameTypes {
+	FILL = 'fill',
+	STROKE = 'stroke',
+	TOOLTIP = 'tooltip'
+}
+
+/**
  * enum of all possible axis positions
  */
 export enum AxisPositions {

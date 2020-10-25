@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, ScaleTypes, Events } from "../../interfaces";
+import { Roles, ScaleTypes, Events, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
@@ -74,7 +74,7 @@ export class StackedArea extends Component {
 			.attr("class", "area")
 			.attr("class", (d) =>
 				this.model.getColorClassName(
-					["fill"],
+					[ColorClassNameTypes.FILL],
 					d[0][groupMapsTo],
 					"area"
 				)

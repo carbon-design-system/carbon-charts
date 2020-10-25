@@ -1,11 +1,11 @@
 // Internal Imports
 import { Component } from "../component";
-import { DOMUtils } from "../../services";
+import { DOMUtils, } from "../../services";
 import { Tools } from "../../tools";
+import { Roles, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { scaleLinear } from "d3-scale";
-import { Roles } from "../../interfaces";
 
 export class Meter extends Component {
 	type = "meter";
@@ -55,7 +55,7 @@ export class Meter extends Component {
 			.attr("height", Tools.getProperty(options, "meter", "height"))
 			.attr("class", (d) =>
 				this.model.getColorClassName(
-					["fill"],
+					[ColorClassNameTypes.FILL],
 					d[groupMapsTo],
 					className
 				)

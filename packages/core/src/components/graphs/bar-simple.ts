@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { Events, Roles } from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -54,7 +54,7 @@ export class SimpleBar extends Bar {
 				)
 			)
 			.attr("class", (d) =>
-				this.model.getColorClassName(["fill"], d[groupMapsTo], "bar")
+				this.model.getColorClassName([ColorClassNameTypes.FILL], d[groupMapsTo], "bar")
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
@@ -120,9 +120,6 @@ export class SimpleBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
-
 		const self = this;
 		this.parent
 			.selectAll("path.bar")

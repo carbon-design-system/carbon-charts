@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
+import { ColorClassNameTypes } from "../../interfaces/enums"; 
 import {
 	LegendOrientations,
 	Roles,
@@ -90,7 +91,7 @@ export class Legend extends Component {
 			.attr("class", (d, i) => {
 				if (paletteOption) {
 					return this.model.getColorClassName(
-						["fill"],
+						[ColorClassNameTypes.FILL],
 						d.name,
 						"checkbox"
 					);
