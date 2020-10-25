@@ -79,7 +79,11 @@ export class StackedBar extends Bar {
 				)
 			)
 			.attr("class", (d) =>
-				this.model.getColorClassName([ColorClassNameTypes.FILL], d[groupMapsTo], "bar")
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "bar"
+				})
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {

@@ -83,10 +83,10 @@ export class AxisChartsTooltip extends Tooltip {
 					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
 					color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
-					class: this.model.getColorClassName(
-						[ColorClassNameTypes.TOOLTIP],
-						datum[groupMapsTo]
-					)
+					class: this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.TOOLTIP],
+						dataGroupName: datum[groupMapsTo]
+					})
 				}
 			];
 		} else if (data.length > 1) {
@@ -103,10 +103,10 @@ export class AxisChartsTooltip extends Tooltip {
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
 						color: this.model.isCustomColorValid() ? this.model.getFillColor(datum[groupMapsTo]) : null,
-						class: this.model.getColorClassName(
-							[ColorClassNameTypes.TOOLTIP],
-							datum[groupMapsTo]
-						)
+						class: this.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							dataGroupName: datum[groupMapsTo]
+						})
 					}))
 					.sort((a, b) => b.value - a.value)
 			);

@@ -54,11 +54,11 @@ export class Meter extends Component {
 			.attr("y", 0)
 			.attr("height", Tools.getProperty(options, "meter", "height"))
 			.attr("class", (d) =>
-				this.model.getColorClassName(
-					[ColorClassNameTypes.FILL],
-					d[groupMapsTo],
-					className
-				)
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: className
+				})
 			)
 			.transition(
 				this.services.transitions.getTransition(

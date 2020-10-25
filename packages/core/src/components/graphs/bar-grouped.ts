@@ -112,7 +112,11 @@ export class GroupedBar extends Bar {
 				)
 			)
 			.attr("class", (d) =>
-				this.model.getColorClassName([ColorClassNameTypes.FILL], d[groupMapsTo], "bar")
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName:"bar"
+				})
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d) => {
@@ -177,8 +181,6 @@ export class GroupedBar extends Bar {
 
 	addEventListeners() {
 		const self = this;
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
 
 		this.parent
 			.selectAll("path.bar")

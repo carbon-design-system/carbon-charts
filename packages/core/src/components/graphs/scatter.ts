@@ -192,25 +192,21 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.attr("class", (d) => {
-				if (
-					this.model.getIsFilled(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d,
-						filled
-					)
-				) {
-					return this.model.getColorClassName(
-						[ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
-						d[groupMapsTo],
-						"dot"
-					);
-				}
-				return this.model.getColorClassName(
-					[ColorClassNameTypes.STROKE],
+				const isFilled = this.model.getIsFilled(
 					d[groupMapsTo],
-					"dot"
-				);
+					d[domainIdentifier],
+					d,
+					filled
+				); 
+				const classNamesNeeded = isFilled
+					? [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE]
+					: [ColorClassNameTypes.STROKE];
+
+				return this.model.getColorClassName({
+					classNameTypes: classNamesNeeded,
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "dot"
+				});
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
@@ -344,11 +340,11 @@ export class Scatter extends Component {
 				hoveredElement
 					.classed("hovered", true)
 					.attr("class", (d) =>
-						self.model.getColorClassName(
-							[ColorClassNameTypes.FILL],
-							d[groupMapsTo],
-							hoveredElement.attr("class")
-						)
+						self.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.FILL],
+							dataGroupName: d[groupMapsTo],
+							originalClassName: hoveredElement.attr("class")
+						})
 					)
 					.style("fill", (d) =>
 						self.model.getFillColor(

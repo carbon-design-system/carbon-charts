@@ -482,16 +482,20 @@ export class ChartModel {
 		return dataGroups.every(dataGroup => Object.keys(userProvidedScale).includes(dataGroup.name));
 	}
 
-	getColorClassName(types: ColorClassNameTypes[], group: any, originalClassName?: any) {
+	getColorClassName(target: {
+		classNameTypes: ColorClassNameTypes[],
+		dataGroupName: string,
+		originalClassName?: string
+	}) {
 		if (this.isCustomColorValid()) {
-			return originalClassName;
+			return target.originalClassName;
 		}
 
-		const colorPairingTag = this.colorClassNames(group);
-		let className = originalClassName;
-		types.forEach(
+		const colorPairingTag = this.colorClassNames(target.dataGroupName);
+		let className = target.originalClassName;
+		target.classNameTypes.forEach(
 			(type) =>
-				(className = originalClassName
+				(className = target.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
 		);

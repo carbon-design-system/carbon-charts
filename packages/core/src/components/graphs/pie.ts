@@ -101,11 +101,11 @@ export class Pie extends Component {
 		enteringPaths
 			.merge(paths)
 			.attr("class", (d) =>
-				this.model.getColorClassName(
-					[ColorClassNameTypes.FILL],
-					d.data[groupMapsTo],
-					"slice"
-				)
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d.data[groupMapsTo],
+					originalClassName: "slice"
+				})
 			)
 			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)

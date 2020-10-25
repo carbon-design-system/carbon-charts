@@ -100,7 +100,11 @@ export class Line extends Component {
 			.merge(lines)
 			.data(data, (group) => group.name)
 			.attr("class", (group) =>
-				this.model.getColorClassName([ColorClassNameTypes.STROKE], group.name, "line")
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.STROKE],
+					dataGroupName: group.name,
+					originalClassName: "line"
+				})
 			)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)

@@ -90,7 +90,10 @@ export class Area extends Component {
 
 		// The fill value of area has been overwritten, get color value from stroke color class instead
 		const strokePathElement = chartSVG.select(
-			`path.${this.model.getColorClassName([ColorClassNameTypes.STROKE], groupedData[0].name)}`
+			`path.${this.model.getColorClassName({
+				classNameTypes: [ColorClassNameTypes.STROKE],
+				dataGroupName:groupedData[0].name
+			})}`
 		).node();
 		const colorValue = strokePathElement
 			? getComputedStyle(
@@ -143,7 +146,11 @@ export class Area extends Component {
 				)
 				.attr("class", "area")
 				.attr("class", (group) =>
-					this.model.getColorClassName([ColorClassNameTypes.FILL], group.name, "area")
+					this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: group.name,
+						originalClassName: "area"
+					})
 				)
 				.attr("d", (group) => {
 					const { data } = group;
@@ -155,7 +162,11 @@ export class Area extends Component {
 				.merge(areas)
 				.attr("class", "area")
 				.attr("class", (group) =>
-					this.model.getColorClassName([ColorClassNameTypes.FILL], group.name, "area")
+					this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: group.name,
+						originalClassName: "area"
+					})
 				)
 				.attr("fill", (group) => self.model.getFillColor(group.name))
 				.transition(

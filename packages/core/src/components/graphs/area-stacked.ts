@@ -73,11 +73,11 @@ export class StackedArea extends Component {
 			.data(stackedData, (d) => d[0][groupMapsTo])
 			.attr("class", "area")
 			.attr("class", (d) =>
-				this.model.getColorClassName(
-					[ColorClassNameTypes.FILL],
-					d[0][groupMapsTo],
-					"area"
-				)
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[0][groupMapsTo],
+					originalClassName: "area"
+				})
 			)
 			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
 			.attr("role", Roles.GRAPHICS_SYMBOL)
