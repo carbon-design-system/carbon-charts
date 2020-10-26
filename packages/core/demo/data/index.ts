@@ -837,6 +837,18 @@ let allDemoGroups = [
 				data: comboDemos.comboLineScatterData,
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboEmptyOptions,
+				data: comboDemos.comboEmptyData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboErrorOptions,
+				data: comboDemos.comboErrorData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
 			}
 		]
 	},

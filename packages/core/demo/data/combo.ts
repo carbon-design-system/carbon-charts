@@ -294,3 +294,88 @@ export const comboLineScatterOptions = {
 };
 
 
+
+
+
+
+export const comboEmptyData = [];
+
+export const comboEmptyOptions = {
+	title: "Combo Chart (empty)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			title: "Attendance"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		right: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			scaleType: "linear",
+			datasets: [
+				"Temperature"
+			]
+		}
+	},
+	chartTypes: {
+		"simple-bar": [
+			"Attendance"
+		],
+		"line": [
+			"Temperature"
+		]
+	}
+};
+
+
+
+
+export const comboErrorData = [
+	{ group: "High", key: "Monday", temp: 20 },
+	{ group: "High", key: "Tuesday", temp: 33 },
+	{ group: "High", key: "Wednesday", temp: 23 },
+	{ group: "High", key: "Thursday", temp: 23 },
+	{ group: "High", key: "Friday", temp: 32 },
+	{ group: "Low", key: "Monday", temp: 12 },
+	{ group: "Low", key: "Tuesday", temp: 22 },
+	{ group: "Low", key: "Wednesday", temp: 20 },
+	{ group: "Low", key: "Thursday", temp: 22 },
+	{ group: "Low", key: "Friday", temp: 25 },
+	{ group: "Temperature", key: "Monday", temp: 24 },
+	{ group: "Temperature", key: "Tuesday", temp: 28 },
+	{ group: "Temperature", key: "Wednesday", temp: 30 },
+	{ group: "Temperature", key: "Thursday", temp: 29 },
+	{ group: "Temperature", key: "Friday", temp: 24 },
+	{ group: "Attendance", key: "Monday", value: 2650 },
+	{ group: "Attendance", key: "Tuesday", value: 2553 },
+	{ group: "Attendance", key: "Wednesday", value: 3433 },
+	{ group: "Attendance", key: "Thursday", value: 3754 },
+	{ group: "Attendance", key: "Friday", value: 3744 }
+];
+
+export const comboErrorOptions = {
+	title: "Combo Chart (no chartTypes)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			title: "Attendance"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		right: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			scaleType: "linear",
+			datasets: [
+				"Temperature"
+			]
+		}
+	}
+};
+
+

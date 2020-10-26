@@ -121,7 +121,9 @@ export class StackedScatter extends Scatter {
 			});
 		});
 
-		return this.model.getDisplayData().filter((datapoint) => {
+		return this.model.getDisplayData(this.configs.groups).filter((datapoint) => {
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datapoint);
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datapoint);
 			return (
 				tooltipData.find((tooltipDatapoint) => {
 					return (

@@ -48,11 +48,6 @@ export class ComboChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ComboChartOptions>) {
 		super(holder, chartConfigs);
 
-		// Warn user if no chartTypes defined
-		if (!chartConfigs.options.chartTypes) {
-			console.warn("No chartTypes defined for the Combo Chart!");
-		}
-
 		// Merge the default options for this chart
 		// With the user provided options
 		const chartOptions = Tools.mergeDefaultChartOptions(
@@ -60,7 +55,14 @@ export class ComboChart extends AxisChart {
 			chartConfigs.options
 		);
 
-		// Merge multiple graphs default options
+		// Warn user if no chartTypes defined
+		// Use skeleton chart instead
+		if (!chartConfigs.options.chartTypes) {
+			console.warn("No chartTypes defined for the Combo Chart!");
+			// add a default chart to get an empty chart
+			chartOptions.chartTypes = {[ComboChartTypes.LINE]: []};
+		}
+
 		const { chartTypes } = chartOptions;
 		const graphs = Object.keys(chartTypes);
 		const graphsDefaultOptions = graphs.reduce((options, g) => Tools.merge(options, Configuration.options[`${Tools.camelCase(g)}Chart`]), {});
