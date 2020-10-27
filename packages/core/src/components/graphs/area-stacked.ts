@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, ScaleTypes, Events, ColorClassNameTypes } from "../../interfaces";
+import {
+	Roles,
+	ScaleTypes,
+	Events,
+	ColorClassNameTypes
+} from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";

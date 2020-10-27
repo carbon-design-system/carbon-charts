@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { DOMUtils, } from "../../services";
+import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
 import { Roles, ColorClassNameTypes } from "../../interfaces";
 

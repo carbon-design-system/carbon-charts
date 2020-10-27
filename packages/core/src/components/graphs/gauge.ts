@@ -1,7 +1,13 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Roles, Events, GaugeTypes, ArrowDirections, ColorClassNameTypes } from "../../interfaces";
+import {
+	Roles,
+	Events,
+	GaugeTypes,
+	ArrowDirections,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports

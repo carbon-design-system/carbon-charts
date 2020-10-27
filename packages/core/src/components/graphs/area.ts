@@ -82,24 +82,29 @@ export class Area extends Component {
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
 
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
 		const chartSVG = DOMUtils.appendOrSelect(
-			select(this.services.domUtils.getHolder()), 
+			select(this.services.domUtils.getHolder()),
 			`svg.${settings.prefix}--${chartprefix}--chart-svg`
 		);
 
 		// The fill value of area has been overwritten, get color value from stroke color class instead
-		const strokePathElement = chartSVG.select(
-			`path.${this.model.getColorClassName({
-				classNameTypes: [ColorClassNameTypes.STROKE],
-				dataGroupName:groupedData[0].name
-			})}`
-		).node();
+		const strokePathElement = chartSVG
+			.select(
+				`path.${this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.STROKE],
+					dataGroupName: groupedData[0].name
+				})}`
+			)
+			.node();
 		const colorValue = strokePathElement
-			? getComputedStyle(
-				strokePathElement,
-				null
-			).getPropertyValue("stroke")
+			? getComputedStyle(strokePathElement, null).getPropertyValue(
+					"stroke"
+			  )
 			: null;
 
 		if (isGradientAllowed && colorValue) {

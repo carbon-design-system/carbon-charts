@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { ColorClassNameTypes } from "../../interfaces/enums"; 
+import { ColorClassNameTypes } from "../../interfaces/enums";
 import {
 	LegendOrientations,
 	Roles,

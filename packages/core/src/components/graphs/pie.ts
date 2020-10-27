@@ -2,7 +2,13 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, Events, Alignments, ColorClassNameTypes } from "../../interfaces";
+import {
+	CalloutDirections,
+	Roles,
+	Events,
+	Alignments,
+	ColorClassNameTypes
+} from "../../interfaces";
 import * as Configuration from "../../configuration";
 
 // D3 Imports

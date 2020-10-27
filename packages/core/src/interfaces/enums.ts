@@ -12,12 +12,12 @@ export enum ChartTheme {
 }
 
 /**
- * 
+ * enum of all color classname types
  */
 export enum ColorClassNameTypes {
-	FILL = 'fill',
-	STROKE = 'stroke',
-	TOOLTIP = 'tooltip'
+	FILL = "fill",
+	STROKE = "stroke",
+	TOOLTIP = "tooltip"
 }
 
 /**

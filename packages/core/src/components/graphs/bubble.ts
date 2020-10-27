@@ -68,7 +68,10 @@ export class Bubble extends Scatter {
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
 			.attr("class", (d) =>
 				this.model.getColorClassName({
-					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
+					classNameTypes: [
+						ColorClassNameTypes.FILL,
+						ColorClassNameTypes.STROKE
+					],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: "dot"
 				})

@@ -174,7 +174,7 @@ export class Tooltip extends Component {
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
-			const useColor = this.model.isCustomColorValid(); 
+			const useColor = this.model.isCustomColorValid();
 
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +

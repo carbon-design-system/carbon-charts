@@ -115,7 +115,7 @@ export class GroupedBar extends Bar {
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName:"bar"
+					originalClassName: "bar"
 				})
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
@@ -304,7 +304,10 @@ export class GroupedBar extends Bar {
 		// If there's a provided width, compare with maxWidth and
 		// Determine which to return
 		if (providedWidth !== null) {
-			if (providedMaxWidth === null || providedWidth <= providedMaxWidth) {
+			if (
+				providedMaxWidth === null ||
+				providedWidth <= providedMaxWidth
+			) {
 				return providedWidth;
 			}
 		}

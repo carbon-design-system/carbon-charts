@@ -473,19 +473,22 @@ export class ChartModel {
 		);
 		const dataGroups = this.getDataGroups();
 
-		if (userProvidedScale == null ||
+		if (
+			userProvidedScale == null ||
 			Object.keys(userProvidedScale).length < dataGroups.length
 		) {
 			return false;
 		}
 
-		return dataGroups.every(dataGroup => Object.keys(userProvidedScale).includes(dataGroup.name));
+		return dataGroups.every((dataGroup) =>
+			Object.keys(userProvidedScale).includes(dataGroup.name)
+		);
 	}
 
 	getColorClassName(target: {
-		classNameTypes: ColorClassNameTypes[],
-		dataGroupName: string,
-		originalClassName?: string
+		classNameTypes: ColorClassNameTypes[];
+		dataGroupName: string;
+		originalClassName?: string;
 	}) {
 		if (this.isCustomColorValid()) {
 			return target.originalClassName;

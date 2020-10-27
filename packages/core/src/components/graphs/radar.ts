@@ -525,7 +525,7 @@ export class Radar extends Component {
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName:  Tools.kebabCase(d[angle])
+					originalClassName: Tools.kebabCase(d[angle])
 				})
 			)
 			.attr(

@@ -197,7 +197,7 @@ export class Scatter extends Component {
 					d[domainIdentifier],
 					d,
 					filled
-				); 
+				);
 				const classNamesNeeded = isFilled
 					? [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE]
 					: [ColorClassNameTypes.STROKE];
@@ -406,8 +406,8 @@ export class Scatter extends Component {
 				hoveredElement.classed("hovered", false);
 
 				if (
-					(!self.configs.filled &&
-					hoveredElement.attr("fill-opacity") === "1")
+					!self.configs.filled &&
+					hoveredElement.attr("fill-opacity") === "1"
 				) {
 					hoveredElement.classed("unfilled", true);
 					hoveredElement.style("fill", null);
