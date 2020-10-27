@@ -242,12 +242,14 @@ export class Toolbar extends Component {
 		}
 		// only if previous enabled menu item found
 		if (previousItemIndex < overflowMenuItems.length) {
-			document
-				.getElementById(
+			const previousItemNode = select(
+				"#" +
 					overflowMenuItems[previousItemIndex].id +
-						this.overflowMenuItemId
-				)
-				.focus();
+					this.overflowMenuItemId
+			).node();
+			if ("focus" in previousItemNode) {
+				previousItemNode.focus();
+			}
 		}
 	}
 
@@ -263,12 +265,14 @@ export class Toolbar extends Component {
 		}
 		// only if next enabled menu item found
 		if (nextItemIndex > -1) {
-			document
-				.getElementById(
+			const nextItemNode = select(
+				"#" +
 					overflowMenuItems[nextItemIndex].id +
-						this.overflowMenuItemId
-				)
-				.focus();
+					this.overflowMenuItemId
+			).node();
+			if ("focus" in nextItemNode) {
+				nextItemNode.focus();
+			}
 		}
 	}
 
@@ -284,25 +288,25 @@ export class Toolbar extends Component {
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem, index) => {
-				const element = document.getElementById(
-					menuItem.id + this.overflowMenuItemId
+				const element = select(
+					"#" + menuItem.id + this.overflowMenuItemId
 				);
 				if (element !== null) {
-					element.addEventListener("click", () => {
+					element.on("click", () => {
 						// call the specified function
 						menuItem.clickFunction();
 
 						// hide overflow menu
 						self.updateOverflowMenu(false);
 					});
-					element.addEventListener("keyup", (e) => {
-						if (e.key === "Enter") {
+					element.on("keyup", () => {
+						if (event.key === "Enter") {
 							// call the specified function
 							menuItem.clickFunction();
-						} else if (e.key === "ArrowUp") {
+						} else if (event.key === "ArrowUp") {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (e.key === "ArrowDown") {
+						} else if (event.key === "ArrowDown") {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
 						}
