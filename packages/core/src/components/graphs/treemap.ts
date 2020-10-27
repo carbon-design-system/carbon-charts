@@ -10,21 +10,6 @@ import { sum } from "d3-array";
 import { hsl, color } from "d3-color";
 import { select } from "d3-selection";
 
-var count = 0;
-
-const domUID = function (name) {
-	return new Id("O-" + (name == null ? "" : name + "-") + ++count);
-};
-
-function Id(id) {
-	this.id = id;
-	this.href = new URL(`#${id}`, location as any) + "";
-}
-
-Id.prototype.toString = function () {
-	return "url(" + this.href + ")";
-};
-
 export class Treemap extends Component {
 	type = "treemap";
 
@@ -87,24 +72,27 @@ export class Treemap extends Component {
 		const enteringLeafGroups = leafGroups
 			.enter()
 			.append("g")
+			.attr("data-name", "leaf");
+
+		enteringLeafGroups
+			.merge(leafGroups)
 			.attr("data-name", "leaf")
-			.attr("opacity", 0);
+			.transition(
+				transitions.getTransition("treemap-group-update", animate)
+			)
+			.attr("transform", (d) => `translate(${d.x0},${d.y0})`);
 
 		const rects = enteringLeafGroups
 			.merge(leafGroups)
-			.attr("data-name", "leaf")
-			.attr("transform", (d) => `translate(${d.x0},${d.y0})`)
-			.attr("opacity", 1)
 			.selectAll("rect.leaf")
 			.data((d) => [d]);
 
-		rects.exit().attr("opacity", 0).remove();
+		rects.exit().attr("width", 0).attr("height", 0).remove();
 
 		const enteringRects = rects
 			.enter()
 			.append("rect")
-			.classed("leaf", true)
-			.attr("opacity", 0);
+			.classed("leaf", true);
 
 		enteringRects
 			.merge(rects)
@@ -116,34 +104,13 @@ export class Treemap extends Component {
 					animate
 				)
 			)
-			// .attr("id", (d) => (d.leafUid = domUID("leaf")).id)
 			.attr("fill", (d) => {
 				while (d.depth > 1) d = d.parent;
 
 				return this.model.getFillColor(d.data.name);
 			})
 			.attr("width", (d) => d.x1 - d.x0)
-			.attr("height", (d) => d.y1 - d.y0)
-			.attr("opacity", 1);
-
-		// Update all titles
-		enteringLeafGroups
-			.merge(leafGroups)
-			.selectAll("title")
-			.data(
-				(d) => [
-					`${d
-						.ancestors()
-						.reverse()
-						.map((d) => d.data.name)
-						.join("/")}\n${d.value}`
-				],
-				(d) => d
-			)
-			.join(
-				(enter) => enter.append("title").text((d) => d),
-				(update) => update.text((d) => d)
-			);
+			.attr("height", (d) => d.y1 - d.y0);
 
 		// Update all titles
 		enteringLeafGroups
