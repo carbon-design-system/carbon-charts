@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. 
+All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.40.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.0...v0.40.1) (2020-10-22)
