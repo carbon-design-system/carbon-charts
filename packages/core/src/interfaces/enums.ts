@@ -172,3 +172,12 @@ export enum TickRotations {
 	AUTO = "auto",
 	NEVER = "never"
 }
+
+/**
+ * enum of supported toolbar control types
+ */
+export enum ToolbarControlTypes {
+	ZOOM_IN = "Zoom in",
+	ZOOM_OUT = "Zoom out",
+	RESET_ZOOM = "Reset zoom"
+}
