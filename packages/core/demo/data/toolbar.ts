@@ -15,16 +15,13 @@ const addToolbarOptions = (options, configs?) => {
 	};
 	options.toolbar.controls = [
 		{
-			type: "Zoom in",
-			text: "Zoom in"
+			type: "Zoom in"
 		},
 		{
-			type: "Zoom out",
-			text: "Zoom out"
+			type: "Zoom out"
 		},
 		{
-			type: "Reset zoom",
-			text: "Reset zoom"
+			type: "Reset zoom"
 		}
 	];
 
