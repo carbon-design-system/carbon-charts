@@ -4,6 +4,9 @@ import { Tools } from "../../tools";
 import { Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
+import { g10 } from "@carbon/themes";
+
+const { ui01, ui03, ui04 } = g10;
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -28,6 +31,8 @@ export class ZoomBar extends Component {
 	// Give every zoomBarClip a distinct ID
 	// so they don't interfere the other zoom bars in a page
 	clipId = "zoomBarClip-" + Math.floor(Math.random() * 99999999999);
+	inverseClipId =
+		"zoomBarClipInverse-" + Math.floor(Math.random() * 99999999999);
 
 	brush = brushX();
 	xScale: any;
@@ -170,16 +175,28 @@ export class ZoomBar extends Component {
 			if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
 				this.renderZoomBarArea(
 					container,
-					"path.zoom-graph-area-unselected",
+					"zoom-graph-area-unselected",
 					zoomBarData,
-					null
+					this.inverseClipId,
+					null,
+					ui01
 				);
-				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
+				this.updateClipPaths(
+					svg,
+					this.clipId,
+					this.inverseClipId,
+					0,
+					0,
+					0,
+					0
+				);
 				this.renderZoomBarArea(
 					container,
-					"path.zoom-graph-area",
+					"zoom-graph-area",
 					zoomBarData,
-					this.clipId
+					this.clipId,
+					ui04,
+					ui03
 				);
 
 				// Draw the zoom base line
@@ -398,9 +415,10 @@ export class ZoomBar extends Component {
 			this.updateSliderSelectedArea(selection);
 		}
 
-		this.updateClipPath(
+		this.updateClipPaths(
 			svg,
 			this.clipId,
+			this.inverseClipId,
 			selection[0],
 			0,
 			selection[1] - selection[0],
@@ -439,7 +457,14 @@ export class ZoomBar extends Component {
 			.attr("height", 2);
 	}
 
-	renderZoomBarArea(container, querySelector, data, clipId) {
+	renderZoomBarArea(
+		container,
+		querySelector,
+		data,
+		clipId,
+		strokeColor,
+		fillColor
+	) {
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
@@ -476,30 +501,84 @@ export class ZoomBar extends Component {
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+		const {
+			width: containerWidth,
+			height: containerHeight
+		} = container.node().getBoundingClientRect();
+
+		// We need a foreign object to render each canvas inside
+		const foreignObject = DOMUtils.appendOrSelect(
+			container,
+			`foreignObject.wrapper-${querySelector}`
+		)
+			.attr("width", "100%")
+			.attr("height", "100%");
+
+		let canvas = <HTMLCanvasElement>document.getElementById(querySelector);
+		if (!canvas) {
+			canvas = <HTMLCanvasElement>document.createElement("CANVAS");
+			canvas.setAttribute("id", querySelector);
+			canvas.setAttribute("class", querySelector);
+
+			document.body.appendChild(canvas);
+			foreignObject.node().appendChild(canvas);
+		}
+
+		canvas.setAttribute("width", containerWidth);
+		canvas.setAttribute("height", containerHeight);
+		const areaContext = canvas.getContext("2d");
+
 		const areaGenerator = area()
 			.x((d, i) => xAccessor(d, i))
 			.y0(zoombarHeight)
-			.y1((d, i) => zoombarHeight - yAccessor(d, i));
+			.y1((d, i) => zoombarHeight - yAccessor(d, i))
+			.context(areaContext);
 
-		const areaGraph = DOMUtils.appendOrSelect(container, querySelector)
-			.datum(data)
-			.attr("d", areaGenerator);
+		// draw to context
+		areaContext.clearRect(0, 0, canvas.width, canvas.height);
+		areaContext.strokeStyle = strokeColor || fillColor;
+		areaContext.beginPath();
+		areaGenerator(data);
+		areaContext.fillStyle = fillColor;
+		areaContext.fill();
+		areaContext.lineWidth = strokeColor ? 1 : 0;
+		areaContext.stroke();
 
 		if (clipId) {
-			areaGraph.attr("clip-path", `url(#${clipId})`);
+			foreignObject.attr("clip-path", `url(#${clipId})`);
 		}
 	}
 
-	updateClipPath(svg, clipId, x, y, width, height) {
-		const zoomBarClipPath = DOMUtils.appendOrSelect(svg, `clipPath`).attr(
-			"id",
-			clipId
-		);
+	updateClipPaths(svg, clipId, inverseClipId, x, y, width, height) {
+		const {
+			width: containerWidth,
+			height: containerHeight
+		} = svg.node().getBoundingClientRect();
+
+		const zoomBarClipPath = DOMUtils.appendOrSelect(
+			svg,
+			`clipPath.clipPath`
+		).attr("id", clipId);
 		DOMUtils.appendOrSelect(zoomBarClipPath, "rect")
-			.attr("x", x)
+			.attr("x", x + 2.5)
 			.attr("y", y)
-			.attr("width", width)
-			.attr("height", height);
+			.attr("width", width - 5)
+			.attr("height", height - 1); // clip up one to show the baseline
+		// Need to attach an inverseClipPath for the outer bounds
+		const zoomBarInverseClipPath = DOMUtils.appendOrSelect(
+			svg,
+			`clipPath.inverseClipPath`
+		).attr("id", inverseClipId);
+		DOMUtils.appendOrSelect(zoomBarInverseClipPath, "rect.leftInverseClip")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("width", x - 2.5)
+			.attr("height", height - 1); // clip up one to show the baseline
+		DOMUtils.appendOrSelect(zoomBarInverseClipPath, "rect.rightInverseClip")
+			.attr("x", x + width + 2.5)
+			.attr("y", 0)
+			.attr("width", containerWidth)
+			.attr("height", height - 1); // clip up one to show the baseline
 	}
 
 	// assume the domains in data are already sorted
