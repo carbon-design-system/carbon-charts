@@ -29,8 +29,8 @@ const addToolbarOptions = (options, configs?) => {
 	];
 
 	if (configs) {
-		if (configs.titlePostfix) {
-			options.title += configs.titlePostfix;
+		if (configs.titleSuffix) {
+			options.title += configs.titleSuffix;
 		}
 		if (configs.numberOfIcons) {
 			options.toolbar.numberOfIcons = configs.numberOfIcons;
@@ -53,7 +53,7 @@ export const toolbarLineTimeSeriesData = lineChart.lineTimeSeriesData;
 export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 	Object.assign({}, lineChart.lineTimeSeriesOptions),
 	{
-		titlePostfix: " - two icons",
+		titleSuffix: " - two icons",
 		numberOfIcons: 2,
 		controls: [
 			{

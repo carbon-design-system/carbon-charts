@@ -59,7 +59,7 @@ export class Toolbar extends Component {
 		);
 		// hide overflow menu if user clicks on somewhere in web page
 		document.body.addEventListener("click", () =>
-			this.showOverflowMenu(false)
+			this.updateOverflowMenu(false)
 		);
 	}
 
@@ -78,11 +78,8 @@ export class Toolbar extends Component {
 
 		// TODO -- adjust toolbar Y position to align title component
 		// before layout component supports vertical alignment center
-		const VERTICAL_ALIGNMENT_Y = -6;
-		svg.attr(
-			"transform",
-			`translate(0, ${parentY + VERTICAL_ALIGNMENT_Y})`
-		);
+		const Y_OFFSET = -6;
+		svg.attr("transform", `translate(0, ${parentY + Y_OFFSET})`);
 
 		const { width } = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
@@ -98,7 +95,7 @@ export class Toolbar extends Component {
 		// parent x doesn't work well
 		// assume the overflow icon has right alignment in layout
 		this.overflowMenuX = width - overflowMenuWidth;
-		this.overflowMenuY = parentY + VERTICAL_ALIGNMENT_Y + buttonSize;
+		this.overflowMenuY = parentY + Y_OFFSET + buttonSize;
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
 			.attr("height", Configuration.toolbar.height)
@@ -203,7 +200,7 @@ export class Toolbar extends Component {
 
 			if (this.isOverflowMenuOpen()) {
 				// keep overflow menu displayed
-				this.showOverflowMenu(true);
+				this.updateOverflowMenu(true);
 			}
 		}
 	}
@@ -217,7 +214,7 @@ export class Toolbar extends Component {
 	}
 
 	// show/hide overflow menu
-	showOverflowMenu(show: boolean) {
+	updateOverflowMenu(show: boolean) {
 		// update overflow button background
 		if (this.overflowButton) {
 			this.overflowButton.classed("toolbar-button--hovered", show);
@@ -278,10 +275,10 @@ export class Toolbar extends Component {
 	toggleOverflowMenu() {
 		if (this.isOverflowMenuOpen()) {
 			// hide overflow menu
-			this.showOverflowMenu(false);
+			this.updateOverflowMenu(false);
 		} else {
 			// show overflow menu
-			this.showOverflowMenu(true);
+			this.updateOverflowMenu(true);
 
 			// setup overflow menu item event listener
 			const self = this;
@@ -296,7 +293,7 @@ export class Toolbar extends Component {
 						menuItem.clickFunction();
 
 						// hide overflow menu
-						self.showOverflowMenu(false);
+						self.updateOverflowMenu(false);
 					});
 					element.addEventListener("keyup", (e) => {
 						if (e.key === "Enter") {
