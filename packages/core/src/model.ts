@@ -485,20 +485,20 @@ export class ChartModel {
 		);
 	}
 
-	getColorClassName(target: {
+	getColorClassName(configs: {
 		classNameTypes: ColorClassNameTypes[];
 		dataGroupName: string;
 		originalClassName?: string;
 	}) {
 		if (this.isCustomColorValid()) {
-			return target.originalClassName;
+			return configs.originalClassName;
 		}
 
-		const colorPairingTag = this.colorClassNames(target.dataGroupName);
-		let className = target.originalClassName;
-		target.classNameTypes.forEach(
+		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
+		let className = configs.originalClassName;
+		configs.classNameTypes.forEach(
 			(type) =>
-				(className = target.originalClassName
+				(className = configs.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
 		);
