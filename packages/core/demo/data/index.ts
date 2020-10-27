@@ -481,7 +481,7 @@ let allDemoGroups = [
 			},
 			{
 				options: lineDemos.sparklineLoadingOptions,
-				data: lineDemos.sparklineLoadingTimeSeriesData,
+				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart
 			}
 		]

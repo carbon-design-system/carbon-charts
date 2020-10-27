@@ -94,10 +94,6 @@ export interface BaseChartOptions {
 		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
 		 */
 		selectedGroups?: string[];
-		/**
-		 * used to simulate data loading in sparkline way
-		 */
-		sparklineLoading?: boolean;
 	};
 	/**
 	 * options related to color scales
