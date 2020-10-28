@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, ScaleTypes, Events } from "../../interfaces";
+import {
+	Roles,
+	ScaleTypes,
+	Events,
+	ColorClassNameTypes
+} from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
@@ -71,6 +76,14 @@ export class StackedArea extends Component {
 		enteringAreas
 			.merge(areas)
 			.data(stackedData, (d) => d[0][groupMapsTo])
+			.attr("class", "area")
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[0][groupMapsTo],
+					originalClassName: "area"
+				})
+			)
 			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
@@ -81,7 +94,6 @@ export class StackedArea extends Component {
 				)
 			)
 			.attr("opacity", Configuration.area.opacity.selected)
-			.attr("class", "area")
 			.attr("d", this.areaGenerator);
 	}
 
