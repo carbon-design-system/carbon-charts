@@ -17,6 +17,7 @@ import {
 	Title,
 	AxisChartsTooltip,
 	Spacer,
+	Toolbar,
 	ZoomBar
 } from "./components";
 import { Tools } from "./tools";
@@ -41,6 +42,11 @@ export class AxisChart extends Chart {
 			"top",
 			"enabled"
 		);
+		const toolbarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"toolbar",
+			"enabled"
+		);
 
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
@@ -56,9 +62,41 @@ export class AxisChart extends Chart {
 			mainXAxisPosition === AxisPositions.BOTTOM &&
 			mainXScaleType === ScaleTypes.TIME;
 
+		const titleAvailable = !!this.model.getOptions().title;
 		const titleComponent = {
 			id: "title",
 			components: [new Title(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const toolbarComponent = {
+			id: "toolbar",
+			components: [new Toolbar(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const headerComponent = {
+			id: "header",
+			components: [
+				new LayoutComponent(
+					this.model,
+					this.services,
+					[
+						// always add title to keep layout correct
+						titleComponent,
+						...(toolbarEnabled ? [toolbarComponent] : [])
+					],
+					{
+						direction: LayoutDirection.ROW
+					}
+				)
+			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -160,14 +198,20 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
-		if (this.model.getOptions().title) {
-			topLevelLayoutComponents.push(titleComponent);
+		// header component is required for either title or toolbar
+		if (titleAvailable || toolbarEnabled) {
+			topLevelLayoutComponents.push(headerComponent);
 
 			const titleSpacerComponent = {
 				id: "spacer",
-				components: [new Spacer(this.model, this.services)],
+				components: [
+					new Spacer(
+						this.model,
+						this.services,
+						toolbarEnabled ? { size: 15 } : undefined
+					)
+				],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
 					y: LayoutGrowth.FIXED

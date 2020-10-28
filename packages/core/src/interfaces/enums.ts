@@ -12,6 +12,15 @@ export enum ChartTheme {
 }
 
 /**
+ * enum of all color classname types
+ */
+export enum ColorClassNameTypes {
+	FILL = "fill",
+	STROKE = "stroke",
+	TOOLTIP = "tooltip"
+}
+
+/**
  * enum of all possible axis positions
  */
 export enum AxisPositions {
@@ -171,4 +180,13 @@ export enum TickRotations {
 	ALWAYS = "always",
 	AUTO = "auto",
 	NEVER = "never"
+}
+
+/**
+ * enum of supported toolbar control types
+ */
+export enum ToolbarControlTypes {
+	ZOOM_IN = "Zoom in",
+	ZOOM_OUT = "Zoom out",
+	RESET_ZOOM = "Reset zoom"
 }
