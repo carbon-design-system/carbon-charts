@@ -1,7 +1,6 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
-import * as colorPalettes from "./services/colorPalettes";
 import { Tools } from "./tools";
 
 /** The meter chart model layer which extends some of the data setting options.

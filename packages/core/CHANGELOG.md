@@ -69,10 +69,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 # Change Log
 
 All notable changes to this project will be documented in this file. See
