@@ -113,10 +113,21 @@ export const transitions = {
 	}
 };
 
+export const toolbar = {
+	buttonSize: 32,
+	iconSize: 20,
+	height: 32,
+	spacerHeight: 10,
+	iconPadding: 6
+};
+
 export const zoomBar = {
 	height: {
 		[ZoomBarTypes.GRAPH_VIEW]: 32,
 		[ZoomBarTypes.SLIDER_VIEW]: 10
 	},
-	spacerHeight: 8
+	spacerHeight: 8,
+	handleWidth: 5,
+	handleBarWidth: 1,
+	handleBarHeight: 12
 };
