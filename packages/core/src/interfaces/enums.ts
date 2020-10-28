@@ -185,3 +185,11 @@ export enum ComboChartTypes {
 	AREA = "area",
 	STACKED_AREA = "stacked-area"
 }
+/**
+ * enum of supported toolbar control types
+ */
+export enum ToolbarControlTypes {
+	ZOOM_IN = "Zoom in",
+	ZOOM_OUT = "Zoom out",
+	RESET_ZOOM = "Reset zoom"
+}

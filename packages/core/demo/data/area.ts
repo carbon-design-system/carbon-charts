@@ -192,7 +192,7 @@ export const stackedAreaTimeSeriesOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			mapsTo: "key"
+			mapsTo: "date"
 		}
 	},
 	curve: "curveMonotoneX"
