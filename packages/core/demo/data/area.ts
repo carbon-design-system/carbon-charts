@@ -191,7 +191,7 @@ export const stackedAreaTimeSeriesOptions = {
 			mapsTo: "value"
 		},
 		bottom: {
-			scaleType: "labels",
+			scaleType: "time",
 			mapsTo: "date"
 		}
 	},
