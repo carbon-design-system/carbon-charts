@@ -155,20 +155,4 @@ const bubbleDoubleLinearData = [
 \`\`\`
 
 **Default value for \`radiusMapsTo\` is \`radius\`**
-
-##### Color scale
-
-You're also able to provide a custom
-\`color range\` to be used within the color scale.
-
-\`\`\`
-const simpleBarOptions = {
-	color: {
-		scale: {
-			"Dataset 1": "blue",
-			"Dataset 2": "red"
-		} // Other data groups would use default colors
-	}
-};
-\`\`\`
 `);
