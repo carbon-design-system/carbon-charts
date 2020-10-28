@@ -1,8 +1,7 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { Events, ScaleTypes } from "./interfaces";
-import { ColorClassNameTypes } from "./interfaces/enums";
+import { Events, ScaleTypes, ColorClassNameTypes } from "./interfaces";
 
 // D3
 import { map } from "d3-collection";
@@ -434,7 +433,7 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		if (!this.isCustomColorValid()) {
+		if (!this.isUserProvidedColorScaleValid()) {
 			return null;
 		}
 		const options = this.getOptions();
@@ -448,7 +447,7 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		if (!this.isCustomColorValid()) {
+		if (!this.isUserProvidedColorScaleValid()) {
 			return null;
 		}
 
@@ -465,7 +464,7 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
-	isCustomColorValid() {
+	isUserProvidedColorScaleValid() {
 		const userProvidedScale = Tools.getProperty(
 			this.getOptions(),
 			"color",
@@ -490,7 +489,7 @@ export class ChartModel {
 		dataGroupName: string;
 		originalClassName?: string;
 	}) {
-		if (this.isCustomColorValid()) {
+		if (this.isUserProvidedColorScaleValid()) {
 			return configs.originalClassName;
 		}
 
@@ -636,7 +635,7 @@ export class ChartModel {
 	 * Fill scales
 	 */
 	protected setCustomColorScale() {
-		if (!this.isCustomColorValid()) {
+		if (!this.isUserProvidedColorScaleValid()) {
 			return;
 		}
 
@@ -704,7 +703,7 @@ export class ChartModel {
 		);
 
 		// If there is no valid user provided scale, use the default set of colors
-		if (!this.isCustomColorValid()) {
+		if (!this.isUserProvidedColorScaleValid()) {
 			this.colorClassNames = scaleOrdinal()
 				.range(colorPairing)
 				.domain(this.allDataGroups);
