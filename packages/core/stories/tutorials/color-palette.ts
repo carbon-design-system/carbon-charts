@@ -10,7 +10,7 @@ _For more guidance on using the IBM Design Language dataviz palette, see [here](
 
 ___
 
-#### Using a dafault palette
+## Using a dafault palette
 You can add the following chart options if you want to choose a color palette option from the IBM dataviz palette.
 By default, carbon-charts will assign the first color option for the appropriate amount of data groups (ex. charts with 4 data groups will get the first option for the 4-color palettes).
 
@@ -34,7 +34,7 @@ Refer to the Carbon Design Website for the full index of color palette options (
 
 ___
 
-#### Using a different size color palette
+## Using a different size color palette
 **Note: It is not suggested to use a color palette designed for a different number of data groups than the chart is rendering.**
 
 \`\`\`
@@ -57,7 +57,7 @@ const lineOptions = {
 
 ___
 
-#### Using a custom color scale
+## Using a custom color scale
 
 You're also able to provide a custom
 \`color range\` to be used within the color scale.
