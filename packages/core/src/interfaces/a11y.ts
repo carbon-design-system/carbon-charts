@@ -4,5 +4,9 @@ export enum Roles {
 	GRAPHICS_SYMBOL = "graphics-symbol",
 	GROUP = "group",
 	DOCUMENT = "document",
-	CHECKBOX = "checkbox"
+	CHECKBOX = "checkbox",
+	BUTTON = "button",
+	MENU = "menu",
+	MENU_ITEM = "menuitem",
+	IMG = "img"
 }
