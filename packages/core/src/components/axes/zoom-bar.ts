@@ -556,9 +556,12 @@ export class ZoomBar extends Component {
 		const { width: selectionWidth, height: selectionHeight } =
 			svg.select("rect.selection").node()?.getBoundingClientRect() || {};
 
-		// If the width exactly matches the selection, then we need to clip the whole zoom bar, otherwise clip just half because the width is on the inner selector, not the outer selector
-		const zoomHandleAdjustment =
-			selectionWidth === width || !width ? 5 : 2.5;
+		// If the left handle is still on the left, the clip needs to adjust for the whole handle, otherwise adjust to the middle
+		const leftZoomHandleAdjustment =
+			x === this.model.get("axesMargins")?.left ? 5 : 2.5;
+		// If the right handle is still on the right, the clip needs to adjust for the whole handle, otherwise adjust to the middle
+		const rightZoomHandleAdjustment =
+			x + width === containerWidth || !width ? 5 : 2.5;
 
 		// clipPath is for the inner bounds
 		const zoomBarClipPath = DOMUtils.appendOrSelect(
@@ -566,10 +569,17 @@ export class ZoomBar extends Component {
 			`clipPath.clipPath`
 		).attr("id", clipId);
 		DOMUtils.appendOrSelect(zoomBarClipPath, "rect")
-			.attr("x", x + zoomHandleAdjustment)
+			.attr("x", x + leftZoomHandleAdjustment)
 			.attr("y", y)
-			.attr("width", width - zoomHandleAdjustment * 2)
-			.attr("height", height - 1); // clip up one to show the baseline
+			.attr(
+				"width",
+				Math.max(
+					width -
+						(leftZoomHandleAdjustment + rightZoomHandleAdjustment),
+					0
+				)
+			)
+			.attr("height", Math.max(height - 1, 0)); // clip up one to show the baseline
 
 		if (width > 0 || height > 0) {
 			// Need to attach an inverseClipPath for the outer bounds
@@ -583,16 +593,16 @@ export class ZoomBar extends Component {
 			)
 				.attr("x", 0)
 				.attr("y", 0)
-				.attr("width", x - zoomHandleAdjustment)
-				.attr("height", height - 1); // clip up one to show the baseline
+				.attr("width", Math.max(x - leftZoomHandleAdjustment, 0))
+				.attr("height", Math.max(height - 1, 0)); // clip up one to show the baseline
 			DOMUtils.appendOrSelect(
 				zoomBarInverseClipPath,
 				"rect.rightInverseClip"
 			)
-				.attr("x", x + width + zoomHandleAdjustment)
+				.attr("x", x + width + rightZoomHandleAdjustment)
 				.attr("y", 0)
 				.attr("width", containerWidth)
-				.attr("height", height - 1); // clip up one to show the baseline
+				.attr("height", Math.max(height - 1, 0)); // clip up one to show the baseline
 		}
 	}
 
