@@ -31,7 +31,10 @@ div.container {
 	&.theme--white {
 		@import "../src/styles/styles-white.scss";
 
-		@include carbon--theme($carbon--theme--white) {
+		@include carbon--theme(
+			$theme: $carbon--theme--white,
+			$emit-custom-properties: true
+		) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
@@ -41,7 +44,10 @@ div.container {
 	&.theme--g10 {
 		@import "../src/styles/styles-g10.scss";
 
-		@include carbon--theme($carbon--theme--g10) {
+		@include carbon--theme(
+			$theme: $carbon--theme--g10,
+			$emit-custom-properties: true
+		) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
@@ -51,7 +57,10 @@ div.container {
 	&.theme--g90 {
 		@import "../src/styles/styles-g90.scss";
 
-		@include carbon--theme($carbon--theme--g90) {
+		@include carbon--theme(
+			$theme: $carbon--theme--g90,
+			$emit-custom-properties: true
+		) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
@@ -82,7 +91,10 @@ div.container {
 	&.theme--g100 {
 		@import "../src/styles/styles-g100.scss";
 
-		@include carbon--theme($carbon--theme--g100) {
+		@include carbon--theme(
+			$theme: $carbon--theme--g100,
+			$emit-custom-properties: true
+		) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;

@@ -4,9 +4,7 @@ import { Tools } from "../../tools";
 import { Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { g10 } from "@carbon/themes";
-
-const { ui01, ui03, ui04 } = g10;
+import { determineCurrentTheme } from "@carbon/themes";
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -171,6 +169,13 @@ export class ZoomBar extends Component {
 				.domain(extent(zoomBarData, (d: any) => d.value));
 
 			const zoomDomain = this.model.get("zoomDomain");
+			const carbonThemeTokens = determineCurrentTheme(container.node());
+			const { ui01, ui03, ui04 } = carbonThemeTokens || {
+				// default to g10 if we cannot dynamically determine
+				ui01: "#ffffff",
+				ui03: "#e0e0e0",
+				ui04: "#8d8d8d"
+			};
 
 			if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
 				this.renderZoomBarArea(
@@ -182,13 +187,13 @@ export class ZoomBar extends Component {
 					ui01
 				);
 				this.updateClipPaths(
-					svg,
+					container,
 					this.clipId,
 					this.inverseClipId,
 					0,
 					0,
 					0,
-					0
+					zoombarHeight
 				);
 				this.renderZoomBarArea(
 					container,
@@ -550,35 +555,50 @@ export class ZoomBar extends Component {
 	}
 
 	updateClipPaths(svg, clipId, inverseClipId, x, y, width, height) {
-		const {
-			width: containerWidth,
-			height: containerHeight
-		} = svg.node().getBoundingClientRect();
+		const { width: containerWidth, height: containerHeight } =
+			svg.node().getBoundingClientRect() || {};
 
+		const { width: selectionWidth, height: selectionHeight } =
+			svg.select("rect.selection").node()?.getBoundingClientRect() || {};
+
+		// If the width exactly matches the selection, then we need to clip the whole zoom bar, otherwise clip just half because the width is on the inner selector, not the outer selector
+		const zoomHandleAdjustment =
+			selectionWidth === width || !width ? 5 : 2.5;
+
+		// clipPath is for the inner bounds
 		const zoomBarClipPath = DOMUtils.appendOrSelect(
 			svg,
 			`clipPath.clipPath`
 		).attr("id", clipId);
 		DOMUtils.appendOrSelect(zoomBarClipPath, "rect")
-			.attr("x", x + 2.5)
+			.attr("x", x + zoomHandleAdjustment)
 			.attr("y", y)
-			.attr("width", width - 5)
+			.attr("width", width - zoomHandleAdjustment * 2)
 			.attr("height", height - 1); // clip up one to show the baseline
-		// Need to attach an inverseClipPath for the outer bounds
-		const zoomBarInverseClipPath = DOMUtils.appendOrSelect(
-			svg,
-			`clipPath.inverseClipPath`
-		).attr("id", inverseClipId);
-		DOMUtils.appendOrSelect(zoomBarInverseClipPath, "rect.leftInverseClip")
-			.attr("x", 0)
-			.attr("y", 0)
-			.attr("width", x - 2.5)
-			.attr("height", height - 1); // clip up one to show the baseline
-		DOMUtils.appendOrSelect(zoomBarInverseClipPath, "rect.rightInverseClip")
-			.attr("x", x + width + 2.5)
-			.attr("y", 0)
-			.attr("width", containerWidth)
-			.attr("height", height - 1); // clip up one to show the baseline
+
+		if (width > 0 || height > 0) {
+			// Need to attach an inverseClipPath for the outer bounds
+			const zoomBarInverseClipPath = DOMUtils.appendOrSelect(
+				svg,
+				`clipPath.inverseClipPath`
+			).attr("id", inverseClipId);
+			DOMUtils.appendOrSelect(
+				zoomBarInverseClipPath,
+				"rect.leftInverseClip"
+			)
+				.attr("x", 0)
+				.attr("y", 0)
+				.attr("width", x - zoomHandleAdjustment)
+				.attr("height", height - 1); // clip up one to show the baseline
+			DOMUtils.appendOrSelect(
+				zoomBarInverseClipPath,
+				"rect.rightInverseClip"
+			)
+				.attr("x", x + width + zoomHandleAdjustment)
+				.attr("y", 0)
+				.attr("width", containerWidth)
+				.attr("height", height - 1); // clip up one to show the baseline
+		}
 	}
 
 	// assume the domains in data are already sorted
