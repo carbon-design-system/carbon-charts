@@ -164,8 +164,6 @@ if (process.env.NODE_ENV !== "production") {
 	${storyUtils.generateThemePickerHTML()}
 `;
 
-		storyUtils.addRadioButtonEventListeners(container);
-
 		const getNewRow = () => {
 			const newRow = document.createElement("div");
 			newRow.setAttribute("class", "bx--row");
@@ -197,6 +195,8 @@ if (process.env.NODE_ENV !== "production") {
 					data: demo.data,
 					options: demo.options
 				});
+
+				storyUtils.addRadioButtonEventListeners(container, chart);
 
 				row.appendChild(column);
 
