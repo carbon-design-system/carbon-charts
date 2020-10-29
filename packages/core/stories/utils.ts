@@ -78,7 +78,7 @@ const generateColorPalettePickerHTML = (container, chart) => {
 									? "selected"
 									: ""
 							}>
-							Option ${i}
+							${numberOfVariants}-color groups, option ${i}
 						</option>`;
 						}
 					} else {
