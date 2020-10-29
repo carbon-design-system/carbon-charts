@@ -135,14 +135,14 @@ export class DOMUtils extends Service {
 		return finalDimensions;
 	}
 
-	static appendOrSelect(parent, query) {
+	static appendOrSelect(parent, query, schema?) {
 		const querySections = query.split(".");
 		const elementToAppend = querySections[0];
 
 		const selection = parent.select(query);
 		if (selection.empty()) {
 			return parent
-				.append(elementToAppend)
+				.append((schema ? `${schema}:` : "") + elementToAppend)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 

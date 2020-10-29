@@ -518,19 +518,14 @@ export class ZoomBar extends Component {
 		)
 			.attr("width", "100%")
 			.attr("height", "100%");
+		const body = DOMUtils.appendOrSelect(foreignObject, "body", "xhtml");
 
-		let canvas = <HTMLCanvasElement>document.getElementById(querySelector);
-		if (!canvas) {
-			canvas = <HTMLCanvasElement>document.createElement("CANVAS");
-			canvas.setAttribute("id", querySelector);
-			canvas.setAttribute("class", querySelector);
-
-			document.body.appendChild(canvas);
-			foreignObject.node().appendChild(canvas);
-		}
-
-		canvas.setAttribute("width", containerWidth);
-		canvas.setAttribute("height", containerHeight);
+		const canvas = <HTMLCanvasElement>(
+			DOMUtils.appendOrSelect(body, `canvas.${querySelector}`)
+				.attr("width", containerWidth)
+				.attr("height", containerHeight)
+				.node()
+		);
 		const areaContext = canvas.getContext("2d");
 
 		const areaGenerator = area()
