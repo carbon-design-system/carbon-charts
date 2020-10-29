@@ -112,6 +112,7 @@ div.container {
 
 	@import "../src/styles/vendor/carbon-components/scss/globals/grid/grid";
 	@import "../src/styles/vendor/carbon-components/scss/components/button/button";
+	@import "../src/styles/vendor/carbon-components/scss/components/select/select";
 	@import "../src/styles/vendor/carbon-components/scss/components/tag/tag";
 	@import "../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button";
 	@import "../src/styles/vendor/carbon-components/scss/components/notification/inline-notification";
@@ -128,7 +129,12 @@ div.container {
 		}
 	}
 
+	a {
+		color: #78a9ff;
+	}
+
 	h3 {
+		margin: 0;
 		font-weight: 700;
 
 		b.component {
@@ -136,9 +142,10 @@ div.container {
 		}
 
 		span.bx--tag.component-name {
-			font-size: 19px;
-			padding: 16px 10px;
-			border-radius: 0.8rem;
+			font-size: 0.8em;
+			padding: 0.25em 1em;
+			border-radius: 1em;
+			font-weight: 600;
 		}
 	}
 

@@ -94,13 +94,13 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			container.innerHTML = `
 <h3>
-	<b class="component">Component:</b>
+	<b class="component">Component</b>
 	<span class="bx--tag bx--tag--green component-name">${
 		demo.chartType.vanilla
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span>data, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
 </p>
 
 ${
@@ -121,6 +121,7 @@ ${
 }
 
 ${storyUtils.generateThemePickerHTML()}
+${storyUtils.generateColorPalettePickerHTML()}
 
 <div class="marginTop-30" id="chart-demo">
 </div>

@@ -1,5 +1,9 @@
 import { ZoomBarTypes } from "./interfaces";
 
+export const color = {
+
+};
+
 export const area = {
 	opacity: {
 		unselected: 0,
