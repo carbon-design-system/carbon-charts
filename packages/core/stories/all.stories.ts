@@ -131,8 +131,6 @@ ${storyUtils.generateThemePickerHTML()}
 </a>
 			`;
 
-			storyUtils.addRadioButtonEventListeners(container);
-
 			// Initialize chart
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
@@ -142,6 +140,7 @@ ${storyUtils.generateThemePickerHTML()}
 				}
 			);
 
+			storyUtils.addRadioButtonEventListeners(container, chart);
 			return container;
 		});
 	});
