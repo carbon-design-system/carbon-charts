@@ -1,7 +1,14 @@
 import { ZoomBarTypes } from "./interfaces";
 
 export const color = {
-
+	pairingOptions: {
+		"1-color": 4,
+		"2-color": 5,
+		"3-color": 5,
+		"4-color": 3,
+		"5-color": 2,
+		"14-color": 1
+	}
 };
 
 export const area = {

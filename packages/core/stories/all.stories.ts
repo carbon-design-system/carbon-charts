@@ -120,8 +120,8 @@ ${
 		: ""
 }
 
-${storyUtils.generateThemePickerHTML()}
-${storyUtils.generateColorPalettePickerHTML()}
+<div id="charting-controls">
+</div>
 
 <div class="marginTop-30" id="chart-demo">
 </div>
@@ -132,8 +132,6 @@ ${storyUtils.generateColorPalettePickerHTML()}
 </a>
 			`;
 
-			storyUtils.addRadioButtonEventListeners(container);
-
 			// Initialize chart
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
@@ -142,6 +140,8 @@ ${storyUtils.generateColorPalettePickerHTML()}
 					options: object("Options", demo.options)
 				}
 			);
+
+			storyUtils.addControls(container, chart);
 
 			return container;
 		});
@@ -162,8 +162,6 @@ if (process.env.NODE_ENV !== "production") {
 	<h3>
 		<b class="component">Collection of all demos</b>
 	</h3>
-
-	${storyUtils.generateThemePickerHTML()}
 `;
 
 		storyUtils.addRadioButtonEventListeners(container);
