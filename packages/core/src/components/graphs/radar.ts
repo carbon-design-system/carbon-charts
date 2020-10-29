@@ -453,7 +453,7 @@ export class Radar extends Component {
 					.append("path")
 					.attr("class", (group) =>
 						this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.FILL],
+							classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 							dataGroupName: group.name,
 							originalClassName: "blob"
 						})
