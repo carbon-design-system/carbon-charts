@@ -193,9 +193,7 @@ export class Treemap extends Component {
 						)
 					)
 					.attr("fill", (d: any) =>
-						color(fillColor)
-							.darker(0.7)
-							.toString()
+						color(fillColor).darker(0.7).toString()
 					);
 
 				// Show tooltip
