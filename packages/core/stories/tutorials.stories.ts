@@ -115,7 +115,6 @@ tutorialStories.add("Event listeners", () => {
 	return container;
 });
 
-
 // Add the tutorial(s) after getting started
 tutorialStories.add("Color palette", () => {
 	// container creation
