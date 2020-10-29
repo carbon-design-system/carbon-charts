@@ -18,6 +18,14 @@ export enum Model {
 }
 
 /**
+ * enum of all toolbar events
+ */
+export enum Toolbar {
+	SHOW_OVERFLOW_MENU = "show-toolbar-overflow-menu",
+	HIDE_OVERFLOW_MENU = "hide-toolbar-overflow-menu"
+}
+
+/**
  * enum of all events related to the zoom-bar
  */
 export enum ZoomBar {
