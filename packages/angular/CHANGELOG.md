@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.5...v0.40.6) (2020-10-30)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.40.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.4...v0.40.5) (2020-10-30)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
 ## [0.40.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.3...v0.40.4) (2020-10-29)
 
 **Note:** Version bump only for package @carbon/charts-angular

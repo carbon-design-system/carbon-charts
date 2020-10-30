@@ -453,7 +453,10 @@ export class Radar extends Component {
 					.append("path")
 					.attr("class", (group) =>
 						this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.FILL],
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
 							dataGroupName: group.name,
 							originalClassName: "blob"
 						})
@@ -478,7 +481,20 @@ export class Radar extends Component {
 								radialLineGenerator(group.data)
 							)
 					),
-			(update) =>
+			(update) => {
+				update
+					.attr("class", (group) =>
+						this.model.getColorClassName({
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						})
+					)
+					.attr("fill", (group) => colorScale(group.name))
+					.attr("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
 						.transition(
@@ -490,7 +506,8 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				),
+				);
+			},
 			(exit) =>
 				exit.call((selection) =>
 					selection
@@ -838,6 +855,7 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
+							color: self.model.getFillColor(datum[groupMapsTo]),
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
 								dataGroupName: datum[groupMapsTo]
