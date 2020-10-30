@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
+import { ColorClassNameTypes } from "../../interfaces/enums";
 import {
 	LegendOrientations,
 	Roles,
@@ -64,6 +65,13 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 
+		const paletteOption = Tools.getProperty(
+			options,
+			"color",
+			"pairing",
+			"option"
+		);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
@@ -80,6 +88,15 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
+			.attr("class", (d, i) => {
+				if (paletteOption) {
+					return this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: d.name,
+						originalClassName: "checkbox"
+					});
+				}
+			})
 			.style("fill", (d) => {
 				return d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name)
@@ -231,8 +248,8 @@ export class Legend extends Component {
 
 					if (
 						startingPoint +
-						spaceNeededForCheckbox +
-						legendItemTextDimensions.width >
+							spaceNeededForCheckbox +
+							legendItemTextDimensions.width >
 						svgDimensions.width
 					) {
 						lineNumber++;
