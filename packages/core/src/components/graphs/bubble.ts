@@ -79,7 +79,7 @@ export class Bubble extends Scatter {
 			.attr("fill", (d) =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 			)
-			.attr("stoke", (d) =>
+			.attr("stroke", (d) =>
 				this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
