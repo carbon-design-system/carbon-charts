@@ -73,6 +73,7 @@ export class Zoom extends Service {
 				new Date(data[domainIdentifier]).getTime()
 			);
 		});
+		// TODO: transforming the data like this for the zoom bar is very expensive for large datasets, also I would argue that summing multiple values doesn't make sense for line graphs and grouped bar graphs
 		allDates = Tools.removeArrayDuplicates(allDates).sort();
 		// Go through all date values
 		// And get corresponding data from each dataset
@@ -92,8 +93,9 @@ export class Zoom extends Service {
 		});
 	}
 
-	getDefaultZoomBarDomain() {
-		const zoomBarData = this.services.zoom.getZoomBarData();
+	getDefaultZoomBarDomain(zoomBarData?) {
+		const allZoomBarData =
+			zoomBarData || this.services.zoom.getZoomBarData();
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
@@ -101,7 +103,7 @@ export class Zoom extends Service {
 		// default to full range with extended domain
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
-			extent(zoomBarData, (d: any) => d[domainIdentifier])
+			extent(allZoomBarData, (d: any) => d[domainIdentifier])
 		);
 	}
 

@@ -32,6 +32,8 @@ export class ZoomBar extends Component {
 	brush = brushX();
 	xScale: any;
 	yScale: any;
+	defaultDomain: any;
+	zoomBarData: any;
 
 	init() {
 		this.services.events.addEventListener(
@@ -105,14 +107,21 @@ export class ZoomBar extends Component {
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
-			const zoomBarData = this.services.zoom.getZoomBarData();
+			this.zoomBarData =
+				this.zoomBarData || this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
-			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
+			// need to cache the defaultDomain for performance reasons
+			this.defaultDomain =
+				this.defaultDomain ||
+				this.services.zoom.getDefaultZoomBarDomain(this.zoomBarData);
 
 			// add value 0 to the extended domain for zoom bar area graph
-			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain);
+			this.compensateDataForDefaultDomain(
+				this.zoomBarData,
+				this.defaultDomain
+			);
 
 			// get old initialZoomDomain from model
 			const oldInitialZoomDomain = this.model.get("initialZoomDomain");
@@ -150,20 +159,22 @@ export class ZoomBar extends Component {
 						initialZoomDomain: newInitialZoomDomain,
 						zoomDomain: newInitialZoomDomain
 							? newInitialZoomDomain
-							: defaultDomain
+							: this.defaultDomain
 					},
 					{ skipUpdate: true }
 				);
 			}
 
-			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
+			this.xScale
+				.range([axesLeftMargin, width])
+				.domain(this.defaultDomain);
 
 			// keep max selection range
 			this.maxSelectionRange = this.xScale.range();
 
 			this.yScale
 				.range([0, zoombarHeight - 6])
-				.domain(extent(zoomBarData, (d: any) => d.value));
+				.domain(extent(this.zoomBarData, (d: any) => d.value));
 
 			const zoomDomain = this.model.get("zoomDomain");
 
@@ -171,14 +182,14 @@ export class ZoomBar extends Component {
 				this.renderZoomBarArea(
 					container,
 					"path.zoom-graph-area-unselected",
-					zoomBarData,
+					this.zoomBarData,
 					null
 				);
 				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
 				this.renderZoomBarArea(
 					container,
 					"path.zoom-graph-area",
-					zoomBarData,
+					this.zoomBarData,
 					this.clipId
 				);
 
