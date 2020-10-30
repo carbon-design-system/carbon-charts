@@ -10,6 +10,7 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
 
 export * from "./area";
@@ -152,6 +153,11 @@ let allDemoGroups = [
 		demos: [
 			{
 				options: barDemos.simpleBarOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarColorPaletteOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
 			},
@@ -406,6 +412,11 @@ let allDemoGroups = [
 		demos: [
 			{
 				options: lineDemos.lineOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			},
@@ -769,6 +780,23 @@ let allDemoGroups = [
 		]
 	},
 	{
+		title: "Toolbar (alpha)",
+		demos: [
+			{
+				options: toolbarDemos.toolbarStackedBarTimeSeriesOptions,
+				data: toolbarDemos.toolbarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: toolbarDemos.toolbarLineTimeSeriesOptions,
+				data: toolbarDemos.toolbarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			}
+		]
+	},
+	{
 		title: "Zoom bar (alpha)",
 		demos: [
 			{
@@ -835,6 +863,12 @@ let allDemoGroups = [
 				options: zoomBarDemos.zoomBarStringDateOptions,
 				data: zoomBarDemos.zoomBarStringDateData,
 				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLockedOptions,
+				data: zoomBarDemos.zoomBarLockedData,
+				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false
 			},
 			{

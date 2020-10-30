@@ -6,6 +6,7 @@ import "../demo/styles.scss";
 import {
 	tabularTutorial,
 	eventListenersTutorial,
+	colorPaletteTutorial,
 	reactTutorial,
 	angularTutorial,
 	vanillaTutorial,
@@ -106,6 +107,21 @@ tutorialStories.add("Event listeners", () => {
 	container.setAttribute("class", "container tutorial");
 
 	container.innerHTML = eventListenersTutorial;
+
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
+
+	return container;
+});
+
+// Add the tutorial(s) after getting started
+tutorialStories.add("Color palette", () => {
+	// container creation
+	const container = document.createElement("div");
+	container.setAttribute("class", "container tutorial");
+
+	container.innerHTML = colorPaletteTutorial;
 
 	container.querySelectorAll("pre code").forEach((block) => {
 		hljs.highlightBlock(block);
