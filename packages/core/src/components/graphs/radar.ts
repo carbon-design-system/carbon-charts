@@ -478,7 +478,16 @@ export class Radar extends Component {
 								radialLineGenerator(group.data)
 							)
 					),
-			(update) =>
+			(update) => {
+				update
+					.attr("class", (group) => 
+						this.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						}))
+					.attr("fill", (group) => colorScale(group.name))
+					.attr("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
 						.transition(
@@ -490,7 +499,8 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				),
+				)
+			},
 			(exit) =>
 				exit.call((selection) =>
 					selection
