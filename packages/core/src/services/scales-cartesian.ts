@@ -261,27 +261,6 @@ export class CartesianScales extends Service {
 		return axisOptions.mapsTo;
 	}
 
-	/** Uses the Y Axis to get data items associated with that value. */
-	getDataFromDomain(domainValue) {
-		const displayData = this.model.getDisplayData();
-		const domainIdentifier = this.getDomainIdentifier();
-		const scaleType = this.scaleTypes[this.domainAxisPosition];
-		if (scaleType === ScaleTypes.TIME) {
-			return displayData.filter((datum) => {
-				let date = datum[domainIdentifier];
-				if (typeof date === "string" || date.getTime === undefined) {
-					date = new Date(date);
-				}
-
-				return date.getTime() === domainValue.getTime();
-			});
-		}
-
-		return displayData.filter((datum) => {
-			return datum[domainIdentifier] === domainValue;
-		});
-	}
-
 	extendsDomain(axisPosition: AxisPositions, domain: any) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
