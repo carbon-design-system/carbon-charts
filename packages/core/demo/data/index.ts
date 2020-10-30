@@ -170,6 +170,11 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarColorPaletteOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.simpleBarOptionsCustomTicks,
 				data: barDemos.simpleBarDataCustomTicks,
 				chartType: chartTypes.SimpleBarChart,
@@ -426,6 +431,11 @@ let allDemoGroups = [
 		demos: [
 			{
 				options: lineDemos.lineOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			},

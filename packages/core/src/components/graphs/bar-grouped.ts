@@ -1,12 +1,16 @@
 // Internal Imports
 import { Bar } from "./bar";
 import { Tools } from "../../tools";
-import { CartesianOrientations, Events, Roles } from "../../interfaces";
+import {
+	CartesianOrientations,
+	ColorClassNameTypes,
+	Events,
+	Roles
+} from "../../interfaces";
 
 // D3 Imports
 import { map } from "d3-collection";
 import { select } from "d3-selection";
-import { color } from "d3-color";
 import { ScaleBand, scaleBand } from "d3-scale";
 
 export class GroupedBar extends Bar {
@@ -105,6 +109,13 @@ export class GroupedBar extends Bar {
 					animate
 				)
 			)
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "bar"
+				})
+			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d) => {
 				/*
@@ -169,25 +180,17 @@ export class GroupedBar extends Bar {
 
 	addEventListeners() {
 		const self = this;
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
 
 		this.parent
 			.selectAll("path.bar")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
-					.attr("fill", (d: any) =>
-						color(self.model.getFillColor(d[groupMapsTo]))
-							.darker(0.7)
-							.toString()
-					);
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
@@ -225,13 +228,7 @@ export class GroupedBar extends Bar {
 
 				hoveredElement
 					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseout_fill_update"
-						)
-					)
-					.attr("fill", (d: any) =>
-						self.model.getFillColor(d[groupMapsTo])
-					);
+						self.services.transitions.getTransition("graph_element_mouseout_fill_update"));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
@@ -304,9 +301,10 @@ export class GroupedBar extends Bar {
 		// If there's a provided width, compare with maxWidth and
 		// Determine which to return
 		if (providedWidth !== null) {
-			if (providedMaxWidth === null) {
-				return providedWidth;
-			} else if (providedWidth <= providedMaxWidth) {
+			if (
+				providedMaxWidth === null ||
+				providedWidth <= providedMaxWidth
+			) {
 				return providedWidth;
 			}
 		}

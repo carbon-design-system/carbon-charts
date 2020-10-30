@@ -2,10 +2,10 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
+import { Roles, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { scaleLinear } from "d3-scale";
-import { Roles } from "../../interfaces";
 
 export class Meter extends Component {
 	type = "meter";
@@ -39,7 +39,10 @@ export class Meter extends Component {
 		const value = svg.selectAll("rect.value").data([data]);
 
 		// if user provided a color for the bar, we dont want to attach a status class
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const className =
+			status != null && !self.model.isUserProvidedColorScaleValid()
+				? `value status--${status}`
+				: "";
 
 		// draw the value bar
 		value
@@ -50,11 +53,12 @@ export class Meter extends Component {
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", Tools.getProperty(options, "meter", "height"))
-			.attr(
-				"class",
-				status != null && !userProvidedScale
-					? `value status--${status}`
-					: ""
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: className
+				})
 			)
 			.transition(
 				this.services.transitions.getTransition(

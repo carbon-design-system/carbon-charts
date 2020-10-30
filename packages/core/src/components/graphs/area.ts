@@ -1,12 +1,18 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { CartesianOrientations, Events } from "../../interfaces";
-import { GradientUtils } from "../../services";
+import {
+	CartesianOrientations,
+	Events,
+	ColorClassNameTypes
+} from "../../interfaces";
+import { GradientUtils, DOMUtils } from "../../services";
 import { Tools } from "../../tools";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { area } from "d3-shape";
+import { select } from "d3-selection";
 
 export class Area extends Component {
 	type = "area";
@@ -76,7 +82,32 @@ export class Area extends Component {
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
 
-		if (isGradientAllowed) {
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
+		const chartSVG = DOMUtils.appendOrSelect(
+			select(this.services.domUtils.getHolder()),
+			`svg.${settings.prefix}--${chartprefix}--chart-svg`
+		);
+
+		// The fill value of area has been overwritten, get color value from stroke color class instead
+		const strokePathElement = chartSVG
+			.select(
+				`path.${this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.STROKE],
+					dataGroupName: groupedData[0].name
+				})}`
+			)
+			.node();
+		const colorValue = strokePathElement
+			? getComputedStyle(strokePathElement, null).getPropertyValue(
+					"stroke"
+			  )
+			: null;
+
+		if (isGradientAllowed && colorValue) {
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id:
@@ -87,10 +118,7 @@ export class Area extends Component {
 				x2: "0%",
 				y1: "0%",
 				y2: "100%",
-				stops: GradientUtils.getStops(
-					domain,
-					this.model.getFillColor(groupedData[0].name)
-				)
+				stops: GradientUtils.getStops(domain, colorValue)
 			});
 		} else {
 			// make sure there is no linearGradient if no gradient is allowed
@@ -114,12 +142,21 @@ export class Area extends Component {
 		if (isGradientAllowed) {
 			enteringAreas
 				.merge(areas)
-				.style("fill", (group) => {
-					return `url(#${group.name.replace(" ", "")}_${
-						this.gradient_id
-					})`;
-				})
+				.style(
+					"fill",
+					(group) =>
+						`url(#${group.name.replace(" ", "")}_${
+							this.gradient_id
+						})`
+				)
 				.attr("class", "area")
+				.attr("class", (group) =>
+					this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: group.name,
+						originalClassName: "area"
+					})
+				)
 				.attr("d", (group) => {
 					const { data } = group;
 					return areaGenerator(data);
@@ -128,9 +165,15 @@ export class Area extends Component {
 			enteringAreas
 				.attr("opacity", 0)
 				.merge(areas)
-				.attr("fill", (group) => {
-					return this.model.getFillColor(group.name);
-				})
+				.attr("class", "area")
+				.attr("class", (group) =>
+					this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: group.name,
+						originalClassName: "area"
+					})
+				)
+				.attr("fill", (group) => self.model.getFillColor(group.name))
 				.transition(
 					this.services.transitions.getTransition(
 						"area-update-enter",
@@ -138,7 +181,6 @@ export class Area extends Component {
 					)
 				)
 				.attr("opacity", Configuration.area.opacity.selected)
-				.attr("class", "area")
 				.attr("d", (group) => {
 					const { data } = group;
 					return areaGenerator(data);

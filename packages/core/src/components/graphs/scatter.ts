@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { Roles, Events } from "../../interfaces";
+import { Roles, Events, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -191,6 +191,24 @@ export class Scatter extends Component {
 		selection
 			.raise()
 			.classed("dot", true)
+			.attr("class", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				const isFilled = this.model.getIsFilled(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d,
+					filled
+				);
+				const classNamesNeeded = isFilled
+					? [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE]
+					: [ColorClassNameTypes.STROKE];
+
+				return this.model.getColorClassName({
+					classNameTypes: classNamesNeeded,
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "dot"
+				});
+			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed("threshold-anomaly", (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
@@ -272,7 +290,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	handleChartHolderOnMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -283,7 +301,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 0);
-	};
+	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -298,7 +316,7 @@ export class Scatter extends Component {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -309,7 +327,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	getTooltipData(hoveredX, hoveredY) {
 		return this.model.getDisplayData(this.configs.groups).filter((d) => {
@@ -322,7 +340,7 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = self.model.getOptions().data;
 
 		this.parent
 			.selectAll("circle")
@@ -331,14 +349,22 @@ export class Scatter extends Component {
 
 				hoveredElement
 					.classed("hovered", true)
-					.style("fill", (d: any) => {
+					.attr("class", (d) =>
+						self.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.FILL],
+							dataGroupName: d[groupMapsTo],
+							originalClassName: hoveredElement.attr("class")
+						})
+					)
+					.style("fill", (d) => {
 						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
 						return self.model.getFillColor(
-							d[groupMapsTo],
-							d[domainIdentifier],
-							d
-						);
-				});
+								d[groupMapsTo],
+								d[domainIdentifier],
+								d);
+						}
+					)
+					.classed("unfilled", false);
 
 				const hoveredX = self.services.cartesianScales.getDomainValue(
 					datum
@@ -390,7 +416,11 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (!self.configs.filled) {
+				if (
+					!self.configs.filled &&
+					hoveredElement.attr("fill-opacity") === "1"
+				) {
+					hoveredElement.classed("unfilled", true);
 					hoveredElement.style("fill", null);
 				}
 

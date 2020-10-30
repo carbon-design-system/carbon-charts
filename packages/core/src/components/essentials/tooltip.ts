@@ -174,6 +174,8 @@ export class Tooltip extends Component {
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
+			const useColor = this.model.isUserProvidedColorScaleValid();
+
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
 				formattedItems
@@ -181,8 +183,9 @@ export class Tooltip extends Component {
 						(item) =>
 							`<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
+								${item.class && !useColor ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								${
-									item.color
+									item.color && useColor
 										? '<a style="background-color: ' +
 										  item.color +
 										  '" class="tooltip-color"></a>'
