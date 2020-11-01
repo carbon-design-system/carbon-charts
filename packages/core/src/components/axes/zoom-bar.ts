@@ -80,7 +80,10 @@ export class ZoomBar extends Component {
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
-
+		// initialization is not completed yet
+		if (width === 0) {
+			return;
+		}
 		// get axes margins
 		let axesLeftMargin = 0;
 		const axesMargins = this.model.get("axesMargins");
@@ -118,7 +121,7 @@ export class ZoomBar extends Component {
 		}
 
 		if (isTopZoomBarLoading) {
-			// TODO - zoom bar skeleton could be improved in the future
+			this.renderSkeleton(container, axesLeftMargin, width);
 			return;
 		}
 
@@ -213,16 +216,8 @@ export class ZoomBar extends Component {
 					zoomBarData,
 					this.clipId
 				);
-
-				// Draw the zoom base line
-				const baselineGenerator = line()([
-					[axesLeftMargin, zoombarHeight],
-					[width, zoombarHeight]
-				]);
-				const zoomBaseline = DOMUtils.appendOrSelect(
-					container,
-					"path.zoom-bg-baseline"
-				).attr("d", baselineGenerator);
+				// Draw the zoom bar base line
+				this.renderZoomBarBaseline(container, axesLeftMargin, width);
 			}
 
 			// Attach brushing event listeners
@@ -577,6 +572,49 @@ export class ZoomBar extends Component {
 			zoomBarData.push(newDatum);
 		}
 		return zoomBarData;
+	}
+
+	renderZoomBarBaseline(container, startX, endX) {
+		const zoombarType = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"type"
+		);
+		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+		const baselineGenerator = line()([
+			[startX, zoombarHeight],
+			[endX, zoombarHeight]
+		]);
+		DOMUtils.appendOrSelect(container, "path.zoom-bg-baseline").attr(
+			"d",
+			baselineGenerator
+		);
+	}
+
+	renderSkeleton(container, startX, endX) {
+		// need to clear current zoom bar area
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area-unselected",
+			[],
+			null
+		);
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area",
+			[],
+			this.clipId
+		);
+		// remove brush listener
+		this.brush.on("start brush end", null);
+		// clear d3 brush
+		DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			this.brushSelector
+		).html(null);
+		// re-render baseline because no axis labels in skeleton so the baseline length needs to change
+		this.renderZoomBarBaseline(container, startX, endX);
 	}
 
 	destroy() {
