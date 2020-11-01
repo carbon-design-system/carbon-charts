@@ -348,6 +348,10 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
 			} else if (event.type === "end") {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END;
+				// only dispatch zoom domain change event for triggering api call when event type equals to end
+				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+					newDomain
+				});
 			}
 			this.services.events.dispatchEvent(zoomBarEventType, {
 				selection,
