@@ -24,28 +24,8 @@ const definedZoomBarData = [
 	{ date: new Date(2019, 0, 19), value: 21300 }
 ];
 
-/**
- * Generates random data going backwards from now once a minute
- * @param {number} quantity number of data points to create
- * @param {number} min min range of integer value
- * @param {number} max max range of integer value
- * @returns {array} randomly generated array of objects with a date and value field
- */
-export const generateRandomData = (quantity, min, max) => {
-	const now = Date.now();
-	return Array(quantity)
-		.fill(0)
-		.map((value, index) => {
-			return {
-				group: "group",
-				value: Math.floor(Math.random() * (max - min + 1) + min),
-				date: new Date(now.valueOf() + (index - quantity) * 60000) // go forward a minute for every value
-			};
-		});
-};
-
 // utility function to update title and enable zoomBar option
-const addZoomBarToOptions = (
+export const addZoomBarToOptions = (
 	options,
 	configs: any = { includeDefinedZoomBarData: false }
 ) => {
@@ -256,20 +236,3 @@ export const zoomBarSkeletonOptions = addZoomBarToOptions(
 );
 zoomBarSkeletonOptions["title"] = "Zoom bar (skeleton)";
 zoomBarSkeletonOptions.zoomBar.top.loading = true;
-
-export const zoomBarHighScaleLineTimeSeriesData = generateRandomData(
-	2000,
-	500,
-	2500
-);
-export const zoomBarHighScaleLineTimeSeriesOptions = addZoomBarToOptions(
-	Object.assign({}, lineChart.lineTimeSeriesOptions)
-);
-zoomBarHighScaleLineTimeSeriesOptions["title"] = "Zoom bar (high scale)";
-zoomBarHighScaleLineTimeSeriesOptions.zoomBar.top.initialZoomDomain = [
-	zoomBarHighScaleLineTimeSeriesData[
-		zoomBarHighScaleLineTimeSeriesData.length - 100
-	]?.date,
-	zoomBarHighScaleLineTimeSeriesData.slice(-1)[0]?.date
-];
-

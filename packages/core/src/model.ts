@@ -137,6 +137,18 @@ export class ChartModel {
 		return sanitizedData;
 	}
 
+	/**
+	 * @param zoomBarData any special zoom bar data to use instead of the model data
+	 */
+	setZoomBarData(newZoomBarData) {
+		const sanitizedData = this.sanitize(Tools.clone(newZoomBarData));
+		this.set({ zoomBarData: sanitizedData });
+	}
+
+	getZoomBarData() {
+		return this.get("zoomBarData");
+	}
+
 	getDataGroups() {
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),

@@ -12,6 +12,7 @@ import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
 import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
+import * as highScaleDemos from "./high-scale";
 
 export * from "./area";
 export * from "./bar";
@@ -876,10 +877,18 @@ let allDemoGroups = [
 				data: zoomBarDemos.zoomBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false
-			},
+			}
+		]
+	}
+] as any;
+
+const devOnlyDemoGroups = [
+	{
+		title: "High scale tests (DEV)",
+		demos: [
 			{
-				options: zoomBarDemos.zoomBarHighScaleLineTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarHighScaleLineTimeSeriesData,
+				options: highScaleDemos.zoomBarHighScaleLineTimeSeriesOptions,
+				isHighScale: true,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			}
@@ -894,39 +903,48 @@ const formatTitleString = (str) =>
 		.toLowerCase()
 		.replace(/\s+/g, "-");
 
-// add codesandbox and code to demos
-allDemoGroups = allDemoGroups.map((demoGroup) => {
-	demoGroup.demos = demoGroup.demos.map((demo) => {
-		demo.title = demo.options.title;
-		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(
-			demo.options.title
-		)}`;
+const mapDemoGroups = (demoGroups) =>
+	demoGroups.map((demoGroup) => {
+		demoGroup.demos = demoGroup.demos.map((demo) => {
+			demo.title = demo.options.title;
+			demo.id = `${formatTitleString(
+				demoGroup.title
+			)}--${formatTitleString(demo.options.title)}`;
 
-		// if there isnt a height set in the chart options, use 400
-		demo.options.height = demo.options.height ?? "400px";
+			// if there isnt a height set in the chart options, use 400
+			demo.options.height = demo.options.height ?? "400px";
 
-		if (!demo.codesandbox) {
-			demo.codesandbox = {};
-		}
-		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
-		demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
-		demo.codesandbox.vanilla = createChartSandbox(
-			createVanillaChartApp(demo)
-		);
-		demo.codesandbox.svelte = createChartSandbox(
-			createSvelteChartApp(demo)
-		);
+			if (!demo.codesandbox) {
+				demo.codesandbox = {};
+			}
+			demo.codesandbox.react = createChartSandbox(
+				createReactChartApp(demo)
+			);
+			demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
+			demo.codesandbox.vanilla = createChartSandbox(
+				createVanillaChartApp(demo)
+			);
+			demo.codesandbox.svelte = createChartSandbox(
+				createSvelteChartApp(demo)
+			);
 
-		if (!demo.code) {
-			demo.code = {};
-		}
-		demo.code.angular = createAngularChartApp(demo);
+			if (!demo.code) {
+				demo.code = {};
+			}
+			demo.code.angular = createAngularChartApp(demo);
 
-		return demo;
+			return demo;
+		});
+
+		return demoGroup;
 	});
+// add codesandbox and code to demos
+allDemoGroups = mapDemoGroups(allDemoGroups);
 
-	return demoGroup;
-});
+// Only add the high-scale testcases in dev
+if (process.env.NODE_ENV !== "production") {
+	allDemoGroups = allDemoGroups.concat(mapDemoGroups(devOnlyDemoGroups));
+}
 
 // in the storybook we want to show all the demos
 export const storybookDemoGroups = allDemoGroups;

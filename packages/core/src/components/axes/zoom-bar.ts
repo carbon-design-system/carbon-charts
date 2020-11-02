@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { AxisPositions, Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	ZoomBarTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
@@ -32,21 +37,33 @@ export class ZoomBar extends Component {
 	brush = brushX();
 	xScale: any;
 	yScale: any;
-	defaultDomain: any;
-	zoomBarData: any;
 
 	init() {
 		this.services.events.addEventListener(
 			Events.ZoomBar.UPDATE,
 			this.render.bind(this)
 		);
+		// check if pre-defined zoom bar data exists
+		const definedZoomBarData = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"data"
+		);
+		if (definedZoomBarData) {
+			this.model.setZoomBarData(definedZoomBarData);
+		}
 	}
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(AxisPositions.TOP);
-		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(AxisPositions.TOP);
+		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(
+			AxisPositions.TOP
+		);
+		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(
+			AxisPositions.TOP
+		);
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
@@ -108,21 +125,16 @@ export class ZoomBar extends Component {
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
-			this.zoomBarData =
-				this.zoomBarData || this.services.zoom.getZoomBarData();
+			const zoomBarData = this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
-			// need to cache the defaultDomain for performance reasons
-			this.defaultDomain =
-				this.defaultDomain ||
-				this.services.zoom.getDefaultZoomBarDomain(this.zoomBarData);
+			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain(
+				zoomBarData
+			);
 
 			// add value 0 to the extended domain for zoom bar area graph
-			this.compensateDataForDefaultDomain(
-				this.zoomBarData,
-				this.defaultDomain
-			);
+			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain);
 
 			// get old initialZoomDomain from model
 			const oldInitialZoomDomain = this.model.get("initialZoomDomain");
@@ -160,22 +172,20 @@ export class ZoomBar extends Component {
 						initialZoomDomain: newInitialZoomDomain,
 						zoomDomain: newInitialZoomDomain
 							? newInitialZoomDomain
-							: this.defaultDomain
+							: defaultDomain
 					},
 					{ skipUpdate: true }
 				);
 			}
 
-			this.xScale
-				.range([axesLeftMargin, width])
-				.domain(this.defaultDomain);
+			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
 
 			// keep max selection range
 			this.maxSelectionRange = this.xScale.range();
 
 			this.yScale
 				.range([0, zoombarHeight - 6])
-				.domain(extent(this.zoomBarData, (d: any) => d.value));
+				.domain(extent(zoomBarData, (d: any) => d.value));
 
 			const zoomDomain = this.model.get("zoomDomain");
 
@@ -183,14 +193,14 @@ export class ZoomBar extends Component {
 				this.renderZoomBarArea(
 					container,
 					"path.zoom-graph-area-unselected",
-					this.zoomBarData,
+					zoomBarData,
 					null
 				);
 				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
 				this.renderZoomBarArea(
 					container,
 					"path.zoom-graph-area",
-					this.zoomBarData,
+					zoomBarData,
 					this.clipId
 				);
 

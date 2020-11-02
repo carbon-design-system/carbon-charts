@@ -121,6 +121,7 @@ ${
 }
 
 ${storyUtils.generateThemePickerHTML()}
+${demo.isHighScale ? storyUtils.generateDemoDataForm() : null}
 
 <div class="marginTop-30" id="chart-demo">
 </div>
@@ -137,10 +138,17 @@ ${storyUtils.generateThemePickerHTML()}
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
 				{
-					data: object("Data", demo.data),
+					data: object(
+						"Data",
+						demo.isHighScale
+							? storyUtils.generateRandomData(100, 100, 500)
+							: demo.data
+					),
 					options: object("Options", demo.options)
 				}
 			);
+
+			storyUtils.addDemoDataFormListeners(container, demo, chart);
 
 			return container;
 		});
