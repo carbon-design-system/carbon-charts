@@ -508,7 +508,7 @@ export class CartesianScales extends Service {
 		} else if (stackedGroups && axisPosition === this.getRangeAxisPosition()) {
 			const { groupMapsTo } = options.data;
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(stackedGroups);
-			const notStackedGroupsData = displayData.filter(datum => !stackedGroups.includes(datum[groupMapsTo]));
+			const nonStackedGroupsData = displayData.filter(datum => !stackedGroups.includes(datum[groupMapsTo]));
 			const stackedValues = dataValuesGroupedByKeys.map(dataValues => {
 				const {sharedStackKey, ...numericalValues} = dataValues;
 				return sum(values(numericalValues) as number[]);
@@ -516,7 +516,7 @@ export class CartesianScales extends Service {
 
 			allDataValues = [
 				...stackedValues,
-				...notStackedGroupsData.map(datum => datum[mapsTo])
+				...nonStackedGroupsData.map(datum => datum[mapsTo])
 			];
 		} else {
 			allDataValues = displayData.map((datum) => datum[mapsTo]);
