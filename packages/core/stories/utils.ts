@@ -71,7 +71,7 @@ export const generateRandomData = (quantity, min, max) => {
 /**
  * Adds a generate demo data form to the story
  */
-export const generateDemoDataForm = () =>
+export const generateHighScaleDemoDataForm = () =>
 	`<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
 	 size="5" value="100"><input type="submit"></label></form>`;
 export const addDemoDataFormListeners = (container, demo, chart) => {
