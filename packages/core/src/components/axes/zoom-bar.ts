@@ -554,7 +554,8 @@ export class ZoomBar extends Component {
 			svg.node().getBoundingClientRect() || {};
 
 		const { width: selectionWidth, height: selectionHeight } =
-			svg.select("rect.selection").node()?.getBoundingClientRect() || {};
+			document.querySelector("rect.selection")?.getBoundingClientRect() || // for some reason we have to use this version as the d3 selector breaks the d3-brush
+			{};
 
 		// If the left handle is still on the left, the clip needs to adjust for the whole handle, otherwise adjust to the middle
 		const leftZoomHandleAdjustment =
