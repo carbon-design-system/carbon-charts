@@ -39,7 +39,7 @@ export class AxisChart extends Chart {
 		const isZoomBarEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"enabled"
 		);
 		const toolbarEnabled = Tools.getProperty(
@@ -61,6 +61,11 @@ export class AxisChart extends Chart {
 			isZoomBarEnabled &&
 			mainXAxisPosition === AxisPositions.BOTTOM &&
 			mainXScaleType === ScaleTypes.TIME;
+
+		// @todo - should check if zoom bar in all axes are locked
+		const isZoomBarLocked = this.services.zoom.isZoomBarLocked(
+			AxisPositions.TOP
+		);
 
 		const titleAvailable = !!this.model.getOptions().title;
 		const titleComponent = {
@@ -112,7 +117,8 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		if (zoomBarEnabled) {
+		// if all zoom bars are locked, no need to add chart brush
+		if (zoomBarEnabled && !isZoomBarLocked) {
 			graphFrameComponents.push(
 				new ChartClip(this.model, this.services),
 				new ChartBrush(this.model, this.services)

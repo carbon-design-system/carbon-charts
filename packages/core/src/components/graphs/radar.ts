@@ -453,7 +453,10 @@ export class Radar extends Component {
 					.append("path")
 					.attr("class", (group) =>
 						this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.FILL],
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
 							dataGroupName: group.name,
 							originalClassName: "blob"
 						})
@@ -480,12 +483,16 @@ export class Radar extends Component {
 					),
 			(update) => {
 				update
-					.attr("class", (group) => 
+					.attr("class", (group) =>
 						this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
 							dataGroupName: group.name,
 							originalClassName: "blob"
-						}))
+						})
+					)
 					.attr("fill", (group) => colorScale(group.name))
 					.attr("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
@@ -848,6 +855,7 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
+							color: self.model.getFillColor(datum[groupMapsTo]),
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
 								dataGroupName: datum[groupMapsTo]
