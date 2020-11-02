@@ -81,14 +81,11 @@ export const addDemoDataFormListeners = (container, demo, chart) => {
 		form.addEventListener("submit", (e: any) => {
 			e.stopPropagation();
 			e.preventDefault();
-			console.log("submit event", e);
 			const recordsToGenerate =
 				parseInt(e.currentTarget[0].value) || 2000;
-			console.log(recordsToGenerate);
 			chart.model.setData(
 				generateRandomData(recordsToGenerate, 100, 500)
 			);
-			console.log(`updating chart`, chart);
 			chart.update();
 		});
 	}

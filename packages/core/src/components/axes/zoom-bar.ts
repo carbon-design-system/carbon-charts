@@ -50,9 +50,9 @@ export class ZoomBar extends Component {
 			AxisPositions.TOP,
 			"data"
 		);
-		if (definedZoomBarData) {
-			this.model.setZoomBarData(definedZoomBarData);
-		}
+
+		// load up the zoomBarData into this model
+		this.model.setZoomBarData(definedZoomBarData);
 	}
 
 	render(animate = true) {
@@ -125,7 +125,7 @@ export class ZoomBar extends Component {
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
-			const zoomBarData = this.services.zoom.getZoomBarData();
+			let zoomBarData = this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
@@ -134,7 +134,10 @@ export class ZoomBar extends Component {
 			);
 
 			// add value 0 to the extended domain for zoom bar area graph
-			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain);
+			zoomBarData = this.compensateDataForDefaultDomain(
+				zoomBarData,
+				defaultDomain
+			);
 
 			// get old initialZoomDomain from model
 			const oldInitialZoomDomain = this.model.get("initialZoomDomain");
@@ -538,27 +541,31 @@ export class ZoomBar extends Component {
 		if (!data || data.length < 2) {
 			return;
 		}
+		const zoomBarData = Tools.clone(data);
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// if min domain is extended
-		if (Number(defaultDomain[0]) < Number(data[0][domainIdentifier])) {
+		if (
+			Number(defaultDomain[0]) < Number(zoomBarData[0][domainIdentifier])
+		) {
 			const newDatum = {};
 			newDatum[domainIdentifier] = defaultDomain[0];
 			newDatum[rangeIdentifier] = 0;
-			data.unshift(newDatum);
+			zoomBarData.unshift(newDatum);
 		}
 		// if max domain is extended
 		if (
 			Number(defaultDomain[1]) >
-			Number(data[data.length - 1][domainIdentifier])
+			Number(zoomBarData[zoomBarData.length - 1][domainIdentifier])
 		) {
 			const newDatum = {};
 			newDatum[domainIdentifier] = defaultDomain[1];
 			newDatum[rangeIdentifier] = 0;
-			data.push(newDatum);
+			zoomBarData.push(newDatum);
 		}
+		return zoomBarData;
 	}
 
 	destroy() {

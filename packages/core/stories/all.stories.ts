@@ -121,7 +121,7 @@ ${
 }
 
 ${storyUtils.generateThemePickerHTML()}
-${demo.isHighScale ? storyUtils.generateDemoDataForm() : ""}
+${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ""}
 
 <div class="marginTop-30" id="chart-demo">
 </div>

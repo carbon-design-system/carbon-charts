@@ -134,15 +134,48 @@ export class ChartModel {
 			dataGroups
 		});
 
+		if (this.getZoomBarData()) {
+			// if we have zoom bar data we need to update it as well
+			this.setZoomBarData();
+		}
 		return sanitizedData;
 	}
 
 	/**
 	 * @param zoomBarData any special zoom bar data to use instead of the model data
 	 */
-	setZoomBarData(newZoomBarData) {
-		const sanitizedData = this.sanitize(Tools.clone(newZoomBarData));
-		this.set({ zoomBarData: sanitizedData });
+	setZoomBarData(newZoomBarData?) {
+		const { cartesianScales } = this.services;
+		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = cartesianScales.getRangeIdentifier();
+		const sanitizedData = newZoomBarData
+			? this.sanitize(Tools.clone(newZoomBarData))
+			: this.getDisplayData(); // if we're not passed explicit zoom data use the model
+
+		// get all dates (Number) in displayData
+		let allDates = sanitizedData.map((datum) =>
+			datum[domainIdentifier].getTime()
+		);
+		allDates = Tools.removeArrayDuplicates(allDates).sort();
+
+		// Go through all date values
+		// And get corresponding data from each dataset
+		const zoomBarNormalizedValues = allDates.map((date) => {
+			let sum = 0;
+			const datum = {};
+
+			sanitizedData.forEach((data) => {
+				if (data[domainIdentifier].getTime() === date) {
+					sum += data[rangeIdentifier];
+				}
+			});
+			datum[domainIdentifier] = new Date(date);
+			datum[rangeIdentifier] = sum;
+
+			return datum;
+		});
+
+		this.set({ zoomBarData: zoomBarNormalizedValues });
 	}
 
 	getZoomBarData() {
