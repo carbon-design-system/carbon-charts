@@ -55,7 +55,7 @@ export class Zoom extends Service {
 		const definedZoomBarData = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"data"
 		);
 
@@ -114,6 +114,7 @@ export class Zoom extends Service {
 			});
 		}
 	}
+
 	getZoomRatio() {
 		return Tools.getProperty(
 			this.model.getOptions(),
@@ -291,5 +292,23 @@ export class Zoom extends Service {
 
 	isEmptyState() {
 		return this.getZoomBarData().length === 0;
+	}
+
+	isZoomBarLoading(position) {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			position,
+			"loading"
+		);
+	}
+
+	isZoomBarLocked(position) {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			position,
+			"locked"
+		);
 	}
 }
