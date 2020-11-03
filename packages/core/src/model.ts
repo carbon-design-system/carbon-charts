@@ -576,6 +576,10 @@ export class ChartModel {
 	protected sanitizeDateValues(data) {
 		const options = this.getOptions();
 
+		if (!options.axes) {
+			return data;
+		}
+
 		const keysToCheck = [];
 		Object.keys(AxisPositions).forEach((axisPosition) => {
 			const axisOptions = options.axes[axisPosition];

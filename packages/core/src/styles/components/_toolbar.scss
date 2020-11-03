@@ -30,7 +30,10 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 			&-icon {
 				pointer-events: visible;
 
-				circle,	rect, path,	polygon {
+				circle,
+				rect,
+				path,
+				polygon {
 					fill: $icon-02;
 				}
 
@@ -43,7 +46,10 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 			&-icon--disabled {
 				pointer-events: auto;
 
-				circle, rect, path,	polygon {
+				circle,
+				rect,
+				path,
+				polygon {
 					fill: $disabled-03;
 				}
 
