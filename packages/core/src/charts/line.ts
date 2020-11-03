@@ -37,7 +37,6 @@ export class LineChart extends AxisChart {
 	}
 
 	getComponents() {
-
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
