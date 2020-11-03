@@ -585,10 +585,13 @@ export class ChartModel {
 		}
 
 		const keysToCheck = [];
-		Object.keys(AxisPositions).forEach((axisPosition) => {
+		Object.keys(AxisPositions).forEach((axisPositionKey) => {
+			const axisPosition = AxisPositions[axisPositionKey];
 			const axisOptions = options.axes[axisPosition];
+
 			if (axisOptions && axisOptions.scaleType === ScaleTypes.TIME) {
 				const axisMapsTo = axisOptions.mapsTo;
+
 				if (axisMapsTo !== null || axisMapsTo !== undefined) {
 					keysToCheck.push(axisMapsTo);
 				}
