@@ -511,6 +511,10 @@ export class ChartModel {
 		return null;
 	}
 
+	getAllDataGroupsNames() {
+		return this.allDataGroups;
+	}
+
 	/**
 	 * Converts data provided in the older format to tabular
 	 *
@@ -678,14 +682,7 @@ export class ChartModel {
 		}
 
 		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
-		const colorPairingCounts = {
-			"1-color": 4,
-			"2-color": 5,
-			"3-color": 5,
-			"4-color": 3,
-			"5-color": 2,
-			"14-color": 1
-		};
+		const colorPairingCounts = Configuration.color.pairingOptions;
 
 		// If number of dataGroups is greater than 5, user 14-color palette
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;
