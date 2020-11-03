@@ -1,5 +1,26 @@
-.#{$prefix}--#{$charts-prefix}--line path.line {
-	pointer-events: none;
-	fill: none;
-	stroke-width: 1.5;
+$lines-bg-color: $ui-03;
+$lines-shimmer-color: $carbon--white-0;
+
+.#{$prefix}--#{$charts-prefix}--line {
+	path.line {
+		pointer-events: none;
+		fill: none;
+		stroke-width: 1.5;
+	}
+
+	path.line.sparkline-loading {
+		animation: shimmer 2.5s infinite linear;
+		@keyframes shimmer {
+			0% {
+				stroke: $lines-bg-color;
+			}
+			20% {
+				stroke: $lines-shimmer-color;
+				opacity: 0.5;
+			}
+			100% {
+				stroke: $lines-bg-color;
+			}
+		}
+	}
 }

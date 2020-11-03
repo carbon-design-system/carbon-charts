@@ -490,6 +490,11 @@ let allDemoGroups = [
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
+			},
+			{
+				options: lineDemos.sparklineLoadingOptions,
+				data: lineDemos.lineSkeletonData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},

@@ -3,99 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.40.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.5...v0.40.6) (2020-10-30)
+## [0.40.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.9...v0.40.10) (2020-11-03)
 
 **Note:** Version bump only for package @carbon/charts
 
 
 
 
+
+## [0.40.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.8...v0.40.9) (2020-11-03)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.40.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.7...v0.40.8) (2020-11-02)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.40.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.6...v0.40.7) (2020-10-30)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.40.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.5...v0.40.6) (2020-10-30)
+
+**Note:** Version bump only for package @carbon/charts
 
 ## [0.40.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.4...v0.40.5) (2020-10-30)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.40.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.3...v0.40.4) (2020-10-29)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.40.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.2...v0.40.3) (2020-10-28)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.40.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.1...v0.40.2) (2020-10-27)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.40.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.0...v0.40.1) (2020-10-22)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 # [0.40.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.39.1...v0.40.0) (2020-10-08)
-
 
 ### Bug Fixes
 
-* **core:** fix Legend and Tooltip group color ([#834](https://github.com/carbon-design-system/carbon-charts/issues/834)) ([da4c9f4](https://github.com/carbon-design-system/carbon-charts/commit/da4c9f4d5da605f19db87fde9ab4caa45056373d)), closes [#828](https://github.com/carbon-design-system/carbon-charts/issues/828) [#828](https://github.com/carbon-design-system/carbon-charts/issues/828)
-
+-   **core:** fix Legend and Tooltip group color
+    ([#834](https://github.com/carbon-design-system/carbon-charts/issues/834))
+    ([da4c9f4](https://github.com/carbon-design-system/carbon-charts/commit/da4c9f4d5da605f19db87fde9ab4caa45056373d)),
+    closes
+    [#828](https://github.com/carbon-design-system/carbon-charts/issues/828)
+    [#828](https://github.com/carbon-design-system/carbon-charts/issues/828)
 
 ### Features
 
-* provide option to refresh range axis label ([#766](https://github.com/carbon-design-system/carbon-charts/issues/766)) ([070f9e3](https://github.com/carbon-design-system/carbon-charts/commit/070f9e38481362e1ad55f036915deb66d8a16648))
-
-
-
-
+-   provide option to refresh range axis label
+    ([#766](https://github.com/carbon-design-system/carbon-charts/issues/766))
+    ([070f9e3](https://github.com/carbon-design-system/carbon-charts/commit/070f9e38481362e1ad55f036915deb66d8a16648))
 
 ## [0.39.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.39.0...v0.39.1) (2020-10-05)
 
-
 ### Bug Fixes
 
-* **core:** fix division by zero & timescale issues ([#829](https://github.com/carbon-design-system/carbon-charts/issues/829)) ([ce9a2ab](https://github.com/carbon-design-system/carbon-charts/commit/ce9a2abdace0eef5ca6bdffa168992972d7f5848))
-
-
-
-
+-   **core:** fix division by zero & timescale issues
+    ([#829](https://github.com/carbon-design-system/carbon-charts/issues/829))
+    ([ce9a2ab](https://github.com/carbon-design-system/carbon-charts/commit/ce9a2abdace0eef5ca6bdffa168992972d7f5848))
 
 # [0.39.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.8...v0.39.0) (2020-10-01)
 
-
 ### Features
 
-* **core:** allow custom labels for total & group in tooltips ([#826](https://github.com/carbon-design-system/carbon-charts/issues/826)) ([6946477](https://github.com/carbon-design-system/carbon-charts/commit/69464778ed4fdd2230cf5ca93162ec11b310e580))
-
-
-
-
+-   **core:** allow custom labels for total & group in tooltips
+    ([#826](https://github.com/carbon-design-system/carbon-charts/issues/826))
+    ([6946477](https://github.com/carbon-design-system/carbon-charts/commit/69464778ed4fdd2230cf5ca93162ec11b310e580))
 
 ## [0.38.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.7...v0.38.8) (2020-09-30)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.38.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.38.6...v0.38.7) (2020-09-23)
 
