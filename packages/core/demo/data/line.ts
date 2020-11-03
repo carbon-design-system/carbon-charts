@@ -499,7 +499,7 @@ export const lineTimeSeriesDualAxesData = [
 ];
 
 export const dualLine = {
-	title: "Combo Line + Line (dual axes)",
+	title: "Line + Line (dual axes)",
 	axes: {
 		left: {
 			title: "Temperature (°C)",
