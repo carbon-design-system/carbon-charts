@@ -514,6 +514,11 @@ let allDemoGroups = [
 				data: lineDemos.lineTimeSeriesDualAxesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: true
+			},
+			{
+				options: lineDemos.sparklineLoadingOptions,
+				data: lineDemos.lineSkeletonData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
