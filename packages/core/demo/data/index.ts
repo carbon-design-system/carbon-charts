@@ -861,6 +861,12 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: comboDemos.comboLoadingOptions,
+				data: comboDemos.comboLoadingData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
 				options: comboDemos.comboErrorOptions,
 				data: comboDemos.comboErrorData,
 				chartType: chartTypes.ComboChart,

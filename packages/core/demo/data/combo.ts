@@ -98,7 +98,7 @@ export const comboStackedData = [
 ];
 
 export const comboStackedOptions = {
-	title: "Combo Line + Stacked bar (discrete)",
+	title: "Combo (Line + Stacked bar)",
 	axes: {
 		left: {
 			title: "Disney Park Attendance",
@@ -151,7 +151,7 @@ export const comboGroupedData = [
 ];
 
 export const comboGroupedOptions = {
-	title: "Combo Line + Grouped bar (discrete)",
+	title: "Combo (Line + Grouped bar)",
 	axes: {
 		left: {
 			title: "Sales",
@@ -203,7 +203,10 @@ export const comboAreaLineData = [
 ];
 
 export const comboAreaLineOptions = {
-	title: "Combo Line + Area",
+	title: "Combo (Line + Area)",
+	points: {
+		enabled: false
+	},
 	axes: {
 		left: {
 			title: "Score",
@@ -235,21 +238,21 @@ export const comboAreaLineOptions = {
 
 
 export const comboLineScatterData = [
-	{ group: "High", key: "Monday", temp: 20 },
-	{ group: "High", key: "Tuesday", temp: 33 },
-	{ group: "High", key: "Wednesday", temp: 23 },
-	{ group: "High", key: "Thursday", temp: 23 },
-	{ group: "High", key: "Friday", temp: 32 },
-	{ group: "Low", key: "Monday", temp: 12 },
-	{ group: "Low", key: "Tuesday", temp: 22 },
-	{ group: "Low", key: "Wednesday", temp: 20 },
-	{ group: "Low", key: "Thursday", temp: 22 },
-	{ group: "Low", key: "Friday", temp: 25 },
-	{ group: "Temperature", key: "Monday", temp: 24 },
-	{ group: "Temperature", key: "Tuesday", temp: 28 },
-	{ group: "Temperature", key: "Wednesday", temp: 30 },
-	{ group: "Temperature", key: "Thursday", temp: 29 },
-	{ group: "Temperature", key: "Friday", temp: 24 },
+	{ group: "Paris", key: "Monday", temp: 25 },
+	{ group: "Paris", key: "Tuesday", temp: 33 },
+	{ group: "Paris", key: "Wednesday", temp: 27 },
+	{ group: "Paris", key: "Thursday", temp: 25 },
+	{ group: "Paris", key: "Friday", temp: 32 },
+	{ group: "Marseille", key: "Monday", temp: 16 },
+	{ group: "Marseille", key: "Tuesday", temp: 22 },
+	{ group: "Marseille", key: "Wednesday", temp: 20 },
+	{ group: "Marseille", key: "Thursday", temp: 22 },
+	{ group: "Marseille", key: "Friday", temp: 25 },
+	{ group: "Avg Temperature", key: "Monday", temp: 20.5 },
+	{ group: "Avg Temperature", key: "Tuesday", temp: 27.5 },
+	{ group: "Avg Temperature", key: "Wednesday", temp: 23.5 },
+	{ group: "Avg Temperature", key: "Thursday", temp: 23.5 },
+	{ group: "Avg Temperature", key: "Friday", temp: 28.5 },
 	{ group: "Attendance", key: "Monday", value: 2650 },
 	{ group: "Attendance", key: "Tuesday", value: 2553 },
 	{ group: "Attendance", key: "Wednesday", value: 3433 },
@@ -258,7 +261,7 @@ export const comboLineScatterData = [
 ];
 
 export const comboLineScatterOptions = {
-	title: "Combo Line + Scatter + Bar",
+	title: "Combo (Line + Scatter + Bar)",
 	axes: {
 		left: {
 			mapsTo: "value",
@@ -273,22 +276,23 @@ export const comboLineScatterOptions = {
 			mapsTo: "temp",
 			scaleType: "linear",
 			datasets: [
-				"Temperature",
-				"High",
-				"Low"
+				"Avg Temperature",
+				"Paris",
+				"Marseille"
 			]
 		}
 	},
+	curve: "curveMonotoneX",
 	chartTypes: {
 		"simple-bar": [
 			"Attendance"
 		],
 		"line": [
-			"Temperature"
+			"Avg Temperature"
 		],
 		"scatter": [
-			"High",
-			"Low"
+			"Paris",
+			"Marseille"
 		]
 	}
 };
@@ -319,6 +323,41 @@ export const comboEmptyOptions = {
 				"Temperature"
 			]
 		}
+	},
+	chartTypes: {
+		"simple-bar": [
+			"Attendance"
+		],
+		"line": [
+			"Temperature"
+		]
+	}
+};
+
+export const comboLoadingData = comboLineScatterData;
+
+export const comboLoadingOptions = {
+	title: "Combo Chart (loading)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			title: "Attendance"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		right: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			scaleType: "linear",
+			datasets: [
+				"Temperature"
+			]
+		}
+	},
+	data: {
+		loading: true
 	},
 	chartTypes: {
 		"simple-bar": [
