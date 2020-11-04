@@ -52,7 +52,8 @@ export const sparklineLoadingOptions = {
 			visible: false,
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear"
+			scaleType: "linear",
+			ticks: {values: [16]}
 		}
 	},
 	grid: {

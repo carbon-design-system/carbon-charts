@@ -64,30 +64,37 @@ export class SkeletonLines extends Skeleton {
 		if (isDataLoading && !isSparkline) {
 			super.renderGridSkeleton(isDataLoading);
 		} else if (isDataLoading && isSparkline) {
-			this.renderSparklineSkeleton(isDataLoading);
+			const tickValue = Tools.getProperty(
+				this.model.getOptions(),
+				"axes",
+				"left",
+				"ticks",
+				"values"
+			);
+			this.renderSparklineSkeleton(isDataLoading, tickValue);
 		} else {
 			this.removeSkeleton();
 		}
 	}
 
-	renderSparklineSkeleton(showShimmerEffect: boolean) {
+	renderSparklineSkeleton(showShimmerEffect: boolean, tickValue: number[] = [100]) {
 		this.setScales();
 		this.drawBackdrop(showShimmerEffect);
-		this.drawSparkline(showShimmerEffect);
+		this.drawSparkline(showShimmerEffect, tickValue);
 		this.updateBackdropStyle();
 		if (showShimmerEffect) {
 			this.setShimmerEffect("shimmer-lines");
 		}
 	}
 
-	drawSparkline(showShimmerEffect: boolean) {
+	drawSparkline(showShimmerEffect: boolean, tickValue: number[] = [100]) {
 		const width = this.backdrop.attr("width");
-		const ticksValues = [100];
+		const ticksValue = tickValue;
 		const sparklineSkeleton = DOMUtils.appendOrSelect(
 			this.backdrop,
 			"g.y.skeleton"
 		);
-		const update = sparklineSkeleton.selectAll("line").data(ticksValues);
+		const update = sparklineSkeleton.selectAll("line").data(ticksValue);
 		update
 			.enter()
 			.append("line")
