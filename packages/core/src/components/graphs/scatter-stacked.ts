@@ -126,9 +126,12 @@ export class StackedScatter extends Scatter {
 			return (
 				tooltipData.find((tooltipDatapoint) => {
 					return (
-						tooltipDatapoint[groupMapsTo] == datapoint[groupMapsTo] &&
-						tooltipDatapoint[domainIdentifier] == datapoint[domainIdentifier] &&
-						tooltipDatapoint[rangeIdentifier] == datapoint[rangeIdentifier]
+						tooltipDatapoint[groupMapsTo] ==
+							datapoint[groupMapsTo] &&
+						tooltipDatapoint[domainIdentifier] ==
+							datapoint[domainIdentifier] &&
+						tooltipDatapoint[rangeIdentifier] ==
+							datapoint[rangeIdentifier]
 					);
 				}) !== undefined
 			);

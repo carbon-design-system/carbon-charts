@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { AxisPositions, Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	ZoomBarTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
@@ -43,8 +48,12 @@ export class ZoomBar extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(AxisPositions.TOP);
-		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(AxisPositions.TOP);
+		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(
+			AxisPositions.TOP
+		);
+		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(
+			AxisPositions.TOP
+		);
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),

@@ -16,7 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	Skeleton
+	SkeletonLines
 } from "../components/index";
 
 export class LineChart extends AxisChart {
@@ -44,9 +44,7 @@ export class LineChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Scatter(this.model, this.services, { handleThresholds: true }),
-			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID
-			})
+			new SkeletonLines(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(

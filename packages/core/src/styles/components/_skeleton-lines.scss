@@ -3,7 +3,7 @@ $lines-shimmer-color: $carbon--white-0;
 $areas-bg-color: rgba(127, 127, 127, 0.1);
 $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
-.#{$prefix}--#{$charts-prefix}--skeleton {
+.#{$prefix}--#{$charts-prefix}--skeleton-lines {
 	// lines
 	rect.chart-skeleton-backdrop {
 		@if $carbon--theme == $carbon--theme--g10 {
@@ -36,25 +36,6 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 		.stop-shimmer {
 			stop-color: $lines-shimmer-color;
-		}
-	}
-
-	// areas
-	.shimmer-effect-areas {
-		fill: url(#shimmer-areas);
-	}
-
-	.empty-state-areas {
-		fill: $areas-bg-color;
-	}
-
-	#shimmer-areas {
-		.stop-bg-shimmer {
-			stop-color: $areas-bg-color;
-		}
-
-		.stop-shimmer {
-			stop-color: $areas-shimmer-color;
 		}
 	}
 }

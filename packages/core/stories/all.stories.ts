@@ -94,13 +94,13 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			container.innerHTML = `
 <h3>
-	<b class="component">Component:</b>
+	<b class="component">Component</b>
 	<span class="bx--tag bx--tag--green component-name">${
 		demo.chartType.vanilla
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span>data, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
 </p>
 
 ${
@@ -120,7 +120,8 @@ ${
 		: ""
 }
 
-${storyUtils.generateThemePickerHTML()}
+<div id="charting-controls">
+</div>
 
 <div class="marginTop-30" id="chart-demo">
 </div>
@@ -131,8 +132,6 @@ ${storyUtils.generateThemePickerHTML()}
 </a>
 			`;
 
-			storyUtils.addRadioButtonEventListeners(container);
-
 			// Initialize chart
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
@@ -141,6 +140,8 @@ ${storyUtils.generateThemePickerHTML()}
 					options: object("Options", demo.options)
 				}
 			);
+
+			storyUtils.addControls(container, chart);
 
 			return container;
 		});
@@ -161,8 +162,6 @@ if (process.env.NODE_ENV !== "production") {
 	<h3>
 		<b class="component">Collection of all demos</b>
 	</h3>
-
-	${storyUtils.generateThemePickerHTML()}
 `;
 
 		storyUtils.addRadioButtonEventListeners(container);
