@@ -366,7 +366,7 @@ export class Gauge extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent
-			.selectAll("path.arc")
+			.selectAll("path.arc-foreground")
 			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
