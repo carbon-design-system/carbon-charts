@@ -87,7 +87,7 @@ export class Gauge extends Component {
 		}
 	}
 
-	render(animate: boolean = true) {
+	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
