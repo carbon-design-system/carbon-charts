@@ -24,7 +24,7 @@ import {
 	Area,
 	StackedArea,
 	Ruler,
-	StackedBarRuler,
+	StackedRuler,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
@@ -39,7 +39,7 @@ const graphComponentsMap = {
 	[ComboChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
 	[ComboChartTypes.SIMPLE_BAR]: [SimpleBar, ZeroLine],
 	[ComboChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
-	[ComboChartTypes.STACKED_BAR]: [StackedBar, StackedBarRuler]
+	[ComboChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
 };
 
 export class ComboChart extends AxisChart {
@@ -109,7 +109,8 @@ export class ComboChart extends AxisChart {
 	getComponents() {
 		const { chartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
-		const stackedRulerEnabled = Object.keys(chartTypes).includes(ComboChartTypes.STACKED_BAR);
+		const stackedRulerEnabled = Object.keys(chartTypes).includes(ComboChartTypes.STACKED_BAR)
+			|| Object.keys(chartTypes).includes(ComboChartTypes.STACKED_AREA);
 
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
