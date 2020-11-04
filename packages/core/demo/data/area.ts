@@ -120,6 +120,9 @@ export const sparklineOptions = {
 	color: {
 		gradient: {
 			enabled: true
+		},
+		scale: {
+			"Dataset 1": "#6f6f6f"
 		}
 	},
 	points: {

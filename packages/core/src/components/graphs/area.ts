@@ -101,11 +101,15 @@ export class Area extends Component {
 				})}`
 			)
 			.node();
+		const sparklineColorObject = Tools.getProperty(
+			this.model.getOptions(),
+			"color",
+			"scale");
 		const colorValue = strokePathElement
 			? getComputedStyle(strokePathElement, null).getPropertyValue(
 					"stroke"
-			  )
-			: null;
+			)
+			: isGradientAllowed ? sparklineColorObject[Object.keys(sparklineColorObject)[0]] : null;
 
 		if (isGradientAllowed && colorValue) {
 			GradientUtils.appendOrUpdateLinearGradient({
