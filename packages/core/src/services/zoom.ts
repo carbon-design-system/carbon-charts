@@ -3,7 +3,7 @@ import { AxisPositions, Events, ScaleTypes } from "../interfaces";
 import { Service } from "./service";
 import { Tools } from "../tools";
 import * as Configuration from "../configuration";
-import { ChartModelCartesian } from "../model-zoom";
+import { ChartModelCartesian } from "../model-cartesian-charts";
 
 // D3 imports
 import { extent } from "d3-array";

@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { ChartModelCartesian } from "../../model-zoom";
+import { ChartModelCartesian } from "../../model-cartesian-charts";
 import { Tools } from "../../tools";
 import {
 	AxisPositions,

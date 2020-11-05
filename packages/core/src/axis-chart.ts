@@ -1,5 +1,5 @@
 import { Chart } from "./chart";
-import { ChartModelCartesian } from "./model-zoom";
+import { ChartModelCartesian } from "./model-cartesian-charts";
 import {
 	LayoutDirection,
 	LayoutGrowth,
