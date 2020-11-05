@@ -39,6 +39,13 @@ export class ConfidenceInterval extends Component {
 		const groupedData = this.model.getGroupedData();
 
 		const confidence = groupedData && groupedData.length === 1;
+
+		if (!confidence) {
+			console.warn(
+				"Confidence Intervals can only be shown when having 1 single dataset"
+			); // eslint-disable-line no-console
+		}
+
 		if (orientation === CartesianOrientations.VERTICAL) {
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
@@ -58,11 +65,13 @@ export class ConfidenceInterval extends Component {
 				.x0((d, i) =>
 					confidence
 						? cartesianScales.getRangeValue(d, i, confidence)[2]
-						: cartesianScales.getRangeValue(d, i, confidence))
+						: cartesianScales.getRangeValue(d, i, confidence)
+				)
 				.x1((d, i) =>
 					confidence
 						? cartesianScales.getRangeValue(d, i, confidence)[1]
-						: cartesianScales.getRangeValue(d, i, confidence))
+						: cartesianScales.getRangeValue(d, i, confidence)
+				)
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
 			domain = this.services.cartesianScales.getMainXScale().domain();
 		}
@@ -103,7 +112,7 @@ export class ConfidenceInterval extends Component {
 			.attr("stroke", (group) => {
 				return this.model.getStrokeColor(group.name);
 			})
-			.style("stroke-dasharray", ("2, 2"))
+			.style("stroke-dasharray", "2, 2")
 			.attr("stroke-width", 0.7 + "px");
 	}
 
