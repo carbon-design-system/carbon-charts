@@ -9,6 +9,29 @@ import { sum } from "d3-array";
 import { hsl, color } from "d3-color";
 import { select } from "d3-selection";
 
+// Carbon colors
+import { colors } from "@carbon/colors";
+
+const findColorShade = (hex) => {
+	if (!hex) {
+		return null;
+	}
+
+	Object.keys(colors).forEach((colorName) => {
+		const colorShades = colors[colorName];
+
+		Object.keys(colorShades).forEach((colorShadeLevel) => {
+			const colorShade = colorShades[colorShadeLevel];
+
+			if (colorShade === hex) {
+				return colorShadeLevel;
+			}
+		});
+	});
+
+	return null;
+};
+
 export class Treemap extends Component {
 	type = "treemap";
 
@@ -61,13 +84,7 @@ export class Treemap extends Component {
 			.data(root.leaves(), (leaf) => leaf.data.name);
 
 		// Remove leaf groups that need to be removed
-		leafGroups
-			.exit()
-			.transition(
-				transitions.getTransition("treemap-group-exit", animate)
-			)
-			.attr("opacity", 0)
-			.remove();
+		leafGroups.exit().attr("opacity", 0).remove();
 
 		// Add the leaf groups that need to be introduced
 		const enteringLeafGroups = leafGroups
@@ -99,12 +116,6 @@ export class Treemap extends Component {
 			.merge(rects)
 			.attr("width", 0)
 			.attr("height", 0)
-			.transition(
-				this.services.transitions.getTransition(
-					"treemap-leaf-update-enter",
-					animate
-				)
-			)
 			.attr("class", (d) => {
 				while (d.depth > 1) d = d.parent;
 
@@ -114,6 +125,12 @@ export class Treemap extends Component {
 					originalClassName: "leaf"
 				});
 			})
+			.transition(
+				this.services.transitions.getTransition(
+					"treemap-leaf-update-enter",
+					animate
+				)
+			)
 			.attr("width", (d) => d.x1 - d.x0)
 			.attr("height", (d) => d.y1 - d.y0);
 
@@ -125,8 +142,9 @@ export class Treemap extends Component {
 				correspondingLeaf.node(),
 				null
 			).getPropertyValue("fill");
-
 			const cl = color(correspondingLeafFill) as any;
+
+			console.log("cl", findColorShade(cl ? cl.hex() : null));
 			const lightness = hsl(cl).l;
 			const darkness = Math.abs(lightness * 100 - 100);
 

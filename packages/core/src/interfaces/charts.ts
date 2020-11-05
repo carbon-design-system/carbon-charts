@@ -86,7 +86,7 @@ export interface BaseChartOptions {
 		 */
 		groupMapsTo?: string;
 		/**
-		 * used to simulate data loading
+		 * used to simulate data loading in skeleton way
 		 */
 		loading?: boolean;
 		/**

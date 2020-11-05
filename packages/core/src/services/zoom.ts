@@ -55,12 +55,23 @@ export class Zoom extends Service {
 		const definedZoomBarData = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"data"
 		);
 
 		// if user already defines zoom bar data, use it
 		if (definedZoomBarData && definedZoomBarData.length > 1) {
+			// Sanitize the user-provided zoombar data
+			definedZoomBarData.forEach((definedZoomBarDatum, i) => {
+				if (
+					definedZoomBarDatum[domainIdentifier].getTime === undefined
+				) {
+					definedZoomBarData[i][domainIdentifier] = new Date(
+						definedZoomBarDatum[domainIdentifier]
+					);
+				}
+			});
+
 			zoomBarData = definedZoomBarData;
 		} else {
 			// use displayData if not defined
@@ -68,12 +79,9 @@ export class Zoom extends Service {
 		}
 
 		// get all dates (Number) in displayData
-		let allDates = [];
-		zoomBarData.forEach((data) => {
-			allDates = allDates.concat(
-				new Date(data[domainIdentifier]).getTime()
-			);
-		});
+		let allDates = zoomBarData.map((datum) =>
+			datum[domainIdentifier].getTime()
+		);
 		allDates = Tools.removeArrayDuplicates(allDates).sort();
 		// Go through all date values
 		// And get corresponding data from each dataset
@@ -82,7 +90,7 @@ export class Zoom extends Service {
 			const datum = {};
 
 			zoomBarData.forEach((data) => {
-				if (new Date(data[domainIdentifier]).getTime() === date) {
+				if (data[domainIdentifier].getTime() === date) {
 					sum += data[rangeIdentifier];
 				}
 			});
@@ -114,6 +122,7 @@ export class Zoom extends Service {
 			});
 		}
 	}
+
 	getZoomRatio() {
 		return Tools.getProperty(
 			this.model.getOptions(),
@@ -291,5 +300,23 @@ export class Zoom extends Service {
 
 	isEmptyState() {
 		return this.getZoomBarData().length === 0;
+	}
+
+	isZoomBarLoading(position) {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			position,
+			"loading"
+		);
+	}
+
+	isZoomBarLocked(position) {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			position,
+			"locked"
+		);
 	}
 }

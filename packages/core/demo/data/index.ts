@@ -496,6 +496,11 @@ let allDemoGroups = [
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
+			},
+			{
+				options: lineDemos.sparklineLoadingOptions,
+				data: lineDemos.lineSkeletonData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
@@ -880,6 +885,12 @@ let allDemoGroups = [
 				options: zoomBarDemos.zoomBarStringDateOptions,
 				data: zoomBarDemos.zoomBarStringDateData,
 				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLockedOptions,
+				data: zoomBarDemos.zoomBarLockedData,
+				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false
 			},
 			{
