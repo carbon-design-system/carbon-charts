@@ -9,6 +9,7 @@ export class ChartModelCartesian extends ChartModel {
 	constructor(services: any) {
 		super(services);
 	}
+
 	setData(newData) {
 		const data = super.setData(newData);
 		if (Tools.getProperty(this.getOptions(), "zoomBar")) {
