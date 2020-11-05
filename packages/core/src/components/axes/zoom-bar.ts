@@ -1,5 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
+import { ChartModelCartesian } from "../../model-zoom";
 import { Tools } from "../../tools";
 import {
 	AxisPositions,
@@ -17,6 +18,7 @@ import { area, line } from "d3-shape";
 import { event } from "d3-selection";
 
 export class ZoomBar extends Component {
+	protected model: ChartModelCartesian;
 	type = "zoom-bar";
 
 	// The minimum selection x range to trigger handler update
