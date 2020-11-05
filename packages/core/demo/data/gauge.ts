@@ -38,7 +38,7 @@ export const gaugeOptionsCircularNoDelta = {
 	},
 	color: {
 		scale: {
-			value: "#891EE8"
+			value: "#FFE5B4"
 		}
 	}
 };
