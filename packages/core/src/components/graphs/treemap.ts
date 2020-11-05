@@ -17,17 +17,17 @@ const findColorShade = (hex) => {
 		return null;
 	}
 
-	Object.keys(colors).forEach((colorName) => {
+	for (let colorName of Object.keys(colors)) {
 		const colorShades = colors[colorName];
 
-		Object.keys(colorShades).forEach((colorShadeLevel) => {
+		for (let colorShadeLevel of Object.keys(colorShades)) {
 			const colorShade = colorShades[colorShadeLevel];
 
 			if (colorShade === hex) {
 				return colorShadeLevel;
 			}
-		});
-	});
+		}
+	}
 
 	return null;
 };
@@ -144,11 +144,17 @@ export class Treemap extends Component {
 			).getPropertyValue("fill");
 			const cl = color(correspondingLeafFill) as any;
 
-			console.log("cl", findColorShade(cl ? cl.hex() : null));
-			const lightness = hsl(cl).l;
-			const darkness = Math.abs(lightness * 100 - 100);
+			let colorShade;
+			if (cl) {
+				colorShade = findColorShade(cl ? cl.hex() : null);
+			}
 
-			return darkness >= 50 ? "white" : "black";
+			if (colorShade === null || colorShade === undefined) {
+				const lightness = hsl(cl).l;
+				colorShade = Math.abs(lightness * 100 - 100);
+			}
+
+			return colorShade >= 50 ? "white" : "black";
 		};
 
 		// Update all titles
