@@ -11,11 +11,15 @@ export class ChartModelCartesian extends ChartModel {
 	}
 
 	setData(newData) {
-		const data = super.setData(newData);
-		if (Tools.getProperty(this.getOptions(), "zoomBar")) {
-			// if we have zoom bar data we need to update it as well
-			this.setZoomBarData();
+		let data;
+		if (newData) {
+			data = super.setData(newData);
+			if (Tools.getProperty(this.getOptions(), "zoomBar")) {
+				// if we have zoom bar data we need to update it as well
+				this.setZoomBarData();
+			}
 		}
+
 		return data;
 	}
 
@@ -31,6 +35,7 @@ export class ChartModelCartesian extends ChartModel {
 
 		const { cartesianScales } = this.services;
 		if (
+			sanitizedData &&
 			cartesianScales.domainAxisPosition &&
 			cartesianScales.rangeAxisPosition
 		) {

@@ -893,6 +893,7 @@ const devOnlyDemoGroups = [
 		demos: [
 			{
 				options: highScaleDemos.zoomBarHighScaleLineTimeSeriesOptions,
+				data: [],
 				isHighScale: true,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false

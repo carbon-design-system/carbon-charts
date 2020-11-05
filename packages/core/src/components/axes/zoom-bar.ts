@@ -10,6 +10,7 @@ import {
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
+import isEmpty from "lodash/isEmpty";
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -128,6 +129,10 @@ export class ZoomBar extends Component {
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			let zoomBarData = this.services.zoom.getZoomBarData();
+			if (isEmpty(zoomBarData)) {
+				// if there's no zoom bar data we can't do anything
+				return;
+			}
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
