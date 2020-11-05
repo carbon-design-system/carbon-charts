@@ -32,6 +32,29 @@ const findColorShade = (hex) => {
 	return null;
 };
 
+const textFillColor = function () {
+	const correspondingLeaf = select(this.parentNode).select(
+		"rect.leaf"
+	) as any;
+	const correspondingLeafFill = getComputedStyle(
+		correspondingLeaf.node(),
+		null
+	).getPropertyValue("fill");
+	const cl = color(correspondingLeafFill) as any;
+
+	let colorShade;
+	if (cl) {
+		colorShade = findColorShade(cl ? cl.hex() : null);
+	}
+
+	if (colorShade === null || colorShade === undefined) {
+		const lightness = hsl(cl).l;
+		colorShade = Math.abs(lightness * 100 - 100);
+	}
+
+	return colorShade > 50 ? "white" : "black";
+};
+
 export class Treemap extends Component {
 	type = "treemap";
 
@@ -133,29 +156,6 @@ export class Treemap extends Component {
 			)
 			.attr("width", (d) => d.x1 - d.x0)
 			.attr("height", (d) => d.y1 - d.y0);
-
-		const textFillColor = function () {
-			const correspondingLeaf = select(this.parentNode).select(
-				"rect.leaf"
-			) as any;
-			const correspondingLeafFill = getComputedStyle(
-				correspondingLeaf.node(),
-				null
-			).getPropertyValue("fill");
-			const cl = color(correspondingLeafFill) as any;
-
-			let colorShade;
-			if (cl) {
-				colorShade = findColorShade(cl ? cl.hex() : null);
-			}
-
-			if (colorShade === null || colorShade === undefined) {
-				const lightness = hsl(cl).l;
-				colorShade = Math.abs(lightness * 100 - 100);
-			}
-
-			return colorShade >= 50 ? "white" : "black";
-		};
 
 		// Update all titles
 		enteringLeafGroups
