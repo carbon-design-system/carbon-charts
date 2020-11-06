@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	ZoomBarTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
@@ -42,16 +47,21 @@ export class ZoomBar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
 
-		const isDataLoading = Tools.getProperty(options, "data", "loading");
+		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(
+			AxisPositions.TOP
+		);
+		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(
+			AxisPositions.TOP
+		);
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
+
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
@@ -94,7 +104,7 @@ export class ZoomBar extends Component {
 				.attr("height", 2);
 		}
 
-		if (isDataLoading) {
+		if (isTopZoomBarLoading) {
 			// TODO - zoom bar skeleton could be improved in the future
 			return;
 		}
@@ -120,7 +130,7 @@ export class ZoomBar extends Component {
 			const newInitialZoomDomain = Tools.getProperty(
 				this.model.getOptions(),
 				"zoomBar",
-				"top",
+				AxisPositions.TOP,
 				"initialZoomDomain"
 			);
 			// change string date to Date object if necessary
@@ -228,6 +238,13 @@ export class ZoomBar extends Component {
 					);
 				}
 			}
+			if (isTopZoomBarLocked) {
+				this.brush.filter(() => {
+					return false;
+				});
+				// reset all cursor to auto
+				brushArea.selectAll("rect").attr("cursor", "auto");
+			}
 		}
 	}
 
@@ -252,7 +269,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
@@ -319,20 +336,22 @@ export class ZoomBar extends Component {
 
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
-		const handleWidth = 5;
+		const handleWidth = Configuration.zoomBar.handleWidth;
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const handleHeight = Configuration.zoomBar.height[zoombarType];
 		const handleXDiff = -handleWidth / 2;
 
-		const handleBarWidth = 1;
+		const handleBarWidth = Configuration.zoomBar.handleBarWidth;
 		const handleBarHeight =
-			zoombarType === ZoomBarTypes.GRAPH_VIEW ? 12 : 6;
+			zoombarType === ZoomBarTypes.GRAPH_VIEW
+				? Configuration.zoomBar.handleBarHeight
+				: 6;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
@@ -412,7 +431,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
@@ -472,7 +491,7 @@ export class ZoomBar extends Component {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			AxisPositions.TOP,
 			"type"
 		);
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];

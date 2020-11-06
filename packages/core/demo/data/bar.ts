@@ -93,6 +93,25 @@ export const simpleBarOptions = {
 	}
 };
 
+export const simpleBarColorPaletteOptions = {
+	title: "Simple bar (color palette)",
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "group"
+		}
+	},
+	color: {
+		pairing: {
+			numberOfVariants: 3,
+			option: 2
+		}
+	}
+};
+
 export const simpleBarCustomLegendOrderOptions = {
 	title: "Simple bar (custom legend order)",
 	axes: {

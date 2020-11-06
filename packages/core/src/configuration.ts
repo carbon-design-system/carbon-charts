@@ -22,12 +22,15 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ToolbarOptions,
+	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
 	GaugeTypes,
 	LegendPositions,
 	TruncationTypes,
+	ToolbarControlTypes,
 	ZoomBarTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
@@ -155,6 +158,10 @@ const chart: BaseChartOptions = {
 	},
 	color: {
 		scale: null,
+		pairing: {
+			numberOfVariants: null,
+			option: 1
+		},
 		gradient: {
 			enabled: false
 		}
@@ -171,12 +178,18 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	ruler,
 	zoomBar: {
 		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
 		},
 		updateRangeAxis: false
-	} as ZoomBarsOptions
+	} as ZoomBarsOptions,
+	toolbar: {
+		enabled: false,
+		numberOfIcons: 3,
+		controls: []
+	} as ToolbarOptions
 } as AxisChartOptions);
 
 /**
