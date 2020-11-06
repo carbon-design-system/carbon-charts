@@ -14,6 +14,9 @@ storybookDemoGroups.forEach(demoGroup => {
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
+		if (demo.isHighScale) {
+			return;
+		}
 		const component = ChartComponents[`Ccv${demo.chartType.vanilla}`];
 		groupStories.add(demo.title, () => ({
 			components: {
