@@ -4,6 +4,7 @@
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
+	"types": "./types/index.d.ts",
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
