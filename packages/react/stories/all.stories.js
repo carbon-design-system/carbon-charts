@@ -15,6 +15,9 @@ storybookDemoGroups.forEach(demoGroup => {
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
+		if (demo.isHighScale) {
+			return;
+		}
 		const DemoComponent = ChartComponents[demo.chartType.vanilla];
 		groupStories.add(demo.title, () => (
 			<div className="container theme--white">
