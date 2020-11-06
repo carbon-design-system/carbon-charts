@@ -1,7 +1,7 @@
 /// <reference types="react" />
 
 import { StackedAreaChart as SAC } from "@carbon/charts";
-import { ChartData, BarChartOptions } from "@carbon/charts/interfaces";
+import { ChartData, StackedAreaChartOptions } from "@carbon/charts/interfaces";
 import BaseChart, { TabularData } from "./base-chart";
 
 declare type StackedAreaChartData =
@@ -10,7 +10,7 @@ declare type StackedAreaChartData =
   | Promise<ChartData>;
 
 export default class StackedAreaChart extends BaseChart<
-  BarChartOptions,
+  StackedAreaChartOptions,
   SAC,
   StackedAreaChartData
 > {
