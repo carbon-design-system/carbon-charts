@@ -1,5 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
+import { ChartModelCartesian } from "../../model-cartesian-charts";
 import { Tools } from "../../tools";
 import {
 	AxisPositions,
@@ -9,6 +10,7 @@ import {
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
+import isEmpty from "lodash/isEmpty";
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -17,6 +19,7 @@ import { area, line } from "d3-shape";
 import { event } from "d3-selection";
 
 export class ZoomBar extends Component {
+	protected model: ChartModelCartesian;
 	type = "zoom-bar";
 
 	// The minimum selection x range to trigger handler update
@@ -43,6 +46,16 @@ export class ZoomBar extends Component {
 			Events.ZoomBar.UPDATE,
 			this.render.bind(this)
 		);
+		// check if pre-defined zoom bar data exists
+		const definedZoomBarData = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"data"
+		);
+
+		// load up the zoomBarData into this model
+		this.model.setZoomBarData(definedZoomBarData);
 	}
 
 	render(animate = true) {
@@ -115,14 +128,23 @@ export class ZoomBar extends Component {
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
-			const zoomBarData = this.services.zoom.getZoomBarData();
+			let zoomBarData = this.services.zoom.getZoomBarData();
+			if (isEmpty(zoomBarData)) {
+				// if there's no zoom bar data we can't do anything
+				return;
+			}
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
-			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
+			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain(
+				zoomBarData
+			);
 
 			// add value 0 to the extended domain for zoom bar area graph
-			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain);
+			zoomBarData = this.compensateDataForDefaultDomain(
+				zoomBarData,
+				defaultDomain
+			);
 
 			// get old initialZoomDomain from model
 			const oldInitialZoomDomain = this.model.get("initialZoomDomain");
@@ -526,27 +548,31 @@ export class ZoomBar extends Component {
 		if (!data || data.length < 2) {
 			return;
 		}
+		const zoomBarData = Tools.clone(data);
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// if min domain is extended
-		if (Number(defaultDomain[0]) < Number(data[0][domainIdentifier])) {
+		if (
+			Number(defaultDomain[0]) < Number(zoomBarData[0][domainIdentifier])
+		) {
 			const newDatum = {};
 			newDatum[domainIdentifier] = defaultDomain[0];
 			newDatum[rangeIdentifier] = 0;
-			data.unshift(newDatum);
+			zoomBarData.unshift(newDatum);
 		}
 		// if max domain is extended
 		if (
 			Number(defaultDomain[1]) >
-			Number(data[data.length - 1][domainIdentifier])
+			Number(zoomBarData[zoomBarData.length - 1][domainIdentifier])
 		) {
 			const newDatum = {};
 			newDatum[domainIdentifier] = defaultDomain[1];
 			newDatum[rangeIdentifier] = 0;
-			data.push(newDatum);
+			zoomBarData.push(newDatum);
 		}
+		return zoomBarData;
 	}
 
 	destroy() {
