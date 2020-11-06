@@ -186,6 +186,7 @@ export class GroupedBar extends Bar {
 			.selectAll("path.bar")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", true);
 
 				hoveredElement.transition(
 					self.services.transitions.getTransition(
