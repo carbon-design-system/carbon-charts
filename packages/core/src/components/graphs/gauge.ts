@@ -127,19 +127,18 @@ export class Gauge extends Component {
 
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground").data([value]);
+		const arcEnter = arcValue.enter().append("path");
 
-		arcValue
-			.enter()
-			.append("path")
-			.attr("class", (d) =>
+		arcEnter
+			.merge(arcValue)
+			.attr("class",
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: d[groupMapsTo],
+					dataGroupName: "value",
 					originalClassName: "arc-foreground"
 				})
 			)
 			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
-			.merge(arcValue)
 			.attr("d", this.arc)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -367,7 +366,7 @@ export class Gauge extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent
-			.selectAll("path.arc")
+			.selectAll("path.arc-foreground")
 			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
