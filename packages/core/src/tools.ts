@@ -12,6 +12,7 @@ import {
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
+	isEmpty as lodashIsEmpty,
 	isEqual as lodashIsEqual,
 	flatMapDeep as lodashFlatMapDeep,
 	kebabCase as lodashKebabCase,
@@ -33,6 +34,7 @@ export namespace Tools {
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
+	export const isEmpty = lodashIsEmpty;
 	export const isEqual = lodashIsEqual;
 	export const flatMapDeep = lodashFlatMapDeep;
 	export const kebabCase = lodashKebabCase;
