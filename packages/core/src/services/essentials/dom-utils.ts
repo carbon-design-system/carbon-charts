@@ -237,6 +237,30 @@ export class DOMUtils extends Service {
 		this.svg = svg.node();
 	}
 
+	toggleFullscreen() {
+		const holder = this.getHolder();
+		const holderSelection = select(holder);
+
+		const isFullScreen = holderSelection.classed("fullscreen");
+
+		// Toggle the `fullscreen` classname
+		holderSelection.classed("fullscreen", !isFullScreen);
+
+		if (isFullScreen) {
+			document.exitFullscreen();
+		} else {
+			if (holder.requestFullscreen) {
+				holder.requestFullscreen();
+			} else if (holder.webkitRequestFullscreen) {
+				/* Safari */
+				holder.webkitRequestFullscreen();
+			} else if (holder.msRequestFullscreen) {
+				/* IE11 */
+				holder.msRequestFullscreen();
+			}
+		}
+	}
+
 	verifyCSSStylesBeingApplied() {
 		// setTimeout is needed here since in `addSVGElement()` we're appending the
 		// CSS verifier element, and need to allow some time for it to become available
@@ -246,8 +270,13 @@ export class DOMUtils extends Service {
 				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
 				.node();
 			const computedStyles = getComputedStyle(cssVerifierElement as any);
-			if (computedStyles.getPropertyValue("overflow") !== "hidden" || computedStyles.getPropertyValue("opacity") !== "0") {
-				console.error("Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide.")
+			if (
+				computedStyles.getPropertyValue("overflow") !== "hidden" ||
+				computedStyles.getPropertyValue("opacity") !== "0"
+			) {
+				console.error(
+					"Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide."
+				);
 			}
 		});
 	}
