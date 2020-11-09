@@ -17,6 +17,7 @@ import {
 	kebabCase as lodashKebabCase,
 	fromPairs as lodashFromPairs,
 	some as lodashSome,
+	isEmpty as lodashIsEmpty,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -38,6 +39,7 @@ export namespace Tools {
 	export const kebabCase = lodashKebabCase;
 	export const fromPairs = lodashFromPairs;
 	export const some = lodashSome;
+	export const isEmpty = lodashIsEmpty;
 
 	export function debounceWithD3MousePosition(fn, delay, element) {
 		var timer = null;
