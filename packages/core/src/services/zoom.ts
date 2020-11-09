@@ -3,11 +3,13 @@ import { AxisPositions, Events, ScaleTypes } from "../interfaces";
 import { Service } from "./service";
 import { Tools } from "../tools";
 import * as Configuration from "../configuration";
+import { ChartModelCartesian } from "../model-cartesian-charts";
 
 // D3 imports
 import { extent } from "d3-array";
 
 export class Zoom extends Service {
+	protected model: ChartModelCartesian;
 	isZoomBarEnabled() {
 		// CartesianScales service is only available in axis charts
 		if (!this.services.cartesianScales) {
@@ -46,55 +48,20 @@ export class Zoom extends Service {
 	// get display data for zoom bar
 	// basically it's sum of value grouped by time
 	getZoomBarData() {
-		const { cartesianScales } = this.services;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
-
-		let zoomBarData;
-		// check if pre-defined zoom bar data exists
-		const definedZoomBarData = Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			AxisPositions.TOP,
-			"data"
-		);
+		const customZoomBarData = this.model.getZoomBarData();
 
 		// if user already defines zoom bar data, use it
-		if (definedZoomBarData && definedZoomBarData.length > 1) {
-			zoomBarData = definedZoomBarData;
+		if (customZoomBarData && customZoomBarData.length > 1) {
+			return customZoomBarData;
 		} else {
 			// use displayData if not defined
-			zoomBarData = this.model.getDisplayData();
+			return this.model.getDisplayData();
 		}
-
-		// get all dates (Number) in displayData
-		let allDates = [];
-		zoomBarData.forEach((data) => {
-			allDates = allDates.concat(
-				new Date(data[domainIdentifier]).getTime()
-			);
-		});
-		allDates = Tools.removeArrayDuplicates(allDates).sort();
-		// Go through all date values
-		// And get corresponding data from each dataset
-		return allDates.map((date) => {
-			let sum = 0;
-			const datum = {};
-
-			zoomBarData.forEach((data) => {
-				if (new Date(data[domainIdentifier]).getTime() === date) {
-					sum += data[rangeIdentifier];
-				}
-			});
-			datum[domainIdentifier] = new Date(date);
-			datum[rangeIdentifier] = sum;
-
-			return datum;
-		});
 	}
 
-	getDefaultZoomBarDomain() {
-		const zoomBarData = this.services.zoom.getZoomBarData();
+	getDefaultZoomBarDomain(zoomBarData?) {
+		const allZoomBarData =
+			zoomBarData || this.services.zoom.getZoomBarData();
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
@@ -102,7 +69,7 @@ export class Zoom extends Service {
 		// default to full range with extended domain
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
-			extent(zoomBarData, (d: any) => d[domainIdentifier])
+			extent(allZoomBarData, (d: any) => d[domainIdentifier])
 		);
 	}
 

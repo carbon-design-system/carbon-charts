@@ -1,7 +1,12 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { Events, ScaleTypes, ColorClassNameTypes } from "./interfaces";
+import {
+	Events,
+	ScaleTypes,
+	ColorClassNameTypes,
+	AxisPositions
+} from "./interfaces";
 
 // D3
 import { map } from "d3-collection";
@@ -538,6 +543,10 @@ export class ChartModel {
 		return null;
 	}
 
+	getAllDataGroupsNames() {
+		return this.allDataGroups;
+	}
+
 	/**
 	 * Converts data provided in the older format to tabular
 	 *
@@ -595,8 +604,46 @@ export class ChartModel {
 		return data;
 	}
 
+	protected sanitizeDateValues(data) {
+		const options = this.getOptions();
+
+		if (!options.axes) {
+			return data;
+		}
+
+		const keysToCheck = [];
+		Object.keys(AxisPositions).forEach((axisPositionKey) => {
+			const axisPosition = AxisPositions[axisPositionKey];
+			const axisOptions = options.axes[axisPosition];
+
+			if (axisOptions && axisOptions.scaleType === ScaleTypes.TIME) {
+				const axisMapsTo = axisOptions.mapsTo;
+
+				if (axisMapsTo !== null || axisMapsTo !== undefined) {
+					keysToCheck.push(axisMapsTo);
+				}
+			}
+		});
+
+		if (keysToCheck.length > 0) {
+			// Check all datapoints and sanitize dates
+			data.forEach((datum) => {
+				keysToCheck.forEach((key) => {
+					if (datum[key].getTime === undefined) {
+						datum[key] = new Date(datum[key]);
+					}
+				});
+			});
+		}
+
+		return data;
+	}
+
 	protected sanitize(data) {
-		return this.getTabularData(data);
+		data = this.getTabularData(data);
+		data = this.sanitizeDateValues(data);
+
+		return data;
 	}
 
 	/*
@@ -705,14 +752,7 @@ export class ChartModel {
 		}
 
 		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
-		const colorPairingCounts = {
-			"1-color": 4,
-			"2-color": 5,
-			"3-color": 5,
-			"4-color": 3,
-			"5-color": 2,
-			"14-color": 1
-		};
+		const colorPairingCounts = Configuration.color.pairingOptions;
 
 		// If number of dataGroups is greater than 5, user 14-color palette
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;

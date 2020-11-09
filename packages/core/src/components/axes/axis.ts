@@ -309,9 +309,18 @@ export class Axis extends Component {
 		let validTicks;
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
+				// sanitize user-provided tick values
+				userProvidedTickValues.forEach((userProvidedTickValue, i) => {
+					if (userProvidedTickValue.getTime === undefined) {
+						userProvidedTickValues[i] = new Date(
+							userProvidedTickValue
+						);
+					}
+				});
+
 				// check the supplied ticks are within the time domain
 				validTicks = userProvidedTickValues.filter((tick) => {
-					const tickTimestamp = new Date(tick).getTime();
+					const tickTimestamp = tick.getTime();
 					return (
 						tickTimestamp >= new Date(lowerBound).getTime() &&
 						tickTimestamp <= new Date(upperBound).getTime()
@@ -330,6 +339,7 @@ export class Axis extends Component {
 					(tick) => tick >= lowerBound && tick <= upperBound
 				);
 			}
+
 			axis.tickValues(validTicks);
 		}
 

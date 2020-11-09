@@ -25,7 +25,7 @@ const definedZoomBarData = [
 ];
 
 // utility function to update title and enable zoomBar option
-const addZoomBarToOptions = (
+export const addZoomBarToOptions = (
 	options,
 	configs: any = { includeDefinedZoomBarData: false }
 ) => {
@@ -234,5 +234,5 @@ export const zoomBarSkeletonOptions = addZoomBarToOptions(
 		barChart.stackedBarTimeSeriesOptions
 	)
 );
-zoomBarSkeletonOptions.title = "Zoom bar (skeleton)";
+zoomBarSkeletonOptions["title"] = "Zoom bar (skeleton)";
 zoomBarSkeletonOptions.zoomBar.top.loading = true;

@@ -94,13 +94,13 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			container.innerHTML = `
 <h3>
-	<b class="component">Component:</b>
+	<b class="component">Component</b>
 	<span class="bx--tag bx--tag--green component-name">${
 		demo.chartType.vanilla
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span>data, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
 </p>
 
 ${
@@ -120,7 +120,9 @@ ${
 		: ""
 }
 
-${storyUtils.generateThemePickerHTML()}
+${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ""}
+<div id="charting-controls">
+</div>
 
 <div class="marginTop-30" id="chart-demo">
 </div>
@@ -131,80 +133,24 @@ ${storyUtils.generateThemePickerHTML()}
 </a>
 			`;
 
-			storyUtils.addRadioButtonEventListeners(container);
-
 			// Initialize chart
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
 				{
-					data: object("Data", demo.data),
+					data: object(
+						"Data",
+						demo.isHighScale
+							? storyUtils.generateRandomData(100, 100, 500)
+							: demo.data
+					),
 					options: object("Options", demo.options)
 				}
 			);
+
+			storyUtils.addDemoDataFormListeners(container, demo, chart);
+			storyUtils.addControls(container, chart);
 
 			return container;
 		});
 	});
 });
-
-// DEV ONLY STORIES
-if (process.env.NODE_ENV !== "production") {
-	const devStories = storiesOf("__DEV__", module).addDecorator(withKnobs);
-
-	// Loop through the demos for the group
-	devStories.add("All chart types", () => {
-		// container creation
-		const container = document.createElement("div");
-		container.setAttribute("class", "container theme--g100");
-
-		container.innerHTML = `
-	<h3>
-		<b class="component">Collection of all demos</b>
-	</h3>
-
-	${storyUtils.generateThemePickerHTML()}
-`;
-
-		storyUtils.addRadioButtonEventListeners(container);
-
-		const getNewRow = () => {
-			const newRow = document.createElement("div");
-			newRow.setAttribute("class", "bx--row");
-			return newRow;
-		};
-
-		const grid = document.createElement("div");
-		grid.setAttribute("class", "bx--grid");
-		container.appendChild(grid);
-
-		let i = 0;
-		let row = getNewRow();
-
-		storybookDemoGroups.forEach((demoGroup) => {
-			demoGroup.demos.forEach((demo) => {
-				grid.appendChild(row);
-				if (i % 2 === 0 && i !== 0) {
-					row = getNewRow();
-					grid.appendChild(row);
-				}
-
-				const ClassToInitialize =
-					ChartComponents[demo.chartType.vanilla];
-
-				const column = document.createElement("div");
-				column.className = "bx--col-md-12 bx--col-lg-6 chart-demo";
-				column.setAttribute("id", demo.title);
-				const chart = new ClassToInitialize(column, {
-					data: demo.data,
-					options: demo.options
-				});
-
-				row.appendChild(column);
-
-				i++;
-			});
-		});
-
-		return container;
-	});
-}
