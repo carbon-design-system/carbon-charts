@@ -10,6 +10,9 @@ storybookDemoGroups.forEach(demoGroup => {
 	);
 
 	demoGroup.demos.forEach(demo => {
+		if (demo.isHighScale) {
+			return;
+		}
 		let chartType = demo.chartType.vanilla;
 
 		switch (chartType) {
