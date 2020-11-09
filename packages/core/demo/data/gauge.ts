@@ -30,7 +30,7 @@ export const gaugeOptionsCircular = {
 
 // guage with custom color
 export const gaugeOptionsCircularNoDelta = {
-	title: "Gauge circular without delta",
+	title: "Gauge circular without delta -- custom color",
 	resizable: true,
 	height: "250px",
 	gauge: {
@@ -38,7 +38,7 @@ export const gaugeOptionsCircularNoDelta = {
 	},
 	color: {
 		scale: {
-			value: "#891EE8"
+			value: "#FFE5B4"
 		}
 	}
 };

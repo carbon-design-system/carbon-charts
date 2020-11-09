@@ -135,3 +135,45 @@ export const addRadioButtonEventListeners = (container) => {
 		});
 	});
 };
+
+/**
+ * Generates random data going backwards from now once a minute
+ * @param {number} quantity number of data points to create
+ * @param {number} min min range of integer value
+ * @param {number} max max range of integer value
+ * @returns {array} randomly generated array of objects with a date and value field
+ */
+export const generateRandomData = (quantity, min, max) => {
+	const now = Date.now();
+	return Array(quantity)
+		.fill(0)
+		.map((value, index) => {
+			return {
+				group: "group",
+				value: Math.floor(Math.random() * (max - min + 1) + min),
+				date: new Date(now.valueOf() + (index - quantity) * 60000) // go forward a minute for every value
+			};
+		});
+};
+/**
+ * Adds a generate demo data form to the story
+ */
+export const generateHighScaleDemoDataForm = () =>
+	`<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
+	 size="5" value="100"><input type="submit"></label></form>`;
+export const addDemoDataFormListeners = (container, demo, chart) => {
+	// Add event listeners for form
+	const form = container.querySelector("form#demo-data");
+	if (form) {
+		form.addEventListener("submit", (e: any) => {
+			e.stopPropagation();
+			e.preventDefault();
+			const recordsToGenerate =
+				parseInt(e.currentTarget[0].value) || 2000;
+			chart.model.setData(
+				generateRandomData(recordsToGenerate, 100, 500)
+			);
+			chart.update();
+		});
+	}
+};
