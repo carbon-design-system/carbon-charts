@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Events, ColorClassNameTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from "d3-hierarchy";
@@ -55,6 +56,7 @@ const textFillColor = function () {
 	return colorShade > 50 ? "white" : "black";
 };
 
+let uidCounter = 0;
 export class Treemap extends Component {
 	type = "treemap";
 
@@ -78,7 +80,8 @@ export class Treemap extends Component {
 		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
+
+		const windowLocation = Tools.getProperty(window, "location");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -113,20 +116,19 @@ export class Treemap extends Component {
 		const enteringLeafGroups = leafGroups
 			.enter()
 			.append("g")
-			.attr("data-name", "leaf");
+			.attr("data-name", "leaf")
+			.attr("data-uid", () => uidCounter++);
 
-		enteringLeafGroups
-			.merge(leafGroups)
+		const allLeafGroups = enteringLeafGroups.merge(leafGroups);
+
+		allLeafGroups
 			.attr("data-name", "leaf")
 			.transition(
 				transitions.getTransition("treemap-group-update", animate)
 			)
 			.attr("transform", (d) => `translate(${d.x0},${d.y0})`);
 
-		const rects = enteringLeafGroups
-			.merge(leafGroups)
-			.selectAll("rect.leaf")
-			.data((d) => [d]);
+		const rects = allLeafGroups.selectAll("rect.leaf").data((d) => [d]);
 
 		rects.exit().attr("width", 0).attr("height", 0).remove();
 
@@ -139,6 +141,10 @@ export class Treemap extends Component {
 			.merge(rects)
 			.attr("width", 0)
 			.attr("height", 0)
+			.attr("id", function () {
+				const uid = select(this.parentNode).attr("data-uid");
+				return `${options.style.prefix}-leaf-${uid}`;
+			})
 			.attr("class", (d) => {
 				while (d.depth > 1) d = d.parent;
 
@@ -157,9 +163,34 @@ export class Treemap extends Component {
 			.attr("width", (d) => d.x1 - d.x0)
 			.attr("height", (d) => d.y1 - d.y0);
 
+		// Update all clip paths
+		allLeafGroups
+			.selectAll("clipPath")
+			.data([1])
+			.join(
+				(enter) => {
+					enter
+						.append("clipPath")
+						.attr("id", function () {
+							const uid = select(this.parentNode).attr(
+								"data-uid"
+							);
+							return `${options.style.prefix}-clip-${uid}`;
+						})
+						.append("use")
+						.attr("xlink:href", function () {
+							const uid = select(this.parentNode.parentNode).attr(
+								"data-uid"
+							);
+							const leafID = `${options.style.prefix}-leaf-${uid}`;
+
+							return new URL(`#${leafID}`, windowLocation) + "";
+						});
+				}
+			);
+
 		// Update all titles
-		enteringLeafGroups
-			.merge(leafGroups)
+		allLeafGroups
 			.selectAll("text")
 			.data(
 				(d) => {
@@ -182,13 +213,27 @@ export class Treemap extends Component {
 				(d) => d
 			)
 			.join(
-				(enter) =>
-					enter
+				(enter) => {
+					const addedText = enter
 						.append("text")
 						.text((d) => d.text)
 						.style("fill", textFillColor)
 						.attr("x", 7)
-						.attr("y", 18),
+						.attr("y", 18);
+
+					if (windowLocation) {
+						addedText.attr("clip-path", function () {
+							const uid = select(this.parentNode).attr(
+								"data-uid"
+							);
+							const clipPathID = `${options.style.prefix}-clip-${uid}`;
+
+							return `url(${
+								new URL(`#${clipPathID}`, windowLocation) + ""
+							})`;
+						});
+					}
+				},
 				(update) =>
 					update.text((d) => d.text).style("fill", textFillColor)
 			);
@@ -216,7 +261,7 @@ export class Treemap extends Component {
 							"graph_element_mouseover_fill_update"
 						)
 					)
-					.attr("fill", (d: any) =>
+					.style("fill", (d: any) =>
 						color(fillColor).darker(0.7).toString()
 					);
 
@@ -279,7 +324,7 @@ export class Treemap extends Component {
 							"graph_element_mouseout_fill_update"
 						)
 					)
-					.attr("fill", null);
+					.style("fill", null);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(

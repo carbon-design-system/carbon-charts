@@ -38,9 +38,9 @@ export const treemapData = [
 		]
 	},
 	{
-		name: "Middle east",
+		name: "Australia",
 		children: [
-			{ name: "Iran", value: 2000 },
+			{ name: "KH", value: 2000, showLabel: false },
 			{ name: "LL", value: 400, showLabel: false },
 			{ name: "MM", value: 500, showLabel: false },
 			{ name: "NN", value: 100, showLabel: false },
@@ -71,19 +71,15 @@ export const treemapData = [
 		children: [
 			{
 				name: "China",
-				value: 17500
+				value: 12500
 			},
 			{
-				name: "India",
-				value: 17500
+				name: "Iran",
+				value: 22500
 			},
 			{
-				name: "Indonesia",
-				value: 7500
-			},
-			{
-				name: "Mianmar",
-				value: 7500
+				name: "Myanmar",
+				value: 12500
 			}
 		]
 	}
@@ -91,7 +87,4 @@ export const treemapData = [
 
 export const treemapOptions = {
 	title: "Treemap"
-	// legend: {
-	// 	clickable: false
-	// }
 };
