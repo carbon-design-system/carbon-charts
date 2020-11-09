@@ -106,9 +106,9 @@ export const chartTypes = {
 		vue: "ccv-radar-chart"
 	},
 	TreemapChart: {
-		vanilla: "TreemapChart"
-		// angular: "ibm-radar-chart",
-		// vue: "ccv-radar-chart"
+		vanilla: "TreemapChart",
+		angular: "ibm-treemap-chart",
+		vue: "ccv-treemap-chart"
 	}
 };
 

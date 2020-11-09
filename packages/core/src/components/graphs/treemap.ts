@@ -167,27 +167,23 @@ export class Treemap extends Component {
 		allLeafGroups
 			.selectAll("clipPath")
 			.data([1])
-			.join(
-				(enter) => {
-					enter
-						.append("clipPath")
-						.attr("id", function () {
-							const uid = select(this.parentNode).attr(
-								"data-uid"
-							);
-							return `${options.style.prefix}-clip-${uid}`;
-						})
-						.append("use")
-						.attr("xlink:href", function () {
-							const uid = select(this.parentNode.parentNode).attr(
-								"data-uid"
-							);
-							const leafID = `${options.style.prefix}-leaf-${uid}`;
+			.join((enter) => {
+				enter
+					.append("clipPath")
+					.attr("id", function () {
+						const uid = select(this.parentNode).attr("data-uid");
+						return `${options.style.prefix}-clip-${uid}`;
+					})
+					.append("use")
+					.attr("xlink:href", function () {
+						const uid = select(this.parentNode.parentNode).attr(
+							"data-uid"
+						);
+						const leafID = `${options.style.prefix}-leaf-${uid}`;
 
-							return new URL(`#${leafID}`, windowLocation) + "";
-						});
-				}
-			);
+						return new URL(`#${leafID}`, windowLocation) + "";
+					});
+			});
 
 		// Update all titles
 		allLeafGroups

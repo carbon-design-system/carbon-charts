@@ -357,9 +357,7 @@ export class Legend extends Component {
 				// Configs
 				const checkboxRadius = Configuration.legend.checkbox.radius;
 				const hoveredItem = select(this);
-				hoveredItem
-					.select("rect.checkbox")
-					.classed("hovered", true);
+				hoveredItem.select("rect.checkbox").classed("hovered", true);
 
 				hoveredItem
 					.append("rect")
@@ -406,9 +404,7 @@ export class Legend extends Component {
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
-				hoveredItem
-					.select("rect.checkbox")
-					.classed("hovered", false);
+				hoveredItem.select("rect.checkbox").classed("hovered", false);
 
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 
