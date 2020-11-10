@@ -277,7 +277,7 @@ $color-map: ();
 					(
 						"#{$name}-#{$category}": $value
 					)
-				);
+				) !global;
 			}
 		}
 	} @else {
