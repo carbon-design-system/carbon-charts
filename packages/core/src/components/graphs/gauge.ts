@@ -132,7 +132,8 @@ export class Gauge extends Component {
 
 		arcEnter
 			.merge(arcValue)
-			.attr("class",
+			.attr(
+				"class",
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: "value",

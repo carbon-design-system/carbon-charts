@@ -12,6 +12,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
+	TreemapChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -378,6 +379,15 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	}
 } as RadarChartOptions);
 
+/**
+ * options specific to treemap charts
+ */
+const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
+	data: Tools.merge(chart.data, {
+		groupMapsTo: "name"
+	})
+} as TreemapChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -393,7 +403,8 @@ export const options = {
 	donutChart,
 	meterChart,
 	radarChart,
-	gaugeChart
+	gaugeChart,
+	treemapChart
 };
 
 export * from "./configuration-non-customizable";
