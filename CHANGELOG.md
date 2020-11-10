@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.0...v0.41.1) (2020-11-10)
+
+
+### Bug Fixes
+
+* **core:** correct axis title paddings in y-axes ([#873](https://github.com/carbon-design-system/carbon-charts/issues/873)) ([8a27a5f](https://github.com/carbon-design-system/carbon-charts/commit/8a27a5f65cbc55a878e603c9aa96c6f38d6ea10d)), closes [#859](https://github.com/carbon-design-system/carbon-charts/issues/859)
+
+
+
+
+
 # [0.41.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.14...v0.41.0) (2020-11-10)
 
 
