@@ -8,12 +8,13 @@ import {
 
 import {
 	debounce as lodashDebounce,
-	merge as lodashMerge,
+	merge as 	lodashMerge,
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	flatten as lodashFlatten,
 	camelCase as lodashCamelCase,
+	isEmpty as lodashIsEmpty,
 	isEqual as lodashIsEqual,
 	flatMapDeep as lodashFlatMapDeep,
 	kebabCase as lodashKebabCase,
@@ -37,6 +38,7 @@ export namespace Tools {
 	export const clamp = lodashClamp;
 	export const flatten = lodashFlatten;
 	export const camelCase = lodashCamelCase;
+	export const isEmpty = lodashIsEmpty;
 	export const isEqual = lodashIsEqual;
 	export const flatMapDeep = lodashFlatMapDeep;
 	export const kebabCase = lodashKebabCase;
