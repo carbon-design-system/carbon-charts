@@ -315,3 +315,8 @@ export interface RadarChartOptions extends BaseChartOptions {
 		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to treemap charts
+ */
+export interface TreemapChartOptions extends BaseChartOptions {}
