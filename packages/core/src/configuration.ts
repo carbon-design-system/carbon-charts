@@ -324,7 +324,8 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		numberFormatter: (number) =>
 			number.toFixed(2) % 1 !== 0
 				? number.toFixed(2).toLocaleString()
-				: number.toFixed().toLocaleString()
+				: number.toFixed().toLocaleString(),
+		alignment: Alignments.LEFT
 	}
 } as GaugeChartOptions);
 

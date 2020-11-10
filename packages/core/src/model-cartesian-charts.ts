@@ -1,6 +1,10 @@
 // Internal Imports
 import { ChartModel } from "./model";
 import { Tools } from "./tools";
+import {
+	ScaleTypes,
+	AxisPositions
+} from "./interfaces";
 
 /**
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
@@ -14,7 +18,14 @@ export class ChartModelCartesian extends ChartModel {
 		let data;
 		if (newData) {
 			data = super.setData(newData);
-			if (Tools.getProperty(this.getOptions(), "zoomBar")) {
+			if (
+				Tools.getProperty(
+					this.getOptions(),
+					"zoomBar",
+					"top",
+					"enabled"
+				)
+			) {
 				// if we have zoom bar data we need to update it as well
 				this.setZoomBarData();
 			}
@@ -70,5 +81,47 @@ export class ChartModelCartesian extends ChartModel {
 
 	getZoomBarData() {
 		return this.get("zoomBarData");
+	}
+
+	protected sanitizeDateValues(data) {
+		const options = this.getOptions();
+
+		if (!options.axes) {
+			return data;
+		}
+
+		const keysToCheck = [];
+		Object.keys(AxisPositions).forEach((axisPositionKey) => {
+			const axisPosition = AxisPositions[axisPositionKey];
+			const axisOptions = options.axes[axisPosition];
+
+			if (axisOptions && axisOptions.scaleType === ScaleTypes.TIME) {
+				const axisMapsTo = axisOptions.mapsTo;
+
+				if (axisMapsTo !== null || axisMapsTo !== undefined) {
+					keysToCheck.push(axisMapsTo);
+				}
+			}
+		});
+
+		if (keysToCheck.length > 0) {
+			// Check all datapoints and sanitize dates
+			data.forEach((datum) => {
+				keysToCheck.forEach((key) => {
+					if (Tools.getProperty(datum, key, "getTime") === null) {
+						datum[key] = new Date(datum[key]);
+					}
+				});
+			});
+		}
+
+		return data;
+	}
+
+	protected sanitize(data) {
+		data = super.sanitize(data);
+		data = this.sanitizeDateValues(data);
+
+		return data;
 	}
 }
