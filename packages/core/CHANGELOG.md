@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.13...v0.40.14) (2020-11-09)
+
+
+### Bug Fixes
+
+* **core:** replace import to lodash with lodash-es ([700ba09](https://github.com/carbon-design-system/carbon-charts/commit/700ba0989ca130c2b750acc868b5bc36192f6f07))
+
+
+
+
+
 ## [0.40.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.12...v0.40.13) (2020-11-06)
 
 **Note:** Version bump only for package @carbon/charts
