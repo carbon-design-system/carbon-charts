@@ -6,7 +6,8 @@ import {
 	Events,
 	GaugeTypes,
 	ArrowDirections,
-	ColorClassNameTypes
+	ColorClassNameTypes,
+	Alignments
 } from "../../interfaces";
 import { Tools } from "../../tools";
 
@@ -145,14 +146,26 @@ export class Gauge extends Component {
 			.attr("aria-roledescription", "value")
 			.attr("aria-label", (d) => d.value);
 
-		// Position Arc
-		svg.attr("transform", `translate(${radius}, ${radius})`);
-
 		// draw the value and delta to the center
 		this.drawValueNumber();
 		this.drawDelta();
 
 		arcValue.exit().remove();
+
+		const alignment = Tools.getProperty(options, "gauge", "alignment");
+
+		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
+			useAttr: true
+		});
+
+		// Position gauge
+		let gaugeTranslateX = radius;
+		if (alignment === Alignments.CENTER) {
+			gaugeTranslateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			gaugeTranslateX = width - radius;
+		}
+		svg.attr("transform", `translate(${gaugeTranslateX}, ${radius})`);
 
 		// Add event listeners
 		this.addEventListeners();
