@@ -166,31 +166,46 @@ export class Treemap extends Component {
 		// Update all clip paths
 		allLeafGroups
 			.selectAll("clipPath")
-			.data([1])
-			.join((enter) => {
-				enter
-					.append("clipPath")
-					.attr("id", function () {
-						const uid = select(this.parentNode).attr("data-uid");
-						return `${options.style.prefix}-clip-${uid}`;
-					})
-					.append("use")
-					.attr("xlink:href", function () {
-						const uid = select(this.parentNode.parentNode).attr(
-							"data-uid"
-						);
-						const leafID = `${options.style.prefix}-leaf-${uid}`;
+			.data(
+				(d) => {
+					if (d.data.showLabel !== true) {
+						return [];
+					}
 
-						return new URL(`#${leafID}`, windowLocation) + "";
-					});
-			});
+					return [1];
+				},
+				(d) => d
+			)
+			.join(
+				(enter) => {
+					enter
+						.append("clipPath")
+						.attr("id", function () {
+							const uid = select(this.parentNode).attr(
+								"data-uid"
+							);
+							return `${options.style.prefix}-clip-${uid}`;
+						})
+						.append("use")
+						.attr("xlink:href", function () {
+							const uid = select(this.parentNode.parentNode).attr(
+								"data-uid"
+							);
+							const leafID = `${options.style.prefix}-leaf-${uid}`;
+
+							return new URL(`#${leafID}`, windowLocation) + "";
+						});
+				},
+				(update) => null,
+				(exit) => exit.remove()
+			);
 
 		// Update all titles
 		allLeafGroups
 			.selectAll("text")
 			.data(
 				(d) => {
-					if (d.data.showLabel === false) {
+					if (d.data.showLabel !== true) {
 						return [];
 					}
 
@@ -231,7 +246,8 @@ export class Treemap extends Component {
 					}
 				},
 				(update) =>
-					update.text((d) => d.text).style("fill", textFillColor)
+					update.text((d) => d.text).style("fill", textFillColor),
+				(exit) => exit.remove()
 			);
 
 		// Add event listeners to elements drawn
