@@ -11,6 +11,7 @@ import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
 import GaugeChart from "./GaugeChart.svelte";
 import MeterChart from "./MeterChart.svelte";
+import TreemapChart from "./TreemapChart.svelte";
 
 export {
 	AreaChart,
@@ -25,5 +26,6 @@ export {
 	ScatterChart,
 	RadarChart,
 	GaugeChart,
-	MeterChart
+	MeterChart,
+	TreemapChart
 };

@@ -4,8 +4,7 @@ import { Tools } from "./tools";
 import {
 	Events,
 	ScaleTypes,
-	ColorClassNameTypes,
-	AxisPositions
+	ColorClassNameTypes
 } from "./interfaces";
 
 // D3
@@ -577,44 +576,8 @@ export class ChartModel {
 		return data;
 	}
 
-	protected sanitizeDateValues(data) {
-		const options = this.getOptions();
-
-		if (!options.axes) {
-			return data;
-		}
-
-		const keysToCheck = [];
-		Object.keys(AxisPositions).forEach((axisPositionKey) => {
-			const axisPosition = AxisPositions[axisPositionKey];
-			const axisOptions = options.axes[axisPosition];
-
-			if (axisOptions && axisOptions.scaleType === ScaleTypes.TIME) {
-				const axisMapsTo = axisOptions.mapsTo;
-
-				if (axisMapsTo !== null || axisMapsTo !== undefined) {
-					keysToCheck.push(axisMapsTo);
-				}
-			}
-		});
-
-		if (keysToCheck.length > 0) {
-			// Check all datapoints and sanitize dates
-			data.forEach((datum) => {
-				keysToCheck.forEach((key) => {
-					if (datum[key].getTime === undefined) {
-						datum[key] = new Date(datum[key]);
-					}
-				});
-			});
-		}
-
-		return data;
-	}
-
 	protected sanitize(data) {
 		data = this.getTabularData(data);
-		data = this.sanitizeDateValues(data);
 
 		return data;
 	}
