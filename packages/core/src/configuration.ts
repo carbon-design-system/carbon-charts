@@ -385,7 +385,7 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 const comboChart: ComboChartOptions = baseBarChart;
 
 /*
-* options specific to treemap charts
+ * options specific to treemap charts
  */
 const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	data: Tools.merge(chart.data, {

@@ -209,7 +209,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+	};
 }
 
 /**
@@ -223,7 +223,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
@@ -237,7 +237,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
