@@ -6,14 +6,14 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 
 	.toolbar-container {
 		.toolbar-button {
-			fill: none;
+			fill: transparent;
 			cursor: pointer;
 			&:hover {
 				.toolbar-button-background {
 					fill: $hover-ui;
 				}
 				.toolbar-button-background--disabled {
-					fill: none;
+					fill: transparent;
 				}
 			}
 
