@@ -10,6 +10,7 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as treemapDemos from "./treemap";
 import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
 import * as comboDemos from "./combo";
@@ -27,6 +28,7 @@ export * from "./scatter";
 export * from "./step";
 export * from "./radar";
 export * from "./combo";
+export * from "./treemap";
 
 import {
 	createChartSandbox,
@@ -109,6 +111,11 @@ export const chartTypes = {
 		vanilla: "ComboChart",
 		angular: "ibm-combo-chart",
 		vue: "ccv-combo-chart"
+	},
+	TreemapChart: {
+		vanilla: "TreemapChart",
+		angular: "ibm-treemap-chart",
+		vue: "ccv-treemap-chart"
 	}
 };
 
@@ -872,6 +879,16 @@ let allDemoGroups = [
 				data: comboDemos.comboErrorData,
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Treemap",
+		demos: [
+			{
+				data: treemapDemos.treemapData,
+				options: treemapDemos.treemapOptions,
+				chartType: chartTypes.TreemapChart
 			}
 		]
 	},

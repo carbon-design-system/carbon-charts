@@ -123,6 +123,7 @@ export class Component {
 	 */
 	getOptions() {
 		if (this.configs.options) {
+			console.log("ye");
 			const options = Tools.merge({}, this.model.getOptions(), this.configs.options);
 			return options;
 		}

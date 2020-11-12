@@ -23,6 +23,7 @@ export * from "./graphs/gauge";
 export * from "./graphs/donut";
 export * from "./graphs/skeleton";
 export * from "./graphs/skeleton-lines";
+export * from "./graphs/treemap";
 
 // Layout
 export * from "./layout/spacer";

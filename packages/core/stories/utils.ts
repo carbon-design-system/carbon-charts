@@ -49,6 +49,11 @@ const generateColorPalettePickerHTML = (container, chart) => {
 	const numberOfVariants =
 		variants || chart.model.getAllDataGroupsNames().length;
 
+	let onlyCategoricalPaletteIsApplicable = false;
+	if (chart.model.getAllDataGroupsNames().length > 5) {
+		onlyCategoricalPaletteIsApplicable = true;
+	}
+
 	const selectedColorPalette = `${numberOfVariants}-${option}`;
 
 	const div = document.createElement("div");
@@ -58,9 +63,9 @@ const generateColorPalettePickerHTML = (container, chart) => {
 	<div
 	class="bx--select">
 	<label for="select-id" class="bx--label">Color palette</label>
-		<div class="bx--select-input__wrapper" >
+		<div class="bx--select-input__wrapper">
 		<select id="color-palette-select" class="bx--select-input">
-			<option class="bx--select-option" value=""  disabled selected hidden>
+			<option class="bx--select-option" value="" disabled selected hidden>
 			Choose an option
 			</option>
 			${Object.keys(colorPairingOptions)
@@ -72,7 +77,9 @@ const generateColorPalettePickerHTML = (container, chart) => {
 					if (numberOfVariants !== 14) {
 						for (let i = 1; i <= optionsCount; i++) {
 							optionsHTML += `
-						<option class="bx--select-option" value="${colorGroup}-option-${i}" ${
+						<option class="bx--select-option" ${
+							onlyCategoricalPaletteIsApplicable ? "disabled" : ""
+						} value="${colorGroup}-option-${i}" ${
 								selectedColorPalette ===
 								`${numberOfVariants}-${i}`
 									? "selected"
@@ -83,7 +90,10 @@ const generateColorPalettePickerHTML = (container, chart) => {
 						}
 					} else {
 						optionsHTML += `<option class="bx--select-option" value="14-color-option-1" ${
-							selectedColorPalette === `14-1` ? "selected" : ""
+							selectedColorPalette === `14-1` ||
+							onlyCategoricalPaletteIsApplicable
+								? "selected"
+								: ""
 						}>
 						Categorical palette
 					</option>`;

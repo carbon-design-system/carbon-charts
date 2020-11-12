@@ -26,6 +26,7 @@ export class Line extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
+		console.log(this.configs.groups);
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
@@ -39,6 +40,7 @@ export class Line extends Component {
 			cartesianScales.getOrientation()
 		);
 		const options = this.getOptions();
+		console.log("options", options);
 
 		// D3 line generator function
 		const lineGenerator = line()

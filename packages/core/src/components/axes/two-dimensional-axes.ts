@@ -83,9 +83,19 @@ export class TwoDimensionalAxes extends Component {
 			if (child.getTitleRef().empty()) {
 				offset = 0;
 			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
-					useBBox: true
-				}).height;
+				offset = DOMUtils.getSVGElementSize(
+					child.getTitleRef(),
+					{
+						useBBox: true
+					}
+				).height;
+
+				if (
+					axisPosition === AxisPositions.LEFT ||
+					axisPosition === AxisPositions.RIGHT
+				) {
+					offset += 5;
+				}
 			}
 
 			switch (axisPosition) {
