@@ -137,7 +137,7 @@ export class DOMUtils extends Service {
 		return finalDimensions;
 	}
 
-	static appendOrSelect(parent, query) {
+	static appendOrSelect(parent, query, id?) {
 		const querySections = query.split(".");
 		const elementToAppend = querySections[0];
 
@@ -145,6 +145,7 @@ export class DOMUtils extends Service {
 		if (selection.empty()) {
 			return parent
 				.append(elementToAppend)
+				.attr("id", id)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 

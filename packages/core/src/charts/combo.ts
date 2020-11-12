@@ -83,7 +83,7 @@ export class ComboChart extends AxisChart {
 			} else {
 				// user has imported a type or custom component to instantiate
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
-				return new type(this.model, this.services, { groups: graph.datasets, options: options });
+				return new type(this.model, this.services, { groups: graph.datasets, id: ++counter, options: options });
 			}
 		});
 		return Tools.flatten(graphComponents);

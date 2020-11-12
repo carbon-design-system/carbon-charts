@@ -11,7 +11,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 export class Component {
 	public type: string;
-	public id: number;
+	public id: string;
 
 	protected parent: any;
 
@@ -27,7 +27,12 @@ export class Component {
 		if (configs) {
 			this.configs = configs;
 			if (this.configs.id) {
-				this.id = this.configs.id;
+				const chartprefix = Tools.getProperty(
+					this.model.getOptions(),
+					"style",
+					"prefix"
+				);
+				this.id = `${chartprefix}--${this.configs.id}`;
 			}
 		}
 
@@ -58,7 +63,6 @@ export class Component {
 	setParent(parent) {
 		const oldParent = this.parent;
 		this.parent = parent;
-		const chartsuffix = this.id ? `--${this.id}` : "";
 
 		if (oldParent && oldParent.node() === parent.node()) {
 			return;
@@ -70,16 +74,14 @@ export class Component {
 				"style",
 				"prefix"
 			);
-			this.parent.classed(
-				`${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`,
-				true
-			);
+			this.parent
+				.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true)
+				.attr( "id", this.id);
 
 			if (oldParent) {
-				oldParent.classed(
-					`${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`,
-					false
-				);
+				oldParent
+					.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false)
+					.attr( "id", this.id);
 			}
 		}
 	}
@@ -89,17 +91,16 @@ export class Component {
 	}
 
 	getContainerSVG(configs = { withinChartClip: false }) {
-		const chartsuffix = this.id ? `--${this.id}` : "";
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
 				"style",
 				"prefix"
 			);
-
 			const svg = DOMUtils.appendOrSelect(
 				this.parent,
-				`g.${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`
+				`g.${settings.prefix}--${chartprefix}--${this.type}`,
+				this.id
 			);
 
 			if (configs.withinChartClip) {
@@ -109,7 +110,6 @@ export class Component {
 					svg.attr("clip-path", `url(#${chartClipId})`);
 				}
 			}
-
 			return svg;
 		}
 
