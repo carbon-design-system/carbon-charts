@@ -1,6 +1,10 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
+import {
+	Events,
+	Roles,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -31,7 +35,6 @@ export class SimpleBar extends Bar {
 
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
-
 
 		const data = this.model.getDisplayData(this.configs.groups);
 
@@ -113,7 +116,7 @@ export class SimpleBar extends Bar {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -124,7 +127,7 @@ export class SimpleBar extends Bar {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	addEventListeners() {
 		const self = this;

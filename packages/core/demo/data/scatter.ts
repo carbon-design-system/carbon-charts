@@ -199,7 +199,7 @@ export const scatterDualAxesOptions = {
 			title: "product count",
 			mapsTo: "productCount",
 			scaleType: "linear",
-			datasets: ["Products"]
+			correspondingDatasets: ["Products"]
 		}
 	}
 };

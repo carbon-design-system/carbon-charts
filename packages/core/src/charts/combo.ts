@@ -71,19 +71,19 @@ export class ComboChart extends AxisChart {
 	getGraphComponents() {
 		const { chartTypes } = this.model.getOptions();
 		let counter = 0;
-		const graphComponents = chartTypes.map(graph => {
+		const graphComponents = chartTypes.map((graph) => {
 			const type = graph.type;
 			let options;
 
 			// initializes the components using input strings with the base configs for each chart
 			if (typeof graph.type === "string") {
-				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], graph.options);
-				return graphComponentsMap[graph.type].map(Component =>
-					new Component(this.model, this.services, { groups: graph.datasets, id: ++counter, options: options }));
+				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], this.model.getOptions(), graph.options);
+				return graphComponentsMap[graph.type].map((Component, i) =>
+					new Component(this.model, this.services, { groups: graph.datasets, id: counter++, options: options }));
 			} else {
 				// user has imported a type or custom component to instantiate
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
-				return new type(this.model, this.services, { groups: graph.datasets, id: ++counter, options: options });
+				return new type(this.model, this.services, { groups: graph.datasets, id: counter++, options: options });
 			}
 		});
 		return Tools.flatten(graphComponents);

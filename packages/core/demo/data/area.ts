@@ -187,7 +187,7 @@ export const stackedAreaTimeSeriesOptions = {
 	axes: {
 		left: {
 			stacked: true,
-			scale: "linear",
+			scaleType: "linear",
 			mapsTo: "value"
 		},
 		bottom: {
@@ -220,7 +220,8 @@ export const stackedAreaTimeSeriesUnevenDataOptions = {
 			stacked: true
 		},
 		bottom: {
-			scaleType: "time"
+			scaleType: "time",
+			mapsTo: "date"
 		}
 	},
 	curve: "curveMonotoneX"
@@ -237,7 +238,8 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 			}
 		},
 		bottom: {
-			scaleType: "time"
+			scaleType: "time",
+			mapsTo: "date"
 		}
 	},
 	curve: "curveMonotoneX"

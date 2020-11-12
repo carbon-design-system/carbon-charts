@@ -5,7 +5,8 @@ import {
 	Roles,
 	ScaleTypes,
 	Events,
-	ColorClassNameTypes
+	ColorClassNameTypes,
+	CartesianOrientations
 } from "../../interfaces";
 
 // D3 Imports
@@ -39,14 +40,12 @@ export class StackedArea extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
-
 		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
 		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(
 			domainAxisPosition
 		);
-		const isTimeSeries = domainScaleType === ScaleTypes.TIME;
+
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
@@ -60,7 +59,7 @@ export class StackedArea extends Component {
 		// D3 area generator function
 		this.areaGenerator = area()
 			// @ts-ignore
-			.x((d) => mainXScale(isTimeSeries ? new Date(d.data.sharedStackKey) : d.data.sharedStackKey))
+			.x((d, i) => this.services.cartesianScales.getValueThroughAxisPosition(domainAxisPosition, d.data.sharedStackKey, i))
 			.y0((d) => mainYScale(d[0]))
 			.y1((d) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());

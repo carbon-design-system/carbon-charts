@@ -18,7 +18,7 @@ export const comboSimpleData = [
 ];
 
 export const comboSimpleOptions = {
-	title: "Combo (Line + Simple bar)",
+	title: "Combo (Line + Simple bar) - custom configs",
 	axes: {
 		left: {
 			mapsTo: "value",
@@ -29,7 +29,7 @@ export const comboSimpleOptions = {
 			mapsTo: "temp",
 			scaleType: "linear",
 			title: "Temperature (°F)",
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		},
 		bottom: {
 			title: "Day of the Week",
@@ -46,7 +46,7 @@ export const comboSimpleOptions = {
 			]
 		},
 		{
-			type: Line,
+			type: "line",
 			options: {
 				points: {
 					radius: 7
@@ -73,7 +73,7 @@ export const comboHorizontalOptions = {
 			mapsTo: "temp",
 			scaleType: "linear",
 			title: "Temperature (°F)",
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		},
 		left: {
 			title: "Day of the Week",
@@ -135,7 +135,7 @@ export const comboStackedOptions = {
 		right: {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	},
 	chartTypes: [
@@ -193,7 +193,7 @@ export const comboGroupedOptions = {
 		right: {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}
@@ -208,14 +208,14 @@ export const comboGroupedOptions = {
 			type: "line",
 			options: {
 				points: {
-					radius: 1
+					filled: true,
+					opacity: 0.5
 				}
 			},
 			datasets: ["Temperature"]
 		}
 	]
 };
-
 
 export const comboAreaLineData = [
 	{ group: "Health", key: "January", value: 312 },
@@ -234,7 +234,6 @@ export const comboAreaLineData = [
 	{ group: "Temperature", key: "June", temp: 34 },
 	{ group: "Temperature", key: "July", temp: 37 },
 	{ group: "Temperature", key: "August", temp: 30 }
-
 ];
 
 export const comboAreaLineOptions = {
@@ -254,7 +253,7 @@ export const comboAreaLineOptions = {
 		right: {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}
@@ -316,7 +315,7 @@ export const comboLineScatterOptions = {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
 			scaleType: "linear",
-			datasets: [
+			correspondingDatasets: [
 				"Avg Temperature",
 				"Paris",
 				"Marseille"
@@ -344,7 +343,6 @@ export const comboLineScatterOptions = {
 	]
 };
 
-
 export const comboEmptyData = [];
 
 export const comboEmptyOptions = {
@@ -362,7 +360,7 @@ export const comboEmptyOptions = {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
 			scaleType: "linear",
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}
@@ -396,7 +394,7 @@ export const comboLoadingOptions = {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
 			scaleType: "linear",
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}
@@ -415,7 +413,6 @@ export const comboLoadingOptions = {
 		}
 	]
 };
-
 
 export const comboErrorData = [
 	{ group: "High", key: "Monday", temp: 20 },
@@ -455,7 +452,7 @@ export const comboErrorOptions = {
 			title: "Temperature (°C)",
 			mapsTo: "temp",
 			scaleType: "linear",
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}

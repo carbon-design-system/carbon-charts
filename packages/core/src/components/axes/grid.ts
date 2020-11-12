@@ -227,8 +227,8 @@ export class Grid extends Component {
 			.merge(backdropRect)
 			.attr("x", xScaleStart)
 			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
+			.attr("width", Math.abs(xScaleEnd - xScaleStart))
+			.attr("height", Math.abs(yScaleEnd - yScaleStart))
 			.lower();
 
 		backdropRect.attr("width", "100%").attr("height", "100%");

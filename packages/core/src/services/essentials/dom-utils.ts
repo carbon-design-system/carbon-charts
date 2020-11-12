@@ -140,8 +140,9 @@ export class DOMUtils extends Service {
 	static appendOrSelect(parent, query, id?) {
 		const querySections = query.split(".");
 		const elementToAppend = querySections[0];
+		const idSelector = id ? `#${id}` : "";
+		const selection = parent.select(`${query}${idSelector}`);
 
-		const selection = parent.select(query);
 		if (selection.empty()) {
 			return parent
 				.append(elementToAppend)

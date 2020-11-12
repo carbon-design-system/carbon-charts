@@ -50,7 +50,7 @@ export class AxisChart extends Chart {
 			"enabled"
 		);
 
-		this.services.cartesianScales.determineDualAxes();
+		this.services.cartesianScales.determineAxisDuality();
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
 		this.services.cartesianScales.determineOrientation();
 

@@ -517,7 +517,7 @@ export const dualLine = {
 		right: {
 			title: "Rainfall (mm)",
 			mapsTo: "rainfall",
-			datasets: [
+			correspondingDatasets: [
 				"Rainfall"
 			]
 		}

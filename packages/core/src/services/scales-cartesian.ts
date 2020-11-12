@@ -89,7 +89,7 @@ export class CartesianScales extends Service {
 	}
 
 	update(animate = true) {
-		this.determineDualAxes();
+		this.determineAxisDuality();
 		this.findDomainAndRangeAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(
@@ -143,19 +143,19 @@ export class CartesianScales extends Service {
 	}
 
 	isDualAxes() {
-		return this.isDualAxes;
+		return this.dualAxes;
 	}
 
-	// if any of the axes objects have datasets [] asserted we flag the chart as dual axes
+	// if any of the axes objects have correspondingDatasets [] asserted we flag the chart as dual axes
 	// it does not count as dual axes if it just has another axis turned on but is not actually using it to map a dataset
-	determineDualAxes() {
+	determineAxisDuality() {
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, "axes");
 
-		if (axesOptions[AxisPositions.LEFT]?.datasets  &&  axesOptions[AxisPositions.RIGHT]
-			|| axesOptions[AxisPositions.RIGHT]?.datasets  &&  axesOptions[AxisPositions.LEFT]
-			|| axesOptions[AxisPositions.TOP]?.datasets  &&  axesOptions[AxisPositions.BOTTOM]
-			|| axesOptions[AxisPositions.BOTTOM]?.datasets  &&  axesOptions[AxisPositions.TOP]) {
+		if (axesOptions[AxisPositions.LEFT]?.correspondingDatasets  &&  axesOptions[AxisPositions.RIGHT]
+			|| axesOptions[AxisPositions.RIGHT]?.correspondingDatasets  &&  axesOptions[AxisPositions.LEFT]
+			|| axesOptions[AxisPositions.TOP]?.correspondingDatasets  &&  axesOptions[AxisPositions.BOTTOM]
+			|| axesOptions[AxisPositions.BOTTOM]?.correspondingDatasets  &&  axesOptions[AxisPositions.TOP]) {
 				this.dualAxes = true;
 		}
 	}
@@ -178,7 +178,7 @@ export class CartesianScales extends Service {
 			return this.rangeAxisPosition;
 		}
 
-		if (axisOptions?.datasets && axisOptions.datasets.includes(dataset)) {
+		if (axisOptions?.correspondingDatasets && axisOptions.correspondingDatasets.includes(dataset)) {
 			return this.secondaryRangeAxisPosition;
 		}
 		return this.rangeAxisPosition;
@@ -194,7 +194,7 @@ export class CartesianScales extends Service {
 		const { groupMapsTo } = options.data;
 		const axesOptions = Tools.getProperty(options, "axes", this.secondaryDomainAxisPosition);
 		const dataset = datum[groupMapsTo];
-		if (axesOptions?.datasets && axesOptions.datasets.includes(dataset)) {
+		if (axesOptions?.correspondingDatasets && axesOptions.correspondingDatasets.includes(dataset)) {
 			return this.secondaryDomainAxisPosition;
 		}
 		return this.domainAxisPosition;
@@ -371,7 +371,7 @@ export class CartesianScales extends Service {
 			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
 				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
 			Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") === true ||
-			dualAxes && Tools.getProperty(axesOptions, AxisPositions.LEFT, "datasets")
+			dualAxes && Tools.getProperty(axesOptions, AxisPositions.LEFT, "correspondingDatasets")
 		) {
 			return AxisPositions.RIGHT;
 		}
@@ -389,7 +389,7 @@ export class CartesianScales extends Service {
 			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
 				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
 			Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true ||
-			dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, "datasets")
+			dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, "correspondingDatasets")
 
 		) {
 			return AxisPositions.TOP;
