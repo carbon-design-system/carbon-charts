@@ -12,7 +12,7 @@ export class Bubble extends Scatter {
 	type = "bubble";
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const data = selection.data();
@@ -40,7 +40,7 @@ export class Bubble extends Scatter {
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);

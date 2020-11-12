@@ -52,8 +52,8 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		const isScatterEnabled =
-			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
-			Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+			Tools.getProperty(this.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.getOptions(), "bubble", "enabled");
 
 		if (!isScatterEnabled) {
 			return;
@@ -62,7 +62,7 @@ export class Scatter extends Component {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 
@@ -168,7 +168,7 @@ export class Scatter extends Component {
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { filled, fillOpacity } = options.points;
 		const { cartesianScales, transitions } = this.services;
 
@@ -304,7 +304,7 @@ export class Scatter extends Component {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("circle.dot")

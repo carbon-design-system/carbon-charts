@@ -60,7 +60,7 @@ export class Pie extends Component {
 		const svg = this.getContainerSVG();
 
 		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
@@ -372,7 +372,7 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.slice")

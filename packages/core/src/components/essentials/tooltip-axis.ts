@@ -19,7 +19,7 @@ export class AxisChartsTooltip extends Tooltip {
 			return [];
 		}
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { cartesianScales } = this.services;
 		const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();

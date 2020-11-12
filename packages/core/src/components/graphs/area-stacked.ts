@@ -36,7 +36,7 @@ export class StackedArea extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 		const self = this;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
@@ -95,7 +95,7 @@ export class StackedArea extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		this.parent

@@ -38,7 +38,7 @@ export class Line extends Component {
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// D3 line generator function
 		const lineGenerator = line()

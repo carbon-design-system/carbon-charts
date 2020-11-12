@@ -8,7 +8,7 @@ export class StackedScatter extends Scatter {
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"points",
 			"enabled"
 		);
@@ -18,7 +18,7 @@ export class StackedScatter extends Scatter {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const percentage = Object.keys(options.axes).some(
@@ -76,7 +76,7 @@ export class StackedScatter extends Scatter {
 	}
 
 	getTooltipData(hoveredX, hoveredY) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage

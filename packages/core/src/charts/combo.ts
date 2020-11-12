@@ -8,7 +8,6 @@ import {
 	Skeletons
 } from "../interfaces/index";
 import { Tools } from "../tools";
-import { ChartModel } from "../model";
 
 // Components
 import {
@@ -37,13 +36,12 @@ const graphComponentsMap = {
 	[ComboChartTypes.SCATTER]: [Scatter],
 	[ComboChartTypes.AREA]: [Area, Line, Scatter],
 	[ComboChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
-	[ComboChartTypes.SIMPLE_BAR]: [SimpleBar, ZeroLine],
+	[ComboChartTypes.SIMPLE_BAR]: [SimpleBar],
 	[ComboChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
 	[ComboChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
 };
 
 export class ComboChart extends AxisChart {
-	model = new ChartModel(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<ComboChartOptions>) {
 		super(holder, chartConfigs);
@@ -60,20 +58,11 @@ export class ComboChart extends AxisChart {
 		if (!chartConfigs.options.chartTypes) {
 			console.warn("No chartTypes defined for the Combo Chart!");
 			// add a default chart to get an empty chart
-			chartOptions.chartTypes = {[ComboChartTypes.LINE]: []};
+			chartOptions.chartTypes = [{ type: ComboChartTypes.LINE, datasets: [] }];
 		}
 
-		const { chartTypes } = chartOptions;
-		const graphs = Object.keys(chartTypes);
-		const graphsDefaultOptions = graphs.reduce((options, g) => Tools.merge(options, Configuration.options[`${Tools.camelCase(g)}Chart`]), {});
-
-		// Merge default, user provided and graphs default options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				graphsDefaultOptions,
-				chartOptions
-			)
-		);
+		// set the global options
+		this.model.setOptions(chartOptions);
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
@@ -81,36 +70,31 @@ export class ComboChart extends AxisChart {
 
 	getGraphComponents() {
 		const { chartTypes } = this.model.getOptions();
-		const graphComponents = Object.keys(chartTypes).map(graph => {
-			return graphComponentsMap[graph].map(Component => new Component(this.model, this.services, {groups: this.getGroupsByChartType(graph)}));
-		});
-		return Tools.removeArrayDuplicates(Tools.flatten(graphComponents));
-	}
+		let counter = 0;
+		const graphComponents = chartTypes.map(graph => {
+			const type = graph.type;
+			let options;
 
-	// returns the groups that the chart type should add into the configs
-	getGroupsByChartType(chart) {
-		const { chartTypes } = this.model.getOptions();
-		let groups = chartTypes[chart];
-		if (chart === ComboChartTypes.LINE && chartTypes[ComboChartTypes.AREA]) {
-			// groups that use area chart need to also use line
-			groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
-		} else if (chart === ComboChartTypes.SCATTER) {
-			// groups that use area or line chart, need to use scatter
-			if (chartTypes[ComboChartTypes.AREA]) {
-				groups = groups.concat(chartTypes[ComboChartTypes.AREA]);
+			// initializes the components using input strings with the base configs for each chart
+			if (typeof graph.type === "string") {
+				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], graph.options);
+				return graphComponentsMap[graph.type].map(Component =>
+					new Component(this.model, this.services, { groups: graph.datasets, id: ++counter, options: options }));
+			} else {
+				// user has imported a type or custom component to instantiate
+				options = Tools.merge({}, this.model.getOptions(), graph.options);
+				return new type(this.model, this.services, { groups: graph.datasets, options: options });
 			}
-			if (chartTypes[ComboChartTypes.LINE]) {
-				groups = groups.concat(chartTypes[ComboChartTypes.LINE]);
-			}
-		}
-		return groups;
+		});
+		return Tools.flatten(graphComponents);
 	}
 
 	getComponents() {
 		const { chartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
-		const stackedRulerEnabled = Object.keys(chartTypes).includes(ComboChartTypes.STACKED_BAR)
-			|| Object.keys(chartTypes).includes(ComboChartTypes.STACKED_AREA);
+		const stackedRulerEnabled = chartTypes.filter(chartObject => {
+			return chartObject.type === (ComboChartTypes.STACKED_BAR || ComboChartTypes.STACKED_AREA);
+		}).length > 0;
 
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [

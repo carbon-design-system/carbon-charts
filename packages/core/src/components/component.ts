@@ -11,6 +11,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 export class Component {
 	public type: string;
+	public id: number;
 
 	protected parent: any;
 
@@ -25,6 +26,9 @@ export class Component {
 
 		if (configs) {
 			this.configs = configs;
+			if (this.configs.id) {
+				this.id = this.configs.id;
+			}
 		}
 
 		// Set parent element to shell SVG if no parent exists for component
@@ -54,6 +58,7 @@ export class Component {
 	setParent(parent) {
 		const oldParent = this.parent;
 		this.parent = parent;
+		const chartsuffix = this.id ? `--${this.id}` : "";
 
 		if (oldParent && oldParent.node() === parent.node()) {
 			return;
@@ -66,13 +71,13 @@ export class Component {
 				"prefix"
 			);
 			this.parent.classed(
-				`${settings.prefix}--${chartprefix}--${this.type}`,
+				`${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`,
 				true
 			);
 
 			if (oldParent) {
 				oldParent.classed(
-					`${settings.prefix}--${chartprefix}--${this.type}`,
+					`${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`,
 					false
 				);
 			}
@@ -84,6 +89,7 @@ export class Component {
 	}
 
 	getContainerSVG(configs = { withinChartClip: false }) {
+		const chartsuffix = this.id ? `--${this.id}` : "";
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
@@ -93,7 +99,7 @@ export class Component {
 
 			const svg = DOMUtils.appendOrSelect(
 				this.parent,
-				`g.${settings.prefix}--${chartprefix}--${this.type}`
+				`g.${settings.prefix}--${chartprefix}--${this.type}${chartsuffix}`
 			);
 
 			if (configs.withinChartClip) {
@@ -108,5 +114,18 @@ export class Component {
 		}
 
 		return this.parent;
+	}
+
+	/**
+	 * graphs used in combo charts share a model with global options but can receive their own local options.
+	 * this function retrieves the global options and merges it with any options passed into this
+	 * component's config.options object.
+	 */
+	getOptions() {
+		if (this.configs.options) {
+			const options = Tools.merge({}, this.model.getOptions(), this.configs.options);
+			return options;
+		}
+		return this.model.getOptions();
 	}
 }

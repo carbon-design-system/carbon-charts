@@ -24,7 +24,7 @@ export class Donut extends Pie {
 		}
 
 		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.center");
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -63,7 +63,7 @@ export class Donut extends Pie {
 	}
 
 	centerNumberTween(d3Ref) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		let donutCenterFigure = Tools.getProperty(
 			options,

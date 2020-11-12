@@ -1,3 +1,8 @@
+// Components
+import {
+	Line,
+	Scatter
+} from ".././../src/components/index";
 
 export const comboSimpleData = [
 	{ group: "School A", date: "Monday", value: 10000 },
@@ -32,14 +37,26 @@ export const comboSimpleOptions = {
 			scaleType: "labels"
 		}
 	},
-	chartTypes: {
-		"simple-bar": [
-			"School A"
-		],
-		"line":  [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "simple-bar",
+			options: {},
+			datasets: [
+				"School A"
+			]
+		},
+		{
+			type: Line,
+			options: {
+				points: {
+					radius: 7
+				}
+			},
+			datasets: [
+				"Temperature"
+			]
+		}
+	]
 };
 
 export const comboHorizontalData = comboSimpleData;
@@ -64,14 +81,20 @@ export const comboHorizontalOptions = {
 			scaleType: "labels"
 		}
 	},
-	chartTypes: {
-		"simple-bar": [
-			"School A"
-		],
-		"line":  [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "simple-bar",
+			options: {},
+			datasets: ["School A"]
+		},
+		{
+			type: "line",
+			options: {},
+			datasets: ["Temperature"]
+
+		}
+
+	]
 };
 
 export const comboStackedData = [
@@ -115,16 +138,22 @@ export const comboStackedOptions = {
 			datasets: ["Temperature"]
 		}
 	},
-	chartTypes: {
-		"stacked-bar": [
-			"Florida",
-			"California",
-			"Tokyo"
-		],
-		"line": [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "stacked-bar",
+			options: {},
+			datasets: [
+				"Florida",
+				"California",
+				"Tokyo"
+			]
+		},
+		{
+			type: "line",
+			options: {},
+			datasets: ["Temperature"]
+		}
+	]
 };
 
 export const comboGroupedData = [
@@ -169,16 +198,22 @@ export const comboGroupedOptions = {
 			]
 		}
 	},
-	chartTypes: {
-		"grouped-bar": [
-			"Location 1",
-			"Location 2",
-			"Location 3"
-		],
-		"line": [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "grouped-bar",
+			options: {},
+			datasets: ["Location 1", "Location 2", "Location 3"]
+		},
+		{
+			type: "line",
+			options: {
+				points: {
+					radius: 1
+				}
+			},
+			datasets: ["Temperature"]
+		}
+	]
 };
 
 
@@ -224,18 +259,24 @@ export const comboAreaLineOptions = {
 			]
 		}
 	},
-	chartTypes: {
-		"area": [
-			"Health"
-		],
-		"line": [
-			"Temperature"
-		]
-	},
+	chartTypes: [
+		{
+			type: "area",
+			options: {},
+			datasets: ["Health"]
+		},
+		{
+			type: "line",
+			options: {
+				points: {
+					enabled: true
+				}
+			},
+			datasets: ["Temperature"]
+		}
+	],
 	curve: "curveNatural"
 };
-
-
 
 export const comboLineScatterData = [
 	{ group: "Paris", key: "Monday", temp: 25 },
@@ -283,23 +324,25 @@ export const comboLineScatterOptions = {
 		}
 	},
 	curve: "curveMonotoneX",
-	chartTypes: {
-		"simple-bar": [
-			"Attendance"
-		],
-		"line": [
-			"Avg Temperature"
-		],
-		"scatter": [
-			"Paris",
-			"Marseille"
-		]
-	}
+	chartTypes: [
+		{
+			type: "simple-bar",
+			datasets: ["Attendance"]
+		},
+		{
+			type: "scatter",
+			datasets: [
+				"Paris",
+				"Marseille"
+			]
+		},
+		{
+			type: "line",
+			datasets: ["Avg Temperature"]
+
+		}
+	]
 };
-
-
-
-
 
 
 export const comboEmptyData = [];
@@ -324,14 +367,16 @@ export const comboEmptyOptions = {
 			]
 		}
 	},
-	chartTypes: {
-		"simple-bar": [
-			"Attendance"
-		],
-		"line": [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "simple-bar",
+			datasets: ["Attendance"]
+		},
+		{
+			type: "line",
+			datasets: ["Temperature"]
+		}
+	]
 };
 
 export const comboLoadingData = comboLineScatterData;
@@ -359,17 +404,17 @@ export const comboLoadingOptions = {
 	data: {
 		loading: true
 	},
-	chartTypes: {
-		"simple-bar": [
-			"Attendance"
-		],
-		"line": [
-			"Temperature"
-		]
-	}
+	chartTypes: [
+		{
+			type: "simple-bar",
+			datasets: ["Attendance"]
+		},
+		{
+			type: "line",
+			datasets: ["Temperature"]
+		}
+	]
 };
-
-
 
 
 export const comboErrorData = [

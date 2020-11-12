@@ -38,7 +38,7 @@ export class Threshold extends Component {
 	render(animate = false) {
 		const { value, fillColor, axisPosition, index } = this.configs;
 		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"style",
 			"prefix"
 		);
@@ -151,7 +151,7 @@ export class Threshold extends Component {
 
 	getFormattedValue() {
 		const { value, axisPosition } = this.configs;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(
 			axisPosition
 		);

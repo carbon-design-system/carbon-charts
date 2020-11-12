@@ -42,7 +42,7 @@ export class Axis extends Component {
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isAxisVisible = Tools.getProperty(
 			options,
 			"axes",
@@ -618,7 +618,7 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
 		const truncationThreshold = Tools.getProperty(

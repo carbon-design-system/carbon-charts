@@ -26,7 +26,7 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
@@ -101,7 +101,7 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.bar")

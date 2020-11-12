@@ -29,7 +29,7 @@ export class Skeleton extends Component {
 		svg.attr("width", width).attr("height", height);
 
 		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"data",
 			"loading"
 		);
@@ -140,7 +140,7 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"x",
 			"numberOfTicks"
@@ -170,7 +170,7 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"y",
 			"numberOfTicks"
@@ -210,7 +210,7 @@ export class Skeleton extends Component {
 		const optionName = innerRadius === 0 ? "pie" : "donut";
 
 		const alignment = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			optionName,
 			"alignment"
 		);

@@ -62,7 +62,7 @@ export class Area extends Component {
 
 		// Is gradient enabled or not
 		const isGradientEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"color",
 			"gradient",
 			"enabled"
@@ -83,7 +83,7 @@ export class Area extends Component {
 			.data(groupedData, (group) => group.name);
 
 		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"style",
 			"prefix"
 		);

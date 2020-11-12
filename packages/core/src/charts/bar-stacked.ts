@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, ScatterChartOptions } from "../interfaces/index";
+import { ChartConfig, BarChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Skeletons } from "../interfaces/enums";
 
@@ -21,7 +21,7 @@ import {
 export class StackedBarChart extends AxisChart {
 	constructor(
 		holder: Element,
-		chartConfigs: ChartConfig<ScatterChartOptions>
+		chartConfigs: ChartConfig<BarChartOptions>
 	) {
 		super(holder, chartConfigs);
 

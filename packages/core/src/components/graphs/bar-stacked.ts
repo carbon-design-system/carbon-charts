@@ -36,7 +36,7 @@ export class StackedBar extends Bar {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Create the data and keys that'll be used by the stack layout
@@ -165,7 +165,7 @@ export class StackedBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;

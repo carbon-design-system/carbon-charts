@@ -39,7 +39,7 @@ export class GroupedBar extends Bar {
 	render(animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData(this.configs.groups);
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Get unique labels
@@ -156,7 +156,7 @@ export class GroupedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.bar")
@@ -295,7 +295,7 @@ export class GroupedBar extends Bar {
 
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const providedWidth = Tools.getProperty(options, "bars", "width");
 		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
 

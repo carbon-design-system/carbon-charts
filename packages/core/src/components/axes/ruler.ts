@@ -25,13 +25,13 @@ export class Ruler extends Component {
 		originalData: any;
 	}[];
 	isXGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
+		this.getOptions(),
 		"grid",
 		"x",
 		"enabled"
 	);
 	isYGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
+		this.getOptions(),
 		"grid",
 		"y",
 		"enabled"
@@ -41,7 +41,7 @@ export class Ruler extends Component {
 
 	render() {
 		const isRulerEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"ruler",
 			"enabled"
 		);

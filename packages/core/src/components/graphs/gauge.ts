@@ -47,7 +47,7 @@ export class Gauge extends Component {
 	}
 
 	getArcRatio(): number {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const type = Tools.getProperty(options, "gauge", "type");
 		const arcRatio = type === GaugeTypes.FULL ? 1 : 0.5;
 		return arcRatio;
@@ -67,7 +67,7 @@ export class Gauge extends Component {
 
 	// use provided arrow direction or default to using the delta
 	getArrow(delta): string {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const arrowDirection = Tools.getProperty(
 			options,
 			"gauge",
@@ -90,7 +90,7 @@ export class Gauge extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
@@ -163,7 +163,7 @@ export class Gauge extends Component {
 	 */
 	drawValueNumber() {
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, "gauge", "type");
 		const value = this.getValue();
@@ -249,7 +249,7 @@ export class Gauge extends Component {
 	drawDelta() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const delta = this.getDelta();
 
 		// Sizing and positions relative to the radius
@@ -356,7 +356,7 @@ export class Gauge extends Component {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		const arcWidth = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"gauge",
 			"arcWidth"
 		);
@@ -403,7 +403,7 @@ export class Gauge extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const arcType = Tools.getProperty(options, "gauge", "type");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {

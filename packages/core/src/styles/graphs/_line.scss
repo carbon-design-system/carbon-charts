@@ -1,7 +1,7 @@
 $lines-bg-color: $ui-03;
 $lines-shimmer-color: $carbon--white-0;
 
-.#{$prefix}--#{$charts-prefix}--line {
+g[class*="#{$prefix}--#{$charts-prefix}--line"] {
 	path.line {
 		pointer-events: none;
 		fill: none;
