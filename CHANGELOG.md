@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.1...v0.41.2) (2020-11-13)
+
+
+### Bug Fixes
+
+* **core:** sanitize user provided axis domains ([5865b7a](https://github.com/carbon-design-system/carbon-charts/commit/5865b7a16ea424314115b05af818eed9449d2564))
+* **core:** tooltips should hide when mouseout is triggered on the chart holder ([#887](https://github.com/carbon-design-system/carbon-charts/issues/887)) ([9ee5210](https://github.com/carbon-design-system/carbon-charts/commit/9ee5210497032108857f503b69eff2c73b22cf06))
+
+
+
+
+
 ## [0.41.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.0...v0.41.1) (2020-11-10)
 
 
