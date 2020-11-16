@@ -87,6 +87,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// listen to chart-mouseout event to hide the tooltip
+		this.services.events.addEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	removeTooltipEventListener() {
@@ -102,6 +108,12 @@ export class Tooltip extends Component {
 		// remove hide-tooltip Custom Events
 		this.services.events.removeEventListener(
 			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
+
+		// remove the listener on chart-mouseout
+		this.services.events.removeEventListener(
+			Events.Chart.MOUSEOUT,
 			this.handleHideTooltip
 		);
 	}
