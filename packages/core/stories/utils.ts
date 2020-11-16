@@ -130,10 +130,10 @@ export const addControls = (container, chart) => {
 	generateThemePickerHTML(container);
 	generateColorPalettePickerHTML(container, chart);
 
-	addRadioButtonEventListeners(container);
+	addRadioButtonEventListeners(container, chart);
 };
 
-export const addRadioButtonEventListeners = (container) => {
+export const addRadioButtonEventListeners = (container, chart) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll(
 		"div#theme-picker input.bx--radio-button"
@@ -142,6 +142,8 @@ export const addRadioButtonEventListeners = (container) => {
 		radioButton.addEventListener("click", (e: any) => {
 			const theme = e.target.value;
 			container.setAttribute("class", `container theme--${theme}`);
+
+			chart.update();
 		});
 	});
 };
