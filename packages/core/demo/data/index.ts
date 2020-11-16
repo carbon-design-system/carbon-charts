@@ -10,6 +10,7 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as treemapDemos from "./treemap";
 import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
 import * as highScaleDemos from "./high-scale";
@@ -25,6 +26,7 @@ export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
+export * from "./treemap";
 
 import {
 	createChartSandbox,
@@ -102,6 +104,11 @@ export const chartTypes = {
 		vanilla: "RadarChart",
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
+	},
+	TreemapChart: {
+		vanilla: "TreemapChart",
+		angular: "ibm-treemap-chart",
+		vue: "ccv-treemap-chart"
 	}
 };
 
@@ -782,6 +789,16 @@ let allDemoGroups = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart
+			}
+		]
+	},
+	{
+		title: "Treemap",
+		demos: [
+			{
+				data: treemapDemos.treemapData,
+				options: treemapDemos.treemapOptions,
+				chartType: chartTypes.TreemapChart
 			}
 		]
 	},

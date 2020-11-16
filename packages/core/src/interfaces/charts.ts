@@ -255,7 +255,7 @@ export interface PieChartOptions extends BaseChartOptions {
 /**
  * options specific to gauge charts
  */
-export interface GaugeChartOptions extends PieChartOptions {
+export interface GaugeChartOptions extends BaseChartOptions {
 	gauge?: {
 		arcWidth?: number;
 		deltaArrow?: {
@@ -269,6 +269,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 		numberFormatter?: Function;
 		valueFontSize?: Function;
 		type?: GaugeTypes;
+		alignment?: Alignments;
 	};
 }
 
@@ -314,3 +315,8 @@ export interface RadarChartOptions extends BaseChartOptions {
 		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to treemap charts
+ */
+export interface TreemapChartOptions extends BaseChartOptions {}

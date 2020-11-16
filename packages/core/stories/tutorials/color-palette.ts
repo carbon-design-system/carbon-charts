@@ -1,6 +1,8 @@
 import marked from "marked";
 
-export const colorPaletteTutorial = marked(`
+export const colorPaletteTutorial = {
+	name: "Color palette",
+	content: marked(`
 # Color palette
 
 Carbon charts recently updated the default color palettes for \`@carbon/charts\` to follow the new IBM Design Language data vizualization palette.
@@ -74,4 +76,5 @@ const simpleBarOptions = {
 	}
 };
 \`\`\`
-`);
+`)
+};

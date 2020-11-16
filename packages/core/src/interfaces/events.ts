@@ -123,6 +123,16 @@ export enum Radar {
 }
 
 /**
+ * enum of all treemap graph events
+ */
+export enum Treemap {
+	LEAF_MOUSEOVER = "leaf-mouseover",
+	LEAF_MOUSEMOVE = "leaf-mousemove",
+	LEAF_CLICK = "leaf-click",
+	LEAF_MOUSEOUT = "leaf-mouseout"
+}
+
+/**
  * enum of all tooltip events
  */
 export enum Tooltip {

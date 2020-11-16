@@ -168,11 +168,12 @@ div.container {
 	}
 
 	// Replace with Carbon .scss imports
-	.bx--snippet--multi {
+	div.bx--snippet--multi {
 		background-color: black;
 		color: white;
 
 		pre {
+			padding: 2em !important;
 			-moz-tab-size: 4;
 			tab-size: 4;
 		}
@@ -325,6 +326,14 @@ div.container {
 
 		h5 {
 			margin-top: 30px;
+		}
+
+		ul li {
+			margin-bottom: 0.5em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 
 		code {
