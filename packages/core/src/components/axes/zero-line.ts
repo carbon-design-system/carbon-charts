@@ -7,12 +7,7 @@ export class ZeroLine extends Component {
 	type = "zero-line";
 
 	render(animate: boolean) {
-		let axisPosition = this.services.cartesianScales.getRangeAxisPosition();
-		if (this.services.cartesianScales.isDualAxes()) {
-			// get the axis that the groups use
-			axisPosition = this.services.cartesianScales.getDualAxesRangePosition(null, this.configs.groups);
-		}
-
+		const axisPosition = this.services.cartesianScales.getRangeAxisPosition({groups: this.configs.groups});
 		const rangeScale = this.services.cartesianScales.getScaleByPosition(axisPosition);
 		// check the domain
 		const [

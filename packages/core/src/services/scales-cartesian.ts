@@ -62,14 +62,34 @@ export class CartesianScales extends Service {
 
 	getDomainAxisPosition(datum?: any) {
 		if (this.dualAxes && datum) {
-			return this.getDualAxesDomainPosition(datum);
+			const options = this.model.getOptions();
+			const { groupMapsTo } = options.data;
+			const axesOptions = Tools.getProperty(options, "axes", this.secondaryDomainAxisPosition);
+			const dataset = datum[groupMapsTo];
+			if (axesOptions?.correspondingDatasets && axesOptions.correspondingDatasets.includes(dataset)) {
+				return this.secondaryDomainAxisPosition;
+			}
 		}
 		return this.domainAxisPosition;
 	}
 
-	getRangeAxisPosition(datum?: any) {
+	getRangeAxisPosition({datum = null, groups = null} = {}) {
 		if (this.dualAxes && datum) {
-			return this.getDualAxesRangePosition(datum);
+			const options = this.model.getOptions();
+			const { groupMapsTo } = options.data;
+			const axisOptions = Tools.getProperty(options, "axes", this.secondaryRangeAxisPosition);
+			let dataset;
+			if (datum) {
+				dataset = datum[groupMapsTo];
+			} else if (groups && groups.length > 0) {
+				dataset = groups[0];
+			} else {
+				return this.rangeAxisPosition;
+			}
+
+			if (axisOptions?.correspondingDatasets && axisOptions.correspondingDatasets.includes(dataset)) {
+				return this.secondaryRangeAxisPosition;
+			}
 		}
 		return this.rangeAxisPosition;
 	}
@@ -158,46 +178,6 @@ export class CartesianScales extends Service {
 			|| axesOptions[AxisPositions.BOTTOM]?.correspondingDatasets  &&  axesOptions[AxisPositions.TOP]) {
 				this.dualAxes = true;
 		}
-	}
-
-	/**
-	 * Returns the position of the range axis for the data item or the datagroups provided
-	 * @param datum
-	 * @param groups
-	 */
-	getDualAxesRangePosition(datum, groups?) {
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
-		const axisOptions = Tools.getProperty(options, "axes", this.secondaryRangeAxisPosition);
-		let dataset;
-		if (datum) {
-			dataset = datum[groupMapsTo];
-		} else if (groups && groups.length > 0) {
-			dataset = groups[0];
-		} else {
-			return this.rangeAxisPosition;
-		}
-
-		if (axisOptions?.correspondingDatasets && axisOptions.correspondingDatasets.includes(dataset)) {
-			return this.secondaryRangeAxisPosition;
-		}
-		return this.rangeAxisPosition;
-	}
-
-
-	/**
-	 * Returns the position of the domain axis that the datum is mapped with
-	 * @param datum
-	 */
-	getDualAxesDomainPosition(datum) {
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
-		const axesOptions = Tools.getProperty(options, "axes", this.secondaryDomainAxisPosition);
-		const dataset = datum[groupMapsTo];
-		if (axesOptions?.correspondingDatasets && axesOptions.correspondingDatasets.includes(dataset)) {
-			return this.secondaryDomainAxisPosition;
-		}
-		return this.domainAxisPosition;
 	}
 
 	getOrientation() {
@@ -311,7 +291,7 @@ export class CartesianScales extends Service {
 	}
 
 	getRangeValue(d, i) {
-		const axisPosition = this.getRangeAxisPosition(d);
+		const axisPosition = this.getRangeAxisPosition({datum: d});
 		return this.getValueThroughAxisPosition(axisPosition, d, i);
 	}
 
@@ -338,7 +318,7 @@ export class CartesianScales extends Service {
 		return Tools.getProperty(
 			options,
 			"axes",
-			this.getRangeAxisPosition(data),
+			this.getRangeAxisPosition({datum: data}),
 			"mapsTo"
 		);
 	}
@@ -389,7 +369,7 @@ export class CartesianScales extends Service {
 			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
 				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
 			Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true ||
-			dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, "correspondingDatasets")
+			(dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, "correspondingDatasets"))
 
 		) {
 			return AxisPositions.TOP;

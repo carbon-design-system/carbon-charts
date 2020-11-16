@@ -72,7 +72,7 @@ export class Scatter extends Component {
 			const percentage = Object.keys(options.axes).some(
 				(axis) => options.axes[axis].percentage
 			);
-			scatterData = this.model.getStackedData(this.configs.groups, { percentage });
+			scatterData = this.model.getStackedData({groups: this.configs.groups, percentage });
 		} else {
 			scatterData = this.model.getDisplayData(this.configs.groups)
 				.filter(
@@ -89,13 +89,7 @@ export class Scatter extends Component {
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
-			.data(
-				scatterData,
-				(datum) => {
-					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
-					return `${datum[groupMapsTo]}-${datum[domainIdentifier]}`;
-				}
-			);
+			.data(scatterData);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();

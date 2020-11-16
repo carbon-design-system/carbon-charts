@@ -24,7 +24,7 @@ export class StackedScatter extends Scatter {
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
-		const stackedData = this.model.getStackedData(this.configs.groups, { percentage });
+		const stackedData = this.model.getStackedData({ groups: this.configs.groups, percentage });
 
 		// Update data on dot groups
 		const circleGroups = svg
@@ -81,7 +81,7 @@ export class StackedScatter extends Scatter {
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
-		const stackedData = this.model.getStackedData(this.configs.groups, { percentage });
+		const stackedData = this.model.getStackedData({groups: this.configs.groups, percentage });
 		const tooltipData = [];
 		stackedData.forEach((groupData, groupDataIndex) => {
 			groupData.forEach((datum, dataIndex) => {
@@ -105,7 +105,7 @@ export class StackedScatter extends Scatter {
 					)
 				) {
 					if (percentage) {
-						rangeValue = this.model.getStackedData(this.configs.groups)[
+						rangeValue = this.model.getStackedData({groups: this.configs.groups})[
 							groupDataIndex
 						][dataIndex]["data"][group];
 					}

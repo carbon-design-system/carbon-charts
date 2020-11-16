@@ -80,7 +80,7 @@ export class Area extends Component {
 
 		const areas = svg
 			.selectAll("path.area")
-			.data(groupedData, (group) => group.name);
+			.data(groupedData);
 
 		const chartprefix = Tools.getProperty(
 			this.getOptions(),
@@ -92,6 +92,17 @@ export class Area extends Component {
 			`svg.${settings.prefix}--${chartprefix}--chart-svg`
 		);
 
+		// Remove elements that need to be exited
+		// We need exit at the top here to make sure that
+		// Data filters are processed before entering new elements
+		// Or updating existing ones
+		areas.exit().attr("opacity", 0).remove();
+
+		// if there is no grouped data (if all data groups are turned OFF with legend which can happen in the case of combo charts)
+		if (!groupedData.length) {
+			return;
+		}
+
 		// The fill value of area has been overwritten, get color value from stroke color class instead
 		const strokePathElement = chartSVG
 			.select(
@@ -101,10 +112,9 @@ export class Area extends Component {
 				})}`
 			)
 			.node();
+
 		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue(
-					"stroke"
-			  )
+			? getComputedStyle(strokePathElement, null).getPropertyValue("stroke" )
 			: null;
 
 		if (isGradientAllowed && colorValue) {
@@ -128,12 +138,6 @@ export class Area extends Component {
 				});
 			}
 		}
-
-		// Remove elements that need to be exited
-		// We need exit at the top here to make sure that
-		// Data filters are processed before entering new elements
-		// Or updating existing ones
-		areas.exit().attr("opacity", 0).remove();
 
 		const self = this;
 
@@ -186,8 +190,6 @@ export class Area extends Component {
 					return areaGenerator(data);
 				});
 		}
-
-		// Apply shared styles and datum
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {

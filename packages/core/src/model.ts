@@ -44,7 +44,7 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getAllDataFromDomain() {
+	getAllDataFromDomain(groups?) {
 		if (!this.getData()) {
 			return null;
 		}
@@ -54,6 +54,13 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 		const { groupMapsTo } = Tools.getProperty(options, "data");
 		const axesOptions = Tools.getProperty( options, "axes");
+
+		// filter out the groups that are irrelevant to the component
+		if (groups) {
+			allData = allData.filter(item => {
+				return groups.includes(item.group);
+			});
+		}
 
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
@@ -107,14 +114,7 @@ export class ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups(groups);
 		const { groupMapsTo } = this.getOptions().data;
-
-		let allDataFromDomain = this.getAllDataFromDomain();
-
-		if (groups) {
-			allDataFromDomain = allDataFromDomain.filter(item => {
-				return groups.includes(item.group);
-			});
-		}
+		const allDataFromDomain = this.getAllDataFromDomain(groups);
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
@@ -271,7 +271,7 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData(groups?: string[], { percentage } = { percentage: false }) {
+	getStackedData({ percentage = false, groups = null } ) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 

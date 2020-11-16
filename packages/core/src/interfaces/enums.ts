@@ -185,7 +185,7 @@ export enum TickRotations {
 /**
  * enum of chartTypes that work with combo chart
  */
-export enum ComboChartTypes {
+export enum ChartTypes {
 	SCATTER = "scatter",
 	LINE = "line",
 	SIMPLE_BAR = "simple-bar",

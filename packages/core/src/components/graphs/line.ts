@@ -60,7 +60,7 @@ export class Line extends Component {
 				(axis) => options.axes[axis].percentage
 			);
 			const { groupMapsTo } = options.data;
-			const stackedData = this.model.getStackedData(this.configs.groups, { percentage });
+			const stackedData = this.model.getStackedData({groups: this.configs.groups, percentage });
 
 			data = stackedData.map((d) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);

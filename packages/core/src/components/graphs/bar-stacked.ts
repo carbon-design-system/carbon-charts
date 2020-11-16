@@ -40,7 +40,7 @@ export class StackedBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData(this.configs.groups);
+		const stackData = this.model.getStackedData({groups: this.configs.groups});
 
 		// Update data on all bar groups
 		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);

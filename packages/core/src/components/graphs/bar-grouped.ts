@@ -129,7 +129,7 @@ export class GroupedBar extends Bar {
 
 				const x0 = startX;
 				const x1 = startX + barWidth;
-				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition(d);
+				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition({datum: d});
 				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(rangeAxis, 0);
 				const y1 = this.services.cartesianScales.getRangeValue(d);
 

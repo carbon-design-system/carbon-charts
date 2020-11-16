@@ -109,7 +109,7 @@ export class Threshold extends Component {
 			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
 			// Set hoverable area width and rotate it
 			thresholdRect
-				.attr("width", yScaleEnd - yScaleStart)
+				.attr("width", Math.abs(yScaleEnd - yScaleStart))
 				.classed("rotate", true);
 		} else {
 			const position =
@@ -126,7 +126,7 @@ export class Threshold extends Component {
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
 			// Set hoverable area width
-			thresholdRect.attr("width", xScaleEnd - xScaleStart);
+			thresholdRect.attr("width", Math.abs(xScaleEnd - xScaleStart));
 		}
 
 		const self = this;

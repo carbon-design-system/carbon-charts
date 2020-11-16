@@ -53,7 +53,7 @@ export class AxisChartsTooltip extends Tooltip {
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
-			const rangeAxisPosition = cartesianScales.getRangeAxisPosition(datum);
+			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({datum});
 			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
 			const rangeAxisOptions = cartesianScales.getAxisOptions(rangeAxisPosition);
 

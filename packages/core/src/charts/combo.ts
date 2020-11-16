@@ -4,7 +4,7 @@ import * as Configuration from "../configuration";
 import {
 	ChartConfig,
 	ComboChartOptions,
-	ComboChartTypes,
+	ChartTypes,
 	Skeletons
 } from "../interfaces/index";
 import { Tools } from "../tools";
@@ -32,13 +32,13 @@ import {
 } from "../components/index";
 
 const graphComponentsMap = {
-	[ComboChartTypes.LINE]: [Line, Scatter],
-	[ComboChartTypes.SCATTER]: [Scatter],
-	[ComboChartTypes.AREA]: [Area, Line, Scatter],
-	[ComboChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
-	[ComboChartTypes.SIMPLE_BAR]: [SimpleBar],
-	[ComboChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
-	[ComboChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
+	[ChartTypes.LINE]: [Line, Scatter],
+	[ChartTypes.SCATTER]: [Scatter],
+	[ChartTypes.AREA]: [Area, Line, Scatter],
+	[ChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
+	[ChartTypes.SIMPLE_BAR]: [SimpleBar],
+	[ChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
+	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
 };
 
 export class ComboChart extends AxisChart {
@@ -58,7 +58,7 @@ export class ComboChart extends AxisChart {
 		if (!chartConfigs.options.chartTypes) {
 			console.warn("No chartTypes defined for the Combo Chart!");
 			// add a default chart to get an empty chart
-			chartOptions.chartTypes = [{ type: ComboChartTypes.LINE, datasets: [] }];
+			chartOptions.chartTypes = [{ type: ChartTypes.LINE, datasets: [] }];
 		}
 
 		// set the global options
@@ -93,7 +93,7 @@ export class ComboChart extends AxisChart {
 		const { chartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
 		const stackedRulerEnabled = chartTypes.filter(chartObject => {
-			return chartObject.type === (ComboChartTypes.STACKED_BAR || ComboChartTypes.STACKED_AREA);
+			return chartObject.type === (ChartTypes.STACKED_BAR || ChartTypes.STACKED_AREA);
 		}).length > 0;
 
 		// Specify what to render inside the graph-frame
