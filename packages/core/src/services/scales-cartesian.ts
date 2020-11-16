@@ -462,6 +462,10 @@ export class CartesianScales extends Service {
 		if (axisOptions.domain) {
 			if (scaleType === ScaleTypes.LABELS) {
 				return axisOptions.domain;
+			} else if (scaleType === ScaleTypes.TIME) {
+				axisOptions.domain = axisOptions.domain.map((d) =>
+					d.getTime === undefined ? new Date(d) : d
+				);
 			}
 			return this.extendsDomain(axisPosition, axisOptions.domain);
 		}
