@@ -328,6 +328,14 @@ div.container {
 			margin-top: 30px;
 		}
 
+		ul li {
+			margin-bottom: 0.5em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
 		code {
 			border-radius: 4px;
 			background-color: #e0e0e0;
