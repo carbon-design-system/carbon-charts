@@ -4,31 +4,32 @@ export const comboChartTutorial = {
 	name: "Combo Chart Tutorial",
 	content: marked(`
 # Combo charts
-Combo charts allow users to visually compare different types of data by superimposing the different graphing components within one chart.
+Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
 Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see this tutorial ____.
 
+Note: Combo Charts are all combinations of **axis charts** and axis components.
 ___
 
 
-## Getting started with combo charts
+## Getting started with Combo charts
 
 
 ### Using the carbon-charts defaults
 
-There is support for using pre-existing carbon-charts graphs and combining them together within a Combo Chart.
+There is support for using pre-existing carbon-charts graphs and combining them together within a \`ComboChart\`.
 The charts that can be seamlessly combined are all different **axis charts only**.
 
-Suggested ChartTypes to combine:
-	- LineChart
-	- ScatterChart
-	- StackedScatterChart
-	- AreaChart
-	- StackedAreaChart
-	- BarChart
-	- GroupedBarChart
-	- StackedBarChart
+Suggested \`ChartTypes\` to combine:
+- \`LineChart\`
+- \`ScatterChart\`
+- \`StackedScatterChart\`
+- \`AreaChart\`
+- \`StackedAreaChart\`
+- \`BarChart\`
+- \`GroupedBarChart\`
+- \`StackedBarChart\`
 
-Below is an example of combining a carbon-charts **AreaChart** with a **LineChart**.
+Below is an example of combining a carbon-charts \`AreaChart\` with a \`LineChart\`.
 
 \`\`\`
 const verySimpleComboData = [
@@ -65,10 +66,14 @@ See the storybook demos for more combinations of charts and configurations.
 Custom components and **independent** carbon-charts components can also be rendered into a Combo Chart. This allows
 users to create their own components and combine them with the pre-existing componentry offered.
 
-
-Below is an example of combining a carbon-charts **AreaChart** with a standalone \`Line\` constructor.
+Below is an example of combining a carbon-charts \`AreaChart\` with a standalone \`Line\` class constructor.
 
 \`\`\`
+// import standanlone componentry
+import {
+	Line
+} from ".././../src/components/index";
+
 const verySimpleComboData = [
     { group: "Dataset 1", value: 650, date: "Tuesday" },
 	{ group: "Dataset 2", value: 296, date: "Tuesday" }
@@ -95,5 +100,10 @@ const comboOptions = {
 		}]
 };
 \`\`\`
+
+Users can omit using any defaults (chartTypes) and build up the charts with only class contructors if they choose. In the case where all the types are constructors,
+ComboChart **will still render the componetry for axis-charts** in addition to the custom/standalone components in the options.
+This enables the user to extend ComboChart to cover complex cases but also leaves responsibility on the developer to use the right chart combinations.
+
 `)
 };
