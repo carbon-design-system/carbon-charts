@@ -652,6 +652,12 @@ export class ChartModel {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
+		Object.keys(userProvidedScale).forEach(dataGroup => {
+			if (!this.allDataGroups.includes(dataGroup)) {
+				console.warn(`"${dataGroup}" does not exist in data groups.`);
+			}
+		})
+
 		/**
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
