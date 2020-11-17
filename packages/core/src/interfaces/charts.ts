@@ -327,10 +327,11 @@ export interface ConfidenceIntervalChartOptions extends ScatterChartOptions {
 		| {
 				name: string;
 		  };
-
+	/**
+	 * identifies what key within the data the confidence values would map to
+	 */
 	confidence?: {
 		upperBoundMapsTo?: string;
 		lowerBoundMapsTo?: string;
-	}
-
+	};
 }

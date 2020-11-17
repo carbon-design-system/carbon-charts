@@ -58,26 +58,26 @@ export class ConfidenceInterval extends Component {
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
 				.y0((d, i) =>
 					confidence
-						? cartesianScales.getRangeValue(d, i, confidence)[2]
-						: cartesianScales.getRangeValue(d, i, confidence)
+						? cartesianScales.getConfidenceScaledValues(d, i)[0]
+						: cartesianScales.getRangeValue(d, i)
 				)
 				.y1((d, i) =>
 					confidence
-						? cartesianScales.getRangeValue(d, i, confidence)[1]
-						: cartesianScales.getRangeValue(d, i, confidence)
+						? cartesianScales.getConfidenceScaledValues(d, i)[1]
+						: cartesianScales.getRangeValue(d, i)
 				);
 			domain = this.services.cartesianScales.getMainYScale().domain();
 		} else {
 			areaGenerator
 				.x0((d, i) =>
 					confidence
-						? cartesianScales.getRangeValue(d, i, confidence)[2]
-						: cartesianScales.getRangeValue(d, i, confidence)
+						? cartesianScales.getConfidenceScaledValues(d, i)[0]
+						: cartesianScales.getRangeValue(d, i)
 				)
 				.x1((d, i) =>
 					confidence
-						? cartesianScales.getRangeValue(d, i, confidence)[1]
-						: cartesianScales.getRangeValue(d, i, confidence)
+						? cartesianScales.getConfidenceScaledValues(d, i)[1]
+						: cartesianScales.getRangeValue(d, i)
 				)
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
 			domain = this.services.cartesianScales.getMainXScale().domain();
@@ -119,7 +119,6 @@ export class ConfidenceInterval extends Component {
 			});
 		}
 
-
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
@@ -127,7 +126,7 @@ export class ConfidenceInterval extends Component {
 		areas.exit().attr("opacity", 0).remove();
 
 		const self = this;
-		
+
 		// Enter paths that need to be introduced
 		const enteringAreas = areas.enter().append("path");
 		enteringAreas
@@ -137,8 +136,9 @@ export class ConfidenceInterval extends Component {
 			.attr("class", (group) =>
 				this.model.getColorClassName({
 					classNameTypes: [
-						ColorClassNameTypes.FILL, 
-						ColorClassNameTypes.STROKE],
+						ColorClassNameTypes.FILL,
+						ColorClassNameTypes.STROKE
+					],
 					dataGroupName: group.name,
 					originalClassName: "area"
 				})
@@ -157,7 +157,7 @@ export class ConfidenceInterval extends Component {
 				return areaGenerator(data);
 			})
 			.attr("stroke", (group) => this.model.getStrokeColor(group.name))
-			.style("stroke-dasharray", ("2, 2"))
+			.style("stroke-dasharray", "2, 2")
 			.attr("stroke-width", 0.7 + "px");
 	}
 
