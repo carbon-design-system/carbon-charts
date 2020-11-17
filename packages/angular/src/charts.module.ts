@@ -37,11 +37,8 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
-<<<<<<< HEAD
-		ConfidenceIntervalChartComponent
-=======
+		ConfidenceIntervalChartComponent,
 		TreemapChartComponent
->>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 	],
 	exports: [
 		BaseChart,
@@ -58,11 +55,8 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
-<<<<<<< HEAD
-		ConfidenceIntervalChartComponent
-=======
+		ConfidenceIntervalChartComponent,
 		TreemapChartComponent
->>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 	]
 })
 
