@@ -12,3 +12,4 @@ export * from "./meter";
 export * from "./radar";
 export * from "./gauge";
 export * from "./confidence-interval";
+export * from "./treemap";

@@ -13,6 +13,7 @@ import {
 	BubbleChartOptions,
 	RadarChartOptions,
 	ConfidenceIntervalChartOptions,
+	TreemapChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -324,7 +325,8 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		numberFormatter: (number) =>
 			number.toFixed(2) % 1 !== 0
 				? number.toFixed(2).toLocaleString()
-				: number.toFixed().toLocaleString()
+				: number.toFixed().toLocaleString(),
+		alignment: Alignments.LEFT
 	}
 } as GaugeChartOptions);
 
@@ -387,6 +389,15 @@ const confidenceIntervalChart: ConfidenceIntervalChartOptions = Tools.merge({},	
 	} as TimeScaleOptions)
 } as LineChartOptions);
 
+/**
+ * options specific to treemap charts
+ */
+const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
+	data: Tools.merge(chart.data, {
+		groupMapsTo: "name"
+	})
+} as TreemapChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -403,7 +414,8 @@ export const options = {
 	meterChart,
 	radarChart,
 	gaugeChart,
-	confidenceIntervalChart
+	confidenceIntervalChart,
+	treemapChart
 };
 
 export * from "./configuration-non-customizable";

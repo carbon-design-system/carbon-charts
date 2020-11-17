@@ -16,6 +16,7 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 import { MeterChartComponent } from "./meter-chart.component";
 import { RadarChartComponent } from "./radar-chart.component";
 import { ConfidenceIntervalChartComponent} from "./confidence-chart.component";
+import { TreemapChartComponent } from "./treemap-chart.component";
 
 @NgModule({
 	imports: [
@@ -36,7 +37,11 @@ import { ConfidenceIntervalChartComponent} from "./confidence-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
+<<<<<<< HEAD
 		ConfidenceIntervalChartComponent
+=======
+		TreemapChartComponent
+>>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 	],
 	exports: [
 		BaseChart,
@@ -53,7 +58,11 @@ import { ConfidenceIntervalChartComponent} from "./confidence-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
+<<<<<<< HEAD
 		ConfidenceIntervalChartComponent
+=======
+		TreemapChartComponent
+>>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 	]
 })
 

@@ -12,6 +12,7 @@ import RadarChart from "./RadarChart.svelte";
 import GaugeChart from "./GaugeChart.svelte";
 import MeterChart from "./MeterChart.svelte";
 import ConfidenceChart from "./ConfidenceChart.svelte";
+import TreemapChart from "./TreemapChart.svelte";
 
 export {
 	AreaChart,
@@ -27,5 +28,9 @@ export {
 	RadarChart,
 	GaugeChart,
 	MeterChart,
+<<<<<<< HEAD
 	ConfidenceChart
+=======
+	TreemapChart
+>>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 };

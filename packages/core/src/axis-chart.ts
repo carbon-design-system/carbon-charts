@@ -1,4 +1,5 @@
 import { Chart } from "./chart";
+import { ChartModelCartesian } from "./model-cartesian-charts";
 import {
 	LayoutDirection,
 	LayoutGrowth,
@@ -30,6 +31,7 @@ export class AxisChart extends Chart {
 		curves: Curves,
 		zoom: Zoom
 	});
+	model: ChartModelCartesian = new ChartModelCartesian(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
 		super(holder, chartConfigs);

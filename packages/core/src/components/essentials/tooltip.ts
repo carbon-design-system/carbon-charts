@@ -87,6 +87,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// listen to chart-mouseout event to hide the tooltip
+		this.services.events.addEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	removeTooltipEventListener() {
@@ -102,6 +108,12 @@ export class Tooltip extends Component {
 		// remove hide-tooltip Custom Events
 		this.services.events.removeEventListener(
 			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
+
+		// remove the listener on chart-mouseout
+		this.services.events.removeEventListener(
+			Events.Chart.MOUSEOUT,
 			this.handleHideTooltip
 		);
 	}
@@ -143,7 +155,9 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
-				item.value = this.valueFormatter(item.value);
+				item.value = item.value
+					? this.valueFormatter(item.value)
+					: item.value;
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
@@ -174,14 +188,15 @@ export class Tooltip extends Component {
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
-			const useColor = this.model.isUserProvidedColorScaleValid();
+			const isUserProvidedColorScaleValid = this.model.isUserProvidedColorScaleValid();
 
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
 				formattedItems
-					.map(
-						(item) =>
-							`<li>
+					.map((item) => {
+						const useColor =
+							item.color || isUserProvidedColorScaleValid;
+						return `<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
 								${item.class && !useColor ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								${
@@ -191,11 +206,11 @@ export class Tooltip extends Component {
 										  '" class="tooltip-color"></a>'
 										: ""
 								}
-								<p class="label">${item.label}</p>
-								<p class="value">${item.value}</p>
+								<p class="label">${item.label || ""}</p>
+								<p class="value">${item.value || ""}</p>
 							</div>
-						</li>`
-					)
+						</li>`;
+					})
 					.join("") +
 				`</ul>`;
 		}

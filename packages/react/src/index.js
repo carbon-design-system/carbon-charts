@@ -12,6 +12,7 @@ import ScatterChart from "./scatter-chart";
 import MeterChart from "./meter-chart";
 import RadarChart from "./radar-chart";
 import ConfidenceIntervalChart from "./confidence-interval-chart";
+import TreemapChart from "./treemap-chart";
 
 export {
 	AreaChart,
@@ -27,5 +28,9 @@ export {
 	ScatterChart,
 	MeterChart,
 	RadarChart,
+<<<<<<< HEAD
 	ConfidenceIntervalChart
+=======
+	TreemapChart
+>>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 };
