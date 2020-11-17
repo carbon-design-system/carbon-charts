@@ -104,13 +104,19 @@ export class Area extends Component {
 				.node();
 			let colorValue;
 			if (strokePathElement) {
-				colorValue = getComputedStyle(strokePathElement, null).getPropertyValue("stroke");
+				colorValue = getComputedStyle(
+					strokePathElement,
+					null
+				).getPropertyValue("stroke");
 			} else {
 				const sparklineColorObject = Tools.getProperty(
 					this.model.getOptions(),
 					"color",
-					"scale");
-				const sparklineColorObjectKeys = Object.keys(sparklineColorObject);
+					"scale"
+				);
+				const sparklineColorObjectKeys = Object.keys(
+					sparklineColorObject
+				);
 				colorValue = sparklineColorObject[sparklineColorObjectKeys[0]];
 			}
 			GradientUtils.appendOrUpdateLinearGradient({
@@ -210,7 +216,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -219,7 +225,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners
