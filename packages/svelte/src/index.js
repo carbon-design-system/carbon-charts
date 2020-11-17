@@ -28,9 +28,6 @@ export {
 	RadarChart,
 	GaugeChart,
 	MeterChart,
-<<<<<<< HEAD
-	ConfidenceChart
-=======
+	ConfidenceChart,
 	TreemapChart
->>>>>>> b41033a010a46fad1246e59ee26cd3d5004abb98
 };
