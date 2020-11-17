@@ -191,7 +191,6 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(options, "axes");
 		const axisOptions = axesOptions[axisPosition];
 		const { mapsTo } = axisOptions;
-
 		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
 		let scaledValue;
 		switch (scaleType) {
@@ -207,10 +206,7 @@ export class CartesianScales extends Service {
 		return scaledValue;
 	}
 
-	getConfidenceScaledValues(
-		datum: any,
-		index?: number,
-	) {
+	getConfidenceScaledValues(datum: any, index?: number) {
 		const { confidence } = this.model.getOptions();
 		const scale = this.scales[this.rangeAxisPosition];
 
@@ -424,14 +420,18 @@ export class CartesianScales extends Service {
 			);
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => datum[mapsTo]);
-		// If the scale has confidence
+			// If the scale has confidence
 		} else if (axisOptions.confidence) {
 			allDataValues = [];
 
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
-				allDataValues.push(datum[axisOptions.confidence.upperBoundMapsTo]);
-				allDataValues.push(datum[axisOptions.confidence.lowerBoundMapsTo]);
+				allDataValues.push(
+					datum[axisOptions.confidence.upperBoundMapsTo]
+				);
+				allDataValues.push(
+					datum[axisOptions.confidence.lowerBoundMapsTo]
+				);
 			});
 		} else {
 			allDataValues = this.services.zoom
