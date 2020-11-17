@@ -1,8 +1,6 @@
 // Components
-import {
-	Line,
-	Scatter
-} from ".././../src/components/index";
+import { SimpleBar } from ".././../src/components/index";
+import { options } from "./../../src/configuration";
 
 export const comboSimpleData = [
 	{ group: "School A", date: "Monday", value: 10000 },
@@ -39,8 +37,8 @@ export const comboSimpleOptions = {
 	},
 	chartTypes: [
 		{
-			type: "simple-bar",
-			options: {},
+			type: SimpleBar,
+			options: options.simpleBarChart,
 			datasets: [
 				"School A"
 			]
@@ -49,7 +47,7 @@ export const comboSimpleOptions = {
 			type: "line",
 			options: {
 				points: {
-					radius: 7
+					radius: 5
 				}
 			},
 			datasets: [
@@ -180,7 +178,7 @@ export const comboGroupedData = [
 ];
 
 export const comboGroupedOptions = {
-	title: "Combo (Line + Grouped bar)",
+	title: "Combo (Line + Grouped bar) - custom configs",
 	axes: {
 		left: {
 			title: "Sales",

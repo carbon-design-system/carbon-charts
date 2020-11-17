@@ -77,6 +77,11 @@ export class ComboChart extends AxisChart {
 
 			// initializes the components using input strings with the base configs for each chart
 			if (typeof graph.type === "string") {
+				// check if it is in the components map
+				// if it isn't then it is not a valid carbon chart to use in combo
+				if (!Object.keys(graphComponentsMap).includes(graph.type)) {
+					return null;
+				}
 				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], this.model.getOptions(), graph.options);
 				return graphComponentsMap[graph.type].map((Component, i) =>
 					new Component(this.model, this.services, { groups: graph.datasets, id: counter++, options: options }));
@@ -85,7 +90,10 @@ export class ComboChart extends AxisChart {
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
 				return new type(this.model, this.services, { groups: graph.datasets, id: counter++, options: options });
 			}
-		});
+		}).filter(item => item !== null);
+
+		console.log(Tools.flatten(graphComponents));
+
 		return Tools.flatten(graphComponents);
 	}
 

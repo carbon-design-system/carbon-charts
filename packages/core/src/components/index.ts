@@ -24,6 +24,7 @@ export * from "./graphs/donut";
 export * from "./graphs/skeleton";
 export * from "./graphs/skeleton-lines";
 export * from "./graphs/treemap";
+export * from "./graphs/radar";
 
 // Layout
 export * from "./layout/spacer";
