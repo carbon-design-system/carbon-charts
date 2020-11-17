@@ -92,26 +92,27 @@ export class Area extends Component {
 			`svg.${settings.prefix}--${chartprefix}--chart-svg`
 		);
 
-		// The fill value of area has been overwritten, get color value from stroke color class instead
-		const strokePathElement = chartSVG
-			.select(
-				`path.${this.model.getColorClassName({
-					classNameTypes: [ColorClassNameTypes.STROKE],
-					dataGroupName: groupedData[0].name
-				})}`
-			)
-			.node();
-		const sparklineColorObject = Tools.getProperty(
-			this.model.getOptions(),
-			"color",
-			"scale");
-		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue(
-					"stroke"
-			)
-			: isGradientAllowed ? sparklineColorObject[Object.keys(sparklineColorObject)[0]] : null;
-
-		if (isGradientAllowed && colorValue) {
+		if (isGradientAllowed) {
+			// The fill value of area has been overwritten, get color value from stroke color class instead
+			const strokePathElement = chartSVG
+				.select(
+					`path.${this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.STROKE],
+						dataGroupName: groupedData[0].name
+					})}`
+				)
+				.node();
+			let colorValue;
+			if (strokePathElement) {
+				colorValue = getComputedStyle(strokePathElement, null).getPropertyValue("stroke");
+			} else {
+				const sparklineColorObject = Tools.getProperty(
+					this.model.getOptions(),
+					"color",
+					"scale");
+				const sparklineColorObjectKeys = Object.keys(sparklineColorObject);
+				colorValue = sparklineColorObject[sparklineColorObjectKeys[0]];
+			}
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id:
