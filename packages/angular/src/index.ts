@@ -1,5 +1,3 @@
-import { from } from 'rxjs';
-
 export * from "./charts.module";
 
 export * from "./base-chart.component";
