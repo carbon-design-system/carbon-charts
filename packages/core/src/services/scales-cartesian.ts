@@ -371,6 +371,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const confidence = Tools.getProperty(options, "confidence");
 		const { includeZero } = axisOptions;
 		const scaleType =
 			Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
@@ -421,17 +422,21 @@ export class CartesianScales extends Service {
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => datum[mapsTo]);
 			// If the scale has confidence
-		} else if (axisOptions.confidence) {
+		} else if (confidence && options.axes) {
 			allDataValues = [];
-
+			
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
-				allDataValues.push(
-					datum[axisOptions.confidence.upperBoundMapsTo]
-				);
-				allDataValues.push(
-					datum[axisOptions.confidence.lowerBoundMapsTo]
-				);
+				if (datum[confidence.upperBoundMapsTo]) {
+					allDataValues.push(
+						datum[confidence.upperBoundMapsTo]
+					);
+				}
+				if (datum[confidence.lowerBoundMapsTo]){
+					allDataValues.push(
+						datum[confidence.lowerBoundMapsTo]
+					);
+				}
 			});
 		} else {
 			allDataValues = this.services.zoom
