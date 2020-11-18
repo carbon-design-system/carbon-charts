@@ -56,7 +56,7 @@ export class ComboChart extends AxisChart {
 		// Warn user if no chartTypes defined
 		// Use skeleton chart instead
 		if (!chartConfigs.options.chartTypes) {
-			console.warn("No chartTypes defined for the Combo Chart!");
+			console.error("No chartTypes defined for the Combo Chart!");
 			// add a default chart to get an empty chart
 			chartOptions.chartTypes = [{ type: ChartTypes.LINE, correspondingDatasets: [] }];
 		}
@@ -99,7 +99,7 @@ export class ComboChart extends AxisChart {
 	getComponents() {
 		const { chartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
-		const stackedRulerEnabled = chartTypes.filter(chartObject => {
+		const stackedRulerEnabled = chartTypes.some(chartObject => {
 			return chartObject.type === (ChartTypes.STACKED_BAR || ChartTypes.STACKED_AREA);
 		}).length > 0;
 

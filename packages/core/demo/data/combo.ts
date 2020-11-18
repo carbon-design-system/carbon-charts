@@ -39,7 +39,7 @@ export const comboSimpleOptions = {
 		{
 			type: SimpleBar,
 			options: options.simpleBarChart,
-			datasets: [
+			correspondingDatasets: [
 				"School A"
 			]
 		},
@@ -50,7 +50,7 @@ export const comboSimpleOptions = {
 					radius: 5
 				}
 			},
-			datasets: [
+			correspondingDatasets: [
 				"Temperature"
 			]
 		}
@@ -83,12 +83,12 @@ export const comboHorizontalOptions = {
 		{
 			type: "simple-bar",
 			options: {},
-			datasets: ["School A"]
+			correspondingDatasets: ["School A"]
 		},
 		{
 			type: "line",
 			options: {},
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 
 		}
 
@@ -140,7 +140,7 @@ export const comboStackedOptions = {
 		{
 			type: "stacked-bar",
 			options: {},
-			datasets: [
+			correspondingDatasets: [
 				"Florida",
 				"California",
 				"Tokyo"
@@ -149,7 +149,7 @@ export const comboStackedOptions = {
 		{
 			type: "line",
 			options: {},
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	]
 };
@@ -199,8 +199,7 @@ export const comboGroupedOptions = {
 	chartTypes: [
 		{
 			type: "grouped-bar",
-			options: {},
-			datasets: ["Location 1", "Location 2", "Location 3"]
+			correspondingDatasets: ["Location 1", "Location 2", "Location 3"]
 		},
 		{
 			type: "line",
@@ -210,7 +209,7 @@ export const comboGroupedOptions = {
 					opacity: 0.5
 				}
 			},
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	]
 };
@@ -260,7 +259,7 @@ export const comboAreaLineOptions = {
 		{
 			type: "area",
 			options: {},
-			datasets: ["Health"]
+			correspondingDatasets: ["Health"]
 		},
 		{
 			type: "line",
@@ -269,7 +268,7 @@ export const comboAreaLineOptions = {
 					enabled: true
 				}
 			},
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	],
 	curve: "curveNatural"
@@ -324,18 +323,18 @@ export const comboLineScatterOptions = {
 	chartTypes: [
 		{
 			type: "simple-bar",
-			datasets: ["Attendance"]
+			correspondingDatasets: ["Attendance"]
 		},
 		{
 			type: "scatter",
-			datasets: [
+			correspondingDatasets: [
 				"Paris",
 				"Marseille"
 			]
 		},
 		{
 			type: "line",
-			datasets: ["Avg Temperature"]
+			correspondingDatasets: ["Avg Temperature"]
 
 		}
 	]
@@ -366,11 +365,11 @@ export const comboEmptyOptions = {
 	chartTypes: [
 		{
 			type: "simple-bar",
-			datasets: ["Attendance"]
+			correspondingDatasets: ["Attendance"]
 		},
 		{
 			type: "line",
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	]
 };
@@ -403,11 +402,11 @@ export const comboLoadingOptions = {
 	chartTypes: [
 		{
 			type: "simple-bar",
-			datasets: ["Attendance"]
+			correspondingDatasets: ["Attendance"]
 		},
 		{
 			type: "line",
-			datasets: ["Temperature"]
+			correspondingDatasets: ["Temperature"]
 		}
 	]
 };
