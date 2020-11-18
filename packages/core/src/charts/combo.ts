@@ -80,6 +80,7 @@ export class ComboChart extends AxisChart {
 				// check if it is in the components map
 				// if it isn't then it is not a valid carbon chart to use in combo
 				if (!Object.keys(graphComponentsMap).includes(graph.type)) {
+					console.error(`Invalid chart type "${graph.type}" specified for combo chart. Please refer to the ComboChart tutorial for more guidance.`);
 					return null;
 				}
 				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], this.model.getOptions(), graph.options);
