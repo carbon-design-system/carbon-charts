@@ -1,6 +1,6 @@
 // Components
-import { SimpleBar } from ".././../src/components/index";
-import { options } from "./../../src/configuration";
+import { SimpleBar } from "@carbon/charts/components/index";
+import { options } from "@carbon/charts/configuration";
 
 export const comboSimpleData = [
 	{ group: "School A", date: "Monday", value: 10000 },
