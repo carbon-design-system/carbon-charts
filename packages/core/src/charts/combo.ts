@@ -58,7 +58,7 @@ export class ComboChart extends AxisChart {
 		if (!chartConfigs.options.chartTypes) {
 			console.warn("No chartTypes defined for the Combo Chart!");
 			// add a default chart to get an empty chart
-			chartOptions.chartTypes = [{ type: ChartTypes.LINE, datasets: [] }];
+			chartOptions.chartTypes = [{ type: ChartTypes.LINE, correspondingDatasets: [] }];
 		}
 
 		// set the global options
@@ -85,11 +85,11 @@ export class ComboChart extends AxisChart {
 				}
 				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], this.model.getOptions(), graph.options);
 				return graphComponentsMap[graph.type].map((Component, i) =>
-					new Component(this.model, this.services, { groups: graph.datasets, id: counter++, options: options }));
+					new Component(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options }));
 			} else {
 				// user has imported a type or custom component to instantiate
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
-				return new type(this.model, this.services, { groups: graph.datasets, id: counter++, options: options });
+				return new type(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options });
 			}
 		}).filter(item => item !== null);
 
