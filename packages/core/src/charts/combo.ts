@@ -93,8 +93,6 @@ export class ComboChart extends AxisChart {
 			}
 		}).filter(item => item !== null);
 
-		console.log(Tools.flatten(graphComponents));
-
 		return Tools.flatten(graphComponents);
 	}
 
