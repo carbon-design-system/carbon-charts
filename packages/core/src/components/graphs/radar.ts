@@ -836,7 +836,7 @@ export class Radar extends Component {
 					(d) => d[angle] === datum
 				);
 
-				const options = self.model.getOptions();
+				const options = self.getOptions();
 				const { groupMapsTo } = options.data;
 				const valueMapsTo = Tools.getProperty(
 					options,

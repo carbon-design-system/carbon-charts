@@ -416,7 +416,7 @@ export class Pie extends Component {
 					datum
 				});
 
-				const { groupMapsTo } = self.model.getOptions().data;
+				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,

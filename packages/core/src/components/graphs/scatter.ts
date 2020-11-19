@@ -321,18 +321,9 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 	}
 
-	getTooltipData(hoveredX, hoveredY) {
-		return this.model.getDisplayData(this.configs.groups).filter((d) => {
-			return (
-				hoveredX === this.services.cartesianScales.getDomainValue(d) &&
-				hoveredY === this.services.cartesianScales.getRangeValue(d)
-			);
-		});
-	}
-
 	addEventListeners() {
 		const self = this;
-		const { groupMapsTo } = self.model.getOptions().data;
+		const { groupMapsTo } = self.getOptions().data;
 
 		this.parent
 			.selectAll("circle")
@@ -358,17 +349,10 @@ export class Scatter extends Component {
 					)
 					.classed("unfilled", false);
 
-				const hoveredX = self.services.cartesianScales.getDomainValue(
-					datum
-				);
-				const hoveredY = self.services.cartesianScales.getRangeValue(
-					datum
-				);
-				const tooltipData = self.getTooltipData(hoveredX, hoveredY);
-				// Show tooltip
+				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: tooltipData
+					data: [datum]
 				});
 
 				// Dispatch mouse event

@@ -12,6 +12,7 @@ export const comboSimpleData = [
 ];
 
 export const comboSimpleOptions = {
+	experimental: true,
 	title: "Combo (Line + Simple bar) - custom configs",
 	axes: {
 		left: {
@@ -55,6 +56,7 @@ export const comboSimpleOptions = {
 export const comboHorizontalData = comboSimpleData;
 
 export const comboHorizontalOptions = {
+	experimental: true,
 	title: "Horizontal Combo (Line + Simple bar)",
 	axes: {
 		top: {
@@ -114,6 +116,7 @@ export const comboStackedData = [
 ];
 
 export const comboStackedOptions = {
+	experimental: true,
 	title: "Combo (Line + Stacked bar)",
 	axes: {
 		left: {
@@ -173,6 +176,7 @@ export const comboGroupedData = [
 ];
 
 export const comboGroupedOptions = {
+	experimental: true,
 	title: "Combo (Line + Grouped bar) - custom configs",
 	axes: {
 		left: {
@@ -214,26 +218,19 @@ export const comboGroupedHorizontalData = [
 	{ group: "Location 1", key: "Monday", value: 65000 },
 	{ group: "Location 1", key: "Tuesday", value: -39123 },
 	{ group: "Location 1", key: "Wednesday", value: -35213 },
-	{ group: "Location 1", key: "Thursday", value: 51213 },
-	{ group: "Location 1", key: "Friday", value: 16932 },
 	{ group: "Location 2", key: "Monday", value: 32432 },
 	{ group: "Location 2", key: "Tuesday", value: -21312 },
 	{ group: "Location 2", key: "Wednesday", value: -56456 },
-	{ group: "Location 2", key: "Thursday", value: -21312 },
-	{ group: "Location 2", key: "Friday", value: 34234 },
 	{ group: "Location 3", key: "Monday", value: -12312 },
 	{ group: "Location 3", key: "Tuesday", value: 23232 },
 	{ group: "Location 3", key: "Wednesday", value: 34232 },
-	{ group: "Location 3", key: "Thursday", value: -12312 },
-	{ group: "Location 3", key: "Friday", value: -34234 },
 	{ group: "Temperature", key: "Monday", temp: 20 },
 	{ group: "Temperature", key: "Tuesday", temp: 23 },
-	{ group: "Temperature", key: "Wednesday", temp: 33 },
-	{ group: "Temperature", key: "Thursday", temp: 34 },
-	{ group: "Temperature", key: "Friday", temp: 34 }
+	{ group: "Temperature", key: "Wednesday", temp: 33 }
 ];
 
 export const comboGroupedHorizontalOptions = {
+	experimental: true,
 	title: "Combo Horizontal (Line + Grouped bar)",
 	axes: {
 		top: {
@@ -285,6 +282,7 @@ export const comboAreaLineData = [
 ];
 
 export const comboAreaLineOptions = {
+	experimental: true,
 	title: "Combo (Line + Area)",
 	points: {
 		enabled: false
@@ -349,6 +347,7 @@ export const comboLineScatterData = [
 ];
 
 export const comboLineScatterOptions = {
+	experimental: true,
 	title: "Combo (Line + Scatter + Bar)",
 	axes: {
 		left: {
@@ -394,6 +393,7 @@ export const comboLineScatterOptions = {
 export const comboEmptyData = [];
 
 export const comboEmptyOptions = {
+	experimental: true,
 	title: "Combo Chart (empty)",
 	axes: {
 		left: {
@@ -428,6 +428,7 @@ export const comboEmptyOptions = {
 export const comboLoadingData = comboLineScatterData;
 
 export const comboLoadingOptions = {
+	experimental: true,
 	title: "Combo Chart (loading)",
 	axes: {
 		left: {
@@ -486,6 +487,7 @@ export const comboErrorData = [
 ];
 
 export const comboErrorOptions = {
+	experimental: true,
 	title: "Combo Chart (no chartTypes)",
 	axes: {
 		left: {
@@ -531,6 +533,7 @@ export const comboStackedAreaLine = [
 ];
 
 export const comboStackedAreaLineOptions = {
+	experimental: true,
 	title: "Combo (Stacked Area + Line)",
 	axes: {
 		left: {
