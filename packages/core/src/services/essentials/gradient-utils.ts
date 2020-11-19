@@ -15,7 +15,7 @@ export class GradientUtils extends Service {
 				.attr("y1", configs.y1)
 				.attr("y2", configs.y2);
 		}
-
+		lg.selectAll("stop").remove();
 		lg.selectAll("stop")
 			.data(configs.stops)
 			.enter()
@@ -24,6 +24,7 @@ export class GradientUtils extends Service {
 			.style("stop-color", (d) => d.color)
 			.style("stop-opacity", (d) => d.opacity);
 	}
+
 
 	static getOffsetRatio(domain) {
 		const offsetRatio =
