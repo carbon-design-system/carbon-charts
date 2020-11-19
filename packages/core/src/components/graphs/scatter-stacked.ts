@@ -8,7 +8,7 @@ export class StackedScatter extends Scatter {
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"points",
 			"enabled"
 		);
@@ -18,16 +18,13 @@ export class StackedScatter extends Scatter {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
-
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
-		const stackedData = this.model.getStackedData({ percentage });
+		const stackedData = this.model.getStackedData({ groups: this.configs.groups, percentage });
 
 		// Update data on dot groups
 		const circleGroups = svg
@@ -63,6 +60,8 @@ export class StackedScatter extends Scatter {
 		// Apply styling & position
 		const circlesToStyle = enteringCircles.merge(circles).datum((d) => {
 			const group = d[groupMapsTo];
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
 
 			return {
 				[groupMapsTo]: group,
@@ -77,14 +76,12 @@ export class StackedScatter extends Scatter {
 	}
 
 	getTooltipData(hoveredX, hoveredY) {
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
-		const stackedData = this.model.getStackedData({ percentage });
+		const stackedData = this.model.getStackedData({groups: this.configs.groups, percentage });
 		const tooltipData = [];
 		stackedData.forEach((groupData, groupDataIndex) => {
 			groupData.forEach((datum, dataIndex) => {
@@ -92,21 +89,23 @@ export class StackedScatter extends Scatter {
 				const domainValue = datum["data"]["sharedStackKey"];
 				let rangeValue = datum["data"][group];
 				const stackedRangeValue = datum[1];
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datum);
 
 				if (
 					rangeValue !== null &&
 					rangeValue !== undefined &&
 					hoveredX ===
-						this.services.cartesianScales.getDomainValue(
-							domainValue
-						) &&
+					this.services.cartesianScales.getDomainValue(
+						domainValue
+					) &&
 					hoveredY ===
-						this.services.cartesianScales.getRangeValue(
-							stackedRangeValue
-						)
+					this.services.cartesianScales.getRangeValue(
+						stackedRangeValue
+					)
 				) {
 					if (percentage) {
-						rangeValue = this.model.getStackedData()[
+						rangeValue = this.model.getStackedData({groups: this.configs.groups})[
 							groupDataIndex
 						][dataIndex]["data"][group];
 					}
@@ -122,7 +121,9 @@ export class StackedScatter extends Scatter {
 			});
 		});
 
-		return this.model.getDisplayData().filter((datapoint) => {
+		return this.model.getDisplayData(this.configs.groups).filter((datapoint) => {
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datapoint);
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datapoint);
 			return (
 				tooltipData.find((tooltipDatapoint) => {
 					return (
