@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Events, Roles } from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import {
 	Point,
@@ -446,11 +446,21 @@ export class Radar extends Component {
 		const blobUpdate = blobs
 			.selectAll("path")
 			.data(this.groupedDataNormalized, (group) => group.name);
+
 		blobUpdate.join(
 			(enter) =>
 				enter
 					.append("path")
-					.attr("class", "blob")
+					.attr("class", (group) =>
+						this.model.getColorClassName({
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						})
+					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
@@ -471,7 +481,20 @@ export class Radar extends Component {
 								radialLineGenerator(group.data)
 							)
 					),
-			(update) =>
+			(update) => {
+				update
+					.attr("class", (group) =>
+						this.model.getColorClassName({
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						})
+					)
+					.attr("fill", (group) => colorScale(group.name))
+					.attr("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
 						.transition(
@@ -483,7 +506,8 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				),
+				)
+			},
 			(exit) =>
 				exit.call((selection) =>
 					selection
@@ -514,7 +538,13 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			.attr("class", (d) => Tools.kebabCase(d[angle]))
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: Tools.kebabCase(d[angle])
+				})
+			)
 			.attr(
 				"cx",
 				(d) =>
@@ -727,21 +757,23 @@ export class Radar extends Component {
 					return Configuration.radar.opacity.unselected;
 				}
 				return Configuration.radar.opacity.selected;
+			})
+			.style("stroke-opacity", (group) => {
+				if (group.name !== hoveredElement.datum().name) {
+					return Configuration.radar.opacity.unselected;
+				}
+				return 1;
 			});
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		const opacity = Tools.getProperty(
-			this.model.getOptions(),
-			"radar",
-			"opacity"
-		);
 		this.parent
 			.selectAll("g.blobs path")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-blob")
 			)
-			.style("fill-opacity", Tools.getProperty(opacity, "selected"));
+			.style("fill-opacity", Configuration.radar.opacity.selected)
+			.style("stroke-opacity", 1);
 	};
 
 	destroy() {
@@ -823,7 +855,11 @@ export class Radar extends Component {
 						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
-							color: self.model.getStrokeColor(datum[groupMapsTo])
+							color: self.model.getFillColor(datum[groupMapsTo]),
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo]
+							})
 						}))
 				});
 			})

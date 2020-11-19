@@ -12,6 +12,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
+	TreemapChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -21,12 +22,15 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ToolbarOptions,
+	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
 	GaugeTypes,
 	LegendPositions,
 	TruncationTypes,
+	ToolbarControlTypes,
 	ZoomBarTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
@@ -154,6 +158,10 @@ const chart: BaseChartOptions = {
 	},
 	color: {
 		scale: null,
+		pairing: {
+			numberOfVariants: null,
+			option: 1
+		},
 		gradient: {
 			enabled: false
 		}
@@ -170,11 +178,18 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	ruler,
 	zoomBar: {
 		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		}
-	} as ZoomBarsOptions
+		},
+		updateRangeAxis: false
+	} as ZoomBarsOptions,
+	toolbar: {
+		enabled: false,
+		numberOfIcons: 3,
+		controls: []
+	} as ToolbarOptions
 } as AxisChartOptions);
 
 /**
@@ -309,7 +324,8 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		numberFormatter: (number) =>
 			number.toFixed(2) % 1 !== 0
 				? number.toFixed(2).toLocaleString()
-				: number.toFixed().toLocaleString()
+				: number.toFixed().toLocaleString(),
+		alignment: Alignments.LEFT
 	}
 } as GaugeChartOptions);
 
@@ -363,6 +379,15 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	}
 } as RadarChartOptions);
 
+/**
+ * options specific to treemap charts
+ */
+const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
+	data: Tools.merge(chart.data, {
+		groupMapsTo: "name"
+	})
+} as TreemapChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -378,7 +403,8 @@ export const options = {
 	donutChart,
 	meterChart,
 	radarChart,
-	gaugeChart
+	gaugeChart,
+	treemapChart
 };
 
 export * from "./configuration-non-customizable";

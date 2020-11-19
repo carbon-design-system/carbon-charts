@@ -1,11 +1,15 @@
 // Internal Imports
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
-import { Roles, Events, CartesianOrientations } from "../../interfaces";
+import {
+	Roles,
+	Events,
+	CartesianOrientations,
+	ColorClassNameTypes
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { color } from "d3-color";
 
 export class StackedBar extends Bar {
 	type = "stacked-bar";
@@ -55,7 +59,7 @@ export class StackedBar extends Bar {
 			.append("g")
 			.classed("bars", true)
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "bars");
+			.attr("data-name", "bars");
 
 		// Update data on all bars
 		const bars = svg
@@ -78,6 +82,13 @@ export class StackedBar extends Bar {
 					"bar-update-enter",
 					animate
 				)
+			)
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "bar"
+				})
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
@@ -164,18 +175,13 @@ export class StackedBar extends Bar {
 			.selectAll("path.bar")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", true);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
-					.attr("fill", (d) =>
-						color(self.model.getFillColor(d[groupMapsTo]))
-							.darker(0.7)
-							.toString()
-					);
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
@@ -232,16 +238,6 @@ export class StackedBar extends Bar {
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
-
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseout_fill_update"
-						)
-					)
-					.attr("fill", (d: any) =>
-						self.model.getFillColor(d[groupMapsTo])
-					);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

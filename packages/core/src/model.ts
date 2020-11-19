@@ -1,8 +1,11 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import * as colorPalettes from "./services/colorPalettes";
-import { Events, ScaleTypes } from "./interfaces";
+import {
+	Events,
+	ScaleTypes,
+	ColorClassNameTypes
+} from "./interfaces";
 
 // D3
 import { map } from "d3-collection";
@@ -35,6 +38,8 @@ export class ChartModel {
 	// Fill scales & fill related objects
 	protected colorScale: any = {};
 
+	protected colorClassNames: any = {};
+
 	constructor(services: any) {
 		this.services = services;
 	}
@@ -52,13 +57,23 @@ export class ChartModel {
 
 		const axesOptions = this.getOptions().axes;
 
-		// Check for custom domain
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
-				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
-					const mapsTo = axesOptions[axis].mapsTo;
+				const mapsTo = axesOptions[axis].mapsTo;
+				const scaleType = axesOptions[axis].scaleType;
+				// make sure linear/log values are numbers
+				if (
+					scaleType === ScaleTypes.LINEAR ||
+					scaleType === ScaleTypes.LOG
+				) {
+					displayData = displayData.map((datum) => {
+						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
+					});
+				}
 
-					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
+				// Check for custom domain
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
+					if (scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
@@ -250,7 +265,11 @@ export class ChartModel {
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
-					d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					if (maxByKey[d.sharedStackKey]) {
+						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+					} else {
+						d[name] = 0;
+					}
 				});
 			});
 		}
@@ -318,7 +337,8 @@ export class ChartModel {
 
 		this.updateAllDataGroups();
 
-		this.setColorScale();
+		this.setCustomColorScale();
+		this.setColorClassNames();
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
@@ -417,8 +437,12 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
+		if (!this.isUserProvidedColorScaleValid()) {
+			return null;
+		}
 		const options = this.getOptions();
 		const defaultFillColor = this.getFillScale()(group);
+
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
 		} else {
@@ -427,6 +451,10 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
+		if (!this.isUserProvidedColorScaleValid()) {
+			return null;
+		}
+
 		const options = this.getOptions();
 		const defaultStrokeColor = this.colorScale(group);
 		if (options.getStrokeColor) {
@@ -440,11 +468,55 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
+	isUserProvidedColorScaleValid() {
+		const userProvidedScale = Tools.getProperty(
+			this.getOptions(),
+			"color",
+			"scale"
+		);
+		const dataGroups = this.getDataGroups();
+
+		if (
+			userProvidedScale == null ||
+			Object.keys(userProvidedScale).length < dataGroups.length
+		) {
+			return false;
+		}
+
+		return dataGroups.every((dataGroup) =>
+			Object.keys(userProvidedScale).includes(dataGroup.name)
+		);
+	}
+
+	getColorClassName(configs: {
+		classNameTypes: ColorClassNameTypes[];
+		dataGroupName: string;
+		originalClassName?: string;
+	}) {
+		if (this.isUserProvidedColorScaleValid()) {
+			return configs.originalClassName;
+		}
+
+		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
+		let className = configs.originalClassName;
+		configs.classNameTypes.forEach(
+			(type) =>
+				(className = configs.originalClassName
+					? `${className} ${type}-${colorPairingTag}`
+					: `${type}-${colorPairingTag}`)
+		);
+		return className;
+	}
+
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
 	getStatus() {
 		return null;
+	}
+
+	getAllDataGroupsNames() {
+		return this.allDataGroups;
 	}
 
 	/**
@@ -505,7 +577,9 @@ export class ChartModel {
 	}
 
 	protected sanitize(data) {
-		return this.getTabularData(data);
+		data = this.getTabularData(data);
+
+		return data;
 	}
 
 	/*
@@ -570,47 +644,80 @@ export class ChartModel {
 	/*
 	 * Fill scales
 	 */
-	protected setColorScale() {
-		const defaultColors = colorPalettes.DEFAULT;
+	protected setCustomColorScale() {
+		if (!this.isUserProvidedColorScaleValid()) {
+			return;
+		}
 
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
-		// If there is no valid user provided scale, use the default set of colors
-		if (
-			userProvidedScale === null ||
-			Object.keys(userProvidedScale).length === 0
-		) {
-			this.colorScale = scaleOrdinal()
-				.range(defaultColors)
-				.domain(this.allDataGroups);
-
-			return;
-		}
+		Object.keys(userProvidedScale).forEach(dataGroup => {
+			if (!this.allDataGroups.includes(dataGroup)) {
+				console.warn(`"${dataGroup}" does not exist in data groups.`);
+			}
+		})
 
 		/**
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
-		 * If not, add a default color
 		 */
 		const colorRange = [];
-		let colorIndex = 0;
 		this.allDataGroups.forEach((dataGroup) => {
 			if (userProvidedScale[dataGroup]) {
 				colorRange.push(userProvidedScale[dataGroup]);
-			} else {
-				colorRange.push(defaultColors[colorIndex]);
-			}
-
-			if (colorIndex === defaultColors.length - 1) {
-				colorIndex = 0;
-			} else {
-				colorIndex++;
 			}
 		});
 
 		this.colorScale = scaleOrdinal()
 			.range(colorRange)
 			.domain(this.allDataGroups);
+	}
+
+	/*
+	 * Color palette
+	 */
+	protected setColorClassNames() {
+		const colorPairingOptions = Tools.getProperty(
+			this.getOptions(),
+			"color",
+			"pairing"
+		);
+
+		// Check if user has defined numberOfVariants (differ from given data)
+		let numberOfVariants = Tools.getProperty(
+			colorPairingOptions,
+			"numberOfVariants"
+		);
+		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
+			numberOfVariants = this.allDataGroups.length;
+		}
+
+		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
+		const colorPairingCounts = Configuration.color.pairingOptions;
+
+		// If number of dataGroups is greater than 5, user 14-color palette
+		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;
+
+		// Use default palette if user choice is not in range
+		pairingOption =
+			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
+				? pairingOption
+				: 1;
+
+		// Create color classes for graph, tooltip and stroke use
+		const colorPairing = this.allDataGroups.map(
+			(dataGroup, index) =>
+				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
+		);
+
+		// If there is no valid user provided scale, use the default set of colors
+		if (!this.isUserProvidedColorScaleValid()) {
+			this.colorClassNames = scaleOrdinal()
+				.range(colorPairing)
+				.domain(this.allDataGroups);
+
+			return;
+		}
 	}
 }

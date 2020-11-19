@@ -1,0 +1,41 @@
+$lines-bg-color: $ui-03;
+$lines-shimmer-color: $carbon--white-0;
+$areas-bg-color: rgba(127, 127, 127, 0.1);
+$areas-shimmer-color: rgba($carbon--white-0, 0.15);
+
+.#{$prefix}--#{$charts-prefix}--skeleton-lines {
+	// lines
+	rect.chart-skeleton-backdrop {
+		@if $carbon--theme == $carbon--theme--g10 {
+			fill: $ui-01;
+		} @else if $carbon--theme == $carbon--theme--g90 {
+			fill: $carbon--gray-100;
+		} @else {
+			fill: $ui-background;
+		}
+	}
+
+	.shimmer-effect-lines {
+		stroke-width: 1px;
+		stroke: url(#shimmer-lines);
+	}
+
+	.shimmer-effect-sparkline {
+		stroke-width: 0px;
+	}
+
+	.empty-state-lines {
+		stroke-width: 1px;
+		stroke: $lines-bg-color;
+	}
+
+	#shimmer-lines {
+		.stop-bg-shimmer {
+			stop-color: $lines-bg-color;
+		}
+
+		.stop-shimmer {
+			stop-color: $lines-shimmer-color;
+		}
+	}
+}

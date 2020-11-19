@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
+import { ColorClassNameTypes } from "../../interfaces/enums";
 import {
 	LegendOrientations,
 	Roles,
@@ -64,12 +65,20 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 
+		const paletteOption = Tools.getProperty(
+			options,
+			"color",
+			"pairing",
+			"option"
+		);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
 			.attr("tabindex", 0)
+			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
 				({ status }) =>
@@ -79,9 +88,18 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
+			.attr("class", (d, i) => {
+				if (paletteOption) {
+					return this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.FILL],
+						dataGroupName: d.name,
+						originalClassName: "checkbox"
+					});
+				}
+			})
 			.style("fill", (d) => {
 				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getStrokeColor(d.name)
+					? this.model.getFillColor(d.name)
 					: null;
 			})
 			.classed("active", function (d, i) {
@@ -339,6 +357,8 @@ export class Legend extends Component {
 				// Configs
 				const checkboxRadius = Configuration.legend.checkbox.radius;
 				const hoveredItem = select(this);
+				hoveredItem.select("rect.checkbox").classed("hovered", true);
+
 				hoveredItem
 					.append("rect")
 					.classed("hover-stroke", true)
@@ -384,6 +404,7 @@ export class Legend extends Component {
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
+				hoveredItem.select("rect.checkbox").classed("hovered", false);
 
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 
@@ -396,7 +417,7 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll("g.legend-item rect.checkbox").on("keyup", function (d) {
-			if (event.key && event.key === "Enter" || event.key === " ") {
+			if (event.key && (event.key === "Enter" || event.key === " ")) {
 				event.preventDefault();
 
 				self.model.toggleDataLabel(d.name);

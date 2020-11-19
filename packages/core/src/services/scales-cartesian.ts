@@ -261,27 +261,6 @@ export class CartesianScales extends Service {
 		return axisOptions.mapsTo;
 	}
 
-	/** Uses the Y Axis to get data items associated with that value. */
-	getDataFromDomain(domainValue) {
-		const displayData = this.model.getDisplayData();
-		const domainIdentifier = this.getDomainIdentifier();
-		const scaleType = this.scaleTypes[this.domainAxisPosition];
-		if (scaleType === ScaleTypes.TIME) {
-			return displayData.filter((datum) => {
-				let date = datum[domainIdentifier];
-				if (typeof date === "string" || date.getTime === undefined) {
-					date = new Date(date);
-				}
-
-				return date.getTime() === domainValue.getTime();
-			});
-		}
-
-		return displayData.filter((datum) => {
-			return datum[domainIdentifier] === domainValue;
-		});
-	}
-
 	extendsDomain(axisPosition: AxisPositions, domain: any) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
@@ -396,6 +375,10 @@ export class CartesianScales extends Service {
 		if (axisOptions.domain) {
 			if (scaleType === ScaleTypes.LABELS) {
 				return axisOptions.domain;
+			} else if (scaleType === ScaleTypes.TIME) {
+				axisOptions.domain = axisOptions.domain.map((d) =>
+					d.getTime === undefined ? new Date(d) : d
+				);
 			}
 			return this.extendsDomain(axisPosition, axisOptions.domain);
 		}
@@ -416,12 +399,20 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
+			const dataValuesGroupedByKeys = this.services.zoom.filterDataForRangeAxis(
+				this.model.getDataValuesGroupedByKeys(),
+				{ stacked: true }
+			);
+
 			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
 				sum(values(dataValues) as any)
 			);
-		} else {
+		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => datum[mapsTo]);
+		} else {
+			allDataValues = this.services.zoom
+				.filterDataForRangeAxis(displayData)
+				.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
