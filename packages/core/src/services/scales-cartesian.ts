@@ -391,16 +391,20 @@ export class CartesianScales extends Service {
 			primaryRangeAxisPosition: null,
 			secondaryRangeAxisPosition: null
 		};
+
+
+		// assign to to be a vertical chart by default
+		result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
+		result.primaryRangeAxisPosition = verticalAxesPositions.primary;
+		// secondary axes
+		result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
+		result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
+
+		// if neither the horizontal axes are label or time
+		// and atleast  one of the main vertical ones are labels or time then it should be horizontal
 		if (
-			mainHorizontalScaleType === ScaleTypes.LABELS ||
-			mainHorizontalScaleType === ScaleTypes.TIME
-		) {
-			result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
-			result.primaryRangeAxisPosition = verticalAxesPositions.primary;
-			// secondary axes
-			result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
-			result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
-		} else if (
+			!(mainHorizontalScaleType === ScaleTypes.LABELS ||
+			mainHorizontalScaleType === ScaleTypes.TIME) &&
 			mainVerticalScaleType === ScaleTypes.LABELS ||
 			mainVerticalScaleType === ScaleTypes.TIME
 		) {
@@ -409,12 +413,6 @@ export class CartesianScales extends Service {
 			// secondary axes
 			result.secondaryDomainAxisPosition = verticalAxesPositions.secondary;
 			result.secondaryRangeAxisPosition = horizontalAxesPositions.secondary;
-		} else {
-			result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
-			result.primaryRangeAxisPosition = verticalAxesPositions.primary;
-			// secondary axes
-			result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
-			result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
 		}
 
 		return result;

@@ -32,7 +32,7 @@ export const comboSimpleOptions = {
 			scaleType: "labels"
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "simple-bar",
 			correspondingDatasets: [
@@ -76,7 +76,7 @@ export const comboHorizontalOptions = {
 			scaleType: "labels"
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "simple-bar",
 			options: {},
@@ -134,7 +134,7 @@ export const comboStackedOptions = {
 			correspondingDatasets: ["Temperature"]
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "stacked-bar",
 			options: {},
@@ -195,7 +195,7 @@ export const comboGroupedOptions = {
 			]
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "grouped-bar",
 			correspondingDatasets: ["Location 1", "Location 2", "Location 3"]
@@ -250,7 +250,7 @@ export const comboGroupedHorizontalOptions = {
 			]
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "grouped-bar",
 			correspondingDatasets: ["Location 1", "Location 2", "Location 3"]
@@ -304,7 +304,7 @@ export const comboAreaLineOptions = {
 			]
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "area",
 			options: {},
@@ -370,7 +370,7 @@ export const comboLineScatterOptions = {
 		}
 	},
 	curve: "curveMonotoneX",
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "simple-bar",
 			correspondingDatasets: ["Attendance"]
@@ -413,7 +413,7 @@ export const comboEmptyOptions = {
 			]
 		}
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "simple-bar",
 			correspondingDatasets: ["Attendance"]
@@ -451,7 +451,7 @@ export const comboLoadingOptions = {
 	data: {
 		loading: true
 	},
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "simple-bar",
 			correspondingDatasets: ["Attendance"]
@@ -488,7 +488,7 @@ export const comboErrorData = [
 
 export const comboErrorOptions = {
 	experimental: true,
-	title: "Combo Chart (no chartTypes)",
+	title: "Combo Chart (no comboChartTypes)",
 	axes: {
 		left: {
 			mapsTo: "value",
@@ -551,7 +551,7 @@ export const comboStackedAreaLineOptions = {
 		}
 	},
 	curve: "curveMonotoneX",
-	chartTypes: [
+	comboChartTypes: [
 		{
 			type: "stacked-area",
 			options: {

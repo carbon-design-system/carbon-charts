@@ -114,7 +114,7 @@ export class Area extends Component {
 			.node();
 
 		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue("stroke" )
+			? getComputedStyle(strokePathElement, null).getPropertyValue("stroke")
 			: null;
 
 		if (isGradientAllowed && colorValue) {

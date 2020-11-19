@@ -53,7 +53,7 @@ export class ChartModel {
 		let allData = this.getData();
 		const dataGroups = this.getDataGroups();
 		const { groupMapsTo } = Tools.getProperty(options, "data");
-		const axesOptions = Tools.getProperty( options, "axes");
+		const axesOptions = Tools.getProperty(options, "axes");
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
