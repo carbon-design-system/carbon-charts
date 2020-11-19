@@ -1,7 +1,3 @@
-// Components
-import { SimpleBar } from "@carbon/charts/components/index";
-import { options } from "@carbon/charts/configuration";
-
 export const comboSimpleData = [
 	{ group: "School A", date: "Monday", value: 10000 },
 	{ group: "School A", date: "Tuesday", value: 65000 },
@@ -37,8 +33,7 @@ export const comboSimpleOptions = {
 	},
 	chartTypes: [
 		{
-			type: SimpleBar,
-			options: options.simpleBarChart,
+			type: "simple-bar",
 			correspondingDatasets: [
 				"School A"
 			]
