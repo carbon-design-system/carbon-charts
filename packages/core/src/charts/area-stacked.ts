@@ -8,10 +8,10 @@ import { Tools } from "../tools";
 import {
 	Grid,
 	StackedArea,
+	StackedRuler,
 	TwoDimensionalAxes,
 	Line,
-	StackedScatter,
-	Ruler
+	StackedScatter
 } from "../components/index";
 
 export class StackedAreaChart extends AxisChart {
@@ -36,7 +36,7 @@ export class StackedAreaChart extends AxisChart {
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Ruler(this.model, this.services),
+			new StackedRuler(this.model, this.services),
 			new StackedArea(this.model, this.services),
 			new Line(this.model, this.services, { stacked: true }),
 			new StackedScatter(this.model, this.services, {
