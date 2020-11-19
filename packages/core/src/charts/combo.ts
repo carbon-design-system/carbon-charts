@@ -90,7 +90,7 @@ export class ComboChart extends AxisChart {
 					stacked = true;
 				}
 				return graphComponentsMap[graph.type].map((Component, i) =>
-					new Component(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options, stacked: stacked }));
+					new Component(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options, stacked }));
 			} else {
 				// user has imported a type or custom component to instantiate
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
