@@ -183,6 +183,18 @@ export enum TickRotations {
 }
 
 /**
+ * enum of chartTypes that work with combo chart
+ */
+export enum ChartTypes {
+	SCATTER = "scatter",
+	LINE = "line",
+	SIMPLE_BAR = "simple-bar",
+	STACKED_BAR = "stacked-bar",
+	GROUPED_BAR = "grouped-bar",
+	AREA = "area",
+	STACKED_AREA = "stacked-area"
+}
+/**
  * enum of supported toolbar control types
  */
 export enum ToolbarControlTypes {

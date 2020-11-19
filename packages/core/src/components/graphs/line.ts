@@ -38,7 +38,7 @@ export class Line extends Component {
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -46,7 +46,7 @@ export class Line extends Component {
 			.y(getYValue)
 			.curve(curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
 				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
@@ -60,21 +60,23 @@ export class Line extends Component {
 				(axis) => options.axes[axis].percentage
 			);
 			const { groupMapsTo } = options.data;
-			const stackedData = this.model.getStackedData({ percentage });
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const stackedData = this.model.getStackedData({groups: this.configs.groups, percentage });
 
-			data = stackedData.map((d) => ({
-				name: d[0][groupMapsTo],
-				data: d.map((datum) => ({
-					[domainIdentifier]: datum.data.sharedStackKey,
-					[groupMapsTo]: datum[groupMapsTo],
-					[rangeIdentifier]: datum[1]
-				})),
-				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
-			}));
+			data = stackedData.map((d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
+				return ({
+					name: d[0][groupMapsTo],
+					data: d.map((datum) => ({
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[groupMapsTo]: datum[groupMapsTo],
+						[rangeIdentifier]: datum[1]
+					})),
+					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+				});
+			});
 		} else {
-			data = this.model.getGroupedData();
+			data = this.model.getGroupedData(this.configs.groups);
 		}
 
 		// Update the bound data on lines
@@ -111,10 +113,11 @@ export class Line extends Component {
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", (group) => {
 				const { data: groupData } = group;
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				return groupData
-					.map((datum) => datum[rangeIdentifier])
-					.join(",");
+					.map((datum) =>  {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datum);
+						return datum[rangeIdentifier];
+					}).join(",");
 			})
 			// Transition
 			.transition(
@@ -146,7 +149,7 @@ export class Line extends Component {
 
 				return Configuration.lines.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -155,7 +158,7 @@ export class Line extends Component {
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
 			.attr("opacity", Configuration.lines.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners

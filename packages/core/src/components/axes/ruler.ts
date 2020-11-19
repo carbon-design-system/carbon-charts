@@ -25,13 +25,13 @@ export class Ruler extends Component {
 		originalData: any;
 	}[];
 	isXGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
+		this.getOptions(),
 		"grid",
 		"x",
 		"enabled"
 	);
 	isYGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
+		this.getOptions(),
 		"grid",
 		"y",
 		"enabled"
@@ -41,7 +41,7 @@ export class Ruler extends Component {
 
 	render() {
 		const isRulerEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"ruler",
 			"enabled"
 		);
@@ -143,10 +143,10 @@ export class Ruler extends Component {
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 			const tooltipData = dataPointsMatchingRulerLine
 				.map((d) => d.originalData)
 				.filter((d) => {
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
