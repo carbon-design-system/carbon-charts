@@ -6,6 +6,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as gaugeDemos from "./gauge";
 import * as scatterDemos from "./scatter";
+import * as lollipopDemos from "./lollipop";
 import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
@@ -76,9 +77,14 @@ export const chartTypes = {
 		vue: "ccv-stacked-area-chart"
 	},
 	ScatterChart: {
-		vanilla: "LollipopChart",
+		vanilla: "ScatterChart",
 		angular: "ibm-scatter-chart",
 		vue: "ccv-scatter-chart"
+	},
+	LollipopChart: {
+		vanilla: "LollipopChart",
+		angular: "ibm-lollipop-chart",
+		vue: "ccv-lollipop-chart"
 	},
 	PieChart: {
 		vanilla: "PieChart",
@@ -605,6 +611,43 @@ let allDemoGroups = [
 				options: scatterDemos.scatterSkeletonOptions,
 				data: scatterDemos.scatterSkeletonData,
 				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
+			}
+		]
+	},
+	{
+		title: "Lollipop",
+		demos: [
+			{
+				options: scatterDemos.doubleLinearScatterOptions,
+				data: scatterDemos.doubleLinearScatterData,
+				chartType: chartTypes.LollipopChart
+			},
+			{
+				options: scatterDemos.scatterTimeSeriesOptions,
+				data: scatterDemos.scatterTimeSeriesData,
+				chartType: chartTypes.LollipopChart
+			},
+			{
+				options: scatterDemos.scatterDiscreteOptions,
+				data: scatterDemos.scatterDiscreteData,
+				chartType: chartTypes.LollipopChart
+			},
+			{
+				options: lollipopDemos.lollipopDiscreteOptions,
+				data: lollipopDemos.lollipopDiscreteData,
+				chartType: chartTypes.LollipopChart
+			},
+			{
+				options: scatterDemos.scatterEmptyStateOptions,
+				data: scatterDemos.scatterEmptyStateData,
+				chartType: chartTypes.LollipopChart,
+				isDemoExample: false
+			},
+			{
+				options: scatterDemos.scatterSkeletonOptions,
+				data: scatterDemos.scatterSkeletonData,
+				chartType: chartTypes.LollipopChart,
 				isDemoExample: false
 			}
 		]
