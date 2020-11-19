@@ -97,10 +97,11 @@ export class Component {
 				"style",
 				"prefix"
 			);
+
+			const idSelector = this.id ? `#${this.id}` : "";
 			const svg = DOMUtils.appendOrSelect(
 				this.parent,
-				`g.${settings.prefix}--${chartprefix}--${this.type}`,
-				this.id
+				`g${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
 			);
 
 			if (configs.withinChartClip) {

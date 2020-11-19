@@ -845,6 +845,12 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: comboDemos.comboGroupedHorizontalOptions,
+				data: comboDemos.comboGroupedHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
 				options: comboDemos.comboHorizontalOptions,
 				data: comboDemos.comboHorizontalData,
 				chartType: chartTypes.ComboChart,
@@ -853,6 +859,12 @@ let allDemoGroups = [
 			{
 				options: comboDemos.comboAreaLineOptions,
 				data: comboDemos.comboAreaLineData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedAreaLineOptions,
+				data: comboDemos.comboStackedAreaLine,
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true
 			},

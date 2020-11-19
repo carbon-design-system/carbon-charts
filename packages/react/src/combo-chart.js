@@ -1,11 +1,11 @@
 import React from "react";
 
-import { ComboChart as PC } from "@carbon/charts";
+import { ComboChart as CC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 
 export default class ComboChart extends BaseChart {
 	componentDidMount() {
-		this.chart = new PC(
+		this.chart = new CC(
 			this.chartRef,
 			{
 				data: this.props.data,

@@ -137,13 +137,27 @@ export class DOMUtils extends Service {
 		return finalDimensions;
 	}
 
-	static appendOrSelect(parent, query, id?) {
-		const querySections = query.split(".");
-		const elementToAppend = querySections[0];
-		const idSelector = id ? `#${id}` : "";
-		const selection = parent.select(`${query}${idSelector}`);
+	static appendOrSelect(parent, query) {
+		const selection = parent.select(`${query}`);
 
 		if (selection.empty()) {
+			// see if there is an id
+			let querySections = query.split("#");
+			let elementToAppend;
+			let id;
+			// if there is an id
+			if (querySections.length === 2) {
+				// take out the element to append
+				elementToAppend = querySections[0];
+				// split it by classes
+				querySections = querySections[1].split(".");
+				// the first string is the id
+				id = querySections[0];
+			} else {
+				querySections = query.split(".");
+				elementToAppend = querySections[0];
+			}
+
 			return parent
 				.append(elementToAppend)
 				.attr("id", id)

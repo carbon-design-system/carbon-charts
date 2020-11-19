@@ -60,7 +60,7 @@ export class CartesianScales extends Service {
 
 	protected orientation: CartesianOrientations;
 
-	getDomainAxisPosition(datum?: any) {
+	getDomainAxisPosition({datum = null} = {}) {
 		if (this.dualAxes && datum) {
 			const options = this.model.getOptions();
 			const { groupMapsTo } = options.data;
@@ -74,19 +74,16 @@ export class CartesianScales extends Service {
 	}
 
 	getRangeAxisPosition({datum = null, groups = null} = {}) {
-		if (this.dualAxes && datum) {
+		if (this.dualAxes) {
 			const options = this.model.getOptions();
 			const { groupMapsTo } = options.data;
 			const axisOptions = Tools.getProperty(options, "axes", this.secondaryRangeAxisPosition);
 			let dataset;
-			if (datum) {
+			if (datum !== null) {
 				dataset = datum[groupMapsTo];
 			} else if (groups && groups.length > 0) {
 				dataset = groups[0];
-			} else {
-				return this.rangeAxisPosition;
 			}
-
 			if (axisOptions?.correspondingDatasets && axisOptions.correspondingDatasets.includes(dataset)) {
 				return this.secondaryRangeAxisPosition;
 			}
@@ -122,30 +119,21 @@ export class CartesianScales extends Service {
 
 	findDomainAndRangeAxes() {
 		// find main axes between (left & right) && (bottom & top)
-		const mainVerticalAxisPosition = this.findMainVerticalAxisPosition();
-		const mainHorizontalAxisPosition = this.findMainHorizontalAxisPosition();
+		const verticalAxesPositions = this.findVerticalAxesPositions();
+		const horizontalAxesPositions = this.findHorizontalAxesPositions();
 
 		// Now we have horizontal & vertical main axes to choose domain & range axes from
 		const domainAndRangeAxesPositions = this.findDomainAndRangeAxesPositions(
-			mainVerticalAxisPosition,
-			mainHorizontalAxisPosition
+			verticalAxesPositions,
+			horizontalAxesPositions
 		);
 
-		this.domainAxisPosition =
-			domainAndRangeAxesPositions.domainAxisPosition;
-		this.rangeAxisPosition = domainAndRangeAxesPositions.rangeAxisPosition;
+		this.domainAxisPosition = domainAndRangeAxesPositions.primaryDomainAxisPosition;
+		this.rangeAxisPosition = domainAndRangeAxesPositions.primaryRangeAxisPosition;
 
-		// use the orientation to assign the secondary axes
-		const orientation = this.getOrientation();
-		const dualAxes = this.isDualAxes();
-		if (dualAxes) {
-			if (orientation === CartesianOrientations.HORIZONTAL) {
-				this.secondaryDomainAxisPosition = this.domainAxisPosition === AxisPositions.LEFT ? AxisPositions.RIGHT : AxisPositions.LEFT;
-				this.secondaryRangeAxisPosition = this.rangeAxisPosition === AxisPositions.BOTTOM ? AxisPositions.TOP : AxisPositions.BOTTOM;
-			} else {
-				this.secondaryDomainAxisPosition = this.domainAxisPosition === AxisPositions.BOTTOM ? AxisPositions.TOP : AxisPositions.BOTTOM;
-				this.secondaryRangeAxisPosition = this.rangeAxisPosition === AxisPositions.LEFT ? AxisPositions.RIGHT : AxisPositions.LEFT;
-			}
+		if (this.isDualAxes()) {
+			this.secondaryDomainAxisPosition = domainAndRangeAxesPositions.secondaryDomainAxisPosition;
+			this.secondaryRangeAxisPosition = domainAndRangeAxesPositions.secondaryRangeAxisPosition;
 		}
 	}
 
@@ -286,7 +274,7 @@ export class CartesianScales extends Service {
 	}
 
 	getDomainValue(d, i) {
-		const axisPosition = this.getDomainAxisPosition(d);
+		const axisPosition = this.getDomainAxisPosition({datum: d});
 		return this.getValueThroughAxisPosition(axisPosition, d, i);
 	}
 
@@ -303,22 +291,22 @@ export class CartesianScales extends Service {
 		return this.getScaleTypeByPosition(this.getMainYAxisPosition());
 	}
 
-	getDomainIdentifier(data?: any) {
+	getDomainIdentifier(datum?: any) {
 		const options = this.model.getOptions();
 		return Tools.getProperty(
 			options,
 			"axes",
-			this.getDomainAxisPosition(data),
+			this.getDomainAxisPosition({datum: datum}),
 			"mapsTo"
 		);
 	}
 
-	getRangeIdentifier(data?: any) {
+	getRangeIdentifier(datum?: any) {
 		const options = this.model.getOptions();
 		return Tools.getProperty(
 			options,
 			"axes",
-			this.getRangeAxisPosition({datum: data}),
+			this.getRangeAxisPosition({datum: datum}),
 			"mapsTo"
 		);
 	}
@@ -341,7 +329,7 @@ export class CartesianScales extends Service {
 		}
 	}
 
-	protected findMainVerticalAxisPosition() {
+	protected findVerticalAxesPositions() {
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, "axes");
 		const dualAxes = this.isDualAxes();
@@ -353,13 +341,13 @@ export class CartesianScales extends Service {
 			Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") === true ||
 			dualAxes && Tools.getProperty(axesOptions, AxisPositions.LEFT, "correspondingDatasets")
 		) {
-			return AxisPositions.RIGHT;
+			return {primary: AxisPositions.RIGHT, secondary: AxisPositions.LEFT};
 		}
 
-		return AxisPositions.LEFT;
+		return {primary: AxisPositions.LEFT, secondary: AxisPositions.RIGHT};
 	}
 
-	protected findMainHorizontalAxisPosition() {
+	protected findHorizontalAxesPositions() {
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, "axes");
 		const dualAxes = this.isDualAxes();
@@ -372,27 +360,24 @@ export class CartesianScales extends Service {
 			(dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, "correspondingDatasets"))
 
 		) {
-			return AxisPositions.TOP;
+			return {primary: AxisPositions.TOP, secondary: AxisPositions.BOTTOM};
 		}
 
-		return AxisPositions.BOTTOM;
+		return {primary: AxisPositions.BOTTOM, secondary: AxisPositions.TOP};
 	}
 
-	protected findDomainAndRangeAxesPositions(
-		mainVerticalAxisPosition: AxisPositions,
-		mainHorizontalAxisPosition: AxisPositions
-	) {
+	protected findDomainAndRangeAxesPositions(verticalAxesPositions, horizontalAxesPositions) {
 		const options = this.model.getOptions();
 
 		const mainVerticalAxisOptions = Tools.getProperty(
 			options,
 			"axes",
-			mainVerticalAxisPosition
+			verticalAxesPositions.primary
 		);
 		const mainHorizontalAxisOptions = Tools.getProperty(
 			options,
 			"axes",
-			mainHorizontalAxisPosition
+			horizontalAxesPositions.primary
 		);
 
 		const mainVerticalScaleType =
@@ -401,24 +386,35 @@ export class CartesianScales extends Service {
 			mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
 
 		const result = {
-			domainAxisPosition: null,
-			rangeAxisPosition: null
+			primaryDomainAxisPosition: null,
+			secondaryDomainAxisPosition: null,
+			primaryRangeAxisPosition: null,
+			secondaryRangeAxisPosition: null
 		};
 		if (
 			mainHorizontalScaleType === ScaleTypes.LABELS ||
 			mainHorizontalScaleType === ScaleTypes.TIME
 		) {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
+			result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
+			result.primaryRangeAxisPosition = verticalAxesPositions.primary;
+			// secondary axes
+			result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
+			result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
 		} else if (
 			mainVerticalScaleType === ScaleTypes.LABELS ||
 			mainVerticalScaleType === ScaleTypes.TIME
 		) {
-			result.domainAxisPosition = mainVerticalAxisPosition;
-			result.rangeAxisPosition = mainHorizontalAxisPosition;
+			result.primaryDomainAxisPosition = verticalAxesPositions.primary;
+			result.primaryRangeAxisPosition = horizontalAxesPositions.primary;
+			// secondary axes
+			result.secondaryDomainAxisPosition = verticalAxesPositions.secondary;
+			result.secondaryRangeAxisPosition = horizontalAxesPositions.secondary;
 		} else {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
+			result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
+			result.primaryRangeAxisPosition = verticalAxesPositions.primary;
+			// secondary axes
+			result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
+			result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
 		}
 
 		return result;

@@ -214,6 +214,62 @@ export const comboGroupedOptions = {
 	]
 };
 
+
+export const comboGroupedHorizontalData = [
+	{ group: "Location 1", key: "Monday", value: 65000 },
+	{ group: "Location 1", key: "Tuesday", value: -39123 },
+	{ group: "Location 1", key: "Wednesday", value: -35213 },
+	{ group: "Location 1", key: "Thursday", value: 51213 },
+	{ group: "Location 1", key: "Friday", value: 16932 },
+	{ group: "Location 2", key: "Monday", value: 32432 },
+	{ group: "Location 2", key: "Tuesday", value: -21312 },
+	{ group: "Location 2", key: "Wednesday", value: -56456 },
+	{ group: "Location 2", key: "Thursday", value: -21312 },
+	{ group: "Location 2", key: "Friday", value: 34234 },
+	{ group: "Location 3", key: "Monday", value: -12312 },
+	{ group: "Location 3", key: "Tuesday", value: 23232 },
+	{ group: "Location 3", key: "Wednesday", value: 34232 },
+	{ group: "Location 3", key: "Thursday", value: -12312 },
+	{ group: "Location 3", key: "Friday", value: -34234 },
+	{ group: "Temperature", key: "Monday", temp: 20 },
+	{ group: "Temperature", key: "Tuesday", temp: 23 },
+	{ group: "Temperature", key: "Wednesday", temp: 33 },
+	{ group: "Temperature", key: "Thursday", temp: 34 },
+	{ group: "Temperature", key: "Friday", temp: 34 }
+];
+
+export const comboGroupedHorizontalOptions = {
+	title: "Combo Horizontal (Line + Grouped bar)",
+	axes: {
+		top: {
+			title: "Sales",
+			mapsTo: "value",
+			main: true
+		},
+		left: {
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		bottom: {
+			title: "Temperature (°C)",
+			mapsTo: "temp",
+			correspondingDatasets: [
+				"Temperature"
+			]
+		}
+	},
+	chartTypes: [
+		{
+			type: "grouped-bar",
+			correspondingDatasets: ["Location 1", "Location 2", "Location 3"]
+		},
+		{
+			type: "line",
+			correspondingDatasets: ["Temperature"]
+		}
+	]
+};
+
 export const comboAreaLineData = [
 	{ group: "Health", key: "January", value: 312 },
 	{ group: "Health", key: "February", value: 232 },
@@ -456,4 +512,60 @@ export const comboErrorOptions = {
 	}
 };
 
+export const comboStackedAreaLine = [
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 17), value: 51213 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 1), value: 20000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 5), value: 25000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 8), value: 60000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 13), value: 30213 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 17), value: 55213 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 1), value: 30000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: 20000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 40000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 60213 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 25213 },
+	{ group: "Temperature", date: new Date(2019, 0, 1), temp: 77 },
+	{ group: "Temperature", date: new Date(2019, 0, 5), temp: 65 },
+	{ group: "Temperature", date: new Date(2019, 0, 8), temp: 80 },
+	{ group: "Temperature", date: new Date(2019, 0, 13), temp: 43 },
+	{ group: "Temperature", date: new Date(2019, 0, 17), temp: 53 }
+];
 
+export const comboStackedAreaLineOptions = {
+	title: "Combo (Stacked Area + Line)",
+	axes: {
+		left: {
+			stacked: true,
+			mapsTo: "value"
+		},
+		bottom: {
+			scaleType: "time",
+			mapsTo: "date"
+		},
+		right: {
+			scaleType: "linear",
+			mapsTo: "temp",
+			correspondingDatasets: [ "Temperature" ]
+		}
+	},
+	curve: "curveMonotoneX",
+	chartTypes: [
+		{
+			type: "stacked-area",
+			options: {
+				points: {
+					enabled: false
+				}
+			},
+			correspondingDatasets: ["Dataset 1", "Dataset 2", "Dataset 3"]
+		},
+		{
+			type: "line",
+			correspondingDatasets: ["Temperature"]
+		}
+	]
+};

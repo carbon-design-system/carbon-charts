@@ -8,7 +8,7 @@ import {
 
 import {
 	debounce as lodashDebounce,
-	merge as 	lodashMerge,
+	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
 	clamp as lodashClamp,

@@ -35,7 +35,7 @@ const graphComponentsMap = {
 	[ChartTypes.LINE]: [Line, Scatter],
 	[ChartTypes.SCATTER]: [Scatter],
 	[ChartTypes.AREA]: [Area, Line, Scatter],
-	[ChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter],
+	[ChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter, StackedRuler],
 	[ChartTypes.SIMPLE_BAR]: [SimpleBar],
 	[ChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
 	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
@@ -83,9 +83,14 @@ export class ComboChart extends AxisChart {
 					console.error(`Invalid chart type "${graph.type}" specified for combo chart. Please refer to the ComboChart tutorial for more guidance.`);
 					return null;
 				}
+				let stacked;
 				options = Tools.merge({}, Configuration.options[`${Tools.camelCase(graph.type)}Chart`], this.model.getOptions(), graph.options);
+				// if we are creating a stacked area, the contained Line chart needs to know it is stacked
+				if (graph.type === ChartTypes.STACKED_AREA) {
+					stacked = true;
+				}
 				return graphComponentsMap[graph.type].map((Component, i) =>
-					new Component(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options }));
+					new Component(this.model, this.services, { groups: graph.correspondingDatasets, id: counter++, options: options, stacked: stacked }));
 			} else {
 				// user has imported a type or custom component to instantiate
 				options = Tools.merge({}, this.model.getOptions(), graph.options);
@@ -99,9 +104,8 @@ export class ComboChart extends AxisChart {
 	getComponents() {
 		const { chartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
-		const stackedRulerEnabled = chartTypes.some(chartObject => {
-			return chartObject.type === (ChartTypes.STACKED_BAR || ChartTypes.STACKED_AREA);
-		}).length > 0;
+		const stackedRulerEnabled = chartTypes.some(chartObject =>
+			chartObject.type === ChartTypes.STACKED_BAR || chartObject.type === ChartTypes.STACKED_AREA);
 
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [

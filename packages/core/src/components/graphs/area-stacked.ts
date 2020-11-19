@@ -40,17 +40,17 @@ export class StackedArea extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const mainYScale = this.services.cartesianScales.getMainYScale();
-		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
-		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(
-			domainAxisPosition
-		);
-
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
 
-		const stackedData = this.model.getStackedData({ percentage });
+		const stackedData = this.model.getStackedData({ percentage, groups: this.configs.groups });
+
+		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
+		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition({datum: stackedData[0][0]});
+		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition({datum: stackedData[0][0]});
+		const mainYScale = this.services.cartesianScales.getScaleByPosition(rangeAxisPosition);
 
 		const areas = svg
 			.selectAll("path.area")
@@ -109,7 +109,7 @@ export class StackedArea extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -118,7 +118,7 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners
