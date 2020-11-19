@@ -45,7 +45,9 @@ export class StackedBar extends Bar {
 		const stackData = this.model.getStackedData();
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
+		const barGroups = svg
+			.selectAll("g.bars")
+			.data(stackData, (d) => d.length > 0 ? d[0][groupMapsTo] : null);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -146,13 +148,15 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent
 			.selectAll("path.bar")
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
 			.attr("opacity", (d) =>
-				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
+				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
 
