@@ -1,4 +1,5 @@
 import { Chart } from "./chart";
+import { ChartModelCartesian } from "./model-cartesian-charts";
 import {
 	LayoutDirection,
 	LayoutGrowth,
@@ -30,6 +31,7 @@ export class AxisChart extends Chart {
 		curves: Curves,
 		zoom: Zoom
 	});
+	model: ChartModelCartesian = new ChartModelCartesian(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
 		super(holder, chartConfigs);
@@ -48,7 +50,10 @@ export class AxisChart extends Chart {
 			"enabled"
 		);
 
+		this.services.cartesianScales.determineAxisDuality();
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
+		this.services.cartesianScales.determineOrientation();
+
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
 			this.model.getOptions(),

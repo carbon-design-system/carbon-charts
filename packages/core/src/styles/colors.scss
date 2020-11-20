@@ -1,51 +1,48 @@
-@import "color-map.scss";
+@import "./color-palatte.scss";
 
-$theme-colors: $dark-theme-colors;
-$color-map: ();
-@mixin getThemeColors() {
+@function getThemeColors() {
+	$color-map: ();
 	@if $carbon--theme ==
 		$carbon--theme--g100 or
 		$carbon--theme ==
 		$carbon--theme--g90
 	{
-		$theme-colors: $dark-theme-colors;
-		@include color-property(null, $dark-theme-colors);
+		@return color-property(null, $dark-theme-colors);
 	} @else {
-		$theme-colors: $white-theme-colors;
-		@include color-property(null, $white-theme-colors);
+		@return color-property(null, $white-theme-colors);
 	}
-}
+};
 
-@mixin color-property($name, $theme-colors) {
+@function color-property($name, $theme-colors) {
+	$color-items: ();
+
 	@if type-of($theme-colors) == map {
 		@each $category, $value in $theme-colors {
-			@if type-of($value) == map {
-				@if $name == null {
-					@include color-property("#{$category}", $value);
-				} @else {
-					@include color-property("#{$name}-#{$category}", $value);
-				}
+			@if $name == null {
+				$color-items: map-merge(
+					$color-items,
+					color-property("#{$category}", $value)
+				)
 			} @else {
-				$color-map: map-merge(
-					$color-map,
-					(
-						"#{$name}-#{$category}": $value
-					)
-				);
+				$color-items: map-merge(
+					$color-items,
+					color-property("#{$name}-#{$category}", $value)
+				)
 			}
 		}
+		@return $color-items;
 	} @else {
-		#{$name}: $theme-colors;
+		@return (#{$name}: $theme-colors);
 	}
-}
+};
 
 .#{$prefix}--#{$charts-prefix}--chart-svg {
-	@include getThemeColors();
+	$color-map: getThemeColors();
 
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
 			fill: $color;
-			&:hover {
+			&.hovered {
 				fill: darken($color, 7%);
 			}
 		}
@@ -57,7 +54,7 @@ $color-map: ();
 }
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
-	@include getThemeColors();
+	$color-map: getThemeColors();
 
 	@each $token, $color in $color-map {
 		.tooltip-#{$token} {

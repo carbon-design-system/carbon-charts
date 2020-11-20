@@ -38,15 +38,13 @@ export class Scatter extends Component {
 	}
 
 	filterBasedOnZoomDomain(data) {
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(data);
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain !== undefined) {
 			return data.filter(
 				(d) =>
-					new Date(d[domainIdentifier]).getTime() >
-						zoomDomain[0].getTime() &&
-					new Date(d[domainIdentifier]).getTime() <
-						zoomDomain[1].getTime()
+					d[domainIdentifier].getTime() > zoomDomain[0].getTime() &&
+					d[domainIdentifier].getTime() < zoomDomain[1].getTime()
 			);
 		}
 		return data;
@@ -54,8 +52,9 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		const isScatterEnabled =
-			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
-			Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+			Tools.getProperty(this.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.getOptions(), "bubble", "enabled");
+
 		if (!isScatterEnabled) {
 			return;
 		}
@@ -63,11 +62,9 @@ export class Scatter extends Component {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const { stacked } = this.configs;
 		let scatterData;
@@ -75,14 +72,14 @@ export class Scatter extends Component {
 			const percentage = Object.keys(options.axes).some(
 				(axis) => options.axes[axis].percentage
 			);
-			scatterData = this.model.getStackedData({ percentage });
+			scatterData = this.model.getStackedData({groups: this.configs.groups, percentage });
 		} else {
-			scatterData = this.model
-				.getDisplayData()
+			scatterData = this.model.getDisplayData(this.configs.groups)
 				.filter(
-					(d) =>
-						d[rangeIdentifier] !== undefined &&
-						d[rangeIdentifier] !== null
+					(d) => {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
+						return d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null;
+					}
 				);
 		}
 
@@ -92,10 +89,7 @@ export class Scatter extends Component {
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
-			.data(
-				scatterData,
-				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
-			);
+			.data(scatterData);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();
@@ -139,8 +133,8 @@ export class Scatter extends Component {
 			getXValue,
 			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
-			(d, i) => cartesianScales.getDomainValue(d, i),
-			(d, i) => cartesianScales.getRangeValue(d, i),
+			(d, i) => this.services.cartesianScales.getDomainValue(d, i),
+			(d, i) => this.services.cartesianScales.getRangeValue(d, i),
 			orientation
 		);
 
@@ -168,13 +162,11 @@ export class Scatter extends Component {
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { filled, fillOpacity } = options.points;
 		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
@@ -192,6 +184,7 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.attr("class", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				const isFilled = this.model.getIsFilled(
 					d[groupMapsTo],
 					d[domainIdentifier],
@@ -212,23 +205,27 @@ export class Scatter extends Component {
 			.classed("threshold-anomaly", (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
 			)
-			.classed("filled", (d) =>
-				this.model.getIsFilled(
+			.classed("filled", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				return this.model.getIsFilled(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d,
 					filled
-				)
+					);
+				}
 			)
 			.classed(
 				"unfilled",
-				(d) =>
-					!this.model.getIsFilled(
+				(d) => {
+					const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+					return !this.model.getIsFilled(
 						d[groupMapsTo],
 						d[domainIdentifier],
 						d,
 						filled
-					)
+					);
+				}
 			)
 			.transition(
 				transitions.getTransition("scatter-update-enter", animate)
@@ -237,6 +234,7 @@ export class Scatter extends Component {
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
 			.attr("fill", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -253,18 +251,23 @@ export class Scatter extends Component {
 				}
 			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
-					d[groupMapsTo],
-					d[domainIdentifier],
-					d
-				)
+			.attr("stroke", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				return this.model.getStrokeColor(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d
+					);
+				}
 			)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
-			.attr("aria-label", (d) => d[rangeIdentifier]);
+			.attr("aria-label", (d) => {
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(d);
+				return d[rangeIdentifier];
+			});
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -279,7 +282,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	handleChartHolderOnMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -290,12 +293,12 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 0);
-	};
+	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("circle.dot")
@@ -305,7 +308,7 @@ export class Scatter extends Component {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -316,21 +319,11 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
-
-	getTooltipData(hoveredX, hoveredY) {
-		return this.model.getDisplayData().filter((d) => {
-			return (
-				hoveredX === this.services.cartesianScales.getDomainValue(d) &&
-				hoveredY === this.services.cartesianScales.getRangeValue(d)
-			);
-		});
 	}
 
 	addEventListeners() {
 		const self = this;
-		const { groupMapsTo } = self.model.getOptions().data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const { groupMapsTo } = self.getOptions().data;
 
 		this.parent
 			.selectAll("circle")
@@ -346,26 +339,20 @@ export class Scatter extends Component {
 							originalClassName: hoveredElement.attr("class")
 						})
 					)
-					.style("fill", (d) =>
-						self.model.getFillColor(
-							d[groupMapsTo],
-							d[domainIdentifier],
-							d
-						)
+					.style("fill", (d) => {
+						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
+						return self.model.getFillColor(
+								d[groupMapsTo],
+								d[domainIdentifier],
+								d);
+						}
 					)
 					.classed("unfilled", false);
 
-				const hoveredX = self.services.cartesianScales.getDomainValue(
-					datum
-				);
-				const hoveredY = self.services.cartesianScales.getRangeValue(
-					datum
-				);
-				const tooltipData = self.getTooltipData(hoveredX, hoveredY);
-				// Show tooltip
+				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: tooltipData
+					data: [datum]
 				});
 
 				// Dispatch mouse event

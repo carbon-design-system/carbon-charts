@@ -5,7 +5,7 @@ import { DOMUtils } from "../../services";
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth(allDataLabels?: string[]) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		if (options.bars.width) {
 			return options.bars.width;
 		}

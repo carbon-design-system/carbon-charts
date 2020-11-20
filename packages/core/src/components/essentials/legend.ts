@@ -21,7 +21,7 @@ export class Legend extends Component {
 		const svg = this.getContainerSVG()
 			.attr("role", Roles.GROUP)
 			.attr("data-name", "legend-items");
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
 		let dataGroups = this.model.getDataGroups();
 		const legendOrder = Tools.getProperty(legendOptions, "order");
@@ -137,7 +137,7 @@ export class Legend extends Component {
 			.remove();
 
 		const legendClickable = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"legend",
 			"clickable"
 		);
@@ -178,7 +178,7 @@ export class Legend extends Component {
 	breakItemsIntoLines(addedLegendItems) {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// Configs
 		const checkboxRadius = Configuration.legend.checkbox.radius;
@@ -340,7 +340,7 @@ export class Legend extends Component {
 	addEventListeners() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
 		const truncationThreshold = Tools.getProperty(
 			legendOptions,
@@ -357,6 +357,8 @@ export class Legend extends Component {
 				// Configs
 				const checkboxRadius = Configuration.legend.checkbox.radius;
 				const hoveredItem = select(this);
+				hoveredItem.select("rect.checkbox").classed("hovered", true);
+
 				hoveredItem
 					.append("rect")
 					.classed("hover-stroke", true)
@@ -402,6 +404,7 @@ export class Legend extends Component {
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
+				hoveredItem.select("rect.checkbox").classed("hovered", false);
 
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 

@@ -42,7 +42,7 @@ export class Axis extends Component {
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isAxisVisible = Tools.getProperty(
 			options,
 			"axes",
@@ -309,9 +309,18 @@ export class Axis extends Component {
 		let validTicks;
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
+				// sanitize user-provided tick values
+				userProvidedTickValues.forEach((userProvidedTickValue, i) => {
+					if (userProvidedTickValue.getTime === undefined) {
+						userProvidedTickValues[i] = new Date(
+							userProvidedTickValue
+						);
+					}
+				});
+
 				// check the supplied ticks are within the time domain
 				validTicks = userProvidedTickValues.filter((tick) => {
-					const tickTimestamp = new Date(tick).getTime();
+					const tickTimestamp = tick.getTime();
 					return (
 						tickTimestamp >= new Date(lowerBound).getTime() &&
 						tickTimestamp <= new Date(upperBound).getTime()
@@ -330,6 +339,7 @@ export class Axis extends Component {
 					(tick) => tick >= lowerBound && tick <= upperBound
 				);
 			}
+
 			axis.tickValues(validTicks);
 		}
 
@@ -552,11 +562,8 @@ export class Axis extends Component {
 			axisScaleType === ScaleTypes.LABELS &&
 			!userProvidedTickValues
 		) {
-			const dataGroups = this.model.getDataValuesGroupedByKeys();
-			if (dataGroups.length > 0) {
-				const activeDataGroups = dataGroups.map(
-					(d) => d.sharedStackKey
-				);
+			const axisTickLabels = this.services.cartesianScales.getScaleDomain(axisPosition);
+			if (axisTickLabels.length > 0) {
 				const tick_html = svg
 					.select(`g.axis.${axisPosition} g.ticks g.tick`)
 					.html();
@@ -565,7 +572,7 @@ export class Axis extends Component {
 
 				container
 					.selectAll("g.tick text")
-					.data(activeDataGroups)
+					.data(axisTickLabels)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
@@ -580,7 +587,7 @@ export class Axis extends Component {
 
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
-					.data(activeDataGroups)
+					.data(axisTickLabels)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
@@ -597,7 +604,7 @@ export class Axis extends Component {
 					.selectAll("g.ticks")
 					.html(this.getInvisibleAxisRef().html());
 
-				container.selectAll("g.tick text").data(activeDataGroups);
+				container.selectAll("g.tick text").data(axisTickLabels);
 			}
 		}
 		// Add event listeners to elements drawn
@@ -611,7 +618,7 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
 		const truncationThreshold = Tools.getProperty(
