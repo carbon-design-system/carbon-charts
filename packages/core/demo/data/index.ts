@@ -178,7 +178,7 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
-				options: barDemos.simpleBarColorPaletteOptions,
+				options: barDemos.simpleBarColorOverrideOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
 			},

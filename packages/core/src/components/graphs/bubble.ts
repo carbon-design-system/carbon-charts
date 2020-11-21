@@ -74,12 +74,12 @@ export class Bubble extends Scatter {
 					originalClassName: "dot"
 				})
 			)
-			.attr("fill", (d) => {
+			.style("fill", (d) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
 				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
 				}
 			)
-			.attr("stroke", (d) => {
+			.style("stroke", (d) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
