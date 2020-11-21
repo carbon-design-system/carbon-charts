@@ -72,8 +72,16 @@ export class GroupedBar extends Bar {
 			.attr("data-name", "bars");
 
 		// Update data on all bars
-		const bars = barGroupsEnter
-			.merge(barGroups)
+		const allBarGroups = barGroupsEnter.merge(barGroups);
+
+		allBarGroups
+			// Transition
+			.transition(
+				this.services.transitions.getTransition(
+					"bar-group-update-enter",
+					animate
+				)
+			)
 			.attr("transform", (label, i) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(
 					label,
@@ -91,9 +99,12 @@ export class GroupedBar extends Bar {
 					// translate in the y direction for horizontal groups
 					return `translate(0, ${translateBy})`;
 				}
-			})
-			.selectAll("path.bar")
-			.data((label) => this.getDataCorrespondingToLabel(label));
+			});
+
+		const bars = allBarGroups.selectAll("path.bar").data(
+			(label) => this.getDataCorrespondingToLabel(label),
+			(d) => d[groupMapsTo]
+		);
 
 		// Remove bars that are no longer needed
 		bars.exit().attr("opacity", 0).remove();
