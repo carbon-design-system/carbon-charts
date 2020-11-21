@@ -129,7 +129,12 @@ export class Gauge extends Component {
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground").data([value]);
 		const arcEnter = arcValue.enter().append("path");
-		const customColor = Tools.getProperty(this.getOptions(), "color", "scale", "value");
+		const customColor = Tools.getProperty(
+			this.getOptions(),
+			"color",
+			"scale",
+			"value"
+		);
 
 		arcEnter
 			.merge(arcValue)
@@ -141,7 +146,7 @@ export class Gauge extends Component {
 					originalClassName: "arc-foreground"
 				})
 			)
-			.style("fill", (d) => customColor ? customColor : null)
+			.style("fill", (d) => (customColor ? customColor : null))
 			.attr("d", this.arc)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -360,7 +365,7 @@ export class Gauge extends Component {
 				"class",
 				status !== null ? `gauge-delta-arrow status--${status}` : ""
 			)
-			.style("fill", () => status === null ? "currentColor" : null)
+			.style("fill", () => (status === null ? "currentColor" : null))
 			.attr("points", self.getArrow(delta));
 
 		deltaArrow.exit().remove();

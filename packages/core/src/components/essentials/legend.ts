@@ -88,7 +88,7 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
-			.attr("class", (d, i) => 
+			.attr("class", (d, i) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d.name,

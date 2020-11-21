@@ -38,7 +38,9 @@ export class Scatter extends Component {
 	}
 
 	filterBasedOnZoomDomain(data) {
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(data);
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+			data
+		);
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain !== undefined) {
 			return data.filter(
@@ -65,31 +67,35 @@ export class Scatter extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-
 		const { stacked } = this.configs;
 		let scatterData;
 		if (stacked) {
 			const percentage = Object.keys(options.axes).some(
 				(axis) => options.axes[axis].percentage
 			);
-			scatterData = this.model.getStackedData({groups: this.configs.groups, percentage });
+			scatterData = this.model.getStackedData({
+				groups: this.configs.groups,
+				percentage
+			});
 		} else {
-			scatterData = this.model.getDisplayData(this.configs.groups)
-				.filter(
-					(d) => {
-						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
-						return d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null;
-					}
-				);
+			scatterData = this.model
+				.getDisplayData(this.configs.groups)
+				.filter((d) => {
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+						d
+					);
+					return (
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+					);
+				});
 		}
 
 		// filter out datapoints that aren't part of the zoomed domain
 		scatterData = this.filterBasedOnZoomDomain(scatterData);
 
 		// Update data on dot groups
-		const circles = svg
-			.selectAll("circle.dot")
-			.data(scatterData);
+		const circles = svg.selectAll("circle.dot").data(scatterData);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();
@@ -212,21 +218,17 @@ export class Scatter extends Component {
 					d[domainIdentifier],
 					d,
 					filled
-					);
-				}
-			)
-			.classed(
-				"unfilled",
-				(d) => {
-					const domainIdentifier = cartesianScales.getDomainIdentifier(d);
-					return !this.model.getIsFilled(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d,
-						filled
-					);
-				}
-			)
+				);
+			})
+			.classed("unfilled", (d) => {
+				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
+				return !this.model.getIsFilled(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d,
+					filled
+				);
+			})
 			.transition(
 				transitions.getTransition("scatter-update-enter", animate)
 			)
@@ -253,12 +255,11 @@ export class Scatter extends Component {
 			.style("stroke", (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return this.model.getStrokeColor(
-						d[groupMapsTo],
-						d[domainIdentifier],
-						d
-					);
-				}
-			)
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				);
+			})
 			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
@@ -282,7 +283,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	}
+	};
 
 	handleChartHolderOnMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -293,7 +294,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 0);
-	}
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -308,7 +309,7 @@ export class Scatter extends Component {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -319,7 +320,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	}
+	};
 
 	addEventListeners() {
 		const self = this;
@@ -340,13 +341,15 @@ export class Scatter extends Component {
 						})
 					)
 					.style("fill", (d) => {
-						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
+						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+							d
+						);
 						return self.model.getFillColor(
-								d[groupMapsTo],
-								d[domainIdentifier],
-								d);
-						}
-					)
+							d[groupMapsTo],
+							d[domainIdentifier],
+							d
+						);
+					})
 					.classed("unfilled", false);
 
 				// Show tooltip for single datapoint

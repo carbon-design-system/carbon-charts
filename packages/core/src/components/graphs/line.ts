@@ -46,7 +46,9 @@ export class Line extends Component {
 			.y(getYValue)
 			.curve(curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(
+					datum
+				);
 				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
@@ -60,12 +62,19 @@ export class Line extends Component {
 				(axis) => options.axes[axis].percentage
 			);
 			const { groupMapsTo } = options.data;
-			const stackedData = this.model.getStackedData({groups: this.configs.groups, percentage });
+			const stackedData = this.model.getStackedData({
+				groups: this.configs.groups,
+				percentage
+			});
 
 			data = stackedData.map((d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
-				return ({
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+					d
+				);
+				return {
 					name: d[0][groupMapsTo],
 					data: d.map((datum) => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
@@ -73,7 +82,7 @@ export class Line extends Component {
 						[rangeIdentifier]: datum[1]
 					})),
 					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
-				});
+				};
 			});
 		} else {
 			data = this.model.getGroupedData(this.configs.groups);
@@ -115,10 +124,13 @@ export class Line extends Component {
 			.attr("aria-label", (group) => {
 				const { data: groupData } = group;
 				return groupData
-					.map((datum) =>  {
-						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datum);
+					.map((datum) => {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+							datum
+						);
 						return datum[rangeIdentifier];
-					}).join(",");
+					})
+					.join(",");
 			})
 			// Transition
 			.transition(
@@ -149,7 +161,7 @@ export class Line extends Component {
 
 				return Configuration.lines.opacity.selected;
 			});
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -158,7 +170,7 @@ export class Line extends Component {
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
 			.attr("opacity", Configuration.lines.opacity.selected);
-	}
+	};
 
 	destroy() {
 		// Remove event listeners

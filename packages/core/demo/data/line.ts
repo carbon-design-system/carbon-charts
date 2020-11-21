@@ -517,9 +517,7 @@ export const dualLine = {
 		right: {
 			title: "Rainfall (mm)",
 			mapsTo: "rainfall",
-			correspondingDatasets: [
-				"Rainfall"
-			]
+			correspondingDatasets: ["Rainfall"]
 		}
 	},
 	curve: "curveMonotoneX"

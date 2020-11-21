@@ -40,7 +40,9 @@ export class StackedBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData({groups: this.configs.groups});
+		const stackData = this.model.getStackedData({
+			groups: this.configs.groups
+		});
 
 		// Update data on all bar groups
 		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
@@ -187,15 +189,21 @@ export class StackedBar extends Bar {
 					datum
 				});
 
-				const displayData = self.model.getDisplayData(self.configs.groups);
+				const displayData = self.model.getDisplayData(
+					self.configs.groups
+				);
 
 				let matchingDataPoint = displayData.find((d) => {
-					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
-					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(d);
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+						d
+					);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
-						datum.data.sharedStackKey &&
+							datum.data.sharedStackKey &&
 						d[groupMapsTo] === datum.group
 					);
 				});

@@ -38,9 +38,7 @@ export class Tooltip extends Component {
 		);
 
 		// if there is a provided tooltip HTML function call it
-		if (
-			Tools.getProperty(this.getOptions(), "tooltip", "customHTML")
-		) {
+		if (Tools.getProperty(this.getOptions(), "tooltip", "customHTML")) {
 			if (e.detail.content) {
 				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
 				tooltipTextContainer.html(labelHTML);
@@ -192,8 +190,9 @@ export class Tooltip extends Component {
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
 				formattedItems
-					.map((item) => (
-						`<li>
+					.map(
+						(item) =>
+							`<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
 								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								${
@@ -207,7 +206,7 @@ export class Tooltip extends Component {
 								<p class="value">${item.value || ""}</p>
 							</div>
 						</li>`
-					))
+					)
 					.join("") +
 				`</ul>`;
 		}
