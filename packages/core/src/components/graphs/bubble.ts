@@ -1,7 +1,7 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
-import { Roles } from "../../interfaces";
+import { Roles, ColorClassNameTypes } from "../../interfaces";
 
 // D3 Imports
 import { Selection } from "d3-selection";
@@ -12,7 +12,7 @@ export class Bubble extends Scatter {
 	type = "bubble";
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const data = selection.data();
@@ -40,13 +40,11 @@ export class Bubble extends Scatter {
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);
-
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		selection
 			.raise()
@@ -66,17 +64,32 @@ export class Bubble extends Scatter {
 			)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
 			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
-			.attr("fill", (d) =>
-				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [
+						ColorClassNameTypes.FILL,
+						ColorClassNameTypes.STROKE
+					],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "dot"
+				})
 			)
-			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
+			.attr("fill", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
+				}
+			)
+			.attr("stroke", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
-				)
+				);
+			}
+
 			)
+			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);
 	}
 }

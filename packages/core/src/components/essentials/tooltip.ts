@@ -39,18 +39,18 @@ export class Tooltip extends Component {
 
 		// if there is a provided tooltip HTML function call it
 		if (
-			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
+			Tools.getProperty(this.getOptions(), "tooltip", "customHTML")
 		) {
 			if (e.detail.content) {
-						const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
-						tooltipTextContainer.html(labelHTML);
-					} else {
-						tooltipTextContainer.html(
-							this.model
-								.getOptions()
-								.tooltip.customHTML(data, defaultHTML)
-						);
-					}
+				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				tooltipTextContainer.html(labelHTML);
+			} else {
+				tooltipTextContainer.html(
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
+				);
+			}
 		} else {
 			// Use default tooltip
 			tooltipTextContainer.html(defaultHTML);
@@ -87,6 +87,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// listen to chart-mouseout event to hide the tooltip
+		this.services.events.addEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	removeTooltipEventListener() {
@@ -104,6 +110,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// remove the listener on chart-mouseout
+		this.services.events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	getItems(e: CustomEvent) {
@@ -115,7 +127,7 @@ export class Tooltip extends Component {
 	}
 
 	formatItems(items) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// get user provided custom values for truncation
 		const truncationType = Tools.getProperty(
@@ -143,7 +155,9 @@ export class Tooltip extends Component {
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
-				item.value = this.valueFormatter(item.value);
+				item.value = item.value
+					? this.valueFormatter(item.value)
+					: item.value;
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
@@ -174,25 +188,29 @@ export class Tooltip extends Component {
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
+			const isUserProvidedColorScaleValid = this.model.isUserProvidedColorScaleValid();
+
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
 				formattedItems
-					.map(
-						(item) =>
-							`<li>
+					.map((item) => {
+						const useColor =
+							item.color || isUserProvidedColorScaleValid;
+						return `<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
+								${item.class && !useColor ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								${
-									item.color
+									item.color && useColor
 										? '<a style="background-color: ' +
 										  item.color +
 										  '" class="tooltip-color"></a>'
 										: ""
 								}
-								<p class="label">${item.label}</p>
-								<p class="value">${item.value}</p>
+								<p class="label">${item.label || ""}</p>
+								<p class="value">${item.value || ""}</p>
 							</div>
-						</li>`
-					)
+						</li>`;
+					})
 					.join("") +
 				`</ul>`;
 		}
@@ -201,7 +219,7 @@ export class Tooltip extends Component {
 	}
 
 	valueFormatter(value: any) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const valueFormatter = Tools.getProperty(
 			options,
 			"tooltip",
@@ -216,7 +234,7 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTooltipEnabled = Tools.getProperty(
 			options,
 			"tooltip",
@@ -247,7 +265,7 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTopZoomBarEnabled = Tools.getProperty(
 			options,
 			"zoomBar",

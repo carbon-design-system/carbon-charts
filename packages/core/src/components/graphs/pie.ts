@@ -2,7 +2,13 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, Events, Alignments } from "../../interfaces";
+import {
+	CalloutDirections,
+	Roles,
+	Events,
+	Alignments,
+	ColorClassNameTypes
+} from "../../interfaces";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
@@ -54,7 +60,7 @@ export class Pie extends Component {
 		const svg = this.getContainerSVG();
 
 		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
@@ -81,7 +87,7 @@ export class Pie extends Component {
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "slices");
+			.attr("data-name", "slices");
 
 		const paths = slicesGroup
 			.selectAll("path.slice")
@@ -100,6 +106,13 @@ export class Pie extends Component {
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d.data[groupMapsTo],
+					originalClassName: "slice"
+				})
+			)
 			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
@@ -131,7 +144,7 @@ export class Pie extends Component {
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "labels");
+			.attr("data-name", "labels");
 
 		const labels = labelsGroup
 			.selectAll("text.pie-label")
@@ -260,7 +273,7 @@ export class Pie extends Component {
 			"g.callouts"
 		)
 			.attr("role", Roles.GROUP)
-			.attr("aria-label", "callouts");
+			.attr("data-name", "callouts");
 
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);
@@ -359,7 +372,7 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.slice")
@@ -403,17 +416,14 @@ export class Pie extends Component {
 					datum
 				});
 
-				const { groupMapsTo } = self.model.getOptions().data;
+				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					items: [
 						{
 							label: datum.data[groupMapsTo],
-							value: datum.data.value,
-							color: self.model.getStrokeColor(
-								datum.data[groupMapsTo]
-							)
+							value: datum.data.value
 						}
 					]
 				});

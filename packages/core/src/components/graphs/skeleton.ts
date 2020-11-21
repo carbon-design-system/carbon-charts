@@ -29,7 +29,7 @@ export class Skeleton extends Component {
 		svg.attr("width", width).attr("height", height);
 
 		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"data",
 			"loading"
 		);
@@ -140,7 +140,7 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"x",
 			"numberOfTicks"
@@ -170,7 +170,7 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"y",
 			"numberOfTicks"
@@ -207,20 +207,15 @@ export class Skeleton extends Component {
 			.attr("width", width)
 			.attr("height", height);
 
-		const optionName = innerRadius === 0
-			? "pie"
-			: "donut";
+		const optionName = innerRadius === 0 ? "pie" : "donut";
 
 		const alignment = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			optionName,
 			"alignment"
 		);
 
-		DOMUtils.appendOrSelect(
-			container,
-			"rect.chart-skeleton-area-container"
-		)
+		DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
 			.attr("width", width)
 			.attr("height", height)
 			.attr("fill", "none");
@@ -242,7 +237,7 @@ export class Skeleton extends Component {
 			.attr("d", arcPathGenerator)
 			.classed("shimmer-effect-areas", shimmer)
 			.classed("empty-state-areas", !shimmer);
-		
+
 		// Position skeleton
 		let translateX = outerRadius + Configuration.pie.xOffset;
 		if (alignment === Alignments.CENTER) {

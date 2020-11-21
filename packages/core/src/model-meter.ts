@@ -1,7 +1,6 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
-import * as colorPalettes from "./services/colorPalettes";
 import { Tools } from "./tools";
 
 /** The meter chart model layer which extends some of the data setting options.
@@ -66,7 +65,8 @@ export class MeterChartModel extends ChartModel {
 		if (allRanges) {
 			const result = allRanges.filter(
 				(step) =>
-					step.range[0] <= boundedValue && boundedValue <= step.range[1]
+					step.range[0] <= boundedValue &&
+					boundedValue <= step.range[1]
 			);
 			if (result.length > 0) {
 				return result[0].status;

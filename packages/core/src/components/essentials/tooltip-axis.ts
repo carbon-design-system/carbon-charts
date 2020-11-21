@@ -1,5 +1,9 @@
 import { Tooltip } from "./tooltip";
-import { AxisPositions, ScaleTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	ScaleTypes,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 
 import { format } from "date-fns";
@@ -15,14 +19,11 @@ export class AxisChartsTooltip extends Tooltip {
 			return [];
 		}
 
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { cartesianScales } = this.services;
 		const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 		const domainAxisScaleType = cartesianScales.getDomainAxisScaleType();
-		const rangeAxisOptions = cartesianScales.getRangeAxisOptions();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
-		const rangeAxisScaleType = cartesianScales.getRangeAxisScaleType();
 
 		// Generate default tooltip
 		const { groupMapsTo } = options.data;
@@ -52,10 +53,12 @@ export class AxisChartsTooltip extends Tooltip {
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
+			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({datum});
+			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
+			const rangeAxisOptions = cartesianScales.getAxisOptions(rangeAxisPosition);
 
 			let rangeLabel = rangeAxisOptions.title;
 			if (!rangeLabel) {
-				const rangeAxisPosition = cartesianScales.getRangeAxisPosition();
 				if (
 					rangeAxisPosition === AxisPositions.LEFT ||
 					rangeAxisPosition === AxisPositions.RIGHT
@@ -76,9 +79,13 @@ export class AxisChartsTooltip extends Tooltip {
 					value: datum[rangeIdentifier]
 				},
 				{
-					label: "Group",
+					label: options.tooltip.groupLabel || "Group",
 					value: datum[groupMapsTo],
-					color: this.model.getStrokeColor(datum[groupMapsTo])
+					color: this.model.getFillColor(datum[groupMapsTo]),
+					class: this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.TOOLTIP],
+						dataGroupName: datum[groupMapsTo]
+					})
 				}
 			];
 
@@ -100,17 +107,24 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map(datum => ({
+					.map((datum) => ({
 						label: datum[groupMapsTo],
-						value: this.valueFormatter(datum[rangeIdentifier]),
-						color: this.model.getStrokeColor(datum[groupMapsTo])
+						value: this.valueFormatter(datum[cartesianScales.getRangeIdentifier(datum)]),
+						color: this.model.getFillColor(datum[groupMapsTo]),
+						class: this.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							dataGroupName: datum[groupMapsTo]
+						})
 					}))
 					.sort((a, b) => b.value - a.value)
 			);
 
-			if (Tools.getProperty(options, "tooltip", "showTotal") === true) {
+			const dualAxes = cartesianScales.isDualAxes();
+			if (!dualAxes && Tools.getProperty(options, "tooltip", "showTotal") === true) {
+				// use the primary/only range id
+				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				items.push({
-					label: "Total",
+					label: options.tooltip.totalLabel || "Total",
 					value: this.valueFormatter(
 						data.reduce(
 							(accumulator, datum) =>

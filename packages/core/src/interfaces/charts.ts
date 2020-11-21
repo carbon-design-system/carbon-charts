@@ -1,4 +1,4 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments } from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections, Alignments, ChartTypes } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -86,7 +86,7 @@ export interface BaseChartOptions {
 		 */
 		groupMapsTo?: string;
 		/**
-		 * used to simulate data loading
+		 * used to simulate data loading in skeleton way
 		 */
 		loading?: boolean;
 		/**
@@ -103,6 +103,25 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * use a carbon dataviz preset color palette
+		 * put the index (selection of which variant)
+		 */
+		pairing?: {
+			/**
+			 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
+			 */
+			numberOfVariants?: number;
+			/**
+			 * the option number of the color paring
+			 */
+			option?: number;
+		};
+		/*
+		 * options related to gradient
+		 * e.g. { enabled: true }
+		 */
+		gradient?: object;
 	};
 }
 
@@ -194,7 +213,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+	};
 }
 
 /**
@@ -208,7 +227,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
@@ -222,7 +241,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
@@ -240,7 +259,7 @@ export interface PieChartOptions extends BaseChartOptions {
 /**
  * options specific to gauge charts
  */
-export interface GaugeChartOptions extends PieChartOptions {
+export interface GaugeChartOptions extends BaseChartOptions {
 	gauge?: {
 		arcWidth?: number;
 		deltaArrow?: {
@@ -254,6 +273,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 		numberFormatter?: Function;
 		valueFontSize?: Function;
 		type?: GaugeTypes;
+		alignment?: Alignments;
 	};
 }
 
@@ -299,3 +319,22 @@ export interface RadarChartOptions extends BaseChartOptions {
 		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to combo bar charts
+ */
+export interface ComboChartOptions extends AxisChartOptions {
+	comboChartTypes?: {
+		[ChartTypes.LINE]?: [],
+		[ChartTypes.STACKED_BAR]?: [],
+		[ChartTypes.GROUPED_BAR]?: [],
+		[ChartTypes.SIMPLE_BAR]?: [],
+		[ChartTypes.SCATTER]?: []
+	};
+}
+
+
+/*
+ * options specific to treemap charts
+ */
+export interface TreemapChartOptions extends BaseChartOptions {}

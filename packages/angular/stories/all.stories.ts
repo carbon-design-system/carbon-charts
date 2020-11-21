@@ -46,6 +46,9 @@ storybookDemoGroups.forEach(demoGroup => {
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
+		if (demo.isHighScale) {
+			return;
+		}
 		groupStories.add(demo.title, () => ({
 			template: getTemplate(demo),
 			moduleMetadata: {

@@ -12,6 +12,8 @@ import settings from "carbon-components/es/globals/js/settings";
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
 
+const CSS_VERIFIER_ELEMENT_CLASSNAME = "DONT_STYLE_ME_css_styles_verifier";
+
 export class DOMUtils extends Service {
 	static getSVGElementSize(
 		svgSelector: Selection<any, any, any, any>,
@@ -136,13 +138,29 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelect(parent, query) {
-		const querySections = query.split(".");
-		const elementToAppend = querySections[0];
+		const selection = parent.select(`${query}`);
 
-		const selection = parent.select(query);
 		if (selection.empty()) {
+			// see if there is an id
+			let querySections = query.split("#");
+			let elementToAppend;
+			let id;
+			// if there is an id
+			if (querySections.length === 2) {
+				// take out the element to append
+				elementToAppend = querySections[0];
+				// split it by classes
+				querySections = querySections[1].split(".");
+				// the first string is the id
+				id = querySections[0];
+			} else {
+				querySections = query.split(".");
+				elementToAppend = querySections[0];
+			}
+
 			return parent
 				.append(elementToAppend)
+				.attr("id", id)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 
@@ -175,6 +193,7 @@ export class DOMUtils extends Service {
 
 		// Add main SVG
 		this.addSVGElement();
+		this.verifyCSSStylesBeingApplied();
 
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
@@ -229,7 +248,29 @@ export class DOMUtils extends Service {
 			.attr("height", "100%")
 			.attr("width", "100%");
 
+		svg.append("g").attr("class", CSS_VERIFIER_ELEMENT_CLASSNAME);
+
 		this.svg = svg.node();
+	}
+
+	verifyCSSStylesBeingApplied() {
+		// setTimeout is needed here since in `addSVGElement()` we're appending the
+		// CSS verifier element, and need to allow some time for it to become available
+		// in the DOM
+		setTimeout(() => {
+			const cssVerifierElement = select(this.svg)
+				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
+				.node();
+			const computedStyles = getComputedStyle(cssVerifierElement as any);
+			if (
+				computedStyles.getPropertyValue("overflow") !== "hidden" ||
+				computedStyles.getPropertyValue("opacity") !== "0"
+			) {
+				console.error(
+					"Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide."
+				);
+			}
+		});
 	}
 
 	setSVGMaxHeight() {

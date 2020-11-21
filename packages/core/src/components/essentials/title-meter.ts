@@ -10,7 +10,7 @@ export class MeterTitle extends Title {
 
 	render() {
 		const dataset = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
 
@@ -54,7 +54,7 @@ export class MeterTitle extends Title {
 	displayStatus() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		const containerBounds = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
@@ -73,7 +73,10 @@ export class MeterTitle extends Title {
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
-			.attr("class", status !== null ? `status-indicator status--${status}` : "")
+			.attr(
+				"class",
+				status !== null ? `status-indicator status--${status}` : ""
+			)
 			.attr("transform", `translate(${containerWidth - radius}, 0)`);
 
 		const data = status ? [status] : [];
@@ -114,7 +117,7 @@ export class MeterTitle extends Title {
 		// check if it is enabled
 		const data =
 			Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"meter",
 				"statusBar",
 				"percentageIndicator",

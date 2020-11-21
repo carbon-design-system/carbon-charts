@@ -39,6 +39,44 @@ export const lineOptions = {
 	}
 };
 
+export const sparklineLoadingOptions = {
+	title: "Sparkline (loading)",
+	axes: {
+		bottom: {
+			visible: false,
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			visible: false,
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	grid: {
+		x: {
+			enabled: false
+		},
+		y: {
+			enabled: false
+		}
+	},
+	legend: {
+		enabled: false
+	},
+	tooltip: {
+		enabled: false
+	},
+	points: {
+		enabled: false
+	},
+	data: {
+		loading: true
+	}
+};
+
 export const lineCenteredLegendData = lineData;
 
 export const lineCenteredLegendOptions = {
@@ -177,6 +215,30 @@ export const lineSelectedGroupsOptions = {
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
+		}
+	}
+};
+
+export const lineCustomColorOptions = {
+	title: "Line (custom colors)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	color: {
+		scale: {
+			"Dataset 1": "#925699",
+			"Dataset 2": "#525669",
+			"Dataset 3": "#725699",
+			"Dataset 4": "#ccc"
 		}
 	}
 };
@@ -421,4 +483,44 @@ export const lineSkeletonOptions = {
 	data: {
 		loading: true
 	}
+};
+
+export const lineTimeSeriesDualAxesData = [
+	{ group: "Temperature", date: new Date(2019, 0, 1), temp: 23 },
+	{ group: "Temperature", date: new Date(2019, 1, 1), temp: 15 },
+	{ group: "Temperature", date: new Date(2019, 2, 1), temp: 24 },
+	{ group: "Temperature", date: new Date(2019, 3, 1), temp: 33 },
+	{ group: "Temperature", date: new Date(2019, 4, 1), temp: 23 },
+	{ group: "Temperature", date: new Date(2019, 5, 1), temp: 32 },
+	{ group: "Temperature", date: new Date(2019, 6, 1), temp: 23 },
+	{ group: "Rainfall", date: new Date(2019, 0, 1), rainfall: 50 },
+	{ group: "Rainfall", date: new Date(2019, 1, 1), rainfall: 65 },
+	{ group: "Rainfall", date: new Date(2019, 2, 1), rainfall: 35 },
+	{ group: "Rainfall", date: new Date(2019, 3, 1), rainfall: 43 },
+	{ group: "Rainfall", date: new Date(2019, 4, 1), rainfall: 53 },
+	{ group: "Rainfall", date: new Date(2019, 5, 1), rainfall: 19 },
+	{ group: "Rainfall", date: new Date(2019, 6, 1), rainfall: 13 }
+];
+
+export const dualLine = {
+	title: "Line + Line (dual axes)",
+	axes: {
+		left: {
+			title: "Temperature (°C)",
+			mapsTo: "temp"
+		},
+		bottom: {
+			scaleType: "time",
+			mapsTo: "date",
+			title: "Date"
+		},
+		right: {
+			title: "Rainfall (mm)",
+			mapsTo: "rainfall",
+			correspondingDatasets: [
+				"Rainfall"
+			]
+		}
+	},
+	curve: "curveMonotoneX"
 };

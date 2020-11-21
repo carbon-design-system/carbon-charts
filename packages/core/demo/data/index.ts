@@ -10,7 +10,11 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as treemapDemos from "./treemap";
+import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
+import * as comboDemos from "./combo";
+import * as highScaleDemos from "./high-scale";
 
 export * from "./area";
 export * from "./bar";
@@ -23,6 +27,8 @@ export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
+export * from "./combo";
+export * from "./treemap";
 
 import {
 	createChartSandbox,
@@ -100,6 +106,16 @@ export const chartTypes = {
 		vanilla: "RadarChart",
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
+	},
+	ComboChart: {
+		vanilla: "ComboChart",
+		angular: "ibm-combo-chart",
+		vue: "ccv-combo-chart"
+	},
+	TreemapChart: {
+		vanilla: "TreemapChart",
+		angular: "ibm-treemap-chart",
+		vue: "ccv-treemap-chart"
 	}
 };
 
@@ -117,6 +133,12 @@ let allDemoGroups = [
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: false
+			},
+			{
+				options: areaDemos.areaDiscreteDomainOptions,
+				data: areaDemos.areaDiscreteDomain,
 				chartType: chartTypes.AreaChart
 			},
 			{
@@ -136,6 +158,12 @@ let allDemoGroups = [
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
 				isDemoExample: true
+			},
+			{
+				options: areaDemos.sparklineOptions,
+				data: areaDemos.sparklineTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -146,6 +174,11 @@ let allDemoGroups = [
 		demos: [
 			{
 				options: barDemos.simpleBarOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarColorPaletteOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
 			},
@@ -363,6 +396,12 @@ let allDemoGroups = [
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: false
+			},
+			{
+				options: bubbleDemos.bubbleDualDiscreteOptions,
+				data: bubbleDemos.bubbleDualDiscreteData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: false
 			}
 		]
 	},
@@ -400,6 +439,11 @@ let allDemoGroups = [
 		demos: [
 			{
 				options: lineDemos.lineOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			},
@@ -472,6 +516,17 @@ let allDemoGroups = [
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
+			},
+			{
+				options: lineDemos.dualLine,
+				data: lineDemos.lineTimeSeriesDualAxesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
+				options: lineDemos.sparklineLoadingOptions,
+				data: lineDemos.lineSkeletonData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
@@ -574,6 +629,12 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterSkeletonOptions,
 				data: scatterDemos.scatterSkeletonData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
+			},
+			{
+				options: scatterDemos.scatterDualAxesOptions,
+				data: scatterDemos.scatterDualAxesData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: false
 			}
@@ -763,6 +824,104 @@ let allDemoGroups = [
 		]
 	},
 	{
+		title: "Combo",
+		demos: [
+			{
+				options: comboDemos.comboSimpleOptions,
+				data: comboDemos.comboSimpleData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedOptions,
+				data: comboDemos.comboStackedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboGroupedOptions,
+				data: comboDemos.comboGroupedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboGroupedHorizontalOptions,
+				data: comboDemos.comboGroupedHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboHorizontalOptions,
+				data: comboDemos.comboHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboAreaLineOptions,
+				data: comboDemos.comboAreaLineData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedAreaLineOptions,
+				data: comboDemos.comboStackedAreaLine,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboLineScatterOptions,
+				data: comboDemos.comboLineScatterData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboEmptyOptions,
+				data: comboDemos.comboEmptyData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboLoadingOptions,
+				data: comboDemos.comboLoadingData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboErrorOptions,
+				data: comboDemos.comboErrorData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Treemap",
+		demos: [
+			{
+				data: treemapDemos.treemapData,
+				options: treemapDemos.treemapOptions,
+				chartType: chartTypes.TreemapChart
+			}
+		]
+	},
+	{
+		title: "Toolbar (alpha)",
+		demos: [
+			{
+				options: toolbarDemos.toolbarStackedBarTimeSeriesOptions,
+				data: toolbarDemos.toolbarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: toolbarDemos.toolbarLineTimeSeriesOptions,
+				data: toolbarDemos.toolbarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			}
+		]
+	},
+	{
 		title: "Zoom bar (alpha)",
 		demos: [
 			{
@@ -826,9 +985,36 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: zoomBarDemos.zoomBarStringDateOptions,
+				data: zoomBarDemos.zoomBarStringDateData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLockedOptions,
+				data: zoomBarDemos.zoomBarLockedData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
 				options: zoomBarDemos.zoomBarSkeletonOptions,
 				data: zoomBarDemos.zoomBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			}
+		]
+	}
+] as any;
+
+const devOnlyDemoGroups = [
+	{
+		title: "High scale tests (DEV)",
+		demos: [
+			{
+				options: highScaleDemos.zoomBarHighScaleLineTimeSeriesOptions,
+				data: [],
+				isHighScale: true,
+				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			}
 		]
@@ -842,39 +1028,48 @@ const formatTitleString = (str) =>
 		.toLowerCase()
 		.replace(/\s+/g, "-");
 
-// add codesandbox and code to demos
-allDemoGroups = allDemoGroups.map((demoGroup) => {
-	demoGroup.demos = demoGroup.demos.map((demo) => {
-		demo.title = demo.options.title;
-		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(
-			demo.options.title
-		)}`;
+const mapDemoGroups = (demoGroups) =>
+	demoGroups.map((demoGroup) => {
+		demoGroup.demos = demoGroup.demos.map((demo) => {
+			demo.title = demo.options.title;
+			demo.id = `${formatTitleString(
+				demoGroup.title
+			)}--${formatTitleString(demo.options.title)}`;
 
-		// if there isnt a height set in the chart options, use 400
-		demo.options.height = demo.options.height ?? "400px";
+			// if there isnt a height set in the chart options, use 400
+			demo.options.height = demo.options.height ?? "400px";
 
-		if (!demo.codesandbox) {
-			demo.codesandbox = {};
-		}
-		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
-		demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
-		demo.codesandbox.vanilla = createChartSandbox(
-			createVanillaChartApp(demo)
-		);
-		demo.codesandbox.svelte = createChartSandbox(
-			createSvelteChartApp(demo)
-		);
+			if (!demo.codesandbox) {
+				demo.codesandbox = {};
+			}
+			demo.codesandbox.react = createChartSandbox(
+				createReactChartApp(demo)
+			);
+			demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
+			demo.codesandbox.vanilla = createChartSandbox(
+				createVanillaChartApp(demo)
+			);
+			demo.codesandbox.svelte = createChartSandbox(
+				createSvelteChartApp(demo)
+			);
 
-		if (!demo.code) {
-			demo.code = {};
-		}
-		demo.code.angular = createAngularChartApp(demo);
+			if (!demo.code) {
+				demo.code = {};
+			}
+			demo.code.angular = createAngularChartApp(demo);
 
-		return demo;
+			return demo;
+		});
+
+		return demoGroup;
 	});
+// add codesandbox and code to demos
+allDemoGroups = mapDemoGroups(allDemoGroups);
 
-	return demoGroup;
-});
+// Only add the high-scale testcases in dev
+if (process.env.NODE_ENV !== "production") {
+	allDemoGroups = allDemoGroups.concat(mapDemoGroups(devOnlyDemoGroups));
+}
 
 // in the storybook we want to show all the demos
 export const storybookDemoGroups = allDemoGroups;
