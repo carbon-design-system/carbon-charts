@@ -12,7 +12,7 @@ export class Bubble extends Scatter {
 	type = "bubble";
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const data = selection.data();
@@ -40,13 +40,11 @@ export class Bubble extends Scatter {
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { radiusMapsTo } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);
-
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		selection
 			.raise()
@@ -76,15 +74,20 @@ export class Bubble extends Scatter {
 					originalClassName: "dot"
 				})
 			)
-			.attr("fill", (d) =>
-				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			.attr("fill", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
+				}
 			)
-			.attr("stroke", (d) =>
-				this.model.getStrokeColor(
+			.attr("stroke", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
-				)
+				);
+			}
+
 			)
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);

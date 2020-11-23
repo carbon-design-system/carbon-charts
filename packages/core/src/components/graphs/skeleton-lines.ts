@@ -29,32 +29,32 @@ export class SkeletonLines extends Skeleton {
 		svg.attr("width", width).attr("height", height);
 
 		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"data",
 			"loading"
 		);
 
 		const isSparkline =
 			!Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"grid",
 				"x",
 				"enabled"
 			) &&
 			!Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"grid",
 				"y",
 				"enabled"
 			) &&
 			!Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"axes",
 				"bottom",
 				"visible"
 			) &&
 			!Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"axes",
 				"left",
 				"visible"

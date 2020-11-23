@@ -1,6 +1,10 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
+import {
+	Events,
+	Roles,
+	ColorClassNameTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -26,16 +30,18 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
+		const data = this.model.getDisplayData(this.configs.groups);
+
 		// Update data on all bars
 		const bars = svg
 			.selectAll("path.bar")
-			.data(this.model.getDisplayData(), (datum) => datum[groupMapsTo]);
+			.data(data, (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit().attr("opacity", 0).remove();
@@ -98,7 +104,7 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.bar")
@@ -110,7 +116,7 @@ export class SimpleBar extends Bar {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -121,7 +127,7 @@ export class SimpleBar extends Bar {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	addEventListeners() {
 		const self = this;

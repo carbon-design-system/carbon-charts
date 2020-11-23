@@ -11,7 +11,7 @@ export class Title extends Component {
 
 		const text = svg
 			.selectAll("text.title")
-			.data([this.model.getOptions().title]);
+			.data([this.getOptions().title]);
 
 		text.enter()
 			.append("text")
