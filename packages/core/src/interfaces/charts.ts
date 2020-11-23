@@ -1,4 +1,10 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments, ChartTypes } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments,
+	ChartTypes
+} from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -209,7 +215,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-	};
+		  };
 }
 
 /**
@@ -223,7 +229,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
 }
 
 /**
@@ -237,7 +243,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
 }
 
 /**
@@ -320,13 +326,12 @@ export interface RadarChartOptions extends BaseChartOptions {
  * options specific to combo bar charts
  */
 export interface ComboChartOptions extends AxisChartOptions {
-	comboChartTypes?: Array<{
+	comboChartTypes: Array<{
 		type?: ChartTypes;
 		options?: object;
 		correspondingDatasets: Array<string>;
 	}>;
 }
-
 
 /*
  * options specific to treemap charts
