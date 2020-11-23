@@ -4,7 +4,7 @@
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
-	"types": "./types/index.d.ts",
+	"types": "./index.d.ts",
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
@@ -57,6 +57,8 @@
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/react": "5.3.12",
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
@@ -77,6 +79,7 @@
 		"sass": "1.25.0",
 		"sass-loader": "8.0.0",
 		"style-loader": "0.19.0",
+		"typescript": "^4.1.2",
 		"url-loader": "0.6.2"
 	},
 	"publishConfig": {

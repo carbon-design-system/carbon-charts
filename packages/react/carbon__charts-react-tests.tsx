@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScaleTypes } from "@carbon/charts/interfaces";
-import { LineChart } from "./types";
+import { LineChart } from "./dist";
 
 class App extends React.Component {
   ref: React.RefObject<LineChart> = React.createRef();
