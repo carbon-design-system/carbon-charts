@@ -24,6 +24,7 @@ export * from "./graphs/donut";
 export * from "./graphs/skeleton";
 export * from "./graphs/skeleton-lines";
 export * from "./graphs/treemap";
+export * from "./graphs/radar";
 
 // Layout
 export * from "./layout/spacer";
@@ -36,7 +37,7 @@ export * from "./axes/grid-brush";
 export * from "./axes/chart-clip";
 export * from "./axes/grid";
 export * from "./axes/ruler";
-export * from "./axes/ruler-stacked-bar";
+export * from "./axes/ruler-stacked";
 export * from "./axes/toolbar";
 export * from "./axes/zero-line";
 export * from "./axes/zoom-bar";

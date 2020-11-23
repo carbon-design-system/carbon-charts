@@ -29,7 +29,7 @@ export class Toolbar extends Component {
 	overflowMenuItemId = Math.floor(Math.random() * 99999999999);
 
 	init() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -65,7 +65,7 @@ export class Toolbar extends Component {
 
 	render(animate = true) {
 		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"data",
 			"loading"
 		);
@@ -361,12 +361,12 @@ export class Toolbar extends Component {
 
 	getControlConfigs() {
 		const numberOfIcons = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"toolbar",
 			"numberOfIcons"
 		);
 		const controls = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"toolbar",
 			"controls"
 		);

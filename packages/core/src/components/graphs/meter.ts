@@ -13,7 +13,7 @@ export class Meter extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 

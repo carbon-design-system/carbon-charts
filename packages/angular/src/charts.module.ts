@@ -15,6 +15,7 @@ import { PieChartComponent } from "./pie-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
 import { MeterChartComponent } from "./meter-chart.component";
 import { RadarChartComponent } from "./radar-chart.component";
+import { ComboChartComponent } from "./combo-chart.component";
 import { TreemapChartComponent } from "./treemap-chart.component";
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
+		ComboChartComponent,
 		TreemapChartComponent
 	],
 	exports: [
@@ -53,6 +55,7 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
+		ComboChartComponent,
 		TreemapChartComponent
 	]
 })

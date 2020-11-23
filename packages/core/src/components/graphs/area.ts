@@ -44,25 +44,25 @@ export class Area extends Component {
 		const areaGenerator = area().curve(this.services.curves.getD3Curve());
 
 		if (orientation === CartesianOrientations.VERTICAL) {
+			domain = this.services.cartesianScales.getMainYScale().domain();
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
 				.y0(cartesianScales.getRangeValue(0))
 				.y1((d, i) => cartesianScales.getRangeValue(d, i));
-			domain = this.services.cartesianScales.getMainYScale().domain();
 		} else {
+			domain = this.services.cartesianScales.getMainXScale().domain();
 			areaGenerator
 				.x0(cartesianScales.getRangeValue(0))
 				.x1((d, i) => cartesianScales.getRangeValue(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
-			domain = this.services.cartesianScales.getMainXScale().domain();
 		}
 
 		// Update the bound data on area groups
-		const groupedData = this.model.getGroupedData();
+		const groupedData = this.model.getGroupedData(this.configs.groups);
 
 		// Is gradient enabled or not
 		const isGradientEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"color",
 			"gradient",
 			"enabled"
@@ -80,10 +80,10 @@ export class Area extends Component {
 
 		const areas = svg
 			.selectAll("path.area")
-			.data(groupedData, (group) => group.name);
+			.data(groupedData);
 
 		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"style",
 			"prefix"
 		);
@@ -91,6 +91,17 @@ export class Area extends Component {
 			select(this.services.domUtils.getHolder()),
 			`svg.${settings.prefix}--${chartprefix}--chart-svg`
 		);
+
+		// Remove elements that need to be exited
+		// We need exit at the top here to make sure that
+		// Data filters are processed before entering new elements
+		// Or updating existing ones
+		areas.exit().attr("opacity", 0).remove();
+
+		// if there is no grouped data (if all data groups are turned OFF with legend which can happen in the case of combo charts)
+		if (!groupedData.length) {
+			return;
+		}
 
 		// The fill value of area has been overwritten, get color value from stroke color class instead
 		const strokePathElement = chartSVG
@@ -101,10 +112,9 @@ export class Area extends Component {
 				})}`
 			)
 			.node();
+
 		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue(
-					"stroke"
-			  )
+			? getComputedStyle(strokePathElement, null).getPropertyValue("stroke")
 			: null;
 
 		if (isGradientAllowed && colorValue) {
@@ -128,12 +138,6 @@ export class Area extends Component {
 				});
 			}
 		}
-
-		// Remove elements that need to be exited
-		// We need exit at the top here to make sure that
-		// Data filters are processed before entering new elements
-		// Or updating existing ones
-		areas.exit().attr("opacity", 0).remove();
 
 		const self = this;
 
@@ -186,8 +190,6 @@ export class Area extends Component {
 					return areaGenerator(data);
 				});
 		}
-
-		// Apply shared styles and datum
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
