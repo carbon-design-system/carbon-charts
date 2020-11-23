@@ -10,5 +10,4 @@ export * from "./tabular-data-format";
 export * from "./themes";
 export * from "./event-listeners";
 export * from "./color-palette";
-export * from "./combo-charts";
 export * from "./dual-axes";
