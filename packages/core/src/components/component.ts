@@ -11,6 +11,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 export class Component {
 	public type: string;
+	public id: string;
 
 	protected parent: any;
 
@@ -25,6 +26,14 @@ export class Component {
 
 		if (configs) {
 			this.configs = configs;
+			if (this.configs.id) {
+				const chartprefix = Tools.getProperty(
+					this.model.getOptions(),
+					"style",
+					"prefix"
+				);
+				this.id = `${chartprefix}--${this.configs.id}`;
+			}
 		}
 
 		// Set parent element to shell SVG if no parent exists for component
@@ -65,16 +74,14 @@ export class Component {
 				"style",
 				"prefix"
 			);
-			this.parent.classed(
-				`${settings.prefix}--${chartprefix}--${this.type}`,
-				true
-			);
+			this.parent
+				.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true)
+				.attr( "id", this.id);
 
 			if (oldParent) {
-				oldParent.classed(
-					`${settings.prefix}--${chartprefix}--${this.type}`,
-					false
-				);
+				oldParent
+					.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false)
+					.attr( "id", this.id);
 			}
 		}
 	}
@@ -91,9 +98,10 @@ export class Component {
 				"prefix"
 			);
 
+			const idSelector = this.id ? `#${this.id}` : "";
 			const svg = DOMUtils.appendOrSelect(
 				this.parent,
-				`g.${settings.prefix}--${chartprefix}--${this.type}`
+				`g${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
 			);
 
 			if (configs.withinChartClip) {
@@ -103,10 +111,22 @@ export class Component {
 					svg.attr("clip-path", `url(#${chartClipId})`);
 				}
 			}
-
 			return svg;
 		}
 
 		return this.parent;
+	}
+
+	/**
+	 * graphs used in combo charts share a model with global options but can receive their own local options.
+	 * this function retrieves the global options and merges it with any options passed into this
+	 * component's config.options object.
+	 */
+	getOptions() {
+		if (this.configs.options) {
+			const options = Tools.merge({}, this.model.getOptions(), this.configs.options);
+			return options;
+		}
+		return this.model.getOptions();
 	}
 }

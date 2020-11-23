@@ -10,7 +10,6 @@ import {
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import isEmpty from "lodash/isEmpty";
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -19,7 +18,6 @@ import { area, line } from "d3-shape";
 import { event } from "d3-selection";
 
 export class ZoomBar extends Component {
-	protected model: ChartModelCartesian;
 	type = "zoom-bar";
 
 	// The minimum selection x range to trigger handler update
@@ -41,6 +39,8 @@ export class ZoomBar extends Component {
 	xScale: any;
 	yScale: any;
 
+	protected model: ChartModelCartesian;
+
 	init() {
 		this.services.events.addEventListener(
 			Events.ZoomBar.UPDATE,
@@ -48,7 +48,7 @@ export class ZoomBar extends Component {
 		);
 		// check if pre-defined zoom bar data exists
 		const definedZoomBarData = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"data"
@@ -69,7 +69,7 @@ export class ZoomBar extends Component {
 		);
 
 		const zoombarType = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"type"
@@ -129,7 +129,7 @@ export class ZoomBar extends Component {
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			let zoomBarData = this.services.zoom.getZoomBarData();
-			if (isEmpty(zoomBarData)) {
+			if (Tools.isEmpty(zoomBarData)) {
 				// if there's no zoom bar data we can't do anything
 				return;
 			}
@@ -150,7 +150,7 @@ export class ZoomBar extends Component {
 			const oldInitialZoomDomain = this.model.get("initialZoomDomain");
 			// get new initialZoomDomain from option
 			const newInitialZoomDomain = Tools.getProperty(
-				this.model.getOptions(),
+				this.getOptions(),
 				"zoomBar",
 				AxisPositions.TOP,
 				"initialZoomDomain"
@@ -289,7 +289,7 @@ export class ZoomBar extends Component {
 		};
 
 		const zoombarType = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"type"
@@ -361,7 +361,7 @@ export class ZoomBar extends Component {
 		const handleWidth = Configuration.zoomBar.handleWidth;
 
 		const zoombarType = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"type"
@@ -451,7 +451,7 @@ export class ZoomBar extends Component {
 
 	updateSliderSelectedArea(selection) {
 		const zoombarType = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"type"
@@ -511,7 +511,7 @@ export class ZoomBar extends Component {
 		);
 
 		const zoombarType = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"zoomBar",
 			AxisPositions.TOP,
 			"type"

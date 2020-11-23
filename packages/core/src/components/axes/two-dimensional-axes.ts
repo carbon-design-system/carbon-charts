@@ -24,7 +24,7 @@ export class TwoDimensionalAxes extends Component {
 	render(animate = false) {
 		const axes = {};
 		const axisPositions = Object.keys(AxisPositions);
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const axesOptions = Tools.getProperty(this.getOptions(), "axes");
 
 		axisPositions.forEach((axisPosition) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]];
@@ -83,9 +83,19 @@ export class TwoDimensionalAxes extends Component {
 			if (child.getTitleRef().empty()) {
 				offset = 0;
 			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
-					useBBox: true
-				}).height;
+				offset = DOMUtils.getSVGElementSize(
+					child.getTitleRef(),
+					{
+						useBBox: true
+					}
+				).height;
+
+				if (
+					axisPosition === AxisPositions.LEFT ||
+					axisPosition === AxisPositions.RIGHT
+				) {
+					offset += 5;
+				}
 			}
 
 			switch (axisPosition) {
@@ -130,7 +140,7 @@ export class TwoDimensionalAxes extends Component {
 
 	addAxisThresholds(animate, axisPosition) {
 		const axesOptions = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"axes",
 			axisPosition
 		);

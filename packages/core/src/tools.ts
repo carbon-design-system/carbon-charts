@@ -12,6 +12,9 @@ import {
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
+	flatten as lodashFlatten,
+	camelCase as lodashCamelCase,
+	isEmpty as lodashIsEmpty,
 	isEqual as lodashIsEqual,
 	flatMapDeep as lodashFlatMapDeep,
 	kebabCase as lodashKebabCase,
@@ -33,6 +36,9 @@ export namespace Tools {
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
+	export const flatten = lodashFlatten;
+	export const camelCase = lodashCamelCase;
+	export const isEmpty = lodashIsEmpty;
 	export const isEqual = lodashIsEqual;
 	export const flatMapDeep = lodashFlatMapDeep;
 	export const kebabCase = lodashKebabCase;
@@ -51,7 +57,7 @@ export namespace Tools {
 			clearTimeout(timer);
 
 			timer = setTimeout(function () {
-				//and use the reference here
+				// and use the reference here
 				fn.apply(context, args);
 			}, delay);
 		};

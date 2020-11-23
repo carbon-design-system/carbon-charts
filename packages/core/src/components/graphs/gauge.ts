@@ -6,7 +6,8 @@ import {
 	Events,
 	GaugeTypes,
 	ArrowDirections,
-	ColorClassNameTypes
+	ColorClassNameTypes,
+	Alignments
 } from "../../interfaces";
 import { Tools } from "../../tools";
 
@@ -47,7 +48,7 @@ export class Gauge extends Component {
 	}
 
 	getArcRatio(): number {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const type = Tools.getProperty(options, "gauge", "type");
 		const arcRatio = type === GaugeTypes.FULL ? 1 : 0.5;
 		return arcRatio;
@@ -67,7 +68,7 @@ export class Gauge extends Component {
 
 	// use provided arrow direction or default to using the delta
 	getArrow(delta): string {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const arrowDirection = Tools.getProperty(
 			options,
 			"gauge",
@@ -90,7 +91,7 @@ export class Gauge extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
@@ -127,33 +128,45 @@ export class Gauge extends Component {
 
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground").data([value]);
+		const arcEnter = arcValue.enter().append("path");
 
-		arcValue
-			.enter()
-			.append("path")
-			.attr("class", (d) =>
+		arcEnter
+			.merge(arcValue)
+			.attr(
+				"class",
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: d[groupMapsTo],
+					dataGroupName: "value",
 					originalClassName: "arc-foreground"
 				})
 			)
 			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
-			.merge(arcValue)
 			.attr("d", this.arc)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")
 			.attr("aria-label", (d) => d.value);
 
-		// Position Arc
-		svg.attr("transform", `translate(${radius}, ${radius})`);
-
 		// draw the value and delta to the center
 		this.drawValueNumber();
 		this.drawDelta();
 
 		arcValue.exit().remove();
+
+		const alignment = Tools.getProperty(options, "gauge", "alignment");
+
+		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
+			useAttr: true
+		});
+
+		// Position gauge
+		let gaugeTranslateX = radius;
+		if (alignment === Alignments.CENTER) {
+			gaugeTranslateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			gaugeTranslateX = width - radius;
+		}
+		svg.attr("transform", `translate(${gaugeTranslateX}, ${radius})`);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -164,7 +177,7 @@ export class Gauge extends Component {
 	 */
 	drawValueNumber() {
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, "gauge", "type");
 		const value = this.getValue();
@@ -250,7 +263,7 @@ export class Gauge extends Component {
 	drawDelta() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const delta = this.getDelta();
 
 		// Sizing and positions relative to the radius
@@ -357,7 +370,7 @@ export class Gauge extends Component {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		const arcWidth = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"gauge",
 			"arcWidth"
 		);
@@ -367,7 +380,7 @@ export class Gauge extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent
-			.selectAll("path.arc")
+			.selectAll("path.arc-foreground")
 			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
@@ -404,7 +417,7 @@ export class Gauge extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const arcType = Tools.getProperty(options, "gauge", "type");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
