@@ -326,8 +326,8 @@ export interface RadarChartOptions extends BaseChartOptions {
  * options specific to combo bar charts
  */
 export interface ComboChartOptions extends AxisChartOptions {
-	comboChartTypes: Array<{
-		type?: ChartTypes;
+	comboChartTypes?: Array<{
+		type: ChartTypes;
 		options?: object;
 		correspondingDatasets: Array<string>;
 	}>;
