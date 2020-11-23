@@ -105,10 +105,7 @@ export class Scatter extends Component {
 			);
 
 		// Remove circles that need to be removed
-		circles
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		circles.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const enteringCircles = circles

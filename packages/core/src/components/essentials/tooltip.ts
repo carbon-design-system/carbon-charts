@@ -38,9 +38,7 @@ export class Tooltip extends Component {
 		);
 
 		// if there is a provided tooltip HTML function call it
-		if (
-			Tools.getProperty(this.getOptions(), "tooltip", "customHTML")
-		) {
+		if (Tools.getProperty(this.getOptions(), "tooltip", "customHTML")) {
 			if (e.detail.content) {
 				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
 				tooltipTextContainer.html(labelHTML);

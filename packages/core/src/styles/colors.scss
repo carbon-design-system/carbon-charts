@@ -11,7 +11,7 @@
 	} @else {
 		@return color-property(null, $white-theme-colors);
 	}
-};
+}
 
 @function color-property($name, $theme-colors) {
 	$color-items: ();
@@ -22,19 +22,19 @@
 				$color-items: map-merge(
 					$color-items,
 					color-property("#{$category}", $value)
-				)
+				);
 			} @else {
 				$color-items: map-merge(
 					$color-items,
 					color-property("#{$name}-#{$category}", $value)
-				)
+				);
 			}
 		}
 		@return $color-items;
 	} @else {
 		@return (#{$name}: $theme-colors);
 	}
-};
+}
 
 .#{$prefix}--#{$charts-prefix}--chart-svg {
 	$color-map: getThemeColors();

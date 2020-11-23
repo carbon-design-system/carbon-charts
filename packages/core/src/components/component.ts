@@ -75,13 +75,19 @@ export class Component {
 				"prefix"
 			);
 			this.parent
-				.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true)
-				.attr( "id", this.id);
+				.classed(
+					`${settings.prefix}--${chartprefix}--${this.type}`,
+					true
+				)
+				.attr("id", this.id);
 
 			if (oldParent) {
 				oldParent
-					.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false)
-					.attr( "id", this.id);
+					.classed(
+						`${settings.prefix}--${chartprefix}--${this.type}`,
+						false
+					)
+					.attr("id", this.id);
 			}
 		}
 	}
@@ -124,7 +130,11 @@ export class Component {
 	 */
 	getOptions() {
 		if (this.configs.options) {
-			const options = Tools.merge({}, this.model.getOptions(), this.configs.options);
+			const options = Tools.merge(
+				{},
+				this.model.getOptions(),
+				this.configs.options
+			);
 			return options;
 		}
 		return this.model.getOptions();

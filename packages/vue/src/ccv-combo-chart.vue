@@ -11,8 +11,8 @@ export default {
 	mounted() {
 		this.coreChart = new ComboChart(this.$el, {
 			data: this.data,
-			options: this.options
+			options: this.options,
 		});
-	}
+	},
 };
 </script>

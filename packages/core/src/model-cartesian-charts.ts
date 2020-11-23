@@ -1,10 +1,7 @@
 // Internal Imports
 import { ChartModel } from "./model";
 import { Tools } from "./tools";
-import {
-	ScaleTypes,
-	AxisPositions
-} from "./interfaces";
+import { ScaleTypes, AxisPositions } from "./interfaces";
 
 /**
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
