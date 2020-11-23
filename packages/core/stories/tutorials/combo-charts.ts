@@ -1,7 +1,7 @@
 import marked from "marked";
 
 export const comboChartTutorial = {
-	name: "Combo Chart Tutorial",
+	name: "Combo charts",
 	content: marked(`
 # Combo charts
 Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
@@ -29,6 +29,7 @@ Supported \`ChartTypes\` to combine:
 Below is an example of combining a carbon-charts \`AreaChart\` with a \`LineChart\`.
 
 \`\`\`
+import { ChartTypes } "@carbon/charts/interfaces";
 const verySimpleComboData = [
     { group: "Dataset 1", value: 650, date: "Tuesday" },
 	{ group: "Dataset 2", value: 296, date: "Tuesday" }
@@ -40,12 +41,12 @@ const comboOptions = {
 	axes: {...}
 	comboChartTypes: [ // takes an array of objects
 		{
-			type: "area" // use a valid ChartType from enums
+			type: ChartTypes.AREA // use a valid ChartType from enums
 			options: {}, // component specific options (i.e, turn on the scatter points, adjust scatter radius)
 			correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
 		},
 		{
-			type: "line" // use a valid ChartType from enums
+			type: ChartTypes.LINE // use a valid ChartType from enums
 			options: {
 				points: {
 					enabled: false; // disable the point on the LineChart won't affect the points in the AreaChart
@@ -70,11 +71,10 @@ Below is an example of combining a carbon-charts \`AreaChart\` with a standalone
 
 
 \`\`\`
-// import standanlone componentry
-import {
-	Line
-} from ".././../src/components/index";
-import { options } from ".././../src/configuration"; // need include base options for the carbon-chart if you are using a component separately
+// import standalone componentry
+import { Line } from "@carbon/charts/components/index";
+import { options } from "@carbon/charts/configuration"; // need to include base options for the carbon-chart if you are using a component separately
+import { ChartTypes } "@carbon/charts/interfaces";
 
 const verySimpleComboData = [
     { group: "Dataset 1", value: 650, date: "Tuesday" },
@@ -87,14 +87,14 @@ const comboOptions = {
 	axes: {...}
 	comboChartTypes: [ // takes an array of objects
 		{
-			type: "area" // use a valid ChartType from enums
+			type: ChartTypes.AREA // use a valid ChartType from enums
 			options: {},
 			correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
 		},
 		{
 			type: Line // using an imported class constructor
-			// add the base options for that type of chart if it is in the carbon-charts library and any additional configurations
-			options: Tools.merge({}, options.lineChart,  {
+			// add the base options for that type of chart if it is in the carbon-charts library and any additional configurations needed
+			options: Object.assign({}, options.lineChart,  {
 				points: {
 					enabled: false; // disable the point on the LineChart won't affect the points in the AreaChart
 				}
