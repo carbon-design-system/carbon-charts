@@ -1,7 +1,7 @@
 import marked from "marked";
 
 export const dualAxesTutorial = {
-	name: "Dual Axes Tutorial",
+	name: "Dual axes charts",
 	content: marked(`
 # Dual Axes Charts
 If a chart is considered to be a **dual axes** chart, it means that the chart uses 2 **different** axes for visually mapping out ranges for the data.
