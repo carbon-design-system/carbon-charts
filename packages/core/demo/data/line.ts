@@ -408,6 +408,9 @@ export const lineTimeSeriesRotatedTicksOptions = {
 		left: {
 			mapsTo: "value"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
