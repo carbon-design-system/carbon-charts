@@ -42,7 +42,7 @@ export class Tooltip extends Component {
 			Tools.getProperty(this.getOptions(), "tooltip", "customHTML")
 		) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 				tooltipTextContainer.html(labelHTML);
 			} else {
 				tooltipTextContainer.html(
@@ -184,7 +184,7 @@ export class Tooltip extends Component {
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
