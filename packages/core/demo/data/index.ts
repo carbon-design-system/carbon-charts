@@ -14,6 +14,7 @@ import * as radarDemos from "./radar";
 import * as treemapDemos from "./treemap";
 import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
+import * as comboDemos from "./combo";
 import * as highScaleDemos from "./high-scale";
 
 export * from "./area";
@@ -27,6 +28,7 @@ export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
+export * from "./combo";
 export * from "./treemap";
 
 import {
@@ -111,6 +113,11 @@ export const chartTypes = {
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
 	},
+	ComboChart: {
+		vanilla: "ComboChart",
+		angular: "ibm-combo-chart",
+		vue: "ccv-combo-chart"
+	},
 	TreemapChart: {
 		vanilla: "TreemapChart",
 		angular: "ibm-treemap-chart",
@@ -132,6 +139,12 @@ let allDemoGroups = [
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: false
+			},
+			{
+				options: areaDemos.areaDiscreteDomainOptions,
+				data: areaDemos.areaDiscreteDomain,
 				chartType: chartTypes.AreaChart
 			},
 			{
@@ -389,6 +402,12 @@ let allDemoGroups = [
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: false
+			},
+			{
+				options: bubbleDemos.bubbleDualDiscreteOptions,
+				data: bubbleDemos.bubbleDualDiscreteData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: false
 			}
 		]
 	},
@@ -505,6 +524,12 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: lineDemos.dualLine,
+				data: lineDemos.lineTimeSeriesDualAxesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
 				options: lineDemos.sparklineLoadingOptions,
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart
@@ -610,6 +635,12 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterSkeletonOptions,
 				data: scatterDemos.scatterSkeletonData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
+			},
+			{
+				options: scatterDemos.scatterDualAxesOptions,
+				data: scatterDemos.scatterDualAxesData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: false
 			}
@@ -810,6 +841,77 @@ let allDemoGroups = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart
+			}
+		]
+	},
+	{
+		title: "Combo",
+		demos: [
+			{
+				options: comboDemos.comboSimpleOptions,
+				data: comboDemos.comboSimpleData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedOptions,
+				data: comboDemos.comboStackedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboGroupedOptions,
+				data: comboDemos.comboGroupedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboGroupedHorizontalOptions,
+				data: comboDemos.comboGroupedHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboHorizontalOptions,
+				data: comboDemos.comboHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboAreaLineOptions,
+				data: comboDemos.comboAreaLineData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedAreaLineOptions,
+				data: comboDemos.comboStackedAreaLine,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboLineScatterOptions,
+				data: comboDemos.comboLineScatterData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboEmptyOptions,
+				data: comboDemos.comboEmptyData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboLoadingOptions,
+				data: comboDemos.comboLoadingData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboErrorOptions,
+				data: comboDemos.comboErrorData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
 			}
 		]
 	},

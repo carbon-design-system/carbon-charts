@@ -38,7 +38,7 @@ export class Threshold extends Component {
 	render(animate = false) {
 		const { value, fillColor, axisPosition, index } = this.configs;
 		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"style",
 			"prefix"
 		);
@@ -109,7 +109,7 @@ export class Threshold extends Component {
 			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
 			// Set hoverable area width and rotate it
 			thresholdRect
-				.attr("width", yScaleEnd - yScaleStart)
+				.attr("width", Math.abs(yScaleEnd - yScaleStart))
 				.classed("rotate", true);
 		} else {
 			const position =
@@ -126,7 +126,7 @@ export class Threshold extends Component {
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
 			// Set hoverable area width
-			thresholdRect.attr("width", xScaleEnd - xScaleStart);
+			thresholdRect.attr("width", Math.abs(xScaleEnd - xScaleStart));
 		}
 
 		const self = this;
@@ -151,7 +151,7 @@ export class Threshold extends Component {
 
 	getFormattedValue() {
 		const { value, axisPosition } = this.configs;
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(
 			axisPosition
 		);
