@@ -619,36 +619,14 @@ let allDemoGroups = [
 		title: "Lollipop",
 		demos: [
 			{
-				options: scatterDemos.doubleLinearScatterOptions,
-				data: scatterDemos.doubleLinearScatterData,
-				chartType: chartTypes.LollipopChart
-			},
-			{
-				options: scatterDemos.scatterTimeSeriesOptions,
-				data: scatterDemos.scatterTimeSeriesData,
-				chartType: chartTypes.LollipopChart
-			},
-			{
-				options: scatterDemos.scatterDiscreteOptions,
-				data: scatterDemos.scatterDiscreteData,
-				chartType: chartTypes.LollipopChart
-			},
-			{
 				options: lollipopDemos.lollipopDiscreteOptions,
 				data: lollipopDemos.lollipopDiscreteData,
 				chartType: chartTypes.LollipopChart
 			},
 			{
-				options: scatterDemos.scatterEmptyStateOptions,
-				data: scatterDemos.scatterEmptyStateData,
-				chartType: chartTypes.LollipopChart,
-				isDemoExample: false
-			},
-			{
-				options: scatterDemos.scatterSkeletonOptions,
-				data: scatterDemos.scatterSkeletonData,
-				chartType: chartTypes.LollipopChart,
-				isDemoExample: false
+				options: lollipopDemos.lollipopDiscretePresentationOptions,
+				data: lollipopDemos.lollipopDiscretePresentationData,
+				chartType: chartTypes.LollipopChart
 			}
 		]
 	},

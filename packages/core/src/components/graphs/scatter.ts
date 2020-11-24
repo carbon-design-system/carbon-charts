@@ -51,6 +51,32 @@ export class Scatter extends Component {
 		return data;
 	}
 
+	getScatterData() {
+		const options = this.model.getOptions();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const { stacked } = this.configs;
+
+		let scatterData;
+		if (stacked) {
+			const percentage = Object.keys(options.axes).some(
+				(axis) => options.axes[axis].percentage
+			);
+			scatterData = this.model.getStackedData({ percentage });
+		} else {
+			scatterData = this.model
+				.getDisplayData()
+				.filter(
+					(d) =>
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+				);
+		}
+
+		// filter out datapoints that aren't part of the zoomed domain
+		return this.filterBasedOnZoomDomain(scatterData);
+	}
+
 	render(animate: boolean) {
 		const isScatterEnabled =
 			Tools.getProperty(this.model.getOptions(), "points", "enabled") ||
@@ -66,32 +92,12 @@ export class Scatter extends Component {
 		const { groupMapsTo } = options.data;
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
-		const { stacked } = this.configs;
-		if (stacked) {
-			const percentage = Object.keys(options.axes).some(
-				(axis) => options.axes[axis].percentage
-			);
-			this.scatterData = this.model.getStackedData({ percentage });
-		} else {
-			this.scatterData = this.model
-				.getDisplayData()
-				.filter(
-					(d) =>
-						d[rangeIdentifier] !== undefined &&
-						d[rangeIdentifier] !== null
-				);
-		}
-
-		// filter out datapoints that aren't part of the zoomed domain
-		this.scatterData = this.filterBasedOnZoomDomain(this.scatterData);
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
 			.data(
-				this.scatterData,
+				this.getScatterData(),
 				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 

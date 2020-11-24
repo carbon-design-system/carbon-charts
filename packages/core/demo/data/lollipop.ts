@@ -18,3 +18,22 @@ export const lollipopDiscreteOptions = {
 		}
 	}
 };
+
+export const lollipopDiscretePresentationData = lollipopDiscreteData;
+
+export const lollipopDiscretePresentationOptions = {
+	title: "Lollipop (horizontal) - presentation",
+	axes: {
+		left: {
+			title: "2019 Annual Sales Figures",
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		bottom: {
+			mapsTo: "value"
+		}
+	},
+	points: {
+		radius: 7
+	}
+};

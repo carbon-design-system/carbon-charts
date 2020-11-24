@@ -3,6 +3,7 @@ import {
 	BaseChartOptions,
 	AxisChartOptions,
 	ScatterChartOptions,
+	LollipopChartOptions,
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
@@ -245,6 +246,11 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
+ * options specific to lollipop charts
+ */
+const lollipopChart: LollipopChartOptions = scatterChart as LollipopChartOptions;
+
+/**
  * options specific to line charts
  */
 const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
@@ -399,6 +405,7 @@ export const options = {
 	areaChart,
 	stackedAreaChart,
 	scatterChart,
+	lollipopChart,
 	pieChart,
 	donutChart,
 	meterChart,

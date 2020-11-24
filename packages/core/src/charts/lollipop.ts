@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, ScatterChartOptions } from "../interfaces/index";
+import { ChartConfig, LollipopChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Skeletons } from "../interfaces/enums";
 
@@ -9,6 +9,7 @@ import { Skeletons } from "../interfaces/enums";
 import {
 	Grid,
 	Ruler,
+	Scatter,
 	Lollipop,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -21,7 +22,7 @@ import {
 export class LollipopChart extends AxisChart {
 	constructor(
 		holder: Element,
-		chartConfigs: ChartConfig<ScatterChartOptions>
+		chartConfigs: ChartConfig<LollipopChartOptions>
 	) {
 		super(holder, chartConfigs);
 
@@ -29,7 +30,7 @@ export class LollipopChart extends AxisChart {
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.scatterChart,
+				Configuration.options.lollipopChart,
 				chartConfigs.options
 			)
 		);
@@ -45,6 +46,7 @@ export class LollipopChart extends AxisChart {
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Lollipop(this.model, this.services),
+			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID
 			})
