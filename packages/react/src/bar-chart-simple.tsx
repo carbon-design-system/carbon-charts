@@ -1,5 +1,4 @@
 import React from "react";
-
 import { SimpleBarChart as SBC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, BarChartOptions } from "@carbon/charts/interfaces";

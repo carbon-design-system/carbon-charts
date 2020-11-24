@@ -1,5 +1,4 @@
 import React from "react";
-
 import { GaugeChart as GC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, GaugeChartOptions } from "@carbon/charts/interfaces";

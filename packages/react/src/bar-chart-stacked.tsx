@@ -1,5 +1,4 @@
 import React from "react";
-
 import { StackedBarChart as SBC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, StackedBarChartOptions } from "@carbon/charts/interfaces";

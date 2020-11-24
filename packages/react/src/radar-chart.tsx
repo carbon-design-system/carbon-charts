@@ -1,5 +1,4 @@
 import React from "react";
-
 import { RadarChart as RC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, RadarChartOptions } from "@carbon/charts/interfaces";

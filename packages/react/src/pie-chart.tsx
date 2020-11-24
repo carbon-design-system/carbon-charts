@@ -1,5 +1,4 @@
 import React from "react";
-
 import { PieChart as PC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, PieChartOptions } from "@carbon/charts/interfaces";

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { MeterChart as MC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, MeterChartOptions } from "@carbon/charts/interfaces";

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { GroupedBarChart as GBC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, BarChartOptions } from "@carbon/charts/interfaces";

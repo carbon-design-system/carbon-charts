@@ -1,17 +1,13 @@
 import React from "react";
 import { Chart as ChartType } from "@carbon/charts/chart";
-import { BaseChartOptions, ChartConfig } from "@carbon/charts/interfaces";
-
-export type TabularData = Record<string, any>[];
-
-export interface BaseChartData extends Pick<ChartConfig<BaseChartOptions>, "data"> {}
+import { ChartTabularData, BaseChartOptions, ChartConfig } from "@carbon/charts/interfaces";
 
 type Props<Options, Data> = { options?: Options; data?: Data } | ChartConfig<Options>;
 
 export default class BaseChart<
   Options = BaseChartOptions,
   Chart = ChartType,
-  Data = BaseChartData,
+  Data = ChartTabularData,
 > extends React.Component<Props<Options, Data>> {
   data: Data | {};
   options: Options | {};

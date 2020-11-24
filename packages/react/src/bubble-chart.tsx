@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BubbleChart as BC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, BubbleChartOptions } from "@carbon/charts/interfaces";

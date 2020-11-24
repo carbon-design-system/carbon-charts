@@ -1,5 +1,4 @@
 import React from "react";
-
 import { StackedAreaChart as SAC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import {

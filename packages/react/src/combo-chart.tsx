@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ComboChart as CC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, ComboChartOptions } from "@carbon/charts/interfaces";

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { TreemapChart as TC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, TreemapChartOptions } from "@carbon/charts/interfaces";

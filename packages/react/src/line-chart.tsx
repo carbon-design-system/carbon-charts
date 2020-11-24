@@ -1,22 +1,17 @@
 import React from "react";
 import { LineChart as LC } from "@carbon/charts";
 import {
-  ChartData,
+  ChartConfig,
   LineChartOptions,
 } from "@carbon/charts/interfaces";
-import BaseChart, { TabularData } from "./base-chart";
+import BaseChart from "./base-chart";
 
-type LineChartData =
-  | TabularData
-  | ChartData
-  | Promise<ChartData>;
+type LineChartProps = ChartConfig<LineChartOptions>;
 
-export default class LineChart extends BaseChart<
-  LineChartOptions,
-  LC,
-  LineChartData
-> {
+export default class LineChart extends BaseChart<LineChartOptions> {
   chartRef?: HTMLDivElement;
+  props!: LineChartProps;
+  chart!: LC;
 
   componentDidMount() {
     this.chart = new LC(this.chartRef!, {

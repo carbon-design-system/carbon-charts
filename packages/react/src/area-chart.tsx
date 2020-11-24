@@ -1,5 +1,4 @@
 import React from "react";
-
 import { AreaChart as AC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 import { ChartConfig, AreaChartOptions } from "@carbon/charts/interfaces";

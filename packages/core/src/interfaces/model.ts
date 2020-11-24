@@ -1,5 +1,7 @@
 import { AxisChartOptions } from "./charts";
 
+export type ChartTabularData = Record<string, any>[];
+
 /**
  * Configuration passed to the chart.
  *
