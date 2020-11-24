@@ -1,10 +1,4 @@
-import {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections,
-	Alignments,
-	ChartTypes
-} from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections, Alignments, ChartTypes } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -215,7 +209,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+	};
 }
 
 /**
@@ -229,7 +223,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
@@ -243,7 +237,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+		};
 }
 
 /**
