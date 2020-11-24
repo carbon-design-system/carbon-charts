@@ -5,7 +5,7 @@ export const comboChartTutorial = {
 	content: marked(`
 # Combo charts
 Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
-Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see [this tutorial](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--dual-axes-charts).
+Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see [this tutorial](/?path=/story/tutorials--dual-axes-charts).
 
 *Note: \`ComboChart\` extends axis chart functionality and should only comprise of graphs/components that use axes.*
 
@@ -29,7 +29,7 @@ Supported \`ChartTypes\` to combine:
 Below is an example of combining a carbon-charts \`AreaChart\` with a \`LineChart\`.
 
 \`\`\`
-import { ChartTypes } "@carbon/charts/interfaces";
+import { ChartTypes } from "@carbon/charts/interfaces/enums";
 const verySimpleComboData = [
     { group: "Dataset 1", value: 650, date: "Tuesday" },
 	{ group: "Dataset 2", value: 296, date: "Tuesday" }
@@ -72,9 +72,9 @@ Below is an example of combining a carbon-charts \`AreaChart\` with a standalone
 
 \`\`\`
 // import standalone componentry
-import { Line } from "@carbon/charts/components/index";
+import { Line } from "@carbon/charts/components/graphs/Line";
 import { options } from "@carbon/charts/configuration"; // need to include base options for the carbon-chart if you are using a component separately
-import { ChartTypes } "@carbon/charts/interfaces";
+import { ChartTypes } from "@carbon/charts/interfaces/enums";
 
 const verySimpleComboData = [
     { group: "Dataset 1", value: 650, date: "Tuesday" },
