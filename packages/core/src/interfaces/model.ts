@@ -9,7 +9,7 @@ export type ChartTabularData = Record<string, any>[];
  */
 export interface ChartConfig<T extends AxisChartOptions> {
 	options: T;
-	data: ChartData | Promise<ChartData>;
+	data: ChartTabularData;
 }
 
 export interface DataSet {

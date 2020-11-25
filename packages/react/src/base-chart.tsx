@@ -1,20 +1,18 @@
 import React from "react";
-import { Chart as ChartType } from "@carbon/charts/chart";
-import { ChartTabularData, BaseChartOptions, ChartConfig } from "@carbon/charts/interfaces";
+import { Chart as BaseChartType } from "@carbon/charts/chart";
+import { ChartTabularData, BaseChartOptions} from "@carbon/charts/interfaces";
 
-type Props<Options, Data> = { options?: Options; data?: Data } | ChartConfig<Options>;
+type Props<Options> = { options?: Options; data?: ChartTabularData };
 
 export default class BaseChart<
-  Options = BaseChartOptions,
-  Chart = ChartType,
-  Data = ChartTabularData,
-> extends React.Component<Props<Options, Data>> {
-  data: Data | {};
+  Options = BaseChartOptions
+> extends React.Component<Props<Options>> {
+  data: ChartTabularData | [];
   options: Options | {};
-  props!: Props<Options, Data>;
-  chart!: Chart;
+  props!: Props<Options>;
+  chart!: BaseChartType;
 
-  constructor(props: Props<Options, Data>) {
+  constructor(props: Props<Options>) {
     super(props);
 
     const { options, data } = props;
@@ -27,13 +25,13 @@ export default class BaseChart<
       console.error("Missing data!");
     }
 
-    this.data = props.data || {};
+    this.data = props.data || [];
     this.options = props.options || {};
 
     Object.assign(this, this.chart);
   }
 
-  shouldComponentUpdate(nextProps: Props<Options, Data>) {
+  shouldComponentUpdate(nextProps: Props<Options>) {
     return (
       this.props.data !== nextProps.data ||
       this.props.options !== nextProps.options
@@ -41,9 +39,7 @@ export default class BaseChart<
   }
 
   componentDidUpdate() {
-    // @ts-ignore
     this.chart.model.setData(this.props.data);
-    // @ts-ignore
     this.chart.model.setOptions(this.props.options);
   }
 }
