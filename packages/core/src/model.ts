@@ -469,7 +469,7 @@ export class ChartModel {
 			return null;
 		}
 		const options = this.getOptions();
-		const defaultFillColor = this.colorScale[group];
+		const defaultFillColor = Tools.getProperty(this.colorScale, group);
 
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
@@ -484,9 +484,7 @@ export class ChartModel {
 		}
 
 		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale[group]
-			? this.colorScale[group]
-			: null;
+		const defaultStrokeColor = Tools.getProperty(this.colorScale, group);
 
 		if (options.getStrokeColor) {
 			return options.getStrokeColor(group, key, data, defaultStrokeColor);
