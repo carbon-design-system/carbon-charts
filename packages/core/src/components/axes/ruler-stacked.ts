@@ -3,7 +3,7 @@ import { Events } from "../../interfaces";
 
 import { Ruler } from "./ruler";
 
-export class StackedBarRuler extends Ruler {
+export class StackedRuler extends Ruler {
 	formatTooltipData(tooltipData) {
 		return tooltipData.reverse();
 	}
