@@ -53,9 +53,13 @@ export class AxisChartsTooltip extends Tooltip {
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
-			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({datum});
+			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({
+				datum
+			});
 			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
-			const rangeAxisOptions = cartesianScales.getAxisOptions(rangeAxisPosition);
+			const rangeAxisOptions = cartesianScales.getAxisOptions(
+				rangeAxisPosition
+			);
 
 			let rangeLabel = rangeAxisOptions.title;
 			if (!rangeLabel) {
@@ -100,7 +104,9 @@ export class AxisChartsTooltip extends Tooltip {
 				data
 					.map((datum) => ({
 						label: datum[groupMapsTo],
-						value: this.valueFormatter(datum[cartesianScales.getRangeIdentifier(datum)]),
+						value: this.valueFormatter(
+							datum[cartesianScales.getRangeIdentifier(datum)]
+						),
 						color: this.model.getFillColor(datum[groupMapsTo]),
 						class: this.model.getColorClassName({
 							classNameTypes: [ColorClassNameTypes.TOOLTIP],
@@ -111,7 +117,10 @@ export class AxisChartsTooltip extends Tooltip {
 			);
 
 			const dualAxes = cartesianScales.isDualAxes();
-			if (!dualAxes && Tools.getProperty(options, "tooltip", "showTotal") === true) {
+			if (
+				!dualAxes &&
+				Tools.getProperty(options, "tooltip", "showTotal") === true
+			) {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				items.push({

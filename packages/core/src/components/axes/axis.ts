@@ -562,7 +562,9 @@ export class Axis extends Component {
 			axisScaleType === ScaleTypes.LABELS &&
 			!userProvidedTickValues
 		) {
-			const axisTickLabels = this.services.cartesianScales.getScaleDomain(axisPosition);
+			const axisTickLabels = this.services.cartesianScales.getScaleDomain(
+				axisPosition
+			);
 			if (axisTickLabels.length > 0) {
 				const tick_html = svg
 					.select(`g.axis.${axisPosition} g.ticks g.tick`)
