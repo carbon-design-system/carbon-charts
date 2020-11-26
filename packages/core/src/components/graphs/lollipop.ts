@@ -1,10 +1,25 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { Tools } from "../../tools";
-import { CartesianOrientations, ColorClassNameTypes } from "../../interfaces";
+import { CartesianOrientations, ColorClassNameTypes, Events } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 export class Lollipop extends Scatter {
 	type = "lollipop";
+
+	init() {
+		const { events } = this.services;
+		// Highlight correct line legend item hovers
+		events.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		// Un-highlight lines on legend item mouseouts
+		events.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
+	}
 
 	render(animate: boolean) {
 		// Grab container SVG
@@ -85,5 +100,53 @@ export class Lollipop extends Scatter {
 					(d, i) => (getYValue(d, i) as any) + options.points.radius
 				);
 		}
+	}
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		this.parent
+			.selectAll("line.line")
+			.transition(
+				this.services.transitions.getTransition("legend-hover-line")
+			)
+			.attr("opacity", (d) => {
+				if (d[groupMapsTo] !== hoveredElement.datum()["name"]) {
+					return Configuration.lines.opacity.unselected;
+				}
+
+				return Configuration.lines.opacity.selected;
+			});
+	};
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("line.line")
+			.transition(
+				this.services.transitions.getTransition("legend-mouseout-line")
+			)
+			.attr("opacity", Configuration.lines.opacity.selected);
+	};
+
+	destroy() {
+		// Remove event listeners
+		this.parent
+			.selectAll("line.line")
+			.on("mousemove", null)
+			.on("mouseout", null);
+
+		// Remove legend listeners
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }
