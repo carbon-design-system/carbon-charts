@@ -7,13 +7,14 @@ export class ZeroLine extends Component {
 	type = "zero-line";
 
 	render(animate: boolean) {
-		const axisPosition = this.services.cartesianScales.getRangeAxisPosition({groups: this.configs.groups});
-		const rangeScale = this.services.cartesianScales.getScaleByPosition(axisPosition);
+		const axisPosition = this.services.cartesianScales.getRangeAxisPosition(
+			{ groups: this.configs.groups }
+		);
+		const rangeScale = this.services.cartesianScales.getScaleByPosition(
+			axisPosition
+		);
 		// check the domain
-		const [
-			minDomainValue,
-			maxDomainValue
-		] = rangeScale.domain();
+		const [minDomainValue, maxDomainValue] = rangeScale.domain();
 
 		const drawZeroLine =
 			(minDomainValue > 0 && maxDomainValue < 0) ||
@@ -32,7 +33,7 @@ export class ZeroLine extends Component {
 
 		// Get x & y position of the line
 		const [x0, x1] = this.services.cartesianScales.getDomainScale().range();
-		let yPosition = +rangeScale(0)  + 0.5;
+		let yPosition = +rangeScale(0) + 0.5;
 
 		// if scale domain contains NaN, return the first value of the range
 		// this is necessary for the zero line y position that otherwise is NaN

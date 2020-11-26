@@ -408,6 +408,9 @@ export const lineTimeSeriesRotatedTicksOptions = {
 		left: {
 			mapsTo: "value"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -517,9 +520,7 @@ export const dualLine = {
 		right: {
 			title: "Rainfall (mm)",
 			mapsTo: "rainfall",
-			correspondingDatasets: [
-				"Rainfall"
-			]
+			correspondingDatasets: ["Rainfall"]
 		}
 	},
 	curve: "curveMonotoneX"

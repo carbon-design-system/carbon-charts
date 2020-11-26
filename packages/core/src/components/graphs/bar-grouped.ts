@@ -49,7 +49,9 @@ export class GroupedBar extends Bar {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		const allDataLabels = map(displayData, (datum) => {
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+				datum
+			);
 			return datum[domainIdentifier];
 		}).keys();
 
@@ -140,8 +142,13 @@ export class GroupedBar extends Bar {
 
 				const x0 = startX;
 				const x1 = startX + barWidth;
-				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition({datum: d});
-				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(rangeAxis, 0);
+				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition(
+					{ datum: d }
+				);
+				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(
+					rangeAxis,
+					0
+				);
 				const y1 = this.services.cartesianScales.getRangeValue(d);
 
 				// don't show if part of bar is out of zoom domain
@@ -238,9 +245,11 @@ export class GroupedBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition("graph_element_mouseout_fill_update"));
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseout_fill_update"
+					)
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
@@ -279,7 +288,9 @@ export class GroupedBar extends Bar {
 		const displayData = this.model.getDisplayData(this.configs.groups);
 
 		return displayData.filter((datum) => {
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum);
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+				datum
+			);
 			return datum[domainIdentifier] === label;
 		});
 	}
@@ -333,7 +344,9 @@ export class GroupedBar extends Bar {
 	}
 
 	protected setGroupScale() {
-		const activeData = this.model.getActiveDataGroupNames(this.configs.groups);
+		const activeData = this.model.getActiveDataGroupNames(
+			this.configs.groups
+		);
 
 		this.groupScale = scaleBand()
 			.domain(activeData)

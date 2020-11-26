@@ -75,20 +75,25 @@ export class Bubble extends Scatter {
 				})
 			)
 			.attr("fill", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
-				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
-				}
-			)
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
+				return this.model.getFillColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				);
+			})
 			.attr("stroke", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
 				);
-			}
-
-			)
+			})
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);
 	}
