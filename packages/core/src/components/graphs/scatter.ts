@@ -67,6 +67,8 @@ export class Scatter extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
 		const { stacked } = this.configs;
 		let scatterData;
 		if (stacked) {
@@ -95,7 +97,12 @@ export class Scatter extends Component {
 		scatterData = this.filterBasedOnZoomDomain(scatterData);
 
 		// Update data on dot groups
-		const circles = svg.selectAll("circle.dot").data(scatterData);
+		const circles = svg
+			.selectAll("circle.dot")
+			.data(
+				scatterData,
+				(d) => `${d[groupMapsTo]}-${d[domainIdentifier]}`
+			);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();

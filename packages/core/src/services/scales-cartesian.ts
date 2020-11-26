@@ -362,7 +362,8 @@ export class CartesianScales extends Service {
 		if (
 			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
 				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") === true ||
+			Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") ===
+				true ||
 			(dualAxes &&
 				Tools.getProperty(
 					axesOptions,
@@ -389,7 +390,8 @@ export class CartesianScales extends Service {
 		if (
 			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
 				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true ||
+			Tools.getProperty(axesOptions, AxisPositions.TOP, "main") ===
+				true ||
 			(dualAxes &&
 				Tools.getProperty(
 					axesOptions,
@@ -446,8 +448,10 @@ export class CartesianScales extends Service {
 		// if neither the horizontal axes are label or time
 		// and atleast  one of the main vertical ones are labels or time then it should be horizontal
 		if (
-			(!(mainHorizontalScaleType === ScaleTypes.LABELS ||
-				mainHorizontalScaleType === ScaleTypes.TIME) &&
+			(!(
+				mainHorizontalScaleType === ScaleTypes.LABELS ||
+				mainHorizontalScaleType === ScaleTypes.TIME
+			) &&
 				mainVerticalScaleType === ScaleTypes.LABELS) ||
 			mainVerticalScaleType === ScaleTypes.TIME
 		) {
