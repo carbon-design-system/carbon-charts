@@ -8,6 +8,7 @@ import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
+	scatterData: any;
 
 	init() {
 		const { events } = this.services;
@@ -52,24 +53,11 @@ export class Scatter extends Component {
 		return data;
 	}
 
-	render(animate: boolean) {
-		const isScatterEnabled =
-			Tools.getProperty(this.getOptions(), "points", "enabled") ||
-			Tools.getProperty(this.getOptions(), "bubble", "enabled");
-
-		if (!isScatterEnabled) {
-			return;
-		}
-
-		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
-
+	getScatterData() {
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		const { stacked } = this.configs;
+
 		let scatterData;
 		if (stacked) {
 			const percentage = Object.keys(options.axes).some(
@@ -94,14 +82,32 @@ export class Scatter extends Component {
 		}
 
 		// filter out datapoints that aren't part of the zoomed domain
-		scatterData = this.filterBasedOnZoomDomain(scatterData);
+		return this.filterBasedOnZoomDomain(scatterData);
+	}
+
+	render(animate: boolean) {
+		const isScatterEnabled =
+			Tools.getProperty(this.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.getOptions(), "bubble", "enabled");
+
+		if (!isScatterEnabled) {
+			return;
+		}
+
+		// Grab container SVG
+		const svg = this.getContainerSVG({ withinChartClip: true });
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
 			.data(
-				scatterData,
-				(d) => `${d[groupMapsTo]}-${d[domainIdentifier]}`
+				this.getScatterData(),
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 
 		// Remove circles that need to be removed

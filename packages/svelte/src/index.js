@@ -6,6 +6,7 @@ import BarChartStacked from "./BarChartStacked.svelte";
 import BubbleChart from "./BubbleChart.svelte";
 import DonutChart from "./DonutChart.svelte";
 import LineChart from "./LineChart.svelte";
+import LollipopChart from "./LollipopChart.svelte";
 import PieChart from "./PieChart.svelte";
 import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
@@ -22,6 +23,7 @@ export {
 	BubbleChart,
 	DonutChart,
 	LineChart,
+	LollipopChart,
 	PieChart,
 	ScatterChart,
 	RadarChart,
