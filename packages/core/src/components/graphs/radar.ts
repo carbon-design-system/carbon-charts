@@ -54,7 +54,7 @@ export class Radar extends Component {
 		const data = this.model.getData();
 		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const {
@@ -506,7 +506,7 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				)
+				);
 			},
 			(exit) =>
 				exit.call((selection) =>
@@ -714,7 +714,7 @@ export class Radar extends Component {
 	// Given a flat array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: any) => {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const completeBlankData = Tools.flatMapDeep(
@@ -732,7 +732,7 @@ export class Radar extends Component {
 	// Given a a grouped array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeGroupedData = (dataset: any) => {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		return dataset.map(({ name, data }) => {
@@ -799,7 +799,7 @@ export class Radar extends Component {
 		const self = this;
 		const {
 			axes: { angle }
-		} = Tools.getProperty(this.model.getOptions(), "radar");
+		} = Tools.getProperty(this.getOptions(), "radar");
 
 		// events on x axes rects
 		this.parent
@@ -836,7 +836,7 @@ export class Radar extends Component {
 					(d) => d[angle] === datum
 				);
 
-				const options = self.model.getOptions();
+				const options = self.getOptions();
 				const { groupMapsTo } = options.data;
 				const valueMapsTo = Tools.getProperty(
 					options,

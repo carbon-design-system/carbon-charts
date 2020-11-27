@@ -13,6 +13,7 @@ import {
 	BubbleChartOptions,
 	RadarChartOptions,
 	ConfidenceIntervalChartOptions,
+	ComboChartOptions,
 	TreemapChartOptions,
 	// Components
 	GridOptions,
@@ -183,8 +184,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		},
-		updateRangeAxis: false
+		}
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
@@ -390,6 +390,11 @@ const confidenceIntervalChart: ConfidenceIntervalChartOptions = Tools.merge({},	
 } as LineChartOptions);
 
 /**
+ * options specific to combo charts
+ */
+const comboChart: ComboChartOptions = baseBarChart;
+
+/*
  * options specific to treemap charts
  */
 const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
@@ -415,6 +420,7 @@ export const options = {
 	radarChart,
 	gaugeChart,
 	confidenceIntervalChart,
+	comboChart,
 	treemapChart
 };
 

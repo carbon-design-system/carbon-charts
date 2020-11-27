@@ -21,7 +21,7 @@ export class Legend extends Component {
 		const svg = this.getContainerSVG()
 			.attr("role", Roles.GROUP)
 			.attr("data-name", "legend-items");
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
 		let dataGroups = this.model.getDataGroups();
 		const legendOrder = Tools.getProperty(legendOptions, "order");
@@ -72,12 +72,19 @@ export class Legend extends Component {
 			"option"
 		);
 
+		const legendClickable = Tools.getProperty(
+			this.getOptions(),
+			"legend",
+			"clickable"
+		);
+		svg.classed("clickable", legendClickable);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
-			.attr("tabindex", 0)
+			.attr("tabindex", legendClickable ? 0 : -1)
 			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
@@ -136,13 +143,6 @@ export class Legend extends Component {
 			.on("mouseout", null)
 			.remove();
 
-		const legendClickable = Tools.getProperty(
-			this.model.getOptions(),
-			"legend",
-			"clickable"
-		);
-		svg.classed("clickable", legendClickable);
-
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
@@ -178,7 +178,7 @@ export class Legend extends Component {
 	breakItemsIntoLines(addedLegendItems) {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// Configs
 		const checkboxRadius = Configuration.legend.checkbox.radius;
@@ -340,7 +340,7 @@ export class Legend extends Component {
 	addEventListeners() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
 		const truncationThreshold = Tools.getProperty(
 			legendOptions,

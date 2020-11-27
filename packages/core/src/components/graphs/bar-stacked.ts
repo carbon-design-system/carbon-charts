@@ -16,6 +16,7 @@ export class StackedBar extends Bar {
 
 	init() {
 		const eventsFragment = this.services.events;
+		this.model.setStackedGroups(this.model.getDataGroupNames());
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener(
@@ -35,17 +36,18 @@ export class StackedBar extends Bar {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData();
+		const stackData = this.model.getStackedData({
+			groups: this.configs.groups
+		});
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
+		const barGroups = svg
+			.selectAll("g.bars")
+			.data(stackData, (d) => (d.length > 0 ? d[0][groupMapsTo] : null));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -146,13 +148,15 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent
 			.selectAll("path.bar")
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
 			.attr("opacity", (d) =>
-				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
+				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
 
@@ -167,7 +171,7 @@ export class StackedBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
@@ -189,12 +193,17 @@ export class StackedBar extends Bar {
 					datum
 				});
 
-				const displayData = self.model.getDisplayData();
-
-				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+				const displayData = self.model.getDisplayData(
+					self.configs.groups
+				);
 
 				let matchingDataPoint = displayData.find((d) => {
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+						d
+					);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
@@ -204,6 +213,9 @@ export class StackedBar extends Bar {
 				});
 
 				if (matchingDataPoint === undefined) {
+					// use the primary range and domain ids
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],
