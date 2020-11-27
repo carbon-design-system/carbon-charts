@@ -3,6 +3,7 @@ import {
 	BaseChartOptions,
 	AxisChartOptions,
 	ScatterChartOptions,
+	LollipopChartOptions,
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
@@ -12,6 +13,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
+	ComboChartOptions,
 	TreemapChartOptions,
 	// Components
 	GridOptions,
@@ -182,8 +184,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
-		},
-		updateRangeAxis: false
+		}
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
@@ -243,6 +244,11 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 		enabled: true
 	}
 } as ScatterChartOptions);
+
+/**
+ * options specific to lollipop charts
+ */
+const lollipopChart: LollipopChartOptions = scatterChart as LollipopChartOptions;
 
 /**
  * options specific to line charts
@@ -380,6 +386,11 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 } as RadarChartOptions);
 
 /**
+ * options specific to combo charts
+ */
+const comboChart: ComboChartOptions = baseBarChart;
+
+/*
  * options specific to treemap charts
  */
 const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
@@ -399,11 +410,13 @@ export const options = {
 	areaChart,
 	stackedAreaChart,
 	scatterChart,
+	lollipopChart,
 	pieChart,
 	donutChart,
 	meterChart,
 	radarChart,
 	gaugeChart,
+	comboChart,
 	treemapChart
 };
 

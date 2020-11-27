@@ -14,7 +14,10 @@ import {
 } from "../components/index";
 
 export class TreemapChart extends Chart {
-	constructor(holder: Element, chartConfigs: ChartConfig<TreemapChartOptions>) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<TreemapChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart

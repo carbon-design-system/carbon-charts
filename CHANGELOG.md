@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.8...v0.41.9) (2020-11-27)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.7...v0.41.8) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.6...v0.41.7) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.5...v0.41.6) (2020-11-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.4...v0.41.5) (2020-11-19)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.3...v0.41.4) (2020-11-16)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.2...v0.41.3) (2020-11-16)
+
+
+### Bug Fixes
+
+* **core:** use fill:transparent for toolbar controls ([#884](https://github.com/carbon-design-system/carbon-charts/issues/884)) ([681ec23](https://github.com/carbon-design-system/carbon-charts/commit/681ec23705d54bbf47f0e71655983ecbbebc7dd8))
+
+
+
+
+
 ## [0.41.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.1...v0.41.2) (2020-11-13)
 
 

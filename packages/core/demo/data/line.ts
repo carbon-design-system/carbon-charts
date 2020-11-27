@@ -408,6 +408,9 @@ export const lineTimeSeriesRotatedTicksOptions = {
 		left: {
 			mapsTo: "value"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -483,4 +486,42 @@ export const lineSkeletonOptions = {
 	data: {
 		loading: true
 	}
+};
+
+export const lineTimeSeriesDualAxesData = [
+	{ group: "Temperature", date: new Date(2019, 0, 1), temp: 23 },
+	{ group: "Temperature", date: new Date(2019, 1, 1), temp: 15 },
+	{ group: "Temperature", date: new Date(2019, 2, 1), temp: 24 },
+	{ group: "Temperature", date: new Date(2019, 3, 1), temp: 33 },
+	{ group: "Temperature", date: new Date(2019, 4, 1), temp: 23 },
+	{ group: "Temperature", date: new Date(2019, 5, 1), temp: 32 },
+	{ group: "Temperature", date: new Date(2019, 6, 1), temp: 23 },
+	{ group: "Rainfall", date: new Date(2019, 0, 1), rainfall: 50 },
+	{ group: "Rainfall", date: new Date(2019, 1, 1), rainfall: 65 },
+	{ group: "Rainfall", date: new Date(2019, 2, 1), rainfall: 35 },
+	{ group: "Rainfall", date: new Date(2019, 3, 1), rainfall: 43 },
+	{ group: "Rainfall", date: new Date(2019, 4, 1), rainfall: 53 },
+	{ group: "Rainfall", date: new Date(2019, 5, 1), rainfall: 19 },
+	{ group: "Rainfall", date: new Date(2019, 6, 1), rainfall: 13 }
+];
+
+export const dualLine = {
+	title: "Line + Line (dual axes)",
+	axes: {
+		left: {
+			title: "Temperature (°C)",
+			mapsTo: "temp"
+		},
+		bottom: {
+			scaleType: "time",
+			mapsTo: "date",
+			title: "Date"
+		},
+		right: {
+			title: "Rainfall (mm)",
+			mapsTo: "rainfall",
+			correspondingDatasets: ["Rainfall"]
+		}
+	},
+	curve: "curveMonotoneX"
 };

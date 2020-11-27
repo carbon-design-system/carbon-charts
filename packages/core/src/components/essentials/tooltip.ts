@@ -38,9 +38,7 @@ export class Tooltip extends Component {
 		);
 
 		// if there is a provided tooltip HTML function call it
-		if (
-			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
-		) {
+		if (Tools.getProperty(this.getOptions(), "tooltip", "customHTML")) {
 			if (e.detail.content) {
 				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
 				tooltipTextContainer.html(labelHTML);
@@ -127,7 +125,7 @@ export class Tooltip extends Component {
 	}
 
 	formatItems(items) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// get user provided custom values for truncation
 		const truncationType = Tools.getProperty(
@@ -219,7 +217,7 @@ export class Tooltip extends Component {
 	}
 
 	valueFormatter(value: any) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const valueFormatter = Tools.getProperty(
 			options,
 			"tooltip",
@@ -234,7 +232,7 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTooltipEnabled = Tools.getProperty(
 			options,
 			"tooltip",
@@ -265,7 +263,7 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTopZoomBarEnabled = Tools.getProperty(
 			options,
 			"zoomBar",
