@@ -387,7 +387,7 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 
 /**
  * options specific to combo charts
-*/
+ */
 const comboChart: ComboChartOptions = baseBarChart;
 
 /*

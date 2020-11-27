@@ -146,7 +146,9 @@ export class Ruler extends Component {
 			const tooltipData = dataPointsMatchingRulerLine
 				.map((d) => d.originalData)
 				.filter((d) => {
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d);
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
