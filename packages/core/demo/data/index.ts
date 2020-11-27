@@ -6,6 +6,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as gaugeDemos from "./gauge";
 import * as scatterDemos from "./scatter";
+import * as lollipopDemos from "./lollipop";
 import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
@@ -81,6 +82,11 @@ export const chartTypes = {
 		vanilla: "ScatterChart",
 		angular: "ibm-scatter-chart",
 		vue: "ccv-scatter-chart"
+	},
+	LollipopChart: {
+		vanilla: "LollipopChart",
+		angular: "ibm-lollipop-chart",
+		vue: "ccv-lollipop-chart"
 	},
 	PieChart: {
 		vanilla: "PieChart",
@@ -637,6 +643,21 @@ let allDemoGroups = [
 				data: scatterDemos.scatterDualAxesData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: false
+			}
+		]
+	},
+	{
+		title: "Lollipop",
+		demos: [
+			{
+				options: lollipopDemos.lollipopDiscreteOptions,
+				data: lollipopDemos.lollipopDiscreteData,
+				chartType: chartTypes.LollipopChart
+			},
+			{
+				options: lollipopDemos.lollipopDiscretePresentationOptions,
+				data: lollipopDemos.lollipopDiscretePresentationData,
+				chartType: chartTypes.LollipopChart
 			}
 		]
 	},

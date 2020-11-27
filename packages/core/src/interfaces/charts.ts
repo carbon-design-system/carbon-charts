@@ -177,6 +177,11 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to lollipop charts
+ */
+export interface LollipopChartOptions extends ScatterChartOptions {}
+
+/**
  * options specific to bubble charts
  */
 export interface BubbleChartOptions extends AxisChartOptions {

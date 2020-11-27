@@ -50,14 +50,14 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed("dot", true)
 			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("cx", (d, i) =>
-				this.services.cartesianScales.getDomainValue(d, i)
-			)
 			.transition(
 				this.services.transitions.getTransition(
 					"bubble-update-enter",
 					animate
 				)
+			)
+			.attr("cx", (d, i) =>
+				this.services.cartesianScales.getDomainValue(d, i)
 			)
 			.attr("cy", (d, i) =>
 				this.services.cartesianScales.getRangeValue(d, i)
