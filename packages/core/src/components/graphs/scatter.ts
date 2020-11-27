@@ -408,12 +408,16 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (
-					!self.configs.filled &&
-					hoveredElement.attr("fill-opacity") === "1"
-				) {
-					hoveredElement.classed("unfilled", true);
-					hoveredElement.style("fill", null);
+				if (!self.configs.filled) {
+					const { filled } = self.getOptions().points;
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(datum);
+					hoveredElement.classed("unfilled", !self.model.getIsFilled(
+						datum[groupMapsTo],
+						datum[domainIdentifier],
+						datum,
+						filled
+					))
+					.style("fill", null);
 				}
 
 				// Dispatch mouse event
