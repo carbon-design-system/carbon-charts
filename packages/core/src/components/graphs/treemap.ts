@@ -346,12 +346,11 @@ export class Treemap extends Component {
 							"graph_element_mouseout_fill_update"
 						)
 					)
-					.style("fill", (d: any) => {
-						const fillColor = self.model.getFillColor(
+					.style("fill", (d: any) => 
+						self.model.getFillColor(
 							d.parent.data.name
-						);
-						return fillColor ? fillColor : null;
-					});
+						)
+					);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
