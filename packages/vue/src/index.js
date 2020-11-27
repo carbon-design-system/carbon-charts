@@ -7,6 +7,7 @@ import CcvBubbleChart from './ccv-bubble-chart.vue';
 import CcvDonutChart from './ccv-donut-chart.vue';
 import CcvGaugeChart from './ccv-gauge-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
+import CcvLollipopChart from './ccv-lollipop-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
 import CcvMeterChart from './ccv-meter-chart.vue';
@@ -24,6 +25,7 @@ const components = [
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvLineChart,
+	CcvLollipopChart,
 	CcvPieChart,
 	CcvScatterChart,
 	CcvMeterChart,
@@ -74,6 +76,7 @@ export {
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvLineChart,
+	CcvLollipopChart,
 	CcvPieChart,
 	CcvScatterChart,
 	CcvMeterChart,
