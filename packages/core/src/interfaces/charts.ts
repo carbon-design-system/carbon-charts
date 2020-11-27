@@ -319,15 +319,7 @@ export interface RadarChartOptions extends BaseChartOptions {
 /**
  * options specific to confidence interval charts
  */
-export interface ConfidenceIntervalChartOptions extends ScatterChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?:
-		| string
-		| {
-				name: string;
-		  };
+export interface ConfidenceIntervalChartOptions extends LineChartOptions {
 	/**
 	 * identifies what key within the data the confidence values would map to
 	 */

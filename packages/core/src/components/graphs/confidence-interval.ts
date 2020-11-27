@@ -17,22 +17,6 @@ import { select } from "d3-selection";
 export class ConfidenceInterval extends Component {
 	type = "area";
 
-	init() {
-		const eventsFragment = this.services.events;
-
-		// Highlight correct area on legend item hovers
-		eventsFragment.addEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
-
-		// Un-highlight area on legend item mouseouts
-		eventsFragment.addEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
-	}
-
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 		let domain = [0, 0];
@@ -49,38 +33,25 @@ export class ConfidenceInterval extends Component {
 
 		if (!confidence) {
 			console.warn(
-				"Confidence Intervals can only be shown when having 1 single dataset"
+				`Confidence Intervals can only be shown when having 1 single datagroup, you've supplied ${groupedData.length}`
 			); // eslint-disable-line no-console
 		}
+
+		const upperConfidenceBound = (d, i) => confidence ? cartesianScales.getConfidenceScaledValues(d, i)[0] : cartesianScales.getRangeValue;
+		const lowerConfidenceBound = (d, i) => confidence ? cartesianScales.getConfidenceScaledValues(d, i)[1] : cartesianScales.getRangeValue;
 
 		if (orientation === CartesianOrientations.VERTICAL) {
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
-				.y0((d, i) =>
-					confidence
-						? cartesianScales.getConfidenceScaledValues(d, i)[0]
-						: cartesianScales.getRangeValue(d, i)
-				)
-				.y1((d, i) =>
-					confidence
-						? cartesianScales.getConfidenceScaledValues(d, i)[1]
-						: cartesianScales.getRangeValue(d, i)
-				);
-			domain = this.services.cartesianScales.getMainYScale().domain();
+				.y0((d, i) => upperConfidenceBound(d, i))
+				.y1((d, i) => lowerConfidenceBound(d, i));
+			domain = cartesianScales.getMainYScale().domain();
 		} else {
 			areaGenerator
-				.x0((d, i) =>
-					confidence
-						? cartesianScales.getConfidenceScaledValues(d, i)[0]
-						: cartesianScales.getRangeValue(d, i)
-				)
-				.x1((d, i) =>
-					confidence
-						? cartesianScales.getConfidenceScaledValues(d, i)[1]
-						: cartesianScales.getRangeValue(d, i)
-				)
+				.x0((d, i) => upperConfidenceBound(d, i))
+				.x1((d, i) => lowerConfidenceBound(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
-			domain = this.services.cartesianScales.getMainXScale().domain();
+			domain = cartesianScales.getMainXScale().domain();
 		}
 
 		const areas = svg
@@ -159,50 +130,5 @@ export class ConfidenceInterval extends Component {
 			.attr("stroke", (group) => this.model.getStrokeColor(group.name))
 			.style("stroke-dasharray", "2, 2")
 			.attr("stroke-width", 0.7 + "px");
-	}
-
-	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-
-		this.parent
-			.selectAll("path.area")
-			.transition(
-				this.services.transitions.getTransition("legend-hover-area")
-			)
-			.attr("opacity", (group) => {
-				if (group.name !== hoveredElement.datum()["name"]) {
-					return Configuration.area.opacity.unselected;
-				}
-
-				return Configuration.area.opacity.selected;
-			});
-	};
-
-	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll("path.area")
-			.transition(
-				this.services.transitions.getTransition("legend-mouseout-area")
-			)
-			.attr("opacity", Configuration.area.opacity.selected);
-	};
-
-	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll("path.area")
-			.on("mousemove", null)
-			.on("mouseout", null);
-
-		// Remove legend listeners
-		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
 	}
 }
