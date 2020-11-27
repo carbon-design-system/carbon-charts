@@ -102,11 +102,11 @@ export class Legend extends Component {
 					originalClassName: "checkbox"
 				})
 			)
-			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getFillColor(d.name)
-					: null;
-			})
+			.style("fill", (d) => (
+				d.status === Configuration.legend.items.status.ACTIVE
+					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
+					: null
+			))
 			.classed("active", function (d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});

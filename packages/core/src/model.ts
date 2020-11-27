@@ -465,9 +465,6 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
 		const options = this.getOptions();
 		const defaultFillColor = Tools.getProperty(this.colorScale, group);
 
@@ -479,10 +476,6 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
-
 		const options = this.getOptions();
 		const defaultStrokeColor = Tools.getProperty(this.colorScale, group);
 
