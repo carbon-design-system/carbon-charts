@@ -129,12 +129,6 @@ export class Gauge extends Component {
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground").data([value]);
 		const arcEnter = arcValue.enter().append("path");
-		const customColor = Tools.getProperty(
-			this.getOptions(),
-			"color",
-			"scale",
-			"value"
-		);
 
 		arcEnter
 			.merge(arcValue)
@@ -146,7 +140,12 @@ export class Gauge extends Component {
 					originalClassName: "arc-foreground"
 				})
 			)
-			.style("fill", (d) => (customColor ? customColor : null))
+			.style("fill", (d) => Tools.getProperty(
+				this.getOptions(),
+				"color",
+				"scale",
+				"value"
+			))
 			.attr("d", this.arc)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
