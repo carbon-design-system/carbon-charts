@@ -364,7 +364,6 @@ export class Gauge extends Component {
 				"class",
 				status !== null ? `gauge-delta-arrow status--${status}` : ""
 			)
-			.style("fill", () => (status === null ? "currentColor" : null))
 			.attr("points", self.getArrow(delta));
 
 		deltaArrow.exit().remove();
