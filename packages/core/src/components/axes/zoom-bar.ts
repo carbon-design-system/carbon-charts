@@ -110,14 +110,16 @@ export class ZoomBar extends Component {
 				.attr("x", axesLeftMargin)
 				.attr("y", 0)
 				.attr("width", width - axesLeftMargin)
-				.attr("height", "100%");
+				.attr("height", "100%")
+				.classed("zoom-bg-skeleton", isTopZoomBarLoading);
 		} else if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
 			// Draw zoombar background line
 			DOMUtils.appendOrSelect(container, "rect.zoom-slider-bg")
 				.attr("x", axesLeftMargin)
 				.attr("y", zoombarHeight / 2 - 1)
 				.attr("width", width - axesLeftMargin)
-				.attr("height", 2);
+				.attr("height", 2)
+				.classed("zoom-slider-bg-skeleton", isTopZoomBarLoading);
 		}
 
 		if (isTopZoomBarLoading) {
@@ -574,7 +576,7 @@ export class ZoomBar extends Component {
 		return zoomBarData;
 	}
 
-	renderZoomBarBaseline(container, startX, endX) {
+	renderZoomBarBaseline(container, startX, endX, skeletonClass = false) {
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
@@ -586,10 +588,9 @@ export class ZoomBar extends Component {
 			[startX, zoombarHeight],
 			[endX, zoombarHeight]
 		]);
-		DOMUtils.appendOrSelect(container, "path.zoom-bg-baseline").attr(
-			"d",
-			baselineGenerator
-		);
+		DOMUtils.appendOrSelect(container, "path.zoom-bg-baseline")
+			.attr("d", baselineGenerator)
+			.classed("zoom-bg-baseline-skeleton", skeletonClass);
 	}
 
 	renderSkeleton(container, startX, endX) {
@@ -613,8 +614,17 @@ export class ZoomBar extends Component {
 			this.getContainerSVG(),
 			this.brushSelector
 		).html(null);
+
 		// re-render baseline because no axis labels in skeleton so the baseline length needs to change
-		this.renderZoomBarBaseline(container, startX, endX);
+		const zoombarType = Tools.getProperty(
+			this.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"type"
+		);
+		if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
+			this.renderZoomBarBaseline(container, startX, endX, true);
+		}
 	}
 
 	destroy() {
