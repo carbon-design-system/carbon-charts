@@ -11,3 +11,4 @@ export * from "./themes";
 export * from "./event-listeners";
 export * from "./color-palette";
 export * from "./dual-axes";
+export * from "./combo-charts";

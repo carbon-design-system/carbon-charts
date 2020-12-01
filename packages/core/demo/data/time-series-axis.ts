@@ -26,6 +26,9 @@ export const lineTimeSeries15secondsOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -55,6 +58,9 @@ export const lineTimeSeriesMinuteOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -83,6 +89,9 @@ export const lineTimeSeries30minutesOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -113,6 +122,9 @@ export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -132,6 +144,9 @@ export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 		timeIntervalFormats: {
 			hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -161,6 +176,9 @@ export const lineTimeSeriesDailyOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -193,6 +211,9 @@ export const lineTimeSeriesWeeklyOptions = {
 	},
 	timeScale: {
 		showDayName: true
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -222,6 +243,9 @@ export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -238,6 +262,9 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 	},
 	timeScale: {
 		localeObject: frLocaleObject
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -267,6 +294,9 @@ export const lineTimeSeriesQuarterlyOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -296,6 +326,9 @@ export const lineTimeSeriesYearlyOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -317,6 +350,9 @@ export const lineTimeSeriesSingleDatumOptions = {
 		bottom: {
 			scaleType: "time"
 		}
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -349,6 +385,9 @@ export const lineTimeSeriesNoExtendedDomainOptions = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -376,6 +415,9 @@ export const lineTimeSeriesTwoIdenticalLabelsOptions = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -389,6 +431,9 @@ export const lineTimeSeriesTwoIdenticalLabels2Options = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
 	}
 };
 
@@ -416,5 +461,8 @@ export const lineTimeSeriesAllLabelsInPrimaryFormatOptions = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
 	}
 };

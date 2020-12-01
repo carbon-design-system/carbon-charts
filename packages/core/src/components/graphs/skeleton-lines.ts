@@ -35,30 +35,15 @@ export class SkeletonLines extends Skeleton {
 		);
 
 		const isSparkline =
-			!Tools.getProperty(
-				this.getOptions(),
-				"grid",
-				"x",
-				"enabled"
-			) &&
-			!Tools.getProperty(
-				this.getOptions(),
-				"grid",
-				"y",
-				"enabled"
-			) &&
+			!Tools.getProperty(this.getOptions(), "grid", "x", "enabled") &&
+			!Tools.getProperty(this.getOptions(), "grid", "y", "enabled") &&
 			!Tools.getProperty(
 				this.getOptions(),
 				"axes",
 				"bottom",
 				"visible"
 			) &&
-			!Tools.getProperty(
-				this.getOptions(),
-				"axes",
-				"left",
-				"visible"
-			);
+			!Tools.getProperty(this.getOptions(), "axes", "left", "visible");
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
 		if (isDataLoading && !isSparkline) {
