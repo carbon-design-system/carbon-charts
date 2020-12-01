@@ -1,4 +1,10 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments, ChartTypes } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments,
+	ChartTypes
+} from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -171,6 +177,11 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to lollipop charts
+ */
+export interface LollipopChartOptions extends ScatterChartOptions {}
+
+/**
  * options specific to bubble charts
  */
 export interface BubbleChartOptions extends AxisChartOptions {
@@ -209,7 +220,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-	};
+		  };
 }
 
 /**
@@ -223,7 +234,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
 }
 
 /**
@@ -237,7 +248,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
 }
 
 /**
@@ -321,14 +332,13 @@ export interface RadarChartOptions extends BaseChartOptions {
  */
 export interface ComboChartOptions extends AxisChartOptions {
 	comboChartTypes?: {
-		[ChartTypes.LINE]?: [],
-		[ChartTypes.STACKED_BAR]?: [],
-		[ChartTypes.GROUPED_BAR]?: [],
-		[ChartTypes.SIMPLE_BAR]?: [],
-		[ChartTypes.SCATTER]?: []
+		[ChartTypes.LINE]?: [];
+		[ChartTypes.STACKED_BAR]?: [];
+		[ChartTypes.GROUPED_BAR]?: [];
+		[ChartTypes.SIMPLE_BAR]?: [];
+		[ChartTypes.SCATTER]?: [];
 	};
 }
-
 
 /*
  * options specific to treemap charts

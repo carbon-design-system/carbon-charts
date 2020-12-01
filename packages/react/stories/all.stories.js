@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, object } from "@storybook/addon-knobs";
 
-import * as ChartComponents from "../src/index";
+import * as ChartComponents from "../dist/index";
 
 import { storybookDemoGroups } from "@carbon/charts/demo/data";
 
