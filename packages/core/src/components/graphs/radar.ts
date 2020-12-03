@@ -506,7 +506,7 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				)
+				);
 			},
 			(exit) =>
 				exit.call((selection) =>

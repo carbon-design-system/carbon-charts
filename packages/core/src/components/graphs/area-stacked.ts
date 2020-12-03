@@ -44,13 +44,22 @@ export class StackedArea extends Component {
 			(axis) => options.axes[axis].percentage
 		);
 
-		const stackedData = this.model.getStackedData({ percentage, groups: this.configs.groups });
+		const stackedData = this.model.getStackedData({
+			percentage,
+			groups: this.configs.groups
+		});
 
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
-		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition({datum: stackedData[0][0]});
-		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition({datum: stackedData[0][0]});
-		const mainYScale = this.services.cartesianScales.getScaleByPosition(rangeAxisPosition);
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition(
+			{ datum: stackedData[0][0] }
+		);
+		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition(
+			{ datum: stackedData[0][0] }
+		);
+		const mainYScale = this.services.cartesianScales.getScaleByPosition(
+			rangeAxisPosition
+		);
 
 		const areas = svg
 			.selectAll("path.area")
@@ -58,8 +67,13 @@ export class StackedArea extends Component {
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			// @ts-ignore
-			.x((d, i) => this.services.cartesianScales.getValueThroughAxisPosition(domainAxisPosition, d.data.sharedStackKey, i))
+			.x((d: any, i) =>
+				this.services.cartesianScales.getValueThroughAxisPosition(
+					domainAxisPosition,
+					d.data.sharedStackKey,
+					i
+				)
+			)
 			.y0((d) => mainYScale(d[0]))
 			.y1((d) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
@@ -109,7 +123,7 @@ export class StackedArea extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -118,7 +132,7 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	}
+	};
 
 	destroy() {
 		// Remove event listeners

@@ -72,12 +72,19 @@ export class Legend extends Component {
 			"option"
 		);
 
+		const legendClickable = Tools.getProperty(
+			this.getOptions(),
+			"legend",
+			"clickable"
+		);
+		svg.classed("clickable", legendClickable);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
-			.attr("tabindex", 0)
+			.attr("tabindex", legendClickable ? 0 : -1)
 			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
@@ -135,13 +142,6 @@ export class Legend extends Component {
 			.on("click", null)
 			.on("mouseout", null)
 			.remove();
-
-		const legendClickable = Tools.getProperty(
-			this.getOptions(),
-			"legend",
-			"clickable"
-		);
-		svg.classed("clickable", legendClickable);
 
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
