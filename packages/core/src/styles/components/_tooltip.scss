@@ -26,12 +26,13 @@
 
 		.title-tooltip {
 			p {
-				line-height: 16px;
+				margin: 2px;
 				font-size: 12px;
 			}
 			width: auto;
 			padding: 4px;
 			min-width: 20px;
+			max-width: 270px;
 		}
 
 		.datapoint-tooltip {
