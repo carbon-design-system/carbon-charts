@@ -465,11 +465,8 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
 		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()(group);
+		const defaultFillColor = Tools.getProperty(this.colorScale, group);
 
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
@@ -479,21 +476,14 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
-
 		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale(group);
+		const defaultStrokeColor = Tools.getProperty(this.colorScale, group);
+
 		if (options.getStrokeColor) {
 			return options.getStrokeColor(group, key, data, defaultStrokeColor);
 		} else {
 			return defaultStrokeColor;
 		}
-	}
-
-	getFillScale() {
-		return this.colorScale;
 	}
 
 	isUserProvidedColorScaleValid() {
@@ -506,12 +496,12 @@ export class ChartModel {
 
 		if (
 			userProvidedScale == null ||
-			Object.keys(userProvidedScale).length < dataGroups.length
+			Object.keys(userProvidedScale).length == 0
 		) {
 			return false;
 		}
 
-		return dataGroups.every((dataGroup) =>
+		return dataGroups.some((dataGroup) =>
 			Object.keys(userProvidedScale).includes(dataGroup.name)
 		);
 	}
@@ -521,10 +511,6 @@ export class ChartModel {
 		dataGroupName: string;
 		originalClassName?: string;
 	}) {
-		if (this.isUserProvidedColorScaleValid()) {
-			return configs.originalClassName;
-		}
-
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
 		let className = configs.originalClassName;
 		configs.classNameTypes.forEach(
@@ -533,6 +519,7 @@ export class ChartModel {
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
 		);
+
 		return className;
 	}
 
@@ -690,16 +677,14 @@ export class ChartModel {
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
 		 */
-		const colorRange = [];
-		this.allDataGroups.forEach((dataGroup) => {
-			if (userProvidedScale[dataGroup]) {
-				colorRange.push(userProvidedScale[dataGroup]);
-			}
-		});
+		const providedDataGroups = this.allDataGroups.filter(
+			(dataGroup) => userProvidedScale[dataGroup]
+		);
 
-		this.colorScale = scaleOrdinal()
-			.range(colorRange)
-			.domain(this.allDataGroups);
+		providedDataGroups.forEach(
+			(dataGroup) =>
+				(this.colorScale[dataGroup] = userProvidedScale[dataGroup])
+		);
 	}
 
 	/*
@@ -739,13 +724,9 @@ export class ChartModel {
 				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
 		);
 
-		// If there is no valid user provided scale, use the default set of colors
-		if (!this.isUserProvidedColorScaleValid()) {
-			this.colorClassNames = scaleOrdinal()
-				.range(colorPairing)
-				.domain(this.allDataGroups);
-
-			return;
-		}
+		// Create default color classnames
+		this.colorClassNames = scaleOrdinal()
+			.range(colorPairing)
+			.domain(this.allDataGroups);
 	}
 }

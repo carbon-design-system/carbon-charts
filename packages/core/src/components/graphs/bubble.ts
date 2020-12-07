@@ -74,7 +74,7 @@ export class Bubble extends Scatter {
 					originalClassName: "dot"
 				})
 			)
-			.attr("fill", (d) => {
+			.style("fill", (d) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 					d
 				);
@@ -84,7 +84,7 @@ export class Bubble extends Scatter {
 					d
 				);
 			})
-			.attr("stroke", (d) => {
+			.style("stroke", (d) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 					d
 				);
