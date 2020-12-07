@@ -161,7 +161,11 @@ export class Treemap extends Component {
 				)
 			)
 			.attr("width", (d) => d.x1 - d.x0)
-			.attr("height", (d) => d.y1 - d.y0);
+			.attr("height", (d) => d.y1 - d.y0)
+			.style("fill", (d) => {
+				while (d.depth > 1) d = d.parent;
+				return this.model.getFillColor(d.data.name);
+			});
 
 		// Update all clip paths
 		allLeafGroups
@@ -260,7 +264,7 @@ export class Treemap extends Component {
 			.selectAll("rect.leaf")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
-				const fillColor = getComputedStyle(this, null).getPropertyValue(
+				let fillColor = getComputedStyle(this, null).getPropertyValue(
 					"fill"
 				);
 
@@ -273,9 +277,15 @@ export class Treemap extends Component {
 							"graph_element_mouseover_fill_update"
 						)
 					)
-					.style("fill", (d: any) =>
-						color(fillColor).darker(0.7).toString()
-					);
+					.style("fill", (d: any) => {
+						const customColor = self.model.getFillColor(
+							d.parent.data.name
+						);
+						if (customColor) {
+							fillColor = customColor;
+						}
+						return color(fillColor).darker(0.7).toString();
+					});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -336,7 +346,11 @@ export class Treemap extends Component {
 							"graph_element_mouseout_fill_update"
 						)
 					)
-					.style("fill", null);
+					.style("fill", (d: any) => 
+						self.model.getFillColor(
+							d.parent.data.name
+						)
+					);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
