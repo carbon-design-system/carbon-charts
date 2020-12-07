@@ -19,12 +19,20 @@ export class ChartModelCartesian extends ChartModel {
 				Tools.getProperty(
 					this.getOptions(),
 					"zoomBar",
-					"top",
+					AxisPositions.TOP,
 					"enabled"
 				)
 			) {
+				// get pre-defined zoom bar data
+				const definedZoomBarData = Tools.getProperty(
+					this.getOptions(),
+					"zoomBar",
+					AxisPositions.TOP,
+					"data"
+				);
 				// if we have zoom bar data we need to update it as well
-				this.setZoomBarData();
+				// with pre-defined zoom bar data
+				this.setZoomBarData(definedZoomBarData);
 			}
 		}
 
