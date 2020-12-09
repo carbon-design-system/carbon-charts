@@ -69,7 +69,7 @@ export class Meter extends Component {
 			.attr("width", (d) =>
 				maximumBarWidth ? xScale(100) : xScale(d.value)
 			)
-			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")

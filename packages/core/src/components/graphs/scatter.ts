@@ -248,7 +248,7 @@ export class Scatter extends Component {
 			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("fill", (d) => {
+			.style("fill", (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				if (
 					this.model.getIsFilled(
@@ -265,8 +265,7 @@ export class Scatter extends Component {
 					);
 				}
 			})
-			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) => {
+			.style("stroke", (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
@@ -274,6 +273,7 @@ export class Scatter extends Component {
 					d
 				);
 			})
+			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
