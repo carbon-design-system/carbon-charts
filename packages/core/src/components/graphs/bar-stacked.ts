@@ -40,12 +40,14 @@ export class StackedBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData({groups: this.configs.groups});
+		const stackData = this.model.getStackedData({
+			groups: this.configs.groups
+		});
 
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll("g.bars")
-			.data(stackData, (d) => d.length > 0 ? d[0][groupMapsTo] : null);
+			.data(stackData, (d) => (d.length > 0 ? d[0][groupMapsTo] : null));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -90,7 +92,7 @@ export class StackedBar extends Bar {
 					originalClassName: "bar"
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = d.data.sharedStackKey;
 
@@ -191,15 +193,21 @@ export class StackedBar extends Bar {
 					datum
 				});
 
-				const displayData = self.model.getDisplayData(self.configs.groups);
+				const displayData = self.model.getDisplayData(
+					self.configs.groups
+				);
 
 				let matchingDataPoint = displayData.find((d) => {
-					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d);
-					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(d);
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+						d
+					);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
-						datum.data.sharedStackKey &&
+							datum.data.sharedStackKey &&
 						d[groupMapsTo] === datum.group
 					);
 				});

@@ -78,9 +78,7 @@ export class Area extends Component {
 			);
 		}
 
-		const areas = svg
-			.selectAll("path.area")
-			.data(groupedData);
+		const areas = svg.selectAll("path.area").data(groupedData);
 
 		const chartprefix = Tools.getProperty(
 			this.getOptions(),
@@ -114,7 +112,9 @@ export class Area extends Component {
 			.node();
 
 		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue("stroke")
+			? getComputedStyle(strokePathElement, null).getPropertyValue(
+					"stroke"
+			  )
 			: null;
 
 		if (isGradientAllowed && colorValue) {

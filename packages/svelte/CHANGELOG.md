@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.13...v0.41.14) (2020-12-07)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.12...v0.41.13) (2020-12-07)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.11...v0.41.12) (2020-12-07)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.10...v0.41.11) (2020-12-04)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.9...v0.41.10) (2020-12-01)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.8...v0.41.9) (2020-11-27)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.7...v0.41.8) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.41.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.6...v0.41.7) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
 ## [0.41.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.5...v0.41.6) (2020-11-20)
 
 **Note:** Version bump only for package @carbon/charts-svelte

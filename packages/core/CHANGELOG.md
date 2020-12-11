@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.41.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.5...v0.41.6) (2020-11-20)
+## [0.41.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.13...v0.41.14) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.41.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.4...v0.41.5) (2020-11-19)
+## [0.41.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.12...v0.41.13) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -19,7 +19,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.41.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.3...v0.41.4) (2020-11-16)
+## [0.41.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.11...v0.41.12) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -27,35 +27,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.41.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.2...v0.41.3) (2020-11-16)
+## [0.41.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.10...v0.41.11) (2020-12-04)
 
-
-### Bug Fixes
-
-* **core:** use fill:transparent for toolbar controls ([#884](https://github.com/carbon-design-system/carbon-charts/issues/884)) ([681ec23](https://github.com/carbon-design-system/carbon-charts/commit/681ec23705d54bbf47f0e71655983ecbbebc7dd8))
+**Note:** Version bump only for package @carbon/charts
 
 
 
 
 
-## [0.41.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.1...v0.41.2) (2020-11-13)
+## [0.41.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.9...v0.41.10) (2020-12-01)
 
-
-### Bug Fixes
-
-* **core:** sanitize user provided axis domains ([5865b7a](https://github.com/carbon-design-system/carbon-charts/commit/5865b7a16ea424314115b05af818eed9449d2564))
-* **core:** tooltips should hide when mouseout is triggered on the chart holder ([#887](https://github.com/carbon-design-system/carbon-charts/issues/887)) ([9ee5210](https://github.com/carbon-design-system/carbon-charts/commit/9ee5210497032108857f503b69eff2c73b22cf06))
+**Note:** Version bump only for package @carbon/charts
 
 
 
 
 
-## [0.41.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.0...v0.41.1) (2020-11-10)
+## [0.41.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.8...v0.41.9) (2020-11-27)
+
+**Note:** Version bump only for package @carbon/charts
 
 
-### Bug Fixes
 
-* **core:** correct axis title paddings in y-axes ([#873](https://github.com/carbon-design-system/carbon-charts/issues/873)) ([8a27a5f](https://github.com/carbon-design-system/carbon-charts/commit/8a27a5f65cbc55a878e603c9aa96c6f38d6ea10d)), closes [#859](https://github.com/carbon-design-system/carbon-charts/issues/859)
+
+
+## [0.41.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.7...v0.41.8) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/charts
 
 
 
@@ -66,33 +64,83 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.41.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.14...v0.41.0) (2020-11-10)
+## [0.41.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.6...v0.41.7) (2020-11-26)
 
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.5...v0.41.6) (2020-11-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.4...v0.41.5) (2020-11-19)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.3...v0.41.4) (2020-11-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.2...v0.41.3) (2020-11-16)
 
 ### Bug Fixes
 
-* use fill:none to allow transparent toolbar control background ([#858](https://github.com/carbon-design-system/carbon-charts/issues/858)) ([e4bf1bf](https://github.com/carbon-design-system/carbon-charts/commit/e4bf1bf45f59b5a4521aa2b6e5856715f148b1d5))
-* **core:** only set zoombar data and sanitize date values if a cartesian time-series chart ([88c8fa1](https://github.com/carbon-design-system/carbon-charts/commit/88c8fa1feee0d8866608bc39426638afb1c81294))
+-   **core:** use fill:transparent for toolbar controls
+    ([#884](https://github.com/carbon-design-system/carbon-charts/issues/884))
+    ([681ec23](https://github.com/carbon-design-system/carbon-charts/commit/681ec23705d54bbf47f0e71655983ecbbebc7dd8))
 
+## [0.41.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.1...v0.41.2) (2020-11-13)
+
+### Bug Fixes
+
+-   **core:** sanitize user provided axis domains
+    ([5865b7a](https://github.com/carbon-design-system/carbon-charts/commit/5865b7a16ea424314115b05af818eed9449d2564))
+-   **core:** tooltips should hide when mouseout is triggered on the chart
+    holder
+    ([#887](https://github.com/carbon-design-system/carbon-charts/issues/887))
+    ([9ee5210](https://github.com/carbon-design-system/carbon-charts/commit/9ee5210497032108857f503b69eff2c73b22cf06))
+
+## [0.41.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.0...v0.41.1) (2020-11-10)
+
+### Bug Fixes
+
+-   **core:** correct axis title paddings in y-axes
+    ([#873](https://github.com/carbon-design-system/carbon-charts/issues/873))
+    ([8a27a5f](https://github.com/carbon-design-system/carbon-charts/commit/8a27a5f65cbc55a878e603c9aa96c6f38d6ea10d)),
+    closes
+    [#859](https://github.com/carbon-design-system/carbon-charts/issues/859)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.41.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.14...v0.41.0) (2020-11-10)
+
+### Bug Fixes
+
+-   use fill:none to allow transparent toolbar control background
+    ([#858](https://github.com/carbon-design-system/carbon-charts/issues/858))
+    ([e4bf1bf](https://github.com/carbon-design-system/carbon-charts/commit/e4bf1bf45f59b5a4521aa2b6e5856715f148b1d5))
+-   **core:** only set zoombar data and sanitize date values if a cartesian
+    time-series chart
+    ([88c8fa1](https://github.com/carbon-design-system/carbon-charts/commit/88c8fa1feee0d8866608bc39426638afb1c81294))
 
 ### Features
 
-* **core:** add alignment options for gauge charts ([#877](https://github.com/carbon-design-system/carbon-charts/issues/877)) ([5d4a621](https://github.com/carbon-design-system/carbon-charts/commit/5d4a621e4b92e3e1fdaa9a3318467c84379e8881))
-
-
-
-
+-   **core:** add alignment options for gauge charts
+    ([#877](https://github.com/carbon-design-system/carbon-charts/issues/877))
+    ([5d4a621](https://github.com/carbon-design-system/carbon-charts/commit/5d4a621e4b92e3e1fdaa9a3318467c84379e8881))
 
 ## [0.40.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.13...v0.40.14) (2020-11-09)
 
-
 ### Bug Fixes
 
-* **core:** replace import to lodash with lodash-es ([700ba09](https://github.com/carbon-design-system/carbon-charts/commit/700ba0989ca130c2b750acc868b5bc36192f6f07))
-
-
-
-
+-   **core:** replace import to lodash with lodash-es
+    ([700ba09](https://github.com/carbon-design-system/carbon-charts/commit/700ba0989ca130c2b750acc868b5bc36192f6f07))
 
 ## [0.40.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.40.12...v0.40.13) (2020-11-06)
 

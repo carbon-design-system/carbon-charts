@@ -1,10 +1,6 @@
 // Internal Imports
 import { Bar } from "./bar";
-import {
-	Events,
-	Roles,
-	ColorClassNameTypes
-} from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -66,7 +62,7 @@ export class SimpleBar extends Bar {
 					originalClassName: "bar"
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -116,7 +112,7 @@ export class SimpleBar extends Bar {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -127,7 +123,7 @@ export class SimpleBar extends Bar {
 				)
 			)
 			.attr("opacity", 1);
-	}
+	};
 
 	addEventListeners() {
 		const self = this;

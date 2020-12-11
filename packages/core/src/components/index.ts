@@ -16,6 +16,7 @@ export * from "./graphs/bar-grouped";
 export * from "./graphs/bar-stacked";
 export * from "./graphs/bubble";
 export * from "./graphs/line";
+export * from "./graphs/lollipop";
 export * from "./graphs/scatter";
 export * from "./graphs/scatter-stacked";
 export * from "./graphs/pie";

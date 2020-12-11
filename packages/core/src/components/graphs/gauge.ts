@@ -140,7 +140,12 @@ export class Gauge extends Component {
 					originalClassName: "arc-foreground"
 				})
 			)
-			.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => Tools.getProperty(
+				this.getOptions(),
+				"color",
+				"scale",
+				"value"
+			))
 			.attr("d", this.arc)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -359,7 +364,6 @@ export class Gauge extends Component {
 				"class",
 				status !== null ? `gauge-delta-arrow status--${status}` : ""
 			)
-			.attr("fill", () => (status === null ? "currentColor" : null))
 			.attr("points", self.getArrow(delta));
 
 		deltaArrow.exit().remove();

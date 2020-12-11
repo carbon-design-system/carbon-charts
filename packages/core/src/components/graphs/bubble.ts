@@ -50,14 +50,14 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed("dot", true)
 			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("cx", (d, i) =>
-				this.services.cartesianScales.getDomainValue(d, i)
-			)
 			.transition(
 				this.services.transitions.getTransition(
 					"bubble-update-enter",
 					animate
 				)
+			)
+			.attr("cx", (d, i) =>
+				this.services.cartesianScales.getDomainValue(d, i)
 			)
 			.attr("cy", (d, i) =>
 				this.services.cartesianScales.getRangeValue(d, i)
@@ -74,21 +74,26 @@ export class Bubble extends Scatter {
 					originalClassName: "dot"
 				})
 			)
-			.attr("fill", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
-				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
-				}
-			)
-			.attr("stroke", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+			.style("fill", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
+				return this.model.getFillColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				);
+			})
+			.style("stroke", (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
 				);
-			}
-
-			)
+			})
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("opacity", 1);
 	}

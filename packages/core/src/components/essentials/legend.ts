@@ -72,12 +72,19 @@ export class Legend extends Component {
 			"option"
 		);
 
+		const legendClickable = Tools.getProperty(
+			this.getOptions(),
+			"legend",
+			"clickable"
+		);
+		svg.classed("clickable", legendClickable);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
 			.merge(legendItems.select("rect.checkbox"))
 			.attr("role", Roles.CHECKBOX)
-			.attr("tabindex", 0)
+			.attr("tabindex", legendClickable ? 0 : -1)
 			.attr("aria-label", (d) => d.name)
 			.attr(
 				"aria-checked",
@@ -88,20 +95,18 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
-			.attr("class", (d, i) => {
-				if (paletteOption) {
-					return this.model.getColorClassName({
-						classNameTypes: [ColorClassNameTypes.FILL],
-						dataGroupName: d.name,
-						originalClassName: "checkbox"
-					});
-				}
-			})
-			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getFillColor(d.name)
-					: null;
-			})
+			.attr("class", (d, i) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d.name,
+					originalClassName: "checkbox"
+				})
+			)
+			.style("fill", (d) => (
+				d.status === Configuration.legend.items.status.ACTIVE
+					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
+					: null
+			))
 			.classed("active", function (d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});
@@ -163,13 +168,6 @@ export class Legend extends Component {
 			.on("click", null)
 			.on("mouseout", null)
 			.remove();
-
-		const legendClickable = Tools.getProperty(
-			this.getOptions(),
-			"legend",
-			"clickable"
-		);
-		svg.classed("clickable", legendClickable);
 
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
