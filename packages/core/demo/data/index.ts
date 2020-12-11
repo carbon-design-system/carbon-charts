@@ -13,7 +13,6 @@ import * as radarDemos from "./radar";
 import * as treemapDemos from "./treemap";
 import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
-import * as confidenceIntervalDemos from "./confidence-interval";
 import * as comboDemos from "./combo";
 import * as highScaleDemos from "./high-scale";
 
@@ -28,7 +27,6 @@ export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
-export * from "./confidence-interval";
 export * from "./combo";
 export * from "./treemap";
 
@@ -109,11 +107,6 @@ export const chartTypes = {
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
 	},
-	ConfidenceIntervalChart: {
-		vanilla: "ConfidenceIntervalChart",
-		angular: "ibm-confidence-interval-chart",
-		vue: "ccv-confidence-interval-chart"
-	},
 	ComboChart: {
 		vanilla: "ComboChart",
 		angular: "ibm-combo-chart",
@@ -169,6 +162,12 @@ let allDemoGroups = [
 			{
 				options: areaDemos.sparklineOptions,
 				data: areaDemos.sparklineTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
+			},
+			{
+				options: areaDemos.boundedAreaTimeSeriesOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 				isDemoExample: true
 			}
@@ -1008,32 +1007,6 @@ let allDemoGroups = [
 				data: zoomBarDemos.zoomBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false
-			},
-			{
-				options: zoomBarDemos.zoomBarConfidenceIntervalTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarConfidenceIntervalTimeSeriesData,
-				chartType: chartTypes.ConfidenceIntervalChart,
-				isDemoExample: false
-			}
-		]
-	},
-	{
-		title: "Confidence Interval",
-		description:
-			"Confidence Interval charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
-		demos: [
-			{
-				options:
-					confidenceIntervalDemos.confidenceIntervalTimeSeriesCurvedOptions,
-				data:
-					confidenceIntervalDemos.confidenceIntervalTimeSeriesCurvedData,
-				chartType: chartTypes.ConfidenceIntervalChart
-			},
-			{
-				options:
-					confidenceIntervalDemos.confidenceIntervalTimeSeriesOptions,
-				data: confidenceIntervalDemos.confidenceIntervalTimeSeriesData,
-				chartType: chartTypes.ConfidenceIntervalChart
 			}
 		]
 	}

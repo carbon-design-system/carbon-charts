@@ -15,7 +15,6 @@ import { PieChartComponent } from "./pie-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
 import { MeterChartComponent } from "./meter-chart.component";
 import { RadarChartComponent } from "./radar-chart.component";
-import { ConfidenceIntervalChartComponent} from "./confidence-chart.component";
 import { ComboChartComponent } from "./combo-chart.component";
 import { TreemapChartComponent } from "./treemap-chart.component";
 
@@ -38,7 +37,6 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
-		ConfidenceIntervalChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent
 	],
@@ -57,7 +55,6 @@ import { TreemapChartComponent } from "./treemap-chart.component";
 		ScatterChartComponent,
 		MeterChartComponent,
 		RadarChartComponent,
-		ConfidenceIntervalChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent
 	]

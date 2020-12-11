@@ -11,7 +11,6 @@ import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
 import CcvMeterChart from './ccv-meter-chart.vue';
 import CcvRadarChart from './ccv-radar-chart.vue';
-import CcvConfidenceIntervalChart from './ccv-confidence-interval-chart.vue';
 import CcvComboChart from './ccv-combo-chart.vue';
 import CcvTreemapChart from './ccv-treemap-chart.vue';
 
@@ -29,7 +28,6 @@ const components = [
 	CcvScatterChart,
 	CcvMeterChart,
 	CcvRadarChart,
-	CcvConfidenceIntervalChart,
 	CcvComboChart,
 	CcvTreemapChart,
 ];
@@ -80,7 +78,6 @@ export {
 	CcvScatterChart,
 	CcvMeterChart,
 	CcvRadarChart,
-	CcvConfidenceIntervalChart,
 	CcvComboChart,
 	CcvTreemapChart,
 };

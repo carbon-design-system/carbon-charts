@@ -13,7 +13,6 @@ import MeterChart from "./meter-chart";
 import RadarChart from "./radar-chart";
 import ComboChart from "./combo-chart";
 import TreemapChart from "./treemap-chart";
-import ConfidenceIntervalChart from "./confidence-interval-chart";
 
 export {
   AreaChart,
@@ -30,6 +29,5 @@ export {
   MeterChart,
   RadarChart,
   ComboChart,
-  TreemapChart,
-  ConfidenceIntervalChart
+  TreemapChart
 };

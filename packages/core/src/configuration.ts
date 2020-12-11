@@ -12,7 +12,6 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
-	ConfidenceIntervalChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
 	// Components
@@ -381,15 +380,6 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 } as RadarChartOptions);
 
 /**
- * options specific to confidence interval charts
- */
-const confidenceIntervalChart: ConfidenceIntervalChartOptions = Tools.merge({},	lineChart, {
-	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: 0
-	} as TimeScaleOptions)
-} as LineChartOptions);
-
-/**
  * options specific to combo charts
  */
 const comboChart: ComboChartOptions = baseBarChart;
@@ -419,7 +409,6 @@ export const options = {
 	meterChart,
 	radarChart,
 	gaugeChart,
-	confidenceIntervalChart,
 	comboChart,
 	treemapChart
 };

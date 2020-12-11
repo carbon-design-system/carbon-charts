@@ -280,15 +280,22 @@ export class CartesianScales extends Service {
 		return scaledValue;
 	}
 
-	getConfidenceScaledValues(datum: any, index?: number) {
-		const { confidence } = this.model.getOptions();
+	getBoundedScaledValues(datum: any, index?: number) {
+		const { bounds } = this.model.getOptions();
 		const scale = this.scales[this.rangeAxisPosition];
 
-		const confidenceValues = [
-			scale(datum[confidence.upperBoundMapsTo]),
-			scale(datum[confidence.lowerBoundMapsTo])
+		const options = this.model.getOptions();
+		const axesOptions = Tools.getProperty(options, "axes");
+		const axisOptions = axesOptions[this.rangeAxisPosition];
+		const { mapsTo } = axisOptions;
+		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+
+		const boundedValues = [
+			scale(datum[bounds.upperBoundMapsTo] ? datum[bounds.upperBoundMapsTo]: value),
+			scale(datum[bounds.lowerBoundMapsTo] ? datum[bounds.lowerBoundMapsTo]: value)
 		];
-		return confidenceValues;
+
+		return boundedValues;
 	}
 
 	getValueThroughAxisPosition(
@@ -479,7 +486,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		const confidence = Tools.getProperty(options, "confidence");
+		const bounds = Tools.getProperty(options, "bounds");
 		const { includeZero } = axisOptions;
 		const scaleType =
 			Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
@@ -525,21 +532,17 @@ export class CartesianScales extends Service {
 			);
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => datum[mapsTo]);
-			// If the scale has confidence
-		} else if (confidence && options.axes) {
+			// If the scale has bounded area
+		} else if (bounds && options.axes) {
 			allDataValues = [];
-			
+
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
-				if (datum[confidence.upperBoundMapsTo]) {
-					allDataValues.push(
-						datum[confidence.upperBoundMapsTo]
-					);
+				if (datum[bounds.upperBoundMapsTo]) {
+					allDataValues.push(datum[bounds.upperBoundMapsTo]);
 				}
-				if (datum[confidence.lowerBoundMapsTo]){
-					allDataValues.push(
-						datum[confidence.lowerBoundMapsTo]
-					);
+				if (datum[bounds.lowerBoundMapsTo]) {
+					allDataValues.push(datum[bounds.lowerBoundMapsTo]);
 				}
 			});
 		} else if (

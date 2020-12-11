@@ -22,7 +22,6 @@ export * from "./graphs/pie";
 export * from "./graphs/gauge";
 export * from "./graphs/donut";
 export * from "./graphs/skeleton";
-export * from "./graphs/confidence-interval";
 export * from "./graphs/skeleton-lines";
 export * from "./graphs/treemap";
 export * from "./graphs/radar";

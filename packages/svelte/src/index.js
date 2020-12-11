@@ -11,7 +11,6 @@ import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
 import GaugeChart from "./GaugeChart.svelte";
 import MeterChart from "./MeterChart.svelte";
-import ConfidenceChart from "./ConfidenceChart.svelte";
 import TreemapChart from "./TreemapChart.svelte";
 
 export {
@@ -28,6 +27,5 @@ export {
 	RadarChart,
 	GaugeChart,
 	MeterChart,
-	ConfidenceChart,
 	TreemapChart
 };

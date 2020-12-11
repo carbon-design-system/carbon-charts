@@ -230,6 +230,11 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| {
 				name: string;
 		  };
+
+	bounds?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
+	};
 }
 
 /**
@@ -322,18 +327,6 @@ export interface RadarChartOptions extends BaseChartOptions {
 	};
 }
 
-/**
- * options specific to confidence interval charts
- */
-export interface ConfidenceIntervalChartOptions extends LineChartOptions {
-	/**
-	 * identifies what key within the data the confidence values would map to
-	 */
-	confidence?: {
-		upperBoundMapsTo?: string;
-		lowerBoundMapsTo?: string;
-	};
-}
 /**
  * options specific to combo bar charts
  */
