@@ -92,7 +92,7 @@ export class StackedBar extends Bar {
 					originalClassName: "bar"
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = d.data.sharedStackKey;
 

@@ -464,9 +464,9 @@ export class Radar extends Component {
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
-					.attr("fill", (group) => colorScale(group.name))
+					.style("fill", (group) => colorScale(group.name))
 					.style("fill-opacity", Configuration.radar.opacity.selected)
-					.attr("stroke", (group) => colorScale(group.name))
+					.style("stroke", (group) => colorScale(group.name))
 					.attr("d", (group) => oldRadialLineGenerator(group.data))
 					.call((selection) =>
 						selection
@@ -493,8 +493,8 @@ export class Radar extends Component {
 							originalClassName: "blob"
 						})
 					)
-					.attr("fill", (group) => colorScale(group.name))
-					.attr("stroke", (group) => colorScale(group.name));
+					.style("fill", (group) => colorScale(group.name))
+					.style("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
 						.transition(
@@ -506,7 +506,7 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				);
+				)
 			},
 			(exit) =>
 				exit.call((selection) =>
@@ -565,7 +565,7 @@ export class Radar extends Component {
 			)
 			.attr("r", 0)
 			.attr("opacity", 0)
-			.attr("fill", (d) => colorScale(d[groupMapsTo]));
+			.style("fill", (d) => colorScale(d[groupMapsTo]));
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect").attr(
@@ -586,7 +586,7 @@ export class Radar extends Component {
 			.attr("y", c.y - xAxisRectHeight / 2)
 			.attr("width", yScale.range()[1])
 			.attr("height", xAxisRectHeight)
-			.attr("fill", "red")
+			.style("fill", "red")
 			.style("fill-opacity", 0)
 			.attr(
 				"transform",

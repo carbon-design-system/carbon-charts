@@ -95,20 +95,18 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
-			.attr("class", (d, i) => {
-				if (paletteOption) {
-					return this.model.getColorClassName({
-						classNameTypes: [ColorClassNameTypes.FILL],
-						dataGroupName: d.name,
-						originalClassName: "checkbox"
-					});
-				}
-			})
-			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getFillColor(d.name)
-					: null;
-			})
+			.attr("class", (d, i) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d.name,
+					originalClassName: "checkbox"
+				})
+			)
+			.style("fill", (d) => (
+				d.status === Configuration.legend.items.status.ACTIVE
+					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
+					: null
+			))
 			.classed("active", function (d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});

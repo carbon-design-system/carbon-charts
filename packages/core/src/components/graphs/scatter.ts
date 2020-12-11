@@ -8,6 +8,7 @@ import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
+	scatterData: any;
 
 	init() {
 		const { events } = this.services;
@@ -52,24 +53,11 @@ export class Scatter extends Component {
 		return data;
 	}
 
-	render(animate: boolean) {
-		const isScatterEnabled =
-			Tools.getProperty(this.getOptions(), "points", "enabled") ||
-			Tools.getProperty(this.getOptions(), "bubble", "enabled");
-
-		if (!isScatterEnabled) {
-			return;
-		}
-
-		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
-
+	getScatterData() {
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		const { stacked } = this.configs;
+
 		let scatterData;
 		if (stacked) {
 			const percentage = Object.keys(options.axes).some(
@@ -94,14 +82,32 @@ export class Scatter extends Component {
 		}
 
 		// filter out datapoints that aren't part of the zoomed domain
-		scatterData = this.filterBasedOnZoomDomain(scatterData);
+		return this.filterBasedOnZoomDomain(scatterData);
+	}
+
+	render(animate: boolean) {
+		const isScatterEnabled =
+			Tools.getProperty(this.getOptions(), "points", "enabled") ||
+			Tools.getProperty(this.getOptions(), "bubble", "enabled");
+
+		if (!isScatterEnabled) {
+			return;
+		}
+
+		// Grab container SVG
+		const svg = this.getContainerSVG({ withinChartClip: true });
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
 			.data(
-				scatterData,
-				(d) => `${d[groupMapsTo]}-${d[domainIdentifier]}`
+				this.getScatterData(),
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 
 		// Remove circles that need to be removed
@@ -242,7 +248,7 @@ export class Scatter extends Component {
 			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("fill", (d) => {
+			.style("fill", (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				if (
 					this.model.getIsFilled(
@@ -259,8 +265,7 @@ export class Scatter extends Component {
 					);
 				}
 			})
-			.attr("fill-opacity", filled ? fillOpacity : 1)
-			.attr("stroke", (d) => {
+			.style("stroke", (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
@@ -268,6 +273,7 @@ export class Scatter extends Component {
 					d
 				);
 			})
+			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -402,12 +408,16 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (
-					!self.configs.filled &&
-					hoveredElement.attr("fill-opacity") === "1"
-				) {
-					hoveredElement.classed("unfilled", true);
-					hoveredElement.style("fill", null);
+				if (!self.configs.filled) {
+					const { filled } = self.getOptions().points;
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(datum);
+					hoveredElement.classed("unfilled", !self.model.getIsFilled(
+						datum[groupMapsTo],
+						datum[domainIdentifier],
+						datum,
+						filled
+					))
+					.style("fill", null);
 				}
 
 				// Dispatch mouse event

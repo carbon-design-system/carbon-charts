@@ -62,7 +62,7 @@ export class SimpleBar extends Bar {
 					originalClassName: "bar"
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
