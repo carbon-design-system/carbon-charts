@@ -291,8 +291,16 @@ export class CartesianScales extends Service {
 		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
 
 		const boundedValues = [
-			scale(datum[bounds.upperBoundMapsTo] ? datum[bounds.upperBoundMapsTo]: value),
-			scale(datum[bounds.lowerBoundMapsTo] ? datum[bounds.lowerBoundMapsTo]: value)
+			scale(
+				datum[bounds.upperBoundMapsTo]
+					? datum[bounds.upperBoundMapsTo]
+					: value
+			),
+			scale(
+				datum[bounds.lowerBoundMapsTo]
+					? datum[bounds.lowerBoundMapsTo]
+					: value
+			)
 		];
 
 		return boundedValues;
