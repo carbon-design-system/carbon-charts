@@ -40,7 +40,7 @@ export class Tooltip extends Component {
 		// if there is a provided tooltip HTML function call it
 		if (Tools.getProperty(this.getOptions(), "tooltip", "customHTML")) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 				tooltipTextContainer.html(labelHTML);
 			} else {
 				tooltipTextContainer.html(
@@ -182,23 +182,21 @@ export class Tooltip extends Component {
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
-			const isUserProvidedColorScaleValid = this.model.isUserProvidedColorScaleValid();
 
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
 				formattedItems
-					.map((item) => {
-						const useColor =
-							item.color || isUserProvidedColorScaleValid;
-						return `<li>
+					.map(
+						(item) =>
+							`<li>
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
-								${item.class && !useColor ? `<a class="tooltip-color ${item.class}"></a>` : ""}
+								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ""}
 								${
-									item.color && useColor
+									item.color
 										? '<a style="background-color: ' +
 										  item.color +
 										  '" class="tooltip-color"></a>'
@@ -207,8 +205,8 @@ export class Tooltip extends Component {
 								<p class="label">${item.label || ""}</p>
 								<p class="value">${item.value || ""}</p>
 							</div>
-						</li>`;
-					})
+						</li>`
+					)
 					.join("") +
 				`</ul>`;
 		}

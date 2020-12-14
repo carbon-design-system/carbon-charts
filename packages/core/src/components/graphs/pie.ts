@@ -113,7 +113,7 @@ export class Pie extends Component {
 					originalClassName: "slice"
 				})
 			)
-			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
+			.style("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
 				this.services.transitions.getTransition(

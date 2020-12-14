@@ -117,6 +117,7 @@ export class Line extends Component {
 					originalClassName: "line"
 				})
 			)
+			.style("stroke", (group) => this.model.getStrokeColor(group.name))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
@@ -139,7 +140,6 @@ export class Line extends Component {
 				)
 			)
 			.attr("opacity", (d) => (d.hidden ? 0 : 1))
-			.attr("stroke", (group) => this.model.getStrokeColor(group.name))
 			.attr("d", (group) => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);
