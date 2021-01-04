@@ -923,12 +923,6 @@ let allDemoGroups = [
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true,
 			},
-			{
-				options: comboDemos.comboErrorOptions,
-				data: comboDemos.comboErrorData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
 		],
 	},
 	{
