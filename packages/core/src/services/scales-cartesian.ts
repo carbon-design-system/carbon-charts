@@ -369,7 +369,8 @@ export class CartesianScales extends Service {
 					axesOptions,
 					AxisPositions.LEFT,
 					"correspondingDatasets"
-				))
+				)
+			)
 		) {
 			return {
 				primary: AxisPositions.RIGHT,
@@ -396,7 +397,8 @@ export class CartesianScales extends Service {
 					axesOptions,
 					AxisPositions.BOTTOM,
 					"correspondingDatasets"
-				))
+				)
+			)
 		) {
 			return {
 				primary: AxisPositions.TOP,

@@ -93,8 +93,8 @@ export const simpleBarOptions = {
 	}
 };
 
-export const simpleBarColorPaletteOptions = {
-	title: "Simple bar (color palette)",
+export const simpleBarColorOverrideOptions = {
+	title: "Simple bar (color override)",
 	axes: {
 		left: {
 			mapsTo: "value"
@@ -106,8 +106,11 @@ export const simpleBarColorPaletteOptions = {
 	},
 	color: {
 		pairing: {
-			numberOfVariants: 3,
 			option: 2
+		},
+		scale: {
+			"Qty": "#925699",
+			"Misc": "#525669"
 		}
 	}
 };
