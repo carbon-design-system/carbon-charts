@@ -177,7 +177,7 @@ export class Area extends Component {
 						originalClassName: "area"
 					})
 				)
-				.attr("fill", (group) => self.model.getFillColor(group.name))
+				.style("fill", (group) => self.model.getFillColor(group.name))
 				.transition(
 					this.services.transitions.getTransition(
 						"area-update-enter",
