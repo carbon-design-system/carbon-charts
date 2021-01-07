@@ -170,6 +170,12 @@ let allDemoGroups = [
 				data: areaDemos.sparklineTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 				isDemoExample: true
+			},
+			{
+				options: areaDemos.boundedAreaTimeSeriesOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
 			}
 		]
 	},

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.15](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.14...v0.41.15) (2021-01-07)
+
+
+### Bug Fixes
+
+* set definedZoomBarData to zoom bar data ([#909](https://github.com/carbon-design-system/carbon-charts/issues/909)) ([d446e47](https://github.com/carbon-design-system/carbon-charts/commit/d446e47bc618b638ddec1513e48c3fd0f01e3256))
+
+
+
+
+
 ## [0.41.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.13...v0.41.14) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
