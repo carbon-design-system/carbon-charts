@@ -235,6 +235,13 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| {
 				name: string;
 		  };
+	/**
+	 * options to bound the area of the chart
+	 */
+	bounds?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
+	};
 }
 
 /**

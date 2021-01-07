@@ -43,22 +43,41 @@ export class Area extends Component {
 		const orientation = cartesianScales.getOrientation();
 		const areaGenerator = area().curve(this.services.curves.getD3Curve());
 
+		// Update the bound data on area groups
+		const groupedData = this.model.getGroupedData(this.configs.groups);
+
+		const bounds = Tools.getProperty(this.getOptions(), "bounds"); 
+		const boundsEnabled = bounds && groupedData && groupedData.length === 1;
+
+		if (!boundsEnabled && bounds) {
+			console.warn(
+				`Bounds can only be shown when having 1 single datagroup, you've supplied ${groupedData.length}`
+			); // eslint-disable-line no-console
+		}
+
+		const upperBound = (d, i) =>
+			boundsEnabled
+				? cartesianScales.getBoundedScaledValues(d, i)[0]
+				: cartesianScales.getRangeValue(0);
+
+		const lowerBound = (d, i) =>
+		boundsEnabled
+			? cartesianScales.getBoundedScaledValues(d, i)[1]
+			: cartesianScales.getRangeValue(d, i);
+
 		if (orientation === CartesianOrientations.VERTICAL) {
 			domain = this.services.cartesianScales.getMainYScale().domain();
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
-				.y0(cartesianScales.getRangeValue(0))
-				.y1((d, i) => cartesianScales.getRangeValue(d, i));
+				.y0((d, i) => upperBound(d, i))
+				.y1((d, i) => lowerBound(d, i));
 		} else {
 			domain = this.services.cartesianScales.getMainXScale().domain();
 			areaGenerator
-				.x0(cartesianScales.getRangeValue(0))
-				.x1((d, i) => cartesianScales.getRangeValue(d, i))
+				.x0((d, i) => upperBound(d, i))
+				.x1((d, i) => lowerBound(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
 		}
-
-		// Update the bound data on area groups
-		const groupedData = this.model.getGroupedData(this.configs.groups);
 
 		// Is gradient enabled or not
 		const isGradientEnabled = Tools.getProperty(
@@ -172,7 +191,7 @@ export class Area extends Component {
 				.attr("class", "area")
 				.attr("class", (group) =>
 					this.model.getColorClassName({
-						classNameTypes: [ColorClassNameTypes.FILL],
+						classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 						dataGroupName: group.name,
 						originalClassName: "area"
 					})
@@ -184,11 +203,20 @@ export class Area extends Component {
 						animate
 					)
 				)
-				.attr("opacity", Configuration.area.opacity.selected)
+				.attr("opacity", boundsEnabled ? 1 : Configuration.area.opacity.selected)
 				.attr("d", (group) => {
 					const { data } = group;
 					return areaGenerator(data);
 				});
+
+				if (boundsEnabled){
+					enteringAreas
+						.attr("fill-opacity", Configuration.area.opacity.selected)
+						.attr("stroke", (group) => self.model.getStrokeColor(group.name))
+						.style("stroke-dasharray", "2, 2")
+						.attr("stroke-width", 0.7 + "px");
+
+				}
 		}
 	}
 
