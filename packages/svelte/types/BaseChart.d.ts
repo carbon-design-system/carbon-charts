@@ -6,19 +6,19 @@ import type {
   ChartTabularData,
 } from "@carbon/charts/interfaces";
 
-export interface BaseChartProps
+export interface BaseChartProps<Chart = BC, ChartOptions = BaseChartOptions>
   extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * Provide a Carbon chart class to instantiate
    * @default undefined
    */
-  Chart?: BC;
+  Chart?: Chart;
 
   /**
    * Obtain a reference to the instantiated chart
    * @default null
    */
-  chart?: null | BC;
+  chart?: null | Chart;
 
   /**
    * Set the chart data using the tabular data format
@@ -30,7 +30,7 @@ export interface BaseChartProps
    * Set the chart options
    * @default {}
    */
-  options?: BubbleChartOptions;
+  options?: ChartOptions;
 
   /**
    * Specify the id for the chart holder element
@@ -45,13 +45,16 @@ export interface BaseChartProps
   ref?: null | HTMLDivElement;
 }
 
-export default class BaseChart extends SvelteComponentTyped<
-  BaseChartProps,
+export default class BaseChart<
+  Chart = BaseChart,
+  ChartOptions = BaseChartOptions
+> extends SvelteComponentTyped<
+  BaseChartProps<Chart, ChartOptions>,
   {
-    load: CustomEvent<BC>;
+    load: CustomEvent<Chart>;
     update: CustomEvent<{
       data: ChartTabularData;
-      options: BaseChartOptions;
+      options: ChartOptions;
     }>;
     destroy: CustomEvent<any>;
   },
