@@ -31,5 +31,5 @@ export {
   MeterChart,
   RadarChart,
   ComboChart,
-	TreemapChart
+  TreemapChart
 };
