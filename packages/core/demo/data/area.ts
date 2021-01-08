@@ -244,3 +244,34 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 	},
 	curve: "curveMonotoneX"
 };
+
+export const boundedAreaTimeSeriesData = [
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 47263, min: 40000, max:50000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 14178, min: 10000, max: 20000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: 23094, min: 10000, max: 25000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 45281, min: 42000, max: 50000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 19), value: -63954, min: -70000, max: -10000 }
+];
+
+export const boundedAreaTimeSeriesOptions = {
+	title: "Bounded area (time series - natural curve)",
+	legend: {
+		enabled: false
+	},
+	bounds : {
+		upperBoundMapsTo: "max",
+		lowerBoundMapsTo: "min" 
+   	},
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveNatural"
+};
