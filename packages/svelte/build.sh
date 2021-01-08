@@ -15,6 +15,9 @@ rollup -c
 # copy src directory for Svelte entry
 cp -r src/ dist/src
 
+# copy types directory
+cp -r types/ dist/types
+
 echo "copying metadata"
 cp *.md dist/
 cp package.json dist/
