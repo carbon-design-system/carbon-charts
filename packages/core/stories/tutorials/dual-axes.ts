@@ -5,7 +5,7 @@ export const dualAxesTutorial = {
 	content: marked(`
 # Dual Axes Charts
 
-If a chart is considered to be a **dual axes** chart, it means that the chart uses 2 **different** axes for visually mapping ranges for the data.
+If a chart is considered to be a **dual axes** chart, it means that the chart uses 2 **different** axes for visually mapping [ranges](https://www.mathsisfun.com/sets/domain-range-codomain.html) for the data.
 Careful consideration should be taken when using dual axes charts because they can more often misrepresent the data.
 
 Please refer to dataviz guidelines [here](https://www.carbondesignsystem.com/data-visualization/getting-started) for more information on IBM's best practices.

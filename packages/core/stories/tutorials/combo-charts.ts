@@ -49,7 +49,7 @@ const comboOptions = {
 			type: ChartTypes.LINE // use a valid ChartType from enums
 			options: {
 				points: {
-					enabled: false // disable the point on the LineChart won't affect the points in the AreaChart
+					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
 				}
 			}, // component specific options
 			correspondingDatasets: ["Dataset 2"]
@@ -96,7 +96,7 @@ const comboOptions = {
 			// add the base options for that type of chart if it is in the carbon-charts library and any additional configurations needed
 			options: Object.assign({}, options.lineChart,  {
 				points: {
-					enabled: false // disable the point on the LineChart won't affect the points in the AreaChart
+					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
 				}
 			}), // component specific options
 			correspondingDatasets: ["Dataset 2"]
