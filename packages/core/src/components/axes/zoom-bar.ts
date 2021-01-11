@@ -184,15 +184,12 @@ export class ZoomBar extends Component {
 				this.model.set(
 					{
 						// use a new object instead of newInitialZoomDomain
-						initialZoomDomain: [
-							new Date(newInitialZoomDomain[0].getTime()),
-							new Date(newInitialZoomDomain[1].getTime())
-						],
+						initialZoomDomain: Tools.merge(
+							[],
+							newInitialZoomDomain
+						),
 						zoomDomain: newInitialZoomDomain
-							? [
-									new Date(newInitialZoomDomain[0].getTime()),
-									new Date(newInitialZoomDomain[1].getTime())
-							  ]
+							? Tools.merge([], newInitialZoomDomain)
 							: defaultDomain
 					},
 					{ skipUpdate: true }
