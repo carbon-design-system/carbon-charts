@@ -144,10 +144,11 @@ export class Pie extends Component {
 			});
 
 		// Draw the slice labels
-		const labelData = pieLayoutData.filter((x) => x.value > 0);
-		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
-			.attr('role', Roles.GROUP)
-			.attr('data-name', 'labels');
+		const renderLabels = options.pie.labels.enabled;
+		const labelData = renderLabels ? pieLayoutData.filter((x) => x.value > 0) : [];
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "labels");
 
 		const labels = labelsGroup
 			.selectAll('text.pie-label')
