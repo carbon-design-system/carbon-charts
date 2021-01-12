@@ -80,7 +80,10 @@ export class ZoomBar extends Component {
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
-
+		// initialization is not completed yet
+		if (width === 0) {
+			return;
+		}
 		// get axes margins
 		let axesLeftMargin = 0;
 		const axesMargins = this.model.get("axesMargins");
@@ -107,18 +110,20 @@ export class ZoomBar extends Component {
 				.attr("x", axesLeftMargin)
 				.attr("y", 0)
 				.attr("width", width - axesLeftMargin)
-				.attr("height", "100%");
+				.attr("height", "100%")
+				.classed("zoom-bg-skeleton", isTopZoomBarLoading);
 		} else if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
 			// Draw zoombar background line
 			DOMUtils.appendOrSelect(container, "rect.zoom-slider-bg")
 				.attr("x", axesLeftMargin)
 				.attr("y", zoombarHeight / 2 - 1)
 				.attr("width", width - axesLeftMargin)
-				.attr("height", 2);
+				.attr("height", 2)
+				.classed("zoom-slider-bg-skeleton", isTopZoomBarLoading);
 		}
 
 		if (isTopZoomBarLoading) {
-			// TODO - zoom bar skeleton could be improved in the future
+			this.renderSkeleton(container, axesLeftMargin, width);
 			return;
 		}
 
@@ -213,16 +218,8 @@ export class ZoomBar extends Component {
 					zoomBarData,
 					this.clipId
 				);
-
-				// Draw the zoom base line
-				const baselineGenerator = line()([
-					[axesLeftMargin, zoombarHeight],
-					[width, zoombarHeight]
-				]);
-				const zoomBaseline = DOMUtils.appendOrSelect(
-					container,
-					"path.zoom-bg-baseline"
-				).attr("d", baselineGenerator);
+				// Draw the zoom bar base line
+				this.renderZoomBarBaseline(container, axesLeftMargin, width);
 			}
 
 			// Attach brushing event listeners
@@ -348,6 +345,10 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
 			} else if (event.type === "end") {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END;
+				// only dispatch zoom domain change event for triggering api call when event type equals to end
+				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+					newDomain
+				});
 			}
 			this.services.events.dispatchEvent(zoomBarEventType, {
 				selection,
@@ -573,6 +574,57 @@ export class ZoomBar extends Component {
 			zoomBarData.push(newDatum);
 		}
 		return zoomBarData;
+	}
+
+	renderZoomBarBaseline(container, startX, endX, skeletonClass = false) {
+		const zoombarType = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"type"
+		);
+		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+		const baselineGenerator = line()([
+			[startX, zoombarHeight],
+			[endX, zoombarHeight]
+		]);
+		DOMUtils.appendOrSelect(container, "path.zoom-bg-baseline")
+			.attr("d", baselineGenerator)
+			.classed("zoom-bg-baseline-skeleton", skeletonClass);
+	}
+
+	renderSkeleton(container, startX, endX) {
+		// need to clear current zoom bar area
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area-unselected",
+			[],
+			null
+		);
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area",
+			[],
+			this.clipId
+		);
+		// remove brush listener
+		this.brush.on("start brush end", null);
+		// clear d3 brush
+		DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			this.brushSelector
+		).html(null);
+
+		// re-render baseline because no axis labels in skeleton so the baseline length needs to change
+		const zoombarType = Tools.getProperty(
+			this.getOptions(),
+			"zoomBar",
+			AxisPositions.TOP,
+			"type"
+		);
+		if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
+			this.renderZoomBarBaseline(container, startX, endX, true);
+		}
 	}
 
 	destroy() {
