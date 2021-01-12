@@ -1,28 +1,12 @@
 <script lang="ts">
   import { MeterChart } from "../types";
   import type { MeterChart as MC } from "@carbon/charts";
-  import type { MeterChartOptions } from "@carbon/charts/interfaces";
+	import { meterData as data, meterOptionsCustomColor } from "@carbon/charts/demo/data";
 
   let chart: MC = null;
   let ref = null;
 
-  const data = [
-    {
-      group: "Dataset 1",
-      value: 56,
-    },
-  ];
-
-  const options: MeterChartOptions = {
-    title: "Meter Chart - statuses and custom color",
-    meter: {
-      title: {
-        percentageIndicator: {
-          enabled: true
-        }
-      }
-    }
-  };
+  const options = meterOptionsCustomColor as any;
 </script>
 
 <MeterChart
