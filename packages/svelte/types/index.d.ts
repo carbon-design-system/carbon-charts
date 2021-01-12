@@ -4,6 +4,7 @@ export { default as BarChartGrouped } from "./BarChartGrouped";
 export { default as BarChartSimple } from "./BarChartSimple";
 export { default as BarChartStacked } from "./BarChartStacked";
 export { default as BubbleChart } from "./BubbleChart";
+export { default as ComboChart } from "./ComboChart";
 export { default as DonutChart } from "./DonutChart";
 export { default as LineChart } from "./LineChart";
 export { default as LollipopChart } from "./LollipopChart";
