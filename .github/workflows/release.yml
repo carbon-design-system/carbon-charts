@@ -28,3 +28,6 @@ jobs:
 
       - name: Run deploy scripts
         run: yarn deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
