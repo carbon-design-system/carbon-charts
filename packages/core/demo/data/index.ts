@@ -176,6 +176,16 @@ let allDemoGroups = [
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 				isDemoExample: true
+			},
+			{
+				options: areaDemos.areaSkeletonOptions,
+				data: areaDemos.areaSkeletonData,
+				chartType: chartTypes.AreaChart
+			},
+			{
+				options: areaDemos.areaEmptyOptions,
+				data: areaDemos.areaEmptyData,
+				chartType: chartTypes.AreaChart
 			}
 		]
 	},

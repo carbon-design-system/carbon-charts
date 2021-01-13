@@ -11,12 +11,6 @@ import { stack } from "d3-shape";
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
-	// Callbacks
-	/**
-	 * Function to be called when data or options update within the model
-	 * @type Function
-	 */
-	protected updateCallback: Function;
 	protected services: any;
 
 	// Internal Model state
@@ -119,16 +113,6 @@ export class ChartModel {
 					dataGroup.status === ACTIVE
 			);
 		});
-	}
-
-	setStackedGroups(groups) {
-		this.set({
-			stackedGroups: groups
-		});
-	}
-
-	getStackedGroups() {
-		return this.get("stackedGroups");
 	}
 
 	getData() {
@@ -368,10 +352,6 @@ export class ChartModel {
 		this.setCustomColorScale();
 		this.setColorClassNames();
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
-	}
-
-	setUpdateCallback(cb: Function) {
-		this.updateCallback = cb;
 	}
 
 	/*

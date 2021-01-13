@@ -19,7 +19,6 @@ export class StackedArea extends Component {
 
 	init() {
 		const eventsFragment = this.services.events;
-		this.model.setStackedGroups(this.model.getDataGroupNames());
 
 		// Highlight correct area on legend item hovers
 		eventsFragment.addEventListener(

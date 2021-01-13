@@ -29,8 +29,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run format",
-			"pre-push": "bash scripts/prepush.sh"
+			"pre-commit": "bash scripts/precommit.sh"
 		}
 	},
 	"release": {

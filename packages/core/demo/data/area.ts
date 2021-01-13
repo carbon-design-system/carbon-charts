@@ -260,7 +260,7 @@ export const boundedAreaTimeSeriesOptions = {
 	},
 	bounds : {
 		upperBoundMapsTo: "max",
-		lowerBoundMapsTo: "min" 
+		lowerBoundMapsTo: "min"
    	},
 	axes: {
 		bottom: {
@@ -274,4 +274,43 @@ export const boundedAreaTimeSeriesOptions = {
 		}
 	},
 	curve: "curveNatural"
+};
+
+// area - empty state
+export const areaEmptyData = [];
+export const areaEmptyOptions = {
+	title: "Area (empty state)",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "labels"
+		}
+	}
+};
+
+
+
+// area - loading skeleton
+export const areaSkeletonData = boundedAreaTimeSeriesData;
+export const areaSkeletonOptions = {
+	title: "Area (skeleton)",
+	bounds : {
+		upperBoundMapsTo: "max",
+		lowerBoundMapsTo: "min"
+   	},
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveNatural",
+	data: {
+		loading: true
+	}
 };

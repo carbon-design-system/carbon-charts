@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    if: github.actor != 'carbon-bot' &&	startsWith(github.event.head_commit.message, 'release - ')
+    name: Create release - Node.js v11.x
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Use Node.js 11.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "11.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Deploy to Github & NPM 🚀
+        run: yarn deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Deploy to gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: pages # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
