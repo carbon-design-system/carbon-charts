@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   build:
-    if: github.actor != "carbon-bot"
+    if: github.actor != 'carbon-bot'
     name: Create release - Node.js v11.x
     runs-on: ubuntu-latest
 
