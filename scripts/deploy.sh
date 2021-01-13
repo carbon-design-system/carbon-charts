@@ -19,6 +19,9 @@ git checkout master
 lerna version --conventional-commits --yes --force-publish
 
 echo "Publish to NPM"
+
+yarn build
+
 # authenticate with the npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
