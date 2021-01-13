@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, AreaChartOptions } from "../interfaces/index";
+import { ChartConfig, AreaChartOptions, Skeletons } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -15,7 +15,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	Skeleton
 } from "../components/index";
 
 export class AreaChart extends AxisChart {
@@ -46,6 +47,9 @@ export class AreaChart extends AxisChart {
 			new Scatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
 				handleThresholds: true
+			}),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.GRID
 			})
 		];
 
