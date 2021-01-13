@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.17](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.16...v0.41.17) (2021-01-13)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.16](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.15...v0.41.16) (2021-01-13)
+
+
+### Bug Fixes
+
+* **core:** add number to the donut center interface ([#929](https://github.com/carbon-design-system/carbon-charts/issues/929)) ([2f012a7](https://github.com/carbon-design-system/carbon-charts/commit/2f012a7915c3250b1044016330b91bc4e76206d8))
+
+
+
+
+
 ## [0.41.15](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.14...v0.41.15) (2021-01-07)
 
 
