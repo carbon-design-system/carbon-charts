@@ -1,4 +1,4 @@
-./.travis/before_install.sh
+./before_install.sh
 
 if [ $CONTEXT == "deploy-preview" ]; then
 	echo "We're in a PR preview"
