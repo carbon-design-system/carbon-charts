@@ -25,14 +25,17 @@
 		color: $text-01;
 
 		.title-tooltip {
-			line-height: 16px;
-			font-size: 12px;
+			p {
+				margin: 2px;
+				font-size: 12px;
+			}
+			width: auto;
 			padding: 4px;
 			min-width: 20px;
+			max-width: 270px;
 		}
 
-		.datapoint-tooltip,
-		.total-val {
+		.datapoint-tooltip {
 			display: flex;
 			padding: 4px;
 			flex-flow: row nowrap;
@@ -61,12 +64,9 @@
 					width: auto;
 				}
 			}
-		}
 
-		.total-val {
-			font-weight: carbon--font-weight("semibold");
-			.label {
-				margin-left: 4px;
+			&.bold {
+				font-weight: carbon--font-weight("semibold");
 			}
 		}
 

@@ -1,7 +1,8 @@
-import { ScaleTypes } from "./enums";
+import { ScaleTypes, TickRotations } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
 import { ThresholdOptions } from "./components";
+import { TruncationOptions } from "./truncation";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -12,11 +13,20 @@ export interface AxisOptions {
 	 */
 	scaleType?: ScaleTypes;
 	/**
+	 * option for stacked axis
+	 */
+	stacked?: boolean;
+	/**
+	 * option for percentage axis scale
+	 */
+	percentage?: boolean;
+	/**
 	 * Whether the Axis should use the specified domain
 	 * instead of it being dynamically generated based on data extents.
 	 * The type of values should depend on the scale type.
 	 * Example for continuous axis scale: [-100, 100]
 	 * Example for discrete axis scale: ['Qty', 'More', 'Sold']
+	 * No need to define domain for percentage axis scale
 	 */
 	domain?: AxisDomain[];
 	/**
@@ -65,10 +75,23 @@ export interface AxisOptions {
 		 */
 		rotateIfSmallerThan?: number;
 		/**
+		 * when to rotate ticks
+		 */
+		rotation?: TickRotations;
+		/**
 		 * function to format the ticks
 		 */
 		formatter?: Function;
+		/**
+		 * optional custom array of tick values that is within the domain of data
+		 */
+		values?: any[];
 	};
+	truncation?: TruncationOptions;
+	/**
+	 * is axis visible or not
+	 */
+	visible?: boolean;
 }
 
 /**

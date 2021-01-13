@@ -10,18 +10,20 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-react d3
+npm install -S @carbon/charts @carbon/charts-react d3@5.x
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-react d3
+yarn add @carbon/charts @carbon/charts-react d3@5.x
 ```
 
+**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
+
 ## Step-by-step instructions
-[Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/react)
+Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials-getting-started--react)
 
 ## Codesandbox examples
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/react).

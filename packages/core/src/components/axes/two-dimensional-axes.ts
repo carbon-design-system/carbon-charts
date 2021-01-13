@@ -5,6 +5,7 @@ import { Axis } from "./axis";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { Threshold } from "../essentials/threshold";
+import { Events } from "./../../interfaces";
 
 export class TwoDimensionalAxes extends Component {
 	type = "2D-axes";
@@ -17,13 +18,13 @@ export class TwoDimensionalAxes extends Component {
 		top: 0,
 		right: 0,
 		bottom: 0,
-		left: 0,
+		left: 0
 	};
 
 	render(animate = false) {
 		const axes = {};
 		const axisPositions = Object.keys(AxisPositions);
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const axesOptions = Tools.getProperty(this.getOptions(), "axes");
 
 		axisPositions.forEach((axisPosition) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]];
@@ -44,7 +45,7 @@ export class TwoDimensionalAxes extends Component {
 				const axisComponent = new Axis(this.model, this.services, {
 					position: axisPosition,
 					axes: this.configs.axes,
-					margins: this.margins,
+					margins: this.margins
 				});
 
 				// Set model, services & parent for the new axis component
@@ -75,7 +76,7 @@ export class TwoDimensionalAxes extends Component {
 			const invisibleAxisRef = child.getInvisibleAxisRef();
 			const {
 				width,
-				height,
+				height
 			} = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
 
 			let offset;
@@ -83,8 +84,15 @@ export class TwoDimensionalAxes extends Component {
 				offset = 0;
 			} else {
 				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
-					useBBox: true,
+					useBBox: true
 				}).height;
+
+				if (
+					axisPosition === AxisPositions.LEFT ||
+					axisPosition === AxisPositions.RIGHT
+				) {
+					offset += 5;
+				}
 			}
 
 			switch (axisPosition) {
@@ -114,6 +122,10 @@ export class TwoDimensionalAxes extends Component {
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins);
 
+			// also set new margins to model to allow external components to access
+			this.model.set({ axesMargins: this.margins }, { skipUpdate: true });
+			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE);
+
 			Object.keys(this.children).forEach((childKey) => {
 				const child = this.children[childKey];
 				child.margins = this.margins;
@@ -125,7 +137,7 @@ export class TwoDimensionalAxes extends Component {
 
 	addAxisThresholds(animate, axisPosition) {
 		const axesOptions = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"axes",
 			axisPosition
 		);

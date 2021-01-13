@@ -1,39 +1,37 @@
-import { Tools } from "@carbon/charts/tools";
-
 import {
 	lineData,
 	lineOptions,
 	lineTimeSeriesData,
-	lineTimeSeriesOptions,
+	lineTimeSeriesOptions
 } from "./line";
 
-export const stepOptions = Tools.merge({}, lineOptions, {
+export const stepOptions = Object.assign({}, lineOptions, {
 	title: "Step (discrete)",
-	curve: "curveStepAfter",
+	curve: "curveStepAfter"
 });
 
 export const stepData = lineData;
 
-export const stepTimeSeriesOptions = Tools.merge({}, lineTimeSeriesOptions, {
+export const stepTimeSeriesOptions = Object.assign({}, lineTimeSeriesOptions, {
 	title: "Step (time series)",
-	curve: "curveStepAfter",
+	curve: "curveStepAfter"
 });
 
 export const stepTimeSeriesData = lineTimeSeriesData;
 
 // step - empty state
 export const stepEmptyStateData = [];
-export const stepEmptyStateOptions = Tools.merge({}, lineTimeSeriesOptions, {
+export const stepEmptyStateOptions = Object.assign({}, lineTimeSeriesOptions, {
 	title: "Step (empty state)",
-	curve: "curveStepAfter",
+	curve: "curveStepAfter"
 });
 
 // step - skeleton
 export const stepSkeletonData = [];
-export const stepSkeletonOptions = Tools.merge({}, lineTimeSeriesOptions, {
+export const stepSkeletonOptions = Object.assign({}, lineTimeSeriesOptions, {
 	title: "Step (skeleton)",
 	curve: "curveStepAfter",
 	data: {
-		loading: true,
-	},
+		loading: true
+	}
 });

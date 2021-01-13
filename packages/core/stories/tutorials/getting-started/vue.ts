@@ -1,6 +1,9 @@
 import marked from "marked";
 
-export const vueTutorial = marked(`
+export const vueTutorial = {
+	name: "Vue",
+	type: "getting-started",
+	content: marked(`
 # Carbon Charts - Vue
 
 The Carbon Charts Vue library provides a collection of reusable charting components
@@ -14,13 +17,15 @@ styles, and behavior in prototype and production work.
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts-vue d3
+yarn add @carbon/charts-vue d3@5.x
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts-vue d3
+npm install --save @carbon/charts-vue d3@5.x
 \`\`\`
+
+**Note:** you'd also need to install \`carbon-components\` if you're not using a bundled version of the library.
 
 &nbsp;
 ## Getting started
@@ -110,4 +115,5 @@ If you experience any issues while getting set up with Carbon Charts,
 please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more
 guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
 if your issue does not already exist.
-`);
+`)
+};

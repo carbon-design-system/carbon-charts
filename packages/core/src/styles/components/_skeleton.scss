@@ -20,6 +20,10 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 		stroke: url(#shimmer-lines);
 	}
 
+	.shimmer-effect-sparkline {
+		stroke-width: 0px;
+	}
+
 	.empty-state-lines {
 		stroke-width: 1px;
 		stroke: $lines-bg-color;

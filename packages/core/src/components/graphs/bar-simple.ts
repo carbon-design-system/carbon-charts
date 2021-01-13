@@ -1,11 +1,10 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { Events, Roles, TooltipTypes } from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { color } from "d3-color";
 
 export class SimpleBar extends Bar {
 	type = "simple-bar";
@@ -27,16 +26,18 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
+
+		const data = this.model.getDisplayData(this.configs.groups);
 
 		// Update data on all bars
 		const bars = svg
 			.selectAll("path.bar")
-			.data(this.model.getDisplayData(), (datum) => datum[groupMapsTo]);
+			.data(data, (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit().attr("opacity", 0).remove();
@@ -54,7 +55,14 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "bar"
+				})
+			)
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -69,6 +77,11 @@ export class SimpleBar extends Bar {
 				const x1 = x0 + barWidth;
 				const y0 = this.services.cartesianScales.getRangeValue(0);
 				const y1 = this.services.cartesianScales.getRangeValue(d, i);
+
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutsideZoomedDomain(x0, x1)) {
+					return;
+				}
 
 				return Tools.generateSVGPathString(
 					{ x0, x1, y0, y1 },
@@ -87,7 +100,7 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.bar")
@@ -113,75 +126,65 @@ export class SimpleBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
-
 		const self = this;
 		this.parent
 			.selectAll("path.bar")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
-					.attr("fill", (d: any) =>
-						color(self.model.getFillColor(d[groupMapsTo]))
-							.darker(0.7)
-							.toString()
-					);
-
+				);
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
+					data: [datum]
 				});
 			})
 			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
-					datum,
+					datum
 				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseout_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseout_fill_update"
 					)
-					.attr("fill", (d: any) =>
-						self.model.getFillColor(d[groupMapsTo])
-					);
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}

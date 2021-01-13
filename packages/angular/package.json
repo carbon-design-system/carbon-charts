@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.32.2",
+	"version": "0.41.21",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -40,14 +40,14 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.32.2"
+		"@carbon/charts": "^0.41.21"
 	},
 	"peerDependencies": {
-		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
-		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0",
-		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0",
+		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
+		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
+		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
 		"rxjs": "^6.0.0",
-		"zone.js": "^0.8.29 || ^0.9.0"
+		"zone.js": "^0.8.29 || ^0.9.0 || ^0.10.0"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "0.13.9",

@@ -1,13 +1,13 @@
 // Internal Imports
 import { Component } from "../component";
+import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 export class Spacer extends Component {
 	type = "spacer";
 
 	render() {
-		this.getContainerSVG()
-			.append("rect")
+		DOMUtils.appendOrSelect(this.getContainerSVG(), "rect")
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr(

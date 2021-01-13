@@ -3,15 +3,13 @@ import { Tools } from "../../tools";
 import { Bar } from "./bar";
 import {
 	Roles,
-	TooltipTypes,
 	Events,
 	CartesianOrientations,
+	ColorClassNameTypes
 } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { color } from "d3-color";
-import { map } from "d3-collection";
 
 export class StackedBar extends Bar {
 	type = "stacked-bar";
@@ -34,24 +32,21 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
 		// Create the data and keys that'll be used by the stack layout
-		const stackKeys = map(
-			displayData,
-			(datum) => datum[domainIdentifier]
-		).keys();
-		const stackData = this.model.getStackedData();
+		const stackData = this.model.getStackedData({
+			groups: this.configs.groups
+		});
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
+		const barGroups = svg
+			.selectAll("g.bars")
+			.data(stackData, (d) => (d.length > 0 ? d[0][groupMapsTo] : null));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -64,13 +59,17 @@ export class StackedBar extends Bar {
 			.enter()
 			.append("g")
 			.classed("bars", true)
-			.attr("role", Roles.GROUP);
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "bars");
 
 		// Update data on all bars
 		const bars = svg
 			.selectAll("g.bars")
 			.selectAll("path.bar")
-			.data((data) => data);
+			.data(
+				(d) => d,
+				(d) => d.data.sharedStackKey
+			);
 
 		// Remove bars that need to be removed
 		bars.exit().remove();
@@ -85,9 +84,16 @@ export class StackedBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: "bar"
+				})
+			)
+			.style("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
-				const key = stackKeys[i];
+				const key = d.data.sharedStackKey;
 
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -103,6 +109,10 @@ export class StackedBar extends Bar {
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutsideZoomedDomain(x0, x1)) {
+					return;
+				}
 				// Add the divider gap
 				if (
 					Math.abs(y1 - y0) > 0 &&
@@ -127,7 +137,7 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "bar")
-			.attr("aria-label", (d) => d.value);
+			.attr("aria-label", (d) => d[1] - d[0]);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -137,13 +147,15 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent
 			.selectAll("path.bar")
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
 			.attr("opacity", (d) =>
-				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
+				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
 
@@ -158,7 +170,7 @@ export class StackedBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
@@ -166,34 +178,31 @@ export class StackedBar extends Bar {
 			.selectAll("path.bar")
 			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", true);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseover_fill_update"
-						)
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						"graph_element_mouseover_fill_update"
 					)
-					.attr("fill", (d: any) =>
-						color(self.model.getFillColor(d[groupMapsTo]))
-							.darker(0.7)
-							.toString()
-					);
+				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
-			})
-			.on("mousemove", function (datum) {
-				const displayData = self.model.getDisplayData();
-				const hoveredElement = select(this);
 
-				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupMapsTo } = self.model.getOptions().data;
+				const displayData = self.model.getDisplayData(
+					self.configs.groups
+				);
 
 				let matchingDataPoint = displayData.find((d) => {
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+						d
+					);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
@@ -203,50 +212,53 @@ export class StackedBar extends Bar {
 				});
 
 				if (matchingDataPoint === undefined) {
+					// use the primary range and domain ids
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group,
+						[groupMapsTo]: datum.group
 					};
 				}
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: matchingDataPoint,
-					type: TooltipTypes.DATAPOINT,
+					data: [matchingDataPoint]
 				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							"graph_element_mouseout_fill_update"
-						)
-					)
-					.attr("fill", (d: any) =>
-						self.model.getFillColor(d[groupMapsTo])
-					);
-
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}

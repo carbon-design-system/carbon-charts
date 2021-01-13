@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, AreaChartOptions } from "../interfaces/index";
+import { ChartConfig, AreaChartOptions, Skeletons } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -16,7 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter,
+	Skeleton
 } from "../components/index";
 
 export class AreaChart extends AxisChart {
@@ -38,18 +38,24 @@ export class AreaChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Area(this.model, this.services),
+			new Scatter(this.model, this.services, {
+				fadeInOnChartHolderMouseover: true,
+				handleThresholds: true
+			}),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.GRID
+			})
 		];
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

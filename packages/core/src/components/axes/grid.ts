@@ -5,8 +5,6 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
-import { mouse, select } from "d3-selection";
-import { TooltipTypes, Events } from "../../interfaces";
 
 export class Grid extends Component {
 	type = "grid";
@@ -14,13 +12,34 @@ export class Grid extends Component {
 	backdrop: any;
 
 	render(animate = true) {
-		// Draw the backdrop
-		this.drawBackdrop();
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+		const isXGridEnabled = Tools.getProperty(
+			this.getOptions(),
+			"grid",
+			"x",
+			"enabled"
+		);
+		const isYGridEnabled = Tools.getProperty(
+			this.getOptions(),
+			"grid",
+			"y",
+			"enabled"
+		);
 
-		this.drawXGrid(animate);
-		this.drawYGrid(animate);
+		if (!isXGridEnabled && !isYGridEnabled) {
+			return;
+		}
+		// Draw the backdrop
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
+
+		if (isXGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
+			this.drawXGrid(animate);
+		}
+
+		if (isYGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+			this.drawYGrid(animate);
+		}
 	}
 
 	drawXGrid(animate: boolean) {
@@ -35,7 +54,7 @@ export class Grid extends Component {
 
 		// Determine number of ticks
 		const numberOfTicks = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"x",
 			"numberOfTicks"
@@ -72,7 +91,7 @@ export class Grid extends Component {
 
 		// Determine number of ticks
 		const numberOfTicks = Tools.getProperty(
-			this.model.getOptions(),
+			this.getOptions(),
 			"grid",
 			"y",
 			"numberOfTicks"
@@ -150,7 +169,7 @@ export class Grid extends Component {
 				+Tools.getTranslationValues(line2).tx -
 				+Tools.getTranslationValues(line1).tx;
 		}
-		const { threshold } = this.model.getOptions().tooltip.gridline;
+		const { threshold } = this.getOptions().tooltip.gridline;
 		// return the threshold
 		return lineSpacing * threshold;
 	}
@@ -161,7 +180,7 @@ export class Grid extends Component {
 	 */
 	getActiveGridline(position) {
 		const userSpecifiedThreshold = Tools.getProperty(
-			this.model.getOptions,
+			this.getOptions,
 			"tooltip",
 			"gridline",
 			"threshold"
@@ -177,7 +196,7 @@ export class Grid extends Component {
 			// threshold for when to display a gridline tooltip
 			const bounds = {
 				min: Number(translations.tx) - threshold,
-				max: Number(translations.tx) + threshold,
+				max: Number(translations.tx) + threshold
 			};
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
@@ -186,7 +205,7 @@ export class Grid extends Component {
 		return xGridlines;
 	}
 
-	drawBackdrop() {
+	drawBackdrop(isXGridEnabled, isYGridEnabled) {
 		const svg = this.parent;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
@@ -199,24 +218,23 @@ export class Grid extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
-			"rect.chart-grid-backdrop"
+			isXGridEnabled || isYGridEnabled
+				? "rect.chart-grid-backdrop.stroked"
+				: "rect.chart-grid-backdrop"
 		);
 
 		this.backdrop
 			.merge(backdropRect)
 			.attr("x", xScaleStart)
 			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
+			.attr("width", Math.abs(xScaleEnd - xScaleStart))
+			.attr("height", Math.abs(yScaleEnd - yScaleStart))
 			.lower();
 
 		backdropRect.attr("width", "100%").attr("height", "100%");
 	}
 
 	cleanGrid(g) {
-		const options = this.model.getOptions();
-		g.selectAll("line").attr("stroke", options.grid.strokeColor);
-
 		// Remove extra elements
 		g.selectAll("text").remove();
 		g.select(".domain").remove();

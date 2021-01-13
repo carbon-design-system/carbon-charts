@@ -1,0 +1,64 @@
+@import "./color-palatte.scss";
+
+@function getThemeColors() {
+	$color-map: ();
+	@if $carbon--theme ==
+		$carbon--theme--g100 or
+		$carbon--theme ==
+		$carbon--theme--g90
+	{
+		@return color-property(null, $dark-theme-colors);
+	} @else {
+		@return color-property(null, $white-theme-colors);
+	}
+}
+
+@function color-property($name, $theme-colors) {
+	$color-items: ();
+
+	@if type-of($theme-colors) == map {
+		@each $category, $value in $theme-colors {
+			@if $name == null {
+				$color-items: map-merge(
+					$color-items,
+					color-property("#{$category}", $value)
+				);
+			} @else {
+				$color-items: map-merge(
+					$color-items,
+					color-property("#{$name}-#{$category}", $value)
+				);
+			}
+		}
+		@return $color-items;
+	} @else {
+		@return (#{$name}: $theme-colors);
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-svg {
+	$color-map: getThemeColors();
+
+	@each $token, $color in $color-map {
+		.fill-#{$token} {
+			fill: $color;
+			&.hovered {
+				fill: darken($color, 7%);
+			}
+		}
+
+		.stroke-#{$token} {
+			stroke: $color;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--tooltip {
+	$color-map: getThemeColors();
+
+	@each $token, $color in $color-map {
+		.tooltip-#{$token} {
+			background-color: $color;
+		}
+	}
+}

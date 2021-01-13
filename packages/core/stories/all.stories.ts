@@ -18,7 +18,7 @@ introStories.add("Welcome", () => {
 	container.innerHTML = `
 <div class="content">
 	<div class="logo">
-		<img src="logo.png" alt="Carbon Charts">
+		<img src="logo.svg" alt="Carbon Charts">
 	</div>
 
 	<div class="content">
@@ -98,16 +98,35 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			container.innerHTML = `
 <h3>
-	<b class="component">Component:</b>
+	<b class="component">Component</b>
 	<span class="bx--tag bx--tag--green component-name">${
 		demo.chartType.vanilla
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span>data, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
 </p>
 
-${storyUtils.generateThemePickerHTML()}
+${
+	demo.options.experimental
+		? `
+<div data-notification
+  class="bx--inline-notification bx--inline-notification--warning"
+  role="alert">
+  <div class="bx--inline-notification__details">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--inline-notification__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1	s1,0.4,1,1S10.6,16,10,16z"></path><path d="M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S10.6,16,10,16z" data-icon-path="inner-path" opacity="0"></path></svg>
+    <div class="bx--inline-notification__text-wrapper">
+      <p class="bx--inline-notification__title">Alpha release</p>
+      <p class="bx--inline-notification__subtitle">This is not a stable release of this component, certain pieces might be added or modified in the future. Additionally, the current implementation might have issues that we have not uncovered yet, and will work to resolve through our stable release of the component.</p>
+    </div>
+  </div>
+</div>`
+		: ""
+}
+
+${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ""}
+<div id="charting-controls">
+</div>
 
 <div class="marginTop-30" id="chart-demo">
 </div>
@@ -118,81 +137,24 @@ ${storyUtils.generateThemePickerHTML()}
 </a>
 			`;
 
-			storyUtils.addRadioButtonEventListeners(container);
-
 			// Initialize chart
 			const chart = new ClassToInitialize(
 				container.querySelector("div#chart-demo"),
 				{
-					data: object("Data", demo.data),
-					options: object("Options", demo.options),
+					data: object(
+						"Data",
+						demo.isHighScale
+							? storyUtils.generateRandomData(100, 100, 500)
+							: demo.data
+					),
+					options: object("Options", demo.options)
 				}
 			);
+
+			storyUtils.addDemoDataFormListeners(container, demo, chart);
+			storyUtils.addControls(container, chart);
 
 			return container;
 		});
 	});
 });
-
-// DEV ONLY STORIES
-if (process.env.NODE_ENV !== "production") {
-	const devStories = storiesOf("__DEV__", module).addDecorator(withKnobs);
-
-	// Loop through the demos for the group
-	devStories.add("All chart types", () => {
-		// container creation
-		const container = document.createElement("div");
-		container.setAttribute("class", "container theme--g100");
-
-		container.innerHTML = `
-	<h3>
-		<b class="component">Collection of all demos</b>
-	</h3>
-
-	${storyUtils.generateThemePickerHTML()}
-`;
-
-		storyUtils.addRadioButtonEventListeners(container);
-
-		const getNewRow = () => {
-			const row = document.createElement("div");
-			row.className = "bx--row";
-
-			return row;
-		};
-
-		const grid = document.createElement("div");
-		grid.setAttribute("class", "bx--grid");
-		container.appendChild(grid);
-
-		let i = 0;
-		let row = getNewRow();
-
-		storybookDemoGroups.forEach((demoGroup) => {
-			demoGroup.demos.forEach((demo) => {
-				grid.appendChild(row);
-				if (i % 2 === 0 && i !== 0) {
-					row = getNewRow();
-					grid.appendChild(row);
-				}
-
-				const ClassToInitialize =
-					ChartComponents[demo.chartType.vanilla];
-
-				const column = document.createElement("div");
-				column.className = "bx--col-md-12 bx--col-lg-6 chart-demo";
-				column.setAttribute("id", demo.title);
-				const chart = new ClassToInitialize(column, {
-					data: demo.data,
-					options: demo.options,
-				});
-
-				row.appendChild(column);
-
-				i++;
-			});
-		});
-
-		return container;
-	});
-}

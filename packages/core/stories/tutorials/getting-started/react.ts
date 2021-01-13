@@ -1,6 +1,9 @@
 import marked from "marked";
 
-export const reactTutorial = marked(`
+export const reactTutorial = {
+	name: "React",
+	type: "getting-started",
+	content: marked(`
 # Carbon Charts - React
 
 The Carbon Charts library provides a collection of reusable charting components to
@@ -14,13 +17,15 @@ consistent markup, styles, and behavior in prototype and production work.
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts-react d3
+yarn add @carbon/charts-react d3@5.x
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts-react d3
+npm install --save @carbon/charts-react d3@5.x
 \`\`\`
+
+**Note:** you'd also need to install \`carbon-components\` if you're not using a bundled version of the library.
 
 &nbsp;
 ## Getting started
@@ -116,4 +121,5 @@ the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
 for more guidelines and support.
 Please[create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
 if your issue does not already exist.
-`);
+`)
+};

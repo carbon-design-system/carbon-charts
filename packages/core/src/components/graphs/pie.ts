@@ -5,9 +5,11 @@ import { Tools } from "../../tools";
 import {
 	CalloutDirections,
 	Roles,
-	TooltipTypes,
 	Events,
+	Alignments,
+	ColorClassNameTypes
 } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -50,8 +52,7 @@ export class Pie extends Component {
 	}
 
 	getInnerRadius() {
-		const options = this.model.getOptions();
-		return options.pie.innerRadius;
+		return Configuration.pie.innerRadius;
 	}
 
 	render(animate = true) {
@@ -59,7 +60,7 @@ export class Pie extends Component {
 		const svg = this.getContainerSVG();
 
 		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
@@ -70,13 +71,13 @@ export class Pie extends Component {
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(this.getInnerRadius())
-			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset);
+			.outerRadius(radius + Configuration.pie.hoverArc.outerRadiusOffset);
 
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
 			.sort(null)
-			.padAngle(options.pie.padAngle);
+			.padAngle(Configuration.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
 		const pieLayoutData = pieLayout(displayData).sort(
@@ -84,10 +85,10 @@ export class Pie extends Component {
 		);
 
 		// Update data on all slices
-		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices").attr(
-			"role",
-			Roles.GROUP
-		);
+		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "slices");
+
 		const paths = slicesGroup
 			.selectAll("path.slice")
 			.data(pieLayoutData, (d) => d.data[groupMapsTo]);
@@ -105,7 +106,14 @@ export class Pie extends Component {
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
-			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d.data[groupMapsTo],
+					originalClassName: "slice"
+				})
+			)
+			.style("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
 				this.services.transitions.getTransition(
@@ -134,10 +142,10 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
-		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr(
-			"role",
-			Roles.GROUP
-		);
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "labels");
+
 		const labels = labelsGroup
 			.selectAll("text.pie-label")
 			.data(labelData, (d: any) => d.data[groupMapsTo]);
@@ -191,16 +199,18 @@ export class Pie extends Component {
 
 				// check if last 2 slices (or just last) are < the threshold
 				if (i >= totalSlices - 2) {
-					if (sliceAngleDeg < options.pie.callout.minSliceDegree) {
+					if (
+						sliceAngleDeg < Configuration.pie.callout.minSliceDegree
+					) {
 						let labelTranslateX, labelTranslateY;
 						if (d.index === totalSlices - 1) {
 							labelTranslateX =
 								d.xPosition +
-								options.pie.callout.offsetX +
-								options.pie.callout.textMargin +
+								Configuration.pie.callout.offsetX +
+								Configuration.pie.callout.textMargin +
 								d.textOffsetX;
 							labelTranslateY =
-								d.yPosition - options.pie.callout.offsetY;
+								d.yPosition - Configuration.pie.callout.offsetY;
 
 							// Set direction of callout
 							d.direction = CalloutDirections.RIGHT;
@@ -208,11 +218,11 @@ export class Pie extends Component {
 						} else {
 							labelTranslateX =
 								d.xPosition -
-								options.pie.callout.offsetX -
+								Configuration.pie.callout.offsetX -
 								d.textOffsetX -
-								options.pie.callout.textMargin;
+								Configuration.pie.callout.textMargin;
 							labelTranslateY =
-								d.yPosition - options.pie.callout.offsetY;
+								d.yPosition - Configuration.pie.callout.offsetY;
 
 							// Set direction of callout
 							d.direction = CalloutDirections.LEFT;
@@ -229,12 +239,28 @@ export class Pie extends Component {
 		// Render pie label callouts
 		this.renderCallouts(calloutData);
 
+		const optionName = Tools.getProperty(options, "donut")
+			? "donut"
+			: "pie";
+		const alignment = Tools.getProperty(options, optionName, "alignment");
+
+		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
+			useAttr: true
+		});
+
 		// Position Pie
-		const pieTranslateX = radius + options.pie.xOffset;
-		let pieTranslateY = radius + options.pie.yOffset;
-		if (calloutData.length > 0) {
-			pieTranslateY += options.pie.yOffsetCallout;
+		let pieTranslateX = radius + Configuration.pie.xOffset;
+		if (alignment === Alignments.CENTER) {
+			pieTranslateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			pieTranslateX = width - radius - Configuration.pie.xOffset;
 		}
+
+		let pieTranslateY = radius + Configuration.pie.yOffset;
+		if (calloutData.length > 0) {
+			pieTranslateY += Configuration.pie.yOffsetCallout;
+		}
+
 		svg.attr("transform", `translate(${pieTranslateX}, ${pieTranslateY})`);
 
 		// Add event listeners
@@ -245,8 +271,9 @@ export class Pie extends Component {
 		const svg = DOMUtils.appendOrSelect(
 			this.getContainerSVG(),
 			"g.callouts"
-		).attr("role", Roles.GROUP);
-		const options = this.model.getOptions();
+		)
+			.attr("role", Roles.GROUP)
+			.attr("data-name", "callouts");
 
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);
@@ -269,34 +296,40 @@ export class Pie extends Component {
 			if (direction === CalloutDirections.RIGHT) {
 				d.startPos = {
 					x: xPosition,
-					y: yPosition + d.textOffsetY,
+					y: yPosition + d.textOffsetY
 				};
 
 				// end position for the callout line
 				d.endPos = {
-					x: xPosition + options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY,
+					x: xPosition + Configuration.pie.callout.offsetX,
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
 				d.intersectPointX =
-					d.endPos.x - options.pie.callout.horizontalLineLength;
+					d.endPos.x - Configuration.pie.callout.horizontalLineLength;
 			} else {
 				// start position for the callout line
 				d.startPos = {
 					x: xPosition,
-					y: yPosition + d.textOffsetY,
+					y: yPosition + d.textOffsetY
 				};
 
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
-					x: xPosition - options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY,
+					x: xPosition - Configuration.pie.callout.offsetX,
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
 				d.intersectPointX =
-					d.endPos.x + options.pie.callout.horizontalLineLength;
+					d.endPos.x + Configuration.pie.callout.horizontalLineLength;
 			}
 
 			// Store the necessary data in the DOM element
@@ -339,7 +372,7 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
 			.selectAll("path.slice")
@@ -366,13 +399,6 @@ export class Pie extends Component {
 		this.parent
 			.selectAll("path.slice")
 			.on("mouseover", function (datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
-					element: select(this),
-					datum,
-				});
-			})
-			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -385,22 +411,40 @@ export class Pie extends Component {
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
-					element: hoveredElement,
-					datum,
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					element: select(this),
+					datum
 				});
 
+				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
+					items: [
+						{
+							label: datum.data[groupMapsTo],
+							value: datum.data.value
+						}
+					]
 				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
@@ -417,25 +461,23 @@ export class Pie extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}
 
 	// Helper functions
 	protected computeRadius() {
-		const options = this.model.getOptions();
-
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		const radius: number = Math.min(width, height) / 2;
 
-		return radius + options.pie.radiusOffset;
+		return radius + Configuration.pie.radiusOffset;
 	}
 }

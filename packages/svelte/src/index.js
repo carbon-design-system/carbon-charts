@@ -1,23 +1,33 @@
 import AreaChart from "./AreaChart.svelte";
+import StackedAreaChart from "./StackedAreaChart.svelte";
 import BarChartGrouped from "./BarChartGrouped.svelte";
 import BarChartSimple from "./BarChartSimple.svelte";
 import BarChartStacked from "./BarChartStacked.svelte";
 import BubbleChart from "./BubbleChart.svelte";
 import DonutChart from "./DonutChart.svelte";
 import LineChart from "./LineChart.svelte";
+import LollipopChart from "./LollipopChart.svelte";
 import PieChart from "./PieChart.svelte";
 import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
+import GaugeChart from "./GaugeChart.svelte";
+import MeterChart from "./MeterChart.svelte";
+import TreemapChart from "./TreemapChart.svelte";
 
 export {
 	AreaChart,
+	StackedAreaChart,
 	BarChartGrouped,
 	BarChartSimple,
 	BarChartStacked,
 	BubbleChart,
 	DonutChart,
 	LineChart,
+	LollipopChart,
 	PieChart,
 	ScatterChart,
-	RadarChart
+	RadarChart,
+	GaugeChart,
+	MeterChart,
+	TreemapChart
 };

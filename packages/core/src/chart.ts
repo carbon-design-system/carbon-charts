@@ -5,7 +5,7 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	Events as ChartEvents,
+	Events as ChartEvents
 } from "./interfaces";
 
 // Misc
@@ -16,19 +16,20 @@ import {
 	Legend,
 	LayoutComponent,
 	Tooltip,
-	Spacer,
+	Spacer
 } from "./components";
 import { Tools } from "./tools";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
+import { DOMUtils, Events, GradientUtils, Transitions } from "./services/index";
 
 export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions,
+		gradientUtils: GradientUtils,
+		transitions: Transitions
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -37,7 +38,7 @@ export class Chart {
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
-		this.model.set({ holder }, true);
+		this.model.set({ holder }, { skipUpdate: true });
 
 		// Initialize all services
 		Object.keys(this.services).forEach((serviceName) => {
@@ -49,8 +50,9 @@ export class Chart {
 		});
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, () => {
-			this.update(true);
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
+			const animate = !!Tools.getProperty(e, "detail", "animate");
+			this.update(animate);
 		});
 
 		// Set model data & options
@@ -110,7 +112,7 @@ export class Chart {
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
 
-		this.model.set({ destroyed: true }, true);
+		this.model.set({ destroyed: true }, { skipUpdate: true });
 	}
 
 	protected getChartComponents(graphFrameComponents: any[]) {
@@ -119,8 +121,8 @@ export class Chart {
 			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const legendComponent = {
@@ -128,8 +130,8 @@ export class Chart {
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const graphFrameComponent = {
@@ -137,8 +139,8 @@ export class Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const isLegendEnabled =
@@ -176,8 +178,8 @@ export class Chart {
 			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const fullFrameComponent = {
@@ -188,18 +190,18 @@ export class Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
-						legendSpacerComponent,
-						graphFrameComponent,
+						...(isLegendEnabled ? [legendSpacerComponent] : []),
+						graphFrameComponent
 					],
 					{
-						direction: fullFrameComponentDirection,
+						direction: fullFrameComponentDirection
 					}
-				),
+				)
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		// Add chart title if it exists
@@ -212,8 +214,8 @@ export class Chart {
 				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+					y: LayoutGrowth.FIXED
+				}
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -221,14 +223,15 @@ export class Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
+			new Tooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN,
+					direction: LayoutDirection.COLUMN
 				}
-			),
+			)
 		];
 	}
 }

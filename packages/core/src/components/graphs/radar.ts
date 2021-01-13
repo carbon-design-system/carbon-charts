@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Events, TooltipTypes, Roles } from "../../interfaces";
+import { Events, Roles, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import {
 	Point,
@@ -9,8 +9,9 @@ import {
 	radialLabelPlacement,
 	radToDeg,
 	polarToCartesianCoords,
-	distanceBetweenPointOnCircAndVerticalDiameter,
+	distanceBetweenPointOnCircAndVerticalDiameter
 } from "../../services/angle-utils";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -45,15 +46,15 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		this.svg = this.getContainerSVG();
+		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 
 		const data = this.model.getData();
 		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const {
@@ -61,9 +62,8 @@ export class Radar extends Component {
 			yLabelPadding,
 			yTicksNumber,
 			minRange,
-			xAxisRectHeight,
-			opacity,
-		} = Tools.getProperty(options, "radar");
+			xAxisRectHeight
+		} = Configuration.radar;
 
 		this.uniqueKeys = Array.from(new Set(data.map((d) => d[angle])));
 		this.uniqueGroups = Array.from(
@@ -93,9 +93,7 @@ export class Radar extends Component {
 		const yScale = scaleLinear()
 			.domain([
 				0,
-				max(
-					this.displayDataNormalized.map((d) => d[value]) as number[]
-				),
+				max(this.displayDataNormalized.map((d) => d[value]) as number[])
 			])
 			.range([minRange, radius])
 			.nice(yTicksNumber);
@@ -135,7 +133,7 @@ export class Radar extends Component {
 		// center coordinates
 		const c: Point = {
 			x: leftPadding + xLabelPadding,
-			y: height / 2,
+			y: height / 2
 		};
 
 		/////////////////////////////
@@ -143,7 +141,7 @@ export class Radar extends Component {
 		/////////////////////////////
 
 		// y axes
-		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr(
+		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -209,94 +207,8 @@ export class Radar extends Component {
 				)
 		);
 
-		// y labels (show only the min and the max labels)
-		const yLabels = DOMUtils.appendOrSelect(this.svg, "g.y-labels").attr(
-			"role",
-			Roles.GROUP
-		);
-		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
-		yLabelUpdate.join(
-			(enter) =>
-				enter
-					.append("text")
-					.attr("opacity", 0)
-					.text((tick) => tick)
-					.attr(
-						"x",
-						(tick) =>
-							polarToCartesianCoords(
-								-Math.PI / 2,
-								yScale(tick),
-								c
-							).x + yLabelPadding
-					)
-					.attr(
-						"y",
-						(tick) =>
-							polarToCartesianCoords(
-								-Math.PI / 2,
-								yScale(tick),
-								c
-							).y
-					)
-					.style("text-anchor", "start")
-					.style("dominant-baseline", "middle")
-					.call((selection) =>
-						selection
-							.transition(
-								this.services.transitions.getTransition(
-									"radar_y_labels_enter",
-									animate
-								)
-							)
-							.attr("opacity", 1)
-					),
-			(update) =>
-				update.call((selection) =>
-					selection
-						.transition(
-							this.services.transitions.getTransition(
-								"radar_y_labels_update",
-								animate
-							)
-						)
-						.text((tick) => tick)
-						.attr("opacity", 1)
-						.attr(
-							"x",
-							(tick) =>
-								polarToCartesianCoords(
-									-Math.PI / 2,
-									yScale(tick),
-									c
-								).x + yLabelPadding
-						)
-						.attr(
-							"y",
-							(tick) =>
-								polarToCartesianCoords(
-									-Math.PI / 2,
-									yScale(tick),
-									c
-								).y
-						)
-				),
-			(exit) =>
-				exit.call((selection) =>
-					selection
-						.transition(
-							this.services.transitions.getTransition(
-								"radar_y_labels_exit",
-								animate
-							)
-						)
-						.attr("opacity", 0)
-						.remove()
-				)
-		);
-
 		// x axes
-		const xAxes = DOMUtils.appendOrSelect(this.svg, "g.x-axes").attr(
+		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -435,7 +347,7 @@ export class Radar extends Component {
 		);
 
 		// x labels
-		const xLabels = DOMUtils.appendOrSelect(this.svg, "g.x-labels").attr(
+		const xLabels = DOMUtils.appendOrSelect(svg, "g.x-labels").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -527,24 +439,34 @@ export class Radar extends Component {
 		);
 
 		// blobs
-		const blobs = DOMUtils.appendOrSelect(this.svg, "g.blobs").attr(
+		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr(
 			"role",
 			Roles.GROUP
 		);
 		const blobUpdate = blobs
 			.selectAll("path")
 			.data(this.groupedDataNormalized, (group) => group.name);
+
 		blobUpdate.join(
 			(enter) =>
 				enter
 					.append("path")
-					.attr("class", "blob")
+					.attr("class", (group) =>
+						this.model.getColorClassName({
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						})
+					)
 					.attr("role", Roles.GRAPHICS_SYMBOL)
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
-					.attr("fill", (group) => colorScale(group.name))
-					.style("fill-opacity", opacity.selected)
-					.attr("stroke", (group) => colorScale(group.name))
+					.style("fill", (group) => colorScale(group.name))
+					.style("fill-opacity", Configuration.radar.opacity.selected)
+					.style("stroke", (group) => colorScale(group.name))
 					.attr("d", (group) => oldRadialLineGenerator(group.data))
 					.call((selection) =>
 						selection
@@ -559,7 +481,20 @@ export class Radar extends Component {
 								radialLineGenerator(group.data)
 							)
 					),
-			(update) =>
+			(update) => {
+				update
+					.attr("class", (group) =>
+						this.model.getColorClassName({
+							classNameTypes: [
+								ColorClassNameTypes.FILL,
+								ColorClassNameTypes.STROKE
+							],
+							dataGroupName: group.name,
+							originalClassName: "blob"
+						})
+					)
+					.style("fill", (group) => colorScale(group.name))
+					.style("stroke", (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
 						.transition(
@@ -571,7 +506,8 @@ export class Radar extends Component {
 						.attr("opacity", 1)
 						.attr("transform", `translate(${c.x}, ${c.y})`)
 						.attr("d", (group) => radialLineGenerator(group.data))
-				),
+				)
+			},
 			(exit) =>
 				exit.call((selection) =>
 					selection
@@ -588,7 +524,7 @@ export class Radar extends Component {
 		);
 
 		// data dots
-		const dots = DOMUtils.appendOrSelect(this.svg, "g.dots").attr(
+		const dots = DOMUtils.appendOrSelect(svg, "g.dots").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -602,7 +538,13 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			.attr("class", (d) => Tools.kebabCase(d[angle]))
+			.attr("class", (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: Tools.kebabCase(d[angle])
+				})
+			)
 			.attr(
 				"cx",
 				(d) =>
@@ -623,13 +565,13 @@ export class Radar extends Component {
 			)
 			.attr("r", 0)
 			.attr("opacity", 0)
-			.attr("fill", (d) => colorScale(d[groupMapsTo]));
+			.style("fill", (d) => colorScale(d[groupMapsTo]));
 
 		// rectangles
-		const xAxesRect = DOMUtils.appendOrSelect(
-			this.svg,
-			"g.x-axes-rect"
-		).attr("role", Roles.GROUP);
+		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect").attr(
+			"role",
+			Roles.GROUP
+		);
 		const xAxisRectUpdate = xAxesRect
 			.selectAll("rect")
 			.data(this.uniqueKeys);
@@ -644,12 +586,107 @@ export class Radar extends Component {
 			.attr("y", c.y - xAxisRectHeight / 2)
 			.attr("width", yScale.range()[1])
 			.attr("height", xAxisRectHeight)
-			.attr("fill", "red")
+			.style("fill", "red")
 			.style("fill-opacity", 0)
 			.attr(
 				"transform",
 				(key) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`
 			);
+
+		// y labels (show only the min and the max labels)
+		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels").attr(
+			"role",
+			Roles.GROUP
+		);
+		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
+		yLabelUpdate.join(
+			(enter) =>
+				enter
+					.append("text")
+					.attr("opacity", 0)
+					.text((tick) => tick)
+					.attr(
+						"x",
+						(tick) =>
+							polarToCartesianCoords(
+								-Math.PI / 2,
+								yScale(tick),
+								c
+							).x + yLabelPadding
+					)
+					.attr(
+						"y",
+						(tick) =>
+							polarToCartesianCoords(
+								-Math.PI / 2,
+								yScale(tick),
+								c
+							).y
+					)
+					.style("text-anchor", "start")
+					.style("dominant-baseline", "middle")
+					.call((selection) =>
+						selection
+							.transition(
+								this.services.transitions.getTransition(
+									"radar_y_labels_enter",
+									animate
+								)
+							)
+							.attr("opacity", 1)
+					),
+			(update) =>
+				update.call((selection) =>
+					selection
+						.transition(
+							this.services.transitions.getTransition(
+								"radar_y_labels_update",
+								animate
+							)
+						)
+						.text((tick) => tick)
+						.attr("opacity", 1)
+						.attr(
+							"x",
+							(tick) =>
+								polarToCartesianCoords(
+									-Math.PI / 2,
+									yScale(tick),
+									c
+								).x + yLabelPadding
+						)
+						.attr(
+							"y",
+							(tick) =>
+								polarToCartesianCoords(
+									-Math.PI / 2,
+									yScale(tick),
+									c
+								).y
+						)
+				),
+			(exit) =>
+				exit.call((selection) =>
+					selection
+						.transition(
+							this.services.transitions.getTransition(
+								"radar_y_labels_exit",
+								animate
+							)
+						)
+						.attr("opacity", 0)
+						.remove()
+				)
+		);
+
+		const alignment = Tools.getProperty(options, "radar", "alignment");
+
+		const alignmentOffset = DOMUtils.getAlignmentOffset(
+			alignment,
+			svg,
+			this.getParent()
+		);
+		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -659,7 +696,10 @@ export class Radar extends Component {
 
 	// append temporarily the label to get the exact space that it occupies
 	getLabelDimensions = (label: string) => {
-		const tmpTick = DOMUtils.appendOrSelect(this.svg, `g.tmp-tick`);
+		const tmpTick = DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			`g.tmp-tick`
+		);
 		const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(
 			label
 		);
@@ -674,7 +714,7 @@ export class Radar extends Component {
 	// Given a flat array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: any) => {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const completeBlankData = Tools.flatMapDeep(
@@ -682,7 +722,7 @@ export class Radar extends Component {
 				return this.uniqueGroups.map((group) => ({
 					[angle]: key,
 					[groupMapsTo]: group,
-					[value]: null,
+					[value]: null
 				}));
 			})
 		);
@@ -692,14 +732,14 @@ export class Radar extends Component {
 	// Given a a grouped array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeGroupedData = (dataset: any) => {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		return dataset.map(({ name, data }) => {
 			const completeBlankData = this.uniqueKeys.map((k) => ({
 				[groupMapsTo]: name,
 				[angle]: k,
-				[value]: null,
+				[value]: null
 			}));
 			return { name, data: Tools.merge(completeBlankData, data) };
 		});
@@ -707,11 +747,6 @@ export class Radar extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const opacity = Tools.getProperty(
-			this.model.getOptions(),
-			"radar",
-			"opacity"
-		);
 		this.parent
 			.selectAll("g.blobs path")
 			.transition(
@@ -719,24 +754,26 @@ export class Radar extends Component {
 			)
 			.style("fill-opacity", (group) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return Tools.getProperty(opacity, "unselected");
+					return Configuration.radar.opacity.unselected;
 				}
-				return Tools.getProperty(opacity, "selected");
+				return Configuration.radar.opacity.selected;
+			})
+			.style("stroke-opacity", (group) => {
+				if (group.name !== hoveredElement.datum().name) {
+					return Configuration.radar.opacity.unselected;
+				}
+				return 1;
 			});
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		const opacity = Tools.getProperty(
-			this.model.getOptions(),
-			"radar",
-			"opacity"
-		);
 		this.parent
 			.selectAll("g.blobs path")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-blob")
 			)
-			.style("fill-opacity", Tools.getProperty(opacity, "selected"));
+			.style("fill-opacity", Configuration.radar.opacity.selected)
+			.style("stroke-opacity", 1);
 	};
 
 	destroy() {
@@ -761,25 +798,24 @@ export class Radar extends Component {
 	addEventListeners() {
 		const self = this;
 		const {
-			axes: { angle },
-			dotsRadius,
-		} = Tools.getProperty(this.model.getOptions(), "radar");
+			axes: { angle }
+		} = Tools.getProperty(this.getOptions(), "radar");
 
 		// events on x axes rects
 		this.parent
 			.selectAll(".x-axes-rect > rect")
 			.on("mouseover", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOVER,
 					{
-						element: select(this),
-						datum,
+						element: hoveredElement,
+						datum
 					}
 				);
-			})
-			.on("mousemove", function (datum) {
-				const hoveredElement = select(this);
+
 				const axisLine = self.parent.select(
 					`.x-axes .x-axis-${Tools.kebabCase(datum)}`
 				);
@@ -793,34 +829,59 @@ export class Radar extends Component {
 					.attr("stroke-dasharray", "4 4");
 				dots.classed("hovered", true)
 					.attr("opacity", 1)
-					.attr("r", dotsRadius);
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Radar.X_AXIS_MOUSEMOVE,
-					{
-						element: hoveredElement,
-						datum,
-					}
-				);
+					.attr("r", Configuration.radar.dotsRadius);
 
 				// get the items that should be highlighted
 				const itemsToHighlight = self.displayDataNormalized.filter(
 					(d) => d[angle] === datum
 				);
 
+				const options = self.getOptions();
+				const { groupMapsTo } = options.data;
+				const valueMapsTo = Tools.getProperty(
+					options,
+					"radar",
+					"axes",
+					"value"
+				);
+
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					multidata: itemsToHighlight,
-					type: TooltipTypes.GRIDLINE,
+					items: itemsToHighlight
+						.filter(
+							(datum) => typeof datum[valueMapsTo] === "number"
+						)
+						.map((datum) => ({
+							label: datum[groupMapsTo],
+							value: datum[valueMapsTo],
+							color: self.model.getFillColor(datum[groupMapsTo]),
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo]
+							})
+						}))
 				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Radar.X_AXIS_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
@@ -843,17 +904,12 @@ export class Radar extends Component {
 					Events.Radar.X_AXIS_MOUSEOUT,
 					{
 						element: hoveredElement,
-						datum,
+						datum
 					}
 				);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement,
-				});
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 			});
 	}
 }

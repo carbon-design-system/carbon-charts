@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
-import { Events } from "./../../interfaces";
+import { Events, Alignments } from "./../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
@@ -11,6 +11,8 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
+
+const CSS_VERIFIER_ELEMENT_CLASSNAME = "DONT_STYLE_ME_css_styles_verifier";
 
 export class DOMUtils extends Service {
 	static getSVGElementSize(
@@ -23,7 +25,7 @@ export class DOMUtils extends Service {
 
 		const finalDimensions = {
 			width: 0,
-			height: 0,
+			height: 0
 		};
 
 		const validateAndSetDimensions = (dimensions) => {
@@ -46,7 +48,7 @@ export class DOMUtils extends Service {
 
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height"),
+			height: svgSelector.attr("height")
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -56,7 +58,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height,
+				height: bbox.height
 			};
 		} catch (e) {}
 
@@ -64,13 +66,13 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height,
+				height: boundingRect.height
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight,
+			height: svgSelector.node().clientHeight
 		};
 
 		// If both attribute values are numbers
@@ -122,7 +124,7 @@ export class DOMUtils extends Service {
 					"height",
 					"baseVal",
 					"value"
-				),
+				)
 			};
 
 			validateAndSetDimensions(nativeDimensions);
@@ -136,17 +138,49 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelect(parent, query) {
-		const querySections = query.split(".");
-		const elementToAppend = querySections[0];
+		const selection = parent.select(`${query}`);
 
-		const selection = parent.select(query);
 		if (selection.empty()) {
+			// see if there is an id
+			let querySections = query.split("#");
+			let elementToAppend;
+			let id;
+			// if there is an id
+			if (querySections.length === 2) {
+				// take out the element to append
+				elementToAppend = querySections[0];
+				// split it by classes
+				querySections = querySections[1].split(".");
+				// the first string is the id
+				id = querySections[0];
+			} else {
+				querySections = query.split(".");
+				elementToAppend = querySections[0];
+			}
+
 			return parent
 				.append(elementToAppend)
+				.attr("id", id)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 
 		return selection;
+	}
+
+	static getAlignmentOffset(alignment, svg, parent) {
+		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
+			useBBox: true
+		});
+		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
+
+		let alignmentOffset = 0;
+		if (alignment === Alignments.CENTER) {
+			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
+		} else if (alignment === Alignments.RIGHT) {
+			alignmentOffset = width - svgDimensions.width;
+		}
+
+		return alignmentOffset;
 	}
 
 	protected svg: Element;
@@ -159,10 +193,13 @@ export class DOMUtils extends Service {
 
 		// Add main SVG
 		this.addSVGElement();
+		this.verifyCSSStylesBeingApplied();
 
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
 		}
+
+		this.addHolderListeners();
 	}
 
 	update() {
@@ -202,22 +239,90 @@ export class DOMUtils extends Service {
 	}
 
 	addSVGElement() {
-		const chartsprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
+		const options = this.model.getOptions();
+		const chartsprefix = Tools.getProperty(options, "style", "prefix");
+
 		const svg = select(this.getHolder())
 			.append("svg")
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
 			.attr("height", "100%")
 			.attr("width", "100%");
 
+		svg.append("g").attr("class", CSS_VERIFIER_ELEMENT_CLASSNAME);
+
 		this.svg = svg.node();
+	}
+
+	verifyCSSStylesBeingApplied() {
+		// setTimeout is needed here since in `addSVGElement()` we're appending the
+		// CSS verifier element, and need to allow some time for it to become available
+		// in the DOM
+		setTimeout(() => {
+			const cssVerifierElement = select(this.svg)
+				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
+				.node();
+			const computedStyles = getComputedStyle(cssVerifierElement as any);
+			if (
+				computedStyles.getPropertyValue("overflow") !== "hidden" ||
+				computedStyles.getPropertyValue("opacity") !== "0"
+			) {
+				console.error(
+					"Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide."
+				);
+			}
+		});
+	}
+
+	setSVGMaxHeight() {
+		// if there is a set height on the holder, leave the chart svg height at 100%
+		if (!this.model.getOptions().height) {
+			const { height: chartHeight } = DOMUtils.getSVGElementSize(
+				select(this.svg),
+				{ useBBox: true }
+			);
+			const chartSVGSelector = select(this.svg).attr("class");
+			const children = select(this.svg).selectAll(
+				`.${chartSVGSelector} > svg`
+			);
+
+			// get the height of the children SVGs (spacers, titles, etc)
+			let childrenHeight = 0;
+			children.nodes().forEach(function (childSVG) {
+				childrenHeight += Number(
+					DOMUtils.getSVGElementSize(select(childSVG), {
+						useBBox: true
+					}).height
+				);
+			});
+
+			// set the chart svg height to the children height
+			// forcing the chart not to take up any more space than it requires
+			childrenHeight <= chartHeight
+				? select(this.svg).attr("height", childrenHeight)
+				: select(this.svg).attr("height", "100%");
+		}
 	}
 
 	getMainSVG() {
 		return this.svg;
+	}
+
+	addHolderListeners() {
+		const holder = this.getHolder();
+
+		if (!holder) {
+			return;
+		}
+
+		select(holder)
+			.on("mouseover", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER);
+			})
+			.on("mouseout", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT);
+			});
 	}
 
 	addResizeListener() {

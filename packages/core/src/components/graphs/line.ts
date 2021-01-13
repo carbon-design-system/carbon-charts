@@ -1,11 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, Events } from "../../interfaces";
+import { Roles, Events, ColorClassNameTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select } from "d3-selection";
 import { line } from "d3-shape";
 
 export class Line extends Component {
@@ -26,19 +25,20 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
+		const options = this.getOptions();
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -46,20 +46,52 @@ export class Line extends Component {
 			.y(getYValue)
 			.curve(curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(
+					datum
+				);
 				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
 				}
-
 				return true;
 			});
 
-		const groupedData = this.model.getGroupedData();
+		let data = [];
+		if (this.configs.stacked) {
+			const percentage = Object.keys(options.axes).some(
+				(axis) => options.axes[axis].percentage
+			);
+			const { groupMapsTo } = options.data;
+			const stackedData = this.model.getStackedData({
+				groups: this.configs.groups,
+				percentage
+			});
+
+			data = stackedData.map((d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+					d
+				);
+				return {
+					name: d[0][groupMapsTo],
+					data: d.map((datum) => ({
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[groupMapsTo]: datum[groupMapsTo],
+						[rangeIdentifier]: datum[1]
+					})),
+					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+				};
+			});
+		} else {
+			data = this.model.getGroupedData(this.configs.groups);
+		}
+
 		// Update the bound data on lines
 		const lines = svg
 			.selectAll("path.line")
-			.data(groupedData, (group) => group.name);
+			.data(data, (group) => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -77,16 +109,28 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
-			.attr("stroke", group => {
-				return this.model.getStrokeColor(group.name);
-			})
+			.data(data, (group) => group.name)
+			.attr("class", (group) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.STROKE],
+					dataGroupName: group.name,
+					originalClassName: "line"
+				})
+			)
+			.style("stroke", (group) => this.model.getStrokeColor(group.name))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", (group) => {
-				const { data } = group;
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-				return data.map((datum) => datum[rangeIdentifier]).join(",");
+				const { data: groupData } = group;
+				return groupData
+					.map((datum) => {
+						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+							datum
+						);
+						return datum[rangeIdentifier];
+					})
+					.join(",");
 			})
 			// Transition
 			.transition(
@@ -95,10 +139,10 @@ export class Line extends Component {
 					animate
 				)
 			)
-			.attr("opacity", 1)
+			.attr("opacity", (d) => (d.hidden ? 0 : 1))
 			.attr("d", (group) => {
-				const { data } = group;
-				return lineGenerator(data);
+				const { data: groupData } = group;
+				return lineGenerator(groupData);
 			});
 	}
 
@@ -106,7 +150,7 @@ export class Line extends Component {
 		const { hoveredElement } = event.detail;
 
 		this.parent
-			.selectAll("g.lines")
+			.selectAll("path.line")
 			.transition(
 				this.services.transitions.getTransition("legend-hover-line")
 			)
@@ -121,7 +165,7 @@ export class Line extends Component {
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("g.lines")
+			.selectAll("path.line")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
@@ -131,7 +175,7 @@ export class Line extends Component {
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path")
+			.selectAll("path.line")
 			.on("mousemove", null)
 			.on("mouseout", null);
 

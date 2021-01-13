@@ -1,15 +1,19 @@
 import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments,
+	ChartTypes
+} from "./enums";
+import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
 	AxesOptions,
+	ZoomBarsOptions
 } from "./index";
-import {
-	AxisTooltipOptions,
-	BarTooltipOptions,
-	BarOptions,
-	StackedBarOptions,
-} from "./components";
+import { BarOptions, StackedBarOptions } from "./components";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
@@ -88,9 +92,14 @@ export interface BaseChartOptions {
 		 */
 		groupMapsTo?: string;
 		/**
-		 * used to simulate data loading
+		 * used to simulate data loading in skeleton way
 		 */
-		loading?: Boolean;
+		loading?: boolean;
+		/**
+		 * options related to pre-selected data groups
+		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
+		 */
+		selectedGroups?: string[];
 	};
 	/**
 	 * options related to color scales
@@ -100,6 +109,25 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * use a carbon dataviz preset color palette
+		 * put the index (selection of which variant)
+		 */
+		pairing?: {
+			/**
+			 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
+			 */
+			numberOfVariants?: number;
+			/**
+			 * the option number of the color paring
+			 */
+			option?: number;
+		};
+		/*
+		 * options related to gradient
+		 * e.g. { enabled: true }
+		 */
+		gradient?: object;
 	};
 }
 
@@ -109,7 +137,11 @@ export interface BaseChartOptions {
 export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
-	tooltip?: AxisTooltipOptions;
+	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarsOptions;
 }
 
 /**
@@ -117,7 +149,6 @@ export interface AxisChartOptions extends BaseChartOptions {
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
-	tooltip?: BarTooltipOptions;
 }
 
 /**
@@ -141,8 +172,14 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 		filled?: boolean;
+		enabled?: boolean;
 	};
 }
+
+/**
+ * options specific to lollipop charts
+ */
+export interface LollipopChartOptions extends ScatterChartOptions {}
 
 /**
  * options specific to bubble charts
@@ -165,6 +202,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * Opacity of the fills used within each circle
 		 */
 		fillOpacity?: number;
+		/**
+		 * enabled scatter dot or not
+		 */
+		enabled?: boolean;
 	};
 }
 
@@ -189,9 +230,32 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | {
-		name: string;
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+	/**
+	 * options to bound the area of the chart
+	 */
+	bounds?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
 	};
+}
+
+/**
+ * options specific to area charts
+ */
+export interface StackedAreaChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -199,25 +263,31 @@ export interface AreaChartOptions extends AxisChartOptions {
  */
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
-		radiusOffset?: number;
-		innerRadius?: number;
-		padAngle?: number;
-		hoverArc?: {
-			outerRadiusOffset?: number;
-		};
-		xOffset?: number;
-		yOffset?: number;
-		yOffsetCallout?: number;
-		callout?: {
-			minSliceDegree?: number;
-			offsetX?: number;
-			offsetY?: number;
-			horizontalLineLength?: number;
-			textMargin?: number;
-		};
 		labels?: {
 			formatter?: Function;
 		};
+		alignment?: Alignments;
+	};
+}
+
+/**
+ * options specific to gauge charts
+ */
+export interface GaugeChartOptions extends BaseChartOptions {
+	gauge?: {
+		arcWidth?: number;
+		deltaArrow?: {
+			direction?: ArrowDirections;
+			size?: Function;
+			enabled: Boolean;
+		};
+		status?: Statuses;
+		deltaFontSize?: Function;
+		numberSpacing?: number;
+		numberFormatter?: Function;
+		valueFontSize?: Function;
+		type?: GaugeTypes;
+		alignment?: Alignments;
 	};
 }
 
@@ -228,10 +298,26 @@ export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
 			label?: string;
+			number?: number;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
 			numberFormatter?: Function;
+		};
+		alignment?: Alignments;
+	};
+}
+
+export interface MeterChartOptions extends BaseChartOptions {
+	meter?: {
+		height?: number;
+		title?: {
+			percentageIndicator?: {
+				/**
+				 * rendering of the percentage value relative to the dataset within title
+				 */
+				enabled?: boolean;
+			};
 		};
 	};
 }
@@ -241,19 +327,26 @@ export interface DonutChartOptions extends PieChartOptions {
  */
 export interface RadarChartOptions extends BaseChartOptions {
 	radar?: {
-		opacity: {
-			unselected: number;
-			selected: number;
-		};
 		axes: {
 			angle: string;
 			value: string;
 		};
-		xLabelPadding: number;
-		yLabelPadding: number;
-		yTicksNumber: number;
-		minRange: number;
-		xAxisRectHeight: number;
-		dotsRadius: number;
+		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to combo charts
+ */
+export interface ComboChartOptions extends AxisChartOptions {
+	comboChartTypes: Array<{
+		type: ChartTypes | any;
+		options?: object;
+		correspondingDatasets: Array<string>;
+	}>;
+}
+
+/*
+ * options specific to treemap charts
+ */
+export interface TreemapChartOptions extends BaseChartOptions {}
