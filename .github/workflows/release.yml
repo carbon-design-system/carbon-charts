@@ -1,32 +1,30 @@
 name: Release
 
 on:
-    push:
-        branches:
-            - master
-        tags:
-            # Push events to matching v*, i.e. v1.0, v20.15.10
-            - "v*"
+  push:
+    branches:
+      - master
+    tags:
+      # Push events to matching v*, i.e. v1.0, v20.15.10
+      - "v*"
 
 jobs:
-    build:
-        name: Create release - Node.js v11.x
-        runs-on: ubuntu-latest
+  build:
+    name: Create release - Node.js v11.x
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-			  uses: actions/checkout@v1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
 
-			- name: Use Node.js 11.x
-			  uses: actions/setup-node@v1
-			  with:
-			    node-version: '11.x'
-			    registry-url: 'https://registry.npmjs.org'
-
-			- name: Install dependencies
-			  run: yarn install --immutable --immutable-cache --check-cache
-
-			- name: Run deploy scripts
-			  run: yarn deploy
+      - name: Use Node.js 11.x
+        uses: actions/setup-node@v1
         with:
-            cmd: deploy # will run `yarn build` command
+          node-version: "11.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Run deploy scripts
+        run: yarn deploy
