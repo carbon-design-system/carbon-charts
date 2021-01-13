@@ -16,7 +16,7 @@ git stash
 # checkout master to get out of detached HEAD state
 git checkout master
 
-lerna version --conventional-commits --yes --force-publish
+lerna version --conventional-commits --yes --force-publish --create-release
 
 echo "Publish to NPM"
 
