@@ -395,8 +395,7 @@ export class CartesianScales extends Service {
 					axesOptions,
 					AxisPositions.LEFT,
 					"correspondingDatasets"
-				)
-			)
+				))
 		) {
 			return {
 				primary: AxisPositions.RIGHT,
@@ -423,8 +422,7 @@ export class CartesianScales extends Service {
 					axesOptions,
 					AxisPositions.BOTTOM,
 					"correspondingDatasets"
-				)
-			)
+				))
 		) {
 			return {
 				primary: AxisPositions.TOP,
@@ -534,15 +532,12 @@ export class CartesianScales extends Service {
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
-		const stackedGroups = this.model.getStackedGroups();
+		const dataGroupNames = this.model.getDataGroupNames();
 
 		if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map(
 				(datum) => +new Date(datum[mapsTo])
 			);
-		} else if (scaleType === ScaleTypes.TIME) {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
-			// If the scale has bounded area
 		} else if (bounds && options.axes) {
 			allDataValues = [];
 
@@ -556,15 +551,15 @@ export class CartesianScales extends Service {
 				}
 			});
 		} else if (
-			stackedGroups &&
+			dataGroupNames &&
 			axisPosition === this.getRangeAxisPosition()
 		) {
 			const { groupMapsTo } = options.data;
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(
-				stackedGroups
+				dataGroupNames
 			);
 			const nonStackedGroupsData = displayData.filter(
-				(datum) => !stackedGroups.includes(datum[groupMapsTo])
+				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
 			);
 			const stackedValues = dataValuesGroupedByKeys.map((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues;

@@ -16,7 +16,6 @@ export class StackedBar extends Bar {
 
 	init() {
 		const eventsFragment = this.services.events;
-		this.model.setStackedGroups(this.model.getDataGroupNames());
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener(
