@@ -6,9 +6,10 @@ import '../demo/styles.scss';
 import * as TUTORIALS from './tutorials/index';
 
 // Syntax highlighting
-const hljs = require('highlight.js/lib/highlight.js');
+const hljs = require('highlight.js/lib/core');
 hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
+
 hljs.registerLanguage(
 	'typescript',
 	require('highlight.js/lib/languages/typescript')
