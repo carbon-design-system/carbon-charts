@@ -293,8 +293,11 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 			];
 		},
 		fillOpacity: 0.2,
-		enabled: true,
+		enabled: true
 	},
+	points: {
+		filled: true
+	}
 } as BubbleChartOptions);
 
 /**

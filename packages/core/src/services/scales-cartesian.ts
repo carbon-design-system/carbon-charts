@@ -551,6 +551,7 @@ export class CartesianScales extends Service {
 				}
 			});
 		} else if (
+			axisOptions.stacked === true &&
 			dataGroupNames &&
 			axisPosition === this.getRangeAxisPosition()
 		) {
