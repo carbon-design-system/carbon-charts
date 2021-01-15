@@ -3,10 +3,10 @@ import {
 	LegendPositions,
 	Alignments,
 	ToolbarControlTypes,
-	ZoomBarTypes
-} from "./enums";
-import { Component } from "../components/component";
-import { TruncationOptions } from "./truncation";
+	ZoomBarTypes,
+} from './enums';
+import { Component } from '../components/component';
+import { TruncationOptions } from './truncation';
 
 /**
  * customize the overlay contents

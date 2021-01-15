@@ -3,17 +3,17 @@ import {
 	Statuses,
 	ArrowDirections,
 	Alignments,
-	ChartTypes
-} from "./enums";
+	ChartTypes,
+} from './enums';
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
 	AxesOptions,
-	ZoomBarsOptions
-} from "./index";
-import { BarOptions, StackedBarOptions } from "./components";
-import { TimeScaleOptions } from "./axis-scales";
+	ZoomBarsOptions,
+} from './index';
+import { BarOptions, StackedBarOptions } from './components';
+import { TimeScaleOptions } from './axis-scales';
 
 /**
  * Base chart options common to any chart

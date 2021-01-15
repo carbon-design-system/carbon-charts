@@ -1,5 +1,5 @@
 // Internal Imports
-import { Service } from "../service";
+import { Service } from '../service';
 
 export class Events extends Service {
 	// DOM Event target
@@ -28,10 +28,10 @@ export class Events extends Service {
 		let newEvent;
 		if (eventDetail) {
 			newEvent = new CustomEvent(eventType, {
-				detail: eventDetail
+				detail: eventDetail,
 			});
 		} else {
-			newEvent = document.createEvent("Event");
+			newEvent = document.createEvent('Event');
 			newEvent.initEvent(eventType, false, true);
 		}
 
