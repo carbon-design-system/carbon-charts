@@ -1,8 +1,8 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const vanillaTutorial = {
-	name: "vanilla",
-	type: "getting-started",
+	name: 'vanilla',
+	type: 'getting-started',
 	content: marked(`
 # Carbon Charts - vanilla
 
@@ -143,5 +143,5 @@ over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
 for more guidelines and support.
 Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
 if your issue does not already exist.
-`)
+`),
 };

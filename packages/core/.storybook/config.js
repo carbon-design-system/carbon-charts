@@ -1,17 +1,17 @@
-import { configure } from "@storybook/html";
-import { setOptions } from "@storybook/addon-options";
-import theme from "./theme";
+import { configure } from '@storybook/html';
+import { setOptions } from '@storybook/addon-options';
+import theme from './theme';
 
 setOptions({
-	name: "Carbon Charts - Vanilla",
+	name: 'Carbon Charts - Vanilla',
 	showAddonPanel: true,
 	sortStoriesByKind: true,
-	panelPosition: "bottom",
+	panelPosition: 'bottom',
 	showDownPanel: true,
-	theme
+	theme,
 });
 
-const req = require.context("../stories", true, /.stories.ts$/);
+const req = require.context('../stories', true, /.stories.ts$/);
 function loadStories() {
 	req.keys().forEach((filename) => {
 		req(filename);

@@ -1,13 +1,13 @@
 // Internal Imports
-import { AxisChart } from "../axis-chart";
-import * as Configuration from "../configuration";
+import { AxisChart } from '../axis-chart';
+import * as Configuration from '../configuration';
 import {
 	ChartConfig,
 	ComboChartOptions,
 	ChartTypes,
-	Skeletons
-} from "../interfaces/index";
-import { Tools } from "../tools";
+	Skeletons,
+} from '../interfaces/index';
+import { Tools } from '../tools';
 
 // Components
 import {
@@ -28,8 +28,8 @@ import {
 	Legend,
 	LayoutComponent,
 	Component,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 const graphComponentsMap = {
 	[ChartTypes.LINE]: [Line, Scatter],
@@ -39,11 +39,11 @@ const graphComponentsMap = {
 		StackedArea,
 		Line,
 		StackedScatter,
-		StackedRuler
+		StackedRuler,
 	],
 	[ChartTypes.SIMPLE_BAR]: [SimpleBar],
 	[ChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
-	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
+	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler],
 };
 
 export class ComboChart extends AxisChart {
@@ -60,10 +60,10 @@ export class ComboChart extends AxisChart {
 		// Warn user if no comboChartTypes defined
 		// Use skeleton chart instead
 		if (!chartConfigs.options.comboChartTypes) {
-			console.error("No comboChartTypes defined for the Combo Chart!");
+			console.error('No comboChartTypes defined for the Combo Chart!');
 			// add a default chart to get an empty chart
 			chartOptions.comboChartTypes = [
-				{ type: ChartTypes.LINE, correspondingDatasets: [] }
+				{ type: ChartTypes.LINE, correspondingDatasets: [] },
 			];
 		}
 
@@ -83,7 +83,7 @@ export class ComboChart extends AxisChart {
 				let options;
 
 				// initializes the components using input strings with the base configs for each chart
-				if (typeof graph.type === "string") {
+				if (typeof graph.type === 'string') {
 					// check if it is in the components map
 					// if it isn't then it is not a valid carbon chart to use in combo
 					if (!Object.keys(graphComponentsMap).includes(graph.type)) {
@@ -111,7 +111,7 @@ export class ComboChart extends AxisChart {
 								groups: graph.correspondingDatasets,
 								id: counter++,
 								options: options,
-								stacked
+								stacked,
 							})
 					);
 				} else {
@@ -124,7 +124,7 @@ export class ComboChart extends AxisChart {
 					return new type(this.model, this.services, {
 						groups: graph.correspondingDatasets,
 						id: counter++,
-						options: options
+						options: options,
 					});
 				}
 			})
@@ -147,12 +147,12 @@ export class ComboChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID
+				skeleton: Skeletons.GRID,
 			}),
 			...(stackedRulerEnabled
 				? []
 				: [new Ruler(this.model, this.services)]),
-			...this.getGraphComponents()
+			...this.getGraphComponents(),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

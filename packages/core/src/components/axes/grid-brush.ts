@@ -1,22 +1,22 @@
 // Internal Imports
-import { Component } from "../component";
-import { Events, ScaleTypes } from "../../interfaces";
-import { DOMUtils } from "../../services";
+import { Component } from '../component';
+import { Events, ScaleTypes } from '../../interfaces';
+import { DOMUtils } from '../../services';
 
 // D3 Imports
-import { brushX } from "d3-brush";
-import { event, mouse } from "d3-selection";
-import { scaleTime } from "d3-scale";
+import { brushX } from 'd3-brush';
+import { event, mouse } from 'd3-selection';
+import { scaleTime } from 'd3-scale';
 
 // This class is used for handle brush events in chart
 export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
-	type = "grid-brush";
+	type = 'grid-brush';
 
-	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
+	selectionSelector = 'rect.selection'; // needs to match the class name in d3.brush
 
-	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _grid-brush.scss
+	frontSelectionSelector = 'rect.frontSelection'; // needs to match the class name in _grid-brush.scss
 
 	render(animate = true) {
 		const svg = this.parent;
@@ -24,7 +24,7 @@ export class ChartBrush extends Component {
 		const frontSelectionArea = this.getContainerSVG();
 		const backdrop = DOMUtils.appendOrSelect(
 			svg,
-			"svg.chart-grid-backdrop"
+			'svg.chart-grid-backdrop'
 		);
 		// use this area to handle d3 brush events
 		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`);
@@ -36,14 +36,14 @@ export class ChartBrush extends Component {
 		);
 
 		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
-			useAttrs: true
+			useAttrs: true,
 		});
 
 		const { cartesianScales } = this.services;
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 		const mainXScale = cartesianScales.getMainXScale();
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
-		frontSelectionArea.attr("transform", `translate(${xScaleStart},0)`);
+		frontSelectionArea.attr('transform', `translate(${xScaleStart},0)`);
 		const frontSelection = DOMUtils.appendOrSelect(
 			frontSelectionArea,
 			this.frontSelectionSelector
@@ -51,7 +51,7 @@ export class ChartBrush extends Component {
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain
-			let zoomDomain = this.model.get("zoomDomain");
+			let zoomDomain = this.model.get('zoomDomain');
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
 				zoomDomain = this.services.zoom.getDefaultZoomBarDomain();
@@ -66,24 +66,24 @@ export class ChartBrush extends Component {
 			const updateSelectionDash = (selection) => {
 				// set end drag point to dash
 				const selectionWidth = selection[1] - selection[0];
-				let dashArray = "0," + selectionWidth.toString(); // top (invisible)
+				let dashArray = '0,' + selectionWidth.toString(); // top (invisible)
 
 				// right
 				const dashCount = Math.floor(height / ChartBrush.DASH_LENGTH);
 				const totalRightDash = dashCount * ChartBrush.DASH_LENGTH;
 				for (let i = 0; i < dashCount; i++) {
-					dashArray += "," + ChartBrush.DASH_LENGTH; // for each full length dash
+					dashArray += ',' + ChartBrush.DASH_LENGTH; // for each full length dash
 				}
-				dashArray += "," + (height - totalRightDash); // for rest of the right height
+				dashArray += ',' + (height - totalRightDash); // for rest of the right height
 				// if dash count is even, one more ",0" is needed to make total right dash pattern even
 				if (dashCount % 2 === 1) {
-					dashArray += ",0";
+					dashArray += ',0';
 				}
 
-				dashArray += "," + selectionWidth.toString(); // bottom (invisible)
-				dashArray += "," + height.toString(); // left
+				dashArray += ',' + selectionWidth.toString(); // bottom (invisible)
+				dashArray += ',' + height.toString(); // left
 
-				frontSelection.attr("stroke-dasharray", dashArray);
+				frontSelection.attr('stroke-dasharray', dashArray);
 			};
 
 			const brushEventHandler = () => {
@@ -95,12 +95,12 @@ export class ChartBrush extends Component {
 
 				// copy the d3 selection attrs to front selection element
 				frontSelection
-					.attr("x", d3Selection.attr("x"))
-					.attr("y", d3Selection.attr("y"))
-					.attr("width", d3Selection.attr("width"))
-					.attr("height", d3Selection.attr("height"))
-					.style("cursor", "pointer")
-					.style("display", null);
+					.attr('x', d3Selection.attr('x'))
+					.attr('y', d3Selection.attr('y'))
+					.attr('width', d3Selection.attr('width'))
+					.attr('height', d3Selection.attr('height'))
+					.style('cursor', 'pointer')
+					.style('display', null);
 
 				updateSelectionDash(selection);
 			};
@@ -112,7 +112,7 @@ export class ChartBrush extends Component {
 
 				let newDomain = [
 					xScale.invert(startPoint),
-					xScale.invert(endPoint)
+					xScale.invert(endPoint),
 				];
 				// if selected start time and end time are the same
 				// reset to default full range
@@ -141,22 +141,22 @@ export class ChartBrush extends Component {
 					// clear brush selection
 					brushArea.call(brush.move, null);
 					// hide frontSelection
-					frontSelection.style("display", "none");
+					frontSelection.style('display', 'none');
 				}
 			};
 			// leave some space to display selection strokes besides axis
 			const brush = brushX()
 				.extent([
 					[0, 0],
-					[width - 1, height]
+					[width - 1, height],
 				])
-				.on("start brush end", brushEventHandler)
-				.on("end.brushed", brushed);
+				.on('start brush end', brushEventHandler)
+				.on('end.brushed', brushed);
 
 			brushArea.call(brush);
 
 			const zoomRatio = this.services.zoom.getZoomRatio();
-			backdrop.on("click", function () {
+			backdrop.on('click', function () {
 				if (event.shiftKey) {
 					// clickedX range: [0, width]
 					const clickedX = mouse(brushArea.node())[0];

@@ -1,8 +1,8 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const reactTutorial = {
-	name: "React",
-	type: "getting-started",
+	name: 'React',
+	type: 'getting-started',
 	content: marked(`
 # Carbon Charts - React
 
@@ -121,5 +121,5 @@ the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
 for more guidelines and support.
 Please[create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
 if your issue does not already exist.
-`)
+`),
 };

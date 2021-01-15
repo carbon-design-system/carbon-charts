@@ -1,18 +1,18 @@
 // Internal Imports
-import { Component } from "../component";
+import { Component } from '../component';
 import {
 	LayoutDirection,
 	LayoutGrowth,
 	LayoutComponentChild,
-	LayoutConfigs
-} from "../../interfaces/index";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
-import { ChartModel } from "../../model";
+	LayoutConfigs,
+} from '../../interfaces/index';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import { ChartModel } from '../../model';
 
 // D3 Imports
-import { select } from "d3-selection";
-import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
+import { select } from 'd3-selection';
+import { hierarchy, treemap, treemapSlice, treemapDice } from 'd3-hierarchy';
 
 // TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
@@ -20,7 +20,7 @@ export class LayoutComponent extends Component {
 	// so they don't interfere when querying elements
 	static instanceID = Math.floor(Math.random() * 99999999999);
 
-	type = "layout";
+	type = 'layout';
 
 	children: LayoutComponentChild[];
 
@@ -64,7 +64,7 @@ export class LayoutComponent extends Component {
 
 		svg.selectAll(`svg.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, "data", "growth", "x");
+				const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 				return (
 					growth === LayoutGrowth.PREFERRED ||
 					growth === LayoutGrowth.FIXED
@@ -83,7 +83,7 @@ export class LayoutComponent extends Component {
 		return svg
 			.selectAll(`svg.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, "data", "growth", "x");
+				const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.size();
@@ -93,11 +93,11 @@ export class LayoutComponent extends Component {
 		// Get parent SVG to render inside of
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true
+			useAttrs: true,
 		});
 
 		let root = hierarchy({
-			children: this.children
+			children: this.children,
 		}).sum((d: any) => d.size);
 
 		// Grab the correct treemap tile function based on direction
@@ -121,19 +121,19 @@ export class LayoutComponent extends Component {
 			.data(root.leaves(), (d: any) => d.data.id);
 
 		updatedSVGs
-			.attr("width", (d: any) => d.x1 - d.x0)
-			.attr("height", (d: any) => d.y1 - d.y0);
+			.attr('width', (d: any) => d.x1 - d.x0)
+			.attr('height', (d: any) => d.y1 - d.y0);
 
 		const enteringSVGs = updatedSVGs
 			.enter()
-			.append("svg")
+			.append('svg')
 			.attr(
-				"class",
+				'class',
 				(d: any) =>
 					`layout-child layout-child-${this._instanceID} ${d.data.id}`
 			)
-			.attr("x", (d: any) => d.x0)
-			.attr("y", (d: any) => d.y0);
+			.attr('x', (d: any) => d.x0)
+			.attr('y', (d: any) => d.y0);
 
 		enteringSVGs
 			.merge(svg.selectAll(`svg.layout-child-${this._instanceID}`))
@@ -143,7 +143,7 @@ export class LayoutComponent extends Component {
 					itemComponent.setParent(select(this));
 
 					// Render preffered & fixed items
-					const growth = Tools.getProperty(d, "data", "growth", "x");
+					const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 					if (
 						growth === LayoutGrowth.PREFERRED ||
 						growth === LayoutGrowth.FIXED
@@ -157,15 +157,15 @@ export class LayoutComponent extends Component {
 			d: any
 		) {
 			// Calculate preffered children sizes after internal rendering
-			const growth = Tools.getProperty(d, "data", "growth", "x");
+			const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 			const matchingSVGDimensions = DOMUtils.getSVGElementSize(
 				select(this),
 				{ useBBox: true }
 			);
 
-			if (d.data.id === "legend") {
+			if (d.data.id === 'legend') {
 				const svgSize = DOMUtils.getSVGElementSize(select(this), {
-					useAttrs: true
+					useAttrs: true,
 				});
 
 				if (svgSize.height < 40) {
@@ -188,7 +188,7 @@ export class LayoutComponent extends Component {
 		// Run through stretch x-items
 		this.children
 			.filter((child) => {
-				const growth = Tools.getProperty(child, "growth", "x");
+				const growth = Tools.getProperty(child, 'growth', 'x');
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.forEach((child, i) => {
@@ -200,7 +200,7 @@ export class LayoutComponent extends Component {
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
 		root = hierarchy({
-			children: this.children
+			children: this.children,
 		}).sum((d: any) => d.size);
 
 		// Compute the position of all elements within the layout
@@ -209,13 +209,13 @@ export class LayoutComponent extends Component {
 		// Add new SVGs to the DOM for each layout child
 		svg.selectAll(`svg.layout-child-${this._instanceID}`)
 			.data(root.leaves(), (d: any) => d.data.id)
-			.attr("x", (d: any) => d.x0)
-			.attr("y", (d: any) => d.y0)
-			.attr("width", (d: any) => d.x1 - d.x0)
-			.attr("height", (d: any) => d.y1 - d.y0)
+			.attr('x', (d: any) => d.x0)
+			.attr('y', (d: any) => d.y0)
+			.attr('width', (d: any) => d.x1 - d.x0)
+			.attr('height', (d: any) => d.y1 - d.y0)
 			.each(function (d: any, i) {
 				d.data.components.forEach((itemComponent) => {
-					const growth = Tools.getProperty(d, "data", "growth", "x");
+					const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 					if (growth === LayoutGrowth.STRETCH) {
 						itemComponent.render(animate);
 					}

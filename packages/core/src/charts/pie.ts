@@ -1,10 +1,10 @@
 // Internal Imports
-import { PieChartModel } from "../model-pie";
-import { Chart } from "../chart";
-import * as Configuration from "../configuration";
-import { ChartConfig, PieChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
-import { Skeletons } from "../interfaces/enums";
+import { PieChartModel } from '../model-pie';
+import { Chart } from '../chart';
+import * as Configuration from '../configuration';
+import { ChartConfig, PieChartOptions } from '../interfaces/index';
+import { Tools } from '../tools';
+import { Skeletons } from '../interfaces/enums';
 
 // Components
 import {
@@ -12,8 +12,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 export class PieChart extends Chart {
 	model = new PieChartModel(this.services);
@@ -49,8 +49,8 @@ export class PieChart extends Chart {
 		const graphFrameComponents: any[] = [
 			new Pie(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.PIE
-			})
+				skeleton: Skeletons.PIE,
+			}),
 		];
 
 		// get the base chart components and export with tooltip

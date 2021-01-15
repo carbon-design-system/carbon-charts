@@ -18,26 +18,26 @@ const meterOptions: MeterChartOptions = {
 };
 
 class App extends React.Component {
-  ref: React.RefObject<LineChart> = React.createRef();
+	ref: React.RefObject<LineChart> = React.createRef();
 
-  state = {
-    data: [
-      { group: "Qty", value: 65000 },
-      { group: "More", value: 29123 },
-      { group: "Sold", value: 35213 },
-      { group: "Restocking", value: 51213 },
-      { group: "Misc", value: 16932 }
-    ]
-  }
+	state = {
+		data: [
+			{ group: 'Qty', value: 65000 },
+			{ group: 'More', value: 29123 },
+			{ group: 'Sold', value: 35213 },
+			{ group: 'Restocking', value: 51213 },
+			{ group: 'Misc', value: 16932 },
+		],
+	};
 
-  componentDidMount() {
-    this.setState({ data: [] });
-  }
+	componentDidMount() {
+		this.setState({ data: [] });
+	}
 
-  render() {
-    if (this.ref != null) {
-      console.log(this.ref.current.data);
-    }
+	render() {
+		if (this.ref != null) {
+			console.log(this.ref.current.data);
+		}
 
     return (
       <>

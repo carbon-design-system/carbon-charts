@@ -29,8 +29,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run format",
-			"pre-push": "bash scripts/prepush.sh"
+			"pre-commit": "bash scripts/precommit.sh"
 		}
 	},
 	"release": {
@@ -40,7 +39,9 @@
 		"commitizen": "4.0.3",
 		"cz-conventional-changelog": "3.1.0",
 		"husky": "4.2.1",
-		"lerna": "3.20.2"
+		"lerna": "3.20.2",
+		"prettier": "2.2.1",
+		"prettier-config-carbon": "0.4.0"
 	},
 	"config": {
 		"commitizen": {
