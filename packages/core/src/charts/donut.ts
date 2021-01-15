@@ -1,9 +1,9 @@
 // Internal Imports
-import { PieChart } from "./pie";
-import * as Configuration from "../configuration";
-import { ChartConfig, PieChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
-import { Skeletons } from "../interfaces/enums";
+import { PieChart } from './pie';
+import * as Configuration from '../configuration';
+import { ChartConfig, PieChartOptions } from '../interfaces/index';
+import { Tools } from '../tools';
+import { Skeletons } from '../interfaces/enums';
 
 // Components
 import {
@@ -11,8 +11,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 export class DonutChart extends PieChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
@@ -36,8 +36,8 @@ export class DonutChart extends PieChart {
 		const graphFrameComponents: any[] = [
 			new Donut(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.DONUT
-			})
+				skeleton: Skeletons.DONUT,
+			}),
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);

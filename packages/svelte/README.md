@@ -29,7 +29,89 @@ yarn add @carbon/charts @carbon/charts-svelte d3@5.x
 
 ## Step-by-step instructions
 
-TBA
+Quickly scaffold a project from the official [Svelte webpack template](https://github.com/sveltejs/template-webpack) using [degit](https://github.com/Rich-Harris/degit):
+
+```bash
+npx degit sveltejs/template-webpack svelte-app
+cd svelte-app
+```
+
+Install the dependencies:
+
+```bash
+yarn add carbon-components @carbon/charts @carbon/charts-svelte d3
+```
+
+Let's add a simple bar chart from `@carbon/charts-svelte`.
+
+First, import the `BarChartSimple` component in `src/App.svelte`.
+
+```html
+<!-- src/App.svelte -->
+<script>
+  import { BarChartSimple } from "@carbon/charts-svelte";
+</script>
+```
+
+Next, add an external stylesheet using the svelte:head API.
+
+```html
+<!-- src/App.svelte -->
+<svelte:head>
+  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
+</svelte:head>
+```
+
+Then, instantiate the `BarChartSimple` component with some sample data. 
+
+```html
+<!-- src/App.svelte -->
+<BarChartSimple
+	data={[
+	{
+		"group": "Qty",
+		"value": 65000
+	},
+	{
+		"group": "More",
+		"value": 29123
+	},
+	{
+		"group": "Sold",
+		"value": 35213
+	},
+	{
+		"group": "Restocking",
+		"value": 51213
+	},
+	{
+		"group": "Misc",
+		"value": 16932
+	}
+]}
+	options={{
+	"title": "Simple bar (discrete)",
+	"axes": {
+		"left": {
+			"mapsTo": "value"
+		},
+		"bottom": {
+			"mapsTo": "group",
+			"scaleType": "labels"
+		}
+	},
+	"height": "400px"
+}}
+	/>
+```
+
+Run the app in development mode.
+
+```bash
+yarn dev
+```
+
+Navigate to [http://localhost:8080](http://localhost:8080). You should see the bar chart rendered in the browser.
 
 ## Codesandbox examples
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/svelte).

@@ -1,12 +1,12 @@
 // Internal Imports
-import { AxisPositions, Events, ScaleTypes } from "../interfaces";
-import { Service } from "./service";
-import { Tools } from "../tools";
-import * as Configuration from "../configuration";
-import { ChartModelCartesian } from "../model-cartesian-charts";
+import { AxisPositions, Events, ScaleTypes } from '../interfaces';
+import { Service } from './service';
+import { Tools } from '../tools';
+import * as Configuration from '../configuration';
+import { ChartModelCartesian } from '../model-cartesian-charts';
 
 // D3 imports
-import { extent } from "d3-array";
+import { extent } from 'd3-array';
 
 export class Zoom extends Service {
 	protected model: ChartModelCartesian;
@@ -21,9 +21,9 @@ export class Zoom extends Service {
 		if (
 			!Tools.getProperty(
 				this.model.getOptions(),
-				"zoomBar",
-				"top",
-				"enabled"
+				'zoomBar',
+				'top',
+				'enabled'
 			)
 		) {
 			return false;
@@ -34,9 +34,9 @@ export class Zoom extends Service {
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
 			this.model.getOptions(),
-			"axes",
+			'axes',
 			mainXAxisPosition,
-			"scaleType"
+			'scaleType'
 		);
 
 		return (
@@ -77,7 +77,7 @@ export class Zoom extends Service {
 		this.model.set({ zoomDomain: newDomain }, { animate: false });
 		if (configs.dispatchEvent) {
 			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-				newDomain
+				newDomain,
 			});
 		}
 	}
@@ -85,27 +85,27 @@ export class Zoom extends Service {
 	getZoomRatio() {
 		return Tools.getProperty(
 			this.model.getOptions(),
-			"zoomBar",
-			"zoomRatio"
+			'zoomBar',
+			'zoomRatio'
 		);
 	}
 
 	// filter out data not inside zoom domain
 	// to get better range value for axis label
 	filterDataForRangeAxis(displayData: object[], configs?: any) {
-		const zoomDomain = this.model.get("zoomDomain");
+		const zoomDomain = this.model.get('zoomDomain');
 		const mergedConfigs = Object.assign(
 			{ stacked: false }, // default configs
 			configs
 		);
 		const shouldUpdateRangeAxis = Tools.getProperty(
 			this.model.getOptions(),
-			"zoomBar",
-			"updateRangeAxis"
+			'zoomBar',
+			'updateRangeAxis'
 		);
 		if (this.isZoomBarEnabled() && shouldUpdateRangeAxis && zoomDomain) {
 			const domainIdentifier = mergedConfigs.stacked
-				? "sharedStackKey"
+				? 'sharedStackKey'
 				: this.services.cartesianScales.getDomainIdentifier();
 			const filteredData = displayData.filter(
 				(datum) =>
@@ -124,7 +124,7 @@ export class Zoom extends Service {
 
 	zoomIn(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
-		const currentZoomDomain = this.model.get("zoomDomain");
+		const currentZoomDomain = this.model.get('zoomDomain');
 		const handleWidth = Configuration.zoomBar.handleWidth;
 		const xScale = this.services.cartesianScales.getMainXScale().copy();
 		xScale.domain(this.getDefaultZoomBarDomain()); // reset domain to default full domain
@@ -167,7 +167,7 @@ export class Zoom extends Service {
 
 	zoomOut(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
-		const currentZoomDomain = this.model.get("zoomDomain");
+		const currentZoomDomain = this.model.get('zoomDomain');
 		const xScale = this.services.cartesianScales.getMainXScale().copy();
 		xScale.domain(this.getDefaultZoomBarDomain()); // reset domain to default full domain
 
@@ -197,7 +197,7 @@ export class Zoom extends Service {
 
 	resetZoomDomain() {
 		// get current zoomDomain
-		const currentZoomDomain = this.model.get("zoomDomain");
+		const currentZoomDomain = this.model.get('zoomDomain');
 		const newDomain = this.getDefaultZoomBarDomain();
 
 		// only if zoomDomain needs update
@@ -214,7 +214,7 @@ export class Zoom extends Service {
 	// don't depend on scale range
 	isMinZoomDomain() {
 		// get current zoomDomain
-		const currentZoomDomain = this.model.get("zoomDomain");
+		const currentZoomDomain = this.model.get('zoomDomain');
 		// assume the max zoom domain is the default zoom bar domain
 		const maxZoomDomain = this.getDefaultZoomBarDomain();
 		if (!currentZoomDomain || !maxZoomDomain) {
@@ -227,8 +227,8 @@ export class Zoom extends Service {
 			maxZoomDomain[1].valueOf() - maxZoomDomain[0].valueOf();
 		const minZoomRatio = Tools.getProperty(
 			this.model.getOptions(),
-			"zoomBar",
-			"minZoomRatio"
+			'zoomBar',
+			'minZoomRatio'
 		);
 		// if current zoom domain is already smaller than minZoomRatio
 		if (currentZoomDomainPeriod / maxZoomDomainPeriod < minZoomRatio) {
@@ -241,7 +241,7 @@ export class Zoom extends Service {
 	// check if current zoom domain is already the max zoom domain
 	isMaxZoomDomain() {
 		// get current zoom domain
-		const currentZoomDomain = this.model.get("zoomDomain");
+		const currentZoomDomain = this.model.get('zoomDomain');
 		// assume the max zoom domain is the default zoom bar domain
 		const maxZoomDomain = this.getDefaultZoomBarDomain();
 
@@ -264,18 +264,18 @@ export class Zoom extends Service {
 	isZoomBarLoading(position) {
 		return Tools.getProperty(
 			this.model.getOptions(),
-			"zoomBar",
+			'zoomBar',
 			position,
-			"loading"
+			'loading'
 		);
 	}
 
 	isZoomBarLocked(position) {
 		return Tools.getProperty(
 			this.model.getOptions(),
-			"zoomBar",
+			'zoomBar',
 			position,
-			"locked"
+			'locked'
 		);
 	}
 }

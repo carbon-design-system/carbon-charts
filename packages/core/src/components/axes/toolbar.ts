@@ -1,18 +1,18 @@
 // Internal Imports
-import { Component } from "../component";
-import { Events, Roles, ToolbarControlTypes } from "../../interfaces";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
-import * as Configuration from "../../configuration";
+import { Component } from '../component';
+import { Events, Roles, ToolbarControlTypes } from '../../interfaces';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import * as Configuration from '../../configuration';
 
 // D3 Imports
-import { event, select } from "d3-selection";
+import { event, select } from 'd3-selection';
 
 // import the settings for the css prefix
-import settings from "carbon-components/es/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
 export class Toolbar extends Component {
-	type = "toolbar";
+	type = 'toolbar';
 
 	// overflow menu button to control background color
 	overflowButton: any;
@@ -33,14 +33,14 @@ export class Toolbar extends Component {
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		const chartPrefix = Tools.getProperty(options, "style", "prefix");
+		const chartPrefix = Tools.getProperty(options, 'style', 'prefix');
 
 		this.overflowMenu = DOMUtils.appendOrSelect(
 			holder,
 			`div.${settings.prefix}--${chartPrefix}--overflowMenu`
 		);
 
-		this.overflowMenu.style("max-width", null);
+		this.overflowMenu.style('max-width', null);
 
 		// listen to show overflow menu event to render the overflow menu
 		this.services.events.addEventListener(
@@ -58,7 +58,7 @@ export class Toolbar extends Component {
 			}
 		);
 		// hide overflow menu if user clicks on somewhere in web page
-		document.body.addEventListener("click", () =>
+		document.body.addEventListener('click', () =>
 			this.updateOverflowMenu(false)
 		);
 	}
@@ -66,25 +66,25 @@ export class Toolbar extends Component {
 	render(animate = true) {
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
-			"data",
-			"loading"
+			'data',
+			'loading'
 		);
 
 		// size of toolbar button with background
 		const buttonSize = Configuration.toolbar.buttonSize;
-		const parentY = parseFloat(this.parent.node().getAttribute("y"));
+		const parentY = parseFloat(this.parent.node().getAttribute('y'));
 
 		const svg = this.getContainerSVG();
 
 		// TODO -- adjust toolbar Y position to align title component
 		// before layout component supports vertical alignment center
 		const Y_OFFSET = -6;
-		svg.attr("transform", `translate(0, ${parentY + Y_OFFSET})`);
+		svg.attr('transform', `translate(0, ${parentY + Y_OFFSET})`);
 
 		const { width } = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
 			{
-				useAttrs: true
+				useAttrs: true,
 			}
 		);
 
@@ -96,10 +96,10 @@ export class Toolbar extends Component {
 		// assume the overflow icon has right alignment in layout
 		this.overflowMenuX = width - overflowMenuWidth;
 		this.overflowMenuY = parentY + Y_OFFSET + buttonSize;
-		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
-			.attr("width", "100%")
-			.attr("height", Configuration.toolbar.height)
-			.attr("opacity", 1);
+		const container = DOMUtils.appendOrSelect(svg, 'svg.toolbar-container')
+			.attr('width', '100%')
+			.attr('height', Configuration.toolbar.height)
+			.attr('opacity', 1);
 
 		// clean children first
 		container.html(null);
@@ -115,11 +115,11 @@ export class Toolbar extends Component {
 		// loading or empty state
 		if (isDataLoading || buttonList.length === 0) {
 			// put an empty rect to keep space unchanged
-			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-spacer")
-				.append("rect")
-				.attr("height", Configuration.toolbar.height)
-				.attr("width", buttonSize * 3) // value doesn't matter but can't be empty
-				.attr("opacity", 0);
+			DOMUtils.appendOrSelect(container, 'svg.toolbar-loading-spacer')
+				.append('rect')
+				.attr('height', Configuration.toolbar.height)
+				.attr('width', buttonSize * 3) // value doesn't matter but can't be empty
+				.attr('opacity', 0);
 		} else {
 			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
@@ -128,62 +128,62 @@ export class Toolbar extends Component {
 				const buttonContainer = DOMUtils.appendOrSelect(
 					container,
 					`svg.${button.id}`
-				).classed("toolbar-button", true);
+				).classed('toolbar-button', true);
 
 				// add button background rect
 				const buttonBackground = DOMUtils.appendOrSelect(
 					buttonContainer,
-					"rect.toolbar-button-background"
+					'rect.toolbar-button-background'
 				)
-					.attr("x", buttonXPosition)
-					.attr("y", 0)
-					.attr("width", buttonSize)
-					.attr("height", buttonSize);
+					.attr('x', buttonXPosition)
+					.attr('y', 0)
+					.attr('width', buttonSize)
+					.attr('height', buttonSize);
 
 				const buttonIcon = DOMUtils.appendOrSelect(
 					buttonContainer,
-					"svg.toolbar-button-icon"
+					'svg.toolbar-button-icon'
 				)
 					.attr(
-						"x",
+						'x',
 						buttonXPosition + Configuration.toolbar.iconPadding
 					)
-					.attr("y", Configuration.toolbar.iconPadding)
-					.attr("width", Configuration.toolbar.iconSize)
-					.attr("height", Configuration.toolbar.iconSize)
-					.attr("viewBox", "0 0 32 32")
-					.attr("role", Roles.IMG);
+					.attr('y', Configuration.toolbar.iconPadding)
+					.attr('width', Configuration.toolbar.iconSize)
+					.attr('height', Configuration.toolbar.iconSize)
+					.attr('viewBox', '0 0 32 32')
+					.attr('role', Roles.IMG);
 
 				buttonIcon.html(button.iconSVGContent);
 				if (button.shouldBeDisabled()) {
 					buttonContainer
-						.classed("toolbar-button--disabled", true)
-						.classed("toolbar-button--focusable", false)
-						.attr("tabindex", -1)
-						.attr("role", null);
-					buttonIcon.classed("toolbar-button-icon--disabled", true);
+						.classed('toolbar-button--disabled', true)
+						.classed('toolbar-button--focusable', false)
+						.attr('tabindex', -1)
+						.attr('role', null);
+					buttonIcon.classed('toolbar-button-icon--disabled', true);
 					buttonBackground.classed(
-						"toolbar-button-background--disabled",
+						'toolbar-button-background--disabled',
 						true
 					);
-					buttonContainer.on("click", null).on("keyup", null);
+					buttonContainer.on('click', null).on('keyup', null);
 				} else {
 					buttonContainer
-						.classed("toolbar-button--disabled", false)
-						.classed("toolbar-button--focusable", true)
-						.attr("tabindex", 0)
-						.attr("role", Roles.BUTTON);
-					buttonIcon.classed("toolbar-button-icon--disabled", false);
+						.classed('toolbar-button--disabled', false)
+						.classed('toolbar-button--focusable', true)
+						.attr('tabindex', 0)
+						.attr('role', Roles.BUTTON);
+					buttonIcon.classed('toolbar-button-icon--disabled', false);
 					buttonBackground.classed(
-						"toolbar-button-background--disabled",
+						'toolbar-button-background--disabled',
 						false
 					);
 					buttonContainer
-						.on("click", button.clickFunction)
-						.on("keyup", () => {
+						.on('click', button.clickFunction)
+						.on('keyup', () => {
 							if (
-								(event.key && event.key === "Enter") ||
-								event.key === " "
+								(event.key && event.key === 'Enter') ||
+								event.key === ' '
 							) {
 								event.preventDefault();
 
@@ -195,7 +195,7 @@ export class Toolbar extends Component {
 			});
 
 			this.overflowButton = this.getContainerSVG().select(
-				"svg.toolbar-overflow-menu"
+				'svg.toolbar-overflow-menu'
 			);
 
 			if (this.isOverflowMenuOpen()) {
@@ -208,7 +208,7 @@ export class Toolbar extends Component {
 	isOverflowMenuOpen() {
 		return (
 			this.overflowMenu
-				.selectAll("ul.bx--overflow-menu-options--open")
+				.selectAll('ul.bx--overflow-menu-options--open')
 				.size() > 0
 		);
 	}
@@ -217,7 +217,7 @@ export class Toolbar extends Component {
 	updateOverflowMenu(show: boolean) {
 		// update overflow button background
 		if (this.overflowButton) {
-			this.overflowButton.classed("toolbar-button--hovered", show);
+			this.overflowButton.classed('toolbar-button--hovered', show);
 		}
 		if (show) {
 			this.services.events.dispatchEvent(
@@ -243,11 +243,11 @@ export class Toolbar extends Component {
 		// only if previous enabled menu item found
 		if (previousItemIndex < overflowMenuItems.length) {
 			const previousItemNode = select(
-				"#" +
+				'#' +
 					overflowMenuItems[previousItemIndex].id +
 					this.overflowMenuItemId
 			).node();
-			if ("focus" in previousItemNode) {
+			if ('focus' in previousItemNode) {
 				previousItemNode.focus();
 			}
 		}
@@ -266,11 +266,11 @@ export class Toolbar extends Component {
 		// only if next enabled menu item found
 		if (nextItemIndex > -1) {
 			const nextItemNode = select(
-				"#" +
+				'#' +
 					overflowMenuItems[nextItemIndex].id +
 					this.overflowMenuItemId
 			).node();
-			if ("focus" in nextItemNode) {
+			if ('focus' in nextItemNode) {
 				nextItemNode.focus();
 			}
 		}
@@ -289,24 +289,24 @@ export class Toolbar extends Component {
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem, index) => {
 				const element = select(
-					"#" + menuItem.id + this.overflowMenuItemId
+					'#' + menuItem.id + this.overflowMenuItemId
 				);
 				if (element !== null) {
-					element.on("click", () => {
+					element.on('click', () => {
 						// call the specified function
 						menuItem.clickFunction();
 
 						// hide overflow menu
 						self.updateOverflowMenu(false);
 					});
-					element.on("keyup", () => {
-						if (event.key === "Enter") {
+					element.on('keyup', () => {
+						if (event.key === 'Enter') {
 							// call the specified function
 							menuItem.clickFunction();
-						} else if (event.key === "ArrowUp") {
+						} else if (event.key === 'ArrowUp') {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (event.key === "ArrowDown") {
+						} else if (event.key === 'ArrowDown') {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
 						}
@@ -325,7 +325,7 @@ export class Toolbar extends Component {
 		const overflowMenuItems = this.getOverflowMenuItems();
 		// don't render whole overflow menu if no overflow menu item
 		if (!overflowMenuItems || overflowMenuItems.length === 0) {
-			return "";
+			return '';
 		}
 
 		let overflowMenuHtml;
@@ -336,10 +336,10 @@ export class Toolbar extends Component {
 
 		// generate html for each overflow menu items
 		overflowMenuItems.forEach((menuItem, index) => {
-			const menuItemClasses = "bx--overflow-menu-options__option".concat(
+			const menuItemClasses = 'bx--overflow-menu-options__option'.concat(
 				menuItem.shouldBeDisabled()
-					? " bx--overflow-menu-options__option--disabled" // class for disabled menu item
-					: ""
+					? ' bx--overflow-menu-options__option--disabled' // class for disabled menu item
+					: ''
 			);
 			overflowMenuHtml += `<li class="${menuItemClasses}" role="${
 				Roles.MENU_ITEM
@@ -362,13 +362,13 @@ export class Toolbar extends Component {
 	getControlConfigs() {
 		const numberOfIcons = Tools.getProperty(
 			this.getOptions(),
-			"toolbar",
-			"numberOfIcons"
+			'toolbar',
+			'numberOfIcons'
 		);
 		const controls = Tools.getProperty(
 			this.getOptions(),
-			"toolbar",
-			"controls"
+			'toolbar',
+			'controls'
 		);
 		const controlList = [];
 		controls.forEach((control) => {
@@ -383,14 +383,14 @@ export class Toolbar extends Component {
 
 		if (controlList.length <= numberOfIcons) {
 			return {
-				buttonList: controlList
+				buttonList: controlList,
 			};
 		}
 
 		return {
 			// leave one button for overflow button
 			buttonList: controlList.splice(0, numberOfIcons - 1),
-			overflowMenuItemList: controlList
+			overflowMenuItemList: controlList,
 		};
 	}
 
@@ -406,12 +406,12 @@ export class Toolbar extends Component {
 	// special button config for overflow button
 	getOverflowButtonConfig() {
 		return {
-			id: "toolbar-overflow-menu",
+			id: 'toolbar-overflow-menu',
 			shouldBeDisabled: () => false,
 			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
 							 <circle cx="16" cy="16" r="2"></circle>
 							 <circle cx="16" cy="24" r="2"></circle>`,
-			clickFunction: () => this.toggleOverflowMenu()
+			clickFunction: () => this.toggleOverflowMenu(),
 		};
 	}
 
@@ -425,34 +425,34 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.ZOOM_IN:
 				if (isZoomBarEnabled) {
 					controlConfig = {
-						id: "toolbar-zoomIn",
+						id: 'toolbar-zoomIn',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMinZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
-						clickFunction: () => this.services.zoom.zoomIn()
+						clickFunction: () => this.services.zoom.zoomIn(),
 					};
 				}
 				break;
 			case ToolbarControlTypes.ZOOM_OUT:
 				if (isZoomBarEnabled) {
 					controlConfig = {
-						id: "toolbar-zoomOut",
+						id: 'toolbar-zoomOut',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
-						clickFunction: () => this.services.zoom.zoomOut()
+						clickFunction: () => this.services.zoom.zoomOut(),
 					};
 				}
 				break;
 			case ToolbarControlTypes.RESET_ZOOM:
 				if (isZoomBarEnabled) {
 					controlConfig = {
-						id: "toolbar-resetZoom",
+						id: 'toolbar-resetZoom',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
 						clickFunction: () =>
-							this.services.zoom.resetZoomDomain()
+							this.services.zoom.resetZoomDomain(),
 					};
 				}
 				break;
@@ -461,7 +461,7 @@ export class Toolbar extends Component {
 
 			default:
 				throw Error(
-					"Not supported toolbar control type: " + controlType
+					'Not supported toolbar control type: ' + controlType
 				);
 		}
 		return controlConfig;
@@ -483,7 +483,7 @@ export class Toolbar extends Component {
 
 			default:
 				throw Error(
-					"Not supported toolbar control type: " + controlType
+					'Not supported toolbar control type: ' + controlType
 				);
 		}
 	}

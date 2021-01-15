@@ -1,94 +1,94 @@
-import { Tools } from "./tools";
+import { Tools } from './tools';
 
-describe("Tools.getProperty", () => {
-	it("works with a simple nested object containing a number > 0", () => {
+describe('Tools.getProperty', () => {
+	it('works with a simple nested object containing a number > 0', () => {
 		const obj = { a: { b: { c: 5 } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual(5);
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual(5);
 	});
 
-	it("works with a simple nested object containing a 0", () => {
+	it('works with a simple nested object containing a 0', () => {
 		const obj = { a: { b: { c: 0 } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual(0);
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual(0);
 	});
 
-	it("works with a simple nested object containing `false`", () => {
+	it('works with a simple nested object containing `false`', () => {
 		const obj = { a: { b: { c: false } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual(false);
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual(false);
 	});
 
-	it("works with a simple nested object containing `true`", () => {
+	it('works with a simple nested object containing `true`', () => {
 		const obj = { a: { b: { c: true } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual(true);
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual(true);
 	});
 
-	it("works with a simple nested object containing a string", () => {
-		const obj = { a: { b: { c: "qwerty" } } };
+	it('works with a simple nested object containing a string', () => {
+		const obj = { a: { b: { c: 'qwerty' } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual("qwerty");
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual('qwerty');
 	});
 
-	it("works with a simple nested object containing an empty string", () => {
-		const obj = { a: { b: { c: "" } } };
+	it('works with a simple nested object containing an empty string', () => {
+		const obj = { a: { b: { c: '' } } };
 
-		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual("");
+		expect(Tools.getProperty(obj, 'a', 'b', 'c')).toEqual('');
 	});
 });
 
-describe("Tools.mergeDefaultChartOptions", () => {
-	it("it merges default chart configuration with provided ones, with special cases for axes", () => {
+describe('Tools.mergeDefaultChartOptions', () => {
+	it('it merges default chart configuration with provided ones, with special cases for axes', () => {
 		const providedOptions = {
-			title: "Title",
+			title: 'Title',
 			axes: {
 				bottom: {
-					title: "Title"
+					title: 'Title',
 				},
 				left: {
-					scaleType: "time"
-				}
-			}
+					scaleType: 'time',
+				},
+			},
 		};
 
 		const defaultOptions = {
 			axes: {
 				top: {
-					includeZero: true
+					includeZero: true,
 				},
 				bottom: {
-					includeZero: true
+					includeZero: true,
 				},
 				left: {
-					includeZero: true
+					includeZero: true,
 				},
 				right: {
-					includeZero: true
-				}
+					includeZero: true,
+				},
 			},
 			timeScale: {
-				addSpaceOnEdges: 1
-			}
+				addSpaceOnEdges: 1,
+			},
 		};
 
 		const expectedMerge = {
-			title: "Title",
+			title: 'Title',
 			axes: {
 				bottom: {
 					includeZero: true,
-					title: "Title",
-					mapsTo: "value"
+					title: 'Title',
+					mapsTo: 'value',
 				},
 				left: {
 					includeZero: true,
-					scaleType: "time",
-					mapsTo: "date"
-				}
+					scaleType: 'time',
+					mapsTo: 'date',
+				},
 			},
 			timeScale: {
-				addSpaceOnEdges: 1
-			}
+				addSpaceOnEdges: 1,
+			},
 		};
 
 		expect(

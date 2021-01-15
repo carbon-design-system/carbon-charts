@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const tabularTutorial = {
-	name: "Tabular data format",
+	name: 'Tabular data format',
 	content: marked(`
 # Tabular data format
 
@@ -156,5 +156,5 @@ const bubbleDoubleLinearData = [
 \`\`\`
 
 **Default value for \`radiusMapsTo\` is \`radius\`**
-`)
+`),
 };

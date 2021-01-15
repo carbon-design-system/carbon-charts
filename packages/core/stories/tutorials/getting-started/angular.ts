@@ -1,8 +1,8 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const angularTutorial = {
-	name: "Angular",
-	type: "getting-started",
+	name: 'Angular',
+	type: 'getting-started',
 	content: marked(`
 # Carbon Charts - Angular
 
@@ -136,5 +136,5 @@ If you experience any issues while getting set up with Carbon Charts, please hea
 [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and support.
 Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if your issue
 does not already exist.
-`)
+`),
 };

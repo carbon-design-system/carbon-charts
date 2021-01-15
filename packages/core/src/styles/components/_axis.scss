@@ -1,6 +1,6 @@
-@import "./../vendor/@carbon/type/scss/type";
-@import "./../vendor/@carbon/type/scss/font-face/sans";
-@import "./../vendor/@carbon/themes/scss/tokens";
+@import './../vendor/@carbon/type/scss/type';
+@import './../vendor/@carbon/type/scss/font-face/sans';
+@import './../vendor/@carbon/themes/scss/tokens';
 
 .#{$prefix}--#{$charts-prefix}--axes g.axis {
 	g.ticks.invisible {
@@ -9,7 +9,7 @@
 
 	g.tick text {
 		fill: $text-02;
-		font-family: carbon--font-family("sans-condensed");
+		font-family: carbon--font-family('sans-condensed');
 	}
 
 	g.tick line {
@@ -21,6 +21,6 @@
 	}
 
 	.axis-title {
-		font-family: carbon--font-family("regular");
+		font-family: carbon--font-family('regular');
 	}
 }
