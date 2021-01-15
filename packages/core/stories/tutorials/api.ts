@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const apiTutorial = {
-	name: "API",
+	name: 'API',
 	content: marked(`
 # API
 
@@ -68,5 +68,5 @@ barChart.services.events.addEventListener("bar-onmouseover", e => {
 Our full API reference docs can be found [here](https://carbon-design-system.github.io/carbon-charts/documentation/).
 
 To get an idea of all the possible configurations in every chart type, see [here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html).
-`)
+`),
 };

@@ -1,19 +1,19 @@
-import { storiesOf } from "@storybook/html";
-import { withKnobs, object } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/html';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
-import { storybookDemoGroups } from "../demo/data";
-import * as ChartComponents from "../src/charts";
-import * as storyUtils from "./utils";
+import { storybookDemoGroups } from '../demo/data';
+import * as ChartComponents from '../src/charts';
+import * as storyUtils from './utils';
 
-import "../demo/styles.scss";
+import '../demo/styles.scss';
 
-const introStories = storiesOf("Intro", module).addDecorator(withKnobs);
+const introStories = storiesOf('Intro', module).addDecorator(withKnobs);
 
 // Loop through the demos for the group
-introStories.add("Welcome", () => {
+introStories.add('Welcome', () => {
 	// container creation
-	const container = document.createElement("div");
-	container.setAttribute("class", "container intro");
+	const container = document.createElement('div');
+	container.setAttribute('class', 'container intro');
 
 	container.innerHTML = `
 <div class="content">
@@ -93,8 +93,8 @@ storybookDemoGroups.forEach((demoGroup) => {
 		// Loop through the demos for the group
 		groupStories.add(demo.title, () => {
 			// container creation
-			const container = document.createElement("div");
-			container.setAttribute("class", "container theme--g100");
+			const container = document.createElement('div');
+			container.setAttribute('class', 'container theme--g100');
 
 			container.innerHTML = `
 <h3>
@@ -121,10 +121,10 @@ ${
     </div>
   </div>
 </div>`
-		: ""
+		: ''
 }
 
-${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ""}
+${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div id="charting-controls">
 </div>
 
@@ -139,15 +139,15 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ""}
 
 			// Initialize chart
 			const chart = new ClassToInitialize(
-				container.querySelector("div#chart-demo"),
+				container.querySelector('div#chart-demo'),
 				{
 					data: object(
-						"Data",
+						'Data',
 						demo.isHighScale
 							? storyUtils.generateRandomData(100, 100, 500)
 							: demo.data
 					),
-					options: object("Options", demo.options)
+					options: object('Options', demo.options),
 				}
 			);
 

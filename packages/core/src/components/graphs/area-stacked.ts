@@ -1,19 +1,19 @@
 // Internal Imports
-import { Component } from "../component";
-import * as Configuration from "../../configuration";
+import { Component } from '../component';
+import * as Configuration from '../../configuration';
 import {
 	Roles,
 	ScaleTypes,
 	Events,
 	ColorClassNameTypes,
-	CartesianOrientations
-} from "../../interfaces";
+	CartesianOrientations,
+} from '../../interfaces';
 
 // D3 Imports
-import { area } from "d3-shape";
+import { area } from 'd3-shape';
 
 export class StackedArea extends Component {
-	type = "area-stacked";
+	type = 'area-stacked';
 
 	areaGenerator: any;
 
@@ -45,7 +45,7 @@ export class StackedArea extends Component {
 
 		const stackedData = this.model.getStackedData({
 			percentage,
-			groups: this.configs.groups
+			groups: this.configs.groups,
 		});
 
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
@@ -61,7 +61,7 @@ export class StackedArea extends Component {
 		);
 
 		const areas = svg
-			.selectAll("path.area")
+			.selectAll('path.area')
 			.data(stackedData, (d) => d[0][groupMapsTo]);
 
 		// D3 area generator function
@@ -77,32 +77,32 @@ export class StackedArea extends Component {
 			.y1((d) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
-		areas.exit().attr("opacity", 0).remove();
+		areas.exit().attr('opacity', 0).remove();
 
-		const enteringAreas = areas.enter().append("path").attr("opacity", 0);
+		const enteringAreas = areas.enter().append('path').attr('opacity', 0);
 
 		enteringAreas
 			.merge(areas)
 			.data(stackedData, (d) => d[0][groupMapsTo])
-			.attr("class", "area")
-			.attr("class", (d) =>
+			.attr('class', 'area')
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[0][groupMapsTo],
-					originalClassName: "area"
+					originalClassName: 'area',
 				})
 			)
-			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "area")
+			.attr('fill', (d) => self.model.getFillColor(d[0][groupMapsTo]))
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'area')
 			.transition(
 				this.services.transitions.getTransition(
-					"area-update-enter",
+					'area-update-enter',
 					animate
 				)
 			)
-			.attr("opacity", Configuration.area.opacity.selected)
-			.attr("d", this.areaGenerator);
+			.attr('opacity', Configuration.area.opacity.selected)
+			.attr('d', this.areaGenerator);
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -111,11 +111,11 @@ export class StackedArea extends Component {
 		const { groupMapsTo } = options.data;
 
 		this.parent
-			.selectAll("path.area")
+			.selectAll('path.area')
 			.transition(
-				this.services.transitions.getTransition("legend-hover-area")
+				this.services.transitions.getTransition('legend-hover-area')
 			)
-			.attr("opacity", (d) => {
+			.attr('opacity', (d) => {
 				if (d[0][groupMapsTo] !== hoveredElement.datum().name) {
 					return Configuration.area.opacity.unselected;
 				}
@@ -126,19 +126,19 @@ export class StackedArea extends Component {
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("path.area")
+			.selectAll('path.area')
 			.transition(
-				this.services.transitions.getTransition("legend-mouseout-area")
+				this.services.transitions.getTransition('legend-mouseout-area')
 			)
-			.attr("opacity", Configuration.area.opacity.selected);
+			.attr('opacity', Configuration.area.opacity.selected);
 	};
 
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path.area")
-			.on("mouseover", null)
-			.on("mousemove", null)
-			.on("mouseout", null);
+			.selectAll('path.area')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null);
 	}
 }

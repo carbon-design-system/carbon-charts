@@ -1,5 +1,5 @@
 // Internal Imports
-import { ChartModel } from "./model";
+import { ChartModel } from './model';
 
 /** The gauge chart model layer */
 export class GaugeChartModel extends ChartModel {
@@ -8,6 +8,6 @@ export class GaugeChartModel extends ChartModel {
 	}
 
 	getDataGroups() {
-		return super.getDataGroups().filter((item) => item.name !== "delta");
+		return super.getDataGroups().filter((item) => item.name !== 'delta');
 	}
 }

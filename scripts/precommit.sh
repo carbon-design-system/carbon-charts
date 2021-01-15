@@ -35,4 +35,6 @@ then
 	git commit -m "Update package-lock.json files"
 fi
 
+lerna run format
+
 #exit 1  # stops push from running, good for testing
