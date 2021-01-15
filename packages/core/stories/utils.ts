@@ -1,8 +1,8 @@
-import * as Configuration from "../src/configuration";
+import * as Configuration from '../src/configuration';
 
 const generateThemePickerHTML = (container) => {
-	const div = document.createElement("div");
-	div.id = "theme-picker";
+	const div = document.createElement('div');
+	div.id = 'theme-picker';
 	div.innerHTML = `
 <fieldset class="bx--fieldset marginTop-30">
 	<div class="bx--form-item">
@@ -39,7 +39,7 @@ const generateThemePickerHTML = (container) => {
 	</div>
 </fieldset>`;
 
-	container.querySelector("#charting-controls").appendChild(div);
+	container.querySelector('#charting-controls').appendChild(div);
 };
 
 const colorPairingOptions = Configuration.color.pairingOptions;
@@ -56,8 +56,8 @@ const generateColorPalettePickerHTML = (container, chart) => {
 
 	const selectedColorPalette = `${numberOfVariants}-${option}`;
 
-	const div = document.createElement("div");
-	div.id = "color-palette-picker";
+	const div = document.createElement('div');
+	div.id = 'color-palette-picker';
 	div.innerHTML = `
 <div class="bx--form-item">
 	<div
@@ -78,12 +78,12 @@ const generateColorPalettePickerHTML = (container, chart) => {
 						for (let i = 1; i <= optionsCount; i++) {
 							optionsHTML += `
 						<option class="bx--select-option" ${
-							onlyCategoricalPaletteIsApplicable ? "disabled" : ""
+							onlyCategoricalPaletteIsApplicable ? 'disabled' : ''
 						} value="${colorGroup}-option-${i}" ${
 								selectedColorPalette ===
 								`${numberOfVariants}-${i}`
-									? "selected"
-									: ""
+									? 'selected'
+									: ''
 							}>
 							${numberOfVariants}-color groups, option ${i}
 						</option>`;
@@ -92,8 +92,8 @@ const generateColorPalettePickerHTML = (container, chart) => {
 						optionsHTML += `<option class="bx--select-option" value="14-color-option-1" ${
 							selectedColorPalette === `14-1` ||
 							onlyCategoricalPaletteIsApplicable
-								? "selected"
-								: ""
+								? 'selected'
+								: ''
 						}>
 						Categorical palette
 					</option>`;
@@ -101,7 +101,7 @@ const generateColorPalettePickerHTML = (container, chart) => {
 
 					return optionsHTML;
 				})
-				.join("")}
+				.join('')}
 		</select>
 		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 		</div>
@@ -109,12 +109,12 @@ const generateColorPalettePickerHTML = (container, chart) => {
 	</div>
 </div>`;
 
-	div.querySelector("#color-palette-select").addEventListener(
-		"change",
+	div.querySelector('#color-palette-select').addEventListener(
+		'change',
 		(e: any) => {
 			const { value } = e.target;
 			const [numberOfVariants, pairingOption] = value.split(
-				"-color-option-"
+				'-color-option-'
 			);
 
 			chartOptions.color.pairing.numberOfVariants = numberOfVariants;
@@ -123,7 +123,7 @@ const generateColorPalettePickerHTML = (container, chart) => {
 		}
 	);
 
-	container.querySelector("#charting-controls").appendChild(div);
+	container.querySelector('#charting-controls').appendChild(div);
 };
 
 export const addControls = (container, chart) => {
@@ -136,12 +136,12 @@ export const addControls = (container, chart) => {
 export const addRadioButtonEventListeners = (container, chart) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll(
-		"div#theme-picker input.bx--radio-button"
+		'div#theme-picker input.bx--radio-button'
 	);
 	radioButtons.forEach((radioButton) => {
-		radioButton.addEventListener("click", (e: any) => {
+		radioButton.addEventListener('click', (e: any) => {
 			const theme = e.target.value;
-			container.setAttribute("class", `container theme--${theme}`);
+			container.setAttribute('class', `container theme--${theme}`);
 
 			chart.update();
 		});
@@ -161,9 +161,9 @@ export const generateRandomData = (quantity, min, max) => {
 		.fill(0)
 		.map((value, index) => {
 			return {
-				group: "group",
+				group: 'group',
 				value: Math.floor(Math.random() * (max - min + 1) + min),
-				date: new Date(now.valueOf() + (index - quantity) * 60000) // go forward a minute for every value
+				date: new Date(now.valueOf() + (index - quantity) * 60000), // go forward a minute for every value
 			};
 		});
 };
@@ -175,9 +175,9 @@ export const generateHighScaleDemoDataForm = () =>
 	 size="5" value="100"><input type="submit"></label></form>`;
 export const addDemoDataFormListeners = (container, demo, chart) => {
 	// Add event listeners for form
-	const form = container.querySelector("form#demo-data");
+	const form = container.querySelector('form#demo-data');
 	if (form) {
-		form.addEventListener("submit", (e: any) => {
+		form.addEventListener('submit', (e: any) => {
 			e.stopPropagation();
 			e.preventDefault();
 			const recordsToGenerate =

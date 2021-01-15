@@ -16,10 +16,6 @@ git stash
 # checkout master to get out of detached HEAD state
 git checkout master
 
-yarn format
-git add *
-git commit -m "Prettier format"
-
 lerna version --conventional-commits --yes --force-publish --create-release github
 
 echo "Publish to NPM"

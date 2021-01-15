@@ -1,7 +1,7 @@
 // Internal Imports
-import * as Configuration from "./configuration";
-import { ChartModel } from "./model";
-import { Tools } from "./tools";
+import * as Configuration from './configuration';
+import { ChartModel } from './model';
+import { Tools } from './tools';
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset
@@ -20,11 +20,11 @@ export class MeterChartModel extends ChartModel {
 	}
 
 	getDisplayData() {
-		if (!this.get("data")) {
+		if (!this.get('data')) {
 			return null;
 		}
 		// meter only uses displays one data group and value
-		return this.get("data")[0];
+		return this.get('data')[0];
 	}
 
 	/**
@@ -34,7 +34,7 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getFillColor(group: string) {
 		const options = this.getOptions();
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const userProvidedScale = Tools.getProperty(options, 'color', 'scale');
 		const status = this.getStatus();
 		// user provided a fill color or there isn't a status we can use the colorScale
 		if (userProvidedScale || !status) {
@@ -57,9 +57,9 @@ export class MeterChartModel extends ChartModel {
 		// user needs to supply ranges
 		const allRanges = Tools.getProperty(
 			options,
-			"meter",
-			"status",
-			"ranges"
+			'meter',
+			'status',
+			'ranges'
 		);
 
 		if (allRanges) {

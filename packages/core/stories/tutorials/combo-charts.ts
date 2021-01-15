@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const comboChartTutorial = {
-	name: "Combo charts",
+	name: 'Combo charts',
 	content: marked(`
 # Combo charts
 Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
@@ -110,5 +110,5 @@ ComboChart **will still render some additional componetry for axis-charts** in a
 Keep in mind that when using components/graphs independently, the library will not enforce any type checking.
 This enables the user to extend \`ComboChart\` to cover complex cases but also leaves responsibility on the developers to use the right chart combinations.
 
-`)
+`),
 };

@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const themesTutorial = {
-	name: "Themes",
+	name: 'Themes',
 	content: marked(`
 # Themes
 
@@ -38,5 +38,5 @@ Using the \`$carbon--theme\`flag you’d be able to customize what theme you’d
 - Our new color palette udpates automatically on theme switches
 - In some chart types such as **Treemap**, you'd need to update the chart after swapping out the themes (this is if you are updating the theme on a chart that's already been rendered). In order to do this you would call \`myChart.update()\` on your charting object instance.
 
-`)
+`),
 };

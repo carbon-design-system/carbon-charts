@@ -1,14 +1,14 @@
 // Internal Imports
-import { Component } from "../component";
-import * as Configuration from "../../configuration";
-import { Roles, Events, ColorClassNameTypes } from "../../interfaces";
-import { Tools } from "../../tools";
+import { Component } from '../component';
+import * as Configuration from '../../configuration';
+import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
-import { line } from "d3-shape";
+import { line } from 'd3-shape';
 
 export class Line extends Component {
-	type = "line";
+	type = 'line';
 
 	init() {
 		const { events } = this.services;
@@ -32,7 +32,7 @@ export class Line extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue
+			getYValue,
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -64,7 +64,7 @@ export class Line extends Component {
 			const { groupMapsTo } = options.data;
 			const stackedData = this.model.getStackedData({
 				groups: this.configs.groups,
-				percentage
+				percentage,
 			});
 
 			data = stackedData.map((d) => {
@@ -79,9 +79,9 @@ export class Line extends Component {
 					data: d.map((datum) => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[groupMapsTo]: datum[groupMapsTo],
-						[rangeIdentifier]: datum[1]
+						[rangeIdentifier]: datum[1],
 					})),
-					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1]),
 				};
 			});
 		} else {
@@ -90,38 +90,38 @@ export class Line extends Component {
 
 		// Update the bound data on lines
 		const lines = svg
-			.selectAll("path.line")
+			.selectAll('path.line')
 			.data(data, (group) => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		lines.exit().attr("opacity", 0).remove();
+		lines.exit().attr('opacity', 0).remove();
 
 		// Add lines that need to be introduced
 		const enteringLines = lines
 			.enter()
-			.append("path")
-			.classed("line", true)
-			.attr("opacity", 0);
+			.append('path')
+			.classed('line', true)
+			.attr('opacity', 0);
 
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
 			.data(data, (group) => group.name)
-			.attr("class", (group) =>
+			.attr('class', (group) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: group.name,
-					originalClassName: "line"
+					originalClassName: 'line',
 				})
 			)
-			.style("stroke", (group) => this.model.getStrokeColor(group.name))
+			.style('stroke', (group) => this.model.getStrokeColor(group.name))
 			// a11y
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "line")
-			.attr("aria-label", (group) => {
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'line')
+			.attr('aria-label', (group) => {
 				const { data: groupData } = group;
 				return groupData
 					.map((datum) => {
@@ -130,17 +130,17 @@ export class Line extends Component {
 						);
 						return datum[rangeIdentifier];
 					})
-					.join(",");
+					.join(',');
 			})
 			// Transition
 			.transition(
 				this.services.transitions.getTransition(
-					"line-update-enter",
+					'line-update-enter',
 					animate
 				)
 			)
-			.attr("opacity", (d) => (d.hidden ? 0 : 1))
-			.attr("d", (group) => {
+			.attr('opacity', (d) => (d.hidden ? 0 : 1))
+			.attr('d', (group) => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);
 			});
@@ -150,12 +150,12 @@ export class Line extends Component {
 		const { hoveredElement } = event.detail;
 
 		this.parent
-			.selectAll("path.line")
+			.selectAll('path.line')
 			.transition(
-				this.services.transitions.getTransition("legend-hover-line")
+				this.services.transitions.getTransition('legend-hover-line')
 			)
-			.attr("opacity", (group) => {
-				if (group.name !== hoveredElement.datum()["name"]) {
+			.attr('opacity', (group) => {
+				if (group.name !== hoveredElement.datum()['name']) {
 					return Configuration.lines.opacity.unselected;
 				}
 
@@ -165,19 +165,19 @@ export class Line extends Component {
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("path.line")
+			.selectAll('path.line')
 			.transition(
-				this.services.transitions.getTransition("legend-mouseout-line")
+				this.services.transitions.getTransition('legend-mouseout-line')
 			)
-			.attr("opacity", Configuration.lines.opacity.selected);
+			.attr('opacity', Configuration.lines.opacity.selected);
 	};
 
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path.line")
-			.on("mousemove", null)
-			.on("mouseout", null);
+			.selectAll('path.line')
+			.on('mousemove', null)
+			.on('mouseout', null);
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
