@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const dualAxesTutorial = {
-	name: "Dual axes charts",
+	name: 'Dual axes charts',
 	content: marked(`
 # Dual Axes Charts
 
@@ -50,5 +50,5 @@ const dualAxesOptions = {
 Note: The library tries to determine the orientation/primary axes **without the use of \`main\`**,
 however it is best to be explicit when working with dual axes charts. If \`main\` is not specified, the library
 will try to determine the best primary/secondary assignments to make which could result in some confusion down the road.
-`)
+`),
 };

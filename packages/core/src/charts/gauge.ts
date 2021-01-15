@@ -1,12 +1,12 @@
 // Internal Imports
-import { Chart } from "../chart";
-import * as Configuration from "../configuration";
-import { ChartConfig, GaugeChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
-import { GaugeChartModel } from "./../model-gauge";
+import { Chart } from '../chart';
+import * as Configuration from '../configuration';
+import { ChartConfig, GaugeChartOptions } from '../interfaces/index';
+import { Tools } from '../tools';
+import { GaugeChartModel } from './../model-gauge';
 
 // Components
-import { Gauge } from "../components/index";
+import { Gauge } from '../components/index';
 
 export class GaugeChart extends Chart {
 	model = new GaugeChartModel(this.services);

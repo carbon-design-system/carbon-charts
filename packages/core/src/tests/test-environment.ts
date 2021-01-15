@@ -1,18 +1,18 @@
-import { Chart } from "../chart";
+import { Chart } from '../chart';
 
-import * as Charts from "../index";
-import { createChartHolder } from "./tools";
+import * as Charts from '../index';
+import { createChartHolder } from './tools';
 
-import { ChartData } from "../interfaces";
+import { ChartData } from '../interfaces';
 
-import { groupedBarData, groupedBarOptions } from "../../demo/data";
+import { groupedBarData, groupedBarOptions } from '../../demo/data';
 
 export const data = groupedBarData as ChartData;
 export const options = Object.assign(groupedBarOptions, {
-	title: "My chart",
+	title: 'My chart',
 	data: {
-		selectedGroups: ["Dataset 1", "Dataset 3"]
-	}
+		selectedGroups: ['Dataset 1', 'Dataset 3'],
+	},
 }) as any;
 
 export class TestEnvironment {
@@ -21,11 +21,11 @@ export class TestEnvironment {
 	chart: Chart;
 
 	render() {
-		const holder = createChartHolder("scatter");
+		const holder = createChartHolder('scatter');
 
 		this.chart = new Charts.ScatterChart(holder, {
 			data: this.chartData,
-			options: this.chartOptions
+			options: this.chartOptions,
 		});
 	}
 
