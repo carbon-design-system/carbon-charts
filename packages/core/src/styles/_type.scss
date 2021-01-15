@@ -1,23 +1,23 @@
-@import "./vendor/@carbon/type/scss/type";
-@import "./vendor/@carbon/type/scss/font-face/mono";
-@import "./vendor/@carbon/type/scss/font-face/sans";
+@import './vendor/@carbon/type/scss/type';
+@import './vendor/@carbon/type/scss/font-face/mono';
+@import './vendor/@carbon/type/scss/font-face/sans';
 
 svg.#{$prefix}--#{$charts-prefix}--chart-svg {
-	font-family: carbon--font-family("sans-condensed");
+	font-family: carbon--font-family('sans-condensed');
 
 	text {
 		font-size: 12px;
-		font-weight: carbon--font-weight("regular");
+		font-weight: carbon--font-weight('regular');
 		fill: $text-02;
 	}
 
 	text.meter-title,
 	text.percent-value {
 		font-size: $carbon--base-font-size;
-		font-family: carbon--font-family("sans");
+		font-family: carbon--font-family('sans');
 	}
 
 	text.meter-title {
-		font-weight: carbon--font-weight("semibold");
+		font-weight: carbon--font-weight('semibold');
 	}
 }

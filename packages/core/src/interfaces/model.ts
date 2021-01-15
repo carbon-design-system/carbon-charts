@@ -1,4 +1,4 @@
-import { AxisChartOptions } from "./charts";
+import { AxisChartOptions } from './charts';
 
 export type ChartTabularData = Record<string, any>[];
 

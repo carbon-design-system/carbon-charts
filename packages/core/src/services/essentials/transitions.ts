@@ -1,11 +1,11 @@
 // Internal Imports
-import { Service } from "../service";
-import * as Configuration from "../../configuration";
-import { Events } from "./../../interfaces";
-import { Tools } from "../../tools";
+import { Service } from '../service';
+import * as Configuration from '../../configuration';
+import { Events } from './../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
-import { Transition, transition } from "d3-transition";
+import { Transition, transition } from 'd3-transition';
 
 export class Transitions extends Service {
 	pendingTransitions = {};
@@ -26,12 +26,12 @@ export class Transitions extends Service {
 		}
 
 		const t: any = transition(name).duration(
-			Tools.getProperty(Configuration.transitions, name, "duration") ||
+			Tools.getProperty(Configuration.transitions, name, 'duration') ||
 				Configuration.transitions.default.duration
 		);
 
 		this.pendingTransitions[t._id] = t;
-		t.on("end interrupt cancel", () => {
+		t.on('end interrupt cancel', () => {
 			delete this.pendingTransitions[t._id];
 		});
 
@@ -42,7 +42,7 @@ export class Transitions extends Service {
 		const t: any = transition(name).duration(0);
 
 		this.pendingTransitions[t._id] = t;
-		t.on("end interrupt cancel", () => {
+		t.on('end interrupt cancel', () => {
 			delete this.pendingTransitions[t._id];
 		});
 

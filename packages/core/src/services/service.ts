@@ -1,4 +1,4 @@
-import { ChartModel } from "../model";
+import { ChartModel } from '../model';
 
 export class Service {
 	protected model: ChartModel;

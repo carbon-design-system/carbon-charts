@@ -1,125 +1,71 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.41.21](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.20...v0.41.21) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.20](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.19...v0.41.20) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.19](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.18...v0.41.19) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.18](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.17...v0.41.18) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.17](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.16...v0.41.17) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.16](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.15...v0.41.16) (2021-01-13)
-
 
 ### Bug Fixes
 
-* **core:** add number to the donut center interface ([#929](https://github.com/carbon-design-system/carbon-charts/issues/929)) ([2f012a7](https://github.com/carbon-design-system/carbon-charts/commit/2f012a7915c3250b1044016330b91bc4e76206d8))
-
-
-
-
+-   **core:** add number to the donut center interface
+    ([#929](https://github.com/carbon-design-system/carbon-charts/issues/929))
+    ([2f012a7](https://github.com/carbon-design-system/carbon-charts/commit/2f012a7915c3250b1044016330b91bc4e76206d8))
 
 ## [0.41.15](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.14...v0.41.15) (2021-01-07)
 
-
 ### Bug Fixes
 
-* set definedZoomBarData to zoom bar data ([#909](https://github.com/carbon-design-system/carbon-charts/issues/909)) ([d446e47](https://github.com/carbon-design-system/carbon-charts/commit/d446e47bc618b638ddec1513e48c3fd0f01e3256))
-
-
-
-
+-   set definedZoomBarData to zoom bar data
+    ([#909](https://github.com/carbon-design-system/carbon-charts/issues/909))
+    ([d446e47](https://github.com/carbon-design-system/carbon-charts/commit/d446e47bc618b638ddec1513e48c3fd0f01e3256))
 
 ## [0.41.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.13...v0.41.14) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.12...v0.41.13) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.11...v0.41.12) (2020-12-07)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.10...v0.41.11) (2020-12-04)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.9...v0.41.10) (2020-12-01)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.8...v0.41.9) (2020-11-27)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.7...v0.41.8) (2020-11-26)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 # Change Log
 
@@ -129,10 +75,6 @@ All notable changes to this project will be documented in this file. See
 ## [0.41.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.6...v0.41.7) (2020-11-26)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.5...v0.41.6) (2020-11-20)
 

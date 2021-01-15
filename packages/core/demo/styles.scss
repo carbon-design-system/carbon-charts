@@ -1,4 +1,4 @@
-@import "../src/styles/vendor/@carbon/elements/scss/themes/mixins";
+@import '../src/styles/vendor/@carbon/elements/scss/themes/mixins';
 
 body {
 	margin: 0;
@@ -25,11 +25,11 @@ body {
 }
 
 div.container {
-	font-family: "IBM Plex Sans", Arial, sans-serif;
+	font-family: 'IBM Plex Sans', Arial, sans-serif;
 	padding: 30px;
 
 	&.theme--white {
-		@import "../src/styles/styles-white.scss";
+		@import '../src/styles/styles-white.scss';
 
 		@include carbon--theme($carbon--theme--white) {
 			color: $text-01;
@@ -39,7 +39,7 @@ div.container {
 	}
 
 	&.theme--g10 {
-		@import "../src/styles/styles-g10.scss";
+		@import '../src/styles/styles-g10.scss';
 
 		@include carbon--theme($carbon--theme--g10) {
 			color: $text-01;
@@ -49,7 +49,7 @@ div.container {
 	}
 
 	&.theme--g90 {
-		@import "../src/styles/styles-g90.scss";
+		@import '../src/styles/styles-g90.scss';
 
 		@include carbon--theme($carbon--theme--g90) {
 			color: $text-01;
@@ -80,7 +80,7 @@ div.container {
 	}
 
 	&.theme--g100 {
-		@import "../src/styles/styles-g100.scss";
+		@import '../src/styles/styles-g100.scss';
 
 		@include carbon--theme($carbon--theme--g100) {
 			color: $text-01;
@@ -118,12 +118,12 @@ div.container {
 		}
 	}
 
-	@import "../src/styles/vendor/carbon-components/scss/globals/grid/grid";
-	@import "../src/styles/vendor/carbon-components/scss/components/button/button";
-	@import "../src/styles/vendor/carbon-components/scss/components/select/select";
-	@import "../src/styles/vendor/carbon-components/scss/components/tag/tag";
-	@import "../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button";
-	@import "../src/styles/vendor/carbon-components/scss/components/notification/inline-notification";
+	@import '../src/styles/vendor/carbon-components/scss/globals/grid/grid';
+	@import '../src/styles/vendor/carbon-components/scss/components/button/button';
+	@import '../src/styles/vendor/carbon-components/scss/components/select/select';
+	@import '../src/styles/vendor/carbon-components/scss/components/tag/tag';
+	@import '../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button';
+	@import '../src/styles/vendor/carbon-components/scss/components/notification/inline-notification';
 
 	#chart-demo {
 		max-width: 700px;
@@ -216,7 +216,7 @@ div.container {
 		text-align: center;
 
 		&:before {
-			content: "";
+			content: '';
 			position: absolute;
 			display: block;
 			width: 100%;
@@ -315,7 +315,7 @@ div.container {
 	}
 
 	&.tutorial {
-		@import "~highlight.js/styles/sunburst.css";
+		@import '~highlight.js/styles/sunburst.css';
 
 		h1,
 		h5,

@@ -1,68 +1,68 @@
 // Karma configuration
 module.exports = function (config) {
-	const browsers = ["ChromeHeadless", "FirefoxHeadless"];
+	const browsers = ['ChromeHeadless', 'FirefoxHeadless'];
 	config.set({
 		// base path that will be used to resolve all patterns (eg. files, exclude)
-		basePath: "./",
+		basePath: './',
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ["jasmine"],
+		frameworks: ['jasmine'],
 		// list of plugins we want to load
 		plugins: [
-			"karma-jasmine",
-			"karma-webpack",
-			"karma-chrome-launcher",
-			"karma-firefox-launcher",
-			"karma-safari-launcher"
+			'karma-jasmine',
+			'karma-webpack',
+			'karma-chrome-launcher',
+			'karma-firefox-launcher',
+			'karma-safari-launcher',
 		],
 		// list of files / patterns to load in the browser
-		files: ["**/*.spec.ts"],
+		files: ['**/*.spec.ts'],
 		// list of files / patterns to exclude
-		exclude: ["node_modules"],
+		exclude: ['node_modules'],
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			"**/*.ts": ["webpack"]
+			'**/*.ts': ['webpack'],
 		},
 		// webpack config
 		webpack: {
-			mode: "development",
+			mode: 'development',
 			module: {
 				rules: [
 					{
 						test: /\.ts$/,
-						loader: "ts-loader",
+						loader: 'ts-loader',
 						options: {
-							transpileOnly: true
-						}
+							transpileOnly: true,
+						},
 					},
 					{
 						test: /\.html?$/,
-						loader: "html-loader"
+						loader: 'html-loader',
 					},
 					{
 						test: /\.scss$/,
 						use: [
-							"style-loader",
-							"css-loader",
-							"postcss-loader",
-							"sass-loader"
-						]
+							'style-loader',
+							'css-loader',
+							'postcss-loader',
+							'sass-loader',
+						],
 					},
 					{
 						test: /\.svg?$/,
-						loader: "raw-loader"
-					}
-				]
+						loader: 'raw-loader',
+					},
+				],
 			},
 			resolve: {
-				extensions: [".ts", ".js"]
-			}
+				extensions: ['.ts', '.js'],
+			},
 		},
 		// test results reporter to use
 		// possible values: "dots", "progress"
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ["progress"],
+		reporters: ['progress'],
 		// web server port
 		port: 9876,
 		// enable / disable colors in the output (reporters and logs)
@@ -77,23 +77,23 @@ module.exports = function (config) {
 		browsers,
 		browserConsoleLogOptions: {
 			terminal: true,
-			level: "warn"
+			level: 'warn',
 		},
 		customLaunchers: {
 			FirefoxHeadless: {
-				base: "Firefox",
-				flags: ["-headless"]
+				base: 'Firefox',
+				flags: ['-headless'],
 			},
 			ChromeNoSandbox: {
-				base: "ChromeHeadless",
-				flags: ["--no-sandbox"]
-			}
+				base: 'ChromeHeadless',
+				flags: ['--no-sandbox'],
+			},
 		},
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
 		singleRun: !!process.env.CI,
 		// Concurrency level
 		// how many browser should be started simultaneous
-		concurrency: Infinity
+		concurrency: Infinity,
 	});
 };

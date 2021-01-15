@@ -1,4 +1,4 @@
-@import "./color-palatte.scss";
+@import './color-palatte.scss';
 
 @function getThemeColors() {
 	$color-map: ();
@@ -21,12 +21,12 @@
 			@if $name == null {
 				$color-items: map-merge(
 					$color-items,
-					color-property("#{$category}", $value)
+					color-property('#{$category}', $value)
 				);
 			} @else {
 				$color-items: map-merge(
 					$color-items,
-					color-property("#{$name}-#{$category}", $value)
+					color-property('#{$name}-#{$category}', $value)
 				);
 			}
 		}

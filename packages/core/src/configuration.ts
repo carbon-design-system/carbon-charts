@@ -1,4 +1,4 @@
-import { Tools } from "./tools";
+import { Tools } from './tools';
 import {
 	BaseChartOptions,
 	AxisChartOptions,
@@ -33,9 +33,9 @@ import {
 	LegendPositions,
 	TruncationTypes,
 	ToolbarControlTypes,
-	ZoomBarTypes
-} from "./interfaces";
-import enUSLocaleObject from "date-fns/locale/en-US/index";
+	ZoomBarTypes,
+} from './interfaces';
+import enUSLocaleObject from 'date-fns/locale/en-US/index';
 
 /*
  *****************************
@@ -49,7 +49,7 @@ import enUSLocaleObject from "date-fns/locale/en-US/index";
 const standardTruncationOptions = {
 	type: TruncationTypes.END_LINE,
 	threshold: 16,
-	numCharacter: 14
+	numCharacter: 14,
 };
 
 /**
@@ -61,7 +61,7 @@ const legend: LegendOptions = {
 	clickable: true,
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
-	order: null
+	order: null,
 };
 
 /**
@@ -71,13 +71,13 @@ export const grid: GridOptions = {
 	x: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
-		numberOfTicks: 15
+		numberOfTicks: 15,
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
-		numberOfTicks: 5
-	}
+		numberOfTicks: 5,
+	},
 };
 
 /**
@@ -85,7 +85,7 @@ export const grid: GridOptions = {
  */
 export const ruler: RulerOptions = {
 	// enable or disable ruler
-	enabled: true
+	enabled: true,
 };
 
 /**
@@ -95,7 +95,7 @@ export const baseTooltip: TooltipOptions = {
 	enabled: true,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
-	truncation: standardTruncationOptions
+	truncation: standardTruncationOptions,
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -105,23 +105,23 @@ const axes: AxesOptions = {
 	top: {
 		visible: true,
 		includeZero: true,
-		truncation: standardTruncationOptions
+		truncation: standardTruncationOptions,
 	},
 	bottom: {
 		visible: true,
 		includeZero: true,
-		truncation: standardTruncationOptions
+		truncation: standardTruncationOptions,
 	},
 	left: {
 		visible: true,
 		includeZero: true,
-		truncation: standardTruncationOptions
+		truncation: standardTruncationOptions,
 	},
 	right: {
 		visible: true,
 		includeZero: true,
-		truncation: standardTruncationOptions
-	}
+		truncation: standardTruncationOptions,
+	},
 };
 
 export const timeScale: TimeScaleOptions = {
@@ -129,16 +129,16 @@ export const timeScale: TimeScaleOptions = {
 	showDayName: false,
 	localeObject: enUSLocaleObject,
 	timeIntervalFormats: {
-		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
-		minute: { primary: "MMM d, p", secondary: "p" },
-		"30minutes": { primary: "MMM d, p", secondary: "p" },
-		hourly: { primary: "MMM d, hh a", secondary: "hh a" },
-		daily: { primary: "MMM d", secondary: "d" },
-		weekly: { primary: "eee, MMM d", secondary: "eee" },
-		monthly: { primary: "MMM yyyy", secondary: "MMM" },
-		quarterly: { primary: "QQQ ''yy", secondary: "QQQ" },
-		yearly: { primary: "yyyy", secondary: "yyyy" }
-	}
+		'15seconds': { primary: 'MMM d, pp', secondary: 'pp' },
+		minute: { primary: 'MMM d, p', secondary: 'p' },
+		'30minutes': { primary: 'MMM d, p', secondary: 'p' },
+		hourly: { primary: 'MMM d, hh a', secondary: 'hh a' },
+		daily: { primary: 'MMM d', secondary: 'd' },
+		weekly: { primary: 'eee, MMM d', secondary: 'eee' },
+		monthly: { primary: 'MMM yyyy', secondary: 'MMM' },
+		quarterly: { primary: "QQQ ''yy", secondary: 'QQQ' },
+		yearly: { primary: 'yyyy', secondary: 'yyyy' },
+	},
 };
 
 /**
@@ -151,23 +151,23 @@ const chart: BaseChartOptions = {
 	tooltip: baseTooltip,
 	legend,
 	style: {
-		prefix: "cc"
+		prefix: 'cc',
 	},
 	data: {
-		groupMapsTo: "group",
+		groupMapsTo: 'group',
 		loading: false,
-		selectedGroups: []
+		selectedGroups: [],
 	},
 	color: {
 		scale: null,
 		pairing: {
 			numberOfVariants: null,
-			option: 1
+			option: 1,
 		},
 		gradient: {
-			enabled: false
-		}
-	}
+			enabled: false,
+		},
+	},
 };
 
 /**
@@ -183,14 +183,14 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		minZoomRatio: 0.01,
 		top: {
 			enabled: false,
-			type: ZoomBarTypes.GRAPH_VIEW
-		}
+			type: ZoomBarTypes.GRAPH_VIEW,
+		},
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
 		numberOfIcons: 3,
-		controls: []
-	} as ToolbarOptions
+		controls: [],
+	} as ToolbarOptions,
 } as AxisChartOptions);
 
 /**
@@ -198,11 +198,11 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
  */
 const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
-		maxWidth: 16
+		maxWidth: 16,
 	},
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: 1
-	} as TimeScaleOptions)
+		addSpaceOnEdges: 1,
+	} as TimeScaleOptions),
 } as BarChartOptions);
 
 /**
@@ -228,8 +228,8 @@ const groupedBarChart: BarChartOptions = Tools.merge(
  */
 const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 	bars: Tools.merge({}, baseBarChart.bars, {
-		dividerSize: 1.5
-	} as StackedBarOptions)
+		dividerSize: 1.5,
+	} as StackedBarOptions),
 } as BarChartOptions);
 
 /**
@@ -241,8 +241,8 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 		radius: 4,
 		fillOpacity: 0.3,
 		filled: true,
-		enabled: true
-	}
+		enabled: true,
+	},
 } as ScatterChartOptions);
 
 /**
@@ -258,8 +258,8 @@ const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
 		// default point radius to 3
 		radius: 3,
 		filled: false,
-		enabled: true
-	}
+		enabled: true,
+	},
 } as LineChartOptions);
 
 /**
@@ -267,8 +267,8 @@ const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
  */
 const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: 0
-	} as TimeScaleOptions)
+		addSpaceOnEdges: 0,
+	} as TimeScaleOptions),
 } as LineChartOptions);
 
 /**
@@ -281,7 +281,7 @@ const stackedAreaChart = areaChart;
  */
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
-		radiusMapsTo: "radius",
+		radiusMapsTo: 'radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,
@@ -289,7 +289,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 			);
 			return [
 				(smallerChartDimension * 3) / 400,
-				(smallerChartDimension * 25) / 400
+				(smallerChartDimension * 25) / 400,
 			];
 		},
 		fillOpacity: 0.2,
@@ -306,10 +306,10 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
 		labels: {
-			formatter: null
+			formatter: null,
 		},
-		alignment: Alignments.LEFT
-	}
+		alignment: Alignments.LEFT,
+	},
 } as PieChartOptions);
 
 /**
@@ -317,14 +317,14 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
  */
 const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 	legend: {
-		enabled: false
+		enabled: false,
 	},
 	gauge: {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
 		deltaArrow: {
 			size: (radius) => radius / 8,
-			enabled: true
+			enabled: true,
 		},
 		status: null,
 		numberSpacing: 10,
@@ -334,8 +334,8 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 			number.toFixed(2) % 1 !== 0
 				? number.toFixed(2).toLocaleString()
 				: number.toFixed().toLocaleString(),
-		alignment: Alignments.LEFT
-	}
+		alignment: Alignments.LEFT,
+	},
 } as GaugeChartOptions);
 
 /**
@@ -345,27 +345,27 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
 		center: {
 			numberFontSize: (radius) =>
-				Math.min((radius / 100) * 24, 24) + "px",
-			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + "px",
+				Math.min((radius / 100) * 24, 24) + 'px',
+			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + 'px',
 			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
-			numberFormatter: (number) => Math.floor(number).toLocaleString()
+			numberFormatter: (number) => Math.floor(number).toLocaleString(),
 		},
-		alignment: Alignments.LEFT
-	}
+		alignment: Alignments.LEFT,
+	},
 } as DonutChartOptions);
 
 const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	legend: {
-		enabled: false
+		enabled: false,
 	},
 	meter: {
 		height: 8,
 		statusBar: {
 			percentageIndicator: {
-				enabled: true
-			}
-		}
-	}
+				enabled: true,
+			},
+		},
+	},
 } as MeterChartOptions);
 
 /**
@@ -374,25 +374,25 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	radar: {
 		axes: {
-			angle: "key",
-			value: "value"
+			angle: 'key',
+			value: 'value',
 		},
-		alignment: Alignments.LEFT
+		alignment: Alignments.LEFT,
 	},
 	tooltip: {
 		gridline: {
-			enabled: true
+			enabled: true,
 		},
 		valueFormatter: (value) =>
-			value !== null && value !== undefined ? value : "N/A"
-	}
+			value !== null && value !== undefined ? value : 'N/A',
+	},
 } as RadarChartOptions);
 
 /**
  * options specific to combo charts
  */
 const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
-	comboChartTypes: []
+	comboChartTypes: [],
 } as ComboChartOptions);
 
 /*
@@ -400,8 +400,8 @@ const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
  */
 const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	data: Tools.merge(chart.data, {
-		groupMapsTo: "name"
-	})
+		groupMapsTo: 'name',
+	}),
 } as TreemapChartOptions);
 
 export const options = {
@@ -422,7 +422,7 @@ export const options = {
 	radarChart,
 	gaugeChart,
 	comboChart,
-	treemapChart
+	treemapChart,
 };
 
-export * from "./configuration-non-customizable";
+export * from './configuration-non-customizable';

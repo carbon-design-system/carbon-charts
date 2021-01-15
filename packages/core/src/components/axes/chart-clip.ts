@@ -1,16 +1,16 @@
 // Internal Imports
-import { Component } from "../component";
-import { DOMUtils } from "../../services";
-import { ChartModel } from "../../model";
+import { Component } from '../component';
+import { DOMUtils } from '../../services';
+import { ChartModel } from '../../model';
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior
 export class ChartClip extends Component {
-	type = "chart-clip";
+	type = 'chart-clip';
 
 	// Give every chart-clip a distinct ID
 	// so they don't interfere each other in a page with multiple charts
-	chartClipId = "chart-clip-id-" + Math.floor(Math.random() * 99999999999);
+	chartClipId = 'chart-clip-id-' + Math.floor(Math.random() * 99999999999);
 
 	chartClipPath: any;
 
@@ -42,16 +42,16 @@ export class ChartClip extends Component {
 		this.chartClipPath = DOMUtils.appendOrSelect(
 			svg,
 			`clipPath.${this.type}`
-		).attr("id", this.chartClipId);
+		).attr('id', this.chartClipId);
 		const clipRect = DOMUtils.appendOrSelect(
 			this.chartClipPath,
 			`rect.${this.type}`
 		);
 		clipRect
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart);
+			.attr('x', xScaleStart)
+			.attr('y', yScaleStart)
+			.attr('width', xScaleEnd - xScaleStart)
+			.attr('height', yScaleEnd - yScaleStart);
 
 		this.chartClipPath.merge(clipRect).lower();
 	}
