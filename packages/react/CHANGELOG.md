@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.23](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.22...v0.41.23) (2021-01-15)
+
+
+### Bug Fixes
+
+* **types:** add peak, status properties to MeterChartOptions interface ([#924](https://github.com/carbon-design-system/carbon-charts/issues/924)) ([ffff193](https://github.com/carbon-design-system/carbon-charts/commit/ffff19380e391fc603600e2630f7bb583a6a335b)), closes [#920](https://github.com/carbon-design-system/carbon-charts/issues/920)
+
+
+
+
+
 ## [0.41.22](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.21...v0.41.22) (2021-01-15)
 
 **Note:** Version bump only for package @carbon/charts-react
