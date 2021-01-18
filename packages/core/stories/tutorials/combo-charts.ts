@@ -1,11 +1,11 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const comboChartTutorial = {
-	name: "Combo charts",
+	name: 'Combo charts',
 	content: marked(`
 # Combo charts
 Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
-Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see [this tutorial](/?path=/story/tutorials--dual-axes-charts).
+Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see the [dual axes tutorial](/?path=/story/tutorials--dual-axes-charts).
 
 *Note: \`ComboChart\` extends axis chart functionality and should only comprise of graphs/components that use axes.*
 
@@ -14,7 +14,7 @@ ____
 ### Using the carbon-charts defaults
 
 There is support for using pre-existing carbon-charts graphs and combining them together within a \`ComboChart\`.
-The charts that can be seamlessly combined are all different **axis charts only**. This is the **reccommended way to use \`ComboCharts\`**.
+The charts that can be seamlessly combined are all different **axis charts only**. This is the **recommended way to use \`ComboCharts\`**.
 
 Supported \`ChartTypes\` to combine:
 - \`LineChart\`
@@ -49,7 +49,7 @@ const comboOptions = {
 			type: ChartTypes.LINE // use a valid ChartType from enums
 			options: {
 				points: {
-					enabled: false; // disable the point on the LineChart won't affect the points in the AreaChart
+					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
 				}
 			}, // component specific options
 			correspondingDatasets: ["Dataset 2"]
@@ -96,7 +96,7 @@ const comboOptions = {
 			// add the base options for that type of chart if it is in the carbon-charts library and any additional configurations needed
 			options: Object.assign({}, options.lineChart,  {
 				points: {
-					enabled: false; // disable the point on the LineChart won't affect the points in the AreaChart
+					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
 				}
 			}), // component specific options
 			correspondingDatasets: ["Dataset 2"]
@@ -110,5 +110,5 @@ ComboChart **will still render some additional componetry for axis-charts** in a
 Keep in mind that when using components/graphs independently, the library will not enforce any type checking.
 This enables the user to extend \`ComboChart\` to cover complex cases but also leaves responsibility on the developers to use the right chart combinations.
 
-`)
+`),
 };

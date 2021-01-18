@@ -1,4 +1,4 @@
-import { LayoutDirection } from "./enums";
+import { LayoutDirection } from './enums';
 
 export interface LayoutConfigs {
 	/**

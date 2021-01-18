@@ -3,8 +3,8 @@ import {
 	AxisChartOptions,
 	CartesianOrientations,
 	ScaleTypes,
-	TruncationTypes
-} from "./interfaces";
+	TruncationTypes,
+} from './interfaces';
 
 import {
 	debounce as lodashDebounce,
@@ -22,11 +22,11 @@ import {
 	some as lodashSome,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
-	DebounceSettings
-} from "lodash-es";
+	DebounceSettings,
+} from 'lodash-es';
 
-import { mouse } from "d3-selection";
-import { Numeric } from "d3";
+import { mouse } from 'd3-selection';
+import { Numeric } from 'd3';
 
 // Functions
 export namespace Tools {
@@ -91,24 +91,24 @@ export namespace Tools {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
 				if (
-					providedAxisOptions["primary"] ||
-					providedAxisOptions["secondary"]
+					providedAxisOptions['primary'] ||
+					providedAxisOptions['secondary']
 				) {
 					console.warn(
-						"`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format"
+						'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format'
 					);
 				}
 
-				const identifier = providedAxisOptions["mapsTo"];
+				const identifier = providedAxisOptions['mapsTo'];
 				if (identifier === undefined || identifier === null) {
-					const scaleType = providedAxisOptions["scaleType"];
+					const scaleType = providedAxisOptions['scaleType'];
 
 					if (scaleType === undefined || scaleType === null) {
-						providedAxisOptions["mapsTo"] = "value";
+						providedAxisOptions['mapsTo'] = 'value';
 					} else if (scaleType === ScaleTypes.TIME) {
-						providedAxisOptions["mapsTo"] = "date";
+						providedAxisOptions['mapsTo'] = 'date';
 					} else if (scaleType === ScaleTypes.LABELS) {
-						providedAxisOptions["mapsTo"] = "key";
+						providedAxisOptions['mapsTo'] = 'key';
 					}
 				}
 			} else {
@@ -133,11 +133,11 @@ export namespace Tools {
 	export function getDimensions(el) {
 		return {
 			width: parseFloat(
-				el.style.width.replace("px", "") || el.offsetWidth
+				el.style.width.replace('px', '') || el.offsetWidth
 			),
 			height: parseFloat(
-				el.style.height.replace("px", "") || el.offsetHeight
-			)
+				el.style.height.replace('px', '') || el.offsetHeight
+			),
 		};
 	}
 
@@ -156,7 +156,7 @@ export namespace Tools {
 		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
 		const transformStr = elementRef
-			.getAttribute("transform")
+			.getAttribute('transform')
 			.match(translateRegex);
 		if (!transformStr) {
 			return null;
@@ -165,13 +165,13 @@ export namespace Tools {
 		// check for the match
 		if (transformStr[0]) {
 			const transforms = transformStr[0]
-				.replace(/translate\(/, "")
-				.replace(/\)/, "")
-				.split(",");
+				.replace(/translate\(/, '')
+				.replace(/\)/, '')
+				.split(',');
 
 			return {
 				tx: transforms[0],
-				ty: transforms[1]
+				ty: transforms[1],
 			};
 		}
 		return null;
@@ -191,11 +191,11 @@ export namespace Tools {
 	export function getTranformOffsets(string) {
 		const regExp = /\(([^)]+)\)/;
 		const match = regExp.exec(string)[1];
-		const xyString = match.split(",");
+		const xyString = match.split(',');
 
 		return {
 			x: parseFloat(xyString[0]),
-			y: parseFloat(xyString[1])
+			y: parseFloat(xyString[1]),
 		};
 	}
 
@@ -213,7 +213,7 @@ export namespace Tools {
 			return stringValue;
 		}
 
-		return stringValue + "px";
+		return stringValue + 'px';
 	}
 
 	/**
@@ -259,13 +259,13 @@ export namespace Tools {
 		if (truncationType === TruncationTypes.MID_LINE) {
 			return (
 				fullText.substr(0, numCharacter / 2) +
-				"..." +
+				'...' +
 				fullText.substr(-numCharacter / 2)
 			);
 		} else if (truncationType === TruncationTypes.FRONT_LINE) {
-			return "..." + fullText.substr(-numCharacter);
+			return '...' + fullText.substr(-numCharacter);
 		} else if (truncationType === TruncationTypes.END_LINE) {
-			return fullText.substr(0, numCharacter) + "...";
+			return fullText.substr(0, numCharacter) + '...';
 		}
 	}
 
@@ -285,7 +285,7 @@ export namespace Tools {
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
 			missing: [],
-			added: []
+			added: [],
 		};
 
 		oldArray.forEach((element) => {
@@ -388,7 +388,7 @@ export namespace Tools {
 				y0: verticalCoordinates.x0,
 				y1: verticalCoordinates.x1,
 				x0: verticalCoordinates.y0,
-				x1: verticalCoordinates.y1
+				x1: verticalCoordinates.y1,
 			};
 		}
 

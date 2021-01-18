@@ -3,17 +3,17 @@ import {
 	Statuses,
 	ArrowDirections,
 	Alignments,
-	ChartTypes
-} from "./enums";
+	ChartTypes,
+} from './enums';
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
 	AxesOptions,
-	ZoomBarsOptions
-} from "./index";
-import { BarOptions, StackedBarOptions } from "./components";
-import { TimeScaleOptions } from "./axis-scales";
+	ZoomBarsOptions,
+} from './index';
+import { BarOptions, StackedBarOptions } from './components';
+import { TimeScaleOptions } from './axis-scales';
 
 /**
  * Base chart options common to any chart
@@ -298,6 +298,7 @@ export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
 			label?: string;
+			number?: number;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
@@ -309,6 +310,13 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		peak?: number;
+		status?: {
+			ranges: Array<{
+				range: [number, number];
+				status: Statuses;
+			}>;
+		};
 		height?: number;
 		title?: {
 			percentageIndicator?: {
