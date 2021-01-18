@@ -422,8 +422,7 @@ export class Scatter extends Component {
 								datum,
 								filled
 							)
-						)
-						.style('fill', null);
+						);
 				}
 
 				// Dispatch mouse event
