@@ -422,6 +422,14 @@ export class Scatter extends Component {
 								datum,
 								filled
 							)
+						)
+						.style("fill", d => filled 
+							? self.model.getFillColor(
+								d[groupMapsTo],
+								d[domainIdentifier],
+								d
+							)
+							: null
 						);
 				}
 
