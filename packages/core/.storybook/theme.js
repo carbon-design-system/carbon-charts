@@ -1,5 +1,5 @@
-import { create } from "@storybook/theming";
-import { g10, g100 } from "@carbon/themes";
+import { create } from '@storybook/theming';
+import { g10, g100 } from '@carbon/themes';
 
 const {
 	field01,
@@ -9,12 +9,12 @@ const {
 	ui01,
 	ui03,
 	ui04,
-	uiBackground
+	uiBackground,
 } = g10;
 const { uiBackground: secondaryColor } = g100;
 
 export default create({
-	base: "light",
+	base: 'light',
 
 	colorPrimary: interactive01,
 	colorSecondary: secondaryColor,
@@ -42,5 +42,5 @@ export default create({
 	inputBg: field01,
 	inputBorder: ui03,
 	inputTextColor: text01,
-	inputBorderRadius: 0
+	inputBorderRadius: 0,
 });

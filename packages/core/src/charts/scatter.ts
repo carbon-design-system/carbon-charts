@@ -1,9 +1,9 @@
 // Internal Imports
-import { AxisChart } from "../axis-chart";
-import * as Configuration from "../configuration";
-import { ChartConfig, ScatterChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
-import { Skeletons } from "../interfaces/enums";
+import { AxisChart } from '../axis-chart';
+import * as Configuration from '../configuration';
+import { ChartConfig, ScatterChartOptions } from '../interfaces/index';
+import { Tools } from '../tools';
+import { Skeletons } from '../interfaces/enums';
 
 // Components
 import {
@@ -15,8 +15,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 export class ScatterChart extends AxisChart {
 	constructor(
@@ -46,8 +46,8 @@ export class ScatterChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID
-			})
+				skeleton: Skeletons.GRID,
+			}),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

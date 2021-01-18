@@ -1,15 +1,15 @@
 // Internal Imports
-import { MeterChartModel } from "../model-meter";
-import { Chart } from "../chart";
-import * as Configuration from "../configuration";
+import { MeterChartModel } from '../model-meter';
+import { Chart } from '../chart';
+import * as Configuration from '../configuration';
 import {
 	ChartConfig,
 	MeterChartOptions,
 	LayoutGrowth,
-	LayoutDirection
-} from "../interfaces/index";
-import { Tools } from "../tools";
-import { Meter } from "./../components/graphs/meter";
+	LayoutDirection,
+} from '../interfaces/index';
+import { Tools } from '../tools';
+import { Meter } from './../components/graphs/meter';
 
 // Components
 import {
@@ -19,8 +19,8 @@ import {
 	Legend,
 	LayoutComponent,
 	MeterTitle,
-	Spacer
-} from "../components/index";
+	Spacer,
+} from '../components/index';
 
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services);
@@ -44,32 +44,32 @@ export class MeterChart extends Chart {
 	getComponents() {
 		// Specify what to render inside the graph only
 		const graph = {
-			id: "meter-graph",
+			id: 'meter-graph',
 			components: [new Meter(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// Meter has an unique dataset title within the graph
 		const titleComponent = {
-			id: "title",
+			id: 'title',
 			components: [new MeterTitle(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// create the title spacer
 		const titleSpacerComponent = {
-			id: "spacer",
+			id: 'spacer',
 			components: [new Spacer(this.model, this.services, { size: 8 })],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// the graph frame for meter includes the custom title (and spacer)
@@ -79,9 +79,9 @@ export class MeterChart extends Chart {
 				this.services,
 				[titleComponent, titleSpacerComponent, graph],
 				{
-					direction: LayoutDirection.COLUMN
+					direction: LayoutDirection.COLUMN,
 				}
-			)
+			),
 		];
 
 		// add the meter title as a top level component
