@@ -59,7 +59,9 @@ export class Pie extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 
-		const displayData = this.model.getDisplayData();
+		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
+		const displayData = this.model.getDisplayData()
+			.filter(data => data.value > 0);
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
