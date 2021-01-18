@@ -172,22 +172,25 @@ export class ZoomBar extends Component {
 			// update initialZoomDomain and set zoomDomain in model only if the option is changed
 			// not the same object, and both start date and end date are not equal
 			if (
+				newInitialZoomDomain &&
 				!(
-					oldInitialZoomDomain === newInitialZoomDomain ||
-					(oldInitialZoomDomain &&
-						newInitialZoomDomain &&
-						oldInitialZoomDomain[0].valueOf() ===
-							newInitialZoomDomain[0].valueOf() &&
-						oldInitialZoomDomain[1].valueOf() ===
-							newInitialZoomDomain[1].valueOf())
+					oldInitialZoomDomain &&
+					oldInitialZoomDomain[0].valueOf() ===
+						newInitialZoomDomain[0].valueOf() &&
+					oldInitialZoomDomain[1].valueOf() ===
+						newInitialZoomDomain[1].valueOf()
 				)
 			) {
 				this.model.set(
 					{
-						initialZoomDomain: newInitialZoomDomain,
+						// use a new object instead of newInitialZoomDomain
+						initialZoomDomain: Tools.merge(
+							[],
+							newInitialZoomDomain
+						),
 						zoomDomain: newInitialZoomDomain
-							? newInitialZoomDomain
-							: defaultDomain,
+							? Tools.merge([], newInitialZoomDomain)
+							: defaultDomain
 					},
 					{ skipUpdate: true }
 				);
