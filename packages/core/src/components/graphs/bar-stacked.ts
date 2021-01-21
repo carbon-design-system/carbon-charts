@@ -1,18 +1,18 @@
 // Internal Imports
-import { Tools } from "../../tools";
-import { Bar } from "./bar";
+import { Tools } from '../../tools';
+import { Bar } from './bar';
 import {
 	Roles,
 	Events,
 	CartesianOrientations,
-	ColorClassNameTypes
-} from "../../interfaces";
+	ColorClassNameTypes,
+} from '../../interfaces';
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select } from 'd3-selection';
 
 export class StackedBar extends Bar {
-	type = "stacked-bar";
+	type = 'stacked-bar';
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -35,36 +35,37 @@ export class StackedBar extends Bar {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
 		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData();
+		const stackData = this.model.getStackedData({
+			groups: this.configs.groups,
+		});
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
+		const barGroups = svg
+			.selectAll('g.bars')
+			.data(stackData, (d) => (d.length > 0 ? d[0][groupMapsTo] : null));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		barGroups.exit().attr("opacity", 0).remove();
+		barGroups.exit().attr('opacity', 0).remove();
 
 		// Add bar groups that need to be introduced
 		barGroups
 			.enter()
-			.append("g")
-			.classed("bars", true)
-			.attr("role", Roles.GROUP)
-			.attr("data-name", "bars");
+			.append('g')
+			.classed('bars', true)
+			.attr('role', Roles.GROUP)
+			.attr('data-name', 'bars');
 
 		// Update data on all bars
 		const bars = svg
-			.selectAll("g.bars")
-			.selectAll("path.bar")
+			.selectAll('g.bars')
+			.selectAll('path.bar')
 			.data(
 				(d) => d,
 				(d) => d.data.sharedStackKey
@@ -74,24 +75,24 @@ export class StackedBar extends Bar {
 		bars.exit().remove();
 
 		bars.enter()
-			.append("path")
+			.append('path')
 			.merge(bars)
-			.classed("bar", true)
+			.classed('bar', true)
 			.transition(
 				this.services.transitions.getTransition(
-					"bar-update-enter",
+					'bar-update-enter',
 					animate
 				)
 			)
-			.attr("class", (d) =>
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: "bar"
+					originalClassName: 'bar',
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr("d", (d, i) => {
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d, i) => {
 				const key = d.data.sharedStackKey;
 
 				/*
@@ -132,11 +133,11 @@ export class StackedBar extends Bar {
 					this.services.cartesianScales.getOrientation()
 				);
 			})
-			.attr("opacity", 1)
+			.attr('opacity', 1)
 			// a11y
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "bar")
-			.attr("aria-label", (d) => d[1] - d[0]);
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'bar')
+			.attr('aria-label', (d) => d[1] - d[0]);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -146,54 +147,62 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent
-			.selectAll("path.bar")
+			.selectAll('path.bar')
 			.transition(
-				this.services.transitions.getTransition("legend-hover-bar")
+				this.services.transitions.getTransition('legend-hover-bar')
 			)
-			.attr("opacity", (d) =>
-				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
+			.attr('opacity', (d) =>
+				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("path.bar")
+			.selectAll('path.bar')
 			.transition(
-				this.services.transitions.getTransition("legend-mouseout-bar")
+				this.services.transitions.getTransition('legend-mouseout-bar')
 			)
-			.attr("opacity", 1);
+			.attr('opacity', 1);
 	};
 
 	addEventListeners() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
 		this.parent
-			.selectAll("path.bar")
-			.on("mouseover", function (datum) {
+			.selectAll('path.bar')
+			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
+				hoveredElement.classed('hovered', true);
 
 				hoveredElement.transition(
 					self.services.transitions.getTransition(
-						"graph_element_mouseover_fill_update"
+						'graph_element_mouseover_fill_update'
 					)
 				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
-				const displayData = self.model.getDisplayData();
-
-				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+				const displayData = self.model.getDisplayData(
+					self.configs.groups
+				);
 
 				let matchingDataPoint = displayData.find((d) => {
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
+						d
+					);
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
@@ -203,50 +212,53 @@ export class StackedBar extends Bar {
 				});
 
 				if (matchingDataPoint === undefined) {
+					// use the primary range and domain ids
+					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group
+						[groupMapsTo]: datum.group,
 					};
 				}
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: [matchingDataPoint]
+					data: [matchingDataPoint],
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on("click", function (datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function (datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false);
+				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}
@@ -254,10 +266,10 @@ export class StackedBar extends Bar {
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path.bar")
-			.on("mouseover", null)
-			.on("mousemove", null)
-			.on("mouseout", null);
+			.selectAll('path.bar')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null);
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;

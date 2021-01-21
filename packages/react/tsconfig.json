@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react",
+		"lib": ["ESNext", "DOM"],
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "es5",
+		"baseUrl": "./",
+		"paths": {
+			"@carbon/charts": ["../core"]
+		}
+	},
+	"include": ["src"]
+}

@@ -1,16 +1,18 @@
 // Internal Imports
-import { Service } from "../service";
-import { Events, Alignments } from "./../../interfaces";
+import { Service } from '../service';
+import { Events, Alignments } from './../../interfaces';
 
 // D3 Imports
-import { select, Selection } from "d3-selection";
-import { Tools } from "../../tools";
+import { select, Selection } from 'd3-selection';
+import { Tools } from '../../tools';
 
 // import the settings for the css prefix
-import settings from "carbon-components/es/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
 // MISC
-import ResizeObserver from "resize-observer-polyfill";
+import ResizeObserver from 'resize-observer-polyfill';
+
+const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
 export class DOMUtils extends Service {
 	static getSVGElementSize(
@@ -23,7 +25,7 @@ export class DOMUtils extends Service {
 
 		const finalDimensions = {
 			width: 0,
-			height: 0
+			height: 0,
 		};
 
 		const validateAndSetDimensions = (dimensions) => {
@@ -35,7 +37,7 @@ export class DOMUtils extends Service {
 						if (
 							dimension &&
 							dimensionNumber > finalDimensions[dimensionKey] &&
-							("" + dimension).indexOf("%") === -1
+							('' + dimension).indexOf('%') === -1
 						) {
 							finalDimensions[dimensionKey] = dimensionNumber;
 						}
@@ -45,8 +47,8 @@ export class DOMUtils extends Service {
 		};
 
 		const attrDimensions = {
-			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height")
+			width: svgSelector.attr('width'),
+			height: svgSelector.attr('height'),
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -56,7 +58,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height
+				height: bbox.height,
 			};
 		} catch (e) {}
 
@@ -64,13 +66,13 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height
+				height: boundingRect.height,
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight
+			height: svgSelector.node().clientHeight,
 		};
 
 		// If both attribute values are numbers
@@ -113,16 +115,16 @@ export class DOMUtils extends Service {
 			const nativeDimensions = {
 				width: Tools.getProperty(
 					svgSelector.node(),
-					"width",
-					"baseVal",
-					"value"
+					'width',
+					'baseVal',
+					'value'
 				),
 				height: Tools.getProperty(
 					svgSelector.node(),
-					"height",
-					"baseVal",
-					"value"
-				)
+					'height',
+					'baseVal',
+					'value'
+				),
 			};
 
 			validateAndSetDimensions(nativeDimensions);
@@ -136,14 +138,30 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelect(parent, query) {
-		const querySections = query.split(".");
-		const elementToAppend = querySections[0];
+		const selection = parent.select(`${query}`);
 
-		const selection = parent.select(query);
 		if (selection.empty()) {
+			// see if there is an id
+			let querySections = query.split('#');
+			let elementToAppend;
+			let id;
+			// if there is an id
+			if (querySections.length === 2) {
+				// take out the element to append
+				elementToAppend = querySections[0];
+				// split it by classes
+				querySections = querySections[1].split('.');
+				// the first string is the id
+				id = querySections[0];
+			} else {
+				querySections = query.split('.');
+				elementToAppend = querySections[0];
+			}
+
 			return parent
 				.append(elementToAppend)
-				.attr("class", querySections.slice(1).join(" "));
+				.attr('id', id)
+				.attr('class', querySections.slice(1).join(' '));
 		}
 
 		return selection;
@@ -151,7 +169,7 @@ export class DOMUtils extends Service {
 
 	static getAlignmentOffset(alignment, svg, parent) {
 		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
-			useBBox: true
+			useBBox: true,
 		});
 		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
 
@@ -175,6 +193,7 @@ export class DOMUtils extends Service {
 
 		// Add main SVG
 		this.addSVGElement();
+		this.verifyCSSStylesBeingApplied();
 
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
@@ -216,20 +235,42 @@ export class DOMUtils extends Service {
 	}
 
 	getHolder() {
-		return this.model.get("holder");
+		return this.model.get('holder');
 	}
 
 	addSVGElement() {
 		const options = this.model.getOptions();
-		const chartsprefix = Tools.getProperty(options, "style", "prefix");
+		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
 
 		const svg = select(this.getHolder())
-			.append("svg")
+			.append('svg')
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
-			.attr("height", "100%")
-			.attr("width", "100%");
+			.attr('height', '100%')
+			.attr('width', '100%');
+
+		svg.append('g').attr('class', CSS_VERIFIER_ELEMENT_CLASSNAME);
 
 		this.svg = svg.node();
+	}
+
+	verifyCSSStylesBeingApplied() {
+		// setTimeout is needed here since in `addSVGElement()` we're appending the
+		// CSS verifier element, and need to allow some time for it to become available
+		// in the DOM
+		setTimeout(() => {
+			const cssVerifierElement = select(this.svg)
+				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
+				.node();
+			const computedStyles = getComputedStyle(cssVerifierElement as any);
+			if (
+				computedStyles.getPropertyValue('overflow') !== 'hidden' ||
+				computedStyles.getPropertyValue('opacity') !== '0'
+			) {
+				console.error(
+					'Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide.'
+				);
+			}
+		});
 	}
 
 	setSVGMaxHeight() {
@@ -239,7 +280,7 @@ export class DOMUtils extends Service {
 				select(this.svg),
 				{ useBBox: true }
 			);
-			const chartSVGSelector = select(this.svg).attr("class");
+			const chartSVGSelector = select(this.svg).attr('class');
 			const children = select(this.svg).selectAll(
 				`.${chartSVGSelector} > svg`
 			);
@@ -249,7 +290,7 @@ export class DOMUtils extends Service {
 			children.nodes().forEach(function (childSVG) {
 				childrenHeight += Number(
 					DOMUtils.getSVGElementSize(select(childSVG), {
-						useBBox: true
+						useBBox: true,
 					}).height
 				);
 			});
@@ -257,8 +298,8 @@ export class DOMUtils extends Service {
 			// set the chart svg height to the children height
 			// forcing the chart not to take up any more space than it requires
 			childrenHeight <= chartHeight
-				? select(this.svg).attr("height", childrenHeight)
-				: select(this.svg).attr("height", "100%");
+				? select(this.svg).attr('height', childrenHeight)
+				: select(this.svg).attr('height', '100%');
 		}
 	}
 
@@ -274,11 +315,11 @@ export class DOMUtils extends Service {
 		}
 
 		select(holder)
-			.on("mouseover", () => {
+			.on('mouseover', () => {
 				// Dispatch event
 				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER);
 			})
-			.on("mouseout", () => {
+			.on('mouseout', () => {
 				// Dispatch event
 				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT);
 			});

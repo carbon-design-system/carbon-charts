@@ -1,19 +1,19 @@
 $css--reset: false;
-@import "./../vendor/carbon-components/src/components/overflow-menu/overflow-menu";
+@import './../vendor/carbon-components/src/components/overflow-menu/overflow-menu';
 
 g.#{$prefix}--#{$charts-prefix}--toolbar {
 	@include carbon--motion(standard, expressive);
 
 	.toolbar-container {
 		.toolbar-button {
-			fill: $ui-background;
+			fill: transparent;
 			cursor: pointer;
 			&:hover {
 				.toolbar-button-background {
 					fill: $hover-ui;
 				}
 				.toolbar-button-background--disabled {
-					fill: $ui-background;
+					fill: transparent;
 				}
 			}
 

@@ -5,23 +5,23 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	Events as ChartEvents
-} from "./interfaces";
+	Events as ChartEvents,
+} from './interfaces';
 
 // Misc
-import { ChartModel } from "./model";
+import { ChartModel } from './model';
 import {
 	Component,
 	Title,
 	Legend,
 	LayoutComponent,
 	Tooltip,
-	Spacer
-} from "./components";
-import { Tools } from "./tools";
+	Spacer,
+} from './components';
+import { Tools } from './tools';
 
 // Services
-import { DOMUtils, Events, GradientUtils, Transitions } from "./services/index";
+import { DOMUtils, Events, GradientUtils, Transitions } from './services/index';
 
 export class Chart {
 	components: Component[];
@@ -29,7 +29,7 @@ export class Chart {
 		domUtils: DOMUtils,
 		events: Events,
 		gradientUtils: GradientUtils,
-		transitions: Transitions
+		transitions: Transitions,
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -51,7 +51,7 @@ export class Chart {
 
 		// Call update() when model has been updated
 		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
-			const animate = !!Tools.getProperty(e, "detail", "animate");
+			const animate = !!Tools.getProperty(e, 'detail', 'animate');
 			this.update(animate);
 		});
 
@@ -69,7 +69,7 @@ export class Chart {
 	}
 
 	getComponents(): any[] {
-		console.error("getComponents() method is not implemented");
+		console.error('getComponents() method is not implemented');
 
 		return null;
 	}
@@ -117,30 +117,30 @@ export class Chart {
 
 	protected getChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
-			id: "title",
+			id: 'title',
 			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const legendComponent = {
-			id: "legend",
+			id: 'legend',
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const graphFrameComponent = {
-			id: "graph-frame",
+			id: 'graph-frame',
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const isLegendEnabled =
@@ -151,39 +151,39 @@ export class Chart {
 		if (isLegendEnabled) {
 			const legendPosition = Tools.getProperty(
 				this.model.getOptions(),
-				"legend",
-				"position"
+				'legend',
+				'position'
 			);
-			if (legendPosition === "left") {
+			if (legendPosition === 'left') {
 				fullFrameComponentDirection = LayoutDirection.ROW;
 
 				if (!this.model.getOptions().legend.orientation) {
 					this.model.getOptions().legend.orientation =
 						LegendOrientations.VERTICAL;
 				}
-			} else if (legendPosition === "right") {
+			} else if (legendPosition === 'right') {
 				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
 				if (!this.model.getOptions().legend.orientation) {
 					this.model.getOptions().legend.orientation =
 						LegendOrientations.VERTICAL;
 				}
-			} else if (legendPosition === "bottom") {
+			} else if (legendPosition === 'bottom') {
 				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
 		}
 
 		const legendSpacerComponent = {
-			id: "spacer",
+			id: 'spacer',
 			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const fullFrameComponent = {
-			id: "full-frame",
+			id: 'full-frame',
 			components: [
 				new LayoutComponent(
 					this.model,
@@ -191,17 +191,17 @@ export class Chart {
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
 						...(isLegendEnabled ? [legendSpacerComponent] : []),
-						graphFrameComponent
+						graphFrameComponent,
 					],
 					{
-						direction: fullFrameComponentDirection
+						direction: fullFrameComponentDirection,
 					}
-				)
+				),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// Add chart title if it exists
@@ -210,12 +210,12 @@ export class Chart {
 			topLevelLayoutComponents.push(titleComponent);
 
 			const titleSpacerComponent = {
-				id: "spacer",
+				id: 'spacer',
 				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
+					y: LayoutGrowth.FIXED,
+				},
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -229,9 +229,9 @@ export class Chart {
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN
+					direction: LayoutDirection.COLUMN,
 				}
-			)
+			),
 		];
 	}
 }

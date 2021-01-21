@@ -1,32 +1,21 @@
 // Internal Imports
-import * as Configuration from "./configuration";
-import { Tools } from "./tools";
-import {
-	Events,
-	ScaleTypes,
-	ColorClassNameTypes,
-	AxisPositions
-} from "./interfaces";
+import * as Configuration from './configuration';
+import { Tools } from './tools';
+import { Events, ScaleTypes, ColorClassNameTypes } from './interfaces';
 
 // D3
-import { map } from "d3-collection";
-import { scaleOrdinal } from "d3-scale";
-import { stack } from "d3-shape";
+import { map } from 'd3-collection';
+import { scaleOrdinal } from 'd3-scale';
+import { stack } from 'd3-shape';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
-	// Callbacks
-	/**
-	 * Function to be called when data or options update within the model
-	 * @type Function
-	 */
-	protected updateCallback: Function;
 	protected services: any;
 
 	// Internal Model state
 	protected state: any = {
-		options: {}
+		options: {},
 	};
 
 	// Data labels
@@ -45,18 +34,23 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getAllDataFromDomain() {
-		if (!this.get("data")) {
+	getAllDataFromDomain(groups?) {
+		if (!this.getData()) {
 			return null;
 		}
-
-		const dataGroups = this.getDataGroups();
-
+		const options = this.getOptions();
 		// Remove datasets that have been disabled
-		let displayData = Tools.clone(this.get("data"));
-		const { groupMapsTo } = this.getOptions().data;
+		let allData = this.getData();
+		const dataGroups = this.getDataGroups();
+		const { groupMapsTo } = Tools.getProperty(options, 'data');
+		const axesOptions = Tools.getProperty(options, 'axes');
 
-		const axesOptions = this.getOptions().axes;
+		// filter out the groups that are irrelevant to the component
+		if (groups) {
+			allData = allData.filter((item) => {
+				return groups.includes(item.group);
+			});
+		}
 
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
@@ -67,22 +61,22 @@ export class ChartModel {
 					scaleType === ScaleTypes.LINEAR ||
 					scaleType === ScaleTypes.LOG
 				) {
-					displayData = displayData.map((datum) => {
+					allData = allData.map((datum) => {
 						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
 					});
 				}
 
 				// Check for custom domain
-				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
+				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						displayData = displayData.filter((datum) =>
+						allData = allData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
 
 						// Filter out data outside domain
-						displayData = displayData.filter(
+						allData = allData.filter(
 							(datum) =>
 								datum[mapsTo] >= start && datum[mapsTo] <= end
 						);
@@ -91,23 +85,26 @@ export class ChartModel {
 			});
 		}
 
-		return displayData.filter((datum) => {
+		return allData.filter((datum) => {
 			return dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);
 		});
 	}
 
-	getDisplayData() {
-		if (!this.get("data")) {
+	/**
+	 * Charts that have group configs passed into them, only want to retrieve the display data relevant to that chart
+	 * @param groups the included datasets for the particular chart
+	 */
+	getDisplayData(groups?) {
+		if (!this.get('data')) {
 			return null;
 		}
 
 		const { ACTIVE } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups();
+		const dataGroups = this.getDataGroups(groups);
 		const { groupMapsTo } = this.getOptions().data;
-
-		const allDataFromDomain = this.getAllDataFromDomain();
+		const allDataFromDomain = this.getAllDataFromDomain(groups);
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
@@ -119,7 +116,7 @@ export class ChartModel {
 	}
 
 	getData() {
-		return this.get("data");
+		return this.get('data');
 	}
 
 	isDataEmpty() {
@@ -136,44 +133,53 @@ export class ChartModel {
 
 		this.set({
 			data: sanitizedData,
-			dataGroups
+			dataGroups,
 		});
 
 		return sanitizedData;
 	}
 
-	getDataGroups() {
+	getDataGroups(groups?) {
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
-			"data",
-			"loading"
+			'data',
+			'loading'
 		);
 
 		// No data should be displayed while data is still loading
 		if (isDataLoading) {
 			return [];
 		}
-		return this.get("dataGroups");
+
+		// if its a combo chart, the specific chart will pass the model the groups it needs
+		if (groups) {
+			return this.get('dataGroups').filter((dataGroup) =>
+				groups.includes(dataGroup.name)
+			);
+		}
+		return this.get('dataGroups');
 	}
 
-	getActiveDataGroups() {
+	getActiveDataGroups(groups?) {
 		const { ACTIVE } = Configuration.legend.items.status;
 
-		return this.getDataGroups().filter(
+		return this.getDataGroups(groups).filter(
 			(dataGroup) => dataGroup.status === ACTIVE
 		);
 	}
 
-	getDataGroupNames() {
-		return this.getDataGroups().map((dataGroup) => dataGroup.name);
+	getDataGroupNames(groups?) {
+		const dataGroups = this.getDataGroups(groups);
+		return dataGroups.map((dataGroup) => dataGroup.name);
 	}
 
-	getActiveDataGroupNames() {
-		return this.getActiveDataGroups().map((dataGroup) => dataGroup.name);
+	getActiveDataGroupNames(groups?) {
+		const activeDataGroups = this.getActiveDataGroups(groups);
+		return activeDataGroups.map((dataGroup) => dataGroup.name);
 	}
 
-	getGroupedData() {
-		const displayData = this.getDisplayData();
+	getGroupedData(groups?) {
+		const displayData = this.getDisplayData(groups);
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
@@ -191,22 +197,21 @@ export class ChartModel {
 
 		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
-			data: groupedData[groupName]
+			data: groupedData[groupName],
 		}));
 	}
 
-	getDataValuesGroupedByKeys() {
+	getDataValuesGroupedByKeys(groups?) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
+		const displayData = this.getDisplayData(groups);
 
-		const displayData = this.getDisplayData();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
-		const stackKeys = map(
-			displayData,
-			(datum) => datum[domainIdentifier]
-		).keys();
+		const stackKeys = map(displayData, (datum) => {
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+				datum
+			);
+			return datum[domainIdentifier];
+		}).keys();
 
 		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
@@ -231,12 +236,18 @@ export class ChartModel {
 			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach((dataGroupName) => {
 				const correspondingDatum = displayData.find((datum) => {
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+						datum
+					);
 					return (
 						datum[groupMapsTo] === dataGroupName &&
 						datum[domainIdentifier].toString() === key
 					);
 				});
 
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+					correspondingValues
+				);
 				correspondingValues[dataGroupName] = correspondingDatum
 					? correspondingDatum[rangeIdentifier]
 					: null;
@@ -245,12 +256,12 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData({ percentage } = { percentage: false }) {
+	getStackedData({ percentage = false, groups = null }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const dataGroupNames = this.getDataGroupNames();
-		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+		const dataGroupNames = this.getDataGroupNames(groups);
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys(groups);
 
 		if (percentage) {
 			const maxByKey = Tools.fromPairs(
@@ -322,7 +333,7 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions)
+			options: Tools.merge(this.getOptions(), newOptions),
 		});
 	}
 
@@ -341,10 +352,6 @@ export class ChartModel {
 		this.setCustomColorScale();
 		this.setColorClassNames();
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
-	}
-
-	setUpdateCallback(cb: Function) {
-		this.updateCallback = cb;
 	}
 
 	/*
@@ -412,12 +419,12 @@ export class ChartModel {
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups
+			dataGroups,
 		});
 
 		// Update model
 		this.set({
-			dataGroups
+			dataGroups,
 		});
 	}
 
@@ -438,11 +445,8 @@ export class ChartModel {
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
 		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()(group);
+		const defaultFillColor = Tools.getProperty(this.colorScale, group);
 
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
@@ -452,12 +456,9 @@ export class ChartModel {
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		if (!this.isUserProvidedColorScaleValid()) {
-			return null;
-		}
-
 		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale(group);
+		const defaultStrokeColor = Tools.getProperty(this.colorScale, group);
+
 		if (options.getStrokeColor) {
 			return options.getStrokeColor(group, key, data, defaultStrokeColor);
 		} else {
@@ -465,26 +466,22 @@ export class ChartModel {
 		}
 	}
 
-	getFillScale() {
-		return this.colorScale;
-	}
-
 	isUserProvidedColorScaleValid() {
 		const userProvidedScale = Tools.getProperty(
 			this.getOptions(),
-			"color",
-			"scale"
+			'color',
+			'scale'
 		);
 		const dataGroups = this.getDataGroups();
 
 		if (
 			userProvidedScale == null ||
-			Object.keys(userProvidedScale).length < dataGroups.length
+			Object.keys(userProvidedScale).length == 0
 		) {
 			return false;
 		}
 
-		return dataGroups.every((dataGroup) =>
+		return dataGroups.some((dataGroup) =>
 			Object.keys(userProvidedScale).includes(dataGroup.name)
 		);
 	}
@@ -494,10 +491,6 @@ export class ChartModel {
 		dataGroupName: string;
 		originalClassName?: string;
 	}) {
-		if (this.isUserProvidedColorScaleValid()) {
-			return configs.originalClassName;
-		}
-
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
 		let className = configs.originalClassName;
 		configs.classNameTypes.forEach(
@@ -506,6 +499,7 @@ export class ChartModel {
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
 		);
+
 		return className;
 	}
 
@@ -537,13 +531,13 @@ export class ChartModel {
 			dataset.data.forEach((datum, i) => {
 				let group;
 
-				const datasetLabel = Tools.getProperty(dataset, "label");
+				const datasetLabel = Tools.getProperty(dataset, 'label');
 				if (datasetLabel === null) {
 					const correspondingLabel = Tools.getProperty(labels, i);
 					if (correspondingLabel) {
 						group = correspondingLabel;
 					} else {
-						group = "Ungrouped";
+						group = 'Ungrouped';
 					}
 				} else {
 					group = datasetLabel;
@@ -551,14 +545,14 @@ export class ChartModel {
 
 				const updatedDatum = {
 					group,
-					key: labels[i]
+					key: labels[i],
 				};
 
 				if (isNaN(datum)) {
-					updatedDatum["value"] = datum.value;
-					updatedDatum["date"] = datum.date;
+					updatedDatum['value'] = datum.value;
+					updatedDatum['date'] = datum.date;
 				} else {
-					updatedDatum["value"] = datum;
+					updatedDatum['value'] = datum;
 				}
 
 				tabularData.push(updatedDatum);
@@ -577,44 +571,8 @@ export class ChartModel {
 		return data;
 	}
 
-	protected sanitizeDateValues(data) {
-		const options = this.getOptions();
-
-		if (!options.axes) {
-			return data;
-		}
-
-		const keysToCheck = [];
-		Object.keys(AxisPositions).forEach((axisPositionKey) => {
-			const axisPosition = AxisPositions[axisPositionKey];
-			const axisOptions = options.axes[axisPosition];
-
-			if (axisOptions && axisOptions.scaleType === ScaleTypes.TIME) {
-				const axisMapsTo = axisOptions.mapsTo;
-
-				if (axisMapsTo !== null || axisMapsTo !== undefined) {
-					keysToCheck.push(axisMapsTo);
-				}
-			}
-		});
-
-		if (keysToCheck.length > 0) {
-			// Check all datapoints and sanitize dates
-			data.forEach((datum) => {
-				keysToCheck.forEach((key) => {
-					if (datum[key].getTime === undefined) {
-						datum[key] = new Date(datum[key]);
-					}
-				});
-			});
-		}
-
-		return data;
-	}
-
 	protected sanitize(data) {
 		data = this.getTabularData(data);
-		data = this.sanitizeDateValues(data);
 
 		return data;
 	}
@@ -674,7 +632,7 @@ export class ChartModel {
 
 		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
-			status: getStatus(groupName)
+			status: getStatus(groupName),
 		}));
 	}
 
@@ -687,22 +645,26 @@ export class ChartModel {
 		}
 
 		const options = this.getOptions();
-		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const userProvidedScale = Tools.getProperty(options, 'color', 'scale');
+
+		Object.keys(userProvidedScale).forEach((dataGroup) => {
+			if (!this.allDataGroups.includes(dataGroup)) {
+				console.warn(`"${dataGroup}" does not exist in data groups.`);
+			}
+		});
 
 		/**
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
 		 */
-		const colorRange = [];
-		this.allDataGroups.forEach((dataGroup) => {
-			if (userProvidedScale[dataGroup]) {
-				colorRange.push(userProvidedScale[dataGroup]);
-			}
-		});
+		const providedDataGroups = this.allDataGroups.filter(
+			(dataGroup) => userProvidedScale[dataGroup]
+		);
 
-		this.colorScale = scaleOrdinal()
-			.range(colorRange)
-			.domain(this.allDataGroups);
+		providedDataGroups.forEach(
+			(dataGroup) =>
+				(this.colorScale[dataGroup] = userProvidedScale[dataGroup])
+		);
 	}
 
 	/*
@@ -711,20 +673,20 @@ export class ChartModel {
 	protected setColorClassNames() {
 		const colorPairingOptions = Tools.getProperty(
 			this.getOptions(),
-			"color",
-			"pairing"
+			'color',
+			'pairing'
 		);
 
 		// Check if user has defined numberOfVariants (differ from given data)
 		let numberOfVariants = Tools.getProperty(
 			colorPairingOptions,
-			"numberOfVariants"
+			'numberOfVariants'
 		);
 		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
 			numberOfVariants = this.allDataGroups.length;
 		}
 
-		let pairingOption = Tools.getProperty(colorPairingOptions, "option");
+		let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
 		const colorPairingCounts = Configuration.color.pairingOptions;
 
 		// If number of dataGroups is greater than 5, user 14-color palette
@@ -742,13 +704,9 @@ export class ChartModel {
 				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
 		);
 
-		// If there is no valid user provided scale, use the default set of colors
-		if (!this.isUserProvidedColorScaleValid()) {
-			this.colorClassNames = scaleOrdinal()
-				.range(colorPairing)
-				.domain(this.allDataGroups);
-
-			return;
-		}
+		// Create default color classnames
+		this.colorClassNames = scaleOrdinal()
+			.range(colorPairing)
+			.domain(this.allDataGroups);
 	}
 }

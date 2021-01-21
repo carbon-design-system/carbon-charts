@@ -1,13 +1,19 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments,
+	ChartTypes,
+} from './enums';
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
 	AxesOptions,
-	ZoomBarsOptions
-} from "./index";
-import { BarOptions, StackedBarOptions } from "./components";
-import { TimeScaleOptions } from "./axis-scales";
+	ZoomBarsOptions,
+} from './index';
+import { BarOptions, StackedBarOptions } from './components';
+import { TimeScaleOptions } from './axis-scales';
 
 /**
  * Base chart options common to any chart
@@ -171,6 +177,11 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to lollipop charts
+ */
+export interface LollipopChartOptions extends ScatterChartOptions {}
+
+/**
  * options specific to bubble charts
  */
 export interface BubbleChartOptions extends AxisChartOptions {
@@ -224,6 +235,13 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| {
 				name: string;
 		  };
+	/**
+	 * options to bound the area of the chart
+	 */
+	bounds?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
+	};
 }
 
 /**
@@ -255,7 +273,7 @@ export interface PieChartOptions extends BaseChartOptions {
 /**
  * options specific to gauge charts
  */
-export interface GaugeChartOptions extends PieChartOptions {
+export interface GaugeChartOptions extends BaseChartOptions {
 	gauge?: {
 		arcWidth?: number;
 		deltaArrow?: {
@@ -269,6 +287,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 		numberFormatter?: Function;
 		valueFontSize?: Function;
 		type?: GaugeTypes;
+		alignment?: Alignments;
 	};
 }
 
@@ -279,6 +298,7 @@ export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
 			label?: string;
+			number?: number;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
@@ -290,6 +310,13 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		peak?: number;
+		status?: {
+			ranges: Array<{
+				range: [number, number];
+				status: Statuses;
+			}>;
+		};
 		height?: number;
 		title?: {
 			percentageIndicator?: {
@@ -314,3 +341,19 @@ export interface RadarChartOptions extends BaseChartOptions {
 		alignment?: Alignments;
 	};
 }
+
+/**
+ * options specific to combo charts
+ */
+export interface ComboChartOptions extends AxisChartOptions {
+	comboChartTypes: Array<{
+		type: ChartTypes | any;
+		options?: object;
+		correspondingDatasets: Array<string>;
+	}>;
+}
+
+/*
+ * options specific to treemap charts
+ */
+export interface TreemapChartOptions extends BaseChartOptions {}

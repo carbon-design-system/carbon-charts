@@ -1,11 +1,11 @@
-import frLocaleObject from "date-fns/locale/fr/index";
+import frLocaleObject from 'date-fns/locale/fr/index';
 
 // 15seconds
 export const lineTimeSeriesData15seconds = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 11, 10, 23, 59, 15), value: 10 },
 				{ date: new Date(2020, 11, 10, 23, 59, 30), value: 15 },
@@ -13,28 +13,31 @@ export const lineTimeSeriesData15seconds = {
 				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 2 },
 				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 9 },
 				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 13 },
-				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 }
-			]
-		}
-	]
+				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeries15secondsOptions = {
-	title: "Line (time series) - Time interval 15seconds",
+	title: 'Line (time series) - Time interval 15seconds',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // minute
 export const lineTimeSeriesDataMinute = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 4, 21, 23, 40), value: 10 },
 				{ date: new Date(2020, 4, 21, 23, 50), value: 10 },
@@ -42,56 +45,62 @@ export const lineTimeSeriesDataMinute = {
 				{ date: new Date(2020, 4, 22, 0, 0), value: 10 },
 				{ date: new Date(2020, 4, 22, 0, 5), value: 10 },
 				{ date: new Date(2020, 4, 22, 0, 7), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 10), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 4, 22, 0, 10), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesMinuteOptions = {
-	title: "Line (time series) - Time interval minute",
+	title: 'Line (time series) - Time interval minute',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // 30minutes
 export const lineTimeSeriesData30minutes = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 11, 10, 23, 0), value: 10 },
 				{ date: new Date(2020, 11, 10, 23, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 30), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 11, 11, 1, 30), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeries30minutesOptions = {
-	title: "Line (time series) - Time interval 30minutes",
+	title: 'Line (time series) - Time interval 30minutes',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // hourly with default ticks formats
 export const lineTimeSeriesDataHourlyDefaultTicksFormats = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 11, 10, 22, 0), value: 10 },
 				{ date: new Date(2020, 11, 10, 23, 0), value: 10 },
@@ -99,10 +108,10 @@ export const lineTimeSeriesDataHourlyDefaultTicksFormats = {
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 2, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 3, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 4, 0), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 11, 11, 4, 0), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesHourlyDefaultLocaleOptions = {
@@ -111,9 +120,12 @@ export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // hourly with custom ticks formats
@@ -125,22 +137,25 @@ export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
 		timeIntervalFormats: {
-			hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
-		}
-	}
+			hourly: { primary: 'MMM d, HH:mm', secondary: 'HH:mm' },
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // daily
 export const lineTimeSeriesDataDaily = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2019, 11, 30), value: 10 },
 				{ date: new Date(2019, 11, 31), value: 10 },
@@ -148,28 +163,31 @@ export const lineTimeSeriesDataDaily = {
 				{ date: new Date(2020, 0, 2), value: 10 },
 				{ date: new Date(2020, 0, 3), value: 10 },
 				{ date: new Date(2020, 0, 4), value: 10 },
-				{ date: new Date(2020, 0, 5), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 0, 5), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesDailyOptions = {
-	title: "Line (time series) - Time interval daily",
+	title: 'Line (time series) - Time interval daily',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // weekly
 export const lineTimeSeriesDataWeekly = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2019, 11, 30), value: 10 },
 				{ date: new Date(2019, 11, 31), value: 10 },
@@ -177,31 +195,34 @@ export const lineTimeSeriesDataWeekly = {
 				{ date: new Date(2020, 0, 2), value: 10 },
 				{ date: new Date(2020, 0, 3), value: 10 },
 				{ date: new Date(2020, 0, 4), value: 10 },
-				{ date: new Date(2020, 0, 5), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 0, 5), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesWeeklyOptions = {
-	title: "Line (time series) - Time interval weekly",
+	title: 'Line (time series) - Time interval weekly',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		showDayName: true
-	}
+		showDayName: true,
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // monthly with default locale
 export const lineTimeSeriesDataMonthlyDefaultLocale = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2019, 9), value: 10 },
 				{ date: new Date(2019, 10), value: 10 },
@@ -209,44 +230,50 @@ export const lineTimeSeriesDataMonthlyDefaultLocale = {
 				{ date: new Date(2019, 0), value: 10 },
 				{ date: new Date(2019, 1), value: 10 },
 				{ date: new Date(2019, 2), value: 10 },
-				{ date: new Date(2019, 3), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2019, 3), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
-	title: "Line (time series) - Time interval monthly with default locale",
+	title: 'Line (time series) - Time interval monthly with default locale',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // monthly with custom locale
 export const lineTimeSeriesDataMonthlyCustomLocale = lineTimeSeriesDataMonthlyDefaultLocale;
 
 export const lineTimeSeriesMonthlyCustomLocaleOptions = {
-	title: "Line (time series) - Time interval monthly with custom locale (fr)",
+	title: 'Line (time series) - Time interval monthly with custom locale (fr)',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		localeObject: frLocaleObject
-	}
+		localeObject: frLocaleObject,
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // quarterly
 export const lineTimeSeriesDataQuarterly = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2018, 0), value: 10 },
 				{ date: new Date(2018, 3), value: 10 },
@@ -254,28 +281,31 @@ export const lineTimeSeriesDataQuarterly = {
 				{ date: new Date(2018, 9), value: 10 },
 				{ date: new Date(2019, 0), value: 10 },
 				{ date: new Date(2019, 3), value: 10 },
-				{ date: new Date(2019, 6), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2019, 6), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesQuarterlyOptions = {
-	title: "Line (time series) - Time interval quarterly",
+	title: 'Line (time series) - Time interval quarterly',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // yearly
 export const lineTimeSeriesDataYearly = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(1977, 0), value: 10 },
 				{ date: new Date(1978, 0), value: 10 },
@@ -283,49 +313,55 @@ export const lineTimeSeriesDataYearly = {
 				{ date: new Date(1980, 0), value: 10 },
 				{ date: new Date(1981, 0), value: 10 },
 				{ date: new Date(1982, 0), value: 10 },
-				{ date: new Date(1983, 0), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(1983, 0), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesYearlyOptions = {
-	title: "Line (time series) - Time interval yearly",
+	title: 'Line (time series) - Time interval yearly',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // single datum
 export const lineTimeSeriesDataSingleDatum = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
-			data: [{ date: new Date("2020-01-06T19:43:16Z"), value: 10 }]
-		}
-	]
+			label: 'Dataset 1',
+			data: [{ date: new Date('2020-01-06T19:43:16Z'), value: 10 }],
+		},
+	],
 };
 
 export const lineTimeSeriesSingleDatumOptions = {
-	title: "Line (time series) - Single datum",
+	title: 'Line (time series) - Single datum',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
-	}
+			scaleType: 'time',
+		},
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // addSpaceOnEdges = 0
 export const lineTimeSeriesNoExtendedDomainData = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2019, 11, 30), value: 10 },
 				{ date: new Date(2019, 11, 31), value: 10 },
@@ -333,88 +369,100 @@ export const lineTimeSeriesNoExtendedDomainData = {
 				{ date: new Date(2020, 0, 2), value: 10 },
 				{ date: new Date(2020, 0, 3), value: 10 },
 				{ date: new Date(2020, 0, 4), value: 10 },
-				{ date: new Date(2020, 0, 5), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 0, 5), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesNoExtendedDomainOptions = {
-	title: "Line (time series) - addSpaceOnEdges = 0",
+	title: 'Line (time series) - addSpaceOnEdges = 0',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		addSpaceOnEdges: 0
-	}
+		addSpaceOnEdges: 0,
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // bug two identical labels
 export const lineTimeSeriesDataTwoIdenticalLabels = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 0, 23, 23, 0), value: 10 },
-				{ date: new Date(2020, 1, 9, 23, 0), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 1, 9, 23, 0), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesTwoIdenticalLabelsOptions = {
-	title: "Line (time series) - Two identical labels",
+	title: 'Line (time series) - Two identical labels',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		addSpaceOnEdges: 0
-	}
+		addSpaceOnEdges: 0,
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 export const lineTimeSeriesTwoIdenticalLabels2Options = {
-	title: "Line (time series) - Two identical labels 2",
+	title: 'Line (time series) - Two identical labels 2',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		addSpaceOnEdges: 0
-	}
+		addSpaceOnEdges: 0,
+	},
+	legend: {
+		clickable: false,
+	},
 };
 
 // bug all labels in primary format
 export const lineTimeSeriesDataAllLabelsInPrimaryFormat = {
-	labels: ["Qty"],
+	labels: ['Qty'],
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: 'Dataset 1',
 			data: [
 				{ date: new Date(2020, 0, 23, 1, 0), value: 10 },
-				{ date: new Date(2020, 0, 29, 1, 0), value: 10 }
-			]
-		}
-	]
+				{ date: new Date(2020, 0, 29, 1, 0), value: 10 },
+			],
+		},
+	],
 };
 
 export const lineTimeSeriesAllLabelsInPrimaryFormatOptions = {
-	title: "Line (time series) - All labels in primary format",
+	title: 'Line (time series) - All labels in primary format',
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "time"
-		}
+			scaleType: 'time',
+		},
 	},
 	timeScale: {
-		addSpaceOnEdges: 0
-	}
+		addSpaceOnEdges: 0,
+	},
+	legend: {
+		clickable: false,
+	},
 };

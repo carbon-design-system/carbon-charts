@@ -1,21 +1,21 @@
-import { Component } from "../component";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
-import { ChartModel } from "../../model";
-import { Events, TruncationTypes } from "../../interfaces";
-import * as Configuration from "../../configuration";
+import { Component } from '../component';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import { ChartModel } from '../../model';
+import { Events, TruncationTypes } from '../../interfaces';
+import * as Configuration from '../../configuration';
 
 // Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import Position, { PLACEMENTS } from '@carbon/utils-position';
 
 // import the settings for the css prefix
-import settings from "carbon-components/es/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
-import { select, mouse } from "d3-selection";
+import { select, mouse } from 'd3-selection';
 
 export class Tooltip extends Component {
-	type = "tooltip";
+	type = 'tooltip';
 
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false;
@@ -34,15 +34,13 @@ export class Tooltip extends Component {
 
 		const tooltipTextContainer = DOMUtils.appendOrSelect(
 			this.tooltip,
-			"div.content-box"
+			'div.content-box'
 		);
 
 		// if there is a provided tooltip HTML function call it
-		if (
-			Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")
-		) {
+		if (Tools.getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 				tooltipTextContainer.html(labelHTML);
 			} else {
 				tooltipTextContainer.html(
@@ -60,11 +58,11 @@ export class Tooltip extends Component {
 		this.positionTooltip(e);
 
 		// Fade in
-		this.tooltip.classed("hidden", false).attr("aria-hidden", false);
+		this.tooltip.classed('hidden', false).attr('aria-hidden', false);
 	};
 
 	handleHideTooltip = () => {
-		this.tooltip.classed("hidden", true).attr("aria-hidden", true);
+		this.tooltip.classed('hidden', true).attr('aria-hidden', true);
 	};
 
 	addTooltipEventListener() {
@@ -87,6 +85,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// listen to chart-mouseout event to hide the tooltip
+		this.services.events.addEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	removeTooltipEventListener() {
@@ -104,6 +108,12 @@ export class Tooltip extends Component {
 			Events.Tooltip.HIDE,
 			this.handleHideTooltip
 		);
+
+		// remove the listener on chart-mouseout
+		this.services.events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
 	getItems(e: CustomEvent) {
@@ -115,35 +125,37 @@ export class Tooltip extends Component {
 	}
 
 	formatItems(items) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		// get user provided custom values for truncation
 		const truncationType = Tools.getProperty(
 			options,
-			"tooltip",
-			"truncation",
-			"type"
+			'tooltip',
+			'truncation',
+			'type'
 		);
 
 		const truncationThreshold = Tools.getProperty(
 			options,
-			"tooltip",
-			"truncation",
-			"threshold"
+			'tooltip',
+			'truncation',
+			'threshold'
 		);
 
 		const truncationNumCharacter = Tools.getProperty(
 			options,
-			"tooltip",
-			"truncation",
-			"numCharacter"
+			'tooltip',
+			'truncation',
+			'numCharacter'
 		);
 
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
-				item.value = this.valueFormatter(item.value);
+				item.value = item.value
+					? this.valueFormatter(item.value)
+					: item.value;
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
@@ -170,11 +182,10 @@ export class Tooltip extends Component {
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
-			const useColor = this.model.isUserProvidedColorScaleValid();
 
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
@@ -182,21 +193,21 @@ export class Tooltip extends Component {
 					.map(
 						(item) =>
 							`<li>
-							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
-								${item.class && !useColor ? `<a class="tooltip-color ${item.class}"></a>` : ""}
+							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
+								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ''}
 								${
-									item.color && useColor
+									item.color
 										? '<a style="background-color: ' +
 										  item.color +
 										  '" class="tooltip-color"></a>'
-										: ""
+										: ''
 								}
-								<p class="label">${item.label}</p>
-								<p class="value">${item.value}</p>
+								<p class="label">${item.label || ''}</p>
+								<p class="value">${item.value || ''}</p>
 							</div>
 						</li>`
 					)
-					.join("") +
+					.join('') +
 				`</ul>`;
 		}
 
@@ -204,11 +215,11 @@ export class Tooltip extends Component {
 	}
 
 	valueFormatter(value: any) {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const valueFormatter = Tools.getProperty(
 			options,
-			"tooltip",
-			"valueFormatter"
+			'tooltip',
+			'valueFormatter'
 		);
 
 		if (valueFormatter) {
@@ -219,27 +230,27 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTooltipEnabled = Tools.getProperty(
 			options,
-			"tooltip",
-			"enabled"
+			'tooltip',
+			'enabled'
 		);
 		if (isTooltipEnabled) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder());
-			const chartprefix = Tools.getProperty(options, "style", "prefix");
+			const chartprefix = Tools.getProperty(options, 'style', 'prefix');
 			this.tooltip = DOMUtils.appendOrSelect(
 				holder,
 				`div.${settings.prefix}--${chartprefix}--tooltip`
 			);
 
-			this.tooltip.style("max-width", null);
+			this.tooltip.style('max-width', null);
 			if (!this.isEventListenerAdded) {
 				this.addTooltipEventListener();
 				this.isEventListenerAdded = true;
 			}
-			this.tooltip.classed("hidden", true);
+			this.tooltip.classed('hidden', true);
 		} else if (!isTooltipEnabled && this.isEventListenerAdded) {
 			// remove tooltip eventListener
 			this.removeTooltipEventListener();
@@ -250,23 +261,23 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const isTopZoomBarEnabled = Tools.getProperty(
 			options,
-			"zoomBar",
-			"top",
-			"enabled"
+			'zoomBar',
+			'top',
+			'enabled'
 		);
 
-		let mouseRelativePos = Tools.getProperty(e, "detail", "mousePosition");
+		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition');
 		if (!mouseRelativePos) {
 			mouseRelativePos = mouse(holder);
 		} else {
 			const zoombarType = Tools.getProperty(
 				options,
-				"zoomBar",
-				"top",
-				"type"
+				'zoomBar',
+				'top',
+				'type'
 			);
 			const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
@@ -286,18 +297,18 @@ export class Tooltip extends Component {
 		const bestPlacementOption = this.positionService.findBestPlacementAt(
 			{
 				left: mouseRelativePos[0],
-				top: mouseRelativePos[1]
+				top: mouseRelativePos[1],
 			},
 			target,
 			[
 				PLACEMENTS.RIGHT,
 				PLACEMENTS.LEFT,
 				PLACEMENTS.TOP,
-				PLACEMENTS.BOTTOM
+				PLACEMENTS.BOTTOM,
 			],
 			() => ({
 				width: holder.offsetWidth,
-				height: holder.offsetHeight
+				height: holder.offsetHeight,
 			})
 		);
 
@@ -310,7 +321,7 @@ export class Tooltip extends Component {
 		pos = this.positionService.findPositionAt(
 			{
 				left: mouseRelativePos[0] + horizontalOffset,
-				top: mouseRelativePos[1]
+				top: mouseRelativePos[1],
 			},
 			target,
 			bestPlacementOption

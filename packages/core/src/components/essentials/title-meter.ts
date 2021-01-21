@@ -1,31 +1,31 @@
 // Internal Imports
-import { Title } from "./title";
-import { DOMUtils } from "../../services";
-import { Tools } from "../../tools";
-import { Statuses } from "./../../interfaces/enums";
-import * as Configuration from "../../configuration";
+import { Title } from './title';
+import { DOMUtils } from '../../services';
+import { Tools } from '../../tools';
+import { Statuses } from './../../interfaces/enums';
+import * as Configuration from '../../configuration';
 
 export class MeterTitle extends Title {
-	type = "meter-title";
+	type = 'meter-title';
 
 	render() {
 		const dataset = this.model.getDisplayData();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
 
 		// the title for a meter, is the label for that dataset
 		const title = svg
-			.selectAll("text.meter-title")
+			.selectAll('text.meter-title')
 			.data([dataset[groupMapsTo]]);
 
 		title
 			.enter()
-			.append("text")
-			.classed("meter-title", true)
+			.append('text')
+			.classed('meter-title', true)
 			.merge(title)
-			.attr("x", 0)
-			.attr("y", "1em")
+			.attr('x', 0)
+			.attr('y', '1em')
 			.text((d) => d);
 
 		title.exit().remove();
@@ -38,7 +38,7 @@ export class MeterTitle extends Title {
 
 		// get the max width of a title (with consideration for the status/percentage)
 		const maxWidth = this.getMaxTitleWidth();
-		const titleElement = DOMUtils.appendOrSelect(svg, "text.meter-title");
+		const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
 
 		if (
 			maxWidth > 0 &&
@@ -54,7 +54,7 @@ export class MeterTitle extends Title {
 	displayStatus() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
+		const options = this.getOptions();
 
 		const containerBounds = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
@@ -65,7 +65,7 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute("width");
+			: this.parent.node().getAttribute('width');
 
 		// get the status from the model
 		const status = this.model.getStatus();
@@ -74,31 +74,31 @@ export class MeterTitle extends Title {
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
 			.attr(
-				"class",
-				status !== null ? `status-indicator status--${status}` : ""
+				'class',
+				status !== null ? `status-indicator status--${status}` : ''
 			)
-			.attr("transform", `translate(${containerWidth - radius}, 0)`);
+			.attr('transform', `translate(${containerWidth - radius}, 0)`);
 
 		const data = status ? [status] : [];
-		const icon = statusGroup.selectAll("circle.status").data(data);
+		const icon = statusGroup.selectAll('circle.status').data(data);
 
 		icon.enter()
-			.append("circle")
+			.append('circle')
 			.merge(icon)
-			.attr("class", "status")
-			.attr("r", radius)
-			.attr("cx", 0)
-			.attr("cy", `calc(1em / 2)`);
+			.attr('class', 'status')
+			.attr('r', radius)
+			.attr('cx', 0)
+			.attr('cy', `calc(1em / 2)`);
 
-		const innerIcon = statusGroup.selectAll("path.innerFill").data(data);
+		const innerIcon = statusGroup.selectAll('path.innerFill').data(data);
 
 		innerIcon
 			.enter()
-			.append("path")
+			.append('path')
 			.merge(innerIcon)
-			.attr("d", self.getStatusIconPathString(status))
-			.attr("transform", `translate(-${radius}, 0)`)
-			.attr("class", "innerFill");
+			.attr('d', self.getStatusIconPathString(status))
+			.attr('transform', `translate(-${radius}, 0)`)
+			.attr('class', 'innerFill');
 
 		innerIcon.exit().remove();
 		icon.exit().remove();
@@ -112,37 +112,37 @@ export class MeterTitle extends Title {
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getContainerSVG();
-		const title = DOMUtils.appendOrSelect(svg, "text.meter-title");
+		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title');
 
 		// check if it is enabled
 		const data =
 			Tools.getProperty(
-				this.model.getOptions(),
-				"meter",
-				"statusBar",
-				"percentageIndicator",
-				"enabled"
+				this.getOptions(),
+				'meter',
+				'statusBar',
+				'percentageIndicator',
+				'enabled'
 			) === true
 				? [dataValue]
 				: [];
 
 		// append a percentage if it is enabled, update it
-		const percentage = svg.selectAll("text.percent-value").data(data);
+		const percentage = svg.selectAll('text.percent-value').data(data);
 
 		// the horizontal offset of the percentage value from the title
 		const offset = Configuration.meter.statusBar.paddingRight;
 
 		percentage
 			.enter()
-			.append("text")
-			.classed("percent-value", true)
+			.append('text')
+			.classed('percent-value', true)
 			.merge(percentage)
 			.text((d) => `${d}%`)
 			.attr(
-				"x",
-				+title.attr("x") + title.node().getComputedTextLength() + offset
+				'x',
+				+title.attr('x') + title.node().getComputedTextLength() + offset
 			) // set the position to after the title
-			.attr("y", title.attr("y"));
+			.attr('y', title.attr('y'));
 
 		percentage.exit().remove();
 	}
@@ -157,17 +157,17 @@ export class MeterTitle extends Title {
 		super.truncateTitle(title, maxWidth);
 
 		// update the position on the percentage to be inline with the title
-		const tspan = DOMUtils.appendOrSelect(this.parent, "tspan");
+		const tspan = DOMUtils.appendOrSelect(this.parent, 'tspan');
 		const offset = Configuration.meter.statusBar.paddingRight;
 		const tspanLength = Math.ceil(tspan.node().getComputedTextLength());
 
 		const percentage = DOMUtils.appendOrSelect(
 			this.parent,
-			"text.percent-value"
+			'text.percent-value'
 		);
 		percentage.attr(
-			"x",
-			+title.attr("x") +
+			'x',
+			+title.attr('x') +
 				title.node().getComputedTextLength() +
 				tspanLength +
 				offset
@@ -185,11 +185,11 @@ export class MeterTitle extends Title {
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute("width");
+			: this.parent.node().getAttribute('width');
 
 		const percentage = DOMUtils.appendOrSelect(
 			this.parent,
-			"text.percent-value"
+			'text.percent-value'
 		);
 		// the title needs to fit the width of the container without crowding the status, and percentage value
 		const offset = Configuration.meter.statusBar.paddingRight;
@@ -197,7 +197,7 @@ export class MeterTitle extends Title {
 
 		const statusGroup = DOMUtils.appendOrSelect(
 			this.parent,
-			"g.status-indicator"
+			'g.status-indicator'
 		).node();
 		const statusWidth =
 			DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
@@ -213,11 +213,11 @@ export class MeterTitle extends Title {
 	protected getStatusIconPathString(status) {
 		switch (status) {
 			case Statuses.SUCCESS:
-				return "M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z";
+				return 'M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z';
 			case Statuses.DANGER:
-				return "M10.7 11.5 4.5 5.3 5.3 4.5 11.5 10.7 Z";
+				return 'M10.7 11.5 4.5 5.3 5.3 4.5 11.5 10.7 Z';
 			case Statuses.WARNING:
-				return "M7.9375,11.125 C7.41973305,11.125 7,11.544733 7,12.0625 C7,12.580267 7.41973305,13 7.9375,13 C8.45526695,13 8.875,12.580267 8.875,12.0625 C8.875,11.544733 8.45526695,11.125 7.9375,11.125 M7.3125, 3 8.5625, 3 8.5625, 9.875 7.3125, 9.875, 7.3125, 3 Z";
+				return 'M7.9375,11.125 C7.41973305,11.125 7,11.544733 7,12.0625 C7,12.580267 7.41973305,13 7.9375,13 C8.45526695,13 8.875,12.580267 8.875,12.0625 C8.875,11.544733 8.45526695,11.125 7.9375,11.125 M7.3125, 3 8.5625, 3 8.5625, 9.875 7.3125, 9.875, 7.3125, 3 Z';
 		}
 	}
 }

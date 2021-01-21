@@ -1,11 +1,11 @@
 // Internal Imports
-import { Component } from "../component";
-import { DOMUtils } from "../../services";
-import { CartesianOrientations, Events } from "../../interfaces";
-import { Tools } from "../../tools";
+import { Component } from '../component';
+import { DOMUtils } from '../../services';
+import { CartesianOrientations, Events } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
-import { Selection, mouse } from "d3-selection";
+import { Selection, mouse } from 'd3-selection';
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -17,7 +17,7 @@ function pointIsWithinThreshold(dx: number, x: number) {
 }
 
 export class Ruler extends Component {
-	type = "ruler";
+	type = 'ruler';
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
 	pointsWithinLine: {
@@ -25,25 +25,25 @@ export class Ruler extends Component {
 		originalData: any;
 	}[];
 	isXGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
-		"grid",
-		"x",
-		"enabled"
+		this.getOptions(),
+		'grid',
+		'x',
+		'enabled'
 	);
 	isYGridEnabled = Tools.getProperty(
-		this.model.getOptions(),
-		"grid",
-		"y",
-		"enabled"
+		this.getOptions(),
+		'grid',
+		'y',
+		'enabled'
 	);
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false;
 
 	render() {
 		const isRulerEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			"ruler",
-			"enabled"
+			this.getOptions(),
+			'ruler',
+			'enabled'
 		);
 
 		this.drawBackdrop();
@@ -57,7 +57,7 @@ export class Ruler extends Component {
 
 	removeBackdropEventListeners() {
 		this.isEventListenerAdded = false;
-		this.backdrop.on("mousemove mouseover mouseout", null);
+		this.backdrop.on('mousemove mouseover mouseout', null);
 	}
 
 	formatTooltipData(tooltipData) {
@@ -69,13 +69,13 @@ export class Ruler extends Component {
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
 		const mouseCoordinate =
 			orientation === CartesianOrientations.HORIZONTAL ? y : x;
-		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr(
-			"aria-label",
-			"ruler"
+		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler').attr(
+			'aria-label',
+			'ruler'
 		);
-		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
+		const rulerLine = DOMUtils.appendOrSelect(ruler, 'line.ruler-line');
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
-			"[role=graphics-symbol]"
+			'[role=graphics-symbol]'
 		);
 		const displayData = this.model.getDisplayData();
 		const rangeScale = this.services.cartesianScales.getRangeScale();
@@ -84,7 +84,7 @@ export class Ruler extends Component {
 		const pointsWithinLine = displayData
 			.map((d) => ({
 				domainValue: this.services.cartesianScales.getDomainValue(d),
-				originalData: d
+				originalData: d,
 			}))
 			.filter((d) =>
 				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
@@ -98,7 +98,7 @@ export class Ruler extends Component {
 		) {
 			this.pointsWithinLine = pointsWithinLine;
 			return this.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-				mousePosition: [x, y]
+				mousePosition: [x, y],
 			});
 		}
 
@@ -143,10 +143,12 @@ export class Ruler extends Component {
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 			const tooltipData = dataPointsMatchingRulerLine
 				.map((d) => d.originalData)
 				.filter((d) => {
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+						d
+					);
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
@@ -174,7 +176,7 @@ export class Ruler extends Component {
 				this.hideRuler();
 			}
 
-			elementsToHighlight.dispatch("mouseover");
+			elementsToHighlight.dispatch('mouseover');
 
 			// set current hovered elements
 			this.elementsToHighlight = elementsToHighlight;
@@ -182,25 +184,25 @@ export class Ruler extends Component {
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				mousePosition: [x, y],
 				hoveredElement: rulerLine,
-				data: this.formatTooltipData(tooltipData)
+				data: this.formatTooltipData(tooltipData),
 			});
 
-			ruler.attr("opacity", 1);
+			ruler.attr('opacity', 1);
 
 			// line snaps to matching point
 			const sampleMatch = dataPointsMatchingRulerLine[0];
-			if (orientation === "horizontal") {
+			if (orientation === 'horizontal') {
 				rulerLine
-					.attr("x1", yScaleStart)
-					.attr("x2", yScaleEnd)
-					.attr("y1", sampleMatch.domainValue)
-					.attr("y2", sampleMatch.domainValue);
+					.attr('x1', yScaleStart)
+					.attr('x2', yScaleEnd)
+					.attr('y1', sampleMatch.domainValue)
+					.attr('y2', sampleMatch.domainValue);
 			} else {
 				rulerLine
-					.attr("y1", yScaleStart)
-					.attr("y2", yScaleEnd)
-					.attr("x1", sampleMatch.domainValue)
-					.attr("x2", sampleMatch.domainValue);
+					.attr('y1', yScaleStart)
+					.attr('y2', yScaleEnd)
+					.attr('x1', sampleMatch.domainValue)
+					.attr('x2', sampleMatch.domainValue);
 			}
 		} else {
 			this.hideRuler();
@@ -209,12 +211,12 @@ export class Ruler extends Component {
 
 	hideRuler() {
 		const svg = this.parent;
-		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
-		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
+		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler');
+		const dataPointElements = svg.selectAll('[role=graphics-symbol]');
 
-		dataPointElements.dispatch("mouseout");
+		dataPointElements.dispatch('mouseout');
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
-		ruler.attr("opacity", 0);
+		ruler.attr('opacity', 0);
 	}
 
 	/**
@@ -245,8 +247,8 @@ export class Ruler extends Component {
 		}
 
 		this.backdrop
-			.on("mousemove mouseover", mouseMoveCallback)
-			.on("mouseout", this.hideRuler.bind(this));
+			.on('mousemove mouseover', mouseMoveCallback)
+			.on('mouseout', this.hideRuler.bind(this));
 	}
 
 	drawBackdrop() {
@@ -259,12 +261,12 @@ export class Ruler extends Component {
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop');
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
 			this.isXGridEnabled || this.isYGridEnabled
-				? "rect.chart-grid-backdrop.stroked"
-				: "rect.chart-grid-backdrop"
+				? 'rect.chart-grid-backdrop.stroked'
+				: 'rect.chart-grid-backdrop'
 		);
 	}
 }

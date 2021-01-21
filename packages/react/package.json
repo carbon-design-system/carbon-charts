@@ -1,14 +1,16 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.40.11",
+	"version": "0.41.27",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
+	"types": "./index.d.ts",
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "build-storybook -o demo/bundle --quiet",
+		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
@@ -46,7 +48,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.40.11"
+		"@carbon/charts": "^0.41.27"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",
@@ -56,6 +58,8 @@
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/react": "5.3.12",
+		"@types/react": "17.0.0",
+		"@types/react-dom": "17.0.0",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
@@ -76,6 +80,7 @@
 		"sass": "1.25.0",
 		"sass-loader": "8.0.0",
 		"style-loader": "0.19.0",
+		"typescript": "4.1.2",
 		"url-loader": "0.6.2"
 	},
 	"publishConfig": {

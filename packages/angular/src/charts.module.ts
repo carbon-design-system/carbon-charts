@@ -11,10 +11,13 @@ import { BubbleChartComponent } from "./bubble-chart.component";
 import { DonutChartComponent } from "./donut-chart.component";
 import { GaugeChartComponent } from "./gauge-chart.component";
 import { LineChartComponent } from "./line-chart.component";
+import { LollipopChartComponent } from "./lollipop-chart.component";
 import { PieChartComponent } from "./pie-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
 import { MeterChartComponent } from "./meter-chart.component";
 import { RadarChartComponent } from "./radar-chart.component";
+import { ComboChartComponent } from "./combo-chart.component";
+import { TreemapChartComponent } from "./treemap-chart.component";
 
 @NgModule({
 	imports: [
@@ -31,10 +34,13 @@ import { RadarChartComponent } from "./radar-chart.component";
 		DonutChartComponent,
 		GaugeChartComponent,
 		LineChartComponent,
+		LollipopChartComponent,
 		PieChartComponent,
 		ScatterChartComponent,
 		MeterChartComponent,
-		RadarChartComponent
+		RadarChartComponent,
+		ComboChartComponent,
+		TreemapChartComponent
 	],
 	exports: [
 		BaseChart,
@@ -47,10 +53,13 @@ import { RadarChartComponent } from "./radar-chart.component";
 		DonutChartComponent,
 		GaugeChartComponent,
 		LineChartComponent,
+		LollipopChartComponent,
 		PieChartComponent,
 		ScatterChartComponent,
 		MeterChartComponent,
-		RadarChartComponent
+		RadarChartComponent,
+		ComboChartComponent,
+		TreemapChartComponent
 	]
 })
 

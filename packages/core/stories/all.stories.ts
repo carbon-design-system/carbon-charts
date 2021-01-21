@@ -1,19 +1,19 @@
-import { storiesOf } from "@storybook/html";
-import { withKnobs, object } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/html';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
-import { storybookDemoGroups } from "../demo/data";
-import * as ChartComponents from "../src/charts";
-import * as storyUtils from "./utils";
+import { storybookDemoGroups } from '../demo/data';
+import * as ChartComponents from '../src/charts';
+import * as storyUtils from './utils';
 
-import "../demo/styles.scss";
+import '../demo/styles.scss';
 
-const introStories = storiesOf("Intro", module).addDecorator(withKnobs);
+const introStories = storiesOf('Intro', module).addDecorator(withKnobs);
 
 // Loop through the demos for the group
-introStories.add("Welcome", () => {
+introStories.add('Welcome', () => {
 	// container creation
-	const container = document.createElement("div");
-	container.setAttribute("class", "container intro");
+	const container = document.createElement('div');
+	container.setAttribute('class', 'container intro');
 
 	container.innerHTML = `
 <div class="content">
@@ -59,7 +59,7 @@ introStories.add("Welcome", () => {
 				React
 			</a>
 
-			<a class="bx--btn bx--btn--primary last" href="https://carbon-design-system.github.io/carbon-charts/vue" target="_blank">
+			<a class="bx--btn bx--btn--primary" href="https://carbon-design-system.github.io/carbon-charts/vue" target="_blank">
 				<svg class="vue" viewBox="0 0 197 170" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<polygon fill="#ffffff" points="157.06 0 98.16 102.01 39.23 0 0 0 98.16 170.02 196.32 0 120.83 0"></polygon>
 					<polygon fill="#ffffff" points="98.16 28.93 81.35 0 75.5 0 98.16 39.26 120.82 0 114.973219 0">
@@ -67,6 +67,10 @@ introStories.add("Welcome", () => {
 				</svg>
 
 				Vue
+			</a>
+
+			<a class="bx--btn bx--btn--primary last" href="https://carbon-design-system.github.io/carbon-charts/svelte" target="_blank">
+				Svelte
 			</a>
 		</div>
 	</div>
@@ -89,8 +93,8 @@ storybookDemoGroups.forEach((demoGroup) => {
 		// Loop through the demos for the group
 		groupStories.add(demo.title, () => {
 			// container creation
-			const container = document.createElement("div");
-			container.setAttribute("class", "container theme--g100");
+			const container = document.createElement('div');
+			container.setAttribute('class', 'container theme--g100');
 
 			container.innerHTML = `
 <h3>
@@ -117,9 +121,10 @@ ${
     </div>
   </div>
 </div>`
-		: ""
+		: ''
 }
 
+${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div id="charting-controls">
 </div>
 
@@ -134,76 +139,22 @@ ${
 
 			// Initialize chart
 			const chart = new ClassToInitialize(
-				container.querySelector("div#chart-demo"),
+				container.querySelector('div#chart-demo'),
 				{
-					data: object("Data", demo.data),
-					options: object("Options", demo.options)
+					data: object(
+						'Data',
+						demo.isHighScale
+							? storyUtils.generateRandomData(100, 100, 500)
+							: demo.data
+					),
+					options: object('Options', demo.options),
 				}
 			);
 
+			storyUtils.addDemoDataFormListeners(container, demo, chart);
 			storyUtils.addControls(container, chart);
 
 			return container;
 		});
 	});
 });
-
-// DEV ONLY STORIES
-if (process.env.NODE_ENV !== "production") {
-	const devStories = storiesOf("__DEV__", module).addDecorator(withKnobs);
-
-	// Loop through the demos for the group
-	devStories.add("All chart types", () => {
-		// container creation
-		const container = document.createElement("div");
-		container.setAttribute("class", "container theme--g100");
-
-		container.innerHTML = `
-	<h3>
-		<b class="component">Collection of all demos</b>
-	</h3>
-`;
-
-		storyUtils.addRadioButtonEventListeners(container);
-
-		const getNewRow = () => {
-			const newRow = document.createElement("div");
-			newRow.setAttribute("class", "bx--row");
-			return newRow;
-		};
-
-		const grid = document.createElement("div");
-		grid.setAttribute("class", "bx--grid");
-		container.appendChild(grid);
-
-		let i = 0;
-		let row = getNewRow();
-
-		storybookDemoGroups.forEach((demoGroup) => {
-			demoGroup.demos.forEach((demo) => {
-				grid.appendChild(row);
-				if (i % 2 === 0 && i !== 0) {
-					row = getNewRow();
-					grid.appendChild(row);
-				}
-
-				const ClassToInitialize =
-					ChartComponents[demo.chartType.vanilla];
-
-				const column = document.createElement("div");
-				column.className = "bx--col-md-12 bx--col-lg-6 chart-demo";
-				column.setAttribute("id", demo.title);
-				const chart = new ClassToInitialize(column, {
-					data: demo.data,
-					options: demo.options
-				});
-
-				row.appendChild(column);
-
-				i++;
-			});
-		});
-
-		return container;
-	});
-}
