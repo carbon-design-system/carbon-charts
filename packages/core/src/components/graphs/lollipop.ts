@@ -108,7 +108,6 @@ export class Lollipop extends Scatter {
 		this.addScatterPointEventListeners();
 	}
 
-
 	// listen for when individual datapoints are hovered
 	addScatterPointEventListeners() {
 		// Highlight correct line associated when hovering on a scatter point
@@ -122,7 +121,6 @@ export class Lollipop extends Scatter {
 			Events.Scatter.SCATTER_MOUSEOUT,
 			this.handleScatterOnMouseOut
 		);
-
 	}
 
 	// on hover, bolden the line associated with the scatter
@@ -132,23 +130,21 @@ export class Lollipop extends Scatter {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		this.parent
-			.selectAll('line.line')
-			.attr('stroke-width', (d) => {
-				if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
-					return null;
-				}
-				// apply selected weight
-				return 2;
-			})
-	}
+		this.parent.selectAll('line.line').attr('stroke-width', (d) => {
+			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
+				return Configuration.lines.weight.unselected;
+			}
+			// apply selected weight
+			return Configuration.lines.weight.selected;
+		});
+	};
 
 	// on mouse out remove the stroke width assertion
 	handleScatterOnMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('line.line')
-			.attr('stroke-width', null);
-	}
+			.attr('stroke-width', Configuration.lines.weight.unselected);
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
