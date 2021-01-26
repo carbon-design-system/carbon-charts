@@ -423,13 +423,14 @@ export class Scatter extends Component {
 								filled
 							)
 						)
-						.style("fill", d => filled 
-							? self.model.getFillColor(
-								d[groupMapsTo],
-								d[domainIdentifier],
-								d
-							)
-							: null
+						.style('fill', (d) =>
+							filled
+								? self.model.getFillColor(
+										d[groupMapsTo],
+										d[domainIdentifier],
+										d
+								  )
+								: null
 						);
 				}
 

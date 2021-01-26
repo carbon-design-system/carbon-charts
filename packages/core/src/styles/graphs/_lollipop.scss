@@ -1,0 +1,9 @@
+.#{$prefix}--#{$charts-prefix}--lollipop {
+	line.line {
+		pointer-events: none;
+	}
+
+	circle.dot {
+		stroke-width: 1.5;
+	}
+}
