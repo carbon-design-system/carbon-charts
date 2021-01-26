@@ -49,6 +49,10 @@ export const lines = {
 		unselected: 0.3,
 		selected: 1,
 	},
+	weight: {
+		selected: 2,
+		unselected: 1,
+	},
 };
 
 export const meter = {
