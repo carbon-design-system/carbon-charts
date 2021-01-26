@@ -104,6 +104,50 @@ export class Lollipop extends Scatter {
 					(d, i) => (getYValue(d, i) as any) + options.points.radius
 				);
 		}
+
+		this.addScatterPointEventListeners();
+	}
+
+
+	// listen for when individual datapoints are hovered
+	addScatterPointEventListeners() {
+		// Highlight correct line associated when hovering on a scatter point
+		this.services.events.addEventListener(
+			Events.Scatter.SCATTER_MOUSEOVER,
+			this.handleScatterOnHover
+		);
+
+		// unbolden the line when not hovered on the lollipop scatter point
+		this.services.events.addEventListener(
+			Events.Scatter.SCATTER_MOUSEOUT,
+			this.handleScatterOnMouseOut
+		);
+
+	}
+
+	// on hover, bolden the line associated with the scatter
+	handleScatterOnHover = (event: CustomEvent) => {
+		const hoveredElement = event.detail;
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		this.parent
+			.selectAll('line.line')
+			.attr('stroke-width', (d) => {
+				if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
+					return null;
+				}
+				// apply selected weight
+				return 2;
+			})
+	}
+
+	// on mouse out remove the stroke width assertion
+	handleScatterOnMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll('line.line')
+			.attr('stroke-width', null);
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -151,6 +195,16 @@ export class Lollipop extends Scatter {
 		eventsFragment.removeEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
+		);
+
+		// remove scatter listeners
+		eventsFragment.removeEventListener(
+			Events.Scatter.SCATTER_MOUSEOVER,
+			this.handleScatterOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Scatter.SCATTER_MOUSEOUT,
+			this.handleScatterOnMouseOut
 		);
 	}
 }

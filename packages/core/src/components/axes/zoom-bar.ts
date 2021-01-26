@@ -190,7 +190,7 @@ export class ZoomBar extends Component {
 						),
 						zoomDomain: newInitialZoomDomain
 							? Tools.merge([], newInitialZoomDomain)
-							: defaultDomain
+							: defaultDomain,
 					},
 					{ skipUpdate: true }
 				);
