@@ -252,15 +252,19 @@ export class Pie extends Component {
 			useAttr: true,
 		});
 
+		// don't add padding for labels & callouts if they are disabled
+		const xOffset = renderLabels ? Configuration.pie.xOffset : 0;
+		const yOffset = renderLabels ? Configuration.pie.yOffset : 0;
+
 		// Position Pie
-		let pieTranslateX = radius + Configuration.pie.xOffset;
+		let pieTranslateX = radius + xOffset;
 		if (alignment === Alignments.CENTER) {
 			pieTranslateX = width / 2;
 		} else if (alignment === Alignments.RIGHT) {
 			pieTranslateX = width - radius - Configuration.pie.xOffset;
 		}
 
-		let pieTranslateY = radius + Configuration.pie.yOffset;
+		let pieTranslateY = radius + yOffset;
 		if (calloutData.length > 0) {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
@@ -480,8 +484,10 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
+		const options = this.getOptions();
 		const radius: number = Math.min(width, height) / 2;
+		const renderLabels = options.pie.labels.enabled;
 
-		return radius + Configuration.pie.radiusOffset;
+		return renderLabels ? radius + Configuration.pie.radiusOffset : radius;
 	}
 }
