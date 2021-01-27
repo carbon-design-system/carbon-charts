@@ -307,7 +307,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
 		labels: {
 			formatter: null,
-			enabled: true
+			enabled: true,
 		},
 		alignment: Alignments.LEFT,
 	},
