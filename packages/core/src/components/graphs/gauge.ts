@@ -206,6 +206,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const hideSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'hideSymbol'
+		);
+
 		// circular gauge without delta should have valueNumber centered
 		let numbersYPosition = 0;
 		if (arcType === GaugeTypes.FULL && !delta) {
@@ -222,10 +228,13 @@ export class Gauge extends Component {
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
 		// Add the big number
-		const valueNumberGroup = DOMUtils.appendOrSelect(
+		const valueNumberGroup = hideSymbol ? DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		).attr('transform', 'translate(-10, 0)'); // Optical centering for the presence of the smaller % symbol
+		) : DOMUtils.appendOrSelect(
+			numbersGroup,
+			'g.gauge-value-number'
+		).attr('transform', 'translate(-10, 0)').attr('transform', 'translate(-10, 0)'); // Optical centering for the presence of the smaller % symbol
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -253,10 +262,12 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
-			.style('font-size', `${valueFontSize(radius) / 2}px`)
-			.attr('x', valueNumberWidth / 2)
-			.text('%');
+		if (!hideSymbol) {
+			DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
+				.style('font-size', `${valueFontSize(radius) / 2}px`)
+				.attr('x', valueNumberWidth / 2)
+				.text('%');
+		}
 	}
 
 	/**
