@@ -11,7 +11,8 @@
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
 		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"postinstall": "carbon-telemetry collect --install"
 	},
 	"repository": {
 		"type": "git",
@@ -48,6 +49,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
+		"@carbon/telemetry": "0.0.0-alpha.6",
 		"@carbon/charts": "^0.41.28"
 	},
 	"peerDependencies": {
