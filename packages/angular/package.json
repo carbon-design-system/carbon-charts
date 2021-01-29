@@ -7,7 +7,8 @@
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"postinstall": "carbon-telemetry collect --install"
 	},
 	"repository": {
 		"type": "git",
@@ -40,6 +41,7 @@
 		"scss"
 	],
 	"dependencies": {
+		"@carbon/telemetry": "0.0.0-alpha.6",
 		"@carbon/charts": "^0.41.28"
 	},
 	"peerDependencies": {

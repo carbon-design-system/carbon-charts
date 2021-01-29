@@ -11,9 +11,11 @@
 		"ci-check": "yarn format:diff",
 		"format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
 		"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"postinstall": "carbon-telemetry collect --install"
 	},
 	"dependencies": {
+		"@carbon/telemetry": "0.0.0-alpha.6",
 		"@carbon/charts": "^0.41.28",
 		"vue": "2.5.21"
 	},
