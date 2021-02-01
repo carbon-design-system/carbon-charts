@@ -363,3 +363,8 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to circle pack charts
+ */
+export interface CirclePackChartOptions extends BaseChartOptions {}

@@ -16,6 +16,7 @@ import {
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	CirclePackChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -415,6 +416,16 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	}),
 } as TreemapChartOptions);
 
+
+/*
+ * options specific to bubble pack charts
+ */
+const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, {
+	data: Tools.merge(chart.data, {
+		groupMapsTo: 'name',
+	}),
+} as CirclePackChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -435,6 +446,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	circlePackChart
 };
 
 export * from './configuration-non-customizable';
