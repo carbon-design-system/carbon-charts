@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.41.28",
+	"version": "0.41.29",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -9,14 +9,14 @@
 		"demo:server": "yarn run storybook",
 		"docs:build": "typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts",
 		"build": "bash build.sh",
-		"postinstall": "bash build-vendor.sh",
 		"lint": "tslint -p tsconfig.json -c tslint.json",
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
-		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
+		"postinstall": "bash build-vendor.sh && carbon-telemetry collect --install"
 	},
 	"repository": {
 		"type": "git",
@@ -49,6 +49,7 @@
 	"license": "Apache-2.0",
 	"dependencies": {
 		"@carbon/colors": "10.15.0",
+		"@carbon/telemetry": "0.0.0-alpha.6",
 		"@carbon/utils-position": "1.1.1",
 		"date-fns": "2.8.1",
 		"lodash-es": "4.17.15",
