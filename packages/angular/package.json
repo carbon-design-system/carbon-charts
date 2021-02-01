@@ -7,8 +7,7 @@
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet",
-		"clean": "rm -rf dist demo/bundle",
-		"postinstall": "carbon-telemetry collect --install"
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",

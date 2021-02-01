@@ -11,8 +11,7 @@
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
 		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet",
-		"clean": "rm -rf dist demo/bundle",
-		"postinstall": "carbon-telemetry collect --install"
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",

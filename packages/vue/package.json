@@ -11,8 +11,7 @@
 		"ci-check": "yarn format:diff",
 		"format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
 		"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
-		"clean": "rm -rf dist demo/bundle",
-		"postinstall": "carbon-telemetry collect --install"
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
 		"@carbon/charts": "^0.41.29",

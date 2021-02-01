@@ -12,8 +12,7 @@
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"clean": "rm -rf dist demo/bundle",
-		"test": "svelte-check --workspace=tests",
-		"postinstall": "carbon-telemetry collect --install"
+		"test": "svelte-check --workspace=tests"
 	},
 	"repository": {
 		"type": "git",
