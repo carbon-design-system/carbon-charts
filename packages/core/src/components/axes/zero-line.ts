@@ -1,19 +1,20 @@
 // Internal Imports
-import { Component } from "../component";
-import { DOMUtils } from "../../services";
-import { Tools } from "../../tools";
+import { Component } from '../component';
+import { DOMUtils } from '../../services';
+import { Tools } from '../../tools';
 
 export class ZeroLine extends Component {
-	type = "zero-line";
+	type = 'zero-line';
 
 	render(animate: boolean) {
-		const axisPosition = this.services.cartesianScales.getRangeAxisPosition({groups: this.configs.groups});
-		const rangeScale = this.services.cartesianScales.getScaleByPosition(axisPosition);
+		const axisPosition = this.services.cartesianScales.getRangeAxisPosition(
+			{ groups: this.configs.groups }
+		);
+		const rangeScale = this.services.cartesianScales.getScaleByPosition(
+			axisPosition
+		);
 		// check the domain
-		const [
-			minDomainValue,
-			maxDomainValue
-		] = rangeScale.domain();
+		const [minDomainValue, maxDomainValue] = rangeScale.domain();
 
 		const drawZeroLine =
 			(minDomainValue > 0 && maxDomainValue < 0) ||
@@ -26,13 +27,13 @@ export class ZeroLine extends Component {
 		// previously had a domain that went into negatives
 		if (!drawZeroLine) {
 			// otherwise if a chart draws a zero line and then the domain change the zero line is still in the DOM
-			svg.selectAll("line.domain").remove();
+			svg.selectAll('line.domain').remove();
 			return;
 		}
 
 		// Get x & y position of the line
 		const [x0, x1] = this.services.cartesianScales.getDomainScale().range();
-		let yPosition = +rangeScale(0)  + 0.5;
+		let yPosition = +rangeScale(0) + 0.5;
 
 		// if scale domain contains NaN, return the first value of the range
 		// this is necessary for the zero line y position that otherwise is NaN
@@ -46,18 +47,18 @@ export class ZeroLine extends Component {
 				x0,
 				x1,
 				y0: yPosition,
-				y1: yPosition
+				y1: yPosition,
 			},
 			this.services.cartesianScales.getOrientation()
 		);
 
-		const line = DOMUtils.appendOrSelect(svg, "line.domain");
+		const line = DOMUtils.appendOrSelect(svg, 'line.domain');
 		line.transition(
-			this.services.transitions.getTransition("zero-line-update", animate)
+			this.services.transitions.getTransition('zero-line-update', animate)
 		)
-			.attr("y1", lineCoordinates.y0)
-			.attr("y2", lineCoordinates.y1)
-			.attr("x1", lineCoordinates.x0)
-			.attr("x2", lineCoordinates.x1);
+			.attr('y1', lineCoordinates.y0)
+			.attr('y2', lineCoordinates.y1)
+			.attr('x1', lineCoordinates.x0)
+			.attr('x2', lineCoordinates.x1);
 	}
 }

@@ -1,28 +1,28 @@
 // Internal Imports
-import { Component } from "../component";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
+import { Component } from '../component';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
 
 // D3 Imports
-import { axisBottom, axisLeft } from "d3-axis";
+import { axisBottom, axisLeft } from 'd3-axis';
 
 export class Grid extends Component {
-	type = "grid";
+	type = 'grid';
 
 	backdrop: any;
 
 	render(animate = true) {
 		const isXGridEnabled = Tools.getProperty(
 			this.getOptions(),
-			"grid",
-			"x",
-			"enabled"
+			'grid',
+			'x',
+			'enabled'
 		);
 		const isYGridEnabled = Tools.getProperty(
 			this.getOptions(),
-			"grid",
-			"y",
-			"enabled"
+			'grid',
+			'y',
+			'enabled'
 		);
 
 		if (!isXGridEnabled && !isYGridEnabled) {
@@ -32,12 +32,12 @@ export class Grid extends Component {
 		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
 
 		if (isXGridEnabled) {
-			DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
+			DOMUtils.appendOrSelect(this.backdrop, 'g.x.grid');
 			this.drawXGrid(animate);
 		}
 
 		if (isYGridEnabled) {
-			DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+			DOMUtils.appendOrSelect(this.backdrop, 'g.y.grid');
 			this.drawYGrid(animate);
 		}
 	}
@@ -45,7 +45,7 @@ export class Grid extends Component {
 	drawXGrid(animate: boolean) {
 		const svg = this.parent;
 
-		const height = this.backdrop.attr("height");
+		const height = this.backdrop.attr('height');
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const xGrid = axisBottom(mainXScale)
@@ -55,22 +55,22 @@ export class Grid extends Component {
 		// Determine number of ticks
 		const numberOfTicks = Tools.getProperty(
 			this.getOptions(),
-			"grid",
-			"x",
-			"numberOfTicks"
+			'grid',
+			'x',
+			'numberOfTicks'
 		);
 		xGrid.ticks(numberOfTicks);
 
 		const g = svg
-			.select(".x.grid")
+			.select('.x.grid')
 			.attr(
-				"transform",
-				`translate(${-this.backdrop.attr("x")}, ${height})`
+				'transform',
+				`translate(${-this.backdrop.attr('x')}, ${height})`
 			);
 
 		if (animate) {
 			const transition = this.services.transitions.getTransition(
-				"grid-update"
+				'grid-update'
 			);
 			g.transition(transition).call(xGrid);
 		} else {
@@ -82,7 +82,7 @@ export class Grid extends Component {
 
 	drawYGrid(animate: boolean) {
 		const svg = this.parent;
-		const width = this.backdrop.attr("width");
+		const width = this.backdrop.attr('width');
 
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const yGrid = axisLeft(mainYScale)
@@ -92,19 +92,19 @@ export class Grid extends Component {
 		// Determine number of ticks
 		const numberOfTicks = Tools.getProperty(
 			this.getOptions(),
-			"grid",
-			"y",
-			"numberOfTicks"
+			'grid',
+			'y',
+			'numberOfTicks'
 		);
 		yGrid.ticks(numberOfTicks);
 
 		const g = svg
-			.select(".y.grid")
-			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`);
+			.select('.y.grid')
+			.attr('transform', `translate(0, ${-this.backdrop.attr('y')})`);
 
 		if (animate) {
 			const transition = this.services.transitions.getTransition(
-				"grid-update"
+				'grid-update'
 			);
 			g.transition(transition).call(yGrid);
 		} else {
@@ -124,7 +124,7 @@ export class Grid extends Component {
 
 		// sort in ascending x translation value order
 		const gridlinesX = svg
-			.selectAll(".x.grid .tick")
+			.selectAll('.x.grid .tick')
 			.nodes()
 			.sort((a, b) => {
 				return (
@@ -159,7 +159,7 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridElement = svg.select("rect.chart-grid-backdrop").node();
+			const gridElement = svg.select('rect.chart-grid-backdrop').node();
 			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
@@ -181,22 +181,22 @@ export class Grid extends Component {
 	getActiveGridline(position) {
 		const userSpecifiedThreshold = Tools.getProperty(
 			this.getOptions,
-			"tooltip",
-			"gridline",
-			"threshold"
+			'tooltip',
+			'gridline',
+			'threshold'
 		);
 		const threshold = userSpecifiedThreshold
 			? userSpecifiedThreshold
 			: this.getGridlineThreshold(position);
 		const svg = this.parent;
 
-		const xGridlines = svg.selectAll(".x.grid .tick").filter(function () {
+		const xGridlines = svg.selectAll('.x.grid .tick').filter(function () {
 			const translations = Tools.getTranslationValues(this);
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
 				min: Number(translations.tx) - threshold,
-				max: Number(translations.tx) + threshold
+				max: Number(translations.tx) + threshold,
 			};
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
@@ -215,28 +215,28 @@ export class Grid extends Component {
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop');
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
 			isXGridEnabled || isYGridEnabled
-				? "rect.chart-grid-backdrop.stroked"
-				: "rect.chart-grid-backdrop"
+				? 'rect.chart-grid-backdrop.stroked'
+				: 'rect.chart-grid-backdrop'
 		);
 
 		this.backdrop
 			.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", Math.abs(xScaleEnd - xScaleStart))
-			.attr("height", Math.abs(yScaleEnd - yScaleStart))
+			.attr('x', xScaleStart)
+			.attr('y', yScaleStart)
+			.attr('width', Math.abs(xScaleEnd - xScaleStart))
+			.attr('height', Math.abs(yScaleEnd - yScaleStart))
 			.lower();
 
-		backdropRect.attr("width", "100%").attr("height", "100%");
+		backdropRect.attr('width', '100%').attr('height', '100%');
 	}
 
 	cleanGrid(g) {
 		// Remove extra elements
-		g.selectAll("text").remove();
-		g.select(".domain").remove();
+		g.selectAll('text').remove();
+		g.select('.domain').remove();
 	}
 }

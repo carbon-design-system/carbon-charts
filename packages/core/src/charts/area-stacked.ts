@@ -1,8 +1,8 @@
 // Internal Imports
-import { AxisChart } from "../axis-chart";
-import * as Configuration from "../configuration";
-import { ChartConfig, AreaChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
+import { AxisChart } from '../axis-chart';
+import * as Configuration from '../configuration';
+import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index';
+import { Tools } from '../tools';
 
 // Components
 import {
@@ -11,8 +11,9 @@ import {
 	StackedRuler,
 	TwoDimensionalAxes,
 	Line,
-	StackedScatter
-} from "../components/index";
+	StackedScatter,
+	Skeleton,
+} from '../components/index';
 
 export class StackedAreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
@@ -42,8 +43,11 @@ export class StackedAreaChart extends AxisChart {
 			new StackedScatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
 				handleThresholds: true,
-				stacked: true
-			})
+				stacked: true,
+			}),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.GRID,
+			}),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

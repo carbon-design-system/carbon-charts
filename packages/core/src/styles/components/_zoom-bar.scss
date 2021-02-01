@@ -2,10 +2,18 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 	rect.zoom-bg {
 		fill: $ui-background;
 		stroke: $ui-01;
+
+		&-skeleton {
+			stroke: url(#shimmer-lines);
+		}
 	}
 
 	rect.zoom-slider-bg {
 		fill: $ui-01;
+
+		&-skeleton {
+			stroke: url(#shimmer-lines);
+		}
 	}
 
 	rect.zoom-slider-selected-area {
@@ -15,6 +23,10 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 	path.zoom-bg-baseline {
 		stroke: $ui-04;
 		stroke-width: 2;
+
+		&-skeleton {
+			stroke: url(#shimmer-lines);
+		}
 	}
 
 	path.zoom-graph-area {

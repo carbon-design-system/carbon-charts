@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const eventListenersTutorial = {
-	name: "Event listeners",
+	name: 'Event listeners',
 	content: marked(`
 # Events in Carbon Charts
 Event dispatching for chart elements allows applications to trigger custom UI actions and states when users interact with the charts.
@@ -19,5 +19,5 @@ barChart.services.events.addEventListener("bar-onmouseover", e => {
 });
 \`\`\`
 
-`)
+`),
 };

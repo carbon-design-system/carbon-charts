@@ -1,8 +1,8 @@
 // Internal Imports
-import { Chart } from "../chart";
-import { ChartConfig, TreemapChartOptions } from "../interfaces/index";
-import * as Configuration from "../configuration";
-import { Tools } from "../tools";
+import { Chart } from '../chart';
+import { ChartConfig, TreemapChartOptions } from '../interfaces/index';
+import * as Configuration from '../configuration';
+import { Tools } from '../tools';
 
 // Components
 import {
@@ -10,11 +10,14 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 export class TreemapChart extends Chart {
-	constructor(holder: Element, chartConfigs: ChartConfig<TreemapChartOptions>) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<TreemapChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart

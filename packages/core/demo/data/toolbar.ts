@@ -1,28 +1,28 @@
-import * as barChart from "./bar";
-import * as lineChart from "./line";
+import * as barChart from './bar';
+import * as lineChart from './line';
 
 // utility function to enable toolbar option
 const addToolbarOptions = (options, configs?) => {
 	options.experimental = true;
 
 	options.toolbar = {
-		enabled: true
+		enabled: true,
 	};
 	options.zoomBar = {
 		top: {
-			enabled: true
-		}
+			enabled: true,
+		},
 	};
 	options.toolbar.controls = [
 		{
-			type: "Zoom in"
+			type: 'Zoom in',
 		},
 		{
-			type: "Zoom out"
+			type: 'Zoom out',
 		},
 		{
-			type: "Reset zoom"
-		}
+			type: 'Reset zoom',
+		},
 	];
 
 	if (configs) {
@@ -50,18 +50,18 @@ export const toolbarLineTimeSeriesData = lineChart.lineTimeSeriesData;
 export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 	Object.assign({}, lineChart.lineTimeSeriesOptions),
 	{
-		titleSuffix: " - two icons",
+		titleSuffix: ' - two icons',
 		numberOfIcons: 2,
 		controls: [
 			{
-				type: "Reset zoom"
+				type: 'Reset zoom',
 			},
 			{
-				type: "Zoom in"
+				type: 'Zoom in',
 			},
 			{
-				type: "Zoom out"
-			}
-		]
+				type: 'Zoom out',
+			},
+		],
 	}
 );

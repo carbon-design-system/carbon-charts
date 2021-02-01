@@ -1,13 +1,13 @@
 // Internal Imports
-import { ChartModel } from "../model";
-import { DOMUtils } from "../services";
-import { Tools } from "../tools";
+import { ChartModel } from '../model';
+import { DOMUtils } from '../services';
+import { Tools } from '../tools';
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select } from 'd3-selection';
 
 // import the settings for the css prefix
-import settings from "carbon-components/es/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
 export class Component {
 	public type: string;
@@ -29,8 +29,8 @@ export class Component {
 			if (this.configs.id) {
 				const chartprefix = Tools.getProperty(
 					this.model.getOptions(),
-					"style",
-					"prefix"
+					'style',
+					'prefix'
 				);
 				this.id = `${chartprefix}--${this.configs.id}`;
 			}
@@ -45,7 +45,7 @@ export class Component {
 	init() {}
 
 	render(animate = true) {
-		console.error("render() method is not implemented");
+		console.error('render() method is not implemented');
 	}
 
 	destroy() {}
@@ -71,17 +71,23 @@ export class Component {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
-				"style",
-				"prefix"
+				'style',
+				'prefix'
 			);
 			this.parent
-				.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true)
-				.attr( "id", this.id);
+				.classed(
+					`${settings.prefix}--${chartprefix}--${this.type}`,
+					true
+				)
+				.attr('id', this.id);
 
 			if (oldParent) {
 				oldParent
-					.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false)
-					.attr( "id", this.id);
+					.classed(
+						`${settings.prefix}--${chartprefix}--${this.type}`,
+						false
+					)
+					.attr('id', this.id);
 			}
 		}
 	}
@@ -94,11 +100,11 @@ export class Component {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
-				"style",
-				"prefix"
+				'style',
+				'prefix'
 			);
 
-			const idSelector = this.id ? `#${this.id}` : "";
+			const idSelector = this.id ? `#${this.id}` : '';
 			const svg = DOMUtils.appendOrSelect(
 				this.parent,
 				`g${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
@@ -106,9 +112,9 @@ export class Component {
 
 			if (configs.withinChartClip) {
 				// get unique chartClipId int this chart from model
-				const chartClipId = this.model.get("chartClipId");
+				const chartClipId = this.model.get('chartClipId');
 				if (chartClipId) {
-					svg.attr("clip-path", `url(#${chartClipId})`);
+					svg.attr('clip-path', `url(#${chartClipId})`);
 				}
 			}
 			return svg;
@@ -124,7 +130,11 @@ export class Component {
 	 */
 	getOptions() {
 		if (this.configs.options) {
-			const options = Tools.merge({}, this.model.getOptions(), this.configs.options);
+			const options = Tools.merge(
+				{},
+				this.model.getOptions(),
+				this.configs.options
+			);
 			return options;
 		}
 		return this.model.getOptions();
