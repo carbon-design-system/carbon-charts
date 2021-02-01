@@ -27,6 +27,7 @@ export * from './graphs/skeleton';
 export * from './graphs/skeleton-lines';
 export * from './graphs/treemap';
 export * from './graphs/radar';
+export * from './graphs/circle-pack';
 
 // Layout
 export * from './layout/spacer';
