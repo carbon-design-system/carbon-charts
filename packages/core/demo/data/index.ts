@@ -136,7 +136,7 @@ export const chartTypes = {
 		vanilla: 'BubblePackChart',
 		angular: 'ibm-circle-pack-chart',
 		vue: 'ccv-circle-pack-chart',
-	}
+	},
 };
 
 let allDemoGroups = [

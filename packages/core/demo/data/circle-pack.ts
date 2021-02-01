@@ -11,7 +11,7 @@ export const circlePackData = [
 	{
 		name: 'B',
 		children: [
-			{ name: 'AB', value: 2800, },
+			{ name: 'AB', value: 2800 },
 			{ name: 'BC', value: 10000 },
 			{ name: 'CD', value: 500 },
 			{ name: 'DE', value: 500 },
@@ -47,32 +47,32 @@ export const circlePackData = [
 			{ name: 'RR', value: 200 },
 			{ name: 'ST', value: 300 },
 		],
-	}
+	},
 ];
 
 export const circlePackOptions = {
-	title: 'Bubble Pack Chart',
+	title: 'Circle Pack Chart',
 };
 
 export const circlePackSingleLevelData = [
 	{
 		name: 'A',
-		value: 300
+		value: 300,
 	},
 	{
 		name: 'B',
-		value: 600
+		value: 600,
 	},
 	{
 		name: 'C',
-		value: 50
+		value: 50,
 	},
 	{
 		name: 'D',
-		value: 80
+		value: 80,
 	},
 	{
 		name: 'E',
-		value: 80
-	}
+		value: 80,
+	},
 ];
