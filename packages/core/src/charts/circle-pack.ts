@@ -35,7 +35,9 @@ export class BubblePackChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [new CirclePack(this.model, this.services)];
+		const graphFrameComponents = [
+			new CirclePack(this.model, this.services),
+		];
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);

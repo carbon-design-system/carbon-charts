@@ -14,7 +14,6 @@ import { select } from 'd3-selection';
 import { colors } from '@carbon/colors';
 import { group } from 'd3';
 
-
 let uidCounter = 0;
 export class CirclePack extends Component {
 	type = 'bubble-pack';
@@ -29,7 +28,7 @@ export class CirclePack extends Component {
 			useAttrs: true,
 		});
 
-		if(width === 0 || height === 0) {
+		if (width === 0 || height === 0) {
 			// on first render the svg is width and height 0
 			// the circle packing layout functionality will not run
 			return;
@@ -45,17 +44,11 @@ export class CirclePack extends Component {
 			.sum((d: any) => d.value)
 			.sort((a, b) => b.value - a.value);
 
-		const packLayout = D3Pack()
-			.size([width, height])
-			.padding(20)
-
-
+		const packLayout = D3Pack().size([width, height]).padding(20);
 
 		const nodeData = packLayout(root).descendants().splice(1);
 
-		const leafGroups = svg
-			.selectAll("g[data-name='leaf']")
-			.data(nodeData)
+		const leafGroups = svg.selectAll("g[data-name='leaf']").data(nodeData);
 
 		// Remove leaf groups that need to be removed
 		leafGroups.exit().attr('opacity', 0).remove();
@@ -68,7 +61,6 @@ export class CirclePack extends Component {
 			.attr('data-uid', () => uidCounter++);
 
 		const allLeafGroups = enteringLeafGroups.merge(leafGroups);
-
 
 		// enter the circles
 		const circles = allLeafGroups.selectAll('circle.leaf').data(nodeData);
@@ -101,10 +93,9 @@ export class CirclePack extends Component {
 			// 		animate
 			// 	)
 			// )
-			.attr('r', d => d.r)
-			.attr('cx', d => d.x)
-			.attr('cy', d => d.y);
-
+			.attr('r', (d) => d.r)
+			.attr('cx', (d) => d.x)
+			.attr('cy', (d) => d.y);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -112,6 +103,5 @@ export class CirclePack extends Component {
 
 	addEventListeners() {
 		const self = this;
-
 	}
 }

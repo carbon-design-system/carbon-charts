@@ -416,7 +416,6 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	}),
 } as TreemapChartOptions);
 
-
 /*
  * options specific to bubble pack charts
  */
@@ -446,7 +445,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
-	circlePackChart
+	circlePackChart,
 };
 
 export * from './configuration-non-customizable';
