@@ -15,7 +15,6 @@ import * as Configuration from '../../configuration';
 import { extent } from 'd3-array';
 import { brushX } from 'd3-brush';
 import { area, line } from 'd3-shape';
-import { event } from 'd3-selection';
 
 export class ZoomBar extends Component {
 	type = 'zoom-bar';
@@ -271,12 +270,13 @@ export class ZoomBar extends Component {
 	}
 
 	addBrushEventListener(zoomDomain, axesLeftMargin, width) {
-		const brushEventListener = () => {
+		const brushEventListener = (event) => {
 			const selection = event.selection;
 			// follow d3 behavior: when selection is null, reset default full range
 			// select behavior is completed, but nothing selected
 			if (selection === null) {
 				this.handleBrushedEvent(
+					event,
 					zoomDomain,
 					this.xScale,
 					this.xScale.range()
@@ -284,7 +284,7 @@ export class ZoomBar extends Component {
 			} else if (selection[0] === selection[1]) {
 				// select behavior is not completed yet, do nothing
 			} else {
-				this.handleBrushedEvent(zoomDomain, this.xScale, selection);
+				this.handleBrushedEvent(event, zoomDomain, this.xScale, selection);
 			}
 		};
 
@@ -307,7 +307,7 @@ export class ZoomBar extends Component {
 	}
 
 	// brush event listener
-	handleBrushedEvent(zoomDomain, scale, selection) {
+	handleBrushedEvent(event, zoomDomain, scale, selection) {
 		const newDomain = [
 			scale.invert(selection[0]),
 			scale.invert(selection[1]),

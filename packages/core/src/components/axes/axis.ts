@@ -636,7 +636,7 @@ export class Axis extends Component {
 		const self = this;
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEOVER,
@@ -656,7 +656,7 @@ export class Axis extends Component {
 					});
 				}
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEMOVE,
@@ -672,14 +672,14 @@ export class Axis extends Component {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				}
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					element: select(this),

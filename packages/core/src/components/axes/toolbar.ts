@@ -6,7 +6,7 @@ import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
-import { event, select } from 'd3-selection';
+import { select } from 'd3-selection';
 
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
@@ -180,7 +180,7 @@ export class Toolbar extends Component {
 					);
 					buttonContainer
 						.on('click', button.clickFunction)
-						.on('keyup', () => {
+						.on('keyup', (event) => {
 							if (
 								(event.key && event.key === 'Enter') ||
 								event.key === ' '
@@ -299,7 +299,7 @@ export class Toolbar extends Component {
 						// hide overflow menu
 						self.updateOverflowMenu(false);
 					});
-					element.on('keyup', () => {
+					element.on('keyup', (event: any) => {
 						if (event.key === 'Enter') {
 							// call the specified function
 							menuItem.clickFunction();
@@ -318,7 +318,6 @@ export class Toolbar extends Component {
 			// default to focus on the first enabled menu item
 			self.focusOnNextEnabledMenuItem(-1);
 		}
-		event.stopImmediatePropagation();
 	}
 
 	getOverflowMenuHTML() {
