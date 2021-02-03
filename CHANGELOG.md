@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.30](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.29...v0.41.30) (2021-02-01)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.41.29](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.28...v0.41.29) (2021-01-29)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
