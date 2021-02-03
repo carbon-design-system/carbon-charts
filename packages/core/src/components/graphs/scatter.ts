@@ -367,7 +367,7 @@ export class Scatter extends Component {
 
 				// Show tooltip
 				const bubbleOptions = Tools.getProperty(
-					self.model.getOptions(),
+					self.getOptions(),
 					'bubble'
 				);
 
