@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.41.29",
+	"version": "0.41.30",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -16,7 +16,7 @@
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
-		"postinstall": "bash build-vendor.sh && carbon-telemetry collect --install"
+		"postinstall": "bash build-vendor.sh"
 	},
 	"repository": {
 		"type": "git",
