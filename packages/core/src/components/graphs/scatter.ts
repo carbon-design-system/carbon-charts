@@ -366,15 +366,29 @@ export class Scatter extends Component {
 					.classed('unfilled', false);
 
 				// Show tooltip
-				const bubbleOptions = Tools.getProperty(self.model.getOptions(), "bubble");
+				const bubbleOptions = Tools.getProperty(
+					self.model.getOptions(),
+					'bubble'
+				);
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
-					additionalItems: [{
-							label: Tools.getProperty(bubbleOptions, "radiusLabel"),
-							value: datum[Tools.getProperty(bubbleOptions, "radiusMapsTo")]
-					}]
+					additionalItems: [
+						{
+							label: Tools.getProperty(
+								bubbleOptions,
+								'radiusLabel'
+							),
+							value:
+								datum[
+									Tools.getProperty(
+										bubbleOptions,
+										'radiusMapsTo'
+									)
+								],
+						},
+					],
 				});
 
 				// Dispatch mouse event

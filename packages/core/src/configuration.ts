@@ -281,8 +281,8 @@ const stackedAreaChart = areaChart;
  */
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
-		radiusMapsTo: "radius",
-		radiusLabel: "Radius",
+		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,

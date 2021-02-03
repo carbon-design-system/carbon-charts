@@ -23,8 +23,8 @@ import {
 } from './components';
 import { Tools } from './tools';
 
-import { CartesianScales, Curves, Zoom } from "./services";
-import { legend as LegendConfig } from "./configuration-non-customizable";
+import { CartesianScales, Curves, Zoom } from './services';
+import { legend as LegendConfig } from './configuration-non-customizable';
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -42,15 +42,11 @@ export class AxisChart extends Chart {
 		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
 			options,
-			"zoomBar",
+			'zoomBar',
 			AxisPositions.TOP,
 			'enabled'
 		);
-		const toolbarEnabled = Tools.getProperty(
-			options,
-			'toolbar',
-			'enabled'
-		);
+		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled');
 
 		this.services.cartesianScales.determineAxisDuality();
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
@@ -59,7 +55,7 @@ export class AxisChart extends Chart {
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
 			options,
-			"axes",
+			'axes',
 			mainXAxisPosition,
 			'scaleType'
 		);
@@ -117,34 +113,32 @@ export class AxisChart extends Chart {
 
 		// Add extra legend items
 		const extraLabels = [];
-		const radiusLabel = Tools.getProperty(
-			options,
-			"bubble",
-			"radiusLabel"
-		);
+		const radiusLabel = Tools.getProperty(options, 'bubble', 'radiusLabel');
 		if (radiusLabel) {
 			const outerRadius = Tools.getProperty(
 				LegendConfig,
-				"checkbox",
-				"radius"
+				'checkbox',
+				'radius'
 			);
 			const innerRadius = outerRadius - 3;
 
 			extraLabels.push({
-				type: "radius-label",
+				type: 'radius-label',
 				icon: `<svg width="16px" height="16px" viewBox="0 0 16 16">
 							<g fill="none" fill-rule="evenodd">
 								<circle cx="7" cy="7" r=${outerRadius}></circle>
 								<circle cx="7" cy="10" r=${innerRadius}></circle>
 							</g>
 						</svg>`,
-				text: radiusLabel
+				text: radiusLabel,
 			});
 		}
 
 		const legendComponent = {
-			id: "legend",
-			components: [new Legend(this.model, this.services, { extraLabels })],
+			id: 'legend',
+			components: [
+				new Legend(this.model, this.services, { extraLabels }),
+			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED,

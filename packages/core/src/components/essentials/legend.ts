@@ -132,32 +132,30 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const extraLabels = Tools.getProperty(this.configs, "extraLabels");
+		const extraLabels = Tools.getProperty(this.configs, 'extraLabels');
 
 		// Add extra labels
 		if (extraLabels && dataGroups.length) {
-			const extraLabelItems = svg.selectAll("g.extra-label")
+			const extraLabelItems = svg
+				.selectAll('g.extra-label')
 				.data(extraLabels);
-			
+
 			const addedExtraLabelItems = extraLabelItems
 				.enter()
-				.append("g")
-				.classed("extra-label", true);
+				.append('g')
+				.classed('extra-label', true);
 
 			addedExtraLabelItems
-				.append("g")
-				.classed("icon", true)
-				.html(d => d.icon);
+				.append('g')
+				.classed('icon', true)
+				.html((d) => d.icon);
 
 			addedExtraLabelItems
-				.append("text")
-				.merge(extraLabelItems.select("text"))
-				.html(d => d.text);
-			
-			this.breakItemsIntoLines(
-				addedLegendItems,
-				addedExtraLabelItems
-			);
+				.append('text')
+				.merge(extraLabelItems.select('text'))
+				.html((d) => d.text);
+
+			this.breakItemsIntoLines(addedLegendItems, addedExtraLabelItems);
 		} else {
 			this.breakItemsIntoLines(addedLegendItems);
 		}
@@ -307,9 +305,12 @@ export class Legend extends Component {
 					.attr('y', yOffset + yPosition + 3);
 
 				// Calculate x position for extra label items
-				if (addedExtraLabelItems && legendOrientation !== LegendOrientations.VERTICAL) {
+				if (
+					addedExtraLabelItems &&
+					legendOrientation !== LegendOrientations.VERTICAL
+				) {
 					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
-						select(this).select("text"),
+						select(this).select('text'),
 						{ useBBox: true }
 					);
 
@@ -378,8 +379,8 @@ export class Legend extends Component {
 		// add extra label items
 		if (addedExtraLabelItems) {
 			addedExtraLabelItems
-				.merge(svg.selectAll("g.extra-label"))
-				.each(function(d) {
+				.merge(svg.selectAll('g.extra-label'))
+				.each(function (d) {
 					const radiusLabelItem = select(this);
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;
@@ -389,13 +390,13 @@ export class Legend extends Component {
 							{ useAttr: true }
 						);
 						const labelItemTextDimensions = DOMUtils.getSVGElementSize(
-							select(this).select("text"),
+							select(this).select('text'),
 							{ useBBox: true }
 						);
 						if (
 							extraLabelItemsStartingPoint +
-							spaceNeededForCheckbox +
-							labelItemTextDimensions.width > 
+								spaceNeededForCheckbox +
+								labelItemTextDimensions.width >
 							svgDimensions.width
 						) {
 							lineNumber++;
@@ -404,28 +405,32 @@ export class Legend extends Component {
 					}
 
 					radiusLabelItem
-						.select("g.icon svg")
-						.attr("x", extraLabelItemsStartingPoint)
-						.attr("y", lineNumber * legendItemsVerticalSpacing);
+						.select('g.icon svg')
+						.attr('x', extraLabelItemsStartingPoint)
+						.attr('y', lineNumber * legendItemsVerticalSpacing);
 
 					radiusLabelItem
-						.select("text")
-						.attr("x", extraLabelItemsStartingPoint + spaceNeededForCheckbox)
+						.select('text')
 						.attr(
-							"y",
+							'x',
+							extraLabelItemsStartingPoint +
+								spaceNeededForCheckbox
+						)
+						.attr(
+							'y',
 							legendTextYOffset +
-							lineNumber *
-							legendItemsVerticalSpacing + 3
+								lineNumber * legendItemsVerticalSpacing +
+								3
 						);
 
 					if (legendOrientation !== LegendOrientations.VERTICAL) {
 						const labelTextDimensions = DOMUtils.getSVGElementSize(
-							radiusLabelItem.select("text"),
+							radiusLabelItem.select('text'),
 							{ useBBox: true }
 						);
-	
+
 						// calculate starting point for next label item
-						extraLabelItemsStartingPoint += 
+						extraLabelItemsStartingPoint +=
 							labelTextDimensions.width +
 							spaceNeededForCheckbox +
 							legendItemsHorizontalSpacing;

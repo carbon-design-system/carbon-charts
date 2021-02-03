@@ -94,12 +94,12 @@ export class AxisChartsTooltip extends Tooltip {
 			];
 
 			if (e.detail.additionalItems) {
-				e.detail.additionalItems.forEach(additionalItem => 
+				e.detail.additionalItems.forEach((additionalItem) =>
 					items.push({
 						label: additionalItem.label,
-						value: additionalItem.value
+						value: additionalItem.value,
 					})
-				)
+				);
 			}
 		} else if (data.length > 1) {
 			items = [
