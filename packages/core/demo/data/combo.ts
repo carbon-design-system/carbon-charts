@@ -116,6 +116,7 @@ export const comboStackedOptions = {
 		left: {
 			title: 'Disney Park Attendance',
 			mapsTo: 'value',
+			stacked: true,
 		},
 		bottom: {
 			title: '2018 Annual Sales Figures',
