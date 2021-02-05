@@ -80,7 +80,7 @@ export class Lollipop extends Scatter {
 					animate
 				)
 			)
-			.attr('stroke', (d) =>
+			.style('stroke', (d) =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 			)
 			.attr('opacity', 1);
