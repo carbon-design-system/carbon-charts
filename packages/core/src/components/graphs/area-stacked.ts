@@ -92,7 +92,7 @@ export class StackedArea extends Component {
 					originalClassName: 'area',
 				})
 			)
-			.attr('fill', (d) => self.model.getFillColor(d[0][groupMapsTo]))
+			.style('fill', (d) => self.model.getFillColor(d[0][groupMapsTo]))
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
 			.transition(
