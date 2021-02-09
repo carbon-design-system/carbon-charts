@@ -281,7 +281,7 @@ export interface GaugeChartOptions extends BaseChartOptions {
 			size?: Function;
 			enabled: Boolean;
 		};
-		hideSymbol?: Boolean;
+		showPercentageSymbol?: Boolean;
 		status?: Statuses;
 		deltaFontSize?: Function;
 		numberSpacing?: number;

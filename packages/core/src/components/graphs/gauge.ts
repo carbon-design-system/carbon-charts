@@ -206,10 +206,10 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
-		const hideSymbol = Tools.getProperty(
+		const showPercentageSymbol = Tools.getProperty(
 			options,
 			'gauge',
-			'hideSymbol'
+			'showPercentageSymbol'
 		);
 
 		// circular gauge without delta should have valueNumber centered
@@ -228,13 +228,13 @@ export class Gauge extends Component {
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
 		// Add the big number
-		const valueNumberGroup = hideSymbol ? DOMUtils.appendOrSelect(
+		const valueNumberGroup = showPercentageSymbol ? DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		) : DOMUtils.appendOrSelect(
+		).attr('transform', 'translate(-10, 0)').attr('transform', 'translate(-10, 0)') : DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		).attr('transform', 'translate(-10, 0)').attr('transform', 'translate(-10, 0)'); // Optical centering for the presence of the smaller % symbol
+		); // Optical centering for the presence of the smaller % symbol
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -262,7 +262,7 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		if (!hideSymbol) {
+		if (showPercentageSymbol) {
 			DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
 				.style('font-size', `${valueFontSize(radius) / 2}px`)
 				.attr('x', valueNumberWidth / 2)
@@ -302,6 +302,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const showPercentageSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'showPercentageSymbol'
+		);
+
 		const numbersGroup = DOMUtils.appendOrSelect(svg, 'g.gauge-numbers');
 
 		// Add the smaller number of the delta
@@ -327,7 +333,7 @@ export class Gauge extends Component {
 			.merge(deltaNumber)
 			.attr('text-anchor', 'middle')
 			.style('font-size', `${deltaFontSize(radius)}px`)
-			.text((d) => `${numberFormatter(d)}%`);
+			.text((d) => `${numberFormatter(d)}${showPercentageSymbol ? '%' : ''}`);
 
 		// Add the caret for the delta number
 		const {
