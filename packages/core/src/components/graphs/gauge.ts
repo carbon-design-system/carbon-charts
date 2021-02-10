@@ -221,11 +221,13 @@ export class Gauge extends Component {
 			'g.gauge-numbers'
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
+
+		const fontSize = valueFontSize(radius);
 		// Add the big number
 		const valueNumberGroup = DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		).attr('transform', 'translate(-10, 0)'); // Optical centering for the presence of the smaller % symbol
+		)
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -241,7 +243,7 @@ export class Gauge extends Component {
 			.append('text')
 			.attr('class', 'gauge-value-number')
 			.merge(valueNumber)
-			.style('font-size', `${valueFontSize(radius)}px`)
+			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
 			.text((d) => numberFormatter(d));
 
@@ -253,10 +255,20 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
-			.style('font-size', `${valueFontSize(radius) / 2}px`)
+		const symbolFontSize = fontSize/2;
+		const symbol = DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
+			.style('font-size', `${symbolFontSize}px`)
 			.attr('x', valueNumberWidth / 2)
+			.attr('y', `-${symbolFontSize/2}px` )
 			.text('%');
+
+		const { width: symbolWidth }= DOMUtils.getSVGElementSize(
+			symbol,
+			{ useBBox: true }
+		);
+
+		// move the value group depending on the symbol's drawn size
+		valueNumberGroup.attr('transform', `translate(-${symbolWidth/2}, 0)`); // Optical centering for the presence of the smaller % symbol
 	}
 
 	/**
