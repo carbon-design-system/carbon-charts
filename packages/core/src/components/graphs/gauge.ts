@@ -221,13 +221,12 @@ export class Gauge extends Component {
 			'g.gauge-numbers'
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
-
 		const fontSize = valueFontSize(radius);
 		// Add the big number
 		const valueNumberGroup = DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		)
+		);
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -256,19 +255,22 @@ export class Gauge extends Component {
 		);
 
 		const symbolFontSize = fontSize / 2;
-		const symbol = DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
+		const symbol = DOMUtils.appendOrSelect(
+			valueNumberGroup,
+			'text.gauge-value-symbol'
+		)
 			.style('font-size', `${symbolFontSize}px`)
 			.attr('x', valueNumberWidth / 2)
 			.text('%');
 
-		const { width: symbolWidth, height: symbolHeight } = DOMUtils.getSVGElementSize(
-			symbol,
-			{ useBBox: true }
-		);
+		const {
+			width: symbolWidth,
+			height: symbolHeight,
+		} = DOMUtils.getSVGElementSize(symbol, { useBBox: true });
 
 		// adjust the symbol to superscript using the bbox instead of the font-size cause
 		// we want to align the actual character to the value number
-		symbol.attr('y', `-${symbolHeight / 2}px`)
+		symbol.attr('y', `-${symbolHeight / 2}px`);
 
 		// move the value group depending on the symbol's drawn size
 		valueNumberGroup.attr('transform', `translate(-${symbolWidth / 2}, 0)`); // Optical centering for the presence of the smaller % symbol
