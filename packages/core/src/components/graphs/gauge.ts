@@ -255,20 +255,23 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		const symbolFontSize = fontSize/2;
+		const symbolFontSize = fontSize / 2;
 		const symbol = DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
 			.style('font-size', `${symbolFontSize}px`)
 			.attr('x', valueNumberWidth / 2)
-			.attr('y', `-${symbolFontSize/2}px` )
 			.text('%');
 
-		const { width: symbolWidth }= DOMUtils.getSVGElementSize(
+		const { width: symbolWidth, height: symbolHeight } = DOMUtils.getSVGElementSize(
 			symbol,
 			{ useBBox: true }
 		);
 
+		// adjust the symbol to superscript using the bbox instead of the font-size cause
+		// we want to align the actual character to the value number
+		symbol.attr('y', `-${symbolHeight / 2}px`)
+
 		// move the value group depending on the symbol's drawn size
-		valueNumberGroup.attr('transform', `translate(-${symbolWidth/2}, 0)`); // Optical centering for the presence of the smaller % symbol
+		valueNumberGroup.attr('transform', `translate(-${symbolWidth / 2}, 0)`); // Optical centering for the presence of the smaller % symbol
 	}
 
 	/**

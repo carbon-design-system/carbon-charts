@@ -11,6 +11,11 @@ svg.#{$prefix}--#{$charts-prefix}--chart-svg {
 		fill: $text-02;
 	}
 
+	g.gauge-numbers text.gauge-value-number {
+		font-family: carbon--font-family('sans');
+		font-weight: carbon--font-weight('light');
+	}
+
 	text.meter-title,
 	text.percent-value {
 		font-size: $carbon--base-font-size;
