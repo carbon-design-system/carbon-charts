@@ -463,17 +463,21 @@ export const comboStackedAreaLineOptions = {
 	title: 'Combo (Stacked Area + Line)',
 	axes: {
 		left: {
+			title: "left",
 			stacked: true,
 			mapsTo: 'value',
+			titleOrientation: "right"
 		},
 		bottom: {
 			scaleType: 'time',
 			mapsTo: 'date',
 		},
 		right: {
+			title: "right",
 			scaleType: 'linear',
 			mapsTo: 'temp',
 			correspondingDatasets: ['Temperature'],
+			titleOrientation: "left"
 		},
 	},
 	curve: 'curveMonotoneX',

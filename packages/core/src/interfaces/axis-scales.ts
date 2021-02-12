@@ -1,4 +1,4 @@
-import { ScaleTypes, TickRotations } from './enums';
+import { ScaleTypes, TickRotations, AxisTitleOrientations } from './enums';
 import { AxisDomain } from 'd3';
 import { Locale } from 'date-fns';
 import { ThresholdOptions } from './components';
@@ -43,6 +43,11 @@ export interface AxisOptions {
 	 * optional title for the scales
 	 */
 	title?: string;
+	/**
+	 * Override for the orientation of the title (for vertical axes).
+	 * The title string can be overrided to be rotated left or right.
+	 */
+	titleOrientation?: AxisTitleOrientations
 	/**
 	 * thresholds
 	 * Example:

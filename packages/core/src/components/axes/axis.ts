@@ -374,14 +374,25 @@ export class Axis extends Component {
 				`text.axis-title`
 			).html(isDataEmpty || isDataLoading ? '' : axisOptions.title);
 
+			// vertical axes can have override for title orientation
+			const titleOrientation = Tools.getProperty(axisOptions, "titleOrientation");
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
-					axisTitleRef
+					if(titleOrientation === AxisPositions.RIGHT) {
+						axisTitleRef
+						.attr('transform', 'rotate(90)')
+						.attr('y', 0)
+						.attr('x', scale.range()[0] / 2)
+						.attr('dy', '-0.5em')
+						.style('text-anchor', 'middle');
+					} else {
+						axisTitleRef
 						.attr('transform', 'rotate(-90)')
 						.attr('y', 0)
 						.attr('x', -(scale.range()[0] / 2))
 						.attr('dy', '1em')
 						.style('text-anchor', 'middle');
+					}
 					break;
 				case AxisPositions.BOTTOM:
 					axisTitleRef
@@ -394,12 +405,21 @@ export class Axis extends Component {
 						.style('text-anchor', 'middle');
 					break;
 				case AxisPositions.RIGHT:
-					axisTitleRef
+					if(titleOrientation === AxisPositions.LEFT) {
+						axisTitleRef
+						.attr('transform', 'rotate(-90)')
+						.attr('y', width)
+						.attr('x', -(scale.range()[0] / 2))
+						//.attr('dy', '-1em')
+						.style('text-anchor', 'middle');
+					} else {
+						axisTitleRef
 						.attr('transform', 'rotate(90)')
 						.attr('y', -width)
 						.attr('x', scale.range()[0] / 2)
 						.attr('dy', '1em')
 						.style('text-anchor', 'middle');
+					}
 					break;
 				case AxisPositions.TOP:
 					const { height: titleHeight } = DOMUtils.getSVGElementSize(
