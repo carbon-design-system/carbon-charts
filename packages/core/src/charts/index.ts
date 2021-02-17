@@ -3,6 +3,7 @@ export * from './area-stacked';
 export * from './bar-simple';
 export * from './bar-grouped';
 export * from './bar-stacked';
+export * from './boxplot';
 export * from './bubble';
 export * from './line';
 export * from './lollipop';
