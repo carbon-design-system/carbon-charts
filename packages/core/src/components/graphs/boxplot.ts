@@ -143,7 +143,7 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'top-whisker',
+					originalClassName: 'whisker top',
 				})
 			)
 			.attr('stroke-width', 2)
@@ -162,7 +162,7 @@ export class Boxplot extends Component {
 			);
 
 		allBoxGroups
-			.select('.top-whisker')
+			.select('.whisker.top')
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-topwhisker',
@@ -207,7 +207,7 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'bottom-whisker',
+					originalClassName: 'whisker bottom',
 				})
 			)
 			.attr('stroke-width', 2)
@@ -226,7 +226,7 @@ export class Boxplot extends Component {
 			);
 
 		allBoxGroups
-			.select('.bottom-whisker')
+			.select('.whisker.bottom')
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-bottomwhisker',
@@ -268,6 +268,7 @@ export class Boxplot extends Component {
 			.attr('fill-opacity', 0.3)
 			.attr('cx', (d: any) => mainXScale(d[groupMapsTo]) + gridSize / 2);
 
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		circleData
 			.merge(circleDataEnter)
 			.transition(
@@ -276,13 +277,130 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('cy', (d: any) => mainYScale(d.value));
+			.attr('cy', (d: any) => mainYScale(d[rangeIdentifier]));
 
-		this.addEventListeners();
+		this.addBoxEventListeners();
+		this.addCircleEventListeners();
 	}
 
-	addEventListeners() {
+	addBoxEventListeners() {
 		const self = this;
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		this.parent
+			.selectAll(
+				'line.vertical-line, rect.box, line.whisker, line.median'
+			)
+			.on('mouseover', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement
+					.classed('hovered', true)
+					.attr('fill-opacity', 0.5);
+
+				// Show tooltip for single datapoint
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							label: options.tooltip.groupLabel || 'Group',
+							value: datum[groupMapsTo],
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							}),
+						},
+						{
+							label: 'Minimum',
+							value: datum.whiskers.min,
+						},
+						{
+							label: 'Q1',
+							value: datum.quartiles.q_25,
+						},
+						{
+							label: 'Median',
+							value: datum.quartiles.q_50,
+						},
+						{
+							label: 'Q3',
+							value: datum.quartiles.q_75,
+						},
+						{
+							label: 'Maximum',
+							value: datum.whiskers.max,
+						},
+						{
+							label: 'IQR',
+							value: datum.quartiles.q_75 - datum.quartiles.q_25,
+						},
+					],
+				});
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+			})
+			.on('mousemove', function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			})
+			.on('click', function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_CLICK,
+					{
+						element: select(this),
+						datum,
+					}
+				);
+			})
+			.on('mouseout', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement
+					.classed('hovered', false)
+					.attr('fill-opacity', 0.3);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Hide tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
+			});
+	}
+
+	addCircleEventListeners() {
+		const self = this;
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		this.parent
 			.selectAll('circle')
@@ -297,7 +415,19 @@ export class Boxplot extends Component {
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: [datum],
+					items: [
+						{
+							label: options.tooltip.groupLabel || 'Group',
+							value: datum[groupMapsTo],
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							}),
+						},
+						{
+							label: 'Outlier',
+							value: datum[rangeIdentifier],
+						},
+					],
 				});
 
 				// Dispatch mouse event
