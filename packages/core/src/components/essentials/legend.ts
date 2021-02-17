@@ -132,18 +132,18 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const extraLabels = Tools.getProperty(this.configs, 'extraLabels');
+		const additionalLabels = Tools.getProperty(this.configs, 'additionalLabels');
 
 		// Add extra labels
-		if (extraLabels && dataGroups.length) {
+		if (additionalLabels && dataGroups.length) {
 			const extraLabelItems = svg
-				.selectAll('g.extra-label')
-				.data(extraLabels);
+				.selectAll('g.additional-label')
+				.data(additionalLabels);
 
 			const addedExtraLabelItems = extraLabelItems
 				.enter()
 				.append('g')
-				.classed('extra-label', true);
+				.classed('additional-label', true);
 
 			addedExtraLabelItems
 				.append('g')
@@ -379,7 +379,7 @@ export class Legend extends Component {
 		// add extra label items
 		if (addedExtraLabelItems) {
 			addedExtraLabelItems
-				.merge(svg.selectAll('g.extra-label'))
+				.merge(svg.selectAll('g.additional-label'))
 				.each(function (d) {
 					const radiusLabelItem = select(this);
 					if (legendOrientation === LegendOrientations.VERTICAL) {

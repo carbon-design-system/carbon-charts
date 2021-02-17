@@ -93,8 +93,8 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 			];
 
-			if (e.detail.additionalItems) {
-				e.detail.additionalItems.forEach((additionalItem) =>
+			if (e.detail.additionalLabels) {
+				e.detail.additionalLabels.forEach((additionalItem) =>
 					items.push({
 						label: additionalItem.label,
 						value: additionalItem.value,

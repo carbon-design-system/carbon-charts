@@ -24,7 +24,7 @@ import {
 import { Tools } from './tools';
 
 import { CartesianScales, Curves, Zoom } from './services';
-import { legend as LegendConfig } from './configuration-non-customizable';
+import { bubble as bubbleConfig } from './configuration-non-customizable';
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -112,32 +112,20 @@ export class AxisChart extends Chart {
 		};
 
 		// Add extra legend items
-		const extraLabels = [];
 		const radiusLabel = Tools.getProperty(options, 'bubble', 'radiusLabel');
-		if (radiusLabel) {
-			const outerRadius = Tools.getProperty(
-				LegendConfig,
-				'checkbox',
-				'radius'
-			);
-			const innerRadius = outerRadius - 3;
-
-			extraLabels.push({
-				type: 'radius-label',
-				icon: `<svg width="16px" height="16px" viewBox="0 0 16 16">
-							<g fill="none" fill-rule="evenodd">
-								<circle cx="7" cy="7" r=${outerRadius}></circle>
-								<circle cx="7" cy="10" r=${innerRadius}></circle>
-							</g>
-						</svg>`,
-				text: radiusLabel,
-			});
-		}
+		const additionalLabels = radiusLabel
+			? [
+					{
+						...bubbleConfig.radiusLabel,
+						text: radiusLabel,
+					},
+			  ]
+			: [];
 
 		const legendComponent = {
 			id: 'legend',
 			components: [
-				new Legend(this.model, this.services, { extraLabels }),
+				new Legend(this.model, this.services, { additionalLabels }),
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
