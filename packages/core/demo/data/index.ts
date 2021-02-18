@@ -402,6 +402,11 @@ let allDemoGroups = [
 				data: boxplotDemos.simpleBoxplotData,
 				chartType: chartTypes.BoxplotChart,
 			},
+			{
+				options: boxplotDemos.simpleVerticalBoxplotOptions,
+				data: boxplotDemos.simpleVerticalBoxplotData,
+				chartType: chartTypes.BoxplotChart,
+			},
 		],
 	},
 	{

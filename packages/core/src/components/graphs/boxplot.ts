@@ -1,6 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
-import { ColorClassNameTypes, Events } from '../../interfaces';
+import {
+	CartesianOrientations,
+	ColorClassNameTypes,
+	Events,
+	Roles,
+} from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -30,7 +36,23 @@ export class Boxplot extends Component {
 			return;
 		}
 
-		const gridSize = Math.floor(width / dataGroupNames.length);
+		// Get orientation of the chart
+		const { cartesianScales } = this.services;
+		const orientation = cartesianScales.getOrientation();
+		const isInVerticalOrientation =
+			orientation === CartesianOrientations.VERTICAL;
+		const [
+			getXValue,
+			getYValue,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
+			(d, i?) => this.services.cartesianScales.getDomainValue(d, i),
+			(d, i?) => this.services.cartesianScales.getRangeValue(d, i),
+			orientation
+		);
+
+		const gridSize = Math.floor(
+			(isInVerticalOrientation ? width : height) / dataGroupNames.length
+		);
 		const boxWidth = Math.min(gridSize / 2, 16);
 		const boxStrokeWidth = '1';
 
@@ -54,7 +76,8 @@ export class Boxplot extends Component {
 		 */
 		// Start range line
 		boxGroupsEnter
-			.append('line')
+			.append('path')
+			.merge(boxGroups.select('path.vertical-line.start'))
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
@@ -63,20 +86,29 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', boxStrokeWidth)
 			.attr('fill', 'none')
-			.attr('x1', (d) => mainXScale(d[groupMapsTo]) + gridSize / 2)
-			.attr('x2', (d) => mainXScale(d[groupMapsTo]) + gridSize / 2)
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-verticalstartline',
 					animate
 				)
 			)
-			.attr('y1', (d) => mainYScale(d.whiskers.min))
-			.attr('y2', (d) => mainYScale(d.quartiles.q_25));
+
+			.attr('d', (d, i) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
+				const x1 = x0;
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
+				const y1 = cartesianScales.getRangeValue(d.quartiles.q_25);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		// End range line
 		boxGroupsEnter
-			.append('line')
+			.append('path')
+			.merge(boxGroups.select('path.vertical-line.end'))
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
@@ -85,16 +117,23 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', boxStrokeWidth)
 			.attr('fill', 'none')
-			.attr('x1', (d) => mainXScale(d[groupMapsTo]) + gridSize / 2)
-			.attr('x2', (d) => mainXScale(d[groupMapsTo]) + gridSize / 2)
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-verticalendline',
 					animate
 				)
 			)
-			.attr('y1', (d) => mainYScale(d.whiskers.max))
-			.attr('y2', (d) => mainYScale(d.quartiles.q_75));
+			.attr('d', (d, i) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
+				const x1 = x0;
+				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
+				const y1 = cartesianScales.getRangeValue(d.quartiles.q_75);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		// The offset needed to center boxes on each group
 		const offset = gridSize / 2 - boxWidth / 2;
@@ -103,8 +142,8 @@ export class Boxplot extends Component {
 		 * Draw out and update the boxes
 		 */
 		boxGroupsEnter
-			.append('rect')
-			.attr('width', boxWidth)
+			.append('path')
+			.merge(boxGroups.select('path.box'))
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [
@@ -116,67 +155,100 @@ export class Boxplot extends Component {
 			)
 			.attr('fill-opacity', 0.3)
 			.attr('stroke-width', boxStrokeWidth)
-			.attr('x', (d) => mainXScale(d[groupMapsTo]) + offset);
-
-		allBoxGroups
-			.select('.box')
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'box')
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-quartiles',
 					animate
 				)
 			)
-			.attr('height', (d) =>
-				Math.abs(
-					mainYScale(d.quartiles.q_75) - mainYScale(d.quartiles.q_25)
-				)
-			)
-			.attr('y', (d) =>
-				mainYScale(Math.max(d.quartiles.q_75, d.quartiles.q_25))
-			);
+			.attr('d', (d, i) => {
+				const x0 =
+					cartesianScales.getDomainValue(d[groupMapsTo]) -
+					boxWidth / 2;
+				const x1 = x0 + boxWidth;
+				const y0 = cartesianScales.getRangeValue(
+					Math[isInVerticalOrientation ? 'max' : 'min'](
+						d.quartiles.q_75,
+						d.quartiles.q_25
+					)
+				);
+				const y1 =
+					y0 +
+					Math.abs(
+						cartesianScales.getRangeValue(d.quartiles.q_75) -
+							cartesianScales.getRangeValue(d.quartiles.q_25)
+					);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
+
+		/*
+		 * Draw out and update highlight areas
+		 */
+		boxGroupsEnter
+			.append('path')
+			.merge(boxGroups.select('path.highlight-area'))
+			.attr('class', 'highlight-area')
+			.attr('opacity', 0)
+			.attr('d', (d, i) => {
+				const x0 =
+					cartesianScales.getDomainValue(d[groupMapsTo]) -
+					boxWidth / 2;
+				const x1 = x0 + boxWidth;
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
+				const y1 = cartesianScales.getRangeValue(d.whiskers.max);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		/*
 		 * Draw out and update the top whisker
 		 */
 		boxGroupsEnter
-			.append('line')
+			.append('path')
+			.merge(boxGroups.select('path.whisker.start'))
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'whisker top',
+					originalClassName: 'whisker start',
 				})
 			)
 			.attr('stroke-width', 2)
 			.attr('fill', 'none')
-			.attr(
-				'x1',
-				(d) => mainXScale(d[groupMapsTo]) + offset + boxWidth / 4
-			)
-			.attr(
-				'x2',
-				(d) =>
-					mainXScale(d[groupMapsTo]) +
-					offset +
-					boxWidth -
-					boxWidth / 4
-			);
-
-		allBoxGroups
-			.select('.whisker.top')
 			.transition(
 				this.services.transitions.getTransition(
-					'boxplot-update-topwhisker',
+					'boxplot-update-startingwhisker',
 					animate
 				)
 			)
-			.attr('y1', (d) => mainYScale(d.whiskers.min))
-			.attr('y2', (d) => mainYScale(d.whiskers.min));
+			.attr('d', (d, i) => {
+				const x0 =
+					cartesianScales.getDomainValue(d[groupMapsTo]) -
+					boxWidth / 4;
+				const x1 = x0 + boxWidth / 2;
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
+				const y1 = cartesianScales.getRangeValue(d.whiskers.min);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		/*
 		 * Draw out and update the median line
 		 */
 		boxGroupsEnter
-			.append('line')
+			.append('path')
+			.merge(boxGroups.select('path.median'))
 			.attr('fill', 'none')
 			.attr('class', () =>
 				this.model.getColorClassName({
@@ -185,61 +257,64 @@ export class Boxplot extends Component {
 				})
 			)
 			.attr('stroke-width', 2)
-			.attr('x1', (d) => mainXScale(d[groupMapsTo]) + offset)
-			.attr('x2', (d) => mainXScale(d[groupMapsTo]) + offset + boxWidth);
-
-		allBoxGroups
-			.select('.median')
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-median',
 					animate
 				)
 			)
-			.attr('y1', (d) => mainYScale(d.quartiles.q_50))
-			.attr('y2', (d) => mainYScale(d.quartiles.q_50));
+			.attr('d', (d, i) => {
+				const x0 =
+					cartesianScales.getDomainValue(d[groupMapsTo]) -
+					boxWidth / 2;
+				const x1 = x0 + boxWidth;
+				const y0 = cartesianScales.getRangeValue(d.quartiles.q_50);
+				const y1 = y0;
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		/*
 		 * Draw out and update the bottom whisker
 		 */
 		boxGroupsEnter
-			.append('line')
+			.append('path')
+			.merge(boxGroups.select('path.whisker.end'))
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'whisker bottom',
+					originalClassName: 'whisker end',
 				})
 			)
 			.attr('stroke-width', 2)
 			.attr('fill', 'none')
-			.attr(
-				'x1',
-				(d) => mainXScale(d[groupMapsTo]) + offset + boxWidth / 4
-			)
-			.attr(
-				'x2',
-				(d) =>
-					mainXScale(d[groupMapsTo]) +
-					offset +
-					boxWidth -
-					boxWidth / 4
-			);
-
-		allBoxGroups
-			.select('.whisker.bottom')
 			.transition(
 				this.services.transitions.getTransition(
-					'boxplot-update-bottomwhisker',
+					'boxplot-update-endingwhisker',
 					animate
 				)
 			)
-			.attr('y1', (d) => mainYScale(d.whiskers.max))
-			.attr('y2', (d) => mainYScale(d.whiskers.max));
+			.attr('d', (d, i) => {
+				const x0 =
+					cartesianScales.getDomainValue(d[groupMapsTo]) -
+					boxWidth / 4;
+				const x1 = x0 + boxWidth / 2;
+				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
+				const y1 = cartesianScales.getRangeValue(d.whiskers.max);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					orientation
+				);
+			});
 
 		/*
 		 * Draw out and update the outlier circles
 		 */
-		const circleData = allBoxGroups.selectAll('circle.outlier').data((d) =>
+		const circles = allBoxGroups.selectAll('circle.outlier').data((d) =>
 			d.outliers.map((outlier) => {
 				return {
 					min: d.whiskers.min,
@@ -250,11 +325,13 @@ export class Boxplot extends Component {
 			})
 		);
 
-		circleData.exit().remove();
+		circles.exit().remove();
 
-		const circleDataEnter = circleData
-			.enter()
-			.append('circle')
+		const circlesEnter = circles.enter().append('circle');
+
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		circles
+			.merge(circlesEnter)
 			.attr('r', 4)
 			.attr('class', () =>
 				this.model.getColorClassName({
@@ -266,18 +343,14 @@ export class Boxplot extends Component {
 				})
 			)
 			.attr('fill-opacity', 0.3)
-			.attr('cx', (d: any) => mainXScale(d[groupMapsTo]) + gridSize / 2);
-
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		circleData
-			.merge(circleDataEnter)
+			.attr('cx', getXValue)
 			.transition(
 				this.services.transitions.getTransition(
 					'boxplot-update-circles',
 					animate
 				)
 			)
-			.attr('cy', (d: any) => mainYScale(d[rangeIdentifier]));
+			.attr('cy', getYValue);
 
 		this.addBoxEventListeners();
 		this.addCircleEventListeners();
@@ -289,15 +362,13 @@ export class Boxplot extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
 		this.parent
-			.selectAll(
-				'line.vertical-line, rect.box, line.whisker, line.median'
-			)
+			.selectAll('path.highlight-area')
 			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement
+				const parentElement = select(this.parentNode);
+				parentElement
+					.select('path.box')
 					.classed('hovered', true)
 					.attr('fill-opacity', 0.5);
 
@@ -374,7 +445,9 @@ export class Boxplot extends Component {
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement
+				const parentElement = select(this.parentNode);
+				parentElement
+					.select('path.box')
 					.classed('hovered', false)
 					.attr('fill-opacity', 0.3);
 

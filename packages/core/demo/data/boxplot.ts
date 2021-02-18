@@ -22,7 +22,21 @@ export const simpleBoxplotData = [
 ];
 
 export const simpleBoxplotOptions = {
-	title: 'Simple box plot (mock data)',
+	title: 'Simple horizontal box plot (mock data)',
+	axes: {
+		bottom: {
+			mapsTo: 'value',
+		},
+		left: {
+			scaleType: 'labels',
+			mapsTo: 'group',
+		},
+	},
+};
+export const simpleVerticalBoxplotData = simpleBoxplotData;
+
+export const simpleVerticalBoxplotOptions = {
+	title: 'Simple vertical box plot (mock data)',
 	axes: {
 		left: {
 			mapsTo: 'value',
