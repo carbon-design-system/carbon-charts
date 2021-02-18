@@ -113,7 +113,7 @@ export class AxisChart extends Chart {
 
 		// Add extra legend items
 		const radiusLabel = Tools.getProperty(options, 'bubble', 'radiusLabel');
-		const additionalLabels = radiusLabel
+		const additionalItems = radiusLabel
 			? [
 					{
 						...bubbleConfig.radiusLabel,
@@ -125,7 +125,7 @@ export class AxisChart extends Chart {
 		const legendComponent = {
 			id: 'legend',
 			components: [
-				new Legend(this.model, this.services, { additionalLabels }),
+				new Legend(this.model, this.services, { additionalItems }),
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,

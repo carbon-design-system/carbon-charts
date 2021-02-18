@@ -132,13 +132,13 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const additionalLabels = Tools.getProperty(this.configs, 'additionalLabels');
+		const additionalItems = Tools.getProperty(this.configs, 'additionalItems');
 
 		// Add extra labels
-		if (additionalLabels && dataGroups.length) {
+		if (additionalItems && dataGroups.length) {
 			const extraLabelItems = svg
 				.selectAll('g.additional-label')
-				.data(additionalLabels);
+				.data(additionalItems);
 
 			const addedExtraLabelItems = extraLabelItems
 				.enter()

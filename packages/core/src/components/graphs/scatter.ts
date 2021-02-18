@@ -374,7 +374,7 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
-					additionalLabels: [
+					additionalItems: [
 						{
 							label: Tools.getProperty(
 								bubbleOptions,
