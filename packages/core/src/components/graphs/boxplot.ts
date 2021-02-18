@@ -210,7 +210,7 @@ export class Boxplot extends Component {
 			});
 
 		/*
-		 * Draw out and update the top whisker
+		 * Draw out and update the starting whisker
 		 */
 		boxGroupsEnter
 			.append('path')
@@ -278,7 +278,7 @@ export class Boxplot extends Component {
 			});
 
 		/*
-		 * Draw out and update the bottom whisker
+		 * Draw out and update the ending whisker
 		 */
 		boxGroupsEnter
 			.append('path')
@@ -412,7 +412,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEOVER,
+					Events.Boxplot.BOX_MOUSEOVER,
 					{
 						element: hoveredElement,
 						datum,
@@ -424,7 +424,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEMOVE,
+					Events.Boxplot.BOX_MOUSEMOVE,
 					{
 						element: hoveredElement,
 						datum,
@@ -435,13 +435,10 @@ export class Boxplot extends Component {
 			})
 			.on('click', function (datum) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_CLICK,
-					{
-						element: select(this),
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
+					element: select(this),
+					datum,
+				});
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
@@ -453,7 +450,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEOUT,
+					Events.Boxplot.BOX_MOUSEOUT,
 					{
 						element: hoveredElement,
 						datum,
@@ -505,7 +502,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEOVER,
+					Events.Boxplot.OUTLIER_MOUSEOVER,
 					{
 						element: hoveredElement,
 						datum,
@@ -517,7 +514,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEMOVE,
+					Events.Boxplot.OUTLIER_MOUSEMOVE,
 					{
 						element: hoveredElement,
 						datum,
@@ -529,7 +526,7 @@ export class Boxplot extends Component {
 			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_CLICK,
+					Events.Boxplot.OUTLIER_CLICK,
 					{
 						element: select(this),
 						datum,
@@ -544,7 +541,7 @@ export class Boxplot extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Scatter.SCATTER_MOUSEOUT,
+					Events.Boxplot.OUTLIER_MOUSEOUT,
 					{
 						element: hoveredElement,
 						datum,
