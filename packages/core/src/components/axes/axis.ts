@@ -382,23 +382,26 @@ export class Axis extends Component {
 			).html(isDataEmpty || isDataLoading ? '' : axisOptions.title);
 
 			// vertical axes can have override for title orientation
-			const titleOrientation = Tools.getProperty(axisOptions, "titleOrientation");
+			const titleOrientation = Tools.getProperty(
+				axisOptions,
+				'titleOrientation'
+			);
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
-					if(titleOrientation === AxisPositions.RIGHT) {
+					if (titleOrientation === AxisPositions.RIGHT) {
 						axisTitleRef
-						.attr('transform', 'rotate(90)')
-						.attr('y', 0)
-						.attr('x', scale.range()[0] / 2)
-						.attr('dy', '-0.5em')
-						.style('text-anchor', 'middle');
+							.attr('transform', 'rotate(90)')
+							.attr('y', 0)
+							.attr('x', scale.range()[0] / 2)
+							.attr('dy', '-0.5em')
+							.style('text-anchor', 'middle');
 					} else {
 						axisTitleRef
-						.attr('transform', 'rotate(-90)')
-						.attr('y', 0)
-						.attr('x', -(scale.range()[0] / 2))
-						.attr('dy', '1em')
-						.style('text-anchor', 'middle');
+							.attr('transform', 'rotate(-90)')
+							.attr('y', 0)
+							.attr('x', -(scale.range()[0] / 2))
+							.attr('dy', '1em')
+							.style('text-anchor', 'middle');
 					}
 					break;
 				case AxisPositions.BOTTOM:
@@ -412,20 +415,19 @@ export class Axis extends Component {
 						.style('text-anchor', 'middle');
 					break;
 				case AxisPositions.RIGHT:
-					if(titleOrientation === AxisPositions.LEFT) {
+					if (titleOrientation === AxisPositions.LEFT) {
 						axisTitleRef
-						.attr('transform', 'rotate(-90)')
-						.attr('y', width)
-						.attr('x', -(scale.range()[0] / 2))
-						//.attr('dy', '-1em')
-						.style('text-anchor', 'middle');
+							.attr('transform', 'rotate(-90)')
+							.attr('y', width)
+							.attr('x', -(scale.range()[0] / 2))
+							.style('text-anchor', 'middle');
 					} else {
 						axisTitleRef
-						.attr('transform', 'rotate(90)')
-						.attr('y', -width)
-						.attr('x', scale.range()[0] / 2)
-						.attr('dy', '1em')
-						.style('text-anchor', 'middle');
+							.attr('transform', 'rotate(90)')
+							.attr('y', -width)
+							.attr('x', scale.range()[0] / 2)
+							.attr('dy', '1em')
+							.style('text-anchor', 'middle');
 					}
 					break;
 				case AxisPositions.TOP:

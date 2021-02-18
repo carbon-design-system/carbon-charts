@@ -47,7 +47,7 @@ export interface AxisOptions {
 	 * Override for the orientation of the title (for vertical axes).
 	 * The title string can be overrided to be rotated left or right.
 	 */
-	titleOrientation?: AxisTitleOrientations
+	titleOrientation?: AxisTitleOrientations;
 	/**
 	 * thresholds
 	 * Example:

@@ -206,6 +206,6 @@ export enum ToolbarControlTypes {
  * enum of title orientations for _vertical axes_
  */
 export enum AxisTitleOrientations {
-	LEFT = "left",
-	RIGHT = "right"
+	LEFT = 'left',
+	RIGHT = 'right',
 }
