@@ -273,12 +273,19 @@ export class Axis extends Component {
 			const timeInterval = computeTimeIntervalName(axis.tickValues());
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
-					formatTick(t, i, timeInterval, timeScaleOptions);
+					formatTick(
+						t,
+						i,
+						axis.tickValues(),
+						timeInterval,
+						timeScaleOptions
+					);
 			} else {
 				formatter = (t: number, i: number) => {
 					const defaultFormattedValue = formatTick(
 						t,
 						i,
+						axis.tickValues(),
 						timeInterval,
 						timeScaleOptions
 					);
@@ -442,8 +449,14 @@ export class Axis extends Component {
 				.data(axis.tickValues(), scale)
 				.order()
 				.select('text');
-			ticks.style('font-weight', (tickValue: number, i: number) => {
-				return isTickPrimary(tickValue, i, timeInterval, showDayName)
+			ticks.style('font-weight', (tick: number, i: number) => {
+				return isTickPrimary(
+					tick,
+					i,
+					axis.tickValues(),
+					timeInterval,
+					showDayName
+				)
 					? 'bold'
 					: 'normal';
 			});
