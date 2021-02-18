@@ -101,7 +101,7 @@
 					<div class="tsd-signature tsd-kind-icon">TIME_<wbr>INTERVALS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[[&#x27;15seconds&#x27;, 15 * 1000],[&#x27;minute&#x27;, 60 * 1000],[&#x27;30minutes&#x27;, 30 * 60 * 1000],[&#x27;hourly&#x27;, 60 * 60 * 1000],[&#x27;daily&#x27;, 24 * 60 * 60 * 1000],[&#x27;monthly&#x27;, 30 * 24 * 60 * 60 * 1000],[&#x27;quarterly&#x27;, 3 * 30 * 24 * 60 * 60 * 1000],[&#x27;yearly&#x27;, 12 * 30 * 24 * 60 * 60 * 1000],]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L8">services/time-series.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L8">services/time-series.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L126">services/time-series.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L130">services/time-series.ts:130</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,7 +141,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L141">services/time-series.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L145">services/time-series.ts:145</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -158,13 +158,13 @@
 					<a name="formattick" class="tsd-anchor"></a>
 					<h3>format<wbr>Tick</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">format<wbr>Tick<span class="tsd-signature-symbol">(</span>tick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, timeScaleOptions<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_axis_scales_.timescaleoptions.html" class="tsd-signature-type">TimeScaleOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">format<wbr>Tick<span class="tsd-signature-symbol">(</span>tick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, allTicks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span>, interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, timeScaleOptions<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_axis_scales_.timescaleoptions.html" class="tsd-signature-type">TimeScaleOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L81">services/time-series.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L84">services/time-series.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -174,6 +174,9 @@
 								</li>
 								<li>
 									<h5>i: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>allTicks: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>interval: <span class="tsd-signature-type">string</span></h5>
@@ -196,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L118">services/time-series.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L122">services/time-series.ts:122</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -219,7 +222,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L106">services/time-series.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L110">services/time-series.ts:110</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -259,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L152">services/time-series.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L156">services/time-series.ts:156</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -276,19 +279,22 @@
 					<a name="ismonthchanged" class="tsd-anchor"></a>
 					<h3>is<wbr>Month<wbr>Changed</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Month<wbr>Changed<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Month<wbr>Changed<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, previousTimestamp<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L158">services/time-series.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L162">services/time-series.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>timestamp: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> previousTimestamp: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -299,13 +305,13 @@
 					<a name="istickprimary" class="tsd-anchor"></a>
 					<h3>is<wbr>Tick<wbr>Primary</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Tick<wbr>Primary<span class="tsd-signature-symbol">(</span>tick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, showDayName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Tick<wbr>Primary<span class="tsd-signature-symbol">(</span>tick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, allTicks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span>, interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, showDayName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L20">services/time-series.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L20">services/time-series.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -315,6 +321,9 @@
 								</li>
 								<li>
 									<h5>i: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>allTicks: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>interval: <span class="tsd-signature-type">string</span></h5>
@@ -337,7 +346,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/da791859/packages/core/src/services/time-series.ts#L164">services/time-series.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/dfa9f9db/packages/core/src/services/time-series.ts#L172">services/time-series.ts:172</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
