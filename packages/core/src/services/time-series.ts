@@ -20,47 +20,50 @@ export const TIME_INTERVALS = [
 export function isTickPrimary(
 	tick: number,
 	i: number,
+	allTicks: Array<number>,
 	interval: string,
 	showDayName: boolean
 ): boolean {
 	const isFirstTick = i === 0;
 	const hasANewWeekStarted = Number(format(new Date(tick), 'c')) === 2;
 	const isFirstQuarter = Number(format(new Date(tick), 'q')) === 1;
-
+	const previousTick = i !== 0 ? allTicks[i - 1] : null;
 	switch (interval) {
 		case '15seconds':
 			return (
 				isFirstTick ||
 				isDayOfMonthChanged(tick) ||
-				isMonthChanged(tick) ||
+				isMonthChanged(tick, previousTick) ||
 				isYearChanged(tick)
 			);
 		case 'minute':
 			return (
 				isFirstTick ||
 				isDayOfMonthChanged(tick) ||
-				isMonthChanged(tick) ||
+				isMonthChanged(tick, previousTick) ||
 				isYearChanged(tick)
 			);
 		case '30minutes':
 			return (
 				isFirstTick ||
 				isDayOfMonthChanged(tick) ||
-				isMonthChanged(tick) ||
+				isMonthChanged(tick, previousTick) ||
 				isYearChanged(tick)
 			);
 		case 'hourly':
 			return (
 				isFirstTick ||
 				isDayOfMonthChanged(tick) ||
-				isMonthChanged(tick) ||
+				isMonthChanged(tick, previousTick) ||
 				isYearChanged(tick)
 			);
 		case 'daily':
 			if (!showDayName) {
 				// daily
 				return (
-					isFirstTick || isMonthChanged(tick) || isYearChanged(tick)
+					isFirstTick ||
+					isMonthChanged(tick, previousTick) ||
+					isYearChanged(tick)
 				);
 			} else {
 				// weekly
@@ -81,6 +84,7 @@ export function isTickPrimary(
 export function formatTick(
 	tick: number,
 	i: number,
+	allTicks: Array<number>,
 	interval: string,
 	timeScaleOptions: TimeScaleOptions
 ): string {
@@ -93,7 +97,7 @@ export function formatTick(
 	];
 	const primary = Tools.getProperty(formats, 'primary');
 	const secondary = Tools.getProperty(formats, 'secondary');
-	const formatString = isTickPrimary(tick, i, interval, showDayName)
+	const formatString = isTickPrimary(tick, i, allTicks, interval, showDayName)
 		? primary
 		: secondary;
 	const locale = timeScaleOptions.localeObject;
@@ -154,10 +158,14 @@ function isDayOfMonthChanged(timestamp: number): boolean {
 	return H === 0 && m === 0 && s === 0;
 }
 
-// Return true if the month (M = 1-12) is changed, false otherwise
-function isMonthChanged(timestamp: number): boolean {
-	const { d, s, m, H } = getTimeformats(timestamp);
-	return d === 1 && H === 0 && m === 0 && s === 0;
+// Return true if the month (M = 1-12) is changed from previous tick's timestamp, false otherwise
+function isMonthChanged(
+	timestamp: number,
+	previousTimestamp?: number
+): boolean {
+	const currentMonth = getTimeformats(timestamp).M;
+	const previousMonth = getTimeformats(previousTimestamp).M;
+	return currentMonth !== previousMonth;
 }
 
 // Return true if the year (YYYY) is changed, false otherwise
