@@ -934,6 +934,12 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
+				options: comboDemos.comboAreaLineTimeSeriesOptions,
+				data: comboDemos.comboAreaLineTimeSeriesData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
 				options: comboDemos.comboEmptyOptions,
 				data: comboDemos.comboEmptyData,
 				chartType: chartTypes.ComboChart,
