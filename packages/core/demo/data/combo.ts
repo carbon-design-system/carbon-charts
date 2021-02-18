@@ -497,3 +497,62 @@ export const comboStackedAreaLineOptions = {
 		},
 	],
 };
+
+export const comboAreaLineTimeSeriesData = [
+	{ group: 'Health', key: new Date(2018, 11, 30), value: 312 },
+	{ group: 'Health', key: new Date(2019, 0, 6), value: 232 },
+	{ group: 'Health', key: new Date(2019, 0, 8), value: 432 },
+	{ group: 'Health', key: new Date(2019, 0, 15), value: 712 },
+	{ group: 'Health', key: new Date(2019, 0, 19), value: 834 },
+	{ group: 'Health', key: new Date(2019, 1, 1), value: 800 },
+	{ group: 'Health', key: new Date(2019, 1, 5), value: 612 },
+	{ group: 'Health', key: new Date(2019, 1, 13), value: 442 },
+	{ group: 'Temperature', key: new Date(2019, 0, 1), temp: -20 },
+	{ group: 'Temperature', key: new Date(2019, 0, 5), temp: -12 },
+	{ group: 'Temperature', key: new Date(2019, 0, 8), temp: 3 },
+	{ group: 'Temperature', key: new Date(2019, 0, 13), temp: 18 },
+	{ group: 'Temperature', key: new Date(2019, 0, 19), temp: 24 },
+	{ group: 'Temperature', key: new Date(2019, 1, 2), temp: 34 },
+	{ group: 'Temperature', key: new Date(2019, 1, 7), temp: 37 },
+	{ group: 'Temperature', key: new Date(2019, 1, 9), temp: 30 },
+];
+
+export const comboAreaLineTimeSeriesOptions = {
+	experimental: true,
+	title: 'Combo (Line + Area) Time series',
+	points: {
+		enabled: false,
+	},
+	axes: {
+		left: {
+			title: 'Score',
+			mapsTo: 'value',
+		},
+		bottom: {
+			scaleType: 'time',
+			mapsTo: 'key',
+		},
+		right: {
+			title: 'Temperature (°C)',
+			mapsTo: 'temp',
+			correspondingDatasets: ['Temperature'],
+		},
+	},
+	comboChartTypes: [
+		{
+			type: 'area',
+			options: {},
+			correspondingDatasets: ['Health'],
+		},
+		{
+			type: 'line',
+			options: {
+				points: {
+					enabled: true,
+				},
+			},
+			correspondingDatasets: ['Temperature'],
+		},
+	],
+	curve: 'curveNatural',
+};
