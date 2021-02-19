@@ -336,6 +336,7 @@ export class Gauge extends Component {
 			deltaGroup,
 			'text.gauge-delta-number'
 		);
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
 
 		deltaNumber.data(delta === null ? [] : [delta]);
 
@@ -346,7 +347,7 @@ export class Gauge extends Component {
 			.merge(deltaNumber)
 			.attr('text-anchor', 'middle')
 			.style('font-size', `${deltaFontSize(radius)}px`)
-			.text((d) => `${numberFormatter(d)}${showPercentageSymbol ? '%' : ''}`);
+			.text((d) => `${numberFormatter(d)}${gaugeSymbol}`);
 
 		// Add the caret for the delta number
 		const {
