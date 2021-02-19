@@ -1,12 +1,12 @@
-import { Tooltip } from "./tooltip";
+import { Tooltip } from './tooltip';
 import {
 	AxisPositions,
 	ScaleTypes,
-	ColorClassNameTypes
-} from "../../interfaces";
-import { Tools } from "../../tools";
+	ColorClassNameTypes,
+} from '../../interfaces';
+import { Tools } from '../../tools';
 
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
@@ -34,9 +34,9 @@ export class AxisChartsTooltip extends Tooltip {
 				domainAxisPosition === AxisPositions.BOTTOM ||
 				domainAxisPosition === AxisPositions.TOP
 			) {
-				domainLabel = "x-value";
+				domainLabel = 'x-value';
 			} else {
-				domainLabel = "y-value";
+				domainLabel = 'y-value';
 			}
 		}
 
@@ -44,7 +44,7 @@ export class AxisChartsTooltip extends Tooltip {
 		if (domainAxisScaleType === ScaleTypes.TIME) {
 			domainValue = format(
 				new Date(data[0][domainIdentifier]),
-				"MMM d, yyyy"
+				'MMM d, yyyy'
 			);
 		} else if (domainAxisScaleType === ScaleTypes.LINEAR) {
 			domainValue = domainValue.toLocaleString();
@@ -53,9 +53,13 @@ export class AxisChartsTooltip extends Tooltip {
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
-			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({datum});
+			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({
+				datum,
+			});
 			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
-			const rangeAxisOptions = cartesianScales.getAxisOptions(rangeAxisPosition);
+			const rangeAxisOptions = cartesianScales.getAxisOptions(
+				rangeAxisPosition
+			);
 
 			let rangeLabel = rangeAxisOptions.title;
 			if (!rangeLabel) {
@@ -63,59 +67,64 @@ export class AxisChartsTooltip extends Tooltip {
 					rangeAxisPosition === AxisPositions.LEFT ||
 					rangeAxisPosition === AxisPositions.RIGHT
 				) {
-					rangeLabel = "y-value";
+					rangeLabel = 'y-value';
 				} else {
-					rangeLabel = "x-value";
+					rangeLabel = 'x-value';
 				}
 			}
 
 			items = [
 				{
 					label: domainLabel,
-					value: domainValue
+					value: domainValue,
 				},
 				{
 					label: rangeLabel,
-					value: datum[rangeIdentifier]
+					value: datum[rangeIdentifier],
 				},
 				{
-					label: options.tooltip.groupLabel || "Group",
+					label: options.tooltip.groupLabel || 'Group',
 					value: datum[groupMapsTo],
 					color: this.model.getFillColor(datum[groupMapsTo]),
 					class: this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.TOOLTIP],
-						dataGroupName: datum[groupMapsTo]
-					})
-				}
+						dataGroupName: datum[groupMapsTo],
+					}),
+				},
 			];
 		} else if (data.length > 1) {
 			items = [
 				{
 					label: domainLabel,
-					value: this.valueFormatter(domainValue)
-				}
+					value: this.valueFormatter(domainValue),
+				},
 			];
 
 			items = items.concat(
 				data
 					.map((datum) => ({
 						label: datum[groupMapsTo],
-						value: this.valueFormatter(datum[cartesianScales.getRangeIdentifier(datum)]),
+						value: this.valueFormatter(
+							datum[cartesianScales.getRangeIdentifier(datum)]
+						),
 						color: this.model.getFillColor(datum[groupMapsTo]),
 						class: this.model.getColorClassName({
 							classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							dataGroupName: datum[groupMapsTo]
-						})
+							dataGroupName: datum[groupMapsTo],
+						}),
 					}))
 					.sort((a, b) => b.value - a.value)
 			);
 
 			const dualAxes = cartesianScales.isDualAxes();
-			if (!dualAxes && Tools.getProperty(options, "tooltip", "showTotal") === true) {
+			if (
+				!dualAxes &&
+				Tools.getProperty(options, 'tooltip', 'showTotal') === true
+			) {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				items.push({
-					label: options.tooltip.totalLabel || "Total",
+					label: options.tooltip.totalLabel || 'Total',
 					value: this.valueFormatter(
 						data.reduce(
 							(accumulator, datum) =>
@@ -123,7 +132,7 @@ export class AxisChartsTooltip extends Tooltip {
 							0
 						)
 					),
-					bold: true
+					bold: true,
 				});
 			}
 		}

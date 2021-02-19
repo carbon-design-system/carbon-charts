@@ -1,17 +1,13 @@
 // Internal Imports
-import { Bar } from "./bar";
-import {
-	Events,
-	Roles,
-	ColorClassNameTypes
-} from "../../interfaces";
-import { Tools } from "../../tools";
+import { Bar } from './bar';
+import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
-	type = "simple-bar";
+	type = 'simple-bar';
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -40,34 +36,34 @@ export class SimpleBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg
-			.selectAll("path.bar")
+			.selectAll('path.bar')
 			.data(data, (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
-		bars.exit().attr("opacity", 0).remove();
+		bars.exit().attr('opacity', 0).remove();
 
 		// Add the paths that need to be introduced
-		const barsEnter = bars.enter().append("path").attr("opacity", 0);
+		const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
 		barsEnter
 			.merge(bars)
-			.classed("bar", true)
-			.attr("width", this.getBarWidth.bind(this))
+			.classed('bar', true)
+			.attr('width', this.getBarWidth.bind(this))
 			.transition(
 				this.services.transitions.getTransition(
-					"bar-update-enter",
+					'bar-update-enter',
 					animate
 				)
 			)
-			.attr("class", (d) =>
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: "bar"
+					originalClassName: 'bar',
 				})
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr("d", (d, i) => {
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -92,11 +88,11 @@ export class SimpleBar extends Bar {
 					this.services.cartesianScales.getOrientation()
 				);
 			})
-			.attr("opacity", 1)
+			.attr('opacity', 1)
 			// a11y
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "bar")
-			.attr("aria-label", (d) => d.value);
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'bar')
+			.attr('aria-label', (d) => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -107,88 +103,88 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = this.getOptions().data;
 
 		this.parent
-			.selectAll("path.bar")
+			.selectAll('path.bar')
 			.transition(
 				this.services.transitions.getTransition(
-					"legend-hover-simple-bar"
+					'legend-hover-simple-bar'
 				)
 			)
-			.attr("opacity", (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
+			.attr('opacity', (d) =>
+				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("path.bar")
+			.selectAll('path.bar')
 			.transition(
 				this.services.transitions.getTransition(
-					"legend-mouseout-simple-bar"
+					'legend-mouseout-simple-bar'
 				)
 			)
-			.attr("opacity", 1);
-	}
+			.attr('opacity', 1);
+	};
 
 	addEventListeners() {
 		const self = this;
 		this.parent
-			.selectAll("path.bar")
-			.on("mouseover", function (datum) {
+			.selectAll('path.bar')
+			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
+				hoveredElement.classed('hovered', true);
 				hoveredElement.transition(
 					self.services.transitions.getTransition(
-						"graph_element_mouseover_fill_update"
+						'graph_element_mouseover_fill_update'
 					)
 				);
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: [datum]
+					data: [datum],
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
-					datum
+					datum,
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on("click", function (datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function (datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false);
+				hoveredElement.classed('hovered', false);
 
 				hoveredElement.transition(
 					self.services.transitions.getTransition(
-						"graph_element_mouseout_fill_update"
+						'graph_element_mouseout_fill_update'
 					)
 				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}
@@ -196,10 +192,10 @@ export class SimpleBar extends Bar {
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path.bar")
-			.on("mouseover", null)
-			.on("mousemove", null)
-			.on("mouseout", null);
+			.selectAll('path.bar')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null);
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;

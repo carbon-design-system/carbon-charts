@@ -1,10 +1,10 @@
 .#{$prefix}--#{$charts-prefix}--ruler {
 	line.ruler-line {
-		@if $ui-background == map-get($carbon--theme--g90, "ui-background") {
+		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
 			stroke: $carbon--white-0;
 		} @else if
 			$ui-background ==
-			map-get($carbon--theme--g100, "ui-background")
+			map-get($carbon--theme--g100, 'ui-background')
 		{
 			stroke: $carbon--white-0;
 		} @else {

@@ -1,7 +1,7 @@
-@import "./../vendor/@carbon/motion/scss/motion.scss";
-@import "./../vendor/@carbon/type/scss/type";
-@import "./../vendor/@carbon/type/scss/font-face/mono";
-@import "./../vendor/@carbon/type/scss/font-face/sans";
+@import './../vendor/@carbon/motion/scss/motion.scss';
+@import './../vendor/@carbon/type/scss/type';
+@import './../vendor/@carbon/type/scss/font-face/mono';
+@import './../vendor/@carbon/type/scss/font-face/sans';
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;
@@ -13,7 +13,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: carbon--font-family("sans-condensed");
+	font-family: carbon--font-family('sans-condensed');
 
 	&.hidden {
 		opacity: 0;
@@ -26,12 +26,13 @@
 
 		.title-tooltip {
 			p {
-				line-height: 16px;
+				margin: 2px;
 				font-size: 12px;
 			}
 			width: auto;
 			padding: 4px;
 			min-width: 20px;
+			max-width: 270px;
 		}
 
 		.datapoint-tooltip {
@@ -65,7 +66,7 @@
 			}
 
 			&.bold {
-				font-weight: carbon--font-weight("semibold");
+				font-weight: carbon--font-weight('semibold');
 			}
 		}
 

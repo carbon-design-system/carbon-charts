@@ -1,7 +1,7 @@
-import marked from "marked";
+import marked from 'marked';
 
 export const colorPaletteTutorial = {
-	name: "Color palette",
+	name: 'Color palette',
 	content: marked(`
 # Color palette
 
@@ -76,5 +76,5 @@ const simpleBarOptions = {
 	}
 };
 \`\`\`
-`)
+`),
 };

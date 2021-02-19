@@ -1,14 +1,14 @@
-import { TestEnvironment } from "../../tests/index";
+import { TestEnvironment } from '../../tests/index';
 
 // import the settings for the css prefixes
-import settings from "carbon-components/es/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
-import { options } from "./../../configuration";
-import { Events } from "./../../interfaces";
+import { options } from './../../configuration';
+import { Events } from './../../interfaces';
 
-import { select } from "d3-selection";
+import { select } from 'd3-selection';
 
-describe("legend component", () => {
+describe('legend component', () => {
 	beforeEach(function () {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
@@ -17,8 +17,8 @@ describe("legend component", () => {
 		this.testEnvironment = testEnvironment;
 	});
 
-	describe("content", () => {
-		it("should have same amount of datasets", async function (done) {
+	describe('content', () => {
+		it('should have same amount of datasets', async function (done) {
 			const data = this.testEnvironment.chartData;
 			const uniqueDatagroups = data
 				.map((d) => d.group)
@@ -40,7 +40,7 @@ describe("legend component", () => {
 				const numberOfLegendItems = select(
 					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
 				)
-					.selectAll("g.legend-item")
+					.selectAll('g.legend-item')
 					.size();
 				expect(numberOfLegendItems).toEqual(numberOfDatagroups);
 

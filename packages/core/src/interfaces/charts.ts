@@ -1,13 +1,19 @@
-import { GaugeTypes, Statuses, ArrowDirections, Alignments, ChartTypes } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments,
+	ChartTypes,
+} from './enums';
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
 	AxesOptions,
-	ZoomBarsOptions
-} from "./index";
-import { BarOptions, StackedBarOptions } from "./components";
-import { TimeScaleOptions } from "./axis-scales";
+	ZoomBarsOptions,
+} from './index';
+import { BarOptions, StackedBarOptions } from './components';
+import { TimeScaleOptions } from './axis-scales';
 
 /**
  * Base chart options common to any chart
@@ -171,6 +177,11 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to lollipop charts
+ */
+export interface LollipopChartOptions extends ScatterChartOptions {}
+
+/**
  * options specific to bubble charts
  */
 export interface BubbleChartOptions extends AxisChartOptions {
@@ -209,7 +220,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-	};
+		  };
 }
 
 /**
@@ -223,7 +234,14 @@ export interface AreaChartOptions extends AxisChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
+	/**
+	 * options to bound the area of the chart
+	 */
+	bounds?: {
+		upperBoundMapsTo?: string;
+		lowerBoundMapsTo?: string;
+	};
 }
 
 /**
@@ -237,7 +255,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		};
+		  };
 }
 
 /**
@@ -280,6 +298,7 @@ export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
 			label?: string;
+			number?: number;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
@@ -291,6 +310,13 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		peak?: number;
+		status?: {
+			ranges: Array<{
+				range: [number, number];
+				status: Statuses;
+			}>;
+		};
 		height?: number;
 		title?: {
 			percentageIndicator?: {
@@ -317,18 +343,15 @@ export interface RadarChartOptions extends BaseChartOptions {
 }
 
 /**
- * options specific to combo bar charts
+ * options specific to combo charts
  */
 export interface ComboChartOptions extends AxisChartOptions {
-	comboChartTypes?: {
-		[ChartTypes.LINE]?: [],
-		[ChartTypes.STACKED_BAR]?: [],
-		[ChartTypes.GROUPED_BAR]?: [],
-		[ChartTypes.SIMPLE_BAR]?: [],
-		[ChartTypes.SCATTER]?: []
-	};
+	comboChartTypes: Array<{
+		type: ChartTypes | any;
+		options?: object;
+		correspondingDatasets: Array<string>;
+	}>;
 }
-
 
 /*
  * options specific to treemap charts

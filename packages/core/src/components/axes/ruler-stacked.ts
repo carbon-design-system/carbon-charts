@@ -1,7 +1,7 @@
-import { DOMUtils } from "../../services";
-import { Events } from "../../interfaces";
+import { DOMUtils } from '../../services';
+import { Events } from '../../interfaces';
 
-import { Ruler } from "./ruler";
+import { Ruler } from './ruler';
 
 export class StackedRuler extends Ruler {
 	formatTooltipData(tooltipData) {
@@ -10,9 +10,9 @@ export class StackedRuler extends Ruler {
 
 	hideRuler() {
 		const svg = this.parent;
-		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
+		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler');
 
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
-		ruler.attr("opacity", 0);
+		ruler.attr('opacity', 0);
 	}
 }

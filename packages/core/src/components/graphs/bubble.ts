@@ -1,15 +1,15 @@
 // Internal Imports
-import { Scatter } from "./scatter";
-import { DOMUtils } from "../../services";
-import { Roles, ColorClassNameTypes } from "../../interfaces";
+import { Scatter } from './scatter';
+import { DOMUtils } from '../../services';
+import { Roles, ColorClassNameTypes } from '../../interfaces';
 
 // D3 Imports
-import { Selection } from "d3-selection";
-import { extent } from "d3-array";
-import { scaleLinear } from "d3-scale";
+import { Selection } from 'd3-selection';
+import { extent } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
 
 export class Bubble extends Scatter {
-	type = "bubble";
+	type = 'bubble';
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const options = this.getOptions();
@@ -48,48 +48,53 @@ export class Bubble extends Scatter {
 
 		selection
 			.raise()
-			.classed("dot", true)
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("cx", (d, i) =>
-				this.services.cartesianScales.getDomainValue(d, i)
-			)
+			.classed('dot', true)
+			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.transition(
 				this.services.transitions.getTransition(
-					"bubble-update-enter",
+					'bubble-update-enter',
 					animate
 				)
 			)
-			.attr("cy", (d, i) =>
+			.attr('cx', (d, i) =>
+				this.services.cartesianScales.getDomainValue(d, i)
+			)
+			.attr('cy', (d, i) =>
 				this.services.cartesianScales.getRangeValue(d, i)
 			)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
-			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
-			.attr("class", (d) =>
+			.attr('r', (d) => radiusScale(d[radiusMapsTo] || 1))
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
-						ColorClassNameTypes.STROKE
+						ColorClassNameTypes.STROKE,
 					],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: "dot"
+					originalClassName: 'dot',
 				})
 			)
-			.attr("fill", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
-				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
-				}
-			)
-			.attr("stroke", (d) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d);
+			.style('fill', (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
+				return this.model.getFillColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				);
+			})
+			.style('stroke', (d) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					d
+				);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
 					d
 				);
-			}
-
-			)
-			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("opacity", 1);
+			})
+			.attr('fill-opacity', options.bubble.fillOpacity)
+			.attr('opacity', 1);
 	}
 }

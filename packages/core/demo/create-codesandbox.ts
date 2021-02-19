@@ -1,9 +1,9 @@
-import { getParameters } from "codesandbox/lib/api/define";
+import { getParameters } from 'codesandbox/lib/api/define';
 
-const packageJSON = require("@carbon/charts/package.json");
+const packageJSON = require('@carbon/charts/package.json');
 const libraryVersion = packageJSON.version;
 const carbonComponentsVersion =
-	packageJSON.devDependencies["carbon-components"];
+	packageJSON.devDependencies['carbon-components'];
 
 const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 `;
@@ -21,8 +21,8 @@ export const createChartSandbox = (chartTemplate: any) => {
 };
 
 export const createVanillaChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, "\t");
-	const chartOptions = JSON.stringify(demo.options, null, "\t");
+	const chartData = JSON.stringify(demo.data, null, '\t');
+	const chartOptions = JSON.stringify(demo.options, null, '\t');
 	const chartComponent = demo.chartType.vanilla;
 
 	const indexHtml = `<html>
@@ -53,29 +53,29 @@ new ${chartComponent}(chartHolder, {
 `;
 	const packageJson = {
 		scripts: {
-			start: "parcel index.html --open",
-			build: "parcel build index.html"
+			start: 'parcel index.html --open',
+			build: 'parcel build index.html',
 		},
 		dependencies: {
-			"@carbon/charts": libraryVersion,
-			"carbon-components": carbonComponentsVersion,
-			d3: "5.9.2"
+			'@carbon/charts': libraryVersion,
+			'carbon-components': carbonComponentsVersion,
+			d3: '5.9.2',
 		},
 		devDependencies: {
-			"parcel-bundler": "^1.6.1"
-		}
+			'parcel-bundler': '^1.6.1',
+		},
 	};
 
 	return {
-		"index.html": indexHtml,
-		"src/index.js": indexJs,
-		"package.json": packageJson
+		'index.html': indexHtml,
+		'src/index.js': indexJs,
+		'package.json': packageJson,
 	};
 };
 
 export const createReactChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, "\t");
-	const chartOptions = JSON.stringify(demo.options, null, "\t");
+	const chartData = JSON.stringify(demo.data, null, '\t');
+	const chartOptions = JSON.stringify(demo.options, null, '\t');
 	const chartComponent = demo.chartType.vanilla;
 
 	const indexHtml = `<div id="root"></div>
@@ -109,27 +109,27 @@ ReactDOM.render(<App />, document.getElementById("root"));
   `;
 	const packageJson = {
 		dependencies: {
-			"@carbon/charts": libraryVersion,
-			"@carbon/charts-react": libraryVersion,
-			d3: "5.12.0",
-			react: "16.12.0",
-			"react-dom": "16.12.0",
-			"react-scripts": "3.0.1",
-			"carbon-components": carbonComponentsVersion
-		}
+			'@carbon/charts': libraryVersion,
+			'@carbon/charts-react': libraryVersion,
+			d3: '5.12.0',
+			react: '16.12.0',
+			'react-dom': '16.12.0',
+			'react-scripts': '3.0.1',
+			'carbon-components': carbonComponentsVersion,
+		},
 	};
 
 	return {
-		"src/index.html": indexHtml,
-		"src/index.js": indexJs,
-		"src/ibm-plex-font.css": ibmPlexFontCSS,
-		"package.json": packageJson
+		'src/index.html': indexHtml,
+		'src/index.js': indexJs,
+		'src/ibm-plex-font.css': ibmPlexFontCSS,
+		'package.json': packageJson,
 	};
 };
 
 export const createAngularChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, "\t\t");
-	const chartOptions = JSON.stringify(demo.options, null, "\t\t");
+	const chartData = JSON.stringify(demo.data, null, '\t\t');
+	const chartOptions = JSON.stringify(demo.options, null, '\t\t');
 	const chartComponent = demo.chartType.angular;
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
@@ -203,41 +203,41 @@ platformBrowserDynamic()
 	const packageJson = JSON.stringify(
 		{
 			dependencies: {
-				"@angular/animations": "8.2.14",
-				"@angular/common": "8.2.14",
-				"@angular/compiler": "8.2.14",
-				"@angular/core": "8.2.14",
-				"@angular/forms": "8.2.14",
-				"@angular/platform-browser": "8.2.14",
-				"@angular/platform-browser-dynamic": "8.2.14",
-				"@angular/router": "8.2.14",
-				"@carbon/charts": libraryVersion,
-				"@carbon/charts-angular": libraryVersion,
-				"core-js": "3.6.0",
-				d3: "5.15.0",
-				rxjs: "6.5.3",
-				"zone.js": "0.10.2"
-			}
+				'@angular/animations': '8.2.14',
+				'@angular/common': '8.2.14',
+				'@angular/compiler': '8.2.14',
+				'@angular/core': '8.2.14',
+				'@angular/forms': '8.2.14',
+				'@angular/platform-browser': '8.2.14',
+				'@angular/platform-browser-dynamic': '8.2.14',
+				'@angular/router': '8.2.14',
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-angular': libraryVersion,
+				'core-js': '3.6.0',
+				d3: '5.15.0',
+				rxjs: '6.5.3',
+				'zone.js': '0.10.2',
+			},
 		},
 		null,
-		"\t"
+		'\t'
 	);
 
 	return {
-		"src/index.html": indexHtml,
-		"src/main.ts": mainTs,
-		"src/app/app.component.html": appComponentHtml,
-		"src/app/app.component.ts": appComponentTs,
-		"src/app/ibm-plex-font.css": ibmPlexFontCSS,
-		"src/app/app.module.ts": appModule,
-		".angular-cli.json": angularCliJson,
-		"package.json": packageJson
+		'src/index.html': indexHtml,
+		'src/main.ts': mainTs,
+		'src/app/app.component.html': appComponentHtml,
+		'src/app/app.component.ts': appComponentTs,
+		'src/app/ibm-plex-font.css': ibmPlexFontCSS,
+		'src/app/app.module.ts': appModule,
+		'.angular-cli.json': angularCliJson,
+		'package.json': packageJson,
 	};
 };
 
 export const createVueChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, "\t\t");
-	const chartOptions = JSON.stringify(demo.options, null, "\t\t");
+	const chartData = JSON.stringify(demo.data, null, '\t\t');
+	const chartOptions = JSON.stringify(demo.options, null, '\t\t');
 	const chartComponent = demo.chartType.vue;
 
 	const chartVue = `<script>
@@ -292,42 +292,42 @@ new Vue({
 	const packageJson = JSON.stringify(
 		{
 			dependencies: {
-				"@carbon/charts": libraryVersion,
-				"@carbon/charts-vue": libraryVersion,
-				"@vue/cli-plugin-babel": "4.1.1",
-				"carbon-components": carbonComponentsVersion,
-				d3: "5.15.0",
-				vue: "^2.6.11"
-			}
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-vue': libraryVersion,
+				'@vue/cli-plugin-babel': '4.1.1',
+				'carbon-components': carbonComponentsVersion,
+				d3: '5.15.0',
+				vue: '^2.6.11',
+			},
 		},
 		null,
-		"\t\t"
+		'\t\t'
 	);
 
 	return {
-		"src/components/chart.vue": chartVue,
-		"src/ibm-plex-font.css": ibmPlexFontCSS,
-		"src/App.vue": appVue,
-		"src/main.js": mainJs,
-		"package.json": packageJson
+		'src/components/chart.vue': chartVue,
+		'src/ibm-plex-font.css': ibmPlexFontCSS,
+		'src/App.vue': appVue,
+		'src/main.js': mainJs,
+		'package.json': packageJson,
 	};
 };
 
 export const createSvelteChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, "\t");
-	const chartOptions = JSON.stringify(demo.options, null, "\t");
+	const chartData = JSON.stringify(demo.data, null, '\t');
+	const chartOptions = JSON.stringify(demo.options, null, '\t');
 
 	let chartComponent = demo.chartType.vanilla;
 
 	switch (chartComponent) {
-		case "SimpleBarChart":
-			chartComponent = "BarChartSimple";
+		case 'SimpleBarChart':
+			chartComponent = 'BarChartSimple';
 			break;
-		case "GroupedBarChart":
-			chartComponent = "BarChartGrouped";
+		case 'GroupedBarChart':
+			chartComponent = 'BarChartGrouped';
 			break;
-		case "StackedBarChart":
-			chartComponent = "BarChartStacked";
+		case 'StackedBarChart':
+			chartComponent = 'BarChartStacked';
 			break;
 	}
 
@@ -354,28 +354,28 @@ export default app;
 
 	const packageJson = {
 		scripts: {
-			build: "rollup -c",
-			autobuild: "rollup -c -w",
-			dev: "run-p start:dev autobuild",
-			start: "sirv public",
-			"start:dev": "sirv public --dev"
+			build: 'rollup -c',
+			autobuild: 'rollup -c -w',
+			dev: 'run-p start:dev autobuild',
+			start: 'sirv public',
+			'start:dev': 'sirv public --dev',
 		},
 		devDependencies: {
-			"npm-run-all": "^4.1.5",
-			rollup: "^1.10.1",
-			"rollup-plugin-commonjs": "^9.3.4",
-			"rollup-plugin-node-resolve": "^4.2.3",
-			"rollup-plugin-svelte": "^5.0.3",
-			"rollup-plugin-terser": "^4.0.4",
-			"sirv-cli": "^0.3.1"
+			'npm-run-all': '^4.1.5',
+			rollup: '^1.10.1',
+			'rollup-plugin-commonjs': '^9.3.4',
+			'rollup-plugin-node-resolve': '^4.2.3',
+			'rollup-plugin-svelte': '^5.0.3',
+			'rollup-plugin-terser': '^4.0.4',
+			'sirv-cli': '^0.3.1',
 		},
 		dependencies: {
-			"@carbon/charts": libraryVersion,
-			"@carbon/charts-svelte": libraryVersion,
-			"carbon-components": carbonComponentsVersion,
-			d3: "5.12.0",
-			svelte: "3.20.x"
-		}
+			'@carbon/charts': libraryVersion,
+			'@carbon/charts-svelte': libraryVersion,
+			'carbon-components': carbonComponentsVersion,
+			d3: '5.12.0',
+			svelte: '3.20.x',
+		},
 	};
 
 	const rollup = `import svelte from "rollup-plugin-svelte";
@@ -410,9 +410,9 @@ export default {
 `;
 
 	return {
-		"App.svelte": App,
-		"index.js": indexJs,
-		"package.json": packageJson,
-		"rollup.config.js": rollup
+		'App.svelte': App,
+		'index.js': indexJs,
+		'package.json': packageJson,
+		'rollup.config.js': rollup,
 	};
 };
