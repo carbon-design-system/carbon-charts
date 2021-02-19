@@ -228,13 +228,10 @@ export class Gauge extends Component {
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
 		// Add the big number
-		const valueNumberGroup = showPercentageSymbol ? DOMUtils.appendOrSelect(
+		const valueNumberGroup = DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		).attr('transform', 'translate(-10, 0)').attr('transform', 'translate(-10, 0)') : DOMUtils.appendOrSelect(
-			numbersGroup,
-			'g.gauge-value-number'
-		); // Optical centering for the presence of the smaller % symbol
+		).attr('transform', `translate(${showPercentageSymbol ? '-10' : '0'}, 0)`); // Optical centering for the presence of the smaller % symbol
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -262,12 +259,12 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		if (showPercentageSymbol) {
-			DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
-				.style('font-size', `${valueFontSize(radius) / 2}px`)
-				.attr('x', valueNumberWidth / 2)
-				.text('%');
-		}
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
+
+		DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
+			.style('font-size', `${valueFontSize(radius) / 2}px`)
+			.attr('x', valueNumberWidth / 2)
+			.text(gaugeSymbol);
 	}
 
 	/**
