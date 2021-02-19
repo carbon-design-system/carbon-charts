@@ -15,6 +15,7 @@ import {
 	ChartClip,
 	LayoutComponent,
 	Legend,
+	Threshold,
 	Title,
 	AxisChartsTooltip,
 	Spacer,
@@ -129,6 +130,8 @@ export class AxisChart extends Chart {
 				new ChartBrush(this.model, this.services)
 			);
 		}
+
+		graphFrameComponents.push(new Threshold(this.model, this.services));
 
 		const graphFrameComponent = {
 			id: 'graph-frame',
