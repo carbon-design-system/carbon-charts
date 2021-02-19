@@ -168,7 +168,13 @@ export class Threshold extends Component {
 
 			const timeScaleOptions = Tools.getProperty(options, 'timeScale');
 			const timeInterval = computeTimeIntervalName(scale.ticks());
-			return formatTick(value, 0, timeInterval, timeScaleOptions);
+			return formatTick(
+				value,
+				0,
+				scale.ticks(),
+				timeInterval,
+				timeScaleOptions
+			);
 		}
 
 		return value.toLocaleString('en');
