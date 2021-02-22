@@ -92,8 +92,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
@@ -123,7 +122,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
@@ -134,9 +133,6 @@ export class Boxplot extends Component {
 					orientation
 				);
 			});
-
-		// The offset needed to center boxes on each group
-		const offset = gridSize / 2 - boxWidth / 2;
 
 		/*
 		 * Draw out and update the boxes
@@ -163,7 +159,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -195,7 +191,7 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.highlight-area'))
 			.attr('class', 'highlight-area')
 			.attr('opacity', 0)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -229,7 +225,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -263,7 +259,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -297,7 +293,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d, i) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -329,7 +325,6 @@ export class Boxplot extends Component {
 
 		const circlesEnter = circles.enter().append('circle');
 
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		circles
 			.merge(circlesEnter)
 			.attr('r', 4)
