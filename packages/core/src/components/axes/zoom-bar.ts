@@ -194,6 +194,17 @@ export class ZoomBar extends Component {
 					},
 					{ skipUpdate: true }
 				);
+			} else if (newInitialZoomDomain === null && oldInitialZoomDomain != null){
+				// if newInitialZoomDomain is set to null (when oldInitialZoomDomain is not null)
+				// save initialZoomDomain and reset zoom domain to default domain
+				this.model.set(
+					{
+						initialZoomDomain: null,
+						zoomDomain: Tools.merge([], defaultDomain)
+					},
+					{ skipUpdate: true }
+				);
+
 			}
 
 			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
