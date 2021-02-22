@@ -74,11 +74,11 @@ export class ChartModel {
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
-
-						// Filter out data outside domain
+						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
 							(datum) =>
-								datum[mapsTo] >= start && datum[mapsTo] <= end
+								!(mapsTo in datum) ||
+								(datum[mapsTo] >= start && datum[mapsTo] <= end)
 						);
 					}
 				}

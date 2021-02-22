@@ -435,50 +435,6 @@ export const comboLoadingOptions = {
 	],
 };
 
-export const comboErrorData = [
-	{ group: 'High', key: 'Monday', temp: 20 },
-	{ group: 'High', key: 'Tuesday', temp: 33 },
-	{ group: 'High', key: 'Wednesday', temp: 23 },
-	{ group: 'High', key: 'Thursday', temp: 23 },
-	{ group: 'High', key: 'Friday', temp: 32 },
-	{ group: 'Low', key: 'Monday', temp: 12 },
-	{ group: 'Low', key: 'Tuesday', temp: 22 },
-	{ group: 'Low', key: 'Wednesday', temp: 20 },
-	{ group: 'Low', key: 'Thursday', temp: 22 },
-	{ group: 'Low', key: 'Friday', temp: 25 },
-	{ group: 'Temperature', key: 'Monday', temp: 24 },
-	{ group: 'Temperature', key: 'Tuesday', temp: 28 },
-	{ group: 'Temperature', key: 'Wednesday', temp: 30 },
-	{ group: 'Temperature', key: 'Thursday', temp: 29 },
-	{ group: 'Temperature', key: 'Friday', temp: 24 },
-	{ group: 'Attendance', key: 'Monday', value: 2650 },
-	{ group: 'Attendance', key: 'Tuesday', value: 2553 },
-	{ group: 'Attendance', key: 'Wednesday', value: 3433 },
-	{ group: 'Attendance', key: 'Thursday', value: 3754 },
-	{ group: 'Attendance', key: 'Friday', value: 3744 },
-];
-
-export const comboErrorOptions = {
-	experimental: true,
-	title: 'Combo Chart (no comboChartTypes)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-			title: 'Attendance',
-		},
-		bottom: {
-			scaleType: 'labels',
-			mapsTo: 'key',
-		},
-		right: {
-			title: 'Temperature (°C)',
-			mapsTo: 'temp',
-			scaleType: 'linear',
-			correspondingDatasets: ['Temperature'],
-		},
-	},
-};
-
 export const comboStackedAreaLine = [
 	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
@@ -507,17 +463,21 @@ export const comboStackedAreaLineOptions = {
 	title: 'Combo (Stacked Area + Line)',
 	axes: {
 		left: {
+			title: 'left',
 			stacked: true,
 			mapsTo: 'value',
+			titleOrientation: 'right',
 		},
 		bottom: {
 			scaleType: 'time',
 			mapsTo: 'date',
 		},
 		right: {
+			title: 'right',
 			scaleType: 'linear',
 			mapsTo: 'temp',
 			correspondingDatasets: ['Temperature'],
+			titleOrientation: 'left',
 		},
 	},
 	curve: 'curveMonotoneX',
