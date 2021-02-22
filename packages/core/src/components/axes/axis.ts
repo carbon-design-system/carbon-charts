@@ -10,7 +10,7 @@ import {
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { DOMUtils } from '../../services';
-import { TickRotations } from '../../interfaces/enums';
+import { AxisTitleOrientations, TickRotations } from '../../interfaces/enums';
 import * as Configuration from '../../configuration';
 import {
 	computeTimeIntervalName,
@@ -388,7 +388,7 @@ export class Axis extends Component {
 			);
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
-					if (titleOrientation === AxisPositions.RIGHT) {
+					if (titleOrientation === AxisTitleOrientations.RIGHT) {
 						axisTitleRef
 							.attr('transform', 'rotate(90)')
 							.attr('y', 0)
@@ -415,7 +415,7 @@ export class Axis extends Component {
 						.style('text-anchor', 'middle');
 					break;
 				case AxisPositions.RIGHT:
-					if (titleOrientation === AxisPositions.LEFT) {
+					if (titleOrientation === AxisTitleOrientations.LEFT) {
 						axisTitleRef
 							.attr('transform', 'rotate(-90)')
 							.attr('y', width)
