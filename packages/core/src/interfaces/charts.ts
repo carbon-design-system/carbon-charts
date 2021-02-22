@@ -270,6 +270,7 @@ export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
 			formatter?: Function;
+			enabled?: Boolean;
 		};
 		alignment?: Alignments;
 	};
