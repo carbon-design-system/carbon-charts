@@ -127,7 +127,7 @@ export class StackedArea extends Component {
 			});
 	};
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
 			.transition(
