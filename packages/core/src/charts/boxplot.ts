@@ -2,7 +2,7 @@
 import { BoxplotChartModel } from '../model-boxplot';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
-import { BarChartOptions, ChartConfig } from '../interfaces/index';
+import { BoxplotChartOptions, ChartConfig } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
@@ -14,7 +14,6 @@ import {
 	ZeroLine,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
-	Legend,
 	LayoutComponent,
 	Skeleton,
 } from '../components/index';
@@ -22,14 +21,14 @@ import {
 export class BoxplotChart extends AxisChart {
 	model = new BoxplotChartModel(this.services);
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<BoxplotChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.simpleBarChart,
+				Configuration.options.boxplotChart,
 				chartConfigs.options
 			)
 		);

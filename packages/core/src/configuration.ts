@@ -7,6 +7,7 @@ import {
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
+	BoxplotChartOptions,
 	AreaChartOptions,
 	PieChartOptions,
 	GaugeChartOptions,
@@ -233,6 +234,15 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 } as BarChartOptions);
 
 /**
+ * options specific to boxplot charts
+ */
+const boxplotChart: BoxplotChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
+
+/**
  * options specific to scatter charts
  */
 const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
@@ -410,6 +420,7 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	boxplotChart,
 	bubbleChart,
 	lineChart,
 	areaChart,
