@@ -106,7 +106,7 @@ export interface BaseChartOptions {
 	 */
 	color?: {
 		/**
-		 * e.g. { "Dataset 1": "blue" }
+		 * e.g. { 'Dataset 1': 'blue' }
 		 */
 		scale?: object;
 		/**
