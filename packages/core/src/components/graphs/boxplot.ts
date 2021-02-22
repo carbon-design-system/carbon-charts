@@ -7,6 +7,7 @@ import {
 	Roles,
 } from '../../interfaces';
 import { Tools } from '../../tools';
+import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -54,7 +55,6 @@ export class Boxplot extends Component {
 			(isInVerticalOrientation ? width : height) / dataGroupNames.length
 		);
 		const boxWidth = Math.min(gridSize / 2, 16);
-		const boxStrokeWidth = '1';
 
 		const boxplotData = this.model.getBoxplotData();
 
@@ -84,7 +84,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line start',
 				})
 			)
-			.attr('stroke-width', boxStrokeWidth)
+			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition(
 				this.services.transitions.getTransition(
@@ -114,7 +114,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line end',
 				})
 			)
-			.attr('stroke-width', boxStrokeWidth)
+			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition(
 				this.services.transitions.getTransition(
@@ -149,8 +149,8 @@ export class Boxplot extends Component {
 					originalClassName: 'box',
 				})
 			)
-			.attr('fill-opacity', 0.3)
-			.attr('stroke-width', boxStrokeWidth)
+			.attr('fill-opacity', Configuration.boxplot.box.opacity.default)
+			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
 			.transition(
@@ -217,7 +217,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker start',
 				})
 			)
-			.attr('stroke-width', 2)
+			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition(
 				this.services.transitions.getTransition(
@@ -285,7 +285,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker end',
 				})
 			)
-			.attr('stroke-width', 2)
+			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition(
 				this.services.transitions.getTransition(
@@ -327,7 +327,7 @@ export class Boxplot extends Component {
 
 		circles
 			.merge(circlesEnter)
-			.attr('r', 4)
+			.attr('r', Configuration.boxplot.circle.radius)
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [
@@ -337,7 +337,7 @@ export class Boxplot extends Component {
 					originalClassName: 'outlier',
 				})
 			)
-			.attr('fill-opacity', 0.3)
+			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
 			.transition(
 				this.services.transitions.getTransition(
@@ -365,7 +365,7 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', true)
-					.attr('fill-opacity', 0.5);
+					.attr('fill-opacity', Configuration.boxplot.box.opacity.hovered);
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -441,7 +441,7 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', false)
-					.attr('fill-opacity', 0.3);
+					.attr('fill-opacity', Configuration.boxplot.box.opacity.default);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -474,7 +474,7 @@ export class Boxplot extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr('fill-opacity', 1)
+					.attr('fill-opacity', Configuration.boxplot.circle.opacity.hovered)
 					.classed('unfilled', false);
 
 				// Show tooltip for single datapoint
@@ -532,7 +532,7 @@ export class Boxplot extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.attr('fill-opacity', 0.3);
+					.attr('fill-opacity', Configuration.boxplot.circle.opacity.default);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
