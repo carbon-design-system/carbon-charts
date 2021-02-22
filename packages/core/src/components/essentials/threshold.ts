@@ -50,15 +50,15 @@ export class Threshold extends Component {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		// Update data on all bars
+		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
 			.selectAll('g.axis-tresholds')
 			.data(thresholdData, (thresholdData) => thresholdData.axisPosition);
 
-		// Remove bars that are no longer needed
+		// Remove axis threshold groups that are no longer needed
 		thresholdAxisGroups.exit().attr('opacity', 0).remove();
 
-		// Add the paths that need to be introduced
+		// Add the axis threshold groups that need to be introduced
 		const thresholdAxisGroupsEnter = thresholdAxisGroups
 			.enter()
 			.append('g');
@@ -66,7 +66,10 @@ export class Threshold extends Component {
 		const thresholdAxisGroupsMerge = thresholdAxisGroupsEnter.merge(
 			thresholdAxisGroups
 		);
-		thresholdAxisGroupsMerge.attr('class', (d) => `axis-tresholds ${d.axisPosition}`);
+		thresholdAxisGroupsMerge.attr(
+			'class',
+			(d) => `axis-tresholds ${d.axisPosition}`
+		);
 
 		const thresholdGroups = thresholdAxisGroupsMerge
 			.selectAll('g.threshold-group')
@@ -77,10 +80,10 @@ export class Threshold extends Component {
 				})
 			);
 
-		// Remove bars that are no longer needed
+		// Remove threshold groups that are no longer needed
 		thresholdGroups.exit().attr('opacity', 0).remove();
 
-		// Add the paths that need to be introduced
+		// Add the threshold groups that need to be introduced
 		const thresholdGroupsEnter = thresholdGroups.enter().append('g');
 
 		thresholdGroupsEnter.append('line').attr('class', 'threshold-line');
@@ -95,8 +98,6 @@ export class Threshold extends Component {
 
 		const self = this;
 		thresholdAxisGroupsMerge.each(function ({ axisPosition }) {
-			// Set threshold line color from configs options
-			// If not defined, the line takes the defined CSS color
 			const scale = self.services.cartesianScales.getScaleByPosition(
 				axisPosition
 			);
@@ -183,7 +184,7 @@ export class Threshold extends Component {
 					)
 					.style('stroke', ({ fillColor }) => fillColor);
 
-				// Set hoverable area width and rotate it
+				// Set hoverable area width
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', xScaleStart)
@@ -193,12 +194,14 @@ export class Threshold extends Component {
 			}
 		});
 
+		// Add event listener for showing the threshold tooltip
 		this.services.events.addEventListener(Events.Threshold.SHOW, (e) => {
 			this.setThresholdLabelPosition(e.detail.datum);
 
 			this.label.classed('hidden', false);
 		});
 
+		// Add event listener for hiding the threshold tooltip
 		this.services.events.addEventListener(Events.Threshold.HIDE, (e) => {
 			this.label.classed('hidden', true);
 		});
