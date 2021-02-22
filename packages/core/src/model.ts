@@ -210,6 +210,7 @@ export class ChartModel {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
+
 			return datum[domainIdentifier];
 		}).keys();
 
@@ -221,6 +222,7 @@ export class ChartModel {
 			stackKeys.sort((a: any, b: any) => {
 				const dateA: any = new Date(a);
 				const dateB: any = new Date(b);
+
 				return dateA - dateB;
 			});
 		} else if (
@@ -488,7 +490,7 @@ export class ChartModel {
 
 	getColorClassName(configs: {
 		classNameTypes: ColorClassNameTypes[];
-		dataGroupName: string;
+		dataGroupName?: string;
 		originalClassName?: string;
 	}) {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);

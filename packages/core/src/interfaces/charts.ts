@@ -145,6 +145,11 @@ export interface AxisChartOptions extends BaseChartOptions {
 }
 
 /**
+ * options specific to boxplot charts
+ */
+export interface BoxplotChartOptions extends AxisChartOptions {}
+
+/**
  * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
