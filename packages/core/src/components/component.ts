@@ -17,7 +17,7 @@ export class Component {
 
 	protected configs: any = {};
 
-	protected model: ChartModel;
+	protected model: any;
 	protected services: any;
 
 	constructor(model: ChartModel, services: any, configs?: any) {

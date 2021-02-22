@@ -28,6 +28,26 @@ export const axis = {
 	paddingRatio: 0.1,
 };
 
+export const boxplot = {
+	circle: {
+		radius: 4,
+		opacity: {
+			hovered: 1,
+			default: 0.3,
+		},
+	},
+	box: {
+		opacity: {
+			hovered: 0.5,
+			default: 0.3,
+		},
+	},
+	strokeWidth: {
+		default: 1,
+		thicker: 2,
+	},
+};
+
 export const legend = {
 	items: {
 		status: {
