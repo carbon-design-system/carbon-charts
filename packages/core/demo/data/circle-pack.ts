@@ -52,6 +52,9 @@ export const circlePackData = [
 
 export const circlePackOptions = {
 	title: 'Circle Pack Chart',
+	legend: {
+		enabled: false,
+	},
 };
 
 export const circlePackSingleLevelData = [
