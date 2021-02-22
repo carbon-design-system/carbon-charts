@@ -133,7 +133,7 @@ export const chartTypes = {
 		vue: 'ccv-treemap-chart',
 	},
 	CirclePackChart: {
-		vanilla: 'BubblePackChart',
+		vanilla: 'CirclePackChart',
 		angular: 'ibm-circle-pack-chart',
 		vue: 'ccv-circle-pack-chart',
 	},

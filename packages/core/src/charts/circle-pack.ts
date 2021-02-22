@@ -1,6 +1,7 @@
 // Internal Imports
 import { Chart } from '../chart';
-import { ChartConfig, TreemapChartOptions } from '../interfaces/index';
+import { CirclePackModel } from '../model-circle-pack';
+import { ChartConfig, CirclePackChartOptions } from '../interfaces/index';
 import * as Configuration from '../configuration';
 import { Tools } from '../tools';
 
@@ -13,10 +14,11 @@ import {
 	Skeleton,
 } from '../components/index';
 
-export class BubblePackChart extends Chart {
+export class CirclePackChart extends Chart {
+	model = new CirclePackModel(this.services);
 	constructor(
 		holder: Element,
-		chartConfigs: ChartConfig<TreemapChartOptions>
+		chartConfigs: ChartConfig<CirclePackChartOptions>
 	) {
 		super(holder, chartConfigs);
 

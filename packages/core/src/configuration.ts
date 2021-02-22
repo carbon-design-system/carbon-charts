@@ -417,7 +417,7 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 } as TreemapChartOptions);
 
 /*
- * options specific to bubble pack charts
+ * options specific to circle pack charts
  */
 const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, {
 	data: Tools.merge(chart.data, {
