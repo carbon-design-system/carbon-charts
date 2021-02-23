@@ -52,7 +52,7 @@ export class Threshold extends Component {
 
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
-			.selectAll('g.axis-tresholds')
+			.selectAll('g.axis-thresholds')
 			.data(thresholdData, (thresholdData) => thresholdData.axisPosition);
 
 		// Remove axis threshold groups that are no longer needed
@@ -68,7 +68,7 @@ export class Threshold extends Component {
 		);
 		thresholdAxisGroupsMerge.attr(
 			'class',
-			(d) => `axis-tresholds ${d.axisPosition}`
+			(d) => `axis-thresholds ${d.axisPosition}`
 		);
 
 		const thresholdGroups = thresholdAxisGroupsMerge
