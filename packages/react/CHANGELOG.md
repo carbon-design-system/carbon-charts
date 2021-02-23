@@ -20,10 +20,6 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts-react
 
-
-
-
-
 # Change Log
 
 All notable changes to this project will be documented in this file. See
