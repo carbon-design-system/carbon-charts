@@ -1,4 +1,4 @@
-export const circlePackData = [
+export const circlePackTwoLevelData = [
 	{
 		name: 'A',
 		children: [
@@ -50,8 +50,15 @@ export const circlePackData = [
 	},
 ];
 
-export const circlePackOptions = {
-	title: 'Circle Pack Chart',
+export const circlePackTwoLevelOptions = {
+	title: 'Two Levels Hierarchy',
+	legend: {
+		enabled: false,
+	},
+};
+
+export const circlePackSingleOptions = {
+	title: 'One Level Hierachy',
 	legend: {
 		enabled: false,
 	},
@@ -77,5 +84,59 @@ export const circlePackSingleLevelData = [
 	{
 		name: 'E',
 		value: 80,
+	},
+];
+
+export const circlePackThreeLevelOptions = {
+	title: 'Three Levels Hierarchy',
+	legend: {
+		enabled: false,
+	},
+};
+
+export const circlePackThreeLevelData = [
+	{
+		name: 'A',
+		children: [
+			{
+				name: 'A',
+				children: [
+					{ name: 'yellow', value: 50 },
+					{ name: 'green', value: 100 },
+				],
+			},
+			{ name: 'B', value: 200 },
+			{ name: 'C', value: 100 },
+			{ name: 'D', value: 900 },
+		],
+	},
+	{
+		name: 'B',
+		children: [
+			{ name: 'AB', value: 2800 },
+			{ name: 'BC', value: 10000 },
+			{ name: 'CD', value: 500 },
+		],
+	},
+	{
+		name: 'C',
+		children: [
+			{ name: 'AA', value: 500 },
+			{ name: 'BB', value: 100 },
+			{ name: 'GG', value: 200 },
+			{ name: 'HH', value: 800 },
+			{ name: 'II', value: 900 },
+			{ name: 'JJ', value: 100 },
+			{ name: 'KK', value: 900 },
+		],
+	},
+	{
+		name: 'D',
+		children: [
+			{ name: 'KH', value: 2000 },
+			{ name: 'LL', value: 400 },
+			{ name: 'MM', value: 500 },
+			{ name: 'ST', value: 300 },
+		],
 	},
 ];

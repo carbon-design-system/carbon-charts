@@ -975,7 +975,17 @@ let allDemoGroups = [
 		demos: [
 			{
 				data: circlePackDemos.circlePackSingleLevelData,
-				options: circlePackDemos.circlePackOptions,
+				options: circlePackDemos.circlePackSingleOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackTwoLevelData,
+				options: circlePackDemos.circlePackTwoLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelOptions,
 				chartType: chartTypes.CirclePackChart,
 			},
 		],

@@ -6,7 +6,7 @@ import * as Configuration from '../../configuration';
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
 import { select } from 'd3-selection';
-import { ColorClassNameTypes } from '../../interfaces/enums';
+import { ColorClassNameTypes, Events } from '../../interfaces/enums';
 
 let uidCounter = 0;
 export class CirclePack extends Component {
@@ -40,7 +40,12 @@ export class CirclePack extends Component {
 
 		const packLayout = D3Pack()
 			.size([width, height])
-			.padding(Configuration.circlePack.padding.outer);
+			.padding((d) => {
+				// add 3 px to account for the stroke width 1.5
+				return d.depth >= 1
+					? Configuration.circlePack.padding.inner + 3
+					: Configuration.circlePack.padding.outer + 3;
+			});
 
 		const nodeData = packLayout(root).descendants().splice(1);
 
@@ -83,12 +88,12 @@ export class CirclePack extends Component {
 					originalClassName: 'leaf',
 				});
 			})
-			.attr('fill-opacity', 0.3)
-			// .style('stroke', (d) => {
-			// 	if (d.depth === 3) {
-			// 		return 'white';
-			// 	}
-			// })
+			.attr('fill-opacity', 0.3) // put in config
+			.style('stroke', (d) => {
+				if (d.depth === 3) {
+					return 'white';
+				}
+			})
 			// .transition(
 			// 	this.services.transitions.getTransition(
 			// 		'circlepack-leaf-update-enter',
@@ -103,7 +108,87 @@ export class CirclePack extends Component {
 		this.addEventListeners();
 	}
 
+	// add event listeners for tooltip on the circles
 	addEventListeners() {
 		const self = this;
+		this.parent
+			.selectAll('circle.leaf')
+			.on('mouseover', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed('hovered', true);
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							label: datum.data.name,
+							value: datum.data.value,
+						},
+					],
+				});
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.CirclePack.CIRCLE_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+			})
+			.on('mousemove', function (datum) {
+				const hoveredElement = select(this);
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							label: datum.data.name,
+							value: datum.data.value,
+						},
+					],
+				});
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.CirclePack.CIRCLE_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+			})
+			.on('mouseout', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed('hovered', false);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.CirclePack.CIRCLE_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Hide tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
+			})
+			.on('click', function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.CirclePack.CIRCLE_CLICK,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
+			});
 	}
 }

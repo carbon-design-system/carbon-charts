@@ -172,3 +172,13 @@ export enum Legend {
 	ITEM_MOUSEOUT = 'legend-item-onmouseout',
 	ITEMS_UPDATE = 'legend-items-update',
 }
+
+/**
+ * enum of all circlepack related events
+ */
+export enum CirclePack {
+	CIRCLE_MOUSEOVER = 'circle-leaf-mouseover',
+	CIRCLE_CLICK = 'circle-leaf-click',
+	CIRCLE_MOUSEOUT = 'circle-leaf-mouseout',
+	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove',
+}
