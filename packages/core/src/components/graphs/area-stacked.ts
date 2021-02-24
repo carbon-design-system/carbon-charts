@@ -1,5 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
+import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
 import {
 	Roles,
@@ -48,13 +49,15 @@ export class StackedArea extends Component {
 			groups: this.configs.groups,
 		});
 
+		const firstDatum = Tools.getProperty(stackedData, 0, 0);
+
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
 		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition(
-			{ datum: stackedData[0][0] }
+			{ firstDatum }
 		);
 		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition(
-			{ datum: stackedData[0][0] }
+			{ firstDatum }
 		);
 		const mainYScale = this.services.cartesianScales.getScaleByPosition(
 			rangeAxisPosition
@@ -124,7 +127,7 @@ export class StackedArea extends Component {
 			});
 	};
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
 			.transition(
