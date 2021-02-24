@@ -1,5 +1,7 @@
 // Internal Imports
 import { ChartModelCartesian } from './model-cartesian-charts';
+import * as Configuration from './configuration';
+import { Tools } from './tools';
 
 // D3 Imports
 import { ascending, min, max, quantile } from 'd3-array';
@@ -90,13 +92,27 @@ export class BoxplotChartModel extends ChartModelCartesian {
 	protected setColorClassNames() {
 		// monochrome
 		const numberOfColors = 1;
-		const pairingOption = 1;
+
+		const colorPairingOptions = Tools.getProperty(
+			this.getOptions(),
+			'color',
+			'pairing'
+		);
+		let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
+		const colorPairingCounts = Configuration.color.pairingOptions;
+
+		// Use default palette if user choice is not in range
+		pairingOption =
+			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
+				? pairingOption
+				: 1;
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
 			(dataGroup, index) =>
 				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
 		);
+		console.log(colorPairing)
 
 		// Create default color classnames
 		this.colorClassNames = scaleOrdinal()
