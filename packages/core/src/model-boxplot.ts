@@ -3,6 +3,7 @@ import { ChartModelCartesian } from './model-cartesian-charts';
 
 // D3 Imports
 import { ascending, min, max, quantile } from 'd3-array';
+import { scaleOrdinal } from 'd3-scale';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -84,5 +85,22 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		}
 
 		return boxplotData;
+	}
+
+	protected setColorClassNames() {
+		// monochrome
+		const numberOfColors = 1;
+		const pairingOption = 1;
+
+		// Create color classes for graph, tooltip and stroke use
+		const colorPairing = this.allDataGroups.map(
+			(dataGroup, index) =>
+				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
+		);
+
+		// Create default color classnames
+		this.colorClassNames = scaleOrdinal()
+			.range(colorPairing)
+			.domain(this.allDataGroups);
 	}
 }
