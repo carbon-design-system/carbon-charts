@@ -1,5 +1,6 @@
 import * as areaDemos from './area';
 import * as barDemos from './bar';
+import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
 import * as donutDemos from './donut';
 import * as lineDemos from './line';
@@ -19,6 +20,7 @@ import * as highScaleDemos from './high-scale';
 
 export * from './area';
 export * from './bar';
+export * from './boxplot';
 export * from './bubble';
 export * from './donut';
 export * from './line';
@@ -62,6 +64,11 @@ export const chartTypes = {
 		vanilla: 'StackedBarChart',
 		angular: 'ibm-stacked-bar-chart',
 		vue: 'ccv-stacked-bar-chart',
+	},
+	BoxplotChart: {
+		vanilla: 'BoxplotChart',
+		angular: 'ibm-boxplot-chart',
+		vue: 'ccv-boxplot-chart',
 	},
 	BubbleChart: {
 		vanilla: 'BubbleChart',
@@ -384,6 +391,21 @@ let allDemoGroups = [
 				data: barDemos.stackedHorizontalBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: false,
+			},
+		],
+	},
+	{
+		title: 'Boxplot',
+		demos: [
+			{
+				options: boxplotDemos.simpleBoxplotOptions,
+				data: boxplotDemos.simpleBoxplotData,
+				chartType: chartTypes.BoxplotChart,
+			},
+			{
+				options: boxplotDemos.simpleVerticalBoxplotOptions,
+				data: boxplotDemos.simpleVerticalBoxplotData,
+				chartType: chartTypes.BoxplotChart,
 			},
 		],
 	},
@@ -912,6 +934,12 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
+				options: comboDemos.comboAreaLineTimeSeriesOptions,
+				data: comboDemos.comboAreaLineTimeSeriesData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
 				options: comboDemos.comboEmptyOptions,
 				data: comboDemos.comboEmptyData,
 				chartType: chartTypes.ComboChart,
@@ -920,12 +948,6 @@ let allDemoGroups = [
 			{
 				options: comboDemos.comboLoadingOptions,
 				data: comboDemos.comboLoadingData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboErrorOptions,
-				data: comboDemos.comboErrorData,
 				chartType: chartTypes.ComboChart,
 				isDemoExample: true,
 			},

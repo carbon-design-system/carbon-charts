@@ -7,7 +7,7 @@
 		pointer-events: none;
 	}
 
-	&.active line.threshold-line {
+	line.threshold-line.active {
 		stroke-width: 2;
 	}
 

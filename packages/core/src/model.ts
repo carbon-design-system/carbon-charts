@@ -74,11 +74,11 @@ export class ChartModel {
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
-
-						// Filter out data outside domain
+						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
 							(datum) =>
-								datum[mapsTo] >= start && datum[mapsTo] <= end
+								!(mapsTo in datum) ||
+								(datum[mapsTo] >= start && datum[mapsTo] <= end)
 						);
 					}
 				}
@@ -210,6 +210,7 @@ export class ChartModel {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
+
 			return datum[domainIdentifier];
 		}).keys();
 
@@ -221,6 +222,7 @@ export class ChartModel {
 			stackKeys.sort((a: any, b: any) => {
 				const dateA: any = new Date(a);
 				const dateB: any = new Date(b);
+
 				return dateA - dateB;
 			});
 		} else if (
@@ -488,7 +490,7 @@ export class ChartModel {
 
 	getColorClassName(configs: {
 		classNameTypes: ColorClassNameTypes[];
-		dataGroupName: string;
+		dataGroupName?: string;
 		originalClassName?: string;
 	}) {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);

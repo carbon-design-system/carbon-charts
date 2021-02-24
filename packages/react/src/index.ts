@@ -3,6 +3,7 @@ import StackedAreaChart from './area-chart-stacked';
 import GroupedBarChart from './bar-chart-grouped';
 import SimpleBarChart from './bar-chart-simple';
 import StackedBarChart from './bar-chart-stacked';
+import BoxplotChart from './boxplot-chart';
 import BubbleChart from './bubble-chart';
 import DonutChart from './donut-chart';
 import GaugeChart from './gauge-chart';
@@ -21,6 +22,7 @@ export {
 	GroupedBarChart,
 	SimpleBarChart,
 	StackedBarChart,
+	BoxplotChart,
 	BubbleChart,
 	DonutChart,
 	GaugeChart,

@@ -11,6 +11,9 @@
 	rect.chart-grid-backdrop.stroked {
 		stroke: $ui-03;
 	}
+	rect.stroke {
+		stroke: $ui-03;
+	}
 
 	g.x.grid g.tick,
 	g.y.grid g.tick {
