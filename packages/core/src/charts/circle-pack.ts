@@ -15,7 +15,6 @@ import {
 } from '../components/index';
 
 export class CirclePackChart extends Chart {
-	model = new CirclePackModel(this.services);
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<CirclePackChartOptions>

@@ -20,6 +20,7 @@ export const axis = {
 export const circlePack = {
 	padding: {
 		outer: 4,
+		inner: 2,
 	},
 };
 

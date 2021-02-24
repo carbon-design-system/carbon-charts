@@ -1,5 +1,9 @@
 .#{$prefix}--#{$charts-prefix}--circle-pack {
 	circle.leaf {
 		stroke-width: 1.5px;
+
+		&.hovered {
+			fill-opacity: 1;
+		}
 	}
 }
