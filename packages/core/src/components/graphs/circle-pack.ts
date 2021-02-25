@@ -117,14 +117,39 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
+				let childrenData = [];
+				if (datum.children) {
+					childrenData = datum.children.map((child) => {
+						if (child !== null) {
+							// sum up the children values if there are any 3rd level
+							const value =
+								typeof child.data.value === 'number'
+									? child.data.value
+									: child.data.children.reduce(
+											(a, b) => a + b.value,
+											0
+									  );
+							return {
+								label: child.data.name,
+								value: value,
+							};
+						}
+					});
+				}
+
+				let fillColor = getComputedStyle(this, null).getPropertyValue(
+					'fill'
+				);
+
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					items: [
 						{
+							color: fillColor,
 							label: datum.data.name,
-							value: datum.data.value,
 						},
+						...childrenData,
 					],
 				});
 
@@ -140,17 +165,6 @@ export class CirclePack extends Component {
 			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					items: [
-						{
-							label: datum.data.name,
-							value: datum.data.value,
-						},
-					],
-				});
-
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEMOVE,
@@ -159,6 +173,8 @@ export class CirclePack extends Component {
 						datum,
 					}
 				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
