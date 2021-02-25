@@ -202,3 +202,10 @@ export enum ToolbarControlTypes {
 	ZOOM_OUT = 'Zoom out',
 	RESET_ZOOM = 'Reset zoom',
 }
+/**
+ * enum of title orientations for _vertical axes_
+ */
+export enum AxisTitleOrientations {
+	LEFT = 'left',
+	RIGHT = 'right',
+}

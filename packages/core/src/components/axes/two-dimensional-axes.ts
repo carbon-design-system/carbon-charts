@@ -109,9 +109,6 @@ export class TwoDimensionalAxes extends Component {
 					margins.right = width + offset;
 					break;
 			}
-
-			// Add thresholds
-			this.addAxisThresholds(animate, axisPosition);
 		});
 
 		// If the new margins are different than the existing ones
@@ -132,31 +129,6 @@ export class TwoDimensionalAxes extends Component {
 			});
 
 			this.render(true);
-		}
-	}
-
-	addAxisThresholds(animate, axisPosition) {
-		const axesOptions = Tools.getProperty(
-			this.getOptions(),
-			'axes',
-			axisPosition
-		);
-		const { thresholds } = axesOptions;
-
-		if (thresholds) {
-			thresholds.forEach((thresholdConfig, i) => {
-				const thresholdComponent = new Threshold(
-					this.model,
-					this.services,
-					{ ...thresholdConfig, axisPosition, index: i }
-				);
-				this.thresholds.push(thresholdComponent);
-			});
-
-			this.thresholds.forEach((threshold) => {
-				threshold.setParent(this.parent);
-				threshold.render(animate);
-			});
 		}
 	}
 }

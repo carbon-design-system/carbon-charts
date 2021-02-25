@@ -93,6 +93,20 @@ export enum Bar {
 }
 
 /**
+ * enum of all boxplot graph events
+ */
+export enum Boxplot {
+	BOX_MOUSEOVER = 'box-mouseover',
+	BOX_MOUSEMOVE = 'box-mousemove',
+	BOX_CLICK = 'box-click',
+	BOX_MOUSEOUT = 'box-mouseout',
+	OUTLIER_MOUSEOVER = 'outlier-mouseover',
+	OUTLIER_MOUSEMOVE = 'outlier-mousemove',
+	OUTLIER_CLICK = 'outlier-click',
+	OUTLIER_MOUSEOUT = 'outlier-mouseout',
+}
+
+/**
  * enum of all scatter graph events
  */
 export enum Scatter {
