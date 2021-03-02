@@ -88,18 +88,18 @@ export class CirclePack extends Component {
 					originalClassName: 'leaf',
 				});
 			})
-			.attr('fill-opacity', 0.3) // put in config
+			.attr('fill-opacity', 0.3) // config
 			.style('stroke', (d) => {
 				if (d.depth === 3) {
 					return 'white';
 				}
 			})
-			// .transition(
-			// 	this.services.transitions.getTransition(
-			// 		'circlepack-leaf-update-enter',
-			// 		animate
-			// 	)
-			// )
+			.transition(
+				this.services.transitions.getTransition(
+					'circlepack-leaf-update-enter',
+					animate
+				)
+			)
 			.attr('r', (d) => d.r)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y);
@@ -118,6 +118,7 @@ export class CirclePack extends Component {
 				hoveredElement.classed('hovered', true);
 
 				let childrenData = [];
+				let parentValue = null;
 				if (datum.children) {
 					childrenData = datum.children.map((child) => {
 						if (child !== null) {
@@ -135,6 +136,9 @@ export class CirclePack extends Component {
 							};
 						}
 					});
+				} else {
+					// if there is no children we want to display the value for the data
+					parentValue = datum.value;
 				}
 
 				let fillColor = getComputedStyle(this, null).getPropertyValue(
@@ -148,6 +152,7 @@ export class CirclePack extends Component {
 						{
 							color: fillColor,
 							label: datum.data.name,
+							value: parentValue
 						},
 						...childrenData,
 					],
