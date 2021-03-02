@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.41](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.40...v0.41.41) (2021-03-02)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
 ## [0.41.40](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.39...v0.41.40) (2021-03-01)
 
 **Note:** Version bump only for package @carbon/charts-vue
