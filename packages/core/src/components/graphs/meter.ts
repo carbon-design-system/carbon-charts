@@ -42,7 +42,7 @@ export class Meter extends Component {
 		const className =
 			status != null && !self.model.isUserProvidedColorScaleValid()
 				? `value status--${status}`
-				: '';
+				: 'value';
 
 		// draw the value bar
 		value
