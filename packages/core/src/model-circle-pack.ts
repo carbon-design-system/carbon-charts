@@ -33,8 +33,7 @@ export class CirclePackChartModel extends ChartModel {
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) =>
-				`${numberOfColors}-${pairingOption}-1`
+			(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
 		);
 
 		// Create default color classnames
@@ -42,5 +41,4 @@ export class CirclePackChartModel extends ChartModel {
 			.range(colorPairing)
 			.domain(this.allDataGroups);
 	}
-
 }
