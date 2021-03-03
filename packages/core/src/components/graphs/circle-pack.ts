@@ -47,7 +47,10 @@ export class CirclePack extends Component {
 					: Configuration.circlePack.padding.outer + 3;
 			});
 
-		const nodeData = packLayout(root).descendants().splice(1);
+		const nodeData = packLayout(root)
+			.descendants()
+			.splice(1)
+			.filter((node) => node.depth < 3);
 
 		const leafGroups = svg.selectAll("g[data-name='leaf']").data(nodeData);
 
@@ -108,6 +111,34 @@ export class CirclePack extends Component {
 		this.addEventListeners();
 	}
 
+	// turn off the highlight class on children circles
+	unhighlightChildren(childData) {
+		const data = childData.map((d) => {
+			return d.data;
+		});
+
+		this.parent
+			.selectAll('circle.leaf')
+			.filter(
+				(d) => data.some((datum) => datum === d.data) && d.depth > 1
+			)
+			.classed('hovered-child', false);
+	}
+
+	// highlight the children circles with a stroke
+	highlightChildren(childData) {
+		const data = childData.map((d) => {
+			return d.data;
+		});
+
+		this.parent
+			.selectAll('circle.leaf')
+			.filter(
+				(d) => data.some((datum) => datum === d.data) && d.depth > 1
+			)
+			.classed('hovered-child', true);
+	}
+
 	// add event listeners for tooltip on the circles
 	addEventListeners() {
 		const self = this;
@@ -117,6 +148,7 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
+				// get the children data for the tooltip
 				let childrenData = [];
 				let parentValue = null;
 				if (datum.children) {
@@ -136,6 +168,8 @@ export class CirclePack extends Component {
 							};
 						}
 					});
+					// children get a highlight stroke
+					self.highlightChildren(datum.children);
 				} else {
 					// if there is no children we want to display the value for the data
 					parentValue = datum.value;
@@ -152,7 +186,7 @@ export class CirclePack extends Component {
 						{
 							color: fillColor,
 							label: datum.data.name,
-							value: parentValue
+							value: parentValue,
 						},
 						...childrenData,
 					],
@@ -184,6 +218,10 @@ export class CirclePack extends Component {
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
+
+				if (datum.children) {
+					self.unhighlightChildren(datum.children);
+				}
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
