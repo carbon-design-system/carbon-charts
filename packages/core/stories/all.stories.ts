@@ -131,7 +131,7 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div class="marginTop-30" id="chart-demo">
 </div>
 
-<h3 class="marginTop-30">Code Sample</h3>
+<h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
 	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg">
 </a>

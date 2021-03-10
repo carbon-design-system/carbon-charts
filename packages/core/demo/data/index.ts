@@ -2,6 +2,7 @@ import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
+import * as bulletDemos from './bullet';
 import * as donutDemos from './donut';
 import * as lineDemos from './line';
 import * as pieDemos from './pie';
@@ -22,6 +23,7 @@ export * from './area';
 export * from './bar';
 export * from './boxplot';
 export * from './bubble';
+export * from './bullet';
 export * from './donut';
 export * from './line';
 export * from './meter';
@@ -74,6 +76,11 @@ export const chartTypes = {
 		vanilla: 'BubbleChart',
 		angular: 'ibm-bubble-chart',
 		vue: 'ccv-bubble-chart',
+	},
+	BulletChart: {
+		vanilla: 'BulletChart',
+		angular: 'ibm-bullet-chart',
+		vue: 'ccv-bullet-chart',
 	},
 	LineChart: {
 		vanilla: 'LineChart',
@@ -446,6 +453,16 @@ let allDemoGroups = [
 				data: bubbleDemos.bubbleDualDiscreteData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: false,
+			},
+		],
+	},
+	{
+		title: 'Bullet',
+		demos: [
+			{
+				options: bulletDemos.basicBulletOptions,
+				data: bulletDemos.basicBulletData,
+				chartType: chartTypes.BulletChart,
 			},
 		],
 	},

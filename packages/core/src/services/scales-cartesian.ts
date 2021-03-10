@@ -265,7 +265,7 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(options, 'axes');
 		const axisOptions = axesOptions[axisPosition];
 		const { mapsTo } = axisOptions;
-		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+		const value = Tools.getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum;
 		let scaledValue;
 		switch (scaleType) {
 			case ScaleTypes.LABELS:

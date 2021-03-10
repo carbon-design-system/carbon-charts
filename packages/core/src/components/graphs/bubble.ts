@@ -2,6 +2,7 @@
 import { Scatter } from './scatter';
 import { DOMUtils } from '../../services';
 import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
 import { Selection } from 'd3-selection';
@@ -46,6 +47,18 @@ export class Bubble extends Scatter {
 		const radiusScale = this.getRadiusScale(selection);
 		const { groupMapsTo } = options.data;
 
+		const { cartesianScales } = this.services;
+		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
+		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
+		const [
+			getXValue,
+			getYValue,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
+			getDomainValue,
+			getRangeValue,
+			cartesianScales.getOrientation()
+		);
+
 		selection
 			.raise()
 			.classed('dot', true)
@@ -56,12 +69,8 @@ export class Bubble extends Scatter {
 					animate
 				)
 			)
-			.attr('cx', (d, i) =>
-				this.services.cartesianScales.getDomainValue(d, i)
-			)
-			.attr('cy', (d, i) =>
-				this.services.cartesianScales.getRangeValue(d, i)
-			)
+			.attr('cx', getXValue)
+			.attr('cy', getYValue)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
 			.attr('r', (d) => radiusScale(d[radiusMapsTo] || 1))
 			.attr('class', (d) =>
