@@ -47,24 +47,13 @@ export class ChartModel {
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter((item) => {
-				return groups.includes(item.group);
-			});
+			allData = allData.filter((item) => groups.includes(item.group));
 		}
 
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
 				const mapsTo = axesOptions[axis].mapsTo;
 				const scaleType = axesOptions[axis].scaleType;
-				// make sure linear/log values are numbers
-				if (
-					scaleType === ScaleTypes.LINEAR ||
-					scaleType === ScaleTypes.LOG
-				) {
-					allData = allData.map((datum) => {
-						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
-					});
-				}
 
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
