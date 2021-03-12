@@ -215,6 +215,18 @@ export interface BubbleChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to bullet charts
+ */
+export interface BulletChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bullets
+	 */
+	bullet?: {
+		performanceAreaTitles?: string[];
+	};
+}
+
+/**
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {

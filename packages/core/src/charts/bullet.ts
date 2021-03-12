@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
-import { ChartConfig, BubbleChartOptions } from '../interfaces/index';
+import { ChartConfig, BulletChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
@@ -19,7 +19,7 @@ import {
 export class BulletChart extends AxisChart {
 	constructor(
 		holder: Element,
-		chartConfigs: ChartConfig<BubbleChartOptions>
+		chartConfigs: ChartConfig<BulletChartOptions>
 	) {
 		super(holder, chartConfigs);
 
@@ -27,7 +27,7 @@ export class BulletChart extends AxisChart {
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.bubbleChart,
+				Configuration.options.bulletChart,
 				chartConfigs.options
 			)
 		);

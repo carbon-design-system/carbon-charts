@@ -25,6 +25,10 @@ export const axis = {
 		verticalSpaceRatio: 2.5,
 		horizontalSpaceRatio: 3.5,
 	},
+	ratio: {
+		reference: 'value',
+		compareTo: 'marker',
+	},
 	paddingRatio: 0.1,
 };
 

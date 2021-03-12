@@ -35,14 +35,12 @@ export class Bullet extends Component {
 
 		const data = this.model.getDisplayData(this.configs.groups);
 
-		const renderRangeBoxes = () => {
-			const rangeScale = this.services.cartesianScales.getRangeScale();
-			const [rangeScaleStart, rangeScaleEnd] = rangeScale.range();
-			const [
-				rangeScaleDomainMin,
-				rangeScaleDomainMax,
-			] = rangeScale.domain();
+		const rangeScale = this.services.cartesianScales.getRangeScale();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const [rangeScaleStart, rangeScaleEnd] = rangeScale.range();
+		const [rangeScaleDomainMin, rangeScaleDomainMax] = rangeScale.domain();
 
+		const renderRangeBoxes = () => {
 			const rangeBoxData = [];
 			data.forEach((datum) => {
 				if (datum.ranges) {
@@ -246,9 +244,76 @@ export class Bullet extends Component {
 				.attr('opacity', 1);
 		};
 
+		const renderTargetQuartiles = () => {
+			let quartilesData = [];
+			data.filter((d) => Tools.getProperty(d, 'marker') !== null).forEach(
+				(d) => {
+					const value = d.marker;
+
+					quartilesData = quartilesData.concat([
+						{ datum: d, value: value * 0.25 },
+						{ datum: d, value: value * 0.5 },
+						{ datum: d, value: value * 0.75 },
+					]);
+				}
+			);
+
+			// Update data on all lines
+			const lines = DOMUtils.appendOrSelect(svg, 'g.quartiles')
+				.selectAll('path.quartile')
+				.data(quartilesData, (datum) => datum[groupMapsTo]);
+
+			// Remove lines that are no longer needed
+			lines.exit().attr('opacity', 0).remove();
+
+			// Add the paths that need to be introduced
+			const linesEnter = lines.enter().append('path').attr('opacity', 0);
+
+			linesEnter
+				.merge(lines)
+				.classed('quartile', true)
+				.transition(
+					this.services.transitions.getTransition(
+						'bullet-quartile-update-enter',
+						animate
+					)
+				)
+				.attr('d', ({ datum: d, value }, i) => {
+					/*
+					 * Orientation support for horizontal/vertical bar charts
+					 * Determine coordinates needed for a vertical set of paths
+					 * to draw the bars needed, and pass those coordinates down to
+					 * generateSVGPathString() to decide whether it needs to flip them
+					 */
+					let lineHeight = 4;
+					// if it lines up with a performance area border
+					// make the line taller
+					if (d.ranges && d.ranges.indexOf(value) !== -1) {
+						lineHeight = 8;
+					}
+
+					const x0 =
+						this.services.cartesianScales.getDomainValue(d, i) -
+						lineHeight / 2;
+					const x1 = x0 + lineHeight;
+					const y0 = this.services.cartesianScales.getRangeValue(
+						value,
+						i
+					);
+					const y1 = y0;
+
+					return Tools.generateSVGPathString(
+						{ x0, x1, y0, y1 },
+						this.services.cartesianScales.getOrientation()
+					);
+				})
+				.attr('opacity', 1);
+		};
+
 		renderRangeBoxes();
 		renderBars();
 		renderTargetLines();
+		renderTargetQuartiles();
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -281,6 +346,20 @@ export class Bullet extends Component {
 			.attr('opacity', 1);
 	};
 
+	getMatchingRangeIndexForDatapoint(datum) {
+		let matchingRangeIndex;
+		for (let i = datum.ranges.length - 1; i > 0; i--) {
+			const range = datum.ranges[i];
+			if (datum.value >= range) {
+				matchingRangeIndex = i;
+
+				return matchingRangeIndex;
+			}
+		}
+
+		return 0;
+	}
+
 	addEventListeners() {
 		const self = this;
 
@@ -299,11 +378,21 @@ export class Bullet extends Component {
 						'graph_element_mouseover_fill_update'
 					)
 				);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
 					datum,
 				});
+
+				const performanceAreaTitles = Tools.getProperty(
+					options,
+					'bullet',
+					'performanceAreaTitles'
+				);
+				const matchingRangeIndex = self.getMatchingRangeIndexForDatapoint(
+					datum
+				);
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
@@ -325,11 +414,13 @@ export class Bullet extends Component {
 						},
 						{
 							label: 'Percentage',
-							value: `${Math.floor(datum[rangeIdentifier] / datum.marker * 100)}%`,
+							value: `${Math.floor(
+								(datum[rangeIdentifier] / datum.marker) * 100
+							)}%`,
 						},
 						{
 							label: 'Performance',
-							value: ["Poor", "Satisfactory", "Great"][1 + Math.floor(Math.random() * 2)],
+							value: performanceAreaTitles[matchingRangeIndex],
 						},
 					],
 				});

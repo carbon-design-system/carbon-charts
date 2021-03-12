@@ -13,6 +13,7 @@ import {
 	GaugeChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	BulletChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
@@ -311,6 +312,15 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 } as BubbleChartOptions);
 
 /**
+ * options specific to bullet charts
+ */
+const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
+	bullet: {
+		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
+	},
+} as BulletChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -423,6 +433,7 @@ export const options = {
 	stackedBarChart,
 	boxplotChart,
 	bubbleChart,
+	bulletChart,
 	lineChart,
 	areaChart,
 	stackedAreaChart,

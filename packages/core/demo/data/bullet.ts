@@ -1,24 +1,12 @@
+import { mouse } from 'd3';
+
 export const basicBulletData = [
 	{
-		title: 'Item A',
-		group: 'D1',
-		ranges: [800, 1000, 1400],
-		marker: 1275,
-		value: 250,
-	},
-	{
-		title: 'Item B',
-		group: 'D1',
-		ranges: [300, 895, 1600],
-		marker: 1455,
-		value: 1000,
-	},
-	{
-		title: 'Item C',
+		title: 'Item E',
 		group: 'D3',
-		ranges: [350, 500, 1000],
-		marker: 1275,
-		value: 550,
+		ranges: [350, 650, 980],
+		marker: 1575,
+		value: 400,
 	},
 	{
 		title: 'Item D',
@@ -28,11 +16,25 @@ export const basicBulletData = [
 		value: 2100,
 	},
 	{
-		title: 'Item E',
+		title: 'Item C',
 		group: 'D3',
-		ranges: [350, 650, 980],
-		marker: 1575,
-		value: 400,
+		ranges: [350, 500, 1005],
+		marker: 1340,
+		value: 550,
+	},
+	{
+		title: 'Item B',
+		group: 'D1',
+		ranges: [300, 895, 1600],
+		marker: 1455,
+		value: 1000,
+	},
+	{
+		title: 'Item A',
+		group: 'D1',
+		ranges: [800, 1000, 1400],
+		marker: 1275,
+		value: 250,
 	},
 ];
 
@@ -47,7 +49,7 @@ export const basicBulletOptions = {
 			mapsTo: 'title',
 		},
 		right: {
-			scaleType: 'labels',
+			scaleType: 'labels-ratio',
 			mapsTo: 'title',
 		},
 	},
