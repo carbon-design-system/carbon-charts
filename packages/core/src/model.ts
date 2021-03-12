@@ -54,6 +54,21 @@ export class ChartModel {
 			Object.keys(axesOptions).forEach((axis) => {
 				const mapsTo = axesOptions[axis].mapsTo;
 				const scaleType = axesOptions[axis].scaleType;
+				// make sure linear/log values are numbers
+				if (
+					scaleType === ScaleTypes.LINEAR ||
+					scaleType === ScaleTypes.LOG
+				) {
+					allData = allData.map((datum) => {
+						return {
+							...datum,
+							[mapsTo]:
+								datum[mapsTo] === null
+									? datum[mapsTo]
+									: Number(datum[mapsTo]),
+						};
+					});
+				}
 
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
