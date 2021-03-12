@@ -52,16 +52,16 @@ export const circlePackTwoLevelData = [
 
 export const circlePackTwoLevelOptions = {
 	title: 'Two Levels Hierarchy',
-	legend: {
-		enabled: false,
-	},
+	canvasZoom: {
+		enabled: true,
+	}
 };
 
 export const circlePackSingleOptions = {
 	title: 'One Level Hierachy',
-	legend: {
-		enabled: false,
-	},
+	canvasZoom: {
+		enabled: true,
+	}
 };
 
 export const circlePackSingleLevelData = [
@@ -89,9 +89,9 @@ export const circlePackSingleLevelData = [
 
 export const circlePackThreeLevelOptions = {
 	title: 'Three Levels Hierarchy',
-	legend: {
-		enabled: false,
-	},
+	canvasZoom: {
+		enabled: true,
+	}
 };
 
 export const circlePackThreeLevelData = [

@@ -1,23 +1,34 @@
 // Internal Imports
 import { Component } from '../component';
-import { DOMUtils } from '../../services';
+import { DOMUtils, CanvasZoom } from '../../services';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
 import { select } from 'd3-selection';
+
 import { ColorClassNameTypes, Events } from '../../interfaces/enums';
+import { easeCubicInOut } from 'd3';
+
+
 
 let uidCounter = 0;
 export class CirclePack extends Component {
 	type = 'circle-pack';
+	hierachyLevel = 1;
+
+	zoomSettings = {
+		duration: 1000,
+		ease: easeCubicInOut,
+		zoomLevel: 3
+	}
 
 	init() {
 		const { events } = this.services;
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
@@ -41,7 +52,7 @@ export class CirclePack extends Component {
 		const packLayout = D3Pack()
 			.size([width, height])
 			.padding((d) => {
-				// add 3 px to account for the stroke width 1.5
+				// add 3 px to account for the stroke width 1.5px
 				return d.depth >= 1
 					? Configuration.circlePack.padding.inner + 3
 					: Configuration.circlePack.padding.outer + 3;
@@ -50,31 +61,19 @@ export class CirclePack extends Component {
 		const nodeData = packLayout(root)
 			.descendants()
 			.splice(1)
-			.filter((node) => node.depth < 3);
-
-		const leafGroups = svg.selectAll("g[data-name='leaf']").data(nodeData);
-
-		// Remove leaf groups that need to be removed
-		// leafGroups.exit().attr('opacity', 0).remove();
-
-		// Add the leaf groups that need to be introduced
-		// const enteringLeafGroups = leafGroups
-		// 	.enter()
-		// 	.append('g')
-		// 	.attr('data-name', 'leaf')
-		// .attr('data-uid', () => uidCounter++);
-
-		// const allLeafGroups = enteringLeafGroups.merge(leafGroups);
+			// .filter((node) => {
+				// filter based on hierarchy level
+			// });
 
 		// enter the circles
-		const circles = svg.selectAll('circle.leaf').data(nodeData);
+		const circles = svg.selectAll('circle.node').data(nodeData);
 
 		circles.exit().attr('width', 0).attr('height', 0).remove();
 
 		const enteringCircles = circles
 			.enter()
 			.append('circle')
-			.classed('leaf', true);
+			.classed('node', true);
 
 		enteringCircles
 			.merge(circles)
@@ -88,7 +87,7 @@ export class CirclePack extends Component {
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
-					originalClassName: 'leaf',
+					originalClassName: d.children ? 'node' : 'node node-leaf' ,
 				});
 			})
 			.attr('fill-opacity', 0.3) // config
@@ -109,6 +108,7 @@ export class CirclePack extends Component {
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
+		this.setBackgroundListeners();
 	}
 
 	// turn off the highlight class on children circles
@@ -118,7 +118,7 @@ export class CirclePack extends Component {
 		});
 
 		this.parent
-			.selectAll('circle.leaf')
+			.selectAll('circle.node')
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
@@ -132,18 +132,31 @@ export class CirclePack extends Component {
 		});
 
 		this.parent
-			.selectAll('circle.leaf')
+			.selectAll('circle.node')
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
 			.classed('hovered-child', true);
 	}
 
+	removeBackgroundListeners() {
+		const chartSvg = select(this.services.domUtils.getHolder());
+		chartSvg
+			.on('click', () => null);
+	}
+
+	setBackgroundListeners() {
+		const chartSvg = select(this.services.domUtils.getHolder());
+		const self = this;
+		chartSvg
+			.on('click', () => self.services.canvasZoom.zoomOut());
+	}
+
 	// add event listeners for tooltip on the circles
 	addEventListeners() {
 		const self = this;
 		this.parent
-			.selectAll('circle.leaf')
+			.selectAll('circle.node')
 			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
@@ -159,9 +172,9 @@ export class CirclePack extends Component {
 								typeof child.data.value === 'number'
 									? child.data.value
 									: child.data.children.reduce(
-											(a, b) => a + b.value,
-											0
-									  );
+										(a, b) => a + b.value,
+										0
+									);
 							return {
 								label: child.data.name,
 								value: value,
@@ -238,6 +251,7 @@ export class CirclePack extends Component {
 				});
 			})
 			.on('click', function (datum) {
+				self.services.canvasZoom.zoomIn(datum, self.parent, self.zoomSettings);
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -249,5 +263,15 @@ export class CirclePack extends Component {
 					}
 				);
 			});
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent
+			.selectAll('circle.node')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null)
+			.on('click', null);
 	}
 }
