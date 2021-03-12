@@ -15,6 +15,7 @@ import MeterChart from './meter-chart';
 import RadarChart from './radar-chart';
 import ComboChart from './combo-chart';
 import TreemapChart from './treemap-chart';
+import CirclePackChart from './circle-pack-chart';
 
 export {
 	AreaChart,
@@ -34,4 +35,5 @@ export {
 	RadarChart,
 	ComboChart,
 	TreemapChart,
+	CirclePackChart,
 };

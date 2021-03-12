@@ -13,6 +13,7 @@ import * as meterDemos from './meter';
 import * as timeSeriesAxisDemos from './time-series-axis';
 import * as radarDemos from './radar';
 import * as treemapDemos from './treemap';
+import * as circlePackDemos from './circle-pack';
 import * as toolbarDemos from './toolbar';
 import * as zoomBarDemos from './zoom-bar';
 import * as comboDemos from './combo';
@@ -32,6 +33,7 @@ export * from './step';
 export * from './radar';
 export * from './combo';
 export * from './treemap';
+export * from './circle-pack';
 
 import {
 	createChartSandbox,
@@ -129,6 +131,11 @@ export const chartTypes = {
 		vanilla: 'TreemapChart',
 		angular: 'ibm-treemap-chart',
 		vue: 'ccv-treemap-chart',
+	},
+	CirclePackChart: {
+		vanilla: 'CirclePackChart',
+		angular: 'ibm-circle-pack-chart',
+		vue: 'ccv-circle-pack-chart',
 	},
 };
 
@@ -960,6 +967,26 @@ let allDemoGroups = [
 				data: treemapDemos.treemapData,
 				options: treemapDemos.treemapOptions,
 				chartType: chartTypes.TreemapChart,
+			},
+		],
+	},
+	{
+		title: 'Circle Pack',
+		demos: [
+			{
+				data: circlePackDemos.circlePackSingleLevelData,
+				options: circlePackDemos.circlePackSingleOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackTwoLevelData,
+				options: circlePackDemos.circlePackTwoLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelOptions,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},
