@@ -31,14 +31,6 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts-react
 
-
-
-
-
-## [0.41.38](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.37...v0.41.38) (2021-02-23)
-
-**Note:** Version bump only for package @carbon/charts-react
-
 ## [0.41.37](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.36...v0.41.37) (2021-02-23)
 
 **Note:** Version bump only for package @carbon/charts-react
