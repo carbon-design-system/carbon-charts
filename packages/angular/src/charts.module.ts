@@ -19,6 +19,7 @@ import { MeterChartComponent } from './meter-chart.component';
 import { RadarChartComponent } from './radar-chart.component';
 import { ComboChartComponent } from './combo-chart.component';
 import { TreemapChartComponent } from './treemap-chart.component';
+import { CirclePackChartComponent } from './circle-pack-chart.component';
 
 @NgModule({
 	imports: [CommonModule],
@@ -41,6 +42,7 @@ import { TreemapChartComponent } from './treemap-chart.component';
 		RadarChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent,
+		CirclePackChartComponent,
 	],
 	exports: [
 		BaseChart,
@@ -61,6 +63,7 @@ import { TreemapChartComponent } from './treemap-chart.component';
 		RadarChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent,
+		CirclePackChartComponent,
 	],
 })
 export class ChartsModule {}

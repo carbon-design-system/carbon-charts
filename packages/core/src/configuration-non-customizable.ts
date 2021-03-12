@@ -1,16 +1,5 @@
 import { ZoomBarTypes } from './interfaces';
 
-export const color = {
-	pairingOptions: {
-		'1-color': 4,
-		'2-color': 5,
-		'3-color': 5,
-		'4-color': 3,
-		'5-color': 2,
-		'14-color': 1,
-	},
-};
-
 export const area = {
 	opacity: {
 		unselected: 0,
@@ -26,6 +15,24 @@ export const axis = {
 		horizontalSpaceRatio: 3.5,
 	},
 	paddingRatio: 0.1,
+};
+
+export const circlePack = {
+	padding: {
+		outer: 4,
+		inner: 2,
+	},
+};
+
+export const color = {
+	pairingOptions: {
+		'1-color': 4,
+		'2-color': 5,
+		'3-color': 5,
+		'4-color': 3,
+		'5-color': 2,
+		'14-color': 1,
+	},
 };
 
 export const boxplot = {

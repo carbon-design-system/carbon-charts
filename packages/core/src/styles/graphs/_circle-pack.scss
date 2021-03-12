@@ -1,0 +1,13 @@
+.#{$prefix}--#{$charts-prefix}--circle-pack {
+	circle.node {
+		stroke-width: 1.5px;
+
+		&.hovered {
+			fill-opacity: 1;
+		}
+
+		&.hovered-child {
+			stroke: $carbon--white-0;
+		}
+	}
+}

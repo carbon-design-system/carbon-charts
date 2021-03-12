@@ -15,6 +15,7 @@ import RadarChart from './RadarChart.svelte';
 import GaugeChart from './GaugeChart.svelte';
 import MeterChart from './MeterChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
+import CirclePackChart from './CirclePackChart.svelte';
 
 export {
 	AreaChart,
@@ -34,4 +35,5 @@ export {
 	GaugeChart,
 	MeterChart,
 	TreemapChart,
+	CirclePackChart
 };
