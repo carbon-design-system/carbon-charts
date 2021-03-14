@@ -36,13 +36,4 @@ g.#{$prefix}--#{$charts-prefix}--legend {
 	&.clickable g.legend-item:hover {
 		cursor: pointer;
 	}
-
-	g.additional-label > g.icon > svg > g {
-		stroke: none;
-		stroke-width: 1;
-
-		circle {
-			stroke: #8c8c8c;
-		}
-	}
 }

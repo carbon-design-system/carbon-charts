@@ -34,8 +34,6 @@ export class Legend extends Component {
 			.selectAll('g.legend-item')
 			.data(dataGroups, (dataGroup) => dataGroup.name);
 
-		// this.getLegendItemArray()
-
 		const addedLegendItems = legendItems
 			.enter()
 			.append('g')
@@ -63,13 +61,6 @@ export class Legend extends Component {
 			legendOptions,
 			'truncation',
 			'numCharacter'
-		);
-
-		const paletteOption = Tools.getProperty(
-			options,
-			'color',
-			'pairing',
-			'option'
 		);
 
 		const legendClickable = Tools.getProperty(
@@ -132,7 +123,10 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const additionalItems = Tools.getProperty(this.configs, 'additionalItems');
+		const additionalItems = Tools.getProperty(
+			this.configs,
+			'additionalItems'
+		);
 
 		// Add extra labels
 		if (additionalItems && dataGroups.length) {
@@ -199,7 +193,7 @@ export class Legend extends Component {
 		return dataGroups;
 	}
 
-	breakItemsIntoLines(addedLegendItems, addedExtraLabelItems = null) {
+	breakItemsIntoLines(addedLegendItems, addedAdditionalLabelItems = null) {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.getOptions();
@@ -306,17 +300,16 @@ export class Legend extends Component {
 
 				// Calculate x position for extra label items
 				if (
-					addedExtraLabelItems &&
+					addedAdditionalLabelItems &&
 					legendOrientation !== LegendOrientations.VERTICAL
 				) {
-					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
+					const lastLegendItemTextDimensions = DOMUtils.getSVGElementSize(
 						select(this).select('text'),
 						{ useBBox: true }
 					);
 
-					extraLabelItemsStartingPoint =
-						startingPoint +
-						legendItemTextDimensions.width +
+					extraLabelItemsStartingPoint +=
+						lastLegendItemTextDimensions.width +
 						spaceNeededForCheckbox +
 						legendItemsHorizontalSpacing;
 				}
@@ -377,11 +370,16 @@ export class Legend extends Component {
 			});
 
 		// add extra label items
-		if (addedExtraLabelItems) {
-			addedExtraLabelItems
+		if (addedAdditionalLabelItems) {
+			addedAdditionalLabelItems
 				.merge(svg.selectAll('g.additional-label'))
 				.each(function (d) {
-					const radiusLabelItem = select(this);
+					const additionalLabelItem = select(this);
+					const iconWidth = Tools.parseSVGSize(
+						d['icon'],
+						checkboxRadius * 2
+					);
+
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;
 					} else {
@@ -395,7 +393,7 @@ export class Legend extends Component {
 						);
 						if (
 							extraLabelItemsStartingPoint +
-								spaceNeededForCheckbox +
+								iconWidth +
 								labelItemTextDimensions.width >
 							svgDimensions.width
 						) {
@@ -404,17 +402,17 @@ export class Legend extends Component {
 						}
 					}
 
-					radiusLabelItem
+					additionalLabelItem
 						.select('g.icon svg')
+						.attr('height', checkboxRadius * 2)
 						.attr('x', extraLabelItemsStartingPoint)
 						.attr('y', lineNumber * legendItemsVerticalSpacing);
 
-					radiusLabelItem
+					additionalLabelItem
 						.select('text')
 						.attr(
 							'x',
-							extraLabelItemsStartingPoint +
-								spaceNeededForCheckbox
+							(d) => extraLabelItemsStartingPoint + iconWidth + 4
 						)
 						.attr(
 							'y',
@@ -425,14 +423,15 @@ export class Legend extends Component {
 
 					if (legendOrientation !== LegendOrientations.VERTICAL) {
 						const labelTextDimensions = DOMUtils.getSVGElementSize(
-							radiusLabelItem.select('text'),
+							select(this).select('text'),
 							{ useBBox: true }
 						);
 
 						// calculate starting point for next label item
 						extraLabelItemsStartingPoint +=
 							labelTextDimensions.width +
-							spaceNeededForCheckbox +
+							iconWidth +
+							Configuration.legend.checkbox.spaceAfter +
 							legendItemsHorizontalSpacing;
 					}
 				});

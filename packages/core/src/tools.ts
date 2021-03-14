@@ -419,4 +419,28 @@ export namespace Tools {
 
 	export const compareNumeric = (a: Numeric, b: Numeric) =>
 		Number(a) === Number(b);
+
+	export const convertSVGString = (string) => {
+		string = string.replace(/&quot;/g, '"');
+		string = string.replace(/&lt;/g, '<');
+		string = string.replace(/&gt;/g, '>');
+		return string;
+	};
+
+	export const parseSVGSize = (iconString, defaultHeight) => {
+		const reg = new RegExp(String.raw`\s(width|height)+\=\"(.*?)\"`, 'g');
+		const attrMatch = iconString.match(reg);
+		let width = 0,
+			height = 0;
+
+		for (const attr of attrMatch) {
+			if (attr.includes('width') && !width) {
+				width = parseInt(attr.match(/[0-9]+/, 'g')[0]);
+			} else if (attr.includes('height') && !height) {
+				height = parseInt(attr.match(/[0-9]+/, 'g')[0]);
+			}
+		}
+
+		return width;
+	};
 }

@@ -58,10 +58,10 @@ export const lines = {
 export const bubble = {
 	radiusLabel: {
 		type: 'radius-label',
-		icon: `<svg width="16px" height="16px" viewBox="0 0 16 16">
+		icon: `<svg width="16px" height="16px" viewBox="0 0 16 16" stroke="none" stroke-width="1">
 					<g fill="none" fill-rule="evenodd">
-						<circle cx="7" cy="7" r="6.5"></circle>
-						<circle cx="7" cy="10" r="3.5"></circle>
+						<circle cx="7" cy="7" r="6.5" stroke="#8c8c8c"></circle>
+						<circle cx="7" cy="10" r="3.5" stroke="#8c8c8c"></circle>
 					</g>
 				</svg>`,
 		text: 'Radius'

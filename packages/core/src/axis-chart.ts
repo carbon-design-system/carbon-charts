@@ -113,14 +113,24 @@ export class AxisChart extends Chart {
 
 		// Add extra legend items
 		const radiusLabel = Tools.getProperty(options, 'bubble', 'radiusLabel');
-		const additionalItems = radiusLabel
+		let additionalItems = Tools.getProperty(
+			options,
+			'legend',
+			'additionalItems'
+		);
+		additionalItems.forEach(
+			(item) => (item.icon = Tools.convertSVGString(item.icon))
+		);
+
+		additionalItems = radiusLabel
 			? [
 					{
 						...bubbleConfig.radiusLabel,
 						text: radiusLabel,
 					},
+					...additionalItems,
 			  ]
-			: [];
+			: additionalItems;
 
 		const legendComponent = {
 			id: 'legend',

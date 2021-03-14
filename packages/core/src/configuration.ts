@@ -62,6 +62,7 @@ const legend: LegendOptions = {
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null,
+	additionalItems: [],
 };
 
 /**
