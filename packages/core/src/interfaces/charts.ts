@@ -106,7 +106,7 @@ export interface BaseChartOptions {
 	 */
 	color?: {
 		/**
-		 * e.g. { "Dataset 1": "blue" }
+		 * e.g. { 'Dataset 1': 'blue' }
 		 */
 		scale?: object;
 		/**
@@ -143,6 +143,11 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 */
 	zoomBar?: ZoomBarsOptions;
 }
+
+/**
+ * options specific to boxplot charts
+ */
+export interface BoxplotChartOptions extends AxisChartOptions {}
 
 /**
  * options specific to bar charts
@@ -269,6 +274,7 @@ export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
 			formatter?: Function;
+			enabled?: Boolean;
 		};
 		alignment?: Alignments;
 	};

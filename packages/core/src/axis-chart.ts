@@ -15,6 +15,7 @@ import {
 	ChartClip,
 	LayoutComponent,
 	Legend,
+	Threshold,
 	Title,
 	AxisChartsTooltip,
 	Spacer,
@@ -38,7 +39,10 @@ export class AxisChart extends Chart {
 		super(holder, chartConfigs);
 	}
 
-	protected getAxisChartComponents(graphFrameComponents: any[]) {
+	protected getAxisChartComponents(
+		graphFrameComponents: any[],
+		configs?: object
+	) {
 		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
 			options,
@@ -151,6 +155,8 @@ export class AxisChart extends Chart {
 			);
 		}
 
+		graphFrameComponents.push(new Threshold(this.model, this.services));
+
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
@@ -161,6 +167,7 @@ export class AxisChart extends Chart {
 		};
 
 		const isLegendEnabled =
+			Tools.getProperty(configs, 'legend', 'enabled') !== false &&
 			this.model.getOptions().legend.enabled !== false;
 
 		// Decide the position of the legend in reference to the chart
