@@ -227,6 +227,11 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
+				options: barDemos.simpleBarAdditionalLegendItemOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
 				options: barDemos.simpleBarFixedDomainOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart,

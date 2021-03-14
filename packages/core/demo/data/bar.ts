@@ -216,6 +216,52 @@ export const simpleBarLongLabelOptions = {
 	},
 };
 
+export const simpleBarAdditionalLegendItemOptions = {
+	title: 'Simple bar (additional legend item)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+	bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'rect',
+				icon: `<svg width="24px" height="13px" stroke="none" stroke-width="1">
+							<g fill="none" fill-rule="evenodd">
+								<rect width="24" height="13" style="fill:none; stroke:white; storke-width:1" />
+								<line x1="0" y1="6" x2="12" y2="6" style="stroke:white;stroke-width:0.5" />
+								<line x1="12" y1="5.7" x2="12" y2="13" style="stroke:white;stroke-width:0.5" />
+							</g>
+						</svg>`,
+				text: 'Rect Icon',
+			},
+			{
+				type: 'line',
+				icon: `<svg width="20px" height="13px" stroke="none" stroke-width="1">
+							<g fill="none" fill-rule="evenodd">
+								<line x1="0" y1="6" x2="20" y2="6" style="stroke:#ffd7ba;stroke-width:1" />
+							</g>
+						</svg>`,
+				text: 'Line Icon',
+			},
+			{
+				type: 'circle',
+				icon: `<svg width="13px" height="13px" viewBox="0 0 16 16" stroke="none" stroke-width="1">
+							<g fill="none" fill-rule="evenodd">
+								<circle cx="7" cy="7" r="6.5" stroke="#ED4577"></circle>
+							</g>
+						</svg>`,
+				text: 'Circle Icon',
+			},
+		],
+	},
+}
+
 export const simpleBarFixedDomainOptions = {
 	title: 'Simple bar (customized domain)',
 	axes: {
