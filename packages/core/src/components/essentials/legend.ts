@@ -128,28 +128,28 @@ export class Legend extends Component {
 			'additionalItems'
 		);
 
-		// Add extra labels
+		// Add additional labels
 		if (additionalItems && dataGroups.length) {
-			const extraLabelItems = svg
+			const additionalLabelItems = svg
 				.selectAll('g.additional-label')
 				.data(additionalItems);
 
-			const addedExtraLabelItems = extraLabelItems
+			const addedAdditionalLabelItems = additionalLabelItems
 				.enter()
 				.append('g')
 				.classed('additional-label', true);
 
-			addedExtraLabelItems
+			addedAdditionalLabelItems
 				.append('g')
 				.classed('icon', true)
 				.html((d) => d.icon);
 
-			addedExtraLabelItems
+			addedAdditionalLabelItems
 				.append('text')
-				.merge(extraLabelItems.select('text'))
+				.merge(additionalLabelItems.select('text'))
 				.html((d) => d.text);
 
-			this.breakItemsIntoLines(addedLegendItems, addedExtraLabelItems);
+			this.breakItemsIntoLines(addedLegendItems, addedAdditionalLabelItems);
 		} else {
 			this.breakItemsIntoLines(addedLegendItems);
 		}
@@ -225,7 +225,7 @@ export class Legend extends Component {
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
-		let extraLabelItemsStartingPoint = 0;
+		let additionalLabelItemsStartingPoint = 0;
 		addedLegendItems
 			.merge(svg.selectAll('g.legend-item'))
 			.each(function (d, i) {
@@ -298,7 +298,7 @@ export class Legend extends Component {
 					.attr('x', startingPoint + spaceNeededForCheckbox)
 					.attr('y', yOffset + yPosition + 3);
 
-				// Calculate x position for extra label items
+				// Calculate x position for additional label items
 				if (
 					addedAdditionalLabelItems &&
 					legendOrientation !== LegendOrientations.VERTICAL
@@ -308,7 +308,7 @@ export class Legend extends Component {
 						{ useBBox: true }
 					);
 
-					extraLabelItemsStartingPoint +=
+					additionalLabelItemsStartingPoint +=
 						lastLegendItemTextDimensions.width +
 						spaceNeededForCheckbox +
 						legendItemsHorizontalSpacing;
@@ -392,27 +392,27 @@ export class Legend extends Component {
 							{ useBBox: true }
 						);
 						if (
-							extraLabelItemsStartingPoint +
+							additionalLabelItemsStartingPoint +
 								iconWidth +
 								labelItemTextDimensions.width >
 							svgDimensions.width
 						) {
 							lineNumber++;
-							extraLabelItemsStartingPoint = 0;
+							additionalLabelItemsStartingPoint = 0;
 						}
 					}
 
 					additionalLabelItem
 						.select('g.icon svg')
 						.attr('height', checkboxRadius * 2)
-						.attr('x', extraLabelItemsStartingPoint)
+						.attr('x', additionalLabelItemsStartingPoint)
 						.attr('y', lineNumber * legendItemsVerticalSpacing);
 
 					additionalLabelItem
 						.select('text')
 						.attr(
 							'x',
-							(d) => extraLabelItemsStartingPoint + iconWidth + 4
+							(d) => additionalLabelItemsStartingPoint + iconWidth + 4
 						)
 						.attr(
 							'y',
@@ -428,7 +428,7 @@ export class Legend extends Component {
 						);
 
 						// calculate starting point for next label item
-						extraLabelItemsStartingPoint +=
+						additionalLabelItemsStartingPoint +=
 							labelTextDimensions.width +
 							iconWidth +
 							Configuration.legend.checkbox.spaceAfter +
