@@ -337,6 +337,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 			size: (radius) => radius / 8,
 			enabled: true,
 		},
+		showPercentageSymbol: true,
 		status: null,
 		numberSpacing: 10,
 		deltaFontSize: (radius) => radius / 8,
