@@ -30,12 +30,12 @@ export class CanvasZoom extends Service {
 		}
 
 		// the 'viewport' size of the chart
-		const {
-			width,
-			height,
-		} = DOMUtils.getSVGElementSize(this.services.domUtils.getHolder(), {
-			useClientDimensions: true,
-		});
+		const { width, height } = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getHolder(),
+			{
+				useClientDimensions: true,
+			}
+		);
 
 		canvasElements
 			.transition()

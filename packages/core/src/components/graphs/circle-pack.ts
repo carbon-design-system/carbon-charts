@@ -5,7 +5,7 @@ import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
-import { select } from 'd3-selection';
+import { event, select } from 'd3-selection';
 
 import { ColorClassNameTypes, Events } from '../../interfaces/enums';
 import { Tools } from './../../tools';
@@ -105,7 +105,7 @@ export class CirclePack extends Component {
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
-		// this.setBackgroundListeners();
+		this.setBackgroundListeners();
 	}
 
 	// turn off the highlight class on children circles
@@ -144,7 +144,16 @@ export class CirclePack extends Component {
 	setBackgroundListeners() {
 		const chartSvg = select(this.services.domUtils.getHolder());
 		const self = this;
-		chartSvg.on('click', () => self.services.canvasZoom.zoomOut());
+		const canvasSelection = this.parent.selectAll('circle.node');
+
+		chartSvg.on('click', () => {
+			self.focal = null;
+			self.model.updateHierarchyLevel(2);
+			self.services.canvasZoom.zoomOut(
+				canvasSelection,
+				Configuration.canvasZoomSettings
+			);
+		});
 	}
 
 	// add event listeners for tooltip on the circles
@@ -257,22 +266,18 @@ export class CirclePack extends Component {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
-					if (self.model.getHierarchyLevel() >= 3) {
-						self.focal = null;
-						self.model.updateHierarchyLevel(2);
-						self.services.canvasZoom.zoomOut(
-							canvasSelection,
-							Configuration.canvasZoomSettings
-						);
-					} else {
-						self.focal = datum;
-						self.model.updateHierarchyLevel(3);
-						self.services.canvasZoom.zoomIn(
-							datum,
-							canvasSelection,
-							Configuration.canvasZoomSettings
-						);
-					}
+
+					self.focal = datum;
+					self.model.updateHierarchyLevel(3);
+					self.services.canvasZoom.zoomIn(
+						datum,
+						canvasSelection,
+						Configuration.canvasZoomSettings
+					);
+					// don't want the click event to propagate to the background zoom out
+					// does not clash with the tooltip/other events becuase it does need to close the
+					// tooltip on the click event in order to zoom in/out
+					event.stopPropagation();
 				}
 				const hoveredElement = select(this);
 
