@@ -371,7 +371,7 @@ export interface TreemapChartOptions extends BaseChartOptions {}
 export interface CirclePackChartOptions extends BaseChartOptions {
 	circlePack?: {
 		// depth of nodes to display
-		hierachyLevel: number,
+		hierachyLevel: number;
 		padding?: {
 			outer?: number;
 			inner?: number;

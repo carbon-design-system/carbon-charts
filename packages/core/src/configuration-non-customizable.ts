@@ -21,15 +21,15 @@ export const axis = {
 export const canvasZoomSettings = {
 	duration: 1000,
 	ease: easeCubicInOut,
-	zoomLevel: 3
-}
+	zoomLevel: 3,
+};
 
 export const circlePack = {
 	padding: {
 		outer: 4,
 		inner: 2,
 	},
-	hierarchyLevel: 2
+	hierarchyLevel: 2,
 };
 
 export const color = {

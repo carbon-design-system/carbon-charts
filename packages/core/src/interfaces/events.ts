@@ -44,12 +44,11 @@ export enum ZoomDomain {
 
 /** enum of all events related to canvas zoom *
  *
-*/
+ */
 export enum CanvasZoom {
 	CANVAS_ZOOM_IN = 'canvas-zoom-in',
-	CANVAS_ZOOM_OUT= 'canvas-zoom-out',
+	CANVAS_ZOOM_OUT = 'canvas-zoom-out',
 }
-
 
 /**
  * enum of all axis-related events

@@ -17,12 +17,18 @@ import {
 	LayoutComponent,
 	Tooltip,
 	Spacer,
-	CanvasChartClip
+	CanvasChartClip,
 } from './components';
 import { Tools } from './tools';
 
 // Services
-import { CanvasZoom, DOMUtils, Events, GradientUtils, Transitions } from './services/index';
+import {
+	CanvasZoom,
+	DOMUtils,
+	Events,
+	GradientUtils,
+	Transitions,
+} from './services/index';
 
 export class Chart {
 	components: Component[];
@@ -31,11 +37,11 @@ export class Chart {
 		events: Events,
 		gradientUtils: GradientUtils,
 		transitions: Transitions,
-		canvasZoom: CanvasZoom
+		canvasZoom: CanvasZoom,
 	};
 	model: ChartModel = new ChartModel(this.services);
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) { }
+	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
@@ -137,13 +143,16 @@ export class Chart {
 		};
 
 		// if canvas zoom is enabled
-		const isZoomEnabled = Tools.getProperty(this.model.getOptions(), 'canvasZoom', 'enabled');
+		const isZoomEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			'canvasZoom',
+			'enabled'
+		);
 		if (isZoomEnabled && isZoomEnabled === true) {
 			graphFrameComponents.push(
 				new CanvasChartClip(this.model, this.services)
 			);
 		}
-
 
 		const graphFrameComponent = {
 			id: 'graph-frame',

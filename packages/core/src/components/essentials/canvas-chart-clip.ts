@@ -9,7 +9,8 @@ export class CanvasChartClip extends ChartClip {
 
 	// Give every chart-clip a distinct ID
 	// so they don't interfere each other in a page with multiple charts
-	chartClipId = 'canvas-chart-clip-id-' + Math.floor(Math.random() * 99999999999);
+	chartClipId =
+		'canvas-chart-clip-id-' + Math.floor(Math.random() * 99999999999);
 
 	createClipPath() {
 		const svg = this.parent;
@@ -29,8 +30,8 @@ export class CanvasChartClip extends ChartClip {
 		clipRect
 			.attr('x', 0)
 			.attr('y', 0)
-			.attr('width', width )
-			.attr('height',  height);
+			.attr('width', width)
+			.attr('height', height);
 
 		this.chartClipPath.merge(clipRect).lower();
 	}

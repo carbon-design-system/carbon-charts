@@ -15,13 +15,17 @@ export class CirclePackChartModel extends ChartModel {
 
 	// update the hierarchy level
 	updateHierarchyLevel(depth: number) {
-		this.setOptions(
-			{ circlePack: { hierarchyLevel: depth } }
-		);
+		this.setOptions({ circlePack: { hierarchyLevel: depth } });
 	}
 
 	getHierarchyLevel() {
-		return Tools.getProperty(this.getOptions(), 'circlePack', 'hierarchyLevel') || Configuration.circlePack.hierarchyLevel;
+		return (
+			Tools.getProperty(
+				this.getOptions(),
+				'circlePack',
+				'hierarchyLevel'
+			) || Configuration.circlePack.hierarchyLevel
+		);
 	}
 
 	protected setColorClassNames() {

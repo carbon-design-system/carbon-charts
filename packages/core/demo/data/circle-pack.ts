@@ -54,14 +54,14 @@ export const circlePackTwoLevelOptions = {
 	title: 'Two Levels Hierarchy',
 	canvasZoom: {
 		enabled: true,
-	}
+	},
 };
 
 export const circlePackSingleOptions = {
 	title: 'One Level Hierachy',
 	canvasZoom: {
 		enabled: true,
-	}
+	},
 };
 
 export const circlePackSingleLevelData = [
@@ -91,7 +91,7 @@ export const circlePackThreeLevelOptions = {
 	title: 'Three Levels Hierarchy',
 	canvasZoom: {
 		enabled: true,
-	}
+	},
 };
 
 export const circlePackThreeLevelData = [
@@ -141,13 +141,12 @@ export const circlePackThreeLevelData = [
 	},
 ];
 
-
 export const circlePackThreeLevelNoZoomOptions = {
 	title: 'Three Levels Hierarchy (No Zoom)',
 	circlePack: {
-		hierarchyLevel: 3
+		hierarchyLevel: 3,
 	},
 	canvasZoom: {
 		enabled: false,
-	}
+	},
 };

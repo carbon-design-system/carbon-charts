@@ -72,7 +72,7 @@ export class CirclePack extends Component {
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
-					originalClassName: d.children ? 'node' : 'node node-leaf' ,
+					originalClassName: d.children ? 'node' : 'node node-leaf',
 				});
 			})
 			.attr('fill-opacity', 0.3) // config
@@ -91,9 +91,17 @@ export class CirclePack extends Component {
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y);
 
-			if(Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') === true && this.focal) {
-				this.services.canvasZoom.zoomIn(this.focal, enteringCircles, Configuration.canvasZoomSettings);
-			}
+		if (
+			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
+				true &&
+			this.focal
+		) {
+			this.services.canvasZoom.zoomIn(
+				this.focal,
+				enteringCircles,
+				Configuration.canvasZoomSettings
+			);
+		}
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -130,15 +138,13 @@ export class CirclePack extends Component {
 
 	removeBackgroundListeners() {
 		const chartSvg = select(this.services.domUtils.getHolder());
-		chartSvg
-			.on('click', () => null);
+		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
 		const chartSvg = select(this.services.domUtils.getHolder());
 		const self = this;
-		chartSvg
-			.on('click', () => self.services.canvasZoom.zoomOut());
+		chartSvg.on('click', () => self.services.canvasZoom.zoomOut());
 	}
 
 	// add event listeners for tooltip on the circles
@@ -161,9 +167,9 @@ export class CirclePack extends Component {
 								typeof child.data.value === 'number'
 									? child.data.value
 									: child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
+											(a, b) => a + b.value,
+											0
+									  );
 							return {
 								label: child.data.name,
 								value: value,
@@ -241,18 +247,32 @@ export class CirclePack extends Component {
 			})
 			.on('click', function (datum) {
 				// zoom if chart has it enabled
-				if(Tools.getProperty(self.getOptions(), 'canvasZoom', 'enabled') === true) {
-					const canvasSelection = self.parent.selectAll('circle.node');
-					if(self.model.getHierarchyLevel() >= 3) {
+				if (
+					Tools.getProperty(
+						self.getOptions(),
+						'canvasZoom',
+						'enabled'
+					) === true
+				) {
+					const canvasSelection = self.parent.selectAll(
+						'circle.node'
+					);
+					if (self.model.getHierarchyLevel() >= 3) {
 						self.focal = null;
 						self.model.updateHierarchyLevel(2);
-						self.services.canvasZoom.zoomOut(canvasSelection, Configuration.canvasZoomSettings);
+						self.services.canvasZoom.zoomOut(
+							canvasSelection,
+							Configuration.canvasZoomSettings
+						);
 					} else {
 						self.focal = datum;
 						self.model.updateHierarchyLevel(3);
-						self.services.canvasZoom.zoomIn(datum, canvasSelection, Configuration.canvasZoomSettings);
+						self.services.canvasZoom.zoomIn(
+							datum,
+							canvasSelection,
+							Configuration.canvasZoomSettings
+						);
 					}
-
 				}
 				const hoveredElement = select(this);
 
