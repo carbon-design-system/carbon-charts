@@ -7,18 +7,17 @@
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
 ## Getting started
-
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-react d3@5.x
+npm install -S @carbon/charts-react d3@5.x
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-react d3@5.x
+yarn add @carbon/charts-react d3@5.x
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a
@@ -54,3 +53,16 @@ used,
 
 Customizable options (specific to chart type) can be found
 [here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)
+
+## Errors trying to resolve `@carbon/charts/styles.css`
+If you're having issues importing `@carbon/charts/styles.css` with an error similar to `can't resolve this module` you may need to install `@carbon/charts` seperately so that your environment can resolve it. To install `@carbon/charts` seperately:
+
+Run the following command using [npm](https://www.npmjs.com/):
+  ```bash
+  npm install -S @carbon/charts
+  ```
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
+  ```bash
+  yarn add @carbon/charts
+  ```
