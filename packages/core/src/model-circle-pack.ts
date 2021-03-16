@@ -13,6 +13,17 @@ export class CirclePackChartModel extends ChartModel {
 		super(services);
 	}
 
+	// update the hierarchy level
+	updateHierarchyLevel(depth: number) {
+		this.setOptions(
+			{ circlePack: { hierarchyLevel: depth } }
+		);
+	}
+
+	getHierarchyLevel() {
+		return Tools.getProperty(this.getOptions(), 'circlePack', 'hierarchyLevel') || Configuration.circlePack.hierarchyLevel;
+	}
+
 	protected setColorClassNames() {
 		// monochrome
 		const numberOfColors = 1;

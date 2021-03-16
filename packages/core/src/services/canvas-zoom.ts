@@ -1,35 +1,65 @@
 // Internal Imports
 import { Service } from './service';
 import { Tools } from '../tools';
+import { Events } from './../interfaces/enums'
 import * as Configuration from '../configuration';
 // Services
-import { DOMUtils, Events, GradientUtils, Transitions } from './index';
+import { DOMUtils } from './index';
+import { select } from 'd3-selection';
 
 export class CanvasZoom extends Service {
 	protected model: any;
 
-	//focal object to zoom into, parent is the whole parent chart svg, settings are duration,easing and zoomlevel
-	zoomIn(obj, parent, settings?) {
+
+
+	/**
+	 * focal:  object to zoom into
+	 * canvasElements: all the elements to translate and zoom on the chart area
+	 * zoomSettings: object containing duration, easing and zoomlevel for the zoom behaviours
+	 *  */
+	zoomIn(focal, canvasElements, zoomSettings?) {
 		let x;
 		let y;
-		var zoomLevel;
+		let zoomLevel;
+		const settings = zoomSettings ? zoomSettings : Configuration.canvasZoomSettings;
 
-		if (obj) {
-			x = obj.x;
-			y = obj.y;
-			zoomLevel = settings.zoomLevel
+		if (focal) {
+			x = focal.x;
+			y = focal.y;
+			zoomLevel = 2
 		}
 
-		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
+		// the 'viewport' size of the chart
+		const { width, height } = DOMUtils.getSVGElementSize(this.services.domUtils.getHolder(), { useClientDimensions: true });
 
-		const circles = parent.selectAll("circle.node");
-		circles.transition()
+		canvasElements.transition()
 			.duration(settings.duration)
 			.ease(settings.ease)
 			.attr('transform', `translate(` + width / 2 + `,` + height / 2 + `)scale(` + zoomLevel + `)translate(` + -x + `,` + -y + `)`);
+
+
+		// Dispatch canvas zoom in event
+		this.services.events.dispatchEvent(
+			Events.CanvasZoom.CANVAS_ZOOM_IN,
+			{
+				element: select(focal)
+			}
+		);
 	}
 
-	zoomOut(obj?) {
-		console.log("zooming out");
+	zoomOut(canvasElements, zoomSettings?) {
+		const settings = zoomSettings ? zoomSettings : Configuration.canvasZoomSettings;
+		canvasElements.transition()
+			.duration(settings.duration)
+			.ease(settings.ease)
+			.attr('transform', '');
+
+
+
+		// Dispatch canvas zoom out event
+		this.services.events.dispatchEvent(
+			Events.CanvasZoom.CANVAS_ZOOM_OUT,
+			{ }
+		);
 	}
 }

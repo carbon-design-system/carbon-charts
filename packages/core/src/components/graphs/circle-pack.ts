@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { DOMUtils, CanvasZoom } from '../../services';
+import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
@@ -8,24 +8,11 @@ import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
 import { select } from 'd3-selection';
 
 import { ColorClassNameTypes, Events } from '../../interfaces/enums';
-import { easeCubicInOut } from 'd3';
+import { Tools } from './../../tools';
 
-
-
-let uidCounter = 0;
 export class CirclePack extends Component {
 	type = 'circle-pack';
-	hierachyLevel = 1;
-
-	zoomSettings = {
-		duration: 1000,
-		ease: easeCubicInOut,
-		zoomLevel: 3
-	}
-
-	init() {
-		const { events } = this.services;
-	}
+	focal;
 
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
@@ -40,6 +27,7 @@ export class CirclePack extends Component {
 		}
 
 		const displayData = this.model.getDisplayData();
+		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 
 		const root = d3Hierarchy({
@@ -61,9 +49,10 @@ export class CirclePack extends Component {
 		const nodeData = packLayout(root)
 			.descendants()
 			.splice(1)
-			// .filter((node) => {
-				// filter based on hierarchy level
-			// });
+			.filter((node) => {
+				//filter based on hierarchy level
+				return node.depth <= hierarchyLevel;
+			});
 
 		// enter the circles
 		const circles = svg.selectAll('circle.node').data(nodeData);
@@ -77,10 +66,6 @@ export class CirclePack extends Component {
 
 		enteringCircles
 			.merge(circles)
-			// .attr('id', function () {
-			// 	const uid = select(this.parentNode).attr('data-uid');
-			// 	return `${options.style.prefix}-leaf-${uid}`;
-			// })
 			.attr('class', (d) => {
 				return this.model.getColorClassName({
 					classNameTypes: [
@@ -106,9 +91,13 @@ export class CirclePack extends Component {
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y);
 
+			if(Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') === true && this.focal) {
+				this.services.canvasZoom.zoomIn(this.focal, enteringCircles, Configuration.canvasZoomSettings);
+			}
+
 		// Add event listeners to elements drawn
 		this.addEventListeners();
-		this.setBackgroundListeners();
+		// this.setBackgroundListeners();
 	}
 
 	// turn off the highlight class on children circles
@@ -251,7 +240,20 @@ export class CirclePack extends Component {
 				});
 			})
 			.on('click', function (datum) {
-				self.services.canvasZoom.zoomIn(datum, self.parent, self.zoomSettings);
+				// zoom if chart has it enabled
+				if(Tools.getProperty(self.getOptions(), 'canvasZoom', 'enabled') === true) {
+					const canvasSelection = self.parent.selectAll('circle.node');
+					if(self.model.getHierarchyLevel() >= 3) {
+						self.focal = null;
+						self.model.updateHierarchyLevel(2);
+						self.services.canvasZoom.zoomOut(canvasSelection, Configuration.canvasZoomSettings);
+					} else {
+						self.focal = datum;
+						self.model.updateHierarchyLevel(3);
+						self.services.canvasZoom.zoomIn(datum, canvasSelection, Configuration.canvasZoomSettings);
+					}
+
+				}
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event

@@ -140,3 +140,14 @@ export const circlePackThreeLevelData = [
 		],
 	},
 ];
+
+
+export const circlePackThreeLevelNoZoomOptions = {
+	title: 'Three Levels Hierarchy (No Zoom)',
+	circlePack: {
+		hierarchyLevel: 3
+	},
+	canvasZoom: {
+		enabled: false,
+	}
+};

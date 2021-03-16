@@ -1,4 +1,5 @@
 import { ZoomBarTypes } from './interfaces';
+import { easeCubicInOut } from 'd3';
 
 export const area = {
 	opacity: {
@@ -17,11 +18,18 @@ export const axis = {
 	paddingRatio: 0.1,
 };
 
+export const canvasZoomSettings = {
+	duration: 1000,
+	ease: easeCubicInOut,
+	zoomLevel: 3
+}
+
 export const circlePack = {
 	padding: {
 		outer: 4,
 		inner: 2,
 	},
+	hierarchyLevel: 2
 };
 
 export const color = {

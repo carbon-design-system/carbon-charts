@@ -988,6 +988,11 @@ let allDemoGroups = [
 				options: circlePackDemos.circlePackThreeLevelOptions,
 				chartType: chartTypes.CirclePackChart,
 			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
 		],
 	},
 	{
