@@ -92,7 +92,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
@@ -122,7 +122,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
@@ -159,7 +159,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -191,7 +191,7 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.highlight-area'))
 			.attr('class', 'highlight-area')
 			.attr('opacity', 0)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -225,7 +225,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -259,7 +259,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -293,7 +293,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', d => {
+			.attr('d', (d) => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -365,7 +365,10 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', true)
-					.attr('fill-opacity', Configuration.boxplot.box.opacity.hovered);
+					.attr(
+						'fill-opacity',
+						Configuration.boxplot.box.opacity.hovered
+					);
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -441,7 +444,10 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', false)
-					.attr('fill-opacity', Configuration.boxplot.box.opacity.default);
+					.attr(
+						'fill-opacity',
+						Configuration.boxplot.box.opacity.default
+					);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -474,7 +480,10 @@ export class Boxplot extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr('fill-opacity', Configuration.boxplot.circle.opacity.hovered)
+					.attr(
+						'fill-opacity',
+						Configuration.boxplot.circle.opacity.hovered
+					)
 					.classed('unfilled', false);
 
 				// Show tooltip for single datapoint
@@ -532,7 +541,10 @@ export class Boxplot extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.attr('fill-opacity', Configuration.boxplot.circle.opacity.default);
+					.attr(
+						'fill-opacity',
+						Configuration.boxplot.circle.opacity.default
+					);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(

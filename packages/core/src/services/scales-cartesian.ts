@@ -506,7 +506,10 @@ export class CartesianScales extends Service {
 
 		const displayData = this.model.getDisplayData();
 		const { mapsTo, percentage } = axisOptions;
-		const {reference: ratioReference, compareTo: ratioCompareTo} = Configuration.axis.ratio;
+		const {
+			reference: ratioReference,
+			compareTo: ratioCompareTo,
+		} = Configuration.axis.ratio;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
@@ -537,7 +540,9 @@ export class CartesianScales extends Service {
 		const dataGroupNames = this.model.getDataGroupNames();
 
 		if (scaleType === ScaleTypes.LABELS_RATIO) {
-			return displayData.map((datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`);
+			return displayData.map(
+				(datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`
+			);
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map(
 				(datum) => +new Date(datum[mapsTo])

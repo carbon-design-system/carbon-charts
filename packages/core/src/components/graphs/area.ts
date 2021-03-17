@@ -126,7 +126,7 @@ export class Area extends Component {
 				.select(
 					`path.${this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.STROKE],
-						dataGroupName: groupedData[0].name
+						dataGroupName: groupedData[0].name,
 					})}`
 				)
 				.node();

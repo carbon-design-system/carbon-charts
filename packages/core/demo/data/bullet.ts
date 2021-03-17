@@ -1,5 +1,3 @@
-import { mouse } from 'd3';
-
 export const basicBulletData = [
 	{
 		title: 'Item E',
