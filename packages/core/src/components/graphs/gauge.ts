@@ -206,6 +206,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const showPercentageSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'showPercentageSymbol'
+		);
+
 		// circular gauge without delta should have valueNumber centered
 		let numbersYPosition = 0;
 		if (arcType === GaugeTypes.FULL && !delta) {
@@ -255,13 +261,14 @@ export class Gauge extends Component {
 		);
 
 		const symbolFontSize = fontSize / 2;
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
 		const symbol = DOMUtils.appendOrSelect(
 			valueNumberGroup,
 			'text.gauge-value-symbol'
 		)
 			.style('font-size', `${symbolFontSize}px`)
 			.attr('x', valueNumberWidth / 2)
-			.text('%');
+			.text(gaugeSymbol);
 
 		const {
 			width: symbolWidth,
@@ -308,6 +315,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const showPercentageSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'showPercentageSymbol'
+		);
+
 		const numbersGroup = DOMUtils.appendOrSelect(svg, 'g.gauge-numbers');
 
 		// Add the smaller number of the delta
@@ -323,6 +336,7 @@ export class Gauge extends Component {
 			deltaGroup,
 			'text.gauge-delta-number'
 		);
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
 
 		deltaNumber.data(delta === null ? [] : [delta]);
 
@@ -333,7 +347,7 @@ export class Gauge extends Component {
 			.merge(deltaNumber)
 			.attr('text-anchor', 'middle')
 			.style('font-size', `${deltaFontSize(radius)}px`)
-			.text((d) => `${numberFormatter(d)}%`);
+			.text((d) => `${numberFormatter(d)}${gaugeSymbol}`);
 
 		// Add the caret for the delta number
 		const {
