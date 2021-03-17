@@ -54,4 +54,14 @@ g.#{$prefix}--#{$charts-prefix}--bullet {
 			stroke: #000;
 		}
 	}
+
+	path.quartile.over-bar {
+		@if ($carbon--theme == $carbon--theme--g90) or
+			($carbon--theme == $carbon--theme--g100)
+		{
+			stroke: #000;
+		} @else {
+			stroke: #fff;
+		}
+	}
 }

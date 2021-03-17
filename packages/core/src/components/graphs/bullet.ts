@@ -249,11 +249,12 @@ export class Bullet extends Component {
 			data.filter((d) => Tools.getProperty(d, 'marker') !== null).forEach(
 				(d) => {
 					const value = d.marker;
+					const barValue = d[rangeIdentifier];
 
 					quartilesData = quartilesData.concat([
-						{ datum: d, value: value * 0.25 },
-						{ datum: d, value: value * 0.5 },
-						{ datum: d, value: value * 0.75 },
+						{ datum: d, value: value * 0.25, barValue },
+						{ datum: d, value: value * 0.5, barValue },
+						{ datum: d, value: value * 0.75, barValue },
 					]);
 				}
 			);
@@ -271,7 +272,11 @@ export class Bullet extends Component {
 
 			linesEnter
 				.merge(lines)
-				.classed('quartile', true)
+				.attr('class', (d) => {
+					return `quartile ${
+						d.value <= d.barValue ? 'over-bar' : ''
+					}`;
+				})
 				.transition(
 					this.services.transitions.getTransition(
 						'bullet-quartile-update-enter',
@@ -402,6 +407,7 @@ export class Bullet extends Component {
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo],
 							}),
 						},
 						{
