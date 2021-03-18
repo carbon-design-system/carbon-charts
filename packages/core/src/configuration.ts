@@ -35,6 +35,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 
@@ -310,6 +311,14 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	points: {
 		filled: true,
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius'
+			}
+		]
+	}
 } as BubbleChartOptions);
 
 /**

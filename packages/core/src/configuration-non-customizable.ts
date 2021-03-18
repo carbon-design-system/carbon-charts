@@ -57,11 +57,42 @@ export const legend = {
 		horizontalSpace: 12,
 		verticalSpace: 24,
 		textYOffset: 8,
-	},
-	checkbox: {
-		radius: 6.5,
 		spaceAfter: 4,
 	},
+	checkbox: {
+		radius: 6.5
+	},
+	radius: {
+		config:[
+			{ cx: 7, cy: 7, r: 6.5 },
+			{ cx: 7, cy: 10, r: 3.5 }
+		],
+		color: '#8c8c8c'
+	},
+	line: {
+		yPosition:6,
+		width: 24,
+		strokeWidth: 1.4,
+		color: '#999999'
+	},
+	area: {
+		width: 24,
+		height: 13,
+		color: '#c6c6c6'
+	},
+	size: {
+		config: [
+			{ width: 24, height: 12},
+			{ width: 14, height: 7}
+		],
+		color: '#8D8D8D'
+	},
+	quartile: {
+		config: [
+			{ x: 0, y: 0, width: 24, height: 12, color: '#6929C4' },
+			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' }
+		],
+	}
 };
 
 export const lines = {
@@ -74,19 +105,6 @@ export const lines = {
 		unselected: 1,
 	},
 };
-
-export const bubble = {
-	radiusLabel: {
-		type: 'radius-label',
-		icon: `<svg width="16px" height="16px" viewBox="0 0 16 16" stroke="none" stroke-width="1">
-					<g fill="none" fill-rule="evenodd">
-						<circle cx="7" cy="7" r="6.5" stroke="#8c8c8c"></circle>
-						<circle cx="7" cy="10" r="3.5" stroke="#8c8c8c"></circle>
-					</g>
-				</svg>`,
-		text: 'Radius'
-	}
-}
 
 export const meter = {
 	statusBar: {

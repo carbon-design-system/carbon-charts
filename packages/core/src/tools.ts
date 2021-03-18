@@ -10,6 +10,7 @@ import {
 	debounce as lodashDebounce,
 	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
+	unionBy as lodashUnionBy,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	flatten as lodashFlatten,
@@ -34,6 +35,7 @@ export namespace Tools {
 	export const debounce = lodashDebounce;
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
+	export const unionBy = lodashUnionBy;
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const flatten = lodashFlatten;
@@ -114,6 +116,15 @@ export namespace Tools {
 			} else {
 				delete defaultOptions.axes[axisName];
 			}
+		}
+
+		// Concat default legend additional items. e.g. radius label
+		if (getProperty(providedOptions, 'legend', 'additionalItems')) {
+			providedOptions.legend.additionalItems = Tools.unionBy(
+				defaultOptions.legend.additionalItems,
+				providedOptions.legend.additionalItems,
+				'name'
+			)
 		}
 
 		return Tools.merge(defaultOptions, providedOptions);
@@ -419,28 +430,4 @@ export namespace Tools {
 
 	export const compareNumeric = (a: Numeric, b: Numeric) =>
 		Number(a) === Number(b);
-
-	export const convertSVGString = (string) => {
-		string = string.replace(/&quot;/g, '"');
-		string = string.replace(/&lt;/g, '<');
-		string = string.replace(/&gt;/g, '>');
-		return string;
-	};
-
-	export const parseSVGSize = (iconString, defaultHeight) => {
-		const reg = new RegExp(String.raw`\s(width|height)+\=\"(.*?)\"`, 'g');
-		const attrMatch = iconString.match(reg);
-		let width = 0,
-			height = 0;
-
-		for (const attr of attrMatch) {
-			if (attr.includes('width') && !width) {
-				width = parseInt(attr.match(/[0-9]+/, 'g')[0]);
-			} else if (attr.includes('height') && !height) {
-				height = parseInt(attr.match(/[0-9]+/, 'g')[0]);
-			}
-		}
-
-		return width;
-	};
 }

@@ -53,9 +53,9 @@ export interface LegendOptions {
  * customize the legend item
  */
 export interface LegendItem {
-	icon: string;
-	text: string;
-	type?: string;
+	type: string;
+	name: string;
+	color?: string;
 }
 
 export interface TooltipOptions {

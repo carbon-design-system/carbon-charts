@@ -25,7 +25,6 @@ import {
 import { Tools } from './tools';
 
 import { CartesianScales, Curves, Zoom } from './services';
-import { bubble as bubbleConfig } from './configuration-non-customizable';
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -115,31 +114,10 @@ export class AxisChart extends Chart {
 			},
 		};
 
-		// Add extra legend items
-		const radiusLabel = Tools.getProperty(options, 'bubble', 'radiusLabel');
-		let additionalItems = Tools.getProperty(
-			options,
-			'legend',
-			'additionalItems'
-		);
-		additionalItems.forEach(
-			(item) => (item.icon = Tools.convertSVGString(item.icon))
-		);
-
-		additionalItems = radiusLabel
-			? [
-					{
-						...bubbleConfig.radiusLabel,
-						text: radiusLabel,
-					},
-					...additionalItems,
-			  ]
-			: additionalItems;
-
 		const legendComponent = {
 			id: 'legend',
 			components: [
-				new Legend(this.model, this.services, { additionalItems }),
+				new Legend(this.model, this.services),
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
