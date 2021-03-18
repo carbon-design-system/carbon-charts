@@ -241,7 +241,7 @@ export const simpleBarAdditionalLegendItemOptions = {
 			{
 				type: 'area',
 				name: 'Poor area',
-				color: '#ffffff',
+				color: '#eeeeee',
 			},
 			{
 				type: 'area',
