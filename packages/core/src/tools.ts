@@ -124,7 +124,7 @@ export namespace Tools {
 				defaultOptions.legend.additionalItems,
 				providedOptions.legend.additionalItems,
 				'name'
-			)
+			);
 		}
 
 		return Tools.merge(defaultOptions, providedOptions);

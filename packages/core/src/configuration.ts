@@ -315,10 +315,10 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 		additionalItems: [
 			{
 				type: LegendItemType.RADIUS,
-				name: 'Radius'
-			}
-		]
-	}
+				name: 'Radius',
+			},
+		],
+	},
 } as BubbleChartOptions);
 
 /**

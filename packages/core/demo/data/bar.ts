@@ -222,7 +222,7 @@ export const simpleBarAdditionalLegendItemOptions = {
 		left: {
 			mapsTo: 'value',
 		},
-	bottom: {
+		bottom: {
 			mapsTo: 'group',
 			scaleType: 'labels',
 		},
@@ -232,29 +232,29 @@ export const simpleBarAdditionalLegendItemOptions = {
 			{
 				type: 'line',
 				name: 'Line',
-				color: '#e63946'
+				color: '#e63946',
 			},
 			{
 				type: 'size',
-				name: 'Size'
+				name: 'Size',
 			},
 			{
 				type: 'area',
 				name: 'Poor area',
-				color: '#ffffff'
+				color: '#ffffff',
 			},
 			{
 				type: 'area',
 				name: 'Satisfactory area',
-				color: '#adb5bd'
+				color: '#adb5bd',
 			},
 			{
 				type: 'quartile',
-				name: 'Quartile'
+				name: 'Quartile',
 			},
-		]
-	}
-}
+		],
+	},
+};
 
 export const simpleBarFixedDomainOptions = {
 	title: 'Simple bar (customized domain)',

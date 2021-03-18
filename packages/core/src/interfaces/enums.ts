@@ -219,5 +219,5 @@ export enum LegendItemType {
 	AREA = 'area',
 	SIZE = 'size',
 	LINE = 'line',
-	QUARTILE = 'quartile'
+	QUARTILE = 'quartile',
 }
