@@ -214,10 +214,10 @@ export class Legend extends Component {
 		} else if (itemConfig.type === LegendItemType.LINE) {
 			const lineConfig = Configuration.legend.line;
 
-			if (additionalItem.select('line.icon').empty()) {
+			if (additionalItem.select('line.line').empty()) {
 				additionalItem
 					.append('line')
-					.classed('icon', true)
+					.classed('line', true)
 					.attr('role', Roles.IMG)
 					.attr('aria-label', 'line')
 					.attr('x1', 0)
