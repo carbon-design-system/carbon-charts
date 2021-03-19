@@ -519,7 +519,6 @@ export class Axis extends Component {
 				// If we're dealing with a discrete scale type
 				// We're able to grab the spacing between the ticks
 				if (scale.step) {
-					console.log('STEP');
 					const textNodes = invisibleAxisRef
 						.selectAll('g.tick text')
 						.nodes();
@@ -549,8 +548,6 @@ export class Axis extends Component {
 						: estimatedTickSize < minTickSize;
 
 					shouldRotateTicks = false;
-
-					console.log('NO STEP', axis.tickValues(), scale.ticks(), validTicks);
 				}
 			}
 
