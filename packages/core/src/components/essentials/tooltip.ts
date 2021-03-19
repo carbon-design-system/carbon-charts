@@ -2,7 +2,7 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model';
-import { Events, ScaleTypes, TruncationTypes } from '../../interfaces';
+import { Events, TruncationTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 // Carbon position service
@@ -229,9 +229,8 @@ export class Tooltip extends Component {
 		}
 
 		const { cartesianScales } = this.services;
-		const domainAxisScaleType = cartesianScales.getDomainAxisScaleType();
 
-		if (domainAxisScaleType === ScaleTypes.TIME) {
+		if (typeof value.getTime === "function") {
 			return format(new Date(value), 'MMM d, yyyy');
 		}
 
