@@ -229,7 +229,7 @@ export class Tooltip extends Component {
 		}
 
 		if (typeof value.getTime === "function") {
-			return format(new Date(value), 'MMM d, yyyy');
+			return format(value, 'MMM d, yyyy');
 		}
 
 		return value.toLocaleString();
