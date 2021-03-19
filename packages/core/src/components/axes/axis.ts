@@ -546,8 +546,6 @@ export class Axis extends Component {
 					shouldRotateTicks = isTimeScaleType
 						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
 						: estimatedTickSize < minTickSize;
-
-					shouldRotateTicks = false;
 				}
 			}
 
