@@ -228,8 +228,6 @@ export class Tooltip extends Component {
 			return valueFormatter(value, label);
 		}
 
-		const { cartesianScales } = this.services;
-
 		if (typeof value.getTime === "function") {
 			return format(new Date(value), 'MMM d, yyyy');
 		}
