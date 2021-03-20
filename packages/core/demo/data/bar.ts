@@ -650,3 +650,48 @@ export const stackedHorizontalBarSkeletonOptions = {
 		loading: true,
 	},
 };
+
+// floating bars
+export const floatingBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 16932] },
+];
+
+export const floatingBarOptions = {
+	title: 'Floating vertical bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+};
+
+export const floatingHorizontalBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 36932] },
+];
+
+export const floatingHorizontalBarOptions = {
+	title: 'Floating horizontal bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+		bottom: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
+	},
+};

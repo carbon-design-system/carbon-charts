@@ -5,6 +5,7 @@ import * as bubbleDemos from './bubble';
 import * as donutDemos from './donut';
 import * as lineDemos from './line';
 import * as pieDemos from './pie';
+import * as ganttDemos from './gantt';
 import * as gaugeDemos from './gauge';
 import * as scatterDemos from './scatter';
 import * as lollipopDemos from './lollipop';
@@ -395,6 +396,21 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: 'Bar (floating)',
+		demos: [
+			{
+				options: barDemos.floatingBarOptions,
+				data: barDemos.floatingBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.floatingHorizontalBarOptions,
+				data: barDemos.floatingHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+		],
+	},
+	{
 		title: 'Boxplot',
 		demos: [
 			{
@@ -616,6 +632,17 @@ let allDemoGroups = [
 			},
 		],
 	},
+	// {
+	// 	title: 'Gantt',
+	// 	demos: [
+	// 		{
+	// 			options: ganttDemos.timeSeriesGanttOptions,
+	// 			data: ganttDemos.timeSeriesGanttData,
+	// 			chartType: chartTypes.SimpleBarChart,
+	// 			isDemoExample: true,
+	// 		},
+	// 	],
+	// },
 	{
 		title: 'Gauge',
 		demos: [

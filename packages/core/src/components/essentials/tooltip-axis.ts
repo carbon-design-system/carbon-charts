@@ -61,6 +61,8 @@ export class AxisChartsTooltip extends Tooltip {
 				rangeAxisPosition
 			);
 
+			const value = datum[rangeIdentifier];
+
 			let rangeLabel = rangeAxisOptions.title;
 			if (!rangeLabel) {
 				if (
@@ -78,10 +80,23 @@ export class AxisChartsTooltip extends Tooltip {
 					label: domainLabel,
 					value: domainValue,
 				},
-				{
-					label: rangeLabel,
-					value: datum[rangeIdentifier],
-				},
+				...(value.length === 2
+					? [
+							{
+								label: "Start",
+								value: value[0],
+							},
+							{
+								label: "End",
+								value: value[1],
+							},
+					  ]
+					: [
+							{
+								label: rangeLabel,
+								value: datum[rangeIdentifier],
+							},
+					  ]),
 				{
 					label: options.tooltip.groupLabel || 'Group',
 					value: datum[groupMapsTo],
