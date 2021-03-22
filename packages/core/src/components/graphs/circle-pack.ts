@@ -68,13 +68,16 @@ export class CirclePack extends Component {
 		enteringCircles
 			.merge(circles)
 			.attr('class', (d) => {
-				const originalClass = hierarchyLevel === 3 ? this.getZoomClasses(d) : '';
+				const originalClass =
+					hierarchyLevel === 3 ? this.getZoomClasses(d) : '';
 				return this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
-					originalClassName: d.children ? `node ${originalClass}` : `node node-leaf ${originalClass}`,
+					originalClassName: d.children
+						? `node ${originalClass}`
+						: `node node-leaf ${originalClass}`,
 				});
 			})
 			.attr('fill-opacity', 0.3) // config
@@ -95,7 +98,7 @@ export class CirclePack extends Component {
 
 		if (
 			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-			true &&
+				true &&
 			this.focal
 		) {
 			this.services.canvasZoom.zoomIn(
@@ -106,7 +109,7 @@ export class CirclePack extends Component {
 
 			// in zoomed in mode, we just want the focal and it's children to be in color (everything else in grayscale)
 			// this.highlightSubtree(this.focal);
-			console.log("here1");
+			console.log('here1');
 		}
 
 		// Add event listeners to elements drawn
@@ -138,12 +141,14 @@ export class CirclePack extends Component {
 			.classed(classname ? classname : 'hovered-child', true);
 	}
 
-	getZoomClasses(node){
-		if(Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-		true &&
-		this.focal) {
-			if(node.data === this.focal.data){
-				return 'focal'
+	getZoomClasses(node) {
+		if (
+			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
+				true &&
+			this.focal
+		) {
+			if (node.data === this.focal.data) {
+				return 'focal';
 			}
 		}
 		return 'zoomed-in';
@@ -189,9 +194,9 @@ export class CirclePack extends Component {
 								typeof child.data.value === 'number'
 									? child.data.value
 									: child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
+											(a, b) => a + b.value,
+											0
+									  );
 							return {
 								label: child.data.name,
 								value: value,
