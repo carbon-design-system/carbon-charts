@@ -194,6 +194,16 @@ let allDemoGroups = [
 				data: areaDemos.areaEmptyData,
 				chartType: chartTypes.AreaChart,
 			},
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+			},
 		],
 	},
 	{
@@ -455,6 +465,77 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: 'Combo',
+		demos: [
+			{
+				options: comboDemos.comboSimpleOptions,
+				data: comboDemos.comboSimpleData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboStackedOptions,
+				data: comboDemos.comboStackedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboGroupedOptions,
+				data: comboDemos.comboGroupedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboGroupedHorizontalOptions,
+				data: comboDemos.comboGroupedHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboHorizontalOptions,
+				data: comboDemos.comboHorizontalData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboAreaLineOptions,
+				data: comboDemos.comboAreaLineData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboStackedAreaLineOptions,
+				data: comboDemos.comboStackedAreaLine,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboLineScatterOptions,
+				data: comboDemos.comboLineScatterData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboAreaLineTimeSeriesOptions,
+				data: comboDemos.comboAreaLineTimeSeriesData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboEmptyOptions,
+				data: comboDemos.comboEmptyData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+			{
+				options: comboDemos.comboLoadingOptions,
+				data: comboDemos.comboLoadingData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true,
+			},
+		],
+	},
+	{
 		title: 'Donut',
 		demos: [
 			{
@@ -580,21 +661,6 @@ let allDemoGroups = [
 		],
 	},
 	{
-		title: 'Area',
-		demos: [
-			{
-				options: areaDemos.stackedAreaTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-			{
-				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-		],
-	},
-	{
 		title: 'Pie',
 		demos: [
 			{
@@ -622,25 +688,50 @@ let allDemoGroups = [
 		],
 	},
 	{
-		title: 'Gauge',
+		title: 'Meter',
 		demos: [
 			{
-				options: gaugeDemos.gaugeOptionsSemi,
-				data: gaugeDemos.gaugeData,
-				chartType: chartTypes.GaugeChart,
+				options: meterDemos.meterOptionsWithStatus,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
 				isDemoExample: true,
 			},
 			{
-				options: gaugeDemos.gaugeOptionsCircular,
-				data: gaugeDemos.gaugeData,
-				chartType: chartTypes.GaugeChart,
+				options: meterDemos.meterOptionsCustomColor,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
 				isDemoExample: true,
 			},
 			{
-				options: gaugeDemos.gaugeOptionsCircularNoDelta,
-				data: gaugeDemos.gaugeDataNoDelta,
-				chartType: chartTypes.GaugeChart,
+				options: meterDemos.meterOptionsNoStatus,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
 				isDemoExample: true,
+			},
+		],
+	},
+	{
+		title: 'Radar',
+		demos: [
+			{
+				data: radarDemos.radarData,
+				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart,
+			},
+			{
+				data: radarDemos.radarCenteredData,
+				options: radarDemos.radarCenteredOptions,
+				chartType: chartTypes.RadarChart,
+			},
+			{
+				data: radarDemos.radarWithMissingDataData,
+				options: radarDemos.radarWithMissingDataOptions,
+				chartType: chartTypes.RadarChart,
+			},
+			{
+				data: radarDemos.radarDenseData,
+				options: radarDemos.radarDenseOptions,
+				chartType: chartTypes.RadarChart,
 			},
 		],
 	},
@@ -690,21 +781,6 @@ let allDemoGroups = [
 		],
 	},
 	{
-		title: 'Lollipop',
-		demos: [
-			{
-				options: lollipopDemos.lollipopDiscreteOptions,
-				data: lollipopDemos.lollipopDiscreteData,
-				chartType: chartTypes.LollipopChart,
-			},
-			{
-				options: lollipopDemos.lollipopDiscretePresentationOptions,
-				data: lollipopDemos.lollipopDiscretePresentationData,
-				chartType: chartTypes.LollipopChart,
-			},
-		],
-	},
-	{
 		title: 'Step',
 		description:
 			'Stepped line charts plot data at regular intervals, forming a series of steps between data points. You can use line visualizations to show trends over time and compare several data sets.',
@@ -730,29 +806,6 @@ let allDemoGroups = [
 				data: stepDemos.stepSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false,
-			},
-		],
-	},
-	{
-		title: 'Meter',
-		demos: [
-			{
-				options: meterDemos.meterOptionsWithStatus,
-				data: meterDemos.meterData,
-				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
-			},
-			{
-				options: meterDemos.meterOptionsCustomColor,
-				data: meterDemos.meterData,
-				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
-			},
-			{
-				options: meterDemos.meterOptionsNoStatus,
-				data: meterDemos.meterData,
-				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -859,102 +912,6 @@ let allDemoGroups = [
 					timeSeriesAxisDemos.lineTimeSeriesAllLabelsInPrimaryFormatOptions,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false,
-			},
-		],
-	},
-	{
-		title: 'Radar',
-		demos: [
-			{
-				data: radarDemos.radarData,
-				options: radarDemos.radarOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarCenteredData,
-				options: radarDemos.radarCenteredOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarWithMissingDataData,
-				options: radarDemos.radarWithMissingDataOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarDenseData,
-				options: radarDemos.radarDenseOptions,
-				chartType: chartTypes.RadarChart,
-			},
-		],
-	},
-	{
-		title: 'Combo',
-		demos: [
-			{
-				options: comboDemos.comboSimpleOptions,
-				data: comboDemos.comboSimpleData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboStackedOptions,
-				data: comboDemos.comboStackedData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboGroupedOptions,
-				data: comboDemos.comboGroupedData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboGroupedHorizontalOptions,
-				data: comboDemos.comboGroupedHorizontalData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboHorizontalOptions,
-				data: comboDemos.comboHorizontalData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboAreaLineOptions,
-				data: comboDemos.comboAreaLineData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboStackedAreaLineOptions,
-				data: comboDemos.comboStackedAreaLine,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboLineScatterOptions,
-				data: comboDemos.comboLineScatterData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboAreaLineTimeSeriesOptions,
-				data: comboDemos.comboAreaLineTimeSeriesData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboEmptyOptions,
-				data: comboDemos.comboEmptyData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
-			},
-			{
-				options: comboDemos.comboLoadingOptions,
-				data: comboDemos.comboLoadingData,
-				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 		],
 	},
