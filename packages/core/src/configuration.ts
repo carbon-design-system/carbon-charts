@@ -73,11 +73,13 @@ export const grid: GridOptions = {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 15,
+		useTickValues: false
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 5,
+		useTickValues: false
 	},
 };
 
