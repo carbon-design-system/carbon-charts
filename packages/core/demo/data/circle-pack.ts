@@ -99,13 +99,19 @@ export const circlePackThreeLevelData = [
 		name: 'A',
 		children: [
 			{
-				name: 'A',
+				name: 'AA',
 				children: [
 					{ name: 'yellow', value: 50 },
 					{ name: 'green', value: 100 },
 				],
 			},
-			{ name: 'B', value: 200 },
+			{
+				name: 'B',
+				children: [
+					{ name: 'red', value: 50 },
+					{ name: 'blue', value: 40 },
+				],
+			},
 			{ name: 'C', value: 100 },
 			{ name: 'D', value: 900 },
 		],

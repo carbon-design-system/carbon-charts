@@ -28,8 +28,12 @@ export class CirclePack extends Component {
 
 		const displayData = this.model.getDisplayData();
 		const hierarchyLevel = this.model.getHierarchyLevel();
-
 		const options = this.getOptions();
+		const canvasZoomEnabled = Tools.getProperty(
+			options,
+			'canvasZoom',
+			'enabled'
+		);
 
 		const root = d3Hierarchy({
 			name: options.title || 'Circle Pack',
@@ -69,7 +73,9 @@ export class CirclePack extends Component {
 			.merge(circles)
 			.attr('class', (d) => {
 				const originalClass =
-					hierarchyLevel === 3 ? this.getZoomClasses(d) : '';
+					canvasZoomEnabled && hierarchyLevel === 3
+						? this.getZoomClass(d)
+						: '';
 				return this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
@@ -81,11 +87,6 @@ export class CirclePack extends Component {
 				});
 			})
 			.attr('fill-opacity', 0.3) // config
-			.style('stroke', (d) => {
-				if (d.depth === 3) {
-					return 'white';
-				}
-			})
 			.transition(
 				this.services.transitions.getTransition(
 					'circlepack-leaf-update-enter',
@@ -96,25 +97,17 @@ export class CirclePack extends Component {
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y);
 
-		if (
-			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-				true &&
-			this.focal
-		) {
+		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(
 				this.focal,
 				enteringCircles,
 				Configuration.canvasZoomSettings
 			);
-
-			// in zoomed in mode, we just want the focal and it's children to be in color (everything else in grayscale)
-			// this.highlightSubtree(this.focal);
-			console.log('here1');
+			this.setBackgroundListeners();
 		}
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
-		this.setBackgroundListeners();
 	}
 
 	// turn off the highlight class on children circles
@@ -141,13 +134,13 @@ export class CirclePack extends Component {
 			.classed(classname ? classname : 'hovered-child', true);
 	}
 
-	getZoomClasses(node) {
-		if (
-			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-				true &&
-			this.focal
-		) {
-			if (node.data === this.focal.data) {
+	getZoomClass(node) {
+		console.log(this.model.getHierarchyLevel());
+		if (this.model.getHierarchyLevel() === 3 && this.focal) {
+			if (
+				node.data === this.focal.data ||
+				this.focal.children.some((d) => d.data === node.data)
+			) {
 				return 'focal';
 			}
 		}
