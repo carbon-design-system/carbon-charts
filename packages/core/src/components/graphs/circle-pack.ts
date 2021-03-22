@@ -28,6 +28,7 @@ export class CirclePack extends Component {
 
 		const displayData = this.model.getDisplayData();
 		const hierarchyLevel = this.model.getHierarchyLevel();
+
 		const options = this.getOptions();
 
 		const root = d3Hierarchy({
@@ -67,12 +68,13 @@ export class CirclePack extends Component {
 		enteringCircles
 			.merge(circles)
 			.attr('class', (d) => {
+				const originalClass = hierarchyLevel === 3 ? this.getZoomClasses(d) : '';
 				return this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
-					originalClassName: d.children ? 'node' : 'node node-leaf',
+					originalClassName: d.children ? `node ${originalClass}` : `node node-leaf ${originalClass}`,
 				});
 			})
 			.attr('fill-opacity', 0.3) // config
@@ -93,7 +95,7 @@ export class CirclePack extends Component {
 
 		if (
 			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-				true &&
+			true &&
 			this.focal
 		) {
 			this.services.canvasZoom.zoomIn(
@@ -101,6 +103,10 @@ export class CirclePack extends Component {
 				enteringCircles,
 				Configuration.canvasZoomSettings
 			);
+
+			// in zoomed in mode, we just want the focal and it's children to be in color (everything else in grayscale)
+			// this.highlightSubtree(this.focal);
+			console.log("here1");
 		}
 
 		// Add event listeners to elements drawn
@@ -110,9 +116,7 @@ export class CirclePack extends Component {
 
 	// turn off the highlight class on children circles
 	unhighlightChildren(childData) {
-		const data = childData.map((d) => {
-			return d.data;
-		});
+		const data = childData.map((d) => d.data);
 
 		this.parent
 			.selectAll('circle.node')
@@ -123,17 +127,26 @@ export class CirclePack extends Component {
 	}
 
 	// highlight the children circles with a stroke
-	highlightChildren(childData) {
-		const data = childData.map((d) => {
-			return d.data;
-		});
+	highlightChildren(childData, classname?) {
+		const data = childData.map((d) => d.data);
 
 		this.parent
 			.selectAll('circle.node')
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed('hovered-child', true);
+			.classed(classname ? classname : 'hovered-child', true);
+	}
+
+	getZoomClasses(node){
+		if(Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
+		true &&
+		this.focal) {
+			if(node.data === this.focal.data){
+				return 'focal'
+			}
+		}
+		return 'zoomed-in';
 	}
 
 	removeBackgroundListeners() {
@@ -176,9 +189,9 @@ export class CirclePack extends Component {
 								typeof child.data.value === 'number'
 									? child.data.value
 									: child.data.children.reduce(
-											(a, b) => a + b.value,
-											0
-									  );
+										(a, b) => a + b.value,
+										0
+									);
 							return {
 								label: child.data.name,
 								value: value,
@@ -255,13 +268,15 @@ export class CirclePack extends Component {
 				});
 			})
 			.on('click', function (datum) {
-				// zoom if chart has it enabled
+				// zoom if chart has zoom enabled AND if its a level 2 that has children
 				if (
 					Tools.getProperty(
 						self.getOptions(),
 						'canvasZoom',
 						'enabled'
-					) === true
+					) === true &&
+					datum.depth === 2 &&
+					datum.children
 				) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
@@ -275,7 +290,7 @@ export class CirclePack extends Component {
 						Configuration.canvasZoomSettings
 					);
 					// don't want the click event to propagate to the background zoom out
-					// does not clash with the tooltip/other events becuase it does need to close the
+					// does not clash with the tooltip/other events because it does need to close the
 					// tooltip on the click event in order to zoom in/out
 					event.stopPropagation();
 				}

@@ -9,5 +9,10 @@
 		&.hovered-child {
 			stroke: $carbon--white-0;
 		}
+
+		&.zoomed-in {
+			fill: gray;
+			stroke: darkgray;
+		}
 	}
 }
