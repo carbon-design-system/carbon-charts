@@ -28,32 +28,32 @@ export class CirclePackChartModel extends ChartModel {
 		);
 	}
 
-	protected setColorClassNames() {
-		// monochrome
-		const numberOfColors = 1;
+	// protected setColorClassNames() {
+	// 	// monochrome
+	// 	const numberOfColors = 1;
 
-		const colorPairingOptions = Tools.getProperty(
-			this.getOptions(),
-			'color',
-			'pairing'
-		);
-		let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
-		const colorPairingCounts = Configuration.color.pairingOptions;
+	// 	const colorPairingOptions = Tools.getProperty(
+	// 		this.getOptions(),
+	// 		'color',
+	// 		'pairing'
+	// 	);
+	// 	let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
+	// 	const colorPairingCounts = Configuration.color.pairingOptions;
 
-		// Use default palette if user choice is not in range
-		pairingOption =
-			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
-				? pairingOption
-				: 1;
+	// 	// Use default palette if user choice is not in range
+	// 	pairingOption =
+	// 		pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
+	// 			? pairingOption
+	// 			: 1;
 
-		// Create color classes for graph, tooltip and stroke use
-		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
-		);
+	// 	// Create color classes for graph, tooltip and stroke use
+	// 	const colorPairing = this.allDataGroups.map(
+	// 		(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
+	// 	);
 
-		// Create default color classnames
-		this.colorClassNames = scaleOrdinal()
-			.range(colorPairing)
-			.domain(this.allDataGroups);
-	}
+	// 	// Create default color classnames
+	// 	this.colorClassNames = scaleOrdinal()
+	// 		.range(colorPairing)
+	// 		.domain(this.allDataGroups);
+	// }
 }

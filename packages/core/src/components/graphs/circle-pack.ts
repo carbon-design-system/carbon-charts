@@ -76,11 +76,16 @@ export class CirclePack extends Component {
 					canvasZoomEnabled && hierarchyLevel === 3
 						? this.getZoomClass(d)
 						: '';
+				let dataGroup = d;
+				while (dataGroup.depth > 1) {
+					dataGroup = dataGroup.parent;
+				}
 				return this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
+					dataGroupName: dataGroup.data.name,
 					originalClassName: d.children
 						? `node ${originalClass}`
 						: `node node-leaf ${originalClass}`,
@@ -135,7 +140,6 @@ export class CirclePack extends Component {
 	}
 
 	getZoomClass(node) {
-		console.log(this.model.getHierarchyLevel());
 		if (this.model.getHierarchyLevel() === 3 && this.focal) {
 			if (
 				node.data === this.focal.data ||
