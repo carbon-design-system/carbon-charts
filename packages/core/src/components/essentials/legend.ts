@@ -106,16 +106,6 @@ export class Legend extends Component {
 			'additionalItems'
 		);
 
-		// Update radius label text with option
-		const radiusLabel = Tools.getProperty(
-			this.getOptions(),
-			'bubble',
-			'radiusLabel'
-		);
-		if (radiusLabel) {
-			additionalItemsOption[0].name = radiusLabel;
-		}
-
 		// add additional legend items
 		if (additionalItemsOption && dataGroups.length) {
 			const additionalItems = svg
@@ -210,7 +200,7 @@ export class Legend extends Component {
 				.attr('cx', (d) => d.cx)
 				.attr('cy', (d) => d.cy)
 				.attr('r', (d) => d.r)
-				.attr('stroke', color);
+				.attr('stroke', itemConfig.color ? itemConfig.color : color);
 		} else if (itemConfig.type === LegendItemType.LINE) {
 			const lineConfig = Configuration.legend.line;
 
@@ -234,6 +224,7 @@ export class Legend extends Component {
 			const color = itemConfig.color
 				? itemConfig.color
 				: Configuration.legend.area.color;
+
 			if (additionalItem.select('rect.area').empty()) {
 				additionalItem
 					.append('rect')
@@ -246,6 +237,7 @@ export class Legend extends Component {
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {
 			const { config, color } = Configuration.legend.size;
+
 			const sizeEnter = additionalItem
 				.attr('fill', 'none')
 				.attr('role', Roles.IMG)
@@ -260,7 +252,7 @@ export class Legend extends Component {
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
 				.attr('y', (d) => 24 - d.height)
-				.attr('stroke', color)
+				.attr('stroke', itemConfig.color ? itemConfig.color : color)
 				.attr('stroke-width', 1);
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { config } = Configuration.legend.quartile;

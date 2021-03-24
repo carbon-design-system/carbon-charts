@@ -4,6 +4,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
+	LegendItemType
 } from './interfaces';
 
 import {
@@ -118,11 +119,19 @@ export namespace Tools {
 			}
 		}
 
-		// Concat default legend additional items. e.g. radius label
+		// Concat default legend additional items
 		if (getProperty(providedOptions, 'legend', 'additionalItems')) {
+			const providedLegendItems = providedOptions.legend.additionalItems;
+			const providedTypes = providedLegendItems.map(item => item.type);
+
+			// remove same type default items if they are provided by user
+			let defaultLegendItems = defaultOptions.legend.additionalItems.filter(
+				item => !providedTypes.includes(item.type)
+			)
+
 			providedOptions.legend.additionalItems = Tools.unionBy(
-				defaultOptions.legend.additionalItems,
-				providedOptions.legend.additionalItems,
+				defaultLegendItems,
+				providedLegendItems,
 				'name'
 			);
 		}

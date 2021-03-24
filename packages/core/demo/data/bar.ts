@@ -216,46 +216,6 @@ export const simpleBarLongLabelOptions = {
 	},
 };
 
-export const simpleBarAdditionalLegendItemOptions = {
-	title: 'Simple bar (additional legend item)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-		},
-		bottom: {
-			mapsTo: 'group',
-			scaleType: 'labels',
-		},
-	},
-	legend: {
-		additionalItems: [
-			{
-				type: 'line',
-				name: 'Line',
-				color: '#e63946',
-			},
-			{
-				type: 'size',
-				name: 'Size',
-			},
-			{
-				type: 'area',
-				name: 'Poor area',
-				color: '#eeeeee',
-			},
-			{
-				type: 'area',
-				name: 'Satisfactory area',
-				color: '#adb5bd',
-			},
-			{
-				type: 'quartile',
-				name: 'Quartile',
-			},
-		],
-	},
-};
-
 export const simpleBarFixedDomainOptions = {
 	title: 'Simple bar (customized domain)',
 	axes: {
