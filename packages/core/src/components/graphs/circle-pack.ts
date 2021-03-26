@@ -35,13 +35,10 @@ export class CirclePack extends Component {
 			'enabled'
 		);
 
-
-		const root = d3Hierarchy(
-			{
-				name: options.title || 'Circle Pack',
-				children: displayData,
-			}
-		)
+		const root = d3Hierarchy({
+			name: options.title || 'Circle Pack',
+			children: displayData,
+		})
 			.sum((d: any) => d.value)
 			.sort((a, b) => b.value - a.value);
 
@@ -61,7 +58,6 @@ export class CirclePack extends Component {
 				//filter based on hierarchy level
 				return node.depth <= hierarchyLevel;
 			});
-
 
 		// enter the circles
 		const circles = svg.selectAll('circle.node').data(nodeData);
@@ -104,8 +100,7 @@ export class CirclePack extends Component {
 					animate
 				)
 			)
-			.attr('fill-opacity', 0.3) // config
-
+			.attr('fill-opacity', 0.3); // config
 
 		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(
@@ -185,49 +180,55 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
-				// get the children data for the tooltip
-				let childrenData = [];
-				let parentValue = null;
-				if (datum.children) {
-					childrenData = datum.children.map((child) => {
-						if (child !== null) {
-							// sum up the children values if there are any 3rd level
-							const value =
-								typeof child.data.value === 'number'
-									? child.data.value
-									: child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
-							return {
-								label: child.data.name,
-								value: value,
-							};
-						}
+				const disabled = hoveredElement
+					.node()
+					.classList.contains('zoomed-in');
+				if (!disabled) {
+					// get the children data for the tooltip
+					let childrenData = [];
+					let parentValue = null;
+					if (datum.children) {
+						childrenData = datum.children.map((child) => {
+							if (child !== null) {
+								// sum up the children values if there are any 3rd level
+								const value =
+									typeof child.data.value === 'number'
+										? child.data.value
+										: child.data.children.reduce(
+												(a, b) => a + b.value,
+												0
+										  );
+								return {
+									label: child.data.name,
+									value: value,
+								};
+							}
+						});
+						// children get a highlight stroke
+						self.highlightChildren(datum.children);
+					} else {
+						// if there is no children we want to display the value for the data
+						parentValue = datum.value;
+					}
+
+					let fillColor = getComputedStyle(
+						this,
+						null
+					).getPropertyValue('fill');
+
+					// Show tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement,
+						items: [
+							{
+								color: fillColor,
+								label: datum.data.name,
+								value: parentValue,
+							},
+							...childrenData,
+						],
 					});
-					// children get a highlight stroke
-					self.highlightChildren(datum.children);
-				} else {
-					// if there is no children we want to display the value for the data
-					parentValue = datum.value;
 				}
-
-				let fillColor = getComputedStyle(this, null).getPropertyValue(
-					'fill'
-				);
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					items: [
-						{
-							color: fillColor,
-							label: datum.data.name,
-							value: parentValue,
-						},
-						...childrenData,
-					],
-				});
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -301,6 +302,7 @@ export class CirclePack extends Component {
 					// tooltip on the click event in order to zoom in/out
 					event.stopPropagation();
 				}
+
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event

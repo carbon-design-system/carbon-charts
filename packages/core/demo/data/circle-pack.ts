@@ -147,7 +147,6 @@ export const circlePackThreeLevelData = [
 	},
 ];
 
-
 export const circlePackThreeLevelsMonochromeOptions = {
 	title: 'Three Levels Hierarchy (monchromatic)',
 	canvasZoom: {
@@ -157,10 +156,10 @@ export const circlePackThreeLevelsMonochromeOptions = {
 
 export const circlePackThreeLevelsMonochromeData = [
 	{
-		name: "revenue",
-		children: circlePackThreeLevelData[0]
-	}
-]
+		name: 'revenue',
+		children: circlePackThreeLevelData[0],
+	},
+];
 
 export const circlePackThreeLevelNoZoomOptions = {
 	title: 'Three Levels Hierarchy (No Zoom)',
