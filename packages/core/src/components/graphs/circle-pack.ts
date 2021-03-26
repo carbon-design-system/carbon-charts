@@ -35,10 +35,13 @@ export class CirclePack extends Component {
 			'enabled'
 		);
 
-		const root = d3Hierarchy({
-			name: options.title || 'Circle Pack',
-			children: displayData,
-		})
+
+		const root = d3Hierarchy(
+			{
+				name: options.title || 'Circle Pack',
+				children: displayData,
+			}
+		)
 			.sum((d: any) => d.value)
 			.sort((a, b) => b.value - a.value);
 
@@ -58,6 +61,7 @@ export class CirclePack extends Component {
 				//filter based on hierarchy level
 				return node.depth <= hierarchyLevel;
 			});
+
 
 		// enter the circles
 		const circles = svg.selectAll('circle.node').data(nodeData);
@@ -91,16 +95,17 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`,
 				});
 			})
-			.attr('fill-opacity', 0.3) // config
+			.attr('r', (d) => d.r)
+			.attr('cx', (d) => d.x)
+			.attr('cy', (d) => d.y)
 			.transition(
 				this.services.transitions.getTransition(
 					'circlepack-leaf-update-enter',
 					animate
 				)
 			)
-			.attr('r', (d) => d.r)
-			.attr('cx', (d) => d.x)
-			.attr('cy', (d) => d.y);
+			.attr('fill-opacity', 0.3) // config
+
 
 		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(
@@ -191,9 +196,9 @@ export class CirclePack extends Component {
 								typeof child.data.value === 'number'
 									? child.data.value
 									: child.data.children.reduce(
-											(a, b) => a + b.value,
-											0
-									  );
+										(a, b) => a + b.value,
+										0
+									);
 							return {
 								label: child.data.name,
 								value: value,

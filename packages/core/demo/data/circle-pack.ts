@@ -96,7 +96,7 @@ export const circlePackThreeLevelOptions = {
 
 export const circlePackThreeLevelData = [
 	{
-		name: 'A',
+		name: 'North America',
 		children: [
 			{
 				name: 'AA',
@@ -117,7 +117,7 @@ export const circlePackThreeLevelData = [
 		],
 	},
 	{
-		name: 'B',
+		name: 'South America',
 		children: [
 			{ name: 'AB', value: 2800 },
 			{ name: 'BC', value: 10000 },
@@ -125,7 +125,7 @@ export const circlePackThreeLevelData = [
 		],
 	},
 	{
-		name: 'C',
+		name: 'Other',
 		children: [
 			{ name: 'AA', value: 500 },
 			{ name: 'BB', value: 100 },
@@ -137,7 +137,7 @@ export const circlePackThreeLevelData = [
 		],
 	},
 	{
-		name: 'D',
+		name: 'Europe',
 		children: [
 			{ name: 'KH', value: 2000 },
 			{ name: 'LL', value: 400 },
@@ -146,6 +146,21 @@ export const circlePackThreeLevelData = [
 		],
 	},
 ];
+
+
+export const circlePackThreeLevelsMonochromeOptions = {
+	title: 'Three Levels Hierarchy (monchromatic)',
+	canvasZoom: {
+		enabled: true,
+	},
+};
+
+export const circlePackThreeLevelsMonochromeData = [
+	{
+		name: "revenue",
+		children: circlePackThreeLevelData[0]
+	}
+]
 
 export const circlePackThreeLevelNoZoomOptions = {
 	title: 'Three Levels Hierarchy (No Zoom)',
