@@ -157,7 +157,58 @@ export const circlePackThreeLevelsMonochromeOptions = {
 export const circlePackThreeLevelsMonochromeData = [
 	{
 		name: 'revenue',
-		children: circlePackThreeLevelData[0],
+		children: [
+			{
+				name: 'North America',
+				children: [
+					{
+						name: 'AA',
+						children: [
+							{ name: 'yellow', value: 50 },
+							{ name: 'green', value: 100 },
+						],
+					},
+					{
+						name: 'B',
+						children: [
+							{ name: 'red', value: 50 },
+							{ name: 'blue', value: 40 },
+						],
+					},
+					{ name: 'C', value: 100 },
+					{ name: 'D', value: 900 },
+				],
+			},
+			{
+				name: 'South America',
+				children: [
+					{ name: 'AB', value: 2800 },
+					{ name: 'BC', value: 10000 },
+					{ name: 'CD', value: 500 },
+				],
+			},
+			{
+				name: 'Other',
+				children: [
+					{ name: 'AA', value: 500 },
+					{ name: 'BB', value: 100 },
+					{ name: 'GG', value: 200 },
+					{ name: 'HH', value: 800 },
+					{ name: 'II', value: 900 },
+					{ name: 'JJ', value: 100 },
+					{ name: 'KK', value: 900 },
+				],
+			},
+			{
+				name: 'Europe',
+				children: [
+					{ name: 'KH', value: 2000 },
+					{ name: 'LL', value: 400 },
+					{ name: 'MM', value: 500 },
+					{ name: 'ST', value: 300 },
+				],
+			},
+		],
 	},
 ];
 

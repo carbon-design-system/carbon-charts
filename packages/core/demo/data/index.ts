@@ -484,11 +484,11 @@ let allDemoGroups = [
 				options: circlePackDemos.circlePackThreeLevelOptions,
 				chartType: chartTypes.CirclePackChart,
 			},
-			// {
-			// 	data: circlePackDemos.circlePackThreeLevelsMonochromeData,
-			// 	options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
-			// 	chartType: chartTypes.CirclePackChart,
-			// },
+			{
+				data: circlePackDemos.circlePackThreeLevelsMonochromeData,
+				options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
 			{
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,

@@ -26,7 +26,7 @@ export class CirclePack extends Component {
 			return;
 		}
 
-		const displayData = this.model.getDisplayData();
+		let displayData = this.model.getDisplayData();
 		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 		const canvasZoomEnabled = Tools.getProperty(
@@ -35,6 +35,10 @@ export class CirclePack extends Component {
 			'enabled'
 		);
 
+		const mono = displayData.length === 1;
+		if (mono) {
+			displayData = displayData[0].children;
+		}
 		const root = d3Hierarchy({
 			name: options.title || 'Circle Pack',
 			children: displayData,
