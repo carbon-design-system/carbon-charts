@@ -14,6 +14,8 @@ import settings from 'carbon-components/es/globals/js/settings';
 // D3 Imports
 import { select, mouse } from 'd3-selection';
 
+import { format } from 'date-fns';
+
 export class Tooltip extends Component {
 	type = 'tooltip';
 
@@ -154,7 +156,7 @@ export class Tooltip extends Component {
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
 				item.value = item.value
-					? this.valueFormatter(item.value)
+					? this.valueFormatter(item.value, item.label)
 					: item.value;
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
@@ -214,7 +216,7 @@ export class Tooltip extends Component {
 		return defaultHTML;
 	}
 
-	valueFormatter(value: any) {
+	valueFormatter(value: any, label: string) {
 		const options = this.getOptions();
 		const valueFormatter = Tools.getProperty(
 			options,
@@ -223,7 +225,11 @@ export class Tooltip extends Component {
 		);
 
 		if (valueFormatter) {
-			return valueFormatter(value);
+			return valueFormatter(value, label);
+		}
+
+		if (typeof value.getTime === "function") {
+			return format(value, 'MMM d, yyyy');
 		}
 
 		return value.toLocaleString();
