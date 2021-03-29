@@ -57,7 +57,7 @@ export class Grid extends Component {
 			this.getOptions(),
 			'grid',
 			'x',
-			'useTickValues'
+			'alignWithAxisTicks'
 		);
 
 		if (alignToTicks) {
@@ -120,7 +120,7 @@ export class Grid extends Component {
 			this.getOptions(),
 			'grid',
 			'y',
-			'useTickValues'
+			'alignWithAxisTicks'
 		);
 
 		if (alignToTicks) {

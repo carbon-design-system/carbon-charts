@@ -100,12 +100,12 @@ export interface GridOptions {
 	y?: {
 		enabled?: boolean;
 		numberOfTicks?: number;
-		useTickValues?: boolean;
+		alignWithAxisTicks?: boolean;
 	};
 	x?: {
 		enabled?: boolean;
 		numberOfTicks?: number;
-		useTickValues?: boolean;
+		alignWithAxisTicks?: boolean;
 	};
 }
 
