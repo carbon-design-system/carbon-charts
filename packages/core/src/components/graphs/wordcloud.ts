@@ -1,12 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
-import {
-	Events,
-	ColorClassNameTypes,
-} from '../../interfaces';
-import * as Configuration from '../../configuration';
+import { Events, ColorClassNameTypes } from '../../interfaces';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -18,13 +13,13 @@ export class WordCloud extends Component {
 	init() {
 		const eventsFragment = this.services.events;
 
-		// Highlight correct circle on legend item hovers
+		// Highlight correct words on legend item hovers
 		eventsFragment.addEventListener(
 			Events.Legend.ITEM_HOVER,
 			this.handleLegendOnHover
 		);
 
-		// Un-highlight circles on legend item mouseouts
+		// Un-highlight words on legend item mouseouts
 		eventsFragment.addEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
@@ -35,7 +30,6 @@ export class WordCloud extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 
-		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -60,9 +54,7 @@ export class WordCloud extends Component {
 				})
 			)
 			.padding(5)
-			.rotate(function () {
-				return ~~(Math.random() * 2) * 90;
-			})
+			.rotate(0)
 			.fontSize(function (d) {
 				return d.size;
 			})
@@ -131,7 +123,7 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
+				this.services.transitions.getTransition('legend-hover-wordcloud')
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -143,7 +135,7 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
+				this.services.transitions.getTransition('legend-mouseout-wordcloud')
 			)
 			.attr('opacity', 1);
 	};
@@ -156,21 +148,23 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.on('mouseover', function (datum) {
-				const hoveredElement = select(this);
-				hoveredElement.classed('hovered', true);
+				const hoveredElement = this;
+				select(hoveredElement).classed('hovered', true);
 
-				// self.parent
-				// 	.selectAll('text.word')
-				// 	.transition(
-				// 		self.services.transitions.getTransition(
-				// 			'legend-hover-bar'
-				// 		)
-				// 	)
-				// 	.attr('opacity', (d) =>
-				// 		d.text !== (hoveredElement.datum() as any).text
-				// 			? 0.3
-				// 			: 1
-				// 	);
+				self.parent
+					.selectAll('text.word')
+					.transition(
+						self.services.transitions.getTransition(
+							'wordcloud-word-hover'
+						)
+					)
+					.attr('opacity', function (d) {
+						if (this === hoveredElement) {
+							return 1;
+						}
+
+						return 0.3;
+					});
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
@@ -182,6 +176,14 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					items: [
+						{
+							label: 'Word',
+							value: datum.text,
+						},
+						{
+							label: 'Occurences',
+							value: datum.size,
+						},
 						{
 							label: options.tooltip.groupLabel || 'Group',
 							value: datum[groupMapsTo],
@@ -195,11 +197,13 @@ export class WordCloud extends Component {
 			})
 			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
 					element: hoveredElement,
 					datum,
 				});
+
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
@@ -219,19 +223,20 @@ export class WordCloud extends Component {
 					element: hoveredElement,
 					datum,
 				});
+
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
 					hoveredElement,
 				});
 
-				// self.parent
-				// 	.selectAll('text.word')
-				// 	.transition(
-				// 		self.services.transitions.getTransition(
-				// 			'legend-hover-bar'
-				// 		)
-				// 	)
-				// 	.attr('opacity', () => 1);
+				self.parent
+					.selectAll('text.word')
+					.transition(
+						self.services.transitions.getTransition(
+							'wordcloud-word-mouseout'
+						)
+					)
+					.attr('opacity', 1);
 			});
 	}
 }
