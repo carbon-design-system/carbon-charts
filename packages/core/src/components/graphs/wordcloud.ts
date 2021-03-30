@@ -2,6 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Events, ColorClassNameTypes } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -123,7 +124,9 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition(
-				this.services.transitions.getTransition('legend-hover-wordcloud')
+				this.services.transitions.getTransition(
+					'legend-hover-wordcloud'
+				)
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -135,7 +138,9 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition(
-				this.services.transitions.getTransition('legend-mouseout-wordcloud')
+				this.services.transitions.getTransition(
+					'legend-mouseout-wordcloud'
+				)
 			)
 			.attr('opacity', 1);
 	};
@@ -144,6 +149,29 @@ export class WordCloud extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
+		// Highlights 1 word or unhighlights all
+		const debouncedHighlight = Tools.debounce((word) => {
+			const allWords = self.parent
+				.selectAll('text.word')
+				.transition(
+					self.services.transitions.getTransition(
+						'wordcloud-word-mouse-highlight'
+					)
+				);
+
+			if (word === null) {
+				allWords.attr('opacity', 1);
+			} else {
+				allWords.attr('opacity', function () {
+					if (word === this) {
+						return 1;
+					}
+
+					return 0.3;
+				});
+			}
+		}, 6);
+
 		const self = this;
 		this.parent
 			.selectAll('text.word')
@@ -151,20 +179,7 @@ export class WordCloud extends Component {
 				const hoveredElement = this;
 				select(hoveredElement).classed('hovered', true);
 
-				self.parent
-					.selectAll('text.word')
-					.transition(
-						self.services.transitions.getTransition(
-							'wordcloud-word-hover'
-						)
-					)
-					.attr('opacity', function (d) {
-						if (this === hoveredElement) {
-							return 1;
-						}
-
-						return 0.3;
-					});
+				debouncedHighlight(hoveredElement);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
@@ -229,14 +244,7 @@ export class WordCloud extends Component {
 					hoveredElement,
 				});
 
-				self.parent
-					.selectAll('text.word')
-					.transition(
-						self.services.transitions.getTransition(
-							'wordcloud-word-mouseout'
-						)
-					)
-					.attr('opacity', 1);
+				debouncedHighlight(null);
 			});
 	}
 }
