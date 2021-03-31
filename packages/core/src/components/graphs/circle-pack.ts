@@ -15,6 +15,7 @@ export class CirclePack extends Component {
 	focal;
 
 	render(animate = true) {
+		// svg and container widths
 		const svg = this.getContainerSVG({ withinChartClip: true });
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
@@ -26,7 +27,9 @@ export class CirclePack extends Component {
 			return;
 		}
 
+		// data and options (zoom/not zoom)
 		let displayData = this.model.getDisplayData();
+		const monochromatic = this.model.isMonochrome();
 		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 		const canvasZoomEnabled = Tools.getProperty(
@@ -35,10 +38,13 @@ export class CirclePack extends Component {
 			'enabled'
 		);
 
-		const mono = displayData.length === 1;
-		if (mono) {
+		// check if there is one root for the data
+		// that root will be the only datagroup (colorscale will be monochrome)
+		if (monochromatic) {
+			// remove want to remove the parent from being rendered
 			displayData = displayData[0].children;
 		}
+
 		const root = d3Hierarchy({
 			name: options.title || 'Circle Pack',
 			children: displayData,
@@ -80,6 +86,7 @@ export class CirclePack extends Component {
 					canvasZoomEnabled && hierarchyLevel === 3
 						? this.getZoomClass(d)
 						: '';
+				// the root(s) of the determine the color
 				let dataGroup = d;
 				while (dataGroup.depth > 1) {
 					dataGroup = dataGroup.parent;
@@ -104,7 +111,7 @@ export class CirclePack extends Component {
 					animate
 				)
 			)
-			.attr('fill-opacity', 0.3); // config
+			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity);
 
 		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(
@@ -113,6 +120,11 @@ export class CirclePack extends Component {
 				Configuration.canvasZoomSettings
 			);
 			this.setBackgroundListeners();
+		}
+
+		if (!monochromatic) {
+			// add legend filtering if it isnt a monochrome chart
+			this.addLegendListeners();
 		}
 
 		// Add event listeners to elements drawn
@@ -155,6 +167,20 @@ export class CirclePack extends Component {
 		return 'zoomed-in';
 	}
 
+	addLegendListeners() {
+		const { events } = this.services;
+		// Highlight correct circle on legend item hovers
+		events.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		// Un-highlight circles on legend item mouseouts
+		events.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
+	}
+
 	removeBackgroundListeners() {
 		const chartSvg = select(this.services.domUtils.getHolder());
 		chartSvg.on('click', () => null);
@@ -174,6 +200,38 @@ export class CirclePack extends Component {
 			);
 		});
 	}
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+
+		this.parent
+			.selectAll('circle.node')
+			.transition(
+				this.services.transitions.getTransition(
+					'legend-hover-circlepack'
+				)
+			)
+			.attr('opacity', (d) => {
+				let dataGroup = d;
+				while (dataGroup.depth > 1) {
+					dataGroup = dataGroup.parent;
+				}
+				return dataGroup.data.name === hoveredElement.datum()['name']
+					? 1
+					: Configuration.circlePack.circles.fillOpacity;
+			});
+	};
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll('circle.node')
+			.transition(
+				this.services.transitions.getTransition(
+					'legend-mouseout-circlepack'
+				)
+			)
+			.attr('opacity', 1);
+	};
 
 	// add event listeners for tooltip on the circles
 	addEventListeners() {
@@ -280,7 +338,11 @@ export class CirclePack extends Component {
 				});
 			})
 			.on('click', function (datum) {
-				// zoom if chart has zoom enabled AND if its a level 2 that has children
+				const hoveredElement = select(this);
+				const disabled = hoveredElement
+					.node()
+					.classList.contains('zoomed-in');
+				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
 				if (
 					Tools.getProperty(
 						self.getOptions(),
@@ -288,7 +350,8 @@ export class CirclePack extends Component {
 						'enabled'
 					) === true &&
 					datum.depth === 2 &&
-					datum.children
+					datum.children &&
+					!disabled
 				) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
@@ -306,8 +369,6 @@ export class CirclePack extends Component {
 					// tooltip on the click event in order to zoom in/out
 					event.stopPropagation();
 				}
-
-				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -328,5 +389,16 @@ export class CirclePack extends Component {
 			.on('mousemove', null)
 			.on('mouseout', null)
 			.on('click', null);
+
+		// remove the listeners on the legend
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }

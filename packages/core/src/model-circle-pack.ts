@@ -9,8 +9,25 @@ import { scaleOrdinal } from 'd3-scale';
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class CirclePackChartModel extends ChartModel {
+	monochrome = false;
+
 	constructor(services: any) {
 		super(services);
+	}
+
+	setData(newData) {
+		super.setData(newData);
+		this.setMonochromatic();
+	}
+
+	setMonochromatic() {
+		if (this.getDisplayData().length === 1) {
+			this.monochrome = true;
+		}
+	}
+
+	isMonochrome() {
+		return this.monochrome;
 	}
 
 	// update the hierarchy level

@@ -25,6 +25,9 @@ export const canvasZoomSettings = {
 };
 
 export const circlePack = {
+	circles: {
+		fillOpacity: 0.3,
+	},
 	padding: {
 		outer: 4,
 		inner: 2,
