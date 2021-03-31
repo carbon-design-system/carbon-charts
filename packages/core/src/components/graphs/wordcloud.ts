@@ -6,6 +6,8 @@ import { Tools } from '../../tools';
 
 // D3 Imports
 import { select } from 'd3-selection';
+import { scaleLinear } from 'd3-scale';
+import { extent } from 'd3-array';
 import cloud from 'd3-cloud';
 
 export class WordCloud extends Component {
@@ -27,12 +29,41 @@ export class WordCloud extends Component {
 		);
 	}
 
+	getFontSizeScale(data: any) {
+		const options = this.getOptions();
+		const { fontSizeMapsTo } = options.wordCloud;
+
+		// Filter out any null/undefined values
+		const allOccurences = data
+			.map((d) => d[fontSizeMapsTo])
+			.filter((size) => size);
+		const chartSize = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		);
+
+		// We need the ternary operator here in case the user
+		// doesn't provide size values in data
+		const sizeDataIsValid = allOccurences.length > 0;
+		const domain = sizeDataIsValid ? extent(allOccurences) : [1, 1];
+		return scaleLinear()
+			.domain(domain as any)
+			.range(
+				sizeDataIsValid
+					? options.wordCloud.fontSizeRange(chartSize, data)
+					: [4, 4]
+			);
+	}
+
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
 
 		const displayData = this.model.getDisplayData();
+		const fontSizeScale = this.getFontSizeScale(displayData);
+
 		const options = this.getOptions();
+		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
@@ -49,16 +80,14 @@ export class WordCloud extends Component {
 				displayData.map(function (d) {
 					return {
 						[groupMapsTo]: d[groupMapsTo],
-						text: d.word,
-						size: d.size,
+						text: d[wordMapsTo],
+						size: d[fontSizeMapsTo],
 					};
 				})
 			)
 			.padding(5)
 			.rotate(0)
-			.fontSize(function (d) {
-				return d.size;
-			})
+			.fontSize(d => fontSizeScale(d.size))
 			.on('end', draw);
 
 		layout.start();
@@ -94,7 +123,7 @@ export class WordCloud extends Component {
 					self.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: d[groupMapsTo],
-						originalClassName: 'word',
+						originalClassName: `word ${d.size > 32 ? "light" : ""}`,
 					})
 				)
 				.attr('text-anchor', 'middle')
@@ -147,6 +176,7 @@ export class WordCloud extends Component {
 
 	addEventListeners() {
 		const options = this.getOptions();
+		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
 		// Highlights 1 word or unhighlights all
@@ -177,8 +207,6 @@ export class WordCloud extends Component {
 			.selectAll('text.word')
 			.on('mouseover', function (datum) {
 				const hoveredElement = this;
-				select(hoveredElement).classed('hovered', true);
-
 				debouncedHighlight(hoveredElement);
 
 				// Dispatch mouse event
@@ -231,7 +259,7 @@ export class WordCloud extends Component {
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed('hovered', false);
+				debouncedHighlight(null);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
@@ -243,8 +271,6 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
 					hoveredElement,
 				});
-
-				debouncedHighlight(null);
 			});
 	}
 }

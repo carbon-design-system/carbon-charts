@@ -2,7 +2,7 @@
 import { PieChartModel } from '../model-pie';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
-import { ChartConfig, PieChartOptions } from '../interfaces/index';
+import { ChartConfig, WorldCloudChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
@@ -16,14 +16,14 @@ import {
 } from '../components/index';
 
 export class WordCloudChart extends Chart {
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<WorldCloudChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.pieChart,
+				Configuration.options.wordCloudChart,
 				chartConfigs.options
 			)
 		);

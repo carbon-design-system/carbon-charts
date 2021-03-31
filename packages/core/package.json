@@ -60,12 +60,12 @@
 		"d3": ">=5.0.0 <=5.14.2"
 	},
 	"devDependencies": {
-		"@carbon/elements": "10.10.1",
-		"@carbon/import-once": "10.3.0",
-		"@carbon/layout": "10.5.0",
-		"@carbon/motion": "10.4.0",
-		"@carbon/themes": "10.4.0",
-		"@carbon/type": "10.5.1",
+		"@carbon/elements": "10.30.0",
+		"@carbon/import-once": "10.5.0",
+		"@carbon/layout": "10.21.0",
+		"@carbon/motion": "10.15.0",
+		"@carbon/themes": "10.30.0",
+		"@carbon/type": "10.24.0",
 		"@rollup/plugin-json": "4.0.2",
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",

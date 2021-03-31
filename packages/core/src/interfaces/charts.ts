@@ -264,6 +264,17 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 }
 
 /**
+ * options specific to world cloud charts
+ */
+export interface WorldCloudChartOptions extends BaseChartOptions {
+	wordCloud?: {
+		fontSizeMapsTo?: string;
+		fontSizeRange?: Function;
+		wordMapsTo?: string;
+	};
+}
+
+/**
  * options specific to pie charts
  */
 export interface PieChartOptions extends BaseChartOptions {

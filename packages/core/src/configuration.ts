@@ -16,6 +16,7 @@ import {
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	WorldCloudChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
@@ -310,6 +311,26 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 } as BubbleChartOptions);
 
 /**
+ * options specific to word cloud charts
+ */
+const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	wordCloud: {
+		fontSizeMapsTo: 'value',
+		fontSizeRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 20) / 400,
+				(smallerChartDimension * 70) / 400,
+			];
+		},
+		wordMapsTo: 'word',
+	},
+} as WorldCloudChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -435,6 +456,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	wordCloudChart,
 };
 
 export * from './configuration-non-customizable';
