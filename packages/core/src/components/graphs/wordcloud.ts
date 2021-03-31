@@ -82,12 +82,13 @@ export class WordCloud extends Component {
 						[groupMapsTo]: d[groupMapsTo],
 						text: d[wordMapsTo],
 						size: d[fontSizeMapsTo],
+						value: d[fontSizeMapsTo],
 					};
 				})
 			)
 			.padding(5)
 			.rotate(0)
-			.fontSize(d => fontSizeScale(d.size))
+			.fontSize((d) => fontSizeScale(d.size))
 			.on('end', draw);
 
 		layout.start();
@@ -123,7 +124,7 @@ export class WordCloud extends Component {
 					self.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: d[groupMapsTo],
-						originalClassName: `word ${d.size > 32 ? "light" : ""}`,
+						originalClassName: `word ${d.size > 32 ? 'light' : ''}`,
 					})
 				)
 				.attr('text-anchor', 'middle')
@@ -133,11 +134,7 @@ export class WordCloud extends Component {
 						animate
 					)
 				)
-				.attr('transform', function (d) {
-					return (
-						'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')'
-					);
-				})
+				.attr('transform', d => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1);
 		}
 
@@ -176,7 +173,7 @@ export class WordCloud extends Component {
 
 	addEventListeners() {
 		const options = this.getOptions();
-		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud;
+		const { fontSizeMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
 		// Highlights 1 word or unhighlights all
@@ -210,25 +207,28 @@ export class WordCloud extends Component {
 				debouncedHighlight(hoveredElement);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
-					element: select(this),
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.WordCloud.WORD_MOUSEOVER,
+					{
+						element: select(this),
+						datum,
+					}
+				);
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					items: [
 						{
-							label: 'Word',
+							label: options.tooltip.wordLabel,
 							value: datum.text,
 						},
 						{
-							label: 'Occurences',
-							value: datum.size,
+							label: options.tooltip.valueLabel,
+							value: datum.value,
 						},
 						{
-							label: options.tooltip.groupLabel || 'Group',
+							label: options.tooltip.groupLabel,
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
@@ -242,30 +242,39 @@ export class WordCloud extends Component {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
-					element: hoveredElement,
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.WordCloud.WORD_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on('click', function (datum) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
-					element: select(this),
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.WordCloud.WORD_CLICK,
+					{
+						element: select(this),
+						datum,
+					}
+				);
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				debouncedHighlight(null);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
-					element: hoveredElement,
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.WordCloud.WORD_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {

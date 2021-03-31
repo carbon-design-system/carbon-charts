@@ -23,6 +23,7 @@ import {
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
+	WordCloudChartTooltipOptions,
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
@@ -97,6 +98,7 @@ export const baseTooltip: TooltipOptions = {
 	enabled: true,
 	showTotal: true,
 	truncation: standardTruncationOptions,
+	groupLabel: 'Group',
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -314,6 +316,10 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
  * options specific to word cloud charts
  */
 const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	tooltip: Tools.merge({}, baseTooltip, {
+		wordLabel: 'Word',
+		valueLabel: 'Occurences',
+	}) as WordCloudChartTooltipOptions,
 	wordCloud: {
 		fontSizeMapsTo: 'value',
 		fontSizeRange: (chartSize, data) => {
@@ -323,7 +329,7 @@ const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
 			);
 			return [
 				(smallerChartDimension * 20) / 400,
-				(smallerChartDimension * 70) / 400,
+				(smallerChartDimension * 75) / 400,
 			];
 		},
 		wordMapsTo: 'word',
