@@ -41,7 +41,16 @@ export class Area extends Component {
 		const { cartesianScales } = this.services;
 
 		const orientation = cartesianScales.getOrientation();
-		const areaGenerator = area().curve(this.services.curves.getD3Curve());
+		const areaGenerator = area()
+			.curve(this.services.curves.getD3Curve())
+			.defined((datum: any, i) => {
+				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const value = datum[rangeIdentifier];
+				if (value === null || value === undefined) {
+					return false;
+				}
+				return true;
+			});
 
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData(this.configs.groups);
