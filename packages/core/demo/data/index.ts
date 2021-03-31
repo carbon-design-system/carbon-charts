@@ -50,21 +50,6 @@ export const chartTypes = {
 		angular: 'ibm-area-chart',
 		vue: 'ccv-area-chart',
 	},
-	SimpleBarChart: {
-		vanilla: 'SimpleBarChart',
-		angular: 'ibm-simple-bar-chart',
-		vue: 'ccv-simple-bar-chart',
-	},
-	GroupedBarChart: {
-		vanilla: 'GroupedBarChart',
-		angular: 'ibm-grouped-bar-chart',
-		vue: 'ccv-grouped-bar-chart',
-	},
-	StackedBarChart: {
-		vanilla: 'StackedBarChart',
-		angular: 'ibm-stacked-bar-chart',
-		vue: 'ccv-stacked-bar-chart',
-	},
 	BoxplotChart: {
 		vanilla: 'BoxplotChart',
 		angular: 'ibm-boxplot-chart',
@@ -75,55 +60,70 @@ export const chartTypes = {
 		angular: 'ibm-bubble-chart',
 		vue: 'ccv-bubble-chart',
 	},
-	LineChart: {
-		vanilla: 'LineChart',
-		angular: 'ibm-line-chart',
-		vue: 'ccv-line-chart',
-	},
-	StackedAreaChart: {
-		vanilla: 'StackedAreaChart',
-		angular: 'ibm-stacked-area-chart',
-		vue: 'ccv-stacked-area-chart',
-	},
-	ScatterChart: {
-		vanilla: 'ScatterChart',
-		angular: 'ibm-scatter-chart',
-		vue: 'ccv-scatter-chart',
-	},
-	LollipopChart: {
-		vanilla: 'LollipopChart',
-		angular: 'ibm-lollipop-chart',
-		vue: 'ccv-lollipop-chart',
-	},
-	PieChart: {
-		vanilla: 'PieChart',
-		angular: 'ibm-pie-chart',
-		vue: 'ccv-pie-chart',
-	},
-	GaugeChart: {
-		vanilla: 'GaugeChart',
-		angular: 'ibm-gauge-chart',
-		vue: 'ccv-gauge-chart',
+	ComboChart: {
+		vanilla: 'ComboChart',
+		angular: 'ibm-combo-chart',
+		vue: 'ccv-combo-chart',
 	},
 	DonutChart: {
 		vanilla: 'DonutChart',
 		angular: 'ibm-donut-chart',
 		vue: 'ccv-donut-chart',
 	},
+	GaugeChart: {
+		vanilla: 'GaugeChart',
+		angular: 'ibm-gauge-chart',
+		vue: 'ccv-gauge-chart',
+	},
+	GroupedBarChart: {
+		vanilla: 'GroupedBarChart',
+		angular: 'ibm-grouped-bar-chart',
+		vue: 'ccv-grouped-bar-chart',
+	},
+	LineChart: {
+		vanilla: 'LineChart',
+		angular: 'ibm-line-chart',
+		vue: 'ccv-line-chart',
+	},
+	LollipopChart: {
+		vanilla: 'LollipopChart',
+		angular: 'ibm-lollipop-chart',
+		vue: 'ccv-lollipop-chart',
+	},
 	MeterChart: {
 		vanilla: 'MeterChart',
 		angular: 'ibm-meter-chart',
 		vue: 'ccv-meter-chart',
+	},
+	PieChart: {
+		vanilla: 'PieChart',
+		angular: 'ibm-pie-chart',
+		vue: 'ccv-pie-chart',
 	},
 	RadarChart: {
 		vanilla: 'RadarChart',
 		angular: 'ibm-radar-chart',
 		vue: 'ccv-radar-chart',
 	},
-	ComboChart: {
-		vanilla: 'ComboChart',
-		angular: 'ibm-combo-chart',
-		vue: 'ccv-combo-chart',
+	ScatterChart: {
+		vanilla: 'ScatterChart',
+		angular: 'ibm-scatter-chart',
+		vue: 'ccv-scatter-chart',
+	},
+	SimpleBarChart: {
+		vanilla: 'SimpleBarChart',
+		angular: 'ibm-simple-bar-chart',
+		vue: 'ccv-simple-bar-chart',
+	},
+	StackedAreaChart: {
+		vanilla: 'StackedAreaChart',
+		angular: 'ibm-stacked-area-chart',
+		vue: 'ccv-stacked-area-chart',
+	},
+	StackedBarChart: {
+		vanilla: 'StackedBarChart',
+		angular: 'ibm-stacked-bar-chart',
+		vue: 'ccv-stacked-bar-chart',
 	},
 	TreemapChart: {
 		vanilla: 'TreemapChart',
@@ -558,6 +558,29 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: 'Gauge',
+		demos: [
+			{
+				options: gaugeDemos.gaugeOptionsSemi,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true,
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircular,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true,
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircularNoDelta,
+				data: gaugeDemos.gaugeDataNoDelta,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true,
+			},
+		],
+	},
+	{
 		title: 'Line',
 		description:
 			'Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.',
@@ -652,6 +675,21 @@ let allDemoGroups = [
 				options: lineDemos.sparklineLoadingOptions,
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Lollipop',
+		demos: [
+			{
+				options: lollipopDemos.lollipopDiscreteOptions,
+				data: lollipopDemos.lollipopDiscreteData,
+				chartType: chartTypes.LollipopChart,
+			},
+			{
+				options: lollipopDemos.lollipopDiscretePresentationOptions,
+				data: lollipopDemos.lollipopDiscretePresentationData,
+				chartType: chartTypes.LollipopChart,
 			},
 		],
 	},
