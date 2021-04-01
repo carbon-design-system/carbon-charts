@@ -119,22 +119,7 @@ export namespace Tools {
 			}
 		}
 
-		// Concat default legend additional items
-		if (getProperty(providedOptions, 'legend', 'additionalItems')) {
-			const providedLegendItems = providedOptions.legend.additionalItems;
-			const providedTypes = providedLegendItems.map(item => item.type);
-
-			// remove same type default items if they are provided by user
-			let defaultLegendItems = defaultOptions.legend.additionalItems.filter(
-				item => !providedTypes.includes(item.type)
-			)
-
-			providedOptions.legend.additionalItems = Tools.unionBy(
-				defaultLegendItems,
-				providedLegendItems,
-				'name'
-			);
-		}
+		updateLegendAdditionalItems(defaultOptions, providedOptions);
 
 		return Tools.merge(defaultOptions, providedOptions);
 	}
@@ -286,6 +271,34 @@ export namespace Tools {
 			return '...' + fullText.substr(-numCharacter);
 		} else if (truncationType === TruncationTypes.END_LINE) {
 			return fullText.substr(0, numCharacter) + '...';
+		}
+	}
+
+	/**
+	 * Update legend additional items
+	 * @param {any} defaultOptions
+	 * @param {any} providedOptions
+	 */
+	export function updateLegendAdditionalItems(defaultOptions, providedOptions) {
+		let defaultLegendItems = Tools.getProperty(defaultOptions, 'legend', 'additionalItems');
+		const providedLegendItems = Tools.getProperty(providedOptions, 'legend', 'additionalItems');
+
+		// Retain default legend additional items
+		if (defaultLegendItems && providedLegendItems) {
+			const providedTypes = providedLegendItems.map(item => item.type);
+
+			// Remove same type default items if they are provided
+			defaultLegendItems = defaultLegendItems.filter(
+				item => !providedTypes.includes(item.type) && item.type === LegendItemType.RADIUS
+			)
+
+			providedOptions.legend.additionalItems = Tools.unionBy(
+				defaultLegendItems,
+				providedLegendItems,
+				'name'
+			);
+
+			defaultOptions.legend.additionalItems = [];
 		}
 	}
 

@@ -108,6 +108,8 @@ export class Legend extends Component {
 
 		// add additional legend items
 		if (additionalItemsOption && dataGroups.length) {
+			svg.selectAll('g.additional-item').remove();
+
 			const additionalItems = svg
 				.selectAll('g.additional-item')
 				.data(additionalItemsOption);
