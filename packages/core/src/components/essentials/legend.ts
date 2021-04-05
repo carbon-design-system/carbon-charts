@@ -191,15 +191,14 @@ export class Legend extends Component {
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			const { config, color } = Configuration.legend.radius;
 
-			const item = additionalItem
+			const circleEnter = additionalItem
+				.attr('fill', 'none')
 				.selectAll('circle')
 				.data(config)
-				.attr('fill', 'none');
+				.enter();
 
-			item
-				.enter()
+			circleEnter
 				.append('circle')
-				.merge(additionalItem.select('circle'))
 				.classed('radius', true)
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'radius')
@@ -207,8 +206,6 @@ export class Legend extends Component {
 				.attr('cy', (d) => d.cy)
 				.attr('r', (d) => d.r)
 				.attr('stroke', itemConfig.color ? itemConfig.color : color);
-
-			item.exit().remove();
 		} else if (itemConfig.type === LegendItemType.LINE) {
 			const lineConfig = Configuration.legend.line;
 
@@ -262,7 +259,6 @@ export class Legend extends Component {
 				.attr('y', (d) => 24 - d.height)
 				.attr('stroke', itemConfig.color ? itemConfig.color : color)
 				.attr('stroke-width', 1);
-
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { config } = Configuration.legend.quartile;
 
@@ -287,8 +283,6 @@ export class Legend extends Component {
 				.attr('height', (d) => d.height)
 				.attr('fill', (d) => d.color);
 		}
-
-		additionalItem.exit().remove();
 	}
 
 	truncateLegendText(addedLegendItemsText) {
