@@ -228,7 +228,7 @@ export class Tooltip extends Component {
 			return valueFormatter(value, label);
 		}
 
-		if (typeof value.getTime === "function") {
+		if (typeof value.getTime === 'function') {
 			return format(value, 'MMM d, yyyy');
 		}
 

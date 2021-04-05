@@ -36,9 +36,9 @@ export const bubbleDoubleLinearOptions = {
 			{
 				type: 'radius',
 				name: 'Surplus',
-			}
-		]
-	}
+			},
+		],
+	},
 };
 
 export const bubbleDiscreteData = [

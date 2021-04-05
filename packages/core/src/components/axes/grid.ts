@@ -61,20 +61,19 @@ export class Grid extends Component {
 		);
 
 		if (alignToTicks) {
-		const mainXPosition = this.services.cartesianScales.getDomainAxisPosition();
-		const customDomain = Tools.getProperty(
-			this.getOptions(),
-			'axes',
-			mainXPosition,
-			'ticks',
-			'values'
-		);
+			const mainXPosition = this.services.cartesianScales.getDomainAxisPosition();
+			const customDomain = Tools.getProperty(
+				this.getOptions(),
+				'axes',
+				mainXPosition,
+				'ticks',
+				'values'
+			);
 			// use custom domain if there is one
 			// otherwise d3 defaults to using one gridline per tick
 			if (customDomain) {
 				xGrid.tickValues(customDomain);
 			}
-
 		} else {
 			// Determine number of ticks
 			const numberOfTicks = Tools.getProperty(
@@ -131,7 +130,7 @@ export class Grid extends Component {
 				'axes',
 				mainYPosition,
 				'ticks',
-				'values',
+				'values'
 			);
 
 			// use custom domain if there is one
@@ -139,7 +138,6 @@ export class Grid extends Component {
 			if (customDomain) {
 				yGrid.tickValues(customDomain);
 			}
-
 		} else {
 			// Determine number of ticks
 			const numberOfTicks = Tools.getProperty(

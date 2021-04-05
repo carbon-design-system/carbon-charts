@@ -120,8 +120,8 @@ export class Legend extends Component {
 				.enter()
 				.append('g')
 				.merge(additionalItems)
-				.classed('additional-item', true)
-			
+				.classed('additional-item', true);
+
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
 

@@ -1,31 +1,19 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.41.48](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.47...v0.41.48) (2021-03-31)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.47](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.46...v0.41.47) (2021-03-30)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.46](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.45...v0.41.46) (2021-03-29)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 # Change Log
 
@@ -36,17 +24,9 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.44](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.43...v0.41.44) (2021-03-24)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 ## [0.41.43](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.42...v0.41.43) (2021-03-15)
 

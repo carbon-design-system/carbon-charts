@@ -4,7 +4,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
-	LegendItemType
+	LegendItemType,
 } from './interfaces';
 
 import {
@@ -279,18 +279,31 @@ export namespace Tools {
 	 * @param {any} defaultOptions
 	 * @param {any} providedOptions
 	 */
-	export function updateLegendAdditionalItems(defaultOptions, providedOptions) {
-		let defaultLegendItems = Tools.getProperty(defaultOptions, 'legend', 'additionalItems');
-		const providedLegendItems = Tools.getProperty(providedOptions, 'legend', 'additionalItems');
+	export function updateLegendAdditionalItems(
+		defaultOptions,
+		providedOptions
+	) {
+		let defaultLegendItems = Tools.getProperty(
+			defaultOptions,
+			'legend',
+			'additionalItems'
+		);
+		const providedLegendItems = Tools.getProperty(
+			providedOptions,
+			'legend',
+			'additionalItems'
+		);
 
 		// Retain default legend additional items
 		if (defaultLegendItems && providedLegendItems) {
-			const providedTypes = providedLegendItems.map(item => item.type);
+			const providedTypes = providedLegendItems.map((item) => item.type);
 
 			// Remove same type default items if they are provided
 			defaultLegendItems = defaultLegendItems.filter(
-				item => !providedTypes.includes(item.type) && item.type === LegendItemType.RADIUS
-			)
+				(item) =>
+					!providedTypes.includes(item.type) &&
+					item.type === LegendItemType.RADIUS
+			);
 
 			providedOptions.legend.additionalItems = Tools.unionBy(
 				defaultLegendItems,
