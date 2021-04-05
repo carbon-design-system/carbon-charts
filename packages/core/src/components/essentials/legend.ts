@@ -108,24 +108,27 @@ export class Legend extends Component {
 
 		// add additional legend items
 		if (additionalItemsOption && dataGroups.length) {
-			svg.selectAll('g.additional-item').remove();
+			const self = this;
 
 			const additionalItems = svg
 				.selectAll('g.additional-item')
 				.data(additionalItemsOption);
 
+			additionalItems.exit().remove();
+
 			const addedAdditionalItems = additionalItems
 				.enter()
 				.append('g')
-				.classed('additional-item', true);
-
-			const self = this;
+				.merge(additionalItems)
+				.classed('additional-item', true)
+			
+			// remove nested child elements that no longer needed
+			addedAdditionalItems.selectAll('*').remove();
 
 			// add different type of legend items
 			addedAdditionalItems
 				.append('g')
 				.classed('icon', true)
-				.merge(svg.selectAll('g.icon'))
 				.each(function (d, i) {
 					const additionalItem = select(this);
 
@@ -188,14 +191,15 @@ export class Legend extends Component {
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			const { config, color } = Configuration.legend.radius;
 
-			const circleEnter = additionalItem
-				.attr('fill', 'none')
+			const item = additionalItem
 				.selectAll('circle')
 				.data(config)
-				.enter();
+				.attr('fill', 'none');
 
-			circleEnter
+			item
+				.enter()
 				.append('circle')
+				.merge(additionalItem.select('circle'))
 				.classed('radius', true)
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'radius')
@@ -203,6 +207,8 @@ export class Legend extends Component {
 				.attr('cy', (d) => d.cy)
 				.attr('r', (d) => d.r)
 				.attr('stroke', itemConfig.color ? itemConfig.color : color);
+
+			item.exit().remove();
 		} else if (itemConfig.type === LegendItemType.LINE) {
 			const lineConfig = Configuration.legend.line;
 
@@ -256,6 +262,7 @@ export class Legend extends Component {
 				.attr('y', (d) => 24 - d.height)
 				.attr('stroke', itemConfig.color ? itemConfig.color : color)
 				.attr('stroke-width', 1);
+
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { config } = Configuration.legend.quartile;
 
@@ -280,6 +287,8 @@ export class Legend extends Component {
 				.attr('height', (d) => d.height)
 				.attr('fill', (d) => d.color);
 		}
+
+		additionalItem.exit().remove();
 	}
 
 	truncateLegendText(addedLegendItemsText) {
