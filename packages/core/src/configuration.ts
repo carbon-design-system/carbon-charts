@@ -320,7 +320,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
 	tooltip: Tools.merge({}, baseTooltip, {
 		wordLabel: 'Word',
-		valueLabel: 'Occurences',
+		valueLabel: 'Value',
 	}) as WordCloudChartTooltipOptions,
 	wordCloud: {
 		fontSizeMapsTo: 'value',
