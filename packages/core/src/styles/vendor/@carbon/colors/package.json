@@ -1,11 +1,15 @@
 {
   "name": "@carbon/colors",
   "description": "Colors for digital and software products using the Carbon Design System",
-  "version": "10.8.0",
+  "version": "10.22.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/colors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/colors"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -27,16 +31,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check \"scss/*.scss\" && bundler sassdoc \"scss/*.scss\"",
-    "clean": "rimraf css es lib umd scss"
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonColors && node tasks/build.js && carbon-cli check \"scss/*.scss\"",
+    "clean": "rimraf css es lib umd scss index.scss"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.6.0",
-    "@carbon/cli-reporter": "^10.3.0",
-    "@carbon/scss-generator": "^10.6.0",
-    "@carbon/test-utils": "^10.7.0",
+    "@carbon/cli": "^10.21.0",
+    "@carbon/cli-reporter": "^10.4.0",
+    "@carbon/scss-generator": "^10.13.0",
+    "@carbon/test-utils": "^10.15.0",
     "change-case": "^4.1.1",
-    "core-js": "^3.0.1",
+    "core-js": "^3.6.5",
     "fs-extra": "^8.1.0",
     "node-sass": "^4.13.1",
     "rimraf": "^3.0.0"
@@ -47,5 +51,5 @@
     "sassDir": "scss",
     "needs": "^1.3.0"
   },
-  "gitHead": "fc828fed0fc6410f0612d14f4190c65e66e56053"
+  "gitHead": "9d5ddba624d9cc7afe54717fd430228349c043e3"
 }
