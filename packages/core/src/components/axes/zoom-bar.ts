@@ -113,6 +113,7 @@ export class ZoomBar extends Component {
 		let zoomGraphArea;
 
 		if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
+			// Draw zoombar background rectangle
 			DOMUtils.appendOrSelect(container, 'rect.zoom-bg')
 				.attr('x', axesLeftMargin)
 				.attr('y', 0)
@@ -121,7 +122,10 @@ export class ZoomBar extends Component {
 				.classed('zoom-bg-skeleton', isTopZoomBarLoading);
 
 			if (canvas) {
-				const canvasContainer = this.addCanvasContainer(width,zoombarHeight);
+				const canvasContainer = this.addCanvasContainer(
+					width,
+					zoombarHeight
+				);
 
 				// Append canvases
 				zoomGraphAreaUnselected = DOMUtils.appendOrSelectCanvas(
@@ -129,7 +133,7 @@ export class ZoomBar extends Component {
 					{ width: String(width), height: zoombarHeight },
 					'zoom-graph-area-unselected-canvas'
 				);
-		
+
 				zoomGraphArea = DOMUtils.appendOrSelectCanvas(
 					canvasContainer,
 					{ width: String(width), height: zoombarHeight },
@@ -218,17 +222,19 @@ export class ZoomBar extends Component {
 					},
 					{ skipUpdate: true }
 				);
-			} else if (newInitialZoomDomain === null && oldInitialZoomDomain != null){
+			} else if (
+				newInitialZoomDomain === null &&
+				oldInitialZoomDomain != null
+			) {
 				// if newInitialZoomDomain is set to null (when oldInitialZoomDomain is not null)
 				// save initialZoomDomain and reset zoom domain to default domain
 				this.model.set(
 					{
 						initialZoomDomain: null,
-						zoomDomain: Tools.merge([], defaultDomain)
+						zoomDomain: Tools.merge([], defaultDomain),
 					},
 					{ skipUpdate: true }
 				);
-
 			}
 
 			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
@@ -257,9 +263,17 @@ export class ZoomBar extends Component {
 					this.clipId
 				);
 				// Draw the zoom bar base line
-				this.renderZoomBarBaseline((canvas ? zoomGraphAreaUnselected : container), axesLeftMargin, width);
+				this.renderZoomBarBaseline(
+					canvas ? zoomGraphAreaUnselected : container,
+					axesLeftMargin,
+					width
+				);
 				if (canvas) {
-					this.renderZoomBarBaseline(zoomGraphArea, axesLeftMargin, width);
+					this.renderZoomBarBaseline(
+						zoomGraphArea,
+						axesLeftMargin,
+						width
+					);
 				}
 			}
 
@@ -308,7 +322,7 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	addCanvasContainer(width, zoombarHeight){
+	addCanvasContainer(width, zoombarHeight) {
 		const chartprefix = Tools.getProperty(
 			this.getOptions(),
 			'style',
@@ -318,29 +332,36 @@ export class ZoomBar extends Component {
 		// Done this way to ensure cross browser compatability
 		// As canvas positioning is not the same across browsers when canvas appended onto svg
 		let canvasContainerPosition;
-		const zoomSvgPosition = select(`svg.${settings.prefix}--${chartprefix}--zoom-bar`)
-		if(!zoomSvgPosition.empty()){
+		const zoomSvgPosition = select(
+			`svg.${settings.prefix}--${chartprefix}--zoom-bar`
+		);
+		if (!zoomSvgPosition.empty()) {
 			canvasContainerPosition = `${zoomSvgPosition.attr('y')}px`;
 		}
 
 		let canvasContainer;
-		const holder = select(this.model.get('holder'))
-		const selection = holder.select(`div.${settings.prefix}--${chartprefix}--canvas-container`);
+		const holder = select(this.model.get('holder'));
+		const selection = holder.select(
+			`div.${settings.prefix}--${chartprefix}--canvas-container`
+		);
 
-		if (selection.empty()){
+		if (selection.empty()) {
 			// Use of xhtml causes errors in DOMUtils appendorselect method
-			canvasContainer = holder.append('xhtml:div')
-				.attr('class', `${settings.prefix}--${chartprefix}--canvas-container`)
+			canvasContainer = holder
+				.append('xhtml:div')
+				.attr(
+					'class',
+					`${settings.prefix}--${chartprefix}--canvas-container`
+				)
 				.style('width', `${width}px`)
 				.style('height', `${zoombarHeight}px`)
 				.style('position', 'absolute')
 				.style('top', canvasContainerPosition);
 		} else {
-			canvasContainer = 
-				selection
-					.style('width', `${width}px`)
-					.style('height', `${zoombarHeight}px`)
-					.style('top', canvasContainerPosition);
+			canvasContainer = selection
+				.style('width', `${width}px`)
+				.style('height', `${zoombarHeight}px`)
+				.style('top', canvasContainerPosition);
 		}
 		return canvasContainer;
 	}
@@ -608,37 +629,48 @@ export class ZoomBar extends Component {
 			const handleWidth = Configuration.zoomBar.handleWidth;
 
 			const axesMargins = this.model.get('axesMargins');
-			const axesLeftMargin = axesMargins && axesMargins.left ? axesMargins.left : null;
+			const axesLeftMargin =
+				axesMargins && axesMargins.left ? axesMargins.left : null;
 			const { width } = DOMUtils.getSVGElementSize(this.parent, {
 				useAttrs: true,
 			});
 
 			const zoomDomain = this.model.get('zoomDomain');
-			const selection = zoomDomain ? zoomDomain.map((domain) =>
-				this.xScale(domain)
-			): [axesLeftMargin, width-axesLeftMargin];
+			const selection = zoomDomain
+				? zoomDomain.map((domain) => this.xScale(domain))
+				: [axesLeftMargin, width - axesLeftMargin];
 
 			// clip the canvas based on selected area
 			if (querySelector !== 'path.zoom-graph-area-unselected') {
-
 				const clipStart = Math.max(
 					selection[0] + handleWidth / 2,
 					this.maxSelectionRange[0] + handleWidth
 				);
 
-				const clipWidth = Math.min(
-					selection[1] - handleWidth / 2,
-					this.maxSelectionRange[1] - handleWidth
-				) - clipStart;
+				const clipWidth =
+					Math.min(
+						selection[1] - handleWidth / 2,
+						this.maxSelectionRange[1] - handleWidth
+					) - clipStart;
 
-				container.rect(clipStart, 0, clipWidth , zoombarHeight);
+				container.rect(clipStart, 0, clipWidth, zoombarHeight);
 				container.clip();
 			}
 
 			// clip the canvas based on unselected area
 			if (querySelector === 'path.zoom-graph-area-unselected') {
-				container.rect(0, 0, selection[0] - (handleWidth / 2) , zoombarHeight);
-				container.rect(selection[1] + handleWidth / 2, 0, this.maxSelectionRange[1] - selection[1], zoombarHeight);
+				container.rect(
+					0,
+					0,
+					selection[0] - handleWidth / 2,
+					zoombarHeight
+				);
+				container.rect(
+					selection[1] + handleWidth / 2,
+					0,
+					this.maxSelectionRange[1] - selection[1],
+					zoombarHeight
+				);
 				container.clip();
 			}
 
@@ -647,19 +679,27 @@ export class ZoomBar extends Component {
 
 			//non position based styling on canvas does not work through css
 			//so have to apply here
-			if(querySelector !== 'path.zoom-graph-area-unselected'){
-				container.lineWidth = 2
-				container.fillStyle = DOMUtils.getComponentStyle('canvas.zoom-graph-area-canvas','fill');
-				container.strokeStyle = DOMUtils.getComponentStyle('canvas.zoom-graph-area-canvas','stroke');
+			if (querySelector !== 'path.zoom-graph-area-unselected') {
+				container.lineWidth = 2;
+				container.fillStyle = DOMUtils.getComponentStyle(
+					'canvas.zoom-graph-area-canvas',
+					'fill'
+				);
+				container.strokeStyle = DOMUtils.getComponentStyle(
+					'canvas.zoom-graph-area-canvas',
+					'stroke'
+				);
 				container.stroke();
 			} else {
-				container.fillStyle = DOMUtils.getComponentStyle('canvas.zoom-graph-area-unselected-canvas','fill');
+				container.fillStyle = DOMUtils.getComponentStyle(
+					'canvas.zoom-graph-area-unselected-canvas',
+					'fill'
+				);
 			}
 
 			container.fill();
 			container.closePath();
 		} else {
-
 			const areaGraph = DOMUtils.appendOrSelect(container, querySelector)
 				.datum(data)
 				.attr('d', areaGenerator);
@@ -725,7 +765,10 @@ export class ZoomBar extends Component {
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
 		if (canvas) {
-			container.strokeStyle =  DOMUtils.getComponentStyle('canvas.zoom-graph-area-canvas','stroke');
+			container.strokeStyle = DOMUtils.getComponentStyle(
+				'canvas.zoom-graph-area-canvas',
+				'stroke'
+			);
 			container.beginPath();
 			container.lineWidth = 2;
 			container.moveTo(startX, zoombarHeight);
