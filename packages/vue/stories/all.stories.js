@@ -20,7 +20,7 @@ storybookDemoGroups.forEach(demoGroup => {
 		const component = ChartComponents[`Ccv${demo.chartType.vanilla}`];
 		groupStories.add(demo.title, () => ({
 			components: {
-				[component.name]: component,
+				[demo.chartType.vue]: component,
 			},
 			props: {
 				data: {

@@ -2,36 +2,38 @@ import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
+import * as comboDemos from './combo';
 import * as donutDemos from './donut';
-import * as lineDemos from './line';
-import * as pieDemos from './pie';
 import * as gaugeDemos from './gauge';
-import * as scatterDemos from './scatter';
+import * as lineDemos from './line';
 import * as lollipopDemos from './lollipop';
-import * as stepDemos from './step';
 import * as meterDemos from './meter';
-import * as timeSeriesAxisDemos from './time-series-axis';
+import * as pieDemos from './pie';
 import * as radarDemos from './radar';
+import * as scatterDemos from './scatter';
+import * as stepDemos from './step';
+import * as timeSeriesAxisDemos from './time-series-axis';
 import * as treemapDemos from './treemap';
 import * as toolbarDemos from './toolbar';
+import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
-import * as comboDemos from './combo';
 import * as highScaleDemos from './high-scale';
 
 export * from './area';
 export * from './bar';
 export * from './boxplot';
 export * from './bubble';
+export * from './combo';
 export * from './donut';
+export * from './gauge';
 export * from './line';
 export * from './meter';
 export * from './pie';
-export * from './gauge';
+export * from './radar';
 export * from './scatter';
 export * from './step';
-export * from './radar';
-export * from './combo';
 export * from './treemap';
+export * from './wordcloud';
 
 import {
 	createChartSandbox,
@@ -129,6 +131,11 @@ export const chartTypes = {
 		vanilla: 'TreemapChart',
 		angular: 'ibm-treemap-chart',
 		vue: 'ccv-treemap-chart',
+	},
+	WordCloudChart: {
+		vanilla: 'WordCloudChart',
+		angular: 'ibm-wordcloud-chart',
+		vue: 'ccv-wordcloud-chart',
 	},
 };
 
@@ -972,6 +979,17 @@ let allDemoGroups = [
 				data: toolbarDemos.toolbarLineTimeSeriesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false,
+			},
+		],
+	},
+
+	{
+		title: 'Word Cloud',
+		demos: [
+			{
+				options: wordCloudDemos.wordCloudOptions,
+				data: wordCloudDemos.wordCloudData,
+				chartType: chartTypes.WordCloudChart,
 			},
 		],
 	},
