@@ -4,6 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+var fast01 = '70ms';
+var fast02 = '110ms';
+var moderate01 = '150ms';
+var moderate02 = '240ms';
+var slow01 = '400ms';
+var slow02 = '700ms';
+var unstable_tokens = ['fast01', 'fast02', 'moderate01', 'moderate02', 'slow01', 'slow02'];
 var easings = {
   standard: {
     productive: 'cubic-bezier(0.2, 0, 0.38, 0.9)',
@@ -32,4 +39,4 @@ function motion(name, mode) {
   return easing[mode];
 }
 
-export { easings, motion };
+export { easings, fast01, fast02, moderate01, moderate02, motion, slow01, slow02, unstable_tokens };
