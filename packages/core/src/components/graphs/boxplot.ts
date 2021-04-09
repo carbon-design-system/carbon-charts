@@ -375,7 +375,7 @@ export class Boxplot extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel || 'Group',
+							label: options.tooltip.groupLabel,
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
@@ -491,7 +491,7 @@ export class Boxplot extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel || 'Group',
+							label: options.tooltip.groupLabel,
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],

@@ -66,7 +66,7 @@ export class AxisChartsTooltip extends Tooltip {
 					value: datum[rangeIdentifier],
 				},
 				{
-					label: options.tooltip.groupLabel || 'Group',
+					label: options.tooltip.groupLabel,
 					value: datum[groupMapsTo],
 					color: this.model.getFillColor(datum[groupMapsTo]),
 					class: this.model.getColorClassName({

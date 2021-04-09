@@ -26,7 +26,7 @@ are pre-defined for a specific theme. Currently, we offer the following color
 themes: white, gray 10, gray 90, gray 100 .
 
 You can preview all of the token values for this on the
-[Carbon Design System website](https://next.carbondesignsystem.com/guidelines/color/usage)
+[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/color/usage)
 .
 
 ### Sass
@@ -108,11 +108,12 @@ import {
 } from '@carbon/themes';
 ```
 
-## 📖 API Documentation
+## 📚 Examples
 
-If you're looking for `@carbon/themes` API documentation, check out:
+If you're looking for more examples on how to use `@carbon/themes`, we have some
+examples that you can check out:
 
-- [Sass](./docs/sass.md)
+- [sass-modules](./examples/sass-modules)
 
 ## 🙌 Contributing
 
