@@ -292,13 +292,13 @@ export class Treemap extends Component {
 					hoveredElement,
 					items: [
 						{
+							label: datum.data.name,
+							value: datum.data.value,
+						},
+						{
 							color: fillColor,
 							label: parent.data.name,
 							bold: true,
-						},
-						{
-							label: datum.data.name,
-							value: datum.data.value,
 						},
 					],
 				});
