@@ -81,7 +81,7 @@ export const simpleBarData = [
 ];
 
 export const simpleBarOptions = {
-	title: 'Simple bar (discrete)',
+	title: 'Vertical simple bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -116,7 +116,7 @@ export const simpleBarColorOverrideOptions = {
 };
 
 export const simpleBarCustomLegendOrderOptions = {
-	title: 'Simple bar (custom legend order)',
+	title: 'Custom legend order (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -156,7 +156,7 @@ export const simpleBarOptionsCustomTicks = {
 export const simpleBarCenteredLegendData = simpleBarData;
 
 export const simpleBarCenteredLegendOptions = {
-	title: 'Simple bar (centered legend)',
+	title: 'Centered legend (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -235,7 +235,7 @@ export const simpleHorizontalBarData = simpleBarData;
 export const simpleHorizontalBarLongLabelData = simpleBarLongLabelData;
 
 export const simpleHorizontalBarOptions = {
-	title: 'Simple horizontal bar (discrete)',
+	title: 'Horizontal simple bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'group',

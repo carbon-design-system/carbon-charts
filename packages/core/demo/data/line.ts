@@ -77,27 +77,6 @@ export const sparklineLoadingOptions = {
 	},
 };
 
-export const lineCenteredLegendData = lineData;
-
-export const lineCenteredLegendOptions = {
-	title: 'Line (centered legend)',
-	axes: {
-		bottom: {
-			title: '2019 Annual Sales Figures',
-			mapsTo: 'key',
-			scaleType: 'labels',
-		},
-		left: {
-			mapsTo: 'value',
-			title: 'Conversion rate',
-			scaleType: 'linear',
-		},
-	},
-	legend: {
-		alignment: 'center',
-	},
-};
-
 export const lineLongLabelData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 1', key: 'More', value: 23500 },

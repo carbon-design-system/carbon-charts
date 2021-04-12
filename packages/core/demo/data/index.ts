@@ -214,13 +214,18 @@ let allDemoGroups = [
 		],
 	},
 	{
-		title: 'Bar (vertical)',
+		title: 'Bar (simple)',
 		description:
 			'Bar charts use vertical or horizontal data markers to compare individual values. You can use them to compare discrete data or show trends over time.',
 		demos: [
 			{
 				options: barDemos.simpleBarOptions,
 				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.simpleHorizontalBarOptions,
+				data: barDemos.simpleHorizontalBarData,
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
@@ -233,16 +238,6 @@ let allDemoGroups = [
 				data: barDemos.simpleBarDataCustomTicks,
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: false,
-			},
-			{
-				options: barDemos.simpleBarCustomLegendOrderOptions,
-				data: barDemos.simpleBarData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleBarCenteredLegendOptions,
-				data: barDemos.simpleBarCenteredLegendData,
-				chartType: chartTypes.SimpleBarChart,
 			},
 			{
 				options: barDemos.simpleBarLongLabelOptions,
@@ -278,6 +273,11 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: false,
 			},
+		],
+	},
+	{
+		title: 'Bar (grouped)',
+		demos: [
 			{
 				description:
 					'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',
@@ -337,16 +337,6 @@ let allDemoGroups = [
 	{
 		title: 'Bar (horizontal)',
 		demos: [
-			{
-				options: barDemos.simpleHorizontalBarOptions,
-				data: barDemos.simpleHorizontalBarData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleHorizontalBarCenteredLegendOptions,
-				data: barDemos.simpleHorizontalBarCenteredLegendData,
-				chartType: chartTypes.SimpleBarChart,
-			},
 			{
 				options: barDemos.simpleHorizontalBarLongLabelOptions,
 				data: barDemos.simpleHorizontalBarLongLabelData,
@@ -588,6 +578,23 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: 'Legend',
+		demos: [
+			{
+				options: barDemos.simpleBarCustomLegendOrderOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false,
+			},
+			{
+				options: barDemos.simpleBarCenteredLegendOptions,
+				data: barDemos.simpleBarCenteredLegendData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false,
+			},
+		],
+	},
+	{
 		title: 'Line',
 		description:
 			'Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.',
@@ -600,11 +607,6 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineCenteredLegendOptions,
-				data: lineDemos.lineCenteredLegendData,
 				chartType: chartTypes.LineChart,
 			},
 			{
