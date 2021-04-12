@@ -205,7 +205,12 @@ export class Tooltip extends Component {
 										: ''
 								}
 								<p class="label">${item.label || ''}</p>
-								<p class="value">${item.value || ''}</p>
+								<p class="value">${
+									item.value === undefined ||
+									item.value === null
+										? ''
+										: item.value
+								}</p>
 							</div>
 						</li>`
 					)
@@ -228,7 +233,7 @@ export class Tooltip extends Component {
 			return valueFormatter(value, label);
 		}
 
-		if (typeof value.getTime === "function") {
+		if (typeof value.getTime === 'function') {
 			return format(value, 'MMM d, yyyy');
 		}
 
