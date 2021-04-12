@@ -65,59 +65,6 @@ export const scatterDiscreteOptions = {
 	},
 };
 
-export const scatterLongLabelDiscreteData = [
-	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
-	{
-		group: 'Dataset 1',
-		key: '6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231',
-		value: 23500,
-	},
-	{ group: 'Dataset 1', key: 'Sold', value: 53100 },
-	{ group: 'Dataset 1', key: 'Restocking', value: 42300 },
-	{ group: 'Dataset 1', key: 'Misc', value: 12300 },
-	{ group: 'Dataset 2', key: 'Qty', value: 34200 },
-	{
-		group: 'Dataset 2',
-		key: '6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231',
-		value: 53200,
-	},
-	{ group: 'Dataset 2', key: 'Sold', value: 42300 },
-	{ group: 'Dataset 2', key: 'Restocking', value: 21400 },
-	{ group: 'Dataset 2', key: 'Misc', value: 0 },
-	{ group: 'Dataset 3', key: 'Qty', value: 41200 },
-	{
-		group: 'Dataset 3',
-		key: '6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231',
-		value: 18400,
-	},
-	{ group: 'Dataset 3', key: 'Sold', value: 34210 },
-	{ group: 'Dataset 3', key: 'Restocking', value: 1400 },
-	{ group: 'Dataset 3', key: 'Misc', value: 42100 },
-	{ group: 'LongLabelShouldBeTruncated', key: 'Qty', value: 22000 },
-	{
-		group: 'LongLabelShouldBeTruncated',
-		key: '6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231',
-		value: 1200,
-	},
-	{ group: 'LongLabelShouldBeTruncated', key: 'Sold', value: 9000 },
-	{ group: 'LongLabelShouldBeTruncated', key: 'Restocking', value: 24000 },
-	{ group: 'LongLabelShouldBeTruncated', key: 'Misc', value: 3000 },
-];
-
-export const scatterLongLabelDiscreteOptions = {
-	title: 'Scatter (discrete with long label)',
-	axes: {
-		bottom: {
-			title: '2019 Annual Sales Figures',
-			scaleType: 'labels',
-			mapsTo: 'key',
-		},
-		left: {
-			mapsTo: 'value',
-		},
-	},
-};
-
 export const scatterTimeSeriesData = lineTimeSeriesData;
 
 export const scatterTimeSeriesOptions = {

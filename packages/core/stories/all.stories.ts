@@ -1,13 +1,13 @@
 import { storiesOf } from '@storybook/html';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
-import { storybookDemoGroups } from '../demo/data';
+import { storybookDemoGroups, DemoGroupTypes } from '../demo/data';
 import * as ChartComponents from '../src/charts';
 import * as storyUtils from './utils';
 
 import '../demo/styles.scss';
 
-const introStories = storiesOf('Intro', module).addDecorator(withKnobs);
+const introStories = storiesOf('Docs|', module).addDecorator(withKnobs);
 
 // Loop through the demos for the group
 introStories.add('Welcome', () => {
@@ -83,9 +83,10 @@ introStories.add('Welcome', () => {
 // Loop through all demo groups
 storybookDemoGroups.forEach((demoGroup) => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
-		withKnobs
-	);
+	const groupStories = storiesOf(
+		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
+		module
+	).addDecorator(withKnobs);
 
 	demoGroup.demos.forEach((demo) => {
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
