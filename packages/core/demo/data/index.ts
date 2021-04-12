@@ -1,5 +1,3 @@
-import { Tools } from '@carbon/charts/tools';
-
 import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
@@ -98,19 +96,16 @@ const utilityDemoGroups = [
 				options: timeSeriesAxisDemos.lineTimeSeries15secondsOptions,
 				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: timeSeriesAxisDemos.lineTimeSeriesMinuteOptions,
 				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: timeSeriesAxisDemos.lineTimeSeries30minutesOptions,
 				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options:
@@ -118,7 +113,6 @@ const utilityDemoGroups = [
 				data:
 					timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options:
@@ -126,19 +120,16 @@ const utilityDemoGroups = [
 				data:
 					timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
 				options: timeSeriesAxisDemos.lineTimeSeriesDailyOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataWeekly,
 				options: timeSeriesAxisDemos.lineTimeSeriesWeeklyOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data:
@@ -146,39 +137,33 @@ const utilityDemoGroups = [
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
 				options: timeSeriesAxisDemos.lineTimeSeriesQuarterlyOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
 				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels,
@@ -371,12 +356,12 @@ const simpleChartDemos = [
 				options: areaDemos.areaTimeSeriesCurvedOptions,
 				data: areaDemos.areaTimeSeriesCurvedData,
 				chartType: chartTypes.AreaChart,
+				mainDemo: true,
 			},
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: false,
 			},
 			{
 				options: areaDemos.areaDiscreteDomainOptions,
@@ -387,25 +372,21 @@ const simpleChartDemos = [
 				options: areaDemos.stackedAreaTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
 				data: areaDemos.stackedAreaTimeSeriesUnevenData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.boundedAreaTimeSeriesOptions,
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.areaSkeletonOptions,
@@ -449,24 +430,22 @@ const simpleChartDemos = [
 				options: barDemos.simpleBarTimeSeriesDenseOptions,
 				data: barDemos.simpleBarTimeSeriesDenseData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
 			},
 			{
 				options: barDemos.simpleBarEmptyStateOptions,
 				data: barDemos.simpleBarEmptyStateData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.simpleBarSkeletonOptions,
 				data: barDemos.simpleBarSkeletonData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
 				chartType: chartTypes.SimpleBarChart,
+				mainDemo: true,
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
@@ -477,13 +456,11 @@ const simpleChartDemos = [
 				options: barDemos.simpleHorizontalBarEmptyStateOptions,
 				data: barDemos.simpleHorizontalBarEmptyStateData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.simpleHorizontalBarSkeletonOptions,
 				data: barDemos.simpleHorizontalBarSkeletonData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -496,6 +473,7 @@ const simpleChartDemos = [
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
 				chartType: chartTypes.GroupedBarChart,
+				mainDemo: true,
 			},
 			{
 				options: barDemos.groupedBarEmptyStateOptions,
@@ -554,6 +532,7 @@ const simpleChartDemos = [
 				options: barDemos.stackedHorizontalBarOptions,
 				data: barDemos.stackedHorizontalBarData,
 				chartType: chartTypes.StackedBarChart,
+				mainDemo: true,
 			},
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
@@ -579,6 +558,7 @@ const simpleChartDemos = [
 				options: boxplotDemos.simpleBoxplotOptions,
 				data: boxplotDemos.simpleBoxplotData,
 				chartType: chartTypes.BoxplotChart,
+				mainDemo: true,
 			},
 			{
 				options: boxplotDemos.simpleVerticalBoxplotOptions,
@@ -596,6 +576,7 @@ const simpleChartDemos = [
 				options: bubbleDemos.bubbleDoubleLinearOptions,
 				data: bubbleDemos.bubbleDoubleLinearData,
 				chartType: chartTypes.BubbleChart,
+				mainDemo: true,
 			},
 			{
 				options: bubbleDemos.bubbleTimeSeriesOptions,
@@ -611,19 +592,16 @@ const simpleChartDemos = [
 				options: bubbleDemos.bubbleDualDiscreteOptions,
 				data: bubbleDemos.bubbleDualDiscreteData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
 			},
 			{
 				options: bubbleDemos.bubbleEmptyStateOptions,
 				data: bubbleDemos.bubbleEmptyStateData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
 			},
 			{
 				options: bubbleDemos.bubbleSkeletonOptions,
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -634,67 +612,57 @@ const simpleChartDemos = [
 				options: comboDemos.comboSimpleOptions,
 				data: comboDemos.comboSimpleData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboStackedOptions,
 				data: comboDemos.comboStackedData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboGroupedOptions,
 				data: comboDemos.comboGroupedData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboGroupedHorizontalOptions,
 				data: comboDemos.comboGroupedHorizontalData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboHorizontalOptions,
 				data: comboDemos.comboHorizontalData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboAreaLineOptions,
 				data: comboDemos.comboAreaLineData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboStackedAreaLineOptions,
 				data: comboDemos.comboStackedAreaLine,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboLineScatterOptions,
 				data: comboDemos.comboLineScatterData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboAreaLineTimeSeriesOptions,
 				data: comboDemos.comboAreaLineTimeSeriesData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
+				mainDemo: true,
 			},
 			{
 				options: comboDemos.comboEmptyOptions,
 				data: comboDemos.comboEmptyData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboLoadingOptions,
 				data: comboDemos.comboLoadingData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -705,6 +673,7 @@ const simpleChartDemos = [
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
 				chartType: chartTypes.DonutChart,
+				mainDemo: true,
 			},
 			{
 				options: donutDemos.donutCenteredOptions,
@@ -715,13 +684,11 @@ const simpleChartDemos = [
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
-				isDemoExample: false,
 			},
 			{
 				options: donutDemos.donutSkeletonOptions,
 				data: donutDemos.donutSkeletonData,
 				chartType: chartTypes.DonutChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -732,19 +699,17 @@ const simpleChartDemos = [
 				options: gaugeDemos.gaugeOptionsSemi,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
+				mainDemo: true,
 			},
 			{
 				options: gaugeDemos.gaugeOptionsCircular,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
 			},
 			{
 				options: gaugeDemos.gaugeOptionsCircularNoDelta,
 				data: gaugeDemos.gaugeDataNoDelta,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -762,6 +727,7 @@ const simpleChartDemos = [
 				options: lineDemos.lineTimeSeriesOptions,
 				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
+				mainDemo: true,
 			},
 			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
@@ -772,19 +738,16 @@ const simpleChartDemos = [
 				options: lineDemos.dualLine,
 				data: lineDemos.lineTimeSeriesDualAxesData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: true,
 			},
 			{
 				options: lineDemos.lineEmptyStateOptions,
 				data: lineDemos.lineEmptyStateData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: lineDemos.lineSkeletonOptions,
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -800,6 +763,7 @@ const simpleChartDemos = [
 				options: lollipopDemos.lollipopDiscretePresentationOptions,
 				data: lollipopDemos.lollipopDiscretePresentationData,
 				chartType: chartTypes.LollipopChart,
+				mainDemo: true,
 			},
 		],
 	},
@@ -810,6 +774,7 @@ const simpleChartDemos = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
+				mainDemo: true
 			},
 			{
 				options: pieDemos.pieCenteredOptions,
@@ -820,13 +785,11 @@ const simpleChartDemos = [
 				options: pieDemos.pieEmptyStateOptions,
 				data: pieDemos.pieEmptyStateData,
 				chartType: chartTypes.PieChart,
-				isDemoExample: false,
 			},
 			{
 				options: pieDemos.pieSkeletonOptions,
 				data: pieDemos.pieSkeletonData,
 				chartType: chartTypes.PieChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -837,19 +800,17 @@ const simpleChartDemos = [
 				options: meterDemos.meterOptionsWithStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
+				mainDemo: true
 			},
 			{
 				options: meterDemos.meterOptionsCustomColor,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
 			},
 			{
 				options: meterDemos.meterOptionsNoStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -875,6 +836,7 @@ const simpleChartDemos = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
+				mainDemo: true
 			},
 		],
 	},
@@ -892,6 +854,7 @@ const simpleChartDemos = [
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
+				mainDemo: true
 			},
 			{
 				options: scatterDemos.scatterDiscreteOptions,
@@ -902,19 +865,16 @@ const simpleChartDemos = [
 				options: scatterDemos.scatterDualAxesOptions,
 				data: scatterDemos.scatterDualAxesData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
 			},
 			{
 				options: scatterDemos.scatterEmptyStateOptions,
 				data: scatterDemos.scatterEmptyStateData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
 			},
 			{
 				options: scatterDemos.scatterSkeletonOptions,
 				data: scatterDemos.scatterSkeletonData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -925,6 +885,7 @@ const simpleChartDemos = [
 				options: areaDemos.sparklineOptions,
 				data: areaDemos.sparklineTimeSeriesData,
 				chartType: chartTypes.AreaChart,
+				mainDemo: true
 			},
 			{
 				options: lineDemos.sparklineLoadingOptions,
@@ -947,18 +908,17 @@ const simpleChartDemos = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
+				mainDemo: true
 			},
 			{
 				options: stepDemos.stepEmptyStateOptions,
 				data: stepDemos.stepEmptyStateData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: stepDemos.stepSkeletonOptions,
 				data: stepDemos.stepSkeletonData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -969,6 +929,7 @@ const simpleChartDemos = [
 				options: wordCloudDemos.wordCloudOptions,
 				data: wordCloudDemos.wordCloudData,
 				chartType: chartTypes.WordCloudChart,
+				mainDemo: true
 			},
 		],
 	},
@@ -1008,7 +969,6 @@ const devOnlyDemoGroups = [
 				data: [],
 				isHighScale: true,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 		],
 	},

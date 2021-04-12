@@ -22,7 +22,7 @@ export const simpleBoxplotData = [
 ];
 
 export const simpleBoxplotOptions = {
-	title: 'Simple horizontal box plot (mock data)',
+	title: 'Horizontal box plot',
 	axes: {
 		bottom: {
 			mapsTo: 'value',
@@ -36,7 +36,7 @@ export const simpleBoxplotOptions = {
 export const simpleVerticalBoxplotData = simpleBoxplotData;
 
 export const simpleVerticalBoxplotOptions = {
-	title: 'Simple vertical box plot (mock data)',
+	title: 'Vertical box plot',
 	axes: {
 		left: {
 			mapsTo: 'value',
