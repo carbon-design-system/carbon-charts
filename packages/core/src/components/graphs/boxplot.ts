@@ -375,6 +375,13 @@ export class Boxplot extends Component {
 					hoveredElement,
 					items: [
 						{
+							label: options.tooltip.groupLabel,
+							value: datum[groupMapsTo],
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							}),
+						},
+						{
 							label: 'Minimum',
 							value: datum.whiskers.min,
 						},
@@ -397,13 +404,6 @@ export class Boxplot extends Component {
 						{
 							label: 'IQR',
 							value: datum.quartiles.q_75 - datum.quartiles.q_25,
-						},
-						{
-							label: options.tooltip.groupLabel,
-							value: datum[groupMapsTo],
-							class: self.model.getColorClassName({
-								classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							}),
 						},
 					],
 				});

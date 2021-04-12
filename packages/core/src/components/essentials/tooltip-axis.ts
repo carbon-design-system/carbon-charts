@@ -93,6 +93,20 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 			];
 
+			items = items.concat(
+				data
+					.map((datum) => ({
+						label: datum[groupMapsTo],
+						value: datum[cartesianScales.getRangeIdentifier(datum)],
+						color: this.model.getFillColor(datum[groupMapsTo]),
+						class: this.model.getColorClassName({
+							classNameTypes: [ColorClassNameTypes.TOOLTIP],
+							dataGroupName: datum[groupMapsTo],
+						}),
+					}))
+					.sort((a, b) => b.value - a.value)
+			);
+
 			const dualAxes = cartesianScales.isDualAxes();
 			if (
 				!dualAxes &&
@@ -110,20 +124,6 @@ export class AxisChartsTooltip extends Tooltip {
 					bold: true,
 				});
 			}
-
-			items = items.concat(
-				data
-					.map((datum) => ({
-						label: datum[groupMapsTo],
-						value: datum[cartesianScales.getRangeIdentifier(datum)],
-						color: this.model.getFillColor(datum[groupMapsTo]),
-						class: this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							dataGroupName: datum[groupMapsTo],
-						}),
-					}))
-					.sort((a, b) => b.value - a.value)
-			);
 		}
 
 		return items;
