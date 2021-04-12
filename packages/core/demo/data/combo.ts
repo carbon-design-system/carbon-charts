@@ -325,7 +325,6 @@ export const comboLineScatterData = [
 ];
 
 export const comboLineScatterOptions = {
-
 	title: 'Combo (Line + Scatter + Bar)',
 	axes: {
 		left: {
@@ -509,7 +508,6 @@ export const comboAreaLineTimeSeriesData = [
 ];
 
 export const comboAreaLineTimeSeriesOptions = {
-
 	title: 'Combo (Line + Area) Time series',
 	points: {
 		enabled: false,
@@ -546,4 +544,7 @@ export const comboAreaLineTimeSeriesOptions = {
 		},
 	],
 	curve: 'curveNatural',
+	timeScale: {
+		addSpaceOnEdges: 0,
+	},
 };
