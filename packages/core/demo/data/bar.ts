@@ -311,7 +311,7 @@ export const simpleBarTimeSeriesOptions = {
 export const simpleBarTurkishLocaleData = simpleBarTimeSeriesData;
 
 export const simpleBarTurkishLocaleOptions = {
-	title: 'Turkish (simple bar)',
+	title: 'Turkish locale (date-fns locales)',
 	axes: {
 		left: {
 			mapsTo: 'value',

@@ -224,8 +224,8 @@ const utilityDemoGroups = [
 		title: 'Locale',
 		demos: [
 			{
-				options: barDemos.simpleBarTimeSeriesOptions,
-				data: barDemos.simpleBarTimeSeriesData,
+				options: barDemos.simpleBarTurkishLocaleOptions,
+				data: barDemos.simpleBarTurkishLocaleData,
 				chartType: chartTypes.SimpleBarChart,
 			},
 		],
