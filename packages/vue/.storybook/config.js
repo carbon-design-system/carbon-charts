@@ -2,7 +2,7 @@ import { configure } from '@storybook/vue';
 import { withOptions } from '@storybook/addon-options';
 
 withOptions({
-	name: 'Carbon Charts - Vue Wrappers',
+	name: 'Carbon Charts - Vue',
 	sortStoriesByKind: true,
 	showDownPanel: true,
 	showAddonPanel: true,
