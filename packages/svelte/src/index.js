@@ -16,6 +16,7 @@ import GaugeChart from './GaugeChart.svelte';
 import MeterChart from './MeterChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
+import WordCloudChart from './WordCloudChart.svelte';
 
 export {
 	AreaChart,
@@ -35,5 +36,6 @@ export {
 	GaugeChart,
 	MeterChart,
 	TreemapChart,
-	CirclePackChart
+	CirclePackChart,
+	WordCloudChart,
 };

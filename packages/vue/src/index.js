@@ -16,6 +16,7 @@ import CcvRadarChart from './ccv-radar-chart.vue';
 import CcvComboChart from './ccv-combo-chart.vue';
 import CcvTreemapChart from './ccv-treemap-chart.vue';
 import CcvCirclePackChart from './ccv-circle-pack-chart.vue';
+import CcvWordCloudChart from './ccv-wordcloud-chart.vue';
 
 const components = [
 	CcvAreaChart,
@@ -36,6 +37,7 @@ const components = [
 	CcvComboChart,
 	CcvTreemapChart,
 	CcvCirclePackChart,
+	CcvWordCloudChart,
 ];
 
 /*
@@ -89,4 +91,5 @@ export {
 	CcvComboChart,
 	CcvTreemapChart,
 	CcvCirclePackChart,
+	CcvWordCloudChart,
 };

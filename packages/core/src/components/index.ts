@@ -29,6 +29,8 @@ export * from './graphs/skeleton-lines';
 export * from './graphs/treemap';
 export * from './graphs/radar';
 export * from './graphs/circle-pack';
+export * from './graphs/wordcloud';
+
 
 // Layout
 export * from './layout/spacer';

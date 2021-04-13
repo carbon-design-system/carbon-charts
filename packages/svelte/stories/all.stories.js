@@ -5,7 +5,7 @@ import * as ChartComponents from "../src";
 import ChartWrapper from "./ChartWrapper.svelte";
 
 storybookDemoGroups.forEach(demoGroup => {
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}|${demoGroup.title}`, module).addDecorator(
 		withKnobs({ escapeHTML: false })
 	);
 

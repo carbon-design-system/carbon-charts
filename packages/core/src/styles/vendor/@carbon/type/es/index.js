@@ -1,4 +1,4 @@
-import { baseFontSize, px, rem, breakpoint, breakpoints } from '@carbon/layout';
+import { px, baseFontSize, rem, breakpoint, breakpoints } from '@carbon/layout';
 
 /**
  * Copyright IBM Corp. 2018, 2018
@@ -143,6 +143,8 @@ function getTypeSize(step) {
 var scale = [12, 14, 16, 18, 20, 24, 28, 32, 36, 42, 48, 54, 60, 68, 76, 84, 92, 102, 112, 122, 132, 144, 156];
 
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
       return typeof obj;
@@ -244,132 +246,133 @@ function _objectWithoutProperties(source, excluded) {
 var caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
   letterSpacing: px(0.32)
 };
 var label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
   letterSpacing: px(0.32)
 };
 var helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: rem(16),
+  lineHeight: 1.34,
   letterSpacing: px(0.32)
 };
 var bodyShort01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(18),
+  lineHeight: 1.29,
   letterSpacing: px(0.16)
 };
 var bodyLong01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.43,
   letterSpacing: px(0.16)
 };
 var bodyShort02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0
 };
 var bodyLong02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(24),
+  lineHeight: 1.5,
   letterSpacing: 0
 };
 var code01 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
   letterSpacing: px(0.32)
 };
 var code02 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.43,
   letterSpacing: px(0.32)
 };
 var heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(18),
+  lineHeight: 1.29,
   letterSpacing: px(0.16)
 };
 var productiveHeading01 = heading01;
 var heading02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0
 };
 var productiveHeading02 = heading02;
 var productiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(26),
+  lineHeight: 1.4,
   letterSpacing: 0
 };
 var productiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(36),
+  lineHeight: 1.29,
   letterSpacing: 0
 };
 var productiveHeading05 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(40),
+  lineHeight: 1.25,
   letterSpacing: 0
 };
 var productiveHeading06 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(50),
+  lineHeight: 1.199,
   letterSpacing: 0
 };
 var productiveHeading07 = {
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(64),
+  lineHeight: 1.19,
   letterSpacing: 0
 };
-var expressiveHeading01 = _objectSpread2({}, heading01, {
-  lineHeight: rem(20)
+var expressiveHeading01 = _objectSpread2(_objectSpread2({}, heading01), {}, {
+  lineHeight: 1.25
 });
-var expressiveHeading02 = _objectSpread2({}, heading02, {
-  lineHeight: rem(24)
+var expressiveHeading02 = _objectSpread2(_objectSpread2({}, heading02), {}, {
+  lineHeight: 1.5
 });
 var expressiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: '130%',
+  lineHeight: 1.4,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
       fontSize: rem(scale[4]),
-      lineHeight: '125%'
+      lineHeight: 1.25
     },
     max: {
-      fontSize: rem(scale[5])
+      fontSize: rem(scale[5]),
+      lineHeight: 1.334
     }
   }
 };
 var expressiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: '129%',
+  lineHeight: 1.29,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
       fontSize: rem(scale[6]),
-      lineHeight: '125%'
+      lineHeight: 1.25
     },
     max: {
       fontSize: rem(scale[7])
@@ -379,31 +382,30 @@ var expressiveHeading04 = {
 var expressiveHeading05 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
       fontWeight: fontWeights.light,
-      lineHeight: '122%',
+      lineHeight: 1.22,
       letterSpacing: 0
     },
     lg: {
       fontSize: rem(scale[9]),
       fontWeight: fontWeights.light,
-      lineHeight: '119%',
+      lineHeight: 1.19,
       letterSpacing: 0
     },
     xlg: {
       fontSize: rem(scale[10]),
       fontWeight: fontWeights.light,
-      lineHeight: '117%',
+      lineHeight: 1.17,
       letterSpacing: 0
     },
     max: {
       fontSize: rem(scale[12]),
       fontWeight: fontWeights.light,
-      lineHeight: rem(70),
       letterSpacing: 0
     }
   }
@@ -411,31 +413,30 @@ var expressiveHeading05 = {
 var expressiveHeading06 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '122%',
+      lineHeight: 1.22,
       letterSpacing: 0
     },
     lg: {
       fontSize: rem(scale[9]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '119%',
+      lineHeight: 1.19,
       letterSpacing: 0
     },
     xlg: {
       fontSize: rem(scale[10]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '117%',
+      lineHeight: 1.17,
       letterSpacing: 0
     },
     max: {
       fontSize: rem(scale[12]),
       fontWeight: fontWeights.semibold,
-      lineHeight: rem(70),
       letterSpacing: 0
     }
   }
@@ -443,21 +444,23 @@ var expressiveHeading06 = {
 var expressiveParagraph01 = {
   fontSize: rem(scale[5]),
   fontWeight: fontWeights.light,
-  lineHeight: '125%',
+  lineHeight: 1.334,
   letterSpacing: 0,
-  lg: {
-    fontSize: rem(scale[6]),
-    lineHeight: '129%'
-  },
-  max: {
-    fontSize: rem(scale[7]),
-    lineHeight: '125%'
+  breakpoints: {
+    lg: {
+      fontSize: rem(scale[6]),
+      lineHeight: 1.29
+    },
+    max: {
+      fontSize: rem(scale[7]),
+      lineHeight: 1.25
+    }
   }
 };
 var quotation01 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: '130%',
+  lineHeight: 1.3,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -468,19 +471,19 @@ var quotation01 = {
     lg: {
       fontSize: rem(scale[5]),
       fontWeight: fontWeights.regular,
-      lineHeight: '125%',
+      lineHeight: 1.334,
       letterSpacing: 0
     },
     xlg: {
       fontSize: rem(scale[6]),
       fontWeight: fontWeights.regular,
-      lineHeight: '129%',
+      lineHeight: 1.29,
       letterSpacing: 0
     },
     max: {
       fontSize: rem(scale[7]),
       fontWeight: fontWeights.regular,
-      lineHeight: '125%',
+      lineHeight: 1.25,
       letterSpacing: 0
     }
   }
@@ -488,20 +491,20 @@ var quotation01 = {
 var quotation02 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.light,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
-      lineHeight: '122%'
+      lineHeight: 1.22
     },
     lg: {
       fontSize: rem(scale[9]),
-      lineHeight: '119%'
+      lineHeight: 1.19
     },
     xlg: {
       fontSize: rem(scale[10]),
-      lineHeight: '117%'
+      lineHeight: 1.17
     },
     max: {
       fontSize: rem(scale[12])
@@ -511,7 +514,7 @@ var quotation02 = {
 var display01 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -522,18 +525,18 @@ var display01 = {
     },
     xlg: {
       fontSize: rem(scale[12]),
-      lineHeight: '117%'
+      lineHeight: 1.17
     },
     max: {
       fontSize: rem(scale[14]),
-      lineHeight: '113%'
+      lineHeight: 1.13
     }
   }
 };
 var display02 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -544,36 +547,36 @@ var display02 = {
     },
     xlg: {
       fontSize: rem(scale[12]),
-      lineHeight: '116%'
+      lineHeight: 1.16
     },
     max: {
       fontSize: rem(scale[14]),
-      lineHeight: '113%'
+      lineHeight: 1.13
     }
   }
 };
 var display03 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[13]),
-      lineHeight: '115%'
+      lineHeight: 1.15
     },
     lg: {
       fontSize: rem(scale[16]),
-      lineHeight: '111%',
+      lineHeight: 1.11,
       letterSpacing: px(-0.64)
     },
     xlg: {
       fontSize: rem(scale[19]),
-      lineHeight: '107%'
+      lineHeight: 1.07
     },
     max: {
       fontSize: rem(scale[22]),
-      lineHeight: '105%',
+      lineHeight: 1.05,
       letterSpacing: px(-0.96)
     }
   }
@@ -581,32 +584,33 @@ var display03 = {
 var display04 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[13]),
-      lineHeight: '115%'
+      lineHeight: 1.15
     },
     lg: {
       fontSize: rem(scale[16]),
-      lineHeight: '111%',
+      lineHeight: 1.11,
       letterSpacing: px(-0.64)
     },
     xlg: {
       fontSize: rem(scale[19]),
-      lineHeight: '107%',
+      lineHeight: 1.07,
       letterSpacing: px(-0.64)
     },
     max: {
       fontSize: rem(scale[22]),
-      lineHeight: '105%',
+      lineHeight: 1.05,
       letterSpacing: px(-0.96)
     }
   }
 };
 
 var styles = /*#__PURE__*/Object.freeze({
+  __proto__: null,
   caption01: caption01,
   label01: label01,
   helperText01: helperText01,
@@ -662,7 +666,7 @@ function fluid(selector) {
 
   styles.fontSize = fluidTypeSize(styles, 'sm', fluidBreakpoints);
   fluidBreakpointNames.forEach(function (name) {
-    styles[breakpoint(name)] = _objectSpread2({}, fluidBreakpoints[name], {
+    styles[breakpoint(name)] = _objectSpread2(_objectSpread2({}, fluidBreakpoints[name]), {}, {
       fontSize: fluidTypeSize(styles, name, fluidBreakpoints)
     });
   });
@@ -670,7 +674,7 @@ function fluid(selector) {
 }
 
 function fluidTypeSize(defaultStyles, fluidBreakpointName, fluidBreakpoints) {
-  var breakpoint$$1 = breakpoints[fluidBreakpointName];
+  var breakpoint = breakpoints[fluidBreakpointName];
   var fluidBreakpoint = fluidBreakpointName === 'sm' ? defaultStyles : fluidBreakpoints[fluidBreakpointName];
   var maxFontSize = defaultStyles.fontSize;
   var minFontSize = defaultStyles.fontSize;
@@ -679,8 +683,8 @@ function fluidTypeSize(defaultStyles, fluidBreakpointName, fluidBreakpoints) {
     minFontSize = fluidBreakpoint.fontSize;
   }
 
-  var maxViewportWidth = breakpoint$$1.width;
-  var minViewportWidth = breakpoint$$1.width;
+  var maxViewportWidth = breakpoint.width;
+  var minViewportWidth = breakpoint.width;
   var nextBreakpointAvailable = next(fluidBreakpointName);
   var nextFluidBreakpointName = null;
 
@@ -713,13 +717,38 @@ function subtract(a, b) {
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var unstable_tokens = ['caption01', 'label01', 'helperText01', 'bodyShort01', 'bodyLong01', 'bodyShort02', 'bodyLong02', 'code01', 'code02', 'heading01', 'productiveHeading01', 'heading02', 'productiveHeading02', 'productiveHeading03', 'productiveHeading04', 'productiveHeading05', 'productiveHeading06', 'productiveHeading07', 'expressiveHeading01', 'expressiveHeading02', 'expressiveHeading03', 'expressiveHeading04', 'expressiveHeading05', 'expressiveHeading06', 'expressiveParagraph01', 'quotation01', 'quotation02', 'display01', 'display02', 'display03', 'display04'];
+// Unstable tokens
+var caption01$1 = 'caption01';
+var label01$1 = 'label01';
+var helperText01$1 = 'helperText01';
+var bodyShort01$1 = 'bodyShort01';
+var bodyLong01$1 = 'bodyLong01';
+var bodyShort02$1 = 'bodyShort02';
+var bodyLong02$1 = 'bodyLong02';
+var code01$1 = 'code01';
+var code02$1 = 'code02';
+var heading01$1 = 'heading01';
+var productiveHeading01$1 = 'productiveHeading01';
+var heading02$1 = 'heading02';
+var productiveHeading02$1 = 'productiveHeading02';
+var productiveHeading03$1 = 'productiveHeading03';
+var productiveHeading04$1 = 'productiveHeading04';
+var productiveHeading05$1 = 'productiveHeading05';
+var productiveHeading06$1 = 'productiveHeading06';
+var productiveHeading07$1 = 'productiveHeading07';
+var expressiveHeading01$1 = 'expressiveHeading01';
+var expressiveHeading02$1 = 'expressiveHeading02';
+var expressiveHeading03$1 = 'expressiveHeading03';
+var expressiveHeading04$1 = 'expressiveHeading04';
+var expressiveHeading05$1 = 'expressiveHeading05';
+var expressiveHeading06$1 = 'expressiveHeading06';
+var expressiveParagraph01$1 = 'expressiveParagraph01';
+var quotation01$1 = 'quotation01';
+var quotation02$1 = 'quotation02';
+var display01$1 = 'display01';
+var display02$1 = 'display02';
+var display03$1 = 'display03';
+var display04$1 = 'display04';
+var unstable_tokens = [caption01$1, label01$1, helperText01$1, bodyShort01$1, bodyLong01$1, bodyShort02$1, bodyLong02$1, code01$1, code02$1, heading01$1, productiveHeading01$1, heading02$1, productiveHeading02$1, productiveHeading03$1, productiveHeading04$1, productiveHeading05$1, productiveHeading06$1, productiveHeading07$1, expressiveHeading01$1, expressiveHeading02$1, expressiveHeading03$1, expressiveHeading04$1, expressiveHeading05$1, expressiveHeading06$1, expressiveParagraph01$1, quotation01$1, quotation02$1, display01$1, display02$1, display03$1, display04$1];
 
-/**
- * Copyright IBM Corp. 2018, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-export { fontFamilies, fontFamily, fontWeights, fontWeight, print, reset, getTypeSize, scale, styles, fluid, caption01, label01, helperText01, bodyShort01, bodyLong01, bodyShort02, bodyLong02, code01, code02, heading01, productiveHeading01, heading02, productiveHeading02, productiveHeading03, productiveHeading04, productiveHeading05, productiveHeading06, productiveHeading07, expressiveHeading01, expressiveHeading02, expressiveHeading03, expressiveHeading04, expressiveHeading05, expressiveHeading06, expressiveParagraph01, quotation01, quotation02, display01, display02, display03, display04, unstable_tokens };
+export { bodyLong01, bodyLong02, bodyShort01, bodyShort02, caption01, code01, code02, display01, display02, display03, display04, expressiveHeading01, expressiveHeading02, expressiveHeading03, expressiveHeading04, expressiveHeading05, expressiveHeading06, expressiveParagraph01, fluid, fontFamilies, fontFamily, fontWeight, fontWeights, getTypeSize, heading01, heading02, helperText01, label01, print, productiveHeading01, productiveHeading02, productiveHeading03, productiveHeading04, productiveHeading05, productiveHeading06, productiveHeading07, quotation01, quotation02, reset, scale, styles, unstable_tokens };

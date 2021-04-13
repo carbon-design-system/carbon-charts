@@ -71,9 +71,19 @@ export enum Area {
 }
 
 /**
+ * enum of all wordcloud graph events
+ */
+ export enum WordCloud {
+	WORD_MOUSEOVER = 'wordcloud-word-mouseover',
+	WORD_MOUSEMOVE = 'wordcloud-word-mousemove',
+	WORD_CLICK = 'wordcloud-word-click',
+	WORD_MOUSEOUT = 'wordcloud-word-mouseout',
+}
+
+/**
  * enum of all pie graph events
  */
-export enum Pie {
+ export enum Pie {
 	SLICE_MOUSEOVER = 'pie-slice-mouseover',
 	SLICE_MOUSEMOVE = 'pie-slice-mousemove',
 	SLICE_CLICK = 'pie-slice-click',

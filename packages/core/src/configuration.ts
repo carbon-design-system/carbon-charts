@@ -17,12 +17,14 @@ import {
 	ComboChartOptions,
 	TreemapChartOptions,
 	CirclePackChartOptions,
+	WorldCloudChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
+	WordCloudChartTooltipOptions,
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
@@ -99,6 +101,7 @@ export const baseTooltip: TooltipOptions = {
 	enabled: true,
 	showTotal: true,
 	truncation: standardTruncationOptions,
+	groupLabel: 'Group',
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -313,6 +316,30 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 } as BubbleChartOptions);
 
 /**
+ * options specific to word cloud charts
+ */
+const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	tooltip: Tools.merge({}, baseTooltip, {
+		wordLabel: 'Word',
+		valueLabel: 'Value',
+	}) as WordCloudChartTooltipOptions,
+	wordCloud: {
+		fontSizeMapsTo: 'value',
+		fontSizeRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 20) / 400,
+				(smallerChartDimension * 75) / 400,
+			];
+		},
+		wordMapsTo: 'word',
+	},
+} as WorldCloudChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -453,6 +480,7 @@ export const options = {
 	comboChart,
 	treemapChart,
 	circlePackChart,
+	wordCloudChart,
 };
 
 export * from './configuration-non-customizable';

@@ -16,3 +16,4 @@ export * from './gauge';
 export * from './combo';
 export * from './treemap';
 export * from './circle-pack';
+export * from './wordcloud';

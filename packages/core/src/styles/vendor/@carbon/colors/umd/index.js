@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.CarbonColors = {})));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CarbonColors = {}));
 }(this, (function (exports) { 'use strict';
 
   /**
@@ -16,8 +16,12 @@
   var white0 = white;
   var yellow = '#f1c21b';
   var yellow30 = yellow;
+  var yellow40 = '#d2a106';
+  var yellow50 = '#b28600';
   var orange = '#ff832b';
   var orange40 = orange;
+  var orange60 = '#ba4e00';
+  var orange70 = '#8a3800';
   var red10 = '#fff1f1';
   var red20 = '#ffd7d9';
   var red30 = '#ffb3b8';
@@ -45,7 +49,7 @@
   var magenta30 = '#ffafd2';
   var magenta40 = '#ff7eb6';
   var magenta50 = '#ee5396';
-  var magenta60 = '#d12771';
+  var magenta60 = '#d02670';
   var magenta70 = '#9f1853';
   var magenta80 = '#740937';
   var magenta90 = '#510224';
@@ -221,7 +225,7 @@
   var warmGray30 = '#cac5c4';
   var warmGray40 = '#ada8a8';
   var warmGray50 = '#8f8b8b';
-  var warmGray60 = '#736f6f';
+  var warmGray60 = '#726e6e';
   var warmGray70 = '#565151';
   var warmGray80 = '#3c3838';
   var warmGray90 = '#272525';
@@ -251,7 +255,9 @@
     green: green,
     magenta: magenta,
     orange: {
-      40: orange40
+      40: orange40,
+      60: orange60,
+      70: orange70
     },
     purple: purple,
     red: red,
@@ -262,7 +268,9 @@
     },
     yellow: {
       20: yellow20,
-      30: yellow30
+      30: yellow30,
+      40: yellow40,
+      50: yellow50
     }
   };
 
@@ -286,55 +294,11 @@
     return "rgba(".concat(values[0], ", ").concat(values[1], ", ").concat(values[2], ", ").concat(opacity, ")");
   }
 
-  /**
-   * Copyright IBM Corp. 2018, 2018
-   *
-   * This source code is licensed under the Apache-2.0 license found in the
-   * LICENSE file in the root directory of this source tree.
-   */
-
   exports.black = black;
   exports.black100 = black100;
-  exports.white = white;
-  exports.white0 = white0;
-  exports.yellow = yellow;
-  exports.yellow30 = yellow30;
-  exports.orange = orange;
-  exports.orange40 = orange40;
-  exports.red10 = red10;
-  exports.red20 = red20;
-  exports.red30 = red30;
-  exports.red40 = red40;
-  exports.red50 = red50;
-  exports.red60 = red60;
-  exports.red70 = red70;
-  exports.red80 = red80;
-  exports.red90 = red90;
-  exports.red100 = red100;
-  exports.red = red;
-  exports.magenta10 = magenta10;
-  exports.magenta20 = magenta20;
-  exports.magenta30 = magenta30;
-  exports.magenta40 = magenta40;
-  exports.magenta50 = magenta50;
-  exports.magenta60 = magenta60;
-  exports.magenta70 = magenta70;
-  exports.magenta80 = magenta80;
-  exports.magenta90 = magenta90;
-  exports.magenta100 = magenta100;
-  exports.magenta = magenta;
-  exports.purple10 = purple10;
-  exports.purple20 = purple20;
-  exports.purple30 = purple30;
-  exports.purple40 = purple40;
-  exports.purple50 = purple50;
-  exports.purple60 = purple60;
-  exports.purple70 = purple70;
-  exports.purple80 = purple80;
-  exports.purple90 = purple90;
-  exports.purple100 = purple100;
-  exports.purple = purple;
+  exports.blue = blue;
   exports.blue10 = blue10;
+  exports.blue100 = blue100;
   exports.blue20 = blue20;
   exports.blue30 = blue30;
   exports.blue40 = blue40;
@@ -343,42 +307,10 @@
   exports.blue70 = blue70;
   exports.blue80 = blue80;
   exports.blue90 = blue90;
-  exports.blue100 = blue100;
-  exports.blue = blue;
-  exports.cyan10 = cyan10;
-  exports.cyan20 = cyan20;
-  exports.cyan30 = cyan30;
-  exports.cyan40 = cyan40;
-  exports.cyan50 = cyan50;
-  exports.cyan60 = cyan60;
-  exports.cyan70 = cyan70;
-  exports.cyan80 = cyan80;
-  exports.cyan90 = cyan90;
-  exports.cyan100 = cyan100;
-  exports.cyan = cyan;
-  exports.teal10 = teal10;
-  exports.teal20 = teal20;
-  exports.teal30 = teal30;
-  exports.teal40 = teal40;
-  exports.teal50 = teal50;
-  exports.teal60 = teal60;
-  exports.teal70 = teal70;
-  exports.teal80 = teal80;
-  exports.teal90 = teal90;
-  exports.teal100 = teal100;
-  exports.teal = teal;
-  exports.green10 = green10;
-  exports.green20 = green20;
-  exports.green30 = green30;
-  exports.green40 = green40;
-  exports.green50 = green50;
-  exports.green60 = green60;
-  exports.green70 = green70;
-  exports.green80 = green80;
-  exports.green90 = green90;
-  exports.green100 = green100;
-  exports.green = green;
+  exports.colors = colors;
+  exports.coolGray = coolGray;
   exports.coolGray10 = coolGray10;
+  exports.coolGray100 = coolGray100;
   exports.coolGray20 = coolGray20;
   exports.coolGray30 = coolGray30;
   exports.coolGray40 = coolGray40;
@@ -387,9 +319,20 @@
   exports.coolGray70 = coolGray70;
   exports.coolGray80 = coolGray80;
   exports.coolGray90 = coolGray90;
-  exports.coolGray100 = coolGray100;
-  exports.coolGray = coolGray;
+  exports.cyan = cyan;
+  exports.cyan10 = cyan10;
+  exports.cyan100 = cyan100;
+  exports.cyan20 = cyan20;
+  exports.cyan30 = cyan30;
+  exports.cyan40 = cyan40;
+  exports.cyan50 = cyan50;
+  exports.cyan60 = cyan60;
+  exports.cyan70 = cyan70;
+  exports.cyan80 = cyan80;
+  exports.cyan90 = cyan90;
+  exports.gray = gray;
   exports.gray10 = gray10;
+  exports.gray100 = gray100;
   exports.gray20 = gray20;
   exports.gray30 = gray30;
   exports.gray40 = gray40;
@@ -398,9 +341,69 @@
   exports.gray70 = gray70;
   exports.gray80 = gray80;
   exports.gray90 = gray90;
-  exports.gray100 = gray100;
-  exports.gray = gray;
+  exports.green = green;
+  exports.green10 = green10;
+  exports.green100 = green100;
+  exports.green20 = green20;
+  exports.green30 = green30;
+  exports.green40 = green40;
+  exports.green50 = green50;
+  exports.green60 = green60;
+  exports.green70 = green70;
+  exports.green80 = green80;
+  exports.green90 = green90;
+  exports.magenta = magenta;
+  exports.magenta10 = magenta10;
+  exports.magenta100 = magenta100;
+  exports.magenta20 = magenta20;
+  exports.magenta30 = magenta30;
+  exports.magenta40 = magenta40;
+  exports.magenta50 = magenta50;
+  exports.magenta60 = magenta60;
+  exports.magenta70 = magenta70;
+  exports.magenta80 = magenta80;
+  exports.magenta90 = magenta90;
+  exports.orange = orange;
+  exports.orange40 = orange40;
+  exports.orange60 = orange60;
+  exports.orange70 = orange70;
+  exports.purple = purple;
+  exports.purple10 = purple10;
+  exports.purple100 = purple100;
+  exports.purple20 = purple20;
+  exports.purple30 = purple30;
+  exports.purple40 = purple40;
+  exports.purple50 = purple50;
+  exports.purple60 = purple60;
+  exports.purple70 = purple70;
+  exports.purple80 = purple80;
+  exports.purple90 = purple90;
+  exports.red = red;
+  exports.red10 = red10;
+  exports.red100 = red100;
+  exports.red20 = red20;
+  exports.red30 = red30;
+  exports.red40 = red40;
+  exports.red50 = red50;
+  exports.red60 = red60;
+  exports.red70 = red70;
+  exports.red80 = red80;
+  exports.red90 = red90;
+  exports.rgba = rgba;
+  exports.teal = teal;
+  exports.teal10 = teal10;
+  exports.teal100 = teal100;
+  exports.teal20 = teal20;
+  exports.teal30 = teal30;
+  exports.teal40 = teal40;
+  exports.teal50 = teal50;
+  exports.teal60 = teal60;
+  exports.teal70 = teal70;
+  exports.teal80 = teal80;
+  exports.teal90 = teal90;
+  exports.warmGray = warmGray;
   exports.warmGray10 = warmGray10;
+  exports.warmGray100 = warmGray100;
   exports.warmGray20 = warmGray20;
   exports.warmGray30 = warmGray30;
   exports.warmGray40 = warmGray40;
@@ -409,11 +412,13 @@
   exports.warmGray70 = warmGray70;
   exports.warmGray80 = warmGray80;
   exports.warmGray90 = warmGray90;
-  exports.warmGray100 = warmGray100;
-  exports.warmGray = warmGray;
+  exports.white = white;
+  exports.white0 = white0;
+  exports.yellow = yellow;
   exports.yellow20 = yellow20;
-  exports.colors = colors;
-  exports.rgba = rgba;
+  exports.yellow30 = yellow30;
+  exports.yellow40 = yellow40;
+  exports.yellow50 = yellow50;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -2,7 +2,7 @@ import { configure } from "@storybook/svelte";
 import { withOptions } from "@storybook/addon-options";
 
 withOptions({
-	name: "Carbon Charts - Svelte Wrappers",
+	name: "Carbon Charts - Svelte",
 	panelPosition: "bottom",
 	showDownPanel: true,
 	showAddonPanel: true,
