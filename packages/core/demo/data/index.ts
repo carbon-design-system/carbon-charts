@@ -348,7 +348,7 @@ const utilityDemoGroups = [
 
 const simpleChartDemos = [
 	{
-		title: 'Area',
+		title: 'Area (simple)',
 		description:
 			'Area charts are similar to line charts, but the areas below the lines are filled with colors or patterns. Stacked charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.',
 		demos: [
@@ -369,21 +369,6 @@ const simpleChartDemos = [
 				chartType: chartTypes.AreaChart,
 			},
 			{
-				options: areaDemos.stackedAreaTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-			{
-				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
-				data: areaDemos.stackedAreaTimeSeriesUnevenData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-			{
-				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-			{
 				options: areaDemos.boundedAreaTimeSeriesOptions,
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
@@ -398,9 +383,20 @@ const simpleChartDemos = [
 				data: areaDemos.areaEmptyData,
 				chartType: chartTypes.AreaChart,
 			},
+		],
+	},
+	{
+		title: 'Area (stacked)',
+		demos: [
 			{
 				options: areaDemos.stackedAreaTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				mainDemo: true,
+			},
+			{
+				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
+				data: areaDemos.stackedAreaTimeSeriesUnevenData,
 				chartType: chartTypes.StackedAreaChart,
 			},
 			{
@@ -410,7 +406,6 @@ const simpleChartDemos = [
 			},
 		],
 	},
-
 	{
 		title: 'Bar (simple)',
 		description:
@@ -774,7 +769,7 @@ const simpleChartDemos = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: pieDemos.pieCenteredOptions,
@@ -800,7 +795,7 @@ const simpleChartDemos = [
 				options: meterDemos.meterOptionsWithStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: meterDemos.meterOptionsCustomColor,
@@ -821,6 +816,7 @@ const simpleChartDemos = [
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
 				chartType: chartTypes.RadarChart,
+				mainDemo: true,
 			},
 			{
 				data: radarDemos.radarCenteredData,
@@ -836,7 +832,6 @@ const simpleChartDemos = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
-				mainDemo: true
 			},
 		],
 	},
@@ -854,7 +849,7 @@ const simpleChartDemos = [
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: scatterDemos.scatterDiscreteOptions,
@@ -885,7 +880,7 @@ const simpleChartDemos = [
 				options: areaDemos.sparklineOptions,
 				data: areaDemos.sparklineTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: lineDemos.sparklineLoadingOptions,
@@ -908,7 +903,7 @@ const simpleChartDemos = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: stepDemos.stepEmptyStateOptions,
@@ -929,7 +924,7 @@ const simpleChartDemos = [
 				options: wordCloudDemos.wordCloudOptions,
 				data: wordCloudDemos.wordCloudData,
 				chartType: chartTypes.WordCloudChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 		],
 	},

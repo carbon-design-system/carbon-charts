@@ -130,6 +130,7 @@ export const areaTimeSeriesCurvedOptions = {
 
 export const sparklineOptions = {
 	title: 'Sparkline (modified area chart)',
+	height: "150px",
 	grid: {
 		x: {
 			enabled: false,
