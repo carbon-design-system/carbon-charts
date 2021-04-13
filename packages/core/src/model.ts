@@ -529,7 +529,7 @@ export class ChartModel {
 	 */
 	protected transformToTabularData(data) {
 		console.warn(
-			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format"
+			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format"
 		);
 		const tabularData = [];
 		const { datasets, labels } = data;

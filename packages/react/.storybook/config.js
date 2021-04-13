@@ -2,7 +2,7 @@ import { configure } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
 
 withOptions({
-	name: 'Carbon Charts - React Wrappers',
+	name: 'Carbon Charts - React',
 	panelPosition: 'bottom',
 	showDownPanel: true,
 	showAddonPanel: true,

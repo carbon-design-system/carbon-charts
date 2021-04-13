@@ -544,4 +544,7 @@ export const comboAreaLineTimeSeriesOptions = {
 		},
 	],
 	curve: 'curveNatural',
+	timeScale: {
+		addSpaceOnEdges: 0,
+	},
 };

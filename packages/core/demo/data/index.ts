@@ -27,13 +27,18 @@ export * from './combo';
 export * from './donut';
 export * from './gauge';
 export * from './line';
+export * from './lollipop';
 export * from './meter';
 export * from './pie';
 export * from './radar';
 export * from './scatter';
 export * from './step';
+export * from './time-series-axis';
 export * from './treemap';
+export * from './toolbar';
 export * from './wordcloud';
+export * from './zoom-bar';
+export * from './high-scale';
 
 import {
 	createChartSandbox,
@@ -44,102 +49,304 @@ import {
 	createSvelteChartApp,
 } from '../create-codesandbox';
 
-import { Tools } from '@carbon/charts/tools';
+import chartTypes from './CHART_TYPES';
+export * from './CHART_TYPES';
 
-export const chartTypes = {
-	AreaChart: {
-		vanilla: 'AreaChart',
-		angular: 'ibm-area-chart',
-		vue: 'ccv-area-chart',
-	},
-	BoxplotChart: {
-		vanilla: 'BoxplotChart',
-		angular: 'ibm-boxplot-chart',
-		vue: 'ccv-boxplot-chart',
-	},
-	BubbleChart: {
-		vanilla: 'BubbleChart',
-		angular: 'ibm-bubble-chart',
-		vue: 'ccv-bubble-chart',
-	},
-	ComboChart: {
-		vanilla: 'ComboChart',
-		angular: 'ibm-combo-chart',
-		vue: 'ccv-combo-chart',
-	},
-	DonutChart: {
-		vanilla: 'DonutChart',
-		angular: 'ibm-donut-chart',
-		vue: 'ccv-donut-chart',
-	},
-	GaugeChart: {
-		vanilla: 'GaugeChart',
-		angular: 'ibm-gauge-chart',
-		vue: 'ccv-gauge-chart',
-	},
-	GroupedBarChart: {
-		vanilla: 'GroupedBarChart',
-		angular: 'ibm-grouped-bar-chart',
-		vue: 'ccv-grouped-bar-chart',
-	},
-	LineChart: {
-		vanilla: 'LineChart',
-		angular: 'ibm-line-chart',
-		vue: 'ccv-line-chart',
-	},
-	LollipopChart: {
-		vanilla: 'LollipopChart',
-		angular: 'ibm-lollipop-chart',
-		vue: 'ccv-lollipop-chart',
-	},
-	MeterChart: {
-		vanilla: 'MeterChart',
-		angular: 'ibm-meter-chart',
-		vue: 'ccv-meter-chart',
-	},
-	PieChart: {
-		vanilla: 'PieChart',
-		angular: 'ibm-pie-chart',
-		vue: 'ccv-pie-chart',
-	},
-	RadarChart: {
-		vanilla: 'RadarChart',
-		angular: 'ibm-radar-chart',
-		vue: 'ccv-radar-chart',
-	},
-	ScatterChart: {
-		vanilla: 'ScatterChart',
-		angular: 'ibm-scatter-chart',
-		vue: 'ccv-scatter-chart',
-	},
-	SimpleBarChart: {
-		vanilla: 'SimpleBarChart',
-		angular: 'ibm-simple-bar-chart',
-		vue: 'ccv-simple-bar-chart',
-	},
-	StackedAreaChart: {
-		vanilla: 'StackedAreaChart',
-		angular: 'ibm-stacked-area-chart',
-		vue: 'ccv-stacked-area-chart',
-	},
-	StackedBarChart: {
-		vanilla: 'StackedBarChart',
-		angular: 'ibm-stacked-bar-chart',
-		vue: 'ccv-stacked-bar-chart',
-	},
-	TreemapChart: {
-		vanilla: 'TreemapChart',
-		angular: 'ibm-treemap-chart',
-		vue: 'ccv-treemap-chart',
-	},
-	WordCloudChart: {
-		vanilla: 'WordCloudChart',
-		angular: 'ibm-wordcloud-chart',
-		vue: 'ccv-wordcloud-chart',
-	},
-};
+export enum DemoGroupTypes {
+	UTILITY = 'utility',
+	SIMPLE_CHART = 'simple-chart',
+	COMPLEX_CHART = 'complex-chart',
+}
 
-let allDemoGroups = [
+const utilityDemoGroups = [
+	{
+		title: 'Axes',
+		demos: [
+			{
+				options: barDemos.simpleBarOptionsCustomTicks,
+				data: barDemos.simpleBarDataCustomTicks,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.stackedBarTimeSeriesOptionsCustomTicks,
+				data: barDemos.stackedBarTimeSeriesDataCustomTicks,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: barDemos.simpleBarFixedDomainOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: lineDemos.lineCustomDomainOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
+				data: lineDemos.lineTimeSeriesDataRotatedTicks,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Axes/Time series',
+		demos: [
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries15secondsOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesMinuteOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries30minutesOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
+				options: timeSeriesAxisDemos.lineTimeSeriesDailyOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataWeekly,
+				options: timeSeriesAxisDemos.lineTimeSeriesWeeklyOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
+				options: timeSeriesAxisDemos.lineTimeSeriesQuarterlyOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
+				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
+				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesTwoIdenticalLabelsOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataAllLabelsInPrimaryFormat,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesAllLabelsInPrimaryFormatOptions,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Colors',
+		demos: [
+			{
+				options: barDemos.simpleBarColorOverrideOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: lineDemos.lineCustomColorOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Legend',
+		demos: [
+			{
+				options: barDemos.simpleBarCenteredLegendOptions,
+				data: barDemos.simpleBarCenteredLegendData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.simpleBarCustomLegendOrderOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.groupedBarSelectedGroupsOptions,
+				data: barDemos.groupedBarSelectedGroupsData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
+				options: lineDemos.lineSelectedGroupsOptions,
+				data: lineDemos.lineSelectedGroupsData,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Locale',
+		demos: [
+			{
+				options: barDemos.simpleBarTurkishLocaleOptions,
+				data: barDemos.simpleBarTurkishLocaleData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+		],
+	},
+	{
+		title: 'Thresholds',
+		demos: [
+			{
+				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Toolbar',
+		demos: [
+			{
+				options: toolbarDemos.toolbarStackedBarTimeSeriesOptions,
+				data: toolbarDemos.toolbarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: toolbarDemos.toolbarLineTimeSeriesOptions,
+				data: toolbarDemos.toolbarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Truncations',
+		demos: [
+			{
+				options: barDemos.simpleHorizontalBarLongLabelOptions,
+				data: barDemos.simpleHorizontalBarLongLabelData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: lineDemos.lineLongLabelOptions,
+				data: lineDemos.lineLongLabelData,
+				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Zoom bar',
+		demos: [
+			{
+				options: zoomBarDemos.zoomBarStackedAreaTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarSimpleBarTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarSimpleBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarStackedBarTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: zoomBarDemos.definedZoomBarStackedBarTimeSeriesOptions,
+				data: zoomBarDemos.definedZoomBarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarBubbleTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarBubbleTimeSeriesData,
+				chartType: chartTypes.BubbleChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarScatterTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarScatterTimeSeriesData,
+				chartType: chartTypes.ScatterChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarStepTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStepTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeries15secondsOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeries15secondsData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeriesInitDomainOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeriesInitDomainData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarStringDateOptions,
+				data: zoomBarDemos.zoomBarStringDateData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarLockedOptions,
+				data: zoomBarDemos.zoomBarLockedData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: zoomBarDemos.zoomBarSkeletonOptions,
+				data: zoomBarDemos.zoomBarSkeletonData,
+				chartType: chartTypes.StackedBarChart,
+			},
+		],
+	},
+].map((demoGroup: any) => {
+	demoGroup.type = DemoGroupTypes.UTILITY;
+
+	return demoGroup;
+});
+
+const simpleChartDemos = [
 	{
 		title: 'Area',
 		description:
@@ -149,12 +356,12 @@ let allDemoGroups = [
 				options: areaDemos.areaTimeSeriesCurvedOptions,
 				data: areaDemos.areaTimeSeriesCurvedData,
 				chartType: chartTypes.AreaChart,
+				mainDemo: true,
 			},
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: false,
 			},
 			{
 				options: areaDemos.areaDiscreteDomainOptions,
@@ -165,31 +372,21 @@ let allDemoGroups = [
 				options: areaDemos.stackedAreaTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
 				data: areaDemos.stackedAreaTimeSeriesUnevenData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: true,
-			},
-			{
-				options: areaDemos.sparklineOptions,
-				data: areaDemos.sparklineTimeSeriesData,
-				chartType: chartTypes.AreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.boundedAreaTimeSeriesOptions,
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: true,
 			},
 			{
 				options: areaDemos.areaSkeletonOptions,
@@ -213,8 +410,9 @@ let allDemoGroups = [
 			},
 		],
 	},
+
 	{
-		title: 'Bar (vertical)',
+		title: 'Bar (simple)',
 		description:
 			'Bar charts use vertical or horizontal data markers to compare individual values. You can use them to compare discrete data or show trends over time.',
 		demos: [
@@ -224,134 +422,30 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
-				options: barDemos.simpleBarColorOverrideOptions,
-				data: barDemos.simpleBarData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleBarOptionsCustomTicks,
-				data: barDemos.simpleBarDataCustomTicks,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: barDemos.simpleBarCustomLegendOrderOptions,
-				data: barDemos.simpleBarData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleBarCenteredLegendOptions,
-				data: barDemos.simpleBarCenteredLegendData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleBarLongLabelOptions,
-				data: barDemos.simpleBarLongLabelData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
-			},
-			{
-				options: barDemos.simpleBarFixedDomainOptions,
-				data: barDemos.simpleBarData,
+				options: barDemos.simpleBarTimeSeriesOptions,
+				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesDenseOptions,
 				data: barDemos.simpleBarTimeSeriesDenseData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
-			},
-			{
-				options: barDemos.simpleBarTimeSeriesOptions,
-				data: barDemos.simpleBarTimeSeriesData,
-				chartType: chartTypes.SimpleBarChart,
 			},
 			{
 				options: barDemos.simpleBarEmptyStateOptions,
 				data: barDemos.simpleBarEmptyStateData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.simpleBarSkeletonOptions,
 				data: barDemos.simpleBarSkeletonData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
-			{
-				description:
-					'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',
-				options: barDemos.groupedBarOptions,
-				data: barDemos.groupedBarData,
-				chartType: chartTypes.GroupedBarChart,
-			},
-			{
-				options: barDemos.groupedBarSelectedGroupsOptions,
-				data: barDemos.groupedBarSelectedGroupsData,
-				chartType: chartTypes.GroupedBarChart,
-			},
-			{
-				options: barDemos.groupedBarEmptyStateOptions,
-				data: barDemos.groupedBarEmptyStateData,
-				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: barDemos.groupedBarSkeletonOptions,
-				data: barDemos.groupedBarSkeletonData,
-				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: false,
-			},
-			{
-				description:
-					'Stacked bar charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.',
-				options: barDemos.stackedBarOptions,
-				data: barDemos.stackedBarData,
-				chartType: chartTypes.StackedBarChart,
-			},
-			{
-				options: barDemos.stackedBarTimeSeriesOptions,
-				data: barDemos.stackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart,
-			},
-			{
-				options: barDemos.stackedBarTimeSeriesOptionsCustomTicks,
-				data: barDemos.stackedBarTimeSeriesDataCustomTicks,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: barDemos.stackedBarEmptyStateOptions,
-				data: barDemos.stackedBarEmptyStateData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: barDemos.stackedBarSkeletonOptions,
-				data: barDemos.stackedBarSkeletonData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-		],
-	},
-	{
-		title: 'Bar (horizontal)',
-		demos: [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
 				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleHorizontalBarCenteredLegendOptions,
-				data: barDemos.simpleHorizontalBarCenteredLegendData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleHorizontalBarLongLabelOptions,
-				data: barDemos.simpleHorizontalBarLongLabelData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				mainDemo: true,
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
@@ -362,14 +456,36 @@ let allDemoGroups = [
 				options: barDemos.simpleHorizontalBarEmptyStateOptions,
 				data: barDemos.simpleHorizontalBarEmptyStateData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.simpleHorizontalBarSkeletonOptions,
 				data: barDemos.simpleHorizontalBarSkeletonData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
 			},
+		],
+	},
+	{
+		title: 'Bar (grouped)',
+		description:
+			'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',
+		demos: [
+			{
+				options: barDemos.groupedBarOptions,
+				data: barDemos.groupedBarData,
+				chartType: chartTypes.GroupedBarChart,
+				mainDemo: true,
+			},
+			{
+				options: barDemos.groupedBarEmptyStateOptions,
+				data: barDemos.groupedBarEmptyStateData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
+				options: barDemos.groupedBarSkeletonOptions,
+				data: barDemos.groupedBarSkeletonData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+
 			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
@@ -379,18 +495,44 @@ let allDemoGroups = [
 				options: barDemos.groupedHorizontalBarEmptyStateOptions,
 				data: barDemos.groupedHorizontalBarEmptyStateData,
 				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.groupedHorizontalBarSkeletonOptions,
 				data: barDemos.groupedHorizontalBarSkeletonData,
 				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: false,
+			},
+		],
+	},
+	{
+		title: 'Bar (stacked)',
+		description:
+			'Stacked bar charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.',
+		demos: [
+			{
+				options: barDemos.stackedBarOptions,
+				data: barDemos.stackedBarData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: barDemos.stackedBarTimeSeriesOptions,
+				data: barDemos.stackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: barDemos.stackedBarEmptyStateOptions,
+				data: barDemos.stackedBarEmptyStateData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: barDemos.stackedBarSkeletonOptions,
+				data: barDemos.stackedBarSkeletonData,
+				chartType: chartTypes.StackedBarChart,
 			},
 			{
 				options: barDemos.stackedHorizontalBarOptions,
 				data: barDemos.stackedHorizontalBarData,
 				chartType: chartTypes.StackedBarChart,
+				mainDemo: true,
 			},
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
@@ -401,13 +543,11 @@ let allDemoGroups = [
 				options: barDemos.stackedHorizontalBarEmptyStateOptions,
 				data: barDemos.stackedHorizontalBarEmptyStateData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
 			},
 			{
 				options: barDemos.stackedHorizontalBarSkeletonOptions,
 				data: barDemos.stackedHorizontalBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -418,6 +558,7 @@ let allDemoGroups = [
 				options: boxplotDemos.simpleBoxplotOptions,
 				data: boxplotDemos.simpleBoxplotData,
 				chartType: chartTypes.BoxplotChart,
+				mainDemo: true,
 			},
 			{
 				options: boxplotDemos.simpleVerticalBoxplotOptions,
@@ -435,6 +576,7 @@ let allDemoGroups = [
 				options: bubbleDemos.bubbleDoubleLinearOptions,
 				data: bubbleDemos.bubbleDoubleLinearData,
 				chartType: chartTypes.BubbleChart,
+				mainDemo: true,
 			},
 			{
 				options: bubbleDemos.bubbleTimeSeriesOptions,
@@ -447,22 +589,19 @@ let allDemoGroups = [
 				chartType: chartTypes.BubbleChart,
 			},
 			{
+				options: bubbleDemos.bubbleDualDiscreteOptions,
+				data: bubbleDemos.bubbleDualDiscreteData,
+				chartType: chartTypes.BubbleChart,
+			},
+			{
 				options: bubbleDemos.bubbleEmptyStateOptions,
 				data: bubbleDemos.bubbleEmptyStateData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
 			},
 			{
 				options: bubbleDemos.bubbleSkeletonOptions,
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
-			},
-			{
-				options: bubbleDemos.bubbleDualDiscreteOptions,
-				data: bubbleDemos.bubbleDualDiscreteData,
-				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -473,67 +612,57 @@ let allDemoGroups = [
 				options: comboDemos.comboSimpleOptions,
 				data: comboDemos.comboSimpleData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboStackedOptions,
 				data: comboDemos.comboStackedData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboGroupedOptions,
 				data: comboDemos.comboGroupedData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboGroupedHorizontalOptions,
 				data: comboDemos.comboGroupedHorizontalData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboHorizontalOptions,
 				data: comboDemos.comboHorizontalData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboAreaLineOptions,
 				data: comboDemos.comboAreaLineData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboStackedAreaLineOptions,
 				data: comboDemos.comboStackedAreaLine,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboLineScatterOptions,
 				data: comboDemos.comboLineScatterData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboAreaLineTimeSeriesOptions,
 				data: comboDemos.comboAreaLineTimeSeriesData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
+				mainDemo: true,
 			},
 			{
 				options: comboDemos.comboEmptyOptions,
 				data: comboDemos.comboEmptyData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 			{
 				options: comboDemos.comboLoadingOptions,
 				data: comboDemos.comboLoadingData,
 				chartType: chartTypes.ComboChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -544,6 +673,7 @@ let allDemoGroups = [
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
 				chartType: chartTypes.DonutChart,
+				mainDemo: true,
 			},
 			{
 				options: donutDemos.donutCenteredOptions,
@@ -554,13 +684,11 @@ let allDemoGroups = [
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
-				isDemoExample: false,
 			},
 			{
 				options: donutDemos.donutSkeletonOptions,
 				data: donutDemos.donutSkeletonData,
 				chartType: chartTypes.DonutChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -571,19 +699,17 @@ let allDemoGroups = [
 				options: gaugeDemos.gaugeOptionsSemi,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
+				mainDemo: true,
 			},
 			{
 				options: gaugeDemos.gaugeOptionsCircular,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
 			},
 			{
 				options: gaugeDemos.gaugeOptionsCircularNoDelta,
 				data: gaugeDemos.gaugeDataNoDelta,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -598,39 +724,10 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
-				options: lineDemos.lineCustomColorOptions,
-				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineCenteredLegendOptions,
-				data: lineDemos.lineCenteredLegendData,
-				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineLongLabelOptions,
-				data: lineDemos.lineLongLabelData,
-				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineCustomDomainOptions,
-				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineSelectedGroupsOptions,
-				data: lineDemos.lineSelectedGroupsData,
-				chartType: chartTypes.LineChart,
-			},
-			{
 				options: lineDemos.lineTimeSeriesOptions,
 				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
-			},
-			{
-				options: lineDemos.lineTimeSeriesCustomDomainOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart,
+				mainDemo: true,
 			},
 			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
@@ -638,48 +735,17 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
-				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
-				data: lineDemos.lineTimeSeriesDataRotatedTicks,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: lineDemos.lineHorizontalOptions,
-				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: lineDemos.lineTimeSeriesHorizontalOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
-				data: lineDemos.lineTimeSeriesData,
+				options: lineDemos.dualLine,
+				data: lineDemos.lineTimeSeriesDualAxesData,
 				chartType: chartTypes.LineChart,
 			},
 			{
 				options: lineDemos.lineEmptyStateOptions,
 				data: lineDemos.lineEmptyStateData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: lineDemos.lineSkeletonOptions,
-				data: lineDemos.lineSkeletonData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: lineDemos.dualLine,
-				data: lineDemos.lineTimeSeriesDualAxesData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: true,
-			},
-			{
-				options: lineDemos.sparklineLoadingOptions,
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
 			},
@@ -697,6 +763,7 @@ let allDemoGroups = [
 				options: lollipopDemos.lollipopDiscretePresentationOptions,
 				data: lollipopDemos.lollipopDiscretePresentationData,
 				chartType: chartTypes.LollipopChart,
+				mainDemo: true,
 			},
 		],
 	},
@@ -707,6 +774,7 @@ let allDemoGroups = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
+				mainDemo: true
 			},
 			{
 				options: pieDemos.pieCenteredOptions,
@@ -717,13 +785,11 @@ let allDemoGroups = [
 				options: pieDemos.pieEmptyStateOptions,
 				data: pieDemos.pieEmptyStateData,
 				chartType: chartTypes.PieChart,
-				isDemoExample: false,
 			},
 			{
 				options: pieDemos.pieSkeletonOptions,
 				data: pieDemos.pieSkeletonData,
 				chartType: chartTypes.PieChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -734,19 +800,17 @@ let allDemoGroups = [
 				options: meterDemos.meterOptionsWithStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
+				mainDemo: true
 			},
 			{
 				options: meterDemos.meterOptionsCustomColor,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
 			},
 			{
 				options: meterDemos.meterOptionsNoStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				isDemoExample: true,
 			},
 		],
 	},
@@ -772,6 +836,7 @@ let allDemoGroups = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
+				mainDemo: true
 			},
 		],
 	},
@@ -789,6 +854,7 @@ let allDemoGroups = [
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
+				mainDemo: true
 			},
 			{
 				options: scatterDemos.scatterDiscreteOptions,
@@ -796,27 +862,35 @@ let allDemoGroups = [
 				chartType: chartTypes.ScatterChart,
 			},
 			{
-				options: scatterDemos.scatterLongLabelDiscreteOptions,
-				data: scatterDemos.scatterLongLabelDiscreteData,
+				options: scatterDemos.scatterDualAxesOptions,
+				data: scatterDemos.scatterDualAxesData,
 				chartType: chartTypes.ScatterChart,
 			},
 			{
 				options: scatterDemos.scatterEmptyStateOptions,
 				data: scatterDemos.scatterEmptyStateData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
 			},
 			{
 				options: scatterDemos.scatterSkeletonOptions,
 				data: scatterDemos.scatterSkeletonData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
+			},
+		],
+	},
+	{
+		title: 'Sparkline',
+		demos: [
+			{
+				options: areaDemos.sparklineOptions,
+				data: areaDemos.sparklineTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				mainDemo: true
 			},
 			{
-				options: scatterDemos.scatterDualAxesOptions,
-				data: scatterDemos.scatterDualAxesData,
-				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
+				options: lineDemos.sparklineLoadingOptions,
+				data: lineDemos.lineSkeletonData,
+				chartType: chartTypes.LineChart,
 			},
 		],
 	},
@@ -834,127 +908,38 @@ let allDemoGroups = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
+				mainDemo: true
 			},
 			{
 				options: stepDemos.stepEmptyStateOptions,
 				data: stepDemos.stepEmptyStateData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 			{
 				options: stepDemos.stepSkeletonOptions,
 				data: stepDemos.stepSkeletonData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 		],
 	},
 	{
-		title: 'Time series axis',
+		title: 'Word Cloud',
 		demos: [
 			{
-				options: timeSeriesAxisDemos.lineTimeSeries15secondsOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: timeSeriesAxisDemos.lineTimeSeriesMinuteOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: timeSeriesAxisDemos.lineTimeSeries30minutesOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
-				data:
-					timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
-				data:
-					timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
-				options: timeSeriesAxisDemos.lineTimeSeriesDailyOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataWeekly,
-				options: timeSeriesAxisDemos.lineTimeSeriesWeeklyOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data:
-					timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
-				options: timeSeriesAxisDemos.lineTimeSeriesQuarterlyOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
-				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
-				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels,
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesTwoIdenticalLabelsOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				data:
-					timeSeriesAxisDemos.lineTimeSeriesDataAllLabelsInPrimaryFormat,
-				options:
-					timeSeriesAxisDemos.lineTimeSeriesAllLabelsInPrimaryFormatOptions,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
+				options: wordCloudDemos.wordCloudOptions,
+				data: wordCloudDemos.wordCloudData,
+				chartType: chartTypes.WordCloudChart,
+				mainDemo: true
 			},
 		],
 	},
+].map((demoGroup: any) => {
+	demoGroup.type = DemoGroupTypes.SIMPLE_CHART;
+
+	return demoGroup;
+});
+
+const complexChartDemos = [
 	{
 		title: 'Treemap',
 		demos: [
@@ -965,118 +950,15 @@ let allDemoGroups = [
 			},
 		],
 	},
-	{
-		title: 'Toolbar (alpha)',
-		demos: [
-			{
-				options: toolbarDemos.toolbarStackedBarTimeSeriesOptions,
-				data: toolbarDemos.toolbarStackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: toolbarDemos.toolbarLineTimeSeriesOptions,
-				data: toolbarDemos.toolbarLineTimeSeriesData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-		],
-	},
+].map((demoGroup: any) => {
+	demoGroup.type = DemoGroupTypes.COMPLEX_CHART;
 
-	{
-		title: 'Word Cloud',
-		demos: [
-			{
-				options: wordCloudDemos.wordCloudOptions,
-				data: wordCloudDemos.wordCloudData,
-				chartType: chartTypes.WordCloudChart,
-			},
-		],
-	},
-	{
-		title: 'Zoom bar (alpha)',
-		demos: [
-			{
-				options: zoomBarDemos.zoomBarStackedAreaTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarStackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarSimpleBarTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarSimpleBarTimeSeriesData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarStackedBarTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarStackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.definedZoomBarStackedBarTimeSeriesOptions,
-				data: zoomBarDemos.definedZoomBarStackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarBubbleTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarBubbleTimeSeriesData,
-				chartType: chartTypes.BubbleChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarLineTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarLineTimeSeriesData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarScatterTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarScatterTimeSeriesData,
-				chartType: chartTypes.ScatterChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarStepTimeSeriesOptions,
-				data: zoomBarDemos.zoomBarStepTimeSeriesData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarLineTimeSeries15secondsOptions,
-				data: zoomBarDemos.zoomBarLineTimeSeries15secondsData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarLineTimeSeriesInitDomainOptions,
-				data: zoomBarDemos.zoomBarLineTimeSeriesInitDomainData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarStringDateOptions,
-				data: zoomBarDemos.zoomBarStringDateData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarLockedOptions,
-				data: zoomBarDemos.zoomBarLockedData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-			{
-				options: zoomBarDemos.zoomBarSkeletonOptions,
-				data: zoomBarDemos.zoomBarSkeletonData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false,
-			},
-		],
-	},
-] as any;
+	return demoGroup;
+});
+
+let allDemoGroups = utilityDemoGroups
+	.concat(simpleChartDemos)
+	.concat(complexChartDemos);
 
 const devOnlyDemoGroups = [
 	{
@@ -1087,7 +969,6 @@ const devOnlyDemoGroups = [
 				data: [],
 				isHighScale: true,
 				chartType: chartTypes.LineChart,
-				isDemoExample: false,
 			},
 		],
 	},
@@ -1101,40 +982,52 @@ const formatTitleString = (str) =>
 		.replace(/\s+/g, '-');
 
 const mapDemoGroups = (demoGroups) =>
-	demoGroups.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.map((demo) => {
-			demo.title = demo.options.title;
-			demo.id = `${formatTitleString(
-				demoGroup.title
-			)}--${formatTitleString(demo.options.title)}`;
-
-			// if there isnt a height set in the chart options, use 400
-			demo.options.height = demo.options.height ?? '400px';
-
-			if (!demo.codesandbox) {
-				demo.codesandbox = {};
+	demoGroups
+		.sort((a, b) => b.title - a.title)
+		.map((demoGroup) => {
+			if (demoGroup.type === DemoGroupTypes.SIMPLE_CHART) {
+				demoGroup.storyGroupTitle = 'Simple charts';
+			} else if (demoGroup.type === DemoGroupTypes.COMPLEX_CHART) {
+				demoGroup.storyGroupTitle = 'Complex charts';
+			} else {
+				demoGroup.storyGroupTitle = 'Utility';
 			}
-			demo.codesandbox.react = createChartSandbox(
-				createReactChartApp(demo)
-			);
-			demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
-			demo.codesandbox.vanilla = createChartSandbox(
-				createVanillaChartApp(demo)
-			);
-			demo.codesandbox.svelte = createChartSandbox(
-				createSvelteChartApp(demo)
-			);
 
-			if (!demo.code) {
-				demo.code = {};
-			}
-			demo.code.angular = createAngularChartApp(demo);
+			demoGroup.demos = demoGroup.demos.map((demo) => {
+				demo.title = demo.options.title;
+				demo.id = `${formatTitleString(
+					demoGroup.title
+				)}--${formatTitleString(demo.options.title)}`;
 
-			return demo;
+				// if there isnt a height set in the chart options, use 400
+				demo.options.height = demo.options.height ?? '400px';
+
+				if (!demo.codesandbox) {
+					demo.codesandbox = {};
+				}
+				demo.codesandbox.react = createChartSandbox(
+					createReactChartApp(demo)
+				);
+				demo.codesandbox.vue = createChartSandbox(
+					createVueChartApp(demo)
+				);
+				demo.codesandbox.vanilla = createChartSandbox(
+					createVanillaChartApp(demo)
+				);
+				demo.codesandbox.svelte = createChartSandbox(
+					createSvelteChartApp(demo)
+				);
+
+				if (!demo.code) {
+					demo.code = {};
+				}
+				demo.code.angular = createAngularChartApp(demo);
+
+				return demo;
+			});
+
+			return demoGroup;
 		});
-
-		return demoGroup;
-	});
 // add codesandbox and code to demos
 allDemoGroups = mapDemoGroups(allDemoGroups);
 
@@ -1145,18 +1038,3 @@ if (process.env.NODE_ENV !== 'production') {
 
 // in the storybook we want to show all the demos
 export const storybookDemoGroups = allDemoGroups;
-
-// in the demo page we want to show only demos with isDemoExample = true
-export const demoGroups = Tools.clone(allDemoGroups)
-	// remove demoGroup if its children don't have any demo examples
-	.filter(
-		(demoGroup) =>
-			demoGroup.demos.filter((demo) => demo.isDemoExample !== false)
-				.length > 0
-	)
-	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter(
-			(demo) => demo.isDemoExample !== false
-		);
-		return demoGroup;
-	});

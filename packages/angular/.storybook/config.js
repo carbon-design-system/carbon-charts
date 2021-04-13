@@ -2,7 +2,7 @@ import { configure } from "@storybook/angular";
 import { setOptions } from "@storybook/addon-options";
 
 setOptions({
-  name: "Carbon Charts - Angular Wrappers",
+  name: "Carbon Charts - Angular",
   showAddonPanel: true,
   sortStoriesByKind: true,
   panelPosition: 'bottom',
