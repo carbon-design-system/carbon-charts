@@ -1,6 +1,6 @@
 @import './vendor/@carbon/type/scss/type';
-@import "./vendor/@carbon/type/scss/font-face/sans";
-@import "./vendor/@carbon/type/scss/font-face/sans-condensed";
+@import './vendor/@carbon/type/scss/font-face/sans';
+@import './vendor/@carbon/type/scss/font-face/sans-condensed';
 @include carbon--font-face-sans();
 @include carbon--font-face-sans-condensed();
 

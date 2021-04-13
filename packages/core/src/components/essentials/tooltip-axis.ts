@@ -84,7 +84,7 @@ export class AxisChartsTooltip extends Tooltip {
 					classNameTypes: [ColorClassNameTypes.TOOLTIP],
 					dataGroupName: datum[groupMapsTo],
 				}),
-			},)
+			});
 		} else if (data.length > 1) {
 			items = [
 				{

@@ -366,8 +366,8 @@ export const lineTimeSeriesRotatedTicksOptions = {
 			scaleType: 'time',
 			mapsTo: 'date',
 			ticks: {
-				rotation: "always"
-			}
+				rotation: 'always',
+			},
 		},
 		left: {
 			mapsTo: 'value',

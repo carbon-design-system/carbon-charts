@@ -774,7 +774,7 @@ const simpleChartDemos = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: pieDemos.pieCenteredOptions,
@@ -800,7 +800,7 @@ const simpleChartDemos = [
 				options: meterDemos.meterOptionsWithStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: meterDemos.meterOptionsCustomColor,
@@ -836,7 +836,7 @@ const simpleChartDemos = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 		],
 	},
@@ -854,7 +854,7 @@ const simpleChartDemos = [
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: scatterDemos.scatterDiscreteOptions,
@@ -885,7 +885,7 @@ const simpleChartDemos = [
 				options: areaDemos.sparklineOptions,
 				data: areaDemos.sparklineTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: lineDemos.sparklineLoadingOptions,
@@ -908,7 +908,7 @@ const simpleChartDemos = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 			{
 				options: stepDemos.stepEmptyStateOptions,
@@ -929,7 +929,7 @@ const simpleChartDemos = [
 				options: wordCloudDemos.wordCloudOptions,
 				data: wordCloudDemos.wordCloudData,
 				chartType: chartTypes.WordCloudChart,
-				mainDemo: true
+				mainDemo: true,
 			},
 		],
 	},
