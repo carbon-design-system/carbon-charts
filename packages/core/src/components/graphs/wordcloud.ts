@@ -134,7 +134,7 @@ export class WordCloud extends Component {
 						animate
 					)
 				)
-				.attr('transform', d => `translate(${d.x}, ${d.y})`)
+				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1);
 		}
 

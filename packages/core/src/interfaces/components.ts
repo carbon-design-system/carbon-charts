@@ -43,6 +43,19 @@ export interface LegendOptions {
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
 	order?: string[];
+	/**
+	 * customized legend items
+	 */
+	additionalItems?: LegendItem[];
+}
+
+/**
+ * customize the legend item
+ */
+export interface LegendItem {
+	type: string;
+	name: string;
+	color?: string;
 }
 
 export interface TooltipOptions {

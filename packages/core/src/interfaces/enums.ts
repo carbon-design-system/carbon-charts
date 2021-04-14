@@ -209,3 +209,15 @@ export enum AxisTitleOrientations {
 	LEFT = 'left',
 	RIGHT = 'right',
 }
+
+/**
+ * enum of legend item type
+ */
+export enum LegendItemType {
+	CHECKBOX = 'checkbox',
+	RADIUS = 'radius',
+	AREA = 'area',
+	SIZE = 'size',
+	LINE = 'line',
+	QUARTILE = 'quartile',
+}
