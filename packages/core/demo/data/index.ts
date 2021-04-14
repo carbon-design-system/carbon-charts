@@ -209,6 +209,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
+				options: barDemos.simpleBarAdditionalLegendItemsOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
 				options: barDemos.groupedBarSelectedGroupsOptions,
 				data: barDemos.groupedBarSelectedGroupsData,
 				chartType: chartTypes.GroupedBarChart,

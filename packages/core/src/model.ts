@@ -338,8 +338,11 @@ export class ChartModel {
 	 * @param newOptions New options to be set
 	 */
 	setOptions(newOptions) {
+		const options = this.getOptions();
+		Tools.updateLegendAdditionalItems(options, newOptions);
+
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions),
+			options: Tools.merge(options, newOptions),
 		});
 	}
 
