@@ -327,7 +327,6 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 } as BubbleChartOptions);
 
 /**
-<<<<<<< HEAD
  * options specific to bullet charts
  */
 const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
@@ -335,7 +334,8 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
 	},
 } as BulletChartOptions);
-=======
+
+/*
  * options specific to word cloud charts
  */
 const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
@@ -358,7 +358,6 @@ const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
 		wordMapsTo: 'word',
 	},
 } as WorldCloudChartOptions);
->>>>>>> c3c5593bc6209cb7d9dd49ae03e83015a9f417da
 
 /**
  * options specific to pie charts

@@ -48,11 +48,11 @@ export class BulletChart extends AxisChart {
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents,
-			{
-				legend: {
-					enabled: false,
-				},
-			}
+			// {
+			// 	legend: {
+			// 		enabled: false,
+			// 	},
+			// }
 		);
 		return components;
 	}

@@ -51,4 +51,24 @@ export const basicBulletOptions = {
 			mapsTo: 'title',
 		},
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'area',
+				name: 'Poor area',
+			},
+			{
+				type: 'area',
+				name: 'Satisfactory area',
+			},
+			{
+				type: 'area',
+				name: 'Great area',
+			},
+			{
+				type: 'quartile',
+				name: 'Quartiles',
+			},
+		],
+	},
 };
