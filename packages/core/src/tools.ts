@@ -283,31 +283,31 @@ export namespace Tools {
 		defaultOptions,
 		providedOptions
 	) {
-		let defaultLegendItems = Tools.getProperty(
+		let defaultAdditionalItems = Tools.getProperty(
 			defaultOptions,
 			'legend',
 			'additionalItems'
 		);
-		const providedLegendItems = Tools.getProperty(
+		const userProvidedAdditionalItems = Tools.getProperty(
 			providedOptions,
 			'legend',
 			'additionalItems'
 		);
 
 		// Retain default legend additional items
-		if (defaultLegendItems && providedLegendItems) {
-			const providedTypes = providedLegendItems.map((item) => item.type);
+		if (defaultAdditionalItems && userProvidedAdditionalItems) {
+			const providedTypes = userProvidedAdditionalItems.map((item) => item.type);
 
 			// Remove same type default items if they are provided
-			defaultLegendItems = defaultLegendItems.filter(
+			defaultAdditionalItems = defaultAdditionalItems.filter(
 				(item) =>
 					!providedTypes.includes(item.type) &&
 					item.type === LegendItemType.RADIUS
 			);
 
 			providedOptions.legend.additionalItems = Tools.unionBy(
-				defaultLegendItems,
-				providedLegendItems,
+				defaultAdditionalItems,
+				userProvidedAdditionalItems,
 				'name'
 			);
 

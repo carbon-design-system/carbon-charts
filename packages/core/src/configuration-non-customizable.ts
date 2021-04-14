@@ -63,7 +63,7 @@ export const legend = {
 		radius: 6.5,
 	},
 	radius: {
-		config: [
+		iconData: [
 			{ cx: 7, cy: 7, r: 6.5 },
 			{ cx: 7, cy: 10, r: 3.5 },
 		],
@@ -81,14 +81,14 @@ export const legend = {
 		color: '#c6c6c6',
 	},
 	size: {
-		config: [
+		iconData: [
 			{ width: 23, height: 12 },
 			{ width: 13, height: 6 },
 		],
 		color: '#8D8D8D',
 	},
 	quartile: {
-		config: [
+		iconData: [
 			{ x: 0, y: 0, width: 24, height: 13, color: '#6929C4' },
 			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' },
 		],

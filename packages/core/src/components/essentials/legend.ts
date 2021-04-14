@@ -189,12 +189,12 @@ export class Legend extends Component {
 		const { width, height } = Configuration.legend.area;
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
-			const { config, color } = Configuration.legend.radius;
+			const { iconData, color } = Configuration.legend.radius;
 
 			const circleEnter = additionalItem
 				.attr('fill', 'none')
 				.selectAll('circle')
-				.data(config)
+				.data(iconData)
 				.enter();
 
 			circleEnter
@@ -241,14 +241,14 @@ export class Legend extends Component {
 					.attr('fill', color);
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {
-			const { config, color } = Configuration.legend.size;
+			const { iconData, color } = Configuration.legend.size;
 
 			const sizeEnter = additionalItem
 				.attr('fill', 'none')
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'size')
 				.selectAll('rect')
-				.data(config)
+				.data(iconData)
 				.enter();
 
 			sizeEnter
@@ -260,18 +260,18 @@ export class Legend extends Component {
 				.attr('stroke', itemConfig.color ? itemConfig.color : color)
 				.attr('stroke-width', 1);
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
-			const { config } = Configuration.legend.quartile;
+			const { iconData } = Configuration.legend.quartile;
 
 			// Set customized color
 			if (itemConfig.color) {
-				config[0].color = itemConfig.color;
+				iconData[0].color = itemConfig.color;
 			}
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'quartile')
-				.data(config)
+				.data(iconData)
 				.enter();
 
 			quartileEnter
