@@ -199,6 +199,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 */
 		radiusMapsTo?: string;
 		/**
+		 * options for what the bubble radius value maps to
+		 */
+		radiusLabel?: string;
+		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */
@@ -273,6 +277,31 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| {
 				name: string;
 		  };
+}
+
+/**
+ * options specific to world cloud charts
+ */
+export interface WordCloudChartTooltipOptions extends TooltipOptions {
+	/** the label that shows up by the highlighted word in the tooltip */
+	wordLabel?: string;
+	/** the label that shows up by the value of the highlighted word in the tooltip */
+	valueLabel?: string;
+}
+
+export interface WorldCloudChartOptions extends BaseChartOptions {
+	wordCloud?: {
+		/** what key in your charting data will the font sizes map to? */
+		fontSizeMapsTo?: string;
+		/** a function (chartSize, data) => {} that'll decide the range of font sizes, e.g. [10, 80] */
+		fontSizeRange?: Function;
+		/** what key in your charting data will the words map to? */
+		wordMapsTo?: string;
+	};
+	/**
+	 * tooltip configuration
+	 */
+	tooltip?: WordCloudChartTooltipOptions;
 }
 
 /**

@@ -16,3 +16,4 @@ export * from './radar';
 export * from './gauge';
 export * from './combo';
 export * from './treemap';
+export * from './wordcloud';

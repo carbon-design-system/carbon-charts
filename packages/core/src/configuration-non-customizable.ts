@@ -61,10 +61,41 @@ export const legend = {
 		horizontalSpace: 12,
 		verticalSpace: 24,
 		textYOffset: 8,
+		spaceAfter: 4,
 	},
 	checkbox: {
 		radius: 6.5,
-		spaceAfter: 4,
+	},
+	radius: {
+		iconData: [
+			{ cx: 7, cy: 7, r: 6.5 },
+			{ cx: 7, cy: 10, r: 3.5 },
+		],
+		color: '#8c8c8c',
+	},
+	line: {
+		yPosition: 6,
+		width: 24,
+		strokeWidth: 1.4,
+		color: '#999999',
+	},
+	area: {
+		width: 24,
+		height: 13,
+		color: '#c6c6c6',
+	},
+	size: {
+		iconData: [
+			{ width: 23, height: 12 },
+			{ width: 13, height: 6 },
+		],
+		color: '#8D8D8D',
+	},
+	quartile: {
+		iconData: [
+			{ x: 0, y: 0, width: 24, height: 13, color: '#6929C4' },
+			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' },
+		],
 	},
 };
 

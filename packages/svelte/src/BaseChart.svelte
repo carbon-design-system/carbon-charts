@@ -13,7 +13,7 @@
 
 	/**
 	 * Set the chart data using the tabular data format
-	 * https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format
+	 * https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format
 	 * @type {typeof import("@carbon/charts/interfaces").ChartTabularData}
 	 */
 	export let data = [];

@@ -365,10 +365,30 @@ export class Scatter extends Component {
 					})
 					.classed('unfilled', false);
 
-				// Show tooltip for single datapoint
+				// Show tooltip
+				const bubbleOptions = Tools.getProperty(
+					self.getOptions(),
+					'bubble'
+				);
+
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
+					additionalItems: [
+						{
+							label: Tools.getProperty(
+								bubbleOptions,
+								'radiusLabel'
+							),
+							value:
+								datum[
+									Tools.getProperty(
+										bubbleOptions,
+										'radiusMapsTo'
+									)
+								],
+						},
+					],
 				});
 
 				// Dispatch mouse event

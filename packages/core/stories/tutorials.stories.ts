@@ -15,8 +15,8 @@ hljs.registerLanguage(
 	require('highlight.js/lib/languages/typescript')
 );
 
-const gettingStartedStories = storiesOf('Tutorials/Getting Started', module);
-const tutorialStories = storiesOf('Tutorials', module);
+const gettingStartedStories = storiesOf('Docs|Getting Started', module);
+const tutorialStories = storiesOf('Docs|Tutorials', module);
 
 Object.keys(TUTORIALS).forEach((tutorialKey) => {
 	const tutorial = TUTORIALS[tutorialKey];

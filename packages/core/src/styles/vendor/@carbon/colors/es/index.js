@@ -10,8 +10,12 @@ var white = '#ffffff';
 var white0 = white;
 var yellow = '#f1c21b';
 var yellow30 = yellow;
+var yellow40 = '#d2a106';
+var yellow50 = '#b28600';
 var orange = '#ff832b';
 var orange40 = orange;
+var orange60 = '#ba4e00';
+var orange70 = '#8a3800';
 var red10 = '#fff1f1';
 var red20 = '#ffd7d9';
 var red30 = '#ffb3b8';
@@ -39,7 +43,7 @@ var magenta20 = '#ffd6e8';
 var magenta30 = '#ffafd2';
 var magenta40 = '#ff7eb6';
 var magenta50 = '#ee5396';
-var magenta60 = '#d12771';
+var magenta60 = '#d02670';
 var magenta70 = '#9f1853';
 var magenta80 = '#740937';
 var magenta90 = '#510224';
@@ -215,7 +219,7 @@ var warmGray20 = '#e5e0df';
 var warmGray30 = '#cac5c4';
 var warmGray40 = '#ada8a8';
 var warmGray50 = '#8f8b8b';
-var warmGray60 = '#736f6f';
+var warmGray60 = '#726e6e';
 var warmGray70 = '#565151';
 var warmGray80 = '#3c3838';
 var warmGray90 = '#272525';
@@ -245,7 +249,9 @@ var colors = {
   green: green,
   magenta: magenta,
   orange: {
-    40: orange40
+    40: orange40,
+    60: orange60,
+    70: orange70
   },
   purple: purple,
   red: red,
@@ -256,7 +262,9 @@ var colors = {
   },
   yellow: {
     20: yellow20,
-    30: yellow30
+    30: yellow30,
+    40: yellow40,
+    50: yellow50
   }
 };
 
@@ -280,11 +288,4 @@ function rgba(hexcode, opacity) {
   return "rgba(".concat(values[0], ", ").concat(values[1], ", ").concat(values[2], ", ").concat(opacity, ")");
 }
 
-/**
- * Copyright IBM Corp. 2018, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-export { black, black100, white, white0, yellow, yellow30, orange, orange40, red10, red20, red30, red40, red50, red60, red70, red80, red90, red100, red, magenta10, magenta20, magenta30, magenta40, magenta50, magenta60, magenta70, magenta80, magenta90, magenta100, magenta, purple10, purple20, purple30, purple40, purple50, purple60, purple70, purple80, purple90, purple100, purple, blue10, blue20, blue30, blue40, blue50, blue60, blue70, blue80, blue90, blue100, blue, cyan10, cyan20, cyan30, cyan40, cyan50, cyan60, cyan70, cyan80, cyan90, cyan100, cyan, teal10, teal20, teal30, teal40, teal50, teal60, teal70, teal80, teal90, teal100, teal, green10, green20, green30, green40, green50, green60, green70, green80, green90, green100, green, coolGray10, coolGray20, coolGray30, coolGray40, coolGray50, coolGray60, coolGray70, coolGray80, coolGray90, coolGray100, coolGray, gray10, gray20, gray30, gray40, gray50, gray60, gray70, gray80, gray90, gray100, gray, warmGray10, warmGray20, warmGray30, warmGray40, warmGray50, warmGray60, warmGray70, warmGray80, warmGray90, warmGray100, warmGray, yellow20, colors, rgba };
+export { black, black100, blue, blue10, blue100, blue20, blue30, blue40, blue50, blue60, blue70, blue80, blue90, colors, coolGray, coolGray10, coolGray100, coolGray20, coolGray30, coolGray40, coolGray50, coolGray60, coolGray70, coolGray80, coolGray90, cyan, cyan10, cyan100, cyan20, cyan30, cyan40, cyan50, cyan60, cyan70, cyan80, cyan90, gray, gray10, gray100, gray20, gray30, gray40, gray50, gray60, gray70, gray80, gray90, green, green10, green100, green20, green30, green40, green50, green60, green70, green80, green90, magenta, magenta10, magenta100, magenta20, magenta30, magenta40, magenta50, magenta60, magenta70, magenta80, magenta90, orange, orange40, orange60, orange70, purple, purple10, purple100, purple20, purple30, purple40, purple50, purple60, purple70, purple80, purple90, red, red10, red100, red20, red30, red40, red50, red60, red70, red80, red90, rgba, teal, teal10, teal100, teal20, teal30, teal40, teal50, teal60, teal70, teal80, teal90, warmGray, warmGray10, warmGray100, warmGray20, warmGray30, warmGray40, warmGray50, warmGray60, warmGray70, warmGray80, warmGray90, white, white0, yellow, yellow20, yellow30, yellow40, yellow50 };
