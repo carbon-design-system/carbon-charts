@@ -16,6 +16,7 @@ export class GradientUtils extends Service {
 				.attr('y2', configs.y2);
 		}
 
+		lg.selectAll('stop').remove();
 		lg.selectAll('stop')
 			.data(configs.stops)
 			.enter()
