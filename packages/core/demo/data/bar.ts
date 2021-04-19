@@ -150,11 +150,19 @@ export const simpleBarAdditionalLegendItemsOptions = {
 			},
 			{
 				type: 'area',
-				name: 'Area',
+				name: 'Poor area',
+			},
+			{
+				type: 'area',
+				name: 'Satisfactory area',
+			},
+			{
+				type: 'area',
+				name: 'Great area',
 			},
 			{
 				type: 'quartile',
-				name: 'Quartile',
+				name: 'Quartiles',
 			},
 			{
 				type: 'size',

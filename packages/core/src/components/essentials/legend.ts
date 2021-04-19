@@ -125,8 +125,9 @@ export class Legend extends Component {
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
 
+			// get index of item with same type to assign distinct classname
 			let previousType;
-			let countSameTypeItem = 0;
+			let indexOfItem = 1;
 
 			// add different type of legend items
 			addedAdditionalItems
@@ -137,15 +138,15 @@ export class Legend extends Component {
 
 					if (!previousType || previousType != d.type) {
 						previousType = d.type;
-						countSameTypeItem = 1;
+						indexOfItem = 1;
 					} else {
-						countSameTypeItem++;
+						indexOfItem++;
 					}
 
 					self.addAdditionalItem(
 						additionalItem,
 						d,
-						countSameTypeItem
+						indexOfItem
 					);
 				});
 			const addedAdditionalItemsText = addedAdditionalItems
@@ -199,7 +200,7 @@ export class Legend extends Component {
 		return dataGroups;
 	}
 
-	addAdditionalItem(additionalItem, itemConfig, countSameTypeItem) {
+	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
 		const { width, height } = Configuration.legend.area;
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
@@ -230,7 +231,7 @@ export class Legend extends Component {
 			if (additionalItem.select('line.line').empty()) {
 				additionalItem
 					.append('line')
-					.classed(`line-${countSameTypeItem}`, true)
+					.classed(`line-${indexOfItem}`, true)
 					.attr('role', Roles.IMG)
 					.attr('aria-label', 'line')
 					.attr('x1', 0)
@@ -249,14 +250,14 @@ export class Legend extends Component {
 			if (additionalItem.select('rect.area').empty()) {
 				additionalItem
 					.append('rect')
-					.classed(`area-${countSameTypeItem}`, true)
+					.classed(`area-${indexOfItem}`, true)
 					.attr('role', Roles.IMG)
 					.attr('aria-label', 'area')
 					.attr('width', width)
 					.attr('height', height)
 					.style(
 						'fill',
-						countSameTypeItem > 3 && !itemConfig.fill
+						indexOfItem > 3 && !itemConfig.fill
 							? Configuration.legend.area.fill
 							: itemConfig.fill
 					)
@@ -295,7 +296,7 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.classed(`quartile-${countSameTypeItem}`, true)
+				.classed(`quartile-${indexOfItem}`, true)
 				.attr('x', (d) => d.x)
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
