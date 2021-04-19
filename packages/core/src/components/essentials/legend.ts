@@ -125,6 +125,9 @@ export class Legend extends Component {
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
 
+			let previousType;
+			let countSameTypeItem = 0;
+
 			// add different type of legend items
 			addedAdditionalItems
 				.append('g')
@@ -132,7 +135,18 @@ export class Legend extends Component {
 				.each(function (d, i) {
 					const additionalItem = select(this);
 
-					self.addAdditionalItem(additionalItem, d);
+					if (!previousType || previousType != d.type) {
+						previousType = d.type;
+						countSameTypeItem = 1;
+					} else {
+						countSameTypeItem++;
+					}
+
+					self.addAdditionalItem(
+						additionalItem,
+						d,
+						countSameTypeItem
+					);
 				});
 			const addedAdditionalItemsText = addedAdditionalItems
 				.append('text')
@@ -185,11 +199,11 @@ export class Legend extends Component {
 		return dataGroups;
 	}
 
-	addAdditionalItem(additionalItem, itemConfig) {
+	addAdditionalItem(additionalItem, itemConfig, countSameTypeItem) {
 		const { width, height } = Configuration.legend.area;
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
-			const { iconData, color } = Configuration.legend.radius;
+			const { iconData, fill, stroke } = Configuration.legend.radius;
 
 			const circleEnter = additionalItem
 				.attr('fill', 'none')
@@ -205,43 +219,51 @@ export class Legend extends Component {
 				.attr('cx', (d) => d.cx)
 				.attr('cy', (d) => d.cy)
 				.attr('r', (d) => d.r)
-				.attr('stroke', itemConfig.color ? itemConfig.color : color);
+				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
+				.style(
+					'stroke',
+					itemConfig.stroke ? itemConfig.stroke : stroke
+				);
 		} else if (itemConfig.type === LegendItemType.LINE) {
 			const lineConfig = Configuration.legend.line;
 
 			if (additionalItem.select('line.line').empty()) {
 				additionalItem
 					.append('line')
-					.classed('line', true)
+					.classed(`line-${countSameTypeItem}`, true)
 					.attr('role', Roles.IMG)
 					.attr('aria-label', 'line')
 					.attr('x1', 0)
 					.attr('y1', lineConfig.yPosition)
 					.attr('x2', width)
 					.attr('y2', lineConfig.yPosition)
-					.attr(
+					.style(
 						'stroke',
-						itemConfig.color ? itemConfig.color : lineConfig.color
+						itemConfig.stroke
+							? itemConfig.stroke
+							: lineConfig.stroke
 					)
-					.attr('stroke-width', lineConfig.strokeWidth);
+					.style('stroke-width', lineConfig.strokeWidth);
 			}
 		} else if (itemConfig.type === LegendItemType.AREA) {
-			const color = itemConfig.color
-				? itemConfig.color
-				: Configuration.legend.area.color;
-
 			if (additionalItem.select('rect.area').empty()) {
 				additionalItem
 					.append('rect')
-					.classed('area', true)
+					.classed(`area-${countSameTypeItem}`, true)
 					.attr('role', Roles.IMG)
 					.attr('aria-label', 'area')
 					.attr('width', width)
 					.attr('height', height)
-					.attr('fill', color);
+					.style(
+						'fill',
+						countSameTypeItem > 3 && !itemConfig.fill
+							? Configuration.legend.area.fill
+							: itemConfig.fill
+					)
+					.style('stroke', itemConfig.stroke);
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {
-			const { iconData, color } = Configuration.legend.size;
+			const { iconData, fill, stroke } = Configuration.legend.size;
 
 			const sizeEnter = additionalItem
 				.attr('fill', 'none')
@@ -257,15 +279,12 @@ export class Legend extends Component {
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
 				.attr('y', (d) => 24 - d.height)
-				.attr('stroke', itemConfig.color ? itemConfig.color : color)
-				.attr('stroke-width', 1);
+				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
+				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
+				.style('stroke-width', 1);
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { iconData } = Configuration.legend.quartile;
-
-			// Set customized color
-			if (itemConfig.color) {
-				iconData[0].color = itemConfig.color;
-			}
+			const { fill, stroke } = itemConfig;
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')
@@ -276,12 +295,20 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.classed('quartile', true)
+				.classed(`quartile-${countSameTypeItem}`, true)
 				.attr('x', (d) => d.x)
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
-				.attr('fill', (d) => d.color);
+				.attr('fill', (d, i) => {
+					// Set customized color
+					if (i == 0 && fill) {
+						return fill;
+					} else if (i == 1 && stroke) {
+						return stroke;
+					}
+					return d.color;
+				});
 		}
 	}
 

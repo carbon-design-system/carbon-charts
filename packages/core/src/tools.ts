@@ -296,7 +296,9 @@ export namespace Tools {
 
 		// Retain default legend additional items
 		if (defaultAdditionalItems && userProvidedAdditionalItems) {
-			const providedTypes = userProvidedAdditionalItems.map((item) => item.type);
+			const providedTypes = userProvidedAdditionalItems.map(
+				(item) => item.type
+			);
 
 			// Remove same type default items if they are provided
 			defaultAdditionalItems = defaultAdditionalItems.filter(
