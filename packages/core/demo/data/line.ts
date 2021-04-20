@@ -457,9 +457,8 @@ export const dualLine = {
 	curve: 'curveMonotoneX',
 };
 
-
 export const lineOptionsLegendOrientation = {
-	title: "Left aligned vertical legend (line)",
+	title: 'Left aligned vertical legend (line)',
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -473,7 +472,7 @@ export const lineOptionsLegendOrientation = {
 		},
 	},
 	legend: {
-		position: "left",
-		orientation: "vertical"
+		position: 'left',
+		orientation: 'vertical',
 	},
 };

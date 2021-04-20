@@ -227,7 +227,7 @@ const utilityDemoGroups = [
 				options: lineDemos.lineOptionsLegendOrientation,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
-			}
+			},
 		],
 	},
 	{
@@ -999,7 +999,6 @@ const mapDemoGroups = (demoGroups) =>
 			}
 
 			demoGroup.demos = demoGroup.demos.map((demo) => {
-				console.log(demo.title);
 				demo.title = demo.options.title;
 				demo.id = `${formatTitleString(
 					demoGroup.title
