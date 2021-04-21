@@ -9,11 +9,11 @@ export default ({ source, target }) => {
 	const pathString = buildPathString(source, target);
 
 	return (
-	<path
-		d={pathString}
-		strokeWidth={1}
-		className={namespace}
-		strokeDasharray={0}
-	/>
+		<path
+			d={pathString}
+			strokeWidth={1}
+			className={namespace}
+			strokeDasharray={0}
+		/>
 	);
 };

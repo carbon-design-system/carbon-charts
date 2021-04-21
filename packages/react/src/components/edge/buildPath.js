@@ -14,4 +14,4 @@ export default (source, target) => {
 	path.lineTo(tx, ty);
 
 	return path.toString();
-  }
+};

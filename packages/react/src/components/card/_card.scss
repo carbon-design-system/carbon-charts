@@ -10,6 +10,7 @@
 	.#{$prefix}--#{$charts-prefix}--card {
 		display: flex;
 		background-color: $ui-background;
+		box-sizing: border-box;
 		font-family: carbon--font-family('sans');
 		width: 100%;
 		height: 100%;
