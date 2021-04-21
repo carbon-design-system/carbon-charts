@@ -2,12 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 const MyComponent = () => {
-	return <div>Hello world...</div>
-}
+	return <div>Hello world...</div>;
+};
 
-storiesOf('Graph', module)
-.add('Default', () => <MyComponent />)
-
+storiesOf('Graph', module).add('Default', () => <MyComponent />);
 
 // Components
 // 1. Create a primitive for an edge (SVG)
@@ -38,6 +36,9 @@ storiesOf('Graph', module)
 //  - RenderIcon prop
 //  - RenderAction prop
 
+// Documentation
+// Sync with Cameron on approach to modular components
+
 // Homes
 // Component lives in relevant repo (React, Angular)
 // Styles live in core
@@ -55,7 +56,6 @@ storiesOf('Graph', module)
 // - VisX dendogram
 // - Grommet diagram
 // - React-flow-chart
-
 
 // Ideas
 // - Decide where it makes sense (if at  all) for things like lines, add utilities to core
