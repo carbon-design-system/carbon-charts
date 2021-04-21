@@ -17,7 +17,7 @@ export class GradientUtils extends Service {
 		}
 
 		lg.selectAll('stop').remove();
-		lg.selectAll("stop")
+		lg.selectAll('stop')
 			.data(configs.stops)
 			.enter()
 			.append('stop')

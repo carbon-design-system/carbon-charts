@@ -37,6 +37,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 
@@ -65,6 +66,7 @@ const legend: LegendOptions = {
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null,
+	additionalItems: [],
 };
 
 /**
@@ -75,13 +77,13 @@ export const grid: GridOptions = {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 15,
-		alignWithAxisTicks: false
+		alignWithAxisTicks: false,
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 5,
-		alignWithAxisTicks: false
+		alignWithAxisTicks: false,
 	},
 };
 
@@ -296,6 +298,7 @@ const stackedAreaChart = areaChart;
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,
@@ -311,6 +314,14 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	},
 	points: {
 		filled: true,
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius',
+			},
+		],
 	},
 } as BubbleChartOptions);
 
