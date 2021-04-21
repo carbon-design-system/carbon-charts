@@ -131,6 +131,43 @@ export const simpleBarCustomLegendOrderOptions = {
 	},
 };
 
+export const simpleBarAdditionalLegendItemsOptions = {
+	title: 'Additional legend items (simple bar)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'line',
+				name: 'Line',
+			},
+			{
+				type: 'area',
+				name: 'Area',
+			},
+			{
+				type: 'quartile',
+				name: 'Quartile',
+			},
+			{
+				type: 'size',
+				name: 'Size',
+			},
+			{
+				type: 'radius',
+				name: 'Radius',
+			},
+		],
+	},
+};
+
 // Simple bar with custom tick values
 export const simpleBarDataCustomTicks = [
 	{ group: 'Group 1', value: 0.5 },

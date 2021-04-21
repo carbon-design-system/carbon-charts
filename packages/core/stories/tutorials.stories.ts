@@ -16,7 +16,7 @@ hljs.registerLanguage(
 );
 
 const gettingStartedStories = storiesOf('Docs|Getting Started', module);
-const tutorialStories = storiesOf("Docs|Tutorials", module);
+const tutorialStories = storiesOf('Docs|Tutorials', module);
 
 Object.keys(TUTORIALS).forEach((tutorialKey) => {
 	const tutorial = TUTORIALS[tutorialKey];

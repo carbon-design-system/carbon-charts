@@ -366,8 +366,8 @@ export const lineTimeSeriesRotatedTicksOptions = {
 			scaleType: 'time',
 			mapsTo: 'date',
 			ticks: {
-				rotation: "always"
-			}
+				rotation: 'always',
+			},
 		},
 		left: {
 			mapsTo: 'value',
@@ -455,4 +455,24 @@ export const dualLine = {
 		},
 	},
 	curve: 'curveMonotoneX',
+};
+
+export const lineOptionsLegendOrientation = {
+	title: 'Left aligned vertical legend (line)',
+	axes: {
+		bottom: {
+			title: '2019 Annual Sales Figures',
+			mapsTo: 'key',
+			scaleType: 'labels',
+		},
+		left: {
+			mapsTo: 'value',
+			title: 'Conversion rate',
+			scaleType: 'linear',
+		},
+	},
+	legend: {
+		position: 'left',
+		orientation: 'vertical',
+	},
 };

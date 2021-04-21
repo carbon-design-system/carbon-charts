@@ -60,16 +60,17 @@ export interface BaseChartOptions {
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
 	getFillColor?: (
-		datasetLabel: any,
-		label?: any,
+		group: string,
+		label?: string,
 		data?: any,
 		defaultFillColor?: string
 	) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
+	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
 	getStrokeColor?: (
-		datasetLabel: any,
+		group: string,
 		label?: any,
 		data?: any,
 		defaultStrokeColor?: string
@@ -198,6 +199,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * the key to lookup in charting data for the bubble radius value
 		 */
 		radiusMapsTo?: string;
+		/**
+		 * options for what the bubble radius value maps to
+		 */
+		radiusLabel?: string;
 		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius

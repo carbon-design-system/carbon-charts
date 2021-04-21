@@ -65,16 +65,26 @@ export class AxisChartsTooltip extends Tooltip {
 					label: rangeLabel,
 					value: datum[rangeIdentifier],
 				},
-				{
-					label: options.tooltip.groupLabel,
-					value: datum[groupMapsTo],
-					color: this.model.getFillColor(datum[groupMapsTo]),
-					class: this.model.getColorClassName({
-						classNameTypes: [ColorClassNameTypes.TOOLTIP],
-						dataGroupName: datum[groupMapsTo],
-					}),
-				},
 			];
+
+			if (e.detail.additionalItems) {
+				e.detail.additionalItems.forEach((additionalItem) =>
+					items.push({
+						label: additionalItem.label,
+						value: additionalItem.value,
+					})
+				);
+			}
+
+			items.push({
+				label: options.tooltip.groupLabel,
+				value: datum[groupMapsTo],
+				color: this.model.getFillColor(datum[groupMapsTo]),
+				class: this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.TOOLTIP],
+					dataGroupName: datum[groupMapsTo],
+				}),
+			});
 		} else if (data.length > 1) {
 			items = [
 				{

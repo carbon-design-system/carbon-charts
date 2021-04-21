@@ -42,17 +42,14 @@ export class AxisChart extends Chart {
 		graphFrameComponents: any[],
 		configs?: object
 	) {
+		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			'zoomBar',
 			AxisPositions.TOP,
 			'enabled'
 		);
-		const toolbarEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			'toolbar',
-			'enabled'
-		);
+		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled');
 
 		this.services.cartesianScales.determineAxisDuality();
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
@@ -60,7 +57,7 @@ export class AxisChart extends Chart {
 
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			'axes',
 			mainXAxisPosition,
 			'scaleType'

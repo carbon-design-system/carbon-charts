@@ -114,9 +114,7 @@ export class WordCloud extends Component {
 
 			enteringText
 				.merge(allText)
-				.style('font-size', function (d) {
-					return d.size;
-				})
+				.style('font-size', (d) => `${d.size}px`)
 				.text(function (d) {
 					return d.text;
 				})
@@ -127,6 +125,9 @@ export class WordCloud extends Component {
 						originalClassName: `word ${d.size > 32 ? 'light' : ''}`,
 					})
 				)
+				.style('fill', (d) => {
+					return self.model.getFillColor(d[groupMapsTo], d.text, d);
+				})
 				.attr('text-anchor', 'middle')
 				.transition(
 					self.services.transitions.getTransition(
@@ -134,7 +135,7 @@ export class WordCloud extends Component {
 						animate
 					)
 				)
-				.attr('transform', d => `translate(${d.x}, ${d.y})`)
+				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1);
 		}
 
@@ -173,7 +174,6 @@ export class WordCloud extends Component {
 
 	addEventListeners() {
 		const options = this.getOptions();
-		const { fontSizeMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
 		// Highlights 1 word or unhighlights all

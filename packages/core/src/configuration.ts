@@ -38,6 +38,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 
@@ -66,6 +67,7 @@ const legend: LegendOptions = {
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null,
+	additionalItems: [],
 };
 
 /**
@@ -297,6 +299,7 @@ const stackedAreaChart = areaChart;
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,
@@ -312,6 +315,14 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	},
 	points: {
 		filled: true,
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius',
+			},
+		],
 	},
 } as BubbleChartOptions);
 

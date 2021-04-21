@@ -16,7 +16,10 @@ import {
 } from '../components/index';
 
 export class WordCloudChart extends Chart {
-	constructor(holder: Element, chartConfigs: ChartConfig<WorldCloudChartOptions>) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<WorldCloudChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
