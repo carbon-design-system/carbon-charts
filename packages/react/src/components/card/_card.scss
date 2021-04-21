@@ -8,6 +8,26 @@
 
 @include exports('cc-card') {
 	.#{$prefix}--#{$charts-prefix}--card {
-		background-color: yellow;
+		display: flex;
+		background-color: $ui-background;
+		font-family: carbon--font-family('sans');
+		width: 100%;
+		height: 100%;
+		padding: $spacing-04 $spacing-05;
+		border-left: carbon--mini-units(0.5) solid $ui-05;
+		cursor: pointer;
+
+		&:focus {
+			@include focus-outline();
+		}
+
+		&__title {
+			@include carbon--type-style($name: productive-heading-01);
+			margin-bottom: 1px;
+		}
+
+		&__description {
+			@include carbon--type-style($name: body-short-01);
+		}
 	}
 }
