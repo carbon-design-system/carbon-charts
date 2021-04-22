@@ -1,4 +1,4 @@
-import { ZoomBarTypes } from './interfaces';
+import { LegendItemType, ZoomBarTypes } from './interfaces';
 import { easeCubicInOut } from 'd3';
 
 export const area = {
@@ -33,6 +33,15 @@ export const circlePack = {
 		inner: 2,
 	},
 	hierarchyLevel: 2,
+	// only want to add this if zoom is enabled
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.ZOOM,
+				name: 'Zoom',
+			},
+		],
+	},
 };
 
 export const color = {
@@ -111,6 +120,12 @@ export const legend = {
 			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' },
 		],
 	},
+	zoom: {
+		iconData: [
+			{ x: 0, y: 0, width: 12, height: 12 },
+		],
+		color: '#8D8D8D',
+	}
 };
 
 export const lines = {

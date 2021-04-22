@@ -41,6 +41,7 @@ import {
 	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
+import { circlePack } from './configuration-non-customizable';
 
 /*
  *****************************
@@ -459,15 +460,10 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 /*
  * options specific to circle pack charts
  */
-const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, {
+const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, circlePack, {
 	data: Tools.merge(chart.data, {
 		groupMapsTo: 'name',
 	}),
-	circlePack: {
-		circles: {
-			fillOpacity: 0.3,
-		},
-	},
 } as CirclePackChartOptions);
 
 export const options = {

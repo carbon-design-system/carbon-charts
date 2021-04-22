@@ -151,14 +151,19 @@ export class Tooltip extends Component {
 			'numCharacter'
 		);
 
+
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
 			return items.map((item) => {
+
+				// get width of the label icon if it exists
+				const labelIconSize = item.labelIcon ? 12 : 0;
+
 				item.value = item.value
 					? this.valueFormatter(item.value, item.label)
 					: item.value;
-				if (item.label && item.label.length > truncationThreshold) {
+				if (item.label && item.label.length + labelIconSize > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
 						truncationType,
@@ -197,20 +202,21 @@ export class Tooltip extends Component {
 							`<li>
 							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
 								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ''}
-								${
-									item.color
-										? '<a style="background-color: ' +
-										  item.color +
-										  '" class="tooltip-color"></a>'
-										: ''
-								}
-								<p class="label">${item.label || ''}</p>
-								<p class="value">${
-									item.value === undefined ||
-									item.value === null
-										? ''
-										: item.value
-								}</p>
+								${item.color
+								? '<a style="background-color: ' +
+								item.color +
+								'" class="tooltip-color"></a>'
+								: ''
+							}
+								<div class="label">
+								<p>${item.label || ''}</p>
+								${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
+								</div>
+								<p class="value">${item.value === undefined ||
+								item.value === null
+								? ''
+								: item.value
+							}</p>
 							</div>
 						</li>`
 					)

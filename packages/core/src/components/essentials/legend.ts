@@ -283,6 +283,32 @@ export class Legend extends Component {
 				.attr('height', (d) => d.height)
 				.attr('fill', (d) => d.color);
 		}
+		else if (itemConfig.type === LegendItemType.ZOOM) {
+			const { iconData, color } = Configuration.legend.zoom;
+
+			const zoomEnter = additionalItem
+				.attr('role', Roles.IMG)
+				.attr('aria-label', 'zoom')
+				.selectAll('g.icon')
+				.data(iconData)
+				.enter();
+
+			zoomEnter
+				.append('g')
+				.attr('x', (d) => d.x)
+				.attr('y', (d) => d.y)
+				.attr('width', (d) => d.width)
+				.attr('height', (d) => d.height)
+				.append("polygon")
+				.attr("points", "13.2,2.9 11.1,2.9 11.1,0.8 10.1,0.8 10.1,2.9 8,2.9 8,3.9 10.1,3.9 10.1,6 11.1,6 11.1,3.9 13.2,3.9 ")
+				.attr("fill", (d) => itemConfig.color ? itemConfig.color : color);
+
+			zoomEnter
+				.append("path")
+				.attr("d", "M6,13.2c-2.8,0-5.1-2.3-5.1-5.1S3.1,2.9,6,2.9v1C3.7,3.9,1.9,5.8,1.9,8s1.9,4.1,4.1,4.1s4.1-1.9,4.1-4.1h1 C11.1,10.9,8.8,13.2,6,13.2z")
+				.attr("fill", (d) => itemConfig.color ? itemConfig.color : color);
+
+		}
 	}
 
 	truncateLegendText(addedLegendItemsText) {
@@ -380,10 +406,11 @@ export class Legend extends Component {
 
 		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const iconWidth =
-			itemType === LegendItemType.CHECKBOX ||
-				itemType === LegendItemType.RADIUS
+			(itemType === LegendItemType.CHECKBOX ||
+				itemType === LegendItemType.RADIUS || itemType === LegendItemType.ZOOM)
 				? Configuration.legend.checkbox.radius * 2
 				: Configuration.legend.area.width;
+
 		const spaceAfter = Configuration.legend.items.spaceAfter;
 
 		const legendItemTextDimensions = DOMUtils.getSVGElementSize(
@@ -519,6 +546,25 @@ export class Legend extends Component {
 					translateOffset
 				)
 				.attr('y', yTextPosition);
+		} else if (itemType === LegendItemType.ZOOM) {
+			legendItem
+				.selectAll('g.icon')
+				.attr(
+					'transform',
+					`translate(${itemConfig.startingPoint
+					}, ${yPosition})`
+				);
+
+			legendItem
+				.select('text')
+				.attr(
+					'x',
+					itemConfig.startingPoint +
+					iconWidth +
+					spaceAfter
+				)
+				.attr('y', yTextPosition);
+
 		} else {
 			legendItem
 				.selectAll('g.icon')

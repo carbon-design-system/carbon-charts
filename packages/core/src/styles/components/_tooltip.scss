@@ -44,6 +44,25 @@
 			justify-content: flex-start;
 			align-items: center;
 
+			div.label {
+				flex: 1;
+				margin-right: 8px;
+
+				span.label-icon svg {
+					height: 1em;
+					width: auto;
+
+					@if $carbon--theme == $carbon--theme--g90 {
+						fill: white;
+					} @else if $carbon--theme == $carbon--theme--g100 {
+						fill: white;
+					} @else {
+						fill: black;
+					}
+
+				}
+			}
+
 			p {
 				white-space: nowrap;
 				overflow: hidden;
@@ -54,11 +73,6 @@
 				margin: 0;
 				padding: 0;
 				border: 0;
-
-				&.label {
-					flex: 1;
-					margin-right: 8px;
-				}
 
 				&.value {
 					width: auto;
@@ -97,7 +111,7 @@
 		top: 0;
 		width: 4px;
 		height: 100%;
-		& + p.label {
+		& + div.label p {
 			margin-left: 4px;
 		}
 	}

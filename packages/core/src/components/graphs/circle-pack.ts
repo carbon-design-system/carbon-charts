@@ -233,6 +233,19 @@ export class CirclePack extends Component {
 			.attr('opacity', 1);
 	};
 
+	getZoomIcon() {
+		return `
+		<?xml version="1.0" encoding="utf-8"?>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+		<g>
+			<polygon points="28,8 24,8 24,4 22,4 22,8 18,8 18,10 22,10 22,14 24,14 24,10 28,10 	"/>
+			<path d="M14,28C8.5,28,4,23.5,4,18S8.5,8,14,8v2c-4.4,0-8,3.6-8,8s3.6,8,8,8s8-3.6,8-8h2C24,23.5,19.5,28,14,28z"/>
+		</g>
+		</svg>
+		`;
+	}
+
 	// add event listeners for tooltip on the circles
 	addEventListeners() {
 		const self = this;
@@ -245,6 +258,13 @@ export class CirclePack extends Component {
 				const disabled = hoveredElement
 					.node()
 					.classList.contains('zoomed-in');
+
+				const canvasZoomEnabled = Tools.getProperty(
+					self.model.getOptions(),
+					'canvasZoom',
+					'enabled'
+				);
+
 				if (!disabled) {
 					// get the children data for the tooltip
 					let childrenData = [];
@@ -253,17 +273,28 @@ export class CirclePack extends Component {
 						childrenData = datum.children.map((child) => {
 							if (child !== null) {
 								// sum up the children values if there are any 3rd level
-								const value =
-									typeof child.data.value === 'number'
-										? child.data.value
-										: child.data.children.reduce(
-												(a, b) => a + b.value,
-												0
-										  );
-								return {
-									label: child.data.name,
-									value: value,
-								};
+								let value;
+								if (typeof child.data.value === 'number') {
+									value = child.data.value;
+
+									return {
+										label: child.data.name,
+										value: value,
+									};
+
+								} else {
+									value = child.data.children.reduce(
+										(a, b) => a + b.value,
+										0
+									);
+
+									return {
+										label: child.data.name,
+										labelIcon: canvasZoomEnabled ? self.getZoomIcon() : null,
+										value: value,
+									};
+								}
+
 							}
 						});
 						// children get a highlight stroke
