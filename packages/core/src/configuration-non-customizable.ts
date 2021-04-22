@@ -121,11 +121,9 @@ export const legend = {
 		],
 	},
 	zoom: {
-		iconData: [
-			{ x: 0, y: 0, width: 12, height: 12 },
-		],
+		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
 		color: '#8D8D8D',
-	}
+	},
 };
 
 export const lines = {

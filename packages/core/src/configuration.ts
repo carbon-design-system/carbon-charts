@@ -460,11 +460,16 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 /*
  * options specific to circle pack charts
  */
-const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, circlePack, {
-	data: Tools.merge(chart.data, {
-		groupMapsTo: 'name',
-	}),
-} as CirclePackChartOptions);
+const circlePackChart: CirclePackChartOptions = Tools.merge(
+	{},
+	chart,
+	circlePack,
+	{
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'name',
+		}),
+	} as CirclePackChartOptions
+);
 
 export const options = {
 	chart,

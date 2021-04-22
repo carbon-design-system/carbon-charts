@@ -281,7 +281,6 @@ export class CirclePack extends Component {
 										label: child.data.name,
 										value: value,
 									};
-
 								} else {
 									value = child.data.children.reduce(
 										(a, b) => a + b.value,
@@ -290,11 +289,12 @@ export class CirclePack extends Component {
 
 									return {
 										label: child.data.name,
-										labelIcon: canvasZoomEnabled ? self.getZoomIcon() : null,
+										labelIcon: canvasZoomEnabled
+											? self.getZoomIcon()
+											: null,
 										value: value,
 									};
 								}
-
 							}
 						});
 						// children get a highlight stroke
