@@ -22,10 +22,10 @@ const elbow = (source, target, percent = 0.5) => {
 
 	const path = d3Path();
 
-    path.moveTo(sx, sy);
-    path.lineTo(sx + (tx - sx) * percent, sy);
-    path.lineTo(sx + (tx - sx) * percent, ty);
-    path.lineTo(tx, ty);
+	path.moveTo(sx, sy);
+	path.lineTo(sx + (tx - sx) * percent, sy);
+	path.lineTo(sx + (tx - sx) * percent, ty);
+	path.lineTo(tx, ty);
 
 	return path.toString();
 };

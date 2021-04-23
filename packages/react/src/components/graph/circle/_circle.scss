@@ -6,29 +6,23 @@
 @import '~@carbon/elements/scss/import-once/import-once';
 @import '~carbon-components/scss/globals/scss/_helper-mixins';
 
-@include exports('cc-card') {
-	.#{$prefix}--#{$charts-prefix}--card {
+@include exports('cc-circle') {
+	.#{$prefix}--#{$charts-prefix}--circle {
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		background-color: $ui-01;
 		box-sizing: border-box;
 		font-family: carbon--font-family('sans');
 		width: 100%;
 		height: 100%;
-		padding: $spacing-04 $spacing-05;
-		border-left: carbon--mini-units(0.5) solid $ui-05;
-		cursor: pointer;
+		border-radius: 100%;
+		position: relative;
 
-		&:focus {
-			@include focus-outline();
-		}
-
-		&:hover {
-			background-color: $hover-ui;
-		}
-
-		&__icon {
-			padding-right: $spacing-03;
-			padding-top: $spacing-02;
+		&__body {
+			position: absolute;
+			top: calc(100% + #{$spacing-01});
+			text-align: center;
 		}
 
 		&__title {
@@ -41,5 +35,6 @@
 			padding-bottom: $spacing-01;
 			@include carbon--type-style($name: body-short-01);
 		}
+
 	}
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Edge from './edge';
-import {elbow, bezier} from "./buildPath";
+import { elbow, bezier } from './buildPath';
 import './_edge.scss';
 
 const linkSource = { x: 0, y: 0 };
@@ -24,19 +24,19 @@ stories.add('Default', () => (
 stories.add('Dashed', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} variant={"dash-sm"} />
+			<Edge source={linkSource} target={linkTarget} variant={'dash-sm'} />
 		</g>
 
 		<g transform="translate(16,32)">
-			<Edge source={linkSource} target={linkTarget} variant={"dash-md"} />
+			<Edge source={linkSource} target={linkTarget} variant={'dash-md'} />
 		</g>
 
 		<g transform="translate(16,48)">
-			<Edge source={linkSource} target={linkTarget} variant={"dash-lg"} />
+			<Edge source={linkSource} target={linkTarget} variant={'dash-lg'} />
 		</g>
 
 		<g transform="translate(16,64)">
-			<Edge source={linkSource} target={linkTarget} variant={"dash-xl"} />
+			<Edge source={linkSource} target={linkTarget} variant={'dash-xl'} />
 		</g>
 	</svg>
 ));
@@ -44,7 +44,7 @@ stories.add('Dashed', () => (
 stories.add('Double', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} variant={"double"} />
+			<Edge source={linkSource} target={linkTarget} variant={'double'} />
 		</g>
 	</svg>
 ));
@@ -52,7 +52,7 @@ stories.add('Double', () => (
 stories.add('Tunnel', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} variant={"tunnel"} />
+			<Edge source={linkSource} target={linkTarget} variant={'tunnel'} />
 		</g>
 	</svg>
 ));
@@ -68,8 +68,9 @@ stories.add('Elbow', () => (
 stories.add('Bezier', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge path={bezier(linkSource, linkTargetCurve, 150, 280, 150, 30)} />
+			<Edge
+				path={bezier(linkSource, linkTargetCurve, 150, 280, 150, 30)}
+			/>
 		</g>
 	</svg>
 ));
-

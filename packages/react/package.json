@@ -49,6 +49,7 @@
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
 		"@carbon/charts": "^0.41.57",
+		"@carbon/icons-react": "^10.30.0",
 		"@carbon/telemetry": "0.0.0-alpha.6"
 	},
 	"peerDependencies": {

@@ -28,17 +28,12 @@
 		}
 
 		&--tunnel {
-			filter:
-			drop-shadow(0 2px 0 $ui-03)
-			drop-shadow(0 -2px 0 $ui-03)
+			filter: drop-shadow(0 2px 0 $ui-03) drop-shadow(0 -2px 0 $ui-03);
 		}
 
 		&--double {
 			stroke: $ui-background;
-			filter:
-			drop-shadow(0 2px 0 $ui-05)
-			drop-shadow(0 -2px 0 $ui-05);
+			filter: drop-shadow(0 2px 0 $ui-05) drop-shadow(0 -2px 0 $ui-05);
 		}
-
 	}
 }
