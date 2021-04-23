@@ -1,19 +1,22 @@
 import React from 'react';
 import settings from 'carbon-components/src/globals/js/settings';
-import buildPathString from './buildPath';
+import {straight} from './buildPath';
+import classnames from "classnames"
 
 const { prefix } = settings;
 
-export default ({ source, target }) => {
+export default ({ source, target, variant = null, path = straight(source, target) }) => {
 	const namespace = `${prefix}--cc--edge`;
-	const pathString = buildPathString(source, target);
+
+	const pathClasses = classnames(namespace, {
+		[`${namespace}--${variant}`]: variant,
+	});
 
 	return (
 		<path
-			d={pathString}
+			d={path}
 			strokeWidth={1.5}
-			className={namespace}
-			strokeDasharray={0}
+			className={pathClasses}
 		/>
 	);
 };

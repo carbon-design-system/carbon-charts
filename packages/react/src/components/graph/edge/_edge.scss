@@ -9,5 +9,36 @@
 @include exports('cc-edge') {
 	.#{$prefix}--#{$charts-prefix}--edge {
 		stroke: $ui-05;
+		fill: transparent;
+
+		&--dash-sm {
+			stroke-dasharray: 2 4;
+		}
+
+		&--dash-md {
+			stroke-dasharray: 4 4;
+		}
+
+		&--dash-lg {
+			stroke-dasharray: 8 4;
+		}
+
+		&--dash-xl {
+			stroke-dasharray: 16 4;
+		}
+
+		&--tunnel {
+			filter:
+			drop-shadow(0 2px 0 $ui-03)
+			drop-shadow(0 -2px 0 $ui-03)
+		}
+
+		&--double {
+			stroke: $ui-background;
+			filter:
+			drop-shadow(0 2px 0 $ui-05)
+			drop-shadow(0 -2px 0 $ui-05);
+		}
+
 	}
 }

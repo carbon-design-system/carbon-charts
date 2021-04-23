@@ -1,14 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Edge from './edge';
+import {elbow, bezier} from "./buildPath";
 import './_edge.scss';
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
-
+const linkTargetCurve = { x: 400, y: 200 };
 
 const stories = storiesOf('Edge', module);
-stories.addDecorator((story) => <div className="container theme--white">{story()}</div>);
+stories.addDecorator((story) => (
+	<div className="container theme--white">{story()}</div>
+));
 
 stories.add('Default', () => (
 	<svg height="800" width="800">
@@ -18,20 +21,30 @@ stories.add('Default', () => (
 	</svg>
 ));
 
-
 stories.add('Dashed', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
+			<Edge source={linkSource} target={linkTarget} variant={"dash-sm"} />
+		</g>
+
+		<g transform="translate(16,32)">
+			<Edge source={linkSource} target={linkTarget} variant={"dash-md"} />
+		</g>
+
+		<g transform="translate(16,48)">
+			<Edge source={linkSource} target={linkTarget} variant={"dash-lg"} />
+		</g>
+
+		<g transform="translate(16,64)">
+			<Edge source={linkSource} target={linkTarget} variant={"dash-xl"} />
 		</g>
 	</svg>
 ));
 
-
 stories.add('Double', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
+			<Edge source={linkSource} target={linkTarget} variant={"double"} />
 		</g>
 	</svg>
 ));
@@ -39,15 +52,7 @@ stories.add('Double', () => (
 stories.add('Tunnel', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
-		</g>
-	</svg>
-));
-
-stories.add('Straight', () => (
-	<svg height="800" width="800">
-		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
+			<Edge source={linkSource} target={linkTarget} variant={"tunnel"} />
 		</g>
 	</svg>
 ));
@@ -55,15 +60,7 @@ stories.add('Straight', () => (
 stories.add('Elbow', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
-		</g>
-	</svg>
-));
-
-stories.add('Rounded elbow', () => (
-	<svg height="800" width="800">
-		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
+			<Edge path={elbow(linkSource, linkTargetCurve)} />
 		</g>
 	</svg>
 ));
@@ -71,16 +68,8 @@ stories.add('Rounded elbow', () => (
 stories.add('Bezier', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
+			<Edge path={bezier(linkSource, linkTargetCurve, 150, 280, 150, 30)} />
 		</g>
 	</svg>
 ));
 
-
-stories.add('Fill', () => (
-	<svg height="800" width="800">
-		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} />
-		</g>
-	</svg>
-));
