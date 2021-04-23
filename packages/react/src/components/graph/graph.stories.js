@@ -4,11 +4,7 @@ import Card from './card/card';
 import Edge from './edge/edge';
 import Circle from './circle/circle';
 
-import {
-	User16,
-	Wikis16,
-	Debug16
-  } from '@carbon/icons-react';
+import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
 import { elbow } from './edge/buildPath';
 
 const nodeHeight = 64;
@@ -23,14 +19,22 @@ stories.addDecorator((story) => (
 stories.add('Default', () => {
 	return (
 		<svg height="1000" width="1000">
-			<Edge source={{ x: 200, y: 132  }} target={{ x: 600, y: 132  }} variant={'dash-sm'} />
+			<Edge
+				source={{ x: 200, y: 132 }}
+				target={{ x: 600, y: 132 }}
+				variant={'dash-sm'}
+			/>
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
 				transform={`translate(${100},${100})`}
 				height={nodeHeight}
 				width={nodeWidth}>
-				<Card title={'Title'} description={'Description'} renderIcon={<User16 />} />
+				<Card
+					title={'Title'}
+					description={'Description'}
+					renderIcon={<User16 />}
+				/>
 			</foreignObject>
 
 			<foreignObject
@@ -47,15 +51,32 @@ stories.add('Default', () => {
 stories.add('Programmatic', () => {
 	const nodeData = [
 		{ id: 'a', x: 0, y: 0, icon: <User16 />, nodeWidth, nodeHeight },
-		{ id: 'b', x: 250, y: 0, icon: <Wikis16 />, nodeWidth, nodeHeight},
-		{ id: 'c', x: 600, y: 200, icon: <Debug16 />, circle: true, nodeWidth: circleSize, nodeHeight: circleSize },
+		{ id: 'b', x: 250, y: 0, icon: <Wikis16 />, nodeWidth, nodeHeight },
+		{
+			id: 'c',
+			x: 600,
+			y: 200,
+			icon: <Debug16 />,
+			circle: true,
+			nodeWidth: circleSize,
+			nodeHeight: circleSize,
+		},
 		{ id: 'd', x: 20, y: 280, icon: <Wikis16 />, nodeWidth, nodeHeight },
 	];
 
 	const edgeData = [
 		{ source: 'a', target: 'b', variant: 'dash-md' },
-		{ source: 'c', target: 'b', path: (source, target) => elbow(source, target) },
-		{ source: 'd', target: 'c', path: (source, target) => elbow(source, target), variant: 'tunnel' },
+		{
+			source: 'c',
+			target: 'b',
+			path: (source, target) => elbow(source, target),
+		},
+		{
+			source: 'd',
+			target: 'c',
+			path: (source, target) => elbow(source, target),
+			variant: 'tunnel',
+		},
 	];
 
 	const edgeMapped = edgeData.map((link) => {
@@ -82,14 +103,29 @@ stories.add('Programmatic', () => {
 			transform={`translate(${node.x},${node.y})`}
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
-			{  node.circle ?
-				<Circle title={'Title'} description={'Description'} renderIcon={node.icon} /> :
-				<Card title={'Title'} description={'Description'} renderIcon={node.icon} />
-			}
+			{node.circle ? (
+				<Circle
+					title={'Title'}
+					description={'Description'}
+					renderIcon={node.icon}
+				/>
+			) : (
+				<Card
+					title={'Title'}
+					description={'Description'}
+					renderIcon={node.icon}
+				/>
+			)}
 		</foreignObject>
 	));
 	const edges = edgeMapped.map((edge, i) => (
-		<Edge key={`link_${i}`} source={edge.source} target={edge.target} path={edge.path && edge.path(edge.source, edge.target)} variant={edge.variant} />
+		<Edge
+			key={`link_${i}`}
+			source={edge.source}
+			target={edge.target}
+			path={edge.path && edge.path(edge.source, edge.target)}
+			variant={edge.variant}
+		/>
 	));
 
 	return (

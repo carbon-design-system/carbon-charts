@@ -5,7 +5,9 @@ const { prefix } = settings;
 
 export default ({ title, description, renderIcon }) => {
 	const namespace = `${prefix}--cc--card`;
-	const icon = renderIcon ? <div className={`${namespace}__icon`}>{renderIcon}</div> : null;
+	const icon = renderIcon ? (
+		<div className={`${namespace}__icon`}>{renderIcon}</div>
+	) : null;
 
 	return (
 		<div className={namespace} tabIndex={0}>

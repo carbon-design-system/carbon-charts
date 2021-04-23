@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import Card from './card';
 import './_card.scss';
 
-import {User16} from '@carbon/icons-react';
+import { User16 } from '@carbon/icons-react';
 
 const stories = storiesOf('Card', module);
 stories.addDecorator((story) => (

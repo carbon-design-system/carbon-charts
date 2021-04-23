@@ -3,9 +3,7 @@ import { storiesOf } from '@storybook/react';
 import Circle from './circle';
 import './_circle.scss';
 
-import {
-	User16
-  } from '@carbon/icons-react';
+import { User16 } from '@carbon/icons-react';
 
 const stories = storiesOf('Circle', module);
 stories.addDecorator((story) => (
