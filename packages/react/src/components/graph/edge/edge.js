@@ -11,7 +11,7 @@ export default ({ source, target }) => {
 	return (
 		<path
 			d={pathString}
-			strokeWidth={1}
+			strokeWidth={1.5}
 			className={namespace}
 			strokeDasharray={0}
 		/>

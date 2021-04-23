@@ -9,7 +9,7 @@
 @include exports('cc-card') {
 	.#{$prefix}--#{$charts-prefix}--card {
 		display: flex;
-		background-color: $ui-background;
+		background-color: $ui-01;
 		box-sizing: border-box;
 		font-family: carbon--font-family('sans');
 		width: 100%;
@@ -20,6 +20,10 @@
 
 		&:focus {
 			@include focus-outline();
+		}
+
+		&:hover {
+			background-color: $hover-ui;
 		}
 
 		&__title {

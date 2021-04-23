@@ -36,7 +36,10 @@ const edgeMapped = edgeData.map((link) => {
 	};
 });
 
-storiesOf('Graph', module).add('Default', () => {
+const stories = storiesOf('Graph', module);
+stories.addDecorator((story) => <div className="container theme--white">{story()}</div>);
+
+stories.add('Default', () => {
 	const nodes = nodeData.map((node, i) => (
 		<foreignObject
 			style={{ overflow: 'visible' }}
