@@ -245,3 +245,19 @@ $dark-theme-colors: (
 		),
 	),
 );
+
+$dark-theme-legend-area-item-colors: (
+	'1': getColorValue('gray', 90),
+	'2': getColorValue('gray', 80),
+	'3': getColorValue('gray', 70),
+);
+
+$dark-theme-legend-area-item-stroke: getColorValue('gray', 60);
+
+$white-theme-legend-area-item-colors: (
+	'1': getColorValue('gray', 10),
+	'2': getColorValue('gray', 20),
+	'3': getColorValue('gray', 30),
+);
+
+$white-theme-legend-area-item-stroke: getColorValue('gray', 50);

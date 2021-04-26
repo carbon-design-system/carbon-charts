@@ -55,7 +55,8 @@ export interface LegendOptions {
 export interface LegendItem {
 	type: string;
 	name: string;
-	color?: string;
+	fill?: string;
+	stroke?: string;
 }
 
 export interface TooltipOptions {
