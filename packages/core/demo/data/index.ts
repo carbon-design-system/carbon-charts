@@ -223,6 +223,11 @@ const utilityDemoGroups = [
 				data: lineDemos.lineSelectedGroupsData,
 				chartType: chartTypes.LineChart,
 			},
+			{
+				options: lineDemos.lineOptionsLegendOrientation,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
 		],
 	},
 	{
