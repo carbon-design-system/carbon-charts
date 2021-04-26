@@ -67,25 +67,29 @@ export const legend = {
 			{ cx: 7, cy: 7, r: 6.5 },
 			{ cx: 7, cy: 10, r: 3.5 },
 		],
-		color: '#8c8c8c',
+		fill: null,
+		stroke: '#8c8c8c',
 	},
 	line: {
 		yPosition: 6,
 		width: 24,
 		strokeWidth: 1.4,
-		color: '#999999',
+		fill: null,
+		stroke: '#999999',
 	},
 	area: {
 		width: 24,
 		height: 13,
-		color: '#c6c6c6',
+		fill: '#6f6f6f',
+		stroke: null,
 	},
 	size: {
 		iconData: [
 			{ width: 23, height: 12 },
 			{ width: 13, height: 6 },
 		],
-		color: '#8D8D8D',
+		fill: null,
+		stroke: '#8D8D8D',
 	},
 	quartile: {
 		iconData: [
