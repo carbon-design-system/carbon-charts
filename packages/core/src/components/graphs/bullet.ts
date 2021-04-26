@@ -432,8 +432,6 @@ export class Bullet extends Component {
 				});
 			})
 			.on('mousemove', function (datum) {
-				const hoveredElement = select(this);
-
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),

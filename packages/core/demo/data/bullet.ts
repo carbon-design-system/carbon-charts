@@ -41,6 +41,7 @@ export const basicBulletOptions = {
 	axes: {
 		bottom: {
 			mapsTo: 'value',
+			extendLinearDomainBy: 'marker',
 		},
 		left: {
 			scaleType: 'labels',

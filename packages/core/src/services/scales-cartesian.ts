@@ -505,7 +505,7 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { mapsTo, percentage } = axisOptions;
+		const { extendLinearDomainBy, mapsTo, percentage } = axisOptions;
 		const {
 			reference: ratioReference,
 			compareTo: ratioCompareTo,
@@ -581,7 +581,13 @@ export class CartesianScales extends Service {
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			if (extendLinearDomainBy) {
+				allDataValues = displayData.map((datum) =>
+					Math.max(datum[mapsTo], datum[extendLinearDomainBy])
+				);
+			} else {
+				allDataValues = displayData.map((datum) => datum[mapsTo]);
+			}
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {

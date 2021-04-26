@@ -77,7 +77,7 @@ export class Legend extends Component {
 			.style('fill', (d) =>
 				d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) ||
-					this.model.getStrokeColor(d.name)
+					  this.model.getStrokeColor(d.name)
 					: null
 			)
 			.classed('active', function (d, i) {
@@ -143,11 +143,7 @@ export class Legend extends Component {
 						indexOfItem++;
 					}
 
-					self.addAdditionalItem(
-						additionalItem,
-						d,
-						indexOfItem
-					);
+					self.addAdditionalItem(additionalItem, d, indexOfItem);
 				});
 			const addedAdditionalItemsText = addedAdditionalItems
 				.append('text')
@@ -285,7 +281,6 @@ export class Legend extends Component {
 				.style('stroke-width', 1);
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { iconData } = Configuration.legend.quartile;
-			const { fill, stroke } = itemConfig;
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')
@@ -296,20 +291,14 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.classed(`quartile-${indexOfItem}`, true)
+				.attr(
+					'class',
+					(d, i) => `quartile-${i === 0 ? 'wrapper' : 'line'}`
+				)
 				.attr('x', (d) => d.x)
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
-				.attr('fill', (d, i) => {
-					// Set customized color
-					if (i == 0 && fill) {
-						return fill;
-					} else if (i == 1 && stroke) {
-						return stroke;
-					}
-					return d.color;
-				});
+				.attr('height', (d) => d.height);
 		}
 	}
 
@@ -409,7 +398,7 @@ export class Legend extends Component {
 		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const iconWidth =
 			itemType === LegendItemType.CHECKBOX ||
-				itemType === LegendItemType.RADIUS
+			itemType === LegendItemType.RADIUS
 				? Configuration.legend.checkbox.radius * 2
 				: Configuration.legend.area.width;
 		const spaceAfter = Configuration.legend.items.spaceAfter;
@@ -438,9 +427,9 @@ export class Legend extends Component {
 			// Place legends in a new line if space is not enough
 			if (
 				itemConfig.startingPoint +
-				iconWidth +
-				spaceAfter +
-				legendItemTextDimensions.width >
+					iconWidth +
+					spaceAfter +
+					legendItemTextDimensions.width >
 				parentSVGDimension.width
 			) {
 				itemConfig.lineNumber++;
@@ -472,7 +461,7 @@ export class Legend extends Component {
 				(!legendOrientation ||
 					legendOrientation === LegendOrientations.HORIZONTAL) &&
 				parseInt(legendItem.select('rect.checkbox').attr('y')) % 24 ===
-				0;
+					0;
 
 			const testVertical =
 				legendOrientation === LegendOrientations.VERTICAL &&
@@ -533,7 +522,8 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${itemConfig.startingPoint - translateOffset}, ${yPosition - 12
+					`translate(${itemConfig.startingPoint - translateOffset}, ${
+						yPosition - 12
 					})`
 				);
 
@@ -542,9 +532,9 @@ export class Legend extends Component {
 				.attr(
 					'x',
 					itemConfig.startingPoint +
-					iconWidth +
-					spaceAfter -
-					translateOffset
+						iconWidth +
+						spaceAfter -
+						translateOffset
 				)
 				.attr('y', yTextPosition);
 		} else {
@@ -552,7 +542,8 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${itemConfig.startingPoint - translateOffset
+					`translate(${
+						itemConfig.startingPoint - translateOffset
 					}, ${yPosition})`
 				);
 
@@ -561,9 +552,9 @@ export class Legend extends Component {
 				.attr(
 					'x',
 					itemConfig.startingPoint +
-					iconWidth +
-					spaceAfter -
-					translateOffset
+						iconWidth +
+						spaceAfter -
+						translateOffset
 				)
 				.attr('y', yTextPosition);
 		}
