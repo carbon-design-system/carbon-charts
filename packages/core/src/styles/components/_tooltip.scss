@@ -45,8 +45,13 @@
 			align-items: center;
 
 			div.label {
+				display: flex;
 				flex: 1;
-				margin-right: 8px;
+
+				p {
+					flex: 1;
+					padding-right: 8px;
+				}
 
 				span.label-icon svg {
 					height: 12px;
@@ -78,6 +83,7 @@
 
 				&.value {
 					width: auto;
+					margin-left: 6px;
 				}
 			}
 

@@ -203,23 +203,18 @@ export class Tooltip extends Component {
 							`<li>
 							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
 								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ''}
-								${
-									item.color
-										? '<a style="background-color: ' +
-										  item.color +
-										  '" class="tooltip-color"></a>'
-										: ''
-								}
+								${item.color
+								? '<a style="background-color: ' +
+								item.color +
+								'" class="tooltip-color"></a>'
+								: ''
+							}
 								<div class="label">
 								<p>${item.label || ''}</p>
 								${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
 								</div>
-								<p class="value">${
-									item.value === undefined ||
-									item.value === null
-										? ''
-										: item.value
-								}</p>
+								${item.value === undefined ||
+								item.value === null ? '' :`<p class="value"/>${item.value}</p>`}
 							</div>
 						</li>`
 					)
