@@ -15,5 +15,9 @@
 			fill-opacity: 30%;
 			stroke: $carbon--gray-20;
 		}
+
+		&.clickable {
+			cursor: pointer;
+		}
 	}
 }

@@ -260,11 +260,16 @@ export class CirclePack extends Component {
 					'enabled'
 				);
 
+				let zoomable = false;
 				if (!disabled) {
 					// get the children data for the tooltip
 					let childrenData = [];
 					let parentValue = null;
 					if (datum.children) {
+						if(datum.depth > 1) {
+							zoomable = true;
+							hoveredElement.classed('clickable', true);
+						}
 						childrenData = datum.children.map((child) => {
 							if (child !== null) {
 								// sum up the children values if there are any 3rd level
@@ -304,6 +309,8 @@ export class CirclePack extends Component {
 						null
 					).getPropertyValue('fill');
 
+					// const zoomable = canvasZoomEnabled && datum
+
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement,
@@ -311,6 +318,9 @@ export class CirclePack extends Component {
 							{
 								color: fillColor,
 								label: datum.data.name,
+								labelIcon: zoomable && canvasZoomEnabled ?
+								self.getZoomIcon()
+								: null,
 								value: parentValue,
 							},
 							...childrenData,

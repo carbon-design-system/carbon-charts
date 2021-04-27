@@ -49,7 +49,10 @@
 				margin-right: 8px;
 
 				span.label-icon svg {
-					height: 1em;
+					height: 12px;
+					padding-top: 3px;
+					vertical-align: top;
+					padding-left: 4px;
 					width: auto;
 
 					@if $carbon--theme == $carbon--theme--g90 {

@@ -143,11 +143,7 @@ export class Legend extends Component {
 						indexOfItem++;
 					}
 
-					self.addAdditionalItem(
-						additionalItem,
-						d,
-						indexOfItem
-					);
+					self.addAdditionalItem(additionalItem, d, indexOfItem);
 				});
 			const addedAdditionalItemsText = addedAdditionalItems
 				.append('text')
