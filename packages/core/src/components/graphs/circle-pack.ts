@@ -235,15 +235,10 @@ export class CirclePack extends Component {
 
 	getZoomIcon() {
 		return `
-		<?xml version="1.0" encoding="utf-8"?>
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-		<g>
-			<polygon points="28,8 24,8 24,4 22,4 22,8 18,8 18,10 22,10 22,14 24,14 24,10 28,10 	"/>
-			<path d="M14,28C8.5,28,4,23.5,4,18S8.5,8,14,8v2c-4.4,0-8,3.6-8,8s3.6,8,8,8s8-3.6,8-8h2C24,23.5,19.5,28,14,28z"/>
-		</g>
-		</svg>
-		`;
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13">
+			<polygon points="7.7 4.82 5.78 4.82 5.78 2.89 4.82 2.89 4.82 4.82 2.89 4.82 2.89 5.78 4.82 5.78 4.82 7.7 5.78 7.7 5.78 5.78 7.7 5.78 7.7 4.82"/>
+			<path d="M9.36,8.67A5.22,5.22,0,0,0,10.59,5.3,5.3,5.3,0,1,0,5.3,10.59,5.22,5.22,0,0,0,8.67,9.36L12.32,13l.68-.68Zm-4.06,1A4.34,4.34,0,1,1,9.63,5.3,4.33,4.33,0,0,1,5.3,9.63Z"/>
+		</svg>`;
 	}
 
 	// add event listeners for tooltip on the circles
