@@ -29,7 +29,7 @@
       options={demo.options} />
   </div>
 
-  <h3 class="marginTop-45">Code sample</h3>
+  <h3 class="marginTop-30">Code sample</h3>
 
   <a href={demo.codesandbox.svelte} target="_blank">
     <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" class="marginTop" />

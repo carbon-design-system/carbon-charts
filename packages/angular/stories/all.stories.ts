@@ -23,7 +23,7 @@ const getTemplate = demo => `
 		</div>
 
 
-		<h3 class="marginTop-45">Code sample</h3>
+		<h3 class="marginTop-30">Code sample</h3>
 
 		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
 			<h5>{{codeFile}}</h5>

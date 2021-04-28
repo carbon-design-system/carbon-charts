@@ -42,7 +42,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 					/>
 				</div>
 
-				<h3 className="marginTop-45">Code sample</h3>
+				<h3 className="marginTop-30">Code sample</h3>
 				<a href={demo.codesandbox.react} target="_blank">
 					<img
 						src="https://codesandbox.io/static/img/play-codesandbox.svg"

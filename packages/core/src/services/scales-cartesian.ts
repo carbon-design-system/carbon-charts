@@ -552,6 +552,7 @@ export class CartesianScales extends Service {
 
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
+
 				if (datum[bounds.upperBoundMapsTo]) {
 					allDataValues.push(datum[bounds.upperBoundMapsTo]);
 				}
@@ -581,13 +582,22 @@ export class CartesianScales extends Service {
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {
-			if (extendLinearDomainBy) {
-				allDataValues = displayData.map((datum) =>
-					Math.max(datum[mapsTo], datum[extendLinearDomainBy])
-				);
-			} else {
-				allDataValues = displayData.map((datum) => datum[mapsTo]);
-			}
+			allDataValues = [];
+
+			displayData.forEach((datum) => {
+				const value = datum[mapsTo];
+				if (value.length === 2) {
+					allDataValues.push(value[0]);
+					allDataValues.push(value[1]);
+				} else {
+					if (extendLinearDomainBy) {
+						allDataValues.push(
+							Math.max(datum[mapsTo], datum[extendLinearDomainBy])
+						);
+					}
+					allDataValues.push(value);
+				}
+			});
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {

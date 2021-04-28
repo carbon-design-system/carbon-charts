@@ -472,6 +472,27 @@ const simpleChartDemos = [
 		],
 	},
 	{
+		title: 'Bar (floating)',
+		demos: [
+			{
+				options: barDemos.floatingHorizontalBarTimeSeriesOptions,
+				data: barDemos.floatingHorizontalBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+				mainDemo: true,
+			},
+			{
+				options: barDemos.floatingBarOptions,
+				data: barDemos.floatingBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.floatingHorizontalBarOptions,
+				data: barDemos.floatingHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+		],
+	},
+	{
 		title: 'Bar (grouped)',
 		description:
 			'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',

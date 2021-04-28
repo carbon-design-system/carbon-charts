@@ -43,7 +43,7 @@ storybookDemoGroups.forEach(demoGroup => {
 						<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
 					</div>
 
-					<h3 class="marginTop-45">Code sample</h3>
+					<h3 class="marginTop-30">Code sample</h3>
 					<a href="${demo.codesandbox.vue}" target="_blank">
 						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" />
 					</a>
