@@ -109,8 +109,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) =>
-				`${numberOfColors}-${pairingOption}-1`
+			(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
 		);
 
 		// Create default color classnames

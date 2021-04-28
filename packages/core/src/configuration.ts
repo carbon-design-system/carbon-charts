@@ -16,12 +16,14 @@ import {
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	WorldCloudChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
+	WordCloudChartTooltipOptions,
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
@@ -35,6 +37,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 
@@ -63,6 +66,7 @@ const legend: LegendOptions = {
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null,
+	additionalItems: [],
 };
 
 /**
@@ -73,11 +77,13 @@ export const grid: GridOptions = {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 15,
+		alignWithAxisTicks: false,
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 5,
+		alignWithAxisTicks: false,
 	},
 };
 
@@ -95,8 +101,8 @@ export const ruler: RulerOptions = {
 export const baseTooltip: TooltipOptions = {
 	enabled: true,
 	showTotal: true,
-	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions,
+	groupLabel: 'Group',
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -292,6 +298,7 @@ const stackedAreaChart = areaChart;
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,
@@ -308,7 +315,39 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	points: {
 		filled: true,
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius',
+			},
+		],
+	},
 } as BubbleChartOptions);
+
+/**
+ * options specific to word cloud charts
+ */
+const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	tooltip: Tools.merge({}, baseTooltip, {
+		wordLabel: 'Word',
+		valueLabel: 'Value',
+	}) as WordCloudChartTooltipOptions,
+	wordCloud: {
+		fontSizeMapsTo: 'value',
+		fontSizeRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 20) / 400,
+				(smallerChartDimension * 75) / 400,
+			];
+		},
+		wordMapsTo: 'word',
+	},
+} as WorldCloudChartOptions);
 
 /**
  * options specific to pie charts
@@ -436,6 +475,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	wordCloudChart,
 };
 
 export * from './configuration-non-customizable';

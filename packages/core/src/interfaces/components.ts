@@ -43,6 +43,20 @@ export interface LegendOptions {
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
 	order?: string[];
+	/**
+	 * customized legend items
+	 */
+	additionalItems?: LegendItem[];
+}
+
+/**
+ * customize the legend item
+ */
+export interface LegendItem {
+	type: string;
+	name: string;
+	fill?: string;
+	stroke?: string;
 }
 
 export interface TooltipOptions {
@@ -100,10 +114,12 @@ export interface GridOptions {
 	y?: {
 		enabled?: boolean;
 		numberOfTicks?: number;
+		alignWithAxisTicks?: boolean;
 	};
 	x?: {
 		enabled?: boolean;
 		numberOfTicks?: number;
+		alignWithAxisTicks?: boolean;
 	};
 }
 

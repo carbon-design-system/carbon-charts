@@ -31,6 +31,14 @@ export const bubbleDoubleLinearOptions = {
 		radiusMapsTo: 'surplus',
 		radiusLabel: 'Surplus',
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'radius',
+				name: 'Surplus',
+			},
+		],
+	},
 };
 
 export const bubbleDiscreteData = [

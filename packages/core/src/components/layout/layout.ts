@@ -163,16 +163,6 @@ export class LayoutComponent extends Component {
 				{ useBBox: true }
 			);
 
-			if (d.data.id === 'legend') {
-				const svgSize = DOMUtils.getSVGElementSize(select(this), {
-					useAttrs: true,
-				});
-
-				if (svgSize.height < 40) {
-					matchingSVGDimensions.height = svgSize.height;
-				}
-			}
-
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal
 					? matchingSVGDimensions.width

@@ -77,27 +77,6 @@ export const sparklineLoadingOptions = {
 	},
 };
 
-export const lineCenteredLegendData = lineData;
-
-export const lineCenteredLegendOptions = {
-	title: 'Line (centered legend)',
-	axes: {
-		bottom: {
-			title: '2019 Annual Sales Figures',
-			mapsTo: 'key',
-			scaleType: 'labels',
-		},
-		left: {
-			mapsTo: 'value',
-			title: 'Conversion rate',
-			scaleType: 'linear',
-		},
-	},
-	legend: {
-		alignment: 'center',
-	},
-};
-
 export const lineLongLabelData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 1', key: 'More', value: 23500 },
@@ -144,7 +123,7 @@ export const lineLongLabelData = [
 ];
 
 export const lineLongLabelOptions = {
-	title: 'Line (discrete with truncated labels)',
+	title: 'Truncated labels (line)',
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -160,7 +139,7 @@ export const lineLongLabelOptions = {
 };
 
 export const lineCustomDomainOptions = {
-	title: 'Line (discrete with customized domain)',
+	title: 'Custom domain (line)',
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -201,7 +180,7 @@ export const lineSelectedGroupsData = [
 ];
 
 export const lineSelectedGroupsOptions = {
-	title: 'Line (selected groups)',
+	title: 'Pre-selected groups (line)',
 	data: {
 		selectedGroups: ['Dataset 1', 'Dataset 3'],
 	},
@@ -220,7 +199,7 @@ export const lineSelectedGroupsOptions = {
 };
 
 export const lineCustomColorOptions = {
-	title: 'Line (custom colors)',
+	title: 'Custom colors (line)',
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -283,26 +262,8 @@ export const lineTimeSeriesOptions = {
 	curve: 'curveMonotoneX',
 };
 
-export const lineTimeSeriesCustomDomainOptions = {
-	title: 'Line (time series with customized domain)',
-	axes: {
-		bottom: {
-			title: '2019 Annual Sales Figures',
-			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
-			mapsTo: 'date',
-			scaleType: 'time',
-		},
-		left: {
-			mapsTo: 'value',
-			title: 'Conversion rate',
-			scaleType: 'linear',
-		},
-	},
-	curve: 'curveMonotoneX',
-};
-
 export const lineTimeSeriesWithThresholdsOptions = {
-	title: 'Line with thresholds (time series)',
+	title: 'Thresholds (line)',
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -398,12 +359,15 @@ export const lineTimeSeriesDataRotatedTicks = [
 ];
 
 export const lineTimeSeriesRotatedTicksOptions = {
-	title: 'Line (time series) - Rotated ticks labels',
+	title: 'Rotated ticks (line)',
 	width: '400px',
 	axes: {
 		bottom: {
 			scaleType: 'time',
 			mapsTo: 'date',
+			ticks: {
+				rotation: 'always',
+			},
 		},
 		left: {
 			mapsTo: 'value',
@@ -412,39 +376,6 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	legend: {
 		clickable: false,
 	},
-};
-
-export const lineHorizontalOptions = {
-	title: 'Line Horizontal (discrete)',
-	axes: {
-		left: {
-			title: '2019 Annual Sales Figures',
-			mapsTo: 'key',
-			scaleType: 'labels',
-		},
-		bottom: {
-			mapsTo: 'value',
-			title: 'Conversion rate',
-			scaleType: 'linear',
-		},
-	},
-};
-
-export const lineTimeSeriesHorizontalOptions = {
-	title: 'Line Horizontal (time series)',
-	axes: {
-		left: {
-			title: '2019 Annual Sales Figures',
-			mapsTo: 'date',
-			scaleType: 'time',
-		},
-		bottom: {
-			mapsTo: 'value',
-			title: 'Conversion rate',
-			scaleType: 'linear',
-		},
-	},
-	curve: 'curveMonotoneY',
 };
 
 // line - empty state
@@ -524,4 +455,24 @@ export const dualLine = {
 		},
 	},
 	curve: 'curveMonotoneX',
+};
+
+export const lineOptionsLegendOrientation = {
+	title: 'Left aligned vertical legend (line)',
+	axes: {
+		bottom: {
+			title: '2019 Annual Sales Figures',
+			mapsTo: 'key',
+			scaleType: 'labels',
+		},
+		left: {
+			mapsTo: 'value',
+			title: 'Conversion rate',
+			scaleType: 'linear',
+		},
+	},
+	legend: {
+		position: 'left',
+		orientation: 'vertical',
+	},
 };

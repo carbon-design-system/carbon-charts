@@ -292,12 +292,12 @@ export class CartesianScales extends Service {
 
 		const boundedValues = [
 			scale(
-				datum[bounds.upperBoundMapsTo]
+				Tools.getProperty(datum, bounds.upperBoundMapsTo) !== null
 					? datum[bounds.upperBoundMapsTo]
 					: value
 			),
 			scale(
-				datum[bounds.lowerBoundMapsTo]
+				Tools.getProperty(datum, bounds.lowerBoundMapsTo) !== null
 					? datum[bounds.lowerBoundMapsTo]
 					: value
 			),
