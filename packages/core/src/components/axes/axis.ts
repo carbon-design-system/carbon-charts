@@ -400,7 +400,7 @@ export class Axis extends Component {
 							.attr('transform', 'rotate(-90)')
 							.attr('y', 0)
 							.attr('x', -(scale.range()[0] / 2))
-							.attr('dy', '1em')
+							.attr('dy', '0.6em')
 							.style('text-anchor', 'middle');
 					}
 					break;
