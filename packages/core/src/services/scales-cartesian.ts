@@ -585,8 +585,8 @@ export class CartesianScales extends Service {
 			allDataValues = [];
 
 			displayData.forEach((datum) => {
-				const value = Tools.getProperty(datum, mapsTo);
-				if (value !== null && Array.isArray(value) && value.length === 2) {
+				const value = datum[mapsTo];
+				if (Array.isArray(value) && value.length === 2) {
 					allDataValues.push(value[0]);
 					allDataValues.push(value[1]);
 				} else {
