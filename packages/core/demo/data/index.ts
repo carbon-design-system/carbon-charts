@@ -473,6 +473,12 @@ const simpleChartDemos = [
 		title: 'Bar (floating)',
 		demos: [
 			{
+				options: barDemos.floatingHorizontalBarTimeSeriesOptions,
+				data: barDemos.floatingHorizontalBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+				mainDemo: true,
+			},
+			{
 				options: barDemos.floatingBarOptions,
 				data: barDemos.floatingBarData,
 				chartType: chartTypes.SimpleBarChart,
@@ -480,11 +486,6 @@ const simpleChartDemos = [
 			{
 				options: barDemos.floatingHorizontalBarOptions,
 				data: barDemos.floatingHorizontalBarData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
-				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
-				data: barDemos.floatingHorizontalBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,
 			},
 		],
