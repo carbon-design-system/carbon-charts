@@ -30,6 +30,13 @@ export interface AxisOptions {
 	 */
 	domain?: AxisDomain[];
 	/**
+	 * an additional key from the charting data that is used to
+	 * extend the domain of an axis by
+	 * (e.g. in the bullet graph we need both the marker &
+	 * the data values to define the domain of the linear scale)
+	 */
+	extendLinearDomainBy?: string;
+	/**
 	 * Whether the Axis should be forced to include 0 as a starting point
 	 * (or ending point, in case of all negative axis).
 	 * Default: true

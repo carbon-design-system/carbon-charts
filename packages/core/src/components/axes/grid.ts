@@ -25,11 +25,12 @@ export class Grid extends Component {
 			'enabled'
 		);
 
+		// Draw the backdrop
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
+
 		if (!isXGridEnabled && !isYGridEnabled) {
 			return;
 		}
-		// Draw the backdrop
-		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
 
 		if (isXGridEnabled) {
 			DOMUtils.appendOrSelect(this.backdrop, 'g.x.grid');

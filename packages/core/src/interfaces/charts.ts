@@ -60,16 +60,17 @@ export interface BaseChartOptions {
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
 	getFillColor?: (
-		datasetLabel: any,
-		label?: any,
+		group: string,
+		label?: string,
 		data?: any,
 		defaultFillColor?: string
 	) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
+	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
 	getStrokeColor?: (
-		datasetLabel: any,
+		group: string,
 		label?: any,
 		data?: any,
 		defaultStrokeColor?: string
@@ -215,6 +216,18 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * enabled scatter dot or not
 		 */
 		enabled?: boolean;
+	};
+}
+
+/**
+ * options specific to bullet charts
+ */
+export interface BulletChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bullets
+	 */
+	bullet?: {
+		performanceAreaTitles?: string[];
 	};
 }
 
