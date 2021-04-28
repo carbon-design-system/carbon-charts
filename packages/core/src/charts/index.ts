@@ -5,6 +5,7 @@ export * from './bar-grouped';
 export * from './bar-stacked';
 export * from './boxplot';
 export * from './bubble';
+export * from './bullet';
 export * from './line';
 export * from './lollipop';
 export * from './scatter';

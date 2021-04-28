@@ -130,7 +130,7 @@ export class Chart {
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
+				y: LayoutGrowth.PREFERRED,
 			},
 		};
 

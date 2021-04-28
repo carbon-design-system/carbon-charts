@@ -2,6 +2,7 @@ import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
+import * as bulletDemos from './bullet';
 import * as comboDemos from './combo';
 import * as donutDemos from './donut';
 import * as gaugeDemos from './gauge';
@@ -23,6 +24,7 @@ export * from './area';
 export * from './bar';
 export * from './boxplot';
 export * from './bubble';
+export * from './bullet';
 export * from './combo';
 export * from './donut';
 export * from './gauge';
@@ -614,11 +616,6 @@ const simpleChartDemos = [
 				data: bubbleDemos.bubbleDiscreteData,
 				chartType: chartTypes.BubbleChart,
 			},
-		],
-	},
-	{
-		title: 'Gauge',
-		demos: [
 			{
 				options: bubbleDemos.bubbleDualDiscreteOptions,
 				data: bubbleDemos.bubbleDualDiscreteData,
@@ -633,6 +630,16 @@ const simpleChartDemos = [
 				options: bubbleDemos.bubbleSkeletonOptions,
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
+			},
+		],
+	},
+	{
+		title: 'Bullet',
+		demos: [
+			{
+				options: bulletDemos.basicBulletOptions,
+				data: bulletDemos.basicBulletData,
+				chartType: chartTypes.BulletChart,
 			},
 		],
 	},
