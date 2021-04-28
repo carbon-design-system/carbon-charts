@@ -89,7 +89,9 @@ export class StackedArea extends Component {
 					originalClassName: 'area',
 				})
 			)
-			.style('fill', (d) => self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo)))
+			.style('fill', (d) =>
+				self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo))
+			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
 			.transition(
@@ -113,7 +115,10 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition('legend-hover-area')
 			)
 			.attr('opacity', (d) => {
-				if (Tools.getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
+				if (
+					Tools.getProperty(d, 0, groupMapsTo) !==
+					hoveredElement.datum().name
+				) {
 					return Configuration.area.opacity.unselected;
 				}
 

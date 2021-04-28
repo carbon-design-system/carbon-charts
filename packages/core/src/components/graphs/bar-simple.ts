@@ -79,7 +79,7 @@ export class SimpleBar extends Bar {
 					barWidth / 2;
 				const x1 = x0 + barWidth;
 				let y0, y1;
-				if (value.length === 2) {
+				if (Array.isArray(value) && value.length === 2) {
 					y0 = this.services.cartesianScales.getRangeValue(value[0]);
 					y1 = this.services.cartesianScales.getRangeValue(
 						value[1],
