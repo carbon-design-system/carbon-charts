@@ -8,10 +8,10 @@ import { Skeletons } from '../interfaces/enums';
 // Components
 import {
 	Bullet,
+	Grid,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
-	Legend,
 	LayoutComponent,
 	Skeleton,
 } from '../components/index';
@@ -40,6 +40,7 @@ export class BulletChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
+			new Grid(this.model, this.services),
 			new Bullet(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID,
@@ -47,12 +48,7 @@ export class BulletChart extends AxisChart {
 		];
 
 		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents,
-			// {
-			// 	legend: {
-			// 		enabled: false,
-			// 	},
-			// }
+			graphFrameComponents
 		);
 		return components;
 	}

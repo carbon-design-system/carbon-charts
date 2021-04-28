@@ -333,6 +333,14 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 	bullet: {
 		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
 	},
+	grid: {
+		x: {
+			enabled: false,
+		},
+		y: {
+			enabled: false,
+		},
+	},
 } as BulletChartOptions);
 
 /*
