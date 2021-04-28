@@ -25,6 +25,10 @@ export const axis = {
 		verticalSpaceRatio: 2.5,
 		horizontalSpaceRatio: 3.5,
 	},
+	ratio: {
+		reference: 'value',
+		compareTo: 'marker',
+	},
 	paddingRatio: 0.1,
 };
 
@@ -93,8 +97,8 @@ export const legend = {
 	},
 	quartile: {
 		iconData: [
-			{ x: 0, y: 0, width: 24, height: 13, color: '#6929C4' },
-			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' },
+			{ x: 0, y: 0, width: 24, height: 13 },
+			{ x: 11, y: 4, width: 1, height: 4 },
 		],
 	},
 };

@@ -80,7 +80,10 @@ export class Axis extends Component {
 			axisPosition
 		);
 
-		if (this.scaleType === ScaleTypes.LABELS) {
+		if (
+			this.scaleType === ScaleTypes.LABELS ||
+			this.scaleType === ScaleTypes.LABELS_RATIO
+		) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);

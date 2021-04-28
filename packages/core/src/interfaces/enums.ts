@@ -67,6 +67,7 @@ export enum ScaleTypes {
 	LINEAR = 'linear',
 	LOG = 'log',
 	LABELS = 'labels',
+	LABELS_RATIO = 'labels-ratio',
 }
 
 /**

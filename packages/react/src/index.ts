@@ -5,6 +5,7 @@ import SimpleBarChart from './bar-chart-simple';
 import StackedBarChart from './bar-chart-stacked';
 import BoxplotChart from './boxplot-chart';
 import BubbleChart from './bubble-chart';
+import BulletChart from './bullet-chart';
 import DonutChart from './donut-chart';
 import GaugeChart from './gauge-chart';
 import LineChart from './line-chart';
@@ -25,6 +26,7 @@ export {
 	StackedBarChart,
 	BoxplotChart,
 	BubbleChart,
+	BulletChart,
 	DonutChart,
 	GaugeChart,
 	LineChart,

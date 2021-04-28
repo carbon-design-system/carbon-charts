@@ -2,6 +2,7 @@ import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
+import * as bulletDemos from './bullet';
 import * as comboDemos from './combo';
 import * as donutDemos from './donut';
 import * as gaugeDemos from './gauge';
@@ -23,6 +24,7 @@ export * from './area';
 export * from './bar';
 export * from './boxplot';
 export * from './bubble';
+export * from './bullet';
 export * from './combo';
 export * from './donut';
 export * from './gauge';
@@ -470,6 +472,27 @@ const simpleChartDemos = [
 		],
 	},
 	{
+		title: 'Bar (floating)',
+		demos: [
+			{
+				options: barDemos.floatingHorizontalBarTimeSeriesOptions,
+				data: barDemos.floatingHorizontalBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+				mainDemo: true,
+			},
+			{
+				options: barDemos.floatingBarOptions,
+				data: barDemos.floatingBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.floatingHorizontalBarOptions,
+				data: barDemos.floatingHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+		],
+	},
+	{
 		title: 'Bar (grouped)',
 		description:
 			'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',
@@ -607,6 +630,16 @@ const simpleChartDemos = [
 				options: bubbleDemos.bubbleSkeletonOptions,
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
+			},
+		],
+	},
+	{
+		title: 'Bullet',
+		demos: [
+			{
+				options: bulletDemos.basicBulletOptions,
+				data: bulletDemos.basicBulletData,
+				chartType: chartTypes.BulletChart,
 			},
 		],
 	},

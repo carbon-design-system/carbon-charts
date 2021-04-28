@@ -93,5 +93,33 @@
 				}
 			}
 		}
+
+		.quartile {
+			&-wrapper {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: getColorValue('gray', 80);
+					stroke: $dark-theme-legend-area-item-stroke;
+				} @else {
+					fill: getColorValue('gray', 20);
+					stroke: $white-theme-legend-area-item-stroke;
+				}
+			}
+
+			&-line {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: #fff;
+				} @else {
+					fill: #000;
+				}
+			}
+		}
 	}
 }
