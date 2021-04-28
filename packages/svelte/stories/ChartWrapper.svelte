@@ -11,7 +11,7 @@
       {`<${chartType} />`}
     </span>
   </h3>
-  
+
   <p class="props">
     <b>Props:</b>
     data,
