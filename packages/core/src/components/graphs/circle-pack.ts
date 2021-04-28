@@ -266,7 +266,7 @@ export class CirclePack extends Component {
 					let childrenData = [];
 					let parentValue = null;
 					if (datum.children) {
-						if(datum.depth > 1) {
+						if (datum.depth > 1 && canvasZoomEnabled) {
 							zoomable = true;
 							hoveredElement.classed('clickable', true);
 						}
@@ -318,9 +318,10 @@ export class CirclePack extends Component {
 							{
 								color: fillColor,
 								label: datum.data.name,
-								labelIcon: zoomable && canvasZoomEnabled ?
-								self.getZoomIcon()
-								: null,
+								labelIcon:
+									zoomable && canvasZoomEnabled
+										? self.getZoomIcon()
+										: null,
 								value: parentValue,
 							},
 							...childrenData,

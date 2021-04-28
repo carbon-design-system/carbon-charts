@@ -33,15 +33,6 @@ export const circlePack = {
 		inner: 2,
 	},
 	hierarchyLevel: 2,
-	// only want to add this if zoom is enabled
-	legend: {
-		additionalItems: [
-			{
-				type: LegendItemType.ZOOM,
-				name: 'Zoom',
-			},
-		],
-	},
 };
 
 export const color = {
