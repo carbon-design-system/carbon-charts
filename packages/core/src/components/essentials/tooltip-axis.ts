@@ -63,7 +63,7 @@ export class AxisChartsTooltip extends Tooltip {
 					label: domainLabel,
 					value: domainValue,
 				},
-				...(value.length === 2
+				...(Array.isArray(value) && value.length === 2
 					? [
 							{
 								label: 'Start',

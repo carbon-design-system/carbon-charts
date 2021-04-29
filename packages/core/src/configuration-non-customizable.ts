@@ -13,7 +13,7 @@ export const color = {
 
 export const area = {
 	opacity: {
-		unselected: 0,
+		unselected: 0.05,
 		selected: 0.4,
 	},
 };

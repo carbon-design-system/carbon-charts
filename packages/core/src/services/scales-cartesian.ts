@@ -586,7 +586,7 @@ export class CartesianScales extends Service {
 
 			displayData.forEach((datum) => {
 				const value = datum[mapsTo];
-				if (value.length === 2) {
+				if (Array.isArray(value) && value.length === 2) {
 					allDataValues.push(value[0]);
 					allDataValues.push(value[1]);
 				} else {
