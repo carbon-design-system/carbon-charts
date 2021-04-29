@@ -281,7 +281,6 @@ export class Legend extends Component {
 				.style('stroke-width', 1);
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
 			const { iconData } = Configuration.legend.quartile;
-			const { fill, stroke } = itemConfig;
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')
@@ -292,22 +291,17 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.classed(`quartile-${indexOfItem}`, true)
+				.attr(
+					'class',
+					(d, i) => `quartile-${i === 0 ? 'wrapper' : 'line'}`
+				)
 				.attr('x', (d) => d.x)
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
-				.attr('fill', (d, i) => {
-					// Set customized color
-					if (i == 0 && fill) {
-						return fill;
-					} else if (i == 1 && stroke) {
-						return stroke;
-					}
-					return d.color;
-				});
+
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
-			const { iconData, color } = Configuration.legend.zoom;
+			const { iconData, color } = Tools.getProperty(Configuration, 'legend', 'zoom');
 
 			const zoomEnter = additionalItem
 				.attr('role', Roles.IMG)

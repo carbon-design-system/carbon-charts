@@ -265,7 +265,8 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(options, 'axes');
 		const axisOptions = axesOptions[axisPosition];
 		const { mapsTo } = axisOptions;
-		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+		const value =
+			Tools.getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum;
 		let scaledValue;
 		switch (scaleType) {
 			case ScaleTypes.LABELS:
@@ -504,7 +505,11 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { mapsTo, percentage } = axisOptions;
+		const { extendLinearDomainBy, mapsTo, percentage } = axisOptions;
+		const {
+			reference: ratioReference,
+			compareTo: ratioCompareTo,
+		} = Configuration.axis.ratio;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
@@ -534,7 +539,11 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		const dataGroupNames = this.model.getDataGroupNames();
 
-		if (scaleType === ScaleTypes.TIME) {
+		if (scaleType === ScaleTypes.LABELS_RATIO) {
+			return displayData.map(
+				(datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`
+			);
+		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map(
 				(datum) => +new Date(datum[mapsTo])
 			);
@@ -543,6 +552,7 @@ export class CartesianScales extends Service {
 
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
+
 				if (datum[bounds.upperBoundMapsTo]) {
 					allDataValues.push(datum[bounds.upperBoundMapsTo]);
 				}
@@ -572,7 +582,22 @@ export class CartesianScales extends Service {
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			allDataValues = [];
+
+			displayData.forEach((datum) => {
+				const value = datum[mapsTo];
+				if (Array.isArray(value) && value.length === 2) {
+					allDataValues.push(value[0]);
+					allDataValues.push(value[1]);
+				} else {
+					if (extendLinearDomainBy) {
+						allDataValues.push(
+							Math.max(datum[mapsTo], datum[extendLinearDomainBy])
+						);
+					}
+					allDataValues.push(value);
+				}
+			});
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
@@ -602,7 +627,10 @@ export class CartesianScales extends Service {
 			scale = scaleTime();
 		} else if (scaleType === ScaleTypes.LOG) {
 			scale = scaleLog().base(axisOptions.base || 10);
-		} else if (scaleType === ScaleTypes.LABELS) {
+		} else if (
+			scaleType === ScaleTypes.LABELS ||
+			scaleType === ScaleTypes.LABELS_RATIO
+		) {
 			scale = scaleBand();
 		} else {
 			scale = scaleLinear();

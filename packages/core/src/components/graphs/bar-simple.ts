@@ -70,13 +70,25 @@ export class SimpleBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				const barWidth = this.getBarWidth();
+				const value = d[rangeIdentifier];
+
 				const x0 =
 					this.services.cartesianScales.getDomainValue(d, i) -
 					barWidth / 2;
 				const x1 = x0 + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(0);
-				const y1 = this.services.cartesianScales.getRangeValue(d, i);
+				let y0, y1;
+				if (Array.isArray(value) && value.length === 2) {
+					y0 = this.services.cartesianScales.getRangeValue(value[0]);
+					y1 = this.services.cartesianScales.getRangeValue(
+						value[1],
+						i
+					);
+				} else {
+					y0 = this.services.cartesianScales.getRangeValue(0);
+					y1 = this.services.cartesianScales.getRangeValue(d, i);
+				}
 
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {

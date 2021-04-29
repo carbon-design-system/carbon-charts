@@ -119,7 +119,7 @@ export class AxisChart extends Chart {
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
+				y: LayoutGrowth.PREFERRED,
 			},
 		};
 
@@ -138,7 +138,7 @@ export class AxisChart extends Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
+				y: LayoutGrowth.STRETCH,
 			},
 		};
 

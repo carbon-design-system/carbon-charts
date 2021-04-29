@@ -80,7 +80,10 @@ export class Axis extends Component {
 			axisPosition
 		);
 
-		if (this.scaleType === ScaleTypes.LABELS) {
+		if (
+			this.scaleType === ScaleTypes.LABELS ||
+			this.scaleType === ScaleTypes.LABELS_RATIO
+		) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);
@@ -400,7 +403,7 @@ export class Axis extends Component {
 							.attr('transform', 'rotate(-90)')
 							.attr('y', 0)
 							.attr('x', -(scale.range()[0] / 2))
-							.attr('dy', '1em')
+							.attr('dy', '0.75em')
 							.style('text-anchor', 'middle');
 					}
 					break;
@@ -410,7 +413,7 @@ export class Axis extends Component {
 							'transform',
 							`translate(${
 								this.margins.left / 2 + scale.range()[1] / 2
-							}, ${height})`
+							}, ${height + 4})`
 						)
 						.style('text-anchor', 'middle');
 					break;
@@ -426,7 +429,7 @@ export class Axis extends Component {
 							.attr('transform', 'rotate(90)')
 							.attr('y', -width)
 							.attr('x', scale.range()[0] / 2)
-							.attr('dy', '1em')
+							.attr('dy', '0.75em')
 							.style('text-anchor', 'middle');
 					}
 					break;

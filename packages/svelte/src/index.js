@@ -5,6 +5,7 @@ import BarChartSimple from './BarChartSimple.svelte';
 import BarChartStacked from './BarChartStacked.svelte';
 import BoxplotChart from './BoxplotChart.svelte';
 import BubbleChart from './BubbleChart.svelte';
+import BulletChart from './BulletChart.svelte';
 import ComboChart from './ComboChart.svelte';
 import DonutChart from './DonutChart.svelte';
 import LineChart from './LineChart.svelte';
@@ -26,6 +27,7 @@ export {
 	BarChartStacked,
 	BoxplotChart,
 	BubbleChart,
+	BulletChart,
 	ComboChart,
 	DonutChart,
 	LineChart,

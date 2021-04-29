@@ -106,7 +106,9 @@ export class Area extends Component {
 			);
 		}
 
-		const areas = svg.selectAll('path.area').data(groupedData);
+		const areas = svg
+			.selectAll('path.area')
+			.data(groupedData, (group) => group.name);
 
 		const chartprefix = Tools.getProperty(
 			this.getOptions(),
