@@ -5,14 +5,11 @@ All notable changes to this project will be documented in this file. See
 
 ## [0.41.62](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.61...v0.41.62) (2021-04-29)
 
-
 ### Bug Fixes
 
-* **core:** fix minor bug with data values that are undefined ([#1007](https://github.com/carbon-design-system/carbon-charts/issues/1007)) ([5c4db99](https://github.com/carbon-design-system/carbon-charts/commit/5c4db996e3aaf5b8c8146b686945c9eb4a191b46))
-
-
-
-
+-   **core:** fix minor bug with data values that are undefined
+    ([#1007](https://github.com/carbon-design-system/carbon-charts/issues/1007))
+    ([5c4db99](https://github.com/carbon-design-system/carbon-charts/commit/5c4db996e3aaf5b8c8146b686945c9eb4a191b46))
 
 # Change Log
 

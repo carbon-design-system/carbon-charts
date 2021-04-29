@@ -298,10 +298,13 @@ export class Legend extends Component {
 				.attr('x', (d) => d.x)
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
-
+				.attr('height', (d) => d.height);
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
-			const { iconData, color } = Tools.getProperty(Configuration, 'legend', 'zoom');
+			const { iconData, color } = Tools.getProperty(
+				Configuration,
+				'legend',
+				'zoom'
+			);
 
 			const zoomEnter = additionalItem
 				.attr('role', Roles.IMG)

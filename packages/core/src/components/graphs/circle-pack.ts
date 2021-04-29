@@ -102,15 +102,16 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`,
 				});
 			})
-			.attr('r', (d) => d.r)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
+			.attr('r', 0)
 			.transition(
 				this.services.transitions.getTransition(
 					'circlepack-leaf-update-enter',
 					animate
 				)
 			)
+			.attr('r', (d) => d.r)
 			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity);
 
 		if (canvasZoomEnabled === true && this.focal) {
@@ -190,15 +191,15 @@ export class CirclePack extends Component {
 		const chartSvg = select(this.services.domUtils.getHolder());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
-		const zoomSetting = Tools.getProperty(Configuration, 'canvasZoomSettings');
+		const zoomSetting = Tools.getProperty(
+			Configuration,
+			'canvasZoomSettings'
+		);
 
 		chartSvg.on('click', () => {
 			self.focal = null;
 			self.model.updateHierarchyLevel(2);
-			self.services.canvasZoom.zoomOut(
-				canvasSelection,
-				zoomSetting
-			);
+			self.services.canvasZoom.zoomOut(canvasSelection, zoomSetting);
 		});
 	}
 

@@ -673,7 +673,7 @@ const simpleChartDemos = [
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
 			},
-		]
+		],
 	},
 	{
 		title: 'Combo',
