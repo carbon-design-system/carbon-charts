@@ -46,7 +46,7 @@ export class StackedBar extends Bar {
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(stackData, (d) => (d.length > 0 ? d[0][groupMapsTo] : null));
+			.data(stackData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that

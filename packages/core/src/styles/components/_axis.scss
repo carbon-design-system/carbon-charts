@@ -21,6 +21,8 @@
 	}
 
 	.axis-title {
-		font-family: carbon--font-family('regular');
+		font-family: carbon--font-family('sans');
+		font-weight: carbon--font-weight('semibold');
+		fill: $text-01;
 	}
 }
