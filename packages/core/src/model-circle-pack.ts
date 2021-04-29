@@ -22,7 +22,11 @@ export class CirclePackChartModel extends ChartModel {
 
 	setOptions(newOptions) {
 		const options = this.getOptions();
-		const zoomOptions = Tools.merge({}, newOptions, this.getZoomOptions(newOptions));
+		const zoomOptions = Tools.merge(
+			{},
+			newOptions,
+			this.getZoomOptions(newOptions)
+		);
 		Tools.updateLegendAdditionalItems(options, zoomOptions);
 
 		this.set({
@@ -38,7 +42,9 @@ export class CirclePackChartModel extends ChartModel {
 		const displayData = this.getDisplayData();
 		const zoomOptions = options ? options : this.getOptions();
 		const data =
-			displayData.length === 1 ? Tools.getProperty(displayData, 0, 'children') : displayData;
+			displayData.length === 1
+				? Tools.getProperty(displayData, 0, 'children')
+				: displayData;
 		let depth = 2;
 		// check data depth
 		data.forEach((datum) => {
@@ -51,11 +57,9 @@ export class CirclePackChartModel extends ChartModel {
 		});
 
 		if (
-			Tools.getProperty(zoomOptions, 'canvasZoom', 'enabled') ===
-			true &&
+			Tools.getProperty(zoomOptions, 'canvasZoom', 'enabled') === true &&
 			depth > 2
 		) {
-
 			return {
 				legend: {
 					additionalItems: [
@@ -71,7 +75,7 @@ export class CirclePackChartModel extends ChartModel {
 	}
 
 	setZoom(options?) {
-		this.setOptions(this.getZoomOptions(options))
+		this.setOptions(this.getZoomOptions(options));
 	}
 
 	setMonochromatic() {
@@ -99,37 +103,34 @@ export class CirclePackChartModel extends ChartModel {
 		);
 	}
 
-
-
 	// set the datagroup name on the items that are it's children
 	setDataGroups() {
 		const data = this.getData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const newData = data.map(depthOne => {
+		const newData = data.map((depthOne) => {
 			const groupName = depthOne[groupMapsTo];
 			return this.setChildrenDataGroup(depthOne, groupName);
-		})
+		});
 
 		this.set({
-			data: newData
+			data: newData,
 		});
 	}
-
 
 	// sets name recursively down the node tree
 	protected setChildrenDataGroup(node, name) {
 		if (node.children) {
 			return {
-				...node, dataGroupName: name, children: node.children.map((child, i) => {
-					return this.setChildrenDataGroup(child, name)
-
-				})
-			}
-		}
-		else {
-			return { ...node, dataGroupName: name }
+				...node,
+				dataGroupName: name,
+				children: node.children.map((child, i) => {
+					return this.setChildrenDataGroup(child, name);
+				}),
+			};
+		} else {
+			return { ...node, dataGroupName: name };
 		}
 	}
 }
