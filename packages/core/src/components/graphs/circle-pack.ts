@@ -190,13 +190,14 @@ export class CirclePack extends Component {
 		const chartSvg = select(this.services.domUtils.getHolder());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
+		const zoomSetting = Tools.getProperty(Configuration, 'canvasZoomSettings');
 
 		chartSvg.on('click', () => {
 			self.focal = null;
 			self.model.updateHierarchyLevel(2);
 			self.services.canvasZoom.zoomOut(
 				canvasSelection,
-				Configuration.canvasZoomSettings
+				zoomSetting
 			);
 		});
 	}
@@ -233,6 +234,7 @@ export class CirclePack extends Component {
 			.attr('opacity', 1);
 	};
 
+	// Zoom icon to be appended to the label in the tooltip
 	getZoomIcon() {
 		return `
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
