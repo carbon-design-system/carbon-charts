@@ -75,7 +75,7 @@ export class Line extends Component {
 					d
 				);
 				return {
-					name: d[0][groupMapsTo],
+					name: Tools.getProperty(d, 0, groupMapsTo),
 					data: d.map((datum) => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[groupMapsTo]: datum[groupMapsTo],
