@@ -42,7 +42,7 @@ export class CirclePack extends Component {
 		// that root will be the only datagroup (colorscale will be monochrome)
 		if (monochromatic) {
 			// remove want to remove the parent from being rendered
-			displayData = displayData[0].children;
+			displayData = Tools.getProperty(displayData, 0, 'children');
 		}
 
 		const root = d3Hierarchy({
@@ -86,17 +86,12 @@ export class CirclePack extends Component {
 					canvasZoomEnabled && hierarchyLevel === 3
 						? this.getZoomClass(d)
 						: '';
-				// the root(s) of the determine the color
-				let dataGroup = d;
-				while (dataGroup.depth > 1) {
-					dataGroup = dataGroup.parent;
-				}
 				return this.model.getColorClassName({
 					classNameTypes: [
 						ColorClassNameTypes.FILL,
 						ColorClassNameTypes.STROKE,
 					],
-					dataGroupName: dataGroup.data.name,
+					dataGroupName: d.data.dataGroupName,
 					originalClassName: d.children
 						? `node ${originalClass}`
 						: `node node-leaf ${originalClass}`,
@@ -104,7 +99,6 @@ export class CirclePack extends Component {
 			})
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
-			.attr('r', 0)
 			.transition(
 				this.services.transitions.getTransition(
 					'circlepack-leaf-update-enter',

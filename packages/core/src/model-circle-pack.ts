@@ -2,7 +2,7 @@
 import { ChartModel } from './model';
 import * as Configuration from './configuration';
 import { Tools } from './tools';
-import { LegendItemType } from './interfaces/enums';
+import { Events, LegendItemType } from './interfaces/enums';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -15,14 +15,30 @@ export class CirclePackChartModel extends ChartModel {
 
 	setData(newData) {
 		super.setData(newData);
+		this.setDataGroups();
 		this.setMonochromatic();
 		this.setZoom();
 	}
 
-	setZoom() {
+	setOptions(newOptions) {
+		const options = this.getOptions();
+		const zoomOptions = Tools.merge({}, newOptions, this.getZoomOptions(newOptions));
+		Tools.updateLegendAdditionalItems(options, zoomOptions);
+
+		this.set({
+			options: Tools.merge(options, zoomOptions),
+		});
+	}
+
+	getZoomOptions(options?) {
+		if (!this.getDisplayData()) {
+			return {};
+		}
+		// uses the user provided options and data to determine if there is zoom in this CP chart
 		const displayData = this.getDisplayData();
+		const zoomOptions = options ? options : this.getOptions();
 		const data =
-			displayData.length === 1 ? displayData[0].children : displayData;
+			displayData.length === 1 ? Tools.getProperty(displayData, 0, 'children') : displayData;
 		let depth = 2;
 		// check data depth
 		data.forEach((datum) => {
@@ -35,11 +51,12 @@ export class CirclePackChartModel extends ChartModel {
 		});
 
 		if (
-			Tools.getProperty(this.getOptions(), 'canvasZoom', 'enabled') ===
-				true &&
+			Tools.getProperty(zoomOptions, 'canvasZoom', 'enabled') ===
+			true &&
 			depth > 2
 		) {
-			this.setOptions({
+
+			return {
 				legend: {
 					additionalItems: [
 						{
@@ -48,8 +65,13 @@ export class CirclePackChartModel extends ChartModel {
 						},
 					],
 				},
-			});
+			};
 		}
+		return null;
+	}
+
+	setZoom(options?) {
+		this.setOptions(this.getZoomOptions(options))
 	}
 
 	setMonochromatic() {
@@ -75,5 +97,39 @@ export class CirclePackChartModel extends ChartModel {
 				'hierarchyLevel'
 			) || Configuration.circlePack.hierarchyLevel
 		);
+	}
+
+
+
+	// set the datagroup name on the items that are it's children
+	setDataGroups() {
+		const data = this.getData();
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const newData = data.map(depthOne => {
+			const groupName = depthOne[groupMapsTo];
+			return this.setChildrenDataGroup(depthOne, groupName);
+		})
+
+		this.set({
+			data: newData
+		});
+	}
+
+
+	// sets name recursively down the node tree
+	protected setChildrenDataGroup(node, name) {
+		if (node.children) {
+			return {
+				...node, dataGroupName: name, children: node.children.map((child, i) => {
+					return this.setChildrenDataGroup(child, name)
+
+				})
+			}
+		}
+		else {
+			return { ...node, dataGroupName: name }
+		}
 	}
 }
