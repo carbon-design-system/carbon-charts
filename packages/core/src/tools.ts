@@ -4,8 +4,10 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
-	LegendItemType,
+	LegendItemTypes,
 } from './interfaces';
+
+import { defaultLegendAdditionalItems } from './configuration-non-customizable';
 
 import {
 	debounce as lodashDebounce,
@@ -295,25 +297,28 @@ export namespace Tools {
 		);
 
 		// Retain default legend additional items
-		if (defaultAdditionalItems && userProvidedAdditionalItems) {
+		if (defaultAdditionalItems && userProvidedAdditionalItems) {	
 			const providedTypes = userProvidedAdditionalItems.map(
 				(item) => item.type
 			);
+	
+			const defaultTypes = defaultAdditionalItems.map(
+				(item) => item.type
+			)
 
-			// Remove same type default items if they are provided
-			defaultAdditionalItems = defaultAdditionalItems.filter(
-				(item) =>
-					!providedTypes.includes(item.type) &&
-					item.type === LegendItemType.RADIUS
-			);
+			// Get default items in default options but not in provided options
+			const updatedDefaultItems = defaultLegendAdditionalItems.filter(
+				(item) => defaultTypes.includes(item.type) &&
+				!providedTypes.includes(item.type)
+			)
+			
+			defaultOptions.legend.additionalItems = updatedDefaultItems;
 
 			providedOptions.legend.additionalItems = Tools.unionBy(
-				defaultAdditionalItems,
+				updatedDefaultItems,
 				userProvidedAdditionalItems,
 				'name'
 			);
-
-			defaultOptions.legend.additionalItems = [];
 		}
 	}
 
