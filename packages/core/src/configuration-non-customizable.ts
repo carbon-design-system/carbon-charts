@@ -1,5 +1,5 @@
-import { LegendItemType, ZoomBarTypes } from './interfaces';
-import { easeCubicInOut } from 'd3';
+import { ZoomBarTypes } from './interfaces';
+import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
 	opacity: {

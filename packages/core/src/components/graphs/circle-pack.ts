@@ -261,6 +261,7 @@ export class CirclePack extends Component {
 				if (!disabled) {
 					// get the children data for the tooltip
 					let childrenData = [];
+					let totalValue = [];
 					let parentValue = null;
 					if (datum.children) {
 						if (datum.depth > 1 && canvasZoomEnabled) {
@@ -294,6 +295,12 @@ export class CirclePack extends Component {
 								}
 							}
 						});
+
+						totalValue = [{
+							label: "Total",
+							value: datum.value,
+							bold: true
+						}];
 						// children get a highlight stroke
 						self.highlightChildren(datum.children);
 					} else {
@@ -305,8 +312,6 @@ export class CirclePack extends Component {
 						this,
 						null
 					).getPropertyValue('fill');
-
-					// const zoomable = canvasZoomEnabled && datum
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -322,6 +327,7 @@ export class CirclePack extends Component {
 								value: parentValue,
 							},
 							...childrenData,
+							...totalValue
 						],
 					});
 				}

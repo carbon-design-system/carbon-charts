@@ -646,36 +646,6 @@ const simpleChartDemos = [
 		],
 	},
 	{
-		title: 'Circle Pack',
-		demos: [
-			{
-				data: circlePackDemos.circlePackSingleLevelData,
-				options: circlePackDemos.circlePackSingleOptions,
-				chartType: chartTypes.CirclePackChart,
-			},
-			{
-				data: circlePackDemos.circlePackTwoLevelData,
-				options: circlePackDemos.circlePackTwoLevelOptions,
-				chartType: chartTypes.CirclePackChart,
-			},
-			{
-				data: circlePackDemos.circlePackThreeLevelData,
-				options: circlePackDemos.circlePackThreeLevelOptions,
-				chartType: chartTypes.CirclePackChart,
-			},
-			{
-				data: circlePackDemos.circlePackThreeLevelsMonochromeData,
-				options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
-				chartType: chartTypes.CirclePackChart,
-			},
-			{
-				data: circlePackDemos.circlePackThreeLevelData,
-				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
-				chartType: chartTypes.CirclePackChart,
-			},
-		],
-	},
-	{
 		title: 'Combo',
 		demos: [
 			{
@@ -1017,6 +987,36 @@ const complexChartDemos = [
 				data: treemapDemos.treemapData,
 				options: treemapDemos.treemapOptions,
 				chartType: chartTypes.TreemapChart,
+			},
+		],
+	},
+	{
+		title: 'Circle Pack',
+		demos: [
+			{
+				data: circlePackDemos.circlePackSingleLevelData,
+				options: circlePackDemos.circlePackSingleOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackTwoLevelData,
+				options: circlePackDemos.circlePackTwoLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelsMonochromeData,
+				options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},
