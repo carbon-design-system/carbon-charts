@@ -43,17 +43,9 @@ export class CanvasZoom extends Service {
 			.ease(settings.ease)
 			.attr(
 				'transform',
-				`translate(` +
-					width / 2 +
-					`,` +
-					height / 2 +
-					`)scale(` +
-					zoomLevel +
-					`)translate(` +
-					-x +
-					`,` +
-					-y +
-					`)`
+				`translate(${width / 2}, ${
+					height / 2
+				}) scale(${zoomLevel}) translate(${-x},${-y})`
 			);
 
 		// Dispatch canvas zoom in event
@@ -73,9 +65,6 @@ export class CanvasZoom extends Service {
 			.attr('transform', '');
 
 		// Dispatch canvas zoom out event
-		this.services.events.dispatchEvent(
-			Events.CanvasZoom.CANVAS_ZOOM_OUT,
-			{}
-		);
+		this.services.events.dispatchEvent(Events.CanvasZoom.CANVAS_ZOOM_OUT);
 	}
 }

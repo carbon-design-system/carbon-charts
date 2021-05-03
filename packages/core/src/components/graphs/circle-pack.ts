@@ -65,7 +65,7 @@ export class CirclePack extends Component {
 			.descendants()
 			.splice(1)
 			.filter((node) => {
-				//filter based on hierarchy level
+				// filter based on hierarchy level
 				return node.depth <= hierarchyLevel;
 			});
 
@@ -296,11 +296,13 @@ export class CirclePack extends Component {
 							}
 						});
 
-						totalValue = [{
-							label: "Total",
-							value: datum.value,
-							bold: true
-						}];
+						totalValue = [
+							{
+								label: 'Total',
+								value: datum.value,
+								bold: true,
+							},
+						];
 						// children get a highlight stroke
 						self.highlightChildren(datum.children);
 					} else {
@@ -327,7 +329,7 @@ export class CirclePack extends Component {
 								value: parentValue,
 							},
 							...childrenData,
-							...totalValue
+							...totalValue,
 						],
 					});
 				}

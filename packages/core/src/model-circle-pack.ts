@@ -1,6 +1,5 @@
 // Internal Imports
 import { ChartModel } from './model';
-import * as Configuration from './configuration';
 import { Tools } from './tools';
 import { Events, LegendItemType } from './interfaces/enums';
 
@@ -11,6 +10,7 @@ export class CirclePackChartModel extends ChartModel {
 
 	constructor(services: any) {
 		super(services);
+		this.set({ depth: 2 }, { skipUpdate: false });
 	}
 
 	setData(newData) {
@@ -29,8 +29,19 @@ export class CirclePackChartModel extends ChartModel {
 		);
 		Tools.updateLegendAdditionalItems(options, zoomOptions);
 
+		let depth = this.getHierarchyLevel();
+		let userProvidedDepth = Tools.getProperty(
+			options,
+			'circlePack',
+			'hierarchyLevel'
+		);
+
 		this.set({
 			options: Tools.merge(options, zoomOptions),
+			depth:
+				userProvidedDepth && userProvidedDepth < 4
+					? userProvidedDepth
+					: depth,
 		});
 	}
 
@@ -45,13 +56,14 @@ export class CirclePackChartModel extends ChartModel {
 			displayData.length === 1
 				? Tools.getProperty(displayData, 0, 'children')
 				: displayData;
-		let depth = 2;
-		// check data depth
-		data.forEach((datum) => {
+
+		let depth = this.getHierarchyLevel();
+		// check the data depth
+		data.some((datum) => {
 			if (datum.children) {
 				if (datum.children.some((item) => item.children)) {
 					depth = 3;
-					return;
+					return false;
 				}
 			}
 		});
@@ -90,17 +102,11 @@ export class CirclePackChartModel extends ChartModel {
 
 	// update the hierarchy level
 	updateHierarchyLevel(depth: number) {
-		this.setOptions({ circlePack: { hierarchyLevel: depth } });
+		this.set({ depth: depth });
 	}
 
 	getHierarchyLevel() {
-		return (
-			Tools.getProperty(
-				this.getOptions(),
-				'circlePack',
-				'hierarchyLevel'
-			) || Configuration.circlePack.hierarchyLevel
-		);
+		return this.get('depth');
 	}
 
 	// set the datagroup name on the items that are it's children
@@ -114,9 +120,12 @@ export class CirclePackChartModel extends ChartModel {
 			return this.setChildrenDataGroup(depthOne, groupName);
 		});
 
-		this.set({
-			data: newData,
-		});
+		this.set(
+			{
+				data: newData,
+			},
+			{ skipUpdate: true }
+		);
 	}
 
 	// sets name recursively down the node tree
