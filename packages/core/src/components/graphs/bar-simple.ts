@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from './bar';
-import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +8,7 @@ import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;

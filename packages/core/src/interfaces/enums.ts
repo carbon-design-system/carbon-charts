@@ -1,6 +1,11 @@
 import * as EventEnums from './events';
 export const Events = EventEnums;
 
+export enum RenderTypes {
+	HTML = 'html',
+	SVG = 'svg',
+}
+
 /**
  * enum of all supported chart themes
  */

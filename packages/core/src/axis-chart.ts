@@ -9,6 +9,7 @@ import {
 	AxisChartOptions,
 	AxisPositions,
 	ScaleTypes,
+	RenderTypes,
 } from './interfaces';
 import {
 	ChartBrush,
@@ -140,6 +141,7 @@ export class AxisChart extends Chart {
 				x: LayoutGrowth.STRETCH,
 				y: LayoutGrowth.STRETCH,
 			},
+			renderType: RenderTypes.SVG
 		};
 
 		const isLegendEnabled =

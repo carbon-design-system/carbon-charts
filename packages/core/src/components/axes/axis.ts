@@ -10,7 +10,7 @@ import {
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { DOMUtils } from '../../services';
-import { AxisTitleOrientations, TickRotations } from '../../interfaces/enums';
+import { AxisTitleOrientations, RenderTypes, TickRotations } from '../../interfaces/enums';
 import * as Configuration from '../../configuration';
 import {
 	computeTimeIntervalName,
@@ -24,6 +24,7 @@ import { axisBottom, axisLeft, axisRight, axisTop } from 'd3-axis';
 
 export class Axis extends Component {
 	type = 'axes';
+	renderType = RenderTypes.SVG;
 
 	margins: any;
 
