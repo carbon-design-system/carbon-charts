@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
 import { Tools } from '../../tools';
-import { ColorClassNameTypes, LegendItemType } from '../../interfaces/enums';
+import {
+	Alignments,
+	ColorClassNameTypes,
+	LegendItemType,
+	RenderTypes,
+} from '../../interfaces/enums';
 import {
 	LegendOrientations,
 	Roles,
@@ -16,27 +21,32 @@ import { select, event } from 'd3-selection';
 
 export class Legend extends Component {
 	type = 'legend';
+	renderType = RenderTypes.HTML;
 
 	render() {
-		const svg = this.getContainerSVG()
-			.attr('role', Roles.GROUP)
-			.attr('data-name', 'legend-items');
 		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, 'legend');
-		let dataGroups = this.model.getDataGroups();
-		const legendOrder = Tools.getProperty(legendOptions, 'order');
+		const alignment = Tools.getProperty(legendOptions, 'alignment');
 
-		if (legendOrder) {
-			dataGroups = this.sortDataGroups(dataGroups, legendOrder);
+		const svg = this.getContainerSVG()
+			.classed('center-aligned', alignment === Alignments.CENTER)
+			.attr('role', Roles.GROUP)
+			.attr('data-name', 'legend-items');
+
+		let dataGroups = this.model.getDataGroups();
+		const userProvidedOrder = Tools.getProperty(legendOptions, 'order');
+
+		if (userProvidedOrder) {
+			dataGroups = this.sortDataGroups(dataGroups, userProvidedOrder);
 		}
 
 		const legendItems = svg
-			.selectAll('g.legend-item')
+			.selectAll('div.legend-item')
 			.data(dataGroups, (dataGroup) => dataGroup.name);
 
 		const addedLegendItems = legendItems
 			.enter()
-			.append('g')
+			.append('div')
 			.classed('legend-item', true)
 			.classed('active', function (d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
@@ -52,9 +62,9 @@ export class Legend extends Component {
 		const checkboxRadius = Configuration.legend.checkbox.radius;
 
 		addedLegendItems
-			.append('rect')
+			.append('div')
 			.classed('checkbox', true)
-			.merge(legendItems.select('rect.checkbox'))
+			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
 			.attr('aria-label', (d) => d.name)
@@ -85,8 +95,8 @@ export class Legend extends Component {
 			});
 
 		const addedLegendItemsText = addedLegendItems
-			.append('text')
-			.merge(legendItems.select('text'));
+			.append('p')
+			.merge(legendItems.select('p'));
 
 		this.truncateLegendText(addedLegendItemsText);
 
@@ -111,14 +121,14 @@ export class Legend extends Component {
 			const self = this;
 
 			const additionalItems = svg
-				.selectAll('g.additional-item')
+				.selectAll('div.additional-item')
 				.data(additionalItemsOption);
 
 			additionalItems.exit().remove();
 
 			const addedAdditionalItems = additionalItems
 				.enter()
-				.append('g')
+				.append('div')
 				.merge(additionalItems)
 				.classed('additional-item', true);
 
@@ -131,7 +141,7 @@ export class Legend extends Component {
 
 			// add different type of legend items
 			addedAdditionalItems
-				.append('g')
+				.append('svg')
 				.classed('icon', true)
 				.each(function (d, i) {
 					const additionalItem = select(this);
@@ -146,8 +156,8 @@ export class Legend extends Component {
 					self.addAdditionalItem(additionalItem, d, indexOfItem);
 				});
 			const addedAdditionalItemsText = addedAdditionalItems
-				.append('text')
-				.merge(addedAdditionalItems.select('text'));
+				.append('p')
+				.merge(addedAdditionalItems.select('p'));
 
 			self.truncateLegendText(addedAdditionalItemsText);
 			this.breakItemsIntoLines(
@@ -168,14 +178,6 @@ export class Legend extends Component {
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
-
-		const alignment = Tools.getProperty(legendOptions, 'alignment');
-		const alignmentOffset = DOMUtils.getAlignmentOffset(
-			alignment,
-			svg,
-			this.getParent()
-		);
-		svg.attr('transform', `translate(${alignmentOffset}, 0)`);
 	}
 
 	sortDataGroups(dataGroups, legendOrder) {
@@ -404,7 +406,7 @@ export class Legend extends Component {
 		const spaceAfter = Configuration.legend.items.spaceAfter;
 
 		const legendItemTextDimensions = DOMUtils.getSVGElementSize(
-			legendItem.select('text'),
+			legendItem.select('p'),
 			{ useBBox: true }
 		);
 		const translateOffset = Configuration.legend.area.width / 2 - 1;
@@ -446,13 +448,13 @@ export class Legend extends Component {
 
 		if (itemType === LegendItemType.CHECKBOX) {
 			legendItem
-				.select('rect.checkbox')
+				.select('div.checkbox')
 				.attr('x', itemConfig.startingPoint)
 				.attr('y', yPosition);
 
 			// Position text
 			legendItem
-				.select('text')
+				.select('p')
 				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
 				.attr('y', yTextPosition);
 
@@ -460,12 +462,12 @@ export class Legend extends Component {
 			const testHorizontal =
 				(!legendOrientation ||
 					legendOrientation === LegendOrientations.HORIZONTAL) &&
-				parseInt(legendItem.select('rect.checkbox').attr('y')) % 24 ===
+				parseInt(legendItem.select('div.checkbox').attr('y')) % 24 ===
 					0;
 
 			const testVertical =
 				legendOrientation === LegendOrientations.VERTICAL &&
-				legendItem.select('rect.checkbox').attr('x') === '0';
+				legendItem.select('div.checkbox').attr('x') === '0';
 
 			const hasCorrectLegendDirection = testHorizontal || testVertical;
 

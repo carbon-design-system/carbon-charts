@@ -52,8 +52,11 @@
 
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
+			background-color: $color;
 			fill: $color;
+
 			&.hovered {
+				background-color: darken($color, 7%);
 				fill: darken($color, 7%);
 			}
 		}

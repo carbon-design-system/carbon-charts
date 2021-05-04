@@ -1,39 +1,52 @@
-g.#{$prefix}--#{$charts-prefix}--legend {
+div.#{$prefix}--#{$charts-prefix}--legend {
+	display: flex;
 	user-select: none;
 
-	g.legend-item {
-		rect.checkbox {
+	&.center-aligned {
+		justify-content: center;
+	}
+
+	div.legend-item {
+		display: flex;
+		align-items: center;
+		margin-right: 12px;
+
+		div.checkbox {
+			width: 13px;
+			height: 13px;
 			stroke-width: 1px;
 			stroke-opacity: 1;
+			margin-right: 4px;
+			border-radius: 1px;
 
 			&:not(.active) {
 				stroke: $text-02;
 				fill: $ui-background;
 			}
 
-			&:not(.active) ~ g.check {
+			&:not(.active) ~ div.check {
 				display: none;
 			}
 		}
 
-		rect.hover-stroke {
+		div.hover-stroke {
 			fill: none;
 			stroke: $carbon--blue-60;
 			stroke-width: 2;
 		}
 
-		g.check > svg path {
+		div.check > svg path {
 			fill: $ui-background;
 			stroke: $ui-background;
 		}
 
-		text {
+		p {
 			font-size: 12px;
 			fill: $text-02;
 		}
 	}
 
-	&.clickable g.legend-item:hover {
+	&.clickable div.legend-item:hover {
 		cursor: pointer;
 	}
 }

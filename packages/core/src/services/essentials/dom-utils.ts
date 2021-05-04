@@ -15,6 +15,13 @@ import ResizeObserver from 'resize-observer-polyfill';
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
 export class DOMUtils extends Service {
+	static getHTMLElementSize(element: HTMLElement) {
+		return {
+			width: element.clientWidth,
+			height: element.clientHeight,
+		};
+	}
+
 	static getSVGElementSize(
 		svgSelector: Selection<any, any, any, any>,
 		options?: any
@@ -191,8 +198,7 @@ export class DOMUtils extends Service {
 		// Add width & height to the chart holder if necessary, and add a classname
 		this.styleHolderElement();
 
-		// Add main SVG
-		this.addSVGElement();
+		this.addHTMLWrapper();
 		this.verifyCSSStylesBeingApplied();
 
 		if (this.model.getOptions().resizable) {
@@ -200,6 +206,21 @@ export class DOMUtils extends Service {
 		}
 
 		this.addHolderListeners();
+	}
+
+	addHTMLWrapper() {
+		const options = this.model.getOptions();
+		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
+
+		const svg = select(this.getHolder())
+			.append('div')
+			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
+			.style('height', '100%')
+			.style('width', '100%');
+
+		svg.append('g').attr('class', CSS_VERIFIER_ELEMENT_CLASSNAME);
+
+		this.svg = svg.node();
 	}
 
 	update() {
@@ -236,21 +257,6 @@ export class DOMUtils extends Service {
 
 	getHolder() {
 		return this.model.get('holder');
-	}
-
-	addSVGElement() {
-		const options = this.model.getOptions();
-		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
-
-		const svg = select(this.getHolder())
-			.append('svg')
-			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
-			.attr('height', '100%')
-			.attr('width', '100%');
-
-		svg.append('g').attr('class', CSS_VERIFIER_ELEMENT_CLASSNAME);
-
-		this.svg = svg.node();
 	}
 
 	verifyCSSStylesBeingApplied() {

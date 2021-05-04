@@ -9,8 +9,15 @@ import { select } from 'd3-selection';
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
 
+export enum RenderTypes {
+	HTML = 'html',
+	SVG = 'svg',
+}
+
 export class Component {
 	public type: string;
+	public renderType = RenderTypes.HTML;
+
 	public id: string;
 
 	protected parent: any;
@@ -105,19 +112,21 @@ export class Component {
 			);
 
 			const idSelector = this.id ? `#${this.id}` : '';
-			const svg = DOMUtils.appendOrSelect(
+			const container = DOMUtils.appendOrSelect(
 				this.parent,
-				`g${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
+				`${this.renderType === RenderTypes.SVG ? 'svg' : 'div'}${idSelector}.${
+					settings.prefix
+				}--${chartprefix}--${this.type}`
 			);
 
 			if (configs.withinChartClip) {
 				// get unique chartClipId int this chart from model
 				const chartClipId = this.model.get('chartClipId');
 				if (chartClipId) {
-					svg.attr('clip-path', `url(#${chartClipId})`);
+					container.attr('clip-path', `url(#${chartClipId})`);
 				}
 			}
-			return svg;
+			return container;
 		}
 
 		return this.parent;

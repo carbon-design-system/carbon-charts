@@ -1,20 +1,21 @@
 // Internal Imports
-import { Component } from '../component';
+import { Component, RenderTypes } from '../component';
 import { DOMUtils } from '../../services';
 import { Events } from './../../interfaces';
 
 export class Title extends Component {
 	type = 'title';
+	renderType = RenderTypes.HTML;
 
 	render() {
 		const svg = this.getContainerSVG();
 
 		const text = svg
-			.selectAll('text.title')
+			.selectAll('p.title')
 			.data([this.getOptions().title]);
 
 		text.enter()
-			.append('text')
+			.append('p')
 			.classed('title', true)
 			.merge(text)
 			.attr('x', 0)
@@ -23,12 +24,12 @@ export class Title extends Component {
 
 		// check the max space the title has to render
 		const maxWidth = this.getMaxTitleWidth();
-		const title = DOMUtils.appendOrSelect(svg, 'text.title');
+		const title = DOMUtils.appendOrSelect(svg, 'p.title');
 
-		// check if title needs truncation (and tooltip support)
-		if (title.node().getComputedTextLength() > maxWidth && maxWidth > 0) {
-			this.truncateTitle(title, maxWidth);
-		}
+		// // check if title needs truncation (and tooltip support)
+		// if (title.node().getComputedTextLength() > maxWidth && maxWidth > 0) {
+		// 	this.truncateTitle(title, maxWidth);
+		// }
 		text.exit().remove();
 	}
 

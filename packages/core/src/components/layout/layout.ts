@@ -5,6 +5,7 @@ import {
 	LayoutGrowth,
 	LayoutComponentChild,
 	LayoutConfigs,
+	RenderTypes,
 } from '../../interfaces/index';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
@@ -62,16 +63,16 @@ export class LayoutComponent extends Component {
 		const svg = this.parent;
 		let sum = 0;
 
-		svg.selectAll(`svg.layout-child-${this._instanceID}`)
+		svg.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, 'data', 'growth', 'x');
+				const growth = Tools.getProperty(d, 'growth', 'x');
 				return (
 					growth === LayoutGrowth.PREFERRED ||
 					growth === LayoutGrowth.FIXED
 				);
 			})
 			.each(function (d: any) {
-				sum += d.data.size;
+				sum += d.size;
 			});
 
 		return sum;
@@ -81,69 +82,70 @@ export class LayoutComponent extends Component {
 		const svg = this.parent;
 
 		return svg
-			.selectAll(`svg.layout-child-${this._instanceID}`)
+			.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, 'data', 'growth', 'x');
+				const growth = Tools.getProperty(d, 'growth', 'x');
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.size();
 	}
 
 	render(animate = true) {
-		// Get parent SVG to render inside of
-		const svg = this.parent;
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+		// Get parent element to render inside of
+		const parent = this.parent;
 
-		let root = hierarchy({
-			children: this.children,
-		}).sum((d: any) => d.size);
+		const { width, height } = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getHolder()
+		);
 
-		// Grab the correct treemap tile function based on direction
-		const tileType =
-			this.configs.direction === LayoutDirection.ROW ||
-			this.configs.direction === LayoutDirection.ROW_REVERSE
-				? treemapDice
-				: treemapSlice;
-
-		// Compute the position of all elements within the layout
-		treemap().tile(tileType).size([width, height])(root);
-
-		// TODORF - Remove
 		const horizontal =
 			this.configs.direction === LayoutDirection.ROW ||
 			this.configs.direction === LayoutDirection.ROW_REVERSE;
 
-		// Add new SVGs to the DOM for each layout child
-		const updatedSVGs = svg
-			.selectAll(`svg.layout-child-${this._instanceID}`)
-			.data(root.leaves(), (d: any) => d.data.id);
+		// Add new boxes to the DOM for each layout child
+		const updatedBoxes = parent
+			.classed('row', this.configs.direction === LayoutDirection.ROW)
+			.classed(
+				'row-reverse',
+				this.configs.direction === LayoutDirection.ROW_REVERSE
+			)
+			.classed(
+				'column',
+				this.configs.direction === LayoutDirection.COLUMN
+			)
+			.classed(
+				'column-reverse',
+				this.configs.direction === LayoutDirection.COLUMN_REVERSE
+			)
+			.selectAll(`div.layout-child-${this._instanceID}`)
+			.data(this.children, (d: any) => d.id);
 
-		updatedSVGs
-			.attr('width', (d: any) => d.x1 - d.x0)
-			.attr('height', (d: any) => d.y1 - d.y0);
+		const enteringBoxes = updatedBoxes.enter().append('div');
 
-		const enteringSVGs = updatedSVGs
-			.enter()
-			.append('svg')
+		enteringBoxes
+			.merge(parent.selectAll(`div.layout-child-${this._instanceID}`))
 			.attr(
 				'class',
 				(d: any) =>
-					`layout-child layout-child-${this._instanceID} ${d.data.id}`
+					`layout-child layout-child-${this._instanceID} ${d.id}`
 			)
-			.attr('x', (d: any) => d.x0)
-			.attr('y', (d: any) => d.y0);
-
-		enteringSVGs
-			.merge(svg.selectAll(`svg.layout-child-${this._instanceID}`))
 			.each(function (d: any) {
 				// Set parent component for each child
-				d.data.components.forEach((itemComponent) => {
-					itemComponent.setParent(select(this));
+				d.components.forEach((itemComponent) => {
+					const selection = select(this);
+
+					const renderType = Tools.getProperty(d, 'renderType');
+					const isRenderingSVG = renderType === RenderTypes.SVG;
+					itemComponent.setParent(
+						isRenderingSVG
+							? DOMUtils.appendOrSelect(selection, 'svg.wrapper')
+									.attr('width', '100%')
+									.attr('height', '100%')
+							: selection
+					);
 
 					// Render preffered & fixed items
-					const growth = Tools.getProperty(d, 'data', 'growth', 'x');
+					const growth = Tools.getProperty(d, 'growth', 'x');
 					if (
 						growth === LayoutGrowth.PREFERRED ||
 						growth === LayoutGrowth.FIXED
@@ -153,27 +155,26 @@ export class LayoutComponent extends Component {
 				});
 			});
 
-		svg.selectAll(`svg.layout-child-${this._instanceID}`).each(function (
-			d: any
-		) {
-			// Calculate preffered children sizes after internal rendering
-			const growth = Tools.getProperty(d, 'data', 'growth', 'x');
-			const matchingSVGDimensions = DOMUtils.getSVGElementSize(
-				select(this),
-				{ useBBox: true }
-			);
+		parent
+			.selectAll(`div.layout-child-${this._instanceID}`)
+			.each(function (d: any) {
+				// Calculate preffered children sizes after internal rendering
+				const growth = Tools.getProperty(d, 'growth', 'x');
+				const matchingElementDimensions = DOMUtils.getHTMLElementSize(
+					this
+				);
 
-			if (growth === LayoutGrowth.PREFERRED) {
-				const matchingSVGWidth = horizontal
-					? matchingSVGDimensions.width
-					: matchingSVGDimensions.height;
-				const svgWidth = horizontal ? width : height;
+				if (growth === LayoutGrowth.PREFERRED) {
+					const matchingElementWidth = horizontal
+						? matchingElementDimensions.width
+						: matchingElementDimensions.height;
+					const elementWidth = horizontal ? width : height;
 
-				d.data.size = (matchingSVGWidth / svgWidth) * 100;
-			}
-		});
+					d.size = (matchingElementWidth / elementWidth) * 100;
+				}
+			});
 
-		updatedSVGs.exit().remove();
+		updatedBoxes.exit().remove();
 
 		// Run through stretch x-items
 		this.children
@@ -187,30 +188,25 @@ export class LayoutComponent extends Component {
 					+this.getNumOfStretchChildren();
 			});
 
-		// Pass children data to the hierarchy layout
-		// And calculate sum of sizes
-		root = hierarchy({
-			children: this.children,
-		}).sum((d: any) => d.size);
+		// Update all boxes with new sizing
+		const allUpdatedBoxes = parent
+			.selectAll(`div.layout-child-${this._instanceID}`)
+			.data(this.children, (d: any) => d.id);
 
-		// Compute the position of all elements within the layout
-		treemap().tile(tileType).size([width, height]).padding(0)(root);
+		if (horizontal) {
+			allUpdatedBoxes.style('width', (d) => `${d.size}%`);
+		} else {
+			allUpdatedBoxes.style('height', (d) => `${d.size}%`);
+		}
 
-		// Add new SVGs to the DOM for each layout child
-		svg.selectAll(`svg.layout-child-${this._instanceID}`)
-			.data(root.leaves(), (d: any) => d.data.id)
-			.attr('x', (d: any) => d.x0)
-			.attr('y', (d: any) => d.y0)
-			.attr('width', (d: any) => d.x1 - d.x0)
-			.attr('height', (d: any) => d.y1 - d.y0)
-			.each(function (d: any, i) {
-				d.data.components.forEach((itemComponent) => {
-					const growth = Tools.getProperty(d, 'data', 'growth', 'x');
-					if (growth === LayoutGrowth.STRETCH) {
-						itemComponent.render(animate);
-					}
-				});
+		allUpdatedBoxes.each(function (d: any, i) {
+			d.components.forEach((itemComponent) => {
+				const growth = Tools.getProperty(d, 'growth', 'x');
+				if (growth === LayoutGrowth.STRETCH) {
+					itemComponent.render(animate);
+				}
 			});
+		});
 	}
 
 	// Pass on model to children as well
