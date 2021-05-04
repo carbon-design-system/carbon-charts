@@ -2,13 +2,14 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { area } from 'd3-shape';
 
 export class StackedArea extends Component {
 	type = 'area-stacked';
+	renderType = RenderTypes.SVG;
 
 	areaGenerator: any;
 
