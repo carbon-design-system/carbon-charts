@@ -1,43 +1,34 @@
 div.#{$prefix}--#{$charts-prefix}--legend {
 	display: flex;
 	user-select: none;
-
-	&.center-aligned {
-		justify-content: center;
-	}
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: -6px;
 
 	div.legend-item {
 		display: flex;
 		align-items: center;
-		margin-right: 12px;
+		margin: 6px 6px;
 
 		div.checkbox {
 			width: 13px;
 			height: 13px;
-			stroke-width: 1px;
-			stroke-opacity: 1;
 			margin-right: 4px;
-			border-radius: 1px;
+			border-radius: 2px;
+			border: solid 1px $ui-background;
+			box-shadow: 0 0 0 2px transparent;
 
 			&:not(.active) {
-				stroke: $text-02;
-				fill: $ui-background;
+				border-color: $text-02;
+				background: $ui-background;
 			}
 
-			&:not(.active) ~ div.check {
+			svg {
 				display: none;
+				vertical-align: text-top;
+				fill: $ui-background;
+				stroke: $ui-background;
 			}
-		}
-
-		div.hover-stroke {
-			fill: none;
-			stroke: $carbon--blue-60;
-			stroke-width: 2;
-		}
-
-		div.check > svg path {
-			fill: $ui-background;
-			stroke: $ui-background;
 		}
 
 		p {
@@ -46,7 +37,40 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 		}
 	}
 
+	&.center-aligned {
+		justify-content: center;
+	}
+
+	&.has-deactivated-items {
+		div.legend-item {
+			div.checkbox {
+				svg {
+					display: block;
+				}
+			}
+		}
+	}
+
+	&.vertical {
+		margin: -6px -6px;
+		flex-direction: column;
+
+		div.legend-item {
+			margin-right: 0;
+			margin-bottom: 12px;
+		}
+	}
+
 	&.clickable div.legend-item:hover {
 		cursor: pointer;
+
+		div.checkbox {
+			border: solid 1px $ui-background;
+			box-shadow: 0 0 0 2px $carbon--blue-60;
+
+			&:not(.active) {
+				border-color: $text-02;
+			}
+		}
 	}
 }

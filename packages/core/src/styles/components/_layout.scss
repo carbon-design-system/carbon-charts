@@ -1,6 +1,27 @@
-.#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-child {
+.#{$prefix}--#{$charts-prefix}--layout {
+	&-row {
+		display: flex;
+		flex-direction: row;
+	}
+
+	&-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&-row-reverse {
+		display: flex;
+		flex-direction: row-reverse;
+	}
+
+	&-column-reverse {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-svg .layout-child {
 	overflow: visible;
-	display: table;
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-svg-wrapper {

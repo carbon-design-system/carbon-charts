@@ -26,7 +26,7 @@ export class SkeletonLines extends Skeleton {
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
 			useAttrs: true,
 		});
-		svg.attr('width', width).attr('height', height);
+		// svg.attr('width', width).attr('height', height);
 
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
