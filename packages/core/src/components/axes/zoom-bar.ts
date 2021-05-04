@@ -5,6 +5,7 @@ import { Tools } from '../../tools';
 import {
 	AxisPositions,
 	Events,
+	RenderTypes,
 	ScaleTypes,
 	ZoomBarTypes,
 } from '../../interfaces';
@@ -19,6 +20,7 @@ import { event } from 'd3-selection';
 
 export class ZoomBar extends Component {
 	type = 'zoom-bar';
+	renderType = RenderTypes.SVG;
 
 	// The minimum selection x range to trigger handler update
 	// Smaller number may introduce a handler flash during initialization

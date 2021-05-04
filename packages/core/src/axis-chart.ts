@@ -213,6 +213,7 @@ export class AxisChart extends Chart {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED,
 			},
+			renderType: RenderTypes.SVG
 		};
 
 		const topLevelLayoutComponents = [];

@@ -1,3 +1,8 @@
 .#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-child {
 	overflow: visible;
+	display: table;
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-svg-wrapper {
+	overflow: visible;
 }

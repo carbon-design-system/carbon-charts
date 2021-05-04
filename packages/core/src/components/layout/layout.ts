@@ -66,6 +66,7 @@ export class LayoutComponent extends Component {
 		svg.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, 'growth', 'x');
+
 				return (
 					growth === LayoutGrowth.PREFERRED ||
 					growth === LayoutGrowth.FIXED
@@ -83,10 +84,10 @@ export class LayoutComponent extends Component {
 
 		return svg
 			.selectAll(`div.layout-child-${this._instanceID}`)
-			.filter((d: any) => {
-				const growth = Tools.getProperty(d, 'growth', 'x');
-				return growth === LayoutGrowth.STRETCH;
-			})
+			.filter(
+				(d: any) =>
+					Tools.getProperty(d, 'growth', 'x') === LayoutGrowth.STRETCH
+			)
 			.size();
 	}
 
@@ -138,7 +139,10 @@ export class LayoutComponent extends Component {
 					const isRenderingSVG = renderType === RenderTypes.SVG;
 					itemComponent.setParent(
 						isRenderingSVG
-							? DOMUtils.appendOrSelect(selection, 'svg.wrapper')
+							? DOMUtils.appendOrSelect(
+									selection,
+									'svg.layout-svg-wrapper'
+							  )
 									.attr('width', '100%')
 									.attr('height', '100%')
 							: selection
@@ -157,12 +161,22 @@ export class LayoutComponent extends Component {
 
 		parent
 			.selectAll(`div.layout-child-${this._instanceID}`)
+			.style('height', null)
+			.style('width', null)
 			.each(function (d: any) {
 				// Calculate preffered children sizes after internal rendering
 				const growth = Tools.getProperty(d, 'growth', 'x');
-				const matchingElementDimensions = DOMUtils.getHTMLElementSize(
-					this
-				);
+
+				const renderType = Tools.getProperty(d, 'renderType');
+				const matchingElementDimensions =
+					renderType === RenderTypes.SVG
+						? DOMUtils.getSVGElementSize(
+								select(this).select('svg.layout-svg-wrapper'),
+								{
+									useBBox: true,
+								}
+						  )
+						: DOMUtils.getHTMLElementSize(this);
 
 				if (growth === LayoutGrowth.PREFERRED) {
 					const matchingElementWidth = horizontal

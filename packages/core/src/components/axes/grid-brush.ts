@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, ScaleTypes } from '../../interfaces';
+import { Events, RenderTypes, ScaleTypes } from '../../interfaces';
 import { DOMUtils } from '../../services';
 
 // D3 Imports
@@ -13,6 +13,7 @@ export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
 	type = 'grid-brush';
+	renderType = RenderTypes.SVG;
 
 	selectionSelector = 'rect.selection'; // needs to match the class name in d3.brush
 

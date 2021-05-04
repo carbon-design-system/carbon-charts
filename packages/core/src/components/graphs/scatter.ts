@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +13,8 @@ import { select, Selection } from 'd3-selection';
 
 export class Scatter extends Component {
 	type = 'scatter';
+	renderType = RenderTypes.SVG;
+
 	scatterData: any;
 
 	init() {
