@@ -13,7 +13,9 @@ import { ChartModel } from '../../model';
 
 // D3 Imports
 import { select } from 'd3-selection';
-import { hierarchy, treemap, treemapSlice, treemapDice } from 'd3-hierarchy';
+
+// import the settings for the css prefix
+import settings from 'carbon-components/es/globals/js/settings';
 
 // TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
@@ -40,14 +42,6 @@ export class LayoutComponent extends Component {
 
 		this._instanceID = LayoutComponent.instanceID++;
 
-		// Pass children data to the hierarchy layout
-		// And calculate sum of sizes
-		const directionIsReversed =
-			this.configs.direction === LayoutDirection.ROW_REVERSE ||
-			this.configs.direction === LayoutDirection.COLUMN_REVERSE;
-		if (directionIsReversed) {
-			this.children = this.children.reverse();
-		}
 		this.init();
 	}
 
@@ -103,19 +97,28 @@ export class LayoutComponent extends Component {
 			this.configs.direction === LayoutDirection.ROW ||
 			this.configs.direction === LayoutDirection.ROW_REVERSE;
 
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			'style',
+			'prefix'
+		);
+
 		// Add new boxes to the DOM for each layout child
 		const updatedBoxes = parent
-			.classed('row', this.configs.direction === LayoutDirection.ROW)
 			.classed(
-				'row-reverse',
+				`${settings.prefix}--${chartprefix}--layout-row`,
+				this.configs.direction === LayoutDirection.ROW
+			)
+			.classed(
+				`${settings.prefix}--${chartprefix}--layout-row-reverse`,
 				this.configs.direction === LayoutDirection.ROW_REVERSE
 			)
 			.classed(
-				'column',
+				`${settings.prefix}--${chartprefix}--layout-column`,
 				this.configs.direction === LayoutDirection.COLUMN
 			)
 			.classed(
-				'column-reverse',
+				`${settings.prefix}--${chartprefix}--layout-column-reverse`,
 				this.configs.direction === LayoutDirection.COLUMN_REVERSE
 			)
 			.selectAll(`div.layout-child-${this._instanceID}`)
@@ -208,9 +211,13 @@ export class LayoutComponent extends Component {
 			.data(this.children, (d: any) => d.id);
 
 		if (horizontal) {
-			allUpdatedBoxes.style('width', (d) => `${d.size}%`);
+			allUpdatedBoxes
+				.style('width', (d) => `${d.size}%`)
+				.style('height', '100%');
 		} else {
-			allUpdatedBoxes.style('height', (d) => `${d.size}%`);
+			allUpdatedBoxes
+				.style('height', (d) => `${d.size}%`)
+				.style('width', '100%');
 		}
 
 		allUpdatedBoxes.each(function (d: any, i) {

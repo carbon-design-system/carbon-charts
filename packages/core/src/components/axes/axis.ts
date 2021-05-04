@@ -10,7 +10,11 @@ import {
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { DOMUtils } from '../../services';
-import { AxisTitleOrientations, RenderTypes, TickRotations } from '../../interfaces/enums';
+import {
+	AxisTitleOrientations,
+	RenderTypes,
+	TickRotations,
+} from '../../interfaces/enums';
 import * as Configuration from '../../configuration';
 import {
 	computeTimeIntervalName,
@@ -527,6 +531,8 @@ export class Axis extends Component {
 						.selectAll('g.tick text')
 						.nodes();
 
+					console.log('textNodes', textNodes);
+
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
 						(textNode) =>
@@ -547,9 +553,40 @@ export class Axis extends Component {
 						? axis.tickValues().length
 						: scale.ticks().length;
 					const estimatedTickSize = width / ticksNumber / 2;
-					shouldRotateTicks = isTimeScaleType
-						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-						: estimatedTickSize < minTickSize;
+					// shouldRotateTicks = isTimeScaleType
+					// 	? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+					// 	: estimatedTickSize < minTickSize;
+
+					shouldRotateTicks = false;
+
+					const mockTextPiece = invisibleAxisRef
+						.append('text')
+						.text('A');
+
+					const averageLetterWidth = mockTextPiece.node().getBBox()
+						.width;
+
+					console.log(
+						'mockTextPiece',
+						mockTextPiece.node(),
+						averageLetterWidth
+					);
+
+					let lastStartPosition;
+					const textNodes = invisibleAxisRef
+						.selectAll('g.tick')
+						.each(function () {
+							const selection = select(this);
+							const xTransformation = parseFloat(
+								Tools.getTranslationValues(this).tx
+							);
+
+							if (lastStartPosition + (selection.text().length * averageLetterWidth * 0.8) >= xTransformation) {
+								shouldRotateTicks = true;
+							}
+
+							lastStartPosition = xTransformation;
+						});
 				}
 			}
 
