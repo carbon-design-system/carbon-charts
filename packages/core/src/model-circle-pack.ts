@@ -6,7 +6,6 @@ import { Events, LegendItemType } from './interfaces/enums';
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class CirclePackChartModel extends ChartModel {
-
 	constructor(services: any) {
 		super(services);
 		this.set({ depth: 2 }, { skipUpdate: false });
