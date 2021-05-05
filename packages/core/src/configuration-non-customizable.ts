@@ -33,8 +33,8 @@ export const circlePack = {
 		fillOpacity: 0.3,
 	},
 	padding: {
-		outer: 4,
-		inner: 2,
+		mainGroup: 4,
+		children: 2,
 	},
 	hierarchyLevel: 2,
 };

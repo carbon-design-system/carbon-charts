@@ -57,8 +57,8 @@ export class CirclePack extends Component {
 			.padding((d) => {
 				// add 3 px to account for the stroke width 1.5px
 				return d.depth >= 1
-					? Configuration.circlePack.padding.inner + 3
-					: Configuration.circlePack.padding.outer + 3;
+					? Configuration.circlePack.padding.children + 3
+					: Configuration.circlePack.padding.mainGroup + 3;
 			});
 
 		const nodeData = packLayout(root)
