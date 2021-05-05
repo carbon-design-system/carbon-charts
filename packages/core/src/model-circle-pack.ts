@@ -8,13 +8,12 @@ import { Events, LegendItemType } from './interfaces/enums';
 export class CirclePackChartModel extends ChartModel {
 	constructor(services: any) {
 		super(services);
-		this.set({ depth: 2 }, { skipUpdate: false });
+		this.set({ depth: 2 }, { skipUpdate: true });
 	}
 
 	setData(newData) {
 		super.setData(newData);
 		this.setDataGroups();
-
 		this.setZoom();
 	}
 
