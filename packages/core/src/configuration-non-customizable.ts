@@ -83,7 +83,7 @@ export const legend = {
 	},
 	area: {
 		width: 24,
-		height: 13,
+		height: 14,
 		fill: '#6f6f6f',
 		stroke: null,
 	},

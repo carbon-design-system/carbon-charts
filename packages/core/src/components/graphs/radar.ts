@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 import {
 	Point,
@@ -24,6 +24,8 @@ let oldYScale: ScaleLinear<number, number>;
 
 export class Radar extends Component {
 	type = 'radar';
+	renderType = RenderTypes.SVG;
+
 	svg: SVGElement;
 	groupMapsTo: string;
 	uniqueKeys: string[];

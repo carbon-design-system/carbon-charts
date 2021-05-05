@@ -8,6 +8,7 @@ import {
 	ArrowDirections,
 	ColorClassNameTypes,
 	Alignments,
+	RenderTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
 
@@ -21,6 +22,7 @@ const ARROW_DOWN_PATH_STRING = '12,6 8,10 4,6';
 
 export class Gauge extends Component {
 	type = 'gauge';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs so that addEventListeners() can access them
 	arc: any;

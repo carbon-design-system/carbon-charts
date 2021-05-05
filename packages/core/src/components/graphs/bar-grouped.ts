@@ -5,6 +5,7 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 	Roles,
 } from '../../interfaces';
 
@@ -15,6 +16,7 @@ import { ScaleBand, scaleBand } from 'd3-scale';
 
 export class GroupedBar extends Bar {
 	type = 'grouped-bar';
+	renderType = RenderTypes.SVG;
 
 	groupScale: ScaleBand<any>;
 

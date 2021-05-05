@@ -2,17 +2,6 @@
 import { Skeleton } from '../graphs/skeleton';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import {
-	Skeletons,
-	CartesianOrientations,
-	Alignments,
-} from '../../interfaces/enums';
-import * as Configuration from '../../configuration';
-
-// D3 Imports
-import { scaleLinear } from 'd3-scale';
-import { easeLinear } from 'd3-ease';
-import { arc } from 'd3-shape';
 
 export class SkeletonLines extends Skeleton {
 	type = 'skeleton-lines';
@@ -23,9 +12,9 @@ export class SkeletonLines extends Skeleton {
 	render() {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
-		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
-		});
+		// const { width, height } = DOMUtils.getSVGElementSize(parent, {
+		// 	useAttrs: true,
+		// });
 		// svg.attr('width', width).attr('height', height);
 
 		const isDataLoading = Tools.getProperty(

@@ -2,16 +2,19 @@
 import { Title } from './title';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Statuses } from './../../interfaces/enums';
+import { RenderTypes, Statuses } from './../../interfaces/enums';
 import * as Configuration from '../../configuration';
 
 export class MeterTitle extends Title {
 	type = 'meter-title';
+	renderType = RenderTypes.SVG;
 
 	render() {
 		const dataset = this.model.getDisplayData();
 		const options = this.getOptions();
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const { groupMapsTo } = options.data;
 
 		// the title for a meter, is the label for that dataset
@@ -66,6 +69,8 @@ export class MeterTitle extends Title {
 		const containerWidth = containerBounds.width
 			? containerBounds.width
 			: this.parent.node().getAttribute('width');
+
+			console.log("containerWidth", containerWidth)
 
 		// get the status from the model
 		const status = this.model.getStatus();

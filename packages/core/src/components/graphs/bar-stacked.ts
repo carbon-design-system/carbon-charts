@@ -6,6 +6,7 @@ import {
 	Events,
 	CartesianOrientations,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 
 // D3 Imports
@@ -13,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class StackedBar extends Bar {
 	type = 'stacked-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;

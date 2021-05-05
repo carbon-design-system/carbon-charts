@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 
@@ -9,6 +9,7 @@ import { select } from 'd3-selection';
 
 export class Bullet extends Component {
 	type = 'bullet';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;

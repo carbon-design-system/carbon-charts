@@ -1,7 +1,7 @@
 // Internal Imports
 import { Scatter } from './scatter';
 import { DOMUtils } from '../../services';
-import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -11,6 +11,7 @@ import { scaleLinear } from 'd3-scale';
 
 export class Bubble extends Scatter {
 	type = 'bubble';
+	renderType = RenderTypes.SVG;
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const options = this.getOptions();

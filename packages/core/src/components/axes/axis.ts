@@ -531,8 +531,6 @@ export class Axis extends Component {
 						.selectAll('g.tick text')
 						.nodes();
 
-					console.log('textNodes', textNodes);
-
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
 						(textNode) =>

@@ -3,12 +3,12 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	user-select: none;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
-	margin: -6px;
+	margin: -5px;
 
 	div.legend-item {
 		display: flex;
 		align-items: center;
-		margin: 6px 6px;
+		margin: 5px;
 
 		div.checkbox {
 			width: 13px;
@@ -28,6 +28,12 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 				vertical-align: text-top;
 				fill: $ui-background;
 				stroke: $ui-background;
+			}
+		}
+
+		&.additional {
+			svg.icon {
+				margin-right: 4px;
 			}
 		}
 
@@ -52,16 +58,16 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	}
 
 	&.vertical {
-		margin: -6px -6px;
+		margin: -5px;
 		flex-direction: column;
 
 		div.legend-item {
 			margin-right: 0;
-			margin-bottom: 12px;
+			margin-bottom: 10px;
 		}
 	}
 
-	&.clickable div.legend-item:hover {
+	&.clickable div.legend-item:not(.additional):hover {
 		cursor: pointer;
 
 		div.checkbox {
