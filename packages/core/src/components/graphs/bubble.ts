@@ -23,7 +23,7 @@ export class Bubble extends Scatter {
 			.map((d) => d[radiusMapsTo])
 			.filter((radius) => radius);
 		const chartSize = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
+			this.services.domUtils.getMainContainer(),
 			{ useAttr: true }
 		);
 

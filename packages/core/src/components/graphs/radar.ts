@@ -1,7 +1,13 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Events,
+	Roles,
+	ColorClassNameTypes,
+	RenderTypes,
+	Alignments,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 import {
 	Point,
@@ -49,7 +55,7 @@ export class Radar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 
@@ -685,17 +691,33 @@ export class Radar extends Component {
 
 		const alignment = Tools.getProperty(options, 'radar', 'alignment');
 
-		const alignmentOffset = DOMUtils.getAlignmentOffset(
+		const alignmentXOffset = this.getAlignmentXOffset(
 			alignment,
 			svg,
 			this.getParent()
 		);
-		svg.attr('transform', `translate(${alignmentOffset}, 0)`);
+		svg.attr('x', alignmentXOffset);
 
 		// Add event listeners
 		this.addEventListeners();
 
 		oldYScale = yScale; // save the current scale as the old one
+	}
+
+	getAlignmentXOffset(alignment, svg, parent) {
+		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
+			useBBox: true,
+		});
+		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
+
+		let alignmentOffset = 0;
+		if (alignment === Alignments.CENTER) {
+			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
+		} else if (alignment === Alignments.RIGHT) {
+			alignmentOffset = width - svgDimensions.width;
+		}
+
+		return alignmentOffset;
 	}
 
 	// append temporarily the label to get the exact space that it occupies

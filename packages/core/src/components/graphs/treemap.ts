@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events, ColorClassNameTypes } from '../../interfaces';
+import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -59,6 +59,7 @@ const textFillColor = function () {
 let uidCounter = 0;
 export class Treemap extends Component {
 	type = 'treemap';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const { events } = this.services;
@@ -83,7 +84,7 @@ export class Treemap extends Component {
 
 		const windowLocation = Tools.getProperty(window, 'location');
 
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 

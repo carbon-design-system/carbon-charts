@@ -489,7 +489,6 @@ export class Pie extends Component {
 			useAttrs: true,
 		});
 
-		console.log('width, height', width, height);
 		const options = this.getOptions();
 		const radius: number = Math.min(width, height) / 2;
 		const renderLabels = options.pie.labels.enabled;

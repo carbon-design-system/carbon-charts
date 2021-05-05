@@ -22,7 +22,6 @@ export class Meter extends Component {
 			useAttrs: true,
 		});
 
-		console.log('width', width);
 		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis

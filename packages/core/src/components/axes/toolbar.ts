@@ -82,7 +82,7 @@ export class Toolbar extends Component {
 		svg.attr('transform', `translate(0, ${parentY + Y_OFFSET})`);
 
 		const { width } = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
+			this.services.domUtils.getMainContainer(),
 			{
 				useAttrs: true,
 			}
