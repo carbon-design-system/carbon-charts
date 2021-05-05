@@ -5,6 +5,7 @@ import {
 	CartesianOrientations,
 	Events,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 import { GradientUtils, DOMUtils } from '../../services';
 import { Tools } from '../../tools';
@@ -16,6 +17,8 @@ import { select } from 'd3-selection';
 
 export class Area extends Component {
 	type = 'area';
+	renderType = RenderTypes.SVG;
+
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
 	init() {

@@ -51,6 +51,7 @@ export class MeterChart extends Chart {
 				x: LayoutGrowth.STRETCH,
 				y: LayoutGrowth.FIXED,
 			},
+			renderType: RenderTypes.SVG,
 		};
 
 		// Meter has an unique dataset title within the graph
@@ -61,6 +62,7 @@ export class MeterChart extends Chart {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED,
 			},
+			renderType: RenderTypes.SVG,
 		};
 
 		// create the title spacer

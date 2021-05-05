@@ -57,11 +57,9 @@ export class MeterTitle extends Title {
 	displayStatus() {
 		const self = this;
 		const svg = this.getContainerSVG();
-		const options = this.getOptions();
 
-		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute
@@ -69,8 +67,6 @@ export class MeterTitle extends Title {
 		const containerWidth = containerBounds.width
 			? containerBounds.width
 			: this.parent.node().getAttribute('width');
-
-			console.log("containerWidth", containerWidth)
 
 		// get the status from the model
 		const status = this.model.getStatus();
@@ -182,9 +178,8 @@ export class MeterTitle extends Title {
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
 		// get a reference to the title elements to calculate the size the title can be
-		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute
@@ -204,6 +199,7 @@ export class MeterTitle extends Title {
 			this.parent,
 			'g.status-indicator'
 		).node();
+
 		const statusWidth =
 			DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
 			Configuration.meter.status.paddingLeft;

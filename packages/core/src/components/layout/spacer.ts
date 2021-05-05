@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from '../component';
-import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 
 export class Spacer extends Component {

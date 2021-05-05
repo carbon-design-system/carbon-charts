@@ -28,10 +28,6 @@ export class Gauge extends Component {
 	arc: any;
 	backgroundArc: any;
 
-	init() {
-		const eventsFragment = this.services.events;
-	}
-
 	getValue(): number {
 		const data = this.model.getData();
 		const value = data.find((d) => d.group === 'value')?.value ?? null;
@@ -91,10 +87,10 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
 		const valueRatio = this.getValueRatio();
@@ -170,7 +166,7 @@ export class Gauge extends Component {
 		} else if (alignment === Alignments.RIGHT) {
 			gaugeTranslateX = width - radius;
 		}
-		svg.attr('transform', `translate(${gaugeTranslateX}, ${radius})`);
+		svg.attr('x', gaugeTranslateX).attr('y', radius);
 
 		// Add event listeners
 		this.addEventListeners();

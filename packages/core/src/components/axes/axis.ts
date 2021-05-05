@@ -564,12 +564,6 @@ export class Axis extends Component {
 					const averageLetterWidth = mockTextPiece.node().getBBox()
 						.width;
 
-					console.log(
-						'mockTextPiece',
-						mockTextPiece.node(),
-						averageLetterWidth
-					);
-
 					let lastStartPosition;
 					const textNodes = invisibleAxisRef
 						.selectAll('g.tick')

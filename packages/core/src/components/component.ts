@@ -45,7 +45,7 @@ export class Component {
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(select(this.services.domUtils.getMainSVG()));
+			this.setParent(select(this.services.domUtils.getMainContainer()));
 		}
 	}
 
