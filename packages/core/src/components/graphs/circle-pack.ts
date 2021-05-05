@@ -29,7 +29,7 @@ export class CirclePack extends Component {
 
 		// data and options (zoom/not zoom)
 		let displayData = this.model.getDisplayData();
-		const monochromatic = this.model.isMonochrome();
+		const parentNode = displayData.length === 1 ? true : false;
 		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 		const canvasZoomEnabled = Tools.getProperty(
@@ -40,7 +40,7 @@ export class CirclePack extends Component {
 
 		// check if there is one root for the data
 		// that root will be the only datagroup (colorscale will be monochrome)
-		if (monochromatic) {
+		if (parentNode) {
 			// remove want to remove the parent from being rendered
 			displayData = Tools.getProperty(displayData, 0, 'children');
 		}
@@ -117,7 +117,7 @@ export class CirclePack extends Component {
 			this.setBackgroundListeners();
 		}
 
-		if (!monochromatic) {
+		if (!parentNode) {
 			// add legend filtering if it isnt a monochrome chart
 			this.addLegendListeners();
 		}
@@ -159,7 +159,7 @@ export class CirclePack extends Component {
 				return 'focal';
 			}
 		}
-		return 'zoomed-in';
+		return 'non-focal';
 	}
 
 	addLegendListeners() {
@@ -208,11 +208,7 @@ export class CirclePack extends Component {
 				)
 			)
 			.attr('opacity', (d) => {
-				let dataGroup = d;
-				while (dataGroup.depth > 1) {
-					dataGroup = dataGroup.parent;
-				}
-				return dataGroup.data.name === hoveredElement.datum()['name']
+				return d.data.dataGroupName === hoveredElement.datum()['name']
 					? 1
 					: Configuration.circlePack.circles.fillOpacity;
 			});
@@ -249,7 +245,7 @@ export class CirclePack extends Component {
 
 				const disabled = hoveredElement
 					.node()
-					.classList.contains('zoomed-in');
+					.classList.contains('non-focal');
 
 				const canvasZoomEnabled = Tools.getProperty(
 					self.model.getOptions(),
@@ -383,7 +379,7 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				const disabled = hoveredElement
 					.node()
-					.classList.contains('zoomed-in');
+					.classList.contains('non-focal');
 				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
 				if (
 					Tools.getProperty(
@@ -442,5 +438,7 @@ export class CirclePack extends Component {
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
 		);
+
+		this.removeBackgroundListeners();
 	}
 }

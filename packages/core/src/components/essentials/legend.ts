@@ -77,7 +77,7 @@ export class Legend extends Component {
 			.style('fill', (d) =>
 				d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) ||
-					  this.model.getStrokeColor(d.name)
+					this.model.getStrokeColor(d.name)
 					: null
 			)
 			.classed('active', function (d, i) {
@@ -313,6 +313,7 @@ export class Legend extends Component {
 				.data(iconData)
 				.enter();
 
+			// add '+' for the magnifying icon
 			zoomEnter
 				.append('g')
 				.attr('x', (d) => d.x)
@@ -328,6 +329,7 @@ export class Legend extends Component {
 					itemConfig.color ? itemConfig.color : color
 				);
 
+			// add the magnifying zoom icon handle/circle
 			zoomEnter
 				.append('path')
 				.attr(
@@ -436,8 +438,8 @@ export class Legend extends Component {
 		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const iconWidth =
 			itemType === LegendItemType.CHECKBOX ||
-			itemType === LegendItemType.RADIUS ||
-			itemType === LegendItemType.ZOOM
+				itemType === LegendItemType.RADIUS ||
+				itemType === LegendItemType.ZOOM
 				? Configuration.legend.checkbox.radius * 2
 				: Configuration.legend.area.width;
 
@@ -467,9 +469,9 @@ export class Legend extends Component {
 			// Place legends in a new line if space is not enough
 			if (
 				itemConfig.startingPoint +
-					iconWidth +
-					spaceAfter +
-					legendItemTextDimensions.width >
+				iconWidth +
+				spaceAfter +
+				legendItemTextDimensions.width >
 				parentSVGDimension.width
 			) {
 				itemConfig.lineNumber++;
@@ -501,7 +503,7 @@ export class Legend extends Component {
 				(!legendOrientation ||
 					legendOrientation === LegendOrientations.HORIZONTAL) &&
 				parseInt(legendItem.select('rect.checkbox').attr('y')) % 24 ===
-					0;
+				0;
 
 			const testVertical =
 				legendOrientation === LegendOrientations.VERTICAL &&
@@ -562,8 +564,7 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${itemConfig.startingPoint - translateOffset}, ${
-						yPosition - 12
+					`translate(${itemConfig.startingPoint - translateOffset}, ${yPosition - 12
 					})`
 				);
 
@@ -572,9 +573,9 @@ export class Legend extends Component {
 				.attr(
 					'x',
 					itemConfig.startingPoint +
-						iconWidth +
-						spaceAfter -
-						translateOffset
+					iconWidth +
+					spaceAfter -
+					translateOffset
 				)
 				.attr('y', yTextPosition);
 		} else if (itemType === LegendItemType.ZOOM) {
@@ -594,8 +595,7 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${
-						itemConfig.startingPoint - translateOffset
+					`translate(${itemConfig.startingPoint - translateOffset
 					}, ${yPosition})`
 				);
 
@@ -604,9 +604,9 @@ export class Legend extends Component {
 				.attr(
 					'x',
 					itemConfig.startingPoint +
-						iconWidth +
-						spaceAfter -
-						translateOffset
+					iconWidth +
+					spaceAfter -
+					translateOffset
 				)
 				.attr('y', yTextPosition);
 		}

@@ -148,6 +148,7 @@ export class Chart {
 			'canvasZoom',
 			'enabled'
 		);
+
 		if (isZoomEnabled && isZoomEnabled === true) {
 			graphFrameComponents.push(
 				new CanvasChartClip(this.model, this.services)
