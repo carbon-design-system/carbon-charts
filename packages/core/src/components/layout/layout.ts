@@ -89,9 +89,7 @@ export class LayoutComponent extends Component {
 		// Get parent element to render inside of
 		const parent = this.parent;
 
-		const { width, height } = DOMUtils.getHTMLElementSize(
-			this.services.domUtils.getHolder()
-		);
+		const { width, height } = DOMUtils.getHTMLElementSize(parent.node());
 
 		const horizontal =
 			this.configs.direction === LayoutDirection.ROW ||
@@ -212,11 +210,11 @@ export class LayoutComponent extends Component {
 
 		if (horizontal) {
 			allUpdatedBoxes
-				.style('width', (d) => `${d.size}%`)
+				.style('width', (d) => `${(d.size / 100) * width}px`)
 				.style('height', '100%');
 		} else {
 			allUpdatedBoxes
-				.style('height', (d) => `${d.size}%`)
+				.style('height', (d) => `${(d.size / 100) * height}px`)
 				.style('width', '100%');
 		}
 

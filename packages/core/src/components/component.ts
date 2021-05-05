@@ -126,7 +126,7 @@ export class Component {
 					container.attr('clip-path', `url(#${chartClipId})`);
 				}
 			}
-			return container;
+			return container.attr("width", "100%").attr("height", "100%");
 		}
 
 		return this.parent;

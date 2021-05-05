@@ -55,14 +55,11 @@ export class Axis extends Component {
 			'visible'
 		);
 
-		const svg = this.getContainerSVG().attr("width", "100%").attr("height", "100%");
+		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 
-		if (axisPosition === 'left') {
-			console.log('width, height', axisPosition, width, height, svg.node());
-		}
 		// Add axis into the parent
 		const container = DOMUtils.appendOrSelect(
 			svg,
