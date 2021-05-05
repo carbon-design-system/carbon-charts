@@ -72,7 +72,9 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(
 			Events.Tooltip.MOVE,
 			(e: CustomEvent) => {
-				this.positionTooltip(e);
+				if (this.tooltip.classed('hidden') === false) {
+					this.positionTooltip(e);
+				}
 			}
 		);
 

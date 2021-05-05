@@ -22,9 +22,8 @@ export class Bubble extends Scatter {
 		const allRadii = data
 			.map((d) => d[radiusMapsTo])
 			.filter((radius) => radius);
-		const chartSize = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainContainer(),
-			{ useAttr: true }
+		const chartSize = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// We need the ternary operator here in case the user
