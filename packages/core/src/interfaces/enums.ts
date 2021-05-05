@@ -20,6 +20,7 @@ export enum ChartTheme {
  * enum of all color classname types
  */
 export enum ColorClassNameTypes {
+	BACKGROUND = 'background',
 	FILL = 'fill',
 	STROKE = 'stroke',
 	TOOLTIP = 'tooltip',

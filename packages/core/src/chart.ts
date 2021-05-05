@@ -6,6 +6,7 @@ import {
 	LayoutDirection,
 	LegendOrientations,
 	Events as ChartEvents,
+	RenderTypes,
 } from './interfaces';
 
 // Misc
@@ -115,7 +116,10 @@ export class Chart {
 		this.model.set({ destroyed: true }, { skipUpdate: true });
 	}
 
-	protected getChartComponents(graphFrameComponents: any[]) {
+	protected getChartComponents(
+		graphFrameComponents: any[],
+		graphFrameRenderType = RenderTypes.SVG
+	) {
 		const titleComponent = {
 			id: 'title',
 			components: [new Title(this.model, this.services)],
@@ -141,6 +145,7 @@ export class Chart {
 				x: LayoutGrowth.STRETCH,
 				y: LayoutGrowth.FIXED,
 			},
+			renderType: graphFrameRenderType,
 		};
 
 		const isLegendEnabled =

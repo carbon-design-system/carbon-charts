@@ -7,6 +7,7 @@ import {
 	MeterChartOptions,
 	LayoutGrowth,
 	LayoutDirection,
+	RenderTypes,
 } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Meter } from './../components/graphs/meter';
@@ -85,7 +86,10 @@ export class MeterChart extends Chart {
 		];
 
 		// add the meter title as a top level component
-		const components: any[] = this.getChartComponents(graphFrame);
+		const components: any[] = this.getChartComponents(
+			graphFrame,
+			RenderTypes.HTML
+		);
 
 		return components;
 	}

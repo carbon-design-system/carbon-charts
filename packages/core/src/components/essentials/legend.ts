@@ -98,12 +98,12 @@ export class Legend extends Component {
 			.attr('ry', 1)
 			.attr('class', (d, i) =>
 				this.model.getColorClassName({
-					classNameTypes: [ColorClassNameTypes.FILL],
+					classNameTypes: [ColorClassNameTypes.BACKGROUND],
 					dataGroupName: d.name,
 					originalClassName: 'checkbox',
 				})
 			)
-			.style('fill', (d) =>
+			.style('background', (d) =>
 				d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) ||
 					  this.model.getStrokeColor(d.name)
@@ -163,7 +163,8 @@ export class Legend extends Component {
 				.enter()
 				.append('div')
 				.merge(additionalItems)
-				.classed('additional-item', true);
+				.classed('legend-item', true)
+				.classed('additional', true);
 
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
@@ -188,6 +189,7 @@ export class Legend extends Component {
 
 					self.addAdditionalItem(additionalItem, d, indexOfItem);
 				});
+
 			const addedAdditionalItemsText = addedAdditionalItems
 				.append('p')
 				.merge(addedAdditionalItems.select('p'));
@@ -228,6 +230,17 @@ export class Legend extends Component {
 
 	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
 		const { width, height } = Configuration.legend.area;
+
+		if (itemConfig.type === LegendItemType.RADIUS) {
+			// Circular icon
+			additionalItem
+				.style('width', `${height}px`)
+				.style('height', `${height}px`);
+		} else {
+			additionalItem
+				.style('width', `${width}px`)
+				.style('height', `${height}px`);
+		}
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			const { iconData, fill, stroke } = Configuration.legend.radius;
@@ -305,7 +318,7 @@ export class Legend extends Component {
 				.classed('size', true)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
-				.attr('y', (d) => 24 - d.height)
+				.attr('y', (d) => 0)
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1);

@@ -108,14 +108,13 @@ export class Skeleton extends Component {
 
 	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent;
-		const parent = svg.node().parentNode;
-		const { width, height } = DOMUtils.getSVGElementSize(parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
-			.attr('width', width)
-			.attr('height', height);
+			.attr('width', '100%')
+			.attr('height', '100%');
 
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
@@ -158,7 +157,7 @@ export class Skeleton extends Component {
 			.attr('x1', (d) => d)
 			.attr('x2', (d) => d)
 			.attr('y1', 0)
-			.attr('y2', height);
+			.attr('y2', '100%');
 
 		xGridG
 			.selectAll('line')
@@ -198,10 +197,9 @@ export class Skeleton extends Component {
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
 		const svg = this.parent;
-		const { width, height } = DOMUtils.getSVGElementSize(
-			svg.node().parentNode,
-			{ useAttrs: true }
-		);
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
+			useAttrs: true,
+		});
 
 		const container = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton')
 			.attr('width', width)
@@ -256,7 +254,7 @@ export class Skeleton extends Component {
 	// same logic in pie
 	computeOuterRadius() {
 		const { width, height } = DOMUtils.getSVGElementSize(
-			this.parent.node().parentNode,
+			this.parent,
 			{ useAttrs: true }
 		);
 		const radius = Math.min(width, height) / 2;
