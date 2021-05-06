@@ -6,7 +6,7 @@ export class Spacer extends Component {
 	type = 'spacer';
 
 	render() {
-		this.getContainerSVG()
+		this.getComponentContainer()
 			.style(
 				'width',
 				`${this.configs.size || Configuration.spacers.default.size}px`

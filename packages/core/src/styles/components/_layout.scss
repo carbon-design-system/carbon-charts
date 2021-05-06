@@ -26,4 +26,5 @@
 
 .#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-svg-wrapper {
 	overflow: visible;
+	-webkit-backface-visibility: hidden;
 }

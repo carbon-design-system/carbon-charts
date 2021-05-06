@@ -59,7 +59,7 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
@@ -281,7 +281,7 @@ export class Pie extends Component {
 
 	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			'g.callouts'
 		)
 			.attr('role', Roles.GROUP)
@@ -485,6 +485,7 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
+		console.log("this.parent", this.parent, this.parent.node())
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});

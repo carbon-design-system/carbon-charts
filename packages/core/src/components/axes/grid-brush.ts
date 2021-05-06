@@ -22,7 +22,7 @@ export class ChartBrush extends Component {
 	render(animate = true) {
 		const svg = this.parent;
 		// use this area to display selection above all graphs
-		const frontSelectionArea = this.getContainerSVG();
+		const frontSelectionArea = this.getComponentContainer();
 		const backdrop = DOMUtils.appendOrSelect(
 			svg,
 			'svg.chart-grid-backdrop'

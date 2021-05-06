@@ -76,7 +76,7 @@ export class Treemap extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();

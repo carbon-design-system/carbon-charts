@@ -12,7 +12,7 @@ export class MeterTitle extends Title {
 	render() {
 		const dataset = this.model.getDisplayData();
 		const options = this.getOptions();
-		const svg = this.getContainerSVG()
+		const svg = this.getComponentContainer()
 			.attr('width', '100%')
 			.attr('height', '100%');
 		const { groupMapsTo } = options.data;
@@ -56,7 +56,7 @@ export class MeterTitle extends Title {
 	 */
 	displayStatus() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		const containerBounds = DOMUtils.getHTMLElementSize(
 			this.services.domUtils.getMainContainer()
@@ -112,7 +112,7 @@ export class MeterTitle extends Title {
 		const dataValue = this.model.getDisplayData().value;
 
 		// use the title's position to append the percentage to the end
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title');
 
 		// check if it is enabled

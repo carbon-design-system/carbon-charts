@@ -49,7 +49,7 @@ export class Threshold extends Component {
 		});
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
@@ -308,7 +308,7 @@ export class Threshold extends Component {
 		const self = this;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Add events to the threshold hoverable area
 		svg.selectAll('rect.threshold-hoverable-area')

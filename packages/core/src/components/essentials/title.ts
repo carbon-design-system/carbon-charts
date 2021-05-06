@@ -8,7 +8,7 @@ export class Title extends Component {
 	renderType = RenderTypes.HTML;
 
 	render() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		const text = svg
 			.selectAll('p.title')

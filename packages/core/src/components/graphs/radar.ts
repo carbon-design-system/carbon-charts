@@ -54,7 +54,7 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
@@ -723,7 +723,7 @@ export class Radar extends Component {
 	// append temporarily the label to get the exact space that it occupies
 	getLabelDimensions = (label: string) => {
 		const tmpTick = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			`g.tmp-tick`
 		);
 		const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(

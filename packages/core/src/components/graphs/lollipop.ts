@@ -29,7 +29,7 @@ export class Lollipop extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 
