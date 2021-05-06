@@ -34,7 +34,7 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions();

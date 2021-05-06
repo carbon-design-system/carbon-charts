@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, Roles, ToolbarControlTypes } from '../../interfaces';
+import {
+	Events,
+	RenderTypes,
+	Roles,
+	ToolbarControlTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
@@ -13,6 +18,7 @@ import settings from 'carbon-components/es/globals/js/settings';
 
 export class Toolbar extends Component {
 	type = 'toolbar';
+	renderType = RenderTypes.HTML;
 
 	// overflow menu button to control background color
 	overflowButton: any;
@@ -29,38 +35,33 @@ export class Toolbar extends Component {
 	overflowMenuItemId = Math.floor(Math.random() * 99999999999);
 
 	init() {
-		const options = this.getOptions();
-
-		// Grab the tooltip element
-		const holder = select(this.services.domUtils.getHolder());
-		const chartPrefix = Tools.getProperty(options, 'style', 'prefix');
-
-		this.overflowMenu = DOMUtils.appendOrSelect(
-			holder,
-			`div.${settings.prefix}--${chartPrefix}--overflowMenu`
-		);
-
-		this.overflowMenu.style('max-width', null);
-
-		// listen to show overflow menu event to render the overflow menu
-		this.services.events.addEventListener(
-			Events.Toolbar.SHOW_OVERFLOW_MENU,
-			() => {
-				this.overflowMenu.html(this.getOverflowMenuHTML());
-			}
-		);
-
-		// listen to hide overflow menu event to hide the overflow menu
-		this.services.events.addEventListener(
-			Events.Toolbar.HIDE_OVERFLOW_MENU,
-			() => {
-				this.overflowMenu.html(null);
-			}
-		);
-		// hide overflow menu if user clicks on somewhere in web page
-		document.body.addEventListener('click', () =>
-			this.updateOverflowMenu(false)
-		);
+		// const options = this.getOptions();
+		// // Grab the tooltip element
+		// const holder = select(this.services.domUtils.getHolder());
+		// const chartPrefix = Tools.getProperty(options, 'style', 'prefix');
+		// this.overflowMenu = DOMUtils.appendOrSelect(
+		// 	holder,
+		// 	`div.${settings.prefix}--${chartPrefix}--overflowMenu`
+		// );
+		// this.overflowMenu.style('max-width', null);
+		// // listen to show overflow menu event to render the overflow menu
+		// this.services.events.addEventListener(
+		// 	Events.Toolbar.SHOW_OVERFLOW_MENU,
+		// 	() => {
+		// 		this.overflowMenu.html(this.getOverflowMenuHTML());
+		// 	}
+		// );
+		// // listen to hide overflow menu event to hide the overflow menu
+		// this.services.events.addEventListener(
+		// 	Events.Toolbar.HIDE_OVERFLOW_MENU,
+		// 	() => {
+		// 		this.overflowMenu.html(null);
+		// 	}
+		// );
+		// // hide overflow menu if user clicks on somewhere in web page
+		// document.body.addEventListener('click', () =>
+		// 	this.updateOverflowMenu(false)
+		// );
 	}
 
 	render(animate = true) {
@@ -70,16 +71,85 @@ export class Toolbar extends Component {
 			'loading'
 		);
 
+		const container = this.getComponentContainer();
+		container.html(`
+<div data-overflow-menu class="bx--overflow-menu">
+	<button
+		class="bx--overflow-menu__trigger"
+		aria-haspopup="true" aria-expanded="false" id="example-zyub0566err-trigger">
+		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+			<circle cx="8" cy="3" r="1"></circle>
+			<circle cx="8" cy="8" r="1"></circle>
+			<circle cx="8" cy="13" r="1"></circle>
+		</svg>
+	</button>
+
+	<div class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1"
+		data-floating-menu-direction="bottom" role="menu" aria-labelledby="example-zyub0566err-trigger"
+		id="example-zyub0566err">
+		<ulclass="bx--overflow-menu-options__content">
+		<li
+			class="bx--overflow-menu-options__option">
+			<button class="bx--overflow-menu-options__btn" role="menuitem"title="An example option that is really long to show what should be done to handle long text"
+				data-floating-menu-primary-focus>
+			<span class="bx--overflow-menu-options__option-content">
+			An example option that is really long to show what should be done to handle long text
+			</span>
+			</button>
+		</li>
+		<li
+			class="bx--overflow-menu-options__option">
+			<button class="bx--overflow-menu-options__btn" role="menuitem">
+			<span class="bx--overflow-menu-options__option-content">
+			Option 2
+			</span>
+			</button>
+		</li>
+		<li
+			class="bx--overflow-menu-options__option">
+			<button class="bx--overflow-menu-options__btn" role="menuitem">
+			<span class="bx--overflow-menu-options__option-content">
+			Option 3
+			</span>
+			</button>
+		</li>
+		<li
+			class="bx--overflow-menu-options__option">
+			<button class="bx--overflow-menu-options__btn" role="menuitem">
+			<span class="bx--overflow-menu-options__option-content">
+			Option 4
+			</span>
+			</button>
+		</li>
+		<li
+			class="bx--overflow-menu-options__optionbx--overflow-menu-options__option--disabled">
+			<button class="bx--overflow-menu-options__btn" role="menuitem"disabled>
+			<span class="bx--overflow-menu-options__option-content">
+			Disabled
+			</span>
+			</button>
+		</li>
+		<li
+			class="bx--overflow-menu-options__option bx--overflow-menu-options__option--danger ">
+			<button class="bx--overflow-menu-options__btn" role="menuitem">
+			<span class="bx--overflow-menu-options__option-content">
+			Danger option
+			</span>
+			</button>
+		</li>
+		</ul>
+		<span tabindex="0"></span>
+	</div>
+</div>
+		`);
+
 		// size of toolbar button with background
 		const buttonSize = Configuration.toolbar.buttonSize;
 		const parentY = parseFloat(this.parent.node().getAttribute('y'));
 
-		const svg = this.getContainerSVG();
-
 		// TODO -- adjust toolbar Y position to align title component
 		// before layout component supports vertical alignment center
 		const Y_OFFSET = -6;
-		svg.attr('transform', `translate(0, ${parentY + Y_OFFSET})`);
 
 		const { width } = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainContainer(),
@@ -96,10 +166,6 @@ export class Toolbar extends Component {
 		// assume the overflow icon has right alignment in layout
 		this.overflowMenuX = width - overflowMenuWidth;
 		this.overflowMenuY = parentY + Y_OFFSET + buttonSize;
-		const container = DOMUtils.appendOrSelect(svg, 'svg.toolbar-container')
-			.attr('width', '100%')
-			.attr('height', Configuration.toolbar.height)
-			.attr('opacity', 1);
 
 		// clean children first
 		container.html(null);
@@ -112,97 +178,141 @@ export class Toolbar extends Component {
 			buttonList.push(this.getOverflowButtonConfig());
 		}
 
-		// loading or empty state
-		if (isDataLoading || buttonList.length === 0) {
-			// put an empty rect to keep space unchanged
-			DOMUtils.appendOrSelect(container, 'svg.toolbar-loading-spacer')
-				.append('rect')
-				.attr('height', Configuration.toolbar.height)
-				.attr('width', buttonSize * 3) // value doesn't matter but can't be empty
-				.attr('opacity', 0);
-		} else {
-			// render toolbar buttons sequentially
-			let buttonXPosition = 0;
-			buttonList.forEach((button) => {
-				// button container
-				const buttonContainer = DOMUtils.appendOrSelect(
-					container,
-					`svg.${button.id}`
-				).classed('toolbar-button', true);
+		console.log('buttonList', buttonList, overflowMenuItemList);
 
-				// add button background rect
-				const buttonBackground = DOMUtils.appendOrSelect(
-					buttonContainer,
-					'rect.toolbar-button-background'
-				)
-					.attr('x', buttonXPosition)
-					.attr('y', 0)
-					.attr('width', buttonSize)
-					.attr('height', buttonSize);
+		const toolbarControls = container
+			.selectAll('div.toolbar-control')
+			.data(buttonList, (button) => button.id);
 
-				const buttonIcon = DOMUtils.appendOrSelect(
-					buttonContainer,
-					'svg.toolbar-button-icon'
-				)
-					.attr(
-						'x',
-						buttonXPosition + Configuration.toolbar.iconPadding
-					)
-					.attr('y', Configuration.toolbar.iconPadding)
-					.attr('width', Configuration.toolbar.iconSize)
-					.attr('height', Configuration.toolbar.iconSize)
-					.attr('viewBox', '0 0 32 32')
-					.attr('role', Roles.IMG);
+		toolbarControls.exit().remove();
 
-				buttonIcon.html(button.iconSVGContent);
-				if (button.shouldBeDisabled()) {
-					buttonContainer
-						.classed('toolbar-button--disabled', true)
-						.classed('toolbar-button--focusable', false)
-						.attr('tabindex', -1)
-						.attr('role', null);
-					buttonIcon.classed('toolbar-button-icon--disabled', true);
-					buttonBackground.classed(
-						'toolbar-button-background--disabled',
-						true
-					);
-					buttonContainer.on('click', null).on('keyup', null);
-				} else {
-					buttonContainer
-						.classed('toolbar-button--disabled', false)
-						.classed('toolbar-button--focusable', true)
-						.attr('tabindex', 0)
-						.attr('role', Roles.BUTTON);
-					buttonIcon.classed('toolbar-button-icon--disabled', false);
-					buttonBackground.classed(
-						'toolbar-button-background--disabled',
-						false
-					);
-					buttonContainer
-						.on('click', button.clickFunction)
-						.on('keyup', () => {
-							if (
-								(event.key && event.key === 'Enter') ||
-								event.key === ' '
-							) {
-								event.preventDefault();
+		const enteringToolbarControls = toolbarControls
+			.enter()
+			.append('div')
+			.attr('class', 'toolbar-control bx--overflow-menu')
+			.classed('disabled', (d) => d.shouldBeDisabled())
+			.attr('data-overflow-menu', 'true');
 
-								button.clickFunction();
-							}
-						});
-				}
-				buttonXPosition += buttonSize;
+		const allToolbarControls = enteringToolbarControls
+			.merge(toolbarControls)
+			.html((d) => {
+				console.log('D', d);
+				return `
+			<button
+				class="bx--overflow-menu__trigger"
+				aria-haspopup="true" aria-expanded="false" id="example-zyub0566err-trigger">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: 20px; height: 20px" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+					${d.iconSVGContent}
+				</svg>
+			</button>`;
+			})
+			.each(function (d) {
+				select(this)
+					.select('button')
+					.on('click', d.clickFunction)
+					.on('keyup', () => {
+						if (
+							(event.key && event.key === 'Enter') ||
+							event.key === ' '
+						) {
+							event.preventDefault();
+
+							d.clickFunction();
+						}
+					});
 			});
 
-			this.overflowButton = this.getContainerSVG().select(
-				'svg.toolbar-overflow-menu'
-			);
+		// // loading or empty state
+		// if (isDataLoading || buttonList.length === 0) {
+		// 	// put an empty rect to keep space unchanged
+		// 	DOMUtils.appendOrSelect(container, 'svg.toolbar-loading-spacer')
+		// 		.append('rect')
+		// 		.attr('height', Configuration.toolbar.height)
+		// 		.attr('width', buttonSize * 3) // value doesn't matter but can't be empty
+		// 		.attr('opacity', 0);
+		// } else {
+		// 	// render toolbar buttons sequentially
+		// 	let buttonXPosition = 0;
+		// 	buttonList.forEach((button) => {
+		// 		// button container
+		// 		const buttonContainer = DOMUtils.appendOrSelect(
+		// 			container,
+		// 			`svg.${button.id}`
+		// 		).classed('toolbar-button', true);
 
-			if (this.isOverflowMenuOpen()) {
-				// keep overflow menu displayed
-				this.updateOverflowMenu(true);
-			}
-		}
+		// 		// add button background rect
+		// 		const buttonBackground = DOMUtils.appendOrSelect(
+		// 			buttonContainer,
+		// 			'rect.toolbar-button-background'
+		// 		)
+		// 			.attr('x', buttonXPosition)
+		// 			.attr('y', 0)
+		// 			.attr('width', buttonSize)
+		// 			.attr('height', buttonSize);
+
+		// 		const buttonIcon = DOMUtils.appendOrSelect(
+		// 			buttonContainer,
+		// 			'svg.toolbar-button-icon'
+		// 		)
+		// 			.attr(
+		// 				'x',
+		// 				buttonXPosition + Configuration.toolbar.iconPadding
+		// 			)
+		// 			.attr('y', Configuration.toolbar.iconPadding)
+		// 			.attr('width', Configuration.toolbar.iconSize)
+		// 			.attr('height', Configuration.toolbar.iconSize)
+		// 			.attr('viewBox', '0 0 32 32')
+		// 			.attr('role', Roles.IMG);
+
+		// 		buttonIcon.html(button.iconSVGContent);
+		// 		if (button.shouldBeDisabled()) {
+		// 			buttonContainer
+		// 				.classed('toolbar-button--disabled', true)
+		// 				.classed('toolbar-button--focusable', false)
+		// 				.attr('tabindex', -1)
+		// 				.attr('role', null);
+		// 			buttonIcon.classed('toolbar-button-icon--disabled', true);
+		// 			buttonBackground.classed(
+		// 				'toolbar-button-background--disabled',
+		// 				true
+		// 			);
+		// 			buttonContainer.on('click', null).on('keyup', null);
+		// 		} else {
+		// 			buttonContainer
+		// 				.classed('toolbar-button--disabled', false)
+		// 				.classed('toolbar-button--focusable', true)
+		// 				.attr('tabindex', 0)
+		// 				.attr('role', Roles.BUTTON);
+		// 			buttonIcon.classed('toolbar-button-icon--disabled', false);
+		// 			buttonBackground.classed(
+		// 				'toolbar-button-background--disabled',
+		// 				false
+		// 			);
+		// 			buttonContainer
+		// 				.on('click', button.clickFunction)
+		// 				.on('keyup', () => {
+		// 					if (
+		// 						(event.key && event.key === 'Enter') ||
+		// 						event.key === ' '
+		// 					) {
+		// 						event.preventDefault();
+
+		// 						button.clickFunction();
+		// 					}
+		// 				});
+		// 		}
+		// 		buttonXPosition += buttonSize;
+		// 	});
+
+		// 	this.overflowButton = this.getComponentContainer().select(
+		// 		'svg.toolbar-overflow-menu'
+		// 	);
+
+		// 	if (this.isOverflowMenuOpen()) {
+		// 		// keep overflow menu displayed
+		// 		this.updateOverflowMenu(true);
+		// 	}
+		// }
 	}
 
 	isOverflowMenuOpen() {
@@ -471,7 +581,7 @@ export class Toolbar extends Component {
 		switch (controlType) {
 			case ToolbarControlTypes.ZOOM_IN:
 				return `<polygon points="19 13 15 13 15 9 13 9 13 13 9 13 9 15 13 15 13 19 15 19 15 15 19 15 19 13"/>
-    					<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
+						<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;
 			case ToolbarControlTypes.ZOOM_OUT:
 				return `<rect x="9" y="13" width="10" height="2"/>
 						<path d="M22.45,21A10.87,10.87,0,0,0,25,14,11,11,0,1,0,14,25a10.87,10.87,0,0,0,7-2.55L28.59,30,30,28.59ZM14,23a9,9,0,1,1,9-9A9,9,0,0,1,14,23Z"/>`;

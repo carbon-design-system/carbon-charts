@@ -55,7 +55,7 @@ export class Axis extends Component {
 			'visible'
 		);
 
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
@@ -566,26 +566,30 @@ export class Axis extends Component {
 						.width;
 
 					let lastStartPosition;
-					const textNodes = invisibleAxisRef
-						.selectAll('g.tick')
-						.each(function () {
-							const selection = select(this);
-							const xTransformation = parseFloat(
-								Tools.getTranslationValues(this).tx
-							);
 
-							if (
-								lastStartPosition +
-									selection.text().length *
-										averageLetterWidth *
-										0.8 >=
+					// Find out whether any text nodes roughly collide
+					invisibleAxisRef.selectAll('g.tick').each(function () {
+						const selection = select(this);
+						const xTransformation = parseFloat(
+							Tools.getProperty(
+								Tools.getTranslationValues(this),
+								'tx'
+							)
+						);
+
+						if (
+							xTransformation !== null &&
+							lastStartPosition +
+								selection.text().length *
+									averageLetterWidth *
+									0.8 >=
 								xTransformation
-							) {
-								shouldRotateTicks = true;
-							}
+						) {
+							shouldRotateTicks = true;
+						}
 
-							lastStartPosition = xTransformation;
-						});
+						lastStartPosition = xTransformation;
+					});
 				}
 			}
 
@@ -689,7 +693,7 @@ export class Axis extends Component {
 	}
 
 	addEventListeners() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,
@@ -769,7 +773,7 @@ export class Axis extends Component {
 	getInvisibleAxisRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} g.ticks.invisible`
 		);
 	}
@@ -777,7 +781,7 @@ export class Axis extends Component {
 	getTitleRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} text.axis-title`
 		);
 	}
@@ -792,7 +796,7 @@ export class Axis extends Component {
 	}
 
 	destroy() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,

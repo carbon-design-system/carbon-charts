@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { CartesianOrientations, Events } from '../../interfaces';
+import { CartesianOrientations, Events, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -18,6 +18,8 @@ function pointIsWithinThreshold(dx: number, x: number) {
 
 export class Ruler extends Component {
 	type = 'ruler';
+	renderType = RenderTypes.SVG;
+
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
 	pointsWithinLine: {

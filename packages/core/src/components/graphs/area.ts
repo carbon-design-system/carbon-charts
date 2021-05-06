@@ -7,9 +7,8 @@ import {
 	ColorClassNameTypes,
 	RenderTypes,
 } from '../../interfaces';
-import { GradientUtils, DOMUtils } from '../../services';
+import { GradientUtils } from '../../services';
 import { Tools } from '../../tools';
-import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
 import { area } from 'd3-shape';
@@ -38,7 +37,7 @@ export class Area extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		let domain = [0, 0];
 
 		const { cartesianScales } = this.services;
@@ -113,15 +112,7 @@ export class Area extends Component {
 			.selectAll('path.area')
 			.data(groupedData, (group) => group.name);
 
-		const chartprefix = Tools.getProperty(
-			this.getOptions(),
-			'style',
-			'prefix'
-		);
-		const chartSVG = DOMUtils.appendOrSelect(
-			select(this.services.domUtils.getHolder()),
-			`svg.${settings.prefix}--${chartprefix}--chart-svg`
-		);
+		const chartMainContainer = select(this.services.domUtils.getMainContainer());
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -136,7 +127,7 @@ export class Area extends Component {
 
 		if (isGradientAllowed) {
 			// The fill value of area has been overwritten, get color value from stroke color class instead
-			const strokePathElement = chartSVG
+			const strokePathElement = chartMainContainer
 				.select(
 					`path.${this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.STROKE],
@@ -144,10 +135,11 @@ export class Area extends Component {
 					})}`
 				)
 				.node();
+
 			let colorValue;
 			if (strokePathElement) {
 				colorValue = getComputedStyle(
-					strokePathElement,
+					strokePathElement as HTMLElement,
 					null
 				).getPropertyValue('stroke');
 			} else {
@@ -156,10 +148,14 @@ export class Area extends Component {
 					'color',
 					'scale'
 				);
-				const sparklineColorObjectKeys = Object.keys(
-					sparklineColorObject
-				);
-				colorValue = sparklineColorObject[sparklineColorObjectKeys[0]];
+
+				if (sparklineColorObject !== null) {
+					const sparklineColorObjectKeys = Object.keys(
+						sparklineColorObject
+					);
+					colorValue =
+						sparklineColorObject[sparklineColorObjectKeys[0]];
+				}
 			}
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,

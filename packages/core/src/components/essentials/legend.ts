@@ -8,12 +8,10 @@ import {
 	RenderTypes,
 } from '../../interfaces/enums';
 import {
-	LegendOrientations,
 	Roles,
 	Events,
 	TruncationTypes,
 } from '../../interfaces';
-import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
@@ -43,7 +41,7 @@ export class Legend extends Component {
 		);
 		const userProvidedOrder = Tools.getProperty(legendOptions, 'order');
 
-		const svg = this.getContainerSVG()
+		const svg = this.getComponentContainer()
 			.classed('center-aligned', alignment === Alignments.CENTER)
 			.classed(legendOrientation, true)
 			.classed('has-deactivated-items', hasDeactivatedItems)
@@ -383,7 +381,7 @@ export class Legend extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, 'legend');
 		const truncationThreshold = Tools.getProperty(

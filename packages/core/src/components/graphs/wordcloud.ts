@@ -32,7 +32,7 @@ export class WordCloud extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG()
+		const svg = this.getComponentContainer()
 			.attr('width', '100%')
 			.attr('height', '100%');
 

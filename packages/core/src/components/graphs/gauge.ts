@@ -87,7 +87,7 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG()
+		const svg = this.getComponentContainer()
 			.attr('width', '100%')
 			.attr('height', '100%');
 		const options = this.getOptions();
@@ -176,7 +176,7 @@ export class Gauge extends Component {
 	 * draws the value number associated with the Gauge component in the center
 	 */
 	drawValueNumber() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, 'gauge', 'type');
@@ -286,7 +286,7 @@ export class Gauge extends Component {
 	 */
 	drawDelta() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const delta = this.getDelta();
 
