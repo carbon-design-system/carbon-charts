@@ -30,7 +30,7 @@ export class CirclePack extends Component {
 		// data and options (zoom/not zoom)
 		let displayData = this.model.getDisplayData();
 		// check if there is just one parent for the data
-		const parentNode = this.model.hasParentNode() === 1 ? true : false;
+		const parentNode = this.model.hasParentNode();
 		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 		const canvasZoomEnabled = Tools.getProperty(
@@ -46,10 +46,7 @@ export class CirclePack extends Component {
 			displayData = Tools.getProperty(displayData, 0, 'children');
 		}
 
-		const root = d3Hierarchy({
-			name: options.title || 'Circle Pack',
-			children: displayData,
-		})
+		const root = d3Hierarchy({children: displayData})
 			.sum((d: any) => d.value)
 			.sort((a, b) => b.value - a.value);
 
@@ -107,6 +104,7 @@ export class CirclePack extends Component {
 				)
 			)
 			.attr('r', (d) => d.r)
+			.attr('opacity', 1)
 			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity);
 
 		if (canvasZoomEnabled === true && this.focal) {

@@ -102,7 +102,7 @@ export class CirclePackChartModel extends ChartModel {
 		return this.get('depth');
 	}
 
-	hasParentNode(){
+	hasParentNode() {
 		return this.parentNode;
 	}
 
