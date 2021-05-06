@@ -29,7 +29,8 @@ export class CirclePack extends Component {
 
 		// data and options (zoom/not zoom)
 		let displayData = this.model.getDisplayData();
-		const parentNode = displayData.length === 1 ? true : false;
+		// check if there is just one parent for the data
+		const parentNode = this.model.hasParentNode() === 1 ? true : false;
 		const hierarchyLevel = this.model.getHierarchyLevel();
 		const options = this.getOptions();
 		const canvasZoomEnabled = Tools.getProperty(

@@ -2,10 +2,13 @@
 import { ChartModel } from './model';
 import { Tools } from './tools';
 import { Events, LegendItemType } from './interfaces/enums';
+import { thresholdSturges } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class CirclePackChartModel extends ChartModel {
+	parentNode = false;
+
 	constructor(services: any) {
 		super(services);
 		this.set({ depth: 2 }, { skipUpdate: true });
@@ -14,6 +17,9 @@ export class CirclePackChartModel extends ChartModel {
 	setData(newData) {
 		super.setData(newData);
 		this.setDataGroups();
+		if (newData.length === 1) {
+			this.parentNode = true;
+		}
 		this.setZoom();
 	}
 
@@ -94,6 +100,10 @@ export class CirclePackChartModel extends ChartModel {
 
 	getHierarchyLevel() {
 		return this.get('depth');
+	}
+
+	hasParentNode(){
+		return this.parentNode;
 	}
 
 	// set the datagroup name on the items that are it's children
