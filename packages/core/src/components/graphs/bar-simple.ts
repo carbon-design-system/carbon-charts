@@ -1,6 +1,12 @@
 // Internal Imports
 import { Bar } from './bar';
-import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Events,
+	Roles,
+	RenderTypes,
+	ColorClassNameTypes,
+	CartesianOrientations,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -34,6 +40,8 @@ export class SimpleBar extends Bar {
 		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const data = this.model.getDisplayData(this.configs.groups);
+
+		const orientation = this.services.cartesianScales.getOrientation();
 
 		// Update data on all bars
 		const bars = svg
@@ -91,6 +99,21 @@ export class SimpleBar extends Bar {
 					y1 = this.services.cartesianScales.getRangeValue(d, i);
 				}
 
+				const difference = Math.abs(y1 - y0);
+				// Set a min-2px size for the bar
+				if (difference !== 0 && difference < 2) {
+					if (
+						(value > 0 &&
+							orientation === CartesianOrientations.VERTICAL) ||
+						(value < 0 &&
+							orientation === CartesianOrientations.HORIZONTAL)
+					) {
+						y1 = y0 - 2;
+					} else {
+						y1 = y0 + 2;
+					}
+				}
+
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {
 					return;
@@ -98,7 +121,7 @@ export class SimpleBar extends Bar {
 
 				return Tools.generateSVGPathString(
 					{ x0, x1, y0, y1 },
-					this.services.cartesianScales.getOrientation()
+					orientation
 				);
 			})
 			.attr('opacity', 1)
