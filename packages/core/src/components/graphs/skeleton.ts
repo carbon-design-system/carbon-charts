@@ -113,8 +113,8 @@ export class Skeleton extends Component {
 		});
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
-			.attr('width', '100%')
-			.attr('height', '100%');
+			.attr('width', width)
+			.attr('height', height);
 
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
@@ -136,7 +136,6 @@ export class Skeleton extends Component {
 	}
 
 	drawXGrid(showShimmerEffect: boolean) {
-		const height = this.backdrop.attr('height');
 		const width = this.backdrop.attr('width');
 		const ticksNumber = Tools.getProperty(
 			this.getOptions(),
