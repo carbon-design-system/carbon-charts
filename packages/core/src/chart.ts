@@ -131,19 +131,13 @@ export class Chart {
 		const titleComponent = {
 			id: 'title',
 			components: [new Title(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const legendComponent = {
 			id: 'legend',
 			components: [new Legend(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.PREFERRED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		// if canvas zoom is enabled
@@ -162,10 +156,7 @@ export class Chart {
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 			renderType: graphFrameRenderType,
 		};
 
@@ -202,10 +193,7 @@ export class Chart {
 		const legendSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const fullFrameComponent = {
@@ -224,10 +212,7 @@ export class Chart {
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		// Add chart title if it exists
@@ -238,10 +223,7 @@ export class Chart {
 			const titleSpacerComponent = {
 				id: 'spacer',
 				components: [new Spacer(this.model, this.services)],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+				growth: LayoutGrowth.PREFERRED,
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
