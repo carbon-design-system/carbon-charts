@@ -13,9 +13,6 @@ import * as Configuration from '../../configuration';
 // D3 Imports
 import { event, select } from 'd3-selection';
 
-// import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
-
 export class Toolbar extends Component {
 	type = 'toolbar';
 	renderType = RenderTypes.HTML;
@@ -26,151 +23,44 @@ export class Toolbar extends Component {
 	// ul options list element
 	overflowMenu: any;
 
-	// x, y coordinate of overflow menu
-	overflowMenuX = 0;
-	overflowMenuY = 0;
-
-	// Use a random number to create overflow menu item unique ID
-	// so they don't interfere the other overflow menu item in a page
-	overflowMenuItemId = Math.floor(Math.random() * 99999999999);
-
 	init() {
-		// const options = this.getOptions();
-		// // Grab the tooltip element
-		// const holder = select(this.services.domUtils.getHolder());
-		// const chartPrefix = Tools.getProperty(options, 'style', 'prefix');
-		// this.overflowMenu = DOMUtils.appendOrSelect(
-		// 	holder,
-		// 	`div.${settings.prefix}--${chartPrefix}--overflowMenu`
-		// );
-		// this.overflowMenu.style('max-width', null);
-		// // listen to show overflow menu event to render the overflow menu
-		// this.services.events.addEventListener(
-		// 	Events.Toolbar.SHOW_OVERFLOW_MENU,
-		// 	() => {
-		// 		this.overflowMenu.html(this.getOverflowMenuHTML());
-		// 	}
-		// );
-		// // listen to hide overflow menu event to hide the overflow menu
-		// this.services.events.addEventListener(
-		// 	Events.Toolbar.HIDE_OVERFLOW_MENU,
-		// 	() => {
-		// 		this.overflowMenu.html(null);
-		// 	}
-		// );
-		// // hide overflow menu if user clicks on somewhere in web page
-		// document.body.addEventListener('click', () =>
-		// 	this.updateOverflowMenu(false)
-		// );
-	}
+		const bodyOnClickHandler = () => this.updateOverflowMenu(false);
 
-	render(animate = true) {
-		const isDataLoading = Tools.getProperty(
-			this.getOptions(),
-			'data',
-			'loading'
-		);
+		// Grab the tooltip element
+		this.services.events.addEventListener(
+			Events.Toolbar.SHOW_OVERFLOW_MENU,
+			() => {
+				this.renderOverflowMenu();
 
-		const container = this.getComponentContainer();
-		container.html(`
-<div data-overflow-menu class="bx--overflow-menu">
-	<button
-		class="bx--overflow-menu__trigger"
-		aria-haspopup="true" aria-expanded="false" id="example-zyub0566err-trigger">
-		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-			<circle cx="8" cy="3" r="1"></circle>
-			<circle cx="8" cy="8" r="1"></circle>
-			<circle cx="8" cy="13" r="1"></circle>
-		</svg>
-	</button>
-
-	<div class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1"
-		data-floating-menu-direction="bottom" role="menu" aria-labelledby="example-zyub0566err-trigger"
-		id="example-zyub0566err">
-		<ulclass="bx--overflow-menu-options__content">
-		<li
-			class="bx--overflow-menu-options__option">
-			<button class="bx--overflow-menu-options__btn" role="menuitem"title="An example option that is really long to show what should be done to handle long text"
-				data-floating-menu-primary-focus>
-			<span class="bx--overflow-menu-options__option-content">
-			An example option that is really long to show what should be done to handle long text
-			</span>
-			</button>
-		</li>
-		<li
-			class="bx--overflow-menu-options__option">
-			<button class="bx--overflow-menu-options__btn" role="menuitem">
-			<span class="bx--overflow-menu-options__option-content">
-			Option 2
-			</span>
-			</button>
-		</li>
-		<li
-			class="bx--overflow-menu-options__option">
-			<button class="bx--overflow-menu-options__btn" role="menuitem">
-			<span class="bx--overflow-menu-options__option-content">
-			Option 3
-			</span>
-			</button>
-		</li>
-		<li
-			class="bx--overflow-menu-options__option">
-			<button class="bx--overflow-menu-options__btn" role="menuitem">
-			<span class="bx--overflow-menu-options__option-content">
-			Option 4
-			</span>
-			</button>
-		</li>
-		<li
-			class="bx--overflow-menu-options__optionbx--overflow-menu-options__option--disabled">
-			<button class="bx--overflow-menu-options__btn" role="menuitem"disabled>
-			<span class="bx--overflow-menu-options__option-content">
-			Disabled
-			</span>
-			</button>
-		</li>
-		<li
-			class="bx--overflow-menu-options__option bx--overflow-menu-options__option--danger ">
-			<button class="bx--overflow-menu-options__btn" role="menuitem">
-			<span class="bx--overflow-menu-options__option-content">
-			Danger option
-			</span>
-			</button>
-		</li>
-		</ul>
-		<span tabindex="0"></span>
-	</div>
-</div>
-		`);
-
-		console.log("container", container.node())
-
-		// size of toolbar button with background
-		const buttonSize = Configuration.toolbar.buttonSize;
-		const parentY = parseFloat(this.parent.node().getAttribute('y'));
-
-		// TODO -- adjust toolbar Y position to align title component
-		// before layout component supports vertical alignment center
-		const Y_OFFSET = -6;
-
-		const { width } = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainContainer(),
-			{
-				useAttrs: true,
+				// hide overflow menu if user clicks on somewhere in web page
+				document.body.addEventListener('click', bodyOnClickHandler);
 			}
 		);
 
-		// overflow menu width is 160px
-		// it's set by Carbon component
-		const overflowMenuWidth = 160;
-		// no good solution to get correct Toolbar position
-		// parent x doesn't work well
-		// assume the overflow icon has right alignment in layout
-		this.overflowMenuX = width - overflowMenuWidth;
-		this.overflowMenuY = parentY + Y_OFFSET + buttonSize;
+		// listen to hide overflow menu event to hide the overflow menu
+		this.services.events.addEventListener(
+			Events.Toolbar.HIDE_OVERFLOW_MENU,
+			() => {
+				// // hide overflow menu if user clicks on somewhere in web page
+				document.body.removeEventListener('click', bodyOnClickHandler);
+			}
+		);
+	}
 
-		// // clean children first
-		// container.html(null);
+	render(animate = true) {
+		const container = this.getComponentContainer();
+
+		if (!this.overflowMenu) {
+			this.overflowMenu = container
+				.append('div')
+				.attr(
+					'class',
+					'bx--overflow-menu-options bx--overflow-menu--flip'
+				)
+				.attr('tabindex', -1)
+				.attr('role', 'menu')
+				.html(`<ul></ul>`);
+		}
 
 		// get the toolbar buttons
 		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
@@ -189,17 +79,16 @@ export class Toolbar extends Component {
 		const enteringToolbarControls = toolbarControls
 			.enter()
 			.append('div')
-			.attr('class', 'toolbar-control bx--overflow-menu')
-			.classed('disabled', (d) => d.shouldBeDisabled())
-			.attr('data-overflow-menu', 'true');
+			.attr('class', 'toolbar-control bx--overflow-menu');
 
 		const allToolbarControls = enteringToolbarControls
 			.merge(toolbarControls)
+			.classed('disabled', (d) => d.shouldBeDisabled())
 			.html(
 				(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
-				aria-haspopup="true" aria-expanded="false" id="example-zyub0566err-trigger">
+				aria-haspopup="true" aria-expanded="false" id="${d.id}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: 20px; height: 20px" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVGContent}
 				</svg>
@@ -221,97 +110,42 @@ export class Toolbar extends Component {
 					});
 			});
 
-		// // loading or empty state
-		// if (isDataLoading || buttonList.length === 0) {
-		// 	// put an empty rect to keep space unchanged
-		// 	DOMUtils.appendOrSelect(container, 'svg.toolbar-loading-spacer')
-		// 		.append('rect')
-		// 		.attr('height', Configuration.toolbar.height)
-		// 		.attr('width', buttonSize * 3) // value doesn't matter but can't be empty
-		// 		.attr('opacity', 0);
-		// } else {
-		// 	// render toolbar buttons sequentially
-		// 	let buttonXPosition = 0;
-		// 	buttonList.forEach((button) => {
-		// 		// button container
-		// 		const buttonContainer = DOMUtils.appendOrSelect(
-		// 			container,
-		// 			`svg.${button.id}`
-		// 		).classed('toolbar-button', true);
+		this.overflowButton = this.getComponentContainer().select(
+			'button.bx--overflow-menu__trigger#toolbar-overflow-menu'
+		);
+	}
 
-		// 		// add button background rect
-		// 		const buttonBackground = DOMUtils.appendOrSelect(
-		// 			buttonContainer,
-		// 			'rect.toolbar-button-background'
-		// 		)
-		// 			.attr('x', buttonXPosition)
-		// 			.attr('y', 0)
-		// 			.attr('width', buttonSize)
-		// 			.attr('height', buttonSize);
+	renderOverflowMenu() {
+		const { overflowMenuItemList } = this.getControlConfigs();
 
-		// 		const buttonIcon = DOMUtils.appendOrSelect(
-		// 			buttonContainer,
-		// 			'svg.toolbar-button-icon'
-		// 		)
-		// 			.attr(
-		// 				'x',
-		// 				buttonXPosition + Configuration.toolbar.iconPadding
-		// 			)
-		// 			.attr('y', Configuration.toolbar.iconPadding)
-		// 			.attr('width', Configuration.toolbar.iconSize)
-		// 			.attr('height', Configuration.toolbar.iconSize)
-		// 			.attr('viewBox', '0 0 32 32')
-		// 			.attr('role', Roles.IMG);
+		const overflowMenuControls = this.overflowMenu
+			.select('ul')
+			.selectAll('li.bx--overflow-menu-options__option')
+			.data(overflowMenuItemList, (button) =>
+				Tools.getProperty(button, 'id')
+			);
 
-		// 		buttonIcon.html(button.iconSVGContent);
-		// 		if (button.shouldBeDisabled()) {
-		// 			buttonContainer
-		// 				.classed('toolbar-button--disabled', true)
-		// 				.classed('toolbar-button--focusable', false)
-		// 				.attr('tabindex', -1)
-		// 				.attr('role', null);
-		// 			buttonIcon.classed('toolbar-button-icon--disabled', true);
-		// 			buttonBackground.classed(
-		// 				'toolbar-button-background--disabled',
-		// 				true
-		// 			);
-		// 			buttonContainer.on('click', null).on('keyup', null);
-		// 		} else {
-		// 			buttonContainer
-		// 				.classed('toolbar-button--disabled', false)
-		// 				.classed('toolbar-button--focusable', true)
-		// 				.attr('tabindex', 0)
-		// 				.attr('role', Roles.BUTTON);
-		// 			buttonIcon.classed('toolbar-button-icon--disabled', false);
-		// 			buttonBackground.classed(
-		// 				'toolbar-button-background--disabled',
-		// 				false
-		// 			);
-		// 			buttonContainer
-		// 				.on('click', button.clickFunction)
-		// 				.on('keyup', () => {
-		// 					if (
-		// 						(event.key && event.key === 'Enter') ||
-		// 						event.key === ' '
-		// 					) {
-		// 						event.preventDefault();
+		overflowMenuControls.exit().remove();
 
-		// 						button.clickFunction();
-		// 					}
-		// 				});
-		// 		}
-		// 		buttonXPosition += buttonSize;
-		// 	});
+		const enteringOverflowMenuControls = overflowMenuControls
+			.enter()
+			.append('li')
+			.attr('id', (d) => d.id)
+			.attr('class', 'bx--overflow-menu-options__option');
 
-		// 	this.overflowButton = this.getComponentContainer().select(
-		// 		'svg.toolbar-overflow-menu'
-		// 	);
+		enteringOverflowMenuControls
+			.append('button')
+			.attr('class', 'bx--overflow-menu-options__btn')
+			.attr('role', 'menuitem');
 
-		// 	if (this.isOverflowMenuOpen()) {
-		// 		// keep overflow menu displayed
-		// 		this.updateOverflowMenu(true);
-		// 	}
-		// }
+		enteringOverflowMenuControls
+			.merge(overflowMenuControls)
+			.classed('bx--overflow-menu-options__option--disabled', (d) =>
+				d.shouldBeDisabled()
+			)
+			.attr('aria-disabled', (d) => d.shouldBeDisabled())
+			.selectAll('button')
+			.text((d) => d.text);
 	}
 
 	isOverflowMenuOpen() {
@@ -324,10 +158,17 @@ export class Toolbar extends Component {
 
 	// show/hide overflow menu
 	updateOverflowMenu(show: boolean) {
+		this.overflowMenu.classed('is-open', show);
+
 		// update overflow button background
 		if (this.overflowButton) {
-			this.overflowButton.classed('toolbar-button--hovered', show);
+			this.overflowButton.attr('aria-expanded', show);
+			select(this.overflowButton.node().parentNode).classed(
+				'bx--overflow-menu--open',
+				show
+			);
 		}
+
 		if (show) {
 			this.services.events.dispatchEvent(
 				Events.Toolbar.SHOW_OVERFLOW_MENU
@@ -352,9 +193,7 @@ export class Toolbar extends Component {
 		// only if previous enabled menu item found
 		if (previousItemIndex < overflowMenuItems.length) {
 			const previousItemNode = select(
-				'#' +
-					overflowMenuItems[previousItemIndex].id +
-					this.overflowMenuItemId
+				`#${overflowMenuItems[previousItemIndex].id} button`
 			).node();
 			if ('focus' in previousItemNode) {
 				previousItemNode.focus();
@@ -375,10 +214,9 @@ export class Toolbar extends Component {
 		// only if next enabled menu item found
 		if (nextItemIndex > -1) {
 			const nextItemNode = select(
-				'#' +
-					overflowMenuItems[nextItemIndex].id +
-					this.overflowMenuItemId
+				`#${overflowMenuItems[nextItemIndex].id} button`
 			).node();
+
 			if ('focus' in nextItemNode) {
 				nextItemNode.focus();
 			}
@@ -397,9 +235,7 @@ export class Toolbar extends Component {
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem, index) => {
-				const element = select(
-					'#' + menuItem.id + this.overflowMenuItemId
-				);
+				const element = select(`#${menuItem.id}`);
 				if (element !== null) {
 					element.on('click', () => {
 						// call the specified function
@@ -408,6 +244,7 @@ export class Toolbar extends Component {
 						// hide overflow menu
 						self.updateOverflowMenu(false);
 					});
+
 					element.on('keyup', () => {
 						if (event.key === 'Enter') {
 							// call the specified function
@@ -419,6 +256,7 @@ export class Toolbar extends Component {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
 						}
+
 						// Not hide overflow menu by keyboard arrow up/down event
 					});
 				}
@@ -428,44 +266,6 @@ export class Toolbar extends Component {
 			self.focusOnNextEnabledMenuItem(-1);
 		}
 		event.stopImmediatePropagation();
-	}
-
-	getOverflowMenuHTML() {
-		const overflowMenuItems = this.getOverflowMenuItems();
-		// don't render whole overflow menu if no overflow menu item
-		if (!overflowMenuItems || overflowMenuItems.length === 0) {
-			return '';
-		}
-
-		let overflowMenuHtml;
-		overflowMenuHtml = `<div data-floating-menu-container="true" data-floating-menu-direction="bottom" role="main">
-			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
-				tabindex="-1" role="${Roles.MENU}" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
-
-		// generate html for each overflow menu items
-		overflowMenuItems.forEach((menuItem, index) => {
-			const menuItemClasses = 'bx--overflow-menu-options__option'.concat(
-				menuItem.shouldBeDisabled()
-					? ' bx--overflow-menu-options__option--disabled' // class for disabled menu item
-					: ''
-			);
-			overflowMenuHtml += `<li class="${menuItemClasses}" role="${
-				Roles.MENU_ITEM
-			}">
-				<button class="bx--overflow-menu-options__btn"
-					data-floating-menu-primary-focus="${index === 0}"
-					tabindex="-1" index="${index}" title="${menuItem.text}"
-					id="${menuItem.id + this.overflowMenuItemId}">
-					<div class="bx--overflow-menu-options__option-content">
-						${menuItem.text}
-					</div>
-				</button>
-			</li>`;
-		});
-
-		overflowMenuHtml += `</ul></div>`;
-		return overflowMenuHtml;
 	}
 
 	getControlConfigs() {

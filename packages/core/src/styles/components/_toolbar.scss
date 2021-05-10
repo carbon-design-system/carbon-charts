@@ -25,73 +25,18 @@ $css--reset: false;
 			}
 		}
 	}
-}
 
-g.#{$prefix}--#{$charts-prefix}--toolbar {
-	@include carbon--motion(standard, expressive);
+	.bx--overflow-menu--flip {
+		right: 0;
+		left: unset;
 
-	.toolbar-container {
-		.toolbar-button {
-			fill: transparent;
-			cursor: pointer;
-			&:hover {
-				.toolbar-button-background {
-					fill: $hover-ui;
-				}
-				.toolbar-button-background--disabled {
-					fill: transparent;
-				}
-			}
+		&.is-open {
+			display: table;
+		}
 
-			&--focusable {
-				&:focus {
-					.toolbar-button-background {
-						stroke: $icon-02;
-						stroke-width: 2;
-						stroke-dasharray: 2;
-					}
-				}
-			}
-
-			&-icon {
-				pointer-events: visible;
-
-				circle,
-				rect,
-				path,
-				polygon {
-					fill: $icon-02;
-				}
-
-				&:hover {
-					cursor: pointer;
-					pointer-events: visible;
-				}
-			}
-
-			&-icon--disabled {
-				pointer-events: auto;
-
-				circle,
-				rect,
-				path,
-				polygon {
-					fill: $disabled-03;
-				}
-
-				&:hover {
-					cursor: auto;
-					pointer-events: auto;
-				}
-			}
-
-			&--hovered {
-				fill: $hover-ui;
-			}
-
-			&--disabled {
-				cursor: auto;
-			}
+		ul {
+			margin: 0;
+			padding: 0;
 		}
 	}
 }
