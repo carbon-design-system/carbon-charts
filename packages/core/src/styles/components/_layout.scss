@@ -18,6 +18,10 @@
 		display: flex;
 		flex-direction: column-reverse;
 	}
+
+	&-alignitems-center {
+		align-items: center;
+	}
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-svg .layout-child {
@@ -26,5 +30,4 @@
 
 .#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-svg-wrapper {
 	overflow: visible;
-	-webkit-backface-visibility: hidden;
 }

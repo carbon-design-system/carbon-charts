@@ -1,4 +1,4 @@
-import { LayoutDirection, RenderTypes } from './enums';
+import { LayoutAlignItems, LayoutDirection, RenderTypes } from './enums';
 
 export interface LayoutConfigs {
 	/**
@@ -9,4 +9,8 @@ export interface LayoutConfigs {
 	 * Whether to render through SVG or HTML
 	 */
 	renderType?: RenderTypes;
+	/**
+	 * how the layout will align its children
+	 */
+	alignItems?: LayoutAlignItems;
 }

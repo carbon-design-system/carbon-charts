@@ -6,6 +6,7 @@ import {
 	LayoutComponentChild,
 	LayoutConfigs,
 	RenderTypes,
+	LayoutAlignItems,
 } from '../../interfaces/index';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
@@ -118,6 +119,10 @@ export class LayoutComponent extends Component {
 			.classed(
 				`${settings.prefix}--${chartprefix}--layout-column-reverse`,
 				this.configs.direction === LayoutDirection.COLUMN_REVERSE
+			)
+			.classed(
+				`${settings.prefix}--${chartprefix}--layout-alignitems-center`,
+				this.configs.alignItems === LayoutAlignItems.CENTER
 			)
 			.selectAll(`div.layout-child-${this._instanceID}`)
 			.data(this.children, (d: any) => d.id);

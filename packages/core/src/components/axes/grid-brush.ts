@@ -21,6 +21,7 @@ export class ChartBrush extends Component {
 
 	render(animate = true) {
 		const svg = this.parent;
+
 		// use this area to display selection above all graphs
 		const frontSelectionArea = this.getComponentContainer();
 		const backdrop = DOMUtils.appendOrSelect(
@@ -80,10 +81,8 @@ export class ChartBrush extends Component {
 				if (dashCount % 2 === 1) {
 					dashArray += ',0';
 				}
-
 				dashArray += ',' + selectionWidth.toString(); // bottom (invisible)
 				dashArray += ',' + height.toString(); // left
-
 				frontSelection.attr('stroke-dasharray', dashArray);
 			};
 
@@ -96,7 +95,11 @@ export class ChartBrush extends Component {
 
 				// copy the d3 selection attrs to front selection element
 				frontSelection
-					.attr('x', d3Selection.attr('x'))
+					.attr(
+						'x',
+						parseFloat(d3Selection.attr('x')) +
+							parseFloat(backdrop.attr('x'))
+					)
 					.attr('y', d3Selection.attr('y'))
 					.attr('width', d3Selection.attr('width'))
 					.attr('height', d3Selection.attr('height'))

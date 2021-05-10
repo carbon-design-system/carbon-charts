@@ -123,6 +123,13 @@ export enum LayoutGrowth {
 }
 
 /**
+ * enum of all possible layout align-items values
+ */
+export enum LayoutAlignItems {
+	CENTER = "center"
+}
+
+/**
  * enum of all possible callout directions
  */
 export enum CalloutDirections {
@@ -227,4 +234,5 @@ export enum LegendItemType {
 	SIZE = 'size',
 	LINE = 'line',
 	QUARTILE = 'quartile',
+	ZOOM = 'zoom',
 }

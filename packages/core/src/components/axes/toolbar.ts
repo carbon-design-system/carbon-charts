@@ -178,8 +178,6 @@ export class Toolbar extends Component {
 			buttonList.push(this.getOverflowButtonConfig());
 		}
 
-		console.log('buttonList', buttonList, overflowMenuItemList);
-
 		const toolbarControls = container
 			.selectAll('div.toolbar-control')
 			.data(buttonList, (button) => button.id);
@@ -195,17 +193,16 @@ export class Toolbar extends Component {
 
 		const allToolbarControls = enteringToolbarControls
 			.merge(toolbarControls)
-			.html((d) => {
-				console.log('D', d);
-				return `
+			.html(
+				(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="example-zyub0566err-trigger">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: 20px; height: 20px" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVGContent}
 				</svg>
-			</button>`;
-			})
+			</button>`
+			)
 			.each(function (d) {
 				select(this)
 					.select('button')
