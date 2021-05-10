@@ -485,7 +485,6 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		console.log("this.parent", this.parent, this.parent.node())
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
