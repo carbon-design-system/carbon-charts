@@ -10,6 +10,7 @@ import {
 	AxisPositions,
 	ScaleTypes,
 	RenderTypes,
+	LayoutAlignItems,
 } from './interfaces';
 import {
 	ChartBrush,
@@ -106,6 +107,7 @@ export class AxisChart extends Chart {
 					],
 					{
 						direction: LayoutDirection.ROW,
+						alignItems: LayoutAlignItems.CENTER,
 					}
 				),
 			],
@@ -141,7 +143,7 @@ export class AxisChart extends Chart {
 				x: LayoutGrowth.STRETCH,
 				y: LayoutGrowth.STRETCH,
 			},
-			renderType: RenderTypes.SVG
+			renderType: RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
@@ -213,7 +215,7 @@ export class AxisChart extends Chart {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED,
 			},
-			renderType: RenderTypes.SVG
+			renderType: RenderTypes.SVG,
 		};
 
 		const topLevelLayoutComponents = [];
