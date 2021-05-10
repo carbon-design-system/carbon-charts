@@ -18,7 +18,6 @@ import { select } from 'd3-selection';
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
 
-// TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
@@ -60,7 +59,7 @@ export class LayoutComponent extends Component {
 
 		svg.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, 'growth', 'x');
+				const growth = Tools.getProperty(d, 'growth');
 
 				return (
 					growth === LayoutGrowth.PREFERRED ||
@@ -81,7 +80,7 @@ export class LayoutComponent extends Component {
 			.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter(
 				(d: any) =>
-					Tools.getProperty(d, 'growth', 'x') === LayoutGrowth.STRETCH
+					Tools.getProperty(d, 'growth') === LayoutGrowth.STRETCH
 			)
 			.size();
 	}
@@ -155,7 +154,7 @@ export class LayoutComponent extends Component {
 					);
 
 					// Render preffered & fixed items
-					const growth = Tools.getProperty(d, 'growth', 'x');
+					const growth = Tools.getProperty(d, 'growth');
 					if (
 						growth === LayoutGrowth.PREFERRED ||
 						growth === LayoutGrowth.FIXED
@@ -171,7 +170,7 @@ export class LayoutComponent extends Component {
 			.style('width', null)
 			.each(function (d: any) {
 				// Calculate preffered children sizes after internal rendering
-				const growth = Tools.getProperty(d, 'growth', 'x');
+				const growth = Tools.getProperty(d, 'growth');
 
 				const renderType = Tools.getProperty(d, 'renderType');
 				const matchingElementDimensions =
@@ -199,7 +198,7 @@ export class LayoutComponent extends Component {
 		// Run through stretch x-items
 		this.children
 			.filter((child) => {
-				const growth = Tools.getProperty(child, 'growth', 'x');
+				const growth = Tools.getProperty(child, 'growth');
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.forEach((child, i) => {
@@ -225,7 +224,7 @@ export class LayoutComponent extends Component {
 
 		allUpdatedBoxes.each(function (d: any, i) {
 			d.components.forEach((itemComponent) => {
-				const growth = Tools.getProperty(d, 'growth', 'x');
+				const growth = Tools.getProperty(d, 'growth');
 				if (growth === LayoutGrowth.STRETCH) {
 					itemComponent.render(animate);
 				}

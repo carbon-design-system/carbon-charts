@@ -143,6 +143,8 @@ export class Toolbar extends Component {
 </div>
 		`);
 
+		console.log("container", container.node())
+
 		// size of toolbar button with background
 		const buttonSize = Configuration.toolbar.buttonSize;
 		const parentY = parseFloat(this.parent.node().getAttribute('y'));
@@ -167,8 +169,8 @@ export class Toolbar extends Component {
 		this.overflowMenuX = width - overflowMenuWidth;
 		this.overflowMenuY = parentY + Y_OFFSET + buttonSize;
 
-		// clean children first
-		container.html(null);
+		// // clean children first
+		// container.html(null);
 
 		// get the toolbar buttons
 		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
