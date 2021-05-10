@@ -1,15 +1,5 @@
 import { ZoomBarTypes } from './interfaces';
-
-export const color = {
-	pairingOptions: {
-		'1-color': 4,
-		'2-color': 5,
-		'3-color': 5,
-		'4-color': 3,
-		'5-color': 2,
-		'14-color': 1,
-	},
-};
+import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
 	opacity: {
@@ -30,6 +20,34 @@ export const axis = {
 		compareTo: 'marker',
 	},
 	paddingRatio: 0.1,
+};
+
+export const canvasZoomSettings = {
+	duration: 1000,
+	ease: easeCubicInOut,
+	zoomLevel: 3,
+};
+
+export const circlePack = {
+	circles: {
+		fillOpacity: 0.3,
+	},
+	padding: {
+		mainGroup: 4,
+		children: 2,
+	},
+	hierarchyLevel: 2,
+};
+
+export const color = {
+	pairingOptions: {
+		'1-color': 4,
+		'2-color': 5,
+		'3-color': 5,
+		'4-color': 3,
+		'5-color': 2,
+		'14-color': 1,
+	},
 };
 
 export const boxplot = {
@@ -100,6 +118,10 @@ export const legend = {
 			{ x: 0, y: 0, width: 24, height: 13 },
 			{ x: 11, y: 4, width: 1, height: 4 },
 		],
+	},
+	zoom: {
+		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
+		color: '#8D8D8D',
 	},
 };
 

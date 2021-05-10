@@ -33,6 +33,12 @@ g.#{$prefix}--#{$charts-prefix}--legend {
 		}
 	}
 
+	g.additional-item {
+		.zoom {
+			fill: $text-02;
+		}
+	}
+
 	&.clickable g.legend-item:hover {
 		cursor: pointer;
 	}

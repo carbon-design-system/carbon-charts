@@ -299,6 +299,46 @@ export class Legend extends Component {
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height);
+		} else if (itemConfig.type === LegendItemType.ZOOM) {
+			const { iconData, color } = Tools.getProperty(
+				Configuration,
+				'legend',
+				'zoom'
+			);
+
+			const zoomEnter = additionalItem
+				.attr('role', Roles.IMG)
+				.attr('aria-label', 'zoom')
+				.selectAll('g.icon')
+				.data(iconData)
+				.enter();
+
+			// add '+' for the magnifying icon
+			zoomEnter
+				.append('g')
+				.attr('x', (d) => d.x)
+				.attr('y', (d) => d.y)
+				.attr('width', (d) => d.width)
+				.attr('height', (d) => d.height)
+				.append('polygon')
+				.attr(
+					'points',
+					'7.7 4.82 5.78 4.82 5.78 2.89 4.82 2.89 4.82 4.82 2.89 4.82 2.89 5.78 4.82 5.78 4.82 7.7 5.78 7.7 5.78 5.78 7.7 5.78 7.7 4.82'
+				)
+				.attr('fill', (d) =>
+					itemConfig.color ? itemConfig.color : color
+				);
+
+			// add the magnifying zoom icon handle/circle
+			zoomEnter
+				.append('path')
+				.attr(
+					'd',
+					'M9.36,8.67A5.22,5.22,0,0,0,10.59,5.3,5.3,5.3,0,1,0,5.3,10.59,5.22,5.22,0,0,0,8.67,9.36L12.32,13l.68-.68Zm-4.06,1A4.34,4.34,0,1,1,9.63,5.3,4.33,4.33,0,0,1,5.3,9.63Z'
+				)
+				.attr('fill', (d) =>
+					itemConfig.color ? itemConfig.color : color
+				);
 		}
 	}
 
@@ -398,9 +438,11 @@ export class Legend extends Component {
 		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const iconWidth =
 			itemType === LegendItemType.CHECKBOX ||
-			itemType === LegendItemType.RADIUS
+			itemType === LegendItemType.RADIUS ||
+			itemType === LegendItemType.ZOOM
 				? Configuration.legend.checkbox.radius * 2
 				: Configuration.legend.area.width;
+
 		const spaceAfter = Configuration.legend.items.spaceAfter;
 
 		const legendItemTextDimensions = DOMUtils.getSVGElementSize(
@@ -536,6 +578,18 @@ export class Legend extends Component {
 						spaceAfter -
 						translateOffset
 				)
+				.attr('y', yTextPosition);
+		} else if (itemType === LegendItemType.ZOOM) {
+			legendItem
+				.selectAll('g.icon')
+				.attr(
+					'transform',
+					`translate(${itemConfig.startingPoint}, ${yPosition})`
+				);
+
+			legendItem
+				.select('text')
+				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
 				.attr('y', yTextPosition);
 		} else {
 			legendItem

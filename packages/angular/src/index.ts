@@ -18,4 +18,5 @@ export * from "./meter-chart.component";
 export * from "./radar-chart.component";
 export * from "./combo-chart.component";
 export * from "./treemap-chart.component";
+export * from "./circle-pack-chart.component";
 export * from "./wordcloud-chart.component";
