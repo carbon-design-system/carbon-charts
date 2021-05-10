@@ -126,7 +126,7 @@ export enum LayoutGrowth {
  * enum of all possible layout align-items values
  */
 export enum LayoutAlignItems {
-	CENTER = "center"
+	CENTER = 'center',
 }
 
 /**
@@ -215,6 +215,8 @@ export enum ToolbarControlTypes {
 	ZOOM_IN = 'Zoom in',
 	ZOOM_OUT = 'Zoom out',
 	RESET_ZOOM = 'Reset zoom',
+	MAKE_FULLSCREEN = 'Make fullscreen',
+	SHOW_AS_DATATABLE = "Show as data-table"
 }
 /**
  * enum of title orientations for _vertical axes_

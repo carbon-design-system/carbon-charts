@@ -15,6 +15,7 @@ import {
 import {
 	ChartBrush,
 	ChartClip,
+	Modal,
 	LayoutComponent,
 	Legend,
 	Threshold,
@@ -220,6 +221,7 @@ export class AxisChart extends Chart {
 
 		return [
 			new AxisChartsTooltip(this.model, this.services),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

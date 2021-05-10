@@ -197,9 +197,16 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		},
 	} as ZoomBarsOptions,
 	toolbar: {
-		enabled: false,
+		enabled: true,
 		numberOfIcons: 3,
-		controls: [],
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			{
+				type: ToolbarControlTypes.MAKE_FULLSCREEN,
+			},
+		],
 	} as ToolbarOptions,
 } as AxisChartOptions);
 

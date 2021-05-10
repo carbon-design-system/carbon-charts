@@ -106,4 +106,15 @@ export class Bubble extends Scatter {
 			.attr('fill-opacity', options.bubble.fillOpacity)
 			.attr('opacity', 1);
 	}
+
+	getTooltipAdditionalItems(datum) {
+		const bubbleOptions = Tools.getProperty(this.getOptions(), 'bubble');
+
+		return [
+			{
+				label: Tools.getProperty(bubbleOptions, 'radiusLabel'),
+				value: datum[Tools.getProperty(bubbleOptions, 'radiusMapsTo')],
+			},
+		];
+	}
 }

@@ -342,6 +342,11 @@ export class Scatter extends Component {
 			.attr('opacity', 1);
 	};
 
+	// This is extended in bubble graphs
+	getTooltipAdditionalItems(datum) {
+		return null;
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = self.getOptions().data;
@@ -373,29 +378,10 @@ export class Scatter extends Component {
 					.classed('unfilled', false);
 
 				// Show tooltip
-				const bubbleOptions = Tools.getProperty(
-					self.getOptions(),
-					'bubble'
-				);
-
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
-					additionalItems: [
-						{
-							label: Tools.getProperty(
-								bubbleOptions,
-								'radiusLabel'
-							),
-							value:
-								datum[
-									Tools.getProperty(
-										bubbleOptions,
-										'radiusMapsTo'
-									)
-								],
-						},
-					],
+					additionalItems: self.getTooltipAdditionalItems(datum),
 				});
 
 				// Dispatch mouse event
