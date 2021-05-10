@@ -17,11 +17,18 @@ import {
 	LayoutComponent,
 	Tooltip,
 	Spacer,
+	CanvasChartClip,
 } from './components';
 import { Tools } from './tools';
 
 // Services
-import { DOMUtils, Events, GradientUtils, Transitions } from './services/index';
+import {
+	CanvasZoom,
+	DOMUtils,
+	Events,
+	GradientUtils,
+	Transitions,
+} from './services/index';
 
 export class Chart {
 	components: Component[];
@@ -30,6 +37,7 @@ export class Chart {
 		events: Events,
 		gradientUtils: GradientUtils,
 		transitions: Transitions,
+		canvasZoom: CanvasZoom,
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -133,6 +141,19 @@ export class Chart {
 				y: LayoutGrowth.PREFERRED,
 			},
 		};
+
+		// if canvas zoom is enabled
+		const isZoomEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			'canvasZoom',
+			'enabled'
+		);
+
+		if (isZoomEnabled && isZoomEnabled === true) {
+			graphFrameComponents.push(
+				new CanvasChartClip(this.model, this.services)
+			);
+		}
 
 		const graphFrameComponent = {
 			id: 'graph-frame',
