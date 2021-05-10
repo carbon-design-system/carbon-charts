@@ -13,6 +13,7 @@ import {
 import { ChartModel } from './model';
 import {
 	Component,
+	Modal,
 	Title,
 	Legend,
 	LayoutComponent,
@@ -232,6 +233,7 @@ export class Chart {
 
 		return [
 			new Tooltip(this.model, this.services),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,
