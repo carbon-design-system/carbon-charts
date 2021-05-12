@@ -12,9 +12,15 @@ import settings from 'carbon-components/es/globals/js/settings';
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
 
+import domtoimage from 'dom-to-image';
+
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
 export class DOMUtils extends Service {
+	constructor(model: any, services: any) {
+		super(model, services);
+	}
+
 	static getHTMLElementSize(element: HTMLElement) {
 		return {
 			width: element.clientWidth,
@@ -241,6 +247,34 @@ export class DOMUtils extends Service {
 
 	getHolder() {
 		return this.model.get('holder');
+	}
+
+	exportToJPG() {
+		domtoimage
+			.toJpeg(this.getMainContainer(), { quality: 1 })
+			.then(function (dataUrl) {
+				var img = new Image();
+				img.src = dataUrl;
+				document.body.appendChild(img);
+
+				// var link = document.createElement('a');
+				// link.download = 'my-image-name.jpeg';
+				// link.href = dataUrl;
+				// link.click();
+			});
+	}
+
+	exportToPNG() {
+		domtoimage
+			.toPng(this.getMainContainer())
+			.then(function (dataUrl) {
+				var img = new Image();
+				img.src = dataUrl;
+				document.body.appendChild(img);
+			})
+			.catch(function (error) {
+				console.error('oops, something went wrong!', error);
+			});
 	}
 
 	toggleFullscreen() {

@@ -1,0 +1,20 @@
+.#{$prefix}--modal .bx--modal-container {
+	width: 90%;
+
+	.#{$prefix}--modal-header {
+		.#{$prefix}--modal-header__label {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	.#{$prefix}--modal-close__icon {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
+	.#{$prefix}--modal-content {
+		padding-right: 1rem;
+		margin-bottom: 0;
+	}
+}

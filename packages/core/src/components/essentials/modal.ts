@@ -2,7 +2,7 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model';
-import { Events, ScaleTypes, TruncationTypes } from '../../interfaces';
+import { Events, ScaleTypes } from '../../interfaces';
 
 // Carbon modal
 import { Modal as CarbonModalComponent } from 'carbon-components';
@@ -88,16 +88,17 @@ export class Modal extends Component {
 		return `
 		<div class="bx--modal-container">
 			<div class="bx--modal-header">
-			<p class="bx--modal-header__label bx--type-delta" id="modal-5ppouesvfhc-label">Optional label</p>
-			<p class="bx--modal-header__heading bx--type-beta" id="modal-5ppouesvfhc-heading">Charting data</p>
-			<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
-				<svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-					<title>Close Modal</title>
-					<path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
-					/>
-				</svg>
-			</button>
+				<p class="bx--modal-header__label bx--type-delta">${options.title}</p>
+
+				<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+					<svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+						<title>Close Modal</title>
+						<path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+						/>
+					</svg>
+				</button>
 			</div>
+
 			<div class="bx--modal-content">
 				<table class="bx--data-table bx--data-table--no-border">
 					<thead>
@@ -113,6 +114,7 @@ export class Modal extends Component {
 							</th>
 						</tr>
 					</thead>
+
 					<tbody>
 						${displayData
 							.map(
