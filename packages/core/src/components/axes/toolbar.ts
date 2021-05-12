@@ -83,7 +83,9 @@ export class Toolbar extends Component {
 
 		const allToolbarControls = enteringToolbarControls
 			.merge(toolbarControls)
-			.classed('disabled', (d) => d.shouldBeDisabled ? d.shouldBeDisabled() : false)
+			.classed('disabled', (d) =>
+				d.shouldBeDisabled ? d.shouldBeDisabled() : false
+			)
 			.html(
 				(d) => `
 			<button
@@ -279,6 +281,7 @@ export class Toolbar extends Component {
 			'toolbar',
 			'controls'
 		);
+
 		const controlList = [];
 		controls.forEach((control) => {
 			const controlConfig = this.getControlConfigByType(control.type);
@@ -384,7 +387,30 @@ export class Toolbar extends Component {
 						this.services.events.dispatchEvent(Events.Modal.SHOW),
 				};
 				break;
-
+			case ToolbarControlTypes.EXPORT_CSV:
+				controlConfig = {
+					id: 'toolbar-export-CSV',
+					shouldBeDisabled: () => false,
+					iconSVGContent: this.getControlIconByType(controlType),
+					clickFunction: () => console.log('csv'),
+				};
+				break;
+			case ToolbarControlTypes.EXPORT_PNG:
+				controlConfig = {
+					id: 'toolbar-export-PNG',
+					shouldBeDisabled: () => false,
+					iconSVGContent: this.getControlIconByType(controlType),
+					clickFunction: () => this.services.domUtils.exportToPNG(),
+				};
+				break;
+			case ToolbarControlTypes.EXPORT_JPG:
+				controlConfig = {
+					id: 'toolbar-export-JPG',
+					shouldBeDisabled: () => false,
+					iconSVGContent: this.getControlIconByType(controlType),
+					clickFunction: () => this.services.domUtils.exportToJPG(),
+				};
+				break;
 			// add more toolbar control configuration here
 
 			default:
@@ -409,7 +435,12 @@ export class Toolbar extends Component {
 				return `<polygon points="21 2 21 4 26.59 4 17 13.58 18.41 15 28 5.41 28 11 30 11 30 2 21 2"/><polygon points="15 18.42 13.59 17 4 26.59 4 21 2 21 2 30 11 30 11 28 5.41 28 15 18.42"/>`;
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				return `<rect x="4" y="6" width="18" height="2"/><rect x="4" y="12" width="18" height="2"/><rect x="4" y="18" width="18" height="2"/><rect x="4" y="24" width="18" height="2"/><rect x="26" y="6" width="2" height="2"/><rect x="26" y="12" width="2" height="2"/><rect x="26" y="18" width="2" height="2"/><rect x="26" y="24" width="2" height="2"/>`;
-			// add more icons here
+			case ToolbarControlTypes.EXPORT_CSV:
+				return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`;
+			case ToolbarControlTypes.EXPORT_JPG:
+				return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`;
+			case ToolbarControlTypes.EXPORT_PNG:
+				return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`; // add more icons here
 			// svg icon must be with 32x32 viewBox
 
 			default:

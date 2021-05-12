@@ -206,6 +206,15 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			{
 				type: ToolbarControlTypes.MAKE_FULLSCREEN,
 			},
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
 		],
 	} as ToolbarOptions,
 } as AxisChartOptions);

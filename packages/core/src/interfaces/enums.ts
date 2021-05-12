@@ -212,6 +212,9 @@ export enum ChartTypes {
  * enum of supported toolbar control types
  */
 export enum ToolbarControlTypes {
+	EXPORT_CSV = 'Export as CSV',
+	EXPORT_PNG = 'Export as PNG',
+	EXPORT_JPG = 'Export as JPG',
 	ZOOM_IN = 'Zoom in',
 	ZOOM_OUT = 'Zoom out',
 	RESET_ZOOM = 'Reset zoom',
