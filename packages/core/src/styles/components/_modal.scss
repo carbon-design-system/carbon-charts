@@ -2,9 +2,14 @@
 	width: 90%;
 
 	.#{$prefix}--modal-header {
-		.#{$prefix}--modal-header__label {
+		&__label {
 			margin-top: 0;
 			margin-bottom: 0;
+		}
+
+		&__heading {
+			margin-top: 0.5rem;
+			margin-bottom: 1rem;
 		}
 	}
 
@@ -14,7 +19,26 @@
 	}
 
 	.#{$prefix}--modal-content {
-		padding-right: 1rem;
+		// padding-right: 1rem;
+		padding: 0;
 		margin-bottom: 0;
+
+		table {
+			position: relative;
+			border-collapse: collapse;
+
+			th {
+				position: sticky;
+				top: 0;
+			}
+		}
+	}
+
+	.#{$prefix}--modal-footer {
+		background-color: transparent;
+
+		.#{$prefix}--#{$charts-prefix}-modal-footer-spacer {
+			flex: 1;
+		}
 	}
 }

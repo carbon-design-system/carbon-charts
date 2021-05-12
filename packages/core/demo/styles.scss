@@ -1,4 +1,6 @@
 @import '../src/styles/vendor/@carbon/elements/scss/themes/mixins';
+@import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
+@import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
 
 body {
 	margin: 0;
@@ -41,6 +43,9 @@ div.container {
 	&.theme--g10 {
 		@import '../src/styles/styles-g10.scss';
 
+		@include modal;
+		@include data-table-core;
+
 		@include carbon--theme($carbon--theme--g10) {
 			color: $text-01;
 			background-color: $ui-background;
@@ -55,6 +60,9 @@ div.container {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			@include modal;
+			@include data-table-core;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -86,6 +94,9 @@ div.container {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			@include modal;
+			@include data-table-core;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -120,8 +131,6 @@ div.container {
 
 	@import '../src/styles/vendor/carbon-components/scss/globals/grid/grid';
 	@import '../src/styles/vendor/carbon-components/scss/components/button/button';
-	@import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
-	@import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
 	@import '../src/styles/vendor/carbon-components/scss/components/select/select';
 	@import '../src/styles/vendor/carbon-components/scss/components/tag/tag';
 	@import '../src/styles/vendor/carbon-components/scss/components/tooltip/tooltip';
