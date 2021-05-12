@@ -85,10 +85,13 @@ export class Modal extends Component {
 		const domainLabel = cartesianScales.getDomainLabel();
 		const rangeLabel = cartesianScales.getRangeLabel();
 
+		const chartprefix = Tools.getProperty(options, 'style', 'prefix');
+
 		return `
 		<div class="bx--modal-container">
 			<div class="bx--modal-header">
-				<p class="bx--modal-header__label bx--type-delta">${options.title}</p>
+				<p class="bx--modal-header__label bx--type-delta">Tabular representation</p>
+				<p class="bx--modal-header__heading bx--type-beta">${options.title}</p>
 
 				<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
 					<svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -130,13 +133,20 @@ export class Modal extends Component {
 										  )
 										: datum[domainIdentifier]
 								}</td>
-								<td>${datum[rangeIdentifier] === null ? '&ndash;' : datum[rangeIdentifier]}</td>
+								<td>${datum[rangeIdentifier] === null ? '&ndash;' : datum[rangeIdentifier].toLocaleString()}</td>
 							</tr>
 						`
 							)
 							.join('')}
 					</tbody>
 				</table>
+			</div>
+
+			<div class="bx--modal-content--overflow-indicator"></div>
+
+			<div class="bx--modal-footer">
+			  <div class="${settings.prefix}--${chartprefix}-modal-footer-spacer"></div>
+			  <button class="bx--btn bx--btn--primary" type="button"   data-modal-primary-focus>Download as CSV</button>
 			</div>
 		</div>`;
 	}

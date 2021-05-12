@@ -91,7 +91,11 @@ export class Toolbar extends Component {
 			<button
 				class="bx--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${d.id}">
-				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: 20px; height: 20px" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
+					d.iconWidth !== undefined ? d.iconWidth : '20px'
+				}; height: ${
+					d.iconWidth !== undefined ? d.iconHeight : '20px'
+				}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVGContent}
 				</svg>
 			</button>`
@@ -372,6 +376,8 @@ export class Toolbar extends Component {
 				controlConfig = {
 					id: 'toolbar-makefullscreen',
 					iconSVGContent: this.getControlIconByType(controlType),
+					iconWidth: '15px',
+					iconHight: '15px',
 					shouldBeDisabled: () => false,
 					clickFunction: () => {
 						this.services.domUtils.toggleFullscreen();
