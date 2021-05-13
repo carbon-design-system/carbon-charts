@@ -1095,6 +1095,20 @@
     "@carbon/import-once" "^10.6.0"
     "@carbon/layout" "^10.21.0"
 
+"@carbon/icon-helpers@^10.16.0":
+  version "10.16.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.16.0.tgz#66f20b9bba49c6ec4c956b8e9e7ec65bdf40da8f"
+  integrity sha512-cN1sM0xvlDEN1pYPDWoHcikGysCTnfA49/12H92dBkn14fpRmB87shIe3hzKlW6h4QP7CrnF0hB5SCkA2KC7Ng==
+
+"@carbon/icons-react@^10.31.0":
+  version "10.31.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.31.0.tgz#d1d79d00c72ae118bcf556d560e6efc1b362b751"
+  integrity sha512-9aUdErOQGZfPgjx+/tDw4lb0XHhkkwdHI/3Q74s3/OFxjcsl/MTbn36I15sanMqElBTAO3a/lU/mhFVnHqhjxw==
+  dependencies:
+    "@carbon/icon-helpers" "^10.16.0"
+    "@carbon/telemetry" "0.0.0-alpha.6"
+    prop-types "^15.7.2"
+
 "@carbon/icons@^10.28.0":
   version "10.28.0"
   resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.28.0.tgz#54d94972e5c0cf56aab9c424e8c436a4c7fe9818"

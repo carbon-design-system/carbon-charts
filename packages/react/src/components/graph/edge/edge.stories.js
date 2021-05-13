@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Edge from './edge';
 import { elbow, bezier } from './buildPath';
-import './_edge.scss';
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };

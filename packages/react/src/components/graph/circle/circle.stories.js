@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Circle from './circle';
-import './_circle.scss';
 
 import { User16 } from '@carbon/icons-react';
 
