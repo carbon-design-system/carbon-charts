@@ -13,9 +13,11 @@ import {
 	GaugeChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	BulletChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	// Components
 	GridOptions,
@@ -40,6 +42,7 @@ import {
 	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
+import { circlePack } from './configuration-non-customizable';
 
 /*
  *****************************
@@ -326,6 +329,23 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 } as BubbleChartOptions);
 
 /**
+ * options specific to bullet charts
+ */
+const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
+	bullet: {
+		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
+	},
+	grid: {
+		x: {
+			enabled: false,
+		},
+		y: {
+			enabled: false,
+		},
+	},
+} as BulletChartOptions);
+
+/*
  * options specific to word cloud charts
  */
 const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
@@ -455,6 +475,20 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	}),
 } as TreemapChartOptions);
 
+/*
+ * options specific to circle pack charts
+ */
+const circlePackChart: CirclePackChartOptions = Tools.merge(
+	{},
+	chart,
+	circlePack,
+	{
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'name',
+		}),
+	} as CirclePackChartOptions
+);
+
 export const options = {
 	chart,
 	axisChart,
@@ -463,6 +497,7 @@ export const options = {
 	stackedBarChart,
 	boxplotChart,
 	bubbleChart,
+	bulletChart,
 	lineChart,
 	areaChart,
 	stackedAreaChart,
@@ -475,6 +510,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	circlePackChart,
 	wordCloudChart,
 };
 

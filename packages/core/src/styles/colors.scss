@@ -1,7 +1,6 @@
 @import './color-palatte.scss';
 
 @function getThemeColors() {
-	$color-map: ();
 	@if $carbon--theme ==
 		$carbon--theme--g100 or
 		$carbon--theme ==
@@ -10,6 +9,18 @@
 		@return color-property(null, $dark-theme-colors);
 	} @else {
 		@return color-property(null, $white-theme-colors);
+	}
+}
+
+@function getLegendAreaItemColors() {
+	@if $carbon--theme ==
+		$carbon--theme--g100 or
+		$carbon--theme ==
+		$carbon--theme--g90
+	{
+		@return color-property(null, $dark-theme-legend-area-item-colors);
+	} @else {
+		@return color-property(null, $white-theme-legend-area-item-colors);
 	}
 }
 
@@ -59,6 +70,56 @@
 	@each $token, $color in $color-map {
 		.tooltip-#{$token} {
 			background-color: $color;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--legend {
+	$area-item-color-map: getLegendAreaItemColors();
+
+	.additional-item > .icon {
+		@each $token, $color in $area-item-color-map {
+			.area-#{$token} {
+				fill: $color;
+
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					stroke: $dark-theme-legend-area-item-stroke;
+				} @else {
+					stroke: $white-theme-legend-area-item-stroke;
+				}
+			}
+		}
+
+		.quartile {
+			&-wrapper {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: getColorValue('gray', 80);
+					stroke: $dark-theme-legend-area-item-stroke;
+				} @else {
+					fill: getColorValue('gray', 20);
+					stroke: $white-theme-legend-area-item-stroke;
+				}
+			}
+
+			&-line {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: #fff;
+				} @else {
+					fill: #000;
+				}
+			}
 		}
 	}
 }

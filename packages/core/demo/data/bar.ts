@@ -150,11 +150,19 @@ export const simpleBarAdditionalLegendItemsOptions = {
 			},
 			{
 				type: 'area',
-				name: 'Area',
+				name: 'Poor area',
+			},
+			{
+				type: 'area',
+				name: 'Satisfactory area',
+			},
+			{
+				type: 'area',
+				name: 'Great area',
 			},
 			{
 				type: 'quartile',
-				name: 'Quartile',
+				name: 'Quartiles',
 			},
 			{
 				type: 'size',
@@ -392,6 +400,28 @@ export const simpleBarTimeSeriesDenseOptions = {
 };
 
 export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
+
+// Horizontal floating time series
+export const floatingHorizontalBarTimeSeriesData = [
+	{ group: 'Qty', date: new Date(2019, 0, 1), value: [10000, 41000] },
+	{ group: 'More', date: new Date(2019, 0, 2), value: 65000 },
+	{ group: 'Sold', date: new Date(2019, 0, 3), value: 30000 },
+	{ group: 'Restocking', date: new Date(2019, 0, 6), value: [22000, 69213] },
+	{ group: 'Misc', date: new Date(2019, 0, 7), value: [3500, 71213] },
+];
+
+export const floatingHorizontalBarTimeSeriesOptions = {
+	title: 'Horizontal floating bar (time series)',
+	axes: {
+		left: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+		bottom: {
+			mapsTo: 'value',
+		},
+	},
+};
 
 // Stacked bar
 export const stackedBarData = [
@@ -677,5 +707,50 @@ export const stackedHorizontalBarSkeletonOptions = {
 	},
 	data: {
 		loading: true,
+	},
+};
+
+// floating bars
+export const floatingBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 16932] },
+];
+
+export const floatingBarOptions = {
+	title: 'Floating vertical bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+};
+
+export const floatingHorizontalBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 36932] },
+];
+
+export const floatingHorizontalBarOptions = {
+	title: 'Floating horizontal bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+		bottom: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
 	},
 };

@@ -1,19 +1,9 @@
 import { ZoomBarTypes } from './interfaces';
-
-export const color = {
-	pairingOptions: {
-		'1-color': 4,
-		'2-color': 5,
-		'3-color': 5,
-		'4-color': 3,
-		'5-color': 2,
-		'14-color': 1,
-	},
-};
+import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
 	opacity: {
-		unselected: 0,
+		unselected: 0.05,
 		selected: 0.4,
 	},
 };
@@ -25,7 +15,39 @@ export const axis = {
 		verticalSpaceRatio: 2.5,
 		horizontalSpaceRatio: 3.5,
 	},
+	ratio: {
+		reference: 'value',
+		compareTo: 'marker',
+	},
 	paddingRatio: 0.1,
+};
+
+export const canvasZoomSettings = {
+	duration: 1000,
+	ease: easeCubicInOut,
+	zoomLevel: 3,
+};
+
+export const circlePack = {
+	circles: {
+		fillOpacity: 0.3,
+	},
+	padding: {
+		mainGroup: 4,
+		children: 2,
+	},
+	hierarchyLevel: 2,
+};
+
+export const color = {
+	pairingOptions: {
+		'1-color': 4,
+		'2-color': 5,
+		'3-color': 5,
+		'4-color': 3,
+		'5-color': 2,
+		'14-color': 1,
+	},
 };
 
 export const boxplot = {
@@ -67,31 +89,39 @@ export const legend = {
 			{ cx: 7, cy: 7, r: 6.5 },
 			{ cx: 7, cy: 10, r: 3.5 },
 		],
-		color: '#8c8c8c',
+		fill: null,
+		stroke: '#8c8c8c',
 	},
 	line: {
 		yPosition: 6,
 		width: 24,
 		strokeWidth: 1.4,
-		color: '#999999',
+		fill: null,
+		stroke: '#999999',
 	},
 	area: {
 		width: 24,
 		height: 13,
-		color: '#c6c6c6',
+		fill: '#6f6f6f',
+		stroke: null,
 	},
 	size: {
 		iconData: [
 			{ width: 23, height: 12 },
 			{ width: 13, height: 6 },
 		],
-		color: '#8D8D8D',
+		fill: null,
+		stroke: '#8D8D8D',
 	},
 	quartile: {
 		iconData: [
-			{ x: 0, y: 0, width: 24, height: 13, color: '#6929C4' },
-			{ x: 11, y: 4, width: 1, height: 4, color: '#FFFFFF' },
+			{ x: 0, y: 0, width: 24, height: 13 },
+			{ x: 11, y: 4, width: 1, height: 4 },
 		],
+	},
+	zoom: {
+		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
+		color: '#8D8D8D',
 	},
 };
 

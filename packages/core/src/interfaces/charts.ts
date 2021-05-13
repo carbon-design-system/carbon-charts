@@ -220,6 +220,18 @@ export interface BubbleChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to bullet charts
+ */
+export interface BulletChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bullets
+	 */
+	bullet?: {
+		performanceAreaTitles?: string[];
+	};
+}
+
+/**
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
@@ -394,3 +406,20 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to circle pack charts
+ */
+export interface CirclePackChartOptions extends BaseChartOptions {
+	circlePack?: {
+		circles: {
+			fillOpacity: number;
+		};
+		// depth of nodes to display
+		hierachyLevel: number;
+		padding?: {
+			outer?: number;
+			inner?: number;
+		};
+	};
+}

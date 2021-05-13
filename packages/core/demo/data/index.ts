@@ -2,6 +2,7 @@ import * as areaDemos from './area';
 import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
+import * as bulletDemos from './bullet';
 import * as comboDemos from './combo';
 import * as donutDemos from './donut';
 import * as gaugeDemos from './gauge';
@@ -14,6 +15,7 @@ import * as scatterDemos from './scatter';
 import * as stepDemos from './step';
 import * as timeSeriesAxisDemos from './time-series-axis';
 import * as treemapDemos from './treemap';
+import * as circlePackDemos from './circle-pack';
 import * as toolbarDemos from './toolbar';
 import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
@@ -23,6 +25,7 @@ export * from './area';
 export * from './bar';
 export * from './boxplot';
 export * from './bubble';
+export * from './bullet';
 export * from './combo';
 export * from './donut';
 export * from './gauge';
@@ -35,6 +38,7 @@ export * from './scatter';
 export * from './step';
 export * from './time-series-axis';
 export * from './treemap';
+export * from './circle-pack';
 export * from './toolbar';
 export * from './wordcloud';
 export * from './zoom-bar';
@@ -470,6 +474,27 @@ const simpleChartDemos = [
 		],
 	},
 	{
+		title: 'Bar (floating)',
+		demos: [
+			{
+				options: barDemos.floatingHorizontalBarTimeSeriesOptions,
+				data: barDemos.floatingHorizontalBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+				mainDemo: true,
+			},
+			{
+				options: barDemos.floatingBarOptions,
+				data: barDemos.floatingBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
+				options: barDemos.floatingHorizontalBarOptions,
+				data: barDemos.floatingHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+		],
+	},
+	{
 		title: 'Bar (grouped)',
 		description:
 			'A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.',
@@ -607,6 +632,16 @@ const simpleChartDemos = [
 				options: bubbleDemos.bubbleSkeletonOptions,
 				data: bubbleDemos.bubbleSkeletonData,
 				chartType: chartTypes.BubbleChart,
+			},
+		],
+	},
+	{
+		title: 'Bullet',
+		demos: [
+			{
+				options: bulletDemos.basicBulletOptions,
+				data: bulletDemos.basicBulletData,
+				chartType: chartTypes.BulletChart,
 			},
 		],
 	},
@@ -952,6 +987,36 @@ const complexChartDemos = [
 				data: treemapDemos.treemapData,
 				options: treemapDemos.treemapOptions,
 				chartType: chartTypes.TreemapChart,
+			},
+		],
+	},
+	{
+		title: 'Circle Pack',
+		demos: [
+			{
+				data: circlePackDemos.circlePackSingleLevelData,
+				options: circlePackDemos.circlePackSingleOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackTwoLevelData,
+				options: circlePackDemos.circlePackTwoLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelsMonochromeData,
+				options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},

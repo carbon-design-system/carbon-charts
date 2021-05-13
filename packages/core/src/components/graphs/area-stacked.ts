@@ -2,13 +2,7 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
-import {
-	Roles,
-	ScaleTypes,
-	Events,
-	ColorClassNameTypes,
-	CartesianOrientations,
-} from '../../interfaces';
+import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
 
 // D3 Imports
 import { area } from 'd3-shape';
@@ -65,7 +59,7 @@ export class StackedArea extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => d[0][groupMapsTo]);
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -86,16 +80,18 @@ export class StackedArea extends Component {
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => d[0][groupMapsTo])
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: d[0][groupMapsTo],
+					dataGroupName: Tools.getProperty(d, 0, groupMapsTo),
 					originalClassName: 'area',
 				})
 			)
-			.style('fill', (d) => self.model.getFillColor(d[0][groupMapsTo]))
+			.style('fill', (d) =>
+				self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo))
+			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
 			.transition(
@@ -119,7 +115,10 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition('legend-hover-area')
 			)
 			.attr('opacity', (d) => {
-				if (d[0][groupMapsTo] !== hoveredElement.datum().name) {
+				if (
+					Tools.getProperty(d, 0, groupMapsTo) !==
+					hoveredElement.datum().name
+				) {
 					return Configuration.area.opacity.unselected;
 				}
 

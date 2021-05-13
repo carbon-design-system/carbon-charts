@@ -5,6 +5,7 @@ import SimpleBarChart from './bar-chart-simple';
 import StackedBarChart from './bar-chart-stacked';
 import BoxplotChart from './boxplot-chart';
 import BubbleChart from './bubble-chart';
+import BulletChart from './bullet-chart';
 import DonutChart from './donut-chart';
 import GaugeChart from './gauge-chart';
 import LineChart from './line-chart';
@@ -15,6 +16,7 @@ import MeterChart from './meter-chart';
 import RadarChart from './radar-chart';
 import ComboChart from './combo-chart';
 import TreemapChart from './treemap-chart';
+import CirclePackChart from './circle-pack-chart';
 import WordCloudChart from './wordcloud-chart';
 
 export {
@@ -25,6 +27,7 @@ export {
 	StackedBarChart,
 	BoxplotChart,
 	BubbleChart,
+	BulletChart,
 	DonutChart,
 	GaugeChart,
 	LineChart,
@@ -35,5 +38,6 @@ export {
 	RadarChart,
 	ComboChart,
 	TreemapChart,
+	CirclePackChart,
 	WordCloudChart,
 };

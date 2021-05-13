@@ -67,6 +67,7 @@ export enum ScaleTypes {
 	LINEAR = 'linear',
 	LOG = 'log',
 	LABELS = 'labels',
+	LABELS_RATIO = 'labels-ratio',
 }
 
 /**
@@ -220,4 +221,5 @@ export enum LegendItemType {
 	SIZE = 'size',
 	LINE = 'line',
 	QUARTILE = 'quartile',
+	ZOOM = 'zoom',
 }
