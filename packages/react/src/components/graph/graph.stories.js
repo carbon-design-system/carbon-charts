@@ -11,7 +11,7 @@ const nodeHeight = 64;
 const nodeWidth = 200;
 const circleSize = 64;
 
-const stories = storiesOf('Graph', module);
+const stories = storiesOf('Experimental|Graph', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));

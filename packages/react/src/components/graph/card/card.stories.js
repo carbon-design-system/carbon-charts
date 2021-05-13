@@ -4,7 +4,7 @@ import Card from './card';
 
 import { User16 } from '@carbon/icons-react';
 
-const stories = storiesOf('Card', module);
+const stories = storiesOf('Experimental|Card', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));
