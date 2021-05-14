@@ -1,6 +1,6 @@
 import * as Configuration from '../src/configuration';
 
-const generateThemePickerHTML = (container) => {
+const generateThemePickerHTML = container => {
 	const div = document.createElement('div');
 	div.id = 'theme-picker';
 	div.innerHTML = `
@@ -69,7 +69,7 @@ const generateColorPalettePickerHTML = (container, chart) => {
 			Choose an option
 			</option>
 			${Object.keys(colorPairingOptions)
-				.map((colorGroup) => {
+				.map(colorGroup => {
 					const optionsCount = colorPairingOptions[colorGroup];
 					let optionsHTML = `<optgroup class="bx--select-optgroup" label="${colorGroup} groups">`;
 
@@ -138,7 +138,7 @@ export const addRadioButtonEventListeners = (container, chart) => {
 	const radioButtons = container.querySelectorAll(
 		'div#theme-picker input.bx--radio-button'
 	);
-	radioButtons.forEach((radioButton) => {
+	radioButtons.forEach(radioButton => {
 		radioButton.addEventListener('click', (e: any) => {
 			const theme = e.target.value;
 			container.setAttribute('class', `container theme--${theme}`);

@@ -393,15 +393,15 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
 		deltaArrow: {
-			size: (radius) => radius / 8,
+			size: radius => radius / 8,
 			enabled: true,
 		},
 		showPercentageSymbol: true,
 		status: null,
 		numberSpacing: 10,
-		deltaFontSize: (radius) => radius / 8,
-		valueFontSize: (radius) => radius / 2.5,
-		numberFormatter: (number) =>
+		deltaFontSize: radius => radius / 8,
+		valueFontSize: radius => radius / 2.5,
+		numberFormatter: number =>
 			number.toFixed(2) % 1 !== 0
 				? number.toFixed(2).toLocaleString()
 				: number.toFixed().toLocaleString(),
@@ -415,11 +415,10 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: (radius) =>
-				Math.min((radius / 100) * 24, 24) + 'px',
-			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + 'px',
-			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
-			numberFormatter: (number) => Math.floor(number).toLocaleString(),
+			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + 'px',
+			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + 'px',
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString(),
 		},
 		alignment: Alignments.LEFT,
 	},
@@ -454,7 +453,7 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 		gridline: {
 			enabled: true,
 		},
-		valueFormatter: (value) =>
+		valueFormatter: value =>
 			value !== null && value !== undefined ? value : 'N/A',
 	},
 } as RadarChartOptions);

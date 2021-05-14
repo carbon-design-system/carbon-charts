@@ -35,7 +35,7 @@ export class StackedArea extends Component {
 		const { groupMapsTo } = options.data;
 
 		const percentage = Object.keys(options.axes).some(
-			(axis) => options.axes[axis].percentage
+			axis => options.axes[axis].percentage
 		);
 
 		const stackedData = this.model.getStackedData({
@@ -59,7 +59,7 @@ export class StackedArea extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
+			.data(stackedData, d => Tools.getProperty(d, 0, groupMapsTo));
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -70,26 +70,32 @@ export class StackedArea extends Component {
 					i
 				)
 			)
-			.y0((d) => mainYScale(d[0]))
-			.y1((d) => mainYScale(d[1]))
+			.y0(d => mainYScale(d[0]))
+			.y1(d => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
-		areas.exit().attr('opacity', 0).remove();
+		areas
+			.exit()
+			.attr('opacity', 0)
+			.remove();
 
-		const enteringAreas = areas.enter().append('path').attr('opacity', 0);
+		const enteringAreas = areas
+			.enter()
+			.append('path')
+			.attr('opacity', 0);
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackedData, d => Tools.getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
-			.attr('class', (d) =>
+			.attr('class', d =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: Tools.getProperty(d, 0, groupMapsTo),
 					originalClassName: 'area',
 				})
 			)
-			.style('fill', (d) =>
+			.style('fill', d =>
 				self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo))
 			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
@@ -114,7 +120,7 @@ export class StackedArea extends Component {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-area')
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', d => {
 				if (
 					Tools.getProperty(d, 0, groupMapsTo) !==
 					hoveredElement.datum().name

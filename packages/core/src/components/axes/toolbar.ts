@@ -123,7 +123,7 @@ export class Toolbar extends Component {
 		} else {
 			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
-			buttonList.forEach((button) => {
+			buttonList.forEach(button => {
 				// button container
 				const buttonContainer = DOMUtils.appendOrSelect(
 					container,
@@ -331,7 +331,9 @@ export class Toolbar extends Component {
 		let overflowMenuHtml;
 		overflowMenuHtml = `<div data-floating-menu-container="true" data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
-				tabindex="-1" role="${Roles.MENU}" aria-label="Menu" data-floating-menu-direction="bottom"
+				tabindex="-1" role="${
+					Roles.MENU
+				}" aria-label="Menu" data-floating-menu-direction="bottom"
 				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
 
 		// generate html for each overflow menu items
@@ -371,7 +373,7 @@ export class Toolbar extends Component {
 			'controls'
 		);
 		const controlList = [];
-		controls.forEach((control) => {
+		controls.forEach(control => {
 			const controlConfig = this.getControlConfigByType(control.type);
 
 			// add to list if config is valid

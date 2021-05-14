@@ -32,13 +32,13 @@ export class Legend extends Component {
 
 		const legendItems = svg
 			.selectAll('g.legend-item')
-			.data(dataGroups, (dataGroup) => dataGroup.name);
+			.data(dataGroups, dataGroup => dataGroup.name);
 
 		const addedLegendItems = legendItems
 			.enter()
 			.append('g')
 			.classed('legend-item', true)
-			.classed('active', function (d, i) {
+			.classed('active', function(d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});
 
@@ -57,7 +57,7 @@ export class Legend extends Component {
 			.merge(legendItems.select('rect.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
-			.attr('aria-label', (d) => d.name)
+			.attr('aria-label', d => d.name)
 			.attr(
 				'aria-checked',
 				({ status }) =>
@@ -74,13 +74,13 @@ export class Legend extends Component {
 					originalClassName: 'checkbox',
 				})
 			)
-			.style('fill', (d) =>
+			.style('fill', d =>
 				d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) ||
 					  this.model.getStrokeColor(d.name)
 					: null
 			)
-			.classed('active', function (d, i) {
+			.classed('active', function(d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});
 
@@ -133,7 +133,7 @@ export class Legend extends Component {
 			addedAdditionalItems
 				.append('g')
 				.classed('icon', true)
-				.each(function (d, i) {
+				.each(function(d, i) {
 					const additionalItem = select(this);
 
 					if (!previousType || previousType != d.type) {
@@ -213,9 +213,9 @@ export class Legend extends Component {
 				.classed('radius', true)
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'radius')
-				.attr('cx', (d) => d.cx)
-				.attr('cy', (d) => d.cy)
-				.attr('r', (d) => d.r)
+				.attr('cx', d => d.cx)
+				.attr('cy', d => d.cy)
+				.attr('r', d => d.r)
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style(
 					'stroke',
@@ -273,9 +273,9 @@ export class Legend extends Component {
 			sizeEnter
 				.append('rect')
 				.classed('size', true)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
-				.attr('y', (d) => 24 - d.height)
+				.attr('width', d => d.width)
+				.attr('height', d => d.height)
+				.attr('y', d => 24 - d.height)
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1);
@@ -295,10 +295,10 @@ export class Legend extends Component {
 					'class',
 					(d, i) => `quartile-${i === 0 ? 'wrapper' : 'line'}`
 				)
-				.attr('x', (d) => d.x)
-				.attr('y', (d) => d.y)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height);
+				.attr('x', d => d.x)
+				.attr('y', d => d.y)
+				.attr('width', d => d.width)
+				.attr('height', d => d.height);
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
 			const { iconData, color } = Tools.getProperty(
 				Configuration,
@@ -316,16 +316,16 @@ export class Legend extends Component {
 			// add '+' for the magnifying icon
 			zoomEnter
 				.append('g')
-				.attr('x', (d) => d.x)
-				.attr('y', (d) => d.y)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
+				.attr('x', d => d.x)
+				.attr('y', d => d.y)
+				.attr('width', d => d.width)
+				.attr('height', d => d.height)
 				.append('polygon')
 				.attr(
 					'points',
 					'7.7 4.82 5.78 4.82 5.78 2.89 4.82 2.89 4.82 4.82 2.89 4.82 2.89 5.78 4.82 5.78 4.82 7.7 5.78 7.7 5.78 5.78 7.7 5.78 7.7 4.82'
 				)
-				.attr('fill', (d) =>
+				.attr('fill', d =>
 					itemConfig.color ? itemConfig.color : color
 				);
 
@@ -336,7 +336,7 @@ export class Legend extends Component {
 					'd',
 					'M9.36,8.67A5.22,5.22,0,0,0,10.59,5.3,5.3,5.3,0,1,0,5.3,10.59,5.22,5.22,0,0,0,8.67,9.36L12.32,13l.68-.68Zm-4.06,1A4.34,4.34,0,1,1,9.63,5.3,4.33,4.33,0,0,1,5.3,9.63Z'
 				)
-				.attr('fill', (d) =>
+				.attr('fill', d =>
 					itemConfig.color ? itemConfig.color : color
 				);
 		}
@@ -362,7 +362,7 @@ export class Legend extends Component {
 
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
-			addedLegendItemsText.html(function (d) {
+			addedLegendItemsText.html(function(d) {
 				if (d.name.length > truncationThreshold) {
 					return Tools.truncateLabel(
 						d.name,
@@ -374,7 +374,7 @@ export class Legend extends Component {
 				}
 			});
 		} else {
-			addedLegendItemsText.html((d) => d.name);
+			addedLegendItemsText.html(d => d.name);
 		}
 	}
 
@@ -386,12 +386,12 @@ export class Legend extends Component {
 		const { DISABLED } = Configuration.legend.items.status;
 		const dataGroups = this.model.getDataGroups();
 		const hasDeactivatedItems = dataGroups.some(
-			(dataGroup) => dataGroup.status === DISABLED
+			dataGroup => dataGroup.status === DISABLED
 		);
 
 		addedLegendItems
 			.merge(svg.selectAll(`g.${className}`))
-			.each(function (d) {
+			.each(function(d) {
 				const legendItem = select(this);
 				const svgDimensions = DOMUtils.getSVGElementSize(self.parent, {
 					useAttr: true,
@@ -552,8 +552,8 @@ export class Legend extends Component {
 		} else if (itemType === LegendItemType.RADIUS) {
 			legendItem
 				.selectAll('circle.radius')
-				.attr('cx', (d) => itemConfig.startingPoint + d.cx)
-				.attr('cy', (d) => yPosition + d.cy);
+				.attr('cx', d => itemConfig.startingPoint + d.cx)
+				.attr('cy', d => yPosition + d.cy);
 
 			legendItem
 				.select('text')
@@ -564,9 +564,8 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${itemConfig.startingPoint - translateOffset}, ${
-						yPosition - 12
-					})`
+					`translate(${itemConfig.startingPoint -
+						translateOffset}, ${yPosition - 12})`
 				);
 
 			legendItem
@@ -596,9 +595,8 @@ export class Legend extends Component {
 				.selectAll('g.icon')
 				.attr(
 					'transform',
-					`translate(${
-						itemConfig.startingPoint - translateOffset
-					}, ${yPosition})`
+					`translate(${itemConfig.startingPoint -
+						translateOffset}, ${yPosition})`
 				);
 
 			legendItem
@@ -628,7 +626,7 @@ export class Legend extends Component {
 		);
 
 		svg.selectAll('g.legend-item')
-			.on('mouseover', function () {
+			.on('mouseover', function() {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this),
 				});
@@ -667,10 +665,10 @@ export class Legend extends Component {
 					});
 				}
 			})
-			.on('mousemove', function () {
+			.on('mousemove', function() {
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function () {
+			.on('click', function() {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this),
 				});
@@ -680,7 +678,7 @@ export class Legend extends Component {
 
 				self.model.toggleDataLabel(clickedItemData.name);
 			})
-			.on('mouseout', function () {
+			.on('mouseout', function() {
 				const hoveredItem = select(this);
 				hoveredItem.select('rect.hover-stroke').remove();
 				hoveredItem.select('rect.checkbox').classed('hovered', false);
@@ -695,7 +693,7 @@ export class Legend extends Component {
 				);
 			});
 
-		svg.selectAll('g.legend-item rect.checkbox').on('keyup', function (d) {
+		svg.selectAll('g.legend-item rect.checkbox').on('keyup', function(d) {
 			if (event.key && (event.key === 'Enter' || event.key === ' ')) {
 				event.preventDefault();
 
@@ -703,7 +701,7 @@ export class Legend extends Component {
 			}
 		});
 
-		svg.selectAll('g.additional-item').on('mouseover', function () {
+		svg.selectAll('g.additional-item').on('mouseover', function() {
 			const hoveredItem = select(this);
 
 			const hoveredItemData = hoveredItem.datum() as any;

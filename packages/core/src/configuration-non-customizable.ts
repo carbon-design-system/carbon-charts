@@ -85,10 +85,7 @@ export const legend = {
 		radius: 6.5,
 	},
 	radius: {
-		iconData: [
-			{ cx: 7, cy: 7, r: 6.5 },
-			{ cx: 7, cy: 10, r: 3.5 },
-		],
+		iconData: [{ cx: 7, cy: 7, r: 6.5 }, { cx: 7, cy: 10, r: 3.5 }],
 		fill: null,
 		stroke: '#8c8c8c',
 	},
@@ -106,10 +103,7 @@ export const legend = {
 		stroke: null,
 	},
 	size: {
-		iconData: [
-			{ width: 23, height: 12 },
-			{ width: 13, height: 6 },
-		],
+		iconData: [{ width: 23, height: 12 }, { width: 13, height: 6 }],
 		fill: null,
 		stroke: '#8D8D8D',
 	},

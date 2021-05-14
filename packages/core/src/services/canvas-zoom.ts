@@ -43,9 +43,8 @@ export class CanvasZoom extends Service {
 			.ease(settings.ease)
 			.attr(
 				'transform',
-				`translate(${width / 2}, ${
-					height / 2
-				}) scale(${zoomLevel}) translate(${-x},${-y})`
+				`translate(${width / 2}, ${height /
+					2}) scale(${zoomLevel}) translate(${-x},${-y})`
 			);
 
 		// Dispatch canvas zoom in event

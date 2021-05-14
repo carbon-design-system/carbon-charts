@@ -55,19 +55,25 @@ export class Lollipop extends Scatter {
 			.selectAll('line.line')
 			.data(
 				this.getScatterData(),
-				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+				datum => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 
 		// Remove lines that are no longer needed
-		lines.exit().attr('opacity', 0).remove();
+		lines
+			.exit()
+			.attr('opacity', 0)
+			.remove();
 
 		// Remove lines that need to be removed
-		const enteringLines = lines.enter().append('line').attr('opacity', 0);
+		const enteringLines = lines
+			.enter()
+			.append('line')
+			.attr('opacity', 0);
 
 		const allLines = enteringLines
 			.merge(lines)
 			.classed('line', true)
-			.attr('class', (d) =>
+			.attr('class', d =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: d[groupMapsTo],
@@ -80,7 +86,7 @@ export class Lollipop extends Scatter {
 					animate
 				)
 			)
-			.style('stroke', (d) =>
+			.style('stroke', d =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 			)
 			.attr('opacity', 1);
@@ -130,7 +136,7 @@ export class Lollipop extends Scatter {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		this.parent.selectAll('line.line').attr('stroke-width', (d) => {
+		this.parent.selectAll('line.line').attr('stroke-width', d => {
 			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
 				return Configuration.lines.weight.unselected;
 			}
@@ -157,7 +163,7 @@ export class Lollipop extends Scatter {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-line')
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', d => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
 					return Configuration.lines.opacity.unselected;
 				}

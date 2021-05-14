@@ -92,7 +92,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
@@ -122,7 +122,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
 				const x1 = x0;
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
@@ -159,7 +159,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -191,7 +191,7 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.highlight-area'))
 			.attr('class', 'highlight-area')
 			.attr('opacity', 0)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -225,7 +225,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -259,7 +259,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 2;
@@ -293,7 +293,7 @@ export class Boxplot extends Component {
 					animate
 				)
 			)
-			.attr('d', (d) => {
+			.attr('d', d => {
 				const x0 =
 					cartesianScales.getDomainValue(d[groupMapsTo]) -
 					boxWidth / 4;
@@ -310,8 +310,8 @@ export class Boxplot extends Component {
 		/*
 		 * Draw out and update the outlier circles
 		 */
-		const circles = allBoxGroups.selectAll('circle.outlier').data((d) =>
-			d.outliers.map((outlier) => {
+		const circles = allBoxGroups.selectAll('circle.outlier').data(d =>
+			d.outliers.map(outlier => {
 				return {
 					min: d.whiskers.min,
 					max: d.whiskers.max,
@@ -359,7 +359,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('path.highlight-area')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function(datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -417,7 +417,7 @@ export class Boxplot extends Component {
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function(datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -431,14 +431,14 @@ export class Boxplot extends Component {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function (datum) {
+			.on('click', function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function(datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -475,7 +475,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -513,7 +513,7 @@ export class Boxplot extends Component {
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function(datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -527,7 +527,7 @@ export class Boxplot extends Component {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function (datum) {
+			.on('click', function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_CLICK,
@@ -537,7 +537,7 @@ export class Boxplot extends Component {
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)

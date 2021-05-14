@@ -59,7 +59,7 @@ export class Line extends Component {
 		let data = [];
 		if (this.configs.stacked) {
 			const percentage = Object.keys(options.axes).some(
-				(axis) => options.axes[axis].percentage
+				axis => options.axes[axis].percentage
 			);
 			const { groupMapsTo } = options.data;
 			const stackedData = this.model.getStackedData({
@@ -67,7 +67,7 @@ export class Line extends Component {
 				percentage,
 			});
 
-			data = stackedData.map((d) => {
+			data = stackedData.map(d => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 					d
 				);
@@ -76,12 +76,12 @@ export class Line extends Component {
 				);
 				return {
 					name: Tools.getProperty(d, 0, groupMapsTo),
-					data: d.map((datum) => ({
+					data: d.map(datum => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[groupMapsTo]: datum[groupMapsTo],
 						[rangeIdentifier]: datum[1],
 					})),
-					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1]),
+					hidden: !Tools.some(d, datum => datum[0] !== datum[1]),
 				};
 			});
 		} else {
@@ -91,13 +91,16 @@ export class Line extends Component {
 		// Update the bound data on lines
 		const lines = svg
 			.selectAll('path.line')
-			.data(data, (group) => group.name);
+			.data(data, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		lines.exit().attr('opacity', 0).remove();
+		lines
+			.exit()
+			.attr('opacity', 0)
+			.remove();
 
 		// Add lines that need to be introduced
 		const enteringLines = lines
@@ -109,22 +112,22 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
-			.data(data, (group) => group.name)
-			.attr('class', (group) =>
+			.data(data, group => group.name)
+			.attr('class', group =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: group.name,
 					originalClassName: 'line',
 				})
 			)
-			.style('stroke', (group) => this.model.getStrokeColor(group.name))
+			.style('stroke', group => this.model.getStrokeColor(group.name))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'line')
-			.attr('aria-label', (group) => {
+			.attr('aria-label', group => {
 				const { data: groupData } = group;
 				return groupData
-					.map((datum) => {
+					.map(datum => {
 						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
 							datum
 						);
@@ -139,8 +142,8 @@ export class Line extends Component {
 					animate
 				)
 			)
-			.attr('opacity', (d) => (d.hidden ? 0 : 1))
-			.attr('d', (group) => {
+			.attr('opacity', d => (d.hidden ? 0 : 1))
+			.attr('d', group => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);
 			});
@@ -154,7 +157,7 @@ export class Line extends Component {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-line')
 			)
-			.attr('opacity', (group) => {
+			.attr('opacity', group => {
 				if (group.name !== hoveredElement.datum()['name']) {
 					return Configuration.lines.opacity.unselected;
 				}

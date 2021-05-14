@@ -8,6 +8,6 @@ export class GaugeChartModel extends ChartModel {
 	}
 
 	getDataGroups() {
-		return super.getDataGroups().filter((item) => item.name !== 'delta');
+		return super.getDataGroups().filter(item => item.name !== 'delta');
 	}
 }

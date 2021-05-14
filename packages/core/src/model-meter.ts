@@ -64,7 +64,7 @@ export class MeterChartModel extends ChartModel {
 
 		if (allRanges) {
 			const result = allRanges.filter(
-				(step) =>
+				step =>
 					step.range[0] <= boundedValue &&
 					boundedValue <= step.range[1]
 			);

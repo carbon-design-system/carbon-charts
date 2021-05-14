@@ -63,7 +63,7 @@ export class ChartBrush extends Component {
 				}
 			}
 
-			const updateSelectionDash = (selection) => {
+			const updateSelectionDash = selection => {
 				// set end drag point to dash
 				const selectionWidth = selection[1] - selection[0];
 				let dashArray = '0,' + selectionWidth.toString(); // top (invisible)
@@ -108,7 +108,9 @@ export class ChartBrush extends Component {
 			// assume max range is [0, width]
 			const updateZoomDomain = (startPoint, endPoint) => {
 				// create xScale based on current zoomDomain
-				const xScale = scaleTime().range([0, width]).domain(zoomDomain);
+				const xScale = scaleTime()
+					.range([0, width])
+					.domain(zoomDomain);
 
 				let newDomain = [
 					xScale.invert(startPoint),
@@ -146,17 +148,14 @@ export class ChartBrush extends Component {
 			};
 			// leave some space to display selection strokes besides axis
 			const brush = brushX()
-				.extent([
-					[0, 0],
-					[width - 1, height],
-				])
+				.extent([[0, 0], [width - 1, height]])
 				.on('start brush end', brushEventHandler)
 				.on('end.brushed', brushed);
 
 			brushArea.call(brush);
 
 			const zoomRatio = this.services.zoom.getZoomRatio();
-			backdrop.on('click', function () {
+			backdrop.on('click', function() {
 				if (event.shiftKey) {
 					// clickedX range: [0, width]
 					const clickedX = mouse(brushArea.node())[0];

@@ -60,7 +60,9 @@ export class Area extends Component {
 
 		if (!boundsEnabled && bounds) {
 			console.warn(
-				`Bounds can only be shown when having 1 single datagroup, you've supplied ${groupedData.length}`
+				`Bounds can only be shown when having 1 single datagroup, you've supplied ${
+					groupedData.length
+				}`
 			); // eslint-disable-line no-console
 		}
 
@@ -108,7 +110,7 @@ export class Area extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(groupedData, (group) => group.name);
+			.data(groupedData, group => group.name);
 
 		const chartprefix = Tools.getProperty(
 			this.getOptions(),
@@ -124,7 +126,10 @@ export class Area extends Component {
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		areas.exit().attr('opacity', 0).remove();
+		areas
+			.exit()
+			.attr('opacity', 0)
+			.remove();
 
 		// if there is no grouped data (if all data groups are turned OFF with legend which can happen in the case of combo charts)
 		if (!groupedData.length) {
@@ -173,7 +178,7 @@ export class Area extends Component {
 		} else {
 			// make sure there is no linearGradient if no gradient is allowed
 			if (!this.parent.selectAll('defs linearGradient').empty()) {
-				this.parent.selectAll('defs linearGradient').each(function () {
+				this.parent.selectAll('defs linearGradient').each(function() {
 					this.parentNode.remove();
 				});
 			}
@@ -188,20 +193,20 @@ export class Area extends Component {
 				.merge(areas)
 				.style(
 					'fill',
-					(group) =>
+					group =>
 						`url(#${group.name.replace(' ', '')}_${
 							this.gradient_id
 						})`
 				)
 				.attr('class', 'area')
-				.attr('class', (group) =>
+				.attr('class', group =>
 					this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: group.name,
 						originalClassName: 'area',
 					})
 				)
-				.attr('d', (group) => {
+				.attr('d', group => {
 					const { data } = group;
 					return areaGenerator(data);
 				});
@@ -210,7 +215,7 @@ export class Area extends Component {
 				.attr('opacity', 0)
 				.merge(areas)
 				.attr('class', 'area')
-				.attr('class', (group) =>
+				.attr('class', group =>
 					this.model.getColorClassName({
 						classNameTypes: [
 							ColorClassNameTypes.FILL,
@@ -220,7 +225,7 @@ export class Area extends Component {
 						originalClassName: 'area',
 					})
 				)
-				.style('fill', (group) => self.model.getFillColor(group.name))
+				.style('fill', group => self.model.getFillColor(group.name))
 				.transition(
 					this.services.transitions.getTransition(
 						'area-update-enter',
@@ -231,7 +236,7 @@ export class Area extends Component {
 					'opacity',
 					boundsEnabled ? 1 : Configuration.area.opacity.selected
 				)
-				.attr('d', (group) => {
+				.attr('d', group => {
 					const { data } = group;
 					return areaGenerator(data);
 				});
@@ -239,7 +244,7 @@ export class Area extends Component {
 			if (boundsEnabled) {
 				enteringAreas
 					.attr('fill-opacity', Configuration.area.opacity.selected)
-					.style('stroke', (group) =>
+					.style('stroke', group =>
 						self.model.getStrokeColor(group.name)
 					)
 					.style('stroke-dasharray', '2, 2')
@@ -256,7 +261,7 @@ export class Area extends Component {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-area')
 			)
-			.attr('opacity', (group) => {
+			.attr('opacity', group => {
 				if (group.name !== hoveredElement.datum()['name']) {
 					return Configuration.area.opacity.unselected;
 				}

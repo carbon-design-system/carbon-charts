@@ -26,7 +26,7 @@ export class MeterTitle extends Title {
 			.merge(title)
 			.attr('x', 0)
 			.attr('y', '1em')
-			.text((d) => d);
+			.text(d => d);
 
 		title.exit().remove();
 
@@ -137,7 +137,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage)
-			.text((d) => `${d}%`)
+			.text(d => `${d}%`)
 			.attr(
 				'x',
 				+title.attr('x') + title.node().getComputedTextLength() + offset

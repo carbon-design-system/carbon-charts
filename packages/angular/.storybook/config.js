@@ -12,7 +12,7 @@ setOptions({
 // load global styles
 require("!style-loader!css-loader!@carbon/charts/demo/styles.css");
 
-const req = require.context("../stories", true, /.stories.ts$/);
+const req = require.context('../', true, /.stories.ts$/);
 function loadStories() {
 	req.keys().forEach(filename => {
 		req(filename);

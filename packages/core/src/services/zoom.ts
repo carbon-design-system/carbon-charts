@@ -108,7 +108,7 @@ export class Zoom extends Service {
 				? 'sharedStackKey'
 				: this.services.cartesianScales.getDomainIdentifier();
 			const filteredData = displayData.filter(
-				(datum) =>
+				datum =>
 					new Date(datum[domainIdentifier]) >= zoomDomain[0] &&
 					new Date(datum[domainIdentifier]) <= zoomDomain[1]
 			);

@@ -30,7 +30,7 @@ export class Tooltip extends Component {
 		this.init();
 	}
 
-	handleShowTooltip = (e) => {
+	handleShowTooltip = e => {
 		const data = e.detail.data || e.detail.items;
 		const defaultHTML = this.getTooltipHTML(e);
 
@@ -42,7 +42,9 @@ export class Tooltip extends Component {
 		// if there is a provided tooltip HTML function call it
 		if (Tools.getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
+				const labelHTML = `<div class="title-tooltip"><p>${
+					e.detail.content
+				}</p></div>`;
 				tooltipTextContainer.html(labelHTML);
 			} else {
 				tooltipTextContainer.html(
@@ -154,7 +156,7 @@ export class Tooltip extends Component {
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
-			return items.map((item) => {
+			return items.map(item => {
 				// get width of the label icon if it exists
 				const labelIconSize = item.labelIcon ? 12 : 0;
 
@@ -190,7 +192,9 @@ export class Tooltip extends Component {
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
+			defaultHTML = `<div class="title-tooltip"><p>${
+				e.detail.content
+			}</p></div>`;
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
@@ -199,7 +203,7 @@ export class Tooltip extends Component {
 				`<ul class='multi-tooltip'>` +
 				formattedItems
 					.map(
-						(item) =>
+						item =>
 							`<li>
 							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
 								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ''}

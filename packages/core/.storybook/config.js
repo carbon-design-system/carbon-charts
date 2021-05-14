@@ -13,7 +13,7 @@ setOptions({
 
 const req = require.context('../stories', true, /.stories.ts$/);
 function loadStories() {
-	req.keys().forEach((filename) => {
+	req.keys().forEach(filename => {
 		req(filename);
 	});
 }

@@ -32,7 +32,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		const boxplotData = [];
 		for (const { name: group, data } of groupedData) {
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-			const values = data.map((d) => d[rangeIdentifier]).sort(ascending);
+			const values = data.map(d => d[rangeIdentifier]).sort(ascending);
 
 			const record = {
 				[groupMapsTo]: group,

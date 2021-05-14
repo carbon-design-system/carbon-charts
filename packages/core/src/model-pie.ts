@@ -15,7 +15,7 @@ export class PieChartModel extends ChartModel {
 		// update the group to the key so the slices render with the correct tooltips and colors
 		if (data !== tabularData) {
 			// If a label was set for the overall dataset, reassign it to key value
-			tabularData.forEach((d) => {
+			tabularData.forEach(d => {
 				if (d.key && d.key !== d.group) {
 					d.group = d.key;
 				}

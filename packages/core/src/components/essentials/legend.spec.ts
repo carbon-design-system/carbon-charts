@@ -9,7 +9,7 @@ import { Events } from './../../interfaces';
 import { select } from 'd3-selection';
 
 describe('legend component', () => {
-	beforeEach(function () {
+	beforeEach(function() {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -18,11 +18,11 @@ describe('legend component', () => {
 	});
 
 	describe('content', () => {
-		it('should have same amount of datasets', async function (done) {
+		it('should have same amount of datasets', async function(done) {
 			const data = this.testEnvironment.chartData;
 			const uniqueDatagroups = data
-				.map((d) => d.group)
-				.filter(function (value, index, self) {
+				.map(d => d.group)
+				.filter(function(value, index, self) {
 					return self.indexOf(value) === index;
 				});
 
@@ -38,7 +38,9 @@ describe('legend component', () => {
 				);
 
 				const numberOfLegendItems = select(
-					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
+					`g.${settings.prefix}--${
+						options.chart.style.prefix
+					}--legend`
 				)
 					.selectAll('g.legend-item')
 					.size();
@@ -55,7 +57,7 @@ describe('legend component', () => {
 		});
 	});
 
-	afterEach(function () {
+	afterEach(function() {
 		this.testEnvironment.destroy();
 	});
 });

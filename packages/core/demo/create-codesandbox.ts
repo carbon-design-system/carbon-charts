@@ -12,7 +12,7 @@ export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};
 
 	Object.keys(chartTemplate).forEach(
-		(filePath) => (files[filePath] = { content: chartTemplate[filePath] })
+		filePath => (files[filePath] = { content: chartTemplate[filePath] })
 	);
 
 	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters(

@@ -258,9 +258,7 @@ export class ZoomBar extends Component {
 					this.xScale.domain()
 				);
 			} else {
-				const selected = zoomDomain.map((domain) =>
-					this.xScale(domain)
-				);
+				const selected = zoomDomain.map(domain => this.xScale(domain));
 				if (selected[1] - selected[0] < this.MIN_SELECTION_DIFF) {
 					// initialization not completed yet
 					// don't update brushHandle to avoid flash
@@ -311,10 +309,7 @@ export class ZoomBar extends Component {
 
 		// Initialize the d3 brush
 		this.brush
-			.extent([
-				[axesLeftMargin, 0],
-				[width, zoombarHeight],
-			])
+			.extent([[axesLeftMargin, 0], [width, zoombarHeight]])
 			.on('start brush end', null) // remove old listener first
 			.on('start brush end', brushEventListener);
 	}
@@ -398,7 +393,7 @@ export class ZoomBar extends Component {
 		svg.select(this.brushSelector)
 			.selectAll('rect.handle')
 			.data([{ type: 'w' }, { type: 'e' }])
-			.attr('x', function (d) {
+			.attr('x', function(d) {
 				if (d.type === 'w') {
 					// handle should not exceed zoom bar range
 					return Math.max(
@@ -428,12 +423,12 @@ export class ZoomBar extends Component {
 		handleBars
 			.enter()
 			.append('rect')
-			.attr('class', function (d) {
+			.attr('class', function(d) {
 				return 'handle-bar handle-bar--' + d.type;
 			});
 		// update positions
 		handleBars
-			.attr('x', function (d) {
+			.attr('x', function(d) {
 				if (d.type === 'w') {
 					return Math.max(
 						selection[0] + handleBarXDiff,
