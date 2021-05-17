@@ -40,16 +40,10 @@ Read the release change logs [here](./CHANGELOG.md)
 
 | Component   | Vanilla            | Angular                  | React | Vue | Svelte |
 |-------------|--------------------|--------------------------|-------|-------| --- |
-<<<<<<< HEAD
 | Simple Bar  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Grouped Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Stacked Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Floating Bar| :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-=======
-| Simple Bar  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: 
-| Grouped Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Stacked Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
->>>>>>> 6f130780c03537b9d803bb5da866869778638e17
 | Donut       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Line        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
@@ -63,13 +57,9 @@ Read the release change logs [here](./CHANGELOG.md)
 | Sparkline   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Treemap     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Combo       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-<<<<<<< HEAD
 | Wordcloud     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Bullet     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Circle Pack     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-=======
-| Wordcloud     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
->>>>>>> 6f130780c03537b9d803bb5da866869778638e17
 
 ## Bugs and feature requests
 
