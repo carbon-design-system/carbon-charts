@@ -49,12 +49,12 @@
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
 		"@carbon/charts": "^0.41.64",
-		"@carbon/telemetry": "0.0.0-alpha.6"
+		"@carbon/telemetry": "0.0.0-alpha.6",
+		"@carbon/icons-react": "^10.32.0"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",
-		"react-dom": "^16.6.3",
-		"@carbon/icons-react": "^10.32.0"
+		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
 		"@storybook/addon-knobs": "5.3.12",

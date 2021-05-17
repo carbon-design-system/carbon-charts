@@ -10,12 +10,12 @@ export default ({ title, description, renderIcon, onClick }) => {
 	) : null;
 
 	return (
-		<button className={namespace} tabIndex={0} onClick={() => onClick()}>
+		<div className={namespace} tabIndex={0} onClick={() => onClick()}>
 			{icon}
 			<div className={`${namespace}__body`}>
 				<div className={`${namespace}__title`}>{title}</div>
 				<div className={`${namespace}__description`}>{description}</div>
 			</div>
-		</button>
+		</div>
 	);
 };
