@@ -243,10 +243,10 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
+				const hierarchyLevel = self.model.getHierarchyLevel();
 				const disabled =
-					self.model.getHierarchyLevel() > 2 &&
+					hierarchyLevel > 2 &&
 					!hoveredElement.node().classList.contains('focal');
-
 				const canvasZoomEnabled = Tools.getProperty(
 					self.model.getOptions(),
 					'canvasZoom',
@@ -283,9 +283,11 @@ export class CirclePack extends Component {
 
 									return {
 										label: child.data.name,
-										labelIcon: canvasZoomEnabled
-											? self.getZoomIcon()
-											: null,
+										labelIcon:
+											canvasZoomEnabled &&
+											hierarchyLevel <= 2
+												? self.getZoomIcon()
+												: null,
 										value: value,
 									};
 								}
@@ -319,7 +321,9 @@ export class CirclePack extends Component {
 								color: fillColor,
 								label: datum.data.name,
 								labelIcon:
-									zoomable && canvasZoomEnabled
+									zoomable &&
+									canvasZoomEnabled &&
+									hierarchyLevel <= 2
 										? self.getZoomIcon()
 										: null,
 								value: parentValue,
