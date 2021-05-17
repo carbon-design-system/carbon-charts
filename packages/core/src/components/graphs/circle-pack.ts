@@ -192,7 +192,7 @@ export class CirclePack extends Component {
 		chartSvg.on('click', () => {
 			self.focal = null;
 			self.model.updateHierarchyLevel(2);
-			chartSvg.classed("zoomed-in", false)
+			chartSvg.classed('zoomed-in', false);
 			self.services.canvasZoom.zoomOut(canvasSelection, zoomSetting);
 		});
 	}
@@ -243,9 +243,9 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
-				const disabled = self.model.getHierarchyLevel() > 2 && !hoveredElement
-					.node()
-					.classList.contains('focal');
+				const disabled =
+					self.model.getHierarchyLevel() > 2 &&
+					!hoveredElement.node().classList.contains('focal');
 
 				const canvasZoomEnabled = Tools.getProperty(
 					self.model.getOptions(),
@@ -381,30 +381,37 @@ export class CirclePack extends Component {
 					.node()
 					.classList.contains('non-focal');
 
-				const zoomedIn = Tools.getProperty(self.getOptions(), 'canvasZoom', 'enabled') && self.model.getHierarchyLevel() > 2;
+				const zoomedIn =
+					Tools.getProperty(
+						self.getOptions(),
+						'canvasZoom',
+						'enabled'
+					) && self.model.getHierarchyLevel() > 2;
 
-				if(zoomedIn) {
+				if (zoomedIn) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
-					const chartSvg = select(self.services.domUtils.getMainSVG());
-					chartSvg.classed('zoomed-in', false)
+					const chartSvg = select(
+						self.services.domUtils.getMainSVG()
+					);
+					chartSvg.classed('zoomed-in', false);
 					self.focal = null;
 					self.model.updateHierarchyLevel(2);
-					self.services.canvasZoom.zoomOut(canvasSelection, Configuration.canvasZoomSettings);
-
+					self.services.canvasZoom.zoomOut(
+						canvasSelection,
+						Configuration.canvasZoomSettings
+					);
 				}
 				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
-				else if (
-					datum.depth === 2 &&
-					datum.children &&
-					!disabled
-				) {
+				else if (datum.depth === 2 && datum.children && !disabled) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
-					const chartSvg = select(self.services.domUtils.getMainSVG());
-					chartSvg.classed('zoomed-in', true)
+					const chartSvg = select(
+						self.services.domUtils.getMainSVG()
+					);
+					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;
 					self.model.updateHierarchyLevel(3);
 					self.services.canvasZoom.zoomIn(
