@@ -20,7 +20,7 @@ export class Toolbar extends Component {
 	// overflow menu button to control background color
 	overflowButton: any;
 
-	// ul options list element
+	// div options list element
 	overflowMenu: any;
 
 	init() {
@@ -155,11 +155,7 @@ export class Toolbar extends Component {
 	}
 
 	isOverflowMenuOpen() {
-		return (
-			this.overflowMenu
-				.selectAll('ul.bx--overflow-menu-options--open')
-				.size() > 0
-		);
+		return this.overflowMenu.classed('is-open');
 	}
 
 	// show/hide overflow menu
@@ -398,7 +394,7 @@ export class Toolbar extends Component {
 					id: 'toolbar-export-CSV',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
-					clickFunction: () => console.log('csv'),
+					clickFunction: () => this.model.exportToCSV(),
 				};
 				break;
 			case ToolbarControlTypes.EXPORT_PNG:

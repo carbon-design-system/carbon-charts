@@ -12,7 +12,8 @@ import settings from 'carbon-components/es/globals/js/settings';
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
 
-import domtoimage from 'dom-to-image';
+// import * as htmlToImage from 'html-to-image';
+import htmlToImage from 'dom-to-image';
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
@@ -180,7 +181,7 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
-	protected mainContainer: Element;
+	protected mainContainer: HTMLElement;
 	protected width: string;
 	protected height: string;
 
@@ -250,7 +251,7 @@ export class DOMUtils extends Service {
 	}
 
 	exportToJPG() {
-		domtoimage
+		htmlToImage
 			.toJpeg(this.getMainContainer(), { quality: 1 })
 			.then(function (dataUrl) {
 				var img = new Image();
@@ -265,7 +266,7 @@ export class DOMUtils extends Service {
 	}
 
 	exportToPNG() {
-		domtoimage
+		htmlToImage
 			.toPng(this.getMainContainer())
 			.then(function (dataUrl) {
 				var img = new Image();

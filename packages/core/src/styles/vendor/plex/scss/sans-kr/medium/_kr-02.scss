@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: local('IBM Plex Sans KR Medium'),
+    local('IBMPlexSansKR-Medium'),
+    url('#{$font-prefix}/IBM-Plex-Sans-KR/fonts/split/woff2/hinted/IBMPlexSansKR-Medium-02.woff2') format('woff2');
+    unicode-range: U+D723-D728, U+D72A-D733, U+D735-D748, U+D74A-D74F, U+D752-D753, U+D755-D757, U+D75A-D75F, U+D762-D764, U+D766-D768, U+D76A-D76B, U+D76D-D76F, U+D771-D787, U+D789-D78B, U+D78D-D78F, U+D791-D797, U+D79A, U+D79C, U+D79E-D7A3;
+}

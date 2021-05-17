@@ -1,0 +1,11 @@
+$font-prefix: '..' !default;
+@font-face {
+  font-family: 'IBM Plex Sans Thai';
+  font-style: normal;
+  font-weight: 700;
+  src: local('IBM Plex Sans Thai Bold'),
+    local('IBMPlexSansThai-Bold'),
+    url('#{$font-prefix}/IBM-Plex-Sans-Thai/fonts/complete/woff2/IBMPlexSansThai-Bold.woff2') format('woff2'),
+    url('#{$font-prefix}/IBM-Plex-Sans-Thai/fonts/complete/woff/IBMPlexSansThai-Bold.woff') format('woff');
+}
+

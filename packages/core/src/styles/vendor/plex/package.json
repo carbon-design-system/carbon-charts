@@ -1,0 +1,60 @@
+{
+  "name": "@ibm/plex",
+  "description": "The package of IBM’s typeface, IBM Plex",
+  "main": "css/ibm-plex.css",
+  "version": "5.1.3",
+  "repository": "https://github.com/ibm/plex.git",
+  "license": "OFL-1.1",
+  "keywords": [
+    "eyeglass-module"
+  ],
+  "bugs": {
+    "url": "https://github.com/ibm/plex/issues"
+  },
+  "scripts": {
+    "clean": "rimraf css scss",
+    "build": "yarn run clean && yarn run build:scss && yarn run build:css",
+    "build:zip": "yarn build && node ./scripts/prepare-zip.js && sh scripts/zip.sh",
+    "build:css": "node ./scripts/compile-css.js",
+    "build:scss": "node ./scripts/generate-scss.js",
+    "test": "parcel serve ./test/index.html",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write \"**/*.{scss}\"",
+    "prepare": "yarn build"
+  },
+  "devDependencies": {
+    "archiver": "^3.0.0",
+    "fs-extra": "^7.0.0",
+    "git-branch": "^2.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "node-sass": "^4.7.2",
+    "parcel": "^2.0.0-beta.1",
+    "prettier": "^1.7.4",
+    "rimraf": "^2.6.2",
+    "sass": "^1.26.10"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "semi": true,
+    "trailingComma": "es5"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier",
+      "git add"
+    ],
+    "**/*.scss": [
+      "prettier",
+      "git add"
+    ]
+  },
+  "eyeglass": {
+    "exports": false,
+    "name": "ibm-plex",
+    "sassDir": "scss",
+    "needs": "*"
+  }
+}

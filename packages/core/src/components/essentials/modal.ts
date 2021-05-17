@@ -31,6 +31,9 @@ export class Modal extends Component {
 
 	handleShowModal = () => {
 		this.modal.html(this.getModalHTML());
+		this.modal
+			.select('div.bx--modal-footer button.bx--btn')
+			.on('click', () => this.model.exportToCSV());
 
 		const modalInstance = CarbonModalComponent.create(this.modal.node());
 		modalInstance.show();
@@ -133,7 +136,13 @@ export class Modal extends Component {
 										  )
 										: datum[domainIdentifier]
 								}</td>
-								<td>${datum[rangeIdentifier] === null ? '&ndash;' : datum[rangeIdentifier].toLocaleString()}</td>
+								<td>${
+									datum[rangeIdentifier] === null
+										? '&ndash;'
+										: datum[
+												rangeIdentifier
+										  ].toLocaleString()
+								}</td>
 							</tr>
 						`
 							)
@@ -146,7 +155,7 @@ export class Modal extends Component {
 
 			<div class="bx--modal-footer">
 			  <div class="${settings.prefix}--${chartprefix}-modal-footer-spacer"></div>
-			  <button class="bx--btn bx--btn--primary" type="button"   data-modal-primary-focus>Download as CSV</button>
+			  <button class="bx--btn bx--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>
 			</div>
 		</div>`;
 	}

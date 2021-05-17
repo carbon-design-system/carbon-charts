@@ -32,6 +32,14 @@
 				top: 0;
 			}
 		}
+
+		@if $ui-background ==
+			map-get($carbon--theme--g90, 'ui-background') or
+			$ui-background ==
+			map-get($carbon--theme--g100, 'ui-background')
+		{
+			color-scheme: dark;
+		}
 	}
 
 	.#{$prefix}--modal-footer {
