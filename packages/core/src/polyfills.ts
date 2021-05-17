@@ -1,5 +1,5 @@
 if (typeof window !== 'undefined') {
-	(function() {
+	(function () {
 		if (typeof window['CustomEvent'] === 'function') {
 			return false;
 		}

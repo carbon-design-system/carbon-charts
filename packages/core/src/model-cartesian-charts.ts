@@ -58,18 +58,18 @@ export class ChartModelCartesian extends ChartModel {
 			const domainIdentifier = cartesianScales.getDomainIdentifier();
 			const rangeIdentifier = cartesianScales.getRangeIdentifier();
 			// get all dates (Number) in displayData
-			let allDates = sanitizedData.map(datum =>
+			let allDates = sanitizedData.map((datum) =>
 				datum[domainIdentifier].getTime()
 			);
 			allDates = Tools.removeArrayDuplicates(allDates).sort();
 
 			// Go through all date values
 			// And get corresponding data from each dataset
-			zoomBarNormalizedValues = allDates.map(date => {
+			zoomBarNormalizedValues = allDates.map((date) => {
 				let sum = 0;
 				const datum = {};
 
-				sanitizedData.forEach(data => {
+				sanitizedData.forEach((data) => {
 					if (data[domainIdentifier].getTime() === date) {
 						sum += data[rangeIdentifier];
 					}
@@ -96,7 +96,7 @@ export class ChartModelCartesian extends ChartModel {
 		}
 
 		const keysToCheck = [];
-		Object.keys(AxisPositions).forEach(axisPositionKey => {
+		Object.keys(AxisPositions).forEach((axisPositionKey) => {
 			const axisPosition = AxisPositions[axisPositionKey];
 			const axisOptions = options.axes[axisPosition];
 
@@ -111,8 +111,8 @@ export class ChartModelCartesian extends ChartModel {
 
 		if (keysToCheck.length > 0) {
 			// Check all datapoints and sanitize dates
-			data.forEach(datum => {
-				keysToCheck.forEach(key => {
+			data.forEach((datum) => {
+				keysToCheck.forEach((key) => {
 					if (Tools.getProperty(datum, key, 'getTime') === null) {
 						datum[key] = new Date(datum[key]);
 					}

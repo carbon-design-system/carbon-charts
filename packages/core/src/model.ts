@@ -47,11 +47,11 @@ export class ChartModel {
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter(item => groups.includes(item.group));
+			allData = allData.filter((item) => groups.includes(item.group));
 		}
 
 		if (axesOptions) {
-			Object.keys(axesOptions).forEach(axis => {
+			Object.keys(axesOptions).forEach((axis) => {
 				const mapsTo = axesOptions[axis].mapsTo;
 				const scaleType = axesOptions[axis].scaleType;
 				// make sure linear/log values are numbers
@@ -59,7 +59,7 @@ export class ChartModel {
 					scaleType === ScaleTypes.LINEAR ||
 					scaleType === ScaleTypes.LOG
 				) {
-					allData = allData.map(datum => {
+					allData = allData.map((datum) => {
 						return {
 							...datum,
 							[mapsTo]:
@@ -73,14 +73,14 @@ export class ChartModel {
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						allData = allData.filter(datum =>
+						allData = allData.filter((datum) =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
 						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
-							datum =>
+							(datum) =>
 								!(mapsTo in datum) ||
 								(datum[mapsTo] >= start && datum[mapsTo] <= end)
 						);
@@ -89,8 +89,10 @@ export class ChartModel {
 			});
 		}
 
-		return allData.filter(datum => {
-			return dataGroups.find(group => group.name === datum[groupMapsTo]);
+		return allData.filter((datum) => {
+			return dataGroups.find(
+				(group) => group.name === datum[groupMapsTo]
+			);
 		});
 	}
 
@@ -108,9 +110,9 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 		const allDataFromDomain = this.getAllDataFromDomain(groups);
 
-		return allDataFromDomain.filter(datum => {
+		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
-				dataGroup =>
+				(dataGroup) =>
 					dataGroup.name === datum[groupMapsTo] &&
 					dataGroup.status === ACTIVE
 			);
@@ -155,7 +157,7 @@ export class ChartModel {
 
 		// if its a combo chart, the specific chart will pass the model the groups it needs
 		if (groups) {
-			return this.get('dataGroups').filter(dataGroup =>
+			return this.get('dataGroups').filter((dataGroup) =>
 				groups.includes(dataGroup.name)
 			);
 		}
@@ -166,18 +168,18 @@ export class ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 
 		return this.getDataGroups(groups).filter(
-			dataGroup => dataGroup.status === ACTIVE
+			(dataGroup) => dataGroup.status === ACTIVE
 		);
 	}
 
 	getDataGroupNames(groups?) {
 		const dataGroups = this.getDataGroups(groups);
-		return dataGroups.map(dataGroup => dataGroup.name);
+		return dataGroups.map((dataGroup) => dataGroup.name);
 	}
 
 	getActiveDataGroupNames(groups?) {
 		const activeDataGroups = this.getActiveDataGroups(groups);
-		return activeDataGroups.map(dataGroup => dataGroup.name);
+		return activeDataGroups.map((dataGroup) => dataGroup.name);
 	}
 
 	getGroupedData(groups?) {
@@ -185,7 +187,7 @@ export class ChartModel {
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
-		displayData.map(datum => {
+		displayData.map((datum) => {
 			const group = datum[groupMapsTo];
 			if (
 				groupedData[group] !== null &&
@@ -197,7 +199,7 @@ export class ChartModel {
 			}
 		});
 
-		return Object.keys(groupedData).map(groupName => ({
+		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
 			data: groupedData[groupName],
 		}));
@@ -208,7 +210,7 @@ export class ChartModel {
 		const { groupMapsTo } = options.data;
 		const displayData = this.getDisplayData(groups);
 
-		const stackKeys = map(displayData, datum => {
+		const stackKeys = map(displayData, (datum) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
@@ -236,10 +238,10 @@ export class ChartModel {
 
 		const dataGroupNames = this.getDataGroupNames();
 
-		return stackKeys.map(key => {
+		return stackKeys.map((key) => {
 			const correspondingValues = { sharedStackKey: key };
-			dataGroupNames.forEach(dataGroupName => {
-				const correspondingDatum = displayData.find(datum => {
+			dataGroupNames.forEach((dataGroupName) => {
+				const correspondingDatum = displayData.find((datum) => {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 						datum
 					);
@@ -273,14 +275,14 @@ export class ChartModel {
 			);
 
 			dataValuesGroupedByKeys.forEach((d: any) => {
-				dataGroupNames.forEach(name => {
+				dataGroupNames.forEach((name) => {
 					maxByKey[d.sharedStackKey] += d[name];
 				});
 			});
 
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
-				dataGroupNames.forEach(name => {
+				dataGroupNames.forEach((name) => {
 					if (maxByKey[d.sharedStackKey]) {
 						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
 					} else {
@@ -296,7 +298,7 @@ export class ChartModel {
 				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
-					.map(key => {
+					.map((key) => {
 						const element = series[key];
 						element[groupMapsTo] = dataGroupNames[i];
 
@@ -369,9 +371,11 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 
 		const hasDeactivatedItems = dataGroups.some(
-			group => group.status === DISABLED
+			(group) => group.status === DISABLED
 		);
-		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+		const activeItems = dataGroups.filter(
+			(group) => group.status === ACTIVE
+		);
 
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
@@ -387,7 +391,7 @@ export class ChartModel {
 				});
 			} else {
 				const indexToChange = dataGroups.findIndex(
-					group => group.name === changedLabel
+					(group) => group.name === changedLabel
 				);
 				dataGroups[indexToChange].status =
 					dataGroups[indexToChange].status === DISABLED
@@ -404,18 +408,18 @@ export class ChartModel {
 
 		// Updates selected groups
 		const updatedActiveItems = dataGroups.filter(
-			group => group.status === ACTIVE
+			(group) => group.status === ACTIVE
 		);
 		const options = this.getOptions();
 
 		const hasUpdatedDeactivatedItems = dataGroups.some(
-			group => group.status === DISABLED
+			(group) => group.status === DISABLED
 		);
 
 		// If there are deactivated items, map the item name into selected groups
 		if (hasUpdatedDeactivatedItems) {
 			options.data.selectedGroups = updatedActiveItems.map(
-				activeItem => activeItem.name
+				(activeItem) => activeItem.name
 			);
 		} else {
 			// If every item is active, clear array
@@ -486,7 +490,7 @@ export class ChartModel {
 			return false;
 		}
 
-		return dataGroups.some(dataGroup =>
+		return dataGroups.some((dataGroup) =>
 			Object.keys(userProvidedScale).includes(dataGroup.name)
 		);
 	}
@@ -499,7 +503,7 @@ export class ChartModel {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
 		let className = configs.originalClassName;
 		configs.classNameTypes.forEach(
-			type =>
+			(type) =>
 				(className = configs.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
@@ -531,7 +535,7 @@ export class ChartModel {
 		const { datasets, labels } = data;
 
 		// Loop through all datasets
-		datasets.forEach(dataset => {
+		datasets.forEach((dataset) => {
 			// Update each data point to the new format
 			dataset.data.forEach((datum, i) => {
 				let group;
@@ -599,7 +603,7 @@ export class ChartModel {
 			this.allDataGroups = this.getDataGroupNames();
 		} else {
 			// Loop through current data groups
-			this.getDataGroupNames().forEach(dataGroupName => {
+			this.getDataGroupNames().forEach((dataGroupName) => {
 				// If group name hasn't been stored yet, store it
 				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
 					this.allDataGroups.push(dataGroupName);
@@ -613,12 +617,15 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const options = this.getOptions();
 
-		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
+		const uniqueDataGroups = map(
+			data,
+			(datum) => datum[groupMapsTo]
+		).keys();
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {
 			const hasAllSelectedGroups = options.data.selectedGroups.every(
-				groupName => uniqueDataGroups.includes(groupName)
+				(groupName) => uniqueDataGroups.includes(groupName)
 			);
 			if (!hasAllSelectedGroups) {
 				options.data.selectedGroups = [];
@@ -626,13 +633,13 @@ export class ChartModel {
 		}
 
 		// Get group status based on items in selected groups
-		const getStatus = groupName =>
+		const getStatus = (groupName) =>
 			!options.data.selectedGroups.length ||
 			options.data.selectedGroups.includes(groupName)
 				? ACTIVE
 				: DISABLED;
 
-		return uniqueDataGroups.map(groupName => ({
+		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
 			status: getStatus(groupName),
 		}));
@@ -649,7 +656,7 @@ export class ChartModel {
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, 'color', 'scale');
 
-		Object.keys(userProvidedScale).forEach(dataGroup => {
+		Object.keys(userProvidedScale).forEach((dataGroup) => {
 			if (!this.allDataGroups.includes(dataGroup)) {
 				console.warn(`"${dataGroup}" does not exist in data groups.`);
 			}
@@ -660,11 +667,11 @@ export class ChartModel {
 		 * by the user, add that to the color range
 		 */
 		const providedDataGroups = this.allDataGroups.filter(
-			dataGroup => userProvidedScale[dataGroup]
+			(dataGroup) => userProvidedScale[dataGroup]
 		);
 
 		providedDataGroups.forEach(
-			dataGroup =>
+			(dataGroup) =>
 				(this.colorScale[dataGroup] = userProvidedScale[dataGroup])
 		);
 	}

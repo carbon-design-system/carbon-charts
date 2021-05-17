@@ -35,8 +35,8 @@ export class WordCloud extends Component {
 
 		// Filter out any null/undefined values
 		const allOccurences = data
-			.map(d => d[fontSizeMapsTo])
-			.filter(size => size);
+			.map((d) => d[fontSizeMapsTo])
+			.filter((size) => size);
 		const chartSize = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
@@ -77,7 +77,7 @@ export class WordCloud extends Component {
 		const layout = cloud()
 			.size([width, height])
 			.words(
-				displayData.map(function(d) {
+				displayData.map(function (d) {
 					return {
 						[groupMapsTo]: d[groupMapsTo],
 						text: d[wordMapsTo],
@@ -88,7 +88,7 @@ export class WordCloud extends Component {
 			)
 			.padding(5)
 			.rotate(0)
-			.fontSize(d => fontSizeScale(d.size))
+			.fontSize((d) => fontSizeScale(d.size))
 			.on('end', draw);
 
 		layout.start();
@@ -102,13 +102,10 @@ export class WordCloud extends Component {
 
 			const allText = textGroup
 				.selectAll('text')
-				.data(words, d => `${d[groupMapsTo]}-${d.text}`);
+				.data(words, (d) => `${d[groupMapsTo]}-${d.text}`);
 
 			// Remove texts that are no longer needed
-			allText
-				.exit()
-				.attr('opacity', 0)
-				.remove();
+			allText.exit().attr('opacity', 0).remove();
 
 			const enteringText = allText
 				.enter()
@@ -117,18 +114,18 @@ export class WordCloud extends Component {
 
 			enteringText
 				.merge(allText)
-				.style('font-size', d => `${d.size}px`)
-				.text(function(d) {
+				.style('font-size', (d) => `${d.size}px`)
+				.text(function (d) {
 					return d.text;
 				})
-				.attr('class', d =>
+				.attr('class', (d) =>
 					self.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: d[groupMapsTo],
 						originalClassName: `word ${d.size > 32 ? 'light' : ''}`,
 					})
 				)
-				.style('fill', d => {
+				.style('fill', (d) => {
 					return self.model.getFillColor(d[groupMapsTo], d.text, d);
 				})
 				.attr('text-anchor', 'middle')
@@ -138,7 +135,7 @@ export class WordCloud extends Component {
 						animate
 					)
 				)
-				.attr('transform', d => `translate(${d.x}, ${d.y})`)
+				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1);
 		}
 
@@ -158,7 +155,7 @@ export class WordCloud extends Component {
 					'legend-hover-wordcloud'
 				)
 			)
-			.attr('opacity', d =>
+			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
 	};
@@ -180,7 +177,7 @@ export class WordCloud extends Component {
 		const { groupMapsTo } = options.data;
 
 		// Highlights 1 word or unhighlights all
-		const debouncedHighlight = Tools.debounce(word => {
+		const debouncedHighlight = Tools.debounce((word) => {
 			const allWords = self.parent
 				.selectAll('text.word')
 				.transition(
@@ -192,7 +189,7 @@ export class WordCloud extends Component {
 			if (word === null) {
 				allWords.attr('opacity', 1);
 			} else {
-				allWords.attr('opacity', function() {
+				allWords.attr('opacity', function () {
 					if (word === this) {
 						return 1;
 					}
@@ -205,7 +202,7 @@ export class WordCloud extends Component {
 		const self = this;
 		this.parent
 			.selectAll('text.word')
-			.on('mouseover', function(datum) {
+			.on('mouseover', function (datum) {
 				const hoveredElement = this;
 				debouncedHighlight(hoveredElement);
 
@@ -241,7 +238,7 @@ export class WordCloud extends Component {
 					],
 				});
 			})
-			.on('mousemove', function(datum) {
+			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -256,7 +253,7 @@ export class WordCloud extends Component {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function(datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_CLICK,
@@ -266,7 +263,7 @@ export class WordCloud extends Component {
 					}
 				);
 			})
-			.on('mouseout', function(datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				debouncedHighlight(null);
 

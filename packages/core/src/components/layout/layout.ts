@@ -51,8 +51,8 @@ export class LayoutComponent extends Component {
 	}
 
 	init() {
-		this.children.forEach(child => {
-			child.components.forEach(component => {
+		this.children.forEach((child) => {
+			child.components.forEach((component) => {
 				component.init();
 			});
 		});
@@ -70,7 +70,7 @@ export class LayoutComponent extends Component {
 					growth === LayoutGrowth.FIXED
 				);
 			})
-			.each(function(d: any) {
+			.each(function (d: any) {
 				sum += d.data.size;
 			});
 
@@ -108,9 +108,7 @@ export class LayoutComponent extends Component {
 				: treemapSlice;
 
 		// Compute the position of all elements within the layout
-		treemap()
-			.tile(tileType)
-			.size([width, height])(root);
+		treemap().tile(tileType).size([width, height])(root);
 
 		// TODORF - Remove
 		const horizontal =
@@ -139,9 +137,9 @@ export class LayoutComponent extends Component {
 
 		enteringSVGs
 			.merge(svg.selectAll(`svg.layout-child-${this._instanceID}`))
-			.each(function(d: any) {
+			.each(function (d: any) {
 				// Set parent component for each child
-				d.data.components.forEach(itemComponent => {
+				d.data.components.forEach((itemComponent) => {
 					itemComponent.setParent(select(this));
 
 					// Render preffered & fixed items
@@ -155,7 +153,7 @@ export class LayoutComponent extends Component {
 				});
 			});
 
-		svg.selectAll(`svg.layout-child-${this._instanceID}`).each(function(
+		svg.selectAll(`svg.layout-child-${this._instanceID}`).each(function (
 			d: any
 		) {
 			// Calculate preffered children sizes after internal rendering
@@ -179,7 +177,7 @@ export class LayoutComponent extends Component {
 
 		// Run through stretch x-items
 		this.children
-			.filter(child => {
+			.filter((child) => {
 				const growth = Tools.getProperty(child, 'growth', 'x');
 				return growth === LayoutGrowth.STRETCH;
 			})
@@ -196,10 +194,7 @@ export class LayoutComponent extends Component {
 		}).sum((d: any) => d.size);
 
 		// Compute the position of all elements within the layout
-		treemap()
-			.tile(tileType)
-			.size([width, height])
-			.padding(0)(root);
+		treemap().tile(tileType).size([width, height]).padding(0)(root);
 
 		// Add new SVGs to the DOM for each layout child
 		svg.selectAll(`svg.layout-child-${this._instanceID}`)
@@ -208,8 +203,8 @@ export class LayoutComponent extends Component {
 			.attr('y', (d: any) => d.y0)
 			.attr('width', (d: any) => d.x1 - d.x0)
 			.attr('height', (d: any) => d.y1 - d.y0)
-			.each(function(d: any, i) {
-				d.data.components.forEach(itemComponent => {
+			.each(function (d: any, i) {
+				d.data.components.forEach((itemComponent) => {
 					const growth = Tools.getProperty(d, 'data', 'growth', 'x');
 					if (growth === LayoutGrowth.STRETCH) {
 						itemComponent.render(animate);
@@ -222,8 +217,8 @@ export class LayoutComponent extends Component {
 	setModel(newObj) {
 		super.setModel(newObj);
 
-		this.children.forEach(child => {
-			child.components.forEach(component => component.setModel(newObj));
+		this.children.forEach((child) => {
+			child.components.forEach((component) => component.setModel(newObj));
 		});
 	}
 
@@ -231,16 +226,16 @@ export class LayoutComponent extends Component {
 	setServices(newObj) {
 		super.setServices(newObj);
 
-		this.children.forEach(child => {
-			child.components.forEach(component =>
+		this.children.forEach((child) => {
+			child.components.forEach((component) =>
 				component.setServices(newObj)
 			);
 		});
 	}
 
 	destroy() {
-		this.children.forEach(child => {
-			child.components.forEach(component => component.destroy());
+		this.children.forEach((child) => {
+			child.components.forEach((component) => component.destroy());
 		});
 	}
 }

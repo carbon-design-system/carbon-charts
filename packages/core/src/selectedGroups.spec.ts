@@ -9,7 +9,7 @@ import { Events } from './interfaces';
 import { select } from 'd3-selection';
 
 describe('selectedGroups option', () => {
-	beforeEach(function() {
+	beforeEach(function () {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -18,7 +18,7 @@ describe('selectedGroups option', () => {
 	});
 
 	describe('selected legend labels', () => {
-		it('should match the selected groups provided in options', function(done) {
+		it('should match the selected groups provided in options', function (done) {
 			const sampleSelectedGroups = ['Dataset 1', 'Dataset 3'];
 
 			const chartEventsService = this.chart.services.events;
@@ -31,13 +31,11 @@ describe('selectedGroups option', () => {
 				);
 
 				const selectedLegendLabels = select(
-					`g.${settings.prefix}--${
-						options.chart.style.prefix
-					}--legend`
+					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
 				)
 					.selectAll('g.legend-item.active > text')
 					.nodes()
-					.map(item => item['innerHTML']);
+					.map((item) => item['innerHTML']);
 
 				expect(selectedLegendLabels).toEqual(sampleSelectedGroups);
 
@@ -52,7 +50,7 @@ describe('selectedGroups option', () => {
 		});
 	});
 
-	afterEach(function() {
+	afterEach(function () {
 		this.testEnvironment.destroy();
 	});
 });

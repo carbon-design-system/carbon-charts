@@ -45,7 +45,7 @@ export class Scatter extends Component {
 		const zoomDomain = this.model.get('zoomDomain');
 		if (zoomDomain !== undefined) {
 			return data.filter(
-				d =>
+				(d) =>
 					d[domainIdentifier].getTime() > zoomDomain[0].getTime() &&
 					d[domainIdentifier].getTime() < zoomDomain[1].getTime()
 			);
@@ -61,7 +61,7 @@ export class Scatter extends Component {
 		let scatterData;
 		if (stacked) {
 			const percentage = Object.keys(options.axes).some(
-				axis => options.axes[axis].percentage
+				(axis) => options.axes[axis].percentage
 			);
 			scatterData = this.model.getStackedData({
 				groups: this.configs.groups,
@@ -70,7 +70,7 @@ export class Scatter extends Component {
 		} else {
 			scatterData = this.model
 				.getDisplayData(this.configs.groups)
-				.filter(d => {
+				.filter((d) => {
 					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
 						d
 					);
@@ -107,14 +107,11 @@ export class Scatter extends Component {
 			.selectAll('circle.dot')
 			.data(
 				this.getScatterData(),
-				datum => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 
 		// Remove circles that need to be removed
-		circles
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		circles.exit().attr('opacity', 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const enteringCircles = circles
@@ -205,7 +202,7 @@ export class Scatter extends Component {
 		selection
 			.raise()
 			.classed('dot', true)
-			.attr('class', d => {
+			.attr('class', (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				const isFilled = this.model.getIsFilled(
 					d[groupMapsTo],
@@ -227,7 +224,7 @@ export class Scatter extends Component {
 			.classed('threshold-anomaly', (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
 			)
-			.classed('filled', d => {
+			.classed('filled', (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return this.model.getIsFilled(
 					d[groupMapsTo],
@@ -236,7 +233,7 @@ export class Scatter extends Component {
 					filled
 				);
 			})
-			.classed('unfilled', d => {
+			.classed('unfilled', (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return !this.model.getIsFilled(
 					d[groupMapsTo],
@@ -251,7 +248,7 @@ export class Scatter extends Component {
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
 			.attr('r', options.points.radius)
-			.style('fill', d => {
+			.style('fill', (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				if (
 					this.model.getIsFilled(
@@ -268,7 +265,7 @@ export class Scatter extends Component {
 					);
 				}
 			})
-			.style('stroke', d => {
+			.style('stroke', (d) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d);
 				return this.model.getStrokeColor(
 					d[groupMapsTo],
@@ -281,7 +278,7 @@ export class Scatter extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'point')
-			.attr('aria-label', d => {
+			.attr('aria-label', (d) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier(d);
 				return d[rangeIdentifier];
 			});
@@ -322,7 +319,7 @@ export class Scatter extends Component {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-scatter')
 			)
-			.attr('opacity', d =>
+			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
 	};
@@ -344,19 +341,19 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function(datum) {
+			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr('class', d =>
+					.attr('class', (d) =>
 						self.model.getColorClassName({
 							classNameTypes: [ColorClassNameTypes.FILL],
 							dataGroupName: d[groupMapsTo],
 							originalClassName: hoveredElement.attr('class'),
 						})
 					)
-					.style('fill', d => {
+					.style('fill', (d) => {
 						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
 							d
 						);
@@ -403,7 +400,7 @@ export class Scatter extends Component {
 					}
 				);
 			})
-			.on('mousemove', function(datum) {
+			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -417,7 +414,7 @@ export class Scatter extends Component {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function(datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_CLICK,
@@ -427,7 +424,7 @@ export class Scatter extends Component {
 					}
 				);
 			})
-			.on('mouseout', function(datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -446,7 +443,7 @@ export class Scatter extends Component {
 								filled
 							)
 						)
-						.style('fill', d =>
+						.style('fill', (d) =>
 							filled
 								? self.model.getFillColor(
 										d[groupMapsTo],

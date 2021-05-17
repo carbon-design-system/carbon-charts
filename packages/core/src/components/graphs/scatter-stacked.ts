@@ -22,7 +22,7 @@ export class StackedScatter extends Scatter {
 		const { groupMapsTo } = options.data;
 
 		const percentage = Object.keys(options.axes).some(
-			axis => options.axes[axis].percentage
+			(axis) => options.axes[axis].percentage
 		);
 		const stackedData = this.model.getStackedData({
 			groups: this.configs.groups,
@@ -32,13 +32,10 @@ export class StackedScatter extends Scatter {
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
-			.data(stackedData, d => Tools.getProperty(d, 0, groupMapsTo));
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// Remove dot groups that need to be removed
-		circleGroups
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		circleGroups.exit().attr('opacity', 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const circleGroupsEnter = circleGroups
@@ -51,13 +48,10 @@ export class StackedScatter extends Scatter {
 		const circles = circleGroupsEnter
 			.merge(circleGroups)
 			.selectAll('circle.dot')
-			.data(d => d);
+			.data((d) => d);
 
 		// Remove circles that need to be removed
-		circles
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		circles.exit().attr('opacity', 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const enteringCircles = circles
@@ -67,7 +61,7 @@ export class StackedScatter extends Scatter {
 			.attr('opacity', 0);
 
 		// Apply styling & position
-		const circlesToStyle = enteringCircles.merge(circles).datum(d => {
+		const circlesToStyle = enteringCircles.merge(circles).datum((d) => {
 			const group = d[groupMapsTo];
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				d
@@ -92,7 +86,7 @@ export class StackedScatter extends Scatter {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 		const percentage = Object.keys(options.axes).some(
-			axis => options.axes[axis].percentage
+			(axis) => options.axes[axis].percentage
 		);
 		const stackedData = this.model.getStackedData({
 			groups: this.configs.groups,
@@ -143,7 +137,7 @@ export class StackedScatter extends Scatter {
 
 		return this.model
 			.getDisplayData(this.configs.groups)
-			.filter(datapoint => {
+			.filter((datapoint) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 					datapoint
 				);
@@ -151,7 +145,7 @@ export class StackedScatter extends Scatter {
 					datapoint
 				);
 				return (
-					tooltipData.find(tooltipDatapoint => {
+					tooltipData.find((tooltipDatapoint) => {
 						return (
 							tooltipDatapoint[groupMapsTo] ==
 								datapoint[groupMapsTo] &&

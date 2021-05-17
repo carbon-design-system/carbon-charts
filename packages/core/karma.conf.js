@@ -1,5 +1,5 @@
 // Karma configuration
-module.exports = function(config) {
+module.exports = function (config) {
 	const browsers = ['ChromeHeadless', 'FirefoxHeadless'];
 	config.set({
 		// base path that will be used to resolve all patterns (eg. files, exclude)

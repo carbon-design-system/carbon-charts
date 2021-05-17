@@ -28,9 +28,9 @@ export class DOMUtils extends Service {
 			height: 0,
 		};
 
-		const validateAndSetDimensions = dimensions => {
+		const validateAndSetDimensions = (dimensions) => {
 			if (dimensions) {
-				Object.keys(finalDimensions).forEach(dimensionKey => {
+				Object.keys(finalDimensions).forEach((dimensionKey) => {
 					if (dimensions[dimensionKey]) {
 						const dimension = dimensions[dimensionKey];
 						const dimensionNumber = parseFloat(dimension);
@@ -287,7 +287,7 @@ export class DOMUtils extends Service {
 
 			// get the height of the children SVGs (spacers, titles, etc)
 			let childrenHeight = 0;
-			children.nodes().forEach(function(childSVG) {
+			children.nodes().forEach(function (childSVG) {
 				childrenHeight += Number(
 					DOMUtils.getSVGElementSize(select(childSVG), {
 						useBBox: true,

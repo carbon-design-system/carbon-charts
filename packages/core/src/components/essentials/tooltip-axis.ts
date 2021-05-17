@@ -83,7 +83,7 @@ export class AxisChartsTooltip extends Tooltip {
 			];
 
 			if (e.detail.additionalItems) {
-				e.detail.additionalItems.forEach(additionalItem =>
+				e.detail.additionalItems.forEach((additionalItem) =>
 					items.push({
 						label: additionalItem.label,
 						value: additionalItem.value,
@@ -110,7 +110,7 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map(datum => ({
+					.map((datum) => ({
 						label: datum[groupMapsTo],
 						value: datum[cartesianScales.getRangeIdentifier(datum)],
 						color: this.model.getFillColor(datum[groupMapsTo]),

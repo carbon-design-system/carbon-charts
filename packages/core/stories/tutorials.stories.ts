@@ -18,7 +18,7 @@ hljs.registerLanguage(
 const gettingStartedStories = storiesOf('Docs|Getting Started', module);
 const tutorialStories = storiesOf('Docs|Tutorials', module);
 
-Object.keys(TUTORIALS).forEach(tutorialKey => {
+Object.keys(TUTORIALS).forEach((tutorialKey) => {
 	const tutorial = TUTORIALS[tutorialKey];
 
 	const storiesToAddTo =
@@ -33,7 +33,7 @@ Object.keys(TUTORIALS).forEach(tutorialKey => {
 
 		container.innerHTML = tutorial.content;
 
-		container.querySelectorAll('pre code').forEach(block => {
+		container.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
 		});
 

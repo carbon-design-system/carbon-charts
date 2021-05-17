@@ -298,7 +298,7 @@ export class Axis extends Component {
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = t => t.toLocaleString();
+					formatter = (t) => t.toLocaleString();
 				}
 			} else {
 				formatter = userProvidedFormatter;
@@ -329,7 +329,7 @@ export class Axis extends Component {
 				});
 
 				// check the supplied ticks are within the time domain
-				validTicks = userProvidedTickValues.filter(tick => {
+				validTicks = userProvidedTickValues.filter((tick) => {
 					const tickTimestamp = tick.getTime();
 					return (
 						tickTimestamp >= new Date(lowerBound).getTime() &&
@@ -340,13 +340,13 @@ export class Axis extends Component {
 				const discreteDomain = this.services.cartesianScales
 					.getScaleByPosition(axisPosition)
 					.domain();
-				validTicks = userProvidedTickValues.filter(tick =>
+				validTicks = userProvidedTickValues.filter((tick) =>
 					discreteDomain.includes(tick)
 				);
 			} else {
 				// continuous scales
 				validTicks = userProvidedTickValues.filter(
-					tick => tick >= lowerBound && tick <= upperBound
+					(tick) => tick >= lowerBound && tick <= upperBound
 				);
 			}
 
@@ -411,8 +411,9 @@ export class Axis extends Component {
 					axisTitleRef
 						.attr(
 							'transform',
-							`translate(${this.margins.left / 2 +
-								scale.range()[1] / 2}, ${height + 4})`
+							`translate(${
+								this.margins.left / 2 + scale.range()[1] / 2
+							}, ${height + 4})`
 						)
 						.style('text-anchor', 'middle');
 					break;
@@ -442,8 +443,9 @@ export class Axis extends Component {
 					axisTitleRef
 						.attr(
 							'transform',
-							`translate(${this.margins.left / 2 +
-								scale.range()[1] / 2}, ${titleHeight / 2})`
+							`translate(${
+								this.margins.left / 2 + scale.range()[1] / 2
+							}, ${titleHeight / 2})`
 						)
 						.style('text-anchor', 'middle');
 					break;
@@ -526,7 +528,7 @@ export class Axis extends Component {
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
-						textNode =>
+						(textNode) =>
 							DOMUtils.getSVGElementSize(textNode, {
 								useBBox: true,
 							}).width >= scale.step()
@@ -587,9 +589,9 @@ export class Axis extends Component {
 			container.attr('opacity', 1);
 		}
 
-		axisRef.selectAll('g.tick').attr('aria-label', d => d);
+		axisRef.selectAll('g.tick').attr('aria-label', (d) => d);
 
-		invisibleAxisRef.selectAll('g.tick').attr('aria-label', d => d);
+		invisibleAxisRef.selectAll('g.tick').attr('aria-label', (d) => d);
 
 		// truncate the label if it's too long
 		// only applies to discrete type
@@ -611,7 +613,7 @@ export class Axis extends Component {
 				container
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function(d) {
+					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
 								d,
@@ -626,7 +628,7 @@ export class Axis extends Component {
 				this.getInvisibleAxisRef()
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function(d) {
+					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(
 								d,
@@ -672,7 +674,7 @@ export class Axis extends Component {
 		const self = this;
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function(datum) {
+			.on('mouseover', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEOVER,
@@ -692,7 +694,7 @@ export class Axis extends Component {
 					});
 				}
 			})
-			.on('mousemove', function(datum) {
+			.on('mousemove', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEMOVE,
@@ -708,14 +710,14 @@ export class Axis extends Component {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				}
 			})
-			.on('click', function(datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function(datum) {
+			.on('mouseout', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					element: select(this),

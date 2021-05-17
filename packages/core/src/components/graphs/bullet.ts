@@ -42,7 +42,7 @@ export class Bullet extends Component {
 
 		const renderRangeBoxes = () => {
 			const rangeBoxData = [];
-			data.forEach(datum => {
+			data.forEach((datum) => {
 				if (datum.ranges) {
 					datum.ranges.forEach((range, i) => {
 						if (
@@ -70,14 +70,11 @@ export class Bullet extends Component {
 				.selectAll('path.range-box')
 				.data(
 					rangeBoxData,
-					datum => `${datum[groupMapsTo]}-${datum.order}`
+					(datum) => `${datum[groupMapsTo]}-${datum.order}`
 				);
 
 			// Remove lines that are no longer needed
-			rangeBoxes
-				.exit()
-				.attr('opacity', 0)
-				.remove();
+			rangeBoxes.exit().attr('opacity', 0).remove();
 
 			// Add the paths that need to be introduced
 			const rangeBoxesEnter = rangeBoxes
@@ -87,7 +84,7 @@ export class Bullet extends Component {
 
 			rangeBoxesEnter
 				.merge(rangeBoxes)
-				.attr('class', d => `range-box order-${d.order}`)
+				.attr('class', (d) => `range-box order-${d.order}`)
 				.transition(
 					this.services.transitions.getTransition(
 						'bullet-range-box-update-enter',
@@ -141,18 +138,13 @@ export class Bullet extends Component {
 			// Update data on all bars
 			const bars = DOMUtils.appendOrSelect(svg, 'g.bars')
 				.selectAll('path.bar')
-				.data(data, datum => datum[groupMapsTo]);
+				.data(data, (datum) => datum[groupMapsTo]);
 
 			// Remove bars that are no longer needed
-			bars.exit()
-				.attr('opacity', 0)
-				.remove();
+			bars.exit().attr('opacity', 0).remove();
 
 			// Add the paths that need to be introduced
-			const barsEnter = bars
-				.enter()
-				.append('path')
-				.attr('opacity', 0);
+			const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
 			barsEnter
 				.merge(bars)
@@ -163,14 +155,14 @@ export class Bullet extends Component {
 						animate
 					)
 				)
-				.attr('class', d =>
+				.attr('class', (d) =>
 					this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: d[groupMapsTo],
 						originalClassName: 'bar',
 					})
 				)
-				.style('fill', d => this.model.getFillColor(d[groupMapsTo]))
+				.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
 				.attr('d', (d, i) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
@@ -199,7 +191,7 @@ export class Bullet extends Component {
 				// a11y
 				.attr('role', Roles.GRAPHICS_SYMBOL)
 				.attr('aria-roledescription', 'bar')
-				.attr('aria-label', d => d.value);
+				.attr('aria-label', (d) => d.value);
 		};
 
 		const renderTargetLines = () => {
@@ -207,21 +199,15 @@ export class Bullet extends Component {
 			const lines = DOMUtils.appendOrSelect(svg, 'g.markers')
 				.selectAll('path.marker')
 				.data(
-					data.filter(d => Tools.getProperty(d, 'marker') !== null),
-					datum => datum[groupMapsTo]
+					data.filter((d) => Tools.getProperty(d, 'marker') !== null),
+					(datum) => datum[groupMapsTo]
 				);
 
 			// Remove lines that are no longer needed
-			lines
-				.exit()
-				.attr('opacity', 0)
-				.remove();
+			lines.exit().attr('opacity', 0).remove();
 
 			// Add the paths that need to be introduced
-			const linesEnter = lines
-				.enter()
-				.append('path')
-				.attr('opacity', 0);
+			const linesEnter = lines.enter().append('path').attr('opacity', 0);
 
 			linesEnter
 				.merge(lines)
@@ -260,8 +246,8 @@ export class Bullet extends Component {
 
 		const renderTargetQuartiles = () => {
 			let quartilesData = [];
-			data.filter(d => Tools.getProperty(d, 'marker') !== null).forEach(
-				d => {
+			data.filter((d) => Tools.getProperty(d, 'marker') !== null).forEach(
+				(d) => {
 					const value = d.marker;
 					const barValue = d[rangeIdentifier];
 
@@ -276,23 +262,17 @@ export class Bullet extends Component {
 			// Update data on all lines
 			const lines = DOMUtils.appendOrSelect(svg, 'g.quartiles')
 				.selectAll('path.quartile')
-				.data(quartilesData, datum => datum[groupMapsTo]);
+				.data(quartilesData, (datum) => datum[groupMapsTo]);
 
 			// Remove lines that are no longer needed
-			lines
-				.exit()
-				.attr('opacity', 0)
-				.remove();
+			lines.exit().attr('opacity', 0).remove();
 
 			// Add the paths that need to be introduced
-			const linesEnter = lines
-				.enter()
-				.append('path')
-				.attr('opacity', 0);
+			const linesEnter = lines.enter().append('path').attr('opacity', 0);
 
 			linesEnter
 				.merge(lines)
-				.attr('class', d => {
+				.attr('class', (d) => {
 					return `quartile ${
 						d.value <= d.barValue ? 'over-bar' : ''
 					}`;
@@ -355,7 +335,7 @@ export class Bullet extends Component {
 					'legend-hover-simple-bar'
 				)
 			)
-			.attr('opacity', d =>
+			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
 	};
@@ -395,7 +375,7 @@ export class Bullet extends Component {
 
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function(datum) {
+			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 				hoveredElement.transition(
@@ -451,7 +431,7 @@ export class Bullet extends Component {
 					],
 				});
 			})
-			.on('mousemove', function(datum) {
+			.on('mousemove', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
@@ -460,14 +440,14 @@ export class Bullet extends Component {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function(datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function(datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 

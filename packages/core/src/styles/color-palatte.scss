@@ -115,11 +115,11 @@ $white-theme-colors: (
 			'9': getColorValue('magenta', 50),
 			'10': #b28600,
 			//yellow 50, update when available in carbon color
-				'11': getColorValue('teal', 50),
+			'11': getColorValue('teal', 50),
 			'12': getColorValue('cyan', 90),
 			'13': #8a3800,
 			//orange 70, update when available in carbon color
-				'14': getColorValue('purple', 50),
+			'14': getColorValue('purple', 50),
 		),
 	),
 );
@@ -237,11 +237,11 @@ $dark-theme-colors: (
 			'9': getColorValue('magenta', 60),
 			'10': #d2a106,
 			//yellow 40, update when available in carbon color
-				'11': getColorValue('teal', 40),
+			'11': getColorValue('teal', 40),
 			'12': getColorValue('cyan', 20),
 			'13': #ba4e00,
 			//orange 60, update when available in carbon color
-				'14': getColorValue('purple', 30),
+			'14': getColorValue('purple', 30),
 		),
 	),
 );

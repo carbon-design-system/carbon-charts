@@ -82,19 +82,19 @@ export class Ruler extends Component {
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
 		const pointsWithinLine = displayData
-			.map(d => ({
+			.map((d) => ({
 				domainValue: this.services.cartesianScales.getDomainValue(d),
 				originalData: d,
 			}))
-			.filter(d =>
+			.filter((d) =>
 				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
 			);
 
 		if (
 			this.pointsWithinLine &&
 			pointsWithinLine.length === this.pointsWithinLine.length &&
-			pointsWithinLine.map(point => point.domainValue).join() ===
-				this.pointsWithinLine.map(point => point.domainValue).join()
+			pointsWithinLine.map((point) => point.domainValue).join() ===
+				this.pointsWithinLine.map((point) => point.domainValue).join()
 		) {
 			this.pointsWithinLine = pointsWithinLine;
 			return this.services.events.dispatchEvent(Events.Tooltip.MOVE, {
@@ -144,8 +144,8 @@ export class Ruler extends Component {
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
 			const tooltipData = dataPointsMatchingRulerLine
-				.map(d => d.originalData)
-				.filter(d => {
+				.map((d) => d.originalData)
+				.filter((d) => {
 					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
 						d
 					);
@@ -155,9 +155,9 @@ export class Ruler extends Component {
 
 			// get elements on which we should trigger mouse events
 			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(
-				d => d.domainValue
+				(d) => d.domainValue
 			);
-			const elementsToHighlight = dataPointElements.filter(d => {
+			const elementsToHighlight = dataPointElements.filter((d) => {
 				const domainValue = this.services.cartesianScales.getDomainValue(
 					d
 				);
@@ -227,7 +227,7 @@ export class Ruler extends Component {
 		const self = this;
 		const displayData = this.model.getDisplayData();
 
-		let mouseMoveCallback = function() {
+		let mouseMoveCallback = function () {
 			const pos = mouse(self.parent.node());
 			self.showRuler(pos);
 		};
@@ -237,7 +237,7 @@ export class Ruler extends Component {
 			const debounceThreshold = (displayData.length % 50) * 12.5;
 
 			mouseMoveCallback = Tools.debounceWithD3MousePosition(
-				function() {
+				function () {
 					const { mousePosition } = this;
 					self.showRuler(mousePosition);
 				},

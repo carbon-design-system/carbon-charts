@@ -19,7 +19,7 @@ export class Title extends Component {
 			.merge(text)
 			.attr('x', 0)
 			.attr('y', '1em')
-			.html(d => d);
+			.html((d) => d);
 
 		// check the max space the title has to render
 		const maxWidth = this.getMaxTitleWidth();
@@ -73,16 +73,16 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on('mouseover', function() {
+				.on('mouseover', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
 						content: untruncatedTitle,
 					});
 				})
-				.on('mousemove', function() {
+				.on('mousemove', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				})
-				.on('mouseout', function() {
+				.on('mouseout', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				});
 		}

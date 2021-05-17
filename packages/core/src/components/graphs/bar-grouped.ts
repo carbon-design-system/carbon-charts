@@ -48,7 +48,7 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
-		const allDataLabels = map(displayData, datum => {
+		const allDataLabels = map(displayData, (datum) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
@@ -58,13 +58,10 @@ export class GroupedBar extends Bar {
 		// Update data on bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(allDataLabels, label => label);
+			.data(allDataLabels, (label) => label);
 
 		// Remove dot groups that need to be removed
-		barGroups
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		barGroups.exit().attr('opacity', 0).remove();
 
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups
@@ -104,23 +101,16 @@ export class GroupedBar extends Bar {
 				}
 			});
 
-		const bars = allBarGroups
-			.selectAll('path.bar')
-			.data(
-				label => this.getDataCorrespondingToLabel(label),
-				d => d[groupMapsTo]
-			);
+		const bars = allBarGroups.selectAll('path.bar').data(
+			(label) => this.getDataCorrespondingToLabel(label),
+			(d) => d[groupMapsTo]
+		);
 
 		// Remove bars that are no longer needed
-		bars.exit()
-			.attr('opacity', 0)
-			.remove();
+		bars.exit().attr('opacity', 0).remove();
 
 		// Add the bars that need to be introduced
-		const barsEnter = bars
-			.enter()
-			.append('path')
-			.attr('opacity', 0);
+		const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
 		// code for vertical grouped bar charts
 		barsEnter
@@ -132,15 +122,15 @@ export class GroupedBar extends Bar {
 					animate
 				)
 			)
-			.attr('class', d =>
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'bar',
 				})
 			)
-			.style('fill', d => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', d => {
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -174,7 +164,7 @@ export class GroupedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', d => d.value);
+			.attr('aria-label', (d) => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -191,7 +181,7 @@ export class GroupedBar extends Bar {
 			.transition(
 				this.services.transitions.getTransition('legend-hover-bar')
 			)
-			.attr('opacity', d =>
+			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
 	};
@@ -211,7 +201,7 @@ export class GroupedBar extends Bar {
 
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function(datum) {
+			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -233,7 +223,7 @@ export class GroupedBar extends Bar {
 					data: [datum],
 				});
 			})
-			.on('mousemove', function(datum) {
+			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -244,14 +234,14 @@ export class GroupedBar extends Bar {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function(datum) {
+			.on('click', function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function(datum) {
+			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -297,7 +287,7 @@ export class GroupedBar extends Bar {
 	protected getDataCorrespondingToLabel(label: string) {
 		const displayData = this.model.getDisplayData(this.configs.groups);
 
-		return displayData.filter(datum => {
+		return displayData.filter((datum) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);

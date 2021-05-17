@@ -78,7 +78,7 @@ export class ComboChart extends AxisChart {
 		const { comboChartTypes } = this.model.getOptions();
 		let counter = 0;
 		const graphComponents = comboChartTypes
-			.map(graph => {
+			.map((graph) => {
 				const type = graph.type;
 				let options;
 
@@ -88,9 +88,7 @@ export class ComboChart extends AxisChart {
 					// if it isn't then it is not a valid carbon chart to use in combo
 					if (!Object.keys(graphComponentsMap).includes(graph.type)) {
 						console.error(
-							`Invalid chart type "${
-								graph.type
-							}" specified for combo chart. Please refer to the ComboChart tutorial for more guidance.`
+							`Invalid chart type "${graph.type}" specified for combo chart. Please refer to the ComboChart tutorial for more guidance.`
 						);
 						return null;
 					}
@@ -130,7 +128,7 @@ export class ComboChart extends AxisChart {
 					});
 				}
 			})
-			.filter(item => item !== null);
+			.filter((item) => item !== null);
 
 		return Tools.flatten(graphComponents);
 	}
@@ -139,7 +137,7 @@ export class ComboChart extends AxisChart {
 		const { comboChartTypes } = this.model.getOptions();
 		// don't add the regular ruler if stacked ruler is added
 		const stackedRulerEnabled = comboChartTypes.some(
-			chartObject =>
+			(chartObject) =>
 				chartObject.type === ChartTypes.STACKED_BAR ||
 				chartObject.type === ChartTypes.STACKED_AREA
 		);

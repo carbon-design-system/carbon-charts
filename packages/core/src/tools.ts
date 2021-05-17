@@ -50,7 +50,7 @@ export namespace Tools {
 
 	export function debounceWithD3MousePosition(fn, delay, element) {
 		var timer = null;
-		return function() {
+		return function () {
 			const context = this;
 			const args = arguments;
 
@@ -59,7 +59,7 @@ export namespace Tools {
 
 			clearTimeout(timer);
 
-			timer = setTimeout(function() {
+			timer = setTimeout(function () {
 				// and use the reference here
 				fn.apply(context, args);
 			}, delay);
@@ -297,12 +297,12 @@ export namespace Tools {
 		// Retain default legend additional items
 		if (defaultAdditionalItems && userProvidedAdditionalItems) {
 			const providedTypes = userProvidedAdditionalItems.map(
-				item => item.type
+				(item) => item.type
 			);
 
 			// Remove same type default items if they are provided
 			defaultAdditionalItems = defaultAdditionalItems.filter(
-				item =>
+				(item) =>
 					!providedTypes.includes(item.type) &&
 					item.type === LegendItemType.RADIUS
 			);
@@ -336,13 +336,13 @@ export namespace Tools {
 			added: [],
 		};
 
-		oldArray.forEach(element => {
+		oldArray.forEach((element) => {
 			if (newArray.indexOf(element) === -1) {
 				difference.missing.push(element);
 			}
 		});
 
-		newArray.forEach(element => {
+		newArray.forEach((element) => {
 			if (oldArray.indexOf(element) === -1) {
 				difference.added.push(element);
 			}
@@ -362,7 +362,7 @@ export namespace Tools {
 		const values = [];
 		const duplicateValues = [];
 
-		arr.forEach(value => {
+		arr.forEach((value) => {
 			if (
 				values.indexOf(value) !== -1 &&
 				duplicateValues.indexOf(value) === -1
@@ -388,7 +388,7 @@ export namespace Tools {
 	 * @returns The function to be used by D3 to push element to the top of the canvas
 	 */
 	export function moveToFront(element) {
-		return element.each(function() {
+		return element.each(function () {
 			this.parentNode.appendChild(this);
 		});
 	}

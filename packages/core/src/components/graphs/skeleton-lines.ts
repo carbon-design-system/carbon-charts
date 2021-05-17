@@ -79,8 +79,8 @@ export class SkeletonLines extends Skeleton {
 			.merge(update)
 			.attr('x1', 0)
 			.attr('x2', width)
-			.attr('y1', d => d)
-			.attr('y2', d => d);
+			.attr('y1', (d) => d)
+			.attr('y2', (d) => d);
 
 		sparklineSkeleton
 			.selectAll('line')

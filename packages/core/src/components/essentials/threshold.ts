@@ -31,7 +31,7 @@ export class Threshold extends Component {
 
 		const thresholdData = [];
 
-		Object.keys(axesOptions).forEach(axisPosition => {
+		Object.keys(axesOptions).forEach((axisPosition) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
 				const axisOptions = axesOptions[axisPosition];
 
@@ -53,13 +53,10 @@ export class Threshold extends Component {
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
 			.selectAll('g.axis-thresholds')
-			.data(thresholdData, thresholdData => thresholdData.axisPosition);
+			.data(thresholdData, (thresholdData) => thresholdData.axisPosition);
 
 		// Remove axis threshold groups that are no longer needed
-		thresholdAxisGroups
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		thresholdAxisGroups.exit().attr('opacity', 0).remove();
 
 		// Add the axis threshold groups that need to be introduced
 		const thresholdAxisGroupsEnter = thresholdAxisGroups
@@ -71,23 +68,20 @@ export class Threshold extends Component {
 		);
 		thresholdAxisGroupsMerge.attr(
 			'class',
-			d => `axis-thresholds ${d.axisPosition}`
+			(d) => `axis-thresholds ${d.axisPosition}`
 		);
 
 		const thresholdGroups = thresholdAxisGroupsMerge
 			.selectAll('g.threshold-group')
-			.data(d =>
-				d.thresholds.map(threshold => {
+			.data((d) =>
+				d.thresholds.map((threshold) => {
 					threshold.axisPosition = d.axisPosition;
 					return threshold;
 				})
 			);
 
 		// Remove threshold groups that are no longer needed
-		thresholdGroups
-			.exit()
-			.attr('opacity', 0)
-			.remove();
+		thresholdGroups.exit().attr('opacity', 0).remove();
 
 		// Add the threshold groups that need to be introduced
 		const thresholdGroupsEnter = thresholdGroups.enter().append('g');
@@ -103,7 +97,7 @@ export class Threshold extends Component {
 		thresholdGroupsMerge.attr('class', 'threshold-group');
 
 		const self = this;
-		thresholdAxisGroupsMerge.each(function({ axisPosition }) {
+		thresholdAxisGroupsMerge.each(function ({ axisPosition }) {
 			const scale = self.services.cartesianScales.getScaleByPosition(
 				axisPosition
 			);
@@ -118,8 +112,8 @@ export class Threshold extends Component {
 
 			const { cartesianScales } = self.services;
 			const orientation = cartesianScales.getOrientation();
-			const getDomainValue = d => cartesianScales.getDomainValue(d);
-			const getRangeValue = d => cartesianScales.getRangeValue(d);
+			const getDomainValue = (d) => cartesianScales.getDomainValue(d);
+			const getRangeValue = (d) => cartesianScales.getRangeValue(d);
 			const [
 				getXValue,
 				getYValue,
@@ -201,14 +195,14 @@ export class Threshold extends Component {
 		});
 
 		// Add event listener for showing the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.SHOW, e => {
+		this.services.events.addEventListener(Events.Threshold.SHOW, (e) => {
 			this.setThresholdLabelPosition(e.detail.datum);
 
 			this.label.classed('hidden', false);
 		});
 
 		// Add event listener for hiding the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.HIDE, e => {
+		this.services.events.addEventListener(Events.Threshold.HIDE, (e) => {
 			this.label.classed('hidden', true);
 		});
 
@@ -317,7 +311,7 @@ export class Threshold extends Component {
 
 		// Add events to the threshold hoverable area
 		svg.selectAll('rect.threshold-hoverable-area')
-			.on('mouseover mousemove', function() {
+			.on('mouseover mousemove', function () {
 				select(this.parentNode)
 					.select('line.threshold-line')
 					.classed('active', true);
@@ -327,7 +321,7 @@ export class Threshold extends Component {
 					datum: select(this).datum(),
 				});
 			})
-			.on('mouseout', function() {
+			.on('mouseout', function () {
 				select(this.parentNode)
 					.select('line.threshold-line')
 					.classed('active', false);

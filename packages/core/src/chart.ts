@@ -49,7 +49,7 @@ export class Chart {
 		this.model.set({ holder }, { skipUpdate: true });
 
 		// Initialize all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
 			this.services[serviceName] = new serviceObj(
 				this.model,
@@ -58,7 +58,7 @@ export class Chart {
 		});
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, e => {
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
 			const animate = !!Tools.getProperty(e, 'detail', 'animate');
 			this.update(animate);
 		});
@@ -88,22 +88,22 @@ export class Chart {
 		}
 
 		// Update all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
 			serviceObj.update();
 		});
 
 		// Render all components
-		this.components.forEach(component => component.render(animate));
+		this.components.forEach((component) => component.render(animate));
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
 		// Since at the start of the transition
 		// Elements do not hold their final size or position
 		const pendingTransitions = this.services.transitions.getPendingTransitions();
-		const promises = Object.keys(pendingTransitions).map(transitionID => {
+		const promises = Object.keys(pendingTransitions).map((transitionID) => {
 			const transition = pendingTransitions[transitionID];
-			return transition.end().catch(e => e); // Skip rejects since we don't care about those;
+			return transition.end().catch((e) => e); // Skip rejects since we don't care about those;
 		});
 
 		Promise.all(promises).then(() =>
@@ -115,7 +115,7 @@ export class Chart {
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach(component => component.destroy());
+		this.components.forEach((component) => component.destroy());
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();

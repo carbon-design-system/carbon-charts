@@ -62,9 +62,9 @@ export class CirclePackChartModel extends ChartModel {
 
 		let depth = this.getHierarchyLevel();
 		// check the data depth
-		data.some(datum => {
+		data.some((datum) => {
 			if (datum.children) {
-				if (datum.children.some(item => item.children)) {
+				if (datum.children.some((item) => item.children)) {
 					depth = 3;
 					return false;
 				}
@@ -112,7 +112,7 @@ export class CirclePackChartModel extends ChartModel {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const newData = data.map(depthOne => {
+		const newData = data.map((depthOne) => {
 			const groupName = depthOne[groupMapsTo];
 			return this.setChildrenDataGroup(depthOne, groupName);
 		});

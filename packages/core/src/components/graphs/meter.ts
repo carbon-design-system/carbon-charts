@@ -23,9 +23,7 @@ export class Meter extends Component {
 		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis
-		const xScale = scaleLinear()
-			.domain([0, 100])
-			.range([0, width]);
+		const xScale = scaleLinear().domain([0, 100]).range([0, width]);
 
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
@@ -55,7 +53,7 @@ export class Meter extends Component {
 			.attr('x', 0)
 			.attr('y', 0)
 			.attr('height', Tools.getProperty(options, 'meter', 'height'))
-			.attr('class', d =>
+			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
@@ -68,14 +66,14 @@ export class Meter extends Component {
 					animate
 				)
 			)
-			.attr('width', d =>
+			.attr('width', (d) =>
 				maximumBarWidth ? xScale(100) : xScale(d.value)
 			)
-			.style('fill', d => self.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
-			.attr('aria-label', d => d.value);
+			.attr('aria-label', (d) => d.value);
 
 		// draw the peak
 		const peakValue = Tools.getProperty(options, 'meter', 'peak');
@@ -104,12 +102,12 @@ export class Meter extends Component {
 					animate
 				)
 			)
-			.attr('x1', d => xScale(d))
-			.attr('x2', d => xScale(d))
+			.attr('x1', (d) => xScale(d))
+			.attr('x2', (d) => xScale(d))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'peak')
-			.attr('aria-label', d => d);
+			.attr('aria-label', (d) => d);
 
 		peak.exit().remove();
 
