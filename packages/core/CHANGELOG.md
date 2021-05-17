@@ -7,10 +7,24 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 6f130780c03537b9d803bb5da866869778638e17
 ## [0.41.63](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.62...v0.41.63) (2021-05-10)
 
 **Note:** Version bump only for package @carbon/charts
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 6f130780c03537b9d803bb5da866869778638e17
 # Change Log
 
 All notable changes to this project will be documented in this file. See
