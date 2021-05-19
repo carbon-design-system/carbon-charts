@@ -245,8 +245,7 @@ export class CirclePack extends Component {
 
 				const hierarchyLevel = self.model.getHierarchyLevel();
 				const disabled =
-					hierarchyLevel > 2 &&
-					!hoveredElement.node().classList.contains('focal');
+					hierarchyLevel > 2 && !hoveredElement.classed('focal');
 				const canvasZoomEnabled = Tools.getProperty(
 					self.model.getOptions(),
 					'canvasZoom',
@@ -381,9 +380,7 @@ export class CirclePack extends Component {
 			})
 			.on('click', function (datum) {
 				const hoveredElement = select(this);
-				const disabled = hoveredElement
-					.node()
-					.classList.contains('non-focal');
+				const disabled = hoveredElement.classed('non-focal');
 
 				const zoomedIn =
 					Tools.getProperty(
