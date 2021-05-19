@@ -11,13 +11,28 @@
 		}
 
 		&.non-focal {
-			fill: $carbon--gray-20;
+			fill: $disabled-02;
 			fill-opacity: 30%;
-			stroke: $carbon--gray-20;
+			stroke: $disabled-02;
 		}
 
 		&.clickable {
-			cursor: pointer;
+			cursor: zoom-in;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-svg.zoomed-in {
+	cursor: zoom-out;
+	.#{$prefix}--#{$charts-prefix}--circle-pack {
+		circle.node {
+			&.hovered-child {
+				stroke: 1.5px solid initial;
+			}
+
+			&.clickable {
+				cursor: zoom-out;
+			}
 		}
 	}
 }
