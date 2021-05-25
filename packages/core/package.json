@@ -53,7 +53,7 @@
 		"@carbon/utils-position": "1.1.1",
 		"d3-cloud": "1.2.5",
 		"date-fns": "2.8.1",
-		"lodash-es": "4.17.15",
+		"lodash-es": "4.17.21",
 		"resize-observer-polyfill": "1.5.0"
 	},
 	"peerDependencies": {
