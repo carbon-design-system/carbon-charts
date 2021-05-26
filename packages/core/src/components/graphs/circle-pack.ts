@@ -95,6 +95,10 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`,
 				});
 			})
+			.style('fill', (d) => this.model.getFillColor(d.data.dataGroupName))
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 			.transition(
@@ -134,11 +138,13 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed('hovered-child', false);
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			);
 	}
 
 	// highlight the children circles with a stroke
-	highlightChildren(childData, classname?) {
+	highlightChildren(childData) {
 		const data = childData.map((d) => d.data);
 
 		this.parent
@@ -146,7 +152,7 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed(classname ? classname : 'hovered-child', true);
+			.style('stroke', 'white');
 	}
 
 	getZoomClass(node) {

@@ -54,6 +54,22 @@ export const circlePackTwoLevelOptions = {
 	},
 };
 
+export const circlePackTwoLevelCustomColorsOptions = {
+	experimental: 'true',
+	title: 'Custom colors (circle pack)',
+	canvasZoom: {
+		enabled: true,
+	},
+	color: {
+		scale: {
+			'Asia': 'green',
+			'South America': 'blue',
+			'North America': 'orange',
+			'Europe': 'red',
+		},
+	},
+};
+
 export const circlePackSingleOptions = {
 	experimental: 'true',
 	title: 'One Level Hierachy',
