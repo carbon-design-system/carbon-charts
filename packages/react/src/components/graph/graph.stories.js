@@ -39,10 +39,8 @@ stories.add('Default', () => {
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
-				transform={`translate(${600},${100})`}
-				height={circleSize}
-				width={circleSize}>
-				<Circle title={'Title'} renderIcon={<Wikis16 />} />
+				transform={`translate(${600},${100})`}>
+				<Circle title={'Title'} size={circleSize} renderIcon={<Wikis16 />} />
 			</foreignObject>
 		</svg>
 	);
@@ -106,6 +104,7 @@ stories.add('Programmatic', () => {
 			{node.circle ? (
 				<Circle
 					title={'Title'}
+					size={circleSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>

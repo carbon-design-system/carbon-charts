@@ -76,5 +76,11 @@
 			padding-bottom: $spacing-01;
 			@include carbon--type-style($name: body-short-01);
 		}
+
+		&__label {
+			@include carbon--type-style($name: label-01);
+			color: $text-02;
+			padding-top: $spacing-06;
+		}
 	}
 }

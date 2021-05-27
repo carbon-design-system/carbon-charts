@@ -22,8 +22,12 @@ stories.add('With icon', () => (
 	<Card title={'Title'} description={'Description'} renderIcon={<User16 />} />
 ));
 
+stories.add('With label', () => (
+	<Card title={'Title'} description={'Description'} label={'Label'} />
+));
+
 stories.add('With action', () => (
-	<Card title={'Title'} description={'Description'} renderIcon={<User16 />} renderAction={
+	<Card title={'Title'} description={'Description'} label={'Label'} renderAction={
 	<OverflowMenu>
 		<OverflowMenuItem itemText="Stop app" />
 		<OverflowMenuItem itemText="Restart app" />
