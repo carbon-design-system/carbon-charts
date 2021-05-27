@@ -31,6 +31,9 @@ export const canvasZoomSettings = {
 export const circlePack = {
 	circles: {
 		fillOpacity: 0.3,
+		hover: {
+			stroke: '#FFF',
+		},
 	},
 	padding: {
 		mainGroup: 4,

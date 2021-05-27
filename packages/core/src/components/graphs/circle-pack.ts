@@ -152,7 +152,7 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.style('stroke', 'white');
+			.style('stroke', Configuration.circlePack.circles.hover.stroke);
 	}
 
 	getZoomClass(node) {
