@@ -6,21 +6,28 @@ const { prefix } = settings;
 @Component({
 	selector: "ibm-graph-card",
 	template: `
-	<div [attr.class]="namespace" tabindex="0" (click)="onClick.emit($event)">
+	<div [ngClass]="[namespace, stacked && namespace + '--stacked']" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
 			<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
 		</div>
-		<div attr.class="{{ namespace + '__body' }}" transform="translate(80,28)">
+		<div attr.class="{{ namespace + '__body' }}">
             <div attr.class="{{ namespace + '__title' }}">{{title}}</div>
-            <div attr.class="{{ namespace + '__description' }}" transform="translate(0,20)">{{description}}</div>
-        </div>
+            <div attr.class="{{ namespace + '__description' }}">{{description}}</div>
+			<div *ngIf="label" attr.class="{{ namespace + '__label' }}">{{label}}</div>
+		</div>
+		<div *ngIf="renderAction" attr.class="{{ namespace + '__action' }}" >
+			<ng-container *ngTemplateOutlet="renderAction"></ng-container>
+		</div>
 	</div>
 	`
 })
 
 export class CardComponent {
-	@Input() title;
 	@Input() description;
+	@Input() label;
+	@Input() stacked;
+	@Input() title;
+	@Input() renderAction: TemplateRef<any>;
 	@Input() renderIcon: TemplateRef<any>;
 	@Output() onClick = new EventEmitter<any>();
 

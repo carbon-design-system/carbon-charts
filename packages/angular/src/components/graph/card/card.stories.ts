@@ -3,7 +3,7 @@ import { CardModule } from "./card.module";
 import { ScreenModule } from "@carbon/icons-angular";
 
 const getTemplate = demo => `
-	<div class="container theme--white">
+	<div class="container theme--white" style="max-width: 400px">
 		${demo}
 	</div>
 `;
@@ -21,6 +21,14 @@ storiesOf("Experimental|Card", module)
 		description: "Description"
 	},
 }))
+.add("Stacked", () => ({
+	template: getTemplate(`<ibm-graph-card [title]="title" [description]="description" [stacked]="stacked"></ibm-graph-card>`),
+	props: {
+		title: "Title",
+		description: "Description",
+		stacked: true
+	},
+}))
 .add("With icon", () => ({
 	template: getTemplate(`
 	<ibm-graph-card [title]="title" [description]="description" [renderIcon]="iconTemplate"></ibm-graph-card>
@@ -32,4 +40,13 @@ storiesOf("Experimental|Card", module)
 		title: "Title",
 		description: "Description"
 	},
-}));
+}))
+.add("With label", () => ({
+	template: getTemplate(`<ibm-graph-card [title]="title" [description]="description" [label]="label"></ibm-graph-card>`),
+	props: {
+		title: "Title",
+		description: "Description",
+		label: "Label"
+	},
+}))
+;
