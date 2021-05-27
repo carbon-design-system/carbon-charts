@@ -25,7 +25,7 @@ storiesOf("Experimental|Card", module)
 	template: getTemplate(`
 	<ibm-graph-card [title]="title" [description]="description" [renderIcon]="iconTemplate"></ibm-graph-card>
 	<ng-template #iconTemplate>
-		<svg ibmIconScreen size="20"></svg>
+		<svg ibmIconScreen size="16"></svg>
 	</ng-template>
 	`),
 	props: {

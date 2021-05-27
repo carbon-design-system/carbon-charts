@@ -19,7 +19,7 @@ storiesOf("Experimental|Circle", module)
 		<div style="height: 48px; width: 48px">
 			<ibm-graph-circle [title]="title" [renderIcon]="iconTemplate"></ibm-graph-circle>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="20"></svg>
+				<svg ibmIconScreen size="16"></svg>
 			</ng-template>
 		</div>
 	`),
