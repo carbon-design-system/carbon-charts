@@ -3,7 +3,7 @@ import settings from 'carbon-components/src/globals/js/settings';
 
 const { prefix } = settings;
 
-export default ({ title, description, renderIcon }) => {
+export default ({ title, description, renderIcon, size = 48 }) => {
 	const namespace = `${prefix}--cc--circle`;
 
 	const titleElement = title ? (
@@ -14,7 +14,7 @@ export default ({ title, description, renderIcon }) => {
 	) : null;
 
 	return (
-		<div className={namespace} tabIndex={0}>
+		<div className={namespace} style={{ height: size, width: size }} tabIndex={0}>
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
 			<div className={`${namespace}__body`}>
 				{titleElement}

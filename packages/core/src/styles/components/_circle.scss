@@ -20,7 +20,8 @@
 		cursor: pointer;
 
 		&:focus {
-			@include focus-outline();
+			outline: none;
+			box-shadow: 0 0 0 1px $focus;
 		}
 
 		&__body {

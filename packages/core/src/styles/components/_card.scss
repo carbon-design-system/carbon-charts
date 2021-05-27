@@ -5,10 +5,23 @@
 @import './../vendor/@carbon/elements/scss/import-once/import-once';
 @import './../vendor/carbon-components/scss/globals/scss/_helper-mixins';
 
+@mixin stacked-card {
+	content: '';
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 0;
+	border-top: carbon--mini-units(0.25) solid $ui-03;
+	border-right: carbon--mini-units(0.25) solid $ui-03;
+	pointer-events: none;
+}
+
 @include exports('cc-card') {
 	.#{$prefix}--#{$charts-prefix}--card {
 		display: flex;
+		position: relative;
 		background-color: $ui-01;
+		z-index: 1;
 		box-sizing: border-box;
 		font-family: carbon--font-family('sans');
 		width: 100%;
@@ -23,6 +36,20 @@
 
 		&:hover {
 			background-color: $hover-ui;
+		}
+
+		&--stacked {
+			&::before {
+				@include stacked-card();
+				left: carbon--mini-units(0.625);
+				bottom: carbon--mini-units(0.625);
+			}
+
+			&::after {
+				@include stacked-card();
+				left: carbon--mini-units(1.375);
+				bottom: carbon--mini-units(1.375);
+			}
 		}
 
 		&__icon {

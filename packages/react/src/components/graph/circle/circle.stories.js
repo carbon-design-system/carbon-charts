@@ -10,7 +10,11 @@ stories.addDecorator((story) => (
 ));
 
 stories.add('Default', () => (
-	<div style={{ height: 48, width: 48 }}>
-		<Circle title={'Title'} renderIcon={<User16 />} />
+	<Circle title={'Title'} renderIcon={<User16 />} />
+));
+
+stories.add('Inherited dimensions', () => (
+	<div style={{ height: 64, width: 64 }}>
+		<Circle title={'Title'} renderIcon={<User16 />} size={"100%"} />
 	</div>
 ));
