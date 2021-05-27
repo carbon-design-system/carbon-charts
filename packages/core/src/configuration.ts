@@ -178,24 +178,6 @@ const chart: BaseChartOptions = {
 			enabled: false,
 		},
 	},
-};
-
-/**
- * Options common to any chart with an axis
- */
-const axisChart: AxisChartOptions = Tools.merge({}, chart, {
-	axes,
-	timeScale,
-	grid,
-	ruler,
-	zoomBar: {
-		zoomRatio: 0.4,
-		minZoomRatio: 0.01,
-		top: {
-			enabled: false,
-			type: ZoomBarTypes.GRAPH_VIEW,
-		},
-	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: true,
 		numberOfIcons: 3,
@@ -217,6 +199,24 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			},
 		],
 	} as ToolbarOptions,
+};
+
+/**
+ * Options common to any chart with an axis
+ */
+const axisChart: AxisChartOptions = Tools.merge({}, chart, {
+	axes,
+	timeScale,
+	grid,
+	ruler,
+	zoomBar: {
+		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
+		top: {
+			enabled: false,
+			type: ZoomBarTypes.GRAPH_VIEW,
+		},
+	} as ZoomBarsOptions,
 } as AxisChartOptions);
 
 /**

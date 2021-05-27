@@ -329,6 +329,7 @@ export class Toolbar extends Component {
 
 	getControlConfigByType(controlType: ToolbarControlTypes) {
 		const isZoomBarEnabled =
+			this.services.zoom &&
 			this.services.zoom.isZoomBarEnabled() &&
 			!this.services.zoom.isEmptyState();
 

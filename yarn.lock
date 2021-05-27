@@ -1377,10 +1377,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ibm/plex@5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@ibm/plex/-/plex-5.1.3.tgz#10b0d72448527d9b8b487165037ad38605c4bf29"
-  integrity sha512-Wgful5xAKIzUFngMyEnZ6nc7IKMyKMRVk4qCIAgjRCI76w1uCGGgImWSEunay+j5mPrEWQKwz1ht8Xk6rcumEw==
+"@ibm/plex@6.0.0-next.6":
+  version "6.0.0-next.6"
+  resolved "https://registry.yarnpkg.com/@ibm/plex/-/plex-6.0.0-next.6.tgz#5b4ab81a84ddb06651fdf684521927cdce135b79"
+  integrity sha512-B3uGruTn2rS5gweynLmfSe7yCawSRsJguJJQHVQiqf4rh2RNgJFu8YLE2Zd/JHV0ZXoVMOslcXP2k3hMkxKEyA==
 
 "@icons/material@^0.2.4":
   version "0.2.4"

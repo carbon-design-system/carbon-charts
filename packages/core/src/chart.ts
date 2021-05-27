@@ -28,6 +28,7 @@ import {
 	CanvasZoom,
 	DOMUtils,
 	Events,
+	Files,
 	GradientUtils,
 	Transitions,
 } from './services/index';
@@ -36,6 +37,7 @@ export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
+		files: Files,
 		events: Events,
 		gradientUtils: GradientUtils,
 		transitions: Transitions,

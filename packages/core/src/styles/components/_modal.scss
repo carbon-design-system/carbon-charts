@@ -46,7 +46,7 @@
 		background-color: transparent;
 
 		.#{$prefix}--#{$charts-prefix}-modal-footer-spacer {
-			flex: 1;
+			width: 50%;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 // Essentials
 export * from './essentials/dom-utils';
 export * from './essentials/events';
+export * from './essentials/files';
 export * from './essentials/transitions';
 export * from './essentials/gradient-utils';
 

@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from '../service';
-import { Events, Alignments } from './../../interfaces';
+import { Events } from './../../interfaces';
 
 // D3 Imports
 import { select, Selection } from 'd3-selection';
@@ -12,8 +12,7 @@ import settings from 'carbon-components/es/globals/js/settings';
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
 
-// import * as htmlToImage from 'html-to-image';
-import htmlToImage from 'dom-to-image';
+import domToImage from 'dom-to-image';
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
@@ -251,27 +250,46 @@ export class DOMUtils extends Service {
 	}
 
 	exportToJPG() {
-		htmlToImage
-			.toJpeg(this.getMainContainer(), { quality: 1 })
-			.then(function (dataUrl) {
-				var img = new Image();
-				img.src = dataUrl;
-				document.body.appendChild(img);
+		const self = this;
+		domToImage
+			.toJpeg(this.getMainContainer(), {
+				quality: 1,
+				// Remove the toolbar
+				filter: (node) => {
+					if (
+						node.classList &&
+						node.classList.contains('bx--cc--toolbar')
+					) {
+						return false;
+					}
 
-				// var link = document.createElement('a');
-				// link.download = 'my-image-name.jpeg';
-				// link.href = dataUrl;
-				// link.click();
+					return true;
+				},
+			})
+			.then(function (dataUrl) {
+				self.services.files.downloadImage(dataUrl, 'myChart.jpg');
 			});
 	}
 
 	exportToPNG() {
-		htmlToImage
-			.toPng(this.getMainContainer())
+		const self = this;
+		domToImage
+			.toPng(this.getMainContainer(), {
+				quality: 1,
+				// Remove the toolbar
+				filter: (node) => {
+					if (
+						node.classList &&
+						node.classList.contains('bx--cc--toolbar')
+					) {
+						return false;
+					}
+
+					return true;
+				},
+			})
 			.then(function (dataUrl) {
-				var img = new Image();
-				img.src = dataUrl;
-				document.body.appendChild(img);
+				self.services.files.downloadImage(dataUrl, 'myChart.png');
 			})
 			.catch(function (error) {
 				console.error('oops, something went wrong!', error);

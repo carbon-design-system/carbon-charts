@@ -55,43 +55,7 @@ export class ChartModelCartesian extends ChartModel {
 			csvString += i < data.length ? csvData + '\n' : csvData;
 		});
 
-		var download = function (content, filename, mimeType) {
-			var anchor = document.createElement('a');
-			mimeType = mimeType || 'application/octet-stream';
-
-			if (navigator.msSaveBlob) {
-				// Internet Explorer 10
-				navigator.msSaveBlob(
-					new Blob([content], {
-						type: mimeType,
-					}),
-					filename
-				);
-			} else if (URL && 'download' in anchor) {
-				// HTML5
-				anchor.href = URL.createObjectURL(
-					new Blob([content], {
-						type: mimeType,
-					})
-				);
-				anchor.setAttribute('download', filename);
-
-				// Add anchor to body
-				document.body.appendChild(anchor);
-
-				// Click anchor
-				anchor.click();
-
-				// Remove anchor from body
-				document.body.removeChild(anchor);
-			} else {
-				location.href = `data:application/octet-stream,${encodeURIComponent(
-					content
-				)}`;
-			}
-		};
-
-		download(csvString, 'myChart.csv', 'text/csv;encoding:utf-8');
+		this.services.files.downloadCSV(csvString, 'myChart.csv');
 	}
 
 	setData(newData) {

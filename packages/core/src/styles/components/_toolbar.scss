@@ -1,5 +1,6 @@
 $css--reset: false;
 @import './../vendor/carbon-components/src/components/overflow-menu/overflow-menu';
+@import './../vendor/carbon-components/src/components/loading/loading';
 
 .#{$prefix}--#{$charts-prefix}--toolbar {
 	display: flex;
@@ -39,6 +40,16 @@ $css--reset: false;
 			padding: 0;
 		}
 	}
+
+	.bx--loading__background {
+		fill: transparent;
+	}
+
+	.bx--loading__stroke {
+		stroke-dashoffset: 99;
+		fill: transparent;
+	}
 }
 
 @include overflow-menu;
+@include loading;

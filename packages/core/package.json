@@ -93,7 +93,7 @@
 		"html-to-image": "1.6.2",
 		"html-webpack-exclude-assets-plugin": "0.0.7",
 		"html-webpack-plugin": "3.2.0",
-		"@ibm/plex": "5.1.3",
+		"@ibm/plex": "6.0.0-next.6",
 		"jasmine-core": "3.4.0",
 		"karma": "4.0.1",
 		"karma-chrome-launcher": "2.2.0",
