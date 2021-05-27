@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 const { prefix } = settings;
 
-export default ({ description, onClick, renderIcon, stacked, title }) => {
+export default ({ description, onClick, renderAction, renderIcon, stacked, title }) => {
 	const namespace = `${prefix}--cc--card`;
 	const icon = renderIcon ? (
 		<div className={`${namespace}__icon`}>{renderIcon}</div>
@@ -14,6 +14,8 @@ export default ({ description, onClick, renderIcon, stacked, title }) => {
 		[`${namespace}--stacked`]: stacked,
 	});
 
+	const action = renderAction ? <div className={`${namespace}__action`}>{renderAction}</div> : null;
+
 	return (
 		<div className={cardClasses} tabIndex={0} onClick={() => onClick()}>
 			{icon}
@@ -21,6 +23,7 @@ export default ({ description, onClick, renderIcon, stacked, title }) => {
 				<div className={`${namespace}__title`}>{title}</div>
 				<div className={`${namespace}__description`}>{description}</div>
 			</div>
+			{action}
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Card from './card';
+import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 
 import { User16 } from '@carbon/icons-react';
 
@@ -19,4 +20,16 @@ stories.add('Stacked', () => (
 
 stories.add('With icon', () => (
 	<Card title={'Title'} description={'Description'} renderIcon={<User16 />} />
+));
+
+stories.add('With action', () => (
+	<Card title={'Title'} description={'Description'} renderIcon={<User16 />} renderAction={
+	<OverflowMenu>
+		<OverflowMenuItem itemText="Stop app" />
+		<OverflowMenuItem itemText="Restart app" />
+		<OverflowMenuItem itemText="Rename app" />
+		<OverflowMenuItem itemText="Edit routes and access" requireTitle />
+		<OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+	</OverflowMenu>
+	} />
 ));

@@ -52,6 +52,15 @@
 			}
 		}
 
+		&__body {
+			flex: 1;
+		}
+
+		&__action {
+			padding-left: $spacing-03;
+			padding-top: $spacing-02;
+		}
+
 		&__icon {
 			padding-right: $spacing-03;
 			padding-top: $spacing-02;
