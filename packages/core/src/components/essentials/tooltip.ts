@@ -316,24 +316,34 @@ export class Tooltip extends Component {
 
 		let pos;
 
-		// Find out whether tooltip should be shown on the left or right side
-		const bestPlacementOption = this.positionService.findBestPlacementAt(
-			{
-				left: mouseRelativePos[0],
-				top: mouseRelativePos[1],
-			},
-			target,
-			[
-				PLACEMENTS.RIGHT,
-				PLACEMENTS.LEFT,
-				PLACEMENTS.TOP,
-				PLACEMENTS.BOTTOM,
-			],
-			() => ({
-				width: holder.offsetWidth,
-				height: holder.offsetHeight,
-			})
-		);
+		const holderWidth = holder.offsetWidth;
+		const holderHeight = holder.offsetHeight;
+
+		let bestPlacementOption;
+		if (mouseRelativePos[0] / holderWidth > 0.9) {
+			bestPlacementOption = PLACEMENTS.LEFT;
+		} else if (mouseRelativePos[0] / holderWidth < 0.1) {
+			bestPlacementOption = PLACEMENTS.RIGHT;
+		} else {
+			// Find out whether tooltip should be shown on the left or right side
+			bestPlacementOption = this.positionService.findBestPlacementAt(
+				{
+					left: mouseRelativePos[0],
+					top: mouseRelativePos[1],
+				},
+				target,
+				[
+					PLACEMENTS.RIGHT,
+					PLACEMENTS.LEFT,
+					PLACEMENTS.TOP,
+					PLACEMENTS.BOTTOM,
+				],
+				() => ({
+					width: holderWidth,
+					height: holderHeight,
+				})
+			);
+		}
 
 		let { horizontalOffset } = Configuration.tooltips;
 		if (bestPlacementOption === PLACEMENTS.LEFT) {

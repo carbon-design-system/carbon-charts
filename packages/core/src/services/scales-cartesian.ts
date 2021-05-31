@@ -543,7 +543,12 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { extendLinearDomainBy, mapsTo, percentage } = axisOptions;
+		const {
+			extendLinearDomainBy,
+			mapsTo,
+			percentage,
+			thresholds,
+		} = axisOptions;
 		const {
 			reference: ratioReference,
 			compareTo: ratioCompareTo,
@@ -640,6 +645,14 @@ export class CartesianScales extends Service {
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
 			allDataValues.push(0);
+		}
+
+		// Add threshold values into the scale
+		if (thresholds && thresholds.length > 0) {
+			thresholds.forEach(threshold => {
+				const thresholdValue = Tools.getProperty(threshold, 'value');
+				if (thresholdValue !== null) allDataValues.push(thresholdValue);
+			});
 		}
 
 		domain = extent(allDataValues);
