@@ -73,6 +73,7 @@
 		"babel-loader": "8.0.5",
 		"carbon-components-angular": "4.52.0",
 		"core-js": "3.0.0",
+		"elkjs": "0.7.1",
 		"karma-webpack": "4.0.2",
 		"ng-packagr": "5.7.1",
 		"rxjs": "6.3.3",

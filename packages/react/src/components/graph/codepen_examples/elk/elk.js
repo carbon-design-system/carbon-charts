@@ -6,7 +6,7 @@ import Edge from '../../edge/edge';
 import { User16 } from '@carbon/icons-react';
 
 const Link = ({ link }) => {
-	const sections = link.sections[0]; // Todo: clean up assignment
+	const sections = link.sections[0];
 	const path = d3Path();
 
 	path.moveTo(sections.startPoint.x, sections.startPoint.y);
