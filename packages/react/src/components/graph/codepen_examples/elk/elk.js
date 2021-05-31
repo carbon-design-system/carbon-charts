@@ -22,14 +22,14 @@ const Link = ({ link }) => {
 	return <Edge path={path.toString()} />;
 };
 
-const Node = ({ x, y }) => {
+const Node = ({ x, y, height, width }) => {
 	return (
 		<foreignObject
 			transform={`translate(${x},${y})`}
-			height={48}
-			width={48}
+			height={height}
+			width={width}
 			style={{ overflow: 'visible' }}>
-			<div style={{ height: 48, width: 48 }}>
+			<div style={{ height, width }}>
 				<Circle renderIcon={<User16 />} />
 			</div>
 		</foreignObject>
