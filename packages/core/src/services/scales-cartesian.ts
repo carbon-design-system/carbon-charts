@@ -119,42 +119,27 @@ export class CartesianScales extends Service {
 		return this.getAxisOptions(rangeAxisPosition);
 	}
 
-	getDomainLabel() {
-		const domainAxisOptions = this.getDomainAxisOptions();
-
-		let domainLabel = domainAxisOptions.title;
-		if (!domainLabel) {
-			const domainAxisPosition = this.getDomainAxisPosition();
+	getScaleLabel(position: AxisPositions) {
+		const options = this.getAxisOptions(position);
+		let title = options.title;
+		if (!title) {
 			if (
-				domainAxisPosition === AxisPositions.BOTTOM ||
-				domainAxisPosition === AxisPositions.TOP
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
 			) {
-				domainLabel = 'x-value';
-			} else {
-				domainLabel = 'y-value';
+				return 'x-value';
 			}
+			return 'y-value';
 		}
+		return title;
+	}
 
-		return domainLabel;
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
 	}
 
 	getRangeLabel() {
-		const rangeAxisOptions = this.getRangeAxisOptions();
-
-		let rangeLabel = rangeAxisOptions.title;
-		if (!rangeLabel) {
-			const rangeAxisPosition = this.getRangeAxisPosition();
-			if (
-				rangeAxisPosition === AxisPositions.LEFT ||
-				rangeAxisPosition === AxisPositions.RIGHT
-			) {
-				rangeLabel = 'y-value';
-			} else {
-				rangeLabel = 'x-value';
-			}
-		}
-
-		return rangeLabel;
+		return this.getScaleLabel(this.getRangeAxisPosition());
 	}
 
 	update(animate = true) {
@@ -649,7 +634,7 @@ export class CartesianScales extends Service {
 
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
-			thresholds.forEach(threshold => {
+			thresholds.forEach((threshold) => {
 				const thresholdValue = Tools.getProperty(threshold, 'value');
 				if (thresholdValue !== null) allDataValues.push(thresholdValue);
 			});
