@@ -32,13 +32,17 @@ storiesOf("Experimental|Graph", module)
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(600, 100)'">
 				<xhtml:div>
-					<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="userTemplate"></ibm-graph-circle>
+					<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
 				</xhtml:div>
 			</svg:foreignObject>
 		</svg>
 
 		<ng-template #userTemplate>
 			<svg ibmIconUser size="16"></svg>
+		</ng-template>
+
+		<ng-template #wikiTemplate>
+			<svg ibmIconWikis size="16"></svg>
 		</ng-template>
 	`),
 	props: {
