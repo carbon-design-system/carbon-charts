@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, TemplateRef } from "@angular/core";
+import { Component, Input, Output, EventEmitter, TemplateRef } from "@angular/core";
 import settings from "carbon-components/src/globals/js/settings";
 
 const { prefix } = settings;
