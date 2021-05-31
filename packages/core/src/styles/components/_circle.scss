@@ -23,22 +23,22 @@
 			outline: none;
 			box-shadow: 0 0 0 1px $focus;
 		}
+	}
 
-		&__body {
-			position: absolute;
-			top: calc(100% + #{$spacing-01});
-			text-align: center;
-		}
+	.#{$prefix}--#{$charts-prefix}--circle__body {
+		position: absolute;
+		top: calc(100% + #{$spacing-01});
+		text-align: center;
+	}
 
-		&__title {
-			@include carbon--type-style($name: productive-heading-01);
-			padding-top: $spacing-01;
-			margin-bottom: 1px;
-		}
+	.#{$prefix}--#{$charts-prefix}--circle__title {
+		@include carbon--type-style($name: productive-heading-01);
+		padding-top: $spacing-01;
+		margin-bottom: 1px;
+	}
 
-		&__description {
-			padding-bottom: $spacing-01;
-			@include carbon--type-style($name: body-short-01);
-		}
+	.#{$prefix}--#{$charts-prefix}--circle__description {
+		padding-bottom: $spacing-01;
+		@include carbon--type-style($name: body-short-01);
 	}
 }
