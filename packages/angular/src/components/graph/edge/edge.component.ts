@@ -7,10 +7,21 @@ const { prefix } = settings;
 @Component({
 	selector: "[ibm-graph-edge]",
 	template: `
-	<svg:path
-		[attr.d]="path ? path : straight(source, target)"
-		[ngClass]="[namespace, variant && namespace + '--' + variant]"
-	/>
+	<svg:g [ngClass]="[namespace, variant ? namespace + '--' + variant : '']">
+		<svg:path
+			[ngClass]="namespace + '__container'"
+			[attr.d]="path ? path : straight(source, target)"
+		/>
+		<svg:path
+			[ngClass]="namespace + '__outer'"
+			[attr.d]="path ? path : straight(source, target)"
+		/>
+		<svg:path
+			[ngClass]="namespace + '__inner'"
+			[attr.d]="path ? path : straight(source, target)"
+		/>
+	</svg:g>
+
 	`
 })
 

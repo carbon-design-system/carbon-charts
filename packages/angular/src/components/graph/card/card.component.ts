@@ -6,7 +6,7 @@ const { prefix } = settings;
 @Component({
 	selector: "ibm-graph-card",
 	template: `
-	<div [ngClass]="[namespace, stacked && namespace + '--stacked']" tabindex="0" (click)="onClick.emit($event)">
+	<div [ngClass]="[namespace, stacked ? namespace + '--stacked' : '']" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
 			<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
 		</div>

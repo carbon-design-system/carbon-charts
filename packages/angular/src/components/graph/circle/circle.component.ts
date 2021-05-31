@@ -6,7 +6,7 @@ const { prefix } = settings;
 @Component({
 	selector: "ibm-graph-circle",
 	template: `
-	<div [attr.class]="namespace" tabindex="0" (click)="onClick.emit($event)">
+	<div [attr.class]="namespace" [ngStyle]="{'height.px': size, 'width.px': size}" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
 			<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
 		</div>
@@ -19,9 +19,11 @@ const { prefix } = settings;
 })
 
 export class CircleComponent {
-	@Input() title;
 	@Input() description;
 	@Input() renderIcon: TemplateRef<any>;
+	@Input() size = 48;
+	@Input() title;
+
 	@Output() onClick = new EventEmitter<any>();
 
 	namespace = `${prefix}--cc--circle`;

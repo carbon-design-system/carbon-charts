@@ -16,7 +16,7 @@ stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));
 
-stories.add('Default', () => {
+stories.add('Composed', () => {
 	return (
 		<svg height="1000" width="1000">
 			<Edge
