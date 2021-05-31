@@ -17,5 +17,11 @@ export default ({
 		[`${namespace}--${variant}`]: variant,
 	});
 
-	return <path d={path} strokeWidth={1.5} className={pathClasses} />;
+	return (
+		<g className={pathClasses}>
+			<path d={path} className={`${namespace}__container`} />
+			<path d={path} className={`${namespace}__outer`} />
+			<path d={path} className={`${namespace}__inner`} />
+		</g>
+	);
 };

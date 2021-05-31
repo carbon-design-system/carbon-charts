@@ -7,32 +7,62 @@
 
 @include exports('cc-edge') {
 	.#{$prefix}--#{$charts-prefix}--edge {
-		stroke: $ui-05;
 		fill: transparent;
+	}
 
-		&--dash-sm {
-			stroke-dasharray: 2 4;
+	.#{$prefix}--#{$charts-prefix}--edge__container {
+		stroke-width: $spacing-06;
+		stroke: transparent;
+		stroke-dasharray: none;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge__inner {
+		stroke-width: carbon--mini-units(0.1875);
+		stroke: $ui-05;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge__outer {
+		stroke-width: carbon--mini-units(0.3125);
+		stroke: transparent;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge:hover {
+		.#{$prefix}--#{$charts-prefix}--edge__inner {
+			stroke-width: carbon--mini-units(0.3125);
 		}
+	}
 
-		&--dash-md {
-			stroke-dasharray: 4 4;
+	.#{$prefix}--#{$charts-prefix}--edge--dash-sm {
+		stroke-dasharray: carbon--mini-units(0.25) carbon--mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-md {
+		stroke-dasharray: carbon--mini-units(0.5) carbon--mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-lg {
+		stroke-dasharray: carbon--mini-units(1) carbon--mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-xl {
+		stroke-dasharray: carbon--mini-units(2) carbon--mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--tunnel {
+		.#{$prefix}--#{$charts-prefix}--edge__outer {
+			stroke: $ui-03;
+			stroke-width: carbon--mini-units(0.75);
 		}
+	}
 
-		&--dash-lg {
-			stroke-dasharray: 8 4;
-		}
-
-		&--dash-xl {
-			stroke-dasharray: 16 4;
-		}
-
-		&--tunnel {
-			filter: drop-shadow(0 2px 0 $ui-03) drop-shadow(0 -2px 0 $ui-03);
-		}
-
-		&--double {
+	.#{$prefix}--#{$charts-prefix}--edge--double {
+		.#{$prefix}--#{$charts-prefix}--edge__inner {
 			stroke: $ui-background;
-			filter: drop-shadow(0 2px 0 $ui-05) drop-shadow(0 -2px 0 $ui-05);
+		}
+
+		.#{$prefix}--#{$charts-prefix}--edge__outer {
+			stroke: $ui-05;
+			stroke-width: carbon--mini-units(0.5625);
 		}
 	}
 }
