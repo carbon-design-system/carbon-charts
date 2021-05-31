@@ -16,8 +16,21 @@ storiesOf("Experimental|Circle", module)
 )
 .add("Default", () => ({
 	template: getTemplate(`
-		<div style="height: 48px; width: 48px">
+		<div>
 			<ibm-graph-circle [title]="title" [renderIcon]="iconTemplate"></ibm-graph-circle>
+			<ng-template #iconTemplate>
+				<svg ibmIconScreen size="16"></svg>
+			</ng-template>
+		</div>
+	`),
+	props: {
+		title: "Title",
+	},
+}))
+.add("Inherited dimensions", () => ({
+	template: getTemplate(`
+		<div style="height: 64px; width: 64px">
+			<ibm-graph-circle [title]="title" [renderIcon]="iconTemplate" [size]="'100%'"></ibm-graph-circle>
 			<ng-template #iconTemplate>
 				<svg ibmIconScreen size="16"></svg>
 			</ng-template>

@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from "@storybook/angular";
 import { CircleModule } from "./circle/circle.module";
 import { CardModule } from "./card/card.module";
 import { EdgeModule } from "./edge/edge.module";
-import { UserModule, WikisModule, DebugModule } from "@carbon/icons-angular";
+import { UserModule, WikisModule } from "@carbon/icons-angular";
 import { elbow } from "./edge/buildPath";
 
 const nodeHeight = 64;
@@ -12,7 +12,7 @@ const circleSize = 64;
 const stories = storiesOf("Experimental|Graph", module);
 stories.addDecorator(
 	moduleMetadata({
-		imports: [CircleModule, CardModule, EdgeModule, UserModule, WikisModule, DebugModule]
+		imports: [CircleModule, CardModule, EdgeModule, UserModule, WikisModule]
 	})
 );
 
@@ -26,16 +26,13 @@ stories.add("Composed", () => ({
 	template: getTemplate(`
 		<svg height="1000" width="1000">
 			<svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm"></svg:g>
+
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(100, 100)'">
-				<xhtml:div>
-					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
-				</xhtml:div>
+				<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
 			</svg:foreignObject>
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(600, 100)'">
-				<xhtml:div>
-					<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
-				</xhtml:div>
+				<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
 			</svg:foreignObject>
 		</svg>
 
@@ -58,18 +55,18 @@ stories.add("Composed", () => ({
 
 
 const nodeData = [
-	{ id: "a", x: 0, y: 0, icon: "userTemplate", nodeWidth, nodeHeight },
-	{ id: "b", x: 250, y: 0, icon: "wikiTemplate", nodeWidth, nodeHeight },
+	{ id: "a", x: 0, y: 0, icon: "user", nodeWidth, nodeHeight },
+	{ id: "b", x: 250, y: 0, icon: "wiki", nodeWidth, nodeHeight },
 	{
 		id: "c",
 		x: 600,
 		y: 200,
-		icon: "debugTemplate",
+		icon: "user",
 		circle: true,
 		nodeWidth: circleSize,
 		nodeHeight: circleSize,
 	},
-	{ id: "d", x: 20, y: 280, icon: "wikiTemplate", nodeWidth, nodeHeight },
+	{ id: "d", x: 20, y: 280, icon: "wiki", nodeWidth, nodeHeight },
 ];
 
 const edgeData = [
@@ -108,13 +105,10 @@ stories.add("Programmatic", () => ({
 	template: getTemplate(`
 		<svg height="1000" width="1000">
 			<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
+
 			<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
-				<xhtml:div *ngIf="node.circle">
-					<ibm-graph-circle [title]="'Title'" [description]="'Description'" [size]="circleSize"></ibm-graph-circle>
-				</xhtml:div>
-				<xhtml:div *ngIf="!node.circle">
-					<ibm-graph-card [title]="'Title'" [description]="'Description'"></ibm-graph-card>
-				</xhtml:div>
+				<ibm-graph-circle *ngIf="node.circle" [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-circle>
+				<ibm-graph-card *ngIf="!node.circle" [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-card>
 			</svg:foreignObject>
 		</svg>
 
@@ -124,10 +118,6 @@ stories.add("Programmatic", () => ({
 
 		<ng-template #wikiTemplate>
 			<svg ibmIconWikis size="16"></svg>
-		</ng-template>
-
-		<ng-template #debugTemplate>
-			<svg ibmIconDebug size="16"></svg>
 		</ng-template>
 	`),
 	props: {
