@@ -24,15 +24,18 @@ const getTemplate = demo => `
 
 stories.add("Composed", () => ({
 	template: getTemplate(`
-		<svg height="1000" width="1000">
+		<svg height="1000" width="1000" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 			<svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm"></svg:g>
-
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(100, 100)'">
-				<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
+				<xhtml:div>
+					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
+				</xhtml:div>
 			</svg:foreignObject>
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(600, 100)'">
-				<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
+				<xhtml:div>
+					<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
+				</xhtml:div>
 			</svg:foreignObject>
 		</svg>
 
@@ -103,12 +106,15 @@ const edgeMapped = edgeData.map((link) => {
 
 stories.add("Programmatic", () => ({
 	template: getTemplate(`
-		<svg height="1000" width="1000">
+		<svg height="1000" width="1000" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 			<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
-
 			<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
-				<ibm-graph-circle *ngIf="node.circle" [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-circle>
-				<ibm-graph-card *ngIf="!node.circle" [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-card>
+				<xhtml:div *ngIf="node.circle">
+					<ibm-graph-circle [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-circle>
+				</xhtml:div>
+				<xhtml:div *ngIf="!node.circle">
+					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-card>
+				</xhtml:div>
 			</svg:foreignObject>
 		</svg>
 

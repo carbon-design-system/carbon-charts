@@ -6,7 +6,7 @@ const { prefix } = settings;
 @Component({
 	selector: "ibm-graph-circle",
 	template: `
-	<div [attr.class]="namespace" [ngStyle]="{'height.px': size, 'width.px': size}" tabindex="0" (click)="onClick.emit($event)">
+	<xhtml:div [attr.class]="namespace" [ngStyle]="{'height.px': size, 'width.px': size}" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
 			<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
 		</div>
@@ -14,7 +14,7 @@ const { prefix } = settings;
             <div attr.class="{{ namespace + '__title' }}">{{title}}</div>
             <div attr.class="{{ namespace + '__description' }}" transform="translate(0,20)">{{description}}</div>
         </div>
-	</div>
+	</xhtml:div>
 	`
 })
 
