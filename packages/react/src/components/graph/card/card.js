@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 const { prefix } = settings;
 
-export default ({ description, label, onClick, renderAction, renderIcon, stacked, title }) => {
+export default ({ description, label, onClick = () => {}, renderAction, renderIcon, stacked, title }) => {
 	const namespace = `${prefix}--cc--card`;
 	const icon = renderIcon ? (
 		<div className={`${namespace}__icon`}>{renderIcon}</div>
