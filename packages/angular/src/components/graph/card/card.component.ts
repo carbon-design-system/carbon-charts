@@ -6,7 +6,7 @@ const { prefix } = settings;
 @Component({
 	selector: "ibm-graph-card",
 	template: `
-	<xhtml:div [ngClass]="[namespace, stacked ? namespace + '--stacked' : '']" tabindex="0" (click)="onClick.emit($event)">
+	<xhtml:div [ngClass]="[namespace, stacked ? namespace + '--stacked' : '']" [ngStyle]="{'border-color': borderColor}" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
 			<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
 		</div>
@@ -23,6 +23,7 @@ const { prefix } = settings;
 })
 
 export class CardComponent {
+	@Input() borderColor;
 	@Input() description;
 	@Input() label;
 	@Input() stacked;

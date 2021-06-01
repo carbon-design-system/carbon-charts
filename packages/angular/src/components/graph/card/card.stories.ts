@@ -30,6 +30,14 @@ storiesOf("Experimental|Card", module)
 		stacked: true
 	},
 }))
+.add("Colored border", () => ({
+	template: getTemplate(`<ibm-graph-card [title]="title" [description]="description" [borderColor]="borderColor"></ibm-graph-card>`),
+	props: {
+		title: "Title",
+		description: "Description",
+		borderColor: "#8a3ffc"
+	},
+}))
 .add("With icon", () => ({
 	template: getTemplate(`
 	<ibm-graph-card [title]="title" [description]="description" [renderIcon]="iconTemplate"></ibm-graph-card>
