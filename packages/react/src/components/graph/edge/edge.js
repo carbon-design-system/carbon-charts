@@ -6,10 +6,13 @@ import classnames from 'classnames';
 const { prefix } = settings;
 
 export default ({
+	markerEnd,
+	markerStart,
+	path,
 	source,
+	color,
 	target,
 	variant = null,
-	path = straight(source, target),
 }) => {
 	const namespace = `${prefix}--cc--edge`;
 
@@ -17,11 +20,13 @@ export default ({
 		[`${namespace}--${variant}`]: variant,
 	});
 
+	const d = path || straight(source, target);
+
 	return (
 		<g className={pathClasses}>
-			<path d={path} className={`${namespace}__container`} />
-			<path d={path} className={`${namespace}__outer`} />
-			<path d={path} className={`${namespace}__inner`} />
+			<path d={d} className={`${namespace}__container`} />
+			<path d={d} className={`${namespace}__outer`} />
+			<path d={d} className={`${namespace}__inner`} markerEnd={markerEnd} markerStart={markerStart} style={{ stroke: color }} />
 		</g>
 	);
 };

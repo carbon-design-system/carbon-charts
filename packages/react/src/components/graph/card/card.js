@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 const { prefix } = settings;
 
-export default ({ borderColor, description, label, onClick = () => {}, renderAction, renderIcon, stacked, title }) => {
+export default ({ color, description, label, onClick = () => {}, renderAction, renderIcon, stacked, title }) => {
 	const namespace = `${prefix}--cc--card`;
 	const icon = renderIcon ? (
 		<div className={`${namespace}__icon`}>{renderIcon}</div>
@@ -18,7 +18,7 @@ export default ({ borderColor, description, label, onClick = () => {}, renderAct
 	const labelElement = label ? <div className={`${namespace}__label`}>{label}</div> : null;
 
 	return (
-		<div className={cardClasses} tabIndex={0} onClick={() => onClick()} style={{ borderColor }} >
+		<div className={cardClasses} tabIndex={0} onClick={() => onClick()} style={{ borderColor: color }} >
 			{icon}
 			<div className={`${namespace}__body`}>
 				<div className={`${namespace}__title`}>{title}</div>

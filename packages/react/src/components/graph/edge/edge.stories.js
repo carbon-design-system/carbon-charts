@@ -20,6 +20,14 @@ stories.add('Default', () => (
 	</svg>
 ));
 
+stories.add('Color', () => (
+	<svg height="800" width="800">
+		<g transform="translate(16,16)">
+			<Edge source={linkSource} target={linkTarget} color={"#FB4B53"} />
+		</g>
+	</svg>
+));
+
 stories.add('Dashed', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">

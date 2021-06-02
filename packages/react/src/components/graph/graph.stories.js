@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import Card from './card/card';
 import Edge from './edge/edge';
 import Circle from './circle/circle';
+import {ArrowRightMarker} from './marker/marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
 import { elbow } from './edge/buildPath';
@@ -19,9 +20,13 @@ stories.addDecorator((story) => (
 stories.add('Composed', () => {
 	return (
 		<svg height="1000" width="1000">
+			<defs>
+				<ArrowRightMarker id={"marker"} />
+			</defs>
 			<Edge
 				source={{ x: 200, y: 132 }}
-				target={{ x: 600, y: 132 }}
+				target={{ x: 596, y: 132 }}
+				markerEnd={`url(#marker`}
 				variant={'dash-sm'}
 			/>
 

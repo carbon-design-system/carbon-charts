@@ -18,8 +18,8 @@ stories.add('Stacked', () => (
 	<Card title={'Title'} description={'Description'} stacked />
 ));
 
-stories.add('Colored border', () => (
-	<Card borderColor={'#8a3ffc'} title={'Title'} description={'Description'} renderIcon={<User16 />} />
+stories.add('Color', () => (
+	<Card color={'#8a3ffc'} title={'Title'} description={'Description'} renderIcon={<User16 />} />
 ));
 
 stories.add('With icon', () => (
