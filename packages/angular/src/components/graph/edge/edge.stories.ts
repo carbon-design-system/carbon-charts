@@ -31,6 +31,20 @@ storiesOf("Experimental|Edge", module)
 		target: linkTarget
 	},
 }))
+.add("Color", () => ({
+	template: getTemplate(`
+		<svg height="800" width="800">
+			<g transform="translate(16,16)">
+				<g ibm-graph-edge [color]="color" [source]="source" [target]="target"></g>
+			</g>
+		</svg>
+	`),
+	props: {
+		color: "#FB4B53",
+		source: linkSource,
+		target: linkTarget,
+	},
+}))
 .add("Dashed", () => ({
 	template: getTemplate(`
 		<svg height="800" width="800">

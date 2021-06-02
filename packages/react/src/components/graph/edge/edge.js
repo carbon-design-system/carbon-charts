@@ -26,7 +26,7 @@ export default ({
 		<g className={pathClasses}>
 			<path d={d} className={`${namespace}__container`} />
 			<path d={d} className={`${namespace}__outer`} />
-			<path d={d} className={`${namespace}__inner`} markerEnd={markerEnd} markerStart={markerStart} style={{ stroke: color }} />
+			<path d={d} className={`${namespace}__inner`} markerEnd={`url(#${markerEnd})`} markerStart={`url(#${markerStart})`} style={{ stroke: color }} />
 		</g>
 	);
 };

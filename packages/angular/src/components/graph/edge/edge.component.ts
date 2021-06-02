@@ -19,6 +19,9 @@ const { prefix } = settings;
 		<svg:path
 			[ngClass]="namespace + '__inner'"
 			[attr.d]="path ? path : straight(source, target)"
+			[ngStyle]="{'stroke': color}"
+			[attr.marker-end]="'url(#' + markerEnd + ')'"
+			[attr.marker-start]="'url(#' + markerStart + ')'"
 		/>
 	</svg:g>
 
@@ -26,6 +29,9 @@ const { prefix } = settings;
 })
 
 export class EdgeComponent {
+	@Input() color;
+	@Input() markerEnd;
+	@Input() markerStart;
 	@Input() source;
 	@Input() target;
 	@Input() variant;

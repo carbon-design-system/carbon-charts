@@ -25,7 +25,7 @@ stories.add('Arrow left', () => (
 			<ArrowLeftMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} />
 	</svg>
 ));
 
@@ -35,7 +35,7 @@ stories.add('Arrow right', () => (
 			<ArrowRightMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerEnd={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerEnd={"marker"} />
 	</svg>
 ));
 
@@ -45,7 +45,7 @@ stories.add('Circle', () => (
 			<CircleMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} />
 	</svg>
 ));
 
@@ -55,7 +55,7 @@ stories.add('Diamond', () => (
 			<DiamondMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} />
 	</svg>
 ));
 
@@ -65,7 +65,7 @@ stories.add('Square', () => (
 			<SquareMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} />
 	</svg>
 ));
 
@@ -76,7 +76,7 @@ stories.add('Tee', () => (
 			<TeeMarker id="marker" />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} />
 	</svg>
 ));
 
@@ -86,6 +86,6 @@ stories.add('Color', () => (
 			<TeeMarker id="marker" color={'#FB4B53'} />
 		</defs>
 
-		<Edge source={linkSource} target={linkTarget} markerStart={`url(#marker`} color={'#FB4B53'} />
+		<Edge source={linkSource} target={linkTarget} markerStart={"marker"} color={'#FB4B53'} />
 	</svg>
 ));
