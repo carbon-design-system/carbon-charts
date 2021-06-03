@@ -10,6 +10,40 @@ import { scaleLinear } from 'd3-scale';
 export class Meter extends Component {
 	type = 'meter';
 
+	getMaximumDomain(data) {
+		if (data.length === 1) {
+			return 100;
+		}
+		const max = data.reduce(
+			(accumulator, datum) => accumulator + datum.value,
+			0
+		);
+
+		return max;
+	}
+
+	getStackedBounds(data, scale) {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		let prevX = 0;
+		const newData = data.map((d, i) => {
+			if (i !== 0) {
+				prevX += scale(d.value);
+				return {
+					...d,
+					width: scale(d.value),
+					x: prevX - scale(d.value),
+				};
+			} else {
+				prevX = scale(d.value);
+				return { ...d, width: scale(d.value), x: 0 };
+			}
+		});
+
+		return newData;
+	}
+
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
@@ -21,9 +55,12 @@ export class Meter extends Component {
 			useAttrs: true,
 		});
 		const { groupMapsTo } = options.data;
+		const domainMax = this.getMaximumDomain(data);
 
 		// each meter has a scale for the value but no visual axis
-		const xScale = scaleLinear().domain([0, 100]).range([0, width]);
+		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
+
+		const stackedData = this.getStackedBounds(data, xScale);
 
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
@@ -36,7 +73,7 @@ export class Meter extends Component {
 		const maximumBarWidth = data.value >= 100;
 
 		// rect with the value binded
-		const value = svg.selectAll('rect.value').data([data]);
+		const valued = svg.selectAll('rect.value').data(stackedData);
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const className =
@@ -45,12 +82,15 @@ export class Meter extends Component {
 				: 'value';
 
 		// draw the value bar
-		value
+		valued
 			.enter()
 			.append('rect')
 			.classed('value', true)
-			.merge(value)
-			.attr('x', 0)
+			.merge(valued)
+			.attr('x', (d) => {
+				console.log(d);
+				return d.x;
+			})
 			.attr('y', 0)
 			.attr('height', Tools.getProperty(options, 'meter', 'height'))
 			.attr('class', (d) =>
@@ -66,9 +106,9 @@ export class Meter extends Component {
 					animate
 				)
 			)
-			.attr('width', (d) =>
-				maximumBarWidth ? xScale(100) : xScale(d.value)
-			)
+			.attr('width', (d, i) => {
+				return d.width;
+			})
 			.style('fill', (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)

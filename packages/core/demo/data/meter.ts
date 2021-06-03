@@ -47,3 +47,16 @@ export const meterOptionsNoStatus = {
 	},
 	height: '100px',
 };
+
+export const propMeterData = [
+	{ group: 'emails', value: 202 },
+	{ group: 'photos', value: 654 },
+	{ group: 'text messages', value: 723 },
+	{ group: 'other', value: 120 },
+	{ group: 'unused', value: 170 },
+];
+
+export const propMeterOptions = {
+	title: 'Proportional Meter Chart',
+	height: '100px',
+};

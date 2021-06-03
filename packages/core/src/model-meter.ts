@@ -12,6 +12,13 @@ export class MeterChartModel extends ChartModel {
 		super(services);
 	}
 
+	update(animate = true) {
+		super.update(animate);
+		if (!this.getDisplayData()) {
+			return;
+		}
+	}
+
 	generateDataLabels(newData) {
 		const dataLabels = {};
 		dataLabels[newData.label] = Configuration.legend.items.status.ACTIVE;
@@ -24,7 +31,7 @@ export class MeterChartModel extends ChartModel {
 			return null;
 		}
 		// meter only uses displays one data group and value
-		return this.get('data')[0];
+		return this.get('data');
 	}
 
 	/**

@@ -852,6 +852,11 @@ const simpleChartDemos = [
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
 			},
+			{
+				options: meterDemos.propMeterOptions,
+				data: meterDemos.propMeterData,
+				chartType: chartTypes.MeterChart,
+			},
 		],
 	},
 	{
