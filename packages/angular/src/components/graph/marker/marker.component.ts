@@ -26,21 +26,25 @@ export class MarkerComponent {
 	@Input() d;
 	@Input() color;
 	@Input() id;
-	@Input() orient;
+	@Input() orient = "auto";
 	@Input() height;
 	@Input() width;
 	@Input() refX;
 	@Input() refY;
+	@Input() position = "end";
 
 	namespace = `${prefix}--cc--marker`;
 
-	setAttributes = ({d, id, height, width, refX, refY}) => {
+	setAttributes = ({d, id, height, width}) => {
+		const xPos = (this.position === "end") ? width - 0.5 : 0.5;
+		const yPos = height / 2;
+
 		this.d = this.d || d;
 		this.id = this.id || id;
 		this.height = this.height || height;
 		this.width = this.width || width;
-		this.refX = this.refX || refX;
-		this.refY = this.refY || refY;
+		this.refX = this.refX || xPos;
+		this.refY = this.refY || yPos;
 	}
 }
 

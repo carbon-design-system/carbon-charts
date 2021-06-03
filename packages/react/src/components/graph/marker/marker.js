@@ -4,8 +4,11 @@ import { arrowLeft, arrowRight, circle, diamond, square, tee } from "./markerDef
 
 const { prefix } = settings;
 
-const Marker = ({ d, color, id, orient = "auto", height, width, refX, refY }) => {
+const Marker = ({ d, color, id, orient = "auto", height, width, position = "end", refX, refY }) => {
 	const namespace = `${prefix}--cc--marker`;
+
+	const xPos = (position === "end") ? width - 0.5 : 0.5;
+	const yPos = height / 2;
 
 	return (
 		<marker
@@ -14,8 +17,8 @@ const Marker = ({ d, color, id, orient = "auto", height, width, refX, refY }) =>
 			markerWidth={width}
 			orient={orient}
 			id={id}
-			refX={refX}
-			refY={refY}
+			refX={refX || xPos}
+			refY={refY || yPos}
 			markerUnits="userSpaceOnUse"
 		>
 			<path d={d} style={{ fill: color }} />

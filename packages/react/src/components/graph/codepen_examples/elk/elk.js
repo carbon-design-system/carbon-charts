@@ -3,6 +3,7 @@ import ELK from 'elkjs/lib/elk.bundled';
 import { path as d3Path } from 'd3-path';
 import Circle from '../../circle/circle';
 import Edge from '../../edge/edge';
+import { TeeMarker, CircleMarker } from '../../marker/marker';
 import { User16 } from '@carbon/icons-react';
 
 const Link = ({ link }) => {
@@ -19,7 +20,7 @@ const Link = ({ link }) => {
 
 	path.lineTo(sections.endPoint.x, sections.endPoint.y);
 
-	return <Edge path={path.toString()} />;
+	return <Edge path={path.toString()} markerStart="circle" markerEnd="tee" />;
 };
 
 const Node = ({ x, y, height, width }) => {
@@ -91,6 +92,10 @@ const Elk = ({ nodes, links, layout }) => {
 				margin: 32,
 			}}>
 			<svg style={{ height: '100%', width: '100%' }}>
+				<defs>
+					<TeeMarker id="tee" />
+					<CircleMarker id="circle" position="start" />
+				</defs>
 				{linkElements}
 				{nodeElements}
 			</svg>

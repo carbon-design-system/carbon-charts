@@ -10,14 +10,14 @@ const getTemplate = demo => `
 const size = 48;
 
 const nodeData = [
-	{ id: "a", height: size, width: size },
-	{ id: "b", height: size, width: size },
-	{ id: "c", height: size, width: size },
-	{ id: "d", height: size, width: size },
-	{ id: "e", height: size, width: size },
-	{ id: "f", height: size, width: size },
-	{ id: "g", height: size, width: size },
-	{ id: "h", height: size, width: size },
+	{ id: "a", height: size, width: size, borderSpacing: "100" },
+	{ id: "b", height: size, width: size, borderSpacing: "100" },
+	{ id: "c", height: size, width: size, borderSpacing: "100" },
+	{ id: "d", height: size, width: size, borderSpacing: "100" },
+	{ id: "e", height: size, width: size, borderSpacing: "100" },
+	{ id: "f", height: size, width: size, borderSpacing: "100" },
+	{ id: "g", height: size, width: size, borderSpacing: "100" },
+	{ id: "h", height: size, width: size, borderSpacing: "100" },
 ];
 
 const linkData = [

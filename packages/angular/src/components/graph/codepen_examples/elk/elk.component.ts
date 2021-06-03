@@ -6,7 +6,11 @@ import { path as d3Path } from "d3-path";
 	selector: "ibm-graph-elk",
 	template: `
 	<svg *ngIf="positions" height="1000" width="1000" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-		<svg:g ibm-graph-edge *ngFor="let edge of positions.edges" [path]="buildPath(edge)"></svg:g>
+		<svg:defs>
+			<svg:marker ibm-graph-marker-circle [id]="'circle'" [position]="'start'"></svg:marker>
+			<svg:marker ibm-graph-marker-tee [id]="'tee'" [position]="'end'" ></svg:marker>
+		</svg:defs>
+		<svg:g ibm-graph-edge *ngFor="let edge of positions.edges" [path]="buildPath(edge)" [markerStart]="'circle'" [markerEnd]="'tee'"></svg:g>
 		<svg:foreignObject *ngFor="let node of positions.children"  style="overflow: visible" [attr.height]="node.height" [attr.width]="node.width" attr.transform="translate({{node.x}},{{node.y}})">
 			<xhtml:div>
 				<ibm-graph-circle [size]="node.height" [renderIcon]="userTemplate"></ibm-graph-circle>
