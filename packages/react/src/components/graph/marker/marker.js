@@ -7,7 +7,7 @@ const { prefix } = settings;
 const Marker = ({ d, color, id, orient = "auto", height, width, position = "end", refX, refY }) => {
 	const namespace = `${prefix}--cc--marker`;
 
-	const xPos = (position === "end") ? width - 0.5 : 0.5;
+	const xPos = (position === "end") ? (width / 2) + 0.5 : 0.5;
 	const yPos = height / 2;
 
 	return (

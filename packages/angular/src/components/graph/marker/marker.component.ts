@@ -36,7 +36,7 @@ export class MarkerComponent {
 	namespace = `${prefix}--cc--marker`;
 
 	setAttributes = ({d, id, height, width}) => {
-		const xPos = (this.position === "end") ? width - 0.5 : 0.5;
+		const xPos = (this.position === "end") ? (width / 2) + 0.5 : 0.5;
 		const yPos = height / 2;
 
 		this.d = this.d || d;
