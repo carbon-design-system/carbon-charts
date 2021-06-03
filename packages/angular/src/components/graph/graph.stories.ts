@@ -2,6 +2,7 @@ import { storiesOf, moduleMetadata } from "@storybook/angular";
 import { CircleModule } from "./circle/circle.module";
 import { CardModule } from "./card/card.module";
 import { EdgeModule } from "./edge/edge.module";
+import { MarkerModule } from "./marker/marker.module";
 import { UserModule, WikisModule } from "@carbon/icons-angular";
 import { elbow } from "./edge/buildPath";
 
@@ -12,7 +13,7 @@ const circleSize = 64;
 const stories = storiesOf("Experimental|Graph", module);
 stories.addDecorator(
 	moduleMetadata({
-		imports: [CircleModule, CardModule, EdgeModule, UserModule, WikisModule]
+		imports: [CircleModule, CardModule, EdgeModule, MarkerModule, UserModule, WikisModule]
 	})
 );
 
@@ -25,7 +26,12 @@ const getTemplate = demo => `
 stories.add("Composed", () => ({
 	template: getTemplate(`
 		<svg height="1000" width="1000" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-			<svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm"></svg:g>
+			<svg:defs>
+				<svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
+			</svg:defs>
+
+			<svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm" [markerEnd]="markerEnd" ></svg:g>
+
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(100, 100)'">
 				<xhtml:div>
 					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
@@ -49,7 +55,8 @@ stories.add("Composed", () => ({
 	`),
 	props: {
 		source: { x: 200, y: 132 },
-		target: { x: 600, y: 132 },
+		target: { x: 596, y: 132 },
+		markerEnd: "marker",
 		nodeHeight,
 		nodeWidth,
 		circleSize

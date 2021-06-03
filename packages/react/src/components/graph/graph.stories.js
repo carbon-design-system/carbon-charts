@@ -26,7 +26,7 @@ stories.add('Composed', () => {
 			<Edge
 				source={{ x: 200, y: 132 }}
 				target={{ x: 596, y: 132 }}
-				markerEnd={`url(#marker`}
+				markerEnd={"marker"}
 				variant={'dash-sm'}
 			/>
 
