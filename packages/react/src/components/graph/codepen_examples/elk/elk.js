@@ -20,7 +20,7 @@ const Link = ({ link }) => {
 
 	path.lineTo(sections.endPoint.x, sections.endPoint.y);
 
-	return <Edge path={path.toString()} markerStart="circle" markerEnd="tee" />;
+	return <Edge path={path.toString()} markerStart="circle" markerEnd="tee" variant="dash-sm" />;
 };
 
 const Node = ({ x, y, height, width }) => {
@@ -31,7 +31,7 @@ const Node = ({ x, y, height, width }) => {
 			width={width}
 			style={{ overflow: 'visible' }}>
 			<div style={{ height, width }}>
-				<Circle renderIcon={<User16 />} />
+				<Circle renderIcon={<User16 />} size={"100%"} />
 			</div>
 		</foreignObject>
 	);
@@ -67,7 +67,7 @@ const Elk = ({ nodes, links, layout }) => {
 		const { children } = positions;
 
 		return children.map((node, i) => {
-			return <Node key={`node_${i}`} x={node.x} y={node.y} />;
+			return <Node key={`node_${i}`} x={node.x} y={node.y} height={node.height} width={node.width} />;
 		});
 	};
 
