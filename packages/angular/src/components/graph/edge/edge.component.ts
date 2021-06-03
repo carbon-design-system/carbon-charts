@@ -20,8 +20,8 @@ const { prefix } = settings;
 			[ngClass]="namespace + '__inner'"
 			[attr.d]="path ? path : straight(source, target)"
 			[ngStyle]="{'stroke': color}"
-			[attr.marker-end]="'url(#' + markerEnd + ')'"
-			[attr.marker-start]="'url(#' + markerStart + ')'"
+			[attr.marker-start]="markerStart ? 'url(#' + markerStart + ')' : ''"
+			[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''"
 		/>
 	</svg:g>
 
