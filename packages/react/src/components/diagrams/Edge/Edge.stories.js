@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Edge from './edge';
+import Edge from '.';
 import { elbow, bezier } from './buildPath';
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
 const linkTargetCurve = { x: 400, y: 200 };
 
-const stories = storiesOf('Experimental|Edge', module);
+const stories = storiesOf('Diagrams|Edge', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card`;
 
-const Card = ({ as = "div", children, color, href = null, onClick = null, stacked }) => {
+const CardNode = ({ as = "div", children, color, href = null, onClick = null, stacked }) => {
 	let Component = 'div';
 
 	if (as !== 'div') {
@@ -28,15 +28,15 @@ const Card = ({ as = "div", children, color, href = null, onClick = null, stacke
 	);
 };
 
-const CardColumn = ({children, farsideColumn}) => <div className={`${namespace}__column ${farsideColumn && `${namespace}__column--farside` }`}>{children}</div>;
-const CardTitle = ({children}) => <h2 className={`${namespace}__title`}>{children}</h2>;
-const CardDescription = ({children}) => <p className={`${namespace}__description`}>{children}</p>;
-const CardLabel = ({children}) => <label className={`${namespace}__label`}>{children}</label>;
+const CardNodeColumn = ({children, farsideColumn}) => <div className={`${namespace}__column ${farsideColumn && `${namespace}__column--farside` }`}>{children}</div>;
+const CardNodeDescription = ({children}) => <p className={`${namespace}__description`}>{children}</p>;
+const CardNodeLabel = ({children}) => <label className={`${namespace}__label`}>{children}</label>;
+const CardNodeTitle = ({children}) => <h2 className={`${namespace}__title`}>{children}</h2>;
 
 export {
-	Card as default,
-	CardColumn,
-	CardTitle,
-	CardDescription,
-	CardLabel
+	CardNode as default,
+	CardNodeColumn,
+	CardNodeDescription,
+	CardNodeLabel,
+	CardNodeTitle
 }

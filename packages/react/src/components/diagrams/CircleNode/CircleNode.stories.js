@@ -4,7 +4,7 @@ import Circle from './circle';
 
 import { User16 } from '@carbon/icons-react';
 
-const stories = storiesOf('Experimental|Circle', module);
+const stories = storiesOf('Diagrams|Circle', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));

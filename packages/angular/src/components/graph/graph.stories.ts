@@ -10,7 +10,7 @@ const nodeHeight = 64;
 const nodeWidth = 200;
 const circleSize = 64;
 
-const stories = storiesOf("Experimental|Graph", module);
+const stories = storiesOf("Diagrams|Graph", module);
 stories.addDecorator(
 	moduleMetadata({
 		imports: [CircleModule, CardModule, EdgeModule, MarkerModule, UserModule, WikisModule]

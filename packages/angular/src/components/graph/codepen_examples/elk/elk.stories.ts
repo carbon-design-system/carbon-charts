@@ -30,7 +30,7 @@ const linkData = [
 	{ id: "7", source: "h", target: "f" },
 ];
 
-storiesOf("Experimental|Elk", module)
+storiesOf("Diagrams|Elk", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [ElkModule]

@@ -11,7 +11,7 @@ const getTemplate = demo => `
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 300, y: 0 };
 
-storiesOf("Experimental|Marker", module)
+storiesOf("Diagrams|Marker", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [MarkerModule, EdgeModule]

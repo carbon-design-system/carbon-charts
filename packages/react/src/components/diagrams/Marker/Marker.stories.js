@@ -7,13 +7,13 @@ import {
 	DiamondMarker,
 	SquareMarker,
 	TeeMarker
-} from './marker';
-import Edge from '../edge/edge';
+} from '.';
+import Edge from '../Edge';
 
 const linkSource = { x: 20, y: 50 };
 const linkTarget = { x: 250, y: 50 };
 
-const stories = storiesOf('Experimental|Marker', module);
+const stories = storiesOf('Diagrams|Marker', module);
 
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>

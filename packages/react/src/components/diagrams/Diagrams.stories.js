@@ -1,18 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Card from './card/card';
-import Edge from './edge/edge';
-import Circle from './circle/circle';
-import {ArrowRightMarker} from './marker/marker';
+import Card from './CardNode';
+import Edge from './Edge';
+import Circle from './CircleNode';
+import {ArrowRightMarker} from './Marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
-import { elbow } from './edge/buildPath';
+import { elbow } from './Edge/buildPath';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
 const circleSize = 64;
 
-const stories = storiesOf('Experimental|Graph', module);
+const stories = storiesOf('Diagrams|Graph', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));

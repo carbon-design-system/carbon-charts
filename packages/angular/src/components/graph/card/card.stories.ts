@@ -9,7 +9,7 @@ const getTemplate = demo => `
 	</div>
 `;
 
-storiesOf("Experimental|Card", module)
+storiesOf("Diagrams|Card", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [CardModule, ScreenModule, DialogModule]

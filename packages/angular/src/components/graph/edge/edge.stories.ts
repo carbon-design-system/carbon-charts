@@ -12,7 +12,7 @@ const getTemplate = demo => `
 	</div>
 `;
 
-storiesOf("Experimental|Edge", module)
+storiesOf("Diagrams|Edge", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [EdgeModule]

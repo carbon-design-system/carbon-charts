@@ -8,7 +8,7 @@ const getTemplate = demo => `
 	</div>
 `;
 
-storiesOf("Experimental|Circle", module)
+storiesOf("Diagrams|Circle", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [CircleModule, ScreenModule]
