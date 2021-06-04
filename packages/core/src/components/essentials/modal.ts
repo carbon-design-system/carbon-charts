@@ -69,24 +69,63 @@ export class Modal extends Component {
 		);
 	}
 
+	// get the scales information
+	assignRangeAndDomains() {
+		const { cartesianScales } = this.services;
+		const options = this.model.getOptions();
+		const isDualAxes = cartesianScales.isDualAxes();
+
+		const scales = {
+			primaryDomain: cartesianScales.domainAxisPosition,
+			primaryRange: cartesianScales.rangeAxisPosition,
+			secondaryDomain: null,
+			secondaryRange: null,
+		};
+		if (isDualAxes) {
+			scales.secondaryDomain =
+				cartesianScales.secondaryDomainAxisPosition;
+			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition;
+		}
+
+		Object.keys(scales).forEach((scale) => {
+			const position = scales[scale];
+			if (cartesianScales.scales[position]) {
+				scales[scale] = {
+					position: position,
+					label: cartesianScales.getScaleLabel(position),
+					identifier: Tools.getProperty(
+						options,
+						'axes',
+						position,
+						'mapsTo'
+					),
+				};
+			} else {
+				scales[scale] = null;
+			}
+		});
+
+		return scales;
+	}
+
 	getModalHTML() {
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const { cartesianScales } = this.services;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
-		const domainScaleType = cartesianScales.getDomainAxisScaleType();
+		const {
+			primaryDomain,
+			primaryRange,
+			secondaryDomain,
+			secondaryRange,
+		} = this.assignRangeAndDomains();
 
+		const domainScaleType = cartesianScales.getDomainAxisScaleType();
 		let domainValueFormatter;
 		if (domainScaleType === ScaleTypes.TIME) {
 			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
 		}
-
-		// domain & range labels
-		const domainLabel = cartesianScales.getDomainLabel();
-		const rangeLabel = cartesianScales.getRangeLabel();
 
 		const chartprefix = Tools.getProperty(options, 'style', 'prefix');
 
@@ -95,7 +134,6 @@ export class Modal extends Component {
 			<div class="bx--modal-header">
 				<p class="bx--modal-header__label bx--type-delta">Tabular representation</p>
 				<p class="bx--modal-header__heading bx--type-beta">${options.title}</p>
-
 				<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
 					<svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
 						<title>Close Modal</title>
@@ -104,55 +142,78 @@ export class Modal extends Component {
 					</svg>
 				</button>
 			</div>
-
-			<div class="bx--modal-content">
-				<table class="bx--data-table bx--data-table--no-border">
+			<div class="bx--modal-content"><table class="bx--data-table bx--data-table--no-border">
 					<thead>
 						<tr>
 							<th scope="col">
 								<div class="bx--table-header-label">Group</div>
 							</th>
 							<th scope="col">
-								<div class="bx--table-header-label">${domainLabel}</div>
+								<div class="bx--table-header-label">${primaryDomain.label}</div>
 							</th>
 							<th scope="col">
-								<div class="bx--table-header-label">${rangeLabel}</div>
+								<div class="bx--table-header-label">${primaryRange.label}</div>
 							</th>
+							${
+								secondaryDomain &&
+								`<th scope="col"><div class="bx--table-header-label">${secondaryDomain.label}</div></th>`
+							}
+							${
+								secondaryRange &&
+								`<th scope="col"><div class="bx--table-header-label">${secondaryRange.label}</div></th>`
+							}
 						</tr>
 					</thead>
-
-					<tbody>
-						${displayData
-							.map(
-								(datum) => `
+					<tbody>${displayData
+						.map(
+							(datum) => `
 							<tr>
 								<td>${datum[groupMapsTo]}</td>
 								<td>${
-									datum[domainIdentifier] === null
+									datum[primaryDomain.identifier] === null
 										? '&ndash;'
 										: domainValueFormatter
 										? domainValueFormatter(
-												datum[domainIdentifier]
+												datum[primaryDomain.identifier]
 										  )
-										: datum[domainIdentifier]
+										: datum[primaryDomain.identifier]
 								}</td>
-								<td>${
-									datum[rangeIdentifier] === null
-										? '&ndash;'
-										: datum[
-												rangeIdentifier
-										  ].toLocaleString()
-								}</td>
+										<td>${
+											datum[primaryRange.identifier] ===
+											null
+												? '&ndash;'
+												: datum[
+														primaryRange.identifier
+												  ].toLocaleString()
+										}</td>
+								${
+									secondaryDomain &&
+									`<td>${
+										datum[secondaryDomain.identifier] ===
+										null
+											? '&ndash;'
+											: datum[secondaryDomain.identifier]
+									}
+								</td>`
+								}
+								${
+									secondaryRange &&
+									`<td>${
+										datum[secondaryRange.identifier] ===
+										null
+											? '&ndash;'
+											: datum[secondaryRange.identifier]
+									}
+								</td>`
+								}
 							</tr>
 						`
-							)
-							.join('')}
+						)
+						.join('')}
 					</tbody>
 				</table>
 			</div>
-
 			<div class="bx--modal-content--overflow-indicator"></div>
-
 			<div class="bx--modal-footer">
 			  <div class="${settings.prefix}--${chartprefix}-modal-footer-spacer"></div>
 			  <button class="bx--btn bx--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>
