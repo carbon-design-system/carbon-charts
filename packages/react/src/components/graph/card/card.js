@@ -22,7 +22,7 @@ const Card = ({ as = "div", children, color, href = null, onClick = null, stacke
 	});
 
 	return (
-		<Component className={cardClasses} tabIndex={0} onClick={() => onClick()} style={{ borderColor: color }} >
+		<Component className={cardClasses} tabIndex={0} onClick={onClick} style={{ borderColor: color }} >
 			{children}
 		</Component>
 	);
