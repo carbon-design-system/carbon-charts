@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Circle from './circle';
+import CircleNode from '.';
 
 import { User16 } from '@carbon/icons-react';
 
@@ -10,11 +10,11 @@ stories.addDecorator((story) => (
 ));
 
 stories.add('Default', () => (
-	<Circle title={'Title'} renderIcon={<User16 />} />
+	<CircleNode title={'Title'} renderIcon={<User16 />} />
 ));
 
 stories.add('Inherited dimensions', () => (
 	<div style={{ height: 64, width: 64 }}>
-		<Circle title={'Title'} renderIcon={<User16 />} size={"100%"} />
+		<CircleNode title={'Title'} renderIcon={<User16 />} size={"100%"} />
 	</div>
 ));
