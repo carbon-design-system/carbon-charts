@@ -31,7 +31,7 @@
 		cursor: pointer;
 
 		&:focus {
-			@include focus-outline();
+			@include focus-outline($type: outline);
 		}
 
 		&:hover {
