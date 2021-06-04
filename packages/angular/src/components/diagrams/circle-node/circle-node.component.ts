@@ -4,7 +4,7 @@ import settings from "carbon-components/src/globals/js/settings";
 const { prefix } = settings;
 
 @Component({
-	selector: "ibm-graph-circle",
+	selector: "ibm-diagram-circle-node",
 	template: `
 	<xhtml:div [attr.class]="namespace" [ngStyle]="{'height.px': size, 'width.px': size}" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
@@ -18,7 +18,7 @@ const { prefix } = settings;
 	`
 })
 
-export class CircleComponent {
+export class CircleNodeComponent {
 	@Input() description;
 	@Input() renderIcon: TemplateRef<any>;
 	@Input() size = 48;

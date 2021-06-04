@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { CircleModule } from "./circle/circle.module";
-import { CardModule } from "./card/card.module";
+import { CircleNodeModule } from "./circle-node/circle-node.module";
+import { CardNodeModule } from "./card-node/card-node.module";
 import { EdgeModule } from "./edge/edge.module";
 import { MarkerModule } from "./marker/marker.module";
 import { UserModule, WikisModule } from "@carbon/icons-angular";
@@ -13,7 +13,7 @@ const circleSize = 64;
 const stories = storiesOf("Diagrams|Graph", module);
 stories.addDecorator(
 	moduleMetadata({
-		imports: [CircleModule, CardModule, EdgeModule, MarkerModule, UserModule, WikisModule]
+		imports: [CircleNodeModule, CardNodeModule, EdgeModule, MarkerModule, UserModule, WikisModule]
 	})
 );
 
@@ -34,13 +34,13 @@ stories.add("Composed", () => ({
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(100, 100)'">
 				<xhtml:div>
-					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-graph-card>
+					<ibm-diagram-card-node [title]="'Title'" [description]="'Description'" [renderIcon]="userTemplate"></ibm-diagram-card-node>
 				</xhtml:div>
 			</svg:foreignObject>
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(600, 100)'">
 				<xhtml:div>
-					<ibm-graph-circle [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-graph-circle>
+					<ibm-diagram-circle-node [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-circle-node>
 				</xhtml:div>
 			</svg:foreignObject>
 		</svg>
@@ -117,10 +117,10 @@ stories.add("Programmatic", () => ({
 			<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
 			<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
 				<xhtml:div *ngIf="node.circle">
-					<ibm-graph-circle [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-circle>
+					<ibm-diagram-circle-node [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-circle-node>
 				</xhtml:div>
 				<xhtml:div *ngIf="!node.circle">
-					<ibm-graph-card [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-graph-card>
+					<ibm-diagram-card-node [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-card-node>
 				</xhtml:div>
 			</svg:foreignObject>
 		</svg>

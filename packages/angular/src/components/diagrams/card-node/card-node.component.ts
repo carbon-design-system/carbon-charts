@@ -4,7 +4,7 @@ import settings from "carbon-components/src/globals/js/settings";
 const { prefix } = settings;
 
 @Component({
-	selector: "ibm-graph-card",
+	selector: "ibm-diagram-card-node",
 	template: `
 	<xhtml:div [ngClass]="[namespace, stacked ? namespace + '--stacked' : '']" [ngStyle]="{'border-color': color}" tabindex="0" (click)="onClick.emit($event)">
 		<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}" >
@@ -22,7 +22,7 @@ const { prefix } = settings;
 	`
 })
 
-export class CardComponent {
+export class CardNodeComponent {
 	@Input() color;
 	@Input() description;
 	@Input() label;

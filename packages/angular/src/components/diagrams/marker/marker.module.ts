@@ -4,7 +4,7 @@ import {
 	MarkerComponent,
 	MarkerArrowLeftComponent,
 	MarkerArrowRightComponent,
-	MarkerCircleComponent,
+	MarkerCircleNodeComponent,
 	MarkerDiamondComponent,
 	MarkerSquareComponent,
 	MarkerTeeComponent
@@ -15,7 +15,7 @@ import {
 		MarkerComponent,
 		MarkerArrowLeftComponent,
 		MarkerArrowRightComponent,
-		MarkerCircleComponent,
+		MarkerCircleNodeComponent,
 		MarkerDiamondComponent,
 		MarkerSquareComponent,
 		MarkerTeeComponent
@@ -24,7 +24,7 @@ import {
 		MarkerComponent,
 		MarkerArrowLeftComponent,
 		MarkerArrowRightComponent,
-		MarkerCircleComponent,
+		MarkerCircleNodeComponent,
 		MarkerDiamondComponent,
 		MarkerSquareComponent,
 		MarkerTeeComponent

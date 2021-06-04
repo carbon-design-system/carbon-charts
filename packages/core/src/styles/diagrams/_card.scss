@@ -82,11 +82,12 @@
 
 	.#{$prefix}--#{$charts-prefix}--card-node__title {
 		@include carbon--type-style($name: productive-heading-01);
-		margin-bottom: 1px;
+		margin: 0;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__description {
 		@include carbon--type-style($name: body-short-01);
+		margin: 0;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__label {
