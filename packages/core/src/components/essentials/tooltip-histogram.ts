@@ -1,4 +1,4 @@
-import { Tooltip } from './tooltip';
+import { AxisChartsTooltip } from './tooltip-axis';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import {
@@ -13,7 +13,7 @@ import settings from 'carbon-components/es/globals/js/settings';
 import { select } from 'd3-selection';
 import { min } from 'd3-array';
 
-export class TooltipHistogram extends Tooltip {
+export class TooltipHistogram extends AxisChartsTooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -46,6 +46,7 @@ export class TooltipHistogram extends Tooltip {
 				)
 			) {
 				const data = e.detail.data;
+				console.log("data1", data)
 				const multidata = data.multidata;
 				const hoveredElement = e.detail.hoveredElement.node();
 
@@ -121,9 +122,11 @@ export class TooltipHistogram extends Tooltip {
 	 * Returns the html for the bar single point tooltip
 	 * @param data associated values for the hovered bar
 	 */
-	getTooltipHTML(data: any) {
+	getTooltipHTML(e: any) {
+		const data = e.detail.data;
 		const options = this.model.getOptions();
 		const { bin } = data;
+		console.log("data", data)
 		const { value } = data.multidata[0];
 		const { cartesianScales } = this.services;
 		const { title: domainTitle } = Tools.getProperty(
