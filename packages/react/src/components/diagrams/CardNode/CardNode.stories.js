@@ -5,7 +5,7 @@ import { User16, ChevronDown16 } from '@carbon/icons-react';
 
 const stories = storiesOf('Diagrams|CardNode', module);
 stories.addDecorator((story) => (
-	<div className="container theme--white" style={{ margin: "2rem", maxWidth: 400 }}>{story()}</div>
+	<div className="container theme--white" style={{ maxWidth: 400 }}>{story()}</div>
 ));
 
 stories.add('Default', () => (
