@@ -26,5 +26,5 @@ export class CircleComponent {
 
 	@Output() onClick = new EventEmitter<any>();
 
-	namespace = `${prefix}--cc--circle`;
+	namespace = `${prefix}--cc--circle-node`;
 }

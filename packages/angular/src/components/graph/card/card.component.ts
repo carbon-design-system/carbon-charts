@@ -32,5 +32,5 @@ export class CardComponent {
 	@Input() renderIcon: TemplateRef<any>;
 	@Output() onClick = new EventEmitter<any>();
 
-	namespace = `${prefix}--cc--card`;
+	namespace = `${prefix}--cc--card-node`;
 }

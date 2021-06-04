@@ -3,7 +3,7 @@ import settings from 'carbon-components/src/globals/js/settings';
 import classnames from 'classnames';
 
 const { prefix } = settings;
-const namespace = `${prefix}--cc--card`;
+const namespace = `${prefix}--cc--card-node`;
 
 const CardNode = ({ as = "div", children, color, href = null, onClick = null, stacked }) => {
 	let Component = 'div';

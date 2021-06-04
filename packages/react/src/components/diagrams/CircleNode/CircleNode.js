@@ -4,7 +4,7 @@ import settings from 'carbon-components/src/globals/js/settings';
 const { prefix } = settings;
 
 export default ({ description, onClick = () => {}, renderIcon,  size = 48, title }) => {
-	const namespace = `${prefix}--cc--circle`;
+	const namespace = `${prefix}--cc--circle-node`;
 
 	const titleElement = title ? (
 		<div className={`${namespace}__title`}>{title}</div>
