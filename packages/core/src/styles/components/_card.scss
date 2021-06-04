@@ -26,17 +26,36 @@
 		font-family: carbon--font-family('sans');
 		width: 100%;
 		height: 100%;
-		padding: $spacing-04 $spacing-05;
+		padding: $spacing-05 $spacing-04;
 		border-left: carbon--mini-units(0.5) solid $ui-05;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card--a,
+	.#{$prefix}--#{$charts-prefix}--card--button {
+		border-top: none;
+		border-right: none;
+		border-bottom: none;
+		color: inherit;
+		text-decoration: none;
 		cursor: pointer;
+	}
 
-		&:focus {
-			@include focus-outline($type: outline);
-		}
+	.#{$prefix}--#{$charts-prefix}--card--button {
+		font-family: inherit;
+		text-align: left;
+		width: 100%;
+	}
 
-		&:hover {
-			background-color: $hover-ui;
-		}
+	.#{$prefix}--#{$charts-prefix}--card--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card--a:hover,
+	.#{$prefix}--#{$charts-prefix}--card--button:focus,
+	.#{$prefix}--#{$charts-prefix}--card--button:hover {
+		background-color: $hover-ui;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card--button:focus {
+		@include focus-outline($type: outline);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card--stacked {
@@ -53,32 +72,25 @@
 		}
 	}
 
-	.#{$prefix}--#{$charts-prefix}--card__body {
-		flex: 1;
+	.#{$prefix}--#{$charts-prefix}--card__column {
+		padding: 0 $spacing-02;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--card__action {
-		padding-left: $spacing-03;
-		padding-top: $spacing-02;
-	}
-
-	.#{$prefix}--#{$charts-prefix}--card__icon {
-		padding-right: $spacing-03;
-		padding-top: $spacing-02;
+	.#{$prefix}--#{$charts-prefix}--card__column--farside {
+		margin-left: auto;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card__title {
 		@include carbon--type-style($name: productive-heading-01);
-		padding-top: $spacing-01;
 		margin-bottom: 1px;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card__description {
-		padding-bottom: $spacing-01;
 		@include carbon--type-style($name: body-short-01);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card__label {
+		display: block;
 		@include carbon--type-style($name: label-01);
 		color: $text-02;
 		padding-top: $spacing-06;
