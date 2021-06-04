@@ -1007,6 +1007,7 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelOptions,
 				chartType: chartTypes.CirclePackChart,
+				mainDemo: true,
 			},
 			{
 				data: circlePackDemos.circlePackThreeLevelsMonochromeData,

@@ -41,7 +41,7 @@ export class CirclePack extends Component {
 
 		// check if there is one root for the data
 		// that root will be the only datagroup (colorscale will be monochrome)
-		if (parentNode) {
+		if (parentNode && Tools.getProperty(displayData, 0, 'children')) {
 			// remove want to remove the parent from being rendered
 			displayData = Tools.getProperty(displayData, 0, 'children');
 		}
@@ -176,12 +176,12 @@ export class CirclePack extends Component {
 	}
 
 	removeBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getHolder());
+		const chartSvg = select(this.services.domUtils.getMainSVG());
 		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getHolder());
+		const chartSvg = select(this.services.domUtils.getMainSVG());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
 		const zoomSetting = Tools.getProperty(
@@ -192,6 +192,7 @@ export class CirclePack extends Component {
 		chartSvg.on('click', () => {
 			self.focal = null;
 			self.model.updateHierarchyLevel(2);
+			chartSvg.classed('zoomed-in', false);
 			self.services.canvasZoom.zoomOut(canvasSelection, zoomSetting);
 		});
 	}
@@ -242,10 +243,9 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
-				const disabled = hoveredElement
-					.node()
-					.classList.contains('non-focal');
-
+				const hierarchyLevel = self.model.getHierarchyLevel();
+				const disabled =
+					hierarchyLevel > 2 && !hoveredElement.classed('focal');
 				const canvasZoomEnabled = Tools.getProperty(
 					self.model.getOptions(),
 					'canvasZoom',
@@ -282,9 +282,11 @@ export class CirclePack extends Component {
 
 									return {
 										label: child.data.name,
-										labelIcon: canvasZoomEnabled
-											? self.getZoomIcon()
-											: null,
+										labelIcon:
+											canvasZoomEnabled &&
+											hierarchyLevel <= 2
+												? self.getZoomIcon()
+												: null,
 										value: value,
 									};
 								}
@@ -318,7 +320,9 @@ export class CirclePack extends Component {
 								color: fillColor,
 								label: datum.data.name,
 								labelIcon:
-									zoomable && canvasZoomEnabled
+									zoomable &&
+									canvasZoomEnabled &&
+									hierarchyLevel <= 2
 										? self.getZoomIcon()
 										: null,
 								value: parentValue,
@@ -376,24 +380,39 @@ export class CirclePack extends Component {
 			})
 			.on('click', function (datum) {
 				const hoveredElement = select(this);
-				const disabled = hoveredElement
-					.node()
-					.classList.contains('non-focal');
-				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
-				if (
+				const disabled = hoveredElement.classed('non-focal');
+
+				const zoomedIn =
 					Tools.getProperty(
 						self.getOptions(),
 						'canvasZoom',
 						'enabled'
-					) === true &&
-					datum.depth === 2 &&
-					datum.children &&
-					!disabled
-				) {
+					) && self.model.getHierarchyLevel() > 2;
+
+				if (zoomedIn) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
-
+					const chartSvg = select(
+						self.services.domUtils.getMainSVG()
+					);
+					chartSvg.classed('zoomed-in', false);
+					self.focal = null;
+					self.model.updateHierarchyLevel(2);
+					self.services.canvasZoom.zoomOut(
+						canvasSelection,
+						Configuration.canvasZoomSettings
+					);
+				}
+				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
+				else if (datum.depth === 2 && datum.children && !disabled) {
+					const canvasSelection = self.parent.selectAll(
+						'circle.node'
+					);
+					const chartSvg = select(
+						self.services.domUtils.getMainSVG()
+					);
+					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;
 					self.model.updateHierarchyLevel(3);
 					self.services.canvasZoom.zoomIn(
