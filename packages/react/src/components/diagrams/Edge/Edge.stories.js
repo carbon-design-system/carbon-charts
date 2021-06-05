@@ -7,7 +7,7 @@ const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
 const linkTargetCurve = { x: 400, y: 200 };
 
-const stories = storiesOf('Diagrams|Edge', module);
+const stories = storiesOf('Diagrams|Edges', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));

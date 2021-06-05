@@ -13,7 +13,7 @@ import Edge from '../Edge';
 const linkSource = { x: 20, y: 50 };
 const linkTarget = { x: 250, y: 50 };
 
-const stories = storiesOf('Diagrams|Marker', module);
+const stories = storiesOf('Diagrams|Edges/markers', module);
 
 stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
