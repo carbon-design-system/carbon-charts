@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ShapeNodeComponent } from "./circle-node.component";
-export { ShapeNodeComponent } from "./circle-node.component";
+import { ShapeNodeComponent } from "./shape-node.component";
+export { ShapeNodeComponent } from "./shape-node.component";
 
 @NgModule({
 	declarations: [ShapeNodeComponent],

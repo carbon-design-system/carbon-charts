@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { ShapeNodeModule } from "./circle-node/circle-node.module";
+import { ShapeNodeModule } from "./shape-node/shape-node.module";
 import { CardNodeModule } from "./card-node/card-node.module";
 import { EdgeModule } from "./edge/edge.module";
 import { MarkerModule } from "./marker/marker.module";
@@ -40,7 +40,7 @@ stories.add("Composed", () => ({
 
 			<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(600, 100)'">
 				<xhtml:div>
-					<ibm-diagram-circle-node [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-circle-node>
+					<ibm-diagram-shape-node [title]="'Title'" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
 				</xhtml:div>
 			</svg:foreignObject>
 		</svg>
@@ -117,7 +117,7 @@ stories.add("Programmatic", () => ({
 			<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
 			<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
 				<xhtml:div *ngIf="node.circle">
-					<ibm-diagram-circle-node [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-circle-node>
+					<ibm-diagram-shape-node [title]="'Title'" [description]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-shape-node>
 				</xhtml:div>
 				<xhtml:div *ngIf="!node.circle">
 					<ibm-diagram-card-node [title]="'Title'" [description]="'Description'" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-card-node>

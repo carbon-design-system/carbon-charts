@@ -25,9 +25,7 @@ const ShapeNode = ({
 
 	let Component = 'div';
 
-	if (as !== 'div') {
-		Component = as;
-	} else if (href) {
+	if (href) {
 		Component = 'a';
 	} else if (onClick) {
 		Component = 'button';
@@ -68,7 +66,7 @@ const ShapeNode = ({
 
 ShapeNode.propTypes = {
 	/** Provide a custom element to be rendered instead of the default */
-	as: PropTypes.elementType,
+	as: PropTypes.oneOf(['div', 'a', 'button']),
 
 	/**
 	 * Optionally specify an href for the CardNode to become an `<a>` element
