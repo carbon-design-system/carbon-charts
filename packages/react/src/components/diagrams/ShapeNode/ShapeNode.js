@@ -5,7 +5,22 @@ import classnames from 'classnames';
 
 const { prefix } = settings;
 
-const ShapeNode = ({ as = "div", href = null, onClick = null, renderIcon,  size = 48, stacked, shape = "circle", subtitle, title }) => {
+const ShapeNode = ({
+	as = "div",
+	href = null,
+	onClick = null,
+	onMouseEnter = null,
+	onMouseOver = null,
+	onMouseOut = null,
+	onMouseLeave = null,
+	onMouseMove = null,
+	renderIcon,
+	size = 48,
+	stacked,
+	shape = "circle",
+	subtitle,
+	title
+}) => {
 	const namespace = `${prefix}--cc--shape-node`;
 
 	let Component = 'div';
@@ -32,7 +47,17 @@ const ShapeNode = ({ as = "div", href = null, onClick = null, renderIcon,  size 
 	) : null;
 
 	return (
-		<Component className={circleClasses} style={{ height: size, width: size }} tabIndex={0} onClick={onClick}>
+		<Component
+			className={circleClasses}
+			onClick={onClick}
+			onMouseEnter={onMouseEnter}
+			onMouseOver={onMouseOver}
+			onMouseOut={onMouseOut}
+			onMouseLeave={onMouseLeave}
+			onMouseMove={onMouseMove}
+			style={{ height: size, width: size }}
+			tabIndex={0}
+		>
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
 			<div className={`${namespace}__body`}>
 				{titleElement}
@@ -56,6 +81,31 @@ ShapeNode.propTypes = {
 	 * is clicked, turning the CardNode into a `<button>` element
 	 */
 	onClick: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseEnter event
+	 */
+	onMouseEnter: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOver event
+	 */
+	onMouseOver: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOut event
+	 */
+	onMouseOut: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseLeave event
+	 */
+	onMouseLeave: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseMove event
+	 */
+	onMouseMove: PropTypes.func,
 
 	/**
 	* Function to render your own icon in the underlying button

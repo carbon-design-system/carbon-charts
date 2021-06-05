@@ -10,6 +10,11 @@ const Edge = ({
 	color,
 	markerEnd,
 	markerStart,
+	onMouseEnter = null,
+	onMouseOver = null,
+	onMouseOut = null,
+	onMouseLeave = null,
+	onMouseMove = null,
 	path,
 	source,
 	target,
@@ -24,7 +29,14 @@ const Edge = ({
 	const d = path || buildStraightPathString(source, target);
 
 	return (
-		<g className={pathClasses}>
+		<g
+			className={pathClasses}
+			onMouseEnter={onMouseEnter}
+			onMouseOver={onMouseOver}
+			onMouseOut={onMouseOut}
+			onMouseLeave={onMouseLeave}
+			onMouseMove={onMouseMove}
+		>
 			<path d={d} className={`${namespace}__container`} />
 			<path d={d} className={`${namespace}__outer`} />
 			<path d={d} className={`${namespace}__inner`} markerEnd={`url(#${markerEnd})`} markerStart={`url(#${markerStart})`} style={{ stroke: color }} />
@@ -49,6 +61,31 @@ Edge.propTypes = {
 	* Specify an ID for a corresponding start marker
 	*/
 	markerStart: PropTypes.string,
+
+	/**
+	 * Provide an optional function to be called for the onMouseEnter event
+	 */
+	onMouseEnter: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOver event
+	 */
+	onMouseOver: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOut event
+	 */
+	onMouseOut: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseLeave event
+	 */
+	onMouseLeave: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseMove event
+	 */
+	onMouseMove: PropTypes.func,
 
 	/**
 	* Specify a path string

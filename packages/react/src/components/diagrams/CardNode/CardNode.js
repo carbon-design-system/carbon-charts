@@ -5,7 +5,19 @@ import settings from 'carbon-components/src/globals/js/settings';
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
-const CardNode = ({ as = "div", children, color, href = null, onClick = null, stacked }) => {
+const CardNode = ({
+		as = "div",
+		children,
+		color,
+		href = null,
+		onMouseEnter = null,
+		onMouseOver = null,
+		onMouseOut = null,
+		onMouseLeave = null,
+		onMouseMove = null,
+		onClick = null,
+		stacked
+	}) => {
 	let Component = 'div';
 
 	if (as !== 'div') {
@@ -22,7 +34,17 @@ const CardNode = ({ as = "div", children, color, href = null, onClick = null, st
 	});
 
 	return (
-		<Component className={cardClasses} tabIndex={0} onClick={onClick} style={{ borderColor: color }} >
+		<Component
+			className={cardClasses}
+			onClick={onClick}
+			onMouseEnter={onMouseEnter}
+			onMouseOver={onMouseOver}
+			onMouseOut={onMouseOut}
+			onMouseLeave={onMouseLeave}
+			onMouseMove={onMouseMove}
+			style={{ borderColor: color }}
+			tabIndex={0}
+		>
 			{children}
 		</Component>
 	);
@@ -54,6 +76,31 @@ CardNode.propTypes = {
 	 * is clicked, turning the CardNode into a `<button>` element
 	 */
 	onClick: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseEnter event
+	 */
+	onMouseEnter: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOver event
+	 */
+	onMouseOver: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseOut event
+	 */
+	onMouseOut: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseLeave event
+	 */
+	onMouseLeave: PropTypes.func,
+
+	/**
+	 * Provide an optional function to be called for the onMouseMove event
+	 */
+	onMouseMove: PropTypes.func,
 
 	/**
 	* Specify whether the node displays a stacked effect
