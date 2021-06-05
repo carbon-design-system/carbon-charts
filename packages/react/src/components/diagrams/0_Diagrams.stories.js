@@ -44,7 +44,7 @@ stories.add('Start here', () => {
 		<div>
 			<h1>Diagrams</h1>
 
-			<p {...paragraphStyle}>UI components for Carbon diagram experiences.</p>
+			<p {...paragraphStyle}>React components for building diagram experiences, using the Carbon Design System.</p>
 
 			<p {...paragraphStyle}>Note that Carbon Charts does not provide layouts for diagrams. These components are intended to be used as components within graphs and diagram layouts. You can create diagrams using these components, alongside graphing libraries, or compose your own layouts.</p>
 
