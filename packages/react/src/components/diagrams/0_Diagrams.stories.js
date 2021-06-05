@@ -10,7 +10,7 @@ import ShapeNode from './ShapeNode';
 import {ArrowRightMarker} from './Marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
-import { elbow } from './Edge/buildPath';
+import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
@@ -77,7 +77,7 @@ const SimpleStatic = () => (
 		</defs>
 		<Edge
 			source={{ x: 0, y: 48 }}
-			target={{ x: 400, y: 48 }}
+			target={{ x: 396, y: 48 }}
 			markerEnd={"marker"}
 			variant={'dash-sm'}
 		/>
@@ -127,12 +127,12 @@ const ProgrammaticStatic = () => {
 		{
 			source: 'c',
 			target: 'b',
-			path: (source, target) => elbow(source, target),
+			path: (source, target) => buildElbowPathString(source, target),
 		},
 		{
 			source: 'd',
 			target: 'c',
-			path: (source, target) => elbow(source, target),
+			path: (source, target) => buildElbowPathString(source, target),
 			variant: 'tunnel',
 		},
 	];
@@ -192,7 +192,7 @@ const ProgrammaticStatic = () => {
 	));
 
 	return (
-		<svg height="250" width="800">
+		<svg height="300" width="800">
 			{edges}
 			{nodes}
 		</svg>

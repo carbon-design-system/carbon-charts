@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import settings from 'carbon-components/src/globals/js/settings';
-import { straight } from './buildPath';
+import { buildStraightPathString } from '@carbon/charts/components/diagrams/buildPaths';
 import classnames from 'classnames';
 
 const { prefix } = settings;
@@ -21,7 +21,7 @@ const Edge = ({
 		[`${namespace}--${variant}`]: variant,
 	});
 
-	const d = path || straight(source, target);
+	const d = path || buildStraightPathString(source, target);
 
 	return (
 		<g className={pathClasses}>

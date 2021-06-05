@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Edge from '.';
-import { elbow, bezier } from './buildPath';
+import { buildBezierPathString, buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
@@ -67,7 +67,7 @@ stories.add('Tunnel', () => (
 stories.add('Elbow', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge path={elbow(linkSource, linkTargetCurve)} />
+			<Edge path={buildElbowPathString(linkSource, linkTargetCurve)} />
 		</g>
 	</svg>
 ));
@@ -76,7 +76,7 @@ stories.add('Bezier', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
 			<Edge
-				path={bezier(linkSource, linkTargetCurve, 150, 280, 150, 30)}
+				path={buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)}
 			/>
 		</g>
 	</svg>
