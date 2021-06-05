@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import settings from 'carbon-components/src/globals/js/settings';
 import classnames from 'classnames';
 
 const { prefix } = settings;
 
-export default ({ as = "div", description, href = null, onClick = null, renderIcon,  size = 48, stacked, title }) => {
-	const namespace = `${prefix}--cc--circle-node`;
+const ShapeNode = ({ as = "div", href = null, onClick = null, renderIcon,  size = 48, stacked, shape = "circle", subtitle, title }) => {
+	const namespace = `${prefix}--cc--shape-node`;
 
 	let Component = 'div';
 
@@ -19,14 +20,15 @@ export default ({ as = "div", description, href = null, onClick = null, renderIc
 
 	const circleClasses = classnames(namespace, {
 		[`${namespace}--stacked`]: stacked,
+		[`${namespace}--${shape}`]: shape,
 		[`${namespace}--${Component}`]: Component,
 	});
 
 	const titleElement = title ? (
 		<div className={`${namespace}__title`}>{title}</div>
 	) : null;
-	const descriptionElement = description ? (
-		<div className={`${namespace}__description`}>{description}</div>
+	const subtitleElement = subtitle ? (
+		<div className={`${namespace}__subtitle`}>{subtitle}</div>
 	) : null;
 
 	return (
@@ -34,8 +36,26 @@ export default ({ as = "div", description, href = null, onClick = null, renderIc
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
 			<div className={`${namespace}__body`}>
 				{titleElement}
-				{descriptionElement}
+				{subtitleElement}
 			</div>
 		</Component>
 	);
 };
+
+ShapeNode.propTypes = {
+	/** Provide a custom element to be rendered instead of the default */
+	as: PropTypes.elementType,
+
+	/**
+	 * Optionally specify an href for the CardNode to become an `<a>` element
+	 */
+	href: PropTypes.string,
+
+	/**
+	 * Provide an optional function to be called when the CardNode
+	 * is clicked, turning the CardNode into a `<button>` element
+	 */
+	onClick: PropTypes.func,
+};
+
+export default ShapeNode;

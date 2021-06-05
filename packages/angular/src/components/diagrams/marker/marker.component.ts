@@ -53,7 +53,7 @@ export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit 
 @Component({ selector: "[ibm-graph-marker-arrow-right]", template})
 export class MarkerArrowRightComponent extends MarkerComponent implements OnInit { ngOnInit() {this.setAttributes({...arrowRight}); } }
 @Component({ selector: "[ibm-graph-marker-circle]", template})
-export class MarkerCircleNodeComponent extends MarkerComponent implements OnInit { ngOnInit() {this.setAttributes({...circle}); } }
+export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit { ngOnInit() {this.setAttributes({...circle}); } }
 @Component({ selector: "[ibm-graph-marker-diamond]", template})
 export class MarkerDiamondComponent extends MarkerComponent implements OnInit { ngOnInit() {this.setAttributes({...diamond}); } }
 @Component({ selector: "[ibm-graph-marker-square]", template})

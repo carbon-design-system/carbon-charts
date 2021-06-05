@@ -18,7 +18,7 @@ const { prefix } = settings;
 	`
 })
 
-export class CircleNodeComponent {
+export class ShapeNodeComponent {
 	@Input() description;
 	@Input() renderIcon: TemplateRef<any>;
 	@Input() size = 48;

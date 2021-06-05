@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { CircleNodeModule } from "./circle-node.module";
+import { ShapeNodeModule } from "./circle-node.module";
 import { ScreenModule } from "@carbon/icons-angular";
 
 const getTemplate = demo => `
@@ -11,7 +11,7 @@ const getTemplate = demo => `
 storiesOf("Diagrams|Circle", module)
 .addDecorator(
 	moduleMetadata({
-		imports: [CircleNodeModule, ScreenModule]
+		imports: [ShapeNodeModule, ScreenModule]
 	})
 )
 .add("Default", () => ({

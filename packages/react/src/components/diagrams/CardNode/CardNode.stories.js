@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import CardNode, { CardNodeColumn, CardNodeDescription, CardNodeLabel, CardNodeTitle } from '.';
 import { User16, ChevronDown16 } from '@carbon/icons-react';
 
-const stories = storiesOf('Diagrams|CardNode', module);
+const stories = storiesOf('Diagrams|Nodes/Card', module);
 stories.addDecorator((story) => (
 	<div className="container theme--white" style={{ maxWidth: 400 }}>{story()}</div>
 ));

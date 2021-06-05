@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CircleNodeComponent } from "./circle-node.component";
-export { CircleNodeComponent } from "./circle-node.component";
+import { ShapeNodeComponent } from "./circle-node.component";
+export { ShapeNodeComponent } from "./circle-node.component";
 
 @NgModule({
-	declarations: [CircleNodeComponent],
-	exports: [CircleNodeComponent],
+	declarations: [ShapeNodeComponent],
+	exports: [ShapeNodeComponent],
 	imports: [CommonModule]
 })
-export class CircleNodeModule { }
+export class ShapeNodeModule { }

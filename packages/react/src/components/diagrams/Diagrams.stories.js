@@ -6,7 +6,7 @@ import CardNode, {
 	CardNodeDescription
 } from './CardNode';
 import Edge from './Edge';
-import CircleNode from './CircleNode';
+import ShapeNode from './ShapeNode';
 import {ArrowRightMarker} from './Marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
@@ -14,7 +14,7 @@ import { elbow } from './Edge/buildPath';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
-const CircleNodeSize = 64;
+const ShapeNodeSize = 64;
 
 const stories = storiesOf('Diagrams|Graph', module);
 stories.addDecorator((story) => (
@@ -53,7 +53,7 @@ stories.add('Composed', () => {
 			<foreignObject
 				style={{ overflow: 'visible' }}
 				transform={`translate(${600},${100})`}>
-				<CircleNode title={'Title'} size={CircleNodeSize} renderIcon={<Wikis16 />} />
+				<ShapeNode title={'Title'} size={ShapeNodeSize} renderIcon={<Wikis16 />} />
 			</foreignObject>
 		</svg>
 	);
@@ -68,9 +68,9 @@ stories.add('Programmatic', () => {
 			x: 600,
 			y: 200,
 			icon: <Debug16 />,
-			CircleNode: true,
-			nodeWidth: CircleNodeSize,
-			nodeHeight: CircleNodeSize,
+			ShapeNode: true,
+			nodeWidth: ShapeNodeSize,
+			nodeHeight: ShapeNodeSize,
 		},
 		{ id: 'd', x: 20, y: 280, icon: <Wikis16 />, nodeWidth, nodeHeight },
 	];
@@ -114,10 +114,10 @@ stories.add('Programmatic', () => {
 			transform={`translate(${node.x},${node.y})`}
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
-			{node.CircleNode ? (
-				<CircleNode
+			{node.ShapeNode ? (
+				<ShapeNode
 					title={'Title'}
-					size={CircleNodeSize}
+					size={ShapeNodeSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>

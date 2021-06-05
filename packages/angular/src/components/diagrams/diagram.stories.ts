@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { CircleNodeModule } from "./circle-node/circle-node.module";
+import { ShapeNodeModule } from "./circle-node/circle-node.module";
 import { CardNodeModule } from "./card-node/card-node.module";
 import { EdgeModule } from "./edge/edge.module";
 import { MarkerModule } from "./marker/marker.module";
@@ -13,7 +13,7 @@ const circleSize = 64;
 const stories = storiesOf("Diagrams|Graph", module);
 stories.addDecorator(
 	moduleMetadata({
-		imports: [CircleNodeModule, CardNodeModule, EdgeModule, MarkerModule, UserModule, WikisModule]
+		imports: [ShapeNodeModule, CardNodeModule, EdgeModule, MarkerModule, UserModule, WikisModule]
 	})
 );
 

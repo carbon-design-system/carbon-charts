@@ -5,8 +5,8 @@
 @import './../vendor/@carbon/elements/scss/import-once/import-once';
 @import './../vendor/carbon-components/scss/globals/scss/_helper-mixins';
 
-@include exports('cc-circle-node') {
-	.#{$prefix}--#{$charts-prefix}--circle-node {
+@include exports('cc-shape-node') {
+	.#{$prefix}--#{$charts-prefix}--shape-node {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -15,55 +15,66 @@
 		font-family: carbon--font-family('sans');
 		width: 100%;
 		height: 100%;
-		border-radius: 100%;
 		position: relative;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node--a,
-	.#{$prefix}--#{$charts-prefix}--circle-node--button {
+	.#{$prefix}--#{$charts-prefix}--shape-node--circle {
+		border-radius: 100%;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--shape-node--square {
+		border-radius: 0;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--shape-node--rounded-square {
+		border-radius: carbon--mini-units(1);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--shape-node--a,
+	.#{$prefix}--#{$charts-prefix}--shape-node--button {
 		border: none;
 		color: inherit;
 		text-decoration: none;
 		cursor: pointer;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node--button {
+	.#{$prefix}--#{$charts-prefix}--shape-node--button {
 		font-family: carbon--font-family('sans');
 		text-align: left;
 		width: 100%;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node--a:focus,
-	.#{$prefix}--#{$charts-prefix}--circle-node--a:hover,
-	.#{$prefix}--#{$charts-prefix}--circle-node--button:focus,
-	.#{$prefix}--#{$charts-prefix}--circle-node--button:hover {
+	.#{$prefix}--#{$charts-prefix}--shape-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--shape-node--a:hover,
+	.#{$prefix}--#{$charts-prefix}--shape-node--button:focus,
+	.#{$prefix}--#{$charts-prefix}--shape-node--button:hover {
 		background-color: $hover-ui;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node--a:focus,
-	.#{$prefix}--#{$charts-prefix}--circle-node--button:focus {
+	.#{$prefix}--#{$charts-prefix}--shape-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--shape-node--button:focus {
 		&:focus {
 			outline: none;
 			box-shadow: 0 0 0 1px $focus;
 		}
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node__body {
+	.#{$prefix}--#{$charts-prefix}--shape-node__body {
 		position: absolute;
 		top: calc(100% + #{$spacing-01});
 		text-align: center;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node__description {
+	.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
 		padding-bottom: $spacing-01;
 		@include carbon--type-style($name: body-short-01);
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node__icon {
+	.#{$prefix}--#{$charts-prefix}--shape-node__icon {
 		display: flex;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--circle-node__title {
+	.#{$prefix}--#{$charts-prefix}--shape-node__title {
 		@include carbon--type-style($name: productive-heading-01);
 		padding-top: $spacing-01;
 		margin-bottom: 1px;
