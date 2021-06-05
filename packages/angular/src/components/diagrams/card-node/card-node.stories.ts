@@ -16,14 +16,14 @@ storiesOf("Diagrams|Nodes/Card", module)
 	})
 )
 .add("Default", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [description]="description"></ibm-diagram-card-node>`),
+	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description"></ibm-diagram-card-node>`),
 	props: {
 		title: "Title",
 		description: "Description"
 	},
 }))
 .add("Stacked", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [description]="description" [stacked]="stacked"></ibm-diagram-card-node>`),
+	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [stacked]="stacked"></ibm-diagram-card-node>`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -31,7 +31,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 	},
 }))
 .add("Color", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [description]="description" [color]="color"></ibm-diagram-card-node>`),
+	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [color]="color"></ibm-diagram-card-node>`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -40,7 +40,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 }))
 .add("With icon", () => ({
 	template: getTemplate(`
-	<ibm-diagram-card-node [title]="title" [description]="description" [renderIcon]="iconTemplate"></ibm-diagram-card-node>
+	<ibm-diagram-card-node [title]="title" [subtitle]="description" [renderIcon]="iconTemplate"></ibm-diagram-card-node>
 	<ng-template #iconTemplate>
 		<svg ibmIconScreen size="16"></svg>
 	</ng-template>
@@ -51,7 +51,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 	},
 }))
 .add("With label", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [description]="description" [label]="label"></ibm-diagram-card-node>`),
+	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [label]="label"></ibm-diagram-card-node>`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -60,7 +60,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 }))
 .add("With action", () => ({
 	template: getTemplate(`
-		<ibm-diagram-card-node [title]="title" [description]="description" [label]="label" [renderAction]="actionTemplate"></ibm-diagram-card-node>
+		<ibm-diagram-card-node [title]="title" [subtitle]="description" [label]="label" [renderAction]="actionTemplate"></ibm-diagram-card-node>
 		<ng-template #actionTemplate>
 			<ibm-overflow-menu>
 				<ibm-overflow-menu-option>

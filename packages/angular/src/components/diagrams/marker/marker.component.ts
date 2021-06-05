@@ -30,15 +30,15 @@ const template = `
 	template
 })
 export class MarkerComponent {
-	@Input() d;
-	@Input() color;
-	@Input() id;
-	@Input() orient = "auto";
-	@Input() height;
-	@Input() width;
-	@Input() refX;
-	@Input() refY;
-	@Input() position = "end";
+	@Input() d: string;
+	@Input() color: string;
+	@Input() id: string;
+	@Input() orient: string | number = "auto";
+	@Input() height: string | number;
+	@Input() width: string | number;
+	@Input() refX: string | number;
+	@Input() refY: string | number;
+	@Input() position: "start" | "end" = "end";
 
 	namespace = `${prefix}--cc--marker`;
 

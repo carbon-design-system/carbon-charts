@@ -3,7 +3,10 @@ import settings from "carbon-components/src/globals/js/settings";
 import { buildStraightPathString } from "@carbon/charts/components/diagrams/buildPaths";
 
 const { prefix } = settings;
-
+interface Coordinates {
+	x: number;
+	y: number;
+}
 @Component({
 	selector: "[ibm-graph-edge]",
 	template: `
@@ -24,18 +27,17 @@ const { prefix } = settings;
 			[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''"
 		/>
 	</svg:g>
-
 	`
 })
 
 export class EdgeComponent {
-	@Input() color;
-	@Input() markerEnd;
-	@Input() markerStart;
-	@Input() source;
-	@Input() target;
-	@Input() variant;
-	@Input() path;
+	@Input() color: string;
+	@Input() markerEnd: string;
+	@Input() markerStart: string;
+	@Input() source: Coordinates;
+	@Input() target: Coordinates;
+	@Input() variant: "dash-sm" | "dash-md" |  "dash-lg" |  "dash-xl" |  "double" |  "tunnel";
+	@Input() path: string;
 
 	pathClasses;
 	namespace = `${prefix}--cc--edge`;

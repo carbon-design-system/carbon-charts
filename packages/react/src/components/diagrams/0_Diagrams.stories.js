@@ -55,10 +55,7 @@ stories.add('Start here', () => {
 
 			<p {...paragraphStyle}>
 				Note that Carbon Charts does not provide layouts for diagrams.
-				These components are intended to be used as components within
-				graphs and diagram layouts. You can create diagrams using these
-				components alongside graphing libraries, or compose your own
-				layouts.
+				You can utilize these components alongside graphing libraries, or by composing your own layouts.
 			</p>
 
 			<h2 {...h2Style}>Examples</h2>

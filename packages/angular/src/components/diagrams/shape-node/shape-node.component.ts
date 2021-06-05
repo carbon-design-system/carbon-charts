@@ -17,11 +17,11 @@ const { prefix } = settings;
 				namespace + '--' + component
 			]"
 			[ngStyle]="{'height.px': size, 'width.px': size}"
-			(mouseenter)="onMouseEnter.emit($event)"
-			(mouseover)="onMouseOver.emit($event)"
-			(mouseout)="onMouseOut.emit($event)"
-			(mouseleave)="onMouseLeave.emit($event)"
-			(mousemove)="onMouseMove.emit($event)"
+			(mouseenter)="mouseEnter.emit($event)"
+			(mouseover)="mouseOver.emit($event)"
+			(mouseout)="mouseOut.emit($event)"
+			(mouseleave)="mouseLeave.emit($event)"
+			(mousemove)="mouseMove.emit($event)"
 			tabindex="0"
 		>
 			<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
@@ -36,12 +36,12 @@ const { prefix } = settings;
 				namespace + '--' + component
 			]"
 			[ngStyle]="{'height.px': size, 'width.px': size}"
-			(click)="onClick.emit($event)"
-			(mouseenter)="onMouseEnter.emit($event)"
-			(mouseover)="onMouseOver.emit($event)"
-			(mouseout)="onMouseOut.emit($event)"
-			(mouseleave)="onMouseLeave.emit($event)"
-			(mousemove)="onMouseMove.emit($event)"
+			(click)="click.emit($event)"
+			(mouseenter)="mouseEnter.emit($event)"
+			(mouseover)="mouseOver.emit($event)"
+			(mouseout)="mouseOut.emit($event)"
+			(mouseleave)="mouseLeave.emit($event)"
+			(mousemove)="mouseMove.emit($event)"
 			tabindex="0"
 		>
 			<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
@@ -57,11 +57,11 @@ const { prefix } = settings;
 			]"
 			[attr.href]="href"
 			[ngStyle]="{'height.px': size, 'width.px': size}"
-			(mouseenter)="onMouseEnter.emit($event)"
-			(mouseover)="onMouseOver.emit($event)"
-			(mouseout)="onMouseOut.emit($event)"
-			(mouseleave)="onMouseLeave.emit($event)"
-			(mousemove)="onMouseMove.emit($event)"
+			(mouseenter)="mouseEnter.emit($event)"
+			(mouseover)="mouseOver.emit($event)"
+			(mouseout)="mouseOut.emit($event)"
+			(mouseleave)="mouseLeave.emit($event)"
+			(mousemove)="mouseMove.emit($event)"
 			tabindex="0"
 		>
 			<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
@@ -81,21 +81,21 @@ const { prefix } = settings;
 })
 
 export class ShapeNodeComponent implements OnInit {
-	@Input() as: String = "div";
-	@Input() href: String = null;
+	@Input() as = "div";
+	@Input() href: string = null;
 	@Input() renderIcon: TemplateRef<any>;
-	@Input() size: Number = 48;
-	@Input() stacked: Boolean;
+	@Input() size = 48;
+	@Input() stacked: boolean;
 	@Input() shape: "circle" | "square" | "rounded-square" = "circle";
-	@Input() subtitle: String;
-	@Input() title: String;
+	@Input() subtitle: string;
+	@Input() title: string;
 
-	@Output() onClick = new EventEmitter<any>();
-	@Output() onMouseEnter = new EventEmitter<any>();
-	@Output() onMouseOver = new EventEmitter<any>();
-	@Output() onMouseOut = new EventEmitter<any>();
-	@Output() onMouseLeave = new EventEmitter<any>();
-	@Output() onMouseMove = new EventEmitter<any>();
+	@Output() click: EventEmitter<any> = new EventEmitter<any>();
+	@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>();
+	@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>();
+	@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>();
+	@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>();
+	@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>();
 
 	namespace = `${prefix}--cc--shape-node`;
 	component = "div";
@@ -103,8 +103,8 @@ export class ShapeNodeComponent implements OnInit {
 	ngOnInit() {
 		if (this.href) {
 			this.component = "a";
-		} else if (this.onClick) {
-			this.component = "button";
+		} else {
+			this.component = this.as;
 		}
 	}
 

@@ -12,7 +12,7 @@ const { prefix } = settings;
 		</div>
 		<div attr.class="{{ namespace + '__body' }}">
             <div attr.class="{{ namespace + '__title' }}">{{title}}</div>
-            <div attr.class="{{ namespace + '__description' }}">{{description}}</div>
+            <div attr.class="{{ namespace + '__description' }}">{{subtitle}}</div>
 			<div *ngIf="label" attr.class="{{ namespace + '__label' }}">{{label}}</div>
 		</div>
 		<div *ngIf="renderAction" attr.class="{{ namespace + '__action' }}" >
@@ -24,7 +24,7 @@ const { prefix } = settings;
 
 export class CardNodeComponent {
 	@Input() color;
-	@Input() description;
+	@Input() subtitle;
 	@Input() label;
 	@Input() stacked;
 	@Input() title;
