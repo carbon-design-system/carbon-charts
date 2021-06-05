@@ -1,2 +1,2 @@
-import ShapeNode from "./ShapeNode";
+import ShapeNode from './ShapeNode';
 export default ShapeNode;

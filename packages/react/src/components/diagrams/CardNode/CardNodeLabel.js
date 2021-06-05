@@ -4,9 +4,11 @@ import settings from 'carbon-components/src/globals/js/settings';
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
-const CardNodeLabel = ({children}) => <label className={`${namespace}__label`}>{children}</label>;
+const CardNodeLabel = ({ children }) => (
+	<label className={`${namespace}__label`}>{children}</label>
+);
 
-export {CardNodeLabel};
+export { CardNodeLabel };
 
 CardNodeLabel.propTypes = {
 	/**

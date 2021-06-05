@@ -6,18 +6,18 @@ const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
 const CardNode = ({
-		as = "div",
-		children,
-		color,
-		href = null,
-		onMouseEnter = null,
-		onMouseOver = null,
-		onMouseOut = null,
-		onMouseLeave = null,
-		onMouseMove = null,
-		onClick = null,
-		stacked
-	}) => {
+	as = 'div',
+	children,
+	color,
+	href = null,
+	onMouseEnter = null,
+	onMouseOver = null,
+	onMouseOut = null,
+	onMouseLeave = null,
+	onMouseMove = null,
+	onClick = null,
+	stacked,
+}) => {
 	let Component = 'div';
 
 	if (as !== 'div') {
@@ -43,8 +43,7 @@ const CardNode = ({
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			style={{ borderColor: color }}
-			tabIndex={0}
-		>
+			tabIndex={0}>
 			{children}
 		</Component>
 	);
@@ -62,8 +61,8 @@ CardNode.propTypes = {
 	children: PropTypes.node,
 
 	/**
-	* Specify the node's border color
-	*/
+	 * Specify the node's border color
+	 */
 	color: PropTypes.string,
 
 	/**
@@ -103,7 +102,7 @@ CardNode.propTypes = {
 	onMouseMove: PropTypes.func,
 
 	/**
-	* Specify whether the node displays a stacked effect
-	*/
-	stacked: PropTypes.bool
+	 * Specify whether the node displays a stacked effect
+	 */
+	stacked: PropTypes.bool,
 };

@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react';
 import CardNode, {
 	CardNodeColumn,
 	CardNodeTitle,
-	CardNodeSubtitle
+	CardNodeSubtitle,
 } from './CardNode';
 import Edge from './Edge';
 import ShapeNode from './ShapeNode';
-import {ArrowRightMarker} from './Marker';
+import { ArrowRightMarker } from './Marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
 import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
@@ -21,51 +21,76 @@ stories.addDecorator((story) => (
 	<div className="container theme--white">{story()}</div>
 ));
 
-
 stories.add('Start here', () => {
+	const paragraphStyle = {
+		style: {
+			maxWidth: 600,
+			fontSize: '1rem',
+			fontWeight: 400,
+			lineHeight: 1.5,
+			letterSpacing: 0,
+		},
+	};
 
-	const paragraphStyle = { style: {
-		maxWidth: 600,
-		fontSize: "1rem",
-		fontWeight: 400,
-		lineHeight: 1.5,
-		letterSpacing: 0,
-	} };
+	const h3Style = {
+		style: {
+			paddingTop: '1rem',
+		},
+	};
 
-	const h3Style = { style: {
-		paddingTop: "1rem"
-	} };
-
-	const h2Style = { style: {
-		paddingTop: "2rem"
-	} };
+	const h2Style = {
+		style: {
+			paddingTop: '2rem',
+		},
+	};
 
 	return (
 		<div>
 			<h1>Diagrams</h1>
 
-			<p {...paragraphStyle}>React components for building diagram experiences, using the Carbon Design System.</p>
+			<p {...paragraphStyle}>
+				React components for building diagram experiences, using the
+				Carbon Design System.
+			</p>
 
-			<p {...paragraphStyle}>Note that Carbon Charts does not provide layouts for diagrams. These components are intended to be used as components within graphs and diagram layouts. You can create diagrams using these components, alongside graphing libraries, or compose your own layouts.</p>
+			<p {...paragraphStyle}>
+				Note that Carbon Charts does not provide layouts for diagrams.
+				These components are intended to be used as components within
+				graphs and diagram layouts. You can create diagrams using these
+				components, alongside graphing libraries, or compose your own
+				layouts.
+			</p>
 
 			<h2 {...h2Style}>Examples</h2>
 
 			<h3 {...h3Style}>Simple static layout</h3>
 
-			<p {...paragraphStyle}>A simple composed diagram, using defined x and y coordinates. <a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">View source</a></p>
+			<p {...paragraphStyle}>
+				A simple composed diagram, using defined x and y coordinates.{' '}
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+					View source
+				</a>
+			</p>
 
 			<SimpleStatic />
 
 			<h3 {...h3Style}>Programmatic static layout</h3>
 
-			<p {...paragraphStyle}>A composed diagram, rendered using arrays of defined x and y coordinates. <a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">View source</a></p>
+			<p {...paragraphStyle}>
+				A composed diagram, rendered using arrays of defined x and y
+				coordinates.{' '}
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+					View source
+				</a>
+			</p>
 
 			<ProgrammaticStatic />
 
 			<h3 {...h3Style}>Layouts using external dependencies</h3>
 
-			<p {...paragraphStyle}>Coming soon. Examples of layouts using external dependencies</p>
-
+			<p {...paragraphStyle}>
+				Coming soon. Examples of layouts using external dependencies
+			</p>
 		</div>
 	);
 });
@@ -73,12 +98,12 @@ stories.add('Start here', () => {
 const SimpleStatic = () => (
 	<svg height="124" width="600">
 		<defs>
-			<ArrowRightMarker id={"marker"} />
+			<ArrowRightMarker id={'marker'} />
 		</defs>
 		<Edge
 			source={{ x: 0, y: 48 }}
 			target={{ x: 396, y: 48 }}
-			markerEnd={"marker"}
+			markerEnd={'marker'}
 			variant={'dash-sm'}
 		/>
 
@@ -101,10 +126,14 @@ const SimpleStatic = () => (
 		<foreignObject
 			style={{ overflow: 'visible' }}
 			transform={`translate(${400},${16})`}>
-			<ShapeNode title={'Title'} size={ShapeNodeSize} renderIcon={<Wikis16 />} />
+			<ShapeNode
+				title={'Title'}
+				size={ShapeNodeSize}
+				renderIcon={<Wikis16 />}
+			/>
 		</foreignObject>
 	</svg>
-)
+);
 
 const ProgrammaticStatic = () => {
 	const nodeData = [
@@ -170,9 +199,7 @@ const ProgrammaticStatic = () => {
 				/>
 			) : (
 				<CardNode>
-					<CardNodeColumn>
-						{node.icon}
-					</CardNodeColumn>
+					<CardNodeColumn>{node.icon}</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
 						<CardNodeSubtitle>Description</CardNodeSubtitle>
@@ -197,5 +224,4 @@ const ProgrammaticStatic = () => {
 			{nodes}
 		</svg>
 	);
-}
-
+};

@@ -1,2 +1,2 @@
-import Edge from "./Edge";
+import Edge from './Edge';
 export default Edge;

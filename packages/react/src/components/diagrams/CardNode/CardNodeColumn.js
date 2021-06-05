@@ -4,9 +4,16 @@ import settings from 'carbon-components/src/globals/js/settings';
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
-const CardNodeColumn = ({children, farsideColumn}) => <div className={`${namespace}__column ${farsideColumn && `${namespace}__column--farside` }`}>{children}</div>;
+const CardNodeColumn = ({ children, farsideColumn }) => (
+	<div
+		className={`${namespace}__column ${
+			farsideColumn && `${namespace}__column--farside`
+		}`}>
+		{children}
+	</div>
+);
 
-export {CardNodeColumn};
+export { CardNodeColumn };
 
 CardNodeColumn.propTypes = {
 	/**
@@ -15,7 +22,7 @@ CardNodeColumn.propTypes = {
 	children: PropTypes.node,
 
 	/**
-	* Specify whether this is the last column
-	*/
+	 * Specify whether this is the last column
+	 */
 	farsideColumn: PropTypes.bool,
 };

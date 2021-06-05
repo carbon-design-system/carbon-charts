@@ -5,5 +5,5 @@ export {
 	CircleMarker,
 	DiamondMarker,
 	SquareMarker,
-	TeeMarker
-} from "./Marker";
+	TeeMarker,
+} from './Marker';

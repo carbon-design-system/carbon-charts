@@ -1,11 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CardNode, { CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitle } from '.';
+import CardNode, {
+	CardNodeColumn,
+	CardNodeSubtitle,
+	CardNodeLabel,
+	CardNodeTitle,
+} from '.';
 import { User16, ChevronDown16 } from '@carbon/icons-react';
 
 const stories = storiesOf('Diagrams|Nodes/Card', module);
 stories.addDecorator((story) => (
-	<div className="container theme--white" style={{ maxWidth: 400 }}>{story()}</div>
+	<div className="container theme--white" style={{ maxWidth: 400 }}>
+		{story()}
+	</div>
 ));
 
 stories.add('Default', () => (
@@ -27,7 +34,7 @@ stories.add('Stacked', () => (
 ));
 
 stories.add('Color', () => (
-	<CardNode color={'#8a3ffc'} >
+	<CardNode color={'#8a3ffc'}>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
@@ -48,7 +55,7 @@ stories.add('With icon', () => (
 ));
 
 stories.add('As button', () => (
-	<CardNode onClick={()=> {}}>
+	<CardNode onClick={() => {}}>
 		<CardNodeColumn>
 			<User16 />
 		</CardNodeColumn>

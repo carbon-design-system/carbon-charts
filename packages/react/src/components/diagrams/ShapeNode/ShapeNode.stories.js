@@ -22,7 +22,7 @@ stories.add('Rounded square', () => (
 ));
 
 stories.add('As button', () => (
-	<ShapeNode title={'Title'} onClick={()=>{}} renderIcon={<User16 />} />
+	<ShapeNode title={'Title'} onClick={() => {}} renderIcon={<User16 />} />
 ));
 
 stories.add('As link', () => (
@@ -31,6 +31,6 @@ stories.add('As link', () => (
 
 stories.add('Inherited dimensions', () => (
 	<div style={{ height: 64, width: 64 }}>
-		<ShapeNode title={'Title'} renderIcon={<User16 />} size={"100%"} />
+		<ShapeNode title={'Title'} renderIcon={<User16 />} size={'100%'} />
 	</div>
 ));

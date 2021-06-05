@@ -6,7 +6,7 @@ import classnames from 'classnames';
 const { prefix } = settings;
 
 const ShapeNode = ({
-	as = "div",
+	as = 'div',
 	href = null,
 	onClick = null,
 	onMouseEnter = null,
@@ -17,9 +17,9 @@ const ShapeNode = ({
 	renderIcon,
 	size = 48,
 	stacked,
-	shape = "circle",
+	shape = 'circle',
 	subtitle,
-	title
+	title,
 }) => {
 	const namespace = `${prefix}--cc--shape-node`;
 
@@ -31,7 +31,7 @@ const ShapeNode = ({
 		Component = 'a';
 	} else if (onClick) {
 		Component = 'button';
-	};
+	}
 
 	const circleClasses = classnames(namespace, {
 		[`${namespace}--stacked`]: stacked,
@@ -56,8 +56,7 @@ const ShapeNode = ({
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			style={{ height: size, width: size }}
-			tabIndex={0}
-		>
+			tabIndex={0}>
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
 			<div className={`${namespace}__body`}>
 				{titleElement}
@@ -108,34 +107,34 @@ ShapeNode.propTypes = {
 	onMouseMove: PropTypes.func,
 
 	/**
-	* Function to render your own icon in the underlying button
-	*/
+	 * Function to render your own icon in the underlying button
+	 */
 	renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
 	/**
-	* Specify the height and width of the shape
-	* Can be defined using any CSS length unit (px, %, rem)
-	*/
+	 * Specify the height and width of the shape
+	 * Can be defined using any CSS length unit (px, %, rem)
+	 */
 	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
 	/**
-	* Specify whether the node displays a stacked effect
-	*/
+	 * Specify whether the node displays a stacked effect
+	 */
 	stacked: PropTypes.bool,
 
 	/**
-	* Specify the shape of the node
-	*/
+	 * Specify the shape of the node
+	 */
 	shape: PropTypes.oneOf(['circle', 'square', 'rounded-square']),
 
 	/**
-	* Specify the node's subtitle
-	*/
+	 * Specify the node's subtitle
+	 */
 	subtitle: PropTypes.string,
 
 	/**
-	* Specify the node's title
-	*/
+	 * Specify the node's title
+	 */
 	title: PropTypes.string,
 };
 

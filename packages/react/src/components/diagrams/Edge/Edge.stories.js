@@ -1,7 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Edge from '.';
-import { buildBezierPathString, buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
+import {
+	buildBezierPathString,
+	buildElbowPathString,
+} from '@carbon/charts/components/diagrams/buildPaths';
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
@@ -23,7 +26,7 @@ stories.add('Default', () => (
 stories.add('Color', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge source={linkSource} target={linkTarget} color={"#FB4B53"} />
+			<Edge source={linkSource} target={linkTarget} color={'#FB4B53'} />
 		</g>
 	</svg>
 ));
@@ -76,7 +79,14 @@ stories.add('Bezier', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
 			<Edge
-				path={buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)}
+				path={buildBezierPathString(
+					linkSource,
+					linkTargetCurve,
+					150,
+					280,
+					150,
+					30
+				)}
 			/>
 		</g>
 	</svg>
