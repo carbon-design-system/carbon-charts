@@ -82,6 +82,12 @@ export class Pie extends Component {
 			.sort(null)
 			.padAngle(Configuration.pie.padAngle);
 
+		// set sort function from options
+		const sortFunction = options?.pie?.sortFunction;
+		if (sortFunction) {
+			pieLayout.sort(sortFunction);
+		}
+
 		// Sort pie layout data based off of the indecies the layout creates
 		const pieLayoutData = pieLayout(displayData).sort(
 			(a: any, b: any) => a.index - b.index

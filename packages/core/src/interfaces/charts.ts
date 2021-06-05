@@ -315,6 +315,7 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		sortFunction?: Function;
 	};
 }
 
