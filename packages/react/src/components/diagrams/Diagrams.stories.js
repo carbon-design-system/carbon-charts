@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import CardNode, {
 	CardNodeColumn,
 	CardNodeTitle,
-	CardNodeDescription
+	CardNodeSubtitle
 } from './CardNode';
 import Edge from './Edge';
 import ShapeNode from './ShapeNode';
@@ -45,7 +45,7 @@ stories.add('Composed', () => {
 					</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
-						<CardNodeDescription>Description</CardNodeDescription>
+						<CardNodeSubtitle>Description</CardNodeSubtitle>
 					</CardNodeColumn>
 				</CardNode>
 			</foreignObject>
@@ -128,7 +128,7 @@ stories.add('Programmatic', () => {
 					</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
-						<CardNodeDescription>Description</CardNodeDescription>
+						<CardNodeSubtitle>Description</CardNodeSubtitle>
 					</CardNodeColumn>
 				</CardNode>
 			)}

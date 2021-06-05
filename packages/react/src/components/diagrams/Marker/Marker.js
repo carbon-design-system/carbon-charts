@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import settings from 'carbon-components/src/globals/js/settings';
 import { arrowLeft, arrowRight, circle, diamond, square, tee } from "./markerDefinitions";
 
@@ -42,3 +43,53 @@ export {
 	SquareMarker,
 	TeeMarker
 };
+
+
+Marker.propTypes = {
+	/**
+	* Specify a path string
+	*/
+	d: PropTypes.string,
+
+
+	/**
+	* Specify the marker's color
+	*/
+	color: PropTypes.string,
+
+	/**
+	* Specify an ID for the marker
+	*/
+	id: PropTypes.string,
+
+	/**
+	* Specify the orient attribute for the marker
+	*/
+	orient: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	/**
+	* Specify the height attribute for the marker
+	*/
+	height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	/**
+	* Specify the width attribute for the marker
+	*/
+	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	/**
+	* Specify whether this marker appears at the start or end of a line
+	*/
+	position: PropTypes.oneOf(['end', 'start']),
+
+	/**
+	* Specify the refX attribute for the marker
+	*/
+	refX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	/**
+	* Specify the refY attribute for the marker
+	*/
+	refY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
+
