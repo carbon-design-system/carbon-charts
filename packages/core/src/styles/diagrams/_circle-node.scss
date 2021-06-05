@@ -28,7 +28,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--circle-node--button {
-		font-family: inherit;
+		font-family: carbon--font-family('sans');
 		text-align: left;
 		width: 100%;
 	}

@@ -1,8 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Card from './CardNode';
+import CardNode, {
+	CardNodeColumn,
+	CardNodeTitle,
+	CardNodeDescription
+} from './CardNode';
 import Edge from './Edge';
-import Circle from './CircleNode';
+import CircleNode from './CircleNode';
 import {ArrowRightMarker} from './Marker';
 
 import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
@@ -10,7 +14,7 @@ import { elbow } from './Edge/buildPath';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
-const circleSize = 64;
+const CircleNodeSize = 64;
 
 const stories = storiesOf('Diagrams|Graph', module);
 stories.addDecorator((story) => (
@@ -35,17 +39,21 @@ stories.add('Composed', () => {
 				transform={`translate(${100},${100})`}
 				height={nodeHeight}
 				width={nodeWidth}>
-				<Card
-					title={'Title'}
-					description={'Description'}
-					renderIcon={<User16 />}
-				/>
+				<CardNode>
+					<CardNodeColumn>
+						<User16 />
+					</CardNodeColumn>
+					<CardNodeColumn>
+						<CardNodeTitle>Title</CardNodeTitle>
+						<CardNodeDescription>Description</CardNodeDescription>
+					</CardNodeColumn>
+				</CardNode>
 			</foreignObject>
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
 				transform={`translate(${600},${100})`}>
-				<Circle title={'Title'} size={circleSize} renderIcon={<Wikis16 />} />
+				<CircleNode title={'Title'} size={CircleNodeSize} renderIcon={<Wikis16 />} />
 			</foreignObject>
 		</svg>
 	);
@@ -60,9 +68,9 @@ stories.add('Programmatic', () => {
 			x: 600,
 			y: 200,
 			icon: <Debug16 />,
-			circle: true,
-			nodeWidth: circleSize,
-			nodeHeight: circleSize,
+			CircleNode: true,
+			nodeWidth: CircleNodeSize,
+			nodeHeight: CircleNodeSize,
 		},
 		{ id: 'd', x: 20, y: 280, icon: <Wikis16 />, nodeWidth, nodeHeight },
 	];
@@ -106,19 +114,23 @@ stories.add('Programmatic', () => {
 			transform={`translate(${node.x},${node.y})`}
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
-			{node.circle ? (
-				<Circle
+			{node.CircleNode ? (
+				<CircleNode
 					title={'Title'}
-					size={circleSize}
+					size={CircleNodeSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>
 			) : (
-				<Card
-					title={'Title'}
-					description={'Description'}
-					renderIcon={node.icon}
-				/>
+				<CardNode>
+					<CardNodeColumn>
+						{node.icon}
+					</CardNodeColumn>
+					<CardNodeColumn>
+						<CardNodeTitle>Title</CardNodeTitle>
+						<CardNodeDescription>Description</CardNodeDescription>
+					</CardNodeColumn>
+				</CardNode>
 			)}
 		</foreignObject>
 	));
