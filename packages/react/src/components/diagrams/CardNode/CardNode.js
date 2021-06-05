@@ -1,7 +1,7 @@
 import React from 'react';
-import settings from 'carbon-components/src/globals/js/settings';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
+import settings from 'carbon-components/src/globals/js/settings';
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
@@ -28,15 +28,35 @@ const CardNode = ({ as = "div", children, color, href = null, onClick = null, st
 	);
 };
 
-const CardNodeColumn = ({children, farsideColumn}) => <div className={`${namespace}__column ${farsideColumn && `${namespace}__column--farside` }`}>{children}</div>;
-const CardNodeDescription = ({children}) => <div className={`${namespace}__description`}>{children}</div>;
-const CardNodeLabel = ({children}) => <label className={`${namespace}__label`}>{children}</label>;
-const CardNodeTitle = ({children}) => <div className={`${namespace}__title`}>{children}</div>;
+export default CardNode;
 
-export {
-	CardNode as default,
-	CardNodeColumn,
-	CardNodeDescription,
-	CardNodeLabel,
-	CardNodeTitle
-}
+CardNode.propTypes = {
+	/** Provide a custom element to be rendered instead of the default */
+	as: PropTypes.elementType,
+
+	/**
+	 * Pass in the children that will be rendered within the CardNode
+	 */
+	children: PropTypes.node,
+
+	/**
+	* Specify the node's border color
+	*/
+	color: PropTypes.string,
+
+	/**
+	 * Optionally specify an href for the CardNode to become an `<a>` element
+	 */
+	href: PropTypes.string,
+
+	/**
+	 * Provide an optional function to be called when the CardNode
+	 * is clicked, turning the CardNode into a `<button>` element
+	 */
+	onClick: PropTypes.func,
+
+	/**
+	* Specify whether the node displays a stacked effect
+	*/
+	stacked: PropTypes.bool
+};

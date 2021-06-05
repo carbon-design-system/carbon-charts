@@ -85,7 +85,7 @@
 		margin: 0;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--card-node__description {
+	.#{$prefix}--#{$charts-prefix}--card-node__subtitle {
 		@include carbon--type-style($name: body-short-01);
 		margin: 0;
 	}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CardNode, { CardNodeColumn, CardNodeDescription, CardNodeLabel, CardNodeTitle } from '.';
+import CardNode, { CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitle } from '.';
 import { User16, ChevronDown16 } from '@carbon/icons-react';
 
 const stories = storiesOf('Diagrams|Nodes/Card', module);
@@ -12,7 +12,7 @@ stories.add('Default', () => (
 	<CardNode>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -21,7 +21,7 @@ stories.add('Stacked', () => (
 	<CardNode stacked>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -30,7 +30,7 @@ stories.add('Color', () => (
 	<CardNode color={'#8a3ffc'} >
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -42,7 +42,7 @@ stories.add('With icon', () => (
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -54,7 +54,7 @@ stories.add('As button', () => (
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -66,7 +66,7 @@ stories.add('As link', () => (
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
 ));
@@ -75,7 +75,7 @@ stories.add('With label', () => (
 	<CardNode>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 			<CardNodeLabel>Label</CardNodeLabel>
 		</CardNodeColumn>
 	</CardNode>
@@ -88,7 +88,7 @@ stories.add('With third column', () => (
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
-			<CardNodeDescription>Description</CardNodeDescription>
+			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 		<CardNodeColumn farsideColumn>
 			<ChevronDown16 />

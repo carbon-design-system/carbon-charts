@@ -1,7 +1,13 @@
+import CardNode from "./CardNode";
+import {CardNodeColumn} from "./CardNodeColumn";
+import {CardNodeLabel} from "./CardNodeLabel";
+import {CardNodeSubtitle} from "./CardNodeSubtitle";
+import {CardNodeTitle} from "./CardNodeTitle";
+
 export {
-	default,
+	CardNode as default,
 	CardNodeColumn,
-	CardNodeDescription,
+	CardNodeSubtitle,
 	CardNodeTitle,
 	CardNodeLabel
-} from "./CardNode";
+};

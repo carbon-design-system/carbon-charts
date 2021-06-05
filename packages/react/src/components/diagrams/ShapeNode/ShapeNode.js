@@ -56,6 +56,37 @@ ShapeNode.propTypes = {
 	 * is clicked, turning the CardNode into a `<button>` element
 	 */
 	onClick: PropTypes.func,
+
+	/**
+	* Function to render your own icon in the underlying button
+	*/
+	renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+	/**
+	* Specify the height and width of the shape
+	* Can be defined using any CSS length unit (px, %, rem)
+	*/
+	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	/**
+	* Specify whether the node displays a stacked effect
+	*/
+	stacked: PropTypes.bool,
+
+	/**
+	* Specify the shape of the node
+	*/
+	shape: PropTypes.oneOf(['circle', 'square', 'rounded-square']),
+
+	/**
+	* Specify the node's subtitle
+	*/
+	subtitle: PropTypes.string,
+
+	/**
+	* Specify the node's title
+	*/
+	title: PropTypes.string,
 };
 
 export default ShapeNode;
