@@ -57,7 +57,7 @@ stories.add('Start here', () => {
 				Note that Carbon Charts does not provide layouts for diagrams.
 				These components are intended to be used as components within
 				graphs and diagram layouts. You can create diagrams using these
-				components, alongside graphing libraries, or compose your own
+				components alongside graphing libraries, or compose your own
 				layouts.
 			</p>
 
@@ -66,7 +66,7 @@ stories.add('Start here', () => {
 			<h3 {...h3Style}>Simple static layout</h3>
 
 			<p {...paragraphStyle}>
-				A simple composed diagram, using defined x and y coordinates.{' '}
+				A simple composed diagram, using statically defined x and y coordinates.{' '}
 				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
@@ -77,7 +77,7 @@ stories.add('Start here', () => {
 			<h3 {...h3Style}>Programmatic static layout</h3>
 
 			<p {...paragraphStyle}>
-				A composed diagram, rendered using arrays of defined x and y
+				A composed diagram, rendered using arrays of statically defined x and y
 				coordinates.{' '}
 				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
 					View source
@@ -112,7 +112,7 @@ const SimpleStatic = () => (
 			transform={`translate(${0},${16})`}
 			height={nodeHeight}
 			width={nodeWidth}>
-			<CardNode>
+			<CardNode onClick={()=>{}}>
 				<CardNodeColumn>
 					<User16 />
 				</CardNodeColumn>
@@ -129,6 +129,7 @@ const SimpleStatic = () => (
 			<ShapeNode
 				title={'Title'}
 				size={ShapeNodeSize}
+				onClick={()=>{}}
 				renderIcon={<Wikis16 />}
 			/>
 		</foreignObject>
@@ -137,8 +138,8 @@ const SimpleStatic = () => (
 
 const ProgrammaticStatic = () => {
 	const nodeData = [
-		{ id: 'a', x: 0, y: 0, icon: <User16 />, nodeWidth, nodeHeight },
-		{ id: 'b', x: 250, y: 0, icon: <Wikis16 />, nodeWidth, nodeHeight },
+		{ id: 'a', x: 0, y: 16, icon: <User16 />, nodeWidth, nodeHeight },
+		{ id: 'b', x: 250, y: 16, icon: <Wikis16 />, nodeWidth, nodeHeight },
 		{
 			id: 'c',
 			x: 600,
@@ -192,13 +193,14 @@ const ProgrammaticStatic = () => {
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
 				<ShapeNode
+					onClick={()=>{}}
 					title={'Title'}
 					size={ShapeNodeSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>
 			) : (
-				<CardNode>
+				<CardNode onClick={()=>{}}>
 					<CardNodeColumn>{node.icon}</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
