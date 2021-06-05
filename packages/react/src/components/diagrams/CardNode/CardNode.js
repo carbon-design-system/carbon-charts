@@ -29,9 +29,9 @@ const CardNode = ({ as = "div", children, color, href = null, onClick = null, st
 };
 
 const CardNodeColumn = ({children, farsideColumn}) => <div className={`${namespace}__column ${farsideColumn && `${namespace}__column--farside` }`}>{children}</div>;
-const CardNodeDescription = ({children}) => <p className={`${namespace}__description`}>{children}</p>;
+const CardNodeDescription = ({children}) => <div className={`${namespace}__description`}>{children}</div>;
 const CardNodeLabel = ({children}) => <label className={`${namespace}__label`}>{children}</label>;
-const CardNodeTitle = ({children}) => <h2 className={`${namespace}__title`}>{children}</h2>;
+const CardNodeTitle = ({children}) => <div className={`${namespace}__title`}>{children}</div>;
 
 export {
 	CardNode as default,
