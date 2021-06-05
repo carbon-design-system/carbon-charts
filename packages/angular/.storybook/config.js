@@ -10,7 +10,7 @@ setOptions({
 });
 
 // load global styles
-require('!style-loader!css-loader!sass-loader!../../core/src/styles/styles-white.scss');
+require("!style-loader!css-loader!@carbon/charts/demo/styles.css");
 
 const req = require.context('../', true, /.stories.ts$/);
 function loadStories() {
