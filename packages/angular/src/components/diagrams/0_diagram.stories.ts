@@ -93,7 +93,7 @@ const SimpleStatic = `
 
 		<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(0, 16)'">
 			<xhtml:div>
-				<ibm-diagram-card-node>
+				<ibm-diagram-card-node as="button">
 					<ibm-diagram-card-node-column>
 						<svg ibmIconUser size="16"></svg>
 					</ibm-diagram-card-node-column>
@@ -111,7 +111,7 @@ const SimpleStatic = `
 
 		<svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(400, 16)'">
 			<xhtml:div>
-				<ibm-diagram-shape-node title="Title" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
+				<ibm-diagram-shape-node as="button" title="Title" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
 			</xhtml:div>
 		</svg:foreignObject>
 	</svg>
@@ -175,10 +175,10 @@ const ProgrammaticStatic = `
 		<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
 		<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
 			<xhtml:div *ngIf="node.circle">
-				<ibm-diagram-shape-node [title]="'Title'" [subtitle]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-shape-node>
+				<ibm-diagram-shape-node as="button" [title]="'Title'" [subtitle]="'Description'" [size]="circleSize" [renderIcon]="(node.icon === 'user') ? userTemplate : wikiTemplate"></ibm-diagram-shape-node>
 			</xhtml:div>
 			<xhtml:div *ngIf="!node.circle">
-				<ibm-diagram-card-node>
+				<ibm-diagram-card-node as="button">
 					<ibm-diagram-card-node-column>
 						<svg ibmIconUser size="16"></svg>
 					</ibm-diagram-card-node-column>
