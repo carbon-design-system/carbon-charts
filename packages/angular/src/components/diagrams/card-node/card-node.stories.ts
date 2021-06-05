@@ -1,7 +1,6 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
 import { CardNodeModule } from "./card-node.module";
-import { ScreenModule } from "@carbon/icons-angular";
-import { DialogModule } from "carbon-components-angular";
+import { ScreenModule, ChevronDownModule } from "@carbon/icons-angular";
 
 const getTemplate = demo => `
 	<div class="container theme--white" style="max-width: 400px; margin: 2rem">
@@ -12,18 +11,40 @@ const getTemplate = demo => `
 storiesOf("Diagrams|Nodes/Card", module)
 .addDecorator(
 	moduleMetadata({
-		imports: [CardNodeModule, ScreenModule, DialogModule]
+		imports: [CardNodeModule, ScreenModule, ChevronDownModule]
 	})
 )
 .add("Default", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description"></ibm-diagram-card-node>`),
+	template: getTemplate(`
+		<ibm-diagram-card-node>
+			<ibm-diagram-card-node-column>
+				<ibm-diagram-card-node-title>
+					{{ title }}
+				</ibm-diagram-card-node-title>
+				<ibm-diagram-card-node-subtitle>
+					{{ description }}
+				</ibm-diagram-card-node-subtitle>
+			</ibm-diagram-card-node-column>
+		</ibm-diagram-card-node>
+	`),
 	props: {
 		title: "Title",
 		description: "Description"
 	},
 }))
 .add("Stacked", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [stacked]="stacked"></ibm-diagram-card-node>`),
+	template: getTemplate(`
+		<ibm-diagram-card-node [stacked]="stacked">
+			<ibm-diagram-card-node-column>
+				<ibm-diagram-card-node-title>
+					{{ title }}
+				</ibm-diagram-card-node-title>
+				<ibm-diagram-card-node-subtitle>
+					{{ description }}
+				</ibm-diagram-card-node-subtitle>
+			</ibm-diagram-card-node-column>
+		</ibm-diagram-card-node>
+	`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -31,7 +52,18 @@ storiesOf("Diagrams|Nodes/Card", module)
 	},
 }))
 .add("Color", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [color]="color"></ibm-diagram-card-node>`),
+	template: getTemplate(`
+	<ibm-diagram-card-node [color]="color">
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
+	`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -40,18 +72,82 @@ storiesOf("Diagrams|Nodes/Card", module)
 }))
 .add("With icon", () => ({
 	template: getTemplate(`
-	<ibm-diagram-card-node [title]="title" [subtitle]="description" [renderIcon]="iconTemplate"></ibm-diagram-card-node>
-	<ng-template #iconTemplate>
-		<svg ibmIconScreen size="16"></svg>
-	</ng-template>
+	<ibm-diagram-card-node [color]="color">
+		<ibm-diagram-card-node-column>
+			<svg ibmIconScreen size="16"></svg>
+		</ibm-diagram-card-node-column>
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
 	`),
 	props: {
 		title: "Title",
 		description: "Description"
 	},
 }))
+.add("As button", () => ({
+	template: getTemplate(`
+	<ibm-diagram-card-node [as]="component">
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
+	`),
+	props: {
+		title: "Title",
+		description: "Description",
+		component: "button"
+	},
+}))
+.add("As link", () => ({
+	template: getTemplate(`
+	<ibm-diagram-card-node [href]="href">
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
+	`),
+	props: {
+		title: "Title",
+		description: "Description",
+		href: "#"
+	},
+}))
 .add("With label", () => ({
-	template: getTemplate(`<ibm-diagram-card-node [title]="title" [subtitle]="description" [label]="label"></ibm-diagram-card-node>`),
+	template: getTemplate(`
+	<ibm-diagram-card-node [color]="color">
+		<ibm-diagram-card-node-column>
+			<svg ibmIconScreen size="16"></svg>
+		</ibm-diagram-card-node-column>
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+			<ibm-diagram-card-node-label>
+				{{ label }}
+			</ibm-diagram-card-node-label>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
+	`),
 	props: {
 		title: "Title",
 		description: "Description",
@@ -60,31 +156,27 @@ storiesOf("Diagrams|Nodes/Card", module)
 }))
 .add("With action", () => ({
 	template: getTemplate(`
-		<ibm-diagram-card-node [title]="title" [subtitle]="description" [label]="label" [renderAction]="actionTemplate"></ibm-diagram-card-node>
-		<ng-template #actionTemplate>
-			<ibm-overflow-menu>
-				<ibm-overflow-menu-option>
-					Stop app
-				</ibm-overflow-menu-option>
-				<ibm-overflow-menu-option>
-					Restart app
-				</ibm-overflow-menu-option>
-				<ibm-overflow-menu-option>
-					Rename app
-				</ibm-overflow-menu-option>
-				<ibm-overflow-menu-option>
-					Edit routes and access
-				</ibm-overflow-menu-option>
-				<ibm-overflow-menu-option type="danger">
-					Delete app
-				</ibm-overflow-menu-option>
-			</ibm-overflow-menu>
-		</ng-template>
+	<ibm-diagram-card-node [color]="color">
+		<ibm-diagram-card-node-column>
+			<svg ibmIconScreen size="16"></svg>
+		</ibm-diagram-card-node-column>
+		<ibm-diagram-card-node-column>
+			<ibm-diagram-card-node-title>
+				{{ title }}
+			</ibm-diagram-card-node-title>
+			<ibm-diagram-card-node-subtitle>
+				{{ description }}
+			</ibm-diagram-card-node-subtitle>
+		</ibm-diagram-card-node-column>
+		<ibm-diagram-card-node-column [farsideColumn]="farsideColumn">
+			<svg ibmIconChevronDown size="16"></svg>
+		</ibm-diagram-card-node-column>
+	</ibm-diagram-card-node>
 	`),
 	props: {
 		title: "Title",
 		description: "Description",
-		label: "Label"
+		farsideColumn: true
 	},
 }))
 ;

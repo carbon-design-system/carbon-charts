@@ -10,6 +10,15 @@ import {
 	MarkerTeeComponent
 } from "./marker.component";
 
+export {
+	MarkerComponent,
+	MarkerArrowLeftComponent,
+	MarkerArrowRightComponent,
+	MarkerShapeNodeComponent,
+	MarkerDiamondComponent,
+	MarkerSquareComponent,
+	MarkerTeeComponent
+};
 @NgModule({
 	declarations: [
 		MarkerComponent,
