@@ -1,6 +1,13 @@
 import { Component, Input, OnInit } from "@angular/core";
 import settings from "carbon-components/src/globals/js/settings";
-import { arrowLeft, arrowRight, circle, diamond, square, tee } from "./markerDefinitions";
+import {
+	arrowLeft,
+	arrowRight,
+	circle,
+	diamond,
+	square,
+	tee,
+} from "@carbon/charts/components/diagrams/markerDefinitions";
 
 const { prefix } = settings;
 

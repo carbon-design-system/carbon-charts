@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
 import { EdgeModule } from "./edge.module";
-import { elbow, bezier } from "./buildPath";
+import { buildBezierPathString, buildElbowPathString } from "@carbon/charts/components/diagrams/buildPaths";
 
 const linkSource = { x: 0, y: 0 };
 const linkTarget = { x: 400, y: 0 };
@@ -12,7 +12,7 @@ const getTemplate = demo => `
 	</div>
 `;
 
-storiesOf("Diagrams|Edge", module)
+storiesOf("Diagrams|Edges", module)
 .addDecorator(
 	moduleMetadata({
 		imports: [EdgeModule]
@@ -107,7 +107,7 @@ storiesOf("Diagrams|Edge", module)
 	props: {
 		source: linkSource,
 		target: linkTarget,
-		path: elbow(linkSource, linkTargetCurve)
+		path: buildElbowPathString(linkSource, linkTargetCurve)
 	},
 }))
 .add("Bezier", () => ({
@@ -121,7 +121,7 @@ storiesOf("Diagrams|Edge", module)
 	props: {
 		source: linkSource,
 		target: linkTarget,
-		path: bezier(linkSource, linkTargetCurve, 150, 280, 150, 30)
+		path: buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
 	},
 }))
 ;

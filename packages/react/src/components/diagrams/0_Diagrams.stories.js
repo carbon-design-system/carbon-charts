@@ -66,7 +66,8 @@ stories.add('Start here', () => {
 			<h3 {...h3Style}>Simple static layout</h3>
 
 			<p {...paragraphStyle}>
-				A simple composed diagram, using statically defined x and y coordinates.{' '}
+				A simple composed diagram, using statically defined x and y
+				coordinates.{' '}
 				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
@@ -77,8 +78,8 @@ stories.add('Start here', () => {
 			<h3 {...h3Style}>Programmatic static layout</h3>
 
 			<p {...paragraphStyle}>
-				A composed diagram, rendered using arrays of statically defined x and y
-				coordinates.{' '}
+				A composed diagram, rendered using arrays of statically defined
+				x and y coordinates.{' '}
 				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
@@ -112,7 +113,7 @@ const SimpleStatic = () => (
 			transform={`translate(${0},${16})`}
 			height={nodeHeight}
 			width={nodeWidth}>
-			<CardNode onClick={()=>{}}>
+			<CardNode onClick={() => {}}>
 				<CardNodeColumn>
 					<User16 />
 				</CardNodeColumn>
@@ -129,7 +130,7 @@ const SimpleStatic = () => (
 			<ShapeNode
 				title={'Title'}
 				size={ShapeNodeSize}
-				onClick={()=>{}}
+				onClick={() => {}}
 				renderIcon={<Wikis16 />}
 			/>
 		</foreignObject>
@@ -193,14 +194,14 @@ const ProgrammaticStatic = () => {
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
 				<ShapeNode
-					onClick={()=>{}}
+					onClick={() => {}}
 					title={'Title'}
 					size={ShapeNodeSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>
 			) : (
-				<CardNode onClick={()=>{}}>
+				<CardNode onClick={() => {}}>
 					<CardNodeColumn>{node.icon}</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
