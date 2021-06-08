@@ -82,10 +82,8 @@ export class Pie extends Component {
 			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
 			.padAngle(Configuration.pie.padAngle);
 
-		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(displayData).sort(
-			(a: any, b: any) => a.index - b.index
-		);
+		// Add data to pie layout
+		const pieLayoutData = pieLayout(displayData);
 
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, 'g.slices')
