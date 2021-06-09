@@ -155,12 +155,14 @@ export class Modal extends Component {
 								<div class="bx--table-header-label">${primaryRange.label}</div>
 							</th>
 							${
-								secondaryDomain &&
-								`<th scope="col"><div class="bx--table-header-label">${secondaryDomain.label}</div></th>`
+								secondaryDomain
+									? `<th scope="col"><div class="bx--table-header-label">${secondaryDomain.label}</div></th>`
+									: ``
 							}
 							${
-								secondaryRange &&
-								`<th scope="col"><div class="bx--table-header-label">${secondaryRange.label}</div></th>`
+								secondaryRange
+									? `<th scope="col"><div class="bx--table-header-label">${secondaryRange.label}</div></th>`
+									: ``
 							}
 						</tr>
 					</thead>
@@ -187,24 +189,34 @@ export class Modal extends Component {
 												  ].toLocaleString()
 										}</td>
 								${
-									secondaryDomain &&
-									`<td>${
-										datum[secondaryDomain.identifier] ===
-										null
-											? '&ndash;'
-											: datum[secondaryDomain.identifier]
-									}
+									secondaryDomain
+										? `<td>${
+												datum[
+													secondaryDomain.identifier
+												] === null
+													? '&ndash;'
+													: datum[
+															secondaryDomain
+																.identifier
+													  ]
+										  }
 								</td>`
+										: ''
 								}
 								${
-									secondaryRange &&
-									`<td>${
-										datum[secondaryRange.identifier] ===
-										null
-											? '&ndash;'
-											: datum[secondaryRange.identifier]
-									}
+									secondaryRange
+										? `<td>${
+												datum[
+													secondaryRange.identifier
+												] === null
+													? '&ndash;'
+													: datum[
+															secondaryRange
+																.identifier
+													  ]
+										  }
 								</td>`
+										: ''
 								}
 							</tr>
 						`
