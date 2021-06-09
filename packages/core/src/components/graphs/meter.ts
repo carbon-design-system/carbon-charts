@@ -18,7 +18,6 @@ export class Meter extends Component {
 			(accumulator, datum) => accumulator + datum.value,
 			0
 		);
-
 		return max;
 	}
 
@@ -48,6 +47,11 @@ export class Meter extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.getOptions();
+		const proportional = Tools.getProperty(
+			options,
+			'meter',
+			'proportional'
+		);
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 
@@ -88,11 +92,17 @@ export class Meter extends Component {
 			.classed('value', true)
 			.merge(valued)
 			.attr('x', (d) => {
-				console.log(d);
 				return d.x;
 			})
 			.attr('y', 0)
-			.attr('height', Tools.getProperty(options, 'meter', 'height'))
+			.attr(
+				'height',
+				Tools.getProperty(options, 'meter', 'height')
+					? Tools.getProperty(options, 'meter', 'height')
+					: proportional
+					? 16
+					: 8
+			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
@@ -116,7 +126,9 @@ export class Meter extends Component {
 			.attr('aria-label', (d) => d.value);
 
 		// draw the peak
-		const peakValue = Tools.getProperty(options, 'meter', 'peak');
+		const peakValue = proportional
+			? null
+			: Tools.getProperty(options, 'meter', 'peak');
 
 		// update the peak if it is less than the value, it should be equal to the value
 		const updatedPeak =

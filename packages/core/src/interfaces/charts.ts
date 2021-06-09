@@ -359,6 +359,7 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		proportional?: boolean;
 		peak?: number;
 		status?: {
 			ranges: Array<{

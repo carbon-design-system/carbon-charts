@@ -42,6 +42,12 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
+		const isProportional = Tools.getProperty(
+			this.model.getOptions(),
+			'meter',
+			'proportional'
+		);
+
 		// Specify what to render inside the graph only
 		const graph = {
 			id: 'meter-graph',
@@ -77,7 +83,11 @@ export class MeterChart extends Chart {
 			new LayoutComponent(
 				this.model,
 				this.services,
-				[titleComponent, titleSpacerComponent, graph],
+				[
+					...(isProportional ? [] : [titleComponent]),
+					...(isProportional ? [] : [titleSpacerComponent]),
+					graph,
+				],
 				{
 					direction: LayoutDirection.COLUMN,
 				}

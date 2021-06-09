@@ -8,6 +8,7 @@ export const meterData = [
 export const meterOptionsWithStatus = {
 	title: 'Meter Chart - with statuses',
 	meter: {
+		proportional: false,
 		peak: 80,
 		status: {
 			ranges: [
@@ -23,6 +24,7 @@ export const meterOptionsWithStatus = {
 export const meterOptionsCustomColor = {
 	title: 'Meter Chart - statuses and custom color',
 	meter: {
+		proportional: false,
 		peak: 70,
 		status: {
 			ranges: [
@@ -43,6 +45,7 @@ export const meterOptionsCustomColor = {
 export const meterOptionsNoStatus = {
 	title: 'Meter Chart - no status',
 	meter: {
+		proportional: false,
 		peak: 70,
 	},
 	height: '100px',
@@ -59,4 +62,15 @@ export const propMeterData = [
 export const propMeterOptions = {
 	title: 'Proportional Meter Chart',
 	height: '100px',
+	legend: {
+		enabled: true,
+	},
+	meter: {
+		proportional: true,
+	},
+	color: {
+		scale: {
+			unused: '#f4f4f4',
+		},
+	},
 };

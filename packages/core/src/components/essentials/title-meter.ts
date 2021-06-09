@@ -9,7 +9,7 @@ export class MeterTitle extends Title {
 	type = 'meter-title';
 
 	render() {
-		const dataset = this.model.getDisplayData();
+		const dataset = this.model.getDisplayData()[0];
 		const options = this.getOptions();
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
@@ -108,7 +108,7 @@ export class MeterTitle extends Title {
 	 * Appends the associated percentage to the end of the title
 	 */
 	appendPercentage() {
-		const dataValue = this.model.getDisplayData().value;
+		const dataValue = this.model.getDisplayData()[0].value;
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getContainerSVG();
