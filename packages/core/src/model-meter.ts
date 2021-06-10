@@ -19,18 +19,23 @@ export class MeterChartModel extends ChartModel {
 		}
 	}
 
-	generateDataLabels(newData) {
-		const dataLabels = {};
-		dataLabels[newData.label] = Configuration.legend.items.status.ACTIVE;
-
-		return dataLabels;
-	}
-
 	getDisplayData() {
 		if (!this.get('data')) {
 			return null;
 		}
-		return this.get('data');
+		const { ACTIVE } = Configuration.legend.items.status;
+		const { groupMapsTo } = this.getOptions().data;
+
+
+		const data = this.get('data');
+		const dataGroups = this.getDataGroups();
+		return data.filter((datum) => {
+			return dataGroups.find(
+				(dataGroup) =>
+					dataGroup.name === datum[groupMapsTo] &&
+					dataGroup.status === ACTIVE
+			);
+		});
 	}
 
 	/**

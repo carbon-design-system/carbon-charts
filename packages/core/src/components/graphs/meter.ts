@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Roles, ColorClassNameTypes, Events } from '../../interfaces';
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale';
@@ -11,9 +11,6 @@ export class Meter extends Component {
 	type = 'meter';
 
 	getMaximumDomain(data) {
-		if (data.length === 1) {
-			return 100;
-		}
 		const max = data.reduce(
 			(accumulator, datum) => accumulator + datum.value,
 			0
@@ -22,9 +19,6 @@ export class Meter extends Component {
 	}
 
 	getStackedBounds(data, scale) {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-
 		let prevX = 0;
 		const newData = data.map((d, i) => {
 			if (i !== 0) {
@@ -59,7 +53,9 @@ export class Meter extends Component {
 			useAttrs: true,
 		});
 		const { groupMapsTo } = options.data;
-		const domainMax = this.getMaximumDomain(data);
+		// all the data is needed to get the max domain, not just the datagroups being shown
+		const domainMax = this.getMaximumDomain(this.model.getData());
+		// const domainMax = this.getMaximumDomain(data);
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
@@ -97,9 +93,7 @@ export class Meter extends Component {
 			.attr('y', 0)
 			.attr(
 				'height',
-				Tools.getProperty(options, 'meter', 'height')
-					? Tools.getProperty(options, 'meter', 'height')
-					: proportional
+				proportional
 					? 16
 					: 8
 			)
@@ -124,6 +118,8 @@ export class Meter extends Component {
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
 			.attr('aria-label', (d) => d.value);
+
+		valued.exit().remove();
 
 		// draw the peak
 		const peakValue = proportional
@@ -165,5 +161,80 @@ export class Meter extends Component {
 
 		// this forces the meter chart to only take up as much height as needed (if no height is provided)
 		this.services.domUtils.setSVGMaxHeight();
+
+		if (proportional) {
+			// Add event listeners to elements and legend
+			this.addLegendListeners();
+			this.addEventListeners();
+		}
+	}
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+		const { groupMapsTo } = this.getOptions().data;
+
+		this.parent
+			.selectAll('rect.value')
+			.transition(
+				this.services.transitions.getTransition(
+					'legend-hover-prop-meter'
+				)
+			)
+			.attr('opacity', (d) => {
+				return d[groupMapsTo] === hoveredElement.datum()['name']
+					? 1
+					: 0.2;
+			});
+	};
+
+	// add event listeners for tooltips on proportional meter bars
+	addEventListeners() {
+		const self = this;
+	}
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll('rect.value')
+			.transition(
+				this.services.transitions.getTransition(
+					'legend-mouseout-prop-meter'
+				)
+			)
+			.attr('opacity', 1);
+	};
+
+	addLegendListeners() {
+		const { events } = this.services;
+		// Highlight correct circle on legend item hovers
+		events.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		// Un-highlight circles on legend item mouseouts
+		events.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent
+			.selectAll('rect.value')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null)
+			.on('click', null);
+
+		// remove the listeners on the legend
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }
