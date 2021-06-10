@@ -221,4 +221,5 @@ export enum LegendItemTypes {
 	SIZE = 'size',
 	LINE = 'line',
 	QUARTILE = 'quartile',
+	ZOOM = 'zoom',
 }

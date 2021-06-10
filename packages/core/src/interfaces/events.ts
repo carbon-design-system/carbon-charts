@@ -42,6 +42,14 @@ export enum ZoomDomain {
 	CHANGE = 'zoom-domain-change',
 }
 
+/** enum of all events related to canvas zoom *
+ *
+ */
+export enum CanvasZoom {
+	CANVAS_ZOOM_IN = 'canvas-zoom-in',
+	CANVAS_ZOOM_OUT = 'canvas-zoom-out',
+}
+
 /**
  * enum of all axis-related events
  */
@@ -181,4 +189,14 @@ export enum Legend {
 	ITEM_CLICK = 'legend-item-onclick',
 	ITEM_MOUSEOUT = 'legend-item-onmouseout',
 	ITEMS_UPDATE = 'legend-items-update',
+}
+
+/**
+ * enum of all circlepack related events
+ */
+export enum CirclePack {
+	CIRCLE_MOUSEOVER = 'circle-leaf-mouseover',
+	CIRCLE_CLICK = 'circle-leaf-click',
+	CIRCLE_MOUSEOUT = 'circle-leaf-mouseout',
+	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove',
 }

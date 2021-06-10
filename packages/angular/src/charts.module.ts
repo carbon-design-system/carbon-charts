@@ -20,6 +20,7 @@ import { MeterChartComponent } from './meter-chart.component';
 import { RadarChartComponent } from './radar-chart.component';
 import { ComboChartComponent } from './combo-chart.component';
 import { TreemapChartComponent } from './treemap-chart.component';
+import { CirclePackChartComponent } from './circle-pack-chart.component';
 import { WordCloudChartComponent } from './wordcloud-chart.component';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		RadarChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent,
+		CirclePackChartComponent,
 		WordCloudChartComponent,
 	],
 	exports: [
@@ -66,7 +68,8 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		RadarChartComponent,
 		ComboChartComponent,
 		TreemapChartComponent,
-		WordCloudChartComponent,
+		CirclePackChartComponent,
+		WordCloudChartComponent
 	],
 })
 export class ChartsModule {}

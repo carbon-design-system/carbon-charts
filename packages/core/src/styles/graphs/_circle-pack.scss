@@ -1,0 +1,38 @@
+.#{$prefix}--#{$charts-prefix}--circle-pack {
+	circle.node {
+		stroke-width: 1.5px;
+
+		&.hovered {
+			fill-opacity: 1;
+		}
+
+		&.hovered-child {
+			stroke: $carbon--white-0;
+		}
+
+		&.non-focal {
+			fill: $disabled-02;
+			fill-opacity: 30%;
+			stroke: $disabled-02;
+		}
+
+		&.clickable {
+			cursor: zoom-in;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-svg.zoomed-in {
+	cursor: zoom-out;
+	.#{$prefix}--#{$charts-prefix}--circle-pack {
+		circle.node {
+			&.hovered-child {
+				stroke: 1.5px solid initial;
+			}
+
+			&.clickable {
+				cursor: zoom-out;
+			}
+		}
+	}
+}
