@@ -16,8 +16,8 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__inner {
-		stroke-width: carbon--mini-units(0.1875);
-		stroke: $ui-05;
+		stroke-width: carbon--mini-units(0.125);
+		stroke: $ui-04;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__outer {

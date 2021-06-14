@@ -26,7 +26,7 @@
 		font-family: carbon--font-family('sans');
 		width: 100%;
 		height: 100%;
-		padding: $spacing-05 $spacing-04;
+		padding: $spacing-05 $spacing-03;
 		border-left: carbon--mini-units(0.5) solid $ui-05;
 	}
 
@@ -73,7 +73,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__column {
-		padding: 0 $spacing-02;
+		padding: 0 $spacing-03;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__column--farside {

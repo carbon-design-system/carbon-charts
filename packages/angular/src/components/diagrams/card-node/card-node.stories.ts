@@ -74,7 +74,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 	template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			<svg ibmIconScreen size="20"></svg>
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -133,7 +133,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 	template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			<svg ibmIconScreen size="20"></svg>
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -158,7 +158,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 	template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			<svg ibmIconScreen size="20"></svg>
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -169,7 +169,7 @@ storiesOf("Diagrams|Nodes/Card", module)
 			</ibm-diagram-card-node-subtitle>
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column [farsideColumn]="farsideColumn">
-			<svg ibmIconChevronDown size="16"></svg>
+			<svg ibmIconChevronDown size="20"></svg>
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),

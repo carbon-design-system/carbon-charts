@@ -95,7 +95,7 @@ const SimpleStatic = `
 			<xhtml:div>
 				<ibm-diagram-card-node as="button">
 					<ibm-diagram-card-node-column>
-						<svg ibmIconUser size="16"></svg>
+						<svg ibmIconUser size="20"></svg>
 					</ibm-diagram-card-node-column>
 					<ibm-diagram-card-node-column>
 						<ibm-diagram-card-node-title>
@@ -117,7 +117,7 @@ const SimpleStatic = `
 	</svg>
 
 	<ng-template #wikiTemplate>
-		<svg ibmIconWikis size="16"></svg>
+		<svg ibmIconWikis size="20"></svg>
 	</ng-template>
 
 `;
@@ -180,7 +180,7 @@ const ProgrammaticStatic = `
 			<xhtml:div *ngIf="!node.circle">
 				<ibm-diagram-card-node as="button">
 					<ibm-diagram-card-node-column>
-						<svg ibmIconUser size="16"></svg>
+						<svg ibmIconUser size="20"></svg>
 					</ibm-diagram-card-node-column>
 					<ibm-diagram-card-node-column>
 						<ibm-diagram-card-node-title>
@@ -196,11 +196,11 @@ const ProgrammaticStatic = `
 	</svg>
 
 	<ng-template #userTemplate>
-		<svg ibmIconUser size="16"></svg>
+		<svg ibmIconUser size="20"></svg>
 	</ng-template>
 
 	<ng-template #wikiTemplate>
-		<svg ibmIconWikis size="16"></svg>
+		<svg ibmIconWikis size="20"></svg>
 	</ng-template>
 `;
 

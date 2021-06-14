@@ -6,7 +6,7 @@ import CardNode, {
 	CardNodeLabel,
 	CardNodeTitle,
 } from '.';
-import { User16, ChevronDown16 } from '@carbon/icons-react';
+import { User20, ChevronDown20 } from '@carbon/icons-react';
 
 const stories = storiesOf('Diagrams|Nodes/Card', module);
 stories.addDecorator((story) => (
@@ -45,7 +45,7 @@ stories.add('Color', () => (
 stories.add('With icon', () => (
 	<CardNode>
 		<CardNodeColumn>
-			<User16 />
+			<User20 />
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
@@ -57,7 +57,7 @@ stories.add('With icon', () => (
 stories.add('As button', () => (
 	<CardNode onClick={() => {}}>
 		<CardNodeColumn>
-			<User16 />
+			<User20 />
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
@@ -69,7 +69,7 @@ stories.add('As button', () => (
 stories.add('As link', () => (
 	<CardNode href="#">
 		<CardNodeColumn>
-			<User16 />
+			<User20 />
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
@@ -91,14 +91,14 @@ stories.add('With label', () => (
 stories.add('With third column', () => (
 	<CardNode>
 		<CardNodeColumn>
-			<User16 />
+			<User20 />
 		</CardNodeColumn>
 		<CardNodeColumn>
 			<CardNodeTitle>Title</CardNodeTitle>
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 		<CardNodeColumn farsideColumn>
-			<ChevronDown16 />
+			<ChevronDown20 />
 		</CardNodeColumn>
 	</CardNode>
 ));
