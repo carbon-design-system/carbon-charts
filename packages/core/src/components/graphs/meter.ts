@@ -6,6 +6,7 @@ import { Roles, ColorClassNameTypes, Events } from '../../interfaces';
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale';
+import { select } from 'd3-selection';
 
 export class Meter extends Component {
 	type = 'meter';
@@ -54,7 +55,7 @@ export class Meter extends Component {
 		});
 		const { groupMapsTo } = options.data;
 		// all the data is needed to get the max domain, not just the datagroups being shown
-		const domainMax = this.getMaximumDomain(this.model.getData());
+		const domainMax = this.getMaximumDomain(data);
 		// const domainMax = this.getMaximumDomain(data);
 
 		// each meter has a scale for the value but no visual axis
@@ -92,10 +93,11 @@ export class Meter extends Component {
 			})
 			.attr('y', 0)
 			.attr(
-				'height',
-				proportional
-					? 16
-					: 8
+				'height', () => {
+					const userProvidedHeight = Tools.getProperty(options, 'meter', 'height');
+					return userProvidedHeight ? userProvidedHeight :
+						( proportional ? 16 : 8 );
+				}
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -169,6 +171,79 @@ export class Meter extends Component {
 		}
 	}
 
+
+
+	// add event listeners for tooltips on proportional meter bars
+	addEventListeners() {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const self = this;
+
+		this.parent
+			.selectAll('rect.value')
+			.on('mouseover', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed('hovered', true);
+
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						'graph_element_mouseover_fill_update'
+					)
+				);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOVER, {
+					element: hoveredElement,
+					datum,
+				});
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							label: datum[groupMapsTo],
+							value: datum.value,
+						}
+					],
+				});
+			})
+			.on('mousemove', function (datum) {
+				const hoveredElement = select(this);
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEMOVE, {
+					element: hoveredElement,
+					datum,
+				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			})
+			.on('click', function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Meter.METER_CLICK, {
+					element: select(this),
+					datum,
+				});
+			})
+			.on('mouseout', function (datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed('hovered', false);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOUT, {
+					element: hoveredElement,
+					datum,
+				});
+
+				// Hide tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
+			});
+
+	}
+
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 		const { groupMapsTo } = this.getOptions().data;
@@ -186,11 +261,6 @@ export class Meter extends Component {
 					: 0.2;
 			});
 	};
-
-	// add event listeners for tooltips on proportional meter bars
-	addEventListeners() {
-		const self = this;
-	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
