@@ -92,13 +92,18 @@ export class Meter extends Component {
 				return d.x;
 			})
 			.attr('y', 0)
-			.attr(
-				'height', () => {
-					const userProvidedHeight = Tools.getProperty(options, 'meter', 'height');
-					return userProvidedHeight ? userProvidedHeight :
-						( proportional ? 16 : 8 );
-				}
-			)
+			.attr('height', () => {
+				const userProvidedHeight = Tools.getProperty(
+					options,
+					'meter',
+					'height'
+				);
+				return userProvidedHeight
+					? userProvidedHeight
+					: proportional
+					? 16
+					: 8;
+			})
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
@@ -171,8 +176,6 @@ export class Meter extends Component {
 		}
 	}
 
-
-
 	// add event listeners for tooltips on proportional meter bars
 	addEventListeners() {
 		const options = this.getOptions();
@@ -193,10 +196,13 @@ export class Meter extends Component {
 				);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOVER, {
-					element: hoveredElement,
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.Meter.METER_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -205,17 +211,20 @@ export class Meter extends Component {
 						{
 							label: datum[groupMapsTo],
 							value: datum.value,
-						}
+						},
 					],
 				});
 			})
 			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEMOVE, {
-					element: hoveredElement,
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.Meter.METER_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
@@ -231,17 +240,19 @@ export class Meter extends Component {
 				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOUT, {
-					element: hoveredElement,
-					datum,
-				});
+				self.services.events.dispatchEvent(
+					Events.Meter.METER_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
 					hoveredElement,
 				});
 			});
-
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {

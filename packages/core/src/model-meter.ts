@@ -26,7 +26,6 @@ export class MeterChartModel extends ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const { groupMapsTo } = this.getOptions().data;
 
-
 		const data = this.get('data');
 		const dataGroups = this.getDataGroups();
 		return data.filter((datum) => {
