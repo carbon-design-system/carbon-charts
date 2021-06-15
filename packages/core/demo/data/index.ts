@@ -834,16 +834,6 @@ const simpleChartDemos = [
 		],
 	},
 	{
-		title: 'Proportional meter',
-		demos: [
-			{
-				options: meterDemos.propMeterOptions,
-				data: meterDemos.propMeterData,
-				chartType: chartTypes.MeterChart,
-			},
-		],
-	},
-	{
 		title: 'Meter',
 		demos: [
 			{
@@ -860,6 +850,16 @@ const simpleChartDemos = [
 			{
 				options: meterDemos.meterOptionsNoStatus,
 				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+			},
+		],
+	},
+	{
+		title: 'Meter (proportional)',
+		demos: [
+			{
+				options: meterDemos.propMeterOptions,
+				data: meterDemos.propMeterData,
 				chartType: chartTypes.MeterChart,
 			},
 		],
