@@ -20,7 +20,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),
@@ -33,7 +33,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),
@@ -47,7 +47,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),
@@ -61,7 +61,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [as]="component"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),
@@ -75,7 +75,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [href]="href"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),
@@ -89,7 +89,7 @@ storiesOf("Diagrams|Nodes/Shape", module)
 		<div style="height: 64px; width: 64px">
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [size]="'100%'"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				<svg ibmIconScreen size="20"></svg>
 			</ng-template>
 		</div>
 	`),

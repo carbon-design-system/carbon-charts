@@ -9,7 +9,7 @@ import Edge from './Edge';
 import ShapeNode from './ShapeNode';
 import { ArrowRightMarker } from './Marker';
 
-import { User16, Wikis16, Debug16 } from '@carbon/icons-react';
+import { User20, Wikis20, Debug20 } from '@carbon/icons-react';
 import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
 
 const nodeHeight = 64;
@@ -106,6 +106,7 @@ const SimpleStatic = () => (
 			<defs>
 				<ArrowRightMarker id={'marker'} />
 			</defs>
+
 			<Edge
 				source={{ x: 0, y: 48 }}
 				target={{ x: 396, y: 48 }}
@@ -120,7 +121,7 @@ const SimpleStatic = () => (
 				width={nodeWidth}>
 				<CardNode onClick={() => {}}>
 					<CardNodeColumn>
-						<User16 />
+						<User20 />
 					</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
@@ -136,7 +137,7 @@ const SimpleStatic = () => (
 					title={'Title'}
 					size={ShapeNodeSize}
 					onClick={() => {}}
-					renderIcon={<Wikis16 />}
+					renderIcon={<Wikis20 />}
 				/>
 			</foreignObject>
 		</svg>
@@ -145,18 +146,18 @@ const SimpleStatic = () => (
 
 const ProgrammaticStatic = () => {
 	const nodeData = [
-		{ id: 'a', x: 0, y: 16, icon: <User16 />, nodeWidth, nodeHeight },
-		{ id: 'b', x: 250, y: 16, icon: <Wikis16 />, nodeWidth, nodeHeight },
+		{ id: 'a', x: 0, y: 16, icon: <User20 />, nodeWidth, nodeHeight },
+		{ id: 'b', x: 250, y: 16, icon: <Wikis20 />, nodeWidth, nodeHeight },
 		{
 			id: 'c',
 			x: 600,
 			y: 200,
-			icon: <Debug16 />,
+			icon: <Debug20 />,
 			ShapeNode: true,
 			nodeWidth: ShapeNodeSize,
 			nodeHeight: ShapeNodeSize,
 		},
-		{ id: 'd', x: 0, y: 150, icon: <Wikis16 />, nodeWidth, nodeHeight },
+		{ id: 'd', x: 0, y: 150, icon: <Wikis20 />, nodeWidth, nodeHeight },
 	];
 
 	const edgeData = [
