@@ -94,45 +94,53 @@ stories.add('Start here', () => {
 	);
 });
 
+const DesktopOnlyMessage = () => (
+	<div className="cp-message">This is a desktop only example</div>
+);
+
 const SimpleStatic = () => (
-	<svg height="124" width="600">
-		<defs>
-			<ArrowRightMarker id={'marker'} />
-		</defs>
-		<Edge
-			source={{ x: 0, y: 48 }}
-			target={{ x: 396, y: 48 }}
-			markerEnd={'marker'}
-			variant={'dash-sm'}
-		/>
+	<div className="demo-desktop-only">
+		<DesktopOnlyMessage />
 
-		<foreignObject
-			style={{ overflow: 'visible' }}
-			transform={`translate(${0},${16})`}
-			height={nodeHeight}
-			width={nodeWidth}>
-			<CardNode onClick={() => {}}>
-				<CardNodeColumn>
-					<User16 />
-				</CardNodeColumn>
-				<CardNodeColumn>
-					<CardNodeTitle>Title</CardNodeTitle>
-					<CardNodeSubtitle>Description</CardNodeSubtitle>
-				</CardNodeColumn>
-			</CardNode>
-		</foreignObject>
-
-		<foreignObject
-			style={{ overflow: 'visible' }}
-			transform={`translate(${400},${16})`}>
-			<ShapeNode
-				title={'Title'}
-				size={ShapeNodeSize}
-				onClick={() => {}}
-				renderIcon={<Wikis16 />}
+		<svg height="124" width="600">
+			<defs>
+				<ArrowRightMarker id={'marker'} />
+			</defs>
+			<Edge
+				source={{ x: 0, y: 48 }}
+				target={{ x: 396, y: 48 }}
+				markerEnd={'marker'}
+				variant={'dash-sm'}
 			/>
-		</foreignObject>
-	</svg>
+
+			<foreignObject
+				style={{ overflow: 'visible' }}
+				transform={`translate(${0},${16})`}
+				height={nodeHeight}
+				width={nodeWidth}>
+				<CardNode onClick={() => {}}>
+					<CardNodeColumn>
+						<User16 />
+					</CardNodeColumn>
+					<CardNodeColumn>
+						<CardNodeTitle>Title</CardNodeTitle>
+						<CardNodeSubtitle>Description</CardNodeSubtitle>
+					</CardNodeColumn>
+				</CardNode>
+			</foreignObject>
+
+			<foreignObject
+				style={{ overflow: 'visible' }}
+				transform={`translate(${400},${16})`}>
+				<ShapeNode
+					title={'Title'}
+					size={ShapeNodeSize}
+					onClick={() => {}}
+					renderIcon={<Wikis16 />}
+				/>
+			</foreignObject>
+		</svg>
+	</div>
 );
 
 const ProgrammaticStatic = () => {
@@ -220,9 +228,13 @@ const ProgrammaticStatic = () => {
 	));
 
 	return (
-		<svg height="300" width="800">
-			{edges}
-			{nodes}
-		</svg>
+		<div className="demo-desktop-only">
+			<DesktopOnlyMessage />
+
+			<svg height="300" width="800">
+				{edges}
+				{nodes}
+			</svg>
+		</div>
 	);
 };
