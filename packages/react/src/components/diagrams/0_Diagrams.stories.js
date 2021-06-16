@@ -95,7 +95,7 @@ stories.add('Start here', () => {
 });
 
 const DesktopOnlyMessage = () => (
-	<div className="cp-message">This is a desktop only example</div>
+	<div className="cp-message">This is a desktop-only example</div>
 );
 
 const SimpleStatic = () => (
