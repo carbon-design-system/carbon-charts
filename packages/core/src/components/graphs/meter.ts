@@ -56,7 +56,6 @@ export class Meter extends Component {
 		const { groupMapsTo } = options.data;
 		// all the data is needed to get the max domain, not just the datagroups being shown
 		const domainMax = this.getMaximumDomain(data);
-		// const domainMax = this.getMaximumDomain(data);
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
