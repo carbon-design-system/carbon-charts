@@ -28,27 +28,31 @@ export class MeterChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs);
 
+		let options = chartConfigs.options;
+		// check if user has added proportional options
+		if (chartConfigs.options.meter.proportional) {
+			options = Tools.merge(
+				Tools.clone(Configuration.options.meterChart),
+				{ legend: { enabled: true } },
+				chartConfigs.options
+			);
+		}
+		// if not proportional we disable the legend
+		// if yes then we use diff height and enable the legend
+
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.meterChart),
-				chartConfigs.options
-			)
+			Tools.merge(Tools.clone(Configuration.options.meterChart), options)
 		);
+
+		console.log(this.model.getOptions());
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
 	}
 
 	getComponents() {
-		const isProportional = false;
-		//  Tools.getProperty(
-		// 	this.model.getOptions(),
-		// 	'meter',
-		// 	'proportional'
-		// );
-
 		// Specify what to render inside the graph only
 		const graph = {
 			id: 'meter-graph',

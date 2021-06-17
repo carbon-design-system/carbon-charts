@@ -22,7 +22,7 @@ export class MeterTitle extends Title {
 
 		if (proportional) {
 			this.displayTotal();
-			this.displayTitleThing();
+			this.displayBreakdownTitle();
 		} else {
 			// the title for a meter, is the label for that dataset
 			const title = svg
@@ -62,7 +62,7 @@ export class MeterTitle extends Title {
 		}
 	}
 
-	displayTitleThing() {
+	displayBreakdownTitle() {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.getOptions();
@@ -117,6 +117,19 @@ export class MeterTitle extends Title {
 			.text((d) => d);
 
 		title.exit().remove();
+
+		const maxWidth = this.getMaxTitleWidth();
+		const titleElement = DOMUtils.appendOrSelect(
+			svg,
+			'text.proportional-meter-title'
+		);
+
+		if (
+			maxWidth > 0 &&
+			titleElement.node().getComputedTextLength() > maxWidth
+		) {
+			this.truncateTitle(titleElement, maxWidth);
+		}
 	}
 
 	// show the total for prop meter
@@ -311,28 +324,46 @@ export class MeterTitle extends Title {
 			{ useAttr: true }
 		);
 
+		const proportional = Tools.getProperty(
+			this.getOptions(),
+			'meter',
+			'proportional'
+		);
+
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width
 			? containerBounds.width
 			: this.parent.node().getAttribute('width');
 
-		const percentage = DOMUtils.appendOrSelect(
-			this.parent,
-			'text.percent-value'
-		);
-		// the title needs to fit the width of the container without crowding the status, and percentage value
-		const offset = Configuration.meter.statusBar.paddingRight;
-		const percentageWidth = percentage.node().getComputedTextLength();
+		if (proportional !== null) {
+			const total = DOMUtils.appendOrSelect(
+				this.parent,
+				'text.proportional-meter-total'
+			).node();
 
-		const statusGroup = DOMUtils.appendOrSelect(
-			this.parent,
-			'g.status-indicator'
-		).node();
-		const statusWidth =
-			DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
-			Configuration.meter.status.paddingLeft;
+			const width = DOMUtils.getSVGElementSize(total, { useBBox: true })
+				.width;
 
-		return containerWidth - percentageWidth - offset - statusWidth;
+			return containerWidth - width;
+		} else {
+			const percentage = DOMUtils.appendOrSelect(
+				this.parent,
+				'text.percent-value'
+			);
+			// the title needs to fit the width of the container without crowding the status, and percentage value
+			const offset = Configuration.meter.statusBar.paddingRight;
+			const percentageWidth = percentage.node().getComputedTextLength();
+
+			const statusGroup = DOMUtils.appendOrSelect(
+				this.parent,
+				'g.status-indicator'
+			).node();
+			const statusWidth =
+				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true })
+					.width + Configuration.meter.status.paddingLeft;
+
+			return containerWidth - percentageWidth - offset - statusWidth;
+		}
 	}
 
 	/**

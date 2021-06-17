@@ -61,16 +61,15 @@ export const propMeterData = [
 export const propMeterOptions = {
 	title: 'Proportional Meter Chart',
 	height: '100px',
-	legend: {
-		enabled: true,
-		clickable: false,
-	},
+	// legend: {
+	// 	enabled: false
+	// },
 	meter: {
 		proportional: {
 			total: 2000,
 			unit: 'GB',
-			totalFormatter: null,
-			breakdownFormatter: null,
+			// totalFormatter: (total)=> `custom total string for: ${total}`,
+			// breakdownFormatter: (x)=> `You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
 		},
 	},
 };
