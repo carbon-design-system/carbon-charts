@@ -47,12 +47,18 @@ export class Meter extends Component {
 		});
 		const { groupMapsTo } = options.data;
 
-
 		let domainMax;
-		if(Tools.getProperty(options, "meter", 'proportional', 'total')){
-			domainMax = Tools.getProperty(options, "meter", 'proportional', 'total');
-		} else  {
-			domainMax = this.model.getMaximumDomain(this.model.getDisplayData());
+		if (Tools.getProperty(options, 'meter', 'proportional', 'total')) {
+			domainMax = Tools.getProperty(
+				options,
+				'meter',
+				'proportional',
+				'total'
+			);
+		} else {
+			domainMax = this.model.getMaximumDomain(
+				this.model.getDisplayData()
+			);
 		}
 
 		// each meter has a scale for the value but no visual axis
@@ -70,8 +76,10 @@ export class Meter extends Component {
 			.attr('x', 0)
 			.attr('y', 0)
 			.attr('width', width)
-			.attr('height', userProvidedHeight ?
-			userProvidedHeight : proportional ? 16 : 8);
+			.attr(
+				'height',
+				userProvidedHeight ? userProvidedHeight : proportional ? 16 : 8
+			);
 
 		// value larger than 100 will display as 100% on meter chart
 		const maximumBarWidth = data.value >= 100;
@@ -257,7 +265,6 @@ export class Meter extends Component {
 				});
 			});
 	}
-
 
 	destroy() {
 		// Remove event listeners

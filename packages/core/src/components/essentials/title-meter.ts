@@ -48,7 +48,10 @@ export class MeterTitle extends Title {
 
 			// get the max width of a title (with consideration for the status/percentage)
 			const maxWidth = this.getMaxTitleWidth();
-			const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
+			const titleElement = DOMUtils.appendOrSelect(
+				svg,
+				'text.meter-title'
+			);
 
 			if (
 				maxWidth > 0 &&
@@ -59,23 +62,43 @@ export class MeterTitle extends Title {
 		}
 	}
 
-
 	displayTitleThing() {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.getOptions();
-		const datasetsTotal = this.model.getMaximumDomain(this.model.getDisplayData());
-		const total = Tools.getProperty(options, 'meter', 'proportional', 'total');
-		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit') ? Tools.getProperty(options, 'meter', 'proportional', 'unit') : '';
+		const datasetsTotal = this.model.getMaximumDomain(
+			this.model.getDisplayData()
+		);
+		const total = Tools.getProperty(
+			options,
+			'meter',
+			'proportional',
+			'total'
+		);
+		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
+			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
+			: '';
 
 		let data;
-		if(datasetsTotal === total){
+		if (datasetsTotal === total) {
 			data = null;
 		} else {
-			const difference = total !== null ? total - datasetsTotal : datasetsTotal;
+			const difference =
+				total !== null ? total - datasetsTotal : datasetsTotal;
 			//breakdownFormatter
-			const breakdownFormatter = Tools.getProperty(options, 'meter', 'proportional', 'breakdownFormatter');
-			data = breakdownFormatter !== null ? breakdownFormatter({datasetsTotal: datasetsTotal, total: total}) : `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
+			const breakdownFormatter = Tools.getProperty(
+				options,
+				'meter',
+				'proportional',
+				'breakdownFormatter'
+			);
+			data =
+				breakdownFormatter !== null
+					? breakdownFormatter({
+							datasetsTotal: datasetsTotal,
+							total: total,
+					  })
+					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
 		}
 
 		// const dataString = `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
@@ -102,12 +125,29 @@ export class MeterTitle extends Title {
 		const svg = this.getContainerSVG();
 		const options = this.getOptions();
 
-		const total = Tools.getProperty(options, 'meter', 'proportional', 'total') ? Tools.getProperty(options, 'meter', 'proportional', 'total') : this.model.getMaximumDomain(this.model.getDisplayData());
-		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit') ? Tools.getProperty(options, 'meter', 'proportional', 'unit') : '';
+		const total = Tools.getProperty(
+			options,
+			'meter',
+			'proportional',
+			'total'
+		)
+			? Tools.getProperty(options, 'meter', 'proportional', 'total')
+			: this.model.getMaximumDomain(this.model.getDisplayData());
+		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
+			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
+			: '';
 		// totalFormatter function
-		const totalFormatter = Tools.getProperty(options, 'meter', 'proportional', 'totalFormatter');
+		const totalFormatter = Tools.getProperty(
+			options,
+			'meter',
+			'proportional',
+			'totalFormatter'
+		);
 
-		const totalString = totalFormatter !==null ? totalFormatter(total) : `${total} ${unit} total`;
+		const totalString =
+			totalFormatter !== null
+				? totalFormatter(total)
+				: `${total} ${unit} total`;
 
 		const containerBounds = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
@@ -136,7 +176,6 @@ export class MeterTitle extends Title {
 
 		title.exit().remove();
 	}
-
 
 	/**
 	 * Appends the corresponding status based on the value and the peak.
@@ -258,9 +297,9 @@ export class MeterTitle extends Title {
 		percentage.attr(
 			'x',
 			+title.attr('x') +
-			title.node().getComputedTextLength() +
-			tspanLength +
-			offset
+				title.node().getComputedTextLength() +
+				tspanLength +
+				offset
 		);
 	}
 

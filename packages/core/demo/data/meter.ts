@@ -70,7 +70,7 @@ export const propMeterOptions = {
 			total: 2000,
 			unit: 'GB',
 			totalFormatter: null,
-			breakdownFormatter: null
-		}
+			breakdownFormatter: null,
+		},
 	},
 };
