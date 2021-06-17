@@ -19,22 +19,20 @@ export class MeterChartModel extends ChartModel {
 		}
 	}
 
+	getMaximumDomain(data) {
+		const max = data.reduce(
+			(accumulator, datum) => accumulator + datum.value,
+			0
+		);
+		return max;
+	}
+
 	getDisplayData() {
 		if (!this.get('data')) {
 			return null;
 		}
-		const { ACTIVE } = Configuration.legend.items.status;
-		const { groupMapsTo } = this.getOptions().data;
 
-		const data = this.get('data');
-		const dataGroups = this.getDataGroups();
-		return data.filter((datum) => {
-			return dataGroups.find(
-				(dataGroup) =>
-					dataGroup.name === datum[groupMapsTo] &&
-					dataGroup.status === ACTIVE
-			);
-		});
+		return this.get('data');
 	}
 
 	/**

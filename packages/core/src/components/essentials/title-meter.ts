@@ -14,39 +14,129 @@ export class MeterTitle extends Title {
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
 
+		const proportional = Tools.getProperty(
+			options,
+			'meter',
+			'proportional'
+		);
+
+		if (proportional) {
+			this.displayTotal();
+			this.displayTitleThing();
+		} else {
+			// the title for a meter, is the label for that dataset
+			const title = svg
+				.selectAll('text.meter-title')
+				.data([dataset[groupMapsTo]]);
+
+			title
+				.enter()
+				.append('text')
+				.classed('meter-title', true)
+				.merge(title)
+				.attr('x', 0)
+				.attr('y', '1em')
+				.text((d) => d);
+
+			title.exit().remove();
+
+			// appends the associated percentage after title
+			this.appendPercentage();
+
+			// if status ranges are provided (custom or default), display indicator
+			this.displayStatus();
+
+			// get the max width of a title (with consideration for the status/percentage)
+			const maxWidth = this.getMaxTitleWidth();
+			const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
+
+			if (
+				maxWidth > 0 &&
+				titleElement.node().getComputedTextLength() > maxWidth
+			) {
+				this.truncateTitle(titleElement, maxWidth);
+			}
+		}
+	}
+
+
+	displayTitleThing() {
+		const self = this;
+		const svg = this.getContainerSVG();
+		const options = this.getOptions();
+		const datasetsTotal = this.model.getMaximumDomain(this.model.getDisplayData());
+		const total = Tools.getProperty(options, 'meter', 'proportional', 'total');
+		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit') ? Tools.getProperty(options, 'meter', 'proportional', 'unit') : '';
+
+		let data;
+		if(datasetsTotal === total){
+			data = null;
+		} else {
+			const difference = total !== null ? total - datasetsTotal : datasetsTotal;
+			//breakdownFormatter
+			const breakdownFormatter = Tools.getProperty(options, 'meter', 'proportional', 'breakdownFormatter');
+			data = breakdownFormatter !== null ? breakdownFormatter({datasetsTotal: datasetsTotal, total: total}) : `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
+		}
+
+		// const dataString = `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
 		// the title for a meter, is the label for that dataset
 		const title = svg
-			.selectAll('text.meter-title')
-			.data([dataset[groupMapsTo]]);
+			.selectAll('text.proportional-meter-title')
+			.data([data]);
 
 		title
 			.enter()
 			.append('text')
-			.classed('meter-title', true)
+			.classed('proportional-meter-title', true)
 			.merge(title)
 			.attr('x', 0)
 			.attr('y', '1em')
 			.text((d) => d);
 
 		title.exit().remove();
-
-		// appends the associated percentage after title
-		this.appendPercentage();
-
-		// if status ranges are provided (custom or default), display indicator
-		this.displayStatus();
-
-		// get the max width of a title (with consideration for the status/percentage)
-		const maxWidth = this.getMaxTitleWidth();
-		const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
-
-		if (
-			maxWidth > 0 &&
-			titleElement.node().getComputedTextLength() > maxWidth
-		) {
-			this.truncateTitle(titleElement, maxWidth);
-		}
 	}
+
+	// show the total for prop meter
+	displayTotal() {
+		const self = this;
+		const svg = this.getContainerSVG();
+		const options = this.getOptions();
+
+		const total = Tools.getProperty(options, 'meter', 'proportional', 'total') ? Tools.getProperty(options, 'meter', 'proportional', 'total') : this.model.getMaximumDomain(this.model.getDisplayData());
+		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit') ? Tools.getProperty(options, 'meter', 'proportional', 'unit') : '';
+		// totalFormatter function
+		const totalFormatter = Tools.getProperty(options, 'meter', 'proportional', 'totalFormatter');
+
+		const totalString = totalFormatter !==null ? totalFormatter(total) : `${total} ${unit} total`;
+
+		const containerBounds = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		);
+
+		// need to check if the width is 0, and try to use the parent attribute
+		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
+		const containerWidth = containerBounds.width
+			? containerBounds.width
+			: this.parent.node().getAttribute('width');
+
+		const title = svg
+			.selectAll('text.proportional-meter-total')
+			.data([totalString]);
+
+		title
+			.enter()
+			.append('text')
+			.classed('proportional-meter-total', true)
+			.merge(title)
+			.attr('x', containerWidth)
+			.attr('y', '1em')
+			.attr('text-anchor', 'end')
+			.text((d) => d);
+
+		title.exit().remove();
+	}
+
 
 	/**
 	 * Appends the corresponding status based on the value and the peak.
@@ -168,9 +258,9 @@ export class MeterTitle extends Title {
 		percentage.attr(
 			'x',
 			+title.attr('x') +
-				title.node().getComputedTextLength() +
-				tspanLength +
-				offset
+			title.node().getComputedTextLength() +
+			tspanLength +
+			offset
 		);
 	}
 

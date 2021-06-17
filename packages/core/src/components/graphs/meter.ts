@@ -11,14 +11,6 @@ import { select } from 'd3-selection';
 export class Meter extends Component {
 	type = 'meter';
 
-	getMaximumDomain(data) {
-		const max = data.reduce(
-			(accumulator, datum) => accumulator + datum.value,
-			0
-		);
-		return max;
-	}
-
 	getStackedBounds(data, scale) {
 		let prevX = 0;
 		const newData = data.map((d, i) => {
@@ -54,20 +46,32 @@ export class Meter extends Component {
 			useAttrs: true,
 		});
 		const { groupMapsTo } = options.data;
-		// all the data is needed to get the max domain, not just the datagroups being shown
-		const domainMax = this.getMaximumDomain(data);
+
+
+		let domainMax;
+		if(Tools.getProperty(options, "meter", 'proportional', 'total')){
+			domainMax = Tools.getProperty(options, "meter", 'proportional', 'total');
+		} else  {
+			domainMax = this.model.getMaximumDomain(this.model.getDisplayData());
+		}
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
 
 		const stackedData = this.getStackedBounds(data, xScale);
 
+		const userProvidedHeight = Tools.getProperty(
+			options,
+			'meter',
+			'height'
+		);
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
 			.attr('x', 0)
 			.attr('y', 0)
 			.attr('width', width)
-			.attr('height', Tools.getProperty(options, 'meter', 'height'));
+			.attr('height', userProvidedHeight ?
+			userProvidedHeight : proportional ? 16 : 8);
 
 		// value larger than 100 will display as 100% on meter chart
 		const maximumBarWidth = data.value >= 100;
@@ -170,7 +174,7 @@ export class Meter extends Component {
 
 		if (proportional) {
 			// Add event listeners to elements and legend
-			this.addLegendListeners();
+			// this.addLegendListeners();
 			this.addEventListeners();
 		}
 	}
@@ -254,48 +258,6 @@ export class Meter extends Component {
 			});
 	}
 
-	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.getOptions().data;
-
-		this.parent
-			.selectAll('rect.value')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-prop-meter'
-				)
-			)
-			.attr('opacity', (d) => {
-				return d[groupMapsTo] === hoveredElement.datum()['name']
-					? 1
-					: 0.2;
-			});
-	};
-
-	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('rect.value')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-prop-meter'
-				)
-			)
-			.attr('opacity', 1);
-	};
-
-	addLegendListeners() {
-		const { events } = this.services;
-		// Highlight correct circle on legend item hovers
-		events.addEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
-		// Un-highlight circles on legend item mouseouts
-		events.addEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
-	}
 
 	destroy() {
 		// Remove event listeners
@@ -305,16 +267,5 @@ export class Meter extends Component {
 			.on('mousemove', null)
 			.on('mouseout', null)
 			.on('click', null);
-
-		// remove the listeners on the legend
-		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
 	}
 }

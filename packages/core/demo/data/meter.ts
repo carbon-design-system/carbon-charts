@@ -56,7 +56,6 @@ export const propMeterData = [
 	{ group: 'photos', value: 654 },
 	{ group: 'text messages', value: 723 },
 	{ group: 'other', value: 120 },
-	{ group: 'unused', value: 170 },
 ];
 
 export const propMeterOptions = {
@@ -64,13 +63,14 @@ export const propMeterOptions = {
 	height: '100px',
 	legend: {
 		enabled: true,
+		clickable: false,
 	},
 	meter: {
-		proportional: true,
-	},
-	color: {
-		scale: {
-			unused: '#f4f4f4',
-		},
+		proportional: {
+			total: 2000,
+			unit: 'GB',
+			totalFormatter: null,
+			breakdownFormatter: null
+		}
 	},
 };
