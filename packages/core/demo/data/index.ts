@@ -261,8 +261,8 @@ const utilityDemoGroups = [
 				options: areaDemos.boundedAreaTimeSeriesWithHighlightsOptions,
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-			}
-		]
+			},
+		],
 	},
 	{
 		title: 'Toolbar',

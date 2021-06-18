@@ -1,10 +1,9 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
-import { AxisPositions} from '../../interfaces';
+import { AxisPositions } from '../../interfaces';
 import { select } from 'd3-selection';
-import * as Configuration from '../../configuration'
-
+import * as Configuration from '../../configuration';
 
 export class Highlight extends Component {
 	type = 'highlight';
@@ -18,6 +17,8 @@ export class Highlight extends Component {
 	render(animate = false) {
 		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
 
+		const line = Tools.getProperty(this.getOptions(), 'highlight', 'line')
+
 		const highlightData = [];
 		Object.keys(axesOptions).forEach((axisPosition) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
@@ -29,11 +30,13 @@ export class Highlight extends Component {
 				) {
 					highlightData.push({
 						axisPosition,
-                        highlightStartMapsTo: axisOptions.highlights.highlightStartMapsTo,
-                        highlightEndMapsTo: axisOptions.highlights.highlightEndMapsTo,
-                        labelMapsTo: axisOptions.highlights.labelMapsTo,
+						highlightStartMapsTo:
+							axisOptions.highlights.highlightStartMapsTo,
+						highlightEndMapsTo:
+							axisOptions.highlights.highlightEndMapsTo,
+						labelMapsTo: axisOptions.highlights.labelMapsTo,
 						highlight: axisOptions.highlights.data,
-                        color: axisOptions.highlights.color
+						color: axisOptions.highlights.color,
 					});
 				}
 			}
@@ -68,10 +71,10 @@ export class Highlight extends Component {
 			.data((d) =>
 				d.highlight.map((highlight) => {
 					highlight.axisPosition = d.axisPosition;
-                    highlight.highlightStartMapsTo = d.highlightStartMapsTo
-                    highlight.labelMapsTo = d.labelMapsTo
-                    highlight.color = d.color
-                    highlight.highlightEndMapsTo = d.highlightEndMapsTo
+					highlight.highlightStartMapsTo = d.highlightStartMapsTo;
+					highlight.labelMapsTo = d.labelMapsTo;
+					highlight.color = d.color;
+					highlight.highlightEndMapsTo = d.highlightEndMapsTo;
 					return highlight;
 				})
 			);
@@ -83,7 +86,10 @@ export class Highlight extends Component {
 		const highlightGroupsEnter = highlightGroups.enter().append('g');
 
 		highlightGroupsEnter.append('rect').attr('class', 'highlight-bar');
-        highlightGroupsEnter.append('line').attr('class', 'highlight-line');
+		if (line) {
+			highlightGroupsEnter.append('line').attr('class', 'highlight-line-1');
+			highlightGroupsEnter.append('line').attr('class', 'highlight-line-2');
+		}
 
 		const highlightGroupsMerge = highlightGroupsEnter.merge(
 			highlightGroups
@@ -125,42 +131,30 @@ export class Highlight extends Component {
 					)
 					.attr('y', yScaleStart)
 					.attr('height', yScaleEnd)
-					.attr(
-						'x',
-                        ({highlightStartMapsTo, ...d}) => getXValue(d[highlightStartMapsTo])
+					.attr('x', ({ highlightStartMapsTo, ...d }) =>
+						getXValue(d[highlightStartMapsTo])
 					)
 					.attr(
 						'width',
-						({highlightStartMapsTo, highlightEndMapsTo,...d}) =>
-							Math.max(getXValue(d[highlightEndMapsTo]) - getXValue(d[highlightStartMapsTo]), 0) 
+						({ highlightStartMapsTo, highlightEndMapsTo, ...d }) =>
+							Math.max(
+								getXValue(d[highlightEndMapsTo]) -
+									getXValue(d[highlightStartMapsTo]),
+								0
+							)
 					)
-					.style('fill', ({color, labelMapsTo, ...data}) => {
-                        return color.scale[data[labelMapsTo]]
-                    })
-                    .style('fill-opacity', Configuration.area.opacity.selected / 2);
+                    .style('stroke', ({ color, labelMapsTo, ...data }) => {
+						return color.scale[data[labelMapsTo]];
+					})
+                    .style('stroke-dasharray', '2, 2')
+					.attr('stroke-width', 1 + 'px')
+                    .style('fill', 'none');
 
-                    // Add highlight line
-                    group
-					.selectAll('line.highlight-line')
-					.transition(
-						self.services.transitions.getTransition(
-							'highlight-line-update',
-							animate
-						)
-					)
-					.attr('y', axisPosition === AxisPositions.TOP? yScaleEnd : yScaleStart)
-					.attr(
-						'x2', ({highlightStartMapsTo, ...d}) => getXValue(d[highlightStartMapsTo])
-					)
-					.attr(
-						'x1',
-						({highlightEndMapsTo, ...d}) =>
-                        getXValue(d[highlightEndMapsTo]) 
-					)
-					.style('stroke', ({color, labelMapsTo, ...data}) => {
-                        return color.scale[data[labelMapsTo]]
-                    })
-         
+				if (line) {
+					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, yScaleEnd, getXValue, axisPosition);
+					self.addLine(group.selectAll('line.highlight-line-2'), self, animate, yScaleStart, getXValue, axisPosition);
+				}
+
 			} else {
 				group
 					.selectAll('rect.highlight-bar')
@@ -172,47 +166,64 @@ export class Highlight extends Component {
 					)
 					.attr('x', xScaleStart)
 					.attr('width', Math.max(xScaleEnd - xScaleStart, 0))
-					.attr(
-						'y',
-						({highlightEndMapsTo, ...d}) => getYValue(d[highlightEndMapsTo])
+					.attr('y', ({ highlightEndMapsTo, ...d }) =>
+						getYValue(d[highlightEndMapsTo])
 					)
 					.attr(
 						'height',
-						({highlightStartMapsTo, highlightEndMapsTo, ...d}) =>
-							Math.max(getYValue(d[highlightStartMapsTo]) - getYValue(d[highlightEndMapsTo]), 0)
+						({ highlightStartMapsTo, highlightEndMapsTo, ...d }) =>
+							Math.max(
+								getYValue(d[highlightStartMapsTo]) -
+									getYValue(d[highlightEndMapsTo]),
+								0
+							)
 					)
-					.style('fill', ({color, labelMapsTo, ...data}) => {
-                        return color.scale[data[labelMapsTo]]
-                    })
-                    .style('fill-opacity', Configuration.area.opacity.selected / 2);
+					.style('stroke', ({ color, labelMapsTo, ...data }) => {
+						return color.scale[data[labelMapsTo]];
+					})
+                    .style('stroke-dasharray', '2, 2')
+					.attr('stroke-width', 1 + 'px')
+                    .style('fill', 'none');
 
-                    // Add highlight line
-                    group
-					.selectAll('line.highlight-line')
-					.transition(
-						self.services.transitions.getTransition(
-							'highlight-line-update',
-							animate
-						)
-					)
-					.attr('x1', AxisPositions.LEFT ? xScaleEnd : xScaleStart)
-                    .attr('x2', AxisPositions.LEFT ? xScaleEnd : xScaleStart)
-					.attr(
-						'y2', ({highlightStartMapsTo, ...d}) => getYValue(d[highlightStartMapsTo])
-					)
-					.attr(
-						'y1',
-						({highlightEndMapsTo, ...d}) =>
-                        getYValue(d[highlightEndMapsTo]) 
-					)
-					.style('stroke', ({color, labelMapsTo, ...data}) => {
-                        return color.scale[data[labelMapsTo]]
-                    })
+				if (line) {
+					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, xScaleStart, getYValue, axisPosition);
+					self.addLine(group.selectAll('line.highlight-line-2'), self, animate, xScaleEnd, getYValue, axisPosition);
+				}
 			}
 		});
+	}
 
 
-
+	addLine(group, self, animate, scale, getValue, axisPosition){
+		group
+			.transition(
+				self.services.transitions.getTransition(
+					'highlight-line-update',
+					animate
+				)
+			)
+			.attr('y1', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ? 
+				scale : 
+				({ highlightEndMapsTo, ...d }) =>
+					getValue(d[highlightEndMapsTo]))
+			.attr('y2', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ? 
+				scale : 
+				({ highlightStartMapsTo, ...d }) =>
+					getValue(d[highlightStartMapsTo]))
+			.attr('x2', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ?
+				({ highlightStartMapsTo, ...d }) =>
+					getValue(d[highlightStartMapsTo])
+				: scale
+			)
+			.attr('x1', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ?
+				({ highlightEndMapsTo, ...d }) =>
+					getValue(d[highlightEndMapsTo])
+				:scale
+			)
+			.style('stroke', ({ color, labelMapsTo, ...data }) => {
+				return color.scale[data[labelMapsTo]];
+			})
+			.attr('stroke-width', 2 + 'px');
 
 	}
 
