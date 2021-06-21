@@ -90,9 +90,20 @@ stories.add('Start here', () => {
 
 			<h3 {...h3Style}>Layouts using external dependencies</h3>
 
-			<p {...paragraphStyle}>
-				Coming soon. Examples of layouts using external dependencies
-			</p>
+			<p>Here's an example using <b>elkjs</b> in react</p>
+
+			<iframe
+				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+				style={{
+					width: '100%',
+					height: '500px',
+					border: 0,
+					borderRadius: '4px',
+					overflow: 'hidden',
+				}}
+				title="carbon-charts-react-elkjs-diagram"
+				allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	);
 });
