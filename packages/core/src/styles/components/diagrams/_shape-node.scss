@@ -52,7 +52,7 @@
 
 		.#{$prefix}--#{$charts-prefix}--shape-node__title,
 		.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
-			font-weight: carbon--font-weight('semibold')
+			font-weight: carbon--font-weight('semibold');
 		}
 	}
 
