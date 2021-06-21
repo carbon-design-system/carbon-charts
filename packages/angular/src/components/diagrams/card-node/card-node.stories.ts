@@ -3,7 +3,7 @@ import { CardNodeModule } from "./card-node.module";
 import { ScreenModule, ChevronDownModule } from "@carbon/icons-angular";
 
 const getTemplate = demo => `
-	<div class="container theme--white" style="max-width: 400px; margin: 2rem">
+	<div class="container theme--white" style="max-width: 400px;">
 		${demo}
 	</div>
 `;

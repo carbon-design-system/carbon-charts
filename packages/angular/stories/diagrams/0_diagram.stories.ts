@@ -41,9 +41,9 @@ stories.add('Start here', () => ({
 			</p>
 
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
-			Note that Carbon Charts does not provide layouts for diagrams.
+			<b>Note that Carbon Charts does not provide layouts for diagrams.
 			You can utilize these components alongside graphing libraries,
-			or by composing your own layouts.
+			or by composing your own layouts.</b>
 			</p>
 
 			<h2 style='padding-top: 2rem'>Examples</h2>
@@ -53,7 +53,7 @@ stories.add('Start here', () => ({
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 			A simple composed diagram, using statically defined x and y
 			coordinates.
-			<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/src/components/diagrams/0_diagram.stories.ts">
+			<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/stories/diagrams/0_diagram.stories.ts">
 				View source
 			</a>
 			</p>
@@ -65,7 +65,7 @@ stories.add('Start here', () => ({
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 				A composed diagram, rendered using arrays of statically defined
 				x and y coordinates.
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/src/components/diagrams/0_diagram.stories.ts">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/stories/diagrams/0_diagram.stories.ts">
 					View source
 				</a>
 			</p>
