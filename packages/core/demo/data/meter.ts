@@ -8,7 +8,6 @@ export const meterData = [
 export const meterOptionsWithStatus = {
 	title: 'Meter Chart - with statuses',
 	meter: {
-		proportional: false,
 		peak: 80,
 		status: {
 			ranges: [
@@ -24,7 +23,6 @@ export const meterOptionsWithStatus = {
 export const meterOptionsCustomColor = {
 	title: 'Meter Chart - statuses and custom color',
 	meter: {
-		proportional: false,
 		peak: 70,
 		status: {
 			ranges: [
@@ -45,7 +43,6 @@ export const meterOptionsCustomColor = {
 export const meterOptionsNoStatus = {
 	title: 'Meter Chart - no status',
 	meter: {
-		proportional: false,
 		peak: 70,
 	},
 	height: '100px',
@@ -60,16 +57,30 @@ export const propMeterData = [
 
 export const propMeterOptions = {
 	title: 'Proportional Meter Chart',
-	height: '100px',
-	// legend: {
-	// 	enabled: false
-	// },
+	height: '110px',
 	meter: {
 		proportional: {
 			total: 2000,
 			unit: 'GB',
-			// totalFormatter: (total)=> `custom total string for: ${total}`,
-			// breakdownFormatter: (x)=> `You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+		},
+	},
+	color: {
+		pairing: {
+			option: 2,
+		},
+	},
+};
+
+export const propMeterTruncationOptions = {
+	title: 'Proportional Meter Chart (truncated)',
+	height: '110px',
+	meter: {
+		proportional: {
+			total: 2000,
+			unit: 'MB',
+			totalFormatter: (total) => `custom total string for: ${total}`,
+			breakdownFormatter: (x) =>
+				`You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
 		},
 	},
 };

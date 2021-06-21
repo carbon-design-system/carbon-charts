@@ -46,8 +46,6 @@ export class MeterChart extends Chart {
 			Tools.merge(Tools.clone(Configuration.options.meterChart), options)
 		);
 
-		console.log(this.model.getOptions());
-
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
 	}

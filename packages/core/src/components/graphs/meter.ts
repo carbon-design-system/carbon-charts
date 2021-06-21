@@ -18,12 +18,12 @@ export class Meter extends Component {
 				prevX += scale(d.value);
 				return {
 					...d,
-					width: scale(d.value),
+					width: Math.abs(scale(d.value) - 2),
 					x: prevX - scale(d.value),
 				};
 			} else {
 				prevX = scale(d.value);
-				return { ...d, width: scale(d.value), x: 0 };
+				return { ...d, width: Math.abs(scale(d.value) - 2), x: 0 };
 			}
 		});
 
@@ -48,22 +48,22 @@ export class Meter extends Component {
 		const { groupMapsTo } = options.data;
 
 		let domainMax;
-		if (Tools.getProperty(options, 'meter', 'proportional', 'total')) {
-			domainMax = Tools.getProperty(
+		if (!Tools.getProperty(options, 'meter', 'proportional')) {
+			domainMax = 100;
+		} else {
+			const total = Tools.getProperty(
 				options,
 				'meter',
 				'proportional',
 				'total'
 			);
-		} else {
-			domainMax = this.model.getMaximumDomain(
-				this.model.getDisplayData()
-			);
+			domainMax = total
+				? total
+				: this.model.getMaximumDomain(this.model.getDisplayData());
 		}
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
-
 		const stackedData = this.getStackedBounds(data, xScale);
 
 		const userProvidedHeight = Tools.getProperty(
@@ -80,9 +80,6 @@ export class Meter extends Component {
 				'height',
 				userProvidedHeight ? userProvidedHeight : proportional ? 16 : 8
 			);
-
-		// value larger than 100 will display as 100% on meter chart
-		const maximumBarWidth = data.value >= 100;
 
 		// rect with the value binded
 		const valued = svg.selectAll('rect.value').data(stackedData);
@@ -144,24 +141,31 @@ export class Meter extends Component {
 			? null
 			: Tools.getProperty(options, 'meter', 'peak');
 
-		// update the peak if it is less than the value, it should be equal to the value
-		const updatedPeak =
-			peakValue !== null && peakValue < data.value
-				? data.value
-				: peakValue;
-		// dont display peak if there isnt one
-		const peakData =
-			updatedPeak === null || maximumBarWidth ? [] : [updatedPeak];
+		let peakData = peakValue;
+		if(peakValue !== null){
+			if(peakValue < data[0].value) {
+				peakData = data[0].value;
+			} else if (peakValue > domainMax) {
+				peakData = domainMax;
+			}
+		}
 
 		// if a peak is supplied within the domain, we want to render it
-		const peak = svg.selectAll('line.peak').data(peakData);
+		const peak = svg.selectAll('line.peak').data(peakData == null ? [] : [peakData]);
 
 		peak.enter()
 			.append('line')
 			.classed('peak', true)
 			.merge(peak)
 			.attr('y1', 0)
-			.attr('y2', Tools.getProperty(options, 'meter', 'height'))
+			.attr('y2', () => {
+				const userProvidedHeight = Tools.getProperty(
+					options,
+					'meter',
+					'height'
+				);
+				return userProvidedHeight ? userProvidedHeight : 8;
+			})
 			.transition(
 				this.services.transitions.getTransition(
 					'peak-line-update',
@@ -182,7 +186,6 @@ export class Meter extends Component {
 
 		if (proportional) {
 			// Add event listeners to elements and legend
-			// this.addLegendListeners();
 			this.addEventListeners();
 		}
 	}
@@ -191,7 +194,6 @@ export class Meter extends Component {
 	addEventListeners() {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
-
 		const self = this;
 
 		this.parent

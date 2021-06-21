@@ -15,9 +15,6 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts-react
 
-
-
-
 # Change Log
 
 All notable changes to this project will be documented in this file. See
@@ -27,6 +24,7 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts-react
 
+<<<<<<< Updated upstream
 # Change Log
 
 All notable changes to this project will be documented in this file. See
@@ -36,6 +34,8 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/charts-react
 
+=======
+>>>>>>> Stashed changes
 ## [0.41.67](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.66...v0.41.67) (2021-05-31)
 
 **Note:** Version bump only for package @carbon/charts-react
