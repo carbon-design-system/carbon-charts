@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// @ts-ignore
 import settings from 'carbon-components/src/globals/js/settings';
+
+// @ts-ignore
 import classnames from 'classnames';
 
 const { prefix } = settings;
@@ -20,7 +24,7 @@ const ShapeNode = ({
 	shape = 'circle',
 	subtitle,
 	title,
-}) => {
+}: any) => {
 	const namespace = `${prefix}--cc--shape-node`;
 
 	let Component = 'div';
@@ -45,6 +49,7 @@ const ShapeNode = ({
 	) : null;
 
 	return (
+		// @ts-ignore
 		<Component
 			className={circleClasses}
 			onClick={onClick}

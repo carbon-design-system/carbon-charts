@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.41.69",
+	"version": "0.41.71",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -51,6 +51,7 @@
 		"@carbon/colors": "10.15.0",
 		"@carbon/telemetry": "0.0.0-alpha.6",
 		"@carbon/utils-position": "1.1.1",
+		"carbon-components": "10.5.0",
 		"d3-cloud": "1.2.5",
 		"date-fns": "2.8.1",
 		"lodash-es": "4.17.21",
@@ -78,7 +79,6 @@
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
 		"babel-polyfill": "6.26.0",
-		"carbon-components": "10.5.0",
 		"codesandbox": "2.1.11",
 		"concurrently": "5.1.0",
 		"copy-webpack-plugin": "4.5.2",

@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { MarkerModule } from "../../src/components/diagrams/marker/marker.module";
-import { EdgeModule } from "../../src/components/diagrams/edge/edge.module";
+import { MarkerModule } from "../../src/diagrams/marker/marker.module";
+import { EdgeModule } from "../../src/diagrams/edge/edge.module";
 
 const getTemplate = demo => `
 	<div class="container theme--white">

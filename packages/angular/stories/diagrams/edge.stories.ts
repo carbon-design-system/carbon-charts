@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from "@storybook/angular";
-import { EdgeModule } from "../../src/components/diagrams/edge/edge.module";
+import { EdgeModule } from "../../src/diagrams/edge/edge.module";
 import { buildBezierPathString, buildElbowPathString } from "@carbon/charts/components/diagrams/buildPaths";
 
 const linkSource = { x: 0, y: 0 };

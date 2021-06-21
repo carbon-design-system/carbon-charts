@@ -1,16 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
+import { User20, Wikis20, Debug20 } from '@carbon/icons-react';
+import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
+
 import CardNode, {
 	CardNodeColumn,
 	CardNodeTitle,
 	CardNodeSubtitle,
-} from './CardNode';
-import Edge from './Edge';
-import ShapeNode from './ShapeNode';
-import { ArrowRightMarker } from './Marker';
-
-import { User20, Wikis20, Debug20 } from '@carbon/icons-react';
-import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
+} from '../../dist/diagrams/CardNode';
+import Edge from '../../dist/diagrams/Edge';
+import ShapeNode from '../../dist/diagrams/ShapeNode';
+import { ArrowRightMarker } from '../../dist/diagrams/Marker';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
@@ -68,7 +69,7 @@ stories.add('Start here', () => {
 			<p {...paragraphStyle}>
 				A simple composed diagram, using statically defined x and y
 				coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>
@@ -80,7 +81,7 @@ stories.add('Start here', () => {
 			<p {...paragraphStyle}>
 				A composed diagram, rendered using arrays of statically defined
 				x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>
@@ -89,9 +90,20 @@ stories.add('Start here', () => {
 
 			<h3 {...h3Style}>Layouts using external dependencies</h3>
 
-			<p {...paragraphStyle}>
-				Coming soon. Examples of layouts using external dependencies
-			</p>
+			<p>Here's an example using <b>elkjs</b> in react</p>
+
+			<iframe
+				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+				style={{
+					width: '100%',
+					height: '500px',
+					border: 0,
+					borderRadius: '4px',
+					overflow: 'hidden',
+				}}
+				title="carbon-charts-react-elkjs-diagram"
+				allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	);
 });

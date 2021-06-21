@@ -7,8 +7,8 @@ import {
 	DiamondMarker,
 	SquareMarker,
 	TeeMarker,
-} from '.';
-import Edge from '../Edge';
+} from '../../dist/diagrams/Marker';
+import Edge from '../../dist/diagrams/Edge';
 
 const linkSource = { x: 20, y: 50 };
 const linkTarget = { x: 250, y: 50 };
