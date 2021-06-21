@@ -37,8 +37,6 @@ export class MeterChart extends Chart {
 				chartConfigs.options
 			);
 		}
-		// if not proportional we disable the legend
-		// if yes then we use diff height and enable the legend
 
 		// Merge the default options for this chart
 		// With the user provided options

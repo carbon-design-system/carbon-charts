@@ -101,8 +101,7 @@ export class MeterTitle extends Title {
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
 		}
 
-		// const dataString = `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
-		// the title for a meter, is the label for that dataset
+		// the breakdown part to whole of the datasets to the overall total
 		const title = svg
 			.selectAll('text.proportional-meter-title')
 			.data([data]);
@@ -149,6 +148,7 @@ export class MeterTitle extends Title {
 		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
 			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
 			: '';
+
 		// totalFormatter function
 		const totalFormatter = Tools.getProperty(
 			options,

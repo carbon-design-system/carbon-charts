@@ -144,6 +144,11 @@ export const meter = {
 		indicatorSize: 16,
 		paddingLeft: 15,
 	},
+	height: {
+		default: 8,
+		proportional: 16
+	},
+	dividerWidth: 2
 };
 
 export const pie = {

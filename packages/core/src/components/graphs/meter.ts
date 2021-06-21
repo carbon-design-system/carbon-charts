@@ -3,6 +3,7 @@ import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
 import { Roles, ColorClassNameTypes, Events } from '../../interfaces';
+import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale';
@@ -13,21 +14,21 @@ export class Meter extends Component {
 
 	getStackedBounds(data, scale) {
 		let prevX = 0;
-		const newData = data.map((d, i) => {
+		const stackedData = data.map((d, i) => {
 			if (i !== 0) {
 				prevX += scale(d.value);
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - 2),
+					width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth),
 					x: prevX - scale(d.value),
 				};
 			} else {
 				prevX = scale(d.value);
-				return { ...d, width: Math.abs(scale(d.value) - 2), x: 0 };
+				return { ...d, width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth), x: 0 };
 			}
 		});
 
-		return newData;
+		return stackedData;
 	}
 
 	render(animate = true) {
@@ -48,7 +49,7 @@ export class Meter extends Component {
 		const { groupMapsTo } = options.data;
 
 		let domainMax;
-		if (!Tools.getProperty(options, 'meter', 'proportional')) {
+		if (Tools.getProperty(options, 'meter', 'proportional') === null) {
 			domainMax = 100;
 		} else {
 			const total = Tools.getProperty(
@@ -78,7 +79,7 @@ export class Meter extends Component {
 			.attr('width', width)
 			.attr(
 				'height',
-				userProvidedHeight ? userProvidedHeight : proportional ? 16 : 8
+				userProvidedHeight ? userProvidedHeight : proportional ? Configuration.meter.height.proportional : Configuration.meter.height.default
 			);
 
 		// rect with the value binded
@@ -109,8 +110,8 @@ export class Meter extends Component {
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? 16
-					: 8;
+						? Configuration.meter.height.proportional
+						: Configuration.meter.height.default
 			})
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -126,7 +127,7 @@ export class Meter extends Component {
 				)
 			)
 			.attr('width', (d, i) => {
-				return d.width;
+				return d.value > domainMax ? xScale(domainMax) : d.width;
 			})
 			.style('fill', (d) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
@@ -142,11 +143,11 @@ export class Meter extends Component {
 			: Tools.getProperty(options, 'meter', 'peak');
 
 		let peakData = peakValue;
-		if(peakValue !== null){
-			if(peakValue < data[0].value) {
-				peakData = data[0].value;
-			} else if (peakValue > domainMax) {
+		if (peakValue !== null) {
+			if (peakValue > domainMax) {
 				peakData = domainMax;
+			} else if (peakValue < data[0].value) {
+				peakData = data[0].value > domainMax ? domainMax : data[0].value;
 			}
 		}
 

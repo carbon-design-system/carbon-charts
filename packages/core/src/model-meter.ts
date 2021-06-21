@@ -12,27 +12,12 @@ export class MeterChartModel extends ChartModel {
 		super(services);
 	}
 
-	update(animate = true) {
-		super.update(animate);
-		if (!this.getDisplayData()) {
-			return;
-		}
-	}
-
 	getMaximumDomain(data) {
 		const max = data.reduce(
 			(accumulator, datum) => accumulator + datum.value,
 			0
 		);
 		return max;
-	}
-
-	getDisplayData() {
-		if (!this.get('data')) {
-			return null;
-		}
-
-		return this.get('data');
 	}
 
 	/**
