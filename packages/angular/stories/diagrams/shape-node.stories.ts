@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { ShapeNodeModule } from '../../src/components/diagrams/shape-node/shape-node.module';
+import { ShapeNodeModule } from '../../src/diagrams/shape-node/shape-node.module';
 import { ScreenModule } from '@carbon/icons-angular';
 
 const getTemplate = (demo) => `

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// @ts-ignore
 import classnames from 'classnames';
+
+// @ts-ignore
 import settings from 'carbon-components/src/globals/js/settings';
+
 const { prefix } = settings;
 const namespace = `${prefix}--cc--card-node`;
 
@@ -17,7 +22,7 @@ const CardNode = ({
 	onMouseMove = null,
 	onClick = null,
 	stacked,
-}) => {
+}: any) => {
 	let Component = 'div';
 
 	if (as !== 'div') {
@@ -34,6 +39,7 @@ const CardNode = ({
 	});
 
 	return (
+		// @ts-ignore
 		<Component
 			className={cardClasses}
 			onClick={onClick}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ShapeNode from '.';
 
 import { User20 } from '@carbon/icons-react';
+
+import ShapeNode from '../../dist/diagrams/ShapeNode';
 
 const stories = storiesOf('Diagrams|Nodes/Shape', module);
 stories.addDecorator((story) => (
