@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// @ts-ignore
 import settings from 'carbon-components/src/globals/js/settings';
+
 import {
 	arrowLeft,
 	arrowRight,
@@ -22,7 +25,7 @@ const Marker = ({
 	position = 'end',
 	refX,
 	refY,
-}) => {
+}: any) => {
 	const namespace = `${prefix}--cc--marker`;
 
 	const xPos = position === 'end' ? width / 2 + 0.5 : 0.5;

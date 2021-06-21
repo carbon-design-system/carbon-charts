@@ -1,11 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
 import CardNode, {
 	CardNodeColumn,
 	CardNodeSubtitle,
 	CardNodeLabel,
 	CardNodeTitle,
-} from '.';
+} from '../../dist/diagrams/CardNode';
+
 import { User20, ChevronDown20 } from '@carbon/icons-react';
 
 const stories = storiesOf('Diagrams|Nodes/Card', module);

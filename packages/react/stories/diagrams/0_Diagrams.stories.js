@@ -1,16 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
+import { User20, Wikis20, Debug20 } from '@carbon/icons-react';
+import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
+
 import CardNode, {
 	CardNodeColumn,
 	CardNodeTitle,
 	CardNodeSubtitle,
-} from './CardNode';
-import Edge from './Edge';
-import ShapeNode from './ShapeNode';
-import { ArrowRightMarker } from './Marker';
-
-import { User20, Wikis20, Debug20 } from '@carbon/icons-react';
-import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
+} from '../../dist/diagrams/CardNode';
+import Edge from '../../dist/diagrams/Edge';
+import ShapeNode from '../../dist/diagrams/ShapeNode';
+import { ArrowRightMarker } from '../../dist/diagrams/Marker';
 
 const nodeHeight = 64;
 const nodeWidth = 200;
@@ -68,7 +69,7 @@ stories.add('Start here', () => {
 			<p {...paragraphStyle}>
 				A simple composed diagram, using statically defined x and y
 				coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>
@@ -80,7 +81,7 @@ stories.add('Start here', () => {
 			<p {...paragraphStyle}>
 				A composed diagram, rendered using arrays of statically defined
 				x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/components/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/src/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>

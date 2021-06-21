@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// @ts-ignore
 import settings from 'carbon-components/src/globals/js/settings';
-import { buildStraightPathString } from '@carbon/charts/components/diagrams/buildPaths';
+
+// @ts-ignore
 import classnames from 'classnames';
+
+import { buildStraightPathString } from '@carbon/charts/components/diagrams/buildPaths';
 
 const { prefix } = settings;
 
@@ -19,7 +24,7 @@ const Edge = ({
 	source,
 	target,
 	variant = null,
-}) => {
+}: any) => {
 	const namespace = `${prefix}--cc--edge`;
 
 	const pathClasses = classnames(namespace, {

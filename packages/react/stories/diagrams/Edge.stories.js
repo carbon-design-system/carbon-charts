@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Edge from '.';
+
+import Edge from '../../dist/diagrams/Edge';
 import {
 	buildBezierPathString,
 	buildElbowPathString,
