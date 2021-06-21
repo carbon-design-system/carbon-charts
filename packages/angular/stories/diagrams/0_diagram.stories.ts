@@ -1,8 +1,8 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { ShapeNodeModule } from '../../src/components/diagrams/shape-node/shape-node.module';
-import { CardNodeModule } from '../../src/components/diagrams/card-node/card-node.module';
-import { EdgeModule } from '../../src/components/diagrams/edge/edge.module';
-import { MarkerModule } from '../../src/components/diagrams/marker/marker.module';
+import { ShapeNodeModule } from '../../src/diagrams/shape-node/shape-node.module';
+import { CardNodeModule } from '../../src/diagrams/card-node/card-node.module';
+import { EdgeModule } from '../../src/diagrams/edge/edge.module';
+import { MarkerModule } from '../../src/diagrams/marker/marker.module';
 
 import { UserModule, WikisModule } from '@carbon/icons-angular';
 import { buildElbowPathString } from '@carbon/charts/components/diagrams/buildPaths';
