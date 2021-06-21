@@ -1,7 +1,7 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.41.68](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.67...v0.41.68) (2021-06-08)
 
@@ -15,25 +15,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts-react
 
-
-
-
-
 ## [0.41.66](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.65...v0.41.66) (2021-05-25)
 
 **Note:** Version bump only for package @carbon/charts-react
 
-
-
-
-
 ## [0.41.65](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.64...v0.41.65) (2021-05-19)
 
 **Note:** Version bump only for package @carbon/charts-react
-
-
-
-
 
 # Change Log
 
@@ -96,19 +84,7 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.41.56](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.55...v0.41.56) (2021-04-16)
-
-**Note:** Version bump only for package @carbon/charts-react
-
-## [0.41.55](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.54...v0.41.55) (2021-04-14)
-
-**Note:** Version bump only for package @carbon/charts-react
-
-## [0.41.54](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.53...v0.41.54) (2021-04-14)
-
-**Note:** Version bump only for package @carbon/charts-react
-
-## [0.41.53](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.52...v0.41.53) (2021-04-13)
+## [0.41.57](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.56...v0.41.57) (2021-04-20)
 
 **Note:** Version bump only for package @carbon/charts-react
 
