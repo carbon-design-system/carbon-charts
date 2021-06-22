@@ -41,7 +41,7 @@ export class CirclePack extends Component {
 
 		// check if there is one root for the data
 		// that root will be the only datagroup (colorscale will be monochrome)
-		if (parentNode) {
+		if (parentNode && Tools.getProperty(displayData, 0, 'children')) {
 			// remove want to remove the parent from being rendered
 			displayData = Tools.getProperty(displayData, 0, 'children');
 		}
