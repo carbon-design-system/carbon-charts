@@ -148,7 +148,10 @@ export class Highlight extends Component {
 					})
                     .style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 1 + 'px')
-                    .style('fill', 'none');
+					.style('fill-opacity', 0.1)
+                    .style('fill', ({ color, labelMapsTo, ...data }) => {
+						return color.scale[data[labelMapsTo]];
+					});
 
 				if (line) {
 					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, yScaleEnd, getXValue, axisPosition);
@@ -183,7 +186,10 @@ export class Highlight extends Component {
 					})
                     .style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 1 + 'px')
-                    .style('fill', 'none');
+                    .style('fill-opacity', 0.1)
+                    .style('fill', ({ color, labelMapsTo, ...data }) => {
+						return color.scale[data[labelMapsTo]];
+					});
 
 				if (line) {
 					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, xScaleStart, getYValue, axisPosition);
