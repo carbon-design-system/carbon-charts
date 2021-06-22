@@ -146,7 +146,6 @@ export class Highlight extends Component {
                     .style('stroke', ({ color, labelMapsTo, ...data }) => {
 						return color.scale[data[labelMapsTo]];
 					})
-                    .style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 1 + 'px')
 					.style('fill-opacity', 0.1)
                     .style('fill', ({ color, labelMapsTo, ...data }) => {
@@ -184,7 +183,6 @@ export class Highlight extends Component {
 					.style('stroke', ({ color, labelMapsTo, ...data }) => {
 						return color.scale[data[labelMapsTo]];
 					})
-                    .style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 1 + 'px')
                     .style('fill-opacity', 0.1)
                     .style('fill', ({ color, labelMapsTo, ...data }) => {
