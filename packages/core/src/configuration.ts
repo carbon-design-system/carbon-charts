@@ -379,6 +379,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			enabled: true,
 		},
 		alignment: Alignments.LEFT,
+		sortFunction: null,
 	},
 } as PieChartOptions);
 

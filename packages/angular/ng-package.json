@@ -4,5 +4,5 @@
 	"lib": {
 		"entryFile": "src/index.ts"
 	},
-	"whitelistedNonPeerDependencies": ["@carbon/charts", "@carbon/telemetry"]
+	"whitelistedNonPeerDependencies": ["@carbon/charts", "@carbon/telemetry", "@carbon/icons-angular"]
 }

@@ -47,3 +47,7 @@ export * from './axes/ruler-stacked';
 export * from './axes/toolbar';
 export * from './axes/zero-line';
 export * from './axes/zoom-bar';
+
+// Diagrams
+export * from './diagrams/buildPaths';
+export * from './diagrams/markerDefinitions';

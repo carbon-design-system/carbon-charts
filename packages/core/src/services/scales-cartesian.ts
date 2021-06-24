@@ -611,7 +611,7 @@ export class CartesianScales extends Service {
 
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
-			thresholds.forEach(threshold => {
+			thresholds.forEach((threshold) => {
 				const thresholdValue = Tools.getProperty(threshold, 'value');
 				if (thresholdValue !== null) allDataValues.push(thresholdValue);
 			});

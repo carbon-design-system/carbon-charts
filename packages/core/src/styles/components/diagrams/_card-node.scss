@@ -1,0 +1,99 @@
+@import './../../vendor/carbon-components/scss/globals/scss/vars';
+@import './../../vendor/@carbon/themes/scss/tokens';
+@import './../../vendor/@carbon/layout/scss/spacing';
+@import './../../vendor/@carbon/type/scss/font-face/sans';
+@import './../../vendor/@carbon/elements/scss/import-once/import-once';
+@import './../../vendor/carbon-components/scss/globals/scss/_helper-mixins';
+
+@mixin stacked-card-node {
+	content: '';
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 0;
+	border-top: carbon--mini-units(0.25) solid $ui-03;
+	border-right: carbon--mini-units(0.25) solid $ui-03;
+	pointer-events: none;
+}
+
+@include exports('cc-card-node') {
+	.#{$prefix}--#{$charts-prefix}--card-node {
+		display: flex;
+		position: relative;
+		background-color: $ui-01;
+		z-index: 1;
+		box-sizing: border-box;
+		font-family: carbon--font-family('sans');
+		width: 100%;
+		height: 100%;
+		padding: $spacing-05 $spacing-03;
+		border-left: carbon--mini-units(0.5) solid $ui-05;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a,
+	.#{$prefix}--#{$charts-prefix}--card-node--button {
+		border-top: none;
+		border-right: none;
+		border-bottom: none;
+		color: inherit;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--button {
+		font-family: carbon--font-family('sans');
+		text-align: left;
+		width: 100%;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--a:hover,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:hover {
+		background-color: $hover-ui;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:focus {
+		@include focus-outline($type: outline);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--stacked {
+		&::before {
+			@include stacked-card-node();
+			left: carbon--mini-units(0.625);
+			bottom: carbon--mini-units(0.625);
+		}
+
+		&::after {
+			@include stacked-card-node();
+			left: carbon--mini-units(1.375);
+			bottom: carbon--mini-units(1.375);
+		}
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__column {
+		padding: 0 $spacing-03;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__column--farside {
+		margin-left: auto;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__title {
+		@include carbon--type-style($name: productive-heading-01);
+		margin: 0;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__subtitle {
+		@include carbon--type-style($name: body-short-01);
+		margin: 0;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__label {
+		display: block;
+		@include carbon--type-style($name: label-01);
+		color: $text-02;
+		padding-top: $spacing-06;
+	}
+}
