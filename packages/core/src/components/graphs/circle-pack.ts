@@ -21,7 +21,10 @@ export class CirclePack extends Component {
 			useAttrs: true,
 		});
 
-		if (width === 0 || height === 0) {
+		// Because of a Firefox bug with regards to sizing & d3 packs,
+		// rather than checking if height or width aren't 0,
+		// we have to make sure they're not smaller than 1
+		if (width < 1 || height < 1) {
 			// on first render the svg is width and height 0
 			// the circle packing layout functionality will not run
 			return;
