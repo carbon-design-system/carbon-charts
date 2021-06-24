@@ -1,4 +1,4 @@
-import { ZoomBarTypes } from './interfaces';
+import { ZoomBarTypes, LegendItemTypes } from './interfaces';
 import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
@@ -230,3 +230,26 @@ export const zoomBar = {
 	handleBarWidth: 1,
 	handleBarHeight: 12,
 };
+
+export const defaultLegendAdditionalItems = [
+	{
+		type: LegendItemTypes.RADIUS,
+		name: 'Radius',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Poor area',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Satisfactory area',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Great area',
+	},
+	{
+		type: LegendItemTypes.QUARTILE,
+		name: 'Quartiles',
+	},
+]
