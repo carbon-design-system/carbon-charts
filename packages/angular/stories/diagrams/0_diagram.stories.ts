@@ -43,12 +43,12 @@ stories.add('Start here', () => ({
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 			<b>Note that Carbon Charts does not provide layouts for diagrams.
 			You can utilize these components alongside graphing libraries,
-			or by composing your own layouts.</b>
+			or by composing your own layouts (see section 3).</b>
 			</p>
 
 			<h2 style='padding-top: 2rem'>Examples</h2>
 
-			<h3 style='padding-top: 1rem'>Simple static layout</h3>
+			<h3 style='padding-top: 1rem'>1. Simple static layout</h3>
 
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 			A simple composed diagram, using statically defined x and y
@@ -60,7 +60,7 @@ stories.add('Start here', () => ({
 
 			${SimpleStatic}
 
-			<h3 style='padding-top: 1rem'>Programmatic static layout</h3>
+			<h3 style='padding-top: 1rem'>2. Programmatic static layout</h3>
 
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 				A composed diagram, rendered using arrays of statically defined
@@ -72,7 +72,7 @@ stories.add('Start here', () => ({
 
 			${ProgrammaticStatic}
 
-			<h3 style='padding-top: 1rem'>Layouts using external dependencies</h3>
+			<h3 style='padding-top: 1rem'>3. Layouts using external dependencies</h3>
 
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 			Coming soon. Examples of layouts using external dependencies
