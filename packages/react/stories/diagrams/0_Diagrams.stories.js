@@ -58,13 +58,13 @@ stories.add('Start here', () => {
 				<b>
 					Note that Carbon Charts does not provide layouts for
 					diagrams. You can utilize these components alongside
-					graphing libraries, or by composing your own layouts.
+					graphing libraries, or by composing your own layouts (see section 3).
 				</b>
 			</p>
 
 			<h2 {...h2Style}>Examples</h2>
 
-			<h3 {...h3Style}>Simple static layout</h3>
+			<h3 {...h3Style}>1. Simple static layout</h3>
 
 			<p {...paragraphStyle}>
 				A simple composed diagram, using statically defined x and y
@@ -76,7 +76,7 @@ stories.add('Start here', () => {
 
 			<SimpleStatic />
 
-			<h3 {...h3Style}>Programmatic static layout</h3>
+			<h3 {...h3Style}>2. Programmatic static layout</h3>
 
 			<p {...paragraphStyle}>
 				A composed diagram, rendered using arrays of statically defined
@@ -88,7 +88,7 @@ stories.add('Start here', () => {
 
 			<ProgrammaticStatic />
 
-			<h3 {...h3Style}>Layouts using external dependencies</h3>
+			<h3 {...h3Style}>3. Layouts using external dependencies</h3>
 
 			<p>Here's an example using <b>elkjs</b> in react</p>
 
