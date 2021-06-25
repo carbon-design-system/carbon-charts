@@ -74,9 +74,20 @@ stories.add('Start here', () => ({
 
 			<h3 style='padding-top: 1rem'>3. Layouts using external dependencies</h3>
 
-			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
-			Coming soon. Examples of layouts using external dependencies
-			</p>
+			<p>Here's an example using <b>elkjs</b> in <b><u>react</u></b></p>
+
+			<iframe
+				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+				style={{
+					width: '100%',
+					height: '500px',
+					border: 0,
+					borderRadius: '4px',
+					overflow: 'hidden',
+				}}
+				title="carbon-charts-react-elkjs-diagram"
+				allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	`),
 	props: {
