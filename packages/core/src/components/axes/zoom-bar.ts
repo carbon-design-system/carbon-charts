@@ -75,6 +75,14 @@ export class ZoomBar extends Component {
 			'type'
 		);
 
+		// As zoom current only available on top only highlights corresponding to bottom axis will be shown 
+		const highlight = Tools.getProperty(
+			this.getOptions(),
+			'axes',
+			AxisPositions.BOTTOM,
+			'highlights'
+		);
+
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
@@ -236,6 +244,29 @@ export class ZoomBar extends Component {
 				);
 				// Draw the zoom bar base line
 				this.renderZoomBarBaseline(container, axesLeftMargin, width);
+				
+				if (highlight) {
+					const startHighlight = highlight.highlightStartMapsTo;
+					const endHighlight = highlight.highlightEndMapsTo;
+					const color = highlight.color;
+					const labelMapTo = highlight.labelMapsTo;
+
+					highlight.data.forEach((element, index) => {
+						DOMUtils.appendOrSelect(
+							container, 
+							`rect.highlight-${index}`
+						)
+						.attr('height', zoombarHeight)
+						.attr('x', this.xScale(element[startHighlight]))
+						.attr('width', this.xScale(element[endHighlight]) - this.xScale(element[startHighlight]))
+						.style('fill', color && color.scale[element[labelMapTo]] ? color.scale[element[labelMapTo]] : null)
+						.style('fill-opacity', 0.1)
+						.style('stroke', color && color.scale[element[labelMapTo]]  ? color.scale[element[labelMapTo]] : null)
+						.style('stroke-dasharray', '2, 2')
+						.attr('stroke-width', 1 + 'px');
+					});
+				}
+
 			}
 
 			// Attach brushing event listeners

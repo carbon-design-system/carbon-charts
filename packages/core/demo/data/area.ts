@@ -1,4 +1,5 @@
 import { timeFormat } from 'd3';
+import { addZoomBarToOptions } from './zoom-bar';
 
 export const areaTimeSeriesData = [
 	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 0 },
@@ -327,9 +328,9 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 				highlightStartMapsTo: 'startHighlight',
 				highlightEndMapsTo: 'endHighlight',
 				labelMapsTo: 'label',
-				color: {
-					scale: { 'Custom formatter': 'red' },
-				},
+				// color: {
+				// 	scale: { 'Custom formatter': 'red' },
+				// },
 				data: [
 					{
 						startHighlight: new Date(2019, 0, 7),
@@ -351,6 +352,8 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 	},
 	curve: 'curveNatural',
 };
+
+export const boundedAreaTimeSeriesWithHighlightsZoomOptions = addZoomBarToOptions(Object.assign({}, boundedAreaTimeSeriesWithHighlightsOptions));
 
 // area - empty state
 export const areaEmptyData = [];

@@ -262,6 +262,11 @@ const utilityDemoGroups = [
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 			},
+			{
+				options: areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+			}
 		],
 	},
 	{

@@ -3,7 +3,6 @@ import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { AxisPositions } from '../../interfaces';
 import { select } from 'd3-selection';
-import * as Configuration from '../../configuration';
 
 export class Highlight extends Component {
 	type = 'highlight';
@@ -138,13 +137,13 @@ export class Highlight extends Component {
 							)
 					)
                     .style('stroke', ({ color, labelMapsTo, ...data }) => {
-						return color.scale[data[labelMapsTo]];
+						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
 					})
                     .style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 1 + 'px')
 					.style('fill-opacity', 0.1)
                     .style('fill', ({ color, labelMapsTo, ...data }) => {
-						return color.scale[data[labelMapsTo]];
+						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
 					});
 
 
