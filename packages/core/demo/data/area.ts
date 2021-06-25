@@ -318,9 +318,6 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 		upperBoundMapsTo: 'max',
 		lowerBoundMapsTo: 'min',
 	},
-	highlight: {
-		line: true,
-	},
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
@@ -355,52 +352,6 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 	curve: 'curveNatural',
 };
 
-
-export const boundedAreaTimeSeriesWithHighlightBoxOptions = {
-	title: 'Bounded area',
-	legend: {
-		enabled: false,
-	},
-	bounds: {
-		upperBoundMapsTo: 'max',
-		lowerBoundMapsTo: 'min',
-	},
-	highlight: {
-		line: false,
-	},
-	axes: {
-		bottom: {
-			title: '2019 Annual Sales Figures',
-			mapsTo: 'date',
-			scaleType: 'time',
-			highlights: {
-				highlightStartMapsTo: 'startHighlight',
-				highlightEndMapsTo: 'endHighlight',
-				labelMapsTo: 'label',
-				color: {
-					scale: { 'Custom formatter': 'red' },
-				},
-				data: [
-					{
-						startHighlight: new Date(2019, 0, 7),
-						label: 'Custom formatter',
-						endHighlight: new Date(2019, 0, 8),
-					},
-					{
-						startHighlight: new Date(2019, 0, 13),
-						label: 'Custom formatter',
-						endHighlight: new Date(2019, 0, 14),
-					},
-				],
-			},
-		},
-		left: {
-			mapsTo: 'value',
-			scaleType: 'linear',
-		},
-	},
-	curve: 'curveNatural',
-};
 // area - empty state
 export const areaEmptyData = [];
 export const areaEmptyOptions = {

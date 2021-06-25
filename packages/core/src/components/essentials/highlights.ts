@@ -17,8 +17,6 @@ export class Highlight extends Component {
 	render(animate = false) {
 		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
 
-		const line = Tools.getProperty(this.getOptions(), 'highlight', 'line')
-
 		const highlightData = [];
 		Object.keys(axesOptions).forEach((axisPosition) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
@@ -86,10 +84,6 @@ export class Highlight extends Component {
 		const highlightGroupsEnter = highlightGroups.enter().append('g');
 
 		highlightGroupsEnter.append('rect').attr('class', 'highlight-bar');
-		if (line) {
-			highlightGroupsEnter.append('line').attr('class', 'highlight-line-1');
-			highlightGroupsEnter.append('line').attr('class', 'highlight-line-2');
-		}
 
 		const highlightGroupsMerge = highlightGroupsEnter.merge(
 			highlightGroups
@@ -153,10 +147,6 @@ export class Highlight extends Component {
 						return color.scale[data[labelMapsTo]];
 					});
 
-				if (line) {
-					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, yScaleEnd, getXValue, axisPosition);
-					self.addLine(group.selectAll('line.highlight-line-2'), self, animate, yScaleStart, getXValue, axisPosition);
-				}
 
 			} else {
 				group
@@ -191,46 +181,7 @@ export class Highlight extends Component {
 						return color.scale[data[labelMapsTo]];
 					});
 
-				if (line) {
-					self.addLine(group.selectAll('line.highlight-line-1'), self, animate, xScaleStart, getYValue, axisPosition);
-					self.addLine(group.selectAll('line.highlight-line-2'), self, animate, xScaleEnd, getYValue, axisPosition);
-				}
 			}
 		});
 	}
-
-
-	addLine(group, self, animate, scale, getValue, axisPosition){
-		group
-			.transition(
-				self.services.transitions.getTransition(
-					'highlight-line-update',
-					animate
-				)
-			)
-			.attr('y1', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ? 
-				scale : 
-				({ highlightEndMapsTo, ...d }) =>
-					getValue(d[highlightEndMapsTo]))
-			.attr('y2', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ? 
-				scale : 
-				({ highlightStartMapsTo, ...d }) =>
-					getValue(d[highlightStartMapsTo]))
-			.attr('x2', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ?
-				({ highlightStartMapsTo, ...d }) =>
-					getValue(d[highlightStartMapsTo])
-				: scale
-			)
-			.attr('x1', axisPosition == AxisPositions.TOP || axisPosition == AxisPositions.BOTTOM ?
-				({ highlightEndMapsTo, ...d }) =>
-					getValue(d[highlightEndMapsTo])
-				:scale
-			)
-			.style('stroke', ({ color, labelMapsTo, ...data }) => {
-				return color.scale[data[labelMapsTo]];
-			})
-			.attr('stroke-width', 2 + 'px');
-
-	}
-
 }
