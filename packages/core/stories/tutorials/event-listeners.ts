@@ -19,5 +19,13 @@ barChart.services.events.addEventListener("bar-onmouseover", e => {
 });
 \`\`\`
 
+&nbsp;
+
+### Code examples
+Here are some possible solutions for event binding:
+
+- [vanilla](https://codesandbox.io/s/carbon-charts-vanilla-event-binding-9b1i5?file=/src/index.js)
+- [React](https://codesandbox.io/s/carbon-charts-react-event-binding-contributed-by-eric-lowry-upztp?file=/src/App.js)
+
 `),
 };

@@ -7,6 +7,7 @@ export * from './essentials/title';
 export * from './essentials/title-meter';
 export * from './essentials/tooltip';
 export * from './essentials/tooltip-axis';
+export * from './essentials/canvas-chart-clip';
 
 // GRAPHS
 export * from './graphs/area';
@@ -28,6 +29,7 @@ export * from './graphs/skeleton';
 export * from './graphs/skeleton-lines';
 export * from './graphs/treemap';
 export * from './graphs/radar';
+export * from './graphs/circle-pack';
 export * from './graphs/wordcloud';
 
 // Layout
@@ -45,3 +47,7 @@ export * from './axes/ruler-stacked';
 export * from './axes/toolbar';
 export * from './axes/zero-line';
 export * from './axes/zoom-bar';
+
+// Diagrams
+export * from './diagrams/buildPaths';
+export * from './diagrams/markerDefinitions';

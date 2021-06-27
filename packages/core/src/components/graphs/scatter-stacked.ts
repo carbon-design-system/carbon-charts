@@ -32,7 +32,7 @@ export class StackedScatter extends Scatter {
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
-			.data(stackedData, (d) => d[0][groupMapsTo]);
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// Remove dot groups that need to be removed
 		circleGroups.exit().attr('opacity', 0).remove();

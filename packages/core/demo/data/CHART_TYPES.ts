@@ -14,6 +14,11 @@ export default {
 		angular: 'ibm-bubble-chart',
 		vue: 'ccv-bubble-chart',
 	},
+	CirclePackChart: {
+		vanilla: 'CirclePackChart',
+		angular: 'ibm-circle-pack-chart',
+		vue: 'ccv-circle-pack-chart',
+	},
 	BulletChart: {
 		vanilla: 'BulletChart',
 		angular: 'ibm-bullet-chart',

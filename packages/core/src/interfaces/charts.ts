@@ -315,6 +315,7 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		sortFunction?: (a: any, b: any) => number;
 	};
 }
 
@@ -406,3 +407,20 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to circle pack charts
+ */
+export interface CirclePackChartOptions extends BaseChartOptions {
+	circlePack?: {
+		circles: {
+			fillOpacity: number;
+		};
+		// depth of nodes to display
+		hierachyLevel: number;
+		padding?: {
+			outer?: number;
+			inner?: number;
+		};
+	};
+}

@@ -15,6 +15,7 @@ import * as scatterDemos from './scatter';
 import * as stepDemos from './step';
 import * as timeSeriesAxisDemos from './time-series-axis';
 import * as treemapDemos from './treemap';
+import * as circlePackDemos from './circle-pack';
 import * as toolbarDemos from './toolbar';
 import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
@@ -37,6 +38,7 @@ export * from './scatter';
 export * from './step';
 export * from './time-series-axis';
 export * from './treemap';
+export * from './circle-pack';
 export * from './toolbar';
 export * from './wordcloud';
 export * from './zoom-bar';
@@ -194,6 +196,11 @@ const utilityDemoGroups = [
 				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
+			},
+			{
+				options: circlePackDemos.circlePackTwoLevelCustomColorsOptions,
+				data: circlePackDemos.circlePackTwoLevelData,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},
@@ -985,6 +992,37 @@ const complexChartDemos = [
 				data: treemapDemos.treemapData,
 				options: treemapDemos.treemapOptions,
 				chartType: chartTypes.TreemapChart,
+			},
+		],
+	},
+	{
+		title: 'Circle Pack',
+		demos: [
+			{
+				data: circlePackDemos.circlePackSingleLevelData,
+				options: circlePackDemos.circlePackSingleOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackTwoLevelData,
+				options: circlePackDemos.circlePackTwoLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelOptions,
+				chartType: chartTypes.CirclePackChart,
+				mainDemo: true,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelsMonochromeData,
+				options: circlePackDemos.circlePackThreeLevelsMonochromeOptions,
+				chartType: chartTypes.CirclePackChart,
+			},
+			{
+				data: circlePackDemos.circlePackThreeLevelData,
+				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},

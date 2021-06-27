@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.41.61](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.60...v0.41.61) (2021-04-28)
+## [0.41.77](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.76...v0.41.77) (2021-06-25)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.76](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.75...v0.41.76) (2021-06-24)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -16,37 +24,145 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.41.60](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.59...v0.41.60) (2021-04-28)
+## [0.41.75](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.74...v0.41.75) (2021-06-24)
 
 **Note:** Version bump only for package @carbon/charts
 
 
 
 
+
+## [0.41.74](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.73...v0.41.74) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.73](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.72...v0.41.73) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.72](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.71...v0.41.72) (2021-06-23)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.71](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.70...v0.41.71) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.70](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.69...v0.41.70) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.69](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.68...v0.41.69) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.68](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.67...v0.41.68) (2021-06-08)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.67](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.66...v0.41.67) (2021-05-31)
+
+### Bug Fixes
+
+-   **core:** fix circlepacks with one dataset
+    ([#1035](https://github.com/carbon-design-system/carbon-charts/issues/1035))
+    ([2f0b183](https://github.com/carbon-design-system/carbon-charts/commit/2f0b183878b650c76b05ca6d5fb1e8f6a17c0266)),
+    closes
+    [#1031](https://github.com/carbon-design-system/carbon-charts/issues/1031)
+-   **core:** make sure tooltips are properly positioned when closer to the
+    edges
+    ([#1037](https://github.com/carbon-design-system/carbon-charts/issues/1037))
+    ([a8d13cd](https://github.com/carbon-design-system/carbon-charts/commit/a8d13cd6d90813161582a00afa5166ca87702f38))
+
+## [0.41.66](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.65...v0.41.66) (2021-05-25)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.65](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.64...v0.41.65) (2021-05-19)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.64](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.63...v0.41.64) (2021-05-10)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.63](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.62...v0.41.63) (2021-05-10)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.62](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.61...v0.41.62) (2021-04-29)
+
+### Bug Fixes
+
+-   **core:** fix minor bug with data values that are undefined
+    ([#1007](https://github.com/carbon-design-system/carbon-charts/issues/1007))
+    ([5c4db99](https://github.com/carbon-design-system/carbon-charts/commit/5c4db996e3aaf5b8c8146b686945c9eb4a191b46))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.61](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.60...v0.41.61) (2021-04-28)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.60](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.59...v0.41.60) (2021-04-28)
+
+**Note:** Version bump only for package @carbon/charts
 
 ## [0.41.59](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.58...v0.41.59) (2021-04-27)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.58](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.57...v0.41.58) (2021-04-26)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.57](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.56...v0.41.57) (2021-04-20)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 # Change Log
 

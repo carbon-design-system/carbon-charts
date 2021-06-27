@@ -1,19 +1,9 @@
-import { ZoomBarTypes } from './interfaces';
-
-export const color = {
-	pairingOptions: {
-		'1-color': 4,
-		'2-color': 5,
-		'3-color': 5,
-		'4-color': 3,
-		'5-color': 2,
-		'14-color': 1,
-	},
-};
+import { ZoomBarTypes, LegendItemTypes } from './interfaces';
+import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
 	opacity: {
-		unselected: 0,
+		unselected: 0.05,
 		selected: 0.4,
 	},
 };
@@ -30,6 +20,37 @@ export const axis = {
 		compareTo: 'marker',
 	},
 	paddingRatio: 0.1,
+};
+
+export const canvasZoomSettings = {
+	duration: 1000,
+	ease: easeCubicInOut,
+	zoomLevel: 3,
+};
+
+export const circlePack = {
+	circles: {
+		fillOpacity: 0.3,
+		hover: {
+			stroke: '#FFF',
+		},
+	},
+	padding: {
+		mainGroup: 4,
+		children: 2,
+	},
+	hierarchyLevel: 2,
+};
+
+export const color = {
+	pairingOptions: {
+		'1-color': 4,
+		'2-color': 5,
+		'3-color': 5,
+		'4-color': 3,
+		'5-color': 2,
+		'14-color': 1,
+	},
 };
 
 export const boxplot = {
@@ -100,6 +121,10 @@ export const legend = {
 			{ x: 0, y: 0, width: 24, height: 13 },
 			{ x: 11, y: 4, width: 1, height: 4 },
 		],
+	},
+	zoom: {
+		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
+		color: '#8D8D8D',
 	},
 };
 
@@ -205,3 +230,26 @@ export const zoomBar = {
 	handleBarWidth: 1,
 	handleBarHeight: 12,
 };
+
+export const defaultLegendAdditionalItems = [
+	{
+		type: LegendItemTypes.RADIUS,
+		name: 'Radius',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Poor area',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Satisfactory area',
+	},
+	{
+		type: LegendItemTypes.AREA,
+		name: 'Great area',
+	},
+	{
+		type: LegendItemTypes.QUARTILE,
+		name: 'Quartiles',
+	},
+]

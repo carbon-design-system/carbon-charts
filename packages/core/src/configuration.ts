@@ -17,6 +17,7 @@ import {
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	// Components
 	GridOptions,
@@ -38,9 +39,10 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	LegendItemType,
+	LegendItemTypes,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
+import { circlePack } from './configuration-non-customizable';
 
 /*
  *****************************
@@ -319,7 +321,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemType.RADIUS,
+				type: LegendItemTypes.RADIUS,
 				name: 'Radius',
 			},
 		],
@@ -341,6 +343,26 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 			enabled: false,
 		},
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Poor area',
+			},
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Satisfactory area',
+			},
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Great area',
+			},
+			{
+				type: LegendItemTypes.QUARTILE,
+				name: 'Quartiles',
+			},
+		],
+	}
 } as BulletChartOptions);
 
 /*
@@ -377,6 +399,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			enabled: true,
 		},
 		alignment: Alignments.LEFT,
+		sortFunction: null,
 	},
 } as PieChartOptions);
 
@@ -473,6 +496,20 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	}),
 } as TreemapChartOptions);
 
+/*
+ * options specific to circle pack charts
+ */
+const circlePackChart: CirclePackChartOptions = Tools.merge(
+	{},
+	chart,
+	circlePack,
+	{
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'name',
+		}),
+	} as CirclePackChartOptions
+);
+
 export const options = {
 	chart,
 	axisChart,
@@ -494,6 +531,7 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	circlePackChart,
 	wordCloudChart,
 };
 
