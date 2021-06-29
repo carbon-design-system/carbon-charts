@@ -274,21 +274,13 @@ export class CirclePack extends Component {
 						}
 						childrenData = datum.children.map((child) => {
 							if (child !== null) {
-								// sum up the children values if there are any 3rd level
-								let value;
+								// retrieve the children values if there are any 3rd level
 								if (typeof child.data.value === 'number') {
-									value = child.data.value;
-
 									return {
 										label: child.data.name,
-										value: value,
+										value: child.data.value,
 									};
 								} else {
-									value = child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
-
 									return {
 										label: child.data.name,
 										labelIcon:
@@ -296,7 +288,7 @@ export class CirclePack extends Component {
 											hierarchyLevel <= 2
 												? self.getZoomIcon()
 												: null,
-										value: value,
+										value: child.value,
 									};
 								}
 							}
