@@ -4,10 +4,8 @@ import { Tools } from '../../tools';
 import {
 	Alignments,
 	ColorClassNameTypes,
-	LegendItemType,
+	LegendItemTypes,
 	RenderTypes,
-} from '../../interfaces/enums';
-import {
 	Roles,
 	Events,
 	TruncationTypes,
@@ -229,6 +227,7 @@ export class Legend extends Component {
 	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
 		const { width, height } = Configuration.legend.area;
 
+<<<<<<< HEAD
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			// Circular icon
 			additionalItem
@@ -241,6 +240,9 @@ export class Legend extends Component {
 		}
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
+=======
+		if (itemConfig.type === LegendItemTypes.RADIUS) {
+>>>>>>> 6c608ff6fb75e0d7c7abee18310d69ff8f78999c
 			const { iconData, fill, stroke } = Configuration.legend.radius;
 
 			const circleEnter = additionalItem
@@ -262,7 +264,7 @@ export class Legend extends Component {
 					'stroke',
 					itemConfig.stroke ? itemConfig.stroke : stroke
 				);
-		} else if (itemConfig.type === LegendItemType.LINE) {
+		} else if (itemConfig.type === LegendItemTypes.LINE) {
 			const lineConfig = Configuration.legend.line;
 
 			if (additionalItem.select('line.line').empty()) {
@@ -283,7 +285,7 @@ export class Legend extends Component {
 					)
 					.style('stroke-width', lineConfig.strokeWidth);
 			}
-		} else if (itemConfig.type === LegendItemType.AREA) {
+		} else if (itemConfig.type === LegendItemTypes.AREA) {
 			if (additionalItem.select('rect.area').empty()) {
 				additionalItem
 					.append('rect')
@@ -300,7 +302,7 @@ export class Legend extends Component {
 					)
 					.style('stroke', itemConfig.stroke);
 			}
-		} else if (itemConfig.type === LegendItemType.SIZE) {
+		} else if (itemConfig.type === LegendItemTypes.SIZE) {
 			const { iconData, fill, stroke } = Configuration.legend.size;
 
 			const sizeEnter = additionalItem
@@ -320,7 +322,7 @@ export class Legend extends Component {
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1);
-		} else if (itemConfig.type === LegendItemType.QUARTILE) {
+		} else if (itemConfig.type === LegendItemTypes.QUARTILE) {
 			const { iconData } = Configuration.legend.quartile;
 
 			const quartileEnter = additionalItem
@@ -340,7 +342,7 @@ export class Legend extends Component {
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height);
-		} else if (itemConfig.type === LegendItemType.ZOOM) {
+		} else if (itemConfig.type === LegendItemTypes.ZOOM) {
 			const { iconData, color } = Tools.getProperty(
 				Configuration,
 				'legend',
@@ -419,6 +421,247 @@ export class Legend extends Component {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	breakItemsIntoLines(addedLegendItems, className, itemConfig) {
+		const self = this;
+		const svg = this.getContainerSVG();
+
+		// Check if there are disabled legend items
+		const { DISABLED } = Configuration.legend.items.status;
+		const dataGroups = this.model.getDataGroups();
+		const hasDeactivatedItems = dataGroups.some(
+			(dataGroup) => dataGroup.status === DISABLED
+		);
+
+		addedLegendItems
+			.merge(svg.selectAll(`g.${className}`))
+			.each(function (d) {
+				const legendItem = select(this);
+				const svgDimensions = DOMUtils.getSVGElementSize(self.parent, {
+					useAttr: true,
+				});
+
+				// Set item position based on item type
+				if (!d.type) {
+					itemConfig.hasDeactivatedItems = hasDeactivatedItems;
+					self.setLegendItemPosition(
+						legendItem,
+						svgDimensions,
+						itemConfig,
+						LegendItemTypes.CHECKBOX
+					);
+				} else {
+					self.setLegendItemPosition(
+						legendItem,
+						svgDimensions,
+						itemConfig,
+						d.type
+					);
+				}
+			});
+	}
+
+	setLegendItemPosition(
+		legendItem,
+		parentSVGDimension,
+		itemConfig,
+		itemType
+	) {
+		const legendOrientation = Tools.getProperty(
+			this.getOptions(),
+			'legend',
+			'orientation'
+		);
+
+		// Configs
+		const legendItemsHorizontalSpacing =
+			Configuration.legend.items.horizontalSpace;
+		const legendItemsVerticalSpacing =
+			Configuration.legend.items.verticalSpace;
+
+		const legendTextYOffset = Configuration.legend.items.textYOffset;
+		const iconWidth =
+			itemType === LegendItemTypes.CHECKBOX ||
+			itemType === LegendItemTypes.RADIUS ||
+			itemType === LegendItemTypes.ZOOM
+				? Configuration.legend.checkbox.radius * 2
+				: Configuration.legend.area.width;
+
+		const spaceAfter = Configuration.legend.items.spaceAfter;
+
+		const legendItemTextDimensions = DOMUtils.getSVGElementSize(
+			legendItem.select('text'),
+			{ useBBox: true }
+		);
+		const translateOffset = Configuration.legend.area.width / 2 - 1;
+		// Check and update position
+		if (
+			itemConfig.itemIndexInLine === 0 ||
+			itemConfig.lastLegendItemTextWidth === 0 ||
+			legendOrientation === LegendOrientations.VERTICAL
+		) {
+			if (itemConfig.itemIndexInLine > 0) {
+				itemConfig.lineNumber++;
+			}
+		} else {
+			itemConfig.startingPoint +=
+				itemConfig.lastLegendItemTextWidth +
+				iconWidth +
+				spaceAfter +
+				legendItemsHorizontalSpacing;
+
+			// Place legends in a new line if space is not enough
+			if (
+				itemConfig.startingPoint +
+					iconWidth +
+					spaceAfter +
+					legendItemTextDimensions.width >
+				parentSVGDimension.width
+			) {
+				itemConfig.lineNumber++;
+				itemConfig.startingPoint =
+					iconWidth === 24 ? translateOffset : 0;
+				itemConfig.itemIndexInLine = 0;
+			}
+		}
+
+		itemConfig.lastLegendItemTextWidth = legendItemTextDimensions.width;
+
+		const yPosition = itemConfig.lineNumber * legendItemsVerticalSpacing;
+		const yTextPosition = legendTextYOffset + yPosition + 3;
+
+		if (itemType === LegendItemTypes.CHECKBOX) {
+			legendItem
+				.select('rect.checkbox')
+				.attr('x', itemConfig.startingPoint)
+				.attr('y', yPosition);
+
+			// Position text
+			legendItem
+				.select('text')
+				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
+				.attr('y', yTextPosition);
+
+			// Test if legendItems are placed in the correct direction
+			const testHorizontal =
+				(!legendOrientation ||
+					legendOrientation === LegendOrientations.HORIZONTAL) &&
+				parseInt(legendItem.select('rect.checkbox').attr('y')) % 24 ===
+					0;
+
+			const testVertical =
+				legendOrientation === LegendOrientations.VERTICAL &&
+				legendItem.select('rect.checkbox').attr('x') === '0';
+
+			const hasCorrectLegendDirection = testHorizontal || testVertical;
+
+			// Render checkbox check icon
+			if (
+				itemConfig.hasDeactivatedItems &&
+				legendItem.select('g.check').empty() &&
+				hasCorrectLegendDirection
+			) {
+				legendItem.append('g').classed('check', true).html(`
+						<svg focusable="false" preserveAspectRatio="xMidYMid meet"
+							xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+							viewBox="0 0 32 32" aria-hidden="true"
+							style="will-change: transform;">
+							<path d="M13 21.2l-7.1-7.1-1.4 1.4 7.1 7.1L13 24 27.1 9.9l-1.4-1.5z"></path>
+							<title>Checkmark</title>
+						</svg>
+					`);
+
+				legendItem
+					.select('g.check svg')
+					.attr('width', iconWidth - 1)
+					.attr('height', iconWidth - 1)
+					.attr(
+						'x',
+						parseFloat(
+							legendItem.select('rect.checkbox').attr('x')
+						) + 0.5
+					)
+					.attr(
+						'y',
+						parseFloat(
+							legendItem.select('rect.checkbox').attr('y')
+						) + 0.5
+					);
+			} else if (
+				!itemConfig.hasDeactivatedItems &&
+				!legendItem.select('g.check').empty()
+			) {
+				legendItem.select('g.check').remove();
+			}
+		} else if (itemType === LegendItemTypes.RADIUS) {
+			legendItem
+				.selectAll('circle.radius')
+				.attr('cx', (d) => itemConfig.startingPoint + d.cx)
+				.attr('cy', (d) => yPosition + d.cy);
+
+			legendItem
+				.select('text')
+				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
+				.attr('y', yTextPosition);
+		} else if (itemType === LegendItemTypes.SIZE) {
+			legendItem
+				.selectAll('g.icon')
+				.attr(
+					'transform',
+					`translate(${itemConfig.startingPoint - translateOffset}, ${
+						yPosition - 12
+					})`
+				);
+
+			legendItem
+				.select('text')
+				.attr(
+					'x',
+					itemConfig.startingPoint +
+						iconWidth +
+						spaceAfter -
+						translateOffset
+				)
+				.attr('y', yTextPosition);
+		} else if (itemType === LegendItemTypes.ZOOM) {
+			legendItem
+				.selectAll('g.icon')
+				.attr(
+					'transform',
+					`translate(${itemConfig.startingPoint}, ${yPosition})`
+				);
+
+			legendItem
+				.select('text')
+				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
+				.attr('y', yTextPosition);
+		} else {
+			legendItem
+				.selectAll('g.icon')
+				.attr(
+					'transform',
+					`translate(${
+						itemConfig.startingPoint - translateOffset
+					}, ${yPosition})`
+				);
+
+			legendItem
+				.select('text')
+				.attr(
+					'x',
+					itemConfig.startingPoint +
+						iconWidth +
+						spaceAfter -
+						translateOffset
+				)
+				.attr('y', yTextPosition);
+		}
+
+		itemConfig.itemIndexInLine++;
+	}
+
+>>>>>>> 6c608ff6fb75e0d7c7abee18310d69ff8f78999c
 	addEventListeners() {
 		const self = this;
 		const svg = this.getComponentContainer();
