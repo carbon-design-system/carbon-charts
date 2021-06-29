@@ -232,7 +232,7 @@ export enum AxisTitleOrientations {
 /**
  * enum of legend item type
  */
-export enum LegendItemTypes {
+export enum LegendItemType {
 	CHECKBOX = 'checkbox',
 	RADIUS = 'radius',
 	AREA = 'area',

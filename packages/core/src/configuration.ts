@@ -39,7 +39,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	LegendItemTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -337,7 +337,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.RADIUS,
+				type: LegendItemType.RADIUS,
 				name: 'Radius',
 			},
 		],
@@ -362,19 +362,19 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Poor area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Satisfactory area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Great area',
 			},
 			{
-				type: LegendItemTypes.QUARTILE,
+				type: LegendItemType.QUARTILE,
 				name: 'Quartiles',
 			},
 		],
