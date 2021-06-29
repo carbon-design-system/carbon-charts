@@ -433,25 +433,24 @@ export class Scatter extends Component {
 					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
 						datum
 					);
+					const isFilled = self.model.getIsFilled(
+						datum[groupMapsTo],
+						datum[domainIdentifier],
+						datum,
+						filled
+					);
 					hoveredElement
-						.classed(
-							'unfilled',
-							!self.model.getIsFilled(
-								datum[groupMapsTo],
-								datum[domainIdentifier],
-								datum,
-								filled
-							)
-						)
-						.style('fill', (d) =>
-							filled
-								? self.model.getFillColor(
-										d[groupMapsTo],
-										d[domainIdentifier],
-										d
-								  )
-								: null
-						);
+						.classed('unfilled', !isFilled)
+						.style('fill', (d) => {
+							if (isFilled || filled) {
+								return self.model.getFillColor(
+									d[groupMapsTo],
+									d[domainIdentifier],
+									d
+								)
+							}
+							return null;
+						});
 				}
 
 				// Dispatch mouse event
