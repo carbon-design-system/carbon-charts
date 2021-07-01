@@ -123,9 +123,15 @@ export class Highlight extends Component {
 						)
 					)
 					// Stroke width added to stop overflow of highlight
-					.attr('y', Math.max(yScaleStart + self.highlightStrokeWidth, 0))
+					.attr(
+						'y',
+						Math.max(yScaleStart + self.highlightStrokeWidth, 0)
+					)
 					// Stroke width subtracted to stop overflow of highlight
-					.attr('height', Math.max(yScaleEnd - (2 * self.highlightStrokeWidth), 0))
+					.attr(
+						'height',
+						Math.max(yScaleEnd - 2 * self.highlightStrokeWidth, 0)
+					)
 					.attr('x', ({ highlightStartMapsTo, ...d }) =>
 						getXValue(d[highlightStartMapsTo])
 					)
@@ -138,17 +144,19 @@ export class Highlight extends Component {
 								0
 							)
 					)
-                    .style('stroke', ({ color, labelMapsTo, ...data }) => {
-						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
+					.style('stroke', ({ color, labelMapsTo, ...data }) => {
+						return color && color.scale[data[labelMapsTo]]
+							? color.scale[data[labelMapsTo]]
+							: null;
 					})
-                    .style('stroke-dasharray', '2, 2')
+					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', self.highlightStrokeWidth + 'px')
 					.style('fill-opacity', 0.1)
-                    .style('fill', ({ color, labelMapsTo, ...data }) => {
-						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
+					.style('fill', ({ color, labelMapsTo, ...data }) => {
+						return color && color.scale[data[labelMapsTo]]
+							? color.scale[data[labelMapsTo]]
+							: null;
 					});
-
-
 			} else {
 				group
 					.selectAll('rect.highlight-bar')
@@ -173,15 +181,18 @@ export class Highlight extends Component {
 							)
 					)
 					.style('stroke', ({ color, labelMapsTo, ...data }) => {
-						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
+						return color && color.scale[data[labelMapsTo]]
+							? color.scale[data[labelMapsTo]]
+							: null;
 					})
-                    .style('stroke-dasharray', '2, 2')
+					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', self.highlightStrokeWidth + 'px')
-                    .style('fill-opacity', 0.1)
-                    .style('fill', ({ color, labelMapsTo, ...data }) => {
-						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
+					.style('fill-opacity', 0.1)
+					.style('fill', ({ color, labelMapsTo, ...data }) => {
+						return color && color.scale[data[labelMapsTo]]
+							? color.scale[data[labelMapsTo]]
+							: null;
 					});
-
 			}
 		});
 	}

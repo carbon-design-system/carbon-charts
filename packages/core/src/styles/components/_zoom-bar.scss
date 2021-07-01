@@ -56,8 +56,8 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		}
 	}
 
-	rect[class^="highlight-"] {
+	rect[class^='highlight-'] {
 		fill: $magenta-50;
-        stroke: $magenta-50;
+		stroke: $magenta-50;
 	}
 }
