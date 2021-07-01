@@ -328,9 +328,6 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 				highlightStartMapsTo: 'startHighlight',
 				highlightEndMapsTo: 'endHighlight',
 				labelMapsTo: 'label',
-				// color: {
-				// 	scale: { 'Custom formatter': 'red' },
-				// },
 				data: [
 					{
 						startHighlight: new Date(2019, 0, 7),
@@ -353,7 +350,9 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 	curve: 'curveNatural',
 };
 
-export const boundedAreaTimeSeriesWithHighlightsZoomOptions = addZoomBarToOptions(Object.assign({}, boundedAreaTimeSeriesWithHighlightsOptions));
+export const boundedAreaTimeSeriesWithHighlightsZoomOptions = addZoomBarToOptions(
+	Object.assign({}, boundedAreaTimeSeriesWithHighlightsOptions)
+);
 
 // area - empty state
 export const areaEmptyData = [];
