@@ -7,7 +7,7 @@ import { select } from 'd3-selection';
 export class Highlight extends Component {
 	type = 'highlight';
 
-	label: any;
+	highlightStrokeWidth = 1;
 
 	constructor(model: ChartModel, services: any) {
 		super(model, services);
@@ -122,8 +122,10 @@ export class Highlight extends Component {
 							animate
 						)
 					)
-					.attr('y', yScaleStart)
-					.attr('height', yScaleEnd)
+					// Stroke width added to stop overflow of highlight
+					.attr('y', Math.max(yScaleStart + self.highlightStrokeWidth, 0))
+					// Stroke width subtracted to stop overflow of highlight
+					.attr('height', Math.max(yScaleEnd - (2 * self.highlightStrokeWidth), 0))
 					.attr('x', ({ highlightStartMapsTo, ...d }) =>
 						getXValue(d[highlightStartMapsTo])
 					)
@@ -140,7 +142,7 @@ export class Highlight extends Component {
 						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
 					})
                     .style('stroke-dasharray', '2, 2')
-					.attr('stroke-width', 1 + 'px')
+					.attr('stroke-width', self.highlightStrokeWidth + 'px')
 					.style('fill-opacity', 0.1)
                     .style('fill', ({ color, labelMapsTo, ...data }) => {
 						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
@@ -171,13 +173,13 @@ export class Highlight extends Component {
 							)
 					)
 					.style('stroke', ({ color, labelMapsTo, ...data }) => {
-						return color.scale[data[labelMapsTo]];
+						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
 					})
                     .style('stroke-dasharray', '2, 2')
-					.attr('stroke-width', 1 + 'px')
+					.attr('stroke-width', self.highlightStrokeWidth + 'px')
                     .style('fill-opacity', 0.1)
                     .style('fill', ({ color, labelMapsTo, ...data }) => {
-						return color.scale[data[labelMapsTo]];
+						return color && color.scale[data[labelMapsTo]] ? color.scale[data[labelMapsTo]] : null;
 					});
 
 			}

@@ -39,6 +39,8 @@ export class ZoomBar extends Component {
 	xScale: any;
 	yScale: any;
 
+	highlightStrokeWidth = 1;
+
 	protected model: ChartModelCartesian;
 
 	init() {
@@ -256,7 +258,8 @@ export class ZoomBar extends Component {
 							container, 
 							`rect.highlight-${index}`
 						)
-						.attr('height', zoombarHeight)
+						.attr('height', zoombarHeight - (2 * this.highlightStrokeWidth))
+						.attr('y', this.highlightStrokeWidth)
 						.attr('x', this.xScale(element[startHighlight]))
 						.attr('width', this.xScale(element[endHighlight]) - this.xScale(element[startHighlight]))
 						.style('fill', color && color.scale[element[labelMapTo]] ? color.scale[element[labelMapTo]] : null)
