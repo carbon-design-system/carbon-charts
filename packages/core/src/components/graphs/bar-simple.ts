@@ -93,7 +93,12 @@ export class SimpleBar extends Bar {
 						i
 					);
 				} else {
-					y0 = this.services.cartesianScales.getRangeValue(0);
+					const rangeScale = this.services.cartesianScales.getRangeScale();
+					const yScaleDomainStart = rangeScale.domain()[0];
+
+					y0 = this.services.cartesianScales.getRangeValue(
+						Math.max(0, yScaleDomainStart)
+					);
 					y1 = this.services.cartesianScales.getRangeValue(d, i);
 				}
 

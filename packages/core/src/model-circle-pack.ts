@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartModel } from './model';
 import { Tools } from './tools';
-import { Events, LegendItemType } from './interfaces/enums';
+import { Events, LegendItemTypes } from './interfaces/enums';
 import { thresholdSturges } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -56,7 +56,8 @@ export class CirclePackChartModel extends ChartModel {
 		const displayData = this.getDisplayData();
 		const zoomOptions = options ? options : this.getOptions();
 		const data =
-			displayData.length === 1 && Tools.getProperty(displayData, 0, 'children')
+			displayData.length === 1 &&
+			Tools.getProperty(displayData, 0, 'children')
 				? Tools.getProperty(displayData, 0, 'children')
 				: displayData;
 
@@ -79,7 +80,7 @@ export class CirclePackChartModel extends ChartModel {
 				legend: {
 					additionalItems: [
 						{
-							type: LegendItemType.ZOOM,
+							type: LegendItemTypes.ZOOM,
 							name: 'Click to zoom',
 						},
 					],

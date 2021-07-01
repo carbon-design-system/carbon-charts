@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { Tools } from '../../tools';
-import { ColorClassNameTypes, LegendItemType } from '../../interfaces/enums';
+import { ColorClassNameTypes, LegendItemTypes } from '../../interfaces/enums';
 import {
 	LegendOrientations,
 	Roles,
@@ -199,7 +199,7 @@ export class Legend extends Component {
 	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
 		const { width, height } = Configuration.legend.area;
 
-		if (itemConfig.type === LegendItemType.RADIUS) {
+		if (itemConfig.type === LegendItemTypes.RADIUS) {
 			const { iconData, fill, stroke } = Configuration.legend.radius;
 
 			const circleEnter = additionalItem
@@ -221,7 +221,7 @@ export class Legend extends Component {
 					'stroke',
 					itemConfig.stroke ? itemConfig.stroke : stroke
 				);
-		} else if (itemConfig.type === LegendItemType.LINE) {
+		} else if (itemConfig.type === LegendItemTypes.LINE) {
 			const lineConfig = Configuration.legend.line;
 
 			if (additionalItem.select('line.line').empty()) {
@@ -242,7 +242,7 @@ export class Legend extends Component {
 					)
 					.style('stroke-width', lineConfig.strokeWidth);
 			}
-		} else if (itemConfig.type === LegendItemType.AREA) {
+		} else if (itemConfig.type === LegendItemTypes.AREA) {
 			if (additionalItem.select('rect.area').empty()) {
 				additionalItem
 					.append('rect')
@@ -259,7 +259,7 @@ export class Legend extends Component {
 					)
 					.style('stroke', itemConfig.stroke);
 			}
-		} else if (itemConfig.type === LegendItemType.SIZE) {
+		} else if (itemConfig.type === LegendItemTypes.SIZE) {
 			const { iconData, fill, stroke } = Configuration.legend.size;
 
 			const sizeEnter = additionalItem
@@ -279,7 +279,7 @@ export class Legend extends Component {
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1);
-		} else if (itemConfig.type === LegendItemType.QUARTILE) {
+		} else if (itemConfig.type === LegendItemTypes.QUARTILE) {
 			const { iconData } = Configuration.legend.quartile;
 
 			const quartileEnter = additionalItem
@@ -299,7 +299,7 @@ export class Legend extends Component {
 				.attr('y', (d) => d.y)
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height);
-		} else if (itemConfig.type === LegendItemType.ZOOM) {
+		} else if (itemConfig.type === LegendItemTypes.ZOOM) {
 			const { iconData, color } = Tools.getProperty(
 				Configuration,
 				'legend',
@@ -404,7 +404,7 @@ export class Legend extends Component {
 						legendItem,
 						svgDimensions,
 						itemConfig,
-						LegendItemType.CHECKBOX
+						LegendItemTypes.CHECKBOX
 					);
 				} else {
 					self.setLegendItemPosition(
@@ -437,9 +437,9 @@ export class Legend extends Component {
 
 		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const iconWidth =
-			itemType === LegendItemType.CHECKBOX ||
-			itemType === LegendItemType.RADIUS ||
-			itemType === LegendItemType.ZOOM
+			itemType === LegendItemTypes.CHECKBOX ||
+			itemType === LegendItemTypes.RADIUS ||
+			itemType === LegendItemTypes.ZOOM
 				? Configuration.legend.checkbox.radius * 2
 				: Configuration.legend.area.width;
 
@@ -486,7 +486,7 @@ export class Legend extends Component {
 		const yPosition = itemConfig.lineNumber * legendItemsVerticalSpacing;
 		const yTextPosition = legendTextYOffset + yPosition + 3;
 
-		if (itemType === LegendItemType.CHECKBOX) {
+		if (itemType === LegendItemTypes.CHECKBOX) {
 			legendItem
 				.select('rect.checkbox')
 				.attr('x', itemConfig.startingPoint)
@@ -549,7 +549,7 @@ export class Legend extends Component {
 			) {
 				legendItem.select('g.check').remove();
 			}
-		} else if (itemType === LegendItemType.RADIUS) {
+		} else if (itemType === LegendItemTypes.RADIUS) {
 			legendItem
 				.selectAll('circle.radius')
 				.attr('cx', (d) => itemConfig.startingPoint + d.cx)
@@ -559,7 +559,7 @@ export class Legend extends Component {
 				.select('text')
 				.attr('x', itemConfig.startingPoint + iconWidth + spaceAfter)
 				.attr('y', yTextPosition);
-		} else if (itemType === LegendItemType.SIZE) {
+		} else if (itemType === LegendItemTypes.SIZE) {
 			legendItem
 				.selectAll('g.icon')
 				.attr(
@@ -579,7 +579,7 @@ export class Legend extends Component {
 						translateOffset
 				)
 				.attr('y', yTextPosition);
-		} else if (itemType === LegendItemType.ZOOM) {
+		} else if (itemType === LegendItemTypes.ZOOM) {
 			legendItem
 				.selectAll('g.icon')
 				.attr(
