@@ -151,6 +151,12 @@ export const timeScale: TimeScaleOptions = {
 	},
 };
 
+const isFullScreenEnabled =
+	document['fullscreenEnabled'] ||
+	document['webkitFullscreenEnabled'] ||
+	document['mozFullScreenEnabled'] ||
+	document['msFullscreenEnabled'];
+
 /**
  * Base chart options common to any chart
  */
@@ -185,9 +191,13 @@ const chart: BaseChartOptions = {
 			{
 				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
 			},
-			{
-				type: ToolbarControlTypes.MAKE_FULLSCREEN,
-			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
 			{
 				type: ToolbarControlTypes.EXPORT_CSV,
 			},
@@ -378,7 +388,7 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 				name: 'Quartiles',
 			},
 		],
-	}
+	},
 } as BulletChartOptions);
 
 /*

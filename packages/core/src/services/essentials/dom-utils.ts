@@ -306,15 +306,25 @@ export class DOMUtils extends Service {
 		holderSelection.classed('fullscreen', !isFullScreen);
 
 		if (isFullScreen) {
-			document.exitFullscreen();
+			// Call the correct function depending on the browser
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document['webkitExitFullscreen']) {
+				document['webkitExitFullscreen']();
+			} else if (document['mozCancelFullScreen']) {
+				document['mozCancelFullScreen']();
+			} else if (document['msExitFullscreen']) {
+				document['msExitFullscreen']();
+			}
 		} else {
+			// Call the correct function depending on the browser
 			if (holder.requestFullscreen) {
 				holder.requestFullscreen();
 			} else if (holder.webkitRequestFullscreen) {
-				/* Safari */
 				holder.webkitRequestFullscreen();
+			} else if (holder.mozRequestFullScreen) {
+				holder.mozRequestFullScreen();
 			} else if (holder.msRequestFullscreen) {
-				/* IE11 */
 				holder.msRequestFullscreen();
 			}
 		}
