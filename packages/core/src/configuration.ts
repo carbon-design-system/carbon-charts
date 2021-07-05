@@ -39,7 +39,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	LegendItemType,
+	LegendItemTypes,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -321,7 +321,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemType.RADIUS,
+				type: LegendItemTypes.RADIUS,
 				name: 'Radius',
 			},
 		],
@@ -343,6 +343,26 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 			enabled: false,
 		},
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Poor area',
+			},
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Satisfactory area',
+			},
+			{
+				type: LegendItemTypes.AREA,
+				name: 'Great area',
+			},
+			{
+				type: LegendItemTypes.QUARTILE,
+				name: 'Quartiles',
+			},
+		],
+	}
 } as BulletChartOptions);
 
 /*
@@ -379,6 +399,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			enabled: true,
 		},
 		alignment: Alignments.LEFT,
+		sortFunction: null,
 	},
 } as PieChartOptions);
 

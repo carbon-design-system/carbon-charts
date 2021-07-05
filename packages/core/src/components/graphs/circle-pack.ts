@@ -21,7 +21,10 @@ export class CirclePack extends Component {
 			useAttrs: true,
 		});
 
-		if (width === 0 || height === 0) {
+		// Because of a Firefox bug with regards to sizing & d3 packs,
+		// rather than checking if height or width aren't 0,
+		// we have to make sure they're not smaller than 1
+		if (width < 1 || height < 1) {
 			// on first render the svg is width and height 0
 			// the circle packing layout functionality will not run
 			return;
@@ -95,6 +98,10 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`,
 				});
 			})
+			.style('fill', (d) => this.model.getFillColor(d.data.dataGroupName))
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 			.transition(
@@ -134,11 +141,13 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed('hovered-child', false);
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			);
 	}
 
 	// highlight the children circles with a stroke
-	highlightChildren(childData, classname?) {
+	highlightChildren(childData) {
 		const data = childData.map((d) => d.data);
 
 		this.parent
@@ -146,7 +155,7 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed(classname ? classname : 'hovered-child', true);
+			.style('stroke', Configuration.circlePack.circles.hover.stroke);
 	}
 
 	getZoomClass(node) {
@@ -265,21 +274,13 @@ export class CirclePack extends Component {
 						}
 						childrenData = datum.children.map((child) => {
 							if (child !== null) {
-								// sum up the children values if there are any 3rd level
-								let value;
+								// retrieve the children values if there are any 3rd level
 								if (typeof child.data.value === 'number') {
-									value = child.data.value;
-
 									return {
 										label: child.data.name,
-										value: value,
+										value: child.data.value,
 									};
 								} else {
-									value = child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
-
 									return {
 										label: child.data.name,
 										labelIcon:
@@ -287,7 +288,7 @@ export class CirclePack extends Component {
 											hierarchyLevel <= 2
 												? self.getZoomIcon()
 												: null,
-										value: value,
+										value: child.value,
 									};
 								}
 							}

@@ -197,6 +197,11 @@ const utilityDemoGroups = [
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 			},
+			{
+				options: circlePackDemos.circlePackTwoLevelCustomColorsOptions,
+				data: circlePackDemos.circlePackTwoLevelData,
+				chartType: chartTypes.CirclePackChart,
+			},
 		],
 	},
 	{

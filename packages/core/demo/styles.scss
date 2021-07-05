@@ -213,6 +213,7 @@ div.container {
 				content: ' ';
 				display: block;
 				position: absolute;
+				z-index: 2;
 				top: 0;
 				left: 0;
 				background: #f4f4f4;
@@ -226,6 +227,7 @@ div.container {
 
 			@media screen and (max-width: 768px) {
 				position: absolute;
+				z-index: 2;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
