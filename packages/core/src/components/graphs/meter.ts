@@ -72,6 +72,7 @@ export class Meter extends Component {
 			'meter',
 			'height'
 		);
+
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
 			.attr('x', 0)
@@ -81,6 +82,13 @@ export class Meter extends Component {
 				'height',
 				userProvidedHeight ? userProvidedHeight : proportional ? Configuration.meter.height.proportional : Configuration.meter.height.default
 			);
+
+		// draw the container max range value indicator
+		DOMUtils.appendOrSelect(svg, 'line.rangeIndicator')
+			.attr('x1', width)
+			.attr('x2', width)
+			.attr('y1', 0)
+			.attr('y2', userProvidedHeight ? userProvidedHeight : proportional ? Configuration.meter.height.proportional : Configuration.meter.height.default)
 
 		// rect with the value binded
 		const valued = svg.selectAll('rect.value').data(stackedData);

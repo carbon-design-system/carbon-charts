@@ -40,26 +40,28 @@ export class MeterTitle extends Title {
 
 			title.exit().remove();
 
+
 			// appends the associated percentage after title
 			this.appendPercentage();
 
 			// if status ranges are provided (custom or default), display indicator
 			this.displayStatus();
 
-			// get the max width of a title (with consideration for the status/percentage)
-			const maxWidth = this.getMaxTitleWidth();
-			const titleElement = DOMUtils.appendOrSelect(
-				svg,
-				'text.meter-title'
-			);
-
-			if (
-				maxWidth > 0 &&
-				titleElement.node().getComputedTextLength() > maxWidth
-			) {
-				this.truncateTitle(titleElement, maxWidth);
-			}
 		}
+		// get the max width of a title (with consideration for the status/percentage)
+		const maxWidth = this.getMaxTitleWidth();
+		const titleElement = DOMUtils.appendOrSelect(
+			svg,
+			'text.meter-title'
+		);
+
+		if (
+			maxWidth > 0 &&
+			titleElement.node().getComputedTextLength() > maxWidth
+		) {
+			this.truncateTitle(titleElement, maxWidth);
+		}
+
 	}
 
 	displayBreakdownTitle() {
@@ -95,9 +97,9 @@ export class MeterTitle extends Title {
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
-							datasetsTotal: datasetsTotal,
-							total: total,
-					  })
+						datasetsTotal: datasetsTotal,
+						total: total,
+					})
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
 		}
 
@@ -310,9 +312,9 @@ export class MeterTitle extends Title {
 		percentage.attr(
 			'x',
 			+title.attr('x') +
-				title.node().getComputedTextLength() +
-				tspanLength +
-				offset
+			title.node().getComputedTextLength() +
+			tspanLength +
+			offset
 		);
 	}
 
@@ -341,10 +343,10 @@ export class MeterTitle extends Title {
 				'text.proportional-meter-total'
 			).node();
 
-			const width = DOMUtils.getSVGElementSize(total, { useBBox: true })
+			const  totalWidth = DOMUtils.getSVGElementSize(total, { useBBox: true })
 				.width;
 
-			return containerWidth - width;
+			return containerWidth - totalWidth - Configuration.meter.total.paddingLeft;
 		} else {
 			const percentage = DOMUtils.appendOrSelect(
 				this.parent,

@@ -147,6 +147,9 @@ export const meter = {
 		indicatorSize: 16,
 		paddingLeft: 15,
 	},
+	total: {
+		paddingLeft: 36
+	},
 	height: {
 		default: 8,
 		proportional: 16
