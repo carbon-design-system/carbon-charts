@@ -1,4 +1,3 @@
-import { timeFormat } from 'd3';
 import { addZoomBarToOptions } from './zoom-bar';
 
 export const areaTimeSeriesData = [
