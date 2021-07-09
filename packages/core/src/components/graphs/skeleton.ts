@@ -21,13 +21,6 @@ export class Skeleton extends Component {
 	backdrop: any;
 
 	render() {
-		const svg = this.parent;
-		const parent = svg.node().parentNode;
-		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
-		});
-		// svg.attr('width', width).attr('height', height);
-
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
 			'data',

@@ -540,22 +540,6 @@ export class Axis extends Component {
 							}).width >= scale.step()
 					);
 				} else {
-					// When dealing with a continuous scale
-					// We need to calculate an estimated size of the ticks
-					const minTickSize =
-						Tools.getProperty(
-							axisOptions,
-							'ticks',
-							'rotateIfSmallerThan'
-						) || Configuration.axis.ticks.rotateIfSmallerThan;
-					const ticksNumber = isTimeScaleType
-						? axis.tickValues().length
-						: scale.ticks().length;
-					const estimatedTickSize = width / ticksNumber / 2;
-					// shouldRotateTicks = isTimeScaleType
-					// 	? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-					// 	: estimatedTickSize < minTickSize;
-
 					shouldRotateTicks = false;
 
 					const mockTextPiece = invisibleAxisRef
