@@ -25,14 +25,16 @@
 		color: $text-01;
 
 		.title-tooltip {
-			p {
-				margin: 2px;
-				font-size: 12px;
-			}
 			width: auto;
 			padding: 4px;
 			min-width: 20px;
 			max-width: 270px;
+
+			p {
+				margin: 2px;
+				font-size: 12px;
+				line-height: 1rem;
+			}
 		}
 
 		.datapoint-tooltip {

@@ -131,14 +131,6 @@ export class Legend extends Component {
 
 		this.truncateLegendText(addedLegendItemsText);
 
-		// Keep track of line numbers and positions
-		const itemConfig = {
-			startingPoint: 0,
-			itemIndexInLine: 0,
-			lineNumber: 0,
-			lastLegendItemTextWidth: 0,
-		};
-
 		const additionalItemsOption = Tools.getProperty(
 			options,
 			'legend',

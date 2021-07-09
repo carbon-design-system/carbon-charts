@@ -10,9 +10,7 @@ export class Title extends Component {
 	render() {
 		const svg = this.getComponentContainer();
 
-		const text = svg
-			.selectAll('p.title')
-			.data([this.getOptions().title]);
+		const text = svg.selectAll('p.title').data([this.getOptions().title]);
 
 		text.enter()
 			.append('p')
@@ -22,14 +20,24 @@ export class Title extends Component {
 			.attr('y', '1em')
 			.html((d) => d);
 
-		// check the max space the title has to render
-		const maxWidth = this.getMaxTitleWidth();
-		const title = DOMUtils.appendOrSelect(svg, 'p.title');
+		// check if title needs truncation (and tooltip support)
+		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {
+			// add events for displaying the tooltip with the title
+			const self = this;
+			text.on('mouseover', function () {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement: text,
+					content: text.text(),
+				});
+			})
+				.on('mousemove', function () {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				})
+				.on('mouseout', function () {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				});
+		}
 
-		// // check if title needs truncation (and tooltip support)
-		// if (title.node().getComputedTextLength() > maxWidth && maxWidth > 0) {
-		// 	this.truncateTitle(title, maxWidth);
-		// }
 		text.exit().remove();
 	}
 
