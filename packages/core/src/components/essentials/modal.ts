@@ -182,7 +182,10 @@ export class Modal extends Component {
 								}</td>
 										<td>${
 											datum[primaryRange.identifier] ===
-											null
+												null ||
+											isNaN(
+												datum[primaryRange.identifier]
+											)
 												? '&ndash;'
 												: datum[
 														primaryRange.identifier
@@ -208,7 +211,13 @@ export class Modal extends Component {
 										? `<td>${
 												datum[
 													secondaryRange.identifier
-												] === null
+												] === null ||
+												isNaN(
+													datum[
+														secondaryRange
+															.identifier
+													]
+												)
 													? '&ndash;'
 													: datum[
 															secondaryRange
