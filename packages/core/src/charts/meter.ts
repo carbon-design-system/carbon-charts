@@ -53,7 +53,7 @@ export class MeterChart extends Chart {
 
 		// Meter has an unique dataset title within the graph
 		const titleComponent = {
-			id: 'title',
+			id: 'meter-title',
 			components: [new MeterTitle(this.model, this.services)],
 			growth: LayoutGrowth.PREFERRED,
 			renderType: RenderTypes.SVG,

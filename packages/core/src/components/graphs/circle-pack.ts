@@ -191,12 +191,12 @@ export class CirclePack extends Component {
 	}
 
 	removeBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
 		const zoomSetting = Tools.getProperty(
@@ -401,7 +401,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', false);
 					self.focal = null;
@@ -417,7 +417,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;
