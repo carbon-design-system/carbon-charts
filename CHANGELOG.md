@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.81](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.80...v0.41.81) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core:** display the first and last data elements when addSpaceOnEdges is set to 0 ([#1064](https://github.com/carbon-design-system/carbon-charts/issues/1064)) ([f321807](https://github.com/carbon-design-system/carbon-charts/commit/f32180774720c7d916f6bd441b7d72500b77e7f9)), closes [#763](https://github.com/carbon-design-system/carbon-charts/issues/763)
+
+
+
+
+
 ## [0.41.80](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.79...v0.41.80) (2021-07-07)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
