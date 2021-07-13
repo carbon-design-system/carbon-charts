@@ -46,8 +46,8 @@ export class Scatter extends Component {
 		if (zoomDomain !== undefined) {
 			return data.filter(
 				(d) =>
-					d[domainIdentifier].getTime() > zoomDomain[0].getTime() &&
-					d[domainIdentifier].getTime() < zoomDomain[1].getTime()
+					d[domainIdentifier].getTime() >= zoomDomain[0].getTime() &&
+					d[domainIdentifier].getTime() <= zoomDomain[1].getTime()
 			);
 		}
 		return data;
@@ -447,7 +447,7 @@ export class Scatter extends Component {
 									d[groupMapsTo],
 									d[domainIdentifier],
 									d
-								)
+								);
 							}
 							return null;
 						});
