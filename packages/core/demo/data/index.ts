@@ -91,6 +91,11 @@ const utilityDemoGroups = [
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart,
 			},
+			{
+				options: lineDemos.lineLogAxisOptions,
+				data: lineDemos.lineLogAxisData,
+				chartType: chartTypes.LineChart,
+			},
 		],
 	},
 	{
