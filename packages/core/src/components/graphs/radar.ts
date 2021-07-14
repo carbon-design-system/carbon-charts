@@ -21,8 +21,8 @@ import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { select } from 'd3-selection';
-import { scaleBand, scaleLinear, ScaleLinear } from 'd3-scale';
-import { max, extent } from 'd3-array';
+import { scaleBand, scaleLinear } from 'd3-scale';
+import { max, min, extent } from 'd3-array';
 import { lineRadial, curveLinearClosed } from 'd3-shape';
 
 export class Radar extends Component {
@@ -94,9 +94,12 @@ export class Radar extends Component {
 				[0, 2 * Math.PI].map((a) => a - Math.PI / 2) as [Angle, Angle]
 			);
 
+		const centerPointMinValue = min(
+			this.fullDataNormalized.map((d) => d[value]) as number[]
+		);
 		const yScale = scaleLinear()
 			.domain([
-				0,
+				centerPointMinValue >= 0 ? 0 : centerPointMinValue,
 				max(this.fullDataNormalized.map((d) => d[value]) as number[]),
 			])
 			.range([minRange, radius])
