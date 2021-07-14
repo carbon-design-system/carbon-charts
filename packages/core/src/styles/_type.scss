@@ -4,7 +4,7 @@
 @include carbon--font-face-sans();
 @include carbon--font-face-sans-condensed();
 
-.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	font-family: carbon--font-family('sans-condensed');
 
 	p {

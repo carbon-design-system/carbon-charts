@@ -204,7 +204,7 @@ export class DOMUtils extends Service {
 
 		const mainContainer = select(this.getHolder())
 			.append('div')
-			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
+			.classed(`${settings.prefix}--${chartsprefix}--chart-wrapper`, true)
 			.style('height', '100%')
 			.style('width', '100%');
 

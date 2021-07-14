@@ -47,7 +47,7 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	$color-map: getThemeColors();
 
 	@each $token, $color in $color-map {

@@ -24,10 +24,10 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-svg .layout-child {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper .layout-child {
 	overflow: visible;
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-svg-wrapper {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
 	overflow: visible;
 }

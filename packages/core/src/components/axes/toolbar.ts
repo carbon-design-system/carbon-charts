@@ -283,17 +283,26 @@ export class Toolbar extends Component {
 		);
 
 		const controlList = [];
+		const overflowSpecificControls = [];
 		controls.forEach((control) => {
 			const controlConfig = this.getControlConfigByType(control.type);
 
 			// add to list if config is valid
 			if (controlConfig) {
 				controlConfig.text = control.text ? control.text : control.type;
-				controlList.push(controlConfig);
+
+				if (controlConfig.id.indexOf('toolbar-export') !== -1) {
+					overflowSpecificControls.push(controlConfig);
+				} else {
+					controlList.push(controlConfig);
+				}
 			}
 		});
 
-		if (controlList.length <= numberOfIcons) {
+		if (
+			controlList.length <= numberOfIcons &&
+			overflowSpecificControls.length === 0
+		) {
 			return {
 				buttonList: controlList,
 			};
@@ -302,7 +311,7 @@ export class Toolbar extends Component {
 		return {
 			// leave one button for overflow button
 			buttonList: controlList.splice(0, numberOfIcons - 1),
-			overflowMenuItemList: controlList,
+			overflowMenuItemList: controlList.concat(overflowSpecificControls),
 		};
 	}
 
