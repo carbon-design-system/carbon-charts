@@ -7,16 +7,22 @@ import * as Configuration from '../../configuration';
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
 import { event, select } from 'd3-selection';
 
-import { ColorClassNameTypes, Events } from '../../interfaces/enums';
+import {
+	ColorClassNameTypes,
+	Events,
+	RenderTypes,
+} from '../../interfaces/enums';
 import { Tools } from './../../tools';
 
 export class CirclePack extends Component {
 	type = 'circle-pack';
-	focal;
+	renderType = RenderTypes.SVG;
+
+	focal: any;
 
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
@@ -185,12 +191,12 @@ export class CirclePack extends Component {
 	}
 
 	removeBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
 		const zoomSetting = Tools.getProperty(
@@ -395,7 +401,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', false);
 					self.focal = null;
@@ -411,7 +417,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;

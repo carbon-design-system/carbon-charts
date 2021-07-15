@@ -119,6 +119,29 @@ export class CartesianScales extends Service {
 		return this.getAxisOptions(rangeAxisPosition);
 	}
 
+	getScaleLabel(position: AxisPositions) {
+		const options = this.getAxisOptions(position);
+		let title = options.title;
+		if (!title) {
+			if (
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
+			) {
+				return 'x-value';
+			}
+			return 'y-value';
+		}
+		return title;
+	}
+
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
+	}
+
+	getRangeLabel() {
+		return this.getScaleLabel(this.getRangeAxisPosition());
+	}
+
 	update(animate = true) {
 		this.determineAxisDuality();
 		this.findDomainAndRangeAxes();

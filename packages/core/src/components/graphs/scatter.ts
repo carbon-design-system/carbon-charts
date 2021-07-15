@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +13,8 @@ import { select, Selection } from 'd3-selection';
 
 export class Scatter extends Component {
 	type = 'scatter';
+	renderType = RenderTypes.SVG;
+
 	scatterData: any;
 
 	init() {
@@ -95,7 +102,7 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -335,6 +342,11 @@ export class Scatter extends Component {
 			.attr('opacity', 1);
 	};
 
+	// This is extended in bubble graphs
+	getTooltipAdditionalItems(datum) {
+		return null;
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = self.getOptions().data;
@@ -366,29 +378,10 @@ export class Scatter extends Component {
 					.classed('unfilled', false);
 
 				// Show tooltip
-				const bubbleOptions = Tools.getProperty(
-					self.getOptions(),
-					'bubble'
-				);
-
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
-					additionalItems: [
-						{
-							label: Tools.getProperty(
-								bubbleOptions,
-								'radiusLabel'
-							),
-							value:
-								datum[
-									Tools.getProperty(
-										bubbleOptions,
-										'radiusMapsTo'
-									)
-								],
-						},
-					],
+					additionalItems: self.getTooltipAdditionalItems(datum),
 				});
 
 				// Dispatch mouse event

@@ -10,7 +10,11 @@ import {
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { DOMUtils } from '../../services';
-import { AxisTitleOrientations, TickRotations } from '../../interfaces/enums';
+import {
+	AxisTitleOrientations,
+	RenderTypes,
+	TickRotations,
+} from '../../interfaces/enums';
 import * as Configuration from '../../configuration';
 import {
 	computeTimeIntervalName,
@@ -24,6 +28,7 @@ import { axisBottom, axisLeft, axisRight, axisTop } from 'd3-axis';
 
 export class Axis extends Component {
 	type = 'axes';
+	renderType = RenderTypes.SVG;
 
 	margins: any;
 
@@ -50,10 +55,11 @@ export class Axis extends Component {
 			'visible'
 		);
 
-		const svg = this.getContainerSVG();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const svg = this.getComponentContainer();
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
+
 		// Add axis into the parent
 		const container = DOMUtils.appendOrSelect(
 			svg,
@@ -534,21 +540,40 @@ export class Axis extends Component {
 							}).width >= scale.step()
 					);
 				} else {
-					// When dealing with a continuous scale
-					// We need to calculate an estimated size of the ticks
-					const minTickSize =
-						Tools.getProperty(
-							axisOptions,
-							'ticks',
-							'rotateIfSmallerThan'
-						) || Configuration.axis.ticks.rotateIfSmallerThan;
-					const ticksNumber = isTimeScaleType
-						? axis.tickValues().length
-						: scale.ticks().length;
-					const estimatedTickSize = width / ticksNumber / 2;
-					shouldRotateTicks = isTimeScaleType
-						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-						: estimatedTickSize < minTickSize;
+					shouldRotateTicks = false;
+
+					const mockTextPiece = invisibleAxisRef
+						.append('text')
+						.text('A');
+
+					const averageLetterWidth = mockTextPiece.node().getBBox()
+						.width;
+
+					let lastStartPosition;
+
+					// Find out whether any text nodes roughly collide
+					invisibleAxisRef.selectAll('g.tick').each(function () {
+						const selection = select(this);
+						const xTransformation = parseFloat(
+							Tools.getProperty(
+								Tools.getTranslationValues(this),
+								'tx'
+							)
+						);
+
+						if (
+							xTransformation !== null &&
+							lastStartPosition +
+								selection.text().length *
+									averageLetterWidth *
+									0.8 >=
+								xTransformation
+						) {
+							shouldRotateTicks = true;
+						}
+
+						lastStartPosition = xTransformation;
+					});
 				}
 			}
 
@@ -652,7 +677,7 @@ export class Axis extends Component {
 	}
 
 	addEventListeners() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,
@@ -732,7 +757,7 @@ export class Axis extends Component {
 	getInvisibleAxisRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} g.ticks.invisible`
 		);
 	}
@@ -740,7 +765,7 @@ export class Axis extends Component {
 	getTitleRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} text.axis-title`
 		);
 	}
@@ -755,7 +780,7 @@ export class Axis extends Component {
 	}
 
 	destroy() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,

@@ -2,13 +2,19 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 
 // D3 Imports
 import { area } from 'd3-shape';
 
 export class StackedArea extends Component {
 	type = 'area-stacked';
+	renderType = RenderTypes.SVG;
 
 	areaGenerator: any;
 
@@ -29,7 +35,7 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		let svg = this.getComponentContainer({ withinChartClip: true });
 		const self = this;
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

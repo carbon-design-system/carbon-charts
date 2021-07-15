@@ -1,6 +1,7 @@
 // Internal Imports
 import { ChartModel } from '../model';
 import { DOMUtils } from '../services';
+import { RenderTypes } from '../interfaces';
 import { Tools } from '../tools';
 
 // D3 Imports
@@ -11,6 +12,8 @@ import settings from 'carbon-components/es/globals/js/settings';
 
 export class Component {
 	public type: string;
+	public renderType = RenderTypes.HTML;
+
 	public id: string;
 
 	protected parent: any;
@@ -38,7 +41,7 @@ export class Component {
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(select(this.services.domUtils.getMainSVG()));
+			this.setParent(select(this.services.domUtils.getMainContainer()));
 		}
 	}
 
@@ -96,7 +99,7 @@ export class Component {
 		return this.parent;
 	}
 
-	getContainerSVG(configs = { withinChartClip: false }) {
+	getComponentContainer(configs = { withinChartClip: false }) {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
@@ -105,19 +108,37 @@ export class Component {
 			);
 
 			const idSelector = this.id ? `#${this.id}` : '';
-			const svg = DOMUtils.appendOrSelect(
+			const container = DOMUtils.appendOrSelect(
 				this.parent,
-				`g${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
+				`${
+					this.renderType === RenderTypes.SVG ? 'svg' : 'div'
+				}${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
 			);
 
 			if (configs.withinChartClip) {
 				// get unique chartClipId int this chart from model
 				const chartClipId = this.model.get('chartClipId');
+
 				if (chartClipId) {
-					svg.attr('clip-path', `url(#${chartClipId})`);
+					const chartClipSelection = select(`#${chartClipId}`);
+					const chartClipRectSelection = chartClipSelection.select(
+						'rect'
+					);
+
+					/*
+					 * these checks are needed because of a chrome bug
+					 * related to the rendering of the clip path
+					 */
+					if (
+						chartClipRectSelection.size() !== 0 &&
+						parseFloat(chartClipRectSelection.attr('height')) > 0
+					) {
+						container.attr('clip-path', `url(#${chartClipId})`);
+					}
 				}
 			}
-			return svg;
+
+			return container.attr('width', '100%').attr('height', '100%');
 		}
 
 		return this.parent;

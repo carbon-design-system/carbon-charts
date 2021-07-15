@@ -4,8 +4,16 @@
 @include carbon--font-face-sans();
 @include carbon--font-face-sans-condensed();
 
-svg.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	font-family: carbon--font-family('sans-condensed');
+
+	p {
+		padding: 0;
+		margin: 0;
+		font-size: 12px;
+		font-weight: carbon--font-weight('regular');
+		color: $text-02;
+	}
 
 	text {
 		font-size: 12px;

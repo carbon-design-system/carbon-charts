@@ -8,6 +8,7 @@ import {
 	ArrowDirections,
 	ColorClassNameTypes,
 	Alignments,
+	RenderTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
 
@@ -21,14 +22,11 @@ const ARROW_DOWN_PATH_STRING = '12,6 8,10 4,6';
 
 export class Gauge extends Component {
 	type = 'gauge';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs so that addEventListeners() can access them
 	arc: any;
 	backgroundArc: any;
-
-	init() {
-		const eventsFragment = this.services.events;
-	}
 
 	getValue(): number {
 		const data = this.model.getData();
@@ -89,10 +87,10 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
 		const valueRatio = this.getValueRatio();
@@ -168,7 +166,7 @@ export class Gauge extends Component {
 		} else if (alignment === Alignments.RIGHT) {
 			gaugeTranslateX = width - radius;
 		}
-		svg.attr('transform', `translate(${gaugeTranslateX}, ${radius})`);
+		svg.attr('x', gaugeTranslateX).attr('y', radius);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -178,7 +176,7 @@ export class Gauge extends Component {
 	 * draws the value number associated with the Gauge component in the center
 	 */
 	drawValueNumber() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, 'gauge', 'type');
@@ -288,7 +286,7 @@ export class Gauge extends Component {
 	 */
 	drawDelta() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const delta = this.getDelta();
 

@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -9,6 +9,7 @@ import { line } from 'd3-shape';
 
 export class Line extends Component {
 	type = 'line';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const { events } = this.services;
@@ -25,7 +26,7 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);

@@ -1,6 +1,11 @@
 import * as EventEnums from './events';
 export const Events = EventEnums;
 
+export enum RenderTypes {
+	HTML = 'html',
+	SVG = 'svg',
+}
+
 /**
  * enum of all supported chart themes
  */
@@ -15,6 +20,7 @@ export enum ChartTheme {
  * enum of all color classname types
  */
 export enum ColorClassNameTypes {
+	BACKGROUND = 'background',
 	FILL = 'fill',
 	STROKE = 'stroke',
 	TOOLTIP = 'tooltip',
@@ -117,6 +123,13 @@ export enum LayoutGrowth {
 }
 
 /**
+ * enum of all possible layout align-items values
+ */
+export enum LayoutAlignItems {
+	CENTER = 'center',
+}
+
+/**
  * enum of all possible callout directions
  */
 export enum CalloutDirections {
@@ -199,9 +212,14 @@ export enum ChartTypes {
  * enum of supported toolbar control types
  */
 export enum ToolbarControlTypes {
+	EXPORT_CSV = 'Export as CSV',
+	EXPORT_PNG = 'Export as PNG',
+	EXPORT_JPG = 'Export as JPG',
 	ZOOM_IN = 'Zoom in',
 	ZOOM_OUT = 'Zoom out',
 	RESET_ZOOM = 'Reset zoom',
+	MAKE_FULLSCREEN = 'Make fullscreen',
+	SHOW_AS_DATATABLE = 'Show as data-table',
 }
 /**
  * enum of title orientations for _vertical axes_
@@ -214,7 +232,7 @@ export enum AxisTitleOrientations {
 /**
  * enum of legend item type
  */
-export enum LegendItemTypes {
+export enum LegendItemType {
 	CHECKBOX = 'checkbox',
 	RADIUS = 'radius',
 	AREA = 'area',

@@ -2,7 +2,7 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model';
-import { AxisPositions, Events, ScaleTypes } from '../../interfaces';
+import { AxisPositions, Events, RenderTypes, ScaleTypes } from '../../interfaces';
 import { select, mouse } from 'd3-selection';
 
 // Carbon position service
@@ -17,6 +17,7 @@ import {
 
 export class Threshold extends Component {
 	type = 'threshold';
+	renderType = RenderTypes.SVG;
 
 	label: any;
 
@@ -48,7 +49,7 @@ export class Threshold extends Component {
 		});
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
@@ -307,7 +308,7 @@ export class Threshold extends Component {
 		const self = this;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Add events to the threshold hoverable area
 		svg.selectAll('rect.threshold-hoverable-area')

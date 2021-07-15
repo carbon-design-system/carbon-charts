@@ -2,6 +2,7 @@
 import { Pie } from './pie';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
+import { RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -9,6 +10,7 @@ import { interpolateNumber, interpolateRound } from 'd3-interpolate';
 
 export class Donut extends Pie {
 	type = 'donut';
+	renderType = RenderTypes.SVG;
 
 	render(animate = true) {
 		// Call render() from Pie
@@ -19,11 +21,11 @@ export class Donut extends Pie {
 		// if there are no data, remove the center content
 		// that is the old one and do nothing
 		if (this.model.isDataEmpty()) {
-			this.getContainerSVG().select('g.center').remove();
+			this.getComponentContainer().select('g.center').remove();
 			return;
 		}
 
-		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), 'g.center');
+		const svg = DOMUtils.appendOrSelect(this.getComponentContainer(), 'g.center');
 		const options = this.getOptions();
 
 		// Compute the outer radius needed

@@ -4,7 +4,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
-	LegendItemTypes,
+	LegendItemType,
 } from './interfaces';
 
 import { defaultLegendAdditionalItems } from './configuration-non-customizable';
@@ -301,7 +301,7 @@ export namespace Tools {
 			const providedTypes = userProvidedAdditionalItems.map(
 				(item) => item.type
 			);
-	
+
 			const defaultTypes = defaultAdditionalItems.map(
 				(item) => item.type
 			)
@@ -311,7 +311,7 @@ export namespace Tools {
 				(item) => defaultTypes.includes(item.type) &&
 				!providedTypes.includes(item.type)
 			)
-			
+
 			defaultOptions.legend.additionalItems = updatedDefaultItems;
 
 			providedOptions.legend.additionalItems = Tools.unionBy(

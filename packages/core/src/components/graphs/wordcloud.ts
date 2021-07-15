@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events, ColorClassNameTypes } from '../../interfaces';
+import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -12,6 +12,7 @@ import cloud from 'd3-cloud';
 
 export class WordCloud extends Component {
 	type = 'wordcloud';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -29,35 +30,11 @@ export class WordCloud extends Component {
 		);
 	}
 
-	getFontSizeScale(data: any) {
-		const options = this.getOptions();
-		const { fontSizeMapsTo } = options.wordCloud;
-
-		// Filter out any null/undefined values
-		const allOccurences = data
-			.map((d) => d[fontSizeMapsTo])
-			.filter((size) => size);
-		const chartSize = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
-		);
-
-		// We need the ternary operator here in case the user
-		// doesn't provide size values in data
-		const sizeDataIsValid = allOccurences.length > 0;
-		const domain = sizeDataIsValid ? extent(allOccurences) : [1, 1];
-		return scaleLinear()
-			.domain(domain as any)
-			.range(
-				sizeDataIsValid
-					? options.wordCloud.fontSizeRange(chartSize, data)
-					: [4, 4]
-			);
-	}
-
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer()
+			.attr('width', '100%')
+			.attr('height', '100%');
 
 		const displayData = this.model.getDisplayData();
 		const fontSizeScale = this.getFontSizeScale(displayData);
@@ -66,7 +43,7 @@ export class WordCloud extends Component {
 		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 
@@ -141,6 +118,31 @@ export class WordCloud extends Component {
 
 		// Add event listeners
 		this.addEventListeners();
+	}
+
+	getFontSizeScale(data: any) {
+		const options = this.getOptions();
+		const { fontSizeMapsTo } = options.wordCloud;
+
+		// Filter out any null/undefined values
+		const allOccurences = data
+			.map((d) => d[fontSizeMapsTo])
+			.filter((size) => size);
+		const chartSize = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
+		);
+
+		// We need the ternary operator here in case the user
+		// doesn't provide size values in data
+		const sizeDataIsValid = allOccurences.length > 0;
+		const domain = sizeDataIsValid ? extent(allOccurences) : [1, 1];
+		return scaleLinear()
+			.domain(domain as any)
+			.range(
+				sizeDataIsValid
+					? options.wordCloud.fontSizeRange(chartSize, data)
+					: [4, 4]
+			);
 	}
 
 	// Highlight elements that match the hovered legend item

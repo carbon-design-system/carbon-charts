@@ -4,6 +4,7 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 	Roles,
 } from '../../interfaces';
 import { Tools } from '../../tools';
@@ -14,10 +15,11 @@ import { select } from 'd3-selection';
 
 export class Boxplot extends Component {
 	type = 'boxplot';
+	renderType = RenderTypes.SVG;
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
