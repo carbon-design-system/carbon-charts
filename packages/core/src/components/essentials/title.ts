@@ -1,7 +1,7 @@
 // Internal Imports
-import { Component, RenderTypes } from '../component';
+import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events } from './../../interfaces';
+import { Events, RenderTypes } from './../../interfaces';
 
 export class Title extends Component {
 	type = 'title';

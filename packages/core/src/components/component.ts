@@ -1,6 +1,7 @@
 // Internal Imports
 import { ChartModel } from '../model';
 import { DOMUtils } from '../services';
+import { RenderTypes } from '../interfaces';
 import { Tools } from '../tools';
 
 // D3 Imports
@@ -8,11 +9,6 @@ import { select } from 'd3-selection';
 
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
-
-export enum RenderTypes {
-	HTML = 'html',
-	SVG = 'svg',
-}
 
 export class Component {
 	public type: string;
