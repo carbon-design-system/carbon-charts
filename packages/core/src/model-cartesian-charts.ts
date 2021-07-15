@@ -36,22 +36,26 @@ export class ChartModelCartesian extends ChartModel {
 		let data = [['Group', domainLabel, rangeLabel]];
 		data = data.concat(
 			displayData.map((datum) => [
-				datum[groupMapsTo], // group
-				datum[domainIdentifier] === null
-					? '–'
-					: domainValueFormatter
-					? domainValueFormatter(datum[domainIdentifier])
-					: datum[domainIdentifier], // domain value
-				datum[rangeIdentifier] === null
-					? '–'
-					: datum[rangeIdentifier].toLocaleString(), // range value
+				`"${datum[groupMapsTo]}"`, // group
+				`"${
+					datum[domainIdentifier] === null
+						? '–'
+						: domainValueFormatter
+						? domainValueFormatter(datum[domainIdentifier])
+						: datum[domainIdentifier]
+				}"`, // domain value
+				`"${
+					datum[rangeIdentifier] === null
+						? '–'
+						: datum[rangeIdentifier].toLocaleString()
+				}"`, // range value
 			])
 		);
 
 		let csvString = '',
 			csvData = '';
 		data.forEach(function (d, i) {
-			csvData = d.join(';');
+			csvData = d.join(',');
 			csvString += i < data.length ? csvData + '\n' : csvData;
 		});
 
