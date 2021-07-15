@@ -3,12 +3,9 @@ import { Component } from '../component';
 import {
 	Events,
 	RenderTypes,
-	Roles,
 	ToolbarControlTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
-import { DOMUtils } from '../../services';
-import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { event, select } from 'd3-selection';
