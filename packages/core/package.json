@@ -54,6 +54,7 @@
 		"carbon-components": "10.5.0",
 		"d3-cloud": "1.2.5",
 		"date-fns": "2.8.1",
+		"dom-to-image": "2.6.0",
 		"lodash-es": "4.17.21",
 		"resize-observer-polyfill": "1.5.0"
 	},
@@ -84,7 +85,6 @@
 		"copy-webpack-plugin": "4.5.2",
 		"css-loader": "0.28.7",
 		"d3": "5.14.2",
-		"dom-to-image": "2.6.0",
 		"extract-text-webpack-plugin": "3.0.2",
 		"file-loader": "1.1.5",
 		"fork-ts-checker-webpack-plugin": "^4.0.5",
