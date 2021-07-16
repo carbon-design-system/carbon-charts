@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   build:
-    if: github.actor != 'carbon-bot' &&	startsWith(github.event.head_commit.message, 'release - ')
+    if: github.actor != 'carbon-bot' &&	contains(github.event.pull_request.labels.*.name, 'release')
     name: Create release - Node.js v11.x
     runs-on: ubuntu-latest
 
