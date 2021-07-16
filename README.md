@@ -60,6 +60,7 @@ Read the release change logs [here](./CHANGELOG.md)
 | Wordcloud     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Bullet     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Circle Pack     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Network diagrams     | — | :white_check_mark: | :white_check_mark: | — | — |
 
 ## Bugs and feature requests
 
