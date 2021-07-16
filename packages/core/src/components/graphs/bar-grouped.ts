@@ -10,7 +10,6 @@ import {
 } from '../../interfaces';
 
 // D3 Imports
-import { map } from 'd3-collection';
 import { select } from 'd3-selection';
 import { ScaleBand, scaleBand } from 'd3-scale';
 
@@ -50,12 +49,12 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getComponentContainer({ withinChartClip: true });
 
-		const allDataLabels = map(displayData, (datum) => {
+		const allDataLabels = displayData.map((datum) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
 			return datum[domainIdentifier];
-		}).keys();
+		});
 
 		// Update data on bar groups
 		const barGroups = svg

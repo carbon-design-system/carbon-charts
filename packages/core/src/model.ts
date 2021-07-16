@@ -4,7 +4,6 @@ import { Tools } from './tools';
 import { Events, ScaleTypes, ColorClassNameTypes } from './interfaces';
 
 // D3
-import { map } from 'd3-collection';
 import { scaleOrdinal } from 'd3-scale';
 import { stack } from 'd3-shape';
 
@@ -210,13 +209,13 @@ export class ChartModel {
 		const { groupMapsTo } = options.data;
 		const displayData = this.getDisplayData(groups);
 
-		const stackKeys = map(displayData, (datum) => {
+		const stackKeys = displayData.map((datum) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
 
 			return datum[domainIdentifier];
-		}).keys();
+		});
 
 		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
@@ -617,10 +616,7 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const options = this.getOptions();
 
-		const uniqueDataGroups = map(
-			data,
-			(datum) => datum[groupMapsTo]
-		).keys();
+		const uniqueDataGroups = data.map((datum) => datum[groupMapsTo]);
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {
