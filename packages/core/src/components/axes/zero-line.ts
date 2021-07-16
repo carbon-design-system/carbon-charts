@@ -2,9 +2,11 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
+import { RenderTypes } from '../../interfaces';
 
 export class ZeroLine extends Component {
 	type = 'zero-line';
+	renderType = RenderTypes.SVG;
 
 	render(animate: boolean) {
 		const axisPosition = this.services.cartesianScales.getRangeAxisPosition(
@@ -21,7 +23,7 @@ export class ZeroLine extends Component {
 			(minDomainValue < 0 && maxDomainValue > 0);
 
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		// show zero line only if is necessary, otherwise make sure tto remove zero line if the chart
 		// previously had a domain that went into negatives

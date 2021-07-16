@@ -1,6 +1,12 @@
 // Internal Imports
 import { Bar } from './bar';
-import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import {
+	Events,
+	Roles,
+	RenderTypes,
+	ColorClassNameTypes,
+	CartesianOrientations,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -30,9 +37,11 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const data = this.model.getDisplayData(this.configs.groups);
+
+		const orientation = this.services.cartesianScales.getOrientation();
 
 		// Update data on all bars
 		const bars = svg
@@ -70,13 +79,45 @@ export class SimpleBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				const barWidth = this.getBarWidth();
+				const value = d[rangeIdentifier];
+
 				const x0 =
 					this.services.cartesianScales.getDomainValue(d, i) -
 					barWidth / 2;
 				const x1 = x0 + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(0);
-				const y1 = this.services.cartesianScales.getRangeValue(d, i);
+				let y0, y1;
+				if (Array.isArray(value) && value.length === 2) {
+					y0 = this.services.cartesianScales.getRangeValue(value[0]);
+					y1 = this.services.cartesianScales.getRangeValue(
+						value[1],
+						i
+					);
+				} else {
+					const rangeScale = this.services.cartesianScales.getRangeScale();
+					const yScaleDomainStart = rangeScale.domain()[0];
+
+					y0 = this.services.cartesianScales.getRangeValue(
+						Math.max(0, yScaleDomainStart)
+					);
+					y1 = this.services.cartesianScales.getRangeValue(d, i);
+				}
+
+				const difference = Math.abs(y1 - y0);
+				// Set a min-2px size for the bar
+				if (difference !== 0 && difference < 2) {
+					if (
+						(value > 0 &&
+							orientation === CartesianOrientations.VERTICAL) ||
+						(value < 0 &&
+							orientation === CartesianOrientations.HORIZONTAL)
+					) {
+						y1 = y0 - 2;
+					} else {
+						y1 = y0 + 2;
+					}
+				}
 
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {
@@ -85,7 +126,7 @@ export class SimpleBar extends Bar {
 
 				return Tools.generateSVGPathString(
 					{ x0, x1, y0, y1 },
-					this.services.cartesianScales.getOrientation()
+					orientation
 				);
 			})
 			.attr('opacity', 1)

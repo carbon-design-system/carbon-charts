@@ -3,8 +3,6 @@ import * as lineChart from './line';
 
 // utility function to enable toolbar option
 const addToolbarOptions = (options, configs?) => {
-	options.experimental = true;
-
 	options.toolbar = {
 		enabled: true,
 	};

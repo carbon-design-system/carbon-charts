@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, ScaleTypes } from '../../interfaces';
+import { Events, RenderTypes, ScaleTypes } from '../../interfaces';
 import { DOMUtils } from '../../services';
 
 // D3 Imports
@@ -13,6 +13,7 @@ export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
 	type = 'grid-brush';
+	renderType = RenderTypes.SVG;
 
 	selectionSelector = 'rect.selection'; // needs to match the class name in d3.brush
 
@@ -20,8 +21,9 @@ export class ChartBrush extends Component {
 
 	render(animate = true) {
 		const svg = this.parent;
+
 		// use this area to display selection above all graphs
-		const frontSelectionArea = this.getContainerSVG();
+		const frontSelectionArea = this.getComponentContainer();
 		const backdrop = DOMUtils.appendOrSelect(
 			svg,
 			'svg.chart-grid-backdrop'
@@ -79,10 +81,8 @@ export class ChartBrush extends Component {
 				if (dashCount % 2 === 1) {
 					dashArray += ',0';
 				}
-
 				dashArray += ',' + selectionWidth.toString(); // bottom (invisible)
 				dashArray += ',' + height.toString(); // left
-
 				frontSelection.attr('stroke-dasharray', dashArray);
 			};
 
@@ -95,7 +95,11 @@ export class ChartBrush extends Component {
 
 				// copy the d3 selection attrs to front selection element
 				frontSelection
-					.attr('x', d3Selection.attr('x'))
+					.attr(
+						'x',
+						parseFloat(d3Selection.attr('x')) +
+							parseFloat(backdrop.attr('x'))
+					)
 					.attr('y', d3Selection.attr('y'))
 					.attr('width', d3Selection.attr('width'))
 					.attr('height', d3Selection.attr('height'))

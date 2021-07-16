@@ -118,6 +118,29 @@ export class CartesianScales extends Service {
 		return this.getAxisOptions(rangeAxisPosition);
 	}
 
+	getScaleLabel(position: AxisPositions) {
+		const options = this.getAxisOptions(position);
+		let title = options.title;
+		if (!title) {
+			if (
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
+			) {
+				return 'x-value';
+			}
+			return 'y-value';
+		}
+		return title;
+	}
+
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
+	}
+
+	getRangeLabel() {
+		return this.getScaleLabel(this.getRangeAxisPosition());
+	}
+
 	update(animate = true) {
 		this.determineAxisDuality();
 		this.findDomainAndRangeAxes();
@@ -264,7 +287,8 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(options, 'axes');
 		const axisOptions = axesOptions[axisPosition];
 		const { mapsTo } = axisOptions;
-		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+		const value =
+			Tools.getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum;
 		let scaledValue;
 		switch (scaleType) {
 			case ScaleTypes.LABELS:
@@ -291,12 +315,12 @@ export class CartesianScales extends Service {
 
 		const boundedValues = [
 			scale(
-				datum[bounds.upperBoundMapsTo]
+				Tools.getProperty(datum, bounds.upperBoundMapsTo) !== null
 					? datum[bounds.upperBoundMapsTo]
 					: value
 			),
 			scale(
-				datum[bounds.lowerBoundMapsTo]
+				Tools.getProperty(datum, bounds.lowerBoundMapsTo) !== null
 					? datum[bounds.lowerBoundMapsTo]
 					: value
 			),
@@ -373,7 +397,8 @@ export class CartesianScales extends Service {
 		} else {
 			return addSpacingToContinuousDomain(
 				domain,
-				Configuration.axis.paddingRatio
+				Configuration.axis.paddingRatio,
+				axisOptions.scaleType
 			);
 		}
 	}
@@ -503,7 +528,16 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { mapsTo, percentage } = axisOptions;
+		const {
+			extendLinearDomainBy,
+			mapsTo,
+			percentage,
+			thresholds,
+		} = axisOptions;
+		const {
+			reference: ratioReference,
+			compareTo: ratioCompareTo,
+		} = Configuration.axis.ratio;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
@@ -535,7 +569,11 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		const dataGroupNames = this.model.getDataGroupNames();
 
-		if (scaleType === ScaleTypes.TIME) {
+		if (scaleType === ScaleTypes.LABELS_RATIO) {
+			return displayData.map(
+				(datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`
+			);
+		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map(
 				(datum) => +new Date(datum[mapsTo])
 			);
@@ -544,6 +582,7 @@ export class CartesianScales extends Service {
 
 			displayData.forEach((datum) => {
 				allDataValues.push(datum[mapsTo]);
+
 				if (datum[bounds.upperBoundMapsTo]) {
 					allDataValues.push(datum[bounds.upperBoundMapsTo]);
 				}
@@ -578,11 +617,39 @@ export class CartesianScales extends Service {
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			allDataValues = [];
+
+			displayData.forEach((datum) => {
+				const value = datum[mapsTo];
+				if (Array.isArray(value) && value.length === 2) {
+					allDataValues.push(value[0]);
+					allDataValues.push(value[1]);
+				} else {
+					if (extendLinearDomainBy) {
+						allDataValues.push(
+							Math.max(datum[mapsTo], datum[extendLinearDomainBy])
+						);
+					}
+					allDataValues.push(value);
+				}
+			});
 		}
 
-		if (scaleType !== ScaleTypes.TIME && includeZero) {
+		// Time can never be 0 and log of base 0 is -Infinity
+		if (
+			scaleType !== ScaleTypes.TIME &&
+			scaleType !== ScaleTypes.LOG &&
+			includeZero
+		) {
 			allDataValues.push(0);
+		}
+
+		// Add threshold values into the scale
+		if (thresholds && thresholds.length > 0) {
+			thresholds.forEach((threshold) => {
+				const thresholdValue = Tools.getProperty(threshold, 'value');
+				if (thresholdValue !== null) allDataValues.push(thresholdValue);
+			});
 		}
 
 		domain = extent(allDataValues);
@@ -608,7 +675,10 @@ export class CartesianScales extends Service {
 			scale = scaleTime();
 		} else if (scaleType === ScaleTypes.LOG) {
 			scale = scaleLog().base(axisOptions.base || 10);
-		} else if (scaleType === ScaleTypes.LABELS) {
+		} else if (
+			scaleType === ScaleTypes.LABELS ||
+			scaleType === ScaleTypes.LABELS_RATIO
+		) {
 			scale = scaleBand();
 		} else {
 			scale = scaleLinear();
@@ -744,7 +814,8 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 
 function addSpacingToContinuousDomain(
 	[lower, upper]: number[],
-	paddingRatio: number
+	paddingRatio: number,
+	scaleType?: ScaleTypes
 ) {
 	const domainLength = upper - lower;
 	const padding = domainLength * paddingRatio;
@@ -752,7 +823,17 @@ function addSpacingToContinuousDomain(
 	// If padding crosses 0, keep 0 as new upper bound
 	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
 	// If padding crosses 0, keep 0 as new lower bound
-	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	// Log of base 0 or a negative number is -Infinity
+	if (scaleType === ScaleTypes.LOG && newLower <= 0) {
+		if (lower <= 0) {
+			throw Error(
+				'Data must have values greater than 0 if log scale type is used.'
+			);
+		}
+		newLower = lower;
+	}
 
 	return [newLower, newUpper];
 }

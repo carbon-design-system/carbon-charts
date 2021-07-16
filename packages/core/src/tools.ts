@@ -4,12 +4,16 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
+	LegendItemType,
 } from './interfaces';
+
+import { defaultLegendAdditionalItems } from './configuration-non-customizable';
 
 import {
 	debounce as lodashDebounce,
 	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
+	unionBy as lodashUnionBy,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	flatten as lodashFlatten,
@@ -34,6 +38,7 @@ export namespace Tools {
 	export const debounce = lodashDebounce;
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
+	export const unionBy = lodashUnionBy;
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const flatten = lodashFlatten;
@@ -96,7 +101,7 @@ export namespace Tools {
 					providedAxisOptions['secondary']
 				) {
 					console.warn(
-						'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format'
+						'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format'
 					);
 				}
 
@@ -116,6 +121,8 @@ export namespace Tools {
 				delete defaultOptions.axes[axisName];
 			}
 		}
+
+		updateLegendAdditionalItems(defaultOptions, providedOptions);
 
 		return Tools.merge(defaultOptions, providedOptions);
 	}
@@ -267,6 +274,52 @@ export namespace Tools {
 			return '...' + fullText.substr(-numCharacter);
 		} else if (truncationType === TruncationTypes.END_LINE) {
 			return fullText.substr(0, numCharacter) + '...';
+		}
+	}
+
+	/**
+	 * Update legend additional items
+	 * @param {any} defaultOptions
+	 * @param {any} providedOptions
+	 */
+	export function updateLegendAdditionalItems(
+		defaultOptions,
+		providedOptions
+	) {
+		let defaultAdditionalItems = Tools.getProperty(
+			defaultOptions,
+			'legend',
+			'additionalItems'
+		);
+		const userProvidedAdditionalItems = Tools.getProperty(
+			providedOptions,
+			'legend',
+			'additionalItems'
+		);
+
+		// Retain default legend additional items
+		if (defaultAdditionalItems && userProvidedAdditionalItems) {
+			const providedTypes = userProvidedAdditionalItems.map(
+				(item) => item.type
+			);
+
+			const defaultTypes = defaultAdditionalItems.map(
+				(item) => item.type
+			)
+
+			// Get default items in default options but not in provided options
+			const updatedDefaultItems = defaultLegendAdditionalItems.filter(
+				(item) => defaultTypes.includes(item.type) &&
+				!providedTypes.includes(item.type)
+			)
+
+			defaultOptions.legend.additionalItems = updatedDefaultItems;
+
+			providedOptions.legend.additionalItems = Tools.unionBy(
+				updatedDefaultItems,
+				userProvidedAdditionalItems,
+				'name'
+			);
 		}
 	}
 

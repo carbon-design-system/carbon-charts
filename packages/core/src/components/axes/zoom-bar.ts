@@ -5,6 +5,7 @@ import { Tools } from '../../tools';
 import {
 	AxisPositions,
 	Events,
+	RenderTypes,
 	ScaleTypes,
 	ZoomBarTypes,
 } from '../../interfaces';
@@ -18,6 +19,7 @@ import { area, line } from 'd3-shape';
 
 export class ZoomBar extends Component {
 	type = 'zoom-bar';
+	renderType = RenderTypes.SVG;
 
 	// The minimum selection x range to trigger handler update
 	// Smaller number may introduce a handler flash during initialization
@@ -58,7 +60,7 @@ export class ZoomBar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(
 			AxisPositions.TOP
@@ -193,6 +195,19 @@ export class ZoomBar extends Component {
 					},
 					{ skipUpdate: true }
 				);
+			} else if (
+				newInitialZoomDomain === null &&
+				oldInitialZoomDomain != null
+			) {
+				// if newInitialZoomDomain is set to null (when oldInitialZoomDomain is not null)
+				// save initialZoomDomain and reset zoom domain to default domain
+				this.model.set(
+					{
+						initialZoomDomain: null,
+						zoomDomain: Tools.merge([], defaultDomain),
+					},
+					{ skipUpdate: true }
+				);
 			}
 
 			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
@@ -239,7 +254,7 @@ export class ZoomBar extends Component {
 			} else if (zoomDomain[0].valueOf() === zoomDomain[1].valueOf()) {
 				brushArea.call(this.brush.move, this.xScale.range()); // default to full range
 				this.updateBrushHandle(
-					this.getContainerSVG(),
+					this.getComponentContainer(),
 					this.xScale.range(),
 					this.xScale.domain()
 				);
@@ -253,7 +268,7 @@ export class ZoomBar extends Component {
 				} else {
 					brushArea.call(this.brush.move, selected); // set brush to correct position
 					this.updateBrushHandle(
-						this.getContainerSVG(),
+						this.getComponentContainer(),
 						selected,
 						zoomDomain
 					);
@@ -314,7 +329,7 @@ export class ZoomBar extends Component {
 		];
 
 		// update brush handle position
-		this.updateBrushHandle(this.getContainerSVG(), selection, newDomain);
+		this.updateBrushHandle(this.getComponentContainer(), selection, newDomain);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse/touch event
@@ -473,7 +488,7 @@ export class ZoomBar extends Component {
 			axesLeftMargin = axesMargins.left;
 		}
 
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const container = svg.select('svg.zoom-container');
 
 		// Draw zoombar background line
@@ -614,7 +629,7 @@ export class ZoomBar extends Component {
 		this.brush.on('start brush end', null);
 		// clear d3 brush
 		DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			this.brushSelector
 		).html(null);
 

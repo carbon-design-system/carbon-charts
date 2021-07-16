@@ -3,12 +3,63 @@ import { ChartModel } from './model';
 import { Tools } from './tools';
 import { ScaleTypes, AxisPositions } from './interfaces';
 
+// date formatting
+import { format } from 'date-fns';
+
 /**
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
  * */
 export class ChartModelCartesian extends ChartModel {
 	constructor(services: any) {
 		super(services);
+	}
+
+	exportToCSV() {
+		const displayData = this.getDisplayData();
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const { cartesianScales } = this.services;
+		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = cartesianScales.getRangeIdentifier();
+		const domainScaleType = cartesianScales.getDomainAxisScaleType();
+
+		let domainValueFormatter;
+		if (domainScaleType === ScaleTypes.TIME) {
+			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
+		}
+
+		// domain & range labels
+		const domainLabel = cartesianScales.getDomainLabel();
+		const rangeLabel = cartesianScales.getRangeLabel();
+
+		let data = [['Group', domainLabel, rangeLabel]];
+		data = data.concat(
+			displayData.map((datum) => [
+				`"${datum[groupMapsTo]}"`, // group
+				`"${
+					datum[domainIdentifier] === null
+						? '–'
+						: domainValueFormatter
+						? domainValueFormatter(datum[domainIdentifier])
+						: datum[domainIdentifier]
+				}"`, // domain value
+				`"${
+					datum[rangeIdentifier] === null
+						? '–'
+						: datum[rangeIdentifier].toLocaleString()
+				}"`, // range value
+			])
+		);
+
+		let csvString = '',
+			csvData = '';
+		data.forEach(function (d, i) {
+			csvData = d.join(',');
+			csvString += i < data.length ? csvData + '\n' : csvData;
+		});
+
+		this.services.files.downloadCSV(csvString, 'myChart.csv');
 	}
 
 	setData(newData) {

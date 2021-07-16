@@ -5,8 +5,23 @@
 	height: 100%;
 	background-color: $ui-background;
 
+	.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+		background-color: $ui-background;
+	}
+
 	.DONT_STYLE_ME_css_styles_verifier {
 		overflow: hidden;
 		opacity: 0;
 	}
+}
+
+.#{$prefix}--chart-holder.fullscreen,
+.#{$prefix}--chart-holder:-webkit-full-screen {
+	/* !important is used here to get closer to
+	a truly fullscreen experience */
+	width: 100% !important;
+	height: 100% !important;
+	max-width: unset !important;
+	max-height: unset !important;
+	padding: 2em;
 }

@@ -2,12 +2,14 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
+import { RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { axisBottom, axisLeft } from 'd3-axis';
 
 export class Grid extends Component {
 	type = 'grid';
+	renderType = RenderTypes.SVG;
 
 	backdrop: any;
 
@@ -25,11 +27,12 @@ export class Grid extends Component {
 			'enabled'
 		);
 
+		// Draw the backdrop
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
+
 		if (!isXGridEnabled && !isYGridEnabled) {
 			return;
 		}
-		// Draw the backdrop
-		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
 
 		if (isXGridEnabled) {
 			DOMUtils.appendOrSelect(this.backdrop, 'g.x.grid');
@@ -52,14 +55,39 @@ export class Grid extends Component {
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
-		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(
+		// if the main range axis has a custom domain, align the gridlines to the ticks
+		const alignToTicks = Tools.getProperty(
 			this.getOptions(),
 			'grid',
 			'x',
-			'numberOfTicks'
+			'alignWithAxisTicks'
 		);
-		xGrid.ticks(numberOfTicks);
+
+		if (alignToTicks) {
+			const mainXPosition = this.services.cartesianScales.getDomainAxisPosition();
+			const customDomain = Tools.getProperty(
+				this.getOptions(),
+				'axes',
+				mainXPosition,
+				'ticks',
+				'values'
+			);
+			// use custom domain if there is one
+			// otherwise d3 defaults to using one gridline per tick
+			if (customDomain) {
+				xGrid.tickValues(customDomain);
+			}
+		} else {
+			// Determine number of ticks
+			const numberOfTicks = Tools.getProperty(
+				this.getOptions(),
+				'grid',
+				'x',
+				'numberOfTicks'
+			);
+
+			xGrid.ticks(numberOfTicks);
+		}
 
 		const g = svg
 			.select('.x.grid')
@@ -89,14 +117,41 @@ export class Grid extends Component {
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
-		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(
+		// if the main range axis has a custom domain, align the gridlines to the ticks
+		const alignToTicks = Tools.getProperty(
 			this.getOptions(),
 			'grid',
 			'y',
-			'numberOfTicks'
+			'alignWithAxisTicks'
 		);
-		yGrid.ticks(numberOfTicks);
+
+		if (alignToTicks) {
+			const mainYPosition = this.services.cartesianScales.getRangeAxisPosition();
+
+			const customDomain = Tools.getProperty(
+				this.getOptions(),
+				'axes',
+				mainYPosition,
+				'ticks',
+				'values'
+			);
+
+			// use custom domain if there is one
+			// otherwise d3 defaults to using one gridline per tick
+			if (customDomain) {
+				yGrid.tickValues(customDomain);
+			}
+		} else {
+			// Determine number of ticks
+			const numberOfTicks = Tools.getProperty(
+				this.getOptions(),
+				'grid',
+				'y',
+				'numberOfTicks'
+			);
+
+			yGrid.ticks(numberOfTicks);
+		}
 
 		const g = svg
 			.select('.y.grid')

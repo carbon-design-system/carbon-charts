@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +13,8 @@ import { select, Selection } from 'd3-selection';
 
 export class Scatter extends Component {
 	type = 'scatter';
+	renderType = RenderTypes.SVG;
+
 	scatterData: any;
 
 	init() {
@@ -46,8 +53,8 @@ export class Scatter extends Component {
 		if (zoomDomain !== undefined) {
 			return data.filter(
 				(d) =>
-					d[domainIdentifier].getTime() > zoomDomain[0].getTime() &&
-					d[domainIdentifier].getTime() < zoomDomain[1].getTime()
+					d[domainIdentifier].getTime() >= zoomDomain[0].getTime() &&
+					d[domainIdentifier].getTime() <= zoomDomain[1].getTime()
 			);
 		}
 		return data;
@@ -95,7 +102,7 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -335,6 +342,11 @@ export class Scatter extends Component {
 			.attr('opacity', 1);
 	};
 
+	// This is extended in bubble graphs
+	getTooltipAdditionalItems(datum) {
+		return null;
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = self.getOptions().data;
@@ -365,10 +377,11 @@ export class Scatter extends Component {
 					})
 					.classed('unfilled', false);
 
-				// Show tooltip for single datapoint
+				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: [datum],
+					additionalItems: self.getTooltipAdditionalItems(datum),
 				});
 
 				// Dispatch mouse event
@@ -413,25 +426,24 @@ export class Scatter extends Component {
 					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
 						datum
 					);
+					const isFilled = self.model.getIsFilled(
+						datum[groupMapsTo],
+						datum[domainIdentifier],
+						datum,
+						filled
+					);
 					hoveredElement
-						.classed(
-							'unfilled',
-							!self.model.getIsFilled(
-								datum[groupMapsTo],
-								datum[domainIdentifier],
-								datum,
-								filled
-							)
-						)
-						.style('fill', (d) =>
-							filled
-								? self.model.getFillColor(
-										d[groupMapsTo],
-										d[domainIdentifier],
-										d
-								  )
-								: null
-						);
+						.classed('unfilled', !isFilled)
+						.style('fill', (d) => {
+							if (isFilled || filled) {
+								return self.model.getFillColor(
+									d[groupMapsTo],
+									d[domainIdentifier],
+									d
+								);
+							}
+							return null;
+						});
 				}
 
 				// Dispatch mouse event

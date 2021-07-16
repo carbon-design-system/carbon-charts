@@ -12,7 +12,6 @@ export const comboSimpleData = [
 ];
 
 export const comboSimpleOptions = {
-	experimental: true,
 	title: 'Combo (Line + Simple bar) - custom configs',
 	axes: {
 		left: {
@@ -52,7 +51,6 @@ export const comboSimpleOptions = {
 export const comboHorizontalData = comboSimpleData;
 
 export const comboHorizontalOptions = {
-	experimental: true,
 	title: 'Horizontal Combo (Line + Simple bar)',
 	axes: {
 		top: {
@@ -110,7 +108,6 @@ export const comboStackedData = [
 ];
 
 export const comboStackedOptions = {
-	experimental: true,
 	title: 'Combo (Line + Stacked bar)',
 	axes: {
 		left: {
@@ -167,7 +164,6 @@ export const comboGroupedData = [
 ];
 
 export const comboGroupedOptions = {
-	experimental: true,
 	title: 'Combo (Line + Grouped bar) - custom configs',
 	axes: {
 		left: {
@@ -218,7 +214,6 @@ export const comboGroupedHorizontalData = [
 ];
 
 export const comboGroupedHorizontalOptions = {
-	experimental: true,
 	title: 'Combo Horizontal (Line + Grouped bar)',
 	axes: {
 		top: {
@@ -268,7 +263,6 @@ export const comboAreaLineData = [
 ];
 
 export const comboAreaLineOptions = {
-	experimental: true,
 	title: 'Combo (Line + Area)',
 	points: {
 		enabled: false,
@@ -331,7 +325,6 @@ export const comboLineScatterData = [
 ];
 
 export const comboLineScatterOptions = {
-	experimental: true,
 	title: 'Combo (Line + Scatter + Bar)',
 	axes: {
 		left: {
@@ -369,7 +362,6 @@ export const comboLineScatterOptions = {
 export const comboEmptyData = [];
 
 export const comboEmptyOptions = {
-	experimental: true,
 	title: 'Combo Chart (empty)',
 	axes: {
 		left: {
@@ -402,7 +394,6 @@ export const comboEmptyOptions = {
 export const comboLoadingData = comboLineScatterData;
 
 export const comboLoadingOptions = {
-	experimental: true,
 	title: 'Combo Chart (loading)',
 	axes: {
 		left: {
@@ -435,50 +426,6 @@ export const comboLoadingOptions = {
 	],
 };
 
-export const comboErrorData = [
-	{ group: 'High', key: 'Monday', temp: 20 },
-	{ group: 'High', key: 'Tuesday', temp: 33 },
-	{ group: 'High', key: 'Wednesday', temp: 23 },
-	{ group: 'High', key: 'Thursday', temp: 23 },
-	{ group: 'High', key: 'Friday', temp: 32 },
-	{ group: 'Low', key: 'Monday', temp: 12 },
-	{ group: 'Low', key: 'Tuesday', temp: 22 },
-	{ group: 'Low', key: 'Wednesday', temp: 20 },
-	{ group: 'Low', key: 'Thursday', temp: 22 },
-	{ group: 'Low', key: 'Friday', temp: 25 },
-	{ group: 'Temperature', key: 'Monday', temp: 24 },
-	{ group: 'Temperature', key: 'Tuesday', temp: 28 },
-	{ group: 'Temperature', key: 'Wednesday', temp: 30 },
-	{ group: 'Temperature', key: 'Thursday', temp: 29 },
-	{ group: 'Temperature', key: 'Friday', temp: 24 },
-	{ group: 'Attendance', key: 'Monday', value: 2650 },
-	{ group: 'Attendance', key: 'Tuesday', value: 2553 },
-	{ group: 'Attendance', key: 'Wednesday', value: 3433 },
-	{ group: 'Attendance', key: 'Thursday', value: 3754 },
-	{ group: 'Attendance', key: 'Friday', value: 3744 },
-];
-
-export const comboErrorOptions = {
-	experimental: true,
-	title: 'Combo Chart (no comboChartTypes)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-			title: 'Attendance',
-		},
-		bottom: {
-			scaleType: 'labels',
-			mapsTo: 'key',
-		},
-		right: {
-			title: 'Temperature (°C)',
-			mapsTo: 'temp',
-			scaleType: 'linear',
-			correspondingDatasets: ['Temperature'],
-		},
-	},
-};
-
 export const comboStackedAreaLine = [
 	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
@@ -503,21 +450,24 @@ export const comboStackedAreaLine = [
 ];
 
 export const comboStackedAreaLineOptions = {
-	experimental: true,
 	title: 'Combo (Stacked Area + Line)',
 	axes: {
 		left: {
+			title: 'left',
 			stacked: true,
 			mapsTo: 'value',
+			titleOrientation: 'right',
 		},
 		bottom: {
 			scaleType: 'time',
 			mapsTo: 'date',
 		},
 		right: {
+			title: 'right',
 			scaleType: 'linear',
 			mapsTo: 'temp',
 			correspondingDatasets: ['Temperature'],
+			titleOrientation: 'left',
 		},
 	},
 	curve: 'curveMonotoneX',
@@ -536,4 +486,65 @@ export const comboStackedAreaLineOptions = {
 			correspondingDatasets: ['Temperature'],
 		},
 	],
+};
+
+export const comboAreaLineTimeSeriesData = [
+	{ group: 'Health', key: new Date(2018, 11, 30), value: 312 },
+	{ group: 'Health', key: new Date(2019, 0, 6), value: 232 },
+	{ group: 'Health', key: new Date(2019, 0, 8), value: 432 },
+	{ group: 'Health', key: new Date(2019, 0, 15), value: 712 },
+	{ group: 'Health', key: new Date(2019, 0, 19), value: 834 },
+	{ group: 'Health', key: new Date(2019, 1, 1), value: 800 },
+	{ group: 'Health', key: new Date(2019, 1, 5), value: 612 },
+	{ group: 'Health', key: new Date(2019, 1, 13), value: 442 },
+	{ group: 'Temperature', key: new Date(2019, 0, 1), temp: -20 },
+	{ group: 'Temperature', key: new Date(2019, 0, 5), temp: -12 },
+	{ group: 'Temperature', key: new Date(2019, 0, 8), temp: 3 },
+	{ group: 'Temperature', key: new Date(2019, 0, 13), temp: 18 },
+	{ group: 'Temperature', key: new Date(2019, 0, 19), temp: 24 },
+	{ group: 'Temperature', key: new Date(2019, 1, 2), temp: 34 },
+	{ group: 'Temperature', key: new Date(2019, 1, 7), temp: 37 },
+	{ group: 'Temperature', key: new Date(2019, 1, 9), temp: 30 },
+];
+
+export const comboAreaLineTimeSeriesOptions = {
+	title: 'Combo (Line + Area) Time series',
+	points: {
+		enabled: false,
+	},
+	axes: {
+		left: {
+			title: 'Score',
+			mapsTo: 'value',
+		},
+		bottom: {
+			scaleType: 'time',
+			mapsTo: 'key',
+		},
+		right: {
+			title: 'Temperature (°C)',
+			mapsTo: 'temp',
+			correspondingDatasets: ['Temperature'],
+		},
+	},
+	comboChartTypes: [
+		{
+			type: 'area',
+			options: {},
+			correspondingDatasets: ['Health'],
+		},
+		{
+			type: 'line',
+			options: {
+				points: {
+					enabled: true,
+				},
+			},
+			correspondingDatasets: ['Temperature'],
+		},
+	],
+	curve: 'curveNatural',
+	timeScale: {
+		addSpaceOnEdges: 0,
+	},
 };

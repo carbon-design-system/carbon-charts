@@ -12,7 +12,7 @@ import {
 	AxesOptions,
 	ZoomBarsOptions,
 } from './index';
-import { BarOptions, StackedBarOptions } from './components';
+import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
 import { TimeScaleOptions } from './axis-scales';
 
 /**
@@ -48,6 +48,10 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
+	 * toolbar configurations
+	 */
+	toolbar?: ToolbarOptions;
+	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
 	getIsFilled?: (
@@ -60,16 +64,17 @@ export interface BaseChartOptions {
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
 	getFillColor?: (
-		datasetLabel: any,
-		label?: any,
+		group: string,
+		label?: string,
 		data?: any,
 		defaultFillColor?: string
 	) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
+	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
 	getStrokeColor?: (
-		datasetLabel: any,
+		group: string,
 		label?: any,
 		data?: any,
 		defaultStrokeColor?: string
@@ -106,7 +111,7 @@ export interface BaseChartOptions {
 	 */
 	color?: {
 		/**
-		 * e.g. { "Dataset 1": "blue" }
+		 * e.g. { 'Dataset 1': 'blue' }
 		 */
 		scale?: object;
 		/**
@@ -143,6 +148,11 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 */
 	zoomBar?: ZoomBarsOptions;
 }
+
+/**
+ * options specific to boxplot charts
+ */
+export interface BoxplotChartOptions extends AxisChartOptions {}
 
 /**
  * options specific to bar charts
@@ -194,6 +204,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 */
 		radiusMapsTo?: string;
 		/**
+		 * options for what the bubble radius value maps to
+		 */
+		radiusLabel?: string;
+		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */
@@ -206,6 +220,18 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * enabled scatter dot or not
 		 */
 		enabled?: boolean;
+	};
+}
+
+/**
+ * options specific to bullet charts
+ */
+export interface BulletChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bullets
+	 */
+	bullet?: {
+		performanceAreaTitles?: string[];
 	};
 }
 
@@ -259,14 +285,41 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 }
 
 /**
+ * options specific to world cloud charts
+ */
+export interface WordCloudChartTooltipOptions extends TooltipOptions {
+	/** the label that shows up by the highlighted word in the tooltip */
+	wordLabel?: string;
+	/** the label that shows up by the value of the highlighted word in the tooltip */
+	valueLabel?: string;
+}
+
+export interface WorldCloudChartOptions extends BaseChartOptions {
+	wordCloud?: {
+		/** what key in your charting data will the font sizes map to? */
+		fontSizeMapsTo?: string;
+		/** a function (chartSize, data) => {} that'll decide the range of font sizes, e.g. [10, 80] */
+		fontSizeRange?: Function;
+		/** what key in your charting data will the words map to? */
+		wordMapsTo?: string;
+	};
+	/**
+	 * tooltip configuration
+	 */
+	tooltip?: WordCloudChartTooltipOptions;
+}
+
+/**
  * options specific to pie charts
  */
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
 			formatter?: Function;
+			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		sortFunction?: (a: any, b: any) => number;
 	};
 }
 
@@ -281,6 +334,7 @@ export interface GaugeChartOptions extends BaseChartOptions {
 			size?: Function;
 			enabled: Boolean;
 		};
+		showPercentageSymbol?: Boolean;
 		status?: Statuses;
 		deltaFontSize?: Function;
 		numberSpacing?: number;
@@ -357,3 +411,20 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to circle pack charts
+ */
+export interface CirclePackChartOptions extends BaseChartOptions {
+	circlePack?: {
+		circles: {
+			fillOpacity: number;
+		};
+		// depth of nodes to display
+		hierachyLevel: number;
+		padding?: {
+			outer?: number;
+			inner?: number;
+		};
+	};
+}

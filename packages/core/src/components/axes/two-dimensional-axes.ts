@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { AxisPositions, ScaleTypes, AxesOptions } from '../../interfaces';
+import {
+	AxisPositions,
+	ScaleTypes,
+	AxesOptions,
+	RenderTypes,
+} from '../../interfaces';
 import { Axis } from './axis';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
@@ -9,6 +14,7 @@ import { Events } from './../../interfaces';
 
 export class TwoDimensionalAxes extends Component {
 	type = '2D-axes';
+	renderType = RenderTypes.SVG;
 
 	children: any = {};
 
@@ -109,9 +115,6 @@ export class TwoDimensionalAxes extends Component {
 					margins.right = width + offset;
 					break;
 			}
-
-			// Add thresholds
-			this.addAxisThresholds(animate, axisPosition);
 		});
 
 		// If the new margins are different than the existing ones
@@ -132,31 +135,6 @@ export class TwoDimensionalAxes extends Component {
 			});
 
 			this.render(true);
-		}
-	}
-
-	addAxisThresholds(animate, axisPosition) {
-		const axesOptions = Tools.getProperty(
-			this.getOptions(),
-			'axes',
-			axisPosition
-		);
-		const { thresholds } = axesOptions;
-
-		if (thresholds) {
-			thresholds.forEach((thresholdConfig, i) => {
-				const thresholdComponent = new Threshold(
-					this.model,
-					this.services,
-					{ ...thresholdConfig, axisPosition, index: i }
-				);
-				this.thresholds.push(thresholdComponent);
-			});
-
-			this.thresholds.forEach((threshold) => {
-				threshold.setParent(this.parent);
-				threshold.render(animate);
-			});
 		}
 	}
 }

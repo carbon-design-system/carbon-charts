@@ -10,7 +10,11 @@ import {
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model';
 import { DOMUtils } from '../../services';
-import { TickRotations } from '../../interfaces/enums';
+import {
+	AxisTitleOrientations,
+	RenderTypes,
+	TickRotations,
+} from '../../interfaces/enums';
 import * as Configuration from '../../configuration';
 import {
 	computeTimeIntervalName,
@@ -24,6 +28,7 @@ import { axisBottom, axisLeft, axisRight, axisTop } from 'd3-axis';
 
 export class Axis extends Component {
 	type = 'axes';
+	renderType = RenderTypes.SVG;
 
 	margins: any;
 
@@ -50,10 +55,11 @@ export class Axis extends Component {
 			'visible'
 		);
 
-		const svg = this.getContainerSVG();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const svg = this.getComponentContainer();
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
+
 		// Add axis into the parent
 		const container = DOMUtils.appendOrSelect(
 			svg,
@@ -80,7 +86,10 @@ export class Axis extends Component {
 			axisPosition
 		);
 
-		if (this.scaleType === ScaleTypes.LABELS) {
+		if (
+			this.scaleType === ScaleTypes.LABELS ||
+			this.scaleType === ScaleTypes.LABELS_RATIO
+		) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);
@@ -273,12 +282,19 @@ export class Axis extends Component {
 			const timeInterval = computeTimeIntervalName(axis.tickValues());
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
-					formatTick(t, i, timeInterval, timeScaleOptions);
+					formatTick(
+						t,
+						i,
+						axis.tickValues(),
+						timeInterval,
+						timeScaleOptions
+					);
 			} else {
 				formatter = (t: number, i: number) => {
 					const defaultFormattedValue = formatTick(
 						t,
 						i,
+						axis.tickValues(),
 						timeInterval,
 						timeScaleOptions
 					);
@@ -374,14 +390,28 @@ export class Axis extends Component {
 				`text.axis-title`
 			).html(isDataEmpty || isDataLoading ? '' : axisOptions.title);
 
+			// vertical axes can have override for title orientation
+			const titleOrientation = Tools.getProperty(
+				axisOptions,
+				'titleOrientation'
+			);
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
-					axisTitleRef
-						.attr('transform', 'rotate(-90)')
-						.attr('y', 0)
-						.attr('x', -(scale.range()[0] / 2))
-						.attr('dy', '1em')
-						.style('text-anchor', 'middle');
+					if (titleOrientation === AxisTitleOrientations.RIGHT) {
+						axisTitleRef
+							.attr('transform', 'rotate(90)')
+							.attr('y', 0)
+							.attr('x', scale.range()[0] / 2)
+							.attr('dy', '-0.5em')
+							.style('text-anchor', 'middle');
+					} else {
+						axisTitleRef
+							.attr('transform', 'rotate(-90)')
+							.attr('y', 0)
+							.attr('x', -(scale.range()[0] / 2))
+							.attr('dy', '0.75em')
+							.style('text-anchor', 'middle');
+					}
 					break;
 				case AxisPositions.BOTTOM:
 					axisTitleRef
@@ -389,17 +419,25 @@ export class Axis extends Component {
 							'transform',
 							`translate(${
 								this.margins.left / 2 + scale.range()[1] / 2
-							}, ${height})`
+							}, ${height + 4})`
 						)
 						.style('text-anchor', 'middle');
 					break;
 				case AxisPositions.RIGHT:
-					axisTitleRef
-						.attr('transform', 'rotate(90)')
-						.attr('y', -width)
-						.attr('x', scale.range()[0] / 2)
-						.attr('dy', '1em')
-						.style('text-anchor', 'middle');
+					if (titleOrientation === AxisTitleOrientations.LEFT) {
+						axisTitleRef
+							.attr('transform', 'rotate(-90)')
+							.attr('y', width)
+							.attr('x', -(scale.range()[0] / 2))
+							.style('text-anchor', 'middle');
+					} else {
+						axisTitleRef
+							.attr('transform', 'rotate(90)')
+							.attr('y', -width)
+							.attr('x', scale.range()[0] / 2)
+							.attr('dy', '0.75em')
+							.style('text-anchor', 'middle');
+					}
 					break;
 				case AxisPositions.TOP:
 					const { height: titleHeight } = DOMUtils.getSVGElementSize(
@@ -442,8 +480,14 @@ export class Axis extends Component {
 				.data(axis.tickValues(), scale)
 				.order()
 				.select('text');
-			ticks.style('font-weight', (tickValue: number, i: number) => {
-				return isTickPrimary(tickValue, i, timeInterval, showDayName)
+			ticks.style('font-weight', (tick: number, i: number) => {
+				return isTickPrimary(
+					tick,
+					i,
+					axis.tickValues(),
+					timeInterval,
+					showDayName
+				)
 					? 'bold'
 					: 'normal';
 			});
@@ -496,21 +540,40 @@ export class Axis extends Component {
 							}).width >= scale.step()
 					);
 				} else {
-					// When dealing with a continuous scale
-					// We need to calculate an estimated size of the ticks
-					const minTickSize =
-						Tools.getProperty(
-							axisOptions,
-							'ticks',
-							'rotateIfSmallerThan'
-						) || Configuration.axis.ticks.rotateIfSmallerThan;
-					const ticksNumber = isTimeScaleType
-						? axis.tickValues().length
-						: scale.ticks().length;
-					const estimatedTickSize = width / ticksNumber / 2;
-					shouldRotateTicks = isTimeScaleType
-						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-						: estimatedTickSize < minTickSize;
+					shouldRotateTicks = false;
+
+					const mockTextPiece = invisibleAxisRef
+						.append('text')
+						.text('A');
+
+					const averageLetterWidth = mockTextPiece.node().getBBox()
+						.width;
+
+					let lastStartPosition;
+
+					// Find out whether any text nodes roughly collide
+					invisibleAxisRef.selectAll('g.tick').each(function () {
+						const selection = select(this);
+						const xTransformation = parseFloat(
+							Tools.getProperty(
+								Tools.getTranslationValues(this),
+								'tx'
+							)
+						);
+
+						if (
+							xTransformation !== null &&
+							lastStartPosition +
+								selection.text().length *
+									averageLetterWidth *
+									0.8 >=
+								xTransformation
+						) {
+							shouldRotateTicks = true;
+						}
+
+						lastStartPosition = xTransformation;
+					});
 				}
 			}
 
@@ -614,7 +677,7 @@ export class Axis extends Component {
 	}
 
 	addEventListeners() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,
@@ -694,7 +757,7 @@ export class Axis extends Component {
 	getInvisibleAxisRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} g.ticks.invisible`
 		);
 	}
@@ -702,7 +765,7 @@ export class Axis extends Component {
 	getTitleRef() {
 		const { position: axisPosition } = this.configs;
 
-		return this.getContainerSVG().select(
+		return this.getComponentContainer().select(
 			`g.axis.${axisPosition} text.axis-title`
 		);
 	}
@@ -717,7 +780,7 @@ export class Axis extends Component {
 	}
 
 	destroy() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,

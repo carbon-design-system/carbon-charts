@@ -5,6 +5,7 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 	Roles,
 } from '../../interfaces';
 
@@ -14,6 +15,7 @@ import { ScaleBand, scaleBand } from 'd3-scale';
 
 export class GroupedBar extends Bar {
 	type = 'grouped-bar';
+	renderType = RenderTypes.SVG;
 
 	groupScale: ScaleBand<any>;
 
@@ -45,7 +47,7 @@ export class GroupedBar extends Bar {
 		this.setGroupScale();
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const allDataLabels = Tools.removeArrayDuplicates(
 			displayData.map((datum) => {

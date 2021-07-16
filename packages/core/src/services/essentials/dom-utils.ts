@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from '../service';
-import { Events, Alignments } from './../../interfaces';
+import { Events } from './../../interfaces';
 
 // D3 Imports
 import { select, Selection } from 'd3-selection';
@@ -12,9 +12,22 @@ import settings from 'carbon-components/es/globals/js/settings';
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
 
+import domToImage from 'dom-to-image';
+
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
 export class DOMUtils extends Service {
+	constructor(model: any, services: any) {
+		super(model, services);
+	}
+
+	static getHTMLElementSize(element: HTMLElement) {
+		return {
+			width: element.clientWidth,
+			height: element.clientHeight,
+		};
+	}
+
 	static getSVGElementSize(
 		svgSelector: Selection<any, any, any, any>,
 		options?: any
@@ -167,23 +180,7 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
-	static getAlignmentOffset(alignment, svg, parent) {
-		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
-			useBBox: true,
-		});
-		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
-
-		let alignmentOffset = 0;
-		if (alignment === Alignments.CENTER) {
-			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
-		} else if (alignment === Alignments.RIGHT) {
-			alignmentOffset = width - svgDimensions.width;
-		}
-
-		return alignmentOffset;
-	}
-
-	protected svg: Element;
+	protected mainContainer: HTMLElement;
 	protected width: string;
 	protected height: string;
 
@@ -191,8 +188,7 @@ export class DOMUtils extends Service {
 		// Add width & height to the chart holder if necessary, and add a classname
 		this.styleHolderElement();
 
-		// Add main SVG
-		this.addSVGElement();
+		this.addMainContainer();
 		this.verifyCSSStylesBeingApplied();
 
 		if (this.model.getOptions().resizable) {
@@ -200,6 +196,21 @@ export class DOMUtils extends Service {
 		}
 
 		this.addHolderListeners();
+	}
+
+	addMainContainer() {
+		const options = this.model.getOptions();
+		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
+
+		const mainContainer = select(this.getHolder())
+			.append('div')
+			.classed(`${settings.prefix}--${chartsprefix}--chart-wrapper`, true)
+			.style('height', '100%')
+			.style('width', '100%');
+
+		mainContainer.append('g').attr('class', CSS_VERIFIER_ELEMENT_CLASSNAME);
+
+		this.mainContainer = mainContainer.node();
 	}
 
 	update() {
@@ -238,19 +249,85 @@ export class DOMUtils extends Service {
 		return this.model.get('holder');
 	}
 
-	addSVGElement() {
-		const options = this.model.getOptions();
-		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
+	exportToJPG() {
+		const self = this;
+		domToImage
+			.toJpeg(this.getMainContainer(), {
+				quality: 1,
+				// Remove the toolbar
+				filter: (node) => {
+					if (
+						node.classList &&
+						node.classList.contains('bx--cc--toolbar')
+					) {
+						return false;
+					}
 
-		const svg = select(this.getHolder())
-			.append('svg')
-			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
-			.attr('height', '100%')
-			.attr('width', '100%');
+					return true;
+				},
+			})
+			.then(function (dataUrl) {
+				self.services.files.downloadImage(dataUrl, 'myChart.jpg');
+			});
+	}
 
-		svg.append('g').attr('class', CSS_VERIFIER_ELEMENT_CLASSNAME);
+	exportToPNG() {
+		const self = this;
+		domToImage
+			.toPng(this.getMainContainer(), {
+				quality: 1,
+				// Remove the toolbar
+				filter: (node) => {
+					if (
+						node.classList &&
+						node.classList.contains('bx--cc--toolbar')
+					) {
+						return false;
+					}
 
-		this.svg = svg.node();
+					return true;
+				},
+			})
+			.then(function (dataUrl) {
+				self.services.files.downloadImage(dataUrl, 'myChart.png');
+			})
+			.catch(function (error) {
+				console.error('oops, something went wrong!', error);
+			});
+	}
+
+	toggleFullscreen() {
+		const holder = this.getHolder();
+		const holderSelection = select(holder);
+
+		const isFullScreen = holderSelection.classed('fullscreen');
+
+		// Toggle the `fullscreen` classname
+		holderSelection.classed('fullscreen', !isFullScreen);
+
+		if (isFullScreen) {
+			// Call the correct function depending on the browser
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document['webkitExitFullscreen']) {
+				document['webkitExitFullscreen']();
+			} else if (document['mozCancelFullScreen']) {
+				document['mozCancelFullScreen']();
+			} else if (document['msExitFullscreen']) {
+				document['msExitFullscreen']();
+			}
+		} else {
+			// Call the correct function depending on the browser
+			if (holder.requestFullscreen) {
+				holder.requestFullscreen();
+			} else if (holder.webkitRequestFullscreen) {
+				holder.webkitRequestFullscreen();
+			} else if (holder.mozRequestFullScreen) {
+				holder.mozRequestFullScreen();
+			} else if (holder.msRequestFullscreen) {
+				holder.msRequestFullscreen();
+			}
+		}
 	}
 
 	verifyCSSStylesBeingApplied() {
@@ -258,7 +335,7 @@ export class DOMUtils extends Service {
 		// CSS verifier element, and need to allow some time for it to become available
 		// in the DOM
 		setTimeout(() => {
-			const cssVerifierElement = select(this.svg)
+			const cssVerifierElement = select(this.mainContainer)
 				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
 				.node();
 			const computedStyles = getComputedStyle(cssVerifierElement as any);
@@ -277,11 +354,11 @@ export class DOMUtils extends Service {
 		// if there is a set height on the holder, leave the chart svg height at 100%
 		if (!this.model.getOptions().height) {
 			const { height: chartHeight } = DOMUtils.getSVGElementSize(
-				select(this.svg),
+				select(this.mainContainer),
 				{ useBBox: true }
 			);
-			const chartSVGSelector = select(this.svg).attr('class');
-			const children = select(this.svg).selectAll(
+			const chartSVGSelector = select(this.mainContainer).attr('class');
+			const children = select(this.mainContainer).selectAll(
 				`.${chartSVGSelector} > svg`
 			);
 
@@ -298,13 +375,13 @@ export class DOMUtils extends Service {
 			// set the chart svg height to the children height
 			// forcing the chart not to take up any more space than it requires
 			childrenHeight <= chartHeight
-				? select(this.svg).attr('height', childrenHeight)
-				: select(this.svg).attr('height', '100%');
+				? select(this.mainContainer).attr('height', childrenHeight)
+				: select(this.mainContainer).attr('height', '100%');
 		}
 	}
 
-	getMainSVG() {
-		return this.svg;
+	getMainContainer() {
+		return this.mainContainer;
 	}
 
 	addHolderListeners() {

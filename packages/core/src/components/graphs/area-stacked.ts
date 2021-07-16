@@ -1,12 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
+import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
 import {
 	Roles,
-	ScaleTypes,
 	Events,
 	ColorClassNameTypes,
-	CartesianOrientations,
+	RenderTypes,
 } from '../../interfaces';
 
 // D3 Imports
@@ -14,6 +14,7 @@ import { area } from 'd3-shape';
 
 export class StackedArea extends Component {
 	type = 'area-stacked';
+	renderType = RenderTypes.SVG;
 
 	areaGenerator: any;
 
@@ -34,7 +35,7 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		let svg = this.getComponentContainer({ withinChartClip: true });
 		const self = this;
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -48,13 +49,15 @@ export class StackedArea extends Component {
 			groups: this.configs.groups,
 		});
 
+		const firstDatum = Tools.getProperty(stackedData, 0, 0);
+
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
 		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition(
-			{ datum: stackedData[0][0] }
+			{ firstDatum }
 		);
 		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition(
-			{ datum: stackedData[0][0] }
+			{ firstDatum }
 		);
 		const mainYScale = this.services.cartesianScales.getScaleByPosition(
 			rangeAxisPosition
@@ -62,7 +65,7 @@ export class StackedArea extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => d[0][groupMapsTo]);
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -83,16 +86,18 @@ export class StackedArea extends Component {
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => d[0][groupMapsTo])
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: d[0][groupMapsTo],
+					dataGroupName: Tools.getProperty(d, 0, groupMapsTo),
 					originalClassName: 'area',
 				})
 			)
-			.attr('fill', (d) => self.model.getFillColor(d[0][groupMapsTo]))
+			.style('fill', (d) =>
+				self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo))
+			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
 			.transition(
@@ -116,7 +121,10 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition('legend-hover-area')
 			)
 			.attr('opacity', (d) => {
-				if (d[0][groupMapsTo] !== hoveredElement.datum().name) {
+				if (
+					Tools.getProperty(d, 0, groupMapsTo) !==
+					hoveredElement.datum().name
+				) {
 					return Configuration.area.opacity.unselected;
 				}
 
@@ -124,7 +132,7 @@ export class StackedArea extends Component {
 			});
 	};
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
 			.transition(

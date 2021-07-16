@@ -46,9 +46,7 @@ export class ChartModel {
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter((item) => {
-				return groups.includes(item.group);
-			});
+			allData = allData.filter((item) => groups.includes(item.group));
 		}
 
 		if (axesOptions) {
@@ -61,7 +59,13 @@ export class ChartModel {
 					scaleType === ScaleTypes.LOG
 				) {
 					allData = allData.map((datum) => {
-						return { ...datum, [mapsTo]: Number(datum[mapsTo]) };
+						return {
+							...datum,
+							[mapsTo]:
+								datum[mapsTo] === null
+									? datum[mapsTo]
+									: Number(datum[mapsTo]),
+						};
 					});
 				}
 
@@ -73,11 +77,11 @@ export class ChartModel {
 						);
 					} else {
 						const [start, end] = axesOptions[axis].domain;
-
-						// Filter out data outside domain
+						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
 							(datum) =>
-								datum[mapsTo] >= start && datum[mapsTo] <= end
+								!(mapsTo in datum) ||
+								(datum[mapsTo] >= start && datum[mapsTo] <= end)
 						);
 					}
 				}
@@ -221,6 +225,7 @@ export class ChartModel {
 			stackKeys.sort((a: any, b: any) => {
 				const dateA: any = new Date(a);
 				const dateB: any = new Date(b);
+
 				return dateA - dateB;
 			});
 		} else if (
@@ -332,8 +337,11 @@ export class ChartModel {
 	 * @param newOptions New options to be set
 	 */
 	setOptions(newOptions) {
+		const options = this.getOptions();
+		Tools.updateLegendAdditionalItems(options, newOptions);
+
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions),
+			options: Tools.merge(options, newOptions),
 		});
 	}
 
@@ -488,7 +496,7 @@ export class ChartModel {
 
 	getColorClassName(configs: {
 		classNameTypes: ColorClassNameTypes[];
-		dataGroupName: string;
+		dataGroupName?: string;
 		originalClassName?: string;
 	}) {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
@@ -520,7 +528,7 @@ export class ChartModel {
 	 */
 	protected transformToTabularData(data) {
 		console.warn(
-			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format"
+			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format"
 		);
 		const tabularData = [];
 		const { datasets, labels } = data;

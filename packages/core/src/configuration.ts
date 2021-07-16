@@ -7,20 +7,25 @@ import {
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
+	BoxplotChartOptions,
 	AreaChartOptions,
 	PieChartOptions,
 	GaugeChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	BulletChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
+	CirclePackChartOptions,
+	WorldCloudChartOptions,
 	// Components
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
+	WordCloudChartTooltipOptions,
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
@@ -34,8 +39,10 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
+import { circlePack } from './configuration-non-customizable';
 
 /*
  *****************************
@@ -62,6 +69,7 @@ const legend: LegendOptions = {
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null,
+	additionalItems: [],
 };
 
 /**
@@ -72,11 +80,13 @@ export const grid: GridOptions = {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 15,
+		alignWithAxisTicks: false,
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
 		numberOfTicks: 5,
+		alignWithAxisTicks: false,
 	},
 };
 
@@ -94,8 +104,8 @@ export const ruler: RulerOptions = {
 export const baseTooltip: TooltipOptions = {
 	enabled: true,
 	showTotal: true,
-	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions,
+	groupLabel: 'Group',
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -141,6 +151,12 @@ export const timeScale: TimeScaleOptions = {
 	},
 };
 
+const isFullScreenEnabled =
+	document['fullscreenEnabled'] ||
+	document['webkitFullscreenEnabled'] ||
+	document['mozFullScreenEnabled'] ||
+	document['msFullscreenEnabled'];
+
 /**
  * Base chart options common to any chart
  */
@@ -168,6 +184,31 @@ const chart: BaseChartOptions = {
 			enabled: false,
 		},
 	},
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 3,
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
+		],
+	} as ToolbarOptions,
 };
 
 /**
@@ -186,11 +227,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			type: ZoomBarTypes.GRAPH_VIEW,
 		},
 	} as ZoomBarsOptions,
-	toolbar: {
-		enabled: false,
-		numberOfIcons: 3,
-		controls: [],
-	} as ToolbarOptions,
 } as AxisChartOptions);
 
 /**
@@ -231,6 +267,15 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 		dividerSize: 1.5,
 	} as StackedBarOptions),
 } as BarChartOptions);
+
+/**
+ * options specific to boxplot charts
+ */
+const boxplotChart: BoxplotChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to scatter charts
@@ -282,6 +327,7 @@ const stackedAreaChart = areaChart;
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(
 				chartSize.width,
@@ -298,7 +344,76 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	points: {
 		filled: true,
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius',
+			},
+		],
+	},
 } as BubbleChartOptions);
+
+/**
+ * options specific to bullet charts
+ */
+const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
+	bullet: {
+		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
+	},
+	grid: {
+		x: {
+			enabled: false,
+		},
+		y: {
+			enabled: false,
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.AREA,
+				name: 'Poor area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Satisfactory area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Great area',
+			},
+			{
+				type: LegendItemType.QUARTILE,
+				name: 'Quartiles',
+			},
+		],
+	},
+} as BulletChartOptions);
+
+/*
+ * options specific to word cloud charts
+ */
+const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	tooltip: Tools.merge({}, baseTooltip, {
+		wordLabel: 'Word',
+		valueLabel: 'Value',
+	}) as WordCloudChartTooltipOptions,
+	wordCloud: {
+		fontSizeMapsTo: 'value',
+		fontSizeRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 20) / 400,
+				(smallerChartDimension * 75) / 400,
+			];
+		},
+		wordMapsTo: 'word',
+	},
+} as WorldCloudChartOptions);
 
 /**
  * options specific to pie charts
@@ -307,8 +422,10 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
 		labels: {
 			formatter: null,
+			enabled: true,
 		},
 		alignment: Alignments.LEFT,
+		sortFunction: null,
 	},
 } as PieChartOptions);
 
@@ -326,6 +443,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 			size: (radius) => radius / 8,
 			enabled: true,
 		},
+		showPercentageSymbol: true,
 		status: null,
 		numberSpacing: 10,
 		deltaFontSize: (radius) => radius / 8,
@@ -404,13 +522,29 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 	}),
 } as TreemapChartOptions);
 
+/*
+ * options specific to circle pack charts
+ */
+const circlePackChart: CirclePackChartOptions = Tools.merge(
+	{},
+	chart,
+	circlePack,
+	{
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'name',
+		}),
+	} as CirclePackChartOptions
+);
+
 export const options = {
 	chart,
 	axisChart,
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	boxplotChart,
 	bubbleChart,
+	bulletChart,
 	lineChart,
 	areaChart,
 	stackedAreaChart,
@@ -423,6 +557,8 @@ export const options = {
 	gaugeChart,
 	comboChart,
 	treemapChart,
+	circlePackChart,
+	wordCloudChart,
 };
 
 export * from './configuration-non-customizable';

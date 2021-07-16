@@ -1,4 +1,4 @@
-import { ScaleTypes, TickRotations } from './enums';
+import { ScaleTypes, TickRotations, AxisTitleOrientations } from './enums';
 import { AxisDomain } from 'd3';
 import { Locale } from 'date-fns';
 import { ThresholdOptions } from './components';
@@ -30,6 +30,13 @@ export interface AxisOptions {
 	 */
 	domain?: AxisDomain[];
 	/**
+	 * an additional key from the charting data that is used to
+	 * extend the domain of an axis by
+	 * (e.g. in the bullet graph we need both the marker &
+	 * the data values to define the domain of the linear scale)
+	 */
+	extendLinearDomainBy?: string;
+	/**
 	 * Whether the Axis should be forced to include 0 as a starting point
 	 * (or ending point, in case of all negative axis).
 	 * Default: true
@@ -43,6 +50,11 @@ export interface AxisOptions {
 	 * optional title for the scales
 	 */
 	title?: string;
+	/**
+	 * Override for the orientation of the title (for vertical axes).
+	 * The title string can be overrided to be rotated left or right.
+	 */
+	titleOrientation?: AxisTitleOrientations;
 	/**
 	 * thresholds
 	 * Example:

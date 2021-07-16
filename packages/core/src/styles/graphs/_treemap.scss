@@ -1,6 +1,6 @@
 @import './../vendor/@carbon/motion/scss/motion.scss';
 
-g.#{$prefix}--#{$charts-prefix}--treemap {
+.#{$prefix}--#{$charts-prefix}--treemap {
 	text {
 		pointer-events: none;
 	}

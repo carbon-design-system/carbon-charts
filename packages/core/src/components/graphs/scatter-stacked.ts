@@ -1,10 +1,11 @@
 // Internal Imports
 import { Scatter } from './scatter';
-import { Roles } from '../../interfaces';
+import { RenderTypes, Roles } from '../../interfaces';
 import { Tools } from '../../tools';
 
 export class StackedScatter extends Scatter {
 	type = 'scatter-stacked';
+	renderType = RenderTypes.SVG;
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(
@@ -16,7 +17,7 @@ export class StackedScatter extends Scatter {
 			return;
 		}
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -32,7 +33,7 @@ export class StackedScatter extends Scatter {
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
-			.data(stackedData, (d) => d[0][groupMapsTo]);
+			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
 		// Remove dot groups that need to be removed
 		circleGroups.exit().attr('opacity', 0).remove();

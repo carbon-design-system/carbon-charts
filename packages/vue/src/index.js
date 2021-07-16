@@ -3,7 +3,9 @@ import CcvStackedAreaChart from './ccv-stacked-area-chart.vue';
 import CcvSimpleBarChart from './ccv-simple-bar-chart.vue';
 import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
 import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
+import CcvBoxplotChart from './ccv-boxplot-chart.vue';
 import CcvBubbleChart from './ccv-bubble-chart.vue';
+import CcvBulletChart from './ccv-bullet-chart.vue';
 import CcvDonutChart from './ccv-donut-chart.vue';
 import CcvGaugeChart from './ccv-gauge-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
@@ -14,6 +16,8 @@ import CcvMeterChart from './ccv-meter-chart.vue';
 import CcvRadarChart from './ccv-radar-chart.vue';
 import CcvComboChart from './ccv-combo-chart.vue';
 import CcvTreemapChart from './ccv-treemap-chart.vue';
+import CcvCirclePackChart from './ccv-circle-pack-chart.vue';
+import CcvWordCloudChart from './ccv-wordcloud-chart.vue';
 
 const components = [
 	CcvAreaChart,
@@ -21,7 +25,9 @@ const components = [
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
+	CcvBoxplotChart,
 	CcvBubbleChart,
+	CcvBulletChart,
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvLineChart,
@@ -32,6 +38,8 @@ const components = [
 	CcvRadarChart,
 	CcvComboChart,
 	CcvTreemapChart,
+	CcvCirclePackChart,
+	CcvWordCloudChart,
 ];
 
 /*
@@ -72,7 +80,9 @@ export {
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
+	CcvBoxplotChart,
 	CcvBubbleChart,
+	CcvBulletChart,
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvLineChart,
@@ -83,4 +93,6 @@ export {
 	CcvRadarChart,
 	CcvComboChart,
 	CcvTreemapChart,
+	CcvCirclePackChart,
+	CcvWordCloudChart,
 };

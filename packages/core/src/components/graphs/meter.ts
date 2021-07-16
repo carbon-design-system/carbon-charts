@@ -2,24 +2,26 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale';
 
 export class Meter extends Component {
 	type = 'meter';
+	renderType = RenderTypes.SVG;
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
+
 		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis
@@ -42,7 +44,7 @@ export class Meter extends Component {
 		const className =
 			status != null && !self.model.isUserProvidedColorScaleValid()
 				? `value status--${status}`
-				: '';
+				: 'value';
 
 		// draw the value bar
 		value

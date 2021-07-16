@@ -5,10 +5,10 @@ import {
 	CartesianOrientations,
 	Events,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
-import { GradientUtils, DOMUtils } from '../../services';
+import { GradientUtils } from '../../services';
 import { Tools } from '../../tools';
-import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
 import { area } from 'd3-shape';
@@ -16,6 +16,8 @@ import { select } from 'd3-selection';
 
 export class Area extends Component {
 	type = 'area';
+	renderType = RenderTypes.SVG;
+
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
 	init() {
@@ -35,13 +37,22 @@ export class Area extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		let domain = [0, 0];
 
 		const { cartesianScales } = this.services;
 
 		const orientation = cartesianScales.getOrientation();
-		const areaGenerator = area().curve(this.services.curves.getD3Curve());
+		const areaGenerator = area()
+			.curve(this.services.curves.getD3Curve())
+			.defined((datum: any, i) => {
+				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const value = datum[rangeIdentifier];
+				if (value === null || value === undefined) {
+					return false;
+				}
+				return true;
+			});
 
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData(this.configs.groups);
@@ -97,17 +108,11 @@ export class Area extends Component {
 			);
 		}
 
-		const areas = svg.selectAll('path.area').data(groupedData);
+		const areas = svg
+			.selectAll('path.area')
+			.data(groupedData, (group) => group.name);
 
-		const chartprefix = Tools.getProperty(
-			this.getOptions(),
-			'style',
-			'prefix'
-		);
-		const chartSVG = DOMUtils.appendOrSelect(
-			select(this.services.domUtils.getHolder()),
-			`svg.${settings.prefix}--${chartprefix}--chart-svg`
-		);
+		const chartMainContainer = select(this.services.domUtils.getMainContainer());
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -120,23 +125,38 @@ export class Area extends Component {
 			return;
 		}
 
-		// The fill value of area has been overwritten, get color value from stroke color class instead
-		const strokePathElement = chartSVG
-			.select(
-				`path.${this.model.getColorClassName({
-					classNameTypes: [ColorClassNameTypes.STROKE],
-					dataGroupName: groupedData[0].name,
-				})}`
-			)
-			.node();
+		if (isGradientAllowed) {
+			// The fill value of area has been overwritten, get color value from stroke color class instead
+			const strokePathElement = chartMainContainer
+				.select(
+					`path.${this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.STROKE],
+						dataGroupName: groupedData[0].name,
+					})}`
+				)
+				.node();
 
-		const colorValue = strokePathElement
-			? getComputedStyle(strokePathElement, null).getPropertyValue(
-					'stroke'
-			  )
-			: null;
+			let colorValue;
+			if (strokePathElement) {
+				colorValue = getComputedStyle(
+					strokePathElement as HTMLElement,
+					null
+				).getPropertyValue('stroke');
+			} else {
+				const sparklineColorObject = Tools.getProperty(
+					this.model.getOptions(),
+					'color',
+					'scale'
+				);
 
-		if (isGradientAllowed && colorValue) {
+				if (sparklineColorObject !== null) {
+					const sparklineColorObjectKeys = Object.keys(
+						sparklineColorObject
+					);
+					colorValue =
+						sparklineColorObject[sparklineColorObjectKeys[0]];
+				}
+			}
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
 				id:
@@ -218,7 +238,7 @@ export class Area extends Component {
 			if (boundsEnabled) {
 				enteringAreas
 					.attr('fill-opacity', Configuration.area.opacity.selected)
-					.attr('stroke', (group) =>
+					.style('stroke', (group) =>
 						self.model.getStrokeColor(group.name)
 					)
 					.style('stroke-dasharray', '2, 2')

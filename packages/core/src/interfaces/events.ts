@@ -9,6 +9,13 @@ export enum Chart {
 	// CLICK = "chart-click",
 	MOUSEOUT = 'chart-mouseout',
 }
+/**
+ * enum of all events related to the overlay modal
+ */
+export enum Modal {
+	SHOW = 'show-modal',
+	HIDE = 'hide-modal',
+}
 
 /**
  * enum of all events related to the chart model
@@ -42,6 +49,14 @@ export enum ZoomDomain {
 	CHANGE = 'zoom-domain-change',
 }
 
+/** enum of all events related to canvas zoom *
+ *
+ */
+export enum CanvasZoom {
+	CANVAS_ZOOM_IN = 'canvas-zoom-in',
+	CANVAS_ZOOM_OUT = 'canvas-zoom-out',
+}
+
 /**
  * enum of all axis-related events
  */
@@ -56,10 +71,20 @@ export enum Axis {
  * enum of all area graph events
  */
 export enum Area {
-	AREA_MOUSEOVER = 'area-mouseover',
-	AREA_MOUSEMOVE = 'area-mousemove',
-	AREA_CLICK = 'area-click',
-	AREA_MOUSEOUT = 'area-mouseout',
+	POINT_MOUSEOVER = 'scatter-mouseover',
+	POINT_MOUSEMOVE = 'scatter-mousemove',
+	POINT_CLICK = 'scatter-click',
+	POINT_MOUSEOUT = 'scatter-mouseout',
+}
+
+/**
+ * enum of all wordcloud graph events
+ */
+export enum WordCloud {
+	WORD_MOUSEOVER = 'wordcloud-word-mouseover',
+	WORD_MOUSEMOVE = 'wordcloud-word-mousemove',
+	WORD_CLICK = 'wordcloud-word-click',
+	WORD_MOUSEOUT = 'wordcloud-word-mouseout',
 }
 
 /**
@@ -90,6 +115,20 @@ export enum Bar {
 	BAR_MOUSEMOVE = 'bar-mousemove',
 	BAR_CLICK = 'bar-click',
 	BAR_MOUSEOUT = 'bar-mouseout',
+}
+
+/**
+ * enum of all boxplot graph events
+ */
+export enum Boxplot {
+	BOX_MOUSEOVER = 'box-mouseover',
+	BOX_MOUSEMOVE = 'box-mousemove',
+	BOX_CLICK = 'box-click',
+	BOX_MOUSEOUT = 'box-mouseout',
+	OUTLIER_MOUSEOVER = 'outlier-mouseover',
+	OUTLIER_MOUSEMOVE = 'outlier-mousemove',
+	OUTLIER_CLICK = 'outlier-click',
+	OUTLIER_MOUSEOUT = 'outlier-mouseout',
 }
 
 /**
@@ -157,4 +196,14 @@ export enum Legend {
 	ITEM_CLICK = 'legend-item-onclick',
 	ITEM_MOUSEOUT = 'legend-item-onmouseout',
 	ITEMS_UPDATE = 'legend-items-update',
+}
+
+/**
+ * enum of all circlepack related events
+ */
+export enum CirclePack {
+	CIRCLE_MOUSEOVER = 'circle-leaf-mouseover',
+	CIRCLE_CLICK = 'circle-leaf-click',
+	CIRCLE_MOUSEOUT = 'circle-leaf-mouseout',
+	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove',
 }

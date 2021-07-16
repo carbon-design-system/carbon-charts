@@ -8,6 +8,7 @@ import {
 	Events,
 	Alignments,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
@@ -28,6 +29,7 @@ function arcTween(a, arcFunc) {
 
 export class Pie extends Component {
 	type = 'pie';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs
 	// So that addEventListeners()
@@ -57,7 +59,7 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
@@ -79,13 +81,11 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort(null)
+			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
 			.padAngle(Configuration.pie.padAngle);
 
-		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(displayData).sort(
-			(a: any, b: any) => a.index - b.index
-		);
+		// Add data to pie layout
+		const pieLayoutData = pieLayout(displayData);
 
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, 'g.slices')
@@ -144,7 +144,10 @@ export class Pie extends Component {
 			});
 
 		// Draw the slice labels
-		const labelData = pieLayoutData.filter((x) => x.value > 0);
+		const renderLabels = options.pie.labels.enabled;
+		const labelData = renderLabels
+			? pieLayoutData.filter((x) => x.value > 0)
+			: [];
 		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
 			.attr('role', Roles.GROUP)
 			.attr('data-name', 'labels');
@@ -251,20 +254,24 @@ export class Pie extends Component {
 			useAttr: true,
 		});
 
+		// don't add padding for labels & callouts if they are disabled
+		const xOffset = renderLabels ? Configuration.pie.xOffset : 0;
+		const yOffset = renderLabels ? Configuration.pie.yOffset : 0;
+
 		// Position Pie
-		let pieTranslateX = radius + Configuration.pie.xOffset;
+		let pieTranslateX = radius + xOffset;
 		if (alignment === Alignments.CENTER) {
 			pieTranslateX = width / 2;
 		} else if (alignment === Alignments.RIGHT) {
 			pieTranslateX = width - radius - Configuration.pie.xOffset;
 		}
 
-		let pieTranslateY = radius + Configuration.pie.yOffset;
+		let pieTranslateY = radius + yOffset;
 		if (calloutData.length > 0) {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
-		svg.attr('transform', `translate(${pieTranslateX}, ${pieTranslateY})`);
+		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -272,7 +279,7 @@ export class Pie extends Component {
 
 	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			'g.callouts'
 		)
 			.attr('role', Roles.GROUP)
@@ -479,8 +486,11 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
-		const radius: number = Math.min(width, height) / 2;
 
-		return radius + Configuration.pie.radiusOffset;
+		const options = this.getOptions();
+		const radius: number = Math.min(width, height) / 2;
+		const renderLabels = options.pie.labels.enabled;
+
+		return renderLabels ? radius + Configuration.pie.radiusOffset : radius;
 	}
 }

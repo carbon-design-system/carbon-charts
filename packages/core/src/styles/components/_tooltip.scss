@@ -25,14 +25,16 @@
 		color: $text-01;
 
 		.title-tooltip {
-			p {
-				margin: 2px;
-				font-size: 12px;
-			}
 			width: auto;
 			padding: 4px;
 			min-width: 20px;
 			max-width: 270px;
+
+			p {
+				margin: 2px;
+				font-size: 12px;
+				line-height: 1rem;
+			}
 		}
 
 		.datapoint-tooltip {
@@ -43,6 +45,36 @@
 			min-width: 20px;
 			justify-content: flex-start;
 			align-items: center;
+
+			div.label {
+				display: flex;
+				flex: 1;
+
+				p {
+					flex: 1;
+					padding-right: 8px;
+				}
+
+				span.label-icon svg {
+					height: 12px;
+					padding-top: 3px;
+					vertical-align: top;
+					padding-left: 4px;
+					width: auto;
+
+					@if ($carbon--theme == $carbon--theme--g90) or
+						($carbon--theme == $carbon--theme--g100)
+					{
+						fill: white;
+					} @else {
+						fill: black;
+					}
+				}
+			}
+
+			&.bold {
+				font-weight: carbon--font-weight('semibold');
+			}
 
 			p {
 				white-space: nowrap;
@@ -55,18 +87,10 @@
 				padding: 0;
 				border: 0;
 
-				&.label {
-					flex: 1;
-					margin-right: 8px;
-				}
-
 				&.value {
 					width: auto;
+					margin-left: 6px;
 				}
-			}
-
-			&.bold {
-				font-weight: carbon--font-weight('semibold');
 			}
 		}
 
@@ -97,7 +121,8 @@
 		top: 0;
 		width: 4px;
 		height: 100%;
-		& + p.label {
+
+		& + div.label p {
 			margin-left: 4px;
 		}
 	}

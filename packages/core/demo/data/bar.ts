@@ -24,7 +24,7 @@ export const groupedBarData = [
 ];
 
 export const groupedBarOptions = {
-	title: 'Grouped bar (discrete)',
+	title: 'Vertical grouped bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -40,7 +40,7 @@ export const groupedBarSelectedGroupsData = groupedBarData;
 
 // Grouped bar with selected groups option
 export const groupedBarSelectedGroupsOptions = {
-	title: 'Grouped bar (selected groups)',
+	title: 'Pre-selected groups (grouped bar)',
 	data: {
 		selectedGroups: ['Dataset 1', 'Dataset 3'],
 	},
@@ -59,7 +59,7 @@ export const groupedBarSelectedGroupsOptions = {
 export const groupedHorizontalBarData = groupedBarData;
 
 export const groupedHorizontalBarOptions = {
-	title: 'Grouped horizontal bar (discrete)',
+	title: 'Horizontal grouped bar (discrete)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -81,7 +81,7 @@ export const simpleBarData = [
 ];
 
 export const simpleBarOptions = {
-	title: 'Simple bar (discrete)',
+	title: 'Vertical simple bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -94,7 +94,7 @@ export const simpleBarOptions = {
 };
 
 export const simpleBarColorOverrideOptions = {
-	title: 'Simple bar (color override)',
+	title: 'Custom colors (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -116,7 +116,7 @@ export const simpleBarColorOverrideOptions = {
 };
 
 export const simpleBarCustomLegendOrderOptions = {
-	title: 'Simple bar (custom legend order)',
+	title: 'Custom legend order (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -131,6 +131,51 @@ export const simpleBarCustomLegendOrderOptions = {
 	},
 };
 
+export const simpleBarAdditionalLegendItemsOptions = {
+	title: 'Additional legend items (simple bar)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'line',
+				name: 'Line',
+			},
+			{
+				type: 'area',
+				name: 'Poor area',
+			},
+			{
+				type: 'area',
+				name: 'Satisfactory area',
+			},
+			{
+				type: 'area',
+				name: 'Great area',
+			},
+			{
+				type: 'quartile',
+				name: 'Quartiles',
+			},
+			{
+				type: 'size',
+				name: 'Size',
+			},
+			{
+				type: 'radius',
+				name: 'Radius',
+			},
+		],
+	},
+};
+
 // Simple bar with custom tick values
 export const simpleBarDataCustomTicks = [
 	{ group: 'Group 1', value: 0.5 },
@@ -138,7 +183,7 @@ export const simpleBarDataCustomTicks = [
 ];
 
 export const simpleBarOptionsCustomTicks = {
-	title: 'Simple bar (custom ticks)',
+	title: 'Custom ticks (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -156,7 +201,7 @@ export const simpleBarOptionsCustomTicks = {
 export const simpleBarCenteredLegendData = simpleBarData;
 
 export const simpleBarCenteredLegendOptions = {
-	title: 'Simple bar (centered legend)',
+	title: 'Centered legend (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -171,8 +216,23 @@ export const simpleBarCenteredLegendOptions = {
 	},
 };
 
-// Simple bar with long labels
-export const simpleBarLongLabelData = [
+export const simpleBarFixedDomainOptions = {
+	title: 'Custom domain (simple bar)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			domain: [-100000, 100000],
+		},
+		bottom: {
+			scaleType: 'labels',
+			mapsTo: 'group',
+		},
+	},
+};
+
+// Horizontal Simple
+export const simpleHorizontalBarData = simpleBarData;
+export const simpleHorizontalBarLongLabelData = [
 	{
 		group:
 			'6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231',
@@ -196,46 +256,8 @@ export const simpleBarLongLabelData = [
 	{ group: 'Qty', value: 16932 },
 ];
 
-export const simpleBarLongLabelOptions = {
-	title: 'Simple bar (truncated labels)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-		},
-		bottom: {
-			mapsTo: 'group',
-			scaleType: 'labels',
-		},
-	},
-	legend: {
-		truncation: {
-			type: 'end_line',
-			threshold: 10,
-			numCharacter: 12,
-		},
-	},
-};
-
-export const simpleBarFixedDomainOptions = {
-	title: 'Simple bar (customized domain)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-			domain: [-100000, 100000],
-		},
-		bottom: {
-			scaleType: 'labels',
-			mapsTo: 'group',
-		},
-	},
-};
-
-// Horizontal Simple
-export const simpleHorizontalBarData = simpleBarData;
-export const simpleHorizontalBarLongLabelData = simpleBarLongLabelData;
-
 export const simpleHorizontalBarOptions = {
-	title: 'Simple horizontal bar (discrete)',
+	title: 'Horizontal simple bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'group',
@@ -250,7 +272,7 @@ export const simpleHorizontalBarOptions = {
 export const simpleHorizontalBarCenteredLegendData = simpleBarData;
 
 export const simpleHorizontalBarCenteredLegendOptions = {
-	title: 'Simple horizontal bar (centered legend)',
+	title: 'Horizontal simple bar (centered legend)',
 	axes: {
 		left: {
 			mapsTo: 'group',
@@ -266,7 +288,7 @@ export const simpleHorizontalBarCenteredLegendOptions = {
 };
 
 export const simpleHorizontalBarLongLabelOptions = {
-	title: 'Simple horizontal bar (truncated labels)',
+	title: 'Truncated labels (simple bar)',
 	axes: {
 		left: {
 			mapsTo: 'group',
@@ -319,7 +341,22 @@ export const simpleBarTimeSeriesDenseData = [
 ];
 
 export const simpleBarTimeSeriesOptions = {
-	title: 'Simple bar (time series - Turkish)',
+	title: 'Vertical simple bar (time series)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+	},
+};
+
+export const simpleBarTurkishLocaleData = simpleBarTimeSeriesData;
+
+export const simpleBarTurkishLocaleOptions = {
+	title: 'Turkish locale (date-fns locales)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -334,7 +371,7 @@ export const simpleBarTimeSeriesOptions = {
 
 // Horizontal simple time series
 export const simpleHorizontalBarTimeSeriesOptions = {
-	title: 'Simple horizontal bar (time series)',
+	title: 'Horizontal simple bar (time series)',
 	axes: {
 		left: {
 			mapsTo: 'date',
@@ -348,7 +385,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 
 // Vertical simple time series with dense data
 export const simpleBarTimeSeriesDenseOptions = {
-	title: 'Simple bar (time series) with dense data',
+	title: 'Vertical simple bar (time series - dense data)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -363,6 +400,28 @@ export const simpleBarTimeSeriesDenseOptions = {
 };
 
 export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
+
+// Horizontal floating time series
+export const floatingHorizontalBarTimeSeriesData = [
+	{ group: 'Qty', date: new Date(2019, 0, 1), value: [10000, 41000] },
+	{ group: 'More', date: new Date(2019, 0, 2), value: 65000 },
+	{ group: 'Sold', date: new Date(2019, 0, 3), value: 30000 },
+	{ group: 'Restocking', date: new Date(2019, 0, 6), value: [22000, 69213] },
+	{ group: 'Misc', date: new Date(2019, 0, 7), value: [3500, 71213] },
+];
+
+export const floatingHorizontalBarTimeSeriesOptions = {
+	title: 'Horizontal floating bar (time series)',
+	axes: {
+		left: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+		bottom: {
+			mapsTo: 'value',
+		},
+	},
+};
 
 // Stacked bar
 export const stackedBarData = [
@@ -389,7 +448,7 @@ export const stackedBarData = [
 ];
 
 export const stackedBarOptions = {
-	title: 'Stacked bar (discrete)',
+	title: 'Vertical stacked bar (discrete)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -406,7 +465,7 @@ export const stackedBarOptions = {
 export const stackedHorizontalBarData = stackedBarData;
 
 export const stackedHorizontalBarOptions = {
-	title: 'Stacked horizontal bar (discrete)',
+	title: 'Horizontal stacked bar (discrete)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -441,7 +500,7 @@ export const stackedBarTimeSeriesData = [
 ];
 
 export const stackedBarTimeSeriesOptions = {
-	title: 'Stacked bar (time series)',
+	title: 'Vertical stacked bar (time series)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -458,7 +517,7 @@ export const stackedBarTimeSeriesOptions = {
 export const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData;
 
 export const stackedBarTimeSeriesOptionsCustomTicks = {
-	title: 'Stacked bar (time series - custom ticks)',
+	title: 'Custom ticks (stacked bar)',
 	axes: {
 		left: {
 			mapsTo: 'value',
@@ -476,7 +535,7 @@ export const stackedBarTimeSeriesOptionsCustomTicks = {
 
 // Stacked horizontal bar (time series)
 export const stackedHorizontalBarTimeSeriesOptions = {
-	title: 'Stacked horizontal bar (time series)',
+	title: 'Horizontal stacked bar (time series)',
 	axes: {
 		left: {
 			scaleType: 'time',
@@ -492,7 +551,7 @@ export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
 // simple bar - empty state
 export const simpleBarEmptyStateData = [];
 export const simpleBarEmptyStateOptions = {
-	title: 'Simple bar (empty state)',
+	title: 'Vertical simple bar (empty state)',
 	axes: {
 		left: {},
 		bottom: {
@@ -504,7 +563,7 @@ export const simpleBarEmptyStateOptions = {
 // simple bar - skeleton
 export const simpleBarSkeletonData = [];
 export const simpleBarSkeletonOptions = {
-	title: 'Simple bar (skeleton)',
+	title: 'Vertical simple bar (skeleton)',
 	axes: {
 		left: {},
 		bottom: {
@@ -519,7 +578,7 @@ export const simpleBarSkeletonOptions = {
 // grouped bar - empty state
 export const groupedBarEmptyStateData = [];
 export const groupedBarEmptyStateOptions = {
-	title: 'Grouped bar (empty state)',
+	title: 'Vertical grouped bar (empty state)',
 	axes: {
 		left: {},
 		bottom: {
@@ -531,7 +590,7 @@ export const groupedBarEmptyStateOptions = {
 // grouped bar - skeleton
 export const groupedBarSkeletonData = [];
 export const groupedBarSkeletonOptions = {
-	title: 'Grouped bar (skeleton)',
+	title: 'Vertical grouped bar (skeleton)',
 	axes: {
 		left: {},
 		bottom: {
@@ -546,7 +605,7 @@ export const groupedBarSkeletonOptions = {
 // stacked bar - empty state
 export const stackedBarEmptyStateData = [];
 export const stackedBarEmptyStateOptions = {
-	title: 'Stacked bar (empty state)',
+	title: 'Vertical stacked bar (empty state)',
 	axes: {
 		left: {},
 		bottom: {
@@ -558,7 +617,7 @@ export const stackedBarEmptyStateOptions = {
 // stacked bar - skeleton
 export const stackedBarSkeletonData = [];
 export const stackedBarSkeletonOptions = {
-	title: 'Stacked bar (skeleton)',
+	title: 'Vertical stacked bar (skeleton)',
 	axes: {
 		left: {},
 		bottom: {
@@ -573,7 +632,7 @@ export const stackedBarSkeletonOptions = {
 // simple horizontal bar - empty state
 export const simpleHorizontalBarEmptyStateData = [];
 export const simpleHorizontalBarEmptyStateOptions = {
-	title: 'Simple horizontal bar (empty state)',
+	title: 'Horizontal simple bar (empty state)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -585,7 +644,7 @@ export const simpleHorizontalBarEmptyStateOptions = {
 // simple horizontal bar - skeleton
 export const simpleHorizontalBarSkeletonData = [];
 export const simpleHorizontalBarSkeletonOptions = {
-	title: 'Simple horizontal bar (skeleton)',
+	title: 'Horizontal simple bar (skeleton)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -600,7 +659,7 @@ export const simpleHorizontalBarSkeletonOptions = {
 // grouped horizontal bar - empty state
 export const groupedHorizontalBarEmptyStateData = [];
 export const groupedHorizontalBarEmptyStateOptions = {
-	title: 'Grouped horizontal bar (empty state)',
+	title: 'Horizontal grouped bar (empty state)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -612,7 +671,7 @@ export const groupedHorizontalBarEmptyStateOptions = {
 // grouped horizontal bar - skeleton
 export const groupedHorizontalBarSkeletonData = [];
 export const groupedHorizontalBarSkeletonOptions = {
-	title: 'Grouped horizontal bar (skeleton)',
+	title: 'Horizontal grouped bar (skeleton)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -627,7 +686,7 @@ export const groupedHorizontalBarSkeletonOptions = {
 // stacked horizontal bar - empty state
 export const stackedHorizontalBarEmptyStateData = [];
 export const stackedHorizontalBarEmptyStateOptions = {
-	title: 'Stacked horizontal bar (empty state)',
+	title: 'Horizontal stacked bar (empty state)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -639,7 +698,7 @@ export const stackedHorizontalBarEmptyStateOptions = {
 // stacked horizontal bar - skeleton
 export const stackedHorizontalBarSkeletonData = [];
 export const stackedHorizontalBarSkeletonOptions = {
-	title: 'Stacked horizontal bar (skeleton)',
+	title: 'Horizontal stacked bar (skeleton)',
 	axes: {
 		left: {
 			scaleType: 'labels',
@@ -648,5 +707,50 @@ export const stackedHorizontalBarSkeletonOptions = {
 	},
 	data: {
 		loading: true,
+	},
+};
+
+// floating bars
+export const floatingBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 16932] },
+];
+
+export const floatingBarOptions = {
+	title: 'Floating vertical bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+};
+
+export const floatingHorizontalBarData = [
+	{ group: 'Qty', value: [30000, 65000] },
+	{ group: 'More', value: [15000, 29123] },
+	{ group: 'Sold', value: [22000, 35213] },
+	{ group: 'Restocking', value: [28000, 51213] },
+	{ group: 'Misc', value: [3000, 36932] },
+];
+
+export const floatingHorizontalBarOptions = {
+	title: 'Floating horizontal bar (discrete)',
+	axes: {
+		left: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+		bottom: {
+			mapsTo: 'value',
+			includeZero: false,
+		},
 	},
 };

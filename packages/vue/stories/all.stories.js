@@ -8,9 +8,10 @@ import { storybookDemoGroups } from '@carbon/charts/demo/data';
 // Loop through all demo groups
 storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
-		withKnobs({ escapeHTML: false })
-	);
+	const groupStories = storiesOf(
+		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
+		module
+	).addDecorator(withKnobs({ escapeHTML: false }));
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
@@ -20,7 +21,7 @@ storybookDemoGroups.forEach(demoGroup => {
 		const component = ChartComponents[`Ccv${demo.chartType.vanilla}`];
 		groupStories.add(demo.title, () => ({
 			components: {
-				[component.name]: component,
+				[demo.chartType.vue]: component,
 			},
 			props: {
 				data: {

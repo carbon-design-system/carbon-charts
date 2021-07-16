@@ -9,12 +9,16 @@ import {
 	AxisChartOptions,
 	AxisPositions,
 	ScaleTypes,
+	RenderTypes,
+	LayoutAlignItems,
 } from './interfaces';
 import {
 	ChartBrush,
 	ChartClip,
+	Modal,
 	LayoutComponent,
 	Legend,
+	Threshold,
 	Title,
 	AxisChartsTooltip,
 	Spacer,
@@ -37,18 +41,18 @@ export class AxisChart extends Chart {
 		super(holder, chartConfigs);
 	}
 
-	protected getAxisChartComponents(graphFrameComponents: any[]) {
+	protected getAxisChartComponents(
+		graphFrameComponents: any[],
+		configs?: object
+	) {
+		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			'zoomBar',
 			AxisPositions.TOP,
 			'enabled'
 		);
-		const toolbarEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			'toolbar',
-			'enabled'
-		);
+		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled');
 
 		this.services.cartesianScales.determineAxisDuality();
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
@@ -56,7 +60,7 @@ export class AxisChart extends Chart {
 
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			'axes',
 			mainXAxisPosition,
 			'scaleType'
@@ -76,19 +80,13 @@ export class AxisChart extends Chart {
 		const titleComponent = {
 			id: 'title',
 			components: [new Title(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		const toolbarComponent = {
 			id: 'toolbar',
 			components: [new Toolbar(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const headerComponent = {
@@ -104,22 +102,17 @@ export class AxisChart extends Chart {
 					],
 					{
 						direction: LayoutDirection.ROW,
+						alignItems: LayoutAlignItems.CENTER,
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const legendComponent = {
 			id: 'legend',
 			components: [new Legend(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		// if all zoom bars are locked, no need to add chart brush
@@ -130,16 +123,17 @@ export class AxisChart extends Chart {
 			);
 		}
 
+		graphFrameComponents.push(new Threshold(this.model, this.services));
+
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
+			Tools.getProperty(configs, 'legend', 'enabled') !== false &&
 			this.model.getOptions().legend.enabled !== false;
 
 		// Decide the position of the legend in reference to the chart
@@ -172,10 +166,7 @@ export class AxisChart extends Chart {
 		const legendSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const fullFrameComponent = {
@@ -194,19 +185,14 @@ export class AxisChart extends Chart {
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		const zoomBarComponent = {
 			id: 'zoom-bar',
 			components: [new ZoomBar(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
+			renderType: RenderTypes.SVG,
 		};
 
 		const topLevelLayoutComponents = [];
@@ -223,10 +209,7 @@ export class AxisChart extends Chart {
 						toolbarEnabled ? { size: 15 } : undefined
 					),
 				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+				growth: LayoutGrowth.PREFERRED,
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -238,6 +221,7 @@ export class AxisChart extends Chart {
 
 		return [
 			new AxisChartsTooltip(this.model, this.services),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

@@ -7,6 +7,7 @@ import {
 	MeterChartOptions,
 	LayoutGrowth,
 	LayoutDirection,
+	RenderTypes,
 } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Meter } from './../components/graphs/meter';
@@ -46,30 +47,23 @@ export class MeterChart extends Chart {
 		const graph = {
 			id: 'meter-graph',
 			components: [new Meter(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: RenderTypes.SVG,
 		};
 
 		// Meter has an unique dataset title within the graph
 		const titleComponent = {
-			id: 'title',
+			id: 'meter-title',
 			components: [new MeterTitle(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
+			renderType: RenderTypes.SVG,
 		};
 
 		// create the title spacer
 		const titleSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		// the graph frame for meter includes the custom title (and spacer)
@@ -85,7 +79,10 @@ export class MeterChart extends Chart {
 		];
 
 		// add the meter title as a top level component
-		const components: any[] = this.getChartComponents(graphFrame);
+		const components: any[] = this.getChartComponents(
+			graphFrame,
+			RenderTypes.HTML
+		);
 
 		return components;
 	}

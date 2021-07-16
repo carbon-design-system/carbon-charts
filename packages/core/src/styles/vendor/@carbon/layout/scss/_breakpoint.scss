@@ -19,7 +19,7 @@ $carbon--grid-gutter: carbon--rem(32px);
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$carbon--grid-gutter--condensed: carbon--rem(2px);
+$carbon--grid-gutter--condensed: carbon--rem(1px);
 
 // Initial map of our breakpoints and their values
 /// @type Map
@@ -125,7 +125,7 @@ $carbon--grid-breakpoints: (
   @return '-#{$name}';
 }
 
-/// Generate a media query up to the width of the given breakpoint name
+/// Generate a media query from the width of the given breakpoint to infinity
 /// @param {String | Number} $name
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
@@ -163,8 +163,13 @@ $carbon--grid-breakpoints: (
       @content;
     }
   } @else if map-has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map-get($breakpoints, $name);
-    $width: map-get($breakpoint, width);
+    $width: map-get($breakpoint, width) - 0.02;
     @media (max-width: $width) {
       @content;
     }
@@ -191,8 +196,16 @@ $carbon--grid-breakpoints: (
   $max: if($is-number-upper, $upper, map-get($breakpoints, $upper));
 
   @if $min and $max {
-    $min-width: if(not $is-number-lower and $min, map-get($min, width), $min);
-    $max-width: if(not $is-number-upper and $max, map-get($max, width), $max);
+    $min-width: if(
+      not $is-number-lower and $min,
+      map-get($min, width) + 0.02,
+      $min
+    );
+    $max-width: if(
+      not $is-number-upper and $max,
+      map-get($max, width) - 0.02,
+      $max
+    );
     @media (min-width: $min-width) and (max-width: $max-width) {
       @content;
     }

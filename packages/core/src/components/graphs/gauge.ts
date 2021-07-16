@@ -8,6 +8,7 @@ import {
 	ArrowDirections,
 	ColorClassNameTypes,
 	Alignments,
+	RenderTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
 
@@ -21,14 +22,11 @@ const ARROW_DOWN_PATH_STRING = '12,6 8,10 4,6';
 
 export class Gauge extends Component {
 	type = 'gauge';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs so that addEventListeners() can access them
 	arc: any;
 	backgroundArc: any;
-
-	init() {
-		const eventsFragment = this.services.events;
-	}
 
 	getValue(): number {
 		const data = this.model.getData();
@@ -89,10 +87,10 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
 		const valueRatio = this.getValueRatio();
@@ -168,7 +166,7 @@ export class Gauge extends Component {
 		} else if (alignment === Alignments.RIGHT) {
 			gaugeTranslateX = width - radius;
 		}
-		svg.attr('transform', `translate(${gaugeTranslateX}, ${radius})`);
+		svg.attr('x', gaugeTranslateX).attr('y', radius);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -178,7 +176,7 @@ export class Gauge extends Component {
 	 * draws the value number associated with the Gauge component in the center
 	 */
 	drawValueNumber() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, 'gauge', 'type');
@@ -206,6 +204,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const showPercentageSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'showPercentageSymbol'
+		);
+
 		// circular gauge without delta should have valueNumber centered
 		let numbersYPosition = 0;
 		if (arcType === GaugeTypes.FULL && !delta) {
@@ -221,11 +225,12 @@ export class Gauge extends Component {
 			'g.gauge-numbers'
 		).attr('transform', `translate(0, ${numbersYPosition})`);
 
+		const fontSize = valueFontSize(radius);
 		// Add the big number
 		const valueNumberGroup = DOMUtils.appendOrSelect(
 			numbersGroup,
 			'g.gauge-value-number'
-		).attr('transform', 'translate(-10, 0)'); // Optical centering for the presence of the smaller % symbol
+		);
 
 		const numberFormatter = Tools.getProperty(
 			options,
@@ -241,7 +246,7 @@ export class Gauge extends Component {
 			.append('text')
 			.attr('class', 'gauge-value-number')
 			.merge(valueNumber)
-			.style('font-size', `${valueFontSize(radius)}px`)
+			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
 			.text((d) => numberFormatter(d));
 
@@ -253,10 +258,27 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
-		DOMUtils.appendOrSelect(valueNumberGroup, 'text.gauge-value-symbol')
-			.style('font-size', `${valueFontSize(radius) / 2}px`)
+		const symbolFontSize = fontSize / 2;
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
+		const symbol = DOMUtils.appendOrSelect(
+			valueNumberGroup,
+			'text.gauge-value-symbol'
+		)
+			.style('font-size', `${symbolFontSize}px`)
 			.attr('x', valueNumberWidth / 2)
-			.text('%');
+			.text(gaugeSymbol);
+
+		const {
+			width: symbolWidth,
+			height: symbolHeight,
+		} = DOMUtils.getSVGElementSize(symbol, { useBBox: true });
+
+		// adjust the symbol to superscript using the bbox instead of the font-size cause
+		// we want to align the actual character to the value number
+		symbol.attr('y', `-${symbolHeight / 2}px`);
+
+		// move the value group depending on the symbol's drawn size
+		valueNumberGroup.attr('transform', `translate(-${symbolWidth / 2}, 0)`); // Optical centering for the presence of the smaller % symbol
 	}
 
 	/**
@@ -264,7 +286,7 @@ export class Gauge extends Component {
 	 */
 	drawDelta() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const delta = this.getDelta();
 
@@ -291,6 +313,12 @@ export class Gauge extends Component {
 			'numberSpacing'
 		);
 
+		const showPercentageSymbol = Tools.getProperty(
+			options,
+			'gauge',
+			'showPercentageSymbol'
+		);
+
 		const numbersGroup = DOMUtils.appendOrSelect(svg, 'g.gauge-numbers');
 
 		// Add the smaller number of the delta
@@ -306,6 +334,7 @@ export class Gauge extends Component {
 			deltaGroup,
 			'text.gauge-delta-number'
 		);
+		const gaugeSymbol = showPercentageSymbol ? '%' : '';
 
 		deltaNumber.data(delta === null ? [] : [delta]);
 
@@ -316,7 +345,7 @@ export class Gauge extends Component {
 			.merge(deltaNumber)
 			.attr('text-anchor', 'middle')
 			.style('font-size', `${deltaFontSize(radius)}px`)
-			.text((d) => `${numberFormatter(d)}%`);
+			.text((d) => `${numberFormatter(d)}${gaugeSymbol}`);
 
 		// Add the caret for the delta number
 		const {

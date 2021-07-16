@@ -1,0 +1,67 @@
+@import './../vendor/@carbon/motion/scss/motion.scss';
+
+.#{$prefix}--#{$charts-prefix}--bullet {
+	path.range-box {
+		pointer-events: none;
+
+		&.order-1 {
+			@if ($carbon--theme == $carbon--theme--g90) or
+				($carbon--theme == $carbon--theme--g100)
+			{
+				fill: $carbon--gray-90;
+				stroke: $carbon--gray-60;
+			} @else {
+				fill: $carbon--gray-10;
+				stroke: $carbon--gray-50;
+			}
+		}
+
+		&.order-2 {
+			@if ($carbon--theme == $carbon--theme--g90) or
+				($carbon--theme == $carbon--theme--g100)
+			{
+				fill: $carbon--gray-80;
+				stroke: $carbon--gray-60;
+			} @else {
+				fill: $carbon--gray-20;
+				stroke: $carbon--gray-50;
+			}
+		}
+
+		&.order-3 {
+			@if ($carbon--theme == $carbon--theme--g90) or
+				($carbon--theme == $carbon--theme--g100)
+			{
+				fill: $carbon--gray-70;
+				stroke: $carbon--gray-60;
+			} @else {
+				fill: $carbon--gray-30;
+				stroke: $carbon--gray-50;
+			}
+		}
+	}
+
+	path.marker,
+	path.quartile {
+		pointer-events: none;
+		stroke-width: 1.5px;
+
+		@if ($carbon--theme == $carbon--theme--g90) or
+			($carbon--theme == $carbon--theme--g100)
+		{
+			stroke: #fff;
+		} @else {
+			stroke: #000;
+		}
+	}
+
+	path.quartile.over-bar {
+		@if ($carbon--theme == $carbon--theme--g90) or
+			($carbon--theme == $carbon--theme--g100)
+		{
+			stroke: #000;
+		} @else {
+			stroke: #fff;
+		}
+	}
+}
