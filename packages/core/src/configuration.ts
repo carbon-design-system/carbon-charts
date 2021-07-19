@@ -152,10 +152,12 @@ export const timeScale: TimeScaleOptions = {
 };
 
 const isFullScreenEnabled =
-	document['fullscreenEnabled'] ||
-	document['webkitFullscreenEnabled'] ||
-	document['mozFullScreenEnabled'] ||
-	document['msFullscreenEnabled'];
+	document && (
+		document['fullscreenEnabled'] ||
+		document['webkitFullscreenEnabled'] ||
+		document['mozFullScreenEnabled'] ||
+		document['msFullscreenEnabled']
+	);
 
 /**
  * Base chart options common to any chart
