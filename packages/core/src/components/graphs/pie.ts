@@ -16,6 +16,7 @@ import * as Configuration from '../../configuration';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
+import { transition } from 'd3-transition';
 
 // Pie slice tween function
 function arcTween(a, arcFunc) {
@@ -106,6 +107,8 @@ export class Pie extends Component {
 			.classed('slice', true)
 			.attr('opacity', 0);
 
+		const t = transition().duration(750);
+
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
@@ -118,12 +121,7 @@ export class Pie extends Component {
 			)
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr('d', this.arc)
-			.transition(
-				this.services.transitions.getTransition(
-					'pie-slice-enter-update',
-					animate
-				)
-			)
+			.transition(t)
 			.attr('opacity', 1)
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
@@ -408,7 +406,7 @@ export class Pie extends Component {
 		const self = this;
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -429,6 +427,7 @@ export class Pie extends Component {
 				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -438,7 +437,7 @@ export class Pie extends Component {
 					],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -448,7 +447,9 @@ export class Pie extends Component {
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
 			.on('click', function (datum) {
 				// Dispatch mouse event

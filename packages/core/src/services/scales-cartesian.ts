@@ -603,7 +603,7 @@ export class CartesianScales extends Service {
 			const stackedValues = dataValuesGroupedByKeys.map((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues;
 
-				// return sum(values(numericalValues) as number[]);
+				return sum(Object.values(numericalValues) as number[]);
 			});
 
 			allDataValues = [

@@ -7,6 +7,8 @@ import { RenderTypes } from '../../interfaces';
 // D3 Imports
 import { axisBottom, axisLeft } from 'd3-axis';
 
+import { transition } from 'd3-transition';
+
 export class Grid extends Component {
 	type = 'grid';
 	renderType = RenderTypes.SVG;
@@ -96,6 +98,7 @@ export class Grid extends Component {
 				`translate(${-this.backdrop.attr('x')}, ${height})`
 			);
 
+		console.log('xGrid', xGrid);
 		if (animate) {
 			const transition = this.services.transitions.getTransition(
 				'grid-update'
@@ -158,10 +161,12 @@ export class Grid extends Component {
 			.attr('transform', `translate(0, ${-this.backdrop.attr('y')})`);
 
 		if (animate) {
-			const transition = this.services.transitions.getTransition(
-				'grid-update'
-			);
-			g.transition(transition).call(yGrid);
+			// const transition = this.services.transitions.getTransition(
+			// 	'grid-update',
+			// 	true,
+			// 	g
+			// );
+			// g.transition(this.services.transitions.getTransition()).call(yGrid);
 		} else {
 			g.call(yGrid);
 		}
