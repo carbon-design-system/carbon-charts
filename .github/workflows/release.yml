@@ -1,12 +1,13 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
       - master
+    types: [closed]
 jobs:
   build:
-    if: github.actor != 'carbon-bot' &&	contains(github.event.pull_request.labels.*.name, 'release')
+    if: github.event.pull_request.merged == true && github.actor != 'carbon-bot' &&	contains(github.event.pull_request.labels.*.name, 'trigger-release')
     name: Create release - Node.js v11.x
     runs-on: ubuntu-latest
 
