@@ -1113,7 +1113,7 @@ const mapDemoGroups = (demoGroups) =>
 allDemoGroups = mapDemoGroups(allDemoGroups);
 
 // Only add the high-scale testcases in dev
-if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
 	allDemoGroups = allDemoGroups.concat(mapDemoGroups(devOnlyDemoGroups));
 }
 
