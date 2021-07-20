@@ -353,12 +353,22 @@ export default app;
 `;
 
 	const App = `<script>
-  import { ${chartComponent} } from "@carbon/charts-svelte";
+	import "@carbon/charts/styles.min.css";
+	import "carbon-components/css/carbon-components.min.css";
+	import { ${chartComponent} } from "@carbon/charts-svelte";
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/carbon-components/css/carbon-components.min.css" />
+	<link
+			rel="preconnect"
+			crossorigin="anonymous"
+			href="https://fonts.gstatic.com"
+	/>
+	<link
+			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
+			rel="stylesheet"
+			crossorigin="anonymous"
+	/>
 </svelte:head>
 
 <${chartComponent}
