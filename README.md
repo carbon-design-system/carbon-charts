@@ -33,7 +33,7 @@
 Carbon data visualization design specifications can be found [here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
-Read the release change logs [here](./CHANGELOG.md)
+Read the release change logs [here](https://github.com/carbon-design-system/carbon-charts/releases)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
