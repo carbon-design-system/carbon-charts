@@ -152,7 +152,7 @@ export const timeScale: TimeScaleOptions = {
 };
 
 const isFullScreenEnabled =
-	document && (
+	typeof document !== 'undefined' && (
 		document['fullscreenEnabled'] ||
 		document['webkitFullscreenEnabled'] ||
 		document['mozFullScreenEnabled'] ||
