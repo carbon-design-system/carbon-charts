@@ -358,6 +358,7 @@ export default app;
 
 <svelte:head>
   <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/carbon-components/css/carbon-components.min.css" />
 </svelte:head>
 
 <${chartComponent}
