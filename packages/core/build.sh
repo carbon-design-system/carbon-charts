@@ -35,6 +35,9 @@ sass --load-path ../../node_modules dist/styles/styles-g90.scss dist/styles-g90.
 sass --load-path ../../node_modules dist/styles/styles-g100.scss dist/styles-g100.css
 sass --load-path ../../node_modules dist/styles/styles-g100.scss dist/styles-g100.min.css --style=compressed
 
+sass --load-path ../../node_modules dist/styles/styles-all.scss dist/styles-all.css
+sass --load-path ../../node_modules dist/styles/styles-all.scss dist/styles-all.min.css --style=compressed
+
 sass demo/styles.scss dist/demo/styles.css
 sass demo/styles.scss dist/demo/styles.min.css --style=compressed
 

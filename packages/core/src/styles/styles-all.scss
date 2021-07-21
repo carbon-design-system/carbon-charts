@@ -1,0 +1,26 @@
+@import './vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+
+:root {
+	@import './styles';
+}
+
+:root[theme='g10'] {
+	@include carbon--theme($carbon--theme--g10) {
+		$carbon--theme: $carbon--theme--g10;
+		@import './styles';
+	}
+}
+
+:root[theme='g90'] {
+	@include carbon--theme($carbon--theme--g90) {
+		$carbon--theme: $carbon--theme--g90;
+		@import './styles';
+	}
+}
+
+:root[theme='g100'] {
+	@include carbon--theme($carbon--theme--g100) {
+		$carbon--theme: $carbon--theme--g100;
+		@import './styles';
+	}
+}
