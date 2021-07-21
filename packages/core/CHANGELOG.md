@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.88](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.87...v0.41.88) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** remove references to `process` in UMD bundles ([#1078](https://github.com/carbon-design-system/carbon-charts/issues/1078)) ([dac2067](https://github.com/carbon-design-system/carbon-charts/commit/dac20679a895c56f03c2a156900d133233e17ded))
+
+
+
+
+
 ## [0.41.87](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.86...v0.41.87) (2021-07-20)
 
 **Note:** Version bump only for package @carbon/charts
