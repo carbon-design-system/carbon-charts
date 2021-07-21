@@ -33,6 +33,15 @@ bundled version of the library.
 
 ## Set-up
 
+This is an overview of using Carbon Charts with common Svelte set-ups.
+
+-   [sveltekit](#sveltekit)
+-   [vite](#vite)
+-   [sapper](#sapper)
+-   [rollup](#rollup)
+-   [webpack](#webpack)
+-   [snowpack](#snowpack)
+
 ### SvelteKit
 
 [SvelteKit](https://github.com/sveltejs/kit) is fast becoming the de facto
@@ -56,14 +65,14 @@ const config = {
 export default config;
 ```
 
-### vite (`@sveltejs/vite-plugin-svelte`)
+### Vite
 
 [vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte) is an
 alternative to using SvelteKit. Similarly, instruct `vite` to optimize
 `@carbon/charts` in vite.config.js.
 
 Note that `@sveltejs/vite-plugin-svelte` is the official vite/svelte integration
-and is not to be confused with [svite](https://github.com/svitejs/svite).
+not to be confused with [svite](https://github.com/svitejs/svite).
 
 ```js
 // vite.config.js
@@ -79,7 +88,7 @@ export default defineConfig(({ mode }) => {
 });
 ```
 
-### sapper
+### Sapper
 
 [sapper](https://github.com/sveltejs/sapper) is another official Svelte
 framework that supports server-side rendering (SSR).
@@ -88,7 +97,7 @@ Take care to install `@carbon/charts-svelte` as a development dependency.
 
 No additional configuration should be necessary.
 
-### rollup
+### Rollup
 
 When using this library with [rollup](https://github.com/rollup/rollup), set
 `context` to `"window"` in the exported configuration in `rollup.config.js`.
@@ -113,7 +122,7 @@ and add it to `plugins` in `rollup.config.js`.
 
 ```js
 // rollup.config.js
-import replace from "@rollup/plugin-replace";
+import replace from '@rollup/plugin-replace';
 
 export default {
 	// ...
@@ -127,14 +136,14 @@ export default {
 };
 ```
 
-### webpack
+### Webpack
 
 [webpack](https://github.com/webpack/webpack) is another popular application
 bundler used to build Svelte apps.
 
 No additional configuration should be necessary.
 
-### snowpack
+### Snowpack
 
 [snowpack](https://github.com/snowpackjs/snowpack) is an ESM-powered frontend
 build tool.
@@ -152,6 +161,135 @@ No additional configuration should be necessary.
 module.exports = {
 	plugins: ['@snowpack/plugin-svelte'],
 };
+```
+
+## Usage
+
+Import chart styles from `@carbon/charts`:
+
+- `@carbon/charts/styles.css`: White theme
+- `@carbon/charts/styles-g10.css`: Gray 10 theme
+- `@carbon/charts/styles-g90.css`: Gray 90 theme
+- `@carbon/charts/styles-g100.css`: Gray 100 theme
+
+### Basic
+
+```svelte
+<script>
+  import { BarChartSimple } from "@carbon/charts-svelte";
+  import "@carbon/charts/styles.min.css";
+</script>
+
+<BarChartSimple
+  data={[
+    { group: "Qty", value: 65000 },
+    { group: "More", value: 29123 },
+    { group: "Sold", value: 35213 },
+    { group: "Restocking", value: 51213 },
+    { group: "Misc", value: 16932 },
+  ]}
+  options={{
+    title: "Simple bar (discrete)",
+    height: "400px",
+    axes: {
+      left: { mapsTo: "value" },
+      bottom: { mapsTo: "group", scaleType: "labels" },
+    },
+  }}
+/>
+
+```
+
+
+
+
+
+
+
+### Dynamic import
+
+Dynamically import a chart and instantiate it using the [svelte:component API](https://svelte.dev/docs#svelte_component).
+
+```svelte
+<script>
+  import { onMount } from "svelte";
+  import "@carbon/charts/styles.min.css";
+
+  let chart;
+
+  onMount(async () => {
+    const charts = await import("@carbon/charts-svelte");
+    chart = charts.BarChartSimple;
+  });
+</script>
+
+<svelte:component
+  this={chart}
+  data={[
+    { group: "Qty", value: 65000 },
+    { group: "More", value: 29123 },
+    { group: "Sold", value: 35213 },
+    { group: "Restocking", value: 51213 },
+    { group: "Misc", value: 16932 },
+  ]}
+  options={{
+    title: "Simple bar (discrete)",
+    height: "400px",
+    axes: {
+      left: { mapsTo: "value" },
+      bottom: { mapsTo: "group", scaleType: "labels" },
+    },
+  }}
+/>
+
+```
+
+
+
+### Event listeners
+
+In this example, event listeners can be attached to instance exposed via the `chart` prop.
+
+```svelte
+<script>
+  import { onMount } from "svelte";
+  import { BarChartSimple } from "@carbon/charts-svelte";
+  import "@carbon/charts/styles.min.css";
+
+  let chart;
+
+  function barMouseOver(e) {
+    console.log(e.detail);
+  }
+
+  onMount(() => {
+    chart.services.events.addEventListener("bar-mouseover", barMouseOver);
+
+    return () => {
+      chart.services.events.removeEventListener("bar-mouseover", barMouseOver);
+    };
+  });
+</script>
+
+<BarChartSimple
+  bind:chart
+  data={[
+    { group: "Qty", value: 65000 },
+    { group: "More", value: 29123 },
+    { group: "Sold", value: 35213 },
+    { group: "Restocking", value: 51213 },
+    { group: "Misc", value: 16932 },
+  ]}
+  options={{
+    title: "Simple bar (discrete)",
+    height: "400px",
+    axes: {
+      left: { mapsTo: "value" },
+      bottom: { mapsTo: "group", scaleType: "labels" },
+    },
+  }}
+/>
+
 ```
 
 ## Codesandbox examples
