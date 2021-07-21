@@ -248,7 +248,7 @@ Dynamically import a chart and instantiate it using the [svelte:component API](h
 
 ### Event listeners
 
-In this example, event listeners can be attached to instance exposed via the `chart` prop.
+In this example, an event listener is attached to the `BarChartSimple` component that fires when hovering over a bar.
 
 ```svelte
 <script>
