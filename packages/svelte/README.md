@@ -109,10 +109,11 @@ export default {
 If you encounter the error message `ReferenceError: process is not defined`,
 install
 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)
-and add it to the list of plugins in `rollup.config.js`.
+and add it to `plugins` in `rollup.config.js`.
 
 ```js
 // rollup.config.js
+import replace from "@rollup/plugin-replace";
 
 export default {
 	// ...
@@ -178,3 +179,9 @@ used,
 
 Customizable options (specific to chart type) can be found
 [here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)
+
+## TypeScript support
+
+Svelte version 3.31 or greater is required to use this library with TypeScript.
+
+TypeScript definitions are located in the [types folder](types/).
