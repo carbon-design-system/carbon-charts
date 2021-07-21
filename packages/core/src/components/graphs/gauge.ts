@@ -362,6 +362,7 @@ export class Gauge extends Component {
 			'deltaArrow',
 			'enabled'
 		);
+
 		const deltaArrow = deltaGroup
 			.selectAll('svg.gauge-delta-arrow')
 			.data(delta !== null && arrowEnabled ? [delta] : []);
@@ -375,22 +376,34 @@ export class Gauge extends Component {
 			.attr('y', -arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35)
 			.attr('width', arrowSize(radius))
 			.attr('height', arrowSize(radius))
-			.attr('viewBox', '0 0 16 16');
+			.attr('viewBox', '0 0 16 16')
+			/*
+			 * using .each() here to ensure that the below function runs
+			 * after svg.gauge-delta-arrow has been mounted onto the DOM
+			 */
+			.each(function () {
+				const deltaArrowSelection = select(this);
 
-		// Needed to correctly size SVG in Firefox
-		DOMUtils.appendOrSelect(deltaArrow, 'rect.gauge-delta-arrow-backdrop')
-			.attr('width', '16')
-			.attr('height', '16')
-			.attr('fill', 'none');
+				// Needed to correctly size SVG in Firefox
+				DOMUtils.appendOrSelect(
+					deltaArrowSelection,
+					'rect.gauge-delta-arrow-backdrop'
+				)
+					.attr('width', '16')
+					.attr('height', '16')
+					.attr('fill', 'none');
 
-		// Draw the arrow with status
-		const status = Tools.getProperty(options, 'gauge', 'status');
-		DOMUtils.appendOrSelect(deltaArrow, 'polygon.gauge-delta-arrow')
-			.attr(
-				'class',
-				status !== null ? `gauge-delta-arrow status--${status}` : ''
-			)
-			.attr('points', self.getArrow(delta));
+				// Draw the arrow with status
+				const status = Tools.getProperty(options, 'gauge', 'status');
+				DOMUtils.appendOrSelect(deltaArrowSelection, 'polygon.gauge-delta-arrow')
+					.attr(
+						'class',
+						status !== null
+							? `gauge-delta-arrow status--${status}`
+							: ''
+					)
+					.attr('points', self.getArrow(delta));
+			});
 
 		deltaArrow.exit().remove();
 		deltaNumber.exit().remove();
