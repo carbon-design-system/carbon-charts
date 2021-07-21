@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.90](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.89...v0.41.90) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** gauge delta arrow not showing on first render ([#1083](https://github.com/carbon-design-system/carbon-charts/issues/1083)) ([2169d80](https://github.com/carbon-design-system/carbon-charts/commit/2169d80f74557e8172d2846c9897ddf70982a1b1))
+
+
+
+
+
 ## [0.41.89](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.88...v0.41.89) (2021-07-21)
 
 **Note:** Version bump only for package @carbon/charts
