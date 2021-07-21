@@ -1,13 +1,14 @@
 name: Release
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types: [closed]
 jobs:
   build:
-    if: github.event.pull_request.merged == true && github.actor != 'carbon-bot' &&	contains(github.event.pull_request.labels.*.name, 'trigger-release')
+    if:
+      github.actor != 'carbon-bot'
+      &&	!startsWith(github.event.head_commit.message, 'skip-release')
     name: Create release - Node.js v11.x
     runs-on: ubuntu-latest
 
@@ -18,8 +19,8 @@ jobs:
       - name: Use Node.js 11.x
         uses: actions/setup-node@v1
         with:
-          node-version: "11.x"
-          registry-url: "https://registry.npmjs.org"
+          node-version: '11.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
