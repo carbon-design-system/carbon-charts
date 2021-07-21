@@ -53,7 +53,6 @@
 		"@carbon/telemetry": "0.0.0-alpha.6"
 	},
 	"peerDependencies": {
-		"carbon-components": "^10.5.x",
 		"svelte": "^3.31.x"
 	},
 	"devDependencies": {
