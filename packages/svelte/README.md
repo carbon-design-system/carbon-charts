@@ -167,10 +167,10 @@ module.exports = {
 
 Import chart styles from `@carbon/charts`:
 
-- `@carbon/charts/styles.css`: White theme
-- `@carbon/charts/styles-g10.css`: Gray 10 theme
-- `@carbon/charts/styles-g90.css`: Gray 90 theme
-- `@carbon/charts/styles-g100.css`: Gray 100 theme
+-   `@carbon/charts/styles.css`: White theme
+-   `@carbon/charts/styles-g10.css`: Gray 10 theme
+-   `@carbon/charts/styles-g90.css`: Gray 90 theme
+-   `@carbon/charts/styles-g100.css`: Gray 100 theme
 
 ### Basic
 
@@ -200,15 +200,30 @@ Import chart styles from `@carbon/charts`:
 
 ```
 
+### Dispatched events
 
+Each Svelte chart component dispatches the following events:
 
+-   **on:load**: fired when the chart is instantiated
+-   **on:update**: fired when `data` or `options` are updated
+-   **on:destroy**: fired when the component is unmounted and the chart is
+    destroyed
 
+```svelte
+<BarChartSimple
+  {data}
+  {options}
+  on:load
+  on:update
+  on:destroy
+/>
 
-
+```
 
 ### Dynamic import
 
-Dynamically import a chart and instantiate it using the [svelte:component API](https://svelte.dev/docs#svelte_component).
+Dynamically import a chart and instantiate it using the
+[svelte:component API](https://svelte.dev/docs#svelte_component).
 
 ```svelte
 <script>
@@ -244,11 +259,10 @@ Dynamically import a chart and instantiate it using the [svelte:component API](h
 
 ```
 
-
-
 ### Event listeners
 
-In this example, an event listener is attached to the `BarChartSimple` component that fires when hovering over a bar.
+In this example, an event listener is attached to the `BarChartSimple` component
+that fires when hovering over a bar.
 
 ```svelte
 <script>
