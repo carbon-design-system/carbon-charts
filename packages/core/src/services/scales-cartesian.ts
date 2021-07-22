@@ -119,6 +119,29 @@ export class CartesianScales extends Service {
 		return this.getAxisOptions(rangeAxisPosition);
 	}
 
+	getScaleLabel(position: AxisPositions) {
+		const options = this.getAxisOptions(position);
+		let title = options.title;
+		if (!title) {
+			if (
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
+			) {
+				return 'x-value';
+			}
+			return 'y-value';
+		}
+		return title;
+	}
+
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
+	}
+
+	getRangeLabel() {
+		return this.getScaleLabel(this.getRangeAxisPosition());
+	}
+
 	update(animate = true) {
 		this.determineAxisDuality();
 		this.findDomainAndRangeAxes();
@@ -375,7 +398,8 @@ export class CartesianScales extends Service {
 		} else {
 			return addSpacingToContinuousDomain(
 				domain,
-				Configuration.axis.paddingRatio
+				Configuration.axis.paddingRatio,
+				axisOptions.scaleType
 			);
 		}
 	}
@@ -605,7 +629,12 @@ export class CartesianScales extends Service {
 			});
 		}
 
-		if (scaleType !== ScaleTypes.TIME && includeZero) {
+		// Time can never be 0 and log of base 0 is -Infinity
+		if (
+			scaleType !== ScaleTypes.TIME &&
+			scaleType !== ScaleTypes.LOG &&
+			includeZero
+		) {
 			allDataValues.push(0);
 		}
 
@@ -779,7 +808,8 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 
 function addSpacingToContinuousDomain(
 	[lower, upper]: number[],
-	paddingRatio: number
+	paddingRatio: number,
+	scaleType?: ScaleTypes
 ) {
 	const domainLength = upper - lower;
 	const padding = domainLength * paddingRatio;
@@ -787,7 +817,17 @@ function addSpacingToContinuousDomain(
 	// If padding crosses 0, keep 0 as new upper bound
 	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
 	// If padding crosses 0, keep 0 as new lower bound
-	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	// Log of base 0 or a negative number is -Infinity
+	if (scaleType === ScaleTypes.LOG && newLower <= 0) {
+		if (lower <= 0) {
+			throw Error(
+				'Data must have values greater than 0 if log scale type is used.'
+			);
+		}
+		newLower = lower;
+	}
 
 	return [newLower, newUpper];
 }

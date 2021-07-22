@@ -33,7 +33,7 @@
 Carbon data visualization design specifications can be found [here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
-Read the release change logs [here](./CHANGELOG.md)
+Read the release change logs [here](https://github.com/carbon-design-system/carbon-charts/releases)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -60,6 +60,7 @@ Read the release change logs [here](./CHANGELOG.md)
 | Wordcloud     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Bullet     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Circle Pack     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Network diagrams     | — | :white_check_mark: | :white_check_mark: | — | — |
 
 ## Bugs and feature requests
 

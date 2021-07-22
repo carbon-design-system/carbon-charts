@@ -1,6 +1,6 @@
 @import './../vendor/@carbon/motion/scss/motion.scss';
 
-g.#{$prefix}--#{$charts-prefix}--bullet {
+.#{$prefix}--#{$charts-prefix}--bullet {
 	path.range-box {
 		pointer-events: none;
 

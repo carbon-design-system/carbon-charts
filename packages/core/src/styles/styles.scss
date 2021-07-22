@@ -22,6 +22,6 @@ $carbon-dataviz-yellow-10: #fcf4d6;
 @import './type';
 @import './chart-holder';
 
-svg.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;
 }

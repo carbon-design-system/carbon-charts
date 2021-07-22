@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.41.79",
+	"version": "0.41.90",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -54,6 +54,7 @@
 		"carbon-components": "10.5.0",
 		"d3-cloud": "1.2.5",
 		"date-fns": "2.8.1",
+		"dom-to-image": "2.6.0",
 		"lodash-es": "4.17.21",
 		"resize-observer-polyfill": "1.5.0"
 	},
@@ -68,6 +69,7 @@
 		"@carbon/themes": "10.30.0",
 		"@carbon/type": "10.24.0",
 		"@rollup/plugin-json": "4.0.2",
+		"@rollup/plugin-replace": "3.0.0",
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/html": "5.3.12",

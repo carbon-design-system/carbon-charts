@@ -1,73 +1,55 @@
 $css--reset: false;
 @import './../vendor/carbon-components/src/components/overflow-menu/overflow-menu';
+@import './../vendor/carbon-components/src/components/loading/loading';
 
-g.#{$prefix}--#{$charts-prefix}--toolbar {
-	@include carbon--motion(standard, expressive);
+.#{$prefix}--#{$charts-prefix}--toolbar {
+	display: flex;
 
-	.toolbar-container {
-		.toolbar-button {
-			fill: transparent;
-			cursor: pointer;
-			&:hover {
-				.toolbar-button-background {
-					fill: $hover-ui;
-				}
-				.toolbar-button-background--disabled {
-					fill: transparent;
-				}
+	div.toolbar-control {
+		&.disabled {
+			&,
+			button {
+				cursor: default;
 			}
 
-			&--focusable {
-				&:focus {
-					.toolbar-button-background {
-						stroke: $icon-02;
-						stroke-width: 2;
-						stroke-dasharray: 2;
-					}
-				}
+			&:hover,
+			button:hover {
+				background-color: transparent;
 			}
 
-			&-icon {
-				pointer-events: visible;
-
-				circle,
-				rect,
-				path,
-				polygon {
-					fill: $icon-02;
-				}
-
-				&:hover {
-					cursor: pointer;
-					pointer-events: visible;
-				}
+			button:focus {
+				outline: none;
 			}
 
-			&-icon--disabled {
-				pointer-events: auto;
-
-				circle,
-				rect,
-				path,
-				polygon {
-					fill: $disabled-03;
-				}
-
-				&:hover {
-					cursor: auto;
-					pointer-events: auto;
-				}
-			}
-
-			&--hovered {
-				fill: $hover-ui;
-			}
-
-			&--disabled {
-				cursor: auto;
+			svg {
+				fill: $disabled-03;
 			}
 		}
+	}
+
+	.bx--overflow-menu--flip {
+		right: 0;
+		left: unset;
+
+		&.is-open {
+			display: table;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	.bx--loading__background {
+		fill: transparent;
+	}
+
+	.bx--loading__stroke {
+		stroke-dashoffset: 99;
+		fill: transparent;
 	}
 }
 
 @include overflow-menu;
+@include loading;

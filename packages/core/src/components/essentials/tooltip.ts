@@ -2,7 +2,7 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model';
-import { Events, TruncationTypes } from '../../interfaces';
+import { Events, RenderTypes, TruncationTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 // Carbon position service
@@ -18,6 +18,7 @@ import { format } from 'date-fns';
 
 export class Tooltip extends Component {
 	type = 'tooltip';
+	renderType = RenderTypes.HTML;
 
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false;
@@ -72,7 +73,9 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(
 			Events.Tooltip.MOVE,
 			(e: CustomEvent) => {
-				this.positionTooltip(e);
+				if (this.tooltip.classed('hidden') === false) {
+					this.positionTooltip(e);
+				}
 			}
 		);
 

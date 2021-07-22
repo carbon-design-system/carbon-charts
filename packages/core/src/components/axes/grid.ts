@@ -2,12 +2,14 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
+import { RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { axisBottom, axisLeft } from 'd3-axis';
 
 export class Grid extends Component {
 	type = 'grid';
+	renderType = RenderTypes.SVG;
 
 	backdrop: any;
 

@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.90](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.89...v0.41.90) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** gauge delta arrow not showing on first render ([#1083](https://github.com/carbon-design-system/carbon-charts/issues/1083)) ([2169d80](https://github.com/carbon-design-system/carbon-charts/commit/2169d80f74557e8172d2846c9897ddf70982a1b1))
+
+
+
+
+
+## [0.41.89](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.88...v0.41.89) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.88](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.87...v0.41.88) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** remove references to `process` in UMD bundles ([#1078](https://github.com/carbon-design-system/carbon-charts/issues/1078)) ([dac2067](https://github.com/carbon-design-system/carbon-charts/commit/dac20679a895c56f03c2a156900d133233e17ded))
+
+
+
+
+
+## [0.41.87](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.86...v0.41.87) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.86](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.85...v0.41.86) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.85](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.84...v0.41.85) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** make sure document exists in case using SSR ([#1073](https://github.com/carbon-design-system/carbon-charts/issues/1073)) ([20a78b8](https://github.com/carbon-design-system/carbon-charts/commit/20a78b8bae199b31d5cf459a84002831e79573fd))
+
+
+
+
+
+## [0.41.84](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.83...v0.41.84) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.83](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.82...v0.41.83) (2021-07-15)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.82](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.81...v0.41.82) (2021-07-13)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.81](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.80...v0.41.81) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core:** display the first and last data elements when addSpaceOnEdges is set to 0 ([#1064](https://github.com/carbon-design-system/carbon-charts/issues/1064)) ([f321807](https://github.com/carbon-design-system/carbon-charts/commit/f32180774720c7d916f6bd441b7d72500b77e7f9)), closes [#763](https://github.com/carbon-design-system/carbon-charts/issues/763)
+
+
+
+
+
+## [0.41.80](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.79...v0.41.80) (2021-07-07)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.41.79](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.78...v0.41.79) (2021-06-29)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

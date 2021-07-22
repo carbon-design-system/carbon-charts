@@ -47,14 +47,23 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	$color-map: getThemeColors();
 
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
 			fill: $color;
+
 			&.hovered {
 				fill: darken($color, 7%);
+			}
+		}
+
+		.background-#{$token} {
+			background-color: $color;
+
+			&.hovered {
+				background-color: darken($color, 7%);
 			}
 		}
 
@@ -77,7 +86,7 @@
 .#{$prefix}--#{$charts-prefix}--legend {
 	$area-item-color-map: getLegendAreaItemColors();
 
-	.additional-item > .icon {
+	.additional > .icon {
 		@each $token, $color in $area-item-color-map {
 			.area-#{$token} {
 				fill: $color;

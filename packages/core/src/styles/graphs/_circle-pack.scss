@@ -18,7 +18,7 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-svg.zoomed-in {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper.zoomed-in {
 	cursor: zoom-out;
 	.#{$prefix}--#{$charts-prefix}--circle-pack {
 		circle.node {

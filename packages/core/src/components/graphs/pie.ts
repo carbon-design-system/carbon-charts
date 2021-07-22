@@ -8,6 +8,7 @@ import {
 	Events,
 	Alignments,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
@@ -28,6 +29,7 @@ function arcTween(a, arcFunc) {
 
 export class Pie extends Component {
 	type = 'pie';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs
 	// So that addEventListeners()
@@ -57,7 +59,7 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
@@ -269,7 +271,7 @@ export class Pie extends Component {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
-		svg.attr('transform', `translate(${pieTranslateX}, ${pieTranslateY})`);
+		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -277,7 +279,7 @@ export class Pie extends Component {
 
 	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			'g.callouts'
 		)
 			.attr('role', Roles.GROUP)
@@ -484,6 +486,7 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
+
 		const options = this.getOptions();
 		const radius: number = Math.min(width, height) / 2;
 		const renderLabels = options.pie.labels.enabled;

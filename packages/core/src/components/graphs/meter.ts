@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Roles, ColorClassNameTypes, Events } from '../../interfaces';
+import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
@@ -11,6 +11,7 @@ import { select } from 'd3-selection';
 
 export class Meter extends Component {
 	type = 'meter';
+	renderType = RenderTypes.SVG;
 
 	getStackedBounds(data, scale) {
 		let prevX = 0;
@@ -33,7 +34,7 @@ export class Meter extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const proportional = Tools.getProperty(
 			options,
@@ -43,9 +44,10 @@ export class Meter extends Component {
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
+
 		const { groupMapsTo } = options.data;
 
 		let domainMax;

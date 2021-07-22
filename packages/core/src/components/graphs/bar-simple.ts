@@ -3,6 +3,7 @@ import { Bar } from './bar';
 import {
 	Events,
 	Roles,
+	RenderTypes,
 	ColorClassNameTypes,
 	CartesianOrientations,
 } from '../../interfaces';
@@ -13,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -35,7 +37,7 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const data = this.model.getDisplayData(this.configs.groups);
 

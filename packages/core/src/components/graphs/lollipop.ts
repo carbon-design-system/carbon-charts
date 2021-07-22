@@ -5,11 +5,13 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 export class Lollipop extends Scatter {
 	type = 'lollipop';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const { events } = this.services;
@@ -27,7 +29,7 @@ export class Lollipop extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 

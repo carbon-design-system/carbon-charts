@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartModel } from './model';
 import { Tools } from './tools';
-import { Events, LegendItemTypes } from './interfaces/enums';
+import { Events, LegendItemType } from './interfaces/enums';
 import { thresholdSturges } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -80,7 +80,7 @@ export class CirclePackChartModel extends ChartModel {
 				legend: {
 					additionalItems: [
 						{
-							type: LegendItemTypes.ZOOM,
+							type: LegendItemType.ZOOM,
 							name: 'Click to zoom',
 						},
 					],

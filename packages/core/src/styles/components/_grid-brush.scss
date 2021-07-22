@@ -9,7 +9,7 @@
 	}
 }
 
-g.#{$prefix}--#{$charts-prefix}--grid-brush {
+.#{$prefix}--#{$charts-prefix}--grid-brush {
 	rect.frontSelection {
 		fill: $ui-03;
 		fill-opacity: 0.3;

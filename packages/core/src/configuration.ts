@@ -39,7 +39,7 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	LegendItemTypes,
+	LegendItemType,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -151,6 +151,14 @@ export const timeScale: TimeScaleOptions = {
 	},
 };
 
+const isFullScreenEnabled =
+	typeof document !== 'undefined' && (
+		document['fullscreenEnabled'] ||
+		document['webkitFullscreenEnabled'] ||
+		document['mozFullScreenEnabled'] ||
+		document['msFullscreenEnabled']
+	);
+
 /**
  * Base chart options common to any chart
  */
@@ -178,6 +186,31 @@ const chart: BaseChartOptions = {
 			enabled: false,
 		},
 	},
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 3,
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
+		],
+	} as ToolbarOptions,
 };
 
 /**
@@ -196,11 +229,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			type: ZoomBarTypes.GRAPH_VIEW,
 		},
 	} as ZoomBarsOptions,
-	toolbar: {
-		enabled: false,
-		numberOfIcons: 3,
-		controls: [],
-	} as ToolbarOptions,
 } as AxisChartOptions);
 
 /**
@@ -321,7 +349,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.RADIUS,
+				type: LegendItemType.RADIUS,
 				name: 'Radius',
 			},
 		],
@@ -346,23 +374,23 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Poor area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Satisfactory area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Great area',
 			},
 			{
-				type: LegendItemTypes.QUARTILE,
+				type: LegendItemType.QUARTILE,
 				name: 'Quartiles',
 			},
 		],
-	}
+	},
 } as BulletChartOptions);
 
 /*
