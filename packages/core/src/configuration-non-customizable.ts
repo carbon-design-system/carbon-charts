@@ -148,13 +148,13 @@ export const meter = {
 		paddingLeft: 15,
 	},
 	total: {
-		paddingLeft: 36
+		paddingLeft: 36,
 	},
 	height: {
 		default: 8,
-		proportional: 16
+		proportional: 16,
 	},
-	dividerWidth: 2
+	dividerWidth: 2,
 };
 
 export const pie = {
@@ -260,4 +260,4 @@ export const defaultLegendAdditionalItems = [
 		type: LegendItemType.QUARTILE,
 		name: 'Quartiles',
 	},
-]
+];

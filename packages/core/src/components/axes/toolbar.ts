@@ -1,10 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import {
-	Events,
-	RenderTypes,
-	ToolbarControlTypes,
-} from '../../interfaces';
+import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports

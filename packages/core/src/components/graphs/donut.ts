@@ -25,7 +25,10 @@ export class Donut extends Pie {
 			return;
 		}
 
-		const svg = DOMUtils.appendOrSelect(this.getComponentContainer(), 'g.center');
+		const svg = DOMUtils.appendOrSelect(
+			this.getComponentContainer(),
+			'g.center'
+		);
 		const options = this.getOptions();
 
 		// Compute the outer radius needed

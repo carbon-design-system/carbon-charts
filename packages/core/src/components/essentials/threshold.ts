@@ -2,7 +2,12 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model';
-import { AxisPositions, Events, RenderTypes, ScaleTypes } from '../../interfaces';
+import {
+	AxisPositions,
+	Events,
+	RenderTypes,
+	ScaleTypes,
+} from '../../interfaces';
 import { select, mouse } from 'd3-selection';
 
 // Carbon position service

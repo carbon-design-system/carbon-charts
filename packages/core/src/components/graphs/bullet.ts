@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Events,
+	Roles,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 

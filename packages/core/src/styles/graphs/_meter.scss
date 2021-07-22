@@ -6,7 +6,11 @@
 	line.rangeIndicator {
 		stroke: $carbon--gray-40;
 		stroke-width: 1px;
-		@if $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100 {
+		@if $carbon--theme ==
+			$carbon--theme--g90 or
+			$carbon--theme ==
+			$carbon--theme--g100
+		{
 			stroke: $carbon--gray-60;
 		}
 	}
@@ -20,7 +24,11 @@
 			fill: $support-03;
 			stroke-width: 1px;
 			stroke: $carbon-dataviz-alert;
-			@if $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100 {
+			@if $carbon--theme ==
+				$carbon--theme--g90 or
+				$carbon--theme ==
+				$carbon--theme--g100
+			{
 				stroke: none;
 			}
 		}

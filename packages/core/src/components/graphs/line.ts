@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports

@@ -329,7 +329,11 @@ export class ZoomBar extends Component {
 		];
 
 		// update brush handle position
-		this.updateBrushHandle(this.getComponentContainer(), selection, newDomain);
+		this.updateBrushHandle(
+			this.getComponentContainer(),
+			selection,
+			newDomain
+		);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse/touch event

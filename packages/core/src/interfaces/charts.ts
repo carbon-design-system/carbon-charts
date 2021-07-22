@@ -365,8 +365,8 @@ export interface DonutChartOptions extends PieChartOptions {
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
 		proportional?: {
-			total?: number,
-			unit?: string
+			total?: number;
+			unit?: string;
 		};
 		peak?: number;
 		status?: {
@@ -383,6 +383,15 @@ export interface MeterChartOptions extends BaseChartOptions {
 				 */
 				enabled?: boolean;
 			};
+		};
+	};
+}
+
+export interface ProportionalMeterChartOptions extends BaseChartOptions {
+	meter?: {
+		proportional?: {
+			total?: number;
+			unit?: string;
 		};
 	};
 }

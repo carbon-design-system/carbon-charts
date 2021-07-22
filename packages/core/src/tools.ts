@@ -304,13 +304,14 @@ export namespace Tools {
 
 			const defaultTypes = defaultAdditionalItems.map(
 				(item) => item.type
-			)
+			);
 
 			// Get default items in default options but not in provided options
 			const updatedDefaultItems = defaultLegendAdditionalItems.filter(
-				(item) => defaultTypes.includes(item.type) &&
-				!providedTypes.includes(item.type)
-			)
+				(item) =>
+					defaultTypes.includes(item.type) &&
+					!providedTypes.includes(item.type)
+			);
 
 			defaultOptions.legend.additionalItems = updatedDefaultItems;
 
