@@ -1,55 +1,55 @@
 $css--reset: false;
 @import './../vendor/carbon-components/src/components/overflow-menu/overflow-menu';
-@import './../vendor/carbon-components/src/components/loading/loading';
 
-.#{$prefix}--#{$charts-prefix}--toolbar {
-	display: flex;
+.#{$prefix}--chart-holder {
+	@include overflow-menu;
 
-	div.toolbar-control {
-		&.disabled {
-			&,
-			button {
-				cursor: default;
-			}
+	.#{$prefix}--#{$charts-prefix}--toolbar {
+		display: flex;
 
-			&:hover,
-			button:hover {
-				background-color: transparent;
-			}
+		div.toolbar-control {
+			&.disabled {
+				&,
+				button {
+					cursor: default;
+				}
 
-			button:focus {
-				outline: none;
-			}
+				&:hover,
+				button:hover {
+					background-color: transparent;
+				}
 
-			svg {
-				fill: $disabled-03;
+				button:focus {
+					outline: none;
+				}
+
+				svg {
+					fill: $disabled-03;
+				}
 			}
 		}
-	}
 
-	.bx--overflow-menu--flip {
-		right: 0;
-		left: unset;
+		.bx--overflow-menu--flip {
+			right: 0;
+			left: unset;
 
-		&.is-open {
-			display: table;
+			&.is-open {
+				display: table;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+			}
 		}
 
-		ul {
-			margin: 0;
-			padding: 0;
+		.bx--loading__background {
+			fill: transparent;
 		}
-	}
 
-	.bx--loading__background {
-		fill: transparent;
-	}
-
-	.bx--loading__stroke {
-		stroke-dashoffset: 99;
-		fill: transparent;
+		.bx--loading__stroke {
+			stroke-dashoffset: 99;
+			fill: transparent;
+		}
 	}
 }
-
-@include overflow-menu;
-@include loading;
