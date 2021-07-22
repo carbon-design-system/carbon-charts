@@ -10,7 +10,11 @@ export class MeterTitle extends Title {
 	renderType = RenderTypes.SVG;
 
 	render() {
-		const dataset = this.model.getDisplayData()[0];
+		const dataset = Tools.getProperty(
+			this.model.getDisplayData(),
+			0,
+			'value'
+		);
 		const options = this.getOptions();
 		const svg = this.getComponentContainer()
 			.attr('width', '100%')
@@ -43,20 +47,15 @@ export class MeterTitle extends Title {
 
 			title.exit().remove();
 
-
 			// appends the associated percentage after title
 			this.appendPercentage();
 
 			// if status ranges are provided (custom or default), display indicator
 			this.displayStatus();
-
 		}
 		// get the max width of a title (with consideration for the status/percentage)
 		const maxWidth = this.getMaxTitleWidth();
-		const titleElement = DOMUtils.appendOrSelect(
-			svg,
-			'text.meter-title'
-		);
+		const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
 
 		if (
 			maxWidth > 0 &&
@@ -64,7 +63,6 @@ export class MeterTitle extends Title {
 		) {
 			this.truncateTitle(titleElement, maxWidth);
 		}
-
 	}
 
 	displayBreakdownTitle() {
@@ -100,9 +98,9 @@ export class MeterTitle extends Title {
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
-						datasetsTotal: datasetsTotal,
-						total: total,
-					})
+							datasetsTotal: datasetsTotal,
+							total: total,
+					  })
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`;
 		}
 
@@ -168,7 +166,7 @@ export class MeterTitle extends Title {
 				: `${total} ${unit} total`;
 
 		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
+			this.services.domUtils.getMainContainer(),
 			{ useAttr: true }
 		);
 
@@ -253,7 +251,11 @@ export class MeterTitle extends Title {
 	 * Appends the associated percentage to the end of the title
 	 */
 	appendPercentage() {
-		const dataValue = this.model.getDisplayData()[0].value;
+		const dataValue = Tools.getProperty(
+			this.model.getDisplayData(),
+			0,
+			'value'
+		);
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer();
@@ -313,9 +315,9 @@ export class MeterTitle extends Title {
 		percentage.attr(
 			'x',
 			+title.attr('x') +
-			title.node().getComputedTextLength() +
-			tspanLength +
-			offset
+				title.node().getComputedTextLength() +
+				tspanLength +
+				offset
 		);
 	}
 
@@ -343,10 +345,15 @@ export class MeterTitle extends Title {
 				'text.proportional-meter-total'
 			).node();
 
-			const  totalWidth = DOMUtils.getSVGElementSize(total, { useBBox: true })
-				.width;
+			const totalWidth = DOMUtils.getSVGElementSize(total, {
+				useBBox: true,
+			}).width;
 
-			return containerWidth - totalWidth - Configuration.meter.total.paddingLeft;
+			return (
+				containerWidth -
+				totalWidth -
+				Configuration.meter.total.paddingLeft
+			);
 		} else {
 			const percentage = DOMUtils.appendOrSelect(
 				this.parent,

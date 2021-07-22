@@ -2,7 +2,12 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces';
+import {
+	Roles,
+	ColorClassNameTypes,
+	Events,
+	RenderTypes,
+} from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 // D3 Imports
@@ -20,12 +25,20 @@ export class Meter extends Component {
 				prevX += scale(d.value);
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth),
+					width: Math.abs(
+						scale(d.value) - Configuration.meter.dividerWidth
+					),
 					x: prevX - scale(d.value),
 				};
 			} else {
 				prevX = scale(d.value);
-				return { ...d, width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth), x: 0 };
+				return {
+					...d,
+					width: Math.abs(
+						scale(d.value) - Configuration.meter.dividerWidth
+					),
+					x: 0,
+				};
 			}
 		});
 
@@ -82,7 +95,11 @@ export class Meter extends Component {
 			.attr('width', width)
 			.attr(
 				'height',
-				userProvidedHeight ? userProvidedHeight : proportional ? Configuration.meter.height.proportional : Configuration.meter.height.default
+				userProvidedHeight
+					? userProvidedHeight
+					: proportional
+					? Configuration.meter.height.proportional
+					: Configuration.meter.height.default
 			);
 
 		// draw the container max range value indicator
@@ -90,7 +107,14 @@ export class Meter extends Component {
 			.attr('x1', width)
 			.attr('x2', width)
 			.attr('y1', 0)
-			.attr('y2', userProvidedHeight ? userProvidedHeight : proportional ? Configuration.meter.height.proportional : Configuration.meter.height.default)
+			.attr(
+				'y2',
+				userProvidedHeight
+					? userProvidedHeight
+					: proportional
+					? Configuration.meter.height.proportional
+					: Configuration.meter.height.default
+			);
 
 		// rect with the value binded
 		const valued = svg.selectAll('rect.value').data(stackedData);
@@ -120,8 +144,8 @@ export class Meter extends Component {
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-						? Configuration.meter.height.proportional
-						: Configuration.meter.height.default
+					? Configuration.meter.height.proportional
+					: Configuration.meter.height.default;
 			})
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -157,12 +181,15 @@ export class Meter extends Component {
 			if (peakValue > domainMax) {
 				peakData = domainMax;
 			} else if (peakValue < data[0].value) {
-				peakData = data[0].value > domainMax ? domainMax : data[0].value;
+				peakData =
+					data[0].value > domainMax ? domainMax : data[0].value;
 			}
 		}
 
 		// if a peak is supplied within the domain, we want to render it
-		const peak = svg.selectAll('line.peak').data(peakData == null ? [] : [peakData]);
+		const peak = svg
+			.selectAll('line.peak')
+			.data(peakData == null ? [] : [peakData]);
 
 		peak.enter()
 			.append('line')
@@ -195,10 +222,8 @@ export class Meter extends Component {
 		// this forces the meter chart to only take up as much height as needed (if no height is provided)
 		this.services.domUtils.setSVGMaxHeight();
 
-		if (proportional) {
-			// Add event listeners to elements and legend
-			this.addEventListeners();
-		}
+		// Add event listeners to elements and legend
+		this.addEventListeners();
 	}
 
 	// add event listeners for tooltips on proportional meter bars
@@ -206,18 +231,16 @@ export class Meter extends Component {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 		const self = this;
+		const proportional = Tools.getProperty(
+			options,
+			'meter',
+			'proportional'
+		);
 
 		this.parent
 			.selectAll('rect.value')
 			.on('mouseover', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed('hovered', true);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -228,16 +251,26 @@ export class Meter extends Component {
 					}
 				);
 
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					items: [
-						{
-							label: datum[groupMapsTo],
-							value: datum.value,
-						},
-					],
-				});
+				if (!proportional) {
+					hoveredElement.classed('hovered', true);
+
+					hoveredElement.transition(
+						self.services.transitions.getTransition(
+							'graph_element_mouseover_fill_update'
+						)
+					);
+
+					// Show tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement,
+						items: [
+							{
+								label: datum[groupMapsTo],
+								value: datum.value,
+							},
+						],
+					});
+				}
 			})
 			.on('mousemove', function (datum) {
 				const hoveredElement = select(this);
@@ -250,7 +283,9 @@ export class Meter extends Component {
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				if (!proportional) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				}
 			})
 			.on('click', function (datum) {
 				// Dispatch mouse event
@@ -261,7 +296,6 @@ export class Meter extends Component {
 			})
 			.on('mouseout', function (datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -272,10 +306,14 @@ export class Meter extends Component {
 					}
 				);
 
-				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
+				if (!proportional) {
+					hoveredElement.classed('hovered', false);
+
+					// Hide tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement,
+					});
+				}
 			});
 	}
 

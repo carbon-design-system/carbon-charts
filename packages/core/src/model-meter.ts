@@ -42,7 +42,7 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getStatus() {
 		const options = this.getOptions();
-		const dataValue = this.getDisplayData()[0].value;
+		const dataValue = Tools.getProperty(this.getDisplayData(), 0, 'value');
 
 		// use max value if the percentage is bigger than 100%
 		const boundedValue = dataValue > 100 ? 100 : dataValue;

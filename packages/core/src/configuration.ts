@@ -29,6 +29,7 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ProportionalMeterChartOptions,
 	ToolbarOptions,
 	ToolbarControl,
 	ZoomBarsOptions,
@@ -152,12 +153,11 @@ export const timeScale: TimeScaleOptions = {
 };
 
 const isFullScreenEnabled =
-	typeof document !== 'undefined' && (
-		document['fullscreenEnabled'] ||
+	typeof document !== 'undefined' &&
+	(document['fullscreenEnabled'] ||
 		document['webkitFullscreenEnabled'] ||
 		document['mozFullScreenEnabled'] ||
-		document['msFullscreenEnabled']
-	);
+		document['msFullscreenEnabled']);
 
 /**
  * Base chart options common to any chart
@@ -489,6 +489,16 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	},
 } as MeterChartOptions);
 
+const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge(
+	{},
+	meterChart,
+	{
+		legend: {
+			enabled: true,
+		},
+	} as MeterChartOptions
+);
+
 /**
  * options specific to radar charts
  */
@@ -556,6 +566,7 @@ export const options = {
 	pieChart,
 	donutChart,
 	meterChart,
+	proportionalMeterChart,
 	radarChart,
 	gaugeChart,
 	comboChart,
