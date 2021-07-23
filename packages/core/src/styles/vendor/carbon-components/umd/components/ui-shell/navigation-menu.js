@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "./navigation-menu-panel", "../../globals/js/misc/on", "../../globals/js/misc/event-matches", "../../globals/js/settings"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.navigationMenuPanel, global.on, global.eventMatches, global.settings);
     global.navigationMenu = mod.exports;
   }
-})(this, function (_exports, _navigationMenuPanel, _on, _eventMatches, _settings) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _navigationMenuPanel, _on, _eventMatches, _settings) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -28,40 +44,39 @@
     };
   }
 
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
-  }
-
   function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
 
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
 
   function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
   function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
 
-      return arr2;
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
     }
+
+    return arr2;
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -84,29 +99,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
   }
 
   function _inherits(subClass, superClass) {
@@ -133,10 +125,65 @@
     return _setPrototypeOf(o, p);
   }
 
-  var NavigationMenu =
-  /*#__PURE__*/
-  function (_NavigationMenuPanel) {
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  var NavigationMenu = /*#__PURE__*/function (_NavigationMenuPanel) {
     _inherits(NavigationMenu, _NavigationMenuPanel);
+
+    var _super = _createSuper(NavigationMenu);
     /**
      * A navigation menu
      * @extends NavigationMenuPanel
@@ -165,12 +212,38 @@
      */
 
 
+    /**
+     * A navigation menu
+     * @extends NavigationMenuPanel
+     * @param {HTMLElement} element The element working as a selector.
+     * @param {object} [options] The component options.
+     * @param {string} [options.selectorInit] The CSS class to find navigation
+     * menus.
+     * @param {string} [options.attribInitTarget] The attribute name in the
+     * launcher buttons to find target navigation menu.
+     * @param {string} [options.selectorShellNavSubmenu] The CSS selector for a
+     * nav submenu
+     * @param {string} [options.selectorShellNavLink] The CSS selector for a nav
+     * link
+     * @param {string} [options.selectorShellNavLinkCurrent] The CSS selector for
+     * the current nav link
+     * @param {string} [options.selectorShellNavItem] The CSS selector for a nav
+     * item
+     * @param {string} [options.selectorShellNavCategory] The CSS selector for a
+     * nav category
+     * @param {string} [options.classShellNavItemActive] The CSS class for the
+     * active nav item
+     * @param {string} [options.classShellNavLinkCurrent] The CSS class for the
+     * current lav link
+     * @param {string} [options.classShellNavCategoryExpanded] The CSS class
+     * for an expanded nav category
+     */
     function NavigationMenu(element, options) {
       var _this;
 
       _classCallCheck(this, NavigationMenu);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(NavigationMenu).call(this, element, options));
+      _this = _super.call(this, element, options);
 
       _this.getCurrentNavigation = function () {
         return _this.element.ownerDocument.activeElement;
@@ -191,6 +264,7 @@
           }; // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
 
 
+          // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
           var index = Math.max(items.indexOf(old) + direction, -1);
           return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
         };
@@ -213,6 +287,7 @@
         } // handle up/down arrow keys
 
 
+        // handle up/down arrow keys
         var matchesNavSubmenu = (0, _eventMatches.default)(event, _this.options.selectorShellNavSubmenu);
         var matchesShellNavLink = (0, _eventMatches.default)(event, _this.options.selectorShellNavLink);
 
@@ -231,6 +306,7 @@
         if (navigationKeyCodeMatches) {
           event.preventDefault(); // prevent arrow keys from scrolling
 
+          // prevent arrow keys from scrolling
           _this.navigate(navigationKeyCodeMatches);
         }
       };
@@ -311,7 +387,7 @@
         }
       }));
 
-      var hasFocusOut = 'onfocusout' in window;
+      var hasFocusOut = ('onfocusout' in window);
 
       _this.manage((0, _on.default)(_this.element, hasFocusOut ? 'focusout' : 'blur', _this._handleFocusOut, !hasFocusOut));
 
@@ -322,9 +398,12 @@
      */
 
 
+    /**
+     * @returns {Element} Currently highlighted element.
+     */
     _createClass(NavigationMenu, null, [{
       key: "options",
-
+      get:
       /**
        * The component options.
        * If `options` is specified in the constructor,
@@ -340,7 +419,7 @@
        * @property {string[]} initEventNames The events that the component
        * will handles
        */
-      get: function get() {
+      function get() {
         var prefix = _settings.default.prefix;
         return Object.assign(Object.create(_navigationMenuPanel.default.options), {
           selectorInit: '[data-navigation-menu]',
@@ -362,7 +441,7 @@
        * Enum for navigating backward/forward.
        * @readonly
        * @member NavigationMenuPanel.NAVIGATE
-       * @type {Object}
+       * @type {object}
        * @property {number} BACKWARD Navigating backward.
        * @property {number} FORWARD Navigating forward.
        */

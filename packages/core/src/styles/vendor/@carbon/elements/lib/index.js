@@ -10,14 +10,6 @@ var motion = require('@carbon/motion');
 
 
 
-Object.keys(themes).forEach(function (k) {
-  if (k !== 'default') Object.defineProperty(exports, k, {
-    enumerable: true,
-    get: function () {
-      return themes[k];
-    }
-  });
-});
 Object.defineProperty(exports, 'black', {
   enumerable: true,
   get: function () {
@@ -965,4 +957,12 @@ Object.defineProperty(exports, 'slow02', {
   get: function () {
     return motion.slow02;
   }
+});
+Object.keys(themes).forEach(function (k) {
+  if (k !== 'default' && !exports.hasOwnProperty(k)) Object.defineProperty(exports, k, {
+    enumerable: true,
+    get: function () {
+      return themes[k];
+    }
+  });
 });
