@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "./navigation-menu-panel", "../../globals/js/misc/on", "../../globals/js/settings", "../../globals/js/misc/on-focus-by-keyboard"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.navigationMenuPanel, global.on, global.settings, global.onFocusByKeyboard);
     global.productSwitcher = mod.exports;
   }
-})(this, function (_exports, _navigationMenuPanel, _on, _settings, _onFocusByKeyboard) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _navigationMenuPanel, _on, _settings, _onFocusByKeyboard) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -26,20 +42,6 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
-  }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -62,22 +64,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
   }
 
   function _get(target, property, receiver) {
@@ -110,13 +96,6 @@
     return object;
   }
 
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -141,12 +120,69 @@
     return _setPrototypeOf(o, p);
   }
 
-  var ProductSwitcher =
-  /*#__PURE__*/
-  function (_NavigationMenuPanel) {
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  var seq = 0;
+
+  var ProductSwitcher = /*#__PURE__*/function (_NavigationMenuPanel) {
     _inherits(ProductSwitcher, _NavigationMenuPanel);
+
+    var _super = _createSuper(ProductSwitcher);
     /**
-     * A navigation menu
+     * A navigation menu.
      * @extends NavigationMenuPanel
      * @param {HTMLElement} element The element working as a selector.
      * @param {object} [options] The component options.
@@ -159,12 +195,24 @@
      */
 
 
+    /**
+     * A navigation menu.
+     * @extends NavigationMenuPanel
+     * @param {HTMLElement} element The element working as a selector.
+     * @param {object} [options] The component options.
+     * @param {string} [options.selectorInit] The CSS class to find product
+     * switchers
+     * @param {string} [options.attribInitTarget] The attribute name in the
+     * launcher buttons to find target product switcher
+     * @param {string} [options.classProductSwitcherExpanded] The CSS class
+     * for an expanded product switcher
+     */
     function ProductSwitcher(element, options) {
       var _this;
 
       _classCallCheck(this, ProductSwitcher);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ProductSwitcher).call(this, element, options));
+      _this = _super.call(this, element, options);
       _this.current = '';
       _this.triggerButtonIds = new Set();
 
@@ -198,7 +246,7 @@
         var launcher = event.delegateTarget;
 
         if (!launcher.id) {
-          launcher.id = "__carbon-product-switcher-launcher-".concat(Math.random().toString(36).substr(2));
+          launcher.id = "__carbon-product-switcher-launcher-".concat(seq++);
         }
 
         var current = launcher.id;
@@ -220,6 +268,7 @@
         } // deactivate all other trigger buttons
 
 
+        // deactivate all other trigger buttons
         _this.triggerButtonIds.forEach(function (id) {
           var button = _this.element.ownerDocument.getElementById(id);
 
@@ -230,6 +279,7 @@
         }); // set active trigger button attributes
 
 
+        // set active trigger button attributes
         var currentTriggerButton = _this.element.ownerDocument.getElementById(_this.current);
 
         if (currentTriggerButton) {
@@ -262,6 +312,10 @@
      */
 
 
+    /**
+     * id of currently active trigger button
+     * @type {string}
+     */
     _createClass(ProductSwitcher, [{
       key: "release",
       value: function release() {
@@ -276,7 +330,7 @@
 
     }], [{
       key: "options",
-
+      get:
       /**
        * The component options.
        * If `options` is specified in the constructor,
@@ -292,7 +346,7 @@
        * @property {string[]} initEventNames The events that the component
        * will handles
        */
-      get: function get() {
+      function get() {
         var prefix = _settings.default.prefix;
         return Object.assign(Object.create(_navigationMenuPanel.default.options), {
           selectorInit: '[data-product-switcher]',
@@ -308,5 +362,6 @@
     return ProductSwitcher;
   }(_navigationMenuPanel.default);
 
-  _exports.default = ProductSwitcher;
+  var _default = ProductSwitcher;
+  _exports.default = _default;
 });

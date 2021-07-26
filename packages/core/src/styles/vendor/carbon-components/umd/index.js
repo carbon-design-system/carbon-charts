@@ -10,7 +10,7 @@
     factory(mod.exports, global.components, global.settings);
     global.index = mod.exports;
   }
-})(this, function (_exports, _components, _settings) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _components, _settings) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -28,6 +28,7 @@
   Object.keys(_components).forEach(function (key) {
     if (key === "default" || key === "__esModule") return;
     if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+    if (key in _exports && _exports[key] === _components[key]) return;
     Object.defineProperty(_exports, key, {
       enumerable: true,
       get: function get() {

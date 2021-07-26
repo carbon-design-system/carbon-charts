@@ -232,7 +232,6 @@ export class Modal extends Component {
 					</tbody>
 				</table>
 			</div>
-			<div class="bx--modal-content--overflow-indicator"></div>
 			<div class="bx--modal-footer">
 			  <div class="${settings.prefix}--${chartprefix}-modal-footer-spacer"></div>
 			  <button class="bx--btn bx--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>

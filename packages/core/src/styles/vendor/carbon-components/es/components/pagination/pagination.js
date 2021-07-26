@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -16,29 +18,6 @@ function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
 }
 
 function _inherits(subClass, superClass) {
@@ -64,6 +43,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -79,10 +113,10 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-var Pagination =
-/*#__PURE__*/
-function (_mixin) {
+var Pagination = /*#__PURE__*/function (_mixin) {
   _inherits(Pagination, _mixin);
+
+  var _super = _createSuper(Pagination);
   /**
    * Pagination component.
    * @extends CreateComponent
@@ -107,12 +141,34 @@ function (_mixin) {
    */
 
 
+  /**
+   * Pagination component.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @param {HTMLElement} element The element working as a pagination component.
+   * @param {object} [options] The component options.
+   * @property {string} [selectorInit] The CSS selector to find pagination components.
+   * @property {string} [selectorItemsPerPageInput]
+   *   The CSS selector to find the input that determines the number of items per page.
+   * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
+   * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
+   * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.
+   * @property {string} [eventItemsPerPage]
+   *   The name of the custom event fired when a user changes the number of items per page.
+   *   event.detail.value contains the number of items a user wishes to see.
+   * @property {string} [eventPageNumber]
+   *   The name of the custom event fired when a user inputs a specific page number.
+   *   event.detail.value contains the value that the user input.
+   * @property {string} [eventPageChange]
+   *   The name of the custom event fired when a user goes forward or backward a page.
+   *   event.detail.direction contains the direction a user wishes to go.
+   */
   function Pagination(element, options) {
     var _this;
 
     _classCallCheck(this, Pagination);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Pagination).call(this, element, options));
+    _this = _super.call(this, element, options);
 
     _this._emitEvent = function (evtName, detail) {
       var event = new CustomEvent("".concat(evtName), {
@@ -184,6 +240,12 @@ function (_mixin) {
     eventPageNumber: 'pageNumber',
     eventPageChange: 'pageChange'
   };
+
+  /**
+   * Dispatches a custom event
+   * @param {string} evtName name of the event to be dispatched.
+   * @param {object} detail contains the original event and any other necessary details.
+   */
   return Pagination;
 }(mixin(createComponent, initComponentBySearch, handles));
 
