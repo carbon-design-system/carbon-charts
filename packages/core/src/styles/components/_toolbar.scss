@@ -4,6 +4,12 @@ $css--reset: false;
 .#{$prefix}--chart-holder {
 	@include overflow-menu;
 
+	.bx--overflow-menu,
+	.bx--overflow-menu__trigger {
+		width: 2rem;
+		height: 2rem;
+	}
+
 	.#{$prefix}--#{$charts-prefix}--toolbar {
 		display: flex;
 

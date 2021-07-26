@@ -129,6 +129,10 @@ div.container {
 		}
 	}
 
+	div#color-palette-picker {
+		max-width: 18rem;
+	}
+
 	&.theme--g90,
 	&.theme--g100 {
 		div#color-palette-picker div.bx--select label.bx--label {
@@ -164,7 +168,7 @@ div.container {
 		span.bx--tag.component-name {
 			font-size: 0.55em;
 			vertical-align: middle;
-			padding: 0.9em 1em;
+			padding: 0.25em 1em;
 			border-radius: 1em;
 			font-weight: 600;
 		}
