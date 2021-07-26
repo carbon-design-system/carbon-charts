@@ -20,11 +20,12 @@ export class Files extends Service {
 			);
 		} else if (URL && 'download' in anchor) {
 			// HTML5
-			anchor.href = URL.createObjectURL(
+			const href = URL.createObjectURL(
 				new Blob([content], {
 					type: mimeType,
 				})
 			);
+			anchor.href = href;
 			anchor.setAttribute('download', filename);
 
 			// Add anchor to body
@@ -35,6 +36,7 @@ export class Files extends Service {
 
 			// Remove anchor from body
 			document.body.removeChild(anchor);
+			URL.revokeObjectURL(href);
 		} else {
 			location.href = `data:application/octet-stream,${encodeURIComponent(
 				content
