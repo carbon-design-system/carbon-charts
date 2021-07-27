@@ -35,12 +35,12 @@ bundled version of the library.
 
 This is an overview of using Carbon Charts with common Svelte set-ups.
 
--   [sveltekit](#sveltekit)
--   [vite](#vite)
--   [sapper](#sapper)
--   [rollup](#rollup)
--   [webpack](#webpack)
--   [snowpack](#snowpack)
+-   [SvelteKit](#sveltekit)
+-   [Vite](#vite)
+-   [Sapper](#sapper)
+-   [Rollup](#rollup)
+-   [Webpack](#webpack)
+-   [Snowpack](#snowpack)
 
 ### SvelteKit
 
@@ -51,13 +51,27 @@ framework for building Svelte apps that supports both client-side rendering
 For set-ups powered by [vite](https://github.com/vitejs/vite), add
 `@carbon/charts` to the list of dependencies for `vite` to optimize.
 
+If using a [SvelteKit adapter](https://kit.svelte.dev/docs#adapters), instruct
+`vite` to avoid externalizing `@carbon/charts` when building for production.
+
 ```js
 // svelte.config.js
+import adapter from '@sveltejs/adapter-node';
+
+const production = process.env.NODE_ENV === 'production';
+
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
+		adapter: adapter(),
 		target: '#svelte',
 		vite: {
-			optimizeDeps: { include: ['@carbon/charts'] },
+			optimizeDeps: {
+				include: ['@carbon/charts'],
+			},
+			ssr: {
+				noExternal: [production && '@carbon/charts'].filter(Boolean),
+			},
 		},
 	},
 };
