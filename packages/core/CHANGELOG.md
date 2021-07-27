@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.93](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.92...v0.41.93) (2021-07-27)
+
+
+### Performance Improvements
+
+* **download-csv:** revoke object URL after downloading ([#1089](https://github.com/carbon-design-system/carbon-charts/issues/1089)) ([6f001c7](https://github.com/carbon-design-system/carbon-charts/commit/6f001c749feb3747686aa5f5cd612a7cbbe7cefc))
+
+
+
+
+
 ## [0.41.92](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.91...v0.41.92) (2021-07-26)
 
 **Note:** Version bump only for package @carbon/charts
