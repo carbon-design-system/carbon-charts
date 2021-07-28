@@ -24,14 +24,17 @@ export class Title extends Component {
 		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {
 			// add events for displaying the tooltip with the title
 			const self = this;
-			text.on('mouseover', function () {
+			text.on('mouseover', function (event) {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement: text,
 					content: text.text(),
 				});
 			})
-				.on('mousemove', function () {
-					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
 				})
 				.on('mouseout', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
@@ -82,14 +85,17 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on('mouseover', function () {
+				.on('mouseover', function (event) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement: title,
 						content: untruncatedTitle,
 					});
 				})
-				.on('mousemove', function () {
-					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
 				})
 				.on('mouseout', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);

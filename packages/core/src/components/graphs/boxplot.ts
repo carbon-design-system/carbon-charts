@@ -341,11 +341,13 @@ export class Boxplot extends Component {
 			)
 			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-circles',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-circles',
+					animate,
+				})
 			)
 			.attr('cy', getYValue);
 
@@ -537,7 +539,9 @@ export class Boxplot extends Component {
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
 			.on('click', function (event, datum) {
 				// Dispatch mouse event

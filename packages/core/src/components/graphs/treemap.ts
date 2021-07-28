@@ -124,8 +124,13 @@ export class Treemap extends Component {
 
 		allLeafGroups
 			.attr('data-name', 'leaf')
-			.transition(
-				transitions.getTransition('treemap-group-update', animate)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'treemap-group-update',
+					animate,
+				})
 			)
 			.attr('transform', (d) => `translate(${d.x0},${d.y0})`);
 
@@ -155,11 +160,13 @@ export class Treemap extends Component {
 					originalClassName: 'leaf',
 				});
 			})
-			.transition(
-				this.services.transitions.getTransition(
-					'treemap-leaf-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'treemap-leaf-update-enter',
+					animate,
+				})
 			)
 			.attr('width', (d) => d.x1 - d.x0)
 			.attr('height', (d) => d.y1 - d.y0)
@@ -290,6 +297,7 @@ export class Treemap extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{

@@ -70,7 +70,7 @@ export class Legend extends Component {
 			'legend',
 			'clickable'
 		);
-		svg.classed('clickable', legendClickable);
+		svg.classed('clickable', legendClickable && dataGroups.length > 1);
 
 		const checkboxRadius = Configuration.legend.checkbox.radius;
 
