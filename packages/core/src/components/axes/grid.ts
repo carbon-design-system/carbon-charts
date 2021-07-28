@@ -165,12 +165,15 @@ export class Grid extends Component {
 			.attr('transform', `translate(0, ${-this.backdrop.attr('y')})`);
 
 		if (animate) {
-			// const transition = this.services.transitions.getTransition(
-			// 	'grid-update',
-			// 	true,
-			// 	g
-			// );
-			// g.transition(this.services.transitions.getTransition()).call(yGrid);
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(yGrid);
 		} else {
 			g.call(yGrid);
 		}
