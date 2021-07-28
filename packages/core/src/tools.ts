@@ -29,8 +29,12 @@ import {
 	DebounceSettings,
 } from 'lodash-es';
 
-import { mouse } from 'd3-selection';
-import { Numeric } from 'd3';
+// D3 Imports
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { pointer } from 'd3-selection';
+import { Numeric } from 'd3-array';
 
 // Functions
 export namespace Tools {
@@ -50,14 +54,14 @@ export namespace Tools {
 	export const fromPairs = lodashFromPairs;
 	export const some = lodashSome;
 
-	export function debounceWithD3MousePosition(fn, delay, element) {
+	export function debounceWithD3MousePosition(fn, delay, holder) {
 		var timer = null;
 		return function () {
 			const context = this;
 			const args = arguments;
 
 			//we get the D3 event here
-			context.mousePosition = mouse(element);
+			context.mousePosition = pointer(args[0], holder);
 
 			clearTimeout(timer);
 
@@ -304,13 +308,14 @@ export namespace Tools {
 
 			const defaultTypes = defaultAdditionalItems.map(
 				(item) => item.type
-			)
+			);
 
 			// Get default items in default options but not in provided options
 			const updatedDefaultItems = defaultLegendAdditionalItems.filter(
-				(item) => defaultTypes.includes(item.type) &&
-				!providedTypes.includes(item.type)
-			)
+				(item) =>
+					defaultTypes.includes(item.type) &&
+					!providedTypes.includes(item.type)
+			);
 
 			defaultOptions.legend.additionalItems = updatedDefaultItems;
 

@@ -253,7 +253,7 @@ export class Ruler extends Component {
 					self.showRuler(mousePosition);
 				},
 				debounceThreshold,
-				this.parent.node()
+				holder
 			);
 		}
 
