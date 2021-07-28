@@ -181,12 +181,6 @@ export class Line extends Component {
 	};
 
 	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('path.line')
-			.on('mousemove', null)
-			.on('mouseout', null);
-
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(

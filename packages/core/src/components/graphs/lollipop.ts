@@ -178,12 +178,6 @@ export class Lollipop extends Scatter {
 	};
 
 	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('line.line')
-			.on('mousemove', null)
-			.on('mouseout', null);
-
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(

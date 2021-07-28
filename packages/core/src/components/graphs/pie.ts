@@ -120,20 +120,6 @@ export class Pie extends Component {
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr('d', this.arc);
 
-		// this.services.transitions
-		// 	.getTransitionSelection({
-		// 		selection: allPaths,
-		// 		name: 'pie_slice_enter_update',
-		// 		animate,
-		// 	})
-
-		// .transition(
-		// 	this.services.transitions.getTransition(
-		// 		'pie_slice_enter_update',
-		// 		animate
-		// 	)
-		// )
-
 		allPaths
 			.transition()
 			.call((t) =>
@@ -441,6 +427,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					event,
 					element: select(this),
 					datum,
 				});
@@ -463,6 +450,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
@@ -472,14 +460,15 @@ export class Pie extends Component {
 					event,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -492,6 +481,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

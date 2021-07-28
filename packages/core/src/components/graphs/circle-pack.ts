@@ -254,7 +254,7 @@ export class CirclePack extends Component {
 		const self = this;
 		this.parent
 			.selectAll('circle.node')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -344,26 +344,30 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -375,6 +379,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -385,7 +390,7 @@ export class CirclePack extends Component {
 					hoveredElement,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				const hoveredElement = select(this);
 				const disabled = hoveredElement.classed('non-focal');
 
@@ -437,6 +442,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_CLICK,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

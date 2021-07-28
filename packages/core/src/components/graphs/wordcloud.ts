@@ -212,6 +212,7 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_MOUSEOVER,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
@@ -258,17 +259,18 @@ export class WordCloud extends Component {
 					event,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedHighlight(null);
 
@@ -276,6 +278,7 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

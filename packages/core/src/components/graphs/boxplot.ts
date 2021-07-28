@@ -361,7 +361,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('path.highlight-area')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -374,6 +374,7 @@ export class Boxplot extends Component {
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -414,33 +415,38 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -455,6 +461,7 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -477,7 +484,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -490,6 +497,7 @@ export class Boxplot extends Component {
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -510,18 +518,20 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -529,17 +539,18 @@ export class Boxplot extends Component {
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -552,6 +563,7 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

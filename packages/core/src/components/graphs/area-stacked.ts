@@ -140,13 +140,4 @@ export class StackedArea extends Component {
 			)
 			.attr('opacity', Configuration.area.opacity.selected);
 	};
-
-	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('path.area')
-			.on('mouseover', null)
-			.on('mousemove', null)
-			.on('mouseout', null);
-	}
 }

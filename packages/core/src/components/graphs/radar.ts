@@ -847,6 +847,7 @@ export class Radar extends Component {
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -907,6 +908,7 @@ export class Radar extends Component {
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -945,6 +947,7 @@ export class Radar extends Component {
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

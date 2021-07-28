@@ -394,6 +394,7 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -406,6 +407,7 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -415,17 +417,18 @@ export class Scatter extends Component {
 					event,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -458,6 +461,7 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
