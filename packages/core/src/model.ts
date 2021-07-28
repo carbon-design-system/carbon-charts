@@ -246,9 +246,10 @@ export class ChartModel {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 						datum
 					);
+
 					return (
 						datum[groupMapsTo] === dataGroupName &&
-						datum[domainIdentifier].toString() === key
+						datum[domainIdentifier].toString() === key.toString()
 					);
 				});
 
@@ -259,6 +260,7 @@ export class ChartModel {
 					? correspondingDatum[rangeIdentifier]
 					: null;
 			});
+
 			return correspondingValues;
 		}) as any;
 	}

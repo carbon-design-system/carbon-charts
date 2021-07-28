@@ -58,11 +58,13 @@ export class SimpleBar extends Bar {
 			.merge(bars)
 			.classed('bar', true)
 			.attr('width', this.getBarWidth.bind(this))
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({

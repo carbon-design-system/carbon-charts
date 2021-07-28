@@ -77,11 +77,13 @@ export class GroupedBar extends Bar {
 
 		allBarGroups
 			// Transition
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-group-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-group-update-enter',
+					animate,
+				})
 			)
 			.attr('transform', (label, i) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(
@@ -117,11 +119,13 @@ export class GroupedBar extends Bar {
 		barsEnter
 			.merge(bars)
 			.classed('bar', true)
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({

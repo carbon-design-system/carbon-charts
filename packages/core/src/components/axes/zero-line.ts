@@ -55,9 +55,14 @@ export class ZeroLine extends Component {
 		);
 
 		const line = DOMUtils.appendOrSelect(svg, 'line.domain');
-		line.transition(
-			this.services.transitions.getTransition('zero-line-update', animate)
-		)
+		line.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'zero-line-update',
+					animate,
+				})
+			)
 			.attr('y1', lineCoordinates.y0)
 			.attr('y2', lineCoordinates.y1)
 			.attr('x1', lineCoordinates.x0)

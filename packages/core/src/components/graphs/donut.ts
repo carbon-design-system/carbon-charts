@@ -25,7 +25,10 @@ export class Donut extends Pie {
 			return;
 		}
 
-		const svg = DOMUtils.appendOrSelect(this.getComponentContainer(), 'g.center');
+		const svg = DOMUtils.appendOrSelect(
+			this.getComponentContainer(),
+			'g.center'
+		);
 		const options = this.getOptions();
 
 		// Compute the outer radius needed
@@ -37,11 +40,13 @@ export class Donut extends Pie {
 			.style('font-size', () =>
 				options.donut.center.numberFontSize(radius)
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'donut-figure-enter-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'donut-figure-enter-update',
+					animate,
+				})
 			)
 			.tween('text', function () {
 				return self.centerNumberTween(select(this));

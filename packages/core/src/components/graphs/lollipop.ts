@@ -76,11 +76,13 @@ export class Lollipop extends Scatter {
 					originalClassName: 'line',
 				})
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'lollipop-line-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'lollipop-line-update-enter',
+					animate,
+				})
 			)
 			.style('stroke', (d) =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)

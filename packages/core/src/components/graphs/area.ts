@@ -112,7 +112,9 @@ export class Area extends Component {
 			.selectAll('path.area')
 			.data(groupedData, (group) => group.name);
 
-		const chartMainContainer = select(this.services.domUtils.getMainContainer());
+		const chartMainContainer = select(
+			this.services.domUtils.getMainContainer()
+		);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -220,11 +222,13 @@ export class Area extends Component {
 					})
 				)
 				.style('fill', (group) => self.model.getFillColor(group.name))
-				.transition(
-					this.services.transitions.getTransition(
-						'area-update-enter',
-						animate
-					)
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'area-update-enter',
+						animate,
+					})
 				)
 				.attr(
 					'opacity',
