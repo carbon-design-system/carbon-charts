@@ -107,10 +107,8 @@ export class Pie extends Component {
 			.classed('slice', true)
 			.attr('opacity', 0);
 
-		const t = transition().duration(750);
-
 		// Update styles & position on existing and entering slices
-		enteringPaths
+		const allPaths = enteringPaths
 			.merge(paths)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -120,8 +118,31 @@ export class Pie extends Component {
 				})
 			)
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
-			.attr('d', this.arc)
-			.transition(t)
+			.attr('d', this.arc);
+
+		// this.services.transitions
+		// 	.getTransitionSelection({
+		// 		selection: allPaths,
+		// 		name: 'pie_slice_enter_update',
+		// 		animate,
+		// 	})
+
+		// .transition(
+		// 	this.services.transitions.getTransition(
+		// 		'pie_slice_enter_update',
+		// 		animate
+		// 	)
+		// )
+
+		allPaths
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'pie_slice_enter_update',
+					animate,
+				})
+			)
 			.attr('opacity', 1)
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)

@@ -98,12 +98,16 @@ export class Grid extends Component {
 				`translate(${-this.backdrop.attr('x')}, ${height})`
 			);
 
-		console.log('xGrid', xGrid);
 		if (animate) {
-			const transition = this.services.transitions.getTransition(
-				'grid-update'
-			);
-			g.transition(transition).call(xGrid);
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(xGrid);
 		} else {
 			g.call(xGrid);
 		}

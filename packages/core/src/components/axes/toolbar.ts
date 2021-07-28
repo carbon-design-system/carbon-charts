@@ -1,10 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import {
-	Events,
-	RenderTypes,
-	ToolbarControlTypes,
-} from '../../interfaces';
+import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -222,7 +218,7 @@ export class Toolbar extends Component {
 		}
 	}
 
-	toggleOverflowMenu() {
+	toggleOverflowMenu(event) {
 		if (this.isOverflowMenuOpen()) {
 			// hide overflow menu
 			this.updateOverflowMenu(false);
@@ -329,7 +325,7 @@ export class Toolbar extends Component {
 			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
 							 <circle cx="16" cy="16" r="2"></circle>
 							 <circle cx="16" cy="24" r="2"></circle>`,
-			clickFunction: () => this.toggleOverflowMenu(),
+			clickFunction: (event) => this.toggleOverflowMenu(event),
 		};
 	}
 

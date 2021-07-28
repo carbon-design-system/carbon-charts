@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -134,11 +139,13 @@ export class Line extends Component {
 					.join(',');
 			})
 			// Transition
-			.transition(
-				this.services.transitions.getTransition(
-					'line-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'line-update-enter',
+					animate,
+				})
 			)
 			.attr('opacity', (d) => (d.hidden ? 0 : 1))
 			.attr('d', (group) => {

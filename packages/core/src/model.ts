@@ -209,13 +209,15 @@ export class ChartModel {
 		const { groupMapsTo } = options.data;
 		const displayData = this.getDisplayData(groups);
 
-		const stackKeys = displayData.map((datum) => {
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-				datum
-			);
+		const stackKeys = Tools.removeArrayDuplicates(
+			displayData.map((datum) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					datum
+				);
 
-			return datum[domainIdentifier];
-		});
+				return datum[domainIdentifier];
+			})
+		);
 
 		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
@@ -616,7 +618,9 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const options = this.getOptions();
 
-		const uniqueDataGroups = data.map((datum) => datum[groupMapsTo]);
+		const uniqueDataGroups = Tools.removeArrayDuplicates(
+			data.map((datum) => datum[groupMapsTo])
+		);
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {

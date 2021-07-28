@@ -465,11 +465,12 @@ export class Axis extends Component {
 			const axisRefSelection = axisRef;
 
 			if (animate) {
-				axisRef = axisRef.transition(
-					this.services.transitions.getTransition(
-						'axis-update',
-						animate
-					)
+				axisRef = axisRef.transition().call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'axis-update',
+						animate,
+					})
 				);
 			}
 			axisRef = axisRef.call(axis);
@@ -496,8 +497,13 @@ export class Axis extends Component {
 				axisRef = axisRef.call(axis);
 			} else {
 				axisRef = axisRef
-					.transition(
-						this.services.transitions.getTransition('axis-update')
+					.transition()
+					.call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'axis-update',
+							animate,
+						})
 					)
 					.call(axis);
 			}
