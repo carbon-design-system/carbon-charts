@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -34,29 +36,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -80,6 +59,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -101,10 +135,10 @@ var toArray = function toArray(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 };
 
-var ContentSwitcher =
-/*#__PURE__*/
-function (_mixin) {
+var ContentSwitcher = /*#__PURE__*/function (_mixin) {
   _inherits(ContentSwitcher, _mixin);
+
+  var _super = _createSuper(ContentSwitcher);
   /**
    * Set of content switcher buttons.
    * @extends CreateComponent
@@ -123,12 +157,28 @@ function (_mixin) {
    */
 
 
+  /**
+   * Set of content switcher buttons.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends EventedState
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a set of content switcher buttons.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+   * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+   * @param {string} [options.eventBeforeSelected]
+   *   The name of the custom event fired before a switcher button is selected.
+   *   Cancellation of this event stops selection of content switcher button.
+   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+   */
   function ContentSwitcher(element, options) {
     var _this;
 
     _classCallCheck(this, ContentSwitcher);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ContentSwitcher).call(this, element, options));
+    _this = _super.call(this, element, options);
 
     _this.manage(on(_this.element, 'click', function (event) {
       _this._handleClick(event);
@@ -143,6 +193,11 @@ function (_mixin) {
    */
 
 
+  /**
+   * Handles click on content switcher button set.
+   * If the click is on a content switcher button, activates it.
+   * @param {Event} event The event triggering this method.
+   */
   _createClass(ContentSwitcher, [{
     key: "_handleClick",
     value: function _handleClick(event) {
@@ -171,6 +226,7 @@ function (_mixin) {
 
       var item = _ref.item; // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
 
+      // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
       var itemLink = item.querySelector(this.options.selectorLink);
 
       if (itemLink) {
@@ -239,7 +295,7 @@ function (_mixin) {
 
   }], [{
     key: "options",
-
+    get:
     /**
      * The component options.
      * If `options` is specified in the constructor,
@@ -256,7 +312,7 @@ function (_mixin) {
      *   Cancellation of this event stops selection of content switcher button.
      * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
      */
-    get: function get() {
+    function get() {
       var prefix = settings.prefix;
       return {
         selectorInit: '[data-content-switcher]',

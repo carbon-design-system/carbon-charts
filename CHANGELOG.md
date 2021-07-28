@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.93](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.92...v0.41.93) (2021-07-27)
+
+
+### Performance Improvements
+
+* **download-csv:** revoke object URL after downloading ([#1089](https://github.com/carbon-design-system/carbon-charts/issues/1089)) ([6f001c7](https://github.com/carbon-design-system/carbon-charts/commit/6f001c749feb3747686aa5f5cd612a7cbbe7cefc))
+
+
+
+
+
+## [0.41.92](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.91...v0.41.92) (2021-07-26)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.91](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.90...v0.41.91) (2021-07-22)
+
+
+### Bug Fixes
+
+* **core:** eliminate style conflicts with carbon-components ([#1086](https://github.com/carbon-design-system/carbon-charts/issues/1086)) ([4b11432](https://github.com/carbon-design-system/carbon-charts/commit/4b1143264f683f774d80dc98d4db2b72a7eac449))
+
+
+
+
+
+## [0.41.90](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.89...v0.41.90) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** gauge delta arrow not showing on first render ([#1083](https://github.com/carbon-design-system/carbon-charts/issues/1083)) ([2169d80](https://github.com/carbon-design-system/carbon-charts/commit/2169d80f74557e8172d2846c9897ddf70982a1b1))
+
+
+
+
+
+## [0.41.89](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.88...v0.41.89) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.88](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.87...v0.41.88) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** remove references to `process` in UMD bundles ([#1078](https://github.com/carbon-design-system/carbon-charts/issues/1078)) ([dac2067](https://github.com/carbon-design-system/carbon-charts/commit/dac20679a895c56f03c2a156900d133233e17ded))
+
+
+
+
+
+## [0.41.87](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.86...v0.41.87) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.86](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.85...v0.41.86) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.41.85](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.84...v0.41.85) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** make sure document exists in case using SSR ([#1073](https://github.com/carbon-design-system/carbon-charts/issues/1073)) ([20a78b8](https://github.com/carbon-design-system/carbon-charts/commit/20a78b8bae199b31d5cf459a84002831e79573fd))
+
+
+
+
+
 ## [0.41.84](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.83...v0.41.84) (2021-07-16)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -34,29 +36,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -80,6 +59,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -95,20 +129,20 @@ export default function (ToMix) {
    * Mix-in class to instantiate components events on launcher button.
    * @class InitComponentByLauncher
    */
-  var InitComponentByLauncher =
-  /*#__PURE__*/
-  function (_ToMix) {
+  var InitComponentByLauncher = /*#__PURE__*/function (_ToMix) {
     _inherits(InitComponentByLauncher, _ToMix);
+
+    var _super = _createSuper(InitComponentByLauncher);
 
     function InitComponentByLauncher() {
       _classCallCheck(this, InitComponentByLauncher);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(InitComponentByLauncher).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(InitComponentByLauncher, null, [{
       key: "init",
-
+      value:
       /**
        * `true` suggests that this component is lazily initialized upon an action/event, etc.
        * @type {boolean}
@@ -125,7 +159,7 @@ export default function (ToMix) {
        * @param {string} [options.attribInitTarget] The attribute name in the launcher buttons to find target component.
        * @returns {Handle} The handle to remove the event listener to handle clicking.
        */
-      value: function init() {
+      function init() {
         var _this = this;
 
         var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
@@ -146,6 +180,7 @@ export default function (ToMix) {
               if (launcher) {
                 event.delegateTarget = launcher; // eslint-disable-line no-param-reassign
 
+                // eslint-disable-line no-param-reassign
                 var elements = launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget));
 
                 if (elements.length > 1) {
