@@ -321,6 +321,7 @@ export class CirclePack extends Component {
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement,
 						items: [
 							{
