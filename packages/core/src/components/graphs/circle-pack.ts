@@ -5,7 +5,7 @@ import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
-import { event, select } from 'd3-selection';
+import { select } from 'd3-selection';
 
 import {
 	ColorClassNameTypes,

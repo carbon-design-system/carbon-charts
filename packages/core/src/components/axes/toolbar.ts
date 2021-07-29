@@ -4,7 +4,7 @@ import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
-import { event, select } from 'd3-selection';
+import { select } from 'd3-selection';
 
 export class Toolbar extends Component {
 	type = 'toolbar';
@@ -97,7 +97,7 @@ export class Toolbar extends Component {
 				select(this)
 					.select('button')
 					.on('click', d.clickFunction)
-					.on('keyup', () => {
+					.on('keyup', (event: KeyboardEvent) => {
 						if (
 							(event.key && event.key === 'Enter') ||
 							event.key === ' '
