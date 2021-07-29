@@ -467,20 +467,24 @@ export class Legend extends Component {
 				);
 			});
 
-		svg.selectAll('div.legend-item div.checkbox').on('keyup', function (event, d) {
-			if (event.key && (event.key === 'Enter' || event.key === ' ')) {
-				event.preventDefault();
+		svg.selectAll('div.legend-item div.checkbox').on(
+			'keyup',
+			function (event, d) {
+				if (event.key && (event.key === 'Enter' || event.key === ' ')) {
+					event.preventDefault();
 
-				self.model.toggleDataLabel(d.name);
+					self.model.toggleDataLabel(d.name);
+				}
 			}
-		});
+		);
 
-		svg.selectAll('g.additional-item').on('mouseover', function () {
+		svg.selectAll('g.additional-item').on('mouseover', function (event) {
 			const hoveredItem = select(this);
 
 			const hoveredItemData = hoveredItem.datum() as any;
 			if (hoveredItemData.name.length > truncationThreshold) {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement: hoveredItem,
 					content: hoveredItemData.name,
 				});
