@@ -927,7 +927,6 @@ export class Radar extends Component {
 				});
 			})
 			.on('mouseout', function (event, datum) {
-				console.log('mouseout');
 				const hoveredElement = select(this);
 				const axisLine = self.parent.select(
 					`.x-axes .x-axis-${Tools.kebabCase(datum)}`

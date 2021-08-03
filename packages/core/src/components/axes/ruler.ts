@@ -95,7 +95,9 @@ export class Ruler extends Component {
 				domainValue: this.services.cartesianScales.getDomainValue(d),
 				originalData: d,
 			}))
-			.filter((d) => pointIsWithinThreshold(d.domainValue, mouseCoordinate));
+			.filter((d) =>
+				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
+			);
 
 		if (
 			this.pointsWithinLine &&
@@ -239,7 +241,8 @@ export class Ruler extends Component {
 		const displayData = this.model.getDisplayData();
 
 		let mouseMoveCallback = function (event) {
-			const pos = pointer(event, holder);
+			const pos = pointer(event, self.parent.node());
+
 			self.showRuler(pos);
 		};
 
