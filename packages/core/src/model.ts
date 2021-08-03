@@ -215,7 +215,7 @@ export class ChartModel {
 					datum
 				);
 
-				return datum[domainIdentifier];
+				return datum[domainIdentifier].toString();
 			})
 		);
 
@@ -249,7 +249,7 @@ export class ChartModel {
 
 					return (
 						datum[groupMapsTo] === dataGroupName &&
-						datum[domainIdentifier].toString() === key.toString()
+						datum[domainIdentifier].toString() === key
 					);
 				});
 
