@@ -465,11 +465,12 @@ export class Axis extends Component {
 			const axisRefSelection = axisRef;
 
 			if (animate) {
-				axisRef = axisRef.transition(
-					this.services.transitions.getTransition(
-						'axis-update',
-						animate
-					)
+				axisRef = axisRef.transition().call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'axis-update',
+						animate,
+					})
 				);
 			}
 			axisRef = axisRef.call(axis);
@@ -496,8 +497,13 @@ export class Axis extends Component {
 				axisRef = axisRef.call(axis);
 			} else {
 				axisRef = axisRef
-					.transition(
-						this.services.transitions.getTransition('axis-update')
+					.transition()
+					.call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'axis-update',
+							animate,
+						})
 					)
 					.call(axis);
 			}
@@ -699,11 +705,12 @@ export class Axis extends Component {
 		const self = this;
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEOVER,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
@@ -714,16 +721,18 @@ export class Axis extends Component {
 					datum.length > truncationThreshold
 				) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement: select(this),
 						content: datum,
 					});
 				}
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEMOVE,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
@@ -732,22 +741,27 @@ export class Axis extends Component {
 					axisScaleType === ScaleTypes.LABELS &&
 					datum.length > truncationThreshold
 				) {
-					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
 				}
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
+					event,
 					element: select(this),
 					datum,
 				});
+
 				if (axisScaleType === ScaleTypes.LABELS) {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				}

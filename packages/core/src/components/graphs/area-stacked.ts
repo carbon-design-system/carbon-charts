@@ -100,11 +100,13 @@ export class StackedArea extends Component {
 			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
-			.transition(
-				this.services.transitions.getTransition(
-					'area-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'area-update-enter',
+					animate,
+				})
 			)
 			.attr('opacity', Configuration.area.opacity.selected)
 			.attr('d', this.areaGenerator);
@@ -140,13 +142,4 @@ export class StackedArea extends Component {
 			)
 			.attr('opacity', Configuration.area.opacity.selected);
 	};
-
-	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('path.area')
-			.on('mouseover', null)
-			.on('mousemove', null)
-			.on('mouseout', null);
-	}
 }

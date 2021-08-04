@@ -249,8 +249,13 @@ export class Scatter extends Component {
 					filled
 				);
 			})
-			.transition(
-				transitions.getTransition('scatter-update-enter', animate)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'scatter-update-enter',
+					animate,
+				})
 			)
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
@@ -353,7 +358,7 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -379,6 +384,7 @@ export class Scatter extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [datum],
 					additionalItems: self.getTooltipAdditionalItems(datum),
@@ -388,36 +394,41 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -450,6 +461,7 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

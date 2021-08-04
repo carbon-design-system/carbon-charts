@@ -62,11 +62,13 @@ export class Meter extends Component {
 					originalClassName: className,
 				})
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'meter-bar-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'meter-bar-update',
+					animate,
+				})
 			)
 			.attr('width', (d) =>
 				maximumBarWidth ? xScale(100) : xScale(d.value)
@@ -98,11 +100,13 @@ export class Meter extends Component {
 			.merge(peak)
 			.attr('y1', 0)
 			.attr('y2', Tools.getProperty(options, 'meter', 'height'))
-			.transition(
-				this.services.transitions.getTransition(
-					'peak-line-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'peak-line-update',
+					animate,
+				})
 			)
 			.attr('x1', (d) => xScale(d))
 			.attr('x2', (d) => xScale(d))

@@ -13,7 +13,7 @@ import {
 import * as Configuration from '../../configuration';
 
 // D3 Imports
-import { select, event } from 'd3-selection';
+import { select } from 'd3-selection';
 
 export class Legend extends Component {
 	type = 'legend';
@@ -70,7 +70,7 @@ export class Legend extends Component {
 			'legend',
 			'clickable'
 		);
-		svg.classed('clickable', legendClickable);
+		svg.classed('clickable', legendClickable && dataGroups.length > 1);
 
 		const checkboxRadius = Configuration.legend.checkbox.radius;
 
@@ -421,7 +421,7 @@ export class Legend extends Component {
 		);
 
 		svg.selectAll('div.legend-item')
-			.on('mouseover', function () {
+			.on('mouseover', function (event) {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this),
 				});
@@ -432,13 +432,16 @@ export class Legend extends Component {
 				const hoveredItemData = hoveredItem.datum() as any;
 				if (hoveredItemData.name.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement: hoveredItem,
 						content: hoveredItemData.name,
 					});
 				}
 			})
-			.on('mousemove', function () {
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			.on('mousemove', function (event) {
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
 			.on('click', function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
@@ -464,20 +467,24 @@ export class Legend extends Component {
 				);
 			});
 
-		svg.selectAll('div.legend-item div.checkbox').on('keyup', function (d) {
-			if (event.key && (event.key === 'Enter' || event.key === ' ')) {
-				event.preventDefault();
+		svg.selectAll('div.legend-item div.checkbox').on(
+			'keyup',
+			function (event, d) {
+				if (event.key && (event.key === 'Enter' || event.key === ' ')) {
+					event.preventDefault();
 
-				self.model.toggleDataLabel(d.name);
+					self.model.toggleDataLabel(d.name);
+				}
 			}
-		});
+		);
 
-		svg.selectAll('g.additional-item').on('mouseover', function () {
+		svg.selectAll('g.additional-item').on('mouseover', function (event) {
 			const hoveredItem = select(this);
 
 			const hoveredItemData = hoveredItem.datum() as any;
 			if (hoveredItemData.name.length > truncationThreshold) {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement: hoveredItem,
 					content: hoveredItemData.name,
 				});

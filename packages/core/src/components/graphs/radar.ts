@@ -840,13 +840,14 @@ export class Radar extends Component {
 		// events on x axes rects
 		this.parent
 			.selectAll('.x-axes-rect > rect')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -883,6 +884,7 @@ export class Radar extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: itemsToHighlight
 						.filter(
@@ -899,28 +901,32 @@ export class Radar extends Component {
 						})),
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				const axisLine = self.parent.select(
 					`.x-axes .x-axis-${Tools.kebabCase(datum)}`
@@ -933,12 +939,14 @@ export class Radar extends Component {
 				axisLine
 					.classed('hovered', false)
 					.attr('stroke-dasharray', '0');
+
 				dots.classed('hovered', false).attr('opacity', 0).attr('r', 0);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
