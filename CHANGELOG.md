@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.96](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.95...v0.41.96) (2021-08-04)
+
+
+### Bug Fixes
+
+* **core:** optimize fullscreen logic ([#1097](https://github.com/carbon-design-system/carbon-charts/issues/1097)) ([d4ee1c9](https://github.com/carbon-design-system/carbon-charts/commit/d4ee1c9da6f37516b2796b69af1b7a429deb41b7))
+
+
+
+
+
 ## [0.41.95](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.94...v0.41.95) (2021-08-02)
 
 
