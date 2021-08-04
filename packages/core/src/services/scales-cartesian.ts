@@ -559,7 +559,9 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return displayData.map((d) => d[mapsTo]);
+			return Tools.removeArrayDuplicates(
+				displayData.map((d) => d[mapsTo])
+			);
 		}
 
 		// Get the extent of the domain
