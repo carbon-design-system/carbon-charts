@@ -88,11 +88,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-verticalstartline',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-verticalstartline',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
@@ -118,11 +120,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-verticalendline',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-verticalendline',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
@@ -155,11 +159,13 @@ export class Boxplot extends Component {
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-quartiles',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-quartiles',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -221,11 +227,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-startingwhisker',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-startingwhisker',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -255,11 +263,13 @@ export class Boxplot extends Component {
 				})
 			)
 			.attr('stroke-width', 2)
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-median',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-median',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -289,11 +299,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-endingwhisker',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-endingwhisker',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
