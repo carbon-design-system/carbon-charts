@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "../../globals/js/settings", "../../globals/js/misc/mixin", "../../globals/js/mixins/create-component", "../../globals/js/mixins/init-component-by-search", "../../globals/js/mixins/handles", "../../globals/js/misc/event-matches", "../../globals/js/misc/on"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.settings, global.mixin, global.createComponent, global.initComponentBySearch, global.handles, global.eventMatches, global.on);
     global.structuredList = mod.exports;
   }
-})(this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -29,20 +45,6 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
-  }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -65,29 +67,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
   }
 
   function _inherits(subClass, superClass) {
@@ -114,14 +93,69 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
   var toArray = function toArray(arrayLike) {
     return Array.prototype.slice.call(arrayLike);
   };
 
-  var StructuredList =
-  /*#__PURE__*/
-  function (_mixin) {
+  var StructuredList = /*#__PURE__*/function (_mixin) {
     _inherits(StructuredList, _mixin);
+
+    var _super = _createSuper(StructuredList);
     /**
      * StructuredList
      * @extends CreateComponent
@@ -134,12 +168,22 @@
      */
 
 
+    /**
+     * StructuredList
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
+     * @extends Handles
+     * @param {HTMLElement} element The root element of tables
+     * @param {object} [options] the... options
+     * @param {string} [options.selectorInit] selector initialization
+     * @param {string} [options.selectorRow] css selector for selected row
+     */
     function StructuredList(element, options) {
       var _this;
 
       _classCallCheck(this, StructuredList);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(StructuredList).call(this, element, options));
+      _this = _super.call(this, element, options);
 
       _this.manage((0, _on.default)(_this.element, 'keydown', function (evt) {
         if (evt.which === 37 || evt.which === 38 || evt.which === 39 || evt.which === 40) {
@@ -212,6 +256,7 @@
 
         evt.preventDefault(); // prevent spacebar from scrolling page
 
+        // prevent spacebar from scrolling page
         var selectedRow = (0, _eventMatches.default)(evt, this.options.selectorRow);
         toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(function (row) {
           return row.classList.remove(_this3.options.classActive);
@@ -231,6 +276,7 @@
 
         evt.preventDefault(); // prevent arrow keys from scrolling
 
+        // prevent arrow keys from scrolling
         var selectedRow = (0, _eventMatches.default)(evt, this.options.selectorRow);
 
         var direction = this._direction(evt);

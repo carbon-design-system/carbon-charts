@@ -135,10 +135,8 @@ export class Modal extends Component {
 				<p class="bx--modal-header__label bx--type-delta">Tabular representation</p>
 				<p class="bx--modal-header__heading bx--type-beta">${options.title}</p>
 				<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
-					<svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-						<title>Close Modal</title>
-						<path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
-						/>
+					<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Close" width="20" height="20" viewBox="0 0 32 32" role="img" class="bx--modal-close__icon">
+						<path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"></path>
 					</svg>
 				</button>
 			</div>
@@ -234,7 +232,6 @@ export class Modal extends Component {
 					</tbody>
 				</table>
 			</div>
-			<div class="bx--modal-content--overflow-indicator"></div>
 			<div class="bx--modal-footer">
 			  <div class="${settings.prefix}--${chartprefix}-modal-footer-spacer"></div>
 			  <button class="bx--btn bx--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>

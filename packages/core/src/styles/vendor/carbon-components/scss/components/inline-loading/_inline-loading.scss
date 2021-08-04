@@ -19,6 +19,7 @@
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
+    min-height: 2rem;
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
@@ -26,28 +27,33 @@
     }
 
     .#{$prefix}--loading__stroke {
-      stroke-dashoffset: 99;
+      stroke-dashoffset: $loading--small__gap;
     }
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
+
     color: $text-02;
   }
 
   .#{$prefix}--inline-loading__animation {
     position: relative;
-    width: 2rem;
-    height: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
+    fill: $support-02;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      position: absolute;
+      top: 0.75rem;
+      width: 0.75rem;
+    }
 
     &[hidden] {
       display: none;
@@ -55,15 +61,25 @@
   }
 
   .#{$prefix}--inline-loading__checkmark {
+    animation-duration: 250ms;
+    animation-fill-mode: forwards;
+    animation-name: stroke;
     fill: none;
     stroke: $interactive-04;
-    transform-origin: 50% 50%;
-    stroke-width: 1.8;
     stroke-dasharray: 12;
     stroke-dashoffset: 12;
-    animation-name: stroke;
-    animation-duration: 0.25s;
-    animation-fill-mode: forwards;
+    stroke-width: 1.8;
+    transform-origin: 50% 50%;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $support-01;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
@@ -79,8 +95,8 @@
 
     .#{$prefix}--inline-loading__checkmark {
       animation: none;
-      stroke-dashoffset: 0;
       stroke-dasharray: 0;
+      stroke-dashoffset: 0;
     }
   }
 }
