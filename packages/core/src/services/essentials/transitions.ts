@@ -25,7 +25,6 @@ export class Transitions extends Service {
 	}
 
 	getTransition(
-		selection?: Selection<any, any, any, any>,
 		name?: string,
 		animate?: boolean
 	): Transition<any, any, any, any> {
@@ -34,7 +33,7 @@ export class Transitions extends Service {
 		}
 
 		// @ts-ignore
-		const t: any = transition(selection, name).duration(
+		const t: any = transition(name).duration(
 			Tools.getProperty(Configuration.transitions, name, 'duration') ||
 				Configuration.transitions.default.duration
 		);

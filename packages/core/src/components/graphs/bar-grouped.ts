@@ -49,12 +49,19 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getComponentContainer({ withinChartClip: true });
 
-		const allDataLabels = displayData.map((datum) => {
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-				datum
-			);
-			return datum[domainIdentifier];
-		});
+		const allDataLabels = Tools.removeArrayDuplicates(
+			displayData.map((datum) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					datum
+				);
+
+				if (datum[domainIdentifier].toString) {
+					return datum[domainIdentifier].toString();
+				}
+
+				return datum[domainIdentifier];
+			})
+		);
 
 		// Update data on bar groups
 		const barGroups = svg
