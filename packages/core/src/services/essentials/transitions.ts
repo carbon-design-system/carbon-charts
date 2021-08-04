@@ -16,7 +16,6 @@ interface setupTransitionConfigs {
 
 export class Transitions extends Service {
 	pendingTransitions = {};
-	// transitions: Transition<any, any, any, any>[];
 
 	init() {
 		this.services.events.addEventListener(Events.Model.UPDATE, () => {
@@ -25,7 +24,7 @@ export class Transitions extends Service {
 	}
 
 	getTransition(
-		name?: string,
+		name: string,
 		animate?: boolean
 	): Transition<any, any, any, any> {
 		if (this.model.getOptions().animations === false || animate === false) {
