@@ -73,7 +73,7 @@ new ${chartComponent}(chartHolder, {
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'carbon-components': carbonComponentsVersion,
-			d3: '5.9.2',
+			d3: '7.0.0',
 		},
 		devDependencies: {
 			'parcel-bundler': '^1.6.1',
