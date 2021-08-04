@@ -32,7 +32,6 @@ export class Transitions extends Service {
 			return this.getInstantTransition(name);
 		}
 
-		// @ts-ignore
 		const t: any = transition(name).duration(
 			Tools.getProperty(Configuration.transitions, name, 'duration') ||
 				Configuration.transitions.default.duration
