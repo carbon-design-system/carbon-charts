@@ -6,7 +6,6 @@ import { Tools } from '../../tools';
 
 // D3 Imports
 import { Transition, transition } from 'd3-transition';
-import { Selection } from 'd3-selection';
 
 interface setupTransitionConfigs {
 	transition?: any; // d3 types are causing issues here, hence why using `any`
