@@ -1,4 +1,4 @@
-import { timeFormat } from 'd3';
+import { timeFormat } from 'd3-time-format';
 
 export const lineData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
@@ -375,6 +375,30 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	},
 	legend: {
 		clickable: false,
+	},
+};
+
+export const lineLogAxisData = [
+	{ group: 'Dataset 1', date: new Date(2019, 11, 30), value: 300100 },
+	{ group: 'Dataset 1', date: new Date(2019, 11, 31), value: 235000 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 1), value: 153100 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 2), value: 142300 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 3), value: 82300 },
+];
+
+export const lineLogAxisOptions = {
+	title: 'Log Axis',
+	width: '400px',
+	axes: {
+		bottom: {
+			scaleType: 'time',
+			mapsTo: 'date',
+		},
+		left: {
+			mapsTo: 'value',
+			scaleType: 'log',
+			includeZero: false,
+		},
 	},
 };
 

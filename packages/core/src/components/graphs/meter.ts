@@ -2,24 +2,26 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale';
 
 export class Meter extends Component {
 	type = 'meter';
+	renderType = RenderTypes.SVG;
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
+
 		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis
@@ -60,11 +62,13 @@ export class Meter extends Component {
 					originalClassName: className,
 				})
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'meter-bar-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'meter-bar-update',
+					animate,
+				})
 			)
 			.attr('width', (d) =>
 				maximumBarWidth ? xScale(100) : xScale(d.value)
@@ -96,11 +100,13 @@ export class Meter extends Component {
 			.merge(peak)
 			.attr('y1', 0)
 			.attr('y2', Tools.getProperty(options, 'meter', 'height'))
-			.transition(
-				this.services.transitions.getTransition(
-					'peak-line-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'peak-line-update',
+					animate,
+				})
 			)
 			.attr('x1', (d) => xScale(d))
 			.attr('x2', (d) => xScale(d))

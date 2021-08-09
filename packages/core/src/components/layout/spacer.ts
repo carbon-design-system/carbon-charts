@@ -1,22 +1,19 @@
 // Internal Imports
 import { Component } from '../component';
-import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 
 export class Spacer extends Component {
 	type = 'spacer';
 
 	render() {
-		DOMUtils.appendOrSelect(this.getContainerSVG(), 'rect')
-			.attr('x', 0)
-			.attr('y', 0)
-			.attr(
+		this.getComponentContainer()
+			.style(
 				'width',
-				this.configs.size || Configuration.spacers.default.size
+				`${this.configs.size || Configuration.spacers.default.size}px`
 			)
-			.attr(
+			.style(
 				'height',
-				this.configs.size || Configuration.spacers.default.size
+				`${this.configs.size || Configuration.spacers.default.size}px`
 			)
 			.attr('opacity', 0);
 	}

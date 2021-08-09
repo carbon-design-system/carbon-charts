@@ -5,11 +5,13 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 export class Lollipop extends Scatter {
 	type = 'lollipop';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const { events } = this.services;
@@ -27,7 +29,7 @@ export class Lollipop extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 
@@ -74,11 +76,13 @@ export class Lollipop extends Scatter {
 					originalClassName: 'line',
 				})
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'lollipop-line-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'lollipop-line-update-enter',
+					animate,
+				})
 			)
 			.style('stroke', (d) =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
@@ -176,12 +180,6 @@ export class Lollipop extends Scatter {
 	};
 
 	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('line.line')
-			.on('mousemove', null)
-			.on('mouseout', null);
-
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(

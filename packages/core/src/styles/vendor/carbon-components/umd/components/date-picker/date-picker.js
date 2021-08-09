@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "flatpickr", "../../globals/js/settings", "../../globals/js/misc/mixin", "../../globals/js/mixins/create-component", "../../globals/js/mixins/init-component-by-search", "../../globals/js/mixins/handles", "../../globals/js/misc/on"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.flatpickr, global.settings, global.mixin, global.createComponent, global.initComponentBySearch, global.handles, global.on);
     global.datePicker = mod.exports;
   }
-})(this, function (_exports, _flatpickr, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _on) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _flatpickr, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _on) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -29,20 +45,6 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
-  }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -65,22 +67,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
   }
 
   function _get(target, property, receiver) {
@@ -113,13 +99,6 @@
     return object;
   }
 
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -144,26 +123,94 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
   function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
 
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
 
   function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
   function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
 
-      return arr2;
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
     }
+
+    return arr2;
   }
   /* eslint no-underscore-dangle: [2, { "allow": ["_input", "_updateClassNames", "_updateInputFields"], "allowAfterThis": true }] */
   // `this.options` create-component mix-in creates prototype chain
@@ -257,16 +304,17 @@
 
       return {
         onMonthChange: updateCurrentMonth,
+        onValueUpdate: updateCurrentMonth,
         onOpen: updateCurrentMonth,
         onReady: [setupElements, updateCurrentMonth, register]
       };
     };
   };
 
-  var DatePicker =
-  /*#__PURE__*/
-  function (_mixin) {
+  var DatePicker = /*#__PURE__*/function (_mixin) {
     _inherits(DatePicker, _mixin);
+
+    var _super = _createSuper(DatePicker);
     /**
      * DatePicker.
      * @extends CreateComponent
@@ -276,12 +324,19 @@
      */
 
 
+    /**
+     * DatePicker.
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
+     * @extends Handles
+     * @param {HTMLElement} element The element working as an date picker.
+     */
     function DatePicker(element, options) {
       var _this;
 
       _classCallCheck(this, DatePicker);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(DatePicker).call(this, element, options));
+      _this = _super.call(this, element, options);
 
       _this._handleFocus = function () {
         if (_this.calendar) {
@@ -313,9 +368,11 @@
           _this._rangeInput = rangeInput; // An attempt to open the date picker dropdown when this component gets focus,
           // and close the date picker dropdown when this component loses focus
 
+          // An attempt to open the date picker dropdown when this component gets focus,
+          // and close the date picker dropdown when this component loses focus
           var w = doc.defaultView;
-          var hasFocusin = 'onfocusin' in w;
-          var hasFocusout = 'onfocusout' in w;
+          var hasFocusin = ('onfocusin' in w);
+          var hasFocusout = ('onfocusout' in w);
           var focusinEventName = hasFocusin ? 'focusin' : 'focus';
           var focusoutEventName = hasFocusout ? 'focusout' : 'blur';
 
@@ -339,6 +396,7 @@
         var calendar = new _flatpickr.default(date, Object.assign(flattenOptions(_this.options), {
           allowInput: true,
           mode: type,
+          disableMobile: true,
           positionElement: type === 'range' && _this.element.querySelector(_this.options.selectorDatePickerInputFrom),
           onClose: function onClose(selectedDates) {
             // An attempt to disable Flatpickr's focus tracking system,
@@ -473,6 +531,8 @@
         // as FlatPicker attempts to take over `keydown` event handler on `document` to run on the date picker dropdown.
 
 
+        // An attempt to temporarily set the `<input>` being edited as the one FlatPicker manages,
+        // as FlatPicker attempts to take over `keydown` event handler on `document` to run on the date picker dropdown.
         _this.manage((0, _on.default)(inputField, 'keydown', function (evt) {
           var origInput = _this.calendar._input;
           _this.calendar._input = evt.target;
@@ -558,6 +618,11 @@
      */
 
 
+    /**
+     * Opens the date picker dropdown when this component gets focus.
+     * Used only for range mode for now.
+     * @private
+     */
     _createClass(DatePicker, [{
       key: "_rightArrowHTML",
       value: function _rightArrowHTML() {
@@ -581,6 +646,7 @@
           } catch (err) {} // eslint-disable-line no-empty
 
 
+          // eslint-disable-line no-empty
           this.calendar = null;
         }
 

@@ -4,6 +4,9 @@ $charts-prefix: 'cc';
 $carbon-dataviz-alert: #b28600;
 $carbon-dataviz-yellow-10: #fcf4d6;
 
+$css--reset: false;
+$css--default-type: false;
+
 // Carbon imports
 @import './vendor/@carbon/colors/scss/colors';
 @import './vendor/@carbon/type/scss/prefix';
@@ -22,6 +25,6 @@ $carbon-dataviz-yellow-10: #fcf4d6;
 @import './type';
 @import './chart-holder';
 
-svg.#{$prefix}--#{$charts-prefix}--chart-svg {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;
 }

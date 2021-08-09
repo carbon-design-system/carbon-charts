@@ -12,7 +12,6 @@ import { Tools } from '../tools';
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';
 import { extent, sum } from 'd3-array';
-import { map, values } from 'd3-collection';
 
 // Misc
 import {
@@ -117,6 +116,29 @@ export class CartesianScales extends Service {
 	getRangeAxisOptions() {
 		const rangeAxisPosition = this.getRangeAxisPosition();
 		return this.getAxisOptions(rangeAxisPosition);
+	}
+
+	getScaleLabel(position: AxisPositions) {
+		const options = this.getAxisOptions(position);
+		let title = options.title;
+		if (!title) {
+			if (
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
+			) {
+				return 'x-value';
+			}
+			return 'y-value';
+		}
+		return title;
+	}
+
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
+	}
+
+	getRangeLabel() {
+		return this.getScaleLabel(this.getRangeAxisPosition());
 	}
 
 	update(animate = true) {
@@ -375,7 +397,8 @@ export class CartesianScales extends Service {
 		} else {
 			return addSpacingToContinuousDomain(
 				domain,
-				Configuration.axis.paddingRatio
+				Configuration.axis.paddingRatio,
+				axisOptions.scaleType
 			);
 		}
 	}
@@ -536,7 +559,9 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return map(displayData, (d) => d[mapsTo]).keys();
+			return Tools.removeArrayDuplicates(
+				displayData.map((d) => d[mapsTo])
+			);
 		}
 
 		// Get the extent of the domain
@@ -579,7 +604,8 @@ export class CartesianScales extends Service {
 			);
 			const stackedValues = dataValuesGroupedByKeys.map((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues;
-				return sum(values(numericalValues) as number[]);
+
+				return sum(Object.values(numericalValues) as number[]);
 			});
 
 			allDataValues = [
@@ -605,13 +631,18 @@ export class CartesianScales extends Service {
 			});
 		}
 
-		if (scaleType !== ScaleTypes.TIME && includeZero) {
+		// Time can never be 0 and log of base 0 is -Infinity
+		if (
+			scaleType !== ScaleTypes.TIME &&
+			scaleType !== ScaleTypes.LOG &&
+			includeZero
+		) {
 			allDataValues.push(0);
 		}
 
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
-			thresholds.forEach(threshold => {
+			thresholds.forEach((threshold) => {
 				const thresholdValue = Tools.getProperty(threshold, 'value');
 				if (thresholdValue !== null) allDataValues.push(thresholdValue);
 			});
@@ -779,7 +810,8 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 
 function addSpacingToContinuousDomain(
 	[lower, upper]: number[],
-	paddingRatio: number
+	paddingRatio: number,
+	scaleType?: ScaleTypes
 ) {
 	const domainLength = upper - lower;
 	const padding = domainLength * paddingRatio;
@@ -787,7 +819,17 @@ function addSpacingToContinuousDomain(
 	// If padding crosses 0, keep 0 as new upper bound
 	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
 	// If padding crosses 0, keep 0 as new lower bound
-	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	// Log of base 0 or a negative number is -Infinity
+	if (scaleType === ScaleTypes.LOG && newLower <= 0) {
+		if (lower <= 0) {
+			throw Error(
+				'Data must have values greater than 0 if log scale type is used.'
+			);
+		}
+		newLower = lower;
+	}
 
 	return [newLower, newUpper];
 }

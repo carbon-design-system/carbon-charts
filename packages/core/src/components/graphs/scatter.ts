@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -8,6 +13,8 @@ import { select, Selection } from 'd3-selection';
 
 export class Scatter extends Component {
 	type = 'scatter';
+	renderType = RenderTypes.SVG;
+
 	scatterData: any;
 
 	init() {
@@ -46,8 +53,8 @@ export class Scatter extends Component {
 		if (zoomDomain !== undefined) {
 			return data.filter(
 				(d) =>
-					d[domainIdentifier].getTime() > zoomDomain[0].getTime() &&
-					d[domainIdentifier].getTime() < zoomDomain[1].getTime()
+					d[domainIdentifier].getTime() >= zoomDomain[0].getTime() &&
+					d[domainIdentifier].getTime() <= zoomDomain[1].getTime()
 			);
 		}
 		return data;
@@ -95,7 +102,7 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -242,8 +249,13 @@ export class Scatter extends Component {
 					filled
 				);
 			})
-			.transition(
-				transitions.getTransition('scatter-update-enter', animate)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'scatter-update-enter',
+					animate,
+				})
 			)
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
@@ -335,13 +347,18 @@ export class Scatter extends Component {
 			.attr('opacity', 1);
 	};
 
+	// This is extended in bubble graphs
+	getTooltipAdditionalItems(datum) {
+		return null;
+	}
+
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = self.getOptions().data;
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -366,65 +383,52 @@ export class Scatter extends Component {
 					.classed('unfilled', false);
 
 				// Show tooltip
-				const bubbleOptions = Tools.getProperty(
-					self.getOptions(),
-					'bubble'
-				);
-
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [datum],
-					additionalItems: [
-						{
-							label: Tools.getProperty(
-								bubbleOptions,
-								'radiusLabel'
-							),
-							value:
-								datum[
-									Tools.getProperty(
-										bubbleOptions,
-										'radiusMapsTo'
-									)
-								],
-						},
-					],
+					additionalItems: self.getTooltipAdditionalItems(datum),
 				});
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -433,31 +437,31 @@ export class Scatter extends Component {
 					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
 						datum
 					);
+					const isFilled = self.model.getIsFilled(
+						datum[groupMapsTo],
+						datum[domainIdentifier],
+						datum,
+						filled
+					);
 					hoveredElement
-						.classed(
-							'unfilled',
-							!self.model.getIsFilled(
-								datum[groupMapsTo],
-								datum[domainIdentifier],
-								datum,
-								filled
-							)
-						)
-						.style('fill', (d) =>
-							filled
-								? self.model.getFillColor(
-										d[groupMapsTo],
-										d[domainIdentifier],
-										d
-								  )
-								: null
-						);
+						.classed('unfilled', !isFilled)
+						.style('fill', (d) => {
+							if (isFilled || filled) {
+								return self.model.getFillColor(
+									d[groupMapsTo],
+									d[domainIdentifier],
+									d
+								);
+							}
+							return null;
+						});
 				}
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

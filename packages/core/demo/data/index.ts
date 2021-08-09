@@ -93,6 +93,11 @@ const utilityDemoGroups = [
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart,
 			},
+			{
+				options: lineDemos.lineLogAxisOptions,
+				data: lineDemos.lineLogAxisData,
+				chartType: chartTypes.LineChart,
+			},
 		],
 	},
 	{
@@ -198,6 +203,11 @@ const utilityDemoGroups = [
 				options: lineDemos.lineCustomColorOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
+			},
+			{
+				options: circlePackDemos.circlePackTwoLevelCustomColorsOptions,
+				data: circlePackDemos.circlePackTwoLevelData,
+				chartType: chartTypes.CirclePackChart,
 			},
 		],
 	},

@@ -8,9 +8,10 @@
 	"command": {
 		"publish": {
 			"ignoreChanges": [
-				"packages/*/demo"
+				"packages/*/demo",
+				"**/*.md"
 			]
 		}
 	},
-	"version": "0.41.67"
+	"version": "0.41.101"
 }

@@ -8,6 +8,7 @@ import {
 	Events,
 	Alignments,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
@@ -15,6 +16,7 @@ import * as Configuration from '../../configuration';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
+import { transition } from 'd3-transition';
 
 // Pie slice tween function
 function arcTween(a, arcFunc) {
@@ -28,6 +30,7 @@ function arcTween(a, arcFunc) {
 
 export class Pie extends Component {
 	type = 'pie';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs
 	// So that addEventListeners()
@@ -57,7 +60,7 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
@@ -79,13 +82,11 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort(null)
+			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
 			.padAngle(Configuration.pie.padAngle);
 
-		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(displayData).sort(
-			(a: any, b: any) => a.index - b.index
-		);
+		// Add data to pie layout
+		const pieLayoutData = pieLayout(displayData);
 
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, 'g.slices')
@@ -107,7 +108,7 @@ export class Pie extends Component {
 			.attr('opacity', 0);
 
 		// Update styles & position on existing and entering slices
-		enteringPaths
+		const allPaths = enteringPaths
 			.merge(paths)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -117,12 +118,16 @@ export class Pie extends Component {
 				})
 			)
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
-			.attr('d', this.arc)
-			.transition(
-				this.services.transitions.getTransition(
-					'pie-slice-enter-update',
-					animate
-				)
+			.attr('d', this.arc);
+
+		allPaths
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'pie_slice_enter_update',
+					animate,
+				})
 			)
 			.attr('opacity', 1)
 			// a11y
@@ -271,7 +276,7 @@ export class Pie extends Component {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
-		svg.attr('transform', `translate(${pieTranslateX}, ${pieTranslateY})`);
+		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -279,7 +284,7 @@ export class Pie extends Component {
 
 	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			'g.callouts'
 		)
 			.attr('role', Roles.GROUP)
@@ -408,7 +413,7 @@ export class Pie extends Component {
 		const self = this;
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -422,6 +427,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					event,
 					element: select(this),
 					datum,
 				});
@@ -429,6 +435,7 @@ export class Pie extends Component {
 				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -438,26 +445,30 @@ export class Pie extends Component {
 					],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -470,6 +481,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
@@ -486,6 +498,7 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
+
 		const options = this.getOptions();
 		const radius: number = Math.min(width, height) / 2;
 		const renderLabels = options.pie.labels.enabled;

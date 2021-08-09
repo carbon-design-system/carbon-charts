@@ -6,12 +6,14 @@ import {
 	LayoutDirection,
 	LegendOrientations,
 	Events as ChartEvents,
+	RenderTypes,
 } from './interfaces';
 
 // Misc
-import { ChartModel } from './model';
+import { ChartModel } from './model/model';
 import {
 	Component,
+	Modal,
 	Title,
 	Legend,
 	LayoutComponent,
@@ -26,6 +28,7 @@ import {
 	CanvasZoom,
 	DOMUtils,
 	Events,
+	Files,
 	GradientUtils,
 	Transitions,
 } from './services/index';
@@ -34,6 +37,7 @@ export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
+		files: Files,
 		events: Events,
 		gradientUtils: GradientUtils,
 		transitions: Transitions,
@@ -44,7 +48,11 @@ export class Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
-	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
+	init(
+		holder: Element,
+		chartConfigs: ChartConfig<BaseChartOptions>,
+		options?: BaseChartOptions
+	) {
 		// Store the holder in the model
 		this.model.set({ holder }, { skipUpdate: true });
 
@@ -62,6 +70,10 @@ export class Chart {
 			const animate = !!Tools.getProperty(e, 'detail', 'animate');
 			this.update(animate);
 		});
+
+		if (options) {
+			this.model.setOptions(options);
+		}
 
 		// Set model data & options
 		this.model.setData(chartConfigs.data);
@@ -123,23 +135,20 @@ export class Chart {
 		this.model.set({ destroyed: true }, { skipUpdate: true });
 	}
 
-	protected getChartComponents(graphFrameComponents: any[]) {
+	protected getChartComponents(
+		graphFrameComponents: any[],
+		graphFrameRenderType = RenderTypes.SVG
+	) {
 		const titleComponent = {
 			id: 'title',
 			components: [new Title(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const legendComponent = {
 			id: 'legend',
 			components: [new Legend(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.PREFERRED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		// if canvas zoom is enabled
@@ -158,10 +167,8 @@ export class Chart {
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: graphFrameRenderType,
 		};
 
 		const isLegendEnabled =
@@ -197,10 +204,7 @@ export class Chart {
 		const legendSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const fullFrameComponent = {
@@ -219,10 +223,7 @@ export class Chart {
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		// Add chart title if it exists
@@ -233,10 +234,7 @@ export class Chart {
 			const titleSpacerComponent = {
 				id: 'spacer',
 				components: [new Spacer(this.model, this.services)],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+				growth: LayoutGrowth.PREFERRED,
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -245,6 +243,7 @@ export class Chart {
 
 		return [
 			new Tooltip(this.model, this.services),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

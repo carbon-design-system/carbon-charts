@@ -13,7 +13,7 @@ import {
 	AxesOptions,
 	ZoomBarsOptions,
 } from './index';
-import { BarOptions, StackedBarOptions } from './components';
+import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
 import { TimeScaleOptions } from './axis-scales';
 
 /**
@@ -48,6 +48,10 @@ export interface BaseChartOptions {
 	 * legend configuration
 	 */
 	legend?: LegendOptions;
+	/**
+	 * toolbar configurations
+	 */
+	toolbar?: ToolbarOptions;
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
@@ -334,6 +338,7 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		sortFunction?: (a: any, b: any) => number;
 	};
 }
 

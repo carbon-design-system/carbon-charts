@@ -6,6 +6,7 @@ import {
 	Events,
 	CartesianOrientations,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 
 // D3 Imports
@@ -13,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class StackedBar extends Bar {
 	type = 'stacked-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -32,7 +34,7 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions();
@@ -78,11 +80,13 @@ export class StackedBar extends Bar {
 			.append('path')
 			.merge(bars)
 			.classed('bar', true)
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -113,6 +117,7 @@ export class StackedBar extends Bar {
 				if (this.isOutsideZoomedDomain(x0, x1)) {
 					return;
 				}
+
 				// Add the divider gap
 				if (
 					Math.abs(y1 - y0) > 0 &&
@@ -176,7 +181,7 @@ export class StackedBar extends Bar {
 		const self = this;
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -188,6 +193,7 @@ export class StackedBar extends Bar {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
@@ -224,34 +230,40 @@ export class StackedBar extends Bar {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [matchingDataPoint],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

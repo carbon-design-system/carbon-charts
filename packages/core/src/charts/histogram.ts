@@ -1,5 +1,5 @@
 // Internal Imports
-import { HistogramChartModel } from '../model-histogram';
+import { HistogramChartModel } from '../model/histogram';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import {

@@ -1,10 +1,11 @@
 // Internal Imports
 import { Scatter } from './scatter';
-import { Roles } from '../../interfaces';
+import { RenderTypes, Roles } from '../../interfaces';
 import { Tools } from '../../tools';
 
 export class StackedScatter extends Scatter {
 	type = 'scatter-stacked';
+	renderType = RenderTypes.SVG;
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(
@@ -16,7 +17,7 @@ export class StackedScatter extends Scatter {
 			return;
 		}
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

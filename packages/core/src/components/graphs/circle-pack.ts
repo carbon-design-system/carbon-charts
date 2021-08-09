@@ -5,23 +5,32 @@ import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
-import { event, select } from 'd3-selection';
+import { select } from 'd3-selection';
 
-import { ColorClassNameTypes, Events } from '../../interfaces/enums';
+import {
+	ColorClassNameTypes,
+	Events,
+	RenderTypes,
+} from '../../interfaces/enums';
 import { Tools } from './../../tools';
 
 export class CirclePack extends Component {
 	type = 'circle-pack';
-	focal;
+	renderType = RenderTypes.SVG;
+
+	focal: any;
 
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
 
-		if (width === 0 || height === 0) {
+		// Because of a Firefox bug with regards to sizing & d3 packs,
+		// rather than checking if height or width aren't 0,
+		// we have to make sure they're not smaller than 1
+		if (width < 1 || height < 1) {
 			// on first render the svg is width and height 0
 			// the circle packing layout functionality will not run
 			return;
@@ -95,6 +104,10 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`,
 				});
 			})
+			.style('fill', (d) => this.model.getFillColor(d.data.dataGroupName))
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 			.transition(
@@ -134,11 +147,13 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed('hovered-child', false);
+			.style('stroke', (d) =>
+				this.model.getFillColor(d.data.dataGroupName)
+			);
 	}
 
 	// highlight the children circles with a stroke
-	highlightChildren(childData, classname?) {
+	highlightChildren(childData) {
 		const data = childData.map((d) => d.data);
 
 		this.parent
@@ -146,7 +161,7 @@ export class CirclePack extends Component {
 			.filter(
 				(d) => data.some((datum) => datum === d.data) && d.depth > 1
 			)
-			.classed(classname ? classname : 'hovered-child', true);
+			.style('stroke', Configuration.circlePack.circles.hover.stroke);
 	}
 
 	getZoomClass(node) {
@@ -176,12 +191,12 @@ export class CirclePack extends Component {
 	}
 
 	removeBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
 		const zoomSetting = Tools.getProperty(
@@ -239,7 +254,7 @@ export class CirclePack extends Component {
 		const self = this;
 		this.parent
 			.selectAll('circle.node')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -265,21 +280,13 @@ export class CirclePack extends Component {
 						}
 						childrenData = datum.children.map((child) => {
 							if (child !== null) {
-								// sum up the children values if there are any 3rd level
-								let value;
+								// retrieve the children values if there are any 3rd level
 								if (typeof child.data.value === 'number') {
-									value = child.data.value;
-
 									return {
 										label: child.data.name,
-										value: value,
+										value: child.data.value,
 									};
 								} else {
-									value = child.data.children.reduce(
-										(a, b) => a + b.value,
-										0
-									);
-
 									return {
 										label: child.data.name,
 										labelIcon:
@@ -287,7 +294,7 @@ export class CirclePack extends Component {
 											hierarchyLevel <= 2
 												? self.getZoomIcon()
 												: null,
-										value: value,
+										value: child.value,
 									};
 								}
 							}
@@ -314,6 +321,7 @@ export class CirclePack extends Component {
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement,
 						items: [
 							{
@@ -337,26 +345,30 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -368,6 +380,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -378,7 +391,7 @@ export class CirclePack extends Component {
 					hoveredElement,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				const hoveredElement = select(this);
 				const disabled = hoveredElement.classed('non-focal');
 
@@ -394,7 +407,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', false);
 					self.focal = null;
@@ -410,7 +423,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;
@@ -430,6 +443,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_CLICK,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

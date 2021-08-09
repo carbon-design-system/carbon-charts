@@ -3,6 +3,7 @@ import { Bar } from './bar';
 import {
 	Events,
 	Roles,
+	RenderTypes,
 	ColorClassNameTypes,
 	CartesianOrientations,
 } from '../../interfaces';
@@ -13,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -35,7 +37,7 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const data = this.model.getDisplayData(this.configs.groups);
 
@@ -56,11 +58,13 @@ export class SimpleBar extends Bar {
 			.merge(bars)
 			.classed('bar', true)
 			.attr('width', this.getBarWidth.bind(this))
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -93,7 +97,12 @@ export class SimpleBar extends Bar {
 						i
 					);
 				} else {
-					y0 = this.services.cartesianScales.getRangeValue(0);
+					const rangeScale = this.services.cartesianScales.getRangeScale();
+					const yScaleDomainStart = rangeScale.domain()[0];
+
+					y0 = this.services.cartesianScales.getRangeValue(
+						Math.max(0, yScaleDomainStart)
+					);
 					y1 = this.services.cartesianScales.getRangeValue(d, i);
 				}
 
@@ -163,7 +172,7 @@ export class SimpleBar extends Bar {
 		const self = this;
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 				hoveredElement.transition(
@@ -173,34 +182,38 @@ export class SimpleBar extends Bar {
 				);
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [datum],
 				});
 			})
-			.on('mousemove', function (datum) {
-				const hoveredElement = select(this);
-
+			.on('mousemove', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					event,
 					element: select(this),
 					datum,
 				});
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -212,6 +225,7 @@ export class SimpleBar extends Bar {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

@@ -1,8 +1,8 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
-import { Events, TruncationTypes } from '../../interfaces';
+import { ChartModel } from '../../model/model';
+import { Events, RenderTypes, TruncationTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
 // Carbon position service
@@ -12,12 +12,16 @@ import Position, { PLACEMENTS } from '@carbon/utils-position';
 import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
-import { select, mouse } from 'd3-selection';
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { select, pointer } from 'd3-selection';
 
 import { format } from 'date-fns';
 
 export class Tooltip extends Component {
 	type = 'tooltip';
+	renderType = RenderTypes.HTML;
 
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false;
@@ -73,7 +77,9 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(
 			Events.Tooltip.MOVE,
 			(e: CustomEvent) => {
-				this.positionTooltip(e);
+				if (this.tooltip.classed('hidden') === false) {
+					this.positionTooltip(e);
+				}
 			}
 		);
 
@@ -292,7 +298,7 @@ export class Tooltip extends Component {
 
 		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition');
 		if (!mouseRelativePos) {
-			mouseRelativePos = mouse(holder);
+			mouseRelativePos = pointer(Tools.getProperty(e, 'detail', 'event'), holder);
 		} else {
 			const zoombarType = Tools.getProperty(
 				options,

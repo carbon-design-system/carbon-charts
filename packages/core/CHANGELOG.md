@@ -3,33 +3,336 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.41.67](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.66...v0.41.67) (2021-05-31)
+## [0.41.101](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.100...v0.41.101) (2021-08-06)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.100](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.99...v0.41.100) (2021-08-04)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.99](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.98...v0.41.99) (2021-08-04)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.98](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.97...v0.41.98) (2021-08-04)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.97](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.96...v0.41.97) (2021-08-04)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.96](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.95...v0.41.96) (2021-08-04)
 
 
 ### Bug Fixes
 
-* **core:** fix circlepacks with one dataset ([#1035](https://github.com/carbon-design-system/carbon-charts/issues/1035)) ([2f0b183](https://github.com/carbon-design-system/carbon-charts/commit/2f0b183878b650c76b05ca6d5fb1e8f6a17c0266)), closes [#1031](https://github.com/carbon-design-system/carbon-charts/issues/1031)
-* **core:** make sure tooltips are properly positioned when closer to the edges ([#1037](https://github.com/carbon-design-system/carbon-charts/issues/1037)) ([a8d13cd](https://github.com/carbon-design-system/carbon-charts/commit/a8d13cd6d90813161582a00afa5166ca87702f38))
+* **core:** optimize fullscreen logic ([#1097](https://github.com/carbon-design-system/carbon-charts/issues/1097)) ([d4ee1c9](https://github.com/carbon-design-system/carbon-charts/commit/d4ee1c9da6f37516b2796b69af1b7a429deb41b7))
 
 
 
 
+
+## [0.41.95](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.94...v0.41.95) (2021-08-02)
+
+
+### Bug Fixes
+
+* **core:** set $css--default-type to false in the styles ([#1096](https://github.com/carbon-design-system/carbon-charts/issues/1096)) ([d35ee26](https://github.com/carbon-design-system/carbon-charts/commit/d35ee269735c150efa1d375c5ff65c4375f7bc3e))
+
+
+
+
+
+## [0.41.94](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.93...v0.41.94) (2021-07-30)
+
+
+### Bug Fixes
+
+* **core:** avoid adding carbon css-reset to styles ([#1095](https://github.com/carbon-design-system/carbon-charts/issues/1095)) ([8c48aef](https://github.com/carbon-design-system/carbon-charts/commit/8c48aefc6f78a9dce831897e7fb75cf79dfb3b19))
+
+
+
+
+
+## [0.41.93](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.92...v0.41.93) (2021-07-27)
+
+
+### Performance Improvements
+
+* **download-csv:** revoke object URL after downloading ([#1089](https://github.com/carbon-design-system/carbon-charts/issues/1089)) ([6f001c7](https://github.com/carbon-design-system/carbon-charts/commit/6f001c749feb3747686aa5f5cd612a7cbbe7cefc))
+
+
+
+
+
+## [0.41.92](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.91...v0.41.92) (2021-07-26)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.91](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.90...v0.41.91) (2021-07-22)
+
+
+### Bug Fixes
+
+* **core:** eliminate style conflicts with carbon-components ([#1086](https://github.com/carbon-design-system/carbon-charts/issues/1086)) ([4b11432](https://github.com/carbon-design-system/carbon-charts/commit/4b1143264f683f774d80dc98d4db2b72a7eac449))
+
+
+
+
+
+## [0.41.90](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.89...v0.41.90) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** gauge delta arrow not showing on first render ([#1083](https://github.com/carbon-design-system/carbon-charts/issues/1083)) ([2169d80](https://github.com/carbon-design-system/carbon-charts/commit/2169d80f74557e8172d2846c9897ddf70982a1b1))
+
+
+
+
+
+## [0.41.89](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.88...v0.41.89) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.88](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.87...v0.41.88) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** remove references to `process` in UMD bundles ([#1078](https://github.com/carbon-design-system/carbon-charts/issues/1078)) ([dac2067](https://github.com/carbon-design-system/carbon-charts/commit/dac20679a895c56f03c2a156900d133233e17ded))
+
+
+
+
+
+## [0.41.87](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.86...v0.41.87) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.86](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.85...v0.41.86) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.85](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.84...v0.41.85) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** make sure document exists in case using SSR ([#1073](https://github.com/carbon-design-system/carbon-charts/issues/1073)) ([20a78b8](https://github.com/carbon-design-system/carbon-charts/commit/20a78b8bae199b31d5cf459a84002831e79573fd))
+
+
+
+
+
+## [0.41.84](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.83...v0.41.84) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.83](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.82...v0.41.83) (2021-07-15)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.82](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.81...v0.41.82) (2021-07-13)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.81](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.80...v0.41.81) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core:** display the first and last data elements when addSpaceOnEdges is set to 0 ([#1064](https://github.com/carbon-design-system/carbon-charts/issues/1064)) ([f321807](https://github.com/carbon-design-system/carbon-charts/commit/f32180774720c7d916f6bd441b7d72500b77e7f9)), closes [#763](https://github.com/carbon-design-system/carbon-charts/issues/763)
+
+
+
+
+
+## [0.41.80](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.79...v0.41.80) (2021-07-07)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.79](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.78...v0.41.79) (2021-06-29)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.78](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.77...v0.41.78) (2021-06-29)
+
+### Bug Fixes
+
+* **core:** keep fill colors if custom getIsFilled is passed on mouse over for line graph ([#1055](https://github.com/carbon-design-system/carbon-charts/issues/1055)) ([b5dac70](https://github.com/carbon-design-system/carbon-charts/commit/b5dac70c919475672ee31c59cf542605db68e5b4))
+
+
+
+
+
+## [0.41.77](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.76...v0.41.77) (2021-06-25)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.76](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.75...v0.41.76) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.75](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.74...v0.41.75) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.74](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.73...v0.41.74) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.73](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.72...v0.41.73) (2021-06-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.72](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.71...v0.41.72) (2021-06-23)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.71](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.70...v0.41.71) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.41.70](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.69...v0.41.70) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.69](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.68...v0.41.69) (2021-06-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.41.68](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.67...v0.41.68) (2021-06-08)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.41.67](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.66...v0.41.67) (2021-05-31)
+
+### Bug Fixes
+
+-   **core:** fix circlepacks with one dataset
+    ([#1035](https://github.com/carbon-design-system/carbon-charts/issues/1035))
+    ([2f0b183](https://github.com/carbon-design-system/carbon-charts/commit/2f0b183878b650c76b05ca6d5fb1e8f6a17c0266)),
+    closes
+    [#1031](https://github.com/carbon-design-system/carbon-charts/issues/1031)
+-   **core:** make sure tooltips are properly positioned when closer to the
+    edges
+    ([#1037](https://github.com/carbon-design-system/carbon-charts/issues/1037))
+    ([a8d13cd](https://github.com/carbon-design-system/carbon-charts/commit/a8d13cd6d90813161582a00afa5166ca87702f38))
 
 ## [0.41.66](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.65...v0.41.66) (2021-05-25)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 ## [0.41.65](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.64...v0.41.65) (2021-05-19)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 # Change Log
 

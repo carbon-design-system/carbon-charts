@@ -1,34 +1,46 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events } from './../../interfaces';
+import { Events, RenderTypes } from './../../interfaces';
 
 export class Title extends Component {
 	type = 'title';
+	renderType = RenderTypes.HTML;
 
 	render() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
-		const text = svg
-			.selectAll('text.title')
-			.data([this.getOptions().title]);
+		const text = svg.selectAll('p.title').data([this.getOptions().title]);
 
 		text.enter()
-			.append('text')
+			.append('p')
 			.classed('title', true)
 			.merge(text)
 			.attr('x', 0)
 			.attr('y', '1em')
 			.html((d) => d);
 
-		// check the max space the title has to render
-		const maxWidth = this.getMaxTitleWidth();
-		const title = DOMUtils.appendOrSelect(svg, 'text.title');
-
 		// check if title needs truncation (and tooltip support)
-		if (title.node().getComputedTextLength() > maxWidth && maxWidth > 0) {
-			this.truncateTitle(title, maxWidth);
+		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {
+			// add events for displaying the tooltip with the title
+			const self = this;
+			text.on('mouseover', function (event) {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
+					hoveredElement: text,
+					content: text.text(),
+				});
+			})
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
+				})
+				.on('mouseout', function () {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				});
 		}
+
 		text.exit().remove();
 	}
 
@@ -73,14 +85,17 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on('mouseover', function () {
+				.on('mouseover', function (event) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement: title,
 						content: untruncatedTitle,
 					});
 				})
-				.on('mousemove', function () {
-					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
 				})
 				.on('mouseout', function () {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);

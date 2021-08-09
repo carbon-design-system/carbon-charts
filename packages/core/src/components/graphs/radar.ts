@@ -1,7 +1,13 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Events, Roles, ColorClassNameTypes } from '../../interfaces';
+import {
+	Events,
+	Roles,
+	ColorClassNameTypes,
+	RenderTypes,
+	Alignments,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 import {
 	Point,
@@ -15,20 +21,19 @@ import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { select } from 'd3-selection';
-import { scaleBand, scaleLinear, ScaleLinear } from 'd3-scale';
-import { max, extent } from 'd3-array';
+import { scaleBand, scaleLinear } from 'd3-scale';
+import { max, min, extent } from 'd3-array';
 import { lineRadial, curveLinearClosed } from 'd3-shape';
-
-// used to make transitions
-let oldYScale: ScaleLinear<number, number>;
 
 export class Radar extends Component {
 	type = 'radar';
+	renderType = RenderTypes.SVG;
+
 	svg: SVGElement;
 	groupMapsTo: string;
 	uniqueKeys: string[];
 	uniqueGroups: string[];
-	displayDataNormalized: any;
+	fullDataNormalized: any;
 	groupedDataNormalized: any;
 
 	init() {
@@ -46,13 +51,12 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const svg = this.getComponentContainer();
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
 		});
 
 		const data = this.model.getData();
-		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.getOptions();
 		const { angle, value } = Tools.getProperty(options, 'radar', 'axes');
@@ -69,7 +73,7 @@ export class Radar extends Component {
 		this.uniqueGroups = Array.from(
 			new Set(data.map((d) => d[groupMapsTo]))
 		);
-		this.displayDataNormalized = this.normalizeFlatData(displayData);
+		this.fullDataNormalized = this.normalizeFlatData(data);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
 		const labelHeight = this.getLabelDimensions(this.uniqueKeys[0]).height;
@@ -85,17 +89,18 @@ export class Radar extends Component {
 		// given a key, return the corresponding angle in radiants
 		// rotated by -PI/2 because we want angle 0° at -y (12 o’clock)
 		const xScale = scaleBand<string>()
-			.domain(this.displayDataNormalized.map((d) => d[angle]))
+			.domain(this.fullDataNormalized.map((d) => d[angle]))
 			.range(
 				[0, 2 * Math.PI].map((a) => a - Math.PI / 2) as [Angle, Angle]
 			);
 
+		const centerPointMinValue = min(
+			this.fullDataNormalized.map((d) => d[value]) as number[]
+		);
 		const yScale = scaleLinear()
 			.domain([
-				0,
-				max(
-					this.displayDataNormalized.map((d) => d[value]) as number[]
-				),
+				centerPointMinValue >= 0 ? 0 : centerPointMinValue,
+				max(this.fullDataNormalized.map((d) => d[value]) as number[]),
 			])
 			.range([minRange, radius])
 			.nice(yTicksNumber);
@@ -111,13 +116,6 @@ export class Radar extends Component {
 			.angle((d) => xScale(d[angle]) + Math.PI / 2)
 			.radius((d) => yScale(d[value]))
 			.curve(curveLinearClosed);
-
-		// this line generator is necessary in order to make a transition of a value from the
-		// position it occupies using the old scale to the position it occupies using the new scale
-		const oldRadialLineGenerator = lineRadial<any>()
-			.angle(radialLineGenerator.angle())
-			.radius((d) => (oldYScale ? oldYScale(d[value]) : minRange))
-			.curve(radialLineGenerator.curve());
 
 		// compute the space that each x label needs
 		const horizSpaceNeededByEachXLabel = this.uniqueKeys.map((key) => {
@@ -161,9 +159,6 @@ export class Radar extends Component {
 					.attr('opacity', 0)
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
-					.attr('d', (tick) =>
-						oldRadialLineGenerator(shapeData(tick))
-					)
 					.call((selection) =>
 						selection
 							.transition(
@@ -465,24 +460,39 @@ export class Radar extends Component {
 					)
 					.attr('role', Roles.GRAPHICS_SYMBOL)
 					.attr('opacity', 0)
-					.attr('transform', `translate(${c.x}, ${c.y})`)
+					.attr(
+						'transform',
+						animate
+							? () =>
+									`translate(${c.x}, ${c.y}) scale(${
+										1 + Math.random() * 0.35
+									})`
+							: `translate(${c.x}, ${c.y})`
+					)
 					.style('fill', (group) => colorScale(group.name))
 					.style('fill-opacity', Configuration.radar.opacity.selected)
 					.style('stroke', (group) => colorScale(group.name))
-					.attr('d', (group) => oldRadialLineGenerator(group.data))
-					.call((selection) =>
-						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_blobs_enter',
-									animate
-								)
+
+					.call((selection) => {
+						const selectionUpdate = selection.transition(
+							this.services.transitions.getTransition(
+								'radar_blobs_enter',
+								animate
 							)
+						);
+
+						if (animate) {
+							selectionUpdate
+								.delay(() => Math.random() * 30)
+								.attr('transform', `translate(${c.x}, ${c.y})`);
+						}
+
+						selectionUpdate
 							.attr('opacity', 1)
 							.attr('d', (group) =>
 								radialLineGenerator(group.data)
-							)
-					),
+							);
+					}),
 			(update) => {
 				update
 					.attr('class', (group) =>
@@ -511,18 +521,28 @@ export class Radar extends Component {
 				);
 			},
 			(exit) =>
-				exit.call((selection) =>
-					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_blobs_exit',
-								animate
-							)
+				exit.call((selection) => {
+					const selectionUpdate = selection.transition(
+						this.services.transitions.getTransition(
+							'radar_blobs_exit',
+							animate
 						)
-						.attr('d', (group) => radialLineGenerator(group.data))
-						.attr('opacity', 0)
-						.remove()
-				)
+					);
+
+					if (animate) {
+						selectionUpdate
+							.delay(() => Math.random() * 30)
+							.attr(
+								'transform',
+								() =>
+									`translate(${c.x}, ${c.y}) scale(${
+										1 + Math.random() * 0.35
+									})`
+							);
+					}
+
+					selectionUpdate.attr('opacity', 0).remove();
+				})
 		);
 
 		// data dots
@@ -532,7 +552,7 @@ export class Radar extends Component {
 		);
 		const dotsUpdate = dots
 			.selectAll('circle')
-			.data(this.displayDataNormalized);
+			.data(this.fullDataNormalized);
 		dotsUpdate
 			.join(
 				(enter) =>
@@ -683,23 +703,37 @@ export class Radar extends Component {
 
 		const alignment = Tools.getProperty(options, 'radar', 'alignment');
 
-		const alignmentOffset = DOMUtils.getAlignmentOffset(
+		const alignmentXOffset = this.getAlignmentXOffset(
 			alignment,
 			svg,
 			this.getParent()
 		);
-		svg.attr('transform', `translate(${alignmentOffset}, 0)`);
+		svg.attr('x', alignmentXOffset);
 
 		// Add event listeners
 		this.addEventListeners();
+	}
 
-		oldYScale = yScale; // save the current scale as the old one
+	getAlignmentXOffset(alignment, svg, parent) {
+		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
+			useBBox: true,
+		});
+		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
+
+		let alignmentOffset = 0;
+		if (alignment === Alignments.CENTER) {
+			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
+		} else if (alignment === Alignments.RIGHT) {
+			alignmentOffset = width - svgDimensions.width;
+		}
+
+		return alignmentOffset;
 	}
 
 	// append temporarily the label to get the exact space that it occupies
 	getLabelDimensions = (label: string) => {
 		const tmpTick = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			`g.tmp-tick`
 		);
 		const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(
@@ -806,13 +840,14 @@ export class Radar extends Component {
 		// events on x axes rects
 		this.parent
 			.selectAll('.x-axes-rect > rect')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -834,7 +869,7 @@ export class Radar extends Component {
 					.attr('r', Configuration.radar.dotsRadius);
 
 				// get the items that should be highlighted
-				const itemsToHighlight = self.displayDataNormalized.filter(
+				const itemsToHighlight = self.fullDataNormalized.filter(
 					(d) => d[angle] === datum
 				);
 
@@ -849,6 +884,7 @@ export class Radar extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: itemsToHighlight
 						.filter(
@@ -865,28 +901,32 @@ export class Radar extends Component {
 						})),
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				const axisLine = self.parent.select(
 					`.x-axes .x-axis-${Tools.kebabCase(datum)}`
@@ -899,12 +939,14 @@ export class Radar extends Component {
 				axisLine
 					.classed('hovered', false)
 					.attr('stroke-dasharray', '0');
+
 				dots.classed('hovered', false).attr('opacity', 0).attr('r', 0);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

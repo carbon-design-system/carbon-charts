@@ -1,12 +1,14 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
+import { RenderTypes } from '../../interfaces';
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior
 export class ChartClip extends Component {
 	type = 'chart-clip';
+	renderType = RenderTypes.SVG;
 
 	// Give every chart-clip a distinct ID
 	// so they don't interfere each other in a page with multiple charts

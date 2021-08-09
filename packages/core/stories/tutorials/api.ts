@@ -59,7 +59,7 @@ Services are globalized functions that have proven useful across the board. Gene
 Event listeners can be added through the events service:
 
 \`\`\`js
-barChart.services.events.addEventListener("bar-onmouseover", e => {
+barChart.services.events.addEventListener("bar-mouseover", e => {
     console.log(e.detail);
 });
 \`\`\`

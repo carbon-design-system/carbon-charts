@@ -1,4 +1,6 @@
 .#{$prefix}--#{$charts-prefix}--gauge {
+	overflow: visible;
+
 	path.arc-background {
 		fill: $ui-01;
 	}

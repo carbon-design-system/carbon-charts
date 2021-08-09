@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -13,25 +15,38 @@ function _typeof(obj) {
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
 
-    return arr2;
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
   }
+
+  return arr2;
 }
 
 function _classCallCheck(instance, Constructor) {
@@ -56,29 +71,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -101,6 +93,61 @@ function _setPrototypeOf(o, p) {
   };
 
   return _setPrototypeOf(o, p);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
 }
 
 function _defineProperty(obj, key, value) {
@@ -137,25 +184,21 @@ import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 
-var triggerButtonPositionProps =
-/* #__PURE__ */
-function () {
+var triggerButtonPositionProps = /* #__PURE__ */function () {
   var _ref;
 
   return _ref = {}, _defineProperty(_ref, DIRECTION_TOP, 'bottom'), _defineProperty(_ref, DIRECTION_BOTTOM, 'top'), _defineProperty(_ref, DIRECTION_LEFT, 'left'), _defineProperty(_ref, DIRECTION_RIGHT, 'right'), _ref;
 }();
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {Object<string, number>}
+ * @type {object<string, number>}
  */
 
 
-var triggerButtonPositionFactors =
-/* #__PURE__ */
-function () {
+var triggerButtonPositionFactors = /* #__PURE__ */function () {
   var _ref2;
 
   return _ref2 = {}, _defineProperty(_ref2, DIRECTION_TOP, -2), _defineProperty(_ref2, DIRECTION_BOTTOM, -1), _defineProperty(_ref2, DIRECTION_LEFT, -2), _defineProperty(_ref2, DIRECTION_RIGHT, -1), _ref2;
@@ -207,10 +250,10 @@ export var getMenuOffset = function getMenuOffset(menuBody, direction, trigger) 
   return undefined;
 };
 
-var OverflowMenu =
-/*#__PURE__*/
-function (_mixin) {
+var OverflowMenu = /*#__PURE__*/function (_mixin) {
   _inherits(OverflowMenu, _mixin);
+
+  var _super = _createSuper(OverflowMenu);
   /**
    * Overflow menu.
    * @extends CreateComponent
@@ -228,12 +271,27 @@ function (_mixin) {
    */
 
 
+  /**
+   * Overflow menu.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a modal dialog.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorOptionMenu] The CSS selector to find the menu.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
+   * @param {string} [options.classShown] The CSS class for the shown state, for the trigger UI.
+   * @param {string} [options.classMenuShown] The CSS class for the shown state, for the menu.
+   * @param {string} [options.classMenuFlip] The CSS class for the flipped state of the menu.
+   * @param {object} [options.objMenuOffset] The offset locating the menu for the non-flipped state.
+   * @param {object} [options.objMenuOffsetFlip] The offset locating the menu for the flipped state.
+   */
   function OverflowMenu(element, options) {
     var _this;
 
     _classCallCheck(this, OverflowMenu);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(OverflowMenu).call(this, element, options));
+    _this = _super.call(this, element, options);
 
     _this.getCurrentNavigation = function () {
       var focused = _this.element.ownerDocument.activeElement;
@@ -255,6 +313,7 @@ function (_mixin) {
         }; // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
 
 
+        // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
         var index = Math.max(items.indexOf(old) + direction, -1);
         return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
       };
@@ -297,18 +356,15 @@ function (_mixin) {
    */
 
 
+  /**
+   * Changes the shown/hidden state.
+   * @param {string} state The new state.
+   * @param {object} detail The detail of the event trigging this action.
+   * @param {Function} callback Callback called when change in state completes.
+   */
   _createClass(OverflowMenu, [{
     key: "changeState",
     value: function changeState(state, detail, callback) {
-      // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
-      var triggerElement = this.triggerNode ? 'triggerNode' : 'element';
-
-      if (state === 'hidden') {
-        this[triggerElement].setAttribute('aria-expanded', 'false');
-      } else {
-        this[triggerElement].setAttribute('aria-expanded', 'true');
-      }
-
       if (!this.optionMenu) {
         var optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
 
@@ -317,12 +373,14 @@ function (_mixin) {
         } // Lazily create a component instance for menu
 
 
+        // Lazily create a component instance for menu
         this.optionMenu = FloatingMenu.create(optionMenu, {
           refNode: this.element,
           classShown: this.options.classMenuShown,
           classRefShown: this.options.classShown,
           offset: this.options.objMenuOffset,
-          triggerNode: this.triggerNode
+          triggerNode: this.triggerNode,
+          contentNode: this.element.querySelector(this.options.selectorContent)
         });
         this.children.push(this.optionMenu);
       }
@@ -333,6 +391,8 @@ function (_mixin) {
       // (And thus the before/after shown/hidden events are fired from the menu)
 
 
+      // Delegates the action of changing state to the menu.
+      // (And thus the before/after shown/hidden events are fired from the menu)
       this.optionMenu.changeState(state, Object.assign(detail, {
         delegatorNode: this.element
       }), callback);
@@ -381,13 +441,13 @@ function (_mixin) {
 
   }, {
     key: "_handleKeyPress",
-
+    value:
     /**
      * Handles key press on document.
      * @param {Event} event The triggering event.
      * @private
      */
-    value: function _handleKeyPress(event) {
+    function _handleKeyPress(event) {
       var _this3 = this;
 
       var key = event.which;
@@ -398,19 +458,11 @@ function (_mixin) {
       var isOfMenu = optionMenu && optionMenu.element.contains(event.target);
       var isExpanded = this.element.classList.contains(this.options.classShown); // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
 
+      // @todo Can clean up to use `this.triggerNode` once non-compliant code is deprecated
       var triggerElement = triggerNode ? 'triggerNode' : 'element';
 
       switch (key) {
-        // Esc
-        case 27:
-          this.changeState('hidden', getLaunchingDetails(event), function () {
-            if (isOfMenu) {
-              _this3[triggerElement].focus();
-            }
-          });
-          break;
         // Enter || Space bar
-
         case 13:
         case 32:
           {
@@ -425,8 +477,10 @@ function (_mixin) {
             if (isOfSelf) {
               event.delegateTarget = element; // eslint-disable-line no-param-reassign
 
+              // eslint-disable-line no-param-reassign
               event.preventDefault(); // prevent scrolling
 
+              // prevent scrolling
               this.changeState(state, getLaunchingDetails(event), function () {
                 if (state === 'hidden' && isOfMenu) {
                   _this3[triggerElement].focus();
@@ -439,6 +493,7 @@ function (_mixin) {
 
         case 38: // up arrow
 
+        // up arrow
         case 40:
           // down arrow
           {
@@ -448,6 +503,7 @@ function (_mixin) {
 
             event.preventDefault(); // prevent scrolling
 
+            // prevent scrolling
             var direction = {
               38: -1,
               40: 1
@@ -468,7 +524,8 @@ function (_mixin) {
         selectorInit: '[data-overflow-menu]',
         selectorOptionMenu: ".".concat(prefix, "--overflow-menu-options"),
         selectorTrigger: 'button[aria-haspopup]',
-        selectorItem: "\n        .".concat(prefix, "--overflow-menu-options--open >\n        .").concat(prefix, "--overflow-menu-options__option:not(.").concat(prefix, "--overflow-menu-options__option--disabled) >\n        .").concat(prefix, "--overflow-menu-options__btn\n      "),
+        selectorContent: ".".concat(prefix, "--overflow-menu-options__content"),
+        selectorItem: "\n        .".concat(prefix, "--overflow-menu-options--open\n        .").concat(prefix, "--overflow-menu-options__option:not(.").concat(prefix, "--overflow-menu-options__option--disabled) >\n        .").concat(prefix, "--overflow-menu-options__btn\n      "),
         classShown: "".concat(prefix, "--overflow-menu--open"),
         classMenuShown: "".concat(prefix, "--overflow-menu-options--open"),
         classMenuFlip: "".concat(prefix, "--overflow-menu--flip"),

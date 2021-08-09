@@ -1,7 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import { Roles, Events, ColorClassNameTypes } from '../../interfaces';
+import {
+	Roles,
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+} from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -9,6 +14,7 @@ import { line } from 'd3-shape';
 
 export class Line extends Component {
 	type = 'line';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const { events } = this.services;
@@ -25,7 +31,7 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
@@ -133,11 +139,13 @@ export class Line extends Component {
 					.join(',');
 			})
 			// Transition
-			.transition(
-				this.services.transitions.getTransition(
-					'line-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'line-update-enter',
+					animate,
+				})
 			)
 			.attr('opacity', (d) => (d.hidden ? 0 : 1))
 			.attr('d', (group) => {
@@ -173,12 +181,6 @@ export class Line extends Component {
 	};
 
 	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('path.line')
-			.on('mousemove', null)
-			.on('mouseout', null);
-
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(

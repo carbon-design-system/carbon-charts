@@ -152,6 +152,13 @@ export const timeScale: TimeScaleOptions = {
 	},
 };
 
+const isFullScreenEnabled =
+	typeof document !== 'undefined' &&
+	(document['fullscreenEnabled'] ||
+		document['webkitFullscreenEnabled'] ||
+		document['mozFullScreenEnabled'] ||
+		document['msFullscreenEnabled']);
+
 /**
  * Base chart options common to any chart
  */
@@ -179,6 +186,31 @@ const chart: BaseChartOptions = {
 			enabled: false,
 		},
 	},
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 3,
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
+		],
+	} as ToolbarOptions,
 };
 
 /**
@@ -197,11 +229,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			type: ZoomBarTypes.GRAPH_VIEW,
 		},
 	} as ZoomBarsOptions,
-	toolbar: {
-		enabled: false,
-		numberOfIcons: 3,
-		controls: [],
-	} as ToolbarOptions,
 } as AxisChartOptions);
 
 /**
@@ -344,12 +371,35 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 			enabled: false,
 		},
 	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.AREA,
+				name: 'Poor area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Satisfactory area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Great area',
+			},
+			{
+				type: LegendItemType.QUARTILE,
+				name: 'Quartiles',
+			},
+		],
+	},
 } as BulletChartOptions);
 
 /**
  * options specific to stacked bar charts
  */
 const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+	bars: {
+		dividerSize: 1.5,
+	} as StackedBarOptions,
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0,
 	} as TimeScaleOptions),
@@ -389,6 +439,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			enabled: true,
 		},
 		alignment: Alignments.LEFT,
+		sortFunction: null,
 	},
 } as PieChartOptions);
 

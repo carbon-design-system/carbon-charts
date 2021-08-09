@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.41.67",
+	"version": "0.41.101",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -40,13 +40,13 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.41.67",
+		"@carbon/charts": "^0.41.101",
 		"@carbon/telemetry": "0.0.0-alpha.6"
 	},
 	"peerDependencies": {
-		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0",
-		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0",
-		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0",
+		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
+		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
+		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
 		"rxjs": "^6.0.0",
 		"zone.js": "^0.8.29 || ^0.9.0 || ^0.10.0 || ^0.11.0"
 	},
@@ -64,6 +64,7 @@
 		"@angular/platform-browser": "7.2.15",
 		"@angular/platform-browser-dynamic": "7.2.15",
 		"@babel/core": "7.3.4",
+		"@carbon/icons-angular": "11.2.1",
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/angular": "5.3.12",
@@ -73,6 +74,7 @@
 		"karma-webpack": "4.0.2",
 		"ng-packagr": "5.7.1",
 		"rxjs": "6.3.3",
+		"sass-loader": "8.0.0",
 		"tsickle": "0.37.1",
 		"tslib": "1.10.0",
 		"tslint": "5.20.1",

@@ -2,6 +2,7 @@ export * from './component';
 
 // ESSENTIALS
 export * from './essentials/legend';
+export * from './essentials/modal';
 export * from './essentials/threshold';
 export * from './essentials/title';
 export * from './essentials/title-meter';
@@ -49,3 +50,7 @@ export * from './axes/ruler-stacked';
 export * from './axes/toolbar';
 export * from './axes/zero-line';
 export * from './axes/zoom-bar';
+
+// Diagrams
+export * from './diagrams/buildPaths';
+export * from './diagrams/markerDefinitions';

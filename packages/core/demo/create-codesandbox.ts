@@ -5,7 +5,8 @@ const libraryVersion = packageJSON.version;
 const carbonComponentsVersion =
 	packageJSON.devDependencies['carbon-components'];
 
-const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+const plexAndCarbonComponentsCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+@import "https://unpkg.com/carbon-components/css/carbon-components.min.css";
 `;
 
 export const createChartSandbox = (chartTemplate: any) => {
@@ -29,7 +30,20 @@ export const createVanillaChartApp = (demo: any) => {
 	<head>
 		<title>Parcel Sandbox</title>
 		<meta charset="UTF-8" />
-		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet">
+		<link
+			rel="preconnect"
+			crossorigin="anonymous"
+			href="https://fonts.gstatic.com"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
+			rel="stylesheet"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://unpkg.com/carbon-components/css/carbon-components.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<div id="app" style="width: 100%; height: 100%;"></div>
@@ -59,7 +73,7 @@ new ${chartComponent}(chartHolder, {
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'carbon-components': carbonComponentsVersion,
-			d3: '5.9.2',
+			d3: '7.0.0',
 		},
 		devDependencies: {
 			'parcel-bundler': '^1.6.1',
@@ -90,7 +104,7 @@ import "@carbon/charts/styles.css";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./ibm-plex-font.css";
+import "./plex-and-carbon-components.css";
 
 class App extends React.Component {
 	state = {
@@ -122,7 +136,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 	return {
 		'src/index.html': indexHtml,
 		'src/index.js': indexJs,
-		'src/ibm-plex-font.css': ibmPlexFontCSS,
+		'src/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
 		'package.json': packageJson,
 	};
 };
@@ -139,7 +153,7 @@ import "@carbon/charts/styles.css";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./ibm-plex-font.css";
+import "./plex-and-carbon-components.css";
 
 @Component({
 	selector: "app-root",
@@ -228,7 +242,7 @@ platformBrowserDynamic()
 		'src/main.ts': mainTs,
 		'src/app/app.component.html': appComponentHtml,
 		'src/app/app.component.ts': appComponentTs,
-		'src/app/ibm-plex-font.css': ibmPlexFontCSS,
+		'src/app/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
 		'src/app/app.module.ts': appModule,
 		'.angular-cli.json': angularCliJson,
 		'package.json': packageJson,
@@ -247,7 +261,7 @@ import chartsVue from "@carbon/charts-vue";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "../ibm-plex-font.css";
+import "../plex-and-carbon-components.css";
 
 Vue.use(chartsVue);
 
@@ -306,7 +320,7 @@ new Vue({
 
 	return {
 		'src/components/chart.vue': chartVue,
-		'src/ibm-plex-font.css': ibmPlexFontCSS,
+		'src/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
 		'package.json': packageJson,
@@ -339,11 +353,22 @@ export default app;
 `;
 
 	const App = `<script>
-  import { ${chartComponent} } from "@carbon/charts-svelte";
+	import "@carbon/charts/styles.min.css";
+	import "carbon-components/css/carbon-components.min.css";
+	import { ${chartComponent} } from "@carbon/charts-svelte";
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
+	<link
+			rel="preconnect"
+			crossorigin="anonymous"
+			href="https://fonts.gstatic.com"
+	/>
+	<link
+			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
+			rel="stylesheet"
+			crossorigin="anonymous"
+	/>
 </svelte:head>
 
 <${chartComponent}

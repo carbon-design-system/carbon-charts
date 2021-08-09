@@ -2,12 +2,16 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
+import { RenderTypes } from '../../interfaces';
 
 // D3 Imports
 import { axisBottom, axisLeft } from 'd3-axis';
 
+import { transition } from 'd3-transition';
+
 export class Grid extends Component {
 	type = 'grid';
+	renderType = RenderTypes.SVG;
 
 	backdrop: any;
 
@@ -95,10 +99,15 @@ export class Grid extends Component {
 			);
 
 		if (animate) {
-			const transition = this.services.transitions.getTransition(
-				'grid-update'
-			);
-			g.transition(transition).call(xGrid);
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(xGrid);
 		} else {
 			g.call(xGrid);
 		}
@@ -156,10 +165,15 @@ export class Grid extends Component {
 			.attr('transform', `translate(0, ${-this.backdrop.attr('y')})`);
 
 		if (animate) {
-			const transition = this.services.transitions.getTransition(
-				'grid-update'
-			);
-			g.transition(transition).call(yGrid);
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(yGrid);
 		} else {
 			g.call(yGrid);
 		}

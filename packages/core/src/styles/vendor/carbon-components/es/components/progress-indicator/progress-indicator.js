@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -34,29 +36,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -80,6 +59,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -97,10 +131,10 @@ var toArray = function toArray(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 };
 
-var ProgressIndicator =
-/*#__PURE__*/
-function (_mixin) {
+var ProgressIndicator = /*#__PURE__*/function (_mixin) {
   _inherits(ProgressIndicator, _mixin);
+
+  var _super = _createSuper(ProgressIndicator);
   /**
    * ProgressIndicator.
    * @extends CreateComponent
@@ -118,17 +152,36 @@ function (_mixin) {
    */
 
 
+  /**
+   * ProgressIndicator.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @param {HTMLElement} element The element representing the ProgressIndicator.
+   * @param {object} [options] The component options.
+   * @property {string} [options.selectorStepElement] The CSS selector to find step elements.
+   * @property {string} [options.selectorCurrent] The CSS selector to find the current step element.
+   * @property {string} [options.selectorIncomplete] The CSS class to find incomplete step elements.
+   * @property {string} [options.selectorComplete] The CSS selector to find completed step elements.
+   * @property {string} [options.classStep] The className for a step element.
+   * @property {string} [options.classComplete] The className for a completed step element.
+   * @property {string} [options.classCurrent] The className for the current step element.
+   * @property {string} [options.classIncomplete] The className for a incomplete step element.
+   */
   function ProgressIndicator(element, options) {
     var _this;
 
     _classCallCheck(this, ProgressIndicator);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProgressIndicator).call(this, element, options));
+    _this = _super.call(this, element, options);
     /**
      * The component state.
-     * @type {Object}
+     * @type {object}
      */
 
+    /**
+     * The component state.
+     * @type {object}
+     */
     _this.state = {
       /**
        * The current step index.
@@ -152,6 +205,9 @@ function (_mixin) {
    */
 
 
+  /**
+   * Returns all steps with details about element and index.
+   */
   _createClass(ProgressIndicator, [{
     key: "getSteps",
     value: function getSteps() {
@@ -295,7 +351,7 @@ function (_mixin) {
     }
   }], [{
     key: "options",
-
+    get:
     /**
      * The component options.
      * If `options` is specified in the constructor,
@@ -313,7 +369,7 @@ function (_mixin) {
      * @property {string} [classCurrent] The className for the current step element.
      * @property {string} [classIncomplete] The className for a incomplete step element.
      */
-    get: function get() {
+    function get() {
       var prefix = settings.prefix;
       return {
         selectorInit: '[data-progress]',

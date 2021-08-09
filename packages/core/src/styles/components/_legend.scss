@@ -1,45 +1,83 @@
-g.#{$prefix}--#{$charts-prefix}--legend {
+div.#{$prefix}--#{$charts-prefix}--legend {
+	display: flex;
 	user-select: none;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: -5px;
 
-	g.legend-item {
-		rect.checkbox {
-			stroke-width: 1px;
-			stroke-opacity: 1;
+	div.legend-item {
+		display: flex;
+		align-items: center;
+		margin: 5px;
+
+		div.checkbox {
+			width: 13px;
+			height: 13px;
+			margin-right: 4px;
+			border-radius: 2px;
+			border: solid 1px $ui-background;
+			box-shadow: 0 0 0 2px transparent;
 
 			&:not(.active) {
-				stroke: $text-02;
-				fill: $ui-background;
+				border-color: $text-02;
+				background: $ui-background;
 			}
 
-			&:not(.active) ~ g.check {
+			svg {
 				display: none;
+				vertical-align: text-top;
+				fill: $ui-background;
+				stroke: $ui-background;
 			}
 		}
 
-		rect.hover-stroke {
-			fill: none;
-			stroke: $carbon--blue-60;
-			stroke-width: 2;
+		&.additional {
+			svg.icon {
+				margin-right: 4px;
+			}
 		}
 
-		g.check > svg path {
-			fill: $ui-background;
-			stroke: $ui-background;
-		}
-
-		text {
+		p {
 			font-size: 12px;
 			fill: $text-02;
+			line-height: 1rem;
 		}
 	}
 
-	g.additional-item {
-		.zoom {
-			fill: $text-02;
+	&.center-aligned {
+		justify-content: center;
+	}
+
+	&.has-deactivated-items {
+		div.legend-item {
+			div.checkbox {
+				svg {
+					display: block;
+				}
+			}
 		}
 	}
 
-	&.clickable g.legend-item:hover {
+	&.vertical {
+		margin: -5px;
+		flex-direction: column;
+
+		div.legend-item {
+			margin-right: 0;
+			margin-bottom: 10px;
+		}
+	}
+
+	&.clickable div.legend-item:not(.additional):hover {
 		cursor: pointer;
+
+		div.checkbox {
+			border: solid 1px $ui-background;
+			box-shadow: 0 0 0 2px $carbon--blue-60;
+
+			&:not(.active) {
+				border-color: $text-02;
+			}
+		}
 	}
 }

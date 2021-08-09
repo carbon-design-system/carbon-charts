@@ -2,16 +2,19 @@
 import { Title } from './title';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
-import { Statuses } from './../../interfaces/enums';
+import { RenderTypes, Statuses } from './../../interfaces/enums';
 import * as Configuration from '../../configuration';
 
 export class MeterTitle extends Title {
 	type = 'meter-title';
+	renderType = RenderTypes.SVG;
 
 	render() {
 		const dataset = this.model.getDisplayData();
 		const options = this.getOptions();
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const { groupMapsTo } = options.data;
 
 		// the title for a meter, is the label for that dataset
@@ -53,12 +56,10 @@ export class MeterTitle extends Title {
 	 */
 	displayStatus() {
 		const self = this;
-		const svg = this.getContainerSVG();
-		const options = this.getOptions();
+		const svg = this.getComponentContainer();
 
-		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute
@@ -111,7 +112,7 @@ export class MeterTitle extends Title {
 		const dataValue = this.model.getDisplayData().value;
 
 		// use the title's position to append the percentage to the end
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title');
 
 		// check if it is enabled
@@ -177,9 +178,8 @@ export class MeterTitle extends Title {
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
 		// get a reference to the title elements to calculate the size the title can be
-		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute
@@ -199,6 +199,7 @@ export class MeterTitle extends Title {
 			this.parent,
 			'g.status-indicator'
 		).node();
+
 		const statusWidth =
 			DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
 			Configuration.meter.status.paddingLeft;

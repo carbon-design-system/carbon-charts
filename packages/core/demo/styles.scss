@@ -1,4 +1,14 @@
 @import '../src/styles/vendor/@carbon/elements/scss/themes/mixins';
+@import '../src/styles/vendor/carbon-components/scss/globals/grid/grid';
+@import '../src/styles/vendor/carbon-components/scss/components/button/button';
+@import '../src/styles/vendor/carbon-components/scss/components/select/select';
+@import '../src/styles/vendor/carbon-components/scss/components/tag/tag';
+@import '../src/styles/vendor/carbon-components/scss/components/tooltip/tooltip';
+@import '../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button';
+@import '../src/styles/vendor/carbon-components/scss/components/notification/inline-notification';
+
+@import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
+@import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
 
 body {
 	margin: 0;
@@ -41,6 +51,9 @@ div.container {
 	&.theme--g10 {
 		@import '../src/styles/styles-g10.scss';
 
+		@include modal;
+		@include data-table-core;
+
 		@include carbon--theme($carbon--theme--g10) {
 			color: $text-01;
 			background-color: $ui-background;
@@ -55,6 +68,9 @@ div.container {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			@include modal;
+			@include data-table-core;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -87,6 +103,9 @@ div.container {
 			background-color: $ui-background;
 			line-height: 1;
 
+			@include modal;
+			@include data-table-core;
+
 			.bx--radio-button__appearance {
 				background-color: transparent;
 				border-color: $icon-01;
@@ -110,20 +129,21 @@ div.container {
 		}
 	}
 
+	div#color-palette-picker {
+		max-width: 18rem;
+	}
+
 	&.theme--g90,
 	&.theme--g100 {
 		div#color-palette-picker div.bx--select label.bx--label {
 			color: #fff;
 			opacity: 0.6;
 		}
-	}
 
-	@import '../src/styles/vendor/carbon-components/scss/globals/grid/grid';
-	@import '../src/styles/vendor/carbon-components/scss/components/button/button';
-	@import '../src/styles/vendor/carbon-components/scss/components/select/select';
-	@import '../src/styles/vendor/carbon-components/scss/components/tag/tag';
-	@import '../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button';
-	@import '../src/styles/vendor/carbon-components/scss/components/notification/inline-notification';
+		a {
+			color: #78a9ff;
+		}
+	}
 
 	#chart-demo {
 		max-width: 700px;
@@ -137,10 +157,6 @@ div.container {
 		}
 	}
 
-	a {
-		color: #78a9ff;
-	}
-
 	h3 {
 		margin: 0;
 		font-weight: 700;
@@ -150,7 +166,8 @@ div.container {
 		}
 
 		span.bx--tag.component-name {
-			font-size: 0.8em;
+			font-size: 0.55em;
+			vertical-align: middle;
 			padding: 0.25em 1em;
 			border-radius: 1em;
 			font-weight: 600;
@@ -176,6 +193,7 @@ div.container {
 			padding: 2em !important;
 			-moz-tab-size: 4;
 			tab-size: 4;
+			line-height: 1.4;
 		}
 
 		.bx--snippet-container pre::after {
@@ -202,6 +220,40 @@ div.container {
 	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container,
 	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
 		padding-bottom: 0;
+	}
+
+	div.demo-desktop-only {
+		@media screen and (max-width: 768px) {
+			position: relative;
+			overflow: hidden;
+
+			&:before {
+				content: ' ';
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 0;
+				left: 0;
+				background: #f4f4f4;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		div.cp-message {
+			display: none;
+
+			@media screen and (max-width: 768px) {
+				position: absolute;
+				z-index: 2;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				display: block;
+				font-weight: bold;
+				text-align: center;
+			}
+		}
 	}
 
 	&.intro {
@@ -318,21 +370,31 @@ div.container {
 		@import '~highlight.js/styles/sunburst.css';
 
 		h1,
+		h2,
 		h5,
-		p,
-		pre {
+		p {
 			margin-bottom: 15px;
+		}
+
+		ul,
+		pre {
+			margin-bottom: 30px;
 		}
 
 		h5 {
 			margin-top: 30px;
 		}
 
-		ul li {
-			margin-bottom: 0.5em;
+		ul {
+			padding-inline-start: 15px;
+			list-style: disc;
 
-			&:last-child {
-				margin-bottom: 0;
+			li {
+				margin-bottom: 0.5em;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 		}
 
@@ -347,9 +409,11 @@ div.container {
 			background-color: black;
 			color: white;
 			padding: 15px;
+			margin-top: 15px;
 			-moz-tab-size: 4;
 			tab-size: 4;
 			font-size: 14px;
+			line-height: 1.4;
 
 			code {
 				background-color: unset;

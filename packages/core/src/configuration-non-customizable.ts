@@ -1,4 +1,4 @@
-import { ZoomBarTypes } from './interfaces';
+import { ZoomBarTypes, LegendItemType } from './interfaces';
 import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
@@ -31,6 +31,9 @@ export const canvasZoomSettings = {
 export const circlePack = {
 	circles: {
 		fillOpacity: 0.3,
+		hover: {
+			stroke: '#FFF',
+		},
 	},
 	padding: {
 		mainGroup: 4,
@@ -101,7 +104,7 @@ export const legend = {
 	},
 	area: {
 		width: 24,
-		height: 13,
+		height: 14,
 		fill: '#6f6f6f',
 		stroke: null,
 	},
@@ -227,3 +230,26 @@ export const zoomBar = {
 	handleBarWidth: 1,
 	handleBarHeight: 12,
 };
+
+export const defaultLegendAdditionalItems = [
+	{
+		type: LegendItemType.RADIUS,
+		name: 'Radius',
+	},
+	{
+		type: LegendItemType.AREA,
+		name: 'Poor area',
+	},
+	{
+		type: LegendItemType.AREA,
+		name: 'Satisfactory area',
+	},
+	{
+		type: LegendItemType.AREA,
+		name: 'Great area',
+	},
+	{
+		type: LegendItemType.QUARTILE,
+		name: 'Quartiles',
+	},
+]

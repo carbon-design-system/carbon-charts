@@ -1,18 +1,22 @@
 // Internal Imports
 import { Component } from '../component';
-import { Events, ScaleTypes } from '../../interfaces';
+import { Events, RenderTypes, ScaleTypes } from '../../interfaces';
 import { DOMUtils } from '../../services';
 
 // D3 Imports
 import { brushX } from 'd3-brush';
-import { event, mouse } from 'd3-selection';
 import { scaleTime } from 'd3-scale';
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { pointer } from 'd3-selection';
 
 // This class is used for handle brush events in chart
 export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
 	type = 'grid-brush';
+	renderType = RenderTypes.SVG;
 
 	selectionSelector = 'rect.selection'; // needs to match the class name in d3.brush
 
@@ -20,8 +24,9 @@ export class ChartBrush extends Component {
 
 	render(animate = true) {
 		const svg = this.parent;
+
 		// use this area to display selection above all graphs
-		const frontSelectionArea = this.getContainerSVG();
+		const frontSelectionArea = this.getComponentContainer();
 		const backdrop = DOMUtils.appendOrSelect(
 			svg,
 			'svg.chart-grid-backdrop'
@@ -79,14 +84,12 @@ export class ChartBrush extends Component {
 				if (dashCount % 2 === 1) {
 					dashArray += ',0';
 				}
-
 				dashArray += ',' + selectionWidth.toString(); // bottom (invisible)
 				dashArray += ',' + height.toString(); // left
-
 				frontSelection.attr('stroke-dasharray', dashArray);
 			};
 
-			const brushEventHandler = () => {
+			const brushEventHandler = (event) => {
 				// selection range: [0, width]
 				const selection = event.selection;
 				if (selection === null || selection[0] === selection[1]) {
@@ -95,7 +98,11 @@ export class ChartBrush extends Component {
 
 				// copy the d3 selection attrs to front selection element
 				frontSelection
-					.attr('x', d3Selection.attr('x'))
+					.attr(
+						'x',
+						parseFloat(d3Selection.attr('x')) +
+							parseFloat(backdrop.attr('x'))
+					)
 					.attr('y', d3Selection.attr('y'))
 					.attr('width', d3Selection.attr('width'))
 					.attr('height', d3Selection.attr('height'))
@@ -130,7 +137,7 @@ export class ChartBrush extends Component {
 				}
 			};
 
-			const brushed = () => {
+			const brushed = (event) => {
 				// max selection range: [0, width]
 				const selection = event.selection;
 
@@ -156,10 +163,12 @@ export class ChartBrush extends Component {
 			brushArea.call(brush);
 
 			const zoomRatio = this.services.zoom.getZoomRatio();
-			backdrop.on('click', function () {
+			backdrop.on('click', function (event) {
 				if (event.shiftKey) {
+					const holder = this.services.domUtils.getHolder();
+
 					// clickedX range: [0, width]
-					const clickedX = mouse(brushArea.node())[0];
+					const clickedX = pointer(brushArea.node(), holder)[0];
 
 					let leftPoint = clickedX - (width * zoomRatio) / 2;
 					if (leftPoint < 0) {
