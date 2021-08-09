@@ -11,7 +11,7 @@ import { Tools } from '../tools';
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';
-import { extent, sum } from 'd3-array';
+import { extent, max, sum } from 'd3-array';
 
 // Misc
 import {
@@ -527,6 +527,17 @@ export class CartesianScales extends Service {
 			return [];
 		}
 
+		if (axisOptions.binned) {
+			const { bins } = this.model.getBinConfigurations();
+			return [0, max(bins, (d) => d.length)];
+		} else if (axisOptions.onlyShowBins) {
+			const { bins } = this.model.getBinConfigurations();
+			return extent(
+				this.model.getStackKeys({ bins }),
+				(d: any) => d.split('-')[0]
+			);
+		}
+
 		const displayData = this.model.getDisplayData();
 		const {
 			extendLinearDomainBy,
@@ -597,7 +608,9 @@ export class CartesianScales extends Service {
 		) {
 			const { groupMapsTo } = options.data;
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(
-				dataGroupNames
+				{
+					groups: dataGroupNames,
+				}
 			);
 			const nonStackedGroupsData = displayData.filter(
 				(datum) => !dataGroupNames.includes(datum[groupMapsTo])

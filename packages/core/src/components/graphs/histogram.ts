@@ -7,10 +7,12 @@ import {
 	ColorClassNameTypes,
 	RenderTypes,
 } from '../../interfaces';
+import { Component } from '../component';
 
 // D3 Imports
 import { select, selectAll } from 'd3-selection';
-import { Component } from '../component';
+
+import { get } from 'lodash-es';
 
 export class Histogram extends Component {
 	type = 'histogram';
@@ -33,142 +35,118 @@ export class Histogram extends Component {
 	}
 
 	render(animate: boolean) {
-		// // Grab container SVG
-		// const svg = this.getComponentContainer();
+		// Grab container SVG
+		const svg = this.getComponentContainer();
 
-		// // Chart options mixed with the internal configurations
-		// const displayData = this.model.getDisplayData();
-		// const options = this.model.getOptions();
-		// const { groupIdentifier } = options;
-		// const { groupMapsTo } = options.data;
+		// Chart options mixed with the internal configurations
+		const options = this.model.getOptions();
+		const { groupIdentifier } = options;
+		const { groupMapsTo } = options.data;
 
-		// const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const binnedStackedData = this.model.getBinnedStackedData();
 
-		// // Create the data and keys that'll be used by the stack layout
-		// const stackKeys = Tools.removeArrayDuplicates(
-		// 	displayData.map((datum) =>
-		// 		datum[domainIdentifier] &&
-		// 		typeof datum[domainIdentifier].toString === 'function'
-		// 			? datum[domainIdentifier].toString()
-		// 			: datum[domainIdentifier]
-		// 	)
-		// );
+		const x = this.services.cartesianScales.getMainXScale();
+		const { bins } = this.model.getBinConfigurations();
 
-		// const percentage = Object.keys(options.axes).some(
-		// 	(axis) => options.axes[axis].percentage
-		// );
+		if (!bins) {
+			return;
+		}
 
-		// const stackData = this.model.getStackedData({
-		// 	percentage,
-		// 	groups: this.configs.groups,
-		// });
+		// Update data on all bar groups
+		const barGroups = svg
+			.selectAll('g.bars')
+			.data(binnedStackedData, (d) => d.key);
 
-		// const x = this.services.cartesianScales.getMainXScale();
-		// const bins = this.model.getHistogramBins();
+		barGroups.exit().attr('opacity', 0).remove();
 
-		// if (!bins) {
-		// 	return;
-		// }
+		// Add bar groups that need to be introduced
+		barGroups
+			.enter()
+			.append('g')
+			.classed('bars', true)
+			.attr('role', Roles.GROUP);
 
-		// const binsMap = bins.reduce((mapped, bin) => {
-		// 	mapped[bin.x0] = bin;
-		// 	return mapped;
-		// }, {});
+		// Update data on all bars
+		const bars = svg
+			.selectAll('g.bars')
+			.selectAll('path.bar')
+			.data((data) => data);
 
-		// // Update data on all bar groups
-		// const barGroups = svg.selectAll('g.bars').data(stackData, (d) => d.key);
+		// Remove bars that need to be removed
+		bars.exit().remove();
 
-		// barGroups.exit().attr('opacity', 0).remove();
+		bars.enter()
+			.append('path')
+			.merge(bars)
+			.classed('bar', true)
+			.attr(groupIdentifier, (d, i) => i)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'histogram-bar-update-enter',
+					animate,
+				})
+			)
+			.attr('class', (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: 'bar',
+				})
+			)
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d, i) => {
+				const bin = get(d, 'data');
 
-		// // Add bar groups that need to be introduced
-		// barGroups
-		// 	.enter()
-		// 	.append('g')
-		// 	.classed('bars', true)
-		// 	.attr('role', Roles.GROUP);
+				if (!bin) {
+					return;
+				}
 
-		// // Update data on all bars
-		// const bars = svg
-		// 	.selectAll('g.bars')
-		// 	.selectAll('path.bar')
-		// 	.data((data) => data);
+				/*
+				 * Orientation support for horizontal/vertical bar charts
+				 * Determine coordinates needed for a vertical set of paths
+				 * to draw the bars needed, and pass those coordinates down to
+				 * generateSVGPathString() to decide whether it needs to flip them
+				 */
+				const barWidth = x(bin.x1) - x(bin.x0) - 1;
+				const x0 = this.services.cartesianScales.getDomainValue(
+					bin.x0,
+					i
+				);
+				const x1 = x0 + barWidth;
 
-		// // Remove bars that need to be removed
-		// bars.exit().remove();
+				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
+				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
-		// bars.enter()
-		// 	.append('path')
-		// 	.merge(bars)
-		// 	.classed('bar', true)
-		// 	.attr(groupIdentifier, (d, i) => i)
-		// 	.transition()
-		// 	.call((t) =>
-		// 		this.services.transitions.setupTransition({
-		// 			transition: t,
-		// 			name: 'histogram-bar-update-enter',
-		// 			animate,
-		// 		})
-		// 	)
-		// 	.attr('class', (d) =>
-		// 		this.model.getColorClassName({
-		// 			classNameTypes: [ColorClassNameTypes.FILL],
-		// 			dataGroupName: d[groupMapsTo],
-		// 			originalClassName: 'bar',
-		// 		})
-		// 	)
-		// 	.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
-		// 	.attr('d', (d, i) => {
-		// 		const key = stackKeys[i];
-		// 		const bin = binsMap[key];
-		// 		if (!bin) {
-		// 			return;
-		// 		}
+				// Add the divider gap
+				if (
+					Math.abs(y1 - y0) > 0 &&
+					Math.abs(y1 - y0) > options.bars.dividerSize
+				) {
+					if (
+						this.services.cartesianScales.getOrientation() ===
+						CartesianOrientations.VERTICAL
+					) {
+						y1 += 1;
+					} else {
+						y1 -= 1;
+					}
+				}
 
-		// 		/*
-		// 		 * Orientation support for horizontal/vertical bar charts
-		// 		 * Determine coordinates needed for a vertical set of paths
-		// 		 * to draw the bars needed, and pass those coordinates down to
-		// 		 * generateSVGPathString() to decide whether it needs to flip them
-		// 		 */
-		// 		const barWidth = x(bin.x1) - x(bin.x0) - 1;
-		// 		const x0 = this.services.cartesianScales.getDomainValue(
-		// 			bin.x0,
-		// 			i
-		// 		);
-		// 		const x1 = x0 + barWidth;
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					this.services.cartesianScales.getOrientation()
+				);
+			})
+			.attr('opacity', 1)
+			// a11y
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'bar')
+			.attr('aria-label', (d) => d.value);
 
-		// 		const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
-		// 		let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
-
-		// 		// Add the divider gap
-		// 		if (
-		// 			Math.abs(y1 - y0) > 0 &&
-		// 			Math.abs(y1 - y0) > options.bars.dividerSize
-		// 		) {
-		// 			console.log("IT ISSSSS")
-		// 			if (
-		// 				this.services.cartesianScales.getOrientation() ===
-		// 				CartesianOrientations.VERTICAL
-		// 			) {
-		// 				y1 += 1;
-		// 			} else {
-		// 				y1 -= 1;
-		// 			}
-		// 		}
-
-		// 		return Tools.generateSVGPathString(
-		// 			{ x0, x1, y0, y1 },
-		// 			this.services.cartesianScales.getOrientation()
-		// 		);
-		// 	})
-		// 	.attr('opacity', 1)
-		// 	// a11y
-		// 	.attr('role', Roles.GRAPHICS_SYMBOL)
-		// 	.attr('aria-roledescription', 'bar')
-		// 	.attr('aria-label', (d) => d.value);
-
-		// // Add event listeners for the above elements
-		// this.addEventListeners(binsMap);
+		// Add event listeners for the above elements
+		this.addEventListeners();
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -198,7 +176,7 @@ export class Histogram extends Component {
 			.attr('opacity', 1);
 	};
 
-	addEventListeners(binsMap) {
+	addEventListeners() {
 		const options = this.model.getOptions();
 		const { groupIdentifier } = options;
 		const { groupMapsTo } = options.data;
@@ -217,21 +195,20 @@ export class Histogram extends Component {
 						groupIdentifier
 					)}"]`
 				);
-				console.log('groupElements', groupElements.nodes());
+
 				groupElements.each((d) =>
 					multidata.push({
 						[groupMapsTo]: d[groupMapsTo],
 						[rangeIdentifier]: d['data'][d[groupMapsTo]],
 					})
 				);
-				console.log('multidata', multidata);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement,
 					data: {
-						bin: binsMap[datum.data['sharedStackKey']],
+						// bin: binsMap[datum.data['sharedStackKey']],
 						multidata,
 						[groupIdentifier]: groupId,
 					},
@@ -260,7 +237,7 @@ export class Histogram extends Component {
 					event,
 					hoveredElement,
 					data: {
-						bin: binsMap[datum.data['sharedStackKey']],
+						// bin: binsMap[datum.data['sharedStackKey']],
 						multidata,
 						[groupIdentifier]: groupId,
 					},

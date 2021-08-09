@@ -774,16 +774,6 @@ const simpleChartDemos = [
 				chartType: chartTypes.HistogramChart,
 			},
 			{
-				options: histogramDemos.histogramTimeSeriesSumOptions,
-				data: histogramDemos.histogramTimeSeriesData,
-				chartType: chartTypes.HistogramChart,
-			},
-			{
-				options: histogramDemos.histogramTimeSeriesAvgOptions,
-				data: histogramDemos.histogramTimeSeriesData,
-				chartType: chartTypes.HistogramChart,
-			},
-			{
 				options: histogramDemos.histogramContinueWithBinsNumberOptions,
 				data: histogramDemos.histogramContinueWithBinsNumberData,
 				chartType: chartTypes.HistogramChart,

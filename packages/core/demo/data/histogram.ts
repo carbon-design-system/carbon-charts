@@ -37,11 +37,13 @@ export const histogramContinueOptions = {
 			title: 'Age',
 			mapsTo: 'age',
 			bins: 5,
+			onlyShowBins: true,
 		},
 		left: {
 			title: 'No. of partecipants',
 			scaleType: 'linear',
 			stacked: true,
+			binned: true,
 		},
 	},
 };
@@ -163,10 +165,12 @@ export const histogramContinueWithBinsNumberOptions = {
 			title: 'US $ (million)',
 			mapsTo: 'value',
 			bins: (870 - 200) / 10,
+			onlyShowBins: true,
 		},
 		left: {
 			title: 'No. of transactions',
 			scaleType: 'linear',
+			binned: true,
 		},
 	},
 };
@@ -178,11 +182,13 @@ export const histogramContinueWithBinsOptions = {
 			title: 'Age',
 			mapsTo: 'age',
 			bins: [20, 40, 50, 60, 90],
+			onlyShowBins: true
 		},
 		left: {
 			title: 'No. of partecipants',
 			scaleType: 'linear',
 			stacked: true,
+			binned: true
 		},
 	},
 };
@@ -308,38 +314,3 @@ export const histogramTimeSeriesData = [
 	{ group: 'Dataset 1', transactions: 100, value: 19 },
 	{ group: 'Dataset 2', transactions: 100, value: 16 },
 ];
-
-export const histogramTimeSeriesSumOptions = {
-	title: 'Histogram (sum) (linear)',
-	axes: {
-		bottom: {
-			title: 'US $ (million)',
-			mapsTo: 'value',
-			aggregation: 'sum',
-		},
-		left: {
-			title: 'Transactions values (sums)',
-			mapsTo: 'transactions',
-			scaleType: 'linear',
-			stacked: true,
-		},
-	},
-};
-
-export const histogramTimeSeriesAvgOptions = {
-	title: 'Histogram (avg) (linear)',
-	axes: {
-		left: {
-			title: 'Transactions values (avg)',
-			mapsTo: 'transactions',
-			scaleType: 'linear',
-			stacked: true,
-		},
-		bottom: {
-			title: 'US $ (million)',
-			mapsTo: 'value',
-			aggregation: 'avg',
-		},
-	},
-};
-

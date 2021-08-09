@@ -1,11 +1,19 @@
 // Internal Imports
 import * as Configuration from '../configuration';
+import { defaultBins } from '../configuration';
+
 import { Tools } from '../tools';
-import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
+import {
+	AggregationTypes,
+	Events,
+	ScaleTypes,
+	ColorClassNameTypes,
+} from '../interfaces';
 
 // D3
 import { scaleOrdinal } from 'd3-scale';
 import { stack } from 'd3-shape';
+import { histogram } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -181,6 +189,127 @@ export class ChartModel {
 		return activeDataGroups.map((dataGroup) => dataGroup.name);
 	}
 
+	private aggregateBinDataByGroup(bin, dataIdentifier, aggregation) {
+		const groups = Tools.groupBy(bin, 'group');
+
+		if (aggregation === AggregationTypes.COUNT) {
+			Object.keys(groups).map((group) => {
+				groups[group] = groups[group].length;
+			});
+		}
+		if (aggregation === AggregationTypes.SUM) {
+			Object.keys(groups).map((group) => {
+				groups[group] = groups[group].reduce(
+					(sum, datum) => sum + datum[dataIdentifier],
+					0
+				);
+			});
+		}
+		if (aggregation === AggregationTypes.AVG) {
+			Object.keys(groups).map((group) => {
+				groups[group] =
+					groups[group].reduce(
+						(sum, datum) => sum + datum[dataIdentifier],
+						0
+					) / groups[group].length;
+			});
+		}
+
+		return groups;
+	}
+
+	getBinConfigurations() {
+		// Manipulate data and options for Histogram
+		const data = this.getData();
+		const options = this.getOptions();
+
+		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const axisOptions = options.axes[mainXPos];
+		const { groupMapsTo } = options.data;
+		const { aggregation = AggregationTypes.COUNT } = axisOptions;
+		const { bins: axisBins = defaultBins } = axisOptions;
+		const areBinsDefined = Array.isArray(axisBins);
+
+		// Get Histogram bins
+		const bins = histogram()
+			.value((d) => d[domainIdentifier])
+			.thresholds(axisBins)(data);
+
+		if (!areBinsDefined) {
+			// If bins are not defined by user
+			const binsWidth = bins[0].x1 - bins[0].x0;
+			// Set last bin width as the others
+			bins[bins.length - 1].x1 = +bins[bins.length - 1].x0 + binsWidth;
+		} else {
+			// Set last bin end as the last user defined one
+			bins[bins.length - 1].x1 = axisBins[axisBins.length - 1];
+		}
+
+		const binsDomain = areBinsDefined
+			? [axisBins[0], axisBins[axisBins.length - 1]]
+			: [bins[0].x0, bins[bins.length - 1].x1];
+
+		// Get all groups
+		const groupsKeys = Array.from(new Set(data.map((d) => d[groupMapsTo])));
+
+		const histogramData = [];
+
+		// Group data by bin
+		bins.forEach((bin) => {
+			const key = `${bin.x0}-${bin.x1}`;
+			const aggregateDataByGroup = this.aggregateBinDataByGroup(
+				bin,
+				rangeIdentifier,
+				aggregation
+			);
+
+			groupsKeys.forEach((group: string) => {
+				// For each dataset put a bin with value 0 if not exist
+				// (Scale X won't change when changing showed datasets)
+				histogramData.push({
+					group,
+					key,
+					value: aggregateDataByGroup[group] || 0,
+					bin: bin.x0,
+				});
+			});
+		});
+
+		return {
+			bins,
+			binsDomain,
+		};
+	}
+
+	getBinnedStackedData() {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const dataGroupNames = this.getDataGroupNames();
+
+		const { bins } = this.getBinConfigurations();
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({
+			bins,
+		});
+
+		return stack()
+			.keys(dataGroupNames)(dataValuesGroupedByKeys)
+			.map((series, i) => {
+				// Add data group names to each series
+				return Object.keys(series)
+					.filter((key: any) => !isNaN(key))
+					.map((key) => {
+						const element = series[key];
+						element[groupMapsTo] = dataGroupNames[i];
+
+						return element;
+					});
+			});
+	}
+
 	getGroupedData(groups?) {
 		const displayData = this.getDisplayData(groups);
 		const groupedData = {};
@@ -204,23 +333,28 @@ export class ChartModel {
 		}));
 	}
 
-	getDataValuesGroupedByKeys(groups?) {
+	getStackKeys({ bins = null, groups = null }) {
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+
 		const displayData = this.getDisplayData(groups);
 
-		const stackKeys = Tools.removeArrayDuplicates(
-			displayData.map((datum) => {
-				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-					datum
-				);
+		let stackKeys;
+		if (bins) {
+			stackKeys = bins.map((bin) => `${bin.x0}-${bin.x1}`);
+		} else {
+			stackKeys = Tools.removeArrayDuplicates(
+				displayData.map((datum) => {
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+						datum
+					);
 
-				return datum[domainIdentifier] &&
-					typeof datum[domainIdentifier].toString === 'function'
-					? datum[domainIdentifier].toString()
-					: datum[domainIdentifier];
-			})
-		);
+					return datum[domainIdentifier] &&
+						typeof datum[domainIdentifier].toString === 'function'
+						? datum[domainIdentifier].toString()
+						: datum[domainIdentifier];
+				})
+			);
+		}
 
 		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
@@ -240,7 +374,37 @@ export class ChartModel {
 			stackKeys.sort((a: any, b: any) => a - b);
 		}
 
+		return stackKeys;
+	}
+
+	getDataValuesGroupedByKeys({ bins = null, groups = null }) {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+		const displayData = this.getDisplayData(groups);
+
 		const dataGroupNames = this.getDataGroupNames();
+
+		const stackKeys = this.getStackKeys({ bins, groups });
+		if (bins) {
+			return stackKeys.map((key) => {
+				const [binStart, binEnd] = key.split('-');
+
+				const correspondingValues = { x0: binStart, x1: binEnd };
+				const correspondingBin = bins.find(
+					(bin) => bin.x0.toString() === binStart.toString()
+				);
+
+				dataGroupNames.forEach((dataGroupName) => {
+					correspondingValues[
+						dataGroupName
+					] = correspondingBin.filter(
+						(binItem) => binItem[groupMapsTo] === dataGroupName
+					).length;
+				});
+
+				return correspondingValues;
+			}) as any;
+		}
 
 		return stackKeys.map((key) => {
 			const correspondingValues = { sharedStackKey: key };
@@ -274,7 +438,9 @@ export class ChartModel {
 		const { groupMapsTo } = options.data;
 
 		const dataGroupNames = this.getDataGroupNames(groups);
-		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys(groups);
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({
+			groups,
+		});
 
 		if (percentage) {
 			const maxByKey = Tools.fromPairs(
