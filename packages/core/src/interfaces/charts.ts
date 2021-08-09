@@ -3,7 +3,6 @@ import {
 	Statuses,
 	ArrowDirections,
 	Alignments,
-	AggregationTypes,
 	ChartTypes,
 } from './enums';
 import {
@@ -247,11 +246,6 @@ export interface HistogramChartOptions extends AxisChartOptions {
 	 * bins: [new Date(...), new Date(...), ...]
 	 */
 	bins?: number | any[];
-	/**
-	 * Aggregation types on bins
-	 * aggregation: "count" (default) | "sum" | "avg"
-	 */
-	aggregation?: AggregationTypes;
 }
 
 /**

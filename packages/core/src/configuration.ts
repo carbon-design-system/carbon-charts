@@ -576,6 +576,4 @@ export const options = {
 	wordCloudChart,
 };
 
-export const defaultBins = 10;
-
 export * from './configuration-non-customizable';

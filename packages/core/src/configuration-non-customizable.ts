@@ -73,6 +73,10 @@ export const boxplot = {
 	},
 };
 
+export const histogram = {
+	defaultBins: 10,
+};
+
 export const legend = {
 	items: {
 		status: {
@@ -252,4 +256,4 @@ export const defaultLegendAdditionalItems = [
 		type: LegendItemType.QUARTILE,
 		name: 'Quartiles',
 	},
-]
+];

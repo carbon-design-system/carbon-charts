@@ -660,7 +660,14 @@ export class Radar extends Component {
 			(update) =>
 				update.call((selection) =>
 					selection
+						.transition(
+							this.services.transitions.getTransition(
+								'radar_y_labels_update',
+								animate
+							)
+						)
 						.text((tick) => tick)
+						.attr('opacity', 1)
 						.attr(
 							'x',
 							(tick) =>
@@ -679,24 +686,17 @@ export class Radar extends Component {
 									c
 								).y
 						)
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_labels_update',
-								animate
-							)
-						)
-						.attr('opacity', 1)
 				),
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.attr('opacity', 0)
 						.transition(
 							this.services.transitions.getTransition(
 								'radar_y_labels_exit',
 								animate
 							)
 						)
+						.attr('opacity', 0)
 						.remove()
 				)
 		);

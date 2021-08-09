@@ -1,13 +1,9 @@
 // Internal Imports
 import * as Configuration from '../configuration';
-import { defaultBins } from '../configuration';
+import { histogram as histogramConfigs } from '../configuration-non-customizable';
 
 import { Tools } from '../tools';
-import {
-	Events,
-	ScaleTypes,
-	ColorClassNameTypes,
-} from '../interfaces';
+import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 
 // D3
 import { scaleOrdinal } from 'd3-scale';
@@ -202,7 +198,7 @@ export class ChartModel {
 
 		const axisOptions = options.axes[mainXPos];
 		const { groupMapsTo } = options.data;
-		const { bins: axisBins = defaultBins } = axisOptions;
+		const { bins: axisBins = histogramConfigs.defaultBins } = axisOptions;
 		const areBinsDefined = Array.isArray(axisBins);
 
 		// Get Histogram bins
