@@ -48,11 +48,7 @@ export class Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
-	init(
-		holder: Element,
-		chartConfigs: ChartConfig<BaseChartOptions>,
-		options?: BaseChartOptions
-	) {
+	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
 		this.model.set({ holder }, { skipUpdate: true });
 
@@ -70,10 +66,6 @@ export class Chart {
 			const animate = !!Tools.getProperty(e, 'detail', 'animate');
 			this.update(animate);
 		});
-
-		if (options) {
-			this.model.setOptions(options);
-		}
 
 		// Set model data & options
 		this.model.setData(chartConfigs.data);

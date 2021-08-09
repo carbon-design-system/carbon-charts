@@ -1,16 +1,14 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
-import {
-	ChartConfig,
-	ScatterChartOptions,
-} from '../interfaces/index';
+import { ChartConfig, ScatterChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
 
 // Components
 import {
 	Grid,
 	Histogram,
+	Ruler,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -46,6 +44,7 @@ export class HistogramChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Histogram(this.model, this.services),
 		];
 

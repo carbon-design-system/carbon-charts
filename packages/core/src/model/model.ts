@@ -4,7 +4,6 @@ import { defaultBins } from '../configuration';
 
 import { Tools } from '../tools';
 import {
-	AggregationTypes,
 	Events,
 	ScaleTypes,
 	ColorClassNameTypes,
@@ -189,33 +188,8 @@ export class ChartModel {
 		return activeDataGroups.map((dataGroup) => dataGroup.name);
 	}
 
-	private aggregateBinDataByGroup(bin, dataIdentifier, aggregation) {
-		const groups = Tools.groupBy(bin, 'group');
-
-		if (aggregation === AggregationTypes.COUNT) {
-			Object.keys(groups).map((group) => {
-				groups[group] = groups[group].length;
-			});
-		}
-		if (aggregation === AggregationTypes.SUM) {
-			Object.keys(groups).map((group) => {
-				groups[group] = groups[group].reduce(
-					(sum, datum) => sum + datum[dataIdentifier],
-					0
-				);
-			});
-		}
-		if (aggregation === AggregationTypes.AVG) {
-			Object.keys(groups).map((group) => {
-				groups[group] =
-					groups[group].reduce(
-						(sum, datum) => sum + datum[dataIdentifier],
-						0
-					) / groups[group].length;
-			});
-		}
-
-		return groups;
+	private aggregateBinDataByGroup(bin) {
+		return Tools.groupBy(bin, 'group');
 	}
 
 	getBinConfigurations() {
@@ -225,11 +199,9 @@ export class ChartModel {
 
 		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const axisOptions = options.axes[mainXPos];
 		const { groupMapsTo } = options.data;
-		const { aggregation = AggregationTypes.COUNT } = axisOptions;
 		const { bins: axisBins = defaultBins } = axisOptions;
 		const areBinsDefined = Array.isArray(axisBins);
 
@@ -260,11 +232,7 @@ export class ChartModel {
 		// Group data by bin
 		bins.forEach((bin) => {
 			const key = `${bin.x0}-${bin.x1}`;
-			const aggregateDataByGroup = this.aggregateBinDataByGroup(
-				bin,
-				rangeIdentifier,
-				aggregation
-			);
+			const aggregateDataByGroup = this.aggregateBinDataByGroup(bin);
 
 			groupsKeys.forEach((group: string) => {
 				// For each dataset put a bin with value 0 if not exist
@@ -288,7 +256,7 @@ export class ChartModel {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const dataGroupNames = this.getDataGroupNames();
+		const dataGroupNames = this.getActiveDataGroupNames();
 
 		const { bins } = this.getBinConfigurations();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({

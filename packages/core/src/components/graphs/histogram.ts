@@ -55,7 +55,7 @@ export class Histogram extends Component {
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(binnedStackedData, (d) => d.key);
+			.data(binnedStackedData, (d) => get(d, `0.${groupMapsTo}`));
 
 		barGroups.exit().attr('opacity', 0).remove();
 
