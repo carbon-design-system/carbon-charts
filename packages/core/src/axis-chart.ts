@@ -29,6 +29,8 @@ import { Tools } from './tools';
 
 import { CartesianScales, Curves, Zoom } from './services';
 
+import { get } from 'lodash-es';
+
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
 		cartesianScales: CartesianScales,
@@ -220,12 +222,10 @@ export class AxisChart extends Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			...(configs.excludeTooltip !== true
+			...(get(configs, 'excludeTooltip') !== true
 				? [new AxisChartsTooltip(this.model, this.services)]
 				: []),
-			...(configs.excludeModal !== true
-				? [new Modal(this.model, this.services)]
-				: []),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

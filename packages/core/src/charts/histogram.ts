@@ -1,4 +1,5 @@
 // Internal Imports
+import { ChartModelBinned } from '../model/binned-charts';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, ScatterChartOptions } from '../interfaces/index';
@@ -6,7 +7,6 @@ import { Tools } from '../tools';
 
 // Components
 import {
-	BinnedModal,
 	Grid,
 	Histogram,
 	Ruler,
@@ -19,6 +19,8 @@ import {
 } from '../components/index';
 
 export class HistogramChart extends AxisChart {
+	model = new ChartModelBinned(this.services);
+
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<ScatterChartOptions>
@@ -53,11 +55,9 @@ export class HistogramChart extends AxisChart {
 			graphFrameComponents,
 			{
 				excludeTooltip: true,
-				excludeModal: true
 			}
 		);
 		components.push(new TooltipHistogram(this.model, this.services));
-		components.push(new BinnedModal(this.model, this.services));
 
 		return components;
 	}

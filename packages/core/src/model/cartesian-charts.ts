@@ -14,42 +14,108 @@ export class ChartModelCartesian extends ChartModel {
 		super(services);
 	}
 
-	exportToCSV() {
+	// get the scales information
+	// needed for getTabularArray()
+	private assignRangeAndDomains() {
+		const { cartesianScales } = this.services;
+		const options = this.getOptions();
+		const isDualAxes = cartesianScales.isDualAxes();
+
+		const scales = {
+			primaryDomain: cartesianScales.domainAxisPosition,
+			primaryRange: cartesianScales.rangeAxisPosition,
+			secondaryDomain: null,
+			secondaryRange: null,
+		};
+		if (isDualAxes) {
+			scales.secondaryDomain =
+				cartesianScales.secondaryDomainAxisPosition;
+			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition;
+		}
+
+		Object.keys(scales).forEach((scale) => {
+			const position = scales[scale];
+			if (cartesianScales.scales[position]) {
+				scales[scale] = {
+					position: position,
+					label: cartesianScales.getScaleLabel(position),
+					identifier: Tools.getProperty(
+						options,
+						'axes',
+						position,
+						'mapsTo'
+					),
+				};
+			} else {
+				scales[scale] = null;
+			}
+		});
+
+		return scales;
+	}
+
+	getTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const { cartesianScales } = this.services;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = cartesianScales.getRangeIdentifier();
-		const domainScaleType = cartesianScales.getDomainAxisScaleType();
+		const {
+			primaryDomain,
+			primaryRange,
+			secondaryDomain,
+			secondaryRange,
+		} = this.assignRangeAndDomains();
 
+		const domainScaleType = cartesianScales.getDomainAxisScaleType();
 		let domainValueFormatter;
 		if (domainScaleType === ScaleTypes.TIME) {
 			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
 		}
 
-		// domain & range labels
-		const domainLabel = cartesianScales.getDomainLabel();
-		const rangeLabel = cartesianScales.getRangeLabel();
+		const result = [
+			[
+				'Group',
+				primaryDomain.label,
+				primaryRange.label,
+				...(secondaryDomain ? [secondaryDomain.label] : []),
+				...(secondaryRange ? [secondaryRange.label] : []),
+			],
+			...displayData.map((datum) => [
+				datum[groupMapsTo],
+				datum[primaryDomain.identifier] === null
+					? '&ndash;'
+					: domainValueFormatter
+					? domainValueFormatter(datum[primaryDomain.identifier])
+					: datum[primaryDomain.identifier],
+				datum[primaryRange.identifier] === null ||
+				isNaN(datum[primaryRange.identifier])
+					? '&ndash;'
+					: datum[primaryRange.identifier].toLocaleString(),
+				...(secondaryDomain
+					? [
+							datum[secondaryDomain.identifier] === null
+								? '&ndash;'
+								: datum[secondaryDomain.identifier],
+					  ]
+					: []),
+				...(secondaryRange
+					? [
+							datum[secondaryRange.identifier] === null ||
+							isNaN(datum[secondaryRange.identifier])
+								? '&ndash;'
+								: datum[secondaryRange.identifier],
+					  ]
+					: []),
+			]),
+		];
 
-		let data = [['Group', domainLabel, rangeLabel]];
-		data = data.concat(
-			displayData.map((datum) => [
-				`"${datum[groupMapsTo]}"`, // group
-				`"${
-					datum[domainIdentifier] === null
-						? '–'
-						: domainValueFormatter
-						? domainValueFormatter(datum[domainIdentifier])
-						: datum[domainIdentifier]
-				}"`, // domain value
-				`"${
-					datum[rangeIdentifier] === null
-						? '–'
-						: datum[rangeIdentifier].toLocaleString()
-				}"`, // range value
-			])
+		return result;
+	}
+
+	exportToCSV() {
+		let data = this.getTabularDataArray().map((row) =>
+			row.map((column) => `\"${column}\"`)
 		);
 
 		let csvString = '',
