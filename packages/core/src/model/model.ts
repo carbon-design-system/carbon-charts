@@ -190,7 +190,7 @@ export class ChartModel {
 
 	getBinConfigurations() {
 		// Manipulate data and options for Histogram
-		const data = this.getData();
+		const data = this.getDisplayData();
 		const options = this.getOptions();
 
 		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();

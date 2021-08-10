@@ -6,6 +6,7 @@ import { Tools } from '../tools';
 
 // Components
 import {
+	BinnedModal,
 	Grid,
 	Histogram,
 	Ruler,
@@ -49,9 +50,15 @@ export class HistogramChart extends AxisChart {
 		];
 
 		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
+			graphFrameComponents,
+			{
+				excludeTooltip: true,
+				excludeModal: true
+			}
 		);
 		components.push(new TooltipHistogram(this.model, this.services));
+		components.push(new BinnedModal(this.model, this.services));
+
 		return components;
 	}
 }

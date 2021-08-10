@@ -43,7 +43,7 @@ export class AxisChart extends Chart {
 
 	protected getAxisChartComponents(
 		graphFrameComponents: any[],
-		configs?: object
+		configs?: any
 	) {
 		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
@@ -220,8 +220,12 @@ export class AxisChart extends Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			new AxisChartsTooltip(this.model, this.services),
-			new Modal(this.model, this.services),
+			...(configs.excludeTooltip !== true
+				? [new AxisChartsTooltip(this.model, this.services)]
+				: []),
+			...(configs.excludeModal !== true
+				? [new Modal(this.model, this.services)]
+				: []),
 			new LayoutComponent(
 				this.model,
 				this.services,

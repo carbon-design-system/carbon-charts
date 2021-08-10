@@ -529,13 +529,16 @@ export class CartesianScales extends Service {
 
 		if (axisOptions.binned) {
 			const { bins } = this.model.getBinConfigurations();
+
 			return [0, max(bins, (d) => d.length)];
 		} else if (axisOptions.onlyShowBins) {
 			const { bins } = this.model.getBinConfigurations();
-			return extent(
-				this.model.getStackKeys({ bins }),
-				(d: any) => d.split('-')[0]
-			);
+			const stackKeys = this.model.getStackKeys({ bins });
+
+			return [
+				stackKeys[0].split('-')[0],
+				stackKeys[stackKeys.length - 1].split('-')[1],
+			];
 		}
 
 		const displayData = this.model.getDisplayData();

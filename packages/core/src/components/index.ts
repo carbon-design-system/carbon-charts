@@ -3,6 +3,7 @@ export * from './component';
 // ESSENTIALS
 export * from './essentials/legend';
 export * from './essentials/modal';
+export * from './essentials/modal-binned';
 export * from './essentials/threshold';
 export * from './essentials/title';
 export * from './essentials/title-meter';
