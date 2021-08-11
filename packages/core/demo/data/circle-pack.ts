@@ -62,10 +62,10 @@ export const circlePackTwoLevelCustomColorsOptions = {
 	},
 	color: {
 		scale: {
-			'Asia': 'green',
+			Asia: 'green',
 			'South America': 'blue',
 			'North America': 'orange',
-			'Europe': 'red',
+			Europe: 'red',
 		},
 	},
 };

@@ -245,10 +245,9 @@ export class Skeleton extends Component {
 
 	// same logic in pie
 	computeOuterRadius() {
-		const { width, height } = DOMUtils.getSVGElementSize(
-			this.parent,
-			{ useAttrs: true }
-		);
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+			useAttrs: true,
+		});
 		const radius = Math.min(width, height) / 2;
 		return radius + Configuration.pie.radiusOffset;
 	}

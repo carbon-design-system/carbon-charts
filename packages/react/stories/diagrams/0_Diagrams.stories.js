@@ -58,7 +58,8 @@ stories.add('Start here', () => {
 				<b>
 					Note that Carbon Charts does not provide layouts for
 					diagrams. You can utilize these components alongside
-					graphing libraries, or by composing your own layouts (see section 3).
+					graphing libraries, or by composing your own layouts (see
+					section 3).
 				</b>
 			</p>
 
@@ -90,7 +91,9 @@ stories.add('Start here', () => {
 
 			<h3 {...h3Style}>3. Layouts using external dependencies</h3>
 
-			<p>Here's an example using <b>elkjs</b> in react</p>
+			<p>
+				Here's an example using <b>elkjs</b> in react
+			</p>
 
 			<iframe
 				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"

@@ -298,7 +298,10 @@ export class Tooltip extends Component {
 
 		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition');
 		if (!mouseRelativePos) {
-			mouseRelativePos = pointer(Tools.getProperty(e, 'detail', 'event'), holder);
+			mouseRelativePos = pointer(
+				Tools.getProperty(e, 'detail', 'event'),
+				holder
+			);
 		} else {
 			const zoombarType = Tools.getProperty(
 				options,

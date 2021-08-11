@@ -299,7 +299,12 @@ export class ZoomBar extends Component {
 			} else if (selection[0] === selection[1]) {
 				// select behavior is not completed yet, do nothing
 			} else {
-				this.handleBrushedEvent(event, zoomDomain, this.xScale, selection);
+				this.handleBrushedEvent(
+					event,
+					zoomDomain,
+					this.xScale,
+					selection
+				);
 			}
 		};
 
@@ -329,7 +334,11 @@ export class ZoomBar extends Component {
 		];
 
 		// update brush handle position
-		this.updateBrushHandle(this.getComponentContainer(), selection, newDomain);
+		this.updateBrushHandle(
+			this.getComponentContainer(),
+			selection,
+			newDomain
+		);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse/touch event
