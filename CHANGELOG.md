@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.103](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.102...v0.41.103) (2021-08-11)
+
+
+### Bug Fixes
+
+* **angular:** area chart export ([#1114](https://github.com/carbon-design-system/carbon-charts/issues/1114)) ([ae37d85](https://github.com/carbon-design-system/carbon-charts/commit/ae37d854ea33dac04e8a7f88f23c30eadd49906f))
+
+
+
+
+
 ## [0.41.102](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.101...v0.41.102) (2021-08-10)
 
 
