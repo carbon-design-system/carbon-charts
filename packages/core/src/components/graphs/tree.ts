@@ -103,12 +103,7 @@ export class Tree extends Component {
 				.attr('dy', '0.31em')
 				.attr('x', (d) => (d._children ? -6 : 6))
 				.attr('text-anchor', (d) => (d._children ? 'end' : 'start'))
-				.text((d) => d.data.name)
-				.clone(true)
-				.lower()
-				.attr('stroke-linejoin', 'round')
-				.attr('stroke-width', 3)
-				.attr('stroke', 'white');
+				.text((d) => d.data.name);
 
 			// Reposition nodes
 			nodeGroups
@@ -189,12 +184,7 @@ export class Tree extends Component {
 			'none'
 		);
 
-		const linkGroup = svg
-			.append('g')
-			.attr('fill', 'none')
-			.attr('stroke', '#555')
-			.attr('stroke-opacity', 0.4)
-			.attr('stroke-width', 1.5);
+		const linkGroup = svg.append('g').attr('class', 'links');
 
 		const nodeGroup = svg.append('g');
 
