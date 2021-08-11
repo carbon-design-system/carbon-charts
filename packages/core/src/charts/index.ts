@@ -15,6 +15,7 @@ export * from './meter';
 export * from './radar';
 export * from './gauge';
 export * from './combo';
+export * from './tree';
 export * from './treemap';
 export * from './circle-pack';
 export * from './wordcloud';

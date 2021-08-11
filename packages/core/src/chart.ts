@@ -33,6 +33,8 @@ import {
 	Transitions,
 } from './services/index';
 
+import { get } from 'lodash-es';
+
 export class Chart {
 	components: Component[];
 	services: any = {
@@ -129,7 +131,7 @@ export class Chart {
 
 	protected getChartComponents(
 		graphFrameComponents: any[],
-		graphFrameRenderType = RenderTypes.SVG
+		configs?: object
 	) {
 		const titleComponent = {
 			id: 'title',
@@ -160,10 +162,11 @@ export class Chart {
 			id: 'graph-frame',
 			components: graphFrameComponents,
 			growth: LayoutGrowth.STRETCH,
-			renderType: graphFrameRenderType,
+			renderType: get(configs, 'graphFrameRenderType') || RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
+			get(configs, 'excludeLegend') !== true &&
 			this.model.getOptions().legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
