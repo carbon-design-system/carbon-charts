@@ -21,7 +21,7 @@ export class ChartModelBinned extends ChartModelCartesian {
 				),
 			],
 			...get(binnedStackedData, 0).map((d, i) => [
-				`${get(d, 'data.x0')} - ${get(d, 'data.x1')}`,
+				`${get(d, 'data.x0')} – ${get(d, 'data.x1')}`,
 				...binnedStackedData.map((datum) =>
 					get(datum[i], `data.${get(datum[i], groupMapsTo)}`)
 				),

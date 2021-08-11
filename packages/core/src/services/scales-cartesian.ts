@@ -119,8 +119,8 @@ export class CartesianScales extends Service {
 	}
 
 	getScaleLabel(position: AxisPositions) {
-		const options = this.getAxisOptions(position);
-		let title = options.title;
+		const axisOptions = this.getAxisOptions(position);
+		let title = axisOptions.title;
 		if (!title) {
 			if (
 				position === AxisPositions.BOTTOM ||

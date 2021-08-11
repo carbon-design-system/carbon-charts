@@ -10,7 +10,7 @@ import {
 import { Component } from '../component';
 
 // D3 Imports
-import { select, selectAll } from 'd3-selection';
+import { select } from 'd3-selection';
 
 import { get } from 'lodash-es';
 
@@ -46,11 +46,6 @@ export class Histogram extends Component {
 		const binnedStackedData = this.model.getBinnedStackedData();
 
 		const x = this.services.cartesianScales.getMainXScale();
-		const { bins } = this.model.getBinConfigurations();
-
-		if (!bins) {
-			return;
-		}
 
 		// Update data on all bar groups
 		const barGroups = svg
@@ -186,87 +181,56 @@ export class Histogram extends Component {
 			.selectAll('path.bar')
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				const groupId = hoveredElement.attr(groupIdentifier);
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 
-				const multidata = [];
-				const groupElements = selectAll(
-					`[${groupIdentifier}="${hoveredElement.attr(
-						groupIdentifier
-					)}"]`
+				hoveredElement.classed('hovered', true);
+				hoveredElement.transition(
+					self.services.transitions.getTransition(
+						'graph_element_mouseover_fill_update'
+					)
 				);
 
-				groupElements.each((d) =>
-					multidata.push({
-						[groupMapsTo]: d[groupMapsTo],
-						[rangeIdentifier]: d['data'][d[groupMapsTo]],
-					})
+				const x0 = parseFloat(get(datum, 'data.x0'));
+				const x1 = parseFloat(get(datum, 'data.x1'));
+
+				const rangeAxisPosition = self.services.cartesianScales.getRangeAxisPosition();
+				const rangeScaleLabel = self.services.cartesianScales.getScaleLabel(
+					rangeAxisPosition
 				);
 
-				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement,
-					data: {
-						// bin: binsMap[datum.data['sharedStackKey']],
-						multidata,
-						[groupIdentifier]: groupId,
-					},
+					items: [
+						{
+							label: 'Range',
+							value: `${x0} – ${x1}`,
+						},
+						{
+							label: options.tooltip.groupLabel || 'Group',
+							value: datum[groupMapsTo],
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo],
+							}),
+						},
+						{
+							label: rangeScaleLabel,
+							value: get(datum, `data.${datum[groupMapsTo]}`),
+						},
+					],
 				});
 			})
 			.on('mousemove', function (event, datum) {
-				const hoveredElement = select(this);
-				const groupId = hoveredElement.attr(groupIdentifier);
-				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-
-				const multidata = [];
-				const groupElements = selectAll(
-					`[${groupIdentifier}="${hoveredElement.attr(
-						groupIdentifier
-					)}"]`
-				);
-				groupElements.each((d) =>
-					multidata.push({
-						[groupMapsTo]: d[groupMapsTo],
-						[rangeIdentifier]: d['data'][d[groupMapsTo]],
-					})
-				);
-
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 					event,
-					hoveredElement,
-					data: {
-						// bin: binsMap[datum.data['sharedStackKey']],
-						multidata,
-						[groupIdentifier]: groupId,
-					},
-				});
-			})
-			.on('click', function (event, datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
-					event,
-					element: select(this),
-					datum,
 				});
 			})
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Select all same group elements
-				selectAll(
-					`[${groupIdentifier}="${hoveredElement.attr(
-						groupIdentifier
-					)}"]`
-				).classed('hovered', false);
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
-					event,
-					element: hoveredElement,
-					datum,
-				});
+				hoveredElement.classed('hovered', false);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE);

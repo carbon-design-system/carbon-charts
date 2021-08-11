@@ -46,6 +46,7 @@ export * from './axes/grid-brush';
 export * from './axes/chart-clip';
 export * from './axes/grid';
 export * from './axes/ruler';
+export * from './axes/ruler-binned';
 export * from './axes/ruler-stacked';
 export * from './axes/toolbar';
 export * from './axes/zero-line';

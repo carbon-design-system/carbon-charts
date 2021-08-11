@@ -14,7 +14,6 @@ export class AxisChartsTooltip extends Tooltip {
 
 		const options = this.getOptions();
 		const { cartesianScales } = this.services;
-		const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 
 		// Generate default tooltip

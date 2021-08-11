@@ -9,7 +9,7 @@ import { Tools } from '../tools';
 import {
 	Grid,
 	Histogram,
-	Ruler,
+	BinnedRuler,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -47,17 +47,13 @@ export class HistogramChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Ruler(this.model, this.services),
+			new BinnedRuler(this.model, this.services),
 			new Histogram(this.model, this.services),
 		];
 
 		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents,
-			{
-				excludeTooltip: true,
-			}
+			graphFrameComponents
 		);
-		components.push(new TooltipHistogram(this.model, this.services));
 
 		return components;
 	}

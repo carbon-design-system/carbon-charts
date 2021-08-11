@@ -10,7 +10,7 @@ import { Tools } from '../../tools';
 // is missing the `pointer` function
 import { Selection, pointer } from 'd3-selection';
 
-type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
+export type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
 const THRESHOLD = 5;
 
@@ -69,7 +69,7 @@ export class Ruler extends Component {
 		return tooltipData;
 	}
 
-	showRuler([x, y]: [number, number]) {
+	showRuler(event, [x, y]: [number, number]) {
 		const svg = this.parent;
 
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
@@ -190,8 +190,6 @@ export class Ruler extends Component {
 			// set current hovered elements
 			this.elementsToHighlight = elementsToHighlight;
 
-			console.log("tooltipData", tooltipData)
-
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				mousePosition: [x, y],
 				hoveredElement: rulerLine,
@@ -245,7 +243,7 @@ export class Ruler extends Component {
 		let mouseMoveCallback = function (event) {
 			const pos = pointer(event, self.parent.node());
 
-			self.showRuler(pos);
+			self.showRuler(event, pos);
 		};
 
 		// Debounce mouseMoveCallback if there are more than 100 datapoints
@@ -253,9 +251,9 @@ export class Ruler extends Component {
 			const debounceThreshold = (displayData.length % 50) * 12.5;
 
 			mouseMoveCallback = Tools.debounceWithD3MousePosition(
-				function () {
+				function (event) {
 					const { mousePosition } = this;
-					self.showRuler(mousePosition);
+					self.showRuler(event, mousePosition);
 				},
 				debounceThreshold,
 				holder

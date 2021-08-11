@@ -40,7 +40,7 @@ export const histogramContinueOptions = {
 			onlyShowBins: true,
 		},
 		left: {
-			title: 'No. of partecipants',
+			title: 'No. of participants',
 			scaleType: 'linear',
 			stacked: true,
 			binned: true,
@@ -185,7 +185,7 @@ export const histogramContinueWithBinsOptions = {
 			onlyShowBins: true
 		},
 		left: {
-			title: 'No. of partecipants',
+			title: 'No. of participants',
 			scaleType: 'linear',
 			stacked: true,
 			binned: true
