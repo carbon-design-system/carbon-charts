@@ -1,6 +1,16 @@
 .#{$prefix}--#{$charts-prefix}--radar {
 	.blobs path {
 		stroke-width: 1.5px;
+
+		&.blob-stroke {
+			stroke: $ui-background;
+			stroke-width: 4px;
+		}
+	}
+
+	circle {
+		stroke: $ui-background;
+		stroke-width: 2px;
 	}
 
 	.y-axes path,

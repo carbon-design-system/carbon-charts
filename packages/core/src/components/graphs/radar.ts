@@ -24,6 +24,7 @@ import { select } from 'd3-selection';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { max, min, extent } from 'd3-array';
 import { lineRadial, curveLinearClosed } from 'd3-shape';
+import { selectAll } from 'd3';
 
 export class Radar extends Component {
 	type = 'radar';
@@ -441,11 +442,11 @@ export class Radar extends Component {
 			Roles.GROUP
 		);
 		const blobUpdate = blobs
-			.selectAll('path')
+			.selectAll('path.blob')
 			.data(this.groupedDataNormalized, (group) => group.name);
 
 		blobUpdate.join(
-			(enter) =>
+			(enter) => {
 				enter
 					.append('path')
 					.attr('class', (group) =>
@@ -472,7 +473,6 @@ export class Radar extends Component {
 					.style('fill', (group) => colorScale(group.name))
 					.style('fill-opacity', Configuration.radar.opacity.selected)
 					.style('stroke', (group) => colorScale(group.name))
-
 					.call((selection) => {
 						const selectionUpdate = selection.transition(
 							this.services.transitions.getTransition(
@@ -492,7 +492,32 @@ export class Radar extends Component {
 							.attr('d', (group) =>
 								radialLineGenerator(group.data)
 							);
-					}),
+					})
+					.call((selection) => {
+						/*
+						 * create clone for the blob stroke
+						 * and style accordingly
+						 */
+						setTimeout(() =>
+							selection.each(function () {
+								const node = this;
+								const nodeSelection = select(this);
+
+								const clonedNode = node.parentNode.insertBefore(
+									node.cloneNode(true),
+									node
+								);
+
+								select(clonedNode)
+									.datum(nodeSelection.datum())
+									.attr('d', nodeSelection.attr('d'))
+									.attr('class', 'blob-stroke')
+									.style('fill-opacity', 0)
+									.style('stroke', null);
+							})
+						);
+					});
+			},
 			(update) => {
 				update
 					.attr('class', (group) =>
@@ -789,7 +814,11 @@ export class Radar extends Component {
 				this.services.transitions.getTransition('legend-hover-blob')
 			)
 			.style('fill-opacity', (group) => {
-				if (group.name !== hoveredElement.datum().name) {
+				console.log('hoveredElement.datum()', hoveredElement.datum());
+				if (
+					hoveredElement.datum() &&
+					group.name !== hoveredElement.datum().name
+				) {
 					return Configuration.radar.opacity.unselected;
 				}
 				return Configuration.radar.opacity.selected;
