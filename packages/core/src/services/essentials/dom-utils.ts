@@ -196,6 +196,8 @@ export class DOMUtils extends Service {
 		}
 
 		this.addHolderListeners();
+
+		this.handleFullscreenChange();
 	}
 
 	addMainContainer() {
@@ -302,10 +304,13 @@ export class DOMUtils extends Service {
 
 		const isFullScreen = holderSelection.classed('fullscreen');
 
-		// Toggle the `fullscreen` classname
-		holderSelection.classed('fullscreen', !isFullScreen);
-
-		if (isFullScreen) {
+		if (
+			isFullScreen &&
+			(document.fullscreenElement ||
+				document['webkitFullscreenElement'] ||
+				document['mozFullScreenElement'] ||
+				document['msFullscreenElement'])
+		) {
 			// Call the correct function depending on the browser
 			if (document.exitFullscreen) {
 				document.exitFullscreen();
@@ -328,6 +333,16 @@ export class DOMUtils extends Service {
 				holder.msRequestFullscreen();
 			}
 		}
+	}
+
+	handleFullscreenChange() {
+		document.addEventListener('fullscreenchange', () => {
+			const holderSelection = select(this.getHolder());
+			const isFullScreen = holderSelection.classed('fullscreen');
+
+			// Toggle the `fullscreen` classname
+			holderSelection.classed('fullscreen', !isFullScreen);
+		});
 	}
 
 	verifyCSSStylesBeingApplied() {

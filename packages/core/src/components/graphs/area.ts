@@ -222,11 +222,13 @@ export class Area extends Component {
 					})
 				)
 				.style('fill', (group) => self.model.getFillColor(group.name))
-				.transition(
-					this.services.transitions.getTransition(
-						'area-update-enter',
-						animate
-					)
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'area-update-enter',
+						animate,
+					})
 				)
 				.attr(
 					'opacity',
@@ -276,12 +278,6 @@ export class Area extends Component {
 	};
 
 	destroy() {
-		// Remove event listeners
-		this.parent
-			.selectAll('path.area')
-			.on('mousemove', null)
-			.on('mouseout', null);
-
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(

@@ -1,8 +1,9 @@
 import { ScaleTypes, TickRotations, AxisTitleOrientations } from './enums';
-import { AxisDomain } from 'd3';
-import { Locale } from 'date-fns';
 import { ThresholdOptions } from './components';
 import { TruncationOptions } from './truncation';
+
+import { AxisDomain } from 'd3-axis';
+import { Locale } from 'date-fns';
 
 /**
  * options to configure a scale. not all options are used by all scales

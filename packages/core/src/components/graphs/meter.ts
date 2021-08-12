@@ -154,11 +154,13 @@ export class Meter extends Component {
 					originalClassName: className,
 				})
 			)
-			.transition(
-				this.services.transitions.getTransition(
-					'meter-bar-update',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'meter-bar-update',
+					animate,
+				})
 			)
 			.attr('width', (d, i) => {
 				return d.value > domainMax ? xScale(domainMax) : d.width;
@@ -204,12 +206,13 @@ export class Meter extends Component {
 				);
 				return userProvidedHeight ? userProvidedHeight : 8;
 			})
-			.transition(
-				this.services.transitions.getTransition(
-					'peak-line-update',
-					animate
-				)
-			)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'peak-line-update',
+					animate,
+				}))
 			.attr('x1', (d) => xScale(d))
 			.attr('x2', (d) => xScale(d))
 			// a11y

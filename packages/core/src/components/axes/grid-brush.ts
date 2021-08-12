@@ -5,8 +5,11 @@ import { DOMUtils } from '../../services';
 
 // D3 Imports
 import { brushX } from 'd3-brush';
-import { event, mouse } from 'd3-selection';
 import { scaleTime } from 'd3-scale';
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { pointer } from 'd3-selection';
 
 // This class is used for handle brush events in chart
 export class ChartBrush extends Component {
@@ -86,7 +89,7 @@ export class ChartBrush extends Component {
 				frontSelection.attr('stroke-dasharray', dashArray);
 			};
 
-			const brushEventHandler = () => {
+			const brushEventHandler = (event) => {
 				// selection range: [0, width]
 				const selection = event.selection;
 				if (selection === null || selection[0] === selection[1]) {
@@ -134,7 +137,7 @@ export class ChartBrush extends Component {
 				}
 			};
 
-			const brushed = () => {
+			const brushed = (event) => {
 				// max selection range: [0, width]
 				const selection = event.selection;
 
@@ -160,10 +163,12 @@ export class ChartBrush extends Component {
 			brushArea.call(brush);
 
 			const zoomRatio = this.services.zoom.getZoomRatio();
-			backdrop.on('click', function () {
+			backdrop.on('click', function (event) {
 				if (event.shiftKey) {
+					const holder = this.services.domUtils.getHolder();
+
 					// clickedX range: [0, width]
-					const clickedX = mouse(brushArea.node())[0];
+					const clickedX = pointer(brushArea.node(), holder)[0];
 
 					let leftPoint = clickedX - (width * zoomRatio) / 2;
 					if (leftPoint < 0) {

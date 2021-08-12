@@ -16,6 +16,7 @@ import * as Configuration from '../../configuration';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
+import { transition } from 'd3-transition';
 
 // Pie slice tween function
 function arcTween(a, arcFunc) {
@@ -107,7 +108,7 @@ export class Pie extends Component {
 			.attr('opacity', 0);
 
 		// Update styles & position on existing and entering slices
-		enteringPaths
+		const allPaths = enteringPaths
 			.merge(paths)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -117,12 +118,16 @@ export class Pie extends Component {
 				})
 			)
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
-			.attr('d', this.arc)
-			.transition(
-				this.services.transitions.getTransition(
-					'pie-slice-enter-update',
-					animate
-				)
+			.attr('d', this.arc);
+
+		allPaths
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'pie_slice_enter_update',
+					animate,
+				})
 			)
 			.attr('opacity', 1)
 			// a11y
@@ -408,7 +413,7 @@ export class Pie extends Component {
 		const self = this;
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -422,6 +427,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					event,
 					element: select(this),
 					datum,
 				});
@@ -429,6 +435,7 @@ export class Pie extends Component {
 				const { groupMapsTo } = self.getOptions().data;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -438,26 +445,30 @@ export class Pie extends Component {
 					],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -470,6 +481,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

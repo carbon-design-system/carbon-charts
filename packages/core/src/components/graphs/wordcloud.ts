@@ -204,7 +204,7 @@ export class WordCloud extends Component {
 		const self = this;
 		this.parent
 			.selectAll('text.word')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = this;
 				debouncedHighlight(hoveredElement);
 
@@ -212,6 +212,7 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_MOUSEOVER,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
@@ -219,6 +220,7 @@ export class WordCloud extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -240,7 +242,7 @@ export class WordCloud extends Component {
 					],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -253,19 +255,22 @@ export class WordCloud extends Component {
 				);
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedHighlight(null);
 
@@ -273,6 +278,7 @@ export class WordCloud extends Component {
 				self.services.events.dispatchEvent(
 					Events.WordCloud.WORD_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

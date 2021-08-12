@@ -1,6 +1,7 @@
 export * from './charts.module';
 
 export * from './base-chart.component';
+export * from './area-chart.component';
 export * from './area-chart-stacked.component';
 export * from './bar-chart-simple.component';
 export * from './bar-chart-grouped.component';

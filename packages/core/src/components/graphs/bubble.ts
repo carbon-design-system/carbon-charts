@@ -63,11 +63,13 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed('dot', true)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
-			.transition(
-				this.services.transitions.getTransition(
-					'bubble-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bubble-update-enter',
+					animate,
+				})
 			)
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)

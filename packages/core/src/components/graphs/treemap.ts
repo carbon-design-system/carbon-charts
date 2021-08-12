@@ -124,8 +124,13 @@ export class Treemap extends Component {
 
 		allLeafGroups
 			.attr('data-name', 'leaf')
-			.transition(
-				transitions.getTransition('treemap-group-update', animate)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'treemap-group-update',
+					animate,
+				})
 			)
 			.attr('transform', (d) => `translate(${d.x0},${d.y0})`);
 
@@ -155,11 +160,13 @@ export class Treemap extends Component {
 					originalClassName: 'leaf',
 				});
 			})
-			.transition(
-				this.services.transitions.getTransition(
-					'treemap-leaf-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'treemap-leaf-update-enter',
+					animate,
+				})
 			)
 			.attr('width', (d) => d.x1 - d.x0)
 			.attr('height', (d) => d.y1 - d.y0)
@@ -263,7 +270,7 @@ export class Treemap extends Component {
 		const self = this;
 		this.parent
 			.selectAll('rect.leaf')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				let fillColor = getComputedStyle(this, null).getPropertyValue(
 					'fill'
@@ -290,6 +297,7 @@ export class Treemap extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -308,33 +316,38 @@ export class Treemap extends Component {
 				self.services.events.dispatchEvent(
 					Events.Treemap.LEAF_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Treemap.LEAF_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Treemap.LEAF_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -355,6 +368,7 @@ export class Treemap extends Component {
 				self.services.events.dispatchEvent(
 					Events.Treemap.LEAF_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
