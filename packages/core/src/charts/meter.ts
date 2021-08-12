@@ -61,7 +61,7 @@ export class MeterChart extends Chart {
 		const titleComponent = {
 			id: 'meter-title',
 			components: [new MeterTitle(this.model, this.services)],
-			growth: LayoutGrowth.PREFERRED,
+			growth: LayoutGrowth.STRETCH,
 			renderType: RenderTypes.SVG,
 		};
 
@@ -69,7 +69,7 @@ export class MeterChart extends Chart {
 		const titleSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: LayoutGrowth.PREFERRED,
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		// the graph frame for meter includes the custom title (and spacer)

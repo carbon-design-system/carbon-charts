@@ -57,7 +57,7 @@ export const propMeterData = [
 
 export const propMeterOptions = {
 	title: 'Proportional Meter Chart',
-	height: '110px',
+	height: '130px',
 	meter: {
 		proportional: {
 			total: 2000,
@@ -73,7 +73,7 @@ export const propMeterOptions = {
 
 export const propMeterTruncationOptions = {
 	title: 'Proportional Meter Chart (truncated)',
-	height: '110px',
+	height: '130px',
 	meter: {
 		proportional: {
 			total: 2000,
