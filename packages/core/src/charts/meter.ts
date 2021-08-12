@@ -32,9 +32,13 @@ export class MeterChart extends Chart {
 		// use prop meter options or regular meter options
 		let options = chartConfigs.options.meter.proportional
 			? Tools.merge(
-				Tools.clone(Configuration.options.proportionalMeterChart), chartConfigs.options)
+					Tools.clone(Configuration.options.proportionalMeterChart),
+					chartConfigs.options
+			  )
 			: Tools.merge(
-				Tools.clone(Configuration.options.meterChart), chartConfigs.options);
+					Tools.clone(Configuration.options.meterChart),
+					chartConfigs.options
+			  );
 
 		// Merge the default options for this chart
 		// With the user provided options

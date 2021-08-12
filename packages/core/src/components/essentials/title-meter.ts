@@ -10,15 +10,9 @@ export class MeterTitle extends Title {
 	renderType = RenderTypes.SVG;
 
 	render() {
-		const dataset = Tools.getProperty(
-			this.model.getDisplayData(),
-			0,
-			'value'
-		);
+		const dataset = Tools.getProperty(this.model.getDisplayData(), 0);
 		const options = this.getOptions();
-		const svg = this.getComponentContainer()
-			.attr('width', '100%')
-			.attr('height', '100%');
+		const svg = this.getComponentContainer();
 		const { groupMapsTo } = options.data;
 
 		const proportional = Tools.getProperty(
@@ -145,9 +139,12 @@ export class MeterTitle extends Title {
 			'meter',
 			'proportional',
 			'total'
-		)
+		);
+
+		const totalValue = total
 			? Tools.getProperty(options, 'meter', 'proportional', 'total')
 			: this.model.getMaximumDomain(this.model.getDisplayData());
+
 		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
 			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
 			: '';
@@ -162,7 +159,7 @@ export class MeterTitle extends Title {
 
 		const totalString =
 			totalFormatter !== null
-				? totalFormatter(total)
+				? totalFormatter(totalValue)
 				: `${total} ${unit} total`;
 
 		const containerBounds = DOMUtils.getSVGElementSize(

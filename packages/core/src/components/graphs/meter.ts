@@ -212,7 +212,8 @@ export class Meter extends Component {
 					transition: t,
 					name: 'peak-line-update',
 					animate,
-				}))
+				})
+			)
 			.attr('x1', (d) => xScale(d))
 			.attr('x2', (d) => xScale(d))
 			// a11y
@@ -254,7 +255,7 @@ export class Meter extends Component {
 					}
 				);
 
-				if (!proportional) {
+				if (proportional) {
 					hoveredElement.classed('hovered', true);
 
 					hoveredElement.transition(
@@ -286,7 +287,7 @@ export class Meter extends Component {
 					}
 				);
 
-				if (!proportional) {
+				if (proportional) {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				}
 			})
@@ -309,7 +310,7 @@ export class Meter extends Component {
 					}
 				);
 
-				if (!proportional) {
+				if (proportional) {
 					hoveredElement.classed('hovered', false);
 
 					// Hide tooltip
