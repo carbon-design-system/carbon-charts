@@ -12,6 +12,7 @@ import { BubbleChartComponent } from './bubble-chart.component';
 import { BulletChartComponent } from './bullet-chart.component';
 import { DonutChartComponent } from './donut-chart.component';
 import { GaugeChartComponent } from './gauge-chart.component';
+import { HistogramChartComponent } from './histogram-chart.component';
 import { LineChartComponent } from './line-chart.component';
 import { LollipopChartComponent } from './lollipop-chart.component';
 import { PieChartComponent } from './pie-chart.component';
@@ -37,6 +38,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		BulletChartComponent,
 		DonutChartComponent,
 		GaugeChartComponent,
+		HistogramChartComponent,
 		LineChartComponent,
 		LollipopChartComponent,
 		PieChartComponent,
@@ -60,6 +62,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		BulletChartComponent,
 		DonutChartComponent,
 		GaugeChartComponent,
+		HistogramChartComponent,
 		LineChartComponent,
 		LollipopChartComponent,
 		PieChartComponent,

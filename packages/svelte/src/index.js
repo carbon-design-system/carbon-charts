@@ -14,6 +14,7 @@ import PieChart from './PieChart.svelte';
 import ScatterChart from './ScatterChart.svelte';
 import RadarChart from './RadarChart.svelte';
 import GaugeChart from './GaugeChart.svelte';
+import HistogramChart from './HistogramChart.svelte';
 import MeterChart from './MeterChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
@@ -36,6 +37,7 @@ export {
 	ScatterChart,
 	RadarChart,
 	GaugeChart,
+	HistogramChart,
 	MeterChart,
 	TreemapChart,
 	CirclePackChart,
