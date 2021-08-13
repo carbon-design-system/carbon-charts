@@ -1,5 +1,21 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.42.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.103...v0.42.0) (2021-08-13)
+
+
+### Features
+
+* **charts:** add histogram ([#1038](https://github.com/carbon-design-system/carbon-charts/issues/1038)) ([07e07b3](https://github.com/carbon-design-system/carbon-charts/commit/07e07b3a2e8bc0eb01a7f4fdfc004e8095fb7b26))
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
