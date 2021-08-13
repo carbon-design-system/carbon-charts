@@ -55,11 +55,10 @@ export class GroupedBar extends Bar {
 					datum
 				);
 
-				if (datum[domainIdentifier].toString) {
-					return datum[domainIdentifier].toString();
-				}
-
-				return datum[domainIdentifier];
+				return datum[domainIdentifier] &&
+					typeof datum[domainIdentifier].toString === 'function'
+					? datum[domainIdentifier].toString()
+					: datum[domainIdentifier];
 			})
 		);
 

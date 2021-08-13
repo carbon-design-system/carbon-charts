@@ -3,13 +3,14 @@ import { AxisPositions, Events, ScaleTypes } from '../interfaces';
 import { Service } from './service';
 import { Tools } from '../tools';
 import * as Configuration from '../configuration';
-import { ChartModelCartesian } from '../model-cartesian-charts';
+import { ChartModelCartesian } from '../model/cartesian-charts';
 
 // D3 imports
 import { extent } from 'd3-array';
 
 export class Zoom extends Service {
 	protected model: ChartModelCartesian;
+
 	isZoomBarEnabled() {
 		// CartesianScales service is only available in axis charts
 		if (!this.services.cartesianScales) {

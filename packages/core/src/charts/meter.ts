@@ -1,5 +1,5 @@
 // Internal Imports
-import { MeterChartModel } from '../model-meter';
+import { MeterChartModel } from '../model/meter';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import {

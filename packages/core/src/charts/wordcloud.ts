@@ -1,5 +1,5 @@
 // Internal Imports
-import { PieChartModel } from '../model-pie';
+import { PieChartModel } from '../model/pie';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, WorldCloudChartOptions } from '../interfaces/index';

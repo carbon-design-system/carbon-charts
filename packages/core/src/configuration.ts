@@ -14,12 +14,14 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	BulletChartOptions,
+	HistogramChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
 	TreemapChartOptions,
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	// Components
+	AxisOptions,
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
@@ -30,7 +32,6 @@ import {
 	StackedBarOptions,
 	MeterChartOptions,
 	ToolbarOptions,
-	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
@@ -111,7 +112,7 @@ export const baseTooltip: TooltipOptions = {
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
 // and by TwoDimensionalAxes.
-const axes: AxesOptions = {
+const axes: AxesOptions<AxisOptions> = {
 	top: {
 		visible: true,
 		includeZero: true,
@@ -152,12 +153,11 @@ export const timeScale: TimeScaleOptions = {
 };
 
 const isFullScreenEnabled =
-	typeof document !== 'undefined' && (
-		document['fullscreenEnabled'] ||
+	typeof document !== 'undefined' &&
+	(document['fullscreenEnabled'] ||
 		document['webkitFullscreenEnabled'] ||
 		document['mozFullScreenEnabled'] ||
-		document['msFullscreenEnabled']
-	);
+		document['msFullscreenEnabled']);
 
 /**
  * Base chart options common to any chart
@@ -393,6 +393,18 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 	},
 } as BulletChartOptions);
 
+/**
+ * options specific to stacked bar charts
+ */
+const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+	bars: {
+		dividerSize: 1.5,
+	} as StackedBarOptions,
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0,
+	} as TimeScaleOptions),
+} as BarChartOptions);
+
 /*
  * options specific to word cloud charts
  */
@@ -547,6 +559,7 @@ export const options = {
 	boxplotChart,
 	bubbleChart,
 	bulletChart,
+	histogramChart,
 	lineChart,
 	areaChart,
 	stackedAreaChart,

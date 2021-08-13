@@ -1,7 +1,7 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 import { Events, ScaleTypes } from '../../interfaces';
 
 // Carbon modal
@@ -15,6 +15,8 @@ import { select } from 'd3-selection';
 
 // date formatting
 import { format } from 'date-fns';
+
+import { get } from 'lodash-es';
 
 export class Modal extends Component {
 	type = 'modal';
@@ -69,65 +71,12 @@ export class Modal extends Component {
 		);
 	}
 
-	// get the scales information
-	assignRangeAndDomains() {
-		const { cartesianScales } = this.services;
-		const options = this.model.getOptions();
-		const isDualAxes = cartesianScales.isDualAxes();
-
-		const scales = {
-			primaryDomain: cartesianScales.domainAxisPosition,
-			primaryRange: cartesianScales.rangeAxisPosition,
-			secondaryDomain: null,
-			secondaryRange: null,
-		};
-		if (isDualAxes) {
-			scales.secondaryDomain =
-				cartesianScales.secondaryDomainAxisPosition;
-			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition;
-		}
-
-		Object.keys(scales).forEach((scale) => {
-			const position = scales[scale];
-			if (cartesianScales.scales[position]) {
-				scales[scale] = {
-					position: position,
-					label: cartesianScales.getScaleLabel(position),
-					identifier: Tools.getProperty(
-						options,
-						'axes',
-						position,
-						'mapsTo'
-					),
-				};
-			} else {
-				scales[scale] = null;
-			}
-		});
-
-		return scales;
-	}
-
 	getModalHTML() {
-		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
-
-		const { cartesianScales } = this.services;
-		const {
-			primaryDomain,
-			primaryRange,
-			secondaryDomain,
-			secondaryRange,
-		} = this.assignRangeAndDomains();
-
-		const domainScaleType = cartesianScales.getDomainAxisScaleType();
-		let domainValueFormatter;
-		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
-		}
 
 		const chartprefix = Tools.getProperty(options, 'style', 'prefix');
+
+		const tableArray = this.model.getTabularDataArray();
 
 		return `
 		<div class="bx--modal-container">
@@ -143,90 +92,22 @@ export class Modal extends Component {
 			<div class="bx--modal-content"><table class="bx--data-table bx--data-table--no-border">
 					<thead>
 						<tr>
-							<th scope="col">
-								<div class="bx--table-header-label">Group</div>
-							</th>
-							<th scope="col">
-								<div class="bx--table-header-label">${primaryDomain.label}</div>
-							</th>
-							<th scope="col">
-								<div class="bx--table-header-label">${primaryRange.label}</div>
-							</th>
-							${
-								secondaryDomain
-									? `<th scope="col"><div class="bx--table-header-label">${secondaryDomain.label}</div></th>`
-									: ``
-							}
-							${
-								secondaryRange
-									? `<th scope="col"><div class="bx--table-header-label">${secondaryRange.label}</div></th>`
-									: ``
-							}
+							${get(tableArray, 0)
+								.map(
+									(heading) => `<th scope="col">
+								<div class="bx--table-header-label">${heading}</div>
+							</th>`
+								)
+								.join('')}
 						</tr>
 					</thead>
-					<tbody>${displayData
+					<tbody>${tableArray
+						.slice(1)
 						.map(
-							(datum) => `
+							(row) => `
 							<tr>
-								<td>${datum[groupMapsTo]}</td>
-								<td>${
-									datum[primaryDomain.identifier] === null
-										? '&ndash;'
-										: domainValueFormatter
-										? domainValueFormatter(
-												datum[primaryDomain.identifier]
-										  )
-										: datum[primaryDomain.identifier]
-								}</td>
-										<td>${
-											datum[primaryRange.identifier] ===
-												null ||
-											isNaN(
-												datum[primaryRange.identifier]
-											)
-												? '&ndash;'
-												: datum[
-														primaryRange.identifier
-												  ].toLocaleString()
-										}</td>
-								${
-									secondaryDomain
-										? `<td>${
-												datum[
-													secondaryDomain.identifier
-												] === null
-													? '&ndash;'
-													: datum[
-															secondaryDomain
-																.identifier
-													  ]
-										  }
-								</td>`
-										: ''
-								}
-								${
-									secondaryRange
-										? `<td>${
-												datum[
-													secondaryRange.identifier
-												] === null ||
-												isNaN(
-													datum[
-														secondaryRange
-															.identifier
-													]
-												)
-													? '&ndash;'
-													: datum[
-															secondaryRange
-																.identifier
-													  ]
-										  }
-								</td>`
-										: ''
-								}
-							</tr>
-						`
+								${row.map((column) => `<td>${column}</td>`).join('')}
+							</tr>`
 						)
 						.join('')}
 					</tbody>

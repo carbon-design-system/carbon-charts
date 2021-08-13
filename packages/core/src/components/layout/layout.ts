@@ -10,7 +10,7 @@ import {
 } from '../../interfaces/index';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 
 // D3 Imports
 import { select } from 'd3-selection';

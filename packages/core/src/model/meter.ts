@@ -1,7 +1,7 @@
 // Internal Imports
-import * as Configuration from './configuration';
+import * as Configuration from '../configuration';
 import { ChartModel } from './model';
-import { Tools } from './tools';
+import { Tools } from '../tools';
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset

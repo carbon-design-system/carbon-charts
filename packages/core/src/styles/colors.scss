@@ -56,6 +56,7 @@
 
 			&.hovered {
 				fill: darken($color, 7%);
+				@include default_transition;
 			}
 		}
 
@@ -64,6 +65,7 @@
 
 			&.hovered {
 				background-color: darken($color, 7%);
+				@include default_transition;
 			}
 		}
 

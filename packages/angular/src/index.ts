@@ -11,6 +11,7 @@ export * from './bubble-chart.component';
 export * from './bullet-chart.component';
 export * from './donut-chart.component';
 export * from './gauge-chart.component';
+export * from './histogram-chart.component';
 export * from './line-chart.component';
 export * from './lollipop-chart.component';
 export * from './pie-chart.component';
