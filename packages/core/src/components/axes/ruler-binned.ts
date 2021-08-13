@@ -111,7 +111,7 @@ export class BinnedRuler extends Ruler {
 						) === true
 							? [
 									{
-										label: 'Total',
+										label: get(options, 'tooltip.totalLabel') || 'Total',
 										value: activeDataGroupNames.reduce(
 											(accum, currentValue) =>
 												accum +
