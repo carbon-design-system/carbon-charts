@@ -36,7 +36,7 @@ export const histogramContinueOptions = {
 		bottom: {
 			title: 'Age',
 			mapsTo: 'age',
-			bins: 5,
+			bins: 10,
 			limitDomainToBins: true,
 		},
 		left: {
