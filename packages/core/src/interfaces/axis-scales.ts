@@ -5,22 +5,11 @@ import { TruncationOptions } from './truncation';
 import { AxisDomain } from 'd3-axis';
 import { Locale } from 'date-fns';
 
-/**
- * options to configure a scale. not all options are used by all scales
- */
-export interface AxisOptions {
+export interface BasedAxisOptions {
 	/**
 	 * type of the scale used on axis
 	 */
 	scaleType?: ScaleTypes;
-	/**
-	 * option for stacked axis
-	 */
-	stacked?: boolean;
-	/**
-	 * option for percentage axis scale
-	 */
-	percentage?: boolean;
 	/**
 	 * Whether the Axis should use the specified domain
 	 * instead of it being dynamically generated based on data extents.
@@ -105,6 +94,55 @@ export interface AxisOptions {
 	 * is axis visible or not
 	 */
 	visible?: boolean;
+	/**
+	 * Bins to display (Histogram)
+	 * bins: 20
+	 * bins: [0, 20, 40, 60]
+	 * bins: [new Date(...), new Date(...), ...]
+	 */
+	bins?: number | any[];
+	/**
+	 * limit the visible axis domain to only the binned area
+	 */
+	limitDomainToBins?: boolean;
+	/**
+	 * should be set to `true` on the domain
+	 * axis that's being broken into bins
+	 */
+	binned?: boolean;
+}
+
+/**
+ * options to configure a scale. not all options are used by all scales
+ */
+export interface AxisOptions extends BasedAxisOptions {
+	/**
+	 * option for stacked axis
+	 */
+	stacked?: boolean;
+	/**
+	 * option for percentage axis scale
+	 */
+	percentage?: boolean;
+}
+
+export interface BinnedAxisOptions {
+	/**
+	 * should be set to `true` on the domain
+	 * axis that's being broken into bins
+	 */
+	binned?: boolean;
+	/**
+	 * Bins to display (Histogram)
+	 * bins: 20
+	 * bins: [0, 20, 40, 60]
+	 * bins: [new Date(...), new Date(...), ...]
+	 */
+	bins?: number | any[];
+	/**
+	 * limit the visible axis domain to only the binned area
+	 */
+	limitDomainToBins?: boolean;
 }
 
 /**
@@ -152,9 +190,10 @@ export interface TimeIntervalFormats {
 /**
  * customize the axes components
  */
-export interface AxesOptions {
-	left?: AxisOptions;
-	bottom?: AxisOptions;
-	right?: AxisOptions;
-	top?: AxisOptions;
+export interface AxesOptions<AxesOptionType> {
+	left?: AxesOptionType;
+	bottom?: AxesOptionType;
+	right?: AxesOptionType;
+	top?: AxesOptionType;
 }
+

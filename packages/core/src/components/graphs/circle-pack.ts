@@ -2,17 +2,18 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
-
-// D3 Imports
-import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
-import { select } from 'd3-selection';
-
 import {
 	ColorClassNameTypes,
 	Events,
 	RenderTypes,
 } from '../../interfaces/enums';
 import { Tools } from './../../tools';
+
+// D3 Imports
+import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
+import { select } from 'd3-selection';
+
+import { get } from 'lodash-es';
 
 export class CirclePack extends Component {
 	type = 'circle-pack';
@@ -300,9 +301,12 @@ export class CirclePack extends Component {
 							}
 						});
 
+						const options = self.model.getOptions();
 						totalValue = [
 							{
-								label: 'Total',
+								label:
+									get(options, 'tooltip.totalLabel') ||
+									'Total',
 								value: datum.value,
 								bold: true,
 							},

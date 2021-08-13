@@ -1,6 +1,9 @@
 import { Tooltip } from './tooltip';
-import { AxisPositions, ColorClassNameTypes } from '../../interfaces';
+import { ColorClassNameTypes } from '../../interfaces';
 import { Tools } from '../../tools';
+
+import { get } from 'lodash-es';
+
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
 		if (e.detail.items) {
@@ -100,7 +103,7 @@ export class AxisChartsTooltip extends Tooltip {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				items.push({
-					label: options.tooltip.totalLabel || 'Total',
+					label: get(options, 'tooltip.totalLabel') || 'Total',
 					value: data.reduce(
 						(accumulator, datum) =>
 							accumulator + datum[rangeIdentifier],

@@ -13,7 +13,11 @@ import {
 	ZoomBarsOptions,
 } from './index';
 import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
-import { TimeScaleOptions } from './axis-scales';
+import {
+	AxisOptions,
+	BinnedAxisOptions,
+	TimeScaleOptions,
+} from './axis-scales';
 
 /**
  * Base chart options common to any chart
@@ -140,7 +144,20 @@ export interface BaseChartOptions {
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
-	axes?: AxesOptions;
+	axes?: AxesOptions<AxisOptions>;
+	grid?: GridOptions;
+	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarsOptions;
+}
+
+/**
+ * Options common to binned charts with an axis
+ */
+export interface BinnedAxisChartOptions extends AxisChartOptions {
+	axes?: AxesOptions<BinnedAxisOptions>;
 	grid?: GridOptions;
 	timeScale?: TimeScaleOptions;
 	/**
@@ -240,12 +257,11 @@ export interface BulletChartOptions extends AxisChartOptions {
  */
 export interface HistogramChartOptions extends AxisChartOptions {
 	/**
-	 * Bins to display (Histogram)
-	 * bins: 20
-	 * bins: [0, 20, 40, 60]
-	 * bins: [new Date(...), new Date(...), ...]
+	 * options related to bins
 	 */
-	bins?: number | any[];
+	bins?: {
+		rangeLabel?: string;
+	}
 }
 
 /**

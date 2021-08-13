@@ -15,7 +15,7 @@ export class ChartModelBinned extends ChartModelCartesian {
 
 		const result = [
 			[
-				'Range',
+				get(options, 'bins.rangeLabel') || 'Range',
 				...binnedStackedData.map((datum) =>
 					get(datum, `0.${groupMapsTo}`)
 				),

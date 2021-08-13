@@ -99,7 +99,8 @@ export class BinnedRuler extends Ruler {
 					hoveredElement: rulerLine,
 					items: [
 						{
-							label: 'Range',
+							label:
+								get(options, 'bins.rangeLabel') || 'Range',
 							value: `${x0} – ${x1}`,
 						},
 						...tooltipDataGroups,

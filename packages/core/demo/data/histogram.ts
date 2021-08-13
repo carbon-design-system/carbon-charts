@@ -37,7 +37,7 @@ export const histogramContinueOptions = {
 			title: 'Age',
 			mapsTo: 'age',
 			bins: 5,
-			onlyShowBins: true,
+			limitDomainToBins: true,
 		},
 		left: {
 			title: 'No. of participants',
@@ -165,7 +165,7 @@ export const histogramContinueWithBinsNumberOptions = {
 			title: 'US $ (million)',
 			mapsTo: 'value',
 			bins: (870 - 200) / 10,
-			onlyShowBins: true,
+			limitDomainToBins: true,
 		},
 		left: {
 			title: 'No. of transactions',
@@ -182,7 +182,7 @@ export const histogramContinueWithBinsOptions = {
 			title: 'Age',
 			mapsTo: 'age',
 			bins: [20, 40, 50, 60, 90],
-			onlyShowBins: true
+			limitDomainToBins: true
 		},
 		left: {
 			title: 'No. of participants',

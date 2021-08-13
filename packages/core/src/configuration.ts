@@ -21,6 +21,7 @@ import {
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	// Components
+	AxisOptions,
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
@@ -31,7 +32,6 @@ import {
 	StackedBarOptions,
 	MeterChartOptions,
 	ToolbarOptions,
-	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
@@ -112,7 +112,7 @@ export const baseTooltip: TooltipOptions = {
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
 // and by TwoDimensionalAxes.
-const axes: AxesOptions = {
+const axes: AxesOptions<AxisOptions> = {
 	top: {
 		visible: true,
 		includeZero: true,

@@ -173,7 +173,6 @@ export class Histogram extends Component {
 
 	addEventListeners() {
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options;
 		const { groupMapsTo } = options.data;
 
 		const self = this;
@@ -202,7 +201,8 @@ export class Histogram extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: 'Range',
+							label:
+								get(options, 'bins.rangeLabel') || 'Range',
 							value: `${x0} – ${x1}`,
 						},
 						{

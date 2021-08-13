@@ -531,7 +531,7 @@ export class CartesianScales extends Service {
 			const { bins } = this.model.getBinConfigurations();
 
 			return [0, max(bins, (d) => d.length)];
-		} else if (axisOptions.onlyShowBins) {
+		} else if (axisOptions.limitDomainToBins) {
 			const { bins } = this.model.getBinConfigurations();
 			const stackKeys = this.model.getStackKeys({ bins });
 

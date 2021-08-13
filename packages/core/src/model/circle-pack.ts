@@ -1,8 +1,7 @@
 // Internal Imports
 import { ChartModel } from './model';
 import { Tools } from '../tools';
-import { Events, LegendItemType } from '../interfaces/enums';
-import { thresholdSturges } from 'd3-array';
+import { LegendItemType } from '../interfaces/enums';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */

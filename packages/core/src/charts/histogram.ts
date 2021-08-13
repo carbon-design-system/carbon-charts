@@ -2,7 +2,7 @@
 import { ChartModelBinned } from '../model/binned-charts';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
-import { ChartConfig, ScatterChartOptions } from '../interfaces/index';
+import { ChartConfig, HistogramChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
 
 // Components
@@ -23,7 +23,7 @@ export class HistogramChart extends AxisChart {
 
 	constructor(
 		holder: Element,
-		chartConfigs: ChartConfig<ScatterChartOptions>
+		chartConfigs: ChartConfig<HistogramChartOptions>
 	) {
 		super(holder, chartConfigs);
 
