@@ -8,24 +8,27 @@ import { Tools } from '../../tools';
 // @ts-ignore
 // ts-ignore is needed because `@types/d3`
 // is missing the `pointer` function
-import { Selection, select, pointer } from 'd3-selection';
+import { Selection, pointer } from 'd3-selection';
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
-const THRESHOLD = 7.5;
+const THRESHOLD = 5;
 
 /** check if x is inside threshold area extents  */
 function pointIsWithinThreshold(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
-export class Ruler extends Component {
-	type = 'ruler';
+export class LegacyRuler extends Component {
+	type = 'ruler-legacy';
 	renderType = RenderTypes.SVG;
 
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
-
+	pointsWithinLine: {
+		domainValue: number;
+		originalData: any;
+	}[];
 	isXGridEnabled = Tools.getProperty(
 		this.getOptions(),
 		'grid',
@@ -71,6 +74,8 @@ export class Ruler extends Component {
 
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
 
+		const displayData = this.model.getDisplayData();
+
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
@@ -80,21 +85,98 @@ export class Ruler extends Component {
 			'aria-label',
 			'ruler'
 		);
-
 		const rulerLine = DOMUtils.appendOrSelect(ruler, 'line.ruler-line');
-		const dataPointElements: GenericSvgSelection = svg.selectAll(
-			'[role=graphics-symbol]'
-		);
 
-		const elementsToHighlight = dataPointElements.filter((d) => {
+		const pointsWithinLine = [];
+		displayData.forEach((d) => {
 			const domainValue = this.services.cartesianScales.getDomainValue(d);
-			// console.log("d", d, domainValue)
-
-			return pointIsWithinThreshold(domainValue, mouseCoordinate);
+			if (pointIsWithinThreshold(domainValue, mouseCoordinate)) {
+				pointsWithinLine.push({
+					domainValue,
+					originalData: d,
+				});
+			}
 		});
 
+		if (
+			this.pointsWithinLine &&
+			pointsWithinLine.length > 0 &&
+			pointsWithinLine.length === this.pointsWithinLine.length &&
+			pointsWithinLine[0].domainValue ===
+				this.pointsWithinLine[0].domainValue &&
+			pointsWithinLine[pointsWithinLine.length - 1].domainValue ===
+				this.pointsWithinLine[this.pointsWithinLine.length - 1]
+					.domainValue
+		) {
+			this.pointsWithinLine = pointsWithinLine;
+			return this.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+				mousePosition: [x, y],
+			});
+		}
+
+		this.pointsWithinLine = pointsWithinLine;
+
+		/**
+		 * Find matches, reduce is used instead of filter
+		 * to only get elements which belong to the same axis coordinate
+		 */
+		const matchingDomainValues = [];
+		const dataPointsMatchingRulerLine: {
+			domainValue: number;
+			originalData: any;
+		}[] = this.pointsWithinLine.reduce((accum, currentValue) => {
+			if (accum.length === 0) {
+				accum.push(currentValue);
+				return accum;
+			}
+
+			// store the first element of the accumulator array to compare it with current element being processed
+			const sampleAccumValue = accum[0].domainValue;
+
+			const distanceToCurrentValue = Math.abs(
+				mouseCoordinate - currentValue.domainValue
+			);
+			const distanceToAccumValue = Math.abs(
+				mouseCoordinate - sampleAccumValue
+			);
+
+			if (distanceToCurrentValue > distanceToAccumValue) {
+				// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
+				return accum;
+			} else if (distanceToCurrentValue < distanceToAccumValue) {
+				// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
+				accum = [currentValue];
+				matchingDomainValues.push(currentValue.domainValue);
+			} else {
+				// currentValue is equal to already stored values, which means there's another match on the same coordinate
+				accum.push(currentValue);
+			}
+
+			return accum;
+		}, []);
+
 		// some data point match
-		if (elementsToHighlight.size() > 0) {
+		if (dataPointsMatchingRulerLine.length > 0) {
+			const tooltipData = dataPointsMatchingRulerLine
+				.map((d) => d.originalData)
+				.filter((d) => {
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+						d
+					);
+
+					return !!d[rangeIdentifier];
+				});
+
+			const dataPointElements: GenericSvgSelection = svg.selectAll(
+				'[role=graphics-symbol]'
+			);
+			const elementsToHighlight = dataPointElements.filter((d) => {
+				const domainValue = this.services.cartesianScales.getDomainValue(
+					d
+				);
+				return matchingDomainValues.includes(domainValue);
+			});
+
 			/** if we pass from a trigger area to another one
 			 * mouseout on previous elements won't get dispatched
 			 * so we need to do it manually
@@ -115,32 +197,25 @@ export class Ruler extends Component {
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				mousePosition: [x, y],
 				hoveredElement: rulerLine,
-				data: this.formatTooltipData(elementsToHighlight.data()),
+				data: this.formatTooltipData(tooltipData),
 			});
 
 			ruler.attr('opacity', 1);
 
 			// line snaps to matching point
-			const sampleMatchData = select(
-				elementsToHighlight.nodes()[0]
-			).datum() as any;
-
-			const rulerPosition = this.services.cartesianScales.getDomainValue(
-				sampleMatchData
-			);
-
+			const sampleMatch = dataPointsMatchingRulerLine[0];
 			if (orientation === 'horizontal') {
 				rulerLine
 					.attr('x1', yScaleStart)
 					.attr('x2', yScaleEnd)
-					.attr('y1', rulerPosition)
-					.attr('y2', rulerPosition);
+					.attr('y1', sampleMatch.domainValue)
+					.attr('y2', sampleMatch.domainValue);
 			} else {
 				rulerLine
 					.attr('y1', yScaleStart)
 					.attr('y2', yScaleEnd)
-					.attr('x1', rulerPosition)
-					.attr('x2', rulerPosition);
+					.attr('x1', sampleMatch.domainValue)
+					.attr('x2', sampleMatch.domainValue);
 			}
 		} else {
 			this.hideRuler();
@@ -151,7 +226,10 @@ export class Ruler extends Component {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler');
 
-		this.elementsToHighlight.dispatch('mouseout');
+		if (this.elementsToHighlight) {
+			this.elementsToHighlight.dispatch('mouseout');
+		}
+
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		ruler.attr('opacity', 0);
 	}
@@ -173,20 +251,20 @@ export class Ruler extends Component {
 
 			self.showRuler(pos);
 		};
+		console.log('displayData.length', displayData.length);
+		// Debounce mouseMoveCallback if there are more than 100 datapoints
+		if (displayData.length > 200) {
+			const debounceThreshold = (displayData.length % 50) * 5;
 
-		// // Debounce mouseMoveCallback if there are more than 100 datapoints
-		// if (displayData.length > 100) {
-		// 	const debounceThreshold = (displayData.length % 50) * 12.5;
-
-		// 	mouseMoveCallback = Tools.debounceWithD3MousePosition(
-		// 		function () {
-		// 			const { mousePosition } = this;
-		// 			self.showRuler(mousePosition);
-		// 		},
-		// 		debounceThreshold,
-		// 		holder
-		// 	);
-		// }
+			mouseMoveCallback = Tools.debounceWithD3MousePosition(
+				function () {
+					const { mousePosition } = this;
+					self.showRuler(mousePosition);
+				},
+				debounceThreshold,
+				holder
+			);
+		}
 
 		this.backdrop
 			.on('mousemove mouseover', mouseMoveCallback)

@@ -10,6 +10,7 @@ import {
 	Area,
 	Line,
 	Ruler,
+	LegacyRuler,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -18,6 +19,8 @@ import {
 	LayoutComponent,
 	Skeleton,
 } from '../components/index';
+
+import { get } from 'lodash-es';
 
 export class AreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
@@ -37,11 +40,12 @@ export class AreaChart extends AxisChart {
 	}
 
 	getComponents() {
+		const options = this.model.getOptions();
+
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Area(this.model, this.services),
 			new Scatter(this.model, this.services, {
@@ -51,6 +55,9 @@ export class AreaChart extends AxisChart {
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID,
 			}),
+			...(get(options, 'points.enabled') === false
+				? [new LegacyRuler(this.model, this.services)]
+				: [new LegacyRuler(this.model, this.services)]),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

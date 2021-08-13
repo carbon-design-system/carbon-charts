@@ -1,4 +1,5 @@
-.#{$prefix}--#{$charts-prefix}--ruler {
+.#{$prefix}--#{$charts-prefix}--ruler,
+.#{$prefix}--#{$charts-prefix}--ruler-legacy {
 	line.ruler-line {
 		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
 			stroke: $carbon--white-0;
