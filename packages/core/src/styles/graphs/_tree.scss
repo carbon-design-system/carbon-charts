@@ -1,0 +1,13 @@
+.#{$prefix}--#{$charts-prefix}--chart-wrapper
+	.#{$prefix}--#{$charts-prefix}--tree {
+	g.links {
+		fill: none;
+		stroke: $text-05;
+		stroke-opacity: 0.4;
+		stroke-width: 1.5;
+	}
+
+	text {
+		fill: $text-01;
+	}
+}
