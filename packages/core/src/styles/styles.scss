@@ -17,6 +17,10 @@ $css--default-type: false;
 	import one of the styles-[theme name here].scss files";
 }
 
+@mixin default_transition {
+	transition: all 0.1s ease-out;
+}
+
 // Internal
 @import './mixins.scss';
 @import './colors.scss';

@@ -1,7 +1,7 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 import { Events, RenderTypes, TruncationTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
@@ -36,6 +36,7 @@ export class Tooltip extends Component {
 
 	handleShowTooltip = (e) => {
 		const data = e.detail.data || e.detail.items;
+
 		const defaultHTML = this.getTooltipHTML(e);
 
 		const tooltipTextContainer = DOMUtils.appendOrSelect(
@@ -297,7 +298,10 @@ export class Tooltip extends Component {
 
 		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition');
 		if (!mouseRelativePos) {
-			mouseRelativePos = pointer(Tools.getProperty(e, 'detail', 'event'), holder);
+			mouseRelativePos = pointer(
+				Tools.getProperty(e, 'detail', 'event'),
+				holder
+			);
 		} else {
 			const zoombarType = Tools.getProperty(
 				options,

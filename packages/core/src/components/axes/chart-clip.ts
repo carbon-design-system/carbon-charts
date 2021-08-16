@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 import { RenderTypes } from '../../interfaces';
 
 // This class is used to create the clipPath to clip the chart components

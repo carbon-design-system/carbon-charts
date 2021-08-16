@@ -1,5 +1,5 @@
 import { Chart } from './chart';
-import { ChartModelCartesian } from './model-cartesian-charts';
+import { ChartModelCartesian } from './model/cartesian-charts';
 import {
 	LayoutDirection,
 	LayoutGrowth,
@@ -43,7 +43,7 @@ export class AxisChart extends Chart {
 
 	protected getAxisChartComponents(
 		graphFrameComponents: any[],
-		configs?: object
+		configs?: any
 	) {
 		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(

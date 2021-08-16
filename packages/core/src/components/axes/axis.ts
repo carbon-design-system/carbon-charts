@@ -8,7 +8,7 @@ import {
 	TruncationTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 import { DOMUtils } from '../../services';
 import {
 	AxisTitleOrientations,

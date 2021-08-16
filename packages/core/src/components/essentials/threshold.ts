@@ -1,7 +1,7 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
+import { ChartModel } from '../../model/model';
 import {
 	AxisPositions,
 	Events,

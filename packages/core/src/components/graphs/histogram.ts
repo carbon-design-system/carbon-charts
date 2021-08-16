@@ -1,6 +1,5 @@
 // Internal Imports
 import { Tools } from '../../tools';
-import { Bar } from './bar';
 import {
 	Roles,
 	Events,
@@ -8,12 +7,15 @@ import {
 	ColorClassNameTypes,
 	RenderTypes,
 } from '../../interfaces';
+import { Component } from '../component';
 
 // D3 Imports
 import { select } from 'd3-selection';
 
-export class StackedBar extends Bar {
-	type = 'stacked-bar';
+import { get } from 'lodash-es';
+
+export class Histogram extends Component {
+	type = 'histogram';
 	renderType = RenderTypes.SVG;
 
 	init() {
@@ -34,26 +36,22 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		const svg = this.getComponentContainer();
 
 		// Chart options mixed with the internal configurations
-		const options = this.getOptions();
+		const options = this.model.getOptions();
+		const { groupIdentifier } = options;
 		const { groupMapsTo } = options.data;
 
-		// Create the data and keys that'll be used by the stack layout
-		const stackData = this.model.getStackedData({
-			groups: this.configs.groups,
-		});
+		const binnedStackedData = this.model.getBinnedStackedData();
+
+		const x = this.services.cartesianScales.getMainXScale();
 
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(stackData, (d) => Tools.getProperty(d, 0, groupMapsTo));
+			.data(binnedStackedData, (d) => get(d, `0.${groupMapsTo}`));
 
-		// Remove elements that need to be exited
-		// We need exit at the top here to make sure that
-		// Data filters are processed before entering new elements
-		// Or updating existing ones
 		barGroups.exit().attr('opacity', 0).remove();
 
 		// Add bar groups that need to be introduced
@@ -61,17 +59,13 @@ export class StackedBar extends Bar {
 			.enter()
 			.append('g')
 			.classed('bars', true)
-			.attr('role', Roles.GROUP)
-			.attr('data-name', 'bars');
+			.attr('role', Roles.GROUP);
 
 		// Update data on all bars
 		const bars = svg
 			.selectAll('g.bars')
 			.selectAll('path.bar')
-			.data(
-				(d) => d,
-				(d) => d.data.sharedStackKey
-			);
+			.data((data) => data);
 
 		// Remove bars that need to be removed
 		bars.exit().remove();
@@ -80,11 +74,12 @@ export class StackedBar extends Bar {
 			.append('path')
 			.merge(bars)
 			.classed('bar', true)
+			.attr(groupIdentifier, (d, i) => i)
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({
 					transition: t,
-					name: 'bar-update-enter',
+					name: 'histogram-bar-update-enter',
 					animate,
 				})
 			)
@@ -97,7 +92,11 @@ export class StackedBar extends Bar {
 			)
 			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('d', (d, i) => {
-				const key = d.data.sharedStackKey;
+				const bin = get(d, 'data');
+
+				if (!bin) {
+					return;
+				}
 
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -105,18 +104,15 @@ export class StackedBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
-				const barWidth = this.getBarWidth();
-				const x0 =
-					this.services.cartesianScales.getDomainValue(key, i) -
-					barWidth / 2;
+				const barWidth = x(bin.x1) - x(bin.x0) - 1;
+				const x0 = this.services.cartesianScales.getDomainValue(
+					bin.x0,
+					i
+				);
 				const x1 = x0 + barWidth;
+
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
-
-				// don't show if part of bar is out of zoom domain
-				if (this.isOutsideZoomedDomain(x0, x1)) {
-					return;
-				}
 
 				// Add the divider gap
 				if (
@@ -142,7 +138,7 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d[1] - d[0]);
+			.attr('aria-label', (d) => d.value);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -152,7 +148,8 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		const { groupMapsTo } = this.model.getOptions().data;
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
 
 		this.parent
 			.selectAll('path.bar')
@@ -175,7 +172,7 @@ export class StackedBar extends Bar {
 	};
 
 	addEventListeners() {
-		const options = this.getOptions();
+		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
@@ -183,95 +180,60 @@ export class StackedBar extends Bar {
 			.selectAll('path.bar')
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed('hovered', true);
 
+				hoveredElement.classed('hovered', true);
 				hoveredElement.transition(
 					self.services.transitions.getTransition(
 						'graph_element_mouseover_fill_update'
 					)
 				);
 
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
-					event,
-					element: hoveredElement,
-					datum,
-				});
+				const x0 = parseFloat(get(datum, 'data.x0'));
+				const x1 = parseFloat(get(datum, 'data.x1'));
 
-				const displayData = self.model.getDisplayData(
-					self.configs.groups
+				const rangeAxisPosition = self.services.cartesianScales.getRangeAxisPosition();
+				const rangeScaleLabel = self.services.cartesianScales.getScaleLabel(
+					rangeAxisPosition
 				);
 
-				let matchingDataPoint = displayData.find((d) => {
-					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(
-						d
-					);
-					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(
-						d
-					);
-					return (
-						d[rangeIdentifier] === datum.data[datum.group] &&
-						d[domainIdentifier].toString() ===
-							datum.data.sharedStackKey &&
-						d[groupMapsTo] === datum.group
-					);
-				});
-
-				if (matchingDataPoint === undefined) {
-					// use the primary range and domain ids
-					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
-					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-					matchingDataPoint = {
-						[domainIdentifier]: datum.data.sharedStackKey,
-						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group,
-					};
-				}
-
-				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement,
-					data: [matchingDataPoint],
+					items: [
+						{
+							label:
+								get(options, 'bins.rangeLabel') || 'Range',
+							value: `${x0} – ${x1}`,
+						},
+						{
+							label: options.tooltip.groupLabel || 'Group',
+							value: datum[groupMapsTo],
+							class: self.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo],
+							}),
+						},
+						{
+							label: rangeScaleLabel,
+							value: get(datum, `data.${datum[groupMapsTo]}`),
+						},
+					],
 				});
 			})
 			.on('mousemove', function (event, datum) {
-				const hoveredElement = select(this);
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
-					event,
-					element: hoveredElement,
-					datum,
-				});
-
+				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 					event,
 				});
 			})
-			.on('click', function (event, datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
-					event,
-					element: select(this),
-					datum,
-				});
-			})
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
+
+				// Select all same group elements
 				hoveredElement.classed('hovered', false);
 
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
-					event,
-					element: hoveredElement,
-					datum,
-				});
-
 				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 			});
 	}
 

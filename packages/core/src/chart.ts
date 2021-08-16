@@ -10,7 +10,7 @@ import {
 } from './interfaces';
 
 // Misc
-import { ChartModel } from './model';
+import { ChartModel } from './model/model';
 import {
 	Component,
 	Modal,

@@ -8,6 +8,7 @@ import BubbleChart from './bubble-chart';
 import BulletChart from './bullet-chart';
 import DonutChart from './donut-chart';
 import GaugeChart from './gauge-chart';
+import HistogramChart from './histogram-chart';
 import LineChart from './line-chart';
 import LollipopChart from './lollipop-chart';
 import PieChart from './pie-chart';
@@ -30,6 +31,7 @@ export {
 	BulletChart,
 	DonutChart,
 	GaugeChart,
+	HistogramChart,
 	LineChart,
 	LollipopChart,
 	PieChart,

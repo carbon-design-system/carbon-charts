@@ -1,5 +1,5 @@
 // Internal Imports
-import { ChartModel } from '../model';
+import { ChartModel } from '../model/model';
 import { DOMUtils } from '../services';
 import { RenderTypes } from '../interfaces';
 import { Tools } from '../tools';

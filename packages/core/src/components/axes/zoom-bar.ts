@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { ChartModelCartesian } from '../../model-cartesian-charts';
+import { ChartModelCartesian } from '../../model/cartesian-charts';
 import { Tools } from '../../tools';
 import {
 	AxisPositions,
@@ -299,7 +299,12 @@ export class ZoomBar extends Component {
 			} else if (selection[0] === selection[1]) {
 				// select behavior is not completed yet, do nothing
 			} else {
-				this.handleBrushedEvent(event, zoomDomain, this.xScale, selection);
+				this.handleBrushedEvent(
+					event,
+					zoomDomain,
+					this.xScale,
+					selection
+				);
 			}
 		};
 
