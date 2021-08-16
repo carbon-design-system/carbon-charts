@@ -121,7 +121,7 @@ export class Tree extends Component {
 				.exit()
 				.transition(transition)
 				.remove()
-				.attr('transform', (d) => `translate(${source.y},${source.x})`)
+				.attr('transform', () => `translate(${source.y},${source.x})`)
 				.attr('fill-opacity', 0)
 				.attr('stroke-opacity', 0);
 
@@ -150,7 +150,7 @@ export class Tree extends Component {
 				.exit()
 				.transition(transition)
 				.remove()
-				.attr('d', (d) => {
+				.attr('d', () => {
 					const o = { x: source.x, y: source.y };
 					return diagonal({ source: o, target: o });
 				});
