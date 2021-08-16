@@ -81,8 +81,8 @@ export class Tree extends Component {
 				.enter()
 				.append('g')
 				.attr('transform', () => `translate(${source.y0},${source.x0})`)
-				.attr('cursor', (d) =>
-					d.children && d.children.length > 0 ? 'pointer' : null
+				.attr('class', (d) =>
+					d.children && d.children.length > 0 ? 'clickable' : null
 				)
 				.on('click', (event, d) => {
 					d.children = d.children ? null : d._children;
@@ -94,7 +94,7 @@ export class Tree extends Component {
 			nodeGroupsEnter
 				.append('circle')
 				.attr('r', 2.5)
-				.attr('fill', (d) => (d._children ? '#555' : '#999'))
+				.attr('class', (d) => (d._children ? 'parent' : 'child'))
 				.attr('stroke-width', 10);
 
 			// Add node labels
@@ -103,7 +103,10 @@ export class Tree extends Component {
 				.attr('dy', '0.31em')
 				.attr('x', (d) => (d._children ? -6 : 6))
 				.attr('text-anchor', (d) => (d._children ? 'end' : 'start'))
-				.text((d) => d.data.name);
+				.text((d) => d.data.name)
+				.clone(true)
+				.attr('class', 'text-stroke')
+				.lower();
 
 			// Reposition nodes
 			nodeGroups

@@ -1,10 +1,8 @@
 // Internal Imports
-import { PieChartModel } from '../model-pie';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, PieChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
-import { Skeletons } from '../interfaces/enums';
 
 // Components
 import {
