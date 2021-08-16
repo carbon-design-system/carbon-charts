@@ -98,8 +98,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+						? Configuration.meter.height.proportional
+						: Configuration.meter.height.default
 			);
 
 		// draw the container max range value indicator
@@ -112,8 +112,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+						? Configuration.meter.height.proportional
+						: Configuration.meter.height.default
 			);
 
 		// rect with the value binded
@@ -144,8 +144,8 @@ export class Meter extends Component {
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default;
+						? Configuration.meter.height.proportional
+						: Configuration.meter.height.default;
 			})
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -243,13 +243,14 @@ export class Meter extends Component {
 
 		this.parent
 			.selectAll('rect.value')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Meter.METER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -266,6 +267,7 @@ export class Meter extends Component {
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement,
 						items: [
 							{
@@ -276,35 +278,40 @@ export class Meter extends Component {
 					});
 				}
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Meter.METER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
 				if (proportional) {
-					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
 				}
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Meter.METER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

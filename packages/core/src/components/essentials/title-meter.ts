@@ -205,7 +205,7 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute('width');
+			: 0;
 
 		// get the status from the model
 		const status = this.model.getStatus();
