@@ -1,5 +1,6 @@
 .#{$prefix}--#{$charts-prefix}--ruler,
-.#{$prefix}--#{$charts-prefix}--ruler-binned {
+.#{$prefix}--#{$charts-prefix}--ruler-binned,
+.#{$prefix}--#{$charts-prefix}--ruler-candlestick {
 	line.ruler-line {
 		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
 			stroke: $carbon--white-0;

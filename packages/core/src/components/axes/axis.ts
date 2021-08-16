@@ -645,7 +645,7 @@ export class Axis extends Component {
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
 					.text(function (d) {
-						if (d.length > truncationThreshold) {
+						if (d && d.length > truncationThreshold) {
 							return Tools.truncateLabel(
 								d,
 								truncationType,
@@ -660,7 +660,7 @@ export class Axis extends Component {
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
 					.text(function (d) {
-						if (d.length > truncationThreshold) {
+						if (d && d.length > truncationThreshold) {
 							return Tools.truncateLabel(
 								d,
 								truncationType,

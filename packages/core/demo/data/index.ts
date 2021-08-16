@@ -3,6 +3,7 @@ import * as barDemos from './bar';
 import * as boxplotDemos from './boxplot';
 import * as bubbleDemos from './bubble';
 import * as bulletDemos from './bullet';
+import * as candlestickDemos from './candlestick';
 import * as comboDemos from './combo';
 import * as donutDemos from './donut';
 import * as gaugeDemos from './gauge';
@@ -654,6 +655,16 @@ const simpleChartDemos = [
 				options: bulletDemos.basicBulletOptions,
 				data: bulletDemos.basicBulletData,
 				chartType: chartTypes.BulletChart,
+			},
+		],
+	},
+	{
+		title: 'Candlestick',
+		demos: [
+			{
+				options: candlestickDemos.candlestickOptions,
+				data: candlestickDemos.candlestickData,
+				chartType: chartTypes.CandlestickChart,
 			},
 		],
 	},

@@ -583,6 +583,8 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		const dataGroupNames = this.model.getDataGroupNames();
 
+		const axisMapsTo = Array.isArray(mapsTo) ? mapsTo : [mapsTo];
+
 		if (scaleType === ScaleTypes.LABELS_RATIO) {
 			return displayData.map(
 				(datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`
@@ -632,18 +634,23 @@ export class CartesianScales extends Service {
 			allDataValues = [];
 
 			displayData.forEach((datum) => {
-				const value = datum[mapsTo];
-				if (Array.isArray(value) && value.length === 2) {
-					allDataValues.push(value[0]);
-					allDataValues.push(value[1]);
-				} else {
-					if (extendLinearDomainBy) {
-						allDataValues.push(
-							Math.max(datum[mapsTo], datum[extendLinearDomainBy])
-						);
+				axisMapsTo.forEach((mapsTo) => {
+					const value = datum[mapsTo];
+					if (Array.isArray(value) && value.length === 2) {
+						allDataValues.push(value[0]);
+						allDataValues.push(value[1]);
+					} else {
+						if (extendLinearDomainBy) {
+							allDataValues.push(
+								Math.max(
+									datum[mapsTo],
+									datum[extendLinearDomainBy]
+								)
+							);
+						}
+						allDataValues.push(value);
 					}
-					allDataValues.push(value);
-				}
+				});
 			});
 		}
 

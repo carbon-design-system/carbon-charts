@@ -24,6 +24,11 @@ export default {
 		angular: 'ibm-bullet-chart',
 		vue: 'ccv-bullet-chart',
 	},
+	CandlestickChart: {
+		vanilla: 'CandlestickChart',
+		angular: 'ibm-candlestick-chart',
+		vue: 'ccv-candlestick-chart',
+	},
 	ComboChart: {
 		vanilla: 'ComboChart',
 		angular: 'ibm-combo-chart',

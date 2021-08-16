@@ -394,7 +394,7 @@ export class Legend extends Component {
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d) {
-				if (d.name.length > truncationThreshold) {
+				if (d.name && d.name.length > truncationThreshold) {
 					return Tools.truncateLabel(
 						d.name,
 						truncationType,

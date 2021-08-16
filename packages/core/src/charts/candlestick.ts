@@ -7,9 +7,8 @@ import { Tools } from '../tools';
 // Components
 import {
 	Grid,
-	Line,
-	Ruler,
-	Scatter,
+	Candlestick,
+	CandlestickRuler,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -18,7 +17,7 @@ import {
 	SkeletonLines,
 } from '../components/index';
 
-export class LineChart extends AxisChart {
+export class CandlestickChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<LineChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -40,14 +39,18 @@ export class LineChart extends AxisChart {
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Ruler(this.model, this.services),
-			new Line(this.model, this.services),
-			new Scatter(this.model, this.services, { handleThresholds: true }),
+			new CandlestickRuler(this.model, this.services),
+			new Candlestick(this.model, this.services),
 			new SkeletonLines(this.model, this.services),
 		];
 
 		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
+			graphFrameComponents,
+			{
+				legend: {
+					enabled: false,
+				},
+			}
 		);
 		return components;
 	}

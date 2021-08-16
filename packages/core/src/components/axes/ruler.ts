@@ -152,16 +152,6 @@ export class Ruler extends Component {
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const tooltipData = dataPointsMatchingRulerLine
-				.map((d) => d.originalData)
-				.filter((d) => {
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
-						d
-					);
-					const value = d[rangeIdentifier];
-					return value !== null && value !== undefined;
-				});
-
 			// get elements on which we should trigger mouse events
 			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(
 				(d) => d.domainValue
@@ -190,11 +180,7 @@ export class Ruler extends Component {
 			// set current hovered elements
 			this.elementsToHighlight = elementsToHighlight;
 
-			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-				mousePosition: [x, y],
-				hoveredElement: rulerLine,
-				data: this.formatTooltipData(tooltipData),
-			});
+			this.showTooltip(rulerLine, dataPointsMatchingRulerLine, x, y);
 
 			ruler.attr('opacity', 1);
 
@@ -226,6 +212,24 @@ export class Ruler extends Component {
 		dataPointElements.dispatch('mouseout');
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		ruler.attr('opacity', 0);
+	}
+
+	showTooltip(rulerLine, dataPointsMatchingRulerLine, x, y) {
+		const tooltipData = dataPointsMatchingRulerLine
+			.map((d) => d.originalData)
+			.filter((d) => {
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
+					d
+				);
+				const value = d[rangeIdentifier];
+				return value !== null && value !== undefined;
+			});
+
+		this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+			mousePosition: [x, y],
+			hoveredElement: rulerLine,
+			data: this.formatTooltipData(tooltipData),
+		});
 	}
 
 	/**
