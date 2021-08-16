@@ -99,8 +99,7 @@ export class BinnedRuler extends Ruler {
 					hoveredElement: rulerLine,
 					items: [
 						{
-							label:
-								get(options, 'bins.rangeLabel') || 'Range',
+							label: get(options, 'bins.rangeLabel') || 'Range',
 							value: `${x0} – ${x1}`,
 						},
 						...tooltipDataGroups,
@@ -111,7 +110,11 @@ export class BinnedRuler extends Ruler {
 						) === true
 							? [
 									{
-										label: get(options, 'tooltip.totalLabel') || 'Total',
+										label:
+											get(
+												options,
+												'tooltip.totalLabel'
+											) || 'Total',
 										value: activeDataGroupNames.reduce(
 											(accum, currentValue) =>
 												accum +

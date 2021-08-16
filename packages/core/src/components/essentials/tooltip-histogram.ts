@@ -1,10 +1,7 @@
 import { AxisChartsTooltip } from './tooltip-axis';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import {
-	CartesianOrientations,
-	Events,
-} from './../../interfaces';
+import { CartesianOrientations, Events } from './../../interfaces';
 
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
@@ -46,7 +43,7 @@ export class TooltipHistogram extends AxisChartsTooltip {
 				)
 			) {
 				const data = e.detail.data;
-				console.log("data1", data)
+				console.log('data1', data);
 				const multidata = data.multidata;
 				const hoveredElement = e.detail.hoveredElement.node();
 
@@ -73,7 +70,10 @@ export class TooltipHistogram extends AxisChartsTooltip {
 					tooltipTextContainer.html(defaultHTML);
 				}
 
-				const position = this.getTooltipPosition(hoveredElement, data) as any;
+				const position = this.getTooltipPosition(
+					hoveredElement,
+					data
+				) as any;
 				// Position the tooltip relative to the bars
 				this.positionTooltip(e.detail.multidata ? undefined : position);
 			}
@@ -115,7 +115,7 @@ export class TooltipHistogram extends AxisChartsTooltip {
 			top: groupTop - holderPosition.top - verticalOffset,
 		};
 
-		return { placement: "top", position: tooltipPos };
+		return { placement: 'top', position: tooltipPos };
 	}
 
 	/**
@@ -126,7 +126,7 @@ export class TooltipHistogram extends AxisChartsTooltip {
 		const data = e.detail.data;
 		const options = this.model.getOptions();
 		const { bin } = data;
-		console.log("data", data)
+		console.log('data', data);
 		const { value } = data.multidata[0];
 		const { cartesianScales } = this.services;
 		const { title: domainTitle } = Tools.getProperty(

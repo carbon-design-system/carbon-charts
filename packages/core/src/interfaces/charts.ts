@@ -261,7 +261,7 @@ export interface HistogramChartOptions extends AxisChartOptions {
 	 */
 	bins?: {
 		rangeLabel?: string;
-	}
+	};
 }
 
 /**

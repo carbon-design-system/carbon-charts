@@ -1,4 +1,6 @@
 .#{$prefix}--#{$charts-prefix}--meter-title {
+	overflow: visible;
+
 	text.meter-title,
 	text.proportional-meter-title,
 	text.proportional-meter-total,

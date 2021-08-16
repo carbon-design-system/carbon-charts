@@ -201,8 +201,7 @@ export class Histogram extends Component {
 					hoveredElement,
 					items: [
 						{
-							label:
-								get(options, 'bins.rangeLabel') || 'Range',
+							label: get(options, 'bins.rangeLabel') || 'Range',
 							value: `${x0} – ${x1}`,
 						},
 						{
