@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.1...v0.43.0) (2021-08-17)
+
+
+### Features
+
+* **core:** remove backgrounds on chart holder & wrapper ([#1120](https://github.com/carbon-design-system/carbon-charts/issues/1120)) ([8044c99](https://github.com/carbon-design-system/carbon-charts/commit/8044c99cd4c307147a164d3e60bbb23d2a0a2dc4))
+
+
+
+
+
 ## [0.42.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.0...v0.42.1) (2021-08-13)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
