@@ -556,6 +556,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.StackedBarChart,
 			},
 			{
+				options: barDemos.stackedBarNegativeOptions,
+				data: barDemos.stackedBarNegativeData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,

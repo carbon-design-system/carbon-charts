@@ -291,12 +291,12 @@ export const lineTimeSeriesWithThresholdsOptions = {
 };
 
 export const lineTimeSeriesDenseData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 5), value: 12000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 10), value: 14000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: 25000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2, 2), value: 26000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: 10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: -10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 5), value: -12000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 10), value: -14000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: -25000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2, 2), value: -26000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: -10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 5), value: 10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 10), value: 12000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 45000 },
