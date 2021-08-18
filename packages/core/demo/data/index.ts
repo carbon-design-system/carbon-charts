@@ -230,6 +230,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
+				options: barDemos.simpleBarLegendOverflowOptions,
+				data: barDemos.simpleBarLegendOverflowData,
+				chartType: chartTypes.SimpleBarChart,
+			},
+			{
 				options: barDemos.groupedBarSelectedGroupsOptions,
 				data: barDemos.groupedBarSelectedGroupsData,
 				chartType: chartTypes.GroupedBarChart,
@@ -421,6 +426,12 @@ const simpleChartDemos = [
 				mainDemo: true,
 			},
 			{
+				options: areaDemos.stackedAreaTimeSeriesNegativeOptions,
+				data: areaDemos.stackedAreaTimeSeriesNegativeData,
+				chartType: chartTypes.StackedAreaChart,
+				mainDemo: true,
+			},
+			{
 				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
 				data: areaDemos.stackedAreaTimeSeriesUnevenData,
 				chartType: chartTypes.StackedAreaChart,
@@ -553,6 +564,11 @@ const simpleChartDemos = [
 			{
 				options: barDemos.stackedBarOptions,
 				data: barDemos.stackedBarData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
+				options: barDemos.stackedBarNegativeOptions,
+				data: barDemos.stackedBarNegativeData,
 				chartType: chartTypes.StackedBarChart,
 			},
 			{

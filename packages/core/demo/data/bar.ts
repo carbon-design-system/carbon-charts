@@ -176,6 +176,60 @@ export const simpleBarAdditionalLegendItemsOptions = {
 	},
 };
 
+// Simple bar
+export const simpleBarLegendOverflowData = [
+	{ group: 'Qty', value: 65000 },
+	{ group: 'More', value: 29123 },
+	{ group: 'Sold', value: 35213 },
+	{ group: 'Restocking', value: 51213 },
+	{ group: 'Misc', value: 16932 },
+];
+
+export const simpleBarLegendOverflowOptions = {
+	title: 'Legend overflow (simple bar)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'group',
+			scaleType: 'labels',
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: 'line',
+				name: 'Line',
+			},
+			{
+				type: 'area',
+				name: 'Poor area',
+			},
+			{
+				type: 'area',
+				name: 'Satisfactory area',
+			},
+			{
+				type: 'area',
+				name: 'Great area',
+			},
+			{
+				type: 'quartile',
+				name: 'Quartiles',
+			},
+			{
+				type: 'size',
+				name: 'Size',
+			},
+			{
+				type: 'radius',
+				name: 'Radius',
+			},
+		],
+	},
+};
+
 // Simple bar with custom tick values
 export const simpleBarDataCustomTicks = [
 	{ group: 'Group 1', value: 0.5 },
@@ -460,6 +514,33 @@ export const stackedBarOptions = {
 		},
 	},
 };
+
+export const stackedBarNegativeData = [
+	{ group: 'Dataset 1', key: 'Qty', value: 65000 },
+	{ group: 'Dataset 1', key: 'More', value: 29123 },
+	{ group: 'Dataset 1', key: 'Sold', value: 35213 },
+	{ group: 'Dataset 1', key: 'Restocking', value: 51213 },
+	{ group: 'Dataset 1', key: 'Misc', value: 16932 },
+	{ group: 'Dataset 2', key: 'Qty', value: 32432 },
+	{ group: 'Dataset 2', key: 'More', value: 21312 },
+	{ group: 'Dataset 2', key: 'Sold', value: 56456 },
+	{ group: 'Dataset 2', key: 'Restocking', value: 21312 },
+	{ group: 'Dataset 2', key: 'Misc', value: 34234 },
+	{ group: 'Dataset 3', key: 'Qty', value: 12312 },
+	{ group: 'Dataset 3', key: 'More', value: 23232 },
+	{ group: 'Dataset 3', key: 'Sold', value: 34232 },
+	{ group: 'Dataset 3', key: 'Restocking', value: 12312 },
+	{ group: 'Dataset 3', key: 'Misc', value: 34234 },
+	{ group: 'Dataset 4', key: 'Qty', value: -32423 },
+	{ group: 'Dataset 4', key: 'More', value: -21313 },
+	{ group: 'Dataset 4', key: 'Sold', value: -64353 },
+	{ group: 'Dataset 4', key: 'Restocking', value: -24134 },
+	{ group: 'Dataset 4', key: 'Misc', value: -32423 },
+];
+
+export const stackedBarNegativeOptions = Object.assign({}, stackedBarOptions, {
+	title: 'Vertical stacked bar (divergent)',
+});
 
 // horizontal stacked bar
 export const stackedHorizontalBarData = stackedBarData;

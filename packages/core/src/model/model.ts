@@ -7,7 +7,7 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 
 // D3
 import { scaleOrdinal } from 'd3-scale';
-import { stack } from 'd3-shape';
+import { stack, stackOffsetDiverging } from 'd3-shape';
 import { histogram } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -430,6 +430,7 @@ export class ChartModel {
 		}
 
 		return stack()
+			.offset(stackOffsetDiverging)
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series
