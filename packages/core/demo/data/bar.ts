@@ -176,60 +176,6 @@ export const simpleBarAdditionalLegendItemsOptions = {
 	},
 };
 
-// Simple bar
-export const simpleBarLegendOverflowData = [
-	{ group: 'Qty', value: 65000 },
-	{ group: 'More', value: 29123 },
-	{ group: 'Sold', value: 35213 },
-	{ group: 'Restocking', value: 51213 },
-	{ group: 'Misc', value: 16932 },
-];
-
-export const simpleBarLegendOverflowOptions = {
-	title: 'Legend overflow (simple bar)',
-	axes: {
-		left: {
-			mapsTo: 'value',
-		},
-		bottom: {
-			mapsTo: 'group',
-			scaleType: 'labels',
-		},
-	},
-	legend: {
-		additionalItems: [
-			{
-				type: 'line',
-				name: 'Line',
-			},
-			{
-				type: 'area',
-				name: 'Poor area',
-			},
-			{
-				type: 'area',
-				name: 'Satisfactory area',
-			},
-			{
-				type: 'area',
-				name: 'Great area',
-			},
-			{
-				type: 'quartile',
-				name: 'Quartiles',
-			},
-			{
-				type: 'size',
-				name: 'Size',
-			},
-			{
-				type: 'radius',
-				name: 'Radius',
-			},
-		],
-	},
-};
-
 // Simple bar with custom tick values
 export const simpleBarDataCustomTicks = [
 	{ group: 'Group 1', value: 0.5 },

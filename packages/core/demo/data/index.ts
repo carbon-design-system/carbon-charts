@@ -230,11 +230,6 @@ const utilityDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
-				options: barDemos.simpleBarLegendOverflowOptions,
-				data: barDemos.simpleBarLegendOverflowData,
-				chartType: chartTypes.SimpleBarChart,
-			},
-			{
 				options: barDemos.groupedBarSelectedGroupsOptions,
 				data: barDemos.groupedBarSelectedGroupsData,
 				chartType: chartTypes.GroupedBarChart,
