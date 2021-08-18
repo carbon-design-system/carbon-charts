@@ -74,6 +74,7 @@ export class StackedScatter extends Scatter {
 			);
 
 			let rangeValueToUse = d[1];
+			// If the bar is in the negative direction
 			if (d[1] === 0 && d[0] < 0) {
 				rangeValueToUse = d[0];
 			}
