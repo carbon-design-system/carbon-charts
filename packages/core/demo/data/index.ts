@@ -426,12 +426,6 @@ const simpleChartDemos = [
 				mainDemo: true,
 			},
 			{
-				options: areaDemos.stackedAreaTimeSeriesNegativeOptions,
-				data: areaDemos.stackedAreaTimeSeriesNegativeData,
-				chartType: chartTypes.StackedAreaChart,
-				mainDemo: true,
-			},
-			{
 				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
 				data: areaDemos.stackedAreaTimeSeriesUnevenData,
 				chartType: chartTypes.StackedAreaChart,

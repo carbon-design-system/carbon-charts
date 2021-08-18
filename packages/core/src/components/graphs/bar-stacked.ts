@@ -43,6 +43,7 @@ export class StackedBar extends Bar {
 		// Create the data and keys that'll be used by the stack layout
 		const stackData = this.model.getStackedData({
 			groups: this.configs.groups,
+			divergent: true
 		});
 
 		const activeDataGroupNames = this.model.getActiveDataGroupNames();

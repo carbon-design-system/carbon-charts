@@ -13,11 +13,9 @@ export class StackedScatter extends Scatter {
 			'points',
 			'enabled'
 		);
-
 		if (!isScatterEnabled) {
 			return;
 		}
-
 		// Grab container SVG
 		const svg = this.getComponentContainer({ withinChartClip: true });
 
@@ -73,16 +71,10 @@ export class StackedScatter extends Scatter {
 				d
 			);
 
-			let rangeValueToUse = d[1];
-			// If the bar is in the negative direction
-			if (d[1] === 0 && d[0] < 0) {
-				rangeValueToUse = d[0];
-			}
-
 			return {
 				[groupMapsTo]: group,
 				[domainIdentifier]: d['data']['sharedStackKey'],
-				[rangeIdentifier]: rangeValueToUse,
+				[rangeIdentifier]: d[1],
 			};
 		});
 		this.styleCircles(circlesToStyle, animate);
@@ -94,16 +86,13 @@ export class StackedScatter extends Scatter {
 	getTooltipData(hoveredX, hoveredY) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
-
 		const percentage = Object.keys(options.axes).some(
 			(axis) => options.axes[axis].percentage
 		);
-
 		const stackedData = this.model.getStackedData({
 			groups: this.configs.groups,
 			percentage,
 		});
-
 		const tooltipData = [];
 		stackedData.forEach((groupData, groupDataIndex) => {
 			groupData.forEach((datum, dataIndex) => {

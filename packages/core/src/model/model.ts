@@ -397,7 +397,7 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData({ percentage = false, groups = null }) {
+	getStackedData({ percentage = false, groups = null, divergent = false }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
@@ -429,8 +429,11 @@ export class ChartModel {
 			});
 		}
 
-		return stack()
-			.offset(stackOffsetDiverging)
+		const stackToUse = divergent
+			? stack().offset(stackOffsetDiverging)
+			: stack();
+
+		return stackToUse
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series
