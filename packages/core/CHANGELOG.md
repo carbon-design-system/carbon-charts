@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.43.0...v0.44.0) (2021-08-18)
+
+
+### Features
+
+* **core:** support negative values in stacked bar ([#1121](https://github.com/carbon-design-system/carbon-charts/issues/1121)) ([b71cc79](https://github.com/carbon-design-system/carbon-charts/commit/b71cc79876fe56b49cbb08441f41e17ee37fbcff))
+
+
+
+
+
 # [0.43.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.1...v0.43.0) (2021-08-17)
 
 
