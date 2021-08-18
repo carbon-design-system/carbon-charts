@@ -134,7 +134,7 @@ export class StackedBar extends Bar {
 						) {
 							y1 += d[1] === 0 ? 2 : 1;
 						} else {
-							y1 -= d[1] === 0 ? 2 : 1;
+							y1 -= d[1] === 0 ? 1 : 1;
 						}
 					} else if (!barIsNegative) {
 						if (
