@@ -45,6 +45,8 @@ export class StackedBar extends Bar {
 			groups: this.configs.groups,
 		});
 
+		const activeDataGroupNames = this.model.getActiveDataGroupNames();
+
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
@@ -110,7 +112,7 @@ export class StackedBar extends Bar {
 					this.services.cartesianScales.getDomainValue(key, i) -
 					barWidth / 2;
 				const x1 = x0 + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
+				let y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
 				// don't show if part of bar is out of zoom domain
@@ -123,13 +125,25 @@ export class StackedBar extends Bar {
 					Math.abs(y1 - y0) > 0 &&
 					Math.abs(y1 - y0) > options.bars.dividerSize
 				) {
-					if (
-						this.services.cartesianScales.getOrientation() ===
-						CartesianOrientations.VERTICAL
-					) {
-						y1 += 1;
-					} else {
-						y1 -= 1;
+					const barIsNegative = d[0] < 0 && d[1] <= 0;
+					if (barIsNegative && activeDataGroupNames.length > 1) {
+						if (
+							this.services.cartesianScales.getOrientation() ===
+							CartesianOrientations.VERTICAL
+						) {
+							y1 += d[1] === 0 ? 2 : 1;
+						} else {
+							y1 -= d[1] === 0 ? 2 : 1;
+						}
+					} else if (!barIsNegative) {
+						if (
+							this.services.cartesianScales.getOrientation() ===
+							CartesianOrientations.VERTICAL
+						) {
+							y1 += 1;
+						} else {
+							y1 -= 1;
+						}
 					}
 				}
 

@@ -10,6 +10,7 @@ import {
 	StackedArea,
 	StackedRuler,
 	TwoDimensionalAxes,
+	ZeroLine,
 	Line,
 	StackedScatter,
 	Skeleton,
@@ -48,6 +49,7 @@ export class StackedAreaChart extends AxisChart {
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID,
 			}),
+			new ZeroLine(this.model, this.services),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

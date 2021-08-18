@@ -12,6 +12,7 @@ import {
 	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
+	ZeroLine,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
@@ -45,6 +46,7 @@ export class LineChart extends AxisChart {
 			new Line(this.model, this.services),
 			new Scatter(this.model, this.services, { handleThresholds: true }),
 			new SkeletonLines(this.model, this.services),
+			new ZeroLine(this.model, this.services),
 		];
 
 		const components: any[] = this.getAxisChartComponents(
