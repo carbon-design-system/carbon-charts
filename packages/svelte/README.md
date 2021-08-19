@@ -337,7 +337,7 @@ For instance in the case of a donut chart you're able to pass in an additional
 field called `center` in your options configuring the donut center.
 
 For instructions on using the **tabular data format**, see
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format)
+[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
 
 There are also additional options available depending on the chart type being
 used,
