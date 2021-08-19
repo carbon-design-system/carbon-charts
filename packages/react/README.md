@@ -11,14 +11,14 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-react d3@5.x
+npm install -S @carbon/charts @carbon/charts-react d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-react d3@5.x
+yarn add @carbon/charts @carbon/charts-react d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a
