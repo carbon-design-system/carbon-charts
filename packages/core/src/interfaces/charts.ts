@@ -261,7 +261,7 @@ export interface HistogramChartOptions extends AxisChartOptions {
 	 */
 	bins?: {
 		rangeLabel?: string;
-	}
+	};
 }
 
 /**
@@ -348,6 +348,11 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		/**
+		 * identifier for value key in your charting data
+		 * defaults to value
+		 */
+		mapsTo?: string;
 		sortFunction?: (a: any, b: any) => number;
 	};
 }

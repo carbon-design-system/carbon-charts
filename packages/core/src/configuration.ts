@@ -440,6 +440,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 		},
 		alignment: Alignments.LEFT,
 		sortFunction: null,
+		mapsTo: 'value',
 	},
 } as PieChartOptions);
 
