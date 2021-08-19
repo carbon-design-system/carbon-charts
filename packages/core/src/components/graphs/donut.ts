@@ -82,7 +82,7 @@ export class Donut extends Pie {
 			donutCenterFigure = this.model
 				.getDisplayData()
 				.reduce((accumulator, d) => {
-					return accumulator + d.value;
+					return accumulator + d[options.pie.mapsTo];
 				}, 0);
 		}
 
