@@ -352,7 +352,7 @@ export interface PieChartOptions extends BaseChartOptions {
 		 * identifier for value key in your charting data
 		 * defaults to value
 		 */
-		mapsTo?: string;
+		valueMapsTo?: string;
 		sortFunction?: (a: any, b: any) => number;
 	};
 }

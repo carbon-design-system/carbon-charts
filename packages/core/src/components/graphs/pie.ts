@@ -64,7 +64,7 @@ export class Pie extends Component {
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
-		const valueMapsTo = options.pie.mapsTo;
+		const { valueMapsTo } = options.pie;
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
@@ -439,7 +439,7 @@ export class Pie extends Component {
 				});
 
 				const { groupMapsTo } = self.getOptions().data;
-				const { mapsTo } = self.getOptions().pie;
+				const { valueMapsTo } = self.getOptions().pie;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
@@ -447,7 +447,7 @@ export class Pie extends Component {
 					items: [
 						{
 							label: datum.data[groupMapsTo],
-							value: datum.data[mapsTo],
+							value: datum.data[valueMapsTo],
 						},
 					],
 				});

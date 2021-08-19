@@ -34,7 +34,7 @@ export const donutMapsToOptions = {
 	title: 'Donut (value maps to count)',
 	resizable: true,
 	pie: {
-		mapsTo: 'count',
+		valueMapsTo: 'count',
 	},
 };
 

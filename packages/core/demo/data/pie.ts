@@ -39,7 +39,7 @@ export const pieMapToOptions = {
 	title: 'Pie (value maps to count)',
 	resizable: true,
 	pie: {
-		mapsTo: 'count',
+		valueMapsTo: 'count',
 	},
 };
 
