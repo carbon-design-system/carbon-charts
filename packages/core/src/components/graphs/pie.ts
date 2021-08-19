@@ -62,12 +62,14 @@ export class Pie extends Component {
 		const self = this;
 		const svg = this.getComponentContainer();
 
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+		const valueMapsTo = options.pie.mapsTo;
+
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
 			.getDisplayData()
-			.filter((data) => data.value > 0);
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+			.filter((data) => data[valueMapsTo] > 0);
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -81,7 +83,7 @@ export class Pie extends Component {
 
 		// Setup the pie layout
 		const pieLayout = pie()
-			.value((d: any) => d.value)
+			.value((d: any) => d[valueMapsTo])
 			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
 			.padAngle(Configuration.pie.padAngle);
 
@@ -136,10 +138,11 @@ export class Pie extends Component {
 			.attr(
 				'aria-label',
 				(d) =>
-					`${d.value}, ${
+					`${d[valueMapsTo]}, ${
 						Tools.convertValueToPercentage(
-							d.data.value,
-							displayData
+							d.data[valueMapsTo],
+							displayData,
+							valueMapsTo
 						) + '%'
 					}`
 			)
@@ -151,7 +154,7 @@ export class Pie extends Component {
 		// Draw the slice labels
 		const renderLabels = options.pie.labels.enabled;
 		const labelData = renderLabels
-			? pieLayoutData.filter((x) => x.value > 0)
+			? pieLayoutData.filter((x) => x.data[valueMapsTo] > 0)
 			: [];
 		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
 			.attr('role', Roles.GROUP)
@@ -181,8 +184,11 @@ export class Pie extends Component {
 				}
 
 				return (
-					Tools.convertValueToPercentage(d.data.value, displayData) +
-					'%'
+					Tools.convertValueToPercentage(
+						d.data[valueMapsTo],
+						displayData,
+						valueMapsTo
+					) + '%'
 				);
 			})
 			// Calculate dimensions in order to transform
@@ -433,6 +439,7 @@ export class Pie extends Component {
 				});
 
 				const { groupMapsTo } = self.getOptions().data;
+				const { mapsTo } = self.getOptions().pie;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
@@ -440,7 +447,7 @@ export class Pie extends Component {
 					items: [
 						{
 							label: datum.data[groupMapsTo],
-							value: datum.data.value,
+							value: datum.data[mapsTo],
 						},
 					],
 				});
