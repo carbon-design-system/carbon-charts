@@ -18,14 +18,14 @@ to [@metonym](https://github.com/metonym).
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte d3@5.x
+npm install -D @carbon/charts-svelte d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte d3@5.x
+yarn add -D @carbon/charts-svelte d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a
