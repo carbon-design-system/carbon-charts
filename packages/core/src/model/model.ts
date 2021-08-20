@@ -7,7 +7,7 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 
 // D3
 import { scaleOrdinal } from 'd3-scale';
-import { stack } from 'd3-shape';
+import { stack, stackOffsetDiverging } from 'd3-shape';
 import { histogram } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -397,7 +397,7 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData({ percentage = false, groups = null }) {
+	getStackedData({ percentage = false, groups = null, divergent = false }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
@@ -429,7 +429,11 @@ export class ChartModel {
 			});
 		}
 
-		return stack()
+		const stackToUse = divergent
+			? stack().offset(stackOffsetDiverging)
+			: stack();
+
+		return stackToUse
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series

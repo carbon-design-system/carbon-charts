@@ -245,12 +245,12 @@ export namespace Tools {
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
+	 * @param {string} key
 	 * @returns The percentage in the form of a number (1 significant digit if necessary)
 	 */
-	export function convertValueToPercentage(item, fullData) {
+	export function convertValueToPercentage(item, fullData, key = 'value') {
 		const percentage =
-			(item / fullData.reduce((accum, val) => accum + val.value, 0)) *
-			100;
+			(item / fullData.reduce((accum, val) => accum + val[key], 0)) * 100;
 		// if the value has any significant figures, keep 1
 		return percentage % 1 !== 0
 			? parseFloat(percentage.toFixed(1))

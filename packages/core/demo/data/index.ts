@@ -556,6 +556,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.StackedBarChart,
 			},
 			{
+				options: barDemos.stackedBarNegativeOptions,
+				data: barDemos.stackedBarNegativeData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,
@@ -733,6 +738,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.DonutChart,
 			},
 			{
+				options: donutDemos.donutMapsToOptions,
+				data: donutDemos.donutDataMapsTo,
+				chartType: chartTypes.DonutChart,
+			},
+			{
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
@@ -851,6 +861,11 @@ const simpleChartDemos = [
 			{
 				options: pieDemos.pieCenteredOptions,
 				data: pieDemos.pieCenteredData,
+				chartType: chartTypes.PieChart,
+			},
+			{
+				options: pieDemos.pieMapToOptions,
+				data: pieDemos.pieDataMapsTo,
 				chartType: chartTypes.PieChart,
 			},
 			{
