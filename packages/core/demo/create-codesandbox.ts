@@ -9,6 +9,8 @@ const plexAndCarbonComponentsCSS = `@import "https://fonts.googleapis.com/css?fa
 @import "https://unpkg.com/carbon-components/css/carbon-components.min.css";
 `;
 
+const D3VERSION = '^7.0.0';
+
 export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};
 
@@ -73,7 +75,7 @@ new ${chartComponent}(chartHolder, {
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'carbon-components': carbonComponentsVersion,
-			d3: '7.0.0',
+			d3: D3VERSION,
 		},
 		devDependencies: {
 			'parcel-bundler': '^1.6.1',
@@ -125,7 +127,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-react': libraryVersion,
-			d3: '5.12.0',
+			d3: D3VERSION,
 			react: '16.12.0',
 			'react-dom': '16.12.0',
 			'react-scripts': '3.0.1',
@@ -228,7 +230,7 @@ platformBrowserDynamic()
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-angular': libraryVersion,
 				'core-js': '3.6.0',
-				d3: '5.15.0',
+				d3: D3VERSION,
 				rxjs: '6.5.3',
 				'zone.js': '0.10.2',
 			},
@@ -310,7 +312,7 @@ new Vue({
 				'@carbon/charts-vue': libraryVersion,
 				'@vue/cli-plugin-babel': '4.1.1',
 				'carbon-components': carbonComponentsVersion,
-				d3: '5.15.0',
+				d3: D3VERSION,
 				vue: '^2.6.11',
 			},
 		},
@@ -398,7 +400,7 @@ export default app;
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-svelte': libraryVersion,
 			'carbon-components': carbonComponentsVersion,
-			d3: '5.12.0',
+			d3: D3VERSION,
 			svelte: '3.20.x',
 		},
 	};
