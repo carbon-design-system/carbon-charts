@@ -34,6 +34,7 @@ export * from './graphs/treemap';
 export * from './graphs/radar';
 export * from './graphs/circle-pack';
 export * from './graphs/wordcloud';
+export * from './graphs/alluvial';
 
 // Layout
 export * from './layout/spacer';
