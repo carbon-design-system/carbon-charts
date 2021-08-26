@@ -58,7 +58,6 @@ export class Alluvial extends Component {
 			}
 		});
 
-
 		svg.html('');
 
 		// Draws the links (Waves)

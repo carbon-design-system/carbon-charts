@@ -1,8 +1,8 @@
 // Internal Imports
-import { Chart } from "../chart";
-import * as Configuration from "../configuration";
-import { ChartConfig, PieChartOptions } from "../interfaces/index";
-import { Tools } from "../tools";
+import { Chart } from '../chart';
+import * as Configuration from '../configuration';
+import { ChartConfig, PieChartOptions } from '../interfaces/index';
+import { Tools } from '../tools';
 
 // Components
 import {
@@ -10,8 +10,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Skeleton
-} from "../components/index";
+	Skeleton,
+} from '../components/index';
 
 export class AlluvialChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
@@ -37,9 +37,7 @@ export class AlluvialChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
-			new Alluvial(this.model, this.services)
-		];
+		const graphFrameComponents = [new Alluvial(this.model, this.services)];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;
