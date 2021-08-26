@@ -462,3 +462,23 @@ export interface CirclePackChartOptions extends BaseChartOptions {
 		};
 	};
 }
+
+/**
+ * options specific to Alluvial charts
+ */
+export interface AlluvialChartOptions extends BaseChartOptions {
+	units?: string;
+	/**
+	 * List of nodes to draw
+	 */
+	nodes: [
+		{
+			name: string;
+			category?: string;
+		}
+	];
+	/**
+	 * Set the node padding
+	 */
+	nodePadding?: number;
+}
