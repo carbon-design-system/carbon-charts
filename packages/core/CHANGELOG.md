@@ -1,5 +1,21 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.46.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.45.1...v0.46.0) (2021-08-27)
+
+
+### Features
+
+* **charts:** add proportional meter chart ([#1040](https://github.com/carbon-design-system/carbon-charts/issues/1040)) ([10592e4](https://github.com/carbon-design-system/carbon-charts/commit/10592e40665d104117b8e2d2580e5edc407c3e8d))
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
