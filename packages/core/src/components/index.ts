@@ -8,7 +8,6 @@ export * from './essentials/title';
 export * from './essentials/title-meter';
 export * from './essentials/tooltip';
 export * from './essentials/tooltip-axis';
-export * from './essentials/tooltip-histogram';
 export * from './essentials/canvas-chart-clip';
 
 // GRAPHS
