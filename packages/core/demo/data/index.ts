@@ -21,6 +21,7 @@ import * as toolbarDemos from './toolbar';
 import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
 import * as highScaleDemos from './high-scale';
+import * as alluvialDemos from './alluvial';
 
 export * from './area';
 export * from './bar';
@@ -45,6 +46,7 @@ export * from './toolbar';
 export * from './wordcloud';
 export * from './zoom-bar';
 export * from './high-scale';
+export * from './alluvial';
 
 import {
 	createChartSandbox,
@@ -1065,6 +1067,18 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
+			},
+		],
+	},
+	{
+		title: 'Alluvial',
+		description: 'In progress',
+		demos: [
+			{
+				options: alluvialDemos.alluvialSimpleOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
+				mainDemo: true,
 			},
 		],
 	},
