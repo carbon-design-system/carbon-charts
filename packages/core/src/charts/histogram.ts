@@ -15,7 +15,6 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipHistogram,
 } from '../components/index';
 
 export class HistogramChart extends AxisChart {
