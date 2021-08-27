@@ -2,6 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Events, RenderTypes } from './../../interfaces';
+import { Tools } from '../../tools';
 
 export class Title extends Component {
 	type = 'title';
@@ -9,8 +10,9 @@ export class Title extends Component {
 
 	render() {
 		const svg = this.getComponentContainer();
+		const title = Tools.getProperty(this.getOptions(), 'title');
 
-		const text = svg.selectAll('p.title').data([this.getOptions().title]);
+		const text = svg.selectAll('p.title').data([title]);
 
 		text.enter()
 			.append('p')

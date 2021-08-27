@@ -31,6 +31,7 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ProportionalMeterChartOptions,
 	ToolbarOptions,
 	ZoomBarsOptions,
 	// ENUMS
@@ -490,9 +491,10 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	legend: {
 		enabled: false,
+		clickable: false,
 	},
 	meter: {
-		height: 8,
+		proportional: null,
 		statusBar: {
 			percentageIndicator: {
 				enabled: true,
@@ -500,6 +502,16 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 		},
 	},
 } as MeterChartOptions);
+
+const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge(
+	{},
+	meterChart,
+	{
+		legend: {
+			enabled: true,
+		},
+	} as MeterChartOptions
+);
 
 /**
  * options specific to radar charts
@@ -569,6 +581,7 @@ export const options = {
 	pieChart,
 	donutChart,
 	meterChart,
+	proportionalMeterChart,
 	radarChart,
 	gaugeChart,
 	comboChart,

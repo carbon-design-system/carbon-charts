@@ -182,13 +182,13 @@ export const histogramContinueWithBinsOptions = {
 			title: 'Age',
 			mapsTo: 'age',
 			bins: [20, 40, 50, 60, 90],
-			limitDomainToBins: true
+			limitDomainToBins: true,
 		},
 		left: {
 			title: 'No. of participants',
 			scaleType: 'linear',
 			stacked: true,
-			binned: true
+			binned: true,
 		},
 	},
 };

@@ -1,7 +1,7 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.45.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.45.0...v0.45.1) (2021-08-23)
 
@@ -13,63 +13,49 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.45.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.44.1...v0.45.0) (2021-08-19)
 
-
 ### Features
 
-* **core:** Add options to map value to other keys ([#1122](https://github.com/carbon-design-system/carbon-charts/issues/1122)) ([1835192](https://github.com/carbon-design-system/carbon-charts/commit/18351924acc182c24a7467dfc989fdc1e5c759dc)), closes [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
-
-
-
-
+-   **core:** Add options to map value to other keys
+    ([#1122](https://github.com/carbon-design-system/carbon-charts/issues/1122))
+    ([1835192](https://github.com/carbon-design-system/carbon-charts/commit/18351924acc182c24a7467dfc989fdc1e5c759dc)),
+    closes
+    [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
+    [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
+    [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
+    [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
+    [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
 
 ## [0.44.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.44.0...v0.44.1) (2021-08-19)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 # [0.44.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.43.0...v0.44.0) (2021-08-18)
-
 
 ### Features
 
-* **core:** support negative values in stacked bar ([#1121](https://github.com/carbon-design-system/carbon-charts/issues/1121)) ([b71cc79](https://github.com/carbon-design-system/carbon-charts/commit/b71cc79876fe56b49cbb08441f41e17ee37fbcff))
-
-
-
-
+-   **core:** support negative values in stacked bar
+    ([#1121](https://github.com/carbon-design-system/carbon-charts/issues/1121))
+    ([b71cc79](https://github.com/carbon-design-system/carbon-charts/commit/b71cc79876fe56b49cbb08441f41e17ee37fbcff))
 
 # [0.43.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.1...v0.43.0) (2021-08-17)
 
-
 ### Features
 
-* **core:** remove backgrounds on chart holder & wrapper ([#1120](https://github.com/carbon-design-system/carbon-charts/issues/1120)) ([8044c99](https://github.com/carbon-design-system/carbon-charts/commit/8044c99cd4c307147a164d3e60bbb23d2a0a2dc4))
-
-
-
-
+-   **core:** remove backgrounds on chart holder & wrapper
+    ([#1120](https://github.com/carbon-design-system/carbon-charts/issues/1120))
+    ([8044c99](https://github.com/carbon-design-system/carbon-charts/commit/8044c99cd4c307147a164d3e60bbb23d2a0a2dc4))
 
 ## [0.42.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.0...v0.42.1) (2021-08-13)
 
 **Note:** Version bump only for package @carbon/charts
 
-
-
-
-
 # [0.42.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.103...v0.42.0) (2021-08-13)
-
 
 ### Features
 
-* **charts:** add histogram ([#1038](https://github.com/carbon-design-system/carbon-charts/issues/1038)) ([07e07b3](https://github.com/carbon-design-system/carbon-charts/commit/07e07b3a2e8bc0eb01a7f4fdfc004e8095fb7b26))
-
-
-
-
+-   **charts:** add histogram
+    ([#1038](https://github.com/carbon-design-system/carbon-charts/issues/1038))
+    ([07e07b3](https://github.com/carbon-design-system/carbon-charts/commit/07e07b3a2e8bc0eb01a7f4fdfc004e8095fb7b26))
 
 # Change Log
 
@@ -272,15 +258,6 @@ All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.41.69](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.68...v0.41.69) (2021-06-21)
-
-**Note:** Version bump only for package @carbon/charts
-
-# Change Log
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## [0.41.68](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.67...v0.41.68) (2021-06-08)
 
 **Note:** Version bump only for package @carbon/charts
 
