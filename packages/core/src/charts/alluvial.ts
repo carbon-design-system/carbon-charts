@@ -11,7 +11,6 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	Skeleton,
 } from '../components/index';
 
 export class AlluvialChart extends Chart {
@@ -34,14 +33,11 @@ export class AlluvialChart extends Chart {
 		this.init(holder, chartConfigs);
 	}
 
-	//@todo: Remove legend
-	// getChartComponents(graphFrameComponents: any[]) {
-	// 	return graphFrameComponents;
-	// }
-
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any = [new Alluvial(this.model, this.services)];
+		const graphFrameComponents: any = [
+			new Alluvial(this.model, this.services),
+		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;
