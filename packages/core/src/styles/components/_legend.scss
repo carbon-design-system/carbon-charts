@@ -3,7 +3,10 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	user-select: none;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
-	margin: -5px;
+
+	&[data-name='legend-items'] {
+		margin: -5px;
+	}
 
 	div.legend-item {
 		display: flex;

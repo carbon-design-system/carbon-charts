@@ -221,3 +221,13 @@ export enum Alluvial {
 	LINE_MOUSEOUT = 'alluvial-line-mouseout',
 	LINE_MOUSEMOVE = 'alluvial-line-mousemove',
 }
+
+/**
+ * enum of all meter related events
+ */
+export enum Meter {
+	METER_MOUSEOVER = 'meter-mouseover',
+	METER_CLICK = 'meter-click',
+	METER_MOUSEOUT = 'meter-mouseout',
+	METER_MOUSEMOVE = 'meter-mousemove',
+}

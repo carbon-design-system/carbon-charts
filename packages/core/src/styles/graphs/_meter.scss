@@ -3,6 +3,18 @@
 		fill: $ui-01;
 	}
 
+	line.rangeIndicator {
+		stroke: $carbon--gray-40;
+		stroke-width: 1px;
+		@if $carbon--theme ==
+			$carbon--theme--g90 or
+			$carbon--theme ==
+			$carbon--theme--g100
+		{
+			stroke: $carbon--gray-60;
+		}
+	}
+
 	rect.value {
 		&.status--danger {
 			fill: $support-01;
