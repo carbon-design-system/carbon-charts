@@ -30,12 +30,18 @@ export class Alluvial extends Component {
 		const options = this.model.getOptions();
 		const data = this.model.getData();
 
+		// Set the custom node padding if provided
+		let nodePadding = Configuration.alluvial.minNodePadding;
+		if (options.nodePadding > Configuration.alluvial.minNodePadding) {
+			nodePadding = options.nodePadding;
+		}
+
 		const sankey = d3Sankey()
 			.nodeId((d) => d.name)
-			.nodeWidth(4)
+			.nodeWidth(Configuration.alluvial.nodeWidth)
 			// Distance nodes are apart from each other
-			.nodePadding(24)
-			// size of the chart and padding
+			.nodePadding(nodePadding)
+			// size of the chart and its padding
 			.extent([
 				[2, 30],
 				[width - 2, height],
@@ -60,6 +66,42 @@ export class Alluvial extends Component {
 
 		svg.html('');
 
+		// Add node category text
+		const alluvialCategory = svg
+			.append('g')
+			.classed('header-arrows', true)
+			.selectAll('g')
+			.data(Object.keys(nodeCoordinates))
+			.join('g')
+			.attr('transform', (d) => {
+				return `translate(${d}, 0)`;
+			});
+
+		// Add the category text
+		alluvialCategory
+			.append('text')
+			.attr('id', (d, i) => `category-${i}`)
+			.style('font-size', '14px')
+			.text((d) => {
+				if (nodeCoordinates[d]) {
+					return nodeCoordinates[d];
+				}
+				return '';
+			})
+			.attr('y', 20)
+			.attr('x', (d, i) => {
+				const { width } = this.parent
+					.select(`text#category-${i}`)
+					.node()
+					.getBBox();
+				// Make the text on the left on the last node group
+				let x = 0;
+				if (d + x >= width) {
+					x = -width + 4;
+				}
+				return x;
+			});
+
 		// Draws the links (Waves)
 		svg.append('g')
 			.attr('fill', 'none')
@@ -77,7 +119,7 @@ export class Alluvial extends Component {
 				});
 			})
 			.attr('stroke-width', (d) => Math.max(1, d.width))
-			.attr('stroke-opacity', 0.8)
+			.attr('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
 				'aria-label',
 				(d) => `${d.source.name} → ${d.target.name} (${d.value})`
@@ -114,7 +156,7 @@ export class Alluvial extends Component {
 			.attr('text-anchor', 'start')
 			.attr('fill', 'white')
 			// Padding to text
-			.attr('x', 8)
+			.attr('x', 4)
 			// shift 13 pixels down to fit background container
 			.attr('dy', 13)
 			.text((d) => {
