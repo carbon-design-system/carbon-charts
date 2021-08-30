@@ -80,7 +80,7 @@ export class Alluvial extends Component {
 			.attr('stroke-opacity', 0.8)
 			.attr(
 				'aria-label',
-				(d) => `${d.source.name} → ${d.target.name}\n${d.value}`
+				(d) => `${d.source.name} → ${d.target.name} (${d.value})`
 			);
 
 		// Creating the groups
@@ -113,8 +113,10 @@ export class Alluvial extends Component {
 			.style('font-size', '12px')
 			.attr('text-anchor', 'start')
 			.attr('fill', 'white')
+			// Padding to text
 			.attr('x', 8)
-			.attr('y', 14)
+			// shift 13 pixels down to fit background container
+			.attr('dy', 13)
 			.text((d) => {
 				return `${d.name} (${d.value})`;
 			})
@@ -133,7 +135,6 @@ export class Alluvial extends Component {
 					.getBBox();
 				return width + 8;
 			})
-			.attr('x', 6)
 			.attr('height', 18)
 			.attr('stroke', 'black')
 			.attr('stroke-width', 2)
@@ -146,14 +147,18 @@ export class Alluvial extends Component {
 				.node()
 				.getBBox();
 
-			// Subtracting 10 since text background is -10
-			const y = (d.y1 - d.y0) / 2 - 10;
+			// Subtracting 9 since text background is 18 to center
+			const y = (d.y1 - d.y0) / 2 - 9;
 			// Node width
 			let x = d.x1 - d.x0;
 
 			// Display bars on the right instead of left of the node
 			if (d.x1 >= width) {
-				x = x - (width + 24);
+				// 16 = node width (4) + text container padding (8) + distance between node and text container (4)
+				x = x - (width + 16);
+			} else {
+				// Add padding to text containers
+				x += 4;
 			}
 
 			return `translate(${x}, ${y})`;
