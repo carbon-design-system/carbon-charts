@@ -19,7 +19,7 @@ body:
     id: summary
     attributes:
       label: Summary
-      description: >
+      description: >-
         Please describe your request in one or two sentences.
 
         Clarify if you are asking for design, development, or both design and
@@ -44,7 +44,7 @@ body:
     id: must-have
     attributes:
       label: '"Must have" functionality'
-      description: >
+      description: >-
         Highlight any "must have" needs and functionality for the request.
 
         This should not be a full list of functionality; the Carbon team will work with
@@ -55,7 +55,7 @@ body:
     id: timeline
     attributes:
       label: Specific timeline issues / requests
-      description: >
+      description: >-
         Do you want this work within a specific time period? Is it related to an
 upcoming release?
 
@@ -68,7 +68,7 @@ upcoming release?
     id: resources
     attributes:
       label: Available extra resources
-      description: >
+      description: >-
         What resources do you have to assist this effort?
 
         *Carbon is a collaborative system. We encourage teams to build components and submit them for integration as either add-ons or core components.*
