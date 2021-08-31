@@ -1,0 +1,73 @@
+name: Accessibility issue
+description: Report an accessibility or usability issue
+title: "[Accessibility]: "
+labels: [accessibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      multiple: true
+      options:
+        - Operating system
+        - Browser
+        - Automated testing tool and ruleset
+        - Assistive technology used to verify
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened? What did you expect to happen instead?
+    validations:
+      required: true
+  - type: input
+    id: sandbox
+    attributes:
+      label: What WCAG 2.1 checkpoint does the issue violate?
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: What version of our packages are you using?
+      placeholder: e.g. `@carbon/charts@0.46.3`
+    validations:
+      required: true
+  - type: textarea
+    id: data-options
+    attributes:
+      label: Data & options used
+      description: Please provide examples of the data & options that you're using
+      render: js
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: js
+  - type: input
+    id: sandbox
+    attributes:
+      label: Codesandbox example
+      description: >
+        Do you have a sandbox where we can see the issue reproduced?
+        
+        **Most of our demos offer a codesandbox that can help you get started**
+        https://carbon-design-system.github.io/carbon-charts/
+      placeholder: ex. https://codesandbox.io/...
+    validations:
+      required: false
