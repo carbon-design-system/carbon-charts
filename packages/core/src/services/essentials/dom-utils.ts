@@ -253,8 +253,19 @@ export class DOMUtils extends Service {
 
 	exportToJPG() {
 		const self = this;
+
+		const holder = this.getHolder();
+		const holderSelection = select(holder);
+		holderSelection.classed('filled', true);
+
 		domToImage
 			.toJpeg(this.getMainContainer(), {
+				bgcolor:
+					typeof window !== 'undefined'
+						? window
+								.getComputedStyle(holder)
+								.getPropertyValue('background-color')
+						: undefined,
 				quality: 1,
 				// Remove the toolbar
 				filter: (node) => {
@@ -270,13 +281,25 @@ export class DOMUtils extends Service {
 			})
 			.then(function (dataUrl) {
 				self.services.files.downloadImage(dataUrl, 'myChart.jpg');
+				holderSelection.classed('filled', false);
 			});
 	}
 
 	exportToPNG() {
 		const self = this;
+
+		const holder = this.getHolder();
+		const holderSelection = select(holder);
+		holderSelection.classed('filled', true);
+
 		domToImage
 			.toPng(this.getMainContainer(), {
+				bgcolor:
+					typeof window !== 'undefined'
+						? window
+								.getComputedStyle(holder)
+								.getPropertyValue('background-color')
+						: undefined,
 				quality: 1,
 				// Remove the toolbar
 				filter: (node) => {
@@ -292,6 +315,7 @@ export class DOMUtils extends Service {
 			})
 			.then(function (dataUrl) {
 				self.services.files.downloadImage(dataUrl, 'myChart.png');
+				holderSelection.classed('filled', false);
 			})
 			.catch(function (error) {
 				console.error('oops, something went wrong!', error);

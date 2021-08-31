@@ -196,4 +196,3 @@ export interface AxesOptions<AxesOptionType> {
 	right?: AxesOptionType;
 	top?: AxesOptionType;
 }
-

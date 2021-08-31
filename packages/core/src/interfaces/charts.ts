@@ -261,7 +261,7 @@ export interface HistogramChartOptions extends AxisChartOptions {
 	 */
 	bins?: {
 		rangeLabel?: string;
-	}
+	};
 }
 
 /**
@@ -348,6 +348,11 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		/**
+		 * identifier for value key in your charting data
+		 * defaults to value
+		 */
+		valueMapsTo?: string;
 		sortFunction?: (a: any, b: any) => number;
 	};
 }
@@ -393,6 +398,10 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		proportional?: {
+			total?: number;
+			unit?: string;
+		};
 		peak?: number;
 		status?: {
 			ranges: Array<{
@@ -408,6 +417,15 @@ export interface MeterChartOptions extends BaseChartOptions {
 				 */
 				enabled?: boolean;
 			};
+		};
+	};
+}
+
+export interface ProportionalMeterChartOptions extends BaseChartOptions {
+	meter?: {
+		proportional?: {
+			total?: number;
+			unit?: string;
 		};
 	};
 }

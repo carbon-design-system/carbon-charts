@@ -1,0 +1,33 @@
+name: Question❓
+description: Suggest an idea for this project
+title: "[Enhancement]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        
+        If you're an IBMer, we have a couple of Slack channels available across all IBM
+        Workspaces:
+
+        - #carbon-design-system for questions about the Design System
+        - #carbon-charts for dev-related questions around carbon dataviz
+        - #carbon-charts-design for design-related questions around carbon dataviz
+
+        For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon-charts/discussions/new) or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with Carbon maintainers and fellow community members.
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Please provide any useful details, screenshots or demos.
+    validations:
+      required: true
