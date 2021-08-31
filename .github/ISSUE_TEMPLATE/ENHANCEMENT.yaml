@@ -56,8 +56,7 @@ body:
     attributes:
       label: Specific timeline issues / requests
       description: >-
-        Do you want this work within a specific time period? Is it related to an
-upcoming release?
+        Do you want this work within a specific time period? Is it related to an upcoming release?
 
         *NB: The Carbon team will try to work with your timeline, but it's not
         guaranteed. The earlier you make a request in advance of a desired delivery
