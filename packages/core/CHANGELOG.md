@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.3...v0.46.4) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** display correct toolbar controls based on provided options ([#1127](https://github.com/carbon-design-system/carbon-charts/issues/1127)) ([77e0e43](https://github.com/carbon-design-system/carbon-charts/commit/77e0e431c3c5c57eec3e49757747c1a7835f93de)), closes [#1109](https://github.com/carbon-design-system/carbon-charts/issues/1109)
+
+
+
+
+
 ## [0.46.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.2...v0.46.3) (2021-08-31)
 
 **Note:** Version bump only for package @carbon/charts
