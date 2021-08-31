@@ -615,17 +615,29 @@ export class CartesianScales extends Service {
 					groups: dataGroupNames,
 				}
 			);
+
 			const nonStackedGroupsData = displayData.filter(
 				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
 			);
-			const stackedValues = dataValuesGroupedByKeys.map((dataValues) => {
+
+			let stackedValues = [];
+			dataValuesGroupedByKeys.forEach((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues;
 
-				return sum(Object.values(numericalValues) as number[]);
+				let positiveSum = 0,
+					negativeSum = 0;
+				Object.values(numericalValues).forEach((value: number) => {
+					if (value < 0) {
+						negativeSum += value;
+					} else {
+						positiveSum += value;
+					}
+				});
+				stackedValues.push([negativeSum, positiveSum]);
 			});
 
 			allDataValues = [
-				...stackedValues,
+				...Tools.flatten(stackedValues),
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {

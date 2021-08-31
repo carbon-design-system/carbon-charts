@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.3...v0.46.4) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** display correct toolbar controls based on provided options ([#1127](https://github.com/carbon-design-system/carbon-charts/issues/1127)) ([77e0e43](https://github.com/carbon-design-system/carbon-charts/commit/77e0e431c3c5c57eec3e49757747c1a7835f93de)), closes [#1109](https://github.com/carbon-design-system/carbon-charts/issues/1109)
+
+
+
+
+
+## [0.46.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.2...v0.46.3) (2021-08-31)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.46.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.1...v0.46.2) (2021-08-30)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.46.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.0...v0.46.1) (2021-08-27)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.46.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.45.1...v0.46.0) (2021-08-27)
+
+
+### Features
+
+* **charts:** add proportional meter chart ([#1040](https://github.com/carbon-design-system/carbon-charts/issues/1040)) ([10592e4](https://github.com/carbon-design-system/carbon-charts/commit/10592e40665d104117b8e2d2580e5edc407c3e8d))
+
+
+
+
+
+## [0.45.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.45.0...v0.45.1) (2021-08-23)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.45.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.44.1...v0.45.0) (2021-08-19)
+
+
+### Features
+
+* **core:** Add options to map value to other keys ([#1122](https://github.com/carbon-design-system/carbon-charts/issues/1122)) ([1835192](https://github.com/carbon-design-system/carbon-charts/commit/18351924acc182c24a7467dfc989fdc1e5c759dc)), closes [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110) [#1110](https://github.com/carbon-design-system/carbon-charts/issues/1110)
+
+
+
+
+
+## [0.44.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.44.0...v0.44.1) (2021-08-19)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.44.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.43.0...v0.44.0) (2021-08-18)
+
+
+### Features
+
+* **core:** support negative values in stacked bar ([#1121](https://github.com/carbon-design-system/carbon-charts/issues/1121)) ([b71cc79](https://github.com/carbon-design-system/carbon-charts/commit/b71cc79876fe56b49cbb08441f41e17ee37fbcff))
+
+
+
+
+
+# [0.43.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.1...v0.43.0) (2021-08-17)
+
+
+### Features
+
+* **core:** remove backgrounds on chart holder & wrapper ([#1120](https://github.com/carbon-design-system/carbon-charts/issues/1120)) ([8044c99](https://github.com/carbon-design-system/carbon-charts/commit/8044c99cd4c307147a164d3e60bbb23d2a0a2dc4))
+
+
+
+
+
 ## [0.42.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.42.0...v0.42.1) (2021-08-13)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

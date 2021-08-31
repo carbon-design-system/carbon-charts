@@ -29,14 +29,20 @@ export class MeterChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs);
 
+		// use prop meter options or regular meter options
+		let options = chartConfigs.options.meter.proportional
+			? Tools.merge(
+					Tools.clone(Configuration.options.proportionalMeterChart),
+					chartConfigs.options
+			  )
+			: Tools.merge(
+					Tools.clone(Configuration.options.meterChart),
+					chartConfigs.options
+			  );
+
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.meterChart),
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(options);
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
@@ -55,7 +61,7 @@ export class MeterChart extends Chart {
 		const titleComponent = {
 			id: 'meter-title',
 			components: [new MeterTitle(this.model, this.services)],
-			growth: LayoutGrowth.PREFERRED,
+			growth: LayoutGrowth.STRETCH,
 			renderType: RenderTypes.SVG,
 		};
 
@@ -63,7 +69,7 @@ export class MeterChart extends Chart {
 		const titleSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: LayoutGrowth.PREFERRED,
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		// the graph frame for meter includes the custom title (and spacer)
