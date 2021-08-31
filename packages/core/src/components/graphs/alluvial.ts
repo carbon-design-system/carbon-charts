@@ -205,5 +205,141 @@ export class Alluvial extends Component {
 
 			return `translate(${x}, ${y})`;
 		});
+
+		this.addLineEventListener();
+	}
+
+	addLineEventListener() {
+		const self = this;
+
+		this.parent
+			.selectAll('path.link')
+			.on('mouseover', function (event, datum) {
+				const hoveredElement = select(this);
+				self.unhighlightLines();
+
+				// Set the opacity of the line to selected
+				hoveredElement
+					.classed('hovered', true)
+					.style(
+						'stroke-opacity',
+						Configuration.alluvial.opacity.selected
+					)
+					.raise();
+
+				const strokeColor = getComputedStyle(
+					this,
+					null
+				).getPropertyValue('stroke');
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.LINE_MOUSEOVER,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Dispatch tooltip show event
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
+					hoveredElement,
+					items: [
+						{
+							label: datum.target.name,
+							value: datum.value,
+							color: strokeColor,
+							labelIcon: self.getRightArrowIcon(),
+						},
+					],
+				});
+			})
+			.on('mousemove', function (event, datum) {
+				// Dispatch mouse move event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.LINE_MOUSEMOVE,
+					{
+						event,
+						element: select(this),
+						datum,
+					}
+				);
+				// Dispatch tooltip move event
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
+			})
+			.on('click', function (event, datum) {
+				// Dispatch mouse click event
+				self.services.events.dispatchEvent(Events.Alluvial.LINE_CLICK, {
+					event,
+					element: select(this),
+					datum,
+				});
+			})
+			.on('mouseout', function (event, datum) {
+				const hoveredElement = select(this);
+				self.normalizeLines();
+
+				// Dispatch mouse out event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.LINE_MOUSEOUT,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Dispatch hide tooltip event
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					event,
+					hoveredElement,
+				});
+			});
+	}
+
+	// Sets the opacity of all lines to default (0.8)
+	private normalizeLines() {
+		this.parent
+			.selectAll('path.link')
+			.classed('hovered', false)
+			.style('stroke-opacity', Configuration.alluvial.opacity.default)
+			.raise();
+	}
+
+	// Sets the opacity of all lines to unfocused (0.3)
+	private unhighlightLines() {
+		this.parent
+			.selectAll('path.link')
+			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus)
+			.lower();
+	}
+
+	getRightArrowIcon() {
+		return `
+		<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+		<defs>
+			<style>
+			.cls-1 {
+				fill: none;
+			}
+			</style>
+		</defs>
+		<polygon points="18 6 16.57 7.393 24.15 15 4 15 4 17 24.15 17 16.57 24.573 18 26 28 16 18 6"/>
+		<rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+		</svg>`;
+	}
+
+	// Remove event listeners
+	destroy() {
+		this.parent
+			.selectAll('path.line,.node-group')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('click', null)
+			.on('mouseout', null);
 	}
 }
