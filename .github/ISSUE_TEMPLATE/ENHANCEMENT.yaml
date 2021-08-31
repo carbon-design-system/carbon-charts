@@ -1,0 +1,76 @@
+name: Feature request or enhancement 💡
+description: Suggest an idea for this project
+title: "[Enhancement]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: >-
+        Please describe your request in one or two sentences.
+
+        Clarify if you are asking for design, development, or both design and
+        development.
+    validations:
+      required: true
+  - type: textarea
+    id: justification
+    attributes:
+      label: Justification
+      description: Provide the business reasons for this request.
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Desired UX and success metrics
+      description: Describe the full user experience for this feature. Also define the metrics by which we can measure success/failure for the user.
+    validations:
+      required: true
+  - type: textarea
+    id: must-have
+    attributes:
+      label: "Must have" functionality
+      description: >-
+        Highlight any "must have" needs and functionality for the request.
+
+        This should not be a full list of functionality; the Carbon team will work with
+        you to define functionality based on the desired UX.
+    validations:
+      required: true
+  - type: textarea
+    id: timeline
+    attributes:
+      label: Specific timeline issues / requests
+      description: >-
+        Do you want this work within a specific time period? Is it related to an
+upcoming release?
+
+        *NB: The Carbon team will try to work with your timeline, but it's not
+        guaranteed. The earlier you make a request in advance of a desired delivery
+        date, the better!*
+    validations:
+      required: true
+  - type: textarea
+    id: resources
+    attributes:
+      label: Available extra resources
+      description: >-
+        What resources do you have to assist this effort?
+
+        *Carbon is a collaborative system. We encourage teams to build components and submit them for integration as either add-ons or core components.*
+    validations:
+      required: true
