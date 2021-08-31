@@ -15,7 +15,7 @@ body:
         - #carbon-charts for dev-related questions around carbon dataviz
         - #carbon-charts-design for design-related questions around carbon dataviz
 
-        For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon-charts/discussions/new).
+        For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon-charts/discussions/new) or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with Carbon maintainers and fellow community members.
   - type: input
     id: contact
     attributes:
