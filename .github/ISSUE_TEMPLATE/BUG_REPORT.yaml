@@ -48,7 +48,11 @@ body:
     id: sandbox
     attributes:
       label: Codesandbox example
-      description: Do you have a sandbox where we can see the issue reproduced? (most of our demos offer a codesandbox that can help you get started https://carbon-design-system.github.io/carbon-charts/)
+      description: >
+        Do you have a sandbox where we can see the issue reproduced?
+        
+        **Most of our demos offer a codesandbox that can help you get started**
+        https://carbon-design-system.github.io/carbon-charts/
       placeholder: ex. https://codesandbox.io/...
     validations:
       required: false
