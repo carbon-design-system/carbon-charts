@@ -4,6 +4,7 @@ import {
 	ArrowDirections,
 	Alignments,
 	ChartTypes,
+	TreeTypes,
 } from './enums';
 import {
 	LegendOptions,
@@ -458,6 +459,13 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to tree charts
+ */
+export interface TreeChartOptions extends BaseChartOptions {
+	treeType?: TreeTypes;
+}
 
 /*
  * options specific to circle pack charts

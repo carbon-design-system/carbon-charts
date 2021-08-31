@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { RenderTypes } from '../../interfaces';
+import { RenderTypes, TreeTypes } from '../../interfaces';
 
 // D3 Imports
 import { cluster as d3Cluster, tree as d3Tree, hierarchy } from 'd3-hierarchy';
@@ -163,7 +163,7 @@ export class Tree extends Component {
 		};
 
 		const tree =
-			get(options, 'treeType') === 'dendrogram'
+			get(options, 'treeType') === TreeTypes.DENDROGRAM
 				? d3Cluster().size([height, width - 155])
 				: d3Tree()
 						.nodeSize([dx, dy])

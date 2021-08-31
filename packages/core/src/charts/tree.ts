@@ -1,7 +1,7 @@
 // Internal Imports
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
-import { ChartConfig, PieChartOptions } from '../interfaces/index';
+import { ChartConfig, TreeChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
 
 // Components
@@ -14,14 +14,14 @@ import {
 } from '../components/index';
 
 export class TreeChart extends Chart {
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<TreeChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.pieChart,
+				Configuration.options.treeChart,
 				chartConfigs.options
 			)
 		);
@@ -34,9 +34,6 @@ export class TreeChart extends Chart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new Tree(this.model, this.services),
-			// new Skeleton(this.model, this.services, {
-			// 	skeleton: Skeletons.PIE,
-			// }),
 		];
 
 		// get the base chart components and export with tooltip

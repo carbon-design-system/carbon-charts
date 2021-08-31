@@ -17,6 +17,7 @@ import {
 	HistogramChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
+	TreeChartOptions,
 	TreemapChartOptions,
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
@@ -42,6 +43,7 @@ import {
 	ToolbarControlTypes,
 	ZoomBarTypes,
 	LegendItemType,
+	TreeTypes,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -541,6 +543,17 @@ const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
 } as ComboChartOptions);
 
 /*
+ * options specific to tree charts
+ */
+const treeChart: TreeChartOptions = Tools.merge(
+	{
+		treeType: TreeTypes.TREE
+	},
+	chart,
+	{} as TreeChartOptions
+);
+
+/*
  * options specific to treemap charts
  */
 const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
@@ -585,6 +598,7 @@ export const options = {
 	radarChart,
 	gaugeChart,
 	comboChart,
+	treeChart,
 	treemapChart,
 	circlePackChart,
 	wordCloudChart,

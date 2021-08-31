@@ -1045,15 +1045,19 @@ const simpleChartDemos = [
 const complexChartDemos = [
 	{
 		title: 'Tree',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
 		demos: [
 			{
 				data: treeDemos.treeData,
-				options: treeDemos.treeOptions,
+				options: treeDemos.dendogramOptions,
 				chartType: chartTypes.TreeChart,
+				mainDemo: true,
 			},
 			{
 				data: treeDemos.treeData,
-				options: treeDemos.dendogramOptions,
+				options: treeDemos.treeOptions,
 				chartType: chartTypes.TreeChart,
 			},
 		],

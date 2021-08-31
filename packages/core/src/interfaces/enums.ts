@@ -104,6 +104,14 @@ export enum LegendOrientations {
 }
 
 /**
+ * enum of tree types for the tree chart
+ */
+export enum TreeTypes {
+	TREE = 'tree',
+	DENDROGRAM = 'dendrogram',
+}
+
+/**
  * enum of all possible layout directions
  */
 export enum LayoutDirection {
@@ -208,6 +216,7 @@ export enum ChartTypes {
 	AREA = 'area',
 	STACKED_AREA = 'stacked-area',
 }
+
 /**
  * enum of supported toolbar control types
  */
