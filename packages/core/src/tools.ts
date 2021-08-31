@@ -88,16 +88,22 @@ export namespace Tools {
 		defaultOptions: any,
 		providedOptions: any
 	) {
-		defaultOptions = Tools.clone(defaultOptions);
+		const clonedDefaultOptions = Tools.clone(defaultOptions);
 		const providedAxesNames = Object.keys(providedOptions.axes || {});
 
+		// Use provide controls list if it exists
+		// Prevents merging and element overriding of the two lists
+		if (providedOptions?.toolbar?.controls) {
+			delete clonedDefaultOptions.toolbar.controls;
+		}
+
 		if (providedAxesNames.length === 0) {
-			delete defaultOptions.axes;
+			delete clonedDefaultOptions.axes;
 		}
 
 		// Update deprecated options to work with the tabular data format
 		// Similar to the functionality in model.transformToTabularData()
-		for (const axisName in defaultOptions.axes) {
+		for (const axisName in clonedDefaultOptions.axes) {
 			if (providedAxesNames.includes(axisName)) {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
@@ -123,13 +129,13 @@ export namespace Tools {
 					}
 				}
 			} else {
-				delete defaultOptions.axes[axisName];
+				delete clonedDefaultOptions.axes[axisName];
 			}
 		}
 
-		updateLegendAdditionalItems(defaultOptions, providedOptions);
+		updateLegendAdditionalItems(clonedDefaultOptions, providedOptions);
 
-		return Tools.merge(defaultOptions, providedOptions);
+		return Tools.merge(clonedDefaultOptions, providedOptions);
 	}
 
 	/**************************************
