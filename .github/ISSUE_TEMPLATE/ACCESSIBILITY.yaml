@@ -34,7 +34,7 @@ body:
     validations:
       required: true
   - type: input
-    id: sandbox
+    id: wcag-issue
     attributes:
       label: What WCAG 2.1 checkpoint does the issue violate?
     validations:
