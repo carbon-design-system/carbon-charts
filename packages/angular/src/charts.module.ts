@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BaseChart } from './base-chart.component';
+import { AlluvialChartComponent } from './alluvial-chart.component';
 import { AreaChartComponent } from './area-chart.component';
 import { StackedAreaChartComponent } from './area-chart-stacked.component';
 import { SimpleBarChartComponent } from './bar-chart-simple.component';
@@ -28,6 +29,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 	imports: [CommonModule],
 	declarations: [
 		BaseChart,
+		AlluvialChartComponent,
 		AreaChartComponent,
 		StackedAreaChartComponent,
 		SimpleBarChartComponent,
@@ -52,6 +54,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 	],
 	exports: [
 		BaseChart,
+		AlluvialChartComponent,
 		AreaChartComponent,
 		StackedAreaChartComponent,
 		SimpleBarChartComponent,
