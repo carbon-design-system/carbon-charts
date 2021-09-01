@@ -1100,6 +1100,11 @@ const complexChartDemos = [
 				data: alluvialDemos.alluvialMultipleCategoryData,
 				chartType: chartTypes.AlluvialChart,
 			},
+			{
+				options: alluvialDemos.alluvialMonochromeOptions,
+				data: alluvialDemos.alluvialMonochromeData,
+				chartType: chartTypes.AlluvialChart,
+			},
 		],
 	},
 ].map((demoGroup: any) => {
