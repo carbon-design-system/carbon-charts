@@ -114,6 +114,15 @@ export class Alluvial extends Component {
 			.attr('d', sankeyLinkHorizontal())
 			.attr('id', (d) => `line-${d.index}`)
 			.attr('class', (d) => {
+				// Use a single color for the lines
+				if (options.monochrome) {
+					return this.model.getColorClassName({
+						classNameTypes: [ColorClassNameTypes.STROKE],
+						dataGroupName: 0,
+						originalClassName: 'link',
+					});
+				}
+
 				return this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: d.source.index,

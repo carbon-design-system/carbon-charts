@@ -484,14 +484,16 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 	/**
 	 * List of nodes to draw
 	 */
-	nodes: [
-		{
-			name: string;
-			category?: string;
-		}
-	];
+	nodes: Array<{
+		name: string;
+		category?: string;
+	}>;
 	/**
 	 * Set the node padding
 	 */
 	nodePadding?: number;
+	/**
+	 * Enable single color usage for lines
+	 */
+	monochrome?: boolean;
 }
