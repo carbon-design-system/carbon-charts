@@ -18,14 +18,16 @@ export class Alluvial extends Component {
 	type = 'alluvial';
 	renderType = RenderTypes.SVG;
 
-	graph: any;
+	private graph: any;
+	private width;
 
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true });
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
+		let height;
+		({ width: this.width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
-		});
+		}));
 
 		const options = this.model.getOptions();
 		const data = this.model.getData();
@@ -44,7 +46,7 @@ export class Alluvial extends Component {
 			// size of the chart and its padding
 			.extent([
 				[2, 30],
-				[width - 2, height],
+				[this.width - 2, height],
 			]);
 
 		// Construct a graph with the provided user data
@@ -145,7 +147,9 @@ export class Alluvial extends Component {
 			.attr('fill', 'black');
 
 		// Group to hold the text & rectangle background
-		const textNode = node.append('g').classed('node-title', true);
+		const textNode = node
+			.append('g')
+			.attr('id', (d) => `node-title-${d.index}`);
 
 		// Node title - text
 		textNode
@@ -171,6 +175,7 @@ export class Alluvial extends Component {
 			.append('rect')
 			.classed('node-text-bg', true)
 			.attr('width', (d, i) => {
+				// Determine rectangle width based on text width
 				const { width } = this.parent
 					.select(`text#node-text-${i}`)
 					.node()
@@ -207,6 +212,7 @@ export class Alluvial extends Component {
 		});
 
 		this.addLineEventListener();
+		this.addNodeEventListener();
 	}
 
 	addLineEventListener() {
@@ -232,7 +238,7 @@ export class Alluvial extends Component {
 					null
 				).getPropertyValue('stroke');
 
-				// Dispatch mouse event
+				// Dispatch mouse over event
 				self.services.events.dispatchEvent(
 					Events.Alluvial.LINE_MOUSEOVER,
 					{
@@ -301,6 +307,162 @@ export class Alluvial extends Component {
 			});
 	}
 
+	addNodeEventListener() {
+		const self = this;
+
+		self.parent
+			.selectAll('.node-group')
+			.on('mouseover', function (event, datum) {
+				const hoveredElement = select(this);
+				// Get transformation value of node
+				const nodeMatrix = self.getTranslationValues(
+					hoveredElement.attr('transform')
+				);
+				// Move node to the left by 2 to grow node from the center
+				hoveredElement.attr(
+					'transform',
+					`translate(${nodeMatrix[0] - 2}, ${nodeMatrix[1]})`
+				);
+
+				hoveredElement
+					.classed('hovered', true)
+					.selectAll('rect.node')
+					.attr('width', 8);
+
+				// Translate first column text container to the
+				// right so it doesn't clash with expanding node
+				if (datum.x0 - 2 === 0) {
+					const titleContainer = self.parent.select(
+						`g#node-title-${datum.index}`
+					);
+					const titleMatrix = self.getTranslationValues(
+						titleContainer.attr('transform')
+					);
+
+					titleContainer.attr(
+						'transform',
+						`translate(${titleMatrix[0] + 4},${titleMatrix[1]})`
+					);
+				}
+
+				self.parent
+					.select(`text#node-text-${datum.index}`)
+					.style('font-weight', 'bold');
+
+				// Dispatch mouse over event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.NODE_MOUSEOVER,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Highlight all lines that pass through node
+				this.paths = [];
+
+				// Outgoing Links
+				datum.sourceLinks.forEach((element) => {
+					this.paths.push(`path#line-${element.index}.link`);
+				});
+
+				// Incoming links
+				datum.targetLinks.forEach((element) => {
+					this.paths.push(`path#line-${element.index}.link`);
+				});
+
+				// Highlight all linked lines in the graph data structure
+				if (this.paths.length) {
+					self.unhighlightLines();
+					self.parent
+						.selectAll(this.paths.join(','))
+						.style('stroke-opacity', 1)
+						.raise();
+				}
+			})
+			.on('mousemove', function (event, datum) {
+				// Dispatch mouse move event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.NODE_MOUSEMOVE,
+					{
+						event,
+						element: select(this),
+						datum,
+					}
+				);
+
+				// Dispatch tooltip move event
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
+			})
+			.on('click', function (event, datum) {
+				// Dispatch mouse click event
+				self.services.events.dispatchEvent(Events.Alluvial.NODE_CLICK, {
+					event,
+					element: select(this),
+					datum,
+				});
+			})
+			.on('mouseout', function (event, datum) {
+				const hoveredElement = select(this);
+
+				// Set the node position to initial state (unexpanded)
+				const nodeMatrix = self.getTranslationValues(
+					hoveredElement.attr('transform')
+				);
+
+				hoveredElement
+					.classed('hovered', false)
+					.attr(
+						'transform',
+						`translate(${nodeMatrix[0] + 2}, ${nodeMatrix[1]})`
+					)
+					.select('rect.node')
+					.attr('width', Configuration.alluvial.nodeWidth);
+
+				// Translate text container back to initial state
+				if (datum.x0 - 2 === 0) {
+					const titleContainer = self.parent.select(
+						`g#node-title-${datum.index}`
+					);
+					const titleMatrix = self.getTranslationValues(
+						titleContainer.attr('transform')
+					);
+
+					titleContainer.attr(
+						'transform',
+						`translate(${titleMatrix[0] - 4},${titleMatrix[1]})`
+					);
+				}
+
+				self.parent
+					.select(`text#node-text-${datum.index}`)
+					.style('font-weight', 'normal');
+
+				self.normalizeLines();
+
+				// Set the opacity of the lines to default state
+				self.parent.selectAll(this.paths).lower();
+
+				// Dispatch mouse out event
+				self.services.events.dispatchEvent(
+					Events.Alluvial.NODE_MOUSEOUT,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				// Dispatch hide tooltip event
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
+			});
+	}
+
 	// Sets the opacity of all lines to default (0.8)
 	private normalizeLines() {
 		this.parent
@@ -316,6 +478,15 @@ export class Alluvial extends Component {
 			.selectAll('path.link')
 			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus)
 			.lower();
+	}
+
+	// Determine the translation values from a string
+	private getTranslationValues(matrix: string) {
+		const translation = matrix
+			.substring(matrix.indexOf('(') + 1, matrix.indexOf(')'))
+			.split(',');
+
+		return [parseFloat(translation[0]), parseFloat(translation[1])];
 	}
 
 	getRightArrowIcon() {
