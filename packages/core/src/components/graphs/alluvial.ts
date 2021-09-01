@@ -152,7 +152,6 @@ export class Alluvial extends Component {
 			.classed('node', true)
 			.attr('height', (d) => d.y1 - d.y0)
 			.attr('width', (d) => d.x1 - d.x0)
-			.attr('stroke', 'black')
 			.attr('fill', 'black');
 
 		// Group to hold the text & rectangle background
@@ -192,7 +191,6 @@ export class Alluvial extends Component {
 				return width + 8;
 			})
 			.attr('height', 18)
-			.attr('stroke', 'black')
 			.attr('stroke-width', 2)
 			.lower();
 
