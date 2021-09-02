@@ -334,15 +334,19 @@ export class Alluvial extends Component {
 				// Highlight all lines that pass through node
 				this.paths = [];
 
-				// Outgoing Links
-				datum.sourceLinks.forEach((element) => {
-					this.paths.push(`path#line-${element.index}.link`);
-				});
+				// Outgoing links
+				self.traverse(
+					{ link: 'sourceLinks', node: 'target' },
+					datum,
+					this.paths
+				);
 
-				// Incoming links
-				datum.targetLinks.forEach((element) => {
-					this.paths.push(`path#line-${element.index}.link`);
-				});
+				//Incoming links
+				self.traverse(
+					{ link: 'targetLinks', node: 'source' },
+					datum,
+					this.paths
+				);
 
 				// Highlight all linked lines in the graph data structure
 				if (this.paths.length) {
@@ -510,6 +514,22 @@ export class Alluvial extends Component {
 			.split(',');
 
 		return [parseFloat(translation[0]), parseFloat(translation[1])];
+	}
+
+	// Traverse graph and get all connected links to node
+	private traverse(
+		direction:
+			| { link: 'sourceLinks'; node: 'target' }
+			| { link: 'targetLinks'; node: 'source' },
+		node,
+		visited = []
+	) {
+		const links = node[direction.link].map((element) => {
+			visited.push(`path#line-${element.index}.link`);
+			return element[direction.node];
+		});
+
+		links.forEach((element) => this.traverse(direction, element, visited));
 	}
 
 	getRightArrowIcon() {
