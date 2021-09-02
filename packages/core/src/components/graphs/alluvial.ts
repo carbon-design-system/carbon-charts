@@ -229,16 +229,20 @@ export class Alluvial extends Component {
 			.selectAll('path.link')
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				self.unhighlightLines();
 
-				// Set the opacity of the line to selected
-				hoveredElement
-					.classed('hovered', true)
-					.style(
-						'stroke-opacity',
-						Configuration.alluvial.opacity.selected
-					)
-					.raise();
+				// Set delay to counter flashy behaviour
+				Tools.debounce(() => {
+					self.unhighlightLines();
+
+					// Set the opacity of the line to selected
+					hoveredElement
+						.classed('hovered', true)
+						.style(
+							'stroke-opacity',
+							Configuration.alluvial.opacity.selected
+						)
+						.raise();
+				}, 50)();
 
 				const strokeColor = getComputedStyle(
 					this,
@@ -294,7 +298,12 @@ export class Alluvial extends Component {
 			})
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
-				self.normalizeLines();
+
+				// Set delay to counter flashy behaviour
+				Tools.debounce(() => {
+					hoveredElement.classed('hovered', false).lower();
+					self.normalizeLines();
+				}, 50)();
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -321,50 +330,6 @@ export class Alluvial extends Component {
 			.selectAll('.node-group')
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				// Get transformation value of node
-				const nodeMatrix = self.getTranslationValues(
-					hoveredElement.attr('transform')
-				);
-				// Move node to the left by 2 to grow node from the center
-				hoveredElement.attr(
-					'transform',
-					`translate(${nodeMatrix[0] - 2}, ${nodeMatrix[1]})`
-				);
-
-				hoveredElement
-					.classed('hovered', true)
-					.selectAll('rect.node')
-					.attr('width', 8);
-
-				// Translate first column text container to the
-				// right so it doesn't clash with expanding node
-				if (datum.x0 - 2 === 0) {
-					const titleContainer = self.parent.select(
-						`g#node-title-${datum.index}`
-					);
-					const titleMatrix = self.getTranslationValues(
-						titleContainer.attr('transform')
-					);
-
-					titleContainer.attr(
-						'transform',
-						`translate(${titleMatrix[0] + 4},${titleMatrix[1]})`
-					);
-				}
-
-				self.parent
-					.select(`text#node-text-${datum.index}`)
-					.style('font-weight', 'bold');
-
-				// Dispatch mouse over event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.NODE_MOUSEOVER,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
 
 				// Highlight all lines that pass through node
 				this.paths = [];
@@ -381,11 +346,61 @@ export class Alluvial extends Component {
 
 				// Highlight all linked lines in the graph data structure
 				if (this.paths.length) {
-					self.unhighlightLines();
-					self.parent
-						.selectAll(this.paths.join(','))
-						.style('stroke-opacity', 1)
-						.raise();
+					// Set delay to counter flashy behaviour
+					Tools.debounce(() => {
+						// Get transformation value of node
+						const nodeMatrix = self.getTranslationValues(
+							hoveredElement.attr('transform')
+						);
+						// Move node to the left by 2 to grow node from the center
+						hoveredElement.attr(
+							'transform',
+							`translate(${nodeMatrix[0] - 2}, ${nodeMatrix[1]})`
+						);
+
+						hoveredElement
+							.classed('hovered', true)
+							.selectAll('rect.node')
+							.attr('width', 8);
+
+						// Translate first column text container to the
+						// right so it doesn't clash with expanding node
+						if (datum.x0 - 2 === 0) {
+							const titleContainer = self.parent.select(
+								`g#node-title-${datum.index}`
+							);
+							const titleMatrix = self.getTranslationValues(
+								titleContainer.attr('transform')
+							);
+
+							titleContainer.attr(
+								'transform',
+								`translate(${titleMatrix[0] + 4},${
+									titleMatrix[1]
+								})`
+							);
+						}
+
+						self.parent
+							.select(`text#node-text-${datum.index}`)
+							.style('font-weight', 'bold');
+
+						self.unhighlightLines();
+						self.parent
+							.selectAll(this.paths.join(','))
+							.style('stroke-opacity', 1)
+							.raise();
+					}, 50)();
+
+					// Dispatch mouse over event
+					self.services.events.dispatchEvent(
+						Events.Alluvial.NODE_MOUSEOVER,
+						{
+							event,
+							element: hoveredElement,
+							datum,
+						}
+					);
 				}
 			})
 			.on('mousemove', function (event, datum) {
@@ -415,43 +430,46 @@ export class Alluvial extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 
-				// Set the node position to initial state (unexpanded)
-				const nodeMatrix = self.getTranslationValues(
-					hoveredElement.attr('transform')
-				);
-
-				hoveredElement
-					.classed('hovered', false)
-					.attr(
-						'transform',
-						`translate(${nodeMatrix[0] + 2}, ${nodeMatrix[1]})`
-					)
-					.select('rect.node')
-					.attr('width', Configuration.alluvial.nodeWidth);
-
-				// Translate text container back to initial state
-				if (datum.x0 - 2 === 0) {
-					const titleContainer = self.parent.select(
-						`g#node-title-${datum.index}`
-					);
-					const titleMatrix = self.getTranslationValues(
-						titleContainer.attr('transform')
+				// Set delay to counter flashy behaviour
+				Tools.debounce(() => {
+					// Set the node position to initial state (unexpanded)
+					const nodeMatrix = self.getTranslationValues(
+						hoveredElement.attr('transform')
 					);
 
-					titleContainer.attr(
-						'transform',
-						`translate(${titleMatrix[0] - 4},${titleMatrix[1]})`
-					);
-				}
+					hoveredElement
+						.classed('hovered', false)
+						.attr(
+							'transform',
+							`translate(${nodeMatrix[0] + 2}, ${nodeMatrix[1]})`
+						)
+						.select('rect.node')
+						.attr('width', Configuration.alluvial.nodeWidth);
 
-				self.parent
-					.select(`text#node-text-${datum.index}`)
-					.style('font-weight', 'normal');
+					// Translate text container back to initial state
+					if (datum.x0 - 2 === 0) {
+						const titleContainer = self.parent.select(
+							`g#node-title-${datum.index}`
+						);
+						const titleMatrix = self.getTranslationValues(
+							titleContainer.attr('transform')
+						);
 
-				self.normalizeLines();
+						titleContainer.attr(
+							'transform',
+							`translate(${titleMatrix[0] - 4},${titleMatrix[1]})`
+						);
+					}
 
-				// Set the opacity of the lines to default state
-				self.parent.selectAll(this.paths).lower();
+					self.parent
+						.select(`text#node-text-${datum.index}`)
+						.style('font-weight', 'normal');
+
+					self.normalizeLines();
+
+					// Set the opacity of the lines to default state
+					self.parent.selectAll(this.paths).lower();
+				}, 50)();
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -475,16 +493,14 @@ export class Alluvial extends Component {
 		this.parent
 			.selectAll('path.link')
 			.classed('hovered', false)
-			.style('stroke-opacity', Configuration.alluvial.opacity.default)
-			.raise();
+			.style('stroke-opacity', Configuration.alluvial.opacity.default);
 	}
 
 	// Sets the opacity of all lines to unfocused (0.3)
 	private unhighlightLines() {
 		this.parent
 			.selectAll('path.link')
-			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus)
-			.lower();
+			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus);
 	}
 
 	// Determine the translation values from a string
