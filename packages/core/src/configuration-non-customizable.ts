@@ -196,7 +196,7 @@ export const radar = {
 export const alluvial = {
 	nodeWidth: 4,
 	nodeHoveredWidth: 8,
-	minNodePadding: 0,
+	minNodePadding: 24,
 	opacity: {
 		unfocus: 0.3,
 		default: 0.8,

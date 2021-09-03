@@ -568,7 +568,7 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 	data: Tools.merge(chart.data, {
 		groupMapsTo: 'source',
 	}),
-	nodePadding: 18,
+	nodePadding: 24,
 	monochrome: false,
 	legend: {
 		enabled: false,
