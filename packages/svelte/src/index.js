@@ -19,6 +19,7 @@ import MeterChart from './MeterChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
 import WordCloudChart from './WordCloudChart.svelte';
+import AlluvialChart from './AlluvialChart.svelte';
 
 export {
 	AreaChart,
@@ -42,4 +43,5 @@ export {
 	TreemapChart,
 	CirclePackChart,
 	WordCloudChart,
+	AlluvialChart,
 };
