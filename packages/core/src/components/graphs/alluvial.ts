@@ -29,6 +29,12 @@ export class Alluvial extends Component {
 			useAttrs: true,
 		}));
 
+		// Because of a Firefox bug with regards to sizing & d3 packs,
+		// rather than checking if height or width aren't 0,
+		// we have to make sure they're not smaller than 1
+		if (this.width < 1 || height < 1) {
+			return;
+		}
 		const options = this.model.getOptions();
 		const data = this.model.getData();
 
