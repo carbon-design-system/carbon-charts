@@ -133,7 +133,9 @@ export class Alluvial extends Component {
 			.attr('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
 				'aria-label',
-				(d) => `${d.source.name} → ${d.target.name} (${d.value})`
+				(d) =>
+					`${d.source.name} → ${d.target.name} (${d.value}
+						${options.units ? ' ' + options.units : ''})`
 			);
 
 		// Creating the groups
@@ -223,6 +225,7 @@ export class Alluvial extends Component {
 	}
 
 	addLineEventListener() {
+		const options = this.getOptions();
 		const self = this;
 
 		this.parent
@@ -266,7 +269,9 @@ export class Alluvial extends Component {
 					items: [
 						{
 							label: datum.target.name,
-							value: datum.value,
+							value:
+								datum.value +
+								(options.units ? ` ${options.units}` : ''),
 							color: strokeColor,
 							labelIcon: self.getRightArrowIcon(),
 						},
