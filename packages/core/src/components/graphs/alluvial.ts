@@ -3,12 +3,7 @@ import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
-import {
-	Roles,
-	Events,
-	ColorClassNameTypes,
-	RenderTypes,
-} from '../../interfaces';
+import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 
 // D3 imports
 import { select } from 'd3-selection';
@@ -102,7 +97,7 @@ export class Alluvial extends Component {
 					.select(`text#category-${i}`)
 					.node()
 					.getBBox();
-				// Make the text on the left on the last node group
+				// Make the text on the left on node group (except first column)
 				let x = 0;
 				if (d + x >= width) {
 					x = -width + 4;
@@ -540,6 +535,7 @@ export class Alluvial extends Component {
 			return element[direction.node];
 		});
 
+		// Retrieve the child nodes
 		links.forEach((element) => this.traverse(direction, element, visited));
 	}
 
