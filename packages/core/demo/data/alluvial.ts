@@ -11,7 +11,7 @@ export const alluvialSimpleData = [
 ];
 
 export const alluvialSimpleOptions = {
-	title: 'Simple alluvial',
+	title: 'Alluvial',
 	units: 'GB',
 	nodes: [
 		{ name: 'A', category: 'Start' },
@@ -24,7 +24,7 @@ export const alluvialSimpleOptions = {
 };
 
 export const alluvialMultipleCategoryOptions = {
-	title: 'Alluvial multiple categories',
+	title: 'Alluvial (multiple categories)',
 	nodes: [
 		{ name: '1st', category: 'Class' },
 		{ name: '2nd', category: 'Class' },
@@ -114,7 +114,7 @@ export const alluvialMultipleCategoryData = [
 export const alluvialMonochromeData = alluvialSimpleData;
 
 export const alluvialMonochromeOptions = {
-	title: 'Monochrome alluvial with custom node padding',
+	title: 'Alluvial (monochrome with custom node padding)',
 	nodes: [
 		{ name: 'A', category: 'Start' },
 		{ name: 'B', category: 'Start' },
@@ -124,5 +124,5 @@ export const alluvialMonochromeOptions = {
 		{ name: 'Z', category: 'Finish' },
 	],
 	monochrome: true,
-	nodePadding: 24,
+	nodePadding: 33,
 };

@@ -1087,7 +1087,6 @@ const complexChartDemos = [
 	},
 	{
 		title: 'Alluvial',
-		description: 'In progress',
 		demos: [
 			{
 				options: alluvialDemos.alluvialSimpleOptions,
