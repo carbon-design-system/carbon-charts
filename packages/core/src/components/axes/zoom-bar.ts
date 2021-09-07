@@ -135,8 +135,11 @@ export class ZoomBar extends Component {
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			let zoomBarData = this.services.zoom.getZoomBarData();
-			if (Tools.isEmpty(zoomBarData)) {
-				// if there's no zoom bar data we can't do anything
+
+			// if there's no zoom bar data we can't do anything (true, undefined, null...)
+			// if zoom domain is based on a single data element
+			// doesn't make sense to allow zooming in
+			if (Tools.isEmpty(zoomBarData) || zoomBarData.length === 1) {
 				return;
 			}
 			this.xScale = mainXScale.copy();
