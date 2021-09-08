@@ -13,20 +13,6 @@ export class Tree extends Component {
 	type = 'tree';
 	renderType = RenderTypes.SVG;
 
-	init() {
-		// 	const eventsFragment = this.services.events;
-		// 	// Highlight correct circle on legend item hovers
-		// 	eventsFragment.addEventListener(
-		// 		Events.Legend.ITEM_HOVER,
-		// 		this.handleLegendOnHover
-		// 	);
-		// 	// Un-highlight circles on legend item mouseouts
-		// 	eventsFragment.addEventListener(
-		// 		Events.Legend.ITEM_MOUSEOUT,
-		// 		this.handleLegendMouseOut
-		// 	);
-	}
-
 	render(animate = true) {
 		const svg = this.getComponentContainer();
 		svg.html('');
@@ -82,12 +68,16 @@ export class Tree extends Component {
 				.append('g')
 				.attr('transform', () => `translate(${source.y0},${source.x0})`)
 				.attr('class', (d) =>
-					d.children && d.children.length > 0 ? 'clickable' : null
+					d.depth !== 0 && d.children && d.children.length > 0
+						? 'clickable'
+						: null
 				)
 				.on('click', (event, d) => {
-					d.children = d.children ? null : d._children;
+					if (d.depth !== 0) {
+						d.children = d.children ? null : d._children;
 
-					update(d);
+						update(d);
+					}
 				});
 
 			// Add node circles to entering nodes
@@ -193,31 +183,6 @@ export class Tree extends Component {
 
 		update(root);
 	}
-
-	// // Highlight elements that match the hovered legend item
-	// handleLegendOnHover = (event: CustomEvent) => {
-	// 	const { hoveredElement } = event.detail;
-	// 	const { groupMapsTo } = this.getOptions().data;
-
-	// 	this.parent
-	// 		.selectAll('path.slice')
-	// 		.transition(
-	// 			this.services.transitions.getTransition('legend-hover-bar')
-	// 		)
-	// 		.attr('opacity', (d) =>
-	// 			d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-	// 		);
-	// };
-
-	// // Un-highlight all elements
-	// handleLegendMouseOut = (event: CustomEvent) => {
-	// 	this.parent
-	// 		.selectAll('path.slice')
-	// 		.transition(
-	// 			this.services.transitions.getTransition('legend-mouseout-bar')
-	// 		)
-	// 		.attr('opacity', 1);
-	// };
 
 	// addEventListeners() {
 	// 	const self = this;
