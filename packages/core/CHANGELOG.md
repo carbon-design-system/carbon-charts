@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.4...v0.46.5) (2021-09-08)
+
+
+### Bug Fixes
+
+* **core:** filter out dots with missing value ([#1136](https://github.com/carbon-design-system/carbon-charts/issues/1136)) ([c87bee8](https://github.com/carbon-design-system/carbon-charts/commit/c87bee87de7337a0b4a332d9a223ed3e3be92ab9)), closes [#1133](https://github.com/carbon-design-system/carbon-charts/issues/1133)
+
+
+
+
+
 ## [0.46.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.3...v0.46.4) (2021-08-31)
 
 
