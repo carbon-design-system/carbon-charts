@@ -2,31 +2,97 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { RenderTypes, TreeTypes } from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
 import { cluster as d3Cluster, tree as d3Tree, hierarchy } from 'd3-hierarchy';
 import { linkHorizontal } from 'd3-shape';
 
-import { get } from 'lodash-es';
+const NODE_OFFSET = 6;
 
 export class Tree extends Component {
 	type = 'tree';
 	renderType = RenderTypes.SVG;
 
+	getLongestLabel(data) {
+		let longestLabel = '';
+		data.forEach((d) => {
+			let longestLabelInChildren = d.children
+				? this.getLongestLabel(d.children)
+				: '';
+			if (
+				longestLabelInChildren.length > longestLabel.length ||
+				d.name.length > longestLabel.length
+			) {
+				longestLabel =
+					longestLabelInChildren.length > d.name.length
+						? longestLabelInChildren
+						: d.name;
+			}
+		});
+
+		return longestLabel;
+	}
+
+	getMockLabelWidth(svg, longestLabel) {
+		// Add mock label to get dimensions
+		const mockLabel = svg
+			.append('text')
+			.attr('dy', '0.31em')
+			.attr('x', 0)
+			.attr('text-anchor', 'end')
+			.text(longestLabel);
+
+		// Get the mock label width
+		const { width: mockLabelWidth } = DOMUtils.getSVGElementSize(
+			mockLabel.node(),
+			{
+				useBBox: true,
+			}
+		);
+
+		// Remove the mock title label
+		mockLabel.remove();
+
+		return mockLabelWidth;
+	}
+
 	render(animate = true) {
 		const svg = this.getComponentContainer();
+
+		// Empty out the svg before rendering the tree
 		svg.html('');
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
 
+		if (width < 1 || height < 1) {
+			return;
+		}
+
 		const options = this.model.getOptions();
 		const displayData = this.model.getDisplayData();
 
-		const margin = { top: 0, right: 0, bottom: 0, left: 30 };
+		const rootTitle =
+			Tools.getProperty(options, 'tree', 'rootTitle') || 'Tree';
+
+		const mockRootTitleWidth = this.getMockLabelWidth(svg, rootTitle);
+
+		let longestLabel = this.getLongestLabel(displayData);
+		const mockLongestLabelWidth = this.getMockLabelWidth(svg, longestLabel);
+
+		const margin = {
+			top: 0,
+			right: 0,
+			bottom: 0,
+			left:
+				mockRootTitleWidth > 0
+					? mockRootTitleWidth + NODE_OFFSET
+					: 30 - NODE_OFFSET,
+		};
 		const root = hierarchy({
-			name: 'flare',
+			name: rootTitle,
 			children: displayData,
 		}) as any;
 
@@ -91,7 +157,7 @@ export class Tree extends Component {
 			nodeGroupsEnter
 				.append('text')
 				.attr('dy', '0.31em')
-				.attr('x', (d) => (d._children ? -6 : 6))
+				.attr('x', (d) => (d._children ? -NODE_OFFSET : NODE_OFFSET))
 				.attr('text-anchor', (d) => (d._children ? 'end' : 'start'))
 				.text((d) => d.data.name)
 				.clone(true)
@@ -152,12 +218,27 @@ export class Tree extends Component {
 			});
 		};
 
+		const descendants = root.descendants();
+		const maxDepth = descendants[descendants.length - 1].depth;
+
 		const tree =
-			get(options, 'treeType') === TreeTypes.DENDROGRAM
-				? d3Cluster().size([height, width - 155])
+			Tools.getProperty(options, 'tree', 'type') === TreeTypes.DENDROGRAM
+				? d3Cluster().size([
+						height,
+						width -
+							mockLongestLabelWidth -
+							maxDepth * NODE_OFFSET -
+							mockRootTitleWidth,
+				  ])
 				: d3Tree()
 						.nodeSize([dx, dy])
-						.size([height, width - 155]);
+						.size([
+							height,
+							width -
+								mockLongestLabelWidth -
+								maxDepth * NODE_OFFSET -
+								mockRootTitleWidth,
+						]);
 
 		const diagonal = linkHorizontal()
 			.x((d: any) => d.y)

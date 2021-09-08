@@ -464,7 +464,10 @@ export interface TreemapChartOptions extends BaseChartOptions {}
  * options specific to tree charts
  */
 export interface TreeChartOptions extends BaseChartOptions {
-	treeType?: TreeTypes;
+	tree?: {
+		type?: TreeTypes;
+		rootTitle?: string;
+	}
 }
 
 /*

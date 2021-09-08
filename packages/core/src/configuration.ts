@@ -547,7 +547,9 @@ const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
  */
 const treeChart: TreeChartOptions = Tools.merge(
 	{
-		treeType: TreeTypes.TREE
+		tree: {
+			type: TreeTypes.TREE,
+		},
 	},
 	chart,
 	{} as TreeChartOptions

@@ -1,3 +1,4 @@
+// based on https://github.com/d3/d3-hierarchy/blob/main/test/data/flare.json
 export const treeData = [
 	{
 		name: 'analytics',
@@ -194,11 +195,16 @@ export const treeData = [
 export const treeOptions = {
 	title: 'Tree',
 	height: '2000px',
+	tree: {
+		rootTitle: 'flare',
+	},
 };
-
 
 export const dendogramOptions = {
 	title: 'Dendrogram',
 	height: '2000px',
-	treeType: "dendrogram"
+	tree: {
+		type: 'dendrogram',
+		rootTitle: 'flare',
+	},
 };
