@@ -1,12 +1,13 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { RenderTypes, TreeTypes } from '../../interfaces';
+import { Events, RenderTypes, TreeTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
 import { cluster as d3Cluster, tree as d3Tree, hierarchy } from 'd3-hierarchy';
 import { linkHorizontal } from 'd3-shape';
+import { select } from 'd3-selection';
 
 const NODE_OFFSET = 6;
 
@@ -128,6 +129,7 @@ export class Tree extends Component {
 				.selectAll('g')
 				.data(nodes, (d) => d.id);
 
+			const self = this;
 			// Add any entering nodes
 			const nodeGroupsEnter = nodeGroups
 				.enter()
@@ -138,12 +140,41 @@ export class Tree extends Component {
 						? 'clickable'
 						: null
 				)
-				.on('click', (event, d) => {
+				.on('mouseover', function (event, d) {
+					// Dispatch mouse event
+					self.services.events.dispatchEvent(
+						Events.Tree.NODE_MOUSEOVER,
+						{
+							event,
+							element: select(this),
+							datum: d,
+						}
+					);
+				})
+				.on('click', function (event, d) {
 					if (d.depth !== 0) {
 						d.children = d.children ? null : d._children;
 
 						update(d);
 					}
+
+					// Dispatch mouse event
+					self.services.events.dispatchEvent(Events.Tree.NODE_CLICK, {
+						event,
+						element: select(this),
+						datum: d,
+					});
+				})
+				.on('mouseout', function (event, d) {
+					// Dispatch mouse event
+					self.services.events.dispatchEvent(
+						Events.Tree.NODE_MOUSEOUT,
+						{
+							event,
+							element: select(this),
+							datum: d,
+						}
+					);
 				});
 
 			// Add node circles to entering nodes
@@ -259,93 +290,8 @@ export class Tree extends Component {
 		);
 
 		const linkGroup = svg.append('g').attr('class', 'links');
-
-		const nodeGroup = svg.append('g');
+		const nodeGroup = svg.append('g').attr('class', 'nodes');
 
 		update(root);
 	}
-
-	// addEventListeners() {
-	// 	const self = this;
-	// 	this.parent
-	// 		.selectAll('path.slice')
-	// 		.on('mouseover', function (event, datum) {
-	// 			const hoveredElement = select(this);
-
-	// 			hoveredElement
-	// 				.classed('hovered', true)
-	// 				.transition(
-	// 					self.services.transitions.getTransition(
-	// 						'pie_slice_mouseover'
-	// 					)
-	// 				)
-	// 				.attr('d', self.hoverArc);
-
-	// 			// Dispatch mouse event
-	// 			self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
-	// 				event,
-	// 				element: select(this),
-	// 				datum,
-	// 			});
-
-	// 			const { groupMapsTo } = self.getOptions().data;
-	// 			// Show tooltip
-	// 			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-	// 				event,
-	// 				hoveredElement,
-	// 				items: [
-	// 					{
-	// 						label: datum.data[groupMapsTo],
-	// 						value: datum.data.value,
-	// 					},
-	// 				],
-	// 			});
-	// 		})
-	// 		.on('mousemove', function (event, datum) {
-	// 			const hoveredElement = select(this);
-
-	// 			// Dispatch mouse event
-	// 			self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
-	// 				event,
-	// 				element: hoveredElement,
-	// 				datum,
-	// 			});
-
-	// 			// Show tooltip
-	// 			self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-	// 				event,
-	// 			});
-	// 		})
-	// 		.on('click', function (event, datum) {
-	// 			// Dispatch mouse event
-	// 			self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
-	// 				event,
-	// 				element: select(this),
-	// 				datum,
-	// 			});
-	// 		})
-	// 		.on('mouseout', function (event, datum) {
-	// 			const hoveredElement = select(this);
-	// 			hoveredElement
-	// 				.classed('hovered', false)
-	// 				.transition(
-	// 					self.services.transitions.getTransition(
-	// 						'pie_slice_mouseover'
-	// 					)
-	// 				)
-	// 				.attr('d', self.arc);
-
-	// 			// Dispatch mouse event
-	// 			self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
-	// 				event,
-	// 				element: hoveredElement,
-	// 				datum,
-	// 			});
-
-	// 			// Hide tooltip
-	// 			self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-	// 				hoveredElement,
-	// 			});
-	// 		});
-	// }
 }
