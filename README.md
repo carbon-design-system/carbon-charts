@@ -69,7 +69,7 @@ Have a bug or a feature request? First read the [issue guidelines](https://githu
 
 ## Contributing
 
-See our [contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
+See our [contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/.github/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
 
