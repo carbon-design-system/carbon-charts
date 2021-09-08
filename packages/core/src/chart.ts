@@ -33,8 +33,6 @@ import {
 	Transitions,
 } from './services/index';
 
-import { get } from 'lodash-es';
-
 export class Chart {
 	components: Component[];
 	services: any = {

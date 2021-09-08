@@ -35,14 +35,14 @@ export class Tree extends Component {
 		return longestLabel;
 	}
 
-	getMockLabelWidth(svg, longestLabel) {
+	getMockLabelWidth(svg, label) {
 		// Add mock label to get dimensions
 		const mockLabel = svg
 			.append('text')
 			.attr('dy', '0.31em')
 			.attr('x', 0)
 			.attr('text-anchor', 'end')
-			.text(longestLabel);
+			.text(label);
 
 		// Get the mock label width
 		const { width: mockLabelWidth } = DOMUtils.getSVGElementSize(
