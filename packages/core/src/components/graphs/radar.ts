@@ -550,9 +550,16 @@ export class Radar extends Component {
 			'role',
 			Roles.GROUP
 		);
+
 		const dotsUpdate = dots
 			.selectAll('circle')
-			.data(this.fullDataNormalized);
+			// Filter out dots with no value so they are not rendered
+			.data(
+				this.fullDataNormalized.filter((d) => {
+					return Tools.getProperty(d, value) !== null;
+				})
+			);
+
 		dotsUpdate
 			.join(
 				(enter) =>
@@ -560,8 +567,6 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
-			// Filter out dots with no value so they are not rendered
-			.filter((d) => typeof d[value] !== undefined && d[value] !== null)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
