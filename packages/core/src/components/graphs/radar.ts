@@ -555,9 +555,9 @@ export class Radar extends Component {
 			.selectAll('circle')
 			// Filter out dots with no value so they are not rendered
 			.data(
-				this.fullDataNormalized.filter((d) => {
-					return Tools.getProperty(d, value) !== null;
-				})
+				this.fullDataNormalized.filter(
+					(d) => Tools.getProperty(d, value) !== null
+				)
 			);
 
 		dotsUpdate
