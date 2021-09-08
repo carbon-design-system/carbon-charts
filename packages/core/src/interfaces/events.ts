@@ -162,6 +162,15 @@ export enum Radar {
 }
 
 /**
+ * enum of all tree graph events
+ */
+export enum Tree {
+	NODE_MOUSEOVER = 'tree-node-mouseover',
+	NODE_CLICK = 'tree-node-click',
+	NODE_MOUSEOUT = 'tree-node-mouseout'
+}
+
+/**
  * enum of all treemap graph events
  */
 export enum Treemap {

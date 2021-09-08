@@ -16,6 +16,7 @@ import RadarChart from './RadarChart.svelte';
 import GaugeChart from './GaugeChart.svelte';
 import HistogramChart from './HistogramChart.svelte';
 import MeterChart from './MeterChart.svelte';
+import TreeChart from './TreeChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
 import WordCloudChart from './WordCloudChart.svelte';
@@ -39,6 +40,7 @@ export {
 	GaugeChart,
 	HistogramChart,
 	MeterChart,
+	TreeChart,
 	TreemapChart,
 	CirclePackChart,
 	WordCloudChart,

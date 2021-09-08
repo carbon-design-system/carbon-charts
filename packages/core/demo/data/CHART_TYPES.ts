@@ -94,6 +94,11 @@ export default {
 		angular: 'ibm-stacked-bar-chart',
 		vue: 'ccv-stacked-bar-chart',
 	},
+	TreeChart: {
+		vanilla: 'TreeChart',
+		angular: 'ibm-tree-chart',
+		vue: 'ccv-tree-chart',
+	},
 	TreemapChart: {
 		vanilla: 'TreemapChart',
 		angular: 'ibm-treemap-chart',

@@ -85,10 +85,9 @@ export class MeterChart extends Chart {
 		];
 
 		// add the meter title as a top level component
-		const components: any[] = this.getChartComponents(
-			graphFrame,
-			RenderTypes.HTML
-		);
+		const components: any[] = this.getChartComponents(graphFrame, {
+			graphFrameRenderType: RenderTypes.HTML,
+		});
 
 		return components;
 	}
