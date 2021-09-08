@@ -560,6 +560,8 @@ export class Radar extends Component {
 				(update) => update,
 				(exit) => exit.remove()
 			)
+			// Filter out dots with no value so they are not rendered
+			.filter((d) => typeof d[value] !== undefined && d[value] !== null)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
