@@ -46,11 +46,12 @@ const colorPairingOptions = Configuration.color.pairingOptions;
 const generateColorPalettePickerHTML = (container, chart) => {
 	const chartOptions = chart.model.getOptions();
 	const { numberOfVariants: variants, option } = chartOptions.color.pairing;
-	const numberOfVariants =
-		variants || chart.model.getAllDataGroupsNames().length;
+
+	const numberOfChartDataGroups = chart.model.getAllDataGroupsNames().length;
+	const numberOfVariants = variants || numberOfChartDataGroups;
 
 	let onlyCategoricalPaletteIsApplicable = false;
-	if (chart.model.getAllDataGroupsNames().length > 5) {
+	if (numberOfChartDataGroups > 5) {
 		onlyCategoricalPaletteIsApplicable = true;
 	}
 
@@ -74,11 +75,15 @@ const generateColorPalettePickerHTML = (container, chart) => {
 					let optionsHTML = `<optgroup class="bx--select-optgroup" label="${colorGroup} groups">`;
 
 					const numberOfVariants = parseInt(colorGroup);
+
 					if (numberOfVariants !== 14) {
 						for (let i = 1; i <= optionsCount; i++) {
 							optionsHTML += `
 						<option class="bx--select-option" ${
-							onlyCategoricalPaletteIsApplicable ? 'disabled' : ''
+							onlyCategoricalPaletteIsApplicable ||
+							numberOfVariants < numberOfChartDataGroups
+								? 'disabled'
+								: ''
 						} value="${colorGroup}-option-${i}" ${
 								selectedColorPalette ===
 								`${numberOfVariants}-${i}`
@@ -126,9 +131,12 @@ const generateColorPalettePickerHTML = (container, chart) => {
 	container.querySelector('#charting-controls').appendChild(div);
 };
 
-export const addControls = (container, chart) => {
+export const addControls = (container, demoGroup, chart) => {
 	generateThemePickerHTML(container);
-	generateColorPalettePickerHTML(container, chart);
+
+	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
+		generateColorPalettePickerHTML(container, chart);
+	}
 
 	addRadioButtonEventListeners(container, chart);
 };

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.5...v0.47.0) (2021-09-08)
+
+
+### Features
+
+* **core:** add tree chart ([#1116](https://github.com/carbon-design-system/carbon-charts/issues/1116)) ([96e4988](https://github.com/carbon-design-system/carbon-charts/commit/96e4988d5b3926f2a9daa642c8ebb62058328aa3))
+
+
+
+
+
+## [0.46.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.4...v0.46.5) (2021-09-08)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
 ## [0.46.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.3...v0.46.4) (2021-08-31)
 
 **Note:** Version bump only for package @carbon/charts-angular

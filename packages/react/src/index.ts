@@ -16,6 +16,7 @@ import ScatterChart from './scatter-chart';
 import MeterChart from './meter-chart';
 import RadarChart from './radar-chart';
 import ComboChart from './combo-chart';
+import TreeChart from './tree-chart';
 import TreemapChart from './treemap-chart';
 import CirclePackChart from './circle-pack-chart';
 import WordCloudChart from './wordcloud-chart';
@@ -40,6 +41,7 @@ export {
 	MeterChart,
 	RadarChart,
 	ComboChart,
+	TreeChart,
 	TreemapChart,
 	CirclePackChart,
 	WordCloudChart,

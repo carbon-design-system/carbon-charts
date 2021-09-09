@@ -21,6 +21,7 @@ import { ScatterChartComponent } from './scatter-chart.component';
 import { MeterChartComponent } from './meter-chart.component';
 import { RadarChartComponent } from './radar-chart.component';
 import { ComboChartComponent } from './combo-chart.component';
+import { TreeChartComponent } from './tree-chart.component';
 import { TreemapChartComponent } from './treemap-chart.component';
 import { CirclePackChartComponent } from './circle-pack-chart.component';
 import { WordCloudChartComponent } from './wordcloud-chart.component';
@@ -48,6 +49,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		MeterChartComponent,
 		RadarChartComponent,
 		ComboChartComponent,
+		TreeChartComponent,
 		TreemapChartComponent,
 		CirclePackChartComponent,
 		WordCloudChartComponent,
@@ -73,6 +75,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		MeterChartComponent,
 		RadarChartComponent,
 		ComboChartComponent,
+		TreeChartComponent,
 		TreemapChartComponent,
 		CirclePackChartComponent,
 		WordCloudChartComponent

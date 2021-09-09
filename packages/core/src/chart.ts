@@ -129,7 +129,7 @@ export class Chart {
 
 	protected getChartComponents(
 		graphFrameComponents: any[],
-		graphFrameRenderType = RenderTypes.SVG
+		configs?: object
 	) {
 		const titleComponent = {
 			id: 'title',
@@ -160,10 +160,11 @@ export class Chart {
 			id: 'graph-frame',
 			components: graphFrameComponents,
 			growth: LayoutGrowth.STRETCH,
-			renderType: graphFrameRenderType,
+			renderType: Tools.getProperty(configs, 'graphFrameRenderType') || RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
+			Tools.getProperty(configs, 'excludeLegend') !== true &&
 			this.model.getOptions().legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart

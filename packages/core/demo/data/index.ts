@@ -15,6 +15,7 @@ import * as radarDemos from './radar';
 import * as scatterDemos from './scatter';
 import * as stepDemos from './step';
 import * as timeSeriesAxisDemos from './time-series-axis';
+import * as treeDemos from './tree';
 import * as treemapDemos from './treemap';
 import * as circlePackDemos from './circle-pack';
 import * as toolbarDemos from './toolbar';
@@ -1093,6 +1094,25 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
+			},
+		],
+	},
+	{
+		title: 'Tree',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.dendogramOptions,
+				chartType: chartTypes.TreeChart,
+				mainDemo: true,
+			},
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.treeOptions,
+				chartType: chartTypes.TreeChart,
 			},
 		],
 	},

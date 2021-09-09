@@ -153,7 +153,7 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 			);
 
 			storyUtils.addDemoDataFormListeners(container, demo, chart);
-			storyUtils.addControls(container, chart);
+			storyUtils.addControls(container, demoGroup, chart);
 
 			return container;
 		});

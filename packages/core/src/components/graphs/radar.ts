@@ -550,9 +550,16 @@ export class Radar extends Component {
 			'role',
 			Roles.GROUP
 		);
+
 		const dotsUpdate = dots
 			.selectAll('circle')
-			.data(this.fullDataNormalized);
+			// Filter out dots with no value so they are not rendered
+			.data(
+				this.fullDataNormalized.filter(
+					(d) => Tools.getProperty(d, value) !== null
+				)
+			);
+
 		dotsUpdate
 			.join(
 				(enter) =>

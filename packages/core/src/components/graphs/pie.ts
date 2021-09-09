@@ -16,7 +16,6 @@ import * as Configuration from '../../configuration';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
-import { transition } from 'd3-transition';
 
 // Pie slice tween function
 function arcTween(a, arcFunc) {
