@@ -244,17 +244,7 @@ export class Alluvial extends Component {
 					);
 
 				if (event === 'mouseout' || link === null) {
-					select(link).classed('hovered', false);
-					// Reorder the links to original order
-					self.parent
-						.selectAll('path.link')
-						.data(this.graph.links, (d) => d.index)
-						.order();
-					// set all links to default opacity
-					allLinks.style(
-						'stroke-opacity',
-						Configuration.alluvial.opacity.default
-					);
+					self.normalizeLines();
 				} else {
 					allLinks.style('stroke-opacity', function () {
 						// highlight and raise if link is this
@@ -267,7 +257,7 @@ export class Alluvial extends Component {
 					});
 				}
 			},
-			100
+			50
 		);
 
 		this.parent
@@ -355,6 +345,33 @@ export class Alluvial extends Component {
 	addNodeEventListener() {
 		const self = this;
 
+		// Set delay to counter flashy behaviour
+		const debouncedLineHighlight = Tools.debounce(
+			(links = [], event = 'mouseover') => {
+
+				if (event === 'mouseout' || links.length === 0) {
+					// set all links to default opacity & corret order
+					self.normalizeLines();
+					return;
+				}
+
+				// Highlight all nodes
+				const allLinks = self.parent
+					.selectAll(links.join(','))
+					.classed('hovered', true)
+					.raise()
+					.transition(
+						self.services.transitions.getTransition(
+							'alluvial-link-mouse-highlight'
+						)
+					);
+
+				self.unhighlightLines();
+				allLinks.style('stroke-opacity', Configuration.alluvial.opacity.selected);
+			},
+			100
+		);
+
 		self.parent
 			.selectAll('.node-group')
 			.on('mouseover', function (event, datum) {
@@ -415,11 +432,7 @@ export class Alluvial extends Component {
 						.select(`text#node-text-${datum.index}`)
 						.style('font-weight', 'bold');
 
-					self.unhighlightLines();
-					self.parent
-						.selectAll(this.paths.join(','))
-						.style('stroke-opacity', 1)
-						.raise();
+					debouncedLineHighlight(this.paths, 'mouseover');
 
 					// Dispatch mouse over event
 					self.services.events.dispatchEvent(
@@ -492,7 +505,7 @@ export class Alluvial extends Component {
 					.select(`text#node-text-${datum.index}`)
 					.style('font-weight', 'normal');
 
-				self.normalizeLines();
+				debouncedLineHighlight([], 'mouseout');
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
