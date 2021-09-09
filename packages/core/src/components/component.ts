@@ -5,7 +5,7 @@ import { RenderTypes } from '../interfaces';
 import { Tools } from '../tools';
 
 // D3 Imports
-import { select } from 'd3-selection';
+import { select, Selection } from 'd3-selection';
 
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
@@ -22,6 +22,8 @@ export class Component {
 
 	protected model: any;
 	protected services: any;
+
+	protected componentContainer: any;
 
 	constructor(model: ChartModel, services: any, configs?: any) {
 		this.model = model;

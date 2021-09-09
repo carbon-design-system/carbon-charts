@@ -46,9 +46,6 @@ export class GroupedBar extends Bar {
 		// Get unique labels
 		this.setGroupScale();
 
-		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
-
 		const allDataLabels = Tools.removeArrayDuplicates(
 			displayData.map((datum) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
@@ -62,8 +59,14 @@ export class GroupedBar extends Bar {
 			})
 		);
 
+		// Grab container SVG
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
 		// Update data on bar groups
-		const barGroups = svg
+		const barGroups = this.componentContainer
 			.selectAll('g.bars')
 			.data(allDataLabels, (label) => label);
 
@@ -121,10 +124,12 @@ export class GroupedBar extends Bar {
 		// Add the bars that need to be introduced
 		const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
+		const allBars = barsEnter.merge(bars);
+		// Add event listeners to elements drawn
+		this.addEventListeners(allBars);
+
 		// code for vertical grouped bar charts
-		barsEnter
-			.merge(bars)
-			.classed('bar', true)
+		allBars
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({
@@ -175,10 +180,10 @@ export class GroupedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value);
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
+			.attr('aria-label', (d) => d.value)
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
+			});
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -187,40 +192,45 @@ export class GroupedBar extends Bar {
 
 		const { groupMapsTo } = this.getOptions().data;
 
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-bar',
+					})
+				)
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
-			)
-			.attr('opacity', 1);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-bar',
+					})
+				)
+				.attr('opacity', 1);
+		}
 	};
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
 
-		this.parent
-			.selectAll('path.bar')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
@@ -261,12 +271,6 @@ export class GroupedBar extends Bar {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseout_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

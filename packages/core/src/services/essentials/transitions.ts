@@ -60,7 +60,7 @@ export class Transitions extends Service {
 			delete this.pendingTransitions[t._id];
 		});
 
-		if (animate !== true) {
+		if (this.model.getOptions().animations === false || animate === false) {
 			return t.duration(0);
 		}
 

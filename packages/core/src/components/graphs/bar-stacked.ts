@@ -34,7 +34,10 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
 
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions();
@@ -49,7 +52,7 @@ export class StackedBar extends Bar {
 		const activeDataGroupNames = this.model.getActiveDataGroupNames();
 
 		// Update data on all bar groups
-		const barGroups = svg
+		const barGroups = this.componentContainer
 			.selectAll('g.bars')
 			.data(stackData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
@@ -68,7 +71,7 @@ export class StackedBar extends Bar {
 			.attr('data-name', 'bars');
 
 		// Update data on all bars
-		const bars = svg
+		const bars = this.componentContainer
 			.selectAll('g.bars')
 			.selectAll('path.bar')
 			.data(
@@ -79,9 +82,11 @@ export class StackedBar extends Bar {
 		// Remove bars that need to be removed
 		bars.exit().remove();
 
-		bars.enter()
-			.append('path')
-			.merge(bars)
+		const allBars = bars.enter().append('path').merge(bars);
+		// Add event listeners to elements drawn
+		this.addEventListeners(allBars);
+
+		allBars
 			.classed('bar', true)
 			.transition()
 			.call((t) =>
@@ -157,10 +162,10 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d[1] - d[0]);
-
-		// Add event listeners for the above elements
-		this.addEventListeners();
+			.attr('aria-label', (d) => d[1] - d[0])
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
+			});
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -169,42 +174,47 @@ export class StackedBar extends Bar {
 
 		const { groupMapsTo } = this.model.getOptions().data;
 
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-bar',
+					})
+				)
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
-			)
-			.attr('opacity', 1);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-bar',
+					})
+				)
+				.attr('opacity', 1);
+		}
 	};
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
-		this.parent
-			.selectAll('path.bar')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {

@@ -34,6 +34,7 @@ export const groupedBarOptions = {
 			mapsTo: 'key',
 		},
 	},
+	// animations: false,
 };
 
 export const groupedBarSelectedGroupsData = groupedBarData;

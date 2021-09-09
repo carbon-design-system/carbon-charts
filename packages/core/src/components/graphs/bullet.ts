@@ -37,7 +37,10 @@ export class Bullet extends Component {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
 
 		const data = this.model.getDisplayData(this.configs.groups);
 
@@ -72,7 +75,10 @@ export class Bullet extends Component {
 			});
 
 			// Update data on all lines
-			const rangeBoxes = DOMUtils.appendOrSelect(svg, 'g.range-boxes')
+			const rangeBoxes = DOMUtils.appendOrSelect(
+				this.componentContainer,
+				'g.range-boxes'
+			)
 				.selectAll('path.range-box')
 				.data(
 					rangeBoxData,
@@ -144,7 +150,10 @@ export class Bullet extends Component {
 
 		const renderBars = () => {
 			// Update data on all bars
-			const bars = DOMUtils.appendOrSelect(svg, 'g.bars')
+			const bars = DOMUtils.appendOrSelect(
+				this.componentContainer,
+				'g.bars'
+			)
 				.selectAll('path.bar')
 				.data(data, (datum) => datum[groupMapsTo]);
 
@@ -154,8 +163,11 @@ export class Bullet extends Component {
 			// Add the paths that need to be introduced
 			const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
-			barsEnter
-				.merge(bars)
+			const allBars = barsEnter.merge(bars);
+			// Add event listeners to elements drawn
+			this.addEventListeners(allBars);
+
+			allBars
 				.classed('bar', true)
 				.transition()
 				.call((t) =>
@@ -201,12 +213,18 @@ export class Bullet extends Component {
 				// a11y
 				.attr('role', Roles.GRAPHICS_SYMBOL)
 				.attr('aria-roledescription', 'bar')
-				.attr('aria-label', (d) => d.value);
+				.attr('aria-label', (d) => d.value)
+				.on('end', () => {
+					this.componentContainer.classed('updating', false);
+				});
 		};
 
 		const renderTargetLines = () => {
 			// Update data on all lines
-			const lines = DOMUtils.appendOrSelect(svg, 'g.markers')
+			const lines = DOMUtils.appendOrSelect(
+				this.componentContainer,
+				'g.markers'
+			)
 				.selectAll('path.marker')
 				.data(
 					data.filter((d) => Tools.getProperty(d, 'marker') !== null),
@@ -272,7 +290,10 @@ export class Bullet extends Component {
 			);
 
 			// Update data on all lines
-			const lines = DOMUtils.appendOrSelect(svg, 'g.quartiles')
+			const lines = DOMUtils.appendOrSelect(
+				this.componentContainer,
+				'g.quartiles'
+			)
 				.selectAll('path.quartile')
 				.data(quartilesData, (datum) => datum[groupMapsTo]);
 
@@ -333,36 +354,41 @@ export class Bullet extends Component {
 		renderBars();
 		renderTargetLines();
 		renderTargetQuartiles();
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.getOptions().data;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
+			const { groupMapsTo } = this.getOptions().data;
 
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-simple-bar'
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-simple-bar',
+					})
 				)
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-simple-bar'
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-simple-bar',
+					})
 				)
-			)
-			.attr('opacity', 1);
+				.attr('opacity', 1);
+		}
 	};
 
 	getMatchingRangeIndexForDatapoint(datum) {
@@ -379,7 +405,7 @@ export class Bullet extends Component {
 		return 0;
 	}
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
 
 		const options = this.getOptions();
@@ -387,16 +413,10 @@ export class Bullet extends Component {
 
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-		this.parent
-			.selectAll('path.bar')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
@@ -470,12 +490,6 @@ export class Bullet extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseout_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
