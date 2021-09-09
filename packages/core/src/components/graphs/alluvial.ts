@@ -243,13 +243,17 @@ export class Alluvial extends Component {
 						)
 					);
 
-				if (event === 'mouseout' || link === null) {
-					self.normalizeLines();
+				if (event === 'mouseout') {
+					select(link).lower();
+					allLinks.style(
+						'stroke-opacity',
+						Configuration.alluvial.opacity.default
+					);
 				} else {
 					allLinks.style('stroke-opacity', function () {
 						// highlight and raise if link is this
 						if (link === this) {
-							select(this).classed('hovered', true).raise();
+							select(this).raise();
 							return Configuration.alluvial.opacity.selected;
 						}
 
@@ -257,7 +261,7 @@ export class Alluvial extends Component {
 					});
 				}
 			},
-			15
+			33
 		);
 
 		this.parent
@@ -265,6 +269,7 @@ export class Alluvial extends Component {
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedLineHighlight(this, 'mouseover');
+				hoveredElement.classed('hovered', true);
 
 				const strokeColor = getComputedStyle(
 					this,
@@ -323,6 +328,7 @@ export class Alluvial extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedLineHighlight(this, 'mouseout');
+				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -348,10 +354,9 @@ export class Alluvial extends Component {
 		// Set delay to counter flashy behaviour
 		const debouncedLineHighlight = Tools.debounce(
 			(links = [], event = 'mouseover') => {
-
 				if (event === 'mouseout' || links.length === 0) {
 					// set all links to default opacity & corret order
-					self.normalizeLines();
+					self.normalizeLinks(true);
 					return;
 				}
 
@@ -367,9 +372,12 @@ export class Alluvial extends Component {
 					);
 
 				self.unhighlightLines();
-				allLinks.style('stroke-opacity', Configuration.alluvial.opacity.selected);
+				allLinks.style(
+					'stroke-opacity',
+					Configuration.alluvial.opacity.selected
+				);
 			},
-			30
+			66
 		);
 
 		self.parent
@@ -525,13 +533,16 @@ export class Alluvial extends Component {
 	}
 
 	// Sets the opacity of all lines to default (0.8)
-	private normalizeLines() {
-		this.parent
+	private normalizeLinks(nodes = false) {
+		const links = this.parent
 			.selectAll('path.link')
 			.classed('hovered', false)
-			.style('stroke-opacity', Configuration.alluvial.opacity.default)
-			.data(this.graph.links, (d) => d.index)
-			.order();
+			.style('stroke-opacity', Configuration.alluvial.opacity.default);
+
+		// Correct link orders if normalizing from node hover
+		if (nodes) {
+			links.data(this.graph.links, (d) => d.index).order();
+		}
 	}
 
 	// Sets the opacity of all lines to unfocused (0.3)
