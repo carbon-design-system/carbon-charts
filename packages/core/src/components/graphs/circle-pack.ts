@@ -23,7 +23,11 @@ export class CirclePack extends Component {
 
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
@@ -78,7 +82,9 @@ export class CirclePack extends Component {
 			});
 
 		// enter the circles
-		const circles = svg.selectAll('circle.node').data(nodeData);
+		const circles = this.componentContainer
+			.selectAll('circle.node')
+			.data(nodeData);
 
 		circles.exit().attr('width', 0).attr('height', 0).remove();
 
@@ -87,8 +93,11 @@ export class CirclePack extends Component {
 			.append('circle')
 			.classed('node', true);
 
-		enteringCircles
-			.merge(circles)
+		const allCircles = enteringCircles.merge(circles);
+		// Add event listeners to elements drawn
+		this.addEventListeners(allCircles);
+
+		allCircles
 			.attr('class', (d) => {
 				const originalClass =
 					canvasZoomEnabled && hierarchyLevel === 3
@@ -111,15 +120,19 @@ export class CirclePack extends Component {
 			)
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
-			.transition(
-				this.services.transitions.getTransition(
-					'circlepack-leaf-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'circlepack-leaf-update-enter',
+				})
 			)
 			.attr('r', (d) => d.r)
 			.attr('opacity', 1)
-			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity);
+			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity)
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
+			});
 
 		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(
@@ -134,9 +147,6 @@ export class CirclePack extends Component {
 			// add legend filtering if it isnt a monochrome chart
 			this.addLegendListeners();
 		}
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
 	}
 
 	// turn off the highlight class on children circles
@@ -214,31 +224,40 @@ export class CirclePack extends Component {
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		this.parent
-			.selectAll('circle.node')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-circlepack'
+			this.parent
+				.selectAll('circle.node')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-circlepack',
+					})
 				)
-			)
-			.attr('opacity', (d) => {
-				return d.data.dataGroupName === hoveredElement.datum()['name']
-					? 1
-					: Configuration.circlePack.circles.fillOpacity;
-			});
+				.attr('opacity', (d) => {
+					return d.data.dataGroupName ===
+						hoveredElement.datum()['name']
+						? 1
+						: Configuration.circlePack.circles.fillOpacity;
+				});
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('circle.node')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-circlepack'
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('circle.node')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-circlepack',
+					})
 				)
-			)
-			.attr('opacity', 1);
+				.attr('opacity', 1);
+		}
 	};
 
 	// Zoom icon to be appended to the label in the tooltip
@@ -251,10 +270,10 @@ export class CirclePack extends Component {
 	}
 
 	// add event listeners for tooltip on the circles
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
-		this.parent
-			.selectAll('circle.node')
+
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
