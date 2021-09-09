@@ -61,6 +61,7 @@ export class Transitions extends Service {
 		});
 
 		if (this.model.getOptions().animations === false || animate === false) {
+			console.log("0 duration")
 			return t.duration(0);
 		}
 

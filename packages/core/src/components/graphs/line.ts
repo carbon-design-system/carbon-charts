@@ -31,7 +31,11 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
@@ -95,7 +99,7 @@ export class Line extends Component {
 		}
 
 		// Update the bound data on lines
-		const lines = svg
+		const lines = this.componentContainer
 			.selectAll('path.line')
 			.data(data, (group) => group.name);
 
@@ -113,8 +117,8 @@ export class Line extends Component {
 			.attr('opacity', 0);
 
 		// Apply styles and datum
-		enteringLines
-			.merge(lines)
+		const allLines = enteringLines.merge(lines);
+		allLines
 			.data(data, (group) => group.name)
 			.attr('class', (group) =>
 				this.model.getColorClassName({
@@ -151,33 +155,48 @@ export class Line extends Component {
 			.attr('d', (group) => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);
+			})
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
 			});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		this.parent
-			.selectAll('path.line')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-line')
-			)
-			.attr('opacity', (group) => {
-				if (group.name !== hoveredElement.datum()['name']) {
-					return Configuration.lines.opacity.unselected;
-				}
+			this.parent
+				.selectAll('path.line')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-line',
+					})
+				)
+				.attr('opacity', (group) => {
+					if (group.name !== hoveredElement.datum()['name']) {
+						return Configuration.lines.opacity.unselected;
+					}
 
-				return Configuration.lines.opacity.selected;
-			});
+					return Configuration.lines.opacity.selected;
+				});
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.line')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-line')
-			)
-			.attr('opacity', Configuration.lines.opacity.selected);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.line')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-line',
+					})
+				)
+				.attr('opacity', Configuration.lines.opacity.selected);
+		}
 	};
 
 	destroy() {

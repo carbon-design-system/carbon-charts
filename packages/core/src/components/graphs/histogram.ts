@@ -36,7 +36,8 @@ export class Histogram extends Component {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer();
+		this.componentContainer = this.getComponentContainer();
+		this.componentContainer.classed('updating', true);
 
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
@@ -48,7 +49,7 @@ export class Histogram extends Component {
 		const x = this.services.cartesianScales.getMainXScale();
 
 		// Update data on all bar groups
-		const barGroups = svg
+		const barGroups = this.componentContainer
 			.selectAll('g.bars')
 			.data(binnedStackedData, (d) => get(d, `0.${groupMapsTo}`));
 
@@ -62,7 +63,7 @@ export class Histogram extends Component {
 			.attr('role', Roles.GROUP);
 
 		// Update data on all bars
-		const bars = svg
+		const bars = this.componentContainer
 			.selectAll('g.bars')
 			.selectAll('path.bar')
 			.data((data) => data);
@@ -70,9 +71,11 @@ export class Histogram extends Component {
 		// Remove bars that need to be removed
 		bars.exit().remove();
 
-		bars.enter()
-			.append('path')
-			.merge(bars)
+		const allBars = bars.enter().append('path').merge(bars);
+		// Add event listeners to elements drawn
+		this.addEventListeners(allBars);
+
+		allBars
 			.classed('bar', true)
 			.attr(groupIdentifier, (d, i) => i)
 			.transition()
@@ -138,55 +141,62 @@ export class Histogram extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value);
-
-		// Add event listeners for the above elements
-		this.addEventListeners();
+			.attr('aria-label', (d) => d.value)
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
+			});
 	}
 
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+			const options = this.getOptions();
+			const { groupMapsTo } = options.data;
 
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-bar',
+					})
+				)
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
-			)
-			.attr('opacity', 1);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.bar')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-bar',
+					})
+				)
+				.attr('opacity', 1);
+		}
 	};
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const self = this;
-		this.parent
-			.selectAll('path.bar')
+
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed('hovered', true);
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				const x0 = parseFloat(get(datum, 'data.x0'));
 				const x1 = parseFloat(get(datum, 'data.x1'));

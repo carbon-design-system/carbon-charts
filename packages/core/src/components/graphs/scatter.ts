@@ -29,20 +29,6 @@ export class Scatter extends Component {
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
 		);
-
-		const { fadeInOnChartHolderMouseover } = this.configs;
-		if (fadeInOnChartHolderMouseover) {
-			// Fade-in scatter circles
-			events.addEventListener(
-				Events.Chart.MOUSEOVER,
-				this.handleChartHolderOnHover
-			);
-			// Fade-out scatter circles
-			events.addEventListener(
-				Events.Chart.MOUSEOUT,
-				this.handleChartHolderOnMouseOut
-			);
-		}
 	}
 
 	filterBasedOnZoomDomain(data) {
@@ -102,7 +88,16 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		this.componentContainer.classed(
+			'fade-in-on-chart-holder-mouseover',
+			fadeInOnChartHolderMouseover
+		);
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -110,7 +105,7 @@ export class Scatter extends Component {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Update data on dot groups
-		const circles = svg
+		const circles = this.componentContainer
 			.selectAll('circle.dot')
 			.data(
 				this.getScatterData(),
@@ -129,10 +124,10 @@ export class Scatter extends Component {
 
 		// Apply styling & position
 		const circlesToStyle = enteringCircles.merge(circles);
-		this.styleCircles(circlesToStyle, animate);
-
 		// Add event listeners to elements drawn
-		this.addEventListeners();
+		this.addEventListeners(circlesToStyle);
+
+		this.styleCircles(circlesToStyle, animate);
 	}
 
 	// A value is an anomaly if is above all defined domain and range thresholds
@@ -293,58 +288,46 @@ export class Scatter extends Component {
 			.attr('aria-label', (d) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier(d);
 				return d[rangeIdentifier];
+			})
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
 			});
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
 	}
 
-	handleChartHolderOnHover = (event: CustomEvent) => {
-		this.parent
-			.selectAll('circle.dot')
-			.transition(
-				this.services.transitions.getTransition(
-					'chart-holder-hover-scatter'
-				)
-			)
-			.attr('opacity', 1);
-	};
-
-	handleChartHolderOnMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('circle.dot')
-			.transition(
-				this.services.transitions.getTransition(
-					'chart-holder-mouseout-scatter'
-				)
-			)
-			.attr('opacity', 0);
-	};
-
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		const { groupMapsTo } = this.getOptions().data;
+			const { groupMapsTo } = this.getOptions().data;
 
-		this.parent
-			.selectAll('circle.dot')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-scatter')
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+			this.parent
+				.selectAll('circle.dot')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-scatter',
+					})
+				)
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('circle.dot')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-scatter'
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('circle.dot')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-scatter',
+					})
 				)
-			)
-			.attr('opacity', 1);
+				.attr('opacity', 1);
+		}
 	};
 
 	// This is extended in bubble graphs
@@ -352,12 +335,11 @@ export class Scatter extends Component {
 		return null;
 	}
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
 		const { groupMapsTo } = self.getOptions().data;
 
-		this.parent
-			.selectAll('circle')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
@@ -490,14 +472,6 @@ export class Scatter extends Component {
 		events.removeEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
-		);
-		events.removeEventListener(
-			Events.Chart.MOUSEOVER,
-			this.handleChartHolderOnHover
-		);
-		events.removeEventListener(
-			Events.Chart.MOUSEOUT,
-			this.handleChartHolderOnMouseOut
 		);
 	}
 }

@@ -17,7 +17,16 @@ export class StackedScatter extends Scatter {
 			return;
 		}
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		this.componentContainer.classed(
+			'fade-in-on-chart-holder-mouseover',
+			fadeInOnChartHolderMouseover
+		);
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -31,7 +40,7 @@ export class StackedScatter extends Scatter {
 		});
 
 		// Update data on dot groups
-		const circleGroups = svg
+		const circleGroups = this.componentContainer
 			.selectAll('g.dots')
 			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
@@ -77,10 +86,11 @@ export class StackedScatter extends Scatter {
 				[rangeIdentifier]: d[1],
 			};
 		});
-		this.styleCircles(circlesToStyle, animate);
 
 		// Add event listeners to elements drawn
-		this.addEventListeners();
+		this.addEventListeners(circlesToStyle);
+
+		this.styleCircles(circlesToStyle, animate);
 	}
 
 	getTooltipData(hoveredX, hoveredY) {

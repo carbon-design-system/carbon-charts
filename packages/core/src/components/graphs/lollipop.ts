@@ -29,7 +29,10 @@ export class Lollipop extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
 
 		const options = this.model.getOptions();
 
@@ -53,7 +56,7 @@ export class Lollipop extends Scatter {
 		);
 
 		// Update data on lines
-		const lines = svg
+		const lines = this.componentContainer
 			.selectAll('line.line')
 			.data(
 				this.getScatterData(),
@@ -66,6 +69,7 @@ export class Lollipop extends Scatter {
 		// Remove lines that need to be removed
 		const enteringLines = lines.enter().append('line').attr('opacity', 0);
 
+		console.log('esga', animate);
 		const allLines = enteringLines
 			.merge(lines)
 			.classed('line', true)
@@ -151,32 +155,44 @@ export class Lollipop extends Scatter {
 	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+			const options = this.getOptions();
+			const { groupMapsTo } = options.data;
 
-		this.parent
-			.selectAll('line.line')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-line')
-			)
-			.attr('opacity', (d) => {
-				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
-					return Configuration.lines.opacity.unselected;
-				}
+			this.parent
+				.selectAll('line.line')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-line',
+					})
+				)
+				.attr('opacity', (d) => {
+					if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
+						return Configuration.lines.opacity.unselected;
+					}
 
-				return Configuration.lines.opacity.selected;
-			});
+					return Configuration.lines.opacity.selected;
+				});
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('line.line')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-line')
-			)
-			.attr('opacity', Configuration.lines.opacity.selected);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('line.line')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-line',
+					})
+				)
+				.attr('opacity', Configuration.lines.opacity.selected);
+		}
 	};
 
 	destroy() {

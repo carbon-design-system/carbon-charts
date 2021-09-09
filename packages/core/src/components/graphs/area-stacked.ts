@@ -35,7 +35,11 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		let svg = this.getComponentContainer({ withinChartClip: true });
+		this.componentContainer = this.getComponentContainer({
+			withinChartClip: true,
+		});
+		this.componentContainer.classed('updating', true);
+
 		const self = this;
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -63,7 +67,7 @@ export class StackedArea extends Component {
 			rangeAxisPosition
 		);
 
-		const areas = svg
+		const areas = this.componentContainer
 			.selectAll('path.area')
 			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
 
@@ -109,45 +113,52 @@ export class StackedArea extends Component {
 				})
 			)
 			.attr('opacity', Configuration.area.opacity.selected)
-			.attr('d', this.areaGenerator);
+			.attr('d', this.areaGenerator)
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
+			});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
+			const options = this.getOptions();
+			const { groupMapsTo } = options.data;
 
-		this.parent
-			.selectAll('path.area')
-			.transition()
-			.call((t) =>
-				this.services.transitions.setupTransition({
-					transition: t,
-					name: 'legend-hover-area',
-				})
-			)
-			.attr('opacity', (d) => {
-				if (
-					Tools.getProperty(d, 0, groupMapsTo) !==
-					hoveredElement.datum().name
-				) {
-					return Configuration.area.opacity.unselected;
-				}
+			this.parent
+				.selectAll('path.area')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-area',
+					})
+				)
+				.attr('opacity', (d) => {
+					if (
+						Tools.getProperty(d, 0, groupMapsTo) !==
+						hoveredElement.datum().name
+					) {
+						return Configuration.area.opacity.unselected;
+					}
 
-				return Configuration.area.opacity.selected;
-			});
+					return Configuration.area.opacity.selected;
+				});
+		}
 	};
 
 	handleLegendMouseOut = () => {
-		this.parent
-			.selectAll('path.area')
-			.transition()
-			.call((t) =>
-				this.services.transitions.setupTransition({
-					transition: t,
-					name: 'legend-mouseout-area',
-				})
-			)
-			.attr('opacity', Configuration.area.opacity.selected);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.area')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-area',
+					})
+				)
+				.attr('opacity', Configuration.area.opacity.selected);
+		}
 	};
 }

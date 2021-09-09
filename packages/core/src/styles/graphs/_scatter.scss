@@ -20,3 +20,20 @@
 		mix-blend-mode: multiply;
 	}
 }
+
+.#{$prefix}--#{$charts-prefix}--scatter.fade-in-on-chart-holder-mouseover {
+	circle {
+		opacity: 0 !important;
+		transition: opacity 0.3s ease-out;
+	}
+}
+
+.#{$prefix}--chart-holder:hover,
+.#{$prefix}--chart-holder .#{$prefix}--#{$charts-prefix}--chart-wrapper:hover {
+	.#{$prefix}--#{$charts-prefix}--scatter.fade-in-on-chart-holder-mouseover {
+		circle {
+			opacity: 1 !important;
+			transition: opacity 0.3s ease-out;
+		}
+	}
+}
