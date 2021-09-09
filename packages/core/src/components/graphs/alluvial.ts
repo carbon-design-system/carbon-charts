@@ -257,7 +257,7 @@ export class Alluvial extends Component {
 					});
 				}
 			},
-			50
+			15
 		);
 
 		this.parent
@@ -369,7 +369,7 @@ export class Alluvial extends Component {
 				self.unhighlightLines();
 				allLinks.style('stroke-opacity', Configuration.alluvial.opacity.selected);
 			},
-			100
+			30
 		);
 
 		self.parent
