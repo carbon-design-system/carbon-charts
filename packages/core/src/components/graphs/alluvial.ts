@@ -19,6 +19,8 @@ export class Alluvial extends Component {
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true });
+		svg.html('');
+
 		let height;
 		({ width: this.width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
@@ -56,6 +58,9 @@ export class Alluvial extends Component {
 			links: data.map((d) => Object.assign({}, d)),
 		});
 
+		// Filter out unused nodes so they are not rendered
+		this.graph.nodes = this.graph.nodes.filter((node) => node.value !== 0);
+
 		// Determine the category name placement x position
 		const nodeCoordinates = {};
 		this.graph.nodes.forEach((element) => {
@@ -66,8 +71,6 @@ export class Alluvial extends Component {
 				nodeCoordinates[point] = element?.category;
 			}
 		});
-
-		svg.html('');
 
 		// Add node category text
 		const alluvialCategory = svg
