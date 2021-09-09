@@ -232,24 +232,49 @@ export class Alluvial extends Component {
 		const options = this.getOptions();
 		const self = this;
 
+		// Set delay to counter flashy behaviour
+		const debouncedLineHighlight = Tools.debounce(
+			(link, event = 'mouseover') => {
+				const allLinks = self.parent
+					.selectAll('path.link')
+					.transition(
+						self.services.transitions.getTransition(
+							'alluvial-link-mouse-highlight'
+						)
+					);
+
+				if (event === 'mouseout' || link === null) {
+					select(link).classed('hovered', false);
+					// Reorder the links to original order
+					self.parent
+						.selectAll('path.link')
+						.data(this.graph.links, (d) => d.index)
+						.order();
+					// set all links to default opacity
+					allLinks.style(
+						'stroke-opacity',
+						Configuration.alluvial.opacity.default
+					);
+				} else {
+					allLinks.style('stroke-opacity', function () {
+						// highlight and raise if link is this
+						if (link === this) {
+							select(this).classed('hovered', true).raise();
+							return Configuration.alluvial.opacity.selected;
+						}
+
+						return Configuration.alluvial.opacity.unfocus;
+					});
+				}
+			},
+			100
+		);
+
 		this.parent
 			.selectAll('path.link')
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-
-				// Set delay to counter flashy behaviour
-				Tools.debounce(() => {
-					self.unhighlightLines();
-
-					// Set the opacity of the line to selected
-					hoveredElement
-						.classed('hovered', true)
-						.style(
-							'stroke-opacity',
-							Configuration.alluvial.opacity.selected
-						)
-						.raise();
-				}, 50)();
+				debouncedLineHighlight(this, 'mouseover');
 
 				const strokeColor = getComputedStyle(
 					this,
@@ -307,12 +332,7 @@ export class Alluvial extends Component {
 			})
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
-
-				// Set delay to counter flashy behaviour
-				Tools.debounce(() => {
-					hoveredElement.classed('hovered', false).lower();
-					self.normalizeLines();
-				}, 50)();
+				debouncedLineHighlight(this, 'mouseout');
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -359,51 +379,47 @@ export class Alluvial extends Component {
 
 				// Highlight all linked lines in the graph data structure
 				if (this.paths.length) {
-					// Set delay to counter flashy behaviour
-					Tools.debounce(() => {
-						// Get transformation value of node
-						const nodeMatrix = self.getTranslationValues(
-							hoveredElement.attr('transform')
+					// Get transformation value of node
+					const nodeMatrix = Tools.getTranformOffsets(
+						hoveredElement.attr('transform')
+					);
+
+					// Move node to the left by 2 to grow node from the center
+					hoveredElement.attr(
+						'transform',
+						`translate(${nodeMatrix.x - 2}, ${nodeMatrix.y})`
+					);
+
+					hoveredElement
+						.classed('hovered', true)
+						.selectAll('rect.node')
+						.attr('width', 8);
+
+					// Translate first column text container to the
+					// right so it doesn't clash with expanding node
+					if (datum.x0 - 2 === 0) {
+						const titleContainer = self.parent.select(
+							`g#node-title-${datum.index}`
 						);
-						// Move node to the left by 2 to grow node from the center
-						hoveredElement.attr(
+						const titleMatrix = Tools.getTranformOffsets(
+							titleContainer.attr('transform')
+						);
+
+						titleContainer.attr(
 							'transform',
-							`translate(${nodeMatrix[0] - 2}, ${nodeMatrix[1]})`
+							`translate(${titleMatrix.x + 4},${titleMatrix.y})`
 						);
+					}
 
-						hoveredElement
-							.classed('hovered', true)
-							.selectAll('rect.node')
-							.attr('width', 8);
+					self.parent
+						.select(`text#node-text-${datum.index}`)
+						.style('font-weight', 'bold');
 
-						// Translate first column text container to the
-						// right so it doesn't clash with expanding node
-						if (datum.x0 - 2 === 0) {
-							const titleContainer = self.parent.select(
-								`g#node-title-${datum.index}`
-							);
-							const titleMatrix = self.getTranslationValues(
-								titleContainer.attr('transform')
-							);
-
-							titleContainer.attr(
-								'transform',
-								`translate(${titleMatrix[0] + 4},${
-									titleMatrix[1]
-								})`
-							);
-						}
-
-						self.parent
-							.select(`text#node-text-${datum.index}`)
-							.style('font-weight', 'bold');
-
-						self.unhighlightLines();
-						self.parent
-							.selectAll(this.paths.join(','))
-							.style('stroke-opacity', 1)
-							.raise();
-					}, 50)();
+					self.unhighlightLines();
+					self.parent
+						.selectAll(this.paths.join(','))
+						.style('stroke-opacity', 1)
+						.raise();
 
 					// Dispatch mouse over event
 					self.services.events.dispatchEvent(
@@ -443,46 +459,40 @@ export class Alluvial extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 
-				// Set delay to counter flashy behaviour
-				Tools.debounce(() => {
-					// Set the node position to initial state (unexpanded)
-					const nodeMatrix = self.getTranslationValues(
-						hoveredElement.attr('transform')
+				// Set the node position to initial state (unexpanded)
+				const nodeMatrix = Tools.getTranformOffsets(
+					hoveredElement.attr('transform')
+				);
+
+				hoveredElement
+					.classed('hovered', false)
+					.attr(
+						'transform',
+						`translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`
+					)
+					.select('rect.node')
+					.attr('width', Configuration.alluvial.nodeWidth);
+
+				// Translate text container back to initial state
+				if (datum.x0 - 2 === 0) {
+					const titleContainer = self.parent.select(
+						`g#node-title-${datum.index}`
+					);
+					const titleMatrix = Tools.getTranformOffsets(
+						titleContainer.attr('transform')
 					);
 
-					hoveredElement
-						.classed('hovered', false)
-						.attr(
-							'transform',
-							`translate(${nodeMatrix[0] + 2}, ${nodeMatrix[1]})`
-						)
-						.select('rect.node')
-						.attr('width', Configuration.alluvial.nodeWidth);
+					titleContainer.attr(
+						'transform',
+						`translate(${titleMatrix.x - 4},${titleMatrix.y})`
+					);
+				}
 
-					// Translate text container back to initial state
-					if (datum.x0 - 2 === 0) {
-						const titleContainer = self.parent.select(
-							`g#node-title-${datum.index}`
-						);
-						const titleMatrix = self.getTranslationValues(
-							titleContainer.attr('transform')
-						);
+				self.parent
+					.select(`text#node-text-${datum.index}`)
+					.style('font-weight', 'normal');
 
-						titleContainer.attr(
-							'transform',
-							`translate(${titleMatrix[0] - 4},${titleMatrix[1]})`
-						);
-					}
-
-					self.parent
-						.select(`text#node-text-${datum.index}`)
-						.style('font-weight', 'normal');
-
-					self.normalizeLines();
-
-					// Set the opacity of the lines to default state
-					self.parent.selectAll(this.paths).lower();
-				}, 50)();
+				self.normalizeLines();
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -506,7 +516,9 @@ export class Alluvial extends Component {
 		this.parent
 			.selectAll('path.link')
 			.classed('hovered', false)
-			.style('stroke-opacity', Configuration.alluvial.opacity.default);
+			.style('stroke-opacity', Configuration.alluvial.opacity.default)
+			.data(this.graph.links, (d) => d.index)
+			.order();
 	}
 
 	// Sets the opacity of all lines to unfocused (0.3)
@@ -514,15 +526,6 @@ export class Alluvial extends Component {
 		this.parent
 			.selectAll('path.link')
 			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus);
-	}
-
-	// Determine the translation values from a string
-	private getTranslationValues(matrix: string) {
-		const translation = matrix
-			.substring(matrix.indexOf('(') + 1, matrix.indexOf(')'))
-			.split(',');
-
-		return [parseFloat(translation[0]), parseFloat(translation[1])];
 	}
 
 	// Traverse graph and get all connected links to node
