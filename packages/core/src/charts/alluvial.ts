@@ -39,7 +39,12 @@ export class AlluvialChart extends Chart {
 			new Alluvial(this.model, this.services),
 		];
 
-		const components: any[] = this.getChartComponents(graphFrameComponents);
+		const components: any[] = this.getChartComponents(
+			graphFrameComponents,
+			{
+				excludeLegend: true,
+			}
+		);
 		return components;
 	}
 }

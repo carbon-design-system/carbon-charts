@@ -585,9 +585,6 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 	}),
 	nodePadding: 24,
 	monochrome: false,
-	legend: {
-		enabled: false,
-	},
 } as AlluvialChartOptions);
 
 export const options = {
