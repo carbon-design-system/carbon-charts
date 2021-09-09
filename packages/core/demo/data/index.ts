@@ -1045,12 +1045,23 @@ const simpleChartDemos = [
 
 const complexChartDemos = [
 	{
-		title: 'Treemap',
+		title: 'Alluvial',
 		demos: [
 			{
-				data: treemapDemos.treemapData,
-				options: treemapDemos.treemapOptions,
-				chartType: chartTypes.TreemapChart,
+				options: alluvialDemos.alluvialSimpleOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
+				mainDemo: true,
+			},
+			{
+				options: alluvialDemos.alluvialMultipleCategoryOptions,
+				data: alluvialDemos.alluvialMultipleCategoryData,
+				chartType: chartTypes.AlluvialChart,
+			},
+			{
+				options: alluvialDemos.alluvialMonochromeOptions,
+				data: alluvialDemos.alluvialMonochromeData,
+				chartType: chartTypes.AlluvialChart,
 			},
 		],
 	},
@@ -1086,23 +1097,12 @@ const complexChartDemos = [
 		],
 	},
 	{
-		title: 'Alluvial',
+		title: 'Treemap',
 		demos: [
 			{
-				options: alluvialDemos.alluvialSimpleOptions,
-				data: alluvialDemos.alluvialSimpleData,
-				chartType: chartTypes.AlluvialChart,
-				mainDemo: true,
-			},
-			{
-				options: alluvialDemos.alluvialMultipleCategoryOptions,
-				data: alluvialDemos.alluvialMultipleCategoryData,
-				chartType: chartTypes.AlluvialChart,
-			},
-			{
-				options: alluvialDemos.alluvialMonochromeOptions,
-				data: alluvialDemos.alluvialMonochromeData,
-				chartType: chartTypes.AlluvialChart,
+				data: treemapDemos.treemapData,
+				options: treemapDemos.treemapOptions,
+				chartType: chartTypes.TreemapChart,
 			},
 		],
 	},
