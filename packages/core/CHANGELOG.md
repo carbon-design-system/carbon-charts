@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.47.0...v0.48.0) (2021-09-10)
+
+
+### Features
+
+* **highlight:** Add highlights ([#1048](https://github.com/carbon-design-system/carbon-charts/issues/1048)) ([baa4645](https://github.com/carbon-design-system/carbon-charts/commit/baa4645c16027ab21f2d2155c79fb73cdf0d4772))
+
+
+
+
+
 # [0.47.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.5...v0.47.0) (2021-09-08)
 
 
