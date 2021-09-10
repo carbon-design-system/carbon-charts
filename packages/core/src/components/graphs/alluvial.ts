@@ -14,26 +14,24 @@ export class Alluvial extends Component {
 	renderType = RenderTypes.SVG;
 
 	private graph: any;
-	private width;
 
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true });
 		svg.html('');
 
-		let height;
-		({ width: this.width, height } = DOMUtils.getSVGElementSize(svg, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
-		}));
+		});
 
 		// Because of a Firefox bug with regards to sizing & d3 packs,
 		// rather than checking if height or width aren't 0,
 		// we have to make sure they're not smaller than 1
-		if (this.width < 1 || height < 1) {
+		if (width < 1 || height < 1) {
 			return;
 		}
 		const options = this.model.getOptions();
-		const data = this.model.getData();
+		const data = this.model.getDisplayData();
 
 		// Set the custom node padding if provided
 		let nodePadding = Configuration.alluvial.minNodePadding;
@@ -46,16 +44,18 @@ export class Alluvial extends Component {
 			.nodeWidth(Configuration.alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
-			// size of the chart and its padding
+			// Size of the chart and its padding
+			// Chart starts at 2 and ends at width - 2 so the outer nodes can expand from center
+			// Chart starts from 30 so node categories can be displayed
 			.extent([
 				[2, 30],
-				[this.width - 2, height],
+				[width - 2, height],
 			]);
 
 		// Construct a graph with the provided user data
 		this.graph = sankey({
-			nodes: options.nodes.map((d) => Object.assign({}, d)),
-			links: data.map((d) => Object.assign({}, d)),
+			nodes: options.nodes,
+			links: data,
 		});
 
 		// Filter out unused nodes so they are not rendered
@@ -96,10 +96,11 @@ export class Alluvial extends Component {
 			})
 			.attr('y', 20)
 			.attr('x', (d, i) => {
-				const { width } = this.parent
-					.select(`text#category-${i}`)
-					.node()
-					.getBBox();
+				const { width } = DOMUtils.getSVGElementSize(
+					select(`text#category-${i}`),
+					{ useBBox: true }
+				);
+
 				// Make the text on the left on node group (except first column)
 				let x = 0;
 				if (d + x >= width) {
@@ -190,10 +191,11 @@ export class Alluvial extends Component {
 			.classed('node-text-bg', true)
 			.attr('width', (d, i) => {
 				// Determine rectangle width based on text width
-				const { width } = this.parent
-					.select(`text#node-text-${i}`)
-					.node()
-					.getBBox();
+				const { width } = DOMUtils.getSVGElementSize(
+					select(`text#node-text-${i}`),
+					{ useBBox: true }
+				);
+
 				return width + 8;
 			})
 			.attr('height', 18)
@@ -202,10 +204,10 @@ export class Alluvial extends Component {
 
 		// Position group based on text width
 		textNode.attr('transform', (d, i) => {
-			const { width } = this.parent
-				.select(`text#node-text-${i}`)
-				.node()
-				.getBBox();
+			const { width } = DOMUtils.getSVGElementSize(
+				select(`text#node-text-${i}`),
+				{ useBBox: true }
+			);
 
 			// Subtracting 9 since text background is 18 to center
 			const y = (d.y1 - d.y0) / 2 - 9;
@@ -271,10 +273,9 @@ export class Alluvial extends Component {
 				debouncedLineHighlight(this, 'mouseover');
 				hoveredElement.classed('hovered', true);
 
-				const strokeColor = getComputedStyle(
-					this,
-					null
-				).getPropertyValue('stroke');
+				const strokeColor = getComputedStyle(this).getPropertyValue(
+					'stroke'
+				);
 
 				// Dispatch mouse over event
 				self.services.events.dispatchEvent(
@@ -571,16 +572,9 @@ export class Alluvial extends Component {
 
 	getRightArrowIcon() {
 		return `
-		<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-		<defs>
-			<style>
-			.cls-1 {
-				fill: none;
-			}
-			</style>
-		</defs>
-		<polygon points="18 6 16.57 7.393 24.15 15 4 15 4 17 24.15 17 16.57 24.573 18 26 28 16 18 6"/>
-		<rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+			<polygon points="18 6 16.57 7.393 24.15 15 4 15 4 17 24.15 17 16.57 24.573 18 26 28 16 18 6"/>
+			<rect  data-name="&lt;Transparent Rectangle&gt;" style="fill: none;" width="32" height="32"/>
 		</svg>`;
 	}
 
