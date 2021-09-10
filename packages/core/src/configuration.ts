@@ -580,11 +580,14 @@ const circlePackChart: CirclePackChartOptions = Tools.merge(
 );
 
 const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
-	data: Tools.merge(chart.data, {
-		groupMapsTo: 'source',
-	}),
-	nodePadding: 24,
-	monochrome: false,
+	alluvial: {
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'source',
+		}),
+		nodePadding: 24,
+		monochrome: false,
+		nodes: [],
+	},
 } as AlluvialChartOptions);
 
 export const options = {

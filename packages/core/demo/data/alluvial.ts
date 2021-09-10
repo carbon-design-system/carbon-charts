@@ -12,30 +12,34 @@ export const alluvialSimpleData = [
 
 export const alluvialSimpleOptions = {
 	title: 'Alluvial',
-	units: 'GB',
-	nodes: [
-		{ name: 'A', category: 'Start' },
-		{ name: 'B', category: 'Start' },
-		{ name: 'C', category: 'Start' },
-		{ name: 'X', category: 'Finish' },
-		{ name: 'Y', category: 'Finish' },
-		{ name: 'Z', category: 'Finish' },
-	],
+	alluvial: {
+		units: 'GB',
+		nodes: [
+			{ name: 'A', category: 'Start' },
+			{ name: 'B', category: 'Start' },
+			{ name: 'C', category: 'Start' },
+			{ name: 'X', category: 'Finish' },
+			{ name: 'Y', category: 'Finish' },
+			{ name: 'Z', category: 'Finish' },
+		],
+	},
 };
 
 export const alluvialMultipleCategoryOptions = {
 	title: 'Alluvial (multiple categories)',
-	nodes: [
-		{ name: '1st', category: 'Class' },
-		{ name: '2nd', category: 'Class' },
-		{ name: 'Crew', category: 'Class' },
-		{ name: 'Male', category: 'Sex' },
-		{ name: 'Female', category: 'Sex' },
-		{ name: 'Child', category: 'Age' },
-		{ name: 'Adult', category: 'Age' },
-		{ name: 'Yes', category: 'Survived' },
-		{ name: 'No', category: 'Survived' },
-	],
+	alluvial: {
+		nodes: [
+			{ name: '1st', category: 'Class' },
+			{ name: '2nd', category: 'Class' },
+			{ name: 'Crew', category: 'Class' },
+			{ name: 'Male', category: 'Sex' },
+			{ name: 'Female', category: 'Sex' },
+			{ name: 'Child', category: 'Age' },
+			{ name: 'Adult', category: 'Age' },
+			{ name: 'Yes', category: 'Survived' },
+			{ name: 'No', category: 'Survived' },
+		],
+	},
 };
 
 export const alluvialMultipleCategoryData = [
@@ -115,14 +119,16 @@ export const alluvialMonochromeData = alluvialSimpleData;
 
 export const alluvialMonochromeOptions = {
 	title: 'Alluvial (monochrome with custom node padding)',
-	nodes: [
-		{ name: 'A', category: 'Start' },
-		{ name: 'B', category: 'Start' },
-		{ name: 'C', category: 'Start' },
-		{ name: 'X', category: 'Finish' },
-		{ name: 'Y', category: 'Finish' },
-		{ name: 'Z', category: 'Finish' },
-	],
-	monochrome: true,
-	nodePadding: 33,
+	alluvial: {
+		nodes: [
+			{ name: 'A', category: 'Start' },
+			{ name: 'B', category: 'Start' },
+			{ name: 'C', category: 'Start' },
+			{ name: 'X', category: 'Finish' },
+			{ name: 'Y', category: 'Finish' },
+			{ name: 'Z', category: 'Finish' },
+		],
+		monochrome: true,
+		nodePadding: 33,
+	},
 };

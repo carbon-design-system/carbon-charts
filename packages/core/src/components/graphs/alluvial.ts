@@ -35,8 +35,10 @@ export class Alluvial extends Component {
 
 		// Set the custom node padding if provided
 		let nodePadding = Configuration.alluvial.minNodePadding;
-		if (options.nodePadding > Configuration.alluvial.minNodePadding) {
-			nodePadding = options.nodePadding;
+		if (
+			options.alluvial.nodePadding > Configuration.alluvial.minNodePadding
+		) {
+			nodePadding = options.alluvial.nodePadding;
 		}
 
 		const sankey = d3Sankey()
@@ -54,7 +56,7 @@ export class Alluvial extends Component {
 
 		// Construct a graph with the provided user data
 		this.graph = sankey({
-			nodes: options.nodes,
+			nodes: options.alluvial.nodes,
 			links: data,
 		});
 
@@ -120,7 +122,7 @@ export class Alluvial extends Component {
 			.attr('id', (d) => `line-${d.index}`)
 			.attr('class', (d) => {
 				// Use a single color for the lines
-				if (options.monochrome) {
+				if (options.alluvial.monochrome) {
 					return this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.STROKE],
 						dataGroupName: 0,
@@ -140,7 +142,7 @@ export class Alluvial extends Component {
 				'aria-label',
 				(d) =>
 					`${d.source.name} → ${d.target.name} (${d.value}
-						${options.units ? ' ' + options.units : ''})`
+						${options.alluvial.units ? ' ' + options.alluvial.units : ''})`
 			);
 
 		// Creating the groups
@@ -296,7 +298,9 @@ export class Alluvial extends Component {
 							label: datum.target.name,
 							value:
 								datum.value +
-								(options.units ? ` ${options.units}` : ''),
+								(options.alluvial.units
+									? ` ${options.alluvial.units}`
+									: ''),
 							color: strokeColor,
 							labelIcon: self.getRightArrowIcon(),
 						},
