@@ -1,12 +1,29 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
-import { ChartModel } from '../../model';
-import { AxisPositions } from '../../interfaces';
-import { select } from 'd3-selection';
+import { ChartModel } from '../../model/model';
+import {
+	AxisPositions,
+	RenderTypes,
+	ScaleTypes,
+} from '../../interfaces';
+
+// D3 Imports
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { select} from 'd3-selection';
+
+// Carbon position service
+import Position from '@carbon/utils-position';
+
 
 export class Highlight extends Component {
 	type = 'highlight';
+	renderType = RenderTypes.SVG;
 
+	label: any;
+
+	positionService = new Position();
 	highlightStrokeWidth = 1;
 
 	constructor(model: ChartModel, services: any) {
@@ -15,14 +32,13 @@ export class Highlight extends Component {
 
 	render(animate = false) {
 		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
-
 		const highlightData = [];
+
 		Object.keys(axesOptions).forEach((axisPosition) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
 				const axisOptions = axesOptions[axisPosition];
-
 				if (
-					axisOptions.highlights?.data &&
+					axisOptions.highlights &&
 					axisOptions.highlights.data.length > 0
 				) {
 					highlightData.push({
@@ -40,7 +56,7 @@ export class Highlight extends Component {
 		});
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Update data on all axis highlight groups
 		const highlightAxisGroups = svg
@@ -83,6 +99,7 @@ export class Highlight extends Component {
 		const highlightGroupsEnter = highlightGroups.enter().append('g');
 
 		highlightGroupsEnter.append('rect').attr('class', 'highlight-bar');
+		highlightGroupsEnter.append('line').attr('class', 'highlight-line');
 
 		const highlightGroupsMerge = highlightGroupsEnter.merge(
 			highlightGroups
@@ -116,11 +133,13 @@ export class Highlight extends Component {
 			) {
 				group
 					.selectAll('rect.highlight-bar')
-					.transition(
-						self.services.transitions.getTransition(
-							'highlight-bar-update',
-							animate
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'highlight-bar-update',
+							animate,
+						})
 					)
 					// Stroke width added to stop overflow of highlight
 					.attr(
@@ -160,11 +179,13 @@ export class Highlight extends Component {
 			} else {
 				group
 					.selectAll('rect.highlight-bar')
-					.transition(
-						self.services.transitions.getTransition(
-							'highlight-line-update',
-							animate
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'highlight-bar-update',
+							animate,
+						})
 					)
 					.attr('x', xScaleStart)
 					.attr('width', Math.max(xScaleEnd - xScaleStart, 0))
