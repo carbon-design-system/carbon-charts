@@ -276,10 +276,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.AreaChart,
 			},
 			{
-				options: areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
+				options:
+					areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
 				data: areaDemos.boundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-			}
+			},
 		],
 	},
 	{

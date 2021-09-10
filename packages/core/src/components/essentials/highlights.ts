@@ -1,21 +1,16 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { ChartModel } from '../../model/model';
-import {
-	AxisPositions,
-	RenderTypes,
-	ScaleTypes,
-} from '../../interfaces';
+import { AxisPositions, RenderTypes, ScaleTypes } from '../../interfaces';
 
 // D3 Imports
 // @ts-ignore
 // ts-ignore is needed because `@types/d3`
 // is missing the `pointer` function
-import { select} from 'd3-selection';
+import { select } from 'd3-selection';
 
 // Carbon position service
 import Position from '@carbon/utils-position';
-
 
 export class Highlight extends Component {
 	type = 'highlight';
