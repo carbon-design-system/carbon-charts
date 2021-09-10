@@ -1,5 +1,5 @@
 // Internal Imports
-import { MeterChartModel } from '../model-meter';
+import { MeterChartModel } from '../model/meter';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import {
@@ -7,6 +7,7 @@ import {
 	MeterChartOptions,
 	LayoutGrowth,
 	LayoutDirection,
+	RenderTypes,
 } from '../interfaces/index';
 import { Tools } from '../tools';
 import { Meter } from './../components/graphs/meter';
@@ -28,14 +29,20 @@ export class MeterChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs);
 
+		// use prop meter options or regular meter options
+		let options = chartConfigs.options.meter.proportional
+			? Tools.merge(
+					Tools.clone(Configuration.options.proportionalMeterChart),
+					chartConfigs.options
+			  )
+			: Tools.merge(
+					Tools.clone(Configuration.options.meterChart),
+					chartConfigs.options
+			  );
+
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.meterChart),
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(options);
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
@@ -46,30 +53,23 @@ export class MeterChart extends Chart {
 		const graph = {
 			id: 'meter-graph',
 			components: [new Meter(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: RenderTypes.SVG,
 		};
 
 		// Meter has an unique dataset title within the graph
 		const titleComponent = {
-			id: 'title',
+			id: 'meter-title',
 			components: [new MeterTitle(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: RenderTypes.SVG,
 		};
 
 		// create the title spacer
 		const titleSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		// the graph frame for meter includes the custom title (and spacer)
@@ -85,7 +85,9 @@ export class MeterChart extends Chart {
 		];
 
 		// add the meter title as a top level component
-		const components: any[] = this.getChartComponents(graphFrame);
+		const components: any[] = this.getChartComponents(graphFrame, {
+			graphFrameRenderType: RenderTypes.HTML,
+		});
 
 		return components;
 	}

@@ -11,6 +11,7 @@ import {
 	StackedBar,
 	StackedRuler,
 	TwoDimensionalAxes,
+	ZeroLine,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
@@ -45,6 +46,7 @@ export class StackedBarChart extends AxisChart {
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.VERT_OR_HORIZ,
 			}),
+			new ZeroLine(this.model, this.services),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

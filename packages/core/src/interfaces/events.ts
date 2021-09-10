@@ -9,6 +9,13 @@ export enum Chart {
 	// CLICK = "chart-click",
 	MOUSEOUT = 'chart-mouseout',
 }
+/**
+ * enum of all events related to the overlay modal
+ */
+export enum Modal {
+	SHOW = 'show-modal',
+	HIDE = 'hide-modal',
+}
 
 /**
  * enum of all events related to the chart model
@@ -64,10 +71,10 @@ export enum Axis {
  * enum of all area graph events
  */
 export enum Area {
-	AREA_MOUSEOVER = 'area-mouseover',
-	AREA_MOUSEMOVE = 'area-mousemove',
-	AREA_CLICK = 'area-click',
-	AREA_MOUSEOUT = 'area-mouseout',
+	POINT_MOUSEOVER = 'scatter-mouseover',
+	POINT_MOUSEMOVE = 'scatter-mousemove',
+	POINT_CLICK = 'scatter-click',
+	POINT_MOUSEOUT = 'scatter-mouseout',
 }
 
 /**
@@ -155,6 +162,15 @@ export enum Radar {
 }
 
 /**
+ * enum of all tree graph events
+ */
+export enum Tree {
+	NODE_MOUSEOVER = 'tree-node-mouseover',
+	NODE_CLICK = 'tree-node-click',
+	NODE_MOUSEOUT = 'tree-node-mouseout'
+}
+
+/**
  * enum of all treemap graph events
  */
 export enum Treemap {
@@ -199,4 +215,14 @@ export enum CirclePack {
 	CIRCLE_CLICK = 'circle-leaf-click',
 	CIRCLE_MOUSEOUT = 'circle-leaf-mouseout',
 	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove',
+}
+
+/**
+ * enum of all meter related events
+ */
+export enum Meter {
+	METER_MOUSEOVER = 'meter-mouseover',
+	METER_CLICK = 'meter-click',
+	METER_MOUSEOUT = 'meter-mouseout',
+	METER_MOUSEMOVE = 'meter-mousemove',
 }

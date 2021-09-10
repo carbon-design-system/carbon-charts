@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "../../globals/js/settings", "../../globals/js/misc/mixin", "../../globals/js/mixins/create-component", "../../globals/js/mixins/init-component-by-search", "../../globals/js/mixins/handles", "../../globals/js/misc/event-matches", "../../globals/js/misc/on", "../../globals/js/misc/svg-toggle-class"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.settings, global.mixin, global.createComponent, global.initComponentBySearch, global.handles, global.eventMatches, global.on, global.svgToggleClass);
     global.search = mod.exports;
   }
-})(this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on, _svgToggleClass) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on, _svgToggleClass) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -30,20 +46,6 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
-  }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -66,29 +68,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
   }
 
   function _inherits(subClass, superClass) {
@@ -115,14 +94,69 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
   var toArray = function toArray(arrayLike) {
     return Array.prototype.slice.call(arrayLike);
   };
 
-  var Search =
-  /*#__PURE__*/
-  function (_mixin) {
+  var Search = /*#__PURE__*/function (_mixin) {
     _inherits(Search, _mixin);
+
+    var _super = _createSuper(Search);
     /**
      * Search with Options.
      * @extends CreateComponent
@@ -144,12 +178,31 @@
      */
 
 
+    /**
+     * Search with Options.
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
+     * @extends Handles
+     * @param {HTMLElement} element The element working as the search component.
+     * @param {object} [options] The component options
+     * @property {string} [options.selectorInit]
+     *   The selector to find search UIs with options.
+     * @property {string} [options.selectorSearchView]
+     *   The selector to find the search view icon containers.
+     * @property {string} [options.selectorSearchInput]
+     *   The selector to find the search input.
+     * @property {string} [options.selectorClearIcon]
+     *   The selector for the clear icon that clears the search box.
+     * @property {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
+     * @property {string} [options.classClearHidden] The class used to hide the clear icon.
+     * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
+     */
     function Search(element, options) {
       var _this;
 
       _classCallCheck(this, Search);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, element, options));
+      _this = _super.call(this, element, options);
 
       var closeIcon = _this.element.querySelector(_this.options.selectorClearIcon);
 
@@ -184,6 +237,10 @@
      */
 
 
+    /**
+     * Toggles between the grid and list layout.
+     * @param {HTMLElement} element The element contining the layout toggle.
+     */
     _createClass(Search, [{
       key: "toggleLayout",
       value: function toggleLayout(element) {

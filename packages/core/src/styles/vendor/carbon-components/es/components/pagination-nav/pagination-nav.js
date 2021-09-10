@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -34,29 +36,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -80,6 +59,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -95,10 +129,10 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-var PaginationNav =
-/*#__PURE__*/
-function (_mixin) {
+var PaginationNav = /*#__PURE__*/function (_mixin) {
   _inherits(PaginationNav, _mixin);
+
+  var _super = _createSuper(PaginationNav);
   /**
    * Pagination Nav component
    * @extends CreateComponent
@@ -108,12 +142,19 @@ function (_mixin) {
    */
 
 
+  /**
+   * Pagination Nav component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a pagination nav.
+   */
   function PaginationNav(element, options) {
     var _this;
 
     _classCallCheck(this, PaginationNav);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PaginationNav).call(this, element, options));
+    _this = _super.call(this, element, options);
 
     _this.getActivePageNumber = function () {
       var pageNum;
@@ -252,9 +293,12 @@ function (_mixin) {
    */
 
 
+  /**
+   * Get active page number
+   */
   _createClass(PaginationNav, null, [{
     key: "options",
-
+    get:
     /**
      * The component options.
      * If `options` is specified in the constructor, {@linkcode PaginationNav.create .create()},
@@ -271,7 +315,7 @@ function (_mixin) {
      * @property {string} [classActive] The CSS class for page's selected state.
      * @property {string} [classDisabled] The CSS class for page's disabled state.
      */
-    get: function get() {
+    function get() {
       var prefix = settings.prefix;
       return {
         selectorInit: '[data-pagination-nav]',

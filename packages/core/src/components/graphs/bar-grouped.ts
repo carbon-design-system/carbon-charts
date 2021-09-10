@@ -5,16 +5,17 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 	Roles,
 } from '../../interfaces';
 
 // D3 Imports
-import { map } from 'd3-collection';
 import { select } from 'd3-selection';
 import { ScaleBand, scaleBand } from 'd3-scale';
 
 export class GroupedBar extends Bar {
 	type = 'grouped-bar';
+	renderType = RenderTypes.SVG;
 
 	groupScale: ScaleBand<any>;
 
@@ -46,14 +47,20 @@ export class GroupedBar extends Bar {
 		this.setGroupScale();
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
-		const allDataLabels = map(displayData, (datum) => {
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-				datum
-			);
-			return datum[domainIdentifier];
-		}).keys();
+		const allDataLabels = Tools.removeArrayDuplicates(
+			displayData.map((datum) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					datum
+				);
+
+				return datum[domainIdentifier] &&
+					typeof datum[domainIdentifier].toString === 'function'
+					? datum[domainIdentifier].toString()
+					: datum[domainIdentifier];
+			})
+		);
 
 		// Update data on bar groups
 		const barGroups = svg
@@ -76,11 +83,13 @@ export class GroupedBar extends Bar {
 
 		allBarGroups
 			// Transition
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-group-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-group-update-enter',
+					animate,
+				})
 			)
 			.attr('transform', (label, i) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(
@@ -116,11 +125,13 @@ export class GroupedBar extends Bar {
 		barsEnter
 			.merge(bars)
 			.classed('bar', true)
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -201,7 +212,7 @@ export class GroupedBar extends Bar {
 
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -213,35 +224,41 @@ export class GroupedBar extends Bar {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [datum],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -253,6 +270,7 @@ export class GroupedBar extends Bar {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

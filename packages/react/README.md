@@ -11,14 +11,14 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-react d3@5.x
+npm install -S @carbon/charts @carbon/charts-react d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-react d3@5.x
+yarn add @carbon/charts @carbon/charts-react d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a
@@ -27,7 +27,7 @@ bundled version of the library.
 ## Step-by-step instructions
 
 Read
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials-getting-started--react)
+[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--react)
 
 ## Codesandbox examples
 
@@ -46,7 +46,7 @@ For instance in the case of a donut chart you're able to pass in an additional
 field called `center` in your options configuring the donut center.
 
 For instructions on using the **tabular data format**, see
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format)
+[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
 
 There are also additional options available depending on the chart type being
 used,

@@ -4,7 +4,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
-	LegendItemTypes,
+	LegendItemType,
 } from './interfaces';
 
 import { defaultLegendAdditionalItems } from './configuration-non-customizable';
@@ -17,6 +17,7 @@ import {
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	flatten as lodashFlatten,
+	groupBy as lodashGroupBy,
 	camelCase as lodashCamelCase,
 	isEmpty as lodashIsEmpty,
 	isEqual as lodashIsEqual,
@@ -29,8 +30,12 @@ import {
 	DebounceSettings,
 } from 'lodash-es';
 
-import { mouse } from 'd3-selection';
-import { Numeric } from 'd3';
+// D3 Imports
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { pointer } from 'd3-selection';
+import { Numeric } from 'd3-array';
 
 // Functions
 export namespace Tools {
@@ -42,6 +47,7 @@ export namespace Tools {
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const flatten = lodashFlatten;
+	export const groupBy = lodashGroupBy;
 	export const camelCase = lodashCamelCase;
 	export const isEmpty = lodashIsEmpty;
 	export const isEqual = lodashIsEqual;
@@ -50,14 +56,14 @@ export namespace Tools {
 	export const fromPairs = lodashFromPairs;
 	export const some = lodashSome;
 
-	export function debounceWithD3MousePosition(fn, delay, element) {
+	export function debounceWithD3MousePosition(fn, delay, holder) {
 		var timer = null;
 		return function () {
 			const context = this;
 			const args = arguments;
 
 			//we get the D3 event here
-			context.mousePosition = mouse(element);
+			context.mousePosition = pointer(args[0], holder);
 
 			clearTimeout(timer);
 
@@ -82,16 +88,22 @@ export namespace Tools {
 		defaultOptions: any,
 		providedOptions: any
 	) {
-		defaultOptions = Tools.clone(defaultOptions);
+		const clonedDefaultOptions = Tools.clone(defaultOptions);
 		const providedAxesNames = Object.keys(providedOptions.axes || {});
 
+		// Use provide controls list if it exists
+		// Prevents merging and element overriding of the two lists
+		if (providedOptions?.toolbar?.controls) {
+			delete clonedDefaultOptions.toolbar.controls;
+		}
+
 		if (providedAxesNames.length === 0) {
-			delete defaultOptions.axes;
+			delete clonedDefaultOptions.axes;
 		}
 
 		// Update deprecated options to work with the tabular data format
 		// Similar to the functionality in model.transformToTabularData()
-		for (const axisName in defaultOptions.axes) {
+		for (const axisName in clonedDefaultOptions.axes) {
 			if (providedAxesNames.includes(axisName)) {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
@@ -117,13 +129,13 @@ export namespace Tools {
 					}
 				}
 			} else {
-				delete defaultOptions.axes[axisName];
+				delete clonedDefaultOptions.axes[axisName];
 			}
 		}
 
-		updateLegendAdditionalItems(defaultOptions, providedOptions);
+		updateLegendAdditionalItems(clonedDefaultOptions, providedOptions);
 
-		return Tools.merge(defaultOptions, providedOptions);
+		return Tools.merge(clonedDefaultOptions, providedOptions);
 	}
 
 	/**************************************
@@ -239,12 +251,12 @@ export namespace Tools {
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
+	 * @param {string} key
 	 * @returns The percentage in the form of a number (1 significant digit if necessary)
 	 */
-	export function convertValueToPercentage(item, fullData) {
+	export function convertValueToPercentage(item, fullData, key = 'value') {
 		const percentage =
-			(item / fullData.reduce((accum, val) => accum + val.value, 0)) *
-			100;
+			(item / fullData.reduce((accum, val) => accum + val[key], 0)) * 100;
 		// if the value has any significant figures, keep 1
 		return percentage % 1 !== 0
 			? parseFloat(percentage.toFixed(1))
@@ -301,17 +313,18 @@ export namespace Tools {
 			const providedTypes = userProvidedAdditionalItems.map(
 				(item) => item.type
 			);
-	
+
 			const defaultTypes = defaultAdditionalItems.map(
 				(item) => item.type
-			)
+			);
 
 			// Get default items in default options but not in provided options
 			const updatedDefaultItems = defaultLegendAdditionalItems.filter(
-				(item) => defaultTypes.includes(item.type) &&
-				!providedTypes.includes(item.type)
-			)
-			
+				(item) =>
+					defaultTypes.includes(item.type) &&
+					!providedTypes.includes(item.type)
+			);
+
 			defaultOptions.legend.additionalItems = updatedDefaultItems;
 
 			providedOptions.legend.additionalItems = Tools.unionBy(

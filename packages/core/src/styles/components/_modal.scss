@@ -1,0 +1,57 @@
+@import './../vendor/carbon-components/src/components/modal/modal';
+
+.#{$prefix}--chart-holder {
+	@include modal;
+
+	.#{$prefix}--modal {
+		&.is-visible {
+			z-index: 99999;
+		}
+
+		.#{$prefix}--modal-container {
+			.#{$prefix}--modal-header {
+				&__label {
+					margin-top: 0;
+					margin-bottom: 0;
+				}
+
+				&__heading {
+					margin-top: 0.5rem;
+					margin-bottom: 1rem;
+				}
+			}
+
+			.#{$prefix}--modal-content {
+				// padding-right: 1rem;
+				padding: 0;
+				margin-bottom: 0;
+
+				table {
+					position: relative;
+					border-collapse: collapse;
+
+					th {
+						position: sticky;
+						top: 0;
+					}
+				}
+
+				@if $ui-background ==
+					map-get($carbon--theme--g90, 'ui-background') or
+					$ui-background ==
+					map-get($carbon--theme--g100, 'ui-background')
+				{
+					color-scheme: dark;
+				}
+			}
+
+			.#{$prefix}--modal-footer {
+				background-color: transparent;
+
+				.#{$prefix}--#{$charts-prefix}-modal-footer-spacer {
+					width: 50%;
+				}
+			}
+		}
+	}
+}

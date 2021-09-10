@@ -22,12 +22,9 @@ export interface LayoutComponentChild {
 	 */
 	size?: number;
 	/**
-	 * how the layout child will grow or shrink in x & y directions
+	 * how the layout child will grow or shrink
 	 */
-	growth?: {
-		x: LayoutGrowth;
-		y: LayoutGrowth;
-	};
+	growth: LayoutGrowth;
 }
 
 /**

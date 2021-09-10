@@ -1,0 +1,43 @@
+.#{$prefix}--#{$charts-prefix}--chart-wrapper
+	.#{$prefix}--#{$charts-prefix}--tree {
+	g.links {
+		fill: none;
+		stroke: $ui-04;
+		stroke-opacity: 0.4;
+		stroke-width: 1.5;
+	}
+
+	g.clickable {
+		cursor: pointer;
+
+		&:hover {
+			text {
+				font-weight: carbon--font-weight('semibold');
+			}
+
+			circle {
+				fill: $text-01;
+				@include default_transition;
+			}
+		}
+	}
+
+	circle {
+		&.parent {
+			fill: $text-02;
+		}
+
+		&.child {
+			fill: $ui-04;
+		}
+	}
+
+	text {
+		fill: $text-01;
+
+		&.text-stroke {
+			stroke: $inverse-01;
+			stroke-width: 2px;
+		}
+	}
+}

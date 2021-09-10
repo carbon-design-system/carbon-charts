@@ -1,4 +1,4 @@
-import { pieData } from './pie';
+import { pieData, pieDataMapsTo } from './pie';
 
 export const donutData = pieData;
 
@@ -25,6 +25,16 @@ export const donutCenteredOptions = {
 			label: 'Browsers',
 		},
 		alignment: 'center',
+	},
+};
+
+// donut - using a different value key
+export const donutDataMapsTo = pieDataMapsTo;
+export const donutMapsToOptions = {
+	title: 'Donut (value maps to count)',
+	resizable: true,
+	pie: {
+		valueMapsTo: 'count',
 	},
 };
 

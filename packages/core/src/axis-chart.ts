@@ -1,5 +1,5 @@
 import { Chart } from './chart';
-import { ChartModelCartesian } from './model-cartesian-charts';
+import { ChartModelCartesian } from './model/cartesian-charts';
 import {
 	LayoutDirection,
 	LayoutGrowth,
@@ -9,10 +9,13 @@ import {
 	AxisChartOptions,
 	AxisPositions,
 	ScaleTypes,
+	RenderTypes,
+	LayoutAlignItems,
 } from './interfaces';
 import {
 	ChartBrush,
 	ChartClip,
+	Modal,
 	LayoutComponent,
 	Legend,
 	Threshold,
@@ -41,7 +44,7 @@ export class AxisChart extends Chart {
 
 	protected getAxisChartComponents(
 		graphFrameComponents: any[],
-		configs?: object
+		configs?: any
 	) {
 		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
@@ -78,19 +81,13 @@ export class AxisChart extends Chart {
 		const titleComponent = {
 			id: 'title',
 			components: [new Title(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		const toolbarComponent = {
 			id: 'toolbar',
 			components: [new Toolbar(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const headerComponent = {
@@ -106,22 +103,17 @@ export class AxisChart extends Chart {
 					],
 					{
 						direction: LayoutDirection.ROW,
+						alignItems: LayoutAlignItems.CENTER,
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const legendComponent = {
 			id: 'legend',
 			components: [new Legend(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.PREFERRED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		// if all zoom bars are locked, no need to add chart brush
@@ -138,10 +130,8 @@ export class AxisChart extends Chart {
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.STRETCH,
-			},
+			growth: LayoutGrowth.STRETCH,
+			renderType: RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
@@ -178,10 +168,7 @@ export class AxisChart extends Chart {
 		const legendSpacerComponent = {
 			id: 'spacer',
 			components: [new Spacer(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
 		};
 
 		const fullFrameComponent = {
@@ -200,19 +187,14 @@ export class AxisChart extends Chart {
 					}
 				),
 			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.STRETCH,
 		};
 
 		const zoomBarComponent = {
 			id: 'zoom-bar',
 			components: [new ZoomBar(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+			growth: LayoutGrowth.PREFERRED,
+			renderType: RenderTypes.SVG,
 		};
 
 		const topLevelLayoutComponents = [];
@@ -229,10 +211,7 @@ export class AxisChart extends Chart {
 						toolbarEnabled ? { size: 15 } : undefined
 					),
 				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+				growth: LayoutGrowth.PREFERRED,
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -244,6 +223,7 @@ export class AxisChart extends Chart {
 
 		return [
 			new AxisChartsTooltip(this.model, this.services),
+			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

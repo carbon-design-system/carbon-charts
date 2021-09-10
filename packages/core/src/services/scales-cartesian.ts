@@ -11,8 +11,7 @@ import { Tools } from '../tools';
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';
-import { extent, sum } from 'd3-array';
-import { map, values } from 'd3-collection';
+import { extent, max, sum } from 'd3-array';
 
 // Misc
 import {
@@ -117,6 +116,29 @@ export class CartesianScales extends Service {
 	getRangeAxisOptions() {
 		const rangeAxisPosition = this.getRangeAxisPosition();
 		return this.getAxisOptions(rangeAxisPosition);
+	}
+
+	getScaleLabel(position: AxisPositions) {
+		const axisOptions = this.getAxisOptions(position);
+		let title = axisOptions.title;
+		if (!title) {
+			if (
+				position === AxisPositions.BOTTOM ||
+				position === AxisPositions.TOP
+			) {
+				return 'x-value';
+			}
+			return 'y-value';
+		}
+		return title;
+	}
+
+	getDomainLabel() {
+		return this.getScaleLabel(this.getDomainAxisPosition());
+	}
+
+	getRangeLabel() {
+		return this.getScaleLabel(this.getRangeAxisPosition());
 	}
 
 	update(animate = true) {
@@ -375,7 +397,8 @@ export class CartesianScales extends Service {
 		} else {
 			return addSpacingToContinuousDomain(
 				domain,
-				Configuration.axis.paddingRatio
+				Configuration.axis.paddingRatio,
+				axisOptions.scaleType
 			);
 		}
 	}
@@ -504,6 +527,20 @@ export class CartesianScales extends Service {
 			return [];
 		}
 
+		if (axisOptions.binned) {
+			const { bins } = this.model.getBinConfigurations();
+
+			return [0, max(bins, (d) => d.length)];
+		} else if (axisOptions.limitDomainToBins) {
+			const { bins } = this.model.getBinConfigurations();
+			const stackKeys = this.model.getStackKeys({ bins });
+
+			return [
+				stackKeys[0].split('-')[0],
+				stackKeys[stackKeys.length - 1].split('-')[1],
+			];
+		}
+
 		const displayData = this.model.getDisplayData();
 		const {
 			extendLinearDomainBy,
@@ -536,7 +573,9 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return map(displayData, (d) => d[mapsTo]).keys();
+			return Tools.removeArrayDuplicates(
+				displayData.map((d) => d[mapsTo])
+			);
 		}
 
 		// Get the extent of the domain
@@ -572,18 +611,33 @@ export class CartesianScales extends Service {
 		) {
 			const { groupMapsTo } = options.data;
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(
-				dataGroupNames
+				{
+					groups: dataGroupNames,
+				}
 			);
+
 			const nonStackedGroupsData = displayData.filter(
 				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
 			);
-			const stackedValues = dataValuesGroupedByKeys.map((dataValues) => {
+
+			let stackedValues = [];
+			dataValuesGroupedByKeys.forEach((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues;
-				return sum(values(numericalValues) as number[]);
+
+				let positiveSum = 0,
+					negativeSum = 0;
+				Object.values(numericalValues).forEach((value: number) => {
+					if (value < 0) {
+						negativeSum += value;
+					} else {
+						positiveSum += value;
+					}
+				});
+				stackedValues.push([negativeSum, positiveSum]);
 			});
 
 			allDataValues = [
-				...stackedValues,
+				...Tools.flatten(stackedValues),
 				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
 			];
 		} else {
@@ -605,7 +659,12 @@ export class CartesianScales extends Service {
 			});
 		}
 
-		if (scaleType !== ScaleTypes.TIME && includeZero) {
+		// Time can never be 0 and log of base 0 is -Infinity
+		if (
+			scaleType !== ScaleTypes.TIME &&
+			scaleType !== ScaleTypes.LOG &&
+			includeZero
+		) {
 			allDataValues.push(0);
 		}
 
@@ -779,7 +838,8 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 
 function addSpacingToContinuousDomain(
 	[lower, upper]: number[],
-	paddingRatio: number
+	paddingRatio: number,
+	scaleType?: ScaleTypes
 ) {
 	const domainLength = upper - lower;
 	const padding = domainLength * paddingRatio;
@@ -787,7 +847,17 @@ function addSpacingToContinuousDomain(
 	// If padding crosses 0, keep 0 as new upper bound
 	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
 	// If padding crosses 0, keep 0 as new lower bound
-	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	// Log of base 0 or a negative number is -Infinity
+	if (scaleType === ScaleTypes.LOG && newLower <= 0) {
+		if (lower <= 0) {
+			throw Error(
+				'Data must have values greater than 0 if log scale type is used.'
+			);
+		}
+		newLower = lower;
+	}
 
 	return [newLower, newUpper];
 }

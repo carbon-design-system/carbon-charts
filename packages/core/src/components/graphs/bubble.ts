@@ -1,7 +1,7 @@
 // Internal Imports
 import { Scatter } from './scatter';
 import { DOMUtils } from '../../services';
-import { Roles, ColorClassNameTypes } from '../../interfaces';
+import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
@@ -11,6 +11,7 @@ import { scaleLinear } from 'd3-scale';
 
 export class Bubble extends Scatter {
 	type = 'bubble';
+	renderType = RenderTypes.SVG;
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const options = this.getOptions();
@@ -21,9 +22,8 @@ export class Bubble extends Scatter {
 		const allRadii = data
 			.map((d) => d[radiusMapsTo])
 			.filter((radius) => radius);
-		const chartSize = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
+		const chartSize = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// We need the ternary operator here in case the user
@@ -63,11 +63,13 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed('dot', true)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
-			.transition(
-				this.services.transitions.getTransition(
-					'bubble-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bubble-update-enter',
+					animate,
+				})
 			)
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
@@ -105,5 +107,16 @@ export class Bubble extends Scatter {
 			})
 			.attr('fill-opacity', options.bubble.fillOpacity)
 			.attr('opacity', 1);
+	}
+
+	getTooltipAdditionalItems(datum) {
+		const bubbleOptions = Tools.getProperty(this.getOptions(), 'bubble');
+
+		return [
+			{
+				label: Tools.getProperty(bubbleOptions, 'radiusLabel'),
+				value: datum[Tools.getProperty(bubbleOptions, 'radiusMapsTo')],
+			},
+		];
 	}
 }

@@ -1,3 +1,33 @@
-.#{$prefix}--#{$charts-prefix}--chart-svg svg.layout-child {
+.#{$prefix}--#{$charts-prefix}--layout {
+	&-row {
+		display: flex;
+		flex-direction: row;
+	}
+
+	&-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&-row-reverse {
+		display: flex;
+		flex-direction: row-reverse;
+	}
+
+	&-column-reverse {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	&-alignitems-center {
+		align-items: center;
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper .layout-child {
+	overflow: visible;
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
 	overflow: visible;
 }

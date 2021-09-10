@@ -14,12 +14,15 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	BulletChartOptions,
+	HistogramChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
+	TreeChartOptions,
 	TreemapChartOptions,
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	// Components
+	AxisOptions,
 	GridOptions,
 	RulerOptions,
 	AxesOptions,
@@ -29,8 +32,8 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ProportionalMeterChartOptions,
 	ToolbarOptions,
-	ToolbarControl,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
@@ -39,7 +42,8 @@ import {
 	TruncationTypes,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	LegendItemTypes,
+	LegendItemType,
+	TreeTypes,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -111,7 +115,7 @@ export const baseTooltip: TooltipOptions = {
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
 // and by TwoDimensionalAxes.
-const axes: AxesOptions = {
+const axes: AxesOptions<AxisOptions> = {
 	top: {
 		visible: true,
 		includeZero: true,
@@ -151,6 +155,13 @@ export const timeScale: TimeScaleOptions = {
 	},
 };
 
+const isFullScreenEnabled =
+	typeof document !== 'undefined' &&
+	(document['fullscreenEnabled'] ||
+		document['webkitFullscreenEnabled'] ||
+		document['mozFullScreenEnabled'] ||
+		document['msFullscreenEnabled']);
+
 /**
  * Base chart options common to any chart
  */
@@ -178,6 +189,31 @@ const chart: BaseChartOptions = {
 			enabled: false,
 		},
 	},
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 3,
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
+		],
+	} as ToolbarOptions,
 };
 
 /**
@@ -196,11 +232,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 			type: ZoomBarTypes.GRAPH_VIEW,
 		},
 	} as ZoomBarsOptions,
-	toolbar: {
-		enabled: false,
-		numberOfIcons: 3,
-		controls: [],
-	} as ToolbarOptions,
 } as AxisChartOptions);
 
 /**
@@ -321,7 +352,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.RADIUS,
+				type: LegendItemType.RADIUS,
 				name: 'Radius',
 			},
 		],
@@ -346,24 +377,36 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 	legend: {
 		additionalItems: [
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Poor area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Satisfactory area',
 			},
 			{
-				type: LegendItemTypes.AREA,
+				type: LegendItemType.AREA,
 				name: 'Great area',
 			},
 			{
-				type: LegendItemTypes.QUARTILE,
+				type: LegendItemType.QUARTILE,
 				name: 'Quartiles',
 			},
 		],
-	}
+	},
 } as BulletChartOptions);
+
+/**
+ * options specific to stacked bar charts
+ */
+const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+	bars: {
+		dividerSize: 1.5,
+	} as StackedBarOptions,
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0,
+	} as TimeScaleOptions),
+} as BarChartOptions);
 
 /*
  * options specific to word cloud charts
@@ -400,6 +443,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 		},
 		alignment: Alignments.LEFT,
 		sortFunction: null,
+		valueMapsTo: 'value',
 	},
 } as PieChartOptions);
 
@@ -449,9 +493,10 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	legend: {
 		enabled: false,
+		clickable: false,
 	},
 	meter: {
-		height: 8,
+		proportional: null,
 		statusBar: {
 			percentageIndicator: {
 				enabled: true,
@@ -459,6 +504,16 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 		},
 	},
 } as MeterChartOptions);
+
+const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge(
+	{},
+	meterChart,
+	{
+		legend: {
+			enabled: true,
+		},
+	} as MeterChartOptions
+);
 
 /**
  * options specific to radar charts
@@ -486,6 +541,19 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
 	comboChartTypes: [],
 } as ComboChartOptions);
+
+/*
+ * options specific to tree charts
+ */
+const treeChart: TreeChartOptions = Tools.merge(
+	{
+		tree: {
+			type: TreeTypes.TREE,
+		},
+	},
+	chart,
+	{} as TreeChartOptions
+);
 
 /*
  * options specific to treemap charts
@@ -519,6 +587,7 @@ export const options = {
 	boxplotChart,
 	bubbleChart,
 	bulletChart,
+	histogramChart,
 	lineChart,
 	areaChart,
 	stackedAreaChart,
@@ -527,9 +596,11 @@ export const options = {
 	pieChart,
 	donutChart,
 	meterChart,
+	proportionalMeterChart,
 	radarChart,
 	gaugeChart,
 	comboChart,
+	treeChart,
 	treemapChart,
 	circlePackChart,
 	wordCloudChart,

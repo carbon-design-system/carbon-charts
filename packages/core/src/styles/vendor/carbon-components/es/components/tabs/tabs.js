@@ -1,4 +1,6 @@
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
       return typeof obj;
@@ -34,22 +36,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
 function _get(target, property, receiver) {
   if (typeof Reflect !== "undefined" && Reflect.get) {
     _get = Reflect.get;
@@ -80,13 +66,6 @@ function _superPropBase(object, property) {
   return object;
 }
 
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -110,6 +89,61 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -127,10 +161,10 @@ var toArray = function toArray(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 };
 
-var Tab =
-/*#__PURE__*/
-function (_ContentSwitcher) {
+var Tab = /*#__PURE__*/function (_ContentSwitcher) {
   _inherits(Tab, _ContentSwitcher);
+
+  var _super = _createSuper(Tab);
   /**
    * Container of tabs.
    * @extends ContentSwitcher
@@ -152,12 +186,31 @@ function (_ContentSwitcher) {
    */
 
 
+  /**
+   * Container of tabs.
+   * @extends ContentSwitcher
+   * @param {HTMLElement} element The element working as a container of tabs.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTriggerText]
+   *   The CSS selector to find the element used in narrow mode showing the selected tab item.
+   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
+   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
+   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
+   * @param {string} [options.classActive] The CSS class for tab's selected state.
+   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+   * @param {string} [options.eventBeforeSelected]
+   *   The name of the custom event fired before a tab is selected.
+   *   Cancellation of this event stops selection of tab.
+   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+   */
   function Tab(element, options) {
     var _this;
 
     _classCallCheck(this, Tab);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tab).call(this, element, options));
+    _this = _super.call(this, element, options);
 
     _this.manage(on(_this.element, 'keydown', function (event) {
       _this._handleKeyDown(event);
@@ -184,6 +237,13 @@ function (_ContentSwitcher) {
    */
 
 
+  /**
+   * Internal method of {@linkcode Tab#setActive .setActive()}, to select a tab item.
+   * @private
+   * @param {object} detail The detail of the event trigging this action.
+   * @param {HTMLElement} detail.item The tab item to be selected.
+   * @param {Function} callback Callback called when change in state completes.
+   */
   _createClass(Tab, [{
     key: "_changeState",
     value: function _changeState(detail, callback) {
@@ -331,7 +391,7 @@ function (_ContentSwitcher) {
 
   }], [{
     key: "options",
-
+    get:
     /**
      * The component options.
      * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
@@ -353,7 +413,7 @@ function (_ContentSwitcher) {
      *   Cancellation of this event stops selection of tab.
      * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
      */
-    get: function get() {
+    function get() {
       var prefix = settings.prefix;
       return Object.assign(Object.create(ContentSwitcher.options), {
         selectorInit: '[data-tabs]',
@@ -376,7 +436,7 @@ function (_ContentSwitcher) {
      * Enum for navigating backward/forward.
      * @readonly
      * @member Tab.NAVIGATE
-     * @type {Object}
+     * @type {object}
      * @property {number} BACKWARD Navigating backward.
      * @property {number} FORWARD Navigating forward.
      */

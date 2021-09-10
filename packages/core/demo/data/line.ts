@@ -1,4 +1,4 @@
-import { timeFormat } from 'd3';
+import { timeFormat } from 'd3-time-format';
 
 export const lineData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
@@ -291,12 +291,12 @@ export const lineTimeSeriesWithThresholdsOptions = {
 };
 
 export const lineTimeSeriesDenseData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 5), value: 12000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 10), value: 14000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: 25000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2, 2), value: 26000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: 10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: -10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 5), value: -12000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 10), value: -14000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: -25000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2, 2), value: -26000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: -10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 5), value: 10000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 10), value: 12000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 45000 },
@@ -375,6 +375,30 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	},
 	legend: {
 		clickable: false,
+	},
+};
+
+export const lineLogAxisData = [
+	{ group: 'Dataset 1', date: new Date(2019, 11, 30), value: 300100 },
+	{ group: 'Dataset 1', date: new Date(2019, 11, 31), value: 235000 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 1), value: 153100 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 2), value: 142300 },
+	{ group: 'Dataset 1', date: new Date(2020, 0, 3), value: 82300 },
+];
+
+export const lineLogAxisOptions = {
+	title: 'Log Axis',
+	width: '400px',
+	axes: {
+		bottom: {
+			scaleType: 'time',
+			mapsTo: 'date',
+		},
+		left: {
+			mapsTo: 'value',
+			scaleType: 'log',
+			includeZero: false,
+		},
 	},
 };
 

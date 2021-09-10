@@ -6,6 +6,7 @@ import * as bulletDemos from './bullet';
 import * as comboDemos from './combo';
 import * as donutDemos from './donut';
 import * as gaugeDemos from './gauge';
+import * as histogramDemos from './histogram';
 import * as lineDemos from './line';
 import * as lollipopDemos from './lollipop';
 import * as meterDemos from './meter';
@@ -14,6 +15,7 @@ import * as radarDemos from './radar';
 import * as scatterDemos from './scatter';
 import * as stepDemos from './step';
 import * as timeSeriesAxisDemos from './time-series-axis';
+import * as treeDemos from './tree';
 import * as treemapDemos from './treemap';
 import * as circlePackDemos from './circle-pack';
 import * as toolbarDemos from './toolbar';
@@ -29,6 +31,7 @@ export * from './bullet';
 export * from './combo';
 export * from './donut';
 export * from './gauge';
+export * from './histogram';
 export * from './line';
 export * from './lollipop';
 export * from './meter';
@@ -89,6 +92,11 @@ const utilityDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: lineDemos.lineLogAxisOptions,
+				data: lineDemos.lineLogAxisData,
 				chartType: chartTypes.LineChart,
 			},
 		],
@@ -564,6 +572,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.StackedBarChart,
 			},
 			{
+				options: barDemos.stackedBarNegativeOptions,
+				data: barDemos.stackedBarNegativeData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,
@@ -741,6 +754,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.DonutChart,
 			},
 			{
+				options: donutDemos.donutMapsToOptions,
+				data: donutDemos.donutDataMapsTo,
+				chartType: chartTypes.DonutChart,
+			},
+			{
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
@@ -770,6 +788,26 @@ const simpleChartDemos = [
 				options: gaugeDemos.gaugeOptionsCircularNoDelta,
 				data: gaugeDemos.gaugeDataNoDelta,
 				chartType: chartTypes.GaugeChart,
+			},
+		],
+	},
+	{
+		title: 'Histogram',
+		demos: [
+			{
+				options: histogramDemos.histogramContinueOptions,
+				data: histogramDemos.histogramContinueData,
+				chartType: chartTypes.HistogramChart,
+			},
+			{
+				options: histogramDemos.histogramContinueWithBinsNumberOptions,
+				data: histogramDemos.histogramContinueWithBinsNumberData,
+				chartType: chartTypes.HistogramChart,
+			},
+			{
+				options: histogramDemos.histogramContinueWithBinsOptions,
+				data: histogramDemos.histogramContinueData,
+				chartType: chartTypes.HistogramChart,
 			},
 		],
 	},
@@ -842,6 +880,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.PieChart,
 			},
 			{
+				options: pieDemos.pieMapToOptions,
+				data: pieDemos.pieDataMapsTo,
+				chartType: chartTypes.PieChart,
+			},
+			{
 				options: pieDemos.pieEmptyStateOptions,
 				data: pieDemos.pieEmptyStateData,
 				chartType: chartTypes.PieChart,
@@ -870,6 +913,21 @@ const simpleChartDemos = [
 			{
 				options: meterDemos.meterOptionsNoStatus,
 				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+			},
+		],
+	},
+	{
+		title: 'Meter (proportional)',
+		demos: [
+			{
+				options: meterDemos.propMeterOptions,
+				data: meterDemos.propMeterData,
+				chartType: chartTypes.MeterChart,
+			},
+			{
+				options: meterDemos.propMeterTruncationOptions,
+				data: meterDemos.propMeterData,
 				chartType: chartTypes.MeterChart,
 			},
 		],
@@ -1000,6 +1058,25 @@ const simpleChartDemos = [
 });
 
 const complexChartDemos = [
+	{
+		title: 'Tree',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.dendogramOptions,
+				chartType: chartTypes.TreeChart,
+				mainDemo: true,
+			},
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.treeOptions,
+				chartType: chartTypes.TreeChart,
+			},
+		],
+	},
 	{
 		title: 'Treemap',
 		demos: [

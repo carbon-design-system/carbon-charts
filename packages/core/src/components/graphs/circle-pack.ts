@@ -2,21 +2,28 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
+import {
+	ColorClassNameTypes,
+	Events,
+	RenderTypes,
+} from '../../interfaces/enums';
+import { Tools } from './../../tools';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';
-import { event, select } from 'd3-selection';
+import { select } from 'd3-selection';
 
-import { ColorClassNameTypes, Events } from '../../interfaces/enums';
-import { Tools } from './../../tools';
+import { get } from 'lodash-es';
 
 export class CirclePack extends Component {
 	type = 'circle-pack';
-	focal;
+	renderType = RenderTypes.SVG;
+
+	focal: any;
 
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
@@ -185,12 +192,12 @@ export class CirclePack extends Component {
 	}
 
 	removeBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		chartSvg.on('click', () => null);
 	}
 
 	setBackgroundListeners() {
-		const chartSvg = select(this.services.domUtils.getMainSVG());
+		const chartSvg = select(this.services.domUtils.getMainContainer());
 		const self = this;
 		const canvasSelection = this.parent.selectAll('circle.node');
 		const zoomSetting = Tools.getProperty(
@@ -248,7 +255,7 @@ export class CirclePack extends Component {
 		const self = this;
 		this.parent
 			.selectAll('circle.node')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -294,9 +301,12 @@ export class CirclePack extends Component {
 							}
 						});
 
+						const options = self.model.getOptions();
 						totalValue = [
 							{
-								label: 'Total',
+								label:
+									get(options, 'tooltip.totalLabel') ||
+									'Total',
 								value: datum.value,
 								bold: true,
 							},
@@ -315,6 +325,7 @@ export class CirclePack extends Component {
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement,
 						items: [
 							{
@@ -338,26 +349,30 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
@@ -369,6 +384,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -379,7 +395,7 @@ export class CirclePack extends Component {
 					hoveredElement,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				const hoveredElement = select(this);
 				const disabled = hoveredElement.classed('non-focal');
 
@@ -395,7 +411,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', false);
 					self.focal = null;
@@ -411,7 +427,7 @@ export class CirclePack extends Component {
 						'circle.node'
 					);
 					const chartSvg = select(
-						self.services.domUtils.getMainSVG()
+						self.services.domUtils.getMainContainer()
 					);
 					chartSvg.classed('zoomed-in', true);
 					self.focal = datum;
@@ -431,6 +447,7 @@ export class CirclePack extends Component {
 				self.services.events.dispatchEvent(
 					Events.CirclePack.CIRCLE_CLICK,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

@@ -1,5 +1,5 @@
 // Internal Imports
-import { BoxplotChartModel } from '../model-boxplot';
+import { BoxplotChartModel } from '../model/boxplot';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { BoxplotChartOptions, ChartConfig } from '../interfaces/index';

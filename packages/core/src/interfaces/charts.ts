@@ -4,6 +4,7 @@ import {
 	ArrowDirections,
 	Alignments,
 	ChartTypes,
+	TreeTypes,
 } from './enums';
 import {
 	LegendOptions,
@@ -12,8 +13,12 @@ import {
 	AxesOptions,
 	ZoomBarsOptions,
 } from './index';
-import { BarOptions, StackedBarOptions } from './components';
-import { TimeScaleOptions } from './axis-scales';
+import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
+import {
+	AxisOptions,
+	BinnedAxisOptions,
+	TimeScaleOptions,
+} from './axis-scales';
 
 /**
  * Base chart options common to any chart
@@ -47,6 +52,10 @@ export interface BaseChartOptions {
 	 * legend configuration
 	 */
 	legend?: LegendOptions;
+	/**
+	 * toolbar configurations
+	 */
+	toolbar?: ToolbarOptions;
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
@@ -136,7 +145,20 @@ export interface BaseChartOptions {
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
-	axes?: AxesOptions;
+	axes?: AxesOptions<AxisOptions>;
+	grid?: GridOptions;
+	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarsOptions;
+}
+
+/**
+ * Options common to binned charts with an axis
+ */
+export interface BinnedAxisChartOptions extends AxisChartOptions {
+	axes?: AxesOptions<BinnedAxisOptions>;
 	grid?: GridOptions;
 	timeScale?: TimeScaleOptions;
 	/**
@@ -232,6 +254,18 @@ export interface BulletChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to histogram charts
+ */
+export interface HistogramChartOptions extends AxisChartOptions {
+	/**
+	 * options related to bins
+	 */
+	bins?: {
+		rangeLabel?: string;
+	};
+}
+
+/**
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
@@ -315,6 +349,11 @@ export interface PieChartOptions extends BaseChartOptions {
 			enabled?: Boolean;
 		};
 		alignment?: Alignments;
+		/**
+		 * identifier for value key in your charting data
+		 * defaults to value
+		 */
+		valueMapsTo?: string;
 		sortFunction?: (a: any, b: any) => number;
 	};
 }
@@ -360,6 +399,10 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		proportional?: {
+			total?: number;
+			unit?: string;
+		};
 		peak?: number;
 		status?: {
 			ranges: Array<{
@@ -375,6 +418,15 @@ export interface MeterChartOptions extends BaseChartOptions {
 				 */
 				enabled?: boolean;
 			};
+		};
+	};
+}
+
+export interface ProportionalMeterChartOptions extends BaseChartOptions {
+	meter?: {
+		proportional?: {
+			total?: number;
+			unit?: string;
 		};
 	};
 }
@@ -407,6 +459,16 @@ export interface ComboChartOptions extends AxisChartOptions {
  * options specific to treemap charts
  */
 export interface TreemapChartOptions extends BaseChartOptions {}
+
+/*
+ * options specific to tree charts
+ */
+export interface TreeChartOptions extends BaseChartOptions {
+	tree?: {
+		type?: TreeTypes;
+		rootTitle?: string;
+	}
+}
 
 /*
  * options specific to circle pack charts

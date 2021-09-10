@@ -4,14 +4,6 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CarbonElements = {}, global.CarbonColors, global.CarbonType, global.CarbonLayout, global.CarbonThemes, global.CarbonMotion));
 }(this, (function (exports, colors, type, layout, themes, motion) { 'use strict';
 
-  Object.keys(themes).forEach(function (k) {
-    if (k !== 'default') Object.defineProperty(exports, k, {
-      enumerable: true,
-      get: function () {
-        return themes[k];
-      }
-    });
-  });
   Object.defineProperty(exports, 'black', {
     enumerable: true,
     get: function () {
@@ -959,6 +951,14 @@
     get: function () {
       return motion.slow02;
     }
+  });
+  Object.keys(themes).forEach(function (k) {
+    if (k !== 'default' && !exports.hasOwnProperty(k)) Object.defineProperty(exports, k, {
+      enumerable: true,
+      get: function () {
+        return themes[k];
+      }
+    });
   });
 
   Object.defineProperty(exports, '__esModule', { value: true });

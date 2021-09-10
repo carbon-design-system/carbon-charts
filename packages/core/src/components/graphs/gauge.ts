@@ -8,6 +8,7 @@ import {
 	ArrowDirections,
 	ColorClassNameTypes,
 	Alignments,
+	RenderTypes,
 } from '../../interfaces';
 import { Tools } from '../../tools';
 
@@ -21,14 +22,11 @@ const ARROW_DOWN_PATH_STRING = '12,6 8,10 4,6';
 
 export class Gauge extends Component {
 	type = 'gauge';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs so that addEventListeners() can access them
 	arc: any;
 	backgroundArc: any;
-
-	init() {
-		const eventsFragment = this.services.events;
-	}
 
 	getValue(): number {
 		const data = this.model.getData();
@@ -89,10 +87,10 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer()
+			.attr('width', '100%')
+			.attr('height', '100%');
 		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
 
 		const value = this.getValue();
 		const valueRatio = this.getValueRatio();
@@ -168,7 +166,7 @@ export class Gauge extends Component {
 		} else if (alignment === Alignments.RIGHT) {
 			gaugeTranslateX = width - radius;
 		}
-		svg.attr('transform', `translate(${gaugeTranslateX}, ${radius})`);
+		svg.attr('x', gaugeTranslateX).attr('y', radius);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -178,7 +176,7 @@ export class Gauge extends Component {
 	 * draws the value number associated with the Gauge component in the center
 	 */
 	drawValueNumber() {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 
 		const arcType = Tools.getProperty(options, 'gauge', 'type');
@@ -288,7 +286,7 @@ export class Gauge extends Component {
 	 */
 	drawDelta() {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const delta = this.getDelta();
 
@@ -364,6 +362,7 @@ export class Gauge extends Component {
 			'deltaArrow',
 			'enabled'
 		);
+
 		const deltaArrow = deltaGroup
 			.selectAll('svg.gauge-delta-arrow')
 			.data(delta !== null && arrowEnabled ? [delta] : []);
@@ -377,22 +376,37 @@ export class Gauge extends Component {
 			.attr('y', -arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35)
 			.attr('width', arrowSize(radius))
 			.attr('height', arrowSize(radius))
-			.attr('viewBox', '0 0 16 16');
+			.attr('viewBox', '0 0 16 16')
+			/*
+			 * using .each() here to ensure that the below function runs
+			 * after svg.gauge-delta-arrow has been mounted onto the DOM
+			 */
+			.each(function () {
+				const deltaArrowSelection = select(this);
 
-		// Needed to correctly size SVG in Firefox
-		DOMUtils.appendOrSelect(deltaArrow, 'rect.gauge-delta-arrow-backdrop')
-			.attr('width', '16')
-			.attr('height', '16')
-			.attr('fill', 'none');
+				// Needed to correctly size SVG in Firefox
+				DOMUtils.appendOrSelect(
+					deltaArrowSelection,
+					'rect.gauge-delta-arrow-backdrop'
+				)
+					.attr('width', '16')
+					.attr('height', '16')
+					.attr('fill', 'none');
 
-		// Draw the arrow with status
-		const status = Tools.getProperty(options, 'gauge', 'status');
-		DOMUtils.appendOrSelect(deltaArrow, 'polygon.gauge-delta-arrow')
-			.attr(
-				'class',
-				status !== null ? `gauge-delta-arrow status--${status}` : ''
-			)
-			.attr('points', self.getArrow(delta));
+				// Draw the arrow with status
+				const status = Tools.getProperty(options, 'gauge', 'status');
+				DOMUtils.appendOrSelect(
+					deltaArrowSelection,
+					'polygon.gauge-delta-arrow'
+				)
+					.attr(
+						'class',
+						status !== null
+							? `gauge-delta-arrow status--${status}`
+							: ''
+					)
+					.attr('points', self.getArrow(delta));
+			});
 
 		deltaArrow.exit().remove();
 		deltaNumber.exit().remove();
@@ -413,34 +427,38 @@ export class Gauge extends Component {
 		const self = this;
 		this.parent
 			.selectAll('path.arc-foreground')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
