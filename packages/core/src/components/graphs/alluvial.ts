@@ -137,7 +137,7 @@ export class Alluvial extends Component {
 				});
 			})
 			.attr('stroke-width', (d) => Math.max(1, d.width))
-			.attr('stroke-opacity', Configuration.alluvial.opacity.default)
+			.style('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
 				'aria-label',
 				(d) =>
@@ -273,7 +273,7 @@ export class Alluvial extends Component {
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedLineHighlight(this, 'mouseover');
-				hoveredElement.classed('hovered', true);
+				hoveredElement.classed('link-hovered', true);
 
 				const strokeColor = getComputedStyle(this).getPropertyValue(
 					'stroke'
@@ -333,7 +333,7 @@ export class Alluvial extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				debouncedLineHighlight(this, 'mouseout');
-				hoveredElement.classed('hovered', false);
+				hoveredElement.classed('link-hovered', false);
 
 				// Dispatch mouse out event
 				self.services.events.dispatchEvent(
@@ -360,27 +360,38 @@ export class Alluvial extends Component {
 		const debouncedLineHighlight = Tools.debounce(
 			(links = [], event = 'mouseover') => {
 				if (event === 'mouseout' || links.length === 0) {
-					// set all links to default opacity & corret order
-					self.normalizeLinks(true);
+					// set all links to default opacity & corret link order
+					self.parent
+						.selectAll('path.link')
+						.classed('link-hovered', false)
+						.data(this.graph.links, (d) => d.index)
+						.order()
+						.style(
+							'stroke-opacity',
+							Configuration.alluvial.opacity.default
+						);
+
 					return;
 				}
 
 				// Highlight all nodes
 				const allLinks = self.parent
-					.selectAll(links.join(','))
-					.classed('hovered', true)
-					.raise()
+					.selectAll('path.link')
 					.transition(
 						self.services.transitions.getTransition(
-							'alluvial-link-mouse-highlight'
+							'alluvial-links-mouse-highlight'
 						)
 					);
 
-				self.unhighlightLines();
-				allLinks.style(
-					'stroke-opacity',
-					Configuration.alluvial.opacity.selected
-				);
+				allLinks.style('stroke-opacity', function (d) {
+					// Raise the links & increase stroke-opacity to selected
+					if (links.some((element) => element === d.index)) {
+						select(this).classed('link-hovered', true).raise();
+						return Configuration.alluvial.opacity.selected;
+					}
+
+					return Configuration.alluvial.opacity.unfocus;
+				});
 			},
 			66
 		);
@@ -390,25 +401,25 @@ export class Alluvial extends Component {
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
-				// Highlight all lines that pass through node
-				this.paths = [];
+				// Highlight all links that pass through node
+				const paths = [];
 
 				// Outgoing links
 				self.traverse(
 					{ link: 'sourceLinks', node: 'target' },
 					datum,
-					this.paths
+					paths
 				);
 
 				//Incoming links
 				self.traverse(
 					{ link: 'targetLinks', node: 'source' },
 					datum,
-					this.paths
+					paths
 				);
 
 				// Highlight all linked lines in the graph data structure
-				if (this.paths.length) {
+				if (paths.length) {
 					// Get transformation value of node
 					const nodeMatrix = Tools.getTranformOffsets(
 						hoveredElement.attr('transform')
@@ -421,7 +432,7 @@ export class Alluvial extends Component {
 					);
 
 					hoveredElement
-						.classed('hovered', true)
+						.classed('node-hovered', true)
 						.selectAll('rect.node')
 						.attr('width', 8);
 
@@ -445,7 +456,7 @@ export class Alluvial extends Component {
 						.select(`text#node-text-${datum.index}`)
 						.style('font-weight', 'bold');
 
-					debouncedLineHighlight(this.paths, 'mouseover');
+					debouncedLineHighlight(paths, 'mouseover');
 
 					// Dispatch mouse over event
 					self.services.events.dispatchEvent(
@@ -491,7 +502,7 @@ export class Alluvial extends Component {
 				);
 
 				hoveredElement
-					.classed('hovered', false)
+					.classed('node-hovered', false)
 					.attr(
 						'transform',
 						`translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`
@@ -537,26 +548,6 @@ export class Alluvial extends Component {
 			});
 	}
 
-	// Sets the opacity of all lines to default (0.8)
-	private normalizeLinks(nodes = false) {
-		const links = this.parent
-			.selectAll('path.link')
-			.classed('hovered', false)
-			.style('stroke-opacity', Configuration.alluvial.opacity.default);
-
-		// Correct link orders if normalizing from node hover
-		if (nodes) {
-			links.data(this.graph.links, (d) => d.index).order();
-		}
-	}
-
-	// Sets the opacity of all lines to unfocused (0.3)
-	private unhighlightLines() {
-		this.parent
-			.selectAll('path.link')
-			.style('stroke-opacity', Configuration.alluvial.opacity.unfocus);
-	}
-
 	// Traverse graph and get all connected links to node
 	private traverse(
 		direction:
@@ -566,7 +557,7 @@ export class Alluvial extends Component {
 		visited = []
 	) {
 		const links = node[direction.link].map((element) => {
-			visited.push(`path#line-${element.index}.link`);
+			visited.push(element.index);
 			return element[direction.node];
 		});
 
