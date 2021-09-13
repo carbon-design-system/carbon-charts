@@ -5,6 +5,7 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	flex-wrap: wrap;
 
 	&[data-name='legend-items'] {
+	    width: 100%;
 		margin: -5px;
 	}
 
