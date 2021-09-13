@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.0...v0.48.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** display donut-figure in the center when donut-title is empty ([#1147](https://github.com/carbon-design-system/carbon-charts/issues/1147)) ([1d3dac5](https://github.com/carbon-design-system/carbon-charts/commit/1d3dac55d868306541ad6acd8205cce5a505dfe0)), closes [#1146](https://github.com/carbon-design-system/carbon-charts/issues/1146)
+
+
+
+
+
 # [0.48.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.47.0...v0.48.0) (2021-09-10)
 
 
