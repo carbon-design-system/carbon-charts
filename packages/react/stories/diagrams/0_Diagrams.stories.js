@@ -218,25 +218,21 @@ const ProgrammaticStatic = () => {
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
-				<body xmlns="http://www.w3.org/1999/xhtml">
-					<ShapeNode
-						onClick={() => {}}
-						title={'Title'}
-						size={ShapeNodeSize}
-						description={'Description'}
-						renderIcon={node.icon}
-					/>
-				</body>
+				<ShapeNode
+					onClick={() => {}}
+					title={'Title'}
+					size={ShapeNodeSize}
+					description={'Description'}
+					renderIcon={node.icon}
+				/>
 			) : (
-				<body xmlns="http://www.w3.org/1999/xhtml">
-					<CardNode onClick={() => {}}>
-						<CardNodeColumn>{node.icon}</CardNodeColumn>
-						<CardNodeColumn>
-							<CardNodeTitle>Title</CardNodeTitle>
-							<CardNodeSubtitle>Description</CardNodeSubtitle>
-						</CardNodeColumn>
-					</CardNode>
-				</body>
+				<CardNode onClick={() => {}}>
+					<CardNodeColumn>{node.icon}</CardNodeColumn>
+					<CardNodeColumn>
+						<CardNodeTitle>Title</CardNodeTitle>
+						<CardNodeSubtitle>Description</CardNodeSubtitle>
+					</CardNodeColumn>
+				</CardNode>
 			)}
 		</foreignObject>
 	));

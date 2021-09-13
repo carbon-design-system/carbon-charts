@@ -100,7 +100,7 @@ const SimpleStatic = `
 	<div class="demo-desktop-only">
 		<div class="cp-message">This is a desktop-only example</div>
 
-		<svg height="124" width="600" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<svg height="124" width="600" style="margin-top: 1em;" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
 			</svg:defs>
@@ -189,7 +189,7 @@ const ProgrammaticStatic = `
 	<div class="demo-desktop-only">
 		<div class="cp-message">This is a desktop-only example</div>
 
-		<svg height="320" width="800" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<svg height="320" width="800" style="margin-top: 1.5em;" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 			<svg:g ibm-graph-edge *ngFor="let edge of edgeMapped" [source]="edge.source" [target]="edge.target" [path]="edge.path && edge.path(edge.source, edge.target)" [variant]="edge.variant"></svg:g>
 			<svg:foreignObject *ngFor="let node of nodeData" style="overflow: visible" [attr.height]="node.nodeHeight" [attr.width]="node.nodeWidth" attr.transform="translate({{node.x}},{{node.y}})">
 				<xhtml:div *ngIf="node.circle">
