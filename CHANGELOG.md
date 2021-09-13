@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.1...v0.48.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** render an empty zoom bar holder when there is less than or equal to 1 data element ([#1134](https://github.com/carbon-design-system/carbon-charts/issues/1134)) ([9864cfd](https://github.com/carbon-design-system/carbon-charts/commit/9864cfd103a45ed8c8ca1605cb98a4cd10434fb2)), closes [#996](https://github.com/carbon-design-system/carbon-charts/issues/996)
+
+
+
+
+
 ## [0.48.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.0...v0.48.1) (2021-09-13)
 
 
