@@ -5,6 +5,7 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	flex-wrap: wrap;
 
 	&[data-name='legend-items'] {
+	    width: 100%;
 		margin: -5px;
 	}
 
@@ -49,6 +50,10 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 
 	&.center-aligned {
 		justify-content: center;
+	}
+
+	&.right-aligned {
+		justify-content: flex-end;
 	}
 
 	&.has-deactivated-items {
