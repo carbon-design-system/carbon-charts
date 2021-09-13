@@ -32,6 +32,6 @@ stories.add('As link', () => (
 
 stories.add('Inherited dimensions', () => (
 	<div style={{ height: 64, width: 64 }}>
-		<ShapeNode title={'Title'} renderIcon={<User20 />} size={'100%'} />
+		<ShapeNode title={'Title'} renderIcon={<User20 />} size={'100%'} position="static" />
 	</div>
 ));

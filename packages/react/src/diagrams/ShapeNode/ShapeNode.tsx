@@ -18,6 +18,8 @@ const ShapeNode = ({
 	onMouseOut = null,
 	onMouseLeave = null,
 	onMouseMove = null,
+	position = 'fixed',
+	bodyPosition = 'absolute',
 	renderIcon,
 	size = 48,
 	stacked,
@@ -58,10 +60,12 @@ const ShapeNode = ({
 			onMouseOut={onMouseOut}
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
-			style={{ height: size, width: size }}
+			style={{ height: size, width: size, position }}
 			tabIndex={0}>
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
-			<div className={`${namespace}__body`}>
+			<div
+				className={`${namespace}__body`}
+				style={{ position: bodyPosition }}>
 				{titleElement}
 				{subtitleElement}
 			</div>

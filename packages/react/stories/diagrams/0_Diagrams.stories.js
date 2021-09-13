@@ -100,6 +100,7 @@ stories.add('Start here', () => {
 				style={{
 					width: '100%',
 					height: '500px',
+					marginTop: '2em',
 					border: 0,
 					borderRadius: '4px',
 					overflow: 'hidden',
@@ -119,7 +120,7 @@ const SimpleStatic = () => (
 	<div className="demo-desktop-only">
 		<DesktopOnlyMessage />
 
-		<svg height="124" width="600">
+		<svg height="124" width="600" style={{ marginTop: '1em' }}>
 			<defs>
 				<ArrowRightMarker id={'marker'} />
 			</defs>
@@ -133,7 +134,7 @@ const SimpleStatic = () => (
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
-				transform={`translate(${0},${16})`}
+				transform={`translate(0, 16)`}
 				height={nodeHeight}
 				width={nodeWidth}>
 				<CardNode onClick={() => {}}>
@@ -149,7 +150,7 @@ const SimpleStatic = () => (
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
-				transform={`translate(${400},${16})`}>
+				transform={`translate(400, 16)`}>
 				<ShapeNode
 					title={'Title'}
 					size={ShapeNodeSize}
@@ -213,25 +214,29 @@ const ProgrammaticStatic = () => {
 		<foreignObject
 			style={{ overflow: 'visible' }}
 			key={`node_${i}`}
-			transform={`translate(${node.x},${node.y})`}
+			transform={`translate(${node.x}, ${node.y})`}
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
-				<ShapeNode
-					onClick={() => {}}
-					title={'Title'}
-					size={ShapeNodeSize}
-					description={'Description'}
-					renderIcon={node.icon}
-				/>
+				<body xmlns="http://www.w3.org/1999/xhtml">
+					<ShapeNode
+						onClick={() => {}}
+						title={'Title'}
+						size={ShapeNodeSize}
+						description={'Description'}
+						renderIcon={node.icon}
+					/>
+				</body>
 			) : (
-				<CardNode onClick={() => {}}>
-					<CardNodeColumn>{node.icon}</CardNodeColumn>
-					<CardNodeColumn>
-						<CardNodeTitle>Title</CardNodeTitle>
-						<CardNodeSubtitle>Description</CardNodeSubtitle>
-					</CardNodeColumn>
-				</CardNode>
+				<body xmlns="http://www.w3.org/1999/xhtml">
+					<CardNode onClick={() => {}}>
+						<CardNodeColumn>{node.icon}</CardNodeColumn>
+						<CardNodeColumn>
+							<CardNodeTitle>Title</CardNodeTitle>
+							<CardNodeSubtitle>Description</CardNodeSubtitle>
+						</CardNodeColumn>
+					</CardNode>
+				</body>
 			)}
 		</foreignObject>
 	));
@@ -249,7 +254,7 @@ const ProgrammaticStatic = () => {
 		<div className="demo-desktop-only">
 			<DesktopOnlyMessage />
 
-			<svg height="300" width="800">
+			<svg height="300" width="800" style={{ marginTop: '1.5em' }}>
 				{edges}
 				{nodes}
 			</svg>
