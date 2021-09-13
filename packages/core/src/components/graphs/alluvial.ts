@@ -55,9 +55,10 @@ export class Alluvial extends Component {
 			]);
 
 		// Construct a graph with the provided user data
+		// Data must be deep cloned to ensure user passed data isn't deleted when themes change
 		this.graph = sankey({
-			nodes: options.alluvial.nodes,
-			links: data,
+			nodes: options.alluvial.nodes.map((d) => Object.assign({}, d)),
+			links: data.map((d) => Object.assign({}, d)),
 		});
 
 		// Filter out unused nodes so they are not rendered
