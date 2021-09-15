@@ -20,3 +20,4 @@ export * from './tree';
 export * from './treemap';
 export * from './circle-pack';
 export * from './wordcloud';
+export * from './alluvial';

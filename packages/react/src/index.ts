@@ -20,6 +20,7 @@ import TreeChart from './tree-chart';
 import TreemapChart from './treemap-chart';
 import CirclePackChart from './circle-pack-chart';
 import WordCloudChart from './wordcloud-chart';
+import AlluvialChart from './alluvial-chart';
 
 export {
 	AreaChart,
@@ -44,4 +45,5 @@ export {
 	TreemapChart,
 	CirclePackChart,
 	WordCloudChart,
+	AlluvialChart,
 };

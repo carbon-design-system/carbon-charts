@@ -1,0 +1,30 @@
+.#{$prefix}--#{$charts-prefix}--alluvial {
+	@if $carbon--theme ==
+		$carbon--theme--g90 or
+		$carbon--theme ==
+		$carbon--theme--g100
+	{
+		rect.node,
+		rect.node-text-bg {
+			fill: white;
+		}
+
+		text.node-text {
+			fill: black;
+		}
+	}
+
+	@if $carbon--theme ==
+		$carbon--theme--g10 or
+		$carbon--theme ==
+		$carbon--theme--white
+	{
+		text.node-text {
+			fill: white;
+		}
+
+		polygon.arrow-down {
+			fill: black;
+		}
+	}
+}

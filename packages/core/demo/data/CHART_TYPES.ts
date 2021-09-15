@@ -1,4 +1,9 @@
 export default {
+	AlluvialChart: {
+		vanilla: 'AlluvialChart',
+		angular: 'ibm-alluvial-chart',
+		vue: 'ccv-alluvial-chart',
+	},
 	AreaChart: {
 		vanilla: 'AreaChart',
 		angular: 'ibm-area-chart',
