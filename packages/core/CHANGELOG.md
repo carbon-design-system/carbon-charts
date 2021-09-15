@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** legend alignment incorrect initial rendering ([#1151](https://github.com/carbon-design-system/carbon-charts/issues/1151)) ([0b01426](https://github.com/carbon-design-system/carbon-charts/commit/0b0142677fd67041ee8576aa19cfa53f24e39a55))
+
+
+
+
+
+## [0.48.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.2...v0.48.3) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** diagram rendering issues in safari ([#1150](https://github.com/carbon-design-system/carbon-charts/issues/1150)) ([fc123dd](https://github.com/carbon-design-system/carbon-charts/commit/fc123dda01795fbd4703362dd2688c5ac1940728))
+
+
+
+
+
+## [0.48.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.1...v0.48.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** render an empty zoom bar holder when there is less than or equal to 1 data element ([#1134](https://github.com/carbon-design-system/carbon-charts/issues/1134)) ([9864cfd](https://github.com/carbon-design-system/carbon-charts/commit/9864cfd103a45ed8c8ca1605cb98a4cd10434fb2)), closes [#996](https://github.com/carbon-design-system/carbon-charts/issues/996)
+
+
+
+
+
+## [0.48.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.0...v0.48.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** display donut-figure in the center when donut-title is empty ([#1147](https://github.com/carbon-design-system/carbon-charts/issues/1147)) ([1d3dac5](https://github.com/carbon-design-system/carbon-charts/commit/1d3dac55d868306541ad6acd8205cce5a505dfe0)), closes [#1146](https://github.com/carbon-design-system/carbon-charts/issues/1146)
+
+
+
+
+
+# [0.48.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.47.0...v0.48.0) (2021-09-10)
+
+
+### Features
+
+* **highlight:** Add highlights ([#1048](https://github.com/carbon-design-system/carbon-charts/issues/1048)) ([baa4645](https://github.com/carbon-design-system/carbon-charts/commit/baa4645c16027ab21f2d2155c79fb73cdf0d4772))
+
+
+
+
+
 # [0.47.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.5...v0.47.0) (2021-09-08)
 
 

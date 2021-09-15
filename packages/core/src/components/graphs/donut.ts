@@ -33,10 +33,24 @@ export class Donut extends Pie {
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
+		const donutTitle = Tools.getProperty(
+			options,
+			'donut',
+			'center',
+			'label'
+		);
 
 		// Add the number shown in the center of the donut
 		DOMUtils.appendOrSelect(svg, 'text.donut-figure')
 			.attr('text-anchor', 'middle')
+			.style('dominant-baseline', () => {
+				// Center figure if title is empty
+				if (donutTitle === null || donutTitle === '') {
+					return 'central';
+				}
+
+				return 'initial';
+			})
 			.style('font-size', () =>
 				options.donut.center.numberFontSize(radius)
 			)
@@ -52,14 +66,17 @@ export class Donut extends Pie {
 				return self.centerNumberTween(select(this));
 			});
 
-		// Add the label below the number in the center of the donut
-		DOMUtils.appendOrSelect(svg, 'text.donut-title')
-			.attr('text-anchor', 'middle')
-			.style('font-size', () =>
-				options.donut.center.titleFontSize(radius)
-			)
-			.attr('y', options.donut.center.titleYPosition(radius))
-			.text(Tools.getProperty(options, 'donut', 'center', 'label'));
+		// Title will be rendered only if it isn't empty
+		if (donutTitle !== null && donutTitle !== '') {
+			// Add the label below the number in the center of the donut
+			DOMUtils.appendOrSelect(svg, 'text.donut-title')
+				.attr('text-anchor', 'middle')
+				.style('font-size', () =>
+					options.donut.center.titleFontSize(radius)
+				)
+				.attr('y', options.donut.center.titleYPosition(radius))
+				.text(donutTitle);
+		}
 	}
 
 	getInnerRadius() {

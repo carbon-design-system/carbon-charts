@@ -32,19 +32,19 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-sm {
-		stroke-dasharray: carbon--mini-units(0.25) carbon--mini-units(0.5);
+		stroke-dasharray: 2 4;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-md {
-		stroke-dasharray: carbon--mini-units(0.5) carbon--mini-units(0.5);
+		stroke-dasharray: 4 4;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-lg {
-		stroke-dasharray: carbon--mini-units(1) carbon--mini-units(0.5);
+		stroke-dasharray: 8 4;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-xl {
-		stroke-dasharray: carbon--mini-units(2) carbon--mini-units(0.5);
+		stroke-dasharray: 16 4;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--tunnel {

@@ -270,6 +270,22 @@ const utilityDemoGroups = [
 		],
 	},
 	{
+		title: 'Highlights',
+		demos: [
+			{
+				options: areaDemos.boundedAreaTimeSeriesWithHighlightsOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+			},
+			{
+				options:
+					areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+			},
+		],
+	},
+	{
 		title: 'Toolbar',
 		demos: [
 			{
