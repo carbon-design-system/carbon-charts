@@ -142,8 +142,11 @@ export class Alluvial extends Component {
 			.attr(
 				'aria-label',
 				(d) =>
-					`${d.source.name} → ${d.target.name} (${d.value}
-						${options.alluvial.units ? ' ' + options.alluvial.units : ''})`
+					`${d.source.name} → ${d.target.name} (${d.value}${
+						options.alluvial.units
+							? ' ' + options.alluvial.units
+							: ''
+					})`
 			);
 
 		// Creating the groups
