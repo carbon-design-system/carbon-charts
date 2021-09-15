@@ -86,6 +86,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line start',
 				})
 			)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
@@ -118,6 +119,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line end',
 				})
 			)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
@@ -155,7 +157,9 @@ export class Boxplot extends Component {
 					originalClassName: 'box',
 				})
 			)
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('fill-opacity', Configuration.boxplot.box.opacity.default)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
@@ -225,6 +229,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker start',
 				})
 			)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
@@ -262,6 +267,7 @@ export class Boxplot extends Component {
 					originalClassName: 'median',
 				})
 			)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', 2)
 			.transition()
 			.call((t) =>
@@ -297,6 +303,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker end',
 				})
 			)
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
@@ -351,6 +358,8 @@ export class Boxplot extends Component {
 					originalClassName: 'outlier',
 				})
 			)
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
 			.transition()
