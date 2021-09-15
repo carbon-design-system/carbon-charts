@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** legend alignment incorrect initial rendering ([#1151](https://github.com/carbon-design-system/carbon-charts/issues/1151)) ([0b01426](https://github.com/carbon-design-system/carbon-charts/commit/0b0142677fd67041ee8576aa19cfa53f24e39a55))
+
+
+
+
+
+## [0.48.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.2...v0.48.3) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** diagram rendering issues in safari ([#1150](https://github.com/carbon-design-system/carbon-charts/issues/1150)) ([fc123dd](https://github.com/carbon-design-system/carbon-charts/commit/fc123dda01795fbd4703362dd2688c5ac1940728))
+
+
+
+
+
 ## [0.48.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.1...v0.48.2) (2021-09-13)
 
 
