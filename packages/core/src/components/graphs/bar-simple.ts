@@ -148,10 +148,11 @@ export class SimpleBar extends Bar {
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.getOptions().data;
-
 		if (this.componentContainer.classed('updating') === false) {
+			const { groupMapsTo } = this.getOptions().data;
+
+			const { hoveredElement } = event.detail;
+
 			this.parent
 				.selectAll('path.bar')
 				.transition()

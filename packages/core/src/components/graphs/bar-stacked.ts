@@ -170,11 +170,11 @@ export class StackedBar extends Bar {
 
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-
-		const { groupMapsTo } = this.model.getOptions().data;
-
 		if (this.componentContainer.classed('updating') === false) {
+			const { groupMapsTo } = this.model.getOptions().data;
+
+			const { hoveredElement } = event.detail;
+
 			this.parent
 				.selectAll('path.bar')
 				.transition()
