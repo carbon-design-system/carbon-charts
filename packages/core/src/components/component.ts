@@ -5,7 +5,7 @@ import { RenderTypes } from '../interfaces';
 import { Tools } from '../tools';
 
 // D3 Imports
-import { select, Selection } from 'd3-selection';
+import { select } from 'd3-selection';
 
 // import the settings for the css prefix
 import settings from 'carbon-components/es/globals/js/settings';
