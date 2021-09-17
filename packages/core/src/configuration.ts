@@ -21,6 +21,7 @@ import {
 	TreemapChartOptions,
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
+	AlluvialChartOptions,
 	// Components
 	AxisOptions,
 	GridOptions,
@@ -578,6 +579,17 @@ const circlePackChart: CirclePackChartOptions = Tools.merge(
 	} as CirclePackChartOptions
 );
 
+const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
+	alluvial: {
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'source',
+		}),
+		nodePadding: 24,
+		monochrome: false,
+		nodes: [],
+	},
+} as AlluvialChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -604,6 +616,7 @@ export const options = {
 	treemapChart,
 	circlePackChart,
 	wordCloudChart,
+	alluvialChart,
 };
 
 export * from './configuration-non-customizable';

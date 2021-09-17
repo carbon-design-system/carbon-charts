@@ -22,6 +22,7 @@ import * as toolbarDemos from './toolbar';
 import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
 import * as highScaleDemos from './high-scale';
+import * as alluvialDemos from './alluvial';
 
 export * from './area';
 export * from './bar';
@@ -46,6 +47,7 @@ export * from './toolbar';
 export * from './wordcloud';
 export * from './zoom-bar';
 export * from './high-scale';
+export * from './alluvial';
 
 import {
 	createChartSandbox,
@@ -264,6 +266,22 @@ const utilityDemoGroups = [
 				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
 				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
+			},
+		],
+	},
+	{
+		title: 'Highlights',
+		demos: [
+			{
+				options: areaDemos.boundedAreaTimeSeriesWithHighlightsOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+			},
+			{
+				options:
+					areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
+				data: areaDemos.boundedAreaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
 			},
 		],
 	},
@@ -1044,31 +1062,23 @@ const simpleChartDemos = [
 
 const complexChartDemos = [
 	{
-		title: 'Tree',
-		configs: {
-			excludeColorPaletteControl: true,
-		},
+		title: 'Alluvial',
 		demos: [
 			{
-				data: treeDemos.treeData,
-				options: treeDemos.dendogramOptions,
-				chartType: chartTypes.TreeChart,
+				options: alluvialDemos.alluvialSimpleOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
 				mainDemo: true,
 			},
 			{
-				data: treeDemos.treeData,
-				options: treeDemos.treeOptions,
-				chartType: chartTypes.TreeChart,
+				options: alluvialDemos.alluvialMultipleCategoryOptions,
+				data: alluvialDemos.alluvialMultipleCategoryData,
+				chartType: chartTypes.AlluvialChart,
 			},
-		],
-	},
-	{
-		title: 'Treemap',
-		demos: [
 			{
-				data: treemapDemos.treemapData,
-				options: treemapDemos.treemapOptions,
-				chartType: chartTypes.TreemapChart,
+				options: alluvialDemos.alluvialMonochromeOptions,
+				data: alluvialDemos.alluvialMonochromeData,
+				chartType: chartTypes.AlluvialChart,
 			},
 		],
 	},
@@ -1100,6 +1110,35 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
+			},
+		],
+	},
+	{
+		title: 'Tree',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.dendogramOptions,
+				chartType: chartTypes.TreeChart,
+				mainDemo: true,
+			},
+			{
+				data: treeDemos.treeData,
+				options: treeDemos.treeOptions,
+				chartType: chartTypes.TreeChart,
+			},
+		],
+	},
+	{
+		title: 'Treemap',
+		demos: [
+			{
+				data: treemapDemos.treemapData,
+				options: treemapDemos.treemapOptions,
+				chartType: chartTypes.TreemapChart,
 			},
 		],
 	},

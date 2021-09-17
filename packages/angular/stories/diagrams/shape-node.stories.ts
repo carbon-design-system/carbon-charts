@@ -85,8 +85,8 @@ storiesOf('Diagrams|Nodes/Shape', module)
 	}))
 	.add('Inherited dimensions', () => ({
 		template: getTemplate(`
-		<div style="height: 64px; width: 64px">
-			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [size]="'100%'"></ibm-diagram-shape-node>
+		<div style="height: 64px; width: 64px; position: relative;">
+			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [size]="'100%'" position="static"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
 				<svg ibmIconScreen size="16"></svg>
 			</ng-template>

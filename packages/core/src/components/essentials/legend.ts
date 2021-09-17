@@ -41,6 +41,7 @@ export class Legend extends Component {
 
 		const svg = this.getComponentContainer()
 			.classed('center-aligned', alignment === Alignments.CENTER)
+			.classed('right-aligned', alignment === Alignments.RIGHT)
 			.classed(legendOrientation, true)
 			.classed('has-deactivated-items', hasDeactivatedItems)
 			.attr('role', Roles.GROUP)
