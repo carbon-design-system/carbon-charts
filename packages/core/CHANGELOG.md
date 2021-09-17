@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.0...v0.49.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* **core:** groupMapsTo in stacked bar charts ([#1156](https://github.com/carbon-design-system/carbon-charts/issues/1156)) ([4d6b61b](https://github.com/carbon-design-system/carbon-charts/commit/4d6b61ba86c154787f9e8acdf3ed8851dc8c6b17))
+
+
+
+
+
 # [0.49.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.4...v0.49.0) (2021-09-15)
 
 
