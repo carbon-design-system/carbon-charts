@@ -245,10 +245,12 @@ export class Alluvial extends Component {
 			(link, event = 'mouseover') => {
 				const allLinks = self.parent
 					.selectAll('path.link')
-					.transition(
-						self.services.transitions.getTransition(
-							'alluvial-link-mouse-highlight'
-						)
+					.transition()
+					.call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'alluvial-link-mouse-highlight',
+						})
 					);
 
 				if (event === 'mouseout') {
@@ -381,10 +383,12 @@ export class Alluvial extends Component {
 				// Highlight all nodes
 				const allLinks = self.parent
 					.selectAll('path.link')
-					.transition(
-						self.services.transitions.getTransition(
-							'alluvial-links-mouse-highlight'
-						)
+					.transition()
+					.call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'alluvial-links-mouse-highlight',
+						})
 					);
 
 				allLinks.style('stroke-opacity', function (d) {

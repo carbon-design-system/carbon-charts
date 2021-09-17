@@ -59,7 +59,10 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getComponentContainer();
+
+		// Grab container SVG
+		this.componentContainer = this.getComponentContainer();
+		this.componentContainer.classed('updating', true);
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -90,7 +93,10 @@ export class Pie extends Component {
 		const pieLayoutData = pieLayout(displayData);
 
 		// Update data on all slices
-		const slicesGroup = DOMUtils.appendOrSelect(svg, 'g.slices')
+		const slicesGroup = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.slices'
+		)
 			.attr('role', Roles.GROUP)
 			.attr('data-name', 'slices');
 
@@ -148,14 +154,23 @@ export class Pie extends Component {
 			// Tween
 			.attrTween('d', function (a) {
 				return arcTween.bind(this)(a, self.arc);
+			})
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
 			});
+
+		// Add event listeners to elements drawn
+		this.addEventListeners(allPaths);
 
 		// Draw the slice labels
 		const renderLabels = options.pie.labels.enabled;
 		const labelData = renderLabels
 			? pieLayoutData.filter((x) => x.data[valueMapsTo] > 0)
 			: [];
-		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
+		const labelsGroup = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.labels'
+		)
 			.attr('role', Roles.GROUP)
 			.attr('data-name', 'labels');
 
@@ -281,10 +296,9 @@ export class Pie extends Component {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
-		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY);
-
-		// Add event listeners
-		this.addEventListeners();
+		this.componentContainer
+			.attr('x', pieTranslateX + 7)
+			.attr('y', pieTranslateY);
 	}
 
 	renderCallouts(calloutData: any[]) {
@@ -391,42 +405,57 @@ export class Pie extends Component {
 
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.getOptions().data;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
+			const { groupMapsTo } = this.getOptions().data;
 
-		this.parent
-			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
-			)
-			.attr('opacity', (d) =>
-				d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+			this.parent
+				.selectAll('path.slice')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend_hover_pie_slice',
+					})
+				)
+				.attr('opacity', (d) =>
+					d.data[groupMapsTo] !== hoveredElement.datum()['name']
+						? 0.3
+						: 1
+				);
+		}
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
-			)
-			.attr('opacity', 1);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('path.slice')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend_mouseout_pie_slice',
+					})
+				)
+				.attr('opacity', 1);
+		}
 	};
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
-		this.parent
-			.selectAll('path.slice')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
 					.classed('hovered', true)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseover',
+						})
 					)
 					.attr('d', self.hoverArc);
 
@@ -478,10 +507,12 @@ export class Pie extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseout',
+						})
 					)
 					.attr('d', self.arc);
 

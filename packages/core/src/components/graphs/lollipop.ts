@@ -69,7 +69,6 @@ export class Lollipop extends Scatter {
 		// Remove lines that need to be removed
 		const enteringLines = lines.enter().append('line').attr('opacity', 0);
 
-		console.log('esga', animate);
 		const allLines = enteringLines
 			.merge(lines)
 			.classed('line', true)

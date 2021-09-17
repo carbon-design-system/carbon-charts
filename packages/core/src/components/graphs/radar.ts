@@ -51,10 +51,16 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer();
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+		// Grab container SVG
+		this.componentContainer = this.getComponentContainer();
+		this.componentContainer.classed('updating', true);
+
+		const { width, height } = DOMUtils.getSVGElementSize(
+			this.componentContainer,
+			{
+				useAttrs: true,
+			}
+		);
 
 		const data = this.model.getData();
 		const groupedData = this.model.getGroupedData();
@@ -141,10 +147,10 @@ export class Radar extends Component {
 		/////////////////////////////
 
 		// y axes
-		const yAxes = DOMUtils.appendOrSelect(svg, 'g.y-axes').attr(
-			'role',
-			Roles.GROUP
-		);
+		const yAxes = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.y-axes'
+		).attr('role', Roles.GROUP);
 		const yAxisUpdate = yAxes
 			.selectAll('path')
 			.data(yTicks, (tick) => tick);
@@ -161,11 +167,13 @@ export class Radar extends Component {
 					.attr('fill', 'none')
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_y_axes_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_y_axes_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 							.attr('d', (tick) =>
@@ -175,11 +183,13 @@ export class Radar extends Component {
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_axes_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_axes_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr('transform', `translate(${c.x}, ${c.y})`)
@@ -190,11 +200,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_axes_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_axes_exit',
+								animate,
+							})
 						)
 						.attr('d', (tick) =>
 							radialLineGenerator(shapeData(tick))
@@ -205,10 +217,10 @@ export class Radar extends Component {
 		);
 
 		// x axes
-		const xAxes = DOMUtils.appendOrSelect(svg, 'g.x-axes').attr(
-			'role',
-			Roles.GROUP
-		);
+		const xAxes = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.x-axes'
+		).attr('role', Roles.GROUP);
 		const xAxisUpdate = xAxes
 			.selectAll('line')
 			.data(this.uniqueKeys, (key) => key);
@@ -238,11 +250,13 @@ export class Radar extends Component {
 					)
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_x_axes_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_x_axes_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 							.attr(
@@ -285,11 +299,13 @@ export class Radar extends Component {
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_axes_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_axes_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr(
@@ -332,11 +348,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_axes_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_axes_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -344,10 +362,10 @@ export class Radar extends Component {
 		);
 
 		// x labels
-		const xLabels = DOMUtils.appendOrSelect(svg, 'g.x-labels').attr(
-			'role',
-			Roles.GROUP
-		);
+		const xLabels = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.x-labels'
+		).attr('role', Roles.GROUP);
 		const xLabelUpdate = xLabels.selectAll('text').data(this.uniqueKeys);
 		xLabelUpdate.join(
 			(enter) =>
@@ -384,22 +402,26 @@ export class Radar extends Component {
 					)
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_x_labels_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_x_labels_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 					),
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_labels_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_labels_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr(
@@ -424,11 +446,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_labels_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_labels_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -436,10 +460,10 @@ export class Radar extends Component {
 		);
 
 		// blobs
-		const blobs = DOMUtils.appendOrSelect(svg, 'g.blobs').attr(
-			'role',
-			Roles.GROUP
-		);
+		const blobs = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.blobs'
+		).attr('role', Roles.GROUP);
 		const blobUpdate = blobs
 			.selectAll('path')
 			.data(this.groupedDataNormalized, (group) => group.name);
@@ -474,12 +498,21 @@ export class Radar extends Component {
 					.style('stroke', (group) => colorScale(group.name))
 
 					.call((selection) => {
-						const selectionUpdate = selection.transition(
-							this.services.transitions.getTransition(
-								'radar_blobs_enter',
-								animate
+						const selectionUpdate = selection
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_blobs_enter',
+									animate,
+								})
 							)
-						);
+							.on('end', () => {
+								this.componentContainer.classed(
+									'updating',
+									false
+								);
+							});
 
 						if (animate) {
 							selectionUpdate
@@ -509,25 +542,36 @@ export class Radar extends Component {
 					.style('stroke', (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_blobs_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_blobs_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr('transform', `translate(${c.x}, ${c.y})`)
 						.attr('d', (group) => radialLineGenerator(group.data))
+						.on('end', () => {
+							this.componentContainer.classed('updating', false);
+						})
 				);
 			},
 			(exit) =>
 				exit.call((selection) => {
-					const selectionUpdate = selection.transition(
-						this.services.transitions.getTransition(
-							'radar_blobs_exit',
-							animate
+					const selectionUpdate = selection
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_blobs_exit',
+								animate,
+							})
 						)
-					);
+						.on('end', () => {
+							this.componentContainer.classed('updating', false);
+						});
 
 					if (animate) {
 						selectionUpdate
@@ -546,10 +590,10 @@ export class Radar extends Component {
 		);
 
 		// data dots
-		const dots = DOMUtils.appendOrSelect(svg, 'g.dots').attr(
-			'role',
-			Roles.GROUP
-		);
+		const dots = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.dots'
+		).attr('role', Roles.GROUP);
 
 		const dotsUpdate = dots
 			.selectAll('circle')
@@ -597,10 +641,10 @@ export class Radar extends Component {
 			.style('fill', (d) => colorScale(d[groupMapsTo]));
 
 		// rectangles
-		const xAxesRect = DOMUtils.appendOrSelect(svg, 'g.x-axes-rect').attr(
-			'role',
-			Roles.GROUP
-		);
+		const xAxesRect = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.x-axes-rect'
+		).attr('role', Roles.GROUP);
 		const xAxisRectUpdate = xAxesRect
 			.selectAll('rect')
 			.data(this.uniqueKeys);
@@ -623,10 +667,10 @@ export class Radar extends Component {
 			);
 
 		// y labels (show only the min and the max labels)
-		const yLabels = DOMUtils.appendOrSelect(svg, 'g.y-labels').attr(
-			'role',
-			Roles.GROUP
-		);
+		const yLabels = DOMUtils.appendOrSelect(
+			this.componentContainer,
+			'g.y-labels'
+		).attr('role', Roles.GROUP);
 		const yLabelUpdate = yLabels.selectAll('text').data(extent(yTicks));
 		yLabelUpdate.join(
 			(enter) =>
@@ -656,22 +700,26 @@ export class Radar extends Component {
 					.style('dominant-baseline', 'middle')
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_y_labels_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_y_labels_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 					),
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_labels_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_labels_update',
+								animate,
+							})
 						)
 						.text((tick) => tick)
 						.attr('opacity', 1)
@@ -697,11 +745,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_labels_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_labels_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -712,10 +762,10 @@ export class Radar extends Component {
 
 		const alignmentXOffset = this.getAlignmentXOffset(
 			alignment,
-			svg,
+			this.componentContainer,
 			this.getParent()
 		);
-		svg.attr('x', alignmentXOffset);
+		this.componentContainer.attr('x', alignmentXOffset);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -789,34 +839,46 @@ export class Radar extends Component {
 	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		this.parent
-			.selectAll('g.blobs path')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-blob')
-			)
-			.style('fill-opacity', (group) => {
-				if (group.name !== hoveredElement.datum().name) {
-					return Configuration.radar.opacity.unselected;
-				}
-				return Configuration.radar.opacity.selected;
-			})
-			.style('stroke-opacity', (group) => {
-				if (group.name !== hoveredElement.datum().name) {
-					return Configuration.radar.opacity.unselected;
-				}
-				return 1;
-			});
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
+			this.parent
+				.selectAll('g.blobs path')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-blob',
+					})
+				)
+				.style('fill-opacity', (group) => {
+					if (group.name !== hoveredElement.datum().name) {
+						return Configuration.radar.opacity.unselected;
+					}
+					return Configuration.radar.opacity.selected;
+				})
+				.style('stroke-opacity', (group) => {
+					if (group.name !== hoveredElement.datum().name) {
+						return Configuration.radar.opacity.unselected;
+					}
+					return 1;
+				});
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('g.blobs path')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-blob')
-			)
-			.style('fill-opacity', Configuration.radar.opacity.selected)
-			.style('stroke-opacity', 1);
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('g.blobs path')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-blob',
+					})
+				)
+				.style('fill-opacity', Configuration.radar.opacity.selected)
+				.style('stroke-opacity', 1);
+		}
 	};
 
 	destroy() {

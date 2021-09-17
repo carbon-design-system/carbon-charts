@@ -76,7 +76,9 @@ export class Treemap extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer();
+		// Grab container SVG
+		this.componentContainer = this.getComponentContainer();
+		this.componentContainer.classed('updating', true);
 
 		const allData = this.model.getData();
 		const displayData = this.model.getDisplayData();
@@ -84,9 +86,12 @@ export class Treemap extends Component {
 
 		const windowLocation = Tools.getProperty(window, 'location');
 
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+		const { width, height } = DOMUtils.getSVGElementSize(
+			this.componentContainer,
+			{
+				useAttrs: true,
+			}
+		);
 
 		const hierarchy = d3Hierarchy({
 			name: options.title || 'Treemap',
@@ -104,9 +109,8 @@ export class Treemap extends Component {
 			.paddingInner(1)
 			.paddingOuter(0)
 			.round(true)(hierarchy);
-		const { transitions } = this.services;
 
-		const leafGroups = svg
+		const leafGroups = this.componentContainer
 			.selectAll("g[data-name='leaf']")
 			.data(root.leaves(), (leaf) => leaf.data.name);
 
@@ -143,8 +147,11 @@ export class Treemap extends Component {
 			.append('rect')
 			.classed('leaf', true);
 
-		enteringRects
-			.merge(rects)
+		const allRects = enteringRects.merge(rects);
+		// Add event listeners to elements drawn
+		this.addEventListeners(allRects);
+
+		allRects
 			.attr('width', 0)
 			.attr('height', 0)
 			.attr('id', function () {
@@ -173,6 +180,9 @@ export class Treemap extends Component {
 			.style('fill', (d) => {
 				while (d.depth > 1) d = d.parent;
 				return this.model.getFillColor(d.data.name);
+			})
+			.on('end', () => {
+				this.componentContainer.classed('updating', false);
 			});
 
 		// Update all clip paths
@@ -261,56 +271,13 @@ export class Treemap extends Component {
 					update.text((d) => d.text).style('fill', textFillColor),
 				(exit) => exit.remove()
 			);
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
 	}
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const self = this;
-		this.parent
-			.selectAll('rect.leaf')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				let fillColor = getComputedStyle(this, null).getPropertyValue(
-					'fill'
-				);
-
-				let parent = datum;
-				while (parent.depth > 1) parent = parent.parent;
-
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							'graph_element_mouseover_fill_update'
-						)
-					)
-					.style('fill', (d: any) => {
-						const customColor = self.model.getFillColor(
-							d.parent.data.name
-						);
-						if (customColor) {
-							fillColor = customColor;
-						}
-						return color(fillColor).darker(0.7).toString();
-					});
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					event,
-					hoveredElement,
-					items: [
-						{
-							color: fillColor,
-							label: parent.data.name,
-							bold: true,
-						},
-						{
-							label: datum.data.name,
-							value: datum.data.value,
-						},
-					],
-				});
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
@@ -321,6 +288,51 @@ export class Treemap extends Component {
 						datum,
 					}
 				);
+
+				if (self.componentContainer.classed('updating') === false) {
+					let fillColor = getComputedStyle(
+						this,
+						null
+					).getPropertyValue('fill');
+
+					let parent = datum;
+					while (parent.depth > 1) parent = parent.parent;
+
+					hoveredElement
+						.transition()
+						.call((t) =>
+							self.services.transitions.setupTransition({
+								transition: t,
+								name: 'graph_element_mouseover_fill_update',
+							})
+						)
+						.style('fill', (d: any) => {
+							const customColor = self.model.getFillColor(
+								d.parent.data.name
+							);
+							if (customColor) {
+								fillColor = customColor;
+							}
+							return color(fillColor).darker(0.7).toString();
+						});
+
+					// Show tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						hoveredElement,
+						items: [
+							{
+								color: fillColor,
+								label: parent.data.name,
+								bold: true,
+							},
+							{
+								label: datum.data.name,
+								value: datum.data.value,
+							},
+						],
+					});
+				}
 			})
 			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
@@ -335,9 +347,11 @@ export class Treemap extends Component {
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+				if (self.componentContainer.classed('updating') === false) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
+				}
 			})
 			.on('click', function (event, datum) {
 				// Dispatch mouse event
@@ -351,19 +365,6 @@ export class Treemap extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
-				let parent = datum;
-				while (parent.depth > 1) parent = parent.parent;
-
-				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							'graph_element_mouseout_fill_update'
-						)
-					)
-					.style('fill', (d: any) =>
-						self.model.getFillColor(d.parent.data.name)
-					);
-
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Treemap.LEAF_MOUSEOUT,
@@ -374,34 +375,63 @@ export class Treemap extends Component {
 					}
 				);
 
-				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
+				if (self.componentContainer.classed('updating') === false) {
+					let parent = datum;
+					while (parent.depth > 1) parent = parent.parent;
+
+					hoveredElement
+						.transition()
+						.call((t) =>
+							self.services.transitions.setupTransition({
+								transition: t,
+								name: 'graph_element_mouseout_fill_update',
+							})
+						)
+						.style('fill', (d: any) =>
+							self.model.getFillColor(d.parent.data.name)
+						);
+
+					// Hide tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement,
+					});
+				}
 			});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
 
-		this.parent
-			.selectAll("g[data-name='leaf']")
-			.transition(
-				this.services.transitions.getTransition('legend-hover-treemap')
-			)
-			.attr('opacity', (d) =>
-				d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3
-			);
+			this.parent
+				.selectAll("g[data-name='leaf']")
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-treemap',
+					})
+				)
+				.attr('opacity', (d) =>
+					d.parent.data.name === hoveredElement.datum()['name']
+						? 1
+						: 0.3
+				);
+		}
 	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll("g[data-name='leaf']")
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-treemap'
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll("g[data-name='leaf']")
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-treemap',
+					})
 				)
-			)
-			.attr('opacity', 1);
+				.attr('opacity', 1);
+		}
 	};
 }

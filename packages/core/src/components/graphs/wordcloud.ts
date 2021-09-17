@@ -32,9 +32,12 @@ export class WordCloud extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getComponentContainer()
+
+		// Grab container SVG
+		this.componentContainer = this.getComponentContainer()
 			.attr('width', '100%')
 			.attr('height', '100%');
+		this.componentContainer.classed('updating', true);
 
 		const displayData = this.model.getDisplayData();
 		const fontSizeScale = this.getFontSizeScale(displayData);
@@ -43,9 +46,12 @@ export class WordCloud extends Component {
 		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud;
 		const { groupMapsTo } = options.data;
 
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+		const { width, height } = DOMUtils.getSVGElementSize(
+			this.componentContainer,
+			{
+				useAttrs: true,
+			}
+		);
 
 		if (width === 0 || height === 0) {
 			return;
@@ -71,7 +77,10 @@ export class WordCloud extends Component {
 		layout.start();
 
 		function draw(words) {
-			const textGroup = DOMUtils.appendOrSelect(svg, 'g.words');
+			const textGroup = DOMUtils.appendOrSelect(
+				self.componentContainer,
+				'g.words'
+			);
 			textGroup.attr(
 				'transform',
 				`translate(${layout.size()[0] / 2}, ${layout.size()[1] / 2})`
@@ -89,8 +98,11 @@ export class WordCloud extends Component {
 				.append('text')
 				.attr('opacity', 0);
 
-			enteringText
-				.merge(allText)
+			const mergedText = enteringText.merge(allText);
+			// Add event listeners to elements drawn
+			self.addEventListeners(mergedText);
+
+			mergedText
 				.style('font-size', (d) => `${d.size}px`)
 				.text(function (d) {
 					return d.text;
@@ -106,18 +118,20 @@ export class WordCloud extends Component {
 					return self.model.getFillColor(d[groupMapsTo], d.text, d);
 				})
 				.attr('text-anchor', 'middle')
-				.transition(
-					self.services.transitions.getTransition(
-						'wordcloud-text-update-enter',
-						animate
-					)
+				.transition()
+				.call((t) =>
+					self.services.transitions.setupTransition({
+						transition: t,
+						name: 'wordcloud-text-update-enter',
+						animate,
+					})
 				)
 				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
-				.attr('opacity', 1);
+				.attr('opacity', 1)
+				.on('end', () => {
+					self.componentContainer.classed('updating', false);
+				});
 		}
-
-		// Add event listeners
-		this.addEventListeners();
 	}
 
 	getFontSizeScale(data: any) {
@@ -147,46 +161,53 @@ export class WordCloud extends Component {
 
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const { groupMapsTo } = this.getOptions().data;
+		if (this.componentContainer.classed('updating') === false) {
+			const { hoveredElement } = event.detail;
+			const { groupMapsTo } = this.getOptions().data;
 
-		this.parent
-			.selectAll('text.word')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-wordcloud'
+			this.parent
+				.selectAll('text.word')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-hover-wordcloud',
+					})
 				)
-			)
-			.attr('opacity', (d) =>
-				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
-			);
+				.attr('opacity', (d) =>
+					d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+				);
+		}
 	};
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('text.word')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-wordcloud'
+		if (this.componentContainer.classed('updating') === false) {
+			this.parent
+				.selectAll('text.word')
+				.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-wordcloud',
+					})
 				)
-			)
-			.attr('opacity', 1);
+				.attr('opacity', 1);
+		}
 	};
 
-	addEventListeners() {
+	addEventListeners(selection) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		// Highlights 1 word or unhighlights all
 		const debouncedHighlight = Tools.debounce((word) => {
-			const allWords = self.parent
-				.selectAll('text.word')
-				.transition(
-					self.services.transitions.getTransition(
-						'wordcloud-word-mouse-highlight'
-					)
-				);
+			const allWords = selection.transition().call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'wordcloud-word-mouse-highlight',
+				})
+			);
 
 			if (word === null) {
 				allWords.attr('opacity', 1);
@@ -202,8 +223,7 @@ export class WordCloud extends Component {
 		}, 6);
 
 		const self = this;
-		this.parent
-			.selectAll('text.word')
+		selection
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = this;
 				debouncedHighlight(hoveredElement);

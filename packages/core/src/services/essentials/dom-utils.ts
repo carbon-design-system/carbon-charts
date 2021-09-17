@@ -429,7 +429,7 @@ export class DOMUtils extends Service {
 		if (!holder) {
 			return;
 		}
-console.log("geweg", holder)
+
 		select(holder)
 			.on('mouseover', () => {
 				// Dispatch event
