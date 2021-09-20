@@ -1,9 +1,19 @@
 import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model';
-import { AxisPositions, Events, ScaleTypes } from '../../interfaces';
-import { select, mouse } from 'd3-selection';
+import { ChartModel } from '../../model/model';
+import {
+	AxisPositions,
+	Events,
+	RenderTypes,
+	ScaleTypes,
+} from '../../interfaces';
+
+// D3 Imports
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { select, pointer } from 'd3-selection';
 
 // Carbon position service
 import Position, { PLACEMENTS } from '@carbon/utils-position';
@@ -17,6 +27,7 @@ import {
 
 export class Threshold extends Component {
 	type = 'threshold';
+	renderType = RenderTypes.SVG;
 
 	label: any;
 
@@ -48,7 +59,7 @@ export class Threshold extends Component {
 		});
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
@@ -130,11 +141,13 @@ export class Threshold extends Component {
 			) {
 				group
 					.selectAll('line.threshold-line')
-					.transition(
-						self.services.transitions.getTransition(
-							'threshold-line-update',
-							animate
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'threshold-line-update',
+							animate,
+						})
 					)
 					.attr('y1', yScaleStart)
 					.attr('y2', yScaleEnd)
@@ -162,11 +175,13 @@ export class Threshold extends Component {
 			} else {
 				group
 					.selectAll('line.threshold-line')
-					.transition(
-						self.services.transitions.getTransition(
-							'threshold-line-update',
-							animate
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'threshold-line-update',
+							animate,
+						})
 					)
 					.attr('x1', xScaleStart)
 					.attr('x2', xScaleEnd)
@@ -196,7 +211,7 @@ export class Threshold extends Component {
 
 		// Add event listener for showing the threshold tooltip
 		this.services.events.addEventListener(Events.Threshold.SHOW, (e) => {
-			this.setThresholdLabelPosition(e.detail.datum);
+			this.setThresholdLabelPosition(e.detail);
 
 			this.label.classed('hidden', false);
 		});
@@ -257,9 +272,9 @@ export class Threshold extends Component {
 		).classed('hidden', true);
 	}
 
-	setThresholdLabelPosition(datum) {
+	setThresholdLabelPosition({ event, datum }) {
 		const holder = this.services.domUtils.getHolder();
-		const mouseRelativePos = mouse(holder);
+		const mouseRelativePos = pointer(event, holder);
 
 		// Format the threshold value using valueFormatter if defined in user-provided options
 		const formattedValue = datum.valueFormatter
@@ -307,26 +322,28 @@ export class Threshold extends Component {
 		const self = this;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Add events to the threshold hoverable area
 		svg.selectAll('rect.threshold-hoverable-area')
-			.on('mouseover mousemove', function () {
+			.on('mouseover mousemove', function (event) {
 				select(this.parentNode)
 					.select('line.threshold-line')
 					.classed('active', true);
 
 				self.services.events.dispatchEvent(Events.Threshold.SHOW, {
+					event,
 					hoveredElement: select(this),
 					datum: select(this).datum(),
 				});
 			})
-			.on('mouseout', function () {
+			.on('mouseout', function (event) {
 				select(this.parentNode)
 					.select('line.threshold-line')
 					.classed('active', false);
 
 				self.services.events.dispatchEvent(Events.Threshold.HIDE, {
+					event,
 					hoveredElement: select(this),
 					datum: select(this).datum(),
 				});

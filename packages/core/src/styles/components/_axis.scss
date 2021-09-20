@@ -2,27 +2,31 @@
 @import './../vendor/@carbon/type/scss/font-face/sans';
 @import './../vendor/@carbon/themes/scss/tokens';
 
-.#{$prefix}--#{$charts-prefix}--axes g.axis {
-	g.ticks.invisible {
-		visibility: hidden;
-	}
+.#{$prefix}--#{$charts-prefix}--axes {
+	overflow: visible;
 
-	g.tick text {
-		fill: $text-02;
-		font-family: carbon--font-family('sans-condensed');
-	}
+	g.axis {
+		g.ticks.invisible {
+			visibility: hidden;
+		}
 
-	g.tick line {
-		display: none;
-	}
+		g.tick text {
+			fill: $text-02;
+			font-family: carbon--font-family('sans-condensed');
+		}
 
-	path.domain {
-		stroke: $ui-04;
-	}
+		g.tick line {
+			display: none;
+		}
 
-	.axis-title {
-		font-family: carbon--font-family('sans');
-		font-weight: carbon--font-weight('semibold');
-		fill: $text-01;
+		path.domain {
+			stroke: $ui-04;
+		}
+
+		.axis-title {
+			font-family: carbon--font-family('sans');
+			font-weight: carbon--font-weight('semibold');
+			fill: $text-01;
+		}
 	}
 }

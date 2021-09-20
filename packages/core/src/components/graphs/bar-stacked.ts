@@ -6,6 +6,7 @@ import {
 	Events,
 	CartesianOrientations,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 
 // D3 Imports
@@ -13,6 +14,7 @@ import { select } from 'd3-selection';
 
 export class StackedBar extends Bar {
 	type = 'stacked-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -32,7 +34,7 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions();
@@ -41,7 +43,10 @@ export class StackedBar extends Bar {
 		// Create the data and keys that'll be used by the stack layout
 		const stackData = this.model.getStackedData({
 			groups: this.configs.groups,
+			divergent: true,
 		});
+
+		const activeDataGroupNames = this.model.getActiveDataGroupNames();
 
 		// Update data on all bar groups
 		const barGroups = svg
@@ -78,11 +83,13 @@ export class StackedBar extends Bar {
 			.append('path')
 			.merge(bars)
 			.classed('bar', true)
-			.transition(
-				this.services.transitions.getTransition(
-					'bar-update-enter',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
 			)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -106,25 +113,38 @@ export class StackedBar extends Bar {
 					this.services.cartesianScales.getDomainValue(key, i) -
 					barWidth / 2;
 				const x1 = x0 + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
+				let y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {
 					return;
 				}
+
 				// Add the divider gap
 				if (
 					Math.abs(y1 - y0) > 0 &&
 					Math.abs(y1 - y0) > options.bars.dividerSize
 				) {
-					if (
-						this.services.cartesianScales.getOrientation() ===
-						CartesianOrientations.VERTICAL
-					) {
-						y1 += 1;
-					} else {
-						y1 -= 1;
+					const barIsNegative = d[0] < 0 && d[1] <= 0;
+					if (barIsNegative && activeDataGroupNames.length > 1) {
+						if (
+							this.services.cartesianScales.getOrientation() ===
+							CartesianOrientations.VERTICAL
+						) {
+							y1 += d[1] === 0 ? 2 : 1;
+						} else {
+							y1 -= d[1] === 0 ? 1 : 1;
+						}
+					} else if (!barIsNegative) {
+						if (
+							this.services.cartesianScales.getOrientation() ===
+							CartesianOrientations.VERTICAL
+						) {
+							y1 += 1;
+						} else {
+							y1 -= 1;
+						}
 					}
 				}
 
@@ -176,7 +196,7 @@ export class StackedBar extends Bar {
 		const self = this;
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
 
@@ -188,6 +208,7 @@ export class StackedBar extends Bar {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
@@ -204,10 +225,10 @@ export class StackedBar extends Bar {
 						d
 					);
 					return (
-						d[rangeIdentifier] === datum.data[datum.group] &&
+						d[rangeIdentifier] === datum.data[datum[groupMapsTo]] &&
 						d[domainIdentifier].toString() ===
 							datum.data.sharedStackKey &&
-						d[groupMapsTo] === datum.group
+						d[groupMapsTo] === datum[groupMapsTo]
 					);
 				});
 
@@ -217,41 +238,47 @@ export class StackedBar extends Bar {
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
-						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group,
+						[rangeIdentifier]: datum.data[datum[groupMapsTo]],
+						[groupMapsTo]: datum[groupMapsTo]
 					};
 				}
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					data: [matchingDataPoint],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});

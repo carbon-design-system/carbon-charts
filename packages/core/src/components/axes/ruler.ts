@@ -1,13 +1,16 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { CartesianOrientations, Events } from '../../interfaces';
+import { CartesianOrientations, Events, RenderTypes } from '../../interfaces';
 import { Tools } from '../../tools';
 
 // D3 Imports
-import { Selection, mouse } from 'd3-selection';
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { Selection, pointer } from 'd3-selection';
 
-type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
+export type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
 const THRESHOLD = 5;
 
@@ -18,6 +21,8 @@ function pointIsWithinThreshold(dx: number, x: number) {
 
 export class Ruler extends Component {
 	type = 'ruler';
+	renderType = RenderTypes.SVG;
+
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
 	pointsWithinLine: {
@@ -64,9 +69,16 @@ export class Ruler extends Component {
 		return tooltipData;
 	}
 
-	showRuler([x, y]: [number, number]) {
+	showRuler(event, [x, y]: [number, number]) {
 		const svg = this.parent;
+
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
+
+		const displayData = this.model.getDisplayData();
+
+		const rangeScale = this.services.cartesianScales.getRangeScale();
+		const [yScaleEnd, yScaleStart] = rangeScale.range();
+
 		const mouseCoordinate =
 			orientation === CartesianOrientations.HORIZONTAL ? y : x;
 		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler').attr(
@@ -77,9 +89,6 @@ export class Ruler extends Component {
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			'[role=graphics-symbol]'
 		);
-		const displayData = this.model.getDisplayData();
-		const rangeScale = this.services.cartesianScales.getRangeScale();
-		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
 		const pointsWithinLine = displayData
 			.map((d) => ({
@@ -224,12 +233,17 @@ export class Ruler extends Component {
 	 */
 	addBackdropEventListeners() {
 		this.isEventListenerAdded = true;
+
 		const self = this;
+
+		const holder = this.services.domUtils.getHolder();
+
 		const displayData = this.model.getDisplayData();
 
-		let mouseMoveCallback = function () {
-			const pos = mouse(self.parent.node());
-			self.showRuler(pos);
+		let mouseMoveCallback = function (event) {
+			const pos = pointer(event, self.parent.node());
+
+			self.showRuler(event, pos);
 		};
 
 		// Debounce mouseMoveCallback if there are more than 100 datapoints
@@ -237,12 +251,12 @@ export class Ruler extends Component {
 			const debounceThreshold = (displayData.length % 50) * 12.5;
 
 			mouseMoveCallback = Tools.debounceWithD3MousePosition(
-				function () {
+				function (event) {
 					const { mousePosition } = this;
-					self.showRuler(mousePosition);
+					self.showRuler(event, mousePosition);
 				},
 				debounceThreshold,
-				this.parent.node()
+				holder
 			);
 		}
 
@@ -254,19 +268,7 @@ export class Ruler extends Component {
 	drawBackdrop() {
 		const svg = this.parent;
 
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
-
-		const [xScaleStart, xScaleEnd] = mainXScale.range();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
-
 		// Get height from the grid
 		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop');
-		const backdropRect = DOMUtils.appendOrSelect(
-			this.backdrop,
-			this.isXGridEnabled || this.isYGridEnabled
-				? 'rect.chart-grid-backdrop.stroked'
-				: 'rect.chart-grid-backdrop'
-		);
 	}
 }

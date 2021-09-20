@@ -8,6 +8,7 @@ import {
 	Events,
 	Alignments,
 	ColorClassNameTypes,
+	RenderTypes,
 } from '../../interfaces';
 import * as Configuration from '../../configuration';
 
@@ -28,6 +29,7 @@ function arcTween(a, arcFunc) {
 
 export class Pie extends Component {
 	type = 'pie';
+	renderType = RenderTypes.SVG;
 
 	// We need to store our arcs
 	// So that addEventListeners()
@@ -57,14 +59,16 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this;
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
+
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+		const { valueMapsTo } = options.pie;
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
 		const displayData = this.model
 			.getDisplayData()
-			.filter((data) => data.value > 0);
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+			.filter((data) => data[valueMapsTo] > 0);
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -78,7 +82,7 @@ export class Pie extends Component {
 
 		// Setup the pie layout
 		const pieLayout = pie()
-			.value((d: any) => d.value)
+			.value((d: any) => d[valueMapsTo])
 			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
 			.padAngle(Configuration.pie.padAngle);
 
@@ -105,7 +109,7 @@ export class Pie extends Component {
 			.attr('opacity', 0);
 
 		// Update styles & position on existing and entering slices
-		enteringPaths
+		const allPaths = enteringPaths
 			.merge(paths)
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -115,12 +119,16 @@ export class Pie extends Component {
 				})
 			)
 			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
-			.attr('d', this.arc)
-			.transition(
-				this.services.transitions.getTransition(
-					'pie-slice-enter-update',
-					animate
-				)
+			.attr('d', this.arc);
+
+		allPaths
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'pie_slice_enter_update',
+					animate,
+				})
 			)
 			.attr('opacity', 1)
 			// a11y
@@ -129,10 +137,11 @@ export class Pie extends Component {
 			.attr(
 				'aria-label',
 				(d) =>
-					`${d.value}, ${
+					`${d[valueMapsTo]}, ${
 						Tools.convertValueToPercentage(
-							d.data.value,
-							displayData
+							d.data[valueMapsTo],
+							displayData,
+							valueMapsTo
 						) + '%'
 					}`
 			)
@@ -144,7 +153,7 @@ export class Pie extends Component {
 		// Draw the slice labels
 		const renderLabels = options.pie.labels.enabled;
 		const labelData = renderLabels
-			? pieLayoutData.filter((x) => x.value > 0)
+			? pieLayoutData.filter((x) => x.data[valueMapsTo] > 0)
 			: [];
 		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
 			.attr('role', Roles.GROUP)
@@ -174,8 +183,11 @@ export class Pie extends Component {
 				}
 
 				return (
-					Tools.convertValueToPercentage(d.data.value, displayData) +
-					'%'
+					Tools.convertValueToPercentage(
+						d.data[valueMapsTo],
+						displayData,
+						valueMapsTo
+					) + '%'
 				);
 			})
 			// Calculate dimensions in order to transform
@@ -269,7 +281,7 @@ export class Pie extends Component {
 			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
-		svg.attr('transform', `translate(${pieTranslateX}, ${pieTranslateY})`);
+		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -277,7 +289,7 @@ export class Pie extends Component {
 
 	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			'g.callouts'
 		)
 			.attr('role', Roles.GROUP)
@@ -406,7 +418,7 @@ export class Pie extends Component {
 		const self = this;
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -420,42 +432,49 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					event,
 					element: select(this),
 					datum,
 				});
 
 				const { groupMapsTo } = self.getOptions().data;
+				const { valueMapsTo } = self.getOptions().pie;
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
 							label: datum.data[groupMapsTo],
-							value: datum.data.value,
+							value: datum.data[valueMapsTo],
 						},
 					],
 				});
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -468,6 +487,7 @@ export class Pie extends Component {
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					event,
 					element: hoveredElement,
 					datum,
 				});
@@ -484,6 +504,7 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		});
+
 		const options = this.getOptions();
 		const radius: number = Math.min(width, height) / 2;
 		const renderLabels = options.pie.labels.enabled;

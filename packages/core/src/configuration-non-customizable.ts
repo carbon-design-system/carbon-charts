@@ -1,4 +1,4 @@
-import { ZoomBarTypes, LegendItemTypes } from './interfaces';
+import { ZoomBarTypes, LegendItemType } from './interfaces';
 import { easeCubicInOut } from 'd3-ease';
 
 export const area = {
@@ -73,6 +73,10 @@ export const boxplot = {
 	},
 };
 
+export const histogram = {
+	defaultBins: 10,
+};
+
 export const legend = {
 	items: {
 		status: {
@@ -104,7 +108,7 @@ export const legend = {
 	},
 	area: {
 		width: 24,
-		height: 13,
+		height: 14,
 		fill: '#6f6f6f',
 		stroke: null,
 	},
@@ -147,6 +151,14 @@ export const meter = {
 		indicatorSize: 16,
 		paddingLeft: 15,
 	},
+	total: {
+		paddingLeft: 36,
+	},
+	height: {
+		default: 8,
+		proportional: 16,
+	},
+	dividerWidth: 2,
 };
 
 export const pie = {
@@ -179,6 +191,17 @@ export const radar = {
 	minRange: 10,
 	xAxisRectHeight: 50,
 	dotsRadius: 5,
+};
+
+export const alluvial = {
+	nodeWidth: 4,
+	nodeHoveredWidth: 8,
+	minNodePadding: 24,
+	opacity: {
+		unfocus: 0.3,
+		default: 0.8,
+		selected: 1,
+	},
 };
 
 export const spacers = {
@@ -233,23 +256,23 @@ export const zoomBar = {
 
 export const defaultLegendAdditionalItems = [
 	{
-		type: LegendItemTypes.RADIUS,
+		type: LegendItemType.RADIUS,
 		name: 'Radius',
 	},
 	{
-		type: LegendItemTypes.AREA,
+		type: LegendItemType.AREA,
 		name: 'Poor area',
 	},
 	{
-		type: LegendItemTypes.AREA,
+		type: LegendItemType.AREA,
 		name: 'Satisfactory area',
 	},
 	{
-		type: LegendItemTypes.AREA,
+		type: LegendItemType.AREA,
 		name: 'Great area',
 	},
 	{
-		type: LegendItemTypes.QUARTILE,
+		type: LegendItemType.QUARTILE,
 		name: 'Quartiles',
 	},
-]
+];

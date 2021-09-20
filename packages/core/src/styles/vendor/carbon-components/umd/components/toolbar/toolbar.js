@@ -1,3 +1,19 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports", "../../globals/js/settings", "../../globals/js/misc/mixin", "../../globals/js/mixins/create-component", "../../globals/js/mixins/init-component-by-search", "../../globals/js/mixins/handles", "../../globals/js/misc/event-matches", "../../globals/js/misc/on"], factory);
@@ -10,7 +26,7 @@
     factory(mod.exports, global.settings, global.mixin, global.createComponent, global.initComponentBySearch, global.handles, global.eventMatches, global.on);
     global.toolbar = mod.exports;
   }
-})(this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on) {
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports, _settings, _mixin2, _createComponent, _initComponentBySearch, _handles, _eventMatches, _on) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -29,20 +45,6 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
-  }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -65,29 +67,6 @@
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
   }
 
   function _inherits(subClass, superClass) {
@@ -114,14 +93,69 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
   var toArray = function toArray(arrayLike) {
     return Array.prototype.slice.call(arrayLike);
   };
 
-  var Toolbar =
-  /*#__PURE__*/
-  function (_mixin) {
+  var Toolbar = /*#__PURE__*/function (_mixin) {
     _inherits(Toolbar, _mixin);
+
+    var _super = _createSuper(Toolbar);
     /**
      * Toolbar.
      * @extends CreateComponent
@@ -131,12 +165,19 @@
      */
 
 
+    /**
+     * Toolbar.
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
+     * @extends Handles
+     * @param {HTMLElement} element The element working as an toolbar.
+     */
     function Toolbar(element, options) {
       var _this;
 
       _classCallCheck(this, Toolbar);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Toolbar).call(this, element, options));
+      _this = _super.call(this, element, options);
 
       if (!_this.element.dataset.tableTarget) {
         console.warn('There is no table bound to this toolbar!'); // eslint-disable-line no-console
@@ -171,6 +212,10 @@
      */
 
 
+    /**
+     * Handles toggling of active state of the toolbar search input
+     * @param {Event} event The event triggering this method.
+     */
     _createClass(Toolbar, [{
       key: "_handleDocumentClick",
       value: function _handleDocumentClick(event) {
@@ -234,7 +279,7 @@
 
     }], [{
       key: "options",
-
+      get:
       /**
        * The component options.
        * If `options` is specified in the constructor,
@@ -245,7 +290,7 @@
        * @property {string} classTallRows The CSS class for making table rows into tall rows.
        * @property {string} classSearchActive The CSS class the active state of the search input.
        */
-      get: function get() {
+      function get() {
         var prefix = _settings.default.prefix;
         return {
           selectorInit: '[data-toolbar]',

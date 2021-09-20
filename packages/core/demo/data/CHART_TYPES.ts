@@ -1,4 +1,9 @@
 export default {
+	AlluvialChart: {
+		vanilla: 'AlluvialChart',
+		angular: 'ibm-alluvial-chart',
+		vue: 'ccv-alluvial-chart',
+	},
 	AreaChart: {
 		vanilla: 'AreaChart',
 		angular: 'ibm-area-chart',
@@ -44,6 +49,11 @@ export default {
 		angular: 'ibm-grouped-bar-chart',
 		vue: 'ccv-grouped-bar-chart',
 	},
+	HistogramChart: {
+		vanilla: 'HistogramChart',
+		angular: 'ibm-histogram-chart',
+		vue: 'ccv-histogram-chart',
+	},
 	LineChart: {
 		vanilla: 'LineChart',
 		angular: 'ibm-line-chart',
@@ -88,6 +98,11 @@ export default {
 		vanilla: 'StackedBarChart',
 		angular: 'ibm-stacked-bar-chart',
 		vue: 'ccv-stacked-bar-chart',
+	},
+	TreeChart: {
+		vanilla: 'TreeChart',
+		angular: 'ibm-tree-chart',
+		vue: 'ccv-tree-chart',
 	},
 	TreemapChart: {
 		vanilla: 'TreemapChart',

@@ -1,6 +1,6 @@
 // Internal Imports
 import { Chart } from '../chart';
-import { CirclePackChartModel } from './../model-circle-pack';
+import { CirclePackChartModel } from '../model/circle-pack';
 import { ChartConfig, CirclePackChartOptions } from '../interfaces/index';
 import * as Configuration from '../configuration';
 import { Tools } from '../tools';

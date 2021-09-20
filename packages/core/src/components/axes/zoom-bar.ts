@@ -1,10 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { ChartModelCartesian } from '../../model-cartesian-charts';
+import { ChartModelCartesian } from '../../model/cartesian-charts';
 import { Tools } from '../../tools';
 import {
 	AxisPositions,
 	Events,
+	RenderTypes,
 	ScaleTypes,
 	ZoomBarTypes,
 } from '../../interfaces';
@@ -15,10 +16,10 @@ import * as Configuration from '../../configuration';
 import { extent } from 'd3-array';
 import { brushX } from 'd3-brush';
 import { area, line } from 'd3-shape';
-import { event } from 'd3-selection';
 
 export class ZoomBar extends Component {
 	type = 'zoom-bar';
+	renderType = RenderTypes.SVG;
 
 	// The minimum selection x range to trigger handler update
 	// Smaller number may introduce a handler flash during initialization
@@ -38,6 +39,8 @@ export class ZoomBar extends Component {
 	brush = brushX();
 	xScale: any;
 	yScale: any;
+
+	highlightStrokeWidth = 1;
 
 	protected model: ChartModelCartesian;
 
@@ -59,7 +62,7 @@ export class ZoomBar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 
 		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(
 			AxisPositions.TOP
@@ -73,6 +76,14 @@ export class ZoomBar extends Component {
 			'zoomBar',
 			AxisPositions.TOP,
 			'type'
+		);
+
+		// As zoom current only available on top only highlights corresponding to bottom axis will be shown
+		const highlight = Tools.getProperty(
+			this.getOptions(),
+			'axes',
+			AxisPositions.BOTTOM,
+			'highlights'
 		);
 
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
@@ -134,8 +145,11 @@ export class ZoomBar extends Component {
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			let zoomBarData = this.services.zoom.getZoomBarData();
-			if (Tools.isEmpty(zoomBarData)) {
-				// if there's no zoom bar data we can't do anything
+
+			// if there's no zoom bar data we can't do anything (true, undefined, null...)
+			// if zoom domain is based on a single data element
+			// doesn't make sense to allow zooming in
+			if (Tools.isEmpty(zoomBarData) || zoomBarData.length === 1) {
 				return;
 			}
 			this.xScale = mainXScale.copy();
@@ -236,6 +250,46 @@ export class ZoomBar extends Component {
 				);
 				// Draw the zoom bar base line
 				this.renderZoomBarBaseline(container, axesLeftMargin, width);
+
+				if (highlight) {
+					const startHighlight = highlight.highlightStartMapsTo;
+					const endHighlight = highlight.highlightEndMapsTo;
+					const color = highlight.color;
+					const labelMapTo = highlight.labelMapsTo;
+
+					highlight.data.forEach((element, index) => {
+						DOMUtils.appendOrSelect(
+							container,
+							`rect.highlight-${index}`
+						)
+							.attr(
+								'height',
+								zoombarHeight - 2 * this.highlightStrokeWidth
+							)
+							.attr('y', this.highlightStrokeWidth)
+							.attr('x', this.xScale(element[startHighlight]))
+							.attr(
+								'width',
+								this.xScale(element[endHighlight]) -
+									this.xScale(element[startHighlight])
+							)
+							.style(
+								'fill',
+								color && color.scale[element[labelMapTo]]
+									? color.scale[element[labelMapTo]]
+									: null
+							)
+							.style('fill-opacity', 0.1)
+							.style(
+								'stroke',
+								color && color.scale[element[labelMapTo]]
+									? color.scale[element[labelMapTo]]
+									: null
+							)
+							.style('stroke-dasharray', '2, 2')
+							.attr('stroke-width', 1 + 'px');
+					});
+				}
 			}
 
 			// Attach brushing event listeners
@@ -253,7 +307,7 @@ export class ZoomBar extends Component {
 			} else if (zoomDomain[0].valueOf() === zoomDomain[1].valueOf()) {
 				brushArea.call(this.brush.move, this.xScale.range()); // default to full range
 				this.updateBrushHandle(
-					this.getContainerSVG(),
+					this.getComponentContainer(),
 					this.xScale.range(),
 					this.xScale.domain()
 				);
@@ -267,7 +321,7 @@ export class ZoomBar extends Component {
 				} else {
 					brushArea.call(this.brush.move, selected); // set brush to correct position
 					this.updateBrushHandle(
-						this.getContainerSVG(),
+						this.getComponentContainer(),
 						selected,
 						zoomDomain
 					);
@@ -284,12 +338,13 @@ export class ZoomBar extends Component {
 	}
 
 	addBrushEventListener(zoomDomain, axesLeftMargin, width) {
-		const brushEventListener = () => {
+		const brushEventListener = (event) => {
 			const selection = event.selection;
 			// follow d3 behavior: when selection is null, reset default full range
 			// select behavior is completed, but nothing selected
 			if (selection === null) {
 				this.handleBrushedEvent(
+					event,
 					zoomDomain,
 					this.xScale,
 					this.xScale.range()
@@ -297,7 +352,12 @@ export class ZoomBar extends Component {
 			} else if (selection[0] === selection[1]) {
 				// select behavior is not completed yet, do nothing
 			} else {
-				this.handleBrushedEvent(zoomDomain, this.xScale, selection);
+				this.handleBrushedEvent(
+					event,
+					zoomDomain,
+					this.xScale,
+					selection
+				);
 			}
 		};
 
@@ -320,14 +380,18 @@ export class ZoomBar extends Component {
 	}
 
 	// brush event listener
-	handleBrushedEvent(zoomDomain, scale, selection) {
+	handleBrushedEvent(event, zoomDomain, scale, selection) {
 		const newDomain = [
 			scale.invert(selection[0]),
 			scale.invert(selection[1]),
 		];
 
 		// update brush handle position
-		this.updateBrushHandle(this.getContainerSVG(), selection, newDomain);
+		this.updateBrushHandle(
+			this.getComponentContainer(),
+			selection,
+			newDomain
+		);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse/touch event
@@ -486,7 +550,7 @@ export class ZoomBar extends Component {
 			axesLeftMargin = axesMargins.left;
 		}
 
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer();
 		const container = svg.select('svg.zoom-container');
 
 		// Draw zoombar background line
@@ -627,7 +691,7 @@ export class ZoomBar extends Component {
 		this.brush.on('start brush end', null);
 		// clear d3 brush
 		DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
+			this.getComponentContainer(),
 			this.brushSelector
 		).html(null);
 

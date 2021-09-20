@@ -14,10 +14,13 @@ import PieChart from './PieChart.svelte';
 import ScatterChart from './ScatterChart.svelte';
 import RadarChart from './RadarChart.svelte';
 import GaugeChart from './GaugeChart.svelte';
+import HistogramChart from './HistogramChart.svelte';
 import MeterChart from './MeterChart.svelte';
+import TreeChart from './TreeChart.svelte';
 import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
 import WordCloudChart from './WordCloudChart.svelte';
+import AlluvialChart from './AlluvialChart.svelte';
 
 export {
 	AreaChart,
@@ -36,8 +39,11 @@ export {
 	ScatterChart,
 	RadarChart,
 	GaugeChart,
+	HistogramChart,
 	MeterChart,
+	TreeChart,
 	TreemapChart,
 	CirclePackChart,
 	WordCloudChart,
+	AlluvialChart,
 };

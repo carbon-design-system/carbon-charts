@@ -8,12 +8,23 @@ Please take a moment to review this document in order to make the contribution p
 
 ## Table of contents
 
+- [IBMer Contributions](#IBMer-Contributions)
 - **[Run Charts in Local Environment](#run-charts-in-local-environment)**
 - [Issue guidelines](#issue-guidelines)
 - [Pull request guidelines](#pull-request-guidelines)
   - [Contribution process](#contribution-process)
 - [Code guidelines](#code-guidelines)
   - [Philosophy](#philosophy)
+
+
+## IBMer Contributions
+
+**If you are an IBMer**, complete these steps, before contributing to any open source project:
+1. Complete your [yearly training](https://ibm.biz/BdzGnB).
+2. Map your identity using [IBM's GitHub mapper tool](https://gh-user-map.dal1a.cirrus.ibm.com/). This will generate an email and invite you to join the IBM org on Github.
+3. Get your manager’s approval.
+
+You can find out more at [W3 Developer](https://w3.ibm.com/developer/docs/open-source/contributing/).
 
 
 ## Run Charts in Local Environment

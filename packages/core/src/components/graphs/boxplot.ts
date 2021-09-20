@@ -4,6 +4,7 @@ import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
+	RenderTypes,
 	Roles,
 } from '../../interfaces';
 import { Tools } from '../../tools';
@@ -14,10 +15,11 @@ import { select } from 'd3-selection';
 
 export class Boxplot extends Component {
 	type = 'boxplot';
+	renderType = RenderTypes.SVG;
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
@@ -86,11 +88,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-verticalstartline',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-verticalstartline',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
@@ -116,11 +120,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-verticalendline',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-verticalendline',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
@@ -153,11 +159,13 @@ export class Boxplot extends Component {
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-quartiles',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-quartiles',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -219,11 +227,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-startingwhisker',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-startingwhisker',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -253,11 +263,13 @@ export class Boxplot extends Component {
 				})
 			)
 			.attr('stroke-width', 2)
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-median',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-median',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -287,11 +299,13 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-endingwhisker',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-endingwhisker',
+					animate,
+				})
 			)
 			.attr('d', (d) => {
 				const x0 =
@@ -339,11 +353,13 @@ export class Boxplot extends Component {
 			)
 			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
-			.transition(
-				this.services.transitions.getTransition(
-					'boxplot-update-circles',
-					animate
-				)
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'boxplot-update-circles',
+					animate,
+				})
 			)
 			.attr('cy', getYValue);
 
@@ -359,7 +375,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('path.highlight-area')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -372,6 +388,7 @@ export class Boxplot extends Component {
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -412,33 +429,38 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
+					event,
 					element: select(this),
 					datum,
 				});
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				const parentElement = select(this.parentNode);
 				parentElement
@@ -453,6 +475,7 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.BOX_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
@@ -475,7 +498,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (datum) {
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -488,6 +511,7 @@ export class Boxplot extends Component {
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
 					items: [
 						{
@@ -508,36 +532,41 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEOVER,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 			})
-			.on('mousemove', function (datum) {
+			.on('mousemove', function (event, datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEMOVE,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}
 				);
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
 			})
-			.on('click', function (datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_CLICK,
 					{
+						event,
 						element: select(this),
 						datum,
 					}
 				);
 			})
-			.on('mouseout', function (datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
@@ -550,6 +579,7 @@ export class Boxplot extends Component {
 				self.services.events.dispatchEvent(
 					Events.Boxplot.OUTLIER_MOUSEOUT,
 					{
+						event,
 						element: hoveredElement,
 						datum,
 					}

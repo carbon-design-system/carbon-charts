@@ -1,6 +1,9 @@
 import { Tooltip } from './tooltip';
-import { AxisPositions, ColorClassNameTypes } from '../../interfaces';
+import { ColorClassNameTypes } from '../../interfaces';
 import { Tools } from '../../tools';
+
+import { get } from 'lodash-es';
+
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
 		if (e.detail.items) {
@@ -14,49 +17,19 @@ export class AxisChartsTooltip extends Tooltip {
 
 		const options = this.getOptions();
 		const { cartesianScales } = this.services;
-		const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 
 		// Generate default tooltip
 		const { groupMapsTo } = options.data;
-		let domainLabel = domainAxisOptions.title;
-		if (!domainLabel) {
-			const domainAxisPosition = cartesianScales.getDomainAxisPosition();
-			if (
-				domainAxisPosition === AxisPositions.BOTTOM ||
-				domainAxisPosition === AxisPositions.TOP
-			) {
-				domainLabel = 'x-value';
-			} else {
-				domainLabel = 'y-value';
-			}
-		}
+		const domainLabel = cartesianScales.getDomainLabel();
+		const rangeLabel = cartesianScales.getRangeLabel();
 
 		let domainValue = data[0][domainIdentifier];
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
-			const rangeAxisPosition = cartesianScales.getRangeAxisPosition({
-				datum,
-			});
 			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
-			const rangeAxisOptions = cartesianScales.getAxisOptions(
-				rangeAxisPosition
-			);
-
 			const value = datum[rangeIdentifier];
-
-			let rangeLabel = rangeAxisOptions.title;
-			if (!rangeLabel) {
-				if (
-					rangeAxisPosition === AxisPositions.LEFT ||
-					rangeAxisPosition === AxisPositions.RIGHT
-				) {
-					rangeLabel = 'y-value';
-				} else {
-					rangeLabel = 'x-value';
-				}
-			}
 
 			items = [
 				{
@@ -130,7 +103,7 @@ export class AxisChartsTooltip extends Tooltip {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				items.push({
-					label: options.tooltip.totalLabel || 'Total',
+					label: get(options, 'tooltip.totalLabel') || 'Total',
 					value: data.reduce(
 						(accumulator, datum) =>
 							accumulator + datum[rangeIdentifier],

@@ -1,4 +1,4 @@
-g.#{$prefix}--#{$charts-prefix}--zoom-bar {
+.#{$prefix}--#{$charts-prefix}--zoom-bar {
 	rect.zoom-bg {
 		fill: $ui-background;
 		stroke: $ui-01;
@@ -54,5 +54,10 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 			fill: none;
 			stroke: none;
 		}
+	}
+
+	rect[class^='highlight-'] {
+		fill: $magenta-50;
+		stroke: $magenta-50;
 	}
 }

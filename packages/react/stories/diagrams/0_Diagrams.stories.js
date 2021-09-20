@@ -58,7 +58,8 @@ stories.add('Start here', () => {
 				<b>
 					Note that Carbon Charts does not provide layouts for
 					diagrams. You can utilize these components alongside
-					graphing libraries, or by composing your own layouts (see section 3).
+					graphing libraries, or by composing your own layouts (see
+					section 3).
 				</b>
 			</p>
 
@@ -90,13 +91,16 @@ stories.add('Start here', () => {
 
 			<h3 {...h3Style}>3. Layouts using external dependencies</h3>
 
-			<p>Here's an example using <b>elkjs</b> in react</p>
+			<p>
+				Here's an example using <b>elkjs</b> in react
+			</p>
 
 			<iframe
 				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
 				style={{
 					width: '100%',
 					height: '500px',
+					marginTop: '2em',
 					border: 0,
 					borderRadius: '4px',
 					overflow: 'hidden',
@@ -116,7 +120,7 @@ const SimpleStatic = () => (
 	<div className="demo-desktop-only">
 		<DesktopOnlyMessage />
 
-		<svg height="124" width="600">
+		<svg height="124" width="600" style={{ marginTop: '1em' }}>
 			<defs>
 				<ArrowRightMarker id={'marker'} />
 			</defs>
@@ -130,7 +134,7 @@ const SimpleStatic = () => (
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
-				transform={`translate(${0},${16})`}
+				transform={`translate(0, 16)`}
 				height={nodeHeight}
 				width={nodeWidth}>
 				<CardNode onClick={() => {}}>
@@ -146,7 +150,7 @@ const SimpleStatic = () => (
 
 			<foreignObject
 				style={{ overflow: 'visible' }}
-				transform={`translate(${400},${16})`}>
+				transform={`translate(400, 16)`}>
 				<ShapeNode
 					title={'Title'}
 					size={ShapeNodeSize}
@@ -210,7 +214,7 @@ const ProgrammaticStatic = () => {
 		<foreignObject
 			style={{ overflow: 'visible' }}
 			key={`node_${i}`}
-			transform={`translate(${node.x},${node.y})`}
+			transform={`translate(${node.x}, ${node.y})`}
 			height={node.nodeHeight}
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
@@ -246,7 +250,7 @@ const ProgrammaticStatic = () => {
 		<div className="demo-desktop-only">
 			<DesktopOnlyMessage />
 
-			<svg height="300" width="800">
+			<svg height="300" width="800" style={{ marginTop: '1.5em' }}>
 				{edges}
 				{nodes}
 			</svg>

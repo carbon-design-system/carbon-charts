@@ -1,6 +1,11 @@
 // Internal Imports
 import { Component } from '../component';
-import { AxisPositions, ScaleTypes, AxesOptions } from '../../interfaces';
+import {
+	AxisPositions,
+	ScaleTypes,
+	AxesOptions,
+	RenderTypes,
+} from '../../interfaces';
 import { Axis } from './axis';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
@@ -9,6 +14,7 @@ import { Events } from './../../interfaces';
 
 export class TwoDimensionalAxes extends Component {
 	type = '2D-axes';
+	renderType = RenderTypes.SVG;
 
 	children: any = {};
 

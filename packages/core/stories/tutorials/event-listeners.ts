@@ -14,7 +14,7 @@ To listen for event just use a reference to the chart to add an event listener f
 This is an example for adding an event listener for a mouseover event on bar chart \`rect\`s.
 
 \`\`\`js
-barChart.services.events.addEventListener("bar-onmouseover", e => {
+barChart.services.events.addEventListener("bar-mouseover", e => {
 	console.log(e.detail);
 });
 \`\`\`
