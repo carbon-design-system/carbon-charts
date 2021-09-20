@@ -91,8 +91,7 @@ export class Threshold extends Component {
 				d.thresholds.map((threshold) => {
 					// Merge relevant keys into the threshold object
 					threshold.axisPosition = d.axisPosition;
-					threshold.correspondingDatasets = d?.correspondingDatasets;
-					threshold.mapsTo = d?.mapsTo;
+					threshold.datum = this.constructDatumObj(d, threshold);
 					return threshold;
 				})
 			);
@@ -173,14 +172,14 @@ export class Threshold extends Component {
 					.attr('y2', yScaleEnd)
 					.attr(
 						'x1',
-						(d) =>
-							getXValue(self.constructDatumObj(d)) +
+						({ datum }) =>
+							getXValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.attr(
 						'x2',
-						(d) =>
-							getXValue(self.constructDatumObj(d)) +
+						({ datum }) =>
+							getXValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.style('stroke', ({ fillColor }) => fillColor);
@@ -189,7 +188,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', 0)
-					.attr('y', (d) => -getXValue(self.constructDatumObj(d)))
+					.attr('y', ({ datum }) => -getXValue(datum))
 					.attr('width', Math.abs(yScaleEnd - yScaleStart))
 					.classed('rotate', true);
 			} else {
@@ -207,14 +206,14 @@ export class Threshold extends Component {
 					.attr('x2', xScaleEnd)
 					.attr(
 						'y1',
-						(d) =>
-							getYValue(self.constructDatumObj(d)) +
+						({ datum }) =>
+							getYValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.attr(
 						'y2',
-						(d) =>
-							getYValue(self.constructDatumObj(d)) +
+						({ datum }) =>
+							getYValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.style('stroke', ({ fillColor }) => fillColor);
@@ -223,7 +222,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', xScaleStart)
-					.attr('y', (d) => getYValue(self.constructDatumObj(d)))
+					.attr('y', ({ datum }) => getYValue(datum))
 					.attr('width', Math.abs(xScaleEnd - xScaleStart))
 					.classed('rotate', false);
 			}
@@ -339,7 +338,7 @@ export class Threshold extends Component {
 	}
 
 	// Constructs object to pass in scale functions
-	constructDatumObj(d) {
+	constructDatumObj(d, element) {
 		const datum = {};
 
 		// We only need to specify group only if correpsonding dataset is defined
@@ -348,7 +347,7 @@ export class Threshold extends Component {
 		}
 
 		// Add attribute with the mapsTo value as key
-		datum[d['mapsTo']] = d.value;
+		datum[d['mapsTo']] = element.value;
 
 		return datum;
 	}
