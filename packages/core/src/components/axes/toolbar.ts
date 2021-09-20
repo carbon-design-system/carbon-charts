@@ -7,6 +7,7 @@ import { Tools } from '../../tools';
 import { select } from 'd3-selection';
 
 export class Toolbar extends Component {
+	static buttonID = 0;
 	type = 'toolbar';
 	renderType = RenderTypes.HTML;
 
@@ -42,6 +43,7 @@ export class Toolbar extends Component {
 
 	render(animate = true) {
 		const container = this.getComponentContainer();
+		const self = this;
 
 		if (!this.overflowMenu) {
 			this.overflowMenu = container
@@ -85,26 +87,52 @@ export class Toolbar extends Component {
 				class="bx--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${d.id}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
-					d.iconWidth !== undefined ? d.iconWidth : '20px'
+					d.iconSVG.width !== undefined ? d.iconSVG.width : '20px'
 				}; height: ${
-					d.iconWidth !== undefined ? d.iconHeight : '20px'
+					d.iconSVG.height !== undefined ? d.iconSVG.height : '20px'
 				}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
-					${d.iconSVGContent}
+					${d.iconSVG.content}
 				</svg>
 			</button>`
 			)
 			.each(function (d) {
 				select(this)
 					.select('button')
-					.on('click', d.clickFunction)
-					.on('keyup', (event: KeyboardEvent) => {
+					.on('click', (event, data) => {
+						// Dispatch click event
+						self.services.events.dispatchEvent(
+							Events.Toolbar.BUTTON_CLICK,
+							{
+								event,
+								element: d,
+							}
+						);
+
+						// call the specified function if it exists
+						if (typeof d.clickFunction === 'function') {
+							d.clickFunction(event);
+						}
+					})
+					.on('keydown', (event: KeyboardEvent) => {
 						if (
 							(event.key && event.key === 'Enter') ||
 							event.key === ' '
 						) {
 							event.preventDefault();
 
-							d.clickFunction();
+							// Dispatch click event
+							self.services.events.dispatchEvent(
+								Events.Toolbar.BUTTON_CLICK,
+								{
+									event,
+									element: d,
+								}
+							);
+
+							// call the specified function if it exists
+							if (typeof d.clickFunction === 'function') {
+								d.clickFunction(event);
+							}
 						}
 					});
 			});
@@ -140,9 +168,11 @@ export class Toolbar extends Component {
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
 			.classed('bx--overflow-menu-options__option--disabled', (d) =>
-				d.shouldBeDisabled()
+				d.shouldBeDisabled ? d.shouldBeDisabled() : false
 			)
-			.attr('aria-disabled', (d) => d.shouldBeDisabled())
+			.attr('aria-disabled', (d) =>
+				d.shouldBeDisabled ? d.shouldBeDisabled() : false
+			)
 			.selectAll('button')
 			.text((d) => d.text);
 	}
@@ -232,28 +262,52 @@ export class Toolbar extends Component {
 			overflowMenuItems.forEach((menuItem, index) => {
 				const element = select(`#${menuItem.id}`);
 				if (element !== null) {
-					element.on('click', () => {
-						// call the specified function
-						menuItem.clickFunction();
+					element
+						.on('click', (event) => {
+							// dispatch click event
+							self.services.events.dispatchEvent(
+								Events.Toolbar.BUTTON_CLICK,
+								{
+									event,
+									element: menuItem,
+								}
+							);
 
-						// hide overflow menu
-						self.updateOverflowMenu(false);
-					});
+							// call the specified function if it exists
+							if (typeof menuItem.clickFunction === 'function') {
+								menuItem.clickFunction(event);
+							}
 
-					element.on('keyup', () => {
-						if (event.key === 'Enter') {
-							// call the specified function
-							menuItem.clickFunction();
-						} else if (event.key === 'ArrowUp') {
-							// focus on previous menu item
-							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (event.key === 'ArrowDown') {
-							// focus on next menu item
-							self.focusOnNextEnabledMenuItem(index);
-						}
+							// hide overflow menu
+							self.updateOverflowMenu(false);
+						})
+						.on('keydown', (event: KeyboardEvent) => {
+							if (event.key === 'Enter' || event.key === ' ') {
+								// dispatch click event
+								self.services.events.dispatchEvent(
+									Events.Toolbar.BUTTON_CLICK,
+									{
+										event,
+										element: menuItem,
+									}
+								);
 
-						// Not hide overflow menu by keyboard arrow up/down event
-					});
+								// call the specified function if it exists
+								if (
+									typeof menuItem.clickFunction === 'function'
+								) {
+									menuItem.clickFunction(event);
+								}
+							} else if (event.key === 'ArrowUp') {
+								// focus on previous menu item
+								self.focusOnPreviousEnabledMenuItem(index);
+							} else if (event.key === 'ArrowDown') {
+								// focus on next menu item
+								self.focusOnNextEnabledMenuItem(index);
+							}
+
+							// Not hide overflow menu by keyboard arrow up/down event
+						});
 				}
 			});
 
@@ -264,21 +318,40 @@ export class Toolbar extends Component {
 	}
 
 	getControlConfigs() {
-		const numberOfIcons = Tools.getProperty(
-			this.getOptions(),
-			'toolbar',
-			'numberOfIcons'
-		);
+		const numberOfIcons =
+			Tools.getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') -
+			1;
 		const controls = Tools.getProperty(
 			this.getOptions(),
 			'toolbar',
 			'controls'
 		);
 
-		const controlList = [];
 		const overflowSpecificControls = [];
+		const buttonList = [];
+		const overflowList = [];
+
+		let displayIcons = true;
+
 		controls.forEach((control) => {
-			const controlConfig = this.getControlConfigByType(control.type);
+			let controlConfig = null;
+			// check if button is custom or default control
+			if (control.type === ToolbarControlTypes.CUSTOM) {
+				// add generic id if missing
+				if (Tools.getProperty(control, 'id') === null) {
+					// add id directly to the data passed so that id isn't reassigned on rerender
+					control.id = `toolbar-button-${Toolbar.buttonID}`;
+					Toolbar.buttonID++;
+				}
+				// define function if missing
+				if (Tools.getProperty(control, 'shouldBeDisabled') === null) {
+					control.shouldBeDisabled = () => false;
+				}
+
+				controlConfig = control;
+			} else {
+				controlConfig = this.getControlConfigByType(control.type);
+			}
 
 			// add to list if config is valid
 			if (controlConfig) {
@@ -286,25 +359,40 @@ export class Toolbar extends Component {
 
 				if (controlConfig.id.indexOf('toolbar-export') !== -1) {
 					overflowSpecificControls.push(controlConfig);
+				} else if (buttonList.length < numberOfIcons && displayIcons) {
+					// check if icon exists
+					// if button does not exist, all of the preceding items will be added to overflow menu
+					// this will ensure users use correct order & fill in any missing data
+					if (
+						Tools.getProperty(
+							controlConfig,
+							'iconSVG',
+							'content'
+						) === null
+					) {
+						displayIcons = false;
+						overflowList.push(controlConfig);
+					} else {
+						buttonList.push(controlConfig);
+					}
 				} else {
-					controlList.push(controlConfig);
+					overflowList.push(controlConfig);
 				}
 			}
 		});
 
-		if (
-			controlList.length <= numberOfIcons &&
-			overflowSpecificControls.length === 0
-		) {
+		// Ensures exports are always at the bottom
+		overflowList.push(...overflowSpecificControls);
+
+		if (!overflowList.length) {
 			return {
-				buttonList: controlList,
+				buttonList,
 			};
 		}
 
 		return {
-			// leave one button for overflow button
-			buttonList: controlList.splice(0, numberOfIcons - 1),
-			overflowMenuItemList: controlList.concat(overflowSpecificControls),
+			buttonList,
+			overflowMenuItemList: overflowList,
 		};
 	}
 
@@ -322,9 +410,11 @@ export class Toolbar extends Component {
 		return {
 			id: 'toolbar-overflow-menu',
 			shouldBeDisabled: () => false,
-			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
-							 <circle cx="16" cy="16" r="2"></circle>
-							 <circle cx="16" cy="24" r="2"></circle>`,
+			iconSVG: {
+				content: `<circle cx="16" cy="8" r="2"></circle>
+				<circle cx="16" cy="16" r="2"></circle>
+				<circle cx="16" cy="24" r="2"></circle>`,
+			},
 			clickFunction: (event) => this.toggleOverflowMenu(event),
 		};
 	}
@@ -343,7 +433,9 @@ export class Toolbar extends Component {
 						id: 'toolbar-zoomIn',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMinZoomDomain(),
-						iconSVGContent: this.getControlIconByType(controlType),
+						iconSVG: {
+							content: this.getControlIconByType(controlType),
+						},
 						clickFunction: () => this.services.zoom.zoomIn(),
 					};
 				}
@@ -354,7 +446,9 @@ export class Toolbar extends Component {
 						id: 'toolbar-zoomOut',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
-						iconSVGContent: this.getControlIconByType(controlType),
+						iconSVG: {
+							content: this.getControlIconByType(controlType),
+						},
 						clickFunction: () => this.services.zoom.zoomOut(),
 					};
 				}
@@ -365,7 +459,9 @@ export class Toolbar extends Component {
 						id: 'toolbar-resetZoom',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
-						iconSVGContent: this.getControlIconByType(controlType),
+						iconSVG: {
+							content: this.getControlIconByType(controlType),
+						},
 						clickFunction: () =>
 							this.services.zoom.resetZoomDomain(),
 					};
@@ -374,9 +470,11 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.MAKE_FULLSCREEN:
 				controlConfig = {
 					id: 'toolbar-makefullscreen',
-					iconSVGContent: this.getControlIconByType(controlType),
-					iconWidth: '15px',
-					iconHight: '15px',
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+						width: '15px',
+						height: '15px',
+					},
 					shouldBeDisabled: () => false,
 					clickFunction: () => {
 						this.services.domUtils.toggleFullscreen();
@@ -386,7 +484,9 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				controlConfig = {
 					id: 'toolbar-showasdatatable',
-					iconSVGContent: this.getControlIconByType(controlType),
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+					},
 					shouldBeDisabled: false,
 					clickFunction: () =>
 						this.services.events.dispatchEvent(Events.Modal.SHOW),
@@ -396,7 +496,9 @@ export class Toolbar extends Component {
 				controlConfig = {
 					id: 'toolbar-export-CSV',
 					shouldBeDisabled: () => false,
-					iconSVGContent: this.getControlIconByType(controlType),
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+					},
 					clickFunction: () => this.model.exportToCSV(),
 				};
 				break;
@@ -404,7 +506,9 @@ export class Toolbar extends Component {
 				controlConfig = {
 					id: 'toolbar-export-PNG',
 					shouldBeDisabled: () => false,
-					iconSVGContent: this.getControlIconByType(controlType),
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+					},
 					clickFunction: () => this.services.domUtils.exportToPNG(),
 				};
 				break;
@@ -412,7 +516,9 @@ export class Toolbar extends Component {
 				controlConfig = {
 					id: 'toolbar-export-JPG',
 					shouldBeDisabled: () => false,
-					iconSVGContent: this.getControlIconByType(controlType),
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+					},
 					clickFunction: () => this.services.domUtils.exportToJPG(),
 				};
 				break;

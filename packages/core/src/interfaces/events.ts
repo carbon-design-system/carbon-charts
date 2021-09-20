@@ -30,6 +30,7 @@ export enum Model {
 export enum Toolbar {
 	SHOW_OVERFLOW_MENU = 'show-toolbar-overflow-menu',
 	HIDE_OVERFLOW_MENU = 'hide-toolbar-overflow-menu',
+	BUTTON_CLICK = 'toolbar-button-click',
 }
 
 /**
@@ -167,7 +168,7 @@ export enum Radar {
 export enum Tree {
 	NODE_MOUSEOVER = 'tree-node-mouseover',
 	NODE_CLICK = 'tree-node-click',
-	NODE_MOUSEOUT = 'tree-node-mouseout'
+	NODE_MOUSEOUT = 'tree-node-mouseout',
 }
 
 /**
