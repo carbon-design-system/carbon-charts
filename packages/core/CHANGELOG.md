@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.3...v0.49.4) (2021-09-22)
+
+
+### Bug Fixes
+
+* **core:** stacked layouts in combo charts ([#1165](https://github.com/carbon-design-system/carbon-charts/issues/1165)) ([3f53e49](https://github.com/carbon-design-system/carbon-charts/commit/3f53e491446020d4e57e6b002a4ab69062aec068))
+
+
+
+
+
 ## [0.49.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.2...v0.49.3) (2021-09-22)
 
 
