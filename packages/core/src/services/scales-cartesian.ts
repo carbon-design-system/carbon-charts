@@ -615,7 +615,6 @@ export class CartesianScales extends Service {
 					groups: dataGroupNames,
 				}
 			);
-
 			const nonStackedGroupsData = displayData.filter(
 				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
 			);
@@ -627,10 +626,12 @@ export class CartesianScales extends Service {
 				let positiveSum = 0,
 					negativeSum = 0;
 				Object.values(numericalValues).forEach((value: number) => {
-					if (value < 0) {
-						negativeSum += value;
-					} else {
-						positiveSum += value;
+					if (!isNaN(value)) {
+						if (value < 0) {
+							negativeSum += value;
+						} else {
+							positiveSum += value;
+						}
 					}
 				});
 				stackedValues.push([negativeSum, positiveSum]);
