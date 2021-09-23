@@ -9,8 +9,8 @@
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
-		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "build-storybook -o demo/bundle --quiet",
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
+		"demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
 		"clean": "rm -rf dist demo/bundle",
 		"test": "svelte-check --workspace=tests"
 	},

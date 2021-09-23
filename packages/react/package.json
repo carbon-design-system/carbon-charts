@@ -10,7 +10,7 @@
 		"build": "bash build.sh",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet",
+		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
