@@ -53,6 +53,9 @@ export class Threshold extends Component {
 					thresholdData.push({
 						axisPosition,
 						thresholds: axisOptions.thresholds,
+						correspondingDatasets:
+							axisOptions?.correspondingDatasets,
+						mapsTo: axisOptions?.mapsTo,
 					});
 				}
 			}
@@ -86,7 +89,9 @@ export class Threshold extends Component {
 			.selectAll('g.threshold-group')
 			.data((d) =>
 				d.thresholds.map((threshold) => {
+					// Merge relevant keys into the threshold object
 					threshold.axisPosition = d.axisPosition;
+					threshold.datum = this.constructDatumObj(d, threshold);
 					return threshold;
 				})
 			);
@@ -115,11 +120,25 @@ export class Threshold extends Component {
 			const scaleType = self.services.cartesianScales.getScaleTypeByPosition(
 				axisPosition
 			);
-			const mainXScale = self.services.cartesianScales.getMainXScale();
-			const mainYScale = self.services.cartesianScales.getMainYScale();
+
+			let xScale = null;
+			let yScale = null;
+
+			// Depending on type of axis position, assign scale and main perpendicular axis
+			if (
+				axisPosition === AxisPositions.LEFT ||
+				axisPosition === AxisPositions.RIGHT
+			) {
+				yScale = scale;
+				xScale = self.services.cartesianScales.getMainXScale();
+			} else {
+				xScale = scale;
+				yScale = self.services.cartesianScales.getMainYScale();
+			}
+
 			const isScaleTypeLabels = scaleType === ScaleTypes.LABELS;
-			const [xScaleStart, xScaleEnd] = mainXScale.range();
-			const [yScaleEnd, yScaleStart] = mainYScale.range();
+			const [xScaleStart, xScaleEnd] = xScale.range();
+			const [yScaleEnd, yScaleStart] = yScale.range();
 
 			const { cartesianScales } = self.services;
 			const orientation = cartesianScales.getOrientation();
@@ -153,14 +172,14 @@ export class Threshold extends Component {
 					.attr('y2', yScaleEnd)
 					.attr(
 						'x1',
-						({ value }) =>
-							getXValue(value) +
+						({ datum }) =>
+							getXValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.attr(
 						'x2',
-						({ value }) =>
-							getXValue(value) +
+						({ datum }) =>
+							getXValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.style('stroke', ({ fillColor }) => fillColor);
@@ -169,7 +188,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', 0)
-					.attr('y', ({ value }) => -getXValue(value))
+					.attr('y', ({ datum }) => -getXValue(datum))
 					.attr('width', Math.abs(yScaleEnd - yScaleStart))
 					.classed('rotate', true);
 			} else {
@@ -187,14 +206,14 @@ export class Threshold extends Component {
 					.attr('x2', xScaleEnd)
 					.attr(
 						'y1',
-						({ value }) =>
-							getYValue(value) +
+						({ datum }) =>
+							getYValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.attr(
 						'y2',
-						({ value }) =>
-							getYValue(value) +
+						({ datum }) =>
+							getYValue(datum) +
 							(isScaleTypeLabels ? scale.step() / 2 : 0)
 					)
 					.style('stroke', ({ fillColor }) => fillColor);
@@ -203,7 +222,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', xScaleStart)
-					.attr('y', ({ value }) => getYValue(value))
+					.attr('y', ({ datum }) => getYValue(datum))
 					.attr('width', Math.abs(xScaleEnd - xScaleStart))
 					.classed('rotate', false);
 			}
@@ -316,6 +335,21 @@ export class Threshold extends Component {
 		);
 
 		this.positionService.setElement(target, pos);
+	}
+
+	// Constructs object to pass in scale functions
+	constructDatumObj(d, element) {
+		const datum = {};
+
+		// We only need to specify group only if correpsonding dataset is defined
+		if (d.correspondingDatasets) {
+			datum['group'] = Tools.getProperty(d, 'correspondingDatasets', 0);
+		}
+
+		// Add attribute with the mapsTo value as key
+		datum[d['mapsTo']] = element.value;
+
+		return datum;
 	}
 
 	addEventListeners() {
