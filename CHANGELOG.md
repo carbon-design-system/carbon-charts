@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.5...v0.49.6) (2021-09-23)
+
+
+### Bug Fixes
+
+* **core:** correctly draw the threshold from multiple axes ([#1159](https://github.com/carbon-design-system/carbon-charts/issues/1159)) ([1bba0d3](https://github.com/carbon-design-system/carbon-charts/commit/1bba0d38cc0b08fc56861d5923d1f7f3293e80a8)), closes [#1153](https://github.com/carbon-design-system/carbon-charts/issues/1153)
+
+
+
+
+
 ## [0.49.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.4...v0.49.5) (2021-09-23)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
