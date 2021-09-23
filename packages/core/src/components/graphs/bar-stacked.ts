@@ -225,10 +225,10 @@ export class StackedBar extends Bar {
 						d
 					);
 					return (
-						d[rangeIdentifier] === datum.data[datum.group] &&
+						d[rangeIdentifier] === datum.data[datum[groupMapsTo]] &&
 						d[domainIdentifier].toString() ===
 							datum.data.sharedStackKey &&
-						d[groupMapsTo] === datum.group
+						d[groupMapsTo] === datum[groupMapsTo]
 					);
 				});
 
@@ -238,8 +238,8 @@ export class StackedBar extends Bar {
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
-						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group,
+						[rangeIdentifier]: datum.data[datum[groupMapsTo]],
+						[groupMapsTo]: datum[groupMapsTo]
 					};
 				}
 

@@ -193,6 +193,17 @@ export const radar = {
 	dotsRadius: 5,
 };
 
+export const alluvial = {
+	nodeWidth: 4,
+	nodeHoveredWidth: 8,
+	minNodePadding: 24,
+	opacity: {
+		unfocus: 0.3,
+		default: 0.8,
+		selected: 1,
+	},
+};
+
 export const spacers = {
 	default: {
 		size: 24,

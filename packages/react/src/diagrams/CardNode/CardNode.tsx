@@ -21,6 +21,7 @@ const CardNode = ({
 	onMouseLeave = null,
 	onMouseMove = null,
 	onClick = null,
+	position = 'static',
 	stacked,
 }: any) => {
 	let Component = 'div';
@@ -48,7 +49,7 @@ const CardNode = ({
 			onMouseOut={onMouseOut}
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
-			style={{ borderColor: color }}
+			style={{ borderColor: color, position }}
 			tabIndex={0}>
 			{children}
 		</Component>

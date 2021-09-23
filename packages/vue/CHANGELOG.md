@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.3...v0.49.4) (2021-09-22)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.49.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.2...v0.49.3) (2021-09-22)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.49.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.1...v0.49.2) (2021-09-20)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.49.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.0...v0.49.1) (2021-09-17)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+# [0.49.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.4...v0.49.0) (2021-09-15)
+
+
+### Features
+
+* **core:** create alluvial chart ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132)) ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)), closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+
+
+
+
+
+## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.48.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.2...v0.48.3) (2021-09-13)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
 ## [0.48.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.1...v0.48.2) (2021-09-13)
 
 **Note:** Version bump only for package @carbon/charts-vue

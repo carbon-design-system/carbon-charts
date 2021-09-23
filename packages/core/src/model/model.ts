@@ -49,7 +49,9 @@ export class ChartModel {
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter((item) => groups.includes(item.group));
+			allData = allData.filter((item) =>
+				groups.includes(item[groupMapsTo])
+			);
 		}
 
 		if (axesOptions) {

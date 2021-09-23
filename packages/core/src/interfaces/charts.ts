@@ -467,7 +467,7 @@ export interface TreeChartOptions extends BaseChartOptions {
 	tree?: {
 		type?: TreeTypes;
 		rootTitle?: string;
-	}
+	};
 }
 
 /*
@@ -484,5 +484,29 @@ export interface CirclePackChartOptions extends BaseChartOptions {
 			outer?: number;
 			inner?: number;
 		};
+	};
+}
+
+/**
+ * options specific to Alluvial charts
+ */
+export interface AlluvialChartOptions extends BaseChartOptions {
+	alluvial: {
+		units?: string;
+		/**
+		 * List of nodes to draw
+		 */
+		nodes: Array<{
+			name: string;
+			category?: string;
+		}>;
+		/**
+		 * Set the node padding
+		 */
+		nodePadding?: number;
+		/**
+		 * Enable single color usage for lines
+		 */
+		monochrome?: boolean;
 	};
 }

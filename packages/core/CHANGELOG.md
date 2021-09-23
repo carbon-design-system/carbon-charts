@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.3...v0.49.4) (2021-09-22)
+
+
+### Bug Fixes
+
+* **core:** stacked layouts in combo charts ([#1165](https://github.com/carbon-design-system/carbon-charts/issues/1165)) ([3f53e49](https://github.com/carbon-design-system/carbon-charts/commit/3f53e491446020d4e57e6b002a4ab69062aec068))
+
+
+
+
+
+## [0.49.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.2...v0.49.3) (2021-09-22)
+
+
+### Bug Fixes
+
+* **core:** replace empty hyperlink with an appropriate tag ([#1163](https://github.com/carbon-design-system/carbon-charts/issues/1163)) ([5d0f75d](https://github.com/carbon-design-system/carbon-charts/commit/5d0f75d97656e85c858364a3cadc92ebe3dd6cc0)), closes [#952](https://github.com/carbon-design-system/carbon-charts/issues/952)
+
+
+
+
+
+## [0.49.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.1...v0.49.2) (2021-09-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.49.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.0...v0.49.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* **core:** groupMapsTo in stacked bar charts ([#1156](https://github.com/carbon-design-system/carbon-charts/issues/1156)) ([4d6b61b](https://github.com/carbon-design-system/carbon-charts/commit/4d6b61ba86c154787f9e8acdf3ed8851dc8c6b17))
+
+
+
+
+
+# [0.49.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.4...v0.49.0) (2021-09-15)
+
+
+### Features
+
+* **core:** create alluvial chart ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132)) ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)), closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+
+
+
+
+
+## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** legend alignment incorrect initial rendering ([#1151](https://github.com/carbon-design-system/carbon-charts/issues/1151)) ([0b01426](https://github.com/carbon-design-system/carbon-charts/commit/0b0142677fd67041ee8576aa19cfa53f24e39a55))
+
+
+
+
+
+## [0.48.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.2...v0.48.3) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** diagram rendering issues in safari ([#1150](https://github.com/carbon-design-system/carbon-charts/issues/1150)) ([fc123dd](https://github.com/carbon-design-system/carbon-charts/commit/fc123dda01795fbd4703362dd2688c5ac1940728))
+
+
+
+
+
 ## [0.48.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.1...v0.48.2) (2021-09-13)
 
 

@@ -218,6 +218,20 @@ export enum CirclePack {
 }
 
 /**
+ * enum of all alluvial related events
+ */
+export enum Alluvial {
+	NODE_MOUSEOVER = 'alluvial-node-mouseover',
+	NODE_CLICK = 'alluvial-node-click',
+	NODE_MOUSEOUT = 'alluvial-node-mouseout',
+	NODE_MOUSEMOVE = 'alluvial-node-mousemove',
+	LINE_MOUSEOVER = 'alluvial-line-mouseover',
+	LINE_CLICK = 'alluvial-line-click',
+	LINE_MOUSEOUT = 'alluvial-line-mouseout',
+	LINE_MOUSEMOVE = 'alluvial-line-mousemove',
+}
+
+/**
  * enum of all meter related events
  */
 export enum Meter {

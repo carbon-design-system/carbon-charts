@@ -41,6 +41,7 @@ export class Legend extends Component {
 
 		const svg = this.getComponentContainer()
 			.classed('center-aligned', alignment === Alignments.CENTER)
+			.classed('right-aligned', alignment === Alignments.RIGHT)
 			.classed(legendOrientation, true)
 			.classed('has-deactivated-items', hasDeactivatedItems)
 			.attr('role', Roles.GROUP)
@@ -374,20 +375,20 @@ export class Legend extends Component {
 	}
 
 	truncateLegendText(addedLegendItemsText) {
-		const trucationOptions = Tools.getProperty(
+		const truncationOptions = Tools.getProperty(
 			this.getOptions(),
 			'legend',
 			'truncation'
 		);
 		// Truncation
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(trucationOptions, 'type');
+		const truncationType = Tools.getProperty(truncationOptions, 'type');
 		const truncationThreshold = Tools.getProperty(
-			trucationOptions,
+			truncationOptions,
 			'threshold'
 		);
 		const truncationNumCharacter = Tools.getProperty(
-			trucationOptions,
+			truncationOptions,
 			'numCharacter'
 		);
 
