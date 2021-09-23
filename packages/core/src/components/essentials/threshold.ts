@@ -343,7 +343,7 @@ export class Threshold extends Component {
 
 		// We only need to specify group only if correpsonding dataset is defined
 		if (d.correspondingDatasets) {
-			datum['group'] = d.correspondingDatasets[0];
+			datum['group'] = Tools.getProperty(d, 'correspondingDatasets', 0);
 		}
 
 		// Add attribute with the mapsTo value as key
