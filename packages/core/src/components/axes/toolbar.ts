@@ -85,6 +85,7 @@ export class Toolbar extends Component {
 				(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
+				aria-label="${d.text ? d.text + 'toolbar button' : 'toolbar button'}"
 				aria-haspopup="true" aria-expanded="false" id="${d.id}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
 					d.iconSVG.width !== undefined ? d.iconSVG.width : '20px'
