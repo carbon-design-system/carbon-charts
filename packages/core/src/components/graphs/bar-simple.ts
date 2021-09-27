@@ -148,6 +148,12 @@ export class SimpleBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-simple-bar',
+				})
+			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
@@ -157,6 +163,12 @@ export class SimpleBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-simple-bar',
+				})
+			)
 			.attr('opacity', 1);
 	};
 

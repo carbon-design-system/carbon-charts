@@ -303,6 +303,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-hover-scatter')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'chart-holder-hover-scatter',
+				})
+			)
 			.attr('opacity', 1);
 	};
 
@@ -310,6 +316,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-mouseout-scatter')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'chart-holder-mouseout-scatter',
+				})
+			)
 			.attr('opacity', 0);
 	};
 
@@ -321,6 +333,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-hover-scatter')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-scatter',
+				})
+			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
@@ -330,6 +348,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-mouseout-scatter')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-scatter',
+				})
+			)
 			.attr('opacity', 1);
 	};
 

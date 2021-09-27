@@ -823,6 +823,12 @@ export class Radar extends Component {
 		this.parent
 			.selectAll('g.blobs path')
 			.transition('legend-hover-blob')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-blob',
+				})
+			)
 			.style('fill-opacity', (group) => {
 				if (group.name !== hoveredElement.datum().name) {
 					return Configuration.radar.opacity.unselected;
@@ -841,6 +847,12 @@ export class Radar extends Component {
 		this.parent
 			.selectAll('g.blobs path')
 			.transition('legend-mouseout-blob')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-blob',
+				})
+			)
 			.style('fill-opacity', Configuration.radar.opacity.selected)
 			.style('stroke-opacity', 1);
 	};

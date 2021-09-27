@@ -155,6 +155,12 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition('legend-hover-wordcloud')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-wordcloud',
+				})
+			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
@@ -165,18 +171,31 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition('legend-mouseout-wordcloud')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-wordcloud',
+				})
+			)
 			.attr('opacity', 1);
 	};
 
 	addEventListeners() {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
+		const self = this;
 
 		// Highlights 1 word or unhighlights all
 		const debouncedHighlight = Tools.debounce((word) => {
 			const allWords = self.parent
 				.selectAll('text.word')
-				.transition('wordcloud-word-mouse-highlight');
+				.transition('wordcloud-word-mouse-highlight')
+				.call((t) =>
+					self.services.transitions.setupTransition({
+						transition: t,
+						name: 'wordcloud-word-mouse-highlight',
+					})
+				);
 
 			if (word === null) {
 				allWords.attr('opacity', 1);
@@ -191,7 +210,6 @@ export class WordCloud extends Component {
 			}
 		}, 6);
 
-		const self = this;
 		this.parent
 			.selectAll('text.word')
 			.on('mouseover', function (event, datum) {

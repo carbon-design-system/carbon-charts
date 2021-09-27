@@ -172,6 +172,12 @@ export class StackedBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-bar',
+				})
+			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
@@ -182,6 +188,12 @@ export class StackedBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-bar',
+				})
+			)
 			.attr('opacity', 1);
 	};
 

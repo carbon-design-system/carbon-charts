@@ -112,6 +112,12 @@ export class CirclePack extends Component {
 			.attr('cx', (d) => d.x)
 			.attr('cy', (d) => d.y)
 			.transition('circlepack-leaf-update-enter')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'circlepack-leaf-update-enter',
+				})
+			)
 			.attr('r', (d) => d.r)
 			.attr('opacity', 1)
 			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity);
@@ -214,6 +220,12 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.transition('legend-hover-circlepack')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-circlepack',
+				})
+			)
 			.attr('opacity', (d) => {
 				return d.data.dataGroupName === hoveredElement.datum()['name']
 					? 1
@@ -225,6 +237,12 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.transition('legend-mouseout-circlepack')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-circlepack',
+				})
+			)
 			.attr('opacity', 1);
 	};
 

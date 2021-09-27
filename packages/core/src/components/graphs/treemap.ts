@@ -391,6 +391,12 @@ export class Treemap extends Component {
 		this.parent
 			.selectAll("g[data-name='leaf']")
 			.transition('legend-hover-treemap')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-treemap',
+				})
+			)
 			.attr('opacity', (d) =>
 				d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3
 			);
@@ -400,6 +406,12 @@ export class Treemap extends Component {
 		this.parent
 			.selectAll("g[data-name='leaf']")
 			.transition('legend-mouseout-treemap')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-treemap',
+				})
+			)
 			.attr('opacity', 1);
 	};
 }
