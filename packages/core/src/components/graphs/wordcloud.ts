@@ -106,11 +106,13 @@ export class WordCloud extends Component {
 					return self.model.getFillColor(d[groupMapsTo], d.text, d);
 				})
 				.attr('text-anchor', 'middle')
-				.transition(
-					self.services.transitions.getTransition(
-						'wordcloud-text-update-enter',
-						animate
-					)
+				.transition()
+				.call((t) =>
+					self.services.transitions.setupTransition({
+						transition: t,
+						name: 'wordcloud-text-update-enter',
+						animate,
+					})
 				)
 				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1);
@@ -152,10 +154,12 @@ export class WordCloud extends Component {
 
 		this.parent
 			.selectAll('text.word')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-wordcloud'
-				)
+			.transition('legend-hover-wordcloud')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-wordcloud',
+				})
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -166,10 +170,12 @@ export class WordCloud extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('text.word')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-wordcloud'
-				)
+			.transition('legend-mouseout-wordcloud')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-wordcloud',
+				})
 			)
 			.attr('opacity', 1);
 	};
@@ -177,15 +183,18 @@ export class WordCloud extends Component {
 	addEventListeners() {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
+		const self = this;
 
 		// Highlights 1 word or unhighlights all
 		const debouncedHighlight = Tools.debounce((word) => {
 			const allWords = self.parent
 				.selectAll('text.word')
-				.transition(
-					self.services.transitions.getTransition(
-						'wordcloud-word-mouse-highlight'
-					)
+				.transition('wordcloud-word-mouse-highlight')
+				.call((t) =>
+					self.services.transitions.setupTransition({
+						transition: t,
+						name: 'wordcloud-word-mouse-highlight',
+					})
 				);
 
 			if (word === null) {
@@ -201,7 +210,6 @@ export class WordCloud extends Component {
 			}
 		}, 6);
 
-		const self = this;
 		this.parent
 			.selectAll('text.word')
 			.on('mouseover', function (event, datum) {
