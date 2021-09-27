@@ -161,11 +161,13 @@ export class Radar extends Component {
 					.attr('fill', 'none')
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_y_axes_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_y_axes_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 							.attr('d', (tick) =>
@@ -175,11 +177,13 @@ export class Radar extends Component {
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_axes_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_axes_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr('transform', `translate(${c.x}, ${c.y})`)
@@ -190,11 +194,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_axes_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_axes_exit',
+								animate,
+							})
 						)
 						.attr('d', (tick) =>
 							radialLineGenerator(shapeData(tick))
@@ -238,11 +244,13 @@ export class Radar extends Component {
 					)
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_x_axes_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_x_axes_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 							.attr(
@@ -285,11 +293,13 @@ export class Radar extends Component {
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_axes_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_axes_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr(
@@ -332,11 +342,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_axes_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_axes_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -384,22 +396,26 @@ export class Radar extends Component {
 					)
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_x_labels_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_x_labels_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 					),
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_labels_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_labels_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr(
@@ -424,11 +440,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_x_labels_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_x_labels_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -474,12 +492,15 @@ export class Radar extends Component {
 					.style('stroke', (group) => colorScale(group.name))
 
 					.call((selection) => {
-						const selectionUpdate = selection.transition(
-							this.services.transitions.getTransition(
-								'radar_blobs_enter',
-								animate
-							)
-						);
+						const selectionUpdate = selection
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_blobs_enter',
+									animate,
+								})
+							);
 
 						if (animate) {
 							selectionUpdate
@@ -509,11 +530,13 @@ export class Radar extends Component {
 					.style('stroke', (group) => colorScale(group.name));
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_blobs_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_blobs_update',
+								animate,
+							})
 						)
 						.attr('opacity', 1)
 						.attr('transform', `translate(${c.x}, ${c.y})`)
@@ -522,11 +545,12 @@ export class Radar extends Component {
 			},
 			(exit) =>
 				exit.call((selection) => {
-					const selectionUpdate = selection.transition(
-						this.services.transitions.getTransition(
-							'radar_blobs_exit',
-							animate
-						)
+					const selectionUpdate = selection.transition().call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'radar_blobs_exit',
+							animate,
+						})
 					);
 
 					if (animate) {
@@ -656,22 +680,26 @@ export class Radar extends Component {
 					.style('dominant-baseline', 'middle')
 					.call((selection) =>
 						selection
-							.transition(
-								this.services.transitions.getTransition(
-									'radar_y_labels_enter',
-									animate
-								)
+							.transition()
+							.call((t) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_y_labels_enter',
+									animate,
+								})
 							)
 							.attr('opacity', 1)
 					),
 			(update) =>
 				update.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_labels_update',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_labels_update',
+								animate,
+							})
 						)
 						.text((tick) => tick)
 						.attr('opacity', 1)
@@ -697,11 +725,13 @@ export class Radar extends Component {
 			(exit) =>
 				exit.call((selection) =>
 					selection
-						.transition(
-							this.services.transitions.getTransition(
-								'radar_y_labels_exit',
-								animate
-							)
+						.transition()
+						.call((t) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_labels_exit',
+								animate,
+							})
 						)
 						.attr('opacity', 0)
 						.remove()
@@ -792,9 +822,7 @@ export class Radar extends Component {
 		const { hoveredElement } = event.detail;
 		this.parent
 			.selectAll('g.blobs path')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-blob')
-			)
+			.transition('legend-hover-blob')
 			.style('fill-opacity', (group) => {
 				if (group.name !== hoveredElement.datum().name) {
 					return Configuration.radar.opacity.unselected;
@@ -812,9 +840,7 @@ export class Radar extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('g.blobs path')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-blob')
-			)
+			.transition('legend-mouseout-blob')
 			.style('fill-opacity', Configuration.radar.opacity.selected)
 			.style('stroke-opacity', 1);
 	};

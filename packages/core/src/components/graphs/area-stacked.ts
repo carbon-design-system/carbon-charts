@@ -119,9 +119,7 @@ export class StackedArea extends Component {
 
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-area')
-			)
+			.transition('legend-hover-area')
 			.attr('opacity', (d) => {
 				if (
 					Tools.getProperty(d, 0, groupMapsTo) !==
@@ -137,9 +135,7 @@ export class StackedArea extends Component {
 	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-area')
-			)
+			.transition('legend-mouseout-area')
 			.attr('opacity', Configuration.area.opacity.selected);
 	};
 }

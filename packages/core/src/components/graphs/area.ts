@@ -256,9 +256,7 @@ export class Area extends Component {
 
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-area')
-			)
+			.transition('legend-hover-area')
 			.attr('opacity', (group) => {
 				if (group.name !== hoveredElement.datum()['name']) {
 					return Configuration.area.opacity.unselected;
@@ -271,9 +269,7 @@ export class Area extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-area')
-			)
+			.transition('legend-mouseout-area')
 			.attr('opacity', Configuration.area.opacity.selected);
 	};
 

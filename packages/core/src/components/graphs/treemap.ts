@@ -280,10 +280,12 @@ export class Treemap extends Component {
 				while (parent.depth > 1) parent = parent.parent;
 
 				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							'graph_element_mouseover_fill_update'
-						)
+					.transition('graph_element_mouseover_fill_update')
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'graph_element_mouseover_fill_update',
+						})
 					)
 					.style('fill', (d: any) => {
 						const customColor = self.model.getFillColor(
@@ -355,10 +357,12 @@ export class Treemap extends Component {
 				while (parent.depth > 1) parent = parent.parent;
 
 				hoveredElement
-					.transition(
-						self.services.transitions.getTransition(
-							'graph_element_mouseout_fill_update'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'graph_element_mouseout_fill_update',
+						})
 					)
 					.style('fill', (d: any) =>
 						self.model.getFillColor(d.parent.data.name)
@@ -386,9 +390,7 @@ export class Treemap extends Component {
 
 		this.parent
 			.selectAll("g[data-name='leaf']")
-			.transition(
-				this.services.transitions.getTransition('legend-hover-treemap')
-			)
+			.transition('legend-hover-treemap')
 			.attr('opacity', (d) =>
 				d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3
 			);
@@ -397,11 +399,7 @@ export class Treemap extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll("g[data-name='leaf']")
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-treemap'
-				)
-			)
+			.transition('legend-mouseout-treemap')
 			.attr('opacity', 1);
 	};
 }

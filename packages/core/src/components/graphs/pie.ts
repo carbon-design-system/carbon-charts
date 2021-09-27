@@ -396,9 +396,7 @@ export class Pie extends Component {
 
 		this.parent
 			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
-			)
+			.transition('legend-hover-bar')
 			.attr('opacity', (d) =>
 				d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
 			);
@@ -408,9 +406,7 @@ export class Pie extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
-			)
+			.transition('legend-mouseout-bar')
 			.attr('opacity', 1);
 	};
 
@@ -423,10 +419,12 @@ export class Pie extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseover',
+						})
 					)
 					.attr('d', self.hoverArc);
 
@@ -478,10 +476,12 @@ export class Pie extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseout',
+						})
 					)
 					.attr('d', self.arc);
 

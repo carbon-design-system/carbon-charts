@@ -259,12 +259,6 @@ export class Meter extends Component {
 				if (proportional) {
 					hoveredElement.classed('hovered', true);
 
-					hoveredElement.transition(
-						self.services.transitions.getTransition(
-							'graph_element_mouseover_fill_update'
-						)
-					);
-
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
