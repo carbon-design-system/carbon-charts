@@ -431,7 +431,7 @@ export class Pie extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.transition()
+					.transition('pie_slice_mouseover')
 					.call((t) =>
 						self.services.transitions.setupTransition({
 							transition: t,
@@ -488,7 +488,7 @@ export class Pie extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.transition()
+					.transition('pie_slice_mouseout')
 					.call((t) =>
 						self.services.transitions.setupTransition({
 							transition: t,
