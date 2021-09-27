@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.6...v0.49.7) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** optimize transition to not return new transition on root element ([#1169](https://github.com/carbon-design-system/carbon-charts/issues/1169)) ([fe4d592](https://github.com/carbon-design-system/carbon-charts/commit/fe4d592991e9cbf68c4b9efab0be4aa46dfcd416)), closes [#1143](https://github.com/carbon-design-system/carbon-charts/issues/1143)
+
+
+
+
+
 ## [0.49.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.5...v0.49.6) (2021-09-23)
 
 
