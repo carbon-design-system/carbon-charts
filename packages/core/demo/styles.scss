@@ -7,6 +7,7 @@
 @import '../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button';
 @import '../src/styles/vendor/carbon-components/scss/components/notification/inline-notification';
 
+@import '../src/styles/vendor/carbon-components/scss/components/overflow-menu/overflow-menu';
 @import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
 @import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
 
@@ -52,6 +53,7 @@ div.container {
 		@import '../src/styles/styles-g10.scss';
 
 		@include modal;
+		@include overflow-menu;
 		@include data-table-core;
 
 		@include carbon--theme($carbon--theme--g10) {
@@ -70,6 +72,7 @@ div.container {
 			line-height: 1;
 
 			@include modal;
+			@include overflow-menu;
 			@include data-table-core;
 
 			.bx--radio-button__appearance {
@@ -104,6 +107,7 @@ div.container {
 			line-height: 1;
 
 			@include modal;
+			@include overflow-menu;
 			@include data-table-core;
 
 			.bx--radio-button__appearance {
