@@ -1,9 +1,5 @@
 $css--reset: false;
-@import './../vendor/carbon-components/src/components/overflow-menu/overflow-menu';
-
 .#{$prefix}--chart-holder {
-	@include overflow-menu;
-
 	.bx--overflow-menu,
 	.bx--overflow-menu__trigger {
 		width: 2rem;
