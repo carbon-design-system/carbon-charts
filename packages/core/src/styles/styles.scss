@@ -28,6 +28,7 @@ $css--default-type: false;
 @import './graphs/index.scss';
 @import './type';
 @import './chart-holder';
+@import './chart-feature-flags';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;

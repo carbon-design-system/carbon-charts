@@ -1,8 +1,4 @@
-@import './../vendor/carbon-components/src/components/modal/modal';
-
 .#{$prefix}--chart-holder {
-	@include modal;
-
 	.#{$prefix}--modal {
 		&.is-visible {
 			z-index: 99999;
