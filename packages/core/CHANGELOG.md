@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.7...v0.50.0) (2021-09-30)
+
+
+### Features
+
+* **core:** remove overflow menu and modal imports in chart styles  ([#1170](https://github.com/carbon-design-system/carbon-charts/issues/1170)) ([4ca6839](https://github.com/carbon-design-system/carbon-charts/commit/4ca683928b8cea7c47b6e3f287b0fff9736eee5f)), closes [#1115](https://github.com/carbon-design-system/carbon-charts/issues/1115)
+
+
+
+
+
 ## [0.49.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.6...v0.49.7) (2021-09-27)
 
 
