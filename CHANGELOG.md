@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.0...v0.50.1) (2021-10-01)
+
+
+### Bug Fixes
+
+* **styles:** use `map-get` in `_type.scss` ([#1171](https://github.com/carbon-design-system/carbon-charts/issues/1171)) ([5d3da4c](https://github.com/carbon-design-system/carbon-charts/commit/5d3da4c08321d9ac0dcf9687cee1b6ab77d06163))
+
+
+
+
+
 # [0.50.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.7...v0.50.0) (2021-09-30)
 
 
