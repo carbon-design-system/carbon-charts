@@ -4,7 +4,7 @@
 
 @import './chart-feature-flags';
 
-@if $chart-feature-flags('enable-font-imports') == true {
+@if map-get($chart-feature-flags, 'enable-font-imports') == true {
 	@include carbon--font-face-sans();
 	@include carbon--font-face-sans-condensed();
 }
