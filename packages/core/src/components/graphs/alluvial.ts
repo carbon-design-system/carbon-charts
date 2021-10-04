@@ -137,6 +137,7 @@ export class Alluvial extends Component {
 					originalClassName: 'link',
 				});
 			})
+			.style('stroke', (d) => this.model.getFillColor(d.source.name))
 			.attr('stroke-width', (d) => Math.max(1, d.width))
 			.style('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
