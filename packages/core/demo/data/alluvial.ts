@@ -25,6 +25,18 @@ export const alluvialSimpleOptions = {
 	},
 };
 
+export const alluvialSimpleCustomColorOptions = {
+	...alluvialSimpleOptions,
+	title: 'Custom colors (alluvial)',
+	color: {
+		scale: {
+			A: 'red',
+			B: 'yellow',
+			C: 'blue',
+		},
+	},
+};
+
 export const alluvialMultipleCategoryOptions = {
 	title: 'Alluvial (multiple categories)',
 	alluvial: {

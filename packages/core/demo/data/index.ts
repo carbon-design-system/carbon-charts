@@ -213,6 +213,11 @@ const utilityDemoGroups = [
 				data: circlePackDemos.circlePackTwoLevelData,
 				chartType: chartTypes.CirclePackChart,
 			},
+			{
+				options: alluvialDemos.alluvialSimpleCustomColorOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
+			},
 		],
 	},
 	{
