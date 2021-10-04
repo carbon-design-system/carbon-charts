@@ -7,7 +7,8 @@
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"start": "yarn storybook"
 	},
 	"repository": {
 		"type": "git",

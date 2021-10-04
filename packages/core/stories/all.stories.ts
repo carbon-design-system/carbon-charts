@@ -5,8 +5,6 @@ import { storybookDemoGroups, DemoGroupTypes } from '../demo/data';
 import * as ChartComponents from '../src/charts';
 import * as storyUtils from './utils';
 
-// import PackageInfo from './../package.json';
-
 import '../demo/styles.scss';
 
 const introStories = storiesOf('Docs|', module).addDecorator(withKnobs);
