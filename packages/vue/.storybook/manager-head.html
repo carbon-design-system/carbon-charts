@@ -32,3 +32,11 @@
 	content="https://charts.carbondesignsystem.com/vue/share.png"
 />
 <meta name="twitter:site" content="@_carbondesign" />
+
+<!-- Storybook override -->
+<script>
+	setTimeout(function() {
+		document.querySelector('div.sidebar-header > div > a').innerHTML =
+			'Carbon Charts - Vue';
+	}, 1000);
+</script>

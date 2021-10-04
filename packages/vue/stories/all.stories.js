@@ -5,6 +5,35 @@ import * as ChartComponents from '../src/index';
 
 import { storybookDemoGroups } from '@carbon/charts/demo/data';
 
+const introStories = storiesOf('Intro', module).addDecorator(withKnobs);
+
+// Loop through the demos for the group
+introStories.add('Welcome', () => ({
+	template: `<div class="container intro">
+		<div
+		class="welcome__container"
+		style="
+		  background: url(./welcome.png) no-repeat center center fixed;
+		  background-size: cover;
+		">
+			<div class="welcome__content">
+				<h2 class="welcome__heading">Carbon Charts</h2>
+				<h4 class="welcome__heading welcome__heading--subtitle">(Vue)</h4>
+
+				<h5 class="welcome__heading welcome__heading--other">Other versions</h5>
+				<ul>
+					<li><a href="https://charts.carbondesignsystem.com" class="welcome__heading welcome__heading--other">vanilla</a></li>
+					<li><a href="https://charts.carbondesignsystem.com/react" class="welcome__heading welcome__heading--other">React</a></li>
+					<li><a href="https://charts.carbondesignsystem.com/angular" class="welcome__heading welcome__heading--other">Angular</a></li>
+					<li><a href="https://charts.carbondesignsystem.com/svelte" class="welcome__heading welcome__heading--other">Svelte</a></li>
+				</ul>
+
+				<span class="netlify">Deploys by <a href="https://netlify.com" target="_blank">Netlify</a></span>
+			</div>
+		</div>
+	</div>`,
+}));
+
 // Loop through all demo groups
 storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
