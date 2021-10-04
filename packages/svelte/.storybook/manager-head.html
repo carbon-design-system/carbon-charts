@@ -32,3 +32,11 @@
 	content="https://charts.carbondesignsystem.com/svelte/share.png"
 />
 <meta name="twitter:site" content="@_carbondesign" />
+
+<!-- Storybook override -->
+<script>
+	setTimeout(function () {
+		document.querySelector('div.sidebar-header > div > a').innerHTML =
+			'Carbon Charts - Svelte';
+	}, 1000);
+</script>
