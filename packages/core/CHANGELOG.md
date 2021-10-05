@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.3...v0.50.4) (2021-10-05)
+
+
+### Bug Fixes
+
+* **core:** allow users to assign custom colors to the links of source nodes ([#1178](https://github.com/carbon-design-system/carbon-charts/issues/1178)) ([bec1cc7](https://github.com/carbon-design-system/carbon-charts/commit/bec1cc736dec36fd8ed26a1ade1ac9f375e3849c)), closes [#1175](https://github.com/carbon-design-system/carbon-charts/issues/1175)
+
+
+
+
+
 ## [0.50.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.2...v0.50.3) (2021-10-04)
 
 **Note:** Version bump only for package @carbon/charts
