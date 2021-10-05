@@ -30,9 +30,9 @@ export const alluvialSimpleCustomColorOptions = {
 	title: 'Custom colors (alluvial)',
 	color: {
 		scale: {
-			A: 'red',
-			B: 'yellow',
-			C: 'blue',
+			A: '#d12771',
+			B: '#08bdba',
+			C: '#6fdc8c',
 		},
 	},
 };
