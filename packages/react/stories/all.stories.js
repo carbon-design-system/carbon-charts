@@ -97,14 +97,21 @@ storybookDemoGroups.forEach((demoGroup) => {
 			const chartRef = React.useRef(null);
 
 			if (demoRef.current && chartRef.current) {
+				const container = demoRef.current;
+				const chart = chartRef.current.chart
+
 				storyUtils.addControls(
-					demoRef.current,
+					container,
 					demoGroup,
-					chartRef.current.chart,
+					chart,
 					{
 						colorPairingOptions,
 					}
 				);
+
+				storyUtils.addOtherVersions(container, demoGroup, demo, {
+					currentVersion: 'react',
+				});
 			}
 
 			React.useEffect(() => {
@@ -144,157 +151,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 						/>
 					</a>
 
-					<div
-						className="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30"
-						data-code-snippet>
-						<div
-							className="bx--snippet-container"
-							aria-label="Code Snippet Text">
-							<pre>
-								<code>
-									<span className="token tag">{`<${demo.chartType.vanilla}`}</span>
-									{`
-    `}
-									<span className="token attr-name">{`data=`}</span>
-									<span className="token attr-value">{`{data}`}</span>
-									{`
-    `}
-									<span className="token attr-name">{`options=`}</span>
-									<span className="token attr-value">{`{options}`}</span>
-									<span className="token tag">{`
-/>`}</span>
-								</code>
-							</pre>
-						</div>
-					</div>
-
-					<h3 className="marginTop-30">Other versions</h3>
-					<div class="bx--row resource-card-group">
-						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
-							<div class="bx--resource-card">
-								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-									<div class="bx--aspect-ratio--object">
-										<a
-											href="https://react.carbondesignsystem.com/?path=/story/components-orderedlist--default"
-											class="bx--tile bx--tile--clickable">
-											<h5 class="bx--resource-card__subtitle">
-												React
-											</h5>
-											<div class="bx--resource-card__icon--img"></div>
-											<div class="bx--resource-card__icon--action">
-												<svg
-													focusable="false"
-													preserveAspectRatio="xMidYMid meet"
-													xmlns="http://www.w3.org/2000/svg"
-													fill="currentColor"
-													aria-label="Open resource"
-													width="20"
-													height="20"
-													viewBox="0 0 32 32"
-													role="img">
-													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
-													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
-												</svg>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
-							<div class="bx--resource-card">
-								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-									<div class="bx--aspect-ratio--object">
-										<a
-											href="https://angular.carbondesignsystem.com/?path=/story/components-list--basic"
-											class="bx--tile bx--tile--clickable">
-											<h5 class="bx--resource-card__subtitle">
-												Angular (Community)
-											</h5>
-											<div class="bx--resource-card__icon--img"></div>
-											<div class="bx--resource-card__icon--action">
-												<svg
-													focusable="false"
-													preserveAspectRatio="xMidYMid meet"
-													xmlns="http://www.w3.org/2000/svg"
-													fill="currentColor"
-													aria-label="Open resource"
-													width="20"
-													height="20"
-													viewBox="0 0 32 32"
-													role="img">
-													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
-													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
-												</svg>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
-							<div class="bx--resource-card">
-								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-									<div class="bx--aspect-ratio--object">
-										<a
-											href="http://vue.carbondesignsystem.com/?path=/story/components-cvlist--default"
-											class="bx--tile bx--tile--clickable">
-											<h5 class="bx--resource-card__subtitle">
-												Vue (Community)
-											</h5>
-											<div class="bx--resource-card__icon--img"></div>
-											<div class="bx--resource-card__icon--action">
-												<svg
-													focusable="false"
-													preserveAspectRatio="xMidYMid meet"
-													xmlns="http://www.w3.org/2000/svg"
-													fill="currentColor"
-													aria-label="Open resource"
-													width="20"
-													height="20"
-													viewBox="0 0 32 32"
-													role="img">
-													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
-													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
-												</svg>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<ul className="demo-other-versions">
-						<li>
-							<a
-								href={`https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`}
-								className="welcome__heading welcome__heading--other">
-								vanilla
-							</a>
-						</li>
-						<li>
-							<a
-								href={`https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`}
-								className="welcome__heading welcome__heading--other">
-								Angular
-							</a>
-						</li>
-						<li>
-							<a
-								href={`https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`}
-								className="welcome__heading welcome__heading--other">
-								Vue
-							</a>
-						</li>
-						<li>
-							<a
-								href={`https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`}
-								className="welcome__heading welcome__heading--other">
-								Svelte
-							</a>
-						</li>
-					</ul>
+					<h3 class="marginTop-45">Other versions</h3>
+					<p style={{ opacity: 0.75 }}>
+						(currently on <strong>React</strong>)
+					</p>
+					<div id="other-versions"></div>
 				</div>
 			);
 		});
