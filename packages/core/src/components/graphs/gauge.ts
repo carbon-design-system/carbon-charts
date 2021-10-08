@@ -156,7 +156,7 @@ export class Gauge extends Component {
 		const alignment = Tools.getProperty(options, 'gauge', 'alignment');
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
-			useAttr: true,
+			useAttrs: true,
 		});
 
 		// Position gauge

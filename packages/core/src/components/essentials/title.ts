@@ -108,7 +108,7 @@ export class Title extends Component {
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
 		return DOMUtils.getSVGElementSize(this.parent.node(), {
-			useAttr: true,
+			useAttrs: true,
 		}).width;
 	}
 

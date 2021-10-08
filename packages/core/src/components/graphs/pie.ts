@@ -261,7 +261,7 @@ export class Pie extends Component {
 		const alignment = Tools.getProperty(options, optionName, 'alignment');
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
-			useAttr: true,
+			useAttrs: true,
 		});
 
 		// don't add padding for labels & callouts if they are disabled
