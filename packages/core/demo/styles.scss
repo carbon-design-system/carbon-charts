@@ -10,6 +10,7 @@
 @import '../src/styles/vendor/carbon-components/scss/components/overflow-menu/overflow-menu';
 @import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
 @import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
+@import '../src/styles/vendor/carbon-components/scss/components/tile/tile';
 
 body {
 	margin: 0;
@@ -46,20 +47,25 @@ div.container {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			@import './resource-card.scss';
 		}
 	}
 
 	&.theme--g10 {
 		@import '../src/styles/styles-g10.scss';
 
-		@include modal;
-		@include overflow-menu;
-		@include data-table-core;
-
 		@include carbon--theme($carbon--theme--g10) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			@import './resource-card.scss';
+
+			@include modal;
+			@include overflow-menu;
+			@include data-table-core;
+			@include select;
 		}
 	}
 
@@ -71,9 +77,12 @@ div.container {
 			background-color: $ui-background;
 			line-height: 1;
 
+			@import './resource-card.scss';
+
 			@include modal;
 			@include overflow-menu;
 			@include data-table-core;
+			@include select;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -106,9 +115,12 @@ div.container {
 			background-color: $ui-background;
 			line-height: 1;
 
+			@import './resource-card.scss';
+
 			@include modal;
 			@include overflow-menu;
 			@include data-table-core;
+			@include select;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -294,7 +306,6 @@ div.container {
 			z-index: 2;
 		}
 
-
 		.welcome__heading {
 			@include type-style('productive-heading-07');
 
@@ -401,6 +412,10 @@ div.container {
 
 		&-30 {
 			margin-top: 30px;
+		}
+
+		&-45 {
+			margin-top: 45px;
 		}
 	}
 

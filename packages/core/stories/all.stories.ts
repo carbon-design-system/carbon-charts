@@ -3,7 +3,10 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 
 import { storybookDemoGroups, DemoGroupTypes } from '../demo/data';
 import * as ChartComponents from '../src/charts';
-import * as storyUtils from './utils';
+import * as storyUtils from '../demo/utils';
+
+import * as Configuration from '../src/configuration';
+const colorPairingOptions = Configuration.color.pairingOptions;
 
 import '../demo/styles.scss';
 
@@ -89,13 +92,18 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div id="charting-controls">
 </div>
 
-<div class="marginTop-30" id="chart-demo">
+<div class="marginTop-45" id="chart-demo">
 </div>
 
-<h3 class="marginTop-30">Code Sample</h3>
+<h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
 	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg">
 </a>
+
+<h3 class="marginTop-45">Other versions</h3>
+<p style="opacity: 0.75;">(currently on <strong>vanilla</strong>)</p>
+<div id="other-versions">
+</div>
 			`;
 
 			// Initialize chart
@@ -113,7 +121,13 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 			);
 
 			storyUtils.addDemoDataFormListeners(container, demo, chart);
-			storyUtils.addControls(container, demoGroup, chart);
+			storyUtils.addControls(container, demoGroup, chart, {
+				colorPairingOptions,
+			});
+
+			storyUtils.addOtherVersions(container, demoGroup, demo, {
+				currentVersion: 'vanilla',
+			});
 
 			return container;
 		});

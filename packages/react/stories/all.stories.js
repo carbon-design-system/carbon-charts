@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
 import * as ChartComponents from '../dist/index';
+import * as storyUtils from '@carbon/charts/demo/utils';
 
 import { storybookDemoGroups } from '@carbon/charts/demo/data';
 import * as Configuration from '@carbon/charts/configuration';
@@ -92,48 +93,26 @@ storybookDemoGroups.forEach((demoGroup) => {
 			 * populating, adding this as a quick hack */
 			const [update, setUpdate] = React.useState(false);
 
-			const [theme, setTheme] = React.useState('g100');
+			const demoRef = React.useRef(null);
 			const chartRef = React.useRef(null);
 
-			const radioOnChangeHandler = ({ target }) => {
-				if (target.checked === true) {
-					setTheme(target.value);
-				}
-			};
-
-			let chart = null;
-			let chartOptions = null;
-
-			let onlyCategoricalPaletteIsApplicable = false;
-			let numberOfChartDataGroups = 0;
-			let numberOfVariants = 0;
-			let selectedColorPalette = null;
-			if (chartRef.current !== null) {
-				chart = chartRef.current.chart;
-				chartOptions = chart.model.getOptions();
-
-				const {
-					numberOfVariants: variants,
-					option,
-				} = chartOptions.color.pairing;
-
-				numberOfChartDataGroups = chart.model.getAllDataGroupsNames()
-					.length;
-				numberOfVariants = variants || numberOfChartDataGroups;
-
-				if (numberOfChartDataGroups > 5) {
-					onlyCategoricalPaletteIsApplicable = true;
-				}
-
-				selectedColorPalette = `${numberOfVariants}-${option}`;
+			if (demoRef.current && chartRef.current) {
+				storyUtils.addControls(
+					demoRef.current,
+					demoGroup,
+					chartRef.current.chart,
+					{
+						colorPairingOptions,
+					}
+				);
 			}
 
 			React.useEffect(() => {
 				setUpdate(!update);
-			}, [chartRef]);
+			}, [demoRef, chartRef]);
 
 			return (
-				<div className={`container theme--${theme}`}>
+				<div className="container theme--g100" ref={demoRef}>
 					<h3>
 						<b>Component:</b>
 						<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
@@ -147,214 +126,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 						</a>
 					</p>
 
-					<div id="charting-controls">
-						<div id="theme-picker">
-							<fieldset className="bx--fieldset marginTop-30">
-								<div className="bx--form-item">
-									<div className="bx--radio-button-group ">
-										<div className="bx--radio-button-wrapper">
-											<input
-												id="radio-button-abfeuherm2f-1"
-												className="bx--radio-button"
-												type="radio"
-												value="white"
-												name="radio-button"
-												tabindex="0"
-												checked={theme === 'white'}
-												onChange={radioOnChangeHandler}
-											/>
-											<label
-												htmlFor="radio-button-abfeuherm2f-1"
-												className="bx--radio-button__label">
-												<span className="bx--radio-button__appearance"></span>
-												<span className="bx--radio-button__label-text">
-													White
-												</span>
-											</label>
-										</div>
-										<div className="bx--radio-button-wrapper">
-											<input
-												id="radio-button-abfeuherm2f-2"
-												className="bx--radio-button"
-												type="radio"
-												value="g10"
-												name="radio-button"
-												tabindex="0"
-												checked={theme === 'g10'}
-												onChange={radioOnChangeHandler}
-											/>
-											<label
-												htmlFor="radio-button-abfeuherm2f-2"
-												className="bx--radio-button__label">
-												<span className="bx--radio-button__appearance"></span>
-												<span className="bx--radio-button__label-text">
-													G10
-												</span>
-											</label>
-										</div>
-										<div className="bx--radio-button-wrapper">
-											<input
-												id="radio-button-abfeuherm2f-3"
-												className="bx--radio-button"
-												type="radio"
-												value="g90"
-												name="radio-button"
-												tabindex="0"
-												checked={theme === 'g90'}
-												onChange={radioOnChangeHandler}
-											/>
-											<label
-												htmlFor="radio-button-abfeuherm2f-3"
-												className="bx--radio-button__label">
-												<span className="bx--radio-button__appearance"></span>
-												<span className="bx--radio-button__label-text">
-													G90
-												</span>
-											</label>
-										</div>
-										<div className="bx--radio-button-wrapper">
-											<input
-												id="radio-button-abfeuherm2f-4"
-												className="bx--radio-button"
-												type="radio"
-												value="g100"
-												name="radio-button"
-												tabindex="0"
-												checked={theme === 'g100'}
-												onChange={radioOnChangeHandler}
-											/>
-											<label
-												htmlFor="radio-button-abfeuherm2f-4"
-												className="bx--radio-button__label">
-												<span className="bx--radio-button__appearance"></span>
-												<span className="bx--radio-button__label-text">
-													G100
-												</span>
-											</label>
-										</div>
-									</div>
-								</div>
-							</fieldset>
-						</div>
-
-						<div className="bx--form-item">
-							<div className="bx--select">
-								<label
-									htmlFor="select-id"
-									className="bx--label">
-									Color palette
-								</label>
-								<div className="bx--select-input__wrapper">
-									<select
-										id="color-palette-select"
-										className="bx--select-input"
-										onChange={(e) => {
-											const { value } = e.target;
-											const [
-												numberOfVariants,
-												pairingOption,
-											] = value.split('-color-option-');
-
-											chartOptions.color.pairing.numberOfVariants = numberOfVariants;
-
-											chartOptions.color.pairing.option = parseInt(
-												pairingOption
-											);
-											chart.model.setOptions(
-												chartOptions
-											);
-										}}>
-										<option
-											className="bx--select-option"
-											value=""
-											disabled
-											selected
-											hidden>
-											Choose an option
-										</option>
-
-										{numberOfVariants !== 14 &&
-											Object.keys(
-												colorPairingOptions
-											).map((colorGroup) => {
-												const optionsCount =
-													colorPairingOptions[
-														colorGroup
-													];
-
-												const numberOfVariants = parseInt(
-													colorGroup
-												);
-
-												const selectOptions = [];
-												for (
-													let i = 1;
-													i <= optionsCount;
-													i++
-												) {
-													selectOptions.push(
-														<option
-															className={`bx--select-option" ${
-																onlyCategoricalPaletteIsApplicable ||
-																numberOfVariants <
-																	numberOfChartDataGroups
-																	? 'disabled'
-																	: ''
-															}`}
-															value={`${colorGroup}-option-${i}" ${
-																selectedColorPalette ===
-																`${numberOfVariants}-${i}`
-																	? 'selected'
-																	: ''
-															}`}>
-															{numberOfVariants}
-															-color groups,
-															option {i}
-														</option>
-													);
-												}
-
-												return (
-													<React.Fragment>
-														<optgroup
-															className="bx--select-optgroup"
-															label={`${colorGroup} groups`}>
-															{selectOptions}
-														</optgroup>
-													</React.Fragment>
-												);
-											})}
-
-										{numberOfVariants === 14 && (
-											<option
-												className="bx--select-option"
-												value="14-color-option-1"
-												selected={
-													selectedColorPalette ===
-														`14-1` ||
-													onlyCategoricalPaletteIsApplicable
-												}>
-												Categorical palette
-											</option>
-										)}
-									</select>
-
-									<svg
-										focusable="false"
-										preserveAspectRatio="xMidYMid meet"
-										style={{ willChange: 'transform' }}
-										xmlns="http://www.w3.org/2000/svg"
-										className="bx--select__arrow"
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										aria-hidden="true">
-										<path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path>
-									</svg>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div id="charting-controls"></div>
 
 					<div className="marginTop-30" id="chart-demo">
 						<DemoComponent
@@ -397,6 +169,102 @@ storybookDemoGroups.forEach((demoGroup) => {
 					</div>
 
 					<h3 className="marginTop-30">Other versions</h3>
+					<div class="bx--row resource-card-group">
+						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
+							<div class="bx--resource-card">
+								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+									<div class="bx--aspect-ratio--object">
+										<a
+											href="https://react.carbondesignsystem.com/?path=/story/components-orderedlist--default"
+											class="bx--tile bx--tile--clickable">
+											<h5 class="bx--resource-card__subtitle">
+												React
+											</h5>
+											<div class="bx--resource-card__icon--img"></div>
+											<div class="bx--resource-card__icon--action">
+												<svg
+													focusable="false"
+													preserveAspectRatio="xMidYMid meet"
+													xmlns="http://www.w3.org/2000/svg"
+													fill="currentColor"
+													aria-label="Open resource"
+													width="20"
+													height="20"
+													viewBox="0 0 32 32"
+													role="img">
+													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
+													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
+												</svg>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
+							<div class="bx--resource-card">
+								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+									<div class="bx--aspect-ratio--object">
+										<a
+											href="https://angular.carbondesignsystem.com/?path=/story/components-list--basic"
+											class="bx--tile bx--tile--clickable">
+											<h5 class="bx--resource-card__subtitle">
+												Angular (Community)
+											</h5>
+											<div class="bx--resource-card__icon--img"></div>
+											<div class="bx--resource-card__icon--action">
+												<svg
+													focusable="false"
+													preserveAspectRatio="xMidYMid meet"
+													xmlns="http://www.w3.org/2000/svg"
+													fill="currentColor"
+													aria-label="Open resource"
+													width="20"
+													height="20"
+													viewBox="0 0 32 32"
+													role="img">
+													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
+													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
+												</svg>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="Grid-module--column--3U35z bx--no-gutter-sm bx--col-md-4 bx--col-lg-4">
+							<div class="bx--resource-card">
+								<div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+									<div class="bx--aspect-ratio--object">
+										<a
+											href="http://vue.carbondesignsystem.com/?path=/story/components-cvlist--default"
+											class="bx--tile bx--tile--clickable">
+											<h5 class="bx--resource-card__subtitle">
+												Vue (Community)
+											</h5>
+											<div class="bx--resource-card__icon--img"></div>
+											<div class="bx--resource-card__icon--action">
+												<svg
+													focusable="false"
+													preserveAspectRatio="xMidYMid meet"
+													xmlns="http://www.w3.org/2000/svg"
+													fill="currentColor"
+													aria-label="Open resource"
+													width="20"
+													height="20"
+													viewBox="0 0 32 32"
+													role="img">
+													<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
+													<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
+												</svg>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<ul className="demo-other-versions">
 						<li>
 							<a
