@@ -25,7 +25,7 @@
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper .layout-child {
-	overflow: visible;
+	overflow: visible !important;
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
