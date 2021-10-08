@@ -25,11 +25,11 @@
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper .layout-child {
-	overflow: visible !important;
+	overflow: visible;
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
 	height: inherit;
 	width: inherit;
-	overflow: visible !important;
+	overflow: visible;
 }
