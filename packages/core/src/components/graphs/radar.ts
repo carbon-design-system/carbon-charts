@@ -755,7 +755,9 @@ export class Radar extends Component {
 		const svgDimensions = DOMUtils.getSVGElementSize(svg, {
 			useBBox: true,
 		});
-		const { width } = DOMUtils.getSVGElementSize(parent, { useAttr: true });
+		const { width } = DOMUtils.getSVGElementSize(parent, {
+			useAttrs: true,
+		});
 
 		let alignmentOffset = 0;
 		if (alignment === Alignments.CENTER) {
