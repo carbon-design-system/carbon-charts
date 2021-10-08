@@ -16,6 +16,13 @@ import domToImage from 'dom-to-image';
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
+interface getSVGElementSizeOptions {
+	useAttrs?: boolean;
+	useClientDimensions?: boolean;
+	useBBox?: boolean;
+	useBoundingRect?: boolean;
+}
+
 export class DOMUtils extends Service {
 	constructor(model: any, services: any) {
 		super(model, services);
@@ -30,7 +37,12 @@ export class DOMUtils extends Service {
 
 	static getSVGElementSize(
 		svgSelector: Selection<any, any, any, any>,
-		options?: any
+		options: getSVGElementSizeOptions = {
+			useAttrs: false,
+			useClientDimensions: false,
+			useBBox: false,
+			useBoundingRect: false,
+		}
 	) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
