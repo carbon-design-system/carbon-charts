@@ -3,8 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
 import * as ChartComponents from '../dist/index';
+import * as storyUtils from '@carbon/charts/demo/utils';
 
 import { storybookDemoGroups } from '@carbon/charts/demo/data';
+import * as Configuration from '@carbon/charts/configuration';
+const colorPairingOptions = Configuration.color.pairingOptions;
 
 const introStories = storiesOf('Intro', module).addDecorator(withKnobs);
 
@@ -74,66 +77,87 @@ storybookDemoGroups.forEach((demoGroup) => {
 		module
 	).addDecorator(withKnobs({ escapeHTML: false }));
 
+	const demoGroupClassification = (demoGroup.type || '').replace(
+		'-chart',
+		''
+	);
+
 	// Loop through the demos for the group
 	demoGroup.demos.forEach((demo) => {
 		if (demo.isHighScale) {
 			return;
 		}
 		const DemoComponent = ChartComponents[demo.chartType.vanilla];
-		groupStories.add(demo.title, () => (
-			<div className="container theme--white">
-				<h3>
-					<b>Component:</b>
-					<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
-				</h3>
-				<p className="props">
-					<b>Props:</b> data,{' '}
-					<a
-						href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
-						target="_blank">
-						options
-					</a>
-				</p>
+		groupStories.add(demo.title, () => {
+			/* Storybook seems to be skipping re-render when chartRef starts
+			 * populating, adding this as a quick hack */
+			const [update, setUpdate] = React.useState(false);
 
-				<div className="marginTop-30">
-					<DemoComponent
-						data={object('Data', demo.data)}
-						options={object('Options', demo.options)}
-					/>
-				</div>
+			const demoRef = React.useRef(null);
+			const chartRef = React.useRef(null);
 
-				<h3 className="marginTop-30">Code sample</h3>
-				<a href={demo.codesandbox.react} target="_blank">
-					<img
-						src="https://codesandbox.io/static/img/play-codesandbox.svg"
-						className="marginTop"
-					/>
-				</a>
+			if (demoRef.current && chartRef.current) {
+				const container = demoRef.current;
+				const chart = chartRef.current.chart
 
-				<div
-					className="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30"
-					data-code-snippet>
-					<div
-						className="bx--snippet-container"
-						aria-label="Code Snippet Text">
-						<pre>
-							<code>
-								<span className="token tag">{`<${demo.chartType.vanilla}`}</span>
-								{`
-    `}
-								<span className="token attr-name">{`data=`}</span>
-								<span className="token attr-value">{`{data}`}</span>
-								{`
-    `}
-								<span className="token attr-name">{`options=`}</span>
-								<span className="token attr-value">{`{options}`}</span>
-								<span className="token tag">{`
-/>`}</span>
-							</code>
-						</pre>
+				storyUtils.addControls(
+					container,
+					demoGroup,
+					chart,
+					{
+						colorPairingOptions,
+					}
+				);
+
+				storyUtils.addOtherVersions(container, demoGroup, demo, {
+					currentVersion: 'react',
+				});
+			}
+
+			React.useEffect(() => {
+				setUpdate(!update);
+			}, [demoRef, chartRef]);
+
+			return (
+				<div className="container theme--g100" ref={demoRef}>
+					<h3>
+						<b>Component:</b>
+						<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
+					</h3>
+					<p className="props">
+						<b>Props:</b> data,{' '}
+						<a
+							href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
+							target="_blank">
+							options
+						</a>
+					</p>
+
+					<div id="charting-controls"></div>
+
+					<div className="marginTop-30" id="chart-demo">
+						<DemoComponent
+							data={object('Data', demo.data)}
+							options={object('Options', demo.options)}
+							ref={chartRef}
+						/>
 					</div>
+
+					<h3 className="marginTop-30">Code sample</h3>
+					<a href={demo.codesandbox.react} target="_blank">
+						<img
+							src="https://codesandbox.io/static/img/play-codesandbox.svg"
+							className="marginTop"
+						/>
+					</a>
+
+					<h3 class="marginTop-45">Other versions</h3>
+					<p style={{ opacity: 0.75 }}>
+						(currently on <strong>React</strong>)
+					</p>
+					<div id="other-versions"></div>
 				</div>
-			</div>
-		));
+			);
+		});
 	});
 });

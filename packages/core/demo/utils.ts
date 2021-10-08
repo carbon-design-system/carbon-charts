@@ -1,10 +1,8 @@
-import * as Configuration from '../src/configuration';
-
-const generateThemePickerHTML = (container) => {
+const generateThemePickerHTML = (container, configs) => {
 	const div = document.createElement('div');
 	div.id = 'theme-picker';
 	div.innerHTML = `
-<fieldset class="bx--fieldset marginTop-30">
+<fieldset class="bx--fieldset marginTop-45">
 	<div class="bx--form-item">
 		<div class="bx--radio-button-group ">
 			<div class="bx--radio-button-wrapper">
@@ -42,8 +40,13 @@ const generateThemePickerHTML = (container) => {
 	container.querySelector('#charting-controls').appendChild(div);
 };
 
-const colorPairingOptions = Configuration.color.pairingOptions;
-const generateColorPalettePickerHTML = (container, chart) => {
+const generateColorPalettePickerHTML = (
+	container,
+	chart,
+	configs = { colorPairingOptions: null }
+) => {
+	const { colorPairingOptions } = configs;
+
 	const chartOptions = chart.model.getOptions();
 	const { numberOfVariants: variants, option } = chartOptions.color.pairing;
 
@@ -131,17 +134,22 @@ const generateColorPalettePickerHTML = (container, chart) => {
 	container.querySelector('#charting-controls').appendChild(div);
 };
 
-export const addControls = (container, demoGroup, chart) => {
-	generateThemePickerHTML(container);
+export const addControls = (
+	container,
+	demoGroup,
+	chart,
+	configs = { colorPairingOptions: null }
+) => {
+	generateThemePickerHTML(container, configs);
 
 	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
-		generateColorPalettePickerHTML(container, chart);
+		generateColorPalettePickerHTML(container, chart, configs);
 	}
 
-	addRadioButtonEventListeners(container, chart);
+	addRadioButtonEventListeners(container, chart, configs);
 };
 
-export const addRadioButtonEventListeners = (container, chart) => {
+export const addRadioButtonEventListeners = (container, chart, configs) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll(
 		'div#theme-picker input.bx--radio-button'
@@ -154,6 +162,91 @@ export const addRadioButtonEventListeners = (container, chart) => {
 			chart.update();
 		});
 	});
+};
+
+export const addOtherVersions = (
+	container,
+	demoGroup,
+	demo,
+	configs = { currentVersion: 'vanilla' }
+) => {
+	const { currentVersion } = configs;
+
+	const demoGroupClassification = (demoGroup.type || '').replace(
+		'-chart',
+		''
+	);
+
+	const div = document.createElement('div');
+	div.setAttribute('class', 'bx--row resource-card-group');
+
+	let htmlContent = '';
+	const otherVersions = [
+		...(currentVersion !== 'vanilla'
+			? [
+					{
+						name: 'vanilla',
+						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'react'
+			? [
+					{
+						name: 'React',
+						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'angular'
+			? [
+					{
+						name: 'Angular',
+						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'vue'
+			? [
+					{
+						name: 'Vue',
+						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'svelte'
+			? [
+					{
+						name: 'Svelte',
+						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+	];
+
+	otherVersions.forEach((otherVersion) => {
+		htmlContent += `<div class="bx--no-gutter-sm bx--col-md-6 bx--col-lg-6">
+		<div class="bx--resource-card">
+		  <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+			<div class="bx--aspect-ratio--object">
+			  <a href="${otherVersion.link}" class="bx--tile bx--tile--clickable">
+				<h5 class="bx--resource-card__subtitle">${otherVersion.name}</h5>
+				<div class="bx--resource-card__icon--img"></div>
+				<div class="bx--resource-card__icon--action">
+				  <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Open resource" width="20" height="20" viewBox="0 0 32 32" role="img">
+					<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
+					<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>
+				  </svg>
+				</div>
+			  </a>
+			</div>
+		  </div>
+		</div>
+	  </div>`;
+	});
+
+	div.innerHTML = htmlContent;
+	container.querySelector('#other-versions').appendChild(div);
 };
 
 /**
