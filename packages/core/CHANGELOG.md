@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.4...v0.50.5) (2021-10-08)
+
+
+### Bug Fixes
+
+* **core:** fix safari bug causing incorrect chart heights ([#1179](https://github.com/carbon-design-system/carbon-charts/issues/1179)) ([55dd880](https://github.com/carbon-design-system/carbon-charts/commit/55dd880e48cb07c8f392ce2b9774e49ea4220051)), closes [#1177](https://github.com/carbon-design-system/carbon-charts/issues/1177)
+
+
+
+
+
 ## [0.50.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.3...v0.50.4) (2021-10-05)
 
 
