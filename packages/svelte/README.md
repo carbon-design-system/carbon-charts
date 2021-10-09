@@ -193,6 +193,7 @@ Import chart styles from `@carbon/charts`:
 <script>
   import { BarChartSimple } from "@carbon/charts-svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 </script>
 
 <BarChartSimple
@@ -244,6 +245,7 @@ Dynamically import a chart and instantiate it using the
 <script>
   import { onMount } from "svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
@@ -284,6 +286,7 @@ that fires when hovering over a bar.
   import { onMount } from "svelte";
   import { BarChartSimple } from "@carbon/charts-svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
