@@ -42,10 +42,20 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getStatus() {
 		const options = this.getOptions();
-		const dataValue = Tools.getProperty(this.getDisplayData(), 0, 'value');
+		const dataValues = Tools.getProperty(this.getDisplayData());
+
+		const { value: totalValue } = dataValues
+			? dataValues.reduce((previous, current) => {
+					return { value: previous.value + current.value };
+			  })
+			: 0;
 
 		// use max value if the percentage is bigger than 100%
-		const boundedValue = dataValue > 100 ? 100 : dataValue;
+		const boundedValue = Tools.getProperty(options, 'meter', 'proportional')
+			? totalValue
+			: totalValue > 100
+			? 100
+			: totalValue;
 
 		// user needs to supply ranges
 		const allRanges = Tools.getProperty(
