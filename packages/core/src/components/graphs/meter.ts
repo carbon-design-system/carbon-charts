@@ -121,7 +121,9 @@ export class Meter extends Component {
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const className =
-			status != null && !self.model.isUserProvidedColorScaleValid()
+			status != null &&
+			!self.model.isUserProvidedColorScaleValid() &&
+			!proportional
 				? `value status--${status}`
 				: 'value';
 
@@ -174,9 +176,7 @@ export class Meter extends Component {
 		valued.exit().remove();
 
 		// draw the peak
-		const peakValue = proportional
-			? null
-			: Tools.getProperty(options, 'meter', 'peak');
+		const peakValue = Tools.getProperty(options, 'meter', 'peak');
 
 		let peakData = peakValue;
 		if (peakValue !== null) {
@@ -204,7 +204,12 @@ export class Meter extends Component {
 					'meter',
 					'height'
 				);
-				return userProvidedHeight ? userProvidedHeight : 8;
+
+				return userProvidedHeight
+					? userProvidedHeight
+					: proportional
+					? Configuration.meter.height.proportional
+					: Configuration.meter.height.default;
 			})
 			.transition()
 			.call((t) =>
