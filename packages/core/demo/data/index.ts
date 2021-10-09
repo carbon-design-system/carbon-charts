@@ -936,6 +936,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.MeterChart,
 			},
 			{
+				options: meterDemos.propMeterStatusOptions,
+				data: meterDemos.propMeterData,
+				chartType: chartTypes.MeterChart,
+			},
+			{
 				options: meterDemos.propMeterTruncationOptions,
 				data: meterDemos.propMeterData,
 				chartType: chartTypes.MeterChart,
