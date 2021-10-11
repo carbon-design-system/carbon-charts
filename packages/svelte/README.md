@@ -114,22 +114,6 @@ No additional configuration should be necessary.
 
 ### Rollup
 
-When using this library with [rollup](https://github.com/rollup/rollup), set
-`context` to `"window"` in the exported configuration in `rollup.config.js`.
-
-```js
-// rollup.config.js
-
-export default {
-	context: 'window',
-	// ...
-};
-```
-
-#### Troubleshooting
-
-##### "process is not defined"
-
 If you encounter the error message `ReferenceError: process is not defined`,
 install
 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)
