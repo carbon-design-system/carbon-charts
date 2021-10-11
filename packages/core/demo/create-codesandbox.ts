@@ -347,7 +347,7 @@ export const createSvelteChartApp = (demo: any) => {
 			break;
 	}
 
-const indexHtml = `<!DOCTYPE html>
+	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -389,20 +389,20 @@ const indexHtml = `<!DOCTYPE html>
 
 	const packageJson = {
 		scripts: {
-			dev: "vite",
-      build: "vite build"
+			dev: 'vite',
+			build: 'vite build',
 		},
 		devDependencies: {
-      "@carbon/charts-svelte": "0.50.6",
-      "@sveltejs/vite-plugin-svelte": "next",
-      "d3": "^7.0.0",
-      "svelte": "^3.43.1",
-      "svelte-hmr": "^0.14.7",
-      "vite": "^2.6.7"
+			'@carbon/charts-svelte': '0.50.6',
+			'@sveltejs/vite-plugin-svelte': 'next',
+			d3: '^7.0.0',
+			svelte: '^3.43.1',
+			'svelte-hmr': '^0.14.7',
+			vite: '^2.6.7',
 		},
 	};
 
-const vite = `import { svelte } from "@sveltejs/vite-plugin-svelte";
+	const vite = `import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vite";
 
 export default defineConfig(({ mode }) => {
