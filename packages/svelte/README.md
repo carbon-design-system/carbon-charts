@@ -68,7 +68,6 @@ const config = {
 		vite: {
 			optimizeDeps: {
 				include: ['@carbon/charts'],
-				exclude: ['@carbon/telemetry']
 			},
 			ssr: {
 				noExternal: [production && '@carbon/charts'].filter(Boolean),
