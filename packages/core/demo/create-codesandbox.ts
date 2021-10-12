@@ -347,11 +347,32 @@ export const createSvelteChartApp = (demo: any) => {
 			break;
 	}
 
-	const indexJs = `import App from "./App.svelte";
+	const indexHtml = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preconnect"
+      crossorigin="anonymous"
+      href="https://fonts.gstatic.com"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <script type="module">
+      import App from "./App.svelte";
 
-const app = new App({ target: document.body });
+      const app = new App({ target: document.body });
 
-export default app;
+      export default app;
+    </script>
+  </body>
+</html>
 `;
 
 	const App = `<script>
@@ -359,19 +380,6 @@ export default app;
 	import "carbon-components/css/carbon-components.min.css";
 	import { ${chartComponent} } from "@carbon/charts-svelte";
 </script>
-
-<svelte:head>
-	<link
-			rel="preconnect"
-			crossorigin="anonymous"
-			href="https://fonts.gstatic.com"
-	/>
-	<link
-			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
-			rel="stylesheet"
-			crossorigin="anonymous"
-	/>
-</svelte:head>
 
 <${chartComponent}
 	data={${chartData}}
@@ -381,65 +389,35 @@ export default app;
 
 	const packageJson = {
 		scripts: {
-			build: 'rollup -c',
-			autobuild: 'rollup -c -w',
-			dev: 'run-p start:dev autobuild',
-			start: 'sirv public',
-			'start:dev': 'sirv public --dev',
+			dev: 'vite',
+			build: 'vite build',
 		},
 		devDependencies: {
-			'npm-run-all': '^4.1.5',
-			rollup: '^1.10.1',
-			'rollup-plugin-commonjs': '^9.3.4',
-			'rollup-plugin-node-resolve': '^4.2.3',
-			'rollup-plugin-svelte': '^5.0.3',
-			'rollup-plugin-terser': '^4.0.4',
-			'sirv-cli': '^0.3.1',
-		},
-		dependencies: {
-			'@carbon/charts': libraryVersion,
 			'@carbon/charts-svelte': libraryVersion,
-			'carbon-components': carbonComponentsVersion,
+			'@sveltejs/vite-plugin-svelte': 'next',
 			d3: D3VERSION,
-			svelte: '3.20.x',
+			svelte: '^3.43.1',
+			'svelte-hmr': '^0.14.7',
+			vite: '^2.6.7',
 		},
 	};
 
-	const rollup = `import svelte from "rollup-plugin-svelte";
-import resolve from "rollup-plugin-node-resolve";
-import commonjs from "rollup-plugin-commonjs";
-import { terser } from "rollup-plugin-terser";
-import postcss from "rollup-plugin-postcss";
+	const vite = `import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { defineConfig } from "vite";
 
-const production = !process.env.ROLLUP_WATCH;
-
-export default {
-  input: "index.js",
-  output: {
-    sourcemap: true,
-    format: "iife",
-    name: "app",
-    file: "public/bundle.js"
-  },
-  plugins: [
-    postcss(),
-    svelte({
-      dev: !production,
-      css: css => {
-        css.write("public/bundle.css");
-      }
-    }),
-    resolve(),
-    commonjs(),
-    production && terser()
-  ]
-};
+export default defineConfig(({ mode }) => {
+  return {
+    plugins: [svelte()],
+    build: { minify: mode === "production" },
+    optimizeDeps: { include: ["@carbon/charts"] },
+  };
+});
 `;
 
 	return {
 		'App.svelte': App,
-		'index.js': indexJs,
+		'index.html': indexHtml,
 		'package.json': packageJson,
-		'rollup.config.js': rollup,
+		'vite.config.js': vite,
 	};
 };
