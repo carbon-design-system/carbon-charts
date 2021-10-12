@@ -393,7 +393,7 @@ export const createSvelteChartApp = (demo: any) => {
 			build: 'vite build',
 		},
 		devDependencies: {
-			'@carbon/charts-svelte': '0.50.6',
+			'@carbon/charts-svelte': '^0.50.6',
 			'@sveltejs/vite-plugin-svelte': 'next',
 			d3: '^7.0.0',
 			svelte: '^3.43.1',
