@@ -83,7 +83,7 @@ export class BinnedRuler extends Ruler {
 			const tooltipDataGroups = activeDataGroupNames
 				.reverse()
 				.map((dataGroupName) => ({
-					label: 'Group',
+					label: dataGroupName,
 					value: get(sampleMatchData, `data.${dataGroupName}`),
 					class: this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.TOOLTIP],
