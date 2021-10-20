@@ -67,7 +67,6 @@
 		"@carbon/import-once": "10.5.0",
 		"@carbon/layout": "10.28.0",
 		"@carbon/motion": "10.21.0",
-		"@carbon/styles": "0.7.0",
 		"@carbon/themes": "10.39.0",
 		"@carbon/type": "10.32.0",
 		"@rollup/plugin-json": "4.0.2",
