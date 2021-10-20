@@ -1,0 +1,37 @@
+{
+  "name": "@carbon/styles",
+  "description": "Styles for the Carbon Design System",
+  "version": "0.7.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/styles"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@carbon/colors": "^10.33.0",
+    "@carbon/feature-flags": "^0.6.0",
+    "@carbon/grid": "^10.38.0",
+    "@carbon/layout": "^10.33.0",
+    "@carbon/motion": "^10.25.0",
+    "@carbon/themes": "^10.45.0",
+    "@carbon/type": "^10.37.0",
+    "@ibm/plex": "6.0.0-next.6"
+  },
+  "devDependencies": {
+    "@carbon/test-utils": "^10.19.0",
+    "css": "^3.0.0"
+  },
+  "gitHead": "3c9fdbcc12116759c47605ad562aa4d3be78b9d5"
+}

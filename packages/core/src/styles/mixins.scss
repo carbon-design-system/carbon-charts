@@ -1,3 +1,6 @@
+// Carbon HCM mixin
+@import './vendor/@carbon/styles/scss/utilities/high-contrast-mode';
+
 @mixin background-opacity($color, $opacity: 0.3) {
 	background: $color; // fallback
 	background: rgba($color, $opacity);
