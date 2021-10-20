@@ -22,10 +22,6 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 			border: solid 1px $ui-background;
 			box-shadow: 0 0 0 2px transparent;
 
-			// Windows HCM fix
-			// @include high-contrast-mode('icon-fill');
-			// @include high-contrast-mode('focus');
-
 			@media (forced-colors: active) {
 				forced-color-adjust: none;
 			}
