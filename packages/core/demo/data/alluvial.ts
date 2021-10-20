@@ -37,6 +37,26 @@ export const alluvialSimpleCustomColorOptions = {
 	},
 };
 
+export const alluvialGradientData = alluvialSimpleData;
+
+export const alluvialSimpleGradientOptions = {
+	...alluvialSimpleOptions,
+	title: 'Alluvial (gradient)',
+	color: {
+		scale: {
+			A: '#d12771',
+			B: '#08bdba',
+			C: '#6fdc8c',
+			X: '#001100',
+			Y: 'yellow',
+			Z: 'blue',
+		},
+		gradient: {
+			enabled: true,
+		},
+	},
+};
+
 export const alluvialMultipleCategoryOptions = {
 	title: 'Alluvial (multiple categories)',
 	alluvial: {
