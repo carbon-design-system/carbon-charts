@@ -14,6 +14,7 @@ export class Alluvial extends Component {
 	renderType = RenderTypes.SVG;
 
 	private graph: any;
+	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
 	render(animate = true) {
 		// svg and container widths
@@ -32,6 +33,14 @@ export class Alluvial extends Component {
 		}
 		const options = this.model.getOptions();
 		const data = this.model.getDisplayData();
+
+		// Is gradient enabled or not
+		const isGradientAllowed = Tools.getProperty(
+			this.getOptions(),
+			'color',
+			'gradient',
+			'enabled'
+		);
 
 		// Set the custom node padding if provided
 		let nodePadding = Configuration.alluvial.minNodePadding;
@@ -113,11 +122,47 @@ export class Alluvial extends Component {
 			});
 
 		// Draws the links (Waves)
-		svg.append('g')
+		const links = svg
+			.append('g')
 			.attr('fill', 'none')
 			.selectAll('g')
 			.data(this.graph.links)
-			.join('path')
+			.join('g');
+
+		// Add gradient if requsted
+		if (isGradientAllowed) {
+			const scale = Tools.getProperty(
+				this.getOptions(),
+				'color',
+				'scale'
+			);
+
+			if (scale) {
+				links
+					.append('linearGradient')
+					.attr('id', (d) => `${this.gradient_id}-link-${d.index}`)
+					.attr('gradientUnits', 'userSpaceOnUse')
+					.call((gradient) =>
+						gradient
+							.append('stop')
+							.attr('offset', '0%')
+							.attr('stop-color', (d) => {
+								return scale[d.source.name];
+							})
+					)
+					.call((gradient) =>
+						gradient
+							.append('stop')
+							.attr('offset', '100%')
+							.attr('stop-color', (d) => {
+								return scale[d.target.name];
+							})
+					);
+			}
+		}
+
+		links
+			.append('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
 			.attr('id', (d) => `line-${d.index}`)
@@ -137,7 +182,13 @@ export class Alluvial extends Component {
 					originalClassName: 'link',
 				});
 			})
-			.style('stroke', (d) => this.model.getFillColor(d.source.name))
+			.style('stroke', (d) => {
+				if (isGradientAllowed) {
+					return `url(#${this.gradient_id}-link-${d.index})`;
+				}
+
+				return this.model.getFillColor(d.source.name);
+			})
 			.attr('stroke-width', (d) => Math.max(1, d.width))
 			.style('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
