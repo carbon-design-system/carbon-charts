@@ -122,6 +122,10 @@
 		width: 4px;
 		height: 100%;
 
+		@media (forced-colors: active) {
+			forced-color-adjust: none;
+		}
+
 		& + div.label p {
 			margin-left: 4px;
 		}
