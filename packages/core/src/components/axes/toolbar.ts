@@ -41,7 +41,7 @@ export class Toolbar extends Component {
 	}
 
 	render(animate = true) {
-		const container = this.getComponentContainer();
+		const container = this.getComponentContainer().attr("role", "toolbar");
 
 		if (!this.overflowMenu) {
 			this.overflowMenu = container
@@ -72,18 +72,20 @@ export class Toolbar extends Component {
 		const enteringToolbarControls = toolbarControls
 			.enter()
 			.append('div')
-			.attr('class', 'toolbar-control bx--overflow-menu');
+			.attr('class', 'toolbar-control bx--overflow-menu')
+			.attr('role', 'button');
 
 		const allToolbarControls = enteringToolbarControls
 			.merge(toolbarControls)
 			.classed('disabled', (d) =>
 				d.shouldBeDisabled ? d.shouldBeDisabled() : false
 			)
+			.attr('aria-label', (d) => d.title)
 			.html(
 				(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
-				aria-haspopup="true" aria-expanded="false" id="${d.id}">
+				aria-haspopup="true" aria-expanded="false" id="${d.id}" aria-label="${d.title}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
 					d.iconWidth !== undefined ? d.iconWidth : '20px'
 				}; height: ${
@@ -321,6 +323,7 @@ export class Toolbar extends Component {
 	getOverflowButtonConfig() {
 		return {
 			id: 'toolbar-overflow-menu',
+			title: "More options",
 			shouldBeDisabled: () => false,
 			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
 							 <circle cx="16" cy="16" r="2"></circle>
@@ -341,6 +344,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomIn',
+						title: 'Zoom in',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMinZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -352,6 +356,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomOut',
+						title: 'Zoom out',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -363,6 +368,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-resetZoom',
+						title: 'Reset zoom',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -374,6 +380,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.MAKE_FULLSCREEN:
 				controlConfig = {
 					id: 'toolbar-makefullscreen',
+					title: 'Make fullscreen',
 					iconSVGContent: this.getControlIconByType(controlType),
 					iconWidth: '15px',
 					iconHight: '15px',
@@ -386,6 +393,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				controlConfig = {
 					id: 'toolbar-showasdatatable',
+					title: 'Show as table',
 					iconSVGContent: this.getControlIconByType(controlType),
 					shouldBeDisabled: false,
 					clickFunction: () =>
@@ -395,6 +403,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
+					title: 'Export as CSV',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.model.exportToCSV(),
@@ -403,6 +412,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
+					title: 'Export as PNG',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.services.domUtils.exportToPNG(),
@@ -411,6 +421,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
+					title: 'Export as JPG',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.services.domUtils.exportToJPG(),
