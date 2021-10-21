@@ -1,128 +1,158 @@
 {
-  "projectName": "carbon-charts",
-  "projectOwner": "carbon-design-system",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "badgeTemplate": "",
-  "contributorsPerLine": 5,
-  "contributors": [
-    {
-      "login": "theiliad",
-      "name": "Eliad Moosavi",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/14989804?v=4",
-      "profile": "http://eMoosavi.com",
-      "contributions": [
-        "code",
-        "doc",
-        "example",
-        "infra"
-      ]
-    },
-    {
-      "login": "zvonimirfras",
-      "name": "Zvonimir Fras",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/9692126?v=4",
-      "profile": "http://www.zvonimirfras.com",
-      "contributions": [
-        "code",
-        "doc",
-        "review"
-      ]
-    },
-    {
-      "login": "cal-smith",
-      "name": "Callum Smith",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/1744185?v=4",
-      "profile": "http://reallyawesomedomain.com",
-      "contributions": [
-        "code",
-        "doc",
-        "review"
-      ]
-    },
-    {
-      "login": "michc",
-      "name": "MichC",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/1393278?v=4",
-      "profile": "https://github.com/michc",
-      "contributions": [
-        "design",
-        "doc"
-      ]
-    },
-    {
-      "login": "nicoleroppel",
-      "name": "nicoleroppel",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/43546639?v=4",
-      "profile": "https://github.com/nicoleroppel",
-      "contributions": [
-        "design",
-        "doc"
-      ]
-    },
-    {
-      "login": "dianatran18",
-      "name": "Diana Tran",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/43549567?v=4",
-      "profile": "https://github.com/dianatran18",
-      "contributions": [
-        "design",
-        "doc"
-      ]
-    },
-    {
-      "login": "JaimeMae",
-      "name": "Jaime Stockton",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/43579539?v=4",
-      "profile": "https://github.com/JaimeMae",
-      "contributions": [
-        "design",
-        "doc"
-      ]
-    },
-    {
-      "login": "PLopezD",
-      "name": "Pablo Lopez Domowicz",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/5810053?v=4",
-      "profile": "https://github.com/PLopezD",
-      "contributions": [
-        "design",
-        "doc"
-      ]
-    },
-    {
-      "login": "JohnPeng47",
-      "name": "John Peng",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/9957837?v=4",
-      "profile": "http://www.johnpeng47.com",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "t-mullen",
-      "name": "Thomas Mullen",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/14932492?v=4",
-      "profile": "https://github.com/t-mullen",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "natashadecoste",
-      "name": "natashadecoste",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/14351335?v=4",
-      "profile": "https://github.com/natashadecoste",
-      "contributions": [
-        "code",
-        "doc",
-        "example"
-      ]
-    }
-  ]
+	"projectName": "carbon-charts",
+	"projectOwner": "carbon-design-system",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": [
+		"README.md"
+	],
+	"imageSize": 100,
+	"commit": false,
+	"badgeTemplate": "",
+	"contributorsPerLine": 5,
+	"contributors": [
+		{
+			"login": "hlyang397",
+			"name": "Eric Yang",
+			"avatar_url": "https://avatars.githubusercontent.com/u/59426533?v=4",
+			"profile": "https://github.com/hlyang397",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "JennChao",
+			"name": "Jennifer Chao",
+			"avatar_url": "https://avatars.githubusercontent.com/u/23396970?v=4",
+			"profile": "https://github.com/JennChao",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "metonym",
+			"name": "Eric Liu",
+			"avatar_url": "https://avatars.githubusercontent.com/u/10718366?v=4",
+			"profile": "https://github.com/metonym",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "j1mie",
+			"name": "j1mie",
+			"avatar_url": "https://avatars.githubusercontent.com/u/12685163?v=4",
+			"profile": "https://github.com/j1mie",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "shaziajk",
+			"name": "shaziajk",
+			"avatar_url": "https://avatars.githubusercontent.com/u/44590418?v=4",
+			"profile": "https://github.com/shaziajk",
+			"contributions": [
+				"code",
+				"doc",
+				"example"
+			]
+		},
+		{
+			"login": "michc",
+			"name": "MichC",
+			"avatar_url": "https://avatars0.githubusercontent.com/u/1393278?v=4",
+			"profile": "https://github.com/michc",
+			"contributions": [
+				"design",
+				"doc"
+			]
+		},
+		{
+			"login": "PLopezD",
+			"name": "Pablo Lopez Domowicz",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/5810053?v=4",
+			"profile": "https://github.com/PLopezD",
+			"contributions": [
+				"design",
+				"doc"
+			]
+		},
+		{
+			"login": "JaimeMae",
+			"name": "Jaime Stockton",
+			"avatar_url": "https://avatars0.githubusercontent.com/u/43579539?v=4",
+			"profile": "https://github.com/JaimeMae",
+			"contributions": [
+				"design",
+				"doc"
+			]
+		},
+		{
+			"login": "t-mullen",
+			"name": "Thomas Mullen",
+			"avatar_url": "https://avatars0.githubusercontent.com/u/14932492?v=4",
+			"profile": "https://github.com/t-mullen",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "scottdickerson",
+			"name": "Scott Dickerson",
+			"avatar_url": "https://avatars.githubusercontent.com/u/6663002?v=4",
+			"profile": "https://github.com/scottdickerson",
+			"contributions": [
+				"code",
+				"doc",
+				"example"
+			]
+		},
+		{
+			"login": "moores2",
+			"name": "Simon Moore",
+			"avatar_url": "https://avatars.githubusercontent.com/u/6977424?v=4",
+			"profile": "https://github.com/moores2",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "ZrianinaMariia",
+			"name": "Mariia",
+			"avatar_url": "https://avatars.githubusercontent.com/u/5481483?v=4",
+			"profile": "https://github.com/ZrianinaMariia",
+			"contributions": [
+				"code",
+				"doc",
+				"example",
+				"review"
+			]
+		},
+		{
+			"login": "JohnPeng47",
+			"name": "John Peng",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/9957837?v=4",
+			"profile": "http://www.johnpeng47.com",
+			"contributions": [
+				"code"
+			]
+		}
+	],
+	"commitConvention": "none"
 }
