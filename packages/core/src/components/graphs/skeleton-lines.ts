@@ -67,7 +67,15 @@ export class SkeletonLines extends Skeleton {
 		sparklineSkeleton
 			.selectAll('line')
 			.classed('shimmer-effect-lines', showShimmerEffect)
-			.classed('empty-state-lines', !showShimmerEffect);
+			.classed('empty-state-lines', !showShimmerEffect)
+			.style(
+				'stroke',
+				showShimmerEffect
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-lines`
+					  )})`
+					: null
+			);
 	}
 
 	updateBackdropStyle() {
@@ -78,7 +86,10 @@ export class SkeletonLines extends Skeleton {
 			this.backdrop,
 			'rect.chart-skeleton-backdrop'
 		);
-		backdropRect.classed('shimmer-effect-lines', false);
-		backdropRect.classed('shimmer-effect-sparkline', true);
+
+		backdropRect
+			.classed('shimmer-effect-lines', false)
+			.classed('shimmer-effect-sparkline', true)
+			.style('stroke', null);
 	}
 }

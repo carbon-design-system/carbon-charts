@@ -480,7 +480,7 @@ export class Alluvial extends Component {
 					// Translate first column text container to the
 					// right so it doesn't clash with expanding node
 					if (datum.x0 - 2 === 0) {
-						const elementID = this.services.domUtils.generateElementIDString(
+						const elementID = self.services.domUtils.generateElementIDString(
 							`alluvial-node-title-${datum.index}`
 						);
 
@@ -497,7 +497,7 @@ export class Alluvial extends Component {
 						);
 					}
 
-					const elementID = this.services.domUtils.generateElementIDString(
+					const elementID = self.services.domUtils.generateElementIDString(
 						`alluvial-node-text-${datum.index}`
 					);
 
@@ -561,7 +561,7 @@ export class Alluvial extends Component {
 
 				// Translate text container back to initial state
 				if (datum.x0 - 2 === 0) {
-					const elementID = this.services.domUtils.generateElementIDString(
+					const elementID = self.services.domUtils.generateElementIDString(
 						`alluvial-node-title-${datum.index}`
 					);
 
@@ -576,7 +576,7 @@ export class Alluvial extends Component {
 					);
 				}
 
-				const elementID = this.services.domUtils.generateElementIDString(
+				const elementID = self.services.domUtils.generateElementIDString(
 					`alluvial-node-text-${datum.index}`
 				);
 
