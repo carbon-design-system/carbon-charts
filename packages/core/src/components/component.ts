@@ -77,20 +77,16 @@ export class Component {
 				'style',
 				'prefix'
 			);
-			this.parent
-				.classed(
-					`${settings.prefix}--${chartprefix}--${this.type}`,
-					true
-				)
-				.attr('id', this.id);
+			this.parent.classed(
+				`${settings.prefix}--${chartprefix}--${this.type}`,
+				true
+			);
 
 			if (oldParent) {
-				oldParent
-					.classed(
-						`${settings.prefix}--${chartprefix}--${this.type}`,
-						false
-					)
-					.attr('id', this.id);
+				oldParent.classed(
+					`${settings.prefix}--${chartprefix}--${this.type}`,
+					false
+				);
 			}
 		}
 	}

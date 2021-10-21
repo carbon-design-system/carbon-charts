@@ -47,7 +47,7 @@ export class Tooltip extends Component {
 		// if there is a provided tooltip HTML function call it
 		if (Tools.getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip" role="tooltip"><p>${e.detail.content}</p></div>`;
+				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 				tooltipTextContainer.html(labelHTML);
 			} else {
 				tooltipTextContainer.html(
@@ -197,13 +197,13 @@ export class Tooltip extends Component {
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip" role="tooltip">><p>${e.detail.content}</p></div>`;
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
 		} else {
 			const items = this.getItems(e);
 			const formattedItems = this.formatItems(items);
 
 			defaultHTML =
-				`<ul class="multi-tooltip" role="tooltip">` +
+				`<ul class="multi-tooltip">` +
 				formattedItems
 					.map(
 						(item) =>
@@ -272,7 +272,8 @@ export class Tooltip extends Component {
 				`div.${settings.prefix}--${chartprefix}--tooltip`
 			);
 
-			this.tooltip.style('max-width', null);
+			this.tooltip.style('max-width', null).attr('role', 'tooltip');
+
 			if (!this.isEventListenerAdded) {
 				this.addTooltipEventListener();
 				this.isEventListenerAdded = true;

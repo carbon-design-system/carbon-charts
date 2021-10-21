@@ -41,7 +41,7 @@ export class Toolbar extends Component {
 	}
 
 	render(animate = true) {
-		const container = this.getComponentContainer().attr("role", "toolbar");
+		const container = this.getComponentContainer().attr('role', 'toolbar');
 
 		if (!this.overflowMenu) {
 			this.overflowMenu = container
@@ -85,7 +85,9 @@ export class Toolbar extends Component {
 				(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
-				aria-haspopup="true" aria-expanded="false" id="${d.id}" aria-label="${d.title}">
+				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
+					`control-${d.id}`
+				)}" aria-label="${d.title}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
 					d.iconWidth !== undefined ? d.iconWidth : '20px'
 				}; height: ${
@@ -112,7 +114,9 @@ export class Toolbar extends Component {
 			});
 
 		this.overflowButton = this.getComponentContainer().select(
-			'button.bx--overflow-menu__trigger#toolbar-overflow-menu'
+			`button.bx--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
+				'control-toolbar-overflow-menu'
+			)}`
 		);
 	}
 
@@ -131,13 +135,17 @@ export class Toolbar extends Component {
 		const enteringOverflowMenuControls = overflowMenuControls
 			.enter()
 			.append('li')
-			.attr('id', (d) => d.id)
-			.attr('class', 'bx--overflow-menu-options__option');
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`control-${d.id}`
+				)
+			)
+			.attr('class', 'bx--overflow-menu-options__option')
+			.attr('role', 'menuitem');
 
 		enteringOverflowMenuControls
 			.append('button')
-			.attr('class', 'bx--overflow-menu-options__btn')
-			.attr('role', 'menuitem');
+			.attr('class', 'bx--overflow-menu-options__btn');
 
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
@@ -180,6 +188,7 @@ export class Toolbar extends Component {
 	focusOnPreviousEnabledMenuItem(currentItemIndex) {
 		const overflowMenuItems = this.getOverflowMenuItems();
 		let previousItemIndex = overflowMenuItems.length;
+
 		for (let i = currentItemIndex - 1; i >= 0; i--) {
 			const previousOverflowMenuItem = overflowMenuItems[i];
 			if (!previousOverflowMenuItem.shouldBeDisabled()) {
@@ -187,10 +196,13 @@ export class Toolbar extends Component {
 				break;
 			}
 		}
+
 		// only if previous enabled menu item found
 		if (previousItemIndex < overflowMenuItems.length) {
 			const previousItemNode = select(
-				`#${overflowMenuItems[previousItemIndex].id} button`
+				`#${this.services.domUtils.generateElementIDString(
+					`control-${overflowMenuItems[previousItemIndex].id}`
+				)} button`
 			).node();
 			if ('focus' in previousItemNode) {
 				previousItemNode.focus();
@@ -201,6 +213,7 @@ export class Toolbar extends Component {
 	focusOnNextEnabledMenuItem(currentItemIndex) {
 		const overflowMenuItems = this.getOverflowMenuItems();
 		let nextItemIndex = -1;
+
 		for (let i = currentItemIndex + 1; i < overflowMenuItems.length; i++) {
 			const nextOverflowMenuItem = overflowMenuItems[i];
 			if (!nextOverflowMenuItem.shouldBeDisabled()) {
@@ -208,10 +221,13 @@ export class Toolbar extends Component {
 				break;
 			}
 		}
+
 		// only if next enabled menu item found
 		if (nextItemIndex > -1) {
 			const nextItemNode = select(
-				`#${overflowMenuItems[nextItemIndex].id} button`
+				`#${this.services.domUtils.generateElementIDString(
+					`control-${overflowMenuItems[nextItemIndex].id}`
+				)} button`
 			).node();
 
 			if ('focus' in nextItemNode) {
@@ -232,7 +248,11 @@ export class Toolbar extends Component {
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem, index) => {
-				const element = select(`#${menuItem.id}`);
+				const element = select(
+					`#${this.services.domUtils.generateElementIDString(
+						`control-${menuItem.id}`
+					)}`
+				);
 				if (element !== null) {
 					element.on('click', () => {
 						// call the specified function
@@ -323,7 +343,7 @@ export class Toolbar extends Component {
 	getOverflowButtonConfig() {
 		return {
 			id: 'toolbar-overflow-menu',
-			title: "More options",
+			title: 'More options',
 			shouldBeDisabled: () => false,
 			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
 							 <circle cx="16" cy="16" r="2"></circle>

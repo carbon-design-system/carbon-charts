@@ -20,6 +20,8 @@ export class Legend extends Component {
 	renderType = RenderTypes.HTML;
 
 	render() {
+		const chartID = this.services.domUtils.getChartID();
+
 		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, 'legend');
 		const alignment = Tools.getProperty(legendOptions, 'alignment');
@@ -45,6 +47,7 @@ export class Legend extends Component {
 			.classed(legendOrientation, true)
 			.classed('has-deactivated-items', hasDeactivatedItems)
 			.attr('role', Roles.GROUP)
+			.attr('aria-label', 'Data groups')
 			.attr('data-name', 'legend-items');
 
 		if (userProvidedOrder) {
@@ -83,7 +86,11 @@ export class Legend extends Component {
 			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
-			.attr('aria-label', (d) => d.name)
+			.attr('aria-labelledby', (d, i) =>
+				this.services.domUtils.generateElementIDString(
+					`legend-datagroup-${i}-title`
+				)
+			)
 			.attr(
 				'aria-checked',
 				({ status }) =>
@@ -91,8 +98,6 @@ export class Legend extends Component {
 			)
 			.attr('width', checkboxRadius * 2)
 			.attr('height', checkboxRadius * 2)
-			.attr('rx', 1)
-			.attr('ry', 1)
 			.attr('class', (d, i) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.BACKGROUND],
@@ -408,6 +413,13 @@ export class Legend extends Component {
 		} else {
 			addedLegendItemsText.html((d) => d.name);
 		}
+
+		// Add an ID for the checkbox to use through `aria-labelledby`
+		addedLegendItemsText.attr('id', (d, i) =>
+			this.services.domUtils.generateElementIDString(
+				`legend-datagroup-${i}-title`
+			)
+		);
 	}
 
 	addEventListeners() {
