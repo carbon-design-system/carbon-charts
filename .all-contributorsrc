@@ -12,6 +12,30 @@
 	"contributorsPerLine": 5,
 	"contributors": [
 		{
+			"login": "DianaStanciulescu",
+			"name": "DianaStanciulescu",
+			"avatar_url": "https://avatars.githubusercontent.com/u/51086727?v=4",
+			"profile": "https://github.com/DianaStanciulescu",
+			"contributions": [
+				"design",
+				"doc",
+				"example",
+				"research"
+			]
+		},
+		{
+			"login": "DanaPaslaru",
+			"name": "DanaPaslaru",
+			"avatar_url": "https://avatars.githubusercontent.com/u/64195956?v=4",
+			"profile": "https://github.com/DanaPaslaru",
+			"contributions": [
+				"design",
+				"doc",
+				"example",
+				"research"
+			]
+		},
+		{
 			"login": "hlyang397",
 			"name": "Eric Yang",
 			"avatar_url": "https://avatars.githubusercontent.com/u/59426533?v=4",
@@ -142,6 +166,24 @@
 				"doc",
 				"example",
 				"review"
+			]
+		},
+		{
+			"login": "rmathur16",
+			"name": "rmathur16",
+			"avatar_url": "https://avatars.githubusercontent.com/u/38890232?v=4",
+			"profile": "https://github.com/rmathur16",
+			"contributions": [
+				"research"
+			]
+		},
+		{
+			"login": "tw15egan",
+			"name": "TJ Egan",
+			"avatar_url": "https://avatars.githubusercontent.com/u/11928039?v=4",
+			"profile": "https://github.com/tw15egan",
+			"contributions": [
+				"code"
 			]
 		},
 		{
