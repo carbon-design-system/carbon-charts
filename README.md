@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://carbon-design-system.github.io/carbon-charts/">
-		<img src="assets/logo.svg" alt="Carbon Charts" width=150 height=150 />
+		<img src="packages/core/.storybook/assets/share.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
@@ -71,6 +71,8 @@ Read the release change logs
 | Histogram          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Tree               | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Alluvial           | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Heatmap            | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Parallel coordinates | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 
