@@ -5,6 +5,7 @@ import {
 	Alignments,
 	ChartTypes,
 	TreeTypes,
+	DividerStatus,
 } from './enums';
 import {
 	LegendOptions,
@@ -508,5 +509,44 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 		 * Enable single color usage for lines
 		 */
 		monochrome?: boolean;
+	};
+}
+
+/**
+ * options specific to Heatmap charts
+ */
+export interface HeatmapChartOptions extends BaseChartOptions {
+	heatmap: {
+		/**
+		 * Divider width state - will default to auto
+		 * No cell divider for cell dimensions less than 16
+		 */
+		divider?: {
+			state?: DividerStatus;
+		};
+		/**
+		 * @question - Should this be a new config? I'm not sure if color legend will be reused
+		 * Color palette too use
+		 */
+		colorPalette?: {
+			/**
+			 * @question - REQUIRES IMPLEMENTATION REVIEW
+			 * - SHOULD THIS BE PART OF THE COLOR OBJECT INSTEAD?
+			 * Sets which IBM color scheme to use, defaults to 'purple'
+			 */
+			type?:
+				| 'purple'
+				| 'blue'
+				| 'cyan'
+				| 'teal'
+				| 'red-cyan'
+				| 'purple-teal';
+			/**
+			 * @question - REQUIRES IMPLEMENTATION REVIEW
+			 * - SHOULD THIS BE PART OF THE LEGEND OR COLOR OBJECT INSTEAD?
+			 * Uses the listed colors to generate color scheme (For both heatmap & color-legend);
+			 */
+			colorCodes?: Array<string>;
+		};
 	};
 }

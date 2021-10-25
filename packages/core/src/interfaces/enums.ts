@@ -250,3 +250,12 @@ export enum LegendItemType {
 	QUARTILE = 'quartile',
 	ZOOM = 'zoom',
 }
+
+/**
+ * enum of axis ticks rotation
+ */
+export enum DividerStatus {
+	ON = 'on',
+	AUTO = 'auto',
+	OFF = 'off',
+}
