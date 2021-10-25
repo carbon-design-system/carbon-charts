@@ -16,7 +16,7 @@ export class ChartModelCartesian extends ChartModel {
 
 	// get the scales information
 	// needed for getTabularArray()
-	private assignRangeAndDomains() {
+	protected assignRangeAndDomains() {
 		const { cartesianScales } = this.services;
 		const options = this.getOptions();
 		const isDualAxes = cartesianScales.isDualAxes();
