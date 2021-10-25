@@ -24,6 +24,7 @@ import * as zoomBarDemos from './zoom-bar';
 import * as highScaleDemos from './high-scale';
 import * as alluvialDemos from './alluvial';
 import * as highlightDemos from './hightlight';
+import * as heatmapDemos from './heatmap';
 
 export * from './area';
 export * from './bar';
@@ -49,6 +50,7 @@ export * from './wordcloud';
 export * from './zoom-bar';
 export * from './high-scale';
 export * from './alluvial';
+export * from './heatmap';
 
 import {
 	createChartSandbox,
@@ -798,6 +800,34 @@ const simpleChartDemos = [
 				options: gaugeDemos.gaugeOptionsCircularNoDelta,
 				data: gaugeDemos.gaugeDataNoDelta,
 				chartType: chartTypes.GaugeChart,
+			},
+		],
+	},
+	{
+		title: 'Heatmap',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				options: heatmapDemos.heatmapOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapColorOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapMissingDataOptions,
+				data: heatmapDemos.heatmapMissingData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapTimescaleOptions,
+				data: heatmapDemos.heatmapTimeScaleData,
+				chartType: chartTypes.HeatmapChart,
 			},
 		],
 	},
