@@ -204,6 +204,10 @@ export const alluvial = {
 	},
 };
 
+export const heatmap = {
+	minCellDividerDimension: 16,
+};
+
 export const spacers = {
 	default: {
 		size: 24,

@@ -45,6 +45,8 @@ import {
 	ZoomBarTypes,
 	LegendItemType,
 	TreeTypes,
+	HeatmapChartOptions,
+	DividerStatus,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -590,6 +592,29 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 	},
 } as AlluvialChartOptions);
 
+const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
+	axes,
+	timeScale,
+	// grid,
+	// ruler,
+	zoomBar: {
+		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
+		top: {
+			enabled: false,
+			type: ZoomBarTypes.GRAPH_VIEW,
+		},
+	} as ZoomBarsOptions,
+	heatmap: {
+		divider: {
+			state: DividerStatus.AUTO,
+		},
+		colorPalette: {
+			type: 'purple',
+		},
+	},
+} as HeatmapChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -617,6 +642,7 @@ export const options = {
 	circlePackChart,
 	wordCloudChart,
 	alluvialChart,
+	heatmapChart,
 };
 
 export * from './configuration-non-customizable';
