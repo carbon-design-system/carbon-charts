@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.8...v0.50.9) (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** hCM issues with legend & tooltips ([#1195](https://github.com/carbon-design-system/carbon-charts/issues/1195)) ([d5d7bf1](https://github.com/carbon-design-system/carbon-charts/commit/d5d7bf1b1438a275ea7083bc278d36c884a49bce))
+
+
+
+
+
+## [0.50.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.7...v0.50.8) (2021-10-18)
+
+
+### Bug Fixes
+
+* **core:** fix group names in binned ruler tooltips ([#1190](https://github.com/carbon-design-system/carbon-charts/issues/1190)) ([312f8be](https://github.com/carbon-design-system/carbon-charts/commit/312f8bea2d885539370ca81ddbc89ee63689ab2b))
+
+
+
+
+
+## [0.50.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.6...v0.50.7) (2021-10-12)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.50.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.5...v0.50.6) (2021-10-08)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
