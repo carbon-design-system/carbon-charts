@@ -21,6 +21,7 @@ import TreemapChart from './TreemapChart.svelte';
 import CirclePackChart from './CirclePackChart.svelte';
 import WordCloudChart from './WordCloudChart.svelte';
 import AlluvialChart from './AlluvialChart.svelte';
+import HeatmapChart from './HeatmapChart.svelte';
 
 export {
 	AreaChart,
@@ -46,4 +47,5 @@ export {
 	CirclePackChart,
 	WordCloudChart,
 	AlluvialChart,
+	HeatmapChart,
 };
