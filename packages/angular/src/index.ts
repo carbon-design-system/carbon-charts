@@ -24,6 +24,7 @@ export * from './treemap-chart.component';
 export * from './circle-pack-chart.component';
 export * from './wordcloud-chart.component';
 export * from './alluvial-chart.component';
+export * from './heatmap-chart.component';
 
 // Diagrams
 export * from './diagrams/card-node/card-node.module';
