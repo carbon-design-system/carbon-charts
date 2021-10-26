@@ -1096,21 +1096,3 @@ export const heatmapMissingDataOptions = {
 		},
 	},
 };
-
-export const heatmapTimescaleOptions = {
-	title: 'Heatmap (timescale)',
-	axes: {
-		left: {
-			title: 'Letter',
-			mapsTo: 't',
-			scaleType: 'labels',
-		},
-		bottom: {
-			title: 'Time',
-			mapsTo: 'time',
-			scaleType: 'time',
-		},
-	},
-};
-
-export const heatmapTimeScaleData = [];

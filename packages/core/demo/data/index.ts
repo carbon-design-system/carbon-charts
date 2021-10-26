@@ -824,11 +824,6 @@ const simpleChartDemos = [
 				data: heatmapDemos.heatmapMissingData,
 				chartType: chartTypes.HeatmapChart,
 			},
-			{
-				options: heatmapDemos.heatmapTimescaleOptions,
-				data: heatmapDemos.heatmapTimeScaleData,
-				chartType: chartTypes.HeatmapChart,
-			},
 		],
 	},
 	{
