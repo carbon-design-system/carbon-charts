@@ -270,7 +270,8 @@ export class Heatmap extends Component {
 
 	// Highlight elements that match the hovered axis item
 	handleAxisOnHover = (event: CustomEvent) => {
-		const { datum } = event.detail;
+		const { detail } = event;
+		const { datum } = detail;
 		// Unique ranges and domains
 		const ranges = this.model.getUniqueRanges();
 		const domains = this.model.getUniqueDomain();
@@ -322,7 +323,7 @@ export class Heatmap extends Component {
 
 		// Dispatch tooltip show event
 		this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-			event,
+			event: detail.event,
 			hoveredElement: select(event.detail.element),
 			items: [
 				{
