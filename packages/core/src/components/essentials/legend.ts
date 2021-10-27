@@ -401,7 +401,6 @@ export class Legend extends Component {
 		);
 
 		const addedLegendItemsText = svg.selectAll('div.legend-item p');
-		console.log('addedLegendItemsText', addedLegendItemsText.nodes());
 
 		const self = this;
 		// Add an ID for the checkbox to use through `aria-labelledby`
@@ -416,7 +415,6 @@ export class Legend extends Component {
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d) {
-				console.log('d', d);
 				if (d.name.length > truncationThreshold) {
 					return Tools.truncateLabel(
 						d.name,
