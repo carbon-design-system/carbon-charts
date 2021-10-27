@@ -32,7 +32,12 @@ export class PieChartModel extends ChartModel {
 
 		const result = [
 			['Group', 'Value'],
-			...displayData.map((datum) => [datum[groupMapsTo], datum['value']]),
+			...displayData.map((datum) => [
+				datum[groupMapsTo],
+				datum['value'] === null
+					? '&ndash;'
+					: datum['value'].toLocaleString(),
+			]),
 		];
 
 		return result;
