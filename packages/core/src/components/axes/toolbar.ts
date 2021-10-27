@@ -43,46 +43,61 @@ export class Toolbar extends Component {
 	render(animate = true) {
 		const container = this.getComponentContainer().attr('role', 'toolbar');
 
-		if (!this.overflowMenu) {
-			this.overflowMenu = container
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			'data',
+			'loading'
+		);
+
+		if (isDataLoading) {
+			container.html('');
+		} else {
+			if (!this.overflowMenu) {
+				this.overflowMenu = container
+					.append('div')
+					.attr(
+						'class',
+						'bx--overflow-menu-options bx--overflow-menu--flip'
+					)
+					.attr('tabindex', -1)
+					.attr('role', 'menu')
+					.html(`<ul></ul>`);
+			}
+
+			// get the toolbar buttons
+			const {
+				buttonList,
+				overflowMenuItemList,
+			} = this.getControlConfigs();
+
+			// overflow button is required only if overflow menu item list is valid
+			if (!!overflowMenuItemList) {
+				buttonList.push(this.getOverflowButtonConfig());
+			}
+
+			const toolbarControls = container
+				.selectAll('div.toolbar-control')
+				.data(buttonList, (button) => button.id);
+
+			toolbarControls.exit().remove();
+
+			const enteringToolbarControls = toolbarControls
+				.enter()
 				.append('div')
-				.attr(
-					'class',
-					'bx--overflow-menu-options bx--overflow-menu--flip'
+				.attr('class', 'toolbar-control bx--overflow-menu')
+				.attr('role', 'button');
+
+			const allToolbarControls = enteringToolbarControls
+				.merge(toolbarControls)
+				.classed('disabled', (d) =>
+					d.shouldBeDisabled ? d.shouldBeDisabled() : false
 				)
-				.attr('tabindex', -1)
-				.attr('role', 'menu')
-				.html(`<ul></ul>`);
-		}
-
-		// get the toolbar buttons
-		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
-
-		// overflow button is required only if overflow menu item list is valid
-		if (!!overflowMenuItemList) {
-			buttonList.push(this.getOverflowButtonConfig());
-		}
-
-		const toolbarControls = container
-			.selectAll('div.toolbar-control')
-			.data(buttonList, (button) => button.id);
-
-		toolbarControls.exit().remove();
-
-		const enteringToolbarControls = toolbarControls
-			.enter()
-			.append('div')
-			.attr('class', 'toolbar-control bx--overflow-menu')
-			.attr('role', 'button');
-
-		const allToolbarControls = enteringToolbarControls
-			.merge(toolbarControls)
-			.classed('disabled', (d) =>
-				d.shouldBeDisabled ? d.shouldBeDisabled() : false
-			)
-			.attr('aria-label', (d) => d.title)
-			.html(
-				(d) => `
+				.attr('aria-disabled', (d) =>
+					d.shouldBeDisabled ? d.shouldBeDisabled() : false
+				)
+				.attr('aria-label', (d) => d.title)
+				.html(
+					(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
@@ -91,33 +106,34 @@ export class Toolbar extends Component {
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
 					d.iconWidth !== undefined ? d.iconWidth : '20px'
 				}; height: ${
-					d.iconWidth !== undefined ? d.iconHeight : '20px'
-				}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+						d.iconWidth !== undefined ? d.iconHeight : '20px'
+					}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVGContent}
 				</svg>
 			</button>`
-			)
-			.each(function (d) {
-				select(this)
-					.select('button')
-					.on('click', d.clickFunction)
-					.on('keyup', (event: KeyboardEvent) => {
-						if (
-							(event.key && event.key === 'Enter') ||
-							event.key === ' '
-						) {
-							event.preventDefault();
+				)
+				.each(function (d) {
+					select(this)
+						.select('button')
+						.on('click', !d.shouldBeDisabled() ? d.clickFunction : null)
+						.on('keyup', (event: KeyboardEvent) => {
+							if (
+								(event.key && event.key === 'Enter') ||
+								event.key === ' '
+							) {
+								event.preventDefault();
 
-							d.clickFunction();
-						}
-					});
-			});
+								d.clickFunction();
+							}
+						});
+				});
 
-		this.overflowButton = this.getComponentContainer().select(
-			`button.bx--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
-				'control-toolbar-overflow-menu'
-			)}`
-		);
+			this.overflowButton = this.getComponentContainer().select(
+				`button.bx--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
+					'control-toolbar-overflow-menu'
+				)}`
+			);
+		}
 	}
 
 	renderOverflowMenu() {
@@ -358,6 +374,8 @@ export class Toolbar extends Component {
 			this.services.zoom.isZoomBarEnabled() &&
 			!this.services.zoom.isEmptyState();
 
+		const displayData = this.model.getDisplayData();
+
 		let controlConfig;
 		switch (controlType) {
 			case ToolbarControlTypes.ZOOM_IN:
@@ -415,7 +433,7 @@ export class Toolbar extends Component {
 					id: 'toolbar-showasdatatable',
 					title: 'Show as table',
 					iconSVGContent: this.getControlIconByType(controlType),
-					shouldBeDisabled: false,
+					shouldBeDisabled: () => displayData.length === 0,
 					clickFunction: () =>
 						this.services.events.dispatchEvent(Events.Modal.SHOW),
 				};
