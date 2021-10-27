@@ -13,7 +13,7 @@ $css--reset: false;
 			&.disabled {
 				&,
 				button {
-					cursor: default;
+					cursor: not-allowed;
 				}
 
 				&:hover,

@@ -203,7 +203,7 @@ export class Tooltip extends Component {
 			const formattedItems = this.formatItems(items);
 
 			defaultHTML =
-				`<ul class='multi-tooltip'>` +
+				`<ul class="multi-tooltip">` +
 				formattedItems
 					.map(
 						(item) =>
@@ -272,7 +272,8 @@ export class Tooltip extends Component {
 				`div.${settings.prefix}--${chartprefix}--tooltip`
 			);
 
-			this.tooltip.style('max-width', null);
+			this.tooltip.style('max-width', null).attr('role', 'tooltip');
+
 			if (!this.isEventListenerAdded) {
 				this.addTooltipEventListener();
 				this.isEventListenerAdded = true;

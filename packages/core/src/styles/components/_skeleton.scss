@@ -17,7 +17,6 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 	.shimmer-effect-lines {
 		stroke-width: 1px;
-		stroke: url(#shimmer-lines);
 	}
 
 	.shimmer-effect-sparkline {
@@ -29,7 +28,7 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 		stroke: $lines-bg-color;
 	}
 
-	#shimmer-lines {
+	.shimmer-lines {
 		.stop-bg-shimmer {
 			stop-color: $lines-bg-color;
 		}
@@ -39,16 +38,12 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 		}
 	}
 
-	// areas
-	.shimmer-effect-areas {
-		fill: url(#shimmer-areas);
-	}
 
 	.empty-state-areas {
 		fill: $areas-bg-color;
 	}
 
-	#shimmer-areas {
+	.shimmer-areas {
 		.stop-bg-shimmer {
 			stop-color: $areas-bg-color;
 		}

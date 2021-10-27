@@ -122,7 +122,15 @@ export class ZoomBar extends Component {
 				.attr('y', 0)
 				.attr('width', width - axesLeftMargin)
 				.attr('height', '100%')
-				.classed('zoom-bg-skeleton', isTopZoomBarLoading);
+				.classed('zoom-bg-skeleton', isTopZoomBarLoading)
+				.style(
+					'stroke',
+					isTopZoomBarLoading
+						? `url(#${this.services.domUtils.generateElementIDString(
+								`shimmer-lines`
+						  )})`
+						: null
+				);
 		} else if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
 			// Draw zoombar background line
 			DOMUtils.appendOrSelect(container, 'rect.zoom-slider-bg')
@@ -130,7 +138,15 @@ export class ZoomBar extends Component {
 				.attr('y', zoombarHeight / 2 - 1)
 				.attr('width', width - axesLeftMargin)
 				.attr('height', 2)
-				.classed('zoom-slider-bg-skeleton', isTopZoomBarLoading);
+				.classed('zoom-slider-bg-skeleton', isTopZoomBarLoading)
+				.style(
+					'stroke',
+					isTopZoomBarLoading
+						? `url(#${this.services.domUtils.generateElementIDString(
+								`shimmer-lines`
+						  )})`
+						: null
+				);
 		}
 
 		if (isTopZoomBarLoading) {
@@ -670,7 +686,15 @@ export class ZoomBar extends Component {
 		]);
 		DOMUtils.appendOrSelect(container, 'path.zoom-bg-baseline')
 			.attr('d', baselineGenerator)
-			.classed('zoom-bg-baseline-skeleton', skeletonClass);
+			.classed('zoom-bg-baseline-skeleton', skeletonClass)
+			.style(
+				'stroke',
+				skeletonClass
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-lines`
+					  )})`
+					: null
+			);
 	}
 
 	renderSkeleton(container, startX, endX) {
