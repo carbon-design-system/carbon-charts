@@ -20,8 +20,6 @@ export class Legend extends Component {
 	renderType = RenderTypes.HTML;
 
 	render() {
-		const chartID = this.services.domUtils.getChartID();
-
 		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, 'legend');
 		const alignment = Tools.getProperty(legendOptions, 'alignment');
@@ -82,7 +80,7 @@ export class Legend extends Component {
 			.append('div')
 			.classed('checkbox', true);
 
-		addedCheckboxes
+		const allCheckboxes = addedCheckboxes
 			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
@@ -135,8 +133,6 @@ export class Legend extends Component {
 			.append('p')
 			.merge(legendItems.select('p'));
 
-		this.truncateLegendText(addedLegendItemsText);
-
 		const additionalItemsOption = Tools.getProperty(
 			options,
 			'legend',
@@ -158,7 +154,12 @@ export class Legend extends Component {
 				.append('div')
 				.merge(additionalItems)
 				.classed('legend-item', true)
-				.classed('additional', true);
+				.classed('additional', true)
+				.attr('aria-labelledby', (d, i) =>
+					this.services.domUtils.generateElementIDString(
+						`legend-datagroup-${allCheckboxes.size() + i}-title`
+					)
+				);
 
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
@@ -188,7 +189,7 @@ export class Legend extends Component {
 				.append('p')
 				.merge(addedAdditionalItems.select('p'));
 
-			this.truncateLegendText(addedAdditionalItemsText);
+			this.truncateLegendText();
 		}
 
 		// Remove old elements as needed.
@@ -379,7 +380,9 @@ export class Legend extends Component {
 		}
 	}
 
-	truncateLegendText(addedLegendItemsText) {
+	truncateLegendText() {
+		const svg = this.getComponentContainer();
+
 		const truncationOptions = Tools.getProperty(
 			this.getOptions(),
 			'legend',
@@ -397,9 +400,23 @@ export class Legend extends Component {
 			'numCharacter'
 		);
 
+		const addedLegendItemsText = svg.selectAll('div.legend-item p');
+		console.log('addedLegendItemsText', addedLegendItemsText.nodes());
+
+		const self = this;
+		// Add an ID for the checkbox to use through `aria-labelledby`
+		addedLegendItemsText.attr('id', function (d, i) {
+			const elementToReference =
+				this.parentNode.querySelector('div.checkbox') ||
+				this.parentNode;
+
+			return elementToReference.getAttribute('aria-labelledby');
+		});
+
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d) {
+				console.log('d', d);
 				if (d.name.length > truncationThreshold) {
 					return Tools.truncateLabel(
 						d.name,
@@ -413,13 +430,6 @@ export class Legend extends Component {
 		} else {
 			addedLegendItemsText.html((d) => d.name);
 		}
-
-		// Add an ID for the checkbox to use through `aria-labelledby`
-		addedLegendItemsText.attr('id', (d, i) =>
-			this.services.domUtils.generateElementIDString(
-				`legend-datagroup-${i}-title`
-			)
-		);
 	}
 
 	addEventListeners() {

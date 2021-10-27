@@ -95,6 +95,10 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div class="marginTop-45" id="chart-demo">
 </div>
 
+<div class="marginTop-45">
+	<a href="${window.location.href}">Open iframe</a>
+</div>
+
 <h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
 	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on Codesandbox">

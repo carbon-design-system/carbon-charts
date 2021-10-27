@@ -63,6 +63,10 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed('dot', true)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-label', (d) => {
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(d);
+				return d[rangeIdentifier];
+			})
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({
