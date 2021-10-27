@@ -1,0 +1,30 @@
+.#{$prefix}--#{$charts-prefix}--heatmap {
+
+	rect.raised {
+		filter: drop-shadow(0px 0px 8px black);
+	}
+
+	@if $carbon--theme == $carbon--theme--white {
+		rect.null-state {
+			fill: #f4f4f4;
+		}
+	}
+
+	@if $carbon--theme == $carbon--theme--g10 {
+		rect.null-state {
+			fill: #ffffff;
+		}
+	}
+
+	@if $carbon--theme == $carbon--theme--g90 {
+		rect.null-state {
+			fill: #161616;
+		}
+	}
+
+	@if $carbon--theme == $carbon--theme--g100 {
+		rect.null-state {
+			fill: #262626;
+		}
+	}
+}
