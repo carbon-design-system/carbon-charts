@@ -86,11 +86,7 @@ export class Heatmap extends Component {
 			.style('fill', (d) => {
 				// Check if a valid value exists
 				if (d.index === -1 || d.value === null) {
-					/**
-					 * @question - Determine what colors should be displaced based on theme for empty cells
-					 * Class null-state, can be used to assign fill color in scss
-					 */
-					return '#f4f4f4';
+					return null;
 				}
 				return this.model.getFillColor(Number(d.value));
 			})
@@ -170,10 +166,7 @@ export class Heatmap extends Component {
 					// Highlight element
 					hoveredElement
 						.raise()
-						.classed('raised', true)
-						.style('stroke', 'white')
-						.style('stroke-width', '3px');
-
+						.classed('raised', true);
 					// Dispatch tooltip show event
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
@@ -318,7 +311,7 @@ export class Heatmap extends Component {
 			.selectAll(ids.join(','))
 			.classed('axis-hovered', true)
 			.style('stroke', 'white')
-			.style('stroke-width', '3px')
+			.style('stroke-width', '2px')
 			.raise();
 
 		// Dispatch tooltip show event
