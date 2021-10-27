@@ -164,9 +164,7 @@ export class Heatmap extends Component {
 
 					// Perform visual changes only if value is valid
 					// Highlight element
-					hoveredElement
-						.raise()
-						.classed('raised', true);
+					hoveredElement.raise().classed('raised', true);
 					// Dispatch tooltip show event
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
