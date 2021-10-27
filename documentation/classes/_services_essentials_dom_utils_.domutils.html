@@ -95,6 +95,7 @@
 						<section class="tsd-index-section tsd-is-private-protected tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#chartid" class="tsd-kind-icon">chartID</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#height" class="tsd-kind-icon">height</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#maincontainer" class="tsd-kind-icon">main<wbr>Container</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#model" class="tsd-kind-icon">model</a></li>
@@ -110,6 +111,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#addresizelistener" class="tsd-kind-icon">add<wbr>Resize<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#exporttojpg" class="tsd-kind-icon">export<wbr>ToJPG</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#exporttopng" class="tsd-kind-icon">export<wbr>ToPNG</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#generateelementidstring" class="tsd-kind-icon">generate<wbr>ElementIDString</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#getchartid" class="tsd-kind-icon">get<wbr>ChartID</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#getholder" class="tsd-kind-icon">get<wbr>Holder</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#getmaincontainer" class="tsd-kind-icon">get<wbr>Main<wbr>Container</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_services_essentials_dom_utils_.domutils.html#handlefullscreenchange" class="tsd-kind-icon">handle<wbr>Fullscreen<wbr>Change</a></li>
@@ -142,7 +145,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L26">services/essentials/dom-utils.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L29">services/essentials/dom-utils.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -161,13 +164,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected tsd-is-external">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="chartid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> chartID</h3>
+					<div class="tsd-signature tsd-kind-icon">chartID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;Math.floor((1 + Math.random()) * 0x1000000000000).toString(16)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L27">services/essentials/dom-utils.ts:27</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="height" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> height</h3>
 					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L197">services/essentials/dom-utils.ts:197</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L201">services/essentials/dom-utils.ts:201</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">main<wbr>Container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L195">services/essentials/dom-utils.ts:195</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L199">services/essentials/dom-utils.ts:199</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -188,7 +201,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#model">model</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/service.ts#L4">services/service.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/service.ts#L4">services/service.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +212,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#services">services</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/service.ts#L5">services/service.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/service.ts#L5">services/service.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -209,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L196">services/essentials/dom-utils.ts:196</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L200">services/essentials/dom-utils.ts:200</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -226,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L438">services/essentials/dom-utils.ts:438</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L450">services/essentials/dom-utils.ts:450</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -243,7 +256,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L215">services/essentials/dom-utils.ts:215</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L227">services/essentials/dom-utils.ts:227</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -260,7 +273,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L456">services/essentials/dom-utils.ts:456</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L468">services/essentials/dom-utils.ts:468</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -277,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L266">services/essentials/dom-utils.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L278">services/essentials/dom-utils.ts:278</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -294,10 +307,50 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L300">services/essentials/dom-utils.ts:300</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L312">services/essentials/dom-utils.ts:312</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="generateelementidstring" class="tsd-anchor"></a>
+					<h3>generate<wbr>ElementIDString</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>ElementIDString<span class="tsd-signature-symbol">(</span>originalID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L223">services/essentials/dom-utils.ts:223</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>originalID: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getchartid" class="tsd-anchor"></a>
+					<h3>get<wbr>ChartID</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>ChartID<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L219">services/essentials/dom-utils.ts:219</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -311,7 +364,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L262">services/essentials/dom-utils.ts:262</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L274">services/essentials/dom-utils.ts:274</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -328,7 +381,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L434">services/essentials/dom-utils.ts:434</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L446">services/essentials/dom-utils.ts:446</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span></h4>
@@ -345,7 +398,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L374">services/essentials/dom-utils.ts:374</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L386">services/essentials/dom-utils.ts:386</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -363,7 +416,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#init">init</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L199">services/essentials/dom-utils.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L203">services/essentials/dom-utils.ts:203</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -381,7 +434,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#setmodel">setModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/service.ts#L19">services/service.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/service.ts#L19">services/service.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -404,7 +457,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L404">services/essentials/dom-utils.ts:404</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L416">services/essentials/dom-utils.ts:416</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -422,7 +475,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#setservices">setServices</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/service.ts#L24">services/service.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/service.ts#L24">services/service.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -445,7 +498,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L234">services/essentials/dom-utils.ts:234</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L246">services/essentials/dom-utils.ts:246</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -462,7 +515,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L337">services/essentials/dom-utils.ts:337</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L349">services/essentials/dom-utils.ts:349</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -480,7 +533,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_services_service_.service.html">Service</a>.<a href="_services_service_.service.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L230">services/essentials/dom-utils.ts:230</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L242">services/essentials/dom-utils.ts:242</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -497,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L384">services/essentials/dom-utils.ts:384</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L396">services/essentials/dom-utils.ts:396</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -514,7 +567,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L165">services/essentials/dom-utils.ts:165</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L169">services/essentials/dom-utils.ts:169</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -540,7 +593,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L31">services/essentials/dom-utils.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L35">services/essentials/dom-utils.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -571,7 +624,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f059e0989/packages/core/src/services/essentials/dom-utils.ts#L38">services/essentials/dom-utils.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/8bc243e96/packages/core/src/services/essentials/dom-utils.ts#L42">services/essentials/dom-utils.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -610,6 +663,9 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="_services_essentials_dom_utils_.domutils.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_services_essentials_dom_utils_.domutils.html#chartid" class="tsd-kind-icon">chartID</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 								<a href="_services_essentials_dom_utils_.domutils.html#height" class="tsd-kind-icon">height</a>
 							</li>
@@ -639,6 +695,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="_services_essentials_dom_utils_.domutils.html#exporttopng" class="tsd-kind-icon">export<wbr>ToPNG</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_services_essentials_dom_utils_.domutils.html#generateelementidstring" class="tsd-kind-icon">generate<wbr>ElementIDString</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_services_essentials_dom_utils_.domutils.html#getchartid" class="tsd-kind-icon">get<wbr>ChartID</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="_services_essentials_dom_utils_.domutils.html#getholder" class="tsd-kind-icon">get<wbr>Holder</a>
