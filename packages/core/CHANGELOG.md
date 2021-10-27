@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.8...v0.50.9) (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** hCM issues with legend & tooltips ([#1195](https://github.com/carbon-design-system/carbon-charts/issues/1195)) ([d5d7bf1](https://github.com/carbon-design-system/carbon-charts/commit/d5d7bf1b1438a275ea7083bc278d36c884a49bce))
+
+
+
+
+
 ## [0.50.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.7...v0.50.8) (2021-10-18)
 
 
