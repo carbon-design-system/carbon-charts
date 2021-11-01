@@ -139,4 +139,73 @@ export class CirclePackChartModel extends ChartModel {
 			return { ...node, dataGroupName: name };
 		}
 	}
+
+	getTabularDataArray() {
+		const displayData = this.getDisplayData();
+
+		const result = [['Child', 'Parent', 'Value']];
+
+		displayData.forEach((datum) => {
+			let value = datum.value ? datum.value : 0;
+			if (datum.children) {
+				// Call recursive function
+				value += this.getChildrenDatums(
+					datum.children,
+					datum.name,
+					result,
+					0
+				);
+			}
+			result.push(['&ndash;', datum.name, value]);
+		});
+
+		return result;
+	}
+
+	/**
+	 * Recursively determine the relationship between all the nested elements in the child
+	 * @param children: Object
+	 * @param parent: String
+	 * @param result: Array<Object>
+	 * @param totalSum: number
+	 * @returns: number
+	 */
+	private getChildrenDatums(children, parent, result = [], totalSum = 0) {
+		const grandParent = parent;
+
+		children.forEach((child) => {
+			const parent = child.name;
+			let sum = 0;
+			/**
+			 * @todo - Comebine into a single if statement instead of using 2 nested ones
+			 * if (child.children) {
+			 *   if (child.children.length > 0) {
+			 */
+			if (child.children) {
+				if (child.children.length > 0) {
+					if (typeof child.value === 'number') {
+						totalSum += child.value;
+					}
+
+					sum += this.getChildrenDatums(
+						child.children,
+						parent,
+						result,
+						sum
+					);
+					result.push([parent, grandParent, sum]);
+					totalSum += sum;
+				}
+			} else {
+				let value = 0;
+				if (typeof child.value === 'number') {
+					value = child.value;
+					totalSum += child.value;
+				}
+				result.push([child.name, grandParent, value]);
+			}
+		});
+
+		return totalSum;
+	}
 }
