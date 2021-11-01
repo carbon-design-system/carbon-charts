@@ -1,5 +1,6 @@
 // Internal Imports
 import { Chart } from '../chart';
+import { AlluvialChartModel } from '../model/alluvial';
 import * as Configuration from '../configuration';
 import { ChartConfig, AlluvialChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
@@ -14,6 +15,8 @@ import {
 } from '../components/index';
 
 export class AlluvialChart extends Chart {
+	model = new AlluvialChartModel(this.services);
+
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<AlluvialChartOptions>
