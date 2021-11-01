@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.51.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.10...v0.51.0) (2021-11-01)
+
+
+### Features
+
+* **core:** add toolbar to non-cartesian charts ([#1191](https://github.com/carbon-design-system/carbon-charts/issues/1191)) ([3574f4f](https://github.com/carbon-design-system/carbon-charts/commit/3574f4f376cc064e0f58de14c61d6442c527aa17))
+
+
+
+
+
 ## [0.50.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.9...v0.50.10) (2021-10-27)
 
 
