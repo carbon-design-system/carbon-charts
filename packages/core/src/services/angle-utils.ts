@@ -82,6 +82,13 @@ export function polarToCartesianCoords(
 ): Point {
 	const x = r * Math.cos(a) + t.x;
 	const y = r * Math.sin(a) + t.y;
+
+	// NaN is rendered at coordinate 0 in browsers
+	// By setting it to 0, further operations can be performed
+	if (isNaN(x) || isNaN(y)) {
+		return { x: 0, y: 0 };
+	}
+
 	return { x, y };
 }
 
