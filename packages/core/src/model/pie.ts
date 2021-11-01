@@ -25,6 +25,24 @@ export class PieChartModel extends ChartModel {
 		return tabularData;
 	}
 
+	getTabularDataArray() {
+		const displayData = this.getDisplayData();
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const result = [
+			['Group', 'Value'],
+			...displayData.map((datum) => [
+				datum[groupMapsTo],
+				datum['value'] === null
+					? '&ndash;'
+					: datum['value'].toLocaleString(),
+			]),
+		];
+
+		return result;
+	}
+
 	sanitize(data) {
 		const tabularData = this.getTabularData(data);
 

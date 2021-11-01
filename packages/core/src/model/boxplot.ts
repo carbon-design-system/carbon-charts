@@ -89,6 +89,80 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		return boxplotData;
 	}
 
+	getTabularDataArray() {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const boxplotData = this.getBoxplotData();
+
+		const result = [
+			[
+				'Group',
+				'Minimum',
+				'Q1',
+				'Median',
+				'Q3',
+				'Maximum',
+				'IQR',
+				'Outlier(s)',
+			],
+			...boxplotData.map((datum) => {
+				let outliers = Tools.getProperty(datum, 'outliers');
+				if (outliers === null || outliers.length === 0) {
+					outliers = ['&ndash;'];
+				}
+				return [
+					datum[groupMapsTo],
+					Tools.getProperty(datum, 'whiskers', 'min') !== null
+						? Tools.getProperty(
+								datum,
+								'whiskers',
+								'min'
+						  ).toLocaleString()
+						: '&ndash;',
+					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
+						? Tools.getProperty(
+								datum,
+								'quartiles',
+								'q_25'
+						  ).toLocaleString()
+						: '&ndash;',
+					Tools.getProperty(datum, 'quartiles', 'q_50') !== null
+						? Tools.getProperty(
+								datum,
+								'quartiles',
+								'q_50'
+						  ).toLocaleString()
+						: '&ndash;',
+					Tools.getProperty(datum, 'quartiles', 'q_75') !== null
+						? Tools.getProperty(
+								datum,
+								'quartiles',
+								'q_75'
+						  ).toLocaleString()
+						: '&ndash;',
+					Tools.getProperty(datum, 'whiskers', 'max') !== null
+						? Tools.getProperty(
+								datum,
+								'whiskers',
+								'max'
+						  ).toLocaleString()
+						: '&ndash;',
+					Tools.getProperty(datum, 'quartiles', 'q_75') !== null &&
+					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
+						? (
+								Tools.getProperty(datum, 'quartiles', 'q_75') -
+								Tools.getProperty(datum, 'quartiles', 'q_25')
+						  ).toLocaleString()
+						: '&ndash;',
+					outliers.map((d) => d.toLocaleString()).join(','),
+				];
+			}),
+		];
+
+		return result;
+	}
+
 	protected setColorClassNames() {
 		// monochrome
 		const numberOfColors = 1;

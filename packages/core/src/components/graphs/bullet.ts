@@ -369,20 +369,6 @@ export class Bullet extends Component {
 			.attr('opacity', 1);
 	};
 
-	getMatchingRangeIndexForDatapoint(datum) {
-		let matchingRangeIndex;
-		for (let i = datum.ranges.length - 1; i > 0; i--) {
-			const range = datum.ranges[i];
-			if (datum.value >= range) {
-				matchingRangeIndex = i;
-
-				return matchingRangeIndex;
-			}
-		}
-
-		return 0;
-	}
-
 	addEventListeners() {
 		const self = this;
 
@@ -409,7 +395,7 @@ export class Bullet extends Component {
 					'bullet',
 					'performanceAreaTitles'
 				);
-				const matchingRangeIndex = self.getMatchingRangeIndexForDatapoint(
+				const matchingRangeIndex = self.model.getMatchingRangeIndexForDatapoint(
 					datum
 				);
 

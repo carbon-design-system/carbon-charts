@@ -1,4 +1,5 @@
 // Internal Imports
+import { RadarChartModel } from '../model/radar';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, RadarChartOptions } from '../interfaces/index';
@@ -13,18 +14,10 @@ import {
 import { Radar } from '../components/graphs/radar';
 
 export class RadarChart extends Chart {
-	// TODO - Optimize the use of "extending"
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<RadarChartOptions>,
-		extending = false
-	) {
-		super(holder, chartConfigs);
+	model = new RadarChartModel(this.services);
 
-		// TODO - Optimize the use of "extending"
-		if (extending) {
-			return;
-		}
+	constructor(holder: Element, chartConfigs: ChartConfig<RadarChartOptions>) {
+		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
