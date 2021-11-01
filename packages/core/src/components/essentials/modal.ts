@@ -82,7 +82,9 @@ export class Modal extends Component {
 		<div class="bx--modal-container">
 			<div class="bx--modal-header">
 				<p class="bx--modal-header__label bx--type-delta" id="modal-title">Tabular representation</p>
-				<p class="bx--modal-header__heading bx--type-beta" id="modal-description">${options.title}</p>
+				<p class="bx--modal-header__heading bx--type-beta" id="modal-description">${
+					options.title
+				}</p>
 				<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
 					<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Close" width="20" height="20" viewBox="0 0 32 32" role="img" class="bx--modal-close__icon">
 						<path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"></path>

@@ -87,6 +87,7 @@ export class Toolbar extends Component {
 				.attr('class', 'toolbar-control bx--overflow-menu')
 				.attr('role', 'button');
 
+			const self = this;
 			const allToolbarControls = enteringToolbarControls
 				.merge(toolbarControls)
 				.classed('disabled', (d) =>
@@ -112,18 +113,27 @@ export class Toolbar extends Component {
 				</svg>
 			</button>`
 				)
-				.each(function (d) {
+				.each(function (d, index) {
 					select(this)
 						.select('button')
-						.on('click', !d.shouldBeDisabled() ? d.clickFunction : null)
-						.on('keyup', (event: KeyboardEvent) => {
+						.on(
+							'click',
+							!d.shouldBeDisabled() ? d.clickFunction : null
+						)
+						.on('keydown', (event: KeyboardEvent) => {
 							if (
 								(event.key && event.key === 'Enter') ||
 								event.key === ' '
 							) {
 								event.preventDefault();
-
 								d.clickFunction();
+							} else if (event.key && event.key === 'ArrowLeft') {
+								self.focusOnPreviousEnabledToolbarItem(index);
+							} else if (
+								event.key &&
+								event.key === 'ArrowRight'
+							) {
+								self.focusOnNextEnabledToolbarItem(index);
 							}
 						});
 				});
@@ -198,6 +208,58 @@ export class Toolbar extends Component {
 			this.services.events.dispatchEvent(
 				Events.Toolbar.HIDE_OVERFLOW_MENU
 			);
+		}
+	}
+
+	// Toolbar controllers
+	focusOnPreviousEnabledToolbarItem(currentItemIndex) {
+		const buttonList = this.getToolbarButtonItems();
+		let previousItemIndex = buttonList.length;
+
+		for (let i = currentItemIndex - 1; i >= 0; i--) {
+			const previousButtonItem = buttonList[i];
+			if (!previousButtonItem.shouldBeDisabled()) {
+				previousItemIndex = i;
+				break;
+			}
+		}
+
+		// only if previous enabled menu item found
+		if (previousItemIndex < buttonList.length) {
+			const previousItemNode = select(
+				`button#${this.services.domUtils.generateElementIDString(
+					`control-${buttonList[previousItemIndex].id}`
+				)}`
+			).node();
+			if ('focus' in previousItemNode) {
+				previousItemNode.focus();
+			}
+		}
+	}
+
+	focusOnNextEnabledToolbarItem(currentItemIndex) {
+		const buttonList = this.getToolbarButtonItems();
+		let nextItemIndex = -1;
+
+		for (let i = currentItemIndex + 1; i < buttonList.length; i++) {
+			const nextOverflowMenuItem = buttonList[i];
+			if (!nextOverflowMenuItem.shouldBeDisabled()) {
+				nextItemIndex = i;
+				break;
+			}
+		}
+
+		// only if next enabled menu item found
+		if (nextItemIndex > -1) {
+			const nextItemNode = select(
+				`button#${this.services.domUtils.generateElementIDString(
+					`control-${buttonList[nextItemIndex].id}`
+				)}`
+			).node();
+
+			if ('focus' in nextItemNode) {
+				nextItemNode.focus();
+			}
 		}
 	}
 
@@ -278,19 +340,22 @@ export class Toolbar extends Component {
 						self.updateOverflowMenu(false);
 					});
 
-					element.on('keyup', () => {
-						if (event.key === 'Enter') {
+					element.on('keydown', (event: KeyboardEvent) => {
+						if (event && event.key === 'Enter') {
 							// call the specified function
 							menuItem.clickFunction();
-						} else if (event.key === 'ArrowUp') {
+						} else if (event && event.key === 'ArrowUp') {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (event.key === 'ArrowDown') {
+						} else if (event && event.key === 'ArrowDown') {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
+						} else if (event && event.key === 'Escape') {
+							self.updateOverflowMenu(false);
 						}
-
 						// Not hide overflow menu by keyboard arrow up/down event
+						// Prevent page from scrolling up/down
+						event.preventDefault();
 					});
 				}
 			});
@@ -298,7 +363,6 @@ export class Toolbar extends Component {
 			// default to focus on the first enabled menu item
 			self.focusOnNextEnabledMenuItem(-1);
 		}
-		event.stopImmediatePropagation();
 	}
 
 	getControlConfigs() {
@@ -344,6 +408,18 @@ export class Toolbar extends Component {
 			buttonList: controlList.splice(0, numberOfIcons - 1),
 			overflowMenuItemList: controlList.concat(overflowSpecificControls),
 		};
+	}
+
+	getToolbarButtonItems() {
+		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
+		if (!!overflowMenuItemList) {
+			buttonList.push(this.getOverflowButtonConfig());
+		}
+		if (!!buttonList) {
+			return buttonList;
+		}
+
+		return [];
 	}
 
 	getOverflowMenuItems() {

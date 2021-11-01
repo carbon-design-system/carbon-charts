@@ -489,9 +489,9 @@ export class Legend extends Component {
 			});
 
 		svg.selectAll('div.legend-item div.checkbox').on(
-			'keyup',
+			'keydown',
 			function (event, d) {
-				if (event.key && (event.key === 'Enter' || event.key === ' ')) {
+				if (event.key && event.key === ' ') {
 					event.preventDefault();
 
 					self.model.toggleDataLabel(d.name);
