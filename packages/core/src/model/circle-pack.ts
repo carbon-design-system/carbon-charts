@@ -176,11 +176,7 @@ export class CirclePackChartModel extends ChartModel {
 		children.forEach((child) => {
 			const parent = child.name;
 			let sum = 0;
-			/**
-			 * @todo - Comebine into a single if statement instead of using 2 nested ones
-			 * if (child.children) {
-			 *   if (child.children.length > 0) {
-			 */
+
 			if (child.children) {
 				if (child.children.length > 0) {
 					if (typeof child.value === 'number') {
