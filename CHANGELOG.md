@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.0...v0.51.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* **core:** render chart axis labels correctly when data loads async ([#1207](https://github.com/carbon-design-system/carbon-charts/issues/1207)) ([f22e99b](https://github.com/carbon-design-system/carbon-charts/commit/f22e99b8145b476d7ba55ce8f9b00843cd98aa3c)), closes [#1135](https://github.com/carbon-design-system/carbon-charts/issues/1135)
+
+
+
+
+
 # [0.51.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.10...v0.51.0) (2021-11-01)
 
 
