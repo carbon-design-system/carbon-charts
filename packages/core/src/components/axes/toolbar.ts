@@ -126,6 +126,7 @@ export class Toolbar extends Component {
 								event.key === ' '
 							) {
 								event.preventDefault();
+
 								d.clickFunction();
 							} else if (event.key && event.key === 'ArrowLeft') {
 								self.focusOnPreviousEnabledToolbarItem(index);
@@ -340,28 +341,34 @@ export class Toolbar extends Component {
 						self.updateOverflowMenu(false);
 					});
 
-					element.on('keydown', (event: KeyboardEvent) => {
-						if (event && event.key === 'Enter') {
+					element.on('keydown', (keyEvent: KeyboardEvent) => {
+						if (keyEvent && keyEvent.key === 'Enter') {
 							// call the specified function
 							menuItem.clickFunction();
-						} else if (event && event.key === 'ArrowUp') {
+						} else if (keyEvent && keyEvent.key === 'ArrowUp') {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (event && event.key === 'ArrowDown') {
+						} else if (keyEvent && keyEvent.key === 'ArrowDown') {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
-						} else if (event && event.key === 'Escape') {
+						} else if (keyEvent && keyEvent.key === 'Escape') {
 							self.updateOverflowMenu(false);
 						}
+
 						// Not hide overflow menu by keyboard arrow up/down event
 						// Prevent page from scrolling up/down
-						event.preventDefault();
+						keyEvent.preventDefault();
 					});
 				}
 			});
 
 			// default to focus on the first enabled menu item
 			self.focusOnNextEnabledMenuItem(-1);
+		}
+
+		// propogation should not be stopped for keyboard events
+		if (!!event) {
+			event.stopImmediatePropagation();
 		}
 	}
 
