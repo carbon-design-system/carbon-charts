@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.1...v0.51.2) (2021-11-02)
+
+
+### Bug Fixes
+
+* **core:** improve keyboard accessibility ([#1208](https://github.com/carbon-design-system/carbon-charts/issues/1208)) ([4f64327](https://github.com/carbon-design-system/carbon-charts/commit/4f64327f29dd23d73e4450a7f1cdda4d1d69d4e6)), closes [#1204](https://github.com/carbon-design-system/carbon-charts/issues/1204)
+
+
+
+
+
 ## [0.51.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.0...v0.51.1) (2021-11-02)
 
 
