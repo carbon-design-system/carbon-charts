@@ -490,11 +490,33 @@ export class Legend extends Component {
 
 		svg.selectAll('div.legend-item div.checkbox').on(
 			'keyup',
-			function (event, d) {
-				if (event.key && (event.key === 'Enter' || event.key === ' ')) {
-					event.preventDefault();
+			function (event) {
+				if (event.key && event.key === 'Tab') {
+					// Higlight group
+					self.services.events.dispatchEvent(
+						Events.Legend.ITEM_HOVER,
+						{
+							hoveredElement: select(this),
+						}
+					);
+				}
+			}
+		);
 
+		svg.selectAll('div.legend-item div.checkbox').on(
+			'keydown',
+			function (event, d) {
+				if (event.key && event.key === ' ') {
+					event.preventDefault();
 					self.model.toggleDataLabel(d.name);
+				} else if (event.key && event.key === 'Tab') {
+					// Unhiglight group
+					self.services.events.dispatchEvent(
+						Events.Legend.ITEM_MOUSEOUT,
+						{
+							hoveredElement: select(this),
+						}
+					);
 				}
 			}
 		);
