@@ -552,8 +552,12 @@ export class Axis extends Component {
 						.append('text')
 						.text('A');
 
-					const averageLetterWidth = mockTextPiece.node().getBBox()
-						.width;
+					const averageLetterWidth = DOMUtils.getSVGElementSize(
+						mockTextPiece.node(),
+						{
+							useBBox: true,
+						}
+					).width;
 
 					let lastStartPosition;
 
