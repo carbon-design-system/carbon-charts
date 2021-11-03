@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.2...v0.51.3) (2021-11-03)
+
+
+### Bug Fixes
+
+* **core:** remove direct reference to getBBox() ([#1209](https://github.com/carbon-design-system/carbon-charts/issues/1209)) ([4960dd0](https://github.com/carbon-design-system/carbon-charts/commit/4960dd0d0d7f186ba12dd139dab6277599b208c5))
+
+
+
+
+
 ## [0.51.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.1...v0.51.2) (2021-11-02)
 
 
