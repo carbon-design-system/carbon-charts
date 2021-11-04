@@ -27,7 +27,6 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Component,
 	Skeleton,
 } from '../components/index';
 
