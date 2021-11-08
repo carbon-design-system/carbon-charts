@@ -48,8 +48,8 @@ export const alluvialSimpleGradientOptions = {
 			B: '#08bdba',
 			C: '#6fdc8c',
 			X: '#001100',
-			Y: 'yellow',
-			Z: 'blue',
+			Y: '#fa4d56',
+			Z: '#ff7eb6',
 		},
 		gradient: {
 			enabled: true,
