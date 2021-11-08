@@ -134,8 +134,10 @@ export class Alluvial extends Component {
 			.append('g')
 			.attr('fill', 'none')
 			.selectAll('g')
-			.data(this.graph.links)
-			.join('g');
+			.data(this.graph.links);
+
+		// Exit so we can have multiple appends in group
+		links.exit().remove();
 
 		// Add gradient if requsted
 		if (isGradientAllowed) {
@@ -147,6 +149,7 @@ export class Alluvial extends Component {
 
 			if (scale) {
 				links
+					.enter()
 					.append('linearGradient')
 					.attr('id', (d) => `${this.gradient_id}-link-${d.index}`)
 					.attr('gradientUnits', 'userSpaceOnUse')
@@ -167,9 +170,12 @@ export class Alluvial extends Component {
 							})
 					);
 			}
+			// Exit so path can be appended to the group
+			links.exit().remove();
 		}
 
 		links
+			.enter()
 			.append('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
