@@ -113,21 +113,6 @@ export class ChartModelCartesian extends ChartModel {
 		return result;
 	}
 
-	exportToCSV() {
-		let data = this.getTabularDataArray().map((row) =>
-			row.map((column) => `\"${column}\"`)
-		);
-
-		let csvString = '',
-			csvData = '';
-		data.forEach(function (d, i) {
-			csvData = d.join(',');
-			csvString += i < data.length ? csvData + '\n' : csvData;
-		});
-
-		this.services.files.downloadCSV(csvString, 'myChart.csv');
-	}
-
 	setData(newData) {
 		let data;
 		if (newData) {

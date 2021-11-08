@@ -24,6 +24,10 @@ interface getSVGElementSizeOptions {
 }
 
 export class DOMUtils extends Service {
+	private chartID = Math.floor(
+		(1 + Math.random()) * 0x1000000000000
+	).toString(16);
+
 	constructor(model: any, services: any) {
 		super(model, services);
 	}
@@ -210,6 +214,14 @@ export class DOMUtils extends Service {
 		this.addHolderListeners();
 
 		this.handleFullscreenChange();
+	}
+
+	getChartID() {
+		return this.chartID;
+	}
+
+	generateElementIDString(originalID) {
+		return `chart-${this.chartID}-${originalID}`;
 	}
 
 	addMainContainer() {

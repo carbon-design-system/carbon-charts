@@ -1,5 +1,6 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart';
+import { BulletChartModel } from '../model/bullet';
 import * as Configuration from '../configuration';
 import { ChartConfig, BulletChartOptions } from '../interfaces/index';
 import { Tools } from '../tools';
@@ -17,6 +18,8 @@ import {
 } from '../components/index';
 
 export class BulletChart extends AxisChart {
+	model = new BulletChartModel(this.services);
+
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<BulletChartOptions>

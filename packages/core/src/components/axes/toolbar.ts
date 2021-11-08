@@ -41,77 +41,110 @@ export class Toolbar extends Component {
 	}
 
 	render(animate = true) {
-		const container = this.getComponentContainer();
+		const container = this.getComponentContainer().attr('role', 'toolbar');
 
-		if (!this.overflowMenu) {
-			this.overflowMenu = container
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			'data',
+			'loading'
+		);
+
+		if (isDataLoading) {
+			container.html('');
+		} else {
+			if (!this.overflowMenu) {
+				this.overflowMenu = container
+					.append('div')
+					.attr(
+						'class',
+						'bx--overflow-menu-options bx--overflow-menu--flip'
+					)
+					.attr('tabindex', -1)
+					.attr('role', 'menu')
+					.html(`<ul></ul>`);
+			}
+
+			// get the toolbar buttons
+			const {
+				buttonList,
+				overflowMenuItemList,
+			} = this.getControlConfigs();
+
+			// overflow button is required only if overflow menu item list is valid
+			if (!!overflowMenuItemList) {
+				buttonList.push(this.getOverflowButtonConfig());
+			}
+
+			const toolbarControls = container
+				.selectAll('div.toolbar-control')
+				.data(buttonList, (button) => button.id);
+
+			toolbarControls.exit().remove();
+
+			const enteringToolbarControls = toolbarControls
+				.enter()
 				.append('div')
-				.attr(
-					'class',
-					'bx--overflow-menu-options bx--overflow-menu--flip'
+				.attr('class', 'toolbar-control bx--overflow-menu')
+				.attr('role', 'button');
+
+			const self = this;
+			const allToolbarControls = enteringToolbarControls
+				.merge(toolbarControls)
+				.classed('disabled', (d) =>
+					d.shouldBeDisabled ? d.shouldBeDisabled() : false
 				)
-				.attr('tabindex', -1)
-				.attr('role', 'menu')
-				.html(`<ul></ul>`);
-		}
-
-		// get the toolbar buttons
-		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
-
-		// overflow button is required only if overflow menu item list is valid
-		if (!!overflowMenuItemList) {
-			buttonList.push(this.getOverflowButtonConfig());
-		}
-
-		const toolbarControls = container
-			.selectAll('div.toolbar-control')
-			.data(buttonList, (button) => button.id);
-
-		toolbarControls.exit().remove();
-
-		const enteringToolbarControls = toolbarControls
-			.enter()
-			.append('div')
-			.attr('class', 'toolbar-control bx--overflow-menu');
-
-		const allToolbarControls = enteringToolbarControls
-			.merge(toolbarControls)
-			.classed('disabled', (d) =>
-				d.shouldBeDisabled ? d.shouldBeDisabled() : false
-			)
-			.html(
-				(d) => `
+				.attr('aria-disabled', (d) =>
+					d.shouldBeDisabled ? d.shouldBeDisabled() : false
+				)
+				.attr('aria-label', (d) => d.title)
+				.html(
+					(d) => `
 			<button
 				class="bx--overflow-menu__trigger"
-				aria-haspopup="true" aria-expanded="false" id="${d.id}">
+				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
+					`control-${d.id}`
+				)}" aria-label="${d.title}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
 					d.iconWidth !== undefined ? d.iconWidth : '20px'
 				}; height: ${
-					d.iconWidth !== undefined ? d.iconHeight : '20px'
-				}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+						d.iconWidth !== undefined ? d.iconHeight : '20px'
+					}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVGContent}
 				</svg>
 			</button>`
-			)
-			.each(function (d) {
-				select(this)
-					.select('button')
-					.on('click', d.clickFunction)
-					.on('keyup', (event: KeyboardEvent) => {
-						if (
-							(event.key && event.key === 'Enter') ||
-							event.key === ' '
-						) {
-							event.preventDefault();
+				)
+				.each(function (d, index) {
+					select(this)
+						.select('button')
+						.on(
+							'click',
+							!d.shouldBeDisabled() ? d.clickFunction : null
+						)
+						.on('keydown', (event: KeyboardEvent) => {
+							if (
+								(event.key && event.key === 'Enter') ||
+								event.key === ' '
+							) {
+								event.preventDefault();
 
-							d.clickFunction();
-						}
-					});
-			});
+								d.clickFunction();
+							} else if (event.key && event.key === 'ArrowLeft') {
+								self.focusOnPreviousEnabledToolbarItem(index);
+							} else if (
+								event.key &&
+								event.key === 'ArrowRight'
+							) {
+								self.focusOnNextEnabledToolbarItem(index);
+							}
+						});
+				});
 
-		this.overflowButton = this.getComponentContainer().select(
-			'button.bx--overflow-menu__trigger#toolbar-overflow-menu'
-		);
+			this.overflowButton = this.getComponentContainer().select(
+				`button.bx--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
+					'control-toolbar-overflow-menu'
+				)}`
+			);
+		}
 	}
 
 	renderOverflowMenu() {
@@ -129,13 +162,17 @@ export class Toolbar extends Component {
 		const enteringOverflowMenuControls = overflowMenuControls
 			.enter()
 			.append('li')
-			.attr('id', (d) => d.id)
-			.attr('class', 'bx--overflow-menu-options__option');
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`control-${d.id}`
+				)
+			)
+			.attr('class', 'bx--overflow-menu-options__option')
+			.attr('role', 'menuitem');
 
 		enteringOverflowMenuControls
 			.append('button')
-			.attr('class', 'bx--overflow-menu-options__btn')
-			.attr('role', 'menuitem');
+			.attr('class', 'bx--overflow-menu-options__btn');
 
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
@@ -175,9 +212,62 @@ export class Toolbar extends Component {
 		}
 	}
 
+	// Toolbar controllers
+	focusOnPreviousEnabledToolbarItem(currentItemIndex) {
+		const buttonList = this.getToolbarButtonItems();
+		let previousItemIndex = buttonList.length;
+
+		for (let i = currentItemIndex - 1; i >= 0; i--) {
+			const previousButtonItem = buttonList[i];
+			if (!previousButtonItem.shouldBeDisabled()) {
+				previousItemIndex = i;
+				break;
+			}
+		}
+
+		// only if previous enabled menu item found
+		if (previousItemIndex < buttonList.length) {
+			const previousItemNode = select(
+				`button#${this.services.domUtils.generateElementIDString(
+					`control-${buttonList[previousItemIndex].id}`
+				)}`
+			).node();
+			if ('focus' in previousItemNode) {
+				previousItemNode.focus();
+			}
+		}
+	}
+
+	focusOnNextEnabledToolbarItem(currentItemIndex) {
+		const buttonList = this.getToolbarButtonItems();
+		let nextItemIndex = -1;
+
+		for (let i = currentItemIndex + 1; i < buttonList.length; i++) {
+			const nextOverflowMenuItem = buttonList[i];
+			if (!nextOverflowMenuItem.shouldBeDisabled()) {
+				nextItemIndex = i;
+				break;
+			}
+		}
+
+		// only if next enabled menu item found
+		if (nextItemIndex > -1) {
+			const nextItemNode = select(
+				`button#${this.services.domUtils.generateElementIDString(
+					`control-${buttonList[nextItemIndex].id}`
+				)}`
+			).node();
+
+			if ('focus' in nextItemNode) {
+				nextItemNode.focus();
+			}
+		}
+	}
+
 	focusOnPreviousEnabledMenuItem(currentItemIndex) {
 		const overflowMenuItems = this.getOverflowMenuItems();
 		let previousItemIndex = overflowMenuItems.length;
+
 		for (let i = currentItemIndex - 1; i >= 0; i--) {
 			const previousOverflowMenuItem = overflowMenuItems[i];
 			if (!previousOverflowMenuItem.shouldBeDisabled()) {
@@ -185,10 +275,13 @@ export class Toolbar extends Component {
 				break;
 			}
 		}
+
 		// only if previous enabled menu item found
 		if (previousItemIndex < overflowMenuItems.length) {
 			const previousItemNode = select(
-				`#${overflowMenuItems[previousItemIndex].id} button`
+				`#${this.services.domUtils.generateElementIDString(
+					`control-${overflowMenuItems[previousItemIndex].id}`
+				)} button`
 			).node();
 			if ('focus' in previousItemNode) {
 				previousItemNode.focus();
@@ -199,6 +292,7 @@ export class Toolbar extends Component {
 	focusOnNextEnabledMenuItem(currentItemIndex) {
 		const overflowMenuItems = this.getOverflowMenuItems();
 		let nextItemIndex = -1;
+
 		for (let i = currentItemIndex + 1; i < overflowMenuItems.length; i++) {
 			const nextOverflowMenuItem = overflowMenuItems[i];
 			if (!nextOverflowMenuItem.shouldBeDisabled()) {
@@ -206,10 +300,13 @@ export class Toolbar extends Component {
 				break;
 			}
 		}
+
 		// only if next enabled menu item found
 		if (nextItemIndex > -1) {
 			const nextItemNode = select(
-				`#${overflowMenuItems[nextItemIndex].id} button`
+				`#${this.services.domUtils.generateElementIDString(
+					`control-${overflowMenuItems[nextItemIndex].id}`
+				)} button`
 			).node();
 
 			if ('focus' in nextItemNode) {
@@ -230,7 +327,11 @@ export class Toolbar extends Component {
 			const self = this;
 			const overflowMenuItems = this.getOverflowMenuItems();
 			overflowMenuItems.forEach((menuItem, index) => {
-				const element = select(`#${menuItem.id}`);
+				const element = select(
+					`#${this.services.domUtils.generateElementIDString(
+						`control-${menuItem.id}`
+					)}`
+				);
 				if (element !== null) {
 					element.on('click', () => {
 						// call the specified function
@@ -240,19 +341,23 @@ export class Toolbar extends Component {
 						self.updateOverflowMenu(false);
 					});
 
-					element.on('keyup', () => {
-						if (event.key === 'Enter') {
+					element.on('keydown', (keyEvent: KeyboardEvent) => {
+						if (keyEvent && keyEvent.key === 'Enter') {
 							// call the specified function
 							menuItem.clickFunction();
-						} else if (event.key === 'ArrowUp') {
+						} else if (keyEvent && keyEvent.key === 'ArrowUp') {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
-						} else if (event.key === 'ArrowDown') {
+						} else if (keyEvent && keyEvent.key === 'ArrowDown') {
 							// focus on next menu item
 							self.focusOnNextEnabledMenuItem(index);
+						} else if (keyEvent && keyEvent.key === 'Escape') {
+							self.updateOverflowMenu(false);
 						}
 
 						// Not hide overflow menu by keyboard arrow up/down event
+						// Prevent page from scrolling up/down
+						keyEvent.preventDefault();
 					});
 				}
 			});
@@ -260,7 +365,11 @@ export class Toolbar extends Component {
 			// default to focus on the first enabled menu item
 			self.focusOnNextEnabledMenuItem(-1);
 		}
-		event.stopImmediatePropagation();
+
+		// propogation should not be stopped for keyboard events
+		if (!!event) {
+			event.stopImmediatePropagation();
+		}
 	}
 
 	getControlConfigs() {
@@ -308,6 +417,18 @@ export class Toolbar extends Component {
 		};
 	}
 
+	getToolbarButtonItems() {
+		const { buttonList, overflowMenuItemList } = this.getControlConfigs();
+		if (!!overflowMenuItemList) {
+			buttonList.push(this.getOverflowButtonConfig());
+		}
+		if (!!buttonList) {
+			return buttonList;
+		}
+
+		return [];
+	}
+
 	getOverflowMenuItems() {
 		const { overflowMenuItemList } = this.getControlConfigs();
 		if (!!overflowMenuItemList) {
@@ -321,6 +442,7 @@ export class Toolbar extends Component {
 	getOverflowButtonConfig() {
 		return {
 			id: 'toolbar-overflow-menu',
+			title: 'More options',
 			shouldBeDisabled: () => false,
 			iconSVGContent: `<circle cx="16" cy="8" r="2"></circle>
 							 <circle cx="16" cy="16" r="2"></circle>
@@ -335,12 +457,15 @@ export class Toolbar extends Component {
 			this.services.zoom.isZoomBarEnabled() &&
 			!this.services.zoom.isEmptyState();
 
+		const displayData = this.model.getDisplayData();
+
 		let controlConfig;
 		switch (controlType) {
 			case ToolbarControlTypes.ZOOM_IN:
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomIn',
+						title: 'Zoom in',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMinZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -352,6 +477,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomOut',
+						title: 'Zoom out',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -363,6 +489,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-resetZoom',
+						title: 'Reset zoom',
 						shouldBeDisabled: () =>
 							this.services.zoom.isMaxZoomDomain(),
 						iconSVGContent: this.getControlIconByType(controlType),
@@ -374,6 +501,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.MAKE_FULLSCREEN:
 				controlConfig = {
 					id: 'toolbar-makefullscreen',
+					title: 'Make fullscreen',
 					iconSVGContent: this.getControlIconByType(controlType),
 					iconWidth: '15px',
 					iconHight: '15px',
@@ -386,8 +514,9 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				controlConfig = {
 					id: 'toolbar-showasdatatable',
+					title: 'Show as table',
 					iconSVGContent: this.getControlIconByType(controlType),
-					shouldBeDisabled: false,
+					shouldBeDisabled: () => displayData.length === 0,
 					clickFunction: () =>
 						this.services.events.dispatchEvent(Events.Modal.SHOW),
 				};
@@ -395,6 +524,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
+					title: 'Export as CSV',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.model.exportToCSV(),
@@ -403,6 +533,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
+					title: 'Export as PNG',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.services.domUtils.exportToPNG(),
@@ -411,6 +542,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
+					title: 'Export as JPG',
 					shouldBeDisabled: () => false,
 					iconSVGContent: this.getControlIconByType(controlType),
 					clickFunction: () => this.services.domUtils.exportToJPG(),

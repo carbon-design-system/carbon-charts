@@ -3,6 +3,8 @@ const generateThemePickerHTML = (container, configs) => {
 	div.id = 'theme-picker';
 	div.innerHTML = `
 <fieldset class="bx--fieldset marginTop-45">
+	<legend class="bx--label">Active theme</legend>
+
 	<div class="bx--form-item">
 		<div class="bx--radio-button-group ">
 			<div class="bx--radio-button-wrapper">
@@ -66,7 +68,7 @@ const generateColorPalettePickerHTML = (
 <div class="bx--form-item">
 	<div
 	class="bx--select">
-	<label for="select-id" class="bx--label">Color palette</label>
+	<label for="color-palette-select" class="bx--label">Active color palette</label>
 		<div class="bx--select-input__wrapper">
 		<select id="color-palette-select" class="bx--select-input">
 			<option class="bx--select-option" value="" disabled selected hidden>

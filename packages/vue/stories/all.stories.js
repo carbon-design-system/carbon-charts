@@ -74,7 +74,7 @@ storybookDemoGroups.forEach(demoGroup => {
 
 					<h3 class="marginTop-30">Code sample</h3>
 					<a href="${demo.codesandbox.vue}" target="_blank">
-						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" />
+						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
 					</a>
 				</div>
 			`,

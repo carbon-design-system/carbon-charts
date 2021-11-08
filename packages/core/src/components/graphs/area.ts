@@ -161,10 +161,11 @@ export class Area extends Component {
 			}
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
-				id:
-					groupedData[0].name.replace(' ', '') +
-					'_' +
-					this.gradient_id,
+				id: this.services.domUtils.generateElementIDString(
+					`${groupedData[0].name.replace(' ', '')}_${
+						this.gradient_id
+					}`
+				),
 				x1: '0%',
 				x2: '0%',
 				y1: '0%',
@@ -190,9 +191,9 @@ export class Area extends Component {
 				.style(
 					'fill',
 					(group) =>
-						`url(#${group.name.replace(' ', '')}_${
-							this.gradient_id
-						})`
+						`url(#${this.services.domUtils.generateElementIDString(
+							`${group.name.replace(' ', '')}_${this.gradient_id}`
+						)})`
 				)
 				.attr('class', 'area')
 				.attr('class', (group) =>
