@@ -1,5 +1,6 @@
 // Internal Imports
 import { Chart } from '../chart';
+import { TreemapChartModel } from '../model/treemap';
 import { ChartConfig, TreemapChartOptions } from '../interfaces/index';
 import * as Configuration from '../configuration';
 import { Tools } from '../tools';
@@ -14,6 +15,8 @@ import {
 } from '../components/index';
 
 export class TreemapChart extends Chart {
+	model = new TreemapChartModel(this.services);
+
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<TreemapChartOptions>

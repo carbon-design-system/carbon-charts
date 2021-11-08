@@ -71,6 +71,7 @@ export class Skeleton extends Component {
 		if (orientation === CartesianOrientations.HORIZONTAL) {
 			this.drawXGrid(showShimmerEffect);
 		}
+
 		this.setShimmerEffect('shimmer-lines');
 	}
 
@@ -125,7 +126,15 @@ export class Skeleton extends Component {
 
 		backdropRect
 			.classed('shimmer-effect-lines', showShimmerEffect)
-			.classed('empty-state-lines', !showShimmerEffect);
+			.classed('empty-state-lines', !showShimmerEffect)
+			.style(
+				'stroke',
+				showShimmerEffect
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-lines`
+					  )})`
+					: null
+			);
 	}
 
 	drawXGrid(showShimmerEffect: boolean) {
@@ -154,7 +163,15 @@ export class Skeleton extends Component {
 		xGridG
 			.selectAll('line')
 			.classed('shimmer-effect-lines', showShimmerEffect)
-			.classed('empty-state-lines', !showShimmerEffect);
+			.classed('empty-state-lines', !showShimmerEffect)
+			.style(
+				'stroke',
+				showShimmerEffect
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-lines`
+					  )})`
+					: null
+			);
 	}
 
 	drawYGrid(showShimmerEffect: boolean) {
@@ -184,7 +201,15 @@ export class Skeleton extends Component {
 		yGridG
 			.selectAll('line')
 			.classed('shimmer-effect-lines', showShimmerEffect)
-			.classed('empty-state-lines', !showShimmerEffect);
+			.classed('empty-state-lines', !showShimmerEffect)
+			.style(
+				'stroke',
+				showShimmerEffect
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-lines`
+					  )})`
+					: null
+			);
 	}
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
@@ -226,7 +251,15 @@ export class Skeleton extends Component {
 			.attr('transform', `translate(${tcx}, ${tcy})`)
 			.attr('d', arcPathGenerator)
 			.classed('shimmer-effect-areas', shimmer)
-			.classed('empty-state-areas', !shimmer);
+			.classed('empty-state-areas', !shimmer)
+			.style(
+				'fill',
+				shimmer
+					? `url(#${this.services.domUtils.generateElementIDString(
+							`shimmer-areas`
+					  )})`
+					: null
+			);
 
 		// Position skeleton
 		let translateX = outerRadius + Configuration.pie.xOffset;
@@ -273,7 +306,11 @@ export class Skeleton extends Component {
 		// append the defs as first child of container
 		const defs = DOMUtils.appendOrSelect(container, 'defs').lower();
 		const linearGradient = DOMUtils.appendOrSelect(defs, 'linearGradient')
-			.attr('id', gradientId)
+			.attr(
+				'id',
+				this.services.domUtils.generateElementIDString(gradientId)
+			)
+			.attr('class', gradientId)
 			.attr('x1', startPoint - 3 * shimmerWidth * width)
 			.attr('x2', endPoint)
 			.attr('y1', 0)

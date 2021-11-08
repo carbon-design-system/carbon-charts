@@ -60,7 +60,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 			const container = document.createElement('div');
 			container.setAttribute('class', 'container theme--g100');
 
-			container.innerHTML = `
+			container.innerHTML = `<main>
 <h3>
 	<b class="component">Component</b>
 	<span class="bx--tag bx--tag--green component-name">${
@@ -68,7 +68,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
 </p>
 
 ${
@@ -97,14 +97,14 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 
 <h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
-	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg">
+	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on Codesandbox">
 </a>
 
 <h3 class="marginTop-45">Other versions</h3>
 <p style="opacity: 0.75;">(currently on <strong>vanilla</strong>)</p>
 <div id="other-versions">
 </div>
-			`;
+</main>`;
 
 			// Initialize chart
 			const chart = new ClassToInitialize(

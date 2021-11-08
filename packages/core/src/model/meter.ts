@@ -78,4 +78,47 @@ export class MeterChartModel extends ChartModel {
 
 		return null;
 	}
+
+	getTabularDataArray() {
+		const displayData = this.getDisplayData();
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+		const status = this.getStatus();
+		const proportional = Tools.getProperty(
+			options,
+			'meter',
+			'proportional'
+		);
+
+		let result = [];
+		let domainMax;
+		// Display the appropriate columns and fields depending on the type of meter
+		if (proportional === null) {
+			domainMax = 100;
+			const datum = displayData[0];
+
+			result = [
+				['Group', 'Value', ...(status ? ['Status'] : [])],
+				[
+					datum[groupMapsTo],
+					datum['value'],
+					...(status ? [status] : []),
+				],
+			];
+		} else {
+			const total = Tools.getProperty(proportional, 'total');
+			domainMax = total ? total : this.getMaximumDomain(displayData);
+
+			result = [
+				['Group', 'Value', 'Percentage of total'],
+				...displayData.map((datum) => [
+					datum[groupMapsTo],
+					datum['value'],
+					((datum['value'] / domainMax) * 100).toFixed(2) + ' %',
+				]),
+			];
+		}
+
+		return result;
+	}
 }

@@ -58,9 +58,19 @@ export class Radar extends Component {
 
 		const data = this.model.getData();
 		const groupedData = this.model.getGroupedData();
+
 		const options = this.getOptions();
-		const { angle, value } = Tools.getProperty(options, 'radar', 'axes');
+
 		const groupMapsTo = Tools.getProperty(options, 'data', 'groupMapsTo');
+		const valueMapsTo = Tools.getProperty(
+			options,
+			'radar',
+			'axes',
+			'value'
+		);
+
+		const { angle, value } = Tools.getProperty(options, 'radar', 'axes');
+
 		const {
 			xLabelPadding,
 			yLabelPadding,
@@ -155,7 +165,6 @@ export class Radar extends Component {
 			(enter) =>
 				enter
 					.append('path')
-					.attr('role', Roles.GRAPHICS_SYMBOL)
 					.attr('opacity', 0)
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
@@ -222,7 +231,6 @@ export class Radar extends Component {
 			(enter) =>
 				enter
 					.append('line')
-					.attr('role', Roles.GRAPHICS_SYMBOL)
 					.attr('opacity', 0)
 					.attr('class', (key) => `x-axis-${Tools.kebabCase(key)}`) // replace spaces with -
 					.attr('stroke-dasharray', '0')
@@ -477,6 +485,7 @@ export class Radar extends Component {
 						})
 					)
 					.attr('role', Roles.GRAPHICS_SYMBOL)
+					.attr('aria-label', (d) => d['name'])
 					.attr('opacity', 0)
 					.attr(
 						'transform',
@@ -587,7 +596,10 @@ export class Radar extends Component {
 		dotsUpdate
 			.join(
 				(enter) =>
-					enter.append('circle').attr('role', Roles.GRAPHICS_SYMBOL),
+					enter
+						.append('circle')
+						.attr('role', Roles.GRAPHICS_SYMBOL)
+						.attr('aria-label', (d) => d[valueMapsTo]),
 				(update) => update,
 				(exit) => exit.remove()
 			)
@@ -630,8 +642,7 @@ export class Radar extends Component {
 			.data(this.uniqueKeys);
 		xAxisRectUpdate
 			.join(
-				(enter) =>
-					enter.append('rect').attr('role', Roles.GRAPHICS_SYMBOL),
+				(enter) => enter.append('rect'),
 				(update) => update,
 				(exit) => exit.remove()
 			)

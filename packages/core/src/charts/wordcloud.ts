@@ -1,5 +1,5 @@
 // Internal Imports
-import { PieChartModel } from '../model/pie';
+import { WordCloudModel } from '../model/wordcloud';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, WorldCloudChartOptions } from '../interfaces/index';
@@ -16,6 +16,8 @@ import {
 } from '../components/index';
 
 export class WordCloudChart extends Chart {
+	model = new WordCloudModel(this.services);
+
 	constructor(
 		holder: Element,
 		chartConfigs: ChartConfig<WorldCloudChartOptions>

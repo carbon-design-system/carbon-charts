@@ -82,7 +82,10 @@ export function polarToCartesianCoords(
 ): Point {
 	const x = r * Math.cos(a) + t.x;
 	const y = r * Math.sin(a) + t.y;
-	return { x, y };
+
+	// NaN is rendered at coordinate 0 in browsers
+	// By setting it to 0, further operations can be performed
+	return { x: isNaN(x) ? 0 : x, y: isNaN(y) ? 0 : y };
 }
 
 // Return the distance between a point (described with polar coordinates)

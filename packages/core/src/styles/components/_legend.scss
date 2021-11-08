@@ -5,7 +5,7 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 	flex-wrap: wrap;
 
 	&[data-name='legend-items'] {
-	    width: 100%;
+		width: 100%;
 		margin: -5px;
 	}
 
@@ -21,6 +21,10 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 			border-radius: 2px;
 			border: solid 1px $ui-background;
 			box-shadow: 0 0 0 2px transparent;
+
+			@media (forced-colors: active) {
+				forced-color-adjust: none;
+			}
 
 			&:not(.active) {
 				border-color: $text-02;

@@ -159,6 +159,7 @@ export class Boxplot extends Component {
 			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
+			.attr('aria-label', (d) => d[groupMapsTo])
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({

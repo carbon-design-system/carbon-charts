@@ -68,7 +68,6 @@ const config = {
 		vite: {
 			optimizeDeps: {
 				include: ['@carbon/charts'],
-				exclude: ['@carbon/telemetry']
 			},
 			ssr: {
 				noExternal: [production && '@carbon/charts'].filter(Boolean),
@@ -113,22 +112,6 @@ Take care to install `@carbon/charts-svelte` as a development dependency.
 No additional configuration should be necessary.
 
 ### Rollup
-
-When using this library with [rollup](https://github.com/rollup/rollup), set
-`context` to `"window"` in the exported configuration in `rollup.config.js`.
-
-```js
-// rollup.config.js
-
-export default {
-	context: 'window',
-	// ...
-};
-```
-
-#### Troubleshooting
-
-##### "process is not defined"
 
 If you encounter the error message `ReferenceError: process is not defined`,
 install
@@ -193,6 +176,7 @@ Import chart styles from `@carbon/charts`:
 <script>
   import { BarChartSimple } from "@carbon/charts-svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 </script>
 
 <BarChartSimple
@@ -244,6 +228,7 @@ Dynamically import a chart and instantiate it using the
 <script>
   import { onMount } from "svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
@@ -284,6 +269,7 @@ that fires when hovering over a bar.
   import { onMount } from "svelte";
   import { BarChartSimple } from "@carbon/charts-svelte";
   import "@carbon/charts/styles.min.css";
+  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
