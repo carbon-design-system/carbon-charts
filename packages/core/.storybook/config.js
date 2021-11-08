@@ -3,7 +3,7 @@ import { setOptions } from '@storybook/addon-options';
 import theme from './theme';
 
 setOptions({
-	name: 'Carbon Charts - Vanilla',
+	name: 'Carbon Charts - vanilla',
 	showAddonPanel: true,
 	sortStoriesByKind: true,
 	panelPosition: 'bottom',

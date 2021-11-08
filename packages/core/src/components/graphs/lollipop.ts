@@ -158,8 +158,12 @@ export class Lollipop extends Scatter {
 
 		this.parent
 			.selectAll('line.line')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-line')
+			.transition('legend-hover-line')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-line',
+				})
 			)
 			.attr('opacity', (d) => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
@@ -173,8 +177,12 @@ export class Lollipop extends Scatter {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('line.line')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-line')
+			.transition('legend-mouseout-line')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-line',
+				})
 			)
 			.attr('opacity', Configuration.lines.opacity.selected);
 	};

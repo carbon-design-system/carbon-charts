@@ -714,6 +714,25 @@ export class ChartModel {
 		return tabularData;
 	}
 
+	getTabularDataArray() {
+		return [];
+	}
+
+	exportToCSV() {
+		let data = this.getTabularDataArray().map((row) =>
+			row.map((column) => `\"${column}\"`)
+		);
+
+		let csvString = '',
+			csvData = '';
+		data.forEach(function (d, i) {
+			csvData = d.join(',');
+			csvString += i < data.length ? csvData + '\n' : csvData;
+		});
+
+		this.services.files.downloadCSV(csvString, 'myChart.csv');
+	}
+
 	protected getTabularData(data) {
 		// if data is not an array
 		if (!Array.isArray(data)) {

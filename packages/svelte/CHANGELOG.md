@@ -3,6 +3,174 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.2...v0.51.3) (2021-11-03)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.51.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.1...v0.51.2) (2021-11-02)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.51.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.0...v0.51.1) (2021-11-02)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+# [0.51.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.10...v0.51.0) (2021-11-01)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.9...v0.50.10) (2021-10-27)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.8...v0.50.9) (2021-10-20)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.7...v0.50.8) (2021-10-18)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.6...v0.50.7) (2021-10-12)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.5...v0.50.6) (2021-10-08)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.4...v0.50.5) (2021-10-08)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.3...v0.50.4) (2021-10-05)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.2...v0.50.3) (2021-10-04)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.1...v0.50.2) (2021-10-04)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.50.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.50.0...v0.50.1) (2021-10-01)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+# [0.50.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.7...v0.50.0) (2021-09-30)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.6...v0.49.7) (2021-09-27)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.5...v0.49.6) (2021-09-23)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.4...v0.49.5) (2021-09-23)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.3...v0.49.4) (2021-09-22)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.2...v0.49.3) (2021-09-22)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.49.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.1...v0.49.2) (2021-09-20)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
 ## [0.49.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.49.0...v0.49.1) (2021-09-17)
 
 **Note:** Version bump only for package @carbon/charts-svelte

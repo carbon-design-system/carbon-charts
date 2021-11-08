@@ -138,7 +138,9 @@ export class Histogram extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value);
+			.attr('aria-label', (d) =>
+				Tools.getProperty(d, 'data', d[groupMapsTo])
+			);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -153,8 +155,12 @@ export class Histogram extends Component {
 
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
+			.transition('legend-hover-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-bar',
+				})
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -165,8 +171,12 @@ export class Histogram extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
+			.transition('legend-mouseout-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-bar',
+				})
 			)
 			.attr('opacity', 1);
 	};
@@ -182,11 +192,6 @@ export class Histogram extends Component {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed('hovered', true);
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				const x0 = parseFloat(get(datum, 'data.x0'));
 				const x1 = parseFloat(get(datum, 'data.x1'));

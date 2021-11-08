@@ -159,8 +159,12 @@ export class Line extends Component {
 
 		this.parent
 			.selectAll('path.line')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-line')
+			.transition('legend-hover-line')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-line',
+				})
 			)
 			.attr('opacity', (group) => {
 				if (group.name !== hoveredElement.datum()['name']) {
@@ -174,8 +178,12 @@ export class Line extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.line')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-line')
+			.transition('legend-mouseout-line')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-line',
+				})
 			)
 			.attr('opacity', Configuration.lines.opacity.selected);
 	};

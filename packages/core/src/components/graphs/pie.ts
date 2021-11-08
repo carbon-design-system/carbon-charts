@@ -261,7 +261,7 @@ export class Pie extends Component {
 		const alignment = Tools.getProperty(options, optionName, 'alignment');
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
-			useAttr: true,
+			useAttrs: true,
 		});
 
 		// don't add padding for labels & callouts if they are disabled
@@ -305,7 +305,7 @@ export class Pie extends Component {
 			.append('g')
 			.classed('callout', true)
 			// a11y
-			.attr('role', `${Roles.GRAPHICS_SYMBOL} ${Roles.GROUP}`)
+			.attr('role', Roles.GROUP)
 			.attr('aria-roledescription', 'label callout');
 
 		// Update data values for each callout
@@ -396,8 +396,12 @@ export class Pie extends Component {
 
 		this.parent
 			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
+			.transition('legend-hover-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-bar',
+				})
 			)
 			.attr('opacity', (d) =>
 				d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -408,8 +412,12 @@ export class Pie extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.slice')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
+			.transition('legend-mouseout-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-bar',
+				})
 			)
 			.attr('opacity', 1);
 	};
@@ -423,10 +431,12 @@ export class Pie extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition('pie_slice_mouseover')
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseover',
+						})
 					)
 					.attr('d', self.hoverArc);
 
@@ -478,10 +488,12 @@ export class Pie extends Component {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed('hovered', false)
-					.transition(
-						self.services.transitions.getTransition(
-							'pie_slice_mouseover'
-						)
+					.transition('pie_slice_mouseout')
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'pie_slice_mouseout',
+						})
 					)
 					.attr('d', self.arc);
 

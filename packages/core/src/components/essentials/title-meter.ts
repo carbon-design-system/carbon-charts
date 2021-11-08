@@ -164,7 +164,7 @@ export class MeterTitle extends Title {
 
 		const containerBounds = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainContainer(),
-			{ useAttr: true }
+			{ useAttrs: true }
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute

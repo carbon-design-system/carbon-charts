@@ -29,5 +29,7 @@
 }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
+	height: inherit;
+	width: inherit;
 	overflow: visible;
 }

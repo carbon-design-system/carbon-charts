@@ -161,10 +161,11 @@ export class Area extends Component {
 			}
 			GradientUtils.appendOrUpdateLinearGradient({
 				svg: this.parent,
-				id:
-					groupedData[0].name.replace(' ', '') +
-					'_' +
-					this.gradient_id,
+				id: this.services.domUtils.generateElementIDString(
+					`${groupedData[0].name.replace(' ', '')}_${
+						this.gradient_id
+					}`
+				),
 				x1: '0%',
 				x2: '0%',
 				y1: '0%',
@@ -190,9 +191,9 @@ export class Area extends Component {
 				.style(
 					'fill',
 					(group) =>
-						`url(#${group.name.replace(' ', '')}_${
-							this.gradient_id
-						})`
+						`url(#${this.services.domUtils.generateElementIDString(
+							`${group.name.replace(' ', '')}_${this.gradient_id}`
+						)})`
 				)
 				.attr('class', 'area')
 				.attr('class', (group) =>
@@ -256,8 +257,12 @@ export class Area extends Component {
 
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-area')
+			.transition('legend-hover-area')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-area',
+				})
 			)
 			.attr('opacity', (group) => {
 				if (group.name !== hoveredElement.datum()['name']) {
@@ -271,8 +276,12 @@ export class Area extends Component {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.area')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-area')
+			.transition('legend-mouseout-area')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-area',
+				})
 			)
 			.attr('opacity', Configuration.area.opacity.selected);
 	};

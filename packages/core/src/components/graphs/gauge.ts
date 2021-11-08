@@ -120,9 +120,10 @@ export class Gauge extends Component {
 			.endAngle(currentAngle);
 
 		// draw the container
-		DOMUtils.appendOrSelect(svg, 'path.arc-background')
-			.attr('d', this.backgroundArc)
-			.attr('role', Roles.GROUP);
+		DOMUtils.appendOrSelect(svg, 'path.arc-background').attr(
+			'd',
+			this.backgroundArc
+		);
 
 		// Add data arc
 		const arcValue = svg.selectAll('path.arc-foreground').data([value]);
@@ -145,7 +146,7 @@ export class Gauge extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
-			.attr('aria-label', (d) => d.value);
+			.attr('aria-label', (d) => d);
 
 		// draw the value and delta to the center
 		this.drawValueNumber();
@@ -156,7 +157,7 @@ export class Gauge extends Component {
 		const alignment = Tools.getProperty(options, 'gauge', 'alignment');
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
-			useAttr: true,
+			useAttrs: true,
 		});
 
 		// Position gauge

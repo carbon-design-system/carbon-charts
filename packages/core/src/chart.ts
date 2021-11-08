@@ -3,6 +3,7 @@ import {
 	ChartConfig,
 	BaseChartOptions,
 	LayoutGrowth,
+	LayoutAlignItems,
 	LayoutDirection,
 	LegendOrientations,
 	Events as ChartEvents,
@@ -17,6 +18,7 @@ import {
 	Title,
 	Legend,
 	LayoutComponent,
+	Toolbar,
 	Tooltip,
 	Spacer,
 	CanvasChartClip,
@@ -131,11 +133,9 @@ export class Chart {
 		graphFrameComponents: any[],
 		configs?: object
 	) {
-		const titleComponent = {
-			id: 'title',
-			components: [new Title(this.model, this.services)],
-			growth: LayoutGrowth.PREFERRED,
-		};
+		const options = this.model.getOptions();
+
+		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled');
 
 		const legendComponent = {
 			id: 'legend',
@@ -145,7 +145,7 @@ export class Chart {
 
 		// if canvas zoom is enabled
 		const isZoomEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			'canvasZoom',
 			'enabled'
 		);
@@ -156,38 +156,71 @@ export class Chart {
 			);
 		}
 
+		const titleAvailable = !!this.model.getOptions().title;
+		const titleComponent = {
+			id: 'title',
+			components: [new Title(this.model, this.services)],
+			growth: LayoutGrowth.STRETCH,
+		};
+
+		const toolbarComponent = {
+			id: 'toolbar',
+			components: [new Toolbar(this.model, this.services)],
+			growth: LayoutGrowth.PREFERRED,
+		};
+
+		const headerComponent = {
+			id: 'header',
+			components: [
+				new LayoutComponent(
+					this.model,
+					this.services,
+					[
+						// always add title to keep layout correct
+						titleComponent,
+						...(toolbarEnabled ? [toolbarComponent] : []),
+					],
+					{
+						direction: LayoutDirection.ROW,
+						alignItems: LayoutAlignItems.CENTER,
+					}
+				),
+			],
+			growth: LayoutGrowth.PREFERRED,
+		};
+
 		const graphFrameComponent = {
 			id: 'graph-frame',
 			components: graphFrameComponents,
 			growth: LayoutGrowth.STRETCH,
-			renderType: Tools.getProperty(configs, 'graphFrameRenderType') || RenderTypes.SVG,
+			renderType:
+				Tools.getProperty(configs, 'graphFrameRenderType') ||
+				RenderTypes.SVG,
 		};
 
 		const isLegendEnabled =
 			Tools.getProperty(configs, 'excludeLegend') !== true &&
-			this.model.getOptions().legend.enabled !== false;
+			options.legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 		if (isLegendEnabled) {
 			const legendPosition = Tools.getProperty(
-				this.model.getOptions(),
+				options,
 				'legend',
 				'position'
 			);
 			if (legendPosition === 'left') {
 				fullFrameComponentDirection = LayoutDirection.ROW;
 
-				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation =
-						LegendOrientations.VERTICAL;
+				if (!options.legend.orientation) {
+					options.legend.orientation = LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === 'right') {
 				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
-				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation =
-						LegendOrientations.VERTICAL;
+				if (!options.legend.orientation) {
+					options.legend.orientation = LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === 'bottom') {
 				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
@@ -221,12 +254,19 @@ export class Chart {
 
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
-		if (this.model.getOptions().title) {
-			topLevelLayoutComponents.push(titleComponent);
+
+		if (titleAvailable || toolbarEnabled) {
+			topLevelLayoutComponents.push(headerComponent);
 
 			const titleSpacerComponent = {
 				id: 'spacer',
-				components: [new Spacer(this.model, this.services)],
+				components: [
+					new Spacer(
+						this.model,
+						this.services,
+						toolbarEnabled ? { size: 15 } : undefined
+					),
+				],
 				growth: LayoutGrowth.PREFERRED,
 			};
 

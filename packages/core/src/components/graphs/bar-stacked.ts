@@ -171,8 +171,12 @@ export class StackedBar extends Bar {
 
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-hover-bar')
+			.transition('legend-hover-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-bar',
+				})
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -183,8 +187,12 @@ export class StackedBar extends Bar {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition('legend-mouseout-bar')
+			.transition('legend-mouseout-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-bar',
+				})
 			)
 			.attr('opacity', 1);
 	};
@@ -199,12 +207,6 @@ export class StackedBar extends Bar {
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
@@ -239,7 +241,7 @@ export class StackedBar extends Bar {
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum[groupMapsTo]],
-						[groupMapsTo]: datum[groupMapsTo]
+						[groupMapsTo]: datum[groupMapsTo],
 					};
 				}
 

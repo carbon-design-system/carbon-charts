@@ -147,10 +147,12 @@ export class SimpleBar extends Bar {
 
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-hover-simple-bar'
-				)
+			.transition('legend-hover-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-simple-bar',
+				})
 			)
 			.attr('opacity', (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
@@ -160,10 +162,12 @@ export class SimpleBar extends Bar {
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
 			.selectAll('path.bar')
-			.transition(
-				this.services.transitions.getTransition(
-					'legend-mouseout-simple-bar'
-				)
+			.transition('legend-mouseout-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-simple-bar',
+				})
 			)
 			.attr('opacity', 1);
 	};
@@ -175,11 +179,7 @@ export class SimpleBar extends Bar {
 			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', true);
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseover_fill_update'
-					)
-				);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					event,
@@ -216,12 +216,6 @@ export class SimpleBar extends Bar {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed('hovered', false);
-
-				hoveredElement.transition(
-					self.services.transitions.getTransition(
-						'graph_element_mouseout_fill_update'
-					)
-				);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

@@ -16,7 +16,18 @@ import domToImage from 'dom-to-image';
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier';
 
+interface getSVGElementSizeOptions {
+	useAttrs?: boolean;
+	useClientDimensions?: boolean;
+	useBBox?: boolean;
+	useBoundingRect?: boolean;
+}
+
 export class DOMUtils extends Service {
+	private chartID = Math.floor(
+		(1 + Math.random()) * 0x1000000000000
+	).toString(16);
+
 	constructor(model: any, services: any) {
 		super(model, services);
 	}
@@ -30,7 +41,12 @@ export class DOMUtils extends Service {
 
 	static getSVGElementSize(
 		svgSelector: Selection<any, any, any, any>,
-		options?: any
+		options: getSVGElementSizeOptions = {
+			useAttrs: false,
+			useClientDimensions: false,
+			useBBox: false,
+			useBoundingRect: false,
+		}
 	) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
@@ -198,6 +214,14 @@ export class DOMUtils extends Service {
 		this.addHolderListeners();
 
 		this.handleFullscreenChange();
+	}
+
+	getChartID() {
+		return this.chartID;
+	}
+
+	generateElementIDString(originalID) {
+		return `chart-${this.chartID}-${originalID}`;
 	}
 
 	addMainContainer() {

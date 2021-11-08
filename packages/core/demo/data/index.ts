@@ -23,6 +23,7 @@ import * as wordCloudDemos from './wordcloud';
 import * as zoomBarDemos from './zoom-bar';
 import * as highScaleDemos from './high-scale';
 import * as alluvialDemos from './alluvial';
+import * as highlightDemos from './hightlight';
 
 export * from './area';
 export * from './bar';
@@ -212,6 +213,11 @@ const utilityDemoGroups = [
 				data: circlePackDemos.circlePackTwoLevelData,
 				chartType: chartTypes.CirclePackChart,
 			},
+			{
+				options: alluvialDemos.alluvialSimpleCustomColorOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
+			},
 		],
 	},
 	{
@@ -273,14 +279,15 @@ const utilityDemoGroups = [
 		title: 'Highlights',
 		demos: [
 			{
-				options: areaDemos.boundedAreaTimeSeriesWithHighlightsOptions,
-				data: areaDemos.boundedAreaTimeSeriesData,
+				options:
+					highlightDemos.boundedAreaTimeSeriesWithHighlightsOptions,
+				data: highlightDemos.highlightBoundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 			},
 			{
 				options:
-					areaDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
-				data: areaDemos.boundedAreaTimeSeriesData,
+					highlightDemos.boundedAreaTimeSeriesWithHighlightsZoomOptions,
+				data: highlightDemos.highlightBoundedAreaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 			},
 		],

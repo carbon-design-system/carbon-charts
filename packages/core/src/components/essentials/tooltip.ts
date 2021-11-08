@@ -203,18 +203,18 @@ export class Tooltip extends Component {
 			const formattedItems = this.formatItems(items);
 
 			defaultHTML =
-				`<ul class='multi-tooltip'>` +
+				`<ul class="multi-tooltip">` +
 				formattedItems
 					.map(
 						(item) =>
 							`<li>
 							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
-								${item.class ? `<a class="tooltip-color ${item.class}"></a>` : ''}
+								${item.class ? `<div class="tooltip-color ${item.class}"></div>` : ''}
 								${
 									item.color
-										? '<a style="background-color: ' +
+										? '<div style="background-color: ' +
 										  item.color +
-										  '" class="tooltip-color"></a>'
+										  '" class="tooltip-color"></div>'
 										: ''
 								}
 								<div class="label">
@@ -272,7 +272,8 @@ export class Tooltip extends Component {
 				`div.${settings.prefix}--${chartprefix}--tooltip`
 			);
 
-			this.tooltip.style('max-width', null);
+			this.tooltip.style('max-width', null).attr('role', 'tooltip');
+
 			if (!this.isEventListenerAdded) {
 				this.addTooltipEventListener();
 				this.isEventListenerAdded = true;

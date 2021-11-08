@@ -45,6 +45,7 @@ export class Legend extends Component {
 			.classed(legendOrientation, true)
 			.classed('has-deactivated-items', hasDeactivatedItems)
 			.attr('role', Roles.GROUP)
+			.attr('aria-label', 'Data groups')
 			.attr('data-name', 'legend-items');
 
 		if (userProvidedOrder) {
@@ -79,11 +80,15 @@ export class Legend extends Component {
 			.append('div')
 			.classed('checkbox', true);
 
-		addedCheckboxes
+		const allCheckboxes = addedCheckboxes
 			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
-			.attr('aria-label', (d) => d.name)
+			.attr('aria-labelledby', (d, i) =>
+				this.services.domUtils.generateElementIDString(
+					`legend-datagroup-${i}-title`
+				)
+			)
 			.attr(
 				'aria-checked',
 				({ status }) =>
@@ -91,8 +96,6 @@ export class Legend extends Component {
 			)
 			.attr('width', checkboxRadius * 2)
 			.attr('height', checkboxRadius * 2)
-			.attr('rx', 1)
-			.attr('ry', 1)
 			.attr('class', (d, i) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.BACKGROUND],
@@ -130,8 +133,6 @@ export class Legend extends Component {
 			.append('p')
 			.merge(legendItems.select('p'));
 
-		this.truncateLegendText(addedLegendItemsText);
-
 		const additionalItemsOption = Tools.getProperty(
 			options,
 			'legend',
@@ -153,7 +154,12 @@ export class Legend extends Component {
 				.append('div')
 				.merge(additionalItems)
 				.classed('legend-item', true)
-				.classed('additional', true);
+				.classed('additional', true)
+				.attr('aria-labelledby', (d, i) =>
+					this.services.domUtils.generateElementIDString(
+						`legend-datagroup-${allCheckboxes.size() + i}-title`
+					)
+				);
 
 			// remove nested child elements that no longer needed
 			addedAdditionalItems.selectAll('*').remove();
@@ -183,7 +189,7 @@ export class Legend extends Component {
 				.append('p')
 				.merge(addedAdditionalItems.select('p'));
 
-			this.truncateLegendText(addedAdditionalItemsText);
+			this.truncateLegendText();
 		}
 
 		// Remove old elements as needed.
@@ -374,23 +380,37 @@ export class Legend extends Component {
 		}
 	}
 
-	truncateLegendText(addedLegendItemsText) {
-		const trucationOptions = Tools.getProperty(
+	truncateLegendText() {
+		const svg = this.getComponentContainer();
+
+		const truncationOptions = Tools.getProperty(
 			this.getOptions(),
 			'legend',
 			'truncation'
 		);
 		// Truncation
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(trucationOptions, 'type');
+		const truncationType = Tools.getProperty(truncationOptions, 'type');
 		const truncationThreshold = Tools.getProperty(
-			trucationOptions,
+			truncationOptions,
 			'threshold'
 		);
 		const truncationNumCharacter = Tools.getProperty(
-			trucationOptions,
+			truncationOptions,
 			'numCharacter'
 		);
+
+		const addedLegendItemsText = svg.selectAll('div.legend-item p');
+
+		const self = this;
+		// Add an ID for the checkbox to use through `aria-labelledby`
+		addedLegendItemsText.attr('id', function (d, i) {
+			const elementToReference =
+				this.parentNode.querySelector('div.checkbox') ||
+				this.parentNode;
+
+			return elementToReference.getAttribute('aria-labelledby');
+		});
 
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
@@ -470,11 +490,33 @@ export class Legend extends Component {
 
 		svg.selectAll('div.legend-item div.checkbox').on(
 			'keyup',
-			function (event, d) {
-				if (event.key && (event.key === 'Enter' || event.key === ' ')) {
-					event.preventDefault();
+			function (event) {
+				if (event.key && event.key === 'Tab') {
+					// Higlight group
+					self.services.events.dispatchEvent(
+						Events.Legend.ITEM_HOVER,
+						{
+							hoveredElement: select(this),
+						}
+					);
+				}
+			}
+		);
 
+		svg.selectAll('div.legend-item div.checkbox').on(
+			'keydown',
+			function (event, d) {
+				if (event.key && event.key === ' ') {
+					event.preventDefault();
 					self.model.toggleDataLabel(d.name);
+				} else if (event.key && event.key === 'Tab') {
+					// Unhiglight group
+					self.services.events.dispatchEvent(
+						Events.Legend.ITEM_MOUSEOUT,
+						{
+							hoveredElement: select(this),
+						}
+					);
 				}
 			}
 		);

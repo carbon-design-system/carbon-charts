@@ -1,8 +1,13 @@
 @import './vendor/@carbon/type/scss/type';
 @import './vendor/@carbon/type/scss/font-face/sans';
 @import './vendor/@carbon/type/scss/font-face/sans-condensed';
-@include carbon--font-face-sans();
-@include carbon--font-face-sans-condensed();
+
+@import './chart-feature-flags';
+
+@if map-get($chart-feature-flags, 'enable-font-imports') == true {
+	@include carbon--font-face-sans();
+	@include carbon--font-face-sans-condensed();
+}
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	font-family: carbon--font-family('sans-condensed');

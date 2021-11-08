@@ -89,7 +89,11 @@ export class Alluvial extends Component {
 		// Add the category text
 		alluvialCategory
 			.append('text')
-			.attr('id', (d, i) => `category-${i}`)
+			.attr('id', (d, i) =>
+				this.services.domUtils.generateElementIDString(
+					`alluvial-category-${i}`
+				)
+			)
 			.style('font-size', '14px')
 			.text((d) => {
 				if (nodeCoordinates[d]) {
@@ -99,8 +103,12 @@ export class Alluvial extends Component {
 			})
 			.attr('y', 20)
 			.attr('x', (d, i) => {
+				const elementID = this.services.domUtils.generateElementIDString(
+					`alluvial-category-${i}`
+				);
+
 				const { width } = DOMUtils.getSVGElementSize(
-					select(`text#category-${i}`),
+					select(`text#${elementID}`),
 					{ useBBox: true }
 				);
 
@@ -120,7 +128,11 @@ export class Alluvial extends Component {
 			.join('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
-			.attr('id', (d) => `line-${d.index}`)
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`alluvial-line-${d.index}`
+				)
+			)
 			.attr('class', (d) => {
 				// Use a single color for the lines
 				if (options.alluvial.monochrome) {
@@ -137,6 +149,7 @@ export class Alluvial extends Component {
 					originalClassName: 'link',
 				});
 			})
+			.style('stroke', (d) => this.model.getFillColor(d.source.name))
 			.attr('stroke-width', (d) => Math.max(1, d.width))
 			.style('stroke-opacity', Configuration.alluvial.opacity.default)
 			.attr(
@@ -156,7 +169,11 @@ export class Alluvial extends Component {
 			.data(this.graph.nodes)
 			.enter()
 			.append('g')
-			.attr('id', (d) => `node-${d.index}`)
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`alluvial-node-${d.index}`
+				)
+			)
 			.classed('node-group', true)
 			.attr('transform', (d) => `translate(${d.x0}, ${d.y0})`);
 
@@ -170,12 +187,20 @@ export class Alluvial extends Component {
 		// Group to hold the text & rectangle background
 		const textNode = node
 			.append('g')
-			.attr('id', (d) => `node-title-${d.index}`);
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`alluvial-node-title-${d.index}`
+				)
+			);
 
 		// Node title - text
 		textNode
 			.append('text')
-			.attr('id', (d) => `node-text-${d.index}`)
+			.attr('id', (d) =>
+				this.services.domUtils.generateElementIDString(
+					`alluvial-node-text-${d.index}`
+				)
+			)
 			.attr('class', 'node-text')
 			.style('font-size', '12px')
 			.attr('text-anchor', 'start')
@@ -196,9 +221,13 @@ export class Alluvial extends Component {
 			.append('rect')
 			.classed('node-text-bg', true)
 			.attr('width', (d, i) => {
+				const elementID = this.services.domUtils.generateElementIDString(
+					`alluvial-node-text-${i}`
+				);
+
 				// Determine rectangle width based on text width
 				const { width } = DOMUtils.getSVGElementSize(
-					select(`text#node-text-${i}`),
+					select(`text#${elementID}`),
 					{ useBBox: true }
 				);
 
@@ -210,8 +239,12 @@ export class Alluvial extends Component {
 
 		// Position group based on text width
 		textNode.attr('transform', (d, i) => {
+			const elementID = this.services.domUtils.generateElementIDString(
+				`alluvial-node-text-${i}`
+			);
+
 			const { width } = DOMUtils.getSVGElementSize(
-				select(`text#node-text-${i}`),
+				select(`text#${elementID}`),
 				{ useBBox: true }
 			);
 
@@ -245,10 +278,12 @@ export class Alluvial extends Component {
 			(link, event = 'mouseover') => {
 				const allLinks = self.parent
 					.selectAll('path.link')
-					.transition(
-						self.services.transitions.getTransition(
-							'alluvial-link-mouse-highlight'
-						)
+					.transition()
+					.call((t) =>
+						self.services.transitions.setupTransition({
+							transition: t,
+							name: 'alluvial-links-mouse-highlight',
+						})
 					);
 
 				if (event === 'mouseout') {
@@ -381,10 +416,12 @@ export class Alluvial extends Component {
 				// Highlight all nodes
 				const allLinks = self.parent
 					.selectAll('path.link')
-					.transition(
-						self.services.transitions.getTransition(
-							'alluvial-links-mouse-highlight'
-						)
+					.transition()
+					.call((t) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'alluvial-link-mouse-highlight',
+						})
 					);
 
 				allLinks.style('stroke-opacity', function (d) {
@@ -443,8 +480,12 @@ export class Alluvial extends Component {
 					// Translate first column text container to the
 					// right so it doesn't clash with expanding node
 					if (datum.x0 - 2 === 0) {
+						const elementID = self.services.domUtils.generateElementIDString(
+							`alluvial-node-title-${datum.index}`
+						);
+
 						const titleContainer = self.parent.select(
-							`g#node-title-${datum.index}`
+							`g#${elementID}`
 						);
 						const titleMatrix = Tools.getTranformOffsets(
 							titleContainer.attr('transform')
@@ -456,8 +497,12 @@ export class Alluvial extends Component {
 						);
 					}
 
+					const elementID = self.services.domUtils.generateElementIDString(
+						`alluvial-node-text-${datum.index}`
+					);
+
 					self.parent
-						.select(`text#node-text-${datum.index}`)
+						.select(`text#${elementID}`)
 						.style('font-weight', 'bold');
 
 					debouncedLineHighlight(paths, 'mouseover');
@@ -516,9 +561,11 @@ export class Alluvial extends Component {
 
 				// Translate text container back to initial state
 				if (datum.x0 - 2 === 0) {
-					const titleContainer = self.parent.select(
-						`g#node-title-${datum.index}`
+					const elementID = self.services.domUtils.generateElementIDString(
+						`alluvial-node-title-${datum.index}`
 					);
+
+					const titleContainer = self.parent.select(`g#${elementID}`);
 					const titleMatrix = Tools.getTranformOffsets(
 						titleContainer.attr('transform')
 					);
@@ -529,8 +576,12 @@ export class Alluvial extends Component {
 					);
 				}
 
+				const elementID = self.services.domUtils.generateElementIDString(
+					`alluvial-node-text-${datum.index}`
+				);
+
 				self.parent
-					.select(`text#node-text-${datum.index}`)
+					.select(`text#${elementID}`)
 					.style('font-weight', 'normal');
 
 				debouncedLineHighlight([], 'mouseout');

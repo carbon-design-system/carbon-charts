@@ -17,9 +17,9 @@ export class Title extends Component {
 		text.enter()
 			.append('p')
 			.classed('title', true)
+			.attr('role', 'heading')
+			.attr('aria-level', 2)
 			.merge(text)
-			.attr('x', 0)
-			.attr('y', '1em')
 			.html((d) => d);
 
 		// check if title needs truncation (and tooltip support)
@@ -108,7 +108,7 @@ export class Title extends Component {
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
 		return DOMUtils.getSVGElementSize(this.parent.node(), {
-			useAttr: true,
+			useAttrs: true,
 		}).width;
 	}
 
