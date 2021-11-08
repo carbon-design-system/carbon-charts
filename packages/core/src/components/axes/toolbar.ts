@@ -103,11 +103,15 @@ export class Toolbar extends Component {
 			<button
 				class="bx--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
-						`control-${d.id}`
-					)}" aria-label="${d.title}">
-				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${d.iconSVG.width !== undefined ? d.iconSVG.width : '20px'
-						}; height: ${d.iconSVG.height !== undefined ? d.iconSVG.height : '20px'
-						}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+					`control-${d.id}`
+				)}" aria-label="${d.title}">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
+					d.iconSVG.width !== undefined ? d.iconSVG.width : '20px'
+				}; height: ${
+						d.iconSVG.height !== undefined
+							? d.iconSVG.height
+							: '20px'
+					}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVG.content}
 				</svg>
 			</button>`
@@ -390,9 +394,7 @@ export class Toolbar extends Component {
 							);
 
 							// call the specified function if it exists
-							if (
-								typeof menuItem.clickFunction === 'function'
-							) {
+							if (typeof menuItem.clickFunction === 'function') {
 								menuItem.clickFunction(event);
 							}
 						} else if (keyEvent && keyEvent.key === 'ArrowUp') {
