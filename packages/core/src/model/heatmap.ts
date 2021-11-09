@@ -235,7 +235,18 @@ export class HeatmapModel extends ChartModelCartesian {
 	getUniqueDomain(): string[] {
 		if (Tools.isEmpty(this._domains)) {
 			const displayData = this.getDisplayData();
-			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+			const { cartesianScales } = this.services;
+
+			const domainIdentifier = cartesianScales.getDomainIdentifier();
+			const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
+			const customDomain = cartesianScales.getCustomDomainValuesByposition(
+				mainXAxisPosition
+			);
+
+			// Use user defined domain if specified
+			if (!!customDomain) {
+				return customDomain;
+			}
 
 			// Get unique axis values & create a matrix
 			this._domains = Array.from(
@@ -257,7 +268,18 @@ export class HeatmapModel extends ChartModelCartesian {
 	getUniqueRanges(): string[] {
 		if (Tools.isEmpty(this._range)) {
 			const displayData = this.getDisplayData();
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const { cartesianScales } = this.services;
+
+			const rangeIdentifier = cartesianScales.getRangeIdentifier();
+			const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
+			const customDomain = cartesianScales.getCustomDomainValuesByposition(
+				mainYAxisPosition
+			);
+
+			// Use user defined domain if specified
+			if (!!customDomain) {
+				return customDomain;
+			}
 
 			// Get unique axis values & create a matrix
 			this._range = Array.from(

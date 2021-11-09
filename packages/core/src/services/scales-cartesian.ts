@@ -214,6 +214,15 @@ export class CartesianScales extends Service {
 		}
 	}
 
+	getCustomDomainValuesByposition(axisPosition: AxisPositions) {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			'axes',
+			axisPosition,
+			'domain'
+		);
+	}
+
 	getOrientation() {
 		return this.orientation;
 	}
