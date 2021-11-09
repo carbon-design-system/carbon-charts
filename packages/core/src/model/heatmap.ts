@@ -123,6 +123,31 @@ export class HeatmapModel extends ChartModelCartesian {
 
 	constructor(services: any) {
 		super(services);
+
+		// Check which scale types are being used
+		const axis = Tools.getProperty(this.getOptions(), 'axes');
+
+		// Need to check options since scale service hasn't been instantiated
+		if (
+			(!!Tools.getProperty(axis, 'left', 'scaleType') &&
+				Tools.getProperty(axis, 'left', 'scaleType') !==
+					ScaleTypes.LABELS) ||
+			(!!Tools.getProperty(axis, 'right', 'scaleType') &&
+				Tools.getProperty(axis, 'right', 'scaleType') !==
+					ScaleTypes.LABELS) ||
+			(!!Tools.getProperty(axis, 'top', 'scaleType') &&
+				Tools.getProperty(axis, 'top', 'scaleType') !==
+					ScaleTypes.LABELS) ||
+			!!Tools.getProperty(
+				axis,
+				'bottom',
+				'scaleType' &&
+					Tools.getProperty(axis, 'bottom', 'scaleType') !==
+						ScaleTypes.LABELS
+			)
+		) {
+			throw Error('Heatmap only supports label scaletypes.');
+		}
 	}
 
 	getLinearScale() {
