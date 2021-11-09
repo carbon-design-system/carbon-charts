@@ -92,6 +92,30 @@ export class Heatmap extends Component {
 			})
 			.attr('aria-label', (d) => d.value);
 
+		rectangles.exit().remove();
+
+		const rowAndColumnHighligher = svg.append('g');
+
+		// Row
+		rowAndColumnHighligher
+			.append('rect')
+			.classed('highlighter-hidden', true)
+			.classed('highlighter-row', true)
+			.attr('x', xRange[0])
+			.attr('y', 0)
+			.attr('width', Math.abs(xRange[1] - xRange[0]))
+			.attr('height', this.yBandwidth);
+
+		// Column
+		rowAndColumnHighligher
+			.append('rect')
+			.classed('highlighter-hidden', true)
+			.classed('highlighter-column', true)
+			.attr('x', xRange[0])
+			.attr('y', 0)
+			.attr('width', this.xBandwidth)
+			.attr('height', Math.abs(yRange[1] - yRange[0]));
+
 		// Add dividers if status is not off, will assume auto or on by default.
 		const dividerStatus = Tools.getProperty(
 			options,
@@ -162,9 +186,24 @@ export class Heatmap extends Component {
 						}
 					);
 
+					console.log(
+						hoveredElement.style('stroke-width') === '1px'
+							? '2px'
+							: '1px',
+						hoveredElement.style('stroke-width')
+					);
 					// Perform visual changes only if value is valid
 					// Highlight element
-					hoveredElement.raise().classed('raised', true);
+					hoveredElement
+						.style(
+							'stroke-width',
+							hoveredElement.style('stroke-width') === '1px'
+								? '2px'
+								: '1px'
+						)
+						.raise()
+						.classed('raised', true);
+
 					// Dispatch tooltip show event
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
@@ -215,7 +254,7 @@ export class Heatmap extends Component {
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
 				const nullState = hoveredElement.classed('null-state');
-				hoveredElement.classed('raised', false);
+				hoveredElement.lower().classed('raised', false);
 
 				// Add cell divider based on status
 				if (dividerStatus !== DividerStatus.OFF && !nullState) {
@@ -269,12 +308,14 @@ export class Heatmap extends Component {
 		// Labels
 		const domainLabel = this.services.cartesianScales.getDomainLabel();
 		const rangeLabel = this.services.cartesianScales.getRangeLabel();
+		// Scales
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 
 		let label = '',
 			sum = 0,
 			min = 0,
 			max = 0;
-		const ids = [];
 
 		// Check to see where datum belongs
 		if (this.matrix[datum] != undefined) {
@@ -285,10 +326,6 @@ export class Heatmap extends Component {
 				sum += value;
 				min = value < min ? value : min;
 				max = value > max ? value : max;
-				const id = this.matrix[datum][element].index;
-				if (id >= 0) {
-					ids.push(`.heat-${id}`);
-				}
 			});
 		} else {
 			label = rangeLabel;
@@ -297,20 +334,22 @@ export class Heatmap extends Component {
 				sum += value;
 				min = value < min ? value : min;
 				max = value > max ? value : max;
-				const id = this.matrix[element][datum].index;
-
-				if (id >= 0) {
-					ids.push(`rect.heat-${id}`);
-				}
 			});
 		}
 
-		this.parent
-			.selectAll(ids.join(','))
-			.classed('axis-hovered', true)
-			.style('stroke', 'white')
-			.style('stroke-width', '2px')
-			.raise();
+		if (mainXScale(datum)) {
+			this.parent
+				.selectAll('rect.highlighter-column')
+				.classed('highlighter-hidden', false)
+				.attr('x', mainXScale(datum))
+				.raise();
+		} else if (mainYScale(datum)) {
+			this.parent
+				.selectAll('rect.highlighter-row')
+				.classed('highlighter-hidden', false)
+				.attr('y', mainYScale(datum))
+				.raise();
+		}
 
 		// Dispatch tooltip show event
 		this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -340,35 +379,11 @@ export class Heatmap extends Component {
 
 	// Un-highlight all elements
 	handleAxisMouseOut = (event: CustomEvent) => {
-		const dividerStatus = Tools.getProperty(
-			this.getOptions(),
-			'heatmap',
-			'divider',
-			'state'
-		);
-
-		const hoveredRects = this.parent
-			.selectAll('rect.axis-hovered')
-			.classed('axis-hovered', false);
-
-		if (
-			(dividerStatus === DividerStatus.AUTO &&
-				Configuration.heatmap.minCellDividerDimension <=
-					this.xBandwidth &&
-				Configuration.heatmap.minCellDividerDimension <=
-					this.yBandwidth) ||
-			dividerStatus === DividerStatus.ON
-		) {
-			/**
-			 * @question
-			 * Use Gray 10 on white theme, but what about the others?
-			 */
-			hoveredRects
-				.style('stroke', '#f4f4f4')
-				.style('stroke-width', '1px');
-		} else {
-			hoveredRects.style('stroke', 'none').style('stroke-width', '0px');
-		}
+		// Hide row/column highlighting
+		this.parent
+			.selectAll('rect.highlighter-column,rect.highlighter-row')
+			.classed('highlighter-hidden', true)
+			.lower();
 
 		// Dispatch hide tooltip event
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE, {
