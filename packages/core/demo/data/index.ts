@@ -815,13 +815,18 @@ const simpleChartDemos = [
 				chartType: chartTypes.HeatmapChart,
 			},
 			{
-				options: heatmapDemos.heatmapColorOptions,
+				options: heatmapDemos.heatmapLegendOptions,
 				data: heatmapDemos.heatmapData,
 				chartType: chartTypes.HeatmapChart,
 			},
 			{
 				options: heatmapDemos.heatmapMissingDataOptions,
 				data: heatmapDemos.heatmapMissingData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapDomainOptions,
+				data: heatmapDemos.heatmapData,
 				chartType: chartTypes.HeatmapChart,
 			},
 		],

@@ -617,13 +617,8 @@ export const heatmapOptions = {
 	},
 };
 
-export const heatmapColorOptions = {
-	title: 'Heatmap (Color options)',
-	heatmap: {
-		colorPalette: {
-			type: 'teal',
-		},
-	},
+export const heatmapLegendOptions = {
+	title: 'Heatmap (Quantize legend options)',
 	axes: {
 		bottom: {
 			title: 'Letters',
@@ -634,6 +629,39 @@ export const heatmapColorOptions = {
 			title: 'Months',
 			mapsTo: 'month',
 			scaleType: 'labels',
+		},
+	},
+	legend: {
+		colorLegend: { type: 'quantize' },
+	},
+};
+
+export const heatmapDomainOptions = {
+	title: 'Heatmap (Axis order option)',
+	axes: {
+		bottom: {
+			title: 'Letters',
+			mapsTo: 'letter',
+			scaleType: 'labels',
+		},
+		left: {
+			title: 'Months',
+			mapsTo: 'month',
+			scaleType: 'labels',
+			domain: [
+				'January',
+				'February',
+				'March',
+				'April',
+				'May',
+				'June',
+				'July',
+				'August',
+				'September',
+				'October',
+				'November',
+				'December',
+			],
 		},
 	},
 };
