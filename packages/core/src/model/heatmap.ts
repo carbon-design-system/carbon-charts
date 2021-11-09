@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 
 // d3 imports
 import { extent } from 'd3-array';
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleQuantize } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
@@ -159,7 +159,19 @@ export class HeatmapModel extends ChartModelCartesian {
 			domain.push(value);
 		});
 
-		return domain;
+		const options = this.getOptions();
+		if (
+			Tools.getProperty(options, 'legend', 'colorLegend', 'type') ===
+			'linear'
+		) {
+			return domain;
+		}
+
+		/**
+		 * @todo
+		 * Clean this up!
+		 */
+		return domain.length !== 2 ? [0, 1] : [0, 100];
 	}
 
 	/**
@@ -181,19 +193,10 @@ export class HeatmapModel extends ChartModelCartesian {
 	 */
 	getColorScale() {
 		if (!this._colorScale) {
-			this._colorScale = scaleLinear()
-				/**
-				 * @todo
-				 * If getpalette() returns array of size 2
-				 * 	Check to see if, there is negative numbers and positive numbers
-				 * 		If Yes, then use min and max values
-				 *
-				 * OR
-				 *
-				 * IN getTicks, compare length of `colors` and `ticks(return)` variable.
-				 * 	If they do not match, use min and max, and the first and last color.
-				 */
-				.domain(this.getTicks())
+			this._colorScale = scaleQuantize()
+				.domain(this.getValueDomain() as [number, number])
+				// scaleLinear()
+				// 	.domain(this.getTicks())
 				.range(this.getPalettes());
 		}
 

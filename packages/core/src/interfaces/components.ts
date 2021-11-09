@@ -4,6 +4,7 @@ import {
 	Alignments,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	ColorLegendType
 } from './enums';
 import { Component } from '../components/component';
 import { TruncationOptions } from './truncation';
@@ -44,6 +45,13 @@ export interface LegendOptions {
 	 * customized legend items
 	 */
 	additionalItems?: LegendItem[];
+	/**
+	 * customize color legend
+	 * enabled by default on select charts
+	 */
+	colorLegend?: {
+		type: ColorLegendType;
+	}
 }
 
 /**

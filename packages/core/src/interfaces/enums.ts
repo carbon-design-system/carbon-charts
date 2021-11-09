@@ -252,6 +252,14 @@ export enum LegendItemType {
 }
 
 /**
+ * enum of color legend types
+ */
+export enum ColorLegendType {
+	LINEAR = 'linear',
+	QUANTILE = 'quantile',
+}
+
+/**
  * enum of axis ticks rotation
  */
 export enum DividerStatus {

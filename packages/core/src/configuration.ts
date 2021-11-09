@@ -594,23 +594,17 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 
 const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
 	axes,
-	timeScale,
-	// grid,
-	// ruler,
-	zoomBar: {
-		zoomRatio: 0.4,
-		minZoomRatio: 0.01,
-		top: {
-			enabled: false,
-			type: ZoomBarTypes.GRAPH_VIEW,
-		},
-	} as ZoomBarsOptions,
 	heatmap: {
 		divider: {
 			state: DividerStatus.AUTO,
 		},
 		colorPalette: {
 			type: 'purple',
+		},
+	},
+	legend: {
+		colorLegend: {
+			type: 'linear',
 		},
 	},
 } as HeatmapChartOptions);
