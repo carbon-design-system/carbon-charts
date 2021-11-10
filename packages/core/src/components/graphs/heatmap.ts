@@ -186,12 +186,6 @@ export class Heatmap extends Component {
 						}
 					);
 
-					console.log(
-						hoveredElement.style('stroke-width') === '1px'
-							? '2px'
-							: '1px',
-						hoveredElement.style('stroke-width')
-					);
 					// Perform visual changes only if value is valid
 					// Highlight element
 					hoveredElement
