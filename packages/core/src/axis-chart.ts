@@ -17,7 +17,6 @@ import {
 	ChartClip,
 	Modal,
 	LayoutComponent,
-	ColorScaleLegend,
 	Legend,
 	Threshold,
 	Highlight,
@@ -48,15 +47,6 @@ export class AxisChart extends Chart {
 		configs?: any
 	) {
 		const options = this.model.getOptions();
-
-		/**
-		 * @question
-		 * Probably not the best place to put this as it'll be called in other charts
-		 * Probbaly a good idea to create a similar class (almost exact copy - extending won't work)
-		 * with heatmap specific options and layout?
-		 */
-		const isHeatmapEnabled = Tools.getProperty(options, 'heatmap');
-
 		const isZoomBarEnabled = Tools.getProperty(
 			options,
 			'zoomBar',
@@ -122,15 +112,9 @@ export class AxisChart extends Chart {
 
 		const legendComponent = {
 			id: 'legend',
-			components: [
-				isHeatmapEnabled
-					? new ColorScaleLegend(this.model, this.services)
-					: new Legend(this.model, this.services),
-			],
+			components: [new Legend(this.model, this.services)],
 			growth: LayoutGrowth.PREFERRED,
 		};
-
-		// Check to see if it is heatmap here and call the color scale legend
 
 		// if all zoom bars are locked, no need to add chart brush
 		if (zoomBarEnabled && !isZoomBarLocked) {
