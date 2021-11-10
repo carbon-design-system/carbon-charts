@@ -4,7 +4,7 @@ import {
 	Alignments,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	ColorLegendType
+	ColorLegendType,
 } from './enums';
 import { Component } from '../components/component';
 import { TruncationOptions } from './truncation';
@@ -51,7 +51,7 @@ export interface LegendOptions {
 	 */
 	colorLegend?: {
 		type: ColorLegendType;
-	}
+	};
 }
 
 /**
