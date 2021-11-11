@@ -116,15 +116,23 @@ export class Heatmap extends Component {
 			.attr('width', this.xBandwidth)
 			.attr('height', Math.abs(yRange[1] - yRange[0]));
 
+		if (this.determineDividerStatus()) {
+			rectangles.style('stroke-width', '1px');
+		}
+
+		this.addEventListener();
+	}
+
+	determineDividerStatus(): boolean {
 		// Add dividers if status is not off, will assume auto or on by default.
 		const dividerStatus = Tools.getProperty(
-			options,
+			this.getOptions(),
 			'heatmap',
 			'divider',
 			'state'
 		);
 
-		// Add cell divider based on status
+		// Determine if cell divider should be displayed
 		if (dividerStatus !== DividerStatus.OFF) {
 			if (
 				(dividerStatus === DividerStatus.AUTO &&
@@ -134,17 +142,11 @@ export class Heatmap extends Component {
 						this.yBandwidth) ||
 				dividerStatus === DividerStatus.ON
 			) {
-				/**
-				 * @question
-				 * Use Gray 10 on white theme, but what about the others?
-				 */
-				rectangles
-					.style('stroke', '#f4f4f4')
-					.style('stroke-width', '1px');
+				return true;
 			}
 		}
 
-		this.addEventListener();
+		return false;
 	}
 
 	addEventListener() {
@@ -186,7 +188,6 @@ export class Heatmap extends Component {
 						}
 					);
 
-					// Perform visual changes only if value is valid
 					// Highlight element
 					hoveredElement
 						.style(
@@ -250,28 +251,12 @@ export class Heatmap extends Component {
 				const nullState = hoveredElement.classed('null-state');
 				hoveredElement.lower().classed('raised', false);
 
-				// Add cell divider based on status
-				if (dividerStatus !== DividerStatus.OFF && !nullState) {
-					if (
-						(dividerStatus === DividerStatus.AUTO &&
-							Configuration.heatmap.minCellDividerDimension <=
-								self.xBandwidth &&
-							Configuration.heatmap.minCellDividerDimension <=
-								self.yBandwidth) ||
-						dividerStatus === DividerStatus.ON
-					) {
-						/**
-						 * @question
-						 * Use Gray 10 on white theme, but what about the others?
-						 */
-						hoveredElement
-							.style('stroke', '#f4f4f4')
-							.style('stroke-width', '1px');
-					} else {
-						hoveredElement
-							.style('stroke', 'none')
-							.style('stroke-width', '0px');
-					}
+				if (self.determineDividerStatus() && !nullState) {
+					hoveredElement.style('stroke-width', '1px');
+				} else {
+					hoveredElement
+						.style('stroke', 'none')
+						.style('stroke-width', '0px');
 				}
 
 				// Dispatch mouse out event
