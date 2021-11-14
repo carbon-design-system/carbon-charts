@@ -598,9 +598,6 @@ const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
 		divider: {
 			state: DividerStatus.AUTO,
 		},
-		colorPalette: {
-			type: 'purple',
-		},
 	},
 	legend: {
 		colorLegend: {

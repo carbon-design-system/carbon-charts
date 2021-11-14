@@ -138,7 +138,14 @@ export interface BaseChartOptions {
 		 * options related to gradient
 		 * e.g. { enabled: true }
 		 */
-		gradient?: object;
+		gradient?: {
+			enabled?: boolean;
+			/**
+			 * hex color array
+			 * e.g. ['#fff', '#000', ...]
+			 */
+			colors?: Array<String>;
+		};
 	};
 }
 
@@ -523,30 +530,6 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		 */
 		divider?: {
 			state?: DividerStatus;
-		};
-		/**
-		 * @question - Should this be a new config? I'm not sure if color legend will be reused
-		 * Color palette too use
-		 */
-		colorPalette?: {
-			/**
-			 * @question - REQUIRES IMPLEMENTATION REVIEW
-			 * - SHOULD THIS BE PART OF THE COLOR OBJECT INSTEAD?
-			 * Sets which IBM color scheme to use, defaults to 'purple'
-			 */
-			type?:
-				| 'purple'
-				| 'blue'
-				| 'cyan'
-				| 'teal'
-				| 'red-cyan'
-				| 'purple-teal';
-			/**
-			 * @question - REQUIRES IMPLEMENTATION REVIEW
-			 * - SHOULD THIS BE PART OF THE LEGEND OR COLOR OBJECT INSTEAD?
-			 * Uses the listed colors to generate color scheme (For both heatmap & color-legend);
-			 */
-			colorCodes?: Array<string>;
 		};
 	};
 }

@@ -256,7 +256,7 @@ export enum LegendItemType {
  */
 export enum ColorLegendType {
 	LINEAR = 'linear',
-	QUANTILE = 'quantile',
+	QUANTIZE = 'quantize',
 }
 
 /**
