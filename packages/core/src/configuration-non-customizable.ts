@@ -130,6 +130,11 @@ export const legend = {
 		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
 		color: '#8D8D8D',
 	},
+	color: {
+		barWidth: 300,
+		barHeight: 8,
+		axisYTranslation: 10,
+	},
 };
 
 export const lines = {
