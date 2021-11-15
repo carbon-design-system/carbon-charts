@@ -1,10 +1,7 @@
 // Internal Imports
-import { ScaleTypes } from '../interfaces';
+import { ColorLegendType, ScaleTypes } from '../interfaces';
 import { ChartModelCartesian } from './cartesian-charts';
 import { Tools } from '../tools';
-
-// date formatting
-import { format } from 'date-fns';
 
 // d3 imports
 import { extent } from 'd3-array';
@@ -14,8 +11,8 @@ import { scaleLinear, scaleQuantize } from 'd3-scale';
 export class HeatmapModel extends ChartModelCartesian {
 	private palettes = {
 		// Monochromatic palettes
-		// Purple 10 - 100 (Includes white)
-		purple: [
+		// White, Purple 10 - 100
+		'mono-1': [
 			'#ffffff',
 			'#f6f2ff',
 			'#e8daff',
@@ -28,8 +25,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#31135e',
 			'#1c0f30',
 		],
-		// Blue 10 - 100 (Includes white)
-		blue: [
+		// White, Blue 10 - 100
+		'mono-2': [
 			'#ffffff',
 			'#edf5ff',
 			'#d0e2ff',
@@ -42,8 +39,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#001d6c',
 			'#001141',
 		],
-		// Cyan 10 - 100 (Includes white)
-		cyan: [
+		// White, Cyan 10 - 100
+		'mono-3': [
 			'#ffffff',
 			'#e5f6ff',
 			'#bae6ff',
@@ -56,8 +53,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#012749',
 			'#1c0f30',
 		],
-		// Teal 10 - 100 (includes white)
-		teal: [
+		// White, Teal 10 - 100
+		'mono-4': [
 			'#ffffff',
 			'#d9fbfb',
 			'#9ef0f0',
@@ -71,8 +68,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#081a1c',
 		],
 		// Diverging palettes
-		// Red 80 - 10, Cyan 10 - 80
-		'red-cyan': [
+		// Red 80 - 10, White, Cyan 10 - 80
+		'diverge-1': [
 			'#750e13',
 			'#a2191f',
 			'#da1e28',
@@ -81,6 +78,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#ffb3b8',
 			'#ffd7d9',
 			'#fff1f1',
+			'#ffffff',
 			'#e5f6ff',
 			'#bae6ff',
 			'#82cfff',
@@ -91,7 +89,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#003a6d',
 		],
 		// Purple 80 - 10, Teal 10 - 80
-		'purple-teal': [
+		'diverge-2': [
 			'#491d8b',
 			'#6929c4',
 			'#8a3ffc',
@@ -100,6 +98,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			'#d4bbff',
 			'#e8daff',
 			'#f6f2ff',
+			'#fff1f1',
+			'#ffffff',
 			'#d9fbfb',
 			'#9ef0f0',
 			'#3ddbd9',
@@ -111,13 +111,13 @@ export class HeatmapModel extends ChartModelCartesian {
 		],
 	};
 
-	// Will hold linearScale used in tick creation & colors
-	private _linearScale: any = undefined;
+	private colorScaleType: ColorLegendType = ColorLegendType.LINEAR;
+	selectedPalette = [];
 	private _colorScale: any = undefined;
 
 	// List of unique ranges and domains
 	private _domains = [];
-	private _range = [];
+	private _ranges = [];
 
 	private _matrix = {};
 
@@ -138,26 +138,12 @@ export class HeatmapModel extends ChartModelCartesian {
 			(!!Tools.getProperty(axis, 'top', 'scaleType') &&
 				Tools.getProperty(axis, 'top', 'scaleType') !==
 					ScaleTypes.LABELS) ||
-			!!Tools.getProperty(
-				axis,
-				'bottom',
-				'scaleType' &&
-					Tools.getProperty(axis, 'bottom', 'scaleType') !==
-						ScaleTypes.LABELS
-			)
+			(!!Tools.getProperty(axis, 'bottom', 'scaleType') &&
+				Tools.getProperty(axis, 'bottom', 'scaleType') !==
+					ScaleTypes.LABELS)
 		) {
 			throw Error('Heatmap only supports label scaletypes.');
 		}
-	}
-
-	getLinearScale() {
-		if (!this._linearScale) {
-			this._linearScale = scaleLinear()
-				.domain(this.getValueDomain())
-				.range([0, 75]);
-		}
-
-		return this._linearScale;
 	}
 
 	/**
@@ -169,63 +155,43 @@ export class HeatmapModel extends ChartModelCartesian {
 		const limits = extent(data);
 		const domain = [];
 
-		// Round extent values to the nearest 10th values since axis rounds values to multiples of 2, 5, and 10s.
-		limits.forEach((number) => {
+		// Round extent values to the nearest multiple of 50
+		// Axis rounds values to multiples of 2, 5, and 10s.
+		limits.forEach((number, index) => {
 			let value = Number(number);
 
-			if (value % 10 === 0 || value === 0) {
+			if (index === 0 && value >= 0) {
+				value = 0;
+			} else if (value % 50 === 0 || value === 0) {
 				value;
 			} else if (value < 0) {
-				value = Math.floor(value / 10) * 10;
+				value = Math.floor(value / 50) * 50;
 			} else {
-				value = Math.ceil(value / 10) * 10;
+				value = Math.ceil(value / 50) * 50;
 			}
 
 			domain.push(value);
 		});
 
-		const options = this.getOptions();
-		if (
-			Tools.getProperty(options, 'legend', 'colorLegend', 'type') ===
-			'linear'
-		) {
-			return domain;
+		// Ensure the median of the range is 0
+		if (domain[0] < 0 && domain[1] > 0) {
+			if (Math.abs(domain[0]) > domain[1]) {
+				domain[1] = Math.abs(domain[0]);
+			} else {
+				domain[0] = -domain[1];
+			}
 		}
 
-		/**
-		 * @todo
-		 * Clean this up!
-		 */
-		return domain.length !== 2 ? [0, 1] : [0, 100];
+		return domain;
 	}
 
 	/**
-	 *
+	 * @override
 	 * @param value
 	 * @returns
 	 */
 	getFillColor(value: number) {
-		if (!this._colorScale) {
-			this.getColorScale();
-		}
-
 		return this._colorScale(value);
-	}
-
-	/**
-	 * Returns linear color scale
-	 * @returns Scale
-	 */
-	getColorScale() {
-		if (!this._colorScale) {
-			this._colorScale = scaleQuantize()
-				.domain(this.getValueDomain() as [number, number])
-				// scaleLinear()
-				// 	.domain(this.getTicks())
-				.range(this.getPalettes());
-		}
-
-		return this._colorScale;
 	}
 
 	/**
@@ -266,7 +232,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns String[]
 	 */
 	getUniqueRanges(): string[] {
-		if (Tools.isEmpty(this._range)) {
+		if (Tools.isEmpty(this._ranges)) {
 			const displayData = this.getDisplayData();
 			const { cartesianScales } = this.services;
 
@@ -282,7 +248,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			}
 
 			// Get unique axis values & create a matrix
-			this._range = Array.from(
+			this._ranges = Array.from(
 				new Set(
 					displayData.map((d) => {
 						return d[rangeIdentifier];
@@ -291,7 +257,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			);
 		}
 
-		return this._range;
+		return this._ranges;
 	}
 
 	/**
@@ -342,11 +308,6 @@ export class HeatmapModel extends ChartModelCartesian {
 
 		const uniqueDomain = this.getUniqueDomain();
 		const uniqueRange = this.getUniqueRanges();
-		/**
-		 * @todo
-		 * - Multiply uniqueDomain.length by uniqueRange.length to get total possible values
-		 * - If displayData().length matches array multiple, return displayData to improve performance
-		 */
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
@@ -368,26 +329,12 @@ export class HeatmapModel extends ChartModelCartesian {
 	}
 
 	/**
-	 * Generate ticks to display based on available colors in list
-	 * @returns Array<number>
-	 */
-	getTicks() {
-		const extent = this.getValueDomain();
-		const colors = this.getPalettes().length;
-		return scaleLinear()
-			.domain([extent[0], extent[1]])
-			.nice()
-			.ticks(colors);
-	}
-
-	/**
 	 * Generate tabular data from display data
 	 * @returns Array<Object>
 	 */
 	getTabularDataArray() {
 		const displayData = this.getDisplayData();
 
-		const { cartesianScales } = this.services;
 		const {
 			primaryDomain,
 			primaryRange,
@@ -395,11 +342,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			secondaryRange,
 		} = this.assignRangeAndDomains();
 
-		const domainScaleType = cartesianScales.getDomainAxisScaleType();
 		let domainValueFormatter;
-		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
-		}
 
 		const result = [
 			[
@@ -441,44 +384,119 @@ export class HeatmapModel extends ChartModelCartesian {
 		return result;
 	}
 
-	/**
-	 * Returns colors
-	 * @returns Array<string>
-	 */
-	getPalettes() {
-		const type = Tools.getProperty(
-			this.getOptions(),
-			'heatmap',
-			'colorPalette',
+	// Uses quantize scale to return class names
+	getColorClassName(configs: { value?: number; originalClassName?: string }) {
+		if (
+			typeof configs.value === 'number' &&
+			this.colorScaleType !== ColorLegendType.QUANTIZE
+		) {
+			return configs.originalClassName;
+		}
+
+		return `${configs.originalClassName} ${this._colorScale(
+			configs.value as number
+		)}`;
+	}
+
+	protected setColorClassNames() {
+		const options = this.getOptions();
+
+		const customColors = Tools.getProperty(
+			options,
+			'color',
+			'gradient',
+			'colors'
+		);
+		const customColorsEnabled = !Tools.isEmpty(customColors);
+
+		let colorPairingOption = Tools.getProperty(
+			options,
+			'color',
+			'pairing',
+			'option'
+		);
+
+		const colorScaleType = Tools.getProperty(
+			options,
+			'legend',
+			'colorLegend',
 			'type'
 		);
 
-		const customColorPalette = Tools.getProperty(
-			this.getOptions(),
-			'heatmap',
-			'colorPalette',
-			'colorCodes'
-		);
-
-		// If user pass in custom colors, use custom colors
-		if (customColorPalette?.length) {
-			return customColorPalette;
-		}
-
 		// If domain consists of negative and positive values, use diverging palettes
 		const domain = this.getValueDomain();
-		if (domain[0] < 0 && domain[1] > 0) {
-			// If type is not set to available options, use default
-			if (type !== 'red-cyan' && type !== 'purple-teal') {
-				return this.palettes['red-cyan'];
+		const colorScheme = domain[0] < 0 && domain[1] > 0 ? 'diverge' : 'mono';
+
+		// Use default color pairing options if not in defined range
+		if (
+			colorPairingOption < 1 &&
+			colorPairingOption > 4 &&
+			colorScheme === 'mono'
+		) {
+			colorPairingOption = 1;
+		} else if (
+			colorPairingOption < 1 &&
+			colorPairingOption > 2 &&
+			colorScheme === 'diverge'
+		) {
+			colorPairingOption = 1;
+		}
+
+		// Define color scale based on legend
+		if (colorScaleType === ColorLegendType.LINEAR) {
+			// Uses hardcoded fill on element
+			this.colorScaleType = ColorLegendType.LINEAR;
+
+			const colorPairing = customColorsEnabled ? customColors : [];
+			let ticks = [];
+
+			// Use only the first, middle, and last color to determine the color gradient
+			// since they are the only displayed ticks
+			if (!customColorsEnabled) {
+				const palette = this.palettes[
+					`${colorScheme}-${colorPairingOption}`
+				];
+				colorPairing.push(palette[0]);
+				colorPairing.push(palette[Math.floor(palette.length / 2)]);
+				colorPairing.push(palette[palette.length - 1]);
+				ticks =
+					colorScheme === 'diverge'
+						? [domain[0], 0, domain[1]]
+						: [domain[0], domain[1] / 2, domain[1]];
+			} else {
+				ticks = scaleLinear()
+					.domain([domain[0], domain[1]])
+					.nice()
+					.ticks(colorPairing.length);
 			}
-		}
 
-		// Check if value exists, if it doesn't use default
-		if (!type || !this.palettes[type]) {
-			return this.palettes['purple'];
-		}
+			// Save scale type
+			this.selectedPalette = colorPairing;
+			this._colorScale = scaleLinear().domain(ticks).range(colorPairing);
+		} else if (colorScaleType === ColorLegendType.QUANTIZE) {
+			// Uses css classes for fill
+			this.colorScaleType = ColorLegendType.QUANTIZE;
 
-		return this.palettes[type];
+			const colorPairing = customColorsEnabled ? customColors : [];
+
+			if (!customColorsEnabled) {
+				// Add class names to list and the amount based on the color scheme
+				// Carbon charts has 11 colors for a single monochromatic palette & 17 for a divergent palette
+				const colorGroupingLength = colorScheme === 'diverge' ? 17 : 11;
+				for (let i = 1; i < colorGroupingLength + 1; i++) {
+					colorPairing.push(
+						`fill-${colorScheme}-${colorPairingOption}-${i}`
+					);
+				}
+			}
+
+			// Save scale type
+			this.selectedPalette = colorPairing;
+			this._colorScale = scaleQuantize()
+				.domain(this.getValueDomain() as [number, number])
+				.range(colorPairing);
+		} else {
+			throw Error(`Color legend ${colorScaleType} is not supported`);
+		}
 	}
 }
