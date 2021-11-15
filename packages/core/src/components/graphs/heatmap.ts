@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from '../component';
-import { DOMUtils } from '../../services';
 import * as Configuration from '../../configuration';
 import { Events, RenderTypes, DividerStatus } from '../../interfaces';
 import { Tools } from '../../tools';
@@ -75,6 +74,12 @@ export class Heatmap extends Component {
 			.enter()
 			.append('rect')
 			.attr('class', (d) => `heat-${d.index}`)
+			.attr('class', (d) => {
+				return this.model.getColorClassName({
+					value: d.value,
+					originalClassName: `heat-${d.index}`,
+				});
+			})
 			.classed('heat', true)
 			.classed('null-state', (d) =>
 				d.index === -1 || d.value === null ? true : false
