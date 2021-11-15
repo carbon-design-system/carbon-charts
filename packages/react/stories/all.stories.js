@@ -148,6 +148,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 						<img
 							src="https://codesandbox.io/static/img/play-codesandbox.svg"
 							className="marginTop"
+							alt="Edit on Codesandbox"
 						/>
 					</a>
 

@@ -305,7 +305,7 @@ export class Pie extends Component {
 			.append('g')
 			.classed('callout', true)
 			// a11y
-			.attr('role', `${Roles.GRAPHICS_SYMBOL} ${Roles.GROUP}`)
+			.attr('role', Roles.GROUP)
 			.attr('aria-roledescription', 'label callout');
 
 		// Update data values for each callout

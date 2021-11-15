@@ -100,6 +100,7 @@ export class StackedArea extends Component {
 			)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
+			.attr('aria-label', (d) => Tools.getProperty(d, 0, groupMapsTo))
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({

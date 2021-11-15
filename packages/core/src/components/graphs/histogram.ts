@@ -138,7 +138,9 @@ export class Histogram extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value);
+			.attr('aria-label', (d) =>
+				Tools.getProperty(d, 'data', d[groupMapsTo])
+			);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
