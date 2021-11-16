@@ -18,3 +18,4 @@ export { default as GaugeChart } from "./GaugeChart";
 export { default as MeterChart } from "./MeterChart";
 export { default as TreemapChart } from "./TreemapChart";
 export { default as WordCloudChart } from "./WordCloudChart";
+export { default as AlluvialChart } from "./AlluvialChart";
