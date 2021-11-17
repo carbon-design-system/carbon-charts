@@ -125,7 +125,15 @@ export class AxisChart extends Chart {
 		}
 
 		graphFrameComponents.push(new Threshold(this.model, this.services));
-		graphFrameComponents.push(new Highlight(this.model, this.services));
+		// Insert Highlight right after Axes is created so user's can still hover over datapoints
+		const insertIndex = graphFrameComponents.findIndex(
+			({ type }) => type === '2D-axes'
+		);
+		graphFrameComponents.splice(
+			insertIndex + 1,
+			0,
+			new Highlight(this.model, this.services)
+		);
 
 		const graphFrameComponent = {
 			id: 'graph-frame',
