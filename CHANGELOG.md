@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.52.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.4...v0.52.0) (2021-11-18)
+
+
+### Features
+
+* **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree charts ([#1219](https://github.com/carbon-design-system/carbon-charts/issues/1219)) ([3e7fcc2](https://github.com/carbon-design-system/carbon-charts/commit/3e7fcc2f16d16d67c4f39f4d4389878b5d829aba))
+
+
+
+
+
 ## [0.51.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.3...v0.51.4) (2021-11-16)
 
 
