@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.0...v0.52.1) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** set pointer events of highlight elements to none ([#1220](https://github.com/carbon-design-system/carbon-charts/issues/1220)) ([5594054](https://github.com/carbon-design-system/carbon-charts/commit/5594054f791e4bd48b121104a3280e9934d90d6f)), closes [#1212](https://github.com/carbon-design-system/carbon-charts/issues/1212)
+
+
+
+
+
 # [0.52.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.4...v0.52.0) (2021-11-18)
 
 **Note:** Version bump only for package @carbon/charts
