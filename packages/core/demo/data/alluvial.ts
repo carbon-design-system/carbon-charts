@@ -12,7 +12,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'About Modal',
 		target: 'Public Cloud',
-		value: 0,
+		value: 3,
 	},
 	{
 		source: 'About Modal',
@@ -72,7 +72,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Create Flow',
 		target: 'Automation',
-		value: 27,
+		value: 18,
 	},
 	{
 		source: 'Notifications',
@@ -87,7 +87,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Notifications',
 		target: 'Public Cloud',
-		value: 0,
+		value: 1,
 	},
 	{
 		source: 'Notifications',
@@ -107,7 +107,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Page Header',
 		target: 'Data and AI, Info Architecture',
-		value: 15,
+		value: 8,
 	},
 	{
 		source: 'Page Header',
@@ -116,163 +116,8 @@ export const alluvialSimpleData = [
 	},
 	{
 		source: 'Page Header',
-		target: 'Security',
-		value: 11,
-	},
-	{
-		source: 'Page Header',
 		target: 'Automation',
-		value: 25,
-	},
-	{
-		source: 'Side Panels',
-		target: 'Data and AI, AI Apps',
-		value: 3,
-	},
-	{
-		source: 'Side Panels',
-		target: 'Data and AI, Info Architecture',
-		value: 16,
-	},
-	{
-		source: 'Side Panels',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'Side Panels',
-		target: 'Security',
-		value: 10,
-	},
-	{
-		source: 'Side Panels',
-		target: 'Automation',
-		value: 22,
-	},
-	{
-		source: 'Status Icons',
-		target: 'Data and AI, AI Apps',
-		value: 5,
-	},
-	{
-		source: 'Status Icons',
-		target: 'Data and AI, Info Architecture',
-		value: 16,
-	},
-	{
-		source: 'Status Icons',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'Status Icons',
-		target: 'Security',
-		value: 11,
-	},
-	{
-		source: 'Status Icons',
-		target: 'Automation',
-		value: 25,
-	},
-	{
-		source: 'Remove',
-		target: 'Data and AI, AI Apps',
-		value: 7,
-	},
-	{
-		source: 'Remove',
-		target: 'Data and AI, Info Architecture',
-		value: 17,
-	},
-	{
-		source: 'Remove',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'Remove',
-		target: 'Security',
-		value: 10,
-	},
-	{
-		source: 'Remove',
-		target: 'Automation',
-		value: 28,
-	},
-	{
-		source: 'User Profile Images',
-		target: 'Data and AI, AI Apps',
-		value: 4,
-	},
-	{
-		source: 'User Profile Images',
-		target: 'Data and AI, Info Architecture',
-		value: 8,
-	},
-	{
-		source: 'User Profile Images',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'User Profile Images',
-		target: 'Security',
-		value: 4,
-	},
-	{
-		source: 'User Profile Images',
-		target: 'Automation',
-		value: 8,
-	},
-	{
-		source: 'HTTP Errors',
-		target: 'Data and AI, AI Apps',
-		value: 8,
-	},
-	{
-		source: 'HTTP Errors',
-		target: 'Data and AI, Info Architecture',
-		value: 12,
-	},
-	{
-		source: 'HTTP Errors',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'HTTP Errors',
-		target: 'Security',
-		value: 11,
-	},
-	{
-		source: 'HTTP Errors',
-		target: 'Automation',
-		value: 22,
-	},
-	{
-		source: 'Empty State',
-		target: 'Data and AI, AI Apps',
-		value: 11,
-	},
-	{
-		source: 'Empty State',
-		target: 'Data and AI, Info Architecture',
-		value: 18,
-	},
-	{
-		source: 'Empty State',
-		target: 'Public Cloud',
-		value: 1,
-	},
-	{
-		source: 'Empty State',
-		target: 'Security',
-		value: 11,
-	},
-	{
-		source: 'Empty State',
-		target: 'Automation',
-		value: 20,
+		value: 13,
 	},
 ];
 
@@ -293,31 +138,7 @@ export const alluvialSimpleOptions = {
 				category: 'Pattern',
 			},
 			{
-				name: 'Empty State',
-				category: 'Pattern',
-			},
-			{
 				name: 'Page Header',
-				category: 'Pattern',
-			},
-			{
-				name: 'HTTP Errors',
-				category: 'Pattern',
-			},
-			{
-				name: 'User Profile Images',
-				category: 'Pattern',
-			},
-			{
-				name: 'Remove',
-				category: 'Pattern',
-			},
-			{
-				name: 'Status Icons',
-				category: 'Pattern',
-			},
-			{
-				name: 'Side Panels',
 				category: 'Pattern',
 			},
 			{
@@ -368,17 +189,11 @@ export const alluvialSimpleGradientOptions = {
 	title: 'Alluvial (gradient)',
 	color: {
 		scale: {
-			'Empty State': '#001d6c',
 			Cards: '#da1e28',
 			'About Modal': '#b28600',
 			'Create Flow': '#198038',
-			'HTTP Errors': '#6929c4',
 			'Page Header': '#ee538b',
-			'User Profile Images': '#33b1ff',
-			Remove: '#f1f1f1',
-			'Status Icons': '#e0e0e0',
 			Notifications: '#08bdba',
-			'Side Panels': '#570408',
 			'Data and AI, AI Apps': '#1192e8',
 			'Data and AI, Info Architecture': '#a56eff',
 			Security: '#009d9a',

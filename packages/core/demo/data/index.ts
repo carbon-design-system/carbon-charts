@@ -1072,16 +1072,15 @@ const complexChartDemos = [
 		title: 'Alluvial',
 		demos: [
 			{
-				options: alluvialDemos.alluvialSimpleOptions,
-				data: alluvialDemos.alluvialSimpleData,
-				chartType: chartTypes.AlluvialChart,
-				mainDemo: true,
-			},
-			{
 				options: alluvialDemos.alluvialSimpleGradientOptions,
 				data: alluvialDemos.alluvialGradientData,
 				chartType: chartTypes.AlluvialChart,
 				mainDemo: true,
+			},
+			{
+				options: alluvialDemos.alluvialSimpleOptions,
+				data: alluvialDemos.alluvialSimpleData,
+				chartType: chartTypes.AlluvialChart,
 			},
 			{
 				options: alluvialDemos.alluvialMultipleCategoryOptions,
