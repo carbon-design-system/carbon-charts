@@ -37,7 +37,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Cards',
 		target: 'Public Cloud',
-		value: 1,
+		value: 2,
 	},
 	{
 		source: 'Cards',
@@ -47,7 +47,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Cards',
 		target: 'Automation',
-		value: 17,
+		value: 13,
 	},
 	{
 		source: 'Create Flow',
@@ -72,12 +72,7 @@ export const alluvialSimpleData = [
 	{
 		source: 'Create Flow',
 		target: 'Automation',
-		value: 18,
-	},
-	{
-		source: 'Notifications',
-		target: 'Data and AI, AI Apps',
-		value: 1,
+		value: 15,
 	},
 	{
 		source: 'Notifications',
@@ -87,17 +82,12 @@ export const alluvialSimpleData = [
 	{
 		source: 'Notifications',
 		target: 'Public Cloud',
-		value: 1,
+		value: 3,
 	},
 	{
 		source: 'Notifications',
 		target: 'Security',
 		value: 3,
-	},
-	{
-		source: 'Notifications',
-		target: 'Automation',
-		value: 6,
 	},
 	{
 		source: 'Page Header',
@@ -108,11 +98,6 @@ export const alluvialSimpleData = [
 		source: 'Page Header',
 		target: 'Data and AI, Info Architecture',
 		value: 8,
-	},
-	{
-		source: 'Page Header',
-		target: 'Public Cloud',
-		value: 1,
 	},
 	{
 		source: 'Page Header',
