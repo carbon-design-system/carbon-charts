@@ -23,7 +23,7 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 				labelMapsTo: 'label',
 				data: [
 					{
-						startHighlight: new Date(2019, 0, 7),
+						startHighlight: new Date(2019, 0, 3),
 						label: 'Custom formatter',
 						endHighlight: new Date(2019, 0, 8),
 					},
