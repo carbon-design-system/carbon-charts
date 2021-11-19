@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.1...v0.52.2) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** add linear gradient support to alluvial links ([#1192](https://github.com/carbon-design-system/carbon-charts/issues/1192)) ([f2170b1](https://github.com/carbon-design-system/carbon-charts/commit/f2170b15b78797e0fcced2367b5b60c2b4e3a332)), closes [#1189](https://github.com/carbon-design-system/carbon-charts/issues/1189)
+
+
+
+
+
 ## [0.52.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.0...v0.52.1) (2021-11-19)
 
 
