@@ -6,13 +6,13 @@ export class Files extends Service {
 		super(model, services);
 	}
 
-	downloadCSV(content, filename, mimeType) {
-		var anchor = document.createElement('a');
-		mimeType = 'text/csv;encoding:utf-8';
+	downloadCSV(content, filename) {
+		const anchor = document.createElement('a');
+		const mimeType = 'text/csv;encoding:utf-8';
 
-		if (navigator.msSaveBlob) {
+		if (navigator['msSaveBlob']) {
 			// Internet Explorer 10
-			navigator.msSaveBlob(
+			navigator['msSaveBlob'](
 				new Blob([content], {
 					type: mimeType,
 				}),

@@ -45,13 +45,17 @@ export class Component {
 		}
 	}
 
-	init() {}
+	init() {
+		// do nothing.
+	}
 
 	render(animate = true) {
 		console.error('render() method is not implemented');
 	}
 
-	destroy() {}
+	destroy() {
+		// do nothing.
+	}
 
 	// Used to pass down information to the components
 	setModel(newObj) {
