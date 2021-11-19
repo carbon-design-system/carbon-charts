@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.52.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.4...v0.52.0) (2021-11-18)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.51.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.3...v0.51.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* **svelte:** remove default export in `index.html` ([#1218](https://github.com/carbon-design-system/carbon-charts/issues/1218)) ([63f99d1](https://github.com/carbon-design-system/carbon-charts/commit/63f99d1b57d1b034292cc44aad93ca2de69beaed))
+
+
+
+
+
 ## [0.51.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.2...v0.51.3) (2021-11-03)
 
 
