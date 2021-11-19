@@ -1,51 +1,12 @@
 export const alluvialSimpleData = [
-	{ source: 'A', target: 'X', value: 3 },
-	{ source: 'A', target: 'Y', value: 5 },
-	{ source: 'A', target: 'Z', value: 8 },
-	{ source: 'B', target: 'X', value: 6 },
-	{ source: 'B', target: 'Y', value: 1 },
-	{ source: 'B', target: 'Z', value: 7 },
-	{ source: 'C', target: 'X', value: 5 },
-	{ source: 'C', target: 'Y', value: 5 },
-	{ source: 'C', target: 'Z', value: 1 },
-];
-
-export const alluvialSimpleOptions = {
-	title: 'Alluvial',
-	alluvial: {
-		units: 'GB',
-		nodes: [
-			{ name: 'A', category: 'Start' },
-			{ name: 'B', category: 'Start' },
-			{ name: 'C', category: 'Start' },
-			{ name: 'X', category: 'Finish' },
-			{ name: 'Y', category: 'Finish' },
-			{ name: 'Z', category: 'Finish' },
-		],
-	},
-};
-
-export const alluvialSimpleCustomColorOptions = {
-	...alluvialSimpleOptions,
-	title: 'Custom colors (alluvial)',
-	color: {
-		scale: {
-			A: '#d12771',
-			B: '#08bdba',
-			C: '#6fdc8c',
-		},
-	},
-};
-
-export const alluvialGradientData = [
 	{
 		source: 'About Modal',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 5,
 	},
 	{
 		source: 'About Modal',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 4,
 	},
 	{
@@ -65,12 +26,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Cards',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 6,
 	},
 	{
 		source: 'Cards',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 15,
 	},
 	{
@@ -90,12 +51,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Create Flow',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 2,
 	},
 	{
 		source: 'Create Flow',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 15,
 	},
 	{
@@ -115,12 +76,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Notifications',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 1,
 	},
 	{
 		source: 'Notifications',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 14,
 	},
 	{
@@ -140,12 +101,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Page Header',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 4,
 	},
 	{
 		source: 'Page Header',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 15,
 	},
 	{
@@ -165,12 +126,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Side Panels',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 3,
 	},
 	{
 		source: 'Side Panels',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 16,
 	},
 	{
@@ -190,12 +151,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Status Icons',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 5,
 	},
 	{
 		source: 'Status Icons',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 16,
 	},
 	{
@@ -215,12 +176,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Remove',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 7,
 	},
 	{
 		source: 'Remove',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 17,
 	},
 	{
@@ -240,12 +201,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'User Profile Images',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 4,
 	},
 	{
 		source: 'User Profile Images',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 8,
 	},
 	{
@@ -265,12 +226,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'HTTP Errors',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 8,
 	},
 	{
 		source: 'HTTP Errors',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 12,
 	},
 	{
@@ -290,12 +251,12 @@ export const alluvialGradientData = [
 	},
 	{
 		source: 'Empty State',
-		target: 'Data & AI, AI Apps',
+		target: 'Data and AI, AI Apps',
 		value: 11,
 	},
 	{
 		source: 'Empty State',
-		target: 'Data & AI, Info Architecture',
+		target: 'Data and AI, Info Architecture',
 		value: 18,
 	},
 	{
@@ -315,8 +276,8 @@ export const alluvialGradientData = [
 	},
 ];
 
-export const alluvialSimpleGradientOptions = {
-	title: 'Alluvial (gradient)',
+export const alluvialSimpleOptions = {
+	title: 'Alluvial',
 	alluvial: {
 		nodes: [
 			{
@@ -364,11 +325,11 @@ export const alluvialSimpleGradientOptions = {
 				category: 'Pattern',
 			},
 			{
-				name: 'Data & AI, AI Apps',
+				name: 'Data and AI, AI Apps',
 				category: 'Group',
 			},
 			{
-				name: 'Data & AI, Info Architecture',
+				name: 'Data and AI, Info Architecture',
 				category: 'Group',
 			},
 			{
@@ -385,6 +346,26 @@ export const alluvialSimpleGradientOptions = {
 			},
 		],
 	},
+	height: '600px',
+};
+
+export const alluvialSimpleCustomColorOptions = {
+	...alluvialSimpleOptions,
+	title: 'Custom colors (alluvial)',
+	color: {
+		scale: {
+			A: '#d12771',
+			B: '#08bdba',
+			C: '#6fdc8c',
+		},
+	},
+};
+
+export const alluvialGradientData = alluvialSimpleData;
+
+export const alluvialSimpleGradientOptions = {
+	...alluvialSimpleOptions,
+	title: 'Alluvial (gradient)',
 	color: {
 		scale: {
 			'Empty State': '#001d6c',
@@ -398,8 +379,8 @@ export const alluvialSimpleGradientOptions = {
 			'Status Icons': '#e0e0e0',
 			Notifications: '#08bdba',
 			'Side Panels': '#570408',
-			'Data &amp; AI, AI Apps': '#1192e8',
-			'Data &amp; AI, Info Architecture': '#a56eff',
+			'Data and AI, AI Apps': '#1192e8',
+			'Data and AI, Info Architecture': '#a56eff',
 			Security: '#009d9a',
 			Automation: '#fa4d56',
 			'Public Cloud': '#198038',
@@ -408,7 +389,6 @@ export const alluvialSimpleGradientOptions = {
 			enabled: true,
 		},
 	},
-	height: '600px',
 };
 
 export const alluvialMultipleCategoryOptions = {
@@ -501,7 +481,17 @@ export const alluvialMultipleCategoryData = [
 	},
 ];
 
-export const alluvialMonochromeData = alluvialSimpleData;
+export const alluvialMonochromeData = [
+	{ source: 'A', target: 'X', value: 3 },
+	{ source: 'A', target: 'Y', value: 5 },
+	{ source: 'A', target: 'Z', value: 8 },
+	{ source: 'B', target: 'X', value: 6 },
+	{ source: 'B', target: 'Y', value: 1 },
+	{ source: 'B', target: 'Z', value: 7 },
+	{ source: 'C', target: 'X', value: 5 },
+	{ source: 'C', target: 'Y', value: 5 },
+	{ source: 'C', target: 'Z', value: 1 },
+];
 
 export const alluvialMonochromeOptions = {
 	title: 'Alluvial (monochrome with custom node padding)',

@@ -1078,6 +1078,12 @@ const complexChartDemos = [
 				mainDemo: true,
 			},
 			{
+				options: alluvialDemos.alluvialSimpleGradientOptions,
+				data: alluvialDemos.alluvialGradientData,
+				chartType: chartTypes.AlluvialChart,
+				mainDemo: true,
+			},
+			{
 				options: alluvialDemos.alluvialMultipleCategoryOptions,
 				data: alluvialDemos.alluvialMultipleCategoryData,
 				chartType: chartTypes.AlluvialChart,
@@ -1085,11 +1091,6 @@ const complexChartDemos = [
 			{
 				options: alluvialDemos.alluvialMonochromeOptions,
 				data: alluvialDemos.alluvialMonochromeData,
-				chartType: chartTypes.AlluvialChart,
-			},
-			{
-				options: alluvialDemos.alluvialSimpleGradientOptions,
-				data: alluvialDemos.alluvialGradientData,
 				chartType: chartTypes.AlluvialChart,
 			},
 		],
