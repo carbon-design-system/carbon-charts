@@ -13,6 +13,7 @@ const namespace = `${prefix}--cc--card-node`;
 const CardNode = ({
 	as = 'div',
 	children,
+	className,
 	color,
 	href = null,
 	onMouseEnter = null,
@@ -37,6 +38,7 @@ const CardNode = ({
 	const cardClasses = classnames(namespace, {
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${Component}`]: Component,
+		[className]: className,
 	});
 
 	return (
@@ -66,6 +68,11 @@ CardNode.propTypes = {
 	 * Pass in the children that will be rendered within the CardNode
 	 */
 	children: PropTypes.node,
+
+	/**
+	 * Provide an optional class to be applied on the outer element
+	 */
+	className: PropTypes.string,
 
 	/**
 	 * Specify the node's border color
