@@ -182,9 +182,12 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('proportional-meter-total', true)
 			.merge(title)
+			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
-				this.model.getStatus() ? containerWidth - 24 : containerWidth
+				this.model.getStatus()
+					? containerWidth - Configuration.meter.total.paddingRight
+					: containerWidth
 			)
 			.attr('y', '1em')
 			.attr('text-anchor', 'end')
