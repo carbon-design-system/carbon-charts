@@ -71,6 +71,39 @@ export const propMeterOptions = {
 	},
 };
 
+export const propMeterStatusOptions = {
+	title: 'Proportional Meter Chart - peak and statuses',
+	height: '130px',
+	meter: {
+		peak: 1800,
+		proportional: {
+			total: 2000,
+			unit: 'GB',
+		},
+		status: {
+			ranges: [
+				{
+					range: [0, 800],
+					status: 'success',
+				},
+				{
+					range: [800, 1800],
+					status: 'warning',
+				},
+				{
+					range: [1800, 2000],
+					status: 'danger',
+				},
+			],
+		},
+	},
+	color: {
+		pairing: {
+			option: 2,
+		},
+	},
+};
+
 export const propMeterTruncationOptions = {
 	title: 'Proportional Meter Chart (truncated)',
 	height: '130px',

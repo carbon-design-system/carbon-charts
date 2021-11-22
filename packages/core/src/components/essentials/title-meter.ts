@@ -43,10 +43,11 @@ export class MeterTitle extends Title {
 
 			// appends the associated percentage after title
 			this.appendPercentage();
-
-			// if status ranges are provided (custom or default), display indicator
-			this.displayStatus();
 		}
+
+		// if status ranges are provided (custom or default), display indicator
+		this.displayStatus();
+
 		// get the max width of a title (with consideration for the status/percentage)
 		const maxWidth = this.getMaxTitleWidth();
 		const titleElement = DOMUtils.appendOrSelect(svg, 'text.meter-title');
@@ -162,9 +163,8 @@ export class MeterTitle extends Title {
 				? totalFormatter(totalValue)
 				: `${total} ${unit} total`;
 
-		const containerBounds = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainContainer(),
-			{ useAttrs: true }
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
 		);
 
 		// need to check if the width is 0, and try to use the parent attribute
@@ -182,7 +182,13 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('proportional-meter-total', true)
 			.merge(title)
-			.attr('x', containerWidth)
+			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
+			.attr(
+				'x',
+				this.model.getStatus()
+					? containerWidth - Configuration.meter.total.paddingRight
+					: containerWidth
+			)
 			.attr('y', '1em')
 			.attr('text-anchor', 'end')
 			.text((d) => d);
