@@ -15,7 +15,7 @@ import {
 
 import {
 	Heatmap,
-	TwoDimensionalAxes,
+	TwoDimensionalHoverAxes,
 	Modal,
 	LayoutComponent,
 	ColorScaleLegend,
@@ -175,7 +175,7 @@ export class HeatmapChart extends AxisChart {
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
-			new TwoDimensionalAxes(this.model, this.services),
+			new TwoDimensionalHoverAxes(this.model, this.services),
 			new Heatmap(this.model, this.services),
 		];
 
