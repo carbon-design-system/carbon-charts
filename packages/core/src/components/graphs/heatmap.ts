@@ -35,10 +35,9 @@ export class Heatmap extends Component {
 
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		const svg = this.getComponentContainer();
 
 		const { cartesianScales } = this.services;
-		const options = this.model.getOptions();
 		this.matrix = this.model.getMatrix();
 
 		svg.html('');
@@ -68,12 +67,29 @@ export class Heatmap extends Component {
 			(yRange[1] - yRange[0]) / uniqueRange.length
 		);
 
-		const rectangles = svg
+		const dividerStatus = this.determineDividerStatus();
+		const container = svg
+			.append('g')
+			.attr(
+				'transform',
+				dividerStatus ? `translate(1, -1)` : `translate(0, 0)`
+			);
+
+		const rectangles = container
 			.selectAll()
 			.data(matrixArray)
 			.enter()
-			.append('rect')
+			.append('g')
 			.attr('class', (d) => `heat-${d.index}`)
+			.classed('cell', true)
+			.attr(
+				'transform',
+				(d) =>
+					`translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(
+						d[rangeIdentifier]
+					)})`
+			)
+			.append('rect')
 			.attr('class', (d) => {
 				return this.model.getColorClassName({
 					value: d.value,
@@ -84,8 +100,6 @@ export class Heatmap extends Component {
 			.classed('null-state', (d) =>
 				d.index === -1 || d.value === null ? true : false
 			)
-			.attr('x', (d) => mainXScale(d[domainIdentifier]))
-			.attr('y', (d) => mainYScale(d[rangeIdentifier]))
 			.attr('width', this.xBandwidth)
 			.attr('height', this.yBandwidth)
 			.style('fill', (d) => {
@@ -99,23 +113,46 @@ export class Heatmap extends Component {
 
 		rectangles.exit().remove();
 
-		const rowAndColumnHighligher = svg.append('g');
+		const rowAndColumnShadow = container
+			.append('g')
+			.classed('shadow-holder', true);
 
 		// Row
-		rowAndColumnHighligher
+		rowAndColumnShadow
 			.append('rect')
 			.classed('highlighter-hidden', true)
-			.classed('highlighter-row', true)
+			.classed('shadow-row', true)
 			.attr('x', xRange[0])
 			.attr('y', 0)
 			.attr('width', Math.abs(xRange[1] - xRange[0]))
 			.attr('height', this.yBandwidth);
 
-		// Column
-		rowAndColumnHighligher
+		rowAndColumnShadow
 			.append('rect')
 			.classed('highlighter-hidden', true)
-			.classed('highlighter-column', true)
+			.classed('shadow-column', true)
+			.attr('x', xRange[0])
+			.attr('y', 0)
+			.attr('width', this.xBandwidth)
+			.attr('height', Math.abs(yRange[1] - yRange[0]));
+
+		const rowAndColumnHighlighter = container
+			.append('g')
+			.classed('row-column-highlighter', true);
+
+		rowAndColumnHighlighter
+			.append('rect')
+			.classed('highlighter-hidden', true)
+			.classed('highlight-row', true)
+			.attr('x', xRange[0])
+			.attr('y', 0)
+			.attr('width', Math.abs(xRange[1] - xRange[0]))
+			.attr('height', this.yBandwidth);
+
+		rowAndColumnHighlighter
+			.append('rect')
+			.classed('highlighter-hidden', true)
+			.classed('highlight-column', true)
 			.attr('x', xRange[0])
 			.attr('y', 0)
 			.attr('width', this.xBandwidth)
@@ -174,9 +211,10 @@ export class Heatmap extends Component {
 		const rangeLabel = cartesianScales.getRangeLabel();
 
 		this.parent
-			.selectAll('rect.heat')
+			.selectAll('g.cell')
 			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
+				const cell = select(this);
+				const hoveredElement = cell.select('rect.heat');
 				const nullState = hoveredElement.classed('null-state');
 
 				// Dispatch event and tooltip only if value exists
@@ -193,6 +231,8 @@ export class Heatmap extends Component {
 						}
 					);
 
+					cell.raise();
+
 					// Highlight element
 					hoveredElement
 						.style(
@@ -201,7 +241,6 @@ export class Heatmap extends Component {
 								? '2px'
 								: '1px'
 						)
-						.raise()
 						.classed('raised', true);
 
 					// Dispatch tooltip show event
@@ -252,9 +291,11 @@ export class Heatmap extends Component {
 				);
 			})
 			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
+				const cell = select(this);
+				const hoveredElement = cell.select('rect.heat');
 				const nullState = hoveredElement.classed('null-state');
-				hoveredElement.lower().classed('raised', false);
+				hoveredElement.classed('raised', false);
+				cell.lower();
 
 				if (self.determineDividerStatus() && !nullState) {
 					hoveredElement.style('stroke-width', '1px');
@@ -300,6 +341,7 @@ export class Heatmap extends Component {
 			sum = 0,
 			min = 0,
 			max = 0;
+		const ids = [];
 
 		// Check to see where datum belongs
 		if (this.matrix[datum] != undefined) {
@@ -310,6 +352,10 @@ export class Heatmap extends Component {
 				sum += value;
 				min = value < min ? value : min;
 				max = value > max ? value : max;
+				const id = this.matrix[datum][element].index;
+				if (id >= 0) {
+					ids.push(`g.heat-${id}`);
+				}
 			});
 		} else {
 			label = rangeLabel;
@@ -318,20 +364,47 @@ export class Heatmap extends Component {
 				sum += value;
 				min = value < min ? value : min;
 				max = value > max ? value : max;
+				const id = this.matrix[datum][element].index;
+				if (id >= 0) {
+					ids.push(`g.heat-${id}`);
+				}
 			});
 		}
 
+		// Pop out cells
+		this.parent
+			.selectAll(ids.join(','))
+			.classed('axis-hovered', true)
+			.raise();
+
+		// Show the outlines to make the cells appear grouped
+		const strokeHighlighter = this.parent
+			.selectAll('g.row-column-highlighter')
+			.raise();
+
 		if (mainXScale(datum)) {
 			this.parent
-				.selectAll('rect.highlighter-column')
+				.select('rect.shadow-column')
+				.classed('highlighter-hidden', false)
+				.attr('x', mainXScale(datum))
+				.raise();
+
+			strokeHighlighter
+				.select('rect.highlight-column')
 				.classed('highlighter-hidden', false)
 				.attr('x', mainXScale(datum))
 				.raise();
 		} else if (mainYScale(datum)) {
 			this.parent
-				.selectAll('rect.highlighter-row')
+				.select('rect.shadow-row')
 				.classed('highlighter-hidden', false)
 				.attr('y', mainYScale(datum))
+				.raise();
+
+			strokeHighlighter
+				.select('rect.highlight-row')
+				.classed('highlighter-hidden', false)
+				.attr('x', mainXScale(datum))
 				.raise();
 		}
 
@@ -363,11 +436,25 @@ export class Heatmap extends Component {
 
 	// Un-highlight all elements
 	handleAxisMouseOut = (event: CustomEvent) => {
-		// Hide row/column highlighting
+		// Hide shadow
 		this.parent
-			.selectAll('rect.highlighter-column,rect.highlighter-row')
-			.classed('highlighter-hidden', true)
+			.selectAll('rect.shadow-column,rect.shadow-row')
+			.classed('highlighter-hidden', true);
+
+		// Lower cells
+		this.parent
+			.selectAll('axis-hovered')
+			.classed('axis-hovered', false)
 			.lower();
+
+		// Hide row/column highlighting
+		const strokeHighlighter = this.parent
+			.selectAll('g.row-column-highlighter')
+			.lower();
+
+		strokeHighlighter
+			.selectAll('rect.highlight-column, rect.highlight-row')
+			.classed('highlighter-hidden', true);
 
 		// Dispatch hide tooltip event
 		this.services.events.dispatchEvent(Events.Tooltip.HIDE, {

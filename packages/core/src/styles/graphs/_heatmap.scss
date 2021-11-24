@@ -8,12 +8,19 @@
 		visibility: hidden;
 	}
 
-	rect.highlighter-column,
-	rect.highlighter-row {
+	rect.shadow-column,
+	rect.shadow-row {
 		stroke: #ffffff;
-		fill: transparent;
+		fill: white;
 		stroke-width: 2px;
 		filter: drop-shadow(0px 0px 5px black);
+	}
+
+	rect.highlight-column,
+	rect.highlight-row {
+		stroke: #ffffff;
+		fill: none;
+		stroke-width: 2px;
 	}
 
 	rect.null-state {
