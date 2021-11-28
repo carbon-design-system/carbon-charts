@@ -220,7 +220,7 @@ export class HoverAxis extends Axis {
 				event.target.focus();
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
-					Events.Axis.LABEL_MOUSEOVER,
+					Events.Axis.LABEL_FOCUS,
 					{
 						event,
 						element: select(this),
@@ -230,7 +230,7 @@ export class HoverAxis extends Axis {
 			})
 			.on('blur', function (event) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
+				self.services.events.dispatchEvent(Events.Axis.LABEL_BLUR, {
 					event,
 					element: select(this),
 					datum: select(this).select('text').datum(),
