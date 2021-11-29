@@ -158,6 +158,7 @@ export const meter = {
 	},
 	total: {
 		paddingLeft: 36,
+		paddingRight: 24,
 	},
 	height: {
 		default: 8,

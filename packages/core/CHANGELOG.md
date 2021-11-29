@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.2...v0.52.3) (2021-11-22)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.52.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.1...v0.52.2) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** add linear gradient support to alluvial links ([#1192](https://github.com/carbon-design-system/carbon-charts/issues/1192)) ([f2170b1](https://github.com/carbon-design-system/carbon-charts/commit/f2170b15b78797e0fcced2367b5b60c2b4e3a332)), closes [#1189](https://github.com/carbon-design-system/carbon-charts/issues/1189)
+
+
+
+
+
+## [0.52.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.0...v0.52.1) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** set pointer events of highlight elements to none ([#1220](https://github.com/carbon-design-system/carbon-charts/issues/1220)) ([5594054](https://github.com/carbon-design-system/carbon-charts/commit/5594054f791e4bd48b121104a3280e9934d90d6f)), closes [#1212](https://github.com/carbon-design-system/carbon-charts/issues/1212)
+
+
+
+
+
+# [0.52.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.4...v0.52.0) (2021-11-18)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 ## [0.51.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.3...v0.51.4) (2021-11-16)
 
 

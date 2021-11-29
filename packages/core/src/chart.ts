@@ -47,7 +47,9 @@ export class Chart {
 	};
 	model: ChartModel = new ChartModel(this.services);
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
+	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
+		// do nothing.
+	}
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
