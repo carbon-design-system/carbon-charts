@@ -407,7 +407,6 @@ export class Heatmap extends Component {
 				.attr('x', mainXScale(datum))
 				.raise();
 		} else if (mainYScale(datum) !== undefined) {
-
 			this.parent
 				.select('rect.shadow-row')
 				.classed('highlighter-hidden', false)

@@ -38,7 +38,10 @@ export class ColorScaleLegend extends Legend {
 		// Align legend with the axis
 		if (xDimensions[0] > 1) {
 			const svg = this.getComponentContainer();
-			svg.select('g.legend-rectangle').attr('transform', `translate(${xDimensions[0]}, 0)`)
+			svg.select('g.legend-rectangle').attr(
+				'transform',
+				`translate(${xDimensions[0]}, 0)`
+			);
 		}
 
 		// @todo - Add the text
@@ -209,10 +212,12 @@ export class ColorScaleLegend extends Legend {
 				.classed('legend-axis', true)
 				.attr(
 					'transform',
-					`translate(${!customColorsEnabled && colorScheme === 'diverge'
-						? '-'
-						: ''
-					}${colorScaleBand.bandwidth() / 2}, ${Configuration.legend.color.axisYTranslation
+					`translate(${
+						!customColorsEnabled && colorScheme === 'diverge'
+							? '-'
+							: ''
+					}${colorScaleBand.bandwidth() / 2}, ${
+						Configuration.legend.color.axisYTranslation
 					})`
 				)
 				.call(xAxis);
