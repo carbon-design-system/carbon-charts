@@ -5,113 +5,10 @@ import { Tools } from '../tools';
 
 // d3 imports
 import { extent } from 'd3-array';
-import { scaleLinear, scaleQuantize } from 'd3-scale';
+import { scaleQuantize } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
-	private palettes = {
-		// Monochromatic palettes
-		// White, Purple 10 - 100
-		'mono-1': [
-			'#ffffff',
-			'#f6f2ff',
-			'#e8daff',
-			'#d4bbff',
-			'#be95ff',
-			'#a56eff',
-			'#8a3ffc',
-			'#6929c4',
-			'#491d8b',
-			'#31135e',
-			'#1c0f30',
-		],
-		// White, Blue 10 - 100
-		'mono-2': [
-			'#ffffff',
-			'#edf5ff',
-			'#d0e2ff',
-			'#a6c8ff',
-			'#78a9ff',
-			'#4589ff',
-			'#0f62fe',
-			'#0043ce',
-			'#002d9c',
-			'#001d6c',
-			'#001141',
-		],
-		// White, Cyan 10 - 100
-		'mono-3': [
-			'#ffffff',
-			'#e5f6ff',
-			'#bae6ff',
-			'#82cfff',
-			'#33b1ff',
-			'#1192e8',
-			'#0072c3',
-			'#00539a',
-			'#003a6d',
-			'#012749',
-			'#1c0f30',
-		],
-		// White, Teal 10 - 100
-		'mono-4': [
-			'#ffffff',
-			'#d9fbfb',
-			'#9ef0f0',
-			'#3ddbd9',
-			'#08bdba',
-			'#009d9a',
-			'#007d79',
-			'#005d5d',
-			'#004144',
-			'#022b30',
-			'#081a1c',
-		],
-		// Diverging palettes
-		// Red 80 - 10, White, Cyan 10 - 80
-		'diverge-1': [
-			'#750e13',
-			'#a2191f',
-			'#da1e28',
-			'#fa4d56',
-			'#ff8389',
-			'#ffb3b8',
-			'#ffd7d9',
-			'#fff1f1',
-			'#ffffff',
-			'#e5f6ff',
-			'#bae6ff',
-			'#82cfff',
-			'#33b1ff',
-			'#1192e8',
-			'#0072c3',
-			'#00539a',
-			'#003a6d',
-		],
-		// Purple 80 - 10, Teal 10 - 80
-		'diverge-2': [
-			'#491d8b',
-			'#6929c4',
-			'#8a3ffc',
-			'#a56eff',
-			'#be95ff',
-			'#d4bbff',
-			'#e8daff',
-			'#f6f2ff',
-			'#fff1f1',
-			'#ffffff',
-			'#d9fbfb',
-			'#9ef0f0',
-			'#3ddbd9',
-			'#08bdba',
-			'#009d9a',
-			'#007d79',
-			'#005d5d',
-			'#004144',
-		],
-	};
-
-	private colorScaleType: ColorLegendType = ColorLegendType.LINEAR;
 	selectedPalette = [];
 	private _colorScale: any = undefined;
 
@@ -386,13 +283,6 @@ export class HeatmapModel extends ChartModelCartesian {
 
 	// Uses quantize scale to return class names
 	getColorClassName(configs: { value?: number; originalClassName?: string }) {
-		if (
-			typeof configs.value === 'number' &&
-			this.colorScaleType !== ColorLegendType.QUANTIZE
-		) {
-			return configs.originalClassName;
-		}
-
 		return `${configs.originalClassName} ${this._colorScale(
 			configs.value as number
 		)}`;
@@ -416,13 +306,6 @@ export class HeatmapModel extends ChartModelCartesian {
 			'option'
 		);
 
-		const colorScaleType = Tools.getProperty(
-			options,
-			'legend',
-			'colorLegend',
-			'type'
-		);
-
 		// If domain consists of negative and positive values, use diverging palettes
 		const domain = this.getValueDomain();
 		const colorScheme = domain[0] < 0 && domain[1] > 0 ? 'diverge' : 'mono';
@@ -442,61 +325,24 @@ export class HeatmapModel extends ChartModelCartesian {
 			colorPairingOption = 1;
 		}
 
-		// Define color scale based on legend
-		if (colorScaleType === ColorLegendType.LINEAR) {
-			// Uses hardcoded fill on element
-			this.colorScaleType = ColorLegendType.LINEAR;
+		// Uses css classes for fill
+		const colorPairing = customColorsEnabled ? customColors : [];
 
-			const colorPairing = customColorsEnabled ? customColors : [];
-			let ticks = [];
-
-			// Use only the first, middle, and last color to determine the color gradient
-			// since they are the only displayed ticks
-			if (!customColorsEnabled) {
-				const palette = this.palettes[
-					`${colorScheme}-${colorPairingOption}`
-				];
-				colorPairing.push(palette[0]);
-				colorPairing.push(palette[Math.floor(palette.length / 2)]);
-				colorPairing.push(palette[palette.length - 1]);
-				ticks =
-					colorScheme === 'diverge'
-						? [domain[0], 0, domain[1]]
-						: [domain[0], domain[1] / 2, domain[1]];
-			} else {
-				ticks = scaleLinear()
-					.domain([domain[0], domain[1]])
-					.nice()
-					.ticks(colorPairing.length);
+		if (!customColorsEnabled) {
+			// Add class names to list and the amount based on the color scheme
+			// Carbon charts has 11 colors for a single monochromatic palette & 17 for a divergent palette
+			const colorGroupingLength = colorScheme === 'diverge' ? 17 : 11;
+			for (let i = 1; i < colorGroupingLength + 1; i++) {
+				colorPairing.push(
+					`fill-${colorScheme}-${colorPairingOption}-${i}`
+				);
 			}
-
-			// Save scale type
-			this.selectedPalette = colorPairing;
-			this._colorScale = scaleLinear().domain(ticks).range(colorPairing);
-		} else if (colorScaleType === ColorLegendType.QUANTIZE) {
-			// Uses css classes for fill
-			this.colorScaleType = ColorLegendType.QUANTIZE;
-
-			const colorPairing = customColorsEnabled ? customColors : [];
-
-			if (!customColorsEnabled) {
-				// Add class names to list and the amount based on the color scheme
-				// Carbon charts has 11 colors for a single monochromatic palette & 17 for a divergent palette
-				const colorGroupingLength = colorScheme === 'diverge' ? 17 : 11;
-				for (let i = 1; i < colorGroupingLength + 1; i++) {
-					colorPairing.push(
-						`fill-${colorScheme}-${colorPairingOption}-${i}`
-					);
-				}
-			}
-
-			// Save scale type
-			this.selectedPalette = colorPairing;
-			this._colorScale = scaleQuantize()
-				.domain(this.getValueDomain() as [number, number])
-				.range(colorPairing);
-		} else {
-			throw Error(`Color legend ${colorScaleType} is not supported`);
 		}
+
+		// Save scale type
+		this.selectedPalette = colorPairing;
+		this._colorScale = scaleQuantize()
+			.domain(this.getValueDomain() as [number, number])
+			.range(colorPairing);
 	}
 }
