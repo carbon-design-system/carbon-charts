@@ -16,8 +16,6 @@ export class ColorScaleLegend extends Legend {
 	private gradient_id =
 		'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
-	private dimensions = [];
-
 	init() {
 		console.log('inside here 2 - init');
 		const eventsFragment = this.services.events;
@@ -35,10 +33,15 @@ export class ColorScaleLegend extends Legend {
 		const mainXScale = cartesianScales.getMainXScale();
 		const mainYScale = cartesianScales.getMainYScale();
 
-		this.dimensions = [mainXScale.range(), mainYScale.range()];
+		const xDimensions = mainXScale.range();
 
-		// Move the legend to the right
-		// Add the text
+		// Align legend with the axis
+		if (xDimensions[0] > 1) {
+			const svg = this.getComponentContainer();
+			svg.select('g.legend-rectangle').attr('transform', `translate(${xDimensions[0]}, 0)`)
+		}
+
+		// @todo - Add the text
 	};
 
 	render() {
@@ -72,7 +75,7 @@ export class ColorScaleLegend extends Legend {
 			'option'
 		);
 
-		const group = svg.append('g');
+		const group = svg.append('g').classed('legend-rectangle', true);
 
 		// If domain consists of negative and positive values, use diverging palettes
 		const colorScheme = domain[0] < 0 && domain[1] > 0 ? 'diverge' : 'mono';
@@ -206,12 +209,10 @@ export class ColorScaleLegend extends Legend {
 				.classed('legend-axis', true)
 				.attr(
 					'transform',
-					`translate(${
-						!customColorsEnabled && colorScheme === 'diverge'
-							? '-'
-							: ''
-					}${colorScaleBand.bandwidth() / 2}, ${
-						Configuration.legend.color.axisYTranslation
+					`translate(${!customColorsEnabled && colorScheme === 'diverge'
+						? '-'
+						: ''
+					}${colorScaleBand.bandwidth() / 2}, ${Configuration.legend.color.axisYTranslation
 					})`
 				)
 				.call(xAxis);
