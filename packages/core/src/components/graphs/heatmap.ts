@@ -20,15 +20,27 @@ export class Heatmap extends Component {
 	init() {
 		const eventsFragment = this.services.events;
 
-		// Highlight correct circle on legend item hovers
+		// Highlight correct cells on Axis item hovers
 		eventsFragment.addEventListener(
 			Events.Axis.LABEL_MOUSEOVER,
 			this.handleAxisOnHover
 		);
 
-		// Un-highlight circles on legend item mouseouts
+		// Highlight correct cells on Axis item mouseouts
 		eventsFragment.addEventListener(
 			Events.Axis.LABEL_MOUSEOUT,
+			this.handleAxisMouseOut
+		);
+
+		// Highlight correct cells on Axis item focus
+		eventsFragment.addEventListener(
+			Events.Axis.LABEL_FOCUS,
+			this.handleAxisOnHover
+		);
+
+		// Highlight correct cells on Axis item  blur
+		eventsFragment.addEventListener(
+			Events.Axis.LABEL_BLUR,
 			this.handleAxisMouseOut
 		);
 	}
@@ -344,7 +356,7 @@ export class Heatmap extends Component {
 		const ids = [];
 
 		// Check to see where datum belongs
-		if (this.matrix[datum] != undefined) {
+		if (this.matrix[datum] !== undefined) {
 			label = domainLabel;
 			// Iterate through Object and get sum, min, and max
 			ranges.forEach((element) => {
@@ -364,7 +376,7 @@ export class Heatmap extends Component {
 				sum += value;
 				min = value < min ? value : min;
 				max = value > max ? value : max;
-				const id = this.matrix[datum][element].index;
+				const id = this.matrix[element][datum].index;
 				if (id >= 0) {
 					ids.push(`g.heat-${id}`);
 				}
@@ -382,7 +394,7 @@ export class Heatmap extends Component {
 			.selectAll('g.row-column-highlighter')
 			.raise();
 
-		if (mainXScale(datum)) {
+		if (mainXScale(datum) !== undefined) {
 			this.parent
 				.select('rect.shadow-column')
 				.classed('highlighter-hidden', false)
@@ -394,7 +406,8 @@ export class Heatmap extends Component {
 				.classed('highlighter-hidden', false)
 				.attr('x', mainXScale(datum))
 				.raise();
-		} else if (mainYScale(datum)) {
+		} else if (mainYScale(datum) !== undefined) {
+
 			this.parent
 				.select('rect.shadow-row')
 				.classed('highlighter-hidden', false)
@@ -404,7 +417,7 @@ export class Heatmap extends Component {
 			strokeHighlighter
 				.select('rect.highlight-row')
 				.classed('highlighter-hidden', false)
-				.attr('x', mainXScale(datum))
+				.attr('y', mainYScale(datum))
 				.raise();
 		}
 
