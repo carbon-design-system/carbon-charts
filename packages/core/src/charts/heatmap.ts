@@ -114,7 +114,7 @@ export class HeatmapChart extends AxisChart {
 
 		const legendSpacerComponent = {
 			id: 'spacer',
-			components: [new Spacer(this.model, this.services, { size: 8 })],
+			components: [new Spacer(this.model, this.services, { size: 15 })],
 			growth: LayoutGrowth.PREFERRED,
 		};
 
