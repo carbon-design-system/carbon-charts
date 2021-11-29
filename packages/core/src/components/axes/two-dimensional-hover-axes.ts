@@ -98,6 +98,8 @@ export class TwoDimensionalHoverAxes extends TwoDimensionalAxes {
 			}
 		});
 
+		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE);
+
 		// If the new margins are different than the existing ones
 		const isNotEqual = Object.keys(margins).some((marginKey) => {
 			return this.margins[marginKey] !== margins[marginKey];

@@ -219,14 +219,11 @@ export class HoverAxis extends Axis {
 				// Focus element since we are using arrow keys
 				event.target.focus();
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Axis.LABEL_FOCUS,
-					{
-						event,
-						element: select(this),
-						datum: select(this).select('text').datum(),
-					}
-				);
+				self.services.events.dispatchEvent(Events.Axis.LABEL_FOCUS, {
+					event,
+					element: select(this),
+					datum: select(this).select('text').datum(),
+				});
 			})
 			.on('blur', function (event) {
 				// Dispatch mouse event
