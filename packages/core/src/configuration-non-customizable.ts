@@ -212,6 +212,8 @@ export const alluvial = {
 
 export const heatmap = {
 	minCellDividerDimension: 16,
+	// Ensures axes lines are displayed with or without stroke disabled
+	chartPadding: 0.5,
 };
 
 export const spacers = {

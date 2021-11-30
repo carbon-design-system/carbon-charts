@@ -1,8 +1,14 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import { Events, RenderTypes, DividerStatus } from '../../interfaces';
+import {
+	Events,
+	RenderTypes,
+	DividerStatus,
+	AxisPositions,
+} from '../../interfaces';
 import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
 
 import { get } from 'lodash-es';
 
@@ -16,6 +22,10 @@ export class Heatmap extends Component {
 	private matrix = {};
 	private xBandwidth = 0;
 	private yBandwidth = 0;
+	private translationUnits = {
+		x: 0,
+		y: 0,
+	};
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -79,12 +89,36 @@ export class Heatmap extends Component {
 			(yRange[1] - yRange[0]) / uniqueRange.length
 		);
 
-		const dividerStatus = this.determineDividerStatus();
+		// Add padding around chart so the axes lines display
+		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
+		if (axesOptions) {
+			Object.keys(axesOptions).forEach((axisPosition) => {
+				switch (axisPosition) {
+					case AxisPositions.TOP:
+						this.translationUnits[1] =
+							Configuration.heatmap.chartPadding;
+						break;
+					case AxisPositions.BOTTOM:
+						this.translationUnits[1] = -Configuration.heatmap
+							.chartPadding;
+						break;
+					case AxisPositions.LEFT:
+						this.translationUnits[0] =
+							Configuration.heatmap.chartPadding;
+						break;
+					case AxisPositions.RIGHT:
+						this.translationUnits[0] = -Configuration.heatmap
+							.chartPadding;
+						break;
+				}
+			});
+		}
+
 		const container = svg
 			.append('g')
 			.attr(
 				'transform',
-				dividerStatus ? `translate(1, -1)` : `translate(0, 0)`
+				`translate(${this.translationUnits[0]}, ${this.translationUnits[1]})`
 			);
 
 		const rectangles = container
@@ -148,12 +182,12 @@ export class Heatmap extends Component {
 			.attr('width', this.xBandwidth)
 			.attr('height', Math.abs(yRange[1] - yRange[0]));
 
-		const rowAndColumnHighlighter = container
-			.append('g')
-			.classed('row-column-highlighter', true);
+		const parent = DOMUtils.appendOrSelect(
+			this.parent,
+			'g.row-column-highlighter'
+		);
 
-		rowAndColumnHighlighter
-			.append('rect')
+		DOMUtils.appendOrSelect(parent, 'rect.highlight-row')
 			.classed('highlighter-hidden', true)
 			.classed('highlight-row', true)
 			.attr('x', xRange[0])
@@ -161,10 +195,8 @@ export class Heatmap extends Component {
 			.attr('width', Math.abs(xRange[1] - xRange[0]))
 			.attr('height', this.yBandwidth);
 
-		rowAndColumnHighlighter
-			.append('rect')
+		DOMUtils.appendOrSelect(parent, 'rect.highlight-column')
 			.classed('highlighter-hidden', true)
-			.classed('highlight-column', true)
 			.attr('x', xRange[0])
 			.attr('y', 0)
 			.attr('width', this.xBandwidth)
@@ -383,40 +415,39 @@ export class Heatmap extends Component {
 			});
 		}
 
+		// Show the outlines to make the cells appear grouped
+		const shadowHighlighter = this.parent.select('g.shadow-holder').raise();
 		// Pop out cells
 		this.parent
 			.selectAll(ids.join(','))
 			.classed('axis-hovered', true)
 			.raise();
 
-		// Show the outlines to make the cells appear grouped
-		const strokeHighlighter = this.parent
-			.selectAll('g.row-column-highlighter')
-			.raise();
-
 		if (mainXScale(datum) !== undefined) {
-			this.parent
+			shadowHighlighter
 				.select('rect.shadow-column')
 				.classed('highlighter-hidden', false)
-				.attr('x', mainXScale(datum))
+				.attr('x', mainXScale(datum) + this.translationUnits[0])
 				.raise();
 
-			strokeHighlighter
+			this.parent
+				.select('g.row-column-highlighter')
 				.select('rect.highlight-column')
 				.classed('highlighter-hidden', false)
-				.attr('x', mainXScale(datum))
+				.attr('x', mainXScale(datum) + this.translationUnits[0])
 				.raise();
 		} else if (mainYScale(datum) !== undefined) {
-			this.parent
+			shadowHighlighter
 				.select('rect.shadow-row')
 				.classed('highlighter-hidden', false)
-				.attr('y', mainYScale(datum))
+				.attr('y', mainXScale(datum) + this.translationUnits[1])
 				.raise();
 
-			strokeHighlighter
+			this.parent
+				.select('g.row-column-highlighter')
 				.select('rect.highlight-row')
 				.classed('highlighter-hidden', false)
-				.attr('y', mainYScale(datum))
+				.attr('y', mainXScale(datum) + this.translationUnits[1])
 				.raise();
 		}
 
@@ -455,16 +486,13 @@ export class Heatmap extends Component {
 
 		// Lower cells
 		this.parent
-			.selectAll('axis-hovered')
+			.selectAll('.axis-hovered')
 			.classed('axis-hovered', false)
 			.lower();
 
 		// Hide row/column highlighting
 		const strokeHighlighter = this.parent
 			.selectAll('g.row-column-highlighter')
-			.lower();
-
-		strokeHighlighter
 			.selectAll('rect.highlight-column, rect.highlight-row')
 			.classed('highlighter-hidden', true);
 
