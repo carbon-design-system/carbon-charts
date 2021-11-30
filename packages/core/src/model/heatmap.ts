@@ -1,5 +1,5 @@
 // Internal Imports
-import { ColorLegendType, ScaleTypes } from '../interfaces';
+import { ScaleTypes } from '../interfaces';
 import { ChartModelCartesian } from './cartesian-charts';
 import { Tools } from '../tools';
 

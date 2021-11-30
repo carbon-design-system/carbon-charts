@@ -1,9 +1,8 @@
 // Internal Imports
 import { TwoDimensionalAxes } from './two-dimensional-axes';
-import { AxisPositions, RenderTypes } from '../../interfaces';
+import { AxisPositions } from '../../interfaces';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
-import { Threshold } from '../essentials/threshold';
 import { Events } from './../../interfaces';
 import { HoverAxis } from './hover-axis';
 

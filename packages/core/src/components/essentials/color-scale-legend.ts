@@ -17,7 +17,6 @@ export class ColorScaleLegend extends Legend {
 		'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
 	init() {
-		console.log('inside here 2 - init');
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
@@ -198,7 +197,6 @@ export class ColorScaleLegend extends Legend {
 						!customColorsEnabled &&
 						((i + 1) % 2 === 0 || i === colorPairing.length - 1)
 					) {
-						console.log('tick formating', i + 1, quant[i]);
 						return null;
 					}
 
@@ -235,8 +233,6 @@ export class ColorScaleLegend extends Legend {
 			legendAxis.enter().append(firstTick.node()).raise();
 
 			legendAxis.select('.domain').remove();
-
-			console.log('legendAxis', legendAxis);
 		} else {
 			throw Error('Entered color legend type is not supported.');
 		}
