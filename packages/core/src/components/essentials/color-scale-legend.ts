@@ -2,10 +2,11 @@
 import { Tools } from '../../tools';
 import { ColorLegendType, Events, RenderTypes, Roles } from '../../interfaces';
 import * as Configuration from '../../configuration';
+import { Legend } from '../';
+import { DOMUtils } from '../../services';
 
 // D3 imports
 import { axisBottom } from 'd3-axis';
-import { Legend } from '..';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { interpolateRound, quantize } from 'd3-interpolate';
 
@@ -15,6 +16,8 @@ export class ColorScaleLegend extends Legend {
 
 	private gradient_id =
 		'gradient-id-' + Math.floor(Math.random() * 99999999999);
+
+	private textWidth = 0;
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -27,31 +30,64 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	handleAxisComplete = (event: CustomEvent) => {
+		const svg = this.getComponentContainer();
+
+		const title = Tools.getProperty(
+			this.getOptions(),
+			'legend',
+			'colorLegend',
+			'title'
+		);
+
 		const { cartesianScales } = this.services;
 		// Get available chart area
 		const mainXScale = cartesianScales.getMainXScale();
-		const mainYScale = cartesianScales.getMainYScale();
 
 		const xDimensions = mainXScale.range();
 
 		// Align legend with the axis
 		if (xDimensions[0] > 1) {
-			const svg = this.getComponentContainer();
 			svg.select('g.legend-rectangle').attr(
 				'transform',
 				`translate(${xDimensions[0]}, 0)`
 			);
-		}
 
-		// @todo - Add the text
+			if (title) {
+				const {
+					width: textWidth,
+				} = DOMUtils.getSVGElementSize(
+					svg.select('g.legend-title').select('text'),
+					{ useBBox: true }
+				);
+
+				// -9 since LEFT y-axis labels are moved towards the left by 9
+				const availableSpace = xDimensions[0] - textWidth - 9;
+
+				// If space is available align the the label with the axis labels
+				if (availableSpace > 1) {
+					svg.select('g.legend-title').attr(
+						'transform',
+						`translate(${availableSpace}, 0)`
+					);
+				} else {
+					// Move the legend down by 16 pixels to display legend text on top
+					svg.select('g.legend-rectangle').attr(
+						'transform',
+						`translate(${xDimensions[0]}, 16)`
+					);
+
+					// Align legend title with start of axis
+					svg.select('g.legend-title').attr(
+						'transform',
+						`translate(${xDimensions[0]}, 0)`
+					);
+				}
+			}
+		}
 	};
 
 	render() {
 		const options = this.getOptions();
-
-		// svg and container widths
-		const svg = this.getComponentContainer();
-		svg.html('').attr('role', Roles.GROUP);
 
 		const customColors = Tools.getProperty(
 			options,
@@ -59,9 +95,6 @@ export class ColorScaleLegend extends Legend {
 			'gradient',
 			'colors'
 		);
-		const customColorsEnabled = !Tools.isEmpty(customColors);
-
-		const domain = this.model.getValueDomain();
 
 		const colorScaleType = Tools.getProperty(
 			options,
@@ -77,7 +110,27 @@ export class ColorScaleLegend extends Legend {
 			'option'
 		);
 
+		const title = Tools.getProperty(
+			options,
+			'legend',
+			'colorLegend',
+			'title'
+		);
+
+		const customColorsEnabled = !Tools.isEmpty(customColors);
+		const domain = this.model.getValueDomain();
+
+		const svg = this.getComponentContainer();
+		svg.html('').attr('role', Roles.GROUP);
 		const group = svg.append('g').classed('legend-rectangle', true);
+
+		if (title) {
+			svg.append('g')
+				.classed('legend-title', true)
+				.append('text')
+				.text(title)
+				.attr('dy', '0.7em');
+		}
 
 		// If domain consists of negative and positive values, use diverging palettes
 		const colorScheme = domain[0] < 0 && domain[1] > 0 ? 'diverge' : 'mono';

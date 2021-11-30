@@ -632,7 +632,7 @@ export const heatmapLegendOptions = {
 		},
 	},
 	legend: {
-		colorLegend: { type: 'quantize' },
+		colorLegend: { title: 'Legend title', type: 'quantize' },
 	},
 };
 
