@@ -242,38 +242,16 @@ export class HeatmapModel extends ChartModelCartesian {
 		let domainValueFormatter;
 
 		const result = [
-			[
-				primaryDomain.label,
-				primaryRange.label,
-				...(secondaryDomain ? [secondaryDomain.label] : []),
-				...(secondaryRange ? [secondaryRange.label] : []),
-				'Value',
-			],
+			[primaryDomain.label, primaryRange.label, 'Value'],
 			...displayData.map((datum) => [
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter
 					? domainValueFormatter(datum[primaryDomain.identifier])
 					: datum[primaryDomain.identifier],
-				datum[primaryRange.identifier] === null ||
-				isNaN(datum[primaryRange.identifier])
+				datum[primaryRange.identifier] === null
 					? '&ndash;'
 					: datum[primaryRange.identifier].toLocaleString(),
-				...(secondaryDomain
-					? [
-							datum[secondaryDomain.identifier] === null
-								? '&ndash;'
-								: datum[secondaryDomain.identifier],
-					  ]
-					: []),
-				...(secondaryRange
-					? [
-							datum[secondaryRange.identifier] === null ||
-							isNaN(datum[secondaryRange.identifier])
-								? '&ndash;'
-								: datum[secondaryRange.identifier],
-					  ]
-					: []),
 				datum['value'],
 			]),
 		];

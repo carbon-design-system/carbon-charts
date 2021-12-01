@@ -1,26 +1,45 @@
 .#{$prefix}--#{$charts-prefix}--heatmap {
-	rect.raised {
-		stroke: #ffffff !important;
-		filter: drop-shadow(0px 0px 3px black);
-	}
-
-	rect.highlighter-hidden {
+	g.highlighter-hidden {
 		visibility: hidden;
 	}
 
-	rect.shadow-column,
-	rect.shadow-row {
-		stroke: #ffffff;
-		fill: white;
-		stroke-width: 2px;
-		filter: drop-shadow(0px 0px 5px black);
+	g.cell-highlight {
+		line {
+			stroke: white;
+			stroke-width: 1px;
+		}
 	}
 
-	rect.highlight-column,
-	rect.highlight-row {
-		stroke: #ffffff;
-		fill: none;
-		stroke-width: 2px;
+	g.cell-2 {
+		line {
+			stroke: white;
+			stroke-width: 2px !important;
+		}
+	}
+
+	g.multi-cell {
+		line {
+			stroke: white;
+			stroke-width: 2px;
+		}
+	}
+
+	g.shadows {
+		line.top {
+			filter: drop-shadow(0px -3px 2px black);
+		}
+
+		line.down {
+			filter: drop-shadow(0px 3px 2px black);
+		}
+
+		line.left {
+			filter: drop-shadow(-3px 0px 2px black);
+		}
+
+		line.right {
+			filter: drop-shadow(3px 0px 2px black);
+		}
 	}
 
 	rect.null-state {
