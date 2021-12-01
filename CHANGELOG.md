@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.4...v0.53.0) (2021-12-01)
+
+
+### Features
+
+* **react diagrams:** add support for applying a custom class to the outer node ([#1222](https://github.com/carbon-design-system/carbon-charts/issues/1222)) ([c7e8606](https://github.com/carbon-design-system/carbon-charts/commit/c7e8606e860702bf80ebfb9045a5965fcd2fa0ff)), closes [#1221](https://github.com/carbon-design-system/carbon-charts/issues/1221)
+
+
+
+
+
 ## [0.52.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.3...v0.52.4) (2021-12-01)
 
 
