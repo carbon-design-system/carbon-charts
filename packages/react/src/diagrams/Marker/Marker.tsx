@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // @ts-ignore
+import classnames from 'classnames';
+
+// @ts-ignore
 import settings from 'carbon-components/src/globals/js/settings';
 
 import {
@@ -16,8 +19,9 @@ import {
 const { prefix } = settings;
 
 const Marker = ({
-	d,
+	className,
 	color,
+	d,
 	id,
 	orient = 'auto',
 	height,
@@ -27,13 +31,16 @@ const Marker = ({
 	refY,
 }: any) => {
 	const namespace = `${prefix}--cc--marker`;
+	const classes = classnames(namespace, {
+		[className]: className,
+	});
 
 	const xPos = position === 'end' ? width / 2 + 0.5 : 0.5;
 	const yPos = height / 2;
 
 	return (
 		<marker
-			className={namespace}
+			className={classes}
 			markerHeight={height}
 			markerWidth={width}
 			orient={orient}
@@ -65,14 +72,19 @@ export {
 
 Marker.propTypes = {
 	/**
-	 * Specify a path string
+	 * Provide an optional class to be applied on the outer element
 	 */
-	d: PropTypes.string,
+	className: PropTypes.string,
 
 	/**
 	 * Specify the marker's color
 	 */
 	color: PropTypes.string,
+
+	/**
+	 * Specify a path string
+	 */
+	d: PropTypes.string,
 
 	/**
 	 * Specify an ID for the marker
