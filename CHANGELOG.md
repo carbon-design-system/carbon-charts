@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.0...v0.53.1) (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** display the correct group when hovering over scatter point ([#1233](https://github.com/carbon-design-system/carbon-charts/issues/1233)) ([dcb5357](https://github.com/carbon-design-system/carbon-charts/commit/dcb5357a470789bbdecb97a2f0fccfa999b0c837)), closes [#1188](https://github.com/carbon-design-system/carbon-charts/issues/1188)
+
+
+
+
+
 # [0.53.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.4...v0.53.0) (2021-12-01)
 
 
