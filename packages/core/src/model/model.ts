@@ -403,7 +403,9 @@ export class ChartModel {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const dataGroupNames = this.getDataGroupNames(groups);
+		// Get only active data groups so non-active data groups are not rendered
+		// on legend item click
+		const dataGroupNames = this.getActiveDataGroupNames(groups);
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({
 			groups,
 		});
