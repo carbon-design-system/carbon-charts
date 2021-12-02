@@ -637,7 +637,7 @@ export const heatmapLegendOptions = {
 };
 
 export const heatmapDomainOptions = {
-	title: 'Heatmap (Axis order option & no divider)',
+	title: 'Heatmap (Axis order option)',
 	axes: {
 		bottom: {
 			title: 'Letters',
@@ -662,11 +662,6 @@ export const heatmapDomainOptions = {
 				'November',
 				'December',
 			],
-		},
-	},
-	heatmap: {
-		divider: {
-			state: 'off',
 		},
 	},
 };
