@@ -30,9 +30,6 @@ export class StackedScatter extends Scatter {
 			percentage,
 		});
 
-		// Organize the data based on the active data groups
-		const dataGroups = this.model.getDataGroups();
-
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
@@ -52,8 +49,7 @@ export class StackedScatter extends Scatter {
 		const circles = circleGroupsEnter
 			.merge(circleGroups)
 			.selectAll('circle.dot')
-			// Render only the circles that should be active
-			.data((d, i) => (dataGroups[i].status ? d : []));
+			.data((d) => d);
 
 		// Remove circles that need to be removed
 		circles.exit().attr('opacity', 0).remove();
