@@ -24,6 +24,8 @@ export class HoverAxis extends Axis {
 
 		container.selectAll('g.ticks').attr('tabindex', 0);
 
+		const self = this;
+
 		container.selectAll('g.tick').each(function () {
 			const g = select(this);
 			g.classed('tick-hover', true).attr('tabindex', -1);
@@ -49,10 +51,20 @@ export class HoverAxis extends Axis {
 				case AxisPositions.TOP:
 					x = -(width / 2);
 					y = -height + Number(textNode.attr('y')) / 2;
+
+					if (self.truncation[axisPosition]) {
+						x = 0;
+						rectangle.attr('transform', `rotate(-45)`);
+					}
 					break;
 				case AxisPositions.BOTTOM:
 					x = -(width / 2);
 					y = height / 2 - 2;
+
+					if (self.truncation[axisPosition]) {
+						x = -width;
+						rectangle.attr('transform', `rotate(-45)`);
+					}
 					break;
 			}
 
@@ -64,8 +76,6 @@ export class HoverAxis extends Axis {
 
 			rectangle.lower();
 		});
-
-		const self = this;
 
 		container.selectAll('g.ticks').on('focus', function () {
 			const axis = select(this);
