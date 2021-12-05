@@ -1,12 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
-import {
-	Events,
-	RenderTypes,
-	DividerStatus,
-	AxisPositions,
-} from '../../interfaces';
+import { Events, RenderTypes, DividerStatus } from '../../interfaces';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 
@@ -90,38 +85,8 @@ export class Heatmap extends Component {
 			(yRange[1] - yRange[0]) / uniqueRange.length
 		);
 
-		// Determine padding depending on axes being used
-		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
-		if (axesOptions) {
-			Object.keys(axesOptions).forEach((axisPosition) => {
-				switch (axisPosition) {
-					case AxisPositions.TOP:
-						this.translationUnits.y =
-							Configuration.heatmap.chartPadding;
-						break;
-					case AxisPositions.BOTTOM:
-						this.translationUnits.y = -Configuration.heatmap
-							.chartPadding;
-						break;
-					case AxisPositions.LEFT:
-						this.translationUnits.x =
-							Configuration.heatmap.chartPadding;
-						break;
-					case AxisPositions.RIGHT:
-						this.translationUnits.x = -Configuration.heatmap
-							.chartPadding;
-						break;
-				}
-			});
-		}
-
-		// Translate the chart to show the chart axes lines
-		const container = svg
-			.append('g')
-			.attr(
-				'transform',
-				`translate(${this.translationUnits.x}, ${this.translationUnits.y})`
-			);
+		// Lower the chart so the axes are always visible
+		const container = svg.lower();
 
 		const rectangles = container
 			.selectAll()
@@ -200,24 +165,26 @@ export class Heatmap extends Component {
 			.classed('highlighter-hidden', true);
 
 		DOMUtils.appendOrSelect(highlight, 'line.top')
-			.attr('x1', 0)
-			.attr('x2', xBandwidth);
+			.attr('x1', -1)
+			.attr('x2', xBandwidth + 1);
 
 		DOMUtils.appendOrSelect(highlight, 'line.left')
 			.attr('x1', 0)
-			.attr('y1', yBandwidth);
+			.attr('y1', -1)
+			.attr('x2', 0)
+			.attr('y2', yBandwidth + 1);
 
 		DOMUtils.appendOrSelect(highlight, 'line.down')
-			.attr('x1', 0)
-			.attr('x2', xBandwidth)
+			.attr('x1', -1)
+			.attr('x2', xBandwidth + 1)
 			.attr('y1', yBandwidth)
 			.attr('y2', yBandwidth);
 
 		DOMUtils.appendOrSelect(highlight, 'line.right')
 			.attr('x1', xBandwidth)
 			.attr('x2', xBandwidth)
-			.attr('y1', 0)
-			.attr('y2', yBandwidth);
+			.attr('y1', -1)
+			.attr('y2', yBandwidth + 1);
 	}
 
 	private determineDividerStatus(): boolean {
@@ -411,9 +378,9 @@ export class Heatmap extends Component {
 				.classed('highlighter-hidden', false)
 				.attr(
 					'transform',
-					`translate(${
-						mainXScale(datum) + this.translationUnits.x
-					}, ${min(mainYScale.range()) + this.translationUnits.y})`
+					`translate(${mainXScale(datum)}, ${min(
+						mainYScale.range()
+					)})`
 				);
 		} else if (mainYScale(datum) !== undefined) {
 			this.parent
@@ -421,9 +388,7 @@ export class Heatmap extends Component {
 				.classed('highlighter-hidden', false)
 				.attr(
 					'transform',
-					`translate(${
-						min(mainXScale.range()) + this.translationUnits.x
-					},${mainYScale(datum) + this.translationUnits.y})`
+					`translate(${min(mainXScale.range())},${mainYScale(datum)})`
 				);
 		}
 
