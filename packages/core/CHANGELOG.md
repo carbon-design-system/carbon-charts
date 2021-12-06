@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.0...v0.53.1) (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** display the correct group when hovering over scatter point ([#1233](https://github.com/carbon-design-system/carbon-charts/issues/1233)) ([dcb5357](https://github.com/carbon-design-system/carbon-charts/commit/dcb5357a470789bbdecb97a2f0fccfa999b0c837)), closes [#1188](https://github.com/carbon-design-system/carbon-charts/issues/1188)
+
+
+
+
+
+# [0.53.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.4...v0.53.0) (2021-12-01)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.52.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.3...v0.52.4) (2021-12-01)
+
+
+### Bug Fixes
+
+* **core:** set zoom domain if old initial zoom domain is undefined ([#1230](https://github.com/carbon-design-system/carbon-charts/issues/1230)) ([6d2bb01](https://github.com/carbon-design-system/carbon-charts/commit/6d2bb014a571dc8a9e6691b6b75c0736ab90b5c5))
+
+
+
+
+
 ## [0.52.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.2...v0.52.3) (2021-11-22)
 
 **Note:** Version bump only for package @carbon/charts
