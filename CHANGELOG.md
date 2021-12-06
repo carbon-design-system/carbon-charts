@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.1...v0.53.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* **core:** display respective combochart tooltips range label ([#1236](https://github.com/carbon-design-system/carbon-charts/issues/1236)) ([a460ea3](https://github.com/carbon-design-system/carbon-charts/commit/a460ea3e1a695b6bf2b56f4401621d2853add8b6)), closes [#1085](https://github.com/carbon-design-system/carbon-charts/issues/1085)
+
+
+
+
+
 ## [0.53.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.0...v0.53.1) (2021-12-02)
 
 
