@@ -296,7 +296,7 @@ export class StackedBar extends Bar {
 
 	protected getBarWidth() {
 		const options = this.getOptions();
-		if (options.bars.width) {
+		if (Tools.getProperty(options, "bars", "width")) {
 			return options.bars.width;
 		}
 		const mainXScale = this.services.cartesianScales.getMainXScale();
