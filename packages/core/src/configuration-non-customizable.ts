@@ -20,6 +20,9 @@ export const axis = {
 		compareTo: 'marker',
 	},
 	paddingRatio: 0.1,
+	hover: {
+		rectanglePadding: 4,
+	},
 };
 
 export const canvasZoomSettings = {

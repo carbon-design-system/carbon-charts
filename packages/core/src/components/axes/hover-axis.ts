@@ -1,8 +1,10 @@
 // Internal Imports
 import { Axis } from './axis';
-import { AxisPositions, Events } from '../../interfaces';
+import { AxisPositions, Events, ScaleTypes } from '../../interfaces';
 import { ChartModel } from '../../model/model';
 import { DOMUtils } from '../../services';
+import { Tools } from '../../tools';
+import * as Configuration from '../../configuration';
 
 // D3 Imports
 import { select } from 'd3-selection';
@@ -14,6 +16,8 @@ export class HoverAxis extends Axis {
 
 	render(animate = true) {
 		super.render(animate);
+		// Remove existing event listeners to avoid flashing behavior
+		super.destroy();
 		const { position: axisPosition } = this.configs;
 		const svg = this.getComponentContainer();
 		const container = DOMUtils.appendOrSelect(
@@ -38,10 +42,12 @@ export class HoverAxis extends Axis {
 			let x = 0,
 				y = 0;
 
+			// Depending on axis position, apply correct translation & rotation to align the rect
+			// with the text
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
 					x = -width + Number(textNode.attr('x'));
-					y = -(height / 2) + 1;
+					y = -(height / 2);
 					break;
 				case AxisPositions.RIGHT:
 					x = Math.abs(Number(textNode.attr('x')));
@@ -67,13 +73,17 @@ export class HoverAxis extends Axis {
 					break;
 			}
 
+			// Translates x position -4 left to keep center after padding
+			// Adds padding on left & right
 			rectangle
-				.attr('x', x)
+				.attr('x', x - Configuration.axis.hover.rectanglePadding)
 				.attr('y', y)
-				.attr('width', width)
-				.attr('height', height);
-
-			rectangle.lower();
+				.attr(
+					'width',
+					width + Configuration.axis.hover.rectanglePadding * 2
+				)
+				.attr('height', height)
+				.lower();
 
 			// Add keyboard event listeners to each group element
 			g.on('keydown', function (event: KeyboardEvent) {
@@ -97,45 +107,91 @@ export class HoverAxis extends Axis {
 			});
 		});
 
-		// Add event listeners to elements drawn
-		this.addFocusEventListeners();
+		// Add event listeners to element group
+		this.addEventListeners();
 	}
 
-	// Focus on the next HTML element sibling
-	private goNext(element: HTMLElement, event: Event) {
-		if (
-			element.nextElementSibling !== null &&
-			element.nextElementSibling.tagName !== 'path'
-		) {
-			element.nextElementSibling.dispatchEvent(new Event('focus'));
-		}
-
-		event.preventDefault();
-	}
-
-	// Focus on the previous HTML element sibling
-	private goPrevious(element: HTMLElement, event: Event) {
-		if (
-			element.previousElementSibling !== null &&
-			element.previousElementSibling.tagName !== 'path'
-		) {
-			element.previousElementSibling.dispatchEvent(new Event('focus'));
-		}
-
-		event.preventDefault();
-	}
-
-	addFocusEventListeners() {
+	addEventListeners() {
 		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
 		const container = DOMUtils.appendOrSelect(
 			svg,
 			`g.axis.${axisPosition}`
 		);
+		const options = this.getOptions();
+		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
+		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType');
+		const truncationThreshold = Tools.getProperty(
+			axisOptions,
+			'truncation',
+			'threshold'
+		);
 
 		const self = this;
 		container
 			.selectAll('g.tick.tick-hover')
+			.on('mouseover', function (event) {
+				const hoveredElement = select(this).select('text');
+				const datum = hoveredElement.datum() as string;
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Axis.LABEL_MOUSEOVER,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				if (
+					axisScaleType === ScaleTypes.LABELS &&
+					datum.length > truncationThreshold
+				) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						element: hoveredElement,
+						datum,
+					});
+				}
+			})
+			.on('mousemove', function (event) {
+				const hoveredElement = select(this).select('text');
+				const datum = hoveredElement.datum() as string;
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Axis.LABEL_MOUSEMOVE,
+					{
+						event,
+						element: hoveredElement,
+						datum,
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
+				});
+			})
+			.on('click', function (event) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
+					event,
+					element: select(this).select('text'),
+					datum: select(this).select('text').datum(),
+				});
+			})
+			.on('mouseout', function (event) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
+					event,
+					element: select(this).select('text'),
+					datum: select(this).select('text').datum(),
+				});
+
+				if (axisScaleType === ScaleTypes.LABELS) {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				}
+			})
 			.on('focus', function (event) {
 				const coordinates = { clientX: 0, clientY: 0 };
 
@@ -164,6 +220,30 @@ export class HoverAxis extends Axis {
 			});
 	}
 
+	// Focus on the next HTML element sibling
+	private goNext(element: HTMLElement, event: Event) {
+		if (
+			element.nextElementSibling &&
+			element.nextElementSibling.tagName !== 'path'
+		) {
+			element.nextElementSibling.dispatchEvent(new Event('focus'));
+		}
+
+		event.preventDefault();
+	}
+
+	// Focus on the previous HTML element sibling
+	private goPrevious(element: HTMLElement, event: Event) {
+		if (
+			element.previousElementSibling &&
+			element.previousElementSibling.tagName !== 'path'
+		) {
+			element.previousElementSibling.dispatchEvent(new Event('focus'));
+		}
+
+		event.preventDefault();
+	}
+
 	destroy() {
 		const svg = this.getComponentContainer();
 		const { position: axisPosition } = this.configs;
@@ -174,7 +254,7 @@ export class HoverAxis extends Axis {
 
 		// Remove event listeners
 		container
-			.selectAll('g.tick text')
+			.selectAll('g.tick.tick-hover')
 			.on('mouseover', null)
 			.on('mousemove', null)
 			.on('mouseout', null)

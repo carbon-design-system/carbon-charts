@@ -710,10 +710,6 @@ export class Axis extends Component {
 			'threshold'
 		);
 
-		const isTimeScaleType =
-			this.scaleType === ScaleTypes.TIME ||
-			axisOptions.scaleType === ScaleTypes.TIME;
-
 		const self = this;
 		container
 			.selectAll('g.tick text')
