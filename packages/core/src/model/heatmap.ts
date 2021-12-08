@@ -52,19 +52,19 @@ export class HeatmapModel extends ChartModelCartesian {
 		const limits = extent(data);
 		const domain = [];
 
-		// Round extent values to the nearest multiple of 50
+		// Round extent values to the nearest multiple of 10
 		// Axis rounds values to multiples of 2, 5, and 10s.
 		limits.forEach((number, index) => {
 			let value = Number(number);
 
 			if (index === 0 && value >= 0) {
 				value = 0;
-			} else if (value % 50 === 0 || value === 0) {
+			} else if (value % 10 === 0 || value === 0) {
 				value;
 			} else if (value < 0) {
-				value = Math.floor(value / 50) * 50;
+				value = Math.floor(value / 10) * 10;
 			} else {
-				value = Math.ceil(value / 50) * 50;
+				value = Math.ceil(value / 10) * 10;
 			}
 
 			domain.push(value);

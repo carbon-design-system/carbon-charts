@@ -52,8 +52,9 @@ export class Heatmap extends Component {
 	}
 
 	render(animate = true) {
-		// svg and container widths
-		const svg = this.getComponentContainer();
+		const svg = this.getComponentContainer({ withinChartClip: true });
+		// Lower the chart so the axes are always visible
+		svg.lower();
 
 		const { cartesianScales } = this.services;
 		this.matrix = this.model.getMatrix();
@@ -85,10 +86,24 @@ export class Heatmap extends Component {
 			(yRange[1] - yRange[0]) / uniqueRange.length
 		);
 
-		// Lower the chart so the axes are always visible
-		const container = svg.lower();
+		const patternID = this.services.domUtils.generateElementIDString(
+			`heatmap-pattern-stripes`
+		);
 
-		const rectangles = container
+		// Create a striped pattern for missing data
+		svg.append('defs')
+			.append('pattern')
+			.attr('id', patternID)
+			.attr('width', 3)
+			.attr('height', 3)
+			.attr('patternUnits', 'userSpaceOnUse')
+			.attr('patternTransform', 'rotate(45)')
+			.append('rect')
+			.classed('pattern-fill', true)
+			.attr('width', 0.5)
+			.attr('height', 8);
+
+		const rectangles = svg
 			.selectAll()
 			.data(matrixArray)
 			.enter()
@@ -118,7 +133,7 @@ export class Heatmap extends Component {
 			.style('fill', (d) => {
 				// Check if a valid value exists
 				if (d.index === -1 || d.value === null) {
-					return null;
+					return `url(#${patternID})`;
 				}
 				return this.model.getFillColor(Number(d.value));
 			})
