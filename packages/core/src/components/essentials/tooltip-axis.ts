@@ -18,17 +18,26 @@ export class AxisChartsTooltip extends Tooltip {
 		const options = this.getOptions();
 		const { cartesianScales } = this.services;
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const dualAxes = cartesianScales.isDualAxes();
 
 		// Generate default tooltip
 		const { groupMapsTo } = options.data;
 		const domainLabel = cartesianScales.getDomainLabel();
-		const rangeLabel = cartesianScales.getRangeLabel();
+		let rangeLabel = cartesianScales.getRangeLabel();
 
 		let domainValue = data[0][domainIdentifier];
 		let items: any[];
 		if (data.length === 1) {
 			const datum = data[0];
 			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
+
+			if (dualAxes) {
+				const position = cartesianScales.getRangeAxisPosition({
+					datum,
+					groups: [datum[groupMapsTo]],
+				});
+				rangeLabel = cartesianScales.getScaleLabel(position);
+			}
 			const value = datum[rangeIdentifier];
 
 			items = [
@@ -95,7 +104,6 @@ export class AxisChartsTooltip extends Tooltip {
 					.sort((a, b) => b.value - a.value)
 			);
 
-			const dualAxes = cartesianScales.isDualAxes();
 			if (
 				!dualAxes &&
 				Tools.getProperty(options, 'tooltip', 'showTotal') === true

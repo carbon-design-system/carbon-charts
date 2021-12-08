@@ -12,6 +12,7 @@ import { buildStraightPathString } from '@carbon/charts/components/diagrams/buil
 const { prefix } = settings;
 
 const Edge = ({
+	className,
 	color,
 	markerEnd,
 	markerStart,
@@ -29,6 +30,7 @@ const Edge = ({
 
 	const pathClasses = classnames(namespace, {
 		[`${namespace}--${variant}`]: variant,
+		[className]: className,
 	});
 
 	const d = path || buildStraightPathString(source, target);
@@ -57,6 +59,11 @@ const Edge = ({
 export default Edge;
 
 Edge.propTypes = {
+	/**
+	 * Provide an optional class to be applied on the outer element
+	 */
+	className: PropTypes.string,
+
 	/**
 	 * Specify the edge's color
 	 */

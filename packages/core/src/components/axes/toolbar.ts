@@ -52,6 +52,9 @@ export class Toolbar extends Component {
 
 		if (isDataLoading) {
 			container.html('');
+			// Set overflow menu to null if data is loading
+			// This will render in a new overflow menu when data is done loading
+			this.overflowMenu = null;
 		} else {
 			if (!this.overflowMenu) {
 				this.overflowMenu = container
@@ -220,6 +223,9 @@ export class Toolbar extends Component {
 
 	// show/hide overflow menu
 	updateOverflowMenu(show: boolean) {
+		if (!this.overflowMenu) {
+			return;
+		}
 		this.overflowMenu.classed('is-open', show);
 
 		// update overflow button background

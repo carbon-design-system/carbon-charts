@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.2...v0.53.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* **core:** fix overflow menu caused by data loading option change ([#1239](https://github.com/carbon-design-system/carbon-charts/issues/1239)) ([48b2058](https://github.com/carbon-design-system/carbon-charts/commit/48b2058746d3d86675d1f979e7ea6839712bef65)), closes [#1229](https://github.com/carbon-design-system/carbon-charts/issues/1229)
+
+
+
+
+
+## [0.53.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.1...v0.53.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* **core:** display respective combochart tooltips range label ([#1236](https://github.com/carbon-design-system/carbon-charts/issues/1236)) ([a460ea3](https://github.com/carbon-design-system/carbon-charts/commit/a460ea3e1a695b6bf2b56f4401621d2853add8b6)), closes [#1085](https://github.com/carbon-design-system/carbon-charts/issues/1085)
+
+
+
+
+
+## [0.53.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.0...v0.53.1) (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** display the correct group when hovering over scatter point ([#1233](https://github.com/carbon-design-system/carbon-charts/issues/1233)) ([dcb5357](https://github.com/carbon-design-system/carbon-charts/commit/dcb5357a470789bbdecb97a2f0fccfa999b0c837)), closes [#1188](https://github.com/carbon-design-system/carbon-charts/issues/1188)
+
+
+
+
+
+# [0.53.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.4...v0.53.0) (2021-12-01)
+
+
+### Features
+
+* **react diagrams:** add support for applying a custom class to the outer node ([#1222](https://github.com/carbon-design-system/carbon-charts/issues/1222)) ([c7e8606](https://github.com/carbon-design-system/carbon-charts/commit/c7e8606e860702bf80ebfb9045a5965fcd2fa0ff)), closes [#1221](https://github.com/carbon-design-system/carbon-charts/issues/1221)
+
+
+
+
+
+## [0.52.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.3...v0.52.4) (2021-12-01)
+
+
+### Bug Fixes
+
+* **core:** set zoom domain if old initial zoom domain is undefined ([#1230](https://github.com/carbon-design-system/carbon-charts/issues/1230)) ([6d2bb01](https://github.com/carbon-design-system/carbon-charts/commit/6d2bb014a571dc8a9e6691b6b75c0736ab90b5c5))
+
+
+
+
+
+## [0.52.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.2...v0.52.3) (2021-11-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.52.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.1...v0.52.2) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** add linear gradient support to alluvial links ([#1192](https://github.com/carbon-design-system/carbon-charts/issues/1192)) ([f2170b1](https://github.com/carbon-design-system/carbon-charts/commit/f2170b15b78797e0fcced2367b5b60c2b4e3a332)), closes [#1189](https://github.com/carbon-design-system/carbon-charts/issues/1189)
+
+
+
+
+
+## [0.52.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.0...v0.52.1) (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** set pointer events of highlight elements to none ([#1220](https://github.com/carbon-design-system/carbon-charts/issues/1220)) ([5594054](https://github.com/carbon-design-system/carbon-charts/commit/5594054f791e4bd48b121104a3280e9934d90d6f)), closes [#1212](https://github.com/carbon-design-system/carbon-charts/issues/1212)
+
+
+
+
+
+# [0.52.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.4...v0.52.0) (2021-11-18)
+
+
+### Features
+
+* **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree charts ([#1219](https://github.com/carbon-design-system/carbon-charts/issues/1219)) ([3e7fcc2](https://github.com/carbon-design-system/carbon-charts/commit/3e7fcc2f16d16d67c4f39f4d4389878b5d829aba))
+
+
+
+
+
+## [0.51.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.3...v0.51.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* **svelte:** remove default export in `index.html` ([#1218](https://github.com/carbon-design-system/carbon-charts/issues/1218)) ([63f99d1](https://github.com/carbon-design-system/carbon-charts/commit/63f99d1b57d1b034292cc44aad93ca2de69beaed))
+
+
+
+
+
 ## [0.51.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.2...v0.51.3) (2021-11-03)
 
 

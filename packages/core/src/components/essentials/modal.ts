@@ -2,7 +2,7 @@ import { Component } from '../component';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model/model';
-import { Events, ScaleTypes } from '../../interfaces';
+import { Events } from '../../interfaces';
 
 // Carbon modal
 import { Modal as CarbonModalComponent } from 'carbon-components';
@@ -12,9 +12,6 @@ import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
 import { select } from 'd3-selection';
-
-// date formatting
-import { format } from 'date-fns';
 
 import { get } from 'lodash-es';
 
@@ -41,19 +38,11 @@ export class Modal extends Component {
 		modalInstance.show();
 	};
 
-	handleHideModal = () => {};
-
 	addEventListeners() {
 		// listen to show-modal Custom Events to render the modal
 		this.services.events.addEventListener(
 			Events.Modal.SHOW,
 			this.handleShowModal
-		);
-
-		// listen to hide-modal Custom Events to hide the modal
-		this.services.events.addEventListener(
-			Events.Modal.HIDE,
-			this.handleHideModal
 		);
 	}
 
@@ -62,12 +51,6 @@ export class Modal extends Component {
 		this.services.events.removeEventListener(
 			Events.Modal.SHOW,
 			this.handleShowModal
-		);
-
-		// remove hide-modal Custom Events
-		this.services.events.removeEventListener(
-			Events.Modal.HIDE,
-			this.handleHideModal
 		);
 	}
 

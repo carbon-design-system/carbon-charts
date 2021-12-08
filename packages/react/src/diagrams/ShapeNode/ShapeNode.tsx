@@ -11,6 +11,7 @@ const { prefix } = settings;
 
 const ShapeNode = ({
 	as = 'div',
+	className,
 	href = null,
 	onClick = null,
 	onMouseEnter = null,
@@ -41,6 +42,7 @@ const ShapeNode = ({
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${shape}`]: shape,
 		[`${namespace}--${Component}`]: Component,
+		[className]: className,
 	});
 
 	const titleElement = title ? (
@@ -76,6 +78,11 @@ const ShapeNode = ({
 ShapeNode.propTypes = {
 	/** Provide a custom element to be rendered instead of the default */
 	as: PropTypes.oneOf(['div', 'a', 'button']),
+
+	/**
+	 * Provide an optional class to be applied on the outer element
+	 */
+	className: PropTypes.string,
 
 	/**
 	 * Optionally specify an href for the CardNode to become an `<a>` element

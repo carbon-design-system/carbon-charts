@@ -936,6 +936,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.MeterChart,
 			},
 			{
+				options: meterDemos.propMeterStatusOptions,
+				data: meterDemos.propMeterData,
+				chartType: chartTypes.MeterChart,
+			},
+			{
 				options: meterDemos.propMeterTruncationOptions,
 				data: meterDemos.propMeterData,
 				chartType: chartTypes.MeterChart,
@@ -1072,10 +1077,15 @@ const complexChartDemos = [
 		title: 'Alluvial',
 		demos: [
 			{
+				options: alluvialDemos.alluvialSimpleGradientOptions,
+				data: alluvialDemos.alluvialGradientData,
+				chartType: chartTypes.AlluvialChart,
+				mainDemo: true,
+			},
+			{
 				options: alluvialDemos.alluvialSimpleOptions,
 				data: alluvialDemos.alluvialSimpleData,
 				chartType: chartTypes.AlluvialChart,
-				mainDemo: true,
 			},
 			{
 				options: alluvialDemos.alluvialMultipleCategoryOptions,
