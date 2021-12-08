@@ -804,34 +804,6 @@ const simpleChartDemos = [
 		],
 	},
 	{
-		title: 'Heatmap',
-		configs: {
-			excludeColorPaletteControl: true,
-		},
-		demos: [
-			{
-				options: heatmapDemos.heatmapOptions,
-				data: heatmapDemos.heatmapData,
-				chartType: chartTypes.HeatmapChart,
-			},
-			{
-				options: heatmapDemos.heatmapLegendOptions,
-				data: heatmapDemos.heatmapData,
-				chartType: chartTypes.HeatmapChart,
-			},
-			{
-				options: heatmapDemos.heatmapMissingDataOptions,
-				data: heatmapDemos.heatmapMissingData,
-				chartType: chartTypes.HeatmapChart,
-			},
-			{
-				options: heatmapDemos.heatmapDomainOptions,
-				data: heatmapDemos.heatmapData,
-				chartType: chartTypes.HeatmapChart,
-			},
-		],
-	},
-	{
 		title: 'Histogram',
 		demos: [
 			{
@@ -1157,6 +1129,34 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
+			},
+		],
+	},
+	{
+		title: 'Heatmap',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				options: heatmapDemos.heatmapOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapQuantizeLegendOption,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapMissingDataOptions,
+				data: heatmapDemos.heatmapMissingData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapDomainOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
 			},
 		],
 	},

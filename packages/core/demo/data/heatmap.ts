@@ -615,10 +615,13 @@ export const heatmapOptions = {
 			scaleType: 'labels',
 		},
 	},
+	legend: {
+		colorLegend: { title: 'Legend title' },
+	},
 };
 
-export const heatmapLegendOptions = {
-	title: 'Heatmap (Quantize legend options)',
+export const heatmapQuantizeLegendOption = {
+	title: 'Heatmap (Quantize legend)',
 	axes: {
 		bottom: {
 			title: 'Letters',
@@ -663,6 +666,9 @@ export const heatmapDomainOptions = {
 				'December',
 			],
 		},
+	},
+	legend: {
+		colorLegend: { title: 'Legend title' },
 	},
 };
 
@@ -1122,5 +1128,8 @@ export const heatmapMissingDataOptions = {
 			mapsTo: 'month',
 			scaleType: 'labels',
 		},
+	},
+	legend: {
+		colorLegend: { title: 'Legend title' },
 	},
 };
