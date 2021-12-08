@@ -1,7 +1,7 @@
 svg.#{$prefix}--#{$charts-prefix}--color-legend {
 	display: flex;
 	user-select: none;
-	height: 38px;
+	height: inherit;
 
 	@if $carbon--theme ==
 		$carbon--theme--g90 or

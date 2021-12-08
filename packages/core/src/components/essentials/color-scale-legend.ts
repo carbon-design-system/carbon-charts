@@ -17,8 +17,6 @@ export class ColorScaleLegend extends Legend {
 	private gradient_id =
 		'gradient-id-' + Math.floor(Math.random() * 99999999999);
 
-	private textWidth = 0;
-
 	init() {
 		const eventsFragment = this.services.events;
 
@@ -32,61 +30,67 @@ export class ColorScaleLegend extends Legend {
 	handleAxisComplete = (event: CustomEvent) => {
 		const svg = this.getComponentContainer();
 
-		const title = Tools.getProperty(
-			this.getOptions(),
-			'legend',
-			'colorLegend',
-			'title'
-		);
+		const { width } = DOMUtils.getSVGElementSize(svg, {
+			useAttrs: true,
+		});
 
-		const { cartesianScales } = this.services;
-		// Get available chart area
-		const mainXScale = cartesianScales.getMainXScale();
-
-		const xDimensions = mainXScale.range();
-
-		// Align legend with the axis
-		if (xDimensions[0] > 1) {
-			svg.select('g.legend-rectangle').attr(
-				'transform',
-				`translate(${xDimensions[0]}, 0)`
+		if (width > Configuration.legend.color.barWidth) {
+			const title = Tools.getProperty(
+				this.getOptions(),
+				'legend',
+				'colorLegend',
+				'title'
 			);
 
-			if (title) {
-				const {
-					width: textWidth,
-				} = DOMUtils.getSVGElementSize(
-					svg.select('g.legend-title').select('text'),
-					{ useBBox: true }
+			const { cartesianScales } = this.services;
+			// Get available chart area
+			const mainXScale = cartesianScales.getMainXScale();
+
+			const xDimensions = mainXScale.range();
+
+			// Align legend with the axis
+			if (xDimensions[0] > 1) {
+				svg.select('g.legend-rectangle').attr(
+					'transform',
+					`translate(${xDimensions[0]}, 0)`
 				);
 
-				// -9 since LEFT y-axis labels are moved towards the left by 9
-				const availableSpace = xDimensions[0] - textWidth - 9;
-
-				// If space is available align the the label with the axis labels
-				if (availableSpace > 1) {
-					svg.select('g.legend-title').attr(
-						'transform',
-						`translate(${availableSpace}, 0)`
-					);
-				} else {
-					// Move the legend down by 16 pixels to display legend text on top
-					svg.select('g.legend-rectangle').attr(
-						'transform',
-						`translate(${xDimensions[0]}, 16)`
+				if (title) {
+					const {
+						width: textWidth,
+					} = DOMUtils.getSVGElementSize(
+						svg.select('g.legend-title').select('text'),
+						{ useBBox: true }
 					);
 
-					// Align legend title with start of axis
-					svg.select('g.legend-title').attr(
-						'transform',
-						`translate(${xDimensions[0]}, 0)`
-					);
+					// -9 since LEFT y-axis labels are moved towards the left by 9 by d3
+					const availableSpace = xDimensions[0] - textWidth - 9;
+
+					// If space is available align the the label with the axis labels
+					if (availableSpace > 1) {
+						svg.select('g.legend-title').attr(
+							'transform',
+							`translate(${availableSpace}, 0)`
+						);
+					} else {
+						// Move the legend down by 16 pixels to display legend text on top
+						svg.select('g.legend-rectangle').attr(
+							'transform',
+							`translate(${xDimensions[0]}, 16)`
+						);
+
+						// Align legend title with start of axis
+						svg.select('g.legend-title').attr(
+							'transform',
+							`translate(${xDimensions[0]}, 0)`
+						);
+					}
 				}
 			}
 		}
 	};
 
-	render() {
+	render(animate = false) {
 		const options = this.getOptions();
 
 		const customColors = Tools.getProperty(
@@ -124,12 +128,27 @@ export class ColorScaleLegend extends Legend {
 		svg.html('').attr('role', Roles.GROUP);
 		const group = svg.append('g').classed('legend-rectangle', true);
 
+		const { width } = DOMUtils.getSVGElementSize(svg, {
+			useAttrs: true,
+		});
+
+		let barWidth = Configuration.legend.color.barWidth;
+		if (width <= Configuration.legend.color.barWidth) {
+			barWidth = width;
+		}
+
 		if (title) {
 			svg.append('g')
 				.classed('legend-title', true)
 				.append('text')
 				.text(title)
 				.attr('dy', '0.7em');
+
+			// Move the legend down by 16 pixels to display legend text on top
+			svg.select('g.legend-rectangle').attr(
+				'transform',
+				`translate(0, 16)`
+			);
 		}
 
 		// If domain consists of negative and positive values, use diverging palettes
@@ -186,14 +205,14 @@ export class ColorScaleLegend extends Legend {
 			// Create the legend container
 			const rectangle = group
 				.append('rect')
-				.attr('width', Configuration.legend.color.barWidth)
+				.attr('width', barWidth)
 				.attr('height', Configuration.legend.color.barHeight)
 				.style('fill', `url(#${this.gradient_id}-legend)`);
 
 			// Create scale & ticks
 			const linearScale = scaleLinear()
 				.domain(domain)
-				.range([0, Configuration.legend.color.barWidth]);
+				.range([0, barWidth]);
 			domain.splice(1, 0, (domain[0] + domain[1]) / 2);
 
 			const xAxis = axisBottom(linearScale)
@@ -203,6 +222,7 @@ export class ColorScaleLegend extends Legend {
 			// Align axes at the bottom of the rectangle and delete the domain line
 			const axis = group
 				.append('g')
+				.classed('legend-axis', true)
 				.attr(
 					'transform',
 					`translate(0,${Configuration.legend.color.axisYTranslation})`
@@ -219,8 +239,6 @@ export class ColorScaleLegend extends Legend {
 			const interpolator = interpolateRound(domain[0], domain[1]);
 			const quant = quantize(interpolator, colorPairing.length);
 
-			// Remove white if divergent is used
-			const other = colorPairing;
 			// If divergent && non-custom color, remove 0/white from being displayed
 			if (!customColorsEnabled && colorScheme === 'diverge') {
 				colorPairing.splice(colorPairing.length / 2, 1);
@@ -228,7 +246,7 @@ export class ColorScaleLegend extends Legend {
 
 			const colorScaleBand = scaleBand()
 				.domain(colorPairing)
-				.rangeRound([0, Configuration.legend.color.barWidth]);
+				.rangeRound([0, barWidth]);
 
 			const rectangle = group
 				.selectAll('rect')
@@ -275,10 +293,7 @@ export class ColorScaleLegend extends Legend {
 
 			const firstTick = legendAxis.select('g.tick').clone(true);
 			firstTick
-				.attr(
-					'transform',
-					`translate(${Configuration.legend.color.barWidth}, 0)`
-				)
+				.attr('transform', `translate(${barWidth}, 0)`)
 				.classed('final-tick', true)
 				.select('text')
 				.text(quant[quant.length - 1]);
@@ -288,6 +303,16 @@ export class ColorScaleLegend extends Legend {
 			legendAxis.select('.domain').remove();
 		} else {
 			throw Error('Entered color legend type is not supported.');
+		}
+
+		// Translate last axis tick if barWidth equals chart width
+		if (width <= Configuration.legend.color.barWidth) {
+			const legend = svg.select('g.legend-axis');
+			const lastTick = legend.select('g.tick:last-of-type text');
+			const { width } = DOMUtils.getSVGElementSize(lastTick, {
+				useBBox: true,
+			});
+			lastTick.attr('x', `-${width}`);
 		}
 	}
 
