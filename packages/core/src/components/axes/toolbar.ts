@@ -94,12 +94,8 @@ export class Toolbar extends Component {
 			const self = this;
 			const allToolbarControls = enteringToolbarControls
 				.merge(toolbarControls)
-				.classed('disabled', (d) =>
-					d.shouldBeDisabled ? d.shouldBeDisabled() : false
-				)
-				.attr('aria-disabled', (d) =>
-					d.shouldBeDisabled ? d.shouldBeDisabled() : false
-				)
+				.classed('disabled', (d) => d.shouldBeDisabled())
+				.attr('aria-disabled', (d) => d.shouldBeDisabled())
 				.attr('aria-label', (d) => d.title)
 				.html(
 					(d) => `
@@ -124,19 +120,7 @@ export class Toolbar extends Component {
 						.select('button')
 						.on('click', (event) => {
 							if (!d.shouldBeDisabled()) {
-								// Dispatch click event
-								self.services.events.dispatchEvent(
-									Events.Toolbar.BUTTON_CLICK,
-									{
-										event,
-										element: d,
-									}
-								);
-
-								// call the specified function if it exists
-								if (typeof d.clickFunction === 'function') {
-									d.clickFunction(event);
-								}
+								self.triggerFunctionAndEvent(d, event, this);
 							}
 						})
 						.on('keydown', (event: KeyboardEvent) => {
@@ -145,20 +129,7 @@ export class Toolbar extends Component {
 								event.key === ' '
 							) {
 								event.preventDefault();
-
-								// Dispatch click event
-								self.services.events.dispatchEvent(
-									Events.Toolbar.BUTTON_CLICK,
-									{
-										event,
-										element: d,
-									}
-								);
-
-								// call the specified function if it exists
-								if (typeof d.clickFunction === 'function') {
-									d.clickFunction(event);
-								}
+								self.triggerFunctionAndEvent(d, event, this);
 							} else if (event.key && event.key === 'ArrowLeft') {
 								self.focusOnPreviousEnabledToolbarItem(index);
 							} else if (
@@ -208,11 +179,9 @@ export class Toolbar extends Component {
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
 			.classed('bx--overflow-menu-options__option--disabled', (d) =>
-				d.shouldBeDisabled ? d.shouldBeDisabled() : false
+				d.shouldBeDisabled()
 			)
-			.attr('aria-disabled', (d) =>
-				d.shouldBeDisabled ? d.shouldBeDisabled() : false
-			)
+			.attr('aria-disabled', (d) => d.shouldBeDisabled())
 			.selectAll('button')
 			.text((d) => d.text);
 	}
@@ -370,19 +339,11 @@ export class Toolbar extends Component {
 				);
 				if (element !== null) {
 					element.on('click', () => {
-						// dispatch click event
-						self.services.events.dispatchEvent(
-							Events.Toolbar.BUTTON_CLICK,
-							{
-								event,
-								element: menuItem,
-							}
+						self.triggerFunctionAndEvent(
+							menuItem,
+							event,
+							element.node()
 						);
-
-						// call the specified function if it exists
-						if (typeof menuItem.clickFunction === 'function') {
-							menuItem.clickFunction(event);
-						}
 
 						// hide overflow menu
 						self.updateOverflowMenu(false);
@@ -390,19 +351,11 @@ export class Toolbar extends Component {
 
 					element.on('keydown', (keyEvent: KeyboardEvent) => {
 						if (keyEvent && keyEvent.key === 'Enter') {
-							// dispatch click event
-							self.services.events.dispatchEvent(
-								Events.Toolbar.BUTTON_CLICK,
-								{
-									event,
-									element: menuItem,
-								}
+							self.triggerFunctionAndEvent(
+								menuItem,
+								event,
+								element.node()
 							);
-
-							// call the specified function if it exists
-							if (typeof menuItem.clickFunction === 'function') {
-								menuItem.clickFunction(event);
-							}
 						} else if (keyEvent && keyEvent.key === 'ArrowUp') {
 							// focus on previous menu item
 							self.focusOnPreviousEnabledMenuItem(index);
@@ -430,6 +383,21 @@ export class Toolbar extends Component {
 		}
 	}
 
+	// Calls passed function && dispatches event
+	triggerFunctionAndEvent(control, event, element?) {
+		// Call custom function only if it exists
+		if (typeof control.clickFunction === 'function') {
+			control.clickFunction(event);
+		}
+
+		// Dispatch selection event
+		this.services.events.dispatchEvent(Events.Toolbar.BUTTON_CLICK, {
+			control,
+			event,
+			element,
+		});
+	}
+
 	getControlConfigs() {
 		const numberOfIcons =
 			Tools.getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') -
@@ -444,8 +412,6 @@ export class Toolbar extends Component {
 		const buttonList = [];
 		const overflowList = [];
 
-		let displayIcons = true;
-
 		controls.forEach((control) => {
 			let controlConfig = null;
 			// check if button is custom or default control
@@ -453,8 +419,7 @@ export class Toolbar extends Component {
 				// add generic id if missing
 				if (Tools.getProperty(control, 'id') === null) {
 					// add id directly to the data passed so that id isn't reassigned on rerender
-					control.id = `toolbar-button-${Toolbar.buttonID}`;
-					Toolbar.buttonID++;
+					control.id = `toolbar-button-${Toolbar.buttonID++}`;
 				}
 				// define function if missing
 				if (Tools.getProperty(control, 'shouldBeDisabled') === null) {
@@ -472,10 +437,8 @@ export class Toolbar extends Component {
 
 				if (controlConfig.id.indexOf('toolbar-export') !== -1) {
 					overflowSpecificControls.push(controlConfig);
-				} else if (buttonList.length < numberOfIcons && displayIcons) {
-					// check if icon exists
-					// if button does not exist, all of the preceding items will be added to overflow menu
-					// this will ensure users use correct order & fill in any missing data
+				} else if (buttonList.length < numberOfIcons) {
+					// check if icon exists else assign to the overflow list
 					if (
 						Tools.getProperty(
 							controlConfig,
@@ -483,7 +446,6 @@ export class Toolbar extends Component {
 							'content'
 						) === null
 					) {
-						displayIcons = false;
 						overflowList.push(controlConfig);
 					} else {
 						buttonList.push(controlConfig);
@@ -494,7 +456,7 @@ export class Toolbar extends Component {
 			}
 		});
 
-		// Ensures exports are always at the bottom
+		// Ensures the `export` controls are always at the bottom
 		overflowList.push(...overflowSpecificControls);
 
 		if (!overflowList.length) {
