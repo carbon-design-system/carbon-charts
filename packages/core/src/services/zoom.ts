@@ -67,11 +67,21 @@ export class Zoom extends Service {
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 
-		// default to full range with extended domain
-		return cartesianScales.extendsDomain(
+		const customDomain = Tools.getProperty(
+			this.model.getOptions(),
+			'axes',
 			mainXAxisPosition,
-			extent(allZoomBarData, (d: any) => d[domainIdentifier])
+			'domain'
 		);
+
+		// Return custom domain if defined
+		// default to full range with extended domain
+		return customDomain
+			? customDomain
+			: cartesianScales.extendsDomain(
+					mainXAxisPosition,
+					extent(allZoomBarData, (d: any) => d[domainIdentifier])
+			  );
 	}
 
 	handleDomainChange(newDomain, configs = { dispatchEvent: true }) {
