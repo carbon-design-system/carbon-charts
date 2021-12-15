@@ -74,14 +74,16 @@ export class Zoom extends Service {
 			'domain'
 		);
 
-		// Return custom domain if defined
+		// return custom domain if exists && valid
+		if (Array.isArray(customDomain) && customDomain.length === 2) {
+			return customDomain;
+		}
+
 		// default to full range with extended domain
-		return customDomain
-			? customDomain
-			: cartesianScales.extendsDomain(
-					mainXAxisPosition,
-					extent(allZoomBarData, (d: any) => d[domainIdentifier])
-			  );
+		return cartesianScales.extendsDomain(
+			mainXAxisPosition,
+			extent(allZoomBarData, (d: any) => d[domainIdentifier])
+		);
 	}
 
 	handleDomainChange(newDomain, configs = { dispatchEvent: true }) {
