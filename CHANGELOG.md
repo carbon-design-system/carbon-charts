@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.4...v0.53.5) (2021-12-15)
+
+
+### Bug Fixes
+
+* **core:** use domain in zoom bar if defined in axes ([#1243](https://github.com/carbon-design-system/carbon-charts/issues/1243)) ([b265676](https://github.com/carbon-design-system/carbon-charts/commit/b2656764758d5b339987a59a2be344d0e94df4c2)), closes [#1228](https://github.com/carbon-design-system/carbon-charts/issues/1228)
+
+
+
+
+
 ## [0.53.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.3...v0.53.4) (2021-12-13)
 
 
