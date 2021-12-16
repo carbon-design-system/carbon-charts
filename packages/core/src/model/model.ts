@@ -299,7 +299,9 @@ export class ChartModel {
 		}));
 	}
 
-	getStackKeys({ bins = null, groups = null }) {
+	getStackKeys(
+		{ bins = null, groups = null } = { bins: null, groups: null }
+	) {
 		const options = this.getOptions();
 
 		const displayData = this.getDisplayData(groups);

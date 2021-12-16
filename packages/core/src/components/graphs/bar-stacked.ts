@@ -304,7 +304,7 @@ export class StackedBar extends Bar {
 			useAttrs: true,
 		}).width;
 	
-		const numberOfDomainValues = this.model.getStackKeys({}).length;
+		const numberOfDomainValues = this.model.getStackKeys().length;
 	
 		if (!mainXScale.step) {
 			return Math.min(
