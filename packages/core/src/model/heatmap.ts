@@ -9,7 +9,7 @@ import { scaleQuantize } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
-	protected axisFlavour = AxisFlavor.HOVER;
+	protected axisFlavor = AxisFlavor.HOVER;
 	private _colorScale: any = undefined;
 
 	// List of unique ranges and domains

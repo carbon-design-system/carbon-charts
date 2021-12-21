@@ -10,7 +10,7 @@ import { format } from 'date-fns';
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
  * */
 export class ChartModelCartesian extends ChartModel {
-	protected axisFlavour = AxisFlavor.DEFAULT;
+	protected axisFlavor = AxisFlavor.DEFAULT;
 
 	constructor(services: any) {
 		super(services);
