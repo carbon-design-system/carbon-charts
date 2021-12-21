@@ -8,6 +8,9 @@
 			fill: $ui-background;
 		}
 	}
+	rect.chart-grid-backdrop.noFillColor {
+		fill: none !important;
+	}
 	rect.chart-grid-backdrop.stroked {
 		stroke: $ui-03;
 	}

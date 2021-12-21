@@ -118,6 +118,10 @@ export interface GridOptions {
 		numberOfTicks?: number;
 		alignWithAxisTicks?: boolean;
 	};
+	/**
+	 * has rect fill color or not
+	 */
+	hasFillColor?: boolean;
 }
 
 /**

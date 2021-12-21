@@ -93,6 +93,7 @@ export const grid: GridOptions = {
 		numberOfTicks: 5,
 		alignWithAxisTicks: false,
 	},
+	hasFillColor: true,
 };
 
 /**

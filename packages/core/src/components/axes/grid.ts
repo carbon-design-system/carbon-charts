@@ -29,8 +29,16 @@ export class Grid extends Component {
 			'enabled'
 		);
 
+		const hasFillColor = Tools.getProperty(
+			this.getOptions(),
+			'grid',
+			'hasFillColor'
+		);
+
+		console.log('!!! hasfillColor: ', hasFillColor);
+
 		// Draw the backdrop
-		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled, hasFillColor);
 
 		if (!isXGridEnabled && !isYGridEnabled) {
 			return;
@@ -272,7 +280,7 @@ export class Grid extends Component {
 		return xGridlines;
 	}
 
-	drawBackdrop(isXGridEnabled, isYGridEnabled) {
+	drawBackdrop(isXGridEnabled, isYGridEnabled, hasFillColor) {
 		const svg = this.parent;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
@@ -287,7 +295,7 @@ export class Grid extends Component {
 			this.backdrop,
 			isXGridEnabled || isYGridEnabled
 				? 'rect.chart-grid-backdrop.stroked'
-				: 'rect.chart-grid-backdrop'
+				: hasFillColor? 'rect.chart-grid-backdrop' : 'rect.chart-grid-backdrop.noFillColor'
 		);
 
 		this.backdrop

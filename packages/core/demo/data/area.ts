@@ -138,6 +138,7 @@ export const sparklineOptions = {
 		y: {
 			enabled: false,
 		},
+		hasFillColor: false,
 	},
 	axes: {
 		bottom: {
