@@ -45,7 +45,6 @@ export * from './layout/layout';
 
 // MISC
 export * from './axes/two-dimensional-axes';
-export * from './axes/two-dimensional-hover-axes';
 export * from './axes/axis';
 export * from './axes/grid-brush';
 export * from './axes/chart-clip';

@@ -260,10 +260,18 @@ export enum ColorLegendType {
 }
 
 /**
- * enum of axis ticks rotation
+ * enum of divider status for heatmap
  */
 export enum DividerStatus {
 	ON = 'on',
 	AUTO = 'auto',
 	OFF = 'off',
+}
+
+/**
+ * enum of axis flavor
+ */
+export enum AxisFlavor {
+	DEFAULT = 'default',
+	HOVER = 'hover',
 }

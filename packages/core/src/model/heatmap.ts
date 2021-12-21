@@ -1,5 +1,5 @@
 // Internal Imports
-import { ScaleTypes } from '../interfaces';
+import { AxisFlavor, ScaleTypes } from '../interfaces';
 import { ChartModelCartesian } from './cartesian-charts';
 import { Tools } from '../tools';
 
@@ -9,7 +9,7 @@ import { scaleQuantize } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
-	selectedPalette = [];
+	protected axisFlavour = AxisFlavor.HOVER;
 	private _colorScale: any = undefined;
 
 	// List of unique ranges and domains
@@ -318,7 +318,6 @@ export class HeatmapModel extends ChartModelCartesian {
 		}
 
 		// Save scale type
-		this.selectedPalette = colorPairing;
 		this._colorScale = scaleQuantize()
 			.domain(this.getValueDomain() as [number, number])
 			.range(colorPairing);

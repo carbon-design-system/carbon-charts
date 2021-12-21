@@ -50,7 +50,7 @@ export class ColorScaleLegend extends Legend {
 
 			// Align legend with the axis
 			if (xDimensions[0] > 1) {
-				svg.select('g.legend-rectangle').attr(
+				svg.select('g.legend').attr(
 					'transform',
 					`translate(${xDimensions[0]}, 0)`
 				);
@@ -74,7 +74,7 @@ export class ColorScaleLegend extends Legend {
 						);
 					} else {
 						// Move the legend down by 16 pixels to display legend text on top
-						svg.select('g.legend-rectangle').attr(
+						svg.select('g.legend').attr(
 							'transform',
 							`translate(${xDimensions[0]}, 16)`
 						);
@@ -125,8 +125,8 @@ export class ColorScaleLegend extends Legend {
 		const domain = this.model.getValueDomain();
 
 		const svg = this.getComponentContainer();
-		svg.html('').attr('role', Roles.GROUP);
-		const group = svg.append('g').classed('legend-rectangle', true);
+		const legend = DOMUtils.appendOrSelect(svg, 'g.legend');
+		const axis = DOMUtils.appendOrSelect(legend, 'g.legend-axis');
 
 		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true,
@@ -138,17 +138,18 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		if (title) {
-			svg.append('g')
-				.classed('legend-title', true)
-				.append('text')
-				.text(title)
-				.attr('dy', '0.7em');
+			const legendTitleGroup = DOMUtils.appendOrSelect(
+				svg,
+				'g.legend-title'
+			);
+			const legendTitle = DOMUtils.appendOrSelect(
+				legendTitleGroup,
+				'text'
+			);
+			legendTitle.text(title).attr('dy', '0.7em');
 
 			// Move the legend down by 16 pixels to display legend text on top
-			svg.select('g.legend-rectangle').attr(
-				'transform',
-				`translate(0, 16)`
-			);
+			legend.attr('transform', `translate(0, 16)`);
 		}
 
 		// If domain consists of negative and positive values, use diverging palettes
@@ -191,8 +192,11 @@ export class ColorScaleLegend extends Legend {
 			const stopLengthPercentage = 100 / (colorPairing.length - 1);
 
 			// Generate the gradient
-			const linearGradient = group
-				.append('linearGradient')
+			const linearGradient = DOMUtils.appendOrSelect(
+				legend,
+				'linearGradient'
+			);
+			linearGradient
 				.attr('id', `${this.gradient_id}-legend`)
 				.selectAll('stop')
 				.data(colorPairing)
@@ -203,8 +207,8 @@ export class ColorScaleLegend extends Legend {
 				.attr('stop-color', (d) => d);
 
 			// Create the legend container
-			const rectangle = group
-				.append('rect')
+			const rectangle = DOMUtils.appendOrSelect(legend, 'rect');
+			rectangle
 				.attr('width', barWidth)
 				.attr('height', Configuration.legend.color.barHeight)
 				.style('fill', `url(#${this.gradient_id}-legend)`);
@@ -220,14 +224,10 @@ export class ColorScaleLegend extends Legend {
 				.tickValues(domain);
 
 			// Align axes at the bottom of the rectangle and delete the domain line
-			const axis = group
-				.append('g')
-				.classed('legend-axis', true)
-				.attr(
-					'transform',
-					`translate(0,${Configuration.legend.color.axisYTranslation})`
-				)
-				.call(xAxis);
+			axis.attr(
+				'transform',
+				`translate(0,${Configuration.legend.color.axisYTranslation})`
+			).call(xAxis);
 
 			// Remove domain
 			axis.select('.domain').remove();
@@ -246,15 +246,21 @@ export class ColorScaleLegend extends Legend {
 
 			const colorScaleBand = scaleBand()
 				.domain(colorPairing)
-				.rangeRound([0, barWidth]);
+				.range([0, barWidth]);
 
-			const rectangle = group
+			// Render the quantized rectangles
+			const rectangle = DOMUtils.appendOrSelect(
+				legend,
+				'g.quantized-rect'
+			);
+
+			rectangle
 				.selectAll('rect')
 				.data(colorScaleBand.domain())
 				.join('rect')
-				.attr('x', colorScaleBand)
+				.attr('x', (d) => colorScaleBand(d))
 				.attr('y', 0)
-				.attr('width', Math.max(0, colorScaleBand.bandwidth() - 1))
+				.attr('width', Math.max(0, colorScaleBand.bandwidth()) - 1)
 				.attr('height', Configuration.legend.color.barHeight)
 				.attr('class', (d) => d)
 				.attr('fill', (d) => d);
@@ -276,39 +282,41 @@ export class ColorScaleLegend extends Legend {
 				});
 
 			// Align axis to match bandwidth start after initial (white)
-			const legendAxis = group
-				.append('g')
-				.classed('legend-axis', true)
+			const axisTranslation = colorScaleBand.bandwidth() / 2;
+			axis.attr(
+				'transform',
+				`translate(${
+					!customColorsEnabled && colorScheme === 'diverge' ? '-' : ''
+				}${axisTranslation}, ${
+					Configuration.legend.color.axisYTranslation
+				})`
+			).call(xAxis);
+
+			// Append the last tick
+			const firstTick = axis.select('g.tick').clone(true);
+			firstTick
 				.attr(
 					'transform',
 					`translate(${
-						!customColorsEnabled && colorScheme === 'diverge'
-							? '-'
-							: ''
-					}${colorScaleBand.bandwidth() / 2}, ${
-						Configuration.legend.color.axisYTranslation
-					})`
+						barWidth +
+						(!customColorsEnabled && colorScheme === 'diverge'
+							? axisTranslation
+							: -axisTranslation)
+					}, 0)`
 				)
-				.call(xAxis);
-
-			const firstTick = legendAxis.select('g.tick').clone(true);
-			firstTick
-				.attr('transform', `translate(${barWidth}, 0)`)
 				.classed('final-tick', true)
 				.select('text')
 				.text(quant[quant.length - 1]);
 
-			legendAxis.enter().append(firstTick.node()).raise();
-
-			legendAxis.select('.domain').remove();
+			axis.enter().append(firstTick.node());
+			axis.select('.domain').remove();
 		} else {
 			throw Error('Entered color legend type is not supported.');
 		}
 
 		// Translate last axis tick if barWidth equals chart width
 		if (width <= Configuration.legend.color.barWidth) {
-			const legend = svg.select('g.legend-axis');
-			const lastTick = legend.select('g.tick:last-of-type text');
+			const lastTick = axis.select('g.tick:last-of-type text');
 			const { width } = DOMUtils.getSVGElementSize(lastTick, {
 				useBBox: true,
 			});

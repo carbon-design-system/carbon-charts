@@ -54,43 +54,17 @@
 		stroke-width: 0px;
 	}
 
-	@if $carbon--theme == $carbon--theme--white {
-		rect.heat {
-			stroke: #ffffff;
-		}
-
-		rect.null-state {
-			fill: #f4f4f4;
-		}
+	rect.heat {
+		stroke: $ui-background;
 	}
 
-	@if $carbon--theme == $carbon--theme--g10 {
-		rect.heat {
-			stroke: #f4f4f4;
-		}
-
-		rect.null-state {
-			fill: #ffffff;
-		}
+	rect.null-state {
+		fill: $ui-01;
 	}
 
 	@if $carbon--theme == $carbon--theme--g90 {
-		rect.heat {
-			stroke: #262626;
-		}
-
 		rect.null-state {
-			fill: #161616;
-		}
-	}
-
-	@if $carbon--theme == $carbon--theme--g100 {
-		rect.heat {
-			stroke: #161616;
-		}
-
-		rect.null-state {
-			fill: #262626;
+			fill: $inverse-01;
 		}
 	}
 }
