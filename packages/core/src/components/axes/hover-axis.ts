@@ -16,6 +16,7 @@ export class HoverAxis extends Axis {
 
 	render(animate = true) {
 		super.render(animate);
+
 		// Remove existing event listeners to avoid flashing behavior
 		super.destroy();
 		const { position: axisPosition } = this.configs;
