@@ -19,6 +19,7 @@ export class HoverAxis extends Axis {
 
 		// Remove existing event listeners to avoid flashing behavior
 		super.destroy();
+
 		const { position: axisPosition } = this.configs;
 		const svg = this.getComponentContainer();
 		const container = DOMUtils.appendOrSelect(
