@@ -34,7 +34,13 @@ export class ColorScaleLegend extends Legend {
 			useAttrs: true,
 		});
 
-		if (width > Configuration.legend.color.barWidth) {
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			'data',
+			'loading'
+		);
+
+		if (width > Configuration.legend.color.barWidth && !isDataLoading) {
 			const title = Tools.getProperty(
 				this.getOptions(),
 				'legend',
@@ -125,6 +131,19 @@ export class ColorScaleLegend extends Legend {
 		const domain = this.model.getValueDomain();
 
 		const svg = this.getComponentContainer();
+
+		// Clear DOM if loading
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			'data',
+			'loading'
+		);
+
+		if (isDataLoading) {
+			svg.html('');
+			return;
+		}
+
 		const legend = DOMUtils.appendOrSelect(svg, 'g.legend');
 		const axis = DOMUtils.appendOrSelect(legend, 'g.legend-axis');
 

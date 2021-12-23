@@ -9,7 +9,7 @@ import { scaleQuantize } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
-	protected axisFlavor = AxisFlavor.HOVER;
+	protected axisFlavor = AxisFlavor.HOVERABLE;
 	private _colorScale: any = undefined;
 
 	// List of unique ranges and domains
@@ -169,17 +169,19 @@ export class HeatmapModel extends ChartModelCartesian {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-			// Create matrix (domain by range) and initalize it's values to null
+			// Create a column
+			const range = {};
+			uniqueRange.forEach((ran: any) => {
+				// Initialize matrix to empty state
+				range[ran] = {
+					value: null,
+					index: -1,
+				};
+			});
+
+			// Complete the matrix by cloning the column to all domains
 			uniqueDomain.forEach((dom: any) => {
-				const range = {};
-				// Data will be set to null by default, to signify 'missing'
-				uniqueRange.forEach((element: any) => {
-					range[element] = {
-						value: null,
-						index: -1,
-					};
-				});
-				this._matrix[dom] = range;
+				this._matrix[dom] = Tools.clone(range);
 			});
 
 			// Fill in user passed data
@@ -192,6 +194,27 @@ export class HeatmapModel extends ChartModelCartesian {
 		}
 
 		return this._matrix;
+	}
+
+	/**
+	 *
+	 * @param newData The new raw data to be set
+	 */
+	setData(newData) {
+		const sanitizedData = this.sanitize(Tools.clone(newData));
+		const dataGroups = this.generateDataGroups(sanitizedData);
+
+		this.set({
+			data: sanitizedData,
+			dataGroups,
+		});
+
+		// Set attributes to empty
+		this._domains = [];
+		this._ranges = [];
+		this._matrix = {};
+
+		return sanitizedData;
 	}
 
 	/**

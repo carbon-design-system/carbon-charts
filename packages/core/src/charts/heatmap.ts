@@ -51,7 +51,10 @@ export class HeatmapChart extends AxisChart {
 
 	// Custom getChartComponents - Implements getChartComponents
 	// Removes zoombar support and additional `features` that are not supported in heatmap
-	private getChartComponentsList(graphFrameComponents: any[], configs?: any) {
+	protected getAxisChartComponents(
+		graphFrameComponents: any[],
+		configs?: any
+	) {
 		const options = this.model.getOptions();
 		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled');
 
@@ -180,7 +183,7 @@ export class HeatmapChart extends AxisChart {
 			new Heatmap(this.model, this.services),
 		];
 
-		const components: any[] = this.getChartComponentsList(
+		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
 		return components;

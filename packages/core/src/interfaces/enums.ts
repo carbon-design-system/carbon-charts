@@ -273,5 +273,5 @@ export enum DividerStatus {
  */
 export enum AxisFlavor {
 	DEFAULT = 'default',
-	HOVER = 'hover',
+	HOVERABLE = 'hoverable',
 }

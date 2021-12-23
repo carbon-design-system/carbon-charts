@@ -61,6 +61,10 @@ export class Heatmap extends Component {
 
 		svg.html('');
 
+		if (Tools.getProperty(this.getOptions(), 'data', 'loading')) {
+			return;
+		}
+
 		// determine x and y axis scale
 		const mainXScale = cartesianScales.getMainXScale();
 		const mainYScale = cartesianScales.getMainYScale();
