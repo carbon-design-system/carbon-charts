@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.5...v0.54.0) (2021-12-24)
+
+
+### Features
+
+* **core:** create heatmap chart  ([#1200](https://github.com/carbon-design-system/carbon-charts/issues/1200)) ([a55be0f](https://github.com/carbon-design-system/carbon-charts/commit/a55be0fcec6020b609ab18b2224562aaa9775321))
+
+
+
+
+
 ## [0.53.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.4...v0.53.5) (2021-12-15)
 
 **Note:** Version bump only for package @carbon/charts-svelte
