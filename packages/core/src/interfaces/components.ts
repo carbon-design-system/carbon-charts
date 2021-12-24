@@ -45,18 +45,6 @@ export interface LegendOptions {
 	 * customized legend items
 	 */
 	additionalItems?: LegendItem[];
-	/**
-	 * customize color legend
-	 * enabled by default on select charts
-	 */
-	colorLegend?: {
-		/**
-		 * Text to display beside or on top of the legend
-		 * Position is determined by text length
-		 */
-		title?: string;
-		type: ColorLegendType;
-	};
 }
 
 /**

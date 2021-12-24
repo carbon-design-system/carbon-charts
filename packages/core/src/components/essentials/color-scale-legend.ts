@@ -43,7 +43,7 @@ export class ColorScaleLegend extends Legend {
 		if (width > Configuration.legend.color.barWidth && !isDataLoading) {
 			const title = Tools.getProperty(
 				this.getOptions(),
-				'legend',
+				'heatmap',
 				'colorLegend',
 				'title'
 			);
@@ -108,7 +108,7 @@ export class ColorScaleLegend extends Legend {
 
 		const colorScaleType = Tools.getProperty(
 			options,
-			'legend',
+			'heatmap',
 			'colorLegend',
 			'type'
 		);
@@ -122,7 +122,7 @@ export class ColorScaleLegend extends Legend {
 
 		const title = Tools.getProperty(
 			options,
-			'legend',
+			'heatmap',
 			'colorLegend',
 			'title'
 		);

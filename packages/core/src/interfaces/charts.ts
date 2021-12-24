@@ -6,6 +6,7 @@ import {
 	ChartTypes,
 	TreeTypes,
 	DividerStatus,
+	ColorLegendType,
 } from './enums';
 import {
 	LegendOptions,
@@ -530,6 +531,18 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		 */
 		divider?: {
 			state?: DividerStatus;
+		};
+		/**
+		 * customize color legend
+		 * enabled by default on select charts
+		 */
+		colorLegend?: {
+			/**
+			 * Text to display beside or on top of the legend
+			 * Position is determined by text length
+			 */
+			title?: string;
+			type: ColorLegendType;
 		};
 	};
 }
