@@ -5,6 +5,8 @@ import {
 	Alignments,
 	ChartTypes,
 	TreeTypes,
+	DividerStatus,
+	ColorLegendType,
 } from './enums';
 import {
 	LegendOptions,
@@ -137,7 +139,14 @@ export interface BaseChartOptions {
 		 * options related to gradient
 		 * e.g. { enabled: true }
 		 */
-		gradient?: object;
+		gradient?: {
+			enabled?: boolean;
+			/**
+			 * hex color array
+			 * e.g. ['#fff', '#000', ...]
+			 */
+			colors?: Array<String>;
+		};
 	};
 }
 
@@ -508,5 +517,32 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 		 * Enable single color usage for lines
 		 */
 		monochrome?: boolean;
+	};
+}
+
+/**
+ * options specific to Heatmap charts
+ */
+export interface HeatmapChartOptions extends BaseChartOptions {
+	heatmap: {
+		/**
+		 * Divider width state - will default to auto
+		 * No cell divider for cell dimensions less than 16
+		 */
+		divider?: {
+			state?: DividerStatus;
+		};
+		/**
+		 * customize color legend
+		 * enabled by default on select charts
+		 */
+		colorLegend?: {
+			/**
+			 * Text to display beside or on top of the legend
+			 * Position is determined by text length
+			 */
+			title?: string;
+			type: ColorLegendType;
+		};
 	};
 }

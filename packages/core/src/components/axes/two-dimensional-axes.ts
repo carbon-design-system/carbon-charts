@@ -1,16 +1,12 @@
 // Internal Imports
 import { Component } from '../component';
-import {
-	AxisPositions,
-	ScaleTypes,
-	AxesOptions,
-	RenderTypes,
-} from '../../interfaces';
+import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces';
 import { Axis } from './axis';
 import { Tools } from '../../tools';
 import { DOMUtils } from '../../services';
 import { Threshold } from '../essentials/threshold';
 import { Events } from './../../interfaces';
+import { HoverAxis } from './hover-axis';
 
 export class TwoDimensionalAxes extends Component {
 	type = '2D-axes';
@@ -48,11 +44,16 @@ export class TwoDimensionalAxes extends Component {
 				this.configs.axes[axisPosition] &&
 				!this.children[axisPosition]
 			) {
-				const axisComponent = new Axis(this.model, this.services, {
+				const configs = {
 					position: axisPosition,
 					axes: this.configs.axes,
 					margins: this.margins,
-				});
+				};
+
+				const axisComponent =
+					this.model.axisFlavor === AxisFlavor.DEFAULT
+						? new Axis(this.model, this.services, configs)
+						: new HoverAxis(this.model, this.services, configs);
 
 				// Set model, services & parent for the new axis component
 				axisComponent.setModel(this.model);
@@ -116,6 +117,8 @@ export class TwoDimensionalAxes extends Component {
 					break;
 			}
 		});
+
+		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE);
 
 		// If the new margins are different than the existing ones
 		const isNotEqual = Object.keys(margins).some((marginKey) => {

@@ -252,3 +252,28 @@ export enum LegendItemType {
 	QUARTILE = 'quartile',
 	ZOOM = 'zoom',
 }
+
+/**
+ * enum of color legend types
+ */
+export enum ColorLegendType {
+	LINEAR = 'linear',
+	QUANTIZE = 'quantize',
+}
+
+/**
+ * enum of divider status for heatmap
+ */
+export enum DividerStatus {
+	ON = 'on',
+	AUTO = 'auto',
+	OFF = 'off',
+}
+
+/**
+ * enum of axis flavor
+ */
+export enum AxisFlavor {
+	DEFAULT = 'default',
+	HOVERABLE = 'hoverable',
+}

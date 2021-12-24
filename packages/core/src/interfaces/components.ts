@@ -4,6 +4,7 @@ import {
 	Alignments,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	ColorLegendType,
 } from './enums';
 import { Component } from '../components/component';
 import { TruncationOptions } from './truncation';

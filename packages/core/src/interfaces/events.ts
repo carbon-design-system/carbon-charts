@@ -66,6 +66,9 @@ export enum Axis {
 	LABEL_MOUSEMOVE = 'axis-label-mousemove',
 	LABEL_CLICK = 'axis-label-click',
 	LABEL_MOUSEOUT = 'axis-label-mouseout',
+	LABEL_FOCUS = 'axis-label-focus',
+	LABEL_BLUR = 'axis-label-blur',
+	RENDER_COMPLETE = 'axis-render-complete',
 }
 
 /**
@@ -240,4 +243,14 @@ export enum Meter {
 	METER_CLICK = 'meter-click',
 	METER_MOUSEOUT = 'meter-mouseout',
 	METER_MOUSEMOVE = 'meter-mousemove',
+}
+
+/**
+ * enum of all heatmap related events
+ */
+export enum Heatmap {
+	HEATMAP_MOUSEOVER = 'heatmap-mouseover',
+	HEATMAP_CLICK = 'heatmap-click',
+	HEATMAP_MOUSEOUT = 'heatmap-mouseout',
+	HEATMAP_MOUSEMOVE = 'hetmap-mousemove',
 }

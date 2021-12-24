@@ -25,6 +25,7 @@ import { TreeChartComponent } from './tree-chart.component';
 import { TreemapChartComponent } from './treemap-chart.component';
 import { CirclePackChartComponent } from './circle-pack-chart.component';
 import { WordCloudChartComponent } from './wordcloud-chart.component';
+import { HeatmapChartComponent } from './heatmap-chart.component';
 
 @NgModule({
 	imports: [CommonModule],
@@ -41,6 +42,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		BulletChartComponent,
 		DonutChartComponent,
 		GaugeChartComponent,
+		HeatmapChartComponent,
 		HistogramChartComponent,
 		LineChartComponent,
 		LollipopChartComponent,
@@ -67,6 +69,7 @@ import { WordCloudChartComponent } from './wordcloud-chart.component';
 		BulletChartComponent,
 		DonutChartComponent,
 		GaugeChartComponent,
+		HeatmapChartComponent,
 		HistogramChartComponent,
 		LineChartComponent,
 		LollipopChartComponent,

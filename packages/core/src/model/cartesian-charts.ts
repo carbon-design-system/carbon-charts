@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartModel } from './model';
 import { Tools } from '../tools';
-import { ScaleTypes, AxisPositions } from '../interfaces';
+import { ScaleTypes, AxisPositions, AxisFlavor } from '../interfaces';
 
 // date formatting
 import { format } from 'date-fns';
@@ -10,13 +10,15 @@ import { format } from 'date-fns';
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
  * */
 export class ChartModelCartesian extends ChartModel {
+	protected axisFlavor = AxisFlavor.DEFAULT;
+
 	constructor(services: any) {
 		super(services);
 	}
 
 	// get the scales information
 	// needed for getTabularArray()
-	private assignRangeAndDomains() {
+	protected assignRangeAndDomains() {
 		const { cartesianScales } = this.services;
 		const options = this.getOptions();
 		const isDualAxes = cartesianScales.isDualAxes();

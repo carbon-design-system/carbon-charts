@@ -20,6 +20,9 @@ export const axis = {
 		compareTo: 'marker',
 	},
 	paddingRatio: 0.1,
+	hover: {
+		rectanglePadding: 4,
+	},
 };
 
 export const canvasZoomSettings = {
@@ -130,6 +133,11 @@ export const legend = {
 		iconData: [{ x: 0, y: 0, width: 12, height: 12 }],
 		color: '#8D8D8D',
 	},
+	color: {
+		barWidth: 300,
+		barHeight: 8,
+		axisYTranslation: 10,
+	},
 };
 
 export const lines = {
@@ -203,6 +211,12 @@ export const alluvial = {
 		default: 0.8,
 		selected: 1,
 	},
+};
+
+export const heatmap = {
+	minCellDividerDimension: 16,
+	// Ensures axes lines are displayed with or without stroke disabled
+	chartPadding: 0.5,
 };
 
 export const spacers = {
