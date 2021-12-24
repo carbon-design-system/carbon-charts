@@ -615,9 +615,10 @@ export const heatmapOptions = {
 			scaleType: 'labels',
 		},
 	},
-	legend: {
+	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
+	experimental: true,
 };
 
 export const heatmapQuantizeLegendOption = {
@@ -634,9 +635,10 @@ export const heatmapQuantizeLegendOption = {
 			scaleType: 'labels',
 		},
 	},
-	legend: {
+	heatmap: {
 		colorLegend: { title: 'Legend title', type: 'quantize' },
 	},
+	experimental: true,
 };
 
 export const heatmapDomainOptions = {
@@ -667,9 +669,10 @@ export const heatmapDomainOptions = {
 			],
 		},
 	},
-	legend: {
+	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
+	experimental: true,
 };
 
 export const heatmapMissingData = [
@@ -1129,7 +1132,8 @@ export const heatmapMissingDataOptions = {
 			scaleType: 'labels',
 		},
 	},
-	legend: {
+	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
+	experimental: true,
 };
