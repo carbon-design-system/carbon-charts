@@ -3,8 +3,8 @@
 	"version": "0.54.0",
 	"description": "Carbon charting components for Svelte",
 	"type": "module",
-	"main": "./index.js",
-	"svelte": "./index.js",
+	"main": "./src/index.js",
+	"svelte": "./src/index.js",
 	"types": "./types/index.d.ts",
 	"scripts": {
 		"start": "yarn run storybook",
