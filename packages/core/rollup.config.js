@@ -9,7 +9,7 @@ export default {
 	input: './src/index.ts',
 	output: {
 		file: `./dist/bundle.js`,
-		format: 'umd',
+		format: 'cjs',
 		name: 'Charts',
 		globals: {
 			'd3-scale': 'd3Scale',
