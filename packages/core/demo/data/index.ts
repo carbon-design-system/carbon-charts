@@ -24,6 +24,7 @@ import * as zoomBarDemos from './zoom-bar';
 import * as highScaleDemos from './high-scale';
 import * as alluvialDemos from './alluvial';
 import * as highlightDemos from './hightlight';
+import * as heatmapDemos from './heatmap';
 
 export * from './area';
 export * from './bar';
@@ -49,6 +50,7 @@ export * from './wordcloud';
 export * from './zoom-bar';
 export * from './high-scale';
 export * from './alluvial';
+export * from './heatmap';
 
 import {
 	createChartSandbox,
@@ -1127,6 +1129,34 @@ const complexChartDemos = [
 				data: circlePackDemos.circlePackThreeLevelData,
 				options: circlePackDemos.circlePackThreeLevelNoZoomOptions,
 				chartType: chartTypes.CirclePackChart,
+			},
+		],
+	},
+	{
+		title: 'Heatmap',
+		configs: {
+			excludeColorPaletteControl: true,
+		},
+		demos: [
+			{
+				options: heatmapDemos.heatmapOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapQuantizeLegendOption,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapMissingDataOptions,
+				data: heatmapDemos.heatmapMissingData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
+				options: heatmapDemos.heatmapDomainOptions,
+				data: heatmapDemos.heatmapData,
+				chartType: chartTypes.HeatmapChart,
 			},
 		],
 	},

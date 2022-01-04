@@ -4,6 +4,7 @@ import {
 	Alignments,
 	ToolbarControlTypes,
 	ZoomBarTypes,
+	ColorLegendType,
 } from './enums';
 import { Component } from '../components/component';
 import { TruncationOptions } from './truncation';
@@ -169,6 +170,25 @@ export interface ToolbarControl {
 	 * type value will be displayed if text is not available
 	 */
 	text?: string;
+	/**
+	 * custom id for button
+	 */
+	id?: String;
+	/**
+	 * SVG HTML element
+	 */
+	iconSVG?: {
+		content?: string;
+		height?: string;
+		width?: string;
+	};
+	shouldBeDisabled?: Function;
+	/**
+	 * function to execute on button click
+	 * alternatively, users can choose to not pass in a function and can
+	 * listen for events to execute asynchronously
+	 */
+	clickFunction?: Function;
 }
 
 /**

@@ -214,6 +214,37 @@ export class CartesianScales extends Service {
 		}
 	}
 
+	getCustomDomainValuesByposition(axisPosition: AxisPositions) {
+		const domain = Tools.getProperty(
+			this.model.getOptions(),
+			'axes',
+			axisPosition,
+			'domain'
+		);
+
+		// Check if domain is an array
+		if (domain && !Array.isArray(domain)) {
+			throw new Error(
+				`Domain in ${axisPosition} axis is not a valid array`
+			);
+		}
+
+		// Determine number of elements passed in domain depending on scale types
+		if (Array.isArray(domain)) {
+			if (
+				(this.scaleTypes[axisPosition] === ScaleTypes.LINEAR ||
+					this.scaleTypes[axisPosition] === ScaleTypes.TIME) &&
+				domain.length !== 2
+			) {
+				throw new Error(
+					`There can only be 2 elements in domain for scale type: ${this.scaleTypes[axisPosition]}`
+				);
+			}
+		}
+
+		return domain;
+	}
+
 	getOrientation() {
 		return this.orientation;
 	}

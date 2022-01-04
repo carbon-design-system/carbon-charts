@@ -49,6 +49,11 @@ export default {
 		angular: 'ibm-grouped-bar-chart',
 		vue: 'ccv-grouped-bar-chart',
 	},
+	HeatmapChart: {
+		vanilla: 'HeatmapChart',
+		angular: 'ibm-heatmap-chart',
+		vue: 'ccv-heatmap-chart',
+	},
 	HistogramChart: {
 		vanilla: 'HistogramChart',
 		angular: 'ibm-histogram-chart',

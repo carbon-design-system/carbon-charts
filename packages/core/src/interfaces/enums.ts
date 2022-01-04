@@ -229,7 +229,9 @@ export enum ToolbarControlTypes {
 	RESET_ZOOM = 'Reset zoom',
 	MAKE_FULLSCREEN = 'Make fullscreen',
 	SHOW_AS_DATATABLE = 'Show as data-table',
+	CUSTOM = 'Custom',
 }
+
 /**
  * enum of title orientations for _vertical axes_
  */
@@ -249,4 +251,29 @@ export enum LegendItemType {
 	LINE = 'line',
 	QUARTILE = 'quartile',
 	ZOOM = 'zoom',
+}
+
+/**
+ * enum of color legend types
+ */
+export enum ColorLegendType {
+	LINEAR = 'linear',
+	QUANTIZE = 'quantize',
+}
+
+/**
+ * enum of divider status for heatmap
+ */
+export enum DividerStatus {
+	ON = 'on',
+	AUTO = 'auto',
+	OFF = 'off',
+}
+
+/**
+ * enum of axis flavor
+ */
+export enum AxisFlavor {
+	DEFAULT = 'default',
+	HOVERABLE = 'hoverable',
 }

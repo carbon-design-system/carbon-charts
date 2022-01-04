@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.5...v0.54.0) (2021-12-24)
+
+
+### Features
+
+* **core:** create heatmap chart  ([#1200](https://github.com/carbon-design-system/carbon-charts/issues/1200)) ([a55be0f](https://github.com/carbon-design-system/carbon-charts/commit/a55be0fcec6020b609ab18b2224562aaa9775321))
+
+
+
+
+
+## [0.53.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.4...v0.53.5) (2021-12-15)
+
+
+### Bug Fixes
+
+* **core:** use domain in zoom bar if defined in axes ([#1243](https://github.com/carbon-design-system/carbon-charts/issues/1243)) ([b265676](https://github.com/carbon-design-system/carbon-charts/commit/b2656764758d5b339987a59a2be344d0e94df4c2)), closes [#1228](https://github.com/carbon-design-system/carbon-charts/issues/1228)
+
+
+
+
+
+## [0.53.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.3...v0.53.4) (2021-12-13)
+
+
+### Bug Fixes
+
+* **core:** allow users to define custom buttons in toolbar ([#1158](https://github.com/carbon-design-system/carbon-charts/issues/1158)) ([4996591](https://github.com/carbon-design-system/carbon-charts/commit/499659155b56df9f7ab03633e43f5437f21bb129)), closes [#1129](https://github.com/carbon-design-system/carbon-charts/issues/1129)
+
+
+
+
+
+## [0.53.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.2...v0.53.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* **core:** fix overflow menu caused by data loading option change ([#1239](https://github.com/carbon-design-system/carbon-charts/issues/1239)) ([48b2058](https://github.com/carbon-design-system/carbon-charts/commit/48b2058746d3d86675d1f979e7ea6839712bef65)), closes [#1229](https://github.com/carbon-design-system/carbon-charts/issues/1229)
+
+
+
+
+
 ## [0.53.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.1...v0.53.2) (2021-12-06)
 
 

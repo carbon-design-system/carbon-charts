@@ -30,6 +30,7 @@ export enum Model {
 export enum Toolbar {
 	SHOW_OVERFLOW_MENU = 'show-toolbar-overflow-menu',
 	HIDE_OVERFLOW_MENU = 'hide-toolbar-overflow-menu',
+	BUTTON_CLICK = 'toolbar-button-click',
 }
 
 /**
@@ -65,6 +66,9 @@ export enum Axis {
 	LABEL_MOUSEMOVE = 'axis-label-mousemove',
 	LABEL_CLICK = 'axis-label-click',
 	LABEL_MOUSEOUT = 'axis-label-mouseout',
+	LABEL_FOCUS = 'axis-label-focus',
+	LABEL_BLUR = 'axis-label-blur',
+	RENDER_COMPLETE = 'axis-render-complete',
 }
 
 /**
@@ -167,7 +171,7 @@ export enum Radar {
 export enum Tree {
 	NODE_MOUSEOVER = 'tree-node-mouseover',
 	NODE_CLICK = 'tree-node-click',
-	NODE_MOUSEOUT = 'tree-node-mouseout'
+	NODE_MOUSEOUT = 'tree-node-mouseout',
 }
 
 /**
@@ -239,4 +243,14 @@ export enum Meter {
 	METER_CLICK = 'meter-click',
 	METER_MOUSEOUT = 'meter-mouseout',
 	METER_MOUSEMOVE = 'meter-mousemove',
+}
+
+/**
+ * enum of all heatmap related events
+ */
+export enum Heatmap {
+	HEATMAP_MOUSEOVER = 'heatmap-mouseover',
+	HEATMAP_CLICK = 'heatmap-click',
+	HEATMAP_MOUSEOUT = 'heatmap-mouseout',
+	HEATMAP_MOUSEMOVE = 'hetmap-mousemove',
 }

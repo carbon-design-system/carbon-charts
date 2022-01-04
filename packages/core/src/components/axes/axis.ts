@@ -31,6 +31,12 @@ export class Axis extends Component {
 	renderType = RenderTypes.SVG;
 
 	margins: any;
+	truncation = {
+		[AxisPositions.LEFT]: false,
+		[AxisPositions.RIGHT]: false,
+		[AxisPositions.TOP]: false,
+		[AxisPositions.BOTTOM]: false,
+	};
 
 	scale: any;
 	scaleType: ScaleTypes;
@@ -645,11 +651,13 @@ export class Axis extends Component {
 
 				container.selectAll('g.ticks g.tick').html(tick_html);
 
+				const self = this;
 				container
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
+							self.truncation[axisPosition] = true;
 							return Tools.truncateLabel(
 								d,
 								truncationType,
@@ -701,10 +709,6 @@ export class Axis extends Component {
 			'truncation',
 			'threshold'
 		);
-
-		const isTimeScaleType =
-			this.scaleType === ScaleTypes.TIME ||
-			axisOptions.scaleType === ScaleTypes.TIME;
 
 		const self = this;
 		container

@@ -2,6 +2,7 @@ export * from './component';
 
 // ESSENTIALS
 export * from './essentials/legend';
+export * from './essentials/color-scale-legend';
 export * from './essentials/modal';
 export * from './essentials/threshold';
 export * from './essentials/title';
@@ -36,6 +37,7 @@ export * from './graphs/radar';
 export * from './graphs/circle-pack';
 export * from './graphs/wordcloud';
 export * from './graphs/alluvial';
+export * from './graphs/heatmap';
 
 // Layout
 export * from './layout/spacer';
