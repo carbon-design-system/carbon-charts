@@ -10,7 +10,7 @@ export class Bar extends Component {
 			return options.bars.width;
 		}
 
-		const numberOfDatapoints = this.model.getDisplayData().length;
+		const numberOfDomainValues = this.model.getStackKeys().length;
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
@@ -19,7 +19,7 @@ export class Bar extends Component {
 		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				(chartWidth * 0.25) / numberOfDatapoints
+				(chartWidth * 0.25) / numberOfDomainValues
 			);
 		}
 
