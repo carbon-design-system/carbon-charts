@@ -1,10 +1,9 @@
 // Internal Imports
 import { Service } from './service';
-import { Tools } from '../tools';
 import { Events } from './../interfaces/enums';
 import * as Configuration from '../configuration';
 // Services
-import { DOMUtils } from './index';
+import { DOMUtils } from './essentials/dom-utils';
 import { select } from 'd3-selection';
 
 export class CanvasZoom extends Service {
