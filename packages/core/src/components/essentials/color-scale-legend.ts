@@ -1,8 +1,8 @@
 // Internal Imports
 import { Tools } from '../../tools';
-import { ColorLegendType, Events, RenderTypes, Roles } from '../../interfaces';
+import { ColorLegendType, Events, RenderTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
-import { Legend } from '../';
+import { Legend } from './legend';
 import { DOMUtils } from '../../services';
 
 // D3 imports
