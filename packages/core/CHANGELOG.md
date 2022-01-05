@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.0...v0.54.1) (2022-01-05)
+
+
+### Bug Fixes
+
+* **core:** remove circular dependencies inheritance from heatmap legend & canvas zoom files ([#1260](https://github.com/carbon-design-system/carbon-charts/issues/1260)) ([1abc4d9](https://github.com/carbon-design-system/carbon-charts/commit/1abc4d9ebf8ce80226df23371c4b9baa669f4c7f))
+
+
+
+
+
 # [0.54.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.5...v0.54.0) (2021-12-24)
 
 
