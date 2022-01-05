@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.1...v0.54.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* **core:** add background to chart in fullscreen mode ([#1261](https://github.com/carbon-design-system/carbon-charts/issues/1261)) ([7a10ae8](https://github.com/carbon-design-system/carbon-charts/commit/7a10ae867060b8719596fc51ccc455f14b8a8210))
+
+
+
+
+
 ## [0.54.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.0...v0.54.1) (2022-01-05)
 
 
