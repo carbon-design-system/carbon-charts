@@ -11,7 +11,7 @@ import { Tools } from '../tools';
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';
-import { extent, max, sum } from 'd3-array';
+import { extent, max } from 'd3-array';
 
 // Misc
 import {
