@@ -68,7 +68,7 @@ export class Area extends Component {
 		}
 
 		let upperBoundRangeValue = 0;
-		// If includeZero is enabled, we want to replace upperBooundRange from 0 to domain value
+		// If includeZero is enabled, we want to replace upperBoundRange from 0 to domain value
 		const includeZeroInRangeValue = (position, domain) => {
 			if (
 				Tools.getProperty(options, 'axes', position, 'includeZero') ===
