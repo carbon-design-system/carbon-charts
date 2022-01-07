@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.2...v0.54.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **stacked-bar:** set bar width based on number of domain values ([#1235](https://github.com/carbon-design-system/carbon-charts/issues/1235)) ([758c064](https://github.com/carbon-design-system/carbon-charts/commit/758c064fcbf8f837da400af9bfac9862b2f20d1f)), closes [#1232](https://github.com/carbon-design-system/carbon-charts/issues/1232)
+
+
+
+
+
 ## [0.54.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.1...v0.54.2) (2022-01-05)
 
 
