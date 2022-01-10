@@ -38,6 +38,7 @@ export class Area extends Component {
 
 	render(animate = true) {
 		const svg = this.getComponentContainer({ withinChartClip: true });
+		const options = this.getOptions();
 		let domain = [0, 0];
 
 		const { cartesianScales } = this.services;
@@ -57,7 +58,7 @@ export class Area extends Component {
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData(this.configs.groups);
 
-		const bounds = Tools.getProperty(this.getOptions(), 'bounds');
+		const bounds = Tools.getProperty(options, 'bounds');
 		const boundsEnabled = bounds && groupedData && groupedData.length === 1;
 
 		if (!boundsEnabled && bounds) {
@@ -66,10 +67,24 @@ export class Area extends Component {
 			); // eslint-disable-line no-console
 		}
 
+		let upperBoundRangeValue = 0;
+		// If includeZero is enabled, we want to replace upperBoundRange from 0 to domain value
+		const includeZeroInRangeValue = (position, domain) => {
+			if (
+				Tools.getProperty(options, 'axes', position, 'includeZero') ===
+				false
+			) {
+				// Replace upperBoundRangeValue if domain is positive
+				if (domain[0] > 0 && domain[1] > 0) {
+					upperBoundRangeValue = domain[0];
+				}
+			}
+		};
+
 		const upperBound = (d, i) =>
 			boundsEnabled
 				? cartesianScales.getBoundedScaledValues(d, i)[0]
-				: cartesianScales.getRangeValue(0);
+				: cartesianScales.getRangeValue(upperBoundRangeValue);
 
 		const lowerBound = (d, i) =>
 			boundsEnabled
@@ -77,13 +92,23 @@ export class Area extends Component {
 				: cartesianScales.getRangeValue(d, i);
 
 		if (orientation === CartesianOrientations.VERTICAL) {
-			domain = this.services.cartesianScales.getMainYScale().domain();
+			domain = cartesianScales.getMainYScale().domain();
+			includeZeroInRangeValue(
+				cartesianScales.getMainYAxisPosition(),
+				domain
+			);
+
 			areaGenerator
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
 				.y0((d, i) => upperBound(d, i))
 				.y1((d, i) => lowerBound(d, i));
 		} else {
-			domain = this.services.cartesianScales.getMainXScale().domain();
+			domain = cartesianScales.getMainXScale().domain();
+			includeZeroInRangeValue(
+				cartesianScales.getMainXAxisPosition(),
+				domain
+			);
+
 			areaGenerator
 				.x0((d, i) => upperBound(d, i))
 				.x1((d, i) => lowerBound(d, i))
@@ -92,7 +117,7 @@ export class Area extends Component {
 
 		// Is gradient enabled or not
 		const isGradientEnabled = Tools.getProperty(
-			this.getOptions(),
+			options,
 			'color',
 			'gradient',
 			'enabled'
