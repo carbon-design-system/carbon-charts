@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.3...v0.54.4) (2022-01-10)
+
+
+### Bug Fixes
+
+* **core:** prevent area chart from bleeding out of cartesian plane when includeZero is enabled ([#1263](https://github.com/carbon-design-system/carbon-charts/issues/1263)) ([62b6014](https://github.com/carbon-design-system/carbon-charts/commit/62b6014eea594d08572f71034eda8919c9e22100)), closes [#1248](https://github.com/carbon-design-system/carbon-charts/issues/1248)
+
+
+
+
+
 ## [0.54.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.2...v0.54.3) (2022-01-07)
 
 
