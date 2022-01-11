@@ -444,6 +444,22 @@ export class Radar extends Component {
 									c
 								).y
 						)
+						.end()
+						.finally(() => {
+							// Align chart horizontally after x-axies has finished rendering
+							const alignment = Tools.getProperty(
+								options,
+								'radar',
+								'alignment'
+							);
+
+							const alignmentXOffset = this.getAlignmentXOffset(
+								alignment,
+								svg,
+								this.getParent()
+							);
+							svg.attr('x', alignmentXOffset);
+						})
 				),
 			(exit) =>
 				exit.call((selection) =>
@@ -748,15 +764,6 @@ export class Radar extends Component {
 						.remove()
 				)
 		);
-
-		const alignment = Tools.getProperty(options, 'radar', 'alignment');
-
-		const alignmentXOffset = this.getAlignmentXOffset(
-			alignment,
-			svg,
-			this.getParent()
-		);
-		svg.attr('x', alignmentXOffset);
 
 		// Add event listeners
 		this.addEventListeners();
