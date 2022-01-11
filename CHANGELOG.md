@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.3...v0.54.4) (2022-01-10)
+
+
+### Bug Fixes
+
+* **core:** prevent area chart from bleeding out of cartesian plane when includeZero is enabled ([#1263](https://github.com/carbon-design-system/carbon-charts/issues/1263)) ([62b6014](https://github.com/carbon-design-system/carbon-charts/commit/62b6014eea594d08572f71034eda8919c9e22100)), closes [#1248](https://github.com/carbon-design-system/carbon-charts/issues/1248)
+
+
+
+
+
+## [0.54.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.2...v0.54.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **stacked-bar:** set bar width based on number of domain values ([#1235](https://github.com/carbon-design-system/carbon-charts/issues/1235)) ([758c064](https://github.com/carbon-design-system/carbon-charts/commit/758c064fcbf8f837da400af9bfac9862b2f20d1f)), closes [#1232](https://github.com/carbon-design-system/carbon-charts/issues/1232)
+
+
+
+
+
+## [0.54.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.1...v0.54.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* **core:** add background to chart in fullscreen mode ([#1261](https://github.com/carbon-design-system/carbon-charts/issues/1261)) ([7a10ae8](https://github.com/carbon-design-system/carbon-charts/commit/7a10ae867060b8719596fc51ccc455f14b8a8210))
+
+
+
+
+
+## [0.54.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.0...v0.54.1) (2022-01-05)
+
+
+### Bug Fixes
+
+* **core:** remove circular dependencies inheritance from heatmap legend & canvas zoom files ([#1260](https://github.com/carbon-design-system/carbon-charts/issues/1260)) ([1abc4d9](https://github.com/carbon-design-system/carbon-charts/commit/1abc4d9ebf8ce80226df23371c4b9baa669f4c7f))
+
+
+
+
+
 # [0.54.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.5...v0.54.0) (2021-12-24)
 
 
