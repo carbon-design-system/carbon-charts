@@ -10,7 +10,6 @@ import {
 } from '../../interfaces';
 import { DOMUtils } from '../../services';
 
-
 // D3 Imports
 import { select } from 'd3-selection';
 
@@ -296,16 +295,16 @@ export class StackedBar extends Bar {
 
 	protected getBarWidth() {
 		const options = this.getOptions();
-		if (Tools.getProperty(options, "bars", "width")) {
+		if (Tools.getProperty(options, 'bars', 'width')) {
 			return options.bars.width;
 		}
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true,
 		}).width;
-	
+
 		const numberOfDomainValues = this.model.getStackKeys().length;
-	
+
 		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
@@ -314,7 +313,7 @@ export class StackedBar extends Bar {
 		}
 		return Math.min(options.bars.maxWidth, mainXScale.step() / 2);
 	}
-	
+
 	destroy() {
 		// Remove event listeners
 		this.parent
