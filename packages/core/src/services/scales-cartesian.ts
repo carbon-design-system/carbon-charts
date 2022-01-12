@@ -754,7 +754,11 @@ export class CartesianScales extends Service {
 
 		const { thresholds } = axesOptions[domainAxisPosition];
 
-		if (!thresholds) {
+		// Check if thresholds exist & is not empty
+		if (
+			!Array.isArray(thresholds) ||
+			(Array.isArray(thresholds) && !thresholds.length)
+		) {
 			return null;
 		}
 
@@ -788,7 +792,11 @@ export class CartesianScales extends Service {
 
 		const { thresholds } = axesOptions[rangeAxisPosition];
 
-		if (!thresholds) {
+		// Check if thresholds exist & is not empty
+		if (
+			!Array.isArray(thresholds) ||
+			(Array.isArray(thresholds) && !thresholds.length)
+		) {
 			return null;
 		}
 
