@@ -36,7 +36,7 @@
 		"branch": "master"
 	},
 	"devDependencies": {
-		"commitizen": "4.0.3",
+		"commitizen": "^4.2.4",
 		"cz-conventional-changelog": "3.1.0",
 		"husky": "4.2.1",
 		"lerna": "3.20.2",
