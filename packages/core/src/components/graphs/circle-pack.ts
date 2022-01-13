@@ -404,14 +404,13 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this);
 				const disabled = hoveredElement.classed('non-focal');
 
-				const zoomedIn =
-					Tools.getProperty(
-						self.getOptions(),
-						'canvasZoom',
-						'enabled'
-					) && self.model.getHierarchyLevel() > 2;
+				const canvasZoomEnabled = Tools.getProperty(
+					self.model.getOptions(),
+					'canvasZoom',
+					'enabled'
+				);
 
-				if (zoomedIn) {
+				if (canvasZoomEnabled && self.model.getHierarchyLevel() > 2) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
@@ -427,7 +426,12 @@ export class CirclePack extends Component {
 					);
 				}
 				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
-				else if (datum.depth === 2 && datum.children && !disabled) {
+				else if (
+					datum.depth === 2 &&
+					datum.children &&
+					!disabled &&
+					canvasZoomEnabled
+				) {
 					const canvasSelection = self.parent.selectAll(
 						'circle.node'
 					);
