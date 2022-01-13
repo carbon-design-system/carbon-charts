@@ -709,6 +709,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.ComboChart,
 			},
 			{
+				options: comboDemos.comboSimpleFloatingOptions,
+				data: comboDemos.comboSimpleFloatingData,
+				chartType: chartTypes.ComboChart,
+			},
+			{
 				options: comboDemos.comboGroupedHorizontalOptions,
 				data: comboDemos.comboGroupedHorizontalData,
 				chartType: chartTypes.ComboChart,

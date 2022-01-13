@@ -48,6 +48,49 @@ export const comboSimpleOptions = {
 	],
 };
 
+export const comboSimpleFloatingData = [
+	{ group: 'School A', date: 'Monday', value: 50000 },
+	{ group: 'School A', date: 'Tuesday', value: 45000 },
+	{ group: 'School A', date: 'Wednesday', value: 58000 },
+	{ group: 'School A', date: 'Thursday', value: 31000 },
+	{ group: 'School A', date: 'Friday', value: 33000 },
+	{ group: 'Temperature', date: 'Monday', temp: [65, 70] },
+	{ group: 'Temperature', date: 'Tuesday', temp: [67, 71] },
+	{ group: 'Temperature', date: 'Wednesday', temp: [75, 83] },
+	{ group: 'Temperature', date: 'Thursday', temp: [31, 42] },
+	{ group: 'Temperature', date: 'Friday', temp: [43, 55] },
+];
+
+export const comboSimpleFloatingOptions = {
+	title: 'Combo (Line + Floating bar)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			scaleType: 'linear',
+			title: 'USA Summer School Attendance',
+			correspondingDatasets: ['School A'],
+		},
+		right: {
+			mapsTo: 'temp',
+			title: 'Temperature (°F)',
+		},
+		bottom: {
+			title: 'Day of the Week',
+			mapsTo: 'date',
+			scaleType: 'labels',
+		},
+	},
+	comboChartTypes: [
+		{ type: 'simple-bar', correspondingDatasets: ['Temperature'] },
+		{
+			type: 'line',
+			options: { points: { radius: 5 } },
+			correspondingDatasets: ['School A'],
+		},
+	],
+	height: '400px',
+};
+
 export const comboHorizontalData = comboSimpleData;
 
 export const comboHorizontalOptions = {
