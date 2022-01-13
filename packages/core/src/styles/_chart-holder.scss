@@ -4,7 +4,8 @@
 	width: 100%;
 	height: 100%;
 
-	&.filled, &.fullscreen {
+	&.filled,
+	&.fullscreen {
 		background-color: $ui-background;
 
 		.#{$prefix}--#{$charts-prefix}--chart-wrapper {
