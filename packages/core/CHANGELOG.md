@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.6...v0.54.7) (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** prevent chart from breaking if thresholds array is empty  ([#1267](https://github.com/carbon-design-system/carbon-charts/issues/1267)) ([f566213](https://github.com/carbon-design-system/carbon-charts/commit/f566213ba4bc5c515f0a8da65a85dd14452186be)), closes [#1264](https://github.com/carbon-design-system/carbon-charts/issues/1264)
+
+
+
+
+
 ## [0.54.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.5...v0.54.6) (2022-01-13)
 
 
