@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.5...v0.54.6) (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** prevent canvas zooming if depth equals 2 and canvas zoom property is set to false ([#1265](https://github.com/carbon-design-system/carbon-charts/issues/1265)) ([1f42fe0](https://github.com/carbon-design-system/carbon-charts/commit/1f42fe09461c5ad9809ecb30d3642728284d021d)), closes [#1251](https://github.com/carbon-design-system/carbon-charts/issues/1251)
+
+
+
+
+
+## [0.54.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.4...v0.54.5) (2022-01-11)
+
+
+### Bug Fixes
+
+* **core:** keep radar chart alignment after fullscreene exit ([#1249](https://github.com/carbon-design-system/carbon-charts/issues/1249)) ([02eebb6](https://github.com/carbon-design-system/carbon-charts/commit/02eebb61ddc1ecfedb68a32cd15c82e428870a36)), closes [#1247](https://github.com/carbon-design-system/carbon-charts/issues/1247)
+
+
+
+
+
 ## [0.54.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.3...v0.54.4) (2022-01-10)
 
 

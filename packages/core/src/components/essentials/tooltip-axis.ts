@@ -92,15 +92,24 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map((datum) => ({
-						label: datum[groupMapsTo],
-						value: datum[cartesianScales.getRangeIdentifier(datum)],
-						color: this.model.getFillColor(datum[groupMapsTo]),
-						class: this.model.getColorClassName({
-							classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							dataGroupName: datum[groupMapsTo],
-						}),
-					}))
+					.map((datum) => {
+						// Format value if is array
+						const value =
+							datum[cartesianScales.getRangeIdentifier(datum)];
+
+						return {
+							label: datum[groupMapsTo],
+							value:
+								Array.isArray(value) && value.length === 2
+									? `${value[0]} - ${value[1]}`
+									: value,
+							color: this.model.getFillColor(datum[groupMapsTo]),
+							class: this.model.getColorClassName({
+								classNameTypes: [ColorClassNameTypes.TOOLTIP],
+								dataGroupName: datum[groupMapsTo],
+							}),
+						};
+					})
 					.sort((a, b) => b.value - a.value)
 			);
 

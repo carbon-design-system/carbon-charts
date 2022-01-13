@@ -113,8 +113,10 @@ No additional configuration should be necessary.
 
 ### Rollup
 
-If you encounter the error message `ReferenceError: process is not defined`,
-install
+Enable `inlineDynamicImports` in your `rollup.config.js` to avoid the
+`this has been rewritten to undefined` error message.
+
+If you encounter `ReferenceError: process is not defined`, install
 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)
 and add it to `plugins` in `rollup.config.js`.
 
@@ -124,6 +126,7 @@ import replace from '@rollup/plugin-replace';
 
 export default {
 	// ...
+	inlineDynamicImports: true,
 	plugins: [
 		replace({
 			preventAssignment: true,
