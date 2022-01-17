@@ -49,39 +49,61 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		// Specify what to render inside the graph only
-		const graph = {
-			id: 'meter-graph',
-			components: [new Meter(this.model, this.services)],
-			growth: LayoutGrowth.STRETCH,
-			renderType: RenderTypes.SVG,
-		};
+		const options = this.model.getOptions();
+		const meterComponents = [
+			// Meter has a unique dataset title within the graph
+			{
+				id: 'meter-title',
+				components: [new MeterTitle(this.model, this.services)],
+				growth: LayoutGrowth.STRETCH,
+				renderType: RenderTypes.SVG,
+			},
+			// Create the title spacer
+			{
+				id: 'spacer',
+				components: [
+					new Spacer(this.model, this.services, { size: 8 }),
+				],
+				growth: LayoutGrowth.STRETCH,
+			},
+			// Specify what to render inside the graph only
+			{
+				id: 'meter-graph',
+				components: [new Meter(this.model, this.services)],
+				growth: LayoutGrowth.STRETCH,
+				renderType: RenderTypes.SVG,
+			},
+		];
 
-		// Meter has an unique dataset title within the graph
-		const titleComponent = {
-			id: 'meter-title',
-			components: [new MeterTitle(this.model, this.services)],
-			growth: LayoutGrowth.STRETCH,
-			renderType: RenderTypes.SVG,
-		};
+		//breakdownFormatter
+		const breakdownFormatter = Tools.getProperty(
+			options,
+			'meter',
+			'proportional',
+			'breakdownFormatter'
+		);
 
-		// create the title spacer
-		const titleSpacerComponent = {
-			id: 'spacer',
-			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: LayoutGrowth.STRETCH,
-		};
+		// totalFormatter function
+		const totalFormatter = Tools.getProperty(
+			options,
+			'meter',
+			'proportional',
+			'totalFormatter'
+		);
+
+		// Check to see if the formatter functions exist
+		if (!!breakdownFormatter && !!totalFormatter) {
+			// Check if both formatters return null or empty string, do not render them
+			if (!breakdownFormatter(null) && !totalFormatter(null)) {
+				meterComponents.splice(0, 2);
+			}
+		}
 
 		// the graph frame for meter includes the custom title (and spacer)
 		const graphFrame = [
-			new LayoutComponent(
-				this.model,
-				this.services,
-				[titleComponent, titleSpacerComponent, graph],
-				{
-					direction: LayoutDirection.COLUMN,
-				}
-			),
+			new LayoutComponent(this.model, this.services, meterComponents, {
+				direction: LayoutDirection.COLUMN,
+			}),
 		];
 
 		// add the meter title as a top level component
