@@ -113,12 +113,18 @@ No additional configuration should be necessary.
 
 ### Rollup
 
-Enable `inlineDynamicImports` in your `rollup.config.js` to avoid the
-`this has been rewritten to undefined` error message.
+#### ReferenceError: process is not defined
 
-If you encounter `ReferenceError: process is not defined`, install
+Install and add
 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace)
-and add it to `plugins` in `rollup.config.js`.
+to the list of plugins in `rollup.config.js` to avoid the
+`process is not defined` runtime error.
+
+This plugin statically replaces strings in bundled files with the specified
+value.
+
+In the example below, all instances of `process.env.NODE_ENV` will be replaced
+with `"production"` while bundling.
 
 ```js
 // rollup.config.js
@@ -126,14 +132,63 @@ import replace from '@rollup/plugin-replace';
 
 export default {
 	// ...
-	inlineDynamicImports: true,
 	plugins: [
 		replace({
 			preventAssignment: true,
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		// ...
 	],
+};
+```
+
+#### `this` has been rewritten to `undefined`
+
+Set [`context: "window"`](https://rollupjs.org/guide/en/#context) to address the
+`this has been rewritten to undefined` Rollup error.
+
+```diff
+export default {
++  context: "window",
+};
+```
+
+#### Circular dependency warnings
+
+You may see circular dependency warnings for `d3` and `@carbon/charts` packages
+that can be safely ignored.
+
+Use the `onwarn` option to selectively ignore these warnings.
+
+```js
+// rollup.config.js
+export default {
+	onwarn: (warning, warn) => {
+		// omit circular dependency warnings emitted from
+		// "d3-*" packages and "@carbon/charts"
+		if (
+			warning.code === 'CIRCULAR_DEPENDENCY' &&
+			/^node_modules\/(d3-|@carbon\/charts)/.test(warning.importer)
+		) {
+			return;
+		}
+
+		// preserve all other warnings
+		warn(warning);
+	},
+};
+```
+
+#### Dynamic imports
+
+If using [dynamic imports](https://rollupjs.org/guide/en/#dynamic-import), set
+`inlineDynamicImports: true` in `rollup.config.js` to enable code-splitting.
+
+Otherwise, you may encounter the Rollup error
+`Invalid value "iife" for option "output.format" - UMD and IIFE output formats are not supported for code-splitting builds.`
+
+```diff
+export default {
++  inlineDynamicImports: true,
 };
 ```
 
