@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.7...v0.54.8) (2022-01-25)
+
+
+### Bug Fixes
+
+* **core:** position bounds correctly in secondary axis of combo chart ([#1281](https://github.com/carbon-design-system/carbon-charts/issues/1281)) ([ab9b8e9](https://github.com/carbon-design-system/carbon-charts/commit/ab9b8e90a0e128f6c9a185091d06e62c35e90042)), closes [#1253](https://github.com/carbon-design-system/carbon-charts/issues/1253)
+
+
+
+
+
 ## [0.54.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.6...v0.54.7) (2022-01-13)
 
 
