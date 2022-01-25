@@ -336,11 +336,12 @@ export class CartesianScales extends Service {
 
 	getBoundedScaledValues(datum: any, index?: number) {
 		const { bounds } = this.model.getOptions();
-		const scale = this.scales[this.rangeAxisPosition];
+		const axisPosition = this.getRangeAxisPosition({ datum });
+		const scale = this.scales[axisPosition];
 
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, 'axes');
-		const axisOptions = axesOptions[this.rangeAxisPosition];
+		const axisOptions = axesOptions[axisPosition];
 		const { mapsTo } = axisOptions;
 		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
 
