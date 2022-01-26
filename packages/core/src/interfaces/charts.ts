@@ -411,6 +411,7 @@ export interface MeterChartOptions extends BaseChartOptions {
 		proportional?: {
 			total?: number;
 			unit?: string;
+			renderTitle?: boolean;
 		};
 		peak?: number;
 		status?: {

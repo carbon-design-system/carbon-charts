@@ -75,28 +75,16 @@ export class MeterChart extends Chart {
 			},
 		];
 
-		//breakdownFormatter
-		const breakdownFormatter = Tools.getProperty(
+		const renderTitle = Tools.getProperty(
 			options,
 			'meter',
 			'proportional',
-			'breakdownFormatter'
+			'renderTitle'
 		);
 
-		// totalFormatter function
-		const totalFormatter = Tools.getProperty(
-			options,
-			'meter',
-			'proportional',
-			'totalFormatter'
-		);
-
-		// Check to see if the formatter functions exist
-		if (!!breakdownFormatter && !!totalFormatter) {
-			// Check if both formatters return null or empty string, do not render them
-			if (!breakdownFormatter(null) && !totalFormatter(null)) {
-				meterComponents.splice(0, 2);
-			}
+		if (renderTitle === false) {
+			console.log('render Title is set to false');
+			meterComponents.splice(0, 2);
 		}
 
 		// the graph frame for meter includes the custom title (and spacer)
