@@ -131,6 +131,11 @@ export interface RulerOptions {
 export interface BarOptions {
 	width?: number;
 	maxWidth?: number;
+	/*
+	 * can be used to manually modify spacing between bars
+	 * @default 0.25
+	 */
+	spacingFactor?: number;
 }
 
 export interface StackedBarOptions extends BarOptions {

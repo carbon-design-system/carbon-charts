@@ -243,6 +243,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
 		maxWidth: 16,
+		spacingFactor: 0.25
 	},
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1,
