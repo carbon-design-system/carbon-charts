@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.8...v0.54.9) (2022-01-27)
+
+
+### Bug Fixes
+
+* **build:** svelte packaging ([#1258](https://github.com/carbon-design-system/carbon-charts/issues/1258)) ([886ef7a](https://github.com/carbon-design-system/carbon-charts/commit/886ef7a0e087889e02f19b54ac826bb57890b0ed))
+
+
+
+
+
 ## [0.54.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.7...v0.54.8) (2022-01-25)
 
 
