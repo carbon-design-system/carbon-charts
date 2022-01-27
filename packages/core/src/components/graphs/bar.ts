@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
+import { Tools } from '../../tools';
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
@@ -17,9 +18,11 @@ export class Bar extends Component {
 		}).width;
 
 		if (!mainXScale.step) {
+			const spacingFactor = Tools.getProperty(options, 'bars', 'spacingFactor');
+
 			return Math.min(
 				options.bars.maxWidth,
-				(chartWidth * 0.25) / numberOfDatapoints
+				(chartWidth * spacingFactor) / numberOfDatapoints
 			);
 		}
 
