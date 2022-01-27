@@ -8,7 +8,7 @@ export class WordCloudModel extends ChartModel {
 		super(services);
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 
 		const options = this.getOptions();

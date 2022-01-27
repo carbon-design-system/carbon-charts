@@ -9,7 +9,7 @@ export class RadarChartModel extends ChartModelCartesian {
 		super(services);
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const options = this.getOptions();
 
 		const groupedData = this.getGroupedData();

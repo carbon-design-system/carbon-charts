@@ -10,6 +10,8 @@ import { scaleOrdinal } from 'd3-scale';
 import { stack, stackOffsetDiverging } from 'd3-shape';
 import { histogram } from 'd3-array';
 
+import { get } from "lodash-es";
+
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
@@ -718,8 +720,34 @@ export class ChartModel {
 		return tabularData;
 	}
 
+	createTabularDataArray() {
+		return [[], []];
+	}
+
 	getTabularDataArray() {
-		return [];
+		const options = this.getOptions();
+
+		const userProvidedTabularDataArray = Tools.getProperty(options, 'dataTable', 'tabularArray');
+		if (Array.isArray(userProvidedTabularDataArray)) {
+			return userProvidedTabularDataArray;
+		} else {
+			const tabularDataArray = this.createTabularDataArray();
+
+			const headingsCellsFormatter = Tools.getProperty(options, 'dataTable', 'headingCellsFormatter');
+			const dataCellsFormatter = Tools.getProperty(options, 'dataTable', 'dataCellsFormatter');
+
+			let headingsCells = get(tabularDataArray, 0) || []
+			if (typeof headingsCellsFormatter === "function" && headingsCells.length !== 0) {
+				headingsCells = headingsCells.map(cell => headingsCellsFormatter(cell))
+			}
+
+			let dataRows = tabularDataArray.slice(1) || []
+			if (typeof dataCellsFormatter === "function" && dataRows.length !== 0) {
+				dataRows = dataRows.map(row => row.map(cell => dataCellsFormatter(cell)))
+			}
+
+			return [headingsCells, ...dataRows];
+		}
 	}
 
 	exportToCSV() {

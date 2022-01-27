@@ -61,6 +61,9 @@ export class Modal extends Component {
 
 		const tableArray = this.model.getTabularDataArray();
 
+		const headingsCells = get(tableArray, 0) || []
+		const dataRows = tableArray.slice(1) || []
+
 		return `
 		<div class="bx--modal-container">
 			<div class="bx--modal-header">
@@ -77,7 +80,7 @@ export class Modal extends Component {
 			<div class="bx--modal-content"><table class="bx--data-table bx--data-table--no-border">
 					<thead>
 						<tr>
-							${get(tableArray, 0)
+							${headingsCells
 								.map(
 									(heading) => `<th scope="col">
 								<div class="bx--table-header-label">${heading}</div>
@@ -86,9 +89,8 @@ export class Modal extends Component {
 								.join('')}
 						</tr>
 					</thead>
-					<tbody>${tableArray
-						.slice(1)
-						.map(
+					<tbody>${
+						dataRows.map(
 							(row) => `
 							<tr>
 								${row.map((column) => `<td>${column}</td>`).join('')}

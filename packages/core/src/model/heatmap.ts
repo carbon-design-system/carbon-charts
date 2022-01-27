@@ -252,7 +252,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * Generate tabular data from display data
 	 * @returns Array<Object>
 	 */
-	getTabularDataArray() {
+	 createTabularDataArray() {
 		const displayData = this.getDisplayData();
 
 		const {

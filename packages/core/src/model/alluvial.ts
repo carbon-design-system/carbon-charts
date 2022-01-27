@@ -9,7 +9,7 @@ export class AlluvialChartModel extends ChartModelCartesian {
 		super(services);
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 
 		// Sort array by source to get a close depiction of the alluvial chart

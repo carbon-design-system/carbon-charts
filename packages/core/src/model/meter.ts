@@ -79,7 +79,7 @@ export class MeterChartModel extends ChartModel {
 		return null;
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

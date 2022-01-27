@@ -140,7 +140,7 @@ export class CirclePackChartModel extends ChartModel {
 		}
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 
 		const result = [['Child', 'Parent', 'Value']];

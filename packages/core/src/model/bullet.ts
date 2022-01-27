@@ -29,7 +29,7 @@ export class BulletChartModel extends ChartModelCartesian {
 		return 0;
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

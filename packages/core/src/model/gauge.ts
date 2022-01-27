@@ -13,7 +13,7 @@ export class GaugeChartModel extends ChartModel {
 		return super.getDataGroups().filter((item) => item.name !== 'delta');
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

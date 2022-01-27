@@ -9,7 +9,7 @@ export class TreemapChartModel extends ChartModel {
 		super(services);
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 
 		const result = [['Child', 'Group', 'Value']];
