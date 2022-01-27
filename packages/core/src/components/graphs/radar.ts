@@ -925,18 +925,7 @@ export class Radar extends Component {
 					`.dots circle.${Tools.kebabCase(datum)}`
 				);
 
-				// Change style
-				axisLine
-					.classed('hovered', true)
-					.attr('stroke-dasharray', '4 4');
-				dots.classed('hovered', true)
-					.attr('opacity', 1)
-					.attr('r', Configuration.radar.dotsRadius);
-
-				// get the items that should be highlighted
-				const itemsToHighlight = self.fullDataNormalized.filter(
-					(d) => d[angle] === datum
-				);
+				const activeDataGroupNames = self.model.getActiveDataGroupNames();
 
 				const options = self.getOptions();
 				const { groupMapsTo } = options.data;
@@ -945,6 +934,20 @@ export class Radar extends Component {
 					'radar',
 					'axes',
 					'value'
+				);
+
+				// Change style
+				axisLine
+					.classed('hovered', true)
+					.attr('stroke-dasharray', '4 4');
+				dots.classed('hovered', true)
+					.attr('opacity', d => activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0)
+					.attr('r', Configuration.radar.dotsRadius);
+
+
+				// get the items that should be highlighted
+				const itemsToHighlight = self.fullDataNormalized.filter(
+					(d) => d[angle] === datum && activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1
 				);
 
 				// Show tooltip
