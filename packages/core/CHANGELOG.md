@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.9...v0.54.10) (2022-01-27)
+
+
+### Bug Fixes
+
+* **radar:** only show active datapoints in tooltips ([#1289](https://github.com/carbon-design-system/carbon-charts/issues/1289)) ([58738da](https://github.com/carbon-design-system/carbon-charts/commit/58738da230ab8dcf8c115f955dabfaf5504b0252))
+
+
+
+
+
 ## [0.54.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.8...v0.54.9) (2022-01-27)
 
 **Note:** Version bump only for package @carbon/charts
