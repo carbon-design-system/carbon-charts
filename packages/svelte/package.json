@@ -2,8 +2,8 @@
 	"name": "@carbon/charts-svelte",
 	"version": "0.54.8",
 	"description": "Carbon charting components for Svelte",
-	"main": "./bundle.js",
-	"module": "./index.js",
+	"type": "module",
+	"main": "./src/index.js",
 	"svelte": "./src/index.js",
 	"types": "./types/index.d.ts",
 	"scripts": {
