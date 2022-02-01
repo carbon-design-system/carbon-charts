@@ -49,23 +49,35 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		const options = this.model.getOptions();
+		const showHeader = Tools.getProperty(
+			this.model.getOptions(),
+			'meter',
+			'showHeader'
+		);
 		const meterComponents = [
-			// Meter has a unique dataset title within the graph
-			{
-				id: 'meter-title',
-				components: [new MeterTitle(this.model, this.services)],
-				growth: LayoutGrowth.STRETCH,
-				renderType: RenderTypes.SVG,
-			},
-			// Create the title spacer
-			{
-				id: 'spacer',
-				components: [
-					new Spacer(this.model, this.services, { size: 8 }),
-				],
-				growth: LayoutGrowth.STRETCH,
-			},
+			...(showHeader
+				? [
+						// Meter has a unique dataset title within the graph
+						{
+							id: 'meter-title',
+							components: [
+								new MeterTitle(this.model, this.services),
+							],
+							growth: LayoutGrowth.STRETCH,
+							renderType: RenderTypes.SVG,
+						},
+						// Create the title spacer
+						{
+							id: 'spacer',
+							components: [
+								new Spacer(this.model, this.services, {
+									size: 8,
+								}),
+							],
+							growth: LayoutGrowth.STRETCH,
+						},
+				  ]
+				: []),
 			// Specify what to render inside the graph only
 			{
 				id: 'meter-graph',
@@ -74,18 +86,6 @@ export class MeterChart extends Chart {
 				renderType: RenderTypes.SVG,
 			},
 		];
-
-		const renderTitle = Tools.getProperty(
-			options,
-			'meter',
-			'proportional',
-			'renderTitle'
-		);
-
-		if (renderTitle === false) {
-			console.log('render Title is set to false');
-			meterComponents.splice(0, 2);
-		}
 
 		// the graph frame for meter includes the custom title (and spacer)
 		const graphFrame = [
