@@ -499,6 +499,7 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 		clickable: false,
 	},
 	meter: {
+		showHeader: true,
 		proportional: null,
 		statusBar: {
 			percentageIndicator: {

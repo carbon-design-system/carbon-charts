@@ -408,10 +408,10 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		showHeader?: boolean;
 		proportional?: {
 			total?: number;
 			unit?: string;
-			renderTitle?: boolean;
 		};
 		peak?: number;
 		status?: {
