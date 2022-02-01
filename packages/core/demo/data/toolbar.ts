@@ -78,3 +78,26 @@ export const toolbarLineTimeSeriesOptions = addToolbarOptions(
 		],
 	}
 );
+
+export const toolbarBarSimpleData = barChart.simpleBarData;
+export const toolbarBarSimpleOptions = addToolbarOptions(
+	Object.assign({}, barChart.simpleBarOptions),
+	{
+		titleSuffix: ' - overriding export titles',
+		numberOfIcons: 1,
+		controls: [
+			{
+				type: 'Export as CSV',
+				text: 'Export data as CSV',
+			},
+			{
+				type: 'Export as JPG',
+				text: 'Export chart in JPG',
+			},
+			{
+				type: 'Export as PNG',
+				text: 'Export chart in PNG',
+			},
+		],
+	}
+);
