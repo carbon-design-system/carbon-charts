@@ -49,13 +49,13 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		const showHeader = Tools.getProperty(
+		const showLabels = Tools.getProperty(
 			this.model.getOptions(),
 			'meter',
-			'showHeader'
+			'showLabels'
 		);
 		const meterComponents = [
-			...(showHeader
+			...(showLabels
 				? [
 						// Meter has a unique dataset title within the graph
 						{
