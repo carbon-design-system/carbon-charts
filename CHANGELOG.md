@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.10...v0.54.11) (2022-02-02)
+
+
+### Bug Fixes
+
+* **core:** render only the components that are being used in proportional meter ([#1273](https://github.com/carbon-design-system/carbon-charts/issues/1273)) ([46715c0](https://github.com/carbon-design-system/carbon-charts/commit/46715c0f285897958fe2008beac391ae8ab8f779)), closes [#1262](https://github.com/carbon-design-system/carbon-charts/issues/1262)
+
+
+
+
+
 ## [0.54.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.9...v0.54.10) (2022-01-27)
 
 
