@@ -49,39 +49,49 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		// Specify what to render inside the graph only
-		const graph = {
-			id: 'meter-graph',
-			components: [new Meter(this.model, this.services)],
-			growth: LayoutGrowth.STRETCH,
-			renderType: RenderTypes.SVG,
-		};
-
-		// Meter has an unique dataset title within the graph
-		const titleComponent = {
-			id: 'meter-title',
-			components: [new MeterTitle(this.model, this.services)],
-			growth: LayoutGrowth.STRETCH,
-			renderType: RenderTypes.SVG,
-		};
-
-		// create the title spacer
-		const titleSpacerComponent = {
-			id: 'spacer',
-			components: [new Spacer(this.model, this.services, { size: 8 })],
-			growth: LayoutGrowth.STRETCH,
-		};
+		const showLabels = Tools.getProperty(
+			this.model.getOptions(),
+			'meter',
+			'showLabels'
+		);
+		const meterComponents = [
+			...(showLabels
+				? [
+						// Meter has a unique dataset title within the graph
+						{
+							id: 'meter-title',
+							components: [
+								new MeterTitle(this.model, this.services),
+							],
+							growth: LayoutGrowth.STRETCH,
+							renderType: RenderTypes.SVG,
+						},
+						// Create the title spacer
+						{
+							id: 'spacer',
+							components: [
+								new Spacer(this.model, this.services, {
+									size: 8,
+								}),
+							],
+							growth: LayoutGrowth.STRETCH,
+						},
+				  ]
+				: []),
+			// Specify what to render inside the graph only
+			{
+				id: 'meter-graph',
+				components: [new Meter(this.model, this.services)],
+				growth: LayoutGrowth.STRETCH,
+				renderType: RenderTypes.SVG,
+			},
+		];
 
 		// the graph frame for meter includes the custom title (and spacer)
 		const graphFrame = [
-			new LayoutComponent(
-				this.model,
-				this.services,
-				[titleComponent, titleSpacerComponent, graph],
-				{
-					direction: LayoutDirection.COLUMN,
-				}
-			),
+			new LayoutComponent(this.model, this.services, meterComponents, {
+				direction: LayoutDirection.COLUMN,
+			}),
 		];
 
 		// add the meter title as a top level component

@@ -408,6 +408,7 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
+		showLabels?: boolean;
 		proportional?: {
 			total?: number;
 			unit?: string;
