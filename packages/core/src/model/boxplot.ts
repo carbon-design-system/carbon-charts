@@ -89,7 +89,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		return boxplotData;
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 

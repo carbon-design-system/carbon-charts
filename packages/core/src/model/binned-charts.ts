@@ -7,7 +7,7 @@ import { get } from 'lodash-es';
  * this is intended for binned type of charts
  * */
 export class ChartModelBinned extends ChartModelCartesian {
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 

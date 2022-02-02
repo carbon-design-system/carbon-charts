@@ -56,7 +56,7 @@ export class ChartModelCartesian extends ChartModel {
 		return scales;
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;

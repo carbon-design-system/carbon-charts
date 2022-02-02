@@ -25,7 +25,7 @@ export class PieChartModel extends ChartModel {
 		return tabularData;
 	}
 
-	getTabularDataArray() {
+	createTabularDataArray() {
 		const displayData = this.getDisplayData();
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
