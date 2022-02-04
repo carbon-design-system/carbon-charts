@@ -7,7 +7,9 @@ export const vueTutorial = {
 # Carbon Charts - Vue
 
 The Carbon Charts Vue library provides a collection of reusable charting components
-to build websites and user interfaces. Adopting the library enables developers to use consistent markup,
+to build websites and user interfaces.
+
+Adopting the library enables developers to use consistent markup,
 styles, and behavior in prototype and production work.
 
 [Vue wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/vue)
