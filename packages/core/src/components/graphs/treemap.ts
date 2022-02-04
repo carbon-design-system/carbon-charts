@@ -95,10 +95,6 @@ export class Treemap extends Component {
 			.sum((d: any) => d.value)
 			.sort((a, b) => b.value - a.value);
 
-		const total = sum(allData, (d: any) =>
-			sum(d.children, (child: any) => child.value)
-		);
-
 		const root = d3Treemap()
 			.size([width, height])
 			.paddingInner(1)
