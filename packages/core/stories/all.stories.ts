@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/html';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
-import { storybookDemoGroups, DemoGroupTypes } from '../demo/data';
+import { storybookDemoGroups } from '../demo/data';
 import * as ChartComponents from '../src/charts';
 import * as storyUtils from '../demo/utils';
 
@@ -10,7 +10,7 @@ const colorPairingOptions = Configuration.color.pairingOptions;
 
 import '../demo/styles.scss';
 
-const introStories = storiesOf('Docs|', module).addDecorator(withKnobs);
+const introStories = storiesOf('Docs|', module);
 
 // Loop through the demos for the group
 introStories.add('Welcome', () => {

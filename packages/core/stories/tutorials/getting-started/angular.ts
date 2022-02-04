@@ -7,7 +7,9 @@ export const angularTutorial = {
 # Carbon Charts - Angular
 
 The Carbon Charts Angular library provides a collection of reusable charting components to build websites
-and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior
+and user interfaces.
+
+Adopting the library enables developers to use consistent markup, styles, and behavior
 in prototype and production work.
 
 [Angular wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/angular)

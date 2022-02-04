@@ -10,10 +10,6 @@ In **v0.30.8** we updated updated the default data format to be of a tabular nat
 This means more flexibility for our users in terms of the shape
 of the data they can provide to the library.
 
-**If you're looking to use @carbon/charts@0.30.8 and above,
-we recommend updating your data type as it should be a quick
-and easy switch.**
-
 \`\`\`js
 // Before
 const simpleBarData = {
