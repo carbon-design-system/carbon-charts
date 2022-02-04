@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.11...v0.54.12) (2022-02-04)
+
+
+### Bug Fixes
+
+* **treemap:** issues with having a depth of 1 ([#1299](https://github.com/carbon-design-system/carbon-charts/issues/1299)) ([778f726](https://github.com/carbon-design-system/carbon-charts/commit/778f726392907563347af94681f3d8cd70dee994))
+
+
+
+
+
 ## [0.54.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.10...v0.54.11) (2022-02-02)
 
 
