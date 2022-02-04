@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-const introStories = storiesOf('Intro/', module);
+const introStories = storiesOf('Docs|Getting Started', module);
 
 // Loop through the demos for the group
 introStories.add('Welcome', () => (
