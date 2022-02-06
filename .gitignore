@@ -11,3 +11,4 @@ package-lock.json
 .cache/
 pages/
 storybook-static/
+packages/angular/.angular

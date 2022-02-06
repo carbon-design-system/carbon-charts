@@ -6,6 +6,9 @@
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
+## Support
+We've ended support for versions prior to Angular 11
+
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):

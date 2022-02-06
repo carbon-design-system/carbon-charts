@@ -1,36 +1,29 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist",
-		"rootDir": "src",
-		"sourceMap": true,
-		"inlineSources": true,
-		"declaration": true,
-		"moduleResolution": "node",
-		"module": "es2015",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"downlevelIteration": true,
-		"importHelpers": true,
-		"target": "es2015",
-		"typeRoots": [
-			"./node_modules/@types"
-		],
-		"lib": [
-			"es2017",
-			"dom"
-		]
-	},
-	"include": [
-		"src/**/*"
-	],
-	"angularCompilerOptions": {
-		"annotateForClosureCompiler": true,
-		"skipTemplateCodegen": true,
-		"strictMetadataEmit": true,
-		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true,
-		"enableResourceInlining": true
-	}
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "inlineSources": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "typeRoots": ["./node_modules/@types"],
+    "target": "es2017",
+    "module": "es2020",
+    "lib": ["es2020", "dom"]
+  },
+  "include": ["src/**/*"],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
+  }
 }
