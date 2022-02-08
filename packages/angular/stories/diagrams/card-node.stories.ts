@@ -8,7 +8,7 @@ const getTemplate = (demo) => `
 	</div>
 `;
 
-storiesOf('Diagrams|Nodes/Card', module)
+storiesOf('Diagrams/Nodes/Card', module)
 	.addDecorator(
 		moduleMetadata({
 			imports: [CardNodeModule, ScreenModule, ChevronDownModule],

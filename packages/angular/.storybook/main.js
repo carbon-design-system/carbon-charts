@@ -1,10 +1,17 @@
 module.exports = {
+  staticDirs: ['./assets'],
   stories: ['../stories/**/*.stories.ts'],
-  logLevel: 'debug',
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  framework: '@storybook/angular',
   core: {
-    builder: 'webpack4',
+    builder: 'webpack5',
   },
-  angularOptions: {
-    enableIvy: true,
+  webpackFinal: async (config) => {
+    return {
+      ...config,
+      resolve: {
+        extensions: ['.js', '.json', '.ts'],
+      },
+    };
   },
 };

@@ -3,9 +3,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "rootDir": "src",
+    "rootDir": "./",
     "sourceMap": true,
+	"allowSyntheticDefaultImports": true,
     "inlineSources": true,
+	"skipLibCheck": true,
     "declaration": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -17,7 +19,8 @@
     "module": "es2020",
     "lib": ["es2020", "dom"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../stories/**/*.stories.*"],
+  "exclude": ["./node_modules/**/*", "../../node_modules/**/*"],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,

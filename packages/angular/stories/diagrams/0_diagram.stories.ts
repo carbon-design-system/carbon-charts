@@ -11,7 +11,7 @@ const nodeHeight = 64;
 const nodeWidth = 200;
 const circleSize = 64;
 
-const stories = storiesOf('Diagrams/', module);
+const stories = storiesOf('Diagrams', module);
 stories.addDecorator(
 	moduleMetadata({
 		imports: [

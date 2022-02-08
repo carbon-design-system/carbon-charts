@@ -1,25 +1,54 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": ".",
+  "newProjectRoot": "projects",
   "projects": {
     "@carbon/charts-angular": {
       "projectType": "library",
-      "root": ".",
-      "sourceRoot": "./src",
-      "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "project": "./ng-package.json"
+            "outputPath": "dist/@carbon/charts-angular",
+            "tsConfig": "tsconfig.json",
+            "index": "./src/index.html",
+            "main": "./src/main.ts"
           },
           "configurations": {
             "production": {
-              "tsConfig": "./tsconfig.json"
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
             },
             "development": {
-              "tsConfig": "./tsconfig.json"
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "verbose": true
             }
           },
           "defaultConfiguration": "production"
@@ -27,14 +56,9 @@
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
-            "browserTarget": "angular-cli:build",
-            "port": 4400
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build"
+            "browserTarget": "@carbon/charts-angular:build",
+            "port": 4400,
+            "styles": ["@carbon/charts/demo/styles.css"]
           }
         }
       }

@@ -8,7 +8,7 @@ const getTemplate = (demo) => `
 	</div>
 `;
 
-storiesOf('Diagrams|Nodes/Shape', module)
+storiesOf('Diagrams/Nodes/Shape', module)
 	.addDecorator(
 		moduleMetadata({
 			imports: [ShapeNodeModule, ScreenModule],
