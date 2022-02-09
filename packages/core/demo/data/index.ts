@@ -1104,6 +1104,11 @@ const complexChartDemos = [
 				data: alluvialDemos.alluvialMonochromeData,
 				chartType: chartTypes.AlluvialChart,
 			},
+			{
+				options: alluvialDemos.alluvialNodeAlignmentOptions,
+				data: alluvialDemos.alluvialNodeAlignmentData,
+				chartType: chartTypes.AlluvialChart,
+			},
 		],
 	},
 	{
