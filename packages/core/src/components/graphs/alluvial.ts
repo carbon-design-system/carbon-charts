@@ -3,11 +3,22 @@ import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Tools } from '../../tools';
 import * as Configuration from '../../configuration';
-import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
+import {
+	Events,
+	ColorClassNameTypes,
+	RenderTypes,
+	Alignments,
+} from '../../interfaces';
 
 // D3 imports
 import { select } from 'd3-selection';
-import { sankey as d3Sankey, sankeyLinkHorizontal } from 'd3-sankey';
+import {
+	sankey as d3Sankey,
+	sankeyLinkHorizontal,
+	sankeyLeft,
+	sankeyRight,
+	sankeyJustify,
+} from 'd3-sankey';
 
 export class Alluvial extends Component {
 	type = 'alluvial';
@@ -50,11 +61,27 @@ export class Alluvial extends Component {
 			nodePadding = options.alluvial.nodePadding;
 		}
 
+		const alignment = Tools.getProperty(
+			options,
+			'alluvial',
+			'nodeAlignment'
+		);
+
+		let nodeAlignment = sankeyJustify;
+
+		if (alignment === Alignments.LEFT) {
+			nodeAlignment = sankeyLeft;
+		} else if (alignment === Alignments.RIGHT) {
+			nodeAlignment = sankeyRight;
+		}
+
 		const sankey = d3Sankey()
 			.nodeId((d) => d.name)
 			.nodeWidth(Configuration.alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
+			// Alignment of nodes within chart
+			.nodeAlign(nodeAlignment)
 			// Size of the chart and its padding
 			// Chart starts at 2 and ends at width - 2 so the outer nodes can expand from center
 			// Chart starts from 30 so node categories can be displayed

@@ -511,6 +511,10 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 			category?: string;
 		}>;
 		/**
+		 * Node alignment (Default is center)
+		 */
+		nodeAlignment?: Alignments;
+		/**
 		 * Set the node padding
 		 */
 		nodePadding?: number;

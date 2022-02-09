@@ -243,7 +243,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
 		maxWidth: 16,
-		spacingFactor: 0.25
+		spacingFactor: 0.25,
 	},
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1,
@@ -588,6 +588,7 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 		data: Tools.merge(chart.data, {
 			groupMapsTo: 'source',
 		}),
+		nodeAlignment: Alignments.CENTER,
 		nodePadding: 24,
 		monochrome: false,
 		nodes: [],
