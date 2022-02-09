@@ -6,7 +6,7 @@
   "scripts": {
     "build": "bash build.sh",
     "storybook": "ng run @carbon/charts-angular:storybook",
-    "demo:build": "build-storybook -o demo/bundle -s ./.storybook/assets",
+    "demo:build": "build-storybook -o demo/bundle",
     "clean": "rm -rf dist demo/bundle",
     "start": "yarn storybook"
   },
