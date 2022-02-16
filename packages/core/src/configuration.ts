@@ -1,25 +1,55 @@
-import { Tools } from "./tools";
+import { Tools } from './tools';
 import {
 	BaseChartOptions,
 	AxisChartOptions,
 	ScatterChartOptions,
+	LollipopChartOptions,
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
+	BoxplotChartOptions,
+	AreaChartOptions,
 	PieChartOptions,
+	GaugeChartOptions,
 	DonutChartOptions,
+	BubbleChartOptions,
+	BulletChartOptions,
+	HistogramChartOptions,
+	RadarChartOptions,
+	ComboChartOptions,
+	TreeChartOptions,
+	TreemapChartOptions,
+	CirclePackChartOptions,
+	WorldCloudChartOptions,
+	AlluvialChartOptions,
 	// Components
+	AxisOptions,
 	GridOptions,
+	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
-	AxisTooltipOptions,
-	BarTooltipOptions,
+	WordCloudChartTooltipOptions,
 	LegendOptions,
-	ChartTheme,
+	StackedBarOptions,
+	MeterChartOptions,
+	ProportionalMeterChartOptions,
+	ToolbarOptions,
+	ZoomBarsOptions,
+	// ENUMS
+	Alignments,
+	GaugeTypes,
 	LegendPositions,
-	StackedBarOptions
-} from "./interfaces/index";
+	TruncationTypes,
+	ToolbarControlTypes,
+	ZoomBarTypes,
+	LegendItemType,
+	TreeTypes,
+	HeatmapChartOptions,
+	DividerStatus,
+} from './interfaces';
+import enUSLocaleObject from 'date-fns/locale/en-US/index';
+import { circlePack } from './configuration-non-customizable';
 
 /*
  *****************************
@@ -28,25 +58,25 @@ import {
  */
 
 /**
+ * Default truncation configuration
+ */
+const standardTruncationOptions = {
+	type: TruncationTypes.END_LINE,
+	threshold: 16,
+	numCharacter: 14,
+};
+
+/**
  * Legend options
  */
-export const legend: LegendOptions = {
+const legend: LegendOptions = {
+	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
-	enabled: true,
-	items: {
-		status: {
-			ACTIVE: 1,
-			DISABLED: 0
-		},
-		horizontalSpace: 12,
-		verticalSpace: 24,
-		textYOffset: 8
-	},
-	checkbox: {
-		radius: 6.5,
-		spaceAfter: 4
-	}
+	truncation: standardTruncationOptions,
+	alignment: Alignments.LEFT,
+	order: null,
+	additionalItems: [],
 };
 
 /**
@@ -54,63 +84,139 @@ export const legend: LegendOptions = {
  */
 export const grid: GridOptions = {
 	x: {
-		numberOfTicks: 5
+		// set enable to false will not draw grid and stroke of grid backdrop
+		enabled: true,
+		numberOfTicks: 15,
+		alignWithAxisTicks: false,
 	},
 	y: {
-		numberOfTicks: 5
-	}
+		// set enable to false will not draw grid and stroke of grid backdrop
+		enabled: true,
+		numberOfTicks: 5,
+		alignWithAxisTicks: false,
+	},
+};
+
+/**
+ * Ruler options
+ */
+export const ruler: RulerOptions = {
+	// enable or disable ruler
+	enabled: true,
 };
 
 /**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
-	datapoint: {
-		horizontalOffset: 10,
-		enabled: true,
-	},
-	title: {
-		verticalOffset: .75,
-		width: .4
-	}
+	enabled: true,
+	showTotal: true,
+	truncation: standardTruncationOptions,
+	groupLabel: 'Group',
 };
 
-export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
-	gridline: {
-		enabled: true,
-		threshold: 0.25
-	}
-} as AxisTooltipOptions);
-
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
-	datapoint: {
-		verticalOffset: 4
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+const axes: AxesOptions<AxisOptions> = {
+	top: {
+		visible: true,
+		includeZero: true,
+		truncation: standardTruncationOptions,
 	},
-	gridline: {
-		enabled: false
-	}
-} as BarTooltipOptions);
+	bottom: {
+		visible: true,
+		includeZero: true,
+		truncation: standardTruncationOptions,
+	},
+	left: {
+		visible: true,
+		includeZero: true,
+		truncation: standardTruncationOptions,
+	},
+	right: {
+		visible: true,
+		includeZero: true,
+		truncation: standardTruncationOptions,
+	},
+};
 
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-const axes: AxesOptions = { };
-
-const timeScale: TimeScaleOptions = {
+export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
+	showDayName: false,
+	localeObject: enUSLocaleObject,
+	timeIntervalFormats: {
+		'15seconds': { primary: 'MMM d, pp', secondary: 'pp' },
+		minute: { primary: 'MMM d, p', secondary: 'p' },
+		'30minutes': { primary: 'MMM d, p', secondary: 'p' },
+		hourly: { primary: 'MMM d, hh a', secondary: 'hh a' },
+		daily: { primary: 'MMM d', secondary: 'd' },
+		weekly: { primary: 'eee, MMM d', secondary: 'eee' },
+		monthly: { primary: 'MMM yyyy', secondary: 'MMM' },
+		quarterly: { primary: "QQQ ''yy", secondary: 'QQQ' },
+		yearly: { primary: 'yyyy', secondary: 'yyyy' },
+	},
 };
+
+const isFullScreenEnabled =
+	typeof document !== 'undefined' &&
+	(document['fullscreenEnabled'] ||
+		document['webkitFullscreenEnabled'] ||
+		document['mozFullScreenEnabled'] ||
+		document['msFullscreenEnabled']);
 
 /**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	width: "100%",
-	height: "100%",
+	width: null,
+	height: null,
 	resizable: true,
 	tooltip: baseTooltip,
 	legend,
 	style: {
-		prefix: "cc"
-	}
+		prefix: 'cc',
+	},
+	data: {
+		groupMapsTo: 'group',
+		loading: false,
+		selectedGroups: [],
+	},
+	color: {
+		scale: null,
+		pairing: {
+			numberOfVariants: null,
+			option: 1,
+		},
+		gradient: {
+			enabled: false,
+		},
+	},
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 3,
+		controls: [
+			{
+				type: ToolbarControlTypes.SHOW_AS_DATATABLE,
+			},
+			...(isFullScreenEnabled
+				? [
+						{
+							type: ToolbarControlTypes.MAKE_FULLSCREEN,
+						},
+				  ]
+				: []),
+			{
+				type: ToolbarControlTypes.EXPORT_CSV,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_PNG,
+			},
+			{
+				type: ToolbarControlTypes.EXPORT_JPG,
+			},
+		],
+	} as ToolbarOptions,
 };
 
 /**
@@ -120,7 +226,15 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
-	tooltip: axisChartTooltip
+	ruler,
+	zoomBar: {
+		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
+		top: {
+			enabled: false,
+			type: ZoomBarTypes.GRAPH_VIEW,
+		},
+	} as ZoomBarsOptions,
 } as AxisChartOptions);
 
 /**
@@ -128,47 +242,49 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
  */
 const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
-		maxWidth: 16
+		maxWidth: 16,
+		spacingFactor: 0.25
 	},
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: 1
+		addSpaceOnEdges: 1,
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip,
 } as BarChartOptions);
 
 /**
  * options specific to simple bar charts
  */
-const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
-} as BarChartOptions);
+const simpleBarChart: BarChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to simple bar charts
  */
-const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
-} as BarChartOptions);
+const groupedBarChart: BarChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to stacked bar charts
  */
 const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 	bars: Tools.merge({}, baseBarChart.bars, {
-		dividerSize: 1.5
-	} as StackedBarOptions)
+		dividerSize: 1.5,
+	} as StackedBarOptions),
 } as BarChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to boxplot charts
  */
-const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
-	points: {
-		// default point radius to 3
-		radius: 3,
-		filled: false
-	}
-} as LineChartOptions);
+const boxplotChart: BoxplotChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to scatter charts
@@ -178,36 +294,189 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 		// default point radius to 4
 		radius: 4,
 		fillOpacity: 0.3,
-		filled: true
-	}
+		filled: true,
+		enabled: true,
+	},
 } as ScatterChartOptions);
+
+/**
+ * options specific to lollipop charts
+ */
+const lollipopChart: LollipopChartOptions = scatterChart as LollipopChartOptions;
+
+/**
+ * options specific to line charts
+ */
+const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
+	points: {
+		// default point radius to 3
+		radius: 3,
+		filled: false,
+		enabled: true,
+	},
+} as LineChartOptions);
+
+/**
+ * options specific to area charts
+ */
+const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0,
+	} as TimeScaleOptions),
+} as LineChartOptions);
+
+/**
+ * options specific to stacked area charts
+ */
+const stackedAreaChart = areaChart;
+
+/**
+ * options specific to bubble charts
+ */
+const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
+	bubble: {
+		radiusMapsTo: 'radius',
+		radiusLabel: 'Radius',
+		radiusRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 3) / 400,
+				(smallerChartDimension * 25) / 400,
+			];
+		},
+		fillOpacity: 0.2,
+		enabled: true,
+	},
+	points: {
+		filled: true,
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.RADIUS,
+				name: 'Radius',
+			},
+		],
+	},
+} as BubbleChartOptions);
+
+/**
+ * options specific to bullet charts
+ */
+const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
+	bullet: {
+		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great'],
+	},
+	grid: {
+		x: {
+			enabled: false,
+		},
+		y: {
+			enabled: false,
+		},
+	},
+	legend: {
+		additionalItems: [
+			{
+				type: LegendItemType.AREA,
+				name: 'Poor area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Satisfactory area',
+			},
+			{
+				type: LegendItemType.AREA,
+				name: 'Great area',
+			},
+			{
+				type: LegendItemType.QUARTILE,
+				name: 'Quartiles',
+			},
+		],
+	},
+} as BulletChartOptions);
+
+/**
+ * options specific to stacked bar charts
+ */
+const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+	bars: {
+		dividerSize: 1.5,
+	} as StackedBarOptions,
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0,
+	} as TimeScaleOptions),
+} as BarChartOptions);
+
+/*
+ * options specific to word cloud charts
+ */
+const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
+	tooltip: Tools.merge({}, baseTooltip, {
+		wordLabel: 'Word',
+		valueLabel: 'Value',
+	}) as WordCloudChartTooltipOptions,
+	wordCloud: {
+		fontSizeMapsTo: 'value',
+		fontSizeRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
+			return [
+				(smallerChartDimension * 20) / 400,
+				(smallerChartDimension * 75) / 400,
+			];
+		},
+		wordMapsTo: 'word',
+	},
+} as WorldCloudChartOptions);
 
 /**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
-		radiusOffset: -15,
-		innerRadius: 2,
-		padAngle: 0.007,
-		hoverArc: {
-			outerRadiusOffset: 3
-		},
-		xOffset: 30,
-		yOffset: 20,
-		yOffsetCallout: 10,
-		callout: {
-			minSliceDegree: 5,
-			offsetX: 15,
-			offsetY: 12,
-			horizontalLineLength: 8,
-			textMargin: 2
-		},
 		labels: {
-			formatter: null
-		}
-	}
+			formatter: null,
+			enabled: true,
+		},
+		alignment: Alignments.LEFT,
+		sortFunction: null,
+		valueMapsTo: 'value',
+	},
 } as PieChartOptions);
+
+/**
+ * options specific to gauge charts
+ */
+const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
+	legend: {
+		enabled: false,
+	},
+	gauge: {
+		type: GaugeTypes.SEMI,
+		arcWidth: 16,
+		deltaArrow: {
+			size: (radius) => radius / 8,
+			enabled: true,
+		},
+		showPercentageSymbol: true,
+		status: null,
+		numberSpacing: 10,
+		deltaFontSize: (radius) => radius / 8,
+		valueFontSize: (radius) => radius / 2.5,
+		numberFormatter: (number) =>
+			number.toFixed(2) % 1 !== 0
+				? number.toFixed(2).toLocaleString()
+				: number.toFixed().toLocaleString(),
+		alignment: Alignments.LEFT,
+	},
+} as GaugeChartOptions);
 
 /**
  * options specific to donut charts
@@ -215,13 +484,127 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
-			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
-			numberFormatter: number => Math.floor(number).toLocaleString()
-		}
-	}
+			numberFontSize: (radius) =>
+				Math.min((radius / 100) * 24, 24) + 'px',
+			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + 'px',
+			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
+			numberFormatter: (number) => Math.floor(number).toLocaleString(),
+		},
+		alignment: Alignments.LEFT,
+	},
 } as DonutChartOptions);
+
+const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+	legend: {
+		enabled: false,
+		clickable: false,
+	},
+	meter: {
+		showLabels: true,
+		proportional: null,
+		statusBar: {
+			percentageIndicator: {
+				enabled: true,
+			},
+		},
+	},
+} as MeterChartOptions);
+
+const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge(
+	{},
+	meterChart,
+	{
+		legend: {
+			enabled: true,
+		},
+	} as MeterChartOptions
+);
+
+/**
+ * options specific to radar charts
+ */
+const radarChart: RadarChartOptions = Tools.merge({}, chart, {
+	radar: {
+		axes: {
+			angle: 'key',
+			value: 'value',
+		},
+		alignment: Alignments.LEFT,
+	},
+	tooltip: {
+		gridline: {
+			enabled: true,
+		},
+		valueFormatter: (value) =>
+			value !== null && value !== undefined ? value : 'N/A',
+	},
+} as RadarChartOptions);
+
+/**
+ * options specific to combo charts
+ */
+const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
+	comboChartTypes: [],
+} as ComboChartOptions);
+
+/*
+ * options specific to tree charts
+ */
+const treeChart: TreeChartOptions = Tools.merge(
+	{
+		tree: {
+			type: TreeTypes.TREE,
+		},
+	},
+	chart,
+	{} as TreeChartOptions
+);
+
+/*
+ * options specific to treemap charts
+ */
+const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
+	data: Tools.merge(chart.data, {
+		groupMapsTo: 'name',
+	}),
+} as TreemapChartOptions);
+
+/*
+ * options specific to circle pack charts
+ */
+const circlePackChart: CirclePackChartOptions = Tools.merge(
+	{},
+	chart,
+	circlePack,
+	{
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'name',
+		}),
+	} as CirclePackChartOptions
+);
+
+const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
+	alluvial: {
+		data: Tools.merge(chart.data, {
+			groupMapsTo: 'source',
+		}),
+		nodePadding: 24,
+		monochrome: false,
+		nodes: [],
+	},
+} as AlluvialChartOptions);
+
+const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
+	axes,
+	heatmap: {
+		divider: {
+			state: DividerStatus.AUTO,
+		},
+		colorLegend: {
+			type: 'linear',
+		},
+	},
+} as HeatmapChartOptions);
 
 export const options = {
 	chart,
@@ -229,52 +612,28 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	boxplotChart,
+	bubbleChart,
+	bulletChart,
+	histogramChart,
 	lineChart,
+	areaChart,
+	stackedAreaChart,
 	scatterChart,
+	lollipopChart,
 	pieChart,
-	donutChart
+	donutChart,
+	meterChart,
+	proportionalMeterChart,
+	radarChart,
+	gaugeChart,
+	comboChart,
+	treeChart,
+	treemapChart,
+	circlePackChart,
+	wordCloudChart,
+	alluvialChart,
+	heatmapChart,
 };
 
-/**
- * Options for line behaviour
- */
-export const lines = {
-	opacity: {
-		unselected: 0.3,
-		selected: 1
-	}
-};
-
-/**
- * Base transition configuration
- */
-export const transitions = {
-	default: {
-		duration: 300
-	},
-	pie_slice_mouseover: {
-		duration: 100
-	},
-	pie_chart_titles: {
-		duration: 375
-	},
-	graph_element_mouseover_fill_update: {
-		duration: 100
-	},
-	graph_element_mouseout_fill_update: {
-		duration: 100
-	}
-};
-
-export const axis = {
-	ticks: {
-		number: 7,
-		rotateIfSmallerThan: 30
-	}
-};
-
-export const spacers = {
-	default: {
-		size: 24
-	}
-};
+export * from './configuration-non-customizable';

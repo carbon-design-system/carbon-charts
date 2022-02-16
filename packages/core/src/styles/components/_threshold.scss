@@ -1,0 +1,49 @@
+.#{$prefix}--#{$charts-prefix}--threshold {
+	line.threshold-line {
+		stroke: $red-50;
+		stroke-width: 1;
+		stroke-dasharray: 4;
+		cursor: pointer;
+		pointer-events: none;
+	}
+
+	line.threshold-line.active {
+		stroke-width: 2;
+	}
+
+	rect.threshold-hoverable-area {
+		height: 20px;
+		transform: translate(0, -10px);
+		cursor: pointer;
+		fill: transparent;
+
+		&.rotate {
+			transform: rotate(90deg) translate(0, -10px);
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--threshold--label {
+	background-color: $red-50;
+	pointer-events: none;
+	transition: opacity 0.1s;
+	@include carbon--motion(standard, expressive);
+	display: inline;
+	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+	position: absolute;
+	word-wrap: break-word;
+	z-index: 1059;
+	font-family: carbon--font-family('sans-condensed');
+
+	color: $text-01;
+	line-height: 16px;
+	font-size: 12px;
+	padding: 4px;
+	min-width: 20px;
+
+	&.hidden {
+		opacity: 0;
+		transition: opacity 0.1s;
+		@include carbon--motion(standard, expressive);
+	}
+}

@@ -1,72 +1,59 @@
 // Internal Imports
-import { Component } from "../component";
-import { AxisPositions, ScaleTypes } from "../../interfaces";
-import { Axis } from "./axis";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
+import { Component } from '../component';
+import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces';
+import { Axis } from './axis';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import { Threshold } from '../essentials/threshold';
+import { Events } from './../../interfaces';
+import { HoverAxis } from './hover-axis';
 
 export class TwoDimensionalAxes extends Component {
-	type = "2D-axes";
+	type = '2D-axes';
+	renderType = RenderTypes.SVG;
 
 	children: any = {};
+
+	thresholds: Threshold[] = [];
 
 	margins = {
 		top: 0,
 		right: 0,
 		bottom: 0,
-		left: 0
+		left: 0,
 	};
 
 	render(animate = false) {
 		const axes = {};
-
 		const axisPositions = Object.keys(AxisPositions);
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
 
-		if (axesOptions) {
-			let primaryAxisOptions, secondaryAxisOptions;
-			axisPositions.forEach(axisPosition => {
-				const axisOptions = axesOptions[AxisPositions[axisPosition]];
-				if (axisOptions) {
-					axes[AxisPositions[axisPosition]] = true;
-
-					if (axisOptions.primary === true) {
-						primaryAxisOptions = axisOptions;
-					} else if (axisOptions.secondary === true) {
-						secondaryAxisOptions = axisOptions;
-					}
-				}
-			});
-		} else {
-			this.model.getOptions().axes = {
-				left: {
-					primary: true
-				},
-				bottom: {
-					secondary: true,
-					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
-				}
-			};
-
-			axes[AxisPositions.LEFT] = true;
-			axes[AxisPositions.BOTTOM] = true;
-		}
+		axisPositions.forEach((axisPosition) => {
+			const axisOptions = axesOptions[AxisPositions[axisPosition]];
+			if (axisOptions) {
+				axes[AxisPositions[axisPosition]] = true;
+			}
+		});
 
 		this.configs.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach(axisPositionKey => {
+		axisPositions.forEach((axisPositionKey) => {
 			const axisPosition = AxisPositions[axisPositionKey];
-			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
-				const axisComponent = new Axis(
-					this.model,
-					this.services,
-					{
-						position: axisPosition,
-						axes: this.configs.axes,
-						margins: this.margins
-					}
-				);
+			if (
+				this.configs.axes[axisPosition] &&
+				!this.children[axisPosition]
+			) {
+				const configs = {
+					position: axisPosition,
+					axes: this.configs.axes,
+					margins: this.margins,
+				};
+
+				const axisComponent =
+					this.model.axisFlavor === AxisFlavor.DEFAULT
+						? new Axis(this.model, this.services, configs)
+						: new HoverAxis(this.model, this.services, configs);
 
 				// Set model, services & parent for the new axis component
 				axisComponent.setModel(this.model);
@@ -77,14 +64,14 @@ export class TwoDimensionalAxes extends Component {
 			}
 		});
 
-		Object.keys(this.children).forEach(childKey => {
+		Object.keys(this.children).forEach((childKey) => {
 			const child = this.children[childKey];
 			child.render(animate);
 		});
 
 		const margins = {} as any;
 
-		Object.keys(this.children).forEach(childKey => {
+		Object.keys(this.children).forEach((childKey) => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
 
@@ -94,13 +81,25 @@ export class TwoDimensionalAxes extends Component {
 			// To be able to tell the final width & height of the axis when initiaing the transition
 			// The invisible axis is updated instantly and without a transition
 			const invisibleAxisRef = child.getInvisibleAxisRef();
-			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+			const {
+				width,
+				height,
+			} = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
 
 			let offset;
 			if (child.getTitleRef().empty()) {
 				offset = 0;
 			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), { useBBox: true }).height;
+				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
+					useBBox: true,
+				}).height;
+
+				if (
+					axisPosition === AxisPositions.LEFT ||
+					axisPosition === AxisPositions.RIGHT
+				) {
+					offset += 5;
+				}
 			}
 
 			switch (axisPosition) {
@@ -119,15 +118,21 @@ export class TwoDimensionalAxes extends Component {
 			}
 		});
 
+		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE);
+
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some(marginKey => {
+		const isNotEqual = Object.keys(margins).some((marginKey) => {
 			return this.margins[marginKey] !== margins[marginKey];
 		});
 
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins);
 
-			Object.keys(this.children).forEach(childKey => {
+			// also set new margins to model to allow external components to access
+			this.model.set({ axesMargins: this.margins }, { skipUpdate: true });
+			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE);
+
+			Object.keys(this.children).forEach((childKey) => {
 				const child = this.children[childKey];
 				child.margins = this.margins;
 			});

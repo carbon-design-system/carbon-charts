@@ -12,7 +12,9 @@ import { reset } from './reset';
 import { getTypeSize, scale } from './scale';
 import * as styles from './styles';
 
+export { fluid } from './fluid';
 export * from './styles';
+export { unstable_tokens } from './tokens';
 export {
   fontFamilies,
   fontFamily,

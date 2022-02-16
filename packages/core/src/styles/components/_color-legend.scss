@@ -1,0 +1,24 @@
+svg.#{$prefix}--#{$charts-prefix}--color-legend {
+	display: flex;
+	user-select: none;
+
+	@if $carbon--theme ==
+		$carbon--theme--g90 or
+		$carbon--theme ==
+		$carbon--theme--g100
+	{
+		g.legend-title text {
+			color: white;
+		}
+	}
+
+	@if $carbon--theme ==
+		$carbon--theme--g10 or
+		$carbon--theme ==
+		$carbon--theme--white
+	{
+		g.legend-title text {
+			fill: black;
+		}
+	}
+}

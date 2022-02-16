@@ -1,71 +1,115 @@
 // Internal Imports
-import { Component } from "../component";
-import { DOMUtils } from "../../services";
-import { TooltipTypes } from "./../../interfaces";
+import { Component } from '../component';
+import { DOMUtils } from '../../services';
+import { Events, RenderTypes } from './../../interfaces';
+import { Tools } from '../../tools';
 
 export class Title extends Component {
-	type = "title";
+	type = 'title';
+	renderType = RenderTypes.HTML;
+
+	render() {
+		const svg = this.getComponentContainer();
+		const title = Tools.getProperty(this.getOptions(), 'title');
+
+		const text = svg.selectAll('p.title').data([title]);
+
+		text.enter()
+			.append('p')
+			.classed('title', true)
+			.attr('role', 'heading')
+			.attr('aria-level', 2)
+			.merge(text)
+			.html((d) => d);
+
+		// check if title needs truncation (and tooltip support)
+		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {
+			// add events for displaying the tooltip with the title
+			const self = this;
+			text.on('mouseover', function (event) {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
+					hoveredElement: text,
+					content: text.text(),
+				});
+			})
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
+				})
+				.on('mouseout', function () {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				});
+		}
+
+		text.exit().remove();
+	}
 
 	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
-	truncateTitle() {
-		// get a reference to the title elements to calculate the size the title can be
-		const containerWidth = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true }).width;
-		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
-
+	truncateTitle(title, maxWidth) {
 		// sanity check to prevent stack overflow on binary search
-		if (containerWidth <= 0) {
+		if (maxWidth <= 0) {
 			return;
 		}
 
+		const untruncatedTitle = title.text();
 		// check if the title is too big for the containing svg
-		if (title.node().getComputedTextLength() > containerWidth) {
+		if (title.node().getComputedTextLength() > maxWidth) {
 			// append the ellipses to their own tspan to calculate the text length
-			title.append("tspan")
-				.text("...");
+			title.append('tspan').text('...');
 
 			// get the bounding width including the elipses '...'
-			const tspanLength = DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength();
-			const truncatedSize = Math.floor(containerWidth - tspanLength);
-			const titleString = this.model.getOptions().title;
+			const tspanLength = DOMUtils.appendOrSelect(title, 'tspan')
+				.node()
+				.getComputedTextLength();
+
+			// with elipses
+			const titleString = title.text();
 
 			// get the index for creating the max length substring that fit within the svg
 			// use one less than the index to avoid crowding (the elipsis)
-			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
+			const substringIndex = this.getSubstringIndex(
+				title.node(),
+				0,
+				titleString.length - 1,
+				maxWidth - tspanLength
+			);
 
 			// use the substring as the title
-			title.text(titleString.substring(0, substringIndex - 1))
-				.append("tspan")
-				.text("...");
+			title
+				.html(titleString.substring(0, substringIndex - 1))
+				.append('tspan')
+				.text('...');
 
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on("mouseenter", function() {
-					self.services.events.dispatchEvent("show-tooltip", {
+				.on('mouseover', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
 						hoveredElement: title,
-						type: TooltipTypes.TITLE
+						content: untruncatedTitle,
 					});
 				})
-				.on("mouseout", function() {
-					self.services.events.dispatchEvent("hide-tooltip", {
-						hoveredElement: title,
+				.on('mousemove', function (event) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
 					});
+				})
+				.on('mouseout', function () {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				});
 		}
 	}
 
-	render() {
-		const svg = this.getContainerSVG();
-
-		const text = DOMUtils.appendOrSelect(svg, "text.title");
-		text.attr("x", 0)
-			.attr("y", 20)
-			.text(this.model.getOptions().title);
-
-		// title needs to first render so that we can check for overflow
-		this.truncateTitle();
+	// computes the maximum space a title can take
+	protected getMaxTitleWidth() {
+		return DOMUtils.getSVGElementSize(this.parent.node(), {
+			useAttrs: true,
+		}).width;
 	}
 
 	/**

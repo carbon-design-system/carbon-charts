@@ -1,0 +1,7 @@
+.#{$prefix}--#{$charts-prefix}--highlight {
+	rect.highlight-bar {
+		pointer-events: none;
+		fill: $magenta-50;
+		stroke: $magenta-50;
+	}
+}

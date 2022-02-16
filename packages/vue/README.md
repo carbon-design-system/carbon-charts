@@ -2,11 +2,11 @@
 
 > Carbon Charting Vue Wrappers
 
-**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/vue)**
+**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
-**[Storybook Demo Sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/vue/stories)**
+**[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
-## Getting Started
+## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
@@ -21,15 +21,26 @@ instead:
 yarn add @carbon/charts @carbon/charts-vue d3
 ```
 
-## Step-by-step Instructions
-[Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vue)
+**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
 
-## Sample Project
-[![Edit Carbon Charts - React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/carbon-charts-vue-gg15t)
+## Step-by-step instructions
 
-## Charting Data & Options
-Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components, .
+Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vue)
 
-For instance, in the case of pie and donut charts, you would only provide one data set. In the case of donut charts, you can pass in an additional field called `center` in your options configuring the donut center.
+## Codesandbox examples
 
-There are also additional options available depending on the chart type being used, [for more examples please see here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/demo-data).
+[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
+
+**When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
+
+## Charting data & options
+
+Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
+
+For instance in the case of a donut chart you're able to pass in an additional field called `center` in your options configuring the donut center.
+
+For instructions on using the **tabular data format**, see [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
+
+There are also additional options available depending on the chart type being used, [see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data).
+
+Customizable options (specific to chart type) can be found [here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)

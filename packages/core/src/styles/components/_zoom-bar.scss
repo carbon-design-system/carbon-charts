@@ -1,0 +1,51 @@
+.#{$prefix}--#{$charts-prefix}--zoom-bar {
+	rect.zoom-bg {
+		fill: $ui-background;
+		stroke: $ui-01;
+	}
+
+	rect.zoom-slider-bg {
+		fill: $ui-01;
+	}
+
+	rect.zoom-slider-selected-area {
+		fill: $icon-02;
+	}
+
+	path.zoom-bg-baseline {
+		stroke: $ui-04;
+		stroke-width: 2;
+	}
+
+	path.zoom-graph-area {
+		fill: $ui-03;
+		stroke: $ui-04;
+		stroke-width: 1;
+	}
+
+	path.zoom-graph-area-unselected {
+		fill: $ui-01;
+		stroke: none;
+	}
+
+	g.zoom-bar-brush {
+		rect.handle {
+			fill: $icon-02;
+		}
+
+		rect.handle-bar {
+			fill: $ui-02;
+		}
+
+		// clear d3.brush selection style
+		rect.selection {
+			fill: none;
+			stroke: none;
+		}
+	}
+
+	rect[class^='highlight-'] {
+		fill: $magenta-50;
+		stroke: $magenta-50;
+	}
+}

@@ -1,0 +1,359 @@
+@function getColorValue($color, $scale) {
+	@return map-get(map-get($ibm-color-map, $color), $scale);
+}
+
+$white-theme-colors: (
+	'1': (
+		'1': (
+			'1': getColorValue('purple', 70),
+		),
+		'2': (
+			'1': getColorValue('blue', 80),
+		),
+		'3': (
+			'1': getColorValue('cyan', 50),
+		),
+		'4': (
+			'1': getColorValue('teal', 60),
+		),
+	),
+	'2': (
+		'1': (
+			'1': getColorValue('purple', 70),
+			'2': getColorValue('teal', 50),
+		),
+		'2': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('red', 90),
+		),
+		'3': (
+			'1': getColorValue('magenta', 70),
+			'2': getColorValue('red', 90),
+		),
+		'4': (
+			'1': getColorValue('cyan', 50),
+			'2': getColorValue('teal', 70),
+		),
+		'5': (
+			'1': getColorValue('teal', 50),
+			'2': getColorValue('blue', 80),
+		),
+	),
+	'3': (
+		'1': (
+			'1': getColorValue('magenta', 50),
+			'2': getColorValue('cyan', 50),
+			'3': getColorValue('purple', 70),
+		),
+		'2': (
+			'1': getColorValue('magenta', 70),
+			'2': getColorValue('red', 50),
+			'3': getColorValue('red', 90),
+		),
+		'3': (
+			'1': getColorValue('purple', 50),
+			'2': getColorValue('teal', 70),
+			'3': getColorValue('blue', 80),
+		),
+		'4': (
+			'1': getColorValue('purple', 50),
+			'2': getColorValue('teal', 70),
+			'3': getColorValue('magenta', 70),
+		),
+		'5': (
+			'1': getColorValue('cyan', 90),
+			'2': getColorValue('purple', 70),
+			'3': getColorValue('teal', 50),
+		),
+	),
+	'4': (
+		'1': (
+			'1': getColorValue('purple', 70),
+			'2': getColorValue('cyan', 90),
+			'3': getColorValue('teal', 50),
+			'4': getColorValue('magenta', 50),
+		),
+		'2': (
+			'1': getColorValue('magenta', 70),
+			'2': getColorValue('red', 50),
+			'3': getColorValue('red', 90),
+			'4': getColorValue('purple', 50),
+		),
+		'3': (
+			'1': getColorValue('teal', 50),
+			'2': getColorValue('blue', 80),
+			'3': getColorValue('purple', 50),
+			'4': getColorValue('magenta', 70),
+		),
+	),
+	'5': (
+		'1': (
+			'1': getColorValue('purple', 70),
+			'2': getColorValue('cyan', 50),
+			'3': getColorValue('teal', 70),
+			'4': getColorValue('magenta', 70),
+			'5': getColorValue('red', 90),
+		),
+		'2': (
+			'1': getColorValue('blue', 80),
+			'2': getColorValue('teal', 50),
+			'3': getColorValue('magenta', 70),
+			'4': getColorValue('red', 90),
+			'5': getColorValue('purple', 50),
+		),
+	),
+	'14': (
+		'1': (
+			'1': getColorValue('purple', 70),
+			'2': getColorValue('cyan', 50),
+			'3': getColorValue('teal', 70),
+			'4': getColorValue('magenta', 70),
+			'5': getColorValue('red', 50),
+			'6': getColorValue('red', 90),
+			'7': getColorValue('green', 60),
+			'8': getColorValue('blue', 80),
+			'9': getColorValue('magenta', 50),
+			'10': #b28600,
+			//yellow 50, update when available in carbon color
+			'11': getColorValue('teal', 50),
+			'12': getColorValue('cyan', 90),
+			'13': #8a3800,
+			//orange 70, update when available in carbon color
+			'14': getColorValue('purple', 50),
+		),
+	),
+);
+
+$dark-theme-colors: (
+	'1': (
+		'1': (
+			'1': getColorValue('purple', 30),
+		),
+		'2': (
+			'1': getColorValue('blue', 50),
+		),
+		'3': (
+			'1': getColorValue('cyan', 40),
+		),
+		'4': (
+			'1': getColorValue('teal', 40),
+		),
+	),
+	'2': (
+		'1': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('teal', 40),
+		),
+		'2': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('magenta', 40),
+		),
+		'3': (
+			'1': getColorValue('magenta', 40),
+			'2': getColorValue('red', 10),
+		),
+		'4': (
+			'1': getColorValue('blue', 50),
+			'2': getColorValue('cyan', 20),
+		),
+		'5': (
+			'1': getColorValue('teal', 60),
+			'2': getColorValue('green', 30),
+		),
+	),
+	'3': (
+		'1': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('cyan', 20),
+		),
+		'2': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('magenta', 40),
+			'3': getColorValue('red', 10),
+		),
+		'3': (
+			'1': getColorValue('blue', 50),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('purple', 30),
+		),
+		'4': (
+			'1': getColorValue('blue', 50),
+			'2': getColorValue('green', 30),
+			'3': getColorValue('red', 10),
+		),
+		'5': (
+			'1': getColorValue('teal', 60),
+			'2': getColorValue('green', 30),
+			'3': getColorValue('cyan', 20),
+		),
+	),
+	'4': (
+		'1': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('cyan', 20),
+			'4': getColorValue('blue', 50),
+		),
+		'2': (
+			'1': getColorValue('blue', 50),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('purple', 30),
+			'4': getColorValue('red', 10),
+		),
+		'3': (
+			'1': getColorValue('teal', 60),
+			'2': getColorValue('red', 10),
+			'3': getColorValue('cyan', 40),
+			'4': getColorValue('green', 30),
+		),
+	),
+	'5': (
+		'1': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('cyan', 20),
+			'4': getColorValue('blue', 50),
+			'5': getColorValue('magenta', 40),
+		),
+		'2': (
+			'1': getColorValue('blue', 50),
+			'2': getColorValue('teal', 40),
+			'3': getColorValue('purple', 30),
+			'4': getColorValue('red', 10),
+			'5': getColorValue('green', 30),
+		),
+	),
+	'14': (
+		'1': (
+			'1': getColorValue('purple', 60),
+			'2': getColorValue('cyan', 40),
+			'3': getColorValue('teal', 60),
+			'4': getColorValue('magenta', 40),
+			'5': getColorValue('red', 50),
+			'6': getColorValue('red', 10),
+			'7': getColorValue('green', 30),
+			'8': getColorValue('blue', 50),
+			'9': getColorValue('magenta', 60),
+			'10': #d2a106,
+			//yellow 40, update when available in carbon color
+			'11': getColorValue('teal', 40),
+			'12': getColorValue('cyan', 20),
+			'13': #ba4e00,
+			//orange 60, update when available in carbon color
+			'14': getColorValue('purple', 30),
+		),
+	),
+);
+
+$dark-theme-legend-area-item-colors: (
+	'1': getColorValue('gray', 90),
+	'2': getColorValue('gray', 80),
+	'3': getColorValue('gray', 70),
+);
+
+$dark-theme-legend-area-item-stroke: getColorValue('gray', 60);
+
+$white-theme-legend-area-item-colors: (
+	'1': getColorValue('gray', 10),
+	'2': getColorValue('gray', 20),
+	'3': getColorValue('gray', 30),
+);
+
+$white-theme-legend-area-item-stroke: getColorValue('gray', 50);
+
+$monochrome-quantize-colors: (
+	'mono-1': (
+		'1': #ffffff,
+		'2': getColorValue('purple', 10),
+		'3': getColorValue('purple', 20),
+		'4': getColorValue('purple', 30),
+		'5': getColorValue('purple', 40),
+		'6': getColorValue('purple', 50),
+		'7': getColorValue('purple', 60),
+		'8': getColorValue('purple', 70),
+		'9': getColorValue('purple', 80),
+		'10': getColorValue('purple', 90),
+		'11': getColorValue('purple', 100),
+	),
+	'mono-2': (
+		'1': #ffffff,
+		'2': getColorValue('blue', 10),
+		'3': getColorValue('blue', 20),
+		'4': getColorValue('blue', 30),
+		'5': getColorValue('blue', 40),
+		'6': getColorValue('blue', 50),
+		'7': getColorValue('blue', 60),
+		'8': getColorValue('blue', 70),
+		'9': getColorValue('blue', 80),
+		'10': getColorValue('blue', 90),
+		'11': getColorValue('blue', 100),
+	),
+	'mono-3': (
+		'1': #ffffff,
+		'2': getColorValue('cyan', 10),
+		'3': getColorValue('cyan', 20),
+		'4': getColorValue('cyan', 30),
+		'5': getColorValue('cyan', 40),
+		'6': getColorValue('cyan', 50),
+		'7': getColorValue('cyan', 60),
+		'8': getColorValue('cyan', 70),
+		'9': getColorValue('cyan', 80),
+		'10': getColorValue('cyan', 90),
+		'11': getColorValue('cyan', 100),
+	),
+	'mono-4': (
+		'1': #ffffff,
+		'2': getColorValue('teal', 10),
+		'3': getColorValue('teal', 20),
+		'4': getColorValue('teal', 30),
+		'5': getColorValue('teal', 40),
+		'6': getColorValue('teal', 50),
+		'7': getColorValue('teal', 60),
+		'8': getColorValue('teal', 70),
+		'9': getColorValue('teal', 80),
+		'10': getColorValue('teal', 90),
+		'11': getColorValue('teal', 100),
+	),
+);
+
+$divergent-quantize-colors: (
+	'diverge-1': (
+		'1': getColorValue('red', 80),
+		'2': getColorValue('red', 70),
+		'3': getColorValue('red', 60),
+		'4': getColorValue('red', 50),
+		'5': getColorValue('red', 40),
+		'6': getColorValue('red', 30),
+		'7': getColorValue('red', 20),
+		'8': getColorValue('red', 10),
+		'9': #ffffff,
+		'10': getColorValue('cyan', 10),
+		'11': getColorValue('cyan', 20),
+		'12': getColorValue('cyan', 30),
+		'13': getColorValue('cyan', 40),
+		'14': getColorValue('cyan', 50),
+		'15': getColorValue('cyan', 60),
+		'16': getColorValue('cyan', 70),
+		'17': getColorValue('cyan', 80),
+	),
+	'diverge-2': (
+		'1': getColorValue('purple', 80),
+		'2': getColorValue('purple', 70),
+		'3': getColorValue('purple', 60),
+		'4': getColorValue('purple', 50),
+		'5': getColorValue('purple', 40),
+		'6': getColorValue('purple', 30),
+		'7': getColorValue('purple', 20),
+		'8': getColorValue('purple', 10),
+		'9': #ffffff,
+		'10': getColorValue('teal', 10),
+		'11': getColorValue('teal', 20),
+		'12': getColorValue('teal', 30),
+		'13': getColorValue('teal', 40),
+		'14': getColorValue('teal', 50),
+		'15': getColorValue('teal', 60),
+		'16': getColorValue('teal', 70),
+		'17': getColorValue('teal', 80),
+	),
+);

@@ -1,69 +1,182 @@
 // Internal Imports
-import { Component } from "../component";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
+import { Component } from '../component';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import { RenderTypes } from '../../interfaces';
 
 // D3 Imports
-import { axisBottom, axisLeft } from "d3-axis";
-import { mouse, select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { axisBottom, axisLeft } from 'd3-axis';
+
+import { transition } from 'd3-transition';
 
 export class Grid extends Component {
-	type = "grid";
+	type = 'grid';
+	renderType = RenderTypes.SVG;
 
 	backdrop: any;
 
-	render() {
+	render(animate = true) {
+		const isXGridEnabled = Tools.getProperty(
+			this.getOptions(),
+			'grid',
+			'x',
+			'enabled'
+		);
+		const isYGridEnabled = Tools.getProperty(
+			this.getOptions(),
+			'grid',
+			'y',
+			'enabled'
+		);
+
 		// Draw the backdrop
-		this.drawBackdrop();
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
 
-		this.drawXGrid();
-		this.drawYGrid();
+		if (!isXGridEnabled && !isYGridEnabled) {
+			return;
+		}
 
-		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
-			this.addGridEventListeners();
+		if (isXGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, 'g.x.grid');
+			this.drawXGrid(animate);
+		}
+
+		if (isYGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, 'g.y.grid');
+			this.drawYGrid(animate);
 		}
 	}
 
-	drawXGrid() {
+	drawXGrid(animate: boolean) {
 		const svg = this.parent;
 
-		const height = this.backdrop.attr("height");
+		const height = this.backdrop.attr('height');
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
-		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks");
-		xGrid.ticks(numberOfTicks);
+		// if the main range axis has a custom domain, align the gridlines to the ticks
+		const alignToTicks = Tools.getProperty(
+			this.getOptions(),
+			'grid',
+			'x',
+			'alignWithAxisTicks'
+		);
 
-		const g = svg.select(".x.grid")
-			.attr("transform", `translate(${-this.backdrop.attr("x")}, ${height})`)
-			.call(xGrid);
+		if (alignToTicks) {
+			const mainXPosition = this.services.cartesianScales.getDomainAxisPosition();
+			const customDomain = Tools.getProperty(
+				this.getOptions(),
+				'axes',
+				mainXPosition,
+				'ticks',
+				'values'
+			);
+			// use custom domain if there is one
+			// otherwise d3 defaults to using one gridline per tick
+			if (customDomain) {
+				xGrid.tickValues(customDomain);
+			}
+		} else {
+			// Determine number of ticks
+			const numberOfTicks = Tools.getProperty(
+				this.getOptions(),
+				'grid',
+				'x',
+				'numberOfTicks'
+			);
+
+			xGrid.ticks(numberOfTicks);
+		}
+
+		const g = svg
+			.select('.x.grid')
+			.attr(
+				'transform',
+				`translate(${-this.backdrop.attr('x')}, ${height})`
+			);
+
+		if (animate) {
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(xGrid);
+		} else {
+			g.call(xGrid);
+		}
 
 		this.cleanGrid(g);
 	}
 
-	drawYGrid() {
+	drawYGrid(animate: boolean) {
 		const svg = this.parent;
-		const width = this.backdrop.attr("width");
+		const width = this.backdrop.attr('width');
 
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const yGrid = axisLeft(mainYScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
-		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks");
-		yGrid.ticks(numberOfTicks);
+		// if the main range axis has a custom domain, align the gridlines to the ticks
+		const alignToTicks = Tools.getProperty(
+			this.getOptions(),
+			'grid',
+			'y',
+			'alignWithAxisTicks'
+		);
 
-		const g = svg.select(".y.grid")
-			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`)
-			.call(yGrid);
+		if (alignToTicks) {
+			const mainYPosition = this.services.cartesianScales.getRangeAxisPosition();
+
+			const customDomain = Tools.getProperty(
+				this.getOptions(),
+				'axes',
+				mainYPosition,
+				'ticks',
+				'values'
+			);
+
+			// use custom domain if there is one
+			// otherwise d3 defaults to using one gridline per tick
+			if (customDomain) {
+				yGrid.tickValues(customDomain);
+			}
+		} else {
+			// Determine number of ticks
+			const numberOfTicks = Tools.getProperty(
+				this.getOptions(),
+				'grid',
+				'y',
+				'numberOfTicks'
+			);
+
+			yGrid.ticks(numberOfTicks);
+		}
+
+		const g = svg
+			.select('.y.grid')
+			.attr('transform', `translate(0, ${-this.backdrop.attr('y')})`);
+
+		if (animate) {
+			g.transition()
+				.call((t) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'grid-update',
+						animate,
+					})
+				)
+				.call(yGrid);
+		} else {
+			g.call(yGrid);
+		}
 
 		this.cleanGrid(g);
 	}
@@ -77,19 +190,29 @@ export class Grid extends Component {
 		const svg = this.parent;
 
 		// sort in ascending x translation value order
-		const gridlinesX = svg.selectAll(".x.grid .tick").nodes()
-		.sort((a, b) => {
-			return Number(Tools.getTranslationValues(a).tx) - Number(Tools.getTranslationValues(b).tx);
-		});
+		const gridlinesX = svg
+			.selectAll('.x.grid .tick')
+			.nodes()
+			.sort((a, b) => {
+				return (
+					Number(Tools.getTranslationValues(a).tx) -
+					Number(Tools.getTranslationValues(b).tx)
+				);
+			});
 
 		// find the 2 gridlines on either side of the mouse
-		let floor = -1; let ceiling;
+		let floor = -1;
+		let ceiling;
+		if (!gridlinesX.length) {
+			return;
+		}
+
 		gridlinesX.forEach((line: HTMLElement, i: any) => {
 			if (mousePos[0] >= +Tools.getTranslationValues(line).tx) {
-				floor ++;
+				floor++;
 			}
 		});
-		ceiling = (floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
+		ceiling = floor + 1 < gridlinesX.length ? floor + 1 : gridlinesX.length;
 
 		// get the 'step' between chart gridlines
 		const line1 = gridlinesX[floor];
@@ -103,15 +226,17 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridElement = svg.select("rect.chart-grid-backdrop").node();
+			const gridElement = svg.select('rect.chart-grid-backdrop').node();
 			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
 		} else {
 			// there are two gridlines to use
-			lineSpacing = +Tools.getTranslationValues(line2).tx - +Tools.getTranslationValues(line1).tx;
+			lineSpacing =
+				+Tools.getTranslationValues(line2).tx -
+				+Tools.getTranslationValues(line1).tx;
 		}
-		const { threshold }  = this.model.getOptions().tooltip.gridline;
+		const { threshold } = this.getOptions().tooltip.gridline;
 		// return the threshold
 		return lineSpacing * threshold;
 	}
@@ -121,76 +246,33 @@ export class Grid extends Component {
 	 * @param position mouse positon
 	 */
 	getActiveGridline(position) {
-		const threshold = Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") ?
-			Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") : this.getGridlineThreshold(position);
+		const userSpecifiedThreshold = Tools.getProperty(
+			this.getOptions,
+			'tooltip',
+			'gridline',
+			'threshold'
+		);
+		const threshold = userSpecifiedThreshold
+			? userSpecifiedThreshold
+			: this.getGridlineThreshold(position);
 		const svg = this.parent;
 
-		const gridlinesX = svg.selectAll(".x.grid .tick")
-		.filter(function() {
+		const xGridlines = svg.selectAll('.x.grid .tick').filter(function () {
 			const translations = Tools.getTranslationValues(this);
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
 				min: Number(translations.tx) - threshold,
-				max: Number(translations.tx) + threshold };
+				max: Number(translations.tx) + threshold,
+			};
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
 		});
 
-		return gridlinesX;
+		return xGridlines;
 	}
 
-	/**
-	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
-	 */
-	addGridEventListeners() {
-		const self = this;
-		const svg = this.parent;
-		const grid = DOMUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
-
-		grid
-		.on("mousemove mouseover", function() {
-			const chartContainer = self.services.domUtils.getMainSVG();
-			const pos = mouse(chartContainer);
-			const hoveredElement = select(this);
-
-			// remove the styling on the lines
-			const allgridlines = svg.selectAll(".x.grid .tick");
-			allgridlines.classed("active", false);
-
-			const activeGridline = self.getActiveGridline(pos);
-			if (activeGridline.empty()) {
-				self.services.events.dispatchEvent("hide-tooltip", {});
-				return;
-			}
-
-			// set active class to control dasharray and theme colors
-			activeGridline
-			.classed("active", true);
-
-			// get the items that should be highlighted
-			let highlightItems;
-
-			// use the selected gridline to get the data with associated domain
-			activeGridline.each(function(d) {
-				highlightItems = self.services.cartesianScales.getDataFromDomain(d);
-			});
-
-			self.services.events.dispatchEvent("show-tooltip", {
-				hoveredElement,
-				multidata: highlightItems,
-				type: TooltipTypes.GRIDLINE
-			});
-		})
-		.on("mouseout", function() {
-			svg.selectAll(".x.grid .tick")
-			.classed("active", false);
-
-			self.services.events.dispatchEvent("hide-tooltip", {});
-		});
-	}
-
-	drawBackdrop() {
+	drawBackdrop(isXGridEnabled, isYGridEnabled) {
 		const svg = this.parent;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
@@ -200,27 +282,28 @@ export class Grid extends Component {
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
-		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop');
+		const backdropRect = DOMUtils.appendOrSelect(
+			this.backdrop,
+			isXGridEnabled || isYGridEnabled
+				? 'rect.chart-grid-backdrop.stroked'
+				: 'rect.chart-grid-backdrop'
+		);
 
-		this.backdrop.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
+		this.backdrop
+			.merge(backdropRect)
+			.attr('x', xScaleStart)
+			.attr('y', yScaleStart)
+			.attr('width', Math.abs(xScaleEnd - xScaleStart))
+			.attr('height', Math.abs(yScaleEnd - yScaleStart))
 			.lower();
 
-		backdropRect.attr("width", "100%")
-			.attr("height", "100%");
+		backdropRect.attr('width', '100%').attr('height', '100%');
 	}
 
 	cleanGrid(g) {
-		const options = this.model.getOptions();
-		g.selectAll("line")
-			.attr("stroke", options.grid.strokeColor);
-
 		// Remove extra elements
-		g.selectAll("text").remove();
-		g.select(".domain").remove();
+		g.selectAll('text').remove();
+		g.select('.domain').remove();
 	}
 }

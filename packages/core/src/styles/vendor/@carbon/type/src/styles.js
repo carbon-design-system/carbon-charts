@@ -6,76 +6,98 @@
  */
 
 import { px, rem } from '@carbon/layout';
-import { fluid } from './fluid';
 import { fontWeights } from './fontWeight';
+import { fontFamilies } from './fontFamily';
 import { scale } from './scale';
 
 export const caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
+  letterSpacing: px(0.32),
+};
+
+export const caption02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.29,
   letterSpacing: px(0.32),
 };
 
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
+  letterSpacing: px(0.32),
+};
+
+export const label02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.29,
   letterSpacing: px(0.32),
 };
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: rem(16),
+  lineHeight: 1.34,
+  letterSpacing: px(0.32),
+};
+
+export const helperText02 = {
+  fontSize: rem(scale[1]),
+  lineHeight: 1.29,
   letterSpacing: px(0.32),
 };
 
 export const bodyShort01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(18),
+  lineHeight: 1.29,
   letterSpacing: px(0.16),
 };
 
 export const bodyLong01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.43,
   letterSpacing: px(0.16),
 };
 
 export const bodyShort02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0,
 };
 
 export const bodyLong02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(24),
+  lineHeight: 1.5,
   letterSpacing: 0,
 };
 
 export const code01 = {
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
 export const code02 = {
+  fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.43,
   letterSpacing: px(0.32),
 };
 
 export const heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(18),
+  lineHeight: 1.29,
   letterSpacing: px(0.16),
 };
 
@@ -84,7 +106,7 @@ export const productiveHeading01 = heading01;
 export const heading02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0,
 };
 
@@ -93,159 +115,166 @@ export const productiveHeading02 = heading02;
 export const productiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(26),
+  lineHeight: 1.4,
   letterSpacing: 0,
 };
 
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(36),
+  lineHeight: 1.29,
   letterSpacing: 0,
 };
 
 export const productiveHeading05 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(40),
+  lineHeight: 1.25,
   letterSpacing: 0,
 };
 
 export const productiveHeading06 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(50),
+  lineHeight: 1.199,
   letterSpacing: 0,
 };
 
 export const productiveHeading07 = {
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(64),
+  lineHeight: 1.19,
   letterSpacing: 0,
 };
 
-export const expressiveHeading01 = heading01;
+export const expressiveHeading01 = {
+  ...heading01,
+  lineHeight: 1.25,
+};
 
-export const expressiveHeading02 = heading02;
+export const expressiveHeading02 = {
+  ...heading02,
+  lineHeight: 1.5,
+};
 
-export const expressiveHeading03 = fluid({
+export const expressiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: '130%',
+  lineHeight: 1.4,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
       fontSize: rem(scale[4]),
-      lineHeight: '125%',
+      lineHeight: 1.25,
     },
     max: {
       fontSize: rem(scale[5]),
+      lineHeight: 1.334,
     },
   },
-});
+};
 
-export const expressiveHeading04 = fluid({
+export const expressiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: '129%',
+  lineHeight: 1.29,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
       fontSize: rem(scale[6]),
-      lineHeight: '125%',
+      lineHeight: 1.25,
     },
     max: {
       fontSize: rem(scale[7]),
     },
   },
-});
+};
 
-export const expressiveHeading05 = fluid({
+export const expressiveHeading05 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
       fontWeight: fontWeights.light,
-      lineHeight: '122%',
+      lineHeight: 1.22,
       letterSpacing: 0,
     },
     lg: {
       fontSize: rem(scale[9]),
       fontWeight: fontWeights.light,
-      lineHeight: '119%',
+      lineHeight: 1.19,
       letterSpacing: 0,
     },
     xlg: {
       fontSize: rem(scale[10]),
       fontWeight: fontWeights.light,
-      lineHeight: '117%',
+      lineHeight: 1.17,
       letterSpacing: 0,
     },
     max: {
       fontSize: rem(scale[12]),
       fontWeight: fontWeights.light,
-      lineHeight: rem(70),
       letterSpacing: 0,
     },
   },
-});
+};
 
-export const expressiveHeading06 = fluid({
+export const expressiveHeading06 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '122%',
+      lineHeight: 1.22,
       letterSpacing: 0,
     },
     lg: {
       fontSize: rem(scale[9]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '119%',
+      lineHeight: 1.19,
       letterSpacing: 0,
     },
     xlg: {
       fontSize: rem(scale[10]),
       fontWeight: fontWeights.semibold,
-      lineHeight: '117%',
+      lineHeight: 1.17,
       letterSpacing: 0,
     },
     max: {
       fontSize: rem(scale[12]),
       fontWeight: fontWeights.semibold,
-      lineHeight: rem(70),
       letterSpacing: 0,
     },
   },
-});
+};
 
-export const expressiveParagraph01 = fluid({
+export const expressiveParagraph01 = {
   fontSize: rem(scale[5]),
   fontWeight: fontWeights.light,
-  lineHeight: '125%',
+  lineHeight: 1.334,
   letterSpacing: 0,
-  lg: {
-    fontSize: rem(scale[6]),
-    lineHeight: '129%',
+  breakpoints: {
+    lg: {
+      fontSize: rem(scale[6]),
+      lineHeight: 1.29,
+    },
+    max: {
+      fontSize: rem(scale[7]),
+      lineHeight: 1.25,
+    },
   },
-  max: {
-    fontSize: rem(scale[7]),
-    lineHeight: '125%',
-  },
-});
+};
 
-export const quotation01 = fluid({
+export const quotation01 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: '130%',
+  lineHeight: 1.3,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -256,52 +285,52 @@ export const quotation01 = fluid({
     lg: {
       fontSize: rem(scale[5]),
       fontWeight: fontWeights.regular,
-      lineHeight: '125%',
+      lineHeight: 1.334,
       letterSpacing: 0,
     },
     xlg: {
       fontSize: rem(scale[6]),
       fontWeight: fontWeights.regular,
-      lineHeight: '129%',
+      lineHeight: 1.29,
       letterSpacing: 0,
     },
     max: {
       fontSize: rem(scale[7]),
       fontWeight: fontWeights.regular,
-      lineHeight: '125%',
+      lineHeight: 1.25,
       letterSpacing: 0,
     },
   },
-});
+};
 
-export const quotation02 = fluid({
+export const quotation02 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.light,
-  lineHeight: '125%',
+  lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
-      lineHeight: '122%',
+      lineHeight: 1.22,
     },
     lg: {
       fontSize: rem(scale[9]),
-      lineHeight: '119%',
+      lineHeight: 1.19,
     },
     xlg: {
       fontSize: rem(scale[10]),
-      lineHeight: '117%',
+      lineHeight: 1.17,
     },
     max: {
       fontSize: rem(scale[12]),
     },
   },
-});
+};
 
-export const display01 = fluid({
+export const display01 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -312,19 +341,19 @@ export const display01 = fluid({
     },
     xlg: {
       fontSize: rem(scale[12]),
-      lineHeight: '117%',
+      lineHeight: 1.17,
     },
     max: {
       fontSize: rem(scale[14]),
-      lineHeight: '113%',
+      lineHeight: 1.13,
     },
   },
-});
+};
 
-export const display02 = fluid({
+export const display02 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
@@ -335,66 +364,66 @@ export const display02 = fluid({
     },
     xlg: {
       fontSize: rem(scale[12]),
-      lineHeight: '116%',
+      lineHeight: 1.16,
     },
     max: {
       fontSize: rem(scale[14]),
-      lineHeight: '113%',
+      lineHeight: 1.13,
     },
   },
-});
+};
 
-export const display03 = fluid({
+export const display03 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[13]),
-      lineHeight: '115%',
+      lineHeight: 1.15,
     },
     lg: {
       fontSize: rem(scale[16]),
-      lineHeight: '111%',
+      lineHeight: 1.11,
       letterSpacing: px(-0.64),
     },
     xlg: {
       fontSize: rem(scale[19]),
-      lineHeight: '107%',
+      lineHeight: 1.07,
     },
     max: {
       fontSize: rem(scale[22]),
-      lineHeight: '105%',
+      lineHeight: 1.05,
       letterSpacing: px(-0.96),
     },
   },
-});
+};
 
-export const display04 = fluid({
+export const display04 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.semibold,
-  lineHeight: '119%',
+  lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[13]),
-      lineHeight: '115%',
+      lineHeight: 1.15,
     },
     lg: {
       fontSize: rem(scale[16]),
-      lineHeight: '111%',
+      lineHeight: 1.11,
       letterSpacing: px(-0.64),
     },
     xlg: {
       fontSize: rem(scale[19]),
-      lineHeight: '107%',
+      lineHeight: 1.07,
       letterSpacing: px(-0.64),
     },
     max: {
       fontSize: rem(scale[22]),
-      lineHeight: '105%',
+      lineHeight: 1.05,
       letterSpacing: px(-0.96),
     },
   },
-});
+};

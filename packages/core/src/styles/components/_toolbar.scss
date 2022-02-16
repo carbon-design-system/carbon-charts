@@ -1,0 +1,57 @@
+$css--reset: false;
+.#{$prefix}--chart-holder {
+	.bx--overflow-menu,
+	.bx--overflow-menu__trigger {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--toolbar {
+		display: flex;
+
+		div.toolbar-control {
+			&.disabled {
+				&,
+				button {
+					cursor: not-allowed;
+				}
+
+				&:hover,
+				button:hover {
+					background-color: transparent;
+				}
+
+				button:focus {
+					outline: none;
+				}
+
+				svg {
+					fill: $disabled-03;
+				}
+			}
+		}
+
+		.bx--overflow-menu--flip {
+			right: 0;
+			left: unset;
+
+			&.is-open {
+				display: table;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		.bx--loading__background {
+			fill: transparent;
+		}
+
+		.bx--loading__stroke {
+			stroke-dashoffset: 99;
+			fill: transparent;
+		}
+	}
+}

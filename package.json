@@ -4,7 +4,7 @@
 	"description": "Carbon charting components, lerna monorepo",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git"
 	},
 	"keywords": [
 		"charts"
@@ -14,8 +14,10 @@
 	"scripts": {
 		"clean": "lerna clean && lerna run clean && rm -rf node_modules",
 		"commit": "git-cz",
+		"format": "lerna run format",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
+		"build": "yarn build-all",
 		"build-all": "bash scripts/build-packages-and-demos.sh",
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
@@ -27,7 +29,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-push": "bash scripts/prepush.sh"
+			"pre-commit": "bash scripts/precommit.sh"
 		}
 	},
 	"release": {
@@ -37,7 +39,9 @@
 		"commitizen": "4.0.3",
 		"cz-conventional-changelog": "3.1.0",
 		"husky": "4.2.1",
-		"lerna": "3.13.4"
+		"lerna": "3.20.2",
+		"prettier": "2.2.1",
+		"prettier-config-carbon": "0.4.0"
 	},
 	"config": {
 		"commitizen": {

@@ -1,17 +1,19 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.29.0",
+	"version": "0.54.12",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
-		"build": "ng build",
+		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"demo:build": "build-storybook -o demo/bundle --quiet",
-		"clean": "rm -rf dist demo/bundle"
+		"demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
+		"clean": "rm -rf dist demo/bundle",
+		"start": "yarn storybook"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -39,14 +41,15 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.29.0"
+		"@carbon/charts": "^0.54.12",
+		"@carbon/telemetry": "0.0.0-alpha.6"
 	},
 	"peerDependencies": {
-		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
-		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0",
-		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0",
+		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
+		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
+		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
 		"rxjs": "^6.0.0",
-		"zone.js": "^0.8.29 || ^0.9.0"
+		"zone.js": "^0.8.29 || ^0.9.0 || ^0.10.0 || ^0.11.0"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "0.13.9",
@@ -62,15 +65,17 @@
 		"@angular/platform-browser": "7.2.15",
 		"@angular/platform-browser-dynamic": "7.2.15",
 		"@babel/core": "7.3.4",
-		"@storybook/addon-knobs": "5.0.11",
-		"@storybook/addon-options": "5.0.11",
-		"@storybook/angular": "5.0.11",
+		"@carbon/icons-angular": "11.2.1",
+		"@storybook/addon-knobs": "5.3.12",
+		"@storybook/addon-options": "5.3.12",
+		"@storybook/angular": "5.3.12",
 		"@types/node": "12.11.7",
 		"babel-loader": "8.0.5",
 		"core-js": "3.0.0",
 		"karma-webpack": "4.0.2",
 		"ng-packagr": "5.7.1",
 		"rxjs": "6.3.3",
+		"sass-loader": "8.0.0",
 		"tsickle": "0.37.1",
 		"tslib": "1.10.0",
 		"tslint": "5.20.1",
@@ -78,6 +83,7 @@
 		"zone.js": "0.8.29"
 	},
 	"publishConfig": {
+		"directory": "dist",
 		"access": "public"
 	},
 	"maintainers": [

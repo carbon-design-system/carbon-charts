@@ -10,23 +10,21 @@ git config --global user.name "carbon-bot"
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-if [ -z "$TRAVIS_TAG" ]
-then
-	echo "The commit is not a tag, get lerna to version packages, and publish to Github."
+echo "Publish to Github"
+git stash
 
-	git stash
+# checkout master to get out of detached HEAD state
+git checkout master
 
-	# checkout master to get out of detached HEAD state
-	git checkout master
+lerna version --conventional-commits --yes --force-publish --create-release github
 
-	lerna version --conventional-commits --yes --force-publish
-else
-	echo "The commit is a tag, publish to NPM!"
+echo "Publish to NPM"
 
-	# authenticate with the npm registry
-	npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+yarn build
 
-	node scripts/clean-package-jsons.js
+# authenticate with the npm registry
+npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-	lerna publish from-git --yes --force-publish --contents dist
-fi
+node scripts/add-telemetry-to-packages.js
+
+lerna publish from-git --yes --force-publish --contents dist

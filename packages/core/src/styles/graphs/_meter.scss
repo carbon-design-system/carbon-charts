@@ -1,0 +1,45 @@
+.#{$prefix}--#{$charts-prefix}--meter {
+	rect.container {
+		fill: $ui-01;
+	}
+
+	line.rangeIndicator {
+		stroke: $carbon--gray-40;
+		stroke-width: 1px;
+		@if $carbon--theme ==
+			$carbon--theme--g90 or
+			$carbon--theme ==
+			$carbon--theme--g100
+		{
+			stroke: $carbon--gray-60;
+		}
+	}
+
+	rect.value {
+		&.status--danger {
+			fill: $support-01;
+		}
+
+		&.status--warning {
+			fill: $support-03;
+			stroke-width: 1px;
+			stroke: $carbon-dataviz-alert;
+			@if $carbon--theme ==
+				$carbon--theme--g90 or
+				$carbon--theme ==
+				$carbon--theme--g100
+			{
+				stroke: none;
+			}
+		}
+
+		&.status--success {
+			fill: $support-02;
+		}
+	}
+
+	line.peak {
+		stroke: $ui-05;
+		stroke-width: 2px;
+	}
+}

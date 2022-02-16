@@ -1,0 +1,21 @@
+.#{$prefix}--#{$charts-prefix}--gauge {
+	overflow: visible;
+
+	path.arc-background {
+		fill: $ui-01;
+	}
+
+	.gauge-delta-arrow {
+		&.status--danger {
+			fill: $support-01;
+		}
+
+		&.status--warning {
+			fill: $support-03;
+		}
+
+		&.status--success {
+			fill: $support-02;
+		}
+	}
+}

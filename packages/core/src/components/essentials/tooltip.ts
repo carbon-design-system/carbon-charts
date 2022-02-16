@@ -1,22 +1,30 @@
-import * as Configuration from "../../configuration";
-import { Component } from "../component";
-import { Tools } from "../../tools";
-import { DOMUtils } from "../../services";
-import { ChartModel } from "../../model";
+import { Component } from '../component';
+import { Tools } from '../../tools';
+import { DOMUtils } from '../../services';
+import { ChartModel } from '../../model/model';
+import { Events, RenderTypes, TruncationTypes } from '../../interfaces';
+import * as Configuration from '../../configuration';
 
 // Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import Position, { PLACEMENTS } from '@carbon/utils-position';
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from 'carbon-components/es/globals/js/settings';
 
 // D3 Imports
-import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, ScaleTypes, TooltipPosition } from "../../interfaces";
+// @ts-ignore
+// ts-ignore is needed because `@types/d3`
+// is missing the `pointer` function
+import { select, pointer } from 'd3-selection';
+
+import { format } from 'date-fns';
 
 export class Tooltip extends Component {
-	type = "tooltip";
+	type = 'tooltip';
+	renderType = RenderTypes.HTML;
 
+	// flag for checking whether tooltip event listener is added or not
+	isEventListenerAdded = false;
 	tooltip: any;
 	positionService = new Position();
 
@@ -26,197 +34,339 @@ export class Tooltip extends Component {
 		this.init();
 	}
 
-	init() {
-		// Grab the tooltip element
-		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
+	handleShowTooltip = (e) => {
+		const data = e.detail.data || e.detail.items;
 
-		// Apply html content to the tooltip
-		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
-		this.tooltip.style("max-width", null);
+		const defaultHTML = this.getTooltipHTML(e);
+
+		const tooltipTextContainer = DOMUtils.appendOrSelect(
+			this.tooltip,
+			'div.content-box'
+		);
+
+		// if there is a provided tooltip HTML function call it
+		if (Tools.getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
+			if (e.detail.content) {
+				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
+				tooltipTextContainer.html(labelHTML);
+			} else {
+				tooltipTextContainer.html(
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
+				);
+			}
+		} else {
+			// Use default tooltip
+			tooltipTextContainer.html(defaultHTML);
+		}
+
+		// Position the tooltip
+		this.positionTooltip(e);
+
+		// Fade in
+		this.tooltip.classed('hidden', false).attr('aria-hidden', false);
+	};
+
+	handleHideTooltip = () => {
+		this.tooltip.classed('hidden', true).attr('aria-hidden', true);
+	};
+
+	addTooltipEventListener() {
+		// listen to move-tooltip Custom Events to move the tooltip
+		this.services.events.addEventListener(
+			Events.Tooltip.MOVE,
+			(e: CustomEvent) => {
+				if (this.tooltip.classed('hidden') === false) {
+					this.positionTooltip(e);
+				}
+			}
+		);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
-			// check the type of tooltip and that it is enabled
-			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
-				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
-
-				let data = select(event.target).datum() as any;
-
-				// Generate default tooltip
-				let defaultHTML;
-				if (e.detail.multidata) {
-					// multi tooltip
-					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data);
-				} else {
-					defaultHTML = this.getTooltipHTML(data, TooltipTypes.DATAPOINT);
-				}
-
-				// if there is a provided tooltip HTML function call it
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
-				} else {
-					// Use default tooltip
-					tooltipTextContainer.html(defaultHTML);
-				}
-
-				// Position the tooltip
-				this.positionTooltip();
-
-			} else if (e.detail.type === TooltipTypes.TITLE) {
-				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
-				const chartWidth =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
-
-				this.tooltip.style("max-width", chartWidth);
-
-
-				tooltipTextContainer.html(this.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
-
-				// get the position based on the title positioning (static)
-				const position = this.getTooltipPosition(e.detail.hoveredElement.node());
-				this.positionTooltip(position);
-
-			}
-
-			// Fade in
-			this.tooltip.classed("hidden", false);
-		});
+		this.services.events.addEventListener(
+			Events.Tooltip.SHOW,
+			this.handleShowTooltip
+		);
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
-			this.tooltip.classed("hidden", true);
-		});
+		this.services.events.addEventListener(
+			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
+
+		// listen to chart-mouseout event to hide the tooltip
+		this.services.events.addEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
 	}
 
-	getTooltipHTML(data: any, type: TooltipTypes) {
-		// check if it is getting styles for a tooltip type
-		if (type === TooltipTypes.TITLE) {
-			const title = this.model.getOptions().title;
-			return `<div class="title-tooltip"><text>${title}</text></div>`;
+	removeTooltipEventListener() {
+		// remove move-tooltip Custom Events
+		this.services.events.removeEventListener(Events.Tooltip.MOVE, null);
+
+		// remove show-tooltip Custom Events
+		this.services.events.removeEventListener(
+			Events.Tooltip.SHOW,
+			this.handleShowTooltip
+		);
+
+		// remove hide-tooltip Custom Events
+		this.services.events.removeEventListener(
+			Events.Tooltip.HIDE,
+			this.handleHideTooltip
+		);
+
+		// remove the listener on chart-mouseout
+		this.services.events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleHideTooltip
+		);
+	}
+
+	getItems(e: CustomEvent) {
+		if (e.detail.items) {
+			return e.detail.items;
 		}
-		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
-		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
 
-		// format the value if needed
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
-
-		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
-
-		return `<div class="datapoint-tooltip">
-					<p class="label">${label}</p>
-					<p class="value">${formattedValue}</p>
-				</div>`;
+		return [];
 	}
 
-	getMultilineTooltipHTML(data: any) {
-		const points = data;
+	formatItems(items) {
+		const options = this.getOptions();
 
-		// sort them so they are in the same order as the graph
-		points.sort((a, b) => b.value - a.value);
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			options,
+			'tooltip',
+			'truncation',
+			'type'
+		);
 
-		// tells us which value to use
-		const scaleType = this.services.cartesianScales.getDomainScale().scaleType;
+		const truncationThreshold = Tools.getProperty(
+			options,
+			'tooltip',
+			'truncation',
+			'threshold'
+		);
 
-		return  "<ul class='multi-tooltip'>" +
-			points.map(datapoint => {
-				// check if the datapoint has multiple values associates (multiple axes)
-				let datapointValue = datapoint.value;
-				if (datapointValue instanceof Object) {
-					// scale type determines which value we care about since it should align with the scale data
-					datapointValue = scaleType === ScaleTypes.TIME ? datapoint.value.date : datapoint.value.value;
+		const truncationNumCharacter = Tools.getProperty(
+			options,
+			'tooltip',
+			'truncation',
+			'numCharacter'
+		);
+
+		// truncate the label if it's too long
+		// only applies to discrete type
+		if (truncationType !== TruncationTypes.NONE) {
+			return items.map((item) => {
+				// get width of the label icon if it exists
+				const labelIconSize = item.labelIcon ? 12 : 0;
+
+				item.value = item.value
+					? this.valueFormatter(item.value, item.label)
+					: item.value;
+				if (
+					item.label &&
+					item.label.length + labelIconSize > truncationThreshold
+				) {
+					item.label = Tools.truncateLabel(
+						item.label,
+						truncationType,
+						truncationNumCharacter
+					);
 				}
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-				this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
 
-				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
+				if (item.value && item.value.length > truncationThreshold) {
+					item.value = Tools.truncateLabel(
+						item.value,
+						truncationType,
+						truncationNumCharacter
+					);
+				}
 
-				return `
-				<li>
-					<div class="datapoint-tooltip">
-						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datapoint.datasetLabel}</p>
-						<p class="value">${formattedValue}</p>
-					</div>
-				</li>`;
-				}).join("") + "</ul>";
+				return item;
+			});
+		}
+
+		return items;
+	}
+
+	getTooltipHTML(e: CustomEvent) {
+		let defaultHTML;
+		if (e.detail.content) {
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
+		} else {
+			const items = this.getItems(e);
+			const formattedItems = this.formatItems(items);
+
+			defaultHTML =
+				`<ul class="multi-tooltip">` +
+				formattedItems
+					.map(
+						(item) =>
+							`<li>
+							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
+								${item.class ? `<div class="tooltip-color ${item.class}"></div>` : ''}
+								${
+									item.color
+										? '<div style="background-color: ' +
+										  item.color +
+										  '" class="tooltip-color"></div>'
+										: ''
+								}
+								<div class="label">
+								<p>${item.label || ''}</p>
+								${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
+								</div>
+								${
+									item.value === undefined ||
+									item.value === null
+										? ''
+										: `<p class="value"/>${item.value}</p>`
+								}
+							</div>
+						</li>`
+					)
+					.join('') +
+				`</ul>`;
+		}
+
+		return defaultHTML;
+	}
+
+	valueFormatter(value: any, label: string) {
+		const options = this.getOptions();
+		const valueFormatter = Tools.getProperty(
+			options,
+			'tooltip',
+			'valueFormatter'
+		);
+
+		if (valueFormatter) {
+			return valueFormatter(value, label);
+		}
+
+		if (typeof value.getTime === 'function') {
+			return format(value, 'MMM d, yyyy');
+		}
+
+		return value.toLocaleString();
 	}
 
 	render() {
-		this.tooltip.classed("hidden", true);
+		const options = this.getOptions();
+		const isTooltipEnabled = Tools.getProperty(
+			options,
+			'tooltip',
+			'enabled'
+		);
+		if (isTooltipEnabled) {
+			// Grab the tooltip element
+			const holder = select(this.services.domUtils.getHolder());
+			const chartprefix = Tools.getProperty(options, 'style', 'prefix');
+			this.tooltip = DOMUtils.appendOrSelect(
+				holder,
+				`div.${settings.prefix}--${chartprefix}--tooltip`
+			);
+
+			this.tooltip.style('max-width', null).attr('role', 'tooltip');
+
+			if (!this.isEventListenerAdded) {
+				this.addTooltipEventListener();
+				this.isEventListenerAdded = true;
+			}
+			this.tooltip.classed('hidden', true);
+		} else if (!isTooltipEnabled && this.isEventListenerAdded) {
+			// remove tooltip eventListener
+			this.removeTooltipEventListener();
+			this.isEventListenerAdded = false;
+		}
 	}
 
-	// returns static position based on the element
-	getTooltipPosition(hoveredElement) {
-		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
-		const elementPosition = hoveredElement.getBoundingClientRect();
-
-		// get the vertical offset
-		const { verticalOffset } = this.model.getOptions().tooltip.title;
-
-		const tooltipPos = {
-			left: (elementPosition.left - holderPosition.left) + elementPosition.width / 2,
-			top: (elementPosition.top - holderPosition.top - verticalOffset)
-		};
-
-		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
-	}
-
-	positionTooltip(positionOverride?: any) {
+	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const mouseRelativePos = mouse(holder);
-		let pos;
+		const options = this.getOptions();
+		const isTopZoomBarEnabled = Tools.getProperty(
+			options,
+			'zoomBar',
+			'top',
+			'enabled'
+		);
 
-		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
-		if (positionOverride) {
-			// placement determines whether the tooltip is centered above or below the position provided
-			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
-
-			pos = this.positionService.findPositionAt(
-				positionOverride.position,
-				target,
-				placement
+		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition');
+		if (!mouseRelativePos) {
+			mouseRelativePos = pointer(
+				Tools.getProperty(e, 'detail', 'event'),
+				holder
 			);
 		} else {
+			const zoombarType = Tools.getProperty(
+				options,
+				'zoomBar',
+				'top',
+				'type'
+			);
+			const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+
+			// if the mouse position is from event (ruler)
+			// we need add zoom bar height
+			if (isTopZoomBarEnabled) {
+				mouseRelativePos[1] +=
+					zoombarHeight + Configuration.zoomBar.spacerHeight;
+
+				// TODO - we need to add toolbar height when toolbar is available
+			}
+		}
+
+		let pos;
+
+		const holderWidth = holder.offsetWidth;
+		const holderHeight = holder.offsetHeight;
+
+		let bestPlacementOption;
+		if (mouseRelativePos[0] / holderWidth > 0.9) {
+			bestPlacementOption = PLACEMENTS.LEFT;
+		} else if (mouseRelativePos[0] / holderWidth < 0.1) {
+			bestPlacementOption = PLACEMENTS.RIGHT;
+		} else {
 			// Find out whether tooltip should be shown on the left or right side
-			const bestPlacementOption = this.positionService.findBestPlacementAt(
+			bestPlacementOption = this.positionService.findBestPlacementAt(
 				{
 					left: mouseRelativePos[0],
-					top: mouseRelativePos[1]
+					top: mouseRelativePos[1],
 				},
 				target,
 				[
 					PLACEMENTS.RIGHT,
 					PLACEMENTS.LEFT,
 					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM
+					PLACEMENTS.BOTTOM,
 				],
 				() => ({
-					width: holder.offsetWidth,
-					height: holder.offsetHeight
+					width: holderWidth,
+					height: holderHeight,
 				})
 			);
-
-			let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
-			if (bestPlacementOption === PLACEMENTS.LEFT) {
-				horizontalOffset *= -1;
-			}
-
-			// Get coordinates to where tooltip should be positioned
-			pos = this.positionService.findPositionAt(
-				{
-					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1]
-				},
-				target,
-				bestPlacementOption
-			);
 		}
+
+		let { horizontalOffset } = Configuration.tooltips;
+		if (bestPlacementOption === PLACEMENTS.LEFT) {
+			horizontalOffset *= -1;
+		}
+
+		// Get coordinates to where tooltip should be positioned
+		pos = this.positionService.findPositionAt(
+			{
+				left: mouseRelativePos[0] + horizontalOffset,
+				top: mouseRelativePos[1],
+			},
+			target,
+			bestPlacementOption
+		);
 
 		this.positionService.setElement(target, pos);
 	}

@@ -1,13 +1,43 @@
-@import "./vendor/@carbon/type/scss/type";
-@import "./vendor/@carbon/type/scss/font-face/mono";
-@import "./vendor/@carbon/type/scss/font-face/sans";
+@import './vendor/@carbon/type/scss/type';
+@import './vendor/@carbon/type/scss/font-face/sans';
+@import './vendor/@carbon/type/scss/font-face/sans-condensed';
 
-svg.#{$prefix}--#{$charts-prefix}--chart-svg {
-	font-family: carbon--font-family("sans-condensed");
+@import './chart-feature-flags';
+
+@if map-get($chart-feature-flags, 'enable-font-imports') == true {
+	@include carbon--font-face-sans();
+	@include carbon--font-face-sans-condensed();
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+	font-family: carbon--font-family('sans-condensed');
+
+	p {
+		padding: 0;
+		margin: 0;
+		font-size: 12px;
+		font-weight: carbon--font-weight('regular');
+		color: $text-02;
+	}
 
 	text {
 		font-size: 12px;
-		font-weight: carbon--font-weight("regular");
+		font-weight: carbon--font-weight('regular');
 		fill: $text-02;
+	}
+
+	g.gauge-numbers text.gauge-value-number {
+		font-family: carbon--font-family('sans');
+		font-weight: carbon--font-weight('light');
+	}
+
+	text.meter-title,
+	text.percent-value {
+		font-size: $carbon--base-font-size;
+		font-family: carbon--font-family('sans');
+	}
+
+	text.meter-title {
+		font-weight: carbon--font-weight('semibold');
 	}
 }

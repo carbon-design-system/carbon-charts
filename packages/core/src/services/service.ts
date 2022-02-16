@@ -1,4 +1,4 @@
-import { ChartModel } from "../model";
+import { ChartModel } from '../model/model';
 
 export class Service {
 	protected model: ChartModel;
@@ -11,9 +11,13 @@ export class Service {
 		this.init();
 	}
 
-	init() {}
+	init() {
+		// do nothing.
+	}
 
-	update() {}
+	update() {
+		// do nothing.
+	}
 
 	// Used to pass down information to the components
 	setModel(newObj) {

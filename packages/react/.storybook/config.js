@@ -1,21 +1,22 @@
 import { configure } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
+import theme from './theme';
 
 withOptions({
-	name: 'Carbon Charts - React Wrappers',
+	name: 'Carbon Charts - React',
 	panelPosition: 'bottom',
 	showDownPanel: true,
 	showAddonPanel: true,
-	sortStoriesByKind: true
+	sortStoriesByKind: true,
+	theme,
 });
 
 // load global styles
-require("!style-loader!css-loader!sass-loader!./previews.scss");
-require("!style-loader!css-loader!@carbon/charts/dist/styles.css");
+require('!style-loader!css-loader!@carbon/charts/demo/styles.css');
 
-const req = require.context("../stories/", true, /.stories.js$/);
+const req = require.context('../', true, /.stories.js$/);
 function loadStories() {
-	req.keys().forEach(filename => {
+	req.keys().forEach((filename) => {
 		req(filename);
 	});
 }

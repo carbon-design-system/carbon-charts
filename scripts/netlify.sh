@@ -1,4 +1,4 @@
-./.travis/before_install.sh
+./before_install.sh
 
 if [ $CONTEXT == "deploy-preview" ]; then
 	echo "We're in a PR preview"
@@ -11,11 +11,11 @@ if [ $CONTEXT == "deploy-preview" ]; then
 		PKG_TO_BUILD="@carbon/charts"
 	else
 		PKG_TO_BUILD="@carbon/charts-$PKG_NAME"
-
-		cd packages/core
-		yarn build
-		cd ../..
 	fi
+
+	cd packages/core
+	yarn build
+	cd ../..
 
 	# create the folder we'll deploy in netlify
 	mkdir -p pages
@@ -24,7 +24,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	cd packages/$PKG_NAME
 
 	# run the demo:build script in all packages
-	yarn run demo:build
+	NODE_ENV=deploypreview yarn run demo:build
 
 	# copy all the demo files to the pages deploy directory
 	cp -a demo/bundle/. ../../pages

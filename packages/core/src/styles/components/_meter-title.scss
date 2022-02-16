@@ -1,0 +1,42 @@
+.#{$prefix}--#{$charts-prefix}--meter-title {
+	overflow: visible;
+
+	text.meter-title,
+	text.proportional-meter-title,
+	text.proportional-meter-total,
+	text.percent-value {
+		fill: $text-01;
+	}
+
+	g.status-indicator {
+		&.status--danger circle.status {
+			fill: $support-01;
+		}
+
+		&.status--warning {
+			circle.status {
+				fill: $support-03;
+			}
+
+			path.innerFill {
+				fill: $carbon--black-100;
+			}
+		}
+
+		&.status--success circle.status {
+			fill: $support-02;
+		}
+
+		path.innerFill {
+			@if $carbon--theme ==
+				$carbon--theme--g90 or
+				$carbon--theme ==
+				$carbon--theme--g100
+			{
+				fill: $carbon--black-100;
+			} @else {
+				fill: $carbon--white-0;
+			}
+		}
+	}
+}

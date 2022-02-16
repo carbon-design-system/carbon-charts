@@ -1,4 +1,6 @@
-import { AxisChartOptions } from "./charts";
+import { AxisChartOptions } from './charts';
+
+export type ChartTabularData = Record<string, any>[];
 
 /**
  * Configuration passed to the chart.
@@ -7,7 +9,7 @@ import { AxisChartOptions } from "./charts";
  */
 export interface ChartConfig<T extends AxisChartOptions> {
 	options: T;
-	data: ChartData | Promise<ChartData>;
+	data: ChartTabularData;
 }
 
 export interface DataSet {

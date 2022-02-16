@@ -1,0 +1,18 @@
+.#{$prefix}--#{$charts-prefix}--grid-brush {
+	// disable default d3 brush selection
+	g.grid-brush {
+		rect.selection {
+			fill: none;
+			fill-opacity: 0;
+			stroke: none;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--grid-brush {
+	rect.frontSelection {
+		fill: $ui-03;
+		fill-opacity: 0.3;
+		stroke: $interactive-03;
+	}
+}

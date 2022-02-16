@@ -1,21 +1,22 @@
-import { configure } from "@storybook/angular";
-import { setOptions } from "@storybook/addon-options";
+import { configure } from '@storybook/angular';
+import { setOptions } from '@storybook/addon-options';
+import theme from './theme';
 
 setOptions({
-  name: "Carbon Charts - Angular Wrappers",
-  showAddonPanel: true,
-  sortStoriesByKind: true,
-  panelPosition: 'bottom',
-  showDownPanel: true
+	name: 'Carbon Charts - Angular',
+	showAddonPanel: true,
+	sortStoriesByKind: true,
+	panelPosition: 'bottom',
+	showDownPanel: true,
+	theme,
 });
 
 // load global styles
-require("!style-loader!css-loader!sass-loader!./previews.scss");
-require("!style-loader!css-loader!@carbon/charts/dist/styles.css");
+require('!style-loader!css-loader!@carbon/charts/demo/styles.css');
 
-const req = require.context("../stories", true, /.stories.ts$/);
+const req = require.context('../stories', true, /.stories.ts$/);
 function loadStories() {
-	req.keys().forEach(filename => {
+	req.keys().forEach((filename) => {
 		req(filename);
 	});
 }

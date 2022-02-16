@@ -1,11 +1,15 @@
 {
   "name": "@carbon/type",
   "description": "Typography for digital and software products using the Carbon Design System",
-  "version": "10.5.1",
+  "version": "10.32.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/type",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/type"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -28,16 +32,18 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc \"scss/**/*.scss\" -i \"**/{_inlined,vendor}**\" && bundler inline && bundler check \"scss/*.scss\"",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonType && carbon-cli inline && carbon-cli check \"scss/*.scss\"",
     "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
   },
   "dependencies": {
-    "@carbon/import-once": "10.3.0",
-    "@carbon/layout": "10.5.0"
+    "@carbon/import-once": "^10.6.0",
+    "@carbon/layout": "^10.28.0"
   },
   "devDependencies": {
-    "@carbon/bundler": "10.4.0",
-    "rimraf": "^2.6.2"
+    "@carbon/cli": "^10.26.0",
+    "@carbon/test-utils": "^10.16.0",
+    "change-case": "^4.1.1",
+    "rimraf": "^3.0.0"
   },
   "eyeglass": {
     "exports": false,
@@ -45,5 +51,5 @@
     "sassDir": "scss",
     "needs": "^1.3.0"
   },
-  "gitHead": "a22ecdc2099ea0f9ae65cacb481132ecf930d1c4"
+  "gitHead": "388008d11f2996c262303445a2e26453cbda9261"
 }

@@ -1,11 +1,9 @@
 // Internal Imports
-import { AxisChart } from "../axis-chart";
-import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	ScatterChartOptions
-} from "../interfaces/index";
-import { Tools } from "../tools";
+import { AxisChart } from '../axis-chart';
+import * as Configuration from '../configuration';
+import { BarChartOptions, ChartConfig } from '../interfaces/index';
+import { Tools } from '../tools';
+import { Skeletons } from '../interfaces/enums';
 
 // Components
 import {
@@ -13,22 +11,22 @@ import {
 	GroupedBar,
 	TwoDimensionalAxes,
 	ZeroLine,
-	TooltipBar,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent
-} from "../components/index";
+	LayoutComponent,
+	Skeleton,
+} from '../components/index';
 
 export class GroupedBarChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.groupedBarChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.groupedBarChart,
 				chartConfigs.options
 			)
 		);
@@ -39,15 +37,19 @@ export class GroupedBarChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new GroupedBar(this.model, this.services),
-			new ZeroLine(this.model, this.services)
+			new ZeroLine(this.model, this.services),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.VERT_OR_HORIZ,
+			}),
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
-		components.push(new TooltipBar(this.model, this.services));
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		return components;
 	}
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>line</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Data-vis-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dataviz-overview-1-Copy-2">
+            <g id="line" transform="translate(40,96)">
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="79.3992359 3.96717492 124.680093 23.7160188 124.80767 23.7585094 153 29.1662907 153 27.7063882 125.217877 22.3141109 78.7034411 2.02725276 29.1451297 99.4040074 2.00326436 91.7852487 1.99693929 93.3414375 29.924037 101.180622"></polygon>
+                <ellipse id="Oval-4" stroke="#0062FF" stroke-width="1.5" fill="#FFFFFF" cx="28.5129165" cy="100.27569" rx="2.25123561" ry="2.25"></ellipse>
+                <ellipse id="Oval-4" stroke="#0062FF" stroke-width="1.5" fill="#FFFFFF" cx="79.008642" cy="3.1089255" rx="2.36020597" ry="2.3589255"></ellipse>
+                <ellipse id="Oval-4" stroke="#0062FF" stroke-width="1.5" fill="#FFFFFF" cx="127.090129" cy="23.7066734" rx="2.36020597" ry="2.3589255"></ellipse>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="0.5 43.75 3.5 43.75 3.5 43.25 0.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="5.5 43.75 8.5 43.75 8.5 43.25 5.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="10.5 43.75 13.5 43.75 13.5 43.25 10.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="15.5 43.75 18.5 43.75 18.5 43.25 15.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="20.5 43.75 23.5 43.75 23.5 43.25 20.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="25.5 43.75 28.5 43.75 28.5 43.25 25.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="30.5 43.75 33.5 43.75 33.5 43.25 30.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="35.5 43.75 38.5 43.75 38.5 43.25 35.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="40.5 43.75 43.5 43.75 43.5 43.25 40.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="45.5 43.75 48.5 43.75 48.5 43.25 45.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="50.5 43.75 53.5 43.75 53.5 43.25 50.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="55.5 43.75 58.5 43.75 58.5 43.25 55.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="60.5 43.75 63.5 43.75 63.5 43.25 60.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="65.5 43.75 68.5 43.75 68.5 43.25 65.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="70.5 43.75 73.5 43.75 73.5 43.25 70.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="75.5 43.75 78.5 43.75 78.5 43.25 75.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="80.5 43.75 83.5 43.75 83.5 43.25 80.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="85.5 43.75 88.5 43.75 88.5 43.25 85.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="90.5 43.75 93.5 43.75 93.5 43.25 90.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="95.5 43.75 98.5 43.75 98.5 43.25 95.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="100.5 43.75 103.5 43.75 103.5 43.25 100.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="105.5 43.75 108.5 43.75 108.5 43.25 105.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="110.5 43.75 113.5 43.75 113.5 43.25 110.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="115.5 43.75 118.5 43.75 118.5 43.25 115.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="120.5 43.75 123.5 43.75 123.5 43.25 120.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="125.5 43.75 128.5 43.75 128.5 43.25 125.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="130.5 43.75 133.5 43.75 133.5 43.25 130.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="135.5 43.75 138.5 43.75 138.5 43.25 135.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="140.5 43.75 143.5 43.75 143.5 43.25 140.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="145.5 43.75 148.5 43.75 148.5 43.25 145.5 43.25"></polygon>
+                <polygon id="Path" fill="#0062FF" fill-rule="nonzero" points="150.5 43.75 152 43.75 152 43.25 150.5 43.25"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

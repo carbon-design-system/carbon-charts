@@ -1,0 +1,70 @@
+.#{$prefix}--#{$charts-prefix}--heatmap {
+	g.highlighter-hidden {
+		visibility: hidden;
+	}
+
+	g.cell-highlight {
+		line {
+			stroke: white;
+			stroke-width: 1px;
+		}
+	}
+
+	g.cell-2 {
+		line {
+			stroke: white;
+			stroke-width: 2px !important;
+		}
+	}
+
+	g.multi-cell {
+		line {
+			stroke: white;
+			stroke-width: 2px;
+		}
+	}
+
+	rect.pattern-fill {
+		fill: $ui-04;
+	}
+
+	g.shadows {
+		line.top {
+			filter: drop-shadow(0px -3px 2px black);
+		}
+
+		line.down {
+			filter: drop-shadow(0px 3px 2px black);
+		}
+
+		line.left {
+			filter: drop-shadow(-3px 0px 2px black);
+		}
+
+		line.right {
+			filter: drop-shadow(3px 0px 2px black);
+		}
+	}
+
+	rect.null-state {
+		stroke: transparent !important;
+	}
+
+	rect.heat {
+		stroke-width: 0px;
+	}
+
+	rect.heat {
+		stroke: $ui-background;
+	}
+
+	rect.null-state {
+		fill: $ui-01;
+	}
+
+	@if $carbon--theme == $carbon--theme--g90 {
+		rect.null-state {
+			fill: $inverse-01;
+		}
+	}
+}

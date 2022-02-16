@@ -1,91 +1,141 @@
 // Internal Imports
-import { Bar } from "./bar";
+import { Bar } from './bar';
 import {
 	Events,
 	Roles,
-	TooltipTypes
-} from "../../interfaces";
-import { Tools } from "../../tools";
+	RenderTypes,
+	ColorClassNameTypes,
+	CartesianOrientations,
+} from '../../interfaces';
+import { Tools } from '../../tools';
 
 // D3 Imports
-import { select } from "d3-selection";
-import { color } from "d3-color";
+import { select } from 'd3-selection';
 
 export class SimpleBar extends Bar {
-	type = "simple-bar";
+	type = 'simple-bar';
+	renderType = RenderTypes.SVG;
 
 	init() {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 
 	render(animate: boolean) {
+		const options = this.getOptions();
+		const { groupMapsTo } = options.data;
+
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getComponentContainer({ withinChartClip: true });
 
-		// Update data on bar groups
-		const barGroups = svg.selectAll("g.bars")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+		const data = this.model.getDisplayData(this.configs.groups);
 
-		// Remove dot groups that need to be removed
-		barGroups.exit()
-			.attr("opacity", 0)
-			.remove();
-
-		// Add the bar groups that need to be introduced
-		const barGroupsEnter = barGroups.enter()
-			.append("g")
-				.classed("bars", true)
-				.attr("role", Roles.GROUP);
+		const orientation = this.services.cartesianScales.getOrientation();
 
 		// Update data on all bars
-		const bars = barGroupsEnter.merge(barGroups)
-			.selectAll("path.bar")
-			.data((d, i) => this.addLabelsToDataPoints(d, i), d => d.label);
+		const bars = svg
+			.selectAll('path.bar')
+			.data(data, (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
-		bars.exit()
-			.attr("opacity", 0)
-			.remove();
+		bars.exit().attr('opacity', 0).remove();
 
 		// Add the paths that need to be introduced
-		const barsEnter = bars.enter()
-			.append("path")
-			.attr("opacity", 0);
+		const barsEnter = bars.enter().append('path').attr('opacity', 0);
 
-		barsEnter.merge(bars)
-			.classed("bar", true)
-			.attr("width", this.getBarWidth.bind(this))
-			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillScale()(d.label))
-			.attr("d", (d, i) => {
+		barsEnter
+			.merge(bars)
+			.classed('bar', true)
+			.attr('width', this.getBarWidth.bind(this))
+			.transition()
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'bar-update-enter',
+					animate,
+				})
+			)
+			.attr('class', (d) =>
+				this.model.getColorClassName({
+					classNameTypes: [ColorClassNameTypes.FILL],
+					dataGroupName: d[groupMapsTo],
+					originalClassName: 'bar',
+				})
+			)
+			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d, i) => {
 				/*
-				* Orientation support for horizontal/vertical bar charts
-				* Determine coordinates needed for a vertical set of paths
-				* to draw the bars needed, and pass those coordinates down to
-				* generateSVGPathString() to decide whether it needs to flip them
-				*/
+				 * Orientation support for horizontal/vertical bar charts
+				 * Determine coordinates needed for a vertical set of paths
+				 * to draw the bars needed, and pass those coordinates down to
+				 * generateSVGPathString() to decide whether it needs to flip them
+				 */
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				const barWidth = this.getBarWidth();
-				const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2;
+				const value = d[rangeIdentifier];
+
+				const x0 =
+					this.services.cartesianScales.getDomainValue(d, i) -
+					barWidth / 2;
 				const x1 = x0 + barWidth;
-				const y0 = this.services.cartesianScales.getRangeValue(0);
-				const y1 = this.services.cartesianScales.getRangeValue(d, i);
+				let y0, y1;
+				if (Array.isArray(value) && value.length === 2) {
+					y0 = this.services.cartesianScales.getRangeValue(value[0]);
+					y1 = this.services.cartesianScales.getRangeValue(
+						value[1],
+						i
+					);
+				} else {
+					const rangeScale = this.services.cartesianScales.getRangeScale();
+					const yScaleDomainStart = rangeScale.domain()[0];
+
+					y0 = this.services.cartesianScales.getRangeValue(
+						Math.max(0, yScaleDomainStart)
+					);
+					y1 = this.services.cartesianScales.getRangeValue(d, i);
+				}
+
+				const difference = Math.abs(y1 - y0);
+				// Set a min-2px size for the bar
+				if (difference !== 0 && difference < 2) {
+					if (
+						(value > 0 &&
+							orientation === CartesianOrientations.VERTICAL) ||
+						(value < 0 &&
+							orientation === CartesianOrientations.HORIZONTAL)
+					) {
+						y1 = y0 - 2;
+					} else {
+						y1 = y0 + 2;
+					}
+				}
+
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutsideZoomedDomain(x0, x1)) {
+					return;
+				}
 
 				return Tools.generateSVGPathString(
 					{ x0, x1, y0, y1 },
-					this.services.cartesianScales.getOrientation()
+					orientation
 				);
 			})
-			.attr("opacity", 1)
+			.attr('opacity', 1)
 			// a11y
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "bar")
-			.attr("aria-label", d => d.value);
+			.attr('role', Roles.GRAPHICS_SYMBOL)
+			.attr('aria-roledescription', 'bar')
+			.attr('aria-label', (d) => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -93,92 +143,111 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupMapsTo } = this.getOptions().data;
 
-		this.parent.selectAll("path.bar")
-			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
-			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
-	}
+		this.parent
+			.selectAll('path.bar')
+			.transition('legend-hover-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-hover-simple-bar',
+				})
+			)
+			.attr('opacity', (d) =>
+				d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+			);
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent.selectAll("path.bar")
-			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
-			.attr("opacity", 1);
-	}
-
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.model.getDisplayData();
-
-		return d.data.map((datum, i) => ({
-			date: datum.date,
-			label: labels[i],
-			datasetLabel: d.label,
-			value: isNaN(datum) ? datum.value : datum
-		}));
-	}
+		this.parent
+			.selectAll('path.bar')
+			.transition('legend-mouseout-simple-bar')
+			.call((t) =>
+				this.services.transitions.setupTransition({
+					transition: t,
+					name: 'legend-mouseout-simple-bar',
+				})
+			)
+			.attr('opacity', 1);
+	};
 
 	addEventListeners() {
 		const self = this;
-		this.parent.selectAll("path.bar")
-			.on("mouseover", function(datum) {
+		this.parent
+			.selectAll('path.bar')
+			.on('mouseover', function (event, datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+				hoveredElement.classed('hovered', true);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					event,
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					data: [datum],
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on('mousemove', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					event,
 					element: select(this),
-					datum
+					datum,
+				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+					event,
 				});
 			})
-			.on("click", function(datum) {
+			.on('click', function (event, datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					event,
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false);
-
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
+				hoveredElement.classed('hovered', false);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					event,
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
 			});
 	}
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("path.bar")
-			.on("mouseover", null)
-			.on("mousemove", null)
-			.on("mouseout", null);
+		this.parent
+			.selectAll('path.bar')
+			.on('mouseover', null)
+			.on('mousemove', null)
+			.on('mouseout', null);
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
-		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }

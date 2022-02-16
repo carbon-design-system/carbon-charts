@@ -1,0 +1,170 @@
+@import './color-palatte.scss';
+
+@function getThemeColors() {
+	@if $carbon--theme ==
+		$carbon--theme--g100 or
+		$carbon--theme ==
+		$carbon--theme--g90
+	{
+		@return color-property(null, $dark-theme-colors);
+	} @else {
+		@return color-property(null, $white-theme-colors);
+	}
+}
+
+@function getGradientColors() {
+	$monochrome: color-property(null, $monochrome-quantize-colors);
+	$divergent: color-property(null, $divergent-quantize-colors);
+
+	@return map-merge($monochrome, $divergent);
+}
+
+@function getLegendAreaItemColors() {
+	@if $carbon--theme ==
+		$carbon--theme--g100 or
+		$carbon--theme ==
+		$carbon--theme--g90
+	{
+		@return color-property(null, $dark-theme-legend-area-item-colors);
+	} @else {
+		@return color-property(null, $white-theme-legend-area-item-colors);
+	}
+}
+
+@function color-property($name, $theme-colors) {
+	$color-items: ();
+
+	@if type-of($theme-colors) == map {
+		@each $category, $value in $theme-colors {
+			@if $name == null {
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$category}', $value)
+				);
+			} @else {
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$name}-#{$category}', $value)
+				);
+			}
+		}
+		@return $color-items;
+	} @else {
+		@return (#{$name}: $theme-colors);
+	}
+}
+
+@function gradient-color-property($name, $theme-colors) {
+	$color-items: ();
+
+	@if type-of($theme-colors) == map {
+		@each $category, $value in $theme-colors {
+			@if $name == null {
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$category}', $value)
+				);
+			} @else {
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$name}-#{$category}', $value)
+				);
+			}
+		}
+		@return $color-items;
+	} @else {
+		@return (#{$name}: $theme-colors);
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+	$color-map: map-merge(getThemeColors(), getGradientColors());
+
+	@each $token, $color in $color-map {
+		.fill-#{$token} {
+			fill: $color;
+
+			&.hovered {
+				fill: darken($color, 7%);
+				@include default_transition;
+			}
+		}
+
+		.background-#{$token} {
+			background-color: $color;
+
+			&.hovered {
+				background-color: darken($color, 7%);
+				@include default_transition;
+			}
+		}
+
+		.stroke-#{$token} {
+			stroke: $color;
+		}
+
+		.stop-color-#{$token} {
+			stop-color: $color;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--tooltip {
+	$color-map: getThemeColors();
+
+	@each $token, $color in $color-map {
+		.tooltip-#{$token} {
+			background-color: $color;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--legend {
+	$area-item-color-map: getLegendAreaItemColors();
+
+	.additional > .icon {
+		@each $token, $color in $area-item-color-map {
+			.area-#{$token} {
+				fill: $color;
+
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					stroke: $dark-theme-legend-area-item-stroke;
+				} @else {
+					stroke: $white-theme-legend-area-item-stroke;
+				}
+			}
+		}
+
+		.quartile {
+			&-wrapper {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: getColorValue('gray', 80);
+					stroke: $dark-theme-legend-area-item-stroke;
+				} @else {
+					fill: getColorValue('gray', 20);
+					stroke: $white-theme-legend-area-item-stroke;
+				}
+			}
+
+			&-line {
+				@if $carbon--theme ==
+					$carbon--theme--g100 or
+					$carbon--theme ==
+					$carbon--theme--g90
+				{
+					fill: #fff;
+				} @else {
+					fill: #000;
+				}
+			}
+		}
+	}
+}
