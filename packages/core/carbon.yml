@@ -189,7 +189,7 @@ assets:
         action: link
         url: https://charts.carbondesignsystem.com/?path=/story/complex-charts-circle-pack
   combo:
-    name: combo
+    name: Combo
     status: stable
     type: component
     tags:
