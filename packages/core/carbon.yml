@@ -381,6 +381,7 @@ assets:
     platform: web
     thumbnailPath: ../../thumbnails/network-diagram.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#network-diagrams
+    noIndex: true
   parallel-coordinates:
     name: Parallel coordinates
     status: draft
