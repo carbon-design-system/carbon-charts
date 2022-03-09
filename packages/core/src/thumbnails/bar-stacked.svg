@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>stacked_bar</title>
+    <g id="stacked_bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-Copy-12" fill="#005D5D" x="87" y="106" width="6" height="31"></rect>
+        <rect id="Rectangle-Copy-13" fill="#BE95FF" x="87" y="56" width="6" height="48"></rect>
+        <rect id="Rectangle-Copy-17" fill="#BE95FF" x="115" y="80" width="6" height="16"></rect>
+        <rect id="Rectangle-Copy-23" fill="#BE95FF" x="143" y="97" width="6" height="23"></rect>
+        <rect id="Rectangle-Copy-26" fill="#BE95FF" x="227" y="110" width="6" height="12"></rect>
+        <rect id="Rectangle-Copy-24" fill="#BE95FF" x="199" y="111" width="6" height="9"></rect>
+        <rect id="Rectangle-Copy-27" fill="#9F1853" x="227" y="99" width="6" height="9"></rect>
+        <rect id="Rectangle-Copy-15" fill="#9F1853" x="87" y="40" width="6" height="14"></rect>
+        <rect id="Rectangle-Copy-18" fill="#9F1853" x="115" y="58" width="6" height="20"></rect>
+        <rect id="Rectangle-Copy-19" fill="#9F1853" x="143" y="75" width="6" height="20"></rect>
+        <rect id="Rectangle-Copy-14" fill="#9F1853" x="199" y="48" width="6" height="60.925926"></rect>
+        <rect id="Rectangle-Copy-28" fill="#BE95FF" x="171" y="95" width="6" height="23"></rect>
+        <rect id="Rectangle-Copy-29" fill="#9F1853" x="171" y="84" width="6" height="9"></rect>
+        <rect id="Rectangle-Copy-30" fill="#005D5D" x="171" y="120" width="6" height="17.2407407"></rect>
+        <rect id="Rectangle-Copy-16" fill="#005D5D" x="115" y="98" width="6" height="39.0185185"></rect>
+        <rect id="Rectangle-Copy-20" fill="#005D5D" x="143" y="122" width="6" height="15"></rect>
+        <rect id="Rectangle-Copy-25" fill="#005D5D" x="199" y="122" width="6" height="15"></rect>
+        <rect id="Rectangle-Copy-21" fill="#005D5D" x="227" y="124" width="6" height="13.240741"></rect>
+    </g>
+</svg>

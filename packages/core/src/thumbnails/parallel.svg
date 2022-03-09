@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>parallel</title>
+    <g id="parallel" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polyline id="Path-14" stroke="#6929C4" stroke-width="0.7" points="87 127 135.333333 84 184 130 231 108"></polyline>
+        <polyline id="Path-15" stroke="#6929C4" stroke-width="0.7" points="87 127 135 47 183 130 232 61"></polyline>
+        <polyline id="Path-16" stroke="#BE95FF" stroke-width="0.7" points="87 127 135.16609 99 183 130 232 98"></polyline>
+        <polyline id="Path-16-Copy-2" stroke="#BE95FF" stroke-width="0.7" points="87 127 135.16609 114 183 130 232 118"></polyline>
+        <polyline id="Path-16-Copy" stroke="#BE95FF" stroke-width="0.7" points="88 93 135 46 184 103 231 61"></polyline>
+        <polyline id="Path-17" stroke="#6929C4" stroke-width="0.7" points="87 110 135.333333 46 184 87 232 59.7462687"></polyline>
+        <line x1="231.5" y1="41" x2="231.5" y2="140" id="Path-13-Copy-3" stroke="#8D8D8D" stroke-width="1.5"></line>
+        <line x1="183.5" y1="41" x2="183.5" y2="140" id="Path-13-Copy-2" stroke="#8D8D8D" stroke-width="1.5"></line>
+        <line x1="87.5" y1="41" x2="87.5" y2="140" id="Path-13" stroke="#8D8D8D" stroke-width="1.5"></line>
+        <line x1="135.5" y1="41" x2="135.5" y2="140" id="Path-13-Copy" stroke="#8D8D8D" stroke-width="1.5"></line>
+    </g>
+</svg>

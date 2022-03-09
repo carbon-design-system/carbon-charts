@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bar-horizontal</title>
+    <g id="bar-horizontal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-9" fill="#002D9C" transform="translate(90.298611, 134.000000) rotate(90.000000) translate(-90.298611, -134.000000) " x="87.2986111" y="115.701389" width="6" height="36.5972222"></rect>
+        <rect id="Rectangle-9" fill="#002D9C" transform="translate(108.597222, 112.000000) rotate(90.000000) translate(-108.597222, -112.000000) " x="105.597222" y="75.4027778" width="6" height="73.1944444"></rect>
+        <rect id="Rectangle-9" fill="#002D9C" transform="translate(93.250000, 90.000000) rotate(90.000000) translate(-93.250000, -90.000000) " x="90.25" y="68.75" width="6" height="42.5"></rect>
+        <rect id="Rectangle-9" fill="#002D9C" transform="translate(160.000000, 68.000000) rotate(90.000000) translate(-160.000000, -68.000000) " x="157" y="-20" width="6" height="176"></rect>
+        <rect id="Rectangle-9-Copy" fill="#002D9C" transform="translate(135.000000, 46.000000) rotate(90.000000) translate(-135.000000, -46.000000) " x="132" y="-17" width="6" height="126"></rect>
+    </g>
+</svg>

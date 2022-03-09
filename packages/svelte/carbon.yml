@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: carbon-charts-svelte
+  name: Carbon Charts Svelte
+  description: Svelte implementation of Carbon Charts
+  inherits: carbon-charts
+  externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
+  demoLinks:
+    - type: storybook
+      name: Storybook
+      action: link
+      url: https://charts.carbondesignsystem.com/svelte
