@@ -35,7 +35,7 @@
             <use id="icon-color" fill="#FFFFFF" xlink:href="#path-7"></use>
         </g>
         <rect id="Rectangle-9-Copy-5" fill="#DA1E28" transform="translate(140.000000, 129.097222) rotate(90.000000) translate(-140.000000, -129.097222) " x="137" y="61" width="6" height="136.194444"></rect>
-        <rect id="Rectangle-9-Copy-6" fill="#FFFFFF" transform="translate(141.000000, 136.097222) rotate(90.000000) translate(-141.000000, -136.097222) " x="137" y="68" width="8" height="136.194444"></rect>
+        <rect id="Rectangle-9-Copy-6" transform="translate(141.000000, 136.097222) rotate(90.000000) translate(-141.000000, -136.097222) " x="137" y="68" width="8" height="136.194444"></rect>
         <rect id="Rectangle-9-Copy-3" fill="#24A148" transform="translate(93.000000, 53.250000) rotate(90.000000) translate(-93.000000, -53.250000) " x="90" y="32" width="6" height="42.5"></rect>
         <line x1="197.5" y1="94" x2="197.5" y2="88" id="Path-21-Copy-2-Copy" stroke="#001141" stroke-width="1.33574"></line>
         <line x1="230.5" y1="132" x2="230.5" y2="126" id="Path-21-Copy-2-Copy-2" stroke="#001141" stroke-width="1.33574"></line>
