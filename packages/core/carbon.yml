@@ -21,7 +21,7 @@ assets:
       - connection
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/alluvial.svg
+    thumbnailPath: ../../thumbnails/alluvial.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#alluvialsankey-diagrams
     demoLinks:
       - type: storybook
@@ -37,7 +37,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/area-simple.svg
+    thumbnailPath: ../../thumbnails/area-simple.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
     demoLinks:
       - type: storybook
@@ -53,7 +53,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/area-stacked.svg
+    thumbnailPath: ../../thumbnails/area-stacked.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
     demoLinks:
       - type: storybook
@@ -69,7 +69,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bar-floating.svg
+    thumbnailPath: ../../thumbnails/bar-floating.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
     demoLinks:
       - type: storybook
@@ -85,7 +85,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bar-grouped.svg
+    thumbnailPath: ../../thumbnails/bar-grouped.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
     demoLinks:
       - type: storybook
@@ -101,7 +101,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bar-simple.svg
+    thumbnailPath: ../../thumbnails/bar-simple.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
     demoLinks:
       - type: storybook
@@ -117,7 +117,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bar-stacked.svg
+    thumbnailPath: ../../thumbnails/bar-stacked.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
     demoLinks:
       - type: storybook
@@ -133,7 +133,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/boxplot.svg
+    thumbnailPath: ../../thumbnails/boxplot.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
     demoLinks:
       - type: storybook
@@ -149,7 +149,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bubble.svg
+    thumbnailPath: ../../thumbnails/bubble.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
     demoLinks:
       - type: storybook
@@ -165,7 +165,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/bullet.svg
+    thumbnailPath: ../../thumbnails/bullet.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
     demoLinks:
       - type: storybook
@@ -181,7 +181,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/circle-pack.svg
+    thumbnailPath: ../../thumbnails/circle-pack.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#circle-packs
     demoLinks:
       - type: storybook
@@ -196,7 +196,7 @@ assets:
       - data-visualization
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/combo.svg
+    thumbnailPath: ../../thumbnails/combo.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook
@@ -212,7 +212,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/donut.svg
+    thumbnailPath: ../../thumbnails/donut.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
     demoLinks:
       - type: storybook
@@ -228,7 +228,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/gauge.svg
+    thumbnailPath: ../../thumbnails/gauge.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
     demoLinks:
       - type: storybook
@@ -244,7 +244,7 @@ assets:
       - geographic-overlay
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/geo-choropleth.svg
+    thumbnailPath: ../../thumbnails/geo-choropleth.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#geographic-overlays
   geo-connection:
     name: Connecting lines
@@ -255,7 +255,7 @@ assets:
       - geographic-overlay
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/geo-connection.svg
+    thumbnailPath: ../../thumbnails/geo-connection.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#connection-map
   geo-proportion:
     name: Proportional symbol
@@ -266,7 +266,7 @@ assets:
       - geographic-overlay
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/geo-choropleth.svg
+    thumbnailPath: ../../thumbnails/geo-choropleth.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#proportional-symbol-map
   heatmap:
     name: Heat map
@@ -283,7 +283,7 @@ assets:
       - correlation
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/heat-map.svg
+    thumbnailPath: ../../thumbnails/heat-map.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#heat-maps
     demoLinks:
       - type: storybook
@@ -299,7 +299,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/histogam.svg
+    thumbnailPath: ../../thumbnails/histogam.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
     demoLinks:
       - type: storybook
@@ -315,7 +315,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/line.svg
+    thumbnailPath: ../../thumbnails/line.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
     demoLinks:
       - type: storybook
@@ -331,7 +331,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/lollipop.svg
+    thumbnailPath: ../../thumbnails/lollipop.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
     demoLinks:
       - type: storybook
@@ -347,7 +347,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/meter.svg
+    thumbnailPath: ../../thumbnails/meter.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
     demoLinks:
       - type: storybook
@@ -363,7 +363,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/meter-proportional.svg
+    thumbnailPath: ../../thumbnails/meter-proportional.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
     demoLinks:
       - type: storybook
@@ -379,7 +379,7 @@ assets:
       - connection
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/network-diagram.svg
+    thumbnailPath: ../../thumbnails/network-diagram.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#network-diagrams
   parallel-coordinates:
     name: Parallel coordinates
@@ -390,7 +390,7 @@ assets:
       - correlation
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/parallel.svg
+    thumbnailPath: ../../thumbnails/parallel.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#parallel-coordinates
   pie:
     name: Pie
@@ -401,7 +401,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/pie.svg
+    thumbnailPath: ../../thumbnails/pie.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
     demoLinks:
       - type: storybook
@@ -417,7 +417,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/radar.svg
+    thumbnailPath: ../../thumbnails/radar.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
     demoLinks:
       - type: storybook
@@ -433,7 +433,7 @@ assets:
       - correlation
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/scatter.svg
+    thumbnailPath: ../../thumbnails/scatter.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
     demoLinks:
       - type: storybook
@@ -449,7 +449,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/sparkline.svg
+    thumbnailPath: ../../thumbnails/sparkline.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook
@@ -465,7 +465,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/step.svg
+    thumbnailPath: ../../thumbnails/step.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook
@@ -481,7 +481,7 @@ assets:
       - trend
     framework: design-only
     platform: web
-    thumbnailPath: /src/thumbnails/stream.svg
+    thumbnailPath: ../../thumbnails/stream.svg
     noIndex: true
   tree:
     name: Tree
@@ -492,7 +492,7 @@ assets:
       - connection
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/tree-diagram.svg
+    thumbnailPath: ../../thumbnails/tree-diagram.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-diagrams
     demoLinks:
       - type: storybook
@@ -508,7 +508,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/tree-map.svg
+    thumbnailPath: ../../thumbnails/tree-map.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-maps
     demoLinks:
       - type: storybook
@@ -524,7 +524,7 @@ assets:
       - comparison
     framework: vanilla
     platform: web
-    thumbnailPath: /src/thumbnails/word-cloud.svg
+    thumbnailPath: ../../thumbnails/word-cloud.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
     demoLinks:
       - type: storybook
