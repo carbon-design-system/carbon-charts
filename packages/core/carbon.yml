@@ -196,6 +196,7 @@ assets:
       - data-visualization
     framework: vanilla
     platform: web
+    thumbnailPath: /src/thumbnails/combo.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook
@@ -362,6 +363,7 @@ assets:
       - part-to-whole
     framework: vanilla
     platform: web
+    thumbnailPath: /src/thumbnails/meter-proportional.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
     demoLinks:
       - type: storybook
@@ -444,8 +446,10 @@ assets:
     type: component
     tags:
       - data-visualization
+      - trend
     framework: vanilla
     platform: web
+    thumbnailPath: /src/thumbnails/sparkline.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook
@@ -458,8 +462,10 @@ assets:
     type: component
     tags:
       - data-visualization
+      - trend
     framework: vanilla
     platform: web
+    thumbnailPath: /src/thumbnails/step.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
     demoLinks:
       - type: storybook

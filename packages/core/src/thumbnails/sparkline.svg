@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>sparkline</title>
+    <defs>
+        <linearGradient x1="50%" y1="-31.4455858%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#6929C4" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="sparkline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(72.000000, 55.000000)">
+            <path d="M0,29 L24.5174129,52 L40.278607,16 L55.1641791,34 C82.6003317,44 96.318408,49 96.318408,49 L124.338308,0 L144.477612,8 L161.114428,42 L176,28" id="Line-Copy" stroke="#491D8B" stroke-width="1.5" stroke-linecap="square"></path>
+            <path d="M0,29 L24.5174129,52 L40.278607,16 L55.1641791,34 C82.6003317,44 96.318408,49 96.318408,49 L124.338308,0 L144.477612,8 L161.114428,42 L176,28 L176,71 L0,71 L0,29 Z" id="Line-Copy-2" fill="url(#linearGradient-1)"></path>
+        </g>
+    </g>
+</svg>

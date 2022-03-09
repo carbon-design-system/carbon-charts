@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>proportional-meter</title>
+    <g id="proportional-meter" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-9-Copy-2" fill="#E0E0E0" transform="translate(161.000000, 93.000000) rotate(90.000000) translate(-161.000000, -93.000000) " x="158" y="5" width="6" height="176"></rect>
+        <rect id="Rectangle-9-Copy-4" fill="#A8A8A8" transform="translate(240.000000, 82.000000) rotate(90.000000) translate(-240.000000, -82.000000) " x="238" y="73" width="4" height="18"></rect>
+        <rect id="Rectangle-9-Copy-5" fill="#A8A8A8" transform="translate(90.000000, 82.000000) rotate(90.000000) translate(-90.000000, -82.000000) " x="88" y="64" width="4" height="36"></rect>
+        <rect id="Rectangle-9-Copy-3" fill="#6929C4" transform="translate(89.000000, 93.250000) rotate(90.000000) translate(-89.000000, -93.250000) " x="86" y="76" width="6" height="34.5"></rect>
+        <rect id="Rectangle-9-Copy-6" fill="#08BDBA" transform="translate(129.500000, 93.000000) rotate(90.000000) translate(-129.500000, -93.000000) " x="126.5" y="69.5" width="6" height="47"></rect>
+        <rect id="Rectangle-9-Copy-7" fill="#012749" transform="translate(166.000000, 93.000000) rotate(90.000000) translate(-166.000000, -93.000000) " x="163" y="80" width="6" height="26"></rect>
+        <rect id="Rectangle-9-Copy-8" fill="#D12771" transform="translate(198.000000, 93.000000) rotate(90.000000) translate(-198.000000, -93.000000) " x="195" y="74" width="6" height="38"></rect>
+        <line x1="106" y1="96" x2="106" y2="90" id="Path-21-Copy-3-Copy" stroke="#FFFFFF" stroke-width="2"></line>
+        <line x1="153" y1="96" x2="153" y2="90" id="Path-21-Copy-3-Copy-2" stroke="#FFFFFF" stroke-width="2"></line>
+        <line x1="178" y1="96" x2="178" y2="90" id="Path-21-Copy-3-Copy-4" stroke="#FFFFFF" stroke-width="2"></line>
+        <line x1="249" y1="96" x2="249" y2="90" id="Path-21-Copy-3-Copy-3" stroke="#8D8D8D" stroke-width="1.5"></line>
+    </g>
+</svg>
