@@ -5,7 +5,7 @@ import { Tools } from '../tools';
 
 // d3 imports
 import { extent } from 'd3-array';
-import { scaleQuantize } from 'd3-scale';
+import { scaleQuantize, scaleLinear } from 'd3-scale';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
@@ -48,29 +48,18 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns Array consisting of smallest and largest values in  data
 	 */
 	getValueDomain() {
-		const data = this.getDisplayData().map((element) => element.value);
-		const limits = extent(data);
-		const domain = [];
+		const limits = extent(this.getDisplayData(), (d: any) => d.value);
+		const domain = scaleLinear()
+			.domain(limits as [number, number])
+			.nice()
+			.domain();
 
-		// Round extent values to the nearest multiple of 10
-		// Axis rounds values to multiples of 2, 5, and 10s.
-		limits.forEach((number, index) => {
-			let value = Number(number);
+		// Ensuring limits start at 0 to make scale look more `nicer`
+		if (domain[0] > 0) {
+			domain[0] = 0;
+		}
 
-			if (index === 0 && value >= 0) {
-				value = 0;
-			} else if (value % 10 === 0 || value === 0) {
-				value;
-			} else if (value < 0) {
-				value = Math.floor(value / 10) * 10;
-			} else {
-				value = Math.ceil(value / 10) * 10;
-			}
-
-			domain.push(value);
-		});
-
-		// Ensure the median of the range is 0
+		// Ensure the median of the range is 0 if domain extends into both negative & positive
 		if (domain[0] < 0 && domain[1] > 0) {
 			if (Math.abs(domain[0]) > domain[1]) {
 				domain[1] = Math.abs(domain[0]);
@@ -85,7 +74,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	/**
 	 * @override
 	 * @param value
-	 * @returns
+	 * @returns string
 	 */
 	getFillColor(value: number) {
 		return this._colorScale(value);
