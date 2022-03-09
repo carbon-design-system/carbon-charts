@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>step</title>
+    <g id="step" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(72.042506, 36.611374)" stroke-width="1.5">
+            <polyline id="Path-7" stroke="#D12771" points="0 90.3127962 44.9574944 90.3886256 44.9574944 60.2464455 76.9574944 60.3886256 76.9574944 36.7772512 126.35123 36.5592417 125.957494 57.3886256"></polyline>
+            <polyline id="Path-7-Copy" stroke="#6929C4" points="0.957494407 38.3886256 44.098434 38.0663507 44.098434 7.92417062"></polyline>
+            <polyline id="Path-10" stroke="#012749" points="0 106.388626 63.1409396 106.388626 62.8881432 75.3886256 93.9574944 75.3886256 94.3512304 20.3886256 125.957494 20.3886256 125.816555 0.388625592 175.957494 0 175.957494 82.3886256"></polyline>
+            <polyline id="Path-11" stroke="#08BDBA" points="85.9574944 91.3886256 142.957494 91.5545024 142.957494 56.3886256 158.957494 56.3886256"></polyline>
+        </g>
+        <ellipse id="Oval-4-Copy-6" stroke="#08BDBA" stroke-width="1.5" fill="#FFFFFF" cx="160.001235" cy="127.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-7" stroke="#08BDBA" stroke-width="1.5" fill="#FFFFFF" cx="215.001235" cy="126.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-8" stroke="#08BDBA" stroke-width="1.5" fill="#FFFFFF" cx="230.001235" cy="91.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-9" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="248.001235" cy="117.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-10" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="248.001235" cy="35.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-11" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="198.001235" cy="35.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-12" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="198.001235" cy="56.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-13" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="166.001235" cy="56.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-14" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="166.001235" cy="111.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-15" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="135.001235" cy="111.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-16" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="135.001235" cy="142.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-17" stroke="#012749" stroke-width="1.5" fill="#FFFFFF" cx="75.0012355" cy="142.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-18" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="75.0012355" cy="126.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-19" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="117.001235" cy="126.999588" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-20" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="117.001235" cy="96.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-25" stroke="#6929C4" stroke-width="1.5" fill="#FFFFFF" cx="116.001235" cy="46.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-26" stroke="#6929C4" stroke-width="1.5" fill="#FFFFFF" cx="116.001235" cy="73.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-27" stroke="#6929C4" stroke-width="1.5" fill="#FFFFFF" cx="75.0012355" cy="73.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-21" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="149.001235" cy="96.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-22" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="149.001236" cy="73.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-23" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="198.001235" cy="73.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-24" stroke="#D12771" stroke-width="1.5" fill="#FFFFFF" cx="198.001235" cy="91.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+    </g>
+</svg>

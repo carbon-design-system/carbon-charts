@@ -1,0 +1,266 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: carbon-charts-svelte
+  name: Carbon Charts Svelte
+  description: Svelte implementation of Carbon Charts
+  inherits: carbon-charts
+  externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
+  demoLinks:
+    - type: storybook
+      name: Storybook
+      action: link
+      url: https://charts.carbondesignsystem.com/svelte
+assets:
+  alluvial:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#alluvialsankey-diagrams
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/complex-charts-alluvial
+  area-simple:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-area-simple
+  area-stacked:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-area-stacked
+  bar-floating:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bar-floating
+  bar-grouped:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bar-grouped
+  bar-simple:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bar-simple
+  bar-stacked:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bar-stacked
+  boxplot:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-boxplot
+  bubble:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bubble
+  bullet:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-bullet
+  circle-pack:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#circle-packs
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/complex-charts-circle-pack
+  combo:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-combo
+  donut:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-donut
+  gauge:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-gauge
+  heatmap:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#heat-maps
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/complex-charts-heatmap
+  histogram:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-histogram
+  line:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-line
+  lollipop:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-lollipop
+  meter:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-meter
+  meter-proportional:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-meter-proportional
+  pie:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-pie
+  radar:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-radar
+  scatter:
+    name: Scatter
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-scatter
+  sparkline:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-sparkline
+  step:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-step
+  tree:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-diagrams
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/complex-charts-tree
+  treemap:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-maps
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/complex-charts-treemap
+  word-cloud:
+    status: stable
+    framework: svelte
+    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://charts.carbondesignsystem.com/svelte/?path=/story/simple-charts-word-cloud

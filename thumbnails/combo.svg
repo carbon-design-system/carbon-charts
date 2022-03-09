@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>combo</title>
+    <g id="combo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-Copy-12" fill="#6929C4" x="87" y="39" width="6" height="98"></rect>
+        <rect id="Rectangle-Copy-14" fill="#6929C4" x="199" y="48.0740741" width="6" height="88.9259259"></rect>
+        <rect id="Rectangle-Copy-16" fill="#6929C4" x="115" y="97.9814815" width="6" height="39.0185185"></rect>
+        <rect id="Rectangle-Copy-20" fill="#6929C4" x="143" y="75.2962963" width="6" height="61.7037037"></rect>
+        <rect id="Rectangle-Copy-21" fill="#6929C4" x="227" y="120" width="6" height="17.2407407"></rect>
+        <rect id="Rectangle-Copy-22" fill="#6929C4" x="171" y="82.5555556" width="6" height="54.4444444"></rect>
+        <path d="M90,87 L118,110 L146,93 L174,68 C193.333333,64 203,62 203,62 L229,75" id="Line" stroke="#009D9A" stroke-width="1.5" stroke-linecap="square"></path>
+        <ellipse id="Oval-4" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="89.0129164" cy="85.275278" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="118.012916" cy="109.275278" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-2" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="146.012916" cy="92.275278" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-5" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="230.001235" cy="74.9995882" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-4" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="202.012916" cy="62.275278" rx="3.2512355" ry="3.24958819"></ellipse>
+        <ellipse id="Oval-4-Copy-3" stroke="#009D9A" stroke-width="1.5" fill="#FFFFFF" cx="174.012916" cy="68.275278" rx="3.2512355" ry="3.24958819"></ellipse>
+    </g>
+</svg>
