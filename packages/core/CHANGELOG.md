@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.13...v0.54.14) (2022-03-14)
+
+
+### Bug Fixes
+
+* **core:** enable heatmap value domain to support small values ([#1325](https://github.com/carbon-design-system/carbon-charts/issues/1325)) ([378845c](https://github.com/carbon-design-system/carbon-charts/commit/378845c040681e9a528357487cd60352777b95d3)), closes [#1321](https://github.com/carbon-design-system/carbon-charts/issues/1321) [#1326](https://github.com/carbon-design-system/carbon-charts/issues/1326)
+
+
+
+
+
 ## [0.54.13](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.12...v0.54.13) (2022-03-09)
 
 **Note:** Version bump only for package @carbon/charts
