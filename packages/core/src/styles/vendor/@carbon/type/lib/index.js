@@ -151,14 +151,9 @@ function ownKeys(object, enumerableOnly) {
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
   }
 
   return keys;
@@ -166,19 +161,12 @@ function ownKeys(object, enumerableOnly) {
 
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
   }
 
   return target;
@@ -187,17 +175,11 @@ function _objectSpread2(target) {
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 function _defineProperty(obj, key, value) {
@@ -254,47 +236,47 @@ function _objectWithoutProperties(source, excluded) {
 var caption01$1 = {
   fontSize: layout.rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: layout.px(0.32)
 };
 var caption02$1 = {
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: layout.px(0.32)
 };
 var label01$1 = {
   fontSize: layout.rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: layout.px(0.32)
 };
 var label02$1 = {
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
-  letterSpacing: layout.px(0.32)
+  lineHeight: 1.28572,
+  letterSpacing: layout.px(0.16)
 };
 var helperText01$1 = {
   fontSize: layout.rem(scale[0]),
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: layout.px(0.32)
 };
 var helperText02$1 = {
   fontSize: layout.rem(scale[1]),
-  lineHeight: 1.29,
-  letterSpacing: layout.px(0.32)
+  lineHeight: 1.28572,
+  letterSpacing: layout.px(0.16)
 };
 var bodyShort01$1 = {
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: layout.px(0.16)
 };
 var bodyLong01$1 = {
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: layout.px(0.16)
 };
 var bodyShort02$1 = {
@@ -313,30 +295,40 @@ var code01$1 = {
   fontFamily: fontFamilies.mono,
   fontSize: layout.rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: layout.px(0.32)
 };
 var code02$1 = {
   fontFamily: fontFamilies.mono,
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: layout.px(0.32)
 };
 var heading01$1 = {
   fontSize: layout.rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.29,
+  lineHeight: 1.42857,
   letterSpacing: layout.px(0.16)
 };
-var productiveHeading01$1 = heading01$1;
+var productiveHeading01$1 = {
+  fontSize: layout.rem(scale[1]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.28572,
+  letterSpacing: layout.px(0.16)
+};
 var heading02$1 = {
+  fontSize: layout.rem(scale[2]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.5,
+  letterSpacing: 0
+};
+var productiveHeading02$1 = {
   fontSize: layout.rem(scale[2]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.375,
   letterSpacing: 0
 };
-var productiveHeading02$1 = heading02$1;
 var productiveHeading03$1 = {
   fontSize: layout.rem(scale[4]),
   fontWeight: fontWeights.regular,
@@ -346,7 +338,7 @@ var productiveHeading03$1 = {
 var productiveHeading04$1 = {
   fontSize: layout.rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: 0
 };
 var productiveHeading05$1 = {
@@ -364,7 +356,7 @@ var productiveHeading06$1 = {
 var productiveHeading07$1 = {
   fontSize: layout.rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.19,
+  lineHeight: 1.199,
   letterSpacing: 0
 };
 var expressiveHeading01$1 = _objectSpread2(_objectSpread2({}, heading01$1), {}, {
@@ -392,7 +384,7 @@ var expressiveHeading03$1 = {
 var expressiveHeading04$1 = {
   fontSize: layout.rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
@@ -474,7 +466,7 @@ var expressiveParagraph01$1 = {
   breakpoints: {
     lg: {
       fontSize: layout.rem(scale[6]),
-      lineHeight: 1.29
+      lineHeight: 1.28572
     },
     max: {
       fontSize: layout.rem(scale[7]),
@@ -483,6 +475,7 @@ var expressiveParagraph01$1 = {
   }
 };
 var quotation01$1 = {
+  fontFamily: fontFamilies.serif,
   fontSize: layout.rem(scale[4]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.3,
@@ -502,7 +495,7 @@ var quotation01$1 = {
     xlg: {
       fontSize: layout.rem(scale[6]),
       fontWeight: fontWeights.regular,
-      lineHeight: 1.29,
+      lineHeight: 1.28572,
       letterSpacing: 0
     },
     max: {
@@ -514,6 +507,7 @@ var quotation01$1 = {
   }
 };
 var quotation02$1 = {
+  fontFamily: fontFamilies.serif,
   fontSize: layout.rem(scale[7]),
   fontWeight: fontWeights.light,
   lineHeight: 1.25,
@@ -632,7 +626,48 @@ var display04$1 = {
       letterSpacing: layout.px(-0.96)
     }
   }
+}; // Type changes - V11
+// Small styles
+// No changes for code-01, code-02, label-01, label-02
+
+var legal01$1 = {
+  fontSize: layout.rem(scale[0]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.33333,
+  letterSpacing: layout.px(0.32)
 };
+var legal02$1 = {
+  fontSize: layout.rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.28572,
+  letterSpacing: layout.px(0.16)
+}; // Body styles
+
+var bodyCompact01$1 = bodyShort01$1;
+var bodyCompact02$1 = bodyShort02$1;
+var body01$1 = bodyLong01$1;
+var body02$1 = bodyLong02$1; // Fixed heading styles
+
+var headingCompact01$1 = productiveHeading01$1;
+var headingCompact02$1 = productiveHeading02$1;
+var heading03$1 = productiveHeading03$1;
+var heading04$1 = productiveHeading04$1;
+var heading05$1 = productiveHeading05$1;
+var heading06$1 = productiveHeading06$1;
+var heading07$1 = productiveHeading07$1; // Fluid heading styles
+
+var fluidHeading03$1 = expressiveHeading03$1;
+var fluidHeading04$1 = expressiveHeading04$1;
+var fluidHeading05$1 = expressiveHeading05$1;
+var fluidHeading06$1 = expressiveHeading06$1; // Additional fluid styles
+
+var fluidParagraph01$1 = expressiveParagraph01$1;
+var fluidQuotation01$1 = quotation01$1;
+var fluidQuotation02$1 = quotation02$1;
+var fluidDisplay01$1 = display01$1;
+var fluidDisplay02$1 = display02$1;
+var fluidDisplay03$1 = display03$1;
+var fluidDisplay04$1 = display04$1;
 
 var styles = /*#__PURE__*/Object.freeze({
   __proto__: null,
@@ -669,7 +704,31 @@ var styles = /*#__PURE__*/Object.freeze({
   display01: display01$1,
   display02: display02$1,
   display03: display03$1,
-  display04: display04$1
+  display04: display04$1,
+  legal01: legal01$1,
+  legal02: legal02$1,
+  bodyCompact01: bodyCompact01$1,
+  bodyCompact02: bodyCompact02$1,
+  body01: body01$1,
+  body02: body02$1,
+  headingCompact01: headingCompact01$1,
+  headingCompact02: headingCompact02$1,
+  heading03: heading03$1,
+  heading04: heading04$1,
+  heading05: heading05$1,
+  heading06: heading06$1,
+  heading07: heading07$1,
+  fluidHeading03: fluidHeading03$1,
+  fluidHeading04: fluidHeading04$1,
+  fluidHeading05: fluidHeading05$1,
+  fluidHeading06: fluidHeading06$1,
+  fluidParagraph01: fluidParagraph01$1,
+  fluidQuotation01: fluidQuotation01$1,
+  fluidQuotation02: fluidQuotation02$1,
+  fluidDisplay01: fluidDisplay01$1,
+  fluidDisplay02: fluidDisplay02$1,
+  fluidDisplay03: fluidDisplay03$1,
+  fluidDisplay04: fluidDisplay04$1
 });
 
 var _excluded = ["breakpoints"];
@@ -780,9 +839,39 @@ var quotation02 = 'quotation02';
 var display01 = 'display01';
 var display02 = 'display02';
 var display03 = 'display03';
-var display04 = 'display04';
-var unstable_tokens = [caption01, caption02, label01, label02, helperText01, helperText02, bodyShort01, bodyLong01, bodyShort02, bodyLong02, code01, code02, heading01, productiveHeading01, heading02, productiveHeading02, productiveHeading03, productiveHeading04, productiveHeading05, productiveHeading06, productiveHeading07, expressiveHeading01, expressiveHeading02, expressiveHeading03, expressiveHeading04, expressiveHeading05, expressiveHeading06, expressiveParagraph01, quotation01, quotation02, display01, display02, display03, display04];
+var display04 = 'display04'; // V11 Tokens
 
+var legal01 = 'legal01';
+var legal02 = 'legal02';
+var bodyCompact01 = 'bodyCompact01';
+var bodyCompact02 = 'bodyCompact02';
+var body01 = 'body01';
+var body02 = 'body02';
+var headingCompact01 = 'headingCompact01';
+var headingCompact02 = 'headingCompact02';
+var heading03 = 'heading03';
+var heading04 = 'heading04';
+var heading05 = 'heading05';
+var heading06 = 'heading06';
+var heading07 = 'heading07';
+var fluidHeading03 = 'fluidHeading03';
+var fluidHeading04 = 'fluidHeading04';
+var fluidHeading05 = 'fluidHeading05';
+var fluidHeading06 = 'fluidHeading06';
+var fluidParagraph01 = 'fluidParagraph01';
+var fluidQuotation01 = 'fluidQuotation01';
+var fluidQuotation02 = 'fluidQuotation02';
+var fluidDisplay01 = 'fluidDisplay01';
+var fluidDisplay02 = 'fluidDisplay02';
+var fluidDisplay03 = 'fluidDisplay03';
+var fluidDisplay04 = 'fluidDisplay04';
+var unstable_tokens = [caption01, caption02, label01, label02, helperText01, helperText02, bodyShort01, bodyLong01, bodyShort02, bodyLong02, code01, code02, heading01, productiveHeading01, heading02, productiveHeading02, productiveHeading03, productiveHeading04, productiveHeading05, productiveHeading06, productiveHeading07, expressiveHeading01, expressiveHeading02, expressiveHeading03, expressiveHeading04, expressiveHeading05, expressiveHeading06, expressiveParagraph01, quotation01, quotation02, display01, display02, display03, display04, // V11 Tokens
+legal01, legal02, bodyCompact01, bodyCompact02, body01, body02, headingCompact01, headingCompact02, heading03, heading04, heading05, heading06, heading07, fluidHeading03, fluidHeading04, fluidHeading05, fluidHeading06, fluidParagraph01, fluidQuotation01, fluidQuotation02, fluidDisplay01, fluidDisplay02, fluidDisplay03, fluidDisplay04];
+
+exports.body01 = body01$1;
+exports.body02 = body02$1;
+exports.bodyCompact01 = bodyCompact01$1;
+exports.bodyCompact02 = bodyCompact02$1;
 exports.bodyLong01 = bodyLong01$1;
 exports.bodyLong02 = bodyLong02$1;
 exports.bodyShort01 = bodyShort01$1;
@@ -803,6 +892,17 @@ exports.expressiveHeading05 = expressiveHeading05$1;
 exports.expressiveHeading06 = expressiveHeading06$1;
 exports.expressiveParagraph01 = expressiveParagraph01$1;
 exports.fluid = fluid;
+exports.fluidDisplay01 = fluidDisplay01$1;
+exports.fluidDisplay02 = fluidDisplay02$1;
+exports.fluidDisplay03 = fluidDisplay03$1;
+exports.fluidDisplay04 = fluidDisplay04$1;
+exports.fluidHeading03 = fluidHeading03$1;
+exports.fluidHeading04 = fluidHeading04$1;
+exports.fluidHeading05 = fluidHeading05$1;
+exports.fluidHeading06 = fluidHeading06$1;
+exports.fluidParagraph01 = fluidParagraph01$1;
+exports.fluidQuotation01 = fluidQuotation01$1;
+exports.fluidQuotation02 = fluidQuotation02$1;
 exports.fontFamilies = fontFamilies;
 exports.fontFamily = fontFamily;
 exports.fontWeight = fontWeight;
@@ -810,10 +910,19 @@ exports.fontWeights = fontWeights;
 exports.getTypeSize = getTypeSize;
 exports.heading01 = heading01$1;
 exports.heading02 = heading02$1;
+exports.heading03 = heading03$1;
+exports.heading04 = heading04$1;
+exports.heading05 = heading05$1;
+exports.heading06 = heading06$1;
+exports.heading07 = heading07$1;
+exports.headingCompact01 = headingCompact01$1;
+exports.headingCompact02 = headingCompact02$1;
 exports.helperText01 = helperText01$1;
 exports.helperText02 = helperText02$1;
 exports.label01 = label01$1;
 exports.label02 = label02$1;
+exports.legal01 = legal01$1;
+exports.legal02 = legal02$1;
 exports.print = print;
 exports.productiveHeading01 = productiveHeading01$1;
 exports.productiveHeading02 = productiveHeading02$1;
