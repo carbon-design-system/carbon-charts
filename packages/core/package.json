@@ -49,7 +49,7 @@
 	"license": "Apache-2.0",
 	"dependencies": {
 		"@carbon/colors": "10.29.0",
-		"@carbon/telemetry": "0.0.0-alpha.6",
+		"@carbon/telemetry": "0.1.0",
 		"@carbon/utils-position": "1.1.1",
 		"carbon-components": "10.40.0",
 		"d3-cloud": "1.2.5",
