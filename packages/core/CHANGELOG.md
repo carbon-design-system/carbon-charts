@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.14...v0.55.0) (2022-03-14)
+
+
+### Features
+
+* **core:** add v11 classnames to modal & overflow menu ([#1329](https://github.com/carbon-design-system/carbon-charts/issues/1329)) ([f79c4ac](https://github.com/carbon-design-system/carbon-charts/commit/f79c4ac389bf3c1456ff92aa374669a26c743d63))
+
+
+
+
+
 ## [0.54.14](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.13...v0.54.14) (2022-03-14)
 
 
