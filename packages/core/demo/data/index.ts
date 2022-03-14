@@ -1154,6 +1154,11 @@ const complexChartDemos = [
 				chartType: chartTypes.HeatmapChart,
 			},
 			{
+				options: heatmapDemos.heatmapPositiveNegativeOptions,
+				data: heatmapDemos.heatmapPositiveNegativeData,
+				chartType: chartTypes.HeatmapChart,
+			},
+			{
 				options: heatmapDemos.heatmapMissingDataOptions,
 				data: heatmapDemos.heatmapMissingData,
 				chartType: chartTypes.HeatmapChart,
