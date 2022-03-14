@@ -641,6 +641,22 @@ export const heatmapQuantizeLegendOption = {
 	experimental: true,
 };
 
+export const heatmapPositiveNegativeOptions = Object.assign(
+	{},
+	heatmapOptions,
+	{
+		title: 'Heatmap (Divergent)',
+		heatmap: {
+			colorLegend: { title: 'Legend title', type: 'quantize' },
+		},
+	}
+);
+
+export const heatmapPositiveNegativeData = heatmapData.map((element) => ({
+	...element,
+	value: (element.value / 10) * (Math.round(Math.random()) ? -1 : 1),
+}));
+
 export const heatmapDomainOptions = {
 	title: 'Heatmap (Axis order option)',
 	axes: {
