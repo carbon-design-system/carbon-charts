@@ -1,0 +1,19 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../dist",
+		"paths": {
+			"@carbon/charts": ["src"],
+			"@carbon/charts/tools": ["src/tools.ts"]
+		}
+	},
+	"ts-node": {
+		"files": true
+	},
+	"include": ["**/*"],
+	"references": [
+		{
+			"path": "../src"
+		}
+	]
+}
