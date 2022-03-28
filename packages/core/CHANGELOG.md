@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.55.1...v0.56.0) (2022-03-28)
+
+
+### Features
+
+* **core:** add alignment option to alluvial  ([#1305](https://github.com/carbon-design-system/carbon-charts/issues/1305)) ([61ad7d4](https://github.com/carbon-design-system/carbon-charts/commit/61ad7d4d6a80b56187310b8062f206f3a5c49c55))
+
+
+
+
+
 ## [0.55.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.55.0...v0.55.1) (2022-03-14)
 
 **Note:** Version bump only for package @carbon/charts
