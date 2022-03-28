@@ -4,37 +4,38 @@ $areas-bg-color: rgba(127, 127, 127, 0.1);
 $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 .#{$prefix}--#{$charts-prefix}--skeleton-lines {
-	// lines
-	rect.chart-skeleton-backdrop {
-		@if $carbon--theme == $carbon--theme--g10 {
-			fill: $ui-01;
-		} @else if $carbon--theme == $carbon--theme--g90 {
-			fill: $carbon--gray-100;
-		} @else {
-			fill: $ui-background;
-		}
-	}
+  // lines
+  rect.chart-skeleton-backdrop {
+    // TODO-V11
+    // @if $carbon--theme == $carbon--theme--g10 {
+    // 	fill: $ui-01;
+    // } @else if $carbon--theme == $carbon--theme--g90 {
+    // 	fill: $carbon--gray-100;
+    // } @else {
+    // 	fill: $ui-background;
+    // }
+  }
 
-	.shimmer-effect-lines {
-		stroke-width: 1px;
-	}
+  .shimmer-effect-lines {
+    stroke-width: 1px;
+  }
 
-	.shimmer-effect-sparkline {
-		stroke-width: 0px;
-	}
+  .shimmer-effect-sparkline {
+    stroke-width: 0px;
+  }
 
-	.empty-state-lines {
-		stroke-width: 1px;
-		stroke: $lines-bg-color;
-	}
+  .empty-state-lines {
+    stroke-width: 1px;
+    stroke: $lines-bg-color;
+  }
 
-	.shimmer-lines {
-		.stop-bg-shimmer {
-			stop-color: $lines-bg-color;
-		}
+  .shimmer-lines {
+    .stop-bg-shimmer {
+      stop-color: $lines-bg-color;
+    }
 
-		.stop-shimmer {
-			stop-color: $lines-shimmer-color;
-		}
-	}
+    .stop-shimmer {
+      stop-color: $lines-shimmer-color;
+    }
+  }
 }

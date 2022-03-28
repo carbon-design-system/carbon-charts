@@ -37,6 +37,7 @@ import {
 
   // Constants
   white,
+  black,
 
   // Tools
   rgba,
@@ -86,8 +87,9 @@ export const supportSuccessInverse = green50;
 export const supportWarningInverse = yellow30;
 export const supportInfoInverse = blue60;
 
-export const overlay = rgba(gray100, 0.7);
+export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
+export const shadow = rgba(black, 0.8);
 
 export const buttonPrimary = blue60;
 export const buttonSecondary = gray60;
@@ -128,8 +130,6 @@ export const layerSelectedHover = adjustLightness(layerSelected, -6);
 export const layerSelectedInverse = gray10;
 export const borderSubtleSelected = gray50;
 
-export const layerDisabled = gray70;
-export const fieldDisabled = gray70;
 export const borderDisabled = gray70;
 
 export const textDisabled = gray50;
@@ -226,7 +226,7 @@ export const hoverRow = layerHover;
 
 export const visitedLink = linkVisited;
 
-export const disabled01 = layerDisabled;
+export const disabled01 = gray70;
 export const disabled02 = textDisabled;
 export const disabled03 = textOnColorDisabled;
 
@@ -271,6 +271,31 @@ export {
   display02,
   display03,
   display04,
+  // V11 Tokens
+  legal01,
+  legal02,
+  bodyCompact01,
+  bodyCompact02,
+  body01,
+  body02,
+  headingCompact01,
+  headingCompact02,
+  heading03,
+  heading04,
+  heading05,
+  heading06,
+  heading07,
+  fluidHeading03,
+  fluidHeading04,
+  fluidHeading05,
+  fluidHeading06,
+  fluidParagraph01,
+  fluidQuotation01,
+  fluidQuotation02,
+  fluidDisplay01,
+  fluidDisplay02,
+  fluidDisplay03,
+  fluidDisplay04,
   // Layout
   // Spacing
   spacing01,

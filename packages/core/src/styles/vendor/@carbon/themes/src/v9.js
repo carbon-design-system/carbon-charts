@@ -6,7 +6,7 @@
  */
 
 import { adjustLightness } from './tools';
-import { white, red60, gray40 } from '@carbon/colors';
+import { white, red60, gray40, black, rgba } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
@@ -147,6 +147,7 @@ export const supportInfoInverse = inverseSupport04;
 
 export const overlay = overlay01;
 export const toggleOff = ui04;
+export const shadow = rgba(black, 0.3);
 
 export const buttonPrimary = interactive01;
 export const buttonSecondary = interactive02;
@@ -182,8 +183,6 @@ export const layerSelectedHover = hoverSelectedUI;
 export const layerSelectedInverse = ui05;
 export const borderSubtleSelected = activeUI;
 
-export const layerDisabled = disabled01;
-export const fieldDisabled = disabled01;
 export const borderDisabled = disabled01;
 
 export const textDisabled = disabled02;
@@ -233,6 +232,31 @@ export {
   display02,
   display03,
   display04,
+  // V11 Tokens
+  legal01,
+  legal02,
+  bodyCompact01,
+  bodyCompact02,
+  body01,
+  body02,
+  headingCompact01,
+  headingCompact02,
+  heading03,
+  heading04,
+  heading05,
+  heading06,
+  heading07,
+  fluidHeading03,
+  fluidHeading04,
+  fluidHeading05,
+  fluidHeading06,
+  fluidParagraph01,
+  fluidQuotation01,
+  fluidQuotation02,
+  fluidDisplay01,
+  fluidDisplay02,
+  fluidDisplay03,
+  fluidDisplay04,
   // Layout
   // Spacing
   spacing01,

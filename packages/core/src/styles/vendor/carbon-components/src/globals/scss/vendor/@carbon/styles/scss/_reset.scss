@@ -6,7 +6,7 @@
 //
 
 @use 'config';
-@use 'type';
+@use 'type/reset' as type;
 
 @mixin reset {
   /// http://meyerweb.com/eric/tools/css/reset/
@@ -144,8 +144,8 @@
     border-collapse: collapse;
     border-spacing: 0;
   }
-  /// End vendor reset
 
+  /// End vendor reset
   html {
     box-sizing: border-box;
   }

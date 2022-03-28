@@ -1,7 +1,4 @@
 @import './../vendor/@carbon/motion/scss/motion.scss';
-@import './../vendor/@carbon/type/scss/type';
-@import './../vendor/@carbon/type/scss/font-face/mono';
-@import './../vendor/@carbon/type/scss/font-face/sans';
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;
@@ -64,13 +61,14 @@
 					padding-left: 4px;
 					width: auto;
 
-					@if ($carbon--theme == $carbon--theme--g90) or
-						($carbon--theme == $carbon--theme--g100)
-					{
-						fill: white;
-					} @else {
-						fill: black;
-					}
+					// TODO-V11
+					// @if ($carbon--theme == $carbon--theme--g90) or
+					// 	($carbon--theme == $carbon--theme--g100)
+					// {
+					// 	fill: white;
+					// } @else {
+					// 	fill: black;
+					// }
 				}
 			}
 
@@ -105,13 +103,14 @@
 				position: relative;
 
 				&:not(:last-child) {
-					@if $carbon--theme == $carbon--theme--g90 {
-						border-bottom: 1px solid $ui-01;
-					} @else if $carbon--theme == $carbon--theme--g100 {
-						border-bottom: 1px solid $ui-04;
-					} @else {
-						border-bottom: 1px solid $ui-03;
-					}
+					// TODO-V11
+					// @if $carbon--theme == $carbon--theme--g90 {
+					// 	border-bottom: 1px solid $ui-01;
+					// } @else if $carbon--theme == $carbon--theme--g100 {
+					// 	border-bottom: 1px solid $ui-04;
+					// } @else {
+					// 	border-bottom: 1px solid $ui-03;
+					// }
 				}
 			}
 		}

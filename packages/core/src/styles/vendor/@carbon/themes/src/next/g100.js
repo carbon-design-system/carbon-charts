@@ -7,9 +7,10 @@
 
 import {
   // Blue
-  blue20,
   blue40,
   blue60,
+  blue70,
+  blue80,
 
   // Gray
   gray10,
@@ -33,7 +34,7 @@ import {
   green50,
   yellow30,
   orange40,
-  red30,
+  red40,
   red50,
   red60,
   purple40,
@@ -41,24 +42,29 @@ import {
 
   // Constants
   white,
+  black,
+
+  // Tools
+  rgba,
+  gray10Hover,
 } from '@carbon/colors';
-import { adjustLightness } from '../tools';
+import { adjustLightness, adjustAlpha } from '../tools';
 
 // Background
 export const background = gray100;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
-export const backgroundActive = gray80;
-export const backgroundHover = adjustLightness(background, 7);
-export const backgroundInverseHover = adjustLightness(backgroundInverse, -5);
-export const backgroundSelected = gray90;
-export const backgroundSelectedHover = adjustLightness(backgroundSelected, 5);
+export const backgroundActive = adjustAlpha(gray50, 0.4);
+export const backgroundHover = adjustAlpha(gray50, 0.16);
+export const backgroundInverseHover = gray10Hover;
+export const backgroundSelected = adjustAlpha(gray50, 0.24);
+export const backgroundSelectedHover = adjustAlpha(gray50, 0.32);
 
 // Layer
 // layer-01
 export const layer01 = gray90;
 export const layerActive01 = gray70;
-export const layerHover01 = adjustLightness(layer01, 5);
+export const layerHover01 = gray90Hover;
 export const layerSelected01 = gray80;
 export const layerSelectedHover01 = gray80Hover;
 
@@ -77,14 +83,13 @@ export const layerSelected03 = gray60;
 export const layerSelectedHover03 = gray60Hover;
 
 // layer
-export const layerDisabled = gray90;
 export const layerSelectedInverse = gray10;
 export const layerSelectedDisabled = gray40;
 
 // layer-accent-01
 export const layerAccent01 = gray80;
 export const layerAccentActive01 = gray60;
-export const layerAccentHover01 = adjustLightness(layerAccent01, 6);
+export const layerAccentHover01 = gray80Hover;
 
 // layer-accent-02
 export const layerAccent02 = gray70;
@@ -108,9 +113,6 @@ export const fieldHover02 = gray80Hover;
 // field-03
 export const field03 = gray70;
 export const fieldHover03 = gray70Hover;
-
-// field
-export const fieldDisabled = gray80;
 
 // Border
 // border-subtle-00
@@ -140,18 +142,18 @@ export const borderInverse = gray10;
 export const borderInteractive = blue50;
 
 // border
-export const borderDisabled = gray90;
+export const borderDisabled = adjustAlpha(gray50, 0.5);
 
 // Text
 export const textPrimary = gray10;
 export const textSecondary = gray30;
-export const textPlaceholder = gray60;
-export const textHelper = gray50;
-export const textError = red30;
+export const textPlaceholder = adjustAlpha(textPrimary, 0.4);
+export const textHelper = gray40;
+export const textError = red40;
 export const textInverse = gray100;
 export const textOnColor = white;
-export const textOnColorDisabled = gray40;
-export const textDisabled = gray70;
+export const textOnColorDisabled = adjustAlpha(textOnColor, 0.25);
+export const textDisabled = adjustAlpha(textPrimary, 0.25);
 
 // Link
 export const linkPrimary = blue40;
@@ -159,14 +161,16 @@ export const linkPrimaryHover = blue30;
 export const linkSecondary = blue30;
 export const linkInverse = blue60;
 export const linkVisited = purple40;
+export const linkInverseActive = gray100;
+export const linkInverseHover = blue70;
 
 // Icon
 export const iconPrimary = gray10;
 export const iconSecondary = gray30;
 export const iconInverse = gray100;
 export const iconOnColor = white;
-export const iconOnColorDisabled = gray40;
-export const iconDisabled = gray70;
+export const iconOnColorDisabled = adjustAlpha(iconOnColor, 0.25);
+export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
 
 // Support
 export const supportError = red50;
@@ -176,7 +180,7 @@ export const supportInfo = blue50;
 export const supportErrorInverse = red60;
 export const supportSuccessInverse = green50;
 export const supportWarningInverse = yellow30;
-export const supportInfoInverse = blue60;
+export const supportInfoInverse = blue70;
 export const supportCautionMinor = yellow30;
 export const supportCautionMajor = orange40;
 export const supportCautionUndefined = purple50;
@@ -192,9 +196,10 @@ export const skeletonElement = gray80;
 
 // Misc
 export const interactive = blue50;
-export const highlight = blue20;
-export const overlay = 'rgba(22, 22, 22, 0.5)';
-export const toggleOff = gray50;
+export const highlight = blue80;
+export const overlay = rgba(black, 0.65);
+export const toggleOff = gray60;
+export const shadow = rgba(black, 0.8);
 
 export {
   // Type

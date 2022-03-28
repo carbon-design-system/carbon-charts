@@ -17,6 +17,7 @@
 @mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    position: relative;
     margin-bottom: $spacing-02;
   }
 
@@ -40,14 +41,17 @@
   // to match the specs.
   .#{$prefix}--checkbox {
     @include visually-hidden;
+    //even though its hidden, positioning is for native validation to be aligned to checkbox
+    top: 1.25rem;
+    left: 0.7rem;
   }
 
   // The label corresponds to the content inside of the `label` tag. Since we're
   // creating our own checkbox style, we'll need to position this in order to
-  // accomodate the spacing needed for the checkbox.
+  // accommodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     display: flex;
@@ -192,5 +196,12 @@
 
     // Add extra spacing when label is present
     margin: rem(1px) 0 0 rem(6px);
+  }
+
+  //-----------------------------------------------
+  // InlineCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--checkbox--inline {
+    position: relative;
   }
 }

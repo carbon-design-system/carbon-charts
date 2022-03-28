@@ -1,73 +1,49 @@
-@import './../vendor/@carbon/type/scss/type';
-@import './../vendor/@carbon/type/scss/font-face/sans';
 @import './../vendor/@carbon/themes/scss/tokens';
 
 .#{$prefix}--#{$charts-prefix}--axes {
-	overflow: visible;
+  overflow: visible;
 
-	g.axis {
-		g.ticks.invisible {
-			visibility: hidden;
-		}
+  g.axis {
+    g.ticks.invisible {
+      visibility: hidden;
+    }
 
-		g.tick-hover rect.axis-holder {
-			fill: transparent;
-			stroke: transparent;
-			stroke-width: 2px;
-		}
+    g.tick-hover rect.axis-holder {
+      fill: transparent;
+      stroke: transparent;
+      stroke-width: 2px;
+    }
 
-		g.tick-hover:hover,
-		g.tick-hover:focus {
-			@if $carbon--theme ==
-				$carbon--theme--g90 or
-				$carbon--theme ==
-				$carbon--theme--g100
-			{
-				rect.axis-holder {
-					fill: white;
-					stroke: white;
-					stroke-width: 2px;
-				}
+    g.tick-hover:hover,
+    g.tick-hover:focus {
+      rect.axis-holder {
+        fill: $layer-selected-inverse;
+        stroke: $layer-selected-inverse;
+        stroke-width: 2px;
+      }
 
-				text {
-					fill: invert($text-02);
-				}
-			}
+      text {
+        fill: $layer-selected-inverse;
+      }
+    }
 
-			@if $carbon--theme ==
-				$carbon--theme--g10 or
-				$carbon--theme ==
-				$carbon--theme--white
-			{
-				rect.axis-holder {
-					fill: black;
-					stroke: black;
-					stroke-width: 2px;
-				}
+    g.tick text {
+      fill: $text-02;
+      font-family: carbon--font-family('sans-condensed');
+    }
 
-				text {
-					fill: white;
-				}
-			}
-		}
+    g.tick line {
+      display: none;
+    }
 
-		g.tick text {
-			fill: $text-02;
-			font-family: carbon--font-family('sans-condensed');
-		}
+    path.domain {
+      stroke: $ui-04;
+    }
 
-		g.tick line {
-			display: none;
-		}
-
-		path.domain {
-			stroke: $ui-04;
-		}
-
-		.axis-title {
-			font-family: carbon--font-family('sans');
-			font-weight: carbon--font-weight('semibold');
-			fill: $text-01;
-		}
-	}
+    .axis-title {
+      font-family: carbon--font-family('sans');
+      font-weight: carbon--font-weight('semibold');
+      fill: $text-01;
+    }
+  }
 }

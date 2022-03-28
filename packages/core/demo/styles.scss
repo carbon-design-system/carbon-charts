@@ -62,10 +62,10 @@ div.container {
 
 			@import './resource-card.scss';
 
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
+			// @include modal;
+			// @include overflow-menu;
+			// @include data-table-core;
+			// @include select;
 		}
 	}
 
@@ -79,10 +79,10 @@ div.container {
 
 			@import './resource-card.scss';
 
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
+			// @include modal;
+			// @include overflow-menu;
+			// @include data-table-core;
+			// @include select;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -117,10 +117,10 @@ div.container {
 
 			@import './resource-card.scss';
 
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
+			// @include modal;
+			// @include overflow-menu;
+			// @include data-table-core;
+			// @include select;
 
 			.bx--radio-button__appearance {
 				background-color: transparent;
@@ -307,7 +307,7 @@ div.container {
 		}
 
 		.welcome__heading {
-			@include type-style('productive-heading-07');
+			// @include type-style('productive-heading-07');
 
 			color: $inverse-01;
 		}
@@ -317,7 +317,7 @@ div.container {
 		}
 
 		.welcome__heading--other {
-			@include type-style('productive-heading-04');
+			// @include type-style('productive-heading-04');
 
 			font-weight: 600;
 			color: #4587fd;

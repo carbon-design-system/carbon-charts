@@ -150,6 +150,7 @@ const colors = [
 
   'overlay',
   'toggleOff',
+  'shadow',
 
   'buttonPrimary',
   'buttonSecondary',
@@ -185,8 +186,6 @@ const colors = [
   'layerSelectedInverse',
   'borderSubtleSelected',
 
-  'layerDisabled',
-  'fieldDisabled',
   'borderDisabled',
 
   'textDisabled',
@@ -346,6 +345,7 @@ export const unstable__meta = {
 
         'overlay',
         'toggleOff',
+        'shadow',
 
         'buttonPrimary',
         'buttonSecondary',
@@ -418,8 +418,6 @@ export const unstable__meta = {
         'layerSelectedInverse',
         'borderSubtleSelected',
 
-        'layerDisabled',
-        'fieldDisabled',
         'borderDisabled',
 
         'textDisabled',

@@ -7,23 +7,21 @@ $carbon-dataviz-yellow-10: #fcf4d6;
 $css--reset: false;
 $css--default-type: false;
 
-// Carbon imports
-@import './vendor/@carbon/colors/scss/colors';
-@import './vendor/@carbon/type/scss/prefix';
+$prefix: 'bx';
+@use './vendor/@carbon/type';
 
-@if variable-exists($name: 'carbon--theme') == false {
-	@warn "$carbon--theme not found, or is undefined. \
-	Either import the Carbon SCSS and set a theme or, if you're using Charts without Carbon, \
-	import one of the styles-[theme name here].scss files";
-}
+// Carbon imports
+// TODO-V11
+@import './vendor/@carbon/colors/scss/colors';
+// @use '@carbon/colors';
 
 @mixin default_transition {
-	transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 // Internal
 @import './mixins.scss';
-@import './colors.scss';
+// @import './colors.scss';
 @import './components/index.scss';
 @import './graphs/index.scss';
 @import './type';
@@ -31,5 +29,5 @@ $css--default-type: false;
 @import './chart-feature-flags';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	overflow: visible;
+  overflow: visible;
 }

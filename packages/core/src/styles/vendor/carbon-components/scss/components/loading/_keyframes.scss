@@ -6,11 +6,13 @@
 //
 
 @import 'vars';
+@import 'functions';
 
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -31,18 +33,20 @@
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: loading-progress($circumference, 0);
   }
+
   100% {
-    stroke-dashoffset: $loading__gap;
+    stroke-dashoffset: loading-progress($circumference, 81);
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: $loading__gap;
+    stroke-dashoffset: loading-progress($circumference, 81);
   }
+
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: loading-progress($circumference, 0);
   }
 }

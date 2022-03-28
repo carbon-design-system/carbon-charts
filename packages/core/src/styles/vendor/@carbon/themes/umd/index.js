@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('color'), require('@carbon/colors'), require('@carbon/type'), require('@carbon/layout')) :
   typeof define === 'function' && define.amd ? define(['exports', 'color', '@carbon/colors', '@carbon/type', '@carbon/layout'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CarbonThemes = {}, global.Color, global.CarbonColors, global.CarbonType, global.CarbonLayout));
-}(this, (function (exports, Color, colors$1, type, layout) { 'use strict';
+})(this, (function (exports, Color, colors$1, type, layout) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -13,14 +13,9 @@
 
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(object);
-
-      if (enumerableOnly) {
-        symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-      }
-
-      keys.push.apply(keys, symbols);
+      enumerableOnly && (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
     }
 
     return keys;
@@ -28,19 +23,12 @@
 
   function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
+      var source = null != arguments[i] ? arguments[i] : {};
+      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
 
     return target;
@@ -72,8 +60,8 @@
    */
 
   function adjustLightness(token, shift) {
-    var original = Color__default['default'](token).hsl().object();
-    return Color__default['default'](_objectSpread2(_objectSpread2({}, original), {}, {
+    var original = Color__default["default"](token).hsl().object();
+    return Color__default["default"](_objectSpread2(_objectSpread2({}, original), {}, {
       l: original.l += shift
     })).round().hex().toLowerCase();
   }
@@ -190,6 +178,7 @@
   var supportInfoInverse$5 = inverseSupport04$5;
   var overlay$5 = overlay01$5;
   var toggleOff$5 = ui04$5;
+  var shadow$5 = colors$1.rgba(colors$1.black, 0.3);
   var buttonPrimary$5 = interactive01$5;
   var buttonSecondary$5 = interactive02$5;
   var buttonTertiary$5 = interactive03$5;
@@ -218,8 +207,6 @@
   var layerSelectedHover$5 = hoverSelectedUI$5;
   var layerSelectedInverse$5 = ui05$5;
   var borderSubtleSelected$5 = activeUI$5;
-  var layerDisabled$5 = disabled01$5;
-  var fieldDisabled$5 = disabled01$5;
   var borderDisabled$5 = disabled01$5;
   var textDisabled$5 = disabled02$5;
   var buttonDisabled$5 = disabled02$5;
@@ -342,6 +329,7 @@
     supportInfoInverse: supportInfoInverse$5,
     overlay: overlay$5,
     toggleOff: toggleOff$5,
+    shadow: shadow$5,
     buttonPrimary: buttonPrimary$5,
     buttonSecondary: buttonSecondary$5,
     buttonTertiary: buttonTertiary$5,
@@ -370,8 +358,6 @@
     layerSelectedHover: layerSelectedHover$5,
     layerSelectedInverse: layerSelectedInverse$5,
     borderSubtleSelected: borderSubtleSelected$5,
-    layerDisabled: layerDisabled$5,
-    fieldDisabled: fieldDisabled$5,
     borderDisabled: borderDisabled$5,
     textDisabled: textDisabled$5,
     buttonDisabled: buttonDisabled$5,
@@ -421,6 +407,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -572,6 +582,7 @@
   var supportInfoInverse$4 = inverseSupport04$4;
   var overlay$4 = overlay01$4;
   var toggleOff$4 = ui04$4;
+  var shadow$4 = colors$1.rgba(colors$1.black, 0.3);
   var buttonPrimary$4 = interactive01$4;
   var buttonSecondary$4 = interactive02$4;
   var buttonTertiary$4 = interactive03$4;
@@ -600,8 +611,6 @@
   var layerSelectedHover$4 = hoverSelectedUI$4;
   var layerSelectedInverse$4 = ui05$4;
   var borderSubtleSelected$4 = activeUI$4;
-  var layerDisabled$4 = disabled01$4;
-  var fieldDisabled$4 = disabled01$4;
   var borderDisabled$4 = disabled01$4;
   var textDisabled$4 = disabled02$4;
   var buttonDisabled$4 = disabled02$4;
@@ -724,6 +733,7 @@
     supportInfoInverse: supportInfoInverse$4,
     overlay: overlay$4,
     toggleOff: toggleOff$4,
+    shadow: shadow$4,
     buttonPrimary: buttonPrimary$4,
     buttonSecondary: buttonSecondary$4,
     buttonTertiary: buttonTertiary$4,
@@ -752,8 +762,6 @@
     layerSelectedHover: layerSelectedHover$4,
     layerSelectedInverse: layerSelectedInverse$4,
     borderSubtleSelected: borderSubtleSelected$4,
-    layerDisabled: layerDisabled$4,
-    fieldDisabled: fieldDisabled$4,
     borderDisabled: borderDisabled$4,
     textDisabled: textDisabled$4,
     buttonDisabled: buttonDisabled$4,
@@ -803,6 +811,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -882,7 +914,7 @@
   var inverseSupport02$3 = colors$1.green50;
   var inverseSupport03$3 = colors$1.yellow;
   var inverseSupport04$3 = colors$1.blue60;
-  var overlay01$3 = colors$1.rgba(colors$1.gray100, 0.7);
+  var overlay01$3 = colors$1.rgba(colors$1.black, 0.65);
   var danger01$3 = colors$1.red60;
   var danger02$3 = colors$1.red50; // Interaction states
 
@@ -954,6 +986,7 @@
   var supportInfoInverse$3 = inverseSupport04$3;
   var overlay$3 = overlay01$3;
   var toggleOff$3 = ui04$3;
+  var shadow$3 = colors$1.rgba(colors$1.black, 0.8);
   var buttonPrimary$3 = interactive01$3;
   var buttonSecondary$3 = interactive02$3;
   var buttonTertiary$3 = interactive03$3;
@@ -982,8 +1015,6 @@
   var layerSelectedHover$3 = hoverSelectedUI$3;
   var layerSelectedInverse$3 = ui05$3;
   var borderSubtleSelected$3 = activeUI$3;
-  var layerDisabled$3 = disabled01$3;
-  var fieldDisabled$3 = disabled01$3;
   var borderDisabled$3 = disabled01$3;
   var textDisabled$3 = disabled02$3;
   var buttonDisabled$3 = disabled02$3;
@@ -1106,6 +1137,7 @@
     supportInfoInverse: supportInfoInverse$3,
     overlay: overlay$3,
     toggleOff: toggleOff$3,
+    shadow: shadow$3,
     buttonPrimary: buttonPrimary$3,
     buttonSecondary: buttonSecondary$3,
     buttonTertiary: buttonTertiary$3,
@@ -1134,8 +1166,6 @@
     layerSelectedHover: layerSelectedHover$3,
     layerSelectedInverse: layerSelectedInverse$3,
     borderSubtleSelected: borderSubtleSelected$3,
-    layerDisabled: layerDisabled$3,
-    fieldDisabled: fieldDisabled$3,
     borderDisabled: borderDisabled$3,
     textDisabled: textDisabled$3,
     buttonDisabled: buttonDisabled$3,
@@ -1185,6 +1215,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -1268,8 +1322,9 @@
   var supportSuccessInverse$2 = colors$1.green50;
   var supportWarningInverse$2 = colors$1.yellow30;
   var supportInfoInverse$2 = colors$1.blue60;
-  var overlay$2 = colors$1.rgba(colors$1.gray100, 0.7);
+  var overlay$2 = colors$1.rgba(colors$1.black, 0.65);
   var toggleOff$2 = colors$1.gray50;
+  var shadow$2 = colors$1.rgba(colors$1.black, 0.8);
   var buttonPrimary$2 = colors$1.blue60;
   var buttonSecondary$2 = colors$1.gray60;
   var buttonTertiary$2 = colors$1.white;
@@ -1301,8 +1356,6 @@
   var layerSelectedHover$2 = adjustLightness(layerSelected$2, -6);
   var layerSelectedInverse$2 = colors$1.gray10;
   var borderSubtleSelected$2 = colors$1.gray50;
-  var layerDisabled$2 = colors$1.gray70;
-  var fieldDisabled$2 = colors$1.gray70;
   var borderDisabled$2 = colors$1.gray70;
   var textDisabled$2 = colors$1.gray50;
   var buttonDisabled$2 = colors$1.gray50;
@@ -1372,7 +1425,7 @@
   var activeDanger$2 = buttonDangerActive$2;
   var hoverRow$2 = layerHover$2;
   var visitedLink$2 = linkVisited$2;
-  var disabled01$2 = layerDisabled$2;
+  var disabled01$2 = colors$1.gray70;
   var disabled02$2 = textDisabled$2;
   var disabled03$2 = textOnColorDisabled$2;
   var decorative01$2 = colors$1.gray60;
@@ -1426,6 +1479,7 @@
     supportInfoInverse: supportInfoInverse$2,
     overlay: overlay$2,
     toggleOff: toggleOff$2,
+    shadow: shadow$2,
     buttonPrimary: buttonPrimary$2,
     buttonSecondary: buttonSecondary$2,
     buttonTertiary: buttonTertiary$2,
@@ -1457,8 +1511,6 @@
     layerSelectedHover: layerSelectedHover$2,
     layerSelectedInverse: layerSelectedInverse$2,
     borderSubtleSelected: borderSubtleSelected$2,
-    layerDisabled: layerDisabled$2,
-    fieldDisabled: fieldDisabled$2,
     borderDisabled: borderDisabled$2,
     textDisabled: textDisabled$2,
     buttonDisabled: buttonDisabled$2,
@@ -1570,6 +1622,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -1649,7 +1725,7 @@
   var inverseSupport02$1 = colors$1.green50;
   var inverseSupport03$1 = colors$1.yellow;
   var inverseSupport04$1 = colors$1.blue60;
-  var overlay01$1 = colors$1.rgba(colors$1.gray100, 0.7);
+  var overlay01$1 = colors$1.rgba(colors$1.black, 0.65);
   var danger01$1 = colors$1.red60;
   var danger02$1 = colors$1.red40; // Interaction states
 
@@ -1721,6 +1797,7 @@
   var supportInfoInverse$1 = inverseSupport04$1;
   var overlay$1 = overlay01$1;
   var toggleOff$1 = ui04$1;
+  var shadow$1 = colors$1.rgba(colors$1.black, 0.8);
   var buttonPrimary$1 = interactive01$1;
   var buttonSecondary$1 = interactive02$1;
   var buttonTertiary$1 = interactive03$1;
@@ -1749,8 +1826,6 @@
   var layerSelectedHover$1 = hoverSelectedUI$1;
   var layerSelectedInverse$1 = ui05$1;
   var borderSubtleSelected$1 = activeUI$1;
-  var layerDisabled$1 = disabled01$1;
-  var fieldDisabled$1 = disabled01$1;
   var borderDisabled$1 = disabled01$1;
   var textDisabled$1 = disabled02$1;
   var buttonDisabled$1 = disabled02$1;
@@ -1873,6 +1948,7 @@
     supportInfoInverse: supportInfoInverse$1,
     overlay: overlay$1,
     toggleOff: toggleOff$1,
+    shadow: shadow$1,
     buttonPrimary: buttonPrimary$1,
     buttonSecondary: buttonSecondary$1,
     buttonTertiary: buttonTertiary$1,
@@ -1901,8 +1977,6 @@
     layerSelectedHover: layerSelectedHover$1,
     layerSelectedInverse: layerSelectedInverse$1,
     borderSubtleSelected: borderSubtleSelected$1,
-    layerDisabled: layerDisabled$1,
-    fieldDisabled: fieldDisabled$1,
     borderDisabled: borderDisabled$1,
     textDisabled: textDisabled$1,
     buttonDisabled: buttonDisabled$1,
@@ -1952,6 +2026,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -2103,6 +2201,7 @@
   var supportInfoInverse = inverseSupport04;
   var overlay = overlay01;
   var toggleOff = ui04;
+  var shadow = colors$1.rgba(colors$1.black, 0.3);
   var buttonPrimary = interactive01;
   var buttonSecondary = interactive02;
   var buttonTertiary = interactive03;
@@ -2131,8 +2230,6 @@
   var layerSelectedHover = hoverSelectedUI;
   var layerSelectedInverse = ui05;
   var borderSubtleSelected = activeUI;
-  var layerDisabled = disabled01;
-  var fieldDisabled = disabled01;
   var borderDisabled = disabled01;
   var textDisabled = disabled02;
   var buttonDisabled = disabled02;
@@ -2255,6 +2352,7 @@
     supportInfoInverse: supportInfoInverse,
     overlay: overlay,
     toggleOff: toggleOff,
+    shadow: shadow,
     buttonPrimary: buttonPrimary,
     buttonSecondary: buttonSecondary,
     buttonTertiary: buttonTertiary,
@@ -2283,8 +2381,6 @@
     layerSelectedHover: layerSelectedHover,
     layerSelectedInverse: layerSelectedInverse,
     borderSubtleSelected: borderSubtleSelected,
-    layerDisabled: layerDisabled,
-    fieldDisabled: fieldDisabled,
     borderDisabled: borderDisabled,
     textDisabled: textDisabled,
     buttonDisabled: buttonDisabled,
@@ -2334,6 +2430,30 @@
     display02: type.display02,
     display03: type.display03,
     display04: type.display04,
+    legal01: type.legal01,
+    legal02: type.legal02,
+    bodyCompact01: type.bodyCompact01,
+    bodyCompact02: type.bodyCompact02,
+    body01: type.body01,
+    body02: type.body02,
+    headingCompact01: type.headingCompact01,
+    headingCompact02: type.headingCompact02,
+    heading03: type.heading03,
+    heading04: type.heading04,
+    heading05: type.heading05,
+    heading06: type.heading06,
+    heading07: type.heading07,
+    fluidHeading03: type.fluidHeading03,
+    fluidHeading04: type.fluidHeading04,
+    fluidHeading05: type.fluidHeading05,
+    fluidHeading06: type.fluidHeading06,
+    fluidParagraph01: type.fluidParagraph01,
+    fluidQuotation01: type.fluidQuotation01,
+    fluidQuotation02: type.fluidQuotation02,
+    fluidDisplay01: type.fluidDisplay01,
+    fluidDisplay02: type.fluidDisplay02,
+    fluidDisplay03: type.fluidDisplay03,
+    fluidDisplay04: type.fluidDisplay04,
     spacing01: layout.spacing01,
     spacing02: layout.spacing02,
     spacing03: layout.spacing03,
@@ -2385,7 +2505,7 @@
   'interactive01', 'interactive02', 'interactive03', 'interactive04', 'uiBackground', 'ui01', 'ui02', 'ui03', 'ui04', 'ui05', 'text01', 'text02', 'text03', 'text04', 'text05', 'textError', 'icon01', 'icon02', 'icon03', 'link01', 'link02', 'inverseLink', 'field01', 'field02', 'inverse01', 'inverse02', 'support01', 'support02', 'support03', 'support04', 'inverseSupport01', 'inverseSupport02', 'inverseSupport03', 'inverseSupport04', 'overlay01', 'danger01', 'danger02', // Interactive states
   'focus', 'inverseFocusUi', 'hoverPrimary', 'activePrimary', 'hoverPrimaryText', 'hoverSecondary', 'activeSecondary', 'hoverTertiary', 'activeTertiary', 'hoverUI', 'hoverLightUI', 'hoverSelectedUI', 'activeUI', 'activeLightUI', 'selectedUI', 'selectedLightUI', 'inverseHoverUI', 'hoverDanger', 'activeDanger', 'hoverRow', 'visitedLink', 'disabled01', 'disabled02', 'disabled03', 'highlight', 'decorative01', 'buttonSeparator', 'skeleton01', 'skeleton02', // New color tokens
   // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
-  'background', 'layer', 'layerAccent', 'layerAccentHover', 'layerAccentActive', 'field', 'backgroundInverse', 'backgroundBrand', 'interactive', 'borderSubtle', 'borderStrong', 'borderInverse', 'borderInteractive', 'textPrimary', 'textSecondary', 'textPlaceholder', 'textHelper', 'textOnColor', 'textInverse', 'linkPrimary', 'linkSecondary', 'linkVisited', 'linkInverse', 'iconPrimary', 'iconSecondary', 'iconOnColor', 'iconInverse', 'supportError', 'supportSuccess', 'supportWarning', 'supportInfo', 'supportErrorInverse', 'supportSuccessInverse', 'supportWarningInverse', 'supportInfoInverse', 'overlay', 'toggleOff', 'buttonPrimary', 'buttonSecondary', 'buttonTertiary', 'buttonDangerPrimary', 'buttonDangerSecondary', 'backgroundActive', 'layerActive', 'buttonDangerActive', 'buttonPrimaryActive', 'buttonSecondaryActive', 'buttonTertiaryActive', 'focusInset', 'focusInverse', 'backgroundHover', 'layerHover', 'fieldHover', 'backgroundInverseHover', 'linkPrimaryHover', 'buttonDangerHover', 'buttonPrimaryHover', 'buttonSecondaryHover', 'buttonTertiaryHover', 'backgroundSelected', 'backgroundSelectedHover', 'layerSelected', 'layerSelectedHover', 'layerSelectedInverse', 'borderSubtleSelected', 'layerDisabled', 'fieldDisabled', 'borderDisabled', 'textDisabled', 'buttonDisabled', 'iconDisabled', 'textOnColorDisabled', 'iconOnColorDisabled', 'layerSelectedDisabled', 'skeletonBackground', 'skeletonElement', // Deprecated
+  'background', 'layer', 'layerAccent', 'layerAccentHover', 'layerAccentActive', 'field', 'backgroundInverse', 'backgroundBrand', 'interactive', 'borderSubtle', 'borderStrong', 'borderInverse', 'borderInteractive', 'textPrimary', 'textSecondary', 'textPlaceholder', 'textHelper', 'textOnColor', 'textInverse', 'linkPrimary', 'linkSecondary', 'linkVisited', 'linkInverse', 'iconPrimary', 'iconSecondary', 'iconOnColor', 'iconInverse', 'supportError', 'supportSuccess', 'supportWarning', 'supportInfo', 'supportErrorInverse', 'supportSuccessInverse', 'supportWarningInverse', 'supportInfoInverse', 'overlay', 'toggleOff', 'shadow', 'buttonPrimary', 'buttonSecondary', 'buttonTertiary', 'buttonDangerPrimary', 'buttonDangerSecondary', 'backgroundActive', 'layerActive', 'buttonDangerActive', 'buttonPrimaryActive', 'buttonSecondaryActive', 'buttonTertiaryActive', 'focusInset', 'focusInverse', 'backgroundHover', 'layerHover', 'fieldHover', 'backgroundInverseHover', 'linkPrimaryHover', 'buttonDangerHover', 'buttonPrimaryHover', 'buttonSecondaryHover', 'buttonTertiaryHover', 'backgroundSelected', 'backgroundSelectedHover', 'layerSelected', 'layerSelectedHover', 'layerSelectedInverse', 'borderSubtleSelected', 'borderDisabled', 'textDisabled', 'buttonDisabled', 'iconDisabled', 'textOnColorDisabled', 'iconOnColorDisabled', 'layerSelectedDisabled', 'skeletonBackground', 'skeletonElement', // Deprecated
   'brand01', 'brand02', 'brand03', 'active01', 'hoverField', 'danger'];
   var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   /**
@@ -2435,11 +2555,11 @@
     colors: [{
       type: 'core',
       tokens: ['uiBackground', 'interactive01', 'interactive02', 'interactive03', 'interactive04', 'brand01', 'brand02', 'brand03', 'danger', 'danger01', 'danger02', 'ui01', 'ui02', 'ui03', 'ui04', 'ui05', 'text01', 'text02', 'text03', 'text04', 'text05', 'textError', 'link01', 'link02', 'icon01', 'icon02', 'icon03', 'field01', 'field02', 'inverse01', 'inverse02', 'inverseLink', 'support01', 'support02', 'support03', 'support04', 'inverseSupport01', 'inverseSupport02', 'inverseSupport03', 'inverseSupport04', 'overlay01', //new tokens
-      'background', 'layer', 'layerAccent', 'layerAccentHover', 'layerAccentActive', 'field', 'backgroundInverse', 'backgroundBrand', 'interactive', 'borderSubtle', 'borderStrong', 'borderInverse', 'borderInteractive', 'textPrimary', 'textSecondary', 'textPlaceholder', 'textHelper', 'textOnColor', 'textInverse', 'linkPrimary', 'linkSecondary', 'linkVisited', 'linkInverse', 'iconPrimary', 'iconSecondary', 'iconOnColor', 'iconInverse', 'supportError', 'supportSuccess', 'supportWarning', 'supportInfo', 'supportErrorInverse', 'supportSuccessInverse', 'supportWarningInverse', 'supportInfoInverse', 'overlay', 'toggleOff', 'buttonPrimary', 'buttonSecondary', 'buttonTertiary', 'buttonDangerPrimary', 'buttonDangerSecondary']
+      'background', 'layer', 'layerAccent', 'layerAccentHover', 'layerAccentActive', 'field', 'backgroundInverse', 'backgroundBrand', 'interactive', 'borderSubtle', 'borderStrong', 'borderInverse', 'borderInteractive', 'textPrimary', 'textSecondary', 'textPlaceholder', 'textHelper', 'textOnColor', 'textInverse', 'linkPrimary', 'linkSecondary', 'linkVisited', 'linkInverse', 'iconPrimary', 'iconSecondary', 'iconOnColor', 'iconInverse', 'supportError', 'supportSuccess', 'supportWarning', 'supportInfo', 'supportErrorInverse', 'supportSuccessInverse', 'supportWarningInverse', 'supportInfoInverse', 'overlay', 'toggleOff', 'shadow', 'buttonPrimary', 'buttonSecondary', 'buttonTertiary', 'buttonDangerPrimary', 'buttonDangerSecondary']
     }, {
       type: 'interactive',
       tokens: ['focus', 'inverseFocusUi', 'hoverPrimary', 'hoverPrimaryText', 'hoverSecondary', 'hoverTertiary', 'hoverUI', 'hoverLightUI', 'hoverSelectedUI', 'hoverDanger', 'hoverRow', 'activePrimary', 'activeSecondary', 'activeTertiary', 'activeUI', 'activeLightUI', 'activeDanger', 'selectedUI', 'selectedLightUI', 'highlight', 'skeleton01', 'skeleton02', 'visitedLink', 'disabled01', 'disabled02', 'disabled03', 'inverseHoverUI', 'active01', 'hoverField', 'decorative01', 'buttonSeparator', // new tokens
-      'backgroundActive', 'layerActive', 'buttonDangerActive', 'buttonPrimaryActive', 'buttonSecondaryActive', 'buttonTertiaryActive', 'focusInset', 'focusInverse', 'backgroundHover', 'layerHover', 'fieldHover', 'backgroundInverseHover', 'linkPrimaryHover', 'buttonDangerHover', 'buttonPrimaryHover', 'buttonSecondaryHover', 'buttonTertiaryHover', 'backgroundSelected', 'backgroundSelectedHover', 'layerSelected', 'layerSelectedHover', 'layerSelectedInverse', 'borderSubtleSelected', 'layerDisabled', 'fieldDisabled', 'borderDisabled', 'textDisabled', 'buttonDisabled', 'iconDisabled', 'textOnColorDisabled', 'iconOnColorDisabled', 'layerSelectedDisabled', 'skeletonBackground', 'skeletonElement']
+      'backgroundActive', 'layerActive', 'buttonDangerActive', 'buttonPrimaryActive', 'buttonSecondaryActive', 'buttonTertiaryActive', 'focusInset', 'focusInverse', 'backgroundHover', 'layerHover', 'fieldHover', 'backgroundInverseHover', 'linkPrimaryHover', 'buttonDangerHover', 'buttonPrimaryHover', 'buttonSecondaryHover', 'buttonTertiaryHover', 'backgroundSelected', 'backgroundSelectedHover', 'layerSelected', 'layerSelectedHover', 'layerSelectedInverse', 'borderSubtleSelected', 'borderDisabled', 'textDisabled', 'buttonDisabled', 'iconDisabled', 'textOnColorDisabled', 'iconOnColorDisabled', 'layerSelectedDisabled', 'skeletonBackground', 'skeletonElement']
     }],
     deprecated: ['brand01', 'brand02', 'brand03', 'active01', 'danger']
   };
@@ -2459,431 +2579,385 @@
     v9: v9
   };
 
+  Object.defineProperty(exports, 'body01', {
+    enumerable: true,
+    get: function () { return type.body01; }
+  });
+  Object.defineProperty(exports, 'body02', {
+    enumerable: true,
+    get: function () { return type.body02; }
+  });
+  Object.defineProperty(exports, 'bodyCompact01', {
+    enumerable: true,
+    get: function () { return type.bodyCompact01; }
+  });
+  Object.defineProperty(exports, 'bodyCompact02', {
+    enumerable: true,
+    get: function () { return type.bodyCompact02; }
+  });
   Object.defineProperty(exports, 'bodyLong01', {
     enumerable: true,
-    get: function () {
-      return type.bodyLong01;
-    }
+    get: function () { return type.bodyLong01; }
   });
   Object.defineProperty(exports, 'bodyLong02', {
     enumerable: true,
-    get: function () {
-      return type.bodyLong02;
-    }
+    get: function () { return type.bodyLong02; }
   });
   Object.defineProperty(exports, 'bodyShort01', {
     enumerable: true,
-    get: function () {
-      return type.bodyShort01;
-    }
+    get: function () { return type.bodyShort01; }
   });
   Object.defineProperty(exports, 'bodyShort02', {
     enumerable: true,
-    get: function () {
-      return type.bodyShort02;
-    }
+    get: function () { return type.bodyShort02; }
   });
   Object.defineProperty(exports, 'caption01', {
     enumerable: true,
-    get: function () {
-      return type.caption01;
-    }
+    get: function () { return type.caption01; }
   });
   Object.defineProperty(exports, 'caption02', {
     enumerable: true,
-    get: function () {
-      return type.caption02;
-    }
+    get: function () { return type.caption02; }
   });
   Object.defineProperty(exports, 'code01', {
     enumerable: true,
-    get: function () {
-      return type.code01;
-    }
+    get: function () { return type.code01; }
   });
   Object.defineProperty(exports, 'code02', {
     enumerable: true,
-    get: function () {
-      return type.code02;
-    }
+    get: function () { return type.code02; }
   });
   Object.defineProperty(exports, 'display01', {
     enumerable: true,
-    get: function () {
-      return type.display01;
-    }
+    get: function () { return type.display01; }
   });
   Object.defineProperty(exports, 'display02', {
     enumerable: true,
-    get: function () {
-      return type.display02;
-    }
+    get: function () { return type.display02; }
   });
   Object.defineProperty(exports, 'display03', {
     enumerable: true,
-    get: function () {
-      return type.display03;
-    }
+    get: function () { return type.display03; }
   });
   Object.defineProperty(exports, 'display04', {
     enumerable: true,
-    get: function () {
-      return type.display04;
-    }
+    get: function () { return type.display04; }
   });
   Object.defineProperty(exports, 'expressiveHeading01', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading01;
-    }
+    get: function () { return type.expressiveHeading01; }
   });
   Object.defineProperty(exports, 'expressiveHeading02', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading02;
-    }
+    get: function () { return type.expressiveHeading02; }
   });
   Object.defineProperty(exports, 'expressiveHeading03', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading03;
-    }
+    get: function () { return type.expressiveHeading03; }
   });
   Object.defineProperty(exports, 'expressiveHeading04', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading04;
-    }
+    get: function () { return type.expressiveHeading04; }
   });
   Object.defineProperty(exports, 'expressiveHeading05', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading05;
-    }
+    get: function () { return type.expressiveHeading05; }
   });
   Object.defineProperty(exports, 'expressiveHeading06', {
     enumerable: true,
-    get: function () {
-      return type.expressiveHeading06;
-    }
+    get: function () { return type.expressiveHeading06; }
   });
   Object.defineProperty(exports, 'expressiveParagraph01', {
     enumerable: true,
-    get: function () {
-      return type.expressiveParagraph01;
-    }
+    get: function () { return type.expressiveParagraph01; }
+  });
+  Object.defineProperty(exports, 'fluidDisplay01', {
+    enumerable: true,
+    get: function () { return type.fluidDisplay01; }
+  });
+  Object.defineProperty(exports, 'fluidDisplay02', {
+    enumerable: true,
+    get: function () { return type.fluidDisplay02; }
+  });
+  Object.defineProperty(exports, 'fluidDisplay03', {
+    enumerable: true,
+    get: function () { return type.fluidDisplay03; }
+  });
+  Object.defineProperty(exports, 'fluidDisplay04', {
+    enumerable: true,
+    get: function () { return type.fluidDisplay04; }
+  });
+  Object.defineProperty(exports, 'fluidHeading03', {
+    enumerable: true,
+    get: function () { return type.fluidHeading03; }
+  });
+  Object.defineProperty(exports, 'fluidHeading04', {
+    enumerable: true,
+    get: function () { return type.fluidHeading04; }
+  });
+  Object.defineProperty(exports, 'fluidHeading05', {
+    enumerable: true,
+    get: function () { return type.fluidHeading05; }
+  });
+  Object.defineProperty(exports, 'fluidHeading06', {
+    enumerable: true,
+    get: function () { return type.fluidHeading06; }
+  });
+  Object.defineProperty(exports, 'fluidParagraph01', {
+    enumerable: true,
+    get: function () { return type.fluidParagraph01; }
+  });
+  Object.defineProperty(exports, 'fluidQuotation01', {
+    enumerable: true,
+    get: function () { return type.fluidQuotation01; }
+  });
+  Object.defineProperty(exports, 'fluidQuotation02', {
+    enumerable: true,
+    get: function () { return type.fluidQuotation02; }
   });
   Object.defineProperty(exports, 'heading01', {
     enumerable: true,
-    get: function () {
-      return type.heading01;
-    }
+    get: function () { return type.heading01; }
   });
   Object.defineProperty(exports, 'heading02', {
     enumerable: true,
-    get: function () {
-      return type.heading02;
-    }
+    get: function () { return type.heading02; }
+  });
+  Object.defineProperty(exports, 'heading03', {
+    enumerable: true,
+    get: function () { return type.heading03; }
+  });
+  Object.defineProperty(exports, 'heading04', {
+    enumerable: true,
+    get: function () { return type.heading04; }
+  });
+  Object.defineProperty(exports, 'heading05', {
+    enumerable: true,
+    get: function () { return type.heading05; }
+  });
+  Object.defineProperty(exports, 'heading06', {
+    enumerable: true,
+    get: function () { return type.heading06; }
+  });
+  Object.defineProperty(exports, 'heading07', {
+    enumerable: true,
+    get: function () { return type.heading07; }
+  });
+  Object.defineProperty(exports, 'headingCompact01', {
+    enumerable: true,
+    get: function () { return type.headingCompact01; }
+  });
+  Object.defineProperty(exports, 'headingCompact02', {
+    enumerable: true,
+    get: function () { return type.headingCompact02; }
   });
   Object.defineProperty(exports, 'helperText01', {
     enumerable: true,
-    get: function () {
-      return type.helperText01;
-    }
+    get: function () { return type.helperText01; }
   });
   Object.defineProperty(exports, 'helperText02', {
     enumerable: true,
-    get: function () {
-      return type.helperText02;
-    }
+    get: function () { return type.helperText02; }
   });
   Object.defineProperty(exports, 'label01', {
     enumerable: true,
-    get: function () {
-      return type.label01;
-    }
+    get: function () { return type.label01; }
   });
   Object.defineProperty(exports, 'label02', {
     enumerable: true,
-    get: function () {
-      return type.label02;
-    }
+    get: function () { return type.label02; }
+  });
+  Object.defineProperty(exports, 'legal01', {
+    enumerable: true,
+    get: function () { return type.legal01; }
+  });
+  Object.defineProperty(exports, 'legal02', {
+    enumerable: true,
+    get: function () { return type.legal02; }
   });
   Object.defineProperty(exports, 'productiveHeading01', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading01;
-    }
+    get: function () { return type.productiveHeading01; }
   });
   Object.defineProperty(exports, 'productiveHeading02', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading02;
-    }
+    get: function () { return type.productiveHeading02; }
   });
   Object.defineProperty(exports, 'productiveHeading03', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading03;
-    }
+    get: function () { return type.productiveHeading03; }
   });
   Object.defineProperty(exports, 'productiveHeading04', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading04;
-    }
+    get: function () { return type.productiveHeading04; }
   });
   Object.defineProperty(exports, 'productiveHeading05', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading05;
-    }
+    get: function () { return type.productiveHeading05; }
   });
   Object.defineProperty(exports, 'productiveHeading06', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading06;
-    }
+    get: function () { return type.productiveHeading06; }
   });
   Object.defineProperty(exports, 'productiveHeading07', {
     enumerable: true,
-    get: function () {
-      return type.productiveHeading07;
-    }
+    get: function () { return type.productiveHeading07; }
   });
   Object.defineProperty(exports, 'quotation01', {
     enumerable: true,
-    get: function () {
-      return type.quotation01;
-    }
+    get: function () { return type.quotation01; }
   });
   Object.defineProperty(exports, 'quotation02', {
     enumerable: true,
-    get: function () {
-      return type.quotation02;
-    }
+    get: function () { return type.quotation02; }
   });
   Object.defineProperty(exports, 'container01', {
     enumerable: true,
-    get: function () {
-      return layout.container01;
-    }
+    get: function () { return layout.container01; }
   });
   Object.defineProperty(exports, 'container02', {
     enumerable: true,
-    get: function () {
-      return layout.container02;
-    }
+    get: function () { return layout.container02; }
   });
   Object.defineProperty(exports, 'container03', {
     enumerable: true,
-    get: function () {
-      return layout.container03;
-    }
+    get: function () { return layout.container03; }
   });
   Object.defineProperty(exports, 'container04', {
     enumerable: true,
-    get: function () {
-      return layout.container04;
-    }
+    get: function () { return layout.container04; }
   });
   Object.defineProperty(exports, 'container05', {
     enumerable: true,
-    get: function () {
-      return layout.container05;
-    }
+    get: function () { return layout.container05; }
   });
   Object.defineProperty(exports, 'fluidSpacing01', {
     enumerable: true,
-    get: function () {
-      return layout.fluidSpacing01;
-    }
+    get: function () { return layout.fluidSpacing01; }
   });
   Object.defineProperty(exports, 'fluidSpacing02', {
     enumerable: true,
-    get: function () {
-      return layout.fluidSpacing02;
-    }
+    get: function () { return layout.fluidSpacing02; }
   });
   Object.defineProperty(exports, 'fluidSpacing03', {
     enumerable: true,
-    get: function () {
-      return layout.fluidSpacing03;
-    }
+    get: function () { return layout.fluidSpacing03; }
   });
   Object.defineProperty(exports, 'fluidSpacing04', {
     enumerable: true,
-    get: function () {
-      return layout.fluidSpacing04;
-    }
+    get: function () { return layout.fluidSpacing04; }
   });
   Object.defineProperty(exports, 'iconSize01', {
     enumerable: true,
-    get: function () {
-      return layout.iconSize01;
-    }
+    get: function () { return layout.iconSize01; }
   });
   Object.defineProperty(exports, 'iconSize02', {
     enumerable: true,
-    get: function () {
-      return layout.iconSize02;
-    }
+    get: function () { return layout.iconSize02; }
   });
   Object.defineProperty(exports, 'layout01', {
     enumerable: true,
-    get: function () {
-      return layout.layout01;
-    }
+    get: function () { return layout.layout01; }
   });
   Object.defineProperty(exports, 'layout02', {
     enumerable: true,
-    get: function () {
-      return layout.layout02;
-    }
+    get: function () { return layout.layout02; }
   });
   Object.defineProperty(exports, 'layout03', {
     enumerable: true,
-    get: function () {
-      return layout.layout03;
-    }
+    get: function () { return layout.layout03; }
   });
   Object.defineProperty(exports, 'layout04', {
     enumerable: true,
-    get: function () {
-      return layout.layout04;
-    }
+    get: function () { return layout.layout04; }
   });
   Object.defineProperty(exports, 'layout05', {
     enumerable: true,
-    get: function () {
-      return layout.layout05;
-    }
+    get: function () { return layout.layout05; }
   });
   Object.defineProperty(exports, 'layout06', {
     enumerable: true,
-    get: function () {
-      return layout.layout06;
-    }
+    get: function () { return layout.layout06; }
   });
   Object.defineProperty(exports, 'layout07', {
     enumerable: true,
-    get: function () {
-      return layout.layout07;
-    }
+    get: function () { return layout.layout07; }
   });
   Object.defineProperty(exports, 'size2XLarge', {
     enumerable: true,
-    get: function () {
-      return layout.size2XLarge;
-    }
+    get: function () { return layout.size2XLarge; }
   });
   Object.defineProperty(exports, 'sizeLarge', {
     enumerable: true,
-    get: function () {
-      return layout.sizeLarge;
-    }
+    get: function () { return layout.sizeLarge; }
   });
   Object.defineProperty(exports, 'sizeMedium', {
     enumerable: true,
-    get: function () {
-      return layout.sizeMedium;
-    }
+    get: function () { return layout.sizeMedium; }
   });
   Object.defineProperty(exports, 'sizeSmall', {
     enumerable: true,
-    get: function () {
-      return layout.sizeSmall;
-    }
+    get: function () { return layout.sizeSmall; }
   });
   Object.defineProperty(exports, 'sizeXLarge', {
     enumerable: true,
-    get: function () {
-      return layout.sizeXLarge;
-    }
+    get: function () { return layout.sizeXLarge; }
   });
   Object.defineProperty(exports, 'sizeXSmall', {
     enumerable: true,
-    get: function () {
-      return layout.sizeXSmall;
-    }
+    get: function () { return layout.sizeXSmall; }
   });
   Object.defineProperty(exports, 'spacing01', {
     enumerable: true,
-    get: function () {
-      return layout.spacing01;
-    }
+    get: function () { return layout.spacing01; }
   });
   Object.defineProperty(exports, 'spacing02', {
     enumerable: true,
-    get: function () {
-      return layout.spacing02;
-    }
+    get: function () { return layout.spacing02; }
   });
   Object.defineProperty(exports, 'spacing03', {
     enumerable: true,
-    get: function () {
-      return layout.spacing03;
-    }
+    get: function () { return layout.spacing03; }
   });
   Object.defineProperty(exports, 'spacing04', {
     enumerable: true,
-    get: function () {
-      return layout.spacing04;
-    }
+    get: function () { return layout.spacing04; }
   });
   Object.defineProperty(exports, 'spacing05', {
     enumerable: true,
-    get: function () {
-      return layout.spacing05;
-    }
+    get: function () { return layout.spacing05; }
   });
   Object.defineProperty(exports, 'spacing06', {
     enumerable: true,
-    get: function () {
-      return layout.spacing06;
-    }
+    get: function () { return layout.spacing06; }
   });
   Object.defineProperty(exports, 'spacing07', {
     enumerable: true,
-    get: function () {
-      return layout.spacing07;
-    }
+    get: function () { return layout.spacing07; }
   });
   Object.defineProperty(exports, 'spacing08', {
     enumerable: true,
-    get: function () {
-      return layout.spacing08;
-    }
+    get: function () { return layout.spacing08; }
   });
   Object.defineProperty(exports, 'spacing09', {
     enumerable: true,
-    get: function () {
-      return layout.spacing09;
-    }
+    get: function () { return layout.spacing09; }
   });
   Object.defineProperty(exports, 'spacing10', {
     enumerable: true,
-    get: function () {
-      return layout.spacing10;
-    }
+    get: function () { return layout.spacing10; }
   });
   Object.defineProperty(exports, 'spacing11', {
     enumerable: true,
-    get: function () {
-      return layout.spacing11;
-    }
+    get: function () { return layout.spacing11; }
   });
   Object.defineProperty(exports, 'spacing12', {
     enumerable: true,
-    get: function () {
-      return layout.spacing12;
-    }
+    get: function () { return layout.spacing12; }
   });
   Object.defineProperty(exports, 'spacing13', {
     enumerable: true,
-    get: function () {
-      return layout.spacing13;
-    }
+    get: function () { return layout.spacing13; }
   });
   exports.active01 = active01$5;
   exports.activeDanger = activeDanger$5;
@@ -2934,7 +3008,6 @@
   exports.field = field$5;
   exports.field01 = field01$5;
   exports.field02 = field02$5;
-  exports.fieldDisabled = fieldDisabled$5;
   exports.fieldHover = fieldHover$5;
   exports.focus = focus$5;
   exports.focusInset = focusInset$5;
@@ -2983,7 +3056,6 @@
   exports.layerAccentActive = layerAccentActive$5;
   exports.layerAccentHover = layerAccentHover$5;
   exports.layerActive = layerActive$5;
-  exports.layerDisabled = layerDisabled$5;
   exports.layerHover = layerHover$5;
   exports.layerSelected = layerSelected$5;
   exports.layerSelectedDisabled = layerSelectedDisabled$5;
@@ -3000,6 +3072,7 @@
   exports.overlay01 = overlay01$5;
   exports.selectedLightUI = selectedLightUI$5;
   exports.selectedUI = selectedUI$5;
+  exports.shadow = shadow$5;
   exports.skeleton01 = skeleton01$5;
   exports.skeleton02 = skeleton02$5;
   exports.skeletonBackground = skeletonBackground$5;
@@ -3046,4 +3119,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
