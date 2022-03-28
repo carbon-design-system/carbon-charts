@@ -281,6 +281,30 @@ export const alluvialMultipleCategoryData = [
 	},
 ];
 
+export const alluvialNodeAlignmentData = [
+	{ source: 'A', target: 'X', value: 3 },
+	{ source: 'A', target: 'Y', value: 7 },
+	{ source: 'B', target: 'X', value: 8 },
+	{ source: 'B', target: 'Y', value: 3 },
+	{ source: 'C', target: 'X', value: 5 },
+	{ source: 'Y', target: 'Z', value: 13 },
+];
+
+export const alluvialNodeAlignmentOptions = {
+	title: 'Alluvial node alignment',
+	alluvial: {
+		nodes: [
+			{ name: 'A', category: 'Start' },
+			{ name: 'B', category: 'Start' },
+			{ name: 'C', category: 'Start' },
+			{ name: 'X', category: 'Middle' },
+			{ name: 'Y', category: 'Middle' },
+			{ name: 'Z', category: 'Finish' },
+		],
+		nodeAlignment: 'left',
+	},
+};
+
 export const alluvialMonochromeData = [
 	{ source: 'A', target: 'X', value: 3 },
 	{ source: 'A', target: 'Y', value: 5 },
