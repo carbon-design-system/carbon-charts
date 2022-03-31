@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Added
+
+* **core:** pass treemap data to `getFillColor`
+
+
+
+
+
 # [0.56.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.55.1...v0.56.0) (2022-03-28)
 
 

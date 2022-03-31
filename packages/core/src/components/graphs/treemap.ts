@@ -168,7 +168,7 @@ export class Treemap extends Component {
 			.attr('height', (d) => d.y1 - d.y0)
 			.style('fill', (d) => {
 				while (d.depth > 1) d = d.parent;
-				return this.model.getFillColor(d.data.name);
+				return this.model.getFillColor(d.data.name, undefined, d);
 			});
 
 		// Update all clip paths
@@ -220,7 +220,7 @@ export class Treemap extends Component {
 					let parent = d;
 					while (parent.depth > 1) parent = parent.parent;
 					const color = hsl(
-						this.model.getFillColor(parent.data.name)
+						this.model.getFillColor(parent.data.name, undefined, d)
 					);
 					return [
 						{
@@ -285,7 +285,9 @@ export class Treemap extends Component {
 					)
 					.style('fill', (d: any) => {
 						const customColor = self.model.getFillColor(
-							d.parent.data.name
+							d.parent.data.name,
+							undefined,
+							d
 						);
 						if (customColor) {
 							fillColor = customColor;
@@ -361,7 +363,11 @@ export class Treemap extends Component {
 						})
 					)
 					.style('fill', (d: any) =>
-						self.model.getFillColor(d.parent.data.name)
+						self.model.getFillColor(
+							d.parent.data.name,
+							undefined,
+							d
+						)
 					);
 
 				// Dispatch mouse event
