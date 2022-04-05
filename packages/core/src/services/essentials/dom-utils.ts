@@ -7,7 +7,7 @@ import { select, Selection } from 'd3-selection';
 import { Tools } from '../../tools';
 
 // import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
+import { carbonPrefix } from "../../configuration-non-customizable";
 
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
@@ -230,7 +230,7 @@ export class DOMUtils extends Service {
 
 		const mainContainer = select(this.getHolder())
 			.append('div')
-			.classed(`${settings.prefix}--${chartsprefix}--chart-wrapper`, true)
+			.classed(`${carbonPrefix}--${chartsprefix}--chart-wrapper`, true)
 			.style('height', '100%')
 			.style('width', '100%');
 
@@ -248,7 +248,7 @@ export class DOMUtils extends Service {
 
 		// Add class to chart holder
 		select(this.getHolder()).classed(
-			`${settings.prefix}--chart-holder`,
+			`${carbonPrefix}--chart-holder`,
 			true
 		);
 
@@ -295,7 +295,7 @@ export class DOMUtils extends Service {
 				filter: (node) => {
 					if (
 						node.classList &&
-						node.classList.contains('bx--cc--toolbar')
+						node.classList.contains('cds--cc--toolbar')
 					) {
 						return false;
 					}
@@ -329,7 +329,7 @@ export class DOMUtils extends Service {
 				filter: (node) => {
 					if (
 						node.classList &&
-						node.classList.contains('bx--cc--toolbar')
+						node.classList.contains('cds--cc--toolbar')
 					) {
 						return false;
 					}

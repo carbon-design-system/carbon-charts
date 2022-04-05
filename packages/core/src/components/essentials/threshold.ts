@@ -19,7 +19,7 @@ import { select, pointer } from 'd3-selection';
 import Position, { PLACEMENTS } from '@carbon/utils-position';
 
 // import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
+import { carbonPrefix } from "../../configuration-non-customizable";
 import {
 	formatTick,
 	computeTimeIntervalName,
@@ -287,7 +287,7 @@ export class Threshold extends Component {
 
 		this.label = DOMUtils.appendOrSelect(
 			holder,
-			`div.${settings.prefix}--${chartprefix}--threshold--label`
+			`div.${carbonPrefix}--${chartprefix}--threshold--label`
 		).classed('hidden', true);
 	}
 

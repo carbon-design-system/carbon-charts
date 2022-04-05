@@ -57,7 +57,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 				<div className="container theme--g100" ref={demoRef}>
 					<h3>
 						<b>Component:</b>
-						<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
+						<span className="cds--tag cds--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
 					</h3>
 					<p className="props">
 						<b>Props:</b> data,{' '}

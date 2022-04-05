@@ -1,7 +1,7 @@
 $css--reset: false;
 .#{$prefix}--chart-holder {
-	.bx--overflow-menu,
-	.bx--overflow-menu__trigger {
+	.cds--overflow-menu,
+	.cds--overflow-menu__trigger {
 		width: 2rem;
 		height: 2rem;
 	}
@@ -31,7 +31,7 @@ $css--reset: false;
 			}
 		}
 
-		.bx--overflow-menu--flip {
+		.cds--overflow-menu--flip {
 			right: 0;
 			left: unset;
 
@@ -45,11 +45,11 @@ $css--reset: false;
 			}
 		}
 
-		.bx--loading__background {
+		.cds--loading__background {
 			fill: transparent;
 		}
 
-		.bx--loading__stroke {
+		.cds--loading__stroke {
 			stroke-dashoffset: 99;
 			fill: transparent;
 		}

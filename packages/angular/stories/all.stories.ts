@@ -9,7 +9,7 @@ const getTemplate = (demo) => `
 	<div class="container theme--white">
 		<h3>
 			<b>Component:</b>
-			<span class="bx--tag bx--tag--green component-name">${demo.chartType.angular}</span>
+			<span class="cds--tag cds--tag--green component-name">${demo.chartType.angular}</span>
 		</h3>
 		<p class="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
 
@@ -28,8 +28,8 @@ const getTemplate = (demo) => `
 		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
 			<h5>{{codeFile}}</h5>
 
-			<div class="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-15" data-code-snippet>
-				<div class="bx--snippet-container" aria-label="Code Snippet Text">
+			<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15" data-code-snippet>
+				<div class="cds--snippet-container" aria-label="Code Snippet Text">
 					<pre><code>{{code[codeFile]}}</code></pre>
 				</div>
 			</div>

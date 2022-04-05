@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import settings from "carbon-components/src/globals/js/settings";
+import { carbonPrefix } from "@carbon/charts/src/configuration-non-customizable";
 import {
 	arrowLeft,
 	arrowRight,
@@ -8,8 +8,6 @@ import {
 	square,
 	tee,
 } from "@carbon/charts/components/diagrams/markerDefinitions";
-
-const { prefix } = settings;
 
 const template = `
 <svg:marker
@@ -40,7 +38,7 @@ export class MarkerComponent {
 	@Input() refY: string | number;
 	@Input() position: "start" | "end" = "end";
 
-	namespace = `${prefix}--cc--marker`;
+	namespace = `${carbonPrefix}--cc--marker`;
 
 	setAttributes = ({d, id, height, width}) => {
 		const xPos = (this.position === "end") ? (width / 2) + 0.5 : 0.5;

@@ -23,17 +23,7 @@
 // @use '@carbon/styles/scss/components/button';
 // @use '@carbon/styles/scss/components/button/tokens';
 
-@import 'carbon-components/scss/globals/grid/grid';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/select/select';
-@import 'carbon-components/scss/components/tag/tag';
-@import 'carbon-components/scss/components/tooltip/tooltip';
-@import 'carbon-components/scss/components/radio-button/radio-button';
-@import 'carbon-components/scss/components/notification/inline-notification';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/data-table-v2/data-table-v2';
-@import 'carbon-components/scss/components/tile/tile';
+// @debug theme.$theme;
 
 @import '../src/styles/styles.scss';
 
@@ -129,14 +119,14 @@ div.container {
     // 	// @include data-table-core;
     // 	// @include select;
 
-    // 	.bx--radio-button__appearance {
+    // 	.cds--radio-button__appearance {
     // 		background-color: transparent;
     // 		border-color: $icon-01;
     // 	}
 
-    // 	.bx--radio-button:checked
-    // 		+ .bx--radio-button__label
-    // 		.bx--radio-button__appearance {
+    // 	.cds--radio-button:checked
+    // 		+ .cds--radio-button__label
+    // 		.cds--radio-button__appearance {
     // 		border-color: $icon-01;
 
     // 		&:before {
@@ -167,14 +157,14 @@ div.container {
     // 	// @include data-table-core;
     // 	// @include select;
 
-    // 	.bx--radio-button__appearance {
+    // 	.cds--radio-button__appearance {
     // 		background-color: transparent;
     // 		border-color: $icon-01;
     // 	}
 
-    // 	.bx--radio-button:checked
-    // 		+ .bx--radio-button__label
-    // 		.bx--radio-button__appearance {
+    // 	.cds--radio-button:checked
+    // 		+ .cds--radio-button__label
+    // 		.cds--radio-button__appearance {
     // 		border-color: $icon-01;
 
     // 		&:before {
@@ -196,7 +186,7 @@ div.container {
 
   &.theme--g90,
   &.theme--g100 {
-    .bx--label {
+    .cds--label {
       color: #fff;
       opacity: 0.6;
     }
@@ -210,10 +200,10 @@ div.container {
     max-width: 700px;
   }
 
-  .bx--grid {
+  .cds--grid {
     padding: 0;
 
-    .bx--row .chart-demo {
+    .cds--row .chart-demo {
       margin-bottom: 60px;
     }
   }
@@ -226,7 +216,7 @@ div.container {
       margin-right: 10px;
     }
 
-    span.bx--tag.component-name {
+    span.cds--tag.component-name {
       font-size: 0.55em;
       vertical-align: middle;
       padding: 0.25em 1em;
@@ -246,7 +236,7 @@ div.container {
   }
 
   // Replace with Carbon .scss imports
-  div.bx--snippet--multi {
+  div.cds--snippet--multi {
     background-color: black;
     color: white;
 
@@ -257,7 +247,7 @@ div.container {
       line-height: 1.4;
     }
 
-    .bx--snippet-container pre::after {
+    .cds--snippet-container pre::after {
       display: none;
     }
 
@@ -274,12 +264,12 @@ div.container {
     }
   }
 
-  .bx--snippet--multi .bx--snippet-container pre code {
+  .cds--snippet--multi .cds--snippet-container pre code {
     font-size: 14px;
   }
 
-  .bx--snippet--multi.bx--snippet--expand .bx--snippet-container,
-  .bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
+  .cds--snippet--multi.cds--snippet--expand .cds--snippet-container,
+  .cds--snippet--multi.cds--snippet--expand .cds--snippet-container pre {
     padding-bottom: 0;
   }
 

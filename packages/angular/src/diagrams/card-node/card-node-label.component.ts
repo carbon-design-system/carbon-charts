@@ -1,7 +1,5 @@
 import { Component } from "@angular/core";
-import settings from "carbon-components/src/globals/js/settings";
-
-const { prefix } = settings;
+import { carbonPrefix } from '@carbon/charts/src/configuration-non-customizable';
 
 @Component({
 	selector: "ibm-diagram-card-node-label",
@@ -13,5 +11,5 @@ const { prefix } = settings;
 })
 
 export class CardNodeLabelComponent {
-	namespace = `${prefix}--cc--card-node__label`;
+	namespace = `${carbonPrefix}--cc--card-node__label`;
 }

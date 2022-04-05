@@ -61,7 +61,7 @@ export class Toolbar extends Component {
 					.append('div')
 					.attr(
 						'class',
-						'bx--overflow-menu-options bx--overflow-menu--flip cds--overflow-menu-options cds--overflow-menu--flip'
+						'cds--overflow-menu-options cds--overflow-menu--flip cds--overflow-menu-options cds--overflow-menu--flip'
 					)
 					.attr('tabindex', -1)
 					.attr('role', 'menu')
@@ -88,7 +88,7 @@ export class Toolbar extends Component {
 			const enteringToolbarControls = toolbarControls
 				.enter()
 				.append('div')
-				.attr('class', 'toolbar-control bx--overflow-menu cds--overflow-menu')
+				.attr('class', 'toolbar-control cds--overflow-menu cds--overflow-menu')
 				.attr('role', 'button');
 
 			const self = this;
@@ -100,7 +100,7 @@ export class Toolbar extends Component {
 				.html(
 					(d) => `
 			<button
-				class="bx--overflow-menu__trigger cds--overflow-menu__trigger"
+				class="cds--overflow-menu__trigger cds--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
 					`control-${d.id}`
 				)}" aria-label="${d.title}">
@@ -110,7 +110,7 @@ export class Toolbar extends Component {
 						d.iconSVG.height !== undefined
 							? d.iconSVG.height
 							: '20px'
-					}" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+					}" xmlns="http://www.w3.org/2000/svg" class="cds--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVG.content}
 				</svg>
 			</button>`
@@ -142,7 +142,7 @@ export class Toolbar extends Component {
 				});
 
 			this.overflowButton = this.getComponentContainer().select(
-				`button.bx--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
+				`button.cds--overflow-menu__trigger#${this.services.domUtils.generateElementIDString(
 					'control-toolbar-overflow-menu'
 				)}`
 			);
@@ -154,7 +154,7 @@ export class Toolbar extends Component {
 
 		const overflowMenuControls = this.overflowMenu
 			.select('ul')
-			.selectAll('li.bx--overflow-menu-options__option')
+			.selectAll('li.cds--overflow-menu-options__option')
 			.data(overflowMenuItemList, (button) =>
 				Tools.getProperty(button, 'id')
 			);
@@ -169,16 +169,16 @@ export class Toolbar extends Component {
 					`control-${d.id}`
 				)
 			)
-			.attr('class', 'bx--overflow-menu-options__option cds--overflow-menu-options__option')
+			.attr('class', 'cds--overflow-menu-options__option cds--overflow-menu-options__option')
 			.attr('role', 'menuitem');
 
 		enteringOverflowMenuControls
 			.append('button')
-			.attr('class', 'bx--overflow-menu-options__btn cds--overflow-menu-options__btn');
+			.attr('class', 'cds--overflow-menu-options__btn cds--overflow-menu-options__btn');
 
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
-			.classed('bx--overflow-menu-options__option--disabled', (d) =>
+			.classed('cds--overflow-menu-options__option--disabled', (d) =>
 				d.shouldBeDisabled()
 			)
 			.classed('cds--overflow-menu-options__option--disabled', (d) =>
@@ -205,7 +205,7 @@ export class Toolbar extends Component {
 			this.overflowButton.attr('aria-expanded', show);
 			select(this.overflowButton.node().parentNode)
 				.classed(
-					'bx--overflow-menu--open',
+					'cds--overflow-menu--open',
 					show
 				).classed(
 					'cds--overflow-menu--open',

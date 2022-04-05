@@ -6,9 +6,7 @@ import {
 	TemplateRef,
 	OnInit,
 } from '@angular/core';
-import settings from 'carbon-components/src/globals/js/settings';
-
-const { prefix } = settings;
+import { carbonPrefix } from "@carbon/charts/src/configuration-non-customizable";
 
 @Component({
 	selector: 'ibm-diagram-shape-node',
@@ -121,7 +119,7 @@ export class ShapeNodeComponent implements OnInit {
 	@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>();
 	@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>();
 
-	namespace = `${prefix}--cc--shape-node`;
+	namespace = `${carbonPrefix}--cc--shape-node`;
 	component = 'div';
 
 	ngOnInit() {

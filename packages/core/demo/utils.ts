@@ -2,37 +2,37 @@ const generateThemePickerHTML = (container, configs) => {
   const div = document.createElement('div');
   div.id = 'theme-picker';
   div.innerHTML = `
-<fieldset class="bx--fieldset marginTop-45">
-	<legend class="bx--label">Active theme</legend>
+<fieldset class="cds--fieldset marginTop-45">
+	<legend class="cds--label">Active theme</legend>
 
-	<div class="bx--form-item">
-		<div class="bx--radio-button-group ">
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-1" class="bx--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-1" class="bx--radio-button__label">
-				<span class="bx--radio-button__appearance"></span>
-				<span class="bx--radio-button__label-text">White</span>
+	<div class="cds--form-item">
+		<div class="cds--radio-button-group ">
+			<div class="cds--radio-button-wrapper">
+				<input id="radio-button-abfeuherm2f-1" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
+				<label for="radio-button-abfeuherm2f-1" class="cds--radio-button__label">
+				<span class="cds--radio-button__appearance"></span>
+				<span class="cds--radio-button__label-text">White</span>
 				</label>
 			</div>
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-2" class="bx--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-2" class="bx--radio-button__label">
-				<span class="bx--radio-button__appearance"></span>
-				<span class="bx--radio-button__label-text">G10</span>
+			<div class="cds--radio-button-wrapper">
+				<input id="radio-button-abfeuherm2f-2" class="cds--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
+				<label for="radio-button-abfeuherm2f-2" class="cds--radio-button__label">
+				<span class="cds--radio-button__appearance"></span>
+				<span class="cds--radio-button__label-text">G10</span>
 				</label>
 			</div>
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-3" class="bx--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-3" class="bx--radio-button__label">
-				<span class="bx--radio-button__appearance"></span>
-				<span class="bx--radio-button__label-text">G90</span>
+			<div class="cds--radio-button-wrapper">
+				<input id="radio-button-abfeuherm2f-3" class="cds--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
+				<label for="radio-button-abfeuherm2f-3" class="cds--radio-button__label">
+				<span class="cds--radio-button__appearance"></span>
+				<span class="cds--radio-button__label-text">G90</span>
 				</label>
 			</div>
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-4" class="bx--radio-button" type="radio" value="g100" name="radio-button" tabindex="0" checked>
-				<label for="radio-button-abfeuherm2f-4" class="bx--radio-button__label">
-				<span class="bx--radio-button__appearance"></span>
-				<span class="bx--radio-button__label-text">G100</span>
+			<div class="cds--radio-button-wrapper">
+				<input id="radio-button-abfeuherm2f-4" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0" checked>
+				<label for="radio-button-abfeuherm2f-4" class="cds--radio-button__label">
+				<span class="cds--radio-button__appearance"></span>
+				<span class="cds--radio-button__label-text">G100</span>
 				</label>
 			</div>
 		</div>
@@ -65,26 +65,26 @@ const generateColorPalettePickerHTML = (
   const div = document.createElement('div');
   div.id = 'color-palette-picker';
   div.innerHTML = `
-<div class="bx--form-item">
+<div class="cds--form-item">
 	<div
-	class="bx--select">
-	<label for="color-palette-select" class="bx--label">Active color palette</label>
-		<div class="bx--select-input__wrapper">
-		<select id="color-palette-select" class="bx--select-input">
-			<option class="bx--select-option" value="" disabled selected hidden>
+	class="cds--select">
+	<label for="color-palette-select" class="cds--label">Active color palette</label>
+		<div class="cds--select-input__wrapper">
+		<select id="color-palette-select" class="cds--select-input">
+			<option class="cds--select-option" value="" disabled selected hidden>
 			Choose an option
 			</option>
 			${Object.keys(colorPairingOptions)
         .map((colorGroup) => {
           const optionsCount = colorPairingOptions[colorGroup];
-          let optionsHTML = `<optgroup class="bx--select-optgroup" label="${colorGroup} groups">`;
+          let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`;
 
           const numberOfVariants = parseInt(colorGroup);
 
           if (numberOfVariants !== 14) {
             for (let i = 1; i <= optionsCount; i++) {
               optionsHTML += `
-						<option class="bx--select-option" ${
+						<option class="cds--select-option" ${
               onlyCategoricalPaletteIsApplicable ||
               numberOfVariants < numberOfChartDataGroups
                 ? 'disabled'
@@ -98,7 +98,7 @@ const generateColorPalettePickerHTML = (
 						</option>`;
             }
           } else {
-            optionsHTML += `<option class="bx--select-option" value="14-color-option-1" ${
+            optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
               selectedColorPalette === `14-1` ||
               onlyCategoricalPaletteIsApplicable
                 ? 'selected'
@@ -112,7 +112,7 @@ const generateColorPalettePickerHTML = (
         })
         .join('')}
 		</select>
-		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 		</div>
 	</div>
 	</div>
@@ -150,7 +150,7 @@ export const addControls = (
 export const addRadioButtonEventListeners = (container, chart, configs) => {
   // Add event listeners for radio buttons
   const radioButtons = container.querySelectorAll(
-    'div#theme-picker input.bx--radio-button'
+    'div#theme-picker input.cds--radio-button'
   );
   radioButtons.forEach((radioButton) => {
     radioButton.addEventListener('click', (e: any) => {
@@ -174,7 +174,7 @@ export const addOtherVersions = (
   const demoGroupClassification = (demoGroup.type || '').replace('-chart', '');
 
   const div = document.createElement('div');
-  div.setAttribute('class', 'bx--row resource-card-group');
+  div.setAttribute('class', 'cds--row resource-card-group');
 
   let htmlContent = '';
   const otherVersions = [
@@ -221,14 +221,14 @@ export const addOtherVersions = (
   ];
 
   otherVersions.forEach((otherVersion) => {
-    htmlContent += `<div class="bx--no-gutter-sm bx--col-md-6 bx--col-lg-6">
-		<div class="bx--resource-card">
-		  <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-			<div class="bx--aspect-ratio--object">
-			  <a href="${otherVersion.link}" class="bx--tile bx--tile--clickable">
-				<h5 class="bx--resource-card__subtitle">${otherVersion.name}</h5>
-				<div class="bx--resource-card__icon--img"></div>
-				<div class="bx--resource-card__icon--action">
+    htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
+		<div class="cds--resource-card">
+		  <div class="cds--aspect-ratio cds--aspect-ratio--2x1">
+			<div class="cds--aspect-ratio--object">
+			  <a href="${otherVersion.link}" class="cds--tile cds--tile--clickable">
+				<h5 class="cds--resource-card__subtitle">${otherVersion.name}</h5>
+				<div class="cds--resource-card__icon--img"></div>
+				<div class="cds--resource-card__icon--action">
 				  <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Open resource" width="20" height="20" viewBox="0 0 32 32" role="img">
 					<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"></path>
 					<path d="M20 2L20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2z"></path>

@@ -7,7 +7,7 @@
 <div class="container theme--white">
   <h3>
     <b>Component:</b>
-    <span class="bx--tag bx--tag--green component-name">
+    <span class="cds--tag cds--tag--green component-name">
       {`<${chartType} />`}
     </span>
   </h3>
@@ -36,9 +36,9 @@
   </a>
 
   <div
-    class="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30"
+    class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30"
     data-code-snippet>
-    <div class="bx--snippet-container" aria-label="Code Snippet Text">
+    <div class="cds--snippet-container" aria-label="Code Snippet Text">
       <pre>
         <code>
           <span class="token tag">{`<${chartType}`}</span> <span class="token attr-name">{`{data}`}</span> <span class="token attr-name">{`{options}`}</span> <span class="token tag">{`/>`}</span>

@@ -1,7 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import settings from 'carbon-components/src/globals/js/settings';
-
-const { prefix } = settings;
+import { carbonPrefix } from '@carbon/charts/src/configuration-non-customizable';
 
 @Component({
 	selector: 'ibm-diagram-card-node-column',
@@ -16,9 +14,9 @@ export class CardNodeColumnComponent {
 
 	@HostBinding('class') get class() {
 		const farsideClassName = this.farsideColumn
-			? `${prefix}--cc--card-node__column--farside`
+			? `${carbonPrefix}--cc--card-node__column--farside`
 			: '';
 
-		return `${prefix}--cc--card-node__column ${farsideClassName}`;
+		return `${carbonPrefix}--cc--card-node__column ${farsideClassName}`;
 	}
 }

@@ -15,8 +15,7 @@
 		"clean": "rm -rf dist demo/bundle",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
-		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
-		"postinstall": "bash build-vendor.sh"
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},
 	"repository": {
 		"type": "git",
