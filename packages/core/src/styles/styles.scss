@@ -8,11 +8,14 @@ $css--reset: false;
 $css--default-type: false;
 
 $prefix: 'bx';
-@use './vendor/@carbon/type';
+
+@use '@carbon/styles';
+@use '@carbon/type';
 
 // Carbon imports
 // TODO-V11
-@import './vendor/@carbon/colors/scss/colors';
+@import '@carbon/colors/index.scss';
+@import '@carbon/styles/scss/components/button/_tokens.scss';
 // @use '@carbon/colors';
 
 @mixin default_transition {

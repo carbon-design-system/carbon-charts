@@ -10,9 +10,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
  */
 var unstable_tokens = [// Spacing
 'spacing01', 'spacing02', 'spacing03', 'spacing04', 'spacing05', 'spacing06', 'spacing07', 'spacing08', 'spacing09', 'spacing10', 'spacing11', 'spacing12', 'spacing13', // Fluid spacing
-'fluidSpacing01', 'fluidSpacing02', 'fluidSpacing03', 'fluidSpacing04', // Layout
-// Deprecated -- Remove in v11
-'layout01', 'layout02', 'layout03', 'layout04', 'layout05', 'layout06', 'layout07', // Containers
+'fluidSpacing01', 'fluidSpacing02', 'fluidSpacing03', 'fluidSpacing04', // Containers
 'container01', 'container02', 'container03', 'container04', 'container05', 'sizeXSmall', 'sizeSmall', 'sizeMedium', 'sizeLarge', 'sizeXLarge', 'size2XLarge', // Icon sizes
 'iconSize01', 'iconSize02'];
 
@@ -115,17 +113,7 @@ var fluidSpacing01 = 0;
 var fluidSpacing02 = '2vw';
 var fluidSpacing03 = '5vw';
 var fluidSpacing04 = '10vw';
-var fluidSpacing = [fluidSpacing01, fluidSpacing02, fluidSpacing03, fluidSpacing04]; // Layout
-// Deprecated -- Remove in v11
-
-var layout01 = miniUnits(2);
-var layout02 = miniUnits(3);
-var layout03 = miniUnits(4);
-var layout04 = miniUnits(6);
-var layout05 = miniUnits(8);
-var layout06 = miniUnits(12);
-var layout07 = miniUnits(20);
-var layout = [layout01, layout02, layout03, layout04, layout05, layout06, layout07]; // Container
+var fluidSpacing = [fluidSpacing01, fluidSpacing02, fluidSpacing03, fluidSpacing04]; // Container
 
 var container01 = miniUnits(3);
 var container02 = miniUnits(4);
@@ -172,14 +160,6 @@ exports.fluidSpacing04 = fluidSpacing04;
 exports.iconSize = iconSize;
 exports.iconSize01 = iconSize01;
 exports.iconSize02 = iconSize02;
-exports.layout = layout;
-exports.layout01 = layout01;
-exports.layout02 = layout02;
-exports.layout03 = layout03;
-exports.layout04 = layout04;
-exports.layout05 = layout05;
-exports.layout06 = layout06;
-exports.layout07 = layout07;
 exports.miniUnit = miniUnit;
 exports.miniUnits = miniUnits;
 exports.px = px;

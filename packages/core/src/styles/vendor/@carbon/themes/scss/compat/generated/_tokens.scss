@@ -7,8 +7,8 @@
 //
 
 @use 'sass:map';
-@use '../../modules/config';
-@use '../../modules/theme';
+@use '../../config';
+@use '../../theme';
 
 /// Internal helper for generating CSS Custom Properties
 @function _get($token) {

@@ -1,8 +1,10 @@
-@import './../vendor/carbon-components/scss/globals/scss/vars';
-@import './../vendor/@carbon/themes/scss/tokens';
-@import './../vendor/@carbon/layout/scss/spacing';
-@import './../vendor/@carbon/elements/scss/import-once/import-once';
-@import './../vendor/carbon-components/scss/globals/scss/_helper-mixins';
+@import 'carbon-components/scss/globals/scss/vars';
+@import 'carbon-components/scss/globals/scss/_helper-mixins';
+
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/layout/scss/spacing';
+
+@import '@carbon/import-once/scss/index';
 
 @mixin stacked-card {
 	content: '';
@@ -10,8 +12,8 @@
 	width: 100%;
 	position: absolute;
 	z-index: 0;
-	border-top: carbon--mini-units(0.25) solid $ui-03;
-	border-right: carbon--mini-units(0.25) solid $ui-03;
+	border-top: carbon--mini-units(0.25) solid $layer-accent-01;
+	border-right: carbon--mini-units(0.25) solid $layer-accent-01;
 	pointer-events: none;
 }
 
@@ -19,7 +21,7 @@
 	.#{$prefix}--#{$charts-prefix}--card {
 		display: flex;
 		position: relative;
-		background-color: $ui-01;
+		background-color: $layer-01;
 		z-index: 1;
 		box-sizing: border-box;
 		font-family: carbon--font-family('sans');
@@ -91,7 +93,7 @@
 	.#{$prefix}--#{$charts-prefix}--card__label {
 		display: block;
 		@include carbon--type-style($name: label-01);
-		color: $text-02;
+		color: $text-secondary;
 		padding-top: $spacing-06;
 	}
 }

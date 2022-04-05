@@ -24,7 +24,7 @@ var yellow70 = '#684e00';
 var yellow80 = '#483700';
 var yellow90 = '#302400';
 var yellow100 = '#1c1500';
-var unstable_yellow = {
+var yellow = {
   10: yellow10,
   20: yellow20,
   30: yellow30,
@@ -36,7 +36,6 @@ var unstable_yellow = {
   90: yellow90,
   100: yellow100
 };
-var yellow = yellow30;
 var yellow10Hover = '#f8e6a0';
 var yellow20Hover = '#fccd27';
 var yellow30Hover = '#ddb00e';
@@ -69,8 +68,7 @@ var orange70 = '#8a3800';
 var orange80 = '#5e2900';
 var orange90 = '#3e1a00';
 var orange100 = '#231000';
-var orange = orange40;
-var unstable_orange = {
+var orange = {
   10: orange10,
   20: orange20,
   30: orange30,
@@ -554,7 +552,7 @@ var colors = {
   gray: gray,
   green: green,
   magenta: magenta,
-  orange: unstable_orange,
+  orange: orange,
   purple: purple,
   red: red,
   teal: teal,
@@ -562,9 +560,9 @@ var colors = {
   white: {
     0: white
   },
-  yellow: unstable_yellow
+  yellow: yellow
 };
-var unstable_hoverColors = {
+var hoverColors = {
   whiteHover: whiteHover,
   blackHover: blackHover,
   blueHover: blueHover,
@@ -715,6 +713,7 @@ exports.green80Hover = green80Hover;
 exports.green90 = green90;
 exports.green90Hover = green90Hover;
 exports.greenHover = greenHover;
+exports.hoverColors = hoverColors;
 exports.magenta = magenta;
 exports.magenta10 = magenta10;
 exports.magenta100 = magenta100;
@@ -826,7 +825,6 @@ exports.teal80Hover = teal80Hover;
 exports.teal90 = teal90;
 exports.teal90Hover = teal90Hover;
 exports.tealHover = tealHover;
-exports.unstable_hoverColors = unstable_hoverColors;
 exports.warmGray = warmGray;
 exports.warmGray10 = warmGray10;
 exports.warmGray100 = warmGray100;

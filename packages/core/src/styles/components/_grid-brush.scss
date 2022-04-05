@@ -11,8 +11,8 @@
 
 .#{$prefix}--#{$charts-prefix}--grid-brush {
 	rect.frontSelection {
-		fill: $ui-03;
+		fill: $layer-accent-01;
 		fill-opacity: 0.3;
-		stroke: $interactive-03;
+		stroke: $button-tertiary;
 	}
 }

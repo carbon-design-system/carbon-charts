@@ -580,10 +580,6 @@
     enumerable: true,
     get: function () { return layout.iconSize; }
   });
-  Object.defineProperty(exports, 'layout', {
-    enumerable: true,
-    get: function () { return layout.layout; }
-  });
   Object.defineProperty(exports, 'miniUnit', {
     enumerable: true,
     get: function () { return layout.miniUnit; }

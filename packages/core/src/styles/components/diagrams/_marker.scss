@@ -1,5 +1,5 @@
-@import './../../vendor/carbon-components/scss/globals/scss/vars';
-@import './../../vendor/@carbon/elements/scss/import-once/import-once';
+@import 'carbon-components/scss/globals/scss/vars';
+@import '@carbon/import-once/scss/index';
 
 @include exports('cc-marker') {
 	.#{$prefix}--#{$charts-prefix}--marker {

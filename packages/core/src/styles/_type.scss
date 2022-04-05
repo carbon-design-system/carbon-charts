@@ -1,15 +1,4 @@
-// TODO-V11
-// @import './vendor/@carbon/type/scss/type';
-// @import './vendor/@carbon/type/scss/font-face/sans';
-// @import './vendor/@carbon/type/scss/font-face/sans-condensed';
-
 @import './chart-feature-flags';
-
-// TODO-V11
-// @if map-get($chart-feature-flags, 'enable-font-imports') == true {
-// 	@include carbon--font-face-sans();
-// 	@include carbon--font-face-sans-condensed();
-// }
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	font-family: carbon--font-family('sans-condensed');
@@ -19,13 +8,13 @@
 		margin: 0;
 		font-size: 12px;
 		font-weight: carbon--font-weight('regular');
-		color: $text-02;
+		color: $text-secondary;
 	}
 
 	text {
 		font-size: 12px;
 		font-weight: carbon--font-weight('regular');
-		fill: $text-02;
+		fill: $text-secondary;
 	}
 
 	g.gauge-numbers text.gauge-value-number {

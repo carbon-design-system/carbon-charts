@@ -2,20 +2,20 @@
 	overflow: visible;
 
 	path.arc-background {
-		fill: $ui-01;
+		fill: $layer-01;
 	}
 
 	.gauge-delta-arrow {
 		&.status--danger {
-			fill: $support-01;
+			fill: $support-error;
 		}
 
 		&.status--warning {
-			fill: $support-03;
+			fill: $support-warning;
 		}
 
 		&.status--success {
-			fill: $support-02;
+			fill: $support-success;
 		}
 	}
 }

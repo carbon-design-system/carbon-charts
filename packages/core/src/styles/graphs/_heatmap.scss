@@ -25,7 +25,7 @@
 	}
 
 	rect.pattern-fill {
-		fill: $ui-04;
+		fill: $border-strong-01;
 	}
 
 	g.shadows {
@@ -55,11 +55,11 @@
 	}
 
 	rect.heat {
-		stroke: $ui-background;
+		stroke: $background;
 	}
 
 	rect.null-state {
-		fill: $ui-01;
+		fill: $layer-01;
 	}
 
 	@if $carbon--theme == $carbon--theme--g90 {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "10.55.0",
+  "version": "11.0.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,25 +31,24 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements && node tasks/build.js && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf es lib umd && node tasks/clean.js"
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements",
+    "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/colors": "^10.37.0",
-    "@carbon/grid": "^10.43.0",
-    "@carbon/icons": "^10.48.0",
-    "@carbon/import-once": "^10.7.0",
-    "@carbon/layout": "^10.37.0",
-    "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.54.0",
-    "@carbon/type": "^10.44.0"
+    "@carbon/colors": "^11.0.0",
+    "@carbon/grid": "^11.0.0",
+    "@carbon/icons": "^11.0.1",
+    "@carbon/layout": "^11.0.0",
+    "@carbon/motion": "^11.0.0",
+    "@carbon/themes": "^11.0.0",
+    "@carbon/type": "^11.0.0"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.34.0",
+    "@carbon/cli": "^11.0.0",
     "fs-extra": "^10.0.0",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",
     "rimraf": "^3.0.0"
   },
-  "gitHead": "9db9b14761bfaabde5cd54e1f47957d243d90321"
+  "gitHead": "db1af06972f4cc0cfb236723646ee59dae7bdee7"
 }

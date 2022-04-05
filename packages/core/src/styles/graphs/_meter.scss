@@ -1,6 +1,6 @@
 .#{$prefix}--#{$charts-prefix}--meter {
 	rect.container {
-		fill: $ui-01;
+		fill: $layer-01;
 	}
 
 	line.rangeIndicator {
@@ -17,11 +17,11 @@
 
 	rect.value {
 		&.status--danger {
-			fill: $support-01;
+			fill: $support-error;
 		}
 
 		&.status--warning {
-			fill: $support-03;
+			fill: $support-warning;
 			stroke-width: 1px;
 			stroke: $carbon-dataviz-alert;
 			@if $carbon--theme ==
@@ -34,7 +34,7 @@
 		}
 
 		&.status--success {
-			fill: $support-02;
+			fill: $support-success;
 		}
 	}
 

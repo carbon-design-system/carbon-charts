@@ -1,4 +1,4 @@
-@import './../vendor/@carbon/themes/scss/tokens';
+@import '@carbon/themes/scss/tokens';
 
 .#{$prefix}--#{$charts-prefix}--axes {
   overflow: visible;
@@ -28,7 +28,7 @@
     }
 
     g.tick text {
-      fill: $text-02;
+      fill: $text-secondary;
       font-family: carbon--font-family('sans-condensed');
     }
 
@@ -37,13 +37,13 @@
     }
 
     path.domain {
-      stroke: $ui-04;
+      stroke: $border-strong-01;
     }
 
     .axis-title {
       font-family: carbon--font-family('sans');
       font-weight: carbon--font-weight('semibold');
-      fill: $text-01;
+      fill: $text-primary;
     }
   }
 }

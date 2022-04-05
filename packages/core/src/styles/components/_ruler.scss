@@ -2,15 +2,15 @@
 .#{$prefix}--#{$charts-prefix}--ruler-binned {
 	line.ruler-line {
 		// TODO-V11
-		// @if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
-		// 	stroke: $carbon--white-0;
+		// @if $background == map-get($carbon--theme--g90, 'ui-background') {
+		// 	stroke: $white-0;
 		// } @else if
-		// 	$ui-background ==
+		// 	$background ==
 		// 	map-get($carbon--theme--g100, 'ui-background')
 		// {
-		// 	stroke: $carbon--white-0;
+		// 	stroke: $white-0;
 		// } @else {
-		// 	stroke: $carbon--black-100;
+		// 	stroke: $black-100;
 		// }
 
 		stroke-width: 1px;

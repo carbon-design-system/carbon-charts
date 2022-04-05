@@ -20,7 +20,7 @@ var yellow70 = '#684e00';
 var yellow80 = '#483700';
 var yellow90 = '#302400';
 var yellow100 = '#1c1500';
-var unstable_yellow = {
+var yellow = {
   10: yellow10,
   20: yellow20,
   30: yellow30,
@@ -32,7 +32,6 @@ var unstable_yellow = {
   90: yellow90,
   100: yellow100
 };
-var yellow = yellow30;
 var yellow10Hover = '#f8e6a0';
 var yellow20Hover = '#fccd27';
 var yellow30Hover = '#ddb00e';
@@ -65,8 +64,7 @@ var orange70 = '#8a3800';
 var orange80 = '#5e2900';
 var orange90 = '#3e1a00';
 var orange100 = '#231000';
-var orange = orange40;
-var unstable_orange = {
+var orange = {
   10: orange10,
   20: orange20,
   30: orange30,
@@ -550,7 +548,7 @@ var colors = {
   gray: gray,
   green: green,
   magenta: magenta,
-  orange: unstable_orange,
+  orange: orange,
   purple: purple,
   red: red,
   teal: teal,
@@ -558,9 +556,9 @@ var colors = {
   white: {
     0: white
   },
-  yellow: unstable_yellow
+  yellow: yellow
 };
-var unstable_hoverColors = {
+var hoverColors = {
   whiteHover: whiteHover,
   blackHover: blackHover,
   blueHover: blueHover,
@@ -597,4 +595,4 @@ function rgba(hexcode, opacity) {
   return "rgba(".concat(values[0], ", ").concat(values[1], ", ").concat(values[2], ", ").concat(opacity, ")");
 }
 
-export { black, black100, blackHover, blue, blue10, blue100, blue100Hover, blue10Hover, blue20, blue20Hover, blue30, blue30Hover, blue40, blue40Hover, blue50, blue50Hover, blue60, blue60Hover, blue70, blue70Hover, blue80, blue80Hover, blue90, blue90Hover, blueHover, colors, coolGray, coolGray10, coolGray100, coolGray100Hover, coolGray10Hover, coolGray20, coolGray20Hover, coolGray30, coolGray30Hover, coolGray40, coolGray40Hover, coolGray50, coolGray50Hover, coolGray60, coolGray60Hover, coolGray70, coolGray70Hover, coolGray80, coolGray80Hover, coolGray90, coolGray90Hover, coolGrayHover, cyan, cyan10, cyan100, cyan100Hover, cyan10Hover, cyan20, cyan20Hover, cyan30, cyan30Hover, cyan40, cyan40Hover, cyan50, cyan50Hover, cyan60, cyan60Hover, cyan70, cyan70Hover, cyan80, cyan80Hover, cyan90, cyan90Hover, cyanHover, gray, gray10, gray100, gray100Hover, gray10Hover, gray20, gray20Hover, gray30, gray30Hover, gray40, gray40Hover, gray50, gray50Hover, gray60, gray60Hover, gray70, gray70Hover, gray80, gray80Hover, gray90, gray90Hover, grayHover, green, green10, green100, green100Hover, green10Hover, green20, green20Hover, green30, green30Hover, green40, green40Hover, green50, green50Hover, green60, green60Hover, green70, green70Hover, green80, green80Hover, green90, green90Hover, greenHover, magenta, magenta10, magenta100, magenta100Hover, magenta10Hover, magenta20, magenta20Hover, magenta30, magenta30Hover, magenta40, magenta40Hover, magenta50, magenta50Hover, magenta60, magenta60Hover, magenta70, magenta70Hover, magenta80, magenta80Hover, magenta90, magenta90Hover, magentaHover, orange, orange10, orange100, orange100Hover, orange10Hover, orange20, orange20Hover, orange30, orange30Hover, orange40, orange40Hover, orange50, orange50Hover, orange60, orange60Hover, orange70, orange70Hover, orange80, orange80Hover, orange90, orange90Hover, orangeHover, purple, purple10, purple100, purple100Hover, purple10Hover, purple20, purple20Hover, purple30, purple30Hover, purple40, purple40Hover, purple50, purple50Hover, purple60, purple60Hover, purple70, purple70Hover, purple80, purple80Hover, purple90, purple90Hover, purpleHover, red, red10, red100, red100Hover, red10Hover, red20, red20Hover, red30, red30Hover, red40, red40Hover, red50, red50Hover, red60, red60Hover, red70, red70Hover, red80, red80Hover, red90, red90Hover, redHover, rgba, teal, teal10, teal100, teal100Hover, teal10Hover, teal20, teal20Hover, teal30, teal30Hover, teal40, teal40Hover, teal50, teal50Hover, teal60, teal60Hover, teal70, teal70Hover, teal80, teal80Hover, teal90, teal90Hover, tealHover, unstable_hoverColors, warmGray, warmGray10, warmGray100, warmGray100Hover, warmGray10Hover, warmGray20, warmGray20Hover, warmGray30, warmGray30Hover, warmGray40, warmGray40Hover, warmGray50, warmGray50Hover, warmGray60, warmGray60Hover, warmGray70, warmGray70Hover, warmGray80, warmGray80Hover, warmGray90, warmGray90Hover, warmGrayHover, white, white0, whiteHover, yellow, yellow10, yellow100, yellow100Hover, yellow10Hover, yellow20, yellow20Hover, yellow30, yellow30Hover, yellow40, yellow40Hover, yellow50, yellow50Hover, yellow60, yellow60Hover, yellow70, yellow70Hover, yellow80, yellow80Hover, yellow90, yellow90Hover, yellowHover };
+export { black, black100, blackHover, blue, blue10, blue100, blue100Hover, blue10Hover, blue20, blue20Hover, blue30, blue30Hover, blue40, blue40Hover, blue50, blue50Hover, blue60, blue60Hover, blue70, blue70Hover, blue80, blue80Hover, blue90, blue90Hover, blueHover, colors, coolGray, coolGray10, coolGray100, coolGray100Hover, coolGray10Hover, coolGray20, coolGray20Hover, coolGray30, coolGray30Hover, coolGray40, coolGray40Hover, coolGray50, coolGray50Hover, coolGray60, coolGray60Hover, coolGray70, coolGray70Hover, coolGray80, coolGray80Hover, coolGray90, coolGray90Hover, coolGrayHover, cyan, cyan10, cyan100, cyan100Hover, cyan10Hover, cyan20, cyan20Hover, cyan30, cyan30Hover, cyan40, cyan40Hover, cyan50, cyan50Hover, cyan60, cyan60Hover, cyan70, cyan70Hover, cyan80, cyan80Hover, cyan90, cyan90Hover, cyanHover, gray, gray10, gray100, gray100Hover, gray10Hover, gray20, gray20Hover, gray30, gray30Hover, gray40, gray40Hover, gray50, gray50Hover, gray60, gray60Hover, gray70, gray70Hover, gray80, gray80Hover, gray90, gray90Hover, grayHover, green, green10, green100, green100Hover, green10Hover, green20, green20Hover, green30, green30Hover, green40, green40Hover, green50, green50Hover, green60, green60Hover, green70, green70Hover, green80, green80Hover, green90, green90Hover, greenHover, hoverColors, magenta, magenta10, magenta100, magenta100Hover, magenta10Hover, magenta20, magenta20Hover, magenta30, magenta30Hover, magenta40, magenta40Hover, magenta50, magenta50Hover, magenta60, magenta60Hover, magenta70, magenta70Hover, magenta80, magenta80Hover, magenta90, magenta90Hover, magentaHover, orange, orange10, orange100, orange100Hover, orange10Hover, orange20, orange20Hover, orange30, orange30Hover, orange40, orange40Hover, orange50, orange50Hover, orange60, orange60Hover, orange70, orange70Hover, orange80, orange80Hover, orange90, orange90Hover, orangeHover, purple, purple10, purple100, purple100Hover, purple10Hover, purple20, purple20Hover, purple30, purple30Hover, purple40, purple40Hover, purple50, purple50Hover, purple60, purple60Hover, purple70, purple70Hover, purple80, purple80Hover, purple90, purple90Hover, purpleHover, red, red10, red100, red100Hover, red10Hover, red20, red20Hover, red30, red30Hover, red40, red40Hover, red50, red50Hover, red60, red60Hover, red70, red70Hover, red80, red80Hover, red90, red90Hover, redHover, rgba, teal, teal10, teal100, teal100Hover, teal10Hover, teal20, teal20Hover, teal30, teal30Hover, teal40, teal40Hover, teal50, teal50Hover, teal60, teal60Hover, teal70, teal70Hover, teal80, teal80Hover, teal90, teal90Hover, tealHover, warmGray, warmGray10, warmGray100, warmGray100Hover, warmGray10Hover, warmGray20, warmGray20Hover, warmGray30, warmGray30Hover, warmGray40, warmGray40Hover, warmGray50, warmGray50Hover, warmGray60, warmGray60Hover, warmGray70, warmGray70Hover, warmGray80, warmGray80Hover, warmGray90, warmGray90Hover, warmGrayHover, white, white0, whiteHover, yellow, yellow10, yellow100, yellow100Hover, yellow10Hover, yellow20, yellow20Hover, yellow30, yellow30Hover, yellow40, yellow40Hover, yellow50, yellow50Hover, yellow60, yellow60Hover, yellow70, yellow70Hover, yellow80, yellow80Hover, yellow90, yellow90Hover, yellowHover };

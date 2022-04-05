@@ -1,6 +1,6 @@
 import { configure } from '@storybook/html';
 import { setOptions } from '@storybook/addon-options';
-import theme from './theme';
+// import theme from './theme';
 
 setOptions({
 	name: 'Carbon Charts - vanilla',
@@ -8,7 +8,7 @@ setOptions({
 	sortStoriesByKind: true,
 	panelPosition: 'bottom',
 	showDownPanel: true,
-	theme,
+	// theme,
 });
 
 const req = require.context('../stories', true, /.stories.ts$/);

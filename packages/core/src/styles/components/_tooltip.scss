@@ -1,9 +1,47 @@
-@import './../vendor/@carbon/motion/scss/motion.scss';
+@use '@carbon/styles/scss/motion' as *;
+
+// TODO
+// @use '@carbon/themes/scss/themes';
+// @use '@carbon/themes/scss/theme';
+
+// Comparing themes
+// @if theme.$theme == themes.$white {
+// }
+
+// @iftheme.matches(theme.$theme, themes.$white) {
+// }
+
+// Inline theming
+// Zones (.cds--white, .cds--g10, ...)
+// .cds--white {
+//   @include theme.theme(themes.$white);
+//
+//   --cds-background: #fffff;
+// }
+// Custom selectors
+// .my-zone-whatever
+
+
+// [data-carbon-theme='g10'] {
+// 	@include styles.theme(styles.$g10);
+// }
+
+// body.dark-mode
+// .dark-mode {
+// 	@include styles.theme(styles.$g100);
+// }
+
+// @media (prefers-c)
+
+// background: theme.$text-primary;
+// background: var(--cds-text-primary, #000000);
+// .dark-mode { --cds-text-primary: #fff };
+
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
-	background-color: $ui-02;
+	background-color: $layer-02;
 	pointer-events: none;
-	@include carbon--motion(standard, expressive);
+	@include motion(standard, expressive);
 	display: inline;
 	visibility: visible;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
@@ -17,11 +55,11 @@
 		opacity: 0;
 		visibility: hidden;
 		transition: visibility 0s linear 0s, opacity 0.1s;
-		@include carbon--motion(standard, expressive);
+		@include motion(standard, expressive);
 	}
 
 	.content-box {
-		color: $text-01;
+		color: $text-primary;
 
 		.title-tooltip {
 			width: auto;
@@ -105,11 +143,11 @@
 				&:not(:last-child) {
 					// TODO-V11
 					// @if $carbon--theme == $carbon--theme--g90 {
-					// 	border-bottom: 1px solid $ui-01;
+					// 	border-bottom: 1px solid $layer-01;
 					// } @else if $carbon--theme == $carbon--theme--g100 {
-					// 	border-bottom: 1px solid $ui-04;
+					// 	border-bottom: 1px solid $border-strong-01;
 					// } @else {
-					// 	border-bottom: 1px solid $ui-03;
+					// 	border-bottom: 1px solid $layer-accent-01;
 					// }
 				}
 			}
