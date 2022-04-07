@@ -11,6 +11,7 @@ $prefix: 'cds';
 
 @use '@carbon/styles';
 @use '@carbon/type';
+@import '@carbon/import-once/scss/import-once';
 
 // Carbon imports
 // TODO-V11
@@ -22,14 +23,14 @@ $prefix: 'cds';
   transition: all 0.1s ease-out;
 }
 
-// Internal
+// // Internal
 @import './mixins.scss';
-// @import './colors.scss';
+// // @import './colors.scss';
 @import './components/index.scss';
-@import './graphs/index.scss';
-@import './type';
-@import './chart-holder';
-@import './chart-feature-flags';
+// @import './graphs/index.scss';
+// @import './type';
+// @import './chart-holder';
+// @import './chart-feature-flags';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
   overflow: visible;

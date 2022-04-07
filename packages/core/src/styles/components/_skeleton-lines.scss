@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 $lines-bg-color: $layer-accent-01;
 $lines-shimmer-color: $white-0;
 $areas-bg-color: rgba(127, 127, 127, 0.1);

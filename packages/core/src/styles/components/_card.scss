@@ -24,11 +24,11 @@
 		background-color: $layer-01;
 		z-index: 1;
 		box-sizing: border-box;
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		width: 100%;
 		height: 100%;
 		padding: $spacing-05 $spacing-04;
-		border-left: carbon--mini-units(0.5) solid $ui-05;
+		border-left: carbon--mini-units(0.5) solid $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card--a,
@@ -51,7 +51,7 @@
 	.#{$prefix}--#{$charts-prefix}--card--a:hover,
 	.#{$prefix}--#{$charts-prefix}--card--button:focus,
 	.#{$prefix}--#{$charts-prefix}--card--button:hover {
-		background-color: $hover-ui;
+		background-color: $background-hover;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card--a:focus,

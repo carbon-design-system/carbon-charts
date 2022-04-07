@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--chart-wrapper g.callouts {
 	stroke: $text-secondary;
 }

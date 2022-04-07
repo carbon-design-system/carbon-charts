@@ -1,8 +1,7 @@
-@import 'carbon-components/scss/globals/scss/vars';
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/import-once/scss/index';
-@import 'carbon-components/scss/globals/scss/_helper-mixins';
+@use "@carbon/styles/scss/utilities/focus-outline" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
+@use '@carbon/styles/scss/theme' as *;
 
 @mixin stacked-card-node {
 	content: '';
@@ -10,8 +9,8 @@
 	width: 100%;
 	position: absolute;
 	z-index: 0;
-	border-top: carbon--mini-units(0.25) solid $layer-accent-01;
-	border-right: carbon--mini-units(0.25) solid $layer-accent-01;
+	border-top: mini-units(0.25) solid $layer-accent-01;
+	border-right: mini-units(0.25) solid $layer-accent-01;
 	pointer-events: none;
 }
 
@@ -22,11 +21,11 @@
 		background-color: $layer-01;
 		z-index: 1;
 		box-sizing: border-box;
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		width: 100%;
 		height: 100%;
 		padding: $spacing-05 $spacing-03;
-		border-left: carbon--mini-units(0.5) solid $ui-05;
+		border-left: mini-units(0.5) solid $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--a,
@@ -40,7 +39,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--button {
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		text-align: left;
 		width: 100%;
 	}
@@ -49,7 +48,7 @@
 	.#{$prefix}--#{$charts-prefix}--card-node--a:hover,
 	.#{$prefix}--#{$charts-prefix}--card-node--button:focus,
 	.#{$prefix}--#{$charts-prefix}--card-node--button:hover {
-		background-color: $hover-ui;
+		background-color: $background-hover;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
@@ -60,14 +59,14 @@
 	.#{$prefix}--#{$charts-prefix}--card-node--stacked {
 		&::before {
 			@include stacked-card-node();
-			left: carbon--mini-units(0.625);
-			bottom: carbon--mini-units(0.625);
+			left: mini-units(0.625);
+			bottom: mini-units(0.625);
 		}
 
 		&::after {
 			@include stacked-card-node();
-			left: carbon--mini-units(1.375);
-			bottom: carbon--mini-units(1.375);
+			left: mini-units(1.375);
+			bottom: mini-units(1.375);
 		}
 	}
 
@@ -80,18 +79,18 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__title {
-		@include carbon--type-style($name: productive-heading-01);
+		@include type-style($name: productive-heading-01);
 		margin: 0;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__subtitle {
-		@include carbon--type-style($name: body-short-01);
+		@include type-style($name: body-short-01);
 		margin: 0;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node__label {
 		display: block;
-		@include carbon--type-style($name: label-01);
+		@include type-style($name: label-01);
 		color: $text-secondary;
 		padding-top: $spacing-06;
 	}

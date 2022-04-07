@@ -1,4 +1,5 @@
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--threshold {
 	line.threshold-line {
@@ -35,7 +36,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 
 	color: $text-primary;
 	line-height: 16px;

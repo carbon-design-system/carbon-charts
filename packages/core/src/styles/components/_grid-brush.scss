@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--grid-brush {
 	// disable default d3 brush selection
 	g.grid-brush {

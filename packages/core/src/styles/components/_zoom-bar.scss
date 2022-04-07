@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--zoom-bar {
 	rect.zoom-bg {
 		fill: $background;

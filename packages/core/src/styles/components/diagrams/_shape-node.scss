@@ -1,8 +1,7 @@
-@import 'carbon-components/scss/globals/scss/vars';
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/import-once/scss/index';
-@import 'carbon-components/scss/globals/scss/_helper-mixins';
+@use "@carbon/styles/scss/utilities/focus-outline" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
+@use '@carbon/styles/scss/theme' as *;
 
 @include exports('cc-shape-node') {
 	.#{$prefix}--#{$charts-prefix}--shape-node {
@@ -11,7 +10,7 @@
 		align-items: center;
 		background-color: $layer-01;
 		box-sizing: border-box;
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		width: 100%;
 		height: 100%;
 		position: relative;
@@ -26,7 +25,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--rounded-square {
-		border-radius: carbon--mini-units(1);
+		border-radius: mini-units(1);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--a,
@@ -38,7 +37,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--button {
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		text-align: left;
 		width: 100%;
 	}
@@ -47,11 +46,11 @@
 	.#{$prefix}--#{$charts-prefix}--shape-node--a:hover,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:focus,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:hover {
-		background-color: $hover-ui;
+		background-color: $background-hover;
 
 		.#{$prefix}--#{$charts-prefix}--shape-node__title,
 		.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
-			font-weight: carbon--font-weight('semibold');
+			font-weight: font-weight('semibold');
 		}
 	}
 
@@ -71,7 +70,7 @@
 
 	.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
 		padding-bottom: $spacing-01;
-		@include carbon--type-style($name: body-short-01);
+		@include type-style($name: body-short-01);
 		color: $text-primary;
 	}
 
@@ -80,7 +79,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node__title {
-		@include carbon--type-style($name: body-short-01);
+		@include type-style($name: body-short-01);
 		color: $text-primary;
 		padding-top: $spacing-01;
 		margin-bottom: 1px;

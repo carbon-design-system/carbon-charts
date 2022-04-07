@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 div.#{$prefix}--#{$charts-prefix}--legend {
 	display: flex;
 	user-select: none;

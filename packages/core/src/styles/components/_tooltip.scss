@@ -1,41 +1,5 @@
 @use '@carbon/styles/scss/motion' as *;
-
-// TODO
-// @use '@carbon/themes/scss/themes';
-// @use '@carbon/themes/scss/theme';
-
-// Comparing themes
-// @if theme.$theme == themes.$white {
-// }
-
-// @iftheme.matches(theme.$theme, themes.$white) {
-// }
-
-// Inline theming
-// Zones (.cds--white, .cds--g10, ...)
-// .cds--white {
-//   @include theme.theme(themes.$white);
-//
-//   --cds-background: #fffff;
-// }
-// Custom selectors
-// .my-zone-whatever
-
-
-// [data-carbon-theme='g10'] {
-// 	@include styles.theme(styles.$g10);
-// }
-
-// body.dark-mode
-// .dark-mode {
-// 	@include styles.theme(styles.$g100);
-// }
-
-// @media (prefers-c)
-
-// background: theme.$text-primary;
-// background: var(--cds-text-primary, #000000);
-// .dark-mode { --cds-text-primary: #fff };
+@use '@carbon/styles/scss/theme' as *;
 
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
@@ -48,7 +12,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 	transition: visibility 0s linear 0.1s, opacity 0.1s;
 
 	&.hidden {

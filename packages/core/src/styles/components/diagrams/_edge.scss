@@ -1,8 +1,7 @@
-@import 'carbon-components/scss/globals/scss/vars';
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/import-once/scss/index';
-@import 'carbon-components/scss/globals/scss/_helper-mixins';
+@use "@carbon/styles/scss/utilities/focus-outline" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
+@use '@carbon/styles/scss/theme' as *;
 
 @include exports('cc-edge') {
 	.#{$prefix}--#{$charts-prefix}--edge {
@@ -16,18 +15,18 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__inner {
-		stroke-width: carbon--mini-units(0.125);
+		stroke-width: mini-units(0.125);
 		stroke: $border-strong-01;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__outer {
-		stroke-width: carbon--mini-units(0.3125);
+		stroke-width: mini-units(0.3125);
 		stroke: transparent;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge:hover {
 		.#{$prefix}--#{$charts-prefix}--edge__inner {
-			stroke-width: carbon--mini-units(0.3125);
+			stroke-width: mini-units(0.3125);
 		}
 	}
 
@@ -50,7 +49,7 @@
 	.#{$prefix}--#{$charts-prefix}--edge--tunnel {
 		.#{$prefix}--#{$charts-prefix}--edge__outer {
 			stroke: $layer-accent-01;
-			stroke-width: carbon--mini-units(0.75);
+			stroke-width: mini-units(0.75);
 		}
 	}
 
@@ -60,8 +59,8 @@
 		}
 
 		.#{$prefix}--#{$charts-prefix}--edge__outer {
-			stroke: $ui-05;
-			stroke-width: carbon--mini-units(0.5625);
+			stroke: $border-inverse;
+			stroke-width: mini-units(0.5625);
 		}
 	}
 }

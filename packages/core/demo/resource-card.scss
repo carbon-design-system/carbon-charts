@@ -20,7 +20,7 @@
 }
 
 .#{$prefix}--resource-card .#{$prefix}--tile:hover {
-	background: $hover-ui;
+	background: $background-hover;
 }
 
 .#{$prefix}--resource-card__title {
@@ -74,7 +74,7 @@
 }
 
 .#{$prefix}--resource-card--dark .#{$prefix}--tile:hover {
-	background: $carbon--gray-80; //$hover-ui for gray 90 theme
+	background: $carbon--gray-80; //$background-hover for gray 90 theme
 }
 
 .#{$prefix}--resource-card--dark .#{$prefix}--resource-card__title,

@@ -1,5 +1,5 @@
 @use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--meter-title {
   overflow: visible;
@@ -31,8 +31,8 @@
     }
 
     path.innerFill {
-      @if theme.matches(themes.$g90, theme.$theme) or
-        theme.matches(themes.$g100, theme.$theme)
+      @if matches(themes.$g90, $theme) or
+        matches(themes.$g100, $theme)
       {
         fill: $black-100;
       } @else {

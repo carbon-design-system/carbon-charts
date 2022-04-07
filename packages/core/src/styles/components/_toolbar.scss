@@ -1,4 +1,7 @@
+@use '@carbon/styles/scss/theme' as *;
+
 $css--reset: false;
+
 .#{$prefix}--chart-holder {
 	.cds--overflow-menu,
 	.cds--overflow-menu__trigger {

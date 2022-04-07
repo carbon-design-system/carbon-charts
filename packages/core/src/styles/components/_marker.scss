@@ -3,6 +3,6 @@
 
 @include exports('cc-marker') {
 	.#{$prefix}--#{$charts-prefix}--marker {
-		fill: $ui-05;
+		fill: $border-inverse;
 	}
 }

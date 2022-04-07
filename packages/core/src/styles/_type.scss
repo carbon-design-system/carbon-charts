@@ -1,7 +1,7 @@
 @import './chart-feature-flags';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 
 	p {
 		padding: 0;
@@ -18,14 +18,14 @@
 	}
 
 	g.gauge-numbers text.gauge-value-number {
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		font-weight: carbon--font-weight('light');
 	}
 
 	text.meter-title,
 	text.percent-value {
 		font-size: $carbon--base-font-size;
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 	}
 
 	text.meter-title {

@@ -17,7 +17,7 @@
 
 	.#{$prefix}--#{$charts-prefix}--edge__inner {
 		stroke-width: carbon--mini-units(0.1875);
-		stroke: $ui-05;
+		stroke: $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__outer {
@@ -60,7 +60,7 @@
 		}
 
 		.#{$prefix}--#{$charts-prefix}--edge__outer {
-			stroke: $ui-05;
+			stroke: $border-inverse;
 			stroke-width: carbon--mini-units(0.5625);
 		}
 	}
