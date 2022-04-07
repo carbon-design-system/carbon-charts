@@ -167,8 +167,7 @@ export class Treemap extends Component {
 			.attr('width', (d) => d.x1 - d.x0)
 			.attr('height', (d) => d.y1 - d.y0)
 			.style('fill', (d) => {
-				while (d.depth > 1) d = d.parent;
-				return this.model.getFillColor(d.data.name, undefined, d);
+				return this.model.getFillColor(d.parent.data.name, undefined, d);
 			});
 
 		// Update all clip paths
