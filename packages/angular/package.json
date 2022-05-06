@@ -41,7 +41,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.56.0",
+		"@carbon/charts": "^0.57.0-latest-carbon-v11-beta",
 		"@carbon/telemetry": "0.0.0-alpha.6"
 	},
 	"peerDependencies": {
@@ -99,5 +99,6 @@
 			"email": "iliadm@ca.ibm.com",
 			"url": "https://github.com/theiliad"
 		}
-	]
+	],
+	"gitHead": "fca18dcc08dee87e1947496ac72b878f6b22baf8"
 }

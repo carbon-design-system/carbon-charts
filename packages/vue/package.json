@@ -15,7 +15,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.56.0",
+		"@carbon/charts": "^0.57.0-latest-carbon-v11-beta",
 		"@carbon/telemetry": "0.0.0-alpha.6",
 		"vue": "2.5.21"
 	},
@@ -109,5 +109,6 @@
 		"patterns",
 		"sass",
 		"scss"
-	]
+	],
+	"gitHead": "fca18dcc08dee87e1947496ac72b878f6b22baf8"
 }
