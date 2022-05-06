@@ -27,4 +27,4 @@ echo "Publish to NPM"
 
 node scripts/add-telemetry-to-packages.js
 
-lerna publish from-package --yes --force-publish --contents dist --dist-tag latest-carbon-v11-beta
+lerna publish from-package --yes --force-publish --contents dist --dist-tag latest-carbon-v11-beta --verbose
