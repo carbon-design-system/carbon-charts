@@ -15,7 +15,6 @@
 </p>
 
 ## Packages
-
 -   [Vanilla](./packages/core)
 -   [React](./packages/react)
 -   [Angular](./packages/angular)
