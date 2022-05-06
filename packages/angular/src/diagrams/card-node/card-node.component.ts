@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { carbonPrefix } from '@carbon/charts/src/configuration-non-customizable';
+import { carbonPrefix } from '../configs';
 
 @Component({
 	selector: 'ibm-diagram-card-node',

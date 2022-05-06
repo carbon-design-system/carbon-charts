@@ -19,6 +19,7 @@
 		"lint": "lerna run lint",
 		"build": "yarn build-all",
 		"build-all": "bash scripts/build-packages-and-demos.sh",
+		"build-packages": "bash scripts/build-packages.sh",
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},

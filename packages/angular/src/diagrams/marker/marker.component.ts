@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { carbonPrefix } from "@carbon/charts/src/configuration-non-customizable";
 import {
 	arrowLeft,
 	arrowRight,
@@ -8,6 +7,8 @@ import {
 	square,
 	tee,
 } from "@carbon/charts/components/diagrams/markerDefinitions";
+
+import { carbonPrefix } from '../configs';
 
 const template = `
 <svg:marker

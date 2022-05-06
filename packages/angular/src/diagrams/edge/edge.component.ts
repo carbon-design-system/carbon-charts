@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { carbonPrefix } from "@carbon/charts/src/configuration-non-customizable";
 import { buildStraightPathString } from "@carbon/charts/components/diagrams/buildPaths";
+
+import { carbonPrefix } from '../configs';
 
 interface Coordinates {
 	x: number;

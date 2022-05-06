@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.56.0",
+	"version": "0.57.0-latest-carbon-v11-beta",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
