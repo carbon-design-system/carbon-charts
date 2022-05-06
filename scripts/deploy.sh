@@ -16,7 +16,7 @@ set -e # exit with nonzero exit code if anything fails
 # # checkout master to get out of detached HEAD state
 # git checkout master
 
-# lerna version --preid d3v5-latest --no-push
+lerna version --preid latest-carbon-v11-beta --no-push
 
 echo "Publish to NPM"
 

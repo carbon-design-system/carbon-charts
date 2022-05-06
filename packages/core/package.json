@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.58.0-latest-carbon-v11-beta",
+	"version": "0.57.0-latest-carbon-v11-beta",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -143,5 +143,5 @@
 			"url": "https://github.com/theiliad"
 		}
 	],
-	"gitHead": "3d8f2d82083bbfd2116d3497107b4f7362414148"
+	"gitHead": "a80393fc8c60a787325aa1cc99a1ff7bce0d1ec8"
 }
