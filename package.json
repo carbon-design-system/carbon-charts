@@ -28,11 +28,6 @@
 			"packages/*"
 		]
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "bash scripts/precommit.sh"
-		}
-	},
 	"release": {
 		"branch": "master"
 	},
