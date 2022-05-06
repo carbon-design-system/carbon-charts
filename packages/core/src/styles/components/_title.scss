@@ -1,3 +1,4 @@
+@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--title {
@@ -5,7 +6,7 @@
 		color: $text-primary;
 		font-size: 16px;
 		font-family: font-family('sans');
-		font-weight: carbon--font-weight('semibold');
+		font-weight: font-weight('semibold');
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

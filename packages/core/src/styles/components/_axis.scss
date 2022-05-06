@@ -24,7 +24,7 @@
       }
 
       text {
-        fill: $layer-selected-inverse;
+        fill: $layer-selected;
       }
     }
 
@@ -43,7 +43,7 @@
 
     .axis-title {
       font-family: font-family('sans');
-      font-weight: carbon--font-weight('semibold');
+      font-weight: font-weight('semibold');
       fill: $text-primary;
     }
   }

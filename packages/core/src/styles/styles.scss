@@ -1,37 +1,35 @@
-$charts-prefix: 'cc';
-
-// Custom dataviz palette colors
-$carbon-dataviz-alert: #b28600;
-$carbon-dataviz-yellow-10: #fcf4d6;
+$charts-prefix: "cc";
 
 $css--reset: false;
 $css--default-type: false;
 
-$prefix: 'cds';
+$prefix: "cds";
 
-@use '@carbon/styles';
-@use '@carbon/type';
-@import '@carbon/import-once/scss/import-once';
+@use "@carbon/styles";
+@use "@carbon/type";
+@use "@carbon/styles/scss/theme";
+
+// Custom charting tokens
+@import "./tokens";
+@include theme.add-component-tokens($custom-charting-tokens);
+
+@import "@carbon/import-once/scss/import-once";
 
 // Carbon imports
-// TODO-V11
-@import '@carbon/colors/index.scss';
-@import '@carbon/styles/scss/components/button/_tokens.scss';
-// @use '@carbon/colors';
+@import "@carbon/colors/index.scss";
+@import "@carbon/styles/scss/components/button/_tokens.scss";
 
 @mixin default_transition {
-  transition: all 0.1s ease-out;
+	transition: all 0.1s ease-out;
 }
 
-// // Internal
-@import './mixins.scss';
-// // @import './colors.scss';
-@import './components/index.scss';
-// @import './graphs/index.scss';
-// @import './type';
-// @import './chart-holder';
-// @import './chart-feature-flags';
+// Internal
+@import "./colors.scss";
+@import "./components/index.scss";
+@import "./graphs/index.scss";
+@import "./type";
+@import "./chart-holder";
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
-  overflow: visible;
+	overflow: visible;
 }

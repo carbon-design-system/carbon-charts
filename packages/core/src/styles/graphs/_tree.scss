@@ -1,3 +1,5 @@
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--chart-wrapper
 	.#{$prefix}--#{$charts-prefix}--tree {
 	g.links {
@@ -12,7 +14,7 @@
 
 		&:hover {
 			text {
-				font-weight: carbon--font-weight('semibold');
+				font-weight: font-weight('semibold');
 			}
 
 			circle {
@@ -36,7 +38,7 @@
 		fill: $text-primary;
 
 		&.text-stroke {
-			stroke: $inverse-01;
+			stroke: $text-inverse;
 			stroke-width: 2px;
 		}
 	}

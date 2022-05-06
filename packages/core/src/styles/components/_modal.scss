@@ -21,9 +21,9 @@
       }
 
       .#{$prefix}--modal-content {
-        // padding-right: 1rem;
         padding: 0;
         margin-bottom: 0;
+		color-scheme: $color-scheme;
 
         table {
           position: relative;
@@ -33,12 +33,6 @@
             position: sticky;
             top: 0;
           }
-        }
-
-        @if theme.matches(themes.$g90, theme.$theme) or
-          theme.matches(themes.$g100, theme.$theme)
-        {
-          color-scheme: dark;
         }
       }
 

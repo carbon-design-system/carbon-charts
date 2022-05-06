@@ -1,4 +1,5 @@
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--bubble {
 	circle.dot.hovered {

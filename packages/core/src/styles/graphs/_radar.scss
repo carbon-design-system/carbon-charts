@@ -1,3 +1,6 @@
+@use '@carbon/styles/scss/themes';
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--radar {
 	.blobs path {
 		stroke-width: 1.5px;
@@ -10,15 +13,6 @@
 	}
 
 	.x-axes line.hovered {
-		@if $background == map-get($carbon--theme--g90, 'ui-background') {
-			stroke: $white-0;
-		} @else if
-			$background ==
-			map-get($carbon--theme--g100, 'ui-background')
-		{
-			stroke: $white-0;
-		} @else {
-			stroke: $black-100;
-		}
+		stroke: $layer-inverse-absolute;
 	}
 }

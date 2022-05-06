@@ -8,7 +8,7 @@ const generateThemePickerHTML = (container, configs) => {
 	<div class="cds--form-item">
 		<div class="cds--radio-button-group ">
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-1" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
+				<input id="radio-button-abfeuherm2f-1" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0" checked>
 				<label for="radio-button-abfeuherm2f-1" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">White</span>
@@ -29,7 +29,7 @@ const generateThemePickerHTML = (container, configs) => {
 				</label>
 			</div>
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-4" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0" checked>
+				<input id="radio-button-abfeuherm2f-4" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
 				<label for="radio-button-abfeuherm2f-4" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">G100</span>
@@ -157,6 +157,7 @@ export const addRadioButtonEventListeners = (container, chart, configs) => {
       const theme = e.target.value;
 
       document.documentElement.setAttribute('data-carbon-theme', theme);
+      chart.services.domUtils.getHolder().setAttribute('data-carbon-theme', theme);
 
       chart.update();
     });

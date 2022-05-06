@@ -1,76 +1,36 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme";
 
-@use '@carbon/styles/scss/motion' as *;
+@use "@carbon/styles/scss/motion" as *;
 
 .#{$prefix}--#{$charts-prefix}--bullet {
-  path.range-box {
-    pointer-events: none;
+	path.range-box {
+		pointer-events: none;
 
-    &.order-1 {
+		&.order-1 {
+			fill: $zone-fill-01;
+			stroke: $zone-stroke-01;
+		}
 
-      //   // TODO-V11
-      //   @if ($carbon--theme == $carbon--theme--g90) or
-      //   	($carbon--theme == $carbon--theme--g100)
-      //   {
-      //   	fill: $gray-90;
-      //   	stroke: $gray-60;
-      //   } @else {
-      //   	fill: $gray-10;
-      //   	stroke: $gray-50;
-      //   }
-    }
+		&.order-2 {
+			fill: $zone-fill-02;
+			stroke: $zone-stroke-02;
+		}
 
-    &.order-2 {
-      // TODO-V11
-      // @if ($carbon--theme == $carbon--theme--g90) or
-      // 	($carbon--theme == $carbon--theme--g100)
-      // {
-      // 	fill: $carbon--gray-80;
-      // 	stroke: $carbon--gray-60;
-      // } @else {
-      // 	fill: $carbon--gray-20;
-      // 	stroke: $carbon--gray-50;
-      // }
-    }
+		&.order-3 {
+			fill: $zone-fill-03;
+			stroke: $zone-stroke-03;
+		}
+	}
 
-    &.order-3 {
-      // TODO-V11
-      // @if ($carbon--theme == $carbon--theme--g90) or
-      // 	($carbon--theme == $carbon--theme--g100)
-      // {
-      // 	fill: $carbon--gray-70;
-      // 	stroke: $carbon--gray-60;
-      // } @else {
-      // 	fill: $carbon--gray-30;
-      // 	stroke: $carbon--gray-50;
-      // }
-    }
-  }
+	path.marker,
+	path.quartile {
+		pointer-events: none;
+		stroke-width: 1.5px;
+		stroke: $layer-inverse-absolute;
+	}
 
-  path.marker,
-  path.quartile {
-    pointer-events: none;
-    stroke-width: 1.5px;
-
-    // TODO-V11
-    // @if ($carbon--theme == $carbon--theme--g90) or
-    // 	($carbon--theme == $carbon--theme--g100)
-    // {
-    // 	stroke: #fff;
-    // } @else {
-    // 	stroke: #000;
-    // }
-  }
-
-  path.quartile.over-bar {
-    // TODO-V11
-    // @if ($carbon--theme == $carbon--theme--g90) or
-    // 	($carbon--theme == $carbon--theme--g100)
-    // {
-    // 	stroke: #000;
-    // } @else {
-    // 	stroke: #fff;
-    // }
-  }
+	path.quartile.over-bar {
+		stroke: $layer-01-absolute;
+	}
 }

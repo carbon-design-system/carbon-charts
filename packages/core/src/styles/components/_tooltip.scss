@@ -1,6 +1,6 @@
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/theme' as *;
-
+@use "@carbon/styles/scss/type" as *;
+@use "@carbon/styles/scss/motion" as *;
+@use "@carbon/styles/scss/theme" as *;
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $layer-02;
@@ -12,7 +12,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: font-family('sans-condensed');
+	font-family: font-family("sans-condensed");
 	transition: visibility 0s linear 0.1s, opacity 0.1s;
 
 	&.hidden {
@@ -62,20 +62,12 @@
 					vertical-align: top;
 					padding-left: 4px;
 					width: auto;
-
-					// TODO-V11
-					// @if ($carbon--theme == $carbon--theme--g90) or
-					// 	($carbon--theme == $carbon--theme--g100)
-					// {
-					// 	fill: white;
-					// } @else {
-					// 	fill: black;
-					// }
+					fill: $layer-inverse-absolute;
 				}
 			}
 
 			&.bold {
-				font-weight: carbon--font-weight('semibold');
+				font-weight: font-weight("semibold");
 			}
 
 			p {
@@ -105,14 +97,7 @@
 				position: relative;
 
 				&:not(:last-child) {
-					// TODO-V11
-					// @if $carbon--theme == $carbon--theme--g90 {
-					// 	border-bottom: 1px solid $layer-01;
-					// } @else if $carbon--theme == $carbon--theme--g100 {
-					// 	border-bottom: 1px solid $border-strong-01;
-					// } @else {
-					// 	border-bottom: 1px solid $layer-accent-01;
-					// }
+					border-bottom: 1px solid $tooltip-line-border;
 				}
 			}
 		}

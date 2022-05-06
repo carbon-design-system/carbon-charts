@@ -1,3 +1,5 @@
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--scatter-stacked {
 	circle.dot.unfilled {
 		fill: $layer-01;

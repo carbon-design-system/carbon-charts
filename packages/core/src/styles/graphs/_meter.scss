@@ -1,18 +1,14 @@
+@use '@carbon/styles/scss/themes';
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--meter {
 	rect.container {
 		fill: $layer-01;
 	}
 
 	line.rangeIndicator {
-		stroke: $carbon--gray-40;
+		stroke: $meter-range-indicator;
 		stroke-width: 1px;
-		@if $carbon--theme ==
-			$carbon--theme--g90 or
-			$carbon--theme ==
-			$carbon--theme--g100
-		{
-			stroke: $carbon--gray-60;
-		}
 	}
 
 	rect.value {
@@ -23,14 +19,7 @@
 		&.status--warning {
 			fill: $support-warning;
 			stroke-width: 1px;
-			stroke: $carbon-dataviz-alert;
-			@if $carbon--theme ==
-				$carbon--theme--g90 or
-				$carbon--theme ==
-				$carbon--theme--g100
-			{
-				stroke: none;
-			}
+			stroke: $alert-stroke;
 		}
 
 		&.status--success {

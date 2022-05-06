@@ -1,17 +1,11 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme";
 
 svg.#{$prefix}--#{$charts-prefix}--color-legend {
-  display: flex;
-  user-select: none;
+	display: flex;
+	user-select: none;
 
-  g.legend-title text {
-    @if theme.matches(themes.$g90, theme.$theme) or
-      theme.matches(themes.$g100, theme.$theme)
-    {
-      color: white;
-    } @else {
-      fill: black;
-    }
-  }
+	g.legend-title text {
+		fill: $layer-inverse-absolute;
+	}
 }

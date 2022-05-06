@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/type' as *;
+
 @import 'carbon-components/scss/globals/scss/vars';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/layout/scss/spacing';
@@ -35,13 +37,13 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--circle__title {
-		@include carbon--type-style($name: productive-heading-01);
+		@include type-style($name: productive-heading-01);
 		padding-top: $spacing-01;
 		margin-bottom: 1px;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--circle__description {
 		padding-bottom: $spacing-01;
-		@include carbon--type-style($name: body-short-01);
+		@include type-style($name: body-short-01);
 	}
 }

@@ -16,41 +16,41 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__inner {
-		stroke-width: carbon--mini-units(0.1875);
+		stroke-width: mini-units(0.1875);
 		stroke: $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__outer {
-		stroke-width: carbon--mini-units(0.3125);
+		stroke-width: mini-units(0.3125);
 		stroke: transparent;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge:hover {
 		.#{$prefix}--#{$charts-prefix}--edge__inner {
-			stroke-width: carbon--mini-units(0.3125);
+			stroke-width: mini-units(0.3125);
 		}
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-sm {
-		stroke-dasharray: carbon--mini-units(0.25) carbon--mini-units(0.5);
+		stroke-dasharray: mini-units(0.25) mini-units(0.5);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-md {
-		stroke-dasharray: carbon--mini-units(0.5) carbon--mini-units(0.5);
+		stroke-dasharray: mini-units(0.5) mini-units(0.5);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-lg {
-		stroke-dasharray: carbon--mini-units(1) carbon--mini-units(0.5);
+		stroke-dasharray: mini-units(1) mini-units(0.5);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--dash-xl {
-		stroke-dasharray: carbon--mini-units(2) carbon--mini-units(0.5);
+		stroke-dasharray: mini-units(2) mini-units(0.5);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge--tunnel {
 		.#{$prefix}--#{$charts-prefix}--edge__outer {
 			stroke: $layer-accent-01;
-			stroke-width: carbon--mini-units(0.75);
+			stroke-width: mini-units(0.75);
 		}
 	}
 
@@ -61,7 +61,7 @@
 
 		.#{$prefix}--#{$charts-prefix}--edge__outer {
 			stroke: $border-inverse;
-			stroke-width: carbon--mini-units(0.5625);
+			stroke-width: mini-units(0.5625);
 		}
 	}
 }

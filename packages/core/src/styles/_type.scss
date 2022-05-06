@@ -1,4 +1,6 @@
-@import './chart-feature-flags';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout' as *;
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	font-family: font-family('sans-condensed');
@@ -7,28 +9,28 @@
 		padding: 0;
 		margin: 0;
 		font-size: 12px;
-		font-weight: carbon--font-weight('regular');
+		font-weight: font-weight('regular');
 		color: $text-secondary;
 	}
 
 	text {
 		font-size: 12px;
-		font-weight: carbon--font-weight('regular');
+		font-weight: font-weight('regular');
 		fill: $text-secondary;
 	}
 
 	g.gauge-numbers text.gauge-value-number {
 		font-family: font-family('sans');
-		font-weight: carbon--font-weight('light');
+		font-weight: font-weight('light');
 	}
 
 	text.meter-title,
 	text.percent-value {
-		font-size: $carbon--base-font-size;
+		font-size: $base-font-size;
 		font-family: font-family('sans');
 	}
 
 	text.meter-title {
-		font-weight: carbon--font-weight('semibold');
+		font-weight: font-weight('semibold');
 	}
 }

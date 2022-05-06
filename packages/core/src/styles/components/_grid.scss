@@ -1,36 +1,30 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme" as *;
 
 .#{$prefix}--#{$charts-prefix}--grid {
-  rect.chart-grid-backdrop {
-    fill: $background;
+	rect.chart-grid-backdrop {
+		fill: $grid-bg;
+	}
 
-    @if matches(themes.$g10, $theme) {
-      fill: $layer-01;
-    } @else if matches(themes.$g90, $theme) {
-      fill: $gray-100;
-    } @else {
-      fill: $background;
-    }
-  }
-  rect.chart-grid-backdrop.stroked {
-    stroke: $layer-accent-01;
-  }
-  rect.stroke {
-    stroke: $layer-accent-01;
-  }
+	rect.chart-grid-backdrop.stroked {
+		stroke: $layer-accent-01;
+	}
 
-  g.x.grid g.tick,
-  g.y.grid g.tick {
-    line {
-      pointer-events: none;
-      stroke-width: 1px;
-      stroke: $layer-accent-01;
-    }
+	rect.stroke {
+		stroke: $layer-accent-01;
+	}
 
-    &.active line {
-      stroke-dasharray: 2px;
-      stroke: $focus;
-    }
-  }
+	g.x.grid g.tick,
+	g.y.grid g.tick {
+		line {
+			pointer-events: none;
+			stroke-width: 1px;
+			stroke: $layer-accent-01;
+		}
+
+		&.active line {
+			stroke-dasharray: 2px;
+			stroke: $focus;
+		}
+	}
 }

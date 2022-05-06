@@ -1,18 +1,7 @@
 .#{$prefix}--#{$charts-prefix}--ruler,
 .#{$prefix}--#{$charts-prefix}--ruler-binned {
 	line.ruler-line {
-		// TODO-V11
-		// @if $background == map-get($carbon--theme--g90, 'ui-background') {
-		// 	stroke: $white-0;
-		// } @else if
-		// 	$background ==
-		// 	map-get($carbon--theme--g100, 'ui-background')
-		// {
-		// 	stroke: $white-0;
-		// } @else {
-		// 	stroke: $black-100;
-		// }
-
+		stroke: $layer-inverse-absolute;
 		stroke-width: 1px;
 		stroke-dasharray: 2;
 		pointer-events: none;

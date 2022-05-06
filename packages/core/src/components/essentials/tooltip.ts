@@ -69,7 +69,7 @@ export class Tooltip extends Component {
 	};
 
 	handleHideTooltip = () => {
-		// this.tooltip.classed('hidden', true).attr('aria-hidden', true);
+		this.tooltip.classed('hidden', true).attr('aria-hidden', true);
 	};
 
 	addTooltipEventListener() {
