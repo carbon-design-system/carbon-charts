@@ -2,6 +2,7 @@ import React from 'react';
 import { PieChart as PC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, PieChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type PieChartProps = ChartConfig<PieChartOptions>;
 
@@ -11,10 +12,12 @@ export default class PieChart extends BaseChart<PieChartOptions> {
 	chart!: PC;
 
 	componentDidMount() {
-		this.chart = new PC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new PC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {

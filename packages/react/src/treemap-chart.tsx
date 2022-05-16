@@ -2,6 +2,7 @@ import React from 'react';
 import { TreemapChart as TC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, TreemapChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type TreemapChartProps = ChartConfig<TreemapChartOptions>;
 
@@ -11,10 +12,12 @@ export default class TreemapChart extends BaseChart<TreemapChartOptions> {
 	chart!: TC;
 
 	componentDidMount() {
-		this.chart = new TC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new TC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {
