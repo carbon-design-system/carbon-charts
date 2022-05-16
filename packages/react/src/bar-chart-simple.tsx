@@ -2,6 +2,7 @@ import React from 'react';
 import { SimpleBarChart as SBC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, BarChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type SimpleBarChartProps = ChartConfig<BarChartOptions>;
 
@@ -11,10 +12,12 @@ export default class SimpleBarChart extends BaseChart<BarChartOptions> {
 	chart!: SBC;
 
 	componentDidMount() {
-		this.chart = new SBC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new SBC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {

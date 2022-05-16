@@ -2,6 +2,7 @@ import React from 'react';
 import { GroupedBarChart as GBC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, BarChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type GroupedBarChartProps = ChartConfig<BarChartOptions>;
 
@@ -11,10 +12,12 @@ export default class GroupedBarChart extends BaseChart<BarChartOptions> {
 	chart!: GBC;
 
 	componentDidMount() {
-		this.chart = new GBC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new GBC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {
