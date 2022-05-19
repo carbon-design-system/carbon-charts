@@ -141,6 +141,7 @@
   $support-info-inverse: map-get($theme, 'support-info-inverse') !global;
   $overlay: map-get($theme, 'overlay') !global;
   $toggle-off: map-get($theme, 'toggle-off') !global;
+  $shadow: map-get($theme, 'shadow') !global;
   $button-primary: map-get($theme, 'button-primary') !global;
   $button-secondary: map-get($theme, 'button-secondary') !global;
   $button-tertiary: map-get($theme, 'button-tertiary') !global;
@@ -175,8 +176,6 @@
   $layer-selected-hover: map-get($theme, 'layer-selected-hover') !global;
   $layer-selected-inverse: map-get($theme, 'layer-selected-inverse') !global;
   $border-subtle-selected: map-get($theme, 'border-subtle-selected') !global;
-  $layer-disabled: map-get($theme, 'layer-disabled') !global;
-  $field-disabled: map-get($theme, 'field-disabled') !global;
   $border-disabled: map-get($theme, 'border-disabled') !global;
   $text-disabled: map-get($theme, 'text-disabled') !global;
   $button-disabled: map-get($theme, 'button-disabled') !global;
@@ -226,6 +225,30 @@
   $display-02: map-get($theme, 'display-02') !global;
   $display-03: map-get($theme, 'display-03') !global;
   $display-04: map-get($theme, 'display-04') !global;
+  $legal-01: map-get($theme, 'legal-01') !global;
+  $legal-02: map-get($theme, 'legal-02') !global;
+  $body-compact-01: map-get($theme, 'body-compact-01') !global;
+  $body-compact-02: map-get($theme, 'body-compact-02') !global;
+  $body-01: map-get($theme, 'body-01') !global;
+  $body-02: map-get($theme, 'body-02') !global;
+  $heading-compact-01: map-get($theme, 'heading-compact-01') !global;
+  $heading-compact-02: map-get($theme, 'heading-compact-02') !global;
+  $heading-03: map-get($theme, 'heading-03') !global;
+  $heading-04: map-get($theme, 'heading-04') !global;
+  $heading-05: map-get($theme, 'heading-05') !global;
+  $heading-06: map-get($theme, 'heading-06') !global;
+  $heading-07: map-get($theme, 'heading-07') !global;
+  $fluid-heading-03: map-get($theme, 'fluid-heading-03') !global;
+  $fluid-heading-04: map-get($theme, 'fluid-heading-04') !global;
+  $fluid-heading-05: map-get($theme, 'fluid-heading-05') !global;
+  $fluid-heading-06: map-get($theme, 'fluid-heading-06') !global;
+  $fluid-paragraph-01: map-get($theme, 'fluid-paragraph-01') !global;
+  $fluid-quotation-01: map-get($theme, 'fluid-quotation-01') !global;
+  $fluid-quotation-02: map-get($theme, 'fluid-quotation-02') !global;
+  $fluid-display-01: map-get($theme, 'fluid-display-01') !global;
+  $fluid-display-02: map-get($theme, 'fluid-display-02') !global;
+  $fluid-display-03: map-get($theme, 'fluid-display-03') !global;
+  $fluid-display-04: map-get($theme, 'fluid-display-04') !global;
   $spacing-01: map-get($theme, 'spacing-01') !global;
   $spacing-02: map-get($theme, 'spacing-02') !global;
   $spacing-03: map-get($theme, 'spacing-03') !global;
@@ -333,8 +356,6 @@
     $layer-selected-hover: $hover-selected-ui !global;
     $layer-selected-inverse: $ui-05 !global;
     $border-subtle-selected: $active-ui !global;
-    $layer-disabled: $disabled-01 !global;
-    $field-disabled: $disabled-01 !global;
     $border-disabled: $disabled-01 !global;
     $text-disabled: $disabled-02 !global;
     $button-disabled: $disabled-02 !global;
@@ -760,6 +781,10 @@
       --#{$custom-property-prefix}-toggle-off,
       map-get($theme, 'toggle-off')
     ) !global;
+    $shadow: var(
+      --#{$custom-property-prefix}-shadow,
+      map-get($theme, 'shadow')
+    ) !global;
     $button-primary: var(
       --#{$custom-property-prefix}-button-primary,
       map-get($theme, 'button-primary')
@@ -871,14 +896,6 @@
     $border-subtle-selected: var(
       --#{$custom-property-prefix}-border-subtle-selected,
       map-get($theme, 'border-subtle-selected')
-    ) !global;
-    $layer-disabled: var(
-      --#{$custom-property-prefix}-layer-disabled,
-      map-get($theme, 'layer-disabled')
-    ) !global;
-    $field-disabled: var(
-      --#{$custom-property-prefix}-field-disabled,
-      map-get($theme, 'field-disabled')
     ) !global;
     $border-disabled: var(
       --#{$custom-property-prefix}-border-disabled,
@@ -2104,6 +2121,10 @@
       @include custom-property('toggle-off', map-get($theme, 'toggle-off'));
     }
 
+    @if should-emit($theme, $parent-carbon-theme, 'shadow', $emit-difference) {
+      @include custom-property('shadow', map-get($theme, 'shadow'));
+    }
+
     @if should-emit(
       $theme,
       $parent-carbon-theme,
@@ -2453,32 +2474,6 @@
       @include custom-property(
         'border-subtle-selected',
         map-get($theme, 'border-subtle-selected')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'layer-disabled',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'layer-disabled',
-        map-get($theme, 'layer-disabled')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'field-disabled',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'field-disabled',
-        map-get($theme, 'field-disabled')
       );
     }
 
@@ -3003,6 +2998,269 @@
     )
     {
       @include custom-property('display-04', map-get($theme, 'display-04'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'legal-01', $emit-difference)
+    {
+      @include custom-property('legal-01', map-get($theme, 'legal-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'legal-02', $emit-difference)
+    {
+      @include custom-property('legal-02', map-get($theme, 'legal-02'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-compact-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'body-compact-01',
+        map-get($theme, 'body-compact-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'body-compact-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'body-compact-02',
+        map-get($theme, 'body-compact-02')
+      );
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'body-01', $emit-difference) {
+      @include custom-property('body-01', map-get($theme, 'body-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'body-02', $emit-difference) {
+      @include custom-property('body-02', map-get($theme, 'body-02'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-compact-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'heading-compact-01',
+        map-get($theme, 'heading-compact-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-compact-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'heading-compact-02',
+        map-get($theme, 'heading-compact-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property('heading-03', map-get($theme, 'heading-03'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property('heading-04', map-get($theme, 'heading-04'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property('heading-05', map-get($theme, 'heading-05'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property('heading-06', map-get($theme, 'heading-06'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'heading-07',
+      $emit-difference
+    )
+    {
+      @include custom-property('heading-07', map-get($theme, 'heading-07'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-heading-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-heading-03',
+        map-get($theme, 'fluid-heading-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-heading-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-heading-04',
+        map-get($theme, 'fluid-heading-04')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-heading-05',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-heading-05',
+        map-get($theme, 'fluid-heading-05')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-heading-06',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-heading-06',
+        map-get($theme, 'fluid-heading-06')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-paragraph-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-paragraph-01',
+        map-get($theme, 'fluid-paragraph-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-quotation-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-quotation-01',
+        map-get($theme, 'fluid-quotation-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-quotation-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-quotation-02',
+        map-get($theme, 'fluid-quotation-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-display-01',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-display-01',
+        map-get($theme, 'fluid-display-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-display-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-display-02',
+        map-get($theme, 'fluid-display-02')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-display-03',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-display-03',
+        map-get($theme, 'fluid-display-03')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'fluid-display-04',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'fluid-display-04',
+        map-get($theme, 'fluid-display-04')
+      );
     }
 
     @if should-emit(

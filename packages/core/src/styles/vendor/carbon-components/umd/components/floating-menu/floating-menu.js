@@ -1,17 +1,11 @@
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 (function (global, factory) {
@@ -32,7 +26,7 @@ function _typeof(obj) {
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
-  _exports.default = _exports.getFloatingPosition = _exports.DIRECTION_BOTTOM = _exports.DIRECTION_RIGHT = _exports.DIRECTION_TOP = _exports.DIRECTION_LEFT = void 0;
+  _exports.getFloatingPosition = _exports.default = _exports.DIRECTION_TOP = _exports.DIRECTION_RIGHT = _exports.DIRECTION_LEFT = _exports.DIRECTION_BOTTOM = void 0;
   _warning = _interopRequireDefault(_warning);
   _mixin2 = _interopRequireDefault(_mixin2);
   _settings = _interopRequireDefault(_settings);
@@ -69,10 +63,13 @@ function _typeof(obj) {
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
 
-  function _get(target, property, receiver) {
+  function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get;
     } else {
@@ -83,14 +80,14 @@ function _typeof(obj) {
         var desc = Object.getOwnPropertyDescriptor(base, property);
 
         if (desc.get) {
-          return desc.get.call(receiver);
+          return desc.get.call(arguments.length < 3 ? target : receiver);
         }
 
         return desc.value;
       };
     }
 
-    return _get(target, property, receiver || target);
+    return _get.apply(this, arguments);
   }
 
   function _superPropBase(object, property) {
@@ -113,6 +110,9 @@ function _typeof(obj) {
         writable: true,
         configurable: true
       }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
@@ -148,6 +148,8 @@ function _typeof(obj) {
   function _possibleConstructorReturn(self, call) {
     if (call && (_typeof(call) === "object" || typeof call === "function")) {
       return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
     }
 
     return _assertThisInitialized(self);

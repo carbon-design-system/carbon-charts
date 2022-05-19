@@ -16,16 +16,22 @@
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
+  Object.defineProperty(_exports, "Accordion", {
+    enumerable: true,
+    get: function get() {
+      return _accordion.default;
+    }
+  });
   Object.defineProperty(_exports, "Checkbox", {
     enumerable: true,
     get: function get() {
       return _checkbox.default;
     }
   });
-  Object.defineProperty(_exports, "FileUploader", {
+  Object.defineProperty(_exports, "CodeSnippet", {
     enumerable: true,
     get: function get() {
-      return _fileUploader.default;
+      return _codeSnippet.default;
     }
   });
   Object.defineProperty(_exports, "ContentSwitcher", {
@@ -34,52 +40,10 @@
       return _contentSwitcher.default;
     }
   });
-  Object.defineProperty(_exports, "Tab", {
+  Object.defineProperty(_exports, "CopyButton", {
     enumerable: true,
     get: function get() {
-      return _tabs.default;
-    }
-  });
-  Object.defineProperty(_exports, "OverflowMenu", {
-    enumerable: true,
-    get: function get() {
-      return _overflowMenu.default;
-    }
-  });
-  Object.defineProperty(_exports, "Modal", {
-    enumerable: true,
-    get: function get() {
-      return _modal.default;
-    }
-  });
-  Object.defineProperty(_exports, "Loading", {
-    enumerable: true,
-    get: function get() {
-      return _loading.default;
-    }
-  });
-  Object.defineProperty(_exports, "InlineLoading", {
-    enumerable: true,
-    get: function get() {
-      return _inlineLoading.default;
-    }
-  });
-  Object.defineProperty(_exports, "Dropdown", {
-    enumerable: true,
-    get: function get() {
-      return _dropdown.default;
-    }
-  });
-  Object.defineProperty(_exports, "NumberInput", {
-    enumerable: true,
-    get: function get() {
-      return _numberInput.default;
-    }
-  });
-  Object.defineProperty(_exports, "DataTableV2", {
-    enumerable: true,
-    get: function get() {
-      return _dataTableV.default;
+      return _copyButton.default;
     }
   });
   Object.defineProperty(_exports, "DataTable", {
@@ -88,10 +52,88 @@
       return _dataTable.default;
     }
   });
+  Object.defineProperty(_exports, "DataTableV2", {
+    enumerable: true,
+    get: function get() {
+      return _dataTableV.default;
+    }
+  });
   Object.defineProperty(_exports, "DatePicker", {
     enumerable: true,
     get: function get() {
       return _datePicker.default;
+    }
+  });
+  Object.defineProperty(_exports, "Dropdown", {
+    enumerable: true,
+    get: function get() {
+      return _dropdown.default;
+    }
+  });
+  Object.defineProperty(_exports, "FileUploader", {
+    enumerable: true,
+    get: function get() {
+      return _fileUploader.default;
+    }
+  });
+  Object.defineProperty(_exports, "FloatingMenu", {
+    enumerable: true,
+    get: function get() {
+      return _floatingMenu.default;
+    }
+  });
+  Object.defineProperty(_exports, "HeaderNav", {
+    enumerable: true,
+    get: function get() {
+      return _headerNav.default;
+    }
+  });
+  Object.defineProperty(_exports, "HeaderSubmenu", {
+    enumerable: true,
+    get: function get() {
+      return _headerSubmenu.default;
+    }
+  });
+  Object.defineProperty(_exports, "InlineLoading", {
+    enumerable: true,
+    get: function get() {
+      return _inlineLoading.default;
+    }
+  });
+  Object.defineProperty(_exports, "Loading", {
+    enumerable: true,
+    get: function get() {
+      return _loading.default;
+    }
+  });
+  Object.defineProperty(_exports, "Modal", {
+    enumerable: true,
+    get: function get() {
+      return _modal.default;
+    }
+  });
+  Object.defineProperty(_exports, "NavigationMenu", {
+    enumerable: true,
+    get: function get() {
+      return _navigationMenu.default;
+    }
+  });
+  Object.defineProperty(_exports, "Notification", {
+    enumerable: true,
+    get: function get() {
+      return _notification.default;
+    }
+  });
+  Object.defineProperty(_exports, "NumberInput", {
+    enumerable: true,
+    get: function get() {
+      return _numberInput.default;
+    }
+  });
+  Object.defineProperty(_exports, "OverflowMenu", {
+    enumerable: true,
+    get: function get() {
+      return _overflowMenu.default;
     }
   });
   Object.defineProperty(_exports, "Pagination", {
@@ -100,28 +142,64 @@
       return _pagination.default;
     }
   });
+  Object.defineProperty(_exports, "PaginationNav", {
+    enumerable: true,
+    get: function get() {
+      return _paginationNav.default;
+    }
+  });
+  Object.defineProperty(_exports, "ProductSwitcher", {
+    enumerable: true,
+    get: function get() {
+      return _productSwitcher.default;
+    }
+  });
+  Object.defineProperty(_exports, "ProgressIndicator", {
+    enumerable: true,
+    get: function get() {
+      return _progressIndicator.default;
+    }
+  });
   Object.defineProperty(_exports, "Search", {
     enumerable: true,
     get: function get() {
       return _search.default;
     }
   });
-  Object.defineProperty(_exports, "Accordion", {
+  Object.defineProperty(_exports, "SideNav", {
     enumerable: true,
     get: function get() {
-      return _accordion.default;
+      return _sideNav.default;
     }
   });
-  Object.defineProperty(_exports, "CopyButton", {
+  Object.defineProperty(_exports, "Slider", {
     enumerable: true,
     get: function get() {
-      return _copyButton.default;
+      return _slider.default;
     }
   });
-  Object.defineProperty(_exports, "Notification", {
+  Object.defineProperty(_exports, "StructuredList", {
     enumerable: true,
     get: function get() {
-      return _notification.default;
+      return _structuredList.default;
+    }
+  });
+  Object.defineProperty(_exports, "Tab", {
+    enumerable: true,
+    get: function get() {
+      return _tabs.default;
+    }
+  });
+  Object.defineProperty(_exports, "TextInput", {
+    enumerable: true,
+    get: function get() {
+      return _textInput.default;
+    }
+  });
+  Object.defineProperty(_exports, "Tile", {
+    enumerable: true,
+    get: function get() {
+      return _tile.default;
     }
   });
   Object.defineProperty(_exports, "Toolbar", {
@@ -140,84 +218,6 @@
     enumerable: true,
     get: function get() {
       return _tooltipSimple.default;
-    }
-  });
-  Object.defineProperty(_exports, "ProgressIndicator", {
-    enumerable: true,
-    get: function get() {
-      return _progressIndicator.default;
-    }
-  });
-  Object.defineProperty(_exports, "FloatingMenu", {
-    enumerable: true,
-    get: function get() {
-      return _floatingMenu.default;
-    }
-  });
-  Object.defineProperty(_exports, "StructuredList", {
-    enumerable: true,
-    get: function get() {
-      return _structuredList.default;
-    }
-  });
-  Object.defineProperty(_exports, "Slider", {
-    enumerable: true,
-    get: function get() {
-      return _slider.default;
-    }
-  });
-  Object.defineProperty(_exports, "Tile", {
-    enumerable: true,
-    get: function get() {
-      return _tile.default;
-    }
-  });
-  Object.defineProperty(_exports, "CodeSnippet", {
-    enumerable: true,
-    get: function get() {
-      return _codeSnippet.default;
-    }
-  });
-  Object.defineProperty(_exports, "TextInput", {
-    enumerable: true,
-    get: function get() {
-      return _textInput.default;
-    }
-  });
-  Object.defineProperty(_exports, "SideNav", {
-    enumerable: true,
-    get: function get() {
-      return _sideNav.default;
-    }
-  });
-  Object.defineProperty(_exports, "HeaderSubmenu", {
-    enumerable: true,
-    get: function get() {
-      return _headerSubmenu.default;
-    }
-  });
-  Object.defineProperty(_exports, "HeaderNav", {
-    enumerable: true,
-    get: function get() {
-      return _headerNav.default;
-    }
-  });
-  Object.defineProperty(_exports, "NavigationMenu", {
-    enumerable: true,
-    get: function get() {
-      return _navigationMenu.default;
-    }
-  });
-  Object.defineProperty(_exports, "ProductSwitcher", {
-    enumerable: true,
-    get: function get() {
-      return _productSwitcher.default;
-    }
-  });
-  Object.defineProperty(_exports, "PaginationNav", {
-    enumerable: true,
-    get: function get() {
-      return _paginationNav.default;
     }
   });
   _checkbox = _interopRequireDefault(_checkbox);
