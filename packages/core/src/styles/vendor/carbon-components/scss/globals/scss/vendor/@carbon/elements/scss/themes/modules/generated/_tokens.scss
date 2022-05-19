@@ -10,12 +10,9 @@
 @use '../config';
 @use '../theme';
 
-/// Specify if a fallback value should be provided for the CSS Custom Property
-$use-fallback-value: false !default;
-
 /// Internal helper for generating CSS Custom Properties
 @function _get($token) {
-  @if $use-fallback-value == false {
+  @if config.$use-fallback-value == false {
     @return var(--#{config.$prefix}-#{$token});
   } @else {
     @return var(--#{config.$prefix}-#{$token}, #{theme.get($token)});
@@ -91,9 +88,6 @@ $layer-selected-03: _get('layer-selected-03') !default;
 /// The CSS Custom Property for the `layer-selected-hover-03` token
 $layer-selected-hover-03: _get('layer-selected-hover-03') !default;
 
-/// The CSS Custom Property for the `layer-disabled` token
-$layer-disabled: _get('layer-disabled') !default;
-
 /// The CSS Custom Property for the `layer-selected-inverse` token
 $layer-selected-inverse: _get('layer-selected-inverse') !default;
 
@@ -144,9 +138,6 @@ $field-03: _get('field-03') !default;
 
 /// The CSS Custom Property for the `field-hover-03` token
 $field-hover-03: _get('field-hover-03') !default;
-
-/// The CSS Custom Property for the `field-disabled` token
-$field-disabled: _get('field-disabled') !default;
 
 /// The CSS Custom Property for the `interactive` token
 $interactive: _get('interactive') !default;
@@ -226,11 +217,17 @@ $link-primary-hover: _get('link-primary-hover') !default;
 /// The CSS Custom Property for the `link-secondary` token
 $link-secondary: _get('link-secondary') !default;
 
+/// The CSS Custom Property for the `link-visited` token
+$link-visited: _get('link-visited') !default;
+
 /// The CSS Custom Property for the `link-inverse` token
 $link-inverse: _get('link-inverse') !default;
 
-/// The CSS Custom Property for the `link-visited` token
-$link-visited: _get('link-visited') !default;
+/// The CSS Custom Property for the `link-inverse-active` token
+$link-inverse-active: _get('link-inverse-active') !default;
+
+/// The CSS Custom Property for the `link-inverse-hover` token
+$link-inverse-hover: _get('link-inverse-hover') !default;
 
 /// The CSS Custom Property for the `icon-primary` token
 $icon-primary: _get('icon-primary') !default;
@@ -291,6 +288,9 @@ $overlay: _get('overlay') !default;
 
 /// The CSS Custom Property for the `toggle-off` token
 $toggle-off: _get('toggle-off') !default;
+
+/// The CSS Custom Property for the `shadow` token
+$shadow: _get('shadow') !default;
 
 /// The CSS Custom Property for the `focus` token
 $focus: _get('focus') !default;

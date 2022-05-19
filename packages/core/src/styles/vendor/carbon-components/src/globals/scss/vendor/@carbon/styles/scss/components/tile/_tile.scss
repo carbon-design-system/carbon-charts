@@ -40,7 +40,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--tile--clickable,
@@ -75,7 +75,7 @@
 
   .#{$prefix}--tile--clickable {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
     text-decoration: none;
@@ -93,7 +93,7 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
   }
 
@@ -144,6 +144,10 @@
       transform-origin: center;
       transition: $duration-fast-02 motion(standard, productive);
 
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
         screen and (prefers-contrast) {
@@ -162,6 +166,7 @@
   }
 
   .#{$prefix}--tile--expandable {
+    position: relative;
     overflow: hidden;
     width: 100%;
     border: 0;
@@ -249,7 +254,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {

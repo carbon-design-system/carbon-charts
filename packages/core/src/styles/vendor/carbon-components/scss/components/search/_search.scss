@@ -62,7 +62,7 @@
 
   .#{$prefix}--search-input[disabled] {
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $disabled;
     cursor: not-allowed;
 
@@ -72,6 +72,10 @@
   }
 
   .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-close::before {
     background: $field-02;
   }
 
@@ -143,6 +147,10 @@
       content: '';
       transition: background-color $duration--fast-02
         motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &:hover {

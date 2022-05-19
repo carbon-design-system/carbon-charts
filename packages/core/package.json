@@ -51,7 +51,7 @@
 		"@carbon/colors": "10.29.0",
 		"@carbon/telemetry": "0.1.0",
 		"@carbon/utils-position": "1.1.1",
-		"carbon-components": "10.40.0",
+		"carbon-components": "10.56.0",
 		"d3-cloud": "1.2.5",
 		"d3-sankey": "0.12.3",
 		"date-fns": "2.8.1",

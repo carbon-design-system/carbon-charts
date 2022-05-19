@@ -23,11 +23,10 @@
   }
 
   .#{$prefix}--tile {
-    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    padding: $carbon--spacing-05;
+    padding: $spacing-05;
     background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
@@ -102,6 +101,7 @@
   }
 
   .#{$prefix}--tile--selectable {
+    position: relative;
     padding-right: $carbon--spacing-09;
     border: 1px solid transparent;
   }
@@ -148,6 +148,10 @@
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
 
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
         screen and (prefers-contrast) {
@@ -166,6 +170,7 @@
   }
 
   .#{$prefix}--tile--expandable {
+    position: relative;
     overflow: hidden;
     width: 100%;
     border: 0;
@@ -229,22 +234,6 @@
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
-  }
-
-  // Fix double border
-  .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-01;
-  }
-
-  .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
-    + .#{$prefix}--tile-input--checked
-    + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
-  }
-
-  .#{$prefix}--tile-input--checked:first-of-type
-    + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile-content {

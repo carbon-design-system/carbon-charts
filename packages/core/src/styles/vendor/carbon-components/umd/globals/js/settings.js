@@ -55,6 +55,5 @@
     selectorFocusable: "\n    a[href], area[href], input:not([disabled]),\n    button:not([disabled]),select:not([disabled]),\n    textarea:not([disabled]),\n    iframe, object, embed, *[tabindex], *[contenteditable=true]\n  "
   };
   var settings_1 = settings;
-  var _default = settings_1;
-  _exports.default = _default;
+  _exports.default = settings_1;
 });

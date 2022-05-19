@@ -17,6 +17,7 @@
     value: true
   });
   _exports.gridColumns16 = _exports.grid = _exports.default = void 0;
+  var featureFlags = {};
   /**
    * Copyright IBM Corp. 2016, 2018
    *
@@ -78,14 +79,9 @@
    * }
    */
 
-  var grid = true;
+  _exports.default = featureFlags;
+  var grid = featureFlags.grid = true;
   _exports.grid = grid;
-  var gridColumns16 = false;
+  var gridColumns16 = featureFlags.gridColumns16 = false;
   _exports.gridColumns16 = gridColumns16;
-  var featureFlags = {
-    grid: grid,
-    gridColumns16: gridColumns16
-  };
-  var _default = featureFlags;
-  _exports.default = _default;
 });

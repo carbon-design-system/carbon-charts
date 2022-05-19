@@ -1,17 +1,11 @@
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 (function (global, factory) {
@@ -66,6 +60,9 @@ function _typeof(obj) {
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
 
@@ -80,6 +77,9 @@ function _typeof(obj) {
         writable: true,
         configurable: true
       }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
@@ -115,6 +115,8 @@ function _typeof(obj) {
   function _possibleConstructorReturn(self, call) {
     if (call && (_typeof(call) === "object" || typeof call === "function")) {
       return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
     }
 
     return _assertThisInitialized(self);
@@ -186,7 +188,7 @@ function _typeof(obj) {
        *
        *  DEPRECATE in v8
        *
-       *  Swapping to a button elemenet instead of a div
+       *  Swapping to a button element instead of a div
        *  automatically maps click events to keypress as well
        *  This event listener now is only added if user is using
        *  the older markup
@@ -197,7 +199,7 @@ function _typeof(obj) {
        *
        *  DEPRECATE in v8
        *
-       *  Swapping to a button elemenet instead of a div
+       *  Swapping to a button element instead of a div
        *  automatically maps click events to keypress as well
        *  This event listener now is only added if user is using
        *  the older markup
@@ -248,7 +250,7 @@ function _typeof(obj) {
        * The component options.
        * If `options` is specified in the constructor,
        * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-       * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+       * properties in this object are overridden for the instance being create and how {@linkcode NumberInput.init .init()} works.
        * @property {string} selectorInit The CSS selector to find accordion UIs.
        */
 

@@ -17,7 +17,7 @@
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: inline;
 
@@ -97,6 +97,10 @@
       content: '';
       opacity: 0;
       transition: opacity $duration-fast-01 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 

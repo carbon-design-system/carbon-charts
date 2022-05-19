@@ -1,3 +1,4 @@
+var featureFlags = {};
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -58,11 +59,7 @@
  *   }
  * }
  */
-var grid = true;
-var gridColumns16 = false;
-var featureFlags = {
-  grid: grid,
-  gridColumns16: gridColumns16
-};
-export default featureFlags;
-export { grid, gridColumns16 };
+
+var grid = featureFlags.grid = true;
+var gridColumns16 = featureFlags.gridColumns16 = false;
+export { featureFlags as default, grid, gridColumns16 };

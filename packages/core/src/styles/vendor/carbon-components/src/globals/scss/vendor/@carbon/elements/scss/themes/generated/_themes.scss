@@ -110,6 +110,7 @@ $carbon--theme--white: (
   support-info-inverse: #4589ff,
   overlay: rgba(22, 22, 22, 0.5),
   toggle-off: #8d8d8d,
+  shadow: rgba(0, 0, 0, 0.3),
   button-primary: #0f62fe,
   button-secondary: #393939,
   button-tertiary: #0f62fe,
@@ -138,8 +139,6 @@ $carbon--theme--white: (
   layer-selected-hover: #cacaca,
   layer-selected-inverse: #161616,
   border-subtle-selected: #c6c6c6,
-  layer-disabled: #f4f4f4,
-  field-disabled: #f4f4f4,
   border-disabled: #f4f4f4,
   text-disabled: #c6c6c6,
   button-disabled: #c6c6c6,
@@ -158,47 +157,47 @@ $carbon--theme--white: (
   caption-01: (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1.34,
+    line-height: 1.33333,
     letter-spacing: 0.32px,
   ),
   caption-02: (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.29,
+    line-height: 1.28572,
     letter-spacing: 0.32px,
   ),
   label-01: (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1.34,
+    line-height: 1.33333,
     letter-spacing: 0.32px,
   ),
   label-02: (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.29,
-    letter-spacing: 0.32px,
+    line-height: 1.28572,
+    letter-spacing: 0.16px,
   ),
   helper-text-01: (
     font-size: 0.75rem,
-    line-height: 1.34,
+    line-height: 1.33333,
     letter-spacing: 0.32px,
   ),
   helper-text-02: (
     font-size: 0.875rem,
-    line-height: 1.29,
-    letter-spacing: 0.32px,
+    line-height: 1.28572,
+    letter-spacing: 0.16px,
   ),
   body-short-01: (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.29,
+    line-height: 1.28572,
     letter-spacing: 0.16px,
   ),
   body-long-01: (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.43,
+    line-height: 1.42857,
     letter-spacing: 0.16px,
   ),
   body-short-02: (
@@ -220,7 +219,7 @@ $carbon--theme--white: (
       ),
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1.34,
+    line-height: 1.33333,
     letter-spacing: 0.32px,
   ),
   code-02: (
@@ -230,25 +229,25 @@ $carbon--theme--white: (
       ),
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.43,
+    line-height: 1.42857,
     letter-spacing: 0.32px,
   ),
   heading-01: (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.29,
+    line-height: 1.42857,
     letter-spacing: 0.16px,
   ),
   productive-heading-01: (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.29,
+    line-height: 1.28572,
     letter-spacing: 0.16px,
   ),
   heading-02: (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375,
+    line-height: 1.5,
     letter-spacing: 0,
   ),
   productive-heading-02: (
@@ -266,7 +265,7 @@ $carbon--theme--white: (
   productive-heading-04: (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 1.29,
+    line-height: 1.28572,
     letter-spacing: 0,
   ),
   productive-heading-05: (
@@ -284,7 +283,7 @@ $carbon--theme--white: (
   productive-heading-07: (
     font-size: 3.375rem,
     font-weight: 300,
-    line-height: 1.19,
+    line-height: 1.199,
     letter-spacing: 0,
   ),
   expressive-heading-01: (
@@ -318,7 +317,7 @@ $carbon--theme--white: (
   expressive-heading-04: (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 1.29,
+    line-height: 1.28572,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
@@ -400,7 +399,7 @@ $carbon--theme--white: (
     breakpoints: (
       lg: (
         font-size: 1.75rem,
-        line-height: 1.29,
+        line-height: 1.28572,
       ),
       max: (
         font-size: 2rem,
@@ -409,6 +408,7 @@ $carbon--theme--white: (
     ),
   ),
   quotation-01: (
+    font-family: unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
     font-size: 1.25rem,
     font-weight: 400,
     line-height: 1.3,
@@ -428,7 +428,7 @@ $carbon--theme--white: (
       xlg: (
         font-size: 1.75rem,
         font-weight: 400,
-        line-height: 1.29,
+        line-height: 1.28572,
         letter-spacing: 0,
       ),
       max: (
@@ -440,6 +440,7 @@ $carbon--theme--white: (
     ),
   ),
   quotation-02: (
+    font-family: unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
     font-size: 2rem,
     font-weight: 300,
     line-height: 1.25,
@@ -559,6 +560,346 @@ $carbon--theme--white: (
       ),
     ),
   ),
+  legal-01: (
+    font-size: 0.75rem,
+    font-weight: 400,
+    line-height: 1.33333,
+    letter-spacing: 0.32px,
+  ),
+  legal-02: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.28572,
+    letter-spacing: 0.16px,
+  ),
+  body-compact-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.28572,
+    letter-spacing: 0.16px,
+  ),
+  body-compact-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.375,
+    letter-spacing: 0,
+  ),
+  body-01: (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.42857,
+    letter-spacing: 0.16px,
+  ),
+  body-02: (
+    font-size: 1rem,
+    font-weight: 400,
+    line-height: 1.5,
+    letter-spacing: 0,
+  ),
+  heading-compact-01: (
+    font-size: 0.875rem,
+    font-weight: 600,
+    line-height: 1.28572,
+    letter-spacing: 0.16px,
+  ),
+  heading-compact-02: (
+    font-size: 1rem,
+    font-weight: 600,
+    line-height: 1.375,
+    letter-spacing: 0,
+  ),
+  heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.4,
+    letter-spacing: 0,
+  ),
+  heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 1.28572,
+    letter-spacing: 0,
+  ),
+  heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 1.25,
+    letter-spacing: 0,
+  ),
+  heading-06: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 1.199,
+    letter-spacing: 0,
+  ),
+  heading-07: (
+    font-size: 3.375rem,
+    font-weight: 300,
+    line-height: 1.199,
+    letter-spacing: 0,
+  ),
+  fluid-heading-03: (
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.4,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.25rem,
+        line-height: 1.25,
+      ),
+      max: (
+        font-size: 1.5rem,
+        line-height: 1.334,
+      ),
+    ),
+  ),
+  fluid-heading-04: (
+    font-size: 1.75rem,
+    font-weight: 400,
+    line-height: 1.28572,
+    letter-spacing: 0,
+    breakpoints: (
+      xlg: (
+        font-size: 1.75rem,
+        line-height: 1.25,
+      ),
+      max: (
+        font-size: 2rem,
+      ),
+    ),
+  ),
+  fluid-heading-05: (
+    font-size: 2rem,
+    font-weight: 400,
+    line-height: 1.25,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 300,
+        line-height: 1.22,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 300,
+        line-height: 1.19,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 300,
+        line-height: 1.17,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 300,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  fluid-heading-06: (
+    font-size: 2rem,
+    font-weight: 600,
+    line-height: 1.25,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        font-weight: 600,
+        line-height: 1.22,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        font-weight: 600,
+        line-height: 1.19,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 3rem,
+        font-weight: 600,
+        line-height: 1.17,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 3.75rem,
+        font-weight: 600,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  fluid-paragraph-01: (
+    font-size: 1.5rem,
+    font-weight: 300,
+    line-height: 1.334,
+    letter-spacing: 0,
+    breakpoints: (
+      lg: (
+        font-size: 1.75rem,
+        line-height: 1.28572,
+      ),
+      max: (
+        font-size: 2rem,
+        line-height: 1.25,
+      ),
+    ),
+  ),
+  fluid-quotation-01: (
+    font-family: unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+    font-size: 1.25rem,
+    font-weight: 400,
+    line-height: 1.3,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 1.25rem,
+        font-weight: 400,
+        letter-spacing: 0,
+      ),
+      lg: (
+        font-size: 1.5rem,
+        font-weight: 400,
+        line-height: 1.334,
+        letter-spacing: 0,
+      ),
+      xlg: (
+        font-size: 1.75rem,
+        font-weight: 400,
+        line-height: 1.28572,
+        letter-spacing: 0,
+      ),
+      max: (
+        font-size: 2rem,
+        font-weight: 400,
+        line-height: 1.25,
+        letter-spacing: 0,
+      ),
+    ),
+  ),
+  fluid-quotation-02: (
+    font-family: unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+    font-size: 2rem,
+    font-weight: 300,
+    line-height: 1.25,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.25rem,
+        line-height: 1.22,
+      ),
+      lg: (
+        font-size: 2.625rem,
+        line-height: 1.19,
+      ),
+      xlg: (
+        font-size: 3rem,
+        line-height: 1.17,
+      ),
+      max: (
+        font-size: 3.75rem,
+      ),
+    ),
+  ),
+  fluid-display-01: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 1.19,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 1.17,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 1.13,
+      ),
+    ),
+  ),
+  fluid-display-02: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 1.19,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 2.625rem,
+      ),
+      lg: (
+        font-size: 3.375rem,
+      ),
+      xlg: (
+        font-size: 3.75rem,
+        line-height: 1.16,
+      ),
+      max: (
+        font-size: 4.75rem,
+        line-height: 1.13,
+      ),
+    ),
+  ),
+  fluid-display-03: (
+    font-size: 2.625rem,
+    font-weight: 300,
+    line-height: 1.19,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 1.15,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 1.11,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 1.07,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 1.05,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
+  fluid-display-04: (
+    font-size: 2.625rem,
+    font-weight: 600,
+    line-height: 1.19,
+    letter-spacing: 0,
+    breakpoints: (
+      md: (
+        font-size: 4.25rem,
+        line-height: 1.15,
+      ),
+      lg: (
+        font-size: 5.75rem,
+        line-height: 1.11,
+        letter-spacing: -0.64px,
+      ),
+      xlg: (
+        font-size: 7.625rem,
+        line-height: 1.07,
+        letter-spacing: -0.64px,
+      ),
+      max: (
+        font-size: 9.75rem,
+        line-height: 1.05,
+        letter-spacing: -0.96px,
+      ),
+    ),
+  ),
   spacing-01: 0.125rem,
   spacing-02: 0.25rem,
   spacing-03: 0.5rem,
@@ -614,8 +955,6 @@ $carbon--theme--g10: map-merge(
     background: #f4f4f4,
     layer: #ffffff,
     field: #ffffff,
-    layer-disabled: #ffffff,
-    field-disabled: #ffffff,
     border-disabled: #ffffff,
   )
 ) !default;
@@ -658,7 +997,8 @@ $carbon--theme--g80: map-merge(
     support-error-inverse: #da1e28,
     support-success-inverse: #24a148,
     support-info-inverse: #0f62fe,
-    overlay: rgba(22, 22, 22, 0.7),
+    overlay: rgba(0, 0, 0, 0.65),
+    shadow: rgba(0, 0, 0, 0.8),
     button-secondary: #6f6f6f,
     button-tertiary: #ffffff,
     button-danger-secondary: #ff8389,
@@ -685,8 +1025,6 @@ $carbon--theme--g80: map-merge(
     layer-selected-hover: #616161,
     layer-selected-inverse: #f4f4f4,
     border-subtle-selected: #8d8d8d,
-    layer-disabled: #525252,
-    field-disabled: #525252,
     border-disabled: #525252,
     text-disabled: #8d8d8d,
     button-disabled: #8d8d8d,
@@ -724,7 +1062,7 @@ $carbon--theme--g80: map-merge(
     inverse-support-01: #da1e28,
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
-    overlay-01: rgba(22, 22, 22, 0.7),
+    overlay-01: rgba(0, 0, 0, 0.65),
     danger-02: #ff8389,
     inverse-focus-ui: #0f62fe,
     hover-primary: #0151e4,
@@ -791,7 +1129,7 @@ $carbon--theme--g90: map-merge(
     inverse-support-01: #da1e28,
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
-    overlay-01: rgba(22, 22, 22, 0.7),
+    overlay-01: rgba(0, 0, 0, 0.65),
     danger-02: #ff8389,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
@@ -847,7 +1185,8 @@ $carbon--theme--g90: map-merge(
     support-error-inverse: #da1e28,
     support-success-inverse: #24a148,
     support-info-inverse: #0f62fe,
-    overlay: rgba(22, 22, 22, 0.7),
+    overlay: rgba(0, 0, 0, 0.65),
+    shadow: rgba(0, 0, 0, 0.8),
     button-secondary: #6f6f6f,
     button-tertiary: #ffffff,
     button-danger-secondary: #ff8389,
@@ -870,8 +1209,6 @@ $carbon--theme--g90: map-merge(
     layer-selected-hover: #656565,
     layer-selected-inverse: #f4f4f4,
     border-subtle-selected: #6f6f6f,
-    layer-disabled: #393939,
-    field-disabled: #393939,
     border-disabled: #393939,
     text-disabled: #6f6f6f,
     button-disabled: #6f6f6f,
@@ -924,7 +1261,7 @@ $carbon--theme--g100: map-merge(
     inverse-support-01: #da1e28,
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
-    overlay-01: rgba(22, 22, 22, 0.7),
+    overlay-01: rgba(0, 0, 0, 0.65),
     danger-02: #fa4d56,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
@@ -980,8 +1317,9 @@ $carbon--theme--g100: map-merge(
     support-error-inverse: #da1e28,
     support-success-inverse: #24a148,
     support-info-inverse: #0f62fe,
-    overlay: rgba(22, 22, 22, 0.7),
+    overlay: rgba(0, 0, 0, 0.65),
     toggle-off: #6f6f6f,
+    shadow: rgba(0, 0, 0, 0.8),
     button-secondary: #6f6f6f,
     button-tertiary: #ffffff,
     button-danger-secondary: #fa4d56,
@@ -1004,8 +1342,6 @@ $carbon--theme--g100: map-merge(
     layer-selected-hover: #4c4c4c,
     layer-selected-inverse: #f4f4f4,
     border-subtle-selected: #525252,
-    layer-disabled: #262626,
-    field-disabled: #262626,
     border-disabled: #262626,
     text-disabled: #525252,
     button-disabled: #525252,
@@ -1141,8 +1477,6 @@ $carbon--theme--v9: map-merge(
     layer-selected-hover: #dfeafa,
     layer-selected-inverse: #5a6872,
     border-subtle-selected: #dfeafa,
-    layer-disabled: #fafbfd,
-    field-disabled: #fafbfd,
     border-disabled: #fafbfd,
     text-disabled: #dfe3e6,
     button-disabled: #dfe3e6,
@@ -1784,6 +2118,12 @@ $carbon--theme: (
       $toggle-off,
       map-get($carbon--theme--white, 'toggle-off')
     ),
+  shadow:
+    if(
+      global-variable-exists('shadow'),
+      $shadow,
+      map-get($carbon--theme--white, 'shadow')
+    ),
   button-primary:
     if(
       global-variable-exists('button-primary'),
@@ -1951,18 +2291,6 @@ $carbon--theme: (
       global-variable-exists('border-subtle-selected'),
       $border-subtle-selected,
       map-get($carbon--theme--white, 'border-subtle-selected')
-    ),
-  layer-disabled:
-    if(
-      global-variable-exists('layer-disabled'),
-      $layer-disabled,
-      map-get($carbon--theme--white, 'layer-disabled')
-    ),
-  field-disabled:
-    if(
-      global-variable-exists('field-disabled'),
-      $field-disabled,
-      map-get($carbon--theme--white, 'field-disabled')
     ),
   border-disabled:
     if(
@@ -2257,6 +2585,150 @@ $carbon--theme: (
       global-variable-exists('display-04'),
       $display-04,
       map-get($carbon--theme--white, 'display-04')
+    ),
+  legal-01:
+    if(
+      global-variable-exists('legal-01'),
+      $legal-01,
+      map-get($carbon--theme--white, 'legal-01')
+    ),
+  legal-02:
+    if(
+      global-variable-exists('legal-02'),
+      $legal-02,
+      map-get($carbon--theme--white, 'legal-02')
+    ),
+  body-compact-01:
+    if(
+      global-variable-exists('body-compact-01'),
+      $body-compact-01,
+      map-get($carbon--theme--white, 'body-compact-01')
+    ),
+  body-compact-02:
+    if(
+      global-variable-exists('body-compact-02'),
+      $body-compact-02,
+      map-get($carbon--theme--white, 'body-compact-02')
+    ),
+  body-01:
+    if(
+      global-variable-exists('body-01'),
+      $body-01,
+      map-get($carbon--theme--white, 'body-01')
+    ),
+  body-02:
+    if(
+      global-variable-exists('body-02'),
+      $body-02,
+      map-get($carbon--theme--white, 'body-02')
+    ),
+  heading-compact-01:
+    if(
+      global-variable-exists('heading-compact-01'),
+      $heading-compact-01,
+      map-get($carbon--theme--white, 'heading-compact-01')
+    ),
+  heading-compact-02:
+    if(
+      global-variable-exists('heading-compact-02'),
+      $heading-compact-02,
+      map-get($carbon--theme--white, 'heading-compact-02')
+    ),
+  heading-03:
+    if(
+      global-variable-exists('heading-03'),
+      $heading-03,
+      map-get($carbon--theme--white, 'heading-03')
+    ),
+  heading-04:
+    if(
+      global-variable-exists('heading-04'),
+      $heading-04,
+      map-get($carbon--theme--white, 'heading-04')
+    ),
+  heading-05:
+    if(
+      global-variable-exists('heading-05'),
+      $heading-05,
+      map-get($carbon--theme--white, 'heading-05')
+    ),
+  heading-06:
+    if(
+      global-variable-exists('heading-06'),
+      $heading-06,
+      map-get($carbon--theme--white, 'heading-06')
+    ),
+  heading-07:
+    if(
+      global-variable-exists('heading-07'),
+      $heading-07,
+      map-get($carbon--theme--white, 'heading-07')
+    ),
+  fluid-heading-03:
+    if(
+      global-variable-exists('fluid-heading-03'),
+      $fluid-heading-03,
+      map-get($carbon--theme--white, 'fluid-heading-03')
+    ),
+  fluid-heading-04:
+    if(
+      global-variable-exists('fluid-heading-04'),
+      $fluid-heading-04,
+      map-get($carbon--theme--white, 'fluid-heading-04')
+    ),
+  fluid-heading-05:
+    if(
+      global-variable-exists('fluid-heading-05'),
+      $fluid-heading-05,
+      map-get($carbon--theme--white, 'fluid-heading-05')
+    ),
+  fluid-heading-06:
+    if(
+      global-variable-exists('fluid-heading-06'),
+      $fluid-heading-06,
+      map-get($carbon--theme--white, 'fluid-heading-06')
+    ),
+  fluid-paragraph-01:
+    if(
+      global-variable-exists('fluid-paragraph-01'),
+      $fluid-paragraph-01,
+      map-get($carbon--theme--white, 'fluid-paragraph-01')
+    ),
+  fluid-quotation-01:
+    if(
+      global-variable-exists('fluid-quotation-01'),
+      $fluid-quotation-01,
+      map-get($carbon--theme--white, 'fluid-quotation-01')
+    ),
+  fluid-quotation-02:
+    if(
+      global-variable-exists('fluid-quotation-02'),
+      $fluid-quotation-02,
+      map-get($carbon--theme--white, 'fluid-quotation-02')
+    ),
+  fluid-display-01:
+    if(
+      global-variable-exists('fluid-display-01'),
+      $fluid-display-01,
+      map-get($carbon--theme--white, 'fluid-display-01')
+    ),
+  fluid-display-02:
+    if(
+      global-variable-exists('fluid-display-02'),
+      $fluid-display-02,
+      map-get($carbon--theme--white, 'fluid-display-02')
+    ),
+  fluid-display-03:
+    if(
+      global-variable-exists('fluid-display-03'),
+      $fluid-display-03,
+      map-get($carbon--theme--white, 'fluid-display-03')
+    ),
+  fluid-display-04:
+    if(
+      global-variable-exists('fluid-display-04'),
+      $fluid-display-04,
+      map-get($carbon--theme--white, 'fluid-display-04')
     ),
   spacing-01:
     if(
