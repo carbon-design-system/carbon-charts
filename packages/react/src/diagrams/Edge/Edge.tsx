@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// @ts-ignore
-import settings from 'carbon-components/src/globals/js/settings';
+// Carbon Prefix
+import { carbonPrefix } from '../configs';
 
 // @ts-ignore
 import classnames from 'classnames';
 
 import { buildStraightPathString } from '@carbon/charts/components/diagrams/buildPaths';
-
-const { prefix } = settings;
 
 const Edge = ({
 	className,
@@ -26,7 +24,7 @@ const Edge = ({
 	target,
 	variant = null,
 }: any) => {
-	const namespace = `${prefix}--cc--edge`;
+	const namespace = `${carbonPrefix}--cc--edge`;
 
 	const pathClasses = classnames(namespace, {
 		[`${namespace}--${variant}`]: variant,

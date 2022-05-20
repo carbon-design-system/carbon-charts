@@ -1,8 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import '../../core/demo/styles.scss';
-
 // import tutorial MD strings
 import { reactGettingStartedTutorial } from './1_gettingStarted_content';
 import * as TUTORIALS from '../../core/stories/tutorials/index';

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 // @ts-ignore
 import classnames from 'classnames';
 
-// @ts-ignore
-import settings from 'carbon-components/src/globals/js/settings';
+// Carbon Prefix
+import { carbonPrefix } from '../configs';
 
 import {
 	arrowLeft,
@@ -15,8 +15,6 @@ import {
 	square,
 	tee,
 } from '@carbon/charts/components/diagrams/markerDefinitions';
-
-const { prefix } = settings;
 
 const Marker = ({
 	className,
@@ -30,7 +28,7 @@ const Marker = ({
 	refX,
 	refY,
 }: any) => {
-	const namespace = `${prefix}--cc--marker`;
+	const namespace = `${carbonPrefix}--cc--marker`;
 	const classes = classnames(namespace, {
 		[className]: className,
 	});
