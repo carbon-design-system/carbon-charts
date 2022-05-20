@@ -138,6 +138,8 @@ export class WordCloud extends Component {
 		// doesn't provide size values in data
 		const sizeDataIsValid = allOccurences.length > 0;
 		const domain = sizeDataIsValid ? extent(allOccurences) : [1, 1];
+
+		// @ts-ignore
 		return scaleLinear()
 			.domain(domain as any)
 			.range(

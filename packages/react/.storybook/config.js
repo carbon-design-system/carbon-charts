@@ -1,6 +1,5 @@
 import { configure } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
-import theme from './theme';
 
 withOptions({
 	name: 'Carbon Charts - React',
@@ -8,7 +7,6 @@ withOptions({
 	showDownPanel: true,
 	showAddonPanel: true,
 	sortStoriesByKind: true,
-	theme,
 });
 
 // load global styles

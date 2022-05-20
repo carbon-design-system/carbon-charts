@@ -30,6 +30,8 @@ export class Bubble extends Scatter {
 		// doesn't provide radius values in data
 		const radiusDataIsValid = allRadii.length > 0;
 		const domain = radiusDataIsValid ? extent(allRadii) : [1, 1];
+
+		// @ts-ignore
 		return scaleLinear()
 			.domain(domain)
 			.range(

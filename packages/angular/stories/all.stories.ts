@@ -13,7 +13,7 @@ const getTemplate = (demo) => `
 		</h3>
 		<p class="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
 
-		<div class="marginTop-30">
+		<div class="marginTop-30" id="chart-demo">
 			<${demo.chartType.angular}
 				class="n-chart"
 				[data]="data"
