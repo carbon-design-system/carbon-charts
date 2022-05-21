@@ -1,36 +1,39 @@
 const generateThemePickerHTML = (container, configs) => {
-  const div = document.createElement('div');
-  div.id = 'theme-picker';
-  div.innerHTML = `
+	const div = document.createElement('div');
+	div.id = 'theme-picker';
+	div.innerHTML = `
 <fieldset class="cds--fieldset marginTop-45">
 	<legend class="cds--label">Active theme</legend>
 
 	<div class="cds--form-item">
-		<div class="cds--radio-button-group ">
+		<div class="cds--radio-button-group">
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-1" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0" checked>
-				<label for="radio-button-abfeuherm2f-1" class="cds--radio-button__label">
+				<input id="theme__white" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
+				<label for="theme__white" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">White</span>
 				</label>
 			</div>
+
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-2" class="cds--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-2" class="cds--radio-button__label">
+				<input id="theme__g10" class="cds--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
+				<label for="theme__g10" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">G10</span>
 				</label>
 			</div>
+
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-3" class="cds--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-3" class="cds--radio-button__label">
+				<input id="theme__g90" class="cds--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
+				<label for="theme__g90" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">G90</span>
 				</label>
 			</div>
+
 			<div class="cds--radio-button-wrapper">
-				<input id="radio-button-abfeuherm2f-4" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
-				<label for="radio-button-abfeuherm2f-4" class="cds--radio-button__label">
+				<input id="theme__g100" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
+				<label for="theme__g100" class="cds--radio-button__label">
 				<span class="cds--radio-button__appearance"></span>
 				<span class="cds--radio-button__label-text">G100</span>
 				</label>
@@ -39,32 +42,47 @@ const generateThemePickerHTML = (container, configs) => {
 	</div>
 </fieldset>`;
 
-  container.querySelector('#charting-controls').appendChild(div);
+	const currentTheme = document.documentElement.getAttribute(
+		'data-carbon-theme'
+	);
+	if (currentTheme) {
+		div.querySelector(`input#theme__${currentTheme}`).setAttribute(
+			'checked',
+			'true'
+		);
+	} else {
+		div.querySelector(`input#theme__white`).setAttribute(
+			'checked',
+			'true'
+		);
+	}
+
+	container.querySelector('#charting-controls').appendChild(div);
 };
 
 const generateColorPalettePickerHTML = (
-  container,
-  chart,
-  configs = { colorPairingOptions: null }
+	container,
+	chart,
+	configs = { colorPairingOptions: null }
 ) => {
-  const { colorPairingOptions } = configs;
+	const { colorPairingOptions } = configs;
 
-  const chartOptions = chart.model.getOptions();
-  const { numberOfVariants: variants, option } = chartOptions.color.pairing;
+	const chartOptions = chart.model.getOptions();
+	const { numberOfVariants: variants, option } = chartOptions.color.pairing;
 
-  const numberOfChartDataGroups = chart.model.getAllDataGroupsNames().length;
-  const numberOfVariants = variants || numberOfChartDataGroups;
+	const numberOfChartDataGroups = chart.model.getAllDataGroupsNames().length;
+	const numberOfVariants = variants || numberOfChartDataGroups;
 
-  let onlyCategoricalPaletteIsApplicable = false;
-  if (numberOfChartDataGroups > 5) {
-    onlyCategoricalPaletteIsApplicable = true;
-  }
+	let onlyCategoricalPaletteIsApplicable = false;
+	if (numberOfChartDataGroups > 5) {
+		onlyCategoricalPaletteIsApplicable = true;
+	}
 
-  const selectedColorPalette = `${numberOfVariants}-${option}`;
+	const selectedColorPalette = `${numberOfVariants}-${option}`;
 
-  const div = document.createElement('div');
-  div.id = 'color-palette-picker';
-  div.innerHTML = `
+	const div = document.createElement('div');
+	div.id = 'color-palette-picker';
+	div.innerHTML = `
 <div class="cds--form-item">
 	<div
 	class="cds--select">
@@ -75,42 +93,43 @@ const generateColorPalettePickerHTML = (
 			Choose an option
 			</option>
 			${Object.keys(colorPairingOptions)
-        .map((colorGroup) => {
-          const optionsCount = colorPairingOptions[colorGroup];
-          let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`;
+				.map((colorGroup) => {
+					const optionsCount = colorPairingOptions[colorGroup];
+					let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`;
 
-          const numberOfVariants = parseInt(colorGroup);
+					const numberOfVariants = parseInt(colorGroup);
 
-          if (numberOfVariants !== 14) {
-            for (let i = 1; i <= optionsCount; i++) {
-              optionsHTML += `
+					if (numberOfVariants !== 14) {
+						for (let i = 1; i <= optionsCount; i++) {
+							optionsHTML += `
 						<option class="cds--select-option" ${
-              onlyCategoricalPaletteIsApplicable ||
-              numberOfVariants < numberOfChartDataGroups
-                ? 'disabled'
-                : ''
-            } value="${colorGroup}-option-${i}" ${
-                selectedColorPalette === `${numberOfVariants}-${i}`
-                  ? 'selected'
-                  : ''
-              }>
+							onlyCategoricalPaletteIsApplicable ||
+							numberOfVariants < numberOfChartDataGroups
+								? 'disabled'
+								: ''
+						} value="${colorGroup}-option-${i}" ${
+								selectedColorPalette ===
+								`${numberOfVariants}-${i}`
+									? 'selected'
+									: ''
+							}>
 							${numberOfVariants}-color groups, option ${i}
 						</option>`;
-            }
-          } else {
-            optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
-              selectedColorPalette === `14-1` ||
-              onlyCategoricalPaletteIsApplicable
-                ? 'selected'
-                : ''
-            }>
+						}
+					} else {
+						optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
+							selectedColorPalette === `14-1` ||
+							onlyCategoricalPaletteIsApplicable
+								? 'selected'
+								: ''
+						}>
 						Categorical palette
 					</option>`;
-          }
+					}
 
-          return optionsHTML;
-        })
-        .join('')}
+					return optionsHTML;
+				})
+				.join('')}
 		</select>
 		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 		</div>
@@ -118,111 +137,129 @@ const generateColorPalettePickerHTML = (
 	</div>
 </div>`;
 
-  div
-    .querySelector('#color-palette-select')
-    .addEventListener('change', (e: any) => {
-      const { value } = e.target;
-      const [numberOfVariants, pairingOption] = value.split('-color-option-');
+	div.querySelector('#color-palette-select').addEventListener(
+		'change',
+		(e: any) => {
+			const { value } = e.target;
+			const [numberOfVariants, pairingOption] = value.split(
+				'-color-option-'
+			);
 
-      chartOptions.color.pairing.numberOfVariants = numberOfVariants;
-      chartOptions.color.pairing.option = pairingOption;
-      chart.model.setOptions(chartOptions);
-    });
+			chartOptions.color.pairing.numberOfVariants = numberOfVariants;
+			chartOptions.color.pairing.option = pairingOption;
+			chart.model.setOptions(chartOptions);
+		}
+	);
 
-  container.querySelector('#charting-controls').appendChild(div);
+	container.querySelector('#charting-controls').appendChild(div);
 };
 
 export const addControls = (
-  container,
-  demoGroup,
-  chart,
-  configs = { colorPairingOptions: null }
+	container,
+	demoGroup,
+	chart,
+	configs = { colorPairingOptions: null }
 ) => {
-  generateThemePickerHTML(container, configs);
+	generateThemePickerHTML(container, configs);
 
-  if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
-    generateColorPalettePickerHTML(container, chart, configs);
-  }
+	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
+		generateColorPalettePickerHTML(container, chart, configs);
+	}
 
-  addRadioButtonEventListeners(container, chart, configs);
+	addRadioButtonEventListeners(container, chart, configs);
 };
 
 export const addRadioButtonEventListeners = (container, chart, configs) => {
-  // Add event listeners for radio buttons
-  const radioButtons = container.querySelectorAll(
-    'div#theme-picker input.cds--radio-button'
-  );
-  radioButtons.forEach((radioButton) => {
-    radioButton.addEventListener('click', (e: any) => {
-      const theme = e.target.value;
+	// Add event listeners for radio buttons
+	const radioButtons = container.querySelectorAll(
+		'div#theme-picker input.cds--radio-button'
+	);
 
-      document.documentElement.setAttribute('data-carbon-theme', theme);
-      chart.services.domUtils.getHolder().setAttribute('data-carbon-theme', theme);
+	const currentTheme = document.documentElement.getAttribute(
+		'data-carbon-theme'
+	);
+	if (currentTheme) {
+		chart.services.domUtils
+			.getHolder()
+			.setAttribute('data-carbon-theme', currentTheme);
+	}
 
-      chart.update();
-    });
-  });
+	radioButtons.forEach((radioButton) => {
+		radioButton.addEventListener('click', (e: any) => {
+			const theme = e.target.value;
+
+			document.documentElement.setAttribute('data-carbon-theme', theme);
+			chart.services.domUtils
+				.getHolder()
+				.setAttribute('data-carbon-theme', theme);
+
+			chart.update();
+		});
+	});
 };
 
 export const addOtherVersions = (
-  container,
-  demoGroup,
-  demo,
-  configs = { currentVersion: 'vanilla' }
+	container,
+	demoGroup,
+	demo,
+	configs = { currentVersion: 'vanilla' }
 ) => {
-  const { currentVersion } = configs;
+	const { currentVersion } = configs;
 
-  const demoGroupClassification = (demoGroup.type || '').replace('-chart', '');
+	const demoGroupClassification = (demoGroup.type || '').replace(
+		'-chart',
+		''
+	);
 
-  const div = document.createElement('div');
-  div.setAttribute('class', 'cds--row resource-card-group');
+	const div = document.createElement('div');
+	div.setAttribute('class', 'cds--row resource-card-group');
 
-  let htmlContent = '';
-  const otherVersions = [
-    ...(currentVersion !== 'vanilla'
-      ? [
-          {
-            name: 'vanilla',
-            link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
-          },
-        ]
-      : []),
-    ...(currentVersion !== 'react'
-      ? [
-          {
-            name: 'React',
-            link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
-          },
-        ]
-      : []),
-    ...(currentVersion !== 'angular'
-      ? [
-          {
-            name: 'Angular',
-            link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
-          },
-        ]
-      : []),
-    ...(currentVersion !== 'vue'
-      ? [
-          {
-            name: 'Vue',
-            link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
-          },
-        ]
-      : []),
-    ...(currentVersion !== 'svelte'
-      ? [
-          {
-            name: 'Svelte',
-            link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
-          },
-        ]
-      : []),
-  ];
+	let htmlContent = '';
+	const otherVersions = [
+		...(currentVersion !== 'vanilla'
+			? [
+					{
+						name: 'vanilla',
+						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'react'
+			? [
+					{
+						name: 'React',
+						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'angular'
+			? [
+					{
+						name: 'Angular',
+						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'vue'
+			? [
+					{
+						name: 'Vue',
+						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+		...(currentVersion !== 'svelte'
+			? [
+					{
+						name: 'Svelte',
+						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`,
+					},
+			  ]
+			: []),
+	];
 
-  otherVersions.forEach((otherVersion) => {
-    htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
+	otherVersions.forEach((otherVersion) => {
+		htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
 		<div class="cds--resource-card">
 		  <div class="cds--aspect-ratio cds--aspect-ratio--2x1">
 			<div class="cds--aspect-ratio--object">
@@ -240,10 +277,10 @@ export const addOtherVersions = (
 		  </div>
 		</div>
 	  </div>`;
-  });
+	});
 
-  div.innerHTML = htmlContent;
-  container.querySelector('#other-versions').appendChild(div);
+	div.innerHTML = htmlContent;
+	container.querySelector('#other-versions').appendChild(div);
 };
 
 /**
@@ -254,33 +291,36 @@ export const addOtherVersions = (
  * @returns {array} randomly generated array of objects with a date and value field
  */
 export const generateRandomData = (quantity, min, max) => {
-  const now = Date.now();
-  return Array(quantity)
-    .fill(0)
-    .map((value, index) => {
-      return {
-        group: 'group',
-        value: Math.floor(Math.random() * (max - min + 1) + min),
-        date: new Date(now.valueOf() + (index - quantity) * 60000), // go forward a minute for every value
-      };
-    });
+	const now = Date.now();
+	return Array(quantity)
+		.fill(0)
+		.map((value, index) => {
+			return {
+				group: 'group',
+				value: Math.floor(Math.random() * (max - min + 1) + min),
+				date: new Date(now.valueOf() + (index - quantity) * 60000), // go forward a minute for every value
+			};
+		});
 };
 /**
  * Adds a generate demo data form to the story
  */
 export const generateHighScaleDemoDataForm = () =>
-  `<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
+	`<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
 	 size="5" value="100"><input type="submit"></label></form>`;
 export const addDemoDataFormListeners = (container, demo, chart) => {
-  // Add event listeners for form
-  const form = container.querySelector('form#demo-data');
-  if (form) {
-    form.addEventListener('submit', (e: any) => {
-      e.stopPropagation();
-      e.preventDefault();
-      const recordsToGenerate = parseInt(e.currentTarget[0].value) || 2000;
-      chart.model.setData(generateRandomData(recordsToGenerate, 100, 500));
-      chart.update();
-    });
-  }
+	// Add event listeners for form
+	const form = container.querySelector('form#demo-data');
+	if (form) {
+		form.addEventListener('submit', (e: any) => {
+			e.stopPropagation();
+			e.preventDefault();
+			const recordsToGenerate =
+				parseInt(e.currentTarget[0].value) || 2000;
+			chart.model.setData(
+				generateRandomData(recordsToGenerate, 100, 500)
+			);
+			chart.update();
+		});
+	}
 };
