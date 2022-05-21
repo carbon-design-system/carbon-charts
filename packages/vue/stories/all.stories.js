@@ -68,7 +68,7 @@ storybookDemoGroups.forEach(demoGroup => {
 					</h3>
 					<p class="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
 
-					<div class="marginTop-30">
+					<div class="marginTop-30" id="chart-demo">
 						<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
 					</div>
 
