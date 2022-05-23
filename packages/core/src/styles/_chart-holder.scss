@@ -1,4 +1,5 @@
-@use '@carbon/styles/scss/theme' as *;
+@use "@carbon/styles/scss/theme" as *;
+@use "@carbon/styles/scss/themes";
 
 .#{$prefix}--chart-holder {
 	position: relative;
@@ -19,6 +20,22 @@
 		overflow: hidden;
 		opacity: 0;
 	}
+}
+
+.#{$prefix}--chart-holder {
+	@include theme(themes.$white);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme="g10"] {
+	@include theme(themes.$g10);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme="g90"] {
+	@include theme(themes.$g90);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme="g100"] {
+	@include theme(themes.$g100);
 }
 
 .#{$prefix}--chart-holder.fullscreen,

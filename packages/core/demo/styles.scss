@@ -5,19 +5,19 @@
 
 @import "../src/styles/styles.scss";
 
-:root {
+html {
 	@include styles.theme(styles.$white);
 }
 
-[data-carbon-theme="g10"] {
+html[data-carbon-theme="g10"] {
 	@include styles.theme(styles.$g10);
 }
 
-[data-carbon-theme="g90"] {
+html[data-carbon-theme="g90"] {
 	@include styles.theme(styles.$g90);
 }
 
-[data-carbon-theme="g100"] {
+html[data-carbon-theme="g100"] {
 	@include styles.theme(styles.$g100);
 }
 
