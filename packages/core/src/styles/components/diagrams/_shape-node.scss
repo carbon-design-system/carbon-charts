@@ -50,7 +50,9 @@
 
 		.#{$prefix}--#{$charts-prefix}--shape-node__title,
 		.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
-			font-weight: font-weight('semibold');
+			// TODO-V11
+			// font-weight: font-weight('semibold');
+			font-weight: 600;
 		}
 	}
 

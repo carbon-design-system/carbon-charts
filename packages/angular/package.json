@@ -42,7 +42,7 @@
 	],
 	"dependencies": {
 		"@carbon/charts": "^0.58.0-latest-carbon-v11-beta.0",
-		"@carbon/telemetry": "0.0.0-alpha.6"
+		"@carbon/telemetry": "0.1.0"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0",

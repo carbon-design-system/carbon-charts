@@ -43,7 +43,9 @@
 
     .axis-title {
       font-family: font-family('sans');
-      font-weight: font-weight('semibold');
+	  // TODO-V11
+	  // font-weight: font-weight('semibold');
+      font-weight: 600;
       fill: $text-primary;
     }
   }

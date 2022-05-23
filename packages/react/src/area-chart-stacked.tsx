@@ -5,6 +5,7 @@ import {
 	ChartConfig,
 	StackedAreaChartOptions,
 } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type StackedAreaChartProps = ChartConfig<StackedAreaChartOptions>;
 
@@ -14,10 +15,12 @@ export default class StackedAreaChart extends BaseChart<StackedAreaChartOptions>
 	chart!: SAC;
 
 	componentDidMount() {
-		this.chart = new SAC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new SAC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {

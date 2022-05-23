@@ -67,7 +67,9 @@
 			}
 
 			&.bold {
-				font-weight: font-weight("semibold");
+				// TODO-V11
+				// font-weight: font-weight('semibold');
+				font-weight: 600;
 			}
 
 			p {

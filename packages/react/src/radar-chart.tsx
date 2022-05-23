@@ -2,6 +2,7 @@ import React from 'react';
 import { RadarChart as RC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, RadarChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type RadarChartProps = ChartConfig<RadarChartOptions>;
 
@@ -11,10 +12,12 @@ export default class RadarChart extends BaseChart<RadarChartOptions> {
 	chart!: RC;
 
 	componentDidMount() {
-		this.chart = new RC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new RC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {

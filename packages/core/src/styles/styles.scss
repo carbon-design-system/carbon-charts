@@ -5,8 +5,8 @@ $css--default-type: false;
 
 $prefix: "cds";
 
-@use "@carbon/styles";
-@use "@carbon/type";
+// @use "@carbon/styles";
+@use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
 
 // Custom charting tokens

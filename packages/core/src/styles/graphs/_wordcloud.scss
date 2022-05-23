@@ -1,6 +1,8 @@
 .#{$prefix}--#{$charts-prefix}--wordcloud {
 	text.word {
 		&.light {
+			// TODO-V11
+			// font-weight: font-weight('light');
 			font-weight: 300;
 		}
 	}

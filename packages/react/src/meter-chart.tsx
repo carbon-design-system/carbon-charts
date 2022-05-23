@@ -2,6 +2,7 @@ import React from 'react';
 import { MeterChart as MC } from '@carbon/charts';
 import BaseChart from './base-chart';
 import { ChartConfig, MeterChartOptions } from '@carbon/charts/interfaces';
+import { hasChartBeenInitialized } from './utils';
 
 type MeterChartProps = ChartConfig<MeterChartOptions>;
 
@@ -11,10 +12,12 @@ export default class MeterChart extends BaseChart<MeterChartOptions> {
 	chart!: MC;
 
 	componentDidMount() {
-		this.chart = new MC(this.chartRef, {
-			data: this.props.data,
-			options: this.props.options,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new MC(this.chartRef, {
+				data: this.props.data,
+				options: this.props.options,
+			});
+		}
 	}
 
 	render() {

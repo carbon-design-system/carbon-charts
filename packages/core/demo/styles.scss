@@ -27,6 +27,23 @@ div.container {
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 	padding: 30px;
 
+	div.v10-banner {
+		background: #1092e8;
+		padding: 1rem 30px;
+		color: #ffffffde;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		margin: -30px -30px 30px -30px;
+
+		b {
+			font-weight: 600;
+		}
+
+		a {
+			color: #fff;
+		}
+	}
+
 	div#color-palette-picker {
 		max-width: 18rem;
 		margin-top: 2rem;

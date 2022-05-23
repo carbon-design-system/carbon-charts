@@ -9,19 +9,25 @@
 		padding: 0;
 		margin: 0;
 		font-size: 12px;
-		font-weight: font-weight('regular');
+		// TODO-V11
+		// font-weight: font-weight('regular');
+		font-weight: 400;
 		color: $text-secondary;
 	}
 
 	text {
 		font-size: 12px;
-		font-weight: font-weight('regular');
+		// TODO-V11
+		// font-weight: font-weight('regular');
+		font-weight: 400;
 		fill: $text-secondary;
 	}
 
 	g.gauge-numbers text.gauge-value-number {
 		font-family: font-family('sans');
-		font-weight: font-weight('light');
+		// TODO-V11
+		// font-weight: font-weight('light');
+		font-weight: 300;
 	}
 
 	text.meter-title,
@@ -31,6 +37,8 @@
 	}
 
 	text.meter-title {
-		font-weight: font-weight('semibold');
+		// TODO-V11
+		// font-weight: font-weight('semibold');
+		font-weight: 600;
 	}
 }

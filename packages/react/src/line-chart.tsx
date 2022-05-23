@@ -2,19 +2,22 @@ import React from 'react';
 import { LineChart as LC } from '@carbon/charts';
 import { ChartConfig, LineChartOptions } from '@carbon/charts/interfaces';
 import BaseChart from './base-chart';
+import { hasChartBeenInitialized } from './utils';
 
 type LineChartProps = ChartConfig<LineChartOptions>;
 
 export default class LineChart extends BaseChart<LineChartOptions> {
-	chartRef?: HTMLDivElement;
+	chartRef!: HTMLDivElement;
 	props!: LineChartProps;
 	chart!: LC;
 
 	componentDidMount() {
-		this.chart = new LC(this.chartRef!, {
-			data: this.props.data as any,
-			options: this.props.options!,
-		});
+		if (hasChartBeenInitialized(this.chartRef) === false) {
+			this.chart = new LC(this.chartRef!, {
+				data: this.props.data as any,
+				options: this.props.options!,
+			});
+		}
 	}
 
 	render() {

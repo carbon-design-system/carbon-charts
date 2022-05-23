@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "^0.58.0-latest-carbon-v11-beta.0",
-		"@carbon/telemetry": "0.0.0-alpha.6",
+		"@carbon/telemetry": "0.1.0",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {

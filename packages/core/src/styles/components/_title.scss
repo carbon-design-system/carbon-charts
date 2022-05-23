@@ -6,7 +6,9 @@
 		color: $text-primary;
 		font-size: 16px;
 		font-family: font-family('sans');
-		font-weight: font-weight('semibold');
+		// TODO-V11
+		// font-weight: font-weight('semibold');
+		font-weight: 600;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
