@@ -5,7 +5,7 @@ export const comboChartTutorial = {
 	content: marked(`
 # Combo charts
 Combo charts allow users to visually compare complex datasets by superimposing different graphing components within one chart.
-Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see the [dual axes tutorial](/?path=/story/tutorials--dual-axes-charts).
+Combination charts **may or may not** use dual axes although it is common that they do. For more information on dual axes with **carbon-charts**, please see the [dual axes tutorial](/?path=/story/docs-tutorials--dual-axes-charts).
 
 *Note: \`ComboChart\` extends axis chart functionality and should only comprise of graphs/components that use axes.*
 
