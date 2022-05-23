@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-svelte",
-	"version": "0.58.0-latest-carbon-v11-beta.0",
+	"version": "0.58.1",
 	"description": "Carbon charting components for Svelte",
 	"type": "module",
 	"main": "./src/index.js",
@@ -49,7 +49,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.58.0-latest-carbon-v11-beta.0",
+		"@carbon/charts": "^0.58.1",
 		"@carbon/telemetry": "0.1.0"
 	},
 	"peerDependencies": {
@@ -95,6 +95,5 @@
 			"email": "eric.young.liu@ibm.com",
 			"url": "https://github.com/metonym"
 		}
-	],
-	"gitHead": "7e0047082222ee1ebdd14a90913b38bcdb9b008c"
+	]
 }
