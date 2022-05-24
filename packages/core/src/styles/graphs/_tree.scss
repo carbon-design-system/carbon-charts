@@ -1,8 +1,10 @@
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--chart-wrapper
 	.#{$prefix}--#{$charts-prefix}--tree {
 	g.links {
 		fill: none;
-		stroke: $ui-04;
+		stroke: $border-strong-01;
 		stroke-opacity: 0.4;
 		stroke-width: 1.5;
 	}
@@ -12,11 +14,13 @@
 
 		&:hover {
 			text {
-				font-weight: carbon--font-weight('semibold');
+				// TODO-V11
+				// font-weight: font-weight('semibold');
+				font-weight: 600;
 			}
 
 			circle {
-				fill: $text-01;
+				fill: $text-primary;
 				@include default_transition;
 			}
 		}
@@ -24,19 +28,19 @@
 
 	circle {
 		&.parent {
-			fill: $text-02;
+			fill: $text-secondary;
 		}
 
 		&.child {
-			fill: $ui-04;
+			fill: $border-strong-01;
 		}
 	}
 
 	text {
-		fill: $text-01;
+		fill: $text-primary;
 
 		&.text-stroke {
-			stroke: $inverse-01;
+			stroke: $text-inverse;
 			stroke-width: 2px;
 		}
 	}

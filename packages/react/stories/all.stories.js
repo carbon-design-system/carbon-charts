@@ -33,16 +33,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			if (demoRef.current && chartRef.current) {
 				const container = demoRef.current;
-				const chart = chartRef.current.chart
+				const chart = chartRef.current.chart;
 
-				storyUtils.addControls(
-					container,
-					demoGroup,
-					chart,
-					{
-						colorPairingOptions,
-					}
-				);
+				storyUtils.addControls(container, demoGroup, chart, {
+					colorPairingOptions,
+				});
 
 				storyUtils.addOtherVersions(container, demoGroup, demo, {
 					currentVersion: 'react',
@@ -55,12 +50,28 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			return (
 				<div className="container theme--g100" ref={demoRef}>
+					<div className="v10-banner">
+						This version is in beta & relies on <b>Carbon v11</b>.
+						If you're using Carbon v10,{' '}
+						<a
+							href="https://carbon-charts-0x.netlify.app"
+							target="_blank"
+							rel="noreferrer">
+							see the legacy demo site
+						</a>
+					</div>
+
 					<h3>
 						<b>Component:</b>
-						<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
+						<span className="cds--tag cds--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
 					</h3>
+
 					<p className="props">
-						<b>Props:</b> data,{' '}
+						<b>Props:</b>{' '}
+						<a href="/?path=/story/docs-tutorials--tabular-data-format">
+							data
+						</a>
+						,{' '}
 						<a
 							href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
 							target="_blank">

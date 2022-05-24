@@ -1,30 +1,29 @@
-@import './../vendor/@carbon/motion/scss/motion.scss';
-@import './../vendor/@carbon/type/scss/type';
-@import './../vendor/@carbon/type/scss/font-face/mono';
-@import './../vendor/@carbon/type/scss/font-face/sans';
+@use "@carbon/styles/scss/type" as *;
+@use "@carbon/styles/scss/motion" as *;
+@use "@carbon/styles/scss/theme" as *;
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
-	background-color: $ui-02;
+	background-color: $layer-02;
 	pointer-events: none;
-	@include carbon--motion(standard, expressive);
+	@include motion(standard, expressive);
 	display: inline;
 	visibility: visible;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 	transition: visibility 0s linear 0.1s, opacity 0.1s;
 
 	&.hidden {
 		opacity: 0;
 		visibility: hidden;
 		transition: visibility 0s linear 0s, opacity 0.1s;
-		@include carbon--motion(standard, expressive);
+		@include motion(standard, expressive);
 	}
 
 	.content-box {
-		color: $text-01;
+		color: $text-primary;
 
 		.title-tooltip {
 			width: auto;
@@ -63,19 +62,14 @@
 					vertical-align: top;
 					padding-left: 4px;
 					width: auto;
-
-					@if ($carbon--theme == $carbon--theme--g90) or
-						($carbon--theme == $carbon--theme--g100)
-					{
-						fill: white;
-					} @else {
-						fill: black;
-					}
+					fill: $layer-inverse-absolute;
 				}
 			}
 
 			&.bold {
-				font-weight: carbon--font-weight('semibold');
+				// TODO-V11
+				// font-weight: font-weight('semibold');
+				font-weight: 600;
 			}
 
 			p {
@@ -105,13 +99,7 @@
 				position: relative;
 
 				&:not(:last-child) {
-					@if $carbon--theme == $carbon--theme--g90 {
-						border-bottom: 1px solid $ui-01;
-					} @else if $carbon--theme == $carbon--theme--g100 {
-						border-bottom: 1px solid $ui-04;
-					} @else {
-						border-bottom: 1px solid $ui-03;
-					}
+					border-bottom: 1px solid $tooltip-line-border;
 				}
 			}
 		}

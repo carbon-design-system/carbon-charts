@@ -1,18 +1,17 @@
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--grid {
 	rect.chart-grid-backdrop {
-		@if $carbon--theme == $carbon--theme--g10 {
-			fill: $ui-01;
-		} @else if $carbon--theme == $carbon--theme--g90 {
-			fill: $carbon--gray-100;
-		} @else {
-			fill: $ui-background;
-		}
+		fill: $grid-bg;
 	}
+
 	rect.chart-grid-backdrop.stroked {
-		stroke: $ui-03;
+		stroke: $layer-accent-01;
 	}
+
 	rect.stroke {
-		stroke: $ui-03;
+		stroke: $layer-accent-01;
 	}
 
 	g.x.grid g.tick,
@@ -20,7 +19,7 @@
 		line {
 			pointer-events: none;
 			stroke-width: 1px;
-			stroke: $ui-03;
+			stroke: $layer-accent-01;
 		}
 
 		&.active line {

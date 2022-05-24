@@ -1,5 +1,7 @@
-$lines-bg-color: $ui-03;
-$lines-shimmer-color: $carbon--white-0;
+@use '@carbon/styles/scss/theme' as *;
+
+$lines-bg-color: $layer-accent-01;
+$lines-shimmer-color: $white-0;
 
 .#{$prefix}--#{$charts-prefix}--line {
 	path.line {

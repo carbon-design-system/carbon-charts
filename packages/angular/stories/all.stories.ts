@@ -7,13 +7,17 @@ import { storybookDemoGroups } from '@carbon/charts/demo/data';
 
 const getTemplate = (demo) => `
 	<div class="container theme--white">
+		<div class="v10-banner">
+			This version is in beta & relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+		</div>
+
 		<h3>
 			<b>Component:</b>
-			<span class="bx--tag bx--tag--green component-name">${demo.chartType.angular}</span>
+			<span class="cds--tag cds--tag--green component-name">${demo.chartType.angular}</span>
 		</h3>
 		<p class="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
 
-		<div class="marginTop-30">
+		<div class="marginTop-30" id="chart-demo">
 			<${demo.chartType.angular}
 				class="n-chart"
 				[data]="data"
@@ -28,8 +32,8 @@ const getTemplate = (demo) => `
 		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
 			<h5>{{codeFile}}</h5>
 
-			<div class="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-15" data-code-snippet>
-				<div class="bx--snippet-container" aria-label="Code Snippet Text">
+			<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15" data-code-snippet>
+				<div class="cds--snippet-container" aria-label="Code Snippet Text">
 					<pre><code>{{code[codeFile]}}</code></pre>
 				</div>
 			</div>

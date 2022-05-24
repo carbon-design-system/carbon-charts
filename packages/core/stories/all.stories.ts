@@ -61,27 +61,31 @@ storybookDemoGroups.forEach((demoGroup) => {
 			container.setAttribute('class', 'container theme--g100');
 
 			container.innerHTML = `<main>
+<div class="v10-banner">
+	This version is in beta & relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+</div>
+
 <h3>
 	<b class="component">Component</b>
-	<span class="bx--tag bx--tag--green component-name">${
+	<span class="cds--tag cds--tag--green component-name">${
 		demo.chartType.vanilla
 	}</span>
 </h3>
 <p class="props">
-	<span><b>Props: </b><span><a href="/?path=/story/tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
+	<span><b>Props: </b><span><a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
 </p>
 
 ${
 	demo.options.experimental
 		? `
 <div data-notification
-  class="bx--inline-notification bx--inline-notification--warning"
+  class="cds--inline-notification cds--inline-notification--warning"
   role="alert">
-  <div class="bx--inline-notification__details">
-    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--inline-notification__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1	s1,0.4,1,1S10.6,16,10,16z"></path><path d="M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S10.6,16,10,16z" data-icon-path="inner-path" opacity="0"></path></svg>
-    <div class="bx--inline-notification__text-wrapper">
-      <p class="bx--inline-notification__title">Alpha release</p>
-      <p class="bx--inline-notification__subtitle">This is not a stable release of this component, certain pieces might be added or modified in the future. Additionally, the current implementation might have issues that we have not uncovered yet, and will work to resolve through our stable release of the component.</p>
+  <div class="cds--inline-notification__details">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--inline-notification__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1	s1,0.4,1,1S10.6,16,10,16z"></path><path d="M9.2,5h1.5v7H9.2V5z M10,16c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S10.6,16,10,16z" data-icon-path="inner-path" opacity="0"></path></svg>
+    <div class="cds--inline-notification__text-wrapper">
+      <p class="cds--inline-notification__title">Alpha release</p>
+      <p class="cds--inline-notification__subtitle">This is not a stable release of this component, certain pieces might be added or modified in the future. Additionally, the current implementation might have issues that we have not uncovered yet, and will work to resolve through our stable release of the component.</p>
     </div>
   </div>
 </div>`

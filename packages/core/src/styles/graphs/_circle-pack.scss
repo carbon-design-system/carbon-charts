@@ -1,3 +1,5 @@
+@use "@carbon/styles/scss/theme" as *;
+
 .#{$prefix}--#{$charts-prefix}--circle-pack {
 	circle.node {
 		stroke-width: 1.5px;
@@ -7,9 +9,9 @@
 		}
 
 		&.non-focal {
-			fill: $disabled-02;
+			fill: $icon-disabled;
 			fill-opacity: 30%;
-			stroke: $disabled-02;
+			stroke: $icon-disabled;
 		}
 
 		&.clickable {

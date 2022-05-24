@@ -1,18 +1,16 @@
-@import './../../vendor/carbon-components/scss/globals/scss/vars';
-@import './../../vendor/@carbon/themes/scss/tokens';
-@import './../../vendor/@carbon/layout/scss/spacing';
-@import './../../vendor/@carbon/type/scss/font-face/sans';
-@import './../../vendor/@carbon/elements/scss/import-once/import-once';
-@import './../../vendor/carbon-components/scss/globals/scss/_helper-mixins';
+@use "@carbon/styles/scss/utilities/focus-outline" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
+@use '@carbon/styles/scss/theme' as *;
 
 @include exports('cc-shape-node') {
 	.#{$prefix}--#{$charts-prefix}--shape-node {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: $ui-01;
+		background-color: $layer-01;
 		box-sizing: border-box;
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		width: 100%;
 		height: 100%;
 		position: relative;
@@ -27,7 +25,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--rounded-square {
-		border-radius: carbon--mini-units(1);
+		border-radius: mini-units(1);
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--a,
@@ -39,7 +37,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--button {
-		font-family: carbon--font-family('sans');
+		font-family: font-family('sans');
 		text-align: left;
 		width: 100%;
 	}
@@ -48,11 +46,13 @@
 	.#{$prefix}--#{$charts-prefix}--shape-node--a:hover,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:focus,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:hover {
-		background-color: $hover-ui;
+		background-color: $network-diagrams-background-hover;
 
 		.#{$prefix}--#{$charts-prefix}--shape-node__title,
 		.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
-			font-weight: carbon--font-weight('semibold');
+			// TODO-V11
+			// font-weight: font-weight('semibold');
+			font-weight: 600;
 		}
 	}
 
@@ -72,8 +72,8 @@
 
 	.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {
 		padding-bottom: $spacing-01;
-		@include carbon--type-style($name: body-short-01);
-		color: $text-01;
+		@include type-style($name: body-short-01);
+		color: $text-primary;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node__icon {
@@ -81,8 +81,8 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node__title {
-		@include carbon--type-style($name: body-short-01);
-		color: $text-01;
+		@include type-style($name: body-short-01);
+		color: $text-primary;
 		padding-top: $spacing-01;
 		margin-bottom: 1px;
 	}

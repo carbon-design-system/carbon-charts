@@ -1,8 +1,8 @@
 import { Component, Input } from "@angular/core";
-import settings from "carbon-components/src/globals/js/settings";
 import { buildStraightPathString } from "@carbon/charts/components/diagrams/buildPaths";
 
-const { prefix } = settings;
+import { carbonPrefix } from '../configs';
+
 interface Coordinates {
 	x: number;
 	y: number;
@@ -40,6 +40,6 @@ export class EdgeComponent {
 	@Input() path: string;
 
 	pathClasses;
-	namespace = `${prefix}--cc--edge`;
+	namespace = `${carbonPrefix}--cc--edge`;
 	straight = buildStraightPathString;
 }

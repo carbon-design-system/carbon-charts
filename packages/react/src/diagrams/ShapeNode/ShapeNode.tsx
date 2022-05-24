@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// @ts-ignore
-import settings from 'carbon-components/src/globals/js/settings';
+// Carbon Prefix
+import { carbonPrefix } from '../configs';
 
 // @ts-ignore
 import classnames from 'classnames';
-
-const { prefix } = settings;
 
 const ShapeNode = ({
 	as = 'div',
@@ -28,7 +26,7 @@ const ShapeNode = ({
 	subtitle,
 	title,
 }: any) => {
-	const namespace = `${prefix}--cc--shape-node`;
+	const namespace = `${carbonPrefix}--cc--shape-node`;
 
 	let Component = 'div';
 

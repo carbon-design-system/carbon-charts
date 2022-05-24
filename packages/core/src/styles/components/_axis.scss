@@ -1,6 +1,5 @@
-@import './../vendor/@carbon/type/scss/type';
-@import './../vendor/@carbon/type/scss/font-face/sans';
-@import './../vendor/@carbon/themes/scss/tokens';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--axes {
 	overflow: visible;
@@ -18,42 +17,20 @@
 
 		g.tick-hover:hover,
 		g.tick-hover:focus {
-			@if $carbon--theme ==
-				$carbon--theme--g90 or
-				$carbon--theme ==
-				$carbon--theme--g100
-			{
-				rect.axis-holder {
-					fill: white;
-					stroke: white;
-					stroke-width: 2px;
-				}
-
-				text {
-					fill: invert($text-02);
-				}
+			rect.axis-holder {
+				fill: $layer-selected-inverse;
+				stroke: $layer-selected-inverse;
+				stroke-width: 2px;
 			}
 
-			@if $carbon--theme ==
-				$carbon--theme--g10 or
-				$carbon--theme ==
-				$carbon--theme--white
-			{
-				rect.axis-holder {
-					fill: black;
-					stroke: black;
-					stroke-width: 2px;
-				}
-
-				text {
-					fill: white;
-				}
+			text {
+				fill: $layer-selected;
 			}
 		}
 
 		g.tick text {
-			fill: $text-02;
-			font-family: carbon--font-family('sans-condensed');
+			fill: $text-secondary;
+			font-family: font-family('sans-condensed');
 		}
 
 		g.tick line {
@@ -61,13 +38,15 @@
 		}
 
 		path.domain {
-			stroke: $ui-04;
+			stroke: $border-strong-01;
 		}
 
 		.axis-title {
-			font-family: carbon--font-family('sans');
-			font-weight: carbon--font-weight('semibold');
-			fill: $text-01;
+			font-family: font-family('sans');
+			// TODO-V11
+			// font-weight: font-weight('semibold');
+			font-weight: 600;
+			fill: $text-primary;
 		}
 	}
 }

@@ -8,7 +8,6 @@ export * from './getting-started/vue';
 export * from './api';
 export * from './tabular-data-format';
 export * from './themes';
-export * from './feature-flags';
 export * from './event-listeners';
 export * from './color-palette';
 export * from './dual-axes';

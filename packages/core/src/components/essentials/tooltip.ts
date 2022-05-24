@@ -9,7 +9,7 @@ import * as Configuration from '../../configuration';
 import Position, { PLACEMENTS } from '@carbon/utils-position';
 
 // import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 // D3 Imports
 // @ts-ignore
@@ -269,7 +269,7 @@ export class Tooltip extends Component {
 			const chartprefix = Tools.getProperty(options, 'style', 'prefix');
 			this.tooltip = DOMUtils.appendOrSelect(
 				holder,
-				`div.${settings.prefix}--${chartprefix}--tooltip`
+				`div.${carbonPrefix}--${chartprefix}--tooltip`
 			);
 
 			this.tooltip.style('max-width', null).attr('role', 'tooltip');

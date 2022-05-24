@@ -1,10 +1,18 @@
-# `@carbon/charts-vue`
+# Notice
+
+### This version is in beta & relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+
+## `@carbon/charts-vue`
 
 > Carbon Charting Vue Wrappers
 
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
+
+## Maintenance & support
+
+These Vue wrappers are community-maintained.
 
 ## Getting started
 

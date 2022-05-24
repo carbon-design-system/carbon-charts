@@ -5,29 +5,12 @@ export const tabularTutorial = {
 	content: marked(`
 # Tabular data format
 
-In **v0.30.8** we updated updated the default data format to be of a tabular nature.
+The default data format in Carbon Charts has a tabular nature.
 
 This means more flexibility for our users in terms of the shape
 of the data they can provide to the library.
 
 \`\`\`js
-// Before
-const simpleBarData = {
-    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-    datasets: [
-        {
-            data: [
-                65000,
-                29123,
-                35213,
-                51213,
-                16932
-            ]
-        }
-    ]
-};
-
-// After
 const simpleBarData = [
     { group: "Qty", value: 65000 },
     { group: "More", value: 29123 },
@@ -37,12 +20,7 @@ const simpleBarData = [
 ];
 \`\`\`
 
-As you might have noticed in the examples above,
-the charting data provided in the existing format
-was an \`object\` that described labels, datasets and datapoints.
-
-Now in the new format you would provide
-an **array where each element is a datapoint.**
+Imagine an **array where each element is a datapoint.**
 
 Now we need to introduce some new fields into our \`axes\`
 options in order to map keys within our datapoints to axis values.

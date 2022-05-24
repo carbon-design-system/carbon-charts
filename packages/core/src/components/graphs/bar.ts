@@ -18,7 +18,11 @@ export class Bar extends Component {
 		}).width;
 
 		if (!mainXScale.step) {
-			const spacingFactor = Tools.getProperty(options, 'bars', 'spacingFactor');
+			const spacingFactor = Tools.getProperty(
+				options,
+				'bars',
+				'spacingFactor'
+			);
 
 			return Math.min(
 				options.bars.maxWidth,

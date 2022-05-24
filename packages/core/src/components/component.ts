@@ -8,7 +8,7 @@ import { Tools } from '../tools';
 import { select } from 'd3-selection';
 
 // import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
+import { carbonPrefix } from '../configuration-non-customizable';
 
 export class Component {
 	public type: string;
@@ -82,13 +82,13 @@ export class Component {
 				'prefix'
 			);
 			this.parent.classed(
-				`${settings.prefix}--${chartprefix}--${this.type}`,
+				`${carbonPrefix}--${chartprefix}--${this.type}`,
 				true
 			);
 
 			if (oldParent) {
 				oldParent.classed(
-					`${settings.prefix}--${chartprefix}--${this.type}`,
+					`${carbonPrefix}--${chartprefix}--${this.type}`,
 					false
 				);
 			}
@@ -112,7 +112,7 @@ export class Component {
 				this.parent,
 				`${
 					this.renderType === RenderTypes.SVG ? 'svg' : 'div'
-				}${idSelector}.${settings.prefix}--${chartprefix}--${this.type}`
+				}${idSelector}.${carbonPrefix}--${chartprefix}--${this.type}`
 			);
 
 			if (configs.withinChartClip) {

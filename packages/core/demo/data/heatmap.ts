@@ -618,7 +618,6 @@ export const heatmapOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
-	experimental: true,
 };
 
 export const heatmapQuantizeLegendOption = {
@@ -638,7 +637,6 @@ export const heatmapQuantizeLegendOption = {
 	heatmap: {
 		colorLegend: { title: 'Legend title', type: 'quantize' },
 	},
-	experimental: true,
 };
 
 export const heatmapPositiveNegativeOptions = Object.assign(
@@ -688,7 +686,6 @@ export const heatmapDomainOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
-	experimental: true,
 };
 
 export const heatmapMissingData = [
@@ -1151,5 +1148,4 @@ export const heatmapMissingDataOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' },
 	},
-	experimental: true,
 };

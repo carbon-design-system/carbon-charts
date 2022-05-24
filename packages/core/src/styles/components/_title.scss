@@ -1,11 +1,14 @@
-@import './../vendor/@carbon/type/scss/type';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--title {
 	p.title {
-		color: $text-01;
+		color: $text-primary;
 		font-size: 16px;
-		font-family: carbon--font-family('sans');
-		font-weight: carbon--font-weight('semibold');
+		font-family: font-family('sans');
+		// TODO-V11
+		// font-weight: font-weight('semibold');
+		font-weight: 600;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

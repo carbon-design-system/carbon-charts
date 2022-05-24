@@ -1,43 +1,44 @@
-@import './vendor/@carbon/type/scss/type';
-@import './vendor/@carbon/type/scss/font-face/sans';
-@import './vendor/@carbon/type/scss/font-face/sans-condensed';
-
-@import './chart-feature-flags';
-
-@if map-get($chart-feature-flags, 'enable-font-imports') == true {
-	@include carbon--font-face-sans();
-	@include carbon--font-face-sans-condensed();
-}
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout' as *;
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 
 	p {
 		padding: 0;
 		margin: 0;
 		font-size: 12px;
-		font-weight: carbon--font-weight('regular');
-		color: $text-02;
+		// TODO-V11
+		// font-weight: font-weight('regular');
+		font-weight: 400;
+		color: $text-secondary;
 	}
 
 	text {
 		font-size: 12px;
-		font-weight: carbon--font-weight('regular');
-		fill: $text-02;
+		// TODO-V11
+		// font-weight: font-weight('regular');
+		font-weight: 400;
+		fill: $text-secondary;
 	}
 
 	g.gauge-numbers text.gauge-value-number {
-		font-family: carbon--font-family('sans');
-		font-weight: carbon--font-weight('light');
+		font-family: font-family('sans');
+		// TODO-V11
+		// font-weight: font-weight('light');
+		font-weight: 300;
 	}
 
 	text.meter-title,
 	text.percent-value {
-		font-size: $carbon--base-font-size;
-		font-family: carbon--font-family('sans');
+		font-size: $base-font-size;
+		font-family: font-family('sans');
 	}
 
 	text.meter-title {
-		font-weight: carbon--font-weight('semibold');
+		// TODO-V11
+		// font-weight: font-weight('semibold');
+		font-weight: 600;
 	}
 }

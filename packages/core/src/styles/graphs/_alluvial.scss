@@ -1,30 +1,17 @@
-.#{$prefix}--#{$charts-prefix}--alluvial {
-	@if $carbon--theme ==
-		$carbon--theme--g90 or
-		$carbon--theme ==
-		$carbon--theme--g100
-	{
-		rect.node,
-		rect.node-text-bg {
-			fill: white;
-		}
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme" as *;
 
-		text.node-text {
-			fill: black;
-		}
+.#{$prefix}--#{$charts-prefix}--alluvial {
+	rect.node,
+	rect.node-text-bg {
+		fill: $layer-inverse-absolute;
 	}
 
-	@if $carbon--theme ==
-		$carbon--theme--g10 or
-		$carbon--theme ==
-		$carbon--theme--white
-	{
-		text.node-text {
-			fill: white;
-		}
+	text.node-text {
+		fill: $layer-01-absolute;
+	}
 
-		polygon.arrow-down {
-			fill: black;
-		}
+	polygon.arrow-down {
+		fill: $layer-01;
 	}
 }

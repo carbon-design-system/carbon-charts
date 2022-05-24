@@ -12,8 +12,18 @@ module.exports = {
 					loader: 'sass-loader',
 					options: {
 						sassOptions: {
-							includePaths: [path.resolve(__dirname + '../src')],
+							includePaths: [
+								path.resolve(__dirname, '..', 'node_modules'),
+								path.resolve(
+									__dirname,
+									'..',
+									'..',
+									'..',
+									'node_modules'
+								),
+							],
 						},
+						implementation: require('sass'),
 					},
 				},
 			],

@@ -1,6 +1,8 @@
 import { ZoomBarTypes, LegendItemType } from './interfaces';
 import { easeCubicInOut } from 'd3-ease';
 
+export const carbonPrefix = 'cds';
+
 export const area = {
 	opacity: {
 		unselected: 0.05,

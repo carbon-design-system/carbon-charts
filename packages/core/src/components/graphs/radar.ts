@@ -941,13 +941,18 @@ export class Radar extends Component {
 					.classed('hovered', true)
 					.attr('stroke-dasharray', '4 4');
 				dots.classed('hovered', true)
-					.attr('opacity', d => activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0)
+					.attr('opacity', (d) =>
+						activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1
+							? 1
+							: 0
+					)
 					.attr('r', Configuration.radar.dotsRadius);
-
 
 				// get the items that should be highlighted
 				const itemsToHighlight = self.fullDataNormalized.filter(
-					(d) => d[angle] === datum && activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1
+					(d) =>
+						d[angle] === datum &&
+						activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1
 				);
 
 				// Show tooltip

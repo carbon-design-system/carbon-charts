@@ -1,3 +1,7 @@
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--threshold {
 	line.threshold-line {
 		stroke: $red-50;
@@ -27,15 +31,15 @@
 	background-color: $red-50;
 	pointer-events: none;
 	transition: opacity 0.1s;
-	@include carbon--motion(standard, expressive);
+	@include motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: carbon--font-family('sans-condensed');
+	font-family: font-family('sans-condensed');
 
-	color: $text-01;
+	color: $text-primary;
 	line-height: 16px;
 	font-size: 12px;
 	padding: 4px;
@@ -44,6 +48,6 @@
 	&.hidden {
 		opacity: 0;
 		transition: opacity 0.1s;
-		@include carbon--motion(standard, expressive);
+		@include motion(standard, expressive);
 	}
 }

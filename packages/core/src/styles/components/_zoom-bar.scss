@@ -1,40 +1,42 @@
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--zoom-bar {
 	rect.zoom-bg {
-		fill: $ui-background;
-		stroke: $ui-01;
+		fill: $background;
+		stroke: $layer-01;
 	}
 
 	rect.zoom-slider-bg {
-		fill: $ui-01;
+		fill: $layer-01;
 	}
 
 	rect.zoom-slider-selected-area {
-		fill: $icon-02;
+		fill: $icon-secondary;
 	}
 
 	path.zoom-bg-baseline {
-		stroke: $ui-04;
+		stroke: $border-strong-01;
 		stroke-width: 2;
 	}
 
 	path.zoom-graph-area {
-		fill: $ui-03;
-		stroke: $ui-04;
+		fill: $layer-accent-01;
+		stroke: $border-strong-01;
 		stroke-width: 1;
 	}
 
 	path.zoom-graph-area-unselected {
-		fill: $ui-01;
+		fill: $layer-01;
 		stroke: none;
 	}
 
 	g.zoom-bar-brush {
 		rect.handle {
-			fill: $icon-02;
+			fill: $icon-secondary;
 		}
 
 		rect.handle-bar {
-			fill: $ui-02;
+			fill: $layer-02;
 		}
 
 		// clear d3.brush selection style

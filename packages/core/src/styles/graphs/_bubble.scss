@@ -1,14 +1,15 @@
-@import './../vendor/@carbon/motion/scss/motion.scss';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--bubble {
 	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all 0.1s;
-		@include carbon--motion(standard, expressive);
+		@include motion(standard, expressive);
 	}
 
 	circle.dot.unfilled {
-		fill: $ui-01;
+		fill: $layer-01;
 	}
 
 	g.lines path.line {

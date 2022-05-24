@@ -1,11 +1,17 @@
+@use "sass:color";
+@use "sass:map";
+
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme" as *;
+
 @import './color-palatte.scss';
 
-@function getThemeColors() {
-	@if $carbon--theme ==
-		$carbon--theme--g100 or
-		$carbon--theme ==
-		$carbon--theme--g90
-	{
+@function generateCSSCustomProperty($token, $fallback) {
+	@return var(--cds-charts-#{$token}, $fallback);
+}
+
+@function getThemeColors($theme_type) {
+	@if $theme_type == 'dark' {
 		@return color-property(null, $dark-theme-colors);
 	} @else {
 		@return color-property(null, $white-theme-colors);
@@ -17,18 +23,6 @@
 	$divergent: color-property(null, $divergent-quantize-colors);
 
 	@return map-merge($monochrome, $divergent);
-}
-
-@function getLegendAreaItemColors() {
-	@if $carbon--theme ==
-		$carbon--theme--g100 or
-		$carbon--theme ==
-		$carbon--theme--g90
-	{
-		@return color-property(null, $dark-theme-legend-area-item-colors);
-	} @else {
-		@return color-property(null, $white-theme-legend-area-item-colors);
-	}
 }
 
 @function color-property($name, $theme-colors) {
@@ -54,116 +48,92 @@
 	}
 }
 
-@function gradient-color-property($name, $theme-colors) {
-	$color-items: ();
-
-	@if type-of($theme-colors) == map {
-		@each $category, $value in $theme-colors {
-			@if $name == null {
-				$color-items: map-merge(
-					$color-items,
-					color-property('#{$category}', $value)
-				);
-			} @else {
-				$color-items: map-merge(
-					$color-items,
-					color-property('#{$name}-#{$category}', $value)
-				);
-			}
-		}
-		@return $color-items;
-	} @else {
-		@return (#{$name}: $theme-colors);
+$color-map-light: map-merge(getThemeColors('light'), getGradientColors());
+.#{$prefix}--chart-holder {
+	@each $token, $color in $color-map-light {
+		--cds-charts-#{$token}: #{$color};
+		--cds-charts-#{$token}-hovered: #{darken($color, 7%)};
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	$color-map: map-merge(getThemeColors(), getGradientColors());
+$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
+.#{$prefix}--chart-holder[data-carbon-theme='g90'],
+.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
+	@each $token, $color in $color-map-dark {
+		--cds-charts-#{$token}: #{$color};
+		--cds-charts-#{$token}-hovered: #{darken($color, 7%)};
+	}
+}
 
+$color-map: map-merge(getThemeColors('light'), getGradientColors());
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
-			fill: $color;
+			fill: generateCSSCustomProperty($token, $color);
 
 			&.hovered {
-				fill: darken($color, 7%);
+				fill: generateCSSCustomProperty(#{$token}-hovered, $color);
 				@include default_transition;
 			}
 		}
 
 		.background-#{$token} {
-			background-color: $color;
+			background-color: generateCSSCustomProperty($token, $color);
 
 			&.hovered {
-				background-color: darken($color, 7%);
+				background-color: generateCSSCustomProperty(
+					#{$token}-hovered,
+					$color
+				);
 				@include default_transition;
 			}
 		}
 
 		.stroke-#{$token} {
-			stroke: $color;
+			stroke: generateCSSCustomProperty($token, $color);
 		}
 
 		.stop-color-#{$token} {
-			stop-color: $color;
+			stop-color: generateCSSCustomProperty($token, $color);
 		}
 	}
 }
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
-	$color-map: getThemeColors();
+	$color-map: getThemeColors('light');
 
 	@each $token, $color in $color-map {
 		.tooltip-#{$token} {
-			background-color: $color;
+			background-color: generateCSSCustomProperty($token, $color);
 		}
 	}
 }
 
 .#{$prefix}--#{$charts-prefix}--legend {
-	$area-item-color-map: getLegendAreaItemColors();
-
 	.additional > .icon {
-		@each $token, $color in $area-item-color-map {
-			.area-#{$token} {
-				fill: $color;
+		.area-1 {
+			fill: $zone-fill-01;
+			stroke: $zone-stroke-01;
+		}
 
-				@if $carbon--theme ==
-					$carbon--theme--g100 or
-					$carbon--theme ==
-					$carbon--theme--g90
-				{
-					stroke: $dark-theme-legend-area-item-stroke;
-				} @else {
-					stroke: $white-theme-legend-area-item-stroke;
-				}
-			}
+		.area-2 {
+			fill: $zone-fill-02;
+			stroke: $zone-stroke-02;
+		}
+
+		.area-3 {
+			fill: $zone-fill-03;
+			stroke: $zone-stroke-03;
 		}
 
 		.quartile {
 			&-wrapper {
-				@if $carbon--theme ==
-					$carbon--theme--g100 or
-					$carbon--theme ==
-					$carbon--theme--g90
-				{
-					fill: getColorValue('gray', 80);
-					stroke: $dark-theme-legend-area-item-stroke;
-				} @else {
-					fill: getColorValue('gray', 20);
-					stroke: $white-theme-legend-area-item-stroke;
-				}
+				fill: $zone-fill-02;
+				stroke: $zone-stroke-01;
 			}
 
 			&-line {
-				@if $carbon--theme ==
-					$carbon--theme--g100 or
-					$carbon--theme ==
-					$carbon--theme--g90
-				{
-					fill: #fff;
-				} @else {
-					fill: #000;
-				}
+				fill: $layer-inverse-absolute;
 			}
 		}
 	}

@@ -1,174 +1,62 @@
-@import '../src/styles/vendor/@carbon/elements/scss/themes/mixins';
-@import '../src/styles/vendor/carbon-components/scss/globals/grid/grid';
-@import '../src/styles/vendor/carbon-components/scss/components/button/button';
-@import '../src/styles/vendor/carbon-components/scss/components/select/select';
-@import '../src/styles/vendor/carbon-components/scss/components/tag/tag';
-@import '../src/styles/vendor/carbon-components/scss/components/tooltip/tooltip';
-@import '../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button';
-@import '../src/styles/vendor/carbon-components/scss/components/notification/inline-notification';
+@use "@carbon/styles";
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/type" as *;
 
-@import '../src/styles/vendor/carbon-components/scss/components/overflow-menu/overflow-menu';
-@import '../src/styles/vendor/carbon-components/scss/components/modal/modal';
-@import '../src/styles/vendor/carbon-components/scss/components/data-table-v2/data-table-v2';
-@import '../src/styles/vendor/carbon-components/scss/components/tile/tile';
+@import '../src/styles/styles.scss';
 
-body {
-	margin: 0;
+html {
+	@include styles.theme(styles.$white);
+}
 
-	/* width */
-	&::-webkit-scrollbar {
-		width: 10px;
-	}
+html[data-carbon-theme='g10'] {
+	@include styles.theme(styles.$g10);
+}
 
-	/* Track */
-	&::-webkit-scrollbar-track {
-		background: #f1f1f1;
-	}
+html[data-carbon-theme='g90'] {
+	@include styles.theme(styles.$g90);
+}
 
-	/* Handle */
-	&::-webkit-scrollbar-thumb {
-		background: #888;
-	}
-
-	/* Handle on hover */
-	&::-webkit-scrollbar-thumb:hover {
-		background: #555;
-	}
+html[data-carbon-theme='g100'] {
+	@include styles.theme(styles.$g100);
 }
 
 div.container {
+	color: theme.$text-primary;
+	background-color: theme.$background;
 	font-family: 'IBM Plex Sans', Arial, sans-serif;
 	padding: 30px;
 
-	&.theme--white {
-		@import '../src/styles/styles-white.scss';
+	div.v10-banner {
+		background-color: var(--cds-charts-5-1-1, #6929c4);
+		padding: 1rem 30px;
+		color: #ffffffde;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		margin: -30px -30px 30px -30px;
 
-		@include carbon--theme($carbon--theme--white) {
-			color: $text-01;
-			background-color: $ui-background;
-			line-height: 1;
-
-			@import './resource-card.scss';
+		b {
+			font-weight: 600;
 		}
-	}
 
-	&.theme--g10 {
-		@import '../src/styles/styles-g10.scss';
-
-		@include carbon--theme($carbon--theme--g10) {
-			color: $text-01;
-			background-color: $ui-background;
-			line-height: 1;
-
-			@import './resource-card.scss';
-
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
-		}
-	}
-
-	&.theme--g90 {
-		@import '../src/styles/styles-g90.scss';
-
-		@include carbon--theme($carbon--theme--g90) {
-			color: $text-01;
-			background-color: $ui-background;
-			line-height: 1;
-
-			@import './resource-card.scss';
-
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
-
-			.bx--radio-button__appearance {
-				background-color: transparent;
-				border-color: $icon-01;
-			}
-
-			.bx--radio-button:checked
-				+ .bx--radio-button__label
-				.bx--radio-button__appearance {
-				border-color: $icon-01;
-
-				&:before {
-					background-color: $icon-01;
-
-					// Allow the selected button to be seen in Windows HCM for IE/Edge
-					@media screen and (-ms-high-contrast: active) {
-						// Utilize a system color variable to accomodate any user HCM theme
-						background-color: windowText;
-					}
-				}
-			}
-		}
-	}
-
-	&.theme--g100 {
-		@import '../src/styles/styles-g100.scss';
-
-		@include carbon--theme($carbon--theme--g100) {
-			color: $text-01;
-			background-color: $ui-background;
-			line-height: 1;
-
-			@import './resource-card.scss';
-
-			@include modal;
-			@include overflow-menu;
-			@include data-table-core;
-			@include select;
-
-			.bx--radio-button__appearance {
-				background-color: transparent;
-				border-color: $icon-01;
-			}
-
-			.bx--radio-button:checked
-				+ .bx--radio-button__label
-				.bx--radio-button__appearance {
-				border-color: $icon-01;
-
-				&:before {
-					background-color: $icon-01;
-
-					// Allow the selected button to be seen in Windows HCM for IE/Edge
-					@media screen and (-ms-high-contrast: active) {
-						// Utilize a system color variable to accomodate any user HCM theme
-						background-color: windowText;
-					}
-				}
-			}
+		a {
+			color: #fff;
 		}
 	}
 
 	div#color-palette-picker {
 		max-width: 18rem;
-	}
-
-	&.theme--g90,
-	&.theme--g100 {
-		.bx--label {
-			color: #fff;
-			opacity: 0.6;
-		}
-
-		a {
-			color: #78a9ff;
-		}
+		margin-top: 2rem;
 	}
 
 	#chart-demo {
 		max-width: 700px;
 	}
 
-	.bx--grid {
+	.cds--grid {
 		padding: 0;
 
-		.bx--row .chart-demo {
+		.cds--row .chart-demo {
 			margin-bottom: 60px;
 		}
 	}
@@ -181,7 +69,7 @@ div.container {
 			margin-right: 10px;
 		}
 
-		span.bx--tag.component-name {
+		span.cds--tag.component-name {
 			font-size: 0.55em;
 			vertical-align: middle;
 			padding: 0.25em 1em;
@@ -201,7 +89,7 @@ div.container {
 	}
 
 	// Replace with Carbon .scss imports
-	div.bx--snippet--multi {
+	div.cds--snippet--multi {
 		background-color: black;
 		color: white;
 
@@ -212,7 +100,7 @@ div.container {
 			line-height: 1.4;
 		}
 
-		.bx--snippet-container pre::after {
+		.cds--snippet-container pre::after {
 			display: none;
 		}
 
@@ -229,12 +117,12 @@ div.container {
 		}
 	}
 
-	.bx--snippet--multi .bx--snippet-container pre code {
+	.cds--snippet--multi .cds--snippet-container pre code {
 		font-size: 14px;
 	}
 
-	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container,
-	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
+	.cds--snippet--multi.cds--snippet--expand .cds--snippet-container,
+	.cds--snippet--multi.cds--snippet--expand .cds--snippet-container pre {
 		padding-bottom: 0;
 	}
 
@@ -309,7 +197,7 @@ div.container {
 		.welcome__heading {
 			@include type-style('productive-heading-07');
 
-			color: $inverse-01;
+			color: theme.$text-inverse;
 		}
 
 		.welcome__heading--subtitle {
@@ -423,4 +311,163 @@ div.container {
 		margin-bottom: 75px;
 		margin-top: 25px;
 	}
+}
+
+.resource-card-group {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 30px;
+	max-width: 700px;
+
+	.#{$prefix}--col-md-6.#{$prefix}--col-lg-6 {
+		border: 1px solid theme.$background;
+		padding: 0;
+	}
+
+	.#{$prefix}--col-lg-6 {
+		width: 100%;
+	}
+
+	@media (min-width: 42rem) {
+		.#{$prefix}--col-md-6 {
+			display: block;
+			max-width: 75%;
+			flex: 0 0 75%;
+		}
+	}
+
+	@media (min-width: 66rem) {
+		.#{$prefix}--col-lg-6 {
+			display: block;
+			max-width: 50%;
+			flex: 0 0 50%;
+		}
+	}
+}
+
+.#{$prefix}--aspect-ratio--object {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.#{$prefix}--resource-card .#{$prefix}--tile {
+	background: theme.$layer-01;
+	height: 100%;
+	padding: 1rem 25% 1rem 1rem;
+	position: relative;
+	transition: background 70ms;
+	text-decoration: none;
+}
+
+.#{$prefix}--resource-card .#{$prefix}--tile:hover {
+	background: theme.$background-hover;
+}
+
+.#{$prefix}--resource-card__title {
+	@include type-style('productive-heading-03');
+	text-decoration: none;
+	color: theme.$text-primary;
+}
+
+.#{$prefix}--resource-card__subtitle {
+	@include type-style('heading-01');
+	font-weight: 400;
+	text-decoration: none;
+	color: theme.$text-primary;
+}
+
+.#{$prefix}--resource-card__icon--img {
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+	min-width: 32px;
+	min-height: 32px;
+	display: flex;
+	align-items: flex-end;
+}
+
+.#{$prefix}--resource-card__icon--img .gatsby-resp-image-wrapper,
+.#{$prefix}--resource-card__icon--img img[src*='gif'],
+.#{$prefix}--resource-card__icon--img img[src*='svg'] {
+	margin-bottom: 0;
+}
+
+.#{$prefix}--resource-card__icon--img .gatsby-resp-image-wrapper {
+	position: static !important; //important needed to override inline style added by Gatsby
+}
+
+.#{$prefix}--resource-card__icon--action {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	width: 20px;
+	height: 20px;
+}
+
+.#{$prefix}--resource-card .#{$prefix}--resource-card__icon--action svg {
+	fill: theme.$icon-primary;
+}
+
+// Dark
+.#{$prefix}--resource-card--dark .#{$prefix}--tile {
+	background: $gray-90; //$background for gray 90 theme
+}
+
+.#{$prefix}--resource-card--dark .#{$prefix}--tile:hover {
+	background: $gray-80; //$background-hover for gray 90 theme
+}
+
+.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__title,
+.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__subtitle {
+	color: theme.$text-on-color;
+}
+
+.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__icon--action svg {
+	fill: $gray-10;
+}
+
+// Disabled
+.#{$prefix}--resource-card--disabled .#{$prefix}--tile:hover {
+	background: theme.$layer-01;
+	cursor: not-allowed;
+}
+
+.#{$prefix}--resource-card--disabled .#{$prefix}--resource-card__title,
+.#{$prefix}--resource-card--disabled .#{$prefix}--resource-card__subtitle {
+	color: theme.$icon-on-color-disabled;
+}
+
+.#{$prefix}--resource-card--disabled
+	.#{$prefix}--resource-card__icon--action
+	svg {
+	fill: theme.$icon-disabled;
+}
+
+.#{$prefix}--resource-card--disabled .#{$prefix}--resource-card__icon--img {
+	filter: grayscale(100%);
+	opacity: 0.5;
+}
+
+// Disabled dark
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
+	.#{$prefix}--tile:hover {
+	background: $gray-90; //$background for gray 90 theme
+}
+
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
+	.#{$prefix}--resource-card__title,
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
+	.#{$prefix}--resource-card__subtitle {
+	color: $gray-50; //$icon-on-color-disabled for gray 90
+}
+
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
+	.#{$prefix}--resource-card__icon--action
+	svg {
+	fill: $gray-70; //$disabled-02 for gray 90
 }

@@ -1,3 +1,5 @@
+@use '@carbon/styles/scss/theme' as *;
+
 .#{$prefix}--#{$charts-prefix}--zero-line line.domain {
-	stroke: $ui-04;
+	stroke: $border-strong-01;
 }

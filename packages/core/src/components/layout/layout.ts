@@ -16,7 +16,7 @@ import { ChartModel } from '../../model/model';
 import { select } from 'd3-selection';
 
 // import the settings for the css prefix
-import settings from 'carbon-components/es/globals/js/settings';
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
@@ -104,23 +104,23 @@ export class LayoutComponent extends Component {
 		// Add new boxes to the DOM for each layout child
 		const updatedBoxes = parent
 			.classed(
-				`${settings.prefix}--${chartprefix}--layout-row`,
+				`${carbonPrefix}--${chartprefix}--layout-row`,
 				this.configs.direction === LayoutDirection.ROW
 			)
 			.classed(
-				`${settings.prefix}--${chartprefix}--layout-row-reverse`,
+				`${carbonPrefix}--${chartprefix}--layout-row-reverse`,
 				this.configs.direction === LayoutDirection.ROW_REVERSE
 			)
 			.classed(
-				`${settings.prefix}--${chartprefix}--layout-column`,
+				`${carbonPrefix}--${chartprefix}--layout-column`,
 				this.configs.direction === LayoutDirection.COLUMN
 			)
 			.classed(
-				`${settings.prefix}--${chartprefix}--layout-column-reverse`,
+				`${carbonPrefix}--${chartprefix}--layout-column-reverse`,
 				this.configs.direction === LayoutDirection.COLUMN_REVERSE
 			)
 			.classed(
-				`${settings.prefix}--${chartprefix}--layout-alignitems-center`,
+				`${carbonPrefix}--${chartprefix}--layout-alignitems-center`,
 				this.configs.alignItems === LayoutAlignItems.CENTER
 			)
 			.selectAll(`div.layout-child-${this._instanceID}`)
