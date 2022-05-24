@@ -16,7 +16,7 @@ set -e # exit with nonzero exit code if anything fails
 # # checkout master to get out of detached HEAD state
 # git checkout master
 
-lerna version --preid latest-carbon-v11-beta --no-push
+lerna version --preid beta --no-push
 
 echo "Publish to NPM"
 
@@ -27,4 +27,4 @@ echo "Publish to NPM"
 
 node scripts/add-telemetry-to-packages.js
 
-lerna publish from-package --yes --force-publish --contents dist --dist-tag latest-carbon-v11-beta
+lerna publish from-package --yes --force-publish --contents dist --dist-tag beta
