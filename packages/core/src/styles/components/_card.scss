@@ -1,15 +1,12 @@
-@use '@carbon/styles/scss/type' as *;
+@use "@carbon/styles/scss/type" as *;
 
-@import 'carbon-components/scss/globals/scss/vars';
-@import 'carbon-components/scss/globals/scss/_helper-mixins';
+@import "@carbon/themes/scss/tokens";
+@import "@carbon/layout/scss/spacing";
 
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/layout/scss/spacing';
-
-@import '@carbon/import-once/scss/index';
+@import "@carbon/import-once/scss/index";
 
 @mixin stacked-card {
-	content: '';
+	content: "";
 	height: 100%;
 	width: 100%;
 	position: absolute;
@@ -19,14 +16,14 @@
 	pointer-events: none;
 }
 
-@include exports('cc-card') {
+@include exports("cc-card") {
 	.#{$prefix}--#{$charts-prefix}--card {
 		display: flex;
 		position: relative;
 		background-color: $layer-01;
 		z-index: 1;
 		box-sizing: border-box;
-		font-family: font-family('sans');
+		font-family: font-family("sans");
 		width: 100%;
 		height: 100%;
 		padding: $spacing-05 $spacing-04;
