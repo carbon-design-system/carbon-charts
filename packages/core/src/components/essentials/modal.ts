@@ -8,7 +8,7 @@ import { Events } from '../../interfaces';
 import { Modal as CarbonModalComponent } from 'carbon-components';
 
 // import the settings for the css prefix
-import { carbonPrefix } from "../../configuration-non-customizable";
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 // D3 Imports
 import { select } from 'd3-selection';

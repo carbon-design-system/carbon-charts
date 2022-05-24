@@ -53,7 +53,7 @@
 	.#{$prefix}--#{$charts-prefix}--card--a:hover,
 	.#{$prefix}--#{$charts-prefix}--card--button:focus,
 	.#{$prefix}--#{$charts-prefix}--card--button:hover {
-		background-color: $background-hover;
+		background-color: $network-diagrams-background-hover;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card--a:focus,

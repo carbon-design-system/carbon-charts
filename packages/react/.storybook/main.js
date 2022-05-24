@@ -12,7 +12,9 @@ module.exports = {
 					loader: 'sass-loader',
 					options: {
 						sassOptions: {
-							includePaths: [path.resolve(__dirname + '../../core/src')],
+							includePaths: [
+								path.resolve(__dirname + '../../core/src'),
+							],
 						},
 					},
 				},

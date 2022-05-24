@@ -4,14 +4,14 @@
 @use "@carbon/styles/scss/themes";
 @use "@carbon/styles/scss/theme" as *;
 
-@import "./color-palatte.scss";
+@import './color-palatte.scss';
 
 @function generateCSSCustomProperty($token, $fallback) {
 	@return var(--cds-charts-#{$token}, $fallback);
 }
 
 @function getThemeColors($theme_type) {
-	@if $theme_type == "dark" {
+	@if $theme_type == 'dark' {
 		@return color-property(null, $dark-theme-colors);
 	} @else {
 		@return color-property(null, $white-theme-colors);
@@ -31,9 +31,15 @@
 	@if type-of($theme-colors) == map {
 		@each $category, $value in $theme-colors {
 			@if $name == null {
-				$color-items: map-merge($color-items, color-property("#{$category}", $value));
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$category}', $value)
+				);
 			} @else {
-				$color-items: map-merge($color-items, color-property("#{$name}-#{$category}", $value));
+				$color-items: map-merge(
+					$color-items,
+					color-property('#{$name}-#{$category}', $value)
+				);
 			}
 		}
 		@return $color-items;
@@ -42,7 +48,7 @@
 	}
 }
 
-$color-map-light: map-merge(getThemeColors("light"), getGradientColors());
+$color-map-light: map-merge(getThemeColors('light'), getGradientColors());
 .#{$prefix}--chart-holder {
 	@each $token, $color in $color-map-light {
 		--cds-charts-#{$token}: #{$color};
@@ -50,16 +56,16 @@ $color-map-light: map-merge(getThemeColors("light"), getGradientColors());
 	}
 }
 
-$color-map-dark: map-merge(getThemeColors("dark"), getGradientColors());
-.#{$prefix}--chart-holder[data-carbon-theme="g90"],
-.#{$prefix}--chart-holder[data-carbon-theme="g100"] {
+$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
+.#{$prefix}--chart-holder[data-carbon-theme='g90'],
+.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
 	@each $token, $color in $color-map-dark {
 		--cds-charts-#{$token}: #{$color};
 		--cds-charts-#{$token}-hovered: #{darken($color, 7%)};
 	}
 }
 
-$color-map: map-merge(getThemeColors("light"), getGradientColors());
+$color-map: map-merge(getThemeColors('light'), getGradientColors());
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
@@ -75,7 +81,10 @@ $color-map: map-merge(getThemeColors("light"), getGradientColors());
 			background-color: generateCSSCustomProperty($token, $color);
 
 			&.hovered {
-				background-color: generateCSSCustomProperty(#{$token}-hovered, $color);
+				background-color: generateCSSCustomProperty(
+					#{$token}-hovered,
+					$color
+				);
 				@include default_transition;
 			}
 		}
@@ -91,7 +100,7 @@ $color-map: map-merge(getThemeColors("light"), getGradientColors());
 }
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
-	$color-map: getThemeColors("light");
+	$color-map: getThemeColors('light');
 
 	@each $token, $color in $color-map {
 		.tooltip-#{$token} {

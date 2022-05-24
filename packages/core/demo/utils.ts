@@ -51,10 +51,7 @@ const generateThemePickerHTML = (container, configs) => {
 			'true'
 		);
 	} else {
-		div.querySelector(`input#theme__white`).setAttribute(
-			'checked',
-			'true'
-		);
+		div.querySelector(`input#theme__white`).setAttribute('checked', 'true');
 	}
 
 	container.querySelector('#charting-controls').appendChild(div);

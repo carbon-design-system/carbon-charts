@@ -12,7 +12,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: font-family("sans-condensed");
+	font-family: font-family('sans-condensed');
 	transition: visibility 0s linear 0.1s, opacity 0.1s;
 
 	&.hidden {

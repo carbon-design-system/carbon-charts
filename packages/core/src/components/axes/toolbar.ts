@@ -88,7 +88,10 @@ export class Toolbar extends Component {
 			const enteringToolbarControls = toolbarControls
 				.enter()
 				.append('div')
-				.attr('class', 'toolbar-control cds--overflow-menu cds--overflow-menu')
+				.attr(
+					'class',
+					'toolbar-control cds--overflow-menu cds--overflow-menu'
+				)
 				.attr('role', 'button');
 
 			const self = this;
@@ -169,12 +172,18 @@ export class Toolbar extends Component {
 					`control-${d.id}`
 				)
 			)
-			.attr('class', 'cds--overflow-menu-options__option cds--overflow-menu-options__option')
+			.attr(
+				'class',
+				'cds--overflow-menu-options__option cds--overflow-menu-options__option'
+			)
 			.attr('role', 'menuitem');
 
 		enteringOverflowMenuControls
 			.append('button')
-			.attr('class', 'cds--overflow-menu-options__btn cds--overflow-menu-options__btn');
+			.attr(
+				'class',
+				'cds--overflow-menu-options__btn cds--overflow-menu-options__btn'
+			);
 
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
@@ -204,13 +213,8 @@ export class Toolbar extends Component {
 		if (this.overflowButton) {
 			this.overflowButton.attr('aria-expanded', show);
 			select(this.overflowButton.node().parentNode)
-				.classed(
-					'cds--overflow-menu--open',
-					show
-				).classed(
-					'cds--overflow-menu--open',
-					show
-				);
+				.classed('cds--overflow-menu--open', show)
+				.classed('cds--overflow-menu--open', show);
 		}
 
 		if (show) {

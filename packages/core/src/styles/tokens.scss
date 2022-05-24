@@ -170,6 +170,29 @@ $meter-range-indicator: (
 	),
 ) !default;
 
+// NETWORK DIAGRAMS
+$network-diagrams-background-hover: (
+	fallback: #f1f1f1,
+	values: (
+		(
+			theme: themes.$white,
+			value: #f1f1f1,
+		),
+		(
+			theme: themes.$g10,
+			value: #f1f1f1,
+		),
+		(
+			theme: themes.$g90,
+			value: #ededed,
+		),
+		(
+			theme: themes.$g100,
+			value: #ededed,
+		),
+	),
+) !default;
+
 // TOOLTIP
 $tooltip-line-border: (
 	fallback: map.get(themes.$white, layer-accent-01),
@@ -335,6 +358,8 @@ $custom-charting-tokens: (
 	grid-bg: $grid-bg,
 	// METER
 	meter-range-indicator: $meter-range-indicator,
+	// NETWORK DIAGRAMS
+	network-diagrams-background-hover: $network-diagrams-background-hover,
 	// TOOLTIP
 	tooltip-line-border: $tooltip-line-border,
 	// ZONES
@@ -347,27 +372,45 @@ $custom-charting-tokens: (
 );
 
 // DARK/LIGHT THEME
-$color-scheme: component-tokens.get-var($color-scheme, "color-scheme");
+$color-scheme: component-tokens.get-var($color-scheme, 'color-scheme');
 
 // ELEMENTS
-$alert-stroke: component-tokens.get-var($alert-stroke, "alert-stroke");
-$layer-01-absolute: component-tokens.get-var($layer-01-absolute, "layer-01-absolute");
-$layer-inverse-absolute: component-tokens.get-var($layer-inverse-absolute, "layer-inverse-absolute");
-$null-state: component-tokens.get-var($null-state, "null-state");
+$alert-stroke: component-tokens.get-var($alert-stroke, 'alert-stroke');
+$layer-01-absolute: component-tokens.get-var(
+	$layer-01-absolute,
+	'layer-01-absolute'
+);
+$layer-inverse-absolute: component-tokens.get-var(
+	$layer-inverse-absolute,
+	'layer-inverse-absolute'
+);
+$null-state: component-tokens.get-var($null-state, 'null-state');
 
 // GRID
-$grid-bg: component-tokens.get-var($grid-bg, "grid-bg");
+$grid-bg: component-tokens.get-var($grid-bg, 'grid-bg');
 
 // METER
-$meter-range-indicator: component-tokens.get-var($meter-range-indicator, "meter-range-indicator");
+$meter-range-indicator: component-tokens.get-var(
+	$meter-range-indicator,
+	'meter-range-indicator'
+);
+
+// NETWORK DIAGRAMS
+$network-diagrams-background-hover: component-tokens.get-var(
+	$network-diagrams-background-hover,
+	'network-diagrams-background-hover'
+);
 
 // TOOLTIP
-$tooltip-line-border: component-tokens.get-var($tooltip-line-border, "tooltip-line-border");
+$tooltip-line-border: component-tokens.get-var(
+	$tooltip-line-border,
+	'tooltip-line-border'
+);
 
 // ZONES
-$zone-fill-01: component-tokens.get-var($zone-fill-01, "zone-fill-01");
-$zone-stroke-01: component-tokens.get-var($zone-stroke-01, "zone-stroke-01");
-$zone-fill-02: component-tokens.get-var($zone-fill-02, "zone-fill-02");
-$zone-stroke-02: component-tokens.get-var($zone-stroke-02, "zone-stroke-02");
-$zone-fill-03: component-tokens.get-var($zone-fill-03, "zone-fill-03");
-$zone-stroke-03: component-tokens.get-var($zone-stroke-03, "zone-stroke-03");
+$zone-fill-01: component-tokens.get-var($zone-fill-01, 'zone-fill-01');
+$zone-stroke-01: component-tokens.get-var($zone-stroke-01, 'zone-stroke-01');
+$zone-fill-02: component-tokens.get-var($zone-fill-02, 'zone-fill-02');
+$zone-stroke-02: component-tokens.get-var($zone-stroke-02, 'zone-stroke-02');
+$zone-fill-03: component-tokens.get-var($zone-fill-03, 'zone-fill-03');
+$zone-stroke-03: component-tokens.get-var($zone-stroke-03, 'zone-stroke-03');

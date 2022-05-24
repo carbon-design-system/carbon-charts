@@ -305,7 +305,11 @@ export class StackedBar extends Bar {
 
 		const numberOfDomainValues = this.model.getStackKeys().length;
 
-		const spacingFactor = Tools.getProperty(options, 'bars', 'spacingFactor');
+		const spacingFactor = Tools.getProperty(
+			options,
+			'bars',
+			'spacingFactor'
+		);
 
 		if (!mainXScale.step) {
 			return Math.min(

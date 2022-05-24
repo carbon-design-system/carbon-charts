@@ -16,7 +16,7 @@ import { ChartModel } from '../../model/model';
 import { select } from 'd3-selection';
 
 // import the settings for the css prefix
-import { carbonPrefix } from "../../configuration-non-customizable";
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID

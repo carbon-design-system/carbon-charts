@@ -9,7 +9,7 @@ import * as Configuration from '../../configuration';
 import Position, { PLACEMENTS } from '@carbon/utils-position';
 
 // import the settings for the css prefix
-import { carbonPrefix } from "../../configuration-non-customizable";
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 // D3 Imports
 // @ts-ignore

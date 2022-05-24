@@ -7,7 +7,7 @@ import { select, Selection } from 'd3-selection';
 import { Tools } from '../../tools';
 
 // import the settings for the css prefix
-import { carbonPrefix } from "../../configuration-non-customizable";
+import { carbonPrefix } from '../../configuration-non-customizable';
 
 // MISC
 import ResizeObserver from 'resize-observer-polyfill';
@@ -247,10 +247,7 @@ export class DOMUtils extends Service {
 		const holderElement = this.getHolder() as HTMLElement;
 
 		// Add class to chart holder
-		select(this.getHolder()).classed(
-			`${carbonPrefix}--chart-holder`,
-			true
-		);
+		select(this.getHolder()).classed(`${carbonPrefix}--chart-holder`, true);
 
 		// In order for resize events to not clash with these updates
 		// We'll check if the width & height values passed in options

@@ -46,7 +46,7 @@
 	.#{$prefix}--#{$charts-prefix}--shape-node--a:hover,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:focus,
 	.#{$prefix}--#{$charts-prefix}--shape-node--button:hover {
-		background-color: $background-hover;
+		background-color: $network-diagrams-background-hover;
 
 		.#{$prefix}--#{$charts-prefix}--shape-node__title,
 		.#{$prefix}--#{$charts-prefix}--shape-node__subtitle {

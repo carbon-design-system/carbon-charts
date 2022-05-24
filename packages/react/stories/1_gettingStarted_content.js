@@ -1,9 +1,9 @@
 import marked from 'marked';
 
 export const reactGettingStartedTutorial = {
-  name: 'React',
-  type: 'getting-started',
-  content: marked(`
+	name: 'React',
+	type: 'getting-started',
+	content: marked(`
 # Carbon Charts - React
 
 The Carbon Charts library provides a collection of reusable charting components to

@@ -2,51 +2,51 @@
 @use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--axes {
-  overflow: visible;
+	overflow: visible;
 
-  g.axis {
-    g.ticks.invisible {
-      visibility: hidden;
-    }
+	g.axis {
+		g.ticks.invisible {
+			visibility: hidden;
+		}
 
-    g.tick-hover rect.axis-holder {
-      fill: transparent;
-      stroke: transparent;
-      stroke-width: 2px;
-    }
+		g.tick-hover rect.axis-holder {
+			fill: transparent;
+			stroke: transparent;
+			stroke-width: 2px;
+		}
 
-    g.tick-hover:hover,
-    g.tick-hover:focus {
-      rect.axis-holder {
-        fill: $layer-selected-inverse;
-        stroke: $layer-selected-inverse;
-        stroke-width: 2px;
-      }
+		g.tick-hover:hover,
+		g.tick-hover:focus {
+			rect.axis-holder {
+				fill: $layer-selected-inverse;
+				stroke: $layer-selected-inverse;
+				stroke-width: 2px;
+			}
 
-      text {
-        fill: $layer-selected;
-      }
-    }
+			text {
+				fill: $layer-selected;
+			}
+		}
 
-    g.tick text {
-      fill: $text-secondary;
-      font-family: font-family('sans-condensed');
-    }
+		g.tick text {
+			fill: $text-secondary;
+			font-family: font-family('sans-condensed');
+		}
 
-    g.tick line {
-      display: none;
-    }
+		g.tick line {
+			display: none;
+		}
 
-    path.domain {
-      stroke: $border-strong-01;
-    }
+		path.domain {
+			stroke: $border-strong-01;
+		}
 
-    .axis-title {
-      font-family: font-family('sans');
-	  // TODO-V11
-	  // font-weight: font-weight('semibold');
-      font-weight: 600;
-      fill: $text-primary;
-    }
-  }
+		.axis-title {
+			font-family: font-family('sans');
+			// TODO-V11
+			// font-weight: font-weight('semibold');
+			font-weight: 600;
+			fill: $text-primary;
+		}
+	}
 }

@@ -48,7 +48,7 @@
 	.#{$prefix}--#{$charts-prefix}--card-node--a:hover,
 	.#{$prefix}--#{$charts-prefix}--card-node--button:focus,
 	.#{$prefix}--#{$charts-prefix}--card-node--button:hover {
-		background-color: $background-hover;
+		background-color: $network-diagrams-background-hover;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
