@@ -1,8 +1,6 @@
-@import 'carbon-components/scss/globals/scss/vars';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/import-once/scss/index';
-@import 'carbon-components/scss/globals/scss/_helper-mixins';
 
 @include exports('cc-edge') {
 	.#{$prefix}--#{$charts-prefix}--edge {

@@ -2,11 +2,12 @@ import { getParameters } from 'codesandbox/lib/api/define';
 
 const packageJSON = require('@carbon/charts/package.json');
 const libraryVersion = packageJSON.version;
-const carbonComponentsVersion =
-	packageJSON.devDependencies['carbon-components'];
+const carbonStylesVersion = packageJSON.dependencies['@carbon/styles'];
+const carbonColorsVersion = packageJSON.dependencies['@carbon/colors'];
 
-const plexAndCarbonComponentsCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
-@import "https://unpkg.com/carbon-components/css/carbon-components.min.css";
+const plexAndCarbonComponentsSCSS = `@use "@carbon/styles";
+
+@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 `;
 
 const D3VERSION = '^7.0.0';
@@ -37,14 +38,11 @@ export const createVanillaChartApp = (demo: any) => {
 			crossorigin="anonymous"
 			href="https://fonts.gstatic.com"
 		/>
+
 		<link
 			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
 			rel="stylesheet"
 			crossorigin="anonymous"
-		/>
-		<link
-			href="https://unpkg.com/carbon-components/css/carbon-components.min.css"
-			rel="stylesheet"
 		/>
 	</head>
 	<body>
@@ -53,7 +51,10 @@ export const createVanillaChartApp = (demo: any) => {
 		<script src="src/index.js"></script>
 	</body>
 </html>`;
-	const indexJs = `import "@carbon/charts/styles.css";
+
+	const indexJs = `import "./carbon-styles.scss";
+
+import "@carbon/charts/styles.css";
 import { ${chartComponent} } from "@carbon/charts";
 
 const data = ${chartData};
@@ -67,6 +68,9 @@ new ${chartComponent}(chartHolder, {
 	options
 });
 `;
+
+	const carbonStylesSCSS = `@use "@carbon/styles";`;
+
 	const packageJson = {
 		scripts: {
 			start: 'parcel index.html --open',
@@ -74,7 +78,8 @@ new ${chartComponent}(chartHolder, {
 		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
-			'carbon-components': carbonComponentsVersion,
+			'@carbon/colors': carbonColorsVersion,
+			'@carbon/styles': carbonStylesVersion,
 			d3: D3VERSION,
 		},
 		devDependencies: {
@@ -85,6 +90,7 @@ new ${chartComponent}(chartHolder, {
 	return {
 		'index.html': indexHtml,
 		'src/index.js': indexJs,
+		'src/carbon-styles.scss': carbonStylesSCSS,
 		'package.json': packageJson,
 	};
 };
@@ -100,13 +106,12 @@ export const createReactChartApp = (demo: any) => {
 	const indexJs = `import React from "react";
 import ReactDOM from "react-dom";
 import { ${chartComponent} } from "@carbon/charts-react";
+
 import "@carbon/charts/styles.css";
-// Or
-// import "@carbon/charts/styles/styles.scss";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./plex-and-carbon-components.css";
+import "./plex-and-carbon-styles.scss";
 
 class App extends React.Component {
 	state = {
@@ -127,18 +132,19 @@ ReactDOM.render(<App />, document.getElementById("root"));
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-react': libraryVersion,
+			'@carbon/colors': carbonColorsVersion,
+			'@carbon/styles': carbonStylesVersion,
 			d3: D3VERSION,
 			react: '16.12.0',
 			'react-dom': '16.12.0',
 			'react-scripts': '3.0.1',
-			'carbon-components': carbonComponentsVersion,
 		},
 	};
 
 	return {
 		'src/index.html': indexHtml,
 		'src/index.js': indexJs,
-		'src/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
+		'src/plex-and-carbon-styles.scss': plexAndCarbonComponentsSCSS,
 		'package.json': packageJson,
 	};
 };
@@ -155,7 +161,7 @@ import "@carbon/charts/styles.css";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./plex-and-carbon-components.css";
+import "./plex-and-carbon-styles.scss";
 
 @Component({
 	selector: "app-root",
@@ -177,45 +183,6 @@ import { AppComponent } from "./app.component";
 })
 export class AppModule {}`;
 
-	const indexHtml = `<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Angular</title>
-	</head>
-	<body>
-		<app-root></app-root>
-	</body>
-</html>`;
-
-	const mainTs = `import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { AppModule } from "./app/app.module";
-platformBrowserDynamic()
-	.bootstrapModule(AppModule)
-	.catch(err => console.log(err));
-`;
-
-	const angularCliJson = `{
-	"apps": [
-		{
-			"root": "src",
-			"outDir": "dist",
-			"assets": ["assets", "favicon.ico"],
-			"index": "index.html",
-			"main": "main.ts",
-			"polyfills": "polyfills.ts",
-			"prefix": "app",
-			"styles": ["styles.css"],
-			"scripts": [],
-			"environmentSource": "environments/environment.ts",
-			"environments": {
-				"dev": "environments/environment.ts",
-				"prod": "environments/environment.prod.ts"
-			}
-		}
-	]
-}`;
-
 	const packageJson = JSON.stringify(
 		{
 			dependencies: {
@@ -229,6 +196,8 @@ platformBrowserDynamic()
 				'@angular/router': '8.2.14',
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-angular': libraryVersion,
+				'@carbon/colors': carbonColorsVersion,
+				'@carbon/styles': carbonStylesVersion,
 				'core-js': '3.6.0',
 				d3: D3VERSION,
 				rxjs: '6.5.3',
@@ -240,13 +209,10 @@ platformBrowserDynamic()
 	);
 
 	return {
-		'src/index.html': indexHtml,
-		'src/main.ts': mainTs,
 		'src/app/app.component.html': appComponentHtml,
 		'src/app/app.component.ts': appComponentTs,
-		'src/app/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
+		'src/app/plex-and-carbon-styles.scss': plexAndCarbonComponentsSCSS,
 		'src/app/app.module.ts': appModule,
-		'.angular-cli.json': angularCliJson,
 		'package.json': packageJson,
 	};
 };
@@ -258,12 +224,13 @@ export const createVueChartApp = (demo: any) => {
 
 	const chartVue = `<script>
 import Vue from "vue";
-import "@carbon/charts/styles.css";
+
 import chartsVue from "@carbon/charts-vue";
+import "@carbon/charts/styles.css";
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "../plex-and-carbon-components.css";
+import "../plex-and-carbon-styles.scss";
 
 Vue.use(chartsVue);
 
@@ -310,8 +277,9 @@ new Vue({
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
+				'@carbon/colors': carbonColorsVersion,
+				'@carbon/styles': carbonStylesVersion,
 				'@vue/cli-plugin-babel': '4.1.1',
-				'carbon-components': carbonComponentsVersion,
 				d3: D3VERSION,
 				vue: '^2.6.11',
 			},
@@ -322,7 +290,7 @@ new Vue({
 
 	return {
 		'src/components/chart.vue': chartVue,
-		'src/plex-and-carbon-components.css': plexAndCarbonComponentsCSS,
+		'src/plex-and-carbon-styles.scss': plexAndCarbonComponentsSCSS,
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
 		'package.json': packageJson,
@@ -374,9 +342,11 @@ export const createSvelteChartApp = (demo: any) => {
 `;
 
 	const App = `<script>
-	import "@carbon/charts/styles.min.css";
-	import "carbon-components/css/carbon-components.min.css";
 	import { ${chartComponent} } from "@carbon/charts-svelte";
+
+	import "@carbon/charts/styles.css";
+
+	import "./plex-and-carbon-styles.scss";
 </script>
 
 <${chartComponent}
@@ -392,8 +362,11 @@ export const createSvelteChartApp = (demo: any) => {
 		},
 		devDependencies: {
 			'@carbon/charts-svelte': libraryVersion,
+			'@carbon/colors': carbonColorsVersion,
+			'@carbon/styles': carbonStylesVersion,
 			'@sveltejs/vite-plugin-svelte': 'next',
 			d3: D3VERSION,
+			sass: '1.52.1',
 			svelte: '^3.43.1',
 			'svelte-hmr': '^0.14.7',
 			vite: '^2.6.7',
@@ -415,6 +388,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		'App.svelte': App,
 		'index.html': indexHtml,
+		'plex-and-carbon-styles.scss': plexAndCarbonComponentsSCSS,
 		'package.json': packageJson,
 		'vite.config.js': vite,
 	};
