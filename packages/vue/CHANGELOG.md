@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.58.2...v1.0.0) (2022-05-24)
+
+
+### Features
+
+* **monorepo:** Carbon v11 migration ([#1345](https://github.com/carbon-design-system/carbon-charts/issues/1345)) ([97c6fcd](https://github.com/carbon-design-system/carbon-charts/commit/97c6fcd842b83adbbeadd9fa1362d7727b91e6ff))
+
+
+### BREAKING CHANGES
+
+* **monorepo:** node-sass => sass, theming
+
+
+
+
+
 ## [0.58.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.58.1...v0.58.2) (2022-05-24)
 
 **Note:** Version bump only for package @carbon/charts-vue
