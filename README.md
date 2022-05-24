@@ -26,6 +26,7 @@
 </a>
 
 ## Design specifications
+
 <a href="https://www.carbondesignsystem.com/data-visualization/getting-started" target="_blank">
   <img src="./assets/dv_dark_theme.png" width=700 />
 </a>
