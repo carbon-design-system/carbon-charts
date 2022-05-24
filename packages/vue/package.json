@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "0.58.1",
+	"version": "0.58.2",
 	"description": "Carbon charting components for Vue",
 	"main": "charts-vue.umd.min.js",
 	"scripts": {
@@ -15,7 +15,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.58.1",
+		"@carbon/charts": "^0.58.2",
 		"@carbon/telemetry": "0.1.0",
 		"vue": "2.5.21"
 	},
