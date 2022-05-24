@@ -51,7 +51,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 			return (
 				<div className="container theme--g100" ref={demoRef}>
 					<div className="v10-banner">
-						This version relies on <b>Carbon v11</b>. If you're
+						This version is in beta & relies on <b>Carbon v11</b>. If you're
 						using Carbon v10,{' '}
 						<a
 							href="https://carbon-charts-0x.netlify.app"

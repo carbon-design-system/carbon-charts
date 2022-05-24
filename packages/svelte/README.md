@@ -1,4 +1,8 @@
-# `@carbon/charts-svelte`
+# Notice
+
+### This version is in beta & relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+
+## `@carbon/charts-svelte`
 
 > Carbon Charting Svelte Wrappers
 
