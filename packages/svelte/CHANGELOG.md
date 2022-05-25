@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.2...v1.0.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* **network-diagrams:** fix styling issues ([#1377](https://github.com/carbon-design-system/carbon-charts/issues/1377)) ([731b747](https://github.com/carbon-design-system/carbon-charts/commit/731b74708fbd2e239f2cf7f51a2a37b8f30ba3f6))
+
+
+
+
+
 ## [1.0.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.1...v1.0.2) (2022-05-24)
 
 **Note:** Version bump only for package @carbon/charts-svelte
