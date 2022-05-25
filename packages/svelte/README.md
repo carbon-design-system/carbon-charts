@@ -68,7 +68,6 @@ const production = process.env.NODE_ENV === 'production';
 const config = {
 	kit: {
 		adapter: adapter(),
-		target: '#svelte',
 		vite: {
 			optimizeDeps: {
 				include: ['@carbon/charts'],
