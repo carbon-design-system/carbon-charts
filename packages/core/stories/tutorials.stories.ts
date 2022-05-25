@@ -31,7 +31,12 @@ Object.keys(TUTORIALS).forEach((tutorialKey) => {
 		const container = document.createElement('div');
 		container.setAttribute('class', 'container tutorial');
 
-		container.innerHTML = tutorial.content;
+		container.innerHTML = `
+		<div class="v10-banner">
+			This version <b>is in beta</b> & relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+		</div>
+
+		${tutorial.content}`;
 
 		container.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);

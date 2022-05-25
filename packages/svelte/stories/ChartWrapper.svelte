@@ -6,7 +6,7 @@
 
 <div class="container theme--white">
 	<div class="v10-banner">
-		This version is in beta & relies on <b>Carbon v11</b>. If you're using Carbon v10,
+		This version <b>is in beta</b> & relies on <b>Carbon v11</b>. If you're using Carbon v10,
 		<a
 			href="https://carbon-charts-0x.netlify.app"
 			target="_blank"
