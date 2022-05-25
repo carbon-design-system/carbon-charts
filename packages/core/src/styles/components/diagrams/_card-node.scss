@@ -9,8 +9,8 @@
 	width: 100%;
 	position: absolute;
 	z-index: 0;
-	border-top: mini-units(0.25) solid $layer-accent-01;
-	border-right: mini-units(0.25) solid $layer-accent-01;
+	border-top: 0.125rem solid $layer-accent-01;
+	border-right: 0.125rem solid $layer-accent-01;
 	pointer-events: none;
 }
 
@@ -25,7 +25,7 @@
 		width: 100%;
 		height: 100%;
 		padding: $spacing-05 $spacing-03;
-		border-left: mini-units(0.5) solid $border-inverse;
+		border-left: 0.25rem solid $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--a,
@@ -59,14 +59,14 @@
 	.#{$prefix}--#{$charts-prefix}--card-node--stacked {
 		&::before {
 			@include stacked-card-node();
-			left: mini-units(0.625);
-			bottom: mini-units(0.625);
+			left: 0.3125rem;
+			bottom: 0.3125rem;
 		}
 
 		&::after {
 			@include stacked-card-node();
-			left: mini-units(1.375);
-			bottom: mini-units(1.375);
+			left: 0.6875rem;
+			bottom: 0.6875rem;
 		}
 	}
 

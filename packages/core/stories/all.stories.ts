@@ -62,7 +62,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 			container.innerHTML = `<main>
 <div class="v10-banner">
-	This version is in beta & relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+	This version <b>is in beta</b> & relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
 </div>
 
 <h3>

@@ -1,8 +1,8 @@
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/import-once/scss/index';
+@import "@carbon/themes/scss/tokens";
+@import "@carbon/layout/scss/spacing";
+@import "@carbon/import-once/scss/index";
 
-@include exports('cc-edge') {
+@include exports("cc-edge") {
 	.#{$prefix}--#{$charts-prefix}--edge {
 		fill: transparent;
 	}
@@ -14,18 +14,18 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__inner {
-		stroke-width: mini-units(0.1875);
+		stroke-width: 0.0625rem;
 		stroke: $border-inverse;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge__outer {
-		stroke-width: mini-units(0.3125);
+		stroke-width: 0.15625rem;
 		stroke: transparent;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--edge:hover {
 		.#{$prefix}--#{$charts-prefix}--edge__inner {
-			stroke-width: mini-units(0.3125);
+			stroke-width: 0.15625rem;
 		}
 	}
 

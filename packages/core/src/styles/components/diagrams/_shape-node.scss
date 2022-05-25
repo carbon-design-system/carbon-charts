@@ -25,7 +25,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--rounded-square {
-		border-radius: mini-units(1);
+		border-radius: 0.5rem;
 	}
 
 	.#{$prefix}--#{$charts-prefix}--shape-node--a,
