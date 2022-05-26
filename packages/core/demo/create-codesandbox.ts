@@ -3,7 +3,6 @@ import { getParameters } from 'codesandbox/lib/api/define';
 const packageJSON = require('@carbon/charts/package.json');
 const libraryVersion = packageJSON.version;
 
-const carbonStylesVersion = packageJSON.dependencies['@carbon/styles'];
 const carbonStylesImport = `import "@carbon/styles/css/styles.css";`;
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
@@ -75,7 +74,6 @@ new ${chartComponent}(chartHolder, {
 		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
-			'@carbon/styles': carbonStylesVersion,
 			d3: D3VERSION,
 		},
 		devDependencies: {
@@ -129,7 +127,6 @@ ReactDOM.render(<App />, document.getElementById("root"));
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-react': libraryVersion,
-			'@carbon/styles': carbonStylesVersion,
 			d3: D3VERSION,
 			react: '16.12.0',
 			'react-dom': '16.12.0',
@@ -194,7 +191,6 @@ export class AppModule {}`;
 				'@angular/router': '8.2.14',
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-angular': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
 				'core-js': '3.6.0',
 				d3: D3VERSION,
 				rxjs: '6.5.3',
@@ -276,7 +272,6 @@ new Vue({
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
 				'@vue/cli-plugin-babel': '4.1.1',
 				d3: D3VERSION,
 				vue: '^2.6.11',
@@ -360,7 +355,6 @@ export const createSvelteChartApp = (demo: any) => {
 		},
 		devDependencies: {
 			'@carbon/charts-svelte': libraryVersion,
-			'@carbon/styles': carbonStylesVersion,
 			'@sveltejs/vite-plugin-svelte': 'next',
 			d3: D3VERSION,
 			sass: '1.52.1',
