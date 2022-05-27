@@ -1048,10 +1048,10 @@
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-11.1.0.tgz#fb8a8fbff8b46cd5663ada8ecd4be2e769a557ce"
   integrity sha512-SmuxE5LeLR5jtoUJg5qAInXwncn9xHKY2ranyDO2kZxuW+rUEr84YjshPHqL39tH8NQHavBEajcMiyAssBhJ4A==
 
-"@carbon/styles@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@carbon/styles/-/styles-1.3.0.tgz#85038ffb2b05d57d5d39ea84eaa777fe40f69b55"
-  integrity sha512-0SCV4YP7h/1rDuK3WDMItOERYRExj6yB7okIberNNnmWGlEUSjbQWaCH/o4ieSkqK2U5dqzIYUHHCkyABWeWoQ==
+"@carbon/styles@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@carbon/styles/-/styles-1.4.0.tgz#98e912aa3c4224ff11c9ffd53d1c87beccd1f6c7"
+  integrity sha512-ItstS2zjBaySM9lzjJsf88kqzCSIxS3ZuLSzG3Dq2Xdt8IKJp/g3oRP+aT2Pez18Fhtwya4ma9EyXGjt8NqEdQ==
   dependencies:
     "@carbon/colors" "^11.2.0-rc.0"
     "@carbon/feature-flags" "^0.7.0"
