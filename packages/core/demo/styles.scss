@@ -3,28 +3,28 @@
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/type" as *;
 
-@import '../src/styles/styles.scss';
+@import "../src/styles/styles.scss";
 
 html {
 	@include styles.theme(styles.$white);
 }
 
-html[data-carbon-theme='g10'] {
+html[data-carbon-theme="g10"] {
 	@include styles.theme(styles.$g10);
 }
 
-html[data-carbon-theme='g90'] {
+html[data-carbon-theme="g90"] {
 	@include styles.theme(styles.$g90);
 }
 
-html[data-carbon-theme='g100'] {
+html[data-carbon-theme="g100"] {
 	@include styles.theme(styles.$g100);
 }
 
 div.container {
 	color: theme.$text-primary;
 	background-color: theme.$background;
-	font-family: 'IBM Plex Sans', Arial, sans-serif;
+	font-family: "IBM Plex Sans", Arial, sans-serif;
 	padding: 30px;
 
 	div.v10-banner {
@@ -51,6 +51,19 @@ div.container {
 
 	#chart-demo {
 		max-width: 700px;
+		@include styles.theme(styles.$white);
+
+		&[data-carbon-theme="g10"] {
+			@include styles.theme(styles.$g10);
+		}
+
+		&[data-carbon-theme="g90"] {
+			@include styles.theme(styles.$g90);
+		}
+
+		&[data-carbon-theme="g100"] {
+			@include styles.theme(styles.$g100);
+		}
 	}
 
 	.cds--grid {
@@ -132,7 +145,7 @@ div.container {
 			overflow: hidden;
 
 			&:before {
-				content: ' ';
+				content: " ";
 				display: block;
 				position: absolute;
 				z-index: 2;
@@ -183,7 +196,7 @@ div.container {
 					width: 100%;
 					height: 100%;
 					background: rgba(0, 0, 0, 0.45);
-					content: ' ';
+					content: " ";
 					z-index: 1;
 				}
 			}
@@ -195,7 +208,7 @@ div.container {
 		}
 
 		.welcome__heading {
-			@include type-style('productive-heading-07');
+			@include type-style("productive-heading-07");
 
 			color: theme.$text-inverse;
 		}
@@ -205,7 +218,7 @@ div.container {
 		}
 
 		.welcome__heading--other {
-			@include type-style('productive-heading-04');
+			@include type-style("productive-heading-04");
 
 			font-weight: 600;
 			color: #4587fd;
@@ -235,7 +248,7 @@ div.container {
 	}
 
 	&.tutorial {
-		@import '~highlight.js/styles/sunburst.css';
+		@import "~highlight.js/styles/sunburst.css";
 
 		h1,
 		h2,
@@ -369,13 +382,13 @@ div.container {
 }
 
 .#{$prefix}--resource-card__title {
-	@include type-style('productive-heading-03');
+	@include type-style("productive-heading-03");
 	text-decoration: none;
 	color: theme.$text-primary;
 }
 
 .#{$prefix}--resource-card__subtitle {
-	@include type-style('heading-01');
+	@include type-style("heading-01");
 	font-weight: 400;
 	text-decoration: none;
 	color: theme.$text-primary;
@@ -392,8 +405,8 @@ div.container {
 }
 
 .#{$prefix}--resource-card__icon--img .gatsby-resp-image-wrapper,
-.#{$prefix}--resource-card__icon--img img[src*='gif'],
-.#{$prefix}--resource-card__icon--img img[src*='svg'] {
+.#{$prefix}--resource-card__icon--img img[src*="gif"],
+.#{$prefix}--resource-card__icon--img img[src*="svg"] {
 	margin-bottom: 0;
 }
 
@@ -442,9 +455,7 @@ div.container {
 	color: theme.$icon-on-color-disabled;
 }
 
-.#{$prefix}--resource-card--disabled
-	.#{$prefix}--resource-card__icon--action
-	svg {
+.#{$prefix}--resource-card--disabled .#{$prefix}--resource-card__icon--action svg {
 	fill: theme.$icon-disabled;
 }
 
@@ -454,20 +465,15 @@ div.container {
 }
 
 // Disabled dark
-.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
-	.#{$prefix}--tile:hover {
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark .#{$prefix}--tile:hover {
 	background: $gray-90; //$background for gray 90 theme
 }
 
-.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
-	.#{$prefix}--resource-card__title,
-.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
-	.#{$prefix}--resource-card__subtitle {
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__title,
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__subtitle {
 	color: $gray-50; //$icon-on-color-disabled for gray 90
 }
 
-.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark
-	.#{$prefix}--resource-card__icon--action
-	svg {
+.#{$prefix}--resource-card--disabled.#{$prefix}--resource-card--dark .#{$prefix}--resource-card__icon--action svg {
 	fill: $gray-70; //$disabled-02 for gray 90
 }
