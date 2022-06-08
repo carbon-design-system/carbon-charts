@@ -57,6 +57,9 @@ export class HeatmapModel extends ChartModelCartesian {
 		// Ensuring limits start at 0 to make scale look more `nicer`
 		if (domain[0] > 0) {
 			domain[0] = 0;
+		} else if (domain[0] === 0 && domain[1] === 0) {
+			// Range cannot be between 0 and 0 (itself)
+			return [0, 1];
 		}
 
 		// Ensure the median of the range is 0 if domain extends into both negative & positive
@@ -244,12 +247,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	getTabularDataArray() {
 		const displayData = this.getDisplayData();
 
-		const {
-			primaryDomain,
-			primaryRange,
-			secondaryDomain,
-			secondaryRange,
-		} = this.assignRangeAndDomains();
+		const { primaryDomain, primaryRange } = this.assignRangeAndDomains();
 
 		let domainValueFormatter;
 
@@ -331,7 +329,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 		// Save scale type
 		this._colorScale = scaleQuantize()
-			.domain(this.getValueDomain() as [number, number])
+			.domain(domain as [number, number])
 			.range(colorPairing);
 	}
 }
