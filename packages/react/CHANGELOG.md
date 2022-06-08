@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.4...v1.1.0) (2022-06-08)
+
+
+### Features
+
+* **core:** add theming functions to sass styles ([#1382](https://github.com/carbon-design-system/carbon-charts/issues/1382)) ([6f56b2f](https://github.com/carbon-design-system/carbon-charts/commit/6f56b2f78436ab7c5d2e4fc83d9b3a91123c78b1))
+
+
+
+
+
 ## [1.0.4](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.3...v1.0.4) (2022-05-27)
 
 **Note:** Version bump only for package @carbon/charts-react
