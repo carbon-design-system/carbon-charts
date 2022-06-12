@@ -33,6 +33,12 @@ export interface BaseChartProps<Chart = BC, ChartOptions = BaseChartOptions, Cha
   options?: ChartOptions;
 
   /**
+   * Specify the Carbon theme
+   * @default "white"
+   */
+  theme?: "white" | "g10" | "g90" | "g100";
+
+  /**
    * Specify the id for the chart holder element
    * @default "chart-" + Math.random().toString(36)
    */
