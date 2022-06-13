@@ -24,6 +24,12 @@
 	 */
 	export let options = {};
 
+  /**
+	 * Specify the Carbon theme
+	 * @type {"white" | "g10" | "g90" | "g100"}
+	 */
+	export let theme = "white";
+
 	/** Specify the id for the chart holder element */
 	export let id = "chart-" + Math.random().toString(36);
 
@@ -70,4 +76,4 @@
 	}
 </script>
 
-<div {...$$restProps} bind:this={ref} {id} />
+<div {...$$restProps} data-carbon-theme={theme} bind:this={ref} {id} />

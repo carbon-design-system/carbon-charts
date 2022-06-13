@@ -224,20 +224,20 @@ module.exports = {
 
 ## Usage
 
-Import chart styles from `@carbon/charts`:
+Styles must be imported from both `@carbon/charts` and `@carbon/styles`.
 
--   `@carbon/charts/styles.css`: White theme
--   `@carbon/charts/styles-g10.css`: Gray 10 theme
--   `@carbon/charts/styles-g90.css`: Gray 90 theme
--   `@carbon/charts/styles-g100.css`: Gray 100 theme
+```js
+import '@carbon/styles/css/styles.css';
+import '@carbon/charts/styles.css';
+```
 
 ### Basic
 
 ```svelte
 <script>
+  import "@carbon/styles/css/styles.css";
+  import "@carbon/charts/styles.css";
   import { BarChartSimple } from "@carbon/charts-svelte";
-  import "@carbon/charts/styles.min.css";
-  import "carbon-components/css/carbon-components.min.css";
 </script>
 
 <BarChartSimple
@@ -258,6 +258,30 @@ Import chart styles from `@carbon/charts`:
   }}
 />
 
+```
+
+### Theming
+
+`@carbon/styles` uses
+[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
+for dynamic, client-side theming. Update the Carbon theme using the `theme`
+prop.
+
+Supported themes include:
+
+-   `"white"`
+-   `"g10"` (Gray 10)
+-   `"g90"` (Gray 90)
+-   `"g100"` (Gray 100)
+
+The default theme is `"white"`.
+
+```svelte
+<BarChartSimple
+  theme="g90"
+  data={/* ... */}
+  options={/* ... */}
+/>
 ```
 
 ### Dispatched events
@@ -287,9 +311,9 @@ Dynamically import a chart and instantiate it using the
 
 ```svelte
 <script>
+  import "@carbon/styles/css/styles.css";
+  import "@carbon/charts/styles.css";
   import { onMount } from "svelte";
-  import "@carbon/charts/styles.min.css";
-  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
@@ -327,10 +351,10 @@ that fires when hovering over a bar.
 
 ```svelte
 <script>
+  import "@carbon/styles/css/styles.css";
+  import "@carbon/charts/styles.css";
   import { onMount } from "svelte";
   import { BarChartSimple } from "@carbon/charts-svelte";
-  import "@carbon/charts/styles.min.css";
-  import "carbon-components/css/carbon-components.min.css";
 
   let chart;
 
