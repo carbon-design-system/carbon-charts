@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.1.0...v1.2.0) (2022-06-13)
+
+
+### Features
+
+* **svelte:** add theme prop ([#1389](https://github.com/carbon-design-system/carbon-charts/issues/1389)) ([b2ff145](https://github.com/carbon-design-system/carbon-charts/commit/b2ff14578ec3e1c319adedb4c8bf96e9a3766a9b))
+
+
+
+
+
 # [1.1.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.4...v1.1.0) (2022-06-08)
 
 
