@@ -24,9 +24,8 @@ interface getSVGElementSizeOptions {
 }
 
 export class DOMUtils extends Service {
-	private chartID = Math.floor(
-		(1 + Math.random()) * 0x1000000000000
-	).toString(16);
+	// Initialized in init
+	private chartID;
 
 	constructor(model: any, services: any) {
 		super(model, services);
@@ -204,6 +203,9 @@ export class DOMUtils extends Service {
 		// Add width & height to the chart holder if necessary, and add a classname
 		this.styleHolderElement();
 
+		// Initialize chart ID
+		this.initializeID();
+
 		this.addMainContainer();
 		this.verifyCSSStylesBeingApplied();
 
@@ -224,6 +226,12 @@ export class DOMUtils extends Service {
 		return `chart-${this.chartID}-${originalID}`;
 	}
 
+	private initializeID() {
+		this.chartID = Math.floor(
+			(1 + Math.random()) * 0x1000000000000
+		).toString(16);
+	}
+
 	addMainContainer() {
 		const options = this.model.getOptions();
 		const chartsprefix = Tools.getProperty(options, 'style', 'prefix');
@@ -231,6 +239,7 @@ export class DOMUtils extends Service {
 		const mainContainer = select(this.getHolder())
 			.append('div')
 			.classed(`${carbonPrefix}--${chartsprefix}--chart-wrapper`, true)
+			.attr('id', `chart-${this.getChartID()}`)
 			.style('height', '100%')
 			.style('width', '100%');
 
