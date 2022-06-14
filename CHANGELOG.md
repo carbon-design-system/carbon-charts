@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.2.0...v1.2.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **core:** add aria-label attribute to toolbar container ([#1391](https://github.com/carbon-design-system/carbon-charts/issues/1391)) ([9c38a76](https://github.com/carbon-design-system/carbon-charts/commit/9c38a764c08a2c2430ce72ac61b0e5e8aef54e74)), closes [#1390](https://github.com/carbon-design-system/carbon-charts/issues/1390)
+
+
+
+
+
 # [1.2.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.1.0...v1.2.0) (2022-06-13)
 
 
