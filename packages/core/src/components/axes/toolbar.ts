@@ -42,7 +42,12 @@ export class Toolbar extends Component {
 	}
 
 	render(animate = true) {
-		const container = this.getComponentContainer().attr('role', 'toolbar');
+		const container = this.getComponentContainer()
+			.attr('role', 'toolbar')
+			.attr(
+				'aria-label',
+				`chart-${this.services.domUtils.getChartID()} toolbar`
+			);
 
 		const isDataLoading = Tools.getProperty(
 			this.getOptions(),
