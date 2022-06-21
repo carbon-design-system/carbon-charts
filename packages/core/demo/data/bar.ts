@@ -23,6 +23,80 @@ export const groupedBarData = [
 	{ group: 'Dataset 4', key: 'Misc', value: 24134 },
 ];
 
+export const groupedBarTimeSeriesData = [
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: 65000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: 30000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 6), value: 49213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 7), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1), value: 8000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 2), value: 67000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 3), value: 15000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 6), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 7), value: 45213 },
+];
+
+export const groupedBarTimeSeriesDenseData = [
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: 65000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: 30000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 6), value: 49213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 7), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 9), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 10), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 11), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 12), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 14), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 15), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 16), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 17), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 18), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 19), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 20), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 21), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 22), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 23), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 24), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 25), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 26), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 27), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 28), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 29), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 30), value: 51213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 31), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1), value: 8000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 2), value: 67000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 3), value: 15000 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 6), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 7), value: 45213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 8), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 9), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 10), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 11), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 12), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 13), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 14), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 15), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 16), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 17), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 18), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 19), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 20), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 21), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 22), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 23), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 24), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 25), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 26), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 27), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 28), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 29), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 30), value: 51213 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 31), value: 51213 },
+];
+
 export const groupedBarOptions = {
 	title: 'Vertical grouped bar (discrete)',
 	axes: {
@@ -67,6 +141,48 @@ export const groupedHorizontalBarOptions = {
 		},
 		bottom: {
 			mapsTo: 'value',
+		},
+	},
+};
+
+// Vertical Grouped Time Series
+export const groupedBarTimeSeriesOptions = {
+	title: 'Vertical grouped bar (time series)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+	},
+};
+
+// Horizontal Grouped Time Series
+export const groupedBarHorizontalTimeSeriesOptions = {
+	title: 'Horizontal grouped bar (time series)',
+	axes: {
+		left: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+		bottom: {
+			mapsTo: 'value',
+		},
+	},
+};
+
+// Vertical Grouped time series with dense data
+export const groupedBarTimeSeriesDenseOptions = {
+	title: 'Vertical grouped bar (time series - dense data)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: 'time',
 		},
 	},
 };

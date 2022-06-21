@@ -338,6 +338,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.SimpleBarChart,
 			},
 			{
+				options: zoomBarDemos.zoomBarGroupedBarTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarGroupedBarTimeSeriesData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
 				options: zoomBarDemos.zoomBarStackedBarTimeSeriesOptions,
 				data: zoomBarDemos.zoomBarStackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,
@@ -546,6 +551,16 @@ const simpleChartDemos = [
 				mainDemo: true,
 			},
 			{
+				options: barDemos.groupedBarTimeSeriesOptions,
+				data: barDemos.groupedBarTimeSeriesData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
+				options: barDemos.groupedBarTimeSeriesDenseOptions,
+				data: barDemos.groupedBarTimeSeriesDenseData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
 				options: barDemos.groupedBarEmptyStateOptions,
 				data: barDemos.groupedBarEmptyStateData,
 				chartType: chartTypes.GroupedBarChart,
@@ -559,6 +574,11 @@ const simpleChartDemos = [
 			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
+				chartType: chartTypes.GroupedBarChart,
+			},
+			{
+				options: barDemos.groupedBarHorizontalTimeSeriesOptions,
+				data: barDemos.groupedBarTimeSeriesData,
 				chartType: chartTypes.GroupedBarChart,
 			},
 			{
