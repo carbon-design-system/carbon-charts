@@ -21,6 +21,9 @@ export class GroupedBar extends Bar {
 
 	padding = 5;
 
+	// A factor to normalize padding between bars regardless of bar group density.
+	readonly defaultStepFactor = 70;
+
 	init() {
 		const eventsFragment = this.services.events;
 
@@ -324,7 +327,7 @@ export class GroupedBar extends Bar {
 		const domainScale = this.services.cartesianScales.getDomainScale();
 		const activeData = this.model.getGroupedData(this.configs.groups);
 
-		let step = 70;
+		let step = this.defaultStepFactor;
 		if (typeof domainScale.step === 'function') {
 			step = domainScale.step();
 		} else if (activeData.length > 0) {
@@ -347,7 +350,7 @@ export class GroupedBar extends Bar {
 			return 0;
 		}
 
-		const padding = Math.min(5, 5 * (this.getDomainScaleStep() / 70));
+		const padding = Math.min(5, 5 * (this.getDomainScaleStep() / this.defaultStepFactor));
 
 		return padding * (activeData.length - 1);
 	}
