@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.0...v1.3.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **core:** remove mock text from axes ([#1402](https://github.com/carbon-design-system/carbon-charts/issues/1402)) ([876d55c](https://github.com/carbon-design-system/carbon-charts/commit/876d55c19727b589d0fdb294b0e3f522328b5fd9))
+
+
+
+
+
 # [1.3.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.2.1...v1.3.0) (2022-06-28)
 
 
