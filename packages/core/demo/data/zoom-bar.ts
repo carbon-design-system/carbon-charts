@@ -71,6 +71,12 @@ export const zoomBarSimpleBarTimeSeriesOptions = addZoomBarToOptions(
 	{ sliderView: true }
 );
 
+export const zoomBarGroupedBarTimeSeriesData = barChart.groupedBarTimeSeriesData;
+export const zoomBarGroupedBarTimeSeriesOptions = addZoomBarToOptions(
+	Object.assign({}, barChart.groupedBarTimeSeriesOptions),
+	{ sliderView: true }
+);
+
 export const zoomBarStackedBarTimeSeriesData =
 	barChart.stackedBarTimeSeriesData;
 export const zoomBarStackedBarTimeSeriesOptions = addZoomBarToOptions(

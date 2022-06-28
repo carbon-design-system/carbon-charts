@@ -21,6 +21,9 @@ export class GroupedBar extends Bar {
 
 	padding = 5;
 
+	// A factor to normalize padding between bars regardless of bar group density.
+	readonly defaultStepFactor = 70;
+
 	init() {
 		const eventsFragment = this.services.events;
 
@@ -141,7 +144,7 @@ export class GroupedBar extends Bar {
 				})
 			)
 			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d) => {
+			.attr('d', (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -162,8 +165,12 @@ export class GroupedBar extends Bar {
 				);
 				const y1 = this.services.cartesianScales.getRangeValue(d);
 
-				// don't show if part of bar is out of zoom domain
-				if (this.isOutsideZoomedDomain(x0, x1)) {
+				// don't show if part of bar is out of zoom domain - test zoom on bar pos, not group
+				const zoomx0 =
+					this.services.cartesianScales.getDomainValue(d, i) -
+					barWidth / 2;
+				const zoomx1 = zoomx0 + barWidth;
+				if (this.isOutsideZoomedDomain(zoomx0, zoomx1)) {
 					return;
 				}
 				return Tools.generateSVGPathString(
@@ -305,7 +312,7 @@ export class GroupedBar extends Bar {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
 				datum
 			);
-			return datum[domainIdentifier] === label;
+			return datum[domainIdentifier].toString() === label;
 		});
 	}
 
@@ -316,6 +323,26 @@ export class GroupedBar extends Bar {
 		return this.getBarWidth() * activeData.length + totalGroupPadding;
 	}
 
+	protected getDomainScaleStep() {
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const activeData = this.model.getGroupedData(this.configs.groups);
+
+		let step = this.defaultStepFactor;
+		if (typeof domainScale.step === 'function') {
+			step = domainScale.step();
+		} else if (activeData.length > 0) {
+			// as a fallback use distance between first bars of adjacent bar groups
+			const ref = activeData.find(d => d.data?.length > 1);
+			if (ref) {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
+					ref.data[0]
+				);
+				step = Math.abs(domainScale(ref.data[1][domainIdentifier]) - domainScale(ref.data[0][domainIdentifier]));
+			}
+		}
+		return step;
+	} 
+
 	protected getTotalGroupPadding() {
 		const activeData = this.model.getGroupedData(this.configs.groups);
 
@@ -323,8 +350,7 @@ export class GroupedBar extends Bar {
 			return 0;
 		}
 
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		const padding = Math.min(5, 5 * (domainScale.step() / 70));
+		const padding = Math.min(5, 5 * (this.getDomainScaleStep() / this.defaultStepFactor));
 
 		return padding * (activeData.length - 1);
 	}
@@ -350,10 +376,9 @@ export class GroupedBar extends Bar {
 		const numOfActiveDataGroups = activeData.length;
 		const totalGroupPadding = this.getTotalGroupPadding();
 
-		const domainScale = this.services.cartesianScales.getDomainScale();
 		return Math.min(
 			providedMaxWidth,
-			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
+			(this.getDomainScaleStep() - totalGroupPadding) / numOfActiveDataGroups
 		);
 	}
 
