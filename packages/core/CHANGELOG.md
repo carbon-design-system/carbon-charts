@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.2.1...v1.3.0) (2022-06-28)
+
+
+### Features
+
+* **core:** bar group time series ([#1398](https://github.com/carbon-design-system/carbon-charts/issues/1398)) ([6ff1bb1](https://github.com/carbon-design-system/carbon-charts/commit/6ff1bb19ec95f5cd5da34ce8639fa9c079461d5f)), closes [#1396](https://github.com/carbon-design-system/carbon-charts/issues/1396) [#1373](https://github.com/carbon-design-system/carbon-charts/issues/1373)
+
+
+
+
+
 ## [1.2.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.2.0...v1.2.1) (2022-06-14)
 
 
