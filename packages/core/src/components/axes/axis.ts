@@ -590,6 +590,9 @@ export class Axis extends Component {
 
 						lastStartPosition = xTransformation;
 					});
+
+					// Cleanup mock text piece
+					mockTextPiece.remove();
 				}
 			}
 
