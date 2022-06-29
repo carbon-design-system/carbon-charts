@@ -54,7 +54,6 @@
 		"d3-cloud": "1.2.5",
 		"d3-sankey": "0.12.3",
 		"date-fns": "2.8.1",
-		"dom-to-image": "2.6.0",
 		"lodash-es": "4.17.21",
 		"resize-observer-polyfill": "1.5.0"
 	},
