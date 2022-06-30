@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.1...v1.3.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **core:** remove dom-to-image dependency & add script to project ([#1403](https://github.com/carbon-design-system/carbon-charts/issues/1403)) ([8dcd34b](https://github.com/carbon-design-system/carbon-charts/commit/8dcd34b00e804f666fa4a756f40d19233d516196)), closes [#1395](https://github.com/carbon-design-system/carbon-charts/issues/1395)
+
+
+
+
+
 ## [1.3.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.0...v1.3.1) (2022-06-28)
 
 
