@@ -614,6 +614,11 @@ const simpleChartDemos = [
 				chartType: chartTypes.StackedBarChart,
 			},
 			{
+				options: barDemos.stackedBarShortIntervalTimeSeriesOptions,
+				data: barDemos.stackedBarShortIntervalTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+			},
+			{
 				options: barDemos.stackedBarEmptyStateOptions,
 				data: barDemos.stackedBarEmptyStateData,
 				chartType: chartTypes.StackedBarChart,
