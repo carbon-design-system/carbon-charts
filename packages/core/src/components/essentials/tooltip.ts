@@ -253,6 +253,13 @@ export class Tooltip extends Component {
 			return format(value, 'MMM d, yyyy');
 		}
 
+		try {
+			// it's a correct ISO format Date string
+			return format(Date.parse(value), 'MMM d, yyyy');
+		} catch (e){
+			// not a valid ISO format string
+		}
+
 		return value.toLocaleString();
 	}
 

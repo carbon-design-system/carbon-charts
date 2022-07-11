@@ -173,3 +173,13 @@ function isYearChanged(timestamp: number): boolean {
 	const { M, d, s, m, H } = getTimeformats(timestamp);
 	return M === 1 && d === 1 && H === 0 && m === 0 && s === 0;
 }
+
+// Return string value of Date with milliseconds
+export function formatDateTillMilliSeconds(date: Date) {
+	if (date === undefined) {
+		return '';
+	}
+
+	// The only valid format with millisecond is ISO 8601
+	return date.toISOString();
+}
