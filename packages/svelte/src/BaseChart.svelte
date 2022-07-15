@@ -24,9 +24,10 @@
 	 */
 	export let options = {};
 
-  /**
+  	/**
 	 * Specify the Carbon theme
 	 * @type {"white" | "g10" | "g90" | "g100"}
+	 * @deprecated as of V1, pass theme into options
 	 */
 	export let theme = "white";
 

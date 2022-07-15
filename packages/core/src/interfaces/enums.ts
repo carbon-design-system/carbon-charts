@@ -10,7 +10,7 @@ export enum RenderTypes {
  * enum of all supported chart themes
  */
 export enum ChartTheme {
-	DEFAULT = 'default',
+	WHITE = 'white',
 	G100 = 'g100',
 	G90 = 'g90',
 	G10 = 'g10',

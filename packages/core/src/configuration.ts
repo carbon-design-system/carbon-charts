@@ -47,6 +47,7 @@ import {
 	TreeTypes,
 	HeatmapChartOptions,
 	DividerStatus,
+	ChartTheme,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -172,6 +173,7 @@ const chart: BaseChartOptions = {
 	width: null,
 	height: null,
 	resizable: true,
+	theme: ChartTheme.WHITE,
 	tooltip: baseTooltip,
 	legend,
 	style: {
