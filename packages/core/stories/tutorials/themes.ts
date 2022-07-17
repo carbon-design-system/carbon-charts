@@ -5,6 +5,7 @@ export const themesTutorial = {
 	content: marked(`
 # Themes
 We support all 4 Carbon themes (white, g10, g90 & g100), which are all included inside the main CSS bundle.
+After importing the carbon styles, pass in one of the four Carbon themes in options like in the examples below.
 
 **If using CSS:**
 
@@ -15,13 +16,13 @@ Now all you need is to add a \`data-carbon-theme\` attribute to your chart holde
 e.g.
 
 \`\`\`html
-<div id="my-sample-chart" data-carbon-theme="g100">
-</div>
+<div id="my-sample-chart"></div>
 \`\`\`
 
 \`\`\`js
 const chartHolder = document.getElementById("my-sample-chart");
 new SimpleBarChart(chartHolder, {
+	theme: "g100", // Pass theme in options
 	data,
 	options
 });
@@ -34,22 +35,15 @@ new SimpleBarChart(chartHolder, {
 @use "@carbon/styles/scss/themes";
 
 @import "@carbon/charts/styles/styles.scss";
+\`\`\`
 
-div.my-sample-chart.theme__white {
-	@include styles.theme(styles.$white);
-}
-
-div.my-sample-chart.theme__g10 {
-	@include styles.theme(styles.$g10);
-}
-
-div.my-sample-chart.theme__g90 {
-	@include styles.theme(styles.$g90);
-}
-
-div.my-sample-chart.theme__g100 {
-	@include styles.theme(styles.$g100);
-}
+\`\`\`js
+const chartHolder = document.getElementById("my-sample-chart");
+new SimpleBarChart(chartHolder, {
+	theme: "g100", // Pass theme in options
+	data,
+	options
+});
 \`\`\`
 
 ## Things to keep in mind
