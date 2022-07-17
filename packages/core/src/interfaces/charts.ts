@@ -48,7 +48,7 @@ export interface BaseChartOptions {
 	 */
 	height?: string;
 	/**
-	 * Optionally specify the theme of the chart
+	 * Optionally specify a theme for the chart
 	 */
 	theme?: ChartTheme;
 	/**
