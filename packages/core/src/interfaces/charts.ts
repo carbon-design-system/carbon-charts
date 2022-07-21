@@ -7,6 +7,7 @@ import {
 	TreeTypes,
 	DividerStatus,
 	ColorLegendType,
+	ChartTheme,
 } from './enums';
 import {
 	LegendOptions,
@@ -46,6 +47,10 @@ export interface BaseChartOptions {
 	 * Optionally specify a height for the chart
 	 */
 	height?: string;
+	/**
+	 * Optionally specify a theme for the chart
+	 */
+	theme?: ChartTheme;
 	/**
 	 * tooltip configuration
 	 */
@@ -281,11 +286,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	curve?: string | { name: string };
 }
 
 /**
@@ -295,11 +296,7 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	curve?: string | { name: string };
 	/**
 	 * options to bound the area of the chart
 	 */
@@ -316,11 +313,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	curve?: string | { name: string };
 }
 
 /**

@@ -255,13 +255,10 @@ export class DOMUtils extends Service {
 	styleHolderElement() {
 		const holderElement = this.getHolder() as HTMLElement;
 
-		// Add class to chart holder
-		select(this.getHolder()).classed(`${carbonPrefix}--chart-holder`, true);
-
 		// In order for resize events to not clash with these updates
 		// We'll check if the width & height values passed in options
 		// Have changed, before setting them to the holder
-		const { width, height } = this.model.getOptions();
+		const { width, height, theme } = this.model.getOptions();
 		if (width !== this.width) {
 			// Apply formatted width attribute to chart
 			holderElement.style.width = width;
@@ -275,6 +272,11 @@ export class DOMUtils extends Service {
 
 			this.height = height;
 		}
+
+		// Add class to chart holder
+		select(this.getHolder())
+			.classed(`${carbonPrefix}--chart-holder`, true)
+			.attr('data-carbon-theme', theme);
 	}
 
 	getHolder() {

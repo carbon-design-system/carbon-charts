@@ -157,7 +157,7 @@ export const addControls = (
 	chart,
 	configs = { colorPairingOptions: null }
 ) => {
-	generateThemePickerHTML(container, configs);
+	generateThemePickerHTML(container, chart);
 
 	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
 		generateColorPalettePickerHTML(container, chart, configs);
@@ -186,11 +186,8 @@ export const addRadioButtonEventListeners = (container, chart, configs) => {
 			const theme = e.target.value;
 
 			document.documentElement.setAttribute('data-carbon-theme', theme);
-			chart.services.domUtils
-				.getHolder()
-				.setAttribute('data-carbon-theme', theme);
-
-			chart.update();
+			// Set selected theme to options
+			chart.model.setOptions({ ...chart.model.getOptions(), theme });
 		});
 	});
 };
