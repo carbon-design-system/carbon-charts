@@ -27,7 +27,7 @@
   	/**
 	 * Specify the Carbon theme
 	 * @type {"white" | "g10" | "g90" | "g100"}
-	 * @deprecated as of V1, pass theme into options
+	 * @deprecated as of v1, pass theme into options
 	 */
 	export let theme = "white";
 
@@ -72,7 +72,7 @@
 
 	$: if (chart) {
 		chart.model.setData(data);
-		chart.model.setOptions(options);
+		chart.model.setOptions({theme, ...options });
 		dispatch("update", { data, options });
 	}
 </script>
