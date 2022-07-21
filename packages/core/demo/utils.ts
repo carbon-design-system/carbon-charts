@@ -188,8 +188,6 @@ export const addRadioButtonEventListeners = (container, chart, configs) => {
 			document.documentElement.setAttribute('data-carbon-theme', theme);
 			// Set selected theme to options
 			chart.model.setOptions({ ...chart.model.getOptions(), theme });
-
-			chart.update();
 		});
 	});
 };
