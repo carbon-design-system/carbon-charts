@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.2...v1.4.0) (2022-07-21)
+
+
+### Features
+
+* **core:** allow theme to be set via options prop ([#1412](https://github.com/carbon-design-system/carbon-charts/issues/1412)) ([6288548](https://github.com/carbon-design-system/carbon-charts/commit/62885487a700e2222d51f70aea790eddd5d6d086)), closes [#1411](https://github.com/carbon-design-system/carbon-charts/issues/1411)
+
+
+
+
+
 ## [1.3.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.1...v1.3.2) (2022-06-30)
 
 **Note:** Version bump only for package @carbon/charts-svelte
