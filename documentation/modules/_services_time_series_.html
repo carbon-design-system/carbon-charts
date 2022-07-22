@@ -81,6 +81,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_services_time_series_.html#closesttimeintervalname" class="tsd-kind-icon">closest<wbr>Time<wbr>Interval<wbr>Name</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_services_time_series_.html#computetimeintervalname" class="tsd-kind-icon">compute<wbr>Time<wbr>Interval<wbr>Name</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_services_time_series_.html#formatdatetillmilliseconds" class="tsd-kind-icon">format<wbr>Date<wbr>Till<wbr>Milli<wbr>Seconds</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_services_time_series_.html#formattick" class="tsd-kind-icon">format<wbr>Tick</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_services_time_series_.html#getconsecutivedifferences" class="tsd-kind-icon">get<wbr>Consecutive<wbr>Differences</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_services_time_series_.html#gettimeformats" class="tsd-kind-icon">get<wbr>Timeformats</a></li>
@@ -101,7 +102,7 @@
 					<div class="tsd-signature tsd-kind-icon">TIME_<wbr>INTERVALS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[[&#x27;15seconds&#x27;, 15 * 1000],[&#x27;minute&#x27;, 60 * 1000],[&#x27;30minutes&#x27;, 30 * 60 * 1000],[&#x27;hourly&#x27;, 60 * 60 * 1000],[&#x27;daily&#x27;, 24 * 60 * 60 * 1000],[&#x27;monthly&#x27;, 30 * 24 * 60 * 60 * 1000],[&#x27;quarterly&#x27;, 3 * 30 * 24 * 60 * 60 * 1000],[&#x27;yearly&#x27;, 12 * 30 * 24 * 60 * 60 * 1000],]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L8">services/time-series.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L8">services/time-series.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,7 +119,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L130">services/time-series.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L137">services/time-series.ts:137</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,13 +142,36 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L145">services/time-series.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L152">services/time-series.ts:152</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>ticks: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="formatdatetillmilliseconds" class="tsd-anchor"></a>
+					<h3>format<wbr>Date<wbr>Till<wbr>Milli<wbr>Seconds</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">format<wbr>Date<wbr>Till<wbr>Milli<wbr>Seconds<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L185">services/time-series.ts:185</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>date: <span class="tsd-signature-type">Date</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -164,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L84">services/time-series.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L84">services/time-series.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -199,7 +223,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L122">services/time-series.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L129">services/time-series.ts:129</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -222,7 +246,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L110">services/time-series.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L117">services/time-series.ts:117</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -262,7 +286,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L156">services/time-series.ts:156</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L163">services/time-series.ts:163</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -285,7 +309,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L162">services/time-series.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L169">services/time-series.ts:169</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -311,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L20">services/time-series.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L20">services/time-series.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -346,7 +370,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/296bddc56/packages/core/src/services/time-series.ts#L172">services/time-series.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/f784ed3ab/packages/core/src/services/time-series.ts#L179">services/time-series.ts:179</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -382,6 +406,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
 						<a href="_services_time_series_.html#computetimeintervalname" class="tsd-kind-icon">compute<wbr>Time<wbr>Interval<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_services_time_series_.html#formatdatetillmilliseconds" class="tsd-kind-icon">format<wbr>Date<wbr>Till<wbr>Milli<wbr>Seconds</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
 						<a href="_services_time_series_.html#formattick" class="tsd-kind-icon">format<wbr>Tick</a>
