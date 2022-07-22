@@ -97,9 +97,16 @@ export function formatTick(
 	];
 	const primary = Tools.getProperty(formats, 'primary');
 	const secondary = Tools.getProperty(formats, 'secondary');
-	const formatString = isTickPrimary(tick, i, allTicks, interval, showDayName)
+	let formatString = isTickPrimary(tick, i, allTicks, interval, showDayName)
 		? primary
 		: secondary;
+
+	// if the interval, and the timestamp includes milliseconds value
+	if (interval === '15seconds' && date.getMilliseconds() !== 0){
+		// show milliseconds in tick
+		formatString = formatString.replace('pp', 'h:m:s.SSS a');
+	}
+
 	const locale = timeScaleOptions.localeObject;
 
 	return format(date, formatString, { locale });
