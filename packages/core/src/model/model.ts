@@ -9,6 +9,7 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 import { scaleOrdinal } from 'd3-scale';
 import { stack, stackOffsetDiverging } from 'd3-shape';
 import { histogram } from 'd3-array';
+import { formatDateTillMilliSeconds } from "../services/time-series";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -316,6 +317,11 @@ export class ChartModel {
 						datum
 					);
 
+					// Use time value as key for Date object to avoid multiple data in the same second
+					if (datum[domainIdentifier] instanceof Date) {
+						return formatDateTillMilliSeconds(datum[domainIdentifier]);
+					}
+
 					return datum[domainIdentifier] &&
 						typeof datum[domainIdentifier].toString === 'function'
 						? datum[domainIdentifier].toString()
@@ -385,7 +391,9 @@ export class ChartModel {
 					return (
 						datum[groupMapsTo] === dataGroupName &&
 						datum.hasOwnProperty(domainIdentifier) &&
-						datum[domainIdentifier].toString() === key
+						(datum[domainIdentifier] instanceof Date
+							? formatDateTillMilliSeconds(datum[domainIdentifier]) === key
+					    	: datum[domainIdentifier].toString() === key)
 					);
 				});
 

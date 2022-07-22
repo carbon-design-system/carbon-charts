@@ -656,6 +656,43 @@ export const stackedBarTimeSeriesOptions = {
 	},
 };
 
+export const stackedBarShortIntervalTimeSeriesData = [
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 8, 15, 20, 111), value: 0 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 8, 15, 20, 222), value: 65000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 8, 15, 20, 333), value: 10000 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 8, 15, 20, 444), value: 49213 },
+	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 8, 15, 20, 555), value: 0 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 8, 15, 20, 111), value: 0 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 8, 15, 20, 222), value: 57312 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 8, 15, 20, 333), value: 21432 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 8, 15, 20, 444), value: 70323 },
+	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 8, 15, 20, 555), value: 0 },
+	{ group: 'Dataset 3', date: new Date(2019, 0, 1, 8, 15, 20, 111), value: 0 },
+	{ group: 'Dataset 3', date: new Date(2019, 0, 1, 8, 15, 20, 222), value: 15000 },
+	{ group: 'Dataset 3', date: new Date(2019, 0, 1, 8, 15, 20, 333), value: 20000 },
+	{ group: 'Dataset 3', date: new Date(2019, 0, 1, 8, 15, 20, 444), value: 39213 },
+	{ group: 'Dataset 3', date: new Date(2019, 0, 1, 8, 15, 20, 555), value: 0 },
+	{ group: 'Dataset 4', date: new Date(2019, 0, 1, 8, 15, 20, 111), value: 0 },
+	{ group: 'Dataset 4', date: new Date(2019, 0, 1, 8, 15, 20, 222), value: 37312 },
+	{ group: 'Dataset 4', date: new Date(2019, 0, 1, 8, 15, 20, 333), value: 51432 },
+	{ group: 'Dataset 4', date: new Date(2019, 0, 1, 8, 15, 20, 444), value: 40323 },
+	{ group: 'Dataset 4', date: new Date(2019, 0, 1, 8, 15, 20, 555), value: 0 },
+];
+
+export const stackedBarShortIntervalTimeSeriesOptions = {
+	title: 'Vertical stacked bar (short interval time series)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			stacked: true,
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: 'time',
+		},
+	},
+};
+
 // demo with custom ticks
 export const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData;
 
