@@ -43,7 +43,6 @@ This is an overview of using Carbon Charts with common Svelte set-ups.
 -   [Vite](#vite)
 -   [Rollup](#rollup)
 -   [Webpack](#webpack)
--   [Snowpack](#snowpack)
 
 ### SvelteKit
 
@@ -191,26 +190,6 @@ export default {
 bundler used to build Svelte apps.
 
 No additional configuration should be necessary.
-
-### Snowpack
-
-[snowpack](https://github.com/snowpackjs/snowpack) is an ESM-powered frontend
-build tool.
-
-Ensure you have
-[@snowpack/plugin-svelte](https://yarnpkg.com/package/@snowpack/plugin-svelte)
-added as a plugin in `snowpack.config.js`.
-
-No additional configuration should be necessary.
-
-```js
-// snowpack.config.js
-
-/** @type {import("snowpack").SnowpackUserConfig } */
-module.exports = {
-	plugins: ['@snowpack/plugin-svelte'],
-};
-```
 
 ## Usage
 
