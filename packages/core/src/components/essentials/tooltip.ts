@@ -255,7 +255,9 @@ export class Tooltip extends Component {
 
 		try {
 			// it's a correct ISO format Date string
-			return format(Date.parse(value), 'MMM d, yyyy');
+			if (typeof value === 'string') {
+				return format(Date.parse(value), 'MMM d, yyyy');
+			}
 		} catch (e){
 			// not a valid ISO format string
 		}
