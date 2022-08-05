@@ -41,7 +41,6 @@ This is an overview of using Carbon Charts with common Svelte set-ups.
 
 -   [SvelteKit](#sveltekit)
 -   [Vite](#vite)
--   [Sapper](#sapper)
 -   [Rollup](#rollup)
 -   [Webpack](#webpack)
 -   [Snowpack](#snowpack)
@@ -104,15 +103,6 @@ export default defineConfig(({ mode }) => {
 	};
 });
 ```
-
-### Sapper
-
-[sapper](https://github.com/sveltejs/sapper) is another official Svelte
-framework that supports server-side rendering (SSR).
-
-Take care to install `@carbon/charts-svelte` as a development dependency.
-
-No additional configuration should be necessary.
 
 ### Rollup
 
