@@ -46,61 +46,40 @@ This is an overview of using Carbon Charts with common Svelte set-ups.
 
 ### SvelteKit
 
-[SvelteKit](https://github.com/sveltejs/kit) is fast becoming the de facto
-framework for building Svelte apps that supports both client-side rendering
-(CSR) and server-side rendering (SSR).
+[SvelteKit](https://github.com/sveltejs/kit) is the official framework for
+building apps that support client-side rendering (CSR) and server-side rendering
+(SSR). SvelteKit is powered by [Vite](https://github.com/vitest-dev/vitest).
 
-For set-ups powered by [vite](https://github.com/vitejs/vite), add
-`@carbon/charts` to the list of dependencies for `vite` to optimize.
-
-If using a [SvelteKit adapter](https://kit.svelte.dev/docs#adapters), instruct
-`vite` to avoid externalizing `@carbon/charts` when building for production.
+In your `vite.config.js`, add `@carbon/charts` and `carbon-components` to
+`ssr.noExternal` to avoid externalizing the dependencies for SSR.
 
 ```js
-// svelte.config.js
-import adapter from '@sveltejs/adapter-node';
+// vite.config.js
+import { sveltekit } from '@sveltejs/kit/vite';
 
-const production = process.env.NODE_ENV === 'production';
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	kit: {
-		adapter: adapter(),
-		vite: {
-			optimizeDeps: {
-				include: ['@carbon/charts'],
-			},
-			ssr: {
-				noExternal: [production && '@carbon/charts'].filter(Boolean),
-			},
-		},
+/** @type {import('vite').UserConfig} */
+export default {
+	plugins: [sveltekit()],
+	ssr: {
+		noExternal: ['@carbon/charts', 'carbon-components'],
 	},
 };
-
-export default config;
 ```
 
 ### Vite
 
-[vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte) is an
-alternative to using SvelteKit. Similarly, instruct `vite` to optimize
-`@carbon/charts` in vite.config.js.
-
-Note that `@sveltejs/vite-plugin-svelte` is the official vite/svelte integration
-not to be confused with [svite](https://github.com/svitejs/svite).
+You can also use Vite without SvelteKit. Instruct `vite` to optimize
+`@carbon/charts` in `vite.config.js`.
 
 ```js
 // vite.config.js
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => {
-	return {
-		plugins: [svelte()],
-		build: { minify: mode === 'production' },
-		optimizeDeps: { include: ['@carbon/charts'] },
-	};
-});
+/** @type {import('vite').UserConfig} */
+export default {
+	plugins: [svelte()],
+	optimizeDeps: { include: ['@carbon/charts'] },
+};
 ```
 
 ### Rollup
@@ -186,7 +165,7 @@ export default {
 
 ### Webpack
 
-[webpack](https://github.com/webpack/webpack) is another popular application
+[Webpack](https://github.com/webpack/webpack) is another popular application
 bundler used to build Svelte apps.
 
 No additional configuration should be necessary.
