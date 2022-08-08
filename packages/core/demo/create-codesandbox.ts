@@ -350,30 +350,25 @@ export const createSvelteChartApp = (demo: any) => {
 
 	const packageJson = {
 		scripts: {
-			dev: 'vite',
+			dev: 'vite --port 3000',
 			build: 'vite build',
 		},
 		devDependencies: {
 			'@carbon/charts-svelte': libraryVersion,
-			'@sveltejs/vite-plugin-svelte': 'next',
+			'@sveltejs/vite-plugin-svelte': '^1.0.1',
 			d3: D3VERSION,
-			sass: '1.52.1',
-			svelte: '^3.43.1',
-			'svelte-hmr': '^0.14.7',
-			vite: '^2.6.7',
+			svelte: '^3.49.0',
+			vite: '^3.0.4',
 		},
 	};
 
 	const vite = `import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { defineConfig } from "vite";
 
-export default defineConfig(({ mode }) => {
-  return {
-    plugins: [svelte()],
-    build: { minify: mode === "production" },
-    optimizeDeps: { include: ["@carbon/charts"] },
-  };
-});
+/** @type {import('vite').UserConfig} */
+export default {
+	plugins: [svelte()],
+	optimizeDeps: { include: ["@carbon/charts"] }
+};	
 `;
 
 	return {
