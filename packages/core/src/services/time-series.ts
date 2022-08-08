@@ -104,7 +104,7 @@ export function formatTick(
 	// if the interval, and the timestamp includes milliseconds value
 	if (interval === '15seconds' && date.getMilliseconds() !== 0){
 		// show milliseconds in tick
-		formatString = formatString.replace('pp', 'h:m:s.SSS a');
+		formatString = formatString.replace('pp', 'h:mm:ss.SSS a');
 	}
 
 	const locale = timeScaleOptions.localeObject;
