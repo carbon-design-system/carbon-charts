@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.0...v1.5.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* show correct time format in ticks with milliseconds ([#1419](https://github.com/carbon-design-system/carbon-charts/issues/1419)) ([d527f05](https://github.com/carbon-design-system/carbon-charts/commit/d527f052d3307be80f7e218f7df832c1bb04c92c))
+
+
+
+
+
 # [1.5.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.4.0...v1.5.0) (2022-07-22)
 
 
