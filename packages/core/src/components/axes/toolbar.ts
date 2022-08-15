@@ -401,6 +401,14 @@ export class Toolbar extends Component {
 
 	// Calls passed function && dispatches event
 	triggerFunctionAndEvent(control, event, element?) {
+		// Check if trigger is disabled
+		if (
+			typeof control.shouldBeDisabled === 'function' &&
+			control.shouldBeDisabled()
+		) {
+			return;
+		}
+
 		// Call custom function only if it exists
 		if (typeof control.clickFunction === 'function') {
 			control.clickFunction(event);
