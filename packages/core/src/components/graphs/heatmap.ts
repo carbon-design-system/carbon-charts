@@ -367,27 +367,43 @@ export class Heatmap extends Component {
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 
 		let label = '',
-			sum = 0,
-			minimum = 0,
-			maximum = 0;
+			sum = null,
+			minimum = null,
+			maximum = null;
 
 		// Check to see where datum belongs
 		if (this.matrix[datum] !== undefined) {
 			label = domainLabel;
 			// Iterate through Object and get sum, min, and max
 			ranges.forEach((element) => {
-				let value = this.matrix[datum][element].value || 0;
-				sum += value;
-				minimum = value < minimum ? value : minimum;
-				maximum = value > maximum ? value : maximum;
+				if (typeof this.matrix[datum][element].value === 'number') {
+					let value = this.matrix[datum][element].value;
+					if (sum === null) {
+						sum = value;
+						minimum = value;
+						maximum = value;
+						return;
+					}
+					sum += value;
+					minimum = value < minimum ? value : minimum;
+					maximum = value > maximum ? value : maximum;
+				}
 			});
 		} else {
 			label = rangeLabel;
 			domains.forEach((element) => {
-				let value = this.matrix[element][datum].value || 0;
-				sum += value;
-				minimum = value < minimum ? value : minimum;
-				maximum = value > maximum ? value : maximum;
+				if (typeof this.matrix[element][datum].value === 'number') {
+					let value = this.matrix[element][datum].value;
+					if (sum === null) {
+						sum = value;
+						minimum = value;
+						maximum = value;
+						return;
+					}
+					sum += value;
+					minimum = value < minimum ? value : minimum;
+					maximum = value > maximum ? value : maximum;
+				}
 			});
 		}
 
@@ -423,15 +439,15 @@ export class Heatmap extends Component {
 				},
 				{
 					label: 'Min',
-					value: minimum,
+					value: minimum !== null ? minimum : '-',
 				},
 				{
 					label: 'Max',
-					value: maximum,
+					value: maximum !== null ? maximum : '-',
 				},
 				{
 					label: 'Average',
-					value: sum / domains.length,
+					value: sum !== null ? sum / domains.length : '-',
 				},
 			],
 		});
