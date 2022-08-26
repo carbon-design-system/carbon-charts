@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
 library:
   id: carbon-charts
-  name: Carbon Charts
+  name: Carbon Charts Vanilla
   description:
-    Carbon Charts help you tell accurate and convincing stories around data with
-    beautiful and accessible visualizations.
+    Tell accurate stories around data with beautiful and accessible
+    visualizations.
   externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
   demoLinks:
     - type: storybook
@@ -299,7 +299,7 @@ assets:
       - trend
     framework: vanilla
     platform: web
-    thumbnailPath: ../../thumbnails/histogam.svg
+    thumbnailPath: ../../thumbnails/histogram.svg
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
     demoLinks:
       - type: storybook
