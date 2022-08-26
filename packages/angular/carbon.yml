@@ -2,7 +2,9 @@
 library:
   id: carbon-charts-angular
   name: Carbon Charts Angular
-  description: Angular implementation of Carbon Charts
+  description:
+    Tell accurate stories around data with beautiful and accessible
+    visualizations.
   inherits: carbon-charts
   externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
   demoLinks:
