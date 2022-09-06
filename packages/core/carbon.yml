@@ -11,6 +11,9 @@ library:
       name: Storybook
       action: link
       url: https://charts.carbondesignsystem.com
+  designKits:
+    data-viz-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/data-viz-sketch
 assets:
   alluvial:
     name: Alluvial
