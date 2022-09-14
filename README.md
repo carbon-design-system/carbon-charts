@@ -5,7 +5,8 @@
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
-		<br /><br />
+		<br />
+		<br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
