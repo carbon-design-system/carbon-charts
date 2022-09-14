@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.5.5",
+	"version": "1.5.6",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -48,7 +48,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^1.5.5",
+		"@carbon/charts": "^1.5.6",
 		"@carbon/icons-react": "^10.49.0",
 		"@carbon/telemetry": "0.1.0"
 	},
