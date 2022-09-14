@@ -131,11 +131,11 @@ export interface ComboChartAxisOptions extends AxisOptions {
 	 * should be set to `true` for the
 	 * left axis to be the primary axis
 	 */
- 	main?: boolean;
- 	/**
-  	 * used to map data on the secondary axis
-  	 */
- 	correspondingDatasets?: Array<string>;
+	main?: boolean;
+	/**
+	 * used to map data on the secondary axis
+	 */
+	correspondingDatasets?: Array<string>;
 }
 
 export interface BinnedAxisOptions {
