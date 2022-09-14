@@ -258,7 +258,8 @@ export class Heatmap extends Component {
 						cell.attr('transform')
 					);
 
-					select('g.cell-highlight')
+					self.parent
+						.select('g.cell-highlight')
 						.attr(
 							'transform',
 							`translate(${
@@ -329,7 +330,9 @@ export class Heatmap extends Component {
 				const hoveredElement = cell.select('rect.heat');
 				const nullState = hoveredElement.classed('null-state');
 
-				select('g.cell-highlight').classed('highlighter-hidden', true);
+				self.parent
+					.select('g.cell-highlight')
+					.classed('highlighter-hidden', true);
 
 				// Dispatch event and tooltip only if value exists
 				if (!nullState) {
