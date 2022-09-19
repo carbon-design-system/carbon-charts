@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.6...v1.5.7) (2022-09-19)
+
+
+### Bug Fixes
+
+* **core:** add missing properties to AxisOptions interface ([#1432](https://github.com/carbon-design-system/carbon-charts/issues/1432)) ([f88f310](https://github.com/carbon-design-system/carbon-charts/commit/f88f31000add77ba4affb78aa82276069d0f501a)), closes [#1413](https://github.com/carbon-design-system/carbon-charts/issues/1413)
+
+
+
+
+
 ## [1.5.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.5...v1.5.6) (2022-09-14)
 
 **Note:** Version bump only for package @carbon/charts
