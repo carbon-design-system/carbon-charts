@@ -20,6 +20,7 @@ import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
 import {
 	AxisOptions,
 	BinnedAxisOptions,
+	ComboChartAxisOptions,
 	TimeScaleOptions,
 } from './axis-scales';
 
@@ -451,6 +452,7 @@ export interface RadarChartOptions extends BaseChartOptions {
  * options specific to combo charts
  */
 export interface ComboChartOptions extends AxisChartOptions {
+	axes?: AxesOptions<ComboChartAxisOptions>;
 	comboChartTypes: Array<{
 		type: ChartTypes | any;
 		options?: object;

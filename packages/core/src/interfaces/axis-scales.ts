@@ -126,6 +126,18 @@ export interface AxisOptions extends BasedAxisOptions {
 	percentage?: boolean;
 }
 
+export interface ComboChartAxisOptions extends AxisOptions {
+	/**
+	 * should be set to `true` for the
+	 * left axis to be the primary axis
+	 */
+	main?: boolean;
+	/**
+	 * used to map data on the secondary axis
+	 */
+	correspondingDatasets?: Array<string>;
+}
+
 export interface BinnedAxisOptions {
 	/**
 	 * should be set to `true` on the domain
