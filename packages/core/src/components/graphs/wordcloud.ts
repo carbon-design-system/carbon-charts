@@ -51,27 +51,26 @@ export class WordCloud extends Component {
 			return;
 		}
 
-		const wordCloudData = [];
-		displayData.map(function (d) {
-			let value = d[fontSizeMapsTo];
-
-			if (typeof d[fontSizeMapsTo] !== 'number') {
-				throw Error(
-					'Badly formatted WordCloud data. `value` should only be an integer or float'
-				);
-			}
-
-			wordCloudData.push({
-				[groupMapsTo]: d[groupMapsTo],
-				text: d[wordMapsTo],
-				size: value,
-				value,
-			});
-		});
-
 		const layout = cloud()
 			.size([width, height])
-			.words(wordCloudData)
+			.words(
+				displayData.map(function (d) {
+					let value = d[fontSizeMapsTo];
+
+					if (typeof d[fontSizeMapsTo] !== 'number') {
+						throw Error(
+							'Badly formatted WordCloud data. `value` should only be an integer or float'
+						);
+					}
+
+					return {
+						[groupMapsTo]: d[groupMapsTo],
+						text: d[wordMapsTo],
+						size: value,
+						value,
+					};
+				})
+			)
 			.padding(5)
 			.rotate(0)
 			.fontSize((d) => fontSizeScale(d.size))
