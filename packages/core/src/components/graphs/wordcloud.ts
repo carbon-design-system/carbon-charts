@@ -55,11 +55,19 @@ export class WordCloud extends Component {
 			.size([width, height])
 			.words(
 				displayData.map(function (d) {
+					let value = d[fontSizeMapsTo];
+
+					if (typeof d[fontSizeMapsTo] !== 'number') {
+						throw Error(
+							'Badly formatted WordCloud data. `value` should only be an integer or float'
+						);
+					}
+
 					return {
 						[groupMapsTo]: d[groupMapsTo],
 						text: d[wordMapsTo],
-						size: d[fontSizeMapsTo],
-						value: d[fontSizeMapsTo],
+						size: value,
+						value,
 					};
 				})
 			)
