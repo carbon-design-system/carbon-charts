@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.7...v1.5.8) (2022-09-26)
+
+
+### Bug Fixes
+
+* **core:** wordcloud should not render if `value` is not a number ([#1449](https://github.com/carbon-design-system/carbon-charts/issues/1449)) ([822f813](https://github.com/carbon-design-system/carbon-charts/commit/822f81360e1c9f2fdcc625a0d538f9af92c62fd9))
+
+
+
+
+
 ## [1.5.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.6...v1.5.7) (2022-09-19)
 
 
