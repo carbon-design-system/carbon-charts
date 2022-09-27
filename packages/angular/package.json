@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.5.8",
+	"version": "1.6.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -41,7 +41,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^1.5.8",
+		"@carbon/charts": "^1.6.0",
 		"@carbon/telemetry": "0.1.0"
 	},
 	"peerDependencies": {

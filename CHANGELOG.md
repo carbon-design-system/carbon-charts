@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.8...v1.6.0) (2022-09-27)
+
+
+### Features
+
+* **angular:** add angular 14 support ([#1450](https://github.com/carbon-design-system/carbon-charts/issues/1450)) ([5e8f4ce](https://github.com/carbon-design-system/carbon-charts/commit/5e8f4ceb1fa6b1411dbc59fef9d0f214e564bfeb)), closes [#1445](https://github.com/carbon-design-system/carbon-charts/issues/1445)
+
+
+
+
+
 ## [1.5.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.7...v1.5.8) (2022-09-26)
 
 
