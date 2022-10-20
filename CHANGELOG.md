@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.0...v1.6.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* **core:** allow users to 'escape' axis tooltip in heatmap ([#1454](https://github.com/carbon-design-system/carbon-charts/issues/1454)) ([d6873e2](https://github.com/carbon-design-system/carbon-charts/commit/d6873e21c2e2c2c663667b5d31575868cfacab19)), closes [#1453](https://github.com/carbon-design-system/carbon-charts/issues/1453)
+
+
+
+
+
 # [1.6.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.8...v1.6.0) (2022-09-27)
 
 
