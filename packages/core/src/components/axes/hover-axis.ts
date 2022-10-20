@@ -86,27 +86,6 @@ export class HoverAxis extends Axis {
 				)
 				.attr('height', height)
 				.lower();
-
-			// Add keyboard event listeners to each group element
-			g.on('keydown', function (event: KeyboardEvent) {
-				// Choose specific arrow key depending on the axis
-				if (
-					axisPosition === AxisPositions.LEFT ||
-					axisPosition === AxisPositions.RIGHT
-				) {
-					if (event.key && event.key === 'ArrowUp') {
-						self.goNext(this as HTMLElement, event);
-					} else if (event.key && event.key === 'ArrowDown') {
-						self.goPrevious(this as HTMLElement, event);
-					}
-				} else {
-					if (event.key && event.key === 'ArrowLeft') {
-						self.goPrevious(this as HTMLElement, event);
-					} else if (event.key && event.key === 'ArrowRight') {
-						self.goNext(this as HTMLElement, event);
-					}
-				}
-			});
 		});
 
 		// Add event listeners to element group
@@ -219,6 +198,35 @@ export class HoverAxis extends Axis {
 					element: select(this),
 					datum: select(this).select('text').datum(),
 				});
+			})
+			.on('keydown', function (event) {
+				// Hide the tooltip when `Escape` is pressed, but keep focus
+				if (event.key && event.key === 'Escape') {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+					self.services.events.dispatchEvent(Events.Axis.LABEL_BLUR, {
+						event,
+						element: select(this),
+						datum: select(this).select('text').datum(),
+					});
+				}
+
+				// Choose specific arrow key depending on the axis
+				if (
+					axisPosition === AxisPositions.LEFT ||
+					axisPosition === AxisPositions.RIGHT
+				) {
+					if (event.key && event.key === 'ArrowUp') {
+						self.goNext(this as HTMLElement, event);
+					} else if (event.key && event.key === 'ArrowDown') {
+						self.goPrevious(this as HTMLElement, event);
+					}
+				} else {
+					if (event.key && event.key === 'ArrowLeft') {
+						self.goPrevious(this as HTMLElement, event);
+					} else if (event.key && event.key === 'ArrowRight') {
+						self.goNext(this as HTMLElement, event);
+					}
+				}
 			});
 	}
 
