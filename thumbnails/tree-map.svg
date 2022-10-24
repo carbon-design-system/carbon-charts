@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>tree-map</title>
-    <g id="tree-map" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Rectangle-2-Copy" fill="#9F1853" points="154 77 234 77 234 141 154 141"></polygon>
-        <polygon id="Rectangle-2-Copy-2" fill="#520408" points="154 41 234 41 234 76 154 76"></polygon>
-        <rect id="Rectangle-2-Copy-4" fill="#A56EFF" x="86" y="41" width="67" height="49"></rect>
-        <polygon id="Rectangle-2-Copy-5" fill="#002D9C" points="86 91 135 91 135 141 86 141"></polygon>
-        <polygon id="Rectangle-2-Copy-84" fill="#08BDBA" points="136 91 153 91 153 141 136 141"></polygon>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="tree-map">
+<rect id="Rectangle 120" x="172" y="82" width="296" height="200" fill="white"/>
+<path id="Rectangle 2 Copy" fill-rule="evenodd" clip-rule="evenodd" d="M308 154H468V282H308V154Z" fill="#9F1853"/>
+<path id="Rectangle 2 Copy 2" fill-rule="evenodd" clip-rule="evenodd" d="M308 82H468V152H308V82Z" fill="#520408"/>
+<rect id="Rectangle 2 Copy 4" x="172" y="82" width="134" height="98" fill="#A56EFF"/>
+<path id="Rectangle 2 Copy 5" fill-rule="evenodd" clip-rule="evenodd" d="M172 182H270V282H172V182Z" fill="#002D9C"/>
+<path id="Rectangle 2 Copy 84" fill-rule="evenodd" clip-rule="evenodd" d="M272 182H306V282H272V182Z" fill="#08BDBA"/>
+</g>
 </svg>
