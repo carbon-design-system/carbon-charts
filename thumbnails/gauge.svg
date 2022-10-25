@@ -13,5 +13,6 @@
             <g id="Mask"></g>
             <path d="M22,43 C22,12.072054 -3.07205401,-13 -34,-13 C-64.927946,-13 -90,12.072054 -90,43" stroke="#E0E0E0" stroke-width="12" mask="url(#mask-2)"></path>
         </g>
+        <line x1="205.5" y1="76" x2="197.278497" y2="83.3080022" id="Line" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square"></line>
     </g>
 </svg>
