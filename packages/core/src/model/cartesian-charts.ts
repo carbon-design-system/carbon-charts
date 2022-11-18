@@ -72,9 +72,9 @@ export class ChartModelCartesian extends ChartModel {
 		const domainScaleType = cartesianScales.getDomainAxisScaleType();
 		let domainValueFormatter;
 		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d) => format(d, 'MMM d, yyyy');
+			domainValueFormatter = (d) => format(d, 'MMM d, yyyy HH:mm:ss');
 		}
-
+		
 		const result = [
 			[
 				'Group',

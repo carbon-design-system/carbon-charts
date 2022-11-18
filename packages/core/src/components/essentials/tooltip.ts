@@ -250,13 +250,13 @@ export class Tooltip extends Component {
 		}
 
 		if (typeof value.getTime === 'function') {
-			return format(value, 'MMM d, yyyy');
+			return format(value, 'MMM d, yyyy HH:mm:ss');
 		}
 
 		try {
 			// it's a correct ISO format Date string
 			if (typeof value === 'string' && (/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(value))) {
-				return format(Date.parse(value), 'MMM d, yyyy');
+				return format(Date.parse(value), 'MMM d, yyyy HH:mm:ss');
 			}
 		} catch (e){
 			// not a valid ISO format string
