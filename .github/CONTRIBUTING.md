@@ -145,6 +145,17 @@ yarn run storybook
 
 ## Legal
 
+Each source file must include a license header for the Apache
+Software License 2.0. Using the SPDX format is the simplest approach.
+For example:
+
+```javascript
+/*
+Copyright <holder> All Rights Reserved.
+SPDX-License-Identifier: Apache-2.0
+*/
+```
+
 We have tried to make it as easy as possible to make contributions. This
 applies to how we handle the legal aspects of contribution. We use the
 same approach - the [Developer's Certificate of Origin 1.1 (DCO)](https://developercertificate.org/) - that the Linux® Kernel [community](https://elinux.org/Developer_Certificate_Of_Origin)
