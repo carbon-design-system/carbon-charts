@@ -174,4 +174,4 @@ for the changelog of each version of Charts.
 
 ## Code of Conduct
 
-Read our code of conduct [here](./CODE_OF_CONDUCT.md)
+Read our code of conduct [here](.github/CODE_OF_CONDUCT.md)
