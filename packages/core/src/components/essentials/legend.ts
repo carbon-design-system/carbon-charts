@@ -402,7 +402,6 @@ export class Legend extends Component {
 
 		const addedLegendItemsText = svg.selectAll('div.legend-item p');
 
-		const self = this;
 		// Add an ID for the checkbox to use through `aria-labelledby`
 		addedLegendItemsText.attr('id', function (d, i) {
 			const elementToReference =
@@ -435,11 +434,7 @@ export class Legend extends Component {
 		const svg = this.getComponentContainer();
 		const options = this.getOptions();
 		const legendOptions = Tools.getProperty(options, 'legend');
-		const truncationThreshold = Tools.getProperty(
-			legendOptions,
-			'truncation',
-			'threshold'
-		);
+		const truncation = Tools.getProperty(legendOptions, 'truncation');
 
 		svg.selectAll('div.legend-item')
 			.on('mouseover', function (event) {
@@ -450,8 +445,12 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select('div.checkbox').classed('hovered', true);
 
+				// Show tooltip if character length is greater than threshold & there is no truncation
 				const hoveredItemData = hoveredItem.datum() as any;
-				if (hoveredItemData.name.length > truncationThreshold) {
+				if (
+					hoveredItemData.name.length > truncation.threshold &&
+					truncation.type !== TruncationTypes.NONE
+				) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
 						hoveredElement: hoveredItem,
@@ -460,9 +459,16 @@ export class Legend extends Component {
 				}
 			})
 			.on('mousemove', function (event) {
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+				// Emit tooltip move event only if tooltip is shown
+				const hoveredItemData = select(this).datum() as any;
+				if (
+					hoveredItemData.name.length > truncation.threshold &&
+					truncation.type !== TruncationTypes.NONE
+				) {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+						event,
+					});
+				}
 			})
 			.on('click', function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
@@ -478,7 +484,14 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select('div.checkbox').classed('hovered', false);
 
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				// Emit tooltip hide event only if tooltip is shown
+				const hoveredItemData = hoveredItem.datum() as any;
+				if (
+					hoveredItemData.name.length > truncation.threshold &&
+					truncation.type !== TruncationTypes.NONE
+				) {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+				}
 
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
@@ -525,7 +538,7 @@ export class Legend extends Component {
 			const hoveredItem = select(this);
 
 			const hoveredItemData = hoveredItem.datum() as any;
-			if (hoveredItemData.name.length > truncationThreshold) {
+			if (hoveredItemData.name.length > truncation.threshold) {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement: hoveredItem,
