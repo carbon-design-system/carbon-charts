@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.1...v1.6.2) (2022-12-06)
+
+
+### Bug Fixes
+
+* **core:** keep tooltip hidden if legend truncation is set to none ([#1471](https://github.com/carbon-design-system/carbon-charts/issues/1471)) ([1c5e555](https://github.com/carbon-design-system/carbon-charts/commit/1c5e555cfda85851ad9d394bcd13809d0605bcce)), closes [#1470](https://github.com/carbon-design-system/carbon-charts/issues/1470)
+
+
+
+
+
 ## [1.6.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.0...v1.6.1) (2022-10-20)
 
 
