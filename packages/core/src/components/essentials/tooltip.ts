@@ -208,27 +208,27 @@ export class Tooltip extends Component {
 					.map(
 						(item) =>
 							`<li>
-							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
-								${item.class ? `<div class="tooltip-color ${item.class}"></div>` : ''}
-								${
-									item.color
-										? '<div style="background-color: ' +
-										  item.color +
-										  '" class="tooltip-color"></div>'
-										: ''
-								}
-								<div class="label">
-								<p>${item.label || ''}</p>
-								${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
+								<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
+									${item.class ? `<div class="tooltip-color ${item.class}"></div>` : ''}
+									${
+										item.color
+											? '<div style="background-color: ' +
+											item.color +
+											'" class="tooltip-color"></div>'
+											: ''
+									}
+									<div class="label">
+									<p>${item.label || ''}</p>
+									${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
+									</div>
+									${
+										item.value === undefined ||
+										item.value === null
+											? ''
+											: `<p class="value"/>${item.value}</p>`
+									}
 								</div>
-								${
-									item.value === undefined ||
-									item.value === null
-										? ''
-										: `<p class="value"/>${item.value}</p>`
-								}
-							</div>
-						</li>`
+							</li>`
 					)
 					.join('') +
 				`</ul>`;
