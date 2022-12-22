@@ -10,6 +10,7 @@ import {
 	Grid,
 	Line,
 	Ruler,
+	LegacyRuler,
 	Scatter,
 	TwoDimensionalAxes,
 	ZeroLine,
@@ -42,7 +43,7 @@ export class LineChart extends AxisChart {
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Ruler(this.model, this.services),
+			new LegacyRuler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Scatter(this.model, this.services, { handleThresholds: true }),
 			new SkeletonLines(this.model, this.services),
