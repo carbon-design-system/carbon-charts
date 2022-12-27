@@ -50,8 +50,8 @@ This is an overview of using Carbon Charts with common Svelte set-ups.
 building apps that support client-side rendering (CSR) and server-side rendering
 (SSR). SvelteKit is powered by [Vite](https://github.com/vitest-dev/vitest).
 
-In your `vite.config.js`, add `@carbon/charts` and `carbon-components` to
-`ssr.noExternal` to avoid externalizing the dependencies for SSR.
+`@carbon/charts` and `carbon-components` should not be externalized for SSR when
+building for production.
 
 ```js
 // vite.config.js
@@ -61,7 +61,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 export default {
 	plugins: [sveltekit()],
 	ssr: {
-		noExternal: ['@carbon/charts', 'carbon-components'],
+		noExternal:
+			process.env.NODE_ENV === 'production'
+				? ['@carbon/charts', 'carbon-components']
+				: [],
 	},
 };
 ```
