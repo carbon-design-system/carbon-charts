@@ -152,18 +152,26 @@ export default {
 };
 ```
 
-#### Dynamic imports
+#### Code-splitting
 
-If using [dynamic imports](https://rollupjs.org/guide/en/#dynamic-import), set
-`inlineDynamicImports: true` in `rollup.config.js` to enable code-splitting.
-
-Otherwise, you may encounter the Rollup error
-`Invalid value "iife" for option "output.format" - UMD and IIFE output formats are not supported for code-splitting builds.`
+If using [dynamic imports](https://rollupjs.org/guide/en/#dynamic-import), use
+`type="module"` alongside `output.dir` for code-splitting.
 
 ```diff
+# index.html
+- <script src="build/bundle.js"></script>
++ <script type="module" src="build/index.js"></script>
+```
+
+```diff
+# rollup.config.js
 export default {
-+  inlineDynamicImports: true,
-};
+  output: {
+-   format: "iife",
+-   file: "public/build/bundle.js",
++   dir: "public/build",
+  }
+}
 ```
 
 ### Webpack
