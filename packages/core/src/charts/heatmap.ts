@@ -97,7 +97,11 @@ export class HeatmapChart extends AxisChart {
 
 		const legendComponent = {
 			id: 'legend',
-			components: [new ColorScaleLegend(this.model, this.services)],
+			components: [
+				new ColorScaleLegend(this.model, this.services, {
+					chartType: 'heatmap',
+				}),
+			],
 			growth: LayoutGrowth.PREFERRED,
 			renderType: RenderTypes.SVG,
 		};
