@@ -22,6 +22,7 @@ import CirclePackChart from './circle-pack-chart';
 import WordCloudChart from './wordcloud-chart';
 import AlluvialChart from './alluvial-chart';
 import HeatmapChart from './heatmap-chart';
+import EXPERIMENTAL_ChoroplethChart from './choropleth-chart';
 
 export {
 	AreaChart,
@@ -48,4 +49,5 @@ export {
 	WordCloudChart,
 	AlluvialChart,
 	HeatmapChart,
+	EXPERIMENTAL_ChoroplethChart,
 };
