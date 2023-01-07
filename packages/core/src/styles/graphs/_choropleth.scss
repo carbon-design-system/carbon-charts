@@ -1,0 +1,14 @@
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/theme" as *;
+
+.#{$prefix}--#{$charts-prefix}--choropleth {
+	path.border {
+		stroke: $layer-accent-01;
+	}
+
+	// @todo
+	// Temporary color until we figure out which token to use
+	path.border.missing-data {
+		stroke: red;
+	}
+}
