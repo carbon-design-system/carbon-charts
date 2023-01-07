@@ -22,6 +22,7 @@ import CirclePackChart from './CirclePackChart.svelte';
 import WordCloudChart from './WordCloudChart.svelte';
 import AlluvialChart from './AlluvialChart.svelte';
 import HeatmapChart from './HeatmapChart.svelte';
+import EXPERIMENTAL_ChoroplethChart from './ChoroplethChart.svelte';
 
 export {
 	AreaChart,
@@ -48,4 +49,5 @@ export {
 	WordCloudChart,
 	AlluvialChart,
 	HeatmapChart,
+	EXPERIMENTAL_ChoroplethChart
 };
