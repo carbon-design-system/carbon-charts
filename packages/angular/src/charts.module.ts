@@ -26,6 +26,7 @@ import { TreemapChartComponent } from './treemap-chart.component';
 import { CirclePackChartComponent } from './circle-pack-chart.component';
 import { WordCloudChartComponent } from './wordcloud-chart.component';
 import { HeatmapChartComponent } from './heatmap-chart.component';
+import { EXPERIMENTAL_ChoroplethChartComponent } from './choropleth.component';
 
 @NgModule({
 	imports: [CommonModule],
@@ -33,6 +34,7 @@ import { HeatmapChartComponent } from './heatmap-chart.component';
 		BaseChart,
 		AlluvialChartComponent,
 		AreaChartComponent,
+		EXPERIMENTAL_ChoroplethChartComponent,
 		StackedAreaChartComponent,
 		SimpleBarChartComponent,
 		GroupedBarChartComponent,
@@ -60,6 +62,7 @@ import { HeatmapChartComponent } from './heatmap-chart.component';
 		BaseChart,
 		AlluvialChartComponent,
 		AreaChartComponent,
+		EXPERIMENTAL_ChoroplethChartComponent,
 		StackedAreaChartComponent,
 		SimpleBarChartComponent,
 		GroupedBarChartComponent,
