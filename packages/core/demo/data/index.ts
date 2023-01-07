@@ -25,6 +25,7 @@ import * as highScaleDemos from './high-scale';
 import * as alluvialDemos from './alluvial';
 import * as highlightDemos from './hightlight';
 import * as heatmapDemos from './heatmap';
+import * as choroplethDemos from './choropleth';
 
 export * from './area';
 export * from './bar';
@@ -51,6 +52,7 @@ export * from './zoom-bar';
 export * from './high-scale';
 export * from './alluvial';
 export * from './heatmap';
+export * from './choropleth';
 
 import {
 	createChartSandbox,
@@ -1105,6 +1107,26 @@ const simpleChartDemos = [
 });
 
 const complexChartDemos = [
+	{
+		title: 'Choropleth',
+		configs: {
+			excludeColorPaletteControl: true,
+			includeProjectionControl: true,
+		},
+		demos: [
+			{
+				options: choroplethDemos.options,
+				data: choroplethDemos.data,
+				chartType: chartTypes.ChoroplethChart,
+				mainDemo: true,
+			},
+			{
+				options: choroplethDemos.missingDataOptions,
+				data: choroplethDemos.missingData,
+				chartType: chartTypes.ChoroplethChart,
+			},
+		],
+	},
 	{
 		title: 'Alluvial',
 		demos: [

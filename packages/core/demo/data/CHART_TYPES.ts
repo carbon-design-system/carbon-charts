@@ -29,6 +29,11 @@ export default {
 		angular: 'ibm-bullet-chart',
 		vue: 'ccv-bullet-chart',
 	},
+	ChoroplethChart: {
+		vanilla: 'EXPERIMENTAL_ChoroplethChart',
+		angular: 'experimental-ibm-choropleth-chart',
+		vue: 'experimental-ccv-choropleth-chart',
+	},
 	ComboChart: {
 		vanilla: 'ComboChart',
 		angular: 'ibm-combo-chart',
