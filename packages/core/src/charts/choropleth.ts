@@ -159,7 +159,7 @@ export class EXPERIMENTAL_ChoroplethChart extends Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			// new AxisChartsTooltip(this.model, this.services),
+			new Tooltip(this.model, this.services),
 			new Modal(this.model, this.services),
 			new LayoutComponent(
 				this.model,
