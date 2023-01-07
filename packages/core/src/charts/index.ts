@@ -22,3 +22,4 @@ export * from './circle-pack';
 export * from './wordcloud';
 export * from './alluvial';
 export * from './heatmap';
+export * from './choropleth';

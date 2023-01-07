@@ -11,6 +11,7 @@ export * from './essentials/tooltip';
 export * from './essentials/tooltip-axis';
 export * from './essentials/canvas-chart-clip';
 export * from './essentials/highlights';
+export * from './essentials/geo-projection';
 
 // GRAPHS
 export * from './graphs/area';
@@ -38,6 +39,7 @@ export * from './graphs/circle-pack';
 export * from './graphs/wordcloud';
 export * from './graphs/alluvial';
 export * from './graphs/heatmap';
+export * from './graphs/choropleth';
 
 // Layout
 export * from './layout/spacer';
