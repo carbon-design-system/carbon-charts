@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.2...v1.6.3) (2022-12-23)
+
+
+### Bug Fixes
+
+* **csp:** remove inline styles ([#1484](https://github.com/carbon-design-system/carbon-charts/issues/1484)) ([622f59a](https://github.com/carbon-design-system/carbon-charts/commit/622f59ab3cc738985f1004ff93423602ad673b86))
+
+
+
+
+
+## [1.6.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.1...v1.6.2) (2022-12-06)
+
+
+### Bug Fixes
+
+* **core:** keep tooltip hidden if legend truncation is set to none ([#1471](https://github.com/carbon-design-system/carbon-charts/issues/1471)) ([1c5e555](https://github.com/carbon-design-system/carbon-charts/commit/1c5e555cfda85851ad9d394bcd13809d0605bcce)), closes [#1470](https://github.com/carbon-design-system/carbon-charts/issues/1470)
+
+
+
+
+
+## [1.6.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.0...v1.6.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* **core:** allow users to 'escape' axis tooltip in heatmap ([#1454](https://github.com/carbon-design-system/carbon-charts/issues/1454)) ([d6873e2](https://github.com/carbon-design-system/carbon-charts/commit/d6873e21c2e2c2c663667b5d31575868cfacab19)), closes [#1453](https://github.com/carbon-design-system/carbon-charts/issues/1453)
+
+
+
+
+
 # [1.6.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.8...v1.6.0) (2022-09-27)
 
 **Note:** Version bump only for package @carbon/charts

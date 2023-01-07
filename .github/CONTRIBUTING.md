@@ -15,6 +15,7 @@ Please take a moment to review this document in order to make the contribution p
   - [Contribution process](#contribution-process)
 - [Code guidelines](#code-guidelines)
   - [Philosophy](#philosophy)
+- [Legal](#legal)
 
 
 ## IBMer Contributions
@@ -140,3 +141,39 @@ yarn run storybook
 
 - Components should be fully equipped with _all_ features and interactions defined in the latest Design Guide and UX Specifications.
 - Components should be _pixel perfect_ when compared to the latest Design Guide.
+
+
+## Legal
+
+Each source file must include a license header for the Apache
+Software License 2.0. Using the SPDX format is the simplest approach.
+For example:
+
+```javascript
+/*
+Copyright <holder> All Rights Reserved.
+SPDX-License-Identifier: Apache-2.0
+*/
+```
+
+We have tried to make it as easy as possible to make contributions. This
+applies to how we handle the legal aspects of contribution. We use the
+same approach - the [Developer's Certificate of Origin 1.1 (DCO)](https://developercertificate.org/) - that the Linux® Kernel [community](https://elinux.org/Developer_Certificate_Of_Origin)
+uses to manage code contributions.
+
+We simply ask that when submitting a patch for review, the developer
+must include a sign-off statement in the commit message.
+
+Here is an example Signed-off-by line, which indicates that the
+submitter accepts the DCO:
+
+```text
+Signed-off-by: John Doe <john.doe@example.com>
+```
+
+You can include this automatically when you commit a change to your
+local git repository using the following command:
+
+```bash
+git commit -s
+```
