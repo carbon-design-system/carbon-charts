@@ -1,12 +1,12 @@
 import React from 'react';
 import { EXPERIMENTAL_ChoroplethChart as CC } from '@carbon/charts';
 import BaseChart from './base-chart';
-import { ChartConfig, ThematicChartOptions } from '@carbon/charts/interfaces';
+import { ChartConfig, ChoroplethChartOptions } from '@carbon/charts/interfaces';
 import { hasChartBeenInitialized } from './utils';
 
-type ChoroplethChartProps = ChartConfig<ThematicChartOptions>;
+type ChoroplethChartProps = ChartConfig<ChoroplethChartOptions>;
 
-export default class EXPERIMENTAL_ChoroplethChart extends BaseChart<ThematicChartOptions> {
+export default class EXPERIMENTAL_ChoroplethChart extends BaseChart<ChoroplethChartOptions> {
 	chartRef!: HTMLDivElement;
 	props!: ChoroplethChartProps;
 	chart!: CC;
