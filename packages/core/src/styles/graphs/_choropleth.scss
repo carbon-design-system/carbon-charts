@@ -3,12 +3,11 @@
 
 .#{$prefix}--#{$charts-prefix}--choropleth {
 	path.border {
-		stroke: $layer-accent-01;
+		stroke: $border-subtle-selected-01;
 	}
 
-	// @todo
-	// Temporary color until we figure out which token to use
 	path.border.missing-data {
-		stroke: red;
+		stroke: $text-placeholder;
+		fill: $background;
 	}
 }
