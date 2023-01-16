@@ -21,12 +21,6 @@ export class Choropleth extends GeoProjection {
 					value: data[d.properties.NAME].value,
 					originalClassName: `border`,
 				});
-			})
-			.classed('missing-data', (d) => {
-				if (data[d.properties.NAME].value) {
-					return false;
-				}
-				return true;
 			});
 
 		this.addCountryAreaEventListener();

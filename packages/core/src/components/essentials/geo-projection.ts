@@ -5,8 +5,8 @@ import { Tools } from '../../tools';
 import { RenderTypes, Projection } from '../../interfaces';
 
 // D3 imports
-import { geoPath } from 'd3';
-import { feature } from 'topojson-client';
+import { geoPath, line } from 'd3';
+import { feature, merge } from 'topojson-client';
 import {
 	// Azimuthal Projections - project the sphere directly on to the plane
 	geoEqualEarth,
@@ -37,10 +37,28 @@ export class GeoProjection extends Component {
 			return;
 		}
 
-		const options = this.model.getOptions();
-
 		// Get users projection
 		const projection = this.getProjection();
+
+		const geoData = Tools.getProperty(this.getOptions(), 'geoData');
+
+		const geometries = Tools.getProperty(geoData, 'objects', 'countries');
+
+		const data = this.model.getCombinedData();
+
+		// Seperate countries that have data & countries with missing data
+		const withData = {};
+		const withoutData = {};
+		Object.keys(data).forEach((element) => {
+			if (typeof data[element].value === 'number') {
+				withData[element] = data[element];
+			} else {
+				withoutData[element] = data[element];
+			}
+		});
+
+		// Merge all without data
+		const withoutDataMerge = merge(geoData, Object.values(withoutData));
 
 		/**
 		 * @todo - Currently only topojson is supported
@@ -56,10 +74,11 @@ export class GeoProjection extends Component {
 		 * }
 		 */
 		// Convert from topojson to geojson
-		const json = feature(
-			options.geoData,
-			options.geoData.objects.countries
-		);
+		const json = feature(geoData, {
+			// We need to specify that we are converting geometry collections
+			type: 'GeometryCollection',
+			geometries: Object.values(withData),
+		});
 
 		// Depending on the projection selected, we will need to scale/translate accordingly
 		const projectionScale = projection.fitSize([width, height], json);
@@ -71,6 +90,34 @@ export class GeoProjection extends Component {
 			.data(json.features)
 			.join('path')
 			.attr('d', geo);
+
+		const patternID = this.services.domUtils.generateElementIDString(
+			`geo-pattern-stripes`
+		);
+
+		// Create a striped pattern for missing data
+		const defs = DOMUtils.appendOrSelect(svg, 'defs');
+		DOMUtils.appendOrSelect(defs, 'pattern')
+			.attr('id', patternID)
+			.attr('width', 5)
+			.attr('height', 10)
+			.attr('patternUnits', 'userSpaceOnUse')
+			.attr('patternTransform', 'rotate(45)')
+			.append('path')
+			.classed('pattern-fill', true)
+			.attr(
+				'd',
+				line()([
+					[0, 0],
+					[0, 10],
+				])
+			);
+
+		const missingBorders = DOMUtils.appendOrSelect(svg, 'g.missing-data');
+		DOMUtils.appendOrSelect(missingBorders, 'path')
+			.datum(withoutDataMerge)
+			.attr('d', geo)
+			.style('fill', `url(#${patternID})`);
 	}
 
 	/**

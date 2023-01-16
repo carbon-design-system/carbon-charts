@@ -6,8 +6,13 @@
 		stroke: $border-subtle-selected-01;
 	}
 
-	path.border.missing-data {
-		stroke: $text-placeholder;
+	g.missing-data path {
+		stroke: $border-subtle-selected-01;
 		fill: $background;
+	}
+
+	pattern path.pattern-fill {
+		stroke: $border-strong-01;
+		stroke-width: 0.5px;
 	}
 }
