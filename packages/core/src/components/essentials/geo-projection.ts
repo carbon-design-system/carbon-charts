@@ -42,8 +42,6 @@ export class GeoProjection extends Component {
 
 		const geoData = Tools.getProperty(this.getOptions(), 'geoData');
 
-		const geometries = Tools.getProperty(geoData, 'objects', 'countries');
-
 		const data = this.model.getCombinedData();
 
 		// Seperate countries that have data & countries with missing data
