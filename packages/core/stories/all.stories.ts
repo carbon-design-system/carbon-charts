@@ -45,11 +45,16 @@ introStories.add('Welcome', () => {
 
 // Loop through all demo groups
 storybookDemoGroups.forEach((demoGroup) => {
+
 	// Create story group for each demo group
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs);
+	);
+
+	if(demoGroup.title !== "Choropleth"){
+		groupStories.addDecorator(withKnobs);
+	}
 
 	demoGroup.demos.forEach((demo) => {
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
