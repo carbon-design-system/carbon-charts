@@ -8,12 +8,12 @@ import { BaseChart } from "./base-chart.component";
 import { EXPERIMENTAL_ChoroplethChart } from "@carbon/charts";
 
 /**
- * Wrapper around `Alluvial` in carbon charts library
+ * Wrapper around `Choropleth` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "experimental-ibm-choropleth-chart",
+	selector: "EXPERIMENTAL-ibm-choropleth-chart",
 	template: ``
 })
 export class EXPERIMENTAL_ChoroplethChartComponent extends BaseChart implements AfterViewInit {

@@ -31,7 +31,7 @@ export default {
 	},
 	ChoroplethChart: {
 		vanilla: 'EXPERIMENTAL_ChoroplethChart',
-		angular: 'experimental-ibm-choropleth-chart',
+		angular: 'EXPERIMENTAL-ibm-choropleth-chart',
 		vue: 'experimental-ccv-choropleth-chart',
 	},
 	ComboChart: {
