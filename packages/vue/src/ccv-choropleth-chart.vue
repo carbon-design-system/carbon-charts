@@ -7,7 +7,7 @@ import { EXPERIMENTAL_ChoroplethChart } from '@carbon/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {
-	name: 'ExperimentalCcvChoroplethChart',
+	name: 'EXPERIMENTALCcvChoroplethChart',
 	extends: CcvBaseChart,
 	mounted() {
 		this.coreChart = new EXPERIMENTAL_ChoroplethChart(this.$el, {
