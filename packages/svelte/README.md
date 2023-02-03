@@ -1,6 +1,6 @@
 # Notice
 
-### This version is in beta & relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+### This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
 
 ## `@carbon/charts-svelte`
 
@@ -50,8 +50,8 @@ This is an overview of using Carbon Charts with common Svelte set-ups.
 building apps that support client-side rendering (CSR) and server-side rendering
 (SSR). SvelteKit is powered by [Vite](https://github.com/vitest-dev/vitest).
 
-In your `vite.config.js`, add `@carbon/charts` and `carbon-components` to
-`ssr.noExternal` to avoid externalizing the dependencies for SSR.
+`@carbon/charts` and `carbon-components` should not be externalized for SSR when
+building for production.
 
 ```js
 // vite.config.js
@@ -61,7 +61,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 export default {
 	plugins: [sveltekit()],
 	ssr: {
-		noExternal: ['@carbon/charts', 'carbon-components'],
+		noExternal:
+			process.env.NODE_ENV === 'production'
+				? ['@carbon/charts', 'carbon-components']
+				: [],
 	},
 };
 ```
@@ -136,11 +139,14 @@ export default {
 	onwarn: (warning, warn) => {
 		// omit circular dependency warnings emitted from
 		// "d3-*" packages and "@carbon/charts"
-		if (
-			warning.code === 'CIRCULAR_DEPENDENCY' &&
-			/^node_modules\/(d3-|@carbon\/charts)/.test(warning.importer)
-		) {
-			return;
+		if (warning.code === 'CIRCULAR_DEPENDENCY') {
+			if (
+				warning.ids.some((id) =>
+					/node_modules\/(d3-|@carbon\/charts)/.test(id)
+				)
+			) {
+				return;
+			}
 		}
 
 		// preserve all other warnings
@@ -149,18 +155,26 @@ export default {
 };
 ```
 
-#### Dynamic imports
+#### Code-splitting
 
-If using [dynamic imports](https://rollupjs.org/guide/en/#dynamic-import), set
-`inlineDynamicImports: true` in `rollup.config.js` to enable code-splitting.
-
-Otherwise, you may encounter the Rollup error
-`Invalid value "iife" for option "output.format" - UMD and IIFE output formats are not supported for code-splitting builds.`
+If using [dynamic imports](https://rollupjs.org/guide/en/#dynamic-import), use
+`type="module"` alongside `output.dir` for code-splitting.
 
 ```diff
+# index.html
+- <script src="build/bundle.js"></script>
++ <script type="module" src="build/index.js"></script>
+```
+
+```diff
+# rollup.config.js
 export default {
-+  inlineDynamicImports: true,
-};
+  output: {
+-   format: "iife",
+-   file: "public/build/bundle.js",
++   dir: "public/build",
+  }
+}
 ```
 
 ### Webpack

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.2...v1.6.3) (2022-12-23)
+
+
+### Bug Fixes
+
+* **csp:** remove inline styles ([#1484](https://github.com/carbon-design-system/carbon-charts/issues/1484)) ([622f59a](https://github.com/carbon-design-system/carbon-charts/commit/622f59ab3cc738985f1004ff93423602ad673b86))
+
+
+
+
+
 ## [1.6.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.1...v1.6.2) (2022-12-06)
 
 

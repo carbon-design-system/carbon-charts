@@ -112,18 +112,28 @@ export class Toolbar extends Component {
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
 					`control-${d.id}`
 				)}" aria-label="${d.title}">
-				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform; width: ${
-					d.iconSVG.width !== undefined ? d.iconSVG.width : '20px'
-				}; height: ${
-						d.iconSVG.height !== undefined
-							? d.iconSVG.height
-							: '20px'
-					}" xmlns="http://www.w3.org/2000/svg" class="cds--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" class="cds--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${d.iconSVG.content}
 				</svg>
 			</button>`
 				)
 				.each(function (d, index) {
+					select(this)
+						.select('svg')
+						.style('will-change', 'transform')
+						.style(
+							'width',
+							d.iconSVG.width !== undefined
+								? d.iconSVG.width
+								: '20px'
+						)
+						.style(
+							'height',
+							d.iconSVG.height !== undefined
+								? d.iconSVG.height
+								: '20px'
+						);
+
 					select(this)
 						.select('button')
 						.on('click', (event) => {
