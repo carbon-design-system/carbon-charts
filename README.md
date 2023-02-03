@@ -38,7 +38,6 @@ Read the release change logs
 [here](https://github.com/carbon-design-system/carbon-charts/releases)
 
 ## Component status
-
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
 | Component          | Vanilla            | Angular            | React              | Vue                | Svelte             |
