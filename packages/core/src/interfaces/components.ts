@@ -4,7 +4,6 @@ import {
 	Alignments,
 	ToolbarControlTypes,
 	ZoomBarTypes,
-	ColorLegendType,
 } from './enums';
 import { Component } from '../components/component';
 import { TruncationOptions } from './truncation';
@@ -170,6 +169,10 @@ export interface ToolbarControl {
 	 * the toolbar control type
 	 */
 	type: ToolbarControlTypes;
+	/**
+	 * used as aria-label for toolbar control
+	 */
+	title?: string;
 	/**
 	 * the text to display (if this control is displayed in overflow menu)
 	 * type value will be displayed if text is not available
