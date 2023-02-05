@@ -1108,7 +1108,7 @@ const simpleChartDemos = [
 
 const complexChartDemos = [
 	{
-		title: 'Choropleth',
+		title: 'Choropleth (experimental)',
 		configs: {
 			excludeColorPaletteControl: true,
 			includeProjectionControl: true,
@@ -1126,6 +1126,7 @@ const complexChartDemos = [
 				chartType: chartTypes.ChoroplethChart,
 			},
 		],
+		disableProps: true,
 	},
 	{
 		title: 'Alluvial',
