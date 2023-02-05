@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.4](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.3...v1.6.4) (2023-02-03)
+
+
+### Bug Fixes
+
+* **csv-export:** fix en-dash html code showing up ([#1492](https://github.com/carbon-design-system/carbon-charts/issues/1492)) ([adaa209](https://github.com/carbon-design-system/carbon-charts/commit/adaa209b14bca0080c87f24a5eaf8108ee632468))
+
+
+
+
+
 ## [1.6.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.2...v1.6.3) (2022-12-23)
 
 
