@@ -52,7 +52,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 		module
 	);
 
-	if(demoGroup.title !== "Choropleth"){
+	if (!demoGroup.disableProps) {
 		groupStories.addDecorator(withKnobs);
 	}
 
@@ -119,13 +119,21 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 			const chart = new ClassToInitialize(
 				container.querySelector('div#chart-demo'),
 				{
-					data: object(
-						'Data',
-						demo.isHighScale
-							? storyUtils.generateRandomData(100, 100, 500)
-							: demo.data
-					),
-					options: object('Options', demo.options),
+					data: demoGroup.disableProps
+						? demo.data
+						: object(
+								'Data',
+								demo.isHighScale
+									? storyUtils.generateRandomData(
+											100,
+											100,
+											500
+									  )
+									: demo.data
+						  ),
+					options: demoGroup.disableProps
+						? demo.options
+						: object('Options', demo.options),
 				}
 			);
 
