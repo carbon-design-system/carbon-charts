@@ -15,7 +15,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs({ escapeHTML: false }));
+	);
+
+	if(demoGroup.title !== "Choropleth"){
+		groupStories.addDecorator(withKnobs({ escapeHTML: false }));
+	}
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach((demo) => {
@@ -83,8 +87,10 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 					<div className="marginTop-30" id="chart-demo">
 						<DemoComponent
-							data={object('Data', demo.data)}
-							options={object('Options', demo.options)}
+							// Only using object knob when chart is NOT choropleth, otherwise props will show even when 'disabled'
+							// This approach is used to bypass storybook bug
+							data={demoGroup.title !== "Choropleth" ? object('Data', demo.data) : demo.data}
+							options={demoGroup.title !== "Choropleth" ? object('Options', demo.options) : demo.options}
 							ref={chartRef}
 						/>
 					</div>
