@@ -66,6 +66,25 @@ export class ChoroplethModel extends ChartModel {
 		return this._matrix;
 	}
 
+	/**
+	 * Generate tabular data from display data
+	 * @returns Array<Object>
+	 */
+	getTabularDataArray() {
+		const displayData = this.getDisplayData();
+
+		const result = [
+			['Country ID', 'Country Name', 'Value'],
+			...displayData.map((datum) => [
+				datum['id'] === null ? '&ndash;' : datum['id'],
+				datum['name'],
+				datum['value'],
+			]),
+		];
+
+		return result;
+	}
+
 	// Uses quantize scale to return class names
 	getColorClassName(configs: { value?: number; originalClassName?: string }) {
 		return `${configs.originalClassName} ${this._colorScale(
