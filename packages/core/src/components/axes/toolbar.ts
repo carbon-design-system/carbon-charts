@@ -69,8 +69,7 @@ export class Toolbar extends Component {
 						'cds--overflow-menu-options cds--overflow-menu--flip cds--overflow-menu-options cds--overflow-menu--flip'
 					)
 					.attr('tabindex', -1)
-					.attr('role', 'menu')
-					.html(`<ul></ul>`);
+					.html(`<ul role='menu'></ul>`);
 			}
 
 			// get the toolbar buttons
@@ -191,7 +190,8 @@ export class Toolbar extends Component {
 				'class',
 				'cds--overflow-menu-options__option cds--overflow-menu-options__option'
 			)
-			.attr('role', 'menuitem');
+			.attr('role', 'menuitem')
+			.attr('tabindex', 1);
 
 		enteringOverflowMenuControls
 			.append('button')
