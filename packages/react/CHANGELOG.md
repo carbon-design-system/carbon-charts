@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.4...v1.6.5) (2023-02-27)
+
+
+### Bug Fixes
+
+* **react:** outdated Carbon prefix being used ([#1501](https://github.com/carbon-design-system/carbon-charts/issues/1501)) ([13d5c58](https://github.com/carbon-design-system/carbon-charts/commit/13d5c58915fc8337d877718fb8857820af10bf26))
+
+
+
+
+
 ## [1.6.4](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.3...v1.6.4) (2023-02-03)
 
 **Note:** Version bump only for package @carbon/charts-react
