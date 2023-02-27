@@ -6495,10 +6495,10 @@ capture-stack-trace@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
 
-carbon-components@10.56.0:
-  version "10.56.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.56.0.tgz#bb5890f00f81cebcddfa2dbae4794477deb539f4"
-  integrity sha512-GPLqHiu2SWvMxcQOi/CcgA/XA3aX/5HiEPSQjLwzjKAJsnkpzq043Jf7QwgLOVbTBzGSjFbFkJnE2lc73I2WBw==
+carbon-components@^10.56.0:
+  version "10.58.3"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.58.3.tgz#425bb5ceb8755fda9c50769572a5845d3f852e00"
+  integrity sha512-RjTnrWCGStsIZ7nErw97AZI9sQWxQ8oIgo3QMdV0FWFcpTOECA4I9Dy4WPpRRdSMBcQpLetTxqjDGourM4u8Tw==
   dependencies:
     "@carbon/telemetry" "0.1.0"
     flatpickr "4.6.1"
