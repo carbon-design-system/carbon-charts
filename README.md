@@ -11,6 +11,9 @@
 		</a>
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+20k%2Fweek-green" />
+		<a href="https://discord.gg/J7JEUEkTRX">
+	    		<img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
+	  	</a>
 	</p>
 </p>
 
@@ -34,12 +37,10 @@ Carbon data visualization design specifications can be found
 [here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
-
 Read the release change logs
 [here](https://github.com/carbon-design-system/carbon-charts/releases)
 
 ## Component status
-
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
 | Component          | Vanilla            | Angular            | React              | Vue                | Svelte             |
