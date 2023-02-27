@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-svelte",
-	"version": "1.6.6",
+	"version": "1.6.7",
 	"description": "Carbon charting components for Svelte",
 	"type": "module",
 	"main": "./src/index.js",
@@ -49,7 +49,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^1.6.6",
+		"@carbon/charts": "^1.6.7",
 		"@carbon/telemetry": "0.1.0"
 	},
 	"peerDependencies": {
