@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.6...v1.6.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* **dependencies:** fixed requirement on carbon-components version ([#1504](https://github.com/carbon-design-system/carbon-charts/issues/1504)) ([4f48728](https://github.com/carbon-design-system/carbon-charts/commit/4f487285c7245e0ffe9ddc9154cea2677569195f))
+
+
+
+
+
+## [1.6.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.5...v1.6.6) (2023-02-27)
+
+
+### Bug Fixes
+
+* **toolbar:** role='menu' being applied to wrong element ([#1502](https://github.com/carbon-design-system/carbon-charts/issues/1502)) ([61f9eca](https://github.com/carbon-design-system/carbon-charts/commit/61f9eca5ee1ac988a4807750aa357407aad72c10))
+
+
+
+
+
 ## [1.6.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.4...v1.6.5) (2023-02-27)
 
 
