@@ -291,126 +291,144 @@ export class Gauge extends Component {
 		const options = this.getOptions();
 		const delta = this.getDelta();
 
-		// Sizing and positions relative to the radius
-		const radius = this.computeRadius();
-		const deltaFontSize = delta
-			? Tools.getProperty(options, 'gauge', 'deltaFontSize')
-			: () => 0;
+		if (!delta) {
+			const deltaGroup = svg.select('g.gauge-delta');
 
-		// use numberFormatter here only if there is a delta supplied
-		const numberFormatter = delta
-			? Tools.getProperty(options, 'gauge', 'numberFormatter')
-			: () => null;
+			if (!deltaGroup.empty()) {
+				deltaGroup.remove();
+			}
+		} else {
+			// Sizing and positions relative to the radius
+			const radius = this.computeRadius();
+			const deltaFontSize = delta
+				? Tools.getProperty(options, 'gauge', 'deltaFontSize')
+				: () => 0;
 
-		const arrowSize = Tools.getProperty(
-			options,
-			'gauge',
-			'deltaArrow',
-			'size'
-		);
-		const numberSpacing = Tools.getProperty(
-			options,
-			'gauge',
-			'numberSpacing'
-		);
+			// use numberFormatter here only if there is a delta supplied
+			const numberFormatter = delta
+				? Tools.getProperty(options, 'gauge', 'numberFormatter')
+				: () => null;
 
-		const showPercentageSymbol = Tools.getProperty(
-			options,
-			'gauge',
-			'showPercentageSymbol'
-		);
+			const arrowSize = Tools.getProperty(
+				options,
+				'gauge',
+				'deltaArrow',
+				'size'
+			);
+			const numberSpacing = Tools.getProperty(
+				options,
+				'gauge',
+				'numberSpacing'
+			);
 
-		const numbersGroup = DOMUtils.appendOrSelect(svg, 'g.gauge-numbers');
+			const showPercentageSymbol = Tools.getProperty(
+				options,
+				'gauge',
+				'showPercentageSymbol'
+			);
 
-		// Add the smaller number of the delta
-		const deltaGroup = DOMUtils.appendOrSelect(
-			numbersGroup,
-			'g.gauge-delta'
-		).attr(
-			'transform',
-			`translate(0, ${deltaFontSize(radius) + numberSpacing})`
-		);
+			const numbersGroup = DOMUtils.appendOrSelect(
+				svg,
+				'g.gauge-numbers'
+			);
 
-		const deltaNumber = DOMUtils.appendOrSelect(
-			deltaGroup,
-			'text.gauge-delta-number'
-		);
-		const gaugeSymbol = showPercentageSymbol ? '%' : '';
+			// Add the smaller number of the delta
+			const deltaGroup = DOMUtils.appendOrSelect(
+				numbersGroup,
+				'g.gauge-delta'
+			).attr(
+				'transform',
+				`translate(0, ${deltaFontSize(radius) + numberSpacing})`
+			);
 
-		deltaNumber.data(delta === null ? [] : [delta]);
+			const deltaNumber = DOMUtils.appendOrSelect(
+				deltaGroup,
+				'text.gauge-delta-number'
+			);
+			const gaugeSymbol = showPercentageSymbol ? '%' : '';
 
-		deltaNumber
-			.enter()
-			.append('text')
-			.classed('gauge-delta-number', true)
-			.merge(deltaNumber)
-			.attr('text-anchor', 'middle')
-			.style('font-size', `${deltaFontSize(radius)}px`)
-			.text((d) => `${numberFormatter(d)}${gaugeSymbol}`);
+			deltaNumber.data(delta === null ? [] : [delta]);
 
-		// Add the caret for the delta number
-		const {
-			width: deltaNumberWidth,
-		} = DOMUtils.getSVGElementSize(
-			DOMUtils.appendOrSelect(svg, '.gauge-delta-number'),
-			{ useBBox: true }
-		);
+			deltaNumber
+				.enter()
+				.append('text')
+				.classed('gauge-delta-number', true)
+				.merge(deltaNumber)
+				.attr('text-anchor', 'middle')
+				.style('font-size', `${deltaFontSize(radius)}px`)
+				.text((d) => `${numberFormatter(d)}${gaugeSymbol}`);
 
-		// check if delta arrow is disabled
-		const arrowEnabled = Tools.getProperty(
-			options,
-			'gauge',
-			'deltaArrow',
-			'enabled'
-		);
+			// Add the caret for the delta number
+			const {
+				width: deltaNumberWidth,
+			} = DOMUtils.getSVGElementSize(
+				DOMUtils.appendOrSelect(svg, '.gauge-delta-number'),
+				{ useBBox: true }
+			);
 
-		const deltaArrow = deltaGroup
-			.selectAll('svg.gauge-delta-arrow')
-			.data(delta !== null && arrowEnabled ? [delta] : []);
+			// check if delta arrow is disabled
+			const arrowEnabled = Tools.getProperty(
+				options,
+				'gauge',
+				'deltaArrow',
+				'enabled'
+			);
 
-		deltaArrow
-			.enter()
-			.append('svg')
-			.merge(deltaArrow)
-			.attr('class', 'gauge-delta-arrow')
-			.attr('x', -arrowSize(radius) - deltaNumberWidth / 2)
-			.attr('y', -arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35)
-			.attr('width', arrowSize(radius))
-			.attr('height', arrowSize(radius))
-			.attr('viewBox', '0 0 16 16')
-			/*
-			 * using .each() here to ensure that the below function runs
-			 * after svg.gauge-delta-arrow has been mounted onto the DOM
-			 */
-			.each(function () {
-				const deltaArrowSelection = select(this);
+			const deltaArrow = deltaGroup
+				.selectAll('svg.gauge-delta-arrow')
+				.data(delta !== null && arrowEnabled ? [delta] : []);
 
-				// Needed to correctly size SVG in Firefox
-				DOMUtils.appendOrSelect(
-					deltaArrowSelection,
-					'rect.gauge-delta-arrow-backdrop'
+			deltaArrow
+				.enter()
+				.append('svg')
+				.merge(deltaArrow)
+				.attr('class', 'gauge-delta-arrow')
+				.attr('x', -arrowSize(radius) - deltaNumberWidth / 2)
+				.attr(
+					'y',
+					-arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35
 				)
-					.attr('width', '16')
-					.attr('height', '16')
-					.attr('fill', 'none');
+				.attr('width', arrowSize(radius))
+				.attr('height', arrowSize(radius))
+				.attr('viewBox', '0 0 16 16')
+				/*
+				 * using .each() here to ensure that the below function runs
+				 * after svg.gauge-delta-arrow has been mounted onto the DOM
+				 */
+				.each(function () {
+					const deltaArrowSelection = select(this);
 
-				// Draw the arrow with status
-				const status = Tools.getProperty(options, 'gauge', 'status');
-				DOMUtils.appendOrSelect(
-					deltaArrowSelection,
-					'polygon.gauge-delta-arrow'
-				)
-					.attr(
-						'class',
-						status !== null
-							? `gauge-delta-arrow status--${status}`
-							: ''
+					// Needed to correctly size SVG in Firefox
+					DOMUtils.appendOrSelect(
+						deltaArrowSelection,
+						'rect.gauge-delta-arrow-backdrop'
 					)
-					.attr('points', self.getArrow(delta));
-			});
+						.attr('width', '16')
+						.attr('height', '16')
+						.attr('fill', 'none');
 
-		deltaArrow.exit().remove();
-		deltaNumber.exit().remove();
+					// Draw the arrow with status
+					const status = Tools.getProperty(
+						options,
+						'gauge',
+						'status'
+					);
+					DOMUtils.appendOrSelect(
+						deltaArrowSelection,
+						'polygon.gauge-delta-arrow'
+					)
+						.attr(
+							'class',
+							status !== null
+								? `gauge-delta-arrow status--${status}`
+								: ''
+						)
+						.attr('points', self.getArrow(delta));
+				});
+
+			deltaArrow.exit().remove();
+			deltaNumber.exit().remove();
+		}
 	}
 
 	getInnerRadius() {
