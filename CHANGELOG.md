@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.7...v1.6.8) (2023-02-27)
+
+
+### Bug Fixes
+
+* **gauge:** `delta` element still showing up when disabled ([#1503](https://github.com/carbon-design-system/carbon-charts/issues/1503)) ([41fc849](https://github.com/carbon-design-system/carbon-charts/commit/41fc849a162984bd48e139154635cbd9916d9222))
+
+
+
+
+
 ## [1.6.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.6...v1.6.7) (2023-02-27)
 
 
