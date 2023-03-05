@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from './model';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { LegendItemType } from '../interfaces/enums';
 
 /** The charting model layer which includes mainly the chart data and options,

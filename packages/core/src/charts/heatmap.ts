@@ -2,7 +2,7 @@
 import { HeatmapModel } from '../model/heatmap';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 import {
 	HeatmapChartOptions,

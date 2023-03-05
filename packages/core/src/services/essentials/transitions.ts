@@ -2,7 +2,7 @@
 import { Service } from '../service';
 import * as Configuration from '../../configuration';
 import { Events } from './../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { Transition, transition } from 'd3-transition';

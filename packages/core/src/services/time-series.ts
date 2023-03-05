@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { TimeScaleOptions } from '../interfaces/axis-scales';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // D3 Imports
 import { min } from 'd3-array';

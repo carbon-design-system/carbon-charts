@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModelCartesian } from './cartesian-charts';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 /**
  * Bullet chart model layer

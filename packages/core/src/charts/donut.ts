@@ -2,7 +2,7 @@
 import { PieChart } from './pie';
 import * as Configuration from '../configuration';
 import { ChartConfig, PieChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
 // Components

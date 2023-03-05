@@ -7,7 +7,7 @@ import {
 	ChartTypes,
 	Skeletons,
 } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {

@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { select } from 'd3-selection';

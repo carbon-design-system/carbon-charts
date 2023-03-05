@@ -1,7 +1,7 @@
 // Internal Imports
 import { Title } from './title';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { RenderTypes, Statuses } from './../../interfaces/enums';
 import * as Configuration from '../../configuration';
 

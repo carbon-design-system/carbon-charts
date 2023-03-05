@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { CartesianOrientations, Events, RenderTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 // @ts-ignore

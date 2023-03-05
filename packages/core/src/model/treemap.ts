@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from './model';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 /**
  * The treemap chart model layer

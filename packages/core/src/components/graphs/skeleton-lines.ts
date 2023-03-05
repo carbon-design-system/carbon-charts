@@ -1,7 +1,7 @@
 // Internal Imports
 import { Skeleton } from '../graphs/skeleton';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 export class SkeletonLines extends Skeleton {
 	type = 'skeleton-lines';

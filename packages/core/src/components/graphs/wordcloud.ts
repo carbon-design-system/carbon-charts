@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { select } from 'd3-selection';
