@@ -36,6 +36,10 @@
 	"release": {
 		"branch": "master"
 	},
+	"engines": {
+		"node": "^14.21.3",
+		"yarn": "^1.22.19"
+	},
 	"devDependencies": {
 		"commitizen": "4.0.3",
 		"cz-conventional-changelog": "3.1.0",
