@@ -37,7 +37,7 @@
 		"branch": "master"
 	},
 	"engines": {
-		"node": "^14.21.3",
+		"node": "^16.19.1",
 		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
