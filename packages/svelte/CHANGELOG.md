@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.12](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.11...v1.6.12) (2023-03-06)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [1.6.11](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.10...v1.6.11) (2023-03-06)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [1.6.10](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.9...v1.6.10) (2023-03-06)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
 ## [1.6.9](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.8...v1.6.9) (2023-03-03)
 
 **Note:** Version bump only for package @carbon/charts-svelte
