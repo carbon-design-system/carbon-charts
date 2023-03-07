@@ -2,7 +2,7 @@
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {

@@ -3,7 +3,7 @@ import { Axis } from './axis';
 import { AxisPositions, Events, ScaleTypes } from '../../interfaces';
 import { ChartModel } from '../../model/model';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import * as Configuration from '../../configuration';
 
 // D3 Imports

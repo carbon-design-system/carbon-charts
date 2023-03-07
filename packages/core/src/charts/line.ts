@@ -2,7 +2,7 @@
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, LineChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
 // Components

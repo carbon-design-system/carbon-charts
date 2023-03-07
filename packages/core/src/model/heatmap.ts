@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisFlavor, ScaleTypes } from '../interfaces';
 import { ChartModelCartesian } from './cartesian-charts';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // d3 imports
 import { extent } from 'd3-array';

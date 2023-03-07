@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component';
 import { ChartModelCartesian } from '../../model/cartesian-charts';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import {
 	AxisPositions,
 	Events,

@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartModelCartesian } from './cartesian-charts';
 import * as Configuration from '../configuration';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // D3 Imports
 import { ascending, min, max, quantile } from 'd3-array';

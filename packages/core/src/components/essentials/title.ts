@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Events, RenderTypes } from './../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 export class Title extends Component {
 	type = 'title';

@@ -8,7 +8,7 @@ import {
 	RenderTypes,
 	LayoutAlignItems,
 } from '../../interfaces/index';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model/model';
 

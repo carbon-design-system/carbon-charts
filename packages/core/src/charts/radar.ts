@@ -3,7 +3,7 @@ import { RadarChartModel } from '../model/radar';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, RadarChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {

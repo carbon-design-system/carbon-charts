@@ -1,6 +1,6 @@
 // Internal Imports
 import { Scatter } from './scatter';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,

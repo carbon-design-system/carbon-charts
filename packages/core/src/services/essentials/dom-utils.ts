@@ -4,7 +4,7 @@ import { Events } from './../../interfaces';
 
 // D3 Imports
 import { select, Selection } from 'd3-selection';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // import the settings for the css prefix
 import { carbonPrefix } from '../../configuration-non-customizable';
