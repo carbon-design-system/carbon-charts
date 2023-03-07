@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.13](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.12...v1.6.13) (2023-03-07)
+
+
+### Bug Fixes
+
+* **csp:** axis & tooltip issues ([#1512](https://github.com/carbon-design-system/carbon-charts/issues/1512)) ([821f6ad](https://github.com/carbon-design-system/carbon-charts/commit/821f6ad6d183191d5b5b79d7140e2b0cd505ecd0))
+
+
+
+
+
 ## [1.6.12](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.11...v1.6.12) (2023-03-06)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
