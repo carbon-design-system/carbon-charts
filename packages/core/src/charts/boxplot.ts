@@ -3,7 +3,7 @@ import { BoxplotChartModel } from '../model/boxplot';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { BoxplotChartOptions, ChartConfig } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
 // Components

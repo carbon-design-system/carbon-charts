@@ -6,7 +6,7 @@ import {
 	ColorClassNameTypes,
 	RenderTypes,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 
 // D3 Imports

@@ -1,5 +1,5 @@
 // Internal Imports
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { Bar } from './bar';
 import {
 	Roles,

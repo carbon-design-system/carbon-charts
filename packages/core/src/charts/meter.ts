@@ -9,7 +9,7 @@ import {
 	LayoutDirection,
 	RenderTypes,
 } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Meter } from './../components/graphs/meter';
 
 // Components

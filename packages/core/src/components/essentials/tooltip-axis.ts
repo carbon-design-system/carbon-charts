@@ -1,6 +1,6 @@
 import { Tooltip } from './tooltip';
 import { ColorClassNameTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 import { get } from 'lodash-es';
 

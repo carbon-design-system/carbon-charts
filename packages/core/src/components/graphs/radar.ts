@@ -8,7 +8,7 @@ import {
 	RenderTypes,
 	Alignments,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import {
 	Point,
 	Angle,

@@ -7,7 +7,7 @@ import {
 	Roles,
 	TruncationTypes,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { ChartModel } from '../../model/model';
 import { DOMUtils } from '../../services';
 import {

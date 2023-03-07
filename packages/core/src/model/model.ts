@@ -2,7 +2,7 @@
 import * as Configuration from '../configuration';
 import { histogram as histogramConfigs } from '../configuration-non-customizable';
 
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 
 // D3

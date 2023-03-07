@@ -3,7 +3,7 @@ import { WordCloudModel } from '../model/wordcloud';
 import { Chart } from '../chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, WorldCloudChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
 // Components

@@ -1,7 +1,7 @@
 // Internal imports
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import * as Configuration from '../../configuration';
 import {
 	Events,

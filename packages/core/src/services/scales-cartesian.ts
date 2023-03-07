@@ -7,7 +7,7 @@ import {
 	ScaleTypes,
 	ThresholdOptions,
 } from '../interfaces';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';

@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { DOMUtils } from '../../services';
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from 'd3-hierarchy';

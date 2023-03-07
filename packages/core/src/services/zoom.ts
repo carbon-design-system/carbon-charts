@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisPositions, Events, ScaleTypes } from '../interfaces';
 import { Service } from './service';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import * as Configuration from '../configuration';
 import { ChartModelCartesian } from '../model/cartesian-charts';
 

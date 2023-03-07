@@ -3,7 +3,7 @@ import { Chart } from '../chart';
 import { TreeChartModel } from '../model/tree';
 import * as Configuration from '../configuration';
 import { ChartConfig, TreeChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {
