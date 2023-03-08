@@ -17,10 +17,10 @@ body:
   - type: checkboxes
     id: ibm
     attributes:
-    label: Are you an IBM employee?
-    options:
-      - label: Yes
-      - label: No
+      label: Are you an IBM employee?
+      options:
+        - label: Yes
+        - label: No
     validations:
       required: true
   - type: input
