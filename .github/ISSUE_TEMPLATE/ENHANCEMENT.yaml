@@ -8,6 +8,21 @@ body:
       value: |
         Thanks for taking the time to fill out this bug report!
   - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What's your name?
+    validations:
+      required: true
+  - type: checkboxes
+    id: ibm
+    attributes:
+      label: Are you an IBM employee?
+      options:
+        - label: 'Yes'
+    validations:
+      required: true
+  - type: input
     id: contact
     attributes:
       label: Contact Details
@@ -71,5 +86,17 @@ body:
         What resources do you have to assist this effort?
 
         *Carbon is a collaborative system. We encourage teams to build components and submit them for integration as either add-ons or core components.*
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: What priority level would this issue be in your opinion?
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
     validations:
       required: true
