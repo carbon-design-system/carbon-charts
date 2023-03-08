@@ -86,3 +86,15 @@ body:
       placeholder: ex. https://codesandbox.io/...
     validations:
       required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: What priority level would this issue be in your opinion?
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
