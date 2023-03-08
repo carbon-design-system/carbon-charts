@@ -3,11 +3,11 @@ description: Report an accessibility or usability issue
 title: "[Accessibility]: "
 labels: [accessibility]
 body:
-   - type: markdown
+  - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
-   - type: input
+  - type: input
     id: name
     attributes:
       label: Name
