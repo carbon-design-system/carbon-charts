@@ -8,6 +8,21 @@ body:
       value: |
         Thanks for taking the time to fill out this bug report!
   - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What's your name?
+    validations:
+      required: true
+  - type: checkboxes
+    id: ibm
+    attributes:
+      label: Are you an IBM employee?
+      options:
+        - label: 'Yes'
+    validations:
+      required: true
+  - type: input
     id: contact
     attributes:
       label: Contact Details
@@ -56,3 +71,15 @@ body:
       placeholder: ex. https://codesandbox.io/...
     validations:
       required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: What priority level would this be in your opinion?
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
