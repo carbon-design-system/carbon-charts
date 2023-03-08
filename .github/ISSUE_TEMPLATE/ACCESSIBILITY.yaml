@@ -7,6 +7,22 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+   - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What's your name?
+    validations:
+      required: true
+  - type: checkboxes
+    id: ibm
+    attributes:
+    label: Are you an IBM employee?
+    options:
+      - label: Yes
+      - label: No
+    validations:
+      required: true
   - type: input
     id: contact
     attributes:
@@ -14,7 +30,7 @@ body:
       description: How can we get in touch with you if we need more info?
       placeholder: ex. email@example.com
     validations:
-      required: false
+      required: true
   - type: dropdown
     id: environment
     attributes:
