@@ -7047,7 +7047,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${coreStories}/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${coreStories}/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: resolve(__dirname, '../../../../charts/dist/demo'),\n    });\n    return config;\n  }\n}"
+                "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: resolve(__dirname, `${core}/dist/demo`) // temporary fix\n\t\t})\n\t\treturn config\n\t}\n}"
             },
             {
                 "name": "context",
@@ -7060,14 +7060,14 @@
                 "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
             },
             {
-                "name": "coreStories",
+                "name": "core",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/charts-angular/.storybook/main.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "string",
-                "defaultValue": "'../../../../charts/stories'"
+                "defaultValue": "'../../../../charts'"
             },
             {
                 "name": "edgeData",
@@ -7133,7 +7133,7 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7143,21 +7143,11 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{ x: 0, y: 0 }"
-            },
-            {
-                "name": "linkTarget",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{ x: 400, y: 0 }"
+                "defaultValue": "{ x: 0, y: 0 }"
             },
             {
                 "name": "linkTarget",
@@ -7168,6 +7158,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{ x: 300, y: 0 }"
+            },
+            {
+                "name": "linkTarget",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ x: 400, y: 0 }"
             },
             {
                 "name": "linkTargetCurve",
@@ -7386,17 +7386,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${coreStories}/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${coreStories}/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: resolve(__dirname, '../../../../charts/dist/demo'),\n    });\n    return config;\n  }\n}"
+                    "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: resolve(__dirname, `${core}/dist/demo`) // temporary fix\n\t\t})\n\t\treturn config\n\t}\n}"
                 },
                 {
-                    "name": "coreStories",
+                    "name": "core",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/charts-angular/.storybook/main.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
-                    "defaultValue": "'../../../../charts/stories'"
+                    "defaultValue": "'../../../../charts'"
                 }
             ],
             "projects/charts-angular/src/test.ts": [
@@ -7466,6 +7466,28 @@
                     "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
+            "projects/charts-angular/src/stories/diagrams/marker.stories.ts": [
+                {
+                    "name": "linkSource",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 0, y: 0 }"
+                },
+                {
+                    "name": "linkTarget",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 300, y: 0 }"
+                }
+            ],
             "projects/charts-angular/src/stories/diagrams/edge.stories.ts": [
                 {
                     "name": "linkSource",
@@ -7496,28 +7518,6 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{ x: 400, y: 200 }"
-                }
-            ],
-            "projects/charts-angular/src/stories/diagrams/marker.stories.ts": [
-                {
-                    "name": "linkSource",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 0, y: 0 }"
-                },
-                {
-                    "name": "linkTarget",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/.storybook/preview.ts": [
@@ -7569,7 +7569,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "coreStories",
+                "name": "core",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
