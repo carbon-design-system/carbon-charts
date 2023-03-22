@@ -1,0 +1,67 @@
+{
+  "name": "@carbon/charts-angular",
+  "version": "1.6.14",
+  "description": "Carbon charting components for Angular",
+  "repository": {
+		"type": "git",
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
+	},
+	"license": "Apache-2.0",
+	"author": "IBM",
+	"keywords": [
+		"carbon",
+		"charts",
+		"angular",
+		"dataviz",
+		"data-visualization",
+		"visualizations",
+		"d3",
+		"svg",
+		"component",
+		"components",
+		"css",
+		"html",
+		"ibm",
+		"typescript",
+		"javascript",
+		"js",
+		"library",
+		"pattern",
+		"patterns",
+		"sass",
+		"scss"
+	],
+  "peerDependencies": {
+    "@angular/common": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/forms": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser-dynamic": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "d3": "^7.0.0",
+    "rxjs": "^7.5.0",
+    "zone.js": "~0.11.4 || ~0.12.0 || ~0.13.0"
+  },
+  "dependencies": {
+    "@carbon/charts": "^1.6.14",
+    "tslib": "^2.3.0"
+  },
+  "publishConfig": {
+		"directory": "dist",
+		"access": "public"
+	},
+	"maintainers": [
+		{
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
+		}
+	],
+	"contributors": [
+		{
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
+		}
+	]
+}

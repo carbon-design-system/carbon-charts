@@ -1,17 +1,23 @@
 {
-	"lerna": "3.13.4",
-	"packages": [
-		"packages/*"
-	],
-	"npmClient": "yarn",
-	"useWorkspaces": true,
-	"command": {
-		"publish": {
-			"ignoreChanges": [
-				"packages/*/demo",
-				"**/*.md"
-			]
-		}
-	},
-	"version": "1.6.14"
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "name": "root",
+  "packages": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "packages/*/demo",
+        "**/*.md"
+      ]
+    },
+    "bootstrap": {
+      "npmClientArgs": [
+        "--prefer-offline"
+      ]
+    }
+  },
+  "version": "1.6.14"
 }

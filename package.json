@@ -37,16 +37,19 @@
 		"branch": "master"
 	},
 	"engines": {
-		"node": "^14.21.3",
-		"yarn": "^1.22.19"
+		"node": "^18.15.0",
+		"yarn": "^3.5.0"
 	},
 	"devDependencies": {
-		"commitizen": "4.0.3",
-		"cz-conventional-changelog": "3.1.0",
-		"husky": "4.2.1",
-		"lerna": "3.20.2",
-		"prettier": "2.2.1",
-		"prettier-config-carbon": "0.4.0"
+		"commitizen": "^4.3.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^8.0.3",
+		"lerna": "^6.5.1",
+		"prettier": "^2.8.4",
+		"prettier-config-carbon": "~0.9.0"
+	},
+	"resolutions": {
+		"axios": "0.21.1"
 	},
 	"config": {
 		"commitizen": {
@@ -58,5 +61,6 @@
 			"name": "Eliad Moosavi",
 			"email": "iliadm@ca.ibm.com"
 		}
-	]
+	],
+	"packageManager": "yarn@3.5.0"
 }

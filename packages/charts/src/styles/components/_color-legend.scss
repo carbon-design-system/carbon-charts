@@ -1,0 +1,11 @@
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
+
+svg.#{$prefix}--#{$charts-prefix}--color-legend {
+	display: flex;
+	user-select: none;
+
+	g.legend-title text {
+		fill: $layer-inverse-absolute;
+	}
+}

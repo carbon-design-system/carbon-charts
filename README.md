@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://carbon-design-system.github.io/carbon-charts/">
-		<img src="packages/core/.storybook/assets/share.png" alt="Carbon Charts" />
+		<img src="packages/charts/.storybook/assets/share.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
@@ -18,11 +18,11 @@
 </p>
 
 ## Packages
--   [Vanilla](./packages/core)
--   [React](./packages/react)
--   [Angular](./packages/angular)
--   [Vue](./packages/vue)
--   [Svelte](./packages/svelte)
+-   [Vanilla JavaScript](./packages/charts)
+-   [React](./packages/charts-react)
+-   [Angular](./packages/charts-angular)
+-   [Vue](./packages/charts-vue)
+-   [Svelte](./packages/charts-svelte)
 
 <a href="https://www.netlify.com" target="_blank">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />

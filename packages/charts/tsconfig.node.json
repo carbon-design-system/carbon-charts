@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"types": ["node", "jasmine"],
+		"composite": true,
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true
+	},
+	"include": [
+		"./vite.config.ts",
+		"./vite.demo.config.ts"
+	]
+}

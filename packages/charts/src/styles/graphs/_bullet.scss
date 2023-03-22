@@ -1,0 +1,36 @@
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
+
+@use '@carbon/styles/scss/motion' as *;
+
+.#{$prefix}--#{$charts-prefix}--bullet {
+	path.range-box {
+		pointer-events: none;
+
+		&.order-1 {
+			fill: $zone-fill-01;
+			stroke: $zone-stroke-01;
+		}
+
+		&.order-2 {
+			fill: $zone-fill-02;
+			stroke: $zone-stroke-02;
+		}
+
+		&.order-3 {
+			fill: $zone-fill-03;
+			stroke: $zone-stroke-03;
+		}
+	}
+
+	path.marker,
+	path.quartile {
+		pointer-events: none;
+		stroke-width: 1.5px;
+		stroke: $layer-inverse-absolute;
+	}
+
+	path.quartile.over-bar {
+		stroke: $layer-01-absolute;
+	}
+}

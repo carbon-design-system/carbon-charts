@@ -1,0 +1,163 @@
+{
+  "name": "@carbon/charts-angular",
+  "version": "1.6.14",
+  "description": "Workspace for building Carbon charting components for Angular",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/main.d.ts",
+      "browser": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "ng": "ng",
+    "copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
+    "build:package": "ng build",
+    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
+    "storybook": "yarn docs:json && ng run charts-angular:storybook",
+    "start": "yarn storybook",
+    "build:demo": "yarn docs:json && ng run charts-angular:build-storybook",
+    "build": "yarn build:package && yarn copy:md && yarn build:demo",
+    "clean": "rimraf dist demo/bundle",
+    "lint": "ng lint",
+    "test": "ng test",
+    "watch": "ng build --watch --configuration development",
+    "format": "prettier --write projects/charts-angular/src/",
+    "format:diff": "prettier --list-different projects/charts-angular/src/",
+    "ci-check": "yarn format:diff"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/forms": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser-dynamic": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "d3": "^7.0.0",
+    "rxjs": "^7.5.0",
+    "zone.js": "~0.11.4 || ~0.12.0 || ~0.13.0"
+  },
+  "dependencies": {
+    "@angular/animations": "^14.3.0",
+    "@angular/common": "^14.3.0",
+    "@angular/compiler": "^14.3.0",
+    "@angular/core": "^14.3.0",
+    "@angular/forms": "^14.3.0",
+    "@angular/platform-browser": "^14.3.0",
+    "@angular/platform-browser-dynamic": "^14.3.0",
+    "@carbon/charts": "workspace:^1.6.14",
+    "d3": "^7.8.2",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.1502.4",
+    "@angular-devkit/build-angular": "^14.2.11",
+    "@angular-devkit/core": "^14.2.11",
+    "@angular/cli": "~14.2.11",
+    "@angular/compiler-cli": "^14.3.0",
+    "@babel/core": "^7.21.3",
+    "@carbon/icons-angular": "~11.2.2",
+    "@carbon/telemetry": "~0.1.0",
+    "@compodoc/compodoc": "^1.1.19",
+    "@storybook/addon-essentials": "^7.0.0-0",
+    "@storybook/addon-interactions": "^7.0.0-0",
+    "@storybook/addon-links": "^7.0.0-0",
+    "@storybook/angular": "^7.0.0-0",
+    "@storybook/blocks": "^7.0.0-0",
+    "@storybook/builder-webpack5": "^7.0.0-0",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@storybook/theming": "^7.0.0-0",
+    "@types/d3-array": "^3.0.4",
+    "@types/d3-axis": "^3.0.2",
+    "@types/d3-brush": "^3.0.2",
+    "@types/d3-ease": "^3.0.0",
+    "@types/d3-scale": "^4.0.3",
+    "@types/d3-selection": "^3.0.4",
+    "@types/jasmine": "~4.3.1",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "jasmine-core": "~4.6.0",
+    "karma": "~6.4.1",
+    "karma-chrome-launcher": "~3.1.1",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-packagr": "~14.2.0",
+    "prettier": "^2.8.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^4.4.0",
+    "storybook": "^7.0.0-0",
+    "style-loader": "^3.3.2",
+    "typescript": "~4.8.4"
+  },
+  "publishConfig": {
+    "directory": "dist",
+    "access": "public"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carbon-design-system/carbon-charts.git",
+    "homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
+  },
+  "bugs": {
+    "url": "https://github.com/carbon-design-system/carbon-charts/issues"
+  },
+  "homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
+  "maintainers": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ],
+  "license": "Apache-2.0",
+  "author": "IBM",
+  "keywords": [
+    "carbon",
+    "charts",
+    "angular",
+    "dataviz",
+    "data-visualization",
+    "visualizations",
+    "d3",
+    "svg",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "typescript",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss"
+  ]
+}
