@@ -28,11 +28,11 @@ then
 	exit 1
 fi
 
-# if package locks updated, add them
-if [ ! -z "`git ls-files -m | grep package-lock.json`" ]
+# if yarn.lock updated, add (note: only one per monorepo)
+if [ ! -z "`git ls-files -m | grep yarn.lock`" ]
 then
-	git add package-lock.json ./packages/*/package-lock.json
-	git commit -m "Update package-lock.json files"
+	git add yarn.lock ./packages/*/yarn.lock
+	git commit -m "Update yarn.lock files"
 fi
 
 lerna run format

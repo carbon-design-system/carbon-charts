@@ -17,10 +17,9 @@
 		"format": "lerna run format",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
-		"build": "yarn build-all",
-		"build-all": "bash scripts/build-packages-and-demos.sh",
-		"build-packages": "bash scripts/build-packages.sh",
-		"build-all-demos": "bash scripts/build-demos.sh",
+		"build:packages": "lerna run --stream build:package",
+		"build:demos": "bash scripts/build-demos.sh",
+		"build": "bash scripts/build-packages-and-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
 	"workspaces": {
@@ -37,16 +36,19 @@
 		"branch": "master"
 	},
 	"engines": {
-		"node": "^14.21.3",
-		"yarn": "^1.22.19"
+		"node": "^18.15.0",
+		"yarn": "^3.5.0"
 	},
 	"devDependencies": {
-		"commitizen": "4.0.3",
-		"cz-conventional-changelog": "3.1.0",
-		"husky": "4.2.1",
-		"lerna": "3.20.2",
-		"prettier": "2.2.1",
-		"prettier-config-carbon": "0.4.0"
+		"commitizen": "^4.3.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^8.0.3",
+		"lerna": "^6.6.0",
+		"prettier": "^2.8.4",
+		"prettier-config-carbon": "~0.9.0"
+	},
+	"resolutions": {
+		"axios": "0.21.1"
 	},
 	"config": {
 		"commitizen": {
@@ -58,5 +60,6 @@
 			"name": "Eliad Moosavi",
 			"email": "iliadm@ca.ibm.com"
 		}
-	]
+	],
+	"packageManager": "yarn@3.5.0"
 }

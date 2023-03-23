@@ -1,0 +1,50 @@
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+
+.#{$prefix}--chart-holder {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	&.filled,
+	&.fullscreen {
+		background-color: $background;
+
+		.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+			background-color: $background;
+		}
+	}
+
+	.DONT_STYLE_ME_css_styles_verifier {
+		overflow: hidden;
+		opacity: 0;
+	}
+}
+
+.#{$prefix}--chart-holder {
+	@include theme(themes.$white);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme='g10'] {
+	@include theme(themes.$g10);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme='g90'] {
+	@include theme(themes.$g90);
+}
+
+.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
+	@include theme(themes.$g100);
+}
+
+.#{$prefix}--chart-holder.fullscreen,
+.#{$prefix}--chart-holder:-webkit-full-screen {
+	/* !important is used here to get closer to
+	a truly fullscreen experience */
+	width: 100% !important;
+	height: 100% !important;
+	max-width: unset !important;
+	max-height: unset !important;
+	padding: 2em;
+}

@@ -1,0 +1,18 @@
+{
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "./bundle",
+		"noEmitOnError": true,
+		"declaration": true
+	},
+	"ts-node": {
+		"files": true
+	},
+	"include": ["**/*", "../package.json"],
+	"references": [
+		{
+			"path": "../src"
+		}
+	]
+}

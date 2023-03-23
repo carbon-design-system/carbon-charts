@@ -1,0 +1,17 @@
+<script lang="ts">
+	import { GroupedBarChart } from '@carbon/charts'
+	import BaseChart from './BaseChart.svelte'
+
+	export let chart: BaseChart | null = null
+	export let ref: HTMLDivElement
+</script>
+
+<BaseChart
+	{...$$restProps}
+	Chart={GroupedBarChart}
+	bind:ref
+	bind:chart
+	on:load
+	on:update
+	on:destroy
+/>

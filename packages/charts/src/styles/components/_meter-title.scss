@@ -1,0 +1,37 @@
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--meter-title {
+	overflow: visible;
+
+	text.meter-title,
+	text.proportional-meter-title,
+	text.proportional-meter-total,
+	text.percent-value {
+		fill: $text-primary;
+	}
+
+	g.status-indicator {
+		&.status--danger circle.status {
+			fill: $support-error;
+		}
+
+		&.status--warning {
+			circle.status {
+				fill: $support-warning;
+			}
+
+			path.innerFill {
+				fill: $black-100;
+			}
+		}
+
+		&.status--success circle.status {
+			fill: $support-success;
+		}
+
+		path.innerFill {
+			fill: $layer-01-absolute;
+		}
+	}
+}

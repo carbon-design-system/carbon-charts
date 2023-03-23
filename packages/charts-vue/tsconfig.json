@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "exclude": ["src/stories/**/*"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext", // to overcome vite.config.ts warning
+    // vite recommendations for Vue.js
+    "types": [
+      "vite/client"
+    ],
+    "isolatedModules": false,
+    "allowJs": true, // needed by vue-tsc
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

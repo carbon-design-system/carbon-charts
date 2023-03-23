@@ -3,11 +3,11 @@ const path = require('path');
 
 // Define paths to package.json files
 const TELEMETRY_ENABLED_PACKAGES = [
-	'core',
-	'angular',
-	'vue',
-	'react',
-	'svelte',
+	'charts',
+	'charts-angular',
+	'charts-vue',
+	'charts-react',
+	'charts-svelte',
 ];
 
 TELEMETRY_ENABLED_PACKAGES.forEach((packageName) => {

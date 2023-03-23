@@ -1,0 +1,23 @@
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--gauge {
+	overflow: visible;
+
+	path.arc-background {
+		fill: $layer-01;
+	}
+
+	.gauge-delta-arrow {
+		&.status--danger {
+			fill: $support-error;
+		}
+
+		&.status--warning {
+			fill: $support-warning;
+		}
+
+		&.status--success {
+			fill: $support-success;
+		}
+	}
+}

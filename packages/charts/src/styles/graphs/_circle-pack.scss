@@ -1,0 +1,36 @@
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--circle-pack {
+	circle.node {
+		stroke-width: 1.5px;
+
+		&.hovered {
+			fill-opacity: 1;
+		}
+
+		&.non-focal {
+			fill: $icon-disabled;
+			fill-opacity: 30%;
+			stroke: $icon-disabled;
+		}
+
+		&.clickable {
+			cursor: zoom-in;
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper.zoomed-in {
+	cursor: zoom-out;
+	.#{$prefix}--#{$charts-prefix}--circle-pack {
+		circle.node {
+			&.hovered-child {
+				stroke: 1.5px solid initial;
+			}
+
+			&.clickable {
+				cursor: zoom-out;
+			}
+		}
+	}
+}
