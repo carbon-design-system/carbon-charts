@@ -7,7 +7,11 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	# e.g. core, angular or react (translate to ./packages/NAME
 	PKG_NAME=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
 
-	PKG_TO_BUILD="@carbon/$PKG_NAME"
+	if [ $PKG_NAME == "core" ]; then
+		PKG_TO_BUILD="@carbon/charts"
+	else
+		PKG_TO_BUILD="@carbon/charts-$PKG_NAME"
+	fi
 
 	cd packages/charts
 	yarn build
@@ -17,7 +21,11 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	mkdir -p pages
 
 	# cd into the package directory
-	cd packages/$PKG_NAME
+	if [ $PKG_NAME == "core" ]; then
+		cd packages/charts
+	else
+		cd packages/charts-$PKG_NAME
+	fi
 
 	# run the build:demo script in all packages
 	NODE_ENV=deploypreview yarn run build:demo
