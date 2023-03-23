@@ -22,18 +22,6 @@
     "./demo": {
       "import": "./dist/demo/index.mjs",
       "require": "./dist/demo/index.js"
-    },
-    "./interfaces": {
-      "types": "./dist/interfaces/index.d.ts"
-    },
-    "./charts": {
-      "types": "./dist/charts/index.d.ts"
-    },
-    "./components": {
-      "types": "./dist/components/index.d.ts"
-    },
-    "./services": {
-      "types": "./dist/services/index.d.ts"
     }
   },
   "files": [
