@@ -17,10 +17,9 @@
 		"format": "lerna run format",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
-		"build": "yarn build-all",
-		"build-all": "bash scripts/build-packages-and-demos.sh",
-		"build-packages": "bash scripts/build-packages.sh",
-		"build-all-demos": "bash scripts/build-demos.sh",
+		"build:packages": "lerna run --stream build:package",
+		"build:demos": "bash scripts/build-demos.sh",
+		"build": "bash scripts/build-packages-and-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
 	"workspaces": {

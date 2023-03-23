@@ -15,7 +15,7 @@ mkdir -p pages
 touch pages/.nojekyll
 echo "charts.carbondesignsystem.com" > pages/CNAME
 
-# run the demo:build script in all packages
-lerna run --stream demo:build
+# run the build:demo script in all packages
+lerna run --stream build:demo
 # copy all the demos/{package name here} folders to the pages deploy directory
 lerna exec -- cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
