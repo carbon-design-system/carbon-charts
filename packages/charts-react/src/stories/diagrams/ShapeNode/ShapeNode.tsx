@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 // Carbon Prefix
 import { carbonPrefix } from '../configs'
 
-// @ts-ignore
 import classnames from 'classnames'
 
 const ShapeNode = ({
@@ -18,6 +17,7 @@ const ShapeNode = ({
 	onMouseMove = null,
 	position = 'fixed',
 	bodyPosition = 'absolute',
+	description,
 	renderIcon,
 	size = 48,
 	stacked,
@@ -143,7 +143,17 @@ ShapeNode.propTypes = {
 	/**
 	 * Specify the node's title
 	 */
-	title: PropTypes.string
+	title: PropTypes.string,
+
+	/**
+	 * Specify the node's description
+	 */
+	description: PropTypes.string,
+
+	/**
+	 * Specify the node's position
+	 */
+	position: PropTypes.string
 }
 
 export default ShapeNode

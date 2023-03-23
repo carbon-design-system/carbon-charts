@@ -23,7 +23,7 @@ const definedZoomBarData = [
 
 // utility function to update title and enable zoomBar option
 export const addZoomBarToOptions = (
-	options,
+	options: any,
 	configs: any = { includeDefinedZoomBarData: false }
 ) => {
 	options['experimental'] = true

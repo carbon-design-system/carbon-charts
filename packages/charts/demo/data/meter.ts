@@ -111,8 +111,8 @@ export const propMeterTruncationOptions = {
 		proportional: {
 			total: 2000,
 			unit: 'MB',
-			totalFormatter: (total) => `custom total string for: ${total}`,
-			breakdownFormatter: (x) =>
+			totalFormatter: (total: any) => `custom total string for: ${total}`,
+			breakdownFormatter: (x: any) =>
 				`You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 		}
 	}

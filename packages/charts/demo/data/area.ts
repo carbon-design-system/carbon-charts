@@ -235,7 +235,7 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 			stacked: true,
 			percentage: true,
 			ticks: {
-				formatter: (d) => `${d}%`
+				formatter: (d: any) => `${d}%`
 			}
 		},
 		bottom: {

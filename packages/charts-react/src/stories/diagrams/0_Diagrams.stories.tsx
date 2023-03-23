@@ -174,12 +174,12 @@ const ProgrammaticStatic = () => {
 		{
 			source: 'c',
 			target: 'b',
-			path: (source, target) => components.buildElbowPathString(source, target)
+			path: (source: any, target: any) => components.buildElbowPathString(source, target)
 		},
 		{
 			source: 'd',
 			target: 'c',
-			path: (source, target) => components.buildElbowPathString(source, target),
+			path: (source: any, target: any) => components.buildElbowPathString(source, target),
 			variant: 'tunnel'
 		}
 	]
@@ -191,12 +191,12 @@ const ProgrammaticStatic = () => {
 		return {
 			...link,
 			source: {
-				x: sourceNode.x + sourceNode.nodeWidth / 2,
-				y: sourceNode.y + sourceNode.nodeHeight / 2
+				x: sourceNode!.x + sourceNode!.nodeWidth / 2,
+				y: sourceNode!.y + sourceNode!.nodeHeight / 2
 			},
 			target: {
-				x: targetNode.x + targetNode.nodeWidth / 2,
-				y: targetNode.y + targetNode.nodeHeight / 2
+				x: targetNode!.x + targetNode!.nodeWidth / 2,
+				y: targetNode!.y + targetNode!.nodeHeight / 2
 			}
 		}
 	})

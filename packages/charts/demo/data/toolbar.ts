@@ -2,7 +2,7 @@ import * as barChart from './bar'
 import * as lineChart from './line'
 
 // utility function to enable toolbar option
-const addToolbarOptions = (options, configs?) => {
+const addToolbarOptions = (options: any, configs?: any) => {
 	options.toolbar = {
 		enabled: true,
 		numberOfIcons: 3

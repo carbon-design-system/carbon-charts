@@ -1,4 +1,4 @@
-const generateThemePickerHTML = (container: HTMLDivElement, configs) => {
+const generateThemePickerHTML = (container: HTMLDivElement, configs: any) => {
 	const div = document.createElement('div')
 	div.id = 'theme-picker'
 	div.innerHTML = `
@@ -46,15 +46,15 @@ const generateThemePickerHTML = (container: HTMLDivElement, configs) => {
 	if (currentTheme) {
 		div.querySelector(`input#theme__${currentTheme}`)?.setAttribute('checked', 'true')
 	} else {
-		div.querySelector(`input#theme__white`).setAttribute('checked', 'true')
+		div.querySelector(`input#theme__white`)?.setAttribute('checked', 'true')
 	}
 
-	container.querySelector('#charting-controls').appendChild(div)
+	container.querySelector('#charting-controls')?.appendChild(div)
 }
 
 const generateColorPalettePickerHTML = (
 	container: HTMLDivElement,
-	chart,
+	chart: any,
 	configs = { colorPairingOptions: null }
 ) => {
 	const { colorPairingOptions } = configs
@@ -84,9 +84,9 @@ const generateColorPalettePickerHTML = (
 					<option class="cds--select-option" value="" disabled selected hidden>
 					Choose an option
 					</option>
-					${Object.keys(colorPairingOptions)
+					${colorPairingOptions ? Object.keys(colorPairingOptions)
 						.map((colorGroup) => {
-							const optionsCount = colorPairingOptions[colorGroup]
+							const optionsCount: number = colorPairingOptions ? colorPairingOptions[colorGroup] : 0
 							let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
 
 							const numberOfVariants = parseInt(colorGroup)
@@ -116,7 +116,7 @@ const generateColorPalettePickerHTML = (
 
 							return optionsHTML
 						})
-						.join('')}
+						.join(''): ''}
 				</select>
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 				</div>
@@ -124,7 +124,7 @@ const generateColorPalettePickerHTML = (
 			</div>
 		</div>`
 
-	div.querySelector('#color-palette-select').addEventListener('change', (e: any) => {
+	div?.querySelector('#color-palette-select')?.addEventListener('change', (e: any) => {
 		const { value } = e.target
 		const [numberOfVariants, pairingOption] = value.split('-color-option-')
 
@@ -133,14 +133,14 @@ const generateColorPalettePickerHTML = (
 		chart.model.setOptions(chartOptions)
 	})
 
-	container.querySelector('#charting-controls').appendChild(div)
+	container?.querySelector('#charting-controls')?.appendChild(div)
 }
 
 export const addControls = (
 	container: HTMLDivElement,
-	demoGroup,
-	chart,
-	configs: { colorPairingOptions: Record<string, number> } = { colorPairingOptions: null }
+	demoGroup: any,
+	chart: any,
+	configs: { colorPairingOptions: any } = { colorPairingOptions: null }
 ) => {
 	generateThemePickerHTML(container, chart)
 
@@ -151,7 +151,7 @@ export const addControls = (
 	addRadioButtonEventListeners(container, chart, configs)
 }
 
-export const addRadioButtonEventListeners = (container: HTMLDivElement, chart, configs) => {
+export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: any, configs: any) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
 
@@ -173,8 +173,8 @@ export const addRadioButtonEventListeners = (container: HTMLDivElement, chart, c
 
 export const addOtherVersions = (
 	container: HTMLElement,
-	demoGroup,
-	demo,
+	demoGroup: any,
+	demo: any,
 	configs = { currentVersion: 'vanilla' }
 ) => {
 	const { currentVersion } = configs
@@ -192,7 +192,7 @@ export const addOtherVersions = (
 						name: 'vanilla',
 						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'react'
 			? [
@@ -200,7 +200,7 @@ export const addOtherVersions = (
 						name: 'React',
 						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'angular'
 			? [
@@ -208,7 +208,7 @@ export const addOtherVersions = (
 						name: 'Angular',
 						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'vue'
 			? [
@@ -216,7 +216,7 @@ export const addOtherVersions = (
 						name: 'Vue',
 						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'svelte'
 			? [
@@ -224,7 +224,7 @@ export const addOtherVersions = (
 						name: 'Svelte',
 						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: [])
 	]
 
@@ -250,7 +250,7 @@ export const addOtherVersions = (
 	})
 
 	div.innerHTML = htmlContent
-	container.querySelector('#other-versions').appendChild(div)
+	container?.querySelector('#other-versions')?.appendChild(div)
 }
 
 /**
@@ -278,7 +278,7 @@ export const generateRandomData = (quantity: number, min: number, max: number) =
 export const generateHighScaleDemoDataForm = () =>
 	`<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
 	 size="5" value="100"><input type="submit"></label></form>`
-export const addDemoDataFormListeners = (container, demo, chart) => {
+export const addDemoDataFormListeners = (container: HTMLElement, demo: any, chart: any) => {
 	// Add event listeners for form
 	const form = container.querySelector('form#demo-data')
 	if (form) {

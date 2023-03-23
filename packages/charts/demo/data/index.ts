@@ -1241,17 +1241,17 @@ const devOnlyDemoGroups = [
 	}
 ] as any
 
-const formatTitleString = (str) =>
+const formatTitleString = (str: string) =>
 	str
 		.replace(/[^\w\s]/gi, '')
 		.replace(/\s\s+/g, ' ')
 		.toLowerCase()
 		.replace(/\s+/g, '-')
 
-const mapDemoGroups = (demoGroups) =>
+const mapDemoGroups = (demoGroups: any) =>
 	demoGroups
-		.sort((a, b) => b.title - a.title)
-		.map((demoGroup) => {
+		.sort((a: any, b: any) => b.title - a.title)
+		.map((demoGroup: any) => {
 			if (demoGroup.type === DemoGroupTypes.SIMPLE_CHART) {
 				demoGroup.storyGroupTitle = 'Simple charts'
 			} else if (demoGroup.type === DemoGroupTypes.COMPLEX_CHART) {
@@ -1260,7 +1260,7 @@ const mapDemoGroups = (demoGroups) =>
 				demoGroup.storyGroupTitle = 'Utility'
 			}
 
-			demoGroup.demos = demoGroup.demos.map((demo) => {
+			demoGroup.demos = demoGroup.demos.map((demo: any) => {
 				demo.title = demo.options.title
 				demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`
 

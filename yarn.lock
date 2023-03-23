@@ -2084,6 +2084,7 @@ __metadata:
     "@storybook/react": ^7.0.0-0
     "@storybook/react-vite": ^7.0.0-0
     "@storybook/testing-library": ^0.0.14-next.1
+    "@types/carbon__icons-react": ^11.16.0
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@typescript-eslint/eslint-plugin": ^5.55.0
@@ -5726,6 +5727,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: bfcadb042a41b124c4e3de4925e3be6d35b78f93f27c4535d5ff86980dc0f8bc407ed99b9b54528952dc62834d5a779392f7a12c2947dd19330eb05a6bcae15a
+  languageName: node
+  linkType: hard
+
+"@types/carbon__icons-react@npm:^11.16.0":
+  version: 11.16.0
+  resolution: "@types/carbon__icons-react@npm:11.16.0"
+  checksum: b546783723c172decb727639fa63d2f97bfa361c058a25ef03dcc58cefbe8caf8a3ff56cd10d8e14c868a3d2989e77c29056de2ce91c7ad7dd4686e6d213f5a7
   languageName: node
   linkType: hard
 

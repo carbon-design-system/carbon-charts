@@ -20,7 +20,8 @@ storybookDemoGroups.forEach((demoGroup) => {
 		if (demo.isHighScale) {
 			return
 		}
-		const DemoComponent = ChartComponents[demo.chartType.vanilla]
+		const DemoComponent = (ChartComponents as {[key: string]: any})[demo.chartType.vanilla];
+
 		groupStories.add(
 			demo.title,
 			(args: Args) => {
@@ -30,7 +31,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 				const [update, setUpdate] = React.useState(false)
 
 				const demoRef = React.useRef(null)
-				const chartRef = React.useRef(null)
+				const chartRef = React.useRef<{ chart: any }>({ chart: null })
 
 				if (demoRef.current && chartRef.current) {
 					const container = demoRef.current

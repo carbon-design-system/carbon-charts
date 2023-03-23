@@ -1,4 +1,5 @@
 import { getParameters } from 'codesandbox/lib/api/define'
+import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 
 import packageJSON from '../package.json'
 const libraryVersion = packageJSON.version
@@ -11,10 +12,10 @@ const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+
 const D3VERSION = '^7.0.0'
 
 export const createChartSandbox = (chartTemplate: any) => {
-	const files = {}
+	const files: IFiles = {}
 
 	Object.keys(chartTemplate).forEach(
-		(filePath) => (files[filePath] = { content: chartTemplate[filePath] })
+		(filePath) => (files[filePath] = { content: chartTemplate[filePath], isBinary: false })
 	)
 
 	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters({ files })}`

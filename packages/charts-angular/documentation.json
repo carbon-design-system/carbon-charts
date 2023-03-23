@@ -7133,7 +7133,7 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7143,21 +7143,11 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{ x: 0, y: 0 }"
-            },
-            {
-                "name": "linkTarget",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{ x: 300, y: 0 }"
+                "defaultValue": "{ x: 0, y: 0 }"
             },
             {
                 "name": "linkTarget",
@@ -7168,6 +7158,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{ x: 400, y: 0 }"
+            },
+            {
+                "name": "linkTarget",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ x: 300, y: 0 }"
             },
             {
                 "name": "linkTargetCurve",
@@ -7466,28 +7466,6 @@
                     "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/marker.stories.ts": [
-                {
-                    "name": "linkSource",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 0, y: 0 }"
-                },
-                {
-                    "name": "linkTarget",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 300, y: 0 }"
-                }
-            ],
             "projects/charts-angular/src/stories/diagrams/edge.stories.ts": [
                 {
                     "name": "linkSource",
@@ -7518,6 +7496,28 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{ x: 400, y: 200 }"
+                }
+            ],
+            "projects/charts-angular/src/stories/diagrams/marker.stories.ts": [
+                {
+                    "name": "linkSource",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 0, y: 0 }"
+                },
+                {
+                    "name": "linkTarget",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/.storybook/preview.ts": [
