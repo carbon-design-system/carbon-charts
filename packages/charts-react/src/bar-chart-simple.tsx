@@ -1,4 +1,9 @@
-import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	SimpleBarChart as SimpleBarChartCore,
+	type BarChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

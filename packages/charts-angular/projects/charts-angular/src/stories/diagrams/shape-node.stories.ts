@@ -9,8 +9,10 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			imports: [ShapeNodeModule, ScreenModule]
 		})
 	)
-	.add('Default', () => ({
-		template: getTemplate(`
+	.add(
+		'Default',
+		() => ({
+			template: getTemplate(`
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -18,17 +20,20 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title'
+			props: {
+				title: 'Title'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Square', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Square',
+		() => ({
+			template: getTemplate(`
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -36,18 +41,21 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title',
-			shape: 'square'
+			props: {
+				title: 'Title',
+				shape: 'square'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Rounded square', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Rounded square',
+		() => ({
+			template: getTemplate(`
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -55,18 +63,21 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title',
-			shape: 'rounded-square'
+			props: {
+				title: 'Title',
+				shape: 'rounded-square'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('As button', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'As button',
+		() => ({
+			template: getTemplate(`
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [as]="component"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -74,18 +85,21 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title',
-			component: 'button'
+			props: {
+				title: 'Title',
+				component: 'button'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('As link', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'As link',
+		() => ({
+			template: getTemplate(`
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [href]="href"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -93,18 +107,21 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title',
-			href: '#'
+			props: {
+				title: 'Title',
+				href: '#'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Inherited dimensions', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Inherited dimensions',
+		() => ({
+			template: getTemplate(`
 		<div style="height: 64px; width: 64px; position: relative;">
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [size]="'100%'" position="static"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
@@ -112,12 +129,13 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			</ng-template>
 		</div>
 	`),
-		props: {
-			title: 'Title'
+			props: {
+				title: 'Title'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
+	)

@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "Coordinates",
-            "id": "interface-Coordinates-bcf8382f42554ab91854950cef73b5baf0123bd681acf5f50b16e1a48b25057484b9b5ca49892d59767115bc8d07b33770410f36aab4f91c481691fd59871159",
+            "id": "interface-Coordinates-a657ca03a51c374cee298c77885b50b5d73f6b2e4b8b3c531c4225b2dc49b7781b5cf6074bf98e0d617fc8e3dd888b2d8f1e52eb4d1dcaf09e03075c3a770eef",
             "file": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t/>\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t/>\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\"\n\t\t\t/>\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
             "properties": [
                 {
                     "name": "x",
@@ -62,7 +62,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -75,7 +75,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -88,7 +88,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -101,7 +101,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -118,7 +118,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -133,7 +133,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -148,7 +148,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -161,7 +161,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -199,7 +199,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -245,7 +245,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -258,7 +258,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -271,7 +271,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -284,7 +284,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -301,7 +301,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -316,7 +316,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -331,7 +331,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -344,7 +344,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -382,7 +382,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -408,7 +408,7 @@
         },
         {
             "name": "BaseChart",
-            "id": "component-BaseChart-e4559ef4623e69b4ebd45a7bfd39ed50e1da6632aa6cb2aec58e366d7a39fe57e49938c423b97af435f2a8c56be62a705d21c3ca1b6cec9889eee8cee52fcec3",
+            "id": "component-BaseChart-b8f59de7d2ef4f96c8e4f01c5ce057d04d03bfc74c18854989a8959fb8216f33c5a4ed241d1e5e5e1a35bb0a3440976aa0c5104cd85a09c3b9441ffb66a99a51",
             "file": "projects/charts-angular/src/lib/base-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -428,7 +428,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": []
                 },
@@ -438,7 +438,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": []
                 },
@@ -448,7 +448,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": []
                 },
@@ -458,7 +458,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": []
                 }
@@ -472,7 +472,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ]
@@ -484,7 +484,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ]
@@ -496,7 +496,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n"
                 },
                 {
@@ -506,7 +506,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -523,7 +523,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 95,
+                    "line": 94,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRuns after view init to create a chart, attach it to `chartRef` and draw it.\n",
@@ -535,7 +535,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -547,7 +547,7 @@
             "description": "<p>Wrapper around <code>BaseChart</code> in carbon charts library</p>\n<p>Most functions just call their equivalent from the chart library.</p>\n",
             "rawdescription": "\n\nWrapper around `BaseChart` in carbon charts library\n\nMost functions just call their equivalent from the chart library.\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core'\nimport type { ChartTabularData } from '@carbon/charts'\n/**\n * Wrapper around `BaseChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-base-chart',\n\ttemplate: ``\n})\nexport class BaseChart implements AfterViewInit, OnInit {\n\n\t/**\n\t * Data passed to charts library for displaying\n\t */\n\t@Input() set data(newData) {\n\t\t// If data already exists, that means the chart has been initialized\n\t\tconst dataExistsAlready = !!this._data\n\n\t\tthis._data = newData\n\n\t\tif (dataExistsAlready) {\n\t\t\tthis.chart?.model.setData(newData)\n\t\t}\n\t}\n\n\tget data() {\n\t\treturn this._data\n\t}\n\n\t/**\n\t * Options passed to charts library\n\t */\n\t@Input() set options(newOptions) {\n\t\t// If data already exists, that means the chart has been initialized\n\t\tconst optionsExistAlready = !!this._options\n\n\t\tthis._options = newOptions\n\n\t\tif (optionsExistAlready) {\n\t\t\tthis.chart?.model.setOptions(newOptions)\n\t\t}\n\t}\n\n\tget options() {\n\t\treturn this._options\n\t}\n\n\t/**\n\t * Chart width\n\t */\n\t@Input() width?: string\n\n\t/**\n\t * Chart height\n\t */\n\t@Input() height?: string\n\n\t/**\n\t * Chart container element ref\n\t */\n\t@ViewChild('nChart') chartRef!: ElementRef<HTMLElement>\n\n\t/**\n\t * Chart object instance\n\t *\n\t * You can use this to do whatever you would normally do with a chart if you used\n\t * charts library directly.\n\t */\n\tchart: any\n\n\tprivate _data!: ChartTabularData\n\tprivate _options: any\n\n\tconstructor(protected elementRef: ElementRef) {\n\t\tconsole.log('Initialized elementRef')\n\t}\n\n\tngOnInit() {\n\t\t// Width prop is mandatory for the wrappers\n\t\tif (this.width) {\n\t\t\tthis.options.width = this.width\n\t\t}\n\n\t\t// Height prop is mandatory for the wrappers\n\t\tif (this.height) {\n\t\t\tthis.options.height = this.height\n\t\t}\n\t}\n\n\t/**\n\t * Runs after view init to create a chart, attach it to `chartRef` and draw it.\n\t */\n\tngAfterViewInit() {\n\t\tconsole.log('You need to implement your own `ngAfterViewInit()` function')\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core'\nimport type { ChartTabularData } from '@carbon/charts'\n/**\n * Wrapper around `BaseChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-base-chart',\n\ttemplate: ``\n})\nexport class BaseChart implements AfterViewInit, OnInit {\n\t/**\n\t * Data passed to charts library for displaying\n\t */\n\t@Input() set data(newData) {\n\t\t// If data already exists, that means the chart has been initialized\n\t\tconst dataExistsAlready = !!this._data\n\n\t\tthis._data = newData\n\n\t\tif (dataExistsAlready) {\n\t\t\tthis.chart?.model.setData(newData)\n\t\t}\n\t}\n\n\tget data() {\n\t\treturn this._data\n\t}\n\n\t/**\n\t * Options passed to charts library\n\t */\n\t@Input() set options(newOptions) {\n\t\t// If data already exists, that means the chart has been initialized\n\t\tconst optionsExistAlready = !!this._options\n\n\t\tthis._options = newOptions\n\n\t\tif (optionsExistAlready) {\n\t\t\tthis.chart?.model.setOptions(newOptions)\n\t\t}\n\t}\n\n\tget options() {\n\t\treturn this._options\n\t}\n\n\t/**\n\t * Chart width\n\t */\n\t@Input() width?: string\n\n\t/**\n\t * Chart height\n\t */\n\t@Input() height?: string\n\n\t/**\n\t * Chart container element ref\n\t */\n\t@ViewChild('nChart') chartRef!: ElementRef<HTMLElement>\n\n\t/**\n\t * Chart object instance\n\t *\n\t * You can use this to do whatever you would normally do with a chart if you used\n\t * charts library directly.\n\t */\n\tchart: any\n\n\tprivate _data!: ChartTabularData\n\tprivate _options: any\n\n\tconstructor(protected elementRef: ElementRef) {\n\t\tconsole.log('Initialized elementRef')\n\t}\n\n\tngOnInit() {\n\t\t// Width prop is mandatory for the wrappers\n\t\tif (this.width) {\n\t\t\tthis.options.width = this.width\n\t\t}\n\n\t\t// Height prop is mandatory for the wrappers\n\t\tif (this.height) {\n\t\t\tthis.options.height = this.height\n\t\t}\n\t}\n\n\t/**\n\t * Runs after view init to create a chart, attach it to `chartRef` and draw it.\n\t */\n\tngAfterViewInit() {\n\t\tconsole.log('You need to implement your own `ngAfterViewInit()` function')\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -564,7 +564,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 74,
+                "line": 73,
                 "jsdoctags": [
                     {
                         "name": "elementRef",
@@ -598,7 +598,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 17,
+                        "line": 16,
                         "rawdescription": "\n\nData passed to charts library for displaying\n",
                         "description": "<p>Data passed to charts library for displaying</p>\n",
                         "jsdoctags": [
@@ -617,7 +617,7 @@
                         "name": "data",
                         "type": "",
                         "returnType": "",
-                        "line": 28
+                        "line": 27
                     }
                 },
                 "options": {
@@ -636,7 +636,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 35,
+                        "line": 34,
                         "rawdescription": "\n\nOptions passed to charts library\n",
                         "description": "<p>Options passed to charts library</p>\n",
                         "jsdoctags": [
@@ -655,7 +655,7 @@
                         "name": "options",
                         "type": "",
                         "returnType": "",
-                        "line": 46
+                        "line": 45
                     }
                 }
             }
@@ -682,7 +682,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -695,7 +695,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -708,7 +708,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -721,7 +721,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -738,7 +738,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -753,7 +753,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -768,7 +768,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -781,7 +781,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -819,7 +819,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -865,7 +865,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -878,7 +878,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -891,7 +891,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -904,7 +904,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -921,7 +921,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -936,7 +936,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -951,7 +951,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -964,7 +964,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -1002,7 +1002,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -1048,7 +1048,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -1061,7 +1061,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1074,7 +1074,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -1087,7 +1087,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1104,7 +1104,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -1119,7 +1119,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -1134,7 +1134,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -1147,7 +1147,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -1185,7 +1185,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -1272,7 +1272,7 @@
         },
         {
             "name": "CardNodeComponent",
-            "id": "component-CardNodeComponent-61c18eac0114d2d7f7a1b8f605cd9b572e7bf94a3bf9e0d14add5e4683f5279579e84a1ffc18df954fb670a433c990790ba4838d8062b569edc34ebb2f6ae78e",
+            "id": "component-CardNodeComponent-906bd3cf8a93c3ededc8c53cc03b90314d1ae4d6a72cfc8b86b912f50a12b6a1a31a69c910c88ef8d4ac1718817e9783f57404a708aa9d3c02d44a898671aef1",
             "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1282,7 +1282,7 @@
             "selector": "ibm-diagram-card-node",
             "styleUrls": [],
             "styles": [],
-            "template": "<ng-container [ngSwitch]=\"component\">\n\t<xhtml:div\n\t\t*ngSwitchCase=\"'div'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'border-color': color,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:div>\n\n\t<xhtml:button\n\t\t*ngSwitchCase=\"'button'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'border-color': color,\n\t\t\tposition: position\n\t\t}\"\n\t\t(click)=\"click.emit($event)\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:button>\n\n\t<xhtml:a\n\t\t*ngSwitchCase=\"'a'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[attr.href]=\"href\"\n\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:a>\n</ng-container>\n<ng-template #nodeTemplate>\n\t<ng-content></ng-content>\n</ng-template>\n\t",
+            "template": "<ng-container [ngSwitch]=\"component\">\n\t<xhtml:div\n\t\t*ngSwitchCase=\"'div'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'border-color': color,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:div>\n\n\t<xhtml:button\n\t\t*ngSwitchCase=\"'button'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'border-color': color,\n\t\t\tposition: position\n\t\t}\"\n\t\t(click)=\"click.emit($event)\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:button>\n\n\t<xhtml:a\n\t\t*ngSwitchCase=\"'a'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[attr.href]=\"href\"\n\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:a>\n</ng-container>\n<ng-template #nodeTemplate>\n\t<ng-content></ng-content>\n</ng-template>\n\t",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
@@ -1291,7 +1291,7 @@
                     "defaultValue": "'div'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 76,
+                    "line": 73,
                     "type": "string",
                     "decorators": []
                 },
@@ -1300,7 +1300,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 78,
+                    "line": 75,
                     "type": "string",
                     "decorators": []
                 },
@@ -1309,7 +1309,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 77,
+                    "line": 74,
                     "type": "string",
                     "decorators": []
                 },
@@ -1318,7 +1318,7 @@
                     "defaultValue": "'static'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 80,
+                    "line": 77,
                     "type": "string",
                     "decorators": []
                 },
@@ -1327,7 +1327,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 79,
+                    "line": 76,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -1338,7 +1338,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 82,
+                    "line": 79,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -1346,7 +1346,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 83,
+                    "line": 80,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -1354,7 +1354,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 86,
+                    "line": 83,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -1362,7 +1362,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 87,
+                    "line": 84,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -1370,7 +1370,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 85,
+                    "line": 82,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -1378,7 +1378,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 84,
+                    "line": 81,
                     "type": "EventEmitter<any>"
                 }
             ],
@@ -1391,7 +1391,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 91
+                    "line": 88
                 },
                 {
                     "name": "namespace",
@@ -1401,7 +1401,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 89
+                    "line": 86
                 }
             ],
             "methodsClass": [
@@ -1411,7 +1411,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 93,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1423,7 +1423,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\t\t<ng-template #nodeTemplate>\n\t\t\t<ng-content></ng-content>\n\t\t</ng-template>\n\t`\n})\nexport class CardNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() color = ''\n\t@Input() stacked = false\n\t@Input() position: string = 'static'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--card-node`\n\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\t\t<ng-template #nodeTemplate>\n\t\t\t<ng-content></ng-content>\n\t\t</ng-template>\n\t`\n})\nexport class CardNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() color = ''\n\t@Input() stacked = false\n\t@Input() position: string = 'static'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--card-node`\n\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1579,7 +1579,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -1592,7 +1592,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1605,7 +1605,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -1618,7 +1618,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1635,7 +1635,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -1650,7 +1650,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -1665,7 +1665,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -1678,7 +1678,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -1716,7 +1716,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -1762,7 +1762,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -1775,7 +1775,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1788,7 +1788,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -1801,7 +1801,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1818,7 +1818,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -1833,7 +1833,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -1848,7 +1848,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -1861,7 +1861,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -1899,7 +1899,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -1945,7 +1945,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -1958,7 +1958,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1971,7 +1971,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -1984,7 +1984,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2001,7 +2001,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -2016,7 +2016,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -2031,7 +2031,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -2044,7 +2044,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -2082,7 +2082,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2108,7 +2108,7 @@
         },
         {
             "name": "EdgeComponent",
-            "id": "component-EdgeComponent-bcf8382f42554ab91854950cef73b5baf0123bd681acf5f50b16e1a48b25057484b9b5ca49892d59767115bc8d07b33770410f36aab4f91c481691fd59871159",
+            "id": "component-EdgeComponent-a657ca03a51c374cee298c77885b50b5d73f6b2e4b8b3c531c4225b2dc49b7781b5cf6074bf98e0d617fc8e3dd888b2d8f1e52eb4d1dcaf09e03075c3a770eef",
             "file": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2118,7 +2118,7 @@
             "selector": "[ibm-graph-edge]",
             "styleUrls": [],
             "styles": [],
-            "template": "<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__container'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t/>\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t/>\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\"\n\t/>\n</svg:g>\n\t",
+            "template": "<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__container'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t<svg:path\n\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n</svg:g>\n\t",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
@@ -2127,7 +2127,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 33,
+                    "line": 30,
                     "type": "string",
                     "decorators": []
                 },
@@ -2136,7 +2136,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 31,
                     "type": "string",
                     "decorators": []
                 },
@@ -2145,7 +2145,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
+                    "line": 32,
                     "type": "string",
                     "decorators": []
                 },
@@ -2154,7 +2154,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 36,
                     "type": "string",
                     "decorators": []
                 },
@@ -2163,7 +2163,7 @@
                     "defaultValue": "{ x: 0, y: 0 }",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 33,
                     "type": "Coordinates",
                     "decorators": []
                 },
@@ -2172,7 +2172,7 @@
                     "defaultValue": "{ x: 0, y: 0 }",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 34,
                     "type": "Coordinates",
                     "decorators": []
                 },
@@ -2180,7 +2180,7 @@
                     "name": "variant",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 35,
                     "type": "\"dash-sm\" | \"dash-md\" | \"dash-lg\" | \"dash-xl\" | \"double\" | \"tunnel\"",
                     "decorators": []
                 }
@@ -2195,7 +2195,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 42
+                    "line": 39
                 },
                 {
                     "name": "pathClasses",
@@ -2205,7 +2205,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 41
+                    "line": 38
                 },
                 {
                     "name": "straight",
@@ -2215,7 +2215,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 43
+                    "line": 40
                 }
             ],
             "methodsClass": [],
@@ -2226,7 +2226,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t/>\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t/>\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\"\n\t\t\t/>\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
@@ -2253,7 +2253,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -2266,7 +2266,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2279,7 +2279,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -2292,7 +2292,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2309,7 +2309,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -2324,7 +2324,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -2339,7 +2339,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -2352,7 +2352,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -2390,7 +2390,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2436,7 +2436,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -2449,7 +2449,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2462,7 +2462,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -2475,7 +2475,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2492,7 +2492,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -2507,7 +2507,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -2522,7 +2522,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -2535,7 +2535,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -2573,7 +2573,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2619,7 +2619,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -2632,7 +2632,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2645,7 +2645,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -2658,7 +2658,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2675,7 +2675,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -2690,7 +2690,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -2705,7 +2705,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -2718,7 +2718,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -2756,7 +2756,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2802,7 +2802,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -2815,7 +2815,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2828,7 +2828,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -2841,7 +2841,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2858,7 +2858,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -2873,7 +2873,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -2888,7 +2888,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -2901,7 +2901,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -2939,7 +2939,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2985,7 +2985,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -2998,7 +2998,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3011,7 +3011,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -3024,7 +3024,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3041,7 +3041,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -3056,7 +3056,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -3071,7 +3071,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -3084,7 +3084,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -3122,7 +3122,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3168,7 +3168,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -3181,7 +3181,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3194,7 +3194,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -3207,7 +3207,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3224,7 +3224,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -3239,7 +3239,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -3254,7 +3254,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -3267,7 +3267,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -3305,7 +3305,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4577,7 +4577,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -4590,7 +4590,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4603,7 +4603,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -4616,7 +4616,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4633,7 +4633,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -4648,7 +4648,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -4663,7 +4663,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -4676,7 +4676,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -4714,7 +4714,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4760,7 +4760,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -4773,7 +4773,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4786,7 +4786,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -4799,7 +4799,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4816,7 +4816,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -4831,7 +4831,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -4846,7 +4846,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -4859,7 +4859,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -4897,7 +4897,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4943,7 +4943,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -4956,7 +4956,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4969,7 +4969,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -4982,7 +4982,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4999,7 +4999,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -5014,7 +5014,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -5029,7 +5029,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -5042,7 +5042,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -5080,7 +5080,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5126,7 +5126,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -5139,7 +5139,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5152,7 +5152,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -5165,7 +5165,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5182,7 +5182,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -5197,7 +5197,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -5212,7 +5212,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -5225,7 +5225,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -5263,7 +5263,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5289,7 +5289,7 @@
         },
         {
             "name": "ShapeNodeComponent",
-            "id": "component-ShapeNodeComponent-ee6a96a9a67b5523d1ec5db9583c1c193e5f7a9b0aa9072db0a3f88e87a23c372ad0bbbe166d87204fc7c9303179836dc9b4c60f543e7432aebc4ed312ffe221",
+            "id": "component-ShapeNodeComponent-3036723925604c9b54fc8c5eafffeddee51ab3c889843f6e8e64c95ae3a6ce3024a8e3cc954010cd6dad12ac7be0aefbeac5b61dda930eb618c96da0c397a836",
             "file": "projects/charts-angular/src/stories/diagrams/shape-node/shape-node.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5299,7 +5299,7 @@
             "selector": "ibm-diagram-shape-node",
             "styleUrls": [],
             "styles": [],
-            "template": "<ng-container [ngSwitch]=\"component\">\n\t<xhtml:div\n\t\t*ngSwitchCase=\"'div'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:div>\n\n\t<xhtml:button\n\t\t*ngSwitchCase=\"'button'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(click)=\"click.emit($event)\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:button>\n\n\t<xhtml:a\n\t\t*ngSwitchCase=\"'a'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[attr.href]=\"href\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\"\n\t>\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:a>\n</ng-container>\n\n<ng-template #nodeTemplate>\n\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t</div>\n\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t{{ subtitle }}\n\t\t</div>\n\t</div>\n</ng-template>\n\t",
+            "template": "<ng-container [ngSwitch]=\"component\">\n\t<xhtml:div\n\t\t*ngSwitchCase=\"'div'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:div>\n\n\t<xhtml:button\n\t\t*ngSwitchCase=\"'button'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(click)=\"click.emit($event)\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:button>\n\n\t<xhtml:a\n\t\t*ngSwitchCase=\"'a'\"\n\t\t[ngClass]=\"[\n\t\t\tnamespace,\n\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\tnamespace + '--' + component\n\t\t]\"\n\t\t[attr.href]=\"href\"\n\t\t[ngStyle]=\"{\n\t\t\t'height.px': size,\n\t\t\t'width.px': size,\n\t\t\tposition: position\n\t\t}\"\n\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\ttabindex=\"0\">\n\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t</xhtml:a>\n</ng-container>\n\n<ng-template #nodeTemplate>\n\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t</div>\n\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t{{ subtitle }}\n\t\t</div>\n\t</div>\n</ng-template>\n\t",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
@@ -5308,7 +5308,7 @@
                     "defaultValue": "'div'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 95,
+                    "line": 92,
                     "type": "string",
                     "decorators": []
                 },
@@ -5317,7 +5317,7 @@
                     "defaultValue": "'absolute'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 104,
+                    "line": 101,
                     "type": "string",
                     "decorators": []
                 },
@@ -5326,7 +5326,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 96,
+                    "line": 93,
                     "type": "string",
                     "decorators": []
                 },
@@ -5335,7 +5335,7 @@
                     "defaultValue": "'fixed'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 103,
+                    "line": 100,
                     "type": "string",
                     "decorators": []
                 },
@@ -5343,7 +5343,7 @@
                     "name": "renderIcon",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 97,
+                    "line": 94,
                     "type": "TemplateRef<any>",
                     "decorators": []
                 },
@@ -5352,7 +5352,7 @@
                     "defaultValue": "'circle'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 100,
+                    "line": 97,
                     "type": "\"circle\" | \"square\" | \"rounded-square\"",
                     "decorators": []
                 },
@@ -5361,7 +5361,7 @@
                     "defaultValue": "48",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 98,
+                    "line": 95,
                     "type": "number",
                     "decorators": []
                 },
@@ -5370,7 +5370,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 99,
+                    "line": 96,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -5379,7 +5379,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 101,
+                    "line": 98,
                     "type": "string",
                     "decorators": []
                 },
@@ -5388,7 +5388,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 102,
+                    "line": 99,
                     "type": "string",
                     "decorators": []
                 }
@@ -5399,7 +5399,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 106,
+                    "line": 103,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -5407,7 +5407,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 107,
+                    "line": 104,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -5415,7 +5415,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 110,
+                    "line": 107,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -5423,7 +5423,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 111,
+                    "line": 108,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -5431,7 +5431,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 109,
+                    "line": 106,
                     "type": "EventEmitter<any>"
                 },
                 {
@@ -5439,7 +5439,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 108,
+                    "line": 105,
                     "type": "EventEmitter<any>"
                 }
             ],
@@ -5452,7 +5452,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 114
+                    "line": 111
                 },
                 {
                     "name": "namespace",
@@ -5462,7 +5462,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 113
+                    "line": 110
                 }
             ],
             "methodsClass": [
@@ -5472,7 +5472,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5484,7 +5484,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'\n\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-shape-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\"\n\t\t\t>\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\n\t\t<ng-template #nodeTemplate>\n\t\t\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t\t\t</div>\n\t\t\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t\t\t{{ subtitle }}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</ng-template>\n\t`\n})\nexport class ShapeNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() renderIcon?: TemplateRef<any>\n\t@Input() size = 48\n\t@Input() stacked = false\n\t@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'\n\t@Input() subtitle = ''\n\t@Input() title = ''\n\t@Input() position: string = 'fixed'\n\t@Input() bodyPosition: string = 'absolute'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--shape-node`\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'\n\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-shape-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\n\t\t<ng-template #nodeTemplate>\n\t\t\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t\t\t</div>\n\t\t\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t\t\t{{ subtitle }}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</ng-template>\n\t`\n})\nexport class ShapeNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() renderIcon?: TemplateRef<any>\n\t@Input() size = 48\n\t@Input() stacked = false\n\t@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'\n\t@Input() subtitle = ''\n\t@Input() title = ''\n\t@Input() position: string = 'fixed'\n\t@Input() bodyPosition: string = 'absolute'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--shape-node`\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5494,7 +5494,7 @@
         },
         {
             "name": "SimpleBarChartComponent",
-            "id": "component-SimpleBarChartComponent-eef41c0173bc2df789e2d32029ad968cd6ba679103c0d467864bf7de0da8b478736f7d3ad47eb92ce57f7b78341218448ef416773cb16b91475777bbb3824176",
+            "id": "component-SimpleBarChartComponent-53e13c8364e06acde855fa5691bbd75fc6789120fa658bea33f30f08c62ec9db5c1442ae7a05666c12649ac866253ab5619e7da7730862de7f16e72ab4d131b4",
             "file": "projects/charts-angular/src/lib/bar-chart-simple.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5514,7 +5514,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -5527,7 +5527,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5540,7 +5540,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -5553,7 +5553,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5570,7 +5570,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -5585,7 +5585,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -5600,7 +5600,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -5613,7 +5613,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -5651,7 +5651,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5666,7 +5666,7 @@
             "description": "<p>Wrapper around <code>SimpleBarChart</code> in carbon charts library</p>\n<p>Most functions just call their equivalent from the chart library.</p>\n",
             "rawdescription": "\n\nWrapper around `SimpleBarChart` in carbon charts library\n\nMost functions just call their equivalent from the chart library.\n",
             "type": "component",
-            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport { SimpleBarChart, type ChartTabularData, type BarChartOptions  } from '@carbon/charts'\n\n/**\n * Wrapper around `SimpleBarChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-simple-bar-chart',\n\ttemplate: ``\n})\nexport class SimpleBarChartComponent extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `elementRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new SimpleBarChart(this.elementRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as BarChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
+            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport { SimpleBarChart, type ChartTabularData, type BarChartOptions } from '@carbon/charts'\n\n/**\n * Wrapper around `SimpleBarChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-simple-bar-chart',\n\ttemplate: ``\n})\nexport class SimpleBarChartComponent extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `elementRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new SimpleBarChart(this.elementRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as BarChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5677,7 +5677,7 @@
         },
         {
             "name": "StackedAreaChartComponent",
-            "id": "component-StackedAreaChartComponent-8fea223c09596c87ab5052d3d149eb26505ba4290840035ea9006bd16d5a5d054517b054c3b9b58b517c0d810e594e2d0ca3d578299abbe81d4a9a612afdce16",
+            "id": "component-StackedAreaChartComponent-54e8f21992b00c4363ac798460a24a9dec838763c07014121abfd3ec08715f3a99e32114cb543cd163d7f71128190f48d797f399f827f1d6d015e9c769e93638",
             "file": "projects/charts-angular/src/lib/area-chart-stacked.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5697,7 +5697,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -5710,7 +5710,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5723,7 +5723,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -5736,7 +5736,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5753,7 +5753,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -5768,7 +5768,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -5783,7 +5783,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -5796,7 +5796,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -5816,7 +5816,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRuns after view init to create a chart, attach it to `elementRef` and draw it.\n",
@@ -5834,7 +5834,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5849,7 +5849,7 @@
             "description": "<p>Wrapper around <code>StackedAreaChart</code> in carbon charts library</p>\n<p>Most functions just call their equivalent from the chart library.</p>\n",
             "rawdescription": "\n\nWrapper around `StackedAreaChart` in carbon charts library\n\nMost functions just call their equivalent from the chart library.\n",
             "type": "component",
-            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport { StackedAreaChart, type StackedAreaChartOptions, type ChartTabularData } from '@carbon/charts'\n\n/**\n * Wrapper around `StackedAreaChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-stacked-area-chart',\n\ttemplate: ``\n})\nexport class StackedAreaChartComponent extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `elementRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new StackedAreaChart(this.elementRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as StackedAreaChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
+            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport {\n\tStackedAreaChart,\n\ttype StackedAreaChartOptions,\n\ttype ChartTabularData\n} from '@carbon/charts'\n\n/**\n * Wrapper around `StackedAreaChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-stacked-area-chart',\n\ttemplate: ``\n})\nexport class StackedAreaChartComponent extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `elementRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new StackedAreaChart(this.elementRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as StackedAreaChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5880,7 +5880,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -5893,7 +5893,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5906,7 +5906,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -5919,7 +5919,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5936,7 +5936,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -5951,7 +5951,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -5966,7 +5966,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -5979,7 +5979,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -6017,7 +6017,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -6063,7 +6063,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -6076,7 +6076,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6089,7 +6089,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -6102,7 +6102,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6119,7 +6119,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -6134,7 +6134,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -6149,7 +6149,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -6162,7 +6162,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -6200,7 +6200,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -6246,7 +6246,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -6259,7 +6259,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6272,7 +6272,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -6285,7 +6285,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6302,7 +6302,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -6317,7 +6317,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -6332,7 +6332,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -6345,7 +6345,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -6383,7 +6383,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -6429,7 +6429,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nData passed to charts library for displaying\n",
                     "description": "<p>Data passed to charts library for displaying</p>\n",
-                    "line": 17,
+                    "line": 16,
                     "type": "ChartTabularData",
                     "decorators": [],
                     "inheritance": {
@@ -6442,7 +6442,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart height\n",
                     "description": "<p>Chart height</p>\n",
-                    "line": 58,
+                    "line": 57,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6455,7 +6455,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptions passed to charts library\n",
                     "description": "<p>Options passed to charts library</p>\n",
-                    "line": 35,
+                    "line": 34,
                     "type": "any",
                     "decorators": [],
                     "inheritance": {
@@ -6468,7 +6468,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChart width\n",
                     "description": "<p>Chart width</p>\n",
-                    "line": 53,
+                    "line": 52,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -6485,7 +6485,7 @@
                     "type": "ChartTabularData",
                     "optional": false,
                     "description": "",
-                    "line": 73,
+                    "line": 72,
                     "modifierKind": [
                         121
                     ],
@@ -6500,7 +6500,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 74,
+                    "line": 73,
                     "modifierKind": [
                         121
                     ],
@@ -6515,7 +6515,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "<p>Chart object instance</p>\n<p>You can use this to do whatever you would normally do with a chart if you used\ncharts library directly.</p>\n",
-                    "line": 71,
+                    "line": 70,
                     "rawdescription": "\n\nChart object instance\n\nYou can use this to do whatever you would normally do with a chart if you used\ncharts library directly.\n",
                     "inheritance": {
                         "file": "BaseChart"
@@ -6528,7 +6528,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "<p>Chart container element ref</p>\n",
-                    "line": 63,
+                    "line": 62,
                     "rawdescription": "\n\nChart container element ref\n",
                     "decorators": [
                         {
@@ -6566,7 +6566,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {

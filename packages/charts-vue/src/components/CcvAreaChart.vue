@@ -8,7 +8,7 @@ export default defineComponent({
 	name: 'CcvAreaChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new AreaChart(this.$el, {
+		this.coreChart = new AreaChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as AreaChartOptions
 		})

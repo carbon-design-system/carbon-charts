@@ -177,24 +177,22 @@ import { AppComponent } from "./app.component";
 })
 export class AppModule {}`
 
-	const packageJson = JSON.stringify(
-		{
-			dependencies: {
-				'@angular/common': '^14.3.0',
-				'@angular/compiler': '^14.3.0',
-				'@angular/core': '^14.3.0',
-				'@angular/forms': '^14.3.0',
-				'@angular/platform-browser': '^14.3.0',
-				'@angular/platform-browser-dynamic': '^14.3.0',
-				'@carbon/charts': libraryVersion,
-				'@carbon/charts-angular': libraryVersion,
-				d3: D3VERSION,
-				rxjs: '~7.5.0',
-				tslib: '^2.3.0',
-				'zone.js': '~0.11.4'
-			}
+	const packageJson = JSON.stringify({
+		dependencies: {
+			'@angular/common': '^14.3.0',
+			'@angular/compiler': '^14.3.0',
+			'@angular/core': '^14.3.0',
+			'@angular/forms': '^14.3.0',
+			'@angular/platform-browser': '^14.3.0',
+			'@angular/platform-browser-dynamic': '^14.3.0',
+			'@carbon/charts': libraryVersion,
+			'@carbon/charts-angular': libraryVersion,
+			d3: D3VERSION,
+			rxjs: '~7.5.0',
+			tslib: '^2.3.0',
+			'zone.js': '~0.11.4'
 		}
-	)
+	})
 
 	return {
 		'src/app/app.component.html': appComponentHtml,
@@ -255,29 +253,26 @@ import './ibm-plex-font.css'
 createApp(App).mount('#app')
 `
 
-	const packageJson = JSON.stringify(
-		{
-			name: 'carbon-charts-vue-example',
-			version: '0.0.0',
-			private: true,
-			scripts: {
-				dev: 'vite dev --host',
-				start: 'vite dev --host',
-				build: 'vite build',
-				preview: 'vite preview'
-			},
-			dependencies: {
-				'@carbon/charts-vue': libraryVersion,
-				d3: D3VERSION,
-				vue: '^3.2.47'
-			},
-			devDependencies: {
-				'@vitejs/plugin-vue': '^4.1.0',
-				'vite': '^4.2.1'
-			}
+	const packageJson = JSON.stringify({
+		name: 'carbon-charts-vue-example',
+		version: '0.0.0',
+		private: true,
+		scripts: {
+			dev: 'vite dev --host',
+			start: 'vite dev --host',
+			build: 'vite build',
+			preview: 'vite preview'
+		},
+		dependencies: {
+			'@carbon/charts-vue': libraryVersion,
+			d3: D3VERSION,
+			vue: '^3.2.47'
+		},
+		devDependencies: {
+			'@vitejs/plugin-vue': '^4.1.0',
+			vite: '^4.2.1'
 		}
-	)
-
+	})
 
 	const viteConfig = `
 import { fileURLToPath, URL } from 'node:url'

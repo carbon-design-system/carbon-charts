@@ -1,9 +1,7 @@
 {
 	"compilerOptions": {
 		"composite": true,
-		"types": [
-      "vite/client"
-    ],
+		"types": ["vite/client"],
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"allowSyntheticDefaultImports": true

@@ -1,4 +1,9 @@
-import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	GroupedBarChart as GroupedBarChartCore,
+	type BarChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { StackedAreaChart, type StackedAreaChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	StackedAreaChart,
+	type StackedAreaChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `StackedAreaChart` in carbon charts library

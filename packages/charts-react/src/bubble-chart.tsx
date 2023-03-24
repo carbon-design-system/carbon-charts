@@ -1,4 +1,9 @@
-import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	BubbleChart as BubbleChartCore,
+	type BubbleChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -58,8 +58,7 @@ const ShapeNode = ({
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			style={{ height: size, width: size, position }}
-			tabIndex={0}
-		>
+			tabIndex={0}>
 			<div className={`${namespace}__icon`}>{renderIcon}</div>
 			<div className={`${namespace}__body`} style={{ position: bodyPosition }}>
 				{titleElement}

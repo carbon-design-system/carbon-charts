@@ -1,4 +1,9 @@
-import { LineChart as LineChartCore, type LineChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	LineChart as LineChartCore,
+	type LineChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -14,8 +14,10 @@ storiesOf('Diagrams/Nodes/Card', module)
 			imports: [CardNodeModule, ScreenModule, ChevronDownModule]
 		})
 	)
-	.add('Default', () => ({
-		template: getTemplate(`
+	.add(
+		'Default',
+		() => ({
+			template: getTemplate(`
 		<ibm-diagram-card-node>
 			<ibm-diagram-card-node-column>
 				<ibm-diagram-card-node-title>
@@ -27,18 +29,21 @@ storiesOf('Diagrams/Nodes/Card', module)
 			</ibm-diagram-card-node-column>
 		</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description'
+			props: {
+				title: 'Title',
+				description: 'Description'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Stacked', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Stacked',
+		() => ({
+			template: getTemplate(`
 		<ibm-diagram-card-node [stacked]="stacked">
 			<ibm-diagram-card-node-column>
 				<ibm-diagram-card-node-title>
@@ -50,19 +55,22 @@ storiesOf('Diagrams/Nodes/Card', module)
 			</ibm-diagram-card-node-column>
 		</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			stacked: true
+			props: {
+				title: 'Title',
+				description: 'Description',
+				stacked: true
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Color', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Color',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -74,19 +82,22 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			color: '#8a3ffc'
+			props: {
+				title: 'Title',
+				description: 'Description',
+				color: '#8a3ffc'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('With icon', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'With icon',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
 			<svg ibmIconScreen size="16"></svg>
@@ -101,18 +112,21 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description'
+			props: {
+				title: 'Title',
+				description: 'Description'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('As button', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'As button',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [as]="component">
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -124,19 +138,22 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			component: 'button'
+			props: {
+				title: 'Title',
+				description: 'Description',
+				component: 'button'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('As link', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'As link',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [href]="href">
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -148,19 +165,22 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			href: '#'
+			props: {
+				title: 'Title',
+				description: 'Description',
+				href: '#'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('With label', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'With label',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
 			<svg ibmIconScreen size="16"></svg>
@@ -178,19 +198,22 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			label: 'Label'
+			props: {
+				title: 'Title',
+				description: 'Description',
+				label: 'Label'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('With action', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'With action',
+		() => ({
+			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
 			<svg ibmIconScreen size="16"></svg>
@@ -208,14 +231,15 @@ storiesOf('Diagrams/Nodes/Card', module)
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),
-		props: {
-			title: 'Title',
-			description: 'Description',
-			farsideColumn: true
+			props: {
+				title: 'Title',
+				description: 'Description',
+				farsideColumn: true
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
+	)

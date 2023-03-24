@@ -1,4 +1,9 @@
-import { AreaChart as AreaChartCore, type AreaChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	AreaChart as AreaChartCore,
+	type AreaChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

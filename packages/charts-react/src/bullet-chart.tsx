@@ -1,4 +1,9 @@
-import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	BulletChart as BulletChartCore,
+	type BulletChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -10,7 +10,7 @@ export default defineConfig({
 			entry: fileURLToPath(new URL('demo/index.ts', import.meta.url)),
 			name: 'ChartsDemoData',
 			formats: ['es', 'umd'],
-			fileName: (format) => `index.${format === 'es' ? 'm':''}js`
+			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			// Reduces bundle size
@@ -46,8 +46,10 @@ export default defineConfig({
 			}
 		}
 	},
-	plugins: [/*dts({
+	plugins: [
+		/*dts({
 		insertTypesEntry: true,
 		tsConfigFilePath: 'demo/tsconfig.json'
-	})*/]
+	})*/
+	]
 })

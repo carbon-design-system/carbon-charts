@@ -1,4 +1,9 @@
-import { ScatterChart as ScatterChartCore, type ScatterChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	ScatterChart as ScatterChartCore,
+	type ScatterChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

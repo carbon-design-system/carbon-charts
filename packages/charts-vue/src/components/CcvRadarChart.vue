@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvRadarChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new RadarChart(this.$el, {
+		this.coreChart = new RadarChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as RadarChartOptions
 		})

@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvPieChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new PieChart(this.$el, {
+		this.coreChart = new PieChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as PieChartOptions
 		})

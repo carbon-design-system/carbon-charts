@@ -1,4 +1,9 @@
-import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	BoxplotChart as BoxplotChartCore,
+	type BoxplotChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -13,45 +13,53 @@ storiesOf('Diagrams/Edges', module)
 			imports: [EdgeModule]
 		})
 	)
-	.add('Default', () => ({
-		template: getTemplate(`
+	.add(
+		'Default',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target"></g>
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget
+			props: {
+				source: linkSource,
+				target: linkTarget
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Color', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Color',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [color]="color" [source]="source" [target]="target"></g>
 			</g>
 		</svg>
 	`),
-		props: {
-			color: '#FB4B53',
-			source: linkSource,
-			target: linkTarget
+			props: {
+				color: '#FB4B53',
+				source: linkSource,
+				target: linkTarget
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Dashed', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Dashed',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target" variant='dash-sm' />
@@ -70,87 +78,100 @@ storiesOf('Diagrams/Edges', module)
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget
+			props: {
+				source: linkSource,
+				target: linkTarget
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Double', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Double',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target" variant='double' />
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget
+			props: {
+				source: linkSource,
+				target: linkTarget
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Tunnel', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Tunnel',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target" variant='tunnel' />
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget
+			props: {
+				source: linkSource,
+				target: linkTarget
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Elbow', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Elbow',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target" [path]="path" />
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			path: Component.buildElbowPathString(linkSource, linkTargetCurve)
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				path: Component.buildElbowPathString(linkSource, linkTargetCurve)
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Bezier', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Bezier',
+		() => ({
+			template: getTemplate(`
 		<svg height="800" width="800">
 			<g transform="translate(16,16)">
 				<g ibm-graph-edge [source]="source" [target]="target" [path]="path" />
 			</g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			path: Component.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				path: Component.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
+	)

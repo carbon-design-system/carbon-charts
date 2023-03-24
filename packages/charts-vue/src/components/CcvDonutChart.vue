@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvDonutChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new DonutChart(this.$el, {
+		this.coreChart = new DonutChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as DonutChartOptions
 		})

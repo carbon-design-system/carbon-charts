@@ -1,4 +1,9 @@
-import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	RadarChart as RadarChartCore,
+	type RadarChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

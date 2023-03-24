@@ -1,4 +1,9 @@
-import { PieChart as PieChartCore, type PieChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	PieChart as PieChartCore,
+	type PieChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

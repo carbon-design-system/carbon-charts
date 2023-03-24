@@ -10,7 +10,6 @@ import type { ChartTabularData } from '@carbon/charts'
 	template: ``
 })
 export class BaseChart implements AfterViewInit, OnInit {
-
 	/**
 	 * Data passed to charts library for displaying
 	 */

@@ -1,4 +1,9 @@
-import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	AlluvialChart as AlluvialChartCore,
+	type AlluvialChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

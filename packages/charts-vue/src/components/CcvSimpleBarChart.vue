@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvSimpleBarChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new SimpleBarChart(this.$el, {
+		this.coreChart = new SimpleBarChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as BarChartOptions
 		})

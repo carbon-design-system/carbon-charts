@@ -3,8 +3,6 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	TruncationTypes,
-	AxisChartOptions,
-	LegendItemType
 } from './interfaces'
 
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
@@ -57,18 +55,16 @@ export const removeArrayDuplicates = uniq
 
 export function debounceWithD3MousePosition(fn, delay, holder) {
 	let timer = null
-	return function () {
-		// param should be ...args
+	return (...args) => {
 		const context = this
-		const args = arguments
 
-		//we get the D3 event here
+		// Get D3 event here
 		context.mousePosition = pointer(args[0], holder)
 
 		clearTimeout(timer)
 
 		timer = setTimeout(function () {
-			// and use the reference here
+			// and use reference here
 			fn.apply(context, args)
 		}, delay)
 	}

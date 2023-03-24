@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvWordCloudChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new WordCloudChart(this.$el, {
+		this.coreChart = new WordCloudChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as WorldCloudChartOptions
 		})

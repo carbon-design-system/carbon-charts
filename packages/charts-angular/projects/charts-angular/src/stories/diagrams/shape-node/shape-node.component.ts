@@ -24,8 +24,7 @@ import { carbonPrefix } from '../configs'
 				(mouseout)="mouseOut.emit($event)"
 				(mouseleave)="mouseLeave.emit($event)"
 				(mousemove)="mouseMove.emit($event)"
-				tabindex="0"
-			>
+				tabindex="0">
 				<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
 			</xhtml:div>
 
@@ -48,8 +47,7 @@ import { carbonPrefix } from '../configs'
 				(mouseout)="mouseOut.emit($event)"
 				(mouseleave)="mouseLeave.emit($event)"
 				(mousemove)="mouseMove.emit($event)"
-				tabindex="0"
-			>
+				tabindex="0">
 				<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
 			</xhtml:button>
 
@@ -72,8 +70,7 @@ import { carbonPrefix } from '../configs'
 				(mouseout)="mouseOut.emit($event)"
 				(mouseleave)="mouseLeave.emit($event)"
 				(mousemove)="mouseMove.emit($event)"
-				tabindex="0"
-			>
+				tabindex="0">
 				<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
 			</xhtml:a>
 		</ng-container>

@@ -7,21 +7,11 @@
 		"baseUrl": "."
 		// "rootDirs": ["src"]
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.js",
-		"stories/**/*",
-		"demo/**/*"
-	],
-	"exclude": [
-		"node_modules",
-		"src/**/*.spec.ts",
-		"src/tests",
-		"demo/bundle"
-	],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*", "demo/**/*"],
+	"exclude": ["node_modules", "src/**/*.spec.ts", "src/tests", "demo/bundle"],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvBulletChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new BulletChart(this.$el, {
+		this.coreChart = new BulletChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as BulletChartOptions
 		})

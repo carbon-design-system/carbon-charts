@@ -72,7 +72,9 @@ stories.add('Elbow', () => (
 stories.add('Bezier', () => (
 	<svg height="800" width="800">
 		<g transform="translate(16,16)">
-			<Edge path={Component.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)} />
+			<Edge
+				path={Component.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)}
+			/>
 		</g>
 	</svg>
 ))

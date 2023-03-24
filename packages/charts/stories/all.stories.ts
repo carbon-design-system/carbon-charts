@@ -9,12 +9,14 @@ const colorPairingOptions = color.pairingOptions
 const introStories = storiesOf('Docs', module)
 
 // Loop through the demos for the group
-introStories.add('Welcome', () => {
-	// container creation
-	const container = document.createElement('div')
-	container.setAttribute('class', 'container intro')
+introStories.add(
+	'Welcome',
+	() => {
+		// container creation
+		const container = document.createElement('div')
+		container.setAttribute('class', 'container intro')
 
-	container.innerHTML = `
+		container.innerHTML = `
 		<div class="welcome__container" style="background: url(./welcome.png) no-repeat center center fixed; background-size: cover;">
 			<div class="welcome__content">
 				<h2 class="welcome__heading">Carbon Charts</h2>
@@ -30,13 +32,14 @@ introStories.add('Welcome', () => {
 			</div>
   </div>`
 
-	return container
-},
-{
-	controls: {
-		hideNoControlsWarning: true
+		return container
+	},
+	{
+		controls: {
+			hideNoControlsWarning: true
+		}
 	}
-})
+)
 
 // Loop through all demo groups
 storybookDemoGroups.forEach((demoGroup) => {
@@ -69,7 +72,8 @@ storybookDemoGroups.forEach((demoGroup) => {
 					<p class="props">
 						<span><b>Props: </b><span><a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
 					</p>
-					${demo.options.experimental
+					${
+						demo.options.experimental
 							? `
 					<div data-notification class="cds--inline-notification cds--inline-notification--warning" role="alert">
 						<div class="cds--inline-notification__details">

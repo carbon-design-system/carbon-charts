@@ -3,11 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
 import { Component } from '@carbon/charts'
 
-import CardNode, {
-	CardNodeColumn,
-	CardNodeTitle,
-	CardNodeSubtitle
-} from './CardNode'
+import CardNode, { CardNodeColumn, CardNodeTitle, CardNodeSubtitle } from './CardNode'
 import Edge from './Edge'
 import ShapeNode from './ShapeNode'
 import { ArrowRightMarker } from './Marker'
@@ -52,9 +48,8 @@ stories.add('Start here', () => {
 
 			<p {...paragraphStyle}>
 				<b>
-					Note that Carbon Charts does not provide layouts for diagrams. You can utilize
-					these components alongside graphing libraries, or by composing your own layouts
-					(see section 3).
+					Note that Carbon Charts does not provide layouts for diagrams. You can utilize these
+					components alongside graphing libraries, or by composing your own layouts (see section 3).
 				</b>
 			</p>
 
@@ -100,8 +95,7 @@ stories.add('Start here', () => {
 				}}
 				title="carbon-charts-react-elkjs-diagram"
 				allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-			></iframe>
+				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	)
 })
@@ -128,8 +122,7 @@ const SimpleStatic = () => (
 				style={{ overflow: 'visible' }}
 				transform={`translate(0, 16)`}
 				height={nodeHeight}
-				width={nodeWidth}
-			>
+				width={nodeWidth}>
 				<CardNode onClick={() => {}}>
 					<CardNodeColumn>
 						<User />
@@ -142,12 +135,7 @@ const SimpleStatic = () => (
 			</foreignObject>
 
 			<foreignObject style={{ overflow: 'visible' }} transform={`translate(400, 16)`}>
-				<ShapeNode
-					title={'Title'}
-					size={ShapeNodeSize}
-					onClick={() => {}}
-					renderIcon={<Wikis />}
-				/>
+				<ShapeNode title={'Title'} size={ShapeNodeSize} onClick={() => {}} renderIcon={<Wikis />} />
 			</foreignObject>
 		</svg>
 	</div>
@@ -207,8 +195,7 @@ const ProgrammaticStatic = () => {
 			key={`node_${i}`}
 			transform={`translate(${node.x}, ${node.y})`}
 			height={node.nodeHeight}
-			width={node.nodeWidth}
-		>
+			width={node.nodeWidth}>
 			{node.ShapeNode ? (
 				<ShapeNode
 					onClick={() => {}}

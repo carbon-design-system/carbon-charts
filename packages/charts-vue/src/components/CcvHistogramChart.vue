@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvHistogramChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new HistogramChart(this.$el, {
+		this.coreChart = new HistogramChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as HistogramChartOptions
 		})

@@ -19,8 +19,10 @@ stories.addDecorator(
 	})
 )
 
-stories.add('Start here', () => ({
-	template: getTemplate(`
+stories.add(
+	'Start here',
+	() => ({
+		template: getTemplate(`
 		<div>
 			<h1>Diagrams</h1>
 
@@ -72,22 +74,23 @@ stories.add('Start here', () => ({
 				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	`),
-	props: {
-		source: { x: 0, y: 48 },
-		target: { x: 396, y: 48 },
-		markerEnd: 'marker',
-		nodeHeight,
-		nodeWidth,
-		circleSize,
-		nodeData,
-		edgeMapped
+		props: {
+			source: { x: 0, y: 48 },
+			target: { x: 396, y: 48 },
+			markerEnd: 'marker',
+			nodeHeight,
+			nodeWidth,
+			circleSize,
+			nodeData,
+			edgeMapped
+		}
+	}),
+	{
+		controls: {
+			hideNoControlsWarning: true
+		}
 	}
-}),
-{
-	controls: {
-		hideNoControlsWarning: true
-	}
-})
+)
 
 const SimpleStatic = `
 	<div class="demo-desktop-only">

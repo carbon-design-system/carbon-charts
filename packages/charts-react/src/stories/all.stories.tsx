@@ -3,7 +3,7 @@ import { storiesOf, type Args } from '@storybook/react'
 import type { Demo } from './Demo'
 import * as ChartComponents from '../index'
 
-import { addControls, addOtherVersions, storybookDemoGroups} from '@carbon/charts/demo'
+import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
 import { Configuration } from '@carbon/charts'
 
 const colorPairingOptions = Configuration.color.pairingOptions
@@ -18,7 +18,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 		if (demo.isHighScale) {
 			return
 		}
-		const DemoComponent = (ChartComponents as {[key: string]: any})[demo.chartType.vanilla];
+		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
 		groupStories.add(
 			demo.title,
@@ -63,9 +63,10 @@ storybookDemoGroups.forEach((demoGroup) => {
 						</h3>
 
 						<p className="props">
-							<b>Props:</b>{' '}
-							<a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>,{' '}
-							<a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">
+							<b>Props:</b> <a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>,{' '}
+							<a
+								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
+								target="_blank">
 								options
 							</a>
 						</p>

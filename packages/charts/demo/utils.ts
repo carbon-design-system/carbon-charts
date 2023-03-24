@@ -84,39 +84,45 @@ const generateColorPalettePickerHTML = (
 					<option class="cds--select-option" value="" disabled selected hidden>
 					Choose an option
 					</option>
-					${colorPairingOptions ? Object.keys(colorPairingOptions)
-						.map((colorGroup) => {
-							const optionsCount: number = colorPairingOptions ? colorPairingOptions[colorGroup] : 0
-							let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
+					${
+						colorPairingOptions
+							? Object.keys(colorPairingOptions)
+									.map((colorGroup) => {
+										const optionsCount: number = colorPairingOptions
+											? colorPairingOptions[colorGroup]
+											: 0
+										let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
 
-							const numberOfVariants = parseInt(colorGroup)
+										const numberOfVariants = parseInt(colorGroup)
 
-							if (numberOfVariants !== 14) {
-								for (let i = 1; i <= optionsCount; i++) {
-									optionsHTML += `
+										if (numberOfVariants !== 14) {
+											for (let i = 1; i <= optionsCount; i++) {
+												optionsHTML += `
 								<option class="cds--select-option" ${
 									onlyCategoricalPaletteIsApplicable || numberOfVariants < numberOfChartDataGroups
 										? 'disabled'
 										: ''
 								} value="${colorGroup}-option-${i}" ${
-										selectedColorPalette === `${numberOfVariants}-${i}` ? 'selected' : ''
-									}>
+													selectedColorPalette === `${numberOfVariants}-${i}` ? 'selected' : ''
+												}>
 									${numberOfVariants}-color groups, option ${i}
 								</option>`
-								}
-							} else {
-								optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
-									selectedColorPalette === `14-1` || onlyCategoricalPaletteIsApplicable
-										? 'selected'
-										: ''
-								}>
+											}
+										} else {
+											optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
+												selectedColorPalette === `14-1` || onlyCategoricalPaletteIsApplicable
+													? 'selected'
+													: ''
+											}>
 								Categorical palette
 							</option>`
-							}
+										}
 
-							return optionsHTML
-						})
-						.join(''): ''}
+										return optionsHTML
+									})
+									.join('')
+							: ''
+					}
 				</select>
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 				</div>
@@ -151,7 +157,11 @@ export const addControls = (
 	addRadioButtonEventListeners(container, chart, configs)
 }
 
-export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: any, configs: any) => {
+export const addRadioButtonEventListeners = (
+	container: HTMLDivElement,
+	chart: any,
+	configs: any
+) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
 
@@ -192,7 +202,7 @@ export const addOtherVersions = (
 						name: 'vanilla',
 						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'react'
 			? [
@@ -200,7 +210,7 @@ export const addOtherVersions = (
 						name: 'React',
 						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'angular'
 			? [
@@ -208,7 +218,7 @@ export const addOtherVersions = (
 						name: 'Angular',
 						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'vue'
 			? [
@@ -216,7 +226,7 @@ export const addOtherVersions = (
 						name: 'Vue',
 						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'svelte'
 			? [
@@ -224,7 +234,7 @@ export const addOtherVersions = (
 						name: 'Svelte',
 						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: [])
 	]
 

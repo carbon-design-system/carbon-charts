@@ -38,8 +38,7 @@ const Edge = ({
 			onMouseOver={onMouseOver}
 			onMouseOut={onMouseOut}
 			onMouseLeave={onMouseLeave}
-			onMouseMove={onMouseMove}
-		>
+			onMouseMove={onMouseMove}>
 			<path d={d} className={`${namespace}__container`} />
 			<path d={d} className={`${namespace}__outer`} />
 			<path

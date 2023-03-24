@@ -12,8 +12,10 @@ storiesOf('Diagrams/Edges/Marker', module)
 			imports: [MarkerModule, EdgeModule]
 		})
 	)
-	.add('Arrow left', () => ({
-		template: getTemplate(`
+	.add(
+		'Arrow left',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-arrow-left [id]="markerStart"></svg:marker>
@@ -23,19 +25,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Arrow Right', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Arrow Right',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
@@ -45,19 +50,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerEnd: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerEnd: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Circle', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Circle',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-circle [id]="markerStart"></svg:marker>
@@ -67,19 +75,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Diamond', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Diamond',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-diamond [id]="markerStart"></svg:marker>
@@ -89,19 +100,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Square', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Square',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-square [id]="markerStart"></svg:marker>
@@ -111,19 +125,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Tee', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Tee',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-tee [id]="markerStart"></svg:marker>
@@ -133,19 +150,22 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
-	.add('Color', () => ({
-		template: getTemplate(`
+	)
+	.add(
+		'Color',
+		() => ({
+			template: getTemplate(`
 		<svg height="400" width="400">
 			<svg:defs>
 				<svg:marker ibm-graph-marker-tee [id]="markerStart" [color]="color" ></svg:marker>
@@ -155,15 +175,16 @@ storiesOf('Diagrams/Edges/Marker', module)
 			</svg:g>
 		</svg>
 	`),
-		props: {
-			source: linkSource,
-			target: linkTarget,
-			markerStart: 'marker',
-			color: '#FB4B53'
+			props: {
+				source: linkSource,
+				target: linkTarget,
+				markerStart: 'marker',
+				color: '#FB4B53'
+			}
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	})
+	)

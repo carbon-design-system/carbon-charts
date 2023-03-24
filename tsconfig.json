@@ -3,9 +3,8 @@
   "display": "Monorepo",
   "compilerOptions": {
     "composite": true,
+    "outDir": "./dist",
     "baseUrl": ".",
-    // Only valid of baseUrl is redefined in each package's tsconfig.json as "."
-    // compilerOptions.paths do not get translated like include and exclude
     "paths": {
       "@/*": [
         "./src/*"
@@ -22,16 +21,21 @@
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "target": "ES2021",
+    "module": "ESNext",
     "lib": [
       "ESNext",
       "DOM",
       "DOM.Iterable"
-    ],
-    "target": "ESNext",
-    "module": "ESNext"
+    ]
   },
   "exclude": [
-    "node_modules",
-    "packages/*/node_modules"
+    ".yarn",
+    "pages",
+    "**/.angular",
+    "**/.sveltekit",
+    "**/node_modules",
+    "**/demo/bundle",
+    "**/dist"
   ]
 }

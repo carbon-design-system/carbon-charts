@@ -1,4 +1,9 @@
-import { MeterChart as MeterChartCore, type MeterChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	MeterChart as MeterChartCore,
+	type MeterChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

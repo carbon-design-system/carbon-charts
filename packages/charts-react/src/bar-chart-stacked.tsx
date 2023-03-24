@@ -1,4 +1,9 @@
-import { StackedBarChart as StackedBarChartCore, type StackedBarChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	StackedBarChart as StackedBarChartCore,
+	type StackedBarChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

@@ -1,4 +1,9 @@
-import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	CirclePackChart as CirclePackChartCore,
+	type CirclePackChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

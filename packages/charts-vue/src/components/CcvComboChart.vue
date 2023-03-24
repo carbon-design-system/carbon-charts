@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvComboChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new ComboChart(this.$el, {
+		this.coreChart = new ComboChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as ComboChartOptions
 		})

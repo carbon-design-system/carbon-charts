@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvLollipopChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new LollipopChart(this.$el, {
+		this.coreChart = new LollipopChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as LollipopChartOptions
 		})

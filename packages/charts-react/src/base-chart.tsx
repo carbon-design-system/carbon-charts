@@ -3,9 +3,7 @@ import type { Chart, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
 type Props<Options> = { options?: Options; data?: ChartTabularData }
 
-export default class BaseChart<Options = BaseChartOptions> extends React.Component<
-	Props<Options>
-> {
+export default class BaseChart<Options = BaseChartOptions> extends React.Component<Props<Options>> {
 	data: ChartTabularData | []
 	options: Options | {}
 	declare props: Props<Options>

@@ -1,4 +1,9 @@
-import { TreeChart as TreeChartCore, type TreeChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	TreeChart as TreeChartCore,
+	type TreeChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

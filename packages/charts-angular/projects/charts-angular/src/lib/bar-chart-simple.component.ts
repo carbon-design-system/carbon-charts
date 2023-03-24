@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { SimpleBarChart, type ChartTabularData, type BarChartOptions  } from '@carbon/charts'
+import { SimpleBarChart, type ChartTabularData, type BarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `SimpleBarChart` in carbon charts library

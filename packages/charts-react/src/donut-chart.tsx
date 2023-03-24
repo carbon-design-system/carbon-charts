@@ -1,4 +1,9 @@
-import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	DonutChart as DonutChartCore,
+	type DonutChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

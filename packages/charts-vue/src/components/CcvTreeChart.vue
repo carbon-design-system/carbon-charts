@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvTreeChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new TreeChart(this.$el, {
+		this.coreChart = new TreeChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as TreeChartOptions
 		})

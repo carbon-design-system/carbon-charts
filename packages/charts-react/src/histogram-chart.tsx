@@ -1,4 +1,9 @@
-import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type ChartConfig, type ChartTabularData} from '@carbon/charts'
+import {
+	HistogramChart as HistogramChartCore,
+	type HistogramChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

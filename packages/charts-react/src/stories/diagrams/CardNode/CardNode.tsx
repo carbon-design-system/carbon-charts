@@ -49,8 +49,7 @@ const CardNode = ({
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			style={{ borderColor: color, position }}
-			tabIndex={0}
-		>
+			tabIndex={0}>
 			{children}
 		</Component>
 	)

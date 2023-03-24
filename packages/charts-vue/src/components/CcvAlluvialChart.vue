@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvAlluvialChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new AlluvialChart(this.$el, {
+		this.coreChart = new AlluvialChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as AlluvialChartOptions
 		})

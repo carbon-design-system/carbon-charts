@@ -1,11 +1,15 @@
-dist
-**/demo/bundle
-**/demo/dist
-node_modules
-.DS_Store
+# Global
+**/node_modules/
+**/*.log
+
+# Root-level of monorepo
+pages/
 .vscode/
-.idea/
-*.log
-.cache/
-pages
-.yarn
+.yarn/
+
+# Package-level
+**/.angular/
+**/.DS_Store
+**/.svelte-kit/
+**/dist/
+**/demo/bundle/

@@ -1,5 +1,10 @@
 import React from 'react'
-import { TreemapChart as TreemapChartCore, type TreemapChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	TreemapChart as TreemapChartCore,
+	type TreemapChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

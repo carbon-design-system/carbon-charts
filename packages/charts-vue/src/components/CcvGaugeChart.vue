@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvGaugeChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new GaugeChart(this.$el, {
+		this.coreChart = new GaugeChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as GaugeChartOptions
 		})

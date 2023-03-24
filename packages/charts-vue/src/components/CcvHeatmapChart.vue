@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvHeatmapChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new HeatmapChart(this.$el, {
+		this.coreChart = new HeatmapChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as HeatmapChartOptions
 		})

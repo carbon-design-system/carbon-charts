@@ -13,19 +13,16 @@ interface Coordinates {
 		<svg:g [ngClass]="[namespace, variant ? namespace + '--' + variant : '']">
 			<svg:path
 				[ngClass]="namespace + '__container'"
-				[attr.d]="path ? path : straight(source, target)"
-			/>
+				[attr.d]="path ? path : straight(source, target)" />
 			<svg:path
 				[ngClass]="namespace + '__outer'"
-				[attr.d]="path ? path : straight(source, target)"
-			/>
+				[attr.d]="path ? path : straight(source, target)" />
 			<svg:path
 				[ngClass]="namespace + '__inner'"
 				[attr.d]="path ? path : straight(source, target)"
 				[ngStyle]="{ stroke: color }"
 				[attr.marker-start]="markerStart ? 'url(#' + markerStart + ')' : ''"
-				[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''"
-			/>
+				[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''" />
 		</svg:g>
 	`
 })

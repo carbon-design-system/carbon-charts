@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvMeterChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new MeterChart(this.$el, {
+		this.coreChart = new MeterChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as MeterChartOptions
 		})

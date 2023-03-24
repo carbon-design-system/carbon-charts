@@ -1,4 +1,9 @@
-import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	HeatmapChart as HeatmapChartCore,
+	type HeatmapChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

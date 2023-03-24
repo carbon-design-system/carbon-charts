@@ -35,8 +35,7 @@ const Marker = ({
 			id={id}
 			refX={refX || xPos}
 			refY={refY || yPos}
-			markerUnits="userSpaceOnUse"
-		>
+			markerUnits="userSpaceOnUse">
 			<path d={d} style={{ fill: color }} />
 		</marker>
 	)

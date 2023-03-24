@@ -1,4 +1,9 @@
-import { WordCloudChart as WordCloudChartCore, type WorldCloudChartOptions, type ChartConfig, type ChartTabularData } from '@carbon/charts'
+import {
+	WordCloudChart as WordCloudChartCore,
+	type WorldCloudChartOptions,
+	type ChartConfig,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './base-chart'
 import { hasChartBeenInitialized } from './utils'
 

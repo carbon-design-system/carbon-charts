@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvScatterChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new ScatterChart(this.$el, {
+		this.coreChart = new ScatterChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as ScatterChartOptions
 		})

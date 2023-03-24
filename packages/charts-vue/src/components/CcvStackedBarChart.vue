@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvStackedBarChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new StackedBarChart(this.$el, {
+		this.coreChart = new StackedBarChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as StackedBarChartOptions
 		})

@@ -7,7 +7,7 @@ export default defineComponent({
 	name: 'CcvCirclePackChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new CirclePackChart(this.$el, {
+		this.coreChart = new CirclePackChart(this.$el as HTMLDivElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as CirclePackChartOptions
 		})
