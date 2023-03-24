@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Chart as BaseChart, BaseChartOptions, ChartTabularData } from '@carbon/charts'
+	import type { BaseChartOptions, ChartTabularData } from '@carbon/charts'
 	import { ChartTheme } from '@carbon/charts'
 	/**
 	 * Provide a Carbon chart class to instantiate
@@ -9,7 +9,7 @@
 	/**
 	 * Obtain a reference to the instantiated chart
 	 */
-	export let chart: BaseChart | null = null
+	export let chart: any = null
 
 	/**
 	 * Set the chart data using the tabular data format

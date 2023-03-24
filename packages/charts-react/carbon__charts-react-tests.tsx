@@ -1,16 +1,16 @@
 import * as React from 'react'
-import { interfaces } from '@carbon/charts'
+import { type MeterChartOptions, Statuses, ScaleTypes } from '@carbon/charts'
 import { LineChart, MeterChart } from './src'
 
-const meterOptions: interfaces.MeterChartOptions = {
+const meterOptions: MeterChartOptions = {
 	title: 'Meter Chart - with statuses',
 	meter: {
 		peak: 80,
 		status: {
 			ranges: [
-				{ range: [0, 50], status: interfaces.Statuses.SUCCESS },
-				{ range: [50, 60], status: interfaces.Statuses.WARNING },
-				{ range: [60, 100], status: interfaces.Statuses.DANGER }
+				{ range: [0, 50], status: Statuses.SUCCESS },
+				{ range: [50, 60], status: Statuses.WARNING },
+				{ range: [60, 100], status: Statuses.DANGER }
 			]
 		}
 	},
@@ -36,7 +36,7 @@ class App extends React.Component {
 
 	render() {
 		if (this.ref != null) {
-			console.log(this.ref.current.data)
+			console.log(this.ref.current?.data)
 		}
 
 		return (
@@ -50,12 +50,12 @@ class App extends React.Component {
 							bottom: {
 								title: '2019 Annual Sales Figures',
 								mapsTo: 'key',
-								scaleType: interfaces.ScaleTypes.LABELS
+								scaleType: ScaleTypes.LABELS
 							},
 							left: {
 								mapsTo: 'value',
 								title: 'Conversion rate',
-								scaleType: interfaces.ScaleTypes.LABELS
+								scaleType: ScaleTypes.LABELS
 							}
 						},
 						color: {

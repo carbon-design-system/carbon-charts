@@ -37,11 +37,11 @@
     "ci-check": "yarn format:diff"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0 || ^15.0.0 || ^16.0.0",
-    "@angular/core": "^14.2.0 || ^15.0.0 || ^16.0.0",
-    "@angular/forms": "^14.2.0 || ^15.0.0 || ^16.0.0",
-    "@angular/platform-browser": "^14.2.0 || ^15.0.0 || ^16.0.0",
-    "@angular/platform-browser-dynamic": "^14.2.0 || ^15.0.0 || ^16.0.0",
+    "@angular/common": "^14.3.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^14.3.0 || ^15.0.0 || ^16.0.0",
+    "@angular/forms": "^14.3.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser": "^14.3.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser-dynamic": "^14.3.0 || ^15.0.0 || ^16.0.0",
     "d3": "^7.0.0",
     "rxjs": "^7.5.0",
     "zone.js": "~0.11.4 || ~0.12.0 || ~0.13.0"
