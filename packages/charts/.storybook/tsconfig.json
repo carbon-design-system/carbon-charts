@@ -1,9 +1,11 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
+		"outDir": "../demo/bundle",
 		"types": ["node", "vite/client"],
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
+		"declaration": false,
 		"noImplicitAny": false,
 		"strict": false,
 		"skipLibCheck": true

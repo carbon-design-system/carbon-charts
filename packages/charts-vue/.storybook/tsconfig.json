@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "noImplicitAny": false,
     "strict": false,
+    "declaration": false,
     "skipLibCheck": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../demo/bundle/**.*",],
