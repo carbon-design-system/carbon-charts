@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ScatterChart } from '../types'
 	import type { ScatterChart as ScatterChartCore } from '@carbon/charts'
-	import { scatterDiscreteData as data, scatterDiscreteOptions } from '@carbon/charts/demo/data'
+	import { scatterDiscreteData as data, scatterDiscreteOptions } from '@carbon/charts/demo'
 
 	let chart: ScatterChartCore | null = null
 	let ref: HTMLDivElement | null = null

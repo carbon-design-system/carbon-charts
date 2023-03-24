@@ -4,7 +4,7 @@
 	import {
 		histogramContinueData as data,
 		histogramContinueWithBinsOptions
-	} from '@carbon/charts/demo/data';
+	} from '@carbon/charts/demo';
 
 	let chart: HistogramChartCore | null = null;
 	let ref: HTMLDivElement | null = null

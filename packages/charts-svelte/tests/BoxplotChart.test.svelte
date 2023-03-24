@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { BoxplotChart } from '../types'
 	import type { BoxplotChart as BoxplotChartCore } from '@carbon/charts'
-	import { simpleBoxplotData as data, simpleBoxplotOptions } from '@carbon/charts/demo/data'
+	import { simpleBoxplotData as data, simpleBoxplotOptions } from '@carbon/charts/demo'
 
 	let chart: BoxplotChartCore | null = null
 	let ref: HTMLDivElement | null = null

@@ -4,7 +4,7 @@
 	import {
 		lollipopDiscreteData as data,
 		lollipopDiscreteOptions
-	} from '@carbon/charts/demo/data/lollipop'
+	} from '@carbon/charts/demo'
 
 	let chart: LollipopChartCore | null = null
 	let ref: HTMLDivElement | null = null

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { LineChart } from '../types'
 	import type { LineChart as LineChartCore } from '@carbon/charts'
-	import { lineLongLabelData as data, lineOptions } from '@carbon/charts/demo/data'
+	import { lineLongLabelData as data, lineOptions } from '@carbon/charts/demo'
 
 	let chart: LineChartCore | null = null
 	let ref: HTMLDivElement | null = null

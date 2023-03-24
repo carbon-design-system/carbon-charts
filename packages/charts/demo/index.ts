@@ -5,7 +5,7 @@ export {
 	generateHighScaleDemoDataForm
 } from './utils'
 
-export { storybookDemoGroups } from './data'
+export * from './data'
 
 export {
 	createChartSandbox,

@@ -4,7 +4,7 @@
 	import {
 		bubbleDoubleLinearData as data,
 		bubbleDoubleLinearOptions
-	} from '@carbon/charts/demo/data'
+	} from '@carbon/charts/demo'
 
 	let chart: BubbleChartCore | null = null
 	let ref: HTMLDivElement | null = null

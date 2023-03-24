@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AlluvialChart } from '../types'
-	import { alluvialSimpleData as data, alluvialSimpleOptions } from '@carbon/charts/demo/data'
+	import { alluvialSimpleData as data, alluvialSimpleOptions } from '@carbon/charts/demo'
 
 	let chart: any | null = null
 	let ref: HTMLDivElement | null = null

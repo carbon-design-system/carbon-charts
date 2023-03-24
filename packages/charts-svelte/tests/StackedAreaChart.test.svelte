@@ -1,7 +1,7 @@
 <script lang="ts">
   import { StackedAreaChart } from "../types";
   import type { StackedAreaChart as StackedAreaChartCore } from "@carbon/charts";
-  import { stackedAreaTimeSeriesData as data, stackedAreaTimeSeriesOptions } from "@carbon/charts/demo/data";
+  import { stackedAreaTimeSeriesData as data, stackedAreaTimeSeriesOptions } from "@carbon/charts/demo";
 
   let chart: StackedAreaChartCore | null = null;
 	let ref: HTMLDivElement | null = null

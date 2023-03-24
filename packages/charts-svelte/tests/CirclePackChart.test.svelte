@@ -4,7 +4,7 @@
 	import {
 		circlePackThreeLevelData as data,
 		circlePackSingleOptions
-	} from '@carbon/charts/demo/data'
+	} from '@carbon/charts/demo'
 
 	let chart: CirclePackChartCore | null = null
 	let ref: HTMLDivElement | null = null

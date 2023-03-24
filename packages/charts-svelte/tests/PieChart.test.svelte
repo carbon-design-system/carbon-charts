@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PieChart } from '../types'
 	import type { PieChart as PieChartCore } from '@carbon/charts'
-	import { pieCenteredData as data, pieCenteredOptions } from '@carbon/charts/demo/data'
+	import { pieCenteredData as data, pieCenteredOptions } from '@carbon/charts/demo'
 
 	let chart: PieChartCore | null = null
 	let ref: HTMLDivElement | null = null

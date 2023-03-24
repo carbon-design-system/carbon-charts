@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TreemapChart } from '../types'
 	import type { TreemapChart as TreemapChartCore } from '@carbon/charts'
-	import { treemapData as data, treemapOptions } from '@carbon/charts/demo/data'
+	import { treemapData as data, treemapOptions } from '@carbon/charts/demo'
 
 	let chart: TreemapChartCore | null = null
 	let ref: HTMLDivElement | null = null

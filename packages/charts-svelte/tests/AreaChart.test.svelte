@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AreaChart } from '../types'
 	import type { AreaChart as AreaChartCore } from '@carbon/charts'
-	import { areaTimeSeriesData as data, areaTimeSeriesOptions } from '@carbon/charts/demo/data'
+	import { areaTimeSeriesData as data, areaTimeSeriesOptions } from '@carbon/charts/demo'
 
 	let chart: AreaChartCore | null = null
 	let ref: HTMLDivElement | null = null

@@ -2715,7 +2715,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-- **packages/core/src/line-chart.ts:** Fix tooltips bug
+- **packages/charts/src/line-chart.ts:** Fix tooltips bug
   [#89](https://github.com/carbon-design-system/carbon-charts/issues/89): Fix imports and
   addDataPointEventListene
   ([5a63f94](https://github.com/carbon-design-system/carbon-charts/commit/5a63f94))

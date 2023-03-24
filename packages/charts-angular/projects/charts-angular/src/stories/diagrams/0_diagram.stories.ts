@@ -43,7 +43,7 @@ stories.add(
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 			A simple composed diagram, using statically defined x and y
 			coordinates.
-			<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/stories/diagrams/0_diagram.stories.ts">
+			<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-angular/stories/diagrams/0_diagram.stories.ts">
 				View source
 			</a>
 			</p>
@@ -55,7 +55,7 @@ stories.add(
 			<p style='max-width: 600px; font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0'>
 				A composed diagram, rendered using arrays of statically defined
 				x and y coordinates.
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/angular/stories/diagrams/0_diagram.stories.ts">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-angular/stories/diagrams/0_diagram.stories.ts">
 					View source
 				</a>
 			</p>

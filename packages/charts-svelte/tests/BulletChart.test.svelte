@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { BulletChart } from '../types'
 	import type { BulletChart as BulletChartCore } from '@carbon/charts'
-	import { basicBulletData as data, basicBulletOptions } from '@carbon/charts/demo/data'
+	import { basicBulletData as data, basicBulletOptions } from '@carbon/charts/demo'
 
 	let chart: BulletChartCore | null = null
 	let ref: HTMLDivElement | null = null

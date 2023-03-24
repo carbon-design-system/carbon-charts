@@ -59,7 +59,7 @@ stories.add('Start here', () => {
 
 			<p {...paragraphStyle}>
 				A simple composed diagram, using statically defined x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>
@@ -70,7 +70,7 @@ stories.add('Start here', () => {
 
 			<p {...paragraphStyle}>
 				A composed diagram, rendered using arrays of statically defined x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
+				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
 					View source
 				</a>
 			</p>

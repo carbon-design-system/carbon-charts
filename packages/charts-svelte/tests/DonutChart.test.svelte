@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { DonutChart } from '../types'
 	import type { DonutChart as DonutChartCore } from '@carbon/charts'
-	import { donutData as data, donutOptions } from '@carbon/charts/demo/data'
+	import { donutData as data, donutOptions } from '@carbon/charts/demo'
 
 	let chart: DonutChartCore | null = null
 	let ref: HTMLDivElement | null = null

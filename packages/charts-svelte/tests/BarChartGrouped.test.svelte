@@ -1,7 +1,7 @@
 <script lang="ts">
   import { BarChartGrouped } from "../types";
   import type { GroupedBarChart as GroupedBarChartCore } from "@carbon/charts";
-  import { groupedBarData as data, groupedBarOptions } from "@carbon/charts/demo/data";
+  import { groupedBarData as data, groupedBarOptions } from "@carbon/charts/demo";
 
   let chart: GroupedBarChartCore | null = null;
 	let ref: HTMLDivElement | null = null

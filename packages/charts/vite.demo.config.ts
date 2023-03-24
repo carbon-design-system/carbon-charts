@@ -1,6 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
-// import dts from 'vite-plugin-dts'
 
 export default defineConfig({
 	build: {
@@ -46,10 +45,5 @@ export default defineConfig({
 			}
 		}
 	},
-	plugins: [
-		/*dts({
-		insertTypesEntry: true,
-		tsConfigFilePath: 'demo/tsconfig.json'
-	})*/
-	]
+	plugins: []
 })

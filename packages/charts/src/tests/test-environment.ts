@@ -3,11 +3,11 @@ import { Chart } from '../chart'
 import * as Charts from '../index'
 import { createChartHolder } from './tools'
 
-import { ChartData } from '../interfaces'
+import { ChartTabularData } from '../interfaces'
 
 import { groupedBarData, groupedBarOptions } from '../../demo/data'
 
-export const data = groupedBarData as ChartData
+export const data = groupedBarData as ChartTabularData
 export const options = Object.assign(groupedBarOptions, {
 	title: 'My chart',
 	data: {

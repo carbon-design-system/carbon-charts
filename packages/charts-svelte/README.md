@@ -8,7 +8,7 @@
 
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/svelte)**
 
-**[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
+**[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/demo/data)**
 
 ## Maintenance & support
 
@@ -294,7 +294,7 @@ For instructions on using the **tabular data format**, see
 
 There are also additional options available depending on the chart type being
 used,
-[see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data).
+[see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/demo/data).
 
 Customizable options (specific to chart type) can be found
 [here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)
