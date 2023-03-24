@@ -1,8 +1,7 @@
 import type { Preview } from '@storybook/angular'
 import { setCompodocJson } from '@storybook/addon-docs/angular'
 import docJson from '../../../documentation.json'
-// import '@carbon/charts/demo/styles.css'
-import '../../../../charts/dist/demo/styles.css' // <-- temporary solution
+import '@carbon/charts/demo/styles.css'
 
 setCompodocJson(docJson)
 

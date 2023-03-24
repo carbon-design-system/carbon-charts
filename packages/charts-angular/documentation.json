@@ -7047,7 +7047,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: resolve(__dirname, `${core}/dist/demo`) // temporary fix\n\t\t})\n\t\treturn config\n\t}\n}"
+                "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: [demoDist],\n\t\t})\n\n\t\tconfig.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n    };\n\n\t\treturn config\n\t}\n}"
             },
             {
                 "name": "context",
@@ -7068,6 +7068,16 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'../../../../charts'"
+            },
+            {
+                "name": "demoDist",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/.storybook/main.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "resolve(__dirname, `${core}/dist/demo`)"
             },
             {
                 "name": "edgeData",
@@ -7386,7 +7396,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: resolve(__dirname, `${core}/dist/demo`) // temporary fix\n\t\t})\n\t\treturn config\n\t}\n}"
+                    "defaultValue": "{\n\tstories: [\n\t\t'../src/**/*.mdx',\n\t\t'../src/**/*.stories.@(js|jsx|ts|tsx)',\n\t\t`${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n\t\t`${core}/stories/getting-started/angular.stories.mdx`\n\t],\n\taddons: [\n\t\t{\n\t\t\tname: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n\t\t\t\tbackgrounds: false,\n\t\t\t\tcontrols: true,\n\t\t\t\tdocs: true,\n\t\t\t\tviewport: false,\n\t\t\t\ttoolbars: true,\n\t\t\t\tmeasure: false,\n\t\t\t\toutline: false\n\t\t\t}\n\t\t}\n\t],\n\tframework: {\n\t\tname: '@storybook/angular',\n\t\toptions: {}\n\t},\n\tdocs: {\n\t\tautodocs: 'tag'\n\t},\n\tstaticDirs: ['assets'],\n\tfeatures: {\n\t\tstoryStoreV7: false\n\t},\n\twebpackFinal: async (config, { configType }) => {\n\t\tconfig?.module?.rules?.push({\n\t\t\ttest: /\\.css$/,\n\t\t\tuse: ['style-loader', 'css-loader'],\n\t\t\tinclude: [demoDist],\n\t\t})\n\n\t\tconfig.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n    };\n\n\t\treturn config\n\t}\n}"
                 },
                 {
                     "name": "core",
@@ -7397,6 +7407,16 @@
                     "deprecationMessage": "",
                     "type": "string",
                     "defaultValue": "'../../../../charts'"
+                },
+                {
+                    "name": "demoDist",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/.storybook/main.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "resolve(__dirname, `${core}/dist/demo`)"
                 }
             ],
             "projects/charts-angular/src/test.ts": [
@@ -7570,6 +7590,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "core",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/.storybook/main.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "demoDist",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

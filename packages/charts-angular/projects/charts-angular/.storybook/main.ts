@@ -2,6 +2,8 @@ import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 
 const core = '../../../../charts'
+const demoDist = resolve(__dirname, `${core}/dist/demo`)
+
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
@@ -39,8 +41,14 @@ const config: StorybookConfig = {
 		config?.module?.rules?.push({
 			test: /\.css$/,
 			use: ['style-loader', 'css-loader'],
-			include: resolve(__dirname, `${core}/dist/demo`) // temporary fix
+			include: [demoDist],
 		})
+
+		config.resolve!.alias = {
+      ...config.resolve!.alias,
+      '@carbon/charts/demo': demoDist,
+    };
+
 		return config
 	}
 }
