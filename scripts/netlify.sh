@@ -1,7 +1,7 @@
 set -e
 
 if [ $CONTEXT == "deploy-preview" ]; then
-	echo "We're in a PR preview"
+	echo "Deploying preview to Netlify for PR..."
 
 	# Grab netlify app type from the netlify app URL
 	APP_TYPE=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
@@ -31,5 +31,5 @@ if [ $CONTEXT == "deploy-preview" ]; then
   # Copy demo bundle from package (even core) to pages
 	cp -a "packages/$PKG_DIR/demo/bundle/." pages
 else
-	echo "We're not in a PR preview, do nothing!"
+	echo "Not a PR (do nothing)"
 fi
