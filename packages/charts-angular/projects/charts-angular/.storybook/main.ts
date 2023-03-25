@@ -46,8 +46,8 @@ const config: StorybookConfig = {
 
 		config.resolve!.alias = {
       ...config.resolve!.alias,
-      '@carbon/charts/demo': demoDist,
-    };
+      '@carbon/charts/demo': demoDist
+    }
 
 		return config
 	}
