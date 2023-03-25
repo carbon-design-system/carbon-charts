@@ -1,3 +1,4 @@
 [context.deploy-preview]
   command = "./scripts/netlify.sh"
   publish = "pages"
+  memory = "2048"
