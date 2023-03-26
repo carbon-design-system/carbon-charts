@@ -1,11 +1,6 @@
-[build]
-  NODE_OPTIONS = "--max-old-space-size=8192"
-  memory = "8192"
-
 [context.deploy-preview]
   command = "./scripts/netlify.sh"
   publish = "pages"
   NODE_ENV = "production"
-  NODE_OPTIONS = "--max-old-space-size=8192"
-  memory = "8192"
+  NODE_OPTIONS = "--max-old-space-size=9216"
   

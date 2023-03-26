@@ -23,6 +23,11 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 	staticDirs: ['assets'],
+	async viteFinal(config, _) {
+		config.build!.sourcemap = false
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+		return config
+	},
 	features: {
 		storyStoreV7: false
 	}

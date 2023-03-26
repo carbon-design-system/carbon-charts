@@ -7073,21 +7073,21 @@
                 "name": "getTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/utils.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
-            },
-            {
-                "name": "getTemplate",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/card-node.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "(content: string) => `\n\t<div class=\"container theme--white\" style=\"max-width: 400px;\">\n\t\t${content}\n\t</div>\n`"
+            },
+            {
+                "name": "getTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
             },
             {
                 "name": "introSection",
@@ -7360,18 +7360,6 @@
                     "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t(args: Args) => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">vanilla</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/utils.ts": [
-                {
-                    "name": "getTemplate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/utils.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
-                }
-            ],
             "projects/charts-angular/src/stories/diagrams/card-node.stories.ts": [
                 {
                     "name": "getTemplate",
@@ -7382,6 +7370,18 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "(content: string) => `\n\t<div class=\"container theme--white\" style=\"max-width: 400px;\">\n\t\t${content}\n\t</div>\n`"
+                }
+            ],
+            "projects/charts-angular/src/stories/diagrams/utils.ts": [
+                {
+                    "name": "getTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
             "projects/charts-angular/src/stories/diagrams/edge.stories.ts": [
