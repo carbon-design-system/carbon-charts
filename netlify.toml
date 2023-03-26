@@ -5,7 +5,7 @@
 [context.deploy-preview]
   command = "./scripts/netlify.sh"
   publish = "pages"
-  NODE_ENV = "deploypreview"
+  NODE_ENV = "production"
   NODE_OPTIONS = "--max-old-space-size=8192"
   memory = "8192"
   

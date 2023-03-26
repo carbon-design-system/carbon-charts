@@ -27,6 +27,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	  PKG_DIR="charts"
 	fi
 
+  # Storybook build is too memory-intensive to run via lerna so do it old-school...
   echo -e "${GREEN}Running storybook build for @carbon/$PKG_DIR..."
 	cd "packages/$PKG_DIR"
 	yarn build:demo
