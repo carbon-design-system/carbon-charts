@@ -7047,7 +7047,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n      options: {\n        actions: false,\n        backgrounds: false,\n        controls: true,\n        docs: true,\n        viewport: false,\n        toolbars: true,\n        measure: false,\n      outline: false\n    }\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
+                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
             },
             {
                 "name": "context",
@@ -7227,7 +7227,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t}\n\t}\n}"
+                "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t}\n\t}\n}"
             },
             {
                 "name": "ProgrammaticStatic",
@@ -7396,7 +7396,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n      options: {\n        actions: false,\n        backgrounds: false,\n        controls: true,\n        docs: true,\n        viewport: false,\n        toolbars: true,\n        measure: false,\n      outline: false\n    }\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
+                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
                 },
                 {
                     "name": "core",
@@ -7549,7 +7549,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t}\n\t}\n}"
+                    "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t}\n\t}\n}"
                 }
             ],
             "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts": [

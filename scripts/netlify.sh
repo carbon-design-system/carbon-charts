@@ -14,12 +14,12 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	# vue -> charts-vue
 
   # Build core package, demo and data
-	NODE_ENV=deploypreview lerna run build --scope=@carbon/charts
+	NODE_ENV=deploypreview lerna run build --scope=@carbon/charts --concurrency=1
 
 	# Build package and demo if not core
 	if [ "$APP_TYPE" != "core" ]; then
 	  PKG_DIR="charts-$APP_TYPE"
-		NODE_ENV=deploypreview lerna run build --scope="@carbon/$PKG_DIR"
+		NODE_ENV=deploypreview lerna run build --scope="@carbon/$PKG_DIR" --concurrency=1
   else
 	  # Map package directory for core since name is different
 	  PKG_DIR="charts"
