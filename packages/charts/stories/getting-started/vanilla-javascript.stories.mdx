@@ -40,19 +40,19 @@ To start using the `StackedBarChart` component, try the example below:
 
 ###### index.js
 ```js
-import "@carbon/styles/css/styles.css"; // may affect global styles
+import '@carbon/styles/css/styles.css' // may affect global styles
 
-import "@carbon/charts/styles.css";
-import { StackedBarChart } from "@carbon/charts";
+import '@carbon/charts/styles.css'
+import { StackedBarChart } from '@carbon/charts'
 
 // grab chart holder DOM element
-const chartHolder = document.getElementById("my-bar-chart");
+const chartHolder = document.getElementById('my-bar-chart')
 
 // initialize the chart
 new StackedBarChart(chartHolder, {
   data: stackedBarData,
   options: stackedBarOptions,
-});
+})
 ```
 
 <br/>
@@ -72,21 +72,21 @@ new StackedBarChart(chartHolder, {
     <script src="https://unpkg.com/@carbon/charts/bundle.js"></script>
     <script>
       // grab chart holder DOM element
-      const chartHolder = document.getElementById("my-bar-chart");
+      const chartHolder = document.getElementById('my-bar-chart')
 
       const stackedBarData = [
-		// refer to tabular data format tutorial
-	  ];
+		    // refer to tabular data format tutorial
+	    ]
 
       const stackedBarOptions = {
-		// refer to chart specific options
-      };
+		    // refer to chart specific options
+      }
 
       // initialize the chart
       new Charts.StackedBarChart(chartHolder, {
         data: stackedBarData,
         options: stackedBarOptions,
-      });
+      })
     </script>
   </body>
 </html>

@@ -35,12 +35,12 @@ To start using the `StackedBarChart` component, try the example below:
 <br/>
 ###### app.module.ts
 ```ts
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
 
-import { ChartsModule } from "@carbon/charts-angular";
+import { ChartsModule } from '@carbon/charts-angular'
 
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component'
 
 @NgModule({
   imports: [BrowserModule, ChartsModule],
@@ -62,24 +62,24 @@ export class AppModule {}
 
 ###### app.component.ts
 ```ts
-import { Component } from "@angular/core";
+import { Component } from '@angular/core'
 
-import "@carbon/styles/css/styles.css";  // may affect global styles
-import "@carbon/charts/styles.css";
+import '@carbon/styles/css/styles.css'  // may affect global styles
+import '@carbon/charts/styles.css'
 
 @Component({
-  selector: "my-app",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   stackedBarData = [
 	// refer to tabular data format tutorial
-  ];
+  ]
 
   stackedBarOptions = {
 	// refer to chart specific options
-  };
+  }
 }
 ```
 
