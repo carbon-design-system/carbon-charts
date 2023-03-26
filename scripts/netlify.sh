@@ -13,18 +13,20 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	# svelte -> charts-svelte
 	# vue -> charts-vue
 
-  # Build core package, demo and data
-	NODE_ENV=deploypreview lerna run build --scope=@carbon/charts --concurrency=1
+  # Build core package and demo dependencies (styles, data)
+	NODE_ENV=deploypreview lerna run build:package --scope=@carbon/charts --concurrency=1
 
-	# Build package and demo if not core
+	# Build package if not core and map APP_TYPE to PKG_DIR
 	if [ "$APP_TYPE" != "core" ]; then
 	  PKG_DIR="charts-$APP_TYPE"
-		NODE_ENV=deploypreview lerna run build --scope="@carbon/$PKG_DIR" --concurrency=1
+		NODE_ENV=deploypreview lerna run build:package --scope="@carbon/$PKG_DIR" --concurrency=1
   else
 	  # Map package directory for core since name is different
 	  PKG_DIR="charts"
 	fi
 
+  # Build demo
+	NODE_ENV=deploypreview lerna run build:demo --scope="@carbon/$PKG_DIR" --concurrency=1
 
 	# Create folder we'll deploy to netlify
 	mkdir -p pages
