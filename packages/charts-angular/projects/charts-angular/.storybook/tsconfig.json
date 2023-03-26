@@ -5,7 +5,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "noImplicitAny": false,
-    "declaration": false,
     "strict": false,
     "skipLibCheck": true
   },

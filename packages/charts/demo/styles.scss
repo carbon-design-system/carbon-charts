@@ -3,7 +3,7 @@
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type' as *;
 $font-prefix: '@ibm/plex';
-// @import "@ibm/plex/scss/ibm-plex";
+@import "@ibm/plex/scss/ibm-plex";
 @import '../src/styles/styles.scss';
 
 html {

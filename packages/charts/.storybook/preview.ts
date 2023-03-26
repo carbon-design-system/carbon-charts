@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/html'
+import { themes } from '@storybook/theming'
+
 import '../demo/styles.scss' // lots of warnings about ~@ibm/plex
 
 const preview: Preview = {
@@ -9,6 +11,9 @@ const preview: Preview = {
 				color: /(background|color)$/i,
 				date: /Date$/
 			}
+		},
+		docs: {
+			theme: themes.dark
 		}
 	}
 }

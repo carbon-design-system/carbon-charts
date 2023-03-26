@@ -13,16 +13,9 @@ const config: StorybookConfig = {
   addons: [
     {
       name: '@storybook/addon-essentials',
-      options: {
-        actions: false,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        viewport: false,
-        toolbars: true,
-        measure: false,
-      outline: false
-    }
+			options: {
+				actions: false
+			}
     },
     '@storybook/addon-mdx-gfm'
   ],

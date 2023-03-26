@@ -2,7 +2,7 @@
 	"name": "@carbon/charts-monorepo",
 	"private": true,
 	"scripts": {
-		"clean": "lerna clean && lerna run clean && rimraf node_modules",
+		"clean": "lerna clean && lerna run clean && rm -rf node_modules yarn.lock .yarn",
 		"commit": "git-cz",
 		"format": "lerna run format",
 		"test": "lerna run test",
@@ -34,10 +34,9 @@
 		"commitizen": "^4.3.0",
 		"cz-conventional-changelog": "^3.3.0",
 		"husky": "^8.0.3",
-		"lerna": "~6.6.1",
+		"lerna": "~6.5.1",
 		"prettier": "^2.8.7",
 		"prettier-config-carbon": "~0.9.0",
-		"rimraf": "^4.4.1",
 		"typescript": "^5.0.2"
 	},
 	"resolutions": {

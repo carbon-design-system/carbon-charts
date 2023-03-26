@@ -29,7 +29,7 @@
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"format:diff": "prettier --list-different src/",
-		"clean": "rimraf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:^1.6.14",
@@ -48,9 +48,11 @@
 		"@storybook/addon-interactions": "^7.0.0-0",
 		"@storybook/addon-links": "^7.0.0-0",
 		"@storybook/blocks": "^7.0.0-0",
+		"@storybook/manager-api": "^7.0.0-0",
 		"@storybook/react": "^7.0.0-0",
 		"@storybook/react-vite": "^7.0.0-0",
 		"@storybook/testing-library": "^0.0.14-next.1",
+		"@storybook/theming": "^7.0.0-0",
 		"@types/carbon__icons-react": "^11.16.0",
 		"@types/react": "^18.0.29",
 		"@types/react-dom": "^18.0.11",
@@ -67,11 +69,11 @@
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"rimraf": "^4.4.1",
 		"sass": "^1.60.0",
 		"storybook": "^7.0.0-0",
 		"typescript": "~4.9.5",
-		"vite": "^4.2.1"
+		"vite": "^4.2.1",
+		"vite-plugin-dts": "^2.1.0"
 	},
 	"prettier": "../../prettier.config.mjs",
 	"publishConfig": {

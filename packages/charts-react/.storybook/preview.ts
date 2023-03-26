@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react'
+import { themes } from '@storybook/theming'
 import '@carbon/charts/demo/styles.css'
 
 const preview: Preview = {
@@ -9,6 +10,9 @@ const preview: Preview = {
 				color: /(background|color)$/i,
 				date: /Date$/
 			}
+		},
+		docs: {
+			theme: themes.dark
 		}
 	}
 }
