@@ -4,10 +4,7 @@ import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 import packageJSON from '../package.json'
 const libraryVersion = packageJSON.version
 
-const carbonStylesImport = `import "@carbon/styles/css/styles.css";`
-
-const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
-`
+const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
 const D3VERSION = '^7.8.2'
 
@@ -49,21 +46,21 @@ export const createVanillaChartApp = (demo: any) => {
 	</body>
 </html>`
 
-	const indexJs = `${carbonStylesImport}
+	const indexJs = `
+import { ${chartComponent} } from '@carbon/charts'
+import '@carbon/styles/css/styles.css'
+import '@carbon/charts/styles.css'
+import './ibm-plex-font.css'
 
-import "@carbon/charts/styles.css";
-import { ${chartComponent} } from "@carbon/charts";
-
-const data = ${chartData};
-
-const options = ${chartOptions};
+const data = ${chartData}
+const options = ${chartOptions}
 
 // Grab chart holder HTML element and initialize the chart
-const chartHolder = document.getElementById("app");
+const chartHolder = document.getElementById("app")
 new ${chartComponent}(chartHolder, {
 	data,
 	options
-});
+})
 `
 
 	const packageJson = {
@@ -73,6 +70,7 @@ new ${chartComponent}(chartHolder, {
 		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
+			'@carbon/styles': '^1.25.0',
 			d3: D3VERSION
 		},
 		devDependencies: {
@@ -83,7 +81,8 @@ new ${chartComponent}(chartHolder, {
 	return {
 		'index.html': indexHtml,
 		'src/index.js': indexJs,
-		'package.json': packageJson
+		'package.json': packageJson,
+		'src/ibm-plex-font.css': plexCSS,
 	}
 }
 
@@ -92,40 +91,39 @@ export const createReactChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, '\t')
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `<div id="root"></div>
-  `
+	const indexHtml = `<div id="root"></div>`
 
-	const indexJs = `import React from "react";
-import ReactDOM from "react-dom";
+	const indexJs = `
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { ${chartComponent} } from '@carbon/charts-react'
 
-${carbonStylesImport}
-
-import "@carbon/charts/styles.css";
-import { ${chartComponent} } from "@carbon/charts-react";
+import '@carbon/styles/css/styles.css'
+import '@carbon/charts/styles.css'
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./ibm-plex-font.css";
+import './ibm-plex-font.css'
 
 class App extends React.Component {
 	state = {
 		data: ${chartData},
 		options: ${chartOptions}
-	};
+	}
 
 	render = () => (
 		<${chartComponent}
 			data={this.state.data}
 			options={this.state.options}>
 		</${chartComponent}>
-	);
+	)
 }
-ReactDOM.render(<App />, document.getElementById("root"));
-  `
+ReactDOM.render(<App />, document.getElementById("root"))`
+
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': libraryVersion,
 			'@carbon/charts-react': libraryVersion,
+			'@carbon/styles': '^1.25.0',
 			d3: D3VERSION,
 			react: '^18.2.0',
 			'react-dom': '^18.2.0',
@@ -147,15 +145,15 @@ export const createAngularChartApp = (demo: any) => {
 	const chartComponent = demo.chartType.angular
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`
-	const appComponentTs = `import { Component } from "@angular/core";
+	const appComponentTs = `
+import { Component } from '@angular/core'
 
-${carbonStylesImport}
-
-import "@carbon/charts/styles.css";
+import '@carbon/styles/css/styles.css'
+import '@carbon/charts/styles.css'
 
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
-import "./ibm-plex-font.css";
+import './ibm-plex-font.css'
 
 @Component({
 	selector: "app-root",
@@ -166,31 +164,35 @@ export class AppComponent {
 	options = ${chartOptions};
 }`
 
-	const appModule = `import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { ChartsModule } from "@carbon/charts-angular";
-import { AppComponent } from "./app.component";
+	const appModule = `
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { ChartsModule } from '@carbon/charts-angular'
+import { AppComponent } from './app.component'
+
 @NgModule({
 	imports: [BrowserModule, ChartsModule],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
 })
+
 export class AppModule {}`
 
 	const packageJson = JSON.stringify({
 		dependencies: {
-			'@angular/common': '^14.3.0',
-			'@angular/compiler': '^14.3.0',
-			'@angular/core': '^14.3.0',
-			'@angular/forms': '^14.3.0',
-			'@angular/platform-browser': '^14.3.0',
-			'@angular/platform-browser-dynamic': '^14.3.0',
-			'@carbon/charts': libraryVersion,
+			'@angular/animations': '^15.2.4',
+			'@angular/common': '^15.2.4',
+			'@angular/compiler': '^15.2.4',
+			'@angular/core': '^15.2.4',
+			'@angular/forms': '^15.2.4',
+			'@angular/platform-browser': '^15.2.4',
+			'@angular/platform-browser-dynamic': '^15.2.4',
 			'@carbon/charts-angular': libraryVersion,
+			'@carbon/styles': '^1.25.0',
 			d3: D3VERSION,
-			rxjs: '~7.5.0',
-			tslib: '^2.3.0',
-			'zone.js': '~0.11.4'
+			rxjs: '~7.8.0',
+			tslib: '^2.5.0',
+			'zone.js': '~0.13.0'
 		}
 	})
 
@@ -208,23 +210,23 @@ export const createVueChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, '\t\t')
 	const chartComponent = demo.chartType.vue
 
-	const chartVue = `<script>
-import Vue from 'vue'
-import chartsVue from '@carbon/charts-vue'
+	const chartVue = `
+<script>
+	import Vue from 'vue'
+	import chartsVue from '@carbon/charts-vue'
 
-export default {
-	name: "Chart",
-	components: {},
-	data() {
-		return {
-			data: ${chartData},
-			options: ${chartOptions}
-		};
-	},
-	template: "<${chartComponent} :data='data' :options='options'></${chartComponent}>"
-}
-</script>
-  `
+	export default {
+		name: 'Chart',
+		components: {},
+		data() {
+			return {
+				data: ${chartData},
+				options: ${chartOptions}
+			}
+		},
+		template: "<${chartComponent} :data='data' :options='options'></${chartComponent}>"
+	}
+</script>`
 
 	const appVue = `
 <script setup>
@@ -247,11 +249,11 @@ export default {
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
 import './ibm-plex-font.css'
 
-createApp(App).mount('#app')
-`
+createApp(App).mount('#app')`
 
 	const packageJson = JSON.stringify({
 		name: 'carbon-charts-vue-example',
@@ -265,6 +267,7 @@ createApp(App).mount('#app')
 		},
 		dependencies: {
 			'@carbon/charts-vue': libraryVersion,
+			'@carbon/styles': '^1.25.0',
 			d3: D3VERSION,
 			vue: '^3.2.47'
 		},
@@ -288,8 +291,7 @@ export default defineConfig({
 			'@': fileURLToPath(new URL('./src', import.meta.url))
 		}
 	}
-})
-	`
+})`
 
 	const htmlTemplate = `
 <!DOCTYPE html>
@@ -336,37 +338,38 @@ export const createSvelteChartApp = (demo: any) => {
 	}
 
 	const indexHtml = `
-		<!DOCTYPE html>
-		<html lang="en">
-			<head>
-				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-				<link
-					rel="preconnect"
-					crossorigin="anonymous"
-					href="https://fonts.gstatic.com"
-				/>
-				<link
-					href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
-					rel="stylesheet"
-					crossorigin="anonymous"
-				/>
-			</head>
-			<body>
-				<script type="module">
-					import App from "./App.svelte";
+		<link
+			rel="preconnect"
+			crossorigin="anonymous"
+			href="https://fonts.gstatic.com"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
+			rel="stylesheet"
+			crossorigin="anonymous"
+		/>
+	</head>
+	<body>
+		<script type="module">
+			import App from "./App.svelte";
 
-					const app = new App({ target: document.body });
-				</script>
-			</body>
-		</html>`
+			const app = new App({ target: document.body });
+		</script>
+	</body>
+</html>`
 
 	const App = `
 <script>
-	import { ${chartComponent} } from "@carbon/charts-svelte";
-	${carbonStylesImport}
-	import "@carbon/charts/styles.css";
+	import { ${chartComponent} } from "@carbon/charts-svelte"
+	import '@carbon/styles/css/styles.css'
+	import '@carbon/charts/styles.css'
+	import './ibm-plex-font.css'
 </script>
 
 <${chartComponent} data={${chartData}} options={${chartOptions}} />`
@@ -383,6 +386,7 @@ export const createSvelteChartApp = (demo: any) => {
 		},
 		devDependencies: {
 			'@carbon/charts-svelte': libraryVersion,
+			'@carbon/styles': '^1.25.0',
 			'@sveltejs/adapter-auto': '^2.0.0',
 			'@sveltejs/kit': '^1.13.0',
 			d3: D3VERSION,
@@ -440,6 +444,7 @@ export default config`
 		'App.svelte': App,
 		'index.html': indexHtml,
 		'package.json': packageJson,
+		'ibm-plex-font.css': plexCSS,
 		'vite.config.ts': viteConfig,
 		'svelte.config.js': svelteKitConfig,
 		'tsconfig.json': tsConfig

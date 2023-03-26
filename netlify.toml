@@ -1,9 +1,13 @@
 [build]
   NODE_OPTIONS = "--max-old-space-size=8192"
+  memory = "8192"
+  yarn_version = "3.5.0"
 
 [context.deploy-preview]
+  yarn_version = "3.5.0"
   command = "./scripts/netlify.sh"
   publish = "pages"
   NODE_ENV = "deploypreview"
   NODE_OPTIONS = "--max-old-space-size=8192"
+  memory = "8192"
   
