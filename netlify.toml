@@ -2,5 +2,4 @@
   command = "./scripts/netlify.sh"
   publish = "pages"
   NODE_ENV = "production"
-  NODE_OPTIONS = "--max-old-space-size=9216"
   
