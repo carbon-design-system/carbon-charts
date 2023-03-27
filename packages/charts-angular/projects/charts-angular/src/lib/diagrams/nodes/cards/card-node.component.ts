@@ -1,9 +1,8 @@
-import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'
-
-import { carbonPrefix } from '../configs'
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
+import { carbonPrefix } from '../../config'
 
 @Component({
-	selector: 'ibm-diagram-shape-node',
+	selector: 'ibm-diagram-card-node',
 	template: `
 		<ng-container [ngSwitch]="component">
 			<xhtml:div
@@ -11,12 +10,10 @@ import { carbonPrefix } from '../configs'
 				[ngClass]="[
 					namespace,
 					stacked ? namespace + '--stacked' : '',
-					shape ? namespace + '--' + shape : '',
 					namespace + '--' + component
 				]"
 				[ngStyle]="{
-					'height.px': size,
-					'width.px': size,
+					'border-color': color,
 					position: position
 				}"
 				(mouseenter)="mouseEnter.emit($event)"
@@ -33,12 +30,10 @@ import { carbonPrefix } from '../configs'
 				[ngClass]="[
 					namespace,
 					stacked ? namespace + '--stacked' : '',
-					shape ? namespace + '--' + shape : '',
 					namespace + '--' + component
 				]"
 				[ngStyle]="{
-					'height.px': size,
-					'width.px': size,
+					'border-color': color,
 					position: position
 				}"
 				(click)="click.emit($event)"
@@ -56,15 +51,10 @@ import { carbonPrefix } from '../configs'
 				[ngClass]="[
 					namespace,
 					stacked ? namespace + '--stacked' : '',
-					shape ? namespace + '--' + shape : '',
 					namespace + '--' + component
 				]"
 				[attr.href]="href"
-				[ngStyle]="{
-					'height.px': size,
-					'width.px': size,
-					position: position
-				}"
+				[ngStyle]="{ 'border-color': color, position: position }"
 				(mouseenter)="mouseEnter.emit($event)"
 				(mouseover)="mouseOver.emit($event)"
 				(mouseout)="mouseOut.emit($event)"
@@ -74,31 +64,17 @@ import { carbonPrefix } from '../configs'
 				<ng-container *ngTemplateOutlet="nodeTemplate"></ng-container>
 			</xhtml:a>
 		</ng-container>
-
 		<ng-template #nodeTemplate>
-			<div *ngIf="renderIcon" attr.class="{{ namespace + '__icon' }}">
-				<ng-container *ngTemplateOutlet="renderIcon"></ng-container>
-			</div>
-			<div attr.class="{{ namespace + '__body' }}" [ngStyle]="{ position: bodyPosition }">
-				<div attr.class="{{ namespace + '__title' }}">{{ title }}</div>
-				<div attr.class="{{ namespace + '__subtitle' }}">
-					{{ subtitle }}
-				</div>
-			</div>
+			<ng-content></ng-content>
 		</ng-template>
 	`
 })
-export class ShapeNodeComponent implements OnInit {
+export class CardNodeComponent implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
-	@Input() renderIcon?: TemplateRef<any>
-	@Input() size = 48
+	@Input() color = ''
 	@Input() stacked = false
-	@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'
-	@Input() subtitle = ''
-	@Input() title = ''
-	@Input() position: string = 'fixed'
-	@Input() bodyPosition: string = 'absolute'
+	@Input() position: string = 'static'
 
 	@Output() click: EventEmitter<any> = new EventEmitter<any>()
 	@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()
@@ -107,7 +83,8 @@ export class ShapeNodeComponent implements OnInit {
 	@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()
 	@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()
 
-	namespace = `${carbonPrefix}--cc--shape-node`
+	namespace = `${carbonPrefix}--cc--card-node`
+
 	component = 'div'
 
 	ngOnInit() {

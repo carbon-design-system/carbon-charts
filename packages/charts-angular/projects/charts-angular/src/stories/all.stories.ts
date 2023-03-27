@@ -1,8 +1,6 @@
 import { storiesOf, type Args } from '@storybook/angular'
 import type { Demo } from './Demo'
-
 import { ChartsModule } from '../public-api'
-
 import { storybookDemoGroups } from '@carbon/charts/demo'
 
 const introSection = storiesOf('Docs', module).add(
@@ -18,7 +16,7 @@ const introSection = storiesOf('Docs', module).add(
 					<h4 class="welcome__heading welcome__heading--subtitle">(Angular)</h4>
 					<h5 class="welcome__heading welcome__heading--other">Other versions</h5>
 					<ul>
-						<li><a href="https://charts.carbondesignsystem.com" class="welcome__heading welcome__heading--other">vanilla</a></li>
+						<li><a href="https://charts.carbondesignsystem.com" class="welcome__heading welcome__heading--other">Vanilla JavaScript</a></li>
 						<li><a href="https://charts.carbondesignsystem.com/react" class="welcome__heading welcome__heading--other">React</a></li>
 						<li><a href="https://charts.carbondesignsystem.com/vue" class="welcome__heading welcome__heading--other">Vue</a></li>
 						<li><a href="https://charts.carbondesignsystem.com/svelte" class="welcome__heading welcome__heading--other">Svelte</a></li>

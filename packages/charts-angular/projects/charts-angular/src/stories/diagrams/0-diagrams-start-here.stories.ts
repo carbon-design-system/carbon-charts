@@ -1,11 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { UserModule, WikisModule } from '@carbon/icons-angular'
 import { Component as CarbonComponent } from '@carbon/charts'
-import { ShapeNodeModule } from './shape-node/shape-node.module'
-import { CardNodeModule } from './card-node/card-node.module'
-import { EdgeModule } from './edge/edge.module'
-import { MarkerModule } from './marker/marker.module'
-
+import { UserModule, WikisModule } from '@carbon/icons-angular'
+import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../public-api'
 import { getTemplate } from './utils'
 
 const nodeHeight = 64

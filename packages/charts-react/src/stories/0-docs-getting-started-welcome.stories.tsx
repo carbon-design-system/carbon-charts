@@ -22,7 +22,7 @@ introStories.add(
 							<a
 								href="https://charts.carbondesignsystem.com"
 								className="welcome__heading welcome__heading--other">
-								vanilla
+								Vanilla JavaScript
 							</a>
 						</li>
 						<li>

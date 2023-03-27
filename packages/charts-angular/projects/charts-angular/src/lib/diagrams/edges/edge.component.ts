@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { Component as CarbonComponent } from '@carbon/charts'
 
-import { carbonPrefix } from '../configs'
+import { carbonPrefix } from '../config'
 
 interface Coordinates {
 	x: number

@@ -1,27 +1,49 @@
-export { AlluvialChartComponent } from './alluvial-chart.component'
-export { AreaChartComponent } from './area-chart.component'
-export { BaseChart } from './base-chart.component'
-export { BoxplotChartComponent } from './boxplot-chart.component'
-export { BubbleChartComponent } from './bubble-chart.component'
-export { BulletChartComponent } from './bullet-chart.component'
-export { CirclePackChartComponent } from './circle-pack-chart.component'
-export { ComboChartComponent } from './combo-chart.component'
-export { DonutChartComponent } from './donut-chart.component'
-export { GaugeChartComponent } from './gauge-chart.component'
-export { GroupedBarChartComponent } from './bar-chart-grouped.component'
-export { HeatmapChartComponent } from './heatmap-chart.component'
-export { HistogramChartComponent } from './histogram-chart.component'
-export { LineChartComponent } from './line-chart.component'
-export { LollipopChartComponent } from './lollipop-chart.component'
-export { MeterChartComponent } from './meter-chart.component'
-export { PieChartComponent } from './pie-chart.component'
-export { RadarChartComponent } from './radar-chart.component'
-export { ScatterChartComponent } from './scatter-chart.component'
-export { SimpleBarChartComponent } from './bar-chart-simple.component'
-export { StackedAreaChartComponent } from './area-chart-stacked.component'
-export { StackedBarChartComponent } from './bar-chart-stacked.component'
-export { TreeChartComponent } from './tree-chart.component'
-export { TreemapChartComponent } from './treemap-chart.component'
-export { WordCloudChartComponent } from './wordcloud-chart.component'
+export {
+  AlluvialChartComponent,
+  AreaChartComponent,
+  BaseChart,
+  BoxplotChartComponent,
+  BubbleChartComponent,
+  BulletChartComponent,
+  ChartsModule,
+  CirclePackChartComponent,
+  ComboChartComponent,
+  DonutChartComponent,
+  GaugeChartComponent,
+  GroupedBarChartComponent,
+  HeatmapChartComponent,
+  HistogramChartComponent,
+  LineChartComponent,
+  LollipopChartComponent,
+  MeterChartComponent,
+  PieChartComponent,
+  RadarChartComponent,
+  ScatterChartComponent,
+  SimpleBarChartComponent,
+  StackedAreaChartComponent,
+  StackedBarChartComponent,
+  TreeChartComponent,
+  TreemapChartComponent,
+  WordCloudChartComponent
+} from './charts'
 
-export { ChartsModule } from './charts.module'
+export {
+  CardNodeColumnComponent,
+  CardNodeComponent,
+  CardNodeLabelComponent,
+  CardNodeSubtitleComponent,
+  CardNodeTitleComponent,
+  CardNodeModule,
+  EdgeComponent,
+  EdgeModule,
+  MarkerArrowLeftComponent,
+  MarkerArrowRightComponent,
+  MarkerComponent,
+  MarkerDiamondComponent,
+  MarkerModule,
+  MarkerShapeNodeComponent,
+  MarkerSquareComponent,
+  MarkerTeeComponent,
+  ShapeNodeComponent,
+  ShapeNodeModule
+} from './diagrams';

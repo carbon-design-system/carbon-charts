@@ -19,7 +19,7 @@ const config: StorybookConfig = {
 	},
 	staticDirs: ['assets'],
 	async viteFinal(config, _) {
-		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+		// config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
 		return config
 	},
 	features: {

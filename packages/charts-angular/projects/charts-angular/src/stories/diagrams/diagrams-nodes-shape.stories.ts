@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { ShapeNodeModule } from './shape-node/shape-node.module'
 import { ScreenModule } from '@carbon/icons-angular'
+import { ShapeNodeModule } from '../../public-api'
 import { getTemplate } from './utils'
 
 storiesOf('Diagrams/Nodes/Shape', module)

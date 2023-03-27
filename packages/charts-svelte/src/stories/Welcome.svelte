@@ -15,7 +15,7 @@
 				<li>
 					<a
 						href="https://charts.carbondesignsystem.com"
-						class="welcome__heading welcome__heading--other">vanilla</a
+						class="welcome__heading welcome__heading--other">Vanilla JavaScript</a
 					>
 				</li>
 				<li>

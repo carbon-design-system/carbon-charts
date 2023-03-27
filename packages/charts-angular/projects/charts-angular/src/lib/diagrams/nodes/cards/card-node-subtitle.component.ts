@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { carbonPrefix } from '../configs'
+import { carbonPrefix } from '../../config'
 
 @Component({
 	selector: 'ibm-diagram-card-node-subtitle',

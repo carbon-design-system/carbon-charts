@@ -15,7 +15,7 @@ storiesOf('Intro', module).add(
 						<h4 class="welcome__heading welcome__heading--subtitle">(Vue)</h4>
 						<h5 class="welcome__heading welcome__heading--other">Other versions</h5>
 						<ul>
-							<li><a href="https://charts.carbondesignsystem.com" class="welcome__heading welcome__heading--other">vanilla</a></li>
+							<li><a href="https://charts.carbondesignsystem.com" class="welcome__heading welcome__heading--other">Vanilla JavaScript</a></li>
 							<li><a href="https://charts.carbondesignsystem.com/react" class="welcome__heading welcome__heading--other">React</a></li>
 							<li><a href="https://charts.carbondesignsystem.com/angular" class="welcome__heading welcome__heading--other">Angular</a></li>
 							<li><a href="https://charts.carbondesignsystem.com/svelte" class="welcome__heading welcome__heading--other">Svelte</a></li>

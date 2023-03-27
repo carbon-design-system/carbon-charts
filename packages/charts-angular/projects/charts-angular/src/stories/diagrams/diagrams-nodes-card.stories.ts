@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { CardNodeModule } from './card-node/card-node.module'
+import { CardNodeModule } from '../../public-api'
 import { ScreenModule, ChevronDownModule } from '@carbon/icons-angular'
 
 const getTemplate = (content: string) => `

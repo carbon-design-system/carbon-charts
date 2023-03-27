@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "Coordinates",
-            "id": "interface-Coordinates-a657ca03a51c374cee298c77885b50b5d73f6b2e4b8b3c531c4225b2dc49b7781b5cf6074bf98e0d617fc8e3dd888b2d8f1e52eb4d1dcaf09e03075c3a770eef",
-            "file": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
+            "id": "interface-Coordinates-d03c6d9201f80e8a447dcccafcdf1497ed86cd3b1ec9d1304d4c965911d659a06257969b135cdb216cb4a05377cef3a72a233aa8dc0cc17fe0a8bd60f7de2395",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/edge.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../config'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
             "properties": [
                 {
                     "name": "x",
@@ -43,7 +43,7 @@
         {
             "name": "AlluvialChartComponent",
             "id": "component-AlluvialChartComponent-2ab6a89704ebab84ad4abd3d720c46e1fbe2b1621e2ec9f896ca2f1eb1af30d8a70aad44dfec9bce9f85df129dfdde1908b4f472c2a5b4c4c5c1ae2a43ec372c",
-            "file": "projects/charts-angular/src/lib/alluvial-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/alluvial-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -226,7 +226,7 @@
         {
             "name": "AreaChartComponent",
             "id": "component-AreaChartComponent-9f2f555df117a50adc2242990acc0992cdb731574acffbe51356526eb45d98e44d6d7fb5757f6fde2478ea909e05a8e2562796769fd97ba943eb8227aecfbaec",
-            "file": "projects/charts-angular/src/lib/area-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/area-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -409,7 +409,7 @@
         {
             "name": "BaseChart",
             "id": "component-BaseChart-b8f59de7d2ef4f96c8e4f01c5ce057d04d03bfc74c18854989a8959fb8216f33c5a4ed241d1e5e5e1a35bb0a3440976aa0c5104cd85a09c3b9441ffb66a99a51",
-            "file": "projects/charts-angular/src/lib/base-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/base-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -663,7 +663,7 @@
         {
             "name": "BoxplotChartComponent",
             "id": "component-BoxplotChartComponent-53cedb273a76b88db2d1a618803b91c59e2588afe5c673e87ac931879cd757a1a28ed9eeda526932240bd6d2ee54583273c90f53b98ccde5d872a55a9a59c1c4",
-            "file": "projects/charts-angular/src/lib/boxplot-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/boxplot-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -846,7 +846,7 @@
         {
             "name": "BubbleChartComponent",
             "id": "component-BubbleChartComponent-909f6add769756b5c21a30e9169fee2d1f71da4a095eb721dc22fc7a1646cf2c8f331a2507536fd874300d1618853863bb873fc84b99c2b847d467d2505af8aa",
-            "file": "projects/charts-angular/src/lib/bubble-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/bubble-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1029,7 +1029,7 @@
         {
             "name": "BulletChartComponent",
             "id": "component-BulletChartComponent-6d228b6c663b4d334379a830d79250ff34ddfe537e3efdc1c86cf5eed378c59f3508a7709ff39cb65b54e560be5e0a8e7a3be9e9d00426919b912eb7fc9c4e1d",
-            "file": "projects/charts-angular/src/lib/bullet-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/bullet-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1211,8 +1211,8 @@
         },
         {
             "name": "CardNodeColumnComponent",
-            "id": "component-CardNodeColumnComponent-667cb685bdfd96b5fd8b94472a49e6b425e53c731788aed95367155623535b96d8ea304f14305c60b01a721b0828c55b06a131f8eb8f53e2b0e5f52aa63649ae",
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node-column.component.ts",
+            "id": "component-CardNodeColumnComponent-b7d9cf5b073a41296c7315710b49d99d96027b452cd705fa0da262995b5a133580a2fba272d87840c9441cf6c0c0fd9ef5bbb1d297048d552fa3ef9733f9c534",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-column.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1254,7 +1254,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-column',\n\ttemplate: `\n\t\t<xhtml:div>\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeColumnComponent {\n\t@Input() farsideColumn = false\n\n\t@HostBinding('class') get class() {\n\t\tconst farsideClassName = this.farsideColumn\n\t\t\t? `${carbonPrefix}--cc--card-node__column--farside`\n\t\t\t: ''\n\n\t\treturn `${carbonPrefix}--cc--card-node__column ${farsideClassName}`\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core'\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-column',\n\ttemplate: `\n\t\t<xhtml:div>\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeColumnComponent {\n\t@Input() farsideColumn = false\n\n\t@HostBinding('class') get class() {\n\t\tconst farsideClassName = this.farsideColumn\n\t\t\t? `${carbonPrefix}--cc--card-node__column--farside`\n\t\t\t: ''\n\n\t\treturn `${carbonPrefix}--cc--card-node__column ${farsideClassName}`\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1272,8 +1272,8 @@
         },
         {
             "name": "CardNodeComponent",
-            "id": "component-CardNodeComponent-906bd3cf8a93c3ededc8c53cc03b90314d1ae4d6a72cfc8b86b912f50a12b6a1a31a69c910c88ef8d4ac1718817e9783f57404a708aa9d3c02d44a898671aef1",
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node.component.ts",
+            "id": "component-CardNodeComponent-c01126d81a18d1d6466abc95c53edb31d9bf06ae855ea54c27abf9286ded40d5e84c48140515c748cd993259a106b9a272d4819775129a782cfc0d0ec896acd4",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1423,7 +1423,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\t\t<ng-template #nodeTemplate>\n\t\t\t<ng-content></ng-content>\n\t\t</ng-template>\n\t`\n})\nexport class CardNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() color = ''\n\t@Input() stacked = false\n\t@Input() position: string = 'static'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--card-node`\n\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-card-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'border-color': color,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{ 'border-color': color, position: position }\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\t\t<ng-template #nodeTemplate>\n\t\t\t<ng-content></ng-content>\n\t\t</ng-template>\n\t`\n})\nexport class CardNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() color = ''\n\t@Input() stacked = false\n\t@Input() position: string = 'static'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--card-node`\n\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1433,8 +1433,8 @@
         },
         {
             "name": "CardNodeLabelComponent",
-            "id": "component-CardNodeLabelComponent-ee7ae842c1728b7fe6d2c16138053699eaefa5bf8dda1a9888d24494844cce52404175f015354cddbab4ab651f4a2ee1430ff6748864308050d32fb59236becb",
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node-label.component.ts",
+            "id": "component-CardNodeLabelComponent-38afb711b25a86914b210c292839dc1d83183c7dcb43b8d8294974f85eb3eda78df4a9edb542ed6189a4114d69c5c799482f859119f9319c588d287248f9d10c",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-label.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1468,15 +1468,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-label',\n\ttemplate: `\n\t\t<xhtml:label [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:label>\n\t`\n})\nexport class CardNodeLabelComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__label`\n}\n",
+            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-label',\n\ttemplate: `\n\t\t<xhtml:label [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:label>\n\t`\n})\nexport class CardNodeLabelComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__label`\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
         },
         {
             "name": "CardNodeSubtitleComponent",
-            "id": "component-CardNodeSubtitleComponent-f43a00b08fcbc1e051aa8cbd4b9a17cb4fc9db989acb0a2be741091b61ec01ed399f43c5ce1c376e643bbd67a908a8f88641deba77b9014e38f401c8db04c888",
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node-subtitle.component.ts",
+            "id": "component-CardNodeSubtitleComponent-cabc340721089bf3e5e0f44198620df4ce50461989f0d60f12fbb5654fa45984273dffc7ab1e5a9aa59946b71294a92ef14f529a234962775d6e93a5899b905a",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-subtitle.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1510,15 +1510,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-subtitle',\n\ttemplate: `\n\t\t<xhtml:div [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeSubtitleComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__subtitle`\n}\n",
+            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-subtitle',\n\ttemplate: `\n\t\t<xhtml:div [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeSubtitleComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__subtitle`\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
         },
         {
             "name": "CardNodeTitleComponent",
-            "id": "component-CardNodeTitleComponent-5f3d9cf26cdea998903a907730ca6c8d1143dc75e70851c8d47db8fe73619e25aae5a853e879744389e0b0735596d26c7c1f424f1d49025a84cedfe5ba26710a",
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node-title.component.ts",
+            "id": "component-CardNodeTitleComponent-d4dfe89010be387e3c46aec51cf5e7bfc6b3a56e30a42a28d04a9014423e5eec600907b6d6ee570b100b06b7ae7a15a261d921e7076b342f8f2b662c2cb7ebce",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-title.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1552,7 +1552,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-title',\n\ttemplate: `\n\t\t<xhtml:div [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeTitleComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__title`\n}\n",
+            "sourceCode": "import { Component } from '@angular/core'\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-card-node-title',\n\ttemplate: `\n\t\t<xhtml:div [ngClass]=\"namespace\">\n\t\t\t<ng-content></ng-content>\n\t\t</xhtml:div>\n\t`\n})\nexport class CardNodeTitleComponent {\n\tnamespace = `${carbonPrefix}--cc--card-node__title`\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
@@ -1560,7 +1560,7 @@
         {
             "name": "CirclePackChartComponent",
             "id": "component-CirclePackChartComponent-cb01a6ef818e489cd1eb57a7006c8b9bd9aaae0103400abbd0b0ad293c5c8490a2ab5d11a69884e08b5187919407cb995fe23f51a79dab9702aa14aed9f6f2be",
-            "file": "projects/charts-angular/src/lib/circle-pack-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/circle-pack-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1743,7 +1743,7 @@
         {
             "name": "ComboChartComponent",
             "id": "component-ComboChartComponent-e90746ea2988f69ede59b86f3cba0b4693a23de53b83baac9a2c4af982a57e4424dbb6e5eb058281b0c187b2d1362c4e44a30562365a6892f0db394ddca1cd9d",
-            "file": "projects/charts-angular/src/lib/combo-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/combo-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1924,9 +1924,105 @@
             ]
         },
         {
+            "name": "DiagramExample1",
+            "id": "component-DiagramExample1-38cee627607d0f3ea5da8e4b791acac987af0a8af37e737821ed38bb1043bf7385a0ff3645442f8d142092a3446b7521b09a7588ced07c13b739049d3443207a",
+            "file": "projects/charts-angular/src/stories/diagrams/example1/diagram-example1.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "diagram-example1",
+            "styleUrls": [],
+            "styles": [
+                "@import '@carbon/charts/demo/styles.css';"
+            ],
+            "templateUrl": [
+                "./diagram-example1.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "circleSize",
+                    "defaultValue": "64",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "markerEnd",
+                    "defaultValue": "'marker'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "nodeHeight",
+                    "defaultValue": "64",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "nodeWidth",
+                    "defaultValue": "200",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "source",
+                    "defaultValue": "{ x: 0, y: 48 }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "target",
+                    "defaultValue": "{ x: 396, y: 48 }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core'\nimport { UserModule, WikisModule } from '@carbon/icons-angular'\nimport { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule  } from '../../../public-api'\n\n@Component({\n\tselector: 'diagram-example1',\n  standalone: true,\n\ttemplateUrl: './diagram-example1.component.html',\n  styles: [`@import '@carbon/charts/demo/styles.css';`],\n  imports: [ CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule, UserModule, WikisModule ]\n})\nexport class DiagramExample1 {\n  source = { x: 0, y: 48 }\n  target = { x: 396, y: 48 }\n  markerEnd = 'marker'\n  nodeHeight = 64\n  nodeWidth = 200\n  circleSize = 64\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "@import '@carbon/charts/demo/styles.css';\n",
+            "templateData": "<div class=\"demo-desktop-only\">\n  <div class=\"cp-message\">This is a desktop-only example</div>\n  <svg height=\"124\" width=\"600\" style=\"margin-top: 1em;\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n    <svg:defs>\n      <svg:marker ibm-graph-marker-arrow-right [id]=\"markerEnd\"></svg:marker>\n    </svg:defs>\n\n    <svg:g ibm-graph-edge [source]=\"source\" [target]=\"target\" variant=\"dash-sm\" [markerEnd]=\"markerEnd\"></svg:g>\n\n    <svg:foreignObject style=\"overflow: visible\" [attr.height]=\"nodeHeight\" [attr.width]=\"nodeWidth\"\n      [attr.transform]=\"'translate(0, 16)'\">\n      <xhtml:div>\n        <ibm-diagram-card-node as=\"button\">\n          <ibm-diagram-card-node-column>\n            <svg ibmIconUser size=\"20\"></svg>\n          </ibm-diagram-card-node-column>\n          <ibm-diagram-card-node-column>\n            <ibm-diagram-card-node-title>\n              Title\n            </ibm-diagram-card-node-title>\n            <ibm-diagram-card-node-subtitle>\n              Description\n            </ibm-diagram-card-node-subtitle>\n          </ibm-diagram-card-node-column>\n        </ibm-diagram-card-node>\n      </xhtml:div>\n    </svg:foreignObject>\n\n    <svg:foreignObject style=\"overflow: visible\" [attr.height]=\"nodeHeight\" [attr.width]=\"nodeWidth\"\n      [attr.transform]=\"'translate(400, 16)'\">\n      <xhtml:div>\n        <ibm-diagram-shape-node as=\"button\" title=\"Title\" [size]=\"circleSize\"\n          [renderIcon]=\"wikiTemplate\"></ibm-diagram-shape-node>\n      </xhtml:div>\n    </svg:foreignObject>\n  </svg>\n\n  <ng-template #wikiTemplate>\n    <svg ibmIconWikis size=\"20\"></svg>\n  </ng-template>\n</div>"
+        },
+        {
             "name": "DonutChartComponent",
             "id": "component-DonutChartComponent-18313752838353d65a9f0da5515e1468b718d9243680cbc50b5c9d189ea409b3011bb563bedf03c4b29efbd736f19487257dff57bcb1d025b67670ef1278f5b3",
-            "file": "projects/charts-angular/src/lib/donut-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/donut-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2108,8 +2204,8 @@
         },
         {
             "name": "EdgeComponent",
-            "id": "component-EdgeComponent-a657ca03a51c374cee298c77885b50b5d73f6b2e4b8b3c531c4225b2dc49b7781b5cf6074bf98e0d617fc8e3dd888b2d8f1e52eb4d1dcaf09e03075c3a770eef",
-            "file": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
+            "id": "component-EdgeComponent-d03c6d9201f80e8a447dcccafcdf1497ed86cd3b1ec9d1304d4c965911d659a06257969b135cdb216cb4a05377cef3a72a233aa8dc0cc17fe0a8bd60f7de2395",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/edge.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2226,7 +2322,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../configs'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\n\nimport { carbonPrefix } from '../config'\n\ninterface Coordinates {\n\tx: number\n\ty: number\n}\n@Component({\n\tselector: '[ibm-graph-edge]',\n\ttemplate: `\n\t\t<svg:g [ngClass]=\"[namespace, variant ? namespace + '--' + variant : '']\">\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__container'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__outer'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\" />\n\t\t\t<svg:path\n\t\t\t\t[ngClass]=\"namespace + '__inner'\"\n\t\t\t\t[attr.d]=\"path ? path : straight(source, target)\"\n\t\t\t\t[ngStyle]=\"{ stroke: color }\"\n\t\t\t\t[attr.marker-start]=\"markerStart ? 'url(#' + markerStart + ')' : ''\"\n\t\t\t\t[attr.marker-end]=\"markerEnd ? 'url(#' + markerEnd + ')' : ''\" />\n\t\t</svg:g>\n\t`\n})\nexport class EdgeComponent {\n\t@Input() color = ''\n\t@Input() markerEnd = ''\n\t@Input() markerStart = ''\n\t@Input() source: Coordinates = { x: 0, y: 0 }\n\t@Input() target: Coordinates = { x: 0, y: 0 }\n\t@Input() variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'\n\t@Input() path = ''\n\n\tpathClasses = ''\n\tnamespace = `${carbonPrefix}--cc--edge`\n\tstraight = CarbonComponent.buildStraightPathString\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
@@ -2234,7 +2330,7 @@
         {
             "name": "GaugeChartComponent",
             "id": "component-GaugeChartComponent-782c35564d172f73843d03b108bd7fddc1dac7fc4bf54f0f51a35cf8f6d231eff41cddb4ba1367776454846c9225a3ab394d8beb1d34b37372f7552c072a64e9",
-            "file": "projects/charts-angular/src/lib/gauge-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/gauge-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2417,7 +2513,7 @@
         {
             "name": "GroupedBarChartComponent",
             "id": "component-GroupedBarChartComponent-d0cee64ad60701ed935eb268f05bac1fa8b1b941ca7fee15aff49dbd550820ec3e858c83e00550b49ee40dd0fac187460c49d5d4b83b8a2c7305d348834e7c69",
-            "file": "projects/charts-angular/src/lib/bar-chart-grouped.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/bar-chart-grouped.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2600,7 +2696,7 @@
         {
             "name": "HeatmapChartComponent",
             "id": "component-HeatmapChartComponent-1a81dd56e29217bb897fc345b0cec9cc74de23b8f621cba760435f0a3ff153acb03a29f4e9542def6b2dcf66b0a974442a811dac09e58e5a1c2117ed26b86084",
-            "file": "projects/charts-angular/src/lib/heatmap-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/heatmap-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2783,7 +2879,7 @@
         {
             "name": "HistogramChartComponent",
             "id": "component-HistogramChartComponent-f4fc6a33d180a7b972bc92b34f1f3a1bccc91248c9f0417dc64af6e99ea0af22a133af03e5055ba49ad709b8510576ad3af3df01a3e015cf21132f900251e77d",
-            "file": "projects/charts-angular/src/lib/histogram-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/histogram-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2966,7 +3062,7 @@
         {
             "name": "LineChartComponent",
             "id": "component-LineChartComponent-ad7d5805a1e8caf6adcccb14be3823a1f349727024d1120561a854d8aed9c29a71673befb06399319281d778ec895f35adb8b3c64208155d7dfedf8006d0c5bf",
-            "file": "projects/charts-angular/src/lib/line-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/line-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -3149,7 +3245,7 @@
         {
             "name": "LollipopChartComponent",
             "id": "component-LollipopChartComponent-6a2a741587b8da11822f26160a60e39f370908d8dec269cfe6270a6ef04ae39e1143f08d77418be02c56c46f3dc7bdd9a7fd8d015cacc90357ffa660c278b07c",
-            "file": "projects/charts-angular/src/lib/lollipop-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/lollipop-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -3331,8 +3427,8 @@
         },
         {
             "name": "MarkerArrowLeftComponent",
-            "id": "component-MarkerArrowLeftComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerArrowLeftComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -3502,7 +3598,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3513,8 +3609,8 @@
         },
         {
             "name": "MarkerArrowRightComponent",
-            "id": "component-MarkerArrowRightComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerArrowRightComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -3684,7 +3780,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3695,8 +3791,8 @@
         },
         {
             "name": "MarkerComponent",
-            "id": "component-MarkerComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -3822,15 +3918,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
         },
         {
             "name": "MarkerDiamondComponent",
-            "id": "component-MarkerDiamondComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerDiamondComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4000,7 +4096,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4011,8 +4107,8 @@
         },
         {
             "name": "MarkerShapeNodeComponent",
-            "id": "component-MarkerShapeNodeComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerShapeNodeComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4182,7 +4278,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4193,8 +4289,8 @@
         },
         {
             "name": "MarkerSquareComponent",
-            "id": "component-MarkerSquareComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerSquareComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4364,7 +4460,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4375,8 +4471,8 @@
         },
         {
             "name": "MarkerTeeComponent",
-            "id": "component-MarkerTeeComponent-bcca5ac33d7cda13cc6dfeee0aafdd943eab452a1cee59f21485f79e35755aaaaf2f64aedf4cda1b4510635b8045b84529cb455d7352e731761d04592d04cb21",
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+            "id": "component-MarkerTeeComponent-4a2619781f6c5b34d418c44040a15128303884fc0d5275b5d56678b855f90387d9ee27b4e162deb9b69544dbca99ad30f356d9c2c2740db40d6be628ce7084a2",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4546,7 +4642,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../configs'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core'\nimport { Component as CarbonComponent } from '@carbon/charts'\nimport { carbonPrefix } from '../../config'\n\nconst template = `\n<svg:marker\n\t[ngClass]=\"namespace\"\n\t[attr.markerHeight]=\"height\"\n\t[attr.markerWidth]=\"width\"\n\t[attr.orient]=\"orient\"\n\t[attr.id]=\"id\"\n\t[attr.refX]=\"refX\"\n\t[attr.refY]=\"refY\"\n\tmarkerUnits=\"userSpaceOnUse\">\n\t<svg:path [attr.d]=\"d\" [ngStyle]=\"{'fill': color}\" ></svg:path>\n</svg:marker>\n`\n\n@Component({\n\tselector: '[ibm-graph-marker]',\n\ttemplate\n})\nexport class MarkerComponent {\n\t@Input() d = ''\n\t@Input() color = ''\n\t@Input() id = ''\n\t@Input() orient: string | number = 'auto'\n\t@Input() height: string | number = ''\n\t@Input() width: string | number = ''\n\t@Input() refX: string | number = ''\n\t@Input() refY: string | number = ''\n\t@Input() position: 'start' | 'end' = 'end'\n\n\tnamespace = `${carbonPrefix}--cc--marker`\n\n\tsetAttributes = ({\n\t\td,\n\t\tid,\n\t\theight,\n\t\twidth\n\t}: {\n\t\td: string\n\t\tid: string\n\t\theight: number\n\t\twidth: number\n\t}) => {\n\t\tconst xPos = this.position === 'end' ? width / 2 + 0.5 : 0.5\n\t\tconst yPos = height / 2\n\n\t\tthis.d = this.d || d\n\t\tthis.id = this.id || id\n\t\tthis.height = this.height || height\n\t\tthis.width = this.width || width\n\t\tthis.refX = this.refX || xPos\n\t\tthis.refY = this.refY || yPos\n\t}\n}\n\n@Component({ selector: '[ibm-graph-marker-arrow-left]', template })\nexport class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowLeft })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-arrow-right]', template })\nexport class MarkerArrowRightComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.arrowRight })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-circle]', template })\nexport class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.circle })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-diamond]', template })\nexport class MarkerDiamondComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.diamond })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-square]', template })\nexport class MarkerSquareComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.square })\n\t}\n}\n@Component({ selector: '[ibm-graph-marker-tee]', template })\nexport class MarkerTeeComponent extends MarkerComponent implements OnInit {\n\tngOnInit() {\n\t\tthis.setAttributes({ ...CarbonComponent.tee })\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4558,7 +4654,7 @@
         {
             "name": "MeterChartComponent",
             "id": "component-MeterChartComponent-9f6ff47ba83c7e864ef479046b00fbfc0e8df1bfdce6ae8d6b21bebfa84e7f169726de382c81dd9b3895a115531133c5f73ae91b6241a6616697ba5a81ba59c7",
-            "file": "projects/charts-angular/src/lib/meter-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/meter-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4741,7 +4837,7 @@
         {
             "name": "PieChartComponent",
             "id": "component-PieChartComponent-956d950b699cebb577e5165571fa0d338f43203e856655fa0ecbd9b1c473c82f86349c848dfa9e3c51a5bc671d9d0c548965f70f800b876bbc0817eb73114aa5",
-            "file": "projects/charts-angular/src/lib/pie-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/pie-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -4924,7 +5020,7 @@
         {
             "name": "RadarChartComponent",
             "id": "component-RadarChartComponent-0c43107fdd3632906ffcab13cfe76b9f1df09f85f8a956de5a73935888a735205b149d7ecf65e2826aff8bc2017a8ef6b1b45a630fb16a59866d219d8d4e70ff",
-            "file": "projects/charts-angular/src/lib/radar-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/radar-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5107,7 +5203,7 @@
         {
             "name": "ScatterChartComponent",
             "id": "component-ScatterChartComponent-c67d69b173e7128b6962d99b6f523964205dba677cde1b689dc4496b99478e68ba8b96ae86a875bd479d0881b409d78f7daa593d8bf494de724ec196069f47b0",
-            "file": "projects/charts-angular/src/lib/scatter-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/scatter-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5289,8 +5385,8 @@
         },
         {
             "name": "ShapeNodeComponent",
-            "id": "component-ShapeNodeComponent-3036723925604c9b54fc8c5eafffeddee51ab3c889843f6e8e64c95ae3a6ce3024a8e3cc954010cd6dad12ac7be0aefbeac5b61dda930eb618c96da0c397a836",
-            "file": "projects/charts-angular/src/stories/diagrams/shape-node/shape-node.component.ts",
+            "id": "component-ShapeNodeComponent-5207d6fd365ec9f0b4b83707011b2372de727d0620f6b0cef2884de42c1645af2cc827ae79caa47633befaaab0d213c619a85f4421a978c7d860442b66af5695",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/shape/shape-node.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5484,7 +5580,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'\n\nimport { carbonPrefix } from '../configs'\n\n@Component({\n\tselector: 'ibm-diagram-shape-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\n\t\t<ng-template #nodeTemplate>\n\t\t\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t\t\t</div>\n\t\t\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t\t\t{{ subtitle }}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</ng-template>\n\t`\n})\nexport class ShapeNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() renderIcon?: TemplateRef<any>\n\t@Input() size = 48\n\t@Input() stacked = false\n\t@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'\n\t@Input() subtitle = ''\n\t@Input() title = ''\n\t@Input() position: string = 'fixed'\n\t@Input() bodyPosition: string = 'absolute'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--shape-node`\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'\n\nimport { carbonPrefix } from '../../config'\n\n@Component({\n\tselector: 'ibm-diagram-shape-node',\n\ttemplate: `\n\t\t<ng-container [ngSwitch]=\"component\">\n\t\t\t<xhtml:div\n\t\t\t\t*ngSwitchCase=\"'div'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:div>\n\n\t\t\t<xhtml:button\n\t\t\t\t*ngSwitchCase=\"'button'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(click)=\"click.emit($event)\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:button>\n\n\t\t\t<xhtml:a\n\t\t\t\t*ngSwitchCase=\"'a'\"\n\t\t\t\t[ngClass]=\"[\n\t\t\t\t\tnamespace,\n\t\t\t\t\tstacked ? namespace + '--stacked' : '',\n\t\t\t\t\tshape ? namespace + '--' + shape : '',\n\t\t\t\t\tnamespace + '--' + component\n\t\t\t\t]\"\n\t\t\t\t[attr.href]=\"href\"\n\t\t\t\t[ngStyle]=\"{\n\t\t\t\t\t'height.px': size,\n\t\t\t\t\t'width.px': size,\n\t\t\t\t\tposition: position\n\t\t\t\t}\"\n\t\t\t\t(mouseenter)=\"mouseEnter.emit($event)\"\n\t\t\t\t(mouseover)=\"mouseOver.emit($event)\"\n\t\t\t\t(mouseout)=\"mouseOut.emit($event)\"\n\t\t\t\t(mouseleave)=\"mouseLeave.emit($event)\"\n\t\t\t\t(mousemove)=\"mouseMove.emit($event)\"\n\t\t\t\ttabindex=\"0\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"nodeTemplate\"></ng-container>\n\t\t\t</xhtml:a>\n\t\t</ng-container>\n\n\t\t<ng-template #nodeTemplate>\n\t\t\t<div *ngIf=\"renderIcon\" attr.class=\"{{ namespace + '__icon' }}\">\n\t\t\t\t<ng-container *ngTemplateOutlet=\"renderIcon\"></ng-container>\n\t\t\t</div>\n\t\t\t<div attr.class=\"{{ namespace + '__body' }}\" [ngStyle]=\"{ position: bodyPosition }\">\n\t\t\t\t<div attr.class=\"{{ namespace + '__title' }}\">{{ title }}</div>\n\t\t\t\t<div attr.class=\"{{ namespace + '__subtitle' }}\">\n\t\t\t\t\t{{ subtitle }}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</ng-template>\n\t`\n})\nexport class ShapeNodeComponent implements OnInit {\n\t@Input() as = 'div'\n\t@Input() href = ''\n\t@Input() renderIcon?: TemplateRef<any>\n\t@Input() size = 48\n\t@Input() stacked = false\n\t@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'\n\t@Input() subtitle = ''\n\t@Input() title = ''\n\t@Input() position: string = 'fixed'\n\t@Input() bodyPosition: string = 'absolute'\n\n\t@Output() click: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()\n\t@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()\n\n\tnamespace = `${carbonPrefix}--cc--shape-node`\n\tcomponent = 'div'\n\n\tngOnInit() {\n\t\tif (this.href) {\n\t\t\tthis.component = 'a'\n\t\t} else {\n\t\t\tthis.component = this.as\n\t\t}\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5495,7 +5591,7 @@
         {
             "name": "SimpleBarChartComponent",
             "id": "component-SimpleBarChartComponent-53e13c8364e06acde855fa5691bbd75fc6789120fa658bea33f30f08c62ec9db5c1442ae7a05666c12649ac866253ab5619e7da7730862de7f16e72ab4d131b4",
-            "file": "projects/charts-angular/src/lib/bar-chart-simple.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/bar-chart-simple.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5678,7 +5774,7 @@
         {
             "name": "StackedAreaChartComponent",
             "id": "component-StackedAreaChartComponent-54e8f21992b00c4363ac798460a24a9dec838763c07014121abfd3ec08715f3a99e32114cb543cd163d7f71128190f48d797f399f827f1d6d015e9c769e93638",
-            "file": "projects/charts-angular/src/lib/area-chart-stacked.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/area-chart-stacked.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5861,7 +5957,7 @@
         {
             "name": "StackedBarChartComponent",
             "id": "component-StackedBarChartComponent-a4b6a4b93b6aecb4a3575a91dbe21984b26734025317b20184dbb2248aaea708b913e5a7f5358633145757af42330680beb2116ff97219e708c72d295dbf56fe",
-            "file": "projects/charts-angular/src/lib/bar-chart-stacked.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/bar-chart-stacked.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -6044,7 +6140,7 @@
         {
             "name": "TreeChartComponent",
             "id": "component-TreeChartComponent-d479b8c45320e4351f2eae530689e5313a1a05f643aa9d534de492155eb9123ef990ef6b313df7352edba30b65cf29e35807c0db9ce904597245a1aaf792cda1",
-            "file": "projects/charts-angular/src/lib/tree-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/tree-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -6227,7 +6323,7 @@
         {
             "name": "TreemapChartComponent",
             "id": "component-TreemapChartComponent-811b17efbcd534e220e285b9b2bee5151d7a2394aed14f6808a2c481671f145002bfd42819d4e3c050dcabaa7bf43e15239a853a86ae6edb701fde75f8ea5db8",
-            "file": "projects/charts-angular/src/lib/treemap-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/treemap-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -6410,7 +6506,7 @@
         {
             "name": "WordCloudChartComponent",
             "id": "component-WordCloudChartComponent-5c1a079c4e63d3f3f0291deb31e7d762cdef1fba879b5f1ca84d62553fb7c736bce5b5bfba73ffb3516667c5260e34f948547e7f166731bf645f5fe242d7fa2c",
-            "file": "projects/charts-angular/src/lib/wordcloud-chart.component.ts",
+            "file": "projects/charts-angular/src/lib/charts/wordcloud-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -6598,7 +6694,7 @@
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
-            "file": "projects/charts-angular/src/stories/diagrams/card-node/card-node.module.ts",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core'\nimport { CommonModule } from '@angular/common'\nimport { CardNodeComponent } from './card-node.component'\nimport { CardNodeColumnComponent } from './card-node-column.component'\nimport { CardNodeLabelComponent } from './card-node-label.component'\nimport { CardNodeSubtitleComponent } from './card-node-subtitle.component'\nimport { CardNodeTitleComponent } from './card-node-title.component'\nexport {\n\tCardNodeComponent,\n\tCardNodeColumnComponent,\n\tCardNodeLabelComponent,\n\tCardNodeSubtitleComponent,\n\tCardNodeTitleComponent\n}\n@NgModule({\n\tdeclarations: [\n\t\tCardNodeComponent,\n\t\tCardNodeColumnComponent,\n\t\tCardNodeLabelComponent,\n\t\tCardNodeSubtitleComponent,\n\t\tCardNodeTitleComponent\n\t],\n\texports: [\n\t\tCardNodeComponent,\n\t\tCardNodeColumnComponent,\n\t\tCardNodeLabelComponent,\n\t\tCardNodeSubtitleComponent,\n\t\tCardNodeTitleComponent\n\t],\n\timports: [CommonModule]\n})\nexport class CardNodeModule {}\n",
             "children": [
@@ -6666,7 +6762,7 @@
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
-            "file": "projects/charts-angular/src/lib/charts.module.ts",
+            "file": "projects/charts-angular/src/lib/charts/charts.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core'\nimport { CommonModule } from '@angular/common'\n\nimport {\n\tAlluvialChartComponent,\n\tAreaChartComponent,\n\tBaseChart,\n\tBoxplotChartComponent,\n\tBubbleChartComponent,\n\tBulletChartComponent,\n\tCirclePackChartComponent,\n\tComboChartComponent,\n\tDonutChartComponent,\n\tGaugeChartComponent,\n\tGroupedBarChartComponent,\n\tHeatmapChartComponent,\n\tHistogramChartComponent,\n\tLineChartComponent,\n\tLollipopChartComponent,\n\tMeterChartComponent,\n\tPieChartComponent,\n\tRadarChartComponent,\n\tScatterChartComponent,\n\tSimpleBarChartComponent,\n\tStackedAreaChartComponent,\n\tStackedBarChartComponent,\n\tTreeChartComponent,\n\tTreemapChartComponent,\n\tWordCloudChartComponent\n} from './index'\n\n@NgModule({\n\timports: [CommonModule],\n\tdeclarations: [\n\t\tBaseChart,\n\t\tAlluvialChartComponent,\n\t\tAreaChartComponent,\n\t\tStackedAreaChartComponent,\n\t\tSimpleBarChartComponent,\n\t\tGroupedBarChartComponent,\n\t\tStackedBarChartComponent,\n\t\tBoxplotChartComponent,\n\t\tBubbleChartComponent,\n\t\tBulletChartComponent,\n\t\tDonutChartComponent,\n\t\tGaugeChartComponent,\n\t\tHeatmapChartComponent,\n\t\tHistogramChartComponent,\n\t\tLineChartComponent,\n\t\tLollipopChartComponent,\n\t\tPieChartComponent,\n\t\tScatterChartComponent,\n\t\tMeterChartComponent,\n\t\tRadarChartComponent,\n\t\tComboChartComponent,\n\t\tTreeChartComponent,\n\t\tTreemapChartComponent,\n\t\tCirclePackChartComponent,\n\t\tWordCloudChartComponent\n\t],\n\texports: [\n\t\tBaseChart,\n\t\tAlluvialChartComponent,\n\t\tAreaChartComponent,\n\t\tStackedAreaChartComponent,\n\t\tSimpleBarChartComponent,\n\t\tGroupedBarChartComponent,\n\t\tStackedBarChartComponent,\n\t\tBoxplotChartComponent,\n\t\tBubbleChartComponent,\n\t\tBulletChartComponent,\n\t\tDonutChartComponent,\n\t\tGaugeChartComponent,\n\t\tHeatmapChartComponent,\n\t\tHistogramChartComponent,\n\t\tLineChartComponent,\n\t\tLollipopChartComponent,\n\t\tPieChartComponent,\n\t\tScatterChartComponent,\n\t\tMeterChartComponent,\n\t\tRadarChartComponent,\n\t\tComboChartComponent,\n\t\tTreeChartComponent,\n\t\tTreemapChartComponent,\n\t\tCirclePackChartComponent,\n\t\tWordCloudChartComponent\n\t]\n})\nexport class ChartsModule {}\n",
             "children": [
@@ -6854,7 +6950,7 @@
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
-            "file": "projects/charts-angular/src/stories/diagrams/edge/edge.module.ts",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/edge.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core'\nimport { CommonModule } from '@angular/common'\nimport { EdgeComponent } from './edge.component'\nexport { EdgeComponent } from './edge.component'\n\n@NgModule({\n\tdeclarations: [EdgeComponent],\n\texports: [EdgeComponent],\n\timports: [CommonModule]\n})\nexport class EdgeModule {}\n",
             "children": [
@@ -6898,7 +6994,7 @@
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
-            "file": "projects/charts-angular/src/stories/diagrams/marker/marker.module.ts",
+            "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core'\nimport { CommonModule } from '@angular/common'\nimport {\n\tMarkerComponent,\n\tMarkerArrowLeftComponent,\n\tMarkerArrowRightComponent,\n\tMarkerShapeNodeComponent,\n\tMarkerDiamondComponent,\n\tMarkerSquareComponent,\n\tMarkerTeeComponent\n} from './marker.component'\n\nexport {\n\tMarkerComponent,\n\tMarkerArrowLeftComponent,\n\tMarkerArrowRightComponent,\n\tMarkerShapeNodeComponent,\n\tMarkerDiamondComponent,\n\tMarkerSquareComponent,\n\tMarkerTeeComponent\n}\n@NgModule({\n\tdeclarations: [\n\t\tMarkerComponent,\n\t\tMarkerArrowLeftComponent,\n\t\tMarkerArrowRightComponent,\n\t\tMarkerShapeNodeComponent,\n\t\tMarkerDiamondComponent,\n\t\tMarkerSquareComponent,\n\t\tMarkerTeeComponent\n\t],\n\texports: [\n\t\tMarkerComponent,\n\t\tMarkerArrowLeftComponent,\n\t\tMarkerArrowRightComponent,\n\t\tMarkerShapeNodeComponent,\n\t\tMarkerDiamondComponent,\n\t\tMarkerSquareComponent,\n\t\tMarkerTeeComponent\n\t],\n\timports: [CommonModule]\n})\nexport class MarkerModule {}\n",
             "children": [
@@ -6978,7 +7074,7 @@
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
-            "file": "projects/charts-angular/src/stories/diagrams/shape-node/shape-node.module.ts",
+            "file": "projects/charts-angular/src/lib/diagrams/nodes/shape/shape-node.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core'\nimport { CommonModule } from '@angular/common'\nimport { ShapeNodeComponent } from './shape-node.component'\nexport { ShapeNodeComponent } from './shape-node.component'\n\n@NgModule({\n\tdeclarations: [ShapeNodeComponent],\n\texports: [ShapeNodeComponent],\n\timports: [CommonModule]\n})\nexport class ShapeNodeModule {}\n",
             "children": [
@@ -7023,7 +7119,7 @@
                 "name": "carbonPrefix",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/configs.ts",
+                "file": "projects/charts-angular/src/lib/diagrams/config.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "string",
@@ -7033,7 +7129,7 @@
                 "name": "circleSize",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "number",
@@ -7047,7 +7143,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
+                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
             },
             {
                 "name": "context",
@@ -7083,7 +7179,7 @@
                 "name": "edgeData",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
@@ -7093,7 +7189,7 @@
                 "name": "edgeMapped",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7113,7 +7209,7 @@
                 "name": "getTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/card-node.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7137,13 +7233,13 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t(args: Args) => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">vanilla</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
+                "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t(args: Args) => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">Vanilla JavaScript</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
             },
             {
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7153,7 +7249,7 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7163,27 +7259,27 @@
                 "name": "linkTarget",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{ x: 400, y: 0 }"
-            },
-            {
-                "name": "linkTarget",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{ x: 300, y: 0 }"
             },
             {
+                "name": "linkTarget",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ x: 400, y: 0 }"
+            },
+            {
                 "name": "linkTargetCurve",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7193,7 +7289,7 @@
                 "name": "nodeData",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
@@ -7203,7 +7299,7 @@
                 "name": "nodeHeight",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "number",
@@ -7213,7 +7309,7 @@
                 "name": "nodeWidth",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "number",
@@ -7233,7 +7329,7 @@
                 "name": "ProgrammaticStatic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7252,7 +7348,7 @@
                 "name": "SimpleStatic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7262,7 +7358,7 @@
                 "name": "stories",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7272,7 +7368,7 @@
                 "name": "template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+                "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7283,24 +7379,24 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "projects/charts-angular/src/stories/diagrams/configs.ts": [
+            "projects/charts-angular/src/lib/diagrams/config.ts": [
                 {
                     "name": "carbonPrefix",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/configs.ts",
+                    "file": "projects/charts-angular/src/lib/diagrams/config.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
                     "defaultValue": "'cds'"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts": [
+            "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts": [
                 {
                     "name": "circleSize",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -7310,7 +7406,7 @@
                     "name": "edgeData",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
@@ -7320,7 +7416,7 @@
                     "name": "edgeMapped",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7330,7 +7426,7 @@
                     "name": "nodeData",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
@@ -7340,7 +7436,7 @@
                     "name": "nodeHeight",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -7350,7 +7446,7 @@
                     "name": "nodeWidth",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -7360,7 +7456,7 @@
                     "name": "ProgrammaticStatic",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7370,7 +7466,7 @@
                     "name": "SimpleStatic",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7380,7 +7476,7 @@
                     "name": "stories",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7396,7 +7492,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    },\n    '@storybook/addon-mdx-gfm'\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
+                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,\n    `${core}/stories/getting-started/angular.stories.mdx`\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist\n    }\n    return config\n  }\n}"
                 },
                 {
                     "name": "core",
@@ -7459,15 +7555,15 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t(args: Args) => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">vanilla</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
+                    "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t(args: Args) => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">Vanilla JavaScript</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/card-node.stories.ts": [
+            "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts": [
                 {
                     "name": "getTemplate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/card-node.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7486,12 +7582,12 @@
                     "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/edge.stories.ts": [
+            "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts": [
                 {
                     "name": "linkSource",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
@@ -7501,7 +7597,29 @@
                     "name": "linkTarget",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 300, y: 0 }"
+                }
+            ],
+            "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts": [
+                {
+                    "name": "linkSource",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 0, y: 0 }"
+                },
+                {
+                    "name": "linkTarget",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
@@ -7511,33 +7629,11 @@
                     "name": "linkTargetCurve",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{ x: 400, y: 200 }"
-                }
-            ],
-            "projects/charts-angular/src/stories/diagrams/marker.stories.ts": [
-                {
-                    "name": "linkSource",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 0, y: 0 }"
-                },
-                {
-                    "name": "linkTarget",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/.storybook/preview.ts": [
@@ -7552,12 +7648,12 @@
                     "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t}\n\t}\n}"
                 }
             ],
-            "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts": [
+            "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts": [
                 {
                     "name": "template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+                    "file": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -7571,7 +7667,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 27,
+        "count": 26,
         "status": "medium",
         "files": [
             {
@@ -7615,7 +7711,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/alluvial-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/alluvial-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AlluvialChartComponent",
@@ -7624,7 +7720,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/area-chart-stacked.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/area-chart-stacked.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "StackedAreaChartComponent",
@@ -7633,7 +7729,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/area-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/area-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AreaChartComponent",
@@ -7642,7 +7738,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/bar-chart-grouped.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/bar-chart-grouped.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "GroupedBarChartComponent",
@@ -7651,7 +7747,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/bar-chart-simple.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/bar-chart-simple.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "SimpleBarChartComponent",
@@ -7660,7 +7756,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/bar-chart-stacked.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/bar-chart-stacked.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "StackedBarChartComponent",
@@ -7669,7 +7765,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/base-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/base-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "BaseChart",
@@ -7678,7 +7774,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/boxplot-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/boxplot-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "BoxplotChartComponent",
@@ -7687,7 +7783,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/bubble-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/bubble-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "BubbleChartComponent",
@@ -7696,7 +7792,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/bullet-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/bullet-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "BulletChartComponent",
@@ -7705,7 +7801,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/circle-pack-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/circle-pack-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "CirclePackChartComponent",
@@ -7714,7 +7810,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/combo-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/combo-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "ComboChartComponent",
@@ -7723,7 +7819,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/donut-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/donut-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "DonutChartComponent",
@@ -7732,7 +7828,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/gauge-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/gauge-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "GaugeChartComponent",
@@ -7741,7 +7837,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/heatmap-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/heatmap-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "HeatmapChartComponent",
@@ -7750,7 +7846,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/histogram-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/histogram-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "HistogramChartComponent",
@@ -7759,7 +7855,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/line-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/line-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LineChartComponent",
@@ -7768,7 +7864,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/lollipop-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/lollipop-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LollipopChartComponent",
@@ -7777,7 +7873,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/meter-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/meter-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "MeterChartComponent",
@@ -7786,7 +7882,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/pie-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/pie-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "PieChartComponent",
@@ -7795,7 +7891,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/radar-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/radar-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "RadarChartComponent",
@@ -7804,7 +7900,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/scatter-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/scatter-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "ScatterChartComponent",
@@ -7813,7 +7909,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/tree-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/tree-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "TreeChartComponent",
@@ -7822,7 +7918,7 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/treemap-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/treemap-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "TreemapChartComponent",
@@ -7831,13 +7927,168 @@
                 "status": "good"
             },
             {
-                "filePath": "projects/charts-angular/src/lib/wordcloud-chart.component.ts",
+                "filePath": "projects/charts-angular/src/lib/charts/wordcloud-chart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "WordCloudChartComponent",
                 "coveragePercent": 72,
                 "coverageCount": "8/11",
                 "status": "good"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/config.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "carbonPrefix",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/edge.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "EdgeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/edge.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Coordinates",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerArrowLeftComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerArrowRightComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerDiamondComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerShapeNodeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerSquareComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MarkerTeeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-column.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardNodeColumnComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-label.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardNodeLabelComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-subtitle.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardNodeSubtitleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node-title.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardNodeTitleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/cards/card-node.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardNodeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/15",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/lib/diagrams/nodes/shape/shape-node.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ShapeNodeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/20",
+                "status": "low"
             },
             {
                 "filePath": "projects/charts-angular/src/stories/all.stories.ts",
@@ -7860,7 +8111,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7870,7 +8121,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7880,7 +8131,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7890,7 +8141,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7900,7 +8151,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7910,7 +8161,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7920,7 +8171,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7930,7 +8181,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7940,7 +8191,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/0_diagram.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/0-diagrams-start-here.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7950,72 +8201,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "getTemplate",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node/card-node-column.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CardNodeColumnComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node/card-node-label.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CardNodeLabelComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node/card-node-subtitle.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CardNodeSubtitleComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node/card-node-title.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CardNodeTitleComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/card-node/card-node.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CardNodeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/15",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/configs.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "carbonPrefix",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -8025,7 +8211,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -8035,7 +8221,27 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/edge.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "linkSource",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "linkTarget",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -8045,123 +8251,22 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "EdgeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/11",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/edge/edge.component.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "Coordinates",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "linkSource",
+                "name": "getTemplate",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "linkTarget",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
+                "filePath": "projects/charts-angular/src/stories/diagrams/example1/diagram-example1.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MarkerArrowLeftComponent",
+                "name": "DiagramExample1",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerArrowRightComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/12",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerDiamondComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerShapeNodeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerSquareComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MarkerTeeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/marker/marker.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/diagrams/shape-node/shape-node.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ShapeNodeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/20",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

@@ -199,10 +199,10 @@ export const addOtherVersions = (
 		...(currentVersion !== 'vanilla'
 			? [
 					{
-						name: 'vanilla',
+						name: 'Vanilla JavaScript',
 						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'react'
 			? [
@@ -210,7 +210,7 @@ export const addOtherVersions = (
 						name: 'React',
 						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'angular'
 			? [
@@ -218,7 +218,7 @@ export const addOtherVersions = (
 						name: 'Angular',
 						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'vue'
 			? [
@@ -226,7 +226,7 @@ export const addOtherVersions = (
 						name: 'Vue',
 						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: []),
 		...(currentVersion !== 'svelte'
 			? [
@@ -234,7 +234,7 @@ export const addOtherVersions = (
 						name: 'Svelte',
 						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-			  ]
+				]
 			: [])
 	]
 

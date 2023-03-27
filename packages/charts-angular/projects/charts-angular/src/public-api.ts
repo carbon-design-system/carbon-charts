@@ -3,6 +3,7 @@
  */
 
 export {
+	// charts
 	AlluvialChartComponent,
 	AreaChartComponent,
 	BaseChart,
@@ -28,5 +29,24 @@ export {
 	StackedBarChartComponent,
 	TreeChartComponent,
 	TreemapChartComponent,
-	WordCloudChartComponent
+	WordCloudChartComponent,
+	// diagrams
+	CardNodeColumnComponent,
+  CardNodeComponent,
+  CardNodeLabelComponent,
+  CardNodeSubtitleComponent,
+  CardNodeTitleComponent,
+  CardNodeModule,
+  EdgeComponent,
+  EdgeModule,
+  MarkerArrowLeftComponent,
+  MarkerArrowRightComponent,
+  MarkerComponent,
+  MarkerDiamondComponent,
+  MarkerModule,
+  MarkerShapeNodeComponent,
+  MarkerSquareComponent,
+  MarkerTeeComponent,
+  ShapeNodeComponent,
+  ShapeNodeModule
 } from './lib'

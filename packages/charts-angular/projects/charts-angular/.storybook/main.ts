@@ -16,8 +16,7 @@ const config: StorybookConfig = {
 			options: {
 				actions: false
 			}
-    },
-    '@storybook/addon-mdx-gfm'
+    }
   ],
   framework: {
     name: '@storybook/angular',

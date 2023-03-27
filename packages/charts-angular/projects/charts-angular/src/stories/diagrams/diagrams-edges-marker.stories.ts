@@ -1,6 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { MarkerModule } from './marker/marker.module'
-import { EdgeModule } from './edge/edge.module'
+import { EdgeModule, MarkerModule } from '../../public-api'
 import { getTemplate } from './utils'
 
 const linkSource = { x: 0, y: 0 }

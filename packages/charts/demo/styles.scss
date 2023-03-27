@@ -1,5 +1,5 @@
 @use '@carbon/styles';
-// @use '@carbon/styles/scss/themes'; // Loads config then forwards to @carbon/themes which is already done in next line
+@use '@carbon/styles/scss/themes'; // Loads config then forwards to @carbon/themes which is already done in next line
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type' as *;
 @import '../src/styles/styles.scss';

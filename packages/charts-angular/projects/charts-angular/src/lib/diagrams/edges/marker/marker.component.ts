@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Component as CarbonComponent } from '@carbon/charts'
-import { carbonPrefix } from '../configs'
+import { carbonPrefix } from '../../config'
 
 const template = `
 <svg:marker

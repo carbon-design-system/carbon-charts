@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { EdgeModule } from './edge/edge.module'
+import { EdgeModule } from '../../public-api'
 import { Component } from '@carbon/charts'
 import { getTemplate } from './utils'
 
