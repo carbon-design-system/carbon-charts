@@ -23,6 +23,9 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 	staticDirs: ['./assets'],
+	async viteFinal(config, _) {
+		return config
+	},
 	features: {
 		storyStoreV7: false
 	}

@@ -4,7 +4,7 @@ import * as ChartComponents from '../components'
 
 import { storybookDemoGroups } from '@carbon/charts/demo'
 
-storiesOf('Intro', module).add(
+storiesOf('Docs/Welcome', module).add(
 	'Welcome',
 	() => ({
 		template: `

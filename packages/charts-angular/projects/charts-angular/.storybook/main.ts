@@ -14,7 +14,8 @@ const config: StorybookConfig = {
     {
       name: '@storybook/addon-essentials',
 			options: {
-				actions: false
+				actions: false,
+        docs: true
 			}
     }
   ],

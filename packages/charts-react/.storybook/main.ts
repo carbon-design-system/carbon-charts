@@ -24,11 +24,6 @@ const config: StorybookConfig = {
 	},
 	staticDirs: ['assets'],
 	async viteFinal(config, _) {
-		// config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
-		// config!.optimization = {
-    //   minimize: false,
-    //   minimizer: [],
-    // }
 		return config
 	},
 	features: {

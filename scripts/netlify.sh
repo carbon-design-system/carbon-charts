@@ -29,10 +29,10 @@ if [ $CONTEXT == "deploy-preview" ]; then
 
   # Storybook build is too memory-intensive to run via lerna so do it old-school...
   echo -e "${GREEN}Running storybook build for @carbon/$PKG_DIR..."
-	cd "packages/$PKG_DIR"
-	yarn build:demo
-	cd ../..
-	#NODE_ENV=production lerna run build:demo --scope="@carbon/$PKG_DIR" --concurrency=1
+	# cd "packages/$PKG_DIR"
+	# yarn build:demo
+	# cd ../..
+  lerna run build:demo --scope="@carbon/$PKG_DIR" --concurrency=1
 
 	echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
 	mkdir -p pages
