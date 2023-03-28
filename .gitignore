@@ -5,7 +5,7 @@
 # Root-level of monorepo
 pages/
 .vscode/
-.yarn/
+.yarn/cache
 
 # Package-level
 **/.angular/
