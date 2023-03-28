@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces';
 import { Axis } from './axis';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 import { Threshold } from '../essentials/threshold';
 import { Events } from './../../interfaces';

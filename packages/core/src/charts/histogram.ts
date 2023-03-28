@@ -3,7 +3,7 @@ import { ChartModelBinned } from '../model/binned-charts';
 import { AxisChart } from '../axis-chart';
 import * as Configuration from '../configuration';
 import { ChartConfig, HistogramChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {

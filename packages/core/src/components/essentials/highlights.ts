@@ -1,5 +1,5 @@
 import { Component } from '../component';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { ChartModel } from '../../model/model';
 import { AxisPositions, RenderTypes, ScaleTypes } from '../../interfaces';
 

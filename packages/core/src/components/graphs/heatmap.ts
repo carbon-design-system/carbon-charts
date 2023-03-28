@@ -2,7 +2,7 @@
 import { Component } from '../component';
 import * as Configuration from '../../configuration';
 import { Events, RenderTypes, DividerStatus } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 
 import { get } from 'lodash-es';

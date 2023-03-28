@@ -7,7 +7,7 @@ import {
 	ColorClassNameTypes,
 	RenderTypes,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { line } from 'd3-shape';

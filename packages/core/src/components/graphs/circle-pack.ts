@@ -7,7 +7,7 @@ import {
 	Events,
 	RenderTypes,
 } from '../../interfaces/enums';
-import { Tools } from './../../tools';
+import * as Tools from './../../tools';
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy';

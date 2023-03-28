@@ -2,7 +2,7 @@
 import { Scatter } from './scatter';
 import { DOMUtils } from '../../services';
 import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { Selection } from 'd3-selection';

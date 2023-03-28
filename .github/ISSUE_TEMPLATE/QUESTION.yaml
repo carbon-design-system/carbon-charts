@@ -17,13 +17,20 @@ body:
 
         For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon-charts/discussions/new) or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with Carbon maintainers and fellow community members.
   - type: input
-    id: contact
+    id: name
     attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
+      label: Name
+      description: What's your name?
     validations:
-      required: false
+      required: true
+  - type: checkboxes
+    id: ibm
+    attributes:
+      label: Are you an IBM employee?
+      options:
+        - label: 'Yes'
+    validations:
+      required: true
   - type: textarea
     id: question
     attributes:

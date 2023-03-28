@@ -1,5 +1,5 @@
 import { Component } from '../component';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model/model';
 import { Events, RenderTypes, TruncationTypes } from '../../interfaces';
@@ -37,7 +37,14 @@ export class Tooltip extends Component {
 	handleShowTooltip = (e) => {
 		const data = e.detail.data || e.detail.items;
 
-		const defaultHTML = this.getTooltipHTML(e);
+		let defaultHTML;
+		let formattedItems = this.formatItems(this.getItems(e));
+
+		if (e.detail.content) {
+			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
+		} else {
+			defaultHTML = this.getTooltipHTML(formattedItems);
+		}
 
 		const tooltipTextContainer = DOMUtils.appendOrSelect(
 			this.tooltip,
@@ -60,6 +67,20 @@ export class Tooltip extends Component {
 			// Use default tooltip
 			tooltipTextContainer.html(defaultHTML);
 		}
+
+		// Apply custom background colors
+		tooltipTextContainer
+			.selectAll('.datapoint-tooltip')
+			.each(function (datum, i) {
+				const item = formattedItems[i];
+
+				if (formattedItems[i] && formattedItems[i].color) {
+					select(this)
+						.select('.tooltip-color')
+						.attr('class', 'tooltip-color')
+						.style('background-color', item.color);
+				}
+			});
 
 		// Position the tooltip
 		this.positionTooltip(e);
@@ -194,47 +215,34 @@ export class Tooltip extends Component {
 		return items;
 	}
 
-	getTooltipHTML(e: CustomEvent) {
-		let defaultHTML;
-		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`;
-		} else {
-			const items = this.getItems(e);
-			const formattedItems = this.formatItems(items);
-
-			defaultHTML =
-				`<ul class="multi-tooltip">` +
-				formattedItems
-					.map(
-						(item) =>
-							`<li>
-							<div class="datapoint-tooltip ${item.bold ? 'bold' : ''}">
-								${item.class ? `<div class="tooltip-color ${item.class}"></div>` : ''}
-								${
-									item.color
-										? '<div style="background-color: ' +
-										  item.color +
-										  '" class="tooltip-color"></div>'
-										: ''
-								}
-								<div class="label">
-								<p>${item.label || ''}</p>
-								${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
-								</div>
-								${
-									item.value === undefined ||
-									item.value === null
-										? ''
-										: `<p class="value"/>${item.value}</p>`
-								}
-							</div>
-						</li>`
-					)
-					.join('') +
-				`</ul>`;
-		}
-
-		return defaultHTML;
+	getTooltipHTML(formattedItems: any) {
+		return (
+			`<ul class="multi-tooltip">` +
+			formattedItems
+				.map(
+					(item) =>
+						`<li>
+					<div class="datapoint-tooltip${item.bold ? ' bold' : ''}">
+						${
+							item.class || item.color
+								? `<div class="tooltip-color ${item.class}"></div>`
+								: ''
+						}
+						<div class="label">
+						<p>${item.label || ''}</p>
+						${item.labelIcon ? `<span class="label-icon"/>${item.labelIcon}</span>` : ''}
+						</div>
+						${
+							item.value === undefined || item.value === null
+								? ''
+								: `<p class="value"/>${item.value}</p>`
+						}
+					</div>
+				</li>`
+				)
+				.join('') +
+			`</ul>`
+		);
 	}
 
 	valueFormatter(value: any, label: string) {

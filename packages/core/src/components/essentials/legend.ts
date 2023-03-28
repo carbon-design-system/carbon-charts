@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import {
 	Alignments,
 	ColorClassNameTypes,

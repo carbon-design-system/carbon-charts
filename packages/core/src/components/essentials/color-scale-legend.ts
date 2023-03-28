@@ -1,5 +1,5 @@
 // Internal Imports
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 import { Legend } from './legend';
