@@ -1945,10 +1945,10 @@ __metadata:
     "@storybook/testing-library": ^0.0.14-next.1
     "@storybook/theming": ^7.0.0-0
     "@types/carbon__icons-react": ^11.16.0
-    "@types/react": ^18.0.29
+    "@types/react": ^18.0.30
     "@types/react-dom": ^18.0.11
-    "@typescript-eslint/eslint-plugin": ^5.56.0
-    "@typescript-eslint/parser": ^5.56.0
+    "@typescript-eslint/eslint-plugin": ^5.57.0
+    "@typescript-eslint/parser": ^5.57.0
     "@vitejs/plugin-react": ^3.1.0
     classnames: ^2.3.2
     codesandbox: ^2.2.3
@@ -1991,8 +1991,8 @@ __metadata:
     "@sveltejs/adapter-auto": ^2.0.0
     "@sveltejs/kit": ^1.14.0
     "@sveltejs/package": ^2.0.2
-    "@typescript-eslint/eslint-plugin": ^5.56.0
-    "@typescript-eslint/parser": ^5.56.0
+    "@typescript-eslint/eslint-plugin": ^5.57.0
+    "@typescript-eslint/parser": ^5.57.0
     codesandbox: ^2.2.3
     d3: ^7.8.3
     eslint: ^8.36.0
@@ -2032,7 +2032,7 @@ __metadata:
     "@storybook/theming": ^7.0.0-0
     "@storybook/vue3": ^7.0.0-0
     "@storybook/vue3-vite": ^7.0.0-0
-    "@types/node": ^18.15.8
+    "@types/node": ^18.15.10
     "@vitejs/plugin-vue": ^4.1.0
     "@vue/eslint-config-prettier": ^7.1.0
     "@vue/eslint-config-typescript": ^11.0.2
@@ -2088,9 +2088,9 @@ __metadata:
     "@types/jasmine": ^4.3.1
     "@types/karma": ^6.3.3
     "@types/marked": ^4.0.8
-    "@types/node": ^18.15.8
-    "@typescript-eslint/eslint-plugin": ^5.56.0
-    "@typescript-eslint/parser": ^5.56.0
+    "@types/node": ^18.15.10
+    "@typescript-eslint/eslint-plugin": ^5.57.0
+    "@typescript-eslint/parser": ^5.57.0
     carbon-components: ^10.58.3
     codesandbox: ^2.2.3
     d3-array: ^3.2.3
@@ -2130,7 +2130,7 @@ __metadata:
     sass: 1.60.0
     storybook: ^7.0.0-0
     tslib: ^2.5.0
-    typedoc: ^0.23.27
+    typedoc: ^0.23.28
     typescript: ^5.0.2
     vite: ^4.2.1
     vite-plugin-dts: ^2.1.0
@@ -6154,7 +6154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^18.15.8":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^18.15.10":
   version: 18.15.10
   resolution: "@types/node@npm:18.15.10"
   checksum: 9aeae0b683eda82892def5315812bdee3f1a28c4898b7e70f8e2514564538b16c4dccbe8339c1266f8fc1d707a48f152689264a854f5ebc2eba5011e793612d9
@@ -6242,7 +6242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.0.29":
+"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.0.30":
   version: 18.0.30
   resolution: "@types/react@npm:18.0.30"
   dependencies:
@@ -6377,7 +6377,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.0.0, @typescript-eslint/eslint-plugin@npm:^5.56.0":
+"@typescript-eslint/eslint-plugin@npm:^5.0.0, @typescript-eslint/eslint-plugin@npm:^5.57.0":
   version: 5.57.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.57.0"
   dependencies:
@@ -6401,7 +6401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.0.0, @typescript-eslint/parser@npm:^5.56.0":
+"@typescript-eslint/parser@npm:^5.0.0, @typescript-eslint/parser@npm:^5.57.0":
   version: 5.57.0
   resolution: "@typescript-eslint/parser@npm:5.57.0"
   dependencies:
@@ -21482,7 +21482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.27":
+"typedoc@npm:^0.23.28":
   version: 0.23.28
   resolution: "typedoc@npm:0.23.28"
   dependencies:
