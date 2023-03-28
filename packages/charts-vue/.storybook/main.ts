@@ -4,8 +4,9 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		'../../charts/stories/tutorials/!(0-api)*.stories.mdx',
-		'../../charts/stories/getting-started/vue.stories.mdx'
+		// Storybook 7 bug prevents MDX files from being shared across packages (other than core and react)
+		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx',
+		// '../../charts/stories/getting-started/vue.stories.mdx'
 	],
 	addons: [
 		{

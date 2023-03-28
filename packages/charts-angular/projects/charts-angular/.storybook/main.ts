@@ -7,8 +7,9 @@ const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
-    `${core}/stories/tutorials/!(0-api)*.stories.mdx`,
-    `${core}/stories/getting-started/angular.stories.mdx`
+    // Storybook 7 bug prevents MDX files from being shared across packages (other than core and react)
+    // `${core}/stories/tutorials/!(0-api)*.stories.mdx`,
+    // `${core}/stories/getting-started/angular.stories.mdx`
   ],
   addons: [
     {
