@@ -55,7 +55,7 @@
 		"@typescript-eslint/parser": "^5.57.0",
 		"codesandbox": "^2.2.3",
 		"d3": "^7.8.3",
-		"eslint": "^8.36.0",
+		"eslint": "^8.37.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.11",
 		"eslint-plugin-svelte3": "^4.0.0",

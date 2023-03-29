@@ -1,10 +1,9 @@
 import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
-import type { Demo } from './Demo'
-import * as ChartComponents from '../index'
-
-import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
 import { Configuration } from '@carbon/charts'
+import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
+import type { Demo } from './Demo'
+import * as ChartComponents from '../charts'
 
 const colorPairingOptions = Configuration.color.pairingOptions
 

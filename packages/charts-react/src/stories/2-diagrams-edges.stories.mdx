@@ -1,0 +1,101 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+import { Edge } from '../'
+
+<Meta title="Diagrams/Edges" />
+
+# Edges
+
+Edges are paths within an SVG.
+
+### Default
+<Canvas style={{ background: '#fff' }}>
+  <svg height="30" width="800">
+		<g transform="translate(16,16)">
+			<Edge source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+	</svg>
+</Canvas>
+
+### Color
+<Canvas style={{ background: '#fff' }}>
+  <svg height="30" width="800">
+		<g transform="translate(16,16)">
+			<Edge color={'#FB4B53'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+	</svg>
+</Canvas>
+
+### Dashed (with variants)
+<Canvas style={{ background: '#fff' }}>
+	<svg height="70" width="800">
+		<g transform="translate(16,16)">
+			<Edge variant={'dash-sm'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+
+		<g transform="translate(16,32)">
+			<Edge variant={'dash-md'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+
+		<g transform="translate(16,48)">
+			<Edge variant={'dash-lg'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+
+		<g transform="translate(16,64)">
+			<Edge variant={'dash-xl'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+	</svg>
+</Canvas>
+
+### Double
+<Canvas style={{ background: '#fff' }}>
+  <svg height="30" width="800">
+		<g transform="translate(16,16)">
+			<Edge variant={'double'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+	</svg>
+</Canvas>
+
+### Tunnel
+<Canvas style={{ background: '#fff' }}>
+  <svg height="30" width="800">
+		<g transform="translate(16,16)">
+			<Edge variant={'tunnel'} source={{ x: 0, y: 0 }} target={{ x: 400, y: 0 }} />
+		</g>
+	</svg>
+</Canvas>
+
+### Elbow
+
+```js
+import { Component as CarbonComponent } from '@carbon/charts'
+const linkSource = { x: 0, y: 0 }
+const linkTarget = { x: 400, y: 0 }
+const path = CarbonComponent.buildElbowPathString(linkSource, linkTargetCurve)
+// path = 'M0,0L200,0L200,200L400,200'
+```
+
+<Canvas style={{ background: '#fff' }}>
+  <svg height="260" width="800">
+		<g transform="translate(16,16)">
+			<Edge path={'M0,0L200,0L200,200L400,200'} />
+		</g>
+	</svg>
+</Canvas>
+
+### Bezier
+
+```js
+import { Component as CarbonComponent } from '@carbon/charts'
+const linkSource = { x: 0, y: 0 }
+const linkTarget = { x: 400, y: 0 }
+const path = CarbonComponent.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
+// path = 'M0,0C150,280,150,30,400,200'
+```
+
+<Canvas style={{ background: '#fff' }}>
+  <svg height="260" width="800">
+		<g transform="translate(16,16)">
+			<Edge path={'M0,0C150,280,150,30,400,200'} />
+		</g>
+	</svg>
+</Canvas>

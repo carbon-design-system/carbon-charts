@@ -1,19 +1,14 @@
 import { storiesOf } from '@storybook/react'
-
 import { User, Wikis, Debug } from '@carbon/icons-react'
 import { Component } from '@carbon/charts'
-
-import CardNode, { CardNodeColumn, CardNodeTitle, CardNodeSubtitle } from './CardNode'
-import Edge from './Edge'
-import ShapeNode from './ShapeNode'
-import { ArrowRightMarker } from './Marker'
+import { CardNode, CardNodeColumn, CardNodeTitle, CardNodeSubtitle, Edge, ShapeNode, ArrowRightMarker } from '../diagrams'
 
 const nodeHeight = 64
 const nodeWidth = 200
 const ShapeNodeSize = 64
 
 const stories = storiesOf('Diagrams', module)
-stories.addDecorator((story) => <div className="container theme--white">{story()}</div>)
+// stories.addDecorator((story) => <div className="container theme--white">{story()}</div>)
 
 stories.add('Start here', () => {
 	const paragraphStyle = {
@@ -98,6 +93,10 @@ stories.add('Start here', () => {
 				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 		</div>
 	)
+},{
+	controls: {
+		hideNoControlsWarning: true
+	}
 })
 
 const DesktopOnlyMessage = () => <div className="cp-message">This is a desktop-only example</div>

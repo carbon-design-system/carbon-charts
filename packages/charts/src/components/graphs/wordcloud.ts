@@ -47,7 +47,7 @@ export class WordCloud extends Component {
 			.size([width, height])
 			.words(
 				displayData.map(function (d) {
-					let value = d[fontSizeMapsTo]
+					const value = d[fontSizeMapsTo]
 
 					if (typeof d[fontSizeMapsTo] !== 'number') {
 						throw Error(
@@ -127,7 +127,6 @@ export class WordCloud extends Component {
 		const sizeDataIsValid = allOccurences.length > 0
 		const domain = sizeDataIsValid ? extent(allOccurences) : [1, 1]
 
-		// @ts-ignore
 		return scaleLinear()
 			.domain(domain as any)
 			.range(sizeDataIsValid ? options.wordCloud.fontSizeRange(chartSize, data) : [4, 4])

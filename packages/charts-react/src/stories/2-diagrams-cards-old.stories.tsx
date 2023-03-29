@@ -1,15 +1,16 @@
 import { storiesOf } from '@storybook/react'
 
-import CardNode, {
+import {
+	CardNode,
 	CardNodeColumn,
 	CardNodeSubtitle,
 	CardNodeLabel,
 	CardNodeTitle
-} from './CardNode'
+} from '../'
 
 import { User, ChevronDown } from '@carbon/icons-react'
 
-const stories = storiesOf('Diagrams/Nodes/Card', module)
+const stories = storiesOf('Diagrams/Cards', module)
 stories.addDecorator((story) => (
 	<div className="container theme--white" style={{ maxWidth: 400 }}>
 		{story()}
