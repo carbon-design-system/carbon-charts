@@ -285,6 +285,7 @@ export class DOMUtils extends Service {
 
 	exportToJPG() {
 		const self = this;
+		const options = this.model.getOptions();
 
 		const holder = this.getHolder();
 		const holderSelection = select(holder);
@@ -312,13 +313,25 @@ export class DOMUtils extends Service {
 				},
 			})
 			.then(function (dataUrl) {
-				self.services.files.downloadImage(dataUrl, 'myChart.jpg');
+				let fileName = 'myChart';
+				const customFilename = Tools.getProperty(
+					options,
+					'fileDownload',
+					'fileName'
+				);
+
+				if (typeof customFilename === 'function') {
+					fileName = customFilename('jpg');
+				}
+
+				self.services.files.downloadImage(dataUrl, `${fileName}.jpg`);
 				holderSelection.classed('filled', false);
 			});
 	}
 
 	exportToPNG() {
 		const self = this;
+		const options = this.model.getOptions();
 
 		const holder = this.getHolder();
 		const holderSelection = select(holder);
@@ -346,7 +359,18 @@ export class DOMUtils extends Service {
 				},
 			})
 			.then(function (dataUrl) {
-				self.services.files.downloadImage(dataUrl, 'myChart.png');
+				let fileName = 'myChart';
+				const customFilename = Tools.getProperty(
+					options,
+					'fileDownload',
+					'fileName'
+				);
+
+				if (typeof customFilename === 'function') {
+					fileName = customFilename('png');
+				}
+
+				self.services.files.downloadImage(dataUrl, `${fileName}.png`);
 				holderSelection.classed('filled', false);
 			})
 			.catch(function (error) {
