@@ -4,8 +4,9 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		'../../charts/stories/tutorials/!(0-api)*.stories.mdx',
-		'../../charts/stories/getting-started/react.stories.mdx'
+		// Temporarily disabled - bug in Storybook doesn't properly import these (they display partially)
+		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx',
+		// '../../charts/stories/getting-started/react.stories.mdx'
 	],
 	addons: [
 		{
