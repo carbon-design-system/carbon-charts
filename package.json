@@ -12,11 +12,9 @@
 		"build": "bash scripts/build-packages-and-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
-	"workspaces": {
-		"packages": [
-			"packages/*"
-		]
-	},
+	"workspaces": [
+		"packages/*"
+	],
 	"husky": {
 		"hooks": {
 			"pre-commit": "bash scripts/precommit.sh"
@@ -37,7 +35,7 @@
 		"lerna": "~6.6.1",
 		"prettier": "^2.8.7",
 		"prettier-config-carbon": "~0.9.0",
-		"typescript": "^5.0.2"
+		"typescript": "^5.0.3"
 	},
 	"resolutions": {
 		"axios": "0.21.1"

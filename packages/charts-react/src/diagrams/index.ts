@@ -1,4 +1,4 @@
-import CardNode from './CardNode'
+import { CardNode } from './CardNode'
 import { CardNodeColumn } from './CardNodeColumn'
 import { CardNodeLabel } from './CardNodeLabel'
 import { CardNodeSubtitle } from './CardNodeSubtitle'

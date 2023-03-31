@@ -43,4 +43,4 @@ const CardNode: React.FC<CardNodeProps & React.HTMLAttributes<HTMLAnchorElement 
 	)
 }
 
-export default CardNode
+export { CardNode }

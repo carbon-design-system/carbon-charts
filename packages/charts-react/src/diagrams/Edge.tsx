@@ -14,7 +14,7 @@ type EdgeProps = {
 	source?: Coordinates
 	target?: Coordinates
 	path?: string
-	variant?: 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'
+	variant?: string // 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'
 }
 
 const Edge: React.FC<EdgeProps & React.SVGProps<SVGGElement>> = ({

@@ -1,8 +1,45 @@
-@use '@carbon/styles';
-@use '@carbon/styles/scss/themes'; // Loads config then forwards to @carbon/themes which is already done in next line
-@use '@carbon/styles/scss/theme';
+$charts-prefix: 'cc';
+
+$css--reset: false;
+$css--default-type: false;
+
+$prefix: 'cds';
+
+// $carbon--font-path
+// Fonts for demo are loaded in .storybook/preview-head.html - don't include here
+@use '@carbon/styles/scss/config' with (
+  $css--font-face: false,
+	// $font-path: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@300;400&family=IBM+Plex+Sans:wght@400;600&display=swap'
+);
+
+@use "@carbon/styles";
 @use '@carbon/styles/scss/type' as *;
-@import '../src/styles/styles.scss';
+@use '@carbon/styles/scss/theme';
+
+// Custom charting tokens
+@import '../src/styles/tokens.scss';
+@include theme.add-component-tokens($custom-charting-tokens);
+
+@import '@carbon/import-once/scss/import-once';
+
+// Carbon imports
+@import '@carbon/colors/index.scss';
+@import '@carbon/styles/scss/components/button/_tokens.scss';
+
+@mixin default_transition {
+	transition: all 0.1s ease-out;
+}
+
+// Internal
+@import '../src/styles/colors.scss';
+@import '../src/styles/components/index.scss';
+@import '../src/styles/graphs/index.scss';
+@import '../src/styles/type';
+@import '../src/styles/chart-holder';
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+	overflow: visible;
+}
 
 html {
 	@include styles.theme(styles.$white);

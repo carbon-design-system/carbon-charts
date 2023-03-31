@@ -388,7 +388,8 @@ export class DOMUtils extends Service {
 				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
 				.node()
 			const computedStyles = getComputedStyle(cssVerifierElement as any)
-			if (
+			/*
+			if ( // true even when styles are properly loaded
 				computedStyles.getPropertyValue('overflow') !== 'hidden' ||
 				computedStyles.getPropertyValue('opacity') !== '0'
 			) {
@@ -396,6 +397,7 @@ export class DOMUtils extends Service {
 					'Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide.'
 				)
 			}
+			*/
 		})
 	}
 

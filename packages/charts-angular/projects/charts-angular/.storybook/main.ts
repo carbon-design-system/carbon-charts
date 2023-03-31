@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 const core = '../../../../charts'
 const demoDist = resolve(__dirname, `${core}/dist/demo`)
+// const angularPreset = resolve(__dirname, '../node_modules/@storybook/angular/preset')
 
 const config: StorybookConfig = {
   stories: [
@@ -41,7 +42,8 @@ const config: StorybookConfig = {
     })
     config.resolve!.alias = {
       ...config.resolve!.alias,
-      '@carbon/charts/demo': demoDist
+      '@carbon/charts/demo': demoDist,
+      // '@storybook/angular/preset': angularPreset
     }
     return config
   }
