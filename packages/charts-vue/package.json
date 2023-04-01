@@ -22,7 +22,6 @@
   "scripts": {
     "copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
     "build:package": "vite build && yarn copy:md",
-    "symlinks:demo": "ln -sf ../charts/stories/getting-started/vue.stories.mdx src/stories/getting-started-vue.stories.mdx",
     "build:demo": "storybook build -o demo/bundle --quiet",
     "build": "yarn build:package && yarn build:demo",
     "type-check": "vue-tsc --noEmit",

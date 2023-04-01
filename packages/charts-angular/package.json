@@ -24,7 +24,6 @@
     "copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
     "build:package": "ng build",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "symlinks:demo": "ln -sf ../charts/stories/getting-started/angular.stories.mdx projects/charts-angular/src/stories/getting-started-angular.stories.mdx",
     "storybook": "yarn docs:json && ng run charts-angular:storybook",
     "start": "yarn storybook",
     "build:demo": "yarn docs:json && ng run charts-angular:build-storybook",

@@ -1,11 +1,12 @@
 import type { StorybookConfig } from '@storybook/sveltekit'
+import { dirname } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		// Storybook 7 bug prevents MDX files from being shared across packages (other than core and react)
-		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx'
+		'../../charts/stories/getting-started/svelte.stories.mdx',
+		'../../charts/stories/tutorials/*.stories.mdx'
 	],
 	addons: [
 		{
@@ -23,7 +24,13 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 	staticDirs: ['../../charts/.storybook/assets'],
-	async viteFinal(config, _) {
+	async viteFinal(config) {
+		if (config.resolve) {
+			config.resolve.alias = {
+				...config.resolve.alias,
+				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
+			}
+		}
 		return config
 	},
 	features: {

@@ -1,12 +1,22 @@
 import type { StorybookConfig } from '@storybook/react-vite'
+import { dirname } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		// Temporarily disabled - bug in Storybook doesn't properly import these (they display partially)
-		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx'
+		'../../charts/stories/getting-started/react.stories.mdx',
+		'../../charts/stories/tutorials/*.stories.mdx'
 	],
+	viteFinal: (config) => {
+		if (config.resolve) {
+			config.resolve.alias = {
+				...config.resolve.alias,
+				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
+			}
+		}
+		return config
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -23,9 +33,6 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 	staticDirs: ['../../charts/.storybook/assets'],
-	async viteFinal(config, _) {
-		return config
-	},
 	features: {
 		storyStoreV7: false
 	}

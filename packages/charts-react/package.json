@@ -21,7 +21,6 @@
 	],
 	"scripts": {
 		"build:package": "vite build",
-		"symlinks:demo": "ln -sf ../../../charts/stories/getting-started/react.stories.mdx src/stories/getting-started-react.stories.mdx",
 		"build:demo": "NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet --disable-telemetry",
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",

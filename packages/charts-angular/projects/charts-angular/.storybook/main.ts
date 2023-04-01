@@ -2,14 +2,15 @@ import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 const core = '../../../../charts'
 const demoDist = resolve(__dirname, `${core}/dist/demo`)
-// const angularPreset = resolve(__dirname, '../node_modules/@storybook/angular/preset')
+import { dirname } from 'path'
 
 const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
-    // Storybook 7 bug prevents MDX files from being shared across packages (other than core and react)
-    // `${core}/stories/tutorials/!(0-api)*.stories.mdx`
+    // Storybook monorepo-specific bug
+		// '../../../../charts/stories/getting-started/angular.stories.mdx',
+		// '../../../../charts/stories/tutorials/*.stories.mdx'
   ],
   addons: [
     {
@@ -42,7 +43,7 @@ const config: StorybookConfig = {
     config.resolve!.alias = {
       ...config.resolve!.alias,
       '@carbon/charts/demo': demoDist,
-      // '@storybook/angular/preset': angularPreset
+      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
     }
     return config
   }
