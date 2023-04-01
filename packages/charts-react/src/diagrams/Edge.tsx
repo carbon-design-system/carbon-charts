@@ -12,12 +12,12 @@ type EdgeProps = {
 	markerStart?: string
 	markerEnd?: string
 	source?: Coordinates
-	target?: Coordinates
+	target?: Coordinates // Conflicts with React.SVGProps<SVGGElement> type for target
 	path?: string
 	variant?: string // 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'
 }
 
-const Edge: React.FC<EdgeProps & React.SVGProps<SVGGElement>> = ({
+const Edge: React.FC<EdgeProps /*& React.SVGProps<SVGGElement>*/> = ({
 	color,
 	markerEnd,
 	markerStart,
