@@ -31,34 +31,32 @@ npm install --save @carbon/charts-vue d3
 To start using the `StackedBarChart` component, try the example below:
 <br/>
 
-###### hello-world.vue
-```vue
-<script>
-  import Vue from 'vue'
+###### HelloWorld.vue
+```ts
+import Vue from 'vue'
 
-  import '@carbon/styles/css/styles.css' // may affect global styles
-  import '@carbon/charts/styles.css'
+import '@carbon/styles/css/styles.css' // may affect global styles
+import '@carbon/charts/styles.css'
 
-  import ChartsVue from '@carbon/charts-vue'
+import ChartsVue from '@carbon/charts-vue'
 
-  Vue.use(ChartsVue)
+Vue.use(ChartsVue)
 
-  export default {
-    components: {},
-    data() {
-      return {
-        data: [
-			    // refer to tabular data format tutorial
-		    ],
-        options: {
-          // refer to chart specific options
-        }
+export default {
+  components: {},
+  data() {
+    return {
+      data: [
+        // refer to tabular data format tutorial
+      ],
+      options: {
+        // refer to chart specific options
       }
-    },
-    template:
-      '<CcvStackedBarChart :data="data" :options="options"></CcvStackedBarChart>',
-  };
-</script>
+    }
+  },
+  template:
+    '<CcvStackedBarChart :data="data" :options="options"></CcvStackedBarChart>',
+}
 ```
 
 <br/>

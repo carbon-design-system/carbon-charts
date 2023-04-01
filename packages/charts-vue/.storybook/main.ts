@@ -1,10 +1,22 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
+import { dirname } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.stories.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx)'
+		'../src/**/*.stories.@(js|jsx|ts|tsx)',
+		'../../charts/stories/getting-started/vue.stories.mdx',
+		'../../charts/stories/tutorials/*.stories.mdx'
 	],
+	viteFinal: (config) => {
+		if (config.resolve) {
+			config.resolve.alias = {
+				...config.resolve.alias,
+				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
+			}
+		}
+		return config
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
