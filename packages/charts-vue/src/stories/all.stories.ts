@@ -1,8 +1,26 @@
 import { storiesOf, type Args } from '@storybook/vue3'
-
 import * as ChartComponents from '../components'
-
 import { storybookDemoGroups } from '@carbon/charts/demo'
+import type { BaseChartOptions, ChartTabularData } from '@carbon/charts'
+
+interface Demo {
+	title: string
+	isHighScale: boolean
+	chartType: {
+		vue: string
+	}
+	data: ChartTabularData
+	options: BaseChartOptions
+	codesandbox: {
+		vue: string
+	}
+}
+
+interface DemoGroup {
+	storyGroupTitle: string
+	title: string
+	demos: Demo[]
+}
 
 storiesOf('Docs/Welcome', module).add(
 	'Welcome',
@@ -33,7 +51,7 @@ storiesOf('Docs/Welcome', module).add(
 )
 
 // Loop through demo groups array
-storybookDemoGroups.forEach((demoGroup) => {
+storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
@@ -42,7 +60,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 		if (demo.isHighScale) {
 			return
 		}
-		const component = ChartComponents[`Ccv${demo.chartType.vanilla}`]
+		const component = ChartComponents[`Ccv${demo.chartType.vue}`]
 		groupStories.add(
 			demo.title,
 			(args: Args) => ({
@@ -84,12 +102,10 @@ storybookDemoGroups.forEach((demoGroup) => {
 				},
 				argTypes: {
 					data: {
-						control: { type: 'object' },
-						// defaultValue: demo.data
+						control: { type: 'object' }
 					},
 					options: {
-						control: { type: 'object' },
-						// defaultValue: demo.options
+						control: { type: 'object' }
 					}
 				}
 			}

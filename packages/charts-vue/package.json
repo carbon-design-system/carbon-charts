@@ -7,7 +7,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./dist/main.d.ts",
+      "types": "./dist/index.d.ts",
       "browser": {
         "import": "./dist/index.mjs",
         "require": "./dist/index.js"
