@@ -1,17 +1,32 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { StackedBarChart, type StackedBarChartOptions, type ChartTabularData } from '@carbon/charts'
+import { StackedBarChart, StackedBarChartOptions, ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData
+  options: StackedBarChartOptions
+}
+
 export default defineComponent({
-	name: 'CcvStackedBarChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new StackedBarChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as StackedBarChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Object as () => ChartTabularData,
+      required: true
+    },
+    options: {
+      type: Object as () => StackedBarChartOptions,
+      required: true
+    }
+  },
+  mounted() {
+    const { data, options } = this.$props as Props
+    this.coreChart = new StackedBarChart(this.$el as HTMLDivElement, {
+      data,
+      options
+    })
+  }
 })
 </script>
 

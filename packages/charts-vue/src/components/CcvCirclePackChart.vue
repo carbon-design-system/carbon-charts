@@ -1,17 +1,29 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { CirclePackChart, type CirclePackChartOptions, type ChartTabularData } from '@carbon/charts'
+import { defineComponent, PropType } from 'vue'
+import { CirclePackChart, CirclePackChartOptions, ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData
+  options: CirclePackChartOptions
+}
+
 export default defineComponent({
-	name: 'CcvCirclePackChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new CirclePackChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as CirclePackChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Object as PropType<ChartTabularData>,
+      required: true,
+    },
+    options: {
+      type: Object as PropType<CirclePackChartOptions>,
+      required: true,
+    },
+  },
+  mounted() {
+    const { data, options } = this.$props as Props
+    this.coreChart = new CirclePackChart(this.$el as HTMLDivElement, { data, options })
+  }
 })
 </script>
 

@@ -3,15 +3,27 @@ import { defineComponent } from 'vue'
 import { PieChart, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData;
+  options: PieChartOptions;
+}
+
 export default defineComponent({
-	name: 'CcvPieChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new PieChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as PieChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Array as () => ChartTabularData,
+      required: true
+    },
+    options: {
+      type: Object as () => PieChartOptions,
+      required: true
+    }
+  },
+  mounted() {
+    const { data, options } = this.$props as Props;
+    this.coreChart = new PieChart(this.$el as HTMLDivElement, { data, options });
+  }
 })
 </script>
 

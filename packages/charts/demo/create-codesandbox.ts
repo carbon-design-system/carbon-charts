@@ -211,37 +211,27 @@ export const createVueChartApp = (demo: any) => {
 	const chartComponent = demo.chartType.vue
 
 	const chartVue = `
-<script>
-	import Vue from 'vue'
-	import chartsVue from '@carbon/charts-vue'
-
-	export default {
-		name: 'Chart',
-		components: {},
-		data() {
-			return {
-				data: ${chartData},
-				options: ${chartOptions}
-			}
-		},
-		template: "<${chartComponent} :data='data' :options='options'></${chartComponent}>"
-	}
-</script>`
-
-	const appVue = `
 <script setup>
-	import Chart from './components/chart'
-	export default {
-		name: 'App',
-		components: {
-			Chart
-		}
-	}
+	import { ${chartComponent} } from '@carbon/charts-vue'
+  defineProps({
+		data: ${chartData},
+		options: ${chartOptions}
+	})
 </script>
 
 <template>
-	<div id="app">
-		<Chart/>
+  <${chartComponent} :data='data' :options='options' />
+</template>
+`
+
+	const appVue = `
+<script setup>
+	import Chart from './components/Chart.vue'
+</script>
+
+<template>
+	<div>
+		<Chart />
 	</div>
 </template>`
 
@@ -273,6 +263,7 @@ createApp(App).mount('#app')`
 		},
 		devDependencies: {
 			'@vitejs/plugin-vue': '^4.1.0',
+			'@vitejs/plugin-vue-jsx': '^3.0.1',
 			vite: '^4.2.1'
 		}
 	})
@@ -282,10 +273,11 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [vue()],
+	plugins: [vue(), vueJsx()],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url))
@@ -300,7 +292,7 @@ export default defineConfig({
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
+    <title>Vue3 Example with Carbon Charts</title>
   </head>
   <body>
     <div id="app"></div>
@@ -309,7 +301,7 @@ export default defineConfig({
 </html>`
 
 	return {
-		'src/components/chart.vue': chartVue,
+		'src/components/Chart.vue': chartVue,
 		'src/ibm-plex-font.css': plexCSS,
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,

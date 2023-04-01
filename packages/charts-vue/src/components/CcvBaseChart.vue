@@ -4,7 +4,6 @@ import type { ChartTabularData } from '@carbon/charts'
 
 
 export default defineComponent({
-	name: 'CcvBaseChart',
 	data() {
 		return {
 			coreChart: null as any | null // would be improved with a base type

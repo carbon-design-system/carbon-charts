@@ -1,17 +1,29 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { ComboChart, type ComboChartOptions, type ChartTabularData } from '@carbon/charts'
+import { defineComponent, PropType } from 'vue'
+import { ComboChart, ComboChartOptions, ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData
+  options: ComboChartOptions
+}
+
 export default defineComponent({
-	name: 'CcvComboChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new ComboChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as ComboChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Object as PropType<ChartTabularData>,
+      required: true
+    },
+    options: {
+      type: Object as PropType<ComboChartOptions>,
+      required: true
+    }
+  },
+  mounted() {
+    const { data, options } = this.$props as Props
+    this.coreChart = new ComboChart(this.$el as HTMLDivElement, { data, options })
+  }
 })
 </script>
 

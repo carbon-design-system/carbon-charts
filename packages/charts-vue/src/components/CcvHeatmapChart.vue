@@ -1,17 +1,29 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { HeatmapChart, type HeatmapChartOptions, type ChartTabularData } from '@carbon/charts'
+import { HeatmapChart, HeatmapChartOptions, ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData;
+  options: HeatmapChartOptions;
+}
+
 export default defineComponent({
-	name: 'CcvHeatmapChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new HeatmapChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as HeatmapChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Object as () => ChartTabularData,
+      required: true
+    },
+    options: {
+      type: Object as () => HeatmapChartOptions,
+      required: true
+    }
+  },
+  mounted() {
+    const { data, options } = this.$props as Props;
+    this.coreChart = new HeatmapChart(this.$el as HTMLDivElement, { data, options });
+  }
 })
 </script>
 

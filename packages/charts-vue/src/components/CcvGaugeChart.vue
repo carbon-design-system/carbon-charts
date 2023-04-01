@@ -3,15 +3,30 @@ import { defineComponent } from 'vue'
 import { GaugeChart, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
 import CcvBaseChart from './CcvBaseChart.vue'
 
+interface Props {
+  data: ChartTabularData
+  options: GaugeChartOptions
+}
+
 export default defineComponent({
-	name: 'CcvGaugeChart',
-	extends: CcvBaseChart,
-	mounted() {
-		this.coreChart = new GaugeChart(this.$el as HTMLDivElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as GaugeChartOptions
-		})
-	}
+  extends: CcvBaseChart,
+  props: {
+    data: {
+      type: Object as () => ChartTabularData,
+      required: true
+    },
+    options: {
+      type: Object as () => GaugeChartOptions,
+      required: true
+    }
+  },
+  mounted() {
+    const { data, options } = this.$props as Props
+    this.coreChart = new GaugeChart(this.$el as HTMLDivElement, {
+      data,
+      options
+    })
+  }
 })
 </script>
 
