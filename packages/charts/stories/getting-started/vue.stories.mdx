@@ -39,25 +39,24 @@ To start using the `StackedBarChart` component, try the example below:
   import '@carbon/styles/css/styles.css' // may affect global styles
   import '@carbon/charts/styles.css'
 
-  import chartsVue from '@carbon/charts-vue'
+  import ChartsVue from '@carbon/charts-vue'
 
-  Vue.use(chartsVue)
+  Vue.use(ChartsVue)
 
   export default {
-    name: 'HelloWorld',
     components: {},
     data() {
       return {
-        stackedBarData: [
+        data: [
 			    // refer to tabular data format tutorial
 		    ],
-        stackedBarOptions: {
+        options: {
           // refer to chart specific options
         }
       }
     },
     template:
-      '<ccv-stacked-bar-chart :data="stackedBarData" :options="stackedBarOptions"></ccv-bar-chart>',
+      '<CcvStackedBarChart :data="data" :options="options"></CcvStackedBarChart>',
   };
 </script>
 ```

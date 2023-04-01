@@ -21,6 +21,7 @@
 	],
 	"scripts": {
 		"build:package": "vite build",
+		"symlinks:demo": "ln -sf ../../../charts/stories/getting-started/react.stories.mdx src/stories/getting-started-react.stories.mdx",
 		"build:demo": "NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet --disable-telemetry",
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",
@@ -34,7 +35,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/telemetry": "~0.1.0",
-		"d3": "^7.8.3"
+		"d3": "^7.8.4"
 	},
 	"peerDependencies": {
 		"d3": "^7.8.0",
@@ -44,15 +45,15 @@
 	"devDependencies": {
 		"@carbon/icons-react": "^11.17.0",
 		"@rushstack/eslint-patch": "^1.2.0",
-		"@storybook/addon-essentials": "^7.0.0-0",
-		"@storybook/addon-interactions": "^7.0.0-0",
-		"@storybook/addon-links": "^7.0.0-0",
-		"@storybook/blocks": "^7.0.0-0",
-		"@storybook/manager-api": "^7.0.0-0",
-		"@storybook/react": "^7.0.0-0",
-		"@storybook/react-vite": "^7.0.0-0",
-		"@storybook/testing-library": "^0.0.14-next.1",
-		"@storybook/theming": "^7.0.0-0",
+		"@storybook/addon-essentials": "^7.0.0",
+		"@storybook/addon-interactions": "^7.0.0",
+		"@storybook/addon-links": "^7.0.0",
+		"@storybook/blocks": "^7.0.0",
+		"@storybook/manager-api": "^7.0.0",
+		"@storybook/react": "^7.0.0",
+		"@storybook/react-vite": "^7.0.0",
+		"@storybook/testing-library": "^0.0.14-next.2",
+		"@storybook/theming": "^7.0.0",
 		"@types/carbon__icons-react": "^11.16.0",
 		"@types/react": "^18.0.31",
 		"@types/react-dom": "^18.0.11",
@@ -70,7 +71,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"sass": "^1.60.0",
-		"storybook": "^7.0.0-0",
+		"storybook": "^7.0.0",
 		"typescript": "^5.0.3",
 		"vite": "^4.2.1",
 		"vite-plugin-dts": "^2.1.0"

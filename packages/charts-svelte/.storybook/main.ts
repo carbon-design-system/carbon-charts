@@ -5,8 +5,7 @@ const config: StorybookConfig = {
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
 		// Storybook 7 bug prevents MDX files from being shared across packages (other than core and react)
-		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx',
-		// '../../charts/stories/getting-started/svelte.stories.mdx'
+		// '../../charts/stories/tutorials/!(0-api)*.stories.mdx'
 	],
 	addons: [
 		{
@@ -23,7 +22,7 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag'
 	},
-	staticDirs: ['./assets'],
+	staticDirs: ['../../charts/.storybook/assets'],
 	async viteFinal(config, _) {
 		return config
 	},
