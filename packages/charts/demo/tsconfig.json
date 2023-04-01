@@ -4,7 +4,7 @@
 		"baseUrl": ".",
 		"outDir": "./bundle",
 		"noEmitOnError": true,
-		"declaration": true
+		"rootDir": "../"
 	},
 	"ts-node": {
 		"files": true

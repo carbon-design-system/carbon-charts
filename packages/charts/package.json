@@ -51,7 +51,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"peerDependencies": {
-		"d3": "^7.4.5"
+		"d3": "^7.8.4"
 	},
 	"dependencies": {
 		"@carbon/styles": "^1.26.0",

@@ -3,18 +3,13 @@ import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 
 import packageJSON from '../package.json'
 const libraryVersion = packageJSON.version
+const D3VERSION = packageJSON.peerDependencies['d3']
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
-const D3VERSION = '^7.8.2'
-
 export const createChartSandbox = (chartTemplate: any) => {
 	const files: IFiles = {}
-
-	Object.keys(chartTemplate).forEach(
-		(filePath) => (files[filePath] = { content: chartTemplate[filePath], isBinary: false })
-	)
-
+	Object.keys(chartTemplate).forEach(filePath => (files[filePath] = { content: chartTemplate[filePath], isBinary: false }))
 	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters({ files })}`
 }
 
@@ -23,16 +18,12 @@ export const createVanillaChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, '\t')
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `<html>
+	const indexHtml = `
+<html>
 	<head>
 		<title>Parcel Sandbox</title>
 		<meta charset="UTF-8" />
-		<link
-			rel="preconnect"
-			crossorigin="anonymous"
-			href="https://fonts.gstatic.com"
-		/>
-
+		<link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
 		<link
 			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
 			rel="stylesheet"
@@ -41,7 +32,6 @@ export const createVanillaChartApp = (demo: any) => {
 	</head>
 	<body>
 		<div id="app" style="width: 100%; height: 100%;"></div>
-
 		<script src="src/index.js"></script>
 	</body>
 </html>`
@@ -70,11 +60,11 @@ new ${chartComponent}(chartHolder, {
 		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
-			'@carbon/styles': '^1.25.0',
+			'@carbon/styles': '^1.26.0',
 			d3: D3VERSION
 		},
 		devDependencies: {
-			'parcel-bundler': '^1.6.1'
+			'parcel-bundler': '^1.12.5'
 		}
 	}
 
@@ -188,7 +178,7 @@ export class AppModule {}`
 			'@angular/platform-browser': '^15.2.4',
 			'@angular/platform-browser-dynamic': '^15.2.4',
 			'@carbon/charts-angular': libraryVersion,
-			'@carbon/styles': '^1.25.0',
+			'@carbon/styles': '^1.26.0',
 			d3: D3VERSION,
 			rxjs: '~7.8.0',
 			tslib: '^2.5.0',
@@ -205,24 +195,54 @@ export class AppModule {}`
 	}
 }
 
+
 export const createVueChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, '\t\t')
-	const chartOptions = JSON.stringify(demo.options, null, '\t\t')
+	const dataJson = JSON.stringify(demo.data, null, '  ')
+	const data = dataJson.replace(/"([^"]+)":/g, '$1:')
+	const optionsJson = JSON.stringify(demo.options, null, '  ')
+	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
 	const chartComponent = demo.chartType.vue
+
+	const codeSandboxTasks = `
+{
+	// These tasks will run in order when initializing your CodeSandbox project.
+	"setupTasks": [
+		{
+			"name": "Install Dependencies",
+			"command": "npm install"
+		}
+	],
+
+	// These tasks can be run from CodeSandbox. Running one will open a log in the app.
+	"tasks": {
+		"dev": {
+			"name": "dev",
+			"command": "npm run dev",
+			"runAtStart": true
+		},
+		"build": {
+			"name": "build",
+			"command": "npm run build",
+			"runAtStart": false
+		},
+		"preview": {
+			"name": "preview",
+			"command": "npm run preview",
+			"runAtStart": false
+		}
+	}
+}`
 
 	const chartVue = `
 <script setup>
-	import { ${chartComponent} } from '@carbon/charts-vue'
-  defineProps({
-		data: ${chartData},
-		options: ${chartOptions}
-	})
+const data = ${data}
+
+const options = ${options}
 </script>
 
 <template>
   <${chartComponent} :data='data' :options='options' />
-</template>
-`
+</template>`
 
 	const appVue = `
 <script setup>
@@ -237,27 +257,29 @@ export const createVueChartApp = (demo: any) => {
 
 	const mainJs = `
 import { createApp } from 'vue'
+import ChartsVue from '@carbon/charts-vue'
 import App from './App.vue'
 
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
 import './ibm-plex-font.css'
 
-createApp(App).mount('#app')`
+const app = createApp(App)
+app.use(ChartsVue)
+app.mount('#app')`
 
 	const packageJson = JSON.stringify({
 		name: 'carbon-charts-vue-example',
+		description: 'Carbon Charts Vue Example',
 		version: '0.0.0',
-		private: true,
 		scripts: {
-			dev: 'vite dev --host',
-			start: 'vite dev --host',
+			dev: 'vite',
 			build: 'vite build',
-			preview: 'vite preview'
+			preview: 'vite preview --port 4173'
 		},
 		dependencies: {
 			'@carbon/charts-vue': libraryVersion,
-			'@carbon/styles': '^1.25.0',
+			'@carbon/styles': '^1.26.0',
 			d3: D3VERSION,
 			vue: '^3.2.47'
 		},
@@ -265,8 +287,9 @@ createApp(App).mount('#app')`
 			'@vitejs/plugin-vue': '^4.1.0',
 			'@vitejs/plugin-vue-jsx': '^3.0.1',
 			vite: '^4.2.1'
-		}
-	})
+		},
+		keywords: []
+	}, null, 2)
 
 	const viteConfig = `
 import { fileURLToPath, URL } from 'node:url'
@@ -307,7 +330,8 @@ export default defineConfig({
 		'src/main.js': mainJs,
 		'index.html': htmlTemplate,
 		'package.json': packageJson,
-		'vite.config.js': viteConfig
+		'vite.config.js': viteConfig,
+		'.codesandbox/tasks.json': codeSandboxTasks
 	}
 }
 
