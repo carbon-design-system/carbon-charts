@@ -615,106 +615,57 @@ export const createVueChartApp = (demo: any) => {
 	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
 	const chartComponent = demo.chartType.vue
 
-	const chartVue =
+	const appVue =
 `<template>
-<${chartComponent} :data='data' :options='options' />
+  <div id="app">
+	  <${chartComponent} :data="data" :options="options" />
+  </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const data = ref(${data})
-
-const options = ref(${options})
+<script>
+export default {
+  data() {
+	  return {
+		  data: ${data},
+		  options: ${options}
+	  }
+  }
+}
 </script>
 
 <style>
-	@import '@carbon/styles/css/styles.css';
-	@import '@carbon/charts/styles.css';
-  @import 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap';
+  @import "@carbon/styles/css/styles.css";
+  @import "@carbon/charts/styles.css";
+  @import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 </style>`
 
-	const appVue =
-`<template>
-	<Chart />
-</template>
-
-<script setup>
-	import Chart from './components/Chart.vue'
-</script>`
-
 	const mainJs =
-`import { createApp } from 'vue'
+`import Vue from 'vue'
 import ChartsVue from '@carbon/charts-vue'
 import App from './App.vue'
 
-const app = createApp(App)
-app.use(ChartsVue)
-app.mount('#app')`
+Vue.use(ChartsVue)
+Vue.config.productionTip = false
+new Vue({
+  render: (h) => h(App)
+}).$mount('#app')`
 
 	const packageJson = JSON.stringify({
 		name: 'carbon-charts-vue-example',
 		description: 'Carbon Charts Vue Example',
 		version: '0.0.0',
-		scripts: {
-			dev: 'vite dev',
-			build: 'vite build',
-			preview: 'vite preview'
-		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-vue': libraryVersion,
 			'@carbon/styles': '^1.26.0',
-			d3: D3VERSION,
-			vue: '^3.2.47'
-		},
-		devDependencies: {
-			'@vitejs/plugin-vue': '^4.1.0',
-			'@vitejs/plugin-vue-jsx': '^3.0.1',
-			vite: '^4.2.1'
-		},
-		keywords: []
+			'@vue/cli-plugin-babel': '^5.0.8',
+			vue: '^2.7.14'
+		}
 	}, null, 2)
 
-	const viteConfig =
-`import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-	plugins: [vue(), vueJsx()],
-	resolve: {
-		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url))
-		}
-	}
-})`
-
-	const htmlTemplate =
-`<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue3 Example with Carbon Charts</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>`
-
 	return {
-		'.codesandbox/tasks.json': codeSandboxTasks,
-		'src/components/Chart.vue': chartVue,
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
-		'index.html': htmlTemplate,
 		'package.json': packageJson,
-		'vite.config.js': viteConfig
 	}
 }
