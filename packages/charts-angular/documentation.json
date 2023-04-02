@@ -7143,7 +7143,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific bug\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
+                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
             },
             {
                 "name": "context",
@@ -7239,7 +7239,7 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7249,21 +7249,11 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{ x: 0, y: 0 }"
-            },
-            {
-                "name": "linkTarget",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{ x: 400, y: 0 }"
+                "defaultValue": "{ x: 0, y: 0 }"
             },
             {
                 "name": "linkTarget",
@@ -7274,6 +7264,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{ x: 300, y: 0 }"
+            },
+            {
+                "name": "linkTarget",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ x: 400, y: 0 }"
             },
             {
                 "name": "linkTargetCurve",
@@ -7492,7 +7492,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific bug\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
+                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
                 },
                 {
                     "name": "core",
@@ -7582,6 +7582,28 @@
                     "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
+            "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts": [
+                {
+                    "name": "linkSource",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 0, y: 0 }"
+                },
+                {
+                    "name": "linkTarget",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 300, y: 0 }"
+                }
+            ],
             "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts": [
                 {
                     "name": "linkSource",
@@ -7612,28 +7634,6 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{ x: 400, y: 200 }"
-                }
-            ],
-            "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts": [
-                {
-                    "name": "linkSource",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 0, y: 0 }"
-                },
-                {
-                    "name": "linkTarget",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/.storybook/preview.ts": [

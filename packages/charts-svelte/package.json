@@ -4,7 +4,8 @@
 	"description": "Carbon charting components for Svelte",
 	"scripts": {
 		"package": "svelte-kit sync && svelte-package && publint",
-		"build:package": "vite build && yarn package",
+		"cp:styles": "cp ../charts/dist/styles.* dist",
+		"build:package": "vite build && yarn package && yarn cp:styles",
 		"copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
 		"build:demo": "storybook build -o demo/bundle --quiet",
 		"build": "yarn build:package && yarn copy:md && yarn build:demo",
@@ -27,7 +28,9 @@
 				"import": "./dist/index.js"
 			},
 			"import": "./dist/index.js"
-		}
+		},
+    "./styles.min.css": "./dist/styles.min.css",
+		"./styles.css": "./dist/styles.css"
 	},
 	"files": [
 		"dist"

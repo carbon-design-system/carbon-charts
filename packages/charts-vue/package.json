@@ -14,14 +14,17 @@
       },
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./styles.min.css": "./dist/styles.min.css",
+		"./styles.css": "./dist/styles.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
-    "build:package": "vite build && yarn copy:md",
+    "cp:styles": "cp ../charts/dist/styles.* dist",
+    "build:package": "vite build && yarn copy:md && yarn cp:styles",
     "build:demo": "storybook build -o demo/bundle --quiet",
     "build": "yarn build:package && yarn build:demo",
     "type-check": "vue-tsc --noEmit",

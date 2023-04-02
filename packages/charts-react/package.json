@@ -14,13 +14,16 @@
 			},
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
-		}
+		},
+    "./styles.min.css": "./dist/styles.min.css",
+		"./styles.css": "./dist/styles.css"
 	},
 	"files": [
 		"dist"
 	],
 	"scripts": {
-		"build:package": "vite build",
+		"cp:styles": "cp ../charts/dist/styles.* dist",
+		"build:package": "vite build && yarn cp:styles",
 		"build:demo": "NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet --disable-telemetry",
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",

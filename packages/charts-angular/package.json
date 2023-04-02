@@ -14,7 +14,9 @@
       },
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./styles.min.css": "./dist/styles.min.css",
+		"./styles.css": "./dist/styles.css"
   },
   "files": [
     "dist"
@@ -22,7 +24,8 @@
   "scripts": {
     "ng": "ng",
     "copy:md": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
-    "build:package": "ng build",
+    "cp:styles": "cp ../charts/dist/styles.* dist",
+    "build:package": "ng build && yarn cp:styles",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "yarn docs:json && ng run charts-angular:storybook",
     "start": "yarn storybook",
