@@ -7,14 +7,17 @@ const D3VERSION = packageJSON.peerDependencies['d3']
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
-// Codesandbox.io tasks.json for vite environments
+const dockerFile =
+`FROM node:18.15.0-bullseye
+`
+
 const codeSandboxTasks =
 `{
-	// These tasks will run in order when initializing your CodeSandbox project.
+	"$schema": "https://codesandbox.io/schemas/tasks.json",
 	"setupTasks": [
 		{
 			"name": "Install Dependencies",
-			"command": "npm install"
+			"command": "npm install && npm run build"
 		}
 	],
 
@@ -473,8 +476,10 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 // Charts Svelte
 
 export const createSvelteChartApp = (demo: any) => {
-	const chartData = JSON.stringify(demo.data, null, 2)
-	const chartOptions = JSON.stringify(demo.options, null, 2)
+	const dataJson = JSON.stringify(demo.data, null, 2)
+	const data = dataJson.replace(/"([^"]+)":/g, '$1:')
+	const optionsJson = JSON.stringify(demo.options, null, 2)
+	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
 
 	let chartComponent = demo.chartType.vanilla
 
@@ -490,42 +495,90 @@ export const createSvelteChartApp = (demo: any) => {
 			break
 	}
 
-	const indexHtml =
+	const svelteKitTsConfig =
+`{
+	"compilerOptions": {
+		"paths": {
+			"$lib": [
+				"../src/lib"
+			],
+			"$lib/*": [
+				"../src/lib/*"
+			]
+		},
+		"rootDirs": [
+			"..",
+			"./types"
+		],
+		"importsNotUsedAsValues": "error",
+		"isolatedModules": true,
+		"preserveValueImports": true,
+		"lib": [
+			"esnext",
+			"DOM",
+			"DOM.Iterable"
+		],
+		"moduleResolution": "node",
+		"module": "esnext",
+		"target": "esnext",
+		"ignoreDeprecations": "5.0"
+	},
+	"include": [
+		"ambient.d.ts",
+		"./types/**/$types.d.ts",
+		"../vite.config.ts",
+		"../src/**/*.js",
+		"../src/**/*.ts",
+		"../src/**/*.svelte",
+		"../tests/**/*.js",
+		"../tests/**/*.ts",
+		"../tests/**/*.svelte"
+	],
+	"exclude": [
+		"../node_modules/**",
+		"./[!ambient.d.ts]**",
+		"../src/service-worker.js",
+		"../src/service-worker.ts",
+		"../src/service-worker.d.ts"
+	]
+}`
+
+	const appHtml =
 `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<link
-			rel="preconnect"
-			crossorigin="anonymous"
-			href="https://fonts.gstatic.com"
-		/>
+		<link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
 		<link
 			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
 			rel="stylesheet"
 			crossorigin="anonymous"
 		/>
+		%sveltekit.head%
 	</head>
-	<body>
-		<script type="module">
-			import App from "./App.svelte";
-
-			const app = new App({ target: document.body });
-		</script>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>`
 
-	const App =
-`<script>
-	import { ${chartComponent} } from "@carbon/charts-svelte"
-	import '@carbon/styles/css/styles.css'
-	import '@carbon/charts/styles.css'
-	import './ibm-plex-font.css'
+	const appDts =
+`declare global {
+	namespace App {
+	}
+}
+
+export {}
+`
+
+  const pageSvelte =
+`<script lang="ts">
+import { ${chartComponent} } from '@carbon/charts-svelte'
+import '@carbon/styles/css/styles.css'
+import '@carbon/charts/styles.css'
 </script>
 
-<${chartComponent} data={${chartData}} options={${chartOptions}} />`
+<${chartComponent} data={${data}} options={${options}} />`
 
 	const packageJson = JSON.stringify({
 		name: 'carbon-charts-svelte-example',
@@ -533,6 +586,7 @@ export const createSvelteChartApp = (demo: any) => {
 		type: module,
 		scripts: {
 			dev: 'vite dev',
+			start: 'vite dev',
 			build: 'vite build',
 			preview: 'vite preview'
 		},
@@ -548,16 +602,11 @@ export const createSvelteChartApp = (demo: any) => {
 			tslib: '^2.5.0',
 			typescript: '^5.0.3',
 			vite: '^4.2.1'
+		},
+		engines: {
+			node: '^18.14.0'
 		}
 	}, null, 2)
-
-	const viteConfig =
-`import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-	plugins: [sveltekit()]
-})`
 
 	const svelteKitConfig =
 `import adapter from '@sveltejs/adapter-auto'
@@ -565,14 +614,9 @@ import { vitePreprocess } from '@sveltejs/kit/vite'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
-		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
-		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
 	}
 }
@@ -594,24 +638,43 @@ export default config`
 	}
 }`
 
+	const viteConfig =
+`import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+	plugins: [sveltekit()],
+	optimizeDeps: {
+		include: ['@carbon/charts', 'carbon-components'],
+		exclude: ['@carbon/telemetry']
+	},
+	ssr: {
+		noExternal: ['@carbon/charts', '@carbon/telemetry', 'carbon-components']
+	}
+})`
+
 	return {
+		'.codesandbox/Dockerfile': dockerFile,
 		'.codesandbox/tasks.json': codeSandboxTasks,
-		'App.svelte': App,
-		'index.html': indexHtml,
+		'.svelte-kit/tsconfig.json': svelteKitTsConfig,
+		'src/app.html': appHtml,
+		'src/app.d.ts': appDts,
+		'src/routes/+page.svelte': pageSvelte,
+		'src/static/.gitkeep': ' ',
+		'.npmrc': 'engine-strict=true',
 		'package.json': packageJson,
-		'ibm-plex-font.css': plexCSS,
-		'vite.config.ts': viteConfig,
 		'svelte.config.js': svelteKitConfig,
-		'tsconfig.json': tsConfig
+		'tsconfig.json': tsConfig,
+		'vite.config.ts': viteConfig,
 	}
 }
 
 // Charts Vue
 
 export const createVueChartApp = (demo: any) => {
-	const dataJson = JSON.stringify(demo.data, null, '  ')
+	const dataJson = JSON.stringify(demo.data, null, 2)
 	const data = dataJson.replace(/"([^"]+)":/g, '$1:')
-	const optionsJson = JSON.stringify(demo.options, null, '  ')
+	const optionsJson = JSON.stringify(demo.options, null, 2)
 	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
 	const chartComponent = demo.chartType.vue
 
