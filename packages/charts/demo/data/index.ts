@@ -1270,10 +1270,12 @@ const mapDemoGroups = (demoGroups: any) =>
 				if (!demo.codesandbox) {
 					demo.codesandbox = {}
 				}
-				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
-				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
+
 				demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
+				demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
+				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
+				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
 				if (!demo.code) {
 					demo.code = {}

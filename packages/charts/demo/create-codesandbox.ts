@@ -7,9 +7,17 @@ const D3VERSION = packageJSON.peerDependencies['d3']
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
-const dockerFile =
-`FROM node:18.15.0-bullseye
-`
+const dockerFile = `FROM node:18.15.0-bullseye`
+
+const sandboxConfig =
+`{
+  "infiniteLoopProtection": true,
+  "hardReloadOnChange": false,
+  "view": "browser",
+  "container": {
+    "node": "16"
+  }
+}`
 
 const codeSandboxTasks =
 `{
@@ -17,7 +25,7 @@ const codeSandboxTasks =
 	"setupTasks": [
 		{
 			"name": "Install Dependencies",
-			"command": "npm install && npm run build"
+			"command": "yarn install"
 		}
 	],
 
@@ -25,27 +33,35 @@ const codeSandboxTasks =
 	"tasks": {
 		"dev": {
 			"name": "dev",
-			"command": "npm run dev",
+			"command": "yarn dev",
 			"runAtStart": true
 		},
 		"build": {
 			"name": "build",
-			"command": "npm run build",
+			"command": "yarn build",
 			"runAtStart": false
 		},
 		"preview": {
 			"name": "preview",
-			"command": "npm run preview",
+			"command": "yarn preview",
 			"runAtStart": false
 		}
 	}
 }`
 
 export const createChartSandbox = (chartTemplate: any) => {
-	const files: IFiles = {}
-	Object.keys(chartTemplate).forEach(filePath => (files[filePath] = { content: chartTemplate[filePath], isBinary: false }))
-	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters({ files })}`
+  const files: IFiles = {}
+  Object.keys(chartTemplate).forEach(filePath => {
+    files[filePath] = {
+      content: chartTemplate[filePath],
+      isBinary: false
+    }
+  })
+  const parameters = getParameters({ files })
+  const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(parameters)}&view=split`
+  return url
 }
+
 
 // Charts Vanilla JavaScript
 
@@ -476,10 +492,8 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 // Charts Svelte
 
 export const createSvelteChartApp = (demo: any) => {
-	const dataJson = JSON.stringify(demo.data, null, 2)
-	const data = dataJson.replace(/"([^"]+)":/g, '$1:')
-	const optionsJson = JSON.stringify(demo.options, null, 2)
-	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
+	const data = JSON.stringify(demo.data, null, 2)
+	const options = JSON.stringify(demo.options, null, 2)
 
 	let chartComponent = demo.chartType.vanilla
 
@@ -583,7 +597,8 @@ import '@carbon/charts/styles.css'
 	const packageJson = JSON.stringify({
 		name: 'carbon-charts-svelte-example',
 		version: '0.0.0',
-		type: module,
+		type: 'module',
+		license: 'MIT',
 		scripts: {
 			dev: 'vite dev',
 			start: 'vite dev',
@@ -597,6 +612,7 @@ import '@carbon/charts/styles.css'
 			'@sveltejs/adapter-auto': '^2.0.0',
 			'@sveltejs/kit': '^1.15.0',
 			d3: D3VERSION,
+			sass: '^1.60.0',
 			svelte: '^3.58.0',
 			'svelte-check': '^3.1.4',
 			tslib: '^2.5.0',
@@ -604,7 +620,7 @@ import '@carbon/charts/styles.css'
 			vite: '^4.2.1'
 		},
 		engines: {
-			node: '^18.14.0'
+			node: '>=16.12.0'
 		}
 	}, null, 2)
 
@@ -649,12 +665,13 @@ export default defineConfig({
 		exclude: ['@carbon/telemetry']
 	},
 	ssr: {
-		noExternal: ['@carbon/charts', '@carbon/telemetry', 'carbon-components']
+		external: ['@carbon/charts']
+		// noExternal: ['@carbon/charts', '@carbon/telemetry', 'carbon-components']
 	}
 })`
 
 	return {
-		'.codesandbox/Dockerfile': dockerFile,
+		// '.codesandbox/Dockerfile': dockerFile, // works but adds a lot of time to the startup process
 		'.codesandbox/tasks.json': codeSandboxTasks,
 		'.svelte-kit/tsconfig.json': svelteKitTsConfig,
 		'src/app.html': appHtml,
@@ -663,6 +680,8 @@ export default defineConfig({
 		'src/static/.gitkeep': ' ',
 		'.npmrc': 'engine-strict=true',
 		'package.json': packageJson,
+		'README.md': `# Carbon Charts Svelte Example`,
+		'sandbox.config.json': sandboxConfig,
 		'svelte.config.js': svelteKitConfig,
 		'tsconfig.json': tsConfig,
 		'vite.config.ts': viteConfig,
@@ -672,10 +691,8 @@ export default defineConfig({
 // Charts Vue
 
 export const createVueChartApp = (demo: any) => {
-	const dataJson = JSON.stringify(demo.data, null, 2)
-	const data = dataJson.replace(/"([^"]+)":/g, '$1:')
-	const optionsJson = JSON.stringify(demo.options, null, 2)
-	const options = optionsJson.replace(/"([^"]+)":/g, '$1:')
+	const data = JSON.stringify(demo.data, null, 2)
+	const options = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vue
 
 	const appVue =
