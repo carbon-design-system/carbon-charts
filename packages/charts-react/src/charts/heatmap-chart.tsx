@@ -1,7 +1,6 @@
 import {
 	HeatmapChart as HeatmapChartCore,
 	type HeatmapChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class HeatmapChart extends BaseChart<HeatmapChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<HeatmapChartOptions>
-	declare chart: HeatmapChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

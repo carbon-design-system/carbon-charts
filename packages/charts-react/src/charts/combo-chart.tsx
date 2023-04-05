@@ -1,7 +1,6 @@
 import {
 	ComboChart as ComboChartCore,
 	type ComboChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class ComboChart extends BaseChart<ComboChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<ComboChartOptions>
-	declare chart: ComboChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

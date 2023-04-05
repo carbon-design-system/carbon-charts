@@ -1,27 +1,20 @@
 import React from 'react'
-import type { Chart, BaseChartOptions, ChartTabularData } from '@carbon/charts'
+import type { Chart as BaseChartCore, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
-type Props<Options> = { options?: Options; data?: ChartTabularData }
+interface Props<Options> {
+  options?: Options;
+  data?: ChartTabularData;
+}
 
 export default class BaseChart<Options = BaseChartOptions> extends React.Component<Props<Options>> {
-	data: ChartTabularData | []
-	options: Options | {}
-	declare props: Props<Options>
-	chart!: Chart
+	data: ChartTabularData | [] = []
+	options: Options | {} = {}
+	chart!: BaseChartCore
 
 	constructor(props: Props<Options>) {
 		super(props)
 
 		const { options, data } = props
-
-		if (!options) {
-			console.error('Missing options!')
-		}
-
-		if (!data) {
-			console.error('Missing data!')
-		}
-
 		this.data = props.data || []
 		this.options = props.options || {}
 

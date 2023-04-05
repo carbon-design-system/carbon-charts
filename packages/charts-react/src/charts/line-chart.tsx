@@ -1,7 +1,6 @@
 import {
 	LineChart as LineChartCore,
 	type LineChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class LineChart extends BaseChart<LineChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<LineChartOptions>
-	declare chart: LineChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

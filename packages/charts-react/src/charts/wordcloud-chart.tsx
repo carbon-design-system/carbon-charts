@@ -1,7 +1,6 @@
 import {
 	WordCloudChart as WordCloudChartCore,
 	type WorldCloudChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class WordCloudChart extends BaseChart<WorldCloudChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<WorldCloudChartOptions>
-	declare chart: WordCloudChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

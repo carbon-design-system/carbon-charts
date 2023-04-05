@@ -1,7 +1,6 @@
 import {
 	PieChart as PieChartCore,
 	type PieChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class PieChart extends BaseChart<PieChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<PieChartOptions>
-	declare chart: PieChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

@@ -1,7 +1,6 @@
 import {
 	GaugeChart as GaugeChartCore,
 	type GaugeChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class GaugeChart extends BaseChart<GaugeChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<GaugeChartOptions>
-	declare chart: GaugeChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

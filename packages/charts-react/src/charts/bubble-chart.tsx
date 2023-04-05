@@ -1,7 +1,6 @@
 import {
 	BubbleChart as BubbleChartCore,
 	type BubbleChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class BubbleChart extends BaseChart<BubbleChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<BubbleChartOptions>
-	declare chart: BubbleChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

@@ -13,7 +13,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Data passed to charts library for displaying
 	 */
-	@Input() set data(newData) {
+	@Input() set data(newData: ChartTabularData) {
 		// If data already exists, that means the chart has been initialized
 		const dataExistsAlready = !!this._data
 
@@ -24,14 +24,14 @@ export class BaseChart implements AfterViewInit, OnInit {
 		}
 	}
 
-	get data() {
+	get data(): ChartTabularData {
 		return this._data
 	}
 
 	/**
 	 * Options passed to charts library
 	 */
-	@Input() set options(newOptions) {
+	@Input() set options(newOptions: any) {
 		// If data already exists, that means the chart has been initialized
 		const optionsExistAlready = !!this._options
 
@@ -59,7 +59,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Chart container element ref
 	 */
-	@ViewChild('nChart') chartRef!: ElementRef<HTMLElement>
+	@ViewChild('chartRef') chartRef!: ElementRef<HTMLElement>
 
 	/**
 	 * Chart object instance

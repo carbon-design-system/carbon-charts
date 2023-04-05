@@ -1,7 +1,6 @@
 import {
 	MeterChart as MeterChartCore,
 	type MeterChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class MeterChart extends BaseChart<MeterChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<MeterChartOptions>
-	declare chart: MeterChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

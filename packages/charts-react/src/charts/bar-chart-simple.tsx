@@ -1,7 +1,6 @@
 import {
 	SimpleBarChart as SimpleBarChartCore,
 	type BarChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class SimpleBarChart extends BaseChart<BarChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<BarChartOptions>
-	declare chart: SimpleBarChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

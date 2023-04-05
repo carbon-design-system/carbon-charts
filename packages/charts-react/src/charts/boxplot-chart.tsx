@@ -1,7 +1,6 @@
 import {
 	BoxplotChart as BoxplotChartCore,
 	type BoxplotChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class BoxplotChart extends BaseChart<BoxplotChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<BoxplotChartOptions>
-	declare chart: BoxplotChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

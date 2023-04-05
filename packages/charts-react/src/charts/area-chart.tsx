@@ -1,7 +1,6 @@
 import {
 	AreaChart as AreaChartCore,
 	type AreaChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class AreaChart extends BaseChart<AreaChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<AreaChartOptions>
-	declare chart: AreaChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {

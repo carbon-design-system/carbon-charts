@@ -1,7 +1,6 @@
 import {
 	BulletChart as BulletChartCore,
 	type BulletChartOptions,
-	type ChartConfig,
 	type ChartTabularData
 } from '@carbon/charts'
 import BaseChart from './base-chart'
@@ -9,8 +8,6 @@ import { hasChartBeenInitialized } from './utils'
 
 export default class BulletChart extends BaseChart<BulletChartOptions> {
 	declare chartRef: HTMLDivElement
-	declare props: ChartConfig<BulletChartOptions>
-	declare chart: BulletChartCore
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {
