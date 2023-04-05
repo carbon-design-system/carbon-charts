@@ -1,11 +1,7 @@
 <div class="container intro">
 	<div
 		class="welcome__container"
-		style="
-	  background: url(./welcome.png) no-repeat center center fixed;
-	  background-size: cover;
-	"
-	>
+		style="background: url(./welcome.png) no-repeat center center fixed; background-size: cover;">
 		<div class="welcome__content">
 			<h2 class="welcome__heading">Carbon Charts</h2>
 			<h4 class="welcome__heading welcome__heading--subtitle">(Svelte)</h4>

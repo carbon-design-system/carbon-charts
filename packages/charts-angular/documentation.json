@@ -7143,7 +7143,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
+                "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [`${corePackage}/demo`]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts': corePackage,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
             },
             {
                 "name": "context",
@@ -7166,14 +7166,14 @@
                 "defaultValue": "'../../../../charts'"
             },
             {
-                "name": "demoDist",
+                "name": "corePackage",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/charts-angular/.storybook/main.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "resolve(__dirname, `${core}/dist/demo`)"
+                "defaultValue": "resolve(__dirname, `${core}/dist`)"
             },
             {
                 "name": "edgeData",
@@ -7203,7 +7203,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<div class=\"marginTop-30\" *ngFor=\"let codeFile of codeFiles;\">\n\t\t\t<h5>{{codeFile}}</h5>\n\t\t\t<div class=\"cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15\" data-code-snippet>\n\t\t\t\t<div class=\"cds--snippet-container\" aria-label=\"Code Snippet Text\">\n\t\t\t\t\t<pre><code>{{code[codeFile]}}</code></pre>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>`"
+                "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\n\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<a href=\"${demo.codesandbox.angular}\" target=\"_blank\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://codesandbox.io/static/img/play-codesandbox.svg\"\n\t\t\t\talt=\"Edit on CodeSandbox\"\n\t\t\t\tclass=\"marginTop\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
             },
             {
                 "name": "getTemplate",
@@ -7492,7 +7492,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [demoDist]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts/demo': demoDist,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
+                    "defaultValue": "{\n  stories: [\n    '../src/**/*.mdx',\n    '../src/**/*.stories.@(js|jsx|ts|tsx)',\n    // Storybook monorepo-specific issue\n\t\t// '../../../../charts/stories/getting-started/angular.stories.mdx',\n\t\t// '../../../../charts/stories/tutorials/*.stories.mdx'\n  ],\n  addons: [\n    {\n      name: '@storybook/addon-essentials',\n\t\t\toptions: {\n\t\t\t\tactions: false,\n        docs: true\n\t\t\t}\n    }\n  ],\n  framework: {\n    name: '@storybook/angular',\n    options: {}\n  },\n  docs: {\n    autodocs: 'tag'\n  },\n  staticDirs: ['../../../../charts/.storybook/assets'],\n  features: {\n    storyStoreV7: false\n  },\n  webpackFinal: async (config, {\n    configType\n  }) => {\n    config?.module?.rules?.push({\n      test: /\\.css$/,\n      use: ['style-loader', 'css-loader'],\n      include: [`${corePackage}/demo`]\n    })\n    config.resolve!.alias = {\n      ...config.resolve!.alias,\n      '@carbon/charts': corePackage,\n      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))\n    }\n    return config\n  }\n}"
                 },
                 {
                     "name": "core",
@@ -7505,14 +7505,14 @@
                     "defaultValue": "'../../../../charts'"
                 },
                 {
-                    "name": "demoDist",
+                    "name": "corePackage",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/charts-angular/.storybook/main.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "resolve(__dirname, `${core}/dist/demo`)"
+                    "defaultValue": "resolve(__dirname, `${core}/dist`)"
                 }
             ],
             "projects/charts-angular/src/test.ts": [
@@ -7545,7 +7545,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<div class=\"marginTop-30\" *ngFor=\"let codeFile of codeFiles;\">\n\t\t\t<h5>{{codeFile}}</h5>\n\t\t\t<div class=\"cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15\" data-code-snippet>\n\t\t\t\t<div class=\"cds--snippet-container\" aria-label=\"Code Snippet Text\">\n\t\t\t\t\t<pre><code>{{code[codeFile]}}</code></pre>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>`"
+                    "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\n\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<a href=\"${demo.codesandbox.angular}\" target=\"_blank\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://codesandbox.io/static/img/play-codesandbox.svg\"\n\t\t\t\talt=\"Edit on CodeSandbox\"\n\t\t\t\tclass=\"marginTop\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
                 },
                 {
                     "name": "introSection",
@@ -7695,7 +7695,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "demoDist",
+                "name": "corePackage",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

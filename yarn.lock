@@ -2076,7 +2076,7 @@ __metadata:
     "@storybook/testing-library": ^0.1.0
     "@storybook/theming": ^7.0.2
     "@sveltejs/adapter-auto": ^2.0.0
-    "@sveltejs/kit": ^1.15.0
+    "@sveltejs/kit": ^1.15.1
     "@sveltejs/package": ^2.0.2
     "@typescript-eslint/eslint-plugin": ^5.57.1
     "@typescript-eslint/parser": ^5.57.1
@@ -2093,7 +2093,7 @@ __metadata:
     react-dom: ^18.2.0
     storybook: ^7.0.2
     svelte: ^3.58.0
-    svelte-check: ^3.1.4
+    svelte-check: ^3.2.0
     tslib: ^2.5.0
     typescript: ^5.0.3
     vite: ^4.2.1
@@ -2137,7 +2137,7 @@ __metadata:
     vite: ^4.2.1
     vite-plugin-dts: ^2.2.0
     vue: ^3.2.47
-    vue-tsc: ^1.3.11
+    vue-tsc: ^1.3.12
   peerDependencies:
     d3: ^7.8.0
     vue: ^3.2.0
@@ -5487,9 +5487,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.15.0":
-  version: 1.15.0
-  resolution: "@sveltejs/kit@npm:1.15.0"
+"@sveltejs/kit@npm:^1.15.1":
+  version: 1.15.1
+  resolution: "@sveltejs/kit@npm:1.15.1"
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^2.0.0
     "@types/cookie": ^0.5.1
@@ -5503,13 +5503,13 @@ __metadata:
     set-cookie-parser: ^2.5.1
     sirv: ^2.0.2
     tiny-glob: ^0.2.9
-    undici: 5.21.0
+    undici: 5.20.0
   peerDependencies:
     svelte: ^3.54.0
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 175826a4a7fe1c421fc6c9cf56a7153cf0234687c63f8a0226c040cec9c13c051cd60e646734754ac124c49467755b4c49be228205671b0e0d8cc92c4690a019
+  checksum: 572c0a969500f218cf23ce36686602a66c97c98b3e656bedd0d14446d125f002dd1b37d2ede422570de18e5800e4bec109fe3ed57a78c9df4ac00718f53f6f1f
   languageName: node
   linkType: hard
 
@@ -6839,9 +6839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@volar/vue-language-core@npm:1.3.11":
-  version: 1.3.11
-  resolution: "@volar/vue-language-core@npm:1.3.11"
+"@volar/vue-language-core@npm:1.3.12":
+  version: 1.3.12
+  resolution: "@volar/vue-language-core@npm:1.3.12"
   dependencies:
     "@volar/language-core": 1.4.0-alpha.7
     "@volar/source-map": 1.4.0-alpha.7
@@ -6852,17 +6852,17 @@ __metadata:
     minimatch: ^6.1.6
     muggle-string: ^0.2.2
     vue-template-compiler: ^2.7.14
-  checksum: fe7c11df0706547cd5b3b4e2a1dbf719b408ffc3b1553b21aa8d4041ffba4483af6a7e856f612ec6f196bbf58040c66e1f84a6b2a62615eb4e7401b39385e2b3
+  checksum: 2c4ae0243a296939305e3d9fb62801042a07364a805e7651b7df44294c6c0813afc16caba73504b20b5da1f0c48bb3eed3a476ecd16a7496614c16910584ce93
   languageName: node
   linkType: hard
 
-"@volar/vue-typescript@npm:1.3.11":
-  version: 1.3.11
-  resolution: "@volar/vue-typescript@npm:1.3.11"
+"@volar/vue-typescript@npm:1.3.12":
+  version: 1.3.12
+  resolution: "@volar/vue-typescript@npm:1.3.12"
   dependencies:
     "@volar/typescript": 1.4.0-alpha.7
-    "@volar/vue-language-core": 1.3.11
-  checksum: 3d70830a333b8d94a02b9d8834f63284eaffab1c2ea9ab5f67b0535948123b1b8e34c00c1619bc0d0d1ae14a10cfcf090545f3918163d4fe192128bd731e924d
+    "@volar/vue-language-core": 1.3.12
+  checksum: cbe69f3996d8ef71990fc7e85c615d8544661bd49c38fe653ed29f72aa6fec9221d5e3dc2e312c1bf19a6280399d4bf0510ad88b84ab776974c2603807ba07d7
   languageName: node
   linkType: hard
 
@@ -21057,9 +21057,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-check@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "svelte-check@npm:3.1.4"
+"svelte-check@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "svelte-check@npm:3.2.0"
   dependencies:
     "@jridgewell/trace-mapping": ^0.3.17
     chokidar: ^3.4.1
@@ -21067,13 +21067,13 @@ __metadata:
     import-fresh: ^3.2.1
     picocolors: ^1.0.0
     sade: ^1.7.4
-    svelte-preprocess: ^5.0.0
-    typescript: ^4.9.4
+    svelte-preprocess: ^5.0.3
+    typescript: ^5.0.3
   peerDependencies:
     svelte: ^3.55.0
   bin:
     svelte-check: bin/svelte-check
-  checksum: b029642a31110edc6d7caa47dbc53102396c171db99a5121288bdf2b4b33539dc430e05b505c7d77ad25a19a5a5560cae0e86227eca07d5f2a6ab5ee452e987a
+  checksum: aee12828fb47e13b1aacd9f7069adc3f154087b5597ea8f4957b0288c87925a8b9542493e261b6bfba780a3e9962256a93ba3302d72a064735260e2371c7030d
   languageName: node
   linkType: hard
 
@@ -21086,7 +21086,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-preprocess@npm:^5.0.0":
+"svelte-preprocess@npm:^5.0.3":
   version: 5.0.3
   resolution: "svelte-preprocess@npm:5.0.3"
   dependencies:
@@ -21852,7 +21852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^3 || ^4, typescript@npm:^4.0.3, typescript@npm:^4.9.4, typescript@npm:~4.9.5":
+"typescript@npm:^3 || ^4, typescript@npm:^4.0.3, typescript@npm:~4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -21882,7 +21882,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.0.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>, typescript@patch:typescript@~4.9.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.0.3#~builtin<compat/typescript>, typescript@patch:typescript@~4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
@@ -21928,12 +21928,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:5.21.0":
-  version: 5.21.0
-  resolution: "undici@npm:5.21.0"
+"undici@npm:5.20.0":
+  version: 5.20.0
+  resolution: "undici@npm:5.20.0"
   dependencies:
     busboy: ^1.6.0
-  checksum: 013d5fd503b631d607942c511c2ab3f3fa78ebcab302acab998b43176b4815503ec15ed9752c5a47918b3bff8a0137768001d3eb57625b2bb6f6d30d8a794d6c
+  checksum: 25412a785b2bd0b12f0bb0ec47ef00aa7a611ca0e570cb7af97cffe6a42e0d78e4b15190363a43771e9002defc3c6647c1b2d52201b3f64e2196819db4d150d3
   languageName: node
   linkType: hard
 
@@ -22504,17 +22504,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^1.3.11":
-  version: 1.3.11
-  resolution: "vue-tsc@npm:1.3.11"
+"vue-tsc@npm:^1.3.12":
+  version: 1.3.12
+  resolution: "vue-tsc@npm:1.3.12"
   dependencies:
-    "@volar/vue-language-core": 1.3.11
-    "@volar/vue-typescript": 1.3.11
+    "@volar/vue-language-core": 1.3.12
+    "@volar/vue-typescript": 1.3.12
   peerDependencies:
     typescript: "*"
   bin:
     vue-tsc: bin/vue-tsc.js
-  checksum: c6c3b5cffdad3787378bc4407fd7efddb231b58b912ffa93eb3bfc74a65cd5c7f87d6cf27827f49fdd9c9bb63f810d50a19dc1086dba22103616777d8ecdaf65
+  checksum: 17cb559685fc5fad363770ef06f3c847d90cdfc9fe622a5879d03d44e900cd66edcfb06948c58375be270e791f4a59e1e1b92600d6c5f393af7c86140d944941
   languageName: node
   linkType: hard
 

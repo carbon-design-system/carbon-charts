@@ -10,7 +10,7 @@ export interface Demo {
 	data: ChartTabularData
 	options: BaseChartOptions
 	codesandbox: {
-		svelte: string
+		angular: string
 	}
 }
 

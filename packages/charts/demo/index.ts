@@ -10,8 +10,8 @@ export * from './data'
 export {
 	createChartSandbox,
 	createVanillaChartApp,
-	createReactChartApp,
 	createAngularChartApp,
+	createReactChartApp,
+	createSvelteChartApp,
 	createVueChartApp,
-	createSvelteChartApp
 } from './create-codesandbox'

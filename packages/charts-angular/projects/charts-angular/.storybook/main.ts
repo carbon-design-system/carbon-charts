@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 const core = '../../../../charts'
-const demoDist = resolve(__dirname, `${core}/dist/demo`)
+const corePackage = resolve(__dirname, `${core}/dist`)
 import { dirname } from 'path'
 
 const config: StorybookConfig = {
@@ -38,11 +38,11 @@ const config: StorybookConfig = {
     config?.module?.rules?.push({
       test: /\.css$/,
       use: ['style-loader', 'css-loader'],
-      include: [demoDist]
+      include: [`${corePackage}/demo`]
     })
     config.resolve!.alias = {
       ...config.resolve!.alias,
-      '@carbon/charts/demo': demoDist,
+      '@carbon/charts': corePackage,
       // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
     }
     return config
