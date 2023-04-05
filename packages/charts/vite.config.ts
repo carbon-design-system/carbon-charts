@@ -13,8 +13,7 @@ export default defineConfig({
 			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
-			// Reduces bundle size for ESM by 117K
-			external: [
+			external: [ // externalizing D3 saves 117K in the bundle
 				'd3-scale',
 				'd3-selection',
 				'd3-transition',
@@ -29,16 +28,16 @@ export default defineConfig({
 			output: {
 				name: 'CarbonCharts',
 				globals: {
-					'd3-scale': 'd3Scale',
-					'd3-selection': 'd3Selection',
-					'd3-transition': 'd3Transition',
-					'd3-shape': 'd3Shape',
-					'd3-color': 'd3Color',
-					'd3-interpolate': 'd3Interpolate',
-					'd3-axis': 'd3Axis',
-					'd3-array': 'd3Array',
-					'd3-hierarchy': 'd3Hierarchy',
-					'd3-time-format': 'd3TimeFormat'
+					'd3-scale': 'd3',
+					'd3-selection': 'd3',
+					'd3-transition': 'd3',
+					'd3-shape': 'd3',
+					'd3-color': 'd3',
+					'd3-interpolate': 'd3',
+					'd3-axis': 'd3',
+					'd3-array': 'd3',
+					'd3-hierarchy': 'd3',
+					'd3-time-format': 'd3'
 				},
 				exports: 'named'
 			}

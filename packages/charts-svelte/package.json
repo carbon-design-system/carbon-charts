@@ -36,7 +36,6 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"d3": "^7.8.0",
 		"svelte": "^3.57.0"
 	},
 	"devDependencies": {
@@ -57,7 +56,6 @@
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
 		"@typescript-eslint/parser": "^5.57.1",
 		"codesandbox": "^2.2.3",
-		"d3": "^7.8.4",
 		"eslint": "^8.37.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.11",
