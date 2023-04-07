@@ -1,5 +1,5 @@
 {
-  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -45,7 +45,8 @@
               "-d",
               "projects/charts-angular"
             ],
-            "port": 9006
+            "port": 9006,
+            "quiet": true
           }
         },
         "build-storybook": {

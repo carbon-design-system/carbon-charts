@@ -205,14 +205,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/animations@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/animations@npm:15.2.5"
+"@angular/animations@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/animations@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/core": 15.2.5
-  checksum: b7ee930c9ecfae7b43fa44ce37d3daf81e64c373d7ab6156d5101b7ba9c6c009a7817df14f29e0dd601594b0cd0f0667674c335b86c6f53ede3ac48b45122b30
+    "@angular/core": 15.2.6
+  checksum: c02eb3642fe00291652fdf3595b6d389e4e1f5142270dedbd2bbddf4e45492a908c7d030187b934fbc90a232197d6827d4b553b0ad821bac5ead8a5e50ffcd80
   languageName: node
   linkType: hard
 
@@ -244,21 +244,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/common@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/common@npm:15.2.5"
+"@angular/common@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/common@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/core": 15.2.5
+    "@angular/core": 15.2.6
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 67587534cefb560f0164e6ac255f5292072cfde3e75c28fc284446b06d9ad5bdc97f092fde6dbcace676f059a9048db371e54f089a96e01c1c06c945d6573cbf
+  checksum: 7fb88919e036252a1621a38193e7f0bfab0581e06eefd4220b0d7c54f9eebdb0c61dd0799253fb3768b2e0d5285714c542692c80e8aead6e949eb7058d6730c2
   languageName: node
   linkType: hard
 
-"@angular/compiler-cli@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/compiler-cli@npm:15.2.5"
+"@angular/compiler-cli@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/compiler-cli@npm:15.2.6"
   dependencies:
     "@babel/core": 7.19.3
     "@jridgewell/sourcemap-codec": ^1.4.14
@@ -271,83 +271,83 @@ __metadata:
     tslib: ^2.3.0
     yargs: ^17.2.1
   peerDependencies:
-    "@angular/compiler": 15.2.5
+    "@angular/compiler": 15.2.6
     typescript: ">=4.8.2 <5.0"
   bin:
     ng-xi18n: bundles/src/bin/ng_xi18n.js
     ngc: bundles/src/bin/ngc.js
     ngcc: bundles/ngcc/main-ngcc.js
-  checksum: bbed22ca346596955f917f9d7186d6282c0afee40d05bd53c7ae992a92ca548fa152865ba6563232af05d46f352908a72e3c35c13162f11b467f7b778f914278
+  checksum: ab4ab06308a77fa9fd277907db4578837a8943f854581db8045cd74a92c498f4fad417666ebf96b001b9dfa6a07ad080060b2c60bcf98ae78e789a663cf87092
   languageName: node
   linkType: hard
 
-"@angular/compiler@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/compiler@npm:15.2.5"
+"@angular/compiler@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/compiler@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/core": 15.2.5
+    "@angular/core": 15.2.6
   peerDependenciesMeta:
     "@angular/core":
       optional: true
-  checksum: 4e1512e5febe78447752d6929f6ecb1aa8765fa1a5b3cd9dfd8926544c71ee5bdbb0b0dc376cdd4bb51567f5f2017939469e00e9b4fb6fc76e214a3afb5e11e8
+  checksum: 0bd3d553170e5bf11b39b854ae6d802bd89bb59c2c165305d554880c4ac04a4fed9dd05b13531b26aca70eef633b17fb659c45e4092de66e50149b68236f5c44
   languageName: node
   linkType: hard
 
-"@angular/core@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/core@npm:15.2.5"
+"@angular/core@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/core@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
     rxjs: ^6.5.3 || ^7.4.0
     zone.js: ~0.11.4 || ~0.12.0 || ~0.13.0
-  checksum: be6f2976f9a1c7a76a300c2a42cc338b53eb205d041f6fce30f86e44af5ec15ae0aef8af3fa31a83af1964483392154191b6b926da427d61fd1c402718ee8ec4
+  checksum: f586062d384b45fa4e3282d4b73e54efdc5e2e0c37d8310a0d72f4da7a2fd9a8d7f254ac484bd7ec334ff66902ffe974229fa98c5ca3b059f0ae42a9184f641c
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/forms@npm:15.2.5"
+"@angular/forms@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/forms@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/common": 15.2.5
-    "@angular/core": 15.2.5
-    "@angular/platform-browser": 15.2.5
+    "@angular/common": 15.2.6
+    "@angular/core": 15.2.6
+    "@angular/platform-browser": 15.2.6
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: e2361e202b399488e60310e6b00bfc47f8a4d262469ed2bf1ec56ee802e5461dbfb69427ca1bbccc8d0497ec337b7b02c08636c7a51f50e45a885be06e39de3e
+  checksum: 411a1668860248d1c3c4c9bf6e7eb9ae0ae0acb6e0ca8b37679dd94409fe2897f75ee24ee90b884946d1c222ae75367cb875b6fa1592ad441306034251537aac
   languageName: node
   linkType: hard
 
-"@angular/platform-browser-dynamic@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/platform-browser-dynamic@npm:15.2.5"
+"@angular/platform-browser-dynamic@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/platform-browser-dynamic@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/common": 15.2.5
-    "@angular/compiler": 15.2.5
-    "@angular/core": 15.2.5
-    "@angular/platform-browser": 15.2.5
-  checksum: 54150995de636b054e90c991c4d2b0fba1e6ba491e40bad6ec89ac52be98559df03993563aefe130e92e40c5b669b25fe02c5e7ba4202332eebe589b3fd539b8
+    "@angular/common": 15.2.6
+    "@angular/compiler": 15.2.6
+    "@angular/core": 15.2.6
+    "@angular/platform-browser": 15.2.6
+  checksum: 9b1d7be0b2d578f29e14b7ca0f08d807df8ea1c3b07bf8425b21448dc15f685a25cecea9abf1ed26800b36885c1dbb7117282262bc9bb1052f2126ac8645ec49
   languageName: node
   linkType: hard
 
-"@angular/platform-browser@npm:^15.2.5":
-  version: 15.2.5
-  resolution: "@angular/platform-browser@npm:15.2.5"
+"@angular/platform-browser@npm:^15.2.6":
+  version: 15.2.6
+  resolution: "@angular/platform-browser@npm:15.2.6"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/animations": 15.2.5
-    "@angular/common": 15.2.5
-    "@angular/core": 15.2.5
+    "@angular/animations": 15.2.6
+    "@angular/common": 15.2.6
+    "@angular/core": 15.2.6
   peerDependenciesMeta:
     "@angular/animations":
       optional: true
-  checksum: ec2754bbf64e5b9519f96dbdb9fe6a2cde9fb0d3432e3dcbbaa5542633a3d5fae32ecd6add68ae14856ad2facd73b75ffe07d0d57c89ae2447a94e1eadde47ea
+  checksum: 10fd147ce431e15aba36832126be5d993e58e35b99ea9e38ceb70652156393e6b425d4dd7064cf191558707f0eb5070ac6cc3c218dfac63acddc57a0837ffb50
   languageName: node
   linkType: hard
 
@@ -1942,15 +1942,15 @@ __metadata:
   resolution: "@carbon/charts-angular@workspace:packages/charts-angular"
   dependencies:
     "@angular-devkit/build-angular": ^15.2.5
-    "@angular/animations": ^15.2.5
+    "@angular/animations": ^15.2.6
     "@angular/cli": ^15.2.5
-    "@angular/common": ^15.2.5
-    "@angular/compiler": ^15.2.5
-    "@angular/compiler-cli": ^15.2.5
-    "@angular/core": ^15.2.5
-    "@angular/forms": ^15.2.5
-    "@angular/platform-browser": ^15.2.5
-    "@angular/platform-browser-dynamic": ^15.2.5
+    "@angular/common": ^15.2.6
+    "@angular/compiler": ^15.2.6
+    "@angular/compiler-cli": ^15.2.6
+    "@angular/core": ^15.2.6
+    "@angular/forms": ^15.2.6
+    "@angular/platform-browser": ^15.2.6
+    "@angular/platform-browser-dynamic": ^15.2.6
     "@babel/core": ^7.21.4
     "@carbon/charts": "workspace:*"
     "@carbon/icons-angular": ^11.2.2
@@ -2045,7 +2045,7 @@ __metadata:
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    sass: ^1.60.0
+    sass: ^1.61.0
     storybook: ^7.0.2
     typescript: ^5.0.3
     vite: ^4.2.1
@@ -2072,7 +2072,7 @@ __metadata:
     "@storybook/testing-library": ^0.1.0
     "@storybook/theming": ^7.0.2
     "@sveltejs/adapter-auto": ^2.0.0
-    "@sveltejs/kit": ^1.15.1
+    "@sveltejs/kit": ^1.15.2
     "@sveltejs/package": ^2.0.2
     "@typescript-eslint/eslint-plugin": ^5.57.1
     "@typescript-eslint/parser": ^5.57.1
@@ -2205,7 +2205,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     resize-observer-polyfill: ^1.5.1
-    sass: 1.60.0
+    sass: 1.61.0
     storybook: ^7.0.2
     tslib: ^2.5.0
     typedoc: ^0.23.28
@@ -5385,9 +5385,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.15.1":
-  version: 1.15.1
-  resolution: "@sveltejs/kit@npm:1.15.1"
+"@sveltejs/kit@npm:^1.15.2":
+  version: 1.15.2
+  resolution: "@sveltejs/kit@npm:1.15.2"
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^2.0.0
     "@types/cookie": ^0.5.1
@@ -5407,7 +5407,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 572c0a969500f218cf23ce36686602a66c97c98b3e656bedd0d14446d125f002dd1b37d2ede422570de18e5800e4bec109fe3ed57a78c9df4ac00718f53f6f1f
+  checksum: 5af0b104afe10db38088433f72b845319b9d9fb20eacf6951db55c84a65eb5c8a0f50a1b5928d2f13d1cefc87fc89a42835a08e3e954739c1290c40d246d0ad1
   languageName: node
   linkType: hard
 
@@ -19618,7 +19618,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.60.0, sass@npm:^1.55.0, sass@npm:^1.60.0":
+"sass@npm:1.61.0, sass@npm:^1.61.0":
+  version: 1.61.0
+  resolution: "sass@npm:1.61.0"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: 31bfb3719f1bb1299bec7b8918bcbca77efa7328b8030cc8e665ed55a02bc5498a3e543b4eb0d06d55ceda8b2f5b2b3176f0678854a8277cb19a59addf65533f
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.55.0":
   version: 1.60.0
   resolution: "sass@npm:1.60.0"
   dependencies:

@@ -5,6 +5,7 @@ export interface Demo {
 	isHighScale: boolean
 	chartType: {
 		vanilla: string
+		angular: string
 	}
 	data: interfaces.ChartTabularData
 	options: interfaces.BaseChartOptions
