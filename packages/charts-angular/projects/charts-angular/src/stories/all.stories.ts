@@ -33,24 +33,20 @@ const introSection = storiesOf('Docs', module).add(
 	}
 )
 
-const getTemplate = (demo: Demo) => `
+const getTemplate = (componentSelector: string) => `
 	<div class="container theme--white">
 		<div class="v10-banner">
 			This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
 		</div>
 		<h3>
 			<b>Component:</b>
-			<span class="cds--tag cds--tag--green component-name">${demo.chartType.angular}</span>
+			<span class="cds--tag cds--tag--green component-name">${componentSelector}</span>
 		</h3>
 		<p class="props">
 		  <b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
 		</p>
 		<div class="marginTop-30" id="chart-demo">
-			<${demo.chartType.angular}
-				[data]="data"
-				[options]="options"
-				#${demo.chartType.vanilla}>
-			</${demo.chartType.angular}>
+			<${componentSelector} [data]="data" [options]="options"></${componentSelector}>
 		</div>
 		<h3 class="marginTop-30">Code sample</h3>
 		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
@@ -74,7 +70,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 			return
 		}
 		const demoStory: any = (args: Args) => ({
-			template: getTemplate(demo),
+			template: getTemplate(demo.chartType.angular),
 			moduleMetadata: {
 				imports: [ChartsModule]
 			},
