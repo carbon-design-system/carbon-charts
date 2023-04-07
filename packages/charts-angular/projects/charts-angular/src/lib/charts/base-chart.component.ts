@@ -73,7 +73,6 @@ export class BaseChart implements AfterViewInit, OnInit {
 	private _options: any
 
 	constructor(protected elementRef: ElementRef) {
-		console.log('Initialized elementRef')
 	}
 
 	ngOnInit() {
@@ -92,6 +91,5 @@ export class BaseChart implements AfterViewInit, OnInit {
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 */
 	ngAfterViewInit() {
-		console.log('You need to implement your own `ngAfterViewInit()` function')
 	}
 }

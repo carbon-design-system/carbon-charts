@@ -1,29 +1,29 @@
 export {
-  MarkerComponent,
-	MarkerArrowLeftComponent,
-	MarkerArrowRightComponent,
-	MarkerShapeNodeComponent,
-	MarkerDiamondComponent,
-	MarkerSquareComponent,
-	MarkerTeeComponent,
+  Marker,
+	MarkerArrowLeft,
+	MarkerArrowRight,
+	MarkerShapeNode,
+	MarkerDiamond,
+	MarkerSquare,
+	MarkerTee,
   MarkerModule 
 } from './edges/marker/marker.module'
 
 export {
-  EdgeComponent,
+  Edge,
   EdgeModule
 } from './edges/edge.module'
 
 export {
-	CardNodeComponent,
-	CardNodeColumnComponent,
-	CardNodeLabelComponent,
-	CardNodeSubtitleComponent,
-	CardNodeTitleComponent,
+	CardNode,
+	CardNodeColumn,
+	CardNodeLabel,
+	CardNodeSubtitle,
+	CardNodeTitle,
   CardNodeModule
 } from './nodes/cards/card-node.module'
 
 export {
-  ShapeNodeComponent,
+  ShapeNode,
   ShapeNodeModule
 } from './nodes/shape/shape-node.module'

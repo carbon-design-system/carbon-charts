@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { StackedBarChart, type ChartTabularData, type StackedBarChartOptions } from '@carbon/charts'
+import { StackedBarChart as StackedBarChartCore, type ChartTabularData, type StackedBarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `StackedBarChart` in carbon charts library
@@ -13,12 +13,12 @@ import { StackedBarChart, type ChartTabularData, type StackedBarChartOptions } f
 	selector: 'ibm-stacked-bar-chart',
 	template: ``
 })
-export class StackedBarChartComponent extends BaseChart implements AfterViewInit {
+export class StackedBarChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new StackedBarChart(this.elementRef.nativeElement, {
+		this.chart = new StackedBarChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as StackedBarChartOptions
 		})

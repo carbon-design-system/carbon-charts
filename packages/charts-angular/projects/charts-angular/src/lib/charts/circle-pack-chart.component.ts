@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { CirclePackChart, type CirclePackChartOptions, type ChartTabularData } from '@carbon/charts'
+import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions, type ChartTabularData } from '@carbon/charts'
 
 /**
  * Wrapper around `BubbleChart` in carbon charts library
@@ -13,12 +13,12 @@ import { CirclePackChart, type CirclePackChartOptions, type ChartTabularData } f
 	selector: 'ibm-circle-pack-chart',
 	template: ``
 })
-export class CirclePackChartComponent extends BaseChart implements AfterViewInit {
+export class CirclePackChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new CirclePackChart(this.elementRef.nativeElement, {
+		this.chart = new CirclePackChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as CirclePackChartOptions
 		})

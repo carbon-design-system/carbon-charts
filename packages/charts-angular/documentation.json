@@ -225,7 +225,7 @@
         },
         {
             "name": "AreaChart",
-            "id": "component-AreaChart-7b2df6c9388dc6e6bea2fbb862f204f69eed7ad913dc1d711b85c1938a2368166e022b0d35523369e0e57e738593b57171ca129359601821080643012353966f",
+            "id": "component-AreaChart-7095d77430765cd724654273e386b8b3afdb318749a419a16de39c2a8630ac96165aa2ddfeec087c0a2fd229d6f685947a744e6d50bc8d617a0e376897927578",
             "file": "projects/charts-angular/src/lib/charts/area-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -235,7 +235,7 @@
             "selector": "ibm-area-chart",
             "styleUrls": [],
             "styles": [],
-            "template": "<div #nChart class=\"ibm-chart-container\"></div>",
+            "template": "",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
@@ -397,7 +397,7 @@
             "description": "<p>Wrapper around <code>AreaChart</code> in carbon charts library</p>\n<p>Most functions just call their equivalent from the chart library.</p>\n",
             "rawdescription": "\n\nWrapper around `AreaChart` in carbon charts library\n\nMost functions just call their equivalent from the chart library.\n",
             "type": "component",
-            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport { AreaChart as AreaChartCore, type AreaChartOptions, type ChartTabularData } from '@carbon/charts'\n\n/**\n * Wrapper around `AreaChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-area-chart',\n\ttemplate: ` <div #nChart class=\"ibm-chart-container\"></div> `\n})\nexport class AreaChart extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `chartRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new AreaChartCore(this.chartRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as AreaChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
+            "sourceCode": "import { Component, AfterViewInit } from '@angular/core'\n\nimport { BaseChart } from './base-chart.component'\n\nimport { AreaChart as AreaChartCore, type AreaChartOptions, type ChartTabularData } from '@carbon/charts'\n\n/**\n * Wrapper around `AreaChart` in carbon charts library\n *\n * Most functions just call their equivalent from the chart library.\n */\n@Component({\n\tselector: 'ibm-area-chart',\n\ttemplate: ``\n})\nexport class AreaChart extends BaseChart implements AfterViewInit {\n\t/**\n\t * Runs after view init to create a chart, attach it to `chartRef` and draw it.\n\t */\n\toverride ngAfterViewInit() {\n\t\tthis.chart = new AreaChartCore(this.elementRef.nativeElement, {\n\t\t\tdata: this.data as ChartTabularData,\n\t\t\toptions: this.options as AreaChartOptions\n\t\t})\n\n\t\tObject.assign(this, this.chart)\n\t}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -7330,6 +7330,16 @@
                 "name": "getTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/all.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<div class=\"marginTop-30\" *ngFor=\"let codeFile of codeFiles;\">\n\t\t\t<h5>{{codeFile}}</h5>\n\t\t\t<div class=\"cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15\" data-code-snippet>\n\t\t\t\t<div class=\"cds--snippet-container\" aria-label=\"Code Snippet Text\">\n\t\t\t\t\t<pre><code>{{code[codeFile]}}</code></pre>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>`"
+            },
+            {
+                "name": "getTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -7360,7 +7370,7 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
@@ -7370,21 +7380,11 @@
                 "name": "linkSource",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{ x: 0, y: 0 }"
-            },
-            {
-                "name": "linkTarget",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{ x: 400, y: 0 }"
+                "defaultValue": "{ x: 0, y: 0 }"
             },
             {
                 "name": "linkTarget",
@@ -7395,6 +7395,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{ x: 300, y: 0 }"
+            },
+            {
+                "name": "linkTarget",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ x: 400, y: 0 }"
             },
             {
                 "name": "linkTargetCurve",
@@ -7657,6 +7667,28 @@
                     "type": "literal type"
                 }
             ],
+            "projects/charts-angular/src/stories/all.stories.ts": [
+                {
+                    "name": "getTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/all.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(demo: Demo) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${demo.chartType.angular}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${demo.chartType.angular}\n\t\t\t\tclass=\"n-chart\"\n\t\t\t\t[data]=\"data\"\n\t\t\t\t[options]=\"options\"\n\t\t\t\t#${demo.chartType.vanilla}>\n\t\t\t</${demo.chartType.angular}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<div class=\"marginTop-30\" *ngFor=\"let codeFile of codeFiles;\">\n\t\t\t<h5>{{codeFile}}</h5>\n\t\t\t<div class=\"cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15\" data-code-snippet>\n\t\t\t\t<div class=\"cds--snippet-container\" aria-label=\"Code Snippet Text\">\n\t\t\t\t\t<pre><code>{{code[codeFile]}}</code></pre>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>`"
+                },
+                {
+                    "name": "introSection",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/all.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t() => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">Vanilla JavaScript</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
+                }
+            ],
             "projects/charts-angular/src/stories/diagrams/diagrams-nodes-card.stories.ts": [
                 {
                     "name": "getTemplate",
@@ -7681,16 +7713,26 @@
                     "defaultValue": "(content: string) => `\n<div class=\"container theme--white\">\n  ${content}\n</div>\n`"
                 }
             ],
-            "projects/charts-angular/src/stories/all.stories.ts": [
+            "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts": [
                 {
-                    "name": "introSection",
+                    "name": "linkSource",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/all.stories.ts",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "storiesOf('Docs', module).add(\n\t'Welcome',\n\t() => ({\n\t\ttemplate: `\n\t\t<div class=\"container intro\">\n\t\t\t<div\n\t\t\tclass=\"welcome__container\"\n\t\t\tstyle=\"background: url(./welcome.png) no-repeat center center fixed; background-size: cover;\">\n\t\t\t\t<div class=\"welcome__content\">\n\t\t\t\t\t<h2 class=\"welcome__heading\">Carbon Charts</h2>\n\t\t\t\t\t<h4 class=\"welcome__heading welcome__heading--subtitle\">(Angular)</h4>\n\t\t\t\t\t<h5 class=\"welcome__heading welcome__heading--other\">Other versions</h5>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com\" class=\"welcome__heading welcome__heading--other\">Vanilla JavaScript</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/react\" class=\"welcome__heading welcome__heading--other\">React</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/vue\" class=\"welcome__heading welcome__heading--other\">Vue</a></li>\n\t\t\t\t\t\t<li><a href=\"https://charts.carbondesignsystem.com/svelte\" class=\"welcome__heading welcome__heading--other\">Svelte</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<span class=\"netlify\">Deploys by <a href=\"https://netlify.com\" target=\"_blank\">Netlify</a></span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>`\n\t}),\n\t{\n\t\tcontrols: {\n\t\t\thideNoControlsWarning: true\n\t\t}\n\t}\n)"
+                    "type": "object",
+                    "defaultValue": "{ x: 0, y: 0 }"
+                },
+                {
+                    "name": "linkTarget",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/src/stories/diagrams/diagrams-edges.stories.ts": [
@@ -7723,28 +7765,6 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{ x: 400, y: 200 }"
-                }
-            ],
-            "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts": [
-                {
-                    "name": "linkSource",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 0, y: 0 }"
-                },
-                {
-                    "name": "linkTarget",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/charts-angular/src/stories/diagrams/diagrams-edges-marker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{ x: 300, y: 0 }"
                 }
             ],
             "projects/charts-angular/.storybook/preview.ts": [
@@ -8199,6 +8219,16 @@
                 "name": "ShapeNode",
                 "coveragePercent": 0,
                 "coverageCount": "0/20",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/stories/all.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "getTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

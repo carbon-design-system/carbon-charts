@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { HistogramChart, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
+import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
 
 /**
  * Wrapper around `HistogramChart` in carbon charts library
@@ -13,12 +13,12 @@ import { HistogramChart, type HistogramChartOptions, type ChartTabularData } fro
 	selector: 'ibm-histogram-chart',
 	template: ``
 })
-export class HistogramChartComponent extends BaseChart implements AfterViewInit {
+export class HistogramChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new HistogramChart(this.elementRef.nativeElement, {
+		this.chart = new HistogramChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as HistogramChartOptions
 		})

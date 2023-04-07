@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { RadarChart, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
+import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
 
 /**
  * Wrapper around `RadarChart` in carbon charts library
@@ -13,12 +13,12 @@ import { RadarChart, type RadarChartOptions, type ChartTabularData } from '@carb
 	selector: 'ibm-radar-chart',
 	template: ``
 })
-export class RadarChartComponent extends BaseChart implements AfterViewInit {
+export class RadarChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new RadarChart(this.elementRef.nativeElement, {
+		this.chart = new RadarChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as RadarChartOptions
 		})

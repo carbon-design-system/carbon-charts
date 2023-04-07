@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { AreaChart, type AreaChartOptions, type ChartTabularData } from '@carbon/charts'
+import { AreaChart as AreaChartCore, type AreaChartOptions, type ChartTabularData } from '@carbon/charts'
 
 /**
  * Wrapper around `AreaChart` in carbon charts library
@@ -11,14 +11,14 @@ import { AreaChart, type AreaChartOptions, type ChartTabularData } from '@carbon
  */
 @Component({
 	selector: 'ibm-area-chart',
-	template: ` <div #nChart class="ibm-chart-container"></div> `
+	template: ``
 })
-export class AreaChartComponent extends BaseChart implements AfterViewInit {
+export class AreaChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new AreaChart(this.chartRef.nativeElement, {
+		this.chart = new AreaChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as AreaChartOptions
 		})

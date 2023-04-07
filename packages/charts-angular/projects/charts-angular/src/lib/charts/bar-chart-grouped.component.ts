@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { GroupedBarChart, type ChartTabularData, type BarChartOptions } from '@carbon/charts'
+import { GroupedBarChart as GroupedBarChartCore, type ChartTabularData, type BarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `GroupedBarChart` in carbon charts library
@@ -13,12 +13,12 @@ import { GroupedBarChart, type ChartTabularData, type BarChartOptions } from '@c
 	selector: 'ibm-grouped-bar-chart',
 	template: ``
 })
-export class GroupedBarChartComponent extends BaseChart implements AfterViewInit {
+export class GroupedBarChart extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new GroupedBarChart(this.elementRef.nativeElement, {
+		this.chart = new GroupedBarChartCore(this.elementRef.nativeElement, {
 			data: this.data as ChartTabularData,
 			options: this.options as BarChartOptions
 		})

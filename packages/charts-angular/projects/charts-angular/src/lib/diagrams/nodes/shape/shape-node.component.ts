@@ -88,7 +88,7 @@ import { carbonPrefix } from '../../config'
 		</ng-template>
 	`
 })
-export class ShapeNodeComponent implements OnInit {
+export class ShapeNode implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
 	@Input() renderIcon?: TemplateRef<any>

@@ -69,7 +69,7 @@ import { carbonPrefix } from '../../config'
 		</ng-template>
 	`
 })
-export class CardNodeComponent implements OnInit {
+export class CardNode implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
 	@Input() color = ''

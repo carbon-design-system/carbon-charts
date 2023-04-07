@@ -5,7 +5,7 @@ import { storybookDemoGroups } from '@carbon/charts/demo'
 
 const introSection = storiesOf('Docs', module).add(
 	'Welcome',
-	(args: Args) => ({
+	() => ({
 		template: `
 		<div class="container intro">
 			<div
