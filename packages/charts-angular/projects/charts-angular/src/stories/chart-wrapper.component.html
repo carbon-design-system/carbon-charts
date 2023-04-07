@@ -1,0 +1,35 @@
+<div class="container theme--white">
+  <div class="v10-banner">
+    This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+  </div>
+  <h3>
+    <b>Component:</b>
+    <span class="cds--tag cds--tag--green component-name">{{chartType}}</span>
+  </h3>
+  <p class="props">
+    <b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
+  </p>
+
+  <div class="marginTop-30" id="chart-demo">
+    <ng-container *ngComponentOutlet="demoChart; injector: injector;"></ng-container>
+	</div>
+
+  <h3 class="marginTop-30">Code sample</h3>
+  <a href="javascript:void(0)" (click)="openCloudSandbox()">
+    <img
+      src="https://codesandbox.io/static/img/play-codesandbox.svg"
+      alt="Edit on CodeSandbox"
+      class="marginTop"
+    />
+  </a>
+
+  <div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30" data-code-snippet>
+    <div class="cds--snippet-container" aria-label="Code Snippet Text">
+      <pre>
+        <code>
+          &lt;{{ chartType }} [data]="data" [options]="options" &gt;&lt;/{{ chartType }}&gt;
+        </code>
+      </pre>
+    </div>
+  </div>
+</div>

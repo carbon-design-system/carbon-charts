@@ -58,7 +58,7 @@ export const createChartSandbox = (chartTemplate: any) => {
     }
   })
   const parameters = getParameters({ files })
-  const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(parameters)}&view=split`
+  const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(parameters)}`
   return url
 }
 
@@ -139,20 +139,20 @@ export const createAngularChartApp = (demo: any) => {
 	"setupTasks": [
 		{
 			"name": "Install Dependencies",
-			"command": "npm install"
+			"command": "yarn install"
 		}
 	],
 
 	// These tasks can be run from CodeSandbox. Running one will open a log in the app.
 	"tasks": {
 		"start": {
-			"name": "start",
-			"command": "npm start",
+			"name": "serve",
+			"command": "yarn serve",
 			"runAtStart": true
 		},
 		"build": {
 			"name": "build",
-			"command": "npm run build",
+			"command": "yarn build",
 			"runAtStart": false
 		}
 	}
@@ -227,7 +227,7 @@ export const createAngularChartApp = (demo: any) => {
             "browserTarget": "charts-angular-example:build:development",
             "port": 8080,
             "host": "0.0.0.0",
-            "disableHostCheck": false
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
@@ -266,10 +266,11 @@ export const createAngularChartApp = (demo: any) => {
 const packageJson = JSON.stringify({
 	description: 'Carbon Charts Angular Example',
 	version: '0.0.0',
+	license: 'MIT',
 	scripts: {
 		ng: 'ng',
-		start: 'ng serve',
-		build: 'ng build',
+		serve: 'NG_CLI_ANALYTICS=false ng serve',
+		build: 'NG_CLI_ANALYTICS=false ng build',
 	},
 	dependencies: {
 		'@angular/animations': '^15.2.5',
@@ -355,7 +356,6 @@ const tsConfig =
   <title>Carbon Charts Angular Example</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <app-root></app-root>

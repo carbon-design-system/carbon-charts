@@ -1272,19 +1272,15 @@ const mapDemoGroups = (demoGroups: any) =>
 				}
 
 				demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
-				demo.codesandbox.angular = {
-					template: 'node-typescript',
-					files: createAngularChartApp(demo),
-					view: 'console'
-				}
+				demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
 				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
+				// Not used any longer now that Angular runs in Cloud Sandbox
 				if (!demo.code) {
 					demo.code = {}
 				}
-				demo.code.angular = createAngularChartApp(demo)
 
 				return demo
 			})

@@ -1,4 +1,4 @@
-import { storiesOf, type Args } from '@storybook/angular'
+import { storiesOf, type Args, type StoryFn } from '@storybook/angular'
 import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
 import { storybookDemoGroups } from '@carbon/charts/demo'
@@ -49,14 +49,14 @@ const getTemplate = (componentSelector: string) => `
 			<${componentSelector} [data]="data" [options]="options"></${componentSelector}>
 		</div>
 		<h3 class="marginTop-30">Code sample</h3>
-		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
-			<h5>{{codeFile}}</h5>
-			<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15" data-code-snippet>
-				<div class="cds--snippet-container" aria-label="Code Snippet Text">
-					<pre><code>{{code[codeFile]}}</code></pre>
-				</div>
-			</div>
-		</div>
+		<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>
+		<a href="#" (click)="openSandbox($event)">
+			<img
+				src="https://codesandbox.io/static/img/play-codesandbox.svg"
+				className="marginTop"
+				alt="Edit on Codesandbox"
+			/>
+		</a>
 	</div>`
 
 // Loop through demo groups array
@@ -69,7 +69,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		if (demo.isHighScale) {
 			return
 		}
-		const demoStory: any = (args: Args) => ({
+		const demoStory: StoryFn = (args: Args) => ({
 			template: getTemplate(demo.chartType.angular),
 			moduleMetadata: {
 				imports: [ChartsModule]
@@ -78,7 +78,26 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				data: args['data'],
 				options: args['options'],
 				codeFiles: Object.keys(demo.code.angular),
-				code: demo.code.angular
+				code: demo.code.angular,
+				// Open Cloud Sandbox (instead of Browser)
+				openSandbox: async (event: Event) => {
+					event.preventDefault()
+
+					try {
+						const response = await fetch(`${demo.codesandbox.angular}&json=1`)
+				
+						if (!response.ok) {
+							throw new Error('Network response from CodeSandbox was not ok')
+						}
+						const data = await response.json()
+						const sandboxUrl = `https://codesandbox.io/p/sandbox/${data.sandbox_id}`
+						window.open(sandboxUrl, '_blank')
+					} catch (error) {
+						console.error('There was a problem opening the Cloud Sandbox:', error)
+						throw error
+					}
+
+				}
 			}
 		})
 		groupStories.add(demo.title, demoStory, {
