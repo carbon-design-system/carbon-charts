@@ -57,11 +57,11 @@ const production = process.env['NODE_ENV'] === 'production'
 
 import {
 	createChartSandbox,
-	createReactChartApp,
-	createAngularChartApp,
-	createVueChartApp,
 	createVanillaChartApp,
-	createSvelteChartApp
+	createAngularChartApp,
+	createReactChartApp,
+	createSvelteChartApp,
+	createVueChartApp
 } from '../create-codesandbox'
 
 import chartTypes from './CHART_TYPES'
@@ -1264,7 +1264,7 @@ const mapDemoGroups = (demoGroups: any) =>
 				demo.title = demo.options.title
 				demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`
 
-				// if there isnt a height set in the chart options, use 400
+				// If height not specified in options, use 400px
 				demo.options.height = demo.options.height ?? '400px'
 
 				if (!demo.codesandbox) {
@@ -1272,7 +1272,11 @@ const mapDemoGroups = (demoGroups: any) =>
 				}
 
 				demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
-				demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
+				demo.codesandbox.angular = {
+					template: 'node-typescript',
+					files: createAngularChartApp(demo),
+					view: 'console'
+				}
 				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))

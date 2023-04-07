@@ -7,7 +7,7 @@ const D3VERSION = packageJSON.peerDependencies['d3']
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
-const dockerFile = `FROM node:18.15.0-bullseye`
+// const dockerFile = `FROM node:18.15.0-bullseye` // not used until moving from browser to cloud sandboxes
 
 const sandboxConfig =
 `{
@@ -178,7 +178,7 @@ export const createAngularChartApp = (demo: any) => {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/charts-angular-example",
+            "outputPath": "./dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -187,7 +187,6 @@ export const createAngularChartApp = (demo: any) => {
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -200,13 +199,13 @@ export const createAngularChartApp = (demo: any) => {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "6kb"
                 }
               ],
               "outputHashing": "all"
@@ -216,7 +215,7 @@ export const createAngularChartApp = (demo: any) => {
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
+              "sourceMap": false,
               "namedChunks": true
             }
           },
@@ -224,6 +223,12 @@ export const createAngularChartApp = (demo: any) => {
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+            "browserTarget": "charts-angular-example:build:development",
+            "port": 8080,
+            "host": "0.0.0.0",
+            "disableHostCheck": false
+          },
           "configurations": {
             "production": {
               "browserTarget": "charts-angular-example:build:production"
@@ -233,12 +238,6 @@ export const createAngularChartApp = (demo: any) => {
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "charts-angular-example:build"
-          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -262,26 +261,25 @@ export const createAngularChartApp = (demo: any) => {
       }
     }
   }
-}
-`
+}`
 
 const packageJson = JSON.stringify({
 	description: 'Carbon Charts Angular Example',
 	version: '0.0.0',
 	scripts: {
 		ng: 'ng',
-		start: 'ng serve --disable-host-check',
+		start: 'ng serve',
 		build: 'ng build',
 	},
 	dependencies: {
-		'@angular/animations': '^15.2.4',
-		'@angular/common': '^15.2.4',
-		'@angular/compiler': '^15.2.4',
-		'@angular/core': '^15.2.4',
-		'@angular/forms': '^15.2.4',
-		'@angular/platform-browser': '^15.2.4',
-		'@angular/platform-browser-dynamic': '^15.2.4',
-		'@angular/router': '^15.2.4',
+		'@angular/animations': '^15.2.5',
+		'@angular/common': '^15.2.5',
+		'@angular/compiler': '^15.2.5',
+		'@angular/core': '^15.2.5',
+		'@angular/forms': '^15.2.5',
+		'@angular/platform-browser': '^15.2.5',
+		'@angular/platform-browser-dynamic': '^15.2.5',
+		'@angular/router': '^15.2.5',
 		'@carbon/charts': libraryVersion,
 		'@carbon/charts-angular': libraryVersion,
 		'@carbon/styles': '^1.26.0',
@@ -293,32 +291,33 @@ const packageJson = JSON.stringify({
 	devDependencies: {
 		'@angular-devkit/build-angular': '^15.2.4',
 		'@angular/cli': '~15.2.4',
-		'@angular/compiler-cli': '^15.2.0',
+		'@angular/compiler-cli': '^15.2.5',
 		'typescript': '~4.9.4'
+	},
+	engines: {
+		node: '>=16.12.0'
 	}
-})
+}, null, 2)
 
 const tsConfig =
-`/* To learn more about this file see: https://angular.io/config/tsconfig. */
-{
-	"compileOnSave": false,
+`{
 	"compilerOptions": {
 		"baseUrl": "./",
-		"outDir": "./dist/out-tsc",
+		"outDir": "./dist",
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
 		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
-		"sourceMap": true,
+		"sourceMap": false,
 		"declaration": false,
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"importHelpers": true,
-		"target": "ES2022",
-		"module": "ES2022",
+		"target": "ESNext",
+		"module": "ESNext",
 		"useDefineForClassFields": false,
 		"lib": [
 			"ES2022",
@@ -334,8 +333,7 @@ const tsConfig =
 }`
 
 	const tsConfigApp =
-`/* To learn more about this file see: https://angular.io/config/tsconfig. */
-{
+`{
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
@@ -354,7 +352,7 @@ const tsConfig =
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AngularTourOfHeroes</title>
+  <title>Carbon Charts Angular Example</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -371,7 +369,7 @@ import { AppModule } from './app/app.module'
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err))`
 
-const stylesScss =
+	const stylesScss =
 `@import '@carbon/styles/css/styles.css';
 @import '@carbon/charts/styles.css';
 @import 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap';`
@@ -386,7 +384,7 @@ const stylesScss =
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html'
+	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -412,9 +410,12 @@ export class AppModule { }`
 		'.codesandbox/tasks.json': codeSandboxAngularTasks,
 		'angular.json': angularJson,
 		'package.json': packageJson,
+		'README.md': `# Carbon Charts Angular Example`,
+		'sandbox.config.json': sandboxConfig,
 		'tsconfig.json': tsConfig,
 		'tsconfig.app.json': tsConfigApp,
 		'dist/.gitkeep': ' ',
+		'src/assets/.gitkeep': ' ',
 		'src/index.html': indexHtml,
 		'src/main.ts': mainTs,
 		'src/styles.scss': stylesScss,

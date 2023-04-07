@@ -47,7 +47,6 @@ const getTemplate = (demo: Demo) => `
 		</p>
 		<div class="marginTop-30" id="chart-demo">
 			<${demo.chartType.angular}
-				class="n-chart"
 				[data]="data"
 				[options]="options"
 				#${demo.chartType.vanilla}>
