@@ -1,5 +1,5 @@
 import { storiesOf, type Args } from '@storybook/angular'
-import type { Demo } from './Demo'
+import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
 import { storybookDemoGroups } from '@carbon/charts/demo'
 
@@ -60,12 +60,12 @@ const getTemplate = (componentSelector: string) => `
 	</div>`
 
 // Loop through demo groups array
-storybookDemoGroups.forEach((demoGroup) => {
+storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
 	// Create stories within story group
-	demoGroup.demos.forEach((demo: any) => {
+	demoGroup.demos.forEach((demo: Demo) => {
 		if (demo.isHighScale) {
 			return
 		}

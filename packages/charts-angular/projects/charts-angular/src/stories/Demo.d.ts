@@ -11,6 +11,9 @@ export interface Demo {
 	options: BaseChartOptions
 	codesandbox: {
 		angular: string
+	},
+	code: {
+		angular: any
 	}
 }
 
