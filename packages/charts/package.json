@@ -54,7 +54,7 @@
 		"d3": "^7.8.4"
 	},
 	"dependencies": {
-		"@carbon/styles": "^1.26.0",
+		"@carbon/styles": "^1.26.1",
 		"@carbon/telemetry": "~0.1.0",
 		"@carbon/utils-position": "^1.1.4",
 		"@types/node": "^18.15.11",
@@ -111,7 +111,7 @@
 		"@typescript-eslint/parser": "^5.57.1",
 		"codesandbox": "^2.2.3",
 		"dom-to-image": "2.6.0",
-		"eslint": "^8.37.0",
+		"eslint": "^8.38.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.11",
 		"highlight.js": "^11.7.0",
@@ -127,7 +127,7 @@
 		"react-dom": "^18.2.0",
 		"sass": "1.61.0",
 		"storybook": "^7.0.2",
-		"typedoc": "^0.23.28",
+		"typedoc": "^0.24.1",
 		"typescript": "^5.0.4",
 		"vite": "^4.2.1",
 		"vite-plugin-dts": "^2.2.0"

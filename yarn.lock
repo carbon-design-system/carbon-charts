@@ -1967,7 +1967,7 @@ __metadata:
     "@types/d3": ^7.4.0
     "@types/jasmine": ~4.3.1
     css-loader: ^6.7.3
-    eslint: ^8.37.0
+    eslint: ^8.38.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.11
     jasmine-core: ~4.6.0
@@ -2037,7 +2037,7 @@ __metadata:
     "@vitejs/plugin-react": ^3.1.0
     classnames: ^2.3.2
     codesandbox: ^2.2.3
-    eslint: 8.37.0
+    eslint: ^8.38.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-jest: ^27.2.1
     eslint-plugin-prettier: ^4.2.1
@@ -2077,7 +2077,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.57.1
     "@typescript-eslint/parser": ^5.57.1
     codesandbox: ^2.2.3
-    eslint: ^8.37.0
+    eslint: ^8.38.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.11
     eslint-plugin-svelte3: ^4.0.0
@@ -2119,7 +2119,7 @@ __metadata:
     "@vue/eslint-config-typescript": ^11.0.2
     "@vue/tsconfig": ^0.1.3
     codesandbox: ^2.2.3
-    eslint: ^8.37.0
+    eslint: ^8.38.0
     eslint-plugin-storybook: ^0.6.11
     eslint-plugin-vue: ^9.10.0
     prettier: ^2.8.7
@@ -2147,7 +2147,7 @@ __metadata:
     "@carbon/import-once": ^10.7.0
     "@carbon/layout": ^11.12.0
     "@carbon/motion": ^11.10.0
-    "@carbon/styles": ^1.26.0
+    "@carbon/styles": ^1.26.1
     "@carbon/telemetry": ~0.1.0
     "@carbon/themes": ^11.17.0
     "@carbon/type": ^11.16.0
@@ -2189,7 +2189,7 @@ __metadata:
     date-fns: ^2.29.3
     dom-to-image: 2.6.0
     dom-to-image-more: ^3.1.1
-    eslint: ^8.37.0
+    eslint: ^8.38.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.11
     highlight.js: ^11.7.0
@@ -2208,7 +2208,7 @@ __metadata:
     sass: 1.61.0
     storybook: ^7.0.2
     tslib: ^2.5.0
-    typedoc: ^0.23.28
+    typedoc: ^0.24.1
     typescript: ^5.0.4
     vite: ^4.2.1
     vite-plugin-dts: ^2.2.0
@@ -2322,9 +2322,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.26.0":
-  version: 1.26.0
-  resolution: "@carbon/styles@npm:1.26.0"
+"@carbon/styles@npm:^1.26.1":
+  version: 1.26.1
+  resolution: "@carbon/styles@npm:1.26.1"
   dependencies:
     "@carbon/colors": ^11.13.0
     "@carbon/feature-flags": ^0.13.0
@@ -2336,7 +2336,7 @@ __metadata:
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
-  checksum: d075f56450b8cb6b5af4a3e6c42841ee3ce8efaf9c49828ac5eb603b37b779bcb505cb1b127b2b2ed5eceb24641deb10e8adbbe1732481156df5f81e8bf02cc9
+  checksum: fc6f325211b473aa32a5e95324ca21a4d3a7a738fec97ef6f2484bbdfa8c482632f49e2ec373b7442eb7c73a7601557ed5cb9478ea76166712f74c2aa14998b1
   languageName: node
   linkType: hard
 
@@ -2924,10 +2924,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.37.0":
-  version: 8.37.0
-  resolution: "@eslint/js@npm:8.37.0"
-  checksum: 7a07fb085c94ce1538949012c292fd3a6cd734f149bc03af6157dfbd8a7477678899ef57b4a27e15b36470a997389ad79a0533d5880c71e67720ae1a7de7c62d
+"@eslint/js@npm:8.38.0":
+  version: 8.38.0
+  resolution: "@eslint/js@npm:8.38.0"
+  checksum: 1f28987aa8c9cd93e23384e16c7220863b39b5dc4b66e46d7cdbccce868040f455a98d24cd8b567a884f26545a0555b761f7328d4a00c051e7ef689cbea5fce1
   languageName: node
   linkType: hard
 
@@ -11280,56 +11280,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.37.0, eslint@npm:^8.37.0":
-  version: 8.37.0
-  resolution: "eslint@npm:8.37.0"
-  dependencies:
-    "@eslint-community/eslint-utils": ^4.2.0
-    "@eslint-community/regexpp": ^4.4.0
-    "@eslint/eslintrc": ^2.0.2
-    "@eslint/js": 8.37.0
-    "@humanwhocodes/config-array": ^0.11.8
-    "@humanwhocodes/module-importer": ^1.0.1
-    "@nodelib/fs.walk": ^1.2.8
-    ajv: ^6.10.0
-    chalk: ^4.0.0
-    cross-spawn: ^7.0.2
-    debug: ^4.3.2
-    doctrine: ^3.0.0
-    escape-string-regexp: ^4.0.0
-    eslint-scope: ^7.1.1
-    eslint-visitor-keys: ^3.4.0
-    espree: ^9.5.1
-    esquery: ^1.4.2
-    esutils: ^2.0.2
-    fast-deep-equal: ^3.1.3
-    file-entry-cache: ^6.0.1
-    find-up: ^5.0.0
-    glob-parent: ^6.0.2
-    globals: ^13.19.0
-    grapheme-splitter: ^1.0.4
-    ignore: ^5.2.0
-    import-fresh: ^3.0.0
-    imurmurhash: ^0.1.4
-    is-glob: ^4.0.0
-    is-path-inside: ^3.0.3
-    js-sdsl: ^4.1.4
-    js-yaml: ^4.1.0
-    json-stable-stringify-without-jsonify: ^1.0.1
-    levn: ^0.4.1
-    lodash.merge: ^4.6.2
-    minimatch: ^3.1.2
-    natural-compare: ^1.4.0
-    optionator: ^0.9.1
-    strip-ansi: ^6.0.1
-    strip-json-comments: ^3.1.0
-    text-table: ^0.2.0
-  bin:
-    eslint: bin/eslint.js
-  checksum: 80f3d5cdce2d671f4794e392d234a78d039c347673defb0596268bd481e8f30a53d93c01ff4f66a546c87d97ab4122c0e9cafe1371f87cb03cee6b7d5aa97595
-  languageName: node
-  linkType: hard
-
 "eslint@npm:8.4.1":
   version: 8.4.1
   resolution: "eslint@npm:8.4.1"
@@ -11375,6 +11325,56 @@ __metadata:
   bin:
     eslint: bin/eslint.js
   checksum: d962cd7cd0f68ddc2412f47154b8992ad3af987cf47fa6e60e51a2b7d32a91f934388f7d29e2c45b16b7ac69f0d220d0a483189ec6ba43a8a480110c34f158f9
+  languageName: node
+  linkType: hard
+
+"eslint@npm:^8.38.0":
+  version: 8.38.0
+  resolution: "eslint@npm:8.38.0"
+  dependencies:
+    "@eslint-community/eslint-utils": ^4.2.0
+    "@eslint-community/regexpp": ^4.4.0
+    "@eslint/eslintrc": ^2.0.2
+    "@eslint/js": 8.38.0
+    "@humanwhocodes/config-array": ^0.11.8
+    "@humanwhocodes/module-importer": ^1.0.1
+    "@nodelib/fs.walk": ^1.2.8
+    ajv: ^6.10.0
+    chalk: ^4.0.0
+    cross-spawn: ^7.0.2
+    debug: ^4.3.2
+    doctrine: ^3.0.0
+    escape-string-regexp: ^4.0.0
+    eslint-scope: ^7.1.1
+    eslint-visitor-keys: ^3.4.0
+    espree: ^9.5.1
+    esquery: ^1.4.2
+    esutils: ^2.0.2
+    fast-deep-equal: ^3.1.3
+    file-entry-cache: ^6.0.1
+    find-up: ^5.0.0
+    glob-parent: ^6.0.2
+    globals: ^13.19.0
+    grapheme-splitter: ^1.0.4
+    ignore: ^5.2.0
+    import-fresh: ^3.0.0
+    imurmurhash: ^0.1.4
+    is-glob: ^4.0.0
+    is-path-inside: ^3.0.3
+    js-sdsl: ^4.1.4
+    js-yaml: ^4.1.0
+    json-stable-stringify-without-jsonify: ^1.0.1
+    levn: ^0.4.1
+    lodash.merge: ^4.6.2
+    minimatch: ^3.1.2
+    natural-compare: ^1.4.0
+    optionator: ^0.9.1
+    strip-ansi: ^6.0.1
+    strip-json-comments: ^3.1.0
+    text-table: ^0.2.0
+  bin:
+    eslint: bin/eslint.js
+  checksum: 73b6d9b650d0434aa7c07d0a1802f099b086ee70a8d8ba7be730439a26572a5eb71def12125c82942be2ec8ee5be38a6f1b42a13e40d4b67f11a148ec9e263eb
   languageName: node
   linkType: hard
 
@@ -21435,9 +21435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.28":
-  version: 0.23.28
-  resolution: "typedoc@npm:0.23.28"
+"typedoc@npm:^0.24.1":
+  version: 0.24.1
+  resolution: "typedoc@npm:0.24.1"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.2.12
@@ -21447,7 +21447,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
   bin:
     typedoc: bin/typedoc
-  checksum: 40eb4e207aac1b734e09400cf03f543642cc7b11000895198dd5a0d3166315759ccf4ac30a2915153597c5c186101c72bac2f1fc12b428184a9274d3a0e44c5e
+  checksum: 49ecc56060a9d37fd3da4fb57f0a848bf618f3b97542ef503dad67e805a611359ad2453a625da0e2dd7a2d9eb7992bcefded58115b5cb3ddc98780b548e6dfd5
   languageName: node
   linkType: hard
 
