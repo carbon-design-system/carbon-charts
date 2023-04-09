@@ -77,8 +77,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 			props: {
 				data: args['data'],
 				options: args['options'],
-				codeFiles: Object.keys(demo.code.angular),
-				code: demo.code.angular,
 				// Open Cloud Sandbox (instead of Browser)
 				openSandbox: async (event: Event) => {
 					event.preventDefault()
