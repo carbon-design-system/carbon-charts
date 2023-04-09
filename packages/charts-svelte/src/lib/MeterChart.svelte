@@ -1,8 +1,20 @@
 <script lang="ts">
-	import { MeterChart } from '@carbon/charts'
+	import { MeterChart, type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
-	export let chart: BaseChart | null = null
-	export let ref: HTMLDivElement | null = null
+
+	export let chart: MeterChart
+	export let options: MeterChartOptions
+	export let data: ChartTabularData
+	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps} Chart={MeterChart} bind:ref bind:chart on:load on:update on:destroy />
+<BaseChart {...$$restProps}
+	Chart={MeterChart}
+	{options}
+	{data}
+	bind:ref
+	bind:chart
+	on:load
+	on:update
+	on:destroy
+/>

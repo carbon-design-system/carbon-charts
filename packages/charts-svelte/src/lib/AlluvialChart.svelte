@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { AlluvialChart, type AlluvialChartOptions } from '@carbon/charts'
+	import { AlluvialChart, type AlluvialChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	// export let options: AlluvialChartOptions | any = {}
-	export let chart: BaseChart | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: AlluvialChart
+	export let options: AlluvialChartOptions
+	export let data: ChartTabularData
+	export let ref: HTMLDivElement
 </script>
 
-<BaseChart
-	{...$$restProps}
+<BaseChart {...$$restProps}
 	Chart={AlluvialChart}
+  {options}
+	{data}
 	bind:ref
 	bind:chart
 	on:load

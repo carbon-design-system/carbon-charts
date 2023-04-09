@@ -1,8 +1,20 @@
 <script lang="ts">
-	import { TreemapChart } from '@carbon/charts'
+	import { TreemapChart, type TreemapChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
-	export let chart: BaseChart | null = null
-	export let ref: HTMLDivElement | null = null
+
+	export let chart: TreemapChart
+	export let options: TreemapChartOptions
+	export let data: ChartTabularData
+	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps} Chart={TreemapChart} bind:ref bind:chart on:load on:update on:destroy />
+<BaseChart {...$$restProps}
+	Chart={TreemapChart}
+	{options}
+	{data}
+	bind:ref
+	bind:chart
+	on:load
+	on:update
+	on:destroy
+/>
