@@ -5,6 +5,23 @@
 	export let DemoComponent: ComponentType
 	export let chartType: string
 	export let demo: Demo
+
+	const openSandbox = async () => {
+		try {
+			const response = await fetch(`${demo.codesandbox.svelte}&json=1`)
+	
+			if (!response.ok) {
+				throw new Error('Network response from CodeSandbox was not ok')
+			}
+			const data = await response.json()
+			const sandboxUrl = `https://codesandbox.io/p/sandbox/${data.sandbox_id}`
+			window.open(sandboxUrl, '_blank')
+		} catch (error) {
+			console.error('There was a problem opening the Cloud Sandbox:', error)
+			throw error
+		}
+
+	}
 </script>
 
 <div class="container theme--white">
@@ -38,8 +55,9 @@
 	</div>
 
 	<h3 class="marginTop-30">Code sample</h3>
+	<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>
 
-	<a href={demo.codesandbox.svelte} target="_blank">
+	<a on:click|preventDefault={openSandbox} href={'#'} target="_blank">
 		<img
 			src="https://codesandbox.io/static/img/play-codesandbox.svg"
 			alt="Edit on CodeSandbox"
