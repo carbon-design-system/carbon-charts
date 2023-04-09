@@ -37,10 +37,15 @@ export {
 	WordCloudChart
 } from './charts'
 
+// Union of chart types
+export type { Charts } from './charts'
+
 // Types and interfaces
 export type { ChartData, ChartConfig, ChartTabularData, DataSet } from './interfaces/model'
 export type { LayoutConfigs } from './interfaces/layout'
 export type {
+	// Union of Chart Options
+	ChartOptions,
 	// Chart Options
 	AlluvialChartOptions,
 	AreaChartOptions,

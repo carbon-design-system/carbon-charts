@@ -535,3 +535,28 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		}
 	}
 }
+
+export type ChartOptions =
+| AlluvialChartOptions
+| AreaChartOptions
+| BarChartOptions
+| BoxplotChartOptions
+| BubbleChartOptions
+| BulletChartOptions
+| CirclePackChartOptions
+| ComboChartOptions
+| DonutChartOptions
+| GaugeChartOptions
+| HeatmapChartOptions
+| HistogramChartOptions
+| LineChartOptions
+| LollipopChartOptions
+| MeterChartOptions
+| PieChartOptions
+| RadarChartOptions
+| ScatterChartOptions
+| StackedAreaChartOptions
+| StackedBarChartOptions
+| TreeChartOptions
+| TreemapChartOptions
+| WorldCloudChartOptions
