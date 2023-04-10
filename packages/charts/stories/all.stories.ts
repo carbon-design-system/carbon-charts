@@ -1,4 +1,5 @@
 import { storiesOf, type Args } from '@storybook/html'
+import sdk from '@stackblitz/sdk'
 import * as ChartComponents from '../src/charts'
 import { color } from '../src/configuration-non-customizable'
 import { storybookDemoGroups } from '../demo/data'
@@ -58,7 +59,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 			(args: Args) => {
 				// container creation
 				const container = document.createElement('div')
-				container.setAttribute('class', 'container theme--g100')
+				container.setAttribute('class', 'container theme--white')
 
 				container.innerHTML = `
 				<main>
@@ -70,7 +71,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 						<span class="cds--tag cds--tag--green component-name">${demo.chartType.vanilla}</span>
 					</h3>
 					<p class="props">
-						<span><b>Props: </b><span><a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
+						<span><b>Props: </b><span><a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
 					</p>
 					${
 						demo.options.experimental
@@ -92,14 +93,25 @@ storybookDemoGroups.forEach((demoGroup) => {
 					<div class="marginTop-45" id="chart-demo"></div>
 
 					<h3 class="marginTop-45">Code Sample</h3>
-					<a href="${demo.codesandbox.vanilla}" target="_blank">
-						<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on Codesandbox">
-					</a>
+					<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>
+					<button id="sandbox" type="button" onClick="openSandbox($event)" style="border:none; padding:0; background-color: transparent; cursor: pointer">
+						<img
+							src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
+							className="marginTop"
+							alt="Edit on StackBlitz"
+						/>
+					</button>
 
 					<h3 class="marginTop-45">Other versions</h3>
 					<p style="opacity: 0.75;">(currently on <strong>JavaScript (Vanilla)</strong>)</p>
+
 					<div id="other-versions"></div>
 				</main>`
+
+				const sandboxButton = container.querySelector('#sandbox');
+				sandboxButton.addEventListener('click', () => {
+					sdk.openProject(demo.code.vanilla, { newWindow: true })
+				})
 
 				// Initialize chart
 				const chart = new ClassToInitialize(container.querySelector('div#chart-demo'), {

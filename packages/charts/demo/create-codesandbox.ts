@@ -68,31 +68,35 @@ export const createVanillaChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, '\t')
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `
-<html>
-	<head>
-		<title>Parcel Sandbox</title>
-		<meta charset="UTF-8" />
-		<link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
-		<link
-			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
-			rel="stylesheet"
-			crossorigin="anonymous"
-		/>
-	</head>
-	<body>
-		<div id="app" style="width: 100%; height: 100%;"></div>
-		<script src="src/index.js"></script>
-	</body>
+	const indexHtml =
+	`	<html>
+  <head>
+    <title>Carbon Charts Vanilla JavaScript Example</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="preconnect"
+      crossorigin="anonymous"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="app" style="width: 100%; height: 100%"></div>
+    <script src="src/index.js"></script>
+  </body>
 </html>`
 
 	const indexJs = `
 import { ${chartComponent} } from '@carbon/charts'
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
-import './ibm-plex-font.css'
 
 const data = ${chartData}
+
 const options = ${chartOptions}
 
 // Grab chart holder HTML element and initialize the chart
@@ -106,25 +110,17 @@ new ${chartComponent}(chartHolder, {
 	const packageJson = JSON.stringify({
 		description: 'Carbon Charts Vanilla JavaScript Example',
 		version: '0.0.0',
-		scripts: {
-			start: 'parcel index.html --open',
-			build: 'parcel build index.html'
-		},
 		dependencies: {
 			'@carbon/charts': libraryVersion,
-			'@carbon/styles': '^1.26.0',
-			d3: D3VERSION
-		},
-		devDependencies: {
-			'parcel-bundler': '^1.12.5'
+			'@carbon/styles': '^1.26.1',
+			'd3': D3VERSION
 		}
 	}, null, 2)
 
 	return {
 		'index.html': indexHtml,
-		'src/index.js': indexJs,
-		'package.json': packageJson,
-		'src/ibm-plex-font.css': plexCSS,
+		'index.js': indexJs,
+		'package.json': packageJson
 	}
 }
 

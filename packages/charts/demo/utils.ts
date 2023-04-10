@@ -1,4 +1,4 @@
-const generateThemePickerHTML = (container: HTMLDivElement, configs: any) => {
+const generateThemePickerHTML = (container: HTMLDivElement) => {
 	const div = document.createElement('div')
 	div.id = 'theme-picker'
 	div.innerHTML = `
@@ -10,32 +10,32 @@ const generateThemePickerHTML = (container: HTMLDivElement, configs: any) => {
 					<div class="cds--radio-button-wrapper">
 						<input id="theme__white" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
 						<label for="theme__white" class="cds--radio-button__label">
-						<span class="cds--radio-button__appearance"></span>
-						<span class="cds--radio-button__label-text">White</span>
+							<span class="cds--radio-button__appearance"></span>
+							<span class="cds--radio-button__label-text">White</span>
 						</label>
 					</div>
 
 					<div class="cds--radio-button-wrapper">
 						<input id="theme__g10" class="cds--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
 						<label for="theme__g10" class="cds--radio-button__label">
-						<span class="cds--radio-button__appearance"></span>
-						<span class="cds--radio-button__label-text">G10</span>
+							<span class="cds--radio-button__appearance"></span>
+							<span class="cds--radio-button__label-text">G10</span>
 						</label>
 					</div>
 
 					<div class="cds--radio-button-wrapper">
 						<input id="theme__g90" class="cds--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
 						<label for="theme__g90" class="cds--radio-button__label">
-						<span class="cds--radio-button__appearance"></span>
-						<span class="cds--radio-button__label-text">G90</span>
+							<span class="cds--radio-button__appearance"></span>
+							<span class="cds--radio-button__label-text">G90</span>
 						</label>
 					</div>
 
 					<div class="cds--radio-button-wrapper">
 						<input id="theme__g100" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
 						<label for="theme__g100" class="cds--radio-button__label">
-						<span class="cds--radio-button__appearance"></span>
-						<span class="cds--radio-button__label-text">G100</span>
+							<span class="cds--radio-button__appearance"></span>
+							<span class="cds--radio-button__label-text">G100</span>
 						</label>
 					</div>
 				</div>
@@ -76,14 +76,13 @@ const generateColorPalettePickerHTML = (
 	div.id = 'color-palette-picker'
 	div.innerHTML = `
 		<div class="cds--form-item">
-			<div
-			class="cds--select">
-			<label for="color-palette-select" class="cds--label">Active color palette</label>
+			<div class="cds--select">
+				<label for="color-palette-select" class="cds--label">Active color palette</label>
 				<div class="cds--select-input__wrapper">
-				<select id="color-palette-select" class="cds--select-input">
-					<option class="cds--select-option" value="" disabled selected hidden>
-					Choose an option
-					</option>
+					<select id="color-palette-select" class="cds--select-input">
+						<option class="cds--select-option" value="" disabled selected hidden>
+						Choose an option
+						</option>
 					${
 						colorPairingOptions
 							? Object.keys(colorPairingOptions)
@@ -123,10 +122,10 @@ const generateColorPalettePickerHTML = (
 									.join('')
 							: ''
 					}
-				</select>
-				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+						</select>
+						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+					</div>
 				</div>
-			</div>
 			</div>
 		</div>`
 
@@ -148,19 +147,18 @@ export const addControls = (
 	chart: any,
 	configs: { colorPairingOptions: any } = { colorPairingOptions: null }
 ) => {
-	generateThemePickerHTML(container, chart)
+	generateThemePickerHTML(container)
 
 	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
 		generateColorPalettePickerHTML(container, chart, configs)
 	}
 
-	addRadioButtonEventListeners(container, chart, configs)
+	addRadioButtonEventListeners(container, chart)
 }
 
 export const addRadioButtonEventListeners = (
 	container: HTMLDivElement,
-	chart: any,
-	configs: any
+	chart: any
 ) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
@@ -286,8 +284,12 @@ export const generateRandomData = (quantity: number, min: number, max: number) =
  * Adds a generate demo data form to the story
  */
 export const generateHighScaleDemoDataForm = () =>
-	`<form id="demo-data"><label for="demo-data-name">Records to generate: </label><input type="number" id="demo-data-number" name="number" required
-	 size="5" value="100"><input type="submit"></label></form>`
+	`<form id="demo-data">
+		<label for="demo-data-name">Records to generate: </label>
+		<input type="number" id="demo-data-number" name="number" required size="5" value="100">
+		<input type="submit">
+	</form>`
+
 export const addDemoDataFormListeners = (container: HTMLElement, demo: any, chart: any) => {
 	// Add event listeners for form
 	const form = container.querySelector('form#demo-data')

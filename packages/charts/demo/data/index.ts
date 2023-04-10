@@ -27,6 +27,8 @@ import * as highlightDemos from './hightlight'
 import * as heatmapDemos from './heatmap'
 import process from 'process'
 
+import packageJSON from '../../package.json'
+
 export * from './area'
 export * from './bar'
 export * from './boxplot'
@@ -54,6 +56,9 @@ export * from './alluvial'
 export * from './heatmap'
 
 const production = process.env['NODE_ENV'] === 'production'
+const libraryVersion = packageJSON.version
+const D3VERSION = packageJSON.peerDependencies['d3']
+const stylesVersion = packageJSON.dependencies['@carbon/styles']
 
 import {
 	createChartSandbox,
@@ -1271,7 +1276,7 @@ const mapDemoGroups = (demoGroups: any) =>
 					demo.codesandbox = {}
 				}
 
-				demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
+				// demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
 				// demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
 				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
@@ -1282,17 +1287,28 @@ const mapDemoGroups = (demoGroups: any) =>
 					demo.code = {}
 				}
 
-				demo.code.angular = {
-					files: createAngularChartApp(demo),
-					template: 'angular-cli', // (EngineBlock), create-react-app (EngineBlock), vue (EngineBlock), javascript (EngineBlock), html (EngineBlock), node (WebContainer)
-					title: 'Carbon Charts Angular Example',
+				const project = {
+					title: 'Carbon Charts Example',
 					description: demo.title,
 					dependencies: {
-						'@carbon/charts': '^1.6.14',
-						'@carbon/charts-angular': '^1.6.14',
-						'@carbon/styles': '^1.26.1',
-						'd3': '^7.8.4'
-					} // EngineBlock only
+						'@carbon/charts': libraryVersion,
+						'@carbon/styles': stylesVersion,
+						'd3': D3VERSION
+					}
+				}
+
+				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
+
+				// template: // (EngineBlock), create-react-app (EngineBlock), vue (EngineBlock), javascript (EngineBlock), html (EngineBlock), node (WebContainer)
+				demo.code.angular = {
+					...project, 
+					files: createAngularChartApp(demo),
+					template: 'angular-cli', 
+					title: 'Carbon Charts Angular Example',
+					dependencies: {
+						...project.dependencies,
+						'@carbon/charts-angular': libraryVersion,
+					}
 				}
 
 				return demo
