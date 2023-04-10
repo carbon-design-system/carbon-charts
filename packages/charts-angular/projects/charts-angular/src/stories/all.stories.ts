@@ -2,6 +2,7 @@ import { storiesOf, type Args, type StoryFn } from '@storybook/angular'
 import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
 import { storybookDemoGroups } from '@carbon/charts/demo'
+import sdk from '@stackblitz/sdk'
 
 const introSection = storiesOf('Docs', module).add(
 	'Welcome',
@@ -52,9 +53,9 @@ const getTemplate = (componentSelector: string) => `
 		<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>
 		<a href="#" (click)="openSandbox($event)">
 			<img
-				src="https://codesandbox.io/static/img/play-codesandbox.svg"
+				src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
 				className="marginTop"
-				alt="Edit on Codesandbox"
+				alt="Edit on StackBlitz"
 			/>
 		</a>
 	</div>`
@@ -77,24 +78,10 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 			props: {
 				data: args['data'],
 				options: args['options'],
-				// Open Cloud Sandbox (instead of Browser)
-				openSandbox: async (event: Event) => {
+				// StackBlitz
+				openSandbox: (event: Event) => {
 					event.preventDefault()
-
-					try {
-						const response = await fetch(`${demo.codesandbox.angular}&json=1`)
-				
-						if (!response.ok) {
-							throw new Error('Network response from CodeSandbox was not ok')
-						}
-						const data = await response.json()
-						const sandboxUrl = `https://codesandbox.io/p/sandbox/${data.sandbox_id}`
-						window.open(sandboxUrl, '_blank')
-					} catch (error) {
-						console.error('There was a problem opening the Cloud Sandbox:', error)
-						throw error
-					}
-
+					sdk.openProject(demo.code.angular, { newWindow: true })
 				}
 			}
 		})

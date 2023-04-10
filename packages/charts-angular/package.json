@@ -70,6 +70,7 @@
     "@babel/core": "^7.21.4",
     "@carbon/telemetry": "~0.1.0",
     "@compodoc/compodoc": "^1.1.19",
+    "@stackblitz/sdk": "^1.9.0",
     "@storybook/addon-essentials": "^7.0.2",
     "@storybook/addon-interactions": "^7.0.2",
     "@storybook/addon-links": "^7.0.2",

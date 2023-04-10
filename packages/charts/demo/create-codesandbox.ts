@@ -7,8 +7,6 @@ const D3VERSION = packageJSON.peerDependencies['d3']
 
 const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
-// const dockerFile = `FROM node:18.15.0-bullseye` // not used until moving from browser to cloud sandboxes
-
 const sandboxConfig =
 `{
   "infiniteLoopProtection": true,
@@ -133,30 +131,6 @@ new ${chartComponent}(chartHolder, {
 // Charts Angular
 
 export const createAngularChartApp = (demo: any) => {
-	const codeSandboxAngularTasks =
-`{
-	// These tasks will run in order when initializing your CodeSandbox project.
-	"setupTasks": [
-		{
-			"name": "Install Dependencies",
-			"command": "yarn install"
-		}
-	],
-
-	// These tasks can be run from CodeSandbox. Running one will open a log in the app.
-	"tasks": {
-		"start": {
-			"name": "serve",
-			"command": "yarn serve",
-			"runAtStart": true
-		},
-		"build": {
-			"name": "build",
-			"command": "yarn build",
-			"runAtStart": false
-		}
-	}
-}`
 
 	const angularJson =
 `{
@@ -164,188 +138,111 @@ export const createAngularChartApp = (demo: any) => {
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "charts-angular-example": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+    "demo": {
       "root": "",
       "sourceRoot": "src",
+      "projectType": "application",
       "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "./dist",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": [],
+            "styles": ["src/global_styles.css"],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
+              "fileReplacements": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "2mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kb",
-                  "maximumError": "6kb"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
+              "optimization": true,
+              "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": true
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-					"options": {
-            "browserTarget": "charts-angular-example:build:development",
-            "port": 8080,
-            "host": "0.0.0.0",
-            "disableHostCheck": true
+          "options": {
+            "browserTarget": "demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "charts-angular-example:build:production"
-            },
-            "development": {
-              "browserTarget": "charts-angular-example:build:development"
+              "browserTarget": "demo:build:production"
             }
-          },
-          "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
           }
         }
       }
     }
-  }
+  },
+  "defaultProject": "demo"
 }`
 
 const packageJson = JSON.stringify({
-	description: 'Carbon Charts Angular Example',
+	name: 'carbon-charts-example',
 	version: '0.0.0',
-	license: 'MIT',
 	scripts: {
-		ng: 'ng',
-		serve: 'NG_CLI_ANALYTICS=false ng serve',
-		build: 'NG_CLI_ANALYTICS=false ng build',
+		'ng': 'ng',
+		'start': 'NG_CLI_ANALYTICS=false ng serve',
+		'build': 'NG_CLI_ANALYTICS=false ng build',
 	},
 	dependencies: {
-		'@angular/animations': '^15.2.5',
-		'@angular/common': '^15.2.5',
-		'@angular/compiler': '^15.2.5',
-		'@angular/core': '^15.2.5',
-		'@angular/forms': '^15.2.5',
-		'@angular/platform-browser': '^15.2.5',
-		'@angular/platform-browser-dynamic': '^15.2.5',
-		'@angular/router': '^15.2.5',
+		'@angular/animations': '^15.2.6',
+		'@angular/common': '^15.2.6',
+		'@angular/compiler': '^15.2.6',
+		'@angular/core': '^15.2.6',
+		'@angular/platform-browser': '^15.2.6',
 		'@carbon/charts': libraryVersion,
 		'@carbon/charts-angular': libraryVersion,
-		'@carbon/styles': '^1.26.0',
-		d3: D3VERSION,
-		rxjs: '~7.8.0',
-		tslib: '^2.3.0',
+		'@carbon/styles': '^1.26.1',
+		'd3': D3VERSION,
+		'rxjs': '~7.8.0',
+		'tslib': '^2.3.0',
 		'zone.js': '~0.12.0'
 	},
 	devDependencies: {
-		'@angular-devkit/build-angular': '^15.2.4',
-		'@angular/cli': '~15.2.4',
+		'@angular-devkit/build-angular': '^15.2.5',
+		'@angular/cli': '~15.2.5',
 		'@angular/compiler-cli': '^15.2.5',
 		'typescript': '~4.9.4'
-	},
-	engines: {
-		node: '>=16.12.0'
 	}
 }, null, 2)
 
 const tsConfig =
 `{
-	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist",
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"noImplicitOverride": true,
-		"noPropertyAccessFromIndexSignature": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"sourceMap": false,
-		"declaration": false,
-		"downlevelIteration": true,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
-		"importHelpers": true,
-		"target": "ESNext",
-		"module": "ESNext",
-		"useDefineForClassFields": false,
-		"lib": [
-			"ES2022",
-			"dom"
-		]
-	},
-	"angularCompilerOptions": {
-		"enableI18nLegacyMessageIdFormat": false,
-		"strictInjectionParameters": true,
-		"strictInputAccessModifiers": true,
-		"strictTemplates": true
-	}
-}`
-
-	const tsConfigApp =
-`{
-  "extends": "./tsconfig.json",
+  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
-    "types": []
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["esnext", "dom"]
   },
-  "files": [
-    "src/main.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "strictInjectionParameters": true
+  }
 }`
 
 	const indexHtml =
@@ -356,73 +253,55 @@ const tsConfig =
   <title>Carbon Charts Angular Example</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link
+		href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
+		rel="stylesheet"
+		crossorigin="anonymous"
+	/>
 </head>
 <body>
-  <app-root></app-root>
+  <my-app></my-app>
 </body>
 </html>`
 
-	const mainTs =
-`import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { AppModule } from './app/app.module'
+	const chartComponent = demo.chartType.angular
+	const chartData = JSON.stringify(demo.data, null, 2)
+	const chartOptions = JSON.stringify(demo.options, null, 2)
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err))`
+	const mainTs =
+`import 'zone.js/dist/zone'
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { bootstrapApplication } from '@angular/platform-browser'
+import { ChartsModule } from '@carbon/charts-angular'
+
+@Component({
+  selector: 'my-app',
+  standalone: true,
+  imports: [CommonModule, ChartsModule],
+	template: '<${chartComponent} [data]="data" [options]="options"></${chartComponent}>'
+})
+export class App {
+	options = ${chartOptions}
+
+	data = ${chartData}
+
+}
+
+bootstrapApplication(App)
+`
 
 	const stylesScss =
 `@import '@carbon/styles/css/styles.css';
-@import '@carbon/charts/styles.css';
-@import 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap';`
-
-	const chartData = JSON.stringify(demo.data, null, 2)
-	const chartOptions = JSON.stringify(demo.options, null, 2)
-	const chartComponent = demo.chartType.angular
-
-	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`
-	const appComponentTs =
-`import { Component } from '@angular/core'
-
-@Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
-	data = ${chartData}
-	options = ${chartOptions}
-}`
-
-	const appModule =
-`import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { ChartsModule } from '@carbon/charts-angular'
-import { AppComponent } from './app.component'
-
-@NgModule({
-	declarations: [AppComponent],
-	imports: [BrowserModule, ChartsModule],
-	providers: [],
-	bootstrap: [AppComponent]
-})
-export class AppModule { }`
+@import '@carbon/charts/styles.css';`
 
 	return {
-		'.codesandbox/tasks.json': codeSandboxAngularTasks,
 		'angular.json': angularJson,
 		'package.json': packageJson,
-		'README.md': `# Carbon Charts Angular Example`,
-		'sandbox.config.json': sandboxConfig,
 		'tsconfig.json': tsConfig,
-		'tsconfig.app.json': tsConfigApp,
-		'dist/.gitkeep': ' ',
-		'src/assets/.gitkeep': ' ',
 		'src/index.html': indexHtml,
 		'src/main.ts': mainTs,
-		'src/styles.scss': stylesScss,
-		'src/app/app.component.html': appComponentHtml,
-		'src/app/app.component.ts': appComponentTs,
-		'src/app/app.component.scss': ' ',
-		'src/app/app.module.ts': appModule
+		'src/global_styles.css': stylesScss
 	}
 }
 

@@ -1272,7 +1272,7 @@ const mapDemoGroups = (demoGroups: any) =>
 				}
 
 				demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
-				demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
+				// demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
 				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
@@ -1280,6 +1280,19 @@ const mapDemoGroups = (demoGroups: any) =>
 				// Not used any longer now that Angular runs in Cloud Sandbox
 				if (!demo.code) {
 					demo.code = {}
+				}
+
+				demo.code.angular = {
+					files: createAngularChartApp(demo),
+					template: 'angular-cli', // (EngineBlock), create-react-app (EngineBlock), vue (EngineBlock), javascript (EngineBlock), html (EngineBlock), node (WebContainer)
+					title: 'Carbon Charts Angular Example',
+					description: demo.title,
+					dependencies: {
+						'@carbon/charts': '^1.6.14',
+						'@carbon/charts-angular': '^1.6.14',
+						'@carbon/styles': '^1.26.1',
+						'd3': '^7.8.4'
+					} // EngineBlock only
 				}
 
 				return demo
