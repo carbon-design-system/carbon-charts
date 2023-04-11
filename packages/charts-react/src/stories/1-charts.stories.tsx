@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
+import sdk from '@stackblitz/sdk'
 import { Configuration } from '@carbon/charts'
 import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
 import type { Demo } from './Demo'
@@ -47,6 +48,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 					setUpdate(!update)
 				}, [demoRef, chartRef])
 
+				const openSandbox = (event: MouseEvent) => {
+					event.preventDefault()
+					sdk.openProject(demo.code.react, { newWindow: true })
+				}
+
 				return (
 					<div className="container theme--g100" ref={demoRef}>
 						<div className="v10-banner">
@@ -77,11 +83,12 @@ storybookDemoGroups.forEach((demoGroup) => {
 						</div>
 
 						<h3 className="marginTop-30">Code sample</h3>
-						<a href={demo.codesandbox.react} target="_blank">
+
+						<a  href="#" onClick={openSandbox}>
 							<img
-								src="https://codesandbox.io/static/img/play-codesandbox.svg"
+								src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
 								className="marginTop"
-								alt="Edit on Codesandbox"
+								alt="Edit on StackBlitz"
 							/>
 						</a>
 

@@ -2021,6 +2021,7 @@ __metadata:
     "@carbon/icons-react": ^11.17.0
     "@carbon/telemetry": ~0.1.0
     "@rushstack/eslint-patch": ^1.2.0
+    "@stackblitz/sdk": 1.9.0
     "@storybook/addon-essentials": ^7.0.2
     "@storybook/addon-interactions": ^7.0.2
     "@storybook/addon-links": ^7.0.2
@@ -4125,7 +4126,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stackblitz/sdk@npm:^1.9.0":
+"@stackblitz/sdk@npm:1.9.0, @stackblitz/sdk@npm:^1.9.0":
   version: 1.9.0
   resolution: "@stackblitz/sdk@npm:1.9.0"
   checksum: 9003383143cc17ef8a6982cece827d85e7bcfb63f07242af85d19834ce387c293f44c83360f8a7ca46dc153e89151c7487c54bc842967047910712aab9bd4a04

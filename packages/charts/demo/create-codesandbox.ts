@@ -308,7 +308,24 @@ export const createReactChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `<div id="root"></div>`
+	const indexHtml =
+`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Carbon Charts React Example</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link
+		href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
+		rel="stylesheet"
+		crossorigin="anonymous"
+	/>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>`
 
 	const indexJs =
 `import React from 'react'
@@ -317,10 +334,6 @@ import { ${chartComponent} } from '@carbon/charts-react'
 
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
-
-// IBM Plex should either be imported in your project by using Carbon
-// or consumed manually through an import
-import './ibm-plex-font.css'
 
 class App extends React.Component {
 	state = {
@@ -357,11 +370,9 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 	}, null, 2)
 
 	return {
-		'src/index.html': indexHtml,
+		'public/index.html': indexHtml,
 		'src/index.js': indexJs,
-		'src/ibm-plex-font.css': plexCSS,
-		'package.json': packageJson,
-		'.codesandbox/tasks.json': codeSandboxTasks
+		'package.json': packageJson
 	}
 }
 

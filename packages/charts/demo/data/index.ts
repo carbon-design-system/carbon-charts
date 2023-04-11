@@ -1278,7 +1278,7 @@ const mapDemoGroups = (demoGroups: any) =>
 
 				// demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
 				// demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
-				demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
+				// demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
@@ -1308,6 +1308,17 @@ const mapDemoGroups = (demoGroups: any) =>
 					dependencies: {
 						...project.dependencies,
 						'@carbon/charts-angular': libraryVersion,
+					}
+				}
+
+				demo.code.react = {
+					...project, 
+					files: createReactChartApp(demo),
+					template: 'create-react-app', 
+					title: 'Carbon Charts React Example',
+					dependencies: {
+						...project.dependencies,
+						'@carbon/charts-react': libraryVersion,
 					}
 				}
 

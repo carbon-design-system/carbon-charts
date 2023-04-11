@@ -11,6 +11,9 @@ export interface Demo {
 	codesandbox: {
 		svelte: string
 		react: string
+	},
+	code: {
+		react: any
 	}
 }
 
