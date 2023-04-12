@@ -163,7 +163,7 @@ export const addRadioButtonEventListeners = (
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
 
-	const currentTheme = document.documentElement.getAttribute('data-carbon-theme')
+	const currentTheme = document.documentElement.getAttribute('data-carbon-theme') // || 'g100'
 	if (currentTheme) {
 		chart.services.domUtils.getHolder().setAttribute('data-carbon-theme', currentTheme)
 	}
@@ -175,6 +175,7 @@ export const addRadioButtonEventListeners = (
 			document.documentElement.setAttribute('data-carbon-theme', theme)
 			// Set selected theme to options
 			chart.model.setOptions({ ...chart.model.getOptions(), theme })
+			// TODO: Would be good to set the demo.data.theme so what appears in the Controls area aligns
 		})
 	})
 }

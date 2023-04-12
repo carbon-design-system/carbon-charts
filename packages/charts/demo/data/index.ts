@@ -1272,23 +1272,13 @@ const mapDemoGroups = (demoGroups: any) =>
 				// If height not specified in options, use 400px
 				demo.options.height = demo.options.height ?? '400px'
 
-				if (!demo.codesandbox) {
-					demo.codesandbox = {}
-				}
-
-				// demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo))
-				// demo.codesandbox.angular = createChartSandbox(createAngularChartApp(demo))
-				// demo.codesandbox.react = createChartSandbox(createReactChartApp(demo))
+				demo.codesandbox = {} // VanillaJS, Angular and React use StackBlitz via demo.code.vanilla, angular, react
 				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
-				// Not used any longer now that Angular runs in Cloud Sandbox
-				if (!demo.code) {
-					demo.code = {}
-				}
-
 				const project = {
 					title: 'Carbon Charts Example',
+					template: 'javascript',
 					description: demo.title,
 					dependencies: {
 						'@carbon/charts': libraryVersion,
@@ -1296,10 +1286,10 @@ const mapDemoGroups = (demoGroups: any) =>
 						'd3': D3VERSION
 					}
 				}
+				demo.code = {} // Svelte and Vue use CodeSandbox
 
 				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
 
-				// template: // (EngineBlock), create-react-app (EngineBlock), vue (EngineBlock), javascript (EngineBlock), html (EngineBlock), node (WebContainer)
 				demo.code.angular = {
 					...project, 
 					files: createAngularChartApp(demo),
@@ -1321,6 +1311,8 @@ const mapDemoGroups = (demoGroups: any) =>
 						'@carbon/charts-react': libraryVersion,
 					}
 				}
+
+				// We could define code.svelte and code.vue using a `node` template (Web Container). Note: StackBlitz `vue` template is Vue 3 only.
 
 				return demo
 			})
