@@ -11,7 +11,7 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 						<input id="theme__white" class="cds--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
 						<label for="theme__white" class="cds--radio-button__label">
 							<span class="cds--radio-button__appearance"></span>
-							<span class="cds--radio-button__label-text">White</span>
+							<span class="cds--radio-button__label-text">White (white)</span>
 						</label>
 					</div>
 
@@ -19,7 +19,7 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 						<input id="theme__g10" class="cds--radio-button" type="radio" value="g10" name="radio-button" tabindex="0">
 						<label for="theme__g10" class="cds--radio-button__label">
 							<span class="cds--radio-button__appearance"></span>
-							<span class="cds--radio-button__label-text">G10</span>
+							<span class="cds--radio-button__label-text">Light Gray (g10)</span>
 						</label>
 					</div>
 
@@ -27,7 +27,7 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 						<input id="theme__g90" class="cds--radio-button" type="radio" value="g90" name="radio-button" tabindex="0">
 						<label for="theme__g90" class="cds--radio-button__label">
 							<span class="cds--radio-button__appearance"></span>
-							<span class="cds--radio-button__label-text">G90</span>
+							<span class="cds--radio-button__label-text">Medium Gray (g90)</span>
 						</label>
 					</div>
 
@@ -35,7 +35,7 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 						<input id="theme__g100" class="cds--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
 						<label for="theme__g100" class="cds--radio-button__label">
 							<span class="cds--radio-button__appearance"></span>
-							<span class="cds--radio-button__label-text">G100</span>
+							<span class="cds--radio-button__label-text">Black (g100)</span>
 						</label>
 					</div>
 				</div>
