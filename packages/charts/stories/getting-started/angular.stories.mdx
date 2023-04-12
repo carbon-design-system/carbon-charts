@@ -17,12 +17,12 @@ in prototype and production work.
 
 **with yarn (preferred):**
 ```bash
-yarn add @carbon/charts-angular d3
+yarn add @carbon/charts-angular @carbon/styles d3
 ```
 
 **with npm:**
 ```bash
-npm install --save @carbon/charts-angular d3
+npm install --save @carbon/charts-angular @carbon/styles  d3
 ```
 
 ## Getting started
@@ -63,7 +63,7 @@ export class AppModule {}
 import { Component } from '@angular/core'
 
 import '@carbon/styles/css/styles.css'  // may affect global styles
-import '@carbon/charts/styles.css'
+import '@carbon/charts-angular/styles.css'
 
 @Component({
   selector: 'my-app',

@@ -12,12 +12,12 @@ consistent markup, styles, and behavior in prototype and production work.
 
 **Using yarn**
 ```bash
-yarn add @carbon/charts-react d3
+yarn add @carbon/charts-react @carbon/styles d3
 ```
 
 **Using npm**
 ```bash
-npm install --save @carbon/charts-react d3
+npm install --save @carbon/charts-react @carbon/styles d3
 ```
 
 ## Getting started
@@ -29,7 +29,7 @@ import React from 'react'
 import { StackedBarChart } from '@carbon/charts-react'
 
 import '@carbon/styles/css/styles.css' // may affect global styles
-import '@carbon/charts/styles.css'
+import '@carbon/charts-react/styles.css'
 
 function App() {
 	const [stackedBarData, setStackedBarData] = React.useState([
