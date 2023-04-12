@@ -51,9 +51,6 @@ storybookDemoGroups.forEach((demoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
 	demoGroup.demos.forEach(demo => {
-		if (demo.isHighScale) {
-			return
-		}
 		demo.options.theme = DEFAULT_THEME
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla]
 
@@ -122,9 +119,6 @@ storybookDemoGroups.forEach((demoGroup) => {
 					data: args.data,
 					options: args.options
 				})
-
-				// Disabled because generateHighScaleDemoDataForm is never called to create a form (cruft?)
-				// storyUtils.addDemoDataFormListeners(container, demo, chart)
 
 				storyUtils.addControls(container, demoGroup, chart, {
 					colorPairingOptions

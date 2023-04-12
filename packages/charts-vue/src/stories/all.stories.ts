@@ -5,7 +5,6 @@ import type { BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
 interface Demo {
 	title: string
-	isHighScale: boolean
 	chartType: {
 		vue: string
 	}
@@ -57,9 +56,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 	// Create stories within story group
 	demoGroup.demos.forEach((demo) => {
-		if (demo.isHighScale) {
-			return
-		}
 		const component = ChartComponents[demo.chartType.vue]
 		groupStories.add(
 			demo.title,

@@ -68,9 +68,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
-		if (demo.isHighScale) {
-			return
-		}
 		const demoStory: StoryFn = (args: Args) => ({
 			template: getTemplate(demo.chartType.angular),
 			moduleMetadata: {

@@ -1,8 +1,6 @@
 export {
 	addControls,
-	addOtherVersions,
-	generateRandomData,
-	generateHighScaleDemoDataForm
+	addOtherVersions
 } from './utils'
 
 export * from './data'

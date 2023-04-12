@@ -15,9 +15,6 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
-		if (demo.isHighScale) {
-			return
-		}
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
 		groupStories.add(

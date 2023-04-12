@@ -2,7 +2,6 @@ import type { interfaces } from '@carbon/charts'
 
 export interface Demo {
 	title: string
-	isHighScale: boolean
 	chartType: {
 		vanilla: string
 		angular: string

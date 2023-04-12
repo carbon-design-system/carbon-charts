@@ -21,11 +21,9 @@ import * as circlePackDemos from './circle-pack'
 import * as toolbarDemos from './toolbar'
 import * as wordCloudDemos from './wordcloud'
 import * as zoomBarDemos from './zoom-bar'
-import * as highScaleDemos from './high-scale'
 import * as alluvialDemos from './alluvial'
 import * as highlightDemos from './hightlight'
 import * as heatmapDemos from './heatmap'
-import process from 'process'
 
 import packageJSON from '../../package.json'
 
@@ -51,11 +49,9 @@ export * from './circle-pack'
 export * from './toolbar'
 export * from './wordcloud'
 export * from './zoom-bar'
-export * from './high-scale'
 export * from './alluvial'
 export * from './heatmap'
 
-const production = process.env['NODE_ENV'] === 'production'
 const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']
 const stylesVersion = packageJSON.dependencies['@carbon/styles']
@@ -69,8 +65,8 @@ import {
 	createVueChartApp
 } from '../create-codesandbox'
 
-import chartTypes from './CHART_TYPES'
-export * from './CHART_TYPES'
+import chartTypes from './chart-types'
+export * from './chart-types'
 
 export enum DemoGroupTypes {
 	UTILITY = 'utility',
@@ -1232,20 +1228,6 @@ const complexChartDemos = [
 
 let allDemoGroups = utilityDemoGroups.concat(simpleChartDemos).concat(complexChartDemos)
 
-const devOnlyDemoGroups = [
-	{
-		title: 'High scale tests (DEV)',
-		demos: [
-			{
-				options: highScaleDemos.zoomBarHighScaleLineTimeSeriesOptions,
-				data: [],
-				isHighScale: true,
-				chartType: chartTypes.LineChart
-			}
-		]
-	}
-] as any
-
 const formatTitleString = (str: string) =>
 	str
 		.replace(/[^\w\s]/gi, '')
@@ -1321,11 +1303,6 @@ const mapDemoGroups = (demoGroups: any) =>
 		})
 // add codesandbox and code to demos
 allDemoGroups = mapDemoGroups(allDemoGroups)
-
-// Only add the high-scale testcases in dev
-if (!production) {
-	allDemoGroups = allDemoGroups.concat(mapDemoGroups(devOnlyDemoGroups))
-}
 
 // in the storybook we want to show all the demos
 export const storybookDemoGroups = allDemoGroups

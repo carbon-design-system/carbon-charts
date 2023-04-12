@@ -22,9 +22,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
 	demoGroup.demos.forEach((demo: Demo) => {
-		if (demo.isHighScale) {
-			return
-		}
 		let chartType = demo.chartType.vanilla
 
 		switch (chartType) {
