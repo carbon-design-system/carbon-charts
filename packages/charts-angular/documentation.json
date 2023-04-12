@@ -1558,137 +1558,6 @@
             "stylesData": ""
         },
         {
-            "name": "ChartWrapper",
-            "id": "component-ChartWrapper-36fc981fbc79de4eda0abb67e714923691ab7f2b4d021c64ad74452d03f9d823b9ee6788b433a4c4b705a43039cfb002df284f931127dfa510dffe44b59f6fe9",
-            "file": "projects/charts-angular/src/stories/chart-wrapper.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "chart-wrapper",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./chart-wrapper.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "chartType",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 10,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "data",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "ChartTabularData",
-                    "decorators": []
-                },
-                {
-                    "name": "demoChart",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 9,
-                    "type": "any",
-                    "decorators": []
-                },
-                {
-                    "name": "options",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "BaseChartOptions",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 17,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "openCloudSandbox",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 32,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        131
-                    ]
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Injector, OnInit, Input, ViewContainerRef } from '@angular/core'\nimport type { ChartTabularData, BaseChartOptions } from '@carbon/charts'\n\n@Component({\n  selector: 'chart-wrapper',\n  templateUrl: './chart-wrapper.component.html'\n})\nexport class ChartWrapper implements OnInit {\n  @Input() demoChart!: any\n  @Input() chartType: string = ''\n  @Input() data!: ChartTabularData\n  @Input() options!: BaseChartOptions\n  // @Input() codeSandbox!: string\n\n  constructor(private viewContainerRef: ViewContainerRef) {}\n\n  ngOnInit(): void {\n    console.log(this.demoChart)\n  }\n\n  get injector() {\n    const injector = this.viewContainerRef.injector;\n    return Injector.create({\n      providers: [\n        { provide: 'data', useValue: this.data },\n        { provide: 'options', useValue: this.options }\n      ],\n      parent: injector\n    })\n  }\n\n  async openCloudSandbox() {\n\t\tconsole.log('Click')\n\t\ttry {\n\t\t\tconst response = await fetch('https://codesandbox.io/api/v1/sandboxes', {\n\t\t\t\tmethod: 'POST',\n\t\t\t\t// body: JSON.stringify(this.codeSandbox),\n\t\t\t\theaders: { 'Content-Type': 'application/json' }\n\t\t\t})\n\t\n\t\t\tif (!response.ok) {\n\t\t\t\tthrow new Error('Network response from CodeSandbox was not ok')\n\t\t\t}\n\t\t\tconst { data } = await response.json()\n\t\t\tconst sandboxUrl = `https://codesandbox.io/p/sandbox/${data.sandbox_id}`\n\t\t\twindow.open(sandboxUrl, '_blank')\n\t\t} catch (error) {\n\t\t\tconsole.error('There was a problem opening the Cloud Sandbox:', error)\n\t\t\tthrow error\n\t\t}\n\t}\n}",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "viewContainerRef",
-                        "type": "ViewContainerRef",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 12,
-                "jsdoctags": [
-                    {
-                        "name": "viewContainerRef",
-                        "type": "ViewContainerRef",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "accessors": {
-                "injector": {
-                    "name": "injector",
-                    "getSignature": {
-                        "name": "injector",
-                        "type": "",
-                        "returnType": "",
-                        "line": 21
-                    }
-                }
-            },
-            "templateData": "<div class=\"container theme--white\">\n  <div class=\"v10-banner\">\n    This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n  </div>\n  <h3>\n    <b>Component:</b>\n    <span class=\"cds--tag cds--tag--green component-name\">{{chartType}}</span>\n  </h3>\n  <p class=\"props\">\n    <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n  </p>\n\n  <div class=\"marginTop-30\" id=\"chart-demo\">\n    <ng-container *ngComponentOutlet=\"demoChart; injector: injector;\"></ng-container>\n\t</div>\n\n  <h3 class=\"marginTop-30\">Code sample</h3>\n  <a href=\"javascript:void(0)\" (click)=\"openCloudSandbox()\">\n    <img\n      src=\"https://codesandbox.io/static/img/play-codesandbox.svg\"\n      alt=\"Edit on CodeSandbox\"\n      class=\"marginTop\"\n    />\n  </a>\n\n  <div class=\"cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30\" data-code-snippet>\n    <div class=\"cds--snippet-container\" aria-label=\"Code Snippet Text\">\n      <pre>\n        <code>\n          &lt;{{ chartType }} [data]=\"data\" [options]=\"options\" &gt;&lt;/{{ chartType }}&gt;\n        </code>\n      </pre>\n    </div>\n  </div>\n</div>"
-        },
-        {
             "name": "CirclePackChart",
             "id": "component-CirclePackChart-13bb43e21c3f2764398adf2fa2eba6283b1332c125dcecb199a1f9f12bbf743667d5988be80c71c329643b62a277c6e342bc166b851871ff461ea9a8dd392ccf",
             "file": "projects/charts-angular/src/lib/charts/circle-pack-chart.component.ts",
@@ -7344,7 +7213,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "(componentSelector: string) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${componentSelector}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${componentSelector} [data]=\"data\" [options]=\"options\"></${componentSelector}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>\n\t\t<a href=\"#\" (click)=\"openSandbox($event)\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://developer.stackblitz.com/img/open_in_stackblitz.svg\"\n\t\t\t\tclassName=\"marginTop\"\n\t\t\t\talt=\"Edit on StackBlitz\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
+                "defaultValue": "(componentSelector: string) => `\n\t<div class=\"container\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${componentSelector}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${componentSelector} [data]=\"data\" [options]=\"options\"></${componentSelector}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>\n\t\t<a href=\"#\" (click)=\"openSandbox($event)\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://developer.stackblitz.com/img/open_in_stackblitz.svg\"\n\t\t\t\tclassName=\"marginTop\"\n\t\t\t\talt=\"Edit on StackBlitz\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
             },
             {
                 "name": "getTemplate",
@@ -7696,7 +7565,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "(componentSelector: string) => `\n\t<div class=\"container theme--white\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${componentSelector}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${componentSelector} [data]=\"data\" [options]=\"options\"></${componentSelector}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>\n\t\t<a href=\"#\" (click)=\"openSandbox($event)\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://developer.stackblitz.com/img/open_in_stackblitz.svg\"\n\t\t\t\tclassName=\"marginTop\"\n\t\t\t\talt=\"Edit on StackBlitz\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
+                    "defaultValue": "(componentSelector: string) => `\n\t<div class=\"container\">\n\t\t<div class=\"v10-banner\">\n\t\t\tThis version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href=\"https://carbon-charts-0x.netlify.app\" target=\"_blank\" rel=\"noreferrer\">see the legacy demo site</a>\n\t\t</div>\n\t\t<h3>\n\t\t\t<b>Component:</b>\n\t\t\t<span class=\"cds--tag cds--tag--green component-name\">${componentSelector}</span>\n\t\t</h3>\n\t\t<p class=\"props\">\n\t\t  <b>Props:</b> data, <a href=\"https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html\" target=\"_blank\">options</a>\n\t\t</p>\n\t\t<div class=\"marginTop-30\" id=\"chart-demo\">\n\t\t\t<${componentSelector} [data]=\"data\" [options]=\"options\"></${componentSelector}>\n\t\t</div>\n\t\t<h3 class=\"marginTop-30\">Code sample</h3>\n\t\t<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>\n\t\t<a href=\"#\" (click)=\"openSandbox($event)\">\n\t\t\t<img\n\t\t\t\tsrc=\"https://developer.stackblitz.com/img/open_in_stackblitz.svg\"\n\t\t\t\tclassName=\"marginTop\"\n\t\t\t\talt=\"Edit on StackBlitz\"\n\t\t\t/>\n\t\t</a>\n\t</div>`"
                 },
                 {
                     "name": "introSection",
@@ -8269,15 +8138,6 @@
                 "name": "introSection",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/charts-angular/src/stories/chart-wrapper.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ChartWrapper",
-                "coveragePercent": 0,
-                "coverageCount": "0/8",
                 "status": "low"
             },
             {
