@@ -1,10 +1,13 @@
 import { storiesOf, type Args } from '@storybook/svelte'
+import { hrefTo } from '@storybook/addon-links'
+import { ChartTheme } from '@carbon/charts'
 import { storybookDemoGroups } from '@carbon/charts/demo'
 import * as ChartComponents from '../lib'
 import type { Demo, DemoGroup } from '../../types/Demo'
 import ChartWrapper from './ChartWrapper.svelte'
 import Welcome from './Welcome.svelte'
 
+const DEFAULT_THEME = ChartTheme.G100
 const introStories = storiesOf('Docs', module) // API to be deprecated soon
 
 introStories.add('Welcome', () => ({
@@ -22,6 +25,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
 	demoGroup.demos.forEach((demo: Demo) => {
+		demo.options.theme = DEFAULT_THEME
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		let chartType = demo.chartType.vanilla
 
 		switch (chartType) {

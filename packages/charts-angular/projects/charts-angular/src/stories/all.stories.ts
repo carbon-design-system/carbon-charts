@@ -1,8 +1,12 @@
 import { storiesOf, type Args, type StoryFn } from '@storybook/angular'
+import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
+import { ChartTheme } from '@carbon/charts'
 import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
 import { storybookDemoGroups } from '@carbon/charts/demo'
+
+const DEFAULT_THEME = ChartTheme.G100
 
 const introSection = storiesOf('Docs', module).add(
 	'Welcome',
@@ -35,7 +39,7 @@ const introSection = storiesOf('Docs', module).add(
 )
 
 const getTemplate = (componentSelector: string) => `
-	<div class="container theme--white">
+	<div class="container">
 		<div class="v10-banner">
 			This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
 		</div>
@@ -67,6 +71,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
+		demo.options.theme = DEFAULT_THEME
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const demoStory: StoryFn = (args: Args) => ({
 			template: getTemplate(demo.chartType.angular),
 			moduleMetadata: {

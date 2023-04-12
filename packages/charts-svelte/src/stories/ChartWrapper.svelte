@@ -24,7 +24,7 @@
 	}
 </script>
 
-<div class="container theme--white">
+<div class="container">
 	<div class="v10-banner">
 		This version relies on <b>Carbon v11</b>. If you're using Carbon v10,
 		<a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer"
@@ -41,7 +41,7 @@
 
 	<p class="props">
 		<b>Props:</b>
-		data,
+		<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
 			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
 			target="_blank"

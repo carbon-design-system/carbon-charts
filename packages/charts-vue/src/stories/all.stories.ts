@@ -1,7 +1,8 @@
 import { storiesOf, type Args } from '@storybook/vue3'
+import { hrefTo } from '@storybook/addon-links'
 import * as ChartComponents from '../components'
 import { storybookDemoGroups } from '@carbon/charts/demo'
-import type { BaseChartOptions, ChartTabularData } from '@carbon/charts'
+import { type BaseChartOptions, type ChartTabularData, ChartTheme } from '@carbon/charts'
 
 interface Demo {
 	title: string
@@ -20,6 +21,8 @@ interface DemoGroup {
 	title: string
 	demos: Demo[]
 }
+
+const DEFAULT_THEME = ChartTheme.G100
 
 storiesOf('Docs/Welcome', module).add(
 	'Welcome',
@@ -55,7 +58,9 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
 	// Create stories within story group
-	demoGroup.demos.forEach((demo) => {
+	demoGroup.demos.forEach((demo: Demo) => {
+		demo.options.theme = DEFAULT_THEME
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const component = ChartComponents[demo.chartType.vue]
 		groupStories.add(
 			demo.title,
@@ -72,7 +77,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					}
 				},
 				template: `
-						<div class="container theme--white">
+						<div class="container">
 
 							<div class="v10-banner">
 								This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
@@ -84,7 +89,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							</h3>
 
 							<p class="props">
-								<b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
+								<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
 							</p>
 
 							<div class="marginTop-30" id="chart-demo">

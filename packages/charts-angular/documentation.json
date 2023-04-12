@@ -7307,6 +7307,16 @@
                 "defaultValue": "resolve(__dirname, `${core}/dist`)"
             },
             {
+                "name": "DEFAULT_THEME",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/charts-angular/src/stories/all.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "ChartTheme.G100"
+            },
+            {
                 "name": "edgeData",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -7454,7 +7464,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t}\n\t}\n}"
+                "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t},\n\t\tbackgrounds: { // --cds-background\n\t\t\tdefault: 'g100',\n\t\t\tvalues: [\n\t\t\t\t{\n\t\t\t\t\tname: 'g100',\n\t\t\t\t\tvalue: '#161616'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'g90',\n\t\t\t\t\tvalue: '#262626'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'g10',\n\t\t\t\t\tvalue: '#f4f4f4'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'white',\n\t\t\t\t\tvalue: '#fff'\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}"
             },
             {
                 "name": "ProgrammaticStatic",
@@ -7669,6 +7679,16 @@
             ],
             "projects/charts-angular/src/stories/all.stories.ts": [
                 {
+                    "name": "DEFAULT_THEME",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/charts-angular/src/stories/all.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "ChartTheme.G100"
+                },
+                {
                     "name": "getTemplate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -7776,7 +7796,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t}\n\t}\n}"
+                    "defaultValue": "{\n\tparameters: {\n\t\tactions: { argTypesRegex: '^on[A-Z].*' },\n\t\tcontrols: {\n\t\t\tmatchers: {\n\t\t\t\tcolor: /(background|color)$/i,\n\t\t\t\tdate: /Date$/\n\t\t\t}\n\t\t},\n\t\tdocs: {\n\t\t\ttheme: themes.dark\n\t\t},\n\t\tbackgrounds: { // --cds-background\n\t\t\tdefault: 'g100',\n\t\t\tvalues: [\n\t\t\t\t{\n\t\t\t\t\tname: 'g100',\n\t\t\t\t\tvalue: '#161616'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'g90',\n\t\t\t\t\tvalue: '#262626'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'g10',\n\t\t\t\t\tvalue: '#f4f4f4'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: 'white',\n\t\t\t\t\tvalue: '#fff'\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}"
                 }
             ],
             "projects/charts-angular/src/lib/diagrams/edges/marker/marker.component.ts": [
@@ -8219,6 +8239,16 @@
                 "name": "ShapeNode",
                 "coveragePercent": 0,
                 "coverageCount": "0/20",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/charts-angular/src/stories/all.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DEFAULT_THEME",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

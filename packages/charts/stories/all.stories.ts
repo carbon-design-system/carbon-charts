@@ -1,12 +1,14 @@
 import { storiesOf, type Args } from '@storybook/html'
+import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
+import { ChartTheme } from '../src/interfaces'
 import * as ChartComponents from '../src/charts'
 import { color } from '../src/configuration-non-customizable'
 import { storybookDemoGroups } from '../demo/data'
 import * as storyUtils from '../demo/utils'
 
 const colorPairingOptions = color.pairingOptions
-const DEFAULT_THEME = 'g100'
+const DEFAULT_THEME = ChartTheme.G100
 
 const introStories = storiesOf('Docs', module)
 
@@ -72,7 +74,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 							<span class="cds--tag cds--tag--green component-name">${demo.chartType.vanilla}</span>
 						</h3>
 						<p class="props">
-							<span><b>Props: </b><span><a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
 						</p>
 						${
 							demo.options.experimental

@@ -1,11 +1,13 @@
 import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
+import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
-import { Configuration } from '@carbon/charts'
+import { Configuration, ChartTheme } from '@carbon/charts'
 import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
 import type { Demo } from './Demo'
 import * as ChartComponents from '../charts'
 
+const DEFAULT_THEME = ChartTheme.G100
 const colorPairingOptions = Configuration.color.pairingOptions
 
 // Loop through demo groups array
@@ -15,6 +17,9 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
+		demo.options.theme = DEFAULT_THEME
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
 		groupStories.add(
@@ -51,7 +56,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 				}
 
 				return (
-					<div className="container theme--g100" ref={demoRef}>
+					<div className="container" ref={demoRef}>
 						<div className="v10-banner">
 							This version relies on <b>Carbon v11</b>. If you're using Carbon v10,{' '}
 							<a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">
@@ -65,7 +70,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 						</h3>
 
 						<p className="props">
-							<b>Props:</b> <a href="/?path=/story/docs-tutorials--tabular-data-format">data</a>,{' '}
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format--docs">data</a>,{' '}
 							<a
 								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
 								target="_blank">
