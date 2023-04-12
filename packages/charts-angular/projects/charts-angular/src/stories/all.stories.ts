@@ -4,7 +4,6 @@ import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
 import { storybookDemoGroups } from '@carbon/charts/demo'
 
-
 const introSection = storiesOf('Docs', module).add(
 	'Welcome',
 	() => ({

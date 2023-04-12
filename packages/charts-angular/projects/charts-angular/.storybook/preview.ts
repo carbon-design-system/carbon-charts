@@ -18,6 +18,27 @@ const preview: Preview = {
 		},
 		docs: {
 			theme: themes.dark
+		},
+		backgrounds: { // --cds-background
+			default: 'g100',
+			values: [
+				{
+					name: 'g100',
+					value: '#161616'
+				},
+				{
+					name: 'g90',
+					value: '#262626'
+				},
+				{
+					name: 'g10',
+					value: '#f4f4f4'
+				},
+				{
+					name: 'white',
+					value: '#fff'
+				}
+			]
 		}
 	}
 }
