@@ -215,7 +215,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/animations@npm:^15.2.6":
+"@angular/animations@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/animations@npm:15.2.7"
   dependencies:
@@ -254,7 +254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/common@npm:^15.2.6":
+"@angular/common@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/common@npm:15.2.7"
   dependencies:
@@ -266,7 +266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/compiler-cli@npm:^15.2.6":
+"@angular/compiler-cli@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/compiler-cli@npm:15.2.7"
   dependencies:
@@ -291,7 +291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/compiler@npm:^15.2.6":
+"@angular/compiler@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/compiler@npm:15.2.7"
   dependencies:
@@ -305,7 +305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/core@npm:^15.2.6":
+"@angular/core@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/core@npm:15.2.7"
   dependencies:
@@ -317,7 +317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^15.2.6":
+"@angular/forms@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/forms@npm:15.2.7"
   dependencies:
@@ -331,7 +331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser-dynamic@npm:^15.2.6":
+"@angular/platform-browser-dynamic@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/platform-browser-dynamic@npm:15.2.7"
   dependencies:
@@ -345,7 +345,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser@npm:^15.2.6":
+"@angular/platform-browser@npm:^15.2.7":
   version: 15.2.7
   resolution: "@angular/platform-browser@npm:15.2.7"
   dependencies:
@@ -2002,15 +2002,15 @@ __metadata:
   resolution: "@carbon/charts-angular@workspace:packages/charts-angular"
   dependencies:
     "@angular-devkit/build-angular": ^15.2.6
-    "@angular/animations": ^15.2.6
+    "@angular/animations": ^15.2.7
     "@angular/cli": ^15.2.6
-    "@angular/common": ^15.2.6
-    "@angular/compiler": ^15.2.6
-    "@angular/compiler-cli": ^15.2.6
-    "@angular/core": ^15.2.6
-    "@angular/forms": ^15.2.6
-    "@angular/platform-browser": ^15.2.6
-    "@angular/platform-browser-dynamic": ^15.2.6
+    "@angular/common": ^15.2.7
+    "@angular/compiler": ^15.2.7
+    "@angular/compiler-cli": ^15.2.7
+    "@angular/core": ^15.2.7
+    "@angular/forms": ^15.2.7
+    "@angular/platform-browser": ^15.2.7
+    "@angular/platform-browser-dynamic": ^15.2.7
     "@babel/core": ^7.21.4
     "@carbon/charts": "workspace:*"
     "@carbon/icons-angular": ^11.2.2
@@ -2078,7 +2078,7 @@ __metadata:
   resolution: "@carbon/charts-react@workspace:packages/charts-react"
   dependencies:
     "@carbon/charts": "workspace:*"
-    "@carbon/icons-react": ^11.17.0
+    "@carbon/icons-react": ^11.18.0
     "@carbon/telemetry": ~0.1.0
     "@rushstack/eslint-patch": ^1.2.0
     "@stackblitz/sdk": 1.9.0
@@ -2134,7 +2134,7 @@ __metadata:
     "@storybook/testing-library": ^0.1.0
     "@storybook/theming": ^7.0.4
     "@sveltejs/adapter-auto": ^2.0.0
-    "@sveltejs/kit": ^1.15.4
+    "@sveltejs/kit": ^1.15.5
     "@sveltejs/package": ^2.0.2
     "@typescript-eslint/eslint-plugin": ^5.58.0
     "@typescript-eslint/parser": ^5.58.0
@@ -2203,16 +2203,16 @@ __metadata:
   resolution: "@carbon/charts@workspace:packages/charts"
   dependencies:
     "@babel/core": 7.21.4
-    "@carbon/colors": ^11.13.0
-    "@carbon/elements": ^11.20.0
-    "@carbon/grid": ^11.12.0
+    "@carbon/colors": ^11.14.0
+    "@carbon/elements": ^11.21.0
+    "@carbon/grid": ^11.13.0
     "@carbon/import-once": ^10.7.0
-    "@carbon/layout": ^11.12.0
+    "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
-    "@carbon/styles": ^1.26.1
+    "@carbon/styles": ^1.27.0
     "@carbon/telemetry": ~0.1.0
-    "@carbon/themes": ^11.17.0
-    "@carbon/type": ^11.16.0
+    "@carbon/themes": ^11.18.0
+    "@carbon/type": ^11.17.0
     "@carbon/utils-position": ^1.1.4
     "@rushstack/eslint-patch": ^1.2.0
     "@stackblitz/sdk": ^1.9.0
@@ -2280,25 +2280,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.13.0":
-  version: 11.13.0
-  resolution: "@carbon/colors@npm:11.13.0"
-  checksum: 73cbfa18ceabd14c7c1e19584acc98af8b6489d2ac279366b54a5ea8ea1e4287d13ff1da3fdafdcee6015c02a5af3d90c3b6cfeebca7fe6f1be48c33ff5fef43
+"@carbon/colors@npm:^11.14.0":
+  version: 11.14.0
+  resolution: "@carbon/colors@npm:11.14.0"
+  checksum: 35aa802a5f044af5f0654bf0cd757b42b84425d149ae724fab3daa507a5244e67fe4a1fdc18bb50d1fbc838580b5c4904e77f46f6e5b5bf4a24ee2fc3e58da77
   languageName: node
   linkType: hard
 
-"@carbon/elements@npm:^11.20.0":
-  version: 11.20.0
-  resolution: "@carbon/elements@npm:11.20.0"
+"@carbon/elements@npm:^11.21.0":
+  version: 11.21.0
+  resolution: "@carbon/elements@npm:11.21.0"
   dependencies:
-    "@carbon/colors": ^11.13.0
-    "@carbon/grid": ^11.12.0
-    "@carbon/icons": ^11.17.0
-    "@carbon/layout": ^11.12.0
+    "@carbon/colors": ^11.14.0
+    "@carbon/grid": ^11.13.0
+    "@carbon/icons": ^11.18.0
+    "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
-    "@carbon/themes": ^11.17.0
-    "@carbon/type": ^11.16.0
-  checksum: 2be34e2e6d713eff2a78fcd3b31a850ed03a3b1dfb0a7f87e5dfe995492c99413fa1192a4499b35e41861fe126bf3d70e1067b1544c09382197f897b28b2493e
+    "@carbon/themes": ^11.18.0
+    "@carbon/type": ^11.17.0
+  checksum: 3e7362b2f07fdd08d80b43821ae856f3ffdb22df3defd2f935b7ad3e411e5acdfbfbd5743ad78405e0f28813898b8e5f2c870c43376dcf1e6345f9ca70c42cca
   languageName: node
   linkType: hard
 
@@ -2309,12 +2309,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.12.0":
-  version: 11.12.0
-  resolution: "@carbon/grid@npm:11.12.0"
+"@carbon/grid@npm:^11.13.0":
+  version: 11.13.0
+  resolution: "@carbon/grid@npm:11.13.0"
   dependencies:
-    "@carbon/layout": ^11.12.0
-  checksum: ff5c47d4a3e085ad40072dc1d064a59681b6f408aa69b7c19275fd7e00b161e299f00feece9b786201c191a1f224476f064974d2fb70c79234e4f6ba42d81d01
+    "@carbon/layout": ^11.13.0
+  checksum: 413accb54ef10bb7df46b6fa9e278fa6b90736edab21a1cf3ff040651629964bbc67466fecad0e46de0dfd07432a4ff2b4b3d6b416dff25ea40878149b12a96b
   languageName: node
   linkType: hard
 
@@ -2344,23 +2344,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.17.0":
-  version: 11.17.0
-  resolution: "@carbon/icons-react@npm:11.17.0"
+"@carbon/icons-react@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "@carbon/icons-react@npm:11.18.0"
   dependencies:
     "@carbon/icon-helpers": ^10.39.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
-  checksum: 166e7e2a09fb5516d77662f6272f50ec21e52035eefc5be6eb8fe1652afea85ebdb2e3983d86ad737a0347237cfc3ea547693a28dd8e5f87d57557e0efd5a981
+  checksum: 8d58be4a402e7be643d8f671bbf04cb7fa5d439b4bd70fa73070d48eb5032465099ff2f31a16017432cd8c7c20e0fd436f67689461f20bafbd38ed9ad6fa7872
   languageName: node
   linkType: hard
 
-"@carbon/icons@npm:^11.17.0":
-  version: 11.17.0
-  resolution: "@carbon/icons@npm:11.17.0"
-  checksum: 83587be3bfc63bd9dba92587bb9d368b0e3355a92f6ba724bc38b90db5fe46105bdab37b201794f7991073cc0f3b4e5592ce6bf257794c7f8e0e04c66af070cc
+"@carbon/icons@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "@carbon/icons@npm:11.18.0"
+  checksum: ff56ca787ad1d1481894ced1053b545fadb05aa4621806ca0fe3a9dfe7ab62d2f3b8222798d0dbffe75cae86110ebe06c1eeab3432dce8feb5b808bbc000b38c
   languageName: node
   linkType: hard
 
@@ -2371,10 +2371,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.12.0":
-  version: 11.12.0
-  resolution: "@carbon/layout@npm:11.12.0"
-  checksum: 7af239a8eeeca3a406886013d82182993483ea060503dd630c1cef0704843c2bb1191a1d38e6c38de573f065f13e6fd108cdf880ec20ad4b6b70d2c8eb75b955
+"@carbon/layout@npm:^11.13.0":
+  version: 11.13.0
+  resolution: "@carbon/layout@npm:11.13.0"
+  checksum: 76b1a42ab44ffc6ef778b6811f30310db860d24189dd59635a5aa12836631f76b09f2ee0d5e5d97fb7dd3030dce252bcdc3f04e9b5e1717e45de6294944522a1
   languageName: node
   linkType: hard
 
@@ -2385,21 +2385,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.26.1":
-  version: 1.26.1
-  resolution: "@carbon/styles@npm:1.26.1"
+"@carbon/styles@npm:^1.27.0":
+  version: 1.27.0
+  resolution: "@carbon/styles@npm:1.27.0"
   dependencies:
-    "@carbon/colors": ^11.13.0
+    "@carbon/colors": ^11.14.0
     "@carbon/feature-flags": ^0.13.0
-    "@carbon/grid": ^11.12.0
-    "@carbon/layout": ^11.12.0
+    "@carbon/grid": ^11.13.0
+    "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
-    "@carbon/themes": ^11.17.0
-    "@carbon/type": ^11.16.0
+    "@carbon/themes": ^11.18.0
+    "@carbon/type": ^11.17.0
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
-  checksum: fc6f325211b473aa32a5e95324ca21a4d3a7a738fec97ef6f2484bbdfa8c482632f49e2ec373b7442eb7c73a7601557ed5cb9478ea76166712f74c2aa14998b1
+  checksum: 881967cf104b4a51a90b1541f4cf15518023d173467223839c6f82e37e30faa3d71bf34ccadfabdebb7a2d37d823068584e12e97227b0bf4cb338d0e8da2601d
   languageName: node
   linkType: hard
 
@@ -2412,25 +2412,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.17.0":
-  version: 11.17.0
-  resolution: "@carbon/themes@npm:11.17.0"
+"@carbon/themes@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "@carbon/themes@npm:11.18.0"
   dependencies:
-    "@carbon/colors": ^11.13.0
-    "@carbon/layout": ^11.12.0
-    "@carbon/type": ^11.16.0
+    "@carbon/colors": ^11.14.0
+    "@carbon/layout": ^11.13.0
+    "@carbon/type": ^11.17.0
     color: ^4.0.0
-  checksum: a10fb8426eef18edeae6b27eb462d886b5bd65533e2e8b1fb5e33109a3dd052b3bbe7ce4d499fb17d6dec1e20b529af0505c236f33e6b22f06687a32262f8d3c
+  checksum: 3b2f8431887c8981ae792f58621f20ff7af66957d4cd2e10687991a9e39e3d9395e35d788791ea1cf17f01c0aa3db2ff8bf92583e9f6278a3b5a40e98265d6d6
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.16.0":
-  version: 11.16.0
-  resolution: "@carbon/type@npm:11.16.0"
+"@carbon/type@npm:^11.17.0":
+  version: 11.17.0
+  resolution: "@carbon/type@npm:11.17.0"
   dependencies:
-    "@carbon/grid": ^11.12.0
-    "@carbon/layout": ^11.12.0
-  checksum: 78f3fa85ef6afd18dcf9085fd9d2b834dd3efe46e3a0c5a23684b424a3adebd59da0f5d9cef94f5243f90ec98e4262173f66634d422155f92932750879eb1096
+    "@carbon/grid": ^11.13.0
+    "@carbon/layout": ^11.13.0
+  checksum: 025a4426888b05346e5e3eab24ab1bba714558afabb60f0714bc876992df9441839f0695411d8c663edc374a86a62940a691560c30aaf713179b0372c064b905
   languageName: node
   linkType: hard
 
@@ -5574,9 +5574,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.15.4":
-  version: 1.15.4
-  resolution: "@sveltejs/kit@npm:1.15.4"
+"@sveltejs/kit@npm:^1.15.5":
+  version: 1.15.5
+  resolution: "@sveltejs/kit@npm:1.15.5"
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^2.0.0
     "@types/cookie": ^0.5.1
@@ -5596,7 +5596,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: cb1061fb7f690df17f1a7b72c7e0a6c566468c4a4c3c466af7e058eaf236b48b2add51bf77b904de9143868dd7b8a2a01558f4597aeafdd0aa47dccec23bd334
+  checksum: ce231cfdf0b1c35cad631408f3464f0c00de9bab65c0e6a17a174df6ca9d763a9ea69944e144bdd95142fe396c074fc19778b699bd699751fcc18d4e9e269129
   languageName: node
   linkType: hard
 

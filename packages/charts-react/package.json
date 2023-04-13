@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.17.0",
+		"@carbon/icons-react": "^11.18.0",
 		"@carbon/telemetry": "~0.1.0"
 	},
 	"peerDependencies": {
