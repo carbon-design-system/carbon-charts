@@ -12,7 +12,7 @@ import { carbonPrefix } from '../../configuration-non-customizable'
 // MISC
 import ResizeObserver from 'resize-observer-polyfill'
 
-import domToImage from 'dom-to-image'
+import domToImage from 'dom-to-image-more'
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 

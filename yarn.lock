@@ -2250,7 +2250,6 @@ __metadata:
     d3-time-format: ^4.1.0
     d3-transition: ^3.0.1
     date-fns: ^2.29.3
-    dom-to-image: 2.6.0
     dom-to-image-more: ^3.1.1
     eslint: ^8.38.0
     eslint-config-prettier: ^8.8.0
@@ -10542,13 +10541,6 @@ __metadata:
   version: 3.1.1
   resolution: "dom-to-image-more@npm:3.1.1"
   checksum: 5f14783266ac580b872cbb531e6e6f2b975814853491d14274cc5681148d915c41b9aaea07ff621189b0b97d9cd8ded2d4ea8e25bda1e61db008917acfe68a3a
-  languageName: node
-  linkType: hard
-
-"dom-to-image@npm:2.6.0":
-  version: 2.6.0
-  resolution: "dom-to-image@npm:2.6.0"
-  checksum: 0d1f450b776d36f3ec982783d2a3898baaa3697f135ed0a9c70085db6bc5ac6def02f5ed7affc6acb92ef4fb3248905fabec915fed541994383d317260f784a2
   languageName: node
   linkType: hard
 
