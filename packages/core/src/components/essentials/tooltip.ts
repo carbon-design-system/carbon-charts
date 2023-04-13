@@ -367,6 +367,8 @@ export class Tooltip extends Component {
 					PLACEMENTS.BOTTOM,
 				],
 				() => ({
+					top: undefined, // properties were never set to optional
+					left: undefined, // ditto
 					width: holderWidth,
 					height: holderHeight,
 				})
