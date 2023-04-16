@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces'
 import { Axis } from './axis'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { Threshold } from '../essentials/threshold'
 import { Events } from '../../interfaces'
@@ -26,7 +26,7 @@ export class TwoDimensionalAxes extends Component {
 	render(animate = false) {
 		const axes = {}
 		const axisPositions = Object.keys(AxisPositions)
-		const axesOptions = Tools.getProperty(this.getOptions(), 'axes')
+		const axesOptions = getProperty(this.getOptions(), 'axes')
 
 		axisPositions.forEach((axisPosition) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]]

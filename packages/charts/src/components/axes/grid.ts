@@ -7,8 +7,6 @@ import { RenderTypes } from '../../interfaces'
 // D3 Imports
 import { axisBottom, axisLeft } from 'd3-axis'
 
-import { transition } from 'd3-transition'
-
 export class Grid extends Component {
 	type = 'grid'
 	renderType = RenderTypes.SVG
@@ -160,7 +158,6 @@ export class Grid extends Component {
 
 		// find the 2 gridlines on either side of the mouse
 		let floor = -1
-		let ceiling
 		if (!gridlinesX.length) {
 			return
 		}
@@ -170,7 +167,7 @@ export class Grid extends Component {
 				floor++
 			}
 		})
-		ceiling = floor + 1 < gridlinesX.length ? floor + 1 : gridlinesX.length
+		const ceiling = floor + 1 < gridlinesX.length ? floor + 1 : gridlinesX.length
 
 		// get the 'step' between chart gridlines
 		const line1 = gridlinesX[floor]

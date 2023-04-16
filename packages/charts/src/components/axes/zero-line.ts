@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { flipSVGCoordinatesBasedOnOrientation } from '../../tools'
 import { RenderTypes } from '../../interfaces'
 
 export class ZeroLine extends Component {
@@ -41,7 +41,7 @@ export class ZeroLine extends Component {
 			yPosition = rangeScale.range()[0]
 		}
 
-		const lineCoordinates = Tools.flipSVGCoordinatesBasedOnOrientation(
+		const lineCoordinates = flipSVGCoordinatesBasedOnOrientation(
 			{
 				x0,
 				x1,

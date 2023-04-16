@@ -3,8 +3,8 @@ import { Axis } from './axis'
 import { AxisPositions, Events, ScaleTypes } from '../../interfaces'
 import type { ChartModel } from '../../model/model'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
-import * as Configuration from '../../configuration'
+import { getProperty }from '../../tools'
+import { axis } from '../../configuration'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -72,9 +72,9 @@ export class HoverAxis extends Axis {
 			// Translates x position -4 left to keep center after padding
 			// Adds padding on left & right
 			rectangle
-				.attr('x', x - Configuration.axis.hover.rectanglePadding)
+				.attr('x', x - axis.hover.rectanglePadding)
 				.attr('y', y)
-				.attr('width', width + Configuration.axis.hover.rectanglePadding * 2)
+				.attr('width', width + axis.hover.rectanglePadding * 2)
 				.attr('height', height)
 				.lower()
 		})
@@ -88,9 +88,9 @@ export class HoverAxis extends Axis {
 		const { position: axisPosition } = this.configs
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 		const options = this.getOptions()
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
-		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType')
-		const truncationThreshold = Tools.getProperty(axisOptions, 'truncation', 'threshold')
+		const axisOptions = getProperty(options, 'axes', axisPosition)
+		const axisScaleType = getProperty(axisOptions, 'scaleType')
+		const truncationThreshold = getProperty(axisOptions, 'truncation', 'threshold')
 
 		const self = this
 		container

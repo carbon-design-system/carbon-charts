@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component'
-import { Events, RenderTypes, ScaleTypes } from '../../interfaces'
+import { RenderTypes, ScaleTypes } from '../../interfaces'
 import { DOMUtils } from '../../services'
 
 // D3 Imports
@@ -19,7 +19,7 @@ export class ChartBrush extends Component {
 
 	frontSelectionSelector = 'rect.frontSelection' // needs to match the class name in _grid-brush.scss
 
-	render(animate = true) {
+	render() {
 		const svg = this.parent
 
 		// use this area to display selection above all graphs
@@ -38,7 +38,7 @@ export class ChartBrush extends Component {
 		const { cartesianScales } = this.services
 		const mainXScaleType = cartesianScales.getMainXScaleType()
 		const mainXScale = cartesianScales.getMainXScale()
-		const [xScaleStart, xScaleEnd] = mainXScale.range()
+		const [xScaleStart] = mainXScale.range()
 		frontSelectionArea.attr('transform', `translate(${xScaleStart},0)`)
 		const frontSelection = DOMUtils.appendOrSelect(frontSelectionArea, this.frontSelectionSelector)
 

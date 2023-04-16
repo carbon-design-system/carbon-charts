@@ -26,7 +26,7 @@ export class ChartClip extends Component {
 		this.model.set({ chartClipId: this.chartClipId }, { skipUpdate: true })
 	}
 
-	render(animate = true) {
+	render() {
 		// Create the clipPath
 		this.createClipPath()
 	}

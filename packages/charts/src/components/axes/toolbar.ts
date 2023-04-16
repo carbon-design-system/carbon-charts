@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -35,12 +35,12 @@ export class Toolbar extends Component {
 		})
 	}
 
-	render(animate = true) {
+	render() {
 		const container = this.getComponentContainer()
 			.attr('role', 'toolbar')
 			.attr('aria-label', `chart-${this.services.domUtils.getChartID()} toolbar`)
 
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		if (isDataLoading) {
 			container.html('')
@@ -137,7 +137,7 @@ export class Toolbar extends Component {
 		const overflowMenuControls = this.overflowMenu
 			.select('ul')
 			.selectAll('li.cds--overflow-menu-options__option')
-			.data(overflowMenuItemList, (button) => Tools.getProperty(button, 'id'))
+			.data(overflowMenuItemList, (button) => getProperty(button, 'id'))
 
 		overflowMenuControls.exit().remove()
 
@@ -365,8 +365,8 @@ export class Toolbar extends Component {
 	}
 
 	getControlConfigs() {
-		const numberOfIcons = Tools.getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
-		const controls = Tools.getProperty(this.getOptions(), 'toolbar', 'controls')
+		const numberOfIcons = getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
+		const controls = getProperty(this.getOptions(), 'toolbar', 'controls')
 
 		const overflowSpecificControls = []
 		const buttonList = []
@@ -377,12 +377,12 @@ export class Toolbar extends Component {
 			// check if button is custom or default control
 			if (control.type === ToolbarControlTypes.CUSTOM) {
 				// add generic id if missing
-				if (Tools.getProperty(control, 'id') === null) {
+				if (getProperty(control, 'id') === null) {
 					// add id directly to the data passed so that id isn't reassigned on rerender
 					control.id = `toolbar-button-${Toolbar.buttonID++}`
 				}
 				// define function if missing
-				if (Tools.getProperty(control, 'shouldBeDisabled') === null) {
+				if (getProperty(control, 'shouldBeDisabled') === null) {
 					control.shouldBeDisabled = () => false
 				}
 
@@ -399,7 +399,7 @@ export class Toolbar extends Component {
 					overflowSpecificControls.push(controlConfig)
 				} else if (buttonList.length < numberOfIcons) {
 					// check if icon exists else assign to the overflow list
-					if (Tools.getProperty(controlConfig, 'iconSVG', 'content') === null) {
+					if (getProperty(controlConfig, 'iconSVG', 'content') === null) {
 						overflowList.push(controlConfig)
 					} else {
 						buttonList.push(controlConfig)

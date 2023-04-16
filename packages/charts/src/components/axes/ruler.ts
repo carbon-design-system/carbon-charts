@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { CartesianOrientations, Events, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { debounceWithD3MousePosition, getProperty, isEqual } from '../../tools'
 
 // D3 Imports
 import { Selection, pointer } from 'd3-selection'
@@ -26,13 +26,13 @@ export class Ruler extends Component {
 		domainValue: number
 		originalData: any
 	}[]
-	isXGridEnabled = Tools.getProperty(this.getOptions(), 'grid', 'x', 'enabled')
-	isYGridEnabled = Tools.getProperty(this.getOptions(), 'grid', 'y', 'enabled')
+	isXGridEnabled = getProperty(this.getOptions(), 'grid', 'x', 'enabled')
+	isYGridEnabled = getProperty(this.getOptions(), 'grid', 'y', 'enabled')
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false
 
 	render() {
-		const isRulerEnabled = Tools.getProperty(this.getOptions(), 'ruler', 'enabled')
+		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
 
 		this.drawBackdrop()
 
@@ -145,7 +145,7 @@ export class Ruler extends Component {
 			if (
 				this.elementsToHighlight &&
 				this.elementsToHighlight.size() > 0 &&
-				!Tools.isEqual(this.elementsToHighlight, elementsToHighlight)
+				!isEqual(this.elementsToHighlight, elementsToHighlight)
 			) {
 				this.hideRuler()
 			}
@@ -215,7 +215,7 @@ export class Ruler extends Component {
 		if (displayData.length > 100) {
 			const debounceThreshold = (displayData.length % 50) * 12.5
 
-			mouseMoveCallback = Tools.debounceWithD3MousePosition(
+			mouseMoveCallback = debounceWithD3MousePosition(
 				function (event) {
 					const { mousePosition } = this
 					self.showRuler(event, mousePosition)

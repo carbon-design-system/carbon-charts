@@ -2,7 +2,7 @@
 import { GenericSvgSelection, Ruler } from './ruler'
 import { DOMUtils } from '../../services'
 import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { isEqual, getProperty } from '../../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -51,7 +51,7 @@ export class BinnedRuler extends Ruler {
 			if (
 				this.elementsToHighlight &&
 				this.elementsToHighlight.size() > 0 &&
-				!Tools.isEqual(this.elementsToHighlight, elementsToHighlight)
+				!isEqual(this.elementsToHighlight, elementsToHighlight)
 			) {
 				this.hideRuler()
 			}
@@ -91,7 +91,7 @@ export class BinnedRuler extends Ruler {
 							value: `${x0} – ${x1}`
 						},
 						...tooltipDataGroups,
-						...(Tools.getProperty(options, 'tooltip', 'showTotal') === true
+						...(getProperty(options, 'tooltip', 'showTotal') === true
 							? [
 									{
 										label: get(options, 'tooltip.totalLabel') || 'Total',
@@ -101,7 +101,7 @@ export class BinnedRuler extends Ruler {
 											0
 										)
 									}
-							  ]
+								]
 							: [])
 					]
 				})
