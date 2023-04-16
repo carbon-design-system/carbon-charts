@@ -78,10 +78,10 @@
     "directory": "dist",
     "access": "public"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
+	"browserslist": [
+		"> 1% not dead",
+		"not op_mini all"
+	],
   "repository": {
     "type": "git",
     "url": "git@github.com:carbon-design-system/carbon-charts.git",

@@ -72,6 +72,10 @@
 		"typescript": "^5.0.4",
 		"vite": "^4.2.1"
 	},
+	"browserslist": [
+		"> 1% not dead",
+		"not op_mini all"
+	],
 	"publishConfig": {
 		"directory": "dist",
 		"access": "public"

@@ -83,8 +83,8 @@
 		"access": "public"
 	},
 	"browserslist": [
-		"> 1%",
-		"last 2 versions"
+		"> 1% not dead",
+		"not op_mini all"
 	],
 	"repository": {
 		"type": "git",
