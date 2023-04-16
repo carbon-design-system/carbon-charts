@@ -105,10 +105,8 @@
     "access": "public"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not IE 10",
-    "not IE 11"
+    "> 1% and not dead",
+    "not op_mini all"
   ],
   "repository": {
     "type": "git",

@@ -38,7 +38,7 @@
             "configDir": "projects/charts-angular/.storybook",
             "tsConfig": "projects/charts-angular/.storybook/tsconfig.json",
             "browserTarget": "charts-angular:build",
-            "compodoc": true,
+            "compodoc": false,
             "compodocArgs": [
               "-e",
               "json",
@@ -55,7 +55,7 @@
             "configDir": "projects/charts-angular/.storybook",
             "tsConfig": "projects/charts-angular/.storybook/tsconfig.json",
             "browserTarget": "charts-angular:build",
-            "compodoc": true,
+            "compodoc": false,
             "compodocArgs": [
               "-e",
               "json",

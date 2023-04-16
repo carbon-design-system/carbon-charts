@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 const core = '../../../../charts'
 const corePackage = resolve(__dirname, `${core}/dist`)
-import { dirname } from 'path'
+// import { dirname } from 'path'
 
 const config: StorybookConfig = {
   stories: [
@@ -16,8 +16,7 @@ const config: StorybookConfig = {
     {
       name: '@storybook/addon-essentials',
 			options: {
-				actions: false,
-        docs: true
+				actions: false
 			}
     }
   ],
@@ -25,6 +24,7 @@ const config: StorybookConfig = {
     name: '@storybook/angular',
     options: {}
   },
+  logLevel: 'error',
   docs: {
     autodocs: 'tag'
   },
