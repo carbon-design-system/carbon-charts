@@ -1,14 +1,12 @@
 // Internal Imports
 import { Chart } from '../chart'
 import { AlluvialChartModel } from '../model/alluvial'
-import * as Configuration from '../configuration'
+import { options as alluvialChartOptions } from '../configuration'
 import type { ChartConfig, AlluvialChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
-import {
-	Alluvial
-} from '../components/index'
+import { Alluvial } from '../components/index'
 
 export class AlluvialChart extends Chart {
 	model = new AlluvialChartModel(this.services)
@@ -19,7 +17,7 @@ export class AlluvialChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.alluvialChart, chartConfigs.options)
+			mergeDefaultChartOptions(alluvialChartOptions.alluvialChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.
