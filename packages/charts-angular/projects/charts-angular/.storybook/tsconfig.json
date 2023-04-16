@@ -1,11 +1,12 @@
 {
   "extends": "../tsconfig.lib.json",
   "compilerOptions": {
-    "types": ["node"],
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "declarationMap": false,
+    "diagnostics": false,
     "resolveJsonModule": true,
-    "noImplicitAny": false,
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],

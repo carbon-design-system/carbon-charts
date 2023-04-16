@@ -40,6 +40,11 @@ const config: StorybookConfig = {
       use: ['style-loader', 'css-loader'],
       include: [`${corePackage}/demo`]
     })
+    config.performance = {
+      hints: 'warning',
+      maxAssetSize: 1024 * 1024 * 2.5, // 2.5 MB
+      maxEntrypointSize: 1024 * 1024 * 5, // 5 MB
+    }
     config.resolve!.alias = {
       ...config.resolve!.alias,
       '@carbon/charts': corePackage,

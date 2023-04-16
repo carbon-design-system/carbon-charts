@@ -1,11 +1,11 @@
 import type { Preview } from '@storybook/angular'
 import { themes } from '@storybook/theming'
 
-import { setCompodocJson } from '@storybook/addon-docs/angular'
-import docJson from '../../../demo/documentation.json'
+// import { setCompodocJson } from '@storybook/addon-docs/angular'
+// import docJson from '../../../demo/documentation.json'
 import '@carbon/charts/demo/styles.css'
 
-setCompodocJson(docJson)
+// setCompodocJson(docJson)
 
 const preview: Preview = {
 	parameters: {
