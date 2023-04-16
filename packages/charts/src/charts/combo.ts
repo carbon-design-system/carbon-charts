@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import { ChartConfig, ComboChartOptions, ChartTypes, Skeletons } from '../interfaces/index'
-import * as Tools from '../tools'
+import { camelCase, flatten, merge, mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -38,8 +38,8 @@ export class ComboChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		const chartOptions = Tools.mergeDefaultChartOptions(
-			Configuration.options.comboChart,
+		const chartOptions = mergeDefaultChartOptions(
+			options.comboChart,
 			chartConfigs.options
 		)
 
@@ -77,9 +77,9 @@ export class ComboChart extends AxisChart {
 						return null
 					}
 					let stacked
-					options = Tools.merge(
+					options = merge(
 						{},
-						Configuration.options[`${Tools.camelCase(graph.type)}Chart`],
+						options[`${camelCase(graph.type)}Chart`],
 						this.model.getOptions(),
 						graph.options
 					)
@@ -98,7 +98,7 @@ export class ComboChart extends AxisChart {
 					)
 				} else {
 					// user has imported a type or custom component to instantiate
-					options = Tools.merge({}, this.model.getOptions(), graph.options)
+					options = merge({}, this.model.getOptions(), graph.options)
 					return new type(this.model, this.services, {
 						groups: graph.correspondingDatasets,
 						id: counter++,
@@ -108,7 +108,7 @@ export class ComboChart extends AxisChart {
 			})
 			.filter((item) => item !== null)
 
-		return Tools.flatten(graphComponents)
+		return flatten(graphComponents)
 	}
 
 	getComponents() {

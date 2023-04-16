@@ -1,8 +1,9 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options }  from '../configuration'
 import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
-import * as Tools from '../tools'
+import { clone, mergeDefaultChartOptions } from '../tools'
+
 
 // Components
 import {
@@ -22,8 +23,8 @@ export class AreaChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Tools.clone(Configuration.options.areaChart),
+			mergeDefaultChartOptions(
+				clone(options.areaChart),
 				chartConfigs.options
 			)
 		)

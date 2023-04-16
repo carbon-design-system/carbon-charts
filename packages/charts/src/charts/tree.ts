@@ -1,9 +1,9 @@
 // Internal Imports
 import { Chart } from '../chart'
 import { TreeChartModel } from '../model/tree'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, TreeChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
 import { Tree } from '../components/index'
@@ -17,7 +17,7 @@ export class TreeChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.treeChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.treeChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

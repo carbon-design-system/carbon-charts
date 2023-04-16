@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -22,7 +22,7 @@ export class StackedAreaChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.stackedAreaChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.stackedAreaChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

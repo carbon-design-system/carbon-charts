@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, BarChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -22,7 +22,7 @@ export class StackedBarChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.stackedBarChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.stackedBarChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

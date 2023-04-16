@@ -1,8 +1,8 @@
 // Internal Imports
 import { PieChart } from './pie'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, PieChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -18,7 +18,7 @@ export class DonutChart extends PieChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.donutChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.donutChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

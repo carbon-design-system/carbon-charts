@@ -1,9 +1,9 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
 import { BulletChartModel } from '../model/bullet'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, BulletChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -23,7 +23,7 @@ export class BulletChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.bulletChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.bulletChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

@@ -1,8 +1,8 @@
 // Internal Imports
 import { HeatmapModel } from '../model/heatmap'
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
-import * as Tools from '../tools'
+import { options } from '../configuration'
+import { getProperty, mergeDefaultChartOptions } from '../tools'
 
 import {
 	HeatmapChartOptions,
@@ -34,7 +34,7 @@ export class HeatmapChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.heatmapChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.heatmapChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.
@@ -45,7 +45,7 @@ export class HeatmapChart extends AxisChart {
 	// Removes zoombar support and additional `features` that are not supported in heatmap
 	protected getAxisChartComponents(graphFrameComponents: any[], configs?: any) {
 		const options = this.model.getOptions()
-		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled')
+		const toolbarEnabled = getProperty(options, 'toolbar', 'enabled')
 
 		this.services.cartesianScales.determineAxisDuality()
 		this.services.cartesianScales.findDomainAndRangeAxes() // need to do this before getMainXAxisPosition()
@@ -99,7 +99,7 @@ export class HeatmapChart extends AxisChart {
 		}
 
 		const isLegendEnabled =
-			Tools.getProperty(configs, 'legend', 'enabled') !== false &&
+			getProperty(configs, 'legend', 'enabled') !== false &&
 			this.model.getOptions().legend.enabled !== false
 
 		// Decide the position of the legend in reference to the chart

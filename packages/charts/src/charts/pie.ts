@@ -1,9 +1,9 @@
 // Internal Imports
 import { PieChartModel } from '../model/pie'
 import { Chart } from '../chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, PieChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -27,7 +27,7 @@ export class PieChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.pieChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.pieChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

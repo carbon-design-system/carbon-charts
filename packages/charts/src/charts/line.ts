@@ -1,9 +1,8 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, LineChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
-import { Skeletons } from '../interfaces/enums'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -23,7 +22,7 @@ export class LineChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.lineChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.lineChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

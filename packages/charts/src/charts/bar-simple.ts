@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { BarChartOptions, ChartConfig } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -21,7 +21,7 @@ export class SimpleBarChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.simpleBarChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.simpleBarChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

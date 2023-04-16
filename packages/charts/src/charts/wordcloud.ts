@@ -1,9 +1,9 @@
 // Internal Imports
 import { WordCloudModel } from '../model/wordcloud'
 import { Chart } from '../chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, WorldCloudChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -21,7 +21,7 @@ export class WordCloudChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.wordCloudChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.wordCloudChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

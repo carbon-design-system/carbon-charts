@@ -1,7 +1,7 @@
 // Internal Imports
 import { MeterChartModel } from '../model/meter'
 import { Chart } from '../chart'
-import * as Configuration from '../configuration'
+import { options as configOptions } from '../configuration'
 import {
 	ChartConfig,
 	MeterChartOptions,
@@ -9,7 +9,7 @@ import {
 	LayoutDirection,
 	RenderTypes
 } from '../interfaces/index'
-import * as Tools from '../tools'
+import { clone, getProperty, merge } from '../tools'
 import { Meter } from '../components/graphs/meter'
 
 // Components
@@ -27,8 +27,8 @@ export class MeterChart extends Chart {
 
 		// use prop meter options or regular meter options
 		const options = chartConfigs.options.meter.proportional
-			? Tools.merge(Tools.clone(Configuration.options.proportionalMeterChart), chartConfigs.options)
-			: Tools.merge(Tools.clone(Configuration.options.meterChart), chartConfigs.options)
+			? merge(clone(configOptions.proportionalMeterChart), chartConfigs.options)
+			: merge(clone(configOptions.meterChart), chartConfigs.options)
 
 		// Merge the default options for this chart
 		// With the user provided options
@@ -39,7 +39,7 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		const showLabels = Tools.getProperty(this.model.getOptions(), 'meter', 'showLabels')
+		const showLabels = getProperty(this.model.getOptions(), 'meter', 'showLabels')
 		const meterComponents = [
 			...(showLabels
 				? [
@@ -60,7 +60,7 @@ export class MeterChart extends Chart {
 							],
 							growth: LayoutGrowth.STRETCH
 						}
-				  ]
+					]
 				: []),
 			// Specify what to render inside the graph only
 			{

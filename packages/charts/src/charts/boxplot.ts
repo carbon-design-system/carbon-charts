@@ -1,9 +1,9 @@
 // Internal Imports
 import { BoxplotChartModel } from '../model/boxplot'
 import { AxisChart } from '../axis-chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { BoxplotChartOptions, ChartConfig } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
@@ -24,7 +24,7 @@ export class BoxplotChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.boxplotChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.boxplotChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

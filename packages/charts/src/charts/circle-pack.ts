@@ -2,8 +2,8 @@
 import { Chart } from '../chart'
 import { CirclePackChartModel } from '../model/circle-pack'
 import type { ChartConfig, CirclePackChartOptions } from '../interfaces/index'
-import * as Configuration from '../configuration'
-import * as Tools from '../tools'
+import { options } from '../configuration'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -19,7 +19,7 @@ export class CirclePackChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.circlePackChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.circlePackChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

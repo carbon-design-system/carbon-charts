@@ -1,9 +1,9 @@
 // Internal Imports
 import { RadarChartModel } from '../model/radar'
 import { Chart } from '../chart'
-import * as Configuration from '../configuration'
+import { options } from '../configuration'
 import type { ChartConfig, RadarChartOptions } from '../interfaces/index'
-import * as Tools from '../tools'
+import { mergeDefaultChartOptions } from '../tools'
 import { Radar } from '../components/graphs/radar'
 
 export class RadarChart extends Chart {
@@ -15,7 +15,7 @@ export class RadarChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(Configuration.options.radarChart, chartConfigs.options)
+			mergeDefaultChartOptions(options.radarChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.
