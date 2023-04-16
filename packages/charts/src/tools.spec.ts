@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'jasmine-core'
 import * as Tools from './tools'
 
 describe('Tools.getProperty', () => {

@@ -1,3 +1,4 @@
+import { expect, it } from 'jasmine-core'
 import { formatTick, computeTimeIntervalName } from './time-series'
 import { TimeScaleOptions } from '../interfaces'
 import * as Configuration from '../configuration'

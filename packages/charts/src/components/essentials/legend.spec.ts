@@ -1,3 +1,4 @@
+import { afterEach, beforeEach, describe, expect, it } from 'jasmine-core'
 import { TestEnvironment } from '../../tests/index'
 
 // import the settings for the css prefixes
