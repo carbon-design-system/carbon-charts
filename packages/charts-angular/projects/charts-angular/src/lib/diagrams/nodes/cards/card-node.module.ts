@@ -13,20 +13,17 @@ export {
 	CardNodeTitle
 }
 @NgModule({
-	declarations: [
-		CardNode,
-		CardNodeColumn,
-		CardNodeLabel,
-		CardNodeSubtitle,
-		CardNodeTitle
-	],
-	exports: [
-		CardNode,
-		CardNodeColumn,
-		CardNodeLabel,
-		CardNodeSubtitle,
-		CardNodeTitle
-	],
-	imports: [CommonModule]
+    exports: [
+        CardNode,
+        CardNodeColumn,
+        CardNodeLabel,
+        CardNodeSubtitle,
+        CardNodeTitle
+    ],
+    imports: [CommonModule, CardNode,
+        CardNodeColumn,
+        CardNodeLabel,
+        CardNodeSubtitle,
+        CardNodeTitle]
 })
 export class CardNodeModule {}

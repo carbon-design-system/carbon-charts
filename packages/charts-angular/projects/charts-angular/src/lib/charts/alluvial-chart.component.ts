@@ -10,8 +10,9 @@ import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions, type Cha
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-alluvial-chart',
-	template: ``
+    selector: 'ibm-alluvial-chart',
+    template: ``,
+    standalone: true
 })
 export class AlluvialChart extends BaseChart implements AfterViewInit {
 	/**

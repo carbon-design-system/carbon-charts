@@ -10,8 +10,9 @@ import { LollipopChart as LollipopChartCore, type LollipopChartOptions, type Cha
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-lollipop-chart',
-	template: ``
+    selector: 'ibm-lollipop-chart',
+    template: ``,
+    standalone: true
 })
 export class LollipopChart extends BaseChart implements AfterViewInit {
 	/**

@@ -10,8 +10,9 @@ import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-radar-chart',
-	template: ``
+    selector: 'ibm-radar-chart',
+    template: ``,
+    standalone: true
 })
 export class RadarChart extends BaseChart implements AfterViewInit {
 	/**

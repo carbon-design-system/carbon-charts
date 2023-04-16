@@ -10,8 +10,9 @@ import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-gauge-chart',
-	template: ``
+    selector: 'ibm-gauge-chart',
+    template: ``,
+    standalone: true
 })
 export class GaugeChart extends BaseChart implements AfterViewInit {
 	/**

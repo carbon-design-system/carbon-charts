@@ -2,12 +2,13 @@ import { Component, Input, HostBinding } from '@angular/core'
 import { carbonPrefix } from '../../config'
 
 @Component({
-	selector: 'ibm-diagram-card-node-column',
-	template: `
+    selector: 'ibm-diagram-card-node-column',
+    template: `
 		<xhtml:div>
 			<ng-content></ng-content>
 		</xhtml:div>
-	`
+	`,
+    standalone: true
 })
 export class CardNodeColumn {
 	@Input() farsideColumn = false

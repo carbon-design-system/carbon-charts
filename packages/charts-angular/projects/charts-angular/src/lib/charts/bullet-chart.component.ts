@@ -10,8 +10,9 @@ import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartTabu
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-bullet-chart',
-	template: ``
+    selector: 'ibm-bullet-chart',
+    template: ``,
+    standalone: true
 })
 export class BulletChart extends BaseChart implements AfterViewInit {
 	/**

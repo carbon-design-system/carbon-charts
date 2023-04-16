@@ -10,8 +10,9 @@ import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartTabu
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-bubble-chart',
-	template: ``
+    selector: 'ibm-bubble-chart',
+    template: ``,
+    standalone: true
 })
 export class BubbleChart extends BaseChart implements AfterViewInit {
 	/**

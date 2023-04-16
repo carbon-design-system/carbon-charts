@@ -10,8 +10,9 @@ import { BoxplotChart as BoxplotChartCore, type ChartTabularData, type BoxplotCh
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-boxplot-chart',
-	template: ``
+    selector: 'ibm-boxplot-chart',
+    template: ``,
+    standalone: true
 })
 export class BoxplotChart extends BaseChart implements AfterViewInit {
 	/**

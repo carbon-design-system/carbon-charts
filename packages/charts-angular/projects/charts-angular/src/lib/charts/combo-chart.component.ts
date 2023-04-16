@@ -9,8 +9,9 @@ import { ComboChart as ComboChartCore, type ComboChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-combo-chart',
-	template: ``
+    selector: 'ibm-combo-chart',
+    template: ``,
+    standalone: true
 })
 export class ComboChart extends BaseChart implements AfterViewInit {
 	/**

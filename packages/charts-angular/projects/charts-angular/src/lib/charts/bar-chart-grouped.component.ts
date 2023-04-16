@@ -10,8 +10,9 @@ import { GroupedBarChart as GroupedBarChartCore, type ChartTabularData, type Bar
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-grouped-bar-chart',
-	template: ``
+    selector: 'ibm-grouped-bar-chart',
+    template: ``,
+    standalone: true
 })
 export class GroupedBarChart extends BaseChart implements AfterViewInit {
 	/**

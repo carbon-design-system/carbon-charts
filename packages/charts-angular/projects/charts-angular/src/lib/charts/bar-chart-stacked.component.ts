@@ -10,8 +10,9 @@ import { StackedBarChart as StackedBarChartCore, type ChartTabularData, type Sta
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-stacked-bar-chart',
-	template: ``
+    selector: 'ibm-stacked-bar-chart',
+    template: ``,
+    standalone: true
 })
 export class StackedBarChart extends BaseChart implements AfterViewInit {
 	/**

@@ -10,8 +10,9 @@ import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-donut-chart',
-	template: ``
+    selector: 'ibm-donut-chart',
+    template: ``,
+    standalone: true
 })
 export class DonutChart extends BaseChart implements AfterViewInit {
 	/**

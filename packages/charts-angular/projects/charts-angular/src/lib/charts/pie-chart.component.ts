@@ -10,8 +10,9 @@ import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData }
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-pie-chart',
-	template: ``
+    selector: 'ibm-pie-chart',
+    template: ``,
+    standalone: true
 })
 export class PieChart extends BaseChart implements AfterViewInit {
 	/**

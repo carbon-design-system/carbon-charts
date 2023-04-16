@@ -10,8 +10,9 @@ import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartT
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-heatmap-chart',
-	template: ``
+    selector: 'ibm-heatmap-chart',
+    template: ``,
+    standalone: true
 })
 export class HeatmapChart extends BaseChart implements AfterViewInit {
 	/**

@@ -10,8 +10,9 @@ import { SimpleBarChart as SimpleBarChartCore, type ChartTabularData, type BarCh
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-simple-bar-chart',
-	template: ``
+    selector: 'ibm-simple-bar-chart',
+    template: ``,
+    standalone: true
 })
 export class SimpleBarChart extends BaseChart implements AfterViewInit {
 	/**

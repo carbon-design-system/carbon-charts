@@ -10,8 +10,9 @@ import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularDat
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-line-chart',
-	template: ``
+    selector: 'ibm-line-chart',
+    template: ``,
+    standalone: true
 })
 export class LineChart extends BaseChart implements AfterViewInit {
 	/**

@@ -10,8 +10,9 @@ import { AreaChart as AreaChartCore, type AreaChartOptions, type ChartTabularDat
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-area-chart',
-	template: ``
+    selector: 'ibm-area-chart',
+    template: ``,
+    standalone: true
 })
 export class AreaChart extends BaseChart implements AfterViewInit {
 	/**

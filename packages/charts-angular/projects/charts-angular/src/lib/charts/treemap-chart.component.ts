@@ -10,8 +10,9 @@ import { TreemapChart as TreemapChartCore, type TreemapChartOptions, type ChartT
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-treemap-chart',
-	template: ``
+    selector: 'ibm-treemap-chart',
+    template: ``,
+    standalone: true
 })
 export class TreemapChart extends BaseChart implements AfterViewInit {
 	/**
