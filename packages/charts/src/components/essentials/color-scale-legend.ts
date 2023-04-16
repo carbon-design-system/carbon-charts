@@ -1,5 +1,5 @@
 // Internal Imports
-import * as Tools from '../../tools'
+import{ getProperty, isEmpty } from '../../tools'
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces'
 import * as Configuration from '../../configuration'
 import { Legend } from './legend'
@@ -24,17 +24,17 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	// Position legend after axis have rendered
-	handleAxisCompleteEvent = (event: CustomEvent) => {
+	handleAxisCompleteEvent = () => {
 		const svg = this.getComponentContainer()
 
 		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})
 
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		if (width > Configuration.legend.color.barWidth && !isDataLoading) {
-			const title = Tools.getProperty(this.getOptions(), 'heatmap', 'colorLegend', 'title')
+			const title = getProperty(this.getOptions(), 'heatmap', 'colorLegend', 'title')
 
 			const { cartesianScales } = this.services
 
@@ -73,30 +73,30 @@ export class ColorScaleLegend extends Legend {
 		}
 	}
 
-	render(animate = false) {
+	render() {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})
 
-		const customColors = Tools.getProperty(options, 'color', 'gradient', 'colors')
+		const customColors = getProperty(options, 'color', 'gradient', 'colors')
 
-		const colorScaleType = Tools.getProperty(options, 'heatmap', 'colorLegend', 'type')
+		const colorScaleType = getProperty(options, 'heatmap', 'colorLegend', 'type')
 
-		let colorPairingOption = Tools.getProperty(options, 'color', 'pairing', 'option')
+		let colorPairingOption = getProperty(options, 'color', 'pairing', 'option')
 
-		const title = Tools.getProperty(options, 'heatmap', 'colorLegend', 'title')
+		const title = getProperty(options, 'heatmap', 'colorLegend', 'title')
 
 		// Clear DOM if loading
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		if (isDataLoading) {
 			svg.html('')
 			return
 		}
 
-		const customColorsEnabled = !Tools.isEmpty(customColors)
+		const customColorsEnabled = !isEmpty(customColors)
 		const domain = this.model.getValueDomain()
 
 		const useDefaultBarWidth = !(width <= Configuration.legend.color.barWidth)
@@ -127,7 +127,7 @@ export class ColorScaleLegend extends Legend {
 
 		let colorPairing = []
 		// Carbon charts has 11 colors for a single monochromatic palette & 17 for a divergent palette
-		let colorGroupingLength = colorScheme === 'diverge' ? 17 : 11
+		const colorGroupingLength = colorScheme === 'diverge' ? 17 : 11
 
 		if (!customColorsEnabled) {
 			// Add class names to list and the amount based on the color scheme

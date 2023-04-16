@@ -1,7 +1,7 @@
 import { Component } from '../component'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 import type { ChartModel } from '../../model/model'
-import { AxisPositions, RenderTypes, ScaleTypes } from '../../interfaces'
+import { AxisPositions, RenderTypes } from '../../interfaces'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -23,7 +23,7 @@ export class Highlight extends Component {
 	}
 
 	render(animate = false) {
-		const axesOptions = Tools.getProperty(this.getOptions(), 'axes')
+		const axesOptions = getProperty(this.getOptions(), 'axes')
 		const highlightData = []
 
 		Object.keys(axesOptions).forEach((axisPosition) => {
@@ -93,7 +93,7 @@ export class Highlight extends Component {
 			const orientation = cartesianScales.getOrientation()
 			const getDomainValue = (d) => cartesianScales.getDomainValue(d)
 			const getRangeValue = (d) => cartesianScales.getRangeValue(d)
-			const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 				getDomainValue,
 				getRangeValue,
 				orientation

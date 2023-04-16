@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from '../component'
-import * as Tools from '../../tools'
+import { getProperty, truncateLabel } from '../../tools'
 import {
 	Alignments,
 	ColorClassNameTypes,
@@ -21,17 +21,17 @@ export class Legend extends Component {
 
 	render() {
 		const options = this.getOptions()
-		const legendOptions = Tools.getProperty(options, 'legend')
-		const alignment = Tools.getProperty(legendOptions, 'alignment')
+		const legendOptions = getProperty(options, 'legend')
+		const alignment = getProperty(legendOptions, 'alignment')
 
-		const legendOrientation = Tools.getProperty(options, 'legend', 'orientation')
+		const legendOrientation = getProperty(options, 'legend', 'orientation')
 
 		let dataGroups = this.model.getDataGroups()
 
 		// Check if there are disabled legend items
 		const { DISABLED } = Configuration.legend.items.status
 		const hasDeactivatedItems = dataGroups.some((dataGroup) => dataGroup.status === DISABLED)
-		const userProvidedOrder = Tools.getProperty(legendOptions, 'order')
+		const userProvidedOrder = getProperty(legendOptions, 'order')
 
 		const svg = this.getComponentContainer()
 			.classed('center-aligned', alignment === Alignments.CENTER)
@@ -56,7 +56,7 @@ export class Legend extends Component {
 			return d.status === Configuration.legend.items.status.ACTIVE
 		})
 
-		const legendClickable = Tools.getProperty(this.getOptions(), 'legend', 'clickable')
+		const legendClickable = getProperty(this.getOptions(), 'legend', 'clickable')
 		svg.classed('clickable', legendClickable && dataGroups.length > 1)
 
 		const checkboxRadius = Configuration.legend.checkbox.radius
@@ -89,7 +89,7 @@ export class Legend extends Component {
 				return d.status === Configuration.legend.items.status.ACTIVE
 			})
 
-		const addedCheckIcons = addedCheckboxes
+		addedCheckboxes
 			.append('svg')
 			.attr('focusable', false)
 			.attr('preserveAspectRatio', 'xMidYMid meet')
@@ -102,9 +102,9 @@ export class Legend extends Component {
 			.append('path')
 			.attr('d', 'M13 21.2l-7.1-7.1-1.4 1.4 7.1 7.1L13 24 27.1 9.9l-1.4-1.5z')
 
-		const addedLegendItemsText = addedLegendItems.append('p').merge(legendItems.select('p'))
+		addedLegendItems.append('p').merge(legendItems.select('p'))
 
-		const additionalItemsOption = Tools.getProperty(options, 'legend', 'additionalItems')
+		const additionalItemsOption = getProperty(options, 'legend', 'additionalItems')
 
 		// add additional legend items
 		if (additionalItemsOption && dataGroups.length) {
@@ -137,7 +137,7 @@ export class Legend extends Component {
 			addedAdditionalItems
 				.append('svg')
 				.classed('icon', true)
-				.each(function (d, i) {
+				.each(function (d) {
 					const additionalItem = select(this)
 
 					if (!previousType || previousType != d.type) {
@@ -150,7 +150,7 @@ export class Legend extends Component {
 					self.addAdditionalItem(additionalItem, d, indexOfItem)
 				})
 
-			const addedAdditionalItemsText = addedAdditionalItems
+			addedAdditionalItems
 				.append('p')
 				.merge(addedAdditionalItems.select('p'))
 
@@ -279,7 +279,7 @@ export class Legend extends Component {
 				.attr('width', (d) => d.width)
 				.attr('height', (d) => d.height)
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
-			const { iconData, color } = Tools.getProperty(Configuration, 'legend', 'zoom')
+			const { iconData, color } = getProperty(Configuration, 'legend', 'zoom')
 
 			const zoomEnter = additionalItem
 				.attr('role', Roles.IMG)
@@ -316,12 +316,12 @@ export class Legend extends Component {
 	truncateLegendText() {
 		const svg = this.getComponentContainer()
 
-		const truncationOptions = Tools.getProperty(this.getOptions(), 'legend', 'truncation')
+		const truncationOptions = getProperty(this.getOptions(), 'legend', 'truncation')
 		// Truncation
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(truncationOptions, 'type')
-		const truncationThreshold = Tools.getProperty(truncationOptions, 'threshold')
-		const truncationNumCharacter = Tools.getProperty(truncationOptions, 'numCharacter')
+		const truncationType = getProperty(truncationOptions, 'type')
+		const truncationThreshold = getProperty(truncationOptions, 'threshold')
+		const truncationNumCharacter = getProperty(truncationOptions, 'numCharacter')
 
 		const addedLegendItemsText = svg.selectAll('div.legend-item p')
 
@@ -336,7 +336,7 @@ export class Legend extends Component {
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d) {
 				if (d.name.length > truncationThreshold) {
-					return Tools.truncateLabel(d.name, truncationType, truncationNumCharacter)
+					return truncateLabel(d.name, truncationType, truncationNumCharacter)
 				} else {
 					return d.name
 				}
@@ -350,8 +350,8 @@ export class Legend extends Component {
 		const self = this
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
-		const legendOptions = Tools.getProperty(options, 'legend')
-		const truncation = Tools.getProperty(legendOptions, 'truncation')
+		const legendOptions = getProperty(options, 'legend')
+		const truncation = getProperty(legendOptions, 'truncation')
 
 		svg
 			.selectAll('div.legend-item')

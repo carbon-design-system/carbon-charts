@@ -89,6 +89,14 @@ export class ZoomBar extends Component {
 			.attr('height', zoombarHeight)
 			.attr('opacity', 1)
 
+		DOMUtils.appendOrSelect(svg, 'rect.zoom-spacer')
+			.attr('x', 0)
+			.attr('y', zoombarHeight)
+			.attr('width', '100%')
+			.attr('height', zoomBar.spacerHeight)
+			.attr('opacity', 1)
+			.attr('fill', 'none')
+
 		if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
 			// Draw zoombar background rectangle
 			DOMUtils.appendOrSelect(container, 'rect.zoom-bg')
