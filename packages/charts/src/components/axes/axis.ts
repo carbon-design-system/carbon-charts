@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { AxisPositions, Events, ScaleTypes, Roles, TruncationTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { clamp, getProperty, getTranslationValues, truncateLabel } from '../../tools'
 import type { ChartModel } from '../../model/model'
 import { DOMUtils } from '../../services'
 import { AxisTitleOrientations, RenderTypes, TickRotations } from '../../interfaces/enums'
@@ -40,7 +40,7 @@ export class Axis extends Component {
 	render(animate = true) {
 		const { position: axisPosition } = this.configs
 		const options = this.getOptions()
-		const isAxisVisible = Tools.getProperty(options, 'axes', axisPosition, 'visible')
+		const isAxisVisible = getProperty(options, 'axes', axisPosition, 'visible')
 
 		const svg = this.getComponentContainer()
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
@@ -101,7 +101,7 @@ export class Axis extends Component {
 			.attr('aria-hidden', true)
 			.attr('aria-label', `invisible ${axisPosition} ticks`)
 
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 		const isTimeScaleType =
 			this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME
 		const isVerticalAxis =
@@ -119,21 +119,21 @@ export class Axis extends Component {
 			return
 		}
 
-		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType')
-		const isDataLoading = Tools.getProperty(options, 'data', 'loading')
-		const numberOfTicksProvided = Tools.getProperty(axisOptions, 'ticks', 'number')
+		const axisScaleType = getProperty(axisOptions, 'scaleType')
+		const isDataLoading = getProperty(options, 'data', 'loading')
+		const numberOfTicksProvided = getProperty(axisOptions, 'ticks', 'number')
 
 		// user can provide custom ticks to be displayed
 		// ticks need to be in the domain of the axis data
-		const userProvidedTickValues = Tools.getProperty(axisOptions, 'ticks', 'values')
+		const userProvidedTickValues = getProperty(axisOptions, 'ticks', 'values')
 
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(axisOptions, 'truncation', 'type')
-		const truncationThreshold = Tools.getProperty(axisOptions, 'truncation', 'threshold')
-		const truncationNumCharacter = Tools.getProperty(axisOptions, 'truncation', 'numCharacter')
+		const truncationType = getProperty(axisOptions, 'truncation', 'type')
+		const truncationThreshold = getProperty(axisOptions, 'truncation', 'threshold')
+		const truncationNumCharacter = getProperty(axisOptions, 'truncation', 'numCharacter')
 
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null
-		const timeScaleOptions = Tools.getProperty(options, 'timeScale')
+		const timeScaleOptions = getProperty(options, 'timeScale')
 
 		// Append to DOM a fake tick to get the right computed font height
 		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`)
@@ -177,18 +177,17 @@ export class Axis extends Component {
 				if (!scale.ticks(numberOfTicks).length) {
 					axis.tickValues([])
 				} else {
-					const addSpaceOnEdges = Tools.getProperty(options, 'timeScale', 'addSpaceOnEdges')
+					const addSpaceOnEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
 
-					const customDomain = Tools.getProperty(options, 'axes', axisPosition, 'domain')
+					const customDomain = getProperty(options, 'axes', axisPosition, 'domain')
 
-					let tickValues
 					// scale.nice() will change scale domain which causes extra space near chart edge
 					// so use another scale instance to avoid impacts to original scale
 					const tempScale = scale.copy()
 					if (addSpaceOnEdges && !customDomain) {
 						tempScale.nice(numberOfTicks)
 					}
-					tickValues = tempScale.ticks(numberOfTicks)
+					const tickValues = tempScale.ticks(numberOfTicks)
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
@@ -204,7 +203,7 @@ export class Axis extends Component {
 
 		// create the right ticks formatter
 		let formatter
-		const userProvidedFormatter = Tools.getProperty(axisOptions, 'ticks', 'formatter')
+		const userProvidedFormatter = getProperty(axisOptions, 'ticks', 'formatter')
 		if (isTimeScaleType) {
 			const timeInterval = computeTimeIntervalName(axis.tickValues())
 			if (userProvidedFormatter === null) {
@@ -298,7 +297,7 @@ export class Axis extends Component {
 			)
 
 			// vertical axes can have override for title orientation
-			const titleOrientation = Tools.getProperty(axisOptions, 'titleOrientation')
+			const titleOrientation = getProperty(axisOptions, 'titleOrientation')
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
 					if (titleOrientation === AxisTitleOrientations.RIGHT) {
@@ -405,7 +404,7 @@ export class Axis extends Component {
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
 			let shouldRotateTicks = false
 			// user could decide if tick rotation is required during zoom domain changing
-			const tickRotation = Tools.getProperty(axisOptions, 'ticks', 'rotation')
+			const tickRotation = getProperty(axisOptions, 'ticks', 'rotation')
 
 			if (tickRotation === TickRotations.ALWAYS) {
 				shouldRotateTicks = true
@@ -442,7 +441,7 @@ export class Axis extends Component {
 					invisibleAxisRef.selectAll('g.tick').each(function () {
 						const selection = select(this)
 						const xTransformation = parseFloat(
-							Tools.getProperty(Tools.getTranslationValues(this), 'tx')
+							getProperty(getTranslationValues(this), 'tx')
 						)
 
 						if (
@@ -516,7 +515,7 @@ export class Axis extends Component {
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
 							self.truncation[axisPosition] = true
-							return Tools.truncateLabel(d, truncationType, truncationNumCharacter)
+							return truncateLabel(d, truncationType, truncationNumCharacter)
 						} else {
 							return d
 						}
@@ -527,7 +526,7 @@ export class Axis extends Component {
 					.data(axisTickLabels)
 					.text(function (d) {
 						if (d.length > truncationThreshold) {
-							return Tools.truncateLabel(d, truncationType, truncationNumCharacter)
+							return truncateLabel(d, truncationType, truncationNumCharacter)
 						} else {
 							return d
 						}
@@ -547,9 +546,9 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 		const options = this.getOptions()
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
-		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType')
-		const truncationThreshold = Tools.getProperty(axisOptions, 'truncation', 'threshold')
+		const axisOptions = getProperty(options, 'axes', axisPosition)
+		const axisScaleType = getProperty(axisOptions, 'scaleType')
+		const truncationThreshold = getProperty(axisOptions, 'truncation', 'threshold')
 
 		const self = this
 		container
@@ -619,7 +618,7 @@ export class Axis extends Component {
 
 	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
 		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio))
-		return Tools.clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number)
+		return clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number)
 	}
 
 	destroy() {
