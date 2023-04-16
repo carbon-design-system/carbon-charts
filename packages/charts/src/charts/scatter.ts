@@ -11,11 +11,7 @@ import {
 	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
-	Skeleton,
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Tooltip,
-	// Legend,
-	// LayoutComponent
+	Skeleton
 } from '../components/index'
 
 export class ScatterChart extends AxisChart {

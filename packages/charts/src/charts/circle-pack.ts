@@ -8,10 +8,6 @@ import * as Tools from '../tools'
 // Components
 import {
 	CirclePack
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent,
-	// Skeleton
 } from '../components/index'
 
 export class CirclePackChart extends Chart {

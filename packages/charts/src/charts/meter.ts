@@ -17,10 +17,6 @@ import {
 	LayoutComponent,
 	MeterTitle,
 	Spacer
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Pie,
-	// Tooltip,
-	// Legend
 } from '../components/index'
 
 export class MeterChart extends Chart {

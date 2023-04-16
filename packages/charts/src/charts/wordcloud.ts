@@ -10,9 +10,6 @@ import { Skeletons } from '../interfaces/enums'
 import {
 	WordCloud,
 	Skeleton
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent
 } from '../components/index'
 
 export class WordCloudChart extends Chart {

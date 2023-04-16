@@ -17,15 +17,7 @@ import {
 	curveStep,
 	curveStepAfter,
 	curveStepBefore
-	// the imports below are needed because of typescript bug (error TS4029)
-	// CurveBundleFactory,
-	// CurveCardinalFactory,
-	// CurveCatmullRomFactory,
-	// CurveGenerator
 } from 'd3-shape'
-
-// this import is needed because of typescript bug (error TS4029)
-// import { Path } from 'd3-path'
 
 // Internal Imports
 import { Service } from './service'

@@ -6,13 +6,7 @@ import * as Configuration from '../configuration'
 import * as Tools from '../tools'
 
 // Components
-import {
-	Treemap
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent,
-	// Skeleton
-} from '../components/index'
+import { Treemap } from '../components/index'
 
 export class TreemapChart extends Chart {
 	model = new TreemapChartModel(this.services)

@@ -9,9 +9,6 @@ import { Skeletons } from '../interfaces/enums'
 import {
 	Donut,
 	Skeleton
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent
 } from '../components/index'
 
 export class DonutChart extends PieChart {

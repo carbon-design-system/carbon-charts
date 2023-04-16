@@ -12,9 +12,6 @@ import {
 	Grid,
 	TwoDimensionalAxes,
 	Skeleton
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Tooltip,
-	// LayoutComponent,
 } from '../components/index'
 
 export class BulletChart extends AxisChart {

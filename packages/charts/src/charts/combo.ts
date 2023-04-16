@@ -20,9 +20,6 @@ import {
 	Ruler,
 	StackedRuler,
 	Skeleton
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent
 } from '../components/index'
 
 const graphComponentsMap = {

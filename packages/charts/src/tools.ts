@@ -23,9 +23,6 @@ import {
 	kebabCase,
 	fromPairs,
 	some
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Cancelable,
-	// DebounceSettings
 } from 'lodash-es'
 
 // D3 Imports

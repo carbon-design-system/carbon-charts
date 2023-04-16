@@ -23,8 +23,6 @@ import {
 	AxisChartsTooltip,
 	Spacer,
 	Toolbar
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Tooltip
 } from '../components'
 
 export class HeatmapChart extends AxisChart {

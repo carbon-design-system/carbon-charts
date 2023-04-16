@@ -4,13 +4,6 @@ import { Chart } from '../chart'
 import * as Configuration from '../configuration'
 import type { ChartConfig, RadarChartOptions } from '../interfaces/index'
 import * as Tools from '../tools'
-
-// Components
-// the imports below are needed because of typescript bug (error TS4029)
-// import {
-// 	Legend,
-// 	LayoutComponent
-// } from '../components/index'
 import { Radar } from '../components/graphs/radar'
 
 export class RadarChart extends Chart {

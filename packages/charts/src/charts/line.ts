@@ -14,10 +14,6 @@ import {
 	TwoDimensionalAxes,
 	ZeroLine,
 	SkeletonLines
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Tooltip,
-	// Legend,
-	// LayoutComponent,
 } from '../components/index'
 
 export class LineChart extends AxisChart {

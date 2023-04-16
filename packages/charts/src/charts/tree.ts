@@ -6,13 +6,7 @@ import type { ChartConfig, TreeChartOptions } from '../interfaces/index'
 import * as Tools from '../tools'
 
 // Components
-import {
-	Tree
-	// the imports below are needed because of typescript bug (error TS4029)
-	// Legend,
-	// LayoutComponent,
-	// Skeleton
-} from '../components/index'
+import { Tree } from '../components/index'
 
 export class TreeChart extends Chart {
 	model = new TreeChartModel(this.services)
