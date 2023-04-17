@@ -5,7 +5,7 @@
 		// Deal with errors in current code
 		"useDefineForClassFields": false, // so we don't need declare on all unitialized properties
 		"baseUrl": ".",
-		"types": ["jasmine"]
+		// "types": ["jasmine"]
 		// "rootDirs": ["src"]
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*", "demo/**/*"],

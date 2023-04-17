@@ -30,16 +30,16 @@ export default defineConfig({
 				name: 'CarbonCharts',
 				globals: {
 					'@carbon/charts': 'Charts',
-					'd3-scale': 'd3Scale',
-					'd3-selection': 'd3Selection',
-					'd3-transition': 'd3Transition',
-					'd3-shape': 'd3Shape',
-					'd3-color': 'd3Color',
-					'd3-interpolate': 'd3Interpolate',
-					'd3-axis': 'd3Axis',
-					'd3-array': 'd3Array',
-					'd3-hierarchy': 'd3Hierarchy',
-					'd3-time-format': 'd3TimeFormat'
+					'd3-scale': 'd3',
+					'd3-selection': 'd3',
+					'd3-transition': 'd3',
+					'd3-shape': 'd3',
+					'd3-color': 'd3',
+					'd3-interpolate': 'd3',
+					'd3-axis': 'd3',
+					'd3-array': 'd3',
+					'd3-hierarchy': 'd3',
+					'd3-time-format': 'd3'
 				},
 				exports: 'named'
 			}
