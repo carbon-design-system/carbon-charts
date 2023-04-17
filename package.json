@@ -24,7 +24,7 @@
 		"branch": "master"
 	},
 	"engines": {
-		"node": "^18.15.0",
+		"node": "^18.16.0",
 		"yarn": "^3.5.0"
 	},
 	"packageManager": "yarn@3.5.0",

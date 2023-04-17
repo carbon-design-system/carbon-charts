@@ -104,7 +104,7 @@
     "access": "public"
   },
   "browserslist": [
-    "> 1% and not dead",
+		"> 1%",
     "not op_mini all"
   ],
   "repository": {
