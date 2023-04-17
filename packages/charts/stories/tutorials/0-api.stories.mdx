@@ -8,17 +8,17 @@ When initializing an object using any of our exposed chart types (e.g. PieChart)
 
 ```ts
 const myChart = new PieChart({
-	data: ...,
-	options: ...
+  data: ...,
+  options: ...
 })
 
 console.log(myChart)
 
 // RESULT
 {
-	model, // where we store charting data & options
-	services, // globalized functions that can affect charting behaviour. (e.g. event listener dispatching etc.)
-	components // internally used for arranging the charting layout, you can disregard this
+  model, // where we store charting data & options
+  services, // globalized functions that can affect charting behaviour. (e.g. event listener dispatching etc.)
+  components // internally used for arranging the charting layout, you can disregard this
 }
 ```
 
@@ -28,8 +28,8 @@ Data updates are done through the model.
 
 ```ts
 const myChart = new PieChart({
-	data: ...,
-	options: ...
+  data: ...,
+  options: ...
 })
 
 myChart.model.setData(...)
@@ -43,8 +43,8 @@ Options updates are also done through the model.
 
 ```js
 const myChart = new PieChart({
-	data: ...,
-	options: ...
+  data: ...,
+  options: ...
 })
 
 myChart.model.setOptions(...)
@@ -60,9 +60,7 @@ Services are globalized functions that have proven useful across the board. Gene
 Event listeners can be added through the events service:
 
 ```ts
-barChart.services.events.addEventListener("bar-mouseover", e => {
-    console.log(e.detail);
-})
+barChart.services.events.addEventListener("bar-mouseover", e => console.log(e.detail))
 ```
 
 ## API Reference

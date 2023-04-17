@@ -131,7 +131,7 @@
 		"typedoc": "^0.24.4",
 		"typescript": "^5.0.4",
 		"vite": "^4.2.1",
-		"vite-plugin-dts": "~2.2.0"
+		"vite-plugin-dts": "~2.3.0"
 	},
 	"prettier": "../../prettier.config.mjs",
 	"publishConfig": {

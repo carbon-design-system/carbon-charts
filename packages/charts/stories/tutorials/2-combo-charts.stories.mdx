@@ -32,28 +32,29 @@ Below is an example of combining a carbon-charts `AreaChart` with a `LineChart`.
 import { ChartTypes } from "@carbon/charts"
 const verySimpleComboData = [
   { group: "Dataset 1", value: 650, date: "Tuesday" },
-	{ group: "Dataset 2", value: 296, date: "Tuesday" }
-	...more data
+  { group: "Dataset 2", value: 296, date: "Tuesday" },
+  // ...more data
 ]
 
 const comboOptions = {
-	...otherOptions // global options apply to all the charts listed in chartTypes (where relevant)
-	axes: {...}
-	comboChartTypes: [ // takes an array of objects
-		{
-			type: ChartTypes.AREA // use a valid ChartType from enums
-			options: {}, // component specific options (i.e, turn on the scatter points, adjust scatter radius)
-			correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
-		},
-		{
-			type: ChartTypes.LINE // use a valid ChartType from enums
-			options: {
-				points: {
-					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
-				}
-			}, // component specific options
-			correspondingDatasets: ["Dataset 2"]
-		}]
+  ...otherOptions, // global options apply to all the charts listed in chartTypes (where relevant)
+  axes: {...},
+  comboChartTypes: [ // takes an array of objects
+    {
+      type: ChartTypes.AREA // use a valid ChartType from enums
+      options: {}, // component specific options (i.e, turn on the scatter points, adjust scatter radius)
+      correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
+    },
+    {
+      type: ChartTypes.LINE, // use a valid ChartType from enums
+      options: {
+        points: {
+          enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
+        }
+      }, // component specific options
+      correspondingDatasets: ["Dataset 2"]
+    }
+  ]
 }
 ```
 > See the storybook demos for more combinations of charts and configurations.
@@ -71,30 +72,31 @@ Below is an example of combining a carbon-charts `AreaChart` with a standalone `
 import { ChartTypes, Configuration, Component } from "@carbon/charts"
 
 const verySimpleComboData = [
-    { group: "Dataset 1", value: 650, date: "Tuesday" },
-	{ group: "Dataset 2", value: 296, date: "Tuesday" }
-	...more data
+  { group: "Dataset 1", value: 650, date: "Tuesday" },
+  { group: "Dataset 2", value: 296, date: "Tuesday" },
+	// ...more data
 ]
 
 const comboOptions = {
-	...otherOptions // global options apply to all the charts listed in chartTypes (where relevant)
-	axes: {...}
-	comboChartTypes: [ // takes an array of objects
-		{
-			type: ChartTypes.AREA // use a valid ChartType from enums
-			options: {},
-			correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
-		},
-		{
-			type: Component.Line // using an imported class constructor
+  ...otherOptions, // global options apply to all the charts listed in chartTypes (where relevant)
+  axes: {...},
+  comboChartTypes: [ // takes an array of objects
+    {
+      type: ChartTypes.AREA // use a valid ChartType from enums
+      options: {},
+      correspondingDatasets: ["Dataset 1"] // the datasets that we want to map with this type of chart
+    },
+    {
+      type: Component.Line // using an imported class constructor
 			// add the base options for that type of chart if it is in the carbon-charts library and any additional configurations needed
-			options: Object.assign({}, Configuration.options.lineChart,  {
-				points: {
-					enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
-				}
-			}), // component specific options
-			correspondingDatasets: ["Dataset 2"]
-		}]
+      options: Object.assign({}, Configuration.options.lineChart,  {
+        points: {
+          enabled: false // disabling the scatter points on the LineChart here won't affect the points in the AreaChart
+        }
+      }), // component specific options
+      correspondingDatasets: ["Dataset 2"]
+    }
+  ]
 }
 ```
 

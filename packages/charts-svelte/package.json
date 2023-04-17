@@ -51,7 +51,7 @@
 		"@storybook/testing-library": "^0.1.0",
 		"@storybook/theming": "^7.0.5",
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.15.6",
+		"@sveltejs/kit": "^1.15.7",
 		"@sveltejs/package": "^2.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.59.0",
 		"@typescript-eslint/parser": "^5.59.0",

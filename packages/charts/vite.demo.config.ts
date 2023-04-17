@@ -5,6 +5,7 @@ export default defineConfig({
 	build: {
 		outDir: 'dist/demo',
 		sourcemap: true,
+		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: fileURLToPath(new URL('demo/index.ts', import.meta.url)),
 			name: 'ChartsDemoData',

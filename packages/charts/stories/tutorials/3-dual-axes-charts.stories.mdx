@@ -23,25 +23,25 @@ a read-only axis (without datasets mapped to it).
 
 ```ts
 const dualAxesOptions = {
-	...otherOptions,
-	axes: {
-		bottom: {
-		  mapsTo: date,
-		  scaleType: time
-		},
-		left: {
-		  mapsTo: temperature,
-		  scaleType: linear,
-		  main: true // this will be the primary axis
-		},
-		right: {
-		  mapsTo: value,
-		  scaleType: linear,
-		  // the dataset "Products sold" will map to this axis instead
-		  correspondingDatasets: [
-			"Products sold"
-		  ]
-		}
+  ...otherOptions,
+  axes: {
+    bottom: {
+      mapsTo: date,
+      scaleType: time
+    },
+    left: {
+      mapsTo: temperature,
+      scaleType: linear,
+      main: true // this will be the primary axis
+    },
+    right: {
+      mapsTo: value,
+      scaleType: linear,
+      // the dataset "Products sold" will map to this axis instead
+      correspondingDatasets: [
+        "Products sold"
+      ]
+    }
   }
 }
 ```

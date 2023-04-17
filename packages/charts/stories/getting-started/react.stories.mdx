@@ -25,29 +25,24 @@ To start using the `StackedBarChart` component, try the example below:
 
 ```ts
 import React from 'react'
-
 import { StackedBarChart } from '@carbon/charts-react'
-
 import '@carbon/styles/css/styles.css' // may affect global styles
 import '@carbon/charts-react/styles.css'
 
 function App() {
-	const [stackedBarData, setStackedBarData] = React.useState([
-		// refer to tabular data format tutorial
-	])
+  const [stackedBarData, setStackedBarData] = React.useState([
+    // refer to tabular data format tutorial
+  ])
 
-	const [stackedBarOptions, setStackedBarOptions] = React.useState([
-		// refer to chart specific options
-	])
+  const [stackedBarOptions, setStackedBarOptions] = React.useState([
+    // refer to chart specific options
+  ])
 
 	return (
-		<div className="App">
-			<StackedBarChart
-				data={stackedBarData}
-				options={stackedBarOptions}
-			/>
-		</div>
-	)
+    <div className="App">
+      <StackedBarChart data={stackedBarData} options={stackedBarOptions} />
+    </div>
+  )
 }
 
 // ...

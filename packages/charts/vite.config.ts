@@ -6,6 +6,7 @@ export default defineConfig({
 	build: {
 		outDir: 'dist',
 		sourcemap: true,
+		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: fileURLToPath(new URL('src/index.ts', import.meta.url)),
 			name: 'CarbonCharts',

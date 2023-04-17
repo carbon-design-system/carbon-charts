@@ -16,16 +16,16 @@ By default, carbon-charts will assign the first color option for the appropriate
 
 ```ts
 const verySimpleBarData = [
-	{ group: "Qty", value: 65000 },
-	{ group: "More", value: 29123 }
+  { group: "Qty", value: 65000 },
+  { group: "More", value: 29123 }
 ] // bar chart with 2 data groups "Qty" and "More"
 
 const verySimpleBarOptions = {
-	color: {
-		pairing: {
-			option: 2 // use the second color palette option for 2-group charts
-		}
-	}
+  color: {
+    pairing: {
+      option: 2 // use the second color palette option for 2-group charts
+    }
+  }
 }
 ```
 > Refer to the Carbon Design Website for the full index of color palette options (by group size).
@@ -39,17 +39,17 @@ const verySimpleBarOptions = {
 // line chart with 2 data groups "Saturday" and "Sunday" initially but expecting
 // 3 data groups on some data loads when long weekend "Friday" or "Monday" is included
 const lineData = [
-	{ group: "Saturday", sales: 65000 },
-	{ group: "Sunday", sales: 29123 }
+  { group: "Saturday", sales: 65000 },
+  { group: "Sunday", sales: 29123 }
 ]
 
 const lineOptions = {
-	color: {
-		pairing: {
-			numberOfVariants: 3; // use a palette with 3 color variants
-			option: 2 // use the 2nd option of 3 color charts
-		}
-	}
+  color: {
+    pairing: {
+      numberOfVariants: 3, // use a palette with 3 color variants
+      option: 2 // use the 2nd option of 3 color charts
+    }
+  }
 }
 ```
 
@@ -63,11 +63,11 @@ default to using the IBM Design Language dataviz palette.
 
 ```ts
 const simpleBarOptions = {
-	color: {
-		scale: {
-			"Dataset 1": "blue",
-			"Dataset 2": "red"
-		} // chart only has 2 data groups
-	}
+  color: {
+    scale: {
+      "Dataset 1": "blue",
+      "Dataset 2": "red"
+    } // chart only has 2 data groups
+  }
 }
 ```
