@@ -15,13 +15,13 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	# vue -> charts-vue
 
 	echo -e "${GREEN}Building @carbon/charts and demo dependencies (styles, data)..."
-	lerna run build:package --scope=@carbon/charts --concurrency=1
+	npx lerna run build:package --scope=@carbon/charts --concurrency=1
 
 	# Build package if not core and map APP_TYPE to PKG_DIR
 	if [ "$APP_TYPE" != "core" ]; then
 	  PKG_DIR="charts-$APP_TYPE"
 		echo -e "${GREEN}Building @carbon/$PKG_DIR..."
-		lerna run build:package --scope="@carbon/$PKG_DIR" --concurrency=1
+		npx lerna run build:package --scope="@carbon/$PKG_DIR" --concurrency=1
   else
 	  # Map package directory for core since name is different
 	  PKG_DIR="charts"
@@ -29,7 +29,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 
   # Storybook build for selected package
   echo -e "${GREEN}Running storybook build for @carbon/$PKG_DIR..."
-  lerna run build:demo --scope="@carbon/$PKG_DIR" --concurrency=1
+  npx lerna run build:demo --scope="@carbon/$PKG_DIR" --concurrency=1
 
 	echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
 	mkdir -p pages
