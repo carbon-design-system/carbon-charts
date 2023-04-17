@@ -50,7 +50,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 					setUpdate(!update)
 				}, [demoRef, chartRef])
 
-				const openSandbox = (event: MouseEvent) => {
+				const openSandbox = (event: React.MouseEvent<HTMLAnchorElement>) => {
 					event.preventDefault()
 					sdk.openProject(demo.code.react, { newWindow: true })
 				}
@@ -86,7 +86,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 						<h3 className="marginTop-30">Code sample</h3>
 
-						<a  href="#" onClick={openSandbox}>
+						<a href="#" onClick={openSandbox}>
 							<img
 								src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
 								className="marginTop"
