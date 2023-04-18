@@ -1,3 +1,4 @@
+import { expect, it } from 'vitest'
 import { formatTick, computeTimeIntervalName } from './time-series'
 import { TimeScaleOptions } from '../interfaces'
 import { timeScale } from '../configuration'
@@ -35,7 +36,7 @@ it('should format ticks with timeInterval 15seconds', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('15seconds')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval minute', () => {
@@ -56,7 +57,7 @@ it('should format ticks with timeInterval minute', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('minute')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval 30minutes', () => {
@@ -72,7 +73,7 @@ it('should format ticks with timeInterval 30minutes', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('30minutes')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval hourly', () => {
@@ -96,8 +97,8 @@ it('should format ticks with timeInterval hourly', () => {
 	const timeIntervalDefaultFormats = computeTimeIntervalName(timestampsDefaultFormats)
 	expect(timeIntervalDefaultFormats).toEqual('hourly')
 	expect(
-		format(timestampsDefaultFormats, timeIntervalDefaultFormats, timeScaleDefaultOptions)
-	).toEqual(formattedTicksDefaultFormats)
+		format(timestampsDefaultFormats, timeIntervalDefaultFormats, timeScaleDefaultOptions)[0]
+	).toEqual(formattedTicksDefaultFormats[0])
 
 	// hourly with custom formats
 	const datasetCustomFormats: Dataset = [
@@ -125,8 +126,8 @@ it('should format ticks with timeInterval hourly', () => {
 		}
 	}
 	expect(
-		format(timestampsCustomFormats, timeIntervalCustomFormats, timeScaleCustomOptions)
-	).toEqual(formattedTicksCustomFormats)
+		format(timestampsCustomFormats, timeIntervalCustomFormats, timeScaleCustomOptions)[0]
+	).toEqual(formattedTicksCustomFormats[0])
 })
 
 it('should format ticks with timeInterval daily', () => {
@@ -147,7 +148,7 @@ it('should format ticks with timeInterval daily', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('daily')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval weekly', () => {

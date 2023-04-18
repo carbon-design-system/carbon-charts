@@ -1,18 +1,14 @@
+import domToImage from 'dom-to-image-more'
+import { select, Selection } from 'd3-selection'
+import ResizeObserver from 'resize-observer-polyfill'
+
 // Internal Imports
 import { Service } from '../service'
 import { Events } from '../../interfaces'
-
-// D3 Imports
-import { select, Selection } from 'd3-selection'
-import * as Tools from '../../tools'
+import { debounce, getProperty } from '../../tools'
 
 // import the settings for the css prefix
 import { carbonPrefix } from '../../configuration-non-customizable'
-
-// MISC
-import ResizeObserver from 'resize-observer-polyfill'
-
-import domToImage from 'dom-to-image-more'
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 
@@ -141,8 +137,8 @@ export class DOMUtils extends Service {
 
 		try {
 			const nativeDimensions = {
-				width: Tools.getProperty(svgSelector.node(), 'width', 'baseVal', 'value'),
-				height: Tools.getProperty(svgSelector.node(), 'height', 'baseVal', 'value')
+				width: getProperty(svgSelector.node(), 'width', 'baseVal', 'value'),
+				height: getProperty(svgSelector.node(), 'height', 'baseVal', 'value')
 			}
 
 			validateAndSetDimensions(nativeDimensions)
@@ -222,7 +218,7 @@ export class DOMUtils extends Service {
 
 	addMainContainer() {
 		const options = this.model.getOptions()
-		const chartsprefix = Tools.getProperty(options, 'style', 'prefix')
+		const chartsprefix = getProperty(options, 'style', 'prefix')
 
 		const mainContainer = select(this.getHolder())
 			.append('div')
@@ -387,8 +383,9 @@ export class DOMUtils extends Service {
 			const cssVerifierElement = select(this.mainContainer)
 				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
 				.node()
-			const computedStyles = getComputedStyle(cssVerifierElement as any)
 			/*
+			const computedStyles = getComputedStyle(cssVerifierElement as any)
+
 			if ( // true even when styles are properly loaded
 				computedStyles.getPropertyValue('overflow') !== 'hidden' ||
 				computedStyles.getPropertyValue('opacity') !== '0'
@@ -462,7 +459,7 @@ export class DOMUtils extends Service {
 		let containerHeight = holder.clientHeight
 
 		// The resize callback function
-		const resizeCallback = Tools.debounce((entries, observer) => {
+		const resizeCallback = debounce(() => {
 			if (!holder) {
 				return
 			}
