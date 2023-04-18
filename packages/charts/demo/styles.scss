@@ -266,62 +266,61 @@ div.container {
 		}
 	}
 
-	&.tutorial {
-		@import '~highlight.js/styles/sunburst.css';
+	// &.tutorial {
 
-		h1,
-		h2,
-		h5,
-		p {
-			margin-bottom: 15px;
-		}
+	// 	h1,
+	// 	h2,
+	// 	h5,
+	// 	p {
+	// 		margin-bottom: 15px;
+	// 	}
 
-		ul,
-		pre {
-			margin-bottom: 30px;
-		}
+	// 	ul,
+	// 	pre {
+	// 		margin-bottom: 30px;
+	// 	}
 
-		h5 {
-			margin-top: 30px;
-		}
+	// 	h5 {
+	// 		margin-top: 30px;
+	// 	}
 
-		ul {
-			padding-inline-start: 15px;
-			list-style: disc;
+	// 	ul {
+	// 		padding-inline-start: 15px;
+	// 		list-style: disc;
 
-			li {
-				margin-bottom: 0.5em;
+	// 		li {
+	// 			margin-bottom: 0.5em;
 
-				&:last-child {
-					margin-bottom: 0;
-				}
-			}
-		}
+	// 			&:last-child {
+	// 				margin-bottom: 0;
+	// 			}
+	// 		}
+	// 	}
 
-		code {
-			border-radius: 4px;
-			background-color: #e0e0e0;
-			color: #161616;
-			padding: 0 0.5em;
-		}
+	// 	code {
+	// 		border-radius: 4px;
+	// 		background-color: #e0e0e0;
+	// 		color: #161616;
+	// 		padding: 0 0.5em;
+	// 	}
 
-		pre {
-			background-color: black;
-			color: white;
-			padding: 15px;
-			margin-top: 15px;
-			-moz-tab-size: 4;
-			tab-size: 4;
-			font-size: 14px;
-			line-height: 1.4;
+	// 	pre {
+	// 		background-color: black;
+	// 		color: white;
+	// 		padding: 15px;
+	// 		margin-top: 15px;
+	// 		-moz-tab-size: 4;
+	// 		tab-size: 4;
+	// 		font-size: 14px;
+	// 		line-height: 1.4;
 
-			code {
-				background-color: unset;
-				color: white;
-				padding: 0;
-			}
-		}
-	}
+	// 		code {
+	// 			background-color: unset;
+	// 			color: white;
+	// 			padding: 0;
+	// 		}
+	// 	}
+	// }
 
 	.marginTop {
 		margin-top: 10px;
