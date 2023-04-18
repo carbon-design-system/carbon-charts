@@ -31,6 +31,9 @@ const config: StorybookConfig = {
 				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
 			}
 		}
+		if (config.build) {
+      config.build.chunkSizeWarningLimit = 1600
+		}
 		return config
 	},
 	features: {

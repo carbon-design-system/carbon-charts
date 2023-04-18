@@ -15,6 +15,11 @@ const config: StorybookConfig = {
 				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
 			}
 		}
+		if (config.build) {
+      config.build.chunkSizeWarningLimit = 1800
+		}
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+
 		return config
 	},
 	addons: [
