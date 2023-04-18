@@ -74,7 +74,7 @@
 		"sass": "^1.62.0",
 		"storybook": "^7.0.5",
 		"typescript": "^5.0.4",
-		"vite": "^4.2.1",
+		"vite": "^4.2.2",
 		"vite-plugin-dts": "~2.3.0"
 	},
 	"prettier": "../../prettier.config.mjs",

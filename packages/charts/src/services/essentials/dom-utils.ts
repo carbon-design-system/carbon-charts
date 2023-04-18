@@ -1,6 +1,6 @@
-import domToImage from 'dom-to-image-more'
 import { select, Selection } from 'd3-selection'
-import ResizeObserver from 'resize-observer-polyfill'
+import ResizeObserver from 'resize-observer-polyfill' // only needed for testing with jsdom as modern browsers (>1%) already support it
+import domToImage from 'dom-to-image-more'
 
 // Internal Imports
 import { Service } from '../service'

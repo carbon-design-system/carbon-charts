@@ -30,9 +30,10 @@ export class TestEnvironment {
 		this.chart.destroy()
 	}
 
-	setChartOptions(func: Function) {
-		this.chartOptions = func(this.chartOptions)
-	}
+	// Dead code
+	// setChartOptions(func: Function) {
+	// 	this.chartOptions = func(this.chartOptions)
+	// }
 
 	getChartReference() {
 		return this.chart

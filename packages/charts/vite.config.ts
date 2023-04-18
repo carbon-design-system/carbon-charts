@@ -4,7 +4,9 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-	test: {},
+	test: {
+		environment: 'jsdom'
+	},
 	build: {
 		outDir: 'dist',
 		sourcemap: true,
