@@ -1,37 +1,38 @@
+import { describe, expect, it } from 'vitest'
 import { getProperty, mergeDefaultChartOptions } from './tools'
 
 describe('Tools.getProperty', () => {
-	it('works with a simple nested object containing a number > 0', () => {
+	it('works with simple nested object containing a number > 0', () => {
 		const obj = { a: { b: { c: 5 } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual(5)
 	})
 
-	it('works with a simple nested object containing a 0', () => {
+	it('works with simple nested object containing a 0', () => {
 		const obj = { a: { b: { c: 0 } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual(0)
 	})
 
-	it('works with a simple nested object containing `false`', () => {
+	it('works with simple nested object containing `false`', () => {
 		const obj = { a: { b: { c: false } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual(false)
 	})
 
-	it('works with a simple nested object containing `true`', () => {
+	it('works with simple nested object containing `true`', () => {
 		const obj = { a: { b: { c: true } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual(true)
 	})
 
-	it('works with a simple nested object containing a string', () => {
+	it('works with simple nested object containing a string', () => {
 		const obj = { a: { b: { c: 'qwerty' } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual('qwerty')
 	})
 
-	it('works with a simple nested object containing an empty string', () => {
+	it('works with simple nested object containing an empty string', () => {
 		const obj = { a: { b: { c: '' } } }
 
 		expect(getProperty(obj, 'a', 'b', 'c')).toEqual('')
@@ -39,7 +40,7 @@ describe('Tools.getProperty', () => {
 })
 
 describe('Tools.mergeDefaultChartOptions', () => {
-	it('it merges default chart configuration with provided ones, with special cases for axes', () => {
+	it('merges default chart configuration with provided ones with special cases for axes', () => {
 		const providedOptions = {
 			title: 'Title',
 			axes: {
