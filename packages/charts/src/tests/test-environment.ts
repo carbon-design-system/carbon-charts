@@ -3,6 +3,8 @@ import { createChartHolder } from './tools'
 import { ChartTabularData } from '../interfaces'
 import { groupedBarData, groupedBarOptions } from '../../demo/data'
 
+type ChartOptionsUpdater = (options: ScatterChartOptions) => ScatterChartOptions;
+
 export const data = groupedBarData as ChartTabularData
 
 export const options = Object.assign(groupedBarOptions, {
@@ -31,9 +33,9 @@ export class TestEnvironment {
 	}
 
 	// Dead code
-	// setChartOptions(func: Function) {
-	// 	this.chartOptions = func(this.chartOptions)
-	// }
+	setChartOptions(func: ChartOptionsUpdater) {
+		this.chartOptions = func(this.chartOptions)
+	}
 
 	getChartReference() {
 		return this.chart

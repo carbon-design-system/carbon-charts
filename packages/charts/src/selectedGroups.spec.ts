@@ -5,23 +5,26 @@ import { TestEnvironment } from './tests/index'
 // import the settings for the css prefixes
 import settings from 'carbon-components/es/globals/js/settings'
 
+import { ScatterChart } from './charts'
 import { options } from './configuration'
 import { Events } from './interfaces'
 
-describe('selectedGroups option', () => {
-	beforeEach(function () {
-		const testEnvironment = new TestEnvironment()
-		testEnvironment.render()
+let chart: ScatterChart
+let testEnvironment: TestEnvironment
 
-		this.chart = testEnvironment.getChartReference()
-		this.testEnvironment = testEnvironment
+describe('selectedGroups option', () => {
+
+	beforeEach(function () {
+		testEnvironment = new TestEnvironment()
+		testEnvironment.render()
+		chart = testEnvironment.getChartReference()
 	})
 
 	describe('selected legend labels', () => {
 		it('should match selected groups provided in options', function (done: () => void) {
 			const sampleSelectedGroups = ['Dataset 1', 'Dataset 3']
 	
-			const chartEventsService = this.chart.services.events
+			const chartEventsService = chart.services.events
 	
 			const renderCb = () => {
 				// Remove render event listener
@@ -44,6 +47,6 @@ describe('selectedGroups option', () => {
 	
 
 	afterEach(function () {
-		this.testEnvironment.destroy()
+		testEnvironment.destroy()
 	})
 })
