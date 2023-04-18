@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, it } from 'jasmine-core'
 import { TestEnvironment } from '../../tests/index'
 
 // import the settings for the css prefixes
@@ -24,7 +23,7 @@ describe('title component', () => {
 
 			const chartEventsService = this.chart.services.events
 			const renderCb = () => {
-				const title = select(`g.${settings.prefix}--${options.chart.style.prefix}--title`)
+				const title = select(`g.${settings.prefix}--${options.chart.style?.prefix}--title`)
 
 				// Remove event listener for when chart render is finished
 				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)

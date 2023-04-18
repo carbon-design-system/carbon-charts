@@ -1,8 +1,10 @@
+/// <reference types="vitest" />
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+	test: {},
 	build: {
 		outDir: 'dist',
 		sourcemap: true,

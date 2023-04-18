@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'jasmine-core'
+import { select } from 'd3-selection'
 import { TestEnvironment } from '../../tests/index'
 
 // import the settings for the css prefixes
@@ -6,8 +6,6 @@ import settings from 'carbon-components/es/globals/js/settings'
 
 import { options } from './../../configuration'
 import { Events } from './../../interfaces'
-
-import { select } from 'd3-selection'
 
 describe('legend component', () => {
 	beforeEach(function () {

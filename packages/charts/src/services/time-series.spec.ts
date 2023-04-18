@@ -1,20 +1,19 @@
-import { expect, it } from 'jasmine-core'
 import { formatTick, computeTimeIntervalName } from './time-series'
 import { TimeScaleOptions } from '../interfaces'
-import * as Configuration from '../configuration'
+import { timeScale } from '../configuration'
 import frLocaleObject from 'date-fns/locale/fr/index'
 
 type TickTuple = [Date, string]
 type Dataset = TickTuple[]
 
-const timeScaleDefaultOptions = Configuration.timeScale
+const timeScaleDefaultOptions = timeScale
 
 const format = (
 	ticks: number[],
 	timeInterval: string,
 	timeScaleOptions: TimeScaleOptions
 ): string[] => {
-	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, timeScaleOptions))
+	return ticks.map((tick, i) => formatTick(tick, i,[], timeInterval, timeScaleOptions))
 }
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
