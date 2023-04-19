@@ -2,7 +2,7 @@
 	"name": "@carbon/charts-monorepo",
 	"private": true,
 	"scripts": {
-		"clean": "lerna clean && lerna run clean && rm -rf node_modules yarn.lock .yarn",
+		"clean": "lerna clean && lerna run clean && rm -rf node_modules yarn.lock .yarn/cache .yarn/install-state.gz",
 		"commit": "git-cz",
 		"format": "lerna run format",
 		"test": "lerna run test",
