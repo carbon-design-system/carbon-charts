@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.14...v1.7.0) (2023-04-19)
+
+
+### Features
+
+* **exports:** custom fileDownload.fileName function ([#1536](https://github.com/carbon-design-system/carbon-charts/issues/1536)) ([fc658e0](https://github.com/carbon-design-system/carbon-charts/commit/fc658e03e188884a27ed60e95ded3f41db5d50ba))
+
+
+
+
+
 ## [1.6.14](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.13...v1.6.14) (2023-03-07)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
