@@ -23,11 +23,9 @@
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
-	"workspaces": {
-		"packages": [
-			"packages/*"
-		]
-	},
+	"workspaces": [
+		"packages/*"
+	],
 	"husky": {
 		"hooks": {
 			"pre-commit": "bash scripts/precommit.sh"
