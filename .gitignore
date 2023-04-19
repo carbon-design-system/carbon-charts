@@ -6,7 +6,7 @@
 .vscode/
 .yarn/cache
 pages/
-# yarn-offline-mirror-cache/
+yarn-offline-mirror-cache/
 
 # Package-level
 **/.angular/
