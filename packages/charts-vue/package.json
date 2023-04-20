@@ -54,7 +54,7 @@
     "@storybook/theming": "^7.0.6",
     "@storybook/vue3": "^7.0.6",
     "@storybook/vue3-vite": "^7.0.6",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.15.12",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
