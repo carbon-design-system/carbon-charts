@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.0...v1.7.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **1522:** externalize dom-to-image-more ([#1540](https://github.com/carbon-design-system/carbon-charts/issues/1540)) ([98f1bfc](https://github.com/carbon-design-system/carbon-charts/commit/98f1bfc40aaf0f6cb0e7139ff8cfc3337474aa33))
+
+
+
+
+
 # [1.7.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.14...v1.7.0) (2023-04-19)
 
 **Note:** Version bump only for package @carbon/charts-angular
