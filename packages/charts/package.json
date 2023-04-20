@@ -44,10 +44,10 @@
 		"start": "yarn storybook",
 		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
-		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore",
-		"ci-check": "yarn format:diff",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"format:diff": "prettier --list-different src/",
+		"ci-check": "yarn format:diff",
+		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"peerDependencies": {
@@ -116,7 +116,7 @@
 		"storybook": "^7.0.6",
 		"typedoc": "^0.24.4",
 		"typescript": "^5.0.4",
-		"vite": "^4.2.2",
+		"vite": "^4.3.1",
 		"vite-plugin-dts": "~2.3.0",
 		"vitest": "0.30.1"
 	},

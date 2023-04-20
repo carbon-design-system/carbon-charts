@@ -16,7 +16,7 @@ git stash
 # checkout master to get out of detached HEAD state
 git checkout master
 
-lerna version --conventional-commits --yes --force-publish --create-release github
+npx lerna version --conventional-commits --yes --force-publish --create-release github
 
 echo "Publish to NPM"
 
@@ -27,4 +27,4 @@ npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 node scripts/add-telemetry-to-packages.js
 
-lerna publish from-git --yes --force-publish --no-verify-access --contents dist
+npx lerna publish from-git --yes --force-publish --no-verify-access --contents dist

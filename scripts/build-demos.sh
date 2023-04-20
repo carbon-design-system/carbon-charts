@@ -11,7 +11,7 @@ set -e
 #  - and any specialty files
 
 # Run build:demo script in all packages in parallel
-lerna run --stream build:demo
+npx lerna run --stream build:demo
 
 # Setup empty pages directory for storybook builds
 rm -rf pages
@@ -20,4 +20,4 @@ touch pages/.nojekyll
 echo "charts.carbondesignsystem.com" > pages/CNAME
 
 # Copy all demos/{package name here} folders to the pages deploy directory
-lerna exec -- cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
+npx lerna exec -- cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages

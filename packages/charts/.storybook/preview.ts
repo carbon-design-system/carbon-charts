@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/html'
 import { themes } from '@storybook/theming'
 
-import '../demo/styles.scss' // lots of warnings about ~@ibm/plex
+import '../demo/styles.scss'
 
 const preview: Preview = {
 	parameters: {

@@ -4,7 +4,7 @@ set -e
 
 GITHUB_UPSTREAM=git@github.com:carbon-design-system/carbon-charts.git
 
-lerna run lint
+npx lerna run lint
 
 if [ $? -ne 0 ]
 then
@@ -35,6 +35,6 @@ then
 	git commit -m "Update yarn.lock files"
 fi
 
-lerna run format
+npx lerna run format
 
 #exit 1  # stops push from running, good for testing

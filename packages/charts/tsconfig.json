@@ -4,9 +4,7 @@
 		"noEmitOnError": true,
 		// Deal with errors in current code
 		"useDefineForClassFields": false, // so we don't need declare on all unitialized properties
-		"baseUrl": ".",
-		// "types": ["jasmine"]
-		// "rootDirs": ["src"]
+		"baseUrl": "."
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*", "demo/**/*"],
 	"exclude": ["node_modules", "src/**/*.spec.ts", "src/tests", "demo/bundle"],
