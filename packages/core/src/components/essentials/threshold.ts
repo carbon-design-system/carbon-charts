@@ -319,6 +319,8 @@ export class Threshold extends Component {
 				PLACEMENTS.BOTTOM,
 			],
 			() => ({
+				top: undefined, // other package lists this as non-optional
+				left: undefined, // ditto
 				width: holder.offsetWidth,
 				height: holder.offsetHeight,
 			})
