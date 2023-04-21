@@ -1,4 +1,4 @@
 [context.deploy-preview]
   command = "./scripts/netlify.sh"
   publish = "pages"
-  environment = { YARN_FLAGS = "--ignore-optional", NODE_VERSION = "14" }
+  environment = { YARN_FLAGS = "--ignore-optional", NODE_VERSION = "14", PYTHON_VERSION = "2.7" }
