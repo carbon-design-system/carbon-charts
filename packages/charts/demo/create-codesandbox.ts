@@ -625,7 +625,6 @@ new Vue({
 			'@carbon/charts': libraryVersion,
 			'@carbon/charts-vue': libraryVersion,
 			'@carbon/styles': '^1.26.0',
-			'@vue/cli-plugin-babel': '^5.0.8',
 			vue: '^2.7.14'
 		}
 	}, null, 2)
