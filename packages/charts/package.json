@@ -22,7 +22,11 @@
 		"./demo": {
 			"import": "./dist/demo/index.mjs",
 			"require": "./dist/demo/index.js"
-		}
+		},
+		"./components": "./src/components/index.ts",
+    "./interfaces": "./src/interfaces/index.ts",
+    "./model": "./src/model/index.ts",
+    "./services": "./src/services/index.ts"
 	},
 	"files": [
 		"dist"
