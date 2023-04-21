@@ -24,9 +24,9 @@
 			"require": "./dist/demo/index.js"
 		},
 		"./components": "./src/components/index.ts",
-    "./interfaces": "./src/interfaces/index.ts",
-    "./model": "./src/model/index.ts",
-    "./services": "./src/services/index.ts"
+		"./interfaces": "./src/interfaces/index.ts",
+		"./model": "./src/model/index.ts",
+		"./services": "./src/services/index.ts"
 	},
 	"files": [
 		"dist"
@@ -105,7 +105,7 @@
 		"@storybook/testing-library": "^0.1.0",
 		"@storybook/theming": "^7.0.6",
 		"@types/d3": "^7.4.0",
-		"@types/node": "^18.15.12",
+		"@types/node": "^18.15.13",
 		"@typescript-eslint/eslint-plugin": "^5.59.0",
 		"@typescript-eslint/parser": "^5.59.0",
 		"codesandbox": "^2.2.3",

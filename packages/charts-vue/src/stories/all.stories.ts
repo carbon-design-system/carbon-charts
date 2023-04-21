@@ -1,5 +1,4 @@
 import { storiesOf, type Args } from '@storybook/vue3'
-import { hrefTo } from '@storybook/addon-links'
 import * as ChartComponents from '../components'
 import { storybookDemoGroups } from '@carbon/charts/demo'
 import { type BaseChartOptions, type ChartTabularData, ChartTheme } from '@carbon/charts'
