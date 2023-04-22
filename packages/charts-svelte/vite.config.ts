@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	plugins: [sveltekit()],
 	optimizeDeps: {
-		include: ['@carbon/charts', 'carbon-components'],
+		include: ['@carbon/charts', 'carbon-components', 'dom-to-image-more'],
 		exclude: ['@carbon/telemetry']
 	},
 	ssr: {

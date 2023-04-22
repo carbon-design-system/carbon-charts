@@ -36,7 +36,7 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"svelte": "^3.57.0"
+		"svelte": "^3.58.0"
 	},
 	"devDependencies": {
 		"@carbon/charts": "workspace:*",
