@@ -23,6 +23,7 @@ export default {
 			'd3-hierarchy': 'd3Hierarchy',
 		},
 	},
+	external: ['dom-to-image-more'],
 	plugins: [resolve(), commonjs(), json(), terser()],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase

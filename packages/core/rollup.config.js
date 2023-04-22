@@ -24,6 +24,7 @@ export default {
 			'd3-time-format': 'd3TimeFormat',
 		},
 	},
+	external: ['dom-to-image-more'],
 	plugins: [
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
