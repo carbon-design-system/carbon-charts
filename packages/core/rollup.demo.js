@@ -2,6 +2,7 @@ import { terser } from 'rollup-plugin-terser';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import json from '@rollup/plugin-json';
+import domToImage from 'dom-to-image-more/src/dom-to-image-more.js';
 
 export default {
 	input: 'dist/demo/data/index.js',
@@ -23,22 +24,18 @@ export default {
 			'd3-hierarchy': 'd3Hierarchy',
 		},
 	},
-	external: ['dom-to-image-more'],
-	plugins: [resolve(), commonjs(), json(), terser()],
-	onwarn(warning, next) {
-		// logs the circular dependencies inside the d3 codebase
-		if (
-			warning.code === 'CIRCULAR_DEPENDENCY' &&
-			warning.importer.indexOf('d3') !== -1
-		) {
-			console.warn(
-				'Circular dependency found in D3:',
-				warning.toString().replace('Circular dependency:', '')
-			);
-			return;
-		}
-
-		next(warning);
-	},
+	plugins: [
+		resolve(),
+		commonjs(),
+		json(),
+    {
+      resolveId(source) {
+        if (source === 'dom-to-image-more') {
+          return domToImage;
+        }
+      },
+    },
+		terser()
+	],
 	external: ['@carbon/charts'],
 };
