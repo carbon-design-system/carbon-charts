@@ -1,7 +1,7 @@
 // Internal Imports
 import { Pie } from './pie'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { RenderTypes } from '../../interfaces'
 
 // D3 Imports
@@ -30,7 +30,7 @@ export class Donut extends Pie {
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius()
-		const donutTitle = Tools.getProperty(options, 'donut', 'center', 'label')
+		const donutTitle = getProperty(options, 'donut', 'center', 'label')
 
 		// Add the number shown in the center of the donut
 		DOMUtils.appendOrSelect(svg, 'text.donut-figure')
@@ -77,7 +77,7 @@ export class Donut extends Pie {
 	centerNumberTween(d3Ref) {
 		const options = this.getOptions()
 
-		let donutCenterFigure = Tools.getProperty(options, 'donut', 'center', 'number')
+		let donutCenterFigure = getProperty(options, 'donut', 'center', 'number')
 		if (donutCenterFigure === null) {
 			donutCenterFigure = this.model.getDisplayData().reduce((accumulator, d) => {
 				return accumulator + d[options.pie.valueMapsTo]

@@ -1,7 +1,7 @@
 // Internal Imports
 import { AxisFlavor, ScaleTypes } from '../interfaces'
 import { ChartModelCartesian } from './cartesian-charts'
-import * as Tools from '../tools'
+import { clone, getProperty, isEmpty } from '../tools'
 
 // d3 imports
 import { extent } from 'd3-array'
@@ -22,18 +22,18 @@ export class HeatmapModel extends ChartModelCartesian {
 		super(services)
 
 		// Check which scale types are being used
-		const axis = Tools.getProperty(this.getOptions(), 'axes')
+		const axis = getProperty(this.getOptions(), 'axes')
 
 		// Need to check options since scale service hasn't been instantiated
 		if (
-			(!!Tools.getProperty(axis, 'left', 'scaleType') &&
-				Tools.getProperty(axis, 'left', 'scaleType') !== ScaleTypes.LABELS) ||
-			(!!Tools.getProperty(axis, 'right', 'scaleType') &&
-				Tools.getProperty(axis, 'right', 'scaleType') !== ScaleTypes.LABELS) ||
-			(!!Tools.getProperty(axis, 'top', 'scaleType') &&
-				Tools.getProperty(axis, 'top', 'scaleType') !== ScaleTypes.LABELS) ||
-			(!!Tools.getProperty(axis, 'bottom', 'scaleType') &&
-				Tools.getProperty(axis, 'bottom', 'scaleType') !== ScaleTypes.LABELS)
+			(!!getProperty(axis, 'left', 'scaleType') &&
+				getProperty(axis, 'left', 'scaleType') !== ScaleTypes.LABELS) ||
+			(!!getProperty(axis, 'right', 'scaleType') &&
+				getProperty(axis, 'right', 'scaleType') !== ScaleTypes.LABELS) ||
+			(!!getProperty(axis, 'top', 'scaleType') &&
+				getProperty(axis, 'top', 'scaleType') !== ScaleTypes.LABELS) ||
+			(!!getProperty(axis, 'bottom', 'scaleType') &&
+				getProperty(axis, 'bottom', 'scaleType') !== ScaleTypes.LABELS)
 		) {
 			throw Error('Heatmap only supports label scaletypes.')
 		}
@@ -84,7 +84,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns String[]
 	 */
 	getUniqueDomain(): string[] {
-		if (Tools.isEmpty(this._domains)) {
+		if (isEmpty(this._domains)) {
 			const displayData = this.getDisplayData()
 			const { cartesianScales } = this.services
 
@@ -115,7 +115,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns String[]
 	 */
 	getUniqueRanges(): string[] {
-		if (Tools.isEmpty(this._ranges)) {
+		if (isEmpty(this._ranges)) {
 			const displayData = this.getDisplayData()
 			const { cartesianScales } = this.services
 
@@ -146,7 +146,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns Object
 	 */
 	getMatrix() {
-		if (Tools.isEmpty(this._matrix)) {
+		if (isEmpty(this._matrix)) {
 			const uniqueDomain = this.getUniqueDomain()
 			const uniqueRange = this.getUniqueRanges()
 
@@ -165,7 +165,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 			// Complete the matrix by cloning the column to all domains
 			uniqueDomain.forEach((dom: any) => {
-				this._matrix[dom] = Tools.clone(range)
+				this._matrix[dom] = clone(range)
 			})
 
 			// Fill in user passed data
@@ -185,7 +185,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const sanitizedData = this.sanitize(Tools.clone(newData))
+		const sanitizedData = this.sanitize(clone(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({
@@ -206,7 +206,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @returns Object[]
 	 */
 	getMatrixAsArray(): Object[] {
-		if (Tools.isEmpty(this._matrix)) {
+		if (isEmpty(this._matrix)) {
 			this.getMatrix()
 		}
 
@@ -269,10 +269,10 @@ export class HeatmapModel extends ChartModelCartesian {
 	protected setColorClassNames() {
 		const options = this.getOptions()
 
-		const customColors = Tools.getProperty(options, 'color', 'gradient', 'colors')
-		const customColorsEnabled = !Tools.isEmpty(customColors)
+		const customColors = getProperty(options, 'color', 'gradient', 'colors')
+		const customColorsEnabled = !isEmpty(customColors)
 
-		let colorPairingOption = Tools.getProperty(options, 'color', 'pairing', 'option')
+		let colorPairingOption = getProperty(options, 'color', 'pairing', 'option')
 
 		// If domain consists of negative and positive values, use diverging palettes
 		const domain = this.getValueDomain()

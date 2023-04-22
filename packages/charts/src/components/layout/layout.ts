@@ -8,7 +8,7 @@ import {
 	RenderTypes,
 	LayoutAlignItems
 } from '../../interfaces/index'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 
@@ -60,7 +60,7 @@ export class LayoutComponent extends Component {
 		svg
 			.selectAll(`div.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
-				const growth = Tools.getProperty(d, 'growth')
+				const growth = getProperty(d, 'growth')
 
 				return growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED
 			})
@@ -76,7 +76,7 @@ export class LayoutComponent extends Component {
 
 		return svg
 			.selectAll(`div.layout-child-${this._instanceID}`)
-			.filter((d: any) => Tools.getProperty(d, 'growth') === LayoutGrowth.STRETCH)
+			.filter((d: any) => getProperty(d, 'growth') === LayoutGrowth.STRETCH)
 			.size()
 	}
 
@@ -90,7 +90,7 @@ export class LayoutComponent extends Component {
 			this.configs.direction === LayoutDirection.ROW ||
 			this.configs.direction === LayoutDirection.ROW_REVERSE
 
-		const chartprefix = Tools.getProperty(this.model.getOptions(), 'style', 'prefix')
+		const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 
 		// Add new boxes to the DOM for each layout child
 		const updatedBoxes = parent
@@ -127,7 +127,7 @@ export class LayoutComponent extends Component {
 				d.components.forEach((itemComponent) => {
 					const selection = select(this)
 
-					const renderType = Tools.getProperty(d, 'renderType')
+					const renderType = getProperty(d, 'renderType')
 					const isRenderingSVG = renderType === RenderTypes.SVG
 					itemComponent.setParent(
 						isRenderingSVG
@@ -138,7 +138,7 @@ export class LayoutComponent extends Component {
 					)
 
 					// Render preffered & fixed items
-					const growth = Tools.getProperty(d, 'growth')
+					const growth = getProperty(d, 'growth')
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render(animate)
 					}
@@ -151,9 +151,9 @@ export class LayoutComponent extends Component {
 			.style('width', null)
 			.each(function (d: any) {
 				// Calculate preffered children sizes after internal rendering
-				const growth = Tools.getProperty(d, 'growth')
+				const growth = getProperty(d, 'growth')
 
-				const renderType = Tools.getProperty(d, 'renderType')
+				const renderType = getProperty(d, 'renderType')
 				const matchingElementDimensions =
 					renderType === RenderTypes.SVG
 						? DOMUtils.getSVGElementSize(select(this).select('svg.layout-svg-wrapper'), {
@@ -176,7 +176,7 @@ export class LayoutComponent extends Component {
 		// Run through stretch x-items
 		this.children
 			.filter((child) => {
-				const growth = Tools.getProperty(child, 'growth')
+				const growth = getProperty(child, 'growth')
 				return growth === LayoutGrowth.STRETCH
 			})
 			.forEach((child, i) => {
@@ -196,7 +196,7 @@ export class LayoutComponent extends Component {
 
 		allUpdatedBoxes.each(function (d: any, i) {
 			d.components.forEach((itemComponent) => {
-				const growth = Tools.getProperty(d, 'growth')
+				const growth = getProperty(d, 'growth')
 				if (growth === LayoutGrowth.STRETCH) {
 					itemComponent.render(animate)
 				}

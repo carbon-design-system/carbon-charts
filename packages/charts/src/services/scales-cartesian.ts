@@ -1,8 +1,8 @@
 // Internal Imports
-import * as Configuration from '../configuration'
+import { axis } from '../configuration'
 import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
-import * as Tools from '../tools'
+import { flatten, getProperty, removeArrayDuplicates } from '../tools'
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale'
@@ -50,7 +50,7 @@ export class CartesianScales extends Service {
 	protected secondaryDomainAxisPosition: AxisPositions
 	protected secondaryRangeAxisPosition: AxisPositions
 
-	protected dualAxes: Boolean
+	protected dualAxes: boolean
 
 	protected orientation: CartesianOrientations
 
@@ -58,7 +58,7 @@ export class CartesianScales extends Service {
 		if (this.dualAxes && datum) {
 			const options = this.model.getOptions()
 			const { groupMapsTo } = options.data
-			const axesOptions = Tools.getProperty(options, 'axes', this.secondaryDomainAxisPosition)
+			const axesOptions = getProperty(options, 'axes', this.secondaryDomainAxisPosition)
 			const dataset = datum[groupMapsTo]
 			if (
 				axesOptions?.correspondingDatasets &&
@@ -74,7 +74,7 @@ export class CartesianScales extends Service {
 		if (this.dualAxes) {
 			const options = this.model.getOptions()
 			const { groupMapsTo } = options.data
-			const axisOptions = Tools.getProperty(options, 'axes', this.secondaryRangeAxisPosition)
+			const axisOptions = getProperty(options, 'axes', this.secondaryRangeAxisPosition)
 			let dataset
 			if (datum !== null) {
 				dataset = datum[groupMapsTo]
@@ -92,7 +92,7 @@ export class CartesianScales extends Service {
 	}
 
 	getAxisOptions(position: AxisPositions) {
-		return Tools.getProperty(this.model.getOptions(), 'axes', position)
+		return getProperty(this.model.getOptions(), 'axes', position)
 	}
 
 	getDomainAxisOptions() {
@@ -107,7 +107,7 @@ export class CartesianScales extends Service {
 
 	getScaleLabel(position: AxisPositions) {
 		const axisOptions = this.getAxisOptions(position)
-		let title = axisOptions.title
+		const title = axisOptions.title
 		if (!title) {
 			if (position === AxisPositions.BOTTOM || position === AxisPositions.TOP) {
 				return 'x-value'
@@ -178,7 +178,7 @@ export class CartesianScales extends Service {
 	// it does not count as dual axes if it just has another axis turned on but is not actually using it to map a dataset
 	determineAxisDuality() {
 		const options = this.model.getOptions()
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const axesOptions = getProperty(options, 'axes')
 
 		if (
 			(axesOptions[AxisPositions.LEFT]?.correspondingDatasets &&
@@ -194,7 +194,7 @@ export class CartesianScales extends Service {
 	}
 
 	getCustomDomainValuesByposition(axisPosition: AxisPositions) {
-		const domain = Tools.getProperty(this.model.getOptions(), 'axes', axisPosition, 'domain')
+		const domain = getProperty(this.model.getOptions(), 'axes', axisPosition, 'domain')
 
 		// Check if domain is an array
 		if (domain && !Array.isArray(domain)) {
@@ -281,10 +281,10 @@ export class CartesianScales extends Service {
 		index?: number
 	) {
 		const options = this.model.getOptions()
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const axesOptions = getProperty(options, 'axes')
 		const axisOptions = axesOptions[axisPosition]
 		const { mapsTo } = axisOptions
-		const value = Tools.getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum
+		const value = getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum
 		let scaledValue
 		switch (scaleType) {
 			case ScaleTypes.LABELS:
@@ -305,19 +305,19 @@ export class CartesianScales extends Service {
 		const scale = this.scales[axisPosition]
 
 		const options = this.model.getOptions()
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const axesOptions = getProperty(options, 'axes')
 		const axisOptions = axesOptions[axisPosition]
 		const { mapsTo } = axisOptions
 		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum
 
 		const boundedValues = [
 			scale(
-				Tools.getProperty(datum, bounds.upperBoundMapsTo) !== null
+				getProperty(datum, bounds.upperBoundMapsTo) !== null
 					? datum[bounds.upperBoundMapsTo]
 					: value
 			),
 			scale(
-				Tools.getProperty(datum, bounds.lowerBoundMapsTo) !== null
+				getProperty(datum, bounds.lowerBoundMapsTo) !== null
 					? datum[bounds.lowerBoundMapsTo]
 					: value
 			)
@@ -353,7 +353,7 @@ export class CartesianScales extends Service {
 
 	getDomainIdentifier(datum?: any) {
 		const options = this.model.getOptions()
-		return Tools.getProperty(
+		return getProperty(
 			options,
 			'axes',
 			this.getDomainAxisPosition({ datum: datum }),
@@ -363,19 +363,19 @@ export class CartesianScales extends Service {
 
 	getRangeIdentifier(datum?: any) {
 		const options = this.model.getOptions()
-		return Tools.getProperty(options, 'axes', this.getRangeAxisPosition({ datum: datum }), 'mapsTo')
+		return getProperty(options, 'axes', this.getRangeAxisPosition({ datum: datum }), 'mapsTo')
 	}
 
 	extendsDomain(axisPosition: AxisPositions, domain: any) {
 		const options = this.model.getOptions()
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, 'timeScale', 'addSpaceOnEdges')
+			const spaceToAddToEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
 			return addSpacingToTimeDomain(domain, spaceToAddToEdges)
 		} else {
 			return addSpacingToContinuousDomain(
 				domain,
-				Configuration.axis.paddingRatio,
+				axis.paddingRatio,
 				axisOptions.scaleType
 			)
 		}
@@ -383,15 +383,15 @@ export class CartesianScales extends Service {
 
 	protected findVerticalAxesPositions() {
 		const options = this.model.getOptions()
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const axesOptions = getProperty(options, 'axes')
 		const dualAxes = this.isDualAxes()
 
 		// If right axis has been specified as `main`
 		if (
-			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
-				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.RIGHT, 'main') === true ||
-			(dualAxes && Tools.getProperty(axesOptions, AxisPositions.LEFT, 'correspondingDatasets'))
+			(getProperty(axesOptions, AxisPositions.LEFT) === null &&
+				getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
+			getProperty(axesOptions, AxisPositions.RIGHT, 'main') === true ||
+			(dualAxes && getProperty(axesOptions, AxisPositions.LEFT, 'correspondingDatasets'))
 		) {
 			return {
 				primary: AxisPositions.RIGHT,
@@ -404,15 +404,15 @@ export class CartesianScales extends Service {
 
 	protected findHorizontalAxesPositions() {
 		const options = this.model.getOptions()
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const axesOptions = getProperty(options, 'axes')
 		const dualAxes = this.isDualAxes()
 
 		// If top axis has been specified as `main`
 		if (
-			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
-				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.TOP, 'main') === true ||
-			(dualAxes && Tools.getProperty(axesOptions, AxisPositions.BOTTOM, 'correspondingDatasets'))
+			(getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
+				getProperty(axesOptions, AxisPositions.TOP) !== null) ||
+			getProperty(axesOptions, AxisPositions.TOP, 'main') === true ||
+			(dualAxes && getProperty(axesOptions, AxisPositions.BOTTOM, 'correspondingDatasets'))
 		) {
 			return {
 				primary: AxisPositions.TOP,
@@ -426,12 +426,12 @@ export class CartesianScales extends Service {
 	protected findDomainAndRangeAxesPositions(verticalAxesPositions, horizontalAxesPositions) {
 		const options = this.model.getOptions()
 
-		const mainVerticalAxisOptions = Tools.getProperty(
+		const mainVerticalAxisOptions = getProperty(
 			options,
 			'axes',
 			verticalAxesPositions.primary
 		)
-		const mainHorizontalAxisOptions = Tools.getProperty(
+		const mainHorizontalAxisOptions = getProperty(
 			options,
 			'axes',
 			horizontalAxesPositions.primary
@@ -475,10 +475,10 @@ export class CartesianScales extends Service {
 
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions()
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
-		const bounds = Tools.getProperty(options, 'bounds')
+		const axisOptions = getProperty(options, 'axes', axisPosition)
+		const bounds = getProperty(options, 'bounds')
 		const { includeZero } = axisOptions
-		const scaleType = Tools.getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
+		const scaleType = getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
 
 		if (this.model.isDataEmpty()) {
 			return []
@@ -497,7 +497,7 @@ export class CartesianScales extends Service {
 
 		const displayData = this.model.getDisplayData()
 		const { extendLinearDomainBy, mapsTo, percentage, thresholds } = axisOptions
-		const { reference: ratioReference, compareTo: ratioCompareTo } = Configuration.axis.ratio
+		const { reference: ratioReference, compareTo: ratioCompareTo } = axis.ratio
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
@@ -519,7 +519,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return Tools.removeArrayDuplicates(displayData.map((d) => d[mapsTo]))
+			return removeArrayDuplicates(displayData.map((d) => d[mapsTo]))
 		}
 
 		// Get the extent of the domain
@@ -557,7 +557,7 @@ export class CartesianScales extends Service {
 				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
 			)
 
-			let stackedValues = []
+			const stackedValues = []
 			dataValuesGroupedByKeys.forEach((dataValues) => {
 				const { sharedStackKey, ...numericalValues } = dataValues
 
@@ -576,7 +576,7 @@ export class CartesianScales extends Service {
 			})
 
 			allDataValues = [
-				...Tools.flatten(stackedValues),
+				...flatten(stackedValues),
 				...nonStackedGroupsData.map((datum) => datum[mapsTo])
 			]
 		} else {
@@ -604,7 +604,7 @@ export class CartesianScales extends Service {
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
 			thresholds.forEach((threshold) => {
-				const thresholdValue = Tools.getProperty(threshold, 'value')
+				const thresholdValue = getProperty(threshold, 'value')
 				if (thresholdValue !== null) allDataValues.push(thresholdValue)
 			})
 		}
@@ -617,13 +617,13 @@ export class CartesianScales extends Service {
 
 	protected createScale(axisPosition: AxisPositions) {
 		const options = this.model.getOptions()
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition)
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 
 		if (!axisOptions) {
 			return null
 		}
 
-		const scaleType = Tools.getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
+		const scaleType = getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
 		this.scaleTypes[axisPosition] = scaleType
 
 		let scale
@@ -646,7 +646,7 @@ export class CartesianScales extends Service {
 		threshold: ThresholdOptions
 		scaleValue: number
 	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), 'axes')
+		const axesOptions = getProperty(this.model.getOptions(), 'axes')
 		const domainAxisPosition = this.getDomainAxisPosition()
 
 		const { thresholds } = axesOptions[domainAxisPosition]
@@ -678,7 +678,7 @@ export class CartesianScales extends Service {
 		threshold: ThresholdOptions
 		scaleValue: number
 	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), 'axes')
+		const axesOptions = getProperty(this.model.getOptions(), 'axes')
 		const rangeAxisPosition = this.getRangeAxisPosition()
 
 		const { thresholds } = axesOptions[rangeAxisPosition]

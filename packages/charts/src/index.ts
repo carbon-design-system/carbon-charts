@@ -5,6 +5,10 @@
   directory structure. Separated into regular and type exports.
 */
 
+// Exports for historic reasons to prevent breaking change - remove in 2.0 (not documented anywhere anyway)
+export * as configurations from './configuration';
+export * as interfaces from './interfaces';
+
 // Base chart classes
 export { AxisChart } from './axis-chart'
 export { Chart } from './chart'
@@ -136,8 +140,8 @@ export {
 	ZoomBarTypes
 } from './interfaces/enums'
 
-// Events
-// TODO: Refactor to make internal naming match public
+// Events with improved naming
+// TODO: Events should be internally renamed to match export so they do not conflict with existing classes
 export {
 	Area as AreaEvent,
 	Axis as AxisEvent,

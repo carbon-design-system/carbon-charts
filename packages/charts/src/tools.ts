@@ -268,7 +268,7 @@ export function truncateLabel(fullText, truncationType, numCharacter) {
  * @param {any} providedOptions
  */
 export function updateLegendAdditionalItems(defaultOptions, providedOptions) {
-	let defaultAdditionalItems = getProperty(defaultOptions, 'legend', 'additionalItems')
+	const defaultAdditionalItems = getProperty(defaultOptions, 'legend', 'additionalItems')
 	const userProvidedAdditionalItems = getProperty(providedOptions, 'legend', 'additionalItems')
 
 	// Retain default legend additional items

@@ -1,11 +1,8 @@
 // Internal Imports
 import { Service } from '../service'
-import * as Configuration from '../../configuration'
+import { transitions } from '../../configuration'
 import { Events } from '../../interfaces'
-import * as Tools from '../../tools'
-
-// D3 Imports
-import { Transition, transition } from 'd3-transition'
+import { getProperty } from '../../tools'
 
 export interface setupTransitionConfigs {
 	transition?: any // d3 types are causing issues here, hence why using `any`
@@ -33,8 +30,8 @@ export class Transitions extends Service {
 		}
 
 		return t.duration(
-			Tools.getProperty(Configuration.transitions, name, 'duration') ||
-				Configuration.transitions.default.duration
+			getProperty(transitions, name, 'duration') ||
+				transitions.default.duration
 		)
 	}
 

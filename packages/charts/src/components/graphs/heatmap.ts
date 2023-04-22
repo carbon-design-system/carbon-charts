@@ -1,8 +1,8 @@
 // Internal Imports
 import { Component } from '../component'
-import * as Configuration from '../../configuration'
+import { heatmap } from '../../configuration'
 import { Events, RenderTypes, DividerStatus } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty, getTranformOffsets } from '../../tools'
 import { DOMUtils } from '../../services'
 
 import { get } from 'lodash-es'
@@ -39,7 +39,7 @@ export class Heatmap extends Component {
 		eventsFragment.addEventListener(Events.Axis.LABEL_BLUR, this.handleAxisMouseOut)
 	}
 
-	render(animate = true) {
+	render() {
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		// Lower the chart so the axes are always visible
 		svg.lower()
@@ -49,7 +49,7 @@ export class Heatmap extends Component {
 
 		svg.html('')
 
-		if (Tools.getProperty(this.getOptions(), 'data', 'loading')) {
+		if (getProperty(this.getOptions(), 'data', 'loading')) {
 			return
 		}
 
@@ -182,14 +182,14 @@ export class Heatmap extends Component {
 
 	private determineDividerStatus(): boolean {
 		// Add dividers if status is not off, will assume auto or on by default.
-		const dividerStatus = Tools.getProperty(this.getOptions(), 'heatmap', 'divider', 'state')
+		const dividerStatus = getProperty(this.getOptions(), 'heatmap', 'divider', 'state')
 
 		// Determine if cell divider should be displayed
 		if (dividerStatus !== DividerStatus.OFF) {
 			if (
 				(dividerStatus === DividerStatus.AUTO &&
-					Configuration.heatmap.minCellDividerDimension <= this.xBandwidth &&
-					Configuration.heatmap.minCellDividerDimension <= this.yBandwidth) ||
+					heatmap.minCellDividerDimension <= this.xBandwidth &&
+					heatmap.minCellDividerDimension <= this.yBandwidth) ||
 				dividerStatus === DividerStatus.ON
 			) {
 				return true
@@ -221,7 +221,7 @@ export class Heatmap extends Component {
 				// Dispatch event and tooltip only if value exists
 				if (!nullState) {
 					// Get transformation value of node
-					const transform = Tools.getTranformOffsets(cell.attr('transform'))
+					const transform = getTranformOffsets(cell.attr('transform'))
 
 					self.parent
 						.select('g.cell-highlight')

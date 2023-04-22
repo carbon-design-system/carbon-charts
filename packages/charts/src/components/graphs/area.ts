@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from '../component'
-import * as Configuration from '../../configuration'
+import { area as configArea } from '../../configuration'
 import { CartesianOrientations, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { GradientUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 // D3 Imports
 import { area } from 'd3-shape'
@@ -47,7 +47,7 @@ export class Area extends Component {
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData(this.configs.groups)
 
-		const bounds = Tools.getProperty(options, 'bounds')
+		const bounds = getProperty(options, 'bounds')
 		const boundsEnabled = bounds && groupedData && groupedData.length === 1
 
 		if (!boundsEnabled && bounds) {
@@ -59,7 +59,7 @@ export class Area extends Component {
 		let upperBoundRangeValue = 0
 		// If includeZero is enabled, we want to replace upperBoundRange from 0 to domain value
 		const includeZeroInRangeValue = (position, domain) => {
-			if (Tools.getProperty(options, 'axes', position, 'includeZero') === false) {
+			if (getProperty(options, 'axes', position, 'includeZero') === false) {
 				// Replace upperBoundRangeValue if domain is positive
 				if (domain[0] > 0 && domain[1] > 0) {
 					upperBoundRangeValue = domain[0]
@@ -96,7 +96,7 @@ export class Area extends Component {
 		}
 
 		// Is gradient enabled or not
-		const isGradientEnabled = Tools.getProperty(options, 'color', 'gradient', 'enabled')
+		const isGradientEnabled = getProperty(options, 'color', 'gradient', 'enabled')
 
 		// Should gradient style be applicable
 		const isGradientAllowed = groupedData && groupedData.length === 1 && isGradientEnabled
@@ -137,7 +137,7 @@ export class Area extends Component {
 					'stroke'
 				)
 			} else {
-				const sparklineColorObject = Tools.getProperty(this.model.getOptions(), 'color', 'scale')
+				const sparklineColorObject = getProperty(this.model.getOptions(), 'color', 'scale')
 
 				if (sparklineColorObject !== null) {
 					const sparklineColorObjectKeys = Object.keys(sparklineColorObject)
@@ -211,7 +211,7 @@ export class Area extends Component {
 						animate
 					})
 				)
-				.attr('opacity', boundsEnabled ? 1 : Configuration.area.opacity.selected)
+				.attr('opacity', boundsEnabled ? 1 : configArea.opacity.selected)
 				.attr('d', (group) => {
 					const { data } = group
 					return areaGenerator(data)
@@ -219,7 +219,7 @@ export class Area extends Component {
 
 			if (boundsEnabled) {
 				enteringAreas
-					.attr('fill-opacity', Configuration.area.opacity.selected)
+					.attr('fill-opacity', configArea.opacity.selected)
 					.style('stroke', (group) => self.model.getStrokeColor(group.name))
 					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 0.7 + 'px')
@@ -241,10 +241,10 @@ export class Area extends Component {
 			)
 			.attr('opacity', (group) => {
 				if (group.name !== hoveredElement.datum()['name']) {
-					return Configuration.area.opacity.unselected
+					return configArea.opacity.unselected
 				}
 
-				return Configuration.area.opacity.selected
+				return configArea.opacity.selected
 			})
 	}
 
@@ -258,7 +258,7 @@ export class Area extends Component {
 					name: 'legend-mouseout-area'
 				})
 			)
-			.attr('opacity', Configuration.area.opacity.selected)
+			.attr('opacity', configArea.opacity.selected)
 	}
 
 	destroy() {

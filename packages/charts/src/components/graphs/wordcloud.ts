@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { debounce } from '../../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -169,7 +169,7 @@ export class WordCloud extends Component {
 		const self = this
 
 		// Highlights 1 word or unhighlights all
-		const debouncedHighlight = Tools.debounce((word) => {
+		const debouncedHighlight = debounce((word) => {
 			const allWords = self.parent
 				.selectAll('text.word')
 				.transition('wordcloud-word-mouse-highlight')

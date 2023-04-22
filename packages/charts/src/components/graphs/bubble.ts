@@ -2,7 +2,7 @@
 import { Scatter } from './scatter'
 import { DOMUtils } from '../../services'
 import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 
 // D3 Imports
 import type { Selection } from 'd3-selection'
@@ -43,7 +43,7 @@ export class Bubble extends Scatter {
 		const { cartesianScales } = this.services
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
@@ -89,12 +89,12 @@ export class Bubble extends Scatter {
 	}
 
 	getTooltipAdditionalItems(datum) {
-		const bubbleOptions = Tools.getProperty(this.getOptions(), 'bubble')
+		const bubbleOptions = getProperty(this.getOptions(), 'bubble')
 
 		return [
 			{
-				label: Tools.getProperty(bubbleOptions, 'radiusLabel'),
-				value: datum[Tools.getProperty(bubbleOptions, 'radiusMapsTo')]
+				label: getProperty(bubbleOptions, 'radiusLabel'),
+				value: datum[getProperty(bubbleOptions, 'radiusMapsTo')]
 			}
 		]
 	}

@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 
 // D3 Imports
 import { select, Selection } from 'd3-selection'
@@ -66,8 +66,8 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		const isScatterEnabled =
-			Tools.getProperty(this.getOptions(), 'points', 'enabled') ||
-			Tools.getProperty(this.getOptions(), 'bubble', 'enabled')
+			getProperty(this.getOptions(), 'points', 'enabled') ||
+			getProperty(this.getOptions(), 'bubble', 'enabled')
 
 		if (!isScatterEnabled) {
 			return
@@ -111,13 +111,13 @@ export class Scatter extends Component {
 		const orientation = cartesianScales.getOrientation()
 
 		// Get highest domain and range thresholds
-		const [xThreshold, yThreshold] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [xThreshold, yThreshold] = flipDomainAndRangeBasedOnOrientation(
 			this.services.cartesianScales.getHighestDomainThreshold(),
 			this.services.cartesianScales.getHighestRangeThreshold(),
 			orientation
 		)
 
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			(d, i) => this.services.cartesianScales.getDomainValue(d, i),
 			(d, i) => this.services.cartesianScales.getRangeValue(d, i),
 			orientation
@@ -152,7 +152,7 @@ export class Scatter extends Component {
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()

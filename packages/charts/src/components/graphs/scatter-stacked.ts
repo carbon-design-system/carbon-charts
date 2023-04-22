@@ -1,14 +1,14 @@
 // Internal Imports
 import { Scatter } from './scatter'
 import { RenderTypes, Roles } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 export class StackedScatter extends Scatter {
 	type = 'scatter-stacked'
 	renderType = RenderTypes.SVG
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.getOptions(), 'points', 'enabled')
+		const isScatterEnabled = getProperty(this.getOptions(), 'points', 'enabled')
 		if (!isScatterEnabled) {
 			return
 		}
@@ -27,7 +27,7 @@ export class StackedScatter extends Scatter {
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
 
 		// Remove dot groups that need to be removed
 		circleGroups.exit().attr('opacity', 0).remove()

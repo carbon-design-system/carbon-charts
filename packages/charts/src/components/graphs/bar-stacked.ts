@@ -1,5 +1,5 @@
 // Internal Imports
-import * as Tools from '../../tools'
+import { generateSVGPathString, getProperty } from '../../tools'
 import { Bar } from './bar'
 import {
 	Roles,
@@ -46,7 +46,7 @@ export class StackedBar extends Bar {
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(stackData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackData, (d) => getProperty(d, 0, groupMapsTo))
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -133,7 +133,7 @@ export class StackedBar extends Bar {
 					}
 				}
 
-				return Tools.generateSVGPathString(
+				return generateSVGPathString(
 					{ x0, x1, y0, y1 },
 					this.services.cartesianScales.getOrientation()
 				)
@@ -270,7 +270,7 @@ export class StackedBar extends Bar {
 
 	protected getBarWidth() {
 		const options = this.getOptions()
-		if (Tools.getProperty(options, 'bars', 'width')) {
+		if (getProperty(options, 'bars', 'width')) {
 			return options.bars.width
 		}
 		const mainXScale = this.services.cartesianScales.getMainXScale()
@@ -280,7 +280,7 @@ export class StackedBar extends Bar {
 
 		const numberOfDomainValues = this.model.getStackKeys().length
 
-		const spacingFactor = Tools.getProperty(options, 'bars', 'spacingFactor')
+		const spacingFactor = getProperty(options, 'bars', 'spacingFactor')
 
 		if (!mainXScale.step) {
 			return Math.min(options.bars.maxWidth, (chartWidth * spacingFactor) / numberOfDomainValues)

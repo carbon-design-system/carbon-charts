@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { generateSVGPathString, getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 
 // D3 Imports
@@ -100,7 +100,7 @@ export class Bullet extends Component {
 						y1 = rangeScaleEnd
 					}
 
-					return Tools.generateSVGPathString(
+					return generateSVGPathString(
 						{ x0, x1, y0, y1 },
 						this.services.cartesianScales.getOrientation()
 					)
@@ -152,7 +152,7 @@ export class Bullet extends Component {
 					const y0 = this.services.cartesianScales.getRangeValue(0) + 1
 					const y1 = this.services.cartesianScales.getRangeValue(d, i)
 
-					return Tools.generateSVGPathString(
+					return generateSVGPathString(
 						{ x0, x1, y0, y1 },
 						this.services.cartesianScales.getOrientation()
 					)
@@ -169,7 +169,7 @@ export class Bullet extends Component {
 			const lines = DOMUtils.appendOrSelect(svg, 'g.markers')
 				.selectAll('path.marker')
 				.data(
-					data.filter((d) => Tools.getProperty(d, 'marker') !== null),
+					data.filter((d) => getProperty(d, 'marker') !== null),
 					(datum) => datum[groupMapsTo]
 				)
 
@@ -203,7 +203,7 @@ export class Bullet extends Component {
 					const y0 = this.services.cartesianScales.getRangeValue(d.marker, i)
 					const y1 = y0
 
-					return Tools.generateSVGPathString(
+					return generateSVGPathString(
 						{ x0, x1, y0, y1 },
 						this.services.cartesianScales.getOrientation()
 					)
@@ -214,7 +214,7 @@ export class Bullet extends Component {
 		const renderTargetQuartiles = () => {
 			let quartilesData = []
 			data
-				.filter((d) => Tools.getProperty(d, 'marker') !== null)
+				.filter((d) => getProperty(d, 'marker') !== null)
 				.forEach((d) => {
 					const value = d.marker
 					const barValue = d[rangeIdentifier]
@@ -269,7 +269,7 @@ export class Bullet extends Component {
 					const y0 = this.services.cartesianScales.getRangeValue(value, i)
 					const y1 = y0
 
-					return Tools.generateSVGPathString(
+					return generateSVGPathString(
 						{ x0, x1, y0, y1 },
 						this.services.cartesianScales.getOrientation()
 					)
@@ -336,7 +336,7 @@ export class Bullet extends Component {
 					datum
 				})
 
-				const performanceAreaTitles = Tools.getProperty(options, 'bullet', 'performanceAreaTitles')
+				const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
 				const matchingRangeIndex = self.model.getMatchingRangeIndexForDatapoint(datum)
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {

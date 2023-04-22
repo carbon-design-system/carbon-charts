@@ -1,5 +1,5 @@
 import { Component } from '../component'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 import { AxisPositions, Events, RenderTypes, ScaleTypes } from '../../interfaces'
@@ -27,7 +27,7 @@ export class Threshold extends Component {
 	}
 
 	render(animate = false) {
-		const axesOptions = Tools.getProperty(this.getOptions(), 'axes')
+		const axesOptions = getProperty(this.getOptions(), 'axes')
 
 		const thresholdData = []
 
@@ -109,7 +109,7 @@ export class Threshold extends Component {
 			const orientation = cartesianScales.getOrientation()
 			const getDomainValue = (d) => cartesianScales.getDomainValue(d)
 			const getRangeValue = (d) => cartesianScales.getRangeValue(d)
-			const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 				getDomainValue,
 				getRangeValue,
 				orientation
@@ -196,7 +196,7 @@ export class Threshold extends Component {
 			const mainYScale = this.services.cartesianScales.getMainYScale()
 			const scale = isVertical ? mainYScale : mainXScale
 
-			const timeScaleOptions = Tools.getProperty(options, 'timeScale')
+			const timeScaleOptions = getProperty(options, 'timeScale')
 			const timeInterval = computeTimeIntervalName(scale.ticks())
 			return formatTick(value, 0, scale.ticks(), timeInterval, timeScaleOptions)
 		}
@@ -207,7 +207,7 @@ export class Threshold extends Component {
 	appendThresholdLabel() {
 		const holder = select(this.services.domUtils.getHolder())
 
-		const chartprefix = Tools.getProperty(this.getOptions(), 'style', 'prefix')
+		const chartprefix = getProperty(this.getOptions(), 'style', 'prefix')
 
 		this.label = DOMUtils.appendOrSelect(
 			holder,
@@ -264,7 +264,7 @@ export class Threshold extends Component {
 
 		// We only need to specify group only if correpsonding dataset is defined
 		if (d.correspondingDatasets) {
-			datum['group'] = Tools.getProperty(d, 'correspondingDatasets', 0)
+			datum['group'] = getProperty(d, 'correspondingDatasets', 0)
 		}
 
 		// Add attribute with the mapsTo value as key

@@ -1,8 +1,7 @@
 // Internal Imports
-import * as Configuration from '../configuration'
+import { color, legend } from '../configuration'
 import { histogram as histogramConfigs } from '../configuration-non-customizable'
-
-import * as Tools from '../tools'
+import { clone, fromPairs, getProperty, groupBy, merge, removeArrayDuplicates, updateLegendAdditionalItems } from '../tools'
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
 
 // D3
@@ -45,8 +44,8 @@ export class ChartModel {
 		// Remove datasets that have been disabled
 		let allData = this.getData()
 		const dataGroups = this.getDataGroups()
-		const { groupMapsTo } = Tools.getProperty(options, 'data')
-		const axesOptions = Tools.getProperty(options, 'axes')
+		const { groupMapsTo } = getProperty(options, 'data')
+		const axesOptions = getProperty(options, 'axes')
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
@@ -96,7 +95,7 @@ export class ChartModel {
 			return null
 		}
 
-		const { ACTIVE } = Configuration.legend.items.status
+		const { ACTIVE } = legend.items.status
 		const dataGroups = this.getDataGroups(groups)
 		const { groupMapsTo } = this.getOptions().data
 		const allDataFromDomain = this.getAllDataFromDomain(groups)
@@ -121,7 +120,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const sanitizedData = this.sanitize(Tools.clone(newData))
+		const sanitizedData = this.sanitize(clone(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({
@@ -133,7 +132,7 @@ export class ChartModel {
 	}
 
 	getDataGroups(groups?) {
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		// No data should be displayed while data is still loading
 		if (isDataLoading) {
@@ -148,7 +147,7 @@ export class ChartModel {
 	}
 
 	getActiveDataGroups(groups?) {
-		const { ACTIVE } = Configuration.legend.items.status
+		const { ACTIVE } = legend.items.status
 
 		return this.getDataGroups(groups).filter((dataGroup) => dataGroup.status === ACTIVE)
 	}
@@ -164,7 +163,7 @@ export class ChartModel {
 	}
 
 	private aggregateBinDataByGroup(bin) {
-		return Tools.groupBy(bin, 'group')
+		return groupBy(bin, 'group')
 	}
 
 	getBinConfigurations() {
@@ -282,7 +281,7 @@ export class ChartModel {
 		if (bins) {
 			stackKeys = bins.map((bin) => `${bin.x0}-${bin.x1}`)
 		} else {
-			stackKeys = Tools.removeArrayDuplicates(
+			stackKeys = removeArrayDuplicates(
 				displayData.map((datum) => {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
@@ -379,7 +378,7 @@ export class ChartModel {
 		})
 
 		if (percentage) {
-			const maxByKey = Tools.fromPairs(
+			const maxByKey = fromPairs(
 				dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0])
 			)
 
@@ -450,10 +449,10 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		const options = this.getOptions()
-		Tools.updateLegendAdditionalItems(options, newOptions)
+		updateLegendAdditionalItems(options, newOptions)
 
 		this.set({
-			options: Tools.merge(options, newOptions)
+			options: merge(options, newOptions)
 		})
 	}
 
@@ -478,7 +477,7 @@ export class ChartModel {
 	 * Data labels
 	 */
 	toggleDataLabel(changedLabel: string) {
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status
+		const { ACTIVE, DISABLED } = legend.items.status
 		const dataGroups = this.getDataGroups()
 
 		const hasDeactivatedItems = dataGroups.some((group) => group.status === DISABLED)
@@ -548,7 +547,7 @@ export class ChartModel {
 
 	getFillColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions()
-		const defaultFillColor = Tools.getProperty(this.colorScale, group)
+		const defaultFillColor = getProperty(this.colorScale, group)
 
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor)
@@ -559,7 +558,7 @@ export class ChartModel {
 
 	getStrokeColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions()
-		const defaultStrokeColor = Tools.getProperty(this.colorScale, group)
+		const defaultStrokeColor = getProperty(this.colorScale, group)
 
 		if (options.getStrokeColor) {
 			return options.getStrokeColor(group, key, data, defaultStrokeColor)
@@ -569,7 +568,7 @@ export class ChartModel {
 	}
 
 	isUserProvidedColorScaleValid() {
-		const userProvidedScale = Tools.getProperty(this.getOptions(), 'color', 'scale')
+		const userProvidedScale = getProperty(this.getOptions(), 'color', 'scale')
 		const dataGroups = this.getDataGroups()
 
 		if (userProvidedScale == null || Object.keys(userProvidedScale).length == 0) {
@@ -624,9 +623,9 @@ export class ChartModel {
 			dataset.data.forEach((datum, i) => {
 				let group
 
-				const datasetLabel = Tools.getProperty(dataset, 'label')
+				const datasetLabel = getProperty(dataset, 'label')
 				if (datasetLabel === null) {
-					const correspondingLabel = Tools.getProperty(labels, i)
+					const correspondingLabel = getProperty(labels, i)
 					if (correspondingLabel) {
 						group = correspondingLabel
 					} else {
@@ -661,7 +660,7 @@ export class ChartModel {
 
 	exportToCSV() {
 		const data = this.getTabularDataArray().map((row) =>
-			row.map((column) => `\"${column === '&ndash;' ? '–' : column}\"`)
+			row.map((column) => `"${column === '&ndash;' ? '–' : column}"`)
 		)
 
 		let csvString = '',
@@ -717,10 +716,10 @@ export class ChartModel {
 
 	protected generateDataGroups(data) {
 		const { groupMapsTo } = this.getOptions().data
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status
+		const { ACTIVE, DISABLED } = legend.items.status
 		const options = this.getOptions()
 
-		const uniqueDataGroups = Tools.removeArrayDuplicates(data.map((datum) => datum[groupMapsTo]))
+		const uniqueDataGroups = removeArrayDuplicates(data.map((datum) => datum[groupMapsTo]))
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {
@@ -753,7 +752,7 @@ export class ChartModel {
 		}
 
 		const options = this.getOptions()
-		const userProvidedScale = Tools.getProperty(options, 'color', 'scale')
+		const userProvidedScale = getProperty(options, 'color', 'scale')
 
 		Object.keys(userProvidedScale).forEach((dataGroup) => {
 			if (!this.allDataGroups.includes(dataGroup)) {
@@ -778,16 +777,16 @@ export class ChartModel {
 	 * Color palette
 	 */
 	protected setColorClassNames() {
-		const colorPairingOptions = Tools.getProperty(this.getOptions(), 'color', 'pairing')
+		const colorPairingOptions = getProperty(this.getOptions(), 'color', 'pairing')
 
 		// Check if user has defined numberOfVariants (differ from given data)
-		let numberOfVariants = Tools.getProperty(colorPairingOptions, 'numberOfVariants')
+		let numberOfVariants = getProperty(colorPairingOptions, 'numberOfVariants')
 		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
 			numberOfVariants = this.allDataGroups.length
 		}
 
-		let pairingOption = Tools.getProperty(colorPairingOptions, 'option')
-		const colorPairingCounts = Configuration.color.pairingOptions
+		let pairingOption = getProperty(colorPairingOptions, 'option')
+		const colorPairingCounts = color.pairingOptions
 
 		// If number of dataGroups is greater than 5, user 14-color palette
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants

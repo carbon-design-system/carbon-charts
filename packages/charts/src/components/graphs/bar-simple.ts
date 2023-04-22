@@ -7,7 +7,7 @@ import {
 	ColorClassNameTypes,
 	CartesianOrientations
 } from '../../interfaces'
-import * as Tools from '../../tools'
+import { generateSVGPathString } from '../../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -109,7 +109,7 @@ export class SimpleBar extends Bar {
 					return
 				}
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 			.attr('opacity', 1)
 			// a11y

@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModelCartesian } from './cartesian-charts'
-import * as Tools from '../tools'
+import { getProperty } from '../tools'
 
 /**
  * Bullet chart model layer
@@ -35,7 +35,7 @@ export class BulletChartModel extends ChartModelCartesian {
 		const { groupMapsTo } = options.data
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
-		const performanceAreaTitles = Tools.getProperty(options, 'bullet', 'performanceAreaTitles')
+		const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
 
 		const result = [
 			['Title', 'Group', 'Value', 'Target', 'Percentage', 'Performance'],
@@ -43,8 +43,8 @@ export class BulletChartModel extends ChartModelCartesian {
 				datum['title'],
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'],
-				Tools.getProperty(datum, 'marker') === null ? '&ndash;' : datum['marker'],
-				Tools.getProperty(datum, 'marker') === null
+				getProperty(datum, 'marker') === null ? '&ndash;' : datum['marker'],
+				getProperty(datum, 'marker') === null
 					? '&ndash;'
 					: `${Math.floor((datum[rangeIdentifier] / datum.marker) * 100)}%`,
 				performanceAreaTitles[this.getMatchingRangeIndexForDatapoint(datum)]

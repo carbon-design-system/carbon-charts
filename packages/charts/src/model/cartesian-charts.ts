@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from './model'
-import * as Tools from '../tools'
+import { clone, getProperty, removeArrayDuplicates } from '../tools'
 import { ScaleTypes, AxisPositions, AxisFlavor } from '../interfaces'
 
 // date formatting
@@ -40,7 +40,7 @@ export class ChartModelCartesian extends ChartModel {
 				scales[scale] = {
 					position: position,
 					label: cartesianScales.getScaleLabel(position),
-					identifier: Tools.getProperty(options, 'axes', position, 'mapsTo')
+					identifier: getProperty(options, 'axes', position, 'mapsTo')
 				}
 			} else {
 				scales[scale] = null
@@ -107,9 +107,9 @@ export class ChartModelCartesian extends ChartModel {
 		let data
 		if (newData) {
 			data = super.setData(newData)
-			if (Tools.getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'enabled')) {
+			if (getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'enabled')) {
 				// get pre-defined zoom bar data
-				const definedZoomBarData = Tools.getProperty(
+				const definedZoomBarData = getProperty(
 					this.getOptions(),
 					'zoomBar',
 					AxisPositions.TOP,
@@ -129,7 +129,7 @@ export class ChartModelCartesian extends ChartModel {
 	 */
 	setZoomBarData(newZoomBarData?) {
 		const sanitizedData = newZoomBarData
-			? this.sanitize(Tools.clone(newZoomBarData))
+			? this.sanitize(clone(newZoomBarData))
 			: this.getDisplayData() // if we're not passed explicit zoom data use the model
 
 		let zoomBarNormalizedValues = sanitizedData
@@ -140,7 +140,7 @@ export class ChartModelCartesian extends ChartModel {
 			const rangeIdentifier = cartesianScales.getRangeIdentifier()
 			// get all dates (Number) in displayData
 			let allDates = sanitizedData.map((datum) => datum[domainIdentifier].getTime())
-			allDates = Tools.removeArrayDuplicates(allDates).sort()
+			allDates = removeArrayDuplicates(allDates).sort()
 
 			// Go through all date values
 			// And get corresponding data from each dataset
@@ -192,7 +192,7 @@ export class ChartModelCartesian extends ChartModel {
 			// Check all datapoints and sanitize dates
 			data.forEach((datum) => {
 				keysToCheck.forEach((key) => {
-					if (Tools.getProperty(datum, key, 'getTime') === null) {
+					if (getProperty(datum, key, 'getTime') === null) {
 						datum[key] = new Date(datum[key])
 					}
 				})

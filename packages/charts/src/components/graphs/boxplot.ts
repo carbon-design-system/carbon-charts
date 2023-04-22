@@ -7,8 +7,8 @@ import {
 	RenderTypes,
 	Roles
 } from '../../interfaces'
-import * as Tools from '../../tools'
-import * as Configuration from '../../configuration'
+import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '../../tools'
+import { boxplot } from '../../configuration'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -43,7 +43,7 @@ export class Boxplot extends Component {
 		const { cartesianScales } = this.services
 		const orientation = cartesianScales.getOrientation()
 		const isInVerticalOrientation = orientation === CartesianOrientations.VERTICAL
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			(d, i?) => this.services.cartesianScales.getDomainValue(d, i),
 			(d, i?) => this.services.cartesianScales.getRangeValue(d, i),
 			orientation
@@ -77,7 +77,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line start'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
 			.call((t) =>
@@ -93,7 +93,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
 				const y1 = cartesianScales.getRangeValue(d.quartiles.q_25)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		// End range line
@@ -106,7 +106,7 @@ export class Boxplot extends Component {
 					originalClassName: 'vertical-line end'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
 			.call((t) =>
@@ -122,7 +122,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
 				const y1 = cartesianScales.getRangeValue(d.quartiles.q_75)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -137,8 +137,8 @@ export class Boxplot extends Component {
 					originalClassName: 'box'
 				})
 			)
-			.attr('fill-opacity', Configuration.boxplot.box.opacity.default)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('fill-opacity', boxplot.box.opacity.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
 			.attr('aria-label', (d) => d[groupMapsTo])
@@ -163,7 +163,7 @@ export class Boxplot extends Component {
 							cartesianScales.getRangeValue(d.quartiles.q_25)
 					)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -180,7 +180,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
 				const y1 = cartesianScales.getRangeValue(d.whiskers.max)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -195,7 +195,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker start'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
+			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
 			.call((t) =>
@@ -211,7 +211,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
 				const y1 = cartesianScales.getRangeValue(d.whiskers.min)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -242,7 +242,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.quartiles.q_50)
 				const y1 = y0
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -257,7 +257,7 @@ export class Boxplot extends Component {
 					originalClassName: 'whisker end'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
+			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
 			.call((t) =>
@@ -273,7 +273,7 @@ export class Boxplot extends Component {
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
 				const y1 = cartesianScales.getRangeValue(d.whiskers.max)
 
-				return Tools.generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
 			})
 
 		/*
@@ -296,14 +296,14 @@ export class Boxplot extends Component {
 
 		circles
 			.merge(circlesEnter)
-			.attr('r', Configuration.boxplot.circle.radius)
+			.attr('r', boxplot.circle.radius)
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 					originalClassName: 'outlier'
 				})
 			)
-			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
+			.attr('fill-opacity', boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
 			.transition()
 			.call((t) =>
@@ -333,7 +333,7 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', true)
-					.attr('fill-opacity', Configuration.boxplot.box.opacity.hovered)
+					.attr('fill-opacity', boxplot.box.opacity.hovered)
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -409,7 +409,7 @@ export class Boxplot extends Component {
 				parentElement
 					.select('path.box')
 					.classed('hovered', false)
-					.attr('fill-opacity', Configuration.boxplot.box.opacity.default)
+					.attr('fill-opacity', boxplot.box.opacity.default)
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_MOUSEOUT, {
@@ -440,7 +440,7 @@ export class Boxplot extends Component {
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr('fill-opacity', Configuration.boxplot.circle.opacity.hovered)
+					.attr('fill-opacity', boxplot.circle.opacity.hovered)
 					.classed('unfilled', false)
 
 				// Show tooltip for single datapoint
@@ -495,7 +495,7 @@ export class Boxplot extends Component {
 				const hoveredElement = select(this)
 				hoveredElement
 					.classed('hovered', false)
-					.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
+					.attr('fill-opacity', boxplot.circle.opacity.default)
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_MOUSEOUT, {

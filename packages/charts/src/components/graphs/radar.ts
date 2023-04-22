@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, Roles, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
-import * as Tools from '../../tools'
+import { flatMapDeep, getProperty, kebabCase, merge } from '../../tools'
 import {
 	Point,
 	Angle,
@@ -11,7 +11,7 @@ import {
 	polarToCartesianCoords,
 	distanceBetweenPointOnCircAndVerticalDiameter
 } from '../../services/angle-utils'
-import * as Configuration from '../../configuration'
+import { radar } from '../../configuration'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -49,13 +49,13 @@ export class Radar extends Component {
 
 		const options = this.getOptions()
 
-		const groupMapsTo = Tools.getProperty(options, 'data', 'groupMapsTo')
-		const valueMapsTo = Tools.getProperty(options, 'radar', 'axes', 'value')
+		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
+		const valueMapsTo = getProperty(options, 'radar', 'axes', 'value')
 
-		const { angle, value } = Tools.getProperty(options, 'radar', 'axes')
+		const { angle, value } = getProperty(options, 'radar', 'axes')
 
 		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight } =
-			Configuration.radar
+			radar
 
 		this.uniqueKeys = Array.from(new Set(data.map((d) => d[angle])))
 		this.uniqueGroups = Array.from(new Set(data.map((d) => d[groupMapsTo])))
@@ -187,7 +187,7 @@ export class Radar extends Component {
 				enter
 					.append('line')
 					.attr('opacity', 0)
-					.attr('class', (key) => `x-axis-${Tools.kebabCase(key)}`) // replace spaces with -
+					.attr('class', (key) => `x-axis-${kebabCase(key)}`) // replace spaces with -
 					.attr('stroke-dasharray', '0')
 					.attr('x1', (key) => polarToCartesianCoords(xScale(key), 0, c).x)
 					.attr('y1', (key) => polarToCartesianCoords(xScale(key), 0, c).y)
@@ -296,7 +296,7 @@ export class Radar extends Component {
 						.end()
 						.finally(() => {
 							// Align chart horizontally after x-axies has finished rendering
-							const alignment = Tools.getProperty(options, 'radar', 'alignment')
+							const alignment = getProperty(options, 'radar', 'alignment')
 
 							const alignmentXOffset = this.getAlignmentXOffset(alignment, svg, this.getParent())
 							svg.attr('x', alignmentXOffset)
@@ -345,7 +345,7 @@ export class Radar extends Component {
 							: `translate(${c.x}, ${c.y})`
 					)
 					.style('fill', (group) => colorScale(group.name))
-					.style('fill-opacity', Configuration.radar.opacity.selected)
+					.style('fill-opacity', radar.opacity.selected)
 					.style('stroke', (group) => colorScale(group.name))
 
 					.call((selection) => {
@@ -420,7 +420,7 @@ export class Radar extends Component {
 		const dotsUpdate = dots
 			.selectAll('circle')
 			// Filter out dots with no value so they are not rendered
-			.data(this.fullDataNormalized.filter((d) => Tools.getProperty(d, value) !== null))
+			.data(this.fullDataNormalized.filter((d) => getProperty(d, value) !== null))
 
 		dotsUpdate
 			.join(
@@ -436,7 +436,7 @@ export class Radar extends Component {
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: Tools.kebabCase(d[angle])
+					originalClassName: kebabCase(d[angle])
 				})
 			)
 			.attr('cx', (d) => polarToCartesianCoords(xScale(d[angle]), yScale(d[value]), c).x)
@@ -560,9 +560,9 @@ export class Radar extends Component {
 	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: any) => {
 		const options = this.getOptions()
-		const { angle, value } = Tools.getProperty(options, 'radar', 'axes')
-		const groupMapsTo = Tools.getProperty(options, 'data', 'groupMapsTo')
-		const completeBlankData = Tools.flatMapDeep(
+		const { angle, value } = getProperty(options, 'radar', 'axes')
+		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
+		const completeBlankData = flatMapDeep(
 			this.uniqueKeys.map((key) => {
 				return this.uniqueGroups.map((group) => ({
 					[angle]: key,
@@ -571,22 +571,22 @@ export class Radar extends Component {
 				}))
 			})
 		)
-		return Tools.merge(completeBlankData, dataset)
+		return merge(completeBlankData, dataset)
 	}
 
 	// Given a a grouped array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeGroupedData = (dataset: any) => {
 		const options = this.getOptions()
-		const { angle, value } = Tools.getProperty(options, 'radar', 'axes')
-		const groupMapsTo = Tools.getProperty(options, 'data', 'groupMapsTo')
+		const { angle, value } = getProperty(options, 'radar', 'axes')
+		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
 		return dataset.map(({ name, data }) => {
 			const completeBlankData = this.uniqueKeys.map((k) => ({
 				[groupMapsTo]: name,
 				[angle]: k,
 				[value]: null
 			}))
-			return { name, data: Tools.merge(completeBlankData, data) }
+			return { name, data: merge(completeBlankData, data) }
 		})
 	}
 
@@ -603,13 +603,13 @@ export class Radar extends Component {
 			)
 			.style('fill-opacity', (group) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return Configuration.radar.opacity.unselected
+					return radar.opacity.unselected
 				}
-				return Configuration.radar.opacity.selected
+				return radar.opacity.selected
 			})
 			.style('stroke-opacity', (group) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return Configuration.radar.opacity.unselected
+					return radar.opacity.unselected
 				}
 				return 1
 			})
@@ -625,7 +625,7 @@ export class Radar extends Component {
 					name: 'legend-mouseout-blob'
 				})
 			)
-			.style('fill-opacity', Configuration.radar.opacity.selected)
+			.style('fill-opacity', radar.opacity.selected)
 			.style('stroke-opacity', 1)
 	}
 
@@ -646,7 +646,7 @@ export class Radar extends Component {
 		const self = this
 		const {
 			axes: { angle }
-		} = Tools.getProperty(this.getOptions(), 'radar')
+		} = getProperty(this.getOptions(), 'radar')
 
 		// events on x axes rects
 		this.parent
@@ -661,21 +661,21 @@ export class Radar extends Component {
 					datum
 				})
 
-				const axisLine = self.parent.select(`.x-axes .x-axis-${Tools.kebabCase(datum)}`)
-				const dots = self.parent.selectAll(`.dots circle.${Tools.kebabCase(datum)}`)
+				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`)
+				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`)
 
 				const activeDataGroupNames = self.model.getActiveDataGroupNames()
 
 				const options = self.getOptions()
 				const { groupMapsTo } = options.data
-				const valueMapsTo = Tools.getProperty(options, 'radar', 'axes', 'value')
+				const valueMapsTo = getProperty(options, 'radar', 'axes', 'value')
 
 				// Change style
 				axisLine.classed('hovered', true).attr('stroke-dasharray', '4 4')
 				dots
 					.classed('hovered', true)
 					.attr('opacity', (d) => (activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0))
-					.attr('r', Configuration.radar.dotsRadius)
+					.attr('r', radar.dotsRadius)
 
 				// get the items that should be highlighted
 				const itemsToHighlight = self.fullDataNormalized.filter(
@@ -723,8 +723,8 @@ export class Radar extends Component {
 			})
 			.on('mouseout', function (event, datum) {
 				const hoveredElement = select(this)
-				const axisLine = self.parent.select(`.x-axes .x-axis-${Tools.kebabCase(datum)}`)
-				const dots = self.parent.selectAll(`.dots circle.${Tools.kebabCase(datum)}`)
+				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`)
+				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`)
 
 				// Change style
 				axisLine.classed('hovered', false).attr('stroke-dasharray', '0')

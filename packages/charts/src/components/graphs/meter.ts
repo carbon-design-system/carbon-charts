@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import * as Configuration from '../../configuration'
+import { meter } from '../../configuration'
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale'
@@ -20,14 +20,14 @@ export class Meter extends Component {
 				prevX += scale(d.value)
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth),
+					width: Math.abs(scale(d.value) - meter.dividerWidth),
 					x: prevX - scale(d.value)
 				}
 			} else {
 				prevX = scale(d.value)
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - Configuration.meter.dividerWidth),
+					width: Math.abs(scale(d.value) - meter.dividerWidth),
 					x: 0
 				}
 			}
@@ -40,7 +40,7 @@ export class Meter extends Component {
 		const self = this
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
-		const proportional = Tools.getProperty(options, 'meter', 'proportional')
+		const proportional = getProperty(options, 'meter', 'proportional')
 		const data = this.model.getDisplayData()
 		const status = this.model.getStatus()
 
@@ -51,10 +51,10 @@ export class Meter extends Component {
 		const { groupMapsTo } = options.data
 
 		let domainMax
-		if (Tools.getProperty(options, 'meter', 'proportional') === null) {
+		if (getProperty(options, 'meter', 'proportional') === null) {
 			domainMax = 100
 		} else {
-			const total = Tools.getProperty(options, 'meter', 'proportional', 'total')
+			const total = getProperty(options, 'meter', 'proportional', 'total')
 			domainMax = total ? total : this.model.getMaximumDomain(this.model.getDisplayData())
 		}
 
@@ -62,7 +62,7 @@ export class Meter extends Component {
 		const xScale = scaleLinear().domain([0, domainMax]).range([0, width])
 		const stackedData = this.getStackedBounds(data, xScale)
 
-		const userProvidedHeight = Tools.getProperty(options, 'meter', 'height')
+		const userProvidedHeight = getProperty(options, 'meter', 'height')
 
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
@@ -74,8 +74,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+					? meter.height.proportional
+					: meter.height.default
 			)
 
 		// draw the container max range value indicator
@@ -88,8 +88,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+					? meter.height.proportional
+					: meter.height.default
 			)
 
 		// rect with the value binded
@@ -112,12 +112,12 @@ export class Meter extends Component {
 			})
 			.attr('y', 0)
 			.attr('height', () => {
-				const userProvidedHeight = Tools.getProperty(options, 'meter', 'height')
+				const userProvidedHeight = getProperty(options, 'meter', 'height')
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+					? meter.height.proportional
+					: meter.height.default
 			})
 			.attr('class', (d) =>
 				this.model.getColorClassName({
@@ -146,7 +146,7 @@ export class Meter extends Component {
 		valued.exit().remove()
 
 		// draw the peak
-		const peakValue = Tools.getProperty(options, 'meter', 'peak')
+		const peakValue = getProperty(options, 'meter', 'peak')
 
 		let peakData = peakValue
 		if (peakValue !== null) {
@@ -167,13 +167,13 @@ export class Meter extends Component {
 			.merge(peak)
 			.attr('y1', 0)
 			.attr('y2', () => {
-				const userProvidedHeight = Tools.getProperty(options, 'meter', 'height')
+				const userProvidedHeight = getProperty(options, 'meter', 'height')
 
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
+					? meter.height.proportional
+					: meter.height.default
 			})
 			.transition()
 			.call((t) =>
@@ -204,7 +204,7 @@ export class Meter extends Component {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const self = this
-		const proportional = Tools.getProperty(options, 'meter', 'proportional')
+		const proportional = getProperty(options, 'meter', 'proportional')
 
 		this.parent
 			.selectAll('rect.value')

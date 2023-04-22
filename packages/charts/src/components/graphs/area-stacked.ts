@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
-import * as Tools from '../../tools'
-import * as Configuration from '../../configuration'
+import { getProperty } from '../../tools'
+import { area as configArea } from '../../configuration'
 import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 
 // D3 Imports
@@ -24,7 +24,7 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		let svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ withinChartClip: true })
 		const self = this
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
@@ -36,7 +36,7 @@ export class StackedArea extends Component {
 			groups: this.configs.groups
 		})
 
-		const firstDatum = Tools.getProperty(stackedData, 0, 0)
+		const firstDatum = getProperty(stackedData, 0, 0)
 
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
@@ -46,7 +46,7 @@ export class StackedArea extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -67,19 +67,19 @@ export class StackedArea extends Component {
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
 			.attr('class', (d) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: Tools.getProperty(d, 0, groupMapsTo),
+					dataGroupName: getProperty(d, 0, groupMapsTo),
 					originalClassName: 'area'
 				})
 			)
-			.style('fill', (d) => self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo)))
+			.style('fill', (d) => self.model.getFillColor(getProperty(d, 0, groupMapsTo)))
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
-			.attr('aria-label', (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.attr('aria-label', (d) => getProperty(d, 0, groupMapsTo))
 			.transition()
 			.call((t) =>
 				this.services.transitions.setupTransition({
@@ -88,7 +88,7 @@ export class StackedArea extends Component {
 					animate
 				})
 			)
-			.attr('opacity', Configuration.area.opacity.selected)
+			.attr('opacity', configArea.opacity.selected)
 			.attr('d', this.areaGenerator)
 	}
 
@@ -107,11 +107,11 @@ export class StackedArea extends Component {
 				})
 			)
 			.attr('opacity', (d) => {
-				if (Tools.getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
-					return Configuration.area.opacity.unselected
+				if (getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
+					return configArea.opacity.unselected
 				}
 
-				return Configuration.area.opacity.selected
+				return configArea.opacity.selected
 			})
 	}
 
@@ -125,6 +125,6 @@ export class StackedArea extends Component {
 					name: 'legend-mouseout-area'
 				})
 			)
-			.attr('opacity', Configuration.area.opacity.selected)
+			.attr('opacity', configArea.opacity.selected)
 	}
 }

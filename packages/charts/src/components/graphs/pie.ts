@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { convertValueToPercentage, getProperty } from '../../tools'
 import {
 	CalloutDirections,
 	Roles,
@@ -10,7 +10,7 @@ import {
 	ColorClassNameTypes,
 	RenderTypes
 } from '../../interfaces'
-import * as Configuration from '../../configuration'
+import { pie as configPie } from '../../configuration'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -48,7 +48,7 @@ export class Pie extends Component {
 	}
 
 	getInnerRadius() {
-		return Configuration.pie.innerRadius
+		return configPie.innerRadius
 	}
 
 	render(animate = true) {
@@ -70,13 +70,13 @@ export class Pie extends Component {
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(this.getInnerRadius())
-			.outerRadius(radius + Configuration.pie.hoverArc.outerRadiusOffset)
+			.outerRadius(radius + configPie.hoverArc.outerRadiusOffset)
 
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d[valueMapsTo])
-			.sort(Tools.getProperty(options, 'pie', 'sortFunction'))
-			.padAngle(Configuration.pie.padAngle)
+			.sort(getProperty(options, 'pie', 'sortFunction'))
+			.padAngle(configPie.padAngle)
 
 		// Add data to pie layout
 		const pieLayoutData = pieLayout(displayData)
@@ -126,7 +126,7 @@ export class Pie extends Component {
 				'aria-label',
 				(d) =>
 					`${d[valueMapsTo]}, ${
-						Tools.convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
+						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
 					}`
 			)
 			// Tween
@@ -161,7 +161,7 @@ export class Pie extends Component {
 					return options.pie.labels.formatter(d)
 				}
 
-				return Tools.convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
+				return convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
 			})
 			// Calculate dimensions in order to transform
 			.datum(function (d) {
@@ -185,15 +185,15 @@ export class Pie extends Component {
 
 				// check if last 2 slices (or just last) are < the threshold
 				if (i >= totalSlices - 2) {
-					if (sliceAngleDeg < Configuration.pie.callout.minSliceDegree) {
+					if (sliceAngleDeg < configPie.callout.minSliceDegree) {
 						let labelTranslateX, labelTranslateY
 						if (d.index === totalSlices - 1) {
 							labelTranslateX =
 								d.xPosition +
-								Configuration.pie.callout.offsetX +
-								Configuration.pie.callout.textMargin +
+								configPie.callout.offsetX +
+								configPie.callout.textMargin +
 								d.textOffsetX
-							labelTranslateY = d.yPosition - Configuration.pie.callout.offsetY
+							labelTranslateY = d.yPosition - configPie.callout.offsetY
 
 							// Set direction of callout
 							d.direction = CalloutDirections.RIGHT
@@ -201,10 +201,10 @@ export class Pie extends Component {
 						} else {
 							labelTranslateX =
 								d.xPosition -
-								Configuration.pie.callout.offsetX -
+								configPie.callout.offsetX -
 								d.textOffsetX -
-								Configuration.pie.callout.textMargin
-							labelTranslateY = d.yPosition - Configuration.pie.callout.offsetY
+								configPie.callout.textMargin
+							labelTranslateY = d.yPosition - configPie.callout.offsetY
 
 							// Set direction of callout
 							d.direction = CalloutDirections.LEFT
@@ -221,28 +221,28 @@ export class Pie extends Component {
 		// Render pie label callouts
 		this.renderCallouts(calloutData)
 
-		const optionName = Tools.getProperty(options, 'donut') ? 'donut' : 'pie'
-		const alignment = Tools.getProperty(options, optionName, 'alignment')
+		const optionName = getProperty(options, 'donut') ? 'donut' : 'pie'
+		const alignment = getProperty(options, optionName, 'alignment')
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
 			useAttrs: true
 		})
 
 		// don't add padding for labels & callouts if they are disabled
-		const xOffset = renderLabels ? Configuration.pie.xOffset : 0
-		const yOffset = renderLabels ? Configuration.pie.yOffset : 0
+		const xOffset = renderLabels ? configPie.xOffset : 0
+		const yOffset = renderLabels ? configPie.yOffset : 0
 
 		// Position Pie
 		let pieTranslateX = radius + xOffset
 		if (alignment === Alignments.CENTER) {
 			pieTranslateX = width / 2
 		} else if (alignment === Alignments.RIGHT) {
-			pieTranslateX = width - radius - Configuration.pie.xOffset
+			pieTranslateX = width - radius - configPie.xOffset
 		}
 
 		let pieTranslateY = radius + yOffset
 		if (calloutData.length > 0) {
-			pieTranslateY += Configuration.pie.yOffsetCallout
+			pieTranslateY += configPie.yOffsetCallout
 		}
 
 		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY)
@@ -282,12 +282,12 @@ export class Pie extends Component {
 
 				// end position for the callout line
 				d.endPos = {
-					x: xPosition + Configuration.pie.callout.offsetX,
-					y: yPosition - Configuration.pie.callout.offsetY + d.textOffsetY
+					x: xPosition + configPie.callout.offsetX,
+					y: yPosition - configPie.callout.offsetY + d.textOffsetY
 				}
 
 				// the intersection point of the vertical and horizontal line
-				d.intersectPointX = d.endPos.x - Configuration.pie.callout.horizontalLineLength
+				d.intersectPointX = d.endPos.x - configPie.callout.horizontalLineLength
 			} else {
 				// start position for the callout line
 				d.startPos = {
@@ -297,12 +297,12 @@ export class Pie extends Component {
 
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
-					x: xPosition - Configuration.pie.callout.offsetX,
-					y: yPosition - Configuration.pie.callout.offsetY + d.textOffsetY
+					x: xPosition - configPie.callout.offsetX,
+					y: yPosition - configPie.callout.offsetY + d.textOffsetY
 				}
 
 				// the intersection point of the vertical and horizontal line
-				d.intersectPointX = d.endPos.x + Configuration.pie.callout.horizontalLineLength
+				d.intersectPointX = d.endPos.x + configPie.callout.horizontalLineLength
 			}
 
 			// Store the necessary data in the DOM element
@@ -468,6 +468,6 @@ export class Pie extends Component {
 		const radius: number = Math.min(width, height) / 2
 		const renderLabels = options.pie.labels.enabled
 
-		return renderLabels ? radius + Configuration.pie.radiusOffset : radius
+		return renderLabels ? radius + configPie.radiusOffset : radius
 	}
 }

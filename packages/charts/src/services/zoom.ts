@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisPositions, Events, ScaleTypes } from '../interfaces'
 import { Service } from './service'
-import * as Tools from '../tools'
-import * as Configuration from '../configuration'
+import { getProperty } from '../tools'
+import { zoomBar } from '../configuration'
 import type { ChartModelCartesian } from '../model/cartesian-charts'
 
 // D3 imports
@@ -19,14 +19,14 @@ export class Zoom extends Service {
 
 		// @todo - need to update this if zoom bar in other position (bottom, left, right) is supported
 		// check configuration
-		if (!Tools.getProperty(this.model.getOptions(), 'zoomBar', 'top', 'enabled')) {
+		if (!getProperty(this.model.getOptions(), 'zoomBar', 'top', 'enabled')) {
 			return false
 		}
 
 		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
 		this.services.cartesianScales.findDomainAndRangeAxes() // need to do this before getMainXAxisPosition()
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition()
-		const mainXScaleType = Tools.getProperty(
+		const mainXScaleType = getProperty(
 			this.model.getOptions(),
 			'axes',
 			mainXAxisPosition,
@@ -56,7 +56,7 @@ export class Zoom extends Service {
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition()
 		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
-		const customDomain = Tools.getProperty(
+		const customDomain = getProperty(
 			this.model.getOptions(),
 			'axes',
 			mainXAxisPosition,
@@ -85,7 +85,7 @@ export class Zoom extends Service {
 	}
 
 	getZoomRatio() {
-		return Tools.getProperty(this.model.getOptions(), 'zoomBar', 'zoomRatio')
+		return getProperty(this.model.getOptions(), 'zoomBar', 'zoomRatio')
 	}
 
 	// filter out data not inside zoom domain
@@ -96,7 +96,7 @@ export class Zoom extends Service {
 			{ stacked: false }, // default configs
 			configs
 		)
-		const shouldUpdateRangeAxis = Tools.getProperty(
+		const shouldUpdateRangeAxis = getProperty(
 			this.model.getOptions(),
 			'zoomBar',
 			'updateRangeAxis'
@@ -123,7 +123,7 @@ export class Zoom extends Service {
 	zoomIn(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get('zoomDomain')
-		const handleWidth = Configuration.zoomBar.handleWidth
+		const handleWidth = zoomBar.handleWidth
 		const xScale = this.services.cartesianScales.getMainXScale().copy()
 		xScale.domain(this.getDefaultZoomBarDomain()) // reset domain to default full domain
 
@@ -218,7 +218,7 @@ export class Zoom extends Service {
 
 		const currentZoomDomainPeriod = currentZoomDomain[1].valueOf() - currentZoomDomain[0].valueOf()
 		const maxZoomDomainPeriod = maxZoomDomain[1].valueOf() - maxZoomDomain[0].valueOf()
-		const minZoomRatio = Tools.getProperty(this.model.getOptions(), 'zoomBar', 'minZoomRatio')
+		const minZoomRatio = getProperty(this.model.getOptions(), 'zoomBar', 'minZoomRatio')
 		// if current zoom domain is already smaller than minZoomRatio
 		if (currentZoomDomainPeriod / maxZoomDomainPeriod < minZoomRatio) {
 			return true
@@ -251,10 +251,10 @@ export class Zoom extends Service {
 	}
 
 	isZoomBarLoading(position) {
-		return Tools.getProperty(this.model.getOptions(), 'zoomBar', position, 'loading')
+		return getProperty(this.model.getOptions(), 'zoomBar', position, 'loading')
 	}
 
 	isZoomBarLocked(position) {
-		return Tools.getProperty(this.model.getOptions(), 'zoomBar', position, 'locked')
+		return getProperty(this.model.getOptions(), 'zoomBar', position, 'locked')
 	}
 }

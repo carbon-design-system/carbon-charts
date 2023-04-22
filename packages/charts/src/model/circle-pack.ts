@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from './model'
-import * as Tools from '../tools'
+import { getProperty, merge, updateLegendAdditionalItems } from '../tools'
 import { LegendItemType } from '../interfaces/enums'
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -24,14 +24,14 @@ export class CirclePackChartModel extends ChartModel {
 
 	setOptions(newOptions) {
 		const options = this.getOptions()
-		const zoomOptions = Tools.merge({}, newOptions, this.getZoomOptions(newOptions))
-		Tools.updateLegendAdditionalItems(options, zoomOptions)
+		const zoomOptions = merge({}, newOptions, this.getZoomOptions(newOptions))
+		updateLegendAdditionalItems(options, zoomOptions)
 
-		let depth = this.getHierarchyLevel()
-		let userProvidedDepth = Tools.getProperty(options, 'circlePack', 'hierarchyLevel')
+		const depth = this.getHierarchyLevel()
+		const userProvidedDepth = getProperty(options, 'circlePack', 'hierarchyLevel')
 
 		this.set({
-			options: Tools.merge(options, zoomOptions),
+			options: merge(options, zoomOptions),
 			depth: userProvidedDepth && userProvidedDepth < 4 ? userProvidedDepth : depth
 		})
 	}
@@ -44,8 +44,8 @@ export class CirclePackChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 		const zoomOptions = options ? options : this.getOptions()
 		const data =
-			displayData.length === 1 && Tools.getProperty(displayData, 0, 'children')
-				? Tools.getProperty(displayData, 0, 'children')
+			displayData.length === 1 && getProperty(displayData, 0, 'children')
+				? getProperty(displayData, 0, 'children')
 				: displayData
 
 		let depth = this.getHierarchyLevel()
@@ -59,7 +59,7 @@ export class CirclePackChartModel extends ChartModel {
 			}
 		})
 
-		if (Tools.getProperty(zoomOptions, 'canvasZoom', 'enabled') === true && depth > 2) {
+		if (getProperty(zoomOptions, 'canvasZoom', 'enabled') === true && depth > 2) {
 			return {
 				legend: {
 					additionalItems: [

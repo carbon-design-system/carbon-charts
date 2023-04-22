@@ -2,8 +2,9 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import * as Configuration from '../../configuration'
+import { canvasZoomSettings, circlePack } from '../../configuration'
 import { ColorClassNameTypes, Events, RenderTypes } from '../../interfaces/enums'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy'
@@ -17,7 +18,7 @@ export class CirclePack extends Component {
 
 	focal: any
 
-	render(animate = true) {
+	render() {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
@@ -39,13 +40,13 @@ export class CirclePack extends Component {
 		const parentNode = this.model.hasParentNode()
 		const hierarchyLevel = this.model.getHierarchyLevel()
 		const options = this.getOptions()
-		const canvasZoomEnabled = Tools.getProperty(options, 'canvasZoom', 'enabled')
+		const canvasZoomEnabled = getProperty(options, 'canvasZoom', 'enabled')
 
 		// check if there is one root for the data
 		// that root will be the only datagroup (colorscale will be monochrome)
-		if (parentNode && Tools.getProperty(displayData, 0, 'children')) {
+		if (parentNode && getProperty(displayData, 0, 'children')) {
 			// remove want to remove the parent from being rendered
-			displayData = Tools.getProperty(displayData, 0, 'children')
+			displayData = getProperty(displayData, 0, 'children')
 		}
 
 		const root = d3Hierarchy({ children: displayData })
@@ -57,8 +58,8 @@ export class CirclePack extends Component {
 			.padding((d) => {
 				// add 3 px to account for the stroke width 1.5px
 				return d.depth >= 1
-					? Configuration.circlePack.padding.children + 3
-					: Configuration.circlePack.padding.mainGroup + 3
+					? circlePack.padding.children + 3
+					: circlePack.padding.mainGroup + 3
 			})
 
 		const nodeData = packLayout(root)
@@ -101,10 +102,10 @@ export class CirclePack extends Component {
 			)
 			.attr('r', (d) => d.r)
 			.attr('opacity', 1)
-			.attr('fill-opacity', Configuration.circlePack.circles.fillOpacity)
+			.attr('fill-opacity', circlePack.circles.fillOpacity)
 
 		if (canvasZoomEnabled === true && this.focal) {
-			this.services.canvasZoom.zoomIn(this.focal, enteringCircles, Configuration.canvasZoomSettings)
+			this.services.canvasZoom.zoomIn(this.focal, enteringCircles, canvasZoomSettings)
 			this.setBackgroundListeners()
 		}
 
@@ -134,7 +135,7 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.filter((d) => data.some((datum) => datum === d.data) && d.depth > 1)
-			.style('stroke', Configuration.circlePack.circles.hover.stroke)
+			.style('stroke', circlePack.circles.hover.stroke)
 	}
 
 	getZoomClass(node) {
@@ -163,7 +164,7 @@ export class CirclePack extends Component {
 		const chartSvg = select(this.services.domUtils.getMainContainer())
 		const self = this
 		const canvasSelection = this.parent.selectAll('circle.node')
-		const zoomSetting = Tools.getProperty(Configuration, 'canvasZoomSettings')
+		const zoomSetting = getProperty(Configuration, 'canvasZoomSettings')
 
 		chartSvg.on('click', () => {
 			self.focal = null
@@ -188,7 +189,7 @@ export class CirclePack extends Component {
 			.attr('opacity', (d) => {
 				return d.data.dataGroupName === hoveredElement.datum()['name']
 					? 1
-					: Configuration.circlePack.circles.fillOpacity
+					: circlePack.circles.fillOpacity
 			})
 	}
 
@@ -225,7 +226,7 @@ export class CirclePack extends Component {
 
 				const hierarchyLevel = self.model.getHierarchyLevel()
 				const disabled = hierarchyLevel > 2 && !hoveredElement.classed('focal')
-				const canvasZoomEnabled = Tools.getProperty(
+				const canvasZoomEnabled = getProperty(
 					self.model.getOptions(),
 					'canvasZoom',
 					'enabled'
@@ -275,7 +276,7 @@ export class CirclePack extends Component {
 						parentValue = datum.value
 					}
 
-					let fillColor = getComputedStyle(this, null).getPropertyValue('fill')
+					const fillColor = getComputedStyle(this, null).getPropertyValue('fill')
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -340,7 +341,7 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this)
 				const disabled = hoveredElement.classed('non-focal')
 
-				const canvasZoomEnabled = Tools.getProperty(
+				const canvasZoomEnabled = getProperty(
 					self.model.getOptions(),
 					'canvasZoom',
 					'enabled'
@@ -352,7 +353,7 @@ export class CirclePack extends Component {
 					chartSvg.classed('zoomed-in', false)
 					self.focal = null
 					self.model.updateHierarchyLevel(2)
-					self.services.canvasZoom.zoomOut(canvasSelection, Configuration.canvasZoomSettings)
+					self.services.canvasZoom.zoomOut(canvasSelection, canvasZoomSettings)
 				}
 				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
 				else if (datum.depth === 2 && datum.children && !disabled && canvasZoomEnabled) {
@@ -361,7 +362,7 @@ export class CirclePack extends Component {
 					chartSvg.classed('zoomed-in', true)
 					self.focal = datum
 					self.model.updateHierarchyLevel(3)
-					self.services.canvasZoom.zoomIn(datum, canvasSelection, Configuration.canvasZoomSettings)
+					self.services.canvasZoom.zoomIn(datum, canvasSelection, canvasZoomSettings)
 					// don't want the click event to propagate to the background zoom out
 					// does not clash with the tooltip/other events because it does need to close the
 					// tooltip on the click event in order to zoom in/out

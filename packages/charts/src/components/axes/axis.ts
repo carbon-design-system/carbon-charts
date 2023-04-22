@@ -5,7 +5,7 @@ import { clamp, getProperty, getTranslationValues, truncateLabel } from '../../t
 import type { ChartModel } from '../../model/model'
 import { DOMUtils } from '../../services'
 import { AxisTitleOrientations, RenderTypes, TickRotations } from '../../interfaces/enums'
-import * as Configuration from '../../configuration'
+import { axis } from '../../configuration'
 import { computeTimeIntervalName, formatTick, isTickPrimary } from '../../services/time-series'
 
 // D3 Imports
@@ -154,13 +154,13 @@ export class Axis extends Component {
 			if (isNumberOfTicksProvided) {
 				numberOfTicks = numberOfTicksProvided
 			} else {
-				numberOfTicks = Configuration.axis.ticks.number
+				numberOfTicks = axis.ticks.number
 				if (isVerticalAxis) {
 					// Set how many ticks based on height
 					numberOfTicks = this.getNumberOfFittingTicks(
 						height,
 						tickHeight,
-						Configuration.axis.ticks.verticalSpaceRatio
+						axis.ticks.verticalSpaceRatio
 					)
 				}
 			}
@@ -466,7 +466,7 @@ export class Axis extends Component {
 						this.getNumberOfFittingTicks(
 							width,
 							tickHeight,
-							Configuration.axis.ticks.horizontalSpaceRatio
+							axis.ticks.horizontalSpaceRatio
 						)
 					)
 
@@ -618,7 +618,7 @@ export class Axis extends Component {
 
 	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
 		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio))
-		return clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number)
+		return clamp(numberOfTicksFit, 2, axis.ticks.number)
 	}
 
 	destroy() {

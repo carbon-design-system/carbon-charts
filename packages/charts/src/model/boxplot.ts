@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartModelCartesian } from './cartesian-charts'
-import * as Configuration from '../configuration'
-import * as Tools from '../tools'
+import { color } from '../configuration'
+import { getProperty } from '../tools'
 
 // D3 Imports
 import { ascending, min, max, quantile } from 'd3-array'
@@ -90,33 +90,33 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		const result = [
 			['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)'],
 			...boxplotData.map((datum) => {
-				let outliers = Tools.getProperty(datum, 'outliers')
+				let outliers = getProperty(datum, 'outliers')
 				if (outliers === null || outliers.length === 0) {
 					outliers = ['&ndash;']
 				}
 				return [
 					datum[groupMapsTo],
-					Tools.getProperty(datum, 'whiskers', 'min') !== null
-						? Tools.getProperty(datum, 'whiskers', 'min').toLocaleString()
+					getProperty(datum, 'whiskers', 'min') !== null
+						? getProperty(datum, 'whiskers', 'min').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
-						? Tools.getProperty(datum, 'quartiles', 'q_25').toLocaleString()
+					getProperty(datum, 'quartiles', 'q_25') !== null
+						? getProperty(datum, 'quartiles', 'q_25').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_50') !== null
-						? Tools.getProperty(datum, 'quartiles', 'q_50').toLocaleString()
+					getProperty(datum, 'quartiles', 'q_50') !== null
+						? getProperty(datum, 'quartiles', 'q_50').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_75') !== null
-						? Tools.getProperty(datum, 'quartiles', 'q_75').toLocaleString()
+					getProperty(datum, 'quartiles', 'q_75') !== null
+						? getProperty(datum, 'quartiles', 'q_75').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'whiskers', 'max') !== null
-						? Tools.getProperty(datum, 'whiskers', 'max').toLocaleString()
+					getProperty(datum, 'whiskers', 'max') !== null
+						? getProperty(datum, 'whiskers', 'max').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_75') !== null &&
-					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
+					getProperty(datum, 'quartiles', 'q_75') !== null &&
+					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (
-								Tools.getProperty(datum, 'quartiles', 'q_75') -
-								Tools.getProperty(datum, 'quartiles', 'q_25')
-						  ).toLocaleString()
+								getProperty(datum, 'quartiles', 'q_75') -
+								getProperty(datum, 'quartiles', 'q_25')
+							).toLocaleString()
 						: '&ndash;',
 					outliers.map((d) => d.toLocaleString()).join(',')
 				]
@@ -130,9 +130,9 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		// monochrome
 		const numberOfColors = 1
 
-		const colorPairingOptions = Tools.getProperty(this.getOptions(), 'color', 'pairing')
-		let pairingOption = Tools.getProperty(colorPairingOptions, 'option')
-		const colorPairingCounts = Configuration.color.pairingOptions
+		const colorPairingOptions = getProperty(this.getOptions(), 'color', 'pairing')
+		let pairingOption = getProperty(colorPairingOptions, 'option')
+		const colorPairingCounts = color.pairingOptions
 
 		// Use default palette if user choice is not in range
 		pairingOption =
@@ -140,7 +140,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
+			() => `${numberOfColors}-${pairingOption}-1`
 		)
 
 		// Create default color classnames

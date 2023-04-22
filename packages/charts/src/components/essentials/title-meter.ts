@@ -1,21 +1,21 @@
 // Internal Imports
 import { Title } from './title'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { RenderTypes, Statuses } from '../../interfaces/enums'
-import * as Configuration from '../../configuration'
+import { meter } from '../../configuration'
 
 export class MeterTitle extends Title {
 	type = 'meter-title'
 	renderType = RenderTypes.SVG
 
 	render() {
-		const dataset = Tools.getProperty(this.model.getDisplayData(), 0)
+		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { groupMapsTo } = options.data
 
-		const proportional = Tools.getProperty(options, 'meter', 'proportional')
+		const proportional = getProperty(options, 'meter', 'proportional')
 
 		if (proportional) {
 			this.displayTotal()
@@ -56,9 +56,9 @@ export class MeterTitle extends Title {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 		const datasetsTotal = this.model.getMaximumDomain(this.model.getDisplayData())
-		const total = Tools.getProperty(options, 'meter', 'proportional', 'total')
-		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
-			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
+		const total = getProperty(options, 'meter', 'proportional', 'total')
+		const unit = getProperty(options, 'meter', 'proportional', 'unit')
+			? getProperty(options, 'meter', 'proportional', 'unit')
 			: ''
 
 		let data
@@ -67,7 +67,7 @@ export class MeterTitle extends Title {
 		} else {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
 			//breakdownFormatter
-			const breakdownFormatter = Tools.getProperty(
+			const breakdownFormatter = getProperty(
 				options,
 				'meter',
 				'proportional',
@@ -110,18 +110,18 @@ export class MeterTitle extends Title {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 
-		const total = Tools.getProperty(options, 'meter', 'proportional', 'total')
+		const total = getProperty(options, 'meter', 'proportional', 'total')
 
 		const totalValue = total
-			? Tools.getProperty(options, 'meter', 'proportional', 'total')
+			? getProperty(options, 'meter', 'proportional', 'total')
 			: this.model.getMaximumDomain(this.model.getDisplayData())
 
-		const unit = Tools.getProperty(options, 'meter', 'proportional', 'unit')
-			? Tools.getProperty(options, 'meter', 'proportional', 'unit')
+		const unit = getProperty(options, 'meter', 'proportional', 'unit')
+			? getProperty(options, 'meter', 'proportional', 'unit')
 			: ''
 
 		// totalFormatter function
-		const totalFormatter = Tools.getProperty(options, 'meter', 'proportional', 'totalFormatter')
+		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
 
 		const totalString =
 			totalFormatter !== null ? totalFormatter(totalValue) : `${total} ${unit} total`
@@ -145,7 +145,7 @@ export class MeterTitle extends Title {
 			.attr(
 				'x',
 				this.model.getStatus()
-					? containerWidth - Configuration.meter.total.paddingRight
+					? containerWidth - meter.total.paddingRight
 					: containerWidth
 			)
 			.attr('y', '1em')
@@ -170,7 +170,7 @@ export class MeterTitle extends Title {
 
 		// get the status from the model
 		const status = this.model.getStatus()
-		const radius = Configuration.meter.status.indicatorSize / 2
+		const radius = meter.status.indicatorSize / 2
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
@@ -207,7 +207,7 @@ export class MeterTitle extends Title {
 	 * Appends the associated percentage to the end of the title
 	 */
 	appendPercentage() {
-		const dataValue = Tools.getProperty(this.model.getDisplayData(), 0, 'value')
+		const dataValue = getProperty(this.model.getDisplayData(), 0, 'value')
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer()
@@ -215,7 +215,7 @@ export class MeterTitle extends Title {
 
 		// check if it is enabled
 		const data =
-			Tools.getProperty(
+			getProperty(
 				this.getOptions(),
 				'meter',
 				'statusBar',
@@ -229,7 +229,7 @@ export class MeterTitle extends Title {
 		const percentage = svg.selectAll('text.percent-value').data(data)
 
 		// the horizontal offset of the percentage value from the title
-		const offset = Configuration.meter.statusBar.paddingRight
+		const offset = meter.statusBar.paddingRight
 
 		percentage
 			.enter()
@@ -254,7 +254,7 @@ export class MeterTitle extends Title {
 
 		// update the position on the percentage to be inline with the title
 		const tspan = DOMUtils.appendOrSelect(this.parent, 'tspan')
-		const offset = Configuration.meter.statusBar.paddingRight
+		const offset = meter.statusBar.paddingRight
 		const tspanLength = Math.ceil(tspan.node().getComputedTextLength())
 
 		const percentage = DOMUtils.appendOrSelect(this.parent, 'text.percent-value')
@@ -269,7 +269,7 @@ export class MeterTitle extends Title {
 		// get a reference to the title elements to calculate the size the title can be
 		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 
-		const proportional = Tools.getProperty(this.getOptions(), 'meter', 'proportional')
+		const proportional = getProperty(this.getOptions(), 'meter', 'proportional')
 
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width
@@ -283,17 +283,17 @@ export class MeterTitle extends Title {
 				useBBox: true
 			}).width
 
-			return containerWidth - totalWidth - Configuration.meter.total.paddingLeft
+			return containerWidth - totalWidth - meter.total.paddingLeft
 		} else {
 			const percentage = DOMUtils.appendOrSelect(this.parent, 'text.percent-value')
 			// the title needs to fit the width of the container without crowding the status, and percentage value
-			const offset = Configuration.meter.statusBar.paddingRight
+			const offset = meter.statusBar.paddingRight
 			const percentageWidth = percentage.node().getComputedTextLength()
 
 			const statusGroup = DOMUtils.appendOrSelect(this.parent, 'g.status-indicator').node()
 			const statusWidth =
 				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
-				Configuration.meter.status.paddingLeft
+				meter.status.paddingLeft
 
 			return containerWidth - percentageWidth - offset - statusWidth
 		}

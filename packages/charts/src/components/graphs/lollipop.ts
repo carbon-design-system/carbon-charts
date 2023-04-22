@@ -1,8 +1,8 @@
 // Internal Imports
 import { Scatter } from './scatter'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation } from '../../tools'
 import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import * as Configuration from '../../configuration'
+import { lines } from '../../configuration'
 
 export class Lollipop extends Scatter {
 	type = 'lollipop'
@@ -32,7 +32,7 @@ export class Lollipop extends Scatter {
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
 		const orientation = cartesianScales.getOrientation()
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			orientation
@@ -111,16 +111,16 @@ export class Lollipop extends Scatter {
 
 		this.parent.selectAll('line.line').attr('stroke-width', (d) => {
 			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
-				return Configuration.lines.weight.unselected
+				return lines.weight.unselected
 			}
 			// apply selected weight
-			return Configuration.lines.weight.selected
+			return lines.weight.selected
 		})
 	}
 
 	// on mouse out remove the stroke width assertion
 	handleScatterOnMouseOut = (event: CustomEvent) => {
-		this.parent.selectAll('line.line').attr('stroke-width', Configuration.lines.weight.unselected)
+		this.parent.selectAll('line.line').attr('stroke-width', lines.weight.unselected)
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -140,10 +140,10 @@ export class Lollipop extends Scatter {
 			)
 			.attr('opacity', (d) => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
-					return Configuration.lines.opacity.unselected
+					return lines.opacity.unselected
 				}
 
-				return Configuration.lines.opacity.selected
+				return lines.opacity.selected
 			})
 	}
 
@@ -157,7 +157,7 @@ export class Lollipop extends Scatter {
 					name: 'legend-mouseout-line'
 				})
 			)
-			.attr('opacity', Configuration.lines.opacity.selected)
+			.attr('opacity', lines.opacity.selected)
 	}
 
 	destroy() {

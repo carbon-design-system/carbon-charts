@@ -10,6 +10,7 @@ import {
 	Events,
 	TruncationTypes
 } from '../../interfaces'
+import { legend } from '../../configuration'
 import * as Configuration from '../../configuration'
 
 // D3 Imports
@@ -29,7 +30,7 @@ export class Legend extends Component {
 		let dataGroups = this.model.getDataGroups()
 
 		// Check if there are disabled legend items
-		const { DISABLED } = Configuration.legend.items.status
+		const { DISABLED } = legend.items.status
 		const hasDeactivatedItems = dataGroups.some((dataGroup) => dataGroup.status === DISABLED)
 		const userProvidedOrder = getProperty(legendOptions, 'order')
 
@@ -53,13 +54,13 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems.enter().append('div').attr('class', 'legend-item')
 
 		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d, i) {
-			return d.status === Configuration.legend.items.status.ACTIVE
+			return d.status === legend.items.status.ACTIVE
 		})
 
 		const legendClickable = getProperty(this.getOptions(), 'legend', 'clickable')
 		svg.classed('clickable', legendClickable && dataGroups.length > 1)
 
-		const checkboxRadius = Configuration.legend.checkbox.radius
+		const checkboxRadius = legend.checkbox.radius
 
 		const addedCheckboxes = addedLegendItems.append('div').classed('checkbox', true)
 
@@ -70,7 +71,7 @@ export class Legend extends Component {
 			.attr('aria-labelledby', (d, i) =>
 				this.services.domUtils.generateElementIDString(`legend-datagroup-${i}-title`)
 			)
-			.attr('aria-checked', ({ status }) => status === Configuration.legend.items.status.ACTIVE)
+			.attr('aria-checked', ({ status }) => status === legend.items.status.ACTIVE)
 			.attr('width', checkboxRadius * 2)
 			.attr('height', checkboxRadius * 2)
 			.attr('class', (d, i) =>
@@ -81,12 +82,12 @@ export class Legend extends Component {
 				})
 			)
 			.style('background', (d) =>
-				d.status === Configuration.legend.items.status.ACTIVE
+				d.status === legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
 					: null
 			)
 			.classed('active', function (d, i) {
-				return d.status === Configuration.legend.items.status.ACTIVE
+				return d.status === legend.items.status.ACTIVE
 			})
 
 		addedCheckboxes
@@ -182,7 +183,7 @@ export class Legend extends Component {
 	}
 
 	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
-		const { width, height } = Configuration.legend.area
+		const { width, height } = legend.area
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			// Circular icon
@@ -192,7 +193,7 @@ export class Legend extends Component {
 		}
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
-			const { iconData, fill, stroke } = Configuration.legend.radius
+			const { iconData, fill, stroke } = legend.radius
 
 			const circleEnter = additionalItem
 				.attr('fill', 'none')
@@ -211,7 +212,7 @@ export class Legend extends Component {
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 		} else if (itemConfig.type === LegendItemType.LINE) {
-			const lineConfig = Configuration.legend.line
+			const lineConfig = legend.line
 
 			if (additionalItem.select('line.line').empty()) {
 				additionalItem
@@ -237,12 +238,12 @@ export class Legend extends Component {
 					.attr('height', height)
 					.style(
 						'fill',
-						indexOfItem > 3 && !itemConfig.fill ? Configuration.legend.area.fill : itemConfig.fill
+						indexOfItem > 3 && !itemConfig.fill ? legend.area.fill : itemConfig.fill
 					)
 					.style('stroke', itemConfig.stroke)
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {
-			const { iconData, fill, stroke } = Configuration.legend.size
+			const { iconData, fill, stroke } = legend.size
 
 			const sizeEnter = additionalItem
 				.attr('fill', 'none')
@@ -262,7 +263,7 @@ export class Legend extends Component {
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1)
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
-			const { iconData } = Configuration.legend.quartile
+			const { iconData } = legend.quartile
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')

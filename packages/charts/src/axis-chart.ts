@@ -26,7 +26,7 @@ import {
 	Toolbar,
 	ZoomBar
 } from './components'
-import * as Tools from './tools'
+import { getProperty } from './tools'
 
 import { CartesianScales, Curves, Zoom } from './services'
 
@@ -44,15 +44,15 @@ export class AxisChart extends Chart {
 
 	protected getAxisChartComponents(graphFrameComponents: any[], configs?: any) {
 		const options = this.model.getOptions()
-		const isZoomBarEnabled = Tools.getProperty(options, 'zoomBar', AxisPositions.TOP, 'enabled')
-		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled')
+		const isZoomBarEnabled = getProperty(options, 'zoomBar', AxisPositions.TOP, 'enabled')
+		const toolbarEnabled = getProperty(options, 'toolbar', 'enabled')
 
 		this.services.cartesianScales.determineAxisDuality()
 		this.services.cartesianScales.findDomainAndRangeAxes() // need to do this before getMainXAxisPosition()
 		this.services.cartesianScales.determineOrientation()
 
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition()
-		const mainXScaleType = Tools.getProperty(options, 'axes', mainXAxisPosition, 'scaleType')
+		const mainXScaleType = getProperty(options, 'axes', mainXAxisPosition, 'scaleType')
 		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
 		const zoomBarEnabled =
 			isZoomBarEnabled &&
@@ -120,13 +120,13 @@ export class AxisChart extends Chart {
 		}
 
 		const isLegendEnabled =
-			Tools.getProperty(configs, 'legend', 'enabled') !== false &&
+			getProperty(configs, 'legend', 'enabled') !== false &&
 			this.model.getOptions().legend.enabled !== false
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN
 		if (isLegendEnabled) {
-			const legendPosition = Tools.getProperty(this.model.getOptions(), 'legend', 'position')
+			const legendPosition = getProperty(this.model.getOptions(), 'legend', 'position')
 			if (legendPosition === LegendPositions.LEFT) {
 				fullFrameComponentDirection = LayoutDirection.ROW
 

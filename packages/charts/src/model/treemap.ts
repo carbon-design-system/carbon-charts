@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from './model'
-import * as Tools from '../tools'
+import { getProperty } from '../tools'
 
 /**
  * The treemap chart model layer
@@ -20,7 +20,7 @@ export class TreemapChartModel extends ChartModel {
 				datum.children.forEach((child) => {
 					result.push([child.name, datum.name, child.value])
 				})
-			} else if (Tools.getProperty(datum.name) !== null && Tools.getProperty(datum.value)) {
+			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {
 				result.push(['–', datum.name, datum.value])
 			}
 		})

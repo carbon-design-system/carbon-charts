@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, RenderTypes, TreeTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 // D3 Imports
 import { cluster as d3Cluster, tree as d3Tree, hierarchy } from 'd3-hierarchy'
@@ -18,7 +18,7 @@ export class Tree extends Component {
 	getLongestLabel(data) {
 		let longestLabel = ''
 		data.forEach((d) => {
-			let longestLabelInChildren = d.children ? this.getLongestLabel(d.children) : ''
+			const longestLabelInChildren = d.children ? this.getLongestLabel(d.children) : ''
 			if (
 				longestLabelInChildren.length > longestLabel.length ||
 				d.name.length > longestLabel.length
@@ -68,11 +68,11 @@ export class Tree extends Component {
 		const options = this.model.getOptions()
 		const displayData = this.model.getDisplayData()
 
-		const rootTitle = Tools.getProperty(options, 'tree', 'rootTitle') || 'Tree'
+		const rootTitle = getProperty(options, 'tree', 'rootTitle') || 'Tree'
 
 		const mockRootTitleWidth = this.getMockLabelWidth(svg, rootTitle)
 
-		let longestLabel = this.getLongestLabel(displayData)
+		const longestLabel = this.getLongestLabel(displayData)
 		const mockLongestLabelWidth = this.getMockLabelWidth(svg, longestLabel)
 
 		const margin = {
@@ -227,11 +227,11 @@ export class Tree extends Component {
 		const maxDepth = descendants[descendants.length - 1].depth
 
 		const tree =
-			Tools.getProperty(options, 'tree', 'type') === TreeTypes.DENDROGRAM
+			getProperty(options, 'tree', 'type') === TreeTypes.DENDROGRAM
 				? d3Cluster().size([
 						height,
 						width - mockLongestLabelWidth - maxDepth * NODE_OFFSET - mockRootTitleWidth
-				  ])
+					])
 				: d3Tree()
 						.nodeSize([dx, dy])
 						.size([

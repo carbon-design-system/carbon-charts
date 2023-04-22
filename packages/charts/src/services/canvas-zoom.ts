@@ -1,7 +1,7 @@
 // Internal Imports
 import { Service } from './service'
 import { Events } from '../interfaces/enums'
-import * as Configuration from '../configuration'
+import { canvasZoomSettings } from '../configuration'
 // Services
 import { DOMUtils } from './essentials/dom-utils'
 import { select } from 'd3-selection'
@@ -18,7 +18,7 @@ export class CanvasZoom extends Service {
 		let x
 		let y
 		let zoomLevel
-		const settings = zoomSettings ? zoomSettings : Configuration.canvasZoomSettings
+		const settings = zoomSettings ? zoomSettings : canvasZoomSettings
 
 		if (focal) {
 			x = focal.x
@@ -47,7 +47,7 @@ export class CanvasZoom extends Service {
 	}
 
 	zoomOut(canvasElements, zoomSettings?) {
-		const settings = zoomSettings ? zoomSettings : Configuration.canvasZoomSettings
+		const settings = zoomSettings ? zoomSettings : canvasZoomSettings
 		canvasElements
 			.transition()
 			.duration(settings.duration)

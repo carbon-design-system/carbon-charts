@@ -1,4 +1,4 @@
-import * as Tools from './tools'
+import { merge } from './tools'
 import {
 	BaseChartOptions,
 	AxisChartOptions,
@@ -116,7 +116,7 @@ export const baseTooltip: TooltipOptions = {
 	groupLabel: 'Group'
 }
 
-// These options will be managed by Tools.mergeDefaultChartOptions
+// These options will be managed by merge()
 // by removing the ones the user is not providing,
 // and by TwoDimensionalAxes.
 const axes: AxesOptions<AxisOptions> = {
@@ -224,7 +224,7 @@ const chart: BaseChartOptions = {
 /**
  * Options common to any chart with an axis
  */
-const axisChart: AxisChartOptions = Tools.merge({}, chart, {
+const axisChart: AxisChartOptions = merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
@@ -242,12 +242,12 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to simple bar charts
  */
-const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+const baseBarChart: BarChartOptions = merge({}, axisChart, {
 	bars: {
 		maxWidth: 16,
 		spacingFactor: 0.25
 	},
-	timeScale: Tools.merge(timeScale, {
+	timeScale: merge(timeScale, {
 		addSpaceOnEdges: 1
 	} as TimeScaleOptions)
 } as BarChartOptions)
@@ -255,18 +255,18 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to simple bar charts
  */
-const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {} as BarChartOptions)
+const simpleBarChart: BarChartOptions = merge({}, baseBarChart, {} as BarChartOptions)
 
 /**
  * options specific to simple bar charts
  */
-const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {} as BarChartOptions)
+const groupedBarChart: BarChartOptions = merge({}, baseBarChart, {} as BarChartOptions)
 
 /**
  * options specific to stacked bar charts
  */
-const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
-	bars: Tools.merge({}, baseBarChart.bars, {
+const stackedBarChart: StackedBarChartOptions = merge({}, baseBarChart, {
+	bars: merge({}, baseBarChart.bars, {
 		dividerSize: 1.5
 	} as StackedBarOptions)
 } as BarChartOptions)
@@ -274,12 +274,12 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 /**
  * options specific to boxplot charts
  */
-const boxplotChart: BoxplotChartOptions = Tools.merge({}, baseBarChart, {} as BarChartOptions)
+const boxplotChart: BoxplotChartOptions = merge({}, baseBarChart, {} as BarChartOptions)
 
 /**
  * options specific to scatter charts
  */
-const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
+const scatterChart: ScatterChartOptions = merge({}, axisChart, {
 	points: {
 		// default point radius to 4
 		radius: 4,
@@ -297,7 +297,7 @@ const lollipopChart: LollipopChartOptions = scatterChart as LollipopChartOptions
 /**
  * options specific to line charts
  */
-const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
+const lineChart: LineChartOptions = merge({}, scatterChart, {
 	points: {
 		// default point radius to 3
 		radius: 3,
@@ -309,8 +309,8 @@ const lineChart: LineChartOptions = Tools.merge({}, scatterChart, {
 /**
  * options specific to area charts
  */
-const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
-	timeScale: Tools.merge(timeScale, {
+const areaChart: AreaChartOptions = merge({}, lineChart, {
+	timeScale: merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions)
 } as LineChartOptions)
@@ -323,7 +323,7 @@ const stackedAreaChart = areaChart
 /**
  * options specific to bubble charts
  */
-const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
+const bubbleChart: BubbleChartOptions = merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
 		radiusLabel: 'Radius',
@@ -350,7 +350,7 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to bullet charts
  */
-const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
+const bulletChart: BulletChartOptions = merge({}, axisChart, {
 	bullet: {
 		performanceAreaTitles: ['Poor', 'Satisfactory', 'Great']
 	},
@@ -387,11 +387,11 @@ const bulletChart: BulletChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to stacked bar charts
  */
-const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+const histogramChart: HistogramChartOptions = merge({}, baseBarChart, {
 	bars: {
 		dividerSize: 1.5
 	} as StackedBarOptions,
-	timeScale: Tools.merge(timeScale, {
+	timeScale: merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions)
 } as BarChartOptions)
@@ -399,8 +399,8 @@ const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
 /*
  * options specific to word cloud charts
  */
-const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
-	tooltip: Tools.merge({}, baseTooltip, {
+const wordCloudChart: WorldCloudChartOptions = merge({}, chart, {
+	tooltip: merge({}, baseTooltip, {
 		wordLabel: 'Word',
 		valueLabel: 'Value'
 	}) as WordCloudChartTooltipOptions,
@@ -417,7 +417,7 @@ const wordCloudChart: WorldCloudChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to pie charts
  */
-const pieChart: PieChartOptions = Tools.merge({}, chart, {
+const pieChart: PieChartOptions = merge({}, chart, {
 	pie: {
 		labels: {
 			formatter: null,
@@ -432,7 +432,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to gauge charts
  */
-const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
+const gaugeChart: GaugeChartOptions = merge({}, chart, {
 	legend: {
 		enabled: false
 	},
@@ -459,7 +459,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to donut charts
  */
-const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
+const donutChart: DonutChartOptions = merge({}, pieChart, {
 	donut: {
 		center: {
 			numberFontSize: (radius) => Math.min((radius / 100) * 24, 24) + 'px',
@@ -471,7 +471,7 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions)
 
-const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+const meterChart: MeterChartOptions = merge({}, chart, {
 	legend: {
 		enabled: false,
 		clickable: false
@@ -487,7 +487,7 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	}
 } as MeterChartOptions)
 
-const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge({}, meterChart, {
+const proportionalMeterChart: ProportionalMeterChartOptions = merge({}, meterChart, {
 	legend: {
 		enabled: true
 	}
@@ -496,7 +496,7 @@ const proportionalMeterChart: ProportionalMeterChartOptions = Tools.merge({}, me
 /**
  * options specific to radar charts
  */
-const radarChart: RadarChartOptions = Tools.merge({}, chart, {
+const radarChart: RadarChartOptions = merge({}, chart, {
 	radar: {
 		axes: {
 			angle: 'key',
@@ -515,14 +515,14 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to combo charts
  */
-const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
+const comboChart: ComboChartOptions = merge({}, baseBarChart, {
 	comboChartTypes: []
 } as ComboChartOptions)
 
 /*
  * options specific to tree charts
  */
-const treeChart: TreeChartOptions = Tools.merge(
+const treeChart: TreeChartOptions = merge(
 	{
 		tree: {
 			type: TreeTypes.TREE
@@ -535,8 +535,8 @@ const treeChart: TreeChartOptions = Tools.merge(
 /*
  * options specific to treemap charts
  */
-const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
-	data: Tools.merge(chart.data, {
+const treemapChart: TreemapChartOptions = merge({}, chart, {
+	data: merge(chart.data, {
 		groupMapsTo: 'name'
 	})
 } as TreemapChartOptions)
@@ -544,15 +544,15 @@ const treemapChart: TreemapChartOptions = Tools.merge({}, chart, {
 /*
  * options specific to circle pack charts
  */
-const circlePackChart: CirclePackChartOptions = Tools.merge({}, chart, circlePack, {
-	data: Tools.merge(chart.data, {
+const circlePackChart: CirclePackChartOptions = merge({}, chart, circlePack, {
+	data: merge(chart.data, {
 		groupMapsTo: 'name'
 	})
 } as CirclePackChartOptions)
 
-const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
+const alluvialChart: AlluvialChartOptions = merge({}, chart, {
 	alluvial: {
-		data: Tools.merge(chart.data, {
+		data: merge(chart.data, {
 			groupMapsTo: 'source'
 		}),
 		nodeAlignment: Alignments.CENTER,
@@ -562,7 +562,7 @@ const alluvialChart: AlluvialChartOptions = Tools.merge({}, chart, {
 	}
 } as AlluvialChartOptions)
 
-const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
+const heatmapChart: HeatmapChartOptions = merge({}, chart, {
 	axes,
 	heatmap: {
 		divider: {

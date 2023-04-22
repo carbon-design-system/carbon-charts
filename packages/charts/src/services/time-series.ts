@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import type { TimeScaleOptions } from '../interfaces/axis-scales'
-import * as Tools from '../tools'
+import { getProperty } from '../tools'
 
 // D3 Imports
 import { min } from 'd3-array'
@@ -88,11 +88,11 @@ export function formatTick(
 	const intervalConsideringAlsoShowDayNameOption =
 		interval === 'daily' && showDayName ? 'weekly' : interval
 	const date = new Date(tick)
-	const formats = Tools.getProperty(timeScaleOptions, 'timeIntervalFormats')[
+	const formats = getProperty(timeScaleOptions, 'timeIntervalFormats')[
 		intervalConsideringAlsoShowDayNameOption
 	]
-	const primary = Tools.getProperty(formats, 'primary')
-	const secondary = Tools.getProperty(formats, 'secondary')
+	const primary = getProperty(formats, 'primary')
+	const secondary = getProperty(formats, 'secondary')
 	let formatString = isTickPrimary(tick, i, allTicks, interval, showDayName) ? primary : secondary
 
 	// if the interval, and the timestamp includes milliseconds value

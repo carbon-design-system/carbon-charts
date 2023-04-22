@@ -1,5 +1,5 @@
 import { Component } from '../component'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 import { Events } from '../../interfaces'
@@ -51,7 +51,7 @@ export class Modal extends Component {
 	getModalHTML() {
 		const options = this.model.getOptions()
 
-		const chartprefix = Tools.getProperty(options, 'style', 'prefix')
+		const chartprefix = getProperty(options, 'style', 'prefix')
 
 		const tableArray = this.model.getTabularDataArray()
 
@@ -110,7 +110,7 @@ export class Modal extends Component {
 		if (!this.isEventListenerAdded) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder())
-			const chartprefix = Tools.getProperty(options, 'style', 'prefix')
+			const chartprefix = getProperty(options, 'style', 'prefix')
 			this.modal = DOMUtils.appendOrSelect(holder, `div.${carbonPrefix}--${chartprefix}--modal`)
 
 			this.addEventListeners()

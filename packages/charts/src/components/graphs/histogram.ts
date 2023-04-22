@@ -1,5 +1,5 @@
 // Internal Imports
-import * as Tools from '../../tools'
+import { generateSVGPathString, getProperty } from '../../tools'
 import {
 	Roles,
 	Events,
@@ -111,7 +111,7 @@ export class Histogram extends Component {
 					}
 				}
 
-				return Tools.generateSVGPathString(
+				return generateSVGPathString(
 					{ x0, x1, y0, y1 },
 					this.services.cartesianScales.getOrientation()
 				)
@@ -120,7 +120,7 @@ export class Histogram extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => Tools.getProperty(d, 'data', d[groupMapsTo]))
+			.attr('aria-label', (d) => getProperty(d, 'data', d[groupMapsTo]))
 
 		// Add event listeners for the above elements
 		this.addEventListeners()

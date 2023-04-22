@@ -1,7 +1,7 @@
 // Internal Imports
 import{ getProperty, isEmpty } from '../../tools'
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces'
-import * as Configuration from '../../configuration'
+import { legend } from '../../configuration'
 import { Legend } from './legend'
 import { DOMUtils } from '../../services'
 
@@ -33,7 +33,7 @@ export class ColorScaleLegend extends Legend {
 
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
-		if (width > Configuration.legend.color.barWidth && !isDataLoading) {
+		if (width > legend.color.barWidth && !isDataLoading) {
 			const title = getProperty(this.getOptions(), 'heatmap', 'colorLegend', 'title')
 
 			const { cartesianScales } = this.services
@@ -99,8 +99,8 @@ export class ColorScaleLegend extends Legend {
 		const customColorsEnabled = !isEmpty(customColors)
 		const domain = this.model.getValueDomain()
 
-		const useDefaultBarWidth = !(width <= Configuration.legend.color.barWidth)
-		const barWidth = useDefaultBarWidth ? Configuration.legend.color.barWidth : width
+		const useDefaultBarWidth = !(width <= legend.color.barWidth)
+		const barWidth = useDefaultBarWidth ? legend.color.barWidth : width
 
 		const legendGroupElement = DOMUtils.appendOrSelect(svg, 'g.legend')
 		const axisElement = DOMUtils.appendOrSelect(legendGroupElement, 'g.legend-axis')
@@ -173,7 +173,7 @@ export class ColorScaleLegend extends Legend {
 
 		// Align axes at the bottom of the rectangle and delete the domain line
 		axisElement
-			.attr('transform', `translate(0,${Configuration.legend.color.axisYTranslation})`)
+			.attr('transform', `translate(0,${legend.color.axisYTranslation})`)
 			.call(legendAxis)
 
 		// Remove auto generated axis bottom line
@@ -210,7 +210,7 @@ export class ColorScaleLegend extends Legend {
 		const rectangle = DOMUtils.appendOrSelect(legendGroupElement, 'rect')
 		rectangle
 			.attr('width', barWidth)
-			.attr('height', Configuration.legend.color.barHeight)
+			.attr('height', legend.color.barHeight)
 			.style('fill', `url(#${this.gradient_id}-legend)`)
 	}
 
@@ -236,7 +236,7 @@ export class ColorScaleLegend extends Legend {
 			.attr('x', (d) => colorScaleBand(d))
 			.attr('y', 0)
 			.attr('width', Math.max(0, colorScaleBand.bandwidth() - 1))
-			.attr('height', Configuration.legend.color.barHeight)
+			.attr('height', legend.color.barHeight)
 			.attr('class', (d) => d)
 			.attr('fill', (d) => d)
 

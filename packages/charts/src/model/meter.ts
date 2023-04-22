@@ -1,7 +1,6 @@
 // Internal Imports
-import * as Configuration from '../configuration'
 import { ChartModel } from './model'
-import * as Tools from '../tools'
+import { getProperty } from '../tools'
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset
@@ -24,7 +23,7 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getFillColor(group: string) {
 		const options = this.getOptions()
-		const userProvidedScale = Tools.getProperty(options, 'color', 'scale')
+		const userProvidedScale = getProperty(options, 'color', 'scale')
 		const status = this.getStatus()
 		// user provided a fill color or there isn't a status we can use the colorScale
 		if (userProvidedScale || !status) {
@@ -39,7 +38,7 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getStatus() {
 		const options = this.getOptions()
-		const dataValues = Tools.getProperty(this.getDisplayData())
+		const dataValues = getProperty(this.getDisplayData())
 
 		const { value: totalValue } = dataValues
 			? dataValues.reduce((previous, current) => {
@@ -48,14 +47,14 @@ export class MeterChartModel extends ChartModel {
 			: 0
 
 		// use max value if the percentage is bigger than 100%
-		const boundedValue = Tools.getProperty(options, 'meter', 'proportional')
+		const boundedValue = getProperty(options, 'meter', 'proportional')
 			? totalValue
 			: totalValue > 100
 			? 100
 			: totalValue
 
 		// user needs to supply ranges
-		const allRanges = Tools.getProperty(options, 'meter', 'status', 'ranges')
+		const allRanges = getProperty(options, 'meter', 'status', 'ranges')
 
 		if (allRanges) {
 			const result = allRanges.filter(
@@ -74,7 +73,7 @@ export class MeterChartModel extends ChartModel {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const status = this.getStatus()
-		const proportional = Tools.getProperty(options, 'meter', 'proportional')
+		const proportional = getProperty(options, 'meter', 'proportional')
 
 		let result = []
 		let domainMax
@@ -88,7 +87,7 @@ export class MeterChartModel extends ChartModel {
 				[datum[groupMapsTo], datum['value'], ...(status ? [status] : [])]
 			]
 		} else {
-			const total = Tools.getProperty(proportional, 'total')
+			const total = getProperty(proportional, 'total')
 			domainMax = total ? total : this.getMaximumDomain(displayData)
 
 			result = [

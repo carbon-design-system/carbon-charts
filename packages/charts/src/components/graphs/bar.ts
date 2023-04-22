@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import{ getProperty } from '../../tools'
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
@@ -18,7 +18,7 @@ export class Bar extends Component {
 		}).width
 
 		if (!mainXScale.step) {
-			const spacingFactor = Tools.getProperty(options, 'bars', 'spacingFactor')
+			const spacingFactor = getProperty(options, 'bars', 'spacingFactor')
 
 			return Math.min(options.bars.maxWidth, (chartWidth * spacingFactor) / numberOfDatapoints)
 		}

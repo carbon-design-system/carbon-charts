@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from './bar'
-import * as Tools from '../../tools'
+import { generateSVGPathString, getProperty, removeArrayDuplicates }from '../../tools'
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,
@@ -46,7 +46,7 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getComponentContainer({ withinChartClip: true })
 
-		const allDataLabels = Tools.removeArrayDuplicates(
+		const allDataLabels = removeArrayDuplicates(
 			displayData.map((datum) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
@@ -149,7 +149,7 @@ export class GroupedBar extends Bar {
 				if (this.isOutsideZoomedDomain(zoomx0, zoomx1)) {
 					return
 				}
-				return Tools.generateSVGPathString(
+				return generateSVGPathString(
 					{ x0, x1, y0, y1 },
 					this.services.cartesianScales.getOrientation()
 				)
@@ -324,8 +324,8 @@ export class GroupedBar extends Bar {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth() {
 		const options = this.getOptions()
-		const providedWidth = Tools.getProperty(options, 'bars', 'width')
-		const providedMaxWidth = Tools.getProperty(options, 'bars', 'maxWidth')
+		const providedWidth = getProperty(options, 'bars', 'width')
+		const providedMaxWidth = getProperty(options, 'bars', 'maxWidth')
 
 		// If there's a provided width, compare with maxWidth and
 		// Determine which to return

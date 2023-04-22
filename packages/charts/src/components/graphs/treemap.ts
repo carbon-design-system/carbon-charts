@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from 'd3-hierarchy'
@@ -18,10 +18,10 @@ const findColorShade = (hex) => {
 		return null
 	}
 
-	for (let colorName of Object.keys(colors)) {
+	for (const colorName of Object.keys(colors)) {
 		const colorShades = colors[colorName]
 
-		for (let colorShadeLevel of Object.keys(colorShades)) {
+		for (const colorShadeLevel of Object.keys(colorShades)) {
 			const colorShade = colorShades[colorShadeLevel]
 
 			if (colorShade === hex) {
@@ -73,7 +73,7 @@ export class Treemap extends Component {
 		const displayData = this.model.getDisplayData()
 		const options = this.model.getOptions()
 
-		const windowLocation = Tools.getProperty(window, 'location')
+		const windowLocation = getProperty(window, 'location')
 
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true

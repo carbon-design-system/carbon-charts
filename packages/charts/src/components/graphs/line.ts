@@ -1,8 +1,8 @@
 // Internal Imports
 import { Component } from '../component'
-import * as Configuration from '../../configuration'
+import { lines } from '../../configuration'
 import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '../../tools'
 
 // D3 Imports
 import { line } from 'd3-shape'
@@ -25,7 +25,7 @@ export class Line extends Component {
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
@@ -59,13 +59,13 @@ export class Line extends Component {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
 				return {
-					name: Tools.getProperty(d, 0, groupMapsTo),
+					name: getProperty(d, 0, groupMapsTo),
 					data: d.map((datum) => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[groupMapsTo]: datum[groupMapsTo],
 						[rangeIdentifier]: datum[1]
 					})),
-					hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+					hidden: !some(d, (datum) => datum[0] !== datum[1])
 				}
 			})
 		} else {
@@ -138,10 +138,10 @@ export class Line extends Component {
 			)
 			.attr('opacity', (group) => {
 				if (group.name !== hoveredElement.datum()['name']) {
-					return Configuration.lines.opacity.unselected
+					return lines.opacity.unselected
 				}
 
-				return Configuration.lines.opacity.selected
+				return lines.opacity.selected
 			})
 	}
 
@@ -155,7 +155,7 @@ export class Line extends Component {
 					name: 'legend-mouseout-line'
 				})
 			)
-			.attr('opacity', Configuration.lines.opacity.selected)
+			.attr('opacity', lines.opacity.selected)
 	}
 
 	destroy() {

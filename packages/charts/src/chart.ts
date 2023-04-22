@@ -23,7 +23,7 @@ import {
 	Spacer,
 	CanvasChartClip
 } from './components'
-import * as Tools from './tools'
+import { getProperty } from './tools'
 
 // Services
 import { CanvasZoom, DOMUtils, Events, Files, GradientUtils, Transitions } from './services/index'
@@ -57,7 +57,7 @@ export class Chart {
 
 		// Call update() when model has been updated
 		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
-			const animate = !!Tools.getProperty(e, 'detail', 'animate')
+			const animate = !!getProperty(e, 'detail', 'animate')
 			this.update(animate)
 		})
 
@@ -122,7 +122,7 @@ export class Chart {
 	protected getChartComponents(graphFrameComponents: any[], configs?: object) {
 		const options = this.model.getOptions()
 
-		const toolbarEnabled = Tools.getProperty(options, 'toolbar', 'enabled')
+		const toolbarEnabled = getProperty(options, 'toolbar', 'enabled')
 
 		const legendComponent = {
 			id: 'legend',
@@ -131,7 +131,7 @@ export class Chart {
 		}
 
 		// if canvas zoom is enabled
-		const isZoomEnabled = Tools.getProperty(options, 'canvasZoom', 'enabled')
+		const isZoomEnabled = getProperty(options, 'canvasZoom', 'enabled')
 
 		if (isZoomEnabled && isZoomEnabled === true) {
 			graphFrameComponents.push(new CanvasChartClip(this.model, this.services))
@@ -174,16 +174,16 @@ export class Chart {
 			id: 'graph-frame',
 			components: graphFrameComponents,
 			growth: LayoutGrowth.STRETCH,
-			renderType: Tools.getProperty(configs, 'graphFrameRenderType') || RenderTypes.SVG
+			renderType: getProperty(configs, 'graphFrameRenderType') || RenderTypes.SVG
 		}
 
 		const isLegendEnabled =
-			Tools.getProperty(configs, 'excludeLegend') !== true && options.legend.enabled !== false
+			getProperty(configs, 'excludeLegend') !== true && options.legend.enabled !== false
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN
 		if (isLegendEnabled) {
-			const legendPosition = Tools.getProperty(options, 'legend', 'position')
+			const legendPosition = getProperty(options, 'legend', 'position')
 			if (legendPosition === 'left') {
 				fullFrameComponentDirection = LayoutDirection.ROW
 

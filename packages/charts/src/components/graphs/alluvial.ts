@@ -1,8 +1,8 @@
 // Internal imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
-import * as Configuration from '../../configuration'
+import { debounce, getProperty, getTranformOffsets } from '../../tools'
+import { alluvial } from '../../configuration'
 import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
 
 // D3 imports
@@ -22,7 +22,7 @@ export class Alluvial extends Component {
 	private graph: any
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
 
-	render(animate = true) {
+	render() {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		svg.html('')
@@ -41,15 +41,15 @@ export class Alluvial extends Component {
 		const data = this.model.getDisplayData()
 
 		// Is gradient enabled or not
-		const isGradientAllowed = Tools.getProperty(this.getOptions(), 'color', 'gradient', 'enabled')
+		const isGradientAllowed = getProperty(this.getOptions(), 'color', 'gradient', 'enabled')
 
 		// Set the custom node padding if provided
-		let nodePadding = Configuration.alluvial.minNodePadding
-		if (options.alluvial.nodePadding > Configuration.alluvial.minNodePadding) {
+		let nodePadding = alluvial.minNodePadding
+		if (options.alluvial.nodePadding > alluvial.minNodePadding) {
 			nodePadding = options.alluvial.nodePadding
 		}
 
-		const alignment = Tools.getProperty(options, 'alluvial', 'nodeAlignment')
+		const alignment = getProperty(options, 'alluvial', 'nodeAlignment')
 
 		let nodeAlignment = sankeyJustify
 
@@ -61,7 +61,7 @@ export class Alluvial extends Component {
 
 		const sankey = d3Sankey()
 			.nodeId((d) => d.name)
-			.nodeWidth(Configuration.alluvial.nodeWidth)
+			.nodeWidth(alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
 			// Alignment of nodes within chart
@@ -141,7 +141,7 @@ export class Alluvial extends Component {
 
 		// Add gradient if requsted
 		if (isGradientAllowed) {
-			const scale = Tools.getProperty(this.getOptions(), 'color', 'scale')
+			const scale = getProperty(this.getOptions(), 'color', 'scale')
 
 			if (scale) {
 				links
@@ -200,7 +200,7 @@ export class Alluvial extends Component {
 				return this.model.getFillColor(d.source.name)
 			})
 			.attr('stroke-width', (d) => Math.max(1, d.width))
-			.style('stroke-opacity', Configuration.alluvial.opacity.default)
+			.style('stroke-opacity', alluvial.opacity.default)
 			.attr(
 				'aria-label',
 				(d) =>
@@ -304,7 +304,7 @@ export class Alluvial extends Component {
 		const self = this
 
 		// Set delay to counter flashy behaviour
-		const debouncedLineHighlight = Tools.debounce((link, event = 'mouseover') => {
+		const debouncedLineHighlight = debounce((link, event = 'mouseover') => {
 			const allLinks = self.parent
 				.selectAll('path.link')
 				.transition()
@@ -317,16 +317,16 @@ export class Alluvial extends Component {
 
 			if (event === 'mouseout') {
 				select(link).lower()
-				allLinks.style('stroke-opacity', Configuration.alluvial.opacity.default)
+				allLinks.style('stroke-opacity', alluvial.opacity.default)
 			} else {
 				allLinks.style('stroke-opacity', function () {
 					// highlight and raise if link is this
 					if (link === this) {
 						select(this).raise()
-						return Configuration.alluvial.opacity.selected
+						return alluvial.opacity.selected
 					}
 
-					return Configuration.alluvial.opacity.unfocus
+					return alluvial.opacity.unfocus
 				})
 			}
 		}, 33)
@@ -405,7 +405,7 @@ export class Alluvial extends Component {
 		const self = this
 
 		// Set delay to counter flashy behaviour
-		const debouncedLineHighlight = Tools.debounce((links = [], event = 'mouseover') => {
+		const debouncedLineHighlight = debounce((links = [], event = 'mouseover') => {
 			if (event === 'mouseout' || links.length === 0) {
 				// set all links to default opacity & corret link order
 				self.parent
@@ -413,7 +413,7 @@ export class Alluvial extends Component {
 					.classed('link-hovered', false)
 					.data(this.graph.links, (d) => d.index)
 					.order()
-					.style('stroke-opacity', Configuration.alluvial.opacity.default)
+					.style('stroke-opacity', alluvial.opacity.default)
 
 				return
 			}
@@ -433,10 +433,10 @@ export class Alluvial extends Component {
 				// Raise the links & increase stroke-opacity to selected
 				if (links.some((element) => element === d.index)) {
 					select(this).classed('link-hovered', true).raise()
-					return Configuration.alluvial.opacity.selected
+					return alluvial.opacity.selected
 				}
 
-				return Configuration.alluvial.opacity.unfocus
+				return alluvial.opacity.unfocus
 			})
 		}, 66)
 
@@ -457,7 +457,7 @@ export class Alluvial extends Component {
 				// Highlight all linked lines in the graph data structure
 				if (paths.length) {
 					// Get transformation value of node
-					const nodeMatrix = Tools.getTranformOffsets(hoveredElement.attr('transform'))
+					const nodeMatrix = getTranformOffsets(hoveredElement.attr('transform'))
 
 					// Move node to the left by 2 to grow node from the center
 					hoveredElement.attr('transform', `translate(${nodeMatrix.x - 2}, ${nodeMatrix.y})`)
@@ -472,7 +472,7 @@ export class Alluvial extends Component {
 						)
 
 						const titleContainer = self.parent.select(`g#${elementID}`)
-						const titleMatrix = Tools.getTranformOffsets(titleContainer.attr('transform'))
+						const titleMatrix = getTranformOffsets(titleContainer.attr('transform'))
 
 						titleContainer.attr('transform', `translate(${titleMatrix.x + 4},${titleMatrix.y})`)
 					}
@@ -518,13 +518,13 @@ export class Alluvial extends Component {
 				const hoveredElement = select(this)
 
 				// Set the node position to initial state (unexpanded)
-				const nodeMatrix = Tools.getTranformOffsets(hoveredElement.attr('transform'))
+				const nodeMatrix = getTranformOffsets(hoveredElement.attr('transform'))
 
 				hoveredElement
 					.classed('node-hovered', false)
 					.attr('transform', `translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`)
 					.select('rect.node')
-					.attr('width', Configuration.alluvial.nodeWidth)
+					.attr('width', alluvial.nodeWidth)
 
 				// Translate text container back to initial state
 				if (datum.x0 - 2 === 0) {
@@ -533,7 +533,7 @@ export class Alluvial extends Component {
 					)
 
 					const titleContainer = self.parent.select(`g#${elementID}`)
-					const titleMatrix = Tools.getTranformOffsets(titleContainer.attr('transform'))
+					const titleMatrix = getTranformOffsets(titleContainer.attr('transform'))
 
 					titleContainer.attr('transform', `translate(${titleMatrix.x - 4},${titleMatrix.y})`)
 				}

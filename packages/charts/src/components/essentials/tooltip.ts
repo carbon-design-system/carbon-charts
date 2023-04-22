@@ -1,9 +1,9 @@
 import { Component } from '../component'
-import * as Tools from '../../tools'
+import { getProperty, truncateLabel } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 import { Events, RenderTypes, TruncationTypes } from '../../interfaces'
-import * as Configuration from '../../configuration'
+import { zoomBar, tooltips } from '../../configuration'
 
 // Carbon position service
 import Position, { PLACEMENTS } from '@carbon/utils-position'
@@ -46,7 +46,7 @@ export class Tooltip extends Component {
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, 'div.content-box')
 
 		// if there is a provided tooltip HTML function call it
-		if (Tools.getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
+		if (getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
 			if (e.detail.content) {
 				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`
 				tooltipTextContainer.html(labelHTML)
@@ -125,11 +125,11 @@ export class Tooltip extends Component {
 		const options = this.getOptions()
 
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(options, 'tooltip', 'truncation', 'type')
+		const truncationType = getProperty(options, 'tooltip', 'truncation', 'type')
 
-		const truncationThreshold = Tools.getProperty(options, 'tooltip', 'truncation', 'threshold')
+		const truncationThreshold = getProperty(options, 'tooltip', 'truncation', 'threshold')
 
-		const truncationNumCharacter = Tools.getProperty(
+		const truncationNumCharacter = getProperty(
 			options,
 			'tooltip',
 			'truncation',
@@ -145,11 +145,11 @@ export class Tooltip extends Component {
 
 				item.value = item.value ? this.valueFormatter(item.value, item.label) : item.value
 				if (item.label && item.label.length + labelIconSize > truncationThreshold) {
-					item.label = Tools.truncateLabel(item.label, truncationType, truncationNumCharacter)
+					item.label = truncateLabel(item.label, truncationType, truncationNumCharacter)
 				}
 
 				if (item.value && item.value.length > truncationThreshold) {
-					item.value = Tools.truncateLabel(item.value, truncationType, truncationNumCharacter)
+					item.value = truncateLabel(item.value, truncationType, truncationNumCharacter)
 				}
 
 				return item
@@ -183,7 +183,7 @@ export class Tooltip extends Component {
 
 	valueFormatter(value: any, label: string) {
 		const options = this.getOptions()
-		const valueFormatter = Tools.getProperty(options, 'tooltip', 'valueFormatter')
+		const valueFormatter = getProperty(options, 'tooltip', 'valueFormatter')
 
 		if (valueFormatter) {
 			return valueFormatter(value, label)
@@ -207,11 +207,11 @@ export class Tooltip extends Component {
 
 	render() {
 		const options = this.getOptions()
-		const isTooltipEnabled = Tools.getProperty(options, 'tooltip', 'enabled')
+		const isTooltipEnabled = getProperty(options, 'tooltip', 'enabled')
 		if (isTooltipEnabled) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder())
-			const chartprefix = Tools.getProperty(options, 'style', 'prefix')
+			const chartprefix = getProperty(options, 'style', 'prefix')
 			this.tooltip = DOMUtils.appendOrSelect(holder, `div.${carbonPrefix}--${chartprefix}--tooltip`)
 
 			this.tooltip.style('max-width', null).attr('role', 'tooltip')
@@ -232,19 +232,19 @@ export class Tooltip extends Component {
 		const holder = this.services.domUtils.getHolder()
 		const target = this.tooltip.node()
 		const options = this.getOptions()
-		const isTopZoomBarEnabled = Tools.getProperty(options, 'zoomBar', 'top', 'enabled')
+		const isTopZoomBarEnabled = getProperty(options, 'zoomBar', 'top', 'enabled')
 
-		let mouseRelativePos = Tools.getProperty(e, 'detail', 'mousePosition')
+		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
 		if (!mouseRelativePos) {
-			mouseRelativePos = pointer(Tools.getProperty(e, 'detail', 'event'), holder)
+			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
-			const zoombarType = Tools.getProperty(options, 'zoomBar', 'top', 'type')
-			const zoombarHeight = Configuration.zoomBar.height[zoombarType]
+			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type')
+			const zoombarHeight = zoomBar.height[zoombarType]
 
 			// if the mouse position is from event (ruler)
 			// we need add zoom bar height
 			if (isTopZoomBarEnabled) {
-				mouseRelativePos[1] += zoombarHeight + Configuration.zoomBar.spacerHeight
+				mouseRelativePos[1] += zoombarHeight + zoomBar.spacerHeight
 
 				// TODO - we need to add toolbar height when toolbar is available
 			}
@@ -276,7 +276,7 @@ export class Tooltip extends Component {
 			)
 		}
 
-		let { horizontalOffset } = Configuration.tooltips
+		let { horizontalOffset } = tooltips
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1
 		}

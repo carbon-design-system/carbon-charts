@@ -1,6 +1,6 @@
 import { Tooltip } from './tooltip'
 import { ColorClassNameTypes } from '../../interfaces'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 import { get } from 'lodash-es'
 
@@ -25,7 +25,7 @@ export class AxisChartsTooltip extends Tooltip {
 		const domainLabel = cartesianScales.getDomainLabel()
 		let rangeLabel = cartesianScales.getRangeLabel()
 
-		let domainValue = data[0][domainIdentifier]
+		const domainValue = data[0][domainIdentifier]
 		let items: any[]
 		if (data.length === 1) {
 			const datum = data[0]
@@ -110,7 +110,7 @@ export class AxisChartsTooltip extends Tooltip {
 					.sort((a, b) => b.value - a.value)
 			)
 
-			if (!dualAxes && Tools.getProperty(options, 'tooltip', 'showTotal') === true) {
+			if (!dualAxes && getProperty(options, 'tooltip', 'showTotal') === true) {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier()
 				items.push({

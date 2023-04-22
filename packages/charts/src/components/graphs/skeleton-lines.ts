@@ -1,7 +1,7 @@
 // Internal Imports
 import { Skeleton } from './skeleton'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 
 export class SkeletonLines extends Skeleton {
 	type = 'skeleton-lines'
@@ -10,13 +10,13 @@ export class SkeletonLines extends Skeleton {
 	backdrop: any
 
 	render() {
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		const isSparkline =
-			!Tools.getProperty(this.getOptions(), 'grid', 'x', 'enabled') &&
-			!Tools.getProperty(this.getOptions(), 'grid', 'y', 'enabled') &&
-			!Tools.getProperty(this.getOptions(), 'axes', 'bottom', 'visible') &&
-			!Tools.getProperty(this.getOptions(), 'axes', 'left', 'visible')
+			!getProperty(this.getOptions(), 'grid', 'x', 'enabled') &&
+			!getProperty(this.getOptions(), 'grid', 'y', 'enabled') &&
+			!getProperty(this.getOptions(), 'axes', 'bottom', 'visible') &&
+			!getProperty(this.getOptions(), 'axes', 'left', 'visible')
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
 		if (isDataLoading && !isSparkline) {

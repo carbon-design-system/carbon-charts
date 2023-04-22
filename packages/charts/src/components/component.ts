@@ -2,7 +2,7 @@
 import type { ChartModel } from '../model/model'
 import { DOMUtils } from '../services'
 import { RenderTypes } from '../interfaces'
-import * as Tools from '../tools'
+import { getProperty, merge } from '../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -30,7 +30,7 @@ export class Component {
 		if (configs) {
 			this.configs = configs
 			if (this.configs.id) {
-				const chartprefix = Tools.getProperty(this.model.getOptions(), 'style', 'prefix')
+				const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 				this.id = `${chartprefix}--${this.configs.id}`
 			}
 		}
@@ -72,7 +72,7 @@ export class Component {
 		}
 
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), 'style', 'prefix')
+			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 			this.parent.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, true)
 
 			if (oldParent) {
@@ -87,7 +87,7 @@ export class Component {
 
 	getComponentContainer(configs = { withinChartClip: false }) {
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), 'style', 'prefix')
+			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 
 			const idSelector = this.id ? `#${this.id}` : ''
 			const container = DOMUtils.appendOrSelect(
@@ -131,7 +131,7 @@ export class Component {
 	 */
 	getOptions() {
 		if (this.configs.options) {
-			const options = Tools.merge({}, this.model.getOptions(), this.configs.options)
+			const options = merge({}, this.model.getOptions(), this.configs.options)
 			return options
 		}
 		return this.model.getOptions()

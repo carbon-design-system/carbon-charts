@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import * as Tools from '../../tools'
+import { getProperty } from '../../tools'
 import { Skeletons, CartesianOrientations, Alignments } from '../../interfaces/enums'
-import * as Configuration from '../../configuration'
+import { pie } from '../../configuration'
 
 // D3 Imports
 import { scaleLinear } from 'd3-scale'
@@ -17,7 +17,7 @@ export class Skeleton extends Component {
 	backdrop: any
 
 	render() {
-		const isDataLoading = Tools.getProperty(this.getOptions(), 'data', 'loading')
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
 		if (isDataLoading) {
@@ -121,7 +121,7 @@ export class Skeleton extends Component {
 
 	drawXGrid(showShimmerEffect: boolean) {
 		const width = this.backdrop.attr('width')
-		const ticksNumber = Tools.getProperty(this.getOptions(), 'grid', 'x', 'numberOfTicks')
+		const ticksNumber = getProperty(this.getOptions(), 'grid', 'x', 'numberOfTicks')
 		const ticksValues = this.xScale.ticks(ticksNumber).map((d) => d * width)
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, 'g.x.skeleton')
@@ -150,7 +150,7 @@ export class Skeleton extends Component {
 	drawYGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr('height')
 		const width = this.backdrop.attr('width')
-		const ticksNumber = Tools.getProperty(this.getOptions(), 'grid', 'y', 'numberOfTicks')
+		const ticksNumber = getProperty(this.getOptions(), 'grid', 'y', 'numberOfTicks')
 		const ticksValues = this.xScale.ticks(ticksNumber).map((d) => d * height)
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, 'g.y.skeleton')
@@ -188,7 +188,7 @@ export class Skeleton extends Component {
 
 		const optionName = innerRadius === 0 ? 'pie' : 'donut'
 
-		const alignment = Tools.getProperty(this.getOptions(), optionName, 'alignment')
+		const alignment = getProperty(this.getOptions(), optionName, 'alignment')
 
 		DOMUtils.appendOrSelect(container, 'rect.chart-skeleton-area-container')
 			.attr('width', width)
@@ -202,7 +202,7 @@ export class Skeleton extends Component {
 			.endAngle(Math.PI * 2)
 
 		// centering circle inside the container
-		const tcx = outerRadius + Math.abs(Configuration.pie.radiusOffset)
+		const tcx = outerRadius + Math.abs(pie.radiusOffset)
 		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2
 
 		const skeletonAreaShape = DOMUtils.appendOrSelect(container, 'path')
@@ -217,14 +217,14 @@ export class Skeleton extends Component {
 			)
 
 		// Position skeleton
-		let translateX = outerRadius + Configuration.pie.xOffset
+		let translateX = outerRadius + pie.xOffset
 		if (alignment === Alignments.CENTER) {
 			translateX = width / 2
 		} else if (alignment === Alignments.RIGHT) {
-			translateX = width - outerRadius - Configuration.pie.xOffset
+			translateX = width - outerRadius - pie.xOffset
 		}
 
-		const translateY = outerRadius + Configuration.pie.yOffset
+		const translateY = outerRadius + pie.yOffset
 		skeletonAreaShape.attr('transform', `translate(${translateX}, ${translateY})`)
 	}
 
@@ -234,7 +234,7 @@ export class Skeleton extends Component {
 			useAttrs: true
 		})
 		const radius = Math.min(width, height) / 2
-		return radius + Configuration.pie.radiusOffset
+		return radius + pie.radiusOffset
 	}
 
 	// same logic in donut

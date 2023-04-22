@@ -10,7 +10,7 @@ import {
 	Alignments,
 	RenderTypes
 } from '../../interfaces'
-import * as Tools from '../../tools'
+import { clamp, getProperty } from '../../tools'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -35,7 +35,7 @@ export class Gauge extends Component {
 	}
 
 	getValueRatio(): number {
-		const value = Tools.clamp(this.getValue(), 0, 100)
+		const value = clamp(this.getValue(), 0, 100)
 		return value / 100
 	}
 
@@ -47,7 +47,7 @@ export class Gauge extends Component {
 
 	getArcRatio(): number {
 		const options = this.getOptions()
-		const type = Tools.getProperty(options, 'gauge', 'type')
+		const type = getProperty(options, 'gauge', 'type')
 		const arcRatio = type === GaugeTypes.FULL ? 1 : 0.5
 		return arcRatio
 	}
@@ -67,7 +67,7 @@ export class Gauge extends Component {
 	// use provided arrow direction or default to using the delta
 	getArrow(delta): string {
 		const options = this.getOptions()
-		const arrowDirection = Tools.getProperty(options, 'gauge', 'deltaArrow', 'direction')
+		const arrowDirection = getProperty(options, 'gauge', 'deltaArrow', 'direction')
 
 		switch (arrowDirection) {
 			case ArrowDirections.UP:
@@ -127,7 +127,7 @@ export class Gauge extends Component {
 					originalClassName: 'arc-foreground'
 				})
 			)
-			.style('fill', (d) => Tools.getProperty(this.getOptions(), 'color', 'scale', 'value'))
+			.style('fill', (d) => getProperty(this.getOptions(), 'color', 'scale', 'value'))
 			.attr('d', this.arc)
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
@@ -140,7 +140,7 @@ export class Gauge extends Component {
 
 		arcValue.exit().remove()
 
-		const alignment = Tools.getProperty(options, 'gauge', 'alignment')
+		const alignment = getProperty(options, 'gauge', 'alignment')
 
 		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
 			useAttrs: true
@@ -166,20 +166,20 @@ export class Gauge extends Component {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 
-		const arcType = Tools.getProperty(options, 'gauge', 'type')
+		const arcType = getProperty(options, 'gauge', 'type')
 		const value = this.getValue()
 		const delta = this.getDelta()
 
 		// Sizing and positions relative to the radius
 		const radius = this.computeRadius()
 
-		const valueFontSize = Tools.getProperty(options, 'gauge', 'valueFontSize')
+		const valueFontSize = getProperty(options, 'gauge', 'valueFontSize')
 		// if there is a delta, use the size to center the numbers, otherwise center the valueNumber
-		const deltaFontSize = Tools.getProperty(options, 'gauge', 'deltaFontSize')
+		const deltaFontSize = getProperty(options, 'gauge', 'deltaFontSize')
 
-		const numberSpacing = Tools.getProperty(options, 'gauge', 'numberSpacing')
+		const numberSpacing = getProperty(options, 'gauge', 'numberSpacing')
 
-		const showPercentageSymbol = Tools.getProperty(options, 'gauge', 'showPercentageSymbol')
+		const showPercentageSymbol = getProperty(options, 'gauge', 'showPercentageSymbol')
 
 		// circular gauge without delta should have valueNumber centered
 		let numbersYPosition = 0
@@ -200,7 +200,7 @@ export class Gauge extends Component {
 		// Add the big number
 		const valueNumberGroup = DOMUtils.appendOrSelect(numbersGroup, 'g.gauge-value-number')
 
-		const numberFormatter = Tools.getProperty(options, 'gauge', 'numberFormatter')
+		const numberFormatter = getProperty(options, 'gauge', 'numberFormatter')
 		const valueNumber = valueNumberGroup.selectAll('text.gauge-value-number').data([value])
 
 		valueNumber
@@ -255,17 +255,17 @@ export class Gauge extends Component {
 		} else {
 			// Sizing and positions relative to the radius
 			const radius = this.computeRadius()
-			const deltaFontSize = delta ? Tools.getProperty(options, 'gauge', 'deltaFontSize') : () => 0
+			const deltaFontSize = delta ? getProperty(options, 'gauge', 'deltaFontSize') : () => 0
 
 			// use numberFormatter here only if there is a delta supplied
 			const numberFormatter = delta
-				? Tools.getProperty(options, 'gauge', 'numberFormatter')
+				? getProperty(options, 'gauge', 'numberFormatter')
 				: () => null
 
-			const arrowSize = Tools.getProperty(options, 'gauge', 'deltaArrow', 'size')
-			const numberSpacing = Tools.getProperty(options, 'gauge', 'numberSpacing')
+			const arrowSize = getProperty(options, 'gauge', 'deltaArrow', 'size')
+			const numberSpacing = getProperty(options, 'gauge', 'numberSpacing')
 
-			const showPercentageSymbol = Tools.getProperty(options, 'gauge', 'showPercentageSymbol')
+			const showPercentageSymbol = getProperty(options, 'gauge', 'showPercentageSymbol')
 
 			const numbersGroup = DOMUtils.appendOrSelect(svg, 'g.gauge-numbers')
 
@@ -296,7 +296,7 @@ export class Gauge extends Component {
 			)
 
 			// check if delta arrow is disabled
-			const arrowEnabled = Tools.getProperty(options, 'gauge', 'deltaArrow', 'enabled')
+			const arrowEnabled = getProperty(options, 'gauge', 'deltaArrow', 'enabled')
 
 			const deltaArrow = deltaGroup
 				.selectAll('svg.gauge-delta-arrow')
@@ -326,7 +326,7 @@ export class Gauge extends Component {
 						.attr('fill', 'none')
 
 					// Draw the arrow with status
-					const status = Tools.getProperty(options, 'gauge', 'status')
+					const status = getProperty(options, 'gauge', 'status')
 					DOMUtils.appendOrSelect(deltaArrowSelection, 'polygon.gauge-delta-arrow')
 						.attr('class', status !== null ? `gauge-delta-arrow status--${status}` : '')
 						.attr('points', self.getArrow(delta))
@@ -340,7 +340,7 @@ export class Gauge extends Component {
 	getInnerRadius() {
 		// Compute the outer radius needed
 		const radius = this.computeRadius()
-		const arcWidth = Tools.getProperty(this.getOptions(), 'gauge', 'arcWidth')
+		const arcWidth = getProperty(this.getOptions(), 'gauge', 'arcWidth')
 		return radius - arcWidth
 	}
 
@@ -389,7 +389,7 @@ export class Gauge extends Component {
 	// Helper functions
 	protected computeRadius() {
 		const options = this.getOptions()
-		const arcType = Tools.getProperty(options, 'gauge', 'type')
+		const arcType = getProperty(options, 'gauge', 'type')
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
