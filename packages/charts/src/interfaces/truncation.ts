@@ -9,9 +9,9 @@ export interface TruncationOptions {
 	/**
 	 * truncation threshold
 	 */
-	threshold?: Number
+	threshold?: number
 	/**
 	 * how many characters to be shown
 	 */
-	numCharacter?: Number
+	numCharacter?: number
 }

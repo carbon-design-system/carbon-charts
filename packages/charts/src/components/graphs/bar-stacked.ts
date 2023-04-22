@@ -107,7 +107,7 @@ export class StackedBar extends Bar {
 				const barWidth = this.getBarWidth()
 				const x0 = this.services.cartesianScales.getDomainValue(key, i) - barWidth / 2
 				const x1 = x0 + barWidth
-				let y0 = this.services.cartesianScales.getRangeValue(d[0], i)
+				const y0 = this.services.cartesianScales.getRangeValue(d[0], i)
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i)
 
 				// don't show if part of bar is out of zoom domain

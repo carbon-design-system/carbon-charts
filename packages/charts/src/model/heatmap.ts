@@ -93,7 +93,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			const customDomain = cartesianScales.getCustomDomainValuesByposition(mainXAxisPosition)
 
 			// Use user defined domain if specified
-			if (!!customDomain) {
+			if (customDomain) {
 				return customDomain
 			}
 
@@ -124,7 +124,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			const customDomain = cartesianScales.getCustomDomainValuesByposition(mainYAxisPosition)
 
 			// Use user defined domain if specified
-			if (!!customDomain) {
+			if (customDomain) {
 				return customDomain
 			}
 
@@ -203,9 +203,9 @@ export class HeatmapModel extends ChartModelCartesian {
 
 	/**
 	 * Converts Object matrix into a single array
-	 * @returns Object[]
+	 * @returns object[]
 	 */
-	getMatrixAsArray(): Object[] {
+	getMatrixAsArray(): object[] {
 		if (isEmpty(this._matrix)) {
 			this.getMatrix()
 		}

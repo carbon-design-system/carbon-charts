@@ -64,12 +64,12 @@ export interface TooltipOptions {
 	/**
 	 * a function to format the tooltip values
 	 */
-	valueFormatter?: Function
+	valueFormatter?: (value: any, label: string) => string
 	/**
 	 * custom function for returning tooltip HTML
 	 * passed an array or object with the data, and then the default tooltip markup
 	 */
-	customHTML?: Function
+	customHTML?: (data: any, defaultHTML: string) => string
 	/**
 	 * customizes the `Group` label shown inside tooltips
 	 */
@@ -96,7 +96,7 @@ export interface ThresholdOptions {
 	/**
 	 * a function to format the threshold values
 	 */
-	valueFormatter?: Function
+	valueFormatter?: (value: any) => string
 	/**
 	 * hex threshold line color
 	 */
@@ -181,7 +181,7 @@ export interface ToolbarControl {
 	/**
 	 * custom id for button
 	 */
-	id?: String
+	id?: string
 	/**
 	 * SVG HTML element
 	 */
@@ -190,13 +190,13 @@ export interface ToolbarControl {
 		height?: string
 		width?: string
 	}
-	shouldBeDisabled?: Function
+	shouldBeDisabled?: () => boolean
 	/**
 	 * function to execute on button click
 	 * alternatively, users can choose to not pass in a function and can
 	 * listen for events to execute asynchronously
 	 */
-	clickFunction?: Function
+	clickFunction?: () => void
 }
 
 /**
@@ -246,9 +246,9 @@ export interface ZoomBarOptions {
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */
-	initialZoomDomain?: Object[]
+	initialZoomDomain?: object[]
 	/**
 	 * options related to zoom bar data
 	 */
-	data?: Object[]
+	data?: object[]
 }

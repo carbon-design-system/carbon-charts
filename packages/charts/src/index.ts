@@ -109,18 +109,25 @@ export type {
 // Enums
 export {
 	Alignments,
+	AreaEvent,
 	ArrowDirections,
+	AxisEvent,
 	AxisFlavor,
 	AxisPositions,
 	AxisTitleOrientations,
+	BarEvent,
+	BoxplotEvent,
 	CalloutDirections,
+	CanvasZoomEvent,
 	CartesianOrientations,
+	ChartEvent,
 	ChartTheme,
 	ChartTypes,
 	ColorClassNameTypes,
 	ColorLegendType,
 	DividerStatus,
 	DominantBaseline,
+	GaugeEvent,
 	GaugeTypes,
 	LayoutAlignItems,
 	LayoutDirection,
@@ -128,42 +135,30 @@ export {
 	LegendItemType,
 	LegendOrientations,
 	LegendPositions,
+	LineEvent,
+	ModalEvent,
+	ModelEvent,
+	PieEvent,
+	RadarEvent,
 	RenderTypes,
 	ScaleTypes,
+	ScatterEvent,
 	Skeletons,
 	Statuses,
 	TextAnchor,
+	ThresholdEvent,
 	TickRotations,
 	ToolbarControlTypes,
+	TooltipEvent,
 	TruncationTypes,
+	TreeEvent,
+	TreemapEvent,
 	TreeTypes,
+	WordCloudEvent,
+	ZoombarEvent,
+	ZoomDomainEvent,
 	ZoomBarTypes
-} from './interfaces/enums'
-
-// Events with improved naming
-// TODO: Events should be internally renamed to match export so they do not conflict with existing classes
-export {
-	Area as AreaEvent,
-	Axis as AxisEvent,
-	Bar as BarEvent,
-	Boxplot as BoxplotEvent,
-	CanvasZoom as CanvasZoomEvent,
-	Chart as ChartEvent,
-	Gauge as GaugeEvent,
-	Line as LineEvent,
-	Modal as ModalEvent,
-	Model as ModelEvent,
-	Pie as PieEvent,
-	Radar as RadarEvent,
-	Scatter as ScatterEvent,
-	Threshold as ThresholdEvent,
-	Tooltip as TooltipEvent,
-	Tree as TreeEvent,
-	Treemap as TreemapEvent,
-	WordCloud as WordCloudEvent,
-	ZoomBar as ZoombarEvent,
-	ZoomDomain as ZoomDomainEvent
-} from './interfaces/events'
+} from './interfaces'
 
 // Less likely to be used externally
 export * as Configuration from './configuration'

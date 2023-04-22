@@ -55,13 +55,13 @@ export class AxisChartsTooltip extends Tooltip {
 								label: 'End',
 								value: value[1]
 							}
-					  ]
+						]
 					: [
 							{
 								label: rangeLabel,
 								value: datum[rangeIdentifier]
 							}
-					  ])
+						])
 			]
 
 			if (e.detail.additionalItems) {

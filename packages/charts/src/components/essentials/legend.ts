@@ -53,7 +53,7 @@ export class Legend extends Component {
 
 		const addedLegendItems = legendItems.enter().append('div').attr('class', 'legend-item')
 
-		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d, i) {
+		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d) {
 			return d.status === legend.items.status.ACTIVE
 		})
 

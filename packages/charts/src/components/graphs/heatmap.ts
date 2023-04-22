@@ -331,7 +331,7 @@ export class Heatmap extends Component {
 			// Iterate through Object and get sum, min, and max
 			ranges.forEach((element) => {
 				if (typeof this.matrix[datum][element].value === 'number') {
-					let value = this.matrix[datum][element].value
+					const value = this.matrix[datum][element].value
 					if (sum === null) {
 						sum = value
 						minimum = value
@@ -347,7 +347,7 @@ export class Heatmap extends Component {
 			label = rangeLabel
 			domains.forEach((element) => {
 				if (typeof this.matrix[element][datum].value === 'number') {
-					let value = this.matrix[element][datum].value
+					const value = this.matrix[element][datum].value
 					if (sum === null) {
 						sum = value
 						minimum = value

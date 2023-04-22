@@ -125,7 +125,7 @@ export class CartesianScales extends Service {
 		return this.getScaleLabel(this.getRangeAxisPosition())
 	}
 
-	update(animate = true) {
+	update() {
 		this.determineAxisDuality()
 		this.findDomainAndRangeAxes()
 		this.determineOrientation()

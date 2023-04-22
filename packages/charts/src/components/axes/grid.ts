@@ -162,7 +162,7 @@ export class Grid extends Component {
 			return
 		}
 
-		gridlinesX.forEach((line: HTMLElement, i: any) => {
+		gridlinesX.forEach((line: HTMLElement) => {
 			if (mousePos[0] >= +getTranslationValues(line).tx) {
 				floor++
 			}

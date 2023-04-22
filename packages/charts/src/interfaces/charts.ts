@@ -338,7 +338,7 @@ export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
 			formatter?: Function
-			enabled?: Boolean
+			enabled?: boolean
 		}
 		alignment?: Alignments
 		/**
@@ -359,9 +359,9 @@ export interface GaugeChartOptions extends BaseChartOptions {
 		deltaArrow?: {
 			direction?: ArrowDirections
 			size?: Function
-			enabled: Boolean
+			enabled: boolean
 		}
-		showPercentageSymbol?: Boolean
+		showPercentageSymbol?: boolean
 		status?: Statuses
 		deltaFontSize?: Function
 		numberSpacing?: number

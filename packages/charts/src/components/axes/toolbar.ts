@@ -63,7 +63,7 @@ export class Toolbar extends Component {
 			const { buttonList, overflowMenuItemList } = this.getControlConfigs()
 
 			// overflow button is required only if overflow menu item list is valid
-			if (!!overflowMenuItemList) {
+			if (overflowMenuItemList) {
 				buttonList.push(this.getOverflowButtonConfig())
 			}
 
@@ -339,7 +339,7 @@ export class Toolbar extends Component {
 		}
 
 		// propogation should not be stopped for keyboard events
-		if (!!event) {
+		if (event) {
 			event.stopImmediatePropagation()
 		}
 	}
@@ -427,10 +427,10 @@ export class Toolbar extends Component {
 
 	getToolbarButtonItems() {
 		const { buttonList, overflowMenuItemList } = this.getControlConfigs()
-		if (!!overflowMenuItemList) {
+		if (overflowMenuItemList) {
 			buttonList.push(this.getOverflowButtonConfig())
 		}
-		if (!!buttonList) {
+		if (buttonList) {
 			return buttonList
 		}
 
@@ -439,7 +439,7 @@ export class Toolbar extends Component {
 
 	getOverflowMenuItems() {
 		const { overflowMenuItemList } = this.getControlConfigs()
-		if (!!overflowMenuItemList) {
+		if (overflowMenuItemList) {
 			return overflowMenuItemList
 		} else {
 			return []

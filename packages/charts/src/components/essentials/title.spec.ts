@@ -1,4 +1,4 @@
-import { beforeEach, describe, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { select } from 'd3-selection'
 import { ScatterChart } from '../../charts'
 import { TestEnvironment } from '../../tests/index'

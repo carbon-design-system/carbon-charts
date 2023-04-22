@@ -84,7 +84,9 @@ export class DOMUtils extends Service {
 				width: bbox.width,
 				height: bbox.height
 			}
-		} catch (e) {}
+		} catch (e) {
+			console.error(e)
+		}
 
 		try {
 			boundingRect = svgSelector.node().getBoundingClientRect()
@@ -92,7 +94,9 @@ export class DOMUtils extends Service {
 				width: boundingRect.width,
 				height: boundingRect.height
 			}
-		} catch (e) {}
+		} catch (e) {
+			console.error(e)
+		}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
