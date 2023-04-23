@@ -14,6 +14,7 @@ export default defineConfig({
 			entry: {
 				index: 'src/index.ts',
 				'components/index': 'src/components/index.ts',
+				'demo/index': 'demo/index.ts',
 				'interfaces/index': 'src/interfaces/index.ts',
 				'model/index': 'src/model/index.ts',
 				'services/index': 'src/services/index.ts'
