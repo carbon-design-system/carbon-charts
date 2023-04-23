@@ -1,5 +1,6 @@
 {
   "extends": "../../tsconfig.json",
+  "types": ["vite/client"], // once Angular supports vite, this can move to ../../tsconfig.json
   "include": [
     "env.d.ts",
     "src/**/*",

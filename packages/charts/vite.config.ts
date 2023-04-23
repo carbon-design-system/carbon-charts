@@ -1,5 +1,4 @@
 /// <reference types="vitest" />
-import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -12,10 +11,16 @@ export default defineConfig({
 		sourcemap: true,
 		chunkSizeWarningLimit: 600,
 		lib: {
-			entry: fileURLToPath(new URL('src/index.ts', import.meta.url)),
+			entry: {
+				index: 'src/index.ts',
+				'components/index': 'src/components/index.ts',
+				'interfaces/index': 'src/interfaces/index.ts',
+				'model/index': 'src/model/index.ts',
+				'services/index': 'src/services/index.ts'
+			},
 			name: 'CarbonCharts',
-			formats: ['es', 'umd'],
-			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
+			formats: ['es', 'cjs'],
+			// fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			external: [ // externalizing D3 saves 117K in the bundle

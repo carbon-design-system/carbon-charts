@@ -1255,7 +1255,7 @@ const mapDemoGroups = (demoGroups: any) =>
 				demo.options.height = demo.options.height ?? '400px'
 
 				demo.codesandbox = {} // VanillaJS, Angular and React use StackBlitz via demo.code.vanilla, angular, react
-				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo))
+				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo)) // TODO: move to StackBlitz (template: 'svelte-ts')
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
 				const project = {

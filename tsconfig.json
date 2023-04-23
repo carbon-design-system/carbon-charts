@@ -10,6 +10,7 @@
         "./src/*"
       ]
     },
+    "isolatedModules": true, // recommended by vite
     "strict": false,
     "resolveJsonModule": true,
     "allowJs": true,

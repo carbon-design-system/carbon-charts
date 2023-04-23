@@ -3,9 +3,10 @@
 	"compilerOptions": {
 		"noEmitOnError": true,
 		// Deal with errors in current code
-		"useDefineForClassFields": false, // so we don't need declare on all unitialized properties
+		"useDefineForClassFields": false, // prevents 7 TypeScript errors related to missing declare statements and 1 where 'services' is used before its initialization
 		"baseUrl": "."
 	},
+	"types": ["vite/client"], // once Angular supports vite, this can move to ../../tsconfig.json
 	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*", "demo/**/*"],
 	"exclude": ["node_modules", "src/**/*.spec.ts", "src/tests", "demo/bundle"],
 	"references": [
