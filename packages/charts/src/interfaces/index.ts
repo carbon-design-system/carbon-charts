@@ -103,7 +103,7 @@ export * as Events from './events'
 
 /*
   Events should be named like this so they can be
-  individually imported without conflicts.
+  individually imported without name conflicts with components/graphs.
   TODO: Events should be internally renamed to match export so they do not conflict with existing classes
 */
 export {
@@ -128,4 +128,3 @@ export {
 	ZoomBar as ZoombarEvent,
 	ZoomDomain as ZoomDomainEvent
 } from './events'
-

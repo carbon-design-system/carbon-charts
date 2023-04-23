@@ -10,18 +10,12 @@ export class Events extends Service {
 		this.documentFragment = document.createDocumentFragment()
 	}
 
-	addEventListener(type: string, listener: Function) {
-		// Need the casting to any here since typescript
-		// Is expecting a function of type EventListenerOrEventListenerObject here
-		// Which seems unreasonable
-		this.documentFragment.addEventListener(type, listener as any)
+	addEventListener(type: string, listener: EventListenerOrEventListenerObject) {
+		this.documentFragment.addEventListener(type, listener)
 	}
 
-	removeEventListener(type: string, listener: Function) {
-		// Need the casting to any here since typescript
-		// Is expecting a function of type EventListenerOrEventListenerObject here
-		// Which seems unreasonable
-		this.documentFragment.removeEventListener(type, listener as any)
+	removeEventListener(type: string, listener: EventListenerOrEventListenerObject) {
+		this.documentFragment.removeEventListener(type, listener)
 	}
 
 	dispatchEvent(eventType: string, eventDetail?: object) {

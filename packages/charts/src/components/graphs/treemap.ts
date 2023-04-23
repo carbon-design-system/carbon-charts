@@ -6,7 +6,6 @@ import { getProperty } from '../../tools'
 
 // D3 Imports
 import { hierarchy as d3Hierarchy, treemap as d3Treemap } from 'd3-hierarchy'
-import { sum } from 'd3-array'
 import { hsl, color } from 'd3-color'
 import { select } from 'd3-selection'
 

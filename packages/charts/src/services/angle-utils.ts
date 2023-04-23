@@ -7,7 +7,7 @@ export interface Point {
 
 export type Angle = number
 
-interface LabelAlignment {
+export interface LabelAlignment {
 	textAnchor: TextAnchor
 	dominantBaseline: DominantBaseline
 }

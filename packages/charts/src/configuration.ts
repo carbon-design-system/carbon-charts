@@ -604,4 +604,26 @@ export const options = {
 	heatmapChart
 }
 
-export * from './configuration-non-customizable'
+export {
+	alluvial,
+	area,
+	axis,
+	boxplot,
+	canvasZoomSettings,
+	carbonPrefix,
+	circlePack,
+	color,
+	defaultLegendAdditionalItems,
+	heatmap,
+	histogram,
+	legend,
+	lines,
+	meter,
+	pie,
+	radar,
+	spacers,
+	tooltips,
+	transitions,
+	toolbar,
+	zoomBar,
+} from './configuration-non-customizable';
