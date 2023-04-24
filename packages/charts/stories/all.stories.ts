@@ -1,11 +1,9 @@
 import { storiesOf, type Args } from '@storybook/html'
-import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '../src/interfaces'
 import * as ChartComponents from '../src/charts'
 import { color } from '../src/configuration-non-customizable'
-import { storybookDemoGroups } from '../demo/data'
-import * as storyUtils from '../demo/utils'
+import { addControls, addOtherVersions, storybookDemoGroups } from '../src/demo'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100
@@ -122,11 +120,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 					options: args.options
 				})
 
-				storyUtils.addControls(container, demoGroup, chart, {
+				addControls(container, demoGroup, chart, {
 					colorPairingOptions
 				})
 
-				storyUtils.addOtherVersions(container, demoGroup, demo, {
+				addOtherVersions(container, demoGroup, demo, {
 					currentVersion: 'vanilla'
 				})
 
