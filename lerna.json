@@ -1,5 +1,7 @@
 {
-	"lerna": "3.13.4",
+	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
+	"version": "1.7.1",
+	"name": "root",
 	"packages": [
 		"packages/*"
 	],
@@ -8,10 +10,15 @@
 	"command": {
 		"publish": {
 			"ignoreChanges": [
-				"packages/*/demo",
+				"packages/*/demo/bundle",
 				"**/*.md"
 			]
-		}
+		},
+		"bootstrap": {
+      "npmClientArgs": [
+        "--cached"
+      ]
+    }
 	},
-	"version": "1.6.14"
+  "commandVersion": "6.6.1"
 }

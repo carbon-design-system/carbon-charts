@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.6.14",
+	"version": "1.7.1",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -48,7 +48,7 @@
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^1.6.14",
+		"@carbon/charts": "^1.7.1",
 		"@carbon/icons-react": "^10.49.0",
 		"@carbon/telemetry": "0.1.0"
 	},
@@ -60,6 +60,7 @@
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/react": "5.3.12",
+		"@types/node": "^12.0.0",
 		"@types/react": "17.0.0",
 		"@types/react-dom": "17.0.0",
 		"babel-cli": "6.26.0",
@@ -71,6 +72,7 @@
 		"babel-preset-env": "1.6.1",
 		"babel-preset-react": "6.24.1",
 		"base64-inline-loader": "1.1.0",
+		"classnames": "^2.3.2",
 		"css-loader": "0.28.7",
 		"img-loader": "2.0.0",
 		"react": "17.0.2",

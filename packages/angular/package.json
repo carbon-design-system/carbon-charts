@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.6.14",
+	"version": "1.7.1",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -41,7 +41,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^1.6.14",
+		"@carbon/charts": "^1.7.1",
 		"@carbon/telemetry": "0.1.0"
 	},
 	"peerDependencies": {
@@ -69,7 +69,7 @@
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
 		"@storybook/angular": "5.3.12",
-		"@types/node": "12.11.7",
+		"@types/node": "^12.0.0",
 		"babel-loader": "8.0.5",
 		"core-js": "3.0.0",
 		"karma-webpack": "4.0.2",
