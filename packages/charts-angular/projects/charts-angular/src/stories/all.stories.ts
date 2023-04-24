@@ -1,10 +1,9 @@
 import { storiesOf, type Args, type StoryFn } from '@storybook/angular'
-import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@carbon/charts'
 import type { Demo, DemoGroup } from './Demo'
 import { ChartsModule } from '../public-api'
-import { storybookDemoGroups } from '@carbon/charts/demo'
+import { storybookDemoGroups } from '@carbon/charts/demo' // FIX
 
 const DEFAULT_THEME = ChartTheme.G100
 

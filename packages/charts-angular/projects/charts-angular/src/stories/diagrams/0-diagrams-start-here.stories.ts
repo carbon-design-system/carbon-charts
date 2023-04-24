@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { Component as CarbonComponent } from '@carbon/charts'
+import { buildElbowPathString } from '@carbon/charts'
 import { UserModule, WikisModule } from '@carbon/icons-angular'
 import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../public-api'
 import { getTemplate } from './utils'
@@ -150,12 +150,12 @@ const edgeData = [
 	{
 		source: 'c',
 		target: 'b',
-		path: (source: any, target: any) => CarbonComponent.buildElbowPathString(source, target)
+		path: (source: any, target: any) => buildElbowPathString(source, target)
 	},
 	{
 		source: 'd',
 		target: 'c',
-		path: (source: any, target: any) => CarbonComponent.buildElbowPathString(source, target),
+		path: (source: any, target: any) => buildElbowPathString(source, target),
 		variant: 'tunnel'
 	}
 ]

@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
 import { EdgeModule } from '../../public-api'
-import { Component } from '@carbon/charts'
+import { buildBezierPathString, buildElbowPathString } from '@carbon/charts'
 import { getTemplate } from './utils'
 
 const linkSource = { x: 0, y: 0 }
@@ -144,7 +144,7 @@ storiesOf('Diagrams/Edges', module)
 			props: {
 				source: linkSource,
 				target: linkTarget,
-				path: Component.buildElbowPathString(linkSource, linkTargetCurve)
+				path: buildElbowPathString(linkSource, linkTargetCurve)
 			}
 		}),
 		{
@@ -166,7 +166,7 @@ storiesOf('Diagrams/Edges', module)
 			props: {
 				source: linkSource,
 				target: linkTarget,
-				path: Component.buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
+				path: buildBezierPathString(linkSource, linkTargetCurve, 150, 280, 150, 30)
 			}
 		}),
 		{
