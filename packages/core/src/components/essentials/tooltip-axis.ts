@@ -11,7 +11,7 @@ export class AxisChartsTooltip extends Tooltip {
 		}
 
 		const data = e.detail.data;
-		if (!data.length || !data[0]) {
+		if (!Array.isArray(data) || !data.length || !data[0]) {
 			return [];
 		}
 
