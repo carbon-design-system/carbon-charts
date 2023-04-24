@@ -14,14 +14,12 @@ export default defineConfig({
 			entry: {
 				index: 'src/index.ts',
 				'components/index': 'src/components/index.ts',
-				'demo/index': 'demo/index.ts',
 				'interfaces/index': 'src/interfaces/index.ts',
 				'model/index': 'src/model/index.ts',
-				'services/index': 'src/services/index.ts'
+				'services/index': 'src/services/index.ts',
+				'demo/index': 'demo/index.ts',
 			},
-			name: 'CarbonCharts',
-			formats: ['es', 'cjs'],
-			// fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
+			name: 'CarbonCharts'
 		},
 		rollupOptions: {
 			external: [ // externalizing D3 saves 117K in the bundle
@@ -37,7 +35,6 @@ export default defineConfig({
 				'd3-time-format'
 			],
 			output: {
-				name: 'CarbonCharts',
 				globals: {
 					'd3-scale': 'd3',
 					'd3-selection': 'd3',
@@ -55,6 +52,6 @@ export default defineConfig({
 		}
 	},
 	plugins: [
-		dts()
+		// dts()
 	]
 })

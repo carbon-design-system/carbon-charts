@@ -6,6 +6,5 @@
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true
 	},
-	"include": ["./vite.config.ts", "./vite.demo.config.ts"],
-	"exclude": []
+	"include": ["./vite.config.ts", "./vite.demo.config.ts"]
 }
