@@ -2,52 +2,54 @@
 	"name": "@carbon/charts",
 	"version": "1.7.1",
 	"description": "Carbon charting components",
+	"type": "module",
 	"module": "./dist/index.mjs",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js",
-			"types": "./dist/index.d.ts",
-			"browser": {
-				"import": "./dist/index.mjs",
-				"require": "./dist/index.js",
-				"types": "./dist/index.d.ts"
-			}
-		},
 		"./package.json": "./package.json",
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css",
+		".": {
+			"types": "./dist/index.d.ts",
+			"browser": {
+				"import": "./dist/index.mjs",
+				"require": "./dist/index.js"
+			},
+			"node": {
+				"import": "./dist/index.mjs",
+				"require": "./dist/index.js"
+			}
+		},
 		"./components": {
+			"types": "./dist/components/index.d.ts",
 			"import": "./dist/components/index.mjs",
-			"require": "./dist/components/index.js",
-			"types": "./dist/components/index.d.ts"
+			"require": "./dist/components/index.js"
 		},
 		"./demo/styles.css": "./dist/demo/styles.css",
 		"./demo": {
+			"types": "./dist/demo/index.d.ts",
 			"import": "./dist/demo/index.mjs",
-			"require": "./dist/demo/index.js",
-			"types": "./dist/demo/index.d.ts"
+			"require": "./dist/demo/index.js"
 		},
 		"./interfaces": {
+			"types": "./dist/interfaces/index.d.ts",
 			"import": "./dist/interfaces/index.mjs",
-			"require": "./dist/interfaces/index.js",
-			"types": "./dist/interfaces/index.d.ts"
+			"require": "./dist/interfaces/index.js"
 		},
 		"./model": {
+			"types": "./dist/model/index.d.ts",
 			"import": "./dist/model/index.mjs",
-			"require": "./dist/model/index.js",
-			"types": "./dist/model/index.d.ts"
+			"require": "./dist/model/index.js"
 		},
 		"./services": {
+			"types": "./dist/services/index.d.ts",
 			"import": "./dist/services/index.mjs",
-			"require": "./dist/services/index.js",
-			"types": "./dist/services/index.d.ts"
+			"require": "./dist/services/index.js"
 		}
 	},
 	"files": [
-		"dist/*"
+		"dist"
 	],
 	"scripts": {
 		"bundle:package": "vite build",
@@ -122,7 +124,7 @@
 		"@storybook/testing-library": "^0.1.0",
 		"@storybook/theming": "^7.0.6",
 		"@types/d3": "^7.4.0",
-		"@types/node": "^18.15.13",
+		"@types/node": "^18.16.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.0",
 		"@typescript-eslint/parser": "^5.59.0",
 		"codesandbox": "^2.2.3",
@@ -130,7 +132,7 @@
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.11",
 		"jsdom": "^21.1.1",
-		"prettier": "^2.8.7",
+		"prettier": "^2.8.8",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"sass": "^1.62.0",
