@@ -57,7 +57,7 @@
 		"styles:css:min:charts": "sass src/styles/styles.scss dist/styles.min.css --style=compressed --load-path=./node_modules",
 		"styles:charts": "yarn styles:scss:charts && yarn styles:css:charts && yarn styles:css:min:charts",
 		"md:charts": "cp CHANGELOG.md dist/ && cp ../../LICENSE.md dist/",
-		"styles:demo": "sass demo/styles.scss dist/demo/styles.css --load-path=./node_modules",
+		"styles:demo": "sass src/demo/styles.scss dist/demo/styles.css --load-path=./node_modules",
 		"build:docs": "typedoc --tsconfig ./src/tsconfig.json --out ./demo/bundle/documentation ./src/index.ts",
 		"build:package": "yarn bundle:package && yarn styles:charts && yarn styles:demo && yarn build:docs && yarn md:charts",
 		"build:demo": "storybook build -o demo/bundle --quiet",

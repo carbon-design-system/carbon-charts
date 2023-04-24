@@ -17,7 +17,7 @@ export default defineConfig({
 				'interfaces/index': 'src/interfaces/index.ts',
 				'model/index': 'src/model/index.ts',
 				'services/index': 'src/services/index.ts',
-				'demo/index': 'demo/index.ts',
+				'demo/index': 'src/demo/index.ts',
 			},
 			name: 'CarbonCharts'
 		},
@@ -52,6 +52,9 @@ export default defineConfig({
 		}
 	},
 	plugins: [
-		// dts()
+		dts({
+			exclude: './package.json'
+		})
+		// equivalent to: npx tsc src/*.ts --declaration --emitDeclarationOnly --declarationDir dist/ --resolveJsonModule --esModuleInterop
 	]
 })

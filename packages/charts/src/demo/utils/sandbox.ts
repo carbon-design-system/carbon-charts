@@ -1,11 +1,10 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 
-import packageJSON from '../package.json'
+//@ts-ignore
+import packageJSON from '../../../package.json'
 const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']
-
-const plexCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";`
 
 const sandboxConfig =
 `{
@@ -504,7 +503,7 @@ import '@carbon/charts/styles.css'
 			'svelte-check': '^3.1.4',
 			tslib: '^2.5.0',
 			typescript: '^5.0.3',
-			vite: '^4.2.1'
+			vite: '^4.3.1'
 		},
 		engines: {
 			node: '>=16.12.0'

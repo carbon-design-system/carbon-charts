@@ -9,7 +9,7 @@
 	"types": [
 		"vite/client" // once Angular supports vite, this can move to ../../tsconfig.json
 	],
-	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*", "demo/**/*"],
+	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*"],
 	"exclude": ["node_modules", "src/**/*.spec.ts", "src/tests", "demo/bundle"],
 	"references": [
 		{
@@ -17,4 +17,3 @@
 		}
 	]
 }
-// npx tsc src/*.ts --declaration --emitDeclarationOnly --declarationDir dist/ --resolveJsonModule --esModuleInterop
