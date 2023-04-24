@@ -25,6 +25,7 @@ yarn build
 # authenticate with the npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-node scripts/add-telemetry-to-packages.js
+node scripts/add-telemetry-to-packages.cjs
 
+# Only publishes dist but new package.json exports set for whole package
 npx lerna publish from-git --yes --force-publish --no-verify-access --contents dist

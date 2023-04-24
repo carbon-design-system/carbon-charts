@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
 // Define paths to package.json files
 const TELEMETRY_ENABLED_PACKAGES = [
@@ -8,17 +8,17 @@ const TELEMETRY_ENABLED_PACKAGES = [
 	'charts-vue',
 	'charts-react',
 	'charts-svelte',
-];
+]
 
 TELEMETRY_ENABLED_PACKAGES.forEach((packageName) => {
 	const packageJSONPath = path.resolve(
 		__dirname,
 		`../packages/${packageName}/dist/package.json`
-	);
-	const packageJSON = require(packageJSONPath);
+	)
+	const packageJSON = require(packageJSONPath)
 
 	if (!packageJSON.scripts) {
-		packageJSON.scripts = {};
+		packageJSON.scripts = {}
 	}
 
 	packageJSON.scripts.postinstall = 'carbon-telemetry collect --install';
@@ -30,5 +30,5 @@ TELEMETRY_ENABLED_PACKAGES.forEach((packageName) => {
 		function (err) {
 			if (err) throw err;
 		}
-	);
-});
+	)
+})
