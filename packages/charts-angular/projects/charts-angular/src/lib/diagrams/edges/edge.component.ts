@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { Component as CarbonComponent } from '@carbon/charts'
+import { buildStraightPathString } from '@carbon/charts'
 
 import { carbonPrefix } from '../config'
 import { NgClass, NgStyle } from '@angular/common';
@@ -40,5 +40,5 @@ export class Edge {
 
 	pathClasses = ''
 	namespace = `${carbonPrefix}--cc--edge`
-	straight = CarbonComponent.buildStraightPathString
+	straight = buildStraightPathString
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { Component as CarbonComponent } from '@carbon/charts'
+import { buildStraightPathString } from '@carbon/charts'
 import { carbonPrefix } from './utils'
 
 type Coordinates = {
@@ -33,7 +33,7 @@ const Edge: React.FC<EdgeProps /*& React.SVGProps<SVGGElement>*/> = ({
 		[rest.className]: rest.className
 	})
 
-	const d = path || CarbonComponent.buildStraightPathString(source, target)
+	const d = path || buildStraightPathString(source, target)
 
 	return (
 		<g className={pathClasses} {...rest}>

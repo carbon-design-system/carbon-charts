@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { carbonPrefix } from '../../config'
-import { NgClass } from '@angular/common';
+import { NgClass } from '@angular/common'
 
 @Component({
     selector: 'ibm-diagram-card-node-subtitle',

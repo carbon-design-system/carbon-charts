@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Component as CarbonComponent } from '@carbon/charts'
+import { arrowLeft, arrowRight, circle, diamond, square, tee } from '@carbon/charts'
 import { carbonPrefix } from '../../config'
 import { NgClass, NgStyle } from '@angular/common';
 
@@ -66,7 +66,7 @@ export class Marker {
 })
 export class MarkerArrowLeft extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.arrowLeft })
+		this.setAttributes({ ...arrowLeft })
 	}
 }
 @Component({
@@ -76,7 +76,7 @@ export class MarkerArrowLeft extends Marker implements OnInit {
 })
 export class MarkerArrowRight extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.arrowRight })
+		this.setAttributes({ ...arrowRight })
 	}
 }
 @Component({
@@ -86,7 +86,7 @@ export class MarkerArrowRight extends Marker implements OnInit {
 })
 export class MarkerShapeNode extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.circle })
+		this.setAttributes({ ...circle })
 	}
 }
 @Component({
@@ -96,7 +96,7 @@ export class MarkerShapeNode extends Marker implements OnInit {
 })
 export class MarkerDiamond extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.diamond })
+		this.setAttributes({ ...diamond })
 	}
 }
 @Component({
@@ -106,7 +106,7 @@ export class MarkerDiamond extends Marker implements OnInit {
 })
 export class MarkerSquare extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.square })
+		this.setAttributes({ ...square })
 	}
 }
 @Component({
@@ -116,6 +116,6 @@ export class MarkerSquare extends Marker implements OnInit {
 })
 export class MarkerTee extends Marker implements OnInit {
 	ngOnInit() {
-		this.setAttributes({ ...CarbonComponent.tee })
+		this.setAttributes({ ...tee })
 	}
 }

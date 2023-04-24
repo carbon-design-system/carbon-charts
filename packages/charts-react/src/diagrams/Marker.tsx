@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { carbonPrefix } from './utils'
-import { Component as CarbonComponent } from '@carbon/charts'
+import { arrowLeft, arrowRight, circle, diamond, square, tee } from '@carbon/charts'
 
 type MarkerProps = {
 	id?: string
@@ -46,12 +46,12 @@ const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
 	)
 }
 
-const ArrowLeftMarker = ({ ...rest }) => <Marker {...CarbonComponent.arrowLeft} {...rest} />
-const ArrowRightMarker = ({ ...rest }) => <Marker {...CarbonComponent.arrowRight} {...rest} />
-const CircleMarker = ({ ...rest }) => <Marker {...CarbonComponent.circle} {...rest} />
-const DiamondMarker = ({ ...rest }) => <Marker {...CarbonComponent.diamond} {...rest} />
-const SquareMarker = ({ ...rest }) => <Marker {...CarbonComponent.square} {...rest} />
-const TeeMarker = ({ ...rest }) => <Marker {...CarbonComponent.tee} {...rest} />
+const ArrowLeftMarker = ({ ...rest }) => <Marker {...arrowLeft} {...rest} />
+const ArrowRightMarker = ({ ...rest }) => <Marker {...arrowRight} {...rest} />
+const CircleMarker = ({ ...rest }) => <Marker {...circle} {...rest} />
+const DiamondMarker = ({ ...rest }) => <Marker {...diamond} {...rest} />
+const SquareMarker = ({ ...rest }) => <Marker {...square} {...rest} />
+const TeeMarker = ({ ...rest }) => <Marker {...tee} {...rest} />
 
 export {
 	Marker,

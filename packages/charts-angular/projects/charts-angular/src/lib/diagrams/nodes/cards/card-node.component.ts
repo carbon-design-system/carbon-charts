@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { carbonPrefix } from '../../config'
-import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common'
 
 @Component({
     selector: 'ibm-diagram-card-node',
