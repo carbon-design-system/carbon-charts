@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
 import sdk from '@stackblitz/sdk'
 import { color, ChartTheme } from '@carbon/charts'
-import { addControls, addOtherVersions, type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/dist/demo'
+import { addControls, addOtherVersions, type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
 import * as ChartComponents from '../charts'
 
 const DEFAULT_THEME = ChartTheme.G100

@@ -1,6 +1,6 @@
 import { storiesOf, type Args } from '@storybook/svelte'
 import { ChartTheme } from '@carbon/charts'
-import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/dist/demo'
+import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
 import * as ChartComponents from '../lib'
 import ChartWrapper from './ChartWrapper.svelte'
 import Welcome from './Welcome.svelte'
