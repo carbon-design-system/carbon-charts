@@ -15,14 +15,14 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-angular d3
+npm install -S @carbon/charts-angular d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-angular d3
+yarn add @carbon/charts-angular d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a

@@ -2,9 +2,7 @@
   "version": "1.7.1",
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "name": "root",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
@@ -14,10 +12,8 @@
         "**/*.md"
       ]
     },
-    "bootstrap": {
-      "npmClientArgs": [
-        "--cached"
-      ]
+    "version": {
+      "message": "chore(release): publish %v"
     }
   },
   "commandVersion": "6.6.1"

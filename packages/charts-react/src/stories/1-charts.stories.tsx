@@ -1,17 +1,16 @@
 import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
-import { hrefTo } from '@storybook/addon-links'
 import sdk from '@stackblitz/sdk'
-import { Configuration, ChartTheme } from '@carbon/charts'
+import { color, ChartTheme } from '@carbon/charts'
 import { addControls, addOtherVersions, storybookDemoGroups } from '@carbon/charts/demo'
-import type { Demo } from './Demo'
+import type { Demo, DemoGroup } from './Demo'
 import * as ChartComponents from '../charts'
 
 const DEFAULT_THEME = ChartTheme.G100
-const colorPairingOptions = Configuration.color.pairingOptions
+const colorPairingOptions = color.pairingOptions
 
 // Loop through demo groups array
-storybookDemoGroups.forEach((demoGroup) => {
+storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
