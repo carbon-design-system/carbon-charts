@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.2...v1.7.3) (2023-04-25)
+
+### Bug Fixes
+
+- **axis-tooltips:** missing check for lack of data
+  ([#1548](https://github.com/carbon-design-system/carbon-charts/issues/1548))
+  ([a3fabe4](https://github.com/carbon-design-system/carbon-charts/commit/a3fabe4f67dbd3b9dd8407f09d51b4659af0989f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.7.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.1...v1.7.2) (2023-04-25)
 
 ### Bug Fixes
