@@ -140,6 +140,10 @@ export interface BaseChartOptions {
 			colors?: Array<string>
 		}
 	}
+	/**
+	 * whether this type of chart is experimental
+	 */
+	experimental?: boolean
 }
 
 /**

@@ -1,25 +1,7 @@
 import { storiesOf, type Args } from '@storybook/vue3'
 import * as ChartComponents from '../components'
-import { storybookDemoGroups } from '@carbon/charts/demo'
-import { type BaseChartOptions, type ChartTabularData, ChartTheme } from '@carbon/charts'
-
-interface Demo {
-	title: string
-	chartType: {
-		vue: string
-	}
-	data: ChartTabularData
-	options: BaseChartOptions
-	codesandbox: {
-		vue: string
-	}
-}
-
-interface DemoGroup {
-	storyGroupTitle: string
-	title: string
-	demos: Demo[]
-}
+import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/dist/demo'
+import { ChartTheme } from '@carbon/charts'
 
 const DEFAULT_THEME = ChartTheme.G100
 

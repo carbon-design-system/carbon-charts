@@ -1,3 +1,4 @@
+import { BaseChartOptions, ChartTabularData } from '@/interfaces'
 import * as areaDemos from './area'
 import * as barDemos from './bar'
 import * as boxplotDemos from './boxplot'
@@ -27,35 +28,6 @@ import * as heatmapDemos from './heatmap'
 //@ts-ignore
 import packageJSON from '../../../package.json'
 
-// export * from './area'
-// export * from './bar'
-// export * from './boxplot'
-// export * from './bubble'
-// export * from './bullet'
-// export * from './combo'
-// export * from './donut'
-// export * from './gauge'
-// export * from './histogram'
-// export * from './line'
-// export * from './lollipop'
-// export * from './meter'
-// export * from './pie'
-// export * from './radar'
-// export * from './scatter'
-// export * from './step'
-// export * from './time-series-axis'
-// export * from './treemap'
-// export * from './circle-pack'
-// export * from './toolbar'
-// export * from './wordcloud'
-// export * from './zoom-bar'
-// export * from './alluvial'
-// export * from './heatmap'
-
-const libraryVersion = packageJSON.version
-const D3VERSION = packageJSON.peerDependencies['d3']
-const stylesVersion = packageJSON.dependencies['@carbon/styles']
-
 import {
 	createChartSandbox,
 	createVanillaChartApp,
@@ -66,13 +38,49 @@ import {
 } from '../utils'
 
 import chartTypes from './chart-types'
-// export * as chartTypes from './chart-types'
+
+export interface Demo {
+	title: string
+	chartType: {
+		vanilla: string
+		angular?: string
+		react?: string
+		svelte?: string
+		vue?: string
+	}
+	data: ChartTabularData
+	options: BaseChartOptions
+	codesandbox: {
+		vanilla: string
+		angular?: string
+		react?: string
+		svelte?: string
+		vue?: string
+	},
+	code: {
+		vanilla: any
+		angular?: any
+		react?: any
+		svelte?: any
+		vue?: any
+	}
+}
+
+export interface DemoGroup {
+	storyGroupTitle: string
+	title: string
+	demos: Demo[]
+}
 
 /*export */enum DemoGroupTypes {
 	UTILITY = 'utility',
 	SIMPLE_CHART = 'simple-chart',
 	COMPLEX_CHART = 'complex-chart'
 }
+
+const libraryVersion = packageJSON.version
+const D3VERSION = packageJSON.peerDependencies['d3']
+const stylesVersion = packageJSON.dependencies['@carbon/styles']
 
 const utilityDemoGroups = [
 	{

@@ -3,7 +3,7 @@ import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '../src/interfaces'
 import * as ChartComponents from '../src/charts'
 import { color } from '../src/configuration-non-customizable'
-import { addControls, addOtherVersions, storybookDemoGroups } from '../src/demo'
+import { addControls, addOtherVersions, type Demo, type DemoGroup, storybookDemoGroups } from '../src/demo'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100
@@ -46,11 +46,11 @@ introStories
 )
 
 // Loop through all demo groups
-storybookDemoGroups.forEach((demoGroup) => {
+storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group for each demo group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
-	demoGroup.demos.forEach(demo => {
+	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla]
 
