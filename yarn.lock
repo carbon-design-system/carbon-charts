@@ -10690,10 +10690,10 @@ dom-serializer@^1.0.1:
     domhandler "^4.2.0"
     entities "^2.0.0"
 
-dom-to-image-more@^3.1.5:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/dom-to-image-more/-/dom-to-image-more-3.1.5.tgz#edce944901ee388335f5dd5dd1fd05d07f812916"
-  integrity sha512-VtXLMgO97LW3FB8PwILjsCgoMq/EhgB4xAdbpiqWPVS/9j/LVfdJX/9j6xFKoMXX0aeAk6a5dmkiWP2mAEsWpg==
+dom-to-image-more@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/dom-to-image-more/-/dom-to-image-more-3.1.6.tgz#a8afd83fe90fac72d72159f2fe618c8a45281cde"
+  integrity sha512-VMO0jNme32T06mWtkOC9QXfj+1npoJxkaTFW0DCwBLguwBKMjqwndiDANxDnbZ0kvNEecwxkv0Zmgdr96cGtAA==
 
 dom-walk@^0.1.0:
   version "0.1.2"
