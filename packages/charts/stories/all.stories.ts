@@ -38,11 +38,11 @@ introStories
 
 			return container
 		},
-	{
-		controls: {
-			hideNoControlsWarning: true
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}
 )
 
 // Loop through all demo groups

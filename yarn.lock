@@ -2083,7 +2083,7 @@ __metadata:
     "@storybook/testing-library": ^0.1.0
     "@storybook/theming": ^7.0.7
     "@sveltejs/adapter-auto": ^2.0.1
-    "@sveltejs/kit": ^1.15.8
+    "@sveltejs/kit": ^1.15.9
     "@sveltejs/package": ^2.0.2
     "@typescript-eslint/eslint-plugin": ^5.59.1
     "@typescript-eslint/parser": ^5.59.1
@@ -5402,11 +5402,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.15.8":
-  version: 1.15.8
-  resolution: "@sveltejs/kit@npm:1.15.8"
+"@sveltejs/kit@npm:^1.15.9":
+  version: 1.15.9
+  resolution: "@sveltejs/kit@npm:1.15.9"
   dependencies:
-    "@sveltejs/vite-plugin-svelte": ^2.1.0
+    "@sveltejs/vite-plugin-svelte": ^2.1.1
     "@types/cookie": ^0.5.1
     cookie: ^0.5.0
     devalue: ^4.3.0
@@ -5424,7 +5424,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 63c0f7aff9647c73e2bcd7fa9a1eadbfe182b32b0892b2b1a78047be0763817fe0b3a725e3ac3995ccdc894b33c135b7b9b1344a3567e882e61452d7fe56bfc1
+  checksum: 28b059feb6ed1dffad74bd41e952daa320323cfb165d23d5d8c91e9d1fad448fdbbcd69a4d030ce4d5ea888250682f3ab7f2ccdbb5357b3f3d315afa9263dfa5
   languageName: node
   linkType: hard
 
@@ -5444,7 +5444,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/vite-plugin-svelte@npm:^2.0.0, @sveltejs/vite-plugin-svelte@npm:^2.1.0":
+"@sveltejs/vite-plugin-svelte@npm:^2.0.0":
   version: 2.1.0
   resolution: "@sveltejs/vite-plugin-svelte@npm:2.1.0"
   dependencies:
@@ -5458,6 +5458,23 @@ __metadata:
     svelte: ^3.54.0
     vite: ^4.0.0
   checksum: 894e96ac6198d5bee8b88f9d68607157794a6f09c30997065dce4a54fedb8a01bcc8bd685f20c49e2822916804b6cecffd45e4b2b9eb81e7ad80cf3e07cdc489
+  languageName: node
+  linkType: hard
+
+"@sveltejs/vite-plugin-svelte@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@sveltejs/vite-plugin-svelte@npm:2.1.1"
+  dependencies:
+    debug: ^4.3.4
+    deepmerge: ^4.3.1
+    kleur: ^4.1.5
+    magic-string: ^0.30.0
+    svelte-hmr: ^0.15.1
+    vitefu: ^0.2.4
+  peerDependencies:
+    svelte: ^3.54.0
+    vite: ^4.0.0
+  checksum: 42187a64bcf22a071b4dcc094a1ef18633e7a2f83b7f800142e6dca33b1dd0397c6773555a5ff48b65eac2365ed407a7c30217461536666e59cbab9d10ec10f7
   languageName: node
   linkType: hard
 
