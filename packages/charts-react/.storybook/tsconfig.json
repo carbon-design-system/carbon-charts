@@ -10,6 +10,6 @@
 		"skipLibCheck": true
 	},
 	"exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../demo/bundle/**.*"],
-	"include": ["../src/**/*", "../demo/**.*", "./preview.ts", "../../charts/stories/**/*"],
+	"include": ["../src/**/*", "../demo/**.*", "./*.ts", "../../charts/stories/**/*"],
 	"files": ["./typings.d.ts"]
 }
