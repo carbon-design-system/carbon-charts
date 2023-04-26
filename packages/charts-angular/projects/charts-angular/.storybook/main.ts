@@ -2,7 +2,6 @@ import type { StorybookConfig } from '@storybook/angular'
 import { resolve } from 'path'
 const core = '../../../../charts'
 const corePackage = resolve(__dirname, `${core}/dist`)
-// import { dirname } from 'path'
 
 const config: StorybookConfig = {
   stories: [
@@ -48,6 +47,7 @@ const config: StorybookConfig = {
     config.resolve!.alias = {
       ...config.resolve!.alias,
       '@carbon/charts': corePackage,
+      // '@carbon/charts/demo': `../../../../charts/dist/demo`
       // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
     }
     return config

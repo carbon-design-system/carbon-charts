@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.7.1",
+	"version": "1.7.3",
 	"description": "Carbon charting components for React",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -76,7 +76,7 @@
 		"sass": "^1.62.1",
 		"storybook": "^7.0.7",
 		"typescript": "^5.0.4",
-		"vite": "^4.3.2",
+		"vite": "^4.3.3",
 		"vite-plugin-dts": "~2.3.0"
 	},
 	"prettier": "../../prettier.config.mjs",

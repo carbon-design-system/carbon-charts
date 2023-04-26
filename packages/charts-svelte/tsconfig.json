@@ -17,7 +17,7 @@
 		"importsNotUsedAsValues": "error",
 		"preserveValueImports": true,
 		"lib": [
-			"esnext",
+			"ESNext",
 			"DOM",
 			"DOM.Iterable"
 		],

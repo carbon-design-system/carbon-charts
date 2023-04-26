@@ -1,14 +1,15 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "angular-charts": [
-        "dist"
-      ]
-    },
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    // "baseUrl": "..",
+    // "paths": {
+    //   "@carbon/charts": ["charts/src"]
+    // },
+    // "outDir": "charts-angular/dist",
+    "baseUrl": ".",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -19,14 +20,14 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node", // cannot handle node16 or bundler
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
+    "target": "ESNext", // Angular 15 defaults to ES2022
+    "module": "ESNext", // Angular 15 defaults to ES2022
     "useDefineForClassFields": false,
     "lib": [
-      "ES2022",
-      "dom"
+      "ESNext", // Angular 15 defaults to "ES2022",
+      "DOM"
     ]
   },
   "angularCompilerOptions": {

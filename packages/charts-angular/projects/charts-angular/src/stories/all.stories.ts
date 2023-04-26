@@ -1,7 +1,8 @@
 import { storiesOf, type Args, type StoryFn } from '@storybook/angular'
 import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@carbon/charts'
-import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
+// import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
+import { type Demo, type DemoGroup, storybookDemoGroups } from '../../../../../charts/dist/demo'
 import { ChartsModule } from '../public-api'
 
 const DEFAULT_THEME = ChartTheme.G100
@@ -72,7 +73,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		demo.options.theme = DEFAULT_THEME
 		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const demoStory: StoryFn = (args: Args) => ({
-			template: getTemplate(demo.chartType.angular),
+			template: getTemplate(demo.chartType.angular as string),
 			moduleMetadata: {
 				imports: [ChartsModule]
 			},

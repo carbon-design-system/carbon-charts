@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/charts-angular",
       "sourceRoot": "projects/charts-angular/src",
-      "prefix": "sc",
+      "prefix": "carbon",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

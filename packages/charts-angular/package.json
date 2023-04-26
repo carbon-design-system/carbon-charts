@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.1",
+  "version": "1.7.3",
   "description": "Workspace for building Carbon charting components for Angular",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -65,8 +65,8 @@
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.6",
-    "@angular/cli": "^15.2.6",
+    "@angular-devkit/build-angular": "^15.2.7",
+    "@angular/cli": "^15.2.7",
     "@angular/compiler-cli": "^15.2.8",
     "@babel/core": "^7.21.4",
     "@carbon/telemetry": "~0.1.0",

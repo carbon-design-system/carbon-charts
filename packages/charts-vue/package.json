@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-vue",
-  "version": "1.7.1",
+  "version": "1.7.3",
   "description": "Carbon charting components for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -69,7 +69,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.0.7",
     "typescript": "^5.0.4",
-    "vite": "^4.3.2",
+    "vite": "^4.3.3",
     "vite-plugin-dts": "~2.3.0",
     "vue": "^3.2.47"
   },
