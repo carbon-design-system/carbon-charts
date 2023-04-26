@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { type MeterChartOptions, Statuses, ScaleTypes } from '@carbon/charts'
-import { LineChart, MeterChart } from './src'
+import { LineChart, MeterChart } from '.'
 
 const meterOptions: MeterChartOptions = {
 	title: 'Meter Chart - with statuses',

@@ -1,41 +1,43 @@
+// IDE picks this up by default
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Monorepo",
   "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "isolatedModules": true, // recommended by vite
-    "strict": false,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
-    "esModuleInterop": true,
+    // Common across frameworks for vite
     "skipLibCheck": true,
-    "declaration": true,
-    "sourceMap": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "target": "ES2021",
+    "target": "ESNext", // Vue overrides to ES2020
     "module": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ]
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler", // Svelte wants node but...
+
+    // Sensible globals
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+
+    // Resolve @carbon/charts in IDE without a build
+    "baseUrl": "./packages",
+    "paths": {
+      "@carbon/charts": ["charts/src"]
+    }
   },
   "exclude": [
+    // Directories
+    ".husky",
     ".yarn",
     "pages",
-    "**/.angular",
-    "**/.sveltekit",
-    "**/node_modules",
-    "**/demo/bundle",
-    "**/dist"
+    ".angular",
+    ".svelte-kit",
+    "node_modules",
+    "demo/bundle",
+    "dist",
+    "**/assets",
+    // Storybook
+    "**/*.stories.@(ts|tsx)",
+    "**/*.mdx",
+    // Tests
+    "**/*.test.tsx",
+    "**/tests/*",
+    "**/*.spec.ts"
   ]
 }

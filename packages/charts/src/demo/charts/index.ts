@@ -1,4 +1,4 @@
-import { BaseChartOptions, ChartTabularData } from '@/interfaces'
+import { BaseChartOptions, ChartTabularData } from '../../interfaces'
 import * as areaDemos from './area'
 import * as barDemos from './bar'
 import * as boxplotDemos from './boxplot'
@@ -72,7 +72,7 @@ export interface DemoGroup {
 	demos: Demo[]
 }
 
-/*export */enum DemoGroupTypes {
+enum DemoGroupTypes {
 	UTILITY = 'utility',
 	SIMPLE_CHART = 'simple-chart',
 	COMPLEX_CHART = 'complex-chart'

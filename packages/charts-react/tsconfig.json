@@ -1,27 +1,19 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": [
-		"src/**/*",
-		".storybook/*.ts",
-		"stories/**/*",
-		"../charts/stories/**/*" // for 1_gettingStarted.stories.tsx
-	],
 	"compilerOptions": {
-		"baseUrl": ".",
-		"types": ["vite/client"],
-		"useDefineForClassFields": true,
-		"allowJs": false,
-		"checkJs": false,
-		"esModuleInterop": false,
-		"allowSyntheticDefaultImports": true,
-		"strict": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"jsx": "react-jsx"
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": false, // TODO: refine TypeScript in project as this should be true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
 	},
-	"references": [
-		{
-			"path": "./tsconfig.node.json"
-		}
-	]
+	"include": ["src"],
+  "references": [{ "path": "./tsconfig.vite.json" }]
 }

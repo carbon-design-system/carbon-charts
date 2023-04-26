@@ -4,12 +4,6 @@ import dts from 'vite-plugin-dts'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-	// vite does not use tsconfig.json
-	resolve: {
-		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url))
-		}
-	},
 	build: {
 		sourcemap: true,
 		chunkSizeWarningLimit: 600,
@@ -33,9 +27,8 @@ export default defineConfig({
 		vue(),
 		dts({ // generate type declaration files in dist, not dist/src
 			cleanVueFileName: true,
-			// tsconfig.json declarationDir is ignored for some reason
 			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/src/','/dist/') // cannot reassign and return constant
+				filePath = filePath.replace('/dist/packages/charts-vue/src/','/dist/') // cannot reassign and return constant
 				return { filePath, content }
 			}
 		})

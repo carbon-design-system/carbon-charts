@@ -1,0 +1,10 @@
+// Common vite tsconfig for React, Svelte, and Vue
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  }
+}

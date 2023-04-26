@@ -6321,14 +6321,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
-  version: 18.0.38
-  resolution: "@types/react@npm:18.0.38"
+"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "@types/react@npm:18.2.0"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 34481c79f4f7ea2aefbaa45281319dc183200230d932d968463eba1643bd3635073d0a17c5c613150a69e36ca18b811ecffafea6384fa3dff3b5203866339d69
+  checksum: db3d92b423150222a666329f7aa3023e3e942044700557b8a7d161530847e621aec9f56c9e7f71761b06dd164c8a7b17ad52355863efe80963dffa5537e8e5fd
   languageName: node
   linkType: hard
 
@@ -6340,17 +6340,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: f39af6e4bc1c5f85d3720109284caf5c8f2d771bf3f2d222abef89a46f369c640c25ac40fd318fb969e1ba06176443bca74a7ee563df8b1d947a21372bc707e7
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.2.0":
-  version: 18.2.0
-  resolution: "@types/react@npm:18.2.0"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: db3d92b423150222a666329f7aa3023e3e942044700557b8a7d161530847e621aec9f56c9e7f71761b06dd164c8a7b17ad52355863efe80963dffa5537e8e5fd
   languageName: node
   linkType: hard
 
@@ -6617,17 +6606,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "@vitejs/plugin-vue@npm:4.1.0"
-  peerDependencies:
-    vite: ^4.0.0
-    vue: ^3.2.25
-  checksum: 532192a3da39f3fd6ba9d4fa9de74533cf6e222785c26bcb75bde9f826c5c4a22ad6f0bb09fae83e3393f9d8d24b6982d547683b1967972a4350e8e76aecf3cb
-  languageName: node
-  linkType: hard
-
-"@vitejs/plugin-vue@npm:^4.2.0":
+"@vitejs/plugin-vue@npm:^4.0.0, @vitejs/plugin-vue@npm:^4.2.0":
   version: 4.2.0
   resolution: "@vitejs/plugin-vue@npm:4.2.0"
   peerDependencies:
@@ -12360,9 +12339,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.204.0
-  resolution: "flow-parser@npm:0.204.0"
-  checksum: 295a85bbb3e9f6f46766d751ab9af9977b278b3a41648a4f1a5a8e123b5388822fd120bb16b2ee68a43199b309e0472732f1f2ff04cc841d4472aab3a67d8848
+  version: 0.204.1
+  resolution: "flow-parser@npm:0.204.1"
+  checksum: dcd1e12d1944647fc368df8b9e31214c4d147f322cba0f639f0fbc2c80fce26ab8ad8e08eb4de08dbb556649f7563a601472026438f4ce967e243399a68ef9fa
   languageName: node
   linkType: hard
 
@@ -19938,7 +19917,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.0.0, rollup@npm:^3.20.2, rollup@npm:^3.21.0":
+"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.0.0, rollup@npm:^3.21.0":
   version: 3.21.0
   resolution: "rollup@npm:3.21.0"
   dependencies:
@@ -22583,44 +22562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0":
-  version: 4.3.1
-  resolution: "vite@npm:4.3.1"
-  dependencies:
-    esbuild: ^0.17.5
-    fsevents: ~2.3.2
-    postcss: ^8.4.21
-    rollup: ^3.20.2
-  peerDependencies:
-    "@types/node": ">= 14"
-    less: "*"
-    sass: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.4.0
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    less:
-      optional: true
-    sass:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: e58ba33ec10af6167686c1c43c61f31fcbc6b3b6a1f16ed03fb6cc8278700c6edaf4ff394ef454291ee35924054c7772feac159f1acf3af1a33d289fe8494d9c
-  languageName: node
-  linkType: hard
-
-"vite@npm:^4.3.2":
+"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.3.2":
   version: 4.3.2
   resolution: "vite@npm:4.3.2"
   dependencies:
@@ -22760,8 +22702,8 @@ __metadata:
   linkType: hard
 
 "vue-docgen-api@npm:^4.40.0":
-  version: 4.69.0
-  resolution: "vue-docgen-api@npm:4.69.0"
+  version: 4.70.0
+  resolution: "vue-docgen-api@npm:4.70.0"
   dependencies:
     "@babel/parser": ^7.21.4
     "@babel/types": ^7.21.4
@@ -22774,7 +22716,7 @@ __metadata:
     recast: ^0.23.1
     ts-map: ^1.0.3
     vue-inbrowser-compiler-independent-utils: ^4.69.0
-  checksum: dadbbfcac15f1ce42038cc49b28d5de283fb55d334d7f3793c38bb27e1e6f5bb682b8021aec55267c2ff7954424a21164e0ce52a1615e9e6c77cb628f9e07df7
+  checksum: 93193525f72f062211e50a6f676e8b58ca5b6304ecde4dc8dd345d18981ac9b9a006d3b987ec227c07564585e54f034d4da353a94e624e68441cc33cbd05b9e5
   languageName: node
   linkType: hard
 

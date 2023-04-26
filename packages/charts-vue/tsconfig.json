@@ -1,25 +1,23 @@
 {
   "extends": "../../tsconfig.json",
-  "types": ["vite/client"], // once Angular supports vite, this can move to ../../tsconfig.json
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue"
-  ],
-  "exclude": ["src/stories/**/*"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "ESNext", // to overcome vite.config.ts warning
-    // vite recommendations for Vue.js
-    "types": [
-      "vite/client"
-    ],
-    "isolatedModules": false,
-    "allowJs": true, // needed by vue-tsc
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    "paths": {
+      "@/*": ["./src/*"] // handy alias
+    },
+
+    /* Linting */
+    "strict": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.vite.json" }]
 }

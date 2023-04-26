@@ -1,7 +1,7 @@
 import { ScatterChart, ScatterChartOptions } from '../index'
 import { createChartHolder } from './tools'
 import { ChartTabularData } from '../interfaces'
-import { groupedBarData, groupedBarOptions } from '../../demo/data'
+import { groupedBarData, groupedBarOptions } from '../demo/charts/bar'
 
 type ChartOptionsUpdater = (options: ScatterChartOptions) => ScatterChartOptions;
 
