@@ -1995,7 +1995,7 @@ __metadata:
     storybook: ^7.0.7
     style-loader: ^3.3.2
     tslib: ^2.5.0
-    typescript: ~4.9.5
+    typescript: ^4.9.5
     zone.js: ~0.13.0
   peerDependencies:
     "@angular/animations": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -2043,7 +2043,7 @@ __metadata:
     "@storybook/theming": ^7.0.7
     "@types/carbon__icons-react": ^11.16.0
     "@types/react": ^18.2.0
-    "@types/react-dom": ^18.2.0
+    "@types/react-dom": ^18.2.1
     "@typescript-eslint/eslint-plugin": ^5.59.1
     "@typescript-eslint/parser": ^5.59.1
     "@vitejs/plugin-react": ^4.0.0
@@ -2056,7 +2056,7 @@ __metadata:
     prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
-    sass: ^1.62.0
+    sass: ^1.62.1
     storybook: ^7.0.7
     typescript: ^5.0.4
     vite: ^4.3.2
@@ -2124,7 +2124,7 @@ __metadata:
     "@storybook/theming": ^7.0.7
     "@storybook/vue3": ^7.0.7
     "@storybook/vue3-vite": ^7.0.7
-    "@types/node": ^18.16.0
+    "@types/node": ^18.16.1
     "@vitejs/plugin-vue": ^4.2.0
     "@vue/eslint-config-prettier": ^7.1.0
     "@vue/eslint-config-typescript": ^11.0.3
@@ -2174,7 +2174,7 @@ __metadata:
     "@storybook/testing-library": ^0.1.0
     "@storybook/theming": ^7.0.7
     "@types/d3": ^7.4.0
-    "@types/node": ^18.16.0
+    "@types/node": ^18.16.1
     "@typescript-eslint/eslint-plugin": ^5.59.1
     "@typescript-eslint/parser": ^5.59.1
     carbon-components: ^10.58.6
@@ -2195,7 +2195,7 @@ __metadata:
     d3-time-format: ^4.1.0
     d3-transition: ^3.0.1
     date-fns: ^2.29.3
-    dom-to-image-more: ^3.1.4
+    dom-to-image-more: ^3.1.5
     eslint: ^8.39.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.11
@@ -2206,7 +2206,7 @@ __metadata:
     react-dom: ^18.2.0
     resize-observer-polyfill: ^1.5.1
     rollup-plugin-generate-package-json: ^3.2.0
-    sass: ^1.62.0
+    sass: ^1.62.1
     storybook: ^7.0.7
     tslib: ^2.5.0
     typedoc: ^0.24.6
@@ -6233,7 +6233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^18.16.0":
+"@types/node@npm:*, @types/node@npm:>=10.0.0":
   version: 18.16.0
   resolution: "@types/node@npm:18.16.0"
   checksum: 63e0042136663b9e85ce503a4c65406cc6621fdba63ea66c74b4b1364a9aa9bdb57cadcb76696abab177f38a819b0fa6ace9e7f1647dcb990aedb1b4bd01012f
@@ -6244,6 +6244,13 @@ __metadata:
   version: 16.18.24
   resolution: "@types/node@npm:16.18.24"
   checksum: 0b221b7f56f3c4911e90dfcc217db3866eb13b7af9390b8f668377f1211b2b3ca808e0128a29d0cef8aa0944523852531e827b923b35e5fa9063db87af7b41a0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.16.1":
+  version: 18.16.1
+  resolution: "@types/node@npm:18.16.1"
+  checksum: 799026b949a48993cba7c9b81b2eabfdfb34c880744cb44c1c990fbedc9e315f3634d126eb2cf9a6e0795577c01016e2326d98565bef695ada9d363fadeb6946
   languageName: node
   linkType: hard
 
@@ -6312,12 +6319,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.0":
-  version: 18.2.0
-  resolution: "@types/react-dom@npm:18.2.0"
+"@types/react-dom@npm:^18.2.1":
+  version: 18.2.1
+  resolution: "@types/react-dom@npm:18.2.1"
   dependencies:
     "@types/react": "*"
-  checksum: 9212b3793707a763f10e2c608f6ccb5f729029da6cb84204f333634d3d7baafbc1b20b7faf7cf788a8fd385050a1fb579902031f9462473ef10607116f33f33c
+  checksum: 4e607a9d08f707ae2bd6b377f1da32989dcbe4e38ac39110423a1f6bc95dd53a5484f7f952b34e9d12b5f29a265d52a8c74c1a7d1d1e25be0fa69ccf9d64209f
   languageName: node
   linkType: hard
 
@@ -10607,10 +10614,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-to-image-more@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "dom-to-image-more@npm:3.1.4"
-  checksum: 54eec0acf3f7a8a7c0e8a770f5b55d3f549be15c3a2861672b1ab2f05d308e1a9310cab0ba808944159e134a65e2523c630d9316858a3ce378909f3eb56536f9
+"dom-to-image-more@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "dom-to-image-more@npm:3.1.5"
+  checksum: 0d54db7a0f0bf75462e6944c962ef2be67cecc80bd22b9d8cd39f11833c7bcb60d1e95f0c10def3286d7793acaa2fb590a17deeabcc372f4b727e73899af9413
   languageName: node
   linkType: hard
 
@@ -20068,7 +20075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.55.0, sass@npm:^1.62.0":
+"sass@npm:^1.55.0":
   version: 1.62.0
   resolution: "sass@npm:1.62.0"
   dependencies:
@@ -20078,6 +20085,19 @@ __metadata:
   bin:
     sass: sass.js
   checksum: d5f606aa25afdf3ed9f316602811a40cf3b29f64cb70ea02f4198ae4288f9687de6fcef9f4fd2d58e06c28282d859aa249bdbf7d7d97a3a6a582eeaa8e5607fa
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.62.1":
+  version: 1.62.1
+  resolution: "sass@npm:1.62.1"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: 1b1b3584b38a63dd94156b65f13b90e3f84b170a38c3d5e3fa578b7a32a37aeb349b4926b0eaf9448d48e955e86b1ee01b13993f19611dad8068af07a607c13b
   languageName: node
   linkType: hard
 
@@ -22001,7 +22021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^3 || ^4, typescript@npm:^4.0.3, typescript@npm:~4.9.5":
+"typescript@npm:^3 || ^4, typescript@npm:^4.0.3, typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -22031,7 +22051,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.0.3#~builtin<compat/typescript>, typescript@patch:typescript@~4.9.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.0.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
