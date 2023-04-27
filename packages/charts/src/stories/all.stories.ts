@@ -1,15 +1,15 @@
 import { storiesOf, type Args } from '@storybook/html'
 import sdk from '@stackblitz/sdk'
-import { ChartTheme } from '../src/interfaces'
-import * as ChartComponents from '../src/charts'
-import { color } from '../src/configuration-non-customizable'
+import { ChartTheme } from '../interfaces'
+import * as ChartComponents from '../charts'
+import { color } from '../configuration-non-customizable'
 import {
 	addControls,
 	addOtherVersions,
 	type Demo,
 	type DemoGroup,
 	storybookDemoGroups
-} from '../src/demo'
+} from '../demo'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100

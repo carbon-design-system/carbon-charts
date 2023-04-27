@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/html-vite'
 
 const config: StorybookConfig = {
-	stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.@(js|jsx|ts|tsx)'],
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
