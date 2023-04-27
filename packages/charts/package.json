@@ -78,7 +78,7 @@
 		"d3": "^7.8.4"
 	},
 	"dependencies": {
-		"@carbon/styles": "^1.27.0",
+		"@carbon/styles": "^1.28.0",
 		"@carbon/telemetry": "~0.1.0",
 		"@carbon/utils-position": "^1.1.4",
 		"carbon-components": "^10.58.6",
@@ -106,7 +106,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.21.4",
 		"@carbon/colors": "^11.14.0",
-		"@carbon/elements": "^11.21.0",
+		"@carbon/elements": "^11.22.0",
 		"@carbon/grid": "^11.13.0",
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.13.0",
