@@ -4,34 +4,38 @@ import { Meta } from '@storybook/blocks'
 
 # Carbon Charts - Vue
 
-The Carbon Charts Vue library provides a collection of reusable charting components
-to build websites and user interfaces.
+The Carbon Charts Vue library provides a collection of reusable charting components to build
+websites and user interfaces.
 
-Adopting the library enables developers to use consistent markup,
-styles, and behavior in prototype and production work.
+Adopting the library enables developers to use consistent markup, styles, and behavior in prototype
+and production work.
 
 [Vue wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/vue)
 
-<br/>
+<br />
 ## Install
 
 **with yarn:**
+
 ```bash
 yarn add @carbon/charts-vue @carbon/styles d3
 ```
 
 **with npm:**
+
 ```bash
 npm install --save @carbon/charts-vue @carbon/styles d3
 ```
 
-<br/>
+<br />
 ## Getting started
 
 To start using the `StackedBarChart` component, try the example below:
-<br/>
+
+<br />
 
 ###### HelloWorld.vue
+
 ```ts
 import Vue from 'vue'
 
@@ -43,57 +47,55 @@ import ChartsVue from '@carbon/charts-vue'
 Vue.use(ChartsVue)
 
 export default {
-  components: {},
-  data() {
-    return {
-      data: [
-        // refer to tabular data format tutorial
-      ],
-      options: {
-        // refer to chart specific options
-      }
-    }
-  },
-  template:
-    '<CcvStackedBarChart :data="data" :options="options"></CcvStackedBarChart>',
+	components: {},
+	data() {
+		return {
+			data: [
+				// refer to tabular data format tutorial
+			],
+			options: {
+				// refer to chart specific options
+			}
+		}
+	},
+	template: '<CcvStackedBarChart :data="data" :options="options"></CcvStackedBarChart>'
 }
 ```
 
-<br/>
-## Data
-Data follows the same model in all charts.
-See tutorial on tabular data format for more information on chart data.
+<br />
+## Data Data follows the same model in all charts. See tutorial on tabular data format for more information
+on chart data.
 
-<br/>
+<br />
 ## Options
 
 You can see the options for all charts
 [here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/src/configuration.ts).
 
-<br/>
-## Demos and Examples
-+ **[Storybook - Demos](https://carbon-design-system.github.io/carbon-charts/charts-vue)**
+<br />
+## Demos and Examples + **[Storybook - Demos](https://carbon-design-system.github.io/carbon-charts/charts-vue)**
 + **[Storybook - Story Sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-vue/stories)**
 + **[Storybook - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/demo/data)**
 
-<br/>
+<br />
 ## Guidance
 
 Please refer to the
 [Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types)
 on using the different charts available in this library.
 
-<br/>
-## Development
-Please refer to the
-[Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
+<br />
+## Development Please refer to the [Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
 before starting any work.
 
 #### Using the server
+
 We recommend the use of
-[Vue Storybook](https://github.com/storybookjs/storybook/tree/next/app/charts-vue) for developing components.
+[Vue Storybook](https://github.com/storybookjs/storybook/tree/next/app/charts-vue) for developing
+components.
 
 **Start the server:**
+
 ```bash
 cd packages/charts-vue
 yarn storybook
@@ -101,14 +103,13 @@ yarn storybook
 
 Open browser to `http://localhost:6006/`.
 
-<br/>
-## List of available components
-View available components [here](https://github.com/carbon-design-system/carbon-charts#component-status)
+<br />
+## List of available components View available components [here](https://github.com/carbon-design-system/carbon-charts#component-status)
 
-<br/>
+<br />
 ## Troubleshoot
 
-If you experience any issues while getting set up with Carbon Charts,
-please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more
-guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
-if your issue does not already exist.
+If you experience any issues while getting set up with Carbon Charts, please head over to the
+[GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and
+support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if
+your issue does not already exist.

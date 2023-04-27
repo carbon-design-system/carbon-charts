@@ -1,26 +1,34 @@
 import { Meta } from '@storybook/blocks'
 
-<Meta title="Docs/Getting Started/React" />
-# Carbon Charts - React
-> This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>.
+<Meta title="Docs/Getting Started/React" /># Carbon Charts - React > This version relies on <b>
+	Carbon v11
+</b>. If you're using Carbon v10, <a
+	href="https://carbon-charts-0x.netlify.app"
+	target="_blank"
+	rel="noreferrer">
+	see the legacy demo site
+</a>.
 
-The Carbon Charts library provides a collection of reusable charting components to
-build websites and user interfaces. Adopting the library enables developers to use
-consistent markup, styles, and behavior in prototype and production work.
+The Carbon Charts library provides a collection of reusable charting components to build websites
+and user interfaces. Adopting the library enables developers to use consistent markup, styles, and
+behavior in prototype and production work.
 
 ## Install
 
 **Using yarn**
+
 ```bash
 yarn add @carbon/charts-react @carbon/styles d3
 ```
 
 **Using npm**
+
 ```bash
 npm install --save @carbon/charts-react @carbon/styles d3
 ```
 
 ## Getting started
+
 To start using the `StackedBarChart` component, try the example below:
 
 ```ts
@@ -30,27 +38,28 @@ import '@carbon/styles/css/styles.css' // may affect global styles
 import '@carbon/charts-react/styles.css'
 
 function App() {
-  const [stackedBarData, setStackedBarData] = React.useState([
-    // refer to tabular data format tutorial
-  ])
+	const [stackedBarData, setStackedBarData] = React.useState([
+		// refer to tabular data format tutorial
+	])
 
-  const [stackedBarOptions, setStackedBarOptions] = React.useState([
-    // refer to chart specific options
-  ])
+	const [stackedBarOptions, setStackedBarOptions] = React.useState([
+		// refer to chart specific options
+	])
 
-  return (
-    <div className="App">
-      <StackedBarChart data={stackedBarData} options={stackedBarOptions} />
-    </div>
-  )
+	return (
+		<div className="App">
+			<StackedBarChart data={stackedBarData} options={stackedBarOptions} />
+		</div>
+	)
 }
 
 // ...
 ```
 
 ## Data
-Data follows almost the same model in all charts.
-See tutorial on tabular data format for more information on chart data.
+
+Data follows almost the same model in all charts. See tutorial on tabular data format for more
+information on chart data.
 
 ## Options
 
@@ -58,8 +67,9 @@ You can see the options for all charts
 [here](https://charts.carbondesignsystem.com/documentation/modules/_interfaces_charts_.html).
 
 ## Demos and Examples
-+ **[Storybook - Story Sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories)**
-+ **[Storybook - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/demo/data)**
+
+- **[Storybook - Story Sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories)**
+- **[Storybook - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts/demo/data)**
 
 ## Guidance
 
@@ -68,28 +78,36 @@ Please refer to the
 on using the different charts available in this library.
 
 ## Development
+
 Please refer to the
 [Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
 before starting any work.
 
 #### Using the server
-We recommend the use of [React Storybook](https://github.com/storybookjs/storybook/tree/next/app/charts-react)
-for developing components.
 
-**Start Storybook** with the following commands then go to [http://localhost:9006](http://localhost:9006)
+We recommend the use of
+[React Storybook](https://github.com/storybookjs/storybook/tree/next/app/charts-react) for
+developing components.
+
+**Start Storybook** with the following commands then go to
+[http://localhost:9006](http://localhost:9006)
+
 ```bash
 cd packages/charts-react
 yarn storybook
 ```
 
 ## List of available components
-View available components [here](https://github.com/carbon-design-system/carbon-charts#component-status)
 
-If you experience any issues while getting set up with Carbon Charts, please head over to
-the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
-for more guidelines and support.
-Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
-if your issue does not already exist.
+View available components
+[here](https://github.com/carbon-design-system/carbon-charts#component-status)
+
+If you experience any issues while getting set up with Carbon Charts, please head over to the
+[GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and
+support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if
+your issue does not already exist.
 
 # Go to React Storybook
-To see our **React** getting started guide, go to our [React storybook site](https://charts.carbondesignsystem.com/react/?path=/story/docs-getting-started--instructions)
+
+To see our **React** getting started guide, go to our
+[React storybook site](https://charts.carbondesignsystem.com/react/?path=/story/docs-getting-started--instructions)
