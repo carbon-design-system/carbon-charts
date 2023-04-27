@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { WordCloudChart as WordCloudChartCore, type WorldCloudChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	WordCloudChart as WordCloudChartCore,
+	type WorldCloudChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `WordCloudChart` in carbon charts library
@@ -10,9 +14,9 @@ import { WordCloudChart as WordCloudChartCore, type WorldCloudChartOptions, type
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-wordcloud-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-wordcloud-chart',
+	template: ``,
+	standalone: true
 })
 export class WordCloudChart extends BaseChart implements AfterViewInit {
 	/**

@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { BoxplotChart as BoxplotChartCore, type ChartTabularData, type BoxplotChartOptions } from '@carbon/charts'
+import {
+	BoxplotChart as BoxplotChartCore,
+	type ChartTabularData,
+	type BoxplotChartOptions
+} from '@carbon/charts'
 
 /**
  * Wrapper around `BoxplotChart` in carbon charts library
@@ -10,9 +14,9 @@ import { BoxplotChart as BoxplotChartCore, type ChartTabularData, type BoxplotCh
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-boxplot-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-boxplot-chart',
+	template: ``,
+	standalone: true
 })
 export class BoxplotChart extends BaseChart implements AfterViewInit {
 	/**

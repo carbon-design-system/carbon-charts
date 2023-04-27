@@ -21,8 +21,7 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />
 
 <svelte:component
 	this={AlluvialChart}
@@ -36,5 +35,4 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />

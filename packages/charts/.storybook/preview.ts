@@ -15,7 +15,8 @@ const preview: Preview = {
 		docs: {
 			theme: themes.dark
 		},
-		backgrounds: { // --cds-background
+		backgrounds: {
+			// --cds-background
 			default: 'g100',
 			values: [
 				{
@@ -36,7 +37,6 @@ const preview: Preview = {
 				}
 			]
 		}
-
 	}
 }
 

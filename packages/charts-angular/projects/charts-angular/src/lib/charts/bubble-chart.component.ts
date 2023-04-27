@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	BubbleChart as BubbleChartCore,
+	type BubbleChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `BubbleChart` in carbon charts library
@@ -10,9 +14,9 @@ import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartTabu
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-bubble-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-bubble-chart',
+	template: ``,
+	standalone: true
 })
 export class BubbleChart extends BaseChart implements AfterViewInit {
 	/**

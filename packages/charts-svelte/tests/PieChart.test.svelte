@@ -22,8 +22,7 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />
 
 <svelte:component
 	this={PieChart}
@@ -37,5 +36,4 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />

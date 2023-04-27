@@ -2,8 +2,8 @@ import React from 'react'
 import type { Chart as BaseChartCore, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
 interface Props<Options> {
-  options?: Options;
-  data?: ChartTabularData;
+	options?: Options
+	data?: ChartTabularData
 }
 
 export default class BaseChart<Options = BaseChartOptions> extends React.Component<Props<Options>> {

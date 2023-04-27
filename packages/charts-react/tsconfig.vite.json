@@ -1,7 +1,11 @@
 {
-  "extends": "../../tsconfig.vite.json",
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["vite.config.ts"]
+	"extends": "../../tsconfig.vite.json",
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true
+		// "baseUrl": ".",
+		// "paths": {
+		//   "@carbon/charts": ["@carbon/charts"]
+		// }
+	},
+	"include": ["vite.config.ts"]
 }

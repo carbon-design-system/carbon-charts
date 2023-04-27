@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { CirclePackChart } from '../types'
 	import type { CirclePackChart as CirclePackChartCore } from '@carbon/charts'
-	import {
-		circlePackThreeLevelData as data,
-		circlePackSingleOptions
-	} from '@carbon/charts/demo'
+	import { circlePackThreeLevelData as data, circlePackSingleOptions } from '@carbon/charts/demo'
 
 	let chart: CirclePackChartCore | null = null
 	let ref: HTMLDivElement | null = null
@@ -25,8 +22,7 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />
 
 <svelte:component
 	this={CirclePackChart}
@@ -40,5 +36,4 @@
 		console.log(e.detail)
 	}}
 	{data}
-	{options}
-/>
+	{options} />

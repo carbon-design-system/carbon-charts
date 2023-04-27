@@ -8,7 +8,8 @@
 	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps}
+<BaseChart
+	{...$$restProps}
 	Chart={BulletChart}
 	{options}
 	{data}
@@ -16,5 +17,4 @@
 	bind:chart
 	on:load
 	on:update
-	on:destroy
-/>
+	on:destroy />

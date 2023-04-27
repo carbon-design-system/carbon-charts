@@ -6,13 +6,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	Ruler,
-	Scatter,
-	TwoDimensionalAxes,
-	Skeleton
-} from '../components/index'
+import { Grid, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class ScatterChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
@@ -20,9 +14,7 @@ export class ScatterChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.scatterChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.scatterChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

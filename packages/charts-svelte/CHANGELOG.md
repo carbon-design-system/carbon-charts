@@ -1,7 +1,7 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [1.6.14](https://github.com/carbon-design-system/carbon-charts/compare/v1.6.13...v1.6.14) (2023-03-07)
 
@@ -103,7 +103,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **core:** allow theme to be set via options prop ([#1412](https://github.com/carbon-design-system/carbon-charts/issues/1412)) ([6288548](https://github.com/carbon-design-system/carbon-charts/commit/62885487a700e2222d51f70aea790eddd5d6d086)), closes [#1411](https://github.com/carbon-design-system/carbon-charts/issues/1411)
+- **core:** allow theme to be set via options prop
+  ([#1412](https://github.com/carbon-design-system/carbon-charts/issues/1412))
+  ([6288548](https://github.com/carbon-design-system/carbon-charts/commit/62885487a700e2222d51f70aea790eddd5d6d086)),
+  closes [#1411](https://github.com/carbon-design-system/carbon-charts/issues/1411)
 
 ## [1.3.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.1...v1.3.2) (2022-06-30)
 
@@ -125,7 +128,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **svelte:** add theme prop ([#1389](https://github.com/carbon-design-system/carbon-charts/issues/1389)) ([b2ff145](https://github.com/carbon-design-system/carbon-charts/commit/b2ff14578ec3e1c319adedb4c8bf96e9a3766a9b))
+- **svelte:** add theme prop
+  ([#1389](https://github.com/carbon-design-system/carbon-charts/issues/1389))
+  ([b2ff145](https://github.com/carbon-design-system/carbon-charts/commit/b2ff14578ec3e1c319adedb4c8bf96e9a3766a9b))
 
 # [1.1.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.4...v1.1.0) (2022-06-08)
 
@@ -139,7 +144,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
--   **network-diagrams:** fix styling issues ([#1377](https://github.com/carbon-design-system/carbon-charts/issues/1377)) ([731b747](https://github.com/carbon-design-system/carbon-charts/commit/731b74708fbd2e239f2cf7f51a2a37b8f30ba3f6))
+- **network-diagrams:** fix styling issues
+  ([#1377](https://github.com/carbon-design-system/carbon-charts/issues/1377))
+  ([731b747](https://github.com/carbon-design-system/carbon-charts/commit/731b74708fbd2e239f2cf7f51a2a37b8f30ba3f6))
 
 ## [1.0.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.0.1...v1.0.2) (2022-05-24)
 
@@ -153,11 +160,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **monorepo:** Carbon v11 migration ([#1345](https://github.com/carbon-design-system/carbon-charts/issues/1345)) ([97c6fcd](https://github.com/carbon-design-system/carbon-charts/commit/97c6fcd842b83adbbeadd9fa1362d7727b91e6ff))
+- **monorepo:** Carbon v11 migration
+  ([#1345](https://github.com/carbon-design-system/carbon-charts/issues/1345))
+  ([97c6fcd](https://github.com/carbon-design-system/carbon-charts/commit/97c6fcd842b83adbbeadd9fa1362d7727b91e6ff))
 
 ### BREAKING CHANGES
 
--   **monorepo:** node-sass => sass, theming
+- **monorepo:** node-sass => sass, theming
 
 ## [0.58.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.58.1...v0.58.2) (2022-05-24)
 
@@ -215,7 +224,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
--   **build:** svelte packaging ([#1258](https://github.com/carbon-design-system/carbon-charts/issues/1258)) ([886ef7a](https://github.com/carbon-design-system/carbon-charts/commit/886ef7a0e087889e02f19b54ac826bb57890b0ed))
+- **build:** svelte packaging
+  ([#1258](https://github.com/carbon-design-system/carbon-charts/issues/1258))
+  ([886ef7a](https://github.com/carbon-design-system/carbon-charts/commit/886ef7a0e087889e02f19b54ac826bb57890b0ed))
 
 ## [0.54.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.54.7...v0.54.8) (2022-01-25)
 
@@ -253,7 +264,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **core:** create heatmap chart ([#1200](https://github.com/carbon-design-system/carbon-charts/issues/1200)) ([a55be0f](https://github.com/carbon-design-system/carbon-charts/commit/a55be0fcec6020b609ab18b2224562aaa9775321))
+- **core:** create heatmap chart
+  ([#1200](https://github.com/carbon-design-system/carbon-charts/issues/1200))
+  ([a55be0f](https://github.com/carbon-design-system/carbon-charts/commit/a55be0fcec6020b609ab18b2224562aaa9775321))
 
 ## [0.53.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.53.4...v0.53.5) (2021-12-15)
 
@@ -299,7 +312,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree charts ([#1219](https://github.com/carbon-design-system/carbon-charts/issues/1219)) ([3e7fcc2](https://github.com/carbon-design-system/carbon-charts/commit/3e7fcc2f16d16d67c4f39f4d4389878b5d829aba))
+- **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree charts
+  ([#1219](https://github.com/carbon-design-system/carbon-charts/issues/1219))
+  ([3e7fcc2](https://github.com/carbon-design-system/carbon-charts/commit/3e7fcc2f16d16d67c4f39f4d4389878b5d829aba))
 
 ## [0.51.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.51.3...v0.51.4) (2021-11-16)
 
@@ -397,7 +412,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **core:** create alluvial chart ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132)) ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)), closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+- **core:** create alluvial chart
+  ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132))
+  ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)),
+  closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
 
 ## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
 
@@ -423,7 +441,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **core:** add tree chart ([#1116](https://github.com/carbon-design-system/carbon-charts/issues/1116)) ([96e4988](https://github.com/carbon-design-system/carbon-charts/commit/96e4988d5b3926f2a9daa642c8ebb62058328aa3))
+- **core:** add tree chart
+  ([#1116](https://github.com/carbon-design-system/carbon-charts/issues/1116))
+  ([96e4988](https://github.com/carbon-design-system/carbon-charts/commit/96e4988d5b3926f2a9daa642c8ebb62058328aa3))
 
 ## [0.46.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.46.4...v0.46.5) (2021-09-08)
 
@@ -477,7 +497,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **charts:** add histogram ([#1038](https://github.com/carbon-design-system/carbon-charts/issues/1038)) ([07e07b3](https://github.com/carbon-design-system/carbon-charts/commit/07e07b3a2e8bc0eb01a7f4fdfc004e8095fb7b26))
+- **charts:** add histogram
+  ([#1038](https://github.com/carbon-design-system/carbon-charts/issues/1038))
+  ([07e07b3](https://github.com/carbon-design-system/carbon-charts/commit/07e07b3a2e8bc0eb01a7f4fdfc004e8095fb7b26))
 
 ## [0.41.103](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.102...v0.41.103) (2021-08-11)
 
@@ -1043,7 +1065,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **svelte:** add Meter chart wrapper ([#744](https://github.com/carbon-design-system/carbon-charts/issues/744)) ([8ed23b1](https://github.com/carbon-design-system/carbon-charts/commit/8ed23b176d168714ed4c0b481fda71eb8bed4106))
+- **svelte:** add Meter chart wrapper
+  ([#744](https://github.com/carbon-design-system/carbon-charts/issues/744))
+  ([8ed23b1](https://github.com/carbon-design-system/carbon-charts/commit/8ed23b176d168714ed4c0b481fda71eb8bed4106))
 
 ## [0.34.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.10...v0.34.11) (2020-08-12)
 
@@ -1101,7 +1125,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
--   **svelte:** add Gauge chart wrapper ([#686](https://github.com/carbon-design-system/carbon-charts/issues/686)) ([1b5d5b4](https://github.com/carbon-design-system/carbon-charts/commit/1b5d5b48a24a551ffaaf8e05bad317b0e3d41a51))
+- **svelte:** add Gauge chart wrapper
+  ([#686](https://github.com/carbon-design-system/carbon-charts/issues/686))
+  ([1b5d5b4](https://github.com/carbon-design-system/carbon-charts/commit/1b5d5b48a24a551ffaaf8e05bad317b0e3d41a51))
 
 ## [0.32.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.11...v0.32.12) (2020-06-26)
 
@@ -1155,21 +1181,25 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
--   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
+- **svelte:** copy svelte source to dist/src
+  ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 ### Features
 
--   **svelte:** manually query DOM for chart holder element as fallback ([0732cd4](https://github.com/carbon-design-system/carbon-charts/commit/0732cd42b63d4dcab170fb8149942e90fd7da67a))
+- **svelte:** manually query DOM for chart holder element as fallback
+  ([0732cd4](https://github.com/carbon-design-system/carbon-charts/commit/0732cd42b63d4dcab170fb8149942e90fd7da67a))
 
 # [0.31.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.31.0) (2020-05-29)
 
 ### Bug Fixes
 
--   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
+- **svelte:** copy svelte source to dist/src
+  ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 ### Features
 
--   **svelte:** manually query DOM for chart holder element as fallback ([0732cd4](https://github.com/carbon-design-system/carbon-charts/commit/0732cd42b63d4dcab170fb8149942e90fd7da67a))
+- **svelte:** manually query DOM for chart holder element as fallback
+  ([0732cd4](https://github.com/carbon-design-system/carbon-charts/commit/0732cd42b63d4dcab170fb8149942e90fd7da67a))
 
 ## [0.30.24](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.23...v0.30.24) (2020-05-15)
 

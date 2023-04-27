@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	LineChart as LineChartCore,
+	type LineChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `LineChart` in carbon charts library
@@ -10,9 +14,9 @@ import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularDat
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-line-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-line-chart',
+	template: ``,
+	standalone: true
 })
 export class LineChart extends BaseChart implements AfterViewInit {
 	/**

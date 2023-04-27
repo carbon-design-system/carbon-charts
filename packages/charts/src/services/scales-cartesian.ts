@@ -353,12 +353,7 @@ export class CartesianScales extends Service {
 
 	getDomainIdentifier(datum?: any) {
 		const options = this.model.getOptions()
-		return getProperty(
-			options,
-			'axes',
-			this.getDomainAxisPosition({ datum: datum }),
-			'mapsTo'
-		)
+		return getProperty(options, 'axes', this.getDomainAxisPosition({ datum: datum }), 'mapsTo')
 	}
 
 	getRangeIdentifier(datum?: any) {
@@ -373,11 +368,7 @@ export class CartesianScales extends Service {
 			const spaceToAddToEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
 			return addSpacingToTimeDomain(domain, spaceToAddToEdges)
 		} else {
-			return addSpacingToContinuousDomain(
-				domain,
-				axis.paddingRatio,
-				axisOptions.scaleType
-			)
+			return addSpacingToContinuousDomain(domain, axis.paddingRatio, axisOptions.scaleType)
 		}
 	}
 
@@ -426,16 +417,8 @@ export class CartesianScales extends Service {
 	protected findDomainAndRangeAxesPositions(verticalAxesPositions, horizontalAxesPositions) {
 		const options = this.model.getOptions()
 
-		const mainVerticalAxisOptions = getProperty(
-			options,
-			'axes',
-			verticalAxesPositions.primary
-		)
-		const mainHorizontalAxisOptions = getProperty(
-			options,
-			'axes',
-			horizontalAxesPositions.primary
-		)
+		const mainVerticalAxisOptions = getProperty(options, 'axes', verticalAxesPositions.primary)
+		const mainHorizontalAxisOptions = getProperty(options, 'axes', horizontalAxesPositions.primary)
 
 		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR
 		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR

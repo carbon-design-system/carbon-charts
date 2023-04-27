@@ -1,6 +1,5 @@
 {
-  "extends": "../../tsconfig.vite.json",
-  "compilerOptions": {
-  },
-  "include": ["vite.config.ts"]
+	"extends": "../../tsconfig.vite.json",
+	"compilerOptions": {},
+	"include": ["vite.config.ts"]
 }

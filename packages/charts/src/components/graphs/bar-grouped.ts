@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from './bar'
-import { generateSVGPathString, getProperty, removeArrayDuplicates }from '../../tools'
+import { generateSVGPathString, getProperty, removeArrayDuplicates } from '../../tools'
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,

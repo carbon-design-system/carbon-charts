@@ -40,7 +40,8 @@ const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
 			id={id}
 			refX={rest.refX || xPos}
 			refY={rest.refY || yPos}
-			markerUnits="userSpaceOnUse" {...rest}>
+			markerUnits="userSpaceOnUse"
+			{...rest}>
 			<path d={d} style={{ fill: color }} />
 		</marker>
 	)

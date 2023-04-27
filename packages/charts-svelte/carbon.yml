@@ -2,8 +2,7 @@
 library:
   id: carbon-charts-svelte
   name: Carbon Charts Svelte
-  description: Tell accurate stories around data with beautiful and accessible
-    visualizations.
+  description: Tell accurate stories around data with beautiful and accessible visualizations.
   inherits: carbon-charts
   externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
   demoLinks:

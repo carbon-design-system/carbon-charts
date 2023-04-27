@@ -14,9 +14,7 @@ export class RadarChart extends Chart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.radarChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.radarChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

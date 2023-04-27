@@ -54,8 +54,7 @@ export class Radar extends Component {
 
 		const { angle, value } = getProperty(options, 'radar', 'axes')
 
-		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight } =
-			radar
+		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight } = radar
 
 		this.uniqueKeys = Array.from(new Set(data.map((d) => d[angle])))
 		this.uniqueGroups = Array.from(new Set(data.map((d) => d[groupMapsTo])))

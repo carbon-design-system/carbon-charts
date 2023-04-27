@@ -7,12 +7,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Bullet,
-	Grid,
-	TwoDimensionalAxes,
-	Skeleton
-} from '../components/index'
+import { Bullet, Grid, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class BulletChart extends AxisChart {
 	model = new BulletChartModel(this.services)
@@ -22,9 +17,7 @@ export class BulletChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.bulletChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.bulletChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

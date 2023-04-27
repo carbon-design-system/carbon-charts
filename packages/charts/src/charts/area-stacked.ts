@@ -21,9 +21,7 @@ export class StackedAreaChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.stackedAreaChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.stackedAreaChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

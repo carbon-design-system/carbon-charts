@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { StackedBarChart as StackedBarChartCore, type ChartTabularData, type StackedBarChartOptions } from '@carbon/charts'
+import {
+	StackedBarChart as StackedBarChartCore,
+	type ChartTabularData,
+	type StackedBarChartOptions
+} from '@carbon/charts'
 
 /**
  * Wrapper around `StackedBarChart` in carbon charts library
@@ -10,9 +14,9 @@ import { StackedBarChart as StackedBarChartCore, type ChartTabularData, type Sta
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-stacked-bar-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-stacked-bar-chart',
+	template: ``,
+	standalone: true
 })
 export class StackedBarChart extends BaseChart implements AfterViewInit {
 	/**

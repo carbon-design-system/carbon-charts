@@ -8,13 +8,13 @@
 	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps}
+<BaseChart
+	{...$$restProps}
 	Chart={AlluvialChart}
-  {options}
+	{options}
 	{data}
 	bind:ref
 	bind:chart
 	on:load
 	on:update
-	on:destroy
-/>
+	on:destroy />

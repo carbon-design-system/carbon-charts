@@ -1,10 +1,7 @@
 import type { StorybookConfig } from '@storybook/html-vite'
 
 const config: StorybookConfig = {
-	stories: [
-		'../stories/**/*.mdx',
-		'../stories/**/*.stories.@(js|jsx|ts|tsx)'
-	],
+	stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -23,9 +20,9 @@ const config: StorybookConfig = {
 	staticDirs: ['assets'],
 	async viteFinal(config, _) {
 		if (config.build) {
-      config.build.chunkSizeWarningLimit = 1600
+			config.build.chunkSizeWarningLimit = 1600
 		}
-		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
 		return config
 	},
 	features: {

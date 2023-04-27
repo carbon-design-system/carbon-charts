@@ -34,10 +34,7 @@ describe('legend component', () => {
 
 			const renderCb = () => {
 				// Remove render event listener
-				chartEventsService.removeEventListener(
-					Events.Chart.RENDER_FINISHED,
-					renderCb
-				)
+				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 
 				const numberOfLegendItems = select(
 					`g.${settings.prefix}--${options.chart.style?.prefix}--legend`
@@ -50,10 +47,7 @@ describe('legend component', () => {
 			}
 
 			// Add event listener for when chart render is finished
-			chartEventsService.addEventListener(
-				Events.Chart.RENDER_FINISHED,
-				renderCb
-			)
+			chartEventsService.addEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 		})
 	})
 

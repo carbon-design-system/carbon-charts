@@ -3,8 +3,8 @@ import { carbonPrefix } from '../../config'
 import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common'
 
 @Component({
-    selector: 'ibm-diagram-card-node',
-    template: `
+	selector: 'ibm-diagram-card-node',
+	template: `
 		<ng-container [ngSwitch]="component">
 			<xhtml:div
 				*ngSwitchCase="'div'"
@@ -69,8 +69,8 @@ import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@ang
 			<ng-content></ng-content>
 		</ng-template>
 	`,
-    standalone: true,
-    imports: [NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet]
+	standalone: true,
+	imports: [NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet]
 })
 export class CardNode implements OnInit {
 	@Input() as = 'div'

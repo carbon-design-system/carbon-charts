@@ -3,7 +3,7 @@ import { createChartHolder } from './tools'
 import { ChartTabularData } from '../interfaces'
 import { groupedBarData, groupedBarOptions } from '../demo/charts/bar'
 
-type ChartOptionsUpdater = (options: ScatterChartOptions) => ScatterChartOptions;
+type ChartOptionsUpdater = (options: ScatterChartOptions) => ScatterChartOptions
 
 export const data = groupedBarData as ChartTabularData
 

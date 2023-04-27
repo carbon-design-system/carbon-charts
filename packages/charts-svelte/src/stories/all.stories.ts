@@ -8,14 +8,16 @@ import Welcome from './Welcome.svelte'
 const DEFAULT_THEME = ChartTheme.G100
 const introStories = storiesOf('Docs', module) // API to be deprecated soon
 
-introStories.add('Welcome', () => ({
-	Component: Welcome
-}),
-{
-	controls: {
-		hideNoControlsWarning: true
+introStories.add(
+	'Welcome',
+	() => ({
+		Component: Welcome
+	}),
+	{
+		controls: {
+			hideNoControlsWarning: true
+		}
 	}
-}
 )
 
 // Loop through demos for group

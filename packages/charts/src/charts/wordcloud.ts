@@ -7,10 +7,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	WordCloud,
-	Skeleton
-} from '../components/index'
+import { WordCloud, Skeleton } from '../components/index'
 
 export class WordCloudChart extends Chart {
 	model = new WordCloudModel(this.services)
@@ -20,9 +17,7 @@ export class WordCloudChart extends Chart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.wordCloudChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.wordCloudChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

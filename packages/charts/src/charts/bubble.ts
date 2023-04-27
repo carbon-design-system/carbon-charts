@@ -6,13 +6,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	Ruler,
-	Bubble,
-	TwoDimensionalAxes,
-	Skeleton
-} from '../components/index'
+import { Grid, Ruler, Bubble, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class BubbleChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<BubbleChartOptions>) {
@@ -20,9 +14,7 @@ export class BubbleChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.bubbleChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.bubbleChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

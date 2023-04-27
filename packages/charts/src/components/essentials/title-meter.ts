@@ -67,18 +67,13 @@ export class MeterTitle extends Title {
 		} else {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
 			//breakdownFormatter
-			const breakdownFormatter = getProperty(
-				options,
-				'meter',
-				'proportional',
-				'breakdownFormatter'
-			)
+			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
-						})
+					  })
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
 		}
 
@@ -144,9 +139,7 @@ export class MeterTitle extends Title {
 			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
-				this.model.getStatus()
-					? containerWidth - meter.total.paddingRight
-					: containerWidth
+				this.model.getStatus() ? containerWidth - meter.total.paddingRight : containerWidth
 			)
 			.attr('y', '1em')
 			.attr('text-anchor', 'end')
@@ -215,13 +208,8 @@ export class MeterTitle extends Title {
 
 		// check if it is enabled
 		const data =
-			getProperty(
-				this.getOptions(),
-				'meter',
-				'statusBar',
-				'percentageIndicator',
-				'enabled'
-			) === true
+			getProperty(this.getOptions(), 'meter', 'statusBar', 'percentageIndicator', 'enabled') ===
+			true
 				? [dataValue]
 				: []
 
@@ -292,8 +280,7 @@ export class MeterTitle extends Title {
 
 			const statusGroup = DOMUtils.appendOrSelect(this.parent, 'g.status-indicator').node()
 			const statusWidth =
-				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
-				meter.status.paddingLeft
+				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width + meter.status.paddingLeft
 
 			return containerWidth - percentageWidth - offset - statusWidth
 		}

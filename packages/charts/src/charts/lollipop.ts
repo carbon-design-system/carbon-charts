@@ -6,14 +6,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	Ruler,
-	Scatter,
-	Lollipop,
-	TwoDimensionalAxes,
-	Skeleton
-} from '../components/index'
+import { Grid, Ruler, Scatter, Lollipop, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class LollipopChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<LollipopChartOptions>) {
@@ -21,9 +14,7 @@ export class LollipopChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.lollipopChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.lollipopChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

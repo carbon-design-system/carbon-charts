@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	HeatmapChart as HeatmapChartCore,
+	type HeatmapChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `Heatmap` in carbon charts library
@@ -10,9 +14,9 @@ import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartT
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-heatmap-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-heatmap-chart',
+	template: ``,
+	standalone: true
 })
 export class HeatmapChart extends BaseChart implements AfterViewInit {
 	/**

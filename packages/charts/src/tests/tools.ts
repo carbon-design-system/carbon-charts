@@ -5,7 +5,7 @@ import settings from 'carbon-components/es/globals/js/settings'
 // Functions
 export const makeChartID = (chartType: ChartTypes) => `${chartType}-chart-holder`
 
-export const createChartHolder = chartType => {
+export const createChartHolder = (chartType) => {
 	const chartHolder = document.createElement('div')
 	chartHolder.id = makeChartID(chartType)
 	chartHolder.classList.add(`${settings.prefix}--chart-holder`)
@@ -15,4 +15,5 @@ export const createChartHolder = chartType => {
 	return chartHolder
 }
 
-export const getChartHolder = (chartType: ChartTypes) => document.getElementById(makeChartID(chartType))
+export const getChartHolder = (chartType: ChartTypes) =>
+	document.getElementById(makeChartID(chartType))

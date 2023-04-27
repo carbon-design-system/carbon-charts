@@ -13,11 +13,7 @@ import { clone, getProperty, merge } from '../tools'
 import { Meter } from '../components/graphs/meter'
 
 // Components
-import {
-	LayoutComponent,
-	MeterTitle,
-	Spacer
-} from '../components/index'
+import { LayoutComponent, MeterTitle, Spacer } from '../components/index'
 
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services)
@@ -60,7 +56,7 @@ export class MeterChart extends Chart {
 							],
 							growth: LayoutGrowth.STRETCH
 						}
-					]
+				  ]
 				: []),
 			// Specify what to render inside the graph only
 			{

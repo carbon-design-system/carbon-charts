@@ -1,19 +1,19 @@
 {
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 
-    /* Bundler mode */
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+		/* Bundler mode */
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
 
-    /* Linting */
-    "strict": false, // TODO: refine TypeScript in project as this should be true
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+		/* Linting */
+		"strict": false, // TODO: refine TypeScript in project as this should be true
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
 	},
 	"include": ["src"],
-  "references": [{ "path": "./tsconfig.vite.json" }]
+	"references": [{ "path": "./tsconfig.vite.json" }]
 }

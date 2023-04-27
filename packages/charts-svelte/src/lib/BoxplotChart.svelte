@@ -8,13 +8,13 @@
 	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps}
+<BaseChart
+	{...$$restProps}
 	Chart={BoxplotChart}
 	{options}
 	{data}
-	bind:ref 
+	bind:ref
 	bind:chart
 	on:load
 	on:update
-	on:destroy
-/>
+	on:destroy />

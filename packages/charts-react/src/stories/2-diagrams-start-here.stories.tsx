@@ -1,7 +1,15 @@
 import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
 import { Component } from '@carbon/charts'
-import { CardNode, CardNodeColumn, CardNodeTitle, CardNodeSubtitle, Edge, ShapeNode, ArrowRightMarker } from '../diagrams'
+import {
+	CardNode,
+	CardNodeColumn,
+	CardNodeTitle,
+	CardNodeSubtitle,
+	Edge,
+	ShapeNode,
+	ArrowRightMarker
+} from '../diagrams'
 
 const nodeHeight = 64
 const nodeWidth = 200
@@ -10,94 +18,99 @@ const ShapeNodeSize = 64
 const stories = storiesOf('Diagrams', module)
 // stories.addDecorator((story) => <div className="container theme--white">{story()}</div>)
 
-stories.add('Start here', () => {
-	const paragraphStyle = {
-		style: {
-			maxWidth: 600,
-			fontSize: '1rem',
-			fontWeight: 400,
-			lineHeight: 1.5,
-			letterSpacing: 0
+stories.add(
+	'Start here',
+	() => {
+		const paragraphStyle = {
+			style: {
+				maxWidth: 600,
+				fontSize: '1rem',
+				fontWeight: 400,
+				lineHeight: 1.5,
+				letterSpacing: 0
+			}
+		}
+
+		const h3Style = {
+			style: {
+				paddingTop: '1rem'
+			}
+		}
+
+		const h2Style = {
+			style: {
+				paddingTop: '2rem'
+			}
+		}
+
+		return (
+			<div>
+				<h1>Diagrams</h1>
+
+				<p {...paragraphStyle}>
+					React components for building diagram experiences, using the Carbon Design System.
+				</p>
+
+				<p {...paragraphStyle}>
+					<b>
+						Note that Carbon Charts does not provide layouts for diagrams. You can utilize these
+						components alongside graphing libraries, or by composing your own layouts (see section
+						3).
+					</b>
+				</p>
+
+				<h2 {...h2Style}>Examples</h2>
+
+				<h3 {...h3Style}>1. Simple static layout</h3>
+
+				<p {...paragraphStyle}>
+					A simple composed diagram, using statically defined x and y coordinates.{' '}
+					<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
+						View source
+					</a>
+				</p>
+
+				<SimpleStatic />
+
+				<h3 {...h3Style}>2. Programmatic static layout</h3>
+
+				<p {...paragraphStyle}>
+					A composed diagram, rendered using arrays of statically defined x and y coordinates.{' '}
+					<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
+						View source
+					</a>
+				</p>
+
+				<ProgrammaticStatic />
+
+				<h3 {...h3Style}>3. Layouts using external dependencies</h3>
+
+				<p>
+					Here's an example using <b>elkjs</b> in react
+				</p>
+
+				<iframe
+					src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+					style={{
+						width: '100%',
+						height: '500px',
+						marginTop: '2em',
+						border: 0,
+						borderRadius: '4px',
+						overflow: 'hidden'
+					}}
+					title="carbon-charts-react-elkjs-diagram"
+					allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+					sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+			</div>
+		)
+	},
+	{
+		controls: {
+			hideNoControlsWarning: true
 		}
 	}
-
-	const h3Style = {
-		style: {
-			paddingTop: '1rem'
-		}
-	}
-
-	const h2Style = {
-		style: {
-			paddingTop: '2rem'
-		}
-	}
-
-	return (
-		<div>
-			<h1>Diagrams</h1>
-
-			<p {...paragraphStyle}>
-				React components for building diagram experiences, using the Carbon Design System.
-			</p>
-
-			<p {...paragraphStyle}>
-				<b>
-					Note that Carbon Charts does not provide layouts for diagrams. You can utilize these
-					components alongside graphing libraries, or by composing your own layouts (see section 3).
-				</b>
-			</p>
-
-			<h2 {...h2Style}>Examples</h2>
-
-			<h3 {...h3Style}>1. Simple static layout</h3>
-
-			<p {...paragraphStyle}>
-				A simple composed diagram, using statically defined x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
-					View source
-				</a>
-			</p>
-
-			<SimpleStatic />
-
-			<h3 {...h3Style}>2. Programmatic static layout</h3>
-
-			<p {...paragraphStyle}>
-				A composed diagram, rendered using arrays of statically defined x and y coordinates.{' '}
-				<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/charts-react/stories/diagrams/0_Diagrams.stories.js">
-					View source
-				</a>
-			</p>
-
-			<ProgrammaticStatic />
-
-			<h3 {...h3Style}>3. Layouts using external dependencies</h3>
-
-			<p>
-				Here's an example using <b>elkjs</b> in react
-			</p>
-
-			<iframe
-				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-				style={{
-					width: '100%',
-					height: '500px',
-					marginTop: '2em',
-					border: 0,
-					borderRadius: '4px',
-					overflow: 'hidden'
-				}}
-				title="carbon-charts-react-elkjs-diagram"
-				allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-				sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
-		</div>
-	)
-},{
-	controls: {
-		hideNoControlsWarning: true
-	}
-})
+)
 
 const DesktopOnlyMessage = () => <div className="cp-message">This is a desktop-only example</div>
 

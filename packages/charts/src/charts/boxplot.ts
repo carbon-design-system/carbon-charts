@@ -7,13 +7,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	Boxplot,
-	TwoDimensionalAxes,
-	ZeroLine,
-	Skeleton
-} from '../components/index'
+import { Grid, Boxplot, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components/index'
 
 export class BoxplotChart extends AxisChart {
 	model = new BoxplotChartModel(this.services)
@@ -23,9 +17,7 @@ export class BoxplotChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.boxplotChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.boxplotChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

@@ -625,5 +625,5 @@ export {
 	tooltips,
 	transitions,
 	toolbar,
-	zoomBar,
-} from './configuration-non-customizable';
+	zoomBar
+} from './configuration-non-customizable'

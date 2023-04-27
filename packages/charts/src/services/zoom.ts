@@ -56,12 +56,7 @@ export class Zoom extends Service {
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition()
 		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
-		const customDomain = getProperty(
-			this.model.getOptions(),
-			'axes',
-			mainXAxisPosition,
-			'domain'
-		)
+		const customDomain = getProperty(this.model.getOptions(), 'axes', mainXAxisPosition, 'domain')
 
 		// return custom domain if exists && valid
 		if (Array.isArray(customDomain) && customDomain.length === 2) {
@@ -96,11 +91,7 @@ export class Zoom extends Service {
 			{ stacked: false }, // default configs
 			configs
 		)
-		const shouldUpdateRangeAxis = getProperty(
-			this.model.getOptions(),
-			'zoomBar',
-			'updateRangeAxis'
-		)
+		const shouldUpdateRangeAxis = getProperty(this.model.getOptions(), 'zoomBar', 'updateRangeAxis')
 		if (this.isZoomBarEnabled() && shouldUpdateRangeAxis && zoomDomain) {
 			const domainIdentifier = mergedConfigs.stacked
 				? 'sharedStackKey'

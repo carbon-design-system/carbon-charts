@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	BulletChart as BulletChartCore,
+	type BulletChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `BulletChart` in carbon charts library
@@ -10,9 +14,9 @@ import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartTabu
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-bullet-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-bullet-chart',
+	template: ``,
+	standalone: true
 })
 export class BulletChart extends BaseChart implements AfterViewInit {
 	/**

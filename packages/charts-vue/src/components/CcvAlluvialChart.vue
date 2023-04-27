@@ -4,22 +4,22 @@ import { AlluvialChart, type AlluvialChartOptions, type ChartTabularData } from 
 import CcvBaseChart from './CcvBaseChart.vue'
 
 interface Props {
-  data: ChartTabularData;
-  options: AlluvialChartOptions;
+	data: ChartTabularData
+	options: AlluvialChartOptions
 }
 
 export default defineComponent({
 	extends: CcvBaseChart,
 	props: {
-    data: {
-      type: Object as () => ChartTabularData,
-      required: true
-    },
-    options: {
-      type: Object as () => AlluvialChartOptions,
-      required: true
-    }
-  },
+		data: {
+			type: Object as () => ChartTabularData,
+			required: true
+		},
+		options: {
+			type: Object as () => AlluvialChartOptions,
+			required: true
+		}
+	},
 	mounted() {
 		const { data, options } = this.$props as Props
 		this.coreChart = new AlluvialChart(this.$el as HTMLDivElement, {

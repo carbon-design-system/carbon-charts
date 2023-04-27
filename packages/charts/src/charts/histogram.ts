@@ -6,12 +6,7 @@ import type { ChartConfig, HistogramChartOptions } from '../interfaces/index'
 import { mergeDefaultChartOptions } from '../tools'
 
 // Components
-import {
-	Grid,
-	Histogram,
-	BinnedRuler,
-	TwoDimensionalAxes
-} from '../components/index'
+import { Grid, Histogram, BinnedRuler, TwoDimensionalAxes } from '../components/index'
 
 export class HistogramChart extends AxisChart {
 	model = new ChartModelBinned(this.services)
@@ -21,9 +16,7 @@ export class HistogramChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.histogramChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.histogramChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

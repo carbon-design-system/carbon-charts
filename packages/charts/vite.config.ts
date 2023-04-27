@@ -17,12 +17,13 @@ export default defineConfig({
 				'interfaces/index': 'src/interfaces/index.ts',
 				'model/index': 'src/model/index.ts',
 				'services/index': 'src/services/index.ts',
-				'demo/index': 'src/demo/index.ts',
+				'demo/index': 'src/demo/index.ts'
 			},
 			name: 'CarbonCharts'
 		},
 		rollupOptions: {
-			external: [ // externalizing D3 saves 117K in the bundle
+			external: [
+				// externalizing D3 saves 117K in the bundle
 				'd3-scale',
 				'd3-selection',
 				'd3-transition',

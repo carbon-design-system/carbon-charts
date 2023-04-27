@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { SimpleBarChart as SimpleBarChartCore, type ChartTabularData, type BarChartOptions } from '@carbon/charts'
+import {
+	SimpleBarChart as SimpleBarChartCore,
+	type ChartTabularData,
+	type BarChartOptions
+} from '@carbon/charts'
 
 /**
  * Wrapper around `SimpleBarChart` in carbon charts library
@@ -10,9 +14,9 @@ import { SimpleBarChart as SimpleBarChartCore, type ChartTabularData, type BarCh
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-simple-bar-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-simple-bar-chart',
+	template: ``,
+	standalone: true
 })
 export class SimpleBarChart extends BaseChart implements AfterViewInit {
 	/**

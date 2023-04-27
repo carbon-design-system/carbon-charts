@@ -1,20 +1,11 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import { options }  from '../configuration'
+import { options } from '../configuration'
 import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
 import { clone, mergeDefaultChartOptions } from '../tools'
 
-
 // Components
-import {
-	Grid,
-	Area,
-	Line,
-	Ruler,
-	Scatter,
-	TwoDimensionalAxes,
-	Skeleton
-} from '../components/index'
+import { Grid, Area, Line, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class AreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
@@ -22,12 +13,7 @@ export class AreaChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(
-				clone(options.areaChart),
-				chartConfigs.options
-			)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(clone(options.areaChart), chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

@@ -32,7 +32,7 @@ const config: StorybookConfig = {
 			}
 		}
 		if (config.build) {
-      config.build.chunkSizeWarningLimit = 1600
+			config.build.chunkSizeWarningLimit = 1600
 		}
 		return config
 	},

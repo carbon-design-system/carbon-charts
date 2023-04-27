@@ -129,12 +129,7 @@ export class Tooltip extends Component {
 
 		const truncationThreshold = getProperty(options, 'tooltip', 'truncation', 'threshold')
 
-		const truncationNumCharacter = getProperty(
-			options,
-			'tooltip',
-			'truncation',
-			'numCharacter'
-		)
+		const truncationNumCharacter = getProperty(options, 'tooltip', 'truncation', 'numCharacter')
 
 		// truncate the label if it's too long
 		// only applies to discrete type

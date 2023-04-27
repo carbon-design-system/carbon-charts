@@ -16,9 +16,9 @@ const config: StorybookConfig = {
 			}
 		}
 		if (config.build) {
-      config.build.chunkSizeWarningLimit = 1800
+			config.build.chunkSizeWarningLimit = 1800
 		}
-		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
 
 		return config
 	},

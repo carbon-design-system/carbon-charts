@@ -20,21 +20,24 @@ export {
 	MarkerTee
 }
 @NgModule({
-    exports: [
-        Marker,
-        MarkerArrowLeft,
-        MarkerArrowRight,
-        MarkerShapeNode,
-        MarkerDiamond,
-        MarkerSquare,
-        MarkerTee
-    ],
-    imports: [CommonModule, Marker,
-        MarkerArrowLeft,
-        MarkerArrowRight,
-        MarkerShapeNode,
-        MarkerDiamond,
-        MarkerSquare,
-        MarkerTee]
+	exports: [
+		Marker,
+		MarkerArrowLeft,
+		MarkerArrowRight,
+		MarkerShapeNode,
+		MarkerDiamond,
+		MarkerSquare,
+		MarkerTee
+	],
+	imports: [
+		CommonModule,
+		Marker,
+		MarkerArrowLeft,
+		MarkerArrowRight,
+		MarkerShapeNode,
+		MarkerDiamond,
+		MarkerSquare,
+		MarkerTee
+	]
 })
 export class MarkerModule {}

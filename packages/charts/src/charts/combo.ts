@@ -38,10 +38,7 @@ export class ComboChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		const chartOptions = mergeDefaultChartOptions(
-			options.comboChart,
-			chartConfigs.options
-		)
+		const chartOptions = mergeDefaultChartOptions(options.comboChart, chartConfigs.options)
 
 		// Warn user if no comboChartTypes defined
 		// Use skeleton chart instead

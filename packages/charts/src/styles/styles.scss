@@ -7,7 +7,7 @@ $prefix: 'cds';
 
 // Carbon Charts expects the user to load IBM Plex on their own per the storybooks
 @use '@carbon/styles/scss/config' with (
-  $css--font-face: false
+	$css--font-face: false
 );
 
 @use '@carbon/styles';

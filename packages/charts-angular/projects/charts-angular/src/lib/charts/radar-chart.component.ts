@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	RadarChart as RadarChartCore,
+	type RadarChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `RadarChart` in carbon charts library
@@ -10,9 +14,9 @@ import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-radar-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-radar-chart',
+	template: ``,
+	standalone: true
 })
 export class RadarChart extends BaseChart implements AfterViewInit {
 	/**

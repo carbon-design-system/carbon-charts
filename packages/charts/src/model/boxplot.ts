@@ -114,9 +114,8 @@ export class BoxplotChartModel extends ChartModelCartesian {
 					getProperty(datum, 'quartiles', 'q_75') !== null &&
 					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (
-								getProperty(datum, 'quartiles', 'q_75') -
-								getProperty(datum, 'quartiles', 'q_25')
-							).toLocaleString()
+								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
+						  ).toLocaleString()
 						: '&ndash;',
 					outliers.map((d) => d.toLocaleString()).join(',')
 				]
@@ -139,9 +138,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 			pairingOption <= colorPairingCounts[`${numberOfColors}-color`] ? pairingOption : 1
 
 		// Create color classes for graph, tooltip and stroke use
-		const colorPairing = this.allDataGroups.map(
-			() => `${numberOfColors}-${pairingOption}-1`
-		)
+		const colorPairing = this.allDataGroups.map(() => `${numberOfColors}-${pairingOption}-1`)
 
 		// Create default color classnames
 		this.colorClassNames = scaleOrdinal().range(colorPairing).domain(this.allDataGroups)
