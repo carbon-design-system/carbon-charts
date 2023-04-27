@@ -6,8 +6,7 @@ import packageJSON from '../../../package.json'
 const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']
 
-const sandboxConfig =
-`{
+const sandboxConfig = `{
   "infiniteLoopProtection": true,
   "hardReloadOnChange": false,
   "view": "browser",
@@ -16,8 +15,7 @@ const sandboxConfig =
   }
 }`
 
-const codeSandboxTasks =
-`{
+const codeSandboxTasks = `{
 	"$schema": "https://codesandbox.io/schemas/tasks.json",
 	"setupTasks": [
 		{
@@ -47,18 +45,19 @@ const codeSandboxTasks =
 }`
 
 export const createChartSandbox = (chartTemplate: any) => {
-  const files: IFiles = {}
-  Object.keys(chartTemplate).forEach(filePath => {
-    files[filePath] = {
-      content: chartTemplate[filePath],
-      isBinary: false
-    }
-  })
-  const parameters = getParameters({ files })
-  const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(parameters)}`
-  return url
+	const files: IFiles = {}
+	Object.keys(chartTemplate).forEach((filePath) => {
+		files[filePath] = {
+			content: chartTemplate[filePath],
+			isBinary: false
+		}
+	})
+	const parameters = getParameters({ files })
+	const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(
+		parameters
+	)}`
+	return url
 }
-
 
 // Charts Vanilla JavaScript
 
@@ -67,8 +66,7 @@ export const createVanillaChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, '\t')
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml =
-	`	<html>
+	const indexHtml = `	<html>
   <head>
     <title>Carbon Charts Vanilla JavaScript Example</title>
     <meta charset="UTF-8" />
@@ -106,15 +104,19 @@ new ${chartComponent}(chartHolder, {
 })
 `
 
-	const packageJson = JSON.stringify({
-		description: 'Carbon Charts Vanilla JavaScript Example',
-		version: '0.0.0',
-		dependencies: {
-			'@carbon/charts': libraryVersion,
-			'@carbon/styles': '^1.26.1',
-			'd3': D3VERSION
-		}
-	}, null, 2)
+	const packageJson = JSON.stringify(
+		{
+			description: 'Carbon Charts Vanilla JavaScript Example',
+			version: '0.0.0',
+			dependencies: {
+				'@carbon/charts': libraryVersion,
+				'@carbon/styles': '^1.26.1',
+				d3: D3VERSION
+			}
+		},
+		null,
+		2
+	)
 
 	return {
 		'index.html': indexHtml,
@@ -126,9 +128,7 @@ new ${chartComponent}(chartHolder, {
 // Charts Angular
 
 export const createAngularChartApp = (demo: any) => {
-
-	const angularJson =
-`{
+	const angularJson = `{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -187,38 +187,41 @@ export const createAngularChartApp = (demo: any) => {
   "defaultProject": "demo"
 }`
 
-const packageJson = JSON.stringify({
-	name: 'carbon-charts-example',
-	version: '0.0.0',
-	scripts: {
-		'ng': 'ng',
-		'start': 'NG_CLI_ANALYTICS=false ng serve',
-		'build': 'NG_CLI_ANALYTICS=false ng build',
-	},
-	dependencies: {
-		'@angular/animations': '^15.2.6',
-		'@angular/common': '^15.2.6',
-		'@angular/compiler': '^15.2.6',
-		'@angular/core': '^15.2.6',
-		'@angular/platform-browser': '^15.2.6',
-		'@carbon/charts': libraryVersion,
-		'@carbon/charts-angular': libraryVersion,
-		'@carbon/styles': '^1.26.1',
-		'd3': D3VERSION,
-		'rxjs': '~7.8.0',
-		'tslib': '^2.3.0',
-		'zone.js': '~0.12.0'
-	},
-	devDependencies: {
-		'@angular-devkit/build-angular': '^15.2.5',
-		'@angular/cli': '~15.2.5',
-		'@angular/compiler-cli': '^15.2.5',
-		'typescript': '~4.9.4'
-	}
-}, null, 2)
+	const packageJson = JSON.stringify(
+		{
+			name: 'carbon-charts-example',
+			version: '0.0.0',
+			scripts: {
+				ng: 'ng',
+				start: 'NG_CLI_ANALYTICS=false ng serve',
+				build: 'NG_CLI_ANALYTICS=false ng build'
+			},
+			dependencies: {
+				'@angular/animations': '^15.2.6',
+				'@angular/common': '^15.2.6',
+				'@angular/compiler': '^15.2.6',
+				'@angular/core': '^15.2.6',
+				'@angular/platform-browser': '^15.2.6',
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-angular': libraryVersion,
+				'@carbon/styles': '^1.26.1',
+				d3: D3VERSION,
+				rxjs: '~7.8.0',
+				tslib: '^2.3.0',
+				'zone.js': '~0.12.0'
+			},
+			devDependencies: {
+				'@angular-devkit/build-angular': '^15.2.5',
+				'@angular/cli': '~15.2.5',
+				'@angular/compiler-cli': '^15.2.5',
+				typescript: '~4.9.4'
+			}
+		},
+		null,
+		2
+	)
 
-const tsConfig =
-`{
+	const tsConfig = `{
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -240,8 +243,7 @@ const tsConfig =
   }
 }`
 
-	const indexHtml =
-`<!doctype html>
+	const indexHtml = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -263,8 +265,7 @@ const tsConfig =
 	const chartData = JSON.stringify(demo.data, null, 2)
 	const chartOptions = JSON.stringify(demo.options, null, 2)
 
-	const mainTs =
-`import 'zone.js/dist/zone'
+	const mainTs = `import 'zone.js/dist/zone'
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
@@ -286,8 +287,7 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesScss =
-`@import '@carbon/styles/css/styles.css';
+	const stylesScss = `@import '@carbon/styles/css/styles.css';
 @import '@carbon/charts/styles.css';`
 
 	return {
@@ -307,8 +307,7 @@ export const createReactChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml =
-`<!doctype html>
+	const indexHtml = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -326,8 +325,7 @@ export const createReactChartApp = (demo: any) => {
 </body>
 </html>`
 
-	const indexJs =
-`import React from 'react'
+	const indexJs = `import React from 'react'
 import ReactDOM from 'react-dom'
 import { ${chartComponent} } from '@carbon/charts-react'
 
@@ -349,24 +347,28 @@ class App extends React.Component {
 }
 ReactDOM.render(<App />, document.getElementById("root"))`
 
-	const packageJson = JSON.stringify({
-		description: 'Carbon Charts React Example',
-		version: '0.0.0',
-		scripts: {
-			dev: 'vite dev',
-			build: 'vite build',
-			preview: 'vite preview'
+	const packageJson = JSON.stringify(
+		{
+			description: 'Carbon Charts React Example',
+			version: '0.0.0',
+			scripts: {
+				dev: 'vite dev',
+				build: 'vite build',
+				preview: 'vite preview'
+			},
+			dependencies: {
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-react': libraryVersion,
+				'@carbon/styles': '^1.26.0',
+				d3: D3VERSION,
+				react: '^18.2.0',
+				'react-dom': '^18.2.0',
+				'react-scripts': '^5.0.1'
+			}
 		},
-		dependencies: {
-			'@carbon/charts': libraryVersion,
-			'@carbon/charts-react': libraryVersion,
-			'@carbon/styles': '^1.26.0',
-			d3: D3VERSION,
-			react: '^18.2.0',
-			'react-dom': '^18.2.0',
-			'react-scripts': '^5.0.1'
-		}
-	}, null, 2)
+		null,
+		2
+	)
 
 	return {
 		'public/index.html': indexHtml,
@@ -395,8 +397,7 @@ export const createSvelteChartApp = (demo: any) => {
 			break
 	}
 
-	const svelteKitTsConfig =
-`{
+	const svelteKitTsConfig = `{
 	"compilerOptions": {
 		"paths": {
 			"$lib": [
@@ -443,8 +444,7 @@ export const createSvelteChartApp = (demo: any) => {
 	]
 }`
 
-	const appHtml =
-`<!DOCTYPE html>
+	const appHtml = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -462,8 +462,7 @@ export const createSvelteChartApp = (demo: any) => {
 	</body>
 </html>`
 
-	const appDts =
-`declare global {
+	const appDts = `declare global {
 	namespace App {
 	}
 }
@@ -471,8 +470,7 @@ export const createSvelteChartApp = (demo: any) => {
 export {}
 `
 
-  const pageSvelte =
-`<script lang="ts">
+	const pageSvelte = `<script lang="ts">
 import { ${chartComponent} } from '@carbon/charts-svelte'
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
@@ -480,38 +478,41 @@ import '@carbon/charts/styles.css'
 
 <${chartComponent} data={${data}} options={${options}} />`
 
-	const packageJson = JSON.stringify({
-		name: 'carbon-charts-svelte-example',
-		version: '0.0.0',
-		type: 'module',
-		license: 'MIT',
-		scripts: {
-			dev: 'vite dev',
-			start: 'vite dev',
-			build: 'vite build',
-			preview: 'vite preview'
+	const packageJson = JSON.stringify(
+		{
+			name: 'carbon-charts-svelte-example',
+			version: '0.0.0',
+			type: 'module',
+			license: 'MIT',
+			scripts: {
+				dev: 'vite dev',
+				start: 'vite dev',
+				build: 'vite build',
+				preview: 'vite preview'
+			},
+			devDependencies: {
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-svelte': libraryVersion,
+				'@carbon/styles': '^1.26.0',
+				'@sveltejs/adapter-auto': '^2.0.0',
+				'@sveltejs/kit': '^1.15.0',
+				d3: D3VERSION,
+				sass: '^1.60.0',
+				svelte: '^3.58.0',
+				'svelte-check': '^3.1.4',
+				tslib: '^2.5.0',
+				typescript: '^5.0.3',
+				vite: '^4.3.1'
+			},
+			engines: {
+				node: '>=16.12.0'
+			}
 		},
-		devDependencies: {
-			'@carbon/charts': libraryVersion,
-			'@carbon/charts-svelte': libraryVersion,
-			'@carbon/styles': '^1.26.0',
-			'@sveltejs/adapter-auto': '^2.0.0',
-			'@sveltejs/kit': '^1.15.0',
-			d3: D3VERSION,
-			sass: '^1.60.0',
-			svelte: '^3.58.0',
-			'svelte-check': '^3.1.4',
-			tslib: '^2.5.0',
-			typescript: '^5.0.3',
-			vite: '^4.3.1'
-		},
-		engines: {
-			node: '>=16.12.0'
-		}
-	}, null, 2)
+		null,
+		2
+	)
 
-	const svelteKitConfig =
-`import adapter from '@sveltejs/adapter-auto'
+	const svelteKitConfig = `import adapter from '@sveltejs/adapter-auto'
 import { vitePreprocess } from '@sveltejs/kit/vite'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -525,8 +526,7 @@ const config = {
 
 export default config`
 
-	const tsConfig =
-`{
+	const tsConfig = `{
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 		"allowJs": true,
@@ -540,8 +540,7 @@ export default config`
 	}
 }`
 
-	const viteConfig =
-`import { sveltekit } from '@sveltejs/kit/vite'
+	const viteConfig = `import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -570,7 +569,7 @@ export default defineConfig({
 		'sandbox.config.json': sandboxConfig,
 		'svelte.config.js': svelteKitConfig,
 		'tsconfig.json': tsConfig,
-		'vite.config.ts': viteConfig,
+		'vite.config.ts': viteConfig
 	}
 }
 
@@ -581,8 +580,7 @@ export const createVueChartApp = (demo: any) => {
 	const options = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vue
 
-	const appVue =
-`<template>
+	const appVue = `<template>
   <div id="app">
 	  <${chartComponent} :data="data" :options="options" />
   </div>
@@ -605,8 +603,7 @@ export default {
   @import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 </style>`
 
-	const mainJs =
-`import Vue from 'vue'
+	const mainJs = `import Vue from 'vue'
 import ChartsVue from '@carbon/charts-vue'
 import App from './App.vue'
 
@@ -616,21 +613,25 @@ new Vue({
   render: (h) => h(App)
 }).$mount('#app')`
 
-	const packageJson = JSON.stringify({
-		name: 'carbon-charts-vue-example',
-		description: 'Carbon Charts Vue Example',
-		version: '0.0.0',
-		dependencies: {
-			'@carbon/charts': libraryVersion,
-			'@carbon/charts-vue': libraryVersion,
-			'@carbon/styles': '^1.26.0',
-			vue: '^2.7.14'
-		}
-	}, null, 2)
+	const packageJson = JSON.stringify(
+		{
+			name: 'carbon-charts-vue-example',
+			description: 'Carbon Charts Vue Example',
+			version: '0.0.0',
+			dependencies: {
+				'@carbon/charts': libraryVersion,
+				'@carbon/charts-vue': libraryVersion,
+				'@carbon/styles': '^1.26.0',
+				vue: '^2.7.14'
+			}
+		},
+		null,
+		2
+	)
 
 	return {
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
-		'package.json': packageJson,
+		'package.json': packageJson
 	}
 }

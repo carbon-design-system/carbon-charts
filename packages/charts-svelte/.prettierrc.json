@@ -1,6 +1,4 @@
 {
-	"extends": "../../prettier.config.mjs",
-	"useTabs": true,
 	"plugins": ["prettier-plugin-svelte"],
 	"overrides": [
 		{

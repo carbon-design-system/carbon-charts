@@ -3,28 +3,17 @@
 	"compilerOptions": {
 		// From ./.svelte-kit/tsconfig.json
 		"paths": {
-			"$lib": [
-				"./src/lib"
-			],
-			"$lib/*": [
-				"./src/lib/*"
-			]
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"]
 		},
-		"rootDirs": [
-			".",
-			"./types"
-		],
+		"rootDirs": [".", "./types"],
 		"importsNotUsedAsValues": "error",
 		"preserveValueImports": true,
-		"lib": [
-			"ESNext",
-			"DOM",
-			"DOM.Iterable"
-		],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		// "moduleResolution": "node", // only uncomment if there are issues
 		"ignoreDeprecations": "5.0",
 
-    "useDefineForClassFields": true,
+		"useDefineForClassFields": true,
 		"allowJs": true,
 		"checkJs": true
 	},
@@ -39,8 +28,6 @@
 		"tests/**/*.ts",
 		"tests/**/*.js"
 	],
-	"exclude": [
-		".svelte-kit/[!ambient.d.ts]**"
-	],
+	"exclude": [".svelte-kit/[!ambient.d.ts]**"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }

@@ -36,8 +36,8 @@
     "lint": "ng lint",
     "test": "ng test",
     "watch": "ng build --watch --configuration development",
-    "format": "prettier --write projects/charts-angular/src/",
-    "format:diff": "prettier --list-different projects/charts-angular/src/",
+    "format": "prettier --write projects/charts-angular/src/ --ignore-path ../../.eslintignore",
+    "format:diff": "prettier --list-different projects/charts-angular/src/ --ignore-path ../../.gitignore",
     "ci-check": "yarn format:diff"
   },
   "peerDependencies": {
@@ -100,7 +100,7 @@
     "style-loader": "^3.3.2",
     "typescript": "^4.9.5"
   },
-  "prettier": "../../prettier.config.mjs",
+  "prettier": "../../prettier.config.cjs",
   "publishConfig": {
     "directory": "dist",
     "access": "public"

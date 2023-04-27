@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	HistogramChart as HistogramChartCore,
+	type HistogramChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `HistogramChart` in carbon charts library
@@ -10,9 +14,9 @@ import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type 
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-histogram-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-histogram-chart',
+	template: ``,
+	standalone: true
 })
 export class HistogramChart extends BaseChart implements AfterViewInit {
 	/**

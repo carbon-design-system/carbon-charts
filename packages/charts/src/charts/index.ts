@@ -24,54 +24,54 @@ import { StackedBarChart } from './bar-stacked'
 import { WordCloudChart } from './wordcloud'
 
 export {
-  AlluvialChart,
-  AreaChart,
-  BoxplotChart,
-  BubbleChart,
-  BulletChart,
-  CirclePackChart,
-  ComboChart,
-  DonutChart,
-  GaugeChart,
-  GroupedBarChart,
-  HeatmapChart,
-  HistogramChart,
-  LineChart,
-  LollipopChart,
-  MeterChart,
-  PieChart,
-  RadarChart,
-  ScatterChart,
-  SimpleBarChart,
-  StackedAreaChart,
-  StackedBarChart,
-  TreeChart,
-  TreemapChart,
-  WordCloudChart
+	AlluvialChart,
+	AreaChart,
+	BoxplotChart,
+	BubbleChart,
+	BulletChart,
+	CirclePackChart,
+	ComboChart,
+	DonutChart,
+	GaugeChart,
+	GroupedBarChart,
+	HeatmapChart,
+	HistogramChart,
+	LineChart,
+	LollipopChart,
+	MeterChart,
+	PieChart,
+	RadarChart,
+	ScatterChart,
+	SimpleBarChart,
+	StackedAreaChart,
+	StackedBarChart,
+	TreeChart,
+	TreemapChart,
+	WordCloudChart
 }
 
 export type Charts =
-  AlluvialChart |
-  AreaChart |
-  BoxplotChart |
-  BubbleChart |
-  BulletChart |
-  CirclePackChart |
-  ComboChart |
-  DonutChart |
-  GaugeChart |
-  GroupedBarChart |
-  HeatmapChart |
-  HistogramChart |
-  LineChart |
-  LollipopChart |
-  MeterChart |
-  PieChart |
-  RadarChart |
-  ScatterChart |
-  SimpleBarChart |
-  StackedAreaChart |
-  StackedBarChart |
-  TreeChart |
-  TreemapChart |
-  WordCloudChart
+	| AlluvialChart
+	| AreaChart
+	| BoxplotChart
+	| BubbleChart
+	| BulletChart
+	| CirclePackChart
+	| ComboChart
+	| DonutChart
+	| GaugeChart
+	| GroupedBarChart
+	| HeatmapChart
+	| HistogramChart
+	| LineChart
+	| LollipopChart
+	| MeterChart
+	| PieChart
+	| RadarChart
+	| ScatterChart
+	| SimpleBarChart
+	| StackedAreaChart
+	| StackedBarChart
+	| TreeChart
+	| TreemapChart
+	| WordCloudChart

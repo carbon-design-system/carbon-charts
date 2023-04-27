@@ -17,5 +17,4 @@
 	bind:chart
 	on:load
 	on:update
-	on:destroy
-/>
+	on:destroy />

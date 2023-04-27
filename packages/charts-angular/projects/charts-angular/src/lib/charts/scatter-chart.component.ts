@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { ScatterChart as ScatterChartCore, type ScatterChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	ScatterChart as ScatterChartCore,
+	type ScatterChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `ScatterChart` in carbon charts library
@@ -10,9 +14,9 @@ import { ScatterChart as ScatterChartCore, type ScatterChartOptions, type ChartT
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-scatter-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-scatter-chart',
+	template: ``,
+	standalone: true
 })
 export class ScatterChart extends BaseChart implements AfterViewInit {
 	/**

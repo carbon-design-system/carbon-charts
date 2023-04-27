@@ -7,13 +7,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	GroupedBar,
-	TwoDimensionalAxes,
-	ZeroLine,
-	Skeleton
-} from '../components/index'
+import { Grid, GroupedBar, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components/index'
 
 export class GroupedBarChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
@@ -21,9 +15,7 @@ export class GroupedBarChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.groupedBarChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.groupedBarChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

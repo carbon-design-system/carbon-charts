@@ -14,7 +14,7 @@
 		"clean": "rm -rf dist demo/bundle",
 		"test": "svelte-check --workspace=tests",
 		"lint": "prettier --plugin-search-dir . --check . && eslint . --ignore-path ../../.gitignore",
-		"format": "prettier --plugin-search-dir . --write .",
+		"format": "prettier --plugin-search-dir . --write .  --ignore-path ../../.eslintignore",
 		"prepublishOnly": "yarn package",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
@@ -74,6 +74,7 @@
 		"typescript": "^5.0.4",
 		"vite": "^4.3.3"
 	},
+	"prettier": "../../prettier.config.cjs",
 	"browserslist": [
 		"> 1%",
 		"not op_mini all"

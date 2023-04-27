@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	DonutChart as DonutChartCore,
+	type DonutChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `DonutChart` in carbon charts library
@@ -10,9 +14,9 @@ import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-donut-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-donut-chart',
+	template: ``,
+	standalone: true
 })
 export class DonutChart extends BaseChart implements AfterViewInit {
 	/**

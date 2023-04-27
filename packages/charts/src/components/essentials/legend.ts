@@ -151,9 +151,7 @@ export class Legend extends Component {
 					self.addAdditionalItem(additionalItem, d, indexOfItem)
 				})
 
-			addedAdditionalItems
-				.append('p')
-				.merge(addedAdditionalItems.select('p'))
+			addedAdditionalItems.append('p').merge(addedAdditionalItems.select('p'))
 
 			this.truncateLegendText()
 		}
@@ -236,10 +234,7 @@ export class Legend extends Component {
 					.attr('aria-label', 'area')
 					.attr('width', width)
 					.attr('height', height)
-					.style(
-						'fill',
-						indexOfItem > 3 && !itemConfig.fill ? legend.area.fill : itemConfig.fill
-					)
+					.style('fill', indexOfItem > 3 && !itemConfig.fill ? legend.area.fill : itemConfig.fill)
 					.style('stroke', itemConfig.stroke)
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {

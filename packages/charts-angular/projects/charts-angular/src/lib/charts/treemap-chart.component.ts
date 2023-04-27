@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { TreemapChart as TreemapChartCore, type TreemapChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	TreemapChart as TreemapChartCore,
+	type TreemapChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `TreemapChart` in carbon charts library
@@ -10,9 +14,9 @@ import { TreemapChart as TreemapChartCore, type TreemapChartOptions, type ChartT
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-treemap-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-treemap-chart',
+	template: ``,
+	standalone: true
 })
 export class TreemapChart extends BaseChart implements AfterViewInit {
 	/**

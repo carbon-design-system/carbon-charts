@@ -440,9 +440,7 @@ export class Axis extends Component {
 					// Find out whether any text nodes roughly collide
 					invisibleAxisRef.selectAll('g.tick').each(function () {
 						const selection = select(this)
-						const xTransformation = parseFloat(
-							getProperty(getTranslationValues(this), 'tx')
-						)
+						const xTransformation = parseFloat(getProperty(getTranslationValues(this), 'tx'))
 
 						if (
 							xTransformation !== null &&
@@ -463,11 +461,7 @@ export class Axis extends Component {
 			if (shouldRotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
-						this.getNumberOfFittingTicks(
-							width,
-							tickHeight,
-							axis.ticks.horizontalSpaceRatio
-						)
+						this.getNumberOfFittingTicks(width, tickHeight, axis.ticks.horizontalSpaceRatio)
 					)
 
 					invisibleAxisRef.call(axis)

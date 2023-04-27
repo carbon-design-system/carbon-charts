@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { GroupedBarChart as GroupedBarChartCore, type ChartTabularData, type BarChartOptions } from '@carbon/charts'
+import {
+	GroupedBarChart as GroupedBarChartCore,
+	type ChartTabularData,
+	type BarChartOptions
+} from '@carbon/charts'
 
 /**
  * Wrapper around `GroupedBarChart` in carbon charts library
@@ -10,9 +14,9 @@ import { GroupedBarChart as GroupedBarChartCore, type ChartTabularData, type Bar
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-grouped-bar-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-grouped-bar-chart',
+	template: ``,
+	standalone: true
 })
 export class GroupedBarChart extends BaseChart implements AfterViewInit {
 	/**

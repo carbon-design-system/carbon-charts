@@ -2,7 +2,7 @@
 import { Chart } from '../chart'
 import { TreemapChartModel } from '../model/treemap'
 import type { ChartConfig, TreemapChartOptions } from '../interfaces/index'
-import{ options } from '../configuration'
+import { options } from '../configuration'
 import { mergeDefaultChartOptions } from '../tools'
 
 // Components
@@ -16,9 +16,7 @@ export class TreemapChart extends Chart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.treemapChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.treemapChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

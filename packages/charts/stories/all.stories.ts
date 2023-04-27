@@ -3,7 +3,13 @@ import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '../src/interfaces'
 import * as ChartComponents from '../src/charts'
 import { color } from '../src/configuration-non-customizable'
-import { addControls, addOtherVersions, type Demo, type DemoGroup, storybookDemoGroups } from '../src/demo'
+import {
+	addControls,
+	addOtherVersions,
+	type Demo,
+	type DemoGroup,
+	storybookDemoGroups
+} from '../src/demo'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100
@@ -11,16 +17,15 @@ const DEFAULT_THEME = ChartTheme.G100
 const introStories = storiesOf('Docs', module)
 
 // Loop through the demos for the group
-introStories
-	.add(
-		'Welcome',
-		() => {
-			// container creation
-			const container = document.createElement('div')
-			container.setAttribute('class', 'container intro')
-			// container.style.backgroundColor = DEFAULT_THEME
+introStories.add(
+	'Welcome',
+	() => {
+		// container creation
+		const container = document.createElement('div')
+		container.setAttribute('class', 'container intro')
+		// container.style.backgroundColor = DEFAULT_THEME
 
-			container.innerHTML = `
+		container.innerHTML = `
 				<div class="welcome__container" style="background: url(./welcome.png) no-repeat center center fixed; background-size: cover;">
 					<div class="welcome__content">
 						<h2 class="welcome__heading">Carbon Charts</h2>
@@ -36,13 +41,13 @@ introStories
 					</div>
 				</div>`
 
-			return container
-		},
-		{
-			controls: {
-				hideNoControlsWarning: true
-			}
+		return container
+	},
+	{
+		controls: {
+			hideNoControlsWarning: true
 		}
+	}
 )
 
 // Loop through all demo groups
@@ -109,7 +114,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 						<div id="other-versions"></div>
 					</main>`
 
-				const sandboxButton = container.querySelector('#sandbox');
+				const sandboxButton = container.querySelector('#sandbox')
 				sandboxButton.addEventListener('click', () => {
 					sdk.openProject(demo.code.vanilla, { newWindow: true })
 				})

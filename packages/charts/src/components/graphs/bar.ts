@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import{ getProperty } from '../../tools'
+import { getProperty } from '../../tools'
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations

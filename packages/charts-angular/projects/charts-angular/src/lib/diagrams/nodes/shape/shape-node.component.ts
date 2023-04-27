@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, TemplateRef, OnInit } from '@angular/core'
 
 import { carbonPrefix } from '../../config'
-import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet, NgIf } from '@angular/common';
+import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet, NgIf } from '@angular/common'
 
 @Component({
-    selector: 'ibm-diagram-shape-node',
-    template: `
+	selector: 'ibm-diagram-shape-node',
+	template: `
 		<ng-container [ngSwitch]="component">
 			<xhtml:div
 				*ngSwitchCase="'div'"
@@ -88,8 +88,8 @@ import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet, NgIf } from
 			</div>
 		</ng-template>
 	`,
-    standalone: true,
-    imports: [NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet, NgIf]
+	standalone: true,
+	imports: [NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet, NgIf]
 })
 export class ShapeNode implements OnInit {
 	@Input() as = 'div'

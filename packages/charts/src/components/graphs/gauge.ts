@@ -258,9 +258,7 @@ export class Gauge extends Component {
 			const deltaFontSize = delta ? getProperty(options, 'gauge', 'deltaFontSize') : () => 0
 
 			// use numberFormatter here only if there is a delta supplied
-			const numberFormatter = delta
-				? getProperty(options, 'gauge', 'numberFormatter')
-				: () => null
+			const numberFormatter = delta ? getProperty(options, 'gauge', 'numberFormatter') : () => null
 
 			const arrowSize = getProperty(options, 'gauge', 'deltaArrow', 'size')
 			const numberSpacing = getProperty(options, 'gauge', 'numberSpacing')

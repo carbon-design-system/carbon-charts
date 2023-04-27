@@ -4,29 +4,29 @@ import { ScatterChart, ScatterChartOptions, ChartTabularData } from '@carbon/cha
 import CcvBaseChart from './CcvBaseChart.vue'
 
 interface Props {
-  data: ChartTabularData
-  options: ScatterChartOptions
+	data: ChartTabularData
+	options: ScatterChartOptions
 }
 
 export default defineComponent({
-  extends: CcvBaseChart,
-  props: {
-    data: {
-      type: Object as () => ChartTabularData,
-      required: true
-    },
-    options: {
-      type: Object as () => ScatterChartOptions,
-      required: true
-    }
-  },
-  mounted() {
-    const { data, options } = this.$props as Props
-    this.coreChart = new ScatterChart(this.$el as HTMLDivElement, {
-      data,
-      options
-    })
-  }
+	extends: CcvBaseChart,
+	props: {
+		data: {
+			type: Object as () => ChartTabularData,
+			required: true
+		},
+		options: {
+			type: Object as () => ScatterChartOptions,
+			required: true
+		}
+	},
+	mounted() {
+		const { data, options } = this.$props as Props
+		this.coreChart = new ScatterChart(this.$el as HTMLDivElement, {
+			data,
+			options
+		})
+	}
 })
 </script>
 

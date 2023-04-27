@@ -1,7 +1,15 @@
 // Internal Imports
 import { color, legend } from '../configuration'
 import { histogram as histogramConfigs } from '../configuration-non-customizable'
-import { clone, fromPairs, getProperty, groupBy, merge, removeArrayDuplicates, updateLegendAdditionalItems } from '../tools'
+import {
+	clone,
+	fromPairs,
+	getProperty,
+	groupBy,
+	merge,
+	removeArrayDuplicates,
+	updateLegendAdditionalItems
+} from '../tools'
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
 
 // D3
@@ -378,9 +386,7 @@ export class ChartModel {
 		})
 
 		if (percentage) {
-			const maxByKey = fromPairs(
-				dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0])
-			)
+			const maxByKey = fromPairs(dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0]))
 
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {

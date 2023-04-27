@@ -48,13 +48,7 @@ export class Grid extends Component {
 
 		if (alignToTicks) {
 			const mainXPosition = this.services.cartesianScales.getDomainAxisPosition()
-			const customDomain = getProperty(
-				this.getOptions(),
-				'axes',
-				mainXPosition,
-				'ticks',
-				'values'
-			)
+			const customDomain = getProperty(this.getOptions(), 'axes', mainXPosition, 'ticks', 'values')
 			// use custom domain if there is one
 			// otherwise d3 defaults to using one gridline per tick
 			if (customDomain) {
@@ -101,13 +95,7 @@ export class Grid extends Component {
 		if (alignToTicks) {
 			const mainYPosition = this.services.cartesianScales.getRangeAxisPosition()
 
-			const customDomain = getProperty(
-				this.getOptions(),
-				'axes',
-				mainYPosition,
-				'ticks',
-				'values'
-			)
+			const customDomain = getProperty(this.getOptions(), 'axes', mainYPosition, 'ticks', 'values')
 
 			// use custom domain if there is one
 			// otherwise d3 defaults to using one gridline per tick
@@ -199,12 +187,7 @@ export class Grid extends Component {
 	 * @param position mouse positon
 	 */
 	getActiveGridline(position) {
-		const userSpecifiedThreshold = getProperty(
-			this.getOptions,
-			'tooltip',
-			'gridline',
-			'threshold'
-		)
+		const userSpecifiedThreshold = getProperty(this.getOptions, 'tooltip', 'gridline', 'threshold')
 		const threshold = userSpecifiedThreshold
 			? userSpecifiedThreshold
 			: this.getGridlineThreshold(position)

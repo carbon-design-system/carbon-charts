@@ -57,9 +57,7 @@ export class CirclePack extends Component {
 			.size([width, height])
 			.padding((d) => {
 				// add 3 px to account for the stroke width 1.5px
-				return d.depth >= 1
-					? circlePack.padding.children + 3
-					: circlePack.padding.mainGroup + 3
+				return d.depth >= 1 ? circlePack.padding.children + 3 : circlePack.padding.mainGroup + 3
 			})
 
 		const nodeData = packLayout(root)
@@ -226,11 +224,7 @@ export class CirclePack extends Component {
 
 				const hierarchyLevel = self.model.getHierarchyLevel()
 				const disabled = hierarchyLevel > 2 && !hoveredElement.classed('focal')
-				const canvasZoomEnabled = getProperty(
-					self.model.getOptions(),
-					'canvasZoom',
-					'enabled'
-				)
+				const canvasZoomEnabled = getProperty(self.model.getOptions(), 'canvasZoom', 'enabled')
 
 				let zoomable = false
 				if (!disabled) {
@@ -341,11 +335,7 @@ export class CirclePack extends Component {
 				const hoveredElement = select(this)
 				const disabled = hoveredElement.classed('non-focal')
 
-				const canvasZoomEnabled = getProperty(
-					self.model.getOptions(),
-					'canvasZoom',
-					'enabled'
-				)
+				const canvasZoomEnabled = getProperty(self.model.getOptions(), 'canvasZoom', 'enabled')
 
 				if (canvasZoomEnabled && self.model.getHierarchyLevel() > 2) {
 					const canvasSelection = self.parent.selectAll('circle.node')

@@ -14,7 +14,7 @@ const format = (
 	timeInterval: string,
 	timeScaleOptions: TimeScaleOptions
 ): string[] => {
-	return ticks.map((tick, i) => formatTick(tick, i,[], timeInterval, timeScaleOptions))
+	return ticks.map((tick, i) => formatTick(tick, i, [], timeInterval, timeScaleOptions))
 }
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {

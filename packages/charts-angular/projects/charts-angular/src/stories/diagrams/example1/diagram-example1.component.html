@@ -1,41 +1,51 @@
 <div class="demo-desktop-only">
-  <div class="cp-message">This is a desktop-only example</div>
-  <svg height="124" width="600" style="margin-top: 1em;" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <svg:defs>
-      <svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
-    </svg:defs>
+	<div class="cp-message">This is a desktop-only example</div>
+	<svg height="124" width="600" style="margin-top: 1em" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+		<svg:defs>
+			<svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
+		</svg:defs>
 
-    <svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm" [markerEnd]="markerEnd"></svg:g>
+		<svg:g
+			ibm-graph-edge
+			[source]="source"
+			[target]="target"
+			variant="dash-sm"
+			[markerEnd]="markerEnd"></svg:g>
 
-    <svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth"
-      [attr.transform]="'translate(0, 16)'">
-      <xhtml:div>
-        <ibm-diagram-card-node as="button">
-          <ibm-diagram-card-node-column>
-            <svg ibmIconUser size="20"></svg>
-          </ibm-diagram-card-node-column>
-          <ibm-diagram-card-node-column>
-            <ibm-diagram-card-node-title>
-              Title
-            </ibm-diagram-card-node-title>
-            <ibm-diagram-card-node-subtitle>
-              Description
-            </ibm-diagram-card-node-subtitle>
-          </ibm-diagram-card-node-column>
-        </ibm-diagram-card-node>
-      </xhtml:div>
-    </svg:foreignObject>
+		<svg:foreignObject
+			style="overflow: visible"
+			[attr.height]="nodeHeight"
+			[attr.width]="nodeWidth"
+			[attr.transform]="'translate(0, 16)'">
+			<xhtml:div>
+				<ibm-diagram-card-node as="button">
+					<ibm-diagram-card-node-column>
+						<svg ibmIconUser size="20"></svg>
+					</ibm-diagram-card-node-column>
+					<ibm-diagram-card-node-column>
+						<ibm-diagram-card-node-title> Title </ibm-diagram-card-node-title>
+						<ibm-diagram-card-node-subtitle> Description </ibm-diagram-card-node-subtitle>
+					</ibm-diagram-card-node-column>
+				</ibm-diagram-card-node>
+			</xhtml:div>
+		</svg:foreignObject>
 
-    <svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth"
-      [attr.transform]="'translate(400, 16)'">
-      <xhtml:div>
-        <ibm-diagram-shape-node as="button" title="Title" [size]="circleSize"
-          [renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
-      </xhtml:div>
-    </svg:foreignObject>
-  </svg>
+		<svg:foreignObject
+			style="overflow: visible"
+			[attr.height]="nodeHeight"
+			[attr.width]="nodeWidth"
+			[attr.transform]="'translate(400, 16)'">
+			<xhtml:div>
+				<ibm-diagram-shape-node
+					as="button"
+					title="Title"
+					[size]="circleSize"
+					[renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
+			</xhtml:div>
+		</svg:foreignObject>
+	</svg>
 
-  <ng-template #wikiTemplate>
-    <svg ibmIconWikis size="20"></svg>
-  </ng-template>
+	<ng-template #wikiTemplate>
+		<svg ibmIconWikis size="20"></svg>
+	</ng-template>
 </div>

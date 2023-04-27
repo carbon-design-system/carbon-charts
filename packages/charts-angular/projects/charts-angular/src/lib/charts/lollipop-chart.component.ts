@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { LollipopChart as LollipopChartCore, type LollipopChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	LollipopChart as LollipopChartCore,
+	type LollipopChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `LollipopChart` in carbon charts library
@@ -10,9 +14,9 @@ import { LollipopChart as LollipopChartCore, type LollipopChartOptions, type Cha
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-lollipop-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-lollipop-chart',
+	template: ``,
+	standalone: true
 })
 export class LollipopChart extends BaseChart implements AfterViewInit {
 	/**

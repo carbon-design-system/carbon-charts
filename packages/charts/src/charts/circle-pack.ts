@@ -6,9 +6,7 @@ import { options } from '../configuration'
 import { mergeDefaultChartOptions } from '../tools'
 
 // Components
-import {
-	CirclePack
-} from '../components/index'
+import { CirclePack } from '../components/index'
 
 export class CirclePackChart extends Chart {
 	model = new CirclePackChartModel(this.services)
@@ -18,9 +16,7 @@ export class CirclePackChart extends Chart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.circlePackChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.circlePackChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

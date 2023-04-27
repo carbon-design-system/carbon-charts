@@ -56,7 +56,7 @@ export interface Demo {
 		react?: string
 		svelte?: string
 		vue?: string
-	},
+	}
 	code: {
 		vanilla: any
 		angular?: any
@@ -1273,7 +1273,7 @@ const mapDemoGroups = (demoGroups: any) =>
 					dependencies: {
 						'@carbon/charts': libraryVersion,
 						'@carbon/styles': stylesVersion,
-						'd3': D3VERSION
+						d3: D3VERSION
 					}
 				}
 				demo.code = {} // Svelte and Vue use CodeSandbox
@@ -1281,24 +1281,24 @@ const mapDemoGroups = (demoGroups: any) =>
 				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
 
 				demo.code.angular = {
-					...project, 
+					...project,
 					files: createAngularChartApp(demo),
-					template: 'angular-cli', 
+					template: 'angular-cli',
 					title: 'Carbon Charts Angular Example',
 					dependencies: {
 						...project.dependencies,
-						'@carbon/charts-angular': libraryVersion,
+						'@carbon/charts-angular': libraryVersion
 					}
 				}
 
 				demo.code.react = {
-					...project, 
+					...project,
 					files: createReactChartApp(demo),
-					template: 'create-react-app', 
+					template: 'create-react-app',
 					title: 'Carbon Charts React Example',
 					dependencies: {
 						...project.dependencies,
-						'@carbon/charts-react': libraryVersion,
+						'@carbon/charts-react': libraryVersion
 					}
 				}
 

@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	AlluvialChart as AlluvialChartCore,
+	type AlluvialChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `Alluvial` in carbon charts library
@@ -10,9 +14,9 @@ import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions, type Cha
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-alluvial-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-alluvial-chart',
+	template: ``,
+	standalone: true
 })
 export class AlluvialChart extends BaseChart implements AfterViewInit {
 	/**

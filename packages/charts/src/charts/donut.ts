@@ -6,10 +6,7 @@ import { mergeDefaultChartOptions } from '../tools'
 import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Donut,
-	Skeleton
-} from '../components/index'
+import { Donut, Skeleton } from '../components/index'
 
 export class DonutChart extends PieChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
@@ -17,9 +14,7 @@ export class DonutChart extends PieChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.donutChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.donutChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

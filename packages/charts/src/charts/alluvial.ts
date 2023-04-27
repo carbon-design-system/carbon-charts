@@ -16,9 +16,7 @@ export class AlluvialChart extends Chart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			mergeDefaultChartOptions(options.alluvialChart, chartConfigs.options)
-		)
+		this.model.setOptions(mergeDefaultChartOptions(options.alluvialChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	GaugeChart as GaugeChartCore,
+	type GaugeChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `GaugeChart` in carbon charts library
@@ -10,9 +14,9 @@ import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-gauge-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-gauge-chart',
+	template: ``,
+	standalone: true
 })
 export class GaugeChart extends BaseChart implements AfterViewInit {
 	/**

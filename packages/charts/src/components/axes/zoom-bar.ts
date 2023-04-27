@@ -41,12 +41,7 @@ export class ZoomBar extends Component {
 	init() {
 		this.services.events.addEventListener(Events.ZoomBar.UPDATE, this.render.bind(this))
 		// check if pre-defined zoom bar data exists
-		const definedZoomBarData = getProperty(
-			this.getOptions(),
-			'zoomBar',
-			AxisPositions.TOP,
-			'data'
-		)
+		const definedZoomBarData = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'data')
 
 		// load up the zoomBarData into this model
 		this.model.setZoomBarData(definedZoomBarData)
@@ -61,12 +56,7 @@ export class ZoomBar extends Component {
 		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type')
 
 		// As zoom current only available on top only highlights corresponding to bottom axis will be shown
-		const highlight = getProperty(
-			this.getOptions(),
-			'axes',
-			AxisPositions.BOTTOM,
-			'highlights'
-		)
+		const highlight = getProperty(this.getOptions(), 'axes', AxisPositions.BOTTOM, 'highlights')
 
 		const zoombarHeight = zoomBar.height[zoombarType]
 
@@ -367,8 +357,7 @@ export class ZoomBar extends Component {
 		const handleXDiff = -handleWidth / 2
 
 		const handleBarWidth = zoomBar.handleBarWidth
-		const handleBarHeight =
-			zoombarType === ZoomBarTypes.GRAPH_VIEW ? zoomBar.handleBarHeight : 6
+		const handleBarHeight = zoombarType === ZoomBarTypes.GRAPH_VIEW ? zoomBar.handleBarHeight : 6
 		const handleBarXDiff = -handleBarWidth / 2
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2
 
@@ -523,12 +512,7 @@ export class ZoomBar extends Component {
 	}
 
 	renderZoomBarBaseline(container, startX, endX, skeletonClass = false) {
-		const zoombarType = getProperty(
-			this.model.getOptions(),
-			'zoomBar',
-			AxisPositions.TOP,
-			'type'
-		)
+		const zoombarType = getProperty(this.model.getOptions(), 'zoomBar', AxisPositions.TOP, 'type')
 		const zoombarHeight = zoomBar.height[zoombarType]
 		const baselineGenerator = line()([
 			[startX, zoombarHeight],

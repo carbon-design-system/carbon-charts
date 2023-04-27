@@ -2,7 +2,13 @@ import React from 'react'
 import { storiesOf, type Args } from '@storybook/react'
 import sdk from '@stackblitz/sdk'
 import { color, ChartTheme } from '@carbon/charts'
-import { addControls, addOtherVersions, type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
+import {
+	addControls,
+	addOtherVersions,
+	type Demo,
+	type DemoGroup,
+	storybookDemoGroups
+} from '@carbon/charts/demo'
 import * as ChartComponents from '../charts'
 
 const DEFAULT_THEME = ChartTheme.G100
@@ -68,7 +74,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 						</h3>
 
 						<p className="props">
-							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format--docs">data</a>,{' '}
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format--docs">data</a>
+							,{' '}
 							<a
 								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
 								target="_blank">

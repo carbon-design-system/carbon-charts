@@ -1,7 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
-import { MeterChart as MeterChartCore, type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	MeterChart as MeterChartCore,
+	type MeterChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `MeterChart` in carbon charts library
@@ -9,9 +13,9 @@ import { MeterChart as MeterChartCore, type MeterChartOptions, type ChartTabular
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-meter-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-meter-chart',
+	template: ``,
+	standalone: true
 })
 export class MeterChart extends BaseChart implements AfterViewInit {
 	/**

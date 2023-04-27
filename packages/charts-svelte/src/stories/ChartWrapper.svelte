@@ -9,7 +9,7 @@
 	const openSandbox = async () => {
 		try {
 			const response = await fetch(`${demo.codesandbox.svelte}&json=1`)
-	
+
 			if (!response.ok) {
 				throw new Error('Network response from CodeSandbox was not ok')
 			}
@@ -20,7 +20,6 @@
 			console.error('There was a problem opening the Cloud Sandbox:', error)
 			throw error
 		}
-
 	}
 </script>
 
@@ -28,8 +27,7 @@
 	<div class="v10-banner">
 		This version relies on <b>Carbon v11</b>. If you're using Carbon v10,
 		<a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer"
-			>see the legacy demo site</a
-		>
+			>see the legacy demo site</a>
 	</div>
 
 	<h3>
@@ -44,8 +42,7 @@
 		<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
 			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
-			target="_blank"
-		>
+			target="_blank">
 			options
 		</a>
 	</p>
@@ -55,14 +52,14 @@
 	</div>
 
 	<h3 class="marginTop-30">Code sample</h3>
-	<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p><br/>
+	<p>Opens in a new tab. Please ensure pop-up blocker is not on.</p>
+	<br />
 
 	<a on:click|preventDefault={openSandbox} href={'#'} target="_blank">
 		<img
 			src="https://codesandbox.io/static/img/play-codesandbox.svg"
 			alt="Edit on CodeSandbox"
-			class="marginTop"
-		/>
+			class="marginTop" />
 	</a>
 
 	<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30" data-code-snippet>
@@ -70,8 +67,8 @@
 			<pre>
         <code>
           <span class="token tag">{`<${chartType}`}</span> <span class="token attr-name"
-						>{`{data}`}</span
-					> <span class="token attr-name">{`{options}`}</span> <span class="token tag">{`/>`}</span>
+						>{`{data}`}</span> <span class="token attr-name">{`{options}`}</span> <span
+						class="token tag">{`/>`}</span>
         </code>
       </pre>
 		</div>

@@ -1,9 +1,5 @@
 // Internal imports
-import {
-	CartesianOrientations,
-	ScaleTypes,
-	TruncationTypes,
-} from './interfaces'
+import { CartesianOrientations, ScaleTypes, TruncationTypes } from './interfaces'
 
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 

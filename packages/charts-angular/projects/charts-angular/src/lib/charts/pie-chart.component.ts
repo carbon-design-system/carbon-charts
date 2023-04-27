@@ -2,7 +2,11 @@ import { Component, AfterViewInit } from '@angular/core'
 
 import { BaseChart } from './base-chart.component'
 
-import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	PieChart as PieChartCore,
+	type PieChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 
 /**
  * Wrapper around `PieChart` in carbon charts library
@@ -10,9 +14,9 @@ import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData }
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-pie-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-pie-chart',
+	template: ``,
+	standalone: true
 })
 export class PieChart extends BaseChart implements AfterViewInit {
 	/**

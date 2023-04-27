@@ -156,10 +156,7 @@ export const addControls = (
 	addRadioButtonEventListeners(container, chart)
 }
 
-export const addRadioButtonEventListeners = (
-	container: HTMLDivElement,
-	chart: any
-) => {
+export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: any) => {
 	// Add event listeners for radio buttons
 	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
 
@@ -201,7 +198,7 @@ export const addOtherVersions = (
 						name: 'Vanilla JavaScript',
 						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'react'
 			? [
@@ -209,7 +206,7 @@ export const addOtherVersions = (
 						name: 'React',
 						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'angular'
 			? [
@@ -217,7 +214,7 @@ export const addOtherVersions = (
 						name: 'Angular',
 						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'vue'
 			? [
@@ -225,7 +222,7 @@ export const addOtherVersions = (
 						name: 'Vue',
 						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: []),
 		...(currentVersion !== 'svelte'
 			? [
@@ -233,7 +230,7 @@ export const addOtherVersions = (
 						name: 'Svelte',
 						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
 					}
-				]
+			  ]
 			: [])
 	]
 

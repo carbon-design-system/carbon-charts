@@ -6,9 +6,9 @@ import type { ChartTabularData } from '@carbon/charts'
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-    selector: 'ibm-base-chart',
-    template: ``,
-    standalone: true
+	selector: 'ibm-base-chart',
+	template: ``,
+	standalone: true
 })
 export class BaseChart implements AfterViewInit, OnInit {
 	/**
@@ -73,8 +73,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 	private _data!: ChartTabularData
 	private _options: any
 
-	constructor(protected elementRef: ElementRef) {
-	}
+	constructor(protected elementRef: ElementRef) {}
 
 	ngOnInit() {
 		// Width prop is mandatory for the wrappers
@@ -91,6 +90,5 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 */
-	ngAfterViewInit() {
-	}
+	ngAfterViewInit() {}
 }

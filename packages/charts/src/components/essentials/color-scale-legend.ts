@@ -1,5 +1,5 @@
 // Internal Imports
-import{ getProperty, isEmpty } from '../../tools'
+import { getProperty, isEmpty } from '../../tools'
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces'
 import { legend } from '../../configuration'
 import { Legend } from './legend'
@@ -172,9 +172,7 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		// Align axes at the bottom of the rectangle and delete the domain line
-		axisElement
-			.attr('transform', `translate(0,${legend.color.axisYTranslation})`)
-			.call(legendAxis)
+		axisElement.attr('transform', `translate(0,${legend.color.axisYTranslation})`).call(legendAxis)
 
 		// Remove auto generated axis bottom line
 		axisElement.select('.domain').remove()

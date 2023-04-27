@@ -7,7 +7,8 @@
 	export let ref: HTMLDivElement
 </script>
 
-<BaseChart {...$$restProps}
+<BaseChart
+	{...$$restProps}
 	Chart={SimpleBarChart}
 	{options}
 	{data}
@@ -15,5 +16,4 @@
 	bind:chart
 	on:load
 	on:update
-	on:destroy
-/>
+	on:destroy />

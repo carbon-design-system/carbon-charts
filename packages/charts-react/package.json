@@ -33,8 +33,8 @@
 		"start": "yarn storybook",
 		"ci-check": "yarn format:diff",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path ../../.gitignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
-		"format:diff": "prettier --list-different src/",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"  --ignore-path ../../.eslintignore",
+		"format:diff": "prettier --list-different src/ --ignore-path ../../.gitignore",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
@@ -79,7 +79,7 @@
 		"vite": "^4.3.3",
 		"vite-plugin-dts": "~2.3.0"
 	},
-	"prettier": "../../prettier.config.mjs",
+	"prettier": "../../prettier.config.cjs",
 	"publishConfig": {
 		"directory": "dist",
 		"access": "public"

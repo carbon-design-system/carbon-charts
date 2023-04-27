@@ -231,7 +231,7 @@ export class Tree extends Component {
 				? d3Cluster().size([
 						height,
 						width - mockLongestLabelWidth - maxDepth * NODE_OFFSET - mockRootTitleWidth
-					])
+				  ])
 				: d3Tree()
 						.nodeSize([dx, dy])
 						.size([

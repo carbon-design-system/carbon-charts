@@ -1,18 +1,15 @@
 export {
-  Marker,
+	Marker,
 	MarkerArrowLeft,
 	MarkerArrowRight,
 	MarkerShapeNode,
 	MarkerDiamond,
 	MarkerSquare,
 	MarkerTee,
-  MarkerModule 
+	MarkerModule
 } from './edges/marker/marker.module'
 
-export {
-  Edge,
-  EdgeModule
-} from './edges/edge.module'
+export { Edge, EdgeModule } from './edges/edge.module'
 
 export {
 	CardNode,
@@ -20,10 +17,7 @@ export {
 	CardNodeLabel,
 	CardNodeSubtitle,
 	CardNodeTitle,
-  CardNodeModule
+	CardNodeModule
 } from './nodes/cards/card-node.module'
 
-export {
-  ShapeNode,
-  ShapeNodeModule
-} from './nodes/shape/shape-node.module'
+export { ShapeNode, ShapeNodeModule } from './nodes/shape/shape-node.module'

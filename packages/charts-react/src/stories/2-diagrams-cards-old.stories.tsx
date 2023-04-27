@@ -1,12 +1,6 @@
 import { storiesOf } from '@storybook/react'
 
-import {
-	CardNode,
-	CardNodeColumn,
-	CardNodeSubtitle,
-	CardNodeLabel,
-	CardNodeTitle
-} from '../'
+import { CardNode, CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitle } from '../'
 
 import { User, ChevronDown } from '@carbon/icons-react'
 
