@@ -5,8 +5,8 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		'../../charts/stories/getting-started/react.stories.mdx',
-		'../../charts/stories/tutorials/*.stories.mdx'
+		'../../charts/src/stories/getting-started/react.stories.mdx',
+		'../../charts/src/stories/tutorials/*.stories.mdx'
 	],
 	viteFinal: (config) => {
 		if (config.resolve) {

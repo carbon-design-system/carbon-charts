@@ -10,6 +10,6 @@
     "skipLibCheck": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*", "./*.ts"],
+  "include": ["../src/**/*", "./preview.ts"],
   "files": ["./typings.d.ts"]
 }

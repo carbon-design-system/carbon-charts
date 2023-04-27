@@ -317,20 +317,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^15.2.8":
-  version: 15.2.8
-  resolution: "@angular/forms@npm:15.2.8"
-  dependencies:
-    tslib: ^2.3.0
-  peerDependencies:
-    "@angular/common": 15.2.8
-    "@angular/core": 15.2.8
-    "@angular/platform-browser": 15.2.8
-    rxjs: ^6.5.3 || ^7.4.0
-  checksum: 15c0b937f31a19117049bbb6e67b023377ac7178ece608831e53b74de8ade89889f3498dce420cc1b4ee849e1cc8a4480ca461c9843019ae03381c953aebd8c7
-  languageName: node
-  linkType: hard
-
 "@angular/platform-browser-dynamic@npm:^15.2.8":
   version: 15.2.8
   resolution: "@angular/platform-browser-dynamic@npm:15.2.8"
@@ -1958,7 +1944,6 @@ __metadata:
     "@angular/compiler": ^15.2.8
     "@angular/compiler-cli": ^15.2.8
     "@angular/core": ^15.2.8
-    "@angular/forms": ^15.2.8
     "@angular/platform-browser": ^15.2.8
     "@angular/platform-browser-dynamic": ^15.2.8
     "@babel/core": ^7.21.4
@@ -1991,18 +1976,15 @@ __metadata:
     prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
-    rxjs: ~7.8.0
+    rxjs: ~7.8.1
     storybook: ^7.0.7
     style-loader: ^3.3.2
     tslib: ^2.5.0
     typescript: ^4.9.5
     zone.js: ~0.13.0
   peerDependencies:
-    "@angular/animations": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     "@angular/common": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     "@angular/core": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-    "@angular/forms": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-    "@angular/platform-browser": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     "@angular/platform-browser-dynamic": ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     rxjs: ^7.8.0
     zone.js: ~0.13.0
@@ -2195,7 +2177,7 @@ __metadata:
     d3-time-format: ^4.1.0
     d3-transition: ^3.0.1
     date-fns: ^2.29.3
-    dom-to-image-more: ^3.1.5
+    dom-to-image-more: ^3.1.6
     eslint: ^8.39.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.11
@@ -10641,10 +10623,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-to-image-more@npm:^3.1.5":
-  version: 3.1.5
-  resolution: "dom-to-image-more@npm:3.1.5"
-  checksum: 0d54db7a0f0bf75462e6944c962ef2be67cecc80bd22b9d8cd39f11833c7bcb60d1e95f0c10def3286d7793acaa2fb590a17deeabcc372f4b727e73899af9413
+"dom-to-image-more@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "dom-to-image-more@npm:3.1.6"
+  checksum: ea47d516528e77d51d9937b334c0a61fbeb9ac9a9fd3cc5fbf62e505d33fa00a7cf37b8b1080dcc9f204117b06e9299bb1bbb8af0dd5c449ab3a8f3b79b759e0
   languageName: node
   linkType: hard
 
@@ -20006,12 +19988,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.5, rxjs@npm:^7.5.6, rxjs@npm:~7.8.0":
+"rxjs@npm:^7.5.5, rxjs@npm:^7.5.6":
   version: 7.8.0
   resolution: "rxjs@npm:7.8.0"
   dependencies:
     tslib: ^2.1.0
   checksum: 61b4d4fd323c1043d8d6ceb91f24183b28bcf5def4f01ca111511d5c6b66755bc5578587fe714ef5d67cf4c9f2e26f4490d4e1d8cabf9bd5967687835e9866a2
+  languageName: node
+  linkType: hard
+
+"rxjs@npm:~7.8.1":
+  version: 7.8.1
+  resolution: "rxjs@npm:7.8.1"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: de4b53db1063e618ec2eca0f7965d9137cabe98cf6be9272efe6c86b47c17b987383df8574861bcced18ebd590764125a901d5506082be84a8b8e364bf05f119
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Carbon charting components for Angular",
   "repository": {
 		"type": "git",
@@ -35,8 +35,6 @@
   "peerDependencies": {
     "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
     "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
-    "@angular/forms": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
-    "@angular/platform-browser": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
     "@angular/platform-browser-dynamic": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
 		"@carbon/charts": "workspace:*",
     "rxjs": "^7.8.0",

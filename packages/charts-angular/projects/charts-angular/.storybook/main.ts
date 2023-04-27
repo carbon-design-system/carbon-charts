@@ -8,8 +8,8 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
     // Storybook monorepo-specific issue
-		// '../../../../charts/stories/getting-started/angular.stories.mdx',
-		// '../../../../charts/stories/tutorials/*.stories.mdx'
+		// '../../../../charts/src/stories/getting-started/angular.stories.mdx',
+		// '../../../../charts/src/stories/tutorials/*.stories.mdx'
   ],
   addons: [
     {

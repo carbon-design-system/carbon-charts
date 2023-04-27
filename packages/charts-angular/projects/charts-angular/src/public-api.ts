@@ -10,7 +10,7 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ChartsModule,
+	ChartsModule, // <-- Module
 	CirclePackChart,
 	ComboChart,
 	DonutChart,
@@ -36,17 +36,17 @@ export {
 	CardNodeLabel,
 	CardNodeSubtitle,
 	CardNodeTitle,
-	CardNodeModule,
+	CardNodeModule, // <-- Module
 	Edge,
-	EdgeModule,
+	EdgeModule, // <-- Module
 	MarkerArrowLeft,
 	MarkerArrowRight,
 	Marker,
 	MarkerDiamond,
-	MarkerModule,
+	MarkerModule, // <-- Module
 	MarkerShapeNode,
 	MarkerSquare,
 	MarkerTee,
 	ShapeNode,
-	ShapeNodeModule
+	ShapeNodeModule // <-- Module
 } from './lib'

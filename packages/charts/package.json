@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.7.3",
+	"version": "1.7.4",
 	"description": "Carbon charting components",
 	"module": "./dist/index.mjs",
 	"main": "./dist/index.js",
@@ -98,7 +98,7 @@
 		"d3-time-format": "^4.1.0",
 		"d3-transition": "^3.0.1",
 		"date-fns": "^2.29.3",
-		"dom-to-image-more": "^3.1.5",
+		"dom-to-image-more": "^3.1.6",
 		"lodash-es": "^4.17.21",
 		"resize-observer-polyfill": "^1.5.1",
 		"tslib": "^2.5.0"
