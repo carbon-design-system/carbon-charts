@@ -11,7 +11,7 @@ export default defineConfig({
 			entry: fileURLToPath(new URL('src/index.ts', import.meta.url)),
 			name: 'ChartsVue',
 			formats: ['es', 'umd'],
-			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
+			fileName: format => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			external: ['vue'],
@@ -28,7 +28,7 @@ export default defineConfig({
 		dts({ // generate type declaration files in dist, not dist/src
 			cleanVueFileName: true,
 			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/packages/charts-vue/src/','/dist/') // cannot reassign and return constant
+				filePath = filePath.replace('/dist/packages/charts-vue/src/','/dist/')
 				return { filePath, content }
 			}
 		})

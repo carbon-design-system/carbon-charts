@@ -4,17 +4,6 @@ import dts from 'vite-plugin-dts'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-	plugins: [
-		react(),
-		dts({
-			insertTypesEntry: true
-		})
-	],
-	resolve: {
-		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url))
-		}
-	},
 	build: {
 		sourcemap: true,
 		chunkSizeWarningLimit: 600,
@@ -33,5 +22,14 @@ export default defineConfig({
 				exports: 'named'
 			}
 		}
-	}
+	},
+	plugins: [
+		react(),
+		dts({
+			beforeWriteFile: (filePath: string, content: string) => {
+				filePath = filePath.replace('/dist/packages/charts-react/src/','/dist/')
+				return { filePath, content }
+			}
+		})
+	]
 })

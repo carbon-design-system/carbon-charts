@@ -4,8 +4,9 @@
   "compilerOptions": {
     // Common across frameworks for vite
     "skipLibCheck": true,
-    "target": "ESNext", // Vue overrides to ES2020
+    "target": "ESNext",
     "module": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "bundler", // Svelte wants node but...
@@ -13,13 +14,7 @@
     // Sensible globals
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-
-    // Resolve @carbon/charts in IDE without a build
-    "baseUrl": "./packages",
-    "paths": {
-      "@carbon/charts": ["charts/src"]
-    }
+    "sourceMap": true
   },
   "exclude": [
     // Directories

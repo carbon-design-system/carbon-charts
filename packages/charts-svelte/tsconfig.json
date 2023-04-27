@@ -1,21 +1,14 @@
 {
-	"extends": "../../tsconfig.json",
+	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		// From ./.svelte-kit/tsconfig.json
-		"paths": {
-			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"]
-		},
-		"rootDirs": [".", "./types"],
-		"importsNotUsedAsValues": "error",
-		"preserveValueImports": true,
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		// "moduleResolution": "node", // only uncomment if there are issues
-		"ignoreDeprecations": "5.0",
-
-		"useDefineForClassFields": true,
-		"allowJs": true,
-		"checkJs": true
+		"moduleResolution": "bundler", // only comment if there are issues
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"noImplicitThis": false
 	},
 	"include": [
 		".svelte-kit/ambient.d.ts",

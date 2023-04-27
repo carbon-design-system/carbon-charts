@@ -11,6 +11,7 @@ const config: StorybookConfig = {
 		// '../../../../charts/src/stories/getting-started/angular.stories.mdx',
 		// '../../../../charts/src/stories/tutorials/*.stories.mdx'
   ],
+  staticDirs: ['../../../../charts/.storybook/assets'],
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -27,9 +28,8 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag'
   },
-  staticDirs: ['../../../../charts/.storybook/assets'],
   features: {
-    storyStoreV7: false
+    storyStoreV7: false // required for storiesOf API
   },
   webpackFinal: async (config, {
     configType

@@ -26,7 +26,7 @@ const config: StorybookConfig = {
 		return config
 	},
 	features: {
-		storyStoreV7: false
+		storyStoreV7: false // required for storiesOf API
 	}
 }
 export default config

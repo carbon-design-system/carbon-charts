@@ -14,7 +14,6 @@ export default class BaseChart<Options = BaseChartOptions> extends React.Compone
 	constructor(props: Props<Options>) {
 		super(props)
 
-		const { options, data } = props
 		this.data = props.data || []
 		this.options = props.options || {}
 

@@ -8,7 +8,9 @@ const config: StorybookConfig = {
 		'../../charts/src/stories/getting-started/vue.stories.mdx',
 		'../../charts/src/stories/tutorials/*.stories.mdx'
 	],
+	staticDirs: ['../../charts/.storybook/assets'],
 	viteFinal: (config) => {
+		// Solves issue related to loading stories from core
 		if (config.resolve) {
 			config.resolve.alias = {
 				...config.resolve.alias,
@@ -18,6 +20,7 @@ const config: StorybookConfig = {
 		if (config.build) {
       config.build.chunkSizeWarningLimit = 1900
 		}
+		// Disable declaration generation for Storybook
 		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
 		return config
 	},
@@ -36,9 +39,8 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag'
 	},
-	staticDirs: ['../../charts/.storybook/assets'],
 	features: {
-		storyStoreV7: false
+		storyStoreV7: false // required for storiesOf API
 	}
 }
 export default config

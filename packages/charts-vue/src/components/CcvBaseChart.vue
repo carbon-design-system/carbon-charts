@@ -22,13 +22,13 @@ export default defineComponent({
 	watch: {
 		data: {
 			handler: function (newData: ChartTabularData) {
-				this.coreChart?.model.setData(newData)
+				this.coreChart?.model?.setData(newData)
 			},
 			deep: true
 		},
 		options: {
 			handler: function (newOptions) {
-				this.coreChart?.model.setOptions(newOptions)
+				this.coreChart?.model?.setOptions(newOptions)
 			},
 			deep: true
 		}
