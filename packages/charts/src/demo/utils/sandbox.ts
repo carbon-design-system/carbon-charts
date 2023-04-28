@@ -110,7 +110,7 @@ new ${chartComponent}(chartHolder, {
 			version: '0.0.0',
 			dependencies: {
 				'@carbon/charts': libraryVersion,
-				'@carbon/styles': '^1.26.1',
+				'@carbon/styles': '^1.28.0',
 				d3: D3VERSION
 			}
 		},
@@ -197,24 +197,24 @@ export const createAngularChartApp = (demo: any) => {
 				build: 'NG_CLI_ANALYTICS=false ng build'
 			},
 			dependencies: {
-				'@angular/animations': '^15.2.6',
-				'@angular/common': '^15.2.6',
-				'@angular/compiler': '^15.2.6',
-				'@angular/core': '^15.2.6',
-				'@angular/platform-browser': '^15.2.6',
+				'@angular/animations': '^15.2.8',
+				'@angular/common': '^15.2.8',
+				'@angular/compiler': '^15.2.8',
+				'@angular/core': '^15.2.8',
+				'@angular/platform-browser': '^15.2.8',
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-angular': libraryVersion,
-				'@carbon/styles': '^1.26.1',
+				'@carbon/styles': '^1.28.0',
 				d3: D3VERSION,
-				rxjs: '~7.8.0',
-				tslib: '^2.3.0',
-				'zone.js': '~0.12.0'
+				rxjs: '~7.8.1',
+				tslib: '^2.5.0',
+				'zone.js': '~0.13.0'
 			},
 			devDependencies: {
-				'@angular-devkit/build-angular': '^15.2.5',
-				'@angular/cli': '~15.2.5',
-				'@angular/compiler-cli': '^15.2.5',
-				typescript: '~4.9.4'
+				'@angular-devkit/build-angular': '^15.2.7',
+				'@angular/cli': '~15.2.7',
+				'@angular/compiler-cli': '^15.2.8',
+				typescript: '~4.9.5'
 			}
 		},
 		null,
@@ -359,11 +359,11 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-react': libraryVersion,
-				'@carbon/styles': '^1.26.0',
+				'@carbon/styles': '^1.28.0',
 				d3: D3VERSION,
 				react: '^18.2.0',
 				'react-dom': '^18.2.0',
-				'react-scripts': '^5.0.1'
+				'react-scripts': '^5.0.1' // needed?
 			}
 		},
 		null,
@@ -493,16 +493,16 @@ import '@carbon/charts/styles.css'
 			devDependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-svelte': libraryVersion,
-				'@carbon/styles': '^1.26.0',
-				'@sveltejs/adapter-auto': '^2.0.0',
-				'@sveltejs/kit': '^1.15.0',
+				'@carbon/styles': '^1.28.0',
+				'@sveltejs/adapter-auto': '^2.0.1',
+				'@sveltejs/kit': '^1.15.9',
 				d3: D3VERSION,
-				sass: '^1.60.0',
+				// sass: '^1.60.0',
 				svelte: '^3.58.0',
-				'svelte-check': '^3.1.4',
+				'svelte-check': '^3.2.0',
 				tslib: '^2.5.0',
-				typescript: '^5.0.3',
-				vite: '^4.3.1'
+				typescript: '^5.0.4',
+				vite: '^4.3.3'
 			},
 			engines: {
 				node: '>=16.12.0'
@@ -621,7 +621,7 @@ new Vue({
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
-				'@carbon/styles': '^1.26.0',
+				'@carbon/styles': '^1.28.0',
 				vue: '^2.7.14'
 			}
 		},
