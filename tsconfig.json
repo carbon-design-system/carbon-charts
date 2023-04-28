@@ -1,4 +1,3 @@
-// IDE picks this up by default
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {

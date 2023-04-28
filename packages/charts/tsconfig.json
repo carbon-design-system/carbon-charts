@@ -1,12 +1,8 @@
 {
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"useDefineForClassFields": false, // prevents 7 TypeScript errors related to missing declare statements and 1 where 'services' is used before its initialization
-		"paths": {
-			"@/*": ["./src/*"] // handy alias
-		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.js", "stories/**/*"],
+	"include": ["src/**/*"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }
