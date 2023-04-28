@@ -1,7 +1,7 @@
 import { storiesOf, type Args } from '@storybook/vue3'
-import * as ChartComponents from '../components'
-import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
 import { ChartTheme } from '@carbon/charts'
+import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
+import * as ChartComponents from '../components'
 
 const DEFAULT_THEME = ChartTheme.G100
 
@@ -43,6 +43,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		demo.options.theme = DEFAULT_THEME
 		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const component = ChartComponents[demo.chartType.vue]
+
 		groupStories.add(
 			demo.title,
 			(args: Args) => ({
@@ -58,32 +59,32 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					}
 				},
 				template: `
-						<div class="container">
+					<div class="container">
 
-							<div class="v10-banner">
-								This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
-							</div>
+						<div class="v10-banner">
+							This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
+						</div>
 
-							<h3>
-								<b>Component:</b>
-								<span class="cds--tag cds--tag--green component-name">${demo.chartType.vue}</span>
-							</h3>
+						<h3>
+							<b>Component:</b>
+							<span class="cds--tag cds--tag--green component-name">${demo.chartType.vue}</span>
+						</h3>
 
-							<p class="props">
-								<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
-							</p>
+						<p class="props">
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
+						</p>
 
-							<div class="marginTop-30" id="chart-demo">
-								<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
-							</div>
+						<div class="marginTop-30" id="chart-demo">
+							<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
+						</div>
 
-							<h3 class="marginTop-30">Code sample</h3>
+						<h3 class="marginTop-30">Code sample</h3>
 
-							<a href="${demo.codesandbox.vue}" target="_blank">
-								<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
-							</a>
+						<a href="${demo.codesandbox.vue}" target="_blank">
+							<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
+						</a>
 
-						</div>`
+					</div>`
 			}),
 			{
 				args: {

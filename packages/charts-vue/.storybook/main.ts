@@ -9,6 +9,14 @@ const config: StorybookConfig = {
 		'../../charts/src/stories/tutorials/*.stories.mdx'
 	],
 	staticDirs: ['../../charts/.storybook/assets'],
+	addons: [
+		{
+			name: '@storybook/addon-essentials',
+			options: {
+				actions: false
+			}
+		}
+	],
 	viteFinal: (config) => {
 		// Solves issue related to loading stories from core
 		if (config.resolve) {
@@ -24,14 +32,6 @@ const config: StorybookConfig = {
 		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
 		return config
 	},
-	addons: [
-		{
-			name: '@storybook/addon-essentials',
-			options: {
-				actions: false
-			}
-		}
-	],
 	framework: {
 		name: '@storybook/vue3-vite',
 		options: {}

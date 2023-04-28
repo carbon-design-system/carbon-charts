@@ -1,6 +1,5 @@
 import type { Preview } from '@storybook/vue3'
 import { themes } from '@storybook/theming'
-
 import '@carbon/charts/demo/styles.css'
 
 const preview: Preview = {

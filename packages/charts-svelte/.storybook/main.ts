@@ -8,6 +8,7 @@ const config: StorybookConfig = {
 		'../../charts/src/stories/getting-started/svelte.stories.mdx',
 		'../../charts/src/stories/tutorials/*.stories.mdx'
 	],
+	staticDirs: ['../../charts/.storybook/assets'],
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -16,15 +17,8 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-	framework: {
-		name: '@storybook/sveltekit',
-		options: {}
-	},
-	docs: {
-		autodocs: 'tag'
-	},
-	staticDirs: ['../../charts/.storybook/assets'],
 	async viteFinal(config) {
+		// Solves issue related to loading stories from core
 		if (config.resolve) {
 			config.resolve.alias = {
 				...config.resolve.alias,
@@ -35,6 +29,13 @@ const config: StorybookConfig = {
 			config.build.chunkSizeWarningLimit = 1600
 		}
 		return config
+	},
+	framework: {
+		name: '@storybook/sveltekit',
+		options: {}
+	},
+	docs: {
+		autodocs: 'tag'
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

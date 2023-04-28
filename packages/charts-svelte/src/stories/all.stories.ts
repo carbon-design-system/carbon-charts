@@ -24,6 +24,7 @@ introStories.add(
 storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
+	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
 		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
