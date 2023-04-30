@@ -16,14 +16,14 @@
 
 		// Package-specific
 		"allowImportingTsExtensions": true,
-		"noEmit": true,
 		"jsx": "react-jsx",
+		"noEmit": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"strict": true
 	},
-	"include": ["src/**/*.tsx", "src/**/*.ts"],
+	"include": ["src"],
 	"exclude": [
     "src/stories",
     "src/**/*.test.tsx"

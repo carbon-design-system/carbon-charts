@@ -2036,8 +2036,10 @@ __metadata:
     classnames: ^2.3.2
     eslint: ^8.39.0
     eslint-config-prettier: ^8.8.0
-    eslint-plugin-jest: ^27.2.1
     eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-react-refresh: ^0.3.5
+    eslint-plugin-storybook: ^0.6.11
     prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -6567,7 +6569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.59.1, @typescript-eslint/utils@npm:^5.10.0, @typescript-eslint/utils@npm:^5.45.0":
+"@typescript-eslint/utils@npm:5.59.1, @typescript-eslint/utils@npm:^5.45.0":
   version: 5.59.1
   resolution: "@typescript-eslint/utils@npm:5.59.1"
   dependencies:
@@ -11421,23 +11423,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^27.2.1":
-  version: 27.2.1
-  resolution: "eslint-plugin-jest@npm:27.2.1"
-  dependencies:
-    "@typescript-eslint/utils": ^5.10.0
-  peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.0.0
-    eslint: ^7.0.0 || ^8.0.0
-  peerDependenciesMeta:
-    "@typescript-eslint/eslint-plugin":
-      optional: true
-    jest:
-      optional: true
-  checksum: 579a4d26304cc6748b2e6dff6c965ea7a21b618d8b051eb02727d25cf5c7767f6db8ef5237531635ff77e242b983b973e7cb8c820a4d20d5bda73358c452a8ab
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-prettier@npm:^4.0.0, eslint-plugin-prettier@npm:^4.2.1":
   version: 4.2.1
   resolution: "eslint-plugin-prettier@npm:4.2.1"
@@ -11450,6 +11435,24 @@ __metadata:
     eslint-config-prettier:
       optional: true
   checksum: b9e839d2334ad8ec7a5589c5cb0f219bded260839a857d7a486997f9870e95106aa59b8756ff3f37202085ebab658de382b0267cae44c3a7f0eb0bcc03a4f6d6
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-react-hooks@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "eslint-plugin-react-hooks@npm:4.6.0"
+  peerDependencies:
+    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+  checksum: 23001801f14c1d16bf0a837ca7970d9dd94e7b560384b41db378b49b6e32dc43d6e2790de1bd737a652a86f81a08d6a91f402525061b47719328f586a57e86c3
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-react-refresh@npm:^0.3.5":
+  version: 0.3.5
+  resolution: "eslint-plugin-react-refresh@npm:0.3.5"
+  peerDependencies:
+    eslint: ">=7"
+  checksum: 8d44201968838ad0ac13311fe593bc422ce80d9143d104c7485e8bcdeb4f8c3b4cda21322a7e360129f14912a980d23e2fb1f9f10d9701c623901e359bd7dd17
   languageName: node
   linkType: hard
 

@@ -6,7 +6,6 @@
 		"composite": true,
 		"module": "ESNext",
 		"moduleResolution": "bundler",
-		"skipLibCheck": true,
 
 		// Package-specific
 		"allowSyntheticDefaultImports": true
