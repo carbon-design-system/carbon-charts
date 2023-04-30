@@ -1,17 +1,29 @@
 {
-  "extends": "../../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // "extends": "../../tsconfig.json",
   "compilerOptions": {
-    /* Bundler mode */
+		// Temporarily copied from ../../tsconfig.json
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+
+    // Package-specific
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "jsx": "preserve",
-
-    /* Linting */
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "strict": true,
   },
   "include": ["src/**/*.vue", "src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["src/stories"],
   "references": [{ "path": "./tsconfig.vite.json" }]
 }

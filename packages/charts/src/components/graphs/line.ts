@@ -23,8 +23,8 @@ export class Line extends Component {
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		const { cartesianScales, curves } = this.services
 
-		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
-		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
+		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
+		const getRangeValue = (d: any) => cartesianScales.getRangeValue(d)
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -37,7 +37,7 @@ export class Line extends Component {
 			.x(getXValue)
 			.y(getYValue)
 			.curve(curves.getD3Curve())
-			.defined((datum: any, i) => {
+			.defined((datum: any) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier(datum)
 				const value = datum[rangeIdentifier]
 				if (value === null || value === undefined) {
@@ -55,7 +55,7 @@ export class Line extends Component {
 				percentage
 			})
 
-			data = stackedData.map((d) => {
+			data = stackedData.map((d: any) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
 				return {
@@ -65,7 +65,7 @@ export class Line extends Component {
 						[groupMapsTo]: datum[groupMapsTo],
 						[rangeIdentifier]: datum[1]
 					})),
-					hidden: !some(d, (datum) => datum[0] !== datum[1])
+					hidden: !some(d, (datum: any) => datum[0] !== datum[1])
 				}
 			})
 		} else {
@@ -73,7 +73,7 @@ export class Line extends Component {
 		}
 
 		// Update the bound data on lines
-		const lines = svg.selectAll('path.line').data(data, (group) => group.name)
+		const lines = svg.selectAll('path.line').data(data, (group: any) => group.name)
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -87,7 +87,7 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
-			.data(data, (group) => group.name)
+			.data(data, (group: any) => group.name)
 			.attr('class', (group) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
@@ -95,14 +95,14 @@ export class Line extends Component {
 					originalClassName: 'line'
 				})
 			)
-			.style('stroke', (group) => this.model.getStrokeColor(group.name))
+			.style('stroke', (group: any) => this.model.getStrokeColor(group.name))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'line')
-			.attr('aria-label', (group) => {
+			.attr('aria-label', (group: any) => {
 				const { data: groupData } = group
 				return groupData
-					.map((datum) => {
+					.map((datum: any) => {
 						const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datum)
 						return datum[rangeIdentifier]
 					})
@@ -110,15 +110,15 @@ export class Line extends Component {
 			})
 			// Transition
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'line-update-enter',
 					animate
 				})
 			)
-			.attr('opacity', (d) => (d.hidden ? 0 : 1))
-			.attr('d', (group) => {
+			.attr('opacity', (d: any) => (d.hidden ? 0 : 1))
+			.attr('d', (group: any) => {
 				const { data: groupData } = group
 				return lineGenerator(groupData)
 			})
@@ -130,13 +130,13 @@ export class Line extends Component {
 		this.parent
 			.selectAll('path.line')
 			.transition('legend-hover-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-line'
 				})
 			)
-			.attr('opacity', (group) => {
+			.attr('opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum()['name']) {
 					return lines.opacity.unselected
 				}
@@ -145,11 +145,11 @@ export class Line extends Component {
 			})
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.line')
 			.transition('legend-mouseout-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-line'

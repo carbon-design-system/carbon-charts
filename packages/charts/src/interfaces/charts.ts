@@ -67,7 +67,7 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getIsFilled?: (datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) => boolean
+	getIsFilled?: (datasetLabel: string, label?: string, data?: any, defaultFilled?: boolean) => boolean
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
@@ -76,7 +76,7 @@ export interface BaseChartOptions {
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
 	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
-	getStrokeColor?: (group: string, label?: any, data?: any, defaultStrokeColor?: string) => string
+	getStrokeColor?: (group: string, label?: string, data?: any, defaultStrokeColor?: string) => string
 	/**
 	 * stylesheet options
 	 */
@@ -175,7 +175,7 @@ export interface BinnedAxisChartOptions extends AxisChartOptions {
 /**
  * options specific to boxplot charts
  */
-export interface BoxplotChartOptions extends AxisChartOptions {}
+export type BoxplotChartOptions = AxisChartOptions
 
 /**
  * options specific to bar charts
@@ -212,7 +212,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 /**
  * options specific to lollipop charts
  */
-export interface LollipopChartOptions extends ScatterChartOptions {}
+export type LollipopChartOptions = ScatterChartOptions
 
 /**
  * options specific to bubble charts
@@ -234,7 +234,7 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */
-		radiusRange?: Function
+		radiusRange?: (min: number, max: number) => number[]
 		/**
 		 * Opacity of the fills used within each circle
 		 */
@@ -325,7 +325,7 @@ export interface WorldCloudChartOptions extends BaseChartOptions {
 		 * @example
 		 * (chartSize, data) => {}
 		 * */
-		fontSizeRange?: Function
+		fontSizeRange?: (chartSize: any, data: any) => object
 		/** what key in your charting data will the words map to? */
 		wordMapsTo?: string
 	}
@@ -341,7 +341,7 @@ export interface WorldCloudChartOptions extends BaseChartOptions {
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
-			formatter?: Function
+			formatter?: (data: any) => string
 			enabled?: boolean
 		}
 		alignment?: Alignments
@@ -350,7 +350,7 @@ export interface PieChartOptions extends BaseChartOptions {
 		 * defaults to value
 		 */
 		valueMapsTo?: string
-		sortFunction?: (a: any, b: any) => number
+		sortFunction?: (a: { group: string, value: number }, b: { group: string, value: number }) => number
 	}
 }
 
@@ -362,15 +362,15 @@ export interface GaugeChartOptions extends BaseChartOptions {
 		arcWidth?: number
 		deltaArrow?: {
 			direction?: ArrowDirections
-			size?: Function
+			size?: (value: number) => number | string
 			enabled: boolean
 		}
 		showPercentageSymbol?: boolean
 		status?: Statuses
-		deltaFontSize?: Function
+		deltaFontSize?: (value: number) => number | string
 		numberSpacing?: number
-		numberFormatter?: Function
-		valueFontSize?: Function
+		numberFormatter?: (value: number) => string
+		valueFontSize?: (value: number) => number | string
 		type?: GaugeTypes
 		alignment?: Alignments
 	}
@@ -384,10 +384,10 @@ export interface DonutChartOptions extends PieChartOptions {
 		center?: {
 			label?: string
 			number?: number
-			numberFontSize?: Function
-			titleFontSize?: Function
-			titleYPosition?: Function
-			numberFormatter?: Function
+			numberFontSize?: (value: number) => number | string
+			titleFontSize?: (value: number) => number | string
+			titleYPosition?: (value: number) => number
+			numberFormatter?: (value: number) => string
 		}
 		alignment?: Alignments
 	}
@@ -456,7 +456,7 @@ export interface ComboChartOptions extends AxisChartOptions {
 /*
  * options specific to treemap charts
  */
-export interface TreemapChartOptions extends BaseChartOptions {}
+export type TreemapChartOptions = BaseChartOptions
 
 /*
  * options specific to tree charts

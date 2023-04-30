@@ -22,7 +22,7 @@ export class MeterChart extends Chart {
 		super(holder, chartConfigs)
 
 		// use prop meter options or regular meter options
-		const options = chartConfigs.options.meter.proportional
+		const options = chartConfigs.options.meter?.proportional
 			? merge(clone(configOptions.proportionalMeterChart), chartConfigs.options)
 			: merge(clone(configOptions.meterChart), chartConfigs.options)
 
@@ -56,7 +56,7 @@ export class MeterChart extends Chart {
 							],
 							growth: LayoutGrowth.STRETCH
 						}
-				  ]
+					]
 				: []),
 			// Specify what to render inside the graph only
 			{

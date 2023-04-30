@@ -130,7 +130,7 @@ function getConsecutiveDifferences(elements: number[]): number[] {
 // Given a duration in ms, return the closest TIME_INTERVAL name
 function closestTimeIntervalName(duration: number): string {
 	const index = TIME_INTERVALS.reduce(
-		(nearestIndex, [intervalName, delta]: [string, number], i) => {
+		(nearestIndex, [, delta]: [string, number], i) => {
 			const deltaNearest = TIME_INTERVALS[nearestIndex][1] as number
 			const oldNearestSpan = Math.abs(deltaNearest - duration)
 			const currentSpan = Math.abs(delta - duration)

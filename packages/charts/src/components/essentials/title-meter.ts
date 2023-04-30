@@ -9,7 +9,8 @@ export class MeterTitle extends Title {
 	type = 'meter-title'
 	renderType = RenderTypes.SVG
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
@@ -31,7 +32,7 @@ export class MeterTitle extends Title {
 				.merge(title)
 				.attr('x', 0)
 				.attr('y', '1em')
-				.text((d) => d)
+				.text((d: any) => d)
 
 			title.exit().remove()
 
@@ -52,7 +53,6 @@ export class MeterTitle extends Title {
 	}
 
 	displayBreakdownTitle() {
-		const self = this
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 		const datasetsTotal = this.model.getMaximumDomain(this.model.getDisplayData())
@@ -73,7 +73,7 @@ export class MeterTitle extends Title {
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
-					  })
+						})
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
 		}
 
@@ -87,7 +87,7 @@ export class MeterTitle extends Title {
 			.merge(title)
 			.attr('x', 0)
 			.attr('y', '1em')
-			.text((d) => d)
+			.text((d: any) => d)
 
 		title.exit().remove()
 
@@ -101,7 +101,6 @@ export class MeterTitle extends Title {
 
 	// show the total for prop meter
 	displayTotal() {
-		const self = this
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 
@@ -127,7 +126,7 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute('width')
+			: <string | number>this.parent.node().getAttribute('width')
 
 		const title = svg.selectAll('text.proportional-meter-total').data([totalString])
 
@@ -139,11 +138,11 @@ export class MeterTitle extends Title {
 			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
-				this.model.getStatus() ? containerWidth - meter.total.paddingRight : containerWidth
+				this.model.getStatus() && typeof containerWidth !== 'string' ? containerWidth - meter.total.paddingRight : containerWidth
 			)
 			.attr('y', '1em')
 			.attr('text-anchor', 'end')
-			.text((d) => d)
+			.text((d: any) => d)
 
 		title.exit().remove()
 	}
@@ -224,7 +223,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage)
-			.text((d) => `${d}%`)
+			.text((d: any) => `${d}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 

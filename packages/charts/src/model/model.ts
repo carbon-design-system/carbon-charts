@@ -44,7 +44,7 @@ export class ChartModel {
 		this.services = services
 	}
 
-	getAllDataFromDomain(groups?) {
+	getAllDataFromDomain(groups?: any) {
 		if (!this.getData()) {
 			return null
 		}
@@ -57,7 +57,7 @@ export class ChartModel {
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter((item) => groups.includes(item[groupMapsTo]))
+			allData = allData.filter((item: any) => groups.includes(item[groupMapsTo]))
 		}
 
 		if (axesOptions) {
@@ -66,7 +66,7 @@ export class ChartModel {
 				const scaleType = axesOptions[axis].scaleType
 				// make sure linear/log values are numbers
 				if (scaleType === ScaleTypes.LINEAR || scaleType === ScaleTypes.LOG) {
-					allData = allData.map((datum) => {
+					allData = allData.map((datum: any) => {
 						return {
 							...datum,
 							[mapsTo]: datum[mapsTo] === null ? datum[mapsTo] : Number(datum[mapsTo])
@@ -77,20 +77,20 @@ export class ChartModel {
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						allData = allData.filter((datum) => axesOptions[axis].domain.includes(datum[mapsTo]))
+						allData = allData.filter((datum: any) => axesOptions[axis].domain.includes(datum[mapsTo]))
 					} else {
 						const [start, end] = axesOptions[axis].domain
 						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
-							(datum) => !(mapsTo in datum) || (datum[mapsTo] >= start && datum[mapsTo] <= end)
+							(datum: any) => !(mapsTo in datum) || (datum[mapsTo] >= start && datum[mapsTo] <= end)
 						)
 					}
 				}
 			})
 		}
 
-		return allData.filter((datum) => {
-			return dataGroups.find((group) => group.name === datum[groupMapsTo])
+		return allData.filter((datum: any) => {
+			return dataGroups.find((group: any) => group.name === datum[groupMapsTo])
 		})
 	}
 
@@ -98,7 +98,7 @@ export class ChartModel {
 	 * Charts that have group configs passed into them, only want to retrieve the display data relevant to that chart
 	 * @param groups the included datasets for the particular chart
 	 */
-	getDisplayData(groups?) {
+	getDisplayData(groups?: any) {
 		if (!this.get('data')) {
 			return null
 		}
@@ -108,9 +108,9 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data
 		const allDataFromDomain = this.getAllDataFromDomain(groups)
 
-		return allDataFromDomain.filter((datum) => {
+		return allDataFromDomain.filter((datum: any) => {
 			return dataGroups.find(
-				(dataGroup) => dataGroup.name === datum[groupMapsTo] && dataGroup.status === ACTIVE
+				(dataGroup: any) => dataGroup.name === datum[groupMapsTo] && dataGroup.status === ACTIVE
 			)
 		})
 	}
@@ -127,7 +127,7 @@ export class ChartModel {
 	 *
 	 * @param newData The new raw data to be set
 	 */
-	setData(newData) {
+	setData(newData: any) {
 		const sanitizedData = this.sanitize(clone(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
@@ -139,7 +139,7 @@ export class ChartModel {
 		return sanitizedData
 	}
 
-	getDataGroups(groups?) {
+	getDataGroups(groups?: any) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		// No data should be displayed while data is still loading
@@ -149,28 +149,28 @@ export class ChartModel {
 
 		// if its a combo chart, the specific chart will pass the model the groups it needs
 		if (groups) {
-			return this.get('dataGroups').filter((dataGroup) => groups.includes(dataGroup.name))
+			return this.get('dataGroups').filter((dataGroup: any) => groups.includes(dataGroup.name))
 		}
 		return this.get('dataGroups')
 	}
 
-	getActiveDataGroups(groups?) {
+	getActiveDataGroups(groups?: any) {
 		const { ACTIVE } = legend.items.status
 
-		return this.getDataGroups(groups).filter((dataGroup) => dataGroup.status === ACTIVE)
+		return this.getDataGroups(groups).filter((dataGroup: any) => dataGroup.status === ACTIVE)
 	}
 
-	getDataGroupNames(groups?) {
+	getDataGroupNames(groups?: any) {
 		const dataGroups = this.getDataGroups(groups)
-		return dataGroups.map((dataGroup) => dataGroup.name)
+		return dataGroups.map((dataGroup: any) => dataGroup.name)
 	}
 
-	getActiveDataGroupNames(groups?) {
+	getActiveDataGroupNames(groups?: any) {
 		const activeDataGroups = this.getActiveDataGroups(groups)
-		return activeDataGroups.map((dataGroup) => dataGroup.name)
+		return activeDataGroups.map((dataGroup: any) => dataGroup.name)
 	}
 
-	private aggregateBinDataByGroup(bin) {
+	private aggregateBinDataByGroup(bin: any) {
 		return groupBy(bin, 'group')
 	}
 
@@ -189,7 +189,7 @@ export class ChartModel {
 
 		// Get Histogram bins
 		const bins = bin()
-			.value((d) => d[domainIdentifier])
+			.value((d: any) => d[domainIdentifier])
 			.thresholds(axisBins)(data)
 
 		if (!areBinsDefined) {
@@ -207,7 +207,7 @@ export class ChartModel {
 			: [bins[0].x0, bins[bins.length - 1].x1]
 
 		// Get all groups
-		const groupsKeys = Array.from(new Set(data.map((d) => d[groupMapsTo])))
+		const groupsKeys = Array.from(new Set(data.map((d: any) => d[groupMapsTo])))
 
 		const histogramData = []
 
@@ -356,7 +356,7 @@ export class ChartModel {
 
 					return (
 						datum[groupMapsTo] === dataGroupName &&
-						datum.hasOwnProperty(domainIdentifier) &&
+						Object.prototype.hasOwnProperty.call(datum, domainIdentifier) &&
 						(datum[domainIdentifier] instanceof Date
 							? formatDateTillMilliSeconds(datum[domainIdentifier]) === key
 							: datum[domainIdentifier].toString() === key)
@@ -397,13 +397,15 @@ export class ChartModel {
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
+					const denominator: number = maxByKey[d.sharedStackKey] as number
 					if (maxByKey[d.sharedStackKey]) {
-						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100
+						d[name] = (d[name] / denominator) * 100;
 					} else {
-						d[name] = 0
+						d[name] = 0;
 					}
-				})
-			})
+				});
+			});
+			
 		}
 
 		const stackToUse = divergent ? stack().offset(stackOffsetDiverging) : stack()

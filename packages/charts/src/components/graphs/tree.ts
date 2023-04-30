@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import { Events, RenderTypes, TreeTypes } from '../../interfaces'
+import { type Coordinates, Events, RenderTypes, TreeTypes } from '../../interfaces'
 import { getProperty } from '../../tools'
 
 // D3 Imports
@@ -15,9 +15,9 @@ export class Tree extends Component {
 	type = 'tree'
 	renderType = RenderTypes.SVG
 
-	getLongestLabel(data) {
+	getLongestLabel(data: any) {
 		let longestLabel = ''
-		data.forEach((d) => {
+		data.forEach((d: any) => {
 			const longestLabelInChildren = d.children ? this.getLongestLabel(d.children) : ''
 			if (
 				longestLabelInChildren.length > longestLabel.length ||
@@ -31,7 +31,7 @@ export class Tree extends Component {
 		return longestLabel
 	}
 
-	getMockLabelWidth(svg, label) {
+	getMockLabelWidth(svg: any, label: string) {
 		// Add mock label to get dimensions
 		const mockLabel = svg
 			.append('text')
@@ -51,6 +51,7 @@ export class Tree extends Component {
 		return mockLabelWidth
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer()
 
@@ -89,13 +90,13 @@ export class Tree extends Component {
 		const dx = 10
 		const dy = width / 6
 
-		const update = (source) => {
+		const update = (source: Coordinates) => {
 			const nodes = root.descendants().reverse()
 			const links = root.links()
 
 			let left = root
 			let right = root
-			root.eachBefore((node) => {
+			root.eachBefore((node: Coordinates) => {
 				if (node.x < left.x) left = node
 				if (node.x > right.x) right = node
 			})
@@ -104,7 +105,7 @@ export class Tree extends Component {
 
 			const transition = svg
 				.transition()
-				.call((t) =>
+				.call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'tree-update-viewbox',
@@ -114,7 +115,7 @@ export class Tree extends Component {
 				.attr('viewBox', [-margin.left, left.x, width, height])
 
 			// Update data on nodes
-			const nodeGroups = nodeGroup.selectAll('g').data(nodes, (d) => d.id)
+			const nodeGroups = nodeGroup.selectAll('g').data(nodes, (d: any) => d.id)
 
 			const self = this
 			// Add any entering nodes
@@ -122,10 +123,10 @@ export class Tree extends Component {
 				.enter()
 				.append('g')
 				.attr('transform', () => `translate(${source.y0},${source.x0})`)
-				.attr('class', (d) =>
+				.attr('class', (d: any) =>
 					d.depth !== 0 && d.children && d.children.length > 0 ? 'clickable' : null
 				)
-				.on('mouseover', function (event, d) {
+				.on('mouseover', function (event: CustomEvent, d: any) {
 					// Dispatch mouse event
 					self.services.events.dispatchEvent(Events.Tree.NODE_MOUSEOVER, {
 						event,
@@ -133,7 +134,7 @@ export class Tree extends Component {
 						datum: d
 					})
 				})
-				.on('click', function (event, d) {
+				.on('click', function (event: CustomEvent, d: any) {
 					if (d.depth !== 0) {
 						d.children = d.children ? null : d._children
 
@@ -147,7 +148,7 @@ export class Tree extends Component {
 						datum: d
 					})
 				})
-				.on('mouseout', function (event, d) {
+				.on('mouseout', function (event: CustomEvent, d: any) {
 					// Dispatch mouse event
 					self.services.events.dispatchEvent(Events.Tree.NODE_MOUSEOUT, {
 						event,
@@ -160,16 +161,16 @@ export class Tree extends Component {
 			nodeGroupsEnter
 				.append('circle')
 				.attr('r', 2.5)
-				.attr('class', (d) => (d._children ? 'parent' : 'child'))
+				.attr('class', (d: any) => (d._children ? 'parent' : 'child'))
 				.attr('stroke-width', 10)
 
 			// Add node labels
 			nodeGroupsEnter
 				.append('text')
 				.attr('dy', '0.31em')
-				.attr('x', (d) => (d._children ? -NODE_OFFSET : NODE_OFFSET))
-				.attr('text-anchor', (d) => (d._children ? 'end' : 'start'))
-				.text((d) => d.data.name)
+				.attr('x', (d: any) => (d._children ? -NODE_OFFSET : NODE_OFFSET))
+				.attr('text-anchor', (d: any) => (d._children ? 'end' : 'start'))
+				.text((d: any) => d.data.name)
 				.clone(true)
 				.attr('class', 'text-stroke')
 				.lower()
@@ -178,7 +179,7 @@ export class Tree extends Component {
 			nodeGroups
 				.merge(nodeGroupsEnter)
 				.transition(transition)
-				.attr('transform', (d) => `translate(${d.y},${d.x})`)
+				.attr('transform', (d: Coordinates) => `translate(${d.y},${d.x})`)
 				.attr('fill-opacity', 1)
 				.attr('stroke-opacity', 1)
 
@@ -192,13 +193,13 @@ export class Tree extends Component {
 				.attr('stroke-opacity', 0)
 
 			// Update data on links
-			const linkPaths = linkGroup.selectAll('path').data(links, (d) => d.target.id)
+			const linkPaths = linkGroup.selectAll('path').data(links, (d: any) => d.target.id)
 
 			// Add any entering link paths
 			const linkPathsEnter = linkPaths
 				.enter()
 				.append('path')
-				.attr('d', (d) => {
+				.attr('d', () => {
 					const o = { x: source.x0, y: source.y0 }
 					return diagonal({ source: o, target: o })
 				})
@@ -217,7 +218,7 @@ export class Tree extends Component {
 				})
 
 			// Update position data for nodes
-			root.eachBefore((d) => {
+			root.eachBefore((d: Coordinates) => {
 				d.x0 = d.x
 				d.y0 = d.y
 			})
@@ -231,7 +232,7 @@ export class Tree extends Component {
 				? d3Cluster().size([
 						height,
 						width - mockLongestLabelWidth - maxDepth * NODE_OFFSET - mockRootTitleWidth
-				  ])
+					])
 				: d3Tree()
 						.nodeSize([dx, dy])
 						.size([
@@ -245,7 +246,7 @@ export class Tree extends Component {
 
 		root.x0 = dy / 2
 		root.y0 = 0
-		root.descendants().forEach((d, i) => {
+		root.descendants().forEach((d: any, i: number) => {
 			d.id = i
 			d._children = d.children
 		})

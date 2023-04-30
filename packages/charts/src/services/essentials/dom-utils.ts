@@ -52,7 +52,7 @@ export class DOMUtils extends Service {
 			height: 0
 		}
 
-		const validateAndSetDimensions = (dimensions) => {
+		const validateAndSetDimensions = (dimensions: any) => {
 			if (dimensions) {
 				Object.keys(finalDimensions).forEach((dimensionKey) => {
 					if (dimensions[dimensionKey]) {
@@ -151,11 +151,10 @@ export class DOMUtils extends Service {
 			validateAndSetDimensions(bboxDimensions)
 			validateAndSetDimensions(attrDimensions)
 		}
-
 		return finalDimensions
 	}
 
-	static appendOrSelect(parent, query) {
+	static appendOrSelect(parent: any, query: any) {
 		const selection = parent.select(`${query}`)
 
 		if (selection.empty()) {
@@ -212,7 +211,7 @@ export class DOMUtils extends Service {
 		return this.chartID
 	}
 
-	generateElementIDString(originalID) {
+	generateElementIDString(originalID: string | number) {
 		return `chart-${this.chartID}-${originalID}`
 	}
 
@@ -286,7 +285,7 @@ export class DOMUtils extends Service {
 						: undefined,
 				quality: 1,
 				// Remove the toolbar
-				filter: (node) => {
+				filter: (node: any) => {
 					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
 						return false
 					}
@@ -294,7 +293,7 @@ export class DOMUtils extends Service {
 					return true
 				}
 			})
-			.then(function (dataUrl) {
+			.then(function (dataUrl: string) {
 				self.services.files.downloadImage(dataUrl, 'myChart.jpg')
 				holderSelection.classed('filled', false)
 			})
@@ -315,7 +314,7 @@ export class DOMUtils extends Service {
 						: undefined,
 				quality: 1,
 				// Remove the toolbar
-				filter: (node) => {
+				filter: (node: HTMLElement) => {
 					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
 						return false
 					}
@@ -323,11 +322,11 @@ export class DOMUtils extends Service {
 					return true
 				}
 			})
-			.then(function (dataUrl) {
+			.then(function (dataUrl: string) {
 				self.services.files.downloadImage(dataUrl, 'myChart.png')
 				holderSelection.classed('filled', false)
 			})
-			.catch(function (error) {
+			.catch(function (error: Error) {
 				console.error('oops, something went wrong!', error)
 			})
 	}
@@ -380,11 +379,12 @@ export class DOMUtils extends Service {
 	}
 
 	verifyCSSStylesBeingApplied() {
+		// This code was triggering erroneous messages even when styles were loaded
 		// setTimeout is needed here since in `addSVGElement()` we're appending the
 		// CSS verifier element, and need to allow some time for it to become available
 		// in the DOM
 		setTimeout(() => {
-			const cssVerifierElement = select(this.mainContainer)
+			/*const cssVerifierElement = */ select(this.mainContainer)
 				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
 				.node()
 			/*

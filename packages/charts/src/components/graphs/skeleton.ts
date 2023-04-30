@@ -16,7 +16,8 @@ export class Skeleton extends Component {
 	yScale: any
 	backdrop: any
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
@@ -103,8 +104,8 @@ export class Skeleton extends Component {
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, 'rect.chart-skeleton-backdrop')
 		backdropRect.attr('width', '100%').attr('height', '100%')
 
-		const [xScaleStart, xScaleEnd] = this.xScale.range()
-		const [yScaleEnd, yScaleStart] = this.yScale.range()
+		const [xScaleStart, ] = this.xScale.range()
+		const [, yScaleStart] = this.yScale.range()
 
 		this.backdrop.merge(backdropRect).attr('x', xScaleStart).attr('y', yScaleStart)
 
@@ -122,7 +123,7 @@ export class Skeleton extends Component {
 	drawXGrid(showShimmerEffect: boolean) {
 		const width = this.backdrop.attr('width')
 		const ticksNumber = getProperty(this.getOptions(), 'grid', 'x', 'numberOfTicks')
-		const ticksValues = this.xScale.ticks(ticksNumber).map((d) => d * width)
+		const ticksValues = this.xScale.ticks(ticksNumber).map((d: any) => d * width)
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, 'g.x.skeleton')
 		const update = xGridG.selectAll('line').data(ticksValues)
@@ -130,8 +131,8 @@ export class Skeleton extends Component {
 			.enter()
 			.append('line')
 			.merge(update)
-			.attr('x1', (d) => d)
-			.attr('x2', (d) => d)
+			.attr('x1', (d: any) => d)
+			.attr('x2', (d: any) => d)
 			.attr('y1', 0)
 			.attr('y2', '100%')
 
@@ -151,7 +152,7 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr('height')
 		const width = this.backdrop.attr('width')
 		const ticksNumber = getProperty(this.getOptions(), 'grid', 'y', 'numberOfTicks')
-		const ticksValues = this.xScale.ticks(ticksNumber).map((d) => d * height)
+		const ticksValues = this.xScale.ticks(ticksNumber).map((d: any) => d * height)
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, 'g.y.skeleton')
 		const update = yGridG.selectAll('line').data(ticksValues)
@@ -161,8 +162,8 @@ export class Skeleton extends Component {
 			.merge(update)
 			.attr('x1', 0)
 			.attr('x2', width)
-			.attr('y1', (d) => d)
-			.attr('y2', (d) => d)
+			.attr('y1', (d: any) => d)
+			.attr('y2', (d: any) => d)
 
 		yGridG
 			.selectAll('line')

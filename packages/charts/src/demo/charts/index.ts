@@ -25,7 +25,8 @@ import * as zoomBarDemos from './zoom-bar'
 import * as alluvialDemos from './alluvial'
 import * as highlightDemos from './hightlight'
 import * as heatmapDemos from './heatmap'
-//@ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import packageJSON from '../../../package.json'
 
 import {

@@ -1,18 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    // Common across frameworks for vite
-    "skipLibCheck": true,
     "target": "ESNext",
     "module": "ESNext",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "moduleResolution": "bundler", // Svelte wants node but...
-
-    // Sensible globals
+    "lib": ["ESNext", "DOM"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true
   },
   "exclude": [

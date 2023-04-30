@@ -28,7 +28,7 @@ export class TwoDimensionalAxes extends Component {
 		const axisPositions = Object.keys(AxisPositions)
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 
-		axisPositions.forEach((axisPosition) => {
+		axisPositions.forEach((axisPosition: any) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]]
 			if (axisOptions) {
 				axes[AxisPositions[axisPosition]] = true
@@ -38,7 +38,7 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach((axisPositionKey) => {
+		axisPositions.forEach((axisPositionKey: any) => {
 			const axisPosition = AxisPositions[axisPositionKey]
 			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const configs = {
@@ -61,14 +61,14 @@ export class TwoDimensionalAxes extends Component {
 			}
 		})
 
-		Object.keys(this.children).forEach((childKey) => {
+		Object.keys(this.children).forEach((childKey: any) => {
 			const child = this.children[childKey]
 			child.render(animate)
 		})
 
 		const margins = {} as any
 
-		Object.keys(this.children).forEach((childKey) => {
+		Object.keys(this.children).forEach((childKey: any) => {
 			const child = this.children[childKey]
 			const axisPosition = child.configs.position
 
@@ -92,7 +92,6 @@ export class TwoDimensionalAxes extends Component {
 					offset += 5
 				}
 			}
-
 			switch (axisPosition) {
 				case AxisPositions.TOP:
 					margins.top = height + offset
@@ -112,7 +111,7 @@ export class TwoDimensionalAxes extends Component {
 		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE)
 
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some((marginKey) => {
+		const isNotEqual = Object.keys(margins).some((marginKey: any) => {
 			return this.margins[marginKey] !== margins[marginKey]
 		})
 
@@ -123,7 +122,7 @@ export class TwoDimensionalAxes extends Component {
 			this.model.set({ axesMargins: this.margins }, { skipUpdate: true })
 			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE)
 
-			Object.keys(this.children).forEach((childKey) => {
+			Object.keys(this.children).forEach((childKey: any) => {
 				const child = this.children[childKey]
 				child.margins = this.margins
 			})

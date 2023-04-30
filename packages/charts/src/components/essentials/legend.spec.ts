@@ -23,7 +23,7 @@ describe('legend component', () => {
 		it('should have same amount of datasets', async function (done: () => void) {
 			const data = testEnvironment.chartData
 			const uniqueDatagroups = data
-				.map((d) => d.group)
+				.map((d: any) => d.group)
 				.filter(function (value, index, self) {
 					return self.indexOf(value) === index
 				})

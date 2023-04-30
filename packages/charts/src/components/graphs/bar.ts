@@ -5,7 +5,7 @@ import { getProperty } from '../../tools'
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
-	protected getBarWidth(allDataLabels?: string[]) {
+	protected getBarWidth() {
 		const options = this.getOptions()
 		if (options.bars.width) {
 			return options.bars.width

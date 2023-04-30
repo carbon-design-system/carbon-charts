@@ -44,8 +44,8 @@ export class Boxplot extends Component {
 		const orientation = cartesianScales.getOrientation()
 		const isInVerticalOrientation = orientation === CartesianOrientations.VERTICAL
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
-			(d, i?) => this.services.cartesianScales.getDomainValue(d, i),
-			(d, i?) => this.services.cartesianScales.getRangeValue(d, i),
+			(d: any) => this.services.cartesianScales.getDomainValue(d),
+			(d: any) => this.services.cartesianScales.getRangeValue(d),
 			orientation
 		)
 
@@ -80,14 +80,14 @@ export class Boxplot extends Component {
 			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-verticalstartline',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo])
 				const x1 = x0
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
@@ -109,14 +109,14 @@ export class Boxplot extends Component {
 			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-verticalendline',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo])
 				const x1 = x0
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
@@ -141,16 +141,16 @@ export class Boxplot extends Component {
 			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
-			.attr('aria-label', (d) => d[groupMapsTo])
+			.attr('aria-label', (d: any) => d[groupMapsTo])
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-quartiles',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
 				const x1 = x0 + boxWidth
 				const y0 = cartesianScales.getRangeValue(
@@ -174,7 +174,7 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.highlight-area'))
 			.attr('class', 'highlight-area')
 			.attr('opacity', 0)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
 				const x1 = x0 + boxWidth
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
@@ -198,14 +198,14 @@ export class Boxplot extends Component {
 			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-startingwhisker',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 4
 				const x1 = x0 + boxWidth / 2
 				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
@@ -229,14 +229,14 @@ export class Boxplot extends Component {
 			)
 			.attr('stroke-width', 2)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-median',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
 				const x1 = x0 + boxWidth
 				const y0 = cartesianScales.getRangeValue(d.quartiles.q_50)
@@ -260,14 +260,14 @@ export class Boxplot extends Component {
 			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-endingwhisker',
 					animate
 				})
 			)
-			.attr('d', (d) => {
+			.attr('d', (d: any) => {
 				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 4
 				const x1 = x0 + boxWidth / 2
 				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
@@ -279,7 +279,7 @@ export class Boxplot extends Component {
 		/*
 		 * Draw out and update the outlier circles
 		 */
-		const circles = allBoxGroups.selectAll('circle.outlier').data((d) =>
+		const circles = allBoxGroups.selectAll('circle.outlier').data((d: any) =>
 			d.outliers.map((outlier) => {
 				return {
 					min: d.whiskers.min,
@@ -306,7 +306,7 @@ export class Boxplot extends Component {
 			.attr('fill-opacity', boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-circles',
@@ -327,7 +327,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('path.highlight-area')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				const parentElement = select(this.parentNode)
 				parentElement
@@ -381,7 +381,7 @@ export class Boxplot extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -395,7 +395,7 @@ export class Boxplot extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
 					event,
@@ -403,7 +403,7 @@ export class Boxplot extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				const parentElement = select(this.parentNode)
 				parentElement
@@ -435,7 +435,7 @@ export class Boxplot extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement
@@ -469,7 +469,7 @@ export class Boxplot extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -483,7 +483,7 @@ export class Boxplot extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_CLICK, {
 					event,
@@ -491,7 +491,7 @@ export class Boxplot extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement
 					.classed('hovered', false)

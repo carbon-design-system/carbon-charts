@@ -107,7 +107,7 @@ export class CartesianScales extends Service {
 
 	getScaleLabel(position: AxisPositions) {
 		const axisOptions = this.getAxisOptions(position)
-		const title = axisOptions.title
+		const title: string = axisOptions.title
 		if (!title) {
 			if (position === AxisPositions.BOTTOM || position === AxisPositions.TOP) {
 				return 'x-value'
@@ -277,15 +277,14 @@ export class CartesianScales extends Service {
 		scale: any,
 		scaleType: ScaleTypes,
 		axisPosition: AxisPositions,
-		datum: any,
-		index?: number
+		datum: any
 	) {
 		const options = this.model.getOptions()
 		const axesOptions = getProperty(options, 'axes')
 		const axisOptions = axesOptions[axisPosition]
 		const { mapsTo } = axisOptions
 		const value = getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum
-		let scaledValue
+		let scaledValue: number
 		switch (scaleType) {
 			case ScaleTypes.LABELS:
 				scaledValue = scale(value) + scale.step() / 2
@@ -299,7 +298,7 @@ export class CartesianScales extends Service {
 		return scaledValue
 	}
 
-	getBoundedScaledValues(datum: any, index?: number) {
+	getBoundedScaledValues(datum: any): number[] {
 		const { bounds } = this.model.getOptions()
 		const axisPosition = this.getRangeAxisPosition({ datum })
 		const scale = this.scales[axisPosition]
@@ -326,21 +325,21 @@ export class CartesianScales extends Service {
 		return boundedValues
 	}
 
-	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any, index?: number) {
+	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any) {
 		const scaleType = this.scaleTypes[axisPosition]
 		const scale = this.scales[axisPosition]
 
-		return this.getValueFromScale(scale, scaleType, axisPosition, datum, index)
+		return this.getValueFromScale(scale, scaleType, axisPosition, datum)
 	}
 
-	getDomainValue(d, i) {
+	getDomainValue(d: string | object) {
 		const axisPosition = this.getDomainAxisPosition({ datum: d })
-		return this.getValueThroughAxisPosition(axisPosition, d, i)
+		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
 
-	getRangeValue(d, i) {
+	getRangeValue(d: string | object) {
 		const axisPosition = this.getRangeAxisPosition({ datum: d })
-		return this.getValueThroughAxisPosition(axisPosition, d, i)
+		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
 
 	getMainXScaleType() {
@@ -470,7 +469,7 @@ export class CartesianScales extends Service {
 		if (axisOptions.binned) {
 			const { bins } = this.model.getBinConfigurations()
 
-			return [0, max(bins, (d) => d.length)]
+			return [0, max(bins, (d: any) => d.length)]
 		} else if (axisOptions.limitDomainToBins) {
 			const { bins } = this.model.getBinConfigurations()
 			const stackKeys = this.model.getStackKeys({ bins })
@@ -487,7 +486,7 @@ export class CartesianScales extends Service {
 			if (scaleType === ScaleTypes.LABELS) {
 				return axisOptions.domain
 			} else if (scaleType === ScaleTypes.TIME) {
-				axisOptions.domain = axisOptions.domain.map((d) =>
+				axisOptions.domain = axisOptions.domain.map((d: any) =>
 					d.getTime === undefined ? new Date(d) : d
 				)
 			}
@@ -502,7 +501,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return removeArrayDuplicates(displayData.map((d) => d[mapsTo]))
+			return removeArrayDuplicates(displayData.map((d: any) => d[mapsTo]))
 		}
 
 		// Get the extent of the domain
@@ -537,12 +536,12 @@ export class CartesianScales extends Service {
 				groups: dataGroupNames
 			})
 			const nonStackedGroupsData = displayData.filter(
-				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
+				(datum: any) => !dataGroupNames.includes(datum[groupMapsTo])
 			)
 
 			const stackedValues = []
 			dataValuesGroupedByKeys.forEach((dataValues) => {
-				const { sharedStackKey, ...numericalValues } = dataValues
+				const { ...numericalValues } = dataValues
 
 				let positiveSum = 0,
 					negativeSum = 0

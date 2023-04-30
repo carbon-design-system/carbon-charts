@@ -14,3 +14,10 @@ export interface LayoutConfigs {
 	 */
 	alignItems?: LayoutAlignItems
 }
+
+export interface Coordinates {
+	x: number
+	y: number
+	x0?: number
+	y0?: number
+}

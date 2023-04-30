@@ -3,32 +3,28 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compileOnSave": false,
   "compilerOptions": {
-    // "baseUrl": "..",
-    // "paths": {
-    //   "@carbon/charts": ["charts/src"]
-    // },
-    // "outDir": "charts-angular/dist",
-    "baseUrl": ".",
-    "outDir": "./dist",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node", // cannot handle node16 or bundler
-    "importHelpers": true,
     "target": "ESNext", // Angular 15 defaults to ES2022
     "module": "ESNext", // Angular 15 defaults to ES2022
-    "useDefineForClassFields": false,
     "lib": [
       "ESNext", // Angular 15 defaults to "ES2022",
       "DOM"
-    ]
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+
+    // Package-specific
+    "baseUrl": ".",
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "moduleResolution": "node", // cannot handle node16 or bundler
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "strict": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

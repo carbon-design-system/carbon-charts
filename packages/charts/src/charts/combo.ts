@@ -1,6 +1,6 @@
 // Internal Imports
 import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
+import { options as configOptions } from '../configuration'
 import { ChartConfig, ComboChartOptions, ChartTypes, Skeletons } from '../interfaces/index'
 import { camelCase, flatten, merge, mergeDefaultChartOptions } from '../tools'
 
@@ -38,7 +38,7 @@ export class ComboChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		const chartOptions = mergeDefaultChartOptions(options.comboChart, chartConfigs.options)
+		const chartOptions = mergeDefaultChartOptions(configOptions.comboChart, chartConfigs.options)
 
 		// Warn user if no comboChartTypes defined
 		// Use skeleton chart instead
@@ -59,9 +59,9 @@ export class ComboChart extends AxisChart {
 		const { comboChartTypes } = this.model.getOptions()
 		let counter = 0
 		const graphComponents = comboChartTypes
-			.map((graph) => {
+			.map((graph: any) => {
 				const type = graph.type
-				let options
+				let options: any
 
 				// initializes the components using input strings with the base configs for each chart
 				if (typeof graph.type === 'string') {
@@ -73,10 +73,10 @@ export class ComboChart extends AxisChart {
 						)
 						return null
 					}
-					let stacked
+					let stacked = false
 					options = merge(
 						{},
-						options[`${camelCase(graph.type)}Chart`],
+						configOptions[`${camelCase(graph.type)}Chart`],
 						this.model.getOptions(),
 						graph.options
 					)
@@ -85,7 +85,7 @@ export class ComboChart extends AxisChart {
 						stacked = true
 					}
 					return graphComponentsMap[graph.type].map(
-						(Component, i) =>
+						(Component: any) =>
 							new Component(this.model, this.services, {
 								groups: graph.correspondingDatasets,
 								id: counter++,
@@ -103,7 +103,7 @@ export class ComboChart extends AxisChart {
 					})
 				}
 			})
-			.filter((item) => item !== null)
+			.filter((item: any) => item !== null)
 
 		return flatten(graphComponents)
 	}

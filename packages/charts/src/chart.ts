@@ -40,8 +40,9 @@ export class Chart {
 	}
 	model: ChartModel = new ChartModel(this.services)
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		// do nothing.
+		// Allow for subclasses to override the constructor with additional parameters or initialization logic without breaking the API contract of the Chart class
 	}
 
 	// Contains the code that uses properties that are overridable by the super-class
@@ -56,9 +57,8 @@ export class Chart {
 		})
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e) => {
-			const animate = !!getProperty(e, 'detail', 'animate')
-			this.update(animate)
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e: any) => {
+			this.update()
 		})
 
 		// Set model data & options
@@ -66,7 +66,7 @@ export class Chart {
 
 		// Set chart resize event listener
 		this.services.events.addEventListener(ChartEvents.Chart.RESIZE, () => {
-			this.update(false)
+			this.update()
 		})
 
 		this.components = this.getComponents()
@@ -80,7 +80,7 @@ export class Chart {
 		return null
 	}
 
-	update(animate = true) {
+	update() {
 		if (!this.components) {
 			return
 		}
@@ -92,7 +92,7 @@ export class Chart {
 		})
 
 		// Render all components
-		this.components.forEach((component) => component.render(animate))
+		this.components.forEach((component) => component.render(true))
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
@@ -101,7 +101,7 @@ export class Chart {
 		const pendingTransitions = this.services.transitions.getPendingTransitions()
 		const promises = Object.keys(pendingTransitions).map((transitionID) => {
 			const transition = pendingTransitions[transitionID]
-			return transition.end().catch((e) => e) // Skip rejects since we don't care about those;
+			return transition.end().catch((e: any) => e) // Skip rejects since we don't care about those;
 		})
 
 		Promise.all(promises).then(() =>

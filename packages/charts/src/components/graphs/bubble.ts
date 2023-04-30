@@ -19,7 +19,7 @@ export class Bubble extends Scatter {
 
 		const data = selection.data()
 		// Filter out any null/undefined values
-		const allRadii = data.map((d) => d[radiusMapsTo]).filter((radius) => radius)
+		const allRadii = data.map((d: any) => d[radiusMapsTo]).filter((radius) => radius)
 		const chartSize = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 
 		// We need the ternary operator here in case the user
@@ -41,8 +41,8 @@ export class Bubble extends Scatter {
 		const { groupMapsTo } = options.data
 
 		const { cartesianScales } = this.services
-		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
-		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
+		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
+		const getRangeValue = (d: any) => cartesianScales.getRangeValue(d)
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -53,12 +53,12 @@ export class Bubble extends Scatter {
 			.raise()
 			.classed('dot', true)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
-			.attr('aria-label', (d) => {
+			.attr('aria-label', (d: any) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier(d)
 				return d[rangeIdentifier]
 			})
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'bubble-update-enter',
@@ -68,19 +68,19 @@ export class Bubble extends Scatter {
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
-			.attr('r', (d) => radiusScale(d[radiusMapsTo] || 1))
-			.attr('class', (d) =>
+			.attr('r', (d: any) => radiusScale(d[radiusMapsTo] || 1))
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'dot'
 				})
 			)
-			.style('fill', (d) => {
+			.style('fill', (d: any) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 			})
-			.style('stroke', (d) => {
+			.style('stroke', (d: any) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 				return this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d)
 			})
@@ -88,7 +88,7 @@ export class Bubble extends Scatter {
 			.attr('opacity', 1)
 	}
 
-	getTooltipAdditionalItems(datum) {
+	getTooltipAdditionalItems(datum: any) {
 		const bubbleOptions = getProperty(this.getOptions(), 'bubble')
 
 		return [

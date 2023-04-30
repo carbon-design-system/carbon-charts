@@ -20,7 +20,8 @@ export class Legend extends Component {
 	type = 'legend'
 	renderType = RenderTypes.HTML
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
 		const alignment = getProperty(legendOptions, 'alignment')
@@ -31,7 +32,7 @@ export class Legend extends Component {
 
 		// Check if there are disabled legend items
 		const { DISABLED } = legend.items.status
-		const hasDeactivatedItems = dataGroups.some((dataGroup) => dataGroup.status === DISABLED)
+		const hasDeactivatedItems = dataGroups.some((dataGroup: any) => dataGroup.status === DISABLED)
 		const userProvidedOrder = getProperty(legendOptions, 'order')
 
 		const svg = this.getComponentContainer()
@@ -49,11 +50,11 @@ export class Legend extends Component {
 
 		const legendItems = svg
 			.selectAll('div.legend-item')
-			.data(dataGroups, (dataGroup) => dataGroup.name)
+			.data(dataGroups, (dataGroup: any) => dataGroup.name)
 
 		const addedLegendItems = legendItems.enter().append('div').attr('class', 'legend-item')
 
-		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d) {
+		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d: any) {
 			return d.status === legend.items.status.ACTIVE
 		})
 
@@ -68,25 +69,25 @@ export class Legend extends Component {
 			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
-			.attr('aria-labelledby', (d, i) =>
+			.attr('aria-labelledby', (d: any, i: number) =>
 				this.services.domUtils.generateElementIDString(`legend-datagroup-${i}-title`)
 			)
 			.attr('aria-checked', ({ status }) => status === legend.items.status.ACTIVE)
 			.attr('width', checkboxRadius * 2)
 			.attr('height', checkboxRadius * 2)
-			.attr('class', (d, i) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.BACKGROUND],
 					dataGroupName: d.name,
 					originalClassName: 'checkbox'
 				})
 			)
-			.style('background', (d) =>
+			.style('background', (d: any) =>
 				d.status === legend.items.status.ACTIVE
 					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
 					: null
 			)
-			.classed('active', function (d, i) {
+			.classed('active', function (d: any) {
 				return d.status === legend.items.status.ACTIVE
 			})
 
@@ -121,7 +122,7 @@ export class Legend extends Component {
 				.merge(additionalItems)
 				.classed('legend-item', true)
 				.classed('additional', true)
-				.attr('aria-labelledby', (d, i) =>
+				.attr('aria-labelledby', (d: any, i: number) =>
 					this.services.domUtils.generateElementIDString(
 						`legend-datagroup-${allCheckboxes.size() + i}-title`
 					)
@@ -138,7 +139,7 @@ export class Legend extends Component {
 			addedAdditionalItems
 				.append('svg')
 				.classed('icon', true)
-				.each(function (d) {
+				.each(function (d: any) {
 					const additionalItem = select(this)
 
 					if (!previousType || previousType != d.type) {
@@ -167,7 +168,7 @@ export class Legend extends Component {
 	sortDataGroups(dataGroups, legendOrder) {
 		// Sort data in user defined order
 		dataGroups.sort(
-			(dataA, dataB) => legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+			(dataA: { name: string}, dataB: { name: string}) => legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
 		)
 
 		// If user only defined partial ordering, ordered items are placed before unordered ones
@@ -204,9 +205,9 @@ export class Legend extends Component {
 				.classed('radius', true)
 				.attr('role', Roles.IMG)
 				.attr('aria-label', 'radius')
-				.attr('cx', (d) => d.cx)
-				.attr('cy', (d) => d.cy)
-				.attr('r', (d) => d.r)
+				.attr('cx', (d: any) => d.cx)
+				.attr('cy', (d: any) => d.cy)
+				.attr('r', (d: any) => d.r)
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 		} else if (itemConfig.type === LegendItemType.LINE) {
@@ -251,9 +252,9 @@ export class Legend extends Component {
 			sizeEnter
 				.append('rect')
 				.classed('size', true)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
-				.attr('y', (d) => 0)
+				.attr('width', (d: any) => d.width)
+				.attr('height', (d: any) => d.height)
+				.attr('y', () => 0)
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1)
@@ -269,11 +270,11 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.attr('class', (d, i) => `quartile-${i === 0 ? 'wrapper' : 'line'}`)
-				.attr('x', (d) => d.x)
-				.attr('y', (d) => d.y)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
+				.attr('class', (d: any, i: number) => `quartile-${i === 0 ? 'wrapper' : 'line'}`)
+				.attr('x', (d: any) => d.x)
+				.attr('y', (d: any) => d.y)
+				.attr('width', (d: any) => d.width)
+				.attr('height', (d: any) => d.height)
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
 			const { iconData, color } = getProperty(Configuration, 'legend', 'zoom')
 
@@ -287,16 +288,16 @@ export class Legend extends Component {
 			// add '+' for the magnifying icon
 			zoomEnter
 				.append('g')
-				.attr('x', (d) => d.x)
-				.attr('y', (d) => d.y)
-				.attr('width', (d) => d.width)
-				.attr('height', (d) => d.height)
+				.attr('x', (d: any) => d.x)
+				.attr('y', (d: any) => d.y)
+				.attr('width', (d: any) => d.width)
+				.attr('height', (d: any) => d.height)
 				.append('polygon')
 				.attr(
 					'points',
 					'7.7 4.82 5.78 4.82 5.78 2.89 4.82 2.89 4.82 4.82 2.89 4.82 2.89 5.78 4.82 5.78 4.82 7.7 5.78 7.7 5.78 5.78 7.7 5.78 7.7 4.82'
 				)
-				.attr('fill', (d) => (itemConfig.color ? itemConfig.color : color))
+				.attr('fill', () => (itemConfig.color ? itemConfig.color : color))
 
 			// add the magnifying zoom icon handle/circle
 			zoomEnter
@@ -305,7 +306,7 @@ export class Legend extends Component {
 					'd',
 					'M9.36,8.67A5.22,5.22,0,0,0,10.59,5.3,5.3,5.3,0,1,0,5.3,10.59,5.22,5.22,0,0,0,8.67,9.36L12.32,13l.68-.68Zm-4.06,1A4.34,4.34,0,1,1,9.63,5.3,4.33,4.33,0,0,1,5.3,9.63Z'
 				)
-				.attr('fill', (d) => (itemConfig.color ? itemConfig.color : color))
+				.attr('fill', () => (itemConfig.color ? itemConfig.color : color))
 		}
 	}
 
@@ -322,7 +323,7 @@ export class Legend extends Component {
 		const addedLegendItemsText = svg.selectAll('div.legend-item p')
 
 		// Add an ID for the checkbox to use through `aria-labelledby`
-		addedLegendItemsText.attr('id', function (d, i) {
+		addedLegendItemsText.attr('id', function () {
 			const elementToReference = this.parentNode.querySelector('div.checkbox') || this.parentNode
 
 			return elementToReference.getAttribute('aria-labelledby')
@@ -330,7 +331,7 @@ export class Legend extends Component {
 
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
-			addedLegendItemsText.html(function (d) {
+			addedLegendItemsText.html(function (d: any) {
 				if (d.name.length > truncationThreshold) {
 					return truncateLabel(d.name, truncationType, truncationNumCharacter)
 				} else {
@@ -338,7 +339,7 @@ export class Legend extends Component {
 				}
 			})
 		} else {
-			addedLegendItemsText.html((d) => d.name)
+			addedLegendItemsText.html((d: any) => d.name)
 		}
 	}
 

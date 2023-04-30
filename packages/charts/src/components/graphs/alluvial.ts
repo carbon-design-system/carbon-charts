@@ -1,7 +1,7 @@
 // Internal imports
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
-import { debounce, getProperty, getTranformOffsets } from '../../tools'
+import { debounce, getProperty, getTransformOffsets } from '../../tools'
 import { alluvial } from '../../configuration'
 import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
 
@@ -22,7 +22,8 @@ export class Alluvial extends Component {
 	private graph: any
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		svg.html('')
@@ -60,7 +61,7 @@ export class Alluvial extends Component {
 		}
 
 		const sankey = d3Sankey()
-			.nodeId((d) => d.name)
+			.nodeId((d: any) => d.name)
 			.nodeWidth(alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
@@ -77,8 +78,8 @@ export class Alluvial extends Component {
 		// Construct a graph with the provided user data
 		// Data must be deep cloned to ensure user passed data isn't deleted when themes change
 		this.graph = sankey({
-			nodes: options.alluvial.nodes.map((d) => Object.assign({}, d)),
-			links: data.map((d) => Object.assign({}, d))
+			nodes: options.alluvial.nodes.map((d: any) => Object.assign({}, d)),
+			links: data.map((d: any) => Object.assign({}, d))
 		})
 
 		// Filter out unused nodes so they are not rendered
@@ -102,7 +103,7 @@ export class Alluvial extends Component {
 			.selectAll('g')
 			.data(Object.keys(nodeCoordinates))
 			.join('g')
-			.attr('transform', (d) => {
+			.attr('transform', (d: any) => {
 				return `translate(${d}, 0)`
 			})
 
@@ -113,7 +114,7 @@ export class Alluvial extends Component {
 				this.services.domUtils.generateElementIDString(`alluvial-category-${i}`)
 			)
 			.style('font-size', '14px')
-			.text((d) => {
+			.text((d: any) => {
 				if (nodeCoordinates[d]) {
 					return nodeCoordinates[d]
 				}
@@ -147,13 +148,13 @@ export class Alluvial extends Component {
 				links
 					.enter()
 					.append('linearGradient')
-					.attr('id', (d) => `${this.gradient_id}-link-${d.index}`)
+					.attr('id', (d: any) => `${this.gradient_id}-link-${d.index}`)
 					.attr('gradientUnits', 'userSpaceOnUse')
 					.call((gradient) =>
 						gradient
 							.append('stop')
 							.attr('offset', '0%')
-							.attr('stop-color', (d) => {
+							.attr('stop-color', (d: any) => {
 								return scale[d.source.name]
 							})
 					)
@@ -161,7 +162,7 @@ export class Alluvial extends Component {
 						gradient
 							.append('stop')
 							.attr('offset', '100%')
-							.attr('stop-color', (d) => {
+							.attr('stop-color', (d: any) => {
 								return scale[d.target.name]
 							})
 					)
@@ -175,8 +176,8 @@ export class Alluvial extends Component {
 			.append('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
-			.attr('id', (d) => this.services.domUtils.generateElementIDString(`alluvial-line-${d.index}`))
-			.attr('class', (d) => {
+			.attr('id', (d: any) => this.services.domUtils.generateElementIDString(`alluvial-line-${d.index}`))
+			.attr('class', (d: any) => {
 				// Use a single color for the lines
 				if (options.alluvial.monochrome) {
 					return this.model.getColorClassName({
@@ -192,18 +193,18 @@ export class Alluvial extends Component {
 					originalClassName: 'link'
 				})
 			})
-			.style('stroke', (d) => {
+			.style('stroke', (d: any) => {
 				if (isGradientAllowed) {
 					return `url(#${this.gradient_id}-link-${d.index})`
 				}
 
 				return this.model.getFillColor(d.source.name)
 			})
-			.attr('stroke-width', (d) => Math.max(1, d.width))
+			.attr('stroke-width', (d: any) => Math.max(1, d.width))
 			.style('stroke-opacity', alluvial.opacity.default)
 			.attr(
 				'aria-label',
-				(d) =>
+				(d: any) =>
 					`${d.source.name} → ${d.target.name} (${d.value}${
 						options.alluvial.units ? ' ' + options.alluvial.units : ''
 					})`
@@ -216,29 +217,29 @@ export class Alluvial extends Component {
 			.data(this.graph.nodes)
 			.enter()
 			.append('g')
-			.attr('id', (d) => this.services.domUtils.generateElementIDString(`alluvial-node-${d.index}`))
+			.attr('id', (d: any) => this.services.domUtils.generateElementIDString(`alluvial-node-${d.index}`))
 			.classed('node-group', true)
-			.attr('transform', (d) => `translate(${d.x0}, ${d.y0})`)
+			.attr('transform', (d: any) => `translate(${d.x0}, ${d.y0})`)
 
 		// Creating the nodes
 		node
 			.append('rect')
 			.classed('node', true)
-			.attr('height', (d) => d.y1 - d.y0)
-			.attr('width', (d) => d.x1 - d.x0)
+			.attr('height', (d: any) => d.y1 - d.y0)
+			.attr('width', (d: any) => d.x1 - d.x0)
 			.attr('fill', 'black')
 
 		// Group to hold the text & rectangle background
 		const textNode = node
 			.append('g')
-			.attr('id', (d) =>
+			.attr('id', (d: any) =>
 				this.services.domUtils.generateElementIDString(`alluvial-node-title-${d.index}`)
 			)
 
 		// Node title - text
 		textNode
 			.append('text')
-			.attr('id', (d) =>
+			.attr('id', (d: any) =>
 				this.services.domUtils.generateElementIDString(`alluvial-node-text-${d.index}`)
 			)
 			.attr('class', 'node-text')
@@ -249,10 +250,10 @@ export class Alluvial extends Component {
 			.attr('x', 4)
 			// shift 13 pixels down to fit background container
 			.attr('dy', 13)
-			.text((d) => {
+			.text((d: any) => {
 				return `${d.name} (${d.value})`
 			})
-			.attr('aria-label', (d) => {
+			.attr('aria-label', (d: any) => {
 				return `${d.name} (${d.value})`
 			})
 
@@ -308,7 +309,7 @@ export class Alluvial extends Component {
 			const allLinks = self.parent
 				.selectAll('path.link')
 				.transition()
-				.call((t) =>
+				.call((t: any) =>
 					self.services.transitions.setupTransition({
 						transition: t,
 						name: 'alluvial-links-mouse-highlight'
@@ -411,7 +412,7 @@ export class Alluvial extends Component {
 				self.parent
 					.selectAll('path.link')
 					.classed('link-hovered', false)
-					.data(this.graph.links, (d) => d.index)
+					.data(this.graph.links, (d: any) => d.index)
 					.order()
 					.style('stroke-opacity', alluvial.opacity.default)
 
@@ -422,7 +423,7 @@ export class Alluvial extends Component {
 			const allLinks = self.parent
 				.selectAll('path.link')
 				.transition()
-				.call((t) =>
+				.call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'alluvial-link-mouse-highlight'
@@ -457,7 +458,7 @@ export class Alluvial extends Component {
 				// Highlight all linked lines in the graph data structure
 				if (paths.length) {
 					// Get transformation value of node
-					const nodeMatrix = getTranformOffsets(hoveredElement.attr('transform'))
+					const nodeMatrix = getTransformOffsets(hoveredElement.attr('transform'))
 
 					// Move node to the left by 2 to grow node from the center
 					hoveredElement.attr('transform', `translate(${nodeMatrix.x - 2}, ${nodeMatrix.y})`)
@@ -472,7 +473,7 @@ export class Alluvial extends Component {
 						)
 
 						const titleContainer = self.parent.select(`g#${elementID}`)
-						const titleMatrix = getTranformOffsets(titleContainer.attr('transform'))
+						const titleMatrix = getTransformOffsets(titleContainer.attr('transform'))
 
 						titleContainer.attr('transform', `translate(${titleMatrix.x + 4},${titleMatrix.y})`)
 					}
@@ -518,7 +519,7 @@ export class Alluvial extends Component {
 				const hoveredElement = select(this)
 
 				// Set the node position to initial state (unexpanded)
-				const nodeMatrix = getTranformOffsets(hoveredElement.attr('transform'))
+				const nodeMatrix = getTransformOffsets(hoveredElement.attr('transform'))
 
 				hoveredElement
 					.classed('node-hovered', false)
@@ -533,7 +534,7 @@ export class Alluvial extends Component {
 					)
 
 					const titleContainer = self.parent.select(`g#${elementID}`)
-					const titleMatrix = getTranformOffsets(titleContainer.attr('transform'))
+					const titleMatrix = getTransformOffsets(titleContainer.attr('transform'))
 
 					titleContainer.attr('transform', `translate(${titleMatrix.x - 4},${titleMatrix.y})`)
 				}

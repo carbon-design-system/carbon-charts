@@ -45,8 +45,9 @@ export class Component {
 		// do nothing.
 	}
 
-	render(animate = true) {
-		console.error('render() method is not implemented')
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true): void {
+		console.error('Error: Component did not provide the required render function.')
 	}
 
 	destroy() {
@@ -54,16 +55,16 @@ export class Component {
 	}
 
 	// Used to pass down information to the components
-	setModel(newObj) {
+	setModel(newObj: any) {
 		this.model = newObj
 	}
 
 	// Used to pass down information to the components
-	setServices(newObj) {
+	setServices(newObj: any) {
 		this.services = newObj
 	}
 
-	setParent(parent) {
+	setParent(parent: any) {
 		const oldParent = this.parent
 		this.parent = parent
 

@@ -13,9 +13,9 @@ export class Meter extends Component {
 	type = 'meter'
 	renderType = RenderTypes.SVG
 
-	getStackedBounds(data, scale) {
+	getStackedBounds(data: any, scale: any) {
 		let prevX = 0
-		const stackedData = data.map((d, i) => {
+		const stackedData = data.map((d: any, i: number) => {
 			if (i !== 0) {
 				prevX += scale(d.value)
 				return {
@@ -107,7 +107,7 @@ export class Meter extends Component {
 			.append('rect')
 			.classed('value', true)
 			.merge(valued)
-			.attr('x', (d) => {
+			.attr('x', (d: any) => {
 				return d.x
 			})
 			.attr('y', 0)
@@ -119,7 +119,7 @@ export class Meter extends Component {
 					? meter.height.proportional
 					: meter.height.default
 			})
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
@@ -127,21 +127,21 @@ export class Meter extends Component {
 				})
 			)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'meter-bar-update',
 					animate
 				})
 			)
-			.attr('width', (d, i) => {
+			.attr('width', (d: any) => {
 				return d.value > domainMax ? xScale(domainMax) : d.width
 			})
-			.style('fill', (d) => self.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
-			.attr('aria-label', (d) => d.value)
+			.attr('aria-label', (d: any) => d.value)
 
 		valued.exit().remove()
 
@@ -176,19 +176,19 @@ export class Meter extends Component {
 					: meter.height.default
 			})
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'peak-line-update',
 					animate
 				})
 			)
-			.attr('x1', (d) => xScale(d))
-			.attr('x2', (d) => xScale(d))
+			.attr('x1', (d: any) => xScale(d))
+			.attr('x2', (d: any) => xScale(d))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'peak')
-			.attr('aria-label', (d) => d)
+			.attr('aria-label', (d: any) => d)
 
 		peak.exit().remove()
 
@@ -234,7 +234,7 @@ export class Meter extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEMOVE, {
@@ -249,7 +249,7 @@ export class Meter extends Component {
 					})
 				}
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_CLICK, {
 					event,
@@ -257,7 +257,7 @@ export class Meter extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event

@@ -52,7 +52,7 @@ export class Threshold extends Component {
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
 			.selectAll('g.axis-thresholds')
-			.data(thresholdData, (thresholdData) => thresholdData.axisPosition)
+			.data(thresholdData, (thresholdData: any) => thresholdData.axisPosition)
 
 		// Remove axis threshold groups that are no longer needed
 		thresholdAxisGroups.exit().attr('opacity', 0).remove()
@@ -61,10 +61,10 @@ export class Threshold extends Component {
 		const thresholdAxisGroupsEnter = thresholdAxisGroups.enter().append('g')
 
 		const thresholdAxisGroupsMerge = thresholdAxisGroupsEnter.merge(thresholdAxisGroups)
-		thresholdAxisGroupsMerge.attr('class', (d) => `axis-thresholds ${d.axisPosition}`)
+		thresholdAxisGroupsMerge.attr('class', (d: any) => `axis-thresholds ${d.axisPosition}`)
 
-		const thresholdGroups = thresholdAxisGroupsMerge.selectAll('g.threshold-group').data((d) =>
-			d.thresholds.map((threshold) => {
+		const thresholdGroups = thresholdAxisGroupsMerge.selectAll('g.threshold-group').data((d: any) =>
+			d.thresholds.map((threshold: any) => {
 				// Merge relevant keys into the threshold object
 				threshold.axisPosition = d.axisPosition
 				threshold.datum = this.constructDatumObj(d, threshold)
@@ -107,8 +107,8 @@ export class Threshold extends Component {
 
 			const { cartesianScales } = self.services
 			const orientation = cartesianScales.getOrientation()
-			const getDomainValue = (d) => cartesianScales.getDomainValue(d)
-			const getRangeValue = (d) => cartesianScales.getRangeValue(d)
+			const getDomainValue = (d: any) => cartesianScales.getDomainValue(d) as number
+			const getRangeValue = (d: any) => cartesianScales.getRangeValue(d) as number
 			const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 				getDomainValue,
 				getRangeValue,
@@ -120,7 +120,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('line.threshold-line')
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'threshold-line-update',
@@ -144,7 +144,7 @@ export class Threshold extends Component {
 				group
 					.selectAll('line.threshold-line')
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'threshold-line-update',
@@ -168,14 +168,14 @@ export class Threshold extends Component {
 		})
 
 		// Add event listener for showing the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.SHOW, (e) => {
+		this.services.events.addEventListener(Events.Threshold.SHOW, (e: any) => {
 			this.setThresholdLabelPosition(e.detail)
 
 			this.label.classed('hidden', false)
 		})
 
 		// Add event listener for hiding the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.HIDE, (e) => {
+		this.services.events.addEventListener(Events.Threshold.HIDE, () => {
 			this.label.classed('hidden', true)
 		})
 
@@ -184,7 +184,7 @@ export class Threshold extends Component {
 		this.addEventListeners()
 	}
 
-	getFormattedValue(datum) {
+	getFormattedValue(datum: any) {
 		const { value, axisPosition } = datum
 		const options = this.getOptions()
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition)

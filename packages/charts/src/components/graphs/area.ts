@@ -35,7 +35,7 @@ export class Area extends Component {
 		const orientation = cartesianScales.getOrientation()
 		const areaGenerator = area()
 			.curve(this.services.curves.getD3Curve())
-			.defined((datum: any, i) => {
+			.defined((datum: any) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier()
 				const value = datum[rangeIdentifier]
 				if (value === null || value === undefined) {
@@ -67,32 +67,32 @@ export class Area extends Component {
 			}
 		}
 
-		const upperBound = (d, i) =>
+		const upperBound = (d: any) =>
 			boundsEnabled
-				? cartesianScales.getBoundedScaledValues(d, i)[0]
+				? cartesianScales.getBoundedScaledValues(d)[0]
 				: cartesianScales.getRangeValue(upperBoundRangeValue)
 
-		const lowerBound = (d, i) =>
+		const lowerBound = (d: any) =>
 			boundsEnabled
-				? cartesianScales.getBoundedScaledValues(d, i)[1]
-				: cartesianScales.getRangeValue(d, i)
+				? cartesianScales.getBoundedScaledValues(d)[1]
+				: cartesianScales.getRangeValue(d)
 
 		if (orientation === CartesianOrientations.VERTICAL) {
 			domain = cartesianScales.getMainYScale().domain()
 			includeZeroInRangeValue(cartesianScales.getMainYAxisPosition(), domain)
 
 			areaGenerator
-				.x((d, i) => cartesianScales.getDomainValue(d, i))
-				.y0((d, i) => upperBound(d, i))
-				.y1((d, i) => lowerBound(d, i))
+				.x((d: any) => cartesianScales.getDomainValue(d))
+				.y0((d: any) => upperBound(d))
+				.y1((d: any) => lowerBound(d))
 		} else {
 			domain = cartesianScales.getMainXScale().domain()
 			includeZeroInRangeValue(cartesianScales.getMainXAxisPosition(), domain)
 
 			areaGenerator
-				.x0((d, i) => upperBound(d, i))
-				.x1((d, i) => lowerBound(d, i))
-				.y((d, i) => cartesianScales.getDomainValue(d, i))
+				.x0((d: any) => upperBound(d))
+				.x1((d: any) => lowerBound(d))
+				.y((d: any) => cartesianScales.getDomainValue(d))
 		}
 
 		// Is gradient enabled or not
@@ -195,16 +195,16 @@ export class Area extends Component {
 				.attr('opacity', 0)
 				.merge(areas)
 				.attr('class', 'area')
-				.attr('class', (group) =>
+				.attr('class', (group: any) =>
 					this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
 						dataGroupName: group.name,
 						originalClassName: 'area'
 					})
 				)
-				.style('fill', (group) => self.model.getFillColor(group.name))
+				.style('fill', (group: any) => self.model.getFillColor(group.name))
 				.transition()
-				.call((t) =>
+				.call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'area-update-enter',
@@ -212,7 +212,7 @@ export class Area extends Component {
 					})
 				)
 				.attr('opacity', boundsEnabled ? 1 : configArea.opacity.selected)
-				.attr('d', (group) => {
+				.attr('d', (group: any) => {
 					const { data } = group
 					return areaGenerator(data)
 				})
@@ -233,13 +233,13 @@ export class Area extends Component {
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-hover-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-area'
 				})
 			)
-			.attr('opacity', (group) => {
+			.attr('opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum()['name']) {
 					return configArea.opacity.unselected
 				}
@@ -248,11 +248,11 @@ export class Area extends Component {
 			})
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-mouseout-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-area'

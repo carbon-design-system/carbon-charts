@@ -27,7 +27,7 @@ export class StackedScatter extends Scatter {
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll('g.dots')
-			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 
 		// Remove dot groups that need to be removed
 		circleGroups.exit().attr('opacity', 0).remove()
@@ -43,7 +43,7 @@ export class StackedScatter extends Scatter {
 		const circles = circleGroupsEnter
 			.merge(circleGroups)
 			.selectAll('circle.dot')
-			.data((d) => d)
+			.data((d: any) => d)
 
 		// Remove circles that need to be removed
 		circles.exit().attr('opacity', 0).remove()
@@ -52,7 +52,7 @@ export class StackedScatter extends Scatter {
 		const enteringCircles = circles.enter().append('circle').classed('dot', true).attr('opacity', 0)
 
 		// Apply styling & position
-		const circlesToStyle = enteringCircles.merge(circles).datum((d) => {
+		const circlesToStyle = enteringCircles.merge(circles).datum((d: any) => {
 			const group = d[groupMapsTo]
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
@@ -69,7 +69,7 @@ export class StackedScatter extends Scatter {
 		this.addEventListeners()
 	}
 
-	getTooltipData(hoveredX, hoveredY) {
+	getTooltipData(hoveredX: number, hoveredY: number) {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)

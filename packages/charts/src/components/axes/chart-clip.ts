@@ -26,7 +26,8 @@ export class ChartClip extends Component {
 		this.model.set({ chartClipId: this.chartClipId }, { skipUpdate: true })
 	}
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		// Create the clipPath
 		this.createClipPath()
 	}
@@ -46,11 +47,14 @@ export class ChartClip extends Component {
 			this.chartClipId
 		)
 		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`)
-		clipRect
+		
+		if (xScaleEnd - xScaleStart > 0) {
+			clipRect
 			.attr('x', xScaleStart)
 			.attr('y', yScaleStart)
 			.attr('width', xScaleEnd - xScaleStart)
 			.attr('height', yScaleEnd - yScaleStart)
+		}
 
 		this.chartClipPath.merge(clipRect).lower()
 	}

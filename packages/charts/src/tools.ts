@@ -181,26 +181,34 @@ export function getTranslationValues(elementRef: HTMLElement) {
  * Gets x and y coordinates from HTML transform attribute
  *
  * @export
- * @param {any} string the transform attribute string ie. transform(x,y)
+ * @param transform string the transform attribute string ie. transform(x,y)
  * @returns Returns an object with x and y offsets of the transform
  */
-export function getTranformOffsets(string) {
-	const regExp = /\(([^)]+)\)/
-	const match = regExp.exec(string)[1]
-	const xyString = match.split(',')
+export function getTransformOffsets(transform: string) {
+  const regExp = /\(([^)]+)\)/;
+  const match = regExp.exec(transform);
 
-	return {
-		x: parseFloat(xyString[0]),
-		y: parseFloat(xyString[1])
-	}
+  if (match && match.length > 1) {
+    const xyString = match[1].split(',');
+
+    if (xyString.length > 1) {
+      return {
+        x: parseFloat(xyString[0]),
+        y: parseFloat(xyString[1]),
+      };
+    }
+  }
+
+  return { x: 0, y: 0 };
 }
+
 
 /**
  * Returns string value for height/width using pixels if there isn't a specified unit of measure
  *
  * @param value string or number value to be checked for unit of measure
  */
-export function formatWidthHeightValues(value) {
+export function formatWidthHeightValues(value: string | number) {
 	const stringValue = value.toString()
 
 	// If the value provided contains any letters
@@ -219,8 +227,8 @@ export function formatWidthHeightValues(value) {
  * @param {any} string the input string to perform first letter capitalization with
  * @returns The transformed string after first letter is capitalized
  */
-export function capitalizeFirstLetter(string) {
-	return string[0].toUpperCase() + string.slice(1)
+export function capitalizeFirstLetter(word: string) {
+	return word[0].toUpperCase() + word.slice(1)
 }
 
 /**
@@ -231,8 +239,8 @@ export function capitalizeFirstLetter(string) {
  * @param {string} key
  * @returns The percentage in the form of a number (1 significant digit if necessary)
  */
-export function convertValueToPercentage(item, fullData, key = 'value') {
-	const percentage = (item / fullData.reduce((accum, val) => accum + val[key], 0)) * 100
+export function convertValueToPercentage(item: any, fullData: any, key = 'value') {
+	const percentage = (item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
 	// if the value has any significant figures, keep 1
 	return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
 }

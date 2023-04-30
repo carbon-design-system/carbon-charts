@@ -62,7 +62,7 @@ export class ChartModelCartesian extends ChartModel {
 		const domainScaleType = cartesianScales.getDomainAxisScaleType()
 		let domainValueFormatter
 		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d) => format(d, 'MMM d, yyyy')
+			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
 		}
 
 		const result = [
@@ -88,14 +88,14 @@ export class ChartModelCartesian extends ChartModel {
 							datum[secondaryDomain.identifier] === null
 								? '&ndash;'
 								: datum[secondaryDomain.identifier]
-					  ]
+						]
 					: []),
 				...(secondaryRange
 					? [
 							datum[secondaryRange.identifier] === null || isNaN(datum[secondaryRange.identifier])
 								? '&ndash;'
 								: datum[secondaryRange.identifier]
-					  ]
+						]
 					: [])
 			])
 		]
@@ -103,7 +103,7 @@ export class ChartModelCartesian extends ChartModel {
 		return result
 	}
 
-	setData(newData) {
+	setData(newData: any) {
 		let data
 		if (newData) {
 			data = super.setData(newData)

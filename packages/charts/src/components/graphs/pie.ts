@@ -21,7 +21,7 @@ import { interpolate } from 'd3-interpolate'
 function arcTween(a, arcFunc) {
 	const i = interpolate(this._current, a)
 
-	return (t) => {
+	return (t: any) => {
 		this._current = i(t)
 		return arcFunc(this._current)
 	}
@@ -88,7 +88,7 @@ export class Pie extends Component {
 
 		const paths = slicesGroup
 			.selectAll('path.slice')
-			.data(pieLayoutData, (d) => d.data[groupMapsTo])
+			.data(pieLayoutData, (d: any) => d.data[groupMapsTo])
 
 		// Remove slices that need to be exited
 		paths.exit().attr('opacity', 0).remove()
@@ -99,19 +99,19 @@ export class Pie extends Component {
 		// Update styles & position on existing and entering slices
 		const allPaths = enteringPaths
 			.merge(paths)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d.data[groupMapsTo],
 					originalClassName: 'slice'
 				})
 			)
-			.style('fill', (d) => self.model.getFillColor(d.data[groupMapsTo]))
+			.style('fill', (d: any) => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr('d', this.arc)
 
 		allPaths
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'pie_slice_enter_update',
@@ -124,13 +124,13 @@ export class Pie extends Component {
 			.attr('aria-roledescription', 'slice')
 			.attr(
 				'aria-label',
-				(d) =>
+				(d: any) =>
 					`${d[valueMapsTo]}, ${
 						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
 					}`
 			)
 			// Tween
-			.attrTween('d', function (a) {
+			.attrTween('d', function (a: any) {
 				return arcTween.bind(this)(a, self.arc)
 			})
 
@@ -156,7 +156,7 @@ export class Pie extends Component {
 		enteringLabels
 			.merge(labels)
 			.style('text-anchor', 'middle')
-			.text((d) => {
+			.text((d: any) => {
 				if (options.pie.labels.formatter) {
 					return options.pie.labels.formatter(d)
 				}
@@ -164,7 +164,7 @@ export class Pie extends Component {
 				return convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
 			})
 			// Calculate dimensions in order to transform
-			.datum(function (d) {
+			.datum(function (d: any) {
 				const marginedRadius = radius + 7
 
 				const theta = (d.endAngle - d.startAngle) / 2 + d.startAngle
@@ -179,7 +179,7 @@ export class Pie extends Component {
 
 				return d
 			})
-			.attr('transform', function (d, i) {
+			.attr('transform', function (d: any, i: number) {
 				const totalSlices = labelData.length
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI)
 
@@ -271,7 +271,7 @@ export class Pie extends Component {
 
 		// Update data values for each callout
 		// For the horizontal and vertical lines to use
-		enteringCallouts.merge(callouts).datum(function (d) {
+		enteringCallouts.merge(callouts).datum(function (d: any) {
 			const { xPosition, yPosition, direction } = d
 
 			if (direction === CalloutDirections.RIGHT) {
@@ -314,28 +314,28 @@ export class Pie extends Component {
 
 		enteringVerticalLines
 			.merge(svg.selectAll('line.vertical-line'))
-			.datum(function (d: any) {
+			.datum(function () {
 				return select(this.parentNode).datum()
 			})
 			.style('stroke-width', '1px')
-			.attr('x1', (d) => d.startPos.x)
-			.attr('y1', (d) => d.startPos.y)
-			.attr('x2', (d) => d.intersectPointX)
-			.attr('y2', (d) => d.endPos.y)
+			.attr('x1', (d: any) => d.startPos.x)
+			.attr('y1', (d: any) => d.startPos.y)
+			.attr('x2', (d: any) => d.intersectPointX)
+			.attr('y2', (d: any) => d.endPos.y)
 
 		// draw horizontal line
 		const enteringHorizontalLines = enteringCallouts.append('line').classed('horizontal-line', true)
 
 		enteringHorizontalLines
 			.merge(svg.selectAll('line.horizontal-line'))
-			.datum(function (d: any) {
+			.datum(function () {
 				return select(this.parentNode).datum()
 			})
 			.style('stroke-width', '1px')
-			.attr('x1', (d) => d.intersectPointX)
-			.attr('y1', (d) => d.endPos.y)
-			.attr('x2', (d) => d.endPos.x)
-			.attr('y2', (d) => d.endPos.y)
+			.attr('x1', (d: any) => d.intersectPointX)
+			.attr('y1', (d: any) => d.endPos.y)
+			.attr('x2', (d: any) => d.endPos.x)
+			.attr('y2', (d: any) => d.endPos.y)
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -346,21 +346,21 @@ export class Pie extends Component {
 		this.parent
 			.selectAll('path.slice')
 			.transition('legend-hover-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-bar'
 				})
 			)
-			.attr('opacity', (d) => (d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.slice')
 			.transition('legend-mouseout-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-bar'
@@ -373,13 +373,13 @@ export class Pie extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement
 					.classed('hovered', true)
 					.transition('pie_slice_mouseover')
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'pie_slice_mouseover'
@@ -408,7 +408,7 @@ export class Pie extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -423,7 +423,7 @@ export class Pie extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
 					event,
@@ -431,12 +431,12 @@ export class Pie extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement
 					.classed('hovered', false)
 					.transition('pie_slice_mouseout')
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'pie_slice_mouseout'

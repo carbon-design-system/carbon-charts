@@ -19,7 +19,8 @@ export class TestEnvironment {
 	chartData = data
 	chart: ScatterChart
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const holder = createChartHolder('scatter')
 
 		this.chart = new ScatterChart(holder, {

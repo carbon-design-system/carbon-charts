@@ -29,8 +29,8 @@ export class Lollipop extends Scatter {
 		const mainYScale = cartesianScales.getMainYScale()
 		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
-		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
-		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
+		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
+		const getRangeValue = (d: any) => cartesianScales.getRangeValue(d)
 		const orientation = cartesianScales.getOrientation()
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
@@ -52,7 +52,7 @@ export class Lollipop extends Scatter {
 		const allLines = enteringLines
 			.merge(lines)
 			.classed('line', true)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: d[groupMapsTo],
@@ -60,14 +60,14 @@ export class Lollipop extends Scatter {
 				})
 			)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'lollipop-line-update-enter',
 					animate
 				})
 			)
-			.style('stroke', (d) => this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d))
+			.style('stroke', (d: any) => this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d))
 			.attr('opacity', 1)
 
 		if (orientation === CartesianOrientations.HORIZONTAL) {
@@ -75,13 +75,13 @@ export class Lollipop extends Scatter {
 				.attr('y1', getYValue)
 				.attr('y2', getYValue)
 				.attr('x1', mainXScale.range()[0])
-				.attr('x2', (d, i) => (getXValue(d, i) as any) - options.points.radius)
+				.attr('x2', (d: any) => (getXValue(d) as any) - options.points.radius)
 		} else {
 			allLines
 				.attr('x1', getXValue)
 				.attr('x2', getXValue)
 				.attr('y1', mainYScale.range()[0])
-				.attr('y2', (d, i) => (getYValue(d, i) as any) + options.points.radius)
+				.attr('y2', (d: any) => getYValue(d) + options.points.radius)
 		}
 
 		this.addScatterPointEventListeners()
@@ -109,7 +109,7 @@ export class Lollipop extends Scatter {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
-		this.parent.selectAll('line.line').attr('stroke-width', (d) => {
+		this.parent.selectAll('line.line').attr('stroke-width', (d: any) => {
 			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
 				return lines.weight.unselected
 			}
@@ -119,7 +119,7 @@ export class Lollipop extends Scatter {
 	}
 
 	// on mouse out remove the stroke width assertion
-	handleScatterOnMouseOut = (event: CustomEvent) => {
+	handleScatterOnMouseOut = () => {
 		this.parent.selectAll('line.line').attr('stroke-width', lines.weight.unselected)
 	}
 
@@ -132,13 +132,13 @@ export class Lollipop extends Scatter {
 		this.parent
 			.selectAll('line.line')
 			.transition('legend-hover-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-line'
 				})
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', (d: any) => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
 					return lines.opacity.unselected
 				}
@@ -147,11 +147,11 @@ export class Lollipop extends Scatter {
 			})
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('line.line')
 			.transition('legend-mouseout-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-line'

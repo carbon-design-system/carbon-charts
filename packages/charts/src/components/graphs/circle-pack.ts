@@ -17,8 +17,9 @@ export class CirclePack extends Component {
 	renderType = RenderTypes.SVG
 
 	focal: any
-
-	render() {
+	
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
@@ -55,7 +56,7 @@ export class CirclePack extends Component {
 
 		const packLayout = D3Pack()
 			.size([width, height])
-			.padding((d) => {
+			.padding((d: any) => {
 				// add 3 px to account for the stroke width 1.5px
 				return d.depth >= 1 ? circlePack.padding.children + 3 : circlePack.padding.mainGroup + 3
 			})
@@ -77,7 +78,7 @@ export class CirclePack extends Component {
 
 		enteringCircles
 			.merge(circles)
-			.attr('class', (d) => {
+			.attr('class', (d: any) => {
 				const originalClass = canvasZoomEnabled && hierarchyLevel === 3 ? this.getZoomClass(d) : ''
 				return this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
@@ -87,18 +88,18 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`
 				})
 			})
-			.style('fill', (d) => this.model.getFillColor(d.data.dataGroupName))
-			.style('stroke', (d) => this.model.getFillColor(d.data.dataGroupName))
-			.attr('cx', (d) => d.x)
-			.attr('cy', (d) => d.y)
+			.style('fill', (d: any) => this.model.getFillColor(d.data.dataGroupName))
+			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName))
+			.attr('cx', (d: any) => d.x)
+			.attr('cy', (d: any) => d.y)
 			.transition('circlepack-leaf-update-enter')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'circlepack-leaf-update-enter'
 				})
 			)
-			.attr('r', (d) => d.r)
+			.attr('r', (d: any) => d.r)
 			.attr('opacity', 1)
 			.attr('fill-opacity', circlePack.circles.fillOpacity)
 
@@ -118,27 +119,27 @@ export class CirclePack extends Component {
 
 	// turn off the highlight class on children circles
 	unhighlightChildren(childData) {
-		const data = childData.map((d) => d.data)
+		const data = childData.map((d: any) => d.data)
 
 		this.parent
 			.selectAll('circle.node')
-			.filter((d) => data.some((datum) => datum === d.data) && d.depth > 1)
-			.style('stroke', (d) => this.model.getFillColor(d.data.dataGroupName))
+			.filter((d: any) => data.some((datum) => datum === d.data) && d.depth > 1)
+			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName))
 	}
 
 	// highlight the children circles with a stroke
 	highlightChildren(childData) {
-		const data = childData.map((d) => d.data)
+		const data = childData.map((d: any) => d.data)
 
 		this.parent
 			.selectAll('circle.node')
-			.filter((d) => data.some((datum) => datum === d.data) && d.depth > 1)
+			.filter((d: any) => data.some((datum) => datum === d.data) && d.depth > 1)
 			.style('stroke', circlePack.circles.hover.stroke)
 	}
 
 	getZoomClass(node) {
 		if (this.model.getHierarchyLevel() === 3 && this.focal) {
-			if (node.data === this.focal.data || this.focal.children.some((d) => d.data === node.data)) {
+			if (node.data === this.focal.data || this.focal.children.some((d: any) => d.data === node.data)) {
 				return 'focal'
 			}
 		}
@@ -178,24 +179,24 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.transition('legend-hover-circlepack')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-circlepack'
 				})
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', (d: any) => {
 				return d.data.dataGroupName === hoveredElement.datum()['name']
 					? 1
 					: circlePack.circles.fillOpacity
 			})
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('circle.node')
 			.transition('legend-mouseout-circlepack')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-circlepack'
@@ -218,7 +219,7 @@ export class CirclePack extends Component {
 		const self = this
 		this.parent
 			.selectAll('circle.node')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -237,7 +238,7 @@ export class CirclePack extends Component {
 							zoomable = true
 							hoveredElement.classed('clickable', true)
 						}
-						childrenData = datum.children.map((child) => {
+						childrenData = datum.children.map((child: any) => {
 							if (child !== null) {
 								// retrieve the children values if there are any 3rd level
 								if (typeof child.data.value === 'number') {
@@ -297,7 +298,7 @@ export class CirclePack extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -311,7 +312,7 @@ export class CirclePack extends Component {
 					event
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -331,7 +332,7 @@ export class CirclePack extends Component {
 					hoveredElement
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				const disabled = hoveredElement.classed('non-focal')
 

@@ -16,7 +16,7 @@ export class RadarChartModel extends ChartModelCartesian {
 
 		const { angle, value } = getProperty(options, 'radar', 'axes')
 
-		const additionalHeaders = getProperty(groupedData, '0', 'data').map((d) => d[angle])
+		const additionalHeaders = getProperty(groupedData, '0', 'data').map((d: any) => d[angle])
 
 		const result = [
 			['Group', ...additionalHeaders],

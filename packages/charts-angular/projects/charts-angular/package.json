@@ -1,8 +1,25 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Carbon charting components for Angular",
-  "repository": {
+  "peerDependencies": {
+    "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser-dynamic": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
+		"@carbon/charts": "workspace:*",
+    "rxjs": "^7.8.0",
+    "zone.js": "~0.13.0"
+  },
+	"files": [
+		"dist",
+		"CHANGELOG.md",
+    "LICENSE.md"
+  ],
+  "publishConfig": {
+		"directory": "dist",
+		"access": "public"
+	},
+	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
 		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
@@ -32,23 +49,6 @@
 		"sass",
 		"scss"
 	],
-  "peerDependencies": {
-    "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
-    "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
-    "@angular/platform-browser-dynamic": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
-		"@carbon/charts": "workspace:*",
-    "rxjs": "^7.8.0",
-    "zone.js": "~0.13.0"
-  },
-	"files": [
-		"dist",
-		"CHANGELOG.md",
-    "LICENSE.md"
-  ],
-  "publishConfig": {
-		"directory": "dist",
-		"access": "public"
-	},
 	"maintainers": [
 		{
 			"name": "Eliad Moosavi",

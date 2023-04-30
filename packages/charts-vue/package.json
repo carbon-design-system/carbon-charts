@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-vue",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Carbon charting components for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -25,16 +25,14 @@
   ],
   "scripts": {
     "license": "cp ../../LICENSE.md ./",
-    "cp:styles": "cp ../charts/dist/styles.* dist",
-    "build:package": "vite build && yarn license && yarn cp:styles",
+    "styles": "cp ../charts/dist/styles.* dist",
+    "build:package": "vite build && yarn license && yarn styles",
     "build:demo": "storybook build -o demo/bundle --quiet",
     "build": "yarn build:package && yarn build:demo",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path ../../.gitignore",
+    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
     "storybook": "storybook dev -p 9006",
     "start": "yarn storybook",
-    "ci-check": "yarn format:diff",
     "format": "prettier --write src/ --ignore-path ../../.gitignore",
-    "format:diff": "prettier --list-different src/ --ignore-path ../../.gitignore",
     "clean": "rm -rf dist demo/bundle"
   },
   "peerDependencies": {
@@ -55,7 +53,6 @@
     "@storybook/theming": "^7.0.7",
     "@storybook/vue3": "^7.0.7",
     "@storybook/vue3-vite": "^7.0.7",
-    "@types/node": "^18.16.2",
     "@vitejs/plugin-vue": "^4.2.1",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
@@ -78,10 +75,6 @@
     "directory": "dist",
     "access": "public"
   },
-  "browserslist": [
-    "> 1%",
-    "not op_mini all"
-  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:carbon-design-system/carbon-charts.git",

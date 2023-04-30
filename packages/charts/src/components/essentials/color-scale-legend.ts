@@ -73,7 +73,8 @@ export class ColorScaleLegend extends Legend {
 		}
 	}
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { width } = DOMUtils.getSVGElementSize(svg, {
@@ -152,12 +153,13 @@ export class ColorScaleLegend extends Legend {
 
 		const legendAxis = axisBottom(linearScale).tickSize(0).tickValues(quant)
 
+		let rangeStart: any // avoid unexpected lexical declaration in case block
 		switch (colorScaleType) {
 			case ColorLegendType.LINEAR:
 				this.drawLinear(colorPairing, legendGroupElement, barWidth)
 				break
 			case ColorLegendType.QUANTIZE:
-				const rangeStart = this.drawQuantize(
+				rangeStart = this.drawQuantize(
 					colorPairing,
 					colorScheme,
 					customColorsEnabled,
@@ -200,9 +202,9 @@ export class ColorScaleLegend extends Legend {
 			.data(colorPairing)
 			.enter()
 			.append('stop')
-			.attr('offset', (_, i) => `${i * stopLengthPercentage}%`)
-			.attr('class', (_, i) => colorPairing[i])
-			.attr('stop-color', (d) => d)
+			.attr('offset', (_, i: number) => `${i * stopLengthPercentage}%`)
+			.attr('class', (_, i: number) => colorPairing[i])
+			.attr('stop-color', (d: string) => d)
 
 		// Create the legend container
 		const rectangle = DOMUtils.appendOrSelect(legendGroupElement, 'rect')
@@ -231,12 +233,12 @@ export class ColorScaleLegend extends Legend {
 			.selectAll('rect')
 			.data(colorScaleBand.domain())
 			.join('rect')
-			.attr('x', (d) => colorScaleBand(d))
+			.attr('x', (d: string) => colorScaleBand(d))
 			.attr('y', 0)
 			.attr('width', Math.max(0, colorScaleBand.bandwidth() - 1))
 			.attr('height', legend.color.barHeight)
-			.attr('class', (d) => d)
-			.attr('fill', (d) => d)
+			.attr('class', (d: string) => d)
+			.attr('fill', (d: string) => d)
 
 		return (!customColorsEnabled && colorScheme) === 'mono' ? colorScaleBand.bandwidth() - 1 : 0
 	}

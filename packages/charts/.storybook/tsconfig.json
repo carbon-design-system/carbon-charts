@@ -11,6 +11,6 @@
 		"skipLibCheck": true
 	},
 	"exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../demo/bundle/**.*"],
-	"include": ["../src/**/*", "../demo/**.*", "./preview.ts"],
+	"include": ["../src/**/*", "./preview.ts"],
 	"files": ["./typings.d.ts"]
 }

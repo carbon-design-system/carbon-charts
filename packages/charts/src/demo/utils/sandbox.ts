@@ -1,7 +1,6 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 
-//@ts-ignore
 import packageJSON from '../../../package.json'
 const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']

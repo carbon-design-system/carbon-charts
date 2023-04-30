@@ -158,7 +158,7 @@ export class LayoutComponent extends Component {
 					renderType === RenderTypes.SVG
 						? DOMUtils.getSVGElementSize(select(this).select('svg.layout-svg-wrapper'), {
 								useBBox: true
-						  })
+							})
 						: DOMUtils.getHTMLElementSize(this)
 
 				if (growth === LayoutGrowth.PREFERRED) {
@@ -179,7 +179,7 @@ export class LayoutComponent extends Component {
 				const growth = getProperty(child, 'growth')
 				return growth === LayoutGrowth.STRETCH
 			})
-			.forEach((child, i) => {
+			.forEach(child => {
 				child.size = (100 - +this.getPreferedAndFixedSizeSum()) / +this.getNumOfStretchChildren()
 			})
 
@@ -189,12 +189,12 @@ export class LayoutComponent extends Component {
 			.data(this.children, (d: any) => d.id)
 
 		if (horizontal) {
-			allUpdatedBoxes.style('width', (d) => `${(d.size / 100) * width}px`).style('height', '100%')
+			allUpdatedBoxes.style('width', (d: any) => `${(d.size / 100) * width}px`).style('height', '100%')
 		} else {
-			allUpdatedBoxes.style('height', (d) => `${(d.size / 100) * height}px`).style('width', '100%')
+			allUpdatedBoxes.style('height', (d: any) => `${(d.size / 100) * height}px`).style('width', '100%')
 		}
 
-		allUpdatedBoxes.each(function (d: any, i) {
+		allUpdatedBoxes.each(function (d: any) {
 			d.components.forEach((itemComponent) => {
 				const growth = getProperty(d, 'growth')
 				if (growth === LayoutGrowth.STRETCH) {

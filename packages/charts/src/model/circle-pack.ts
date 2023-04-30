@@ -13,7 +13,7 @@ export class CirclePackChartModel extends ChartModel {
 		this.set({ depth: 2 }, { skipUpdate: true })
 	}
 
-	setData(newData) {
+	setData(newData: any) {
 		super.setData(newData)
 		this.setDataGroups()
 		if (newData.length === 1) {
@@ -22,7 +22,7 @@ export class CirclePackChartModel extends ChartModel {
 		this.setZoom()
 	}
 
-	setOptions(newOptions) {
+	setOptions(newOptions: any) {
 		const options = this.getOptions()
 		const zoomOptions = merge({}, newOptions, this.getZoomOptions(newOptions))
 		updateLegendAdditionalItems(options, zoomOptions)
@@ -36,7 +36,7 @@ export class CirclePackChartModel extends ChartModel {
 		})
 	}
 
-	getZoomOptions(options?) {
+	getZoomOptions(options?: any) {
 		if (!this.getDisplayData()) {
 			return {}
 		}
@@ -50,9 +50,9 @@ export class CirclePackChartModel extends ChartModel {
 
 		let depth = this.getHierarchyLevel()
 		// check the data depth
-		data.some((datum) => {
+		data.some((datum: any) => {
 			if (datum.children) {
-				if (datum.children.some((item) => item.children)) {
+				if (datum.children.some((item: any) => item.children)) {
 					depth = 3
 					return false
 				}
@@ -74,7 +74,7 @@ export class CirclePackChartModel extends ChartModel {
 		return null
 	}
 
-	setZoom(options?) {
+	setZoom(options?: any) {
 		this.setOptions(this.getZoomOptions(options))
 	}
 
@@ -97,7 +97,7 @@ export class CirclePackChartModel extends ChartModel {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
-		const newData = data.map((depthOne) => {
+		const newData = data.map((depthOne: any) => {
 			const groupName = depthOne[groupMapsTo]
 			return this.setChildrenDataGroup(depthOne, groupName)
 		})
@@ -111,12 +111,12 @@ export class CirclePackChartModel extends ChartModel {
 	}
 
 	// sets name recursively down the node tree
-	protected setChildrenDataGroup(node, name) {
+	protected setChildrenDataGroup(node: any, name: any) {
 		if (node.children) {
 			return {
 				...node,
 				dataGroupName: name,
-				children: node.children.map((child, i) => {
+				children: node.children.map((child: any) => {
 					return this.setChildrenDataGroup(child, name)
 				})
 			}
@@ -130,7 +130,7 @@ export class CirclePackChartModel extends ChartModel {
 
 		const result = [['Child', 'Parent', 'Value']]
 
-		displayData.forEach((datum) => {
+		displayData.forEach((datum: any) => {
 			let value = datum.value ? datum.value : 0
 			if (datum.children) {
 				// Call recursive function
@@ -150,10 +150,10 @@ export class CirclePackChartModel extends ChartModel {
 	 * @param totalSum: number
 	 * @returns: number
 	 */
-	private getChildrenDatums(children, parent, result = [], totalSum = 0) {
+	private getChildrenDatums(children: any, parent: any, result: string[][] = [], totalSum = 0) {
 		const grandParent = parent
 
-		children.forEach((child) => {
+		children.forEach((child: any) => {
 			const parent = child.name
 			let sum = 0
 

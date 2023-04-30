@@ -30,7 +30,7 @@ export class Gauge extends Component {
 
 	getValue(): number {
 		const data = this.model.getData()
-		const value = data.find((d) => d.group === 'value')?.value ?? null
+		const value = data.find((d: any) => d.group === 'value')?.value ?? null
 		return value
 	}
 
@@ -41,7 +41,7 @@ export class Gauge extends Component {
 
 	getDelta(): number {
 		const data = this.model.getData()
-		const delta = data.find((d) => d.group === 'delta')?.value ?? null
+		const delta = data.find((d: any) => d.group === 'delta')?.value ?? null
 		return delta
 	}
 
@@ -65,7 +65,7 @@ export class Gauge extends Component {
 	}
 
 	// use provided arrow direction or default to using the delta
-	getArrow(delta): string {
+	getArrow(delta: any): string {
 		const options = this.getOptions()
 		const arrowDirection = getProperty(options, 'gauge', 'deltaArrow', 'direction')
 
@@ -79,6 +79,7 @@ export class Gauge extends Component {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
 		const options = this.getOptions()
@@ -127,12 +128,12 @@ export class Gauge extends Component {
 					originalClassName: 'arc-foreground'
 				})
 			)
-			.style('fill', (d) => getProperty(this.getOptions(), 'color', 'scale', 'value'))
+			.style('fill', () => getProperty(this.getOptions(), 'color', 'scale', 'value'))
 			.attr('d', this.arc)
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
-			.attr('aria-label', (d) => d)
+			.attr('aria-label', (d: any) => d)
 
 		// draw the value and delta to the center
 		this.drawValueNumber()
@@ -210,7 +211,7 @@ export class Gauge extends Component {
 			.merge(valueNumber)
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
-			.text((d) => numberFormatter(d))
+			.text((d: any) => numberFormatter(d))
 
 		// add the percentage symbol beside the valueNumber
 		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(
@@ -285,7 +286,7 @@ export class Gauge extends Component {
 				.merge(deltaNumber)
 				.attr('text-anchor', 'middle')
 				.style('font-size', `${deltaFontSize(radius)}px`)
-				.text((d) => `${numberFormatter(d)}${gaugeSymbol}`)
+				.text((d: any) => `${numberFormatter(d)}${gaugeSymbol}`)
 
 			// Add the caret for the delta number
 			const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(
@@ -346,7 +347,7 @@ export class Gauge extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.arc-foreground')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
 					event,
@@ -354,7 +355,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -364,7 +365,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_CLICK, {
 					event,
@@ -372,7 +373,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event

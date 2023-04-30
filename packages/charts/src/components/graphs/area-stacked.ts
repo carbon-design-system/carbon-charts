@@ -46,7 +46,7 @@ export class StackedArea extends Component {
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -57,8 +57,8 @@ export class StackedArea extends Component {
 					i
 				)
 			)
-			.y0((d) => mainYScale(d[0]))
-			.y1((d) => mainYScale(d[1]))
+			.y0((d: any) => mainYScale(d[0]))
+			.y1((d: any) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve())
 
 		areas.exit().attr('opacity', 0).remove()
@@ -67,21 +67,21 @@ export class StackedArea extends Component {
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: getProperty(d, 0, groupMapsTo),
 					originalClassName: 'area'
 				})
 			)
-			.style('fill', (d) => self.model.getFillColor(getProperty(d, 0, groupMapsTo)))
+			.style('fill', (d: any) => self.model.getFillColor(getProperty(d, 0, groupMapsTo)))
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
-			.attr('aria-label', (d) => getProperty(d, 0, groupMapsTo))
+			.attr('aria-label', (d: any) => getProperty(d, 0, groupMapsTo))
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'area-update-enter',
@@ -100,13 +100,13 @@ export class StackedArea extends Component {
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-hover-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-area'
 				})
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', (d: any) => {
 				if (getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
 					return configArea.opacity.unselected
 				}
@@ -119,7 +119,7 @@ export class StackedArea extends Component {
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-mouseout-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-area'

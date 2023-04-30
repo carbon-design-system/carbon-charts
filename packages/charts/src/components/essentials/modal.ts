@@ -105,7 +105,8 @@ export class Modal extends Component {
 		</div>`
 	}
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const options = this.model.getOptions()
 		if (!this.isEventListenerAdded) {
 			// Grab the tooltip element

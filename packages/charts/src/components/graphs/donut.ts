@@ -45,7 +45,7 @@ export class Donut extends Pie {
 			})
 			.style('font-size', () => options.donut.center.numberFontSize(radius))
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'donut-figure-enter-update',
@@ -96,7 +96,7 @@ export class Donut extends Pie {
 
 		const i = interpolateFunction(currentValue, donutCenterFigure)
 
-		return (t) => {
+		return (t: any) => {
 			const { numberFormatter } = options.donut.center
 			d3Ref.text(numberFormatter(i(t)))
 		}

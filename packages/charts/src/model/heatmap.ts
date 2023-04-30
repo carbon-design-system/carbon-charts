@@ -100,7 +100,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			// Get unique axis values & create a matrix
 			this._domains = Array.from(
 				new Set(
-					displayData.map((d) => {
+					displayData.map((d: any) => {
 						return d[domainIdentifier]
 					})
 				)
@@ -131,7 +131,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			// Get unique axis values & create a matrix
 			this._ranges = Array.from(
 				new Set(
-					displayData.map((d) => {
+					displayData.map((d: any) => {
 						return d[rangeIdentifier]
 					})
 				)
@@ -184,7 +184,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 *
 	 * @param newData The new raw data to be set
 	 */
-	setData(newData) {
+	setData(newData: any) {
 		const sanitizedData = this.sanitize(clone(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 

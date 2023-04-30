@@ -28,12 +28,12 @@ export class Scatter extends Component {
 		}
 	}
 
-	filterBasedOnZoomDomain(data) {
+	filterBasedOnZoomDomain(data: any) {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(data)
 		const zoomDomain = this.model.get('zoomDomain')
 		if (zoomDomain !== undefined) {
 			return data.filter(
-				(d) =>
+				(d: any) =>
 					d[domainIdentifier].getTime() >= zoomDomain[0].getTime() &&
 					d[domainIdentifier].getTime() <= zoomDomain[1].getTime()
 			)
@@ -54,7 +54,7 @@ export class Scatter extends Component {
 				percentage
 			})
 		} else {
-			scatterData = this.model.getDisplayData(this.configs.groups).filter((d) => {
+			scatterData = this.model.getDisplayData(this.configs.groups).filter((d: any) => {
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
 				return d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null
 			})
@@ -101,7 +101,7 @@ export class Scatter extends Component {
 	}
 
 	// A value is an anomaly if is above all defined domain and range thresholds
-	isDatapointThresholdAnomaly(datum: any, index: number) {
+	isDatapointThresholdAnomaly(datum: any) {
 		const { handleThresholds } = this.configs
 		if (!handleThresholds) {
 			return false
@@ -118,14 +118,14 @@ export class Scatter extends Component {
 		)
 
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
-			(d, i) => this.services.cartesianScales.getDomainValue(d, i),
-			(d, i) => this.services.cartesianScales.getRangeValue(d, i),
+			(d: any) => this.services.cartesianScales.getDomainValue(d),
+			(d: any) => this.services.cartesianScales.getRangeValue(d),
 			orientation
 		)
 
 		// Get datum x and y values
-		const xValue = getXValue(datum, index)
-		const yValue = getYValue(datum, index)
+		const xValue = getXValue(datum)
+		const yValue = getYValue(datum)
 
 		// To be an anomaly, the value has to be higher or equal than the threshold value
 		// (if are present, both range and domain threshold values)
@@ -146,12 +146,12 @@ export class Scatter extends Component {
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions()
 		const { filled, fillOpacity } = options.points
-		const { cartesianScales, transitions } = this.services
+		const { cartesianScales } = this.services
 
 		const { groupMapsTo } = options.data
 
-		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i)
-		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i)
+		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
+		const getRangeValue = (d: any) => cartesianScales.getRangeValue(d)
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -162,7 +162,7 @@ export class Scatter extends Component {
 		selection
 			.raise()
 			.classed('dot', true)
-			.attr('class', (d) => {
+			.attr('class', (d: any) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				const isFilled = this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 				const classNamesNeeded = isFilled
@@ -176,17 +176,17 @@ export class Scatter extends Component {
 				})
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
-			.classed('threshold-anomaly', (d, i) => this.isDatapointThresholdAnomaly(d, i))
-			.classed('filled', (d) => {
+			.classed('threshold-anomaly', (d: any) => this.isDatapointThresholdAnomaly(d))
+			.classed('filled', (d: any) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				return this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 			})
-			.classed('unfilled', (d) => {
+			.classed('unfilled', (d: any) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				return !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 			})
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'scatter-update-enter',
@@ -196,13 +196,13 @@ export class Scatter extends Component {
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
 			.attr('r', options.points.radius)
-			.style('fill', (d) => {
+			.style('fill', (d: any) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				if (this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)) {
 					return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 				}
 			})
-			.style('stroke', (d) => {
+			.style('stroke', (d: any) => {
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				return this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d)
 			})
@@ -211,7 +211,7 @@ export class Scatter extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'point')
-			.attr('aria-label', (d) => {
+			.attr('aria-label', (d: any) => {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier(d)
 				return d[rangeIdentifier]
 			})
@@ -220,11 +220,11 @@ export class Scatter extends Component {
 		this.addEventListeners()
 	}
 
-	handleChartHolderOnHover = (event: CustomEvent) => {
+	handleChartHolderOnHover = () => {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-hover-scatter')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'chart-holder-hover-scatter'
@@ -233,11 +233,11 @@ export class Scatter extends Component {
 			.attr('opacity', 1)
 	}
 
-	handleChartHolderOnMouseOut = (event: CustomEvent) => {
+	handleChartHolderOnMouseOut = () => {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-mouseout-scatter')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'chart-holder-mouseout-scatter'
@@ -254,20 +254,20 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-hover-scatter')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-scatter'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-mouseout-scatter')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-scatter'
@@ -276,8 +276,9 @@ export class Scatter extends Component {
 			.attr('opacity', 1)
 	}
 
-	// This is extended in bubble graphs
-	getTooltipAdditionalItems(datum) {
+	// Extended in bubble graphs
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	getTooltipAdditionalItems(datum: any) {
 		return null
 	}
 
@@ -287,19 +288,19 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr('class', (d) =>
+					.attr('class', (d: any) =>
 						self.model.getColorClassName({
 							classNameTypes: [ColorClassNameTypes.FILL],
 							dataGroupName: d[groupMapsTo],
 							originalClassName: hoveredElement.attr('class')
 						})
 					)
-					.style('fill', (d) => {
+					.style('fill', (d: any) => {
 						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d)
 						return self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 					})
@@ -320,7 +321,7 @@ export class Scatter extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -334,7 +335,7 @@ export class Scatter extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
 					event,
@@ -342,7 +343,7 @@ export class Scatter extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -355,7 +356,7 @@ export class Scatter extends Component {
 						datum,
 						filled
 					)
-					hoveredElement.classed('unfilled', !isFilled).style('fill', (d) => {
+					hoveredElement.classed('unfilled', !isFilled).style('fill', (d: any) => {
 						if (isFilled || filled) {
 							return self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 						}

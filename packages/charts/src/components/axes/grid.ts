@@ -67,7 +67,7 @@ export class Grid extends Component {
 
 		if (animate) {
 			g.transition()
-				.call((t) =>
+				.call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'grid-update',
@@ -113,7 +113,7 @@ export class Grid extends Component {
 
 		if (animate) {
 			g.transition()
-				.call((t) =>
+				.call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'grid-update',
@@ -140,7 +140,7 @@ export class Grid extends Component {
 		const gridlinesX = svg
 			.selectAll('.x.grid .tick')
 			.nodes()
-			.sort((a, b) => {
+			.sort((a: HTMLElement, b: HTMLElement) => {
 				return Number(getTranslationValues(a).tx) - Number(getTranslationValues(b).tx)
 			})
 

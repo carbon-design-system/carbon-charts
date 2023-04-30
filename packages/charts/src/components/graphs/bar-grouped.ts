@@ -76,17 +76,16 @@ export class GroupedBar extends Bar {
 		allBarGroups
 			// Transition
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'bar-group-update-enter',
 					animate
 				})
 			)
-			.attr('transform', (label, i) => {
-				const scaleValue = this.services.cartesianScales.getDomainValue(label, i)
+			.attr('transform', (label: string) => {
+				const scaleValue = this.services.cartesianScales.getDomainValue(label)
 				const translateBy = scaleValue - this.getGroupWidth() / 2
-				// const translateBy = scaleValue - this.getGroupWidth(null) / 2 + this.getBarWidth(null);
 
 				if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 					return `translate(${translateBy}, 0)`
@@ -97,8 +96,8 @@ export class GroupedBar extends Bar {
 			})
 
 		const bars = allBarGroups.selectAll('path.bar').data(
-			(label) => this.getDataCorrespondingToLabel(label),
-			(d) => d[groupMapsTo]
+			(label: string) => this.getDataCorrespondingToLabel(label),
+			(d: any) => d[groupMapsTo]
 		)
 
 		// Remove bars that are no longer needed
@@ -112,22 +111,22 @@ export class GroupedBar extends Bar {
 			.merge(bars)
 			.classed('bar', true)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'bar-update-enter',
 					animate
 				})
 			)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d, i) => {
+			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d: any) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -144,7 +143,7 @@ export class GroupedBar extends Bar {
 				const y1 = this.services.cartesianScales.getRangeValue(d)
 
 				// don't show if part of bar is out of zoom domain - test zoom on bar pos, not group
-				const zoomx0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2
+				const zoomx0 = this.services.cartesianScales.getDomainValue(d) - barWidth / 2
 				const zoomx1 = zoomx0 + barWidth
 				if (this.isOutsideZoomedDomain(zoomx0, zoomx1)) {
 					return
@@ -158,7 +157,7 @@ export class GroupedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value)
+			.attr('aria-label', (d: any) => d.value)
 
 		// Add event listeners to elements drawn
 		this.addEventListeners()
@@ -173,21 +172,21 @@ export class GroupedBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-bar'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-bar'
@@ -201,7 +200,7 @@ export class GroupedBar extends Bar {
 
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -219,7 +218,7 @@ export class GroupedBar extends Bar {
 					data: [datum]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -233,7 +232,7 @@ export class GroupedBar extends Bar {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					event,
@@ -241,7 +240,7 @@ export class GroupedBar extends Bar {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -276,7 +275,7 @@ export class GroupedBar extends Bar {
 	protected getDataCorrespondingToLabel(label: string) {
 		const displayData = this.model.getDisplayData(this.configs.groups)
 
-		return displayData.filter((datum) => {
+		return displayData.filter((datum: any) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 			return datum[domainIdentifier].toString() === label
 		})
@@ -298,7 +297,7 @@ export class GroupedBar extends Bar {
 			step = domainScale.step()
 		} else if (activeData.length > 0) {
 			// as a fallback use distance between first bars of adjacent bar groups
-			const ref = activeData.find((d) => d.data?.length > 1)
+			const ref = activeData.find((d: any) => d.data?.length > 1)
 			if (ref) {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(ref.data[0])
 				step = Math.abs(

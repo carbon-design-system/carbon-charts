@@ -1,6 +1,14 @@
 {
-  "extends": "../../tsconfig.vite.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // "extends": "../../tsconfig.vite.json",
   "compilerOptions": {
+      // Temporarily copied from ../../tsconfig.vite.json
+		"composite": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+
+    // Package-specific
     "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts"]

@@ -224,7 +224,7 @@ export class Axis extends Component {
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = (t) => t.toLocaleString()
+					formatter = (t: any) => t.toLocaleString()
 				}
 			} else {
 				formatter = userProvidedFormatter
@@ -243,7 +243,7 @@ export class Axis extends Component {
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
 				// sanitize user-provided tick values
-				userProvidedTickValues.forEach((userProvidedTickValue, i) => {
+				userProvidedTickValues.forEach((userProvidedTickValue: any, i: number) => {
 					if (userProvidedTickValue.getTime === undefined) {
 						userProvidedTickValues[i] = new Date(userProvidedTickValue)
 					}
@@ -261,11 +261,11 @@ export class Axis extends Component {
 				const discreteDomain = this.services.cartesianScales
 					.getScaleByPosition(axisPosition)
 					.domain()
-				validTicks = userProvidedTickValues.filter((tick) => discreteDomain.includes(tick))
+				validTicks = userProvidedTickValues.filter((tick: any) => discreteDomain.includes(tick))
 			} else {
 				// continuous scales
 				validTicks = userProvidedTickValues.filter(
-					(tick) => tick >= lowerBound && tick <= upperBound
+					(tick: any) => tick >= lowerBound && tick <= upperBound
 				)
 			}
 
@@ -298,6 +298,7 @@ export class Axis extends Component {
 
 			// vertical axes can have override for title orientation
 			const titleOrientation = getProperty(axisOptions, 'titleOrientation')
+			let titleHeight // avoid lexical declaration in case block
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
 					if (titleOrientation === AxisTitleOrientations.RIGHT) {
@@ -341,9 +342,9 @@ export class Axis extends Component {
 					}
 					break
 				case AxisPositions.TOP:
-					const { height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
+					({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
 						useBBox: true
-					})
+					}))
 					axisTitleRef
 						.attr(
 							'transform',
@@ -361,7 +362,7 @@ export class Axis extends Component {
 			const axisRefSelection = axisRef
 
 			if (animate) {
-				axisRef = axisRef.transition().call((t) =>
+				axisRef = axisRef.transition().call((t: any) =>
 					this.services.transitions.setupTransition({
 						transition: t,
 						name: 'axis-update',
@@ -388,7 +389,7 @@ export class Axis extends Component {
 			} else {
 				axisRef = axisRef
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						this.services.transitions.setupTransition({
 							transition: t,
 							name: 'axis-update',
@@ -421,7 +422,7 @@ export class Axis extends Component {
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
-						(textNode) =>
+						(textNode: any) =>
 							DOMUtils.getSVGElementSize(textNode, {
 								useBBox: true
 							}).width >= scale.step()
@@ -485,9 +486,9 @@ export class Axis extends Component {
 			container.attr('opacity', 1)
 		}
 
-		axisRef.selectAll('g.tick').attr('aria-label', (d) => d)
+		axisRef.selectAll('g.tick').attr('aria-label', (d: any) => d)
 
-		invisibleAxisRef.selectAll('g.tick').attr('aria-label', (d) => d)
+		invisibleAxisRef.selectAll('g.tick').attr('aria-label', (d: any) => d)
 
 		// truncate the label if it's too long
 		// only applies to discrete type
@@ -518,7 +519,7 @@ export class Axis extends Component {
 				this.getInvisibleAxisRef()
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function (d) {
+					.text(function (d: any) {
 						if (d.length > truncationThreshold) {
 							return truncateLabel(d, truncationType, truncationNumCharacter)
 						} else {
@@ -547,7 +548,7 @@ export class Axis extends Component {
 		const self = this
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
 					event,
@@ -563,7 +564,7 @@ export class Axis extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
 					event,
@@ -576,7 +577,7 @@ export class Axis extends Component {
 					})
 				}
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					event,
@@ -584,7 +585,7 @@ export class Axis extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					event,
@@ -610,7 +611,7 @@ export class Axis extends Component {
 		return this.getComponentContainer().select(`g.axis.${axisPosition} text.axis-title`)
 	}
 
-	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
+	getNumberOfFittingTicks(size: number, tickSize: number, spaceRatio: number) {
 		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio))
 		return clamp(numberOfTicksFit, 2, axis.ticks.number)
 	}

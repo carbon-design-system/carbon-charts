@@ -1,19 +1,32 @@
 {
-	"extends": "../../tsconfig.json",
+	"$schema": "https://json.schemastore.org/tsconfig",
+	// "extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		// Temporarily copied from ../../tsconfig.json
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
 
-		/* Bundler mode */
+		// Package-specific
 		"allowImportingTsExtensions": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-
-		/* Linting */
-		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"strict": true
 	},
 	"include": ["src/**/*.tsx", "src/**/*.ts"],
+	"exclude": [
+    "src/stories",
+    "src/**/*.test.tsx"
+  ],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }

@@ -9,7 +9,8 @@ export class SkeletonLines extends Skeleton {
 	yScale: any
 	backdrop: any
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		const isSparkline =
@@ -49,8 +50,8 @@ export class SkeletonLines extends Skeleton {
 			.merge(update)
 			.attr('x1', 0)
 			.attr('x2', width)
-			.attr('y1', (d) => d)
-			.attr('y2', (d) => d)
+			.attr('y1', (d: any) => d)
+			.attr('y2', (d: any) => d)
 
 		sparklineSkeleton
 			.selectAll('line')

@@ -32,7 +32,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		const boxplotData = []
 		for (const { name: group, data } of groupedData) {
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
-			const values = data.map((d) => d[rangeIdentifier]).sort(ascending)
+			const values = data.map((d: any) => d[rangeIdentifier]).sort(ascending)
 
 			const record = {
 				[groupMapsTo]: group,
@@ -115,9 +115,9 @@ export class BoxplotChartModel extends ChartModelCartesian {
 					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (
 								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
-						  ).toLocaleString()
+							).toLocaleString()
 						: '&ndash;',
-					outliers.map((d) => d.toLocaleString()).join(',')
+					outliers.map((d: any) => d.toLocaleString()).join(',')
 				]
 			})
 		]

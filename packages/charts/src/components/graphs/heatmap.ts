@@ -2,7 +2,7 @@
 import { Component } from '../component'
 import { heatmap } from '../../configuration'
 import { Events, RenderTypes, DividerStatus } from '../../interfaces'
-import { getProperty, getTranformOffsets } from '../../tools'
+import { getProperty, getTransformOffsets } from '../../tools'
 import { DOMUtils } from '../../services'
 
 import { get } from 'lodash-es'
@@ -39,7 +39,8 @@ export class Heatmap extends Component {
 		eventsFragment.addEventListener(Events.Axis.LABEL_BLUR, this.handleAxisMouseOut)
 	}
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const svg = this.getComponentContainer({ withinChartClip: true })
 		// Lower the chart so the axes are always visible
 		svg.lower()
@@ -95,31 +96,31 @@ export class Heatmap extends Component {
 			.data(matrixArray)
 			.enter()
 			.append('g')
-			.attr('class', (d) => `heat-${d.index}`)
+			.attr('class', (d: any) => `heat-${d.index}`)
 			.classed('cell', true)
 			.attr(
 				'transform',
-				(d) => `translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(d[rangeIdentifier])})`
+				(d: any) => `translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(d[rangeIdentifier])})`
 			)
 			.append('rect')
-			.attr('class', (d) => {
+			.attr('class', (d: any) => {
 				return this.model.getColorClassName({
 					value: d.value,
 					originalClassName: `heat-${d.index}`
 				})
 			})
 			.classed('heat', true)
-			.classed('null-state', (d) => (d.index === -1 || d.value === null ? true : false))
+			.classed('null-state', (d: any) => (d.index === -1 || d.value === null ? true : false))
 			.attr('width', this.xBandwidth)
 			.attr('height', this.yBandwidth)
-			.style('fill', (d) => {
+			.style('fill', (d: any) => {
 				// Check if a valid value exists
 				if (d.index === -1 || d.value === null) {
 					return `url(#${patternID})`
 				}
 				return this.model.getFillColor(Number(d.value))
 			})
-			.attr('aria-label', (d) => d.value)
+			.attr('aria-label', (d: any) => d.value)
 
 		// Cell highlight box
 		this.createOuterBox('g.cell-highlight', this.xBandwidth, this.yBandwidth)
@@ -221,7 +222,7 @@ export class Heatmap extends Component {
 				// Dispatch event and tooltip only if value exists
 				if (!nullState) {
 					// Get transformation value of node
-					const transform = getTranformOffsets(cell.attr('transform'))
+					const transform = getTransformOffsets(cell.attr('transform'))
 
 					self.parent
 						.select('g.cell-highlight')

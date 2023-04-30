@@ -44,7 +44,7 @@ export class Histogram extends Component {
 		// Update data on all bar groups
 		const barGroups = svg
 			.selectAll('g.bars')
-			.data(binnedStackedData, (d) => get(d, `0.${groupMapsTo}`))
+			.data(binnedStackedData, (d: any) => get(d, `0.${groupMapsTo}`))
 
 		barGroups.exit().attr('opacity', 0).remove()
 
@@ -67,21 +67,21 @@ export class Histogram extends Component {
 			.classed('bar', true)
 			.attr(groupIdentifier, (d, i) => i)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'histogram-bar-update-enter',
 					animate
 				})
 			)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
 			.attr('d', (d, i) => {
 				const bin = get(d, 'data')
 
@@ -96,11 +96,11 @@ export class Histogram extends Component {
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
 				const barWidth = x(bin.x1) - x(bin.x0) - 1
-				const x0 = this.services.cartesianScales.getDomainValue(bin.x0, i)
+				const x0 = this.services.cartesianScales.getDomainValue(bin.x0, i) as number
 				const x1 = x0 + barWidth
 
-				const y0 = this.services.cartesianScales.getRangeValue(d[0], i)
-				let y1 = this.services.cartesianScales.getRangeValue(d[1], i)
+				const y0 = this.services.cartesianScales.getRangeValue(d[0], i) as number
+				let y1 = this.services.cartesianScales.getRangeValue(d[1], i) as number
 
 				// Add the divider gap
 				if (Math.abs(y1 - y0) > 0 && Math.abs(y1 - y0) > options.bars.dividerSize) {
@@ -120,7 +120,7 @@ export class Histogram extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => getProperty(d, 'data', d[groupMapsTo]))
+			.attr('aria-label', (d: any) => getProperty(d, 'data', d[groupMapsTo]))
 
 		// Add event listeners for the above elements
 		this.addEventListeners()
@@ -136,21 +136,21 @@ export class Histogram extends Component {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-bar'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-bar'
@@ -166,7 +166,7 @@ export class Histogram extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement.classed('hovered', true)
@@ -200,13 +200,13 @@ export class Histogram extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent) {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 					event
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function () {
 				const hoveredElement = select(this)
 
 				// Select all same group elements

@@ -31,7 +31,8 @@ export class Ruler extends Component {
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
 
 		this.drawBackdrop()
@@ -48,11 +49,11 @@ export class Ruler extends Component {
 		this.backdrop.on('mousemove mouseover mouseout', null)
 	}
 
-	formatTooltipData(tooltipData) {
+	formatTooltipData(tooltipData: any) {
 		return tooltipData
 	}
 
-	showRuler(event, [x, y]: [number, number]) {
+	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation()
@@ -68,16 +69,16 @@ export class Ruler extends Component {
 		const dataPointElements: GenericSvgSelection = svg.selectAll('[role=graphics-symbol]')
 
 		const pointsWithinLine = displayData
-			.map((d) => ({
-				domainValue: this.services.cartesianScales.getDomainValue(d),
+			.map((d: any) => ({
+				domainValue: this.services.cartesianScales.getDomainValue(d) as number,
 				originalData: d
 			}))
-			.filter((d) => pointIsWithinThreshold(d.domainValue, mouseCoordinate))
+			.filter((d: any) => pointIsWithinThreshold(d.domainValue, mouseCoordinate))
 
 		if (
 			this.pointsWithinLine &&
 			pointsWithinLine.length === this.pointsWithinLine.length &&
-			pointsWithinLine.map((point) => point.domainValue).join() ===
+			pointsWithinLine.map((point: any) => point.domainValue).join() ===
 				this.pointsWithinLine.map((point) => point.domainValue).join()
 		) {
 			this.pointsWithinLine = pointsWithinLine
@@ -124,17 +125,17 @@ export class Ruler extends Component {
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
 			const tooltipData = dataPointsMatchingRulerLine
-				.map((d) => d.originalData)
-				.filter((d) => {
+				.map((d: any) => d.originalData)
+				.filter((d: any) => {
 					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
 					const value = d[rangeIdentifier]
 					return value !== null && value !== undefined
 				})
 
 			// get elements on which we should trigger mouse events
-			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map((d) => d.domainValue)
-			const elementsToHighlight = dataPointElements.filter((d) => {
-				const domainValue = this.services.cartesianScales.getDomainValue(d)
+			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map((d: any) => d.domainValue)
+			const elementsToHighlight = dataPointElements.filter((d: any) => {
+				const domainValue = this.services.cartesianScales.getDomainValue(d) as number
 				return domainValuesMatchingRulerLine.includes(domainValue)
 			})
 
@@ -205,7 +206,7 @@ export class Ruler extends Component {
 
 		const displayData = this.model.getDisplayData()
 
-		let mouseMoveCallback = function (event) {
+		let mouseMoveCallback = function (event: CustomEvent) {
 			const pos = pointer(event, self.parent.node())
 
 			self.showRuler(event, pos)
@@ -216,7 +217,7 @@ export class Ruler extends Component {
 			const debounceThreshold = (displayData.length % 50) * 12.5
 
 			mouseMoveCallback = debounceWithD3MousePosition(
-				function (event) {
+				function (event: CustomEvent) {
 					const { mousePosition } = this
 					self.showRuler(event, mousePosition)
 				},

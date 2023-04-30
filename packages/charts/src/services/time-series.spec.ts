@@ -18,8 +18,8 @@ const format = (
 }
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
-	const timestamps = dataset.map((d) => d[0].getTime())
-	const formattedTicks = dataset.map((d) => d[1])
+	const timestamps = dataset.map((d: any) => d[0].getTime())
+	const formattedTicks = dataset.map((d: any) => d[1])
 	return { timestamps, formattedTicks }
 }
 

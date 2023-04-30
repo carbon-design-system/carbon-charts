@@ -20,9 +20,9 @@ export class GradientUtils extends Service {
 			.data(configs.stops)
 			.enter()
 			.append('stop')
-			.attr('offset', (d) => d.offset)
-			.style('stop-color', (d) => d.color)
-			.style('stop-opacity', (d) => d.opacity)
+			.attr('offset', (d: any) => d.offset)
+			.style('stop-color', (d: any) => d.color)
+			.style('stop-opacity', (d: any) => d.opacity)
 	}
 
 	static getOffsetRatio(domain) {

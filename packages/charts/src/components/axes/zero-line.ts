@@ -54,7 +54,7 @@ export class ZeroLine extends Component {
 		const line = DOMUtils.appendOrSelect(svg, 'line.domain')
 		line
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'zero-line-update',

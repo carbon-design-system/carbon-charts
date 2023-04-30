@@ -101,6 +101,7 @@ export type {
 	TickFormats,
 	TimeIntervalFormats,
 	// Other
+	Coordinates,
 	LegendItem,
 	LayoutComponentChild,
 	ToolbarControl

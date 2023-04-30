@@ -35,7 +35,8 @@ export class Toolbar extends Component {
 		})
 	}
 
-	render() {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		render(animate = true) {
 		const container = this.getComponentContainer()
 			.attr('role', 'toolbar')
 			.attr('aria-label', `chart-${this.services.domUtils.getChartID()} toolbar`)
@@ -80,13 +81,13 @@ export class Toolbar extends Component {
 				.attr('role', 'button')
 
 			const self = this
-			const allToolbarControls = enteringToolbarControls
+			enteringToolbarControls
 				.merge(toolbarControls)
-				.classed('disabled', (d) => d.shouldBeDisabled())
-				.attr('aria-disabled', (d) => d.shouldBeDisabled())
-				.attr('aria-label', (d) => d.title)
+				.classed('disabled', (d: any) => d.shouldBeDisabled())
+				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
+				.attr('aria-label', (d: any) => d.title)
 				.html(
-					(d) => `
+					(d: any) => `
 			<button
 				class="cds--overflow-menu__trigger cds--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
@@ -97,7 +98,7 @@ export class Toolbar extends Component {
 				</svg>
 			</button>`
 				)
-				.each(function (d, index) {
+				.each(function (d: any, index: number) {
 					select(this)
 						.select('svg')
 						.style('will-change', 'transform')
@@ -106,12 +107,12 @@ export class Toolbar extends Component {
 
 					select(this)
 						.select('button')
-						.on('click', (event) => {
+						.on('click', (event: CustomEvent) => {
 							if (!d.shouldBeDisabled()) {
 								self.triggerFunctionAndEvent(d, event, this)
 							}
 						})
-						.on('keydown', (event: KeyboardEvent) => {
+						.on('keydown', (event: any) => {
 							if ((event.key && event.key === 'Enter') || event.key === ' ') {
 								event.preventDefault()
 								self.triggerFunctionAndEvent(d, event, this)
@@ -137,14 +138,14 @@ export class Toolbar extends Component {
 		const overflowMenuControls = this.overflowMenu
 			.select('ul')
 			.selectAll('li.cds--overflow-menu-options__option')
-			.data(overflowMenuItemList, (button) => getProperty(button, 'id'))
+			.data(overflowMenuItemList, (button: any) => getProperty(button, 'id'))
 
 		overflowMenuControls.exit().remove()
 
 		const enteringOverflowMenuControls = overflowMenuControls
 			.enter()
 			.append('li')
-			.attr('id', (d) => this.services.domUtils.generateElementIDString(`control-${d.id}`))
+			.attr('id', (d: any) => this.services.domUtils.generateElementIDString(`control-${d.id}`))
 			.attr('class', 'cds--overflow-menu-options__option cds--overflow-menu-options__option')
 			.attr('role', 'menuitem')
 			.attr('tabindex', 1)
@@ -155,11 +156,11 @@ export class Toolbar extends Component {
 
 		enteringOverflowMenuControls
 			.merge(overflowMenuControls)
-			.classed('cds--overflow-menu-options__option--disabled', (d) => d.shouldBeDisabled())
-			.classed('cds--overflow-menu-options__option--disabled', (d) => d.shouldBeDisabled())
-			.attr('aria-disabled', (d) => d.shouldBeDisabled())
+			.classed('cds--overflow-menu-options__option--disabled', (d: any) => d.shouldBeDisabled())
+			.classed('cds--overflow-menu-options__option--disabled', (d: any) => d.shouldBeDisabled())
+			.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 			.selectAll('button')
-			.text((d) => d.text)
+			.text((d: any) => d.text)
 	}
 
 	isOverflowMenuOpen() {
@@ -189,7 +190,7 @@ export class Toolbar extends Component {
 	}
 
 	// Toolbar controllers
-	focusOnPreviousEnabledToolbarItem(currentItemIndex) {
+	focusOnPreviousEnabledToolbarItem(currentItemIndex: number) {
 		const buttonList = this.getToolbarButtonItems()
 		let previousItemIndex = buttonList.length
 
@@ -214,7 +215,7 @@ export class Toolbar extends Component {
 		}
 	}
 
-	focusOnNextEnabledToolbarItem(currentItemIndex) {
+	focusOnNextEnabledToolbarItem(currentItemIndex: number) {
 		const buttonList = this.getToolbarButtonItems()
 		let nextItemIndex = -1
 
@@ -240,7 +241,7 @@ export class Toolbar extends Component {
 		}
 	}
 
-	focusOnPreviousEnabledMenuItem(currentItemIndex) {
+	focusOnPreviousEnabledMenuItem(currentItemIndex: number) {
 		const overflowMenuItems = this.getOverflowMenuItems()
 		let previousItemIndex = overflowMenuItems.length
 
@@ -265,7 +266,7 @@ export class Toolbar extends Component {
 		}
 	}
 
-	focusOnNextEnabledMenuItem(currentItemIndex) {
+	focusOnNextEnabledMenuItem(currentItemIndex: number) {
 		const overflowMenuItems = this.getOverflowMenuItems()
 		let nextItemIndex = -1
 
@@ -291,7 +292,7 @@ export class Toolbar extends Component {
 		}
 	}
 
-	toggleOverflowMenu(event) {
+	toggleOverflowMenu(event: any) {
 		if (this.isOverflowMenuOpen()) {
 			// hide overflow menu
 			this.updateOverflowMenu(false)
@@ -302,7 +303,7 @@ export class Toolbar extends Component {
 			// setup overflow menu item event listener
 			const self = this
 			const overflowMenuItems = this.getOverflowMenuItems()
-			overflowMenuItems.forEach((menuItem, index) => {
+			overflowMenuItems.forEach((menuItem: any, index) => {
 				const element = select(
 					`#${this.services.domUtils.generateElementIDString(`control-${menuItem.id}`)}`
 				)
@@ -345,7 +346,7 @@ export class Toolbar extends Component {
 	}
 
 	// Calls passed function && dispatches event
-	triggerFunctionAndEvent(control, event, element?) {
+	triggerFunctionAndEvent(control: any, event: CustomEvent, element?: any) {
 		// Check if trigger is disabled
 		if (typeof control.shouldBeDisabled === 'function' && control.shouldBeDisabled()) {
 			return
@@ -372,7 +373,7 @@ export class Toolbar extends Component {
 		const buttonList = []
 		const overflowList = []
 
-		controls.forEach((control) => {
+		controls.forEach((control: any) => {
 			let controlConfig = null
 			// check if button is custom or default control
 			if (control.type === ToolbarControlTypes.CUSTOM) {
@@ -457,7 +458,7 @@ export class Toolbar extends Component {
 				<circle cx="16" cy="16" r="2"></circle>
 				<circle cx="16" cy="24" r="2"></circle>`
 			},
-			clickFunction: (event) => this.toggleOverflowMenu(event)
+			clickFunction: (event: any) => this.toggleOverflowMenu(event)
 		}
 	}
 
@@ -469,7 +470,7 @@ export class Toolbar extends Component {
 
 		const displayData = this.model.getDisplayData()
 
-		let controlConfig
+		let controlConfig: any
 		switch (controlType) {
 			case ToolbarControlTypes.ZOOM_IN:
 				if (isZoomBarEnabled) {

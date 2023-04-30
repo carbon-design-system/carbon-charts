@@ -25,7 +25,7 @@ export class HoverAxis extends Axis {
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 
 		const self = this
-		container.selectAll('g.tick').each(function (_, index) {
+		container.selectAll('g.tick').each(function (_, index: number) {
 			const g = select(this)
 			g.classed('tick-hover', true).attr('tabindex', index === 0 ? 0 : -1)
 			const textNode = g.select('text')
@@ -95,7 +95,7 @@ export class HoverAxis extends Axis {
 		const self = this
 		container
 			.selectAll('g.tick.tick-hover')
-			.on('mouseover', function (event) {
+			.on('mouseover', function (event: CustomEvent) {
 				const hoveredElement = select(this).select('text')
 				const datum = hoveredElement.datum() as string
 
@@ -114,7 +114,7 @@ export class HoverAxis extends Axis {
 					})
 				}
 			})
-			.on('mousemove', function (event) {
+			.on('mousemove', function (event: CustomEvent) {
 				const hoveredElement = select(this).select('text')
 				const datum = hoveredElement.datum() as string
 				// Dispatch mouse event
@@ -128,7 +128,7 @@ export class HoverAxis extends Axis {
 					event
 				})
 			})
-			.on('click', function (event) {
+			.on('click', function (event: CustomEvent) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					event,
@@ -136,7 +136,7 @@ export class HoverAxis extends Axis {
 					datum: select(this).select('text').datum()
 				})
 			})
-			.on('mouseout', function (event) {
+			.on('mouseout', function (event: CustomEvent) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					event,
@@ -148,7 +148,7 @@ export class HoverAxis extends Axis {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE)
 				}
 			})
-			.on('focus', function (event) {
+			.on('focus', function (event: any) {
 				const coordinates = { clientX: 0, clientY: 0 }
 
 				if (event.target) {
@@ -166,7 +166,7 @@ export class HoverAxis extends Axis {
 					datum: select(this).select('text').datum()
 				})
 			})
-			.on('blur', function (event) {
+			.on('blur', function (event: CustomEvent) {
 				// Dispatch blur event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_BLUR, {
 					event,
@@ -174,7 +174,7 @@ export class HoverAxis extends Axis {
 					datum: select(this).select('text').datum()
 				})
 			})
-			.on('keydown', function (event) {
+			.on('keydown', function (event: KeyboardEvent) {
 				// Hide the tooltip when `Escape` is pressed, but keep focus
 				if (event.key && event.key === 'Escape') {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE)
@@ -203,7 +203,7 @@ export class HoverAxis extends Axis {
 	}
 
 	// Focus on the next HTML element sibling
-	private goNext(element: HTMLElement, event: Event) {
+	private goNext(element: HTMLElement, event: KeyboardEvent) {
 		if (element.nextElementSibling && element.nextElementSibling.tagName !== 'path') {
 			element.nextElementSibling.dispatchEvent(new Event('focus'))
 		}
@@ -212,7 +212,7 @@ export class HoverAxis extends Axis {
 	}
 
 	// Focus on the previous HTML element sibling
-	private goPrevious(element: HTMLElement, event: Event) {
+	private goPrevious(element: HTMLElement, event: KeyboardEvent) {
 		if (element.previousElementSibling && element.previousElementSibling.tagName !== 'path') {
 			element.previousElementSibling.dispatchEvent(new Event('focus'))
 		}

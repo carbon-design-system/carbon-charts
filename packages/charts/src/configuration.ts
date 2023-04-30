@@ -327,7 +327,7 @@ const bubbleChart: BubbleChartOptions = merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: 'radius',
 		radiusLabel: 'Radius',
-		radiusRange: (chartSize, data) => {
+		radiusRange: (chartSize: any) => {
 			const smallerChartDimension = Math.min(chartSize.width, chartSize.height)
 			return [(smallerChartDimension * 3) / 400, (smallerChartDimension * 25) / 400]
 		},
@@ -406,7 +406,7 @@ const wordCloudChart: WorldCloudChartOptions = merge({}, chart, {
 	}) as WordCloudChartTooltipOptions,
 	wordCloud: {
 		fontSizeMapsTo: 'value',
-		fontSizeRange: (chartSize, data) => {
+		fontSizeRange: (chartSize: any) => {
 			const smallerChartDimension = Math.min(chartSize.width, chartSize.height)
 			return [(smallerChartDimension * 20) / 400, (smallerChartDimension * 75) / 400]
 		},
@@ -440,18 +440,18 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
 		deltaArrow: {
-			size: (radius) => radius / 8,
+			size: (radius: number) => radius / 8,
 			enabled: true
 		},
 		showPercentageSymbol: true,
 		status: null,
 		numberSpacing: 10,
-		deltaFontSize: (radius) => radius / 8,
-		valueFontSize: (radius) => radius / 2.5,
-		numberFormatter: (number) =>
-			number.toFixed(2) % 1 !== 0
-				? number.toFixed(2).toLocaleString()
-				: number.toFixed().toLocaleString(),
+		deltaFontSize: (radius: number) => radius / 8,
+		valueFontSize: (radius: number) => radius / 2.5,
+		numberFormatter: (value: number) =>
+		Number(value.toFixed(2)) % 1 !== 0
+				? value.toFixed(2).toLocaleString()
+				: value.toFixed().toLocaleString(),
 		alignment: Alignments.LEFT
 	}
 } as GaugeChartOptions)
@@ -462,8 +462,8 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 const donutChart: DonutChartOptions = merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: (radius) => Math.min((radius / 100) * 24, 24) + 'px',
-			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + 'px',
+			numberFontSize: (radius) => `${Math.min((radius / 100) * 24, 24)}px`,
+			titleFontSize: (radius) => `${Math.min((radius / 100) * 15, 15)}px`,
 			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
 			numberFormatter: (number) => Math.floor(number).toLocaleString()
 		},

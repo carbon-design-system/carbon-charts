@@ -51,22 +51,22 @@ export class SimpleBar extends Bar {
 			.classed('bar', true)
 			.attr('width', this.getBarWidth.bind(this))
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'bar-update-enter',
 					animate
 				})
 			)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d, i) => {
+			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d: any, i: number) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -77,9 +77,9 @@ export class SimpleBar extends Bar {
 				const barWidth = this.getBarWidth()
 				const value = d[rangeIdentifier]
 
-				const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2
+				const x0 = this.services.cartesianScales.getDomainValue(d) - barWidth / 2
 				const x1 = x0 + barWidth
-				let y0, y1
+				let y0: number, y1: number
 				if (Array.isArray(value) && value.length === 2) {
 					y0 = this.services.cartesianScales.getRangeValue(value[0])
 					y1 = this.services.cartesianScales.getRangeValue(value[1], i)
@@ -115,7 +115,7 @@ export class SimpleBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d.value)
+			.attr('aria-label', (d: any) => d.value)
 
 		// Add event listeners to elements drawn
 		this.addEventListeners()
@@ -128,20 +128,20 @@ export class SimpleBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-simple-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-simple-bar'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-simple-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-simple-bar'
@@ -154,7 +154,7 @@ export class SimpleBar extends Bar {
 		const self = this
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -171,7 +171,7 @@ export class SimpleBar extends Bar {
 					data: [datum]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					event,
@@ -183,7 +183,7 @@ export class SimpleBar extends Bar {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					event,
@@ -191,7 +191,7 @@ export class SimpleBar extends Bar {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 

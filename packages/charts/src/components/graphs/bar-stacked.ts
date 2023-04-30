@@ -44,7 +44,7 @@ export class StackedBar extends Bar {
 		const activeDataGroupNames = this.model.getActiveDataGroupNames()
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll('g.bars').data(stackData, (d) => getProperty(d, 0, groupMapsTo))
+		const barGroups = svg.selectAll('g.bars').data(stackData, (d: any) => getProperty(d, 0, groupMapsTo))
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -65,8 +65,8 @@ export class StackedBar extends Bar {
 			.selectAll('g.bars')
 			.selectAll('path.bar')
 			.data(
-				(d) => d,
-				(d) => d.data.sharedStackKey
+				(d: any) => d,
+				(d: any) => d.data.sharedStackKey
 			)
 
 		// Remove bars that need to be removed
@@ -78,23 +78,23 @@ export class StackedBar extends Bar {
 			.merge(bars)
 			.classed('bar', true)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'bar-update-enter',
 					animate
 				})
 			)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d, i) => {
-				const key = d.data.sharedStackKey
+			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
+			.attr('d', (d: any, i: number) => {
+				const key = d.data.sharedStackKey as string
 
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -103,7 +103,7 @@ export class StackedBar extends Bar {
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
 				const barWidth = this.getBarWidth()
-				const x0 = this.services.cartesianScales.getDomainValue(key, i) - barWidth / 2
+				const x0 = this.services.cartesianScales.getDomainValue(key) - barWidth / 2
 				const x1 = x0 + barWidth
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i)
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i)
@@ -140,7 +140,7 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'bar')
-			.attr('aria-label', (d) => d[1] - d[0])
+			.attr('aria-label', (d: any) => d[1] - d[0])
 
 		// Add event listeners for the above elements
 		this.addEventListeners()
@@ -155,21 +155,21 @@ export class StackedBar extends Bar {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-hover-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-bar'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.bar')
 			.transition('legend-mouseout-bar')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-bar'
@@ -185,7 +185,7 @@ export class StackedBar extends Bar {
 		const self = this
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -198,7 +198,7 @@ export class StackedBar extends Bar {
 
 				const displayData = self.model.getDisplayData(self.configs.groups)
 
-				let matchingDataPoint = displayData.find((d) => {
+				let matchingDataPoint = displayData.find((d: any) => {
 					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d)
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier(d)
 					return (
@@ -226,7 +226,7 @@ export class StackedBar extends Bar {
 					data: [matchingDataPoint]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -240,7 +240,7 @@ export class StackedBar extends Bar {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					event,
@@ -248,7 +248,7 @@ export class StackedBar extends Bar {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -269,7 +269,7 @@ export class StackedBar extends Bar {
 	protected getBarWidth() {
 		const options = this.getOptions()
 		if (getProperty(options, 'bars', 'width')) {
-			return options.bars.width
+			return options.bars.width as number
 		}
 		const mainXScale = this.services.cartesianScales.getMainXScale()
 		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {

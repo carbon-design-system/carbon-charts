@@ -12,7 +12,7 @@ import { select } from 'd3-selection'
 // Carbon colors
 import { colors } from '@carbon/colors'
 
-const findColorShade = (hex) => {
+const findColorShade = (hex: string) => {
 	if (!hex) {
 		return null
 	}
@@ -39,7 +39,7 @@ const textFillColor = function () {
 	)
 	const cl = color(correspondingLeafFill) as any
 
-	let colorShade
+	let colorShade: any
 	if (cl) {
 		colorShade = findColorShade(cl ? cl.hex() : null)
 	}
@@ -68,7 +68,7 @@ export class Treemap extends Component {
 	render(animate = true) {
 		const svg = this.getComponentContainer()
 
-		const allData = this.model.getData()
+		this.model.getData()
 		const displayData = this.model.getDisplayData()
 		const options = this.model.getOptions()
 
@@ -88,11 +88,10 @@ export class Treemap extends Component {
 		const root = d3Treemap().size([width, height]).paddingInner(1).paddingOuter(0).round(true)(
 			hierarchy
 		)
-		const { transitions } = this.services
 
 		const leafGroups = svg
 			.selectAll("g[data-name='leaf']")
-			.data(root.leaves(), (leaf) => leaf.data.name)
+			.data(root.leaves(), (leaf: any) => leaf.data.name)
 
 		// Remove leaf groups that need to be removed
 		leafGroups.exit().attr('opacity', 0).remove()
@@ -109,16 +108,16 @@ export class Treemap extends Component {
 		allLeafGroups
 			.attr('data-name', 'leaf')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'treemap-group-update',
 					animate
 				})
 			)
-			.attr('transform', (d) => `translate(${d.x0},${d.y0})`)
+			.attr('transform', (d: any) => `translate(${d.x0},${d.y0})`)
 
-		const rects = allLeafGroups.selectAll('rect.leaf').data((d) => [d])
+		const rects = allLeafGroups.selectAll('rect.leaf').data((d: any) => [d])
 
 		rects.exit().attr('width', 0).attr('height', 0).remove()
 
@@ -132,7 +131,7 @@ export class Treemap extends Component {
 				const uid = select(this.parentNode).attr('data-uid')
 				return `${options.style.prefix}-leaf-${uid}`
 			})
-			.attr('class', (d) => {
+			.attr('class', (d: any) => {
 				while (d.depth > 1) d = d.parent
 
 				return this.model.getColorClassName({
@@ -142,16 +141,16 @@ export class Treemap extends Component {
 				})
 			})
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'treemap-leaf-update-enter',
 					animate
 				})
 			)
-			.attr('width', (d) => d.x1 - d.x0)
-			.attr('height', (d) => d.y1 - d.y0)
-			.style('fill', (d) => {
+			.attr('width', (d: any) => d.x1 - d.x0)
+			.attr('height', (d: any) => d.y1 - d.y0)
+			.style('fill', (d: any) => {
 				while (d.depth > 1) d = d.parent
 				return this.model.getFillColor(d.data.name)
 			})
@@ -160,17 +159,17 @@ export class Treemap extends Component {
 		allLeafGroups
 			.selectAll('clipPath')
 			.data(
-				(d) => {
+				(d: any) => {
 					if (d.data.showLabel !== true) {
 						return []
 					}
 
 					return [1]
 				},
-				(d) => d
+				(d: any) => d
 			)
 			.join(
-				(enter) => {
+				(enter: any) => {
 					enter
 						.append('clipPath')
 						.attr('id', function () {
@@ -185,15 +184,16 @@ export class Treemap extends Component {
 							return new URL(`#${leafID}`, windowLocation) + ''
 						})
 				},
-				(update) => null,
-				(exit) => exit.remove()
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				(update: any) => null,
+				(exit: any) => exit.remove()
 			)
 
 		// Update all titles
 		allLeafGroups
 			.selectAll('text')
 			.data(
-				(d) => {
+				(d: any) => {
 					if (d.data.showLabel !== true) {
 						return []
 					}
@@ -208,13 +208,13 @@ export class Treemap extends Component {
 						}
 					]
 				},
-				(d) => d
+				(d: any) => d
 			)
 			.join(
-				(enter) => {
+				(enter: any) => {
 					const addedText = enter
 						.append('text')
-						.text((d) => d.text)
+						.text((d: any) => d.text)
 						.style('fill', textFillColor)
 						.attr('x', 7)
 						.attr('y', 18)
@@ -228,8 +228,8 @@ export class Treemap extends Component {
 						})
 					}
 				},
-				(update) => update.text((d) => d.text).style('fill', textFillColor),
-				(exit) => exit.remove()
+				(update: any) => update.text((d: any) => d.text).style('fill', textFillColor),
+				(exit: any) => exit.remove()
 			)
 
 		// Add event listeners to elements drawn
@@ -240,7 +240,7 @@ export class Treemap extends Component {
 		const self = this
 		this.parent
 			.selectAll('rect.leaf')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				let fillColor = getComputedStyle(this, null).getPropertyValue('fill')
 
@@ -249,7 +249,7 @@ export class Treemap extends Component {
 
 				hoveredElement
 					.transition('graph_element_mouseover_fill_update')
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'graph_element_mouseover_fill_update'
@@ -287,7 +287,7 @@ export class Treemap extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -301,7 +301,7 @@ export class Treemap extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Treemap.LEAF_CLICK, {
 					event,
@@ -309,7 +309,7 @@ export class Treemap extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -318,7 +318,7 @@ export class Treemap extends Component {
 
 				hoveredElement
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'graph_element_mouseout_fill_update'
@@ -346,20 +346,20 @@ export class Treemap extends Component {
 		this.parent
 			.selectAll("g[data-name='leaf']")
 			.transition('legend-hover-treemap')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-treemap'
 				})
 			)
-			.attr('opacity', (d) => (d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3))
+			.attr('opacity', (d: any) => (d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3))
 	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll("g[data-name='leaf']")
 			.transition('legend-mouseout-treemap')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-treemap'

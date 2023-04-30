@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Workspace for building Carbon charting components for Angular",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -25,20 +25,17 @@
   ],
   "scripts": {
     "ng": "ng",
-    "cp:styles": "cp ../charts/dist/styles.* dist",
+    "styles": "cp ../charts/dist/styles.* dist",
     "license": "cp ../../LICENSE.md ./",
-    "build:package": "ng build && yarn cp:styles && yarn license",
-    "storybook": "ng run charts-angular:storybook",
-    "start": "yarn storybook",
+    "build:package": "ng build && yarn styles && yarn license",
     "build:demo": "ng run charts-angular:build-storybook",
     "build": "yarn build:package && yarn license && yarn build:demo",
-    "clean": "rm -rf dist demo/bundle",
-    "lint": "ng lint",
+    "storybook": "ng run charts-angular:storybook",
+    "start": "yarn storybook",
     "test": "ng test",
-    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint",
     "format": "prettier --write projects/charts-angular/src/ --ignore-path ../../.eslintignore",
-    "format:diff": "prettier --list-different projects/charts-angular/src/ --ignore-path ../../.gitignore",
-    "ci-check": "yarn format:diff"
+    "clean": "rm -rf dist demo/bundle"
   },
   "peerDependencies": {
     "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
@@ -64,7 +61,7 @@
     "@angular-devkit/build-angular": "^15.2.7",
     "@angular/cli": "^15.2.7",
     "@angular/compiler-cli": "^15.2.8",
-    "@babel/core": "^7.21.4",
+    "@babel/core": "^7.21.5",
     "@carbon/telemetry": "~0.1.0",
     "@compodoc/compodoc": "^1.1.19",
     "@stackblitz/sdk": "^1.9.0",

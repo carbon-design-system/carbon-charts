@@ -19,7 +19,8 @@ export class ChartBrush extends Component {
 
 	frontSelectionSelector = 'rect.frontSelection' // needs to match the class name in _grid-brush.scss
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const svg = this.parent
 
 		// use this area to display selection above all graphs
@@ -53,7 +54,7 @@ export class ChartBrush extends Component {
 				}
 			}
 
-			const updateSelectionDash = (selection) => {
+			const updateSelectionDash = (selection: any) => {
 				// set end drag point to dash
 				const selectionWidth = selection[1] - selection[0]
 				let dashArray = '0,' + selectionWidth.toString() // top (invisible)
@@ -74,7 +75,7 @@ export class ChartBrush extends Component {
 				frontSelection.attr('stroke-dasharray', dashArray)
 			}
 
-			const brushEventHandler = (event) => {
+			const brushEventHandler = (event: any) => {
 				// selection range: [0, width]
 				const selection = event.selection
 				if (selection === null || selection[0] === selection[1]) {
@@ -115,7 +116,9 @@ export class ChartBrush extends Component {
 				}
 			}
 
-			const brushed = (event) => {
+			let brush
+
+			const brushed = (event: any) => {
 				// max selection range: [0, width]
 				const selection = event.selection
 
@@ -129,19 +132,22 @@ export class ChartBrush extends Component {
 					frontSelection.style('display', 'none')
 				}
 			}
-			// leave some space to display selection strokes besides axis
-			const brush = brushX()
-				.extent([
-					[0, 0],
-					[width - 1, height]
-				])
-				.on('start brush end', brushEventHandler)
-				.on('end.brushed', brushed)
 
-			brushArea.call(brush)
+			if (height != 0 && width != 0) {
+				// leave some space to display selection strokes beside axes
+				brush = brushX()
+					.extent([
+						[0, 0],
+						[ width - 1, height]
+					])
+					.on('start brush end', brushEventHandler)
+					.on('end.brushed', brushed)
+
+				brushArea.call(brush)
+			}
 
 			const zoomRatio = this.services.zoom.getZoomRatio()
-			backdrop.on('click', function (event) {
+			backdrop.on('click', function (event: MouseEvent) {
 				if (event.shiftKey) {
 					const holder = this.services.domUtils.getHolder()
 

@@ -31,7 +31,7 @@ export class Tooltip extends Component {
 		this.init()
 	}
 
-	handleShowTooltip = (e) => {
+	handleShowTooltip = (e: any) => {
 		const data = e.detail.data || e.detail.items
 
 		let defaultHTML
@@ -200,7 +200,8 @@ export class Tooltip extends Component {
 		return value.toLocaleString()
 	}
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const options = this.getOptions()
 		const isTooltipEnabled = getProperty(options, 'tooltip', 'enabled')
 		if (isTooltipEnabled) {

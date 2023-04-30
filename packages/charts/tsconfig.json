@@ -1,7 +1,22 @@
 {
-	"extends": "../../tsconfig.json",
+	"$schema": "https://json.schemastore.org/tsconfig",
+	// "extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"useDefineForClassFields": false, // prevents 7 TypeScript errors related to missing declare statements and 1 where 'services' is used before its initialization
+		// Temporarily copied from ../../tsconfig.json
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+
+		// Package-specific settings
+		"useDefineForClassFields": false, // TODO: Fix the 7 issues
+		"strict": false, // TODO: Address TypeScript issues in project so strict can be true
 	},
 	"include": ["src/**/*"],
 	"references": [{ "path": "./tsconfig.vite.json" }]

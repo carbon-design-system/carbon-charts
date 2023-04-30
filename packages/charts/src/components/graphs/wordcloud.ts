@@ -46,7 +46,7 @@ export class WordCloud extends Component {
 		const layout = cloud()
 			.size([width, height])
 			.words(
-				displayData.map(function (d) {
+				displayData.map(function (d: any) {
 					const value = d[fontSizeMapsTo]
 
 					if (typeof d[fontSizeMapsTo] !== 'number') {
@@ -65,7 +65,7 @@ export class WordCloud extends Component {
 			)
 			.padding(5)
 			.rotate(0)
-			.fontSize((d) => fontSizeScale(d.size))
+			.fontSize((d: any) => fontSizeScale(d.size))
 			.on('end', draw)
 
 		layout.start()
@@ -74,7 +74,7 @@ export class WordCloud extends Component {
 			const textGroup = DOMUtils.appendOrSelect(svg, 'g.words')
 			textGroup.attr('transform', `translate(${layout.size()[0] / 2}, ${layout.size()[1] / 2})`)
 
-			const allText = textGroup.selectAll('text').data(words, (d) => `${d[groupMapsTo]}-${d.text}`)
+			const allText = textGroup.selectAll('text').data(words, (d: any) => `${d[groupMapsTo]}-${d.text}`)
 
 			// Remove texts that are no longer needed
 			allText.exit().attr('opacity', 0).remove()
@@ -83,30 +83,30 @@ export class WordCloud extends Component {
 
 			enteringText
 				.merge(allText)
-				.style('font-size', (d) => `${d.size}px`)
-				.text(function (d) {
+				.style('font-size', (d: any) => `${d.size}px`)
+				.text(function (d: any) {
 					return d.text
 				})
-				.attr('class', (d) =>
+				.attr('class', (d: any) =>
 					self.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: d[groupMapsTo],
 						originalClassName: `word ${d.size > 32 ? 'light' : ''}`
 					})
 				)
-				.style('fill', (d) => {
+				.style('fill', (d: any) => {
 					return self.model.getFillColor(d[groupMapsTo], d.text, d)
 				})
 				.attr('text-anchor', 'middle')
 				.transition()
-				.call((t) =>
+				.call((t: any) =>
 					self.services.transitions.setupTransition({
 						transition: t,
 						name: 'wordcloud-text-update-enter',
 						animate
 					})
 				)
-				.attr('transform', (d) => `translate(${d.x}, ${d.y})`)
+				.attr('transform', (d: any) => `translate(${d.x}, ${d.y})`)
 				.attr('opacity', 1)
 		}
 
@@ -119,7 +119,7 @@ export class WordCloud extends Component {
 		const { fontSizeMapsTo } = options.wordCloud
 
 		// Filter out any null/undefined values
-		const allOccurences = data.map((d) => d[fontSizeMapsTo]).filter((size) => size)
+		const allOccurences = data.map((d: any) => d[fontSizeMapsTo]).filter((size: any) => size)
 		const chartSize = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 
 		// We need the ternary operator here in case the user
@@ -140,21 +140,21 @@ export class WordCloud extends Component {
 		this.parent
 			.selectAll('text.word')
 			.transition('legend-hover-wordcloud')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-hover-wordcloud'
 				})
 			)
-			.attr('opacity', (d) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('text.word')
 			.transition('legend-mouseout-wordcloud')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-wordcloud'
@@ -169,11 +169,11 @@ export class WordCloud extends Component {
 		const self = this
 
 		// Highlights 1 word or unhighlights all
-		const debouncedHighlight = debounce((word) => {
+		const debouncedHighlight = debounce((word: any) => {
 			const allWords = self.parent
 				.selectAll('text.word')
 				.transition('wordcloud-word-mouse-highlight')
-				.call((t) =>
+				.call((t: any) =>
 					self.services.transitions.setupTransition({
 						transition: t,
 						name: 'wordcloud-word-mouse-highlight'
@@ -195,7 +195,7 @@ export class WordCloud extends Component {
 
 		this.parent
 			.selectAll('text.word')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = this
 				debouncedHighlight(hoveredElement)
 
@@ -230,7 +230,7 @@ export class WordCloud extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -244,7 +244,7 @@ export class WordCloud extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.WordCloud.WORD_CLICK, {
 					event,
@@ -252,7 +252,7 @@ export class WordCloud extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedHighlight(null)
 

@@ -59,7 +59,7 @@ export type {
 	ZoomBarsOptions
 } from './components'
 
-export type { LayoutConfigs } from './layout'
+export type { Coordinates, LayoutConfigs } from './layout'
 
 export type { ChartConfig, ChartData, ChartTabularData, DataSet } from './model'
 

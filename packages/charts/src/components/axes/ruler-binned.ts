@@ -33,7 +33,7 @@ export class BinnedRuler extends Ruler {
 
 		const dataPointElements: GenericSvgSelection = svg.selectAll('[role=graphics-symbol]')
 
-		const elementsToHighlight = dataPointElements.filter((d) => {
+		const elementsToHighlight = dataPointElements.filter((d: any) => {
 			if (
 				parseFloat(get(d, 'data.x0')) <= correspondingDomainValue &&
 				parseFloat(get(d, 'data.x1')) >= correspondingDomainValue
@@ -70,7 +70,7 @@ export class BinnedRuler extends Ruler {
 
 			const tooltipDataGroups = activeDataGroupNames
 				.reverse()
-				.map((dataGroupName) => ({
+				.map((dataGroupName: string) => ({
 					label: dataGroupName,
 					value: get(sampleMatchData, `data.${dataGroupName}`),
 					class: this.model.getColorClassName({
@@ -78,7 +78,7 @@ export class BinnedRuler extends Ruler {
 						dataGroupName
 					})
 				}))
-				.filter((d) => d.value !== 0)
+				.filter((d: any) => d.value !== 0)
 			const thereIsMatchingData = tooltipDataGroups.length > 0
 
 			if (thereIsMatchingData) {
@@ -96,7 +96,7 @@ export class BinnedRuler extends Ruler {
 									{
 										label: get(options, 'tooltip.totalLabel') || 'Total',
 										value: activeDataGroupNames.reduce(
-											(accum, currentValue) =>
+											(accum: number, currentValue: any) =>
 												accum + parseFloat(get(sampleMatchData, `data.${currentValue}`)),
 											0
 										)

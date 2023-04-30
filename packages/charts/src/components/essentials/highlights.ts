@@ -1,7 +1,7 @@
 import { Component } from '../component'
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 import type { ChartModel } from '../../model/model'
-import { AxisPositions, RenderTypes } from '../../interfaces'
+import { AxisPositions, type CartesianOrientations, RenderTypes } from '../../interfaces'
 
 // D3 Imports
 import { select } from 'd3-selection'
@@ -26,7 +26,7 @@ export class Highlight extends Component {
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 		const highlightData = []
 
-		Object.keys(axesOptions).forEach((axisPosition) => {
+		Object.keys(axesOptions).forEach((axisPosition: any) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
 				const axisOptions = axesOptions[axisPosition]
 				if (axisOptions.highlights && axisOptions.highlights.data.length > 0) {
@@ -48,7 +48,7 @@ export class Highlight extends Component {
 		// Update data on all axis highlight groups
 		const highlightAxisGroups = svg
 			.selectAll('g.axis-highlight')
-			.data(highlightData, (highlightData) => highlightData.axisPosition)
+			.data(highlightData, (highlightData: any) => highlightData.axisPosition)
 
 		// Remove axis highlight groups that are no longer needed
 		highlightAxisGroups.exit().attr('opacity', 0).remove()
@@ -57,10 +57,10 @@ export class Highlight extends Component {
 		const highlightAxisGroupsEnter = highlightAxisGroups.enter().append('g')
 
 		const highlightAxisGroupsMerge = highlightAxisGroupsEnter.merge(highlightAxisGroups)
-		highlightAxisGroupsMerge.attr('class', (d) => `axis-highlight ${d.axisPosition}`)
+		highlightAxisGroupsMerge.attr('class', (d: any) => `axis-highlight ${d.axisPosition}`)
 
-		const highlightGroups = highlightAxisGroupsMerge.selectAll('g.highlight-group').data((d) =>
-			d.highlight.map((highlight) => {
+		const highlightGroups = highlightAxisGroupsMerge.selectAll('g.highlight-group').data((d: any) =>
+			d.highlight.map((highlight: any) => {
 				highlight.axisPosition = d.axisPosition
 				highlight.highlightStartMapsTo = d.highlightStartMapsTo
 				highlight.labelMapsTo = d.labelMapsTo
@@ -90,9 +90,9 @@ export class Highlight extends Component {
 			const [yScaleEnd, yScaleStart] = mainYScale.range()
 
 			const { cartesianScales } = self.services
-			const orientation = cartesianScales.getOrientation()
-			const getDomainValue = (d) => cartesianScales.getDomainValue(d)
-			const getRangeValue = (d) => cartesianScales.getRangeValue(d)
+			const orientation = cartesianScales.getOrientation() as CartesianOrientations
+			const getDomainValue = (d: any) => cartesianScales.getDomainValue(d) as number
+			const getRangeValue = (d: any) => cartesianScales.getRangeValue(d) as number
 			const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 				getDomainValue,
 				getRangeValue,
@@ -104,7 +104,7 @@ export class Highlight extends Component {
 				group
 					.selectAll('rect.highlight-bar')
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'highlight-bar-update',
@@ -132,7 +132,7 @@ export class Highlight extends Component {
 				group
 					.selectAll('rect.highlight-bar')
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						self.services.transitions.setupTransition({
 							transition: t,
 							name: 'highlight-bar-update',
