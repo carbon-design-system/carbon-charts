@@ -53,6 +53,7 @@
     "LICENSE.md"
   ],
   "scripts": {
+    "postinstall": "carbon-telemetry collect --install",
     "bundle:package": "vite build",
     "styles:scss:charts": "cp -a src/styles/. dist/styles",
     "styles:css:charts": "sass src/styles/styles.scss dist/styles.css --load-path=./node_modules",

@@ -3,6 +3,7 @@
 	"version": "1.7.5",
 	"description": "Carbon charting components for Svelte",
 	"scripts": {
+		"postinstall": "carbon-telemetry collect --install",
 		"styles": "cp ../core/dist/styles.* dist",
 		"license": "cp ../../LICENSE.md ./",
 		"build:package": "svelte-kit sync && svelte-package && yarn styles && yarn license",

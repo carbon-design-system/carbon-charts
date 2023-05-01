@@ -25,6 +25,7 @@
     "LICENSE.md"
   ],
   "scripts": {
+    "postinstall": "carbon-telemetry collect --install",
     "license": "cp ../../LICENSE.md ./",
     "styles": "cp ../core/dist/styles.* dist",
     "build:package": "vite build && yarn license && yarn styles",
