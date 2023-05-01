@@ -3,6 +3,7 @@
 	"version": "1.7.5",
 	"description": "Carbon charting components for Svelte",
 	"scripts": {
+		"postinstall": "carbon-telemetry collect --install",
 		"styles": "cp ../charts/dist/styles.* dist",
 		"license": "cp ../../LICENSE.md ./",
 		"build:package": "svelte-kit sync && svelte-package && publint && yarn license && yarn styles",
@@ -39,7 +40,6 @@
 		"svelte": "^3.58.0"
 	},
 	"devDependencies": {
-		"postinstall": "carbon-telemetry collect --install",
 		"@carbon/charts": "workspace:*",
 		"@carbon/telemetry": "~0.1.0",
 		"@storybook/addon-essentials": "^7.0.7",
@@ -54,8 +54,8 @@
 		"@sveltejs/adapter-auto": "^2.0.1",
 		"@sveltejs/kit": "^1.15.9",
 		"@sveltejs/package": "^2.0.2",
-		"@typescript-eslint/eslint-plugin": "^5.59.1",
-		"@typescript-eslint/parser": "^5.59.1",
+		"@typescript-eslint/eslint-plugin": "^5.59.2",
+		"@typescript-eslint/parser": "^5.59.2",
 		"codesandbox": "^2.2.3",
 		"eslint": "^8.39.0",
 		"eslint-config-prettier": "^8.8.0",

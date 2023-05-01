@@ -25,6 +25,7 @@
     "LICENSE.md"
   ],
   "scripts": {
+    "postinstall": "carbon-telemetry collect --install",
     "license": "cp ../../LICENSE.md ./",
     "styles": "cp ../charts/dist/styles.* dist",
     "build:package": "vite build && yarn license && yarn styles",
@@ -40,7 +41,6 @@
     "vue": "^3.2.0"
   },
   "dependencies": {
-    "postinstall": "carbon-telemetry collect --install",
     "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "~0.1.0",
     "vue": "^3.2.47"
