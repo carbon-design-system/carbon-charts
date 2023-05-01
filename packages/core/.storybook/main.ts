@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/html-vite'
 
 const config: StorybookConfig = {
 	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.ts'],
+	staticDirs: ['assets'],
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -17,7 +18,7 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag'
 	},
-	staticDirs: ['assets'],
+
 	async viteFinal(config, _) {
 		if (config.build) {
 			config.build.chunkSizeWarningLimit = 1600

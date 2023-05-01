@@ -1,0 +1,87 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { DiagramExample1 } from './diagram-example1.component'
+import '@carbon/charts/demo/styles.css'
+
+<Meta title="Diagrams/Example 1" component={DiagramExample1} />
+export const Template = args => ({ props: args })
+
+# Diagrams
+
+Angular components for building diagram experiences, using the Carbon Design System.
+
+> Note: Carbon Charts does not provide layouts for diagrams. You can utilize these components alongside graphing libraries, or by composing your own layouts (see section 3).
+
+## Example 1: Simple static layout
+
+<Canvas>
+	<Story name="Example 1">
+	  {Template.bind({})}
+	</Story>
+</Canvas>
+
+```ts
+// diagram-example.component.ts
+import { Component } from '@angular/core'
+import { UserModule, WikisModule } from '@carbon/icons-angular'
+import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../'
+
+@Component({
+	selector: 'diagram-example1',
+  standalone: true,
+	templateUrl: './diagram-example1.component.html',
+  imports: [ CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule, UserModule, WikisModule ]
+})
+export class DiagramExample1 {
+  source = { x: 0, y: 48 }
+  target = { x: 396, y: 48 }
+  markerEnd = 'marker'
+  nodeHeight = 64
+  nodeWidth = 200
+  circleSize = 64
+}
+```
+
+```html
+<!-- diagram-example1.component.html -->
+<svg height="124" width="600" style="margin-top: 1em;" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <svg:defs>
+    <svg:marker ibm-graph-marker-arrow-right [id]="markerEnd"></svg:marker>
+  </svg:defs>
+
+  <svg:g ibm-graph-edge [source]="source" [target]="target" variant="dash-sm" [markerEnd]="markerEnd" ></svg:g>
+
+  <svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(0, 16)'">
+    <xhtml:div>
+      <ibm-diagram-card-node as="button">
+        <ibm-diagram-card-node-column>
+          <svg ibmIconUser size="20"></svg>
+        </ibm-diagram-card-node-column>
+        <ibm-diagram-card-node-column>
+          <ibm-diagram-card-node-title>
+            Title
+          </ibm-diagram-card-node-title>
+          <ibm-diagram-card-node-subtitle>
+            Description
+          </ibm-diagram-card-node-subtitle>
+        </ibm-diagram-card-node-column>
+      </ibm-diagram-card-node>
+    </xhtml:div>
+  </svg:foreignObject>
+
+  <svg:foreignObject style="overflow: visible" [attr.height]="nodeHeight" [attr.width]="nodeWidth" [attr.transform]="'translate(400, 16)'">
+    <xhtml:div>
+      <ibm-diagram-shape-node as="button" title="Title" [size]="circleSize" [renderIcon]="wikiTemplate"></ibm-diagram-shape-node>
+    </xhtml:div>
+  </svg:foreignObject>
+</svg>
+
+<ng-template #wikiTemplate>
+  <svg ibmIconWikis size="20"></svg>
+</ng-template>
+```
+
+
+A simple composed diagram, using statically defined x and y coordinates.
+
+2. Programatic static layout
+

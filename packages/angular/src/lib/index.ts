@@ -1,16 +1,11 @@
-/*
- * Public API Surface of charts-angular
- */
-
 export {
-	// charts
 	AlluvialChart,
 	AreaChart,
 	BaseChart,
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ChartsModule, // <-- Module
+	ChartsModule,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,
@@ -29,24 +24,26 @@ export {
 	StackedBarChart,
 	TreeChart,
 	TreemapChart,
-	WordCloudChart,
-	// diagrams
+	WordCloudChart
+} from './charts'
+
+export {
 	CardNodeColumn,
 	CardNode,
 	CardNodeLabel,
 	CardNodeSubtitle,
 	CardNodeTitle,
-	CardNodeModule, // <-- Module
+	CardNodeModule,
 	Edge,
-	EdgeModule, // <-- Module
+	EdgeModule,
 	MarkerArrowLeft,
 	MarkerArrowRight,
 	Marker,
 	MarkerDiamond,
-	MarkerModule, // <-- Module
+	MarkerModule,
 	MarkerShapeNode,
 	MarkerSquare,
 	MarkerTee,
 	ShapeNode,
-	ShapeNodeModule // <-- Module
-} from './lib'
+	ShapeNodeModule
+} from './diagrams'

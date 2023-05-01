@@ -2,13 +2,87 @@
   "name": "@carbon/charts-angular",
   "version": "1.7.5",
   "description": "Carbon charting components for Angular",
-  "main": "index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/main.d.ts",
+  "typings": "./dist/main.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs",
+      "esm2020": "./dist/index.mjs",
+      "browser": {
+        "import": "./dist/index.mjs"
+      },
+      "import": "./dist/index.mjs"
+    },
+    "./styles.min.css": "./dist/styles.min.css",
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.md"
+  ],
   "scripts": {
-    "build": "bash build.sh",
-    "storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-    "demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
-    "clean": "rm -rf dist demo/bundle",
-    "start": "yarn storybook"
+    "license": "cp ../../LICENSE.md ./",
+    "styles": "cp ../core/dist/styles.* dist",
+    "build:package": "vite build && yarn license && yarn styles",
+    "build:demo": "storybook build -o demo/bundle --quiet",
+    "build": "yarn build:package && yarn build:demo",
+    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
+    "storybook": "storybook dev -p 9006",
+    "start": "yarn storybook",
+    "format": "prettier --write src/ --ignore-path ../../.gitignore",
+    "clean": "rm -rf dist demo/bundle"
+  },
+  "peerDependencies": {
+    "@angular/common": "*",
+    "@angular/core": "*"
+  },
+  "dependencies": {
+    "@angular/common": "16.0.0-rc.3",
+    "@angular/core": "16.0.0-rc.3",
+    "@carbon/charts": "workspace:*",
+    "@carbon/icons-angular": "^11.2.2",
+    "@carbon/telemetry": "~0.1.0"
+  },
+  "devDependencies": {
+    "@angular/animations": "16.0.0-rc.3",
+    "@angular/compiler": "16.0.0-rc.3",
+    "@angular/platform-browser": "16.0.0-rc.3",
+    "@babel/core": "^7.21.5",
+    "@stackblitz/sdk": "^1.9.0",
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/addon-interactions": "^7.0.7",
+    "@storybook/addon-links": "^7.0.7",
+    "@storybook/angular": "^7.0.7",
+    "@storybook/blocks": "^7.0.7",
+    "@storybook/html": "^7.0.7",
+    "@storybook/html-vite": "^7.0.7",
+    "@storybook/manager-api": "^7.0.7",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/theming": "^7.0.7",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rxjs": "^7.8.1",
+    "storybook": "^7.0.7",
+    "style-loader": "^3.3.2",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.3",
+    "vite-plugin-dts": "^2.3.0",
+    "zone.js": "~0.13.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -40,52 +114,6 @@
     "sass",
     "scss"
   ],
-  "dependencies": {
-    "@carbon/charts": "workspace:*",
-    "@carbon/telemetry": "0.1.0"
-  },
-  "peerDependencies": {
-    "@angular/common": "*",
-    "@angular/compiler": "*",
-    "@angular/core": "*",
-    "rxjs": "*",
-    "zone.js": "*"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "0.13.9",
-    "@angular-devkit/build-ng-packagr": "0.13.9",
-    "@angular-devkit/core": "8.2.2",
-    "@angular/animations": "7.2.15",
-    "@angular/cli": "~7.3.9",
-    "@angular/common": "7.2.15",
-    "@angular/compiler": "7.2.15",
-    "@angular/compiler-cli": "7.2.15",
-    "@angular/core": "7.2.15",
-    "@angular/forms": "7.2.15",
-    "@angular/platform-browser": "7.2.15",
-    "@angular/platform-browser-dynamic": "7.2.15",
-    "@babel/core": "7.3.4",
-    "@carbon/icons-angular": "11.2.1",
-    "@storybook/addon-knobs": "5.3.12",
-    "@storybook/addon-options": "5.3.12",
-    "@storybook/angular": "5.3.12",
-    "@types/node": "^12.0.0",
-    "babel-loader": "8.0.5",
-    "core-js": "3.0.0",
-    "karma-webpack": "4.0.2",
-    "ng-packagr": "5.7.1",
-    "rxjs": "6.3.3",
-    "sass-loader": "8.0.0",
-    "tsickle": "0.37.1",
-    "tslib": "1.10.0",
-    "tslint": "5.20.1",
-    "typescript": "3.2.2",
-    "zone.js": "0.8.29"
-  },
-  "publishConfig": {
-    "directory": "dist",
-    "access": "public"
-  },
   "maintainers": [
     {
       "name": "Eliad Moosavi",
