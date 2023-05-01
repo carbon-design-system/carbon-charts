@@ -1,0 +1,14 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+// import { User, ChevronDown } from '@carbon/icons-react'
+
+import {
+	CardNode // This line causes an error for no particular reason
+	CardNodeColumn,
+	CardNodeSubtitle,
+	CardNodeLabel,
+	CardNodeTitle
+} from '../'
+
+<Meta title="Diagrams/Cards" />
+
+# CardNode

@@ -1,13 +1,12 @@
-// require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution')
 
-export default {
+module.exports = {
 	root: true,
 	extends: [
-		'plugin:react/recommended',
+		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
 		'prettier',
-		'prettier/@typescript-eslint',
-		'prettier/react',
 		'plugin:storybook/recommended'
 	],
 	parserOptions: {
