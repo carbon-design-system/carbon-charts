@@ -1,37 +1,32 @@
 // Internal Imports
-import { Chart } from '../chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, GaugeChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { GaugeChartModel } from '../model/gauge';
+import { Chart } from '../chart'
+import { options } from '../configuration'
+import type { ChartConfig, GaugeChartOptions } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
+import { GaugeChartModel } from '../model/gauge'
 
 // Components
-import { Gauge } from '../components/index';
+import { Gauge } from '../components/index'
 
 export class GaugeChart extends Chart {
-	model = new GaugeChartModel(this.services);
+	model = new GaugeChartModel(this.services)
 	constructor(holder: Element, chartConfigs: ChartConfig<GaugeChartOptions>) {
-		super(holder, chartConfigs);
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.gaugeChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.gaugeChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [new Gauge(this.model, this.services)];
+		const graphFrameComponents = [new Gauge(this.model, this.services)]
 
-		const components: any[] = this.getChartComponents(graphFrameComponents);
+		const components: any[] = this.getChartComponents(graphFrameComponents)
 
-		return components;
+		return components
 	}
 }

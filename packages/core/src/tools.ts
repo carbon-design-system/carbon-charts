@@ -1,13 +1,7 @@
 // Internal imports
-import {
-	AxisChartOptions,
-	CartesianOrientations,
-	ScaleTypes,
-	TruncationTypes,
-	LegendItemType,
-} from './interfaces';
+import { CartesianOrientations, ScaleTypes, TruncationTypes } from './interfaces'
 
-import { defaultLegendAdditionalItems } from './configuration-non-customizable';
+import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 
 import {
 	debounce,
@@ -24,18 +18,12 @@ import {
 	flatMapDeep,
 	kebabCase,
 	fromPairs,
-	some,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Cancelable,
-	DebounceSettings,
-} from 'lodash-es';
+	some
+} from 'lodash-es'
 
 // D3 Imports
-// @ts-ignore
-// ts-ignore is needed because `@types/d3`
-// is missing the `pointer` function
-import { pointer } from 'd3-selection';
-import { Numeric } from 'd3-array';
+import { pointer } from 'd3-selection'
+import type { Numeric } from 'd3-array'
 
 // Functions
 
@@ -53,27 +41,26 @@ export {
 	flatMapDeep,
 	kebabCase,
 	fromPairs,
-	some,
-};
-export const clone = cloneDeep;
-export const removeArrayDuplicates = uniq;
+	some
+}
+export const clone = cloneDeep
+export const removeArrayDuplicates = uniq
 
 export function debounceWithD3MousePosition(fn, delay, holder) {
-	var timer = null;
-	return function () {
-		const context = this;
-		const args = arguments;
+	let timer = null
+	return (...args) => {
+		const context = this
 
-		//we get the D3 event here
-		context.mousePosition = pointer(args[0], holder);
+		// Get D3 event here
+		context.mousePosition = pointer(args[0], holder)
 
-		clearTimeout(timer);
+		clearTimeout(timer)
 
 		timer = setTimeout(function () {
-			// and use the reference here
-			fn.apply(context, args);
-		}, delay);
-	};
+			// and use reference here
+			fn.apply(context, args)
+		}, delay)
+	}
 }
 
 /**
@@ -86,58 +73,52 @@ export function debounceWithD3MousePosition(fn, delay, holder) {
  * @param {AxisChartOptions} providedOptions user provided options
  * @returns merged options
  */
-export function mergeDefaultChartOptions(
-	defaultOptions: any,
-	providedOptions: any
-) {
-	const clonedDefaultOptions = clone(defaultOptions);
-	const providedAxesNames = Object.keys(providedOptions.axes || {});
+export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
+	const clonedDefaultOptions = clone(defaultOptions)
+	const providedAxesNames = Object.keys(providedOptions.axes || {})
 
 	// Use provide controls list if it exists
 	// Prevents merging and element overriding of the two lists
 	if (providedOptions?.toolbar?.controls) {
-		delete clonedDefaultOptions.toolbar.controls;
+		delete clonedDefaultOptions.toolbar.controls
 	}
 
 	if (providedAxesNames.length === 0) {
-		delete clonedDefaultOptions.axes;
+		delete clonedDefaultOptions.axes
 	}
 
 	// Update deprecated options to work with the tabular data format
 	// Similar to the functionality in model.transformToTabularData()
 	for (const axisName in clonedDefaultOptions.axes) {
 		if (providedAxesNames.includes(axisName)) {
-			const providedAxisOptions = providedOptions.axes[axisName];
+			const providedAxisOptions = providedOptions.axes[axisName]
 
-			if (
-				providedAxisOptions['primary'] ||
-				providedAxisOptions['secondary']
-			) {
+			if (providedAxisOptions['primary'] || providedAxisOptions['secondary']) {
 				console.warn(
 					'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format'
-				);
+				)
 			}
 
-			const identifier = providedAxisOptions['mapsTo'];
+			const identifier = providedAxisOptions['mapsTo']
 			if (identifier === undefined || identifier === null) {
-				const scaleType = providedAxisOptions['scaleType'];
+				const scaleType = providedAxisOptions['scaleType']
 
 				if (scaleType === undefined || scaleType === null) {
-					providedAxisOptions['mapsTo'] = 'value';
+					providedAxisOptions['mapsTo'] = 'value'
 				} else if (scaleType === ScaleTypes.TIME) {
-					providedAxisOptions['mapsTo'] = 'date';
+					providedAxisOptions['mapsTo'] = 'date'
 				} else if (scaleType === ScaleTypes.LABELS) {
-					providedAxisOptions['mapsTo'] = 'key';
+					providedAxisOptions['mapsTo'] = 'key'
 				}
 			}
 		} else {
-			delete clonedDefaultOptions.axes[axisName];
+			delete clonedDefaultOptions.axes[axisName]
 		}
 	}
 
-	updateLegendAdditionalItems(clonedDefaultOptions, providedOptions);
+	updateLegendAdditionalItems(clonedDefaultOptions, providedOptions)
 
-	return merge(clonedDefaultOptions, providedOptions);
+	return merge(clonedDefaultOptions, providedOptions)
 }
 
 /**************************************
@@ -153,13 +134,9 @@ export function mergeDefaultChartOptions(
  */
 export function getDimensions(el) {
 	return {
-		width: parseFloat(
-			el.style.width.replace('px', '') || el.offsetWidth
-		),
-		height: parseFloat(
-			el.style.height.replace('px', '') || el.offsetHeight
-		),
-	};
+		width: parseFloat(el.style.width.replace('px', '') || el.offsetWidth),
+		height: parseFloat(el.style.height.replace('px', '') || el.offsetHeight)
+	}
 }
 
 /**
@@ -170,17 +147,15 @@ export function getDimensions(el) {
  */
 export function getTranslationValues(elementRef: HTMLElement) {
 	if (!elementRef) {
-		return;
+		return
 	}
 
 	// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
-	const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
+	const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/
 
-	const transformStr = elementRef
-		.getAttribute('transform')
-		.match(translateRegex);
+	const transformStr = elementRef.getAttribute('transform').match(translateRegex)
 	if (!transformStr) {
-		return null;
+		return null
 	}
 
 	// check for the match
@@ -188,14 +163,14 @@ export function getTranslationValues(elementRef: HTMLElement) {
 		const transforms = transformStr[0]
 			.replace(/translate\(/, '')
 			.replace(/\)/, '')
-			.split(',');
+			.split(',')
 
 		return {
 			tx: transforms[0],
-			ty: transforms[1],
-		};
+			ty: transforms[1]
+		}
 	}
-	return null;
+	return null
 }
 
 /**************************************
@@ -206,35 +181,43 @@ export function getTranslationValues(elementRef: HTMLElement) {
  * Gets x and y coordinates from HTML transform attribute
  *
  * @export
- * @param {any} string the transform attribute string ie. transform(x,y)
+ * @param transform string the transform attribute string ie. transform(x,y)
  * @returns Returns an object with x and y offsets of the transform
  */
-export function getTranformOffsets(string) {
-	const regExp = /\(([^)]+)\)/;
-	const match = regExp.exec(string)[1];
-	const xyString = match.split(',');
+export function getTransformOffsets(transform: string) {
+  const regExp = /\(([^)]+)\)/;
+  const match = regExp.exec(transform);
 
-	return {
-		x: parseFloat(xyString[0]),
-		y: parseFloat(xyString[1]),
-	};
+  if (match && match.length > 1) {
+    const xyString = match[1].split(',');
+
+    if (xyString.length > 1) {
+      return {
+        x: parseFloat(xyString[0]),
+        y: parseFloat(xyString[1]),
+      };
+    }
+  }
+
+  return { x: 0, y: 0 };
 }
+
 
 /**
  * Returns string value for height/width using pixels if there isn't a specified unit of measure
  *
  * @param value string or number value to be checked for unit of measure
  */
-export function formatWidthHeightValues(value) {
-	const stringValue = value.toString();
+export function formatWidthHeightValues(value: string | number) {
+	const stringValue = value.toString()
 
 	// If the value provided contains any letters
 	// Return it the same way
 	if (stringValue.match(/[a-z]/i)) {
-		return stringValue;
+		return stringValue
 	}
 
-	return stringValue + 'px';
+	return stringValue + 'px'
 }
 
 /**
@@ -244,8 +227,8 @@ export function formatWidthHeightValues(value) {
  * @param {any} string the input string to perform first letter capitalization with
  * @returns The transformed string after first letter is capitalized
  */
-export function capitalizeFirstLetter(string) {
-	return string[0].toUpperCase() + string.slice(1);
+export function capitalizeFirstLetter(word: string) {
+	return word[0].toUpperCase() + word.slice(1)
 }
 
 /**
@@ -256,13 +239,10 @@ export function capitalizeFirstLetter(string) {
  * @param {string} key
  * @returns The percentage in the form of a number (1 significant digit if necessary)
  */
-export function convertValueToPercentage(item, fullData, key = 'value') {
-	const percentage =
-		(item / fullData.reduce((accum, val) => accum + val[key], 0)) * 100;
+export function convertValueToPercentage(item: any, fullData: any, key = 'value') {
+	const percentage = (item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
 	// if the value has any significant figures, keep 1
-	return percentage % 1 !== 0
-		? parseFloat(percentage.toFixed(1))
-		: percentage;
+	return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
 }
 
 /**
@@ -275,18 +255,14 @@ export function convertValueToPercentage(item, fullData, key = 'value') {
  */
 export function truncateLabel(fullText, truncationType, numCharacter) {
 	if (numCharacter > fullText.length) {
-		return fullText;
+		return fullText
 	}
 	if (truncationType === TruncationTypes.MID_LINE) {
-		return (
-			fullText.substr(0, numCharacter / 2) +
-			'...' +
-			fullText.substr(-numCharacter / 2)
-		);
+		return fullText.substr(0, numCharacter / 2) + '...' + fullText.substr(-numCharacter / 2)
 	} else if (truncationType === TruncationTypes.FRONT_LINE) {
-		return '...' + fullText.substr(-numCharacter);
+		return '...' + fullText.substr(-numCharacter)
 	} else if (truncationType === TruncationTypes.END_LINE) {
-		return fullText.substr(0, numCharacter) + '...';
+		return fullText.substr(0, numCharacter) + '...'
 	}
 }
 
@@ -295,45 +271,28 @@ export function truncateLabel(fullText, truncationType, numCharacter) {
  * @param {any} defaultOptions
  * @param {any} providedOptions
  */
-export function updateLegendAdditionalItems(
-	defaultOptions,
-	providedOptions
-) {
-	let defaultAdditionalItems = getProperty(
-		defaultOptions,
-		'legend',
-		'additionalItems'
-	);
-	const userProvidedAdditionalItems = getProperty(
-		providedOptions,
-		'legend',
-		'additionalItems'
-	);
+export function updateLegendAdditionalItems(defaultOptions, providedOptions) {
+	const defaultAdditionalItems = getProperty(defaultOptions, 'legend', 'additionalItems')
+	const userProvidedAdditionalItems = getProperty(providedOptions, 'legend', 'additionalItems')
 
 	// Retain default legend additional items
 	if (defaultAdditionalItems && userProvidedAdditionalItems) {
-		const providedTypes = userProvidedAdditionalItems.map(
-			(item) => item.type
-		);
+		const providedTypes = userProvidedAdditionalItems.map((item) => item.type)
 
-		const defaultTypes = defaultAdditionalItems.map(
-			(item) => item.type
-		);
+		const defaultTypes = defaultAdditionalItems.map((item) => item.type)
 
 		// Get default items in default options but not in provided options
 		const updatedDefaultItems = defaultLegendAdditionalItems.filter(
-			(item) =>
-				defaultTypes.includes(item.type) &&
-				!providedTypes.includes(item.type)
-		);
+			(item) => defaultTypes.includes(item.type) && !providedTypes.includes(item.type)
+		)
 
-		defaultOptions.legend.additionalItems = updatedDefaultItems;
+		defaultOptions.legend.additionalItems = updatedDefaultItems
 
 		providedOptions.legend.additionalItems = unionBy(
 			updatedDefaultItems,
 			userProvidedAdditionalItems,
 			'name'
-		);
+		)
 	}
 }
 
@@ -353,22 +312,22 @@ export function updateLegendAdditionalItems(
 export function arrayDifferences(oldArray: any[], newArray: any[]) {
 	const difference = {
 		missing: [],
-		added: [],
-	};
+		added: []
+	}
 
 	oldArray.forEach((element) => {
 		if (newArray.indexOf(element) === -1) {
-			difference.missing.push(element);
+			difference.missing.push(element)
 		}
-	});
+	})
 
 	newArray.forEach((element) => {
 		if (oldArray.indexOf(element) === -1) {
-			difference.added.push(element);
+			difference.added.push(element)
 		}
-	});
+	})
 
-	return difference;
+	return difference
 }
 
 /**
@@ -379,21 +338,18 @@ export function arrayDifferences(oldArray: any[], newArray: any[]) {
  * @returns A list of the duplicated keys in data
  */
 export function getDuplicateValues(arr: any) {
-	const values = [];
-	const duplicateValues = [];
+	const values = []
+	const duplicateValues = []
 
 	arr.forEach((value) => {
-		if (
-			values.indexOf(value) !== -1 &&
-			duplicateValues.indexOf(value) === -1
-		) {
-			duplicateValues.push(value);
+		if (values.indexOf(value) !== -1 && duplicateValues.indexOf(value) === -1) {
+			duplicateValues.push(value)
 		}
 
-		values.push(value);
-	});
+		values.push(value)
+	})
 
-	return duplicateValues;
+	return duplicateValues
 }
 
 // ================================================================================
@@ -409,8 +365,8 @@ export function getDuplicateValues(arr: any) {
  */
 export function moveToFront(element) {
 	return element.each(function () {
-		this.parentNode.appendChild(this);
-	});
+		this.parentNode.appendChild(this)
+	})
 }
 
 // ================================================================================
@@ -425,26 +381,26 @@ export function moveToFront(element) {
  * (i.e "style", "color" would retrieve the color property from within an object that has "color" nested within "style")
  */
 export const getProperty = (object, ...propPath) => {
-	let position = object;
+	let position = object
 	if (position) {
 		for (const prop of propPath) {
 			if (position[prop] !== null && position[prop] !== undefined) {
-				position = position[prop];
+				position = position[prop]
 			} else {
-				return null;
+				return null
 			}
 		}
-		return position;
+		return position
 	}
 
-	return null;
-};
+	return null
+}
 
 interface SVGPathCoordinates {
-	x0: number;
-	x1: number;
-	y0: number;
-	y1: number;
+	x0: number
+	x1: number
+	y0: number
+	y1: number
 }
 
 export const flipSVGCoordinatesBasedOnOrientation = (
@@ -456,34 +412,28 @@ export const flipSVGCoordinatesBasedOnOrientation = (
 			y0: verticalCoordinates.x0,
 			y1: verticalCoordinates.x1,
 			x0: verticalCoordinates.y0,
-			x1: verticalCoordinates.y1,
-		};
+			x1: verticalCoordinates.y1
+		}
 	}
 
-	return verticalCoordinates;
-};
+	return verticalCoordinates
+}
 
 export const generateSVGPathString = (
 	verticalCoordinates: SVGPathCoordinates,
 	orientation?: CartesianOrientations
 ) => {
-	const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(
-		verticalCoordinates,
-		orientation
-	);
+	const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(verticalCoordinates, orientation)
 
-	return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`;
-};
+	return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`
+}
 
 export function flipDomainAndRangeBasedOnOrientation<D, R>(
 	domain: D,
 	range: R,
 	orientation?: CartesianOrientations
 ): [D, R] | [R, D] {
-	return orientation === CartesianOrientations.VERTICAL
-		? [domain, range]
-		: [range, domain];
+	return orientation === CartesianOrientations.VERTICAL ? [domain, range] : [range, domain]
 }
 
-export const compareNumeric = (a: Numeric, b: Numeric) =>
-	Number(a) === Number(b);
+export const compareNumeric = (a: Numeric, b: Numeric) => Number(a) === Number(b)

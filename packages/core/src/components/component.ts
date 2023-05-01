@@ -1,47 +1,43 @@
 // Internal Imports
-import { ChartModel } from '../model/model';
-import { DOMUtils } from '../services';
-import { RenderTypes } from '../interfaces';
-import * as Tools from '../tools';
+import type { ChartModel } from '../model/model'
+import { DOMUtils } from '../services'
+import { RenderTypes } from '../interfaces'
+import { getProperty, merge } from '../tools'
 
 // D3 Imports
-import { select } from 'd3-selection';
+import { select } from 'd3-selection'
 
 // import the settings for the css prefix
-import { carbonPrefix } from '../configuration-non-customizable';
+import { carbonPrefix } from '../configuration-non-customizable'
 
 export class Component {
-	public type: string;
-	public renderType = RenderTypes.HTML;
+	public type: string
+	public renderType = RenderTypes.HTML
 
-	public id: string;
+	public id: string
 
-	protected parent: any;
+	protected parent: any
 
-	protected configs: any = {};
+	protected configs: any = {}
 
-	protected model: any;
-	protected services: any;
+	protected model: any
+	protected services: any
 
 	constructor(model: ChartModel, services: any, configs?: any) {
-		this.model = model;
-		this.services = services;
+		this.model = model
+		this.services = services
 
 		if (configs) {
-			this.configs = configs;
+			this.configs = configs
 			if (this.configs.id) {
-				const chartprefix = Tools.getProperty(
-					this.model.getOptions(),
-					'style',
-					'prefix'
-				);
-				this.id = `${chartprefix}--${this.configs.id}`;
+				const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
+				this.id = `${chartprefix}--${this.configs.id}`
 			}
 		}
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(select(this.services.domUtils.getMainContainer()));
+			this.setParent(select(this.services.domUtils.getMainContainer()))
 		}
 	}
 
@@ -49,8 +45,9 @@ export class Component {
 		// do nothing.
 	}
 
-	render(animate = true) {
-		console.error('render() method is not implemented');
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true): void {
+		console.error('Error: Component did not provide the required render function.')
 	}
 
 	destroy() {
@@ -58,72 +55,56 @@ export class Component {
 	}
 
 	// Used to pass down information to the components
-	setModel(newObj) {
-		this.model = newObj;
+	setModel(newObj: any) {
+		this.model = newObj
 	}
 
 	// Used to pass down information to the components
-	setServices(newObj) {
-		this.services = newObj;
+	setServices(newObj: any) {
+		this.services = newObj
 	}
 
-	setParent(parent) {
-		const oldParent = this.parent;
-		this.parent = parent;
+	setParent(parent: any) {
+		const oldParent = this.parent
+		this.parent = parent
 
 		if (oldParent && oldParent.node() === parent.node()) {
-			return;
+			return
 		}
 
 		if (this.type) {
-			const chartprefix = Tools.getProperty(
-				this.model.getOptions(),
-				'style',
-				'prefix'
-			);
-			this.parent.classed(
-				`${carbonPrefix}--${chartprefix}--${this.type}`,
-				true
-			);
+			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
+			this.parent.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, true)
 
 			if (oldParent) {
-				oldParent.classed(
-					`${carbonPrefix}--${chartprefix}--${this.type}`,
-					false
-				);
+				oldParent.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, false)
 			}
 		}
 	}
 
 	getParent() {
-		return this.parent;
+		return this.parent
 	}
 
 	getComponentContainer(configs = { withinChartClip: false }) {
 		if (this.type) {
-			const chartprefix = Tools.getProperty(
-				this.model.getOptions(),
-				'style',
-				'prefix'
-			);
+			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 
-			const idSelector = this.id ? `#${this.id}` : '';
+			const idSelector = this.id ? `#${this.id}` : ''
 			const container = DOMUtils.appendOrSelect(
 				this.parent,
 				`${
 					this.renderType === RenderTypes.SVG ? 'svg' : 'div'
 				}${idSelector}.${carbonPrefix}--${chartprefix}--${this.type}`
-			);
+			)
 
 			if (configs.withinChartClip) {
 				// get unique chartClipId int this chart from model
-				const chartClipId = this.model.get('chartClipId');
+				const chartClipId = this.model.get('chartClipId')
 
 				if (chartClipId) {
-					const chartClipSelection = select(`#${chartClipId}`);
-					const chartClipRectSelection = chartClipSelection.select(
-						'rect'
-					);
+					const chartClipSelection = select(`#${chartClipId}`)
+					const chartClipRectSelection = chartClipSelection.select('rect')
 
 					/*
 					 * these checks are needed because of a chrome bug
@@ -133,15 +114,15 @@ export class Component {
 						chartClipRectSelection.size() !== 0 &&
 						parseFloat(chartClipRectSelection.attr('height')) > 0
 					) {
-						container.attr('clip-path', `url(#${chartClipId})`);
+						container.attr('clip-path', `url(#${chartClipId})`)
 					}
 				}
 			}
 
-			return container.attr('width', '100%').attr('height', '100%');
+			return container.attr('width', '100%').attr('height', '100%')
 		}
 
-		return this.parent;
+		return this.parent
 	}
 
 	/**
@@ -151,13 +132,9 @@ export class Component {
 	 */
 	getOptions() {
 		if (this.configs.options) {
-			const options = Tools.merge(
-				{},
-				this.model.getOptions(),
-				this.configs.options
-			);
-			return options;
+			const options = merge({}, this.model.getOptions(), this.configs.options)
+			return options
 		}
-		return this.model.getOptions();
+		return this.model.getOptions()
 	}
 }

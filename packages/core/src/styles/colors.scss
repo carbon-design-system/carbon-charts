@@ -1,8 +1,8 @@
-@use "sass:color";
-@use "sass:map";
+@use 'sass:color';
+@use 'sass:map';
 
-@use "@carbon/styles/scss/themes";
-@use "@carbon/styles/scss/theme" as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
 
 @import './color-palatte.scss';
 
@@ -31,15 +31,9 @@
 	@if type-of($theme-colors) == map {
 		@each $category, $value in $theme-colors {
 			@if $name == null {
-				$color-items: map-merge(
-					$color-items,
-					color-property('#{$category}', $value)
-				);
+				$color-items: map-merge($color-items, color-property('#{$category}', $value));
 			} @else {
-				$color-items: map-merge(
-					$color-items,
-					color-property('#{$name}-#{$category}', $value)
-				);
+				$color-items: map-merge($color-items, color-property('#{$name}-#{$category}', $value));
 			}
 		}
 		@return $color-items;
@@ -81,10 +75,7 @@ $color-map: map-merge(getThemeColors('light'), getGradientColors());
 			background-color: generateCSSCustomProperty($token, $color);
 
 			&.hovered {
-				background-color: generateCSSCustomProperty(
-					#{$token}-hovered,
-					$color
-				);
+				background-color: generateCSSCustomProperty(#{$token}-hovered, $color);
 				@include default_transition;
 			}
 		}

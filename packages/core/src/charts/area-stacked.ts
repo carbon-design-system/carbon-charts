@@ -1,8 +1,8 @@
 // Internal Imports
-import { AxisChart } from '../axis-chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index';
-import * as Tools from '../tools';
+import { AxisChart } from '../axis-chart'
+import { options } from '../configuration'
+import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -12,24 +12,19 @@ import {
 	TwoDimensionalAxes,
 	Line,
 	StackedScatter,
-	Skeleton,
-} from '../components/index';
+	Skeleton
+} from '../components/index'
 
 export class StackedAreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
-		super(holder, chartConfigs);
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.stackedAreaChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.stackedAreaChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
@@ -43,16 +38,14 @@ export class StackedAreaChart extends AxisChart {
 			new StackedScatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
 				handleThresholds: true,
-				stacked: true,
+				stacked: true
 			}),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
-			}),
-		];
+				skeleton: Skeletons.GRID
+			})
+		]
 
-		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
-		);
-		return components;
+		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		return components
 	}
 }

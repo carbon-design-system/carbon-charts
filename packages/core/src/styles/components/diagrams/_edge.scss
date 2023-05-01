@@ -1,9 +1,9 @@
-@use "@carbon/styles/scss/utilities/focus-outline" as *;
-@use "@carbon/styles/scss/spacing" as *;
-@use "@carbon/styles/scss/type" as *;
-@use "@carbon/styles/scss/theme" as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
 
-@include exports("cc-edge") {
+@include exports('cc-edge') {
 	.#{$prefix}--#{$charts-prefix}--edge {
 		fill: transparent;
 	}

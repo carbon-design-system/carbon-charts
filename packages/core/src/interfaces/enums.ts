@@ -1,9 +1,9 @@
-import * as EventEnums from './events';
-export const Events = EventEnums;
+import * as EventEnums from './events'
+export const Events = EventEnums
 
 export enum RenderTypes {
 	HTML = 'html',
-	SVG = 'svg',
+	SVG = 'svg'
 }
 
 /**
@@ -13,7 +13,7 @@ export enum ChartTheme {
 	WHITE = 'white',
 	G100 = 'g100',
 	G90 = 'g90',
-	G10 = 'g10',
+	G10 = 'g10'
 }
 
 /**
@@ -23,7 +23,7 @@ export enum ColorClassNameTypes {
 	BACKGROUND = 'background',
 	FILL = 'fill',
 	STROKE = 'stroke',
-	TOOLTIP = 'tooltip',
+	TOOLTIP = 'tooltip'
 }
 
 /**
@@ -33,7 +33,7 @@ export enum AxisPositions {
 	LEFT = 'left',
 	RIGHT = 'right',
 	TOP = 'top',
-	BOTTOM = 'bottom',
+	BOTTOM = 'bottom'
 }
 
 /**
@@ -41,7 +41,7 @@ export enum AxisPositions {
  */
 export enum ZoomBarTypes {
 	GRAPH_VIEW = 'graph_view',
-	SLIDER_VIEW = 'slider_view',
+	SLIDER_VIEW = 'slider_view'
 }
 
 /**
@@ -51,7 +51,7 @@ export enum TruncationTypes {
 	END_LINE = 'end_line',
 	MID_LINE = 'mid_line',
 	FRONT_LINE = 'front_line',
-	NONE = 'none',
+	NONE = 'none'
 }
 
 /**
@@ -62,7 +62,7 @@ export enum TruncationTypes {
  */
 export enum CartesianOrientations {
 	VERTICAL = 'vertical',
-	HORIZONTAL = 'horizontal',
+	HORIZONTAL = 'horizontal'
 }
 
 /**
@@ -73,7 +73,7 @@ export enum ScaleTypes {
 	LINEAR = 'linear',
 	LOG = 'log',
 	LABELS = 'labels',
-	LABELS_RATIO = 'labels-ratio',
+	LABELS_RATIO = 'labels-ratio'
 }
 
 /**
@@ -83,7 +83,7 @@ export enum LegendPositions {
 	RIGHT = 'right',
 	LEFT = 'left',
 	TOP = 'top',
-	BOTTOM = 'bottom',
+	BOTTOM = 'bottom'
 }
 
 /**
@@ -92,7 +92,7 @@ export enum LegendPositions {
 export enum Alignments {
 	LEFT = 'left',
 	CENTER = 'center',
-	RIGHT = 'right',
+	RIGHT = 'right'
 }
 
 /**
@@ -100,7 +100,7 @@ export enum Alignments {
  */
 export enum LegendOrientations {
 	HORIZONTAL = 'horizontal',
-	VERTICAL = 'vertical',
+	VERTICAL = 'vertical'
 }
 
 /**
@@ -108,7 +108,7 @@ export enum LegendOrientations {
  */
 export enum TreeTypes {
 	TREE = 'tree',
-	DENDROGRAM = 'dendrogram',
+	DENDROGRAM = 'dendrogram'
 }
 
 /**
@@ -118,7 +118,7 @@ export enum LayoutDirection {
 	ROW = 'row',
 	COLUMN = 'column',
 	ROW_REVERSE = 'row-reverse',
-	COLUMN_REVERSE = 'column-reverse',
+	COLUMN_REVERSE = 'column-reverse'
 }
 
 /**
@@ -127,14 +127,14 @@ export enum LayoutDirection {
 export enum LayoutGrowth {
 	FIXED = 'fixed',
 	PREFERRED = 'preferred',
-	STRETCH = 'stretch',
+	STRETCH = 'stretch'
 }
 
 /**
  * enum of all possible layout align-items values
  */
 export enum LayoutAlignItems {
-	CENTER = 'center',
+	CENTER = 'center'
 }
 
 /**
@@ -142,7 +142,7 @@ export enum LayoutAlignItems {
  */
 export enum CalloutDirections {
 	LEFT = 'left',
-	RIGHT = 'right',
+	RIGHT = 'right'
 }
 
 /**
@@ -152,7 +152,7 @@ export enum Skeletons {
 	GRID = 'grid',
 	VERT_OR_HORIZ = 'vertOrHoriz',
 	PIE = 'pie',
-	DONUT = 'donut',
+	DONUT = 'donut'
 }
 
 /**
@@ -161,7 +161,7 @@ export enum Skeletons {
 export enum TextAnchor {
 	START = 'start',
 	MIDDLE = 'middle',
-	END = 'end',
+	END = 'end'
 }
 
 /**
@@ -170,12 +170,12 @@ export enum TextAnchor {
 export enum DominantBaseline {
 	BASELINE = 'baseline',
 	MIDDLE = 'middle',
-	HANGING = 'hanging',
+	HANGING = 'hanging'
 }
 
 export enum GaugeTypes {
 	SEMI = 'semi',
-	FULL = 'full',
+	FULL = 'full'
 }
 
 /**
@@ -183,7 +183,7 @@ export enum GaugeTypes {
  */
 export enum ArrowDirections {
 	UP = 'up',
-	DOWN = 'down',
+	DOWN = 'down'
 }
 
 /**
@@ -192,7 +192,7 @@ export enum ArrowDirections {
 export enum Statuses {
 	SUCCESS = 'success',
 	WARNING = 'warning',
-	DANGER = 'danger',
+	DANGER = 'danger'
 }
 
 /**
@@ -201,7 +201,7 @@ export enum Statuses {
 export enum TickRotations {
 	ALWAYS = 'always',
 	AUTO = 'auto',
-	NEVER = 'never',
+	NEVER = 'never'
 }
 
 /**
@@ -214,7 +214,7 @@ export enum ChartTypes {
 	STACKED_BAR = 'stacked-bar',
 	GROUPED_BAR = 'grouped-bar',
 	AREA = 'area',
-	STACKED_AREA = 'stacked-area',
+	STACKED_AREA = 'stacked-area'
 }
 
 /**
@@ -229,7 +229,7 @@ export enum ToolbarControlTypes {
 	RESET_ZOOM = 'Reset zoom',
 	MAKE_FULLSCREEN = 'Make fullscreen',
 	SHOW_AS_DATATABLE = 'Show as data-table',
-	CUSTOM = 'Custom',
+	CUSTOM = 'Custom'
 }
 
 /**
@@ -237,7 +237,7 @@ export enum ToolbarControlTypes {
  */
 export enum AxisTitleOrientations {
 	LEFT = 'left',
-	RIGHT = 'right',
+	RIGHT = 'right'
 }
 
 /**
@@ -250,7 +250,7 @@ export enum LegendItemType {
 	SIZE = 'size',
 	LINE = 'line',
 	QUARTILE = 'quartile',
-	ZOOM = 'zoom',
+	ZOOM = 'zoom'
 }
 
 /**
@@ -258,7 +258,7 @@ export enum LegendItemType {
  */
 export enum ColorLegendType {
 	LINEAR = 'linear',
-	QUANTIZE = 'quantize',
+	QUANTIZE = 'quantize'
 }
 
 /**
@@ -267,7 +267,7 @@ export enum ColorLegendType {
 export enum DividerStatus {
 	ON = 'on',
 	AUTO = 'auto',
-	OFF = 'off',
+	OFF = 'off'
 }
 
 /**
@@ -275,5 +275,5 @@ export enum DividerStatus {
  */
 export enum AxisFlavor {
 	DEFAULT = 'default',
-	HOVERABLE = 'hoverable',
+	HOVERABLE = 'hoverable'
 }

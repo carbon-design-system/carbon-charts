@@ -1,42 +1,26 @@
 // Internal Imports
-import { AxisChart } from '../axis-chart';
-import { BulletChartModel } from '../model/bullet';
-import * as Configuration from '../configuration';
-import { ChartConfig, BulletChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
+import { AxisChart } from '../axis-chart'
+import { BulletChartModel } from '../model/bullet'
+import { options } from '../configuration'
+import type { ChartConfig, BulletChartOptions } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
+import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Bullet,
-	Grid,
-	TwoDimensionalAxes,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Bullet, Grid, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class BulletChart extends AxisChart {
-	model = new BulletChartModel(this.services);
+	model = new BulletChartModel(this.services)
 
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<BulletChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: Element, chartConfigs: ChartConfig<BulletChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.bulletChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.bulletChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
@@ -46,13 +30,11 @@ export class BulletChart extends AxisChart {
 			new Grid(this.model, this.services),
 			new Bullet(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
-			}),
-		];
+				skeleton: Skeletons.GRID
+			})
+		]
 
-		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
-		);
-		return components;
+		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		return components
 	}
 }

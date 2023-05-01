@@ -1,20 +1,30 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		"declaration": true,
-		"outDir": "dist",
+		// For vite
+		"target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+		"isolatedModules": true,
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+
+		// All packages
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"jsx": "react",
-		"lib": ["ESNext", "DOM"],
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"skipLibCheck": true,
+		"sourceMap": true,
+
+		// For this package only
+		"jsx": "react-jsx",
+
+		/* Linting */
 		"strict": true,
-		"target": "es5",
-		"baseUrl": "./",
-		"paths": {
-			"@carbon/charts": ["../core"]
-		}
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src"]
+	"include": ["src/**/*"],
+	"exclude": ["src/**/*.test.tsx"],
+	"references": [{ "path": "./tsconfig.vite.json" }]
 }

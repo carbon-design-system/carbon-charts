@@ -1,26 +1,26 @@
 // Internal Imports
-import { ChartModel } from './model';
+import { ChartModel } from './model'
 
 /**
  * The tree chart model layer
  */
 export class TreeChartModel extends ChartModel {
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
 	getTabularDataArray() {
-		const displayData = this.getDisplayData();
+		const displayData = this.getDisplayData()
 
-		const result = [['Child', 'Parent']];
+		const result = [['Child', 'Parent']]
 
 		displayData.forEach((datum) => {
 			// Call recurisve function
-			this.getChildrenDatums(datum, result);
-			result.push([datum.name, '&ndash;']);
-		});
+			this.getChildrenDatums(datum, result)
+			result.push([datum.name, '&ndash;'])
+		})
 
-		return result;
+		return result
 	}
 
 	/**
@@ -33,9 +33,9 @@ export class TreeChartModel extends ChartModel {
 		if (datum.children) {
 			if (datum.children.length > 0) {
 				datum.children.forEach((child) => {
-					this.getChildrenDatums(child, result);
-					result.push([child.name, datum.name]);
-				});
+					this.getChildrenDatums(child, result)
+					result.push([child.name, datum.name])
+				})
 			}
 		}
 	}

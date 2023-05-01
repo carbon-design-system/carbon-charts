@@ -1,5 +1,7 @@
-import { AlluvialChart as AC } from "@carbon/charts";
-import type { AlluvialChartOptions } from "@carbon/charts/interfaces";
-import BaseChart from "./BaseChart";
+import { AlluvialChart as AlluvialChartCore, type interfaces } from '@carbon/charts'
+import BaseChart from './BaseChart'
 
-export default class AlluvialChart extends BaseChart<AC, AlluvialChartOptions> {}
+export default class AlluvialChart extends BaseChart<
+	AlluvialChartCore,
+	interfaces.AlluvialChartOptions
+> {}

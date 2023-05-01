@@ -1,20 +1,15 @@
 // Internal Imports
-import { Component } from '../component';
-import * as Configuration from '../../configuration';
+import { Component } from '../component'
+import { spacers } from '../../configuration'
 
 export class Spacer extends Component {
-	type = 'spacer';
+	type = 'spacer'
 
-	render() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		this.getComponentContainer()
-			.style(
-				'width',
-				`${this.configs.size || Configuration.spacers.default.size}px`
-			)
-			.style(
-				'height',
-				`${this.configs.size || Configuration.spacers.default.size}px`
-			)
-			.attr('opacity', 0);
+			.style('width', `${this.configs.size || spacers.default.size}px`)
+			.style('height', `${this.configs.size || spacers.default.size}px`)
+			.attr('opacity', 0)
 	}
 }

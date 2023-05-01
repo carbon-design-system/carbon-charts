@@ -1,71 +1,52 @@
 // Internal Imports
-import { Component } from '../component';
-import * as Tools from '../../tools';
-import * as Configuration from '../../configuration';
-import {
-	Roles,
-	Events,
-	ColorClassNameTypes,
-	RenderTypes,
-} from '../../interfaces';
+import { Component } from '../component'
+import { getProperty } from '../../tools'
+import { area as configArea } from '../../configuration'
+import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 
 // D3 Imports
-import { area } from 'd3-shape';
+import { area } from 'd3-shape'
 
 export class StackedArea extends Component {
-	type = 'area-stacked';
-	renderType = RenderTypes.SVG;
+	type = 'area-stacked'
+	renderType = RenderTypes.SVG
 
-	areaGenerator: any;
+	areaGenerator: any
 
 	init() {
-		const eventsFragment = this.services.events;
+		const eventsFragment = this.services.events
 
 		// Highlight correct area on legend item hovers
-		eventsFragment.addEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
+		eventsFragment.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover)
 
 		// Un-highlight area on legend item mouseouts
-		eventsFragment.addEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
+		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 	}
 
 	render(animate = true) {
-		let svg = this.getComponentContainer({ withinChartClip: true });
-		const self = this;
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const svg = this.getComponentContainer({ withinChartClip: true })
+		const self = this
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const percentage = Object.keys(options.axes).some(
-			(axis) => options.axes[axis].percentage
-		);
+		const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)
 
 		const stackedData = this.model.getStackedData({
 			percentage,
-			groups: this.configs.groups,
-		});
+			groups: this.configs.groups
+		})
 
-		const firstDatum = Tools.getProperty(stackedData, 0, 0);
+		const firstDatum = getProperty(stackedData, 0, 0)
 
 		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
-		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition(
-			{ firstDatum }
-		);
-		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition(
-			{ firstDatum }
-		);
-		const mainYScale = this.services.cartesianScales.getScaleByPosition(
-			rangeAxisPosition
-		);
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition({ firstDatum })
+		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition({ firstDatum })
+		const mainYScale = this.services.cartesianScales.getScaleByPosition(rangeAxisPosition)
 
 		const areas = svg
 			.selectAll('path.area')
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo));
+			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -76,79 +57,74 @@ export class StackedArea extends Component {
 					i
 				)
 			)
-			.y0((d) => mainYScale(d[0]))
-			.y1((d) => mainYScale(d[1]))
-			.curve(this.services.curves.getD3Curve());
+			.y0((d: any) => mainYScale(d[0]))
+			.y1((d: any) => mainYScale(d[1]))
+			.curve(this.services.curves.getD3Curve())
 
-		areas.exit().attr('opacity', 0).remove();
+		areas.exit().attr('opacity', 0).remove()
 
-		const enteringAreas = areas.enter().append('path').attr('opacity', 0);
+		const enteringAreas = areas.enter().append('path').attr('opacity', 0)
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
-					dataGroupName: Tools.getProperty(d, 0, groupMapsTo),
-					originalClassName: 'area',
+					dataGroupName: getProperty(d, 0, groupMapsTo),
+					originalClassName: 'area'
 				})
 			)
-			.style('fill', (d) =>
-				self.model.getFillColor(Tools.getProperty(d, 0, groupMapsTo))
-			)
+			.style('fill', (d: any) => self.model.getFillColor(getProperty(d, 0, groupMapsTo)))
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
-			.attr('aria-label', (d) => Tools.getProperty(d, 0, groupMapsTo))
+			.attr('aria-label', (d: any) => getProperty(d, 0, groupMapsTo))
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'area-update-enter',
-					animate,
+					animate
 				})
 			)
-			.attr('opacity', Configuration.area.opacity.selected)
-			.attr('d', this.areaGenerator);
+			.attr('opacity', configArea.opacity.selected)
+			.attr('d', this.areaGenerator)
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const { hoveredElement } = event.detail
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-hover-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
-					name: 'legend-hover-area',
+					name: 'legend-hover-area'
 				})
 			)
-			.attr('opacity', (d) => {
-				if (
-					Tools.getProperty(d, 0, groupMapsTo) !==
-					hoveredElement.datum().name
-				) {
-					return Configuration.area.opacity.unselected;
+			.attr('opacity', (d: any) => {
+				if (getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
+					return configArea.opacity.unselected
 				}
 
-				return Configuration.area.opacity.selected;
-			});
-	};
+				return configArea.opacity.selected
+			})
+	}
 
 	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('path.area')
 			.transition('legend-mouseout-area')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
-					name: 'legend-mouseout-area',
+					name: 'legend-mouseout-area'
 				})
 			)
-			.attr('opacity', Configuration.area.opacity.selected);
-	};
+			.attr('opacity', configArea.opacity.selected)
+	}
 }

@@ -1,1 +1,1 @@
-export * from './test-environment';
+export { data, options, TestEnvironment } from './test-environment'

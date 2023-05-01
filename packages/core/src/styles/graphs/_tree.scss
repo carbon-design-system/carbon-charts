@@ -1,7 +1,6 @@
-@use "@carbon/styles/scss/theme" as *;
+@use '@carbon/styles/scss/theme' as *;
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper
-	.#{$prefix}--#{$charts-prefix}--tree {
+.#{$prefix}--#{$charts-prefix}--chart-wrapper .#{$prefix}--#{$charts-prefix}--tree {
 	g.links {
 		fill: none;
 		stroke: $border-strong-01;

@@ -1,6 +1,6 @@
-@use "@carbon/styles/scss/type" as *;
-@use "@carbon/styles/scss/motion" as *;
-@use "@carbon/styles/scss/theme" as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $layer-02;

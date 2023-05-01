@@ -1,55 +1,53 @@
 // Internal Imports
-import { Service } from '../service';
+import { Service } from '../service'
 
 export class Files extends Service {
 	constructor(model: any, services: any) {
-		super(model, services);
+		super(model, services)
 	}
 
 	downloadCSV(content, filename) {
-		const anchor = document.createElement('a');
-		const mimeType = 'text/csv;encoding:utf-8';
+		const anchor = document.createElement('a')
+		const mimeType = 'text/csv;encoding:utf-8'
 
 		if (navigator['msSaveBlob']) {
 			// Internet Explorer 10
 			navigator['msSaveBlob'](
 				new Blob([content], {
-					type: mimeType,
+					type: mimeType
 				}),
 				filename
-			);
+			)
 		} else if (URL && 'download' in anchor) {
 			// HTML5
 			const href = URL.createObjectURL(
 				new Blob([content], {
-					type: mimeType,
+					type: mimeType
 				})
-			);
-			anchor.href = href;
-			anchor.setAttribute('download', filename);
+			)
+			anchor.href = href
+			anchor.setAttribute('download', filename)
 
 			// Add anchor to body
-			document.body.appendChild(anchor);
+			document.body.appendChild(anchor)
 
 			// Click anchor
-			anchor.click();
+			anchor.click()
 
 			// Remove anchor from body
-			document.body.removeChild(anchor);
-			URL.revokeObjectURL(href);
+			document.body.removeChild(anchor)
+			URL.revokeObjectURL(href)
 		} else {
-			location.href = `data:application/octet-stream,${encodeURIComponent(
-				content
-			)}`;
+			location.href = `data:application/octet-stream,${encodeURIComponent(content)}`
 		}
 	}
 
 	downloadImage(uri, name) {
-		const link = document.createElement('a');
-		link.download = name;
-		link.href = uri;
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+		const link = document.createElement('a')
+		link.download = name
+		link.href = uri
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
 	}
 }

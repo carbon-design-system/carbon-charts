@@ -1,13 +1,8 @@
 // Internal Imports
-import { AxisChart } from '../axis-chart';
-import * as Configuration from '../configuration';
-import {
-	ChartConfig,
-	ComboChartOptions,
-	ChartTypes,
-	Skeletons,
-} from '../interfaces/index';
-import * as Tools from '../tools';
+import { AxisChart } from '../axis-chart'
+import { options as configOptions } from '../configuration'
+import { ChartConfig, ComboChartOptions, ChartTypes, Skeletons } from '../interfaces/index'
+import { camelCase, flatten, merge, mergeDefaultChartOptions } from '../tools'
 
 // Components
 import {
@@ -24,62 +19,49 @@ import {
 	StackedArea,
 	Ruler,
 	StackedRuler,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+	Skeleton
+} from '../components/index'
 
 const graphComponentsMap = {
 	[ChartTypes.LINE]: [Line, Scatter],
 	[ChartTypes.SCATTER]: [Scatter],
 	[ChartTypes.AREA]: [Area, Line, Scatter],
-	[ChartTypes.STACKED_AREA]: [
-		StackedArea,
-		Line,
-		StackedScatter,
-		StackedRuler,
-	],
+	[ChartTypes.STACKED_AREA]: [StackedArea, Line, StackedScatter, StackedRuler],
 	[ChartTypes.SIMPLE_BAR]: [SimpleBar],
 	[ChartTypes.GROUPED_BAR]: [GroupedBar, ZeroLine],
-	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler],
-};
+	[ChartTypes.STACKED_BAR]: [StackedBar, StackedRuler]
+}
 
 export class ComboChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ComboChartOptions>) {
-		super(holder, chartConfigs);
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		const chartOptions = Tools.mergeDefaultChartOptions(
-			Configuration.options.comboChart,
-			chartConfigs.options
-		);
+		const chartOptions = mergeDefaultChartOptions(configOptions.comboChart, chartConfigs.options)
 
 		// Warn user if no comboChartTypes defined
 		// Use skeleton chart instead
 		if (!chartConfigs.options.comboChartTypes) {
-			console.error('No comboChartTypes defined for the Combo Chart!');
+			console.error('No comboChartTypes defined for the Combo Chart!')
 			// add a default chart to get an empty chart
-			chartOptions.comboChartTypes = [
-				{ type: ChartTypes.LINE, correspondingDatasets: [] },
-			];
+			chartOptions.comboChartTypes = [{ type: ChartTypes.LINE, correspondingDatasets: [] }]
 		}
 
 		// set the global options
-		this.model.setOptions(chartOptions);
+		this.model.setOptions(chartOptions)
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getGraphComponents() {
-		const { comboChartTypes } = this.model.getOptions();
-		let counter = 0;
+		const { comboChartTypes } = this.model.getOptions()
+		let counter = 0
 		const graphComponents = comboChartTypes
-			.map((graph) => {
-				const type = graph.type;
-				let options;
+			.map((graph: any) => {
+				const type = graph.type
+				let options: any
 
 				// initializes the components using input strings with the base configs for each chart
 				if (typeof graph.type === 'string') {
@@ -88,76 +70,65 @@ export class ComboChart extends AxisChart {
 					if (!Object.keys(graphComponentsMap).includes(graph.type)) {
 						console.error(
 							`Invalid chart type "${graph.type}" specified for combo chart. Please refer to the ComboChart tutorial for more guidance.`
-						);
-						return null;
+						)
+						return null
 					}
-					let stacked;
-					options = Tools.merge(
+					let stacked = false
+					options = merge(
 						{},
-						Configuration.options[
-							`${Tools.camelCase(graph.type)}Chart`
-						],
+						configOptions[`${camelCase(graph.type)}Chart`],
 						this.model.getOptions(),
 						graph.options
-					);
+					)
 					// if we are creating a stacked area, the contained Line chart needs to know it is stacked
 					if (graph.type === ChartTypes.STACKED_AREA) {
-						stacked = true;
+						stacked = true
 					}
 					return graphComponentsMap[graph.type].map(
-						(Component, i) =>
+						(Component: any) =>
 							new Component(this.model, this.services, {
 								groups: graph.correspondingDatasets,
 								id: counter++,
 								options: options,
-								stacked,
+								stacked
 							})
-					);
+					)
 				} else {
 					// user has imported a type or custom component to instantiate
-					options = Tools.merge(
-						{},
-						this.model.getOptions(),
-						graph.options
-					);
+					options = merge({}, this.model.getOptions(), graph.options)
 					return new type(this.model, this.services, {
 						groups: graph.correspondingDatasets,
 						id: counter++,
-						options: options,
-					});
+						options: options
+					})
 				}
 			})
-			.filter((item) => item !== null);
+			.filter((item: any) => item !== null)
 
-		return Tools.flatten(graphComponents);
+		return flatten(graphComponents)
 	}
 
 	getComponents() {
-		const { comboChartTypes } = this.model.getOptions();
+		const { comboChartTypes } = this.model.getOptions()
 		// don't add the regular ruler if stacked ruler is added
 		const stackedRulerEnabled = comboChartTypes.some(
 			(chartObject) =>
-				chartObject.type === ChartTypes.STACKED_BAR ||
-				chartObject.type === ChartTypes.STACKED_AREA
-		);
+				chartObject.type === ChartTypes.STACKED_BAR || chartObject.type === ChartTypes.STACKED_AREA
+		)
 
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
+				skeleton: Skeletons.GRID
 			}),
-			...(stackedRulerEnabled
-				? []
-				: [new Ruler(this.model, this.services)]),
-			...this.getGraphComponents(),
-		];
+			...(stackedRulerEnabled ? [] : [new Ruler(this.model, this.services)]),
+			...this.getGraphComponents()
+		]
 
-		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
-		);
+		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
 
-		return components;
+		return components
 	}
 }

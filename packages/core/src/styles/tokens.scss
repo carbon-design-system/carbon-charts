@@ -1,7 +1,7 @@
-@use "sass:map";
-@use "@carbon/styles/scss/themes";
-@use "@carbon/styles/scss/utilities/component-tokens";
-@use "@carbon/colors" as *;
+@use 'sass:map';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/utilities/component-tokens';
+@use '@carbon/colors' as *;
 
 /*
  *
@@ -12,21 +12,21 @@ $color-scheme: (
 	values: (
 		(
 			theme: themes.$white,
-			value: light,
+			value: light
 		),
 		(
 			theme: themes.$g10,
-			value: light,
+			value: light
 		),
 		(
 			theme: themes.$g90,
-			value: dark,
+			value: dark
 		),
 		(
 			theme: themes.$g100,
-			value: dark,
-		),
-	),
+			value: dark
+		)
+	)
 ) !default;
 
 /*
@@ -38,21 +38,21 @@ $alert-stroke: (
 	values: (
 		(
 			theme: themes.$white,
-			value: #b28600,
+			value: #b28600
 		),
 		(
 			theme: themes.$g10,
-			value: #b28600,
+			value: #b28600
 		),
 		(
 			theme: themes.$g90,
-			value: none,
+			value: none
 		),
 		(
 			theme: themes.$g100,
-			value: none,
-		),
-	),
+			value: none
+		)
+	)
 ) !default;
 
 $layer-01-absolute: (
@@ -60,21 +60,21 @@ $layer-01-absolute: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $white-0,
+			value: $white-0
 		),
 		(
 			theme: themes.$g10,
-			value: $white-0,
+			value: $white-0
 		),
 		(
 			theme: themes.$g90,
-			value: $black-100,
+			value: $black-100
 		),
 		(
 			theme: themes.$g100,
-			value: $black-100,
-		),
-	),
+			value: $black-100
+		)
+	)
 ) !default;
 
 $layer-inverse-absolute: (
@@ -82,21 +82,21 @@ $layer-inverse-absolute: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $black-100,
+			value: $black-100
 		),
 		(
 			theme: themes.$g10,
-			value: $black-100,
+			value: $black-100
 		),
 		(
 			theme: themes.$g90,
-			value: $white-0,
+			value: $white-0
 		),
 		(
 			theme: themes.$g100,
-			value: $white-0,
-		),
-	),
+			value: $white-0
+		)
+	)
 ) !default;
 
 $null-state: (
@@ -104,21 +104,21 @@ $null-state: (
 	values: (
 		(
 			theme: themes.$white,
-			value: none,
+			value: none
 		),
 		(
 			theme: themes.$g10,
-			value: none,
+			value: none
 		),
 		(
 			theme: themes.$g90,
-			value: map.get(themes.$g90, icon-inverse),
+			value: map.get(themes.$g90, icon-inverse)
 		),
 		(
 			theme: themes.$g100,
-			value: none,
-		),
-	),
+			value: none
+		)
+	)
 ) !default;
 
 /*
@@ -130,21 +130,21 @@ $grid-bg: (
 	values: (
 		(
 			theme: themes.$white,
-			value: map.get(themes.$white, background),
+			value: map.get(themes.$white, background)
 		),
 		(
 			theme: themes.$g10,
-			value: map.get(themes.$g10, layer-01),
+			value: map.get(themes.$g10, layer-01)
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-100,
+			value: $gray-100
 		),
 		(
 			theme: themes.$g100,
-			value: map.get(themes.$g100, background),
-		),
-	),
+			value: map.get(themes.$g100, background)
+		)
+	)
 ) !default;
 
 // METER
@@ -153,21 +153,21 @@ $meter-range-indicator: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-40,
+			value: $gray-40
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-40,
+			value: $gray-40
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60,
+			value: $gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60,
-		),
-	),
+			value: $gray-60
+		)
+	)
 ) !default;
 
 // NETWORK DIAGRAMS
@@ -176,21 +176,21 @@ $network-diagrams-background-hover: (
 	values: (
 		(
 			theme: themes.$white,
-			value: #f1f1f1,
+			value: #f1f1f1
 		),
 		(
 			theme: themes.$g10,
-			value: #f1f1f1,
+			value: #f1f1f1
 		),
 		(
 			theme: themes.$g90,
-			value: #ededed,
+			value: #ededed
 		),
 		(
 			theme: themes.$g100,
-			value: #ededed,
-		),
-	),
+			value: #ededed
+		)
+	)
 ) !default;
 
 // TOOLTIP
@@ -199,21 +199,21 @@ $tooltip-line-border: (
 	values: (
 		(
 			theme: themes.$white,
-			value: map.get(themes.$white, layer-accent-01),
+			value: map.get(themes.$white, layer-accent-01)
 		),
 		(
 			theme: themes.$g10,
-			value: map.get(themes.$g10, layer-accent-01),
+			value: map.get(themes.$g10, layer-accent-01)
 		),
 		(
 			theme: themes.$g90,
-			value: map.get(themes.$g90, layer-01),
+			value: map.get(themes.$g90, layer-01)
 		),
 		(
 			theme: themes.$g100,
-			value: map.get(themes.$g100, border-strong-01),
-		),
-	),
+			value: map.get(themes.$g100, border-strong-01)
+		)
+	)
 ) !default;
 
 // ZONES
@@ -222,42 +222,42 @@ $zone-fill-01: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-10,
+			value: $gray-10
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-10,
+			value: $gray-10
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-90,
+			value: $gray-90
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-90,
-		),
-	),
+			value: $gray-90
+		)
+	)
 ) !default;
 $zone-stroke-01: (
 	fallback: $gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60,
+			value: $gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60,
-		),
-	),
+			value: $gray-60
+		)
+	)
 ) !default;
 
 $zone-fill-02: (
@@ -265,42 +265,42 @@ $zone-fill-02: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-20,
+			value: $gray-20
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-20,
+			value: $gray-20
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-80,
+			value: $gray-80
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-80,
-		),
-	),
+			value: $gray-80
+		)
+	)
 ) !default;
 $zone-stroke-02: (
 	fallback: $gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60,
+			value: $gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60,
-		),
-	),
+			value: $gray-60
+		)
+	)
 ) !default;
 
 $zone-fill-03: (
@@ -308,42 +308,42 @@ $zone-fill-03: (
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-30,
+			value: $gray-30
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-30,
+			value: $gray-30
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-70,
+			value: $gray-70
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-70,
-		),
-	),
+			value: $gray-70
+		)
+	)
 ) !default;
 $zone-stroke-03: (
 	fallback: $gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50,
+			value: $gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60,
+			value: $gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60,
-		),
-	),
+			value: $gray-60
+		)
+	)
 ) !default;
 
 $custom-charting-tokens: (
@@ -376,10 +376,7 @@ $color-scheme: component-tokens.get-var($color-scheme, 'color-scheme');
 
 // ELEMENTS
 $alert-stroke: component-tokens.get-var($alert-stroke, 'alert-stroke');
-$layer-01-absolute: component-tokens.get-var(
-	$layer-01-absolute,
-	'layer-01-absolute'
-);
+$layer-01-absolute: component-tokens.get-var($layer-01-absolute, 'layer-01-absolute');
 $layer-inverse-absolute: component-tokens.get-var(
 	$layer-inverse-absolute,
 	'layer-inverse-absolute'
@@ -390,10 +387,7 @@ $null-state: component-tokens.get-var($null-state, 'null-state');
 $grid-bg: component-tokens.get-var($grid-bg, 'grid-bg');
 
 // METER
-$meter-range-indicator: component-tokens.get-var(
-	$meter-range-indicator,
-	'meter-range-indicator'
-);
+$meter-range-indicator: component-tokens.get-var($meter-range-indicator, 'meter-range-indicator');
 
 // NETWORK DIAGRAMS
 $network-diagrams-background-hover: component-tokens.get-var(
@@ -402,10 +396,7 @@ $network-diagrams-background-hover: component-tokens.get-var(
 );
 
 // TOOLTIP
-$tooltip-line-border: component-tokens.get-var(
-	$tooltip-line-border,
-	'tooltip-line-border'
-);
+$tooltip-line-border: component-tokens.get-var($tooltip-line-border, 'tooltip-line-border');
 
 // ZONES
 $zone-fill-01: component-tokens.get-var($zone-fill-01, 'zone-fill-01');

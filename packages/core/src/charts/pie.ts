@@ -1,47 +1,32 @@
 // Internal Imports
-import { PieChartModel } from '../model/pie';
-import { Chart } from '../chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, PieChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
+import { PieChartModel } from '../model/pie'
+import { Chart } from '../chart'
+import { options } from '../configuration'
+import type { ChartConfig, PieChartOptions } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
+import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Pie,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Pie, Skeleton } from '../components/index'
 
 export class PieChart extends Chart {
-	model = new PieChartModel(this.services);
+	model = new PieChartModel(this.services)
 
 	// TODO - Optimize the use of "extending"
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<PieChartOptions>,
-		extending = false
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {
+		super(holder, chartConfigs)
 
 		// TODO - Optimize the use of "extending"
 		if (extending) {
-			return;
+			return
 		}
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.pieChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.pieChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
@@ -49,12 +34,12 @@ export class PieChart extends Chart {
 		const graphFrameComponents: any[] = [
 			new Pie(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.PIE,
-			}),
-		];
+				skeleton: Skeletons.PIE
+			})
+		]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: any[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

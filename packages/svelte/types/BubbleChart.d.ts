@@ -1,5 +1,5 @@
-import { BubbleChart as BC } from "@carbon/charts";
-import type { BubbleChartOptions } from "@carbon/charts/interfaces";
-import BaseChart from "./BaseChart";
+import { BubbleChart as BubbleChartCore } from '@carbon/charts'
+import type { BubbleChartOptions } from '@carbon/charts/interfaces'
+import BaseChart from './BaseChart'
 
-export default class BubbleChart extends BaseChart<BC, BubbleChartOptions> {}
+export default class BubbleChart extends BaseChart<BubbleChartCore, BubbleChartOptions> {}

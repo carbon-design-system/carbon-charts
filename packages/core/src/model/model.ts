@@ -1,237 +1,220 @@
 // Internal Imports
-import * as Configuration from '../configuration';
-import { histogram as histogramConfigs } from '../configuration-non-customizable';
-
-import * as Tools from '../tools';
-import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
+import { color, legend } from '../configuration'
+import { histogram as histogramConfigs } from '../configuration-non-customizable'
+import {
+	clone,
+	fromPairs,
+	getProperty,
+	groupBy,
+	merge,
+	removeArrayDuplicates,
+	updateLegendAdditionalItems
+} from '../tools'
+import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
 
 // D3
-import { scaleOrdinal } from 'd3-scale';
-import { stack, stackOffsetDiverging } from 'd3-shape';
-import { bin } from 'd3-array';
-import { formatDateTillMilliSeconds } from '../services/time-series';
+import { scaleOrdinal } from 'd3-scale'
+import { stack, stackOffsetDiverging } from 'd3-shape'
+import { bin } from 'd3-array'
+import { formatDateTillMilliSeconds } from '../services/time-series'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
-	protected services: any;
+	protected services: any
 
 	// Internal Model state
 	protected state: any = {
-		options: {},
-	};
+		options: {}
+	}
 
 	// Data labels
 	/**
 	 * A list of all the data groups that have existed within the lifetime of the chart
 	 * @type string[]
 	 */
-	protected allDataGroups: string[];
+	protected allDataGroups: string[]
 
 	// Fill scales & fill related objects
-	protected colorScale: any = {};
+	protected colorScale: any = {}
 
-	protected colorClassNames: any = {};
+	protected colorClassNames: any = {}
 
 	constructor(services: any) {
-		this.services = services;
+		this.services = services
 	}
 
-	getAllDataFromDomain(groups?) {
+	getAllDataFromDomain(groups?: any) {
 		if (!this.getData()) {
-			return null;
+			return null
 		}
-		const options = this.getOptions();
+		const options = this.getOptions()
 		// Remove datasets that have been disabled
-		let allData = this.getData();
-		const dataGroups = this.getDataGroups();
-		const { groupMapsTo } = Tools.getProperty(options, 'data');
-		const axesOptions = Tools.getProperty(options, 'axes');
+		let allData = this.getData()
+		const dataGroups = this.getDataGroups()
+		const { groupMapsTo } = getProperty(options, 'data')
+		const axesOptions = getProperty(options, 'axes')
 
 		// filter out the groups that are irrelevant to the component
 		if (groups) {
-			allData = allData.filter((item) =>
-				groups.includes(item[groupMapsTo])
-			);
+			allData = allData.filter((item: any) => groups.includes(item[groupMapsTo]))
 		}
 
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
-				const mapsTo = axesOptions[axis].mapsTo;
-				const scaleType = axesOptions[axis].scaleType;
+				const mapsTo = axesOptions[axis].mapsTo
+				const scaleType = axesOptions[axis].scaleType
 				// make sure linear/log values are numbers
-				if (
-					scaleType === ScaleTypes.LINEAR ||
-					scaleType === ScaleTypes.LOG
-				) {
-					allData = allData.map((datum) => {
+				if (scaleType === ScaleTypes.LINEAR || scaleType === ScaleTypes.LOG) {
+					allData = allData.map((datum: any) => {
 						return {
 							...datum,
-							[mapsTo]:
-								datum[mapsTo] === null
-									? datum[mapsTo]
-									: Number(datum[mapsTo]),
-						};
-					});
+							[mapsTo]: datum[mapsTo] === null ? datum[mapsTo] : Number(datum[mapsTo])
+						}
+					})
 				}
 
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						allData = allData.filter((datum) =>
-							axesOptions[axis].domain.includes(datum[mapsTo])
-						);
+						allData = allData.filter((datum: any) => axesOptions[axis].domain.includes(datum[mapsTo]))
 					} else {
-						const [start, end] = axesOptions[axis].domain;
+						const [start, end] = axesOptions[axis].domain
 						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
 						allData = allData.filter(
-							(datum) =>
-								!(mapsTo in datum) ||
-								(datum[mapsTo] >= start && datum[mapsTo] <= end)
-						);
+							(datum: any) => !(mapsTo in datum) || (datum[mapsTo] >= start && datum[mapsTo] <= end)
+						)
 					}
 				}
-			});
+			})
 		}
 
-		return allData.filter((datum) => {
-			return dataGroups.find(
-				(group) => group.name === datum[groupMapsTo]
-			);
-		});
+		return allData.filter((datum: any) => {
+			return dataGroups.find((group: any) => group.name === datum[groupMapsTo])
+		})
 	}
 
 	/**
 	 * Charts that have group configs passed into them, only want to retrieve the display data relevant to that chart
 	 * @param groups the included datasets for the particular chart
 	 */
-	getDisplayData(groups?) {
+	getDisplayData(groups?: any) {
 		if (!this.get('data')) {
-			return null;
+			return null
 		}
 
-		const { ACTIVE } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups(groups);
-		const { groupMapsTo } = this.getOptions().data;
-		const allDataFromDomain = this.getAllDataFromDomain(groups);
+		const { ACTIVE } = legend.items.status
+		const dataGroups = this.getDataGroups(groups)
+		const { groupMapsTo } = this.getOptions().data
+		const allDataFromDomain = this.getAllDataFromDomain(groups)
 
-		return allDataFromDomain.filter((datum) => {
+		return allDataFromDomain.filter((datum: any) => {
 			return dataGroups.find(
-				(dataGroup) =>
-					dataGroup.name === datum[groupMapsTo] &&
-					dataGroup.status === ACTIVE
-			);
-		});
+				(dataGroup: any) => dataGroup.name === datum[groupMapsTo] && dataGroup.status === ACTIVE
+			)
+		})
 	}
 
 	getData() {
-		return this.get('data');
+		return this.get('data')
 	}
 
 	isDataEmpty() {
-		return !this.getData().length;
+		return !this.getData().length
 	}
 
 	/**
 	 *
 	 * @param newData The new raw data to be set
 	 */
-	setData(newData) {
-		const sanitizedData = this.sanitize(Tools.clone(newData));
-		const dataGroups = this.generateDataGroups(sanitizedData);
+	setData(newData: any) {
+		const sanitizedData = this.sanitize(clone(newData))
+		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({
 			data: sanitizedData,
-			dataGroups,
-		});
+			dataGroups
+		})
 
-		return sanitizedData;
+		return sanitizedData
 	}
 
-	getDataGroups(groups?) {
-		const isDataLoading = Tools.getProperty(
-			this.getOptions(),
-			'data',
-			'loading'
-		);
+	getDataGroups(groups?: any) {
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		// No data should be displayed while data is still loading
 		if (isDataLoading) {
-			return [];
+			return []
 		}
 
 		// if its a combo chart, the specific chart will pass the model the groups it needs
 		if (groups) {
-			return this.get('dataGroups').filter((dataGroup) =>
-				groups.includes(dataGroup.name)
-			);
+			return this.get('dataGroups').filter((dataGroup: any) => groups.includes(dataGroup.name))
 		}
-		return this.get('dataGroups');
+		return this.get('dataGroups')
 	}
 
-	getActiveDataGroups(groups?) {
-		const { ACTIVE } = Configuration.legend.items.status;
+	getActiveDataGroups(groups?: any) {
+		const { ACTIVE } = legend.items.status
 
-		return this.getDataGroups(groups).filter(
-			(dataGroup) => dataGroup.status === ACTIVE
-		);
+		return this.getDataGroups(groups).filter((dataGroup: any) => dataGroup.status === ACTIVE)
 	}
 
-	getDataGroupNames(groups?) {
-		const dataGroups = this.getDataGroups(groups);
-		return dataGroups.map((dataGroup) => dataGroup.name);
+	getDataGroupNames(groups?: any) {
+		const dataGroups = this.getDataGroups(groups)
+		return dataGroups.map((dataGroup: any) => dataGroup.name)
 	}
 
-	getActiveDataGroupNames(groups?) {
-		const activeDataGroups = this.getActiveDataGroups(groups);
-		return activeDataGroups.map((dataGroup) => dataGroup.name);
+	getActiveDataGroupNames(groups?: any) {
+		const activeDataGroups = this.getActiveDataGroups(groups)
+		return activeDataGroups.map((dataGroup: any) => dataGroup.name)
 	}
 
-	private aggregateBinDataByGroup(bin) {
-		return Tools.groupBy(bin, 'group');
+	private aggregateBinDataByGroup(bin: any) {
+		return groupBy(bin, 'group')
 	}
 
 	getBinConfigurations() {
 		// Manipulate data and options for Histogram
-		const data = this.getDisplayData();
-		const options = this.getOptions();
+		const data = this.getDisplayData()
+		const options = this.getOptions()
 
-		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const mainXPos = this.services.cartesianScales.getMainXAxisPosition()
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier()
 
-		const axisOptions = options.axes[mainXPos];
-		const { groupMapsTo } = options.data;
-		const { bins: axisBins = histogramConfigs.defaultBins } = axisOptions;
-		const areBinsDefined = Array.isArray(axisBins);
+		const axisOptions = options.axes[mainXPos]
+		const { groupMapsTo } = options.data
+		const { bins: axisBins = histogramConfigs.defaultBins } = axisOptions
+		const areBinsDefined = Array.isArray(axisBins)
 
 		// Get Histogram bins
 		const bins = bin()
-			.value((d) => d[domainIdentifier])
-			.thresholds(axisBins)(data);
+			.value((d: any) => d[domainIdentifier])
+			.thresholds(axisBins)(data)
 
 		if (!areBinsDefined) {
 			// If bins are not defined by user
-			const binsWidth = bins[0].x1 - bins[0].x0;
+			const binsWidth = bins[0].x1 - bins[0].x0
 			// Set last bin width as the others
-			bins[bins.length - 1].x1 = +bins[bins.length - 1].x0 + binsWidth;
+			bins[bins.length - 1].x1 = +bins[bins.length - 1].x0 + binsWidth
 		} else {
 			// Set last bin end as the last user defined one
-			bins[bins.length - 1].x1 = axisBins[axisBins.length - 1];
+			bins[bins.length - 1].x1 = axisBins[axisBins.length - 1]
 		}
 
 		const binsDomain = areBinsDefined
 			? [axisBins[0], axisBins[axisBins.length - 1]]
-			: [bins[0].x0, bins[bins.length - 1].x1];
+			: [bins[0].x0, bins[bins.length - 1].x1]
 
 		// Get all groups
-		const groupsKeys = Array.from(new Set(data.map((d) => d[groupMapsTo])));
+		const groupsKeys = Array.from(new Set(data.map((d: any) => d[groupMapsTo])))
 
-		const histogramData = [];
+		const histogramData = []
 
 		// Group data by bin
 		bins.forEach((bin) => {
-			const key = `${bin.x0}-${bin.x1}`;
-			const aggregateDataByGroup = this.aggregateBinDataByGroup(bin);
+			const key = `${bin.x0}-${bin.x1}`
+			const aggregateDataByGroup = this.aggregateBinDataByGroup(bin)
 
 			groupsKeys.forEach((group: string) => {
 				// For each dataset put a bin with value 0 if not exist
@@ -240,27 +223,27 @@ export class ChartModel {
 					group,
 					key,
 					value: aggregateDataByGroup[group] || 0,
-					bin: bin.x0,
-				});
-			});
-		});
+					bin: bin.x0
+				})
+			})
+		})
 
 		return {
 			bins,
-			binsDomain,
-		};
+			binsDomain
+		}
 	}
 
 	getBinnedStackedData() {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const dataGroupNames = this.getActiveDataGroupNames();
+		const dataGroupNames = this.getActiveDataGroupNames()
 
-		const { bins } = this.getBinConfigurations();
+		const { bins } = this.getBinConfigurations()
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({
-			bins,
-		});
+			bins
+		})
 
 		return stack()
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
@@ -269,187 +252,163 @@ export class ChartModel {
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
 					.map((key) => {
-						const element = series[key];
-						element[groupMapsTo] = dataGroupNames[i];
+						const element = series[key]
+						element[groupMapsTo] = dataGroupNames[i]
 
-						return element;
-					});
-			});
+						return element
+					})
+			})
 	}
 
 	getGroupedData(groups?) {
-		const displayData = this.getDisplayData(groups);
-		const groupedData = {};
-		const { groupMapsTo } = this.getOptions().data;
+		const displayData = this.getDisplayData(groups)
+		const groupedData = {}
+		const { groupMapsTo } = this.getOptions().data
 
 		displayData.map((datum) => {
-			const group = datum[groupMapsTo];
-			if (
-				groupedData[group] !== null &&
-				groupedData[group] !== undefined
-			) {
-				groupedData[group].push(datum);
+			const group = datum[groupMapsTo]
+			if (groupedData[group] !== null && groupedData[group] !== undefined) {
+				groupedData[group].push(datum)
 			} else {
-				groupedData[group] = [datum];
+				groupedData[group] = [datum]
 			}
-		});
+		})
 
 		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
-			data: groupedData[groupName],
-		}));
+			data: groupedData[groupName]
+		}))
 	}
 
-	getStackKeys(
-		{ bins = null, groups = null } = { bins: null, groups: null }
-	) {
-		const options = this.getOptions();
+	getStackKeys({ bins = null, groups = null } = { bins: null, groups: null }) {
+		const options = this.getOptions()
 
-		const displayData = this.getDisplayData(groups);
+		const displayData = this.getDisplayData(groups)
 
-		let stackKeys;
+		let stackKeys
 		if (bins) {
-			stackKeys = bins.map((bin) => `${bin.x0}-${bin.x1}`);
+			stackKeys = bins.map((bin) => `${bin.x0}-${bin.x1}`)
 		} else {
-			stackKeys = Tools.removeArrayDuplicates(
+			stackKeys = removeArrayDuplicates(
 				displayData.map((datum) => {
-					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-						datum
-					);
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
 					// Use time value as key for Date object to avoid multiple data in the same second
 					if (datum[domainIdentifier] instanceof Date) {
-						return formatDateTillMilliSeconds(
-							datum[domainIdentifier]
-						);
+						return formatDateTillMilliSeconds(datum[domainIdentifier])
 					}
 
-					return datum[domainIdentifier] &&
-						typeof datum[domainIdentifier].toString === 'function'
+					return datum[domainIdentifier] && typeof datum[domainIdentifier].toString === 'function'
 						? datum[domainIdentifier].toString()
-						: datum[domainIdentifier];
+						: datum[domainIdentifier]
 				})
-			);
+			)
 		}
 
-		const axisPosition = this.services.cartesianScales.domainAxisPosition;
-		const scaleType = options.axes[axisPosition].scaleType;
+		const axisPosition = this.services.cartesianScales.domainAxisPosition
+		const scaleType = options.axes[axisPosition].scaleType
 
 		// Sort keys
 		if (scaleType === ScaleTypes.TIME) {
 			stackKeys.sort((a: any, b: any) => {
-				const dateA: any = new Date(a);
-				const dateB: any = new Date(b);
+				const dateA: any = new Date(a)
+				const dateB: any = new Date(b)
 
-				return dateA - dateB;
-			});
-		} else if (
-			scaleType === ScaleTypes.LOG ||
-			scaleType === ScaleTypes.LINEAR
-		) {
-			stackKeys.sort((a: any, b: any) => a - b);
+				return dateA - dateB
+			})
+		} else if (scaleType === ScaleTypes.LOG || scaleType === ScaleTypes.LINEAR) {
+			stackKeys.sort((a: any, b: any) => a - b)
 		}
 
-		return stackKeys;
+		return stackKeys
 	}
 
 	getDataValuesGroupedByKeys({ bins = null, groups = null }) {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-		const displayData = this.getDisplayData(groups);
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
+		const displayData = this.getDisplayData(groups)
 
-		const dataGroupNames = this.getDataGroupNames();
+		const dataGroupNames = this.getDataGroupNames()
 
-		const stackKeys = this.getStackKeys({ bins, groups });
+		const stackKeys = this.getStackKeys({ bins, groups })
 		if (bins) {
 			return stackKeys.map((key) => {
-				const [binStart, binEnd] = key.split('-');
+				const [binStart, binEnd] = key.split('-')
 
-				const correspondingValues = { x0: binStart, x1: binEnd };
-				const correspondingBin = bins.find(
-					(bin) => bin.x0.toString() === binStart.toString()
-				);
+				const correspondingValues = { x0: binStart, x1: binEnd }
+				const correspondingBin = bins.find((bin) => bin.x0.toString() === binStart.toString())
 
 				dataGroupNames.forEach((dataGroupName) => {
-					correspondingValues[
-						dataGroupName
-					] = correspondingBin.filter(
+					correspondingValues[dataGroupName] = correspondingBin.filter(
 						(binItem) => binItem[groupMapsTo] === dataGroupName
-					).length;
-				});
+					).length
+				})
 
-				return correspondingValues;
-			}) as any;
+				return correspondingValues
+			}) as any
 		}
 
 		return stackKeys.map((key) => {
-			const correspondingValues = { sharedStackKey: key };
+			const correspondingValues = { sharedStackKey: key }
 			dataGroupNames.forEach((dataGroupName) => {
 				const correspondingDatum = displayData.find((datum) => {
-					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(
-						datum
-					);
+					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
 					return (
 						datum[groupMapsTo] === dataGroupName &&
-						datum.hasOwnProperty(domainIdentifier) &&
+						Object.prototype.hasOwnProperty.call(datum, domainIdentifier) &&
 						(datum[domainIdentifier] instanceof Date
-							? formatDateTillMilliSeconds(
-									datum[domainIdentifier]
-							  ) === key
+							? formatDateTillMilliSeconds(datum[domainIdentifier]) === key
 							: datum[domainIdentifier].toString() === key)
-					);
-				});
+					)
+				})
 
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(
-					correspondingValues
-				);
+				const rangeIdentifier =
+					this.services.cartesianScales.getRangeIdentifier(correspondingValues)
 				correspondingValues[dataGroupName] = correspondingDatum
 					? correspondingDatum[rangeIdentifier]
-					: null;
-			});
+					: null
+			})
 
-			return correspondingValues;
-		}) as any;
+			return correspondingValues
+		}) as any
 	}
 
 	getStackedData({ percentage = false, groups = null, divergent = false }) {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
 		// Get only active data groups so non-active data groups are not rendered
 		// on legend item click
-		const dataGroupNames = this.getActiveDataGroupNames(groups);
+		const dataGroupNames = this.getActiveDataGroupNames(groups)
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys({
-			groups,
-		});
+			groups
+		})
 
 		if (percentage) {
-			const maxByKey = Tools.fromPairs(
-				dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0])
-			);
+			const maxByKey = fromPairs(dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0]))
 
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
-					maxByKey[d.sharedStackKey] += d[name];
-				});
-			});
+					maxByKey[d.sharedStackKey] += d[name]
+				})
+			})
 
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach((name) => {
+					const denominator: number = maxByKey[d.sharedStackKey] as number
 					if (maxByKey[d.sharedStackKey]) {
-						d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+						d[name] = (d[name] / denominator) * 100;
 					} else {
 						d[name] = 0;
 					}
 				});
 			});
+			
 		}
 
-		const stackToUse = divergent
-			? stack().offset(stackOffsetDiverging)
-			: stack();
+		const stackToUse = divergent ? stack().offset(stackOffsetDiverging) : stack()
 
 		return stackToUse
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
@@ -458,37 +417,37 @@ export class ChartModel {
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
 					.map((key) => {
-						const element = series[key];
-						element[groupMapsTo] = dataGroupNames[i];
+						const element = series[key]
+						element[groupMapsTo] = dataGroupNames[i]
 
-						return element;
-					});
-			});
+						return element
+					})
+			})
 	}
 
 	/**
 	 * @return {Object} The chart's options
 	 */
 	getOptions() {
-		return this.state.options;
+		return this.state.options
 	}
 
 	set(newState: any, configs?: any) {
-		this.state = Object.assign({}, this.state, newState);
+		this.state = Object.assign({}, this.state, newState)
 		const newConfig = Object.assign(
 			{ skipUpdate: false, animate: true }, // default configs
 			configs
-		);
+		)
 		if (!newConfig.skipUpdate) {
-			this.update(newConfig.animate);
+			this.update(newConfig.animate)
 		}
 	}
 
 	get(property?: string) {
 		if (property) {
-			return this.state[property];
+			return this.state[property]
 		} else {
-			return this.state;
+			return this.state
 		}
 	}
 
@@ -497,12 +456,12 @@ export class ChartModel {
 	 * @param newOptions New options to be set
 	 */
 	setOptions(newOptions) {
-		const options = this.getOptions();
-		Tools.updateLegendAdditionalItems(options, newOptions);
+		const options = this.getOptions()
+		updateLegendAdditionalItems(options, newOptions)
 
 		this.set({
-			options: Tools.merge(options, newOptions),
-		});
+			options: merge(options, newOptions)
+		})
 	}
 
 	/**
@@ -512,88 +471,70 @@ export class ChartModel {
 	 */
 	update(animate = true) {
 		if (!this.getDisplayData()) {
-			return;
+			return
 		}
 
-		this.updateAllDataGroups();
+		this.updateAllDataGroups()
 
-		this.setCustomColorScale();
-		this.setColorClassNames();
-		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
+		this.setCustomColorScale()
+		this.setColorClassNames()
+		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate })
 	}
 
 	/*
 	 * Data labels
 	 */
 	toggleDataLabel(changedLabel: string) {
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups();
+		const { ACTIVE, DISABLED } = legend.items.status
+		const dataGroups = this.getDataGroups()
 
-		const hasDeactivatedItems = dataGroups.some(
-			(group) => group.status === DISABLED
-		);
-		const activeItems = dataGroups.filter(
-			(group) => group.status === ACTIVE
-		);
+		const hasDeactivatedItems = dataGroups.some((group) => group.status === DISABLED)
+		const activeItems = dataGroups.filter((group) => group.status === ACTIVE)
 
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
 			// If the only active item is being toggled
 			// Activate all items
-			if (
-				activeItems.length === 1 &&
-				activeItems[0].name === changedLabel
-			) {
+			if (activeItems.length === 1 && activeItems[0].name === changedLabel) {
 				// If every item is active, then enable "changedLabel" and disable all other items
 				dataGroups.forEach((group, i) => {
-					dataGroups[i].status = ACTIVE;
-				});
+					dataGroups[i].status = ACTIVE
+				})
 			} else {
-				const indexToChange = dataGroups.findIndex(
-					(group) => group.name === changedLabel
-				);
+				const indexToChange = dataGroups.findIndex((group) => group.name === changedLabel)
 				dataGroups[indexToChange].status =
-					dataGroups[indexToChange].status === DISABLED
-						? ACTIVE
-						: DISABLED;
+					dataGroups[indexToChange].status === DISABLED ? ACTIVE : DISABLED
 			}
 		} else {
 			// If every item is active, then enable "changedLabel" and disable all other items
 			dataGroups.forEach((group, i) => {
-				dataGroups[i].status =
-					group.name === changedLabel ? ACTIVE : DISABLED;
-			});
+				dataGroups[i].status = group.name === changedLabel ? ACTIVE : DISABLED
+			})
 		}
 
 		// Updates selected groups
-		const updatedActiveItems = dataGroups.filter(
-			(group) => group.status === ACTIVE
-		);
-		const options = this.getOptions();
+		const updatedActiveItems = dataGroups.filter((group) => group.status === ACTIVE)
+		const options = this.getOptions()
 
-		const hasUpdatedDeactivatedItems = dataGroups.some(
-			(group) => group.status === DISABLED
-		);
+		const hasUpdatedDeactivatedItems = dataGroups.some((group) => group.status === DISABLED)
 
 		// If there are deactivated items, map the item name into selected groups
 		if (hasUpdatedDeactivatedItems) {
-			options.data.selectedGroups = updatedActiveItems.map(
-				(activeItem) => activeItem.name
-			);
+			options.data.selectedGroups = updatedActiveItems.map((activeItem) => activeItem.name)
 		} else {
 			// If every item is active, clear array
-			options.data.selectedGroups = [];
+			options.data.selectedGroups = []
 		}
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups,
-		});
+			dataGroups
+		})
 
 		// Update model
 		this.set({
-			dataGroups,
-		});
+			dataGroups
+		})
 	}
 
 	/**
@@ -604,82 +545,73 @@ export class ChartModel {
 	 * @param defaultFilled the default for this chart
 	 */
 	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
-		const options = this.getOptions();
+		const options = this.getOptions()
 		if (options.getIsFilled) {
-			return options.getIsFilled(group, key, data, defaultFilled);
+			return options.getIsFilled(group, key, data, defaultFilled)
 		} else {
-			return defaultFilled;
+			return defaultFilled
 		}
 	}
 
 	getFillColor(group: any, key?: any, data?: any) {
-		const options = this.getOptions();
-		const defaultFillColor = Tools.getProperty(this.colorScale, group);
+		const options = this.getOptions()
+		const defaultFillColor = getProperty(this.colorScale, group)
 
 		if (options.getFillColor) {
-			return options.getFillColor(group, key, data, defaultFillColor);
+			return options.getFillColor(group, key, data, defaultFillColor)
 		} else {
-			return defaultFillColor;
+			return defaultFillColor
 		}
 	}
 
 	getStrokeColor(group: any, key?: any, data?: any) {
-		const options = this.getOptions();
-		const defaultStrokeColor = Tools.getProperty(this.colorScale, group);
+		const options = this.getOptions()
+		const defaultStrokeColor = getProperty(this.colorScale, group)
 
 		if (options.getStrokeColor) {
-			return options.getStrokeColor(group, key, data, defaultStrokeColor);
+			return options.getStrokeColor(group, key, data, defaultStrokeColor)
 		} else {
-			return defaultStrokeColor;
+			return defaultStrokeColor
 		}
 	}
 
 	isUserProvidedColorScaleValid() {
-		const userProvidedScale = Tools.getProperty(
-			this.getOptions(),
-			'color',
-			'scale'
-		);
-		const dataGroups = this.getDataGroups();
+		const userProvidedScale = getProperty(this.getOptions(), 'color', 'scale')
+		const dataGroups = this.getDataGroups()
 
-		if (
-			userProvidedScale == null ||
-			Object.keys(userProvidedScale).length == 0
-		) {
-			return false;
+		if (userProvidedScale == null || Object.keys(userProvidedScale).length == 0) {
+			return false
 		}
 
-		return dataGroups.some((dataGroup) =>
-			Object.keys(userProvidedScale).includes(dataGroup.name)
-		);
+		return dataGroups.some((dataGroup) => Object.keys(userProvidedScale).includes(dataGroup.name))
 	}
 
 	getColorClassName(configs: {
-		classNameTypes: ColorClassNameTypes[];
-		dataGroupName?: string;
-		originalClassName?: string;
+		classNameTypes: ColorClassNameTypes[]
+		dataGroupName?: string
+		originalClassName?: string
 	}) {
-		const colorPairingTag = this.colorClassNames(configs.dataGroupName);
-		let className = configs.originalClassName;
+		const colorPairingTag = this.colorClassNames(configs.dataGroupName)
+		let className = configs.originalClassName
 		configs.classNameTypes.forEach(
 			(type) =>
 				(className = configs.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
-		);
+		)
 
-		return className;
+		return className
 	}
 
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
 	getStatus() {
-		return null;
+		return null
 	}
 
 	getAllDataGroupsNames() {
-		return this.allDataGroups;
+		return this.allDataGroups
 	}
 
 	/**
@@ -689,92 +621,79 @@ export class ChartModel {
 	protected transformToTabularData(data) {
 		console.warn(
 			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format"
-		);
-		const tabularData = [];
-		const { datasets, labels } = data;
+		)
+		const tabularData = []
+		const { datasets, labels } = data
 
 		// Loop through all datasets
 		datasets.forEach((dataset) => {
 			// Update each data point to the new format
 			dataset.data.forEach((datum, i) => {
-				let group;
+				let group
 
-				const datasetLabel = Tools.getProperty(dataset, 'label');
+				const datasetLabel = getProperty(dataset, 'label')
 				if (datasetLabel === null) {
-					const correspondingLabel = Tools.getProperty(labels, i);
+					const correspondingLabel = getProperty(labels, i)
 					if (correspondingLabel) {
-						group = correspondingLabel;
+						group = correspondingLabel
 					} else {
-						group = 'Ungrouped';
+						group = 'Ungrouped'
 					}
 				} else {
-					group = datasetLabel;
+					group = datasetLabel
 				}
 
 				const updatedDatum = {
 					group,
-					key: labels[i],
-				};
-
-				if (isNaN(datum)) {
-					updatedDatum['value'] = datum.value;
-					updatedDatum['date'] = datum.date;
-				} else {
-					updatedDatum['value'] = datum;
+					key: labels[i]
 				}
 
-				tabularData.push(updatedDatum);
-			});
-		});
+				if (isNaN(datum)) {
+					updatedDatum['value'] = datum.value
+					updatedDatum['date'] = datum.date
+				} else {
+					updatedDatum['value'] = datum
+				}
 
-		return tabularData;
+				tabularData.push(updatedDatum)
+			})
+		})
+
+		return tabularData
 	}
 
 	getTabularDataArray() {
-		return [];
+		return []
 	}
 
 	exportToCSV() {
-		let data = this.getTabularDataArray().map((row) =>
-			row.map((column) => `\"${column === '&ndash;' ? '–' : column}\"`)
-		);
+		const data = this.getTabularDataArray().map((row) =>
+			row.map((column) => `"${column === '&ndash;' ? '–' : column}"`)
+		)
 
 		let csvString = '',
-			csvData = '';
+			csvData = ''
 		data.forEach(function (d, i) {
-			csvData = d.join(',');
-			csvString += i < data.length ? csvData + '\n' : csvData;
-		});
+			csvData = d.join(',')
+			csvString += i < data.length ? csvData + '\n' : csvData
+		})
 
-		const options = this.getOptions();
-
-		let fileName = 'myChart';
-		const customFilename = Tools.getProperty(
-			options,
-			'fileDownload',
-			'fileName'
-		);
-
-		if (typeof customFilename === 'function') {
-			fileName = customFilename('csv');
-		}
-
-		this.services.files.downloadCSV(csvString, `${fileName}.csv`);
+		this.services.files.downloadCSV(csvString, 'myChart.csv')
 	}
 
 	protected getTabularData(data) {
 		// if data is not an array
 		if (!Array.isArray(data)) {
-			return this.transformToTabularData(data);
+			return this.transformToTabularData(data)
 		}
 
-		return data;
+		return data
 	}
 
 	protected sanitize(data) {
-		data = this.getTabularData(data);
+		data = this.getTabularData(data)
 
-		return data;
+		return data
 	}
 
 	/*
@@ -791,48 +710,45 @@ export class ChartModel {
 		// it doesn't currently exist
 
 		if (!this.allDataGroups) {
-			this.allDataGroups = this.getDataGroupNames();
+			this.allDataGroups = this.getDataGroupNames()
 		} else {
 			// Loop through current data groups
 			this.getDataGroupNames().forEach((dataGroupName) => {
 				// If group name hasn't been stored yet, store it
 				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
-					this.allDataGroups.push(dataGroupName);
+					this.allDataGroups.push(dataGroupName)
 				}
-			});
+			})
 		}
 	}
 
 	protected generateDataGroups(data) {
-		const { groupMapsTo } = this.getOptions().data;
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const options = this.getOptions();
+		const { groupMapsTo } = this.getOptions().data
+		const { ACTIVE, DISABLED } = legend.items.status
+		const options = this.getOptions()
 
-		const uniqueDataGroups = Tools.removeArrayDuplicates(
-			data.map((datum) => datum[groupMapsTo])
-		);
+		const uniqueDataGroups = removeArrayDuplicates(data.map((datum) => datum[groupMapsTo]))
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {
-			const hasAllSelectedGroups = options.data.selectedGroups.every(
-				(groupName) => uniqueDataGroups.includes(groupName)
-			);
+			const hasAllSelectedGroups = options.data.selectedGroups.every((groupName) =>
+				uniqueDataGroups.includes(groupName)
+			)
 			if (!hasAllSelectedGroups) {
-				options.data.selectedGroups = [];
+				options.data.selectedGroups = []
 			}
 		}
 
 		// Get group status based on items in selected groups
 		const getStatus = (groupName) =>
-			!options.data.selectedGroups.length ||
-			options.data.selectedGroups.includes(groupName)
+			!options.data.selectedGroups.length || options.data.selectedGroups.includes(groupName)
 				? ACTIVE
-				: DISABLED;
+				: DISABLED
 
 		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
-			status: getStatus(groupName),
-		}));
+			status: getStatus(groupName)
+		}))
 	}
 
 	/*
@@ -840,17 +756,17 @@ export class ChartModel {
 	 */
 	protected setCustomColorScale() {
 		if (!this.isUserProvidedColorScaleValid()) {
-			return;
+			return
 		}
 
-		const options = this.getOptions();
-		const userProvidedScale = Tools.getProperty(options, 'color', 'scale');
+		const options = this.getOptions()
+		const userProvidedScale = getProperty(options, 'color', 'scale')
 
 		Object.keys(userProvidedScale).forEach((dataGroup) => {
 			if (!this.allDataGroups.includes(dataGroup)) {
-				console.warn(`"${dataGroup}" does not exist in data groups.`);
+				console.warn(`"${dataGroup}" does not exist in data groups.`)
 			}
-		});
+		})
 
 		/**
 		 * Go through allDataGroups. If a data group has a color value provided
@@ -858,54 +774,41 @@ export class ChartModel {
 		 */
 		const providedDataGroups = this.allDataGroups.filter(
 			(dataGroup) => userProvidedScale[dataGroup]
-		);
+		)
 
 		providedDataGroups.forEach(
-			(dataGroup) =>
-				(this.colorScale[dataGroup] = userProvidedScale[dataGroup])
-		);
+			(dataGroup) => (this.colorScale[dataGroup] = userProvidedScale[dataGroup])
+		)
 	}
 
 	/*
 	 * Color palette
 	 */
 	protected setColorClassNames() {
-		const colorPairingOptions = Tools.getProperty(
-			this.getOptions(),
-			'color',
-			'pairing'
-		);
+		const colorPairingOptions = getProperty(this.getOptions(), 'color', 'pairing')
 
 		// Check if user has defined numberOfVariants (differ from given data)
-		let numberOfVariants = Tools.getProperty(
-			colorPairingOptions,
-			'numberOfVariants'
-		);
+		let numberOfVariants = getProperty(colorPairingOptions, 'numberOfVariants')
 		if (!numberOfVariants || numberOfVariants < this.allDataGroups.length) {
-			numberOfVariants = this.allDataGroups.length;
+			numberOfVariants = this.allDataGroups.length
 		}
 
-		let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
-		const colorPairingCounts = Configuration.color.pairingOptions;
+		let pairingOption = getProperty(colorPairingOptions, 'option')
+		const colorPairingCounts = color.pairingOptions
 
 		// If number of dataGroups is greater than 5, user 14-color palette
-		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants;
+		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants
 
 		// Use default palette if user choice is not in range
 		pairingOption =
-			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
-				? pairingOption
-				: 1;
+			pairingOption <= colorPairingCounts[`${numberOfColors}-color`] ? pairingOption : 1
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) =>
-				`${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
-		);
+			(dataGroup, index) => `${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
+		)
 
 		// Create default color classnames
-		this.colorClassNames = scaleOrdinal()
-			.range(colorPairing)
-			.domain(this.allDataGroups);
+		this.colorClassNames = scaleOrdinal().range(colorPairing).domain(this.allDataGroups)
 	}
 }

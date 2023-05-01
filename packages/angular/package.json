@@ -41,15 +41,15 @@
     "scss"
   ],
   "dependencies": {
-    "@carbon/charts": "^1.7.5",
+    "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "0.1.0"
   },
   "peerDependencies": {
-    "@angular/common": ">= 6.0.0 && < 16.0.0",
-    "@angular/compiler": ">= 6.0.0 && < 16.0.0",
-    "@angular/core": ">= 6.0.0 && < 16.0.0",
-    "rxjs": ">= 6.0.0 && < 7.9.0",
-    "zone.js": ">= 0.8.29 && < 0.13.0"
+    "@angular/common": "*",
+    "@angular/compiler": "*",
+    "@angular/core": "*",
+    "rxjs": "*",
+    "zone.js": "*"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.9",

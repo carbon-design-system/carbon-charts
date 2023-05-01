@@ -1,42 +1,23 @@
 // Internal Imports
-import { AxisChart } from '../axis-chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, LollipopChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
+import { AxisChart } from '../axis-chart'
+import { options } from '../configuration'
+import type { ChartConfig, LollipopChartOptions } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
+import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Grid,
-	Ruler,
-	Scatter,
-	Lollipop,
-	TwoDimensionalAxes,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Grid, Ruler, Scatter, Lollipop, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class LollipopChart extends AxisChart {
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<LollipopChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: Element, chartConfigs: ChartConfig<LollipopChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.lollipopChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.lollipopChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
@@ -48,13 +29,11 @@ export class LollipopChart extends AxisChart {
 			new Lollipop(this.model, this.services),
 			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
-			}),
-		];
+				skeleton: Skeletons.GRID
+			})
+		]
 
-		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
-		);
-		return components;
+		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		return components
 	}
 }

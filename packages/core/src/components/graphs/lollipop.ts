@@ -1,115 +1,90 @@
 // Internal Imports
-import { Scatter } from './scatter';
-import * as Tools from '../../tools';
-import {
-	CartesianOrientations,
-	ColorClassNameTypes,
-	Events,
-	RenderTypes,
-} from '../../interfaces';
-import * as Configuration from '../../configuration';
+import { Scatter } from './scatter'
+import { flipDomainAndRangeBasedOnOrientation } from '../../tools'
+import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
+import { lines } from '../../configuration'
 
 export class Lollipop extends Scatter {
-	type = 'lollipop';
-	renderType = RenderTypes.SVG;
+	type = 'lollipop'
+	renderType = RenderTypes.SVG
 
 	init() {
-		const { events } = this.services;
+		const { events } = this.services
 		// Highlight correct line legend item hovers
-		events.addEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
+		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover)
 		// Un-highlight lines on legend item mouseouts
-		events.addEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
+		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 	}
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true })
 
-		const options = this.model.getOptions();
+		const options = this.model.getOptions()
 
-		const { groupMapsTo } = options.data;
+		const { groupMapsTo } = options.data
 
-		const { cartesianScales } = this.services;
-		const mainXScale = cartesianScales.getMainXScale();
-		const mainYScale = cartesianScales.getMainYScale();
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const { cartesianScales } = this.services
+		const mainXScale = cartesianScales.getMainXScale()
+		const mainYScale = cartesianScales.getMainYScale()
+		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
-		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
-		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
-		const orientation = cartesianScales.getOrientation();
-		const [
-			getXValue,
-			getYValue,
-		] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
+		const getRangeValue = (d: any) => cartesianScales.getRangeValue(d)
+		const orientation = cartesianScales.getOrientation()
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			orientation
-		);
+		)
 
 		// Update data on lines
 		const lines = svg
 			.selectAll('line.line')
-			.data(
-				this.getScatterData(),
-				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
-			);
+			.data(this.getScatterData(), (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`)
 
 		// Remove lines that are no longer needed
-		lines.exit().attr('opacity', 0).remove();
+		lines.exit().attr('opacity', 0).remove()
 
 		// Remove lines that need to be removed
-		const enteringLines = lines.enter().append('line').attr('opacity', 0);
+		const enteringLines = lines.enter().append('line').attr('opacity', 0)
 
 		const allLines = enteringLines
 			.merge(lines)
 			.classed('line', true)
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: 'line',
+					originalClassName: 'line'
 				})
 			)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'lollipop-line-update-enter',
-					animate,
+					animate
 				})
 			)
-			.style('stroke', (d) =>
-				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
-			)
-			.attr('opacity', 1);
+			.style('stroke', (d: any) => this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d))
+			.attr('opacity', 1)
 
 		if (orientation === CartesianOrientations.HORIZONTAL) {
 			allLines
 				.attr('y1', getYValue)
 				.attr('y2', getYValue)
 				.attr('x1', mainXScale.range()[0])
-				.attr(
-					'x2',
-					(d, i) => (getXValue(d, i) as any) - options.points.radius
-				);
+				.attr('x2', (d: any) => (getXValue(d) as any) - options.points.radius)
 		} else {
 			allLines
 				.attr('x1', getXValue)
 				.attr('x2', getXValue)
 				.attr('y1', mainYScale.range()[0])
-				.attr(
-					'y2',
-					(d, i) => (getYValue(d, i) as any) + options.points.radius
-				);
+				.attr('y2', (d: any) => getYValue(d) + options.points.radius)
 		}
 
-		this.addScatterPointEventListeners();
+		this.addScatterPointEventListeners()
 	}
 
 	// listen for when individual datapoints are hovered
@@ -118,95 +93,84 @@ export class Lollipop extends Scatter {
 		this.services.events.addEventListener(
 			Events.Scatter.SCATTER_MOUSEOVER,
 			this.handleScatterOnHover
-		);
+		)
 
 		// unbolden the line when not hovered on the lollipop scatter point
 		this.services.events.addEventListener(
 			Events.Scatter.SCATTER_MOUSEOUT,
 			this.handleScatterOnMouseOut
-		);
+		)
 	}
 
 	// on hover, bolden the line associated with the scatter
 	handleScatterOnHover = (event: CustomEvent) => {
-		const hoveredElement = event.detail;
+		const hoveredElement = event.detail
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		this.parent.selectAll('line.line').attr('stroke-width', (d) => {
+		this.parent.selectAll('line.line').attr('stroke-width', (d: any) => {
 			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
-				return Configuration.lines.weight.unselected;
+				return lines.weight.unselected
 			}
 			// apply selected weight
-			return Configuration.lines.weight.selected;
-		});
-	};
+			return lines.weight.selected
+		})
+	}
 
 	// on mouse out remove the stroke width assertion
-	handleScatterOnMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll('line.line')
-			.attr('stroke-width', Configuration.lines.weight.unselected);
-	};
+	handleScatterOnMouseOut = () => {
+		this.parent.selectAll('line.line').attr('stroke-width', lines.weight.unselected)
+	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
+		const { hoveredElement } = event.detail
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
 		this.parent
 			.selectAll('line.line')
 			.transition('legend-hover-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
-					name: 'legend-hover-line',
+					name: 'legend-hover-line'
 				})
 			)
-			.attr('opacity', (d) => {
+			.attr('opacity', (d: any) => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
-					return Configuration.lines.opacity.unselected;
+					return lines.opacity.unselected
 				}
 
-				return Configuration.lines.opacity.selected;
-			});
-	};
+				return lines.opacity.selected
+			})
+	}
 
-	handleLegendMouseOut = (event: CustomEvent) => {
+	handleLegendMouseOut = () => {
 		this.parent
 			.selectAll('line.line')
 			.transition('legend-mouseout-line')
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
-					name: 'legend-mouseout-line',
+					name: 'legend-mouseout-line'
 				})
 			)
-			.attr('opacity', Configuration.lines.opacity.selected);
-	};
+			.attr('opacity', lines.opacity.selected)
+	}
 
 	destroy() {
 		// Remove legend listeners
-		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_HOVER,
-			this.handleLegendOnHover
-		);
-		eventsFragment.removeEventListener(
-			Events.Legend.ITEM_MOUSEOUT,
-			this.handleLegendMouseOut
-		);
+		const eventsFragment = this.services.events
+		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover)
+		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 
 		// remove scatter listeners
-		eventsFragment.removeEventListener(
-			Events.Scatter.SCATTER_MOUSEOVER,
-			this.handleScatterOnHover
-		);
+		eventsFragment.removeEventListener(Events.Scatter.SCATTER_MOUSEOVER, this.handleScatterOnHover)
 		eventsFragment.removeEventListener(
 			Events.Scatter.SCATTER_MOUSEOUT,
 			this.handleScatterOnMouseOut
-		);
+		)
 	}
 }

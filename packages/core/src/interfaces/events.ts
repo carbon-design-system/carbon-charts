@@ -7,21 +7,21 @@ export enum Chart {
 	MOUSEOVER = 'chart-mouseover',
 	// MOUSEMOVE = "chart-mousemove",
 	// CLICK = "chart-click",
-	MOUSEOUT = 'chart-mouseout',
+	MOUSEOUT = 'chart-mouseout'
 }
 /**
  * enum of all events related to the overlay modal
  */
 export enum Modal {
 	SHOW = 'show-modal',
-	HIDE = 'hide-modal',
+	HIDE = 'hide-modal'
 }
 
 /**
  * enum of all events related to the chart model
  */
 export enum Model {
-	UPDATE = 'model-update',
+	UPDATE = 'model-update'
 }
 
 /**
@@ -30,7 +30,7 @@ export enum Model {
 export enum Toolbar {
 	SHOW_OVERFLOW_MENU = 'show-toolbar-overflow-menu',
 	HIDE_OVERFLOW_MENU = 'hide-toolbar-overflow-menu',
-	BUTTON_CLICK = 'toolbar-button-click',
+	BUTTON_CLICK = 'toolbar-button-click'
 }
 
 /**
@@ -40,14 +40,14 @@ export enum ZoomBar {
 	UPDATE = 'zoom-bar-update',
 	SELECTION_START = 'zoom-bar-selection-start',
 	SELECTION_IN_PROGRESS = 'zoom-bar-selection-in-progress',
-	SELECTION_END = 'zoom-bar-selection-end',
+	SELECTION_END = 'zoom-bar-selection-end'
 }
 
 /**
  * enum of all events related to the zoom domain
  */
 export enum ZoomDomain {
-	CHANGE = 'zoom-domain-change',
+	CHANGE = 'zoom-domain-change'
 }
 
 /** enum of all events related to canvas zoom *
@@ -55,7 +55,7 @@ export enum ZoomDomain {
  */
 export enum CanvasZoom {
 	CANVAS_ZOOM_IN = 'canvas-zoom-in',
-	CANVAS_ZOOM_OUT = 'canvas-zoom-out',
+	CANVAS_ZOOM_OUT = 'canvas-zoom-out'
 }
 
 /**
@@ -68,7 +68,7 @@ export enum Axis {
 	LABEL_MOUSEOUT = 'axis-label-mouseout',
 	LABEL_FOCUS = 'axis-label-focus',
 	LABEL_BLUR = 'axis-label-blur',
-	RENDER_COMPLETE = 'axis-render-complete',
+	RENDER_COMPLETE = 'axis-render-complete'
 }
 
 /**
@@ -78,7 +78,7 @@ export enum Area {
 	POINT_MOUSEOVER = 'scatter-mouseover',
 	POINT_MOUSEMOVE = 'scatter-mousemove',
 	POINT_CLICK = 'scatter-click',
-	POINT_MOUSEOUT = 'scatter-mouseout',
+	POINT_MOUSEOUT = 'scatter-mouseout'
 }
 
 /**
@@ -88,7 +88,7 @@ export enum WordCloud {
 	WORD_MOUSEOVER = 'wordcloud-word-mouseover',
 	WORD_MOUSEMOVE = 'wordcloud-word-mousemove',
 	WORD_CLICK = 'wordcloud-word-click',
-	WORD_MOUSEOUT = 'wordcloud-word-mouseout',
+	WORD_MOUSEOUT = 'wordcloud-word-mouseout'
 }
 
 /**
@@ -98,7 +98,7 @@ export enum Pie {
 	SLICE_MOUSEOVER = 'pie-slice-mouseover',
 	SLICE_MOUSEMOVE = 'pie-slice-mousemove',
 	SLICE_CLICK = 'pie-slice-click',
-	SLICE_MOUSEOUT = 'pie-slice-mouseout',
+	SLICE_MOUSEOUT = 'pie-slice-mouseout'
 }
 
 /**
@@ -108,7 +108,7 @@ export enum Gauge {
 	ARC_MOUSEOVER = 'gauge-arc-mouseover',
 	ARC_MOUSEMOVE = 'gauge-arc-mousemove',
 	ARC_CLICK = 'gauge-arc-click',
-	ARC_MOUSEOUT = 'gauge-arc-mouseout',
+	ARC_MOUSEOUT = 'gauge-arc-mouseout'
 }
 
 /**
@@ -118,7 +118,7 @@ export enum Bar {
 	BAR_MOUSEOVER = 'bar-mouseover',
 	BAR_MOUSEMOVE = 'bar-mousemove',
 	BAR_CLICK = 'bar-click',
-	BAR_MOUSEOUT = 'bar-mouseout',
+	BAR_MOUSEOUT = 'bar-mouseout'
 }
 
 /**
@@ -132,7 +132,7 @@ export enum Boxplot {
 	OUTLIER_MOUSEOVER = 'outlier-mouseover',
 	OUTLIER_MOUSEMOVE = 'outlier-mousemove',
 	OUTLIER_CLICK = 'outlier-click',
-	OUTLIER_MOUSEOUT = 'outlier-mouseout',
+	OUTLIER_MOUSEOUT = 'outlier-mouseout'
 }
 
 /**
@@ -142,7 +142,7 @@ export enum Scatter {
 	SCATTER_MOUSEOVER = 'scatter-mouseover',
 	SCATTER_MOUSEMOVE = 'scatter-mousemove',
 	SCATTER_CLICK = 'scatter-click',
-	SCATTER_MOUSEOUT = 'scatter-mouseout',
+	SCATTER_MOUSEOUT = 'scatter-mouseout'
 }
 
 /**
@@ -152,7 +152,7 @@ export enum Line {
 	POINT_MOUSEOVER = 'scatter-mouseover',
 	POINT_MOUSEMOVE = 'scatter-mousemove',
 	POINT_CLICK = 'scatter-click',
-	POINT_MOUSEOUT = 'scatter-mouseout',
+	POINT_MOUSEOUT = 'scatter-mouseout'
 }
 
 /**
@@ -162,7 +162,7 @@ export enum Radar {
 	X_AXIS_MOUSEOVER = 'radar-x-axis-mouseover',
 	X_AXIS_MOUSEMOVE = 'radar-x-axis-mousemove',
 	X_AXIS_CLICK = 'radar-x-axis-click',
-	X_AXIS_MOUSEOUT = 'radar-x-axis-mouseout',
+	X_AXIS_MOUSEOUT = 'radar-x-axis-mouseout'
 }
 
 /**
@@ -171,7 +171,7 @@ export enum Radar {
 export enum Tree {
 	NODE_MOUSEOVER = 'tree-node-mouseover',
 	NODE_CLICK = 'tree-node-click',
-	NODE_MOUSEOUT = 'tree-node-mouseout',
+	NODE_MOUSEOUT = 'tree-node-mouseout'
 }
 
 /**
@@ -181,7 +181,7 @@ export enum Treemap {
 	LEAF_MOUSEOVER = 'leaf-mouseover',
 	LEAF_MOUSEMOVE = 'leaf-mousemove',
 	LEAF_CLICK = 'leaf-click',
-	LEAF_MOUSEOUT = 'leaf-mouseout',
+	LEAF_MOUSEOUT = 'leaf-mouseout'
 }
 
 /**
@@ -190,7 +190,7 @@ export enum Treemap {
 export enum Tooltip {
 	SHOW = 'show-tooltip',
 	MOVE = 'move-tooltip',
-	HIDE = 'hide-tooltip',
+	HIDE = 'hide-tooltip'
 }
 
 /**
@@ -198,7 +198,7 @@ export enum Tooltip {
  */
 export enum Threshold {
 	SHOW = 'show-threshold',
-	HIDE = 'hide-threshold',
+	HIDE = 'hide-threshold'
 }
 
 /**
@@ -208,7 +208,7 @@ export enum Legend {
 	ITEM_HOVER = 'legend-item-onhover',
 	ITEM_CLICK = 'legend-item-onclick',
 	ITEM_MOUSEOUT = 'legend-item-onmouseout',
-	ITEMS_UPDATE = 'legend-items-update',
+	ITEMS_UPDATE = 'legend-items-update'
 }
 
 /**
@@ -218,7 +218,7 @@ export enum CirclePack {
 	CIRCLE_MOUSEOVER = 'circle-leaf-mouseover',
 	CIRCLE_CLICK = 'circle-leaf-click',
 	CIRCLE_MOUSEOUT = 'circle-leaf-mouseout',
-	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove',
+	CIRCLE_MOUSEMOVE = 'circle-leaf-mousemove'
 }
 
 /**
@@ -232,7 +232,7 @@ export enum Alluvial {
 	LINE_MOUSEOVER = 'alluvial-line-mouseover',
 	LINE_CLICK = 'alluvial-line-click',
 	LINE_MOUSEOUT = 'alluvial-line-mouseout',
-	LINE_MOUSEMOVE = 'alluvial-line-mousemove',
+	LINE_MOUSEMOVE = 'alluvial-line-mousemove'
 }
 
 /**
@@ -242,7 +242,7 @@ export enum Meter {
 	METER_MOUSEOVER = 'meter-mouseover',
 	METER_CLICK = 'meter-click',
 	METER_MOUSEOUT = 'meter-mouseout',
-	METER_MOUSEMOVE = 'meter-mousemove',
+	METER_MOUSEMOVE = 'meter-mousemove'
 }
 
 /**
@@ -252,5 +252,5 @@ export enum Heatmap {
 	HEATMAP_MOUSEOVER = 'heatmap-mouseover',
 	HEATMAP_CLICK = 'heatmap-click',
 	HEATMAP_MOUSEOUT = 'heatmap-mouseout',
-	HEATMAP_MOUSEMOVE = 'hetmap-mousemove',
+	HEATMAP_MOUSEMOVE = 'hetmap-mousemove'
 }

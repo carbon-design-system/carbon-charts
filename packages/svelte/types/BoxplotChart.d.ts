@@ -1,5 +1,5 @@
-import { BoxplotChart as BC } from "@carbon/charts";
-import type { BoxplotChartOptions } from "@carbon/charts/interfaces";
-import BaseChart from "./BaseChart";
+import { BoxplotChart as BoxplotChartCore } from '@carbon/charts'
+import type { BoxplotChartOptions } from '@carbon/charts/interfaces'
+import BaseChart from './BaseChart'
 
-export default class BoxplotChart extends BaseChart<BC, BoxplotChartOptions> {}
+export default class BoxplotChart extends BaseChart<BoxplotChartCore, BoxplotChartOptions> {}

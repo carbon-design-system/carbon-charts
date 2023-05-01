@@ -1,24 +1,77 @@
-export * from './area';
-export * from './area-stacked';
-export * from './bar-simple';
-export * from './bar-grouped';
-export * from './bar-stacked';
-export * from './boxplot';
-export * from './bubble';
-export * from './bullet';
-export * from './histogram';
-export * from './line';
-export * from './lollipop';
-export * from './scatter';
-export * from './pie';
-export * from './donut';
-export * from './meter';
-export * from './radar';
-export * from './gauge';
-export * from './combo';
-export * from './tree';
-export * from './treemap';
-export * from './circle-pack';
-export * from './wordcloud';
-export * from './alluvial';
-export * from './heatmap';
+import { AlluvialChart } from './alluvial'
+import { AreaChart } from './area'
+import { BoxplotChart } from './boxplot'
+import { BubbleChart } from './bubble'
+import { BulletChart } from './bullet'
+import { CirclePackChart } from './circle-pack'
+import { ComboChart } from './combo'
+import { DonutChart } from './donut'
+import { GaugeChart } from './gauge'
+import { GroupedBarChart } from './bar-grouped'
+import { HeatmapChart } from './heatmap'
+import { HistogramChart } from './histogram'
+import { LineChart } from './line'
+import { LollipopChart } from './lollipop'
+import { MeterChart } from './meter'
+import { PieChart } from './pie'
+import { RadarChart } from './radar'
+import { ScatterChart } from './scatter'
+import { TreeChart } from './tree'
+import { TreemapChart } from './treemap'
+import { SimpleBarChart } from './bar-simple'
+import { StackedAreaChart } from './area-stacked'
+import { StackedBarChart } from './bar-stacked'
+import { WordCloudChart } from './wordcloud'
+
+export {
+	AlluvialChart,
+	AreaChart,
+	BoxplotChart,
+	BubbleChart,
+	BulletChart,
+	CirclePackChart,
+	ComboChart,
+	DonutChart,
+	GaugeChart,
+	GroupedBarChart,
+	HeatmapChart,
+	HistogramChart,
+	LineChart,
+	LollipopChart,
+	MeterChart,
+	PieChart,
+	RadarChart,
+	ScatterChart,
+	SimpleBarChart,
+	StackedAreaChart,
+	StackedBarChart,
+	TreeChart,
+	TreemapChart,
+	WordCloudChart
+}
+
+export type Charts =
+	| AlluvialChart
+	| AreaChart
+	| BoxplotChart
+	| BubbleChart
+	| BulletChart
+	| CirclePackChart
+	| ComboChart
+	| DonutChart
+	| GaugeChart
+	| GroupedBarChart
+	| HeatmapChart
+	| HistogramChart
+	| LineChart
+	| LollipopChart
+	| MeterChart
+	| PieChart
+	| RadarChart
+	| ScatterChart
+	| SimpleBarChart
+	| StackedAreaChart
+	| StackedBarChart
+	| TreeChart
+	| TreemapChart
+	| WordCloudChart

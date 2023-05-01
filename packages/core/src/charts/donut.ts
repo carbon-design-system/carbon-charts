@@ -1,34 +1,23 @@
 // Internal Imports
-import { PieChart } from './pie';
-import * as Configuration from '../configuration';
-import { ChartConfig, PieChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
+import { PieChart } from './pie'
+import { options } from '../configuration'
+import type { ChartConfig, PieChartOptions } from '../interfaces/index'
+import { mergeDefaultChartOptions } from '../tools'
+import { Skeletons } from '../interfaces/enums'
 
 // Components
-import {
-	Donut,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Donut, Skeleton } from '../components/index'
 
 export class DonutChart extends PieChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
-		super(holder, chartConfigs, true);
+		super(holder, chartConfigs, true)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.donutChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.donutChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
@@ -36,11 +25,11 @@ export class DonutChart extends PieChart {
 		const graphFrameComponents: any[] = [
 			new Donut(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.DONUT,
-			}),
-		];
+				skeleton: Skeletons.DONUT
+			})
+		]
 
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: any[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

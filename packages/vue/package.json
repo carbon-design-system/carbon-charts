@@ -2,84 +2,79 @@
   "name": "@carbon/charts-vue",
   "version": "1.7.5",
   "description": "Carbon charting components for Vue",
-  "main": "charts-vue.umd.min.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles.min.css": "./dist/styles.min.css",
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.md"
+  ],
   "scripts": {
-    "build": "bash build.sh",
-    "lint": "vue-cli-service lint ./src/index.js",
-    "storybook": "start-storybook -p 6006 -s ./.storybook/assets",
+    "license": "cp ../../LICENSE.md ./",
+    "styles": "cp ../core/dist/styles.* dist",
+    "build:package": "vite build && yarn license && yarn styles",
+    "build:demo": "storybook build -o demo/bundle --quiet",
+    "build": "yarn build:package && yarn build:demo",
+    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
+    "storybook": "storybook dev -p 9006",
     "start": "yarn storybook",
-    "demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
-    "ci-check": "yarn format:diff",
-    "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
-    "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
+    "format": "prettier --write src/ --ignore-path ../../.gitignore",
     "clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
-    "@carbon/charts": "^1.7.5",
-    "@carbon/telemetry": "0.1.0",
-    "vue": "2.5.21"
+    "@carbon/charts": "workspace:*",
+    "@carbon/telemetry": "~0.1.0",
+    "vue": "^2.7.14"
   },
   "devDependencies": {
-    "@babel/core": "7.3.4",
-    "@storybook/addon-knobs": "5.3.12",
-    "@storybook/addon-links": "5.3.12",
-    "@storybook/addons": "5.3.12",
-    "@storybook/theming": "5.3.12",
-    "@storybook/vue": "5.3.12",
-    "@vue/babel-preset-app": "4.1.2",
-    "@vue/cli-plugin-babel": "4.1.2",
-    "@vue/cli-plugin-eslint": "4.1.2",
-    "@vue/cli-service": "4.1.2",
-    "babel-eslint": "10.0.1",
-    "babel-loader": "8.0.5",
-    "babel-preset-vue": "2.0.2",
-    "cache-loader": "4.1.0",
-    "eslint": "5.8.0",
-    "eslint-plugin-vue": "5.0.0",
-    "lint-staged": "8.1.5",
-    "prettier": "1.16.4",
-    "vue-loader": "^15.7.0",
-    "vue-template-compiler": "2.5.21"
+    "@babel/core": "^7.21.5",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/addon-interactions": "^7.0.7",
+    "@storybook/addon-links": "^7.0.7",
+    "@storybook/blocks": "^7.0.7",
+    "@storybook/manager-api": "^7.0.7",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/theming": "^7.0.7",
+    "@storybook/vue": "^7.0.7",
+    "@storybook/vue-vite": "^7.0.7",
+    "@types/node": "^18.16.3",
+    "@vitejs/plugin-vue": "^4.2.1",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/tsconfig": "^0.3.2",
+    "codesandbox": "^2.2.3",
+    "eslint": "^8.39.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "eslint-plugin-vue": "^9.11.0",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.7",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.3",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-vue2": "^2.0.3",
+    "vue-template-compiler": "^2.7.14"
   },
   "publishConfig": {
-    "directory": "dist",
     "access": "public"
   },
-  "lint-staged": {
-    "*.{scss,css,js,md,vue}": [
-      "yarn format",
-      "git add"
-    ]
-  },
-  "prettier": {
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:carbon-design-system/carbon-charts.git",

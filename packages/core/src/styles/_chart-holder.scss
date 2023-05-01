@@ -1,5 +1,5 @@
-@use "@carbon/styles/scss/theme" as *;
-@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
 
 .#{$prefix}--chart-holder {
 	position: relative;
@@ -26,15 +26,15 @@
 	@include theme(themes.$white);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme="g10"] {
+.#{$prefix}--chart-holder[data-carbon-theme='g10'] {
 	@include theme(themes.$g10);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme="g90"] {
+.#{$prefix}--chart-holder[data-carbon-theme='g90'] {
 	@include theme(themes.$g90);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme="g100"] {
+.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
 	@include theme(themes.$g100);
 }
 

@@ -1,17 +1,12 @@
 // Internal Imports
-import * as Configuration from '../configuration';
-import { Service } from './service';
-import {
-	AxisPositions,
-	CartesianOrientations,
-	ScaleTypes,
-	ThresholdOptions,
-} from '../interfaces';
-import * as Tools from '../tools';
+import { axis } from '../configuration'
+import { Service } from './service'
+import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
+import { flatten, getProperty, removeArrayDuplicates } from '../tools'
 
 // D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale';
-import { extent, max } from 'd3-array';
+import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale'
+import { extent, max } from 'd3-array'
 
 // Misc
 import {
@@ -32,148 +27,133 @@ import {
 	subMinutes,
 	differenceInSeconds,
 	subSeconds,
-	addSeconds,
-} from 'date-fns';
+	addSeconds
+} from 'date-fns'
 
 export class CartesianScales extends Service {
 	protected scaleTypes = {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
-	};
+		left: null
+	}
 
 	protected scales = {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
-	};
+		left: null
+	}
 
-	protected domainAxisPosition: AxisPositions;
-	protected rangeAxisPosition: AxisPositions;
-	protected secondaryDomainAxisPosition: AxisPositions;
-	protected secondaryRangeAxisPosition: AxisPositions;
+	protected domainAxisPosition: AxisPositions
+	protected rangeAxisPosition: AxisPositions
+	protected secondaryDomainAxisPosition: AxisPositions
+	protected secondaryRangeAxisPosition: AxisPositions
 
-	protected dualAxes: Boolean;
+	protected dualAxes: boolean
 
-	protected orientation: CartesianOrientations;
+	protected orientation: CartesianOrientations
 
 	getDomainAxisPosition({ datum = null } = {}) {
 		if (this.dualAxes && datum) {
-			const options = this.model.getOptions();
-			const { groupMapsTo } = options.data;
-			const axesOptions = Tools.getProperty(
-				options,
-				'axes',
-				this.secondaryDomainAxisPosition
-			);
-			const dataset = datum[groupMapsTo];
+			const options = this.model.getOptions()
+			const { groupMapsTo } = options.data
+			const axesOptions = getProperty(options, 'axes', this.secondaryDomainAxisPosition)
+			const dataset = datum[groupMapsTo]
 			if (
 				axesOptions?.correspondingDatasets &&
 				axesOptions.correspondingDatasets.includes(dataset)
 			) {
-				return this.secondaryDomainAxisPosition;
+				return this.secondaryDomainAxisPosition
 			}
 		}
-		return this.domainAxisPosition;
+		return this.domainAxisPosition
 	}
 
 	getRangeAxisPosition({ datum = null, groups = null } = {}) {
 		if (this.dualAxes) {
-			const options = this.model.getOptions();
-			const { groupMapsTo } = options.data;
-			const axisOptions = Tools.getProperty(
-				options,
-				'axes',
-				this.secondaryRangeAxisPosition
-			);
-			let dataset;
+			const options = this.model.getOptions()
+			const { groupMapsTo } = options.data
+			const axisOptions = getProperty(options, 'axes', this.secondaryRangeAxisPosition)
+			let dataset
 			if (datum !== null) {
-				dataset = datum[groupMapsTo];
+				dataset = datum[groupMapsTo]
 			} else if (groups && groups.length > 0) {
-				dataset = groups[0];
+				dataset = groups[0]
 			}
 			if (
 				axisOptions?.correspondingDatasets &&
 				axisOptions.correspondingDatasets.includes(dataset)
 			) {
-				return this.secondaryRangeAxisPosition;
+				return this.secondaryRangeAxisPosition
 			}
 		}
-		return this.rangeAxisPosition;
+		return this.rangeAxisPosition
 	}
 
 	getAxisOptions(position: AxisPositions) {
-		return Tools.getProperty(this.model.getOptions(), 'axes', position);
+		return getProperty(this.model.getOptions(), 'axes', position)
 	}
 
 	getDomainAxisOptions() {
-		const domainAxisPosition = this.getDomainAxisPosition();
-		return this.getAxisOptions(domainAxisPosition);
+		const domainAxisPosition = this.getDomainAxisPosition()
+		return this.getAxisOptions(domainAxisPosition)
 	}
 
 	getRangeAxisOptions() {
-		const rangeAxisPosition = this.getRangeAxisPosition();
-		return this.getAxisOptions(rangeAxisPosition);
+		const rangeAxisPosition = this.getRangeAxisPosition()
+		return this.getAxisOptions(rangeAxisPosition)
 	}
 
 	getScaleLabel(position: AxisPositions) {
-		const axisOptions = this.getAxisOptions(position);
-		let title = axisOptions.title;
+		const axisOptions = this.getAxisOptions(position)
+		const title: string = axisOptions.title
 		if (!title) {
-			if (
-				position === AxisPositions.BOTTOM ||
-				position === AxisPositions.TOP
-			) {
-				return 'x-value';
+			if (position === AxisPositions.BOTTOM || position === AxisPositions.TOP) {
+				return 'x-value'
 			}
-			return 'y-value';
+			return 'y-value'
 		}
-		return title;
+		return title
 	}
 
 	getDomainLabel() {
-		return this.getScaleLabel(this.getDomainAxisPosition());
+		return this.getScaleLabel(this.getDomainAxisPosition())
 	}
 
 	getRangeLabel() {
-		return this.getScaleLabel(this.getRangeAxisPosition());
+		return this.getScaleLabel(this.getRangeAxisPosition())
 	}
 
-	update(animate = true) {
-		this.determineAxisDuality();
-		this.findDomainAndRangeAxes();
-		this.determineOrientation();
+	update() {
+		this.determineAxisDuality()
+		this.findDomainAndRangeAxes()
+		this.determineOrientation()
 		const axisPositions = Object.keys(AxisPositions).map(
 			(axisPositionKey) => AxisPositions[axisPositionKey]
-		);
+		)
 		axisPositions.forEach((axisPosition) => {
-			this.scales[axisPosition] = this.createScale(axisPosition);
-		});
+			this.scales[axisPosition] = this.createScale(axisPosition)
+		})
 	}
 
 	findDomainAndRangeAxes() {
 		// find main axes between (left & right) && (bottom & top)
-		const verticalAxesPositions = this.findVerticalAxesPositions();
-		const horizontalAxesPositions = this.findHorizontalAxesPositions();
+		const verticalAxesPositions = this.findVerticalAxesPositions()
+		const horizontalAxesPositions = this.findHorizontalAxesPositions()
 
 		// Now we have horizontal & vertical main axes to choose domain & range axes from
 		const domainAndRangeAxesPositions = this.findDomainAndRangeAxesPositions(
 			verticalAxesPositions,
 			horizontalAxesPositions
-		);
+		)
 
-		this.domainAxisPosition =
-			domainAndRangeAxesPositions.primaryDomainAxisPosition;
-		this.rangeAxisPosition =
-			domainAndRangeAxesPositions.primaryRangeAxisPosition;
+		this.domainAxisPosition = domainAndRangeAxesPositions.primaryDomainAxisPosition
+		this.rangeAxisPosition = domainAndRangeAxesPositions.primaryRangeAxisPosition
 
 		if (this.isDualAxes()) {
-			this.secondaryDomainAxisPosition =
-				domainAndRangeAxesPositions.secondaryDomainAxisPosition;
-			this.secondaryRangeAxisPosition =
-				domainAndRangeAxesPositions.secondaryRangeAxisPosition;
+			this.secondaryDomainAxisPosition = domainAndRangeAxesPositions.secondaryDomainAxisPosition
+			this.secondaryRangeAxisPosition = domainAndRangeAxesPositions.secondaryRangeAxisPosition
 		}
 	}
 
@@ -184,21 +164,21 @@ export class CartesianScales extends Service {
 			(this.domainAxisPosition === AxisPositions.BOTTOM ||
 				this.domainAxisPosition === AxisPositions.TOP)
 		) {
-			this.orientation = CartesianOrientations.VERTICAL;
+			this.orientation = CartesianOrientations.VERTICAL
 		} else {
-			this.orientation = CartesianOrientations.HORIZONTAL;
+			this.orientation = CartesianOrientations.HORIZONTAL
 		}
 	}
 
 	isDualAxes() {
-		return this.dualAxes;
+		return this.dualAxes
 	}
 
 	// if any of the axes objects have correspondingDatasets [] asserted we flag the chart as dual axes
 	// it does not count as dual axes if it just has another axis turned on but is not actually using it to map a dataset
 	determineAxisDuality() {
-		const options = this.model.getOptions();
-		const axesOptions = Tools.getProperty(options, 'axes');
+		const options = this.model.getOptions()
+		const axesOptions = getProperty(options, 'axes')
 
 		if (
 			(axesOptions[AxisPositions.LEFT]?.correspondingDatasets &&
@@ -207,26 +187,18 @@ export class CartesianScales extends Service {
 				axesOptions[AxisPositions.LEFT]) ||
 			(axesOptions[AxisPositions.TOP]?.correspondingDatasets &&
 				axesOptions[AxisPositions.BOTTOM]) ||
-			(axesOptions[AxisPositions.BOTTOM]?.correspondingDatasets &&
-				axesOptions[AxisPositions.TOP])
+			(axesOptions[AxisPositions.BOTTOM]?.correspondingDatasets && axesOptions[AxisPositions.TOP])
 		) {
-			this.dualAxes = true;
+			this.dualAxes = true
 		}
 	}
 
 	getCustomDomainValuesByposition(axisPosition: AxisPositions) {
-		const domain = Tools.getProperty(
-			this.model.getOptions(),
-			'axes',
-			axisPosition,
-			'domain'
-		);
+		const domain = getProperty(this.model.getOptions(), 'axes', axisPosition, 'domain')
 
 		// Check if domain is an array
 		if (domain && !Array.isArray(domain)) {
-			throw new Error(
-				`Domain in ${axisPosition} axis is not a valid array`
-			);
+			throw new Error(`Domain in ${axisPosition} axis is not a valid array`)
 		}
 
 		// Determine number of elements passed in domain depending on scale types
@@ -238,643 +210,520 @@ export class CartesianScales extends Service {
 			) {
 				throw new Error(
 					`There can only be 2 elements in domain for scale type: ${this.scaleTypes[axisPosition]}`
-				);
+				)
 			}
 		}
 
-		return domain;
+		return domain
 	}
 
 	getOrientation() {
-		return this.orientation;
+		return this.orientation
 	}
 
 	getScaleByPosition(axisPosition: AxisPositions) {
-		return this.scales[axisPosition];
+		return this.scales[axisPosition]
 	}
 
 	getScaleTypeByPosition(axisPosition: AxisPositions) {
-		return this.scaleTypes[axisPosition];
+		return this.scaleTypes[axisPosition]
 	}
 
 	getDomainAxisScaleType() {
-		const domainAxisPosition = this.getDomainAxisPosition();
-		return this.getScaleTypeByPosition(domainAxisPosition);
+		const domainAxisPosition = this.getDomainAxisPosition()
+		return this.getScaleTypeByPosition(domainAxisPosition)
 	}
 
 	getRangeAxisScaleType() {
-		const rangeAxisPosition = this.getRangeAxisPosition();
-		return this.getScaleTypeByPosition(rangeAxisPosition);
+		const rangeAxisPosition = this.getRangeAxisPosition()
+		return this.getScaleTypeByPosition(rangeAxisPosition)
 	}
 
 	getDomainScale() {
-		return this.scales[this.domainAxisPosition];
+		return this.scales[this.domainAxisPosition]
 	}
 
 	getRangeScale() {
-		return this.scales[this.rangeAxisPosition];
+		return this.scales[this.rangeAxisPosition]
 	}
 
 	// Find the main x-axis out of the 2 x-axis on the chart (when 2D axis is used)
 	getMainXAxisPosition() {
-		const possibleXAxisPositions = [
-			AxisPositions.BOTTOM,
-			AxisPositions.TOP,
-		];
+		const possibleXAxisPositions = [AxisPositions.BOTTOM, AxisPositions.TOP]
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
 			(position) => possibleXAxisPositions.indexOf(position) > -1
-		);
+		)
 	}
 
 	// Find the main y-axis out of the 2 y-axis on the chart (when 2D axis is used)
 	getMainYAxisPosition() {
-		const possibleYAxisPositions = [
-			AxisPositions.LEFT,
-			AxisPositions.RIGHT,
-		];
+		const possibleYAxisPositions = [AxisPositions.LEFT, AxisPositions.RIGHT]
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
 			(position) => possibleYAxisPositions.indexOf(position) > -1
-		);
+		)
 	}
 
 	getMainXScale() {
-		return this.scales[this.getMainXAxisPosition()];
+		return this.scales[this.getMainXAxisPosition()]
 	}
 
 	getMainYScale() {
-		return this.scales[this.getMainYAxisPosition()];
+		return this.scales[this.getMainYAxisPosition()]
 	}
 
 	getValueFromScale(
 		scale: any,
 		scaleType: ScaleTypes,
 		axisPosition: AxisPositions,
-		datum: any,
-		index?: number
+		datum: any
 	) {
-		const options = this.model.getOptions();
-		const axesOptions = Tools.getProperty(options, 'axes');
-		const axisOptions = axesOptions[axisPosition];
-		const { mapsTo } = axisOptions;
-		const value =
-			Tools.getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum;
-		let scaledValue;
+		const options = this.model.getOptions()
+		const axesOptions = getProperty(options, 'axes')
+		const axisOptions = axesOptions[axisPosition]
+		const { mapsTo } = axisOptions
+		const value = getProperty(datum, mapsTo) !== null ? datum[mapsTo] : datum
+		let scaledValue: number
 		switch (scaleType) {
 			case ScaleTypes.LABELS:
-				scaledValue = scale(value) + scale.step() / 2;
-				break;
+				scaledValue = scale(value) + scale.step() / 2
+				break
 			case ScaleTypes.TIME:
-				scaledValue = scale(new Date(value));
-				break;
+				scaledValue = scale(new Date(value))
+				break
 			default:
-				scaledValue = scale(value);
+				scaledValue = scale(value)
 		}
-		return scaledValue;
+		return scaledValue
 	}
 
-	getBoundedScaledValues(datum: any, index?: number) {
-		const { bounds } = this.model.getOptions();
-		const axisPosition = this.getRangeAxisPosition({ datum });
-		const scale = this.scales[axisPosition];
+	getBoundedScaledValues(datum: any): number[] {
+		const { bounds } = this.model.getOptions()
+		const axisPosition = this.getRangeAxisPosition({ datum })
+		const scale = this.scales[axisPosition]
 
-		const options = this.model.getOptions();
-		const axesOptions = Tools.getProperty(options, 'axes');
-		const axisOptions = axesOptions[axisPosition];
-		const { mapsTo } = axisOptions;
-		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+		const options = this.model.getOptions()
+		const axesOptions = getProperty(options, 'axes')
+		const axisOptions = axesOptions[axisPosition]
+		const { mapsTo } = axisOptions
+		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum
 
 		const boundedValues = [
 			scale(
-				Tools.getProperty(datum, bounds.upperBoundMapsTo) !== null
+				getProperty(datum, bounds.upperBoundMapsTo) !== null
 					? datum[bounds.upperBoundMapsTo]
 					: value
 			),
 			scale(
-				Tools.getProperty(datum, bounds.lowerBoundMapsTo) !== null
+				getProperty(datum, bounds.lowerBoundMapsTo) !== null
 					? datum[bounds.lowerBoundMapsTo]
 					: value
-			),
-		];
+			)
+		]
 
-		return boundedValues;
+		return boundedValues
 	}
 
-	getValueThroughAxisPosition(
-		axisPosition: AxisPositions,
-		datum: any,
-		index?: number
-	) {
-		const scaleType = this.scaleTypes[axisPosition];
-		const scale = this.scales[axisPosition];
+	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any) {
+		const scaleType = this.scaleTypes[axisPosition]
+		const scale = this.scales[axisPosition]
 
-		return this.getValueFromScale(
-			scale,
-			scaleType,
-			axisPosition,
-			datum,
-			index
-		);
+		return this.getValueFromScale(scale, scaleType, axisPosition, datum)
 	}
 
-	getDomainValue(d, i) {
-		const axisPosition = this.getDomainAxisPosition({ datum: d });
-		return this.getValueThroughAxisPosition(axisPosition, d, i);
+	getDomainValue(d: string | object) {
+		const axisPosition = this.getDomainAxisPosition({ datum: d })
+		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
 
-	getRangeValue(d, i) {
-		const axisPosition = this.getRangeAxisPosition({ datum: d });
-		return this.getValueThroughAxisPosition(axisPosition, d, i);
+	getRangeValue(d: string | object) {
+		const axisPosition = this.getRangeAxisPosition({ datum: d })
+		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
 
 	getMainXScaleType() {
-		return this.getScaleTypeByPosition(this.getMainXAxisPosition());
+		return this.getScaleTypeByPosition(this.getMainXAxisPosition())
 	}
 
 	getMainYScaleType() {
-		return this.getScaleTypeByPosition(this.getMainYAxisPosition());
+		return this.getScaleTypeByPosition(this.getMainYAxisPosition())
 	}
 
 	getDomainIdentifier(datum?: any) {
-		const options = this.model.getOptions();
-		return Tools.getProperty(
-			options,
-			'axes',
-			this.getDomainAxisPosition({ datum: datum }),
-			'mapsTo'
-		);
+		const options = this.model.getOptions()
+		return getProperty(options, 'axes', this.getDomainAxisPosition({ datum: datum }), 'mapsTo')
 	}
 
 	getRangeIdentifier(datum?: any) {
-		const options = this.model.getOptions();
-		return Tools.getProperty(
-			options,
-			'axes',
-			this.getRangeAxisPosition({ datum: datum }),
-			'mapsTo'
-		);
+		const options = this.model.getOptions()
+		return getProperty(options, 'axes', this.getRangeAxisPosition({ datum: datum }), 'mapsTo')
 	}
 
 	extendsDomain(axisPosition: AxisPositions, domain: any) {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
+		const options = this.model.getOptions()
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(
-				options,
-				'timeScale',
-				'addSpaceOnEdges'
-			);
-			return addSpacingToTimeDomain(domain, spaceToAddToEdges);
+			const spaceToAddToEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
+			return addSpacingToTimeDomain(domain, spaceToAddToEdges)
 		} else {
-			return addSpacingToContinuousDomain(
-				domain,
-				Configuration.axis.paddingRatio,
-				axisOptions.scaleType
-			);
+			return addSpacingToContinuousDomain(domain, axis.paddingRatio, axisOptions.scaleType)
 		}
 	}
 
 	protected findVerticalAxesPositions() {
-		const options = this.model.getOptions();
-		const axesOptions = Tools.getProperty(options, 'axes');
-		const dualAxes = this.isDualAxes();
+		const options = this.model.getOptions()
+		const axesOptions = getProperty(options, 'axes')
+		const dualAxes = this.isDualAxes()
 
 		// If right axis has been specified as `main`
 		if (
-			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
-				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.RIGHT, 'main') ===
-				true ||
-			(dualAxes &&
-				Tools.getProperty(
-					axesOptions,
-					AxisPositions.LEFT,
-					'correspondingDatasets'
-				))
+			(getProperty(axesOptions, AxisPositions.LEFT) === null &&
+				getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
+			getProperty(axesOptions, AxisPositions.RIGHT, 'main') === true ||
+			(dualAxes && getProperty(axesOptions, AxisPositions.LEFT, 'correspondingDatasets'))
 		) {
 			return {
 				primary: AxisPositions.RIGHT,
-				secondary: AxisPositions.LEFT,
-			};
+				secondary: AxisPositions.LEFT
+			}
 		}
 
-		return { primary: AxisPositions.LEFT, secondary: AxisPositions.RIGHT };
+		return { primary: AxisPositions.LEFT, secondary: AxisPositions.RIGHT }
 	}
 
 	protected findHorizontalAxesPositions() {
-		const options = this.model.getOptions();
-		const axesOptions = Tools.getProperty(options, 'axes');
-		const dualAxes = this.isDualAxes();
+		const options = this.model.getOptions()
+		const axesOptions = getProperty(options, 'axes')
+		const dualAxes = this.isDualAxes()
 
 		// If top axis has been specified as `main`
 		if (
-			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
-				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
-			Tools.getProperty(axesOptions, AxisPositions.TOP, 'main') ===
-				true ||
-			(dualAxes &&
-				Tools.getProperty(
-					axesOptions,
-					AxisPositions.BOTTOM,
-					'correspondingDatasets'
-				))
+			(getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
+				getProperty(axesOptions, AxisPositions.TOP) !== null) ||
+			getProperty(axesOptions, AxisPositions.TOP, 'main') === true ||
+			(dualAxes && getProperty(axesOptions, AxisPositions.BOTTOM, 'correspondingDatasets'))
 		) {
 			return {
 				primary: AxisPositions.TOP,
-				secondary: AxisPositions.BOTTOM,
-			};
+				secondary: AxisPositions.BOTTOM
+			}
 		}
 
-		return { primary: AxisPositions.BOTTOM, secondary: AxisPositions.TOP };
+		return { primary: AxisPositions.BOTTOM, secondary: AxisPositions.TOP }
 	}
 
-	protected findDomainAndRangeAxesPositions(
-		verticalAxesPositions,
-		horizontalAxesPositions
-	) {
-		const options = this.model.getOptions();
+	protected findDomainAndRangeAxesPositions(verticalAxesPositions, horizontalAxesPositions) {
+		const options = this.model.getOptions()
 
-		const mainVerticalAxisOptions = Tools.getProperty(
-			options,
-			'axes',
-			verticalAxesPositions.primary
-		);
-		const mainHorizontalAxisOptions = Tools.getProperty(
-			options,
-			'axes',
-			horizontalAxesPositions.primary
-		);
+		const mainVerticalAxisOptions = getProperty(options, 'axes', verticalAxesPositions.primary)
+		const mainHorizontalAxisOptions = getProperty(options, 'axes', horizontalAxesPositions.primary)
 
-		const mainVerticalScaleType =
-			mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
-		const mainHorizontalScaleType =
-			mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
+		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR
+		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR
 
 		const result = {
 			primaryDomainAxisPosition: null,
 			secondaryDomainAxisPosition: null,
 			primaryRangeAxisPosition: null,
-			secondaryRangeAxisPosition: null,
-		};
+			secondaryRangeAxisPosition: null
+		}
 
 		// assign to to be a vertical chart by default
-		result.primaryDomainAxisPosition = horizontalAxesPositions.primary;
-		result.primaryRangeAxisPosition = verticalAxesPositions.primary;
+		result.primaryDomainAxisPosition = horizontalAxesPositions.primary
+		result.primaryRangeAxisPosition = verticalAxesPositions.primary
 		// secondary axes
-		result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary;
-		result.secondaryRangeAxisPosition = verticalAxesPositions.secondary;
+		result.secondaryDomainAxisPosition = horizontalAxesPositions.secondary
+		result.secondaryRangeAxisPosition = verticalAxesPositions.secondary
 
 		// if neither the horizontal axes are label or time
 		// and atleast  one of the main vertical ones are labels or time then it should be horizontal
 		if (
 			(!(
-				mainHorizontalScaleType === ScaleTypes.LABELS ||
-				mainHorizontalScaleType === ScaleTypes.TIME
+				mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME
 			) &&
 				mainVerticalScaleType === ScaleTypes.LABELS) ||
 			mainVerticalScaleType === ScaleTypes.TIME
 		) {
-			result.primaryDomainAxisPosition = verticalAxesPositions.primary;
-			result.primaryRangeAxisPosition = horizontalAxesPositions.primary;
+			result.primaryDomainAxisPosition = verticalAxesPositions.primary
+			result.primaryRangeAxisPosition = horizontalAxesPositions.primary
 			// secondary axes
-			result.secondaryDomainAxisPosition =
-				verticalAxesPositions.secondary;
-			result.secondaryRangeAxisPosition =
-				horizontalAxesPositions.secondary;
+			result.secondaryDomainAxisPosition = verticalAxesPositions.secondary
+			result.secondaryRangeAxisPosition = horizontalAxesPositions.secondary
 		}
 
-		return result;
+		return result
 	}
 
 	protected getScaleDomain(axisPosition: AxisPositions) {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
-		const bounds = Tools.getProperty(options, 'bounds');
-		const { includeZero } = axisOptions;
-		const scaleType =
-			Tools.getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR;
+		const options = this.model.getOptions()
+		const axisOptions = getProperty(options, 'axes', axisPosition)
+		const bounds = getProperty(options, 'bounds')
+		const { includeZero } = axisOptions
+		const scaleType = getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
 
 		if (this.model.isDataEmpty()) {
-			return [];
+			return []
 		}
 
 		if (axisOptions.binned) {
-			const { bins } = this.model.getBinConfigurations();
+			const { bins } = this.model.getBinConfigurations()
 
-			return [0, max(bins, (d) => d.length)];
+			return [0, max(bins, (d: any) => d.length)]
 		} else if (axisOptions.limitDomainToBins) {
-			const { bins } = this.model.getBinConfigurations();
-			const stackKeys = this.model.getStackKeys({ bins });
+			const { bins } = this.model.getBinConfigurations()
+			const stackKeys = this.model.getStackKeys({ bins })
 
-			return [
-				stackKeys[0].split('-')[0],
-				stackKeys[stackKeys.length - 1].split('-')[1],
-			];
+			return [stackKeys[0].split('-')[0], stackKeys[stackKeys.length - 1].split('-')[1]]
 		}
 
-		const displayData = this.model.getDisplayData();
-		const {
-			extendLinearDomainBy,
-			mapsTo,
-			percentage,
-			thresholds,
-		} = axisOptions;
-		const {
-			reference: ratioReference,
-			compareTo: ratioCompareTo,
-		} = Configuration.axis.ratio;
+		const displayData = this.model.getDisplayData()
+		const { extendLinearDomainBy, mapsTo, percentage, thresholds } = axisOptions
+		const { reference: ratioReference, compareTo: ratioCompareTo } = axis.ratio
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
 			if (scaleType === ScaleTypes.LABELS) {
-				return axisOptions.domain;
+				return axisOptions.domain
 			} else if (scaleType === ScaleTypes.TIME) {
-				axisOptions.domain = axisOptions.domain.map((d) =>
+				axisOptions.domain = axisOptions.domain.map((d: any) =>
 					d.getTime === undefined ? new Date(d) : d
-				);
+				)
 			}
-			return this.extendsDomain(axisPosition, axisOptions.domain);
+			return this.extendsDomain(axisPosition, axisOptions.domain)
 		}
 
 		// Return [0, 100] for percentage axis scale
 		if (percentage) {
-			return [0, 100];
+			return [0, 100]
 		}
 
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return Tools.removeArrayDuplicates(
-				displayData.map((d) => d[mapsTo])
-			);
+			return removeArrayDuplicates(displayData.map((d: any) => d[mapsTo]))
 		}
 
 		// Get the extent of the domain
-		let domain;
-		let allDataValues;
-		const dataGroupNames = this.model.getDataGroupNames();
+		let domain
+		let allDataValues
+		const dataGroupNames = this.model.getDataGroupNames()
 
 		if (scaleType === ScaleTypes.LABELS_RATIO) {
-			return displayData.map(
-				(datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`
-			);
+			return displayData.map((datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`)
 		} else if (scaleType === ScaleTypes.TIME) {
-			allDataValues = displayData.map(
-				(datum) => +new Date(datum[mapsTo])
-			);
+			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]))
 		} else if (bounds && options.axes) {
-			allDataValues = [];
+			allDataValues = []
 
 			displayData.forEach((datum) => {
-				allDataValues.push(datum[mapsTo]);
+				allDataValues.push(datum[mapsTo])
 
 				if (datum[bounds.upperBoundMapsTo]) {
-					allDataValues.push(datum[bounds.upperBoundMapsTo]);
+					allDataValues.push(datum[bounds.upperBoundMapsTo])
 				}
 				if (datum[bounds.lowerBoundMapsTo]) {
-					allDataValues.push(datum[bounds.lowerBoundMapsTo]);
+					allDataValues.push(datum[bounds.lowerBoundMapsTo])
 				}
-			});
+			})
 		} else if (
 			axisOptions.stacked === true &&
 			dataGroupNames &&
 			axisPosition === this.getRangeAxisPosition()
 		) {
-			const { groupMapsTo } = options.data;
-			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(
-				{
-					groups: dataGroupNames,
-				}
-			);
+			const { groupMapsTo } = options.data
+			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys({
+				groups: dataGroupNames
+			})
 			const nonStackedGroupsData = displayData.filter(
-				(datum) => !dataGroupNames.includes(datum[groupMapsTo])
-			);
+				(datum: any) => !dataGroupNames.includes(datum[groupMapsTo])
+			)
 
-			let stackedValues = [];
+			const stackedValues = []
 			dataValuesGroupedByKeys.forEach((dataValues) => {
-				const { sharedStackKey, ...numericalValues } = dataValues;
+				const { ...numericalValues } = dataValues
 
 				let positiveSum = 0,
-					negativeSum = 0;
+					negativeSum = 0
 				Object.values(numericalValues).forEach((value: number) => {
 					if (!isNaN(value)) {
 						if (value < 0) {
-							negativeSum += value;
+							negativeSum += value
 						} else {
-							positiveSum += value;
+							positiveSum += value
 						}
 					}
-				});
-				stackedValues.push([negativeSum, positiveSum]);
-			});
+				})
+				stackedValues.push([negativeSum, positiveSum])
+			})
 
 			allDataValues = [
-				...Tools.flatten(stackedValues),
-				...nonStackedGroupsData.map((datum) => datum[mapsTo]),
-			];
+				...flatten(stackedValues),
+				...nonStackedGroupsData.map((datum) => datum[mapsTo])
+			]
 		} else {
-			allDataValues = [];
+			allDataValues = []
 
 			displayData.forEach((datum) => {
-				const value = datum[mapsTo];
+				const value = datum[mapsTo]
 				if (Array.isArray(value) && value.length === 2) {
-					allDataValues.push(value[0]);
-					allDataValues.push(value[1]);
+					allDataValues.push(value[0])
+					allDataValues.push(value[1])
 				} else {
 					if (extendLinearDomainBy) {
-						allDataValues.push(
-							Math.max(datum[mapsTo], datum[extendLinearDomainBy])
-						);
+						allDataValues.push(Math.max(datum[mapsTo], datum[extendLinearDomainBy]))
 					}
-					allDataValues.push(value);
+					allDataValues.push(value)
 				}
-			});
+			})
 		}
 
 		// Time can never be 0 and log of base 0 is -Infinity
-		if (
-			scaleType !== ScaleTypes.TIME &&
-			scaleType !== ScaleTypes.LOG &&
-			includeZero
-		) {
-			allDataValues.push(0);
+		if (scaleType !== ScaleTypes.TIME && scaleType !== ScaleTypes.LOG && includeZero) {
+			allDataValues.push(0)
 		}
 
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
 			thresholds.forEach((threshold) => {
-				const thresholdValue = Tools.getProperty(threshold, 'value');
-				if (thresholdValue !== null) allDataValues.push(thresholdValue);
-			});
+				const thresholdValue = getProperty(threshold, 'value')
+				if (thresholdValue !== null) allDataValues.push(thresholdValue)
+			})
 		}
 
-		domain = extent(allDataValues);
-		domain = this.extendsDomain(axisPosition, domain);
+		domain = extent(allDataValues)
+		domain = this.extendsDomain(axisPosition, domain)
 
-		return domain;
+		return domain
 	}
 
 	protected createScale(axisPosition: AxisPositions) {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
+		const options = this.model.getOptions()
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 
 		if (!axisOptions) {
-			return null;
+			return null
 		}
 
-		const scaleType =
-			Tools.getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR;
-		this.scaleTypes[axisPosition] = scaleType;
+		const scaleType = getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
+		this.scaleTypes[axisPosition] = scaleType
 
-		let scale;
+		let scale
 		if (scaleType === ScaleTypes.TIME) {
-			scale = scaleTime();
+			scale = scaleTime()
 		} else if (scaleType === ScaleTypes.LOG) {
-			scale = scaleLog().base(axisOptions.base || 10);
-		} else if (
-			scaleType === ScaleTypes.LABELS ||
-			scaleType === ScaleTypes.LABELS_RATIO
-		) {
-			scale = scaleBand();
+			scale = scaleLog().base(axisOptions.base || 10)
+		} else if (scaleType === ScaleTypes.LABELS || scaleType === ScaleTypes.LABELS_RATIO) {
+			scale = scaleBand()
 		} else {
-			scale = scaleLinear();
+			scale = scaleLinear()
 		}
 
-		scale.domain(this.getScaleDomain(axisPosition));
+		scale.domain(this.getScaleDomain(axisPosition))
 
-		return scale;
+		return scale
 	}
 
 	protected getHighestDomainThreshold(): null | {
-		threshold: ThresholdOptions;
-		scaleValue: number;
+		threshold: ThresholdOptions
+		scaleValue: number
 	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), 'axes');
-		const domainAxisPosition = this.getDomainAxisPosition();
+		const axesOptions = getProperty(this.model.getOptions(), 'axes')
+		const domainAxisPosition = this.getDomainAxisPosition()
 
-		const { thresholds } = axesOptions[domainAxisPosition];
+		const { thresholds } = axesOptions[domainAxisPosition]
 
 		// Check if thresholds exist & is not empty
-		if (
-			!Array.isArray(thresholds) ||
-			(Array.isArray(thresholds) && !thresholds.length)
-		) {
-			return null;
+		if (!Array.isArray(thresholds) || (Array.isArray(thresholds) && !thresholds.length)) {
+			return null
 		}
 
-		const domainScale = this.getDomainScale();
+		const domainScale = this.getDomainScale()
 		// Find the highest threshold for the domain
-		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value
-		)[0];
+		const highestThreshold = thresholds.sort((a, b) => b.value - a.value)[0]
 
-		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
+		const scaleType = this.getScaleTypeByPosition(domainAxisPosition)
 		if (
 			scaleType === ScaleTypes.TIME &&
-			(typeof highestThreshold.value === 'string' ||
-				highestThreshold.value.getTime === undefined)
+			(typeof highestThreshold.value === 'string' || highestThreshold.value.getTime === undefined)
 		) {
-			highestThreshold.value = new Date(highestThreshold.value);
+			highestThreshold.value = new Date(highestThreshold.value)
 		}
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value),
-		};
+			scaleValue: domainScale(highestThreshold.value)
+		}
 	}
 
 	protected getHighestRangeThreshold(): null | {
-		threshold: ThresholdOptions;
-		scaleValue: number;
+		threshold: ThresholdOptions
+		scaleValue: number
 	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), 'axes');
-		const rangeAxisPosition = this.getRangeAxisPosition();
+		const axesOptions = getProperty(this.model.getOptions(), 'axes')
+		const rangeAxisPosition = this.getRangeAxisPosition()
 
-		const { thresholds } = axesOptions[rangeAxisPosition];
+		const { thresholds } = axesOptions[rangeAxisPosition]
 
 		// Check if thresholds exist & is not empty
-		if (
-			!Array.isArray(thresholds) ||
-			(Array.isArray(thresholds) && !thresholds.length)
-		) {
-			return null;
+		if (!Array.isArray(thresholds) || (Array.isArray(thresholds) && !thresholds.length)) {
+			return null
 		}
 
-		const rangeScale = this.getRangeScale();
+		const rangeScale = this.getRangeScale()
 		// Find the highest threshold for the range
-		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value
-		)[0];
+		const highestThreshold = thresholds.sort((a, b) => b.value - a.value)[0]
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value),
-		};
+			scaleValue: rangeScale(highestThreshold.value)
+		}
 	}
 }
 
 function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
-	const startDate = new Date(domain[0]);
-	const endDate = new Date(domain[1]);
+	const startDate = new Date(domain[0])
+	const endDate = new Date(domain[1])
 
 	if (differenceInYears(endDate, startDate) > 1) {
-		return [
-			subYears(startDate, spaceToAddToEdges),
-			addYears(endDate, spaceToAddToEdges),
-		];
+		return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)]
 	}
 
 	if (differenceInMonths(endDate, startDate) > 1) {
-		return [
-			subMonths(startDate, spaceToAddToEdges),
-			addMonths(endDate, spaceToAddToEdges),
-		];
+		return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)]
 	}
 
 	if (differenceInDays(endDate, startDate) > 1) {
-		return [
-			subDays(startDate, spaceToAddToEdges),
-			addDays(endDate, spaceToAddToEdges),
-		];
+		return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)]
 	}
 
 	if (differenceInHours(endDate, startDate) > 1) {
-		return [
-			subHours(startDate, spaceToAddToEdges),
-			addHours(endDate, spaceToAddToEdges),
-		];
+		return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)]
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 30) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges * 30),
-			addMinutes(endDate, spaceToAddToEdges * 30),
-		];
+			addMinutes(endDate, spaceToAddToEdges * 30)
+		]
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 1) {
-		return [
-			subMinutes(startDate, spaceToAddToEdges),
-			addMinutes(endDate, spaceToAddToEdges),
-		];
+		return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)]
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 15) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges * 15),
-			addSeconds(endDate, spaceToAddToEdges * 15),
-		];
+			addSeconds(endDate, spaceToAddToEdges * 15)
+		]
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 1) {
-		return [
-			subSeconds(startDate, spaceToAddToEdges),
-			addSeconds(endDate, spaceToAddToEdges),
-		];
+		return [subSeconds(startDate, spaceToAddToEdges), addSeconds(endDate, spaceToAddToEdges)]
 	}
 
-	return [startDate, endDate];
+	return [startDate, endDate]
 }
 
 function addSpacingToContinuousDomain(
@@ -882,23 +731,21 @@ function addSpacingToContinuousDomain(
 	paddingRatio: number,
 	scaleType?: ScaleTypes
 ) {
-	const domainLength = upper - lower;
-	const padding = domainLength * paddingRatio;
+	const domainLength = upper - lower
+	const padding = domainLength * paddingRatio
 
 	// If padding crosses 0, keep 0 as new upper bound
-	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
+	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding
 	// If padding crosses 0, keep 0 as new lower bound
-	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+	let newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding
 
 	// Log of base 0 or a negative number is -Infinity
 	if (scaleType === ScaleTypes.LOG && newLower <= 0) {
 		if (lower <= 0) {
-			throw Error(
-				'Data must have values greater than 0 if log scale type is used.'
-			);
+			throw Error('Data must have values greater than 0 if log scale type is used.')
 		}
-		newLower = lower;
+		newLower = lower
 	}
 
-	return [newLower, newUpper];
+	return [newLower, newUpper]
 }

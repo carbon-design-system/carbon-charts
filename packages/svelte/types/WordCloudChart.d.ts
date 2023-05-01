@@ -1,5 +1,5 @@
-import { WordCloudChart as WC } from "@carbon/charts";
-import type { WorldCloudChartOptions } from "@carbon/charts/interfaces";
-import BaseChart from "./BaseChart";
+import { WordCloudChart as WordCloudChartCore } from '@carbon/charts'
+import type { WorldCloudChartOptions } from '@carbon/charts/interfaces'
+import BaseChart from './BaseChart'
 
-export default class WordCloudChart extends BaseChart<WC, WorldCloudChartOptions> {}
+export default class WordCloudChart extends BaseChart<WordCloudChartCore, WorldCloudChartOptions> {}

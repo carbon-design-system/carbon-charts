@@ -1,5 +1,5 @@
-import { MeterChart as MC } from "@carbon/charts";
-import type { MeterChartOptions } from "@carbon/charts/interfaces";
-import BaseChart from "./BaseChart";
+import { MeterChart as MeterChartCore } from '@carbon/charts'
+import type { MeterChartOptions } from '@carbon/charts/interfaces'
+import BaseChart from './BaseChart'
 
-export default class MeterChart extends BaseChart<MC, MeterChartOptions> {}
+export default class MeterChart extends BaseChart<MeterChartCore, MeterChartOptions> {}

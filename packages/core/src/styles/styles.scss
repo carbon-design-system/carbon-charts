@@ -5,9 +5,14 @@ $css--default-type: false;
 
 $prefix: 'cds';
 
-// @use "@carbon/styles";
-@use "@carbon/styles/scss/type";
-@use "@carbon/styles/scss/theme";
+// Carbon Charts expects the user to load IBM Plex on their own per the storybooks
+@use '@carbon/styles/scss/config' with (
+	$css--font-face: false
+);
+
+@use '@carbon/styles';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme';
 
 // Custom charting tokens
 @import './tokens';

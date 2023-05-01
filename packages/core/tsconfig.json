@@ -1,28 +1,23 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+	// "extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"composite": true,
-		"baseUrl": ".",
-		"declaration": true,
-		"lib": ["es2015", "dom"],
+		// Temporarily copied from ../../tsconfig.json
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
 		"esModuleInterop": true,
-		"sourceMap": true,
-		"mapRoot": "./",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"outDir": "./dist/build",
-		"rootDir": ".",
-		"target": "es5",
-		"inlineSources": true,
-		"types": ["node", "jasmine"],
-		"typeRoots": ["./node_modules/@types", "./custom.d.ts"]
+		"forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+
+		// Package-specific settings
+		"useDefineForClassFields": false, // TODO: Fix the 7 issues
+		"strict": false // TODO: Address TypeScript issues in project so strict can be true
 	},
-	"exclude": [
-		"./src/**/*.spec.ts",
-		"./src/tests",
-		"./node_modules",
-		"../../node_modules"
-	],
-	"references": [{ "path": "src" }, { "path": "demo" }],
-	"files": []
+	"include": ["src"],
+  "references": [{ "path": "./tsconfig.vite.json" }]
 }
