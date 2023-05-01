@@ -9,7 +9,7 @@ export default defineConfig({
 		lib: {
 			entry: 'src/index.ts',
 			name: 'ChartsReact',
-			formats: [/*'es', */'umd'],
+			formats: ['es','umd'],
 			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
