@@ -2,7 +2,6 @@
 	"name": "@carbon/charts-monorepo",
 	"private": true,
 	"description": "Carbon charting components, lerna monorepo",
-
 	"scripts": {
 		"clean:root": "rm -rf node_modules yarn.lock .yarn/cache .yarn/install-state.gz",
 		"clean": "lerna clean && lerna run clean && yarn clean:root",

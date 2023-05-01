@@ -10,8 +10,6 @@
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
-**[Angular 13 example](https://github.com/nstuyvesant/carbon-charts-angular-13)**
-
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):

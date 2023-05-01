@@ -44,16 +44,16 @@
     "@angular/core": "*"
   },
   "dependencies": {
-    "@angular/common": "16.0.0-rc.3",
-    "@angular/core": "16.0.0-rc.3",
+    "@angular/common": "16.0.0-rc.4",
+    "@angular/core": "16.0.0-rc.4",
     "@carbon/charts": "workspace:*",
     "@carbon/icons-angular": "^11.2.2",
     "@carbon/telemetry": "~0.1.0"
   },
   "devDependencies": {
-    "@angular/animations": "16.0.0-rc.3",
-    "@angular/compiler": "16.0.0-rc.3",
-    "@angular/platform-browser": "16.0.0-rc.3",
+    "@angular/animations": "16.0.0-rc.4",
+    "@angular/compiler": "16.0.0-rc.4",
+    "@angular/platform-browser": "16.0.0-rc.4",
     "@babel/core": "^7.21.5",
     "@stackblitz/sdk": "^1.9.0",
     "@storybook/addon-essentials": "^7.0.7",
