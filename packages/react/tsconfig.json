@@ -1,30 +1,27 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		// For vite
-		"target": "ESNext",
+		// Temporarily copied from ../../tsconfig.json
+    "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
-		"isolatedModules": true,
-		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
 
-		// All packages
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"sourceMap": true,
-
-		// For this package only
+		// Package-specific
+		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
-
-		/* Linting */
-		"strict": true,
+		"noEmit": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"strict": true
 	},
 	"include": ["src/**/*"],
-	"exclude": ["src/**/*.test.tsx"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }
