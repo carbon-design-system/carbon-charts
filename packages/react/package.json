@@ -25,7 +25,7 @@
     "LICENSE.md"
   ],
   "scripts": {
-    "styles": "cp ../charts/dist/styles.* dist",
+    "styles": "cp ../core/dist/styles.* dist",
     "license": "cp ../../LICENSE.md ./",
     "build:package": "tsc && vite build && yarn styles && yarn license",
     "build:demo": "NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet --disable-telemetry",

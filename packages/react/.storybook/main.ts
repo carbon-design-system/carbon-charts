@@ -4,7 +4,7 @@ import { dirname } from 'path'
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx)',
+		'../src/**/*.stories.tsx',
 		'../../core/src/stories/getting-started/react.stories.mdx',
 		'../../core/src/stories/tutorials/*.stories.mdx'
 	],
