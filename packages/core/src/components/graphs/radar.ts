@@ -170,7 +170,7 @@ export class Radar extends Component {
 					.attr('fill', 'none')
 					.call((selection) =>
 						selection
-							.transition()
+							.transition() // BUG: unresolved from Issue 1555 - https://github.com/carbon-design-system/carbon-charts/issues/1555
 							.call((t) =>
 								this.services.transitions.setupTransition({
 									transition: t,
