@@ -23,5 +23,6 @@
 		"strict": true
 	},
 	"include": ["src/**/*"],
+	"exclude": ["src/**/*.test.tsx"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }
