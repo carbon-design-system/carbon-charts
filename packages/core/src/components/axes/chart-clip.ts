@@ -49,11 +49,14 @@ export class ChartClip extends Component {
 			this.chartClipPath,
 			`rect.${this.type}`
 		);
-		clipRect
-			.attr('x', xScaleStart)
-			.attr('y', yScaleStart)
-			.attr('width', xScaleEnd - xScaleStart)
-			.attr('height', yScaleEnd - yScaleStart);
+
+		if (xScaleEnd - xScaleStart > 0) {
+			clipRect
+				.attr('x', xScaleStart)
+				.attr('y', yScaleStart)
+				.attr('width', xScaleEnd - xScaleStart)
+				.attr('height', yScaleEnd - yScaleStart);
+		}
 
 		this.chartClipPath.merge(clipRect).lower();
 	}
