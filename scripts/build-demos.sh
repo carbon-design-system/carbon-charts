@@ -10,12 +10,14 @@ set -e
 #  - README.md
 #  - and any specialty files
 
-# Generate all assets needed for push to gh-pages
+# Run build:demo script in all packages in parallel
+npx lerna run --stream build:demo
+
+# Setup empty pages directory for storybook builds
+rm -rf pages
 mkdir -p pages
 touch pages/.nojekyll
 echo "charts.carbondesignsystem.com" > pages/CNAME
 
-# run the demo:build script in all packages
-npx lerna run --stream demo:build
-# copy all the demos/{package name here} folders to the pages deploy directory
+# Copy demos/{package name here} folders to the pages deploy directory
 npx lerna exec -- cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
