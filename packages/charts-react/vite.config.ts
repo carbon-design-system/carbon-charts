@@ -22,6 +22,16 @@ export default defineConfig({
 			}
 		}
 	},
+	optimizeDeps: {
+		include: [
+			'@carbon/charts',
+			'@carbon/icons-react'
+		],
+		exclude: [
+			// Will cause errors when running storybook if in the include list
+			'@carbon/telemetry'
+		]
+	},
 	plugins: [
 		react(),
 		dts({

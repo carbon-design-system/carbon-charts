@@ -52,6 +52,25 @@ export default defineConfig({
 			}
 		}
 	},
+	optimizeDeps: {
+		include: [
+			'@carbon/colors',
+			'@carbon/layout',
+			'@carbon/themes',
+			'@carbon/utils-position',
+			'carbon-components',
+			'date-fns',
+			'dom-to-image-more',
+			'lodash-es',
+			'resize-observer-polyfill'
+		],
+		exclude: [
+			// Storybook will not run if these are in the include list
+			'@carbon/import-once',
+			'@carbon/styles',
+			'@carbon/telemetry',
+		]
+	},
 	plugins: [
 		dts({
 			exclude: './package.json'

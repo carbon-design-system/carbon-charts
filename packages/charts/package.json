@@ -76,8 +76,12 @@
 		"d3": "^7.8.4"
 	},
 	"dependencies": {
+		"@carbon/colors": "^11.14.0",
+		"@carbon/import-once": "^10.7.0",
+		"@carbon/layout": "^11.13.0",
 		"@carbon/styles": "^1.28.0",
 		"@carbon/telemetry": "~0.1.0",
+		"@carbon/themes": "^11.18.0",
 		"@carbon/utils-position": "^1.1.4",
 		"carbon-components": "^10.58.6",
 		"d3-array": "^3.2.3",
@@ -102,15 +106,6 @@
 		"tslib": "^2.5.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.21.5",
-		"@carbon/colors": "^11.14.0",
-		"@carbon/elements": "^11.22.0",
-		"@carbon/grid": "^11.13.0",
-		"@carbon/import-once": "^10.7.0",
-		"@carbon/layout": "^11.13.0",
-		"@carbon/motion": "^11.10.0",
-		"@carbon/themes": "^11.18.0",
-		"@carbon/type": "^11.17.0",
 		"@rushstack/eslint-patch": "^1.2.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@storybook/addon-essentials": "^7.0.7",
@@ -134,7 +129,6 @@
 		"prettier": "^2.8.8",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"rollup-plugin-generate-package-json": "^3.2.0",
 		"sass": "^1.62.1",
 		"storybook": "^7.0.7",
 		"typedoc": "^0.24.6",

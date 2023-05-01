@@ -2038,7 +2038,7 @@ __metadata:
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-react-refresh: ^0.3.5
+    eslint-plugin-react-refresh: ^0.4.0
     eslint-plugin-storybook: ^0.6.11
     prettier: ^2.8.8
     react: ^18.2.0
@@ -2049,8 +2049,8 @@ __metadata:
     vite: ^4.3.3
     vite-plugin-dts: ~2.3.0
   peerDependencies:
-    react: ^18.0.0
-    react-dom: ^18.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
@@ -2136,17 +2136,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts@workspace:packages/charts"
   dependencies:
-    "@babel/core": ^7.21.5
     "@carbon/colors": ^11.14.0
-    "@carbon/elements": ^11.22.0
-    "@carbon/grid": ^11.13.0
     "@carbon/import-once": ^10.7.0
     "@carbon/layout": ^11.13.0
-    "@carbon/motion": ^11.10.0
     "@carbon/styles": ^1.28.0
     "@carbon/telemetry": ~0.1.0
     "@carbon/themes": ^11.18.0
-    "@carbon/type": ^11.17.0
     "@carbon/utils-position": ^1.1.4
     "@rushstack/eslint-patch": ^1.2.0
     "@stackblitz/sdk": ^1.9.0
@@ -2191,7 +2186,6 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     resize-observer-polyfill: ^1.5.1
-    rollup-plugin-generate-package-json: ^3.2.0
     sass: ^1.62.1
     storybook: ^7.0.7
     tslib: ^2.5.0
@@ -2209,21 +2203,6 @@ __metadata:
   version: 11.14.0
   resolution: "@carbon/colors@npm:11.14.0"
   checksum: 35aa802a5f044af5f0654bf0cd757b42b84425d149ae724fab3daa507a5244e67fe4a1fdc18bb50d1fbc838580b5c4904e77f46f6e5b5bf4a24ee2fc3e58da77
-  languageName: node
-  linkType: hard
-
-"@carbon/elements@npm:^11.22.0":
-  version: 11.22.0
-  resolution: "@carbon/elements@npm:11.22.0"
-  dependencies:
-    "@carbon/colors": ^11.14.0
-    "@carbon/grid": ^11.13.0
-    "@carbon/icons": ^11.19.0
-    "@carbon/layout": ^11.13.0
-    "@carbon/motion": ^11.10.0
-    "@carbon/themes": ^11.18.0
-    "@carbon/type": ^11.17.0
-  checksum: e5c7f580854e69e26d87e41b5fabebeb636c900f096da9912fb676c5c4f6fab8a5f462185f89de4b5bb088593a20a1754212095388e444841229f14826831074
   languageName: node
   linkType: hard
 
@@ -2279,13 +2258,6 @@ __metadata:
   peerDependencies:
     react: ">=16"
   checksum: 5d8ccda738d6f62dc530eb2836fc65959e76728ac644f94bf7c2ea7e9b2b80fd0b214586d61fb745f385b9ee5db0bb176d8d79c9281967c7b34217ae7f3afb3c
-  languageName: node
-  linkType: hard
-
-"@carbon/icons@npm:^11.19.0":
-  version: 11.19.0
-  resolution: "@carbon/icons@npm:11.19.0"
-  checksum: d136b7847245adbeaf49d46f254ede0ff01637cbc5a526500ee3ff667e36ffc0d82314f1554d26b20edcc7ab56fa74c1004887f3c2ae4534cf9243d918df8ca4
   languageName: node
   linkType: hard
 
@@ -11447,12 +11419,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-refresh@npm:^0.3.5":
-  version: 0.3.5
-  resolution: "eslint-plugin-react-refresh@npm:0.3.5"
+"eslint-plugin-react-refresh@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "eslint-plugin-react-refresh@npm:0.4.0"
   peerDependencies:
     eslint: ">=7"
-  checksum: 8d44201968838ad0ac13311fe593bc422ce80d9143d104c7485e8bcdeb4f8c3b4cda21322a7e360129f14912a980d23e2fb1f9f10d9701c623901e359bd7dd17
+  checksum: fd8b9f81c469ec2a74afa9404e48ea8f443df54163739b4da9ef9e65ae5f19a523d7a1e70b78f12ddb2a00b40d77f980619f33677e059ad493297ed8d727fc31
   languageName: node
   linkType: hard
 
@@ -19986,18 +19958,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-generate-package-json@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "rollup-plugin-generate-package-json@npm:3.2.0"
-  dependencies:
-    read-pkg: ^5.2.0
-    write-pkg: ^4.0.0
-  peerDependencies:
-    rollup: ">=1.0.0"
-  checksum: 61b440377a16a1674ee0c8c4ccaf3d43522671ccde2c182a302fb063f32f8b5c81c81a74d1dbf5239aefab2743037f4dae6583083072ed30829225dc117c2d7d
-  languageName: node
-  linkType: hard
-
 "rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.0.0, rollup@npm:^3.21.0":
   version: 3.21.2
   resolution: "rollup@npm:3.21.2"
@@ -23415,7 +23375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"write-pkg@npm:4.0.0, write-pkg@npm:^4.0.0":
+"write-pkg@npm:4.0.0":
   version: 4.0.0
   resolution: "write-pkg@npm:4.0.0"
   dependencies:

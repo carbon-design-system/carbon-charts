@@ -22,6 +22,10 @@ export default defineConfig({
 			}
 		}
 	},
+	optimizeDeps: {
+		include: ['@carbon/charts'],
+		exclude: ['@carbon/telemetry']
+	},
 	plugins: [
 		vue(),
 		dts({ // generate type declaration files in dist, not dist/src
