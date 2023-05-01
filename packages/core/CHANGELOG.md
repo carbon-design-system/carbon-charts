@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.5...v1.7.6) (2023-05-01)
+
+### Bug Fixes
+
+- **1555:** corrects JS console errors for all but radar chart
+  ([#1556](https://github.com/carbon-design-system/carbon-charts/issues/1556))
+  ([f4e51bb](https://github.com/carbon-design-system/carbon-charts/commit/f4e51bb3b4e649a6c843a30a42b4c8c38eaf1868))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.7.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.4...v1.7.5) (2023-04-28)
 
 ### Bug Fixes

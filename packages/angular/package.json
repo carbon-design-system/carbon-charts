@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "description": "Carbon charting components for Angular",
   "module": "./dist/index.mjs",
   "types": "./dist/main.d.ts",
