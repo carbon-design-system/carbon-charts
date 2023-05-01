@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    // Directories
+    ".husky",
+    ".yarn",
+    "pages",
+    ".angular",
+    ".svelte-kit",
+    "node_modules",
+    "demo/bundle",
+    "dist",
+    "**/assets",
+    // Storybook
+    "**/*.stories.@(ts|tsx)",
+    "**/*.mdx",
+    // Tests
+    "**/*.test.tsx",
+    "**/tests/*",
+    "**/*.spec.ts"
+  ]
+}

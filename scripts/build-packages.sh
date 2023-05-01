@@ -11,4 +11,4 @@ set -e
 #  - and any specialty files
 
 # run the build and demo:build script in all packages
-lerna run --stream build
+npx lerna run --stream build
