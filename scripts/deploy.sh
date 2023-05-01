@@ -18,17 +18,17 @@ git stash
 # Checkout master to get out of detached HEAD state
 git checkout master
 
+# Create release with lerna
 npx lerna version --conventional-commits --yes --force-publish --create-release github
 
-echo "Publish to NPM"
-
-# Build packages and demos
+echo "Rebuild packages and demos.."
 yarn build
 
-# authenticate with the npm registry
-npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
-
+# Add telemetry to packages
 node scripts/add-telemetry-to-packages.cjs
 
-# Only publishes dist but new package.json exports set for whole package
-npx lerna publish from-git --yes --force-publish --contents dist
+# Authenticate with npm registry
+npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
+echo "Publish to NPM.."
+npx lerna publish from-git --yes --force-publish --no-verify-access

@@ -24,9 +24,6 @@
 		"strict": true
 	},
 	"include": ["src"],
-	"exclude": [
-    "src/stories",
-    "src/**/*.test.tsx"
-  ],
+	"exclude": ["src/**/*.test.tsx"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }

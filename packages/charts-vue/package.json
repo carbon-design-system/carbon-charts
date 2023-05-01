@@ -4,6 +4,7 @@
   "description": "Carbon charting components for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -40,7 +41,8 @@
   },
   "dependencies": {
     "@carbon/charts": "workspace:*",
-    "@carbon/telemetry": "~0.1.0"
+    "@carbon/telemetry": "~0.1.0",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
@@ -67,12 +69,10 @@
     "storybook": "^7.0.7",
     "typescript": "^5.0.4",
     "vite": "^4.3.3",
-    "vite-plugin-dts": "~2.3.0",
-    "vue": "^3.2.47"
+    "vite-plugin-dts": "~2.3.0"
   },
   "prettier": "../../prettier.config.cjs",
   "publishConfig": {
-    "directory": "dist",
     "access": "public"
   },
   "repository": {

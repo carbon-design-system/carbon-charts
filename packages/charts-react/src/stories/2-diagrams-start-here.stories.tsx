@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
-import { Component } from '@carbon/charts'
+import { buildElbowPathString } from '@carbon/charts'
 import {
 	CardNode,
 	CardNodeColumn,
@@ -174,12 +174,12 @@ const ProgrammaticStatic = () => {
 		{
 			source: 'c',
 			target: 'b',
-			path: (source: any, target: any) => Component.buildElbowPathString(source, target)
+			path: (source: any, target: any) => buildElbowPathString(source, target)
 		},
 		{
 			source: 'd',
 			target: 'c',
-			path: (source: any, target: any) => Component.buildElbowPathString(source, target),
+			path: (source: any, target: any) => buildElbowPathString(source, target),
 			variant: 'tunnel'
 		}
 	]

@@ -16,8 +16,8 @@
 
 		// Package-specific settings
 		"useDefineForClassFields": false, // TODO: Fix the 7 issues
-		"strict": false, // TODO: Address TypeScript issues in project so strict can be true
+		"strict": false // TODO: Address TypeScript issues in project so strict can be true
 	},
-	"include": ["src/**/*"],
+	"include": ["src"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }

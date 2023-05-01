@@ -15,7 +15,7 @@ mkdir -p pages
 touch pages/.nojekyll
 echo "charts.carbondesignsystem.com" > pages/CNAME
 
-# run the build:package then build:demo script in all packages
+# Run the build:package then build:demo script in all packages
 npx lerna run --stream build:package
 NODE_ENV=production npx lerna run --stream build:demo
 

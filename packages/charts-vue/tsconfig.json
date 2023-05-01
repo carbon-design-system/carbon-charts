@@ -23,7 +23,6 @@
     "noFallthroughCasesInSwitch": true,
     "strict": true,
   },
-  "include": ["src/**/*.vue", "src/**/*.ts", "src/**/*.d.ts"],
-  "exclude": ["src/stories"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.vite.json" }]
 }

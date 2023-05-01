@@ -4,6 +4,7 @@
 	"description": "Carbon charting components for React",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
@@ -80,7 +81,6 @@
 	},
 	"prettier": "../../prettier.config.cjs",
 	"publishConfig": {
-		"directory": "dist",
 		"access": "public"
 	},
 	"repository": {
