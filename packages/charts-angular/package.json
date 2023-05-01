@@ -25,6 +25,7 @@
     "LICENSE.md"
   ],
   "scripts": {
+    "postinstall": "carbon-telemetry collect --install",
     "ng": "ng",
     "styles": "cp ../charts/dist/styles.* dist",
     "license": "cp ../../LICENSE.md ./",

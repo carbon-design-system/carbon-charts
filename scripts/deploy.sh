@@ -24,9 +24,6 @@ npx lerna version --conventional-commits --yes --force-publish --create-release 
 echo "Rebuild packages and demos.."
 yarn build
 
-# Add telemetry to packages
-node scripts/add-telemetry-to-packages.cjs
-
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 

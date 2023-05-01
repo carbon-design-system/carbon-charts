@@ -40,6 +40,7 @@
     "vue": "^3.2.0"
   },
   "dependencies": {
+    "postinstall": "carbon-telemetry collect --install",
     "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "~0.1.0",
     "vue": "^3.2.47"
