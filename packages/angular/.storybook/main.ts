@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/html-vite'
+import type { StorybookConfig } from '@storybook/angular'
 import { dirname } from 'path'
 
 const config: StorybookConfig = {
@@ -18,7 +18,7 @@ const config: StorybookConfig = {
     }
   ],
   framework: {
-    name: '@storybook/html-vite',
+    name: '@storybook/angular-vite',
     options: {}
   },
   logLevel: 'error',
