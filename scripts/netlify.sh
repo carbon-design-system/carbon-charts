@@ -19,7 +19,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 		npx lerna run build:package --scope="@carbon/$PKG_DIR" --concurrency=1
   else
 	  # Map package directory for core since name is different
-	  PKG_DIR="charts"
+	  PKG_DIR="core"
 	fi
 
 	# Storybook build for selected package
