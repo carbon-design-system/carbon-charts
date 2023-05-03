@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	LineChart as LineChartCore,
 	type LineChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-line-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class LineChart extends BaseChart implements AfterViewInit {
 	/**

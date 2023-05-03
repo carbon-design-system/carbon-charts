@@ -4,7 +4,8 @@ import { ShapeNode } from './shape-node.component'
 export { ShapeNode } from './shape-node.component'
 
 @NgModule({
-	exports: [ShapeNode],
-	imports: [CommonModule, ShapeNode]
+	declarations: [ShapeNode],
+	imports: [CommonModule],
+	exports: [ShapeNode]
 })
 export class ShapeNodeModule {}

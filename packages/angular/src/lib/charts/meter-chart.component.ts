@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
 import {
 	MeterChart as MeterChartCore,
@@ -14,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-meter-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class MeterChart extends BaseChart implements AfterViewInit {
 	/**

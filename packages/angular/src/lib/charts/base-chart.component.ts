@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core'
 import type { ChartTabularData } from '@carbon/charts'
+
 /**
  * Wrapper around `BaseChart` in carbon charts library
  *
@@ -7,8 +8,7 @@ import type { ChartTabularData } from '@carbon/charts'
  */
 @Component({
 	selector: 'ibm-base-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class BaseChart implements AfterViewInit, OnInit {
 	/**

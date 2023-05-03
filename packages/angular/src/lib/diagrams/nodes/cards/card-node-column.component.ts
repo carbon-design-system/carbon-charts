@@ -7,8 +7,7 @@ import { carbonPrefix } from '../../config'
 		<xhtml:div>
 			<ng-content></ng-content>
 		</xhtml:div>
-	`,
-	standalone: true
+	`
 })
 export class CardNodeColumn {
 	@Input() farsideColumn = false

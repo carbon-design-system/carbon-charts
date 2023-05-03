@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	TreeChart as TreeChartCore,
 	type TreemapChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-tree-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class TreeChart extends BaseChart implements AfterViewInit {
 	/**

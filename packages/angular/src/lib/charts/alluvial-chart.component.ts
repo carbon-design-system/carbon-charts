@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	AlluvialChart as AlluvialChartCore,
 	type AlluvialChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-alluvial-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class AlluvialChart extends BaseChart implements AfterViewInit {
 	/**

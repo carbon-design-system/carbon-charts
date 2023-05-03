@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
 import {
 	ComboChart as ComboChartCore,
@@ -14,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-combo-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class ComboChart extends BaseChart implements AfterViewInit {
 	/**

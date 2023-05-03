@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	SimpleBarChart as SimpleBarChartCore,
 	type ChartTabularData,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-simple-bar-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class SimpleBarChart extends BaseChart implements AfterViewInit {
 	/**

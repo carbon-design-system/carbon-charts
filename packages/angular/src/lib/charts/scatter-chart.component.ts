@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	ScatterChart as ScatterChartCore,
 	type ScatterChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-scatter-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class ScatterChart extends BaseChart implements AfterViewInit {
 	/**

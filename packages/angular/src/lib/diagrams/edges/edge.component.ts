@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core'
 import { buildStraightPathString } from '@carbon/charts'
 
 import { carbonPrefix } from '../config'
-import { NgClass, NgStyle } from '@angular/common'
 
 interface Coordinates {
 	x: number
@@ -25,9 +24,7 @@ interface Coordinates {
 				[attr.marker-start]="markerStart ? 'url(#' + markerStart + ')' : ''"
 				[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''" />
 		</svg:g>
-	`,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	`
 })
 export class Edge {
 	@Input() color = ''

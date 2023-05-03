@@ -27,7 +27,6 @@ import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../..
 
 @Component({
 	selector: 'diagram-example1',
-  standalone: true,
 	templateUrl: './diagram-example1.component.html',
   imports: [ CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule, UserModule, WikisModule ]
 })

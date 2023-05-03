@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	RadarChart as RadarChartCore,
 	type RadarChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-radar-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class RadarChart extends BaseChart implements AfterViewInit {
 	/**

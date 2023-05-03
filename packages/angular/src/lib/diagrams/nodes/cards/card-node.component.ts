@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { carbonPrefix } from '../../config'
-import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common'
 
 @Component({
 	selector: 'ibm-diagram-card-node',
@@ -68,9 +67,7 @@ import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet } from '@ang
 		<ng-template #nodeTemplate>
 			<ng-content></ng-content>
 		</ng-template>
-	`,
-	standalone: true,
-	imports: [NgSwitch, NgSwitchCase, NgClass, NgStyle, NgTemplateOutlet]
+	`
 })
 export class CardNode implements OnInit {
 	@Input() as = 'div'

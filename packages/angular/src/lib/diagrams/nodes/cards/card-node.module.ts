@@ -7,7 +7,8 @@ import { CardNodeSubtitle } from './card-node-subtitle.component'
 import { CardNodeTitle } from './card-node-title.component'
 export { CardNode, CardNodeColumn, CardNodeLabel, CardNodeSubtitle, CardNodeTitle }
 @NgModule({
-	exports: [CardNode, CardNodeColumn, CardNodeLabel, CardNodeSubtitle, CardNodeTitle],
-	imports: [CommonModule, CardNode, CardNodeColumn, CardNodeLabel, CardNodeSubtitle, CardNodeTitle]
+	declarations: [CardNode, CardNodeColumn, CardNodeLabel, CardNodeSubtitle, CardNodeTitle],
+	imports: [CommonModule],
+	exports: [CardNode, CardNodeColumn, CardNodeLabel, CardNodeSubtitle, CardNodeTitle]
 })
 export class CardNodeModule {}

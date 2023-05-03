@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	AreaChart as AreaChartCore,
 	type AreaChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-area-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class AreaChart extends BaseChart implements AfterViewInit {
 	/**

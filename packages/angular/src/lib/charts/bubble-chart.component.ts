@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	BubbleChart as BubbleChartCore,
 	type BubbleChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-bubble-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class BubbleChart extends BaseChart implements AfterViewInit {
 	/**

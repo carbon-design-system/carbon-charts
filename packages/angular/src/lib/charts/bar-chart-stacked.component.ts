@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	StackedBarChart as StackedBarChartCore,
 	type ChartTabularData,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-stacked-bar-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class StackedBarChart extends BaseChart implements AfterViewInit {
 	/**

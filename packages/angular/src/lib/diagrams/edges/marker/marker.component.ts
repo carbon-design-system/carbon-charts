@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { arrowLeft, arrowRight, circle, diamond, square, tee } from '@carbon/charts'
 import { carbonPrefix } from '../../config'
-import { NgClass, NgStyle } from '@angular/common'
 
 const template = `
 <svg:marker
@@ -19,9 +18,7 @@ const template = `
 
 @Component({
 	selector: '[ibm-graph-marker]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class Marker {
 	@Input() d = ''
@@ -61,9 +58,7 @@ export class Marker {
 
 @Component({
 	selector: '[ibm-graph-marker-arrow-left]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerArrowLeft extends Marker implements OnInit {
 	ngOnInit() {
@@ -72,9 +67,7 @@ export class MarkerArrowLeft extends Marker implements OnInit {
 }
 @Component({
 	selector: '[ibm-graph-marker-arrow-right]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerArrowRight extends Marker implements OnInit {
 	ngOnInit() {
@@ -83,9 +76,7 @@ export class MarkerArrowRight extends Marker implements OnInit {
 }
 @Component({
 	selector: '[ibm-graph-marker-circle]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerShapeNode extends Marker implements OnInit {
 	ngOnInit() {
@@ -94,9 +85,7 @@ export class MarkerShapeNode extends Marker implements OnInit {
 }
 @Component({
 	selector: '[ibm-graph-marker-diamond]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerDiamond extends Marker implements OnInit {
 	ngOnInit() {
@@ -105,9 +94,7 @@ export class MarkerDiamond extends Marker implements OnInit {
 }
 @Component({
 	selector: '[ibm-graph-marker-square]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerSquare extends Marker implements OnInit {
 	ngOnInit() {
@@ -116,9 +103,7 @@ export class MarkerSquare extends Marker implements OnInit {
 }
 @Component({
 	selector: '[ibm-graph-marker-tee]',
-	template,
-	standalone: true,
-	imports: [NgClass, NgStyle]
+	template
 })
 export class MarkerTee extends Marker implements OnInit {
 	ngOnInit() {

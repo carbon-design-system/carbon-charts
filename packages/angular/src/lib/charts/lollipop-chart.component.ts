@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	LollipopChart as LollipopChartCore,
 	type LollipopChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-lollipop-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class LollipopChart extends BaseChart implements AfterViewInit {
 	/**

@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	PieChart as PieChartCore,
 	type PieChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-pie-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class PieChart extends BaseChart implements AfterViewInit {
 	/**

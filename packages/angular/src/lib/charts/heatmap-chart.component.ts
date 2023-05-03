@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	HeatmapChart as HeatmapChartCore,
 	type HeatmapChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-heatmap-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class HeatmapChart extends BaseChart implements AfterViewInit {
 	/**

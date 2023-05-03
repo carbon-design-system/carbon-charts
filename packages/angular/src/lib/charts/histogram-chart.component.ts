@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	HistogramChart as HistogramChartCore,
 	type HistogramChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-histogram-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class HistogramChart extends BaseChart implements AfterViewInit {
 	/**

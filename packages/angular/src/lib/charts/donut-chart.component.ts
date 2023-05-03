@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	DonutChart as DonutChartCore,
 	type DonutChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-donut-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class DonutChart extends BaseChart implements AfterViewInit {
 	/**

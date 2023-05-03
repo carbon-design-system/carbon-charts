@@ -1,7 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-
 import { BaseChart } from './base-chart.component'
-
 import {
 	WordCloudChart as WordCloudChartCore,
 	type WorldCloudChartOptions,
@@ -15,8 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-wordcloud-chart',
-	template: ``,
-	standalone: true
+	template: ``
 })
 export class WordCloudChart extends BaseChart implements AfterViewInit {
 	/**
