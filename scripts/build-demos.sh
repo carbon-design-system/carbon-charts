@@ -13,7 +13,7 @@ set -e
 # Run build:demo script in all packages in parallel
 npx lerna run --stream build:demo
 
-# Setup empty pages directory for storybook builds
+# Setup empty pages directory for Storybook builds
 rm -rf pages
 mkdir -p pages
 touch pages/.nojekyll
