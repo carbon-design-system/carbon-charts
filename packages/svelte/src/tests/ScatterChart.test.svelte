@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ScatterChart } from '../types'
+	import ScatterChart from '../lib/ScatterChart.svelte'
 	import type { ScatterChart as ScatterChartCore } from '@carbon/charts'
 	import { scatterDiscreteData as data, scatterDiscreteOptions } from '@carbon/charts/demo'
 

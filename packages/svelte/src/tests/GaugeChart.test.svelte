@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GaugeChart } from '../types'
+	import GaugeChart from '../lib/GaugeChart.svelte'
 	import type { GaugeChart as GaugeChartCore } from '@carbon/charts'
 	import { gaugeData as data, gaugeOptionsSemi } from '@carbon/charts/demo'
 

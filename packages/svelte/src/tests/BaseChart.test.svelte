@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BaseChart from '../types/BaseChart'
+	import BaseChart from '../lib/BaseChart.svelte'
 	import { stackedBarData as data, stackedBarOptions } from '@carbon/charts/demo'
 
 	let chart: any | null = null

@@ -25,6 +25,15 @@ import * as zoomBarDemos from './zoom-bar'
 import * as alluvialDemos from './alluvial'
 import * as highlightDemos from './hightlight'
 import * as heatmapDemos from './heatmap'
+
+export {
+	areaDemos, barDemos, boxplotDemos, bubbleDemos, bulletDemos,
+	comboDemos, donutDemos, gaugeDemos, histogramDemos, lineDemos,
+	lollipopDemos, meterDemos, pieDemos, radarDemos, scatterDemos,
+	stepDemos, timeSeriesAxisDemos, treeDemos, treemapDemos,
+	circlePackDemos, toolbarDemos, wordCloudDemos, zoomBarDemos,
+	alluvialDemos, highlightDemos, heatmapDemos
+}
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import packageJSON from '../../../package.json'

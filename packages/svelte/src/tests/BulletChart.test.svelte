@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BulletChart } from '../types'
+	import BulletChart from '../lib/BulletChart.svelte'
 	import type { BulletChart as BulletChartCore } from '@carbon/charts'
 	import { basicBulletData as data, basicBulletOptions } from '@carbon/charts/demo'
 

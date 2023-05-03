@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LineChart } from '../types'
+	import LineChart from '../lib/LineChart.svelte'
 	import type { LineChart as LineChartCore } from '@carbon/charts'
 	import { lineLongLabelData as data, lineOptions } from '@carbon/charts/demo'
 

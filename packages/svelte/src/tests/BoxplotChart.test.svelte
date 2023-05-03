@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BoxplotChart } from '../types'
+	import BoxplotChart from '../lib/BoxplotChart.svelte'
 	import type { BoxplotChart as BoxplotChartCore } from '@carbon/charts'
 	import { simpleBoxplotData as data, simpleBoxplotOptions } from '@carbon/charts/demo'
 

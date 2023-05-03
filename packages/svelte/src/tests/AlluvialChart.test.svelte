@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AlluvialChart } from '../types'
+	import AlluvialChart from '../lib/AlluvialChart.svelte'
 	import { alluvialSimpleData as data, alluvialSimpleOptions } from '@carbon/charts/demo'
 
 	let chart: any | null = null

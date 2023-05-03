@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AreaChart } from '../types'
+	import AreaChart from  '../lib/AreaChart.svelte'
 	import type { AreaChart as AreaChartCore } from '@carbon/charts'
 	import { areaTimeSeriesData as data, areaTimeSeriesOptions } from '@carbon/charts/demo'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LollipopChart } from '../types'
+	import LollipopChart from '../lib/LollipopChart.svelte'
 	import type { LollipopChart as LollipopChartCore } from '@carbon/charts'
 	import { lollipopDiscreteData as data, lollipopDiscreteOptions } from '@carbon/charts/demo'
 

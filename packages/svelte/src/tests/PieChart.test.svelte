@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PieChart } from '../types'
+	import PieChart from '../lib/PieChart.svelte'
 	import type { PieChart as PieChartCore } from '@carbon/charts'
 	import { pieCenteredData as data, pieCenteredOptions } from '@carbon/charts/demo'
 

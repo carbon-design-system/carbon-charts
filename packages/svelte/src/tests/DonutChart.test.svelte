@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DonutChart } from '../types'
+	import DonutChart from '../lib/DonutChart.svelte'
 	import type { DonutChart as DonutChartCore } from '@carbon/charts'
 	import { donutData as data, donutOptions } from '@carbon/charts/demo'
 

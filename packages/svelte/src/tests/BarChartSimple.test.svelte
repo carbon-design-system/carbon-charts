@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BarChartSimple } from '../types'
+	import BarChartSimple from '../lib/BarChartSimple.svelte'
 	import type { SimpleBarChart as SimpleBarChartCore } from '@carbon/charts'
 	import { simpleBarData as data, simpleBarOptions } from '@carbon/charts/demo'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BarChartStacked } from '../types'
+	import BarChartStacked from '../lib/BarChartStacked.svelte'
 	import type { StackedBarChart as StackedBarChartCore } from '@carbon/charts'
 	import { stackedBarData as data, stackedBarOptions } from '@carbon/charts/demo'
 

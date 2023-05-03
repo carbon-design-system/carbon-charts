@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { TreeChart } from '../types'
+	import TreeChart from '../lib/TreeChart.svelte'
 	import type { TreeChart as TreeChartCore } from '@carbon/charts'
 
 	let chart: TreeChartCore | null = null
 	let ref: HTMLDivElement | null = null
 
-	// copied from packages/charts/demo/data/tree.ts
+	// copied from packages/core/demo/data/tree.ts
 	const data = {
 		name: 'analytics',
 		children: [

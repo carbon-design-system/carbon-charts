@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TreemapChart } from '../types'
+	import TreemapChart from '../lib/TreeChart.svelte'
 	import type { TreemapChart as TreemapChartCore } from '@carbon/charts'
 	import { treemapData as data, treemapOptions } from '@carbon/charts/demo'
 

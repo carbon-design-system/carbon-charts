@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BubbleChart } from '../types'
+	import BubbleChart from '../lib/BubbleChart.svelte'
 	import type { BubbleChart as BubbleChartCore } from '@carbon/charts'
 	import { bubbleDoubleLinearData as data, bubbleDoubleLinearOptions } from '@carbon/charts/demo'
 

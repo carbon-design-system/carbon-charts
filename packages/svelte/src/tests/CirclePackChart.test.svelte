@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CirclePackChart } from '../types'
+	import CirclePackChart from '../lib/CirclePackChart.svelte'
 	import type { CirclePackChart as CirclePackChartCore } from '@carbon/charts'
 	import { circlePackThreeLevelData as data, circlePackSingleOptions } from '@carbon/charts/demo'
 

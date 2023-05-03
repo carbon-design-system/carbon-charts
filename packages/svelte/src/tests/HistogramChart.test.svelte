@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HistogramChart } from '../types'
+	import HistogramChart from '../lib/HistogramChart.svelte'
 	import type { HistogramChart as HistogramChartCore } from '@carbon/charts'
 	import {
 		histogramContinueData as data,

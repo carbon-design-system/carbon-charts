@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MeterChart } from '../types'
+	import MeterChart from '../lib/MeterChart.svelte'
 	import type { MeterChart as MeterChartCore } from '@carbon/charts'
 	import { meterData as data, meterOptionsCustomColor } from '@carbon/charts/demo'
 

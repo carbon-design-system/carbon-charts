@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { StackedAreaChart } from '../types'
+	import StackedAreaChart from '../lib/StackedAreaChart.svelte'
 	import type { StackedAreaChart as StackedAreaChartCore } from '@carbon/charts'
 	import {
 		stackedAreaTimeSeriesData as data,

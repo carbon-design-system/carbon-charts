@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { WordCloudChart } from '../types'
+	import WordCloudChart from '../lib/WordCloudChart.svelte'
 	import type { WordCloudChart as WordCloudChartCore } from '@carbon/charts'
 	import { wordCloudData as data, wordCloudOptions } from '@carbon/charts/demo'
 
