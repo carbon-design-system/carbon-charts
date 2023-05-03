@@ -2,21 +2,15 @@
   "name": "@carbon/charts-angular",
   "version": "1.7.6",
   "description": "Carbon charting components for Angular",
-  "module": "./dist/index.mjs",
-  "types": "./dist/main.d.ts",
-  "typings": "./dist/main.d.ts",
-  "files": [
-    "dist",
-    "CHANGELOG.md",
-    "LICENSE.md"
-  ],
+  "exports": {
+    "./styles.min.css": "./dist/styles.min.css",
+    "./styles.css": "./dist/styles.css"
+  },
   "scripts": {
     "postinstall": "carbon-telemetry collect --install",
-    "license": "cp ../../LICENSE.md ./",
+    "metadata": "cp ../../LICENSE.md dist && cp *.md dist",
     "styles": "cp ../core/dist/styles.* dist",
-    "build:package:new": "vite build && yarn license && yarn styles",
-    "build:package": "ng build && yarn styles && yarn license",
-    "build:demo:new": "storybook build -o demo/bundle --quiet",
+    "build:package": "ng build && yarn styles && yarn metadata",
     "build:demo": "ng run charts-angular:build-storybook",
     "build": "yarn build:package && yarn build:demo",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
@@ -58,7 +52,7 @@
     "@storybook/theming": "^7.1.0-0",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-storybook": "^0.6.11",
+    "eslint-plugin-storybook": "^0.6.12",
     "ng-packagr": "16.0.0-rc.1",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
@@ -72,6 +66,7 @@
     "zone.js": "~0.13.0"
   },
   "publishConfig": {
+    "directory": "dist",
     "access": "public"
   },
   "repository": {

@@ -7,6 +7,7 @@ const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    // BUG: Storybook limitation for the moment - importing mdx files from another package uses that package's @storybook/blocks which causes error
 		// '../../core/src/stories/getting-started/angular.stories.mdx',
 		// '../../core/src/stories/tutorials/*.stories.mdx'
   ],
@@ -40,7 +41,8 @@ const config: StorybookConfig = {
     }
     config.resolve!.alias = {
       ...config.resolve!.alias,
-      // '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
+      // BUG: In theory, this line is supposed to workaround the Storybook issue but doesn't (webpack vs. vite)
+      '@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
     }
     return config
   },

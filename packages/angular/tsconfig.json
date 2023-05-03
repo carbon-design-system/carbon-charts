@@ -25,25 +25,25 @@
     // "inlineSources": true,
     // "declaration": true,
 		// "moduleResolution": "node",
-		// "module": "es2015",
 		// "emitDecoratorMetadata": true,
 		// "downlevelIteration": true,
     // "importHelpers": true,
+    // "lib": ["es2017", "dom"]
 		// "target": "es2015",
+    // "module": "es2015",
 		// "typeRoots": ["./node_modules/@types"],
-		// "lib": ["es2017", "dom"]
   },
   "include": ["src", "./package.json"],
   "exclude": ["src/test.ts"],
   // "include": ["src/**/*"],
 	// "exclude": ["./node_modules", "../../node_modules"],
-  "references": [{ "path": "./tsconfig.vite.json" }]
-  // "angularCompilerOptions": {
-	// 	"annotateForClosureCompiler": true,
-	// 	"skipTemplateCodegen": true,
-	// 	"strictMetadataEmit": true,
-	// 	"fullTemplateTypeCheck": true,
-	// 	"strictInjectionParameters": true,
-	// 	"enableResourceInlining": true
-	// }
+  "references": [{ "path": "./tsconfig.vite.json" }],
+  "angularCompilerOptions": {
+		"annotateForClosureCompiler": true,
+		"skipTemplateCodegen": true,
+		"strictMetadataEmit": true,
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true,
+		"enableResourceInlining": true
+	}
 }

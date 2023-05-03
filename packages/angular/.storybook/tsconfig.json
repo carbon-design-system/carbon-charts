@@ -2,13 +2,10 @@
   "extends": "../tsconfig.lib.json",
   "compilerOptions": {
     "baseUrl": "../",
-    // "composite": true,
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "declarationMap": false,
-    "strict": true,
-    "skipLibCheck": true,
-    "types": ["node"]
+    "strict": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
   "include": ["../src/**/*", "./preview.ts"],

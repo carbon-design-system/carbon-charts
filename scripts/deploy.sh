@@ -27,5 +27,7 @@ yarn build
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-echo "Publish to NPM.."
+echo "Publish to NPM..."
+# Do NOT specify --contents! Use package.json publishConfig.directory per package for better granularity.
+# All packages except angular are published from their root with publishing content filtered via files array in package.json.
 npx lerna publish from-git --yes --force-publish --no-verify-access
