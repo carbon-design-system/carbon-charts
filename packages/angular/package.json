@@ -5,22 +5,6 @@
   "module": "./dist/index.mjs",
   "types": "./dist/main.d.ts",
   "typings": "./dist/main.d.ts",
-  "exports": {
-    "./package.json": {
-      "default": "./package.json"
-    },
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.mjs",
-      "esm2022": "./dist/index.mjs",
-      "browser": {
-        "import": "./dist/index.mjs"
-      },
-      "import": "./dist/index.mjs"
-    },
-    "./styles.min.css": "./dist/styles.min.css",
-    "./styles.css": "./dist/styles.css"
-  },
   "files": [
     "dist",
     "CHANGELOG.md",
@@ -30,11 +14,14 @@
     "postinstall": "carbon-telemetry collect --install",
     "license": "cp ../../LICENSE.md ./",
     "styles": "cp ../core/dist/styles.* dist",
-    "build:package": "vite build && yarn license && yarn styles",
-    "build:demo": "storybook build -o demo/bundle --quiet",
+    "build:package:new": "vite build && yarn license && yarn styles",
+    "build:package": "ng build && yarn styles && yarn license",
+    "build:demo:new": "storybook build -o demo/bundle --quiet",
+    "build:demo": "ng run charts-angular:build-storybook",
     "build": "yarn build:package && yarn build:demo",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
-    "storybook": "storybook dev -p 9006",
+    "storybook:new": "storybook dev -p 9006",
+    "storybook": "ng run charts-angular:storybook",
     "start": "yarn storybook",
     "format": "prettier --write src/ --ignore-path ../../.gitignore",
     "clean": "rm -rf dist demo/bundle"
@@ -51,31 +38,36 @@
     "@carbon/telemetry": "~0.1.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "16.0.0-rc.4",
     "@angular/animations": "16.0.0-rc.4",
+    "@angular/cli": "16.0.0-rc.4",
     "@angular/compiler": "16.0.0-rc.4",
+    "@angular/compiler-cli": "16.0.0-rc.4",
     "@angular/forms": "16.0.0-rc.4",
     "@angular/platform-browser": "16.0.0-rc.4",
-    "@babel/core": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@compodoc/compodoc": "^1.1.19",
     "@stackblitz/sdk": "^1.9.0",
     "@storybook/addon-essentials": "^7.1.0-0",
     "@storybook/addon-interactions": "^7.1.0-0",
     "@storybook/addon-links": "^7.1.0-0",
     "@storybook/angular": "^7.1.0-0",
     "@storybook/blocks": "^7.1.0-0",
-    "@storybook/html": "^7.1.0-0",
     "@storybook/manager-api": "^7.1.0-0",
     "@storybook/testing-library": "^0.1.0",
     "@storybook/theming": "^7.1.0-0",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.11",
+    "ng-packagr": "16.0.0-rc.1",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "^7.8.1",
     "storybook": "^7.1.0-0",
+    "style-loader": "3.3.2",
     "typescript": "^5.0.4",
-    "vite": "^4.3.3",
+    "vite": "^4.3.4",
     "vite-plugin-dts": "^2.3.0",
     "zone.js": "~0.13.0"
   },

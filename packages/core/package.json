@@ -131,7 +131,7 @@
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.11",
-    "jsdom": "^21.1.2",
+    "jsdom": "^22.0.0",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -139,7 +139,7 @@
     "storybook": "^7.0.7",
     "typedoc": "^0.24.6",
     "typescript": "^5.0.4",
-    "vite": "^4.3.3",
+    "vite": "^4.3.4",
     "vite-plugin-dts": "~2.3.0",
     "vitest": "0.30.1"
   },
