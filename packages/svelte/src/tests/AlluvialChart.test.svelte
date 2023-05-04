@@ -1,11 +1,11 @@
 <script lang="ts">
-	import AlluvialChart from '../lib/AlluvialChart.svelte'
-	import { alluvialSimpleData as data, alluvialSimpleOptions } from '@carbon/charts/demo'
+	import type { AlluvialChart as AlluvialChartCore } from '@carbon/charts'
+	import { alluvialDemos } from '@carbon/charts/demo'
+	import { AlluvialChart } from '../../types'
 
-	let chart: any | null = null
+	const { alluvialSimpleOptions: options, alluvialSimpleData: data } = alluvialDemos
+	let chart: AlluvialChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = alluvialSimpleOptions as any
 </script>
 
 <AlluvialChart

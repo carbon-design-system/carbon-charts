@@ -1,12 +1,11 @@
 <script lang="ts">
-	import CirclePackChart from '../lib/CirclePackChart.svelte'
 	import type { CirclePackChart as CirclePackChartCore } from '@carbon/charts'
-	import { circlePackThreeLevelData as data, circlePackSingleOptions } from '@carbon/charts/demo'
+	import { CirclePackChart } from '../../types'
+	import { circlePackDemos } from '@carbon/charts/demo'
 
+	const { circlePackSingleOptions: options, circlePackThreeLevelData: data } = circlePackDemos
 	let chart: CirclePackChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = circlePackSingleOptions as any
 </script>
 
 <CirclePackChart

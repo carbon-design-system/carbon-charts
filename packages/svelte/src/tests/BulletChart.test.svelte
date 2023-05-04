@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BulletChart from '../lib/BulletChart.svelte'
 	import type { BulletChart as BulletChartCore } from '@carbon/charts'
-	import { basicBulletData as data, basicBulletOptions } from '@carbon/charts/demo'
+	import { BulletChart } from '../../types'
+	import { bulletDemos } from '@carbon/charts/demo'
 
+	const { basicBulletOptions: options, basicBulletData: data } = bulletDemos
 	let chart: BulletChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = basicBulletOptions as any
 </script>
 
 <BulletChart

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import LineChart from '../lib/LineChart.svelte'
 	import type { LineChart as LineChartCore } from '@carbon/charts'
-	import { lineLongLabelData as data, lineOptions } from '@carbon/charts/demo'
+	import { lineDemos } from '@carbon/charts/demo'
+	import { LineChart } from '../../types'
 
+	const { lineOptions: options, lineLongLabelData: data } = lineDemos
 	let chart: LineChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = lineOptions as any
 </script>
 
 <LineChart

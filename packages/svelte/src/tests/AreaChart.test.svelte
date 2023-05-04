@@ -1,12 +1,11 @@
 <script lang="ts">
-	import AreaChart from  '../lib/AreaChart.svelte'
 	import type { AreaChart as AreaChartCore } from '@carbon/charts'
-	import { areaTimeSeriesData as data, areaTimeSeriesOptions } from '@carbon/charts/demo'
+	import { areaDemos } from '@carbon/charts/demo'
+	import { AreaChart } from '../../types'
 
+	const { areaTimeSeriesOptions: options, areaTimeSeriesData: data } = areaDemos
 	let chart: AreaChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = areaTimeSeriesOptions as any
 </script>
 
 <AreaChart

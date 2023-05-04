@@ -1,15 +1,11 @@
 <script lang="ts">
-	import StackedAreaChart from '../lib/StackedAreaChart.svelte'
 	import type { StackedAreaChart as StackedAreaChartCore } from '@carbon/charts'
-	import {
-		stackedAreaTimeSeriesData as data,
-		stackedAreaTimeSeriesOptions
-	} from '@carbon/charts/demo'
+	import { areaDemos } from '@carbon/charts/demo'
+	import { StackedAreaChart } from '../../types'
 
+	const { stackedAreaTimeSeriesOptions: options, stackedAreaTimeSeriesData: data } = areaDemos
 	let chart: StackedAreaChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = stackedAreaTimeSeriesOptions as any
 </script>
 
 <StackedAreaChart

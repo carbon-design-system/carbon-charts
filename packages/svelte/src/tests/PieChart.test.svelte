@@ -1,12 +1,11 @@
 <script lang="ts">
-	import PieChart from '../lib/PieChart.svelte'
 	import type { PieChart as PieChartCore } from '@carbon/charts'
-	import { pieCenteredData as data, pieCenteredOptions } from '@carbon/charts/demo'
+	import { pieDemos } from '@carbon/charts/demo'
+	import { PieChart } from '../../types'
 
+	const { pieCenteredOptions: options, pieCenteredData: data } = pieDemos
 	let chart: PieChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = pieCenteredOptions as any
 </script>
 
 <PieChart

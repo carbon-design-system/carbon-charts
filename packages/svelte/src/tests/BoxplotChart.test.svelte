@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BoxplotChart from '../lib/BoxplotChart.svelte'
 	import type { BoxplotChart as BoxplotChartCore } from '@carbon/charts'
-	import { simpleBoxplotData as data, simpleBoxplotOptions } from '@carbon/charts/demo'
+	import { boxplotDemos } from '@carbon/charts/demo'
+	import { BoxplotChart } from '../../types'
 
+	const { simpleBoxplotOptions: options, simpleBoxplotData: data } = boxplotDemos
 	let chart: BoxplotChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = simpleBoxplotOptions as any
 </script>
 
 <BoxplotChart

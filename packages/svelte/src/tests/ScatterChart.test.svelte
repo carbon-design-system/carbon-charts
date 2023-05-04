@@ -1,12 +1,11 @@
 <script lang="ts">
-	import ScatterChart from '../lib/ScatterChart.svelte'
 	import type { ScatterChart as ScatterChartCore } from '@carbon/charts'
-	import { scatterDiscreteData as data, scatterDiscreteOptions } from '@carbon/charts/demo'
+	import { scatterDemos } from '@carbon/charts/demo'
+	import { ScatterChart } from '../../types'
 
+	const { scatterDiscreteOptions: options, scatterDiscreteData: data } = scatterDemos
 	let chart: ScatterChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = scatterDiscreteOptions as any
 </script>
 
 <ScatterChart

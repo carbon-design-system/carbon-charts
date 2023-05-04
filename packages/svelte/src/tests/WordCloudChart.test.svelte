@@ -1,12 +1,11 @@
 <script lang="ts">
-	import WordCloudChart from '../lib/WordCloudChart.svelte'
 	import type { WordCloudChart as WordCloudChartCore } from '@carbon/charts'
-	import { wordCloudData as data, wordCloudOptions } from '@carbon/charts/demo'
+	import { wordCloudDemos } from '@carbon/charts/demo'
+	import { WordCloudChart } from '../../types'
 
+	const { wordCloudOptions: options, wordCloudData: data } = wordCloudDemos
 	let chart: WordCloudChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = wordCloudOptions as any
 </script>
 
 <WordCloudChart

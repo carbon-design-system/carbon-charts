@@ -1,6 +1,6 @@
 <script lang="ts">
-	import TreeChart from '../lib/TreeChart.svelte'
 	import type { TreeChart as TreeChartCore } from '@carbon/charts'
+	import { TreeChart } from '../../types'
 
 	let chart: TreeChartCore | null = null
 	let ref: HTMLDivElement | null = null

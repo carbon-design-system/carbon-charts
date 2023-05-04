@@ -1,12 +1,11 @@
 <script lang="ts">
-	import MeterChart from '../lib/MeterChart.svelte'
 	import type { MeterChart as MeterChartCore } from '@carbon/charts'
-	import { meterData as data, meterOptionsCustomColor } from '@carbon/charts/demo'
+	import { meterDemos } from '@carbon/charts/demo'
+	import { MeterChart } from '../../types'
 
+	const { meterOptionsCustomColor: options, meterData: data } = meterDemos
 	let chart: MeterChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = meterOptionsCustomColor as any
 </script>
 
 <MeterChart

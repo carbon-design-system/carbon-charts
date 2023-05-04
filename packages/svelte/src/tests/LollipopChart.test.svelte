@@ -1,12 +1,11 @@
 <script lang="ts">
-	import LollipopChart from '../lib/LollipopChart.svelte'
 	import type { LollipopChart as LollipopChartCore } from '@carbon/charts'
-	import { lollipopDiscreteData as data, lollipopDiscreteOptions } from '@carbon/charts/demo'
+	import { lollipopDemos } from '@carbon/charts/demo'
+	import LollipopChart from '../lib/LollipopChart.svelte'
 
+	const { lollipopDiscreteOptions: options, lollipopDiscreteData: data } = lollipopDemos
 	let chart: LollipopChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = lollipopDiscreteOptions as any
 </script>
 
 <LollipopChart

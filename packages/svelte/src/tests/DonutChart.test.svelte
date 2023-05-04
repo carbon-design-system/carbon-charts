@@ -1,12 +1,11 @@
 <script lang="ts">
-	import DonutChart from '../lib/DonutChart.svelte'
 	import type { DonutChart as DonutChartCore } from '@carbon/charts'
-	import { donutData as data, donutOptions } from '@carbon/charts/demo'
+	import { donutDemos } from '@carbon/charts/demo'
+	import { DonutChart } from '../../types'
 
+	const { donutOptions: options, donutData: data } = donutDemos
 	let chart: DonutChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = donutOptions as any
 </script>
 
 <DonutChart

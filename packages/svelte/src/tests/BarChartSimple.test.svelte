@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BarChartSimple from '../lib/BarChartSimple.svelte'
 	import type { SimpleBarChart as SimpleBarChartCore } from '@carbon/charts'
-	import { simpleBarData as data, simpleBarOptions } from '@carbon/charts/demo'
+	import { barDemos } from '@carbon/charts/demo'
+	import { BarChartSimple } from '../../types'
 
+	const { simpleBarOptions: options, simpleBarData: data } = barDemos
 	let chart: SimpleBarChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = simpleBarOptions as any
 </script>
 
 <BarChartSimple

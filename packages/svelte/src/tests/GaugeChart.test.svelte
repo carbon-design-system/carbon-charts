@@ -1,12 +1,11 @@
 <script lang="ts">
-	import GaugeChart from '../lib/GaugeChart.svelte'
 	import type { GaugeChart as GaugeChartCore } from '@carbon/charts'
-	import { gaugeData as data, gaugeOptionsSemi } from '@carbon/charts/demo'
+	import { gaugeDemos } from '@carbon/charts/demo'
+	import { GaugeChart } from '../../types'
 
+	const { gaugeOptionsSemi: options, gaugeData: data } = gaugeDemos
 	let chart: GaugeChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = gaugeOptionsSemi as any
 </script>
 
 <GaugeChart

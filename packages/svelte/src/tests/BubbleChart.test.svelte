@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BubbleChart from '../lib/BubbleChart.svelte'
 	import type { BubbleChart as BubbleChartCore } from '@carbon/charts'
-	import { bubbleDoubleLinearData as data, bubbleDoubleLinearOptions } from '@carbon/charts/demo'
+	import { BubbleChart} from '../../types'
+	import { bubbleDemos } from '@carbon/charts/demo'
 
+	const { bubbleDoubleLinearOptions: options, bubbleDoubleLinearData: data } = bubbleDemos
 	let chart: BubbleChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = bubbleDoubleLinearOptions as any
 </script>
 
 <BubbleChart

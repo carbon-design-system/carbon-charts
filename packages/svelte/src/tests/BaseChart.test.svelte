@@ -1,11 +1,11 @@
 <script lang="ts">
-	import BaseChart from '../lib/BaseChart.svelte'
-	import { stackedBarData as data, stackedBarOptions } from '@carbon/charts/demo'
+	import type { Chart as BaseChartCore } from '@carbon/charts'
+	import { barDemos } from '@carbon/charts/demo'
+	import BaseChart from '../../types/BaseChart'
 
-	let chart: any | null = null
+	const { stackedBarOptions: options, stackedBarData: data } = barDemos
+	let chart: BaseChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = stackedBarOptions as any
 </script>
 
 <BaseChart

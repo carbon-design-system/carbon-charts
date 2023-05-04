@@ -1,15 +1,11 @@
 <script lang="ts">
-	import HistogramChart from '../lib/HistogramChart.svelte'
 	import type { HistogramChart as HistogramChartCore } from '@carbon/charts'
-	import {
-		histogramContinueData as data,
-		histogramContinueWithBinsOptions
-	} from '@carbon/charts/demo'
+	import { HistogramChart } from '../../types'
+	import { histogramDemos } from '@carbon/charts/demo'
 
+	const { histogramContinueWithBinsOptions: options, histogramContinueData: data } = histogramDemos
 	let chart: HistogramChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = histogramContinueWithBinsOptions as any
 </script>
 
 <HistogramChart

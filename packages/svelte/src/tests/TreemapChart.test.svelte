@@ -1,12 +1,11 @@
 <script lang="ts">
-	import TreemapChart from '../lib/TreeChart.svelte'
 	import type { TreemapChart as TreemapChartCore } from '@carbon/charts'
-	import { treemapData as data, treemapOptions } from '@carbon/charts/demo'
+	import { TreemapChart } from '../../types'
+	import { treemapDemos } from '@carbon/charts/demo'
 
+	const { treemapOptions: options, treemapData: data } = treemapDemos
 	let chart: TreemapChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = treemapOptions
 </script>
 
 <TreemapChart

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BarChartGrouped from '../lib/BarChartGrouped.svelte'
 	import type { GroupedBarChart as GroupedBarChartCore } from '@carbon/charts'
-	import { groupedBarData as data, groupedBarOptions } from '@carbon/charts/demo'
+	import { barDemos } from '@carbon/charts/demo'
+	import { BarChartGrouped } from '../../types'
 
+	const { groupedBarOptions: options, groupedBarData: data } = barDemos
 	let chart: GroupedBarChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = groupedBarOptions as any
 </script>
 
 <BarChartGrouped

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import BarChartStacked from '../lib/BarChartStacked.svelte'
 	import type { StackedBarChart as StackedBarChartCore } from '@carbon/charts'
-	import { stackedBarData as data, stackedBarOptions } from '@carbon/charts/demo'
+	import { barDemos } from '@carbon/charts/demo'
+	import { BarChartStacked } from '../../types'
 
+	const { stackedBarOptions: options, stackedBarData: data } = barDemos
 	let chart: StackedBarChartCore | null = null
 	let ref: HTMLDivElement | null = null
-
-	const options = stackedBarOptions as any
 </script>
 
 <BarChartStacked
