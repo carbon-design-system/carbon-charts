@@ -46,8 +46,8 @@ export class LayoutComponent extends Component {
 	}
 
 	init() {
-		this.children.forEach((child) => {
-			child.components.forEach((component) => {
+		this.children.forEach((child: any) => {
+			child.components.forEach((component: Component) => {
 				component.init()
 			})
 		})
@@ -179,7 +179,7 @@ export class LayoutComponent extends Component {
 				const growth = getProperty(child, 'growth')
 				return growth === LayoutGrowth.STRETCH
 			})
-			.forEach(child => {
+			.forEach((child: any) => {
 				child.size = (100 - +this.getPreferedAndFixedSizeSum()) / +this.getNumOfStretchChildren()
 			})
 
@@ -195,7 +195,7 @@ export class LayoutComponent extends Component {
 		}
 
 		allUpdatedBoxes.each(function (d: any) {
-			d.components.forEach((itemComponent) => {
+			d.components.forEach((itemComponent: any) => {
 				const growth = getProperty(d, 'growth')
 				if (growth === LayoutGrowth.STRETCH) {
 					itemComponent.render(animate)
@@ -205,26 +205,26 @@ export class LayoutComponent extends Component {
 	}
 
 	// Pass on model to children as well
-	setModel(newObj) {
+	setModel(newObj: ChartModel) {
 		super.setModel(newObj)
 
-		this.children.forEach((child) => {
-			child.components.forEach((component) => component.setModel(newObj))
+		this.children.forEach((child: any) => {
+			child.components.forEach((component: Component) => component.setModel(newObj))
 		})
 	}
 
 	// Pass on essentials to children as well
-	setServices(newObj) {
+	setServices(newObj: any) {
 		super.setServices(newObj)
 
-		this.children.forEach((child) => {
-			child.components.forEach((component) => component.setServices(newObj))
+		this.children.forEach((child: any) => {
+			child.components.forEach((component: Component) => component.setServices(newObj))
 		})
 	}
 
 	destroy() {
-		this.children.forEach((child) => {
-			child.components.forEach((component) => component.destroy())
+		this.children.forEach((child: any) => {
+			child.components.forEach((component: Component) => component.destroy())
 		})
 	}
 }

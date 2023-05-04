@@ -50,7 +50,7 @@ export class Zoom extends Service {
 		}
 	}
 
-	getDefaultZoomBarDomain(zoomBarData?) {
+	getDefaultZoomBarDomain(zoomBarData?: any) {
 		const allZoomBarData = zoomBarData || this.services.zoom.getZoomBarData()
 		const { cartesianScales } = this.services
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition()
@@ -97,7 +97,7 @@ export class Zoom extends Service {
 				? 'sharedStackKey'
 				: this.services.cartesianScales.getDomainIdentifier()
 			const filteredData = displayData.filter(
-				(datum) =>
+				(datum: any) =>
 					new Date(datum[domainIdentifier]) >= zoomDomain[0] &&
 					new Date(datum[domainIdentifier]) <= zoomDomain[1]
 			)
@@ -241,11 +241,11 @@ export class Zoom extends Service {
 		return this.getZoomBarData().length === 0
 	}
 
-	isZoomBarLoading(position) {
+	isZoomBarLoading(position: any) {
 		return getProperty(this.model.getOptions(), 'zoomBar', position, 'loading')
 	}
 
-	isZoomBarLocked(position) {
+	isZoomBarLocked(position: any) {
 		return getProperty(this.model.getOptions(), 'zoomBar', position, 'locked')
 	}
 }

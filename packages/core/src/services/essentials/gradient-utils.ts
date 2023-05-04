@@ -2,7 +2,7 @@
 import { Service } from '../service'
 
 export class GradientUtils extends Service {
-	static appendOrUpdateLinearGradient(configs) {
+	static appendOrUpdateLinearGradient(configs: any) {
 		let lg = configs.svg.select(`defs linearGradient#${configs.id}`)
 		if (lg.empty()) {
 			lg = configs.svg
@@ -25,13 +25,13 @@ export class GradientUtils extends Service {
 			.style('stop-opacity', (d: any) => d.opacity)
 	}
 
-	static getOffsetRatio(domain) {
+	static getOffsetRatio(domain: any) {
 		const offsetRatio =
 			((Math.abs(domain[1]) * 100) / Math.abs(domain[0] - domain[1])).toFixed(2) + '%'
 		return offsetRatio
 	}
 
-	static getStops(domain, color) {
+	static getStops(domain: any, color: string) {
 		const need3Stops = domain[0] < 0 && domain[1] > 0
 		let stops: object[] = [
 			{

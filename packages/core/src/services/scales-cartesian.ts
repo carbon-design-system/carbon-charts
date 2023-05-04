@@ -413,7 +413,7 @@ export class CartesianScales extends Service {
 		return { primary: AxisPositions.BOTTOM, secondary: AxisPositions.TOP }
 	}
 
-	protected findDomainAndRangeAxesPositions(verticalAxesPositions, horizontalAxesPositions) {
+	protected findDomainAndRangeAxesPositions(verticalAxesPositions: any, horizontalAxesPositions: any) {
 		const options = this.model.getOptions()
 
 		const mainVerticalAxisOptions = getProperty(options, 'axes', verticalAxesPositions.primary)
@@ -505,18 +505,18 @@ export class CartesianScales extends Service {
 		}
 
 		// Get the extent of the domain
-		let domain
-		let allDataValues
+		let domain: any
+		let allDataValues: any
 		const dataGroupNames = this.model.getDataGroupNames()
 
 		if (scaleType === ScaleTypes.LABELS_RATIO) {
-			return displayData.map((datum) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`)
+			return displayData.map((datum: any) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`)
 		} else if (scaleType === ScaleTypes.TIME) {
 			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]))
 		} else if (bounds && options.axes) {
 			allDataValues = []
 
-			displayData.forEach((datum) => {
+			displayData.forEach((datum: any) => {
 				allDataValues.push(datum[mapsTo])
 
 				if (datum[bounds.upperBoundMapsTo]) {
@@ -540,7 +540,7 @@ export class CartesianScales extends Service {
 			)
 
 			const stackedValues = []
-			dataValuesGroupedByKeys.forEach((dataValues) => {
+			dataValuesGroupedByKeys.forEach((dataValues: any) => {
 				const { ...numericalValues } = dataValues
 
 				let positiveSum = 0,
@@ -559,12 +559,12 @@ export class CartesianScales extends Service {
 
 			allDataValues = [
 				...flatten(stackedValues),
-				...nonStackedGroupsData.map((datum) => datum[mapsTo])
+				...nonStackedGroupsData.map((datum: any) => datum[mapsTo])
 			]
 		} else {
 			allDataValues = []
 
-			displayData.forEach((datum) => {
+			displayData.forEach((datum: any) => {
 				const value = datum[mapsTo]
 				if (Array.isArray(value) && value.length === 2) {
 					allDataValues.push(value[0])
@@ -585,7 +585,7 @@ export class CartesianScales extends Service {
 
 		// Add threshold values into the scale
 		if (thresholds && thresholds.length > 0) {
-			thresholds.forEach((threshold) => {
+			thresholds.forEach((threshold: any) => {
 				const thresholdValue = getProperty(threshold, 'value')
 				if (thresholdValue !== null) allDataValues.push(thresholdValue)
 			})

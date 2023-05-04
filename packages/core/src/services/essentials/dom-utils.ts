@@ -1,6 +1,7 @@
 import { select, Selection } from 'd3-selection'
 import ResizeObserver from 'resize-observer-polyfill' // only needed for testing with jsdom as modern browsers (>1%) already support it
 import domToImage from 'dom-to-image-more'
+import type { ChartModel } from '../..'
 
 // Internal Imports
 import { Service } from '../service'
@@ -21,9 +22,9 @@ export interface getSVGElementSizeOptions {
 
 export class DOMUtils extends Service {
 	// Initialized in init
-	private chartID
+	private chartID: string
 
-	constructor(model: any, services: any) {
+	constructor(model: ChartModel, services: any) {
 		super(model, services)
 	}
 

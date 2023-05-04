@@ -20,12 +20,12 @@ export class Service {
 	}
 
 	// Used to pass down information to the components
-	setModel(newObj) {
+	setModel(newObj: ChartModel) {
 		this.model = newObj
 	}
 
 	// Used to pass down services to the components
-	setServices(newObj) {
+	setServices(newObj: any) {
 		this.services = newObj
 	}
 }

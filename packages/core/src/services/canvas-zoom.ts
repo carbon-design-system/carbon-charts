@@ -14,10 +14,10 @@ export class CanvasZoom extends Service {
 	 * canvasElements: all the elements to translate and zoom on the chart area
 	 * zoomSettings: object containing duration, easing and zoomlevel for the zoom behaviours
 	 *  */
-	zoomIn(focal, canvasElements, zoomSettings?) {
-		let x
-		let y
-		let zoomLevel
+	zoomIn(focal: any, canvasElements: any, zoomSettings?: any) {
+		let x: number
+		let y: number
+		let zoomLevel: number
 		const settings = zoomSettings ? zoomSettings : canvasZoomSettings
 
 		if (focal) {
@@ -46,7 +46,7 @@ export class CanvasZoom extends Service {
 		})
 	}
 
-	zoomOut(canvasElements, zoomSettings?) {
+	zoomOut(canvasElements: any, zoomSettings?: any) {
 		const settings = zoomSettings ? zoomSettings : canvasZoomSettings
 		canvasElements
 			.transition()

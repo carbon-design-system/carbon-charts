@@ -1,12 +1,13 @@
 // Internal Imports
 import { Service } from '../service'
+import { ChartModel } from '../..'
 
 export class Files extends Service {
-	constructor(model: any, services: any) {
+	constructor(model: ChartModel, services: any) {
 		super(model, services)
 	}
 
-	downloadCSV(content, filename) {
+	downloadCSV(content: any, filename: string) {
 		const anchor = document.createElement('a')
 		const mimeType = 'text/csv;encoding:utf-8'
 
@@ -42,7 +43,7 @@ export class Files extends Service {
 		}
 	}
 
-	downloadImage(uri, name) {
+	downloadImage(uri: string, name: string) {
 		const link = document.createElement('a')
 		link.download = name
 		link.href = uri

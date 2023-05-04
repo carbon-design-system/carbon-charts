@@ -19,7 +19,7 @@ export class Events extends Service {
 	}
 
 	dispatchEvent(eventType: string, eventDetail?: object) {
-		let newEvent
+		let newEvent: any
 		if (eventDetail) {
 			newEvent = new CustomEvent(eventType, {
 				detail: eventDetail
