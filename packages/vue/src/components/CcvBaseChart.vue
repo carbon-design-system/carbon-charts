@@ -10,14 +10,14 @@ export interface CoreChart<T> {
 }
 
 export default defineComponent({
+	props: {
+		data: { type: Object as () => ChartTabularData, required: true },
+		options: { type: Object, required: true }
+	},
 	data() {
 		return {
 			coreChart: null as CoreChart<any> | null
 		}
-	},
-	props: {
-		data: { type: Object as () => ChartTabularData, required: true },
-		options: { type: Object, required: true }
 	},
 	watch: {
 		data: {

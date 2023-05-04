@@ -7,6 +7,7 @@
     "./styles.css": "./dist/styles.css"
   },
   "scripts": {
+    "ng": "ng",
     "postinstall": "carbon-telemetry collect --install",
     "metadata": "cp ../../LICENSE.md dist && cp *.md dist",
     "styles": "cp ../core/dist/styles.* dist",
