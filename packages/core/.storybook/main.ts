@@ -18,7 +18,9 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag'
 	},
-
+	core: {
+    // disableTelemetry: true
+  },
 	async viteFinal(config, _) {
 		if (config.build) {
 			config.build.chunkSizeWarningLimit = 1600

@@ -36,6 +36,9 @@ const config: StorybookConfig = {
 		name: '@storybook/vue-vite',
 		options: {}
 	},
+	core: {
+    // disableTelemetry: true
+  },
 	docs: {
 		autodocs: 'tag'
 	},
