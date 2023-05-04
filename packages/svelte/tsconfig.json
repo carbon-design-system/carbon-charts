@@ -2,6 +2,7 @@
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 		// Copied from ../../tsconfig.json
+		// Note: Not extending root tsconfig because SvelteKit really wants you to extend theirs
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
@@ -14,7 +15,6 @@
     "sourceMap": true,
 
 		// Package-specific
-		// "moduleResolution": "node",
 		"noImplicitThis": false
 	},
 	"include": [

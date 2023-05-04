@@ -1,5 +1,4 @@
-import { type BaseType, select, Selection } from 'd3-selection'
-// import ResizeObserver from 'resize-observer-polyfill' // only needed for testing with jsdom as modern browsers (>1%) already support it
+import { select, Selection } from 'd3-selection'
 import domToImage from 'dom-to-image-more'
 import type { ChartModel } from '../..'
 
