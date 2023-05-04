@@ -5,8 +5,8 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../src/**/*.stories.tsx',
-		'../../core/src/stories/getting-started/react.stories.mdx',
-		'../../core/src/stories/tutorials/*.stories.mdx'
+		// '../../core/src/stories/getting-started/react.stories.mdx',
+		// '../../core/src/stories/tutorials/*.stories.mdx'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 	viteFinal: (config) => {
