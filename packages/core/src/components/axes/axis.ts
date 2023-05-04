@@ -49,7 +49,7 @@ export class Axis extends Component {
 
 		// Add axis into the parent
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
-		let startPosition, endPosition
+		let startPosition: number, endPosition: number
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
 			startPosition = this.configs.axes[AxisPositions.LEFT] ? this.margins.left : 0
 			endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width
