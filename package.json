@@ -34,7 +34,7 @@
 		"prettier-config-carbon": "^0.9.0"
 	},
 	"resolutions": {
-		"axios": "0.21.1"
+		"axios": "^1.4.0"
 	},
 	"husky": {
 		"hooks": {
