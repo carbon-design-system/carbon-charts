@@ -1,5 +1,5 @@
-import { select, Selection } from 'd3-selection'
-import ResizeObserver from 'resize-observer-polyfill' // only needed for testing with jsdom as modern browsers (>1%) already support it
+import { type BaseType, select, Selection } from 'd3-selection'
+// import ResizeObserver from 'resize-observer-polyfill' // only needed for testing with jsdom as modern browsers (>1%) already support it
 import domToImage from 'dom-to-image-more'
 import type { ChartModel } from '../..'
 
@@ -36,7 +36,7 @@ export class DOMUtils extends Service {
 	}
 
 	static getSVGElementSize(
-		svgSelector: Selection<any, any, any, any>,
+		svgSelector: Selection<SVGGraphicsElement, any, HTMLElement, any>,
 		options: getSVGElementSizeOptions = {
 			useAttrs: false,
 			useClientDimensions: false,
@@ -76,32 +76,43 @@ export class DOMUtils extends Service {
 			height: svgSelector.attr('height')
 		}
 
-		let bbox, bboxDimensions, boundingRect, boundingRectDimensions
-		// In many versions of Firefox
-		// getBBox will cause an "NSFailure" error
+		const svgElement = svgSelector.node()
+
+		let bbox: DOMRect, bboxDimensions: Partial<DOMRect>, boundingRect: DOMRect, boundingRectDimensions: Partial<DOMRect>
+		
 		try {
-			bbox = svgSelector.node().getBBox()
-			bboxDimensions = {
-				width: bbox.width,
-				height: bbox.height
+			// Not all SVG graphics elements have bounding boxes (eg <defs>, <title>, <styles>)
+			if (typeof svgElement.getBBox === 'function') {
+				bbox = svgElement.getBBox()
+				bboxDimensions = {
+					width: bbox.width,
+					height: bbox.height
+				}
 			}
 		} catch (e) {
 			console.error(e)
 		}
 
 		try {
-			boundingRect = svgSelector.node().getBoundingClientRect()
-			boundingRectDimensions = {
-				width: boundingRect.width,
-				height: boundingRect.height
+			// Not all SVG graphics elements have...
+			if (typeof svgElement.getBoundingClientRect === 'function') {
+				boundingRect = svgElement.getBoundingClientRect()
+				boundingRectDimensions = {
+					width: boundingRect.width,
+					height: boundingRect.height
+				}
 			}
 		} catch (e) {
 			console.error(e)
 		}
 
-		const clientDimensions = {
-			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight
+		// Not all SVG graphics elements have...
+		let clientDimensions: Partial<DOMRect>
+		if (svgElement instanceof SVGSVGElement) {
+			clientDimensions = {
+				width: svgElement.clientWidth,
+				height: svgElement.clientHeight
+			}
 		}
 
 		// If both attribute values are numbers
@@ -161,8 +172,8 @@ export class DOMUtils extends Service {
 		if (selection.empty()) {
 			// see if there is an id
 			let querySections = query.split('#')
-			let elementToAppend
-			let id
+			let elementToAppend: Element
+			let id: string
 			// if there is an id
 			if (querySections.length === 2) {
 				// take out the element to append
@@ -185,7 +196,7 @@ export class DOMUtils extends Service {
 		return selection
 	}
 
-	protected mainContainer: HTMLElement
+	protected mainContainer: HTMLDivElement
 	protected width: string
 	protected height: string
 
@@ -386,7 +397,7 @@ export class DOMUtils extends Service {
 		// in the DOM
 		setTimeout(() => {
 			/*const cssVerifierElement = */ select(this.mainContainer)
-				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`)
+				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`) // BUG: weird to add a <g> element to a <div> (perhaps change it to a comment?)
 				.node()
 			/*
 			const computedStyles = getComputedStyle(cssVerifierElement as any)
@@ -406,7 +417,7 @@ export class DOMUtils extends Service {
 	setSVGMaxHeight() {
 		// if there is a set height on the holder, leave the chart svg height at 100%
 		if (!this.model.getOptions().height) {
-			const { height: chartHeight } = DOMUtils.getSVGElementSize(select(this.mainContainer), {
+			const { height: chartHeight } = DOMUtils.getSVGElementSize(select(this.mainContainer) as any, {
 				useBBox: true
 			})
 			const chartSVGSelector = select(this.mainContainer).attr('class')
@@ -416,7 +427,7 @@ export class DOMUtils extends Service {
 			let childrenHeight = 0
 			children.nodes().forEach(function (childSVG) {
 				childrenHeight += Number(
-					DOMUtils.getSVGElementSize(select(childSVG), {
+					DOMUtils.getSVGElementSize(select<SVGGraphicsElement, any>(childSVG as any), {
 						useBBox: true
 					}).height
 				)
