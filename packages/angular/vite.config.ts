@@ -17,7 +17,5 @@ export default defineConfig({
 		include: ['@carbon/charts'],
 		exclude: ['@carbon/telemetry']
 	},
-	plugins: [
-		dts()
-	]
+	plugins: [dts()]
 })

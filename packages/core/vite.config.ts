@@ -60,8 +60,7 @@ export default defineConfig({
 			'carbon-components',
 			'date-fns',
 			'dom-to-image-more',
-			'lodash-es',
-			'resize-observer-polyfill'
+			'lodash-es'
 		],
 		exclude: [
 			// Storybook will not run if these are in the include list

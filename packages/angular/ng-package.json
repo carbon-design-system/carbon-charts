@@ -4,6 +4,11 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
-
-  "allowedNonPeerDependencies": ["@angular/common", "@angular/core", "@carbon/charts", "@carbon/icons-angular", "@carbon/telemetry"]
+  "allowedNonPeerDependencies": [
+    "@angular/common",
+    "@angular/core",
+    "@carbon/charts",
+    "@carbon/icons-angular",
+    "@carbon/telemetry"
+  ]
 }

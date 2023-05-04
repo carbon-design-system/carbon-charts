@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "./",
       "sourceRoot": "src",
-      "prefix": "carbon",
+      "prefix": "ibm",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -74,11 +74,8 @@
     "packageManager": "yarn"
   },
   "schematics": {
-		"@schematics/angular:component": {
-			"prefix": "ibm"
-		},
-		"@schematics/angular:directive": {
-			"prefix": "ibm"
-		}
-	}
+    "@schematics/angular:component": {
+      "prefix": "ibm"
+    }
+  }
 }
