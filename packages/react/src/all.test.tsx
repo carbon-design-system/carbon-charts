@@ -17,6 +17,7 @@ const meterOptions: MeterChartOptions = {
 	height: '100px'
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class App extends React.Component {
 	ref: React.RefObject<LineChart> = React.createRef()
 

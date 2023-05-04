@@ -11,7 +11,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"strict": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["src/**/*.test.tsx"],
+	"include": ["src"],
+	"exclude": ["src/all.test.tsx"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }
