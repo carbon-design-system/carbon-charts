@@ -83,11 +83,11 @@ export class Alluvial extends Component {
 		})
 
 		// Filter out unused nodes so they are not rendered
-		this.graph.nodes = this.graph.nodes.filter((node) => node.value !== 0)
+		this.graph.nodes = this.graph.nodes.filter((node: any) => node.value !== 0)
 
 		// Determine the category name placement x position
 		const nodeCoordinates = {}
-		this.graph.nodes.forEach((element) => {
+		this.graph.nodes.forEach((element: any) => {
 			const point = element.x0
 
 			// Only 1 category per x-value
@@ -110,7 +110,7 @@ export class Alluvial extends Component {
 		// Add the category text
 		alluvialCategory
 			.append('text')
-			.attr('id', (d, i) =>
+			.attr('id', (d: any, i: number) =>
 				this.services.domUtils.generateElementIDString(`alluvial-category-${i}`)
 			)
 			.style('font-size', '14px')
@@ -121,8 +121,8 @@ export class Alluvial extends Component {
 				return ''
 			})
 			.attr('y', 20)
-			.attr('x', (d, i) => {
-				const elementID = this.services.domUtils.generateElementIDString(`alluvial-category-${i}`)
+			.attr('x', (d: any, i: number) => {
+				const elementID = this.services.domUtils.generateElementIDString(`alluvial-category-${i}`) as string
 
 				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
@@ -158,7 +158,7 @@ export class Alluvial extends Component {
 								return scale[d.source.name]
 							})
 					)
-					.call((gradient) =>
+					.call((gradient: any) =>
 						gradient
 							.append('stop')
 							.attr('offset', '100%')
@@ -261,8 +261,8 @@ export class Alluvial extends Component {
 		textNode
 			.append('rect')
 			.classed('node-text-bg', true)
-			.attr('width', (d, i) => {
-				const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`)
+			.attr('width', (d: any, i: number) => {
+				const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`) as string
 
 				// Determine rectangle width based on text width
 				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
@@ -274,8 +274,8 @@ export class Alluvial extends Component {
 			.lower()
 
 		// Position group based on text width
-		textNode.attr('transform', (d, i) => {
-			const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`)
+		textNode.attr('transform', (d: any, i: number) => {
+			const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`) as string
 
 			const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
@@ -334,7 +334,7 @@ export class Alluvial extends Component {
 
 		this.parent
 			.selectAll('path.link')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedLineHighlight(this, 'mouseover')
 				hoveredElement.classed('link-hovered', true)
@@ -362,7 +362,7 @@ export class Alluvial extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse move event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEMOVE, {
 					event,
@@ -374,7 +374,7 @@ export class Alluvial extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_CLICK, {
 					event,
@@ -382,7 +382,7 @@ export class Alluvial extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedLineHighlight(this, 'mouseout')
 				hoveredElement.classed('link-hovered', false)
@@ -430,9 +430,9 @@ export class Alluvial extends Component {
 					})
 				)
 
-			allLinks.style('stroke-opacity', function (d) {
+			allLinks.style('stroke-opacity', function (d: any) {
 				// Raise the links & increase stroke-opacity to selected
-				if (links.some((element) => element === d.index)) {
+				if (links.some((element: any) => element === d.index)) {
 					select(this).classed('link-hovered', true).raise()
 					return alluvial.opacity.selected
 				}
@@ -443,7 +443,7 @@ export class Alluvial extends Component {
 
 		self.parent
 			.selectAll('.node-group')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Highlight all links that pass through node
@@ -494,7 +494,7 @@ export class Alluvial extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse move event
 				self.services.events.dispatchEvent(Events.Alluvial.NODE_MOUSEMOVE, {
 					event,
@@ -507,7 +507,7 @@ export class Alluvial extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: CustomEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.NODE_CLICK, {
 					event,
@@ -515,7 +515,7 @@ export class Alluvial extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: CustomEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Set the node position to initial state (unexpanded)
@@ -564,16 +564,16 @@ export class Alluvial extends Component {
 	// Traverse graph and get all connected links to node
 	private traverse(
 		direction: { link: 'sourceLinks'; node: 'target' } | { link: 'targetLinks'; node: 'source' },
-		node,
+		node: any,
 		visited = []
 	) {
-		const links = node[direction.link].map((element) => {
+		const links = node[direction.link].map((element: any) => {
 			visited.push(element.index)
 			return element[direction.node]
 		})
 
 		// Retrieve the child nodes
-		links.forEach((element) => this.traverse(direction, element, visited))
+		links.forEach((element: any) => this.traverse(direction, element, visited))
 	}
 
 	getRightArrowIcon() {
@@ -586,15 +586,11 @@ export class Alluvial extends Component {
 
 	// Remove event listeners
 	destroy() {
-		try {
-			this.parent
+		this.parent
 			.selectAll('path.line,.node-group')
 			.on('mouseover', null)
 			.on('mousemove', null)
 			.on('click', null)
 			.on('mouseout', null)
-		} catch (err) {
-			console.error('Error in core/src/components/graphs/alluvial.ts:destroy():588', err)
-		}
 	}
 }
