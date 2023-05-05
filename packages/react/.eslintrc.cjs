@@ -1,3 +1,4 @@
+/* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
@@ -5,11 +6,17 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
+		'plugin:react/recommended',
 		'prettier',
 		'plugin:storybook/recommended'
 	],
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		ecmaVersion: 'latest'
-	}
+		ecmaVersion: 'latest',
+		sourceType: 'module'
+	},
+	plugins: [
+		'react',
+		'@typescript-eslint'
+	],
 }
