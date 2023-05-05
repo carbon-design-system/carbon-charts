@@ -586,11 +586,15 @@ export class Alluvial extends Component {
 
 	// Remove event listeners
 	destroy() {
-		this.parent
+		try {
+			this.parent
 			.selectAll('path.line,.node-group')
 			.on('mouseover', null)
 			.on('mousemove', null)
 			.on('click', null)
 			.on('mouseout', null)
+		} catch (err) {
+			console.error('Error in core/src/components/graphs/alluvial.ts:destroy():588', err)
+		}
 	}
 }
