@@ -165,13 +165,13 @@ export class DOMUtils extends Service {
 		return finalDimensions
 	}
 
-	static appendOrSelect(parent: any, query: any) {
+	static appendOrSelect(parent: any, query: string) {
 		const selection = parent.select(`${query}`)
 
 		if (selection.empty()) {
 			// see if there is an id
 			let querySections = query.split('#')
-			let elementToAppend: Element
+			let elementToAppend: any
 			let id: string
 			// if there is an id
 			if (querySections.length === 2) {
