@@ -51,7 +51,7 @@
     "@storybook/manager-api": "^7.1.0-0",
     "@storybook/testing-library": "^0.1.0",
     "@storybook/theming": "^7.1.0-0",
-    "eslint": "^8.39.0",
+    "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.12",
     "ng-packagr": "^16.0.0",
@@ -62,7 +62,7 @@
     "storybook": "^7.1.0-0",
     "style-loader": "3.3.2",
     "typescript": "^5.0.4",
-    "vite": "^4.3.4",
+    "vite": "^4.3.5",
     "vite-plugin-dts": "^2.3.0",
     "zone.js": "~0.13.0"
   },

@@ -15,6 +15,9 @@ import {
 	sankeyJustify
 } from 'd3-sankey'
 
+// BUG: Typing is not working for this.services.domUtils from the base class Component.
+// DOMUtils is already imported directly to this module so why bother using this.services.domUtils?
+
 export class Alluvial extends Component {
 	type = 'alluvial'
 	renderType = RenderTypes.SVG
@@ -42,7 +45,7 @@ export class Alluvial extends Component {
 		const data = this.model.getDisplayData()
 
 		// Is gradient enabled or not
-		const isGradientAllowed = getProperty(this.getOptions(), 'color', 'gradient', 'enabled')
+		const isGradientAllowed: boolean = getProperty(this.getOptions(), 'color', 'gradient', 'enabled')
 
 		// Set the custom node padding if provided
 		let nodePadding = alluvial.minNodePadding
@@ -61,7 +64,7 @@ export class Alluvial extends Component {
 		}
 
 		const sankey = d3Sankey()
-			.nodeId((d: any) => d.name)
+			.nodeId((node: any) => node.name)
 			.nodeWidth(alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)

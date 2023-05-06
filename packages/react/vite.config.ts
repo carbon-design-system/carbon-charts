@@ -24,7 +24,7 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		include: [
-			'@carbon/charts',
+			// '@carbon/charts', // Might be causing issue with Storybook / react-docgen
 			'@carbon/icons-react'
 		],
 		exclude: [
