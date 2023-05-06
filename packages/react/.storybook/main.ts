@@ -3,13 +3,14 @@ import { dirname } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
-		// '../src/**/*.mdx',
+		'../src/**/*.mdx',
 		'../src/**/*.stories.tsx',
-		// '../../core/src/stories/getting-started/react.stories.mdx',
-		// '../../core/src/stories/tutorials/*.stories.mdx'
+		'../../core/src/stories/getting-started/react.stories.mdx',
+		'../../core/src/stories/tutorials/*.stories.mdx'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 	viteFinal: (config) => {
+
 		// Workaround for issue loading stories from outside the package
 		if (config.resolve) {
 			config.resolve.alias = {
@@ -19,6 +20,7 @@ const config: StorybookConfig = {
 		}
 		if (config.build) {
 			config.build.chunkSizeWarningLimit = 1800
+			config.build.sourcemap = false
 		}
 
 		// Remove vite:dts - no need for declarations
