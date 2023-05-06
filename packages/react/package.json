@@ -79,9 +79,6 @@
     "vite": "^4.3.5",
     "vite-plugin-dts": "~2.3.0"
   },
-  "resolutions": {
-    "react-docgen": "^5.0.0"
-  },
   "prettier": "../../prettier.config.cjs",
   "publishConfig": {
     "access": "public"

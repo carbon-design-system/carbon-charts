@@ -32,6 +32,11 @@ export default defineConfig({
 			'@carbon/telemetry'
 		]
 	},
+	resolve: {
+		alias: {
+			'@storybook/react-dom-shim': '@storybook/react-dom-shim/dist/react-18'
+		}
+	},
 	plugins: [
 		react(),
 		dts({

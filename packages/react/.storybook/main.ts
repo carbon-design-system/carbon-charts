@@ -10,7 +10,6 @@ const config: StorybookConfig = {
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 	viteFinal: (config) => {
-		// console.log('STORYBOOK VITE CONFIG', config)
 		// Workaround for issue loading stories from outside the package
 		if (config.resolve) {
 			config.resolve.alias = {
@@ -21,10 +20,19 @@ const config: StorybookConfig = {
 		if (config.build) {
 			config.build.chunkSizeWarningLimit = 1800
 		}
-		// Don't emit declarations for Storybook
-		// config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'storybook:react-docgen-plugin')
+
+		// Remove vite:dts - no need for declarations
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
 
+		const index = config.plugins.findIndex(plugin => plugin.name === 'storybook:react-docgen-plugin');
+		if (index !== -1) {
+			const targetPlugin = config.plugins?.splice(index, 1)[0]
+			delete targetPlugin?.enforce
+			config.plugins?.push(targetPlugin)
+		}
+
+		// In case we need to disable storybook:react-docgen-plugin
+		// config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'storybook:react-docgen-plugin')
 		return config
 	},
 	addons: [
