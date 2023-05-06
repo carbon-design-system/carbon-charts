@@ -3,10 +3,10 @@ import { dirname } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
-		'../src/**/*.mdx',
+		// '../src/**/*.mdx',
 		'../src/**/*.stories.tsx',
-		'../../core/src/stories/getting-started/react.stories.mdx',
-		'../../core/src/stories/tutorials/*.stories.mdx'
+		// '../../core/src/stories/getting-started/react.stories.mdx',
+		// '../../core/src/stories/tutorials/*.stories.mdx'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 	viteFinal: (config) => {
@@ -22,14 +22,14 @@ const config: StorybookConfig = {
 		}
 
 		// Remove vite:dts - no need for declarations
-		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
+		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts' /* || plugin!.name !== 'storybook:react-docgen-plugin'*/)
 
-		const index = config.plugins.findIndex(plugin => plugin.name === 'storybook:react-docgen-plugin');
-		if (index !== -1) {
-			const targetPlugin = config.plugins?.splice(index, 1)[0]
-			delete targetPlugin?.enforce
-			config.plugins?.push(targetPlugin)
-		}
+		// const index = config.plugins?.findIndex(plugin => plugin?.name === 'storybook:react-docgen-plugin');
+		// if (index !== -1) {
+		// 	const targetPlugin = config.plugins?.splice(index, 1)[0]
+		// 	delete targetPlugin?.enforce
+		// 	config.plugins?.push(targetPlugin)
+		// }
 
 		// In case we need to disable storybook:react-docgen-plugin
 		// config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'storybook:react-docgen-plugin')
