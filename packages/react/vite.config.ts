@@ -24,10 +24,12 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		include: [
-			'@carbon/charts', // Might be causing issue with Storybook / react-docgen
+			// '@carbon/charts',
 			'@carbon/icons-react'
 		],
 		exclude: [
+			'@carbon/charts',
+
 			// Will cause errors when running storybook if in the include list
 			'@carbon/telemetry'
 		]

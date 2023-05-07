@@ -227,7 +227,7 @@ export {
 	Title,
 	Tooltip,
 	// Graphs
-	// Alluvial,
+	Alluvial,
 	Area,
 	Bar,
 	Boxplot,
