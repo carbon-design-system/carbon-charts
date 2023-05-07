@@ -24,7 +24,7 @@ const config: StorybookConfig = {
 		}
 
 	// 	// Remove vite:dts - no need for declarations
-	// 	config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts' /* || plugin!.name !== 'storybook:react-docgen-plugin'*/)
+		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts' /* || plugin!.name !== 'storybook:react-docgen-plugin'*/)
 	// 	// config.plugins = [
 	// 	// 	Inspect({
   //   //   	build: true,
