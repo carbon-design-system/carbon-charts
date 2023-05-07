@@ -57,6 +57,7 @@
     "@storybook/manager-api": "^7.0.9",
     "@storybook/react": "^7.0.9",
     "@storybook/react-vite": "^7.0.9",
+    "@storybook/react-webpack5": "^7.0.9",
     "@storybook/testing-library": "^0.1.0",
     "@storybook/theming": "^7.0.9",
     "@types/carbon__icons-react": "^11.16.0",
