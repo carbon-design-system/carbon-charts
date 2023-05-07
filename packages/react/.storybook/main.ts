@@ -4,12 +4,13 @@ import type { StorybookConfig } from '@storybook/react-webpack5'
 // import Inspect from 'vite-plugin-inspect'
 import { dirname, resolve } from 'path'
 
+const core = '../../core'
+const corePackage = resolve(__dirname, `${core}/dist`)
+
 const config: StorybookConfig = {
 	stories: [
-		'../src/**/*.mdx',
-		'../src/**/*.stories.tsx',
-		'../../core/src/stories/getting-started/react.stories.mdx',
-		'../../core/src/stories/tutorials/*.stories.mdx'
+		'../src/stories/**/*.mdx',
+		'../src/stories/**/*.stories.tsx'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 
@@ -35,20 +36,18 @@ const config: StorybookConfig = {
 	webpackFinal: async (config) => {
 		config.module?.rules?.push({
 			test: /\.scss$/,
-			use: [
-				'style-loader',
-				'css-loader',
-				'sass-loader'
-				// {
-				// 	loader: 'sass-loader',
-				// 	options: {
-				// 		sassOptions: {
-				// 			includePaths: [resolve(__dirname + '../../core/src')]
-				// 		}
-				// 	}
-				// }
-			]
+			use: ['style-loader', 'css-loader'],
+			include: [`${corePackage}/demo`]
 		})
+		config.performance = {
+			hints: 'warning',
+			maxAssetSize: 1024 * 1024 * 2.5, // 2.5 MB
+			maxEntrypointSize: 1024 * 1024 * 5 // 5 MB
+		}
+		config.resolve!.alias = {
+			...config.resolve!.alias,
+			'react': resolve(__dirname, '../node_modules/react')
+		}
 
 		return config
 	},

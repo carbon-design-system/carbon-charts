@@ -1,3 +1,4 @@
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 const introStories = storiesOf('Docs/Getting Started', module)
