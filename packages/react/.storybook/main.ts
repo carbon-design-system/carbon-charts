@@ -2,10 +2,7 @@
 import type { StorybookConfig } from '@storybook/react-webpack5'
 
 // import Inspect from 'vite-plugin-inspect'
-import { dirname, resolve } from 'path'
-
-const core = '../../core'
-const corePackage = resolve(__dirname, `${core}/dist`)
+import { resolve } from 'path'
 
 const config: StorybookConfig = {
 	stories: [
@@ -15,14 +12,6 @@ const config: StorybookConfig = {
 	staticDirs: ['../../core/.storybook/assets'],
 
 	// viteFinal: (config) => {
-
-	// 	// Workaround for issue loading stories from outside the package
-	// 	if (config.resolve) {
-	// 		config.resolve.alias = {
-	// 			...config.resolve.alias,
-	// 			'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
-	// 		}
-	// 	}
 	// 	if (config.build) {
 	// 		config.build.chunkSizeWarningLimit = 1800
 	// 	}
@@ -36,8 +25,7 @@ const config: StorybookConfig = {
 	webpackFinal: async (config) => {
 		config.module?.rules?.push({
 			test: /\.scss$/,
-			use: ['style-loader', 'css-loader'],
-			include: [`${corePackage}/demo`]
+			use: ['style-loader', 'css-loader']
 		})
 		config.performance = {
 			hints: 'warning',
