@@ -62,7 +62,7 @@
     "codesandbox": "^2.2.3",
     "eslint": "^8.40.0",
     "eslint-plugin-storybook": "^0.6.12",
-    "eslint-plugin-vue": "^9.11.0",
+    "eslint-plugin-vue": "^9.11.1",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
