@@ -40,9 +40,6 @@ const config: StorybookConfig = {
 	// 		// targetPlugin.enforce = 'post'
 	// 		// config.plugins?.push(targetPlugin)
 	// 	}
-
-	// 	// In case we need to disable storybook:react-docgen-plugin
-	// 	// config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'storybook:react-docgen-plugin')
 		return config
 	},
 	addons: [
