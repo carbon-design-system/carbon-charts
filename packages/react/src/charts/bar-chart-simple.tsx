@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	SimpleBarChart as SimpleBarChartCore,
 	type BarChartOptions,

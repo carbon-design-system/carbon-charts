@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	GaugeChart as GaugeChartCore,
 	type GaugeChartOptions,

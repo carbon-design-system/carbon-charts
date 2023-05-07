@@ -1,9 +1,6 @@
 // import type { StorybookConfig } from '@storybook/react-vite'
 import type { StorybookConfig } from '@storybook/react-webpack5'
 
-// import Inspect from 'vite-plugin-inspect'
-import { resolve } from 'path'
-
 const config: StorybookConfig = {
 	stories: [
 		'../src/stories/**/*.mdx',
@@ -31,10 +28,6 @@ const config: StorybookConfig = {
 			hints: 'warning',
 			maxAssetSize: 1024 * 1024 * 2.5, // 2.5 MB
 			maxEntrypointSize: 1024 * 1024 * 5 // 5 MB
-		}
-		config.resolve!.alias = {
-			...config.resolve!.alias,
-			'react': resolve(__dirname, '../node_modules/react')
 		}
 
 		return config

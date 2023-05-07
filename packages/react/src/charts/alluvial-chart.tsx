@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	AlluvialChart as AlluvialChartCore,
 	type AlluvialChartOptions,

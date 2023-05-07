@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	DonutChart as DonutChartCore,
 	type DonutChartOptions,

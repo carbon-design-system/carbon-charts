@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	HistogramChart as HistogramChartCore,
 	type HistogramChartOptions,

@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	CirclePackChart as CirclePackChartCore,
 	type CirclePackChartOptions,

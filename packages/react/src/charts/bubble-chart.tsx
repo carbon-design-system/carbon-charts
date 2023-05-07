@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	BubbleChart as BubbleChartCore,
 	type BubbleChartOptions,

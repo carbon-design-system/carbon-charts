@@ -1,3 +1,4 @@
+import React from 'react'
 import {
 	LollipopChart as LollipopChartCore,
 	type LollipopChartOptions,

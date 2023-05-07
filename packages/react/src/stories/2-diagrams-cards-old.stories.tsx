@@ -3,7 +3,13 @@ import { storiesOf } from '@storybook/react'
 import { CardNode, CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitle } from '../'
 import { User, ChevronDown } from '@carbon/icons-react'
 
+const noControls = {
+	controls: {
+		hideNoControlsWarning: true
+	}
+}
 const stories = storiesOf('Diagrams/Cards', module)
+
 stories.addDecorator((story) => (
 	<div className="container theme--white" style={{ maxWidth: 400 }}>
 		{story()}
@@ -17,7 +23,7 @@ stories.add('Default', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('Stacked', () => (
 	<CardNode stacked>
@@ -26,7 +32,7 @@ stories.add('Stacked', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('Color', () => (
 	<CardNode color={'#8a3ffc'}>
@@ -35,7 +41,7 @@ stories.add('Color', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('With icon', () => (
 	<CardNode>
@@ -47,7 +53,7 @@ stories.add('With icon', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('As button', () => (
 	<CardNode onClick={() => {}}>
@@ -59,7 +65,7 @@ stories.add('As button', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('As link', () => (
 	<CardNode href="#">
@@ -71,7 +77,7 @@ stories.add('As link', () => (
 			<CardNodeSubtitle>Description</CardNodeSubtitle>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('With label', () => (
 	<CardNode>
@@ -81,7 +87,7 @@ stories.add('With label', () => (
 			<CardNodeLabel>Label</CardNodeLabel>
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
 
 stories.add('With third column', () => (
 	<CardNode>
@@ -96,4 +102,4 @@ stories.add('With third column', () => (
 			<ChevronDown />
 		</CardNodeColumn>
 	</CardNode>
-))
+), noControls)
