@@ -77,7 +77,8 @@
     "storybook": "^7.0.9",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
-    "vite-plugin-dts": "~2.3.0"
+    "vite-plugin-dts": "~2.3.0",
+    "vite-plugin-inspect": "^0.7.25"
   },
   "prettier": "../../prettier.config.cjs",
   "publishConfig": {

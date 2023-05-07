@@ -319,6 +319,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@antfu/utils@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@antfu/utils@npm:0.7.2"
+  checksum: ada98dde0a06bc10129ad7bc9d0007c1cf7e36eeb9e8ca93ea5173bc1e1d351afee8511c9e8e182b3105b787ce0ce813afc4ab283b511374f1e56a085f60a2c6
+  languageName: node
+  linkType: hard
+
 "@assemblyscript/loader@npm:^0.10.1":
   version: 0.10.1
   resolution: "@assemblyscript/loader@npm:0.10.1"
@@ -2035,6 +2042,7 @@ __metadata:
     typescript: ^5.0.4
     vite: ^4.3.5
     vite-plugin-dts: ~2.3.0
+    vite-plugin-inspect: ^0.7.25
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -12175,7 +12183,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^11.1.0":
+"fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
   version: 11.1.1
   resolution: "fs-extra@npm:11.1.1"
   dependencies:
@@ -19880,7 +19888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sirv@npm:^2.0.2":
+"sirv@npm:^2.0.2, sirv@npm:^2.0.3":
   version: 2.0.3
   resolution: "sirv@npm:2.0.3"
   dependencies:
@@ -21891,6 +21899,22 @@ __metadata:
   peerDependencies:
     vite: ">=2.9.0"
   checksum: b4247d9f7800bd72addd62fb07fbd3f5a1535a6de771420e4ed896fb5db156335b2abf810091ecd998ac05d6ebbd857a186ec3d468216f0bc6e54064c4886b31
+  languageName: node
+  linkType: hard
+
+"vite-plugin-inspect@npm:^0.7.25":
+  version: 0.7.25
+  resolution: "vite-plugin-inspect@npm:0.7.25"
+  dependencies:
+    "@antfu/utils": ^0.7.2
+    "@rollup/pluginutils": ^5.0.2
+    debug: ^4.3.4
+    fs-extra: ^11.1.1
+    picocolors: ^1.0.0
+    sirv: ^2.0.3
+  peerDependencies:
+    vite: ^3.1.0 || ^4.0.0
+  checksum: e2f9f10d64851f0c80701d47b1de37d785b43e50530c1758023033665c02adc22518703aea2ad8314fa2d2f8ba26745fa240609c373edbd2aa5bfd4ed6c0a399
   languageName: node
   linkType: hard
 
