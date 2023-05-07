@@ -6,7 +6,7 @@
 		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
 		"noEmit": true,
-		"noUnusedLocals": true,
+		// "noUnusedLocals": true, // Only needed while Storybook's webpack 5 builder is used
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"strict": true
