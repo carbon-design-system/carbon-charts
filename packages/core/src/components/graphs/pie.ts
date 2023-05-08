@@ -18,7 +18,7 @@ import { arc, pie } from 'd3-shape'
 import { interpolate } from 'd3-interpolate'
 
 // Pie slice tween function
-function arcTween(a, arcFunc) {
+function arcTween(a: any, arcFunc: any) {
 	const i = interpolate(this._current, a)
 
 	return (t: any) => {
@@ -60,7 +60,7 @@ export class Pie extends Component {
 		const { valueMapsTo } = options.pie
 
 		// remove any slices that are valued at 0 because they dont need to be rendered and will create extra padding
-		const displayData = this.model.getDisplayData().filter((data) => data[valueMapsTo] > 0)
+		const displayData = this.model.getDisplayData().filter((data: any) => data[valueMapsTo] > 0)
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius()
@@ -152,7 +152,7 @@ export class Pie extends Component {
 		const enteringLabels = labels.enter().append('text').classed('pie-label', true)
 
 		// Update styles & position on existing & entering labels
-		const calloutData = []
+		const calloutData: any[] = []
 		enteringLabels
 			.merge(labels)
 			.style('text-anchor', 'middle')
@@ -373,7 +373,7 @@ export class Pie extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.slice')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement
@@ -408,7 +408,7 @@ export class Pie extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -423,7 +423,7 @@ export class Pie extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
 					event,
@@ -431,7 +431,7 @@ export class Pie extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement
 					.classed('hovered', false)

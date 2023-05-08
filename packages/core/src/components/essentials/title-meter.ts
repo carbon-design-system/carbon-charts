@@ -236,7 +236,7 @@ export class MeterTitle extends Title {
 	 * @param titlestring the original string that needs truncation
 	 * @param maxWidth the max width the title can take
 	 */
-	truncateTitle(title, maxWidth) {
+	truncateTitle(title: string, maxWidth: number | string) {
 		super.truncateTitle(title, maxWidth)
 
 		// update the position on the percentage to be inline with the title
@@ -289,7 +289,7 @@ export class MeterTitle extends Title {
 	 * Get the associated status icon for the data
 	 * @param status the active status for the meter chart
 	 */
-	protected getStatusIconPathString(status) {
+	protected getStatusIconPathString(status: Statuses) {
 		switch (status) {
 			case Statuses.SUCCESS:
 				return 'M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z'

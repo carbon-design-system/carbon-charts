@@ -59,7 +59,7 @@ export class Tooltip extends Component {
 		}
 
 		// Apply custom background colors
-		tooltipTextContainer.selectAll('.datapoint-tooltip').each(function (datum, i) {
+		tooltipTextContainer.selectAll('.datapoint-tooltip').each(function (datum: any, i: number) {
 			const item = formattedItems[i]
 
 			if (formattedItems[i] && formattedItems[i].color) {
@@ -121,7 +121,7 @@ export class Tooltip extends Component {
 		return []
 	}
 
-	formatItems(items) {
+	formatItems(items: any) {
 		const options = this.getOptions()
 
 		// get user provided custom values for truncation
@@ -134,7 +134,7 @@ export class Tooltip extends Component {
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {
-			return items.map((item) => {
+			return items.map((item: any) => {
 				// get width of the label icon if it exists
 				const labelIconSize = item.labelIcon ? 12 : 0
 
@@ -159,7 +159,7 @@ export class Tooltip extends Component {
 			`<ul class="multi-tooltip">` +
 			formattedItems
 				.map(
-					(item) =>
+					(item: any) =>
 						`<li>
 					<div class="datapoint-tooltip${item.bold ? ' bold' : ''}">
 						${item.class || item.color ? `<div class="tooltip-color ${item.class}"></div>` : ''}
@@ -264,7 +264,7 @@ export class Tooltip extends Component {
 				target,
 				[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM],
 				() => ({
-					top: undefined, // properties were never set to optional
+					top: undefined, // properties were never set to optional (probably should)
 					left: undefined, // ditto
 					width: holderWidth,
 					height: holderHeight

@@ -95,7 +95,7 @@ export class ChartBrush extends Component {
 			}
 
 			// assume max range is [0, width]
-			const updateZoomDomain = (startPoint, endPoint) => {
+			const updateZoomDomain = (startPoint: any, endPoint: any) => {
 				// create xScale based on current zoomDomain
 				const xScale = scaleTime().range([0, width]).domain(zoomDomain)
 
@@ -116,7 +116,7 @@ export class ChartBrush extends Component {
 				}
 			}
 
-			let brush
+			let brush: any
 
 			const brushed = (event: any) => {
 				// max selection range: [0, width]

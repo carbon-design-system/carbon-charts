@@ -337,7 +337,7 @@ export class Alluvial extends Component {
 
 		this.parent
 			.selectAll('path.link')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedLineHighlight(this, 'mouseover')
 				hoveredElement.classed('link-hovered', true)
@@ -365,7 +365,7 @@ export class Alluvial extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse move event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEMOVE, {
 					event,
@@ -377,7 +377,7 @@ export class Alluvial extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_CLICK, {
 					event,
@@ -385,7 +385,7 @@ export class Alluvial extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedLineHighlight(this, 'mouseout')
 				hoveredElement.classed('link-hovered', false)
@@ -446,7 +446,7 @@ export class Alluvial extends Component {
 
 		self.parent
 			.selectAll('.node-group')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Highlight all links that pass through node
@@ -497,7 +497,7 @@ export class Alluvial extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse move event
 				self.services.events.dispatchEvent(Events.Alluvial.NODE_MOUSEMOVE, {
 					event,
@@ -510,7 +510,7 @@ export class Alluvial extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.NODE_CLICK, {
 					event,
@@ -518,7 +518,7 @@ export class Alluvial extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Set the node position to initial state (unexpanded)

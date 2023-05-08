@@ -58,7 +58,7 @@ export class Area extends Component {
 
 		let upperBoundRangeValue = 0
 		// If includeZero is enabled, we want to replace upperBoundRange from 0 to domain value
-		const includeZeroInRangeValue = (position, domain) => {
+		const includeZeroInRangeValue = (position: any, domain: any) => {
 			if (getProperty(options, 'axes', position, 'includeZero') === false) {
 				// Replace upperBoundRangeValue if domain is positive
 				if (domain[0] > 0 && domain[1] > 0) {
@@ -105,7 +105,7 @@ export class Area extends Component {
 			console.error('Gradients can only be enabled when having 1 single dataset')
 		}
 
-		const areas = svg.selectAll('path.area').data(groupedData, (group) => group.name)
+		const areas = svg.selectAll('path.area').data(groupedData, (group: any) => group.name)
 
 		const chartMainContainer = select(this.services.domUtils.getMainContainer())
 
@@ -173,20 +173,20 @@ export class Area extends Component {
 				.merge(areas)
 				.style(
 					'fill',
-					(group) =>
+					(group: any) =>
 						`url(#${this.services.domUtils.generateElementIDString(
 							`${group.name.replace(' ', '')}_${this.gradient_id}`
 						)})`
 				)
 				.attr('class', 'area')
-				.attr('class', (group) =>
+				.attr('class', (group: any) =>
 					this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.FILL],
 						dataGroupName: group.name,
 						originalClassName: 'area'
 					})
 				)
-				.attr('d', (group) => {
+				.attr('d', (group: any) => {
 					const { data } = group
 					return areaGenerator(data)
 				})
@@ -220,7 +220,7 @@ export class Area extends Component {
 			if (boundsEnabled) {
 				enteringAreas
 					.attr('fill-opacity', configArea.opacity.selected)
-					.style('stroke', (group) => self.model.getStrokeColor(group.name))
+					.style('stroke', (group: any) => self.model.getStrokeColor(group.name))
 					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 0.7 + 'px')
 			}

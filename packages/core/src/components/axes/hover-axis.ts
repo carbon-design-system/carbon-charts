@@ -95,7 +95,7 @@ export class HoverAxis extends Axis {
 		const self = this
 		container
 			.selectAll('g.tick.tick-hover')
-			.on('mouseover', function (event: CustomEvent) {
+			.on('mouseover', function (event: MouseEvent) {
 				const hoveredElement = select(this).select('text')
 				const datum = hoveredElement.datum() as string
 
@@ -114,7 +114,7 @@ export class HoverAxis extends Axis {
 					})
 				}
 			})
-			.on('mousemove', function (event: CustomEvent) {
+			.on('mousemove', function (event: MouseEvent) {
 				const hoveredElement = select(this).select('text')
 				const datum = hoveredElement.datum() as string
 				// Dispatch mouse event
@@ -128,7 +128,7 @@ export class HoverAxis extends Axis {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent) {
+			.on('click', function (event: MouseEvent) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					event,
@@ -136,7 +136,7 @@ export class HoverAxis extends Axis {
 					datum: select(this).select('text').datum()
 				})
 			})
-			.on('mouseout', function (event: CustomEvent) {
+			.on('mouseout', function (event: MouseEvent) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					event,
@@ -148,7 +148,7 @@ export class HoverAxis extends Axis {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE)
 				}
 			})
-			.on('focus', function (event: any) {
+			.on('focus', function (event: FocusEvent) {
 				const coordinates = { clientX: 0, clientY: 0 }
 
 				if (event.target) {
@@ -166,7 +166,7 @@ export class HoverAxis extends Axis {
 					datum: select(this).select('text').datum()
 				})
 			})
-			.on('blur', function (event: CustomEvent) {
+			.on('blur', function (event: FocusEvent) {
 				// Dispatch blur event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_BLUR, {
 					event,

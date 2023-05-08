@@ -112,7 +112,7 @@ export class Bullet extends Component {
 			// Update data on all bars
 			const bars = DOMUtils.appendOrSelect(svg, 'g.bars')
 				.selectAll('path.bar')
-				.data(data, (datum) => datum[groupMapsTo])
+				.data(data, (datum: any) => datum[groupMapsTo])
 
 			// Remove bars that are no longer needed
 			bars.exit().attr('opacity', 0).remove()
@@ -139,7 +139,7 @@ export class Bullet extends Component {
 					})
 				)
 				.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-				.attr('d', (d, i) => {
+				.attr('d', (d: any, i: number) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -190,7 +190,7 @@ export class Bullet extends Component {
 						animate
 					})
 				)
-				.attr('d', (d, i) => {
+				.attr('d', (d: any, i: number) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -212,7 +212,7 @@ export class Bullet extends Component {
 		}
 
 		const renderTargetQuartiles = () => {
-			let quartilesData = []
+			let quartilesData: any[] = []
 			data
 				.filter((d: any) => getProperty(d, 'marker') !== null)
 				.forEach((d: any) => {
@@ -229,7 +229,7 @@ export class Bullet extends Component {
 			// Update data on all lines
 			const lines = DOMUtils.appendOrSelect(svg, 'g.quartiles')
 				.selectAll('path.quartile')
-				.data(quartilesData, (datum) => datum[groupMapsTo])
+				.data(quartilesData, (datum: any) => datum[groupMapsTo])
 
 			// Remove lines that are no longer needed
 			lines.exit().attr('opacity', 0).remove()
@@ -325,7 +325,7 @@ export class Bullet extends Component {
 
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -370,7 +370,7 @@ export class Bullet extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					event,
@@ -382,7 +382,7 @@ export class Bullet extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					event,
@@ -390,7 +390,7 @@ export class Bullet extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 

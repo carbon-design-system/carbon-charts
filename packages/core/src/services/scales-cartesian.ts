@@ -512,7 +512,7 @@ export class CartesianScales extends Service {
 		if (scaleType === ScaleTypes.LABELS_RATIO) {
 			return displayData.map((datum: any) => `${datum[ratioReference]}/${datum[ratioCompareTo]}`)
 		} else if (scaleType === ScaleTypes.TIME) {
-			allDataValues = displayData.map((datum) => +new Date(datum[mapsTo]))
+			allDataValues = displayData.map((datum: any) => +new Date(datum[mapsTo]))
 		} else if (bounds && options.axes) {
 			allDataValues = []
 

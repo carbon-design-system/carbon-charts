@@ -41,7 +41,7 @@ export class Lollipop extends Scatter {
 		// Update data on lines
 		const lines = svg
 			.selectAll('line.line')
-			.data(this.getScatterData(), (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`)
+			.data(this.getScatterData(), (datum: any) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`)
 
 		// Remove lines that are no longer needed
 		lines.exit().attr('opacity', 0).remove()

@@ -70,7 +70,7 @@ export class WordCloud extends Component {
 
 		layout.start()
 
-		function draw(words) {
+		function draw(words: any) {
 			const textGroup = DOMUtils.appendOrSelect(svg, 'g.words')
 			textGroup.attr('transform', `translate(${layout.size()[0] / 2}, ${layout.size()[1] / 2})`)
 
@@ -195,7 +195,7 @@ export class WordCloud extends Component {
 
 		this.parent
 			.selectAll('text.word')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = this
 				debouncedHighlight(hoveredElement)
 
@@ -230,7 +230,7 @@ export class WordCloud extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -244,7 +244,7 @@ export class WordCloud extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.WordCloud.WORD_CLICK, {
 					event,
@@ -252,7 +252,7 @@ export class WordCloud extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				debouncedHighlight(null)
 

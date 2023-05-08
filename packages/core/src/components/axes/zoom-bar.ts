@@ -529,7 +529,7 @@ export class ZoomBar extends Component {
 			)
 	}
 
-	renderSkeleton(container, startX: number, endX: number) {
+	renderSkeleton(container: any, startX: number, endX: number) {
 		// need to clear current zoom bar area
 		this.renderZoomBarArea(container, 'path.zoom-graph-area-unselected', [], null)
 		this.renderZoomBarArea(container, 'path.zoom-graph-area', [], this.clipId)

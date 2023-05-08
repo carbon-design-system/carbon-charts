@@ -8,7 +8,7 @@ export class PieChartModel extends ChartModel {
 		super(services)
 	}
 
-	getTabularData(data) {
+	getTabularData(data: any) {
 		const tabularData = super.getTabularData(data)
 
 		// if the data was changed to tabular format
@@ -32,7 +32,7 @@ export class PieChartModel extends ChartModel {
 
 		const result = [
 			['Group', 'Value'],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'].toLocaleString()
 			])
@@ -41,7 +41,7 @@ export class PieChartModel extends ChartModel {
 		return result
 	}
 
-	sanitize(data) {
+	sanitize(data: any) {
 		const tabularData = this.getTabularData(data)
 
 		// Sort data based on value

@@ -65,7 +65,7 @@ export class AxisChartsTooltip extends Tooltip {
 			]
 
 			if (e.detail.additionalItems) {
-				e.detail.additionalItems.forEach((additionalItem) =>
+				e.detail.additionalItems.forEach((additionalItem: any) =>
 					items.push({
 						label: additionalItem.label,
 						value: additionalItem.value
@@ -92,7 +92,7 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map((datum) => {
+					.map((datum: any) => {
 						// Format value if is array
 						const value = datum[cartesianScales.getRangeIdentifier(datum)]
 
@@ -107,7 +107,7 @@ export class AxisChartsTooltip extends Tooltip {
 							})
 						}
 					})
-					.sort((a, b) => b.value - a.value)
+					.sort((a: any, b: any) => b.value - a.value)
 			)
 
 			if (!dualAxes && getProperty(options, 'tooltip', 'showTotal') === true) {
@@ -115,7 +115,7 @@ export class AxisChartsTooltip extends Tooltip {
 				const rangeIdentifier = cartesianScales.getRangeIdentifier()
 				items.push({
 					label: get(options, 'tooltip.totalLabel') || 'Total',
-					value: data.reduce((accumulator, datum) => accumulator + datum[rangeIdentifier], 0),
+					value: data.reduce((accumulator: number, datum: any) => accumulator + datum[rangeIdentifier], 0),
 					bold: true
 				})
 			}

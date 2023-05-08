@@ -15,7 +15,7 @@ export class BulletChartModel extends ChartModelCartesian {
 	 * @param datum
 	 * @returns number
 	 */
-	getMatchingRangeIndexForDatapoint(datum) {
+	getMatchingRangeIndexForDatapoint(datum: any) {
 		let matchingRangeIndex
 		for (let i = datum.ranges.length - 1; i > 0; i--) {
 			const range = datum.ranges[i]
@@ -39,7 +39,7 @@ export class BulletChartModel extends ChartModelCartesian {
 
 		const result = [
 			['Title', 'Group', 'Value', 'Target', 'Percentage', 'Performance'],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum['title'],
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'],

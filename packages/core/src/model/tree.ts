@@ -14,7 +14,7 @@ export class TreeChartModel extends ChartModel {
 
 		const result = [['Child', 'Parent']]
 
-		displayData.forEach((datum) => {
+		displayData.forEach((datum: any) => {
 			// Call recurisve function
 			this.getChildrenDatums(datum, result)
 			result.push([datum.name, '&ndash;'])
@@ -28,11 +28,11 @@ export class TreeChartModel extends ChartModel {
 	 * @param datum: Object
 	 * @param result: Array<Object>
 	 */
-	private getChildrenDatums(datum, result = []) {
+	private getChildrenDatums(datum: any, result: any[] = []) {
 		// Check to see if datum has children before iterating through it
 		if (datum.children) {
 			if (datum.children.length > 0) {
-				datum.children.forEach((child) => {
+				datum.children.forEach((child: any) => {
 					this.getChildrenDatums(child, result)
 					result.push([child.name, datum.name])
 				})

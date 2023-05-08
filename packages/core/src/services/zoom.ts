@@ -70,7 +70,7 @@ export class Zoom extends Service {
 		)
 	}
 
-	handleDomainChange(newDomain, configs = { dispatchEvent: true }) {
+	handleDomainChange(newDomain: any, configs = { dispatchEvent: true }) {
 		this.model.set({ zoomDomain: newDomain }, { animate: false })
 		if (configs.dispatchEvent) {
 			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {

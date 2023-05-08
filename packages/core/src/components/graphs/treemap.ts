@@ -240,7 +240,7 @@ export class Treemap extends Component {
 		const self = this
 		this.parent
 			.selectAll('rect.leaf')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				let fillColor = getComputedStyle(this, null).getPropertyValue('fill')
 
@@ -287,7 +287,7 @@ export class Treemap extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -301,7 +301,7 @@ export class Treemap extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Treemap.LEAF_CLICK, {
 					event,
@@ -309,7 +309,7 @@ export class Treemap extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 

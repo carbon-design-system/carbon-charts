@@ -17,7 +17,7 @@ export class WordCloudModel extends ChartModel {
 
 		const result = [
 			[options.tooltip.wordLabel, 'Group', options.tooltip.valueLabel],
-			...displayData.map((datum) => [datum[wordMapsTo], datum[groupMapsTo], datum[fontSizeMapsTo]])
+			...displayData.map((datum: any) => [datum[wordMapsTo], datum[groupMapsTo], datum[fontSizeMapsTo]])
 		]
 
 		return result

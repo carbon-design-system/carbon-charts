@@ -208,7 +208,7 @@ export class Meter extends Component {
 
 		this.parent
 			.selectAll('rect.value')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -234,7 +234,7 @@ export class Meter extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEMOVE, {
@@ -249,7 +249,7 @@ export class Meter extends Component {
 					})
 				}
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_CLICK, {
 					event,
@@ -257,7 +257,7 @@ export class Meter extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event

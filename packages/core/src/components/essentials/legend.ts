@@ -132,7 +132,7 @@ export class Legend extends Component {
 			addedAdditionalItems.selectAll('*').remove()
 
 			// get index of item with same type to assign distinct classname
-			let previousType
+			let previousType: any
 			let indexOfItem = 1
 
 			// add different type of legend items
@@ -165,7 +165,7 @@ export class Legend extends Component {
 		}
 	}
 
-	sortDataGroups(dataGroups, legendOrder) {
+	sortDataGroups(dataGroups: any, legendOrder: any) {
 		// Sort data in user defined order
 		dataGroups.sort(
 			(dataA: { name: string}, dataB: { name: string}) => legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
@@ -181,7 +181,7 @@ export class Legend extends Component {
 		return dataGroups
 	}
 
-	addAdditionalItem(additionalItem, itemConfig, indexOfItem) {
+	addAdditionalItem(additionalItem: any, itemConfig: any, indexOfItem: any) {
 		const { width, height } = legend.area
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
@@ -352,7 +352,7 @@ export class Legend extends Component {
 
 		svg
 			.selectAll('div.legend-item')
-			.on('mouseover', function (event) {
+			.on('mouseover', function (event: MouseEvent) {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this)
 				})
@@ -373,7 +373,7 @@ export class Legend extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event) {
+			.on('mousemove', function (event: MouseEvent) {
 				// Emit tooltip move event only if tooltip is shown
 				const hoveredItemData = select(this).datum() as any
 				if (
@@ -413,7 +413,7 @@ export class Legend extends Component {
 				})
 			})
 
-		svg.selectAll('div.legend-item div.checkbox').on('keyup', function (event) {
+		svg.selectAll('div.legend-item div.checkbox').on('keyup', function (event: KeyboardEvent) {
 			if (event.key && event.key === 'Tab') {
 				// Higlight group
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
@@ -422,7 +422,7 @@ export class Legend extends Component {
 			}
 		})
 
-		svg.selectAll('div.legend-item div.checkbox').on('keydown', function (event, d) {
+		svg.selectAll('div.legend-item div.checkbox').on('keydown', function (event: KeyboardEvent, d: any) {
 			if (event.key && event.key === ' ') {
 				event.preventDefault()
 				self.model.toggleDataLabel(d.name)
@@ -434,7 +434,7 @@ export class Legend extends Component {
 			}
 		})
 
-		svg.selectAll('g.additional-item').on('mouseover', function (event) {
+		svg.selectAll('g.additional-item').on('mouseover', function (event: MouseEvent) {
 			const hoveredItem = select(this)
 
 			const hoveredItemData = hoveredItem.datum() as any

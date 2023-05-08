@@ -29,14 +29,14 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this
 			text
-				.on('mouseover', function (event) {
+				.on('mouseover', function (event: MouseEvent) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
 						hoveredElement: text,
 						content: text.text()
 					})
 				})
-				.on('mousemove', function (event) {
+				.on('mousemove', function (event: MouseEvent) {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 						event
 					})
@@ -52,7 +52,7 @@ export class Title extends Component {
 	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
-	truncateTitle(title, maxWidth) {
+	truncateTitle(title: any, maxWidth: number) {
 		// sanity check to prevent stack overflow on binary search
 		if (maxWidth <= 0) {
 			return
@@ -88,14 +88,14 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this
 			title
-				.on('mouseover', function (event) {
+				.on('mouseover', function (event: MouseEvent) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
 						hoveredElement: title,
 						content: untruncatedTitle
 					})
 				})
-				.on('mousemove', function (event) {
+				.on('mousemove', function (event: MouseEvent) {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 						event
 					})
@@ -120,7 +120,7 @@ export class Title extends Component {
 	 * @param end the end index for the binary search
 	 * @param width the width of the svg container that holds the title
 	 */
-	protected getSubstringIndex(title, start, end, width) {
+	protected getSubstringIndex(title: any, start: number, end: number, width: number) {
 		const mid = Math.floor((end + start) / 2)
 		if (title.getSubStringLength(0, mid) > width) {
 			return this.getSubstringIndex(title, start, mid, width)

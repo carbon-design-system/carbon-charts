@@ -118,26 +118,26 @@ export class CirclePack extends Component {
 	}
 
 	// turn off the highlight class on children circles
-	unhighlightChildren(childData) {
+	unhighlightChildren(childData: any) {
 		const data = childData.map((d: any) => d.data)
 
 		this.parent
 			.selectAll('circle.node')
-			.filter((d: any) => data.some((datum) => datum === d.data) && d.depth > 1)
+			.filter((d: any) => data.some((datum: any) => datum === d.data) && d.depth > 1)
 			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName))
 	}
 
 	// highlight the children circles with a stroke
-	highlightChildren(childData) {
+	highlightChildren(childData: any) {
 		const data = childData.map((d: any) => d.data)
 
 		this.parent
 			.selectAll('circle.node')
-			.filter((d: any) => data.some((datum) => datum === d.data) && d.depth > 1)
+			.filter((d: any) => data.some((datum: any) => datum === d.data) && d.depth > 1)
 			.style('stroke', circlePack.circles.hover.stroke)
 	}
 
-	getZoomClass(node) {
+	getZoomClass(node: any) {
 		if (this.model.getHierarchyLevel() === 3 && this.focal) {
 			if (node.data === this.focal.data || this.focal.children.some((d: any) => d.data === node.data)) {
 				return 'focal'
@@ -219,7 +219,7 @@ export class CirclePack extends Component {
 		const self = this
 		this.parent
 			.selectAll('circle.node')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -231,7 +231,7 @@ export class CirclePack extends Component {
 				if (!disabled) {
 					// get the children data for the tooltip
 					let childrenData = []
-					let totalValue = []
+					let totalValue: any[] = []
 					let parentValue = null
 					if (datum.children) {
 						if (datum.depth > 1 && canvasZoomEnabled) {
@@ -298,7 +298,7 @@ export class CirclePack extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -312,7 +312,7 @@ export class CirclePack extends Component {
 					event
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 
@@ -332,7 +332,7 @@ export class CirclePack extends Component {
 					hoveredElement
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				const disabled = hoveredElement.classed('non-focal')
 

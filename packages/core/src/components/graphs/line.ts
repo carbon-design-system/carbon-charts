@@ -60,7 +60,7 @@ export class Line extends Component {
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
 				return {
 					name: getProperty(d, 0, groupMapsTo),
-					data: d.map((datum) => ({
+					data: d.map((datum: any) => ({
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[groupMapsTo]: datum[groupMapsTo],
 						[rangeIdentifier]: datum[1]
@@ -88,7 +88,7 @@ export class Line extends Component {
 		enteringLines
 			.merge(lines)
 			.data(data, (group: any) => group.name)
-			.attr('class', (group) =>
+			.attr('class', (group: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: group.name,

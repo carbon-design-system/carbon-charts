@@ -124,7 +124,7 @@ export class LayoutComponent extends Component {
 			.attr('class', (d: any) => `layout-child layout-child-${this._instanceID} ${d.id}`)
 			.each(function (d: any) {
 				// Set parent component for each child
-				d.components.forEach((itemComponent) => {
+				d.components.forEach((itemComponent: any) => {
 					const selection = select(this)
 
 					const renderType = getProperty(d, 'renderType')

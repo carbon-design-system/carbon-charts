@@ -347,7 +347,7 @@ export class Gauge extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.arc-foreground')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
 					event,
@@ -355,7 +355,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
@@ -365,7 +365,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_CLICK, {
 					event,
@@ -373,7 +373,7 @@ export class Gauge extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event

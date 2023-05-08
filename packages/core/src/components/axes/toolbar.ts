@@ -70,7 +70,7 @@ export class Toolbar extends Component {
 
 			const toolbarControls = container
 				.selectAll('div.toolbar-control')
-				.data(buttonList, (button) => button.id)
+				.data(buttonList, (button: any) => button.id)
 
 			toolbarControls.exit().remove()
 
@@ -107,7 +107,7 @@ export class Toolbar extends Component {
 
 					select(this)
 						.select('button')
-						.on('click', (event: CustomEvent) => {
+						.on('click', (event: CustomEvent<MouseEvent>) => {
 							if (!d.shouldBeDisabled()) {
 								self.triggerFunctionAndEvent(d, event, this)
 							}

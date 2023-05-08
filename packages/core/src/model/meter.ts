@@ -11,7 +11,7 @@ export class MeterChartModel extends ChartModel {
 		super(services)
 	}
 
-	getMaximumDomain(data) {
+	getMaximumDomain(data: any) {
 		const max = data.reduce((accumulator, datum) => accumulator + datum.value, 0)
 		return max
 	}
@@ -41,7 +41,7 @@ export class MeterChartModel extends ChartModel {
 		const dataValues = getProperty(this.getDisplayData())
 
 		const { value: totalValue } = dataValues
-			? dataValues.reduce((previous, current) => {
+			? dataValues.reduce((previous: any, current: any) => {
 					return { value: previous.value + current.value }
 				})
 			: 0
@@ -58,7 +58,7 @@ export class MeterChartModel extends ChartModel {
 
 		if (allRanges) {
 			const result = allRanges.filter(
-				(step) => step.range[0] <= boundedValue && boundedValue <= step.range[1]
+				(step: any) => step.range[0] <= boundedValue && boundedValue <= step.range[1]
 			)
 			if (result.length > 0) {
 				return result[0].status
@@ -92,7 +92,7 @@ export class MeterChartModel extends ChartModel {
 
 			result = [
 				['Group', 'Value', 'Percentage of total'],
-				...displayData.map((datum) => [
+				...displayData.map((datum: any) => [
 					datum[groupMapsTo],
 					datum['value'],
 					((datum['value'] / domainMax) * 100).toFixed(2) + ' %'

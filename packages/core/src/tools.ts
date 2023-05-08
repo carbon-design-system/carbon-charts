@@ -46,8 +46,8 @@ export {
 export const clone = cloneDeep
 export const removeArrayDuplicates = uniq
 
-export function debounceWithD3MousePosition(fn, delay, holder) {
-	let timer = null
+export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
+	let timer: any = null
 	return (...args) => {
 		const context = this
 

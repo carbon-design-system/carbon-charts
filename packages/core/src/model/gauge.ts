@@ -10,7 +10,7 @@ export class GaugeChartModel extends ChartModel {
 	}
 
 	getDataGroups() {
-		return super.getDataGroups().filter((item) => item.name !== 'delta')
+		return super.getDataGroups().filter((item: any) => item.name !== 'delta')
 	}
 
 	getTabularDataArray() {
@@ -20,7 +20,7 @@ export class GaugeChartModel extends ChartModel {
 
 		const result = [
 			['Group', 'Value'],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'].toLocaleString()
 			])

@@ -126,7 +126,7 @@ export class Tree extends Component {
 				.attr('class', (d: any) =>
 					d.depth !== 0 && d.children && d.children.length > 0 ? 'clickable' : null
 				)
-				.on('mouseover', function (event: CustomEvent, d: any) {
+				.on('mouseover', function (event: MouseEvent, d: any) {
 					// Dispatch mouse event
 					self.services.events.dispatchEvent(Events.Tree.NODE_MOUSEOVER, {
 						event,
@@ -134,7 +134,7 @@ export class Tree extends Component {
 						datum: d
 					})
 				})
-				.on('click', function (event: CustomEvent, d: any) {
+				.on('click', function (event: MouseEvent, d: any) {
 					if (d.depth !== 0) {
 						d.children = d.children ? null : d._children
 
@@ -148,7 +148,7 @@ export class Tree extends Component {
 						datum: d
 					})
 				})
-				.on('mouseout', function (event: CustomEvent, d: any) {
+				.on('mouseout', function (event: MouseEvent, d: any) {
 					// Dispatch mouse event
 					self.services.events.dispatchEvent(Events.Tree.NODE_MOUSEOUT, {
 						event,

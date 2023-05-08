@@ -29,7 +29,7 @@ export class Threshold extends Component {
 	render(animate = false) {
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 
-		const thresholdData = []
+		const thresholdData: any[] = []
 
 		Object.keys(axesOptions).forEach((axisPosition) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
@@ -259,7 +259,7 @@ export class Threshold extends Component {
 	}
 
 	// Constructs object to pass in scale functions
-	constructDatumObj(d, element) {
+	constructDatumObj(d: any, element: any) {
 		const datum = {}
 
 		// We only need to specify group only if correpsonding dataset is defined
@@ -282,7 +282,7 @@ export class Threshold extends Component {
 		// Add events to the threshold hoverable area
 		svg
 			.selectAll('rect.threshold-hoverable-area')
-			.on('mouseover mousemove', function (event) {
+			.on('mouseover mousemove', function (event: MouseEvent) {
 				select(this.parentNode).select('line.threshold-line').classed('active', true)
 
 				self.services.events.dispatchEvent(Events.Threshold.SHOW, {
@@ -291,7 +291,7 @@ export class Threshold extends Component {
 					datum: select(this).datum()
 				})
 			})
-			.on('mouseout', function (event) {
+			.on('mouseout', function (event: MouseEvent) {
 				select(this.parentNode).select('line.threshold-line').classed('active', false)
 
 				self.services.events.dispatchEvent(Events.Threshold.HIDE, {

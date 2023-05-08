@@ -214,7 +214,7 @@ export class Heatmap extends Component {
 
 		this.parent
 			.selectAll('g.cell')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const cell = select(this)
 				const hoveredElement = cell.select('rect.heat')
 				const nullState = hoveredElement.classed('null-state')
@@ -262,7 +262,7 @@ export class Heatmap extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse move event
 				self.services.events.dispatchEvent(Events.Heatmap.HEATMAP_MOUSEMOVE, {
 					event,
@@ -274,7 +274,7 @@ export class Heatmap extends Component {
 					event
 				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Heatmap.HEATMAP_CLICK, {
 					event,
@@ -282,7 +282,7 @@ export class Heatmap extends Component {
 					datum: datum
 				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const cell = select(this)
 				const hoveredElement = cell.select('rect.heat')
 				const nullState = hoveredElement.classed('null-state')
@@ -308,7 +308,7 @@ export class Heatmap extends Component {
 	}
 
 	// Highlight elements that match the hovered axis item
-	handleAxisOnHover = (event: CustomEvent) => {
+	handleAxisOnHover = (event: MouseEvent) => {
 		const { detail } = event
 		const { datum } = detail
 		// Unique ranges and domains
@@ -322,15 +322,15 @@ export class Heatmap extends Component {
 		const mainYScale = this.services.cartesianScales.getMainYScale()
 
 		let label = '',
-			sum = null,
-			minimum = null,
-			maximum = null
+			sum: any = null,
+			minimum: any = null,
+			maximum: any = null
 
 		// Check to see where datum belongs
 		if (this.matrix[datum] !== undefined) {
 			label = domainLabel
 			// Iterate through Object and get sum, min, and max
-			ranges.forEach((element) => {
+			ranges.forEach((element: any) => {
 				if (typeof this.matrix[datum][element].value === 'number') {
 					const value = this.matrix[datum][element].value
 					if (sum === null) {
@@ -346,7 +346,7 @@ export class Heatmap extends Component {
 			})
 		} else {
 			label = rangeLabel
-			domains.forEach((element) => {
+			domains.forEach((element: any) => {
 				if (typeof this.matrix[element][datum].value === 'number') {
 					const value = this.matrix[element][datum].value
 					if (sum === null) {

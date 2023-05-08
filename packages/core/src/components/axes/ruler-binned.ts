@@ -13,7 +13,7 @@ export class BinnedRuler extends Ruler {
 	type = 'ruler-binned'
 	renderType = RenderTypes.SVG
 
-	showRuler(event, [x, y]: [number, number]) {
+	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 
 		const options = this.model.getOptions()

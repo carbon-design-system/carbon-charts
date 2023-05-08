@@ -10,7 +10,7 @@ import { computeTimeIntervalName, formatTick, isTickPrimary } from '../../servic
 
 // D3 Imports
 import { select } from 'd3-selection'
-import { axisBottom, axisLeft, axisRight, axisTop } from 'd3-axis'
+import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, type AxisDomain } from 'd3-axis'
 
 export class Axis extends Component {
 	type = 'axes'
@@ -24,7 +24,7 @@ export class Axis extends Component {
 		[AxisPositions.BOTTOM]: false
 	}
 
-	scale: any
+	scale: AxisScale<any>
 	scaleType: ScaleTypes
 
 	constructor(model: ChartModel, services: any, configs?: any) {
@@ -250,7 +250,7 @@ export class Axis extends Component {
 				})
 
 				// check the supplied ticks are within the time domain
-				validTicks = userProvidedTickValues.filter((tick) => {
+				validTicks = userProvidedTickValues.filter((tick: any) => {
 					const tickTimestamp = tick.getTime()
 					return (
 						tickTimestamp >= new Date(lowerBound).getTime() &&
@@ -436,7 +436,7 @@ export class Axis extends Component {
 						useBBox: true
 					}).width
 
-					let lastStartPosition
+					let lastStartPosition: any
 
 					// Find out whether any text nodes roughly collide
 					invisibleAxisRef.selectAll('g.tick').each(function () {
@@ -507,7 +507,7 @@ export class Axis extends Component {
 				container
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function (d) {
+					.text(function (d: any) {
 						if (d.length > truncationThreshold) {
 							self.truncation[axisPosition] = true
 							return truncateLabel(d, truncationType, truncationNumCharacter)
@@ -548,7 +548,7 @@ export class Axis extends Component {
 		const self = this
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
 					event,
@@ -564,7 +564,7 @@ export class Axis extends Component {
 					})
 				}
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
 					event,
@@ -577,7 +577,7 @@ export class Axis extends Component {
 					})
 				}
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					event,
@@ -585,7 +585,7 @@ export class Axis extends Component {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					event,

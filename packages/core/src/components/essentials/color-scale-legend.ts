@@ -190,7 +190,7 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	// Renders gradient legend
-	drawLinear(colorPairing, legendGroupElement, barWidth) {
+	drawLinear(colorPairing: any, legendGroupElement: any, barWidth: any) {
 		const stopLengthPercentage = 100 / (colorPairing.length - 1)
 
 		// Generate the gradient
@@ -202,8 +202,8 @@ export class ColorScaleLegend extends Legend {
 			.data(colorPairing)
 			.enter()
 			.append('stop')
-			.attr('offset', (_, i: number) => `${i * stopLengthPercentage}%`)
-			.attr('class', (_, i: number) => colorPairing[i])
+			.attr('offset', (_: any, i: number) => `${i * stopLengthPercentage}%`)
+			.attr('class', (_: any, i: number) => colorPairing[i])
 			.attr('stop-color', (d: string) => d)
 
 		// Create the legend container
@@ -218,7 +218,7 @@ export class ColorScaleLegend extends Legend {
 	 * Renders quantized legend
 	 * @returns number (range start)
 	 */
-	drawQuantize(colorPairing, colorScheme, customColorsEnabled, legendGroupElement, barWidth) {
+	drawQuantize(colorPairing: any, colorScheme: any, customColorsEnabled: any, legendGroupElement: any, barWidth: any) {
 		// If divergent && non-custom color, remove 0/white from being displayed
 		if (!customColorsEnabled && colorScheme === 'diverge') {
 			colorPairing.splice(colorPairing.length / 2, 1)

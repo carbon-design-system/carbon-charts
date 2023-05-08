@@ -132,7 +132,7 @@ export class Grid extends Component {
 	 * Returns the threshold for the gridline tooltips based on the mouse location.
 	 * Calculated based on the mouse position between the two closest gridlines or edges of chart.
 	 */
-	getGridlineThreshold(mousePos) {
+	getGridlineThreshold(mousePos: any) {
 		// use the space between axis grid ticks to adjust the threshold for the tooltips
 		const svg = this.parent
 
@@ -186,7 +186,7 @@ export class Grid extends Component {
 	 * Returns the active gridlines based on the gridline threshold and mouse position.
 	 * @param position mouse positon
 	 */
-	getActiveGridline(position) {
+	getActiveGridline(position: any) {
 		const userSpecifiedThreshold = getProperty(this.getOptions, 'tooltip', 'gridline', 'threshold')
 		const threshold = userSpecifiedThreshold
 			? userSpecifiedThreshold
@@ -208,7 +208,7 @@ export class Grid extends Component {
 		return xGridlines
 	}
 
-	drawBackdrop(isXGridEnabled, isYGridEnabled) {
+	drawBackdrop(isXGridEnabled: boolean, isYGridEnabled: boolean) {
 		const svg = this.parent
 
 		const mainXScale = this.services.cartesianScales.getMainXScale()
@@ -237,7 +237,7 @@ export class Grid extends Component {
 		backdropRect.attr('width', '100%').attr('height', '100%')
 	}
 
-	cleanGrid(g) {
+	cleanGrid(g: any) {
 		// Remove extra elements
 		g.selectAll('text').remove()
 		g.select('.domain').remove()

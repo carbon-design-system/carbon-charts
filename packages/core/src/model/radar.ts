@@ -23,7 +23,7 @@ export class RadarChartModel extends ChartModelCartesian {
 			...groupedData.map((datum) => {
 				return [
 					datum['name'],
-					...additionalHeaders.map((additionalHeader, i) =>
+					...additionalHeaders.map((additionalHeader: any, i: number) =>
 						getProperty(datum, 'data', i, value) !== null
 							? getProperty(datum, 'data', i, value).toLocaleString()
 							: '&ndash;'

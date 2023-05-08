@@ -14,7 +14,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		super(services)
 	}
 
-	getBoxQuartiles(d) {
+	getBoxQuartiles(d: any) {
 		return {
 			q_25: quantile(d, 0.25),
 			q_50: quantile(d, 0.5),

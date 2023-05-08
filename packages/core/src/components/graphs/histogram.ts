@@ -55,7 +55,7 @@ export class Histogram extends Component {
 		const bars = svg
 			.selectAll('g.bars')
 			.selectAll('path.bar')
-			.data((data) => data)
+			.data((data: any) => data)
 
 		// Remove bars that need to be removed
 		bars.exit().remove()
@@ -65,7 +65,7 @@ export class Histogram extends Component {
 			.append('path')
 			.merge(bars)
 			.classed('bar', true)
-			.attr(groupIdentifier, (d, i) => i)
+			.attr(groupIdentifier, (_: any, i: number) => i)
 			.transition()
 			.call((t: any) =>
 				this.services.transitions.setupTransition({
@@ -82,7 +82,7 @@ export class Histogram extends Component {
 				})
 			)
 			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d, i) => {
+			.attr('d', (d: any, i: number) => {
 				const bin = get(d, 'data')
 
 				if (!bin) {
@@ -166,7 +166,7 @@ export class Histogram extends Component {
 		const self = this
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
 				hoveredElement.classed('hovered', true)
@@ -200,7 +200,7 @@ export class Histogram extends Component {
 					]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent) {
+			.on('mousemove', function (event: MouseEvent) {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
 					event

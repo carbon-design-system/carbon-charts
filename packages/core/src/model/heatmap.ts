@@ -216,7 +216,7 @@ export class HeatmapModel extends ChartModelCartesian {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier()
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
-		const arr = []
+		const arr: any[] = []
 		uniqueDomain.forEach((domain) => {
 			uniqueRange.forEach((range) => {
 				const element = {
@@ -245,7 +245,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 		const result = [
 			[primaryDomain.label, primaryRange.label, 'Value'],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter

@@ -73,7 +73,7 @@ export class ChartModelCartesian extends ChartModel {
 				...(secondaryDomain ? [secondaryDomain.label] : []),
 				...(secondaryRange ? [secondaryRange.label] : [])
 			],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
@@ -127,7 +127,7 @@ export class ChartModelCartesian extends ChartModel {
 	/**
 	 * @param zoomBarData any special zoom bar data to use instead of the model data
 	 */
-	setZoomBarData(newZoomBarData?) {
+	setZoomBarData(newZoomBarData?: any) {
 		const sanitizedData = newZoomBarData
 			? this.sanitize(clone(newZoomBarData))
 			: this.getDisplayData() // if we're not passed explicit zoom data use the model
@@ -144,11 +144,11 @@ export class ChartModelCartesian extends ChartModel {
 
 			// Go through all date values
 			// And get corresponding data from each dataset
-			zoomBarNormalizedValues = allDates.map((date) => {
+			zoomBarNormalizedValues = allDates.map((date: Date) => {
 				let sum = 0
 				const datum = {}
 
-				sanitizedData.forEach((data) => {
+				sanitizedData.forEach((data: any) => {
 					if (data[domainIdentifier].getTime() === date) {
 						sum += data[rangeIdentifier]
 					}
@@ -167,7 +167,7 @@ export class ChartModelCartesian extends ChartModel {
 		return this.get('zoomBarData')
 	}
 
-	protected sanitizeDateValues(data) {
+	protected sanitizeDateValues(data: any) {
 		const options = this.getOptions()
 
 		if (!options.axes) {
@@ -190,7 +190,7 @@ export class ChartModelCartesian extends ChartModel {
 
 		if (keysToCheck.length > 0) {
 			// Check all datapoints and sanitize dates
-			data.forEach((datum) => {
+			data.forEach((datum: any) => {
 				keysToCheck.forEach((key) => {
 					if (getProperty(datum, key, 'getTime') === null) {
 						datum[key] = new Date(datum[key])
@@ -202,7 +202,7 @@ export class ChartModelCartesian extends ChartModel {
 		return data
 	}
 
-	protected sanitize(data) {
+	protected sanitize(data: any) {
 		data = super.sanitize(data)
 		data = this.sanitizeDateValues(data)
 

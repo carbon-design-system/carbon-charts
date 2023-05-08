@@ -38,7 +38,7 @@ export class SimpleBar extends Bar {
 		const orientation = this.services.cartesianScales.getOrientation()
 
 		// Update data on all bars
-		const bars = svg.selectAll('path.bar').data(data, (datum) => datum[groupMapsTo])
+		const bars = svg.selectAll('path.bar').data(data, (datum: any) => datum[groupMapsTo])
 
 		// Remove bars that are no longer needed
 		bars.exit().attr('opacity', 0).remove()
@@ -154,7 +154,7 @@ export class SimpleBar extends Bar {
 		const self = this
 		this.parent
 			.selectAll('path.bar')
-			.on('mouseover', function (event: CustomEvent, datum: any) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
 
@@ -171,7 +171,7 @@ export class SimpleBar extends Bar {
 					data: [datum]
 				})
 			})
-			.on('mousemove', function (event: CustomEvent, datum: any) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					event,
@@ -183,7 +183,7 @@ export class SimpleBar extends Bar {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					event,
@@ -191,7 +191,7 @@ export class SimpleBar extends Bar {
 					datum
 				})
 			})
-			.on('mouseout', function (event: CustomEvent, datum: any) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', false)
 

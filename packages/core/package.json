@@ -151,7 +151,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.62.1",
     "storybook": "^7.0.9",
-    "typedoc": "^0.24.6",
+    "typedoc": "^0.24.7",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
     "vite-plugin-dts": "~2.3.0",

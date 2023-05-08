@@ -712,7 +712,7 @@ export class Radar extends Component {
 					event
 				})
 			})
-			.on('click', function (event: CustomEvent, datum: any) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
 					event,

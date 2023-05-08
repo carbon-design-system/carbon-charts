@@ -15,9 +15,9 @@ export class TreemapChartModel extends ChartModel {
 
 		const result = [['Child', 'Group', 'Value']]
 
-		displayData.forEach((datum) => {
+		displayData.forEach((datum: any) => {
 			if (Array.isArray(datum.children)) {
-				datum.children.forEach((child) => {
+				datum.children.forEach((child: any) => {
 					result.push([child.name, datum.name, child.value])
 				})
 			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {

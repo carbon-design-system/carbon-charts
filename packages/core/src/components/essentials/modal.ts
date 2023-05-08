@@ -77,7 +77,7 @@ export class Modal extends Component {
 						<tr>
 							${get(tableArray, 0)
 								.map(
-									(heading) => `<th scope="col">
+									(heading: any) => `<th scope="col">
 								<div class="cds--table-header-label cds--table-header-label">${heading}</div>
 							</th>`
 								)
@@ -88,9 +88,9 @@ export class Modal extends Component {
 					<tbody>${tableArray
 						.slice(1)
 						.map(
-							(row) => `
+							(row: any) => `
 							<tr>
-								${row.map((column) => `<td>${column}</td>`).join('')}
+								${row.map((column: any) => `<td>${column}</td>`).join('')}
 							</tr>`
 						)
 						.join('')}
