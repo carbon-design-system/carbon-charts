@@ -4,25 +4,27 @@
       "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
-          "metadata",
-          "styles",
+          "file:license",
+          "file:md",
+          "file:styles",
+          "file:scss:charts",
+          "file:css:charts",
+          "file:css:min:charts",
+          "file:css:demo",
+          "postbundle",
           "build:package",
-          "mdx",
+
+          "demo:docs",
+          "demo:mdx",
           "build:demo",
-          "build",
-          "bundle:package",
-          "styles:scss:charts",
-          "styles:css:charts",
-          "styles:css:min:charts",
-          "styles:charts",
-          "styles:demo",
-          "build:docs",
-          "license"
+
+          "build"
         ]
       }
     }
   },
   "targetDefaults": {
+
     "build:package": {
       "dependsOn": [
         "^build:package"
@@ -31,6 +33,7 @@
         "{projectRoot}/dist"
       ]
     },
+
     "build:demo": {
       "dependsOn": [
         "^build:demo"
@@ -39,51 +42,7 @@
         "{projectRoot}/demo/bundle"
       ]
     },
-    "metadata": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "mdx": {
-      "outputs": [
-        "{projectRoot}/src/stories"
-      ]
-    },
-    "bundle:package": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles:scss:charts": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles:css:charts": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles:css:min:charts": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles:charts": {
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
-    },
-    "styles:demo": {
-      "outputs": [
-        "{projectRoot}/dist/demo"
-      ]
-    },
+ 
     "build:docs": {
       "outputs": [
         "{projectRoot}/demo/bundle/documentation"
