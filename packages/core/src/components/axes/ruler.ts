@@ -206,7 +206,7 @@ export class Ruler extends Component {
 
 		const displayData = this.model.getDisplayData()
 
-		let mouseMoveCallback = function (event: MouseEvent) {
+		let mouseMoveCallback = function (event: CustomEvent) {
 			const pos = pointer(event, self.parent.node())
 
 			self.showRuler(event, pos)

@@ -236,7 +236,7 @@ export class MeterTitle extends Title {
 	 * @param titlestring the original string that needs truncation
 	 * @param maxWidth the max width the title can take
 	 */
-	truncateTitle(title: string, maxWidth: number | string) {
+	truncateTitle(title: any, maxWidth: number) {
 		super.truncateTitle(title, maxWidth)
 
 		// update the position on the percentage to be inline with the title

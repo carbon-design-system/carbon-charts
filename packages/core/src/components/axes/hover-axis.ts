@@ -148,7 +148,7 @@ export class HoverAxis extends Axis {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE)
 				}
 			})
-			.on('focus', function (event: FocusEvent) {
+			.on('focus', function (event: any) {
 				const coordinates = { clientX: 0, clientY: 0 }
 
 				if (event.target) {

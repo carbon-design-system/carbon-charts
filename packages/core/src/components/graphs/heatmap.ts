@@ -308,7 +308,7 @@ export class Heatmap extends Component {
 	}
 
 	// Highlight elements that match the hovered axis item
-	handleAxisOnHover = (event: MouseEvent) => {
+	handleAxisOnHover = (event: CustomEvent) => {
 		const { detail } = event
 		const { datum } = detail
 		// Unique ranges and domains
