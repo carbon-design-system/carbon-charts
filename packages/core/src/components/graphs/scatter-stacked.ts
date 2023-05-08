@@ -77,9 +77,9 @@ export class StackedScatter extends Scatter {
 			groups: this.configs.groups,
 			percentage
 		})
-		const tooltipData = []
-		stackedData.forEach((groupData, groupDataIndex) => {
-			groupData.forEach((datum, dataIndex) => {
+		const tooltipData: any[] = []
+		stackedData.forEach((groupData: any, groupDataIndex: any) => {
+			groupData.forEach((datum: any, dataIndex: number) => {
 				const group = datum[groupMapsTo]
 				const domainValue = datum['data']['sharedStackKey']
 				let rangeValue = datum['data'][group]
@@ -110,7 +110,7 @@ export class StackedScatter extends Scatter {
 			})
 		})
 
-		return this.model.getDisplayData(this.configs.groups).filter((datapoint) => {
+		return this.model.getDisplayData(this.configs.groups).filter((datapoint: any) => {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datapoint)
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datapoint)
 			return (

@@ -46,7 +46,7 @@ export class Meter extends Component {
 
 		const { groupMapsTo } = options.data
 
-		let domainMax
+		let domainMax: number
 		if (getProperty(options, 'meter', 'proportional') === null) {
 			domainMax = 100
 		} else {

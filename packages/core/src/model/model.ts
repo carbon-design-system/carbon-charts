@@ -12,6 +12,7 @@ import {
 } from '../tools'
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
 import { formatDateTillMilliSeconds } from '../services/time-series'
+import type { ChartTabularData } from '../interfaces'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -331,7 +332,7 @@ export class ChartModel {
 				const [binStart, binEnd] = key.split('-')
 
 				const correspondingValues = { x0: binStart, x1: binEnd }
-				const correspondingBin = bins.find((bin) => bin.x0.toString() === binStart.toString())
+				const correspondingBin = bins.find((bin: any) => bin.x0.toString() === binStart.toString())
 
 				dataGroupNames.forEach((dataGroupName: any) => {
 					correspondingValues[dataGroupName] = correspondingBin.filter(
@@ -515,7 +516,7 @@ export class ChartModel {
 
 		// If there are deactivated items, map the item name into selected groups
 		if (hasUpdatedDeactivatedItems) {
-			options.data.selectedGroups = updatedActiveItems.map((activeItem) => activeItem.name)
+			options.data.selectedGroups = updatedActiveItems.map((activeItem: any) => activeItem.name)
 		} else {
 			// If every item is active, clear array
 			options.data.selectedGroups = []
@@ -617,7 +618,7 @@ export class ChartModel {
 		console.warn(
 			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format"
 		)
-		const tabularData = []
+		const tabularData: ChartTabularData = []
 		const { datasets, labels } = data
 
 		// Loop through all datasets
@@ -657,7 +658,7 @@ export class ChartModel {
 		return tabularData
 	}
 
-	getTabularDataArray() {
+	getTabularDataArray(): ChartTabularData {
 		return []
 	}
 

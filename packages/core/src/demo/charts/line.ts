@@ -403,7 +403,7 @@ export const lineLogAxisOptions = {
 }
 
 // line - empty state
-export const lineEmptyStateData = []
+export const lineEmptyStateData: any[] = []
 export const lineEmptyStateOptions = {
 	title: 'Line (empty state)',
 	axes: {
@@ -422,7 +422,7 @@ export const lineEmptyStateOptions = {
 }
 
 // line - skeleton
-export const lineSkeletonData = []
+export const lineSkeletonData: any[] = []
 export const lineSkeletonOptions = {
 	title: 'Line (skeleton)',
 	axes: {

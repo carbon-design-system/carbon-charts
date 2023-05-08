@@ -33,10 +33,10 @@ export class Bullet extends Component {
 		const [, rangeScaleDomainMax] = rangeScale.domain()
 
 		const renderRangeBoxes = () => {
-			const rangeBoxData = []
+			const rangeBoxData: any[] = []
 			data.forEach((datum: any) => {
 				if (datum.ranges) {
-					datum.ranges.forEach((range, i) => {
+					datum.ranges.forEach((range: any, i: number) => {
 						if (range !== null && range !== undefined && range < rangeScaleDomainMax) {
 							rangeBoxData.push({
 								datum,
@@ -167,7 +167,7 @@ export class Bullet extends Component {
 				.selectAll('path.marker')
 				.data(
 					data.filter((d: any) => getProperty(d, 'marker') !== null),
-					(datum) => datum[groupMapsTo]
+					(datum: any) => datum[groupMapsTo]
 				)
 
 			// Remove lines that are no longer needed
@@ -247,7 +247,7 @@ export class Bullet extends Component {
 						animate
 					})
 				)
-				.attr('d', ({ datum: d, value }, i) => {
+				.attr('d', ({ datum: d, value }, i: number) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths

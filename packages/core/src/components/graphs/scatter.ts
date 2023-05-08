@@ -81,7 +81,7 @@ export class Scatter extends Component {
 		// Update data on dot groups
 		const circles = svg
 			.selectAll('circle.dot')
-			.data(this.getScatterData(), (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`)
+			.data(this.getScatterData(), (datum: any) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`)
 
 		// Remove circles that need to be removed
 		circles.exit().attr('opacity', 0).remove()

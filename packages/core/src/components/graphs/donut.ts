@@ -70,12 +70,12 @@ export class Donut extends Pie {
 		return radius * (3 / 4)
 	}
 
-	centerNumberTween(d3Ref) {
+	centerNumberTween(d3Ref: any) {
 		const options = this.getOptions()
 
 		let donutCenterFigure = getProperty(options, 'donut', 'center', 'number')
 		if (donutCenterFigure === null) {
-			donutCenterFigure = this.model.getDisplayData().reduce((accumulator, d) => {
+			donutCenterFigure = this.model.getDisplayData().reduce((accumulator: number, d: any) => {
 				return accumulator + d[options.pie.valueMapsTo]
 			}, 0)
 		}

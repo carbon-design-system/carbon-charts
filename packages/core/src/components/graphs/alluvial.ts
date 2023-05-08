@@ -150,7 +150,7 @@ export class Alluvial extends Component {
 					.append('linearGradient')
 					.attr('id', (d: any) => `${this.gradient_id}-link-${d.index}`)
 					.attr('gradientUnits', 'userSpaceOnUse')
-					.call((gradient) =>
+					.call((gradient: any) =>
 						gradient
 							.append('stop')
 							.attr('offset', '0%')
@@ -447,7 +447,7 @@ export class Alluvial extends Component {
 				const hoveredElement = select(this)
 
 				// Highlight all links that pass through node
-				const paths = []
+				const paths: any[] = []
 
 				// Outgoing links
 				self.traverse({ link: 'sourceLinks', node: 'target' }, datum, paths)
@@ -565,7 +565,7 @@ export class Alluvial extends Component {
 	private traverse(
 		direction: { link: 'sourceLinks'; node: 'target' } | { link: 'targetLinks'; node: 'source' },
 		node: any,
-		visited = []
+		visited: any[] = []
 	) {
 		const links = node[direction.link].map((element: any) => {
 			visited.push(element.index)

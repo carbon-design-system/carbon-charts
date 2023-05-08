@@ -124,7 +124,7 @@ export class CartesianScales extends Service {
 		this.findDomainAndRangeAxes()
 		this.determineOrientation()
 		const axisPositions = Object.keys(AxisPositions).map(
-			(axisPositionKey) => AxisPositions[axisPositionKey]
+			(axisPositionKey: any) => AxisPositions[axisPositionKey]
 		)
 		axisPositions.forEach((axisPosition) => {
 			this.scales[axisPosition] = this.createScale(axisPosition)
@@ -533,7 +533,7 @@ export class CartesianScales extends Service {
 				(datum: any) => !dataGroupNames.includes(datum[groupMapsTo])
 			)
 
-			const stackedValues = []
+			const stackedValues: any[] = []
 			dataValuesGroupedByKeys.forEach((dataValues: any) => {
 				const { ...numericalValues } = dataValues
 

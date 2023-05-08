@@ -385,7 +385,7 @@ export class Radar extends Component {
 				)
 			},
 			(exit: any) =>
-				exit.call((selection) => {
+				exit.call((selection: any) => {
 					const selectionUpdate = selection.transition().call((t: any) =>
 						this.services.transitions.setupTransition({
 							transition: t,
@@ -503,7 +503,7 @@ export class Radar extends Component {
 						.attr('y', (tick: any) => polarToCartesianCoords(-Math.PI / 2, yScale(tick), c).y)
 				),
 			(exit: any) =>
-				exit.call((selection) =>
+				exit.call((selection: any) =>
 					selection
 						.transition()
 						.call((t: any) =>

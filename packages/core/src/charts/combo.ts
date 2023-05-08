@@ -112,7 +112,7 @@ export class ComboChart extends AxisChart {
 		const { comboChartTypes } = this.model.getOptions()
 		// don't add the regular ruler if stacked ruler is added
 		const stackedRulerEnabled = comboChartTypes.some(
-			(chartObject) =>
+			(chartObject: any) =>
 				chartObject.type === ChartTypes.STACKED_BAR || chartObject.type === ChartTypes.STACKED_AREA
 		)
 

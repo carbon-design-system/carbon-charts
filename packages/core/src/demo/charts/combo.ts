@@ -402,7 +402,7 @@ export const comboLineScatterOptions = {
 	]
 }
 
-export const comboEmptyData = []
+export const comboEmptyData: any[] = []
 
 export const comboEmptyOptions = {
 	title: 'Combo Chart (empty)',

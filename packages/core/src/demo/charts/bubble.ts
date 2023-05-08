@@ -105,7 +105,7 @@ export const bubbleTimeSeriesOptions = {
 }
 
 // bubble - empty state
-export const bubbleEmptyStateData = []
+export const bubbleEmptyStateData: any[] = []
 export const bubbleEmptyStateOptions = {
 	title: 'Bubble (empty state)',
 	axes: {
@@ -126,7 +126,7 @@ export const bubbleEmptyStateOptions = {
 }
 
 // bubble - skeleton
-export const bubbleSkeletonData = []
+export const bubbleSkeletonData: any[] = []
 export const bubbleSkeletonOptions = {
 	title: 'Bubble (skeleton)',
 	axes: {

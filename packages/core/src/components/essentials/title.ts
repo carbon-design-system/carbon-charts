@@ -120,7 +120,7 @@ export class Title extends Component {
 	 * @param end the end index for the binary search
 	 * @param width the width of the svg container that holds the title
 	 */
-	protected getSubstringIndex(title: any, start: number, end: number, width: number) {
+	protected getSubstringIndex(title: any, start: number, end: number, width: number): number {
 		const mid = Math.floor((end + start) / 2)
 		if (title.getSubStringLength(0, mid) > width) {
 			return this.getSubstringIndex(title, start, mid, width)

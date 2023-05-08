@@ -44,14 +44,14 @@ export const pieMapToOptions = {
 }
 
 // pie - empty state
-export const pieEmptyStateData = []
+export const pieEmptyStateData: any[] = []
 export const pieEmptyStateOptions = {
 	title: 'Pie (empty state)',
 	resizable: true
 }
 
 // pie - skeleton
-export const pieSkeletonData = []
+export const pieSkeletonData: any[] = []
 export const pieSkeletonOptions = {
 	title: 'Pie (skeleton)',
 	resizable: true,

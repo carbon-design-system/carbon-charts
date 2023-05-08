@@ -34,7 +34,7 @@ export class ChartModelCartesian extends ChartModel {
 			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition
 		}
 
-		Object.keys(scales).forEach((scale) => {
+		Object.keys(scales).forEach((scale: any) => {
 			const position = scales[scale]
 			if (cartesianScales.scales[position]) {
 				scales[scale] = {
@@ -60,7 +60,7 @@ export class ChartModelCartesian extends ChartModel {
 			this.assignRangeAndDomains()
 
 		const domainScaleType = cartesianScales.getDomainAxisScaleType()
-		let domainValueFormatter
+		let domainValueFormatter: any
 		if (domainScaleType === ScaleTypes.TIME) {
 			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
 		}
@@ -139,7 +139,7 @@ export class ChartModelCartesian extends ChartModel {
 			const domainIdentifier = cartesianScales.getDomainIdentifier()
 			const rangeIdentifier = cartesianScales.getRangeIdentifier()
 			// get all dates (Number) in displayData
-			let allDates = sanitizedData.map((datum) => datum[domainIdentifier].getTime())
+			let allDates = sanitizedData.map((datum: any) => datum[domainIdentifier].getTime())
 			allDates = removeArrayDuplicates(allDates).sort()
 
 			// Go through all date values
@@ -174,7 +174,7 @@ export class ChartModelCartesian extends ChartModel {
 			return data
 		}
 
-		const keysToCheck = []
+		const keysToCheck: any[] = []
 		Object.keys(AxisPositions).forEach((axisPositionKey) => {
 			const axisPosition = AxisPositions[axisPositionKey]
 			const axisOptions = options.axes[axisPosition]
@@ -191,7 +191,7 @@ export class ChartModelCartesian extends ChartModel {
 		if (keysToCheck.length > 0) {
 			// Check all datapoints and sanitize dates
 			data.forEach((datum: any) => {
-				keysToCheck.forEach((key) => {
+				keysToCheck.forEach((key: any) => {
 					if (getProperty(datum, key, 'getTime') === null) {
 						datum[key] = new Date(datum[key])
 					}

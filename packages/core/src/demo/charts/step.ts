@@ -15,14 +15,14 @@ export const stepTimeSeriesOptions = Object.assign({}, lineTimeSeriesOptions, {
 export const stepTimeSeriesData = lineTimeSeriesData
 
 // step - empty state
-export const stepEmptyStateData = []
+export const stepEmptyStateData: any[] = []
 export const stepEmptyStateOptions = Object.assign({}, lineTimeSeriesOptions, {
 	title: 'Step (empty state)',
 	curve: 'curveStepAfter'
 })
 
 // step - skeleton
-export const stepSkeletonData = []
+export const stepSkeletonData: any[] = []
 export const stepSkeletonOptions = Object.assign({}, lineTimeSeriesOptions, {
 	title: 'Step (skeleton)',
 	curve: 'curveStepAfter',

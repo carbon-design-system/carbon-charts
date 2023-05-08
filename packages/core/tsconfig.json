@@ -3,7 +3,7 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		// Package-specific settings
-		"noUnusedLocals": false,
+		"noImplicitAny": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": false,
 		"useDefineForClassFields": false, // TODO: Fix the 7 issues so this setting can be dropped

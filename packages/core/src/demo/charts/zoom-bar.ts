@@ -201,7 +201,7 @@ zoomBarStringDateOptions.zoomBar.top.data = [
 	}
 ]
 
-export const zoomBarLockedData = []
+export const zoomBarLockedData: any[] = []
 export const zoomBarLockedOptions = addZoomBarToOptions(
 	Object.assign(
 		{
@@ -218,7 +218,7 @@ zoomBarLockedOptions.zoomBar.top.locked = true
 zoomBarLockedOptions.zoomBar.top.initialZoomDomain = [new Date(2019, 0, 3), new Date(2019, 0, 15)]
 
 // assume no data set while loading is true
-export const zoomBarSkeletonData = []
+export const zoomBarSkeletonData: any[] = []
 export const zoomBarSkeletonOptions = addZoomBarToOptions(
 	Object.assign(
 		{

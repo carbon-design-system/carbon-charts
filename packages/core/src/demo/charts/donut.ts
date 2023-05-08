@@ -39,7 +39,7 @@ export const donutMapsToOptions = {
 }
 
 // donut - empty state
-export const donutEmptyStateData = []
+export const donutEmptyStateData: any[] = []
 export const donutEmptyStateOptions = {
 	title: 'Donut (empty state)',
 	resizable: true,
@@ -51,7 +51,7 @@ export const donutEmptyStateOptions = {
 }
 
 // donut - skeleton
-export const donutSkeletonData = []
+export const donutSkeletonData: any[] = []
 export const donutSkeletonOptions = {
 	title: 'Donut (skeleton)',
 	resizable: true,

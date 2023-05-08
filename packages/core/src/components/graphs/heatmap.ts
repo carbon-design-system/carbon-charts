@@ -147,7 +147,7 @@ export class Heatmap extends Component {
 	 * @param xBandwidth - X length
 	 * @param yBandwidth - y length
 	 */
-	private createOuterBox(parentTag, xBandwidth, yBandwidth) {
+	private createOuterBox(parentTag: string, xBandwidth: number, yBandwidth: number) {
 		// Create a highlighter in the parent component so the shadow and the lines do not get clipped
 		const highlight = DOMUtils.appendOrSelect(this.parent, parentTag)
 			.classed('shadows', true)

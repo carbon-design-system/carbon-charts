@@ -277,7 +277,7 @@ export class Boxplot extends Component {
 		 * Draw out and update the outlier circles
 		 */
 		const circles = allBoxGroups.selectAll('circle.outlier').data((d: any) =>
-			d.outliers.map((outlier) => {
+			d.outliers.map((outlier: any) => {
 				return {
 					min: d.whiskers.min,
 					max: d.whiskers.max,

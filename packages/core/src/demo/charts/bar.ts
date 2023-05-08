@@ -725,7 +725,7 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData
 
 // simple bar - empty state
-export const simpleBarEmptyStateData = []
+export const simpleBarEmptyStateData: any[] = []
 export const simpleBarEmptyStateOptions = {
 	title: 'Vertical simple bar (empty state)',
 	axes: {
@@ -737,7 +737,7 @@ export const simpleBarEmptyStateOptions = {
 }
 
 // simple bar - skeleton
-export const simpleBarSkeletonData = []
+export const simpleBarSkeletonData: any[] = []
 export const simpleBarSkeletonOptions = {
 	title: 'Vertical simple bar (skeleton)',
 	axes: {
@@ -752,7 +752,7 @@ export const simpleBarSkeletonOptions = {
 }
 
 // grouped bar - empty state
-export const groupedBarEmptyStateData = []
+export const groupedBarEmptyStateData: any[] = []
 export const groupedBarEmptyStateOptions = {
 	title: 'Vertical grouped bar (empty state)',
 	axes: {
@@ -764,7 +764,7 @@ export const groupedBarEmptyStateOptions = {
 }
 
 // grouped bar - skeleton
-export const groupedBarSkeletonData = []
+export const groupedBarSkeletonData: any[] = []
 export const groupedBarSkeletonOptions = {
 	title: 'Vertical grouped bar (skeleton)',
 	axes: {
@@ -779,7 +779,7 @@ export const groupedBarSkeletonOptions = {
 }
 
 // stacked bar - empty state
-export const stackedBarEmptyStateData = []
+export const stackedBarEmptyStateData: any[] = []
 export const stackedBarEmptyStateOptions = {
 	title: 'Vertical stacked bar (empty state)',
 	axes: {
@@ -791,7 +791,7 @@ export const stackedBarEmptyStateOptions = {
 }
 
 // stacked bar - skeleton
-export const stackedBarSkeletonData = []
+export const stackedBarSkeletonData: any[] = []
 export const stackedBarSkeletonOptions = {
 	title: 'Vertical stacked bar (skeleton)',
 	axes: {
@@ -806,7 +806,7 @@ export const stackedBarSkeletonOptions = {
 }
 
 // simple horizontal bar - empty state
-export const simpleHorizontalBarEmptyStateData = []
+export const simpleHorizontalBarEmptyStateData: any[] = []
 export const simpleHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal simple bar (empty state)',
 	axes: {
@@ -818,7 +818,7 @@ export const simpleHorizontalBarEmptyStateOptions = {
 }
 
 // simple horizontal bar - skeleton
-export const simpleHorizontalBarSkeletonData = []
+export const simpleHorizontalBarSkeletonData: any[] = []
 export const simpleHorizontalBarSkeletonOptions = {
 	title: 'Horizontal simple bar (skeleton)',
 	axes: {
@@ -833,7 +833,7 @@ export const simpleHorizontalBarSkeletonOptions = {
 }
 
 // grouped horizontal bar - empty state
-export const groupedHorizontalBarEmptyStateData = []
+export const groupedHorizontalBarEmptyStateData: any[] = []
 export const groupedHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal grouped bar (empty state)',
 	axes: {
@@ -845,7 +845,7 @@ export const groupedHorizontalBarEmptyStateOptions = {
 }
 
 // grouped horizontal bar - skeleton
-export const groupedHorizontalBarSkeletonData = []
+export const groupedHorizontalBarSkeletonData: any[] = []
 export const groupedHorizontalBarSkeletonOptions = {
 	title: 'Horizontal grouped bar (skeleton)',
 	axes: {
@@ -860,7 +860,7 @@ export const groupedHorizontalBarSkeletonOptions = {
 }
 
 // stacked horizontal bar - empty state
-export const stackedHorizontalBarEmptyStateData = []
+export const stackedHorizontalBarEmptyStateData: any[] = []
 export const stackedHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal stacked bar (empty state)',
 	axes: {
@@ -872,7 +872,7 @@ export const stackedHorizontalBarEmptyStateOptions = {
 }
 
 // stacked horizontal bar - skeleton
-export const stackedHorizontalBarSkeletonData = []
+export const stackedHorizontalBarSkeletonData: any[] = []
 export const stackedHorizontalBarSkeletonOptions = {
 	title: 'Horizontal stacked bar (skeleton)',
 	axes: {

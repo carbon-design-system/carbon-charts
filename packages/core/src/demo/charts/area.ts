@@ -308,7 +308,7 @@ export const boundedAreaTimeSeriesOptions = {
 }
 
 // area - empty state
-export const areaEmptyData = []
+export const areaEmptyData: any[] = []
 export const areaEmptyOptions = {
 	title: 'Area (empty state)',
 	axes: {

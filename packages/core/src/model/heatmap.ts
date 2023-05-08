@@ -9,8 +9,8 @@ export class HeatmapModel extends ChartModelCartesian {
 	private _colorScale: any = undefined
 
 	// List of unique ranges and domains
-	private _domains = []
-	private _ranges = []
+	private _domains: any[] = []
+	private _ranges: any[] = []
 
 	private _matrix = {}
 
@@ -165,7 +165,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			})
 
 			// Fill in user passed data
-			this.getDisplayData().forEach((d, i) => {
+			this.getDisplayData().forEach((d: any, i: number) => {
 				this._matrix[d[domainIdentifier]][d[rangeIdentifier]] = {
 					value: d['value'],
 					index: i
@@ -237,7 +237,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 		const { primaryDomain, primaryRange } = this.assignRangeAndDomains()
 
-		let domainValueFormatter
+		let domainValueFormatter: any
 
 		const result = [
 			[primaryDomain.label, primaryRange.label, 'Value'],

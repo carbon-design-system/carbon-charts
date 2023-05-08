@@ -20,7 +20,7 @@ export class Highlight extends Component {
 
 	render(animate = false) {
 		const axesOptions = getProperty(this.getOptions(), 'axes')
-		const highlightData = []
+		const highlightData: any[] = []
 
 		Object.keys(axesOptions).forEach((axisPosition: any) => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {

@@ -42,7 +42,7 @@ export const removeArrayDuplicates = uniq
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null
-	return (...args) => {
+	return (...args: any) => {
 		const context = this
 
 		// Get D3 event here
@@ -126,7 +126,7 @@ export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: a
  * @param {any} el element to get dimensions from
  * @returns an object containing the width and height of el
  */
-export function getDimensions(el) {
+export function getDimensions(el: any) {
 	return {
 		width: parseFloat(el.style.width.replace('px', '') || el.offsetWidth),
 		height: parseFloat(el.style.height.replace('px', '') || el.offsetHeight)
@@ -247,7 +247,7 @@ export function convertValueToPercentage(item: any, fullData: any, key = 'value'
  * @param {any} numCharacter
  * @returns Truncated text
  */
-export function truncateLabel(fullText, truncationType, numCharacter) {
+export function truncateLabel(fullText: any, truncationType: any, numCharacter: any) {
 	if (numCharacter > fullText.length) {
 		return fullText
 	}
@@ -265,15 +265,15 @@ export function truncateLabel(fullText, truncationType, numCharacter) {
  * @param {any} defaultOptions
  * @param {any} providedOptions
  */
-export function updateLegendAdditionalItems(defaultOptions, providedOptions) {
+export function updateLegendAdditionalItems(defaultOptions: any, providedOptions: any) {
 	const defaultAdditionalItems = getProperty(defaultOptions, 'legend', 'additionalItems')
 	const userProvidedAdditionalItems = getProperty(providedOptions, 'legend', 'additionalItems')
 
 	// Retain default legend additional items
 	if (defaultAdditionalItems && userProvidedAdditionalItems) {
-		const providedTypes = userProvidedAdditionalItems.map((item) => item.type)
+		const providedTypes = userProvidedAdditionalItems.map((item: any) => item.type)
 
-		const defaultTypes = defaultAdditionalItems.map((item) => item.type)
+		const defaultTypes = defaultAdditionalItems.map((item: any) => item.type)
 
 		// Get default items in default options but not in provided options
 		const updatedDefaultItems = defaultLegendAdditionalItems.filter(
@@ -332,10 +332,10 @@ export function arrayDifferences(oldArray: any[], newArray: any[]) {
  * @returns A list of the duplicated keys in data
  */
 export function getDuplicateValues(arr: any) {
-	const values = []
-	const duplicateValues = []
+	const values: any[] = []
+	const duplicateValues: any[] = []
 
-	arr.forEach((value) => {
+	arr.forEach((value: any) => {
 		if (values.indexOf(value) !== -1 && duplicateValues.indexOf(value) === -1) {
 			duplicateValues.push(value)
 		}
@@ -357,7 +357,7 @@ export function getDuplicateValues(arr: any) {
  * @param {any} element input element to moved in front
  * @returns The function to be used by D3 to push element to the top of the canvas
  */
-export function moveToFront(element) {
+export function moveToFront(element: any) {
 	return element.each(function () {
 		this.parentNode.appendChild(this)
 	})
@@ -374,7 +374,7 @@ export function moveToFront(element) {
  * @param propPath nested properties used to extract the final property from within the object
  * (i.e "style", "color" would retrieve the color property from within an object that has "color" nested within "style")
  */
-export const getProperty = (object, ...propPath) => {
+export const getProperty = (object: any, ...propPath: any) => {
 	let position = object
 	if (position) {
 		for (const prop of propPath) {

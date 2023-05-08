@@ -1,6 +1,7 @@
 // Internal Imports
 import { ChartModel } from './model'
 import { getProperty } from '../tools'
+import { ChartTabularData } from '..'
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset
@@ -12,7 +13,7 @@ export class MeterChartModel extends ChartModel {
 	}
 
 	getMaximumDomain(data: any) {
-		const max = data.reduce((accumulator, datum) => accumulator + datum.value, 0)
+		const max = data.reduce((accumulator: number, datum: any) => accumulator + datum.value, 0)
 		return max
 	}
 
@@ -75,8 +76,8 @@ export class MeterChartModel extends ChartModel {
 		const status = this.getStatus()
 		const proportional = getProperty(options, 'meter', 'proportional')
 
-		let result = []
-		let domainMax
+		let result: ChartTabularData = []
+		let domainMax: number
 		// Display the appropriate columns and fields depending on the type of meter
 		if (proportional === null) {
 			domainMax = 100

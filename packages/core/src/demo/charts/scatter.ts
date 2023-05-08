@@ -82,7 +82,7 @@ export const scatterTimeSeriesOptions = {
 }
 
 // scatter - empty state
-export const scatterEmptyStateData = []
+export const scatterEmptyStateData: any[] = []
 export const scatterEmptyStateOptions = {
 	title: 'Scatter (empty state)',
 	axes: {
@@ -98,7 +98,7 @@ export const scatterEmptyStateOptions = {
 }
 
 // scatter - skeleton
-export const scatterSkeletonData = []
+export const scatterSkeletonData: any[] = []
 export const scatterSkeletonOptions = {
 	title: 'Scatter (skeleton)',
 	axes: {

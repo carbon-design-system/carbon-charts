@@ -22,7 +22,7 @@ export class HoverAxis extends Axis {
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 
 		const self = this
-		container.selectAll('g.tick').each(function (_, index: number) {
+		container.selectAll('g.tick').each(function (_: any, index: number) {
 			const g = select(this)
 			g.classed('tick-hover', true).attr('tabindex', index === 0 ? 0 : -1)
 			const textNode = g.select<SVGGraphicsElement>('text')

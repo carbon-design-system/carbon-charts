@@ -366,9 +366,9 @@ export class Toolbar extends Component {
 		const numberOfIcons = getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
 		const controls = getProperty(this.getOptions(), 'toolbar', 'controls')
 
-		const overflowSpecificControls = []
-		const buttonList = []
-		const overflowList = []
+		const overflowSpecificControls: any[] = []
+		const buttonList: any[] = []
+		const overflowList: any[] = []
 
 		controls.forEach((control: any) => {
 			let controlConfig = null
