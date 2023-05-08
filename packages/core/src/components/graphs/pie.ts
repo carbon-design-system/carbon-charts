@@ -1,4 +1,4 @@
-// Internal Imports
+import { arc, interpolate, pie , select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { convertValueToPercentage, getProperty } from '../../tools'
@@ -11,11 +11,6 @@ import {
 	RenderTypes
 } from '../../interfaces'
 import { pie as configPie } from '../../configuration'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { arc, pie } from 'd3-shape'
-import { interpolate } from 'd3-interpolate'
 
 // Pie slice tween function
 function arcTween(a: any, arcFunc: any) {

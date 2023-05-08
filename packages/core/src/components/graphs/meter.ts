@@ -1,13 +1,9 @@
-// Internal Imports
+import { scaleLinear, select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
 import { meter } from '../../configuration'
-
-// D3 Imports
-import { scaleLinear } from 'd3-scale'
-import { select } from 'd3-selection'
 
 export class Meter extends Component {
 	type = 'meter'

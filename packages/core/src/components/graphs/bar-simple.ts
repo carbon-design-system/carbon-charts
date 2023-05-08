@@ -1,4 +1,4 @@
-// Internal Imports
+import { select } from 'd3'
 import { Bar } from './bar'
 import {
 	Events,
@@ -8,9 +8,6 @@ import {
 	CartesianOrientations
 } from '../../interfaces'
 import { generateSVGPathString } from '../../tools'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar'

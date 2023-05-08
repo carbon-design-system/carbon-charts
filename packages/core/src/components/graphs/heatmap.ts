@@ -1,15 +1,10 @@
-// Internal Imports
+import { min, select } from 'd3'
+import { get } from 'lodash-es'
 import { Component } from '../component'
 import { heatmap } from '../../configuration'
 import { Events, RenderTypes, DividerStatus } from '../../interfaces'
 import { getProperty, getTransformOffsets } from '../../tools'
 import { DOMUtils } from '../../services'
-
-import { get } from 'lodash-es'
-
-// D3 Imports
-import { min } from 'd3-array'
-import { select } from 'd3-selection'
 
 export class Heatmap extends Component {
 	type = 'heatmap'

@@ -1,4 +1,4 @@
-// Internal Imports
+import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, select } from 'd3'
 import { Component } from '../component'
 import { AxisPositions, Events, ScaleTypes, Roles, TruncationTypes } from '../../interfaces'
 import { clamp, getProperty, getTranslationValues, truncateLabel } from '../../tools'
@@ -7,10 +7,6 @@ import { DOMUtils } from '../../services'
 import { AxisTitleOrientations, RenderTypes, TickRotations } from '../../interfaces/enums'
 import { axis } from '../../configuration'
 import { computeTimeIntervalName, formatTick, isTickPrimary } from '../../services/time-series'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, type AxisDomain } from 'd3-axis'
 
 export class Axis extends Component {
 	type = 'axes'

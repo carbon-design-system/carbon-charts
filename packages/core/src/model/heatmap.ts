@@ -1,11 +1,7 @@
-// Internal Imports
+import { extent, scaleQuantize, scaleLinear } from 'd3'
 import { AxisFlavor, ScaleTypes } from '../interfaces'
 import { ChartModelCartesian } from './cartesian-charts'
 import { clone, getProperty, isEmpty } from '../tools'
-
-// d3 imports
-import { extent } from 'd3-array'
-import { scaleQuantize, scaleLinear } from 'd3-scale'
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {

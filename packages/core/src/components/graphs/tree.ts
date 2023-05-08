@@ -1,13 +1,8 @@
-// Internal Imports
+import { cluster as d3Cluster, tree as d3Tree, hierarchy, linkHorizontal, select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { type Coordinates, Events, RenderTypes, TreeTypes } from '../../interfaces'
 import { getProperty } from '../../tools'
-
-// D3 Imports
-import { cluster as d3Cluster, tree as d3Tree, hierarchy } from 'd3-hierarchy'
-import { linkHorizontal } from 'd3-shape'
-import { select } from 'd3-selection'
 
 const NODE_OFFSET = 6
 

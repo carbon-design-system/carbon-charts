@@ -1,4 +1,4 @@
-// Internal Imports
+import { select } from 'd3'
 import { Component } from '../component'
 import {
 	CartesianOrientations,
@@ -9,9 +9,6 @@ import {
 } from '../../interfaces'
 import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '../../tools'
 import { boxplot } from '../../configuration'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class Boxplot extends Component {
 	type = 'boxplot'

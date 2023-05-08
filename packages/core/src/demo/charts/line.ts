@@ -1,4 +1,4 @@
-import { timeFormat } from 'd3-time-format'
+import { timeFormat } from 'd3'
 
 export const lineData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },

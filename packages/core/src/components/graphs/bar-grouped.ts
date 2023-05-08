@@ -1,4 +1,4 @@
-// Internal Imports
+import { ScaleBand, scaleBand, select } from 'd3'
 import { Bar } from './bar'
 import { generateSVGPathString, getProperty, removeArrayDuplicates } from '../../tools'
 import {
@@ -8,10 +8,6 @@ import {
 	RenderTypes,
 	Roles
 } from '../../interfaces'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { ScaleBand, scaleBand } from 'd3-scale'
 
 export class GroupedBar extends Bar {
 	type = 'grouped-bar'

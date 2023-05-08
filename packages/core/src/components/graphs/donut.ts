@@ -1,12 +1,8 @@
-// Internal Imports
+import { interpolateNumber, interpolateRound, select } from 'd3'
 import { Pie } from './pie'
 import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { RenderTypes } from '../../interfaces'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { interpolateNumber, interpolateRound } from 'd3-interpolate'
 
 export class Donut extends Pie {
 	type = 'donut'

@@ -1,12 +1,4 @@
-// Internal imports
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { debounce, getProperty, getTransformOffsets } from '../../tools'
-import { alluvial } from '../../configuration'
-import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
-
-// D3 imports
-import { select } from 'd3-selection'
+import { select } from 'd3'
 import {
 	sankey as d3Sankey,
 	sankeyLinkHorizontal,
@@ -14,6 +6,12 @@ import {
 	sankeyRight,
 	sankeyJustify
 } from 'd3-sankey'
+
+import { Component } from '../component'
+import { DOMUtils } from '../../services'
+import { debounce, getProperty, getTransformOffsets } from '../../tools'
+import { alluvial } from '../../configuration'
+import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
 
 // BUG: Typing is not working for this.services.domUtils from the base class Component.
 // DOMUtils is already imported directly to this module so why bother using this.services.domUtils?

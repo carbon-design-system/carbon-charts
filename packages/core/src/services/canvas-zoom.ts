@@ -1,10 +1,8 @@
-// Internal Imports
+import { select } from 'd3'
 import { Service } from './service'
 import { Events } from '../interfaces/enums'
 import { canvasZoomSettings } from '../configuration'
-// Services
 import { DOMUtils } from './essentials/dom-utils'
-import { select } from 'd3-selection'
 
 export class CanvasZoom extends Service {
 	protected model: any

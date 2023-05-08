@@ -1,11 +1,7 @@
-// Internal Imports
+import { ascending, min, max, quantile, scaleOrdinal } from 'd3'
 import { ChartModelCartesian } from './cartesian-charts'
 import { color } from '../configuration'
 import { getProperty } from '../tools'
-
-// D3 Imports
-import { ascending, min, max, quantile } from 'd3-array'
-import { scaleOrdinal } from 'd3-scale'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */

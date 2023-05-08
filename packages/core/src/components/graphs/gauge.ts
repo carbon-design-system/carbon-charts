@@ -1,4 +1,4 @@
-// Internal Imports
+import { arc, select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import {
@@ -11,10 +11,6 @@ import {
 	RenderTypes
 } from '../../interfaces'
 import { clamp, getProperty } from '../../tools'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { arc } from 'd3-shape'
 
 // arrow paths for delta
 const ARROW_UP_PATH_STRING = '4,10 8,6 12,10'

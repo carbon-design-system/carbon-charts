@@ -1,14 +1,9 @@
-// Internal Imports
+import { arc, easeLinear, scaleLinear } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { Skeletons, CartesianOrientations, Alignments } from '../../interfaces/enums'
 import { pie } from '../../configuration'
-
-// D3 Imports
-import { scaleLinear } from 'd3-scale'
-import { easeLinear } from 'd3-ease'
-import { arc } from 'd3-shape'
 
 export class Skeleton extends Component {
 	type = 'skeleton'

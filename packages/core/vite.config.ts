@@ -21,34 +21,7 @@ export default defineConfig({
 			name: 'CarbonCharts'
 		},
 		rollupOptions: {
-			external: [
-				// externalizing D3 saves 117K in the bundle
-				'd3-scale',
-				'd3-selection',
-				'd3-transition',
-				'd3-shape',
-				'd3-color',
-				'd3-interpolate',
-				'd3-axis',
-				'd3-array',
-				'd3-hierarchy',
-				'd3-time-format'
-			],
-			output: {
-				globals: {
-					'd3-scale': 'd3',
-					'd3-selection': 'd3',
-					'd3-transition': 'd3',
-					'd3-shape': 'd3',
-					'd3-color': 'd3',
-					'd3-interpolate': 'd3',
-					'd3-axis': 'd3',
-					'd3-array': 'd3',
-					'd3-hierarchy': 'd3',
-					'd3-time-format': 'd3'
-				},
-				exports: 'named'
-			}
+			external: [ 'd3', 'd3-cloud', 'd3-sankey'] // Note d3-cloud and d3-sankey are not included in d3!
 		}
 	},
 	optimizeDeps: {
@@ -66,7 +39,7 @@ export default defineConfig({
 			// Storybook will not run if these are in the include list
 			'@carbon/import-once',
 			'@carbon/styles',
-			'@carbon/telemetry',
+			'@carbon/telemetry'
 		]
 	},
 	plugins: [

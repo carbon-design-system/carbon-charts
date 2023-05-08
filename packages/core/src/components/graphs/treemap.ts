@@ -1,16 +1,9 @@
-// Internal Imports
+import { color, hierarchy as d3Hierarchy, hsl, treemap as d3Treemap, select } from 'd3'
+import { colors } from '@carbon/colors'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { getProperty } from '../../tools'
-
-// D3 Imports
-import { hierarchy as d3Hierarchy, treemap as d3Treemap } from 'd3-hierarchy'
-import { hsl, color } from 'd3-color'
-import { select } from 'd3-selection'
-
-// Carbon colors
-import { colors } from '@carbon/colors'
 
 const findColorShade = (hex: string) => {
 	if (!hex) {

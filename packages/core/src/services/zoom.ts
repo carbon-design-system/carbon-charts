@@ -1,12 +1,9 @@
-// Internal Imports
+import { extent } from 'd3'
 import { AxisPositions, Events, ScaleTypes } from '../interfaces'
 import { Service } from './service'
 import { getProperty } from '../tools'
 import { zoomBar } from '../configuration'
 import type { ChartModelCartesian } from '../model/cartesian-charts'
-
-// D3 imports
-import { extent } from 'd3-array'
 
 export class Zoom extends Service {
 	protected model: ChartModelCartesian

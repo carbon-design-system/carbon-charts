@@ -1,16 +1,11 @@
-// Internal Imports
+import { hierarchy as d3Hierarchy, pack as D3Pack, select } from 'd3'
+import { get } from 'lodash-es'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import * as Configuration from '../../configuration'
 import { canvasZoomSettings, circlePack } from '../../configuration'
 import { ColorClassNameTypes, Events, RenderTypes } from '../../interfaces/enums'
 import { getProperty } from '../../tools'
-
-// D3 Imports
-import { hierarchy as d3Hierarchy, pack as D3Pack } from 'd3-hierarchy'
-import { select } from 'd3-selection'
-
-import { get } from 'lodash-es'
 
 export class CirclePack extends Component {
 	type = 'circle-pack'

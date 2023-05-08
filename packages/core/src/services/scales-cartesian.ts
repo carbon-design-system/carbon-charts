@@ -1,14 +1,4 @@
-// Internal Imports
-import { axis } from '../configuration'
-import { Service } from './service'
-import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
-import { flatten, getProperty, removeArrayDuplicates } from '../tools'
-
-// D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3-scale'
-import { extent, max } from 'd3-array'
-
-// Misc
+import { extent, max, scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3'
 import {
 	differenceInYears,
 	addYears,
@@ -29,6 +19,10 @@ import {
 	subSeconds,
 	addSeconds
 } from 'date-fns'
+import { axis } from '../configuration'
+import { Service } from './service'
+import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
+import { flatten, getProperty, removeArrayDuplicates } from '../tools'
 
 export class CartesianScales extends Service {
 	protected scaleTypes = {

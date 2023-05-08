@@ -1,13 +1,8 @@
-// Internal Imports
+import { extent, scaleLinear, type Selection } from 'd3'
 import { Scatter } from './scatter'
 import { DOMUtils } from '../../services'
 import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
-
-// D3 Imports
-import type { Selection } from 'd3-selection'
-import { extent } from 'd3-array'
-import { scaleLinear } from 'd3-scale'
 
 export class Bubble extends Scatter {
 	type = 'bubble'

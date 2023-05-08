@@ -1,11 +1,8 @@
-// Internal Imports
+import { select } from 'd3'
 import { Component } from '../component'
 import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { generateSVGPathString, getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class Bullet extends Component {
 	type = 'bullet'

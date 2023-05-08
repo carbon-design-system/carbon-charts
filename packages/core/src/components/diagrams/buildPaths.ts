@@ -1,4 +1,4 @@
-import { path as d3Path } from 'd3-path'
+import { path as d3Path } from 'd3'
 import type { Coordinates } from '../../'
 /**
  * Returns a path string for a straight path

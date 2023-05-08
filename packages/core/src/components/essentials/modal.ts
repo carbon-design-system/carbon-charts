@@ -1,19 +1,12 @@
+import { select } from 'd3'
+import { get } from 'lodash-es'
+import { Modal as CarbonModalComponent } from 'carbon-components' // Carbon model
 import { Component } from '../component'
 import { getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 import { Events } from '../../interfaces'
-
-// Carbon modal
-import { Modal as CarbonModalComponent } from 'carbon-components'
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../../configuration-non-customizable'
-
-// D3 Imports
-import { select } from 'd3-selection'
-
-import { get } from 'lodash-es'
+import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
 
 export class Modal extends Component {
 	type = 'modal'

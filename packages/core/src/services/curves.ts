@@ -17,9 +17,7 @@ import {
 	curveStep,
 	curveStepAfter,
 	curveStepBefore
-} from 'd3-shape'
-
-// Internal Imports
+} from 'd3'
 import { Service } from './service'
 
 export class Curves extends Service {

@@ -1,14 +1,10 @@
-import { select, Selection } from 'd3-selection'
+import { select, Selection } from 'd3'
 import domToImage from 'dom-to-image-more'
 import type { ChartModel } from '../..'
-
-// Internal Imports
 import { Service } from '../service'
 import { Events } from '../../interfaces'
 import { debounce, getProperty } from '../../tools'
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../../configuration-non-customizable'
+import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 

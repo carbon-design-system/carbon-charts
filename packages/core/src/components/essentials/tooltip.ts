@@ -1,20 +1,13 @@
+import { select, pointer } from 'd3'
+import { format } from 'date-fns'
+import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
 import { Component } from '../component'
 import { getProperty, truncateLabel } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
 import { Events, RenderTypes, TruncationTypes } from '../../interfaces'
 import { zoomBar, tooltips } from '../../configuration'
-
-// Carbon position service
-import Position, { PLACEMENTS } from '@carbon/utils-position'
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../../configuration-non-customizable'
-
-// D3 Imports
-import { select, pointer } from 'd3-selection'
-
-import { format } from 'date-fns'
+import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
 
 export class Tooltip extends Component {
 	type = 'tooltip'
@@ -34,7 +27,7 @@ export class Tooltip extends Component {
 	handleShowTooltip = (e: any) => {
 		const data = e.detail.data || e.detail.items
 
-		let defaultHTML
+		let defaultHTML: any
 		const formattedItems = this.formatItems(this.getItems(e))
 
 		if (e.detail.content) {
@@ -249,7 +242,7 @@ export class Tooltip extends Component {
 		const holderWidth = holder.offsetWidth
 		const holderHeight = holder.offsetHeight
 
-		let bestPlacementOption
+		let bestPlacementOption: any
 		if (mouseRelativePos[0] / holderWidth > 0.9) {
 			bestPlacementOption = PLACEMENTS.LEFT
 		} else if (mouseRelativePos[0] / holderWidth < 0.1) {

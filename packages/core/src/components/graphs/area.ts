@@ -1,13 +1,9 @@
-// Internal Imports
+import { area, select } from 'd3'
 import { Component } from '../component'
 import { area as configArea } from '../../configuration'
 import { CartesianOrientations, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { GradientUtils } from '../../services'
 import { getProperty } from '../../tools'
-
-// D3 Imports
-import { area } from 'd3-shape'
-import { select } from 'd3-selection'
 
 export class Area extends Component {
 	type = 'area'

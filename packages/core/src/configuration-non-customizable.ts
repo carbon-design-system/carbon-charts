@@ -1,5 +1,6 @@
+import { easeCubicInOut } from 'd3'
 import { ZoomBarTypes, LegendItemType } from './interfaces'
-import { easeCubicInOut } from 'd3-ease'
+
 
 export const carbonPrefix = 'cds'
 

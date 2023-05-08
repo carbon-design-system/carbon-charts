@@ -1,4 +1,4 @@
-// Internal Imports
+import { select } from 'd3'
 import { generateSVGPathString, getProperty } from '../../tools'
 import { Bar } from './bar'
 import {
@@ -9,9 +9,6 @@ import {
 	RenderTypes
 } from '../../interfaces'
 import { DOMUtils } from '../../services'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class StackedBar extends Bar {
 	type = 'stacked-bar'

@@ -1,14 +1,9 @@
-// Internal Imports
+import { extent, scaleLinear, select } from 'd3'
+import cloud from 'd3-cloud'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { debounce } from '../../tools'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { scaleLinear } from 'd3-scale'
-import { extent } from 'd3-array'
-import cloud from 'd3-cloud'
 
 export class WordCloud extends Component {
 	type = 'wordcloud'

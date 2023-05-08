@@ -1,4 +1,4 @@
-// Internal Imports
+import { curveLinearClosed, extent, lineRadial, max, min, scaleBand, scaleLinear, select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, Roles, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
@@ -12,12 +12,6 @@ import {
 	distanceBetweenPointOnCircAndVerticalDiameter
 } from '../../services/angle-utils'
 import { radar } from '../../configuration'
-
-// D3 Imports
-import { select } from 'd3-selection'
-import { scaleBand, scaleLinear } from 'd3-scale'
-import { max, min, extent } from 'd3-array'
-import { lineRadial, curveLinearClosed } from 'd3-shape'
 
 export class Radar extends Component {
 	type = 'radar'

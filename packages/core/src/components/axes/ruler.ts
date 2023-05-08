@@ -1,11 +1,8 @@
-// Internal Imports
+import { Selection, pointer } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { CartesianOrientations, Events, RenderTypes } from '../../interfaces'
 import { debounceWithD3MousePosition, getProperty, isEqual } from '../../tools'
-
-// D3 Imports
-import { Selection, pointer } from 'd3-selection'
 
 export type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>
 

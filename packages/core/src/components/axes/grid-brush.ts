@@ -1,12 +1,7 @@
-// Internal Imports
+import { brushX, pointer, scaleTime} from 'd3'
 import { Component } from '../component'
 import { RenderTypes, ScaleTypes } from '../../interfaces'
 import { DOMUtils } from '../../services'
-
-// D3 Imports
-import { brushX } from 'd3-brush'
-import { scaleTime } from 'd3-scale'
-import { pointer } from 'd3-selection'
 
 // This class is used for handle brush events in chart
 export class ChartBrush extends Component {

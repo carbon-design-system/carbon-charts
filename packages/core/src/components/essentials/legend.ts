@@ -1,4 +1,4 @@
-// Internal Imports
+import { select } from 'd3'
 import { Component } from '../component'
 import { getProperty, truncateLabel } from '../../tools'
 import {
@@ -12,9 +12,6 @@ import {
 } from '../../interfaces'
 import { legend } from '../../configuration'
 import * as Configuration from '../../configuration'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class Legend extends Component {
 	type = 'legend'

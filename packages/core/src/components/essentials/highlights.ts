@@ -1,13 +1,9 @@
+import { select } from 'd3'
+import Position from '@carbon/utils-position' // position service
 import { Component } from '../component'
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
 import type { ChartModel } from '../../model/model'
 import { AxisPositions, type CartesianOrientations, RenderTypes } from '../../interfaces'
-
-// D3 Imports
-import { select } from 'd3-selection'
-
-// Carbon position service
-import Position from '@carbon/utils-position'
 
 export class Highlight extends Component {
 	type = 'highlight'

@@ -1,13 +1,10 @@
-// Internal Imports
+import { select } from 'd3'
 import { Axis } from './axis'
 import { AxisPositions, Events, ScaleTypes } from '../../interfaces'
 import type { ChartModel } from '../../model/model'
 import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { axis } from '../../configuration'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class HoverAxis extends Axis {
 	constructor(model: ChartModel, services: any, configs?: any) {

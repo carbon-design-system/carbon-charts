@@ -1,4 +1,4 @@
-// Internal Imports
+import { bin, scaleOrdinal, stack, stackOffsetDiverging  } from 'd3'
 import { color, legend } from '../configuration'
 import { histogram as histogramConfigs } from '../configuration-non-customizable'
 import {
@@ -11,11 +11,6 @@ import {
 	updateLegendAdditionalItems
 } from '../tools'
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
-
-// D3
-import { scaleOrdinal } from 'd3-scale'
-import { stack, stackOffsetDiverging } from 'd3-shape'
-import { bin } from 'd3-array'
 import { formatDateTillMilliSeconds } from '../services/time-series'
 
 /** The charting model layer which includes mainly the chart data and options,

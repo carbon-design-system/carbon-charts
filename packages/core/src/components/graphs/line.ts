@@ -1,11 +1,8 @@
-// Internal Imports
+import { line } from 'd3'
 import { Component } from '../component'
 import { lines } from '../../configuration'
 import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '../../tools'
-
-// D3 Imports
-import { line } from 'd3-shape'
 
 export class Line extends Component {
 	type = 'line'

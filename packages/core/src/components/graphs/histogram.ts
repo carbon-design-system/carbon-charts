@@ -1,4 +1,5 @@
-// Internal Imports
+import { select } from 'd3'
+import { get } from 'lodash-es'
 import { generateSVGPathString, getProperty } from '../../tools'
 import {
 	Roles,
@@ -8,11 +9,6 @@ import {
 	RenderTypes
 } from '../../interfaces'
 import { Component } from '../component'
-
-// D3 Imports
-import { select } from 'd3-selection'
-
-import { get } from 'lodash-es'
 
 export class Histogram extends Component {
 	type = 'histogram'

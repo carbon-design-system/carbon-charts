@@ -1,10 +1,7 @@
-// Internal Imports
+import { select } from 'd3'
 import { Component } from '../component'
 import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces'
 import { getProperty } from '../../tools'
-
-// D3 Imports
-import { select } from 'd3-selection'
 
 export class Toolbar extends Component {
 	static buttonID = 0

@@ -1,8 +1,4 @@
-// Internal imports
-import { CartesianOrientations, ScaleTypes, TruncationTypes } from './interfaces'
-
-import { defaultLegendAdditionalItems } from './configuration-non-customizable'
-
+import { pointer, type Numeric } from 'd3'
 import {
 	debounce,
 	merge,
@@ -20,10 +16,8 @@ import {
 	fromPairs,
 	some
 } from 'lodash-es'
-
-// D3 Imports
-import { pointer } from 'd3-selection'
-import type { Numeric } from 'd3-array'
+import { CartesianOrientations, ScaleTypes, TruncationTypes } from './interfaces'
+import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 
 // Functions
 

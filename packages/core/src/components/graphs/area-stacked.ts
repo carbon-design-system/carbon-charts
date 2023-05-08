@@ -1,11 +1,8 @@
-// Internal Imports
+import { area } from 'd3'
 import { Component } from '../component'
 import { getProperty } from '../../tools'
 import { area as configArea } from '../../configuration'
 import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-
-// D3 Imports
-import { area } from 'd3-shape'
 
 export class StackedArea extends Component {
 	type = 'area-stacked'

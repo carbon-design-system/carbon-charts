@@ -1,14 +1,9 @@
-// Internal Imports
+import { select } from 'd3'
 import type { ChartModel } from '../model/model'
 import { DOMUtils } from '../services'
 import { RenderTypes } from '../interfaces'
 import { getProperty, merge } from '../tools'
-
-// D3 Imports
-import { select } from 'd3-selection'
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../configuration-non-customizable'
+import { carbonPrefix } from '../configuration-non-customizable' // CSS prefix
 
 export class Component {
 	public type: string

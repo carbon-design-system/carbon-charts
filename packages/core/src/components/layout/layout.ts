@@ -1,4 +1,4 @@
-// Internal Imports
+import { select } from 'd3'
 import { Component } from '../component'
 import {
 	LayoutDirection,
@@ -11,12 +11,7 @@ import {
 import { getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
 import type { ChartModel } from '../../model/model'
-
-// D3 Imports
-import { select } from 'd3-selection'
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../../configuration-non-customizable'
+import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
 
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID

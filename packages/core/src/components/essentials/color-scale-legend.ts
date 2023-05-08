@@ -1,14 +1,9 @@
-// Internal Imports
+import { axisBottom, interpolateNumber, quantize, scaleBand, scaleLinear } from 'd3'
 import { getProperty, isEmpty } from '../../tools'
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces'
 import { legend } from '../../configuration'
 import { Legend } from './legend'
 import { DOMUtils } from '../../services'
-
-// D3 imports
-import { axisBottom } from 'd3-axis'
-import { scaleBand, scaleLinear } from 'd3-scale'
-import { interpolateNumber, quantize } from 'd3-interpolate'
 
 export class ColorScaleLegend extends Legend {
 	type = 'color-legend'
