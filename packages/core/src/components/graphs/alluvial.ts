@@ -6,7 +6,6 @@ import {
 	sankeyRight,
 	sankeyJustify
 } from 'd3-sankey'
-
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { debounce, getProperty, getTransformOffsets } from '../../tools'
