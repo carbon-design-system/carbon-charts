@@ -9,7 +9,7 @@
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build:package": "svelte-kit sync && svelte-package && yarn postbundle",
 		"build:demo": "storybook build -o demo/bundle --quiet",
-		"build": "yarn build:package && yarn license && yarn build:demo",
+		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",
 		"start": "yarn storybook",
 		"test": "svelte-check --workspace=tests",

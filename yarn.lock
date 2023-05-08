@@ -3383,15 +3383,15 @@ __metadata:
   linkType: hard
 
 "@npmcli/run-script@npm:^6.0.0":
-  version: 6.0.1
-  resolution: "@npmcli/run-script@npm:6.0.1"
+  version: 6.0.2
+  resolution: "@npmcli/run-script@npm:6.0.2"
   dependencies:
     "@npmcli/node-gyp": ^3.0.0
     "@npmcli/promise-spawn": ^6.0.0
     node-gyp: ^9.0.0
     read-package-json-fast: ^3.0.0
     which: ^3.0.0
-  checksum: dcc99755f67a535d57d95f25cdaecf414d1adffba4058cbf940fbffce27a953c6d95e40aed127e913ed14c8ac3d9b6223ef002beebd525574750a4be861425d7
+  checksum: 7a671d7dbeae376496e1c6242f02384928617dc66cd22881b2387272205c3668f8490ec2da4ad63e1abf979efdd2bdf4ea0926601d78578e07d83cfb233b3a1a
   languageName: node
   linkType: hard
 
@@ -10141,11 +10141,11 @@ __metadata:
   linkType: hard
 
 "core-js-compat@npm:^3.25.1":
-  version: 3.30.1
-  resolution: "core-js-compat@npm:3.30.1"
+  version: 3.30.2
+  resolution: "core-js-compat@npm:3.30.2"
   dependencies:
     browserslist: ^4.21.5
-  checksum: e450a9771fc927ce982333929e1c4b32f180f641e4cfff9de6ed44b5930de19be7707cf74f45d1746ca69b8e8ac0698a555cb7244fbfbed6c38ca93844207bf7
+  checksum: 4c81d635559eebc2f81db60f5095a235f580a2f90698113c4124c72761393592b139e30974cce6095a9a6aad6bb3cd467b24b20c32e77ed24ca74eb5944d0638
   languageName: node
   linkType: hard
 
@@ -17010,9 +17010,9 @@ __metadata:
   linkType: hard
 
 "node-fetch-native@npm:^1.0.2":
-  version: 1.1.0
-  resolution: "node-fetch-native@npm:1.1.0"
-  checksum: 65b85ba8d671f7d4b8a4c8eb70dfd3864b4d04ab771e15aeadc613011cd4e4568c4a0a3f1aebdd37410cd2d75c65ab3e538eedb1732fc6b33ee093167e22bbe0
+  version: 1.1.1
+  resolution: "node-fetch-native@npm:1.1.1"
+  checksum: 41fe59179eb94b6ffb25e657e5ed14b4b50e2ba7f6bf5346622970638c8abbf29653b011141c919c6c081979962edd1eb94424a7621412cd78c47a9cd8be1227
   languageName: node
   linkType: hard
 
@@ -17042,8 +17042,8 @@ __metadata:
   linkType: hard
 
 "node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
-  version: 2.6.9
-  resolution: "node-fetch@npm:2.6.9"
+  version: 2.6.10
+  resolution: "node-fetch@npm:2.6.10"
   dependencies:
     whatwg-url: ^5.0.0
   peerDependencies:
@@ -17051,7 +17051,7 @@ __metadata:
   peerDependenciesMeta:
     encoding:
       optional: true
-  checksum: acb04f9ce7224965b2b59e71b33c639794d8991efd73855b0b250921382b38331ffc9d61bce502571f6cc6e11a8905ca9b1b6d4aeb586ab093e2756a1fd190d0
+  checksum: 9250e5266ccb4cc43e0ba5a4e23447d65f207a445d8f968420ef5f135cb9db3f03e527647a3762c1ba06872cbd13640e572d9eea63ba6754e936a6e824ed85a3
   languageName: node
   linkType: hard
 
@@ -19512,14 +19512,14 @@ __metadata:
   linkType: hard
 
 "readable-stream@npm:^4.1.0":
-  version: 4.3.0
-  resolution: "readable-stream@npm:4.3.0"
+  version: 4.4.0
+  resolution: "readable-stream@npm:4.4.0"
   dependencies:
     abort-controller: ^3.0.0
     buffer: ^6.0.3
     events: ^3.3.0
     process: ^0.11.10
-  checksum: 5f8d5fc1eb0c6eb47771ad4537881126d6280666e1f10ba1e2262a670a0352c36f59e6a04d17c9a6f7c888218984836dc67f55e95a77de8bfdf06fb75f00f670
+  checksum: cc1630c2de134aee92646e77b1770019633000c408fd48609babf2caa53f00ca794928023aa9ad3d435a1044cec87d2ce7e2b7389dd1caf948b65c175edb7f52
   languageName: node
   linkType: hard
 
@@ -21279,8 +21279,8 @@ __metadata:
   linkType: hard
 
 "svelte-check@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "svelte-check@npm:3.3.1"
+  version: 3.3.2
+  resolution: "svelte-check@npm:3.3.2"
   dependencies:
     "@jridgewell/trace-mapping": ^0.3.17
     chokidar: ^3.4.1
@@ -21294,7 +21294,7 @@ __metadata:
     svelte: ^3.55.0
   bin:
     svelte-check: bin/svelte-check
-  checksum: e79fdbac6f0f72a21c2d8c77b5229158a8993464bd600586207c9287bccf6a9091d1ff323cab03eeb467bb4d15cca90390342158f6add341f055e99077a7c301
+  checksum: eb2079f499e42313dd875efc0dc72b4c3c843165bf5b7f013faf759d96fd4bab7ec9d3765a04ae4a77ef2e79b4b7ac90908cce3e844cf069fffbb9ad7ed56a98
   languageName: node
   linkType: hard
 
@@ -21354,22 +21354,22 @@ __metadata:
   linkType: hard
 
 "svelte2tsx@npm:~0.6.0":
-  version: 0.6.13
-  resolution: "svelte2tsx@npm:0.6.13"
+  version: 0.6.14
+  resolution: "svelte2tsx@npm:0.6.14"
   dependencies:
     dedent-js: ^1.0.1
     pascal-case: ^3.1.1
   peerDependencies:
     svelte: ^3.55
     typescript: ^4.9.4 || ^5.0.0
-  checksum: 095fbceb40cbbc3945230afe3bf262f5ea28231d4e73cd02ddd8ab472c086c24f17d7c13d5108a9f9e14c9d1a4eff21238db8aa19833a979089fe197901fac1f
+  checksum: 36625e9ff1530a615a3b3e6713d33c45e02960d160a84e5ba08852bef73f3a189fc33687ce1bc7a139cbb01f263543fce2d13bc41c557be73d88d7613fa585bb
   languageName: node
   linkType: hard
 
 "svelte@npm:^3.0.0, svelte@npm:^3.59.0":
-  version: 3.59.0
-  resolution: "svelte@npm:3.59.0"
-  checksum: 10e337f2241f716a8ada0f8ccc9660f283c75ffb0cd5ae4f17a6848b7a6b727432a808d50687553637a0591925236e430c21b2d0b5b40210d81479ceadefe4a5
+  version: 3.59.1
+  resolution: "svelte@npm:3.59.1"
+  checksum: bd4344f01a5b0e219af99874b4e300e4e63449f81aa9e45c1216301a23f72baaf9b235147a40949d87e2a1430e7850659d73dec6be398bcd07706b79d4022cd6
   languageName: node
   linkType: hard
 
@@ -21567,14 +21567,14 @@ __metadata:
   linkType: hard
 
 "terser-webpack-plugin@npm:^5.3.1, terser-webpack-plugin@npm:^5.3.7":
-  version: 5.3.7
-  resolution: "terser-webpack-plugin@npm:5.3.7"
+  version: 5.3.8
+  resolution: "terser-webpack-plugin@npm:5.3.8"
   dependencies:
     "@jridgewell/trace-mapping": ^0.3.17
     jest-worker: ^27.4.5
     schema-utils: ^3.1.1
     serialize-javascript: ^6.0.1
-    terser: ^5.16.5
+    terser: ^5.16.8
   peerDependencies:
     webpack: ^5.1.0
   peerDependenciesMeta:
@@ -21584,11 +21584,11 @@ __metadata:
       optional: true
     uglify-js:
       optional: true
-  checksum: 095e699fdeeb553cdf2c6f75f983949271b396d9c201d7ae9fc633c45c1c1ad14c7257ef9d51ccc62213dd3e97f875870ba31550f6d4f1b6674f2615562da7f7
+  checksum: 0ffc2a1949b1fd60ef9c815c4629b9817656db612bb58c5db96e3b04204c86afd142b115392e48733364edc7bf95131f54c10174c05f046ba8f2adead6b06c3c
   languageName: node
   linkType: hard
 
-"terser@npm:5.17.1, terser@npm:^5.10.0, terser@npm:^5.16.5":
+"terser@npm:5.17.1":
   version: 5.17.1
   resolution: "terser@npm:5.17.1"
   dependencies:
@@ -21599,6 +21599,20 @@ __metadata:
   bin:
     terser: bin/terser
   checksum: 69b0e80e3c4084db2819de4d6ae8a2ba79f2fcd7ed6df40fe4b602ec7bfd8e889cc63c7d5268f30990ffecbf6eeda18f857adad9386fe2c2331b398d58ed855c
+  languageName: node
+  linkType: hard
+
+"terser@npm:^5.10.0, terser@npm:^5.16.8":
+  version: 5.17.2
+  resolution: "terser@npm:5.17.2"
+  dependencies:
+    "@jridgewell/source-map": ^0.3.2
+    acorn: ^8.5.0
+    commander: ^2.20.0
+    source-map-support: ~0.5.20
+  bin:
+    terser: bin/terser
+  checksum: 20153b0887065ff7d026bbbd9d0df065871406f9b66b0fa83786400c32c10b93b2309bff0df48f42473e7c3559bfd22d3ce593b82797bac9c882a243d008f5b9
   languageName: node
   linkType: hard
 
@@ -22869,8 +22883,8 @@ __metadata:
   linkType: hard
 
 "vue-eslint-parser@npm:^9.0.1, vue-eslint-parser@npm:^9.1.1":
-  version: 9.2.0
-  resolution: "vue-eslint-parser@npm:9.2.0"
+  version: 9.2.1
+  resolution: "vue-eslint-parser@npm:9.2.1"
   dependencies:
     debug: ^4.3.4
     eslint-scope: ^7.1.1
@@ -22881,7 +22895,7 @@ __metadata:
     semver: ^7.3.6
   peerDependencies:
     eslint: ">=6.0.0"
-  checksum: b1302d0371f1e4b76d483456103929b9fe9ff7ae13036030a71066f0ce2d405ca7b4575d4e6106444890bca16809b064565004c8d18d101b7ad5a52417201147
+  checksum: f643ec4029c9420817854f1bcd49cd35f7bcdcc293ad75d2619af873067768fa5887ce4665093fa6071ab1935a421afb541f1c1a29d27952bc35d55811f51fb1
   languageName: node
   linkType: hard
 

@@ -9,8 +9,12 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "moduleResolution": "bundler",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": true
   }
 }

@@ -40,11 +40,6 @@ export default defineConfig({
 	},
 	plugins: [
 		react(),
-		dts({
-			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/packages/react/src/','/dist/')
-				return { filePath, content }
-			}
-		})
+		dts()
 	]
 })

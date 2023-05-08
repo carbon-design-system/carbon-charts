@@ -6,7 +6,7 @@ import { ChartsModule } from '../'
 
 const DEFAULT_THEME = ChartTheme.G100
 
-const introSection = storiesOf('Docs', module).add(
+storiesOf('Docs', module).add(
 	'Welcome',
 	() => ({
 		template: `

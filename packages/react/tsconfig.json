@@ -6,10 +6,7 @@
 		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
 		"noEmit": true,
-		// "noUnusedLocals": true, // Only needed while Storybook's webpack 5 builder is used
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
-		"strict": true
+		"noUnusedLocals": false // Only while Storybook's webpack 5 builder is used
 	},
 	"include": ["src"],
 	"exclude": ["src/all.test.tsx"],

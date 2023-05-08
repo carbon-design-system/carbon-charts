@@ -5,11 +5,7 @@
     // Package-specific
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "strict": true
+    "jsx": "preserve"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.vite.json" }],
