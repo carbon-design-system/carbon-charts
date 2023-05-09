@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import frLocaleObject from 'date-fns/locale/fr/index'
+import { fr as localeObject } from 'date-fns/locale'
 import { formatTick, computeTimeIntervalName } from './time-series'
 import { TimeScaleOptions } from '../interfaces'
 import { timeScale } from '../configuration'
@@ -221,7 +221,7 @@ it('should format ticks with timeInterval monthly', () => {
 	expect(timeIntervalCustomFormats).toEqual('monthly')
 	const timeScaleCustomOptions = {
 		...timeScaleDefaultOptions,
-		localeObject: frLocaleObject
+		localeObject
 	}
 	expect(
 		format(timestampsCustomFormats, timeIntervalCustomFormats, timeScaleCustomOptions)

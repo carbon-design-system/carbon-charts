@@ -1,4 +1,4 @@
-import trLocaleObject from 'date-fns/locale/tr/index'
+import { tr as localeObject } from 'date-fns/locale'
 
 export const groupedBarData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 65000 },
@@ -478,7 +478,7 @@ export const simpleBarTurkishLocaleOptions = {
 			scaleType: 'time'
 		}
 	},
-	timeScale: { localeObject: trLocaleObject }
+	timeScale: { localeObject }
 }
 
 // Horizontal simple time series
@@ -507,7 +507,7 @@ export const simpleBarTimeSeriesDenseOptions = {
 			scaleType: 'time'
 		}
 	},
-	timeScale: { localeObject: trLocaleObject },
+	timeScale: { localeObject },
 	bars: { maxWidth: 200 }
 }
 

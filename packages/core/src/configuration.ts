@@ -49,7 +49,7 @@ import {
 	DividerStatus,
 	ChartTheme
 } from './interfaces'
-import enUSLocaleObject from 'date-fns/locale/en-US/index'
+import { enUS as localeObject } from 'date-fns/locale'
 import { circlePack } from './configuration-non-customizable'
 
 /*
@@ -145,7 +145,7 @@ const axes: AxesOptions<AxisOptions> = {
 export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
 	showDayName: false,
-	localeObject: enUSLocaleObject,
+	localeObject,
 	timeIntervalFormats: {
 		'15seconds': { primary: 'MMM d, pp', secondary: 'pp' },
 		minute: { primary: 'MMM d, p', secondary: 'p' },
