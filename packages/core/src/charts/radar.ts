@@ -9,7 +9,7 @@ import { Radar } from '../components/graphs/radar'
 export class RadarChart extends Chart {
 	model = new RadarChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<RadarChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<RadarChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

@@ -12,7 +12,7 @@ import { Bullet, Grid, TwoDimensionalAxes, Skeleton } from '../components/index'
 export class BulletChart extends AxisChart {
 	model = new BulletChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BulletChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BulletChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

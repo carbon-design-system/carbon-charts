@@ -12,7 +12,7 @@ import { WordCloud, Skeleton } from '../components/index'
 export class WordCloudChart extends Chart {
 	model = new WordCloudModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<WorldCloudChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<WorldCloudChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

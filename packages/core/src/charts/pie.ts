@@ -13,7 +13,7 @@ export class PieChart extends Chart {
 	model = new PieChartModel(this.services)
 
 	// TODO - Optimize the use of "extending"
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {
 		super(holder, chartConfigs)
 
 		// TODO - Optimize the use of "extending"

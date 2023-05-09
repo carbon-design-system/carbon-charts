@@ -8,7 +8,7 @@ import { clone, mergeDefaultChartOptions } from '../tools'
 import { Grid, Area, Line, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class AreaChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AreaChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

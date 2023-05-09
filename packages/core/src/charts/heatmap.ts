@@ -28,7 +28,7 @@ import {
 export class HeatmapChart extends AxisChart {
 	model = new HeatmapModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<HeatmapChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<HeatmapChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

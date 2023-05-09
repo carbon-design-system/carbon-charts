@@ -38,8 +38,8 @@ export class ChartClip extends Component {
 		const mainXScale = cartesianScales.getMainXScale()
 		const mainYScale = cartesianScales.getMainYScale()
 
-		const [xScaleStart, xScaleEnd] = mainXScale.range()
-		const [yScaleEnd, yScaleStart] = mainYScale.range()
+		const [xScaleStart, xScaleEnd]: [number, number] = mainXScale.range()
+		const [yScaleEnd, yScaleStart]: [number, number] = mainYScale.range()
 
 		// Get height
 		this.chartClipPath = DOMUtils.appendOrSelect(svg, `clipPath.${this.type}`).attr(

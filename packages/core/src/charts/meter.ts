@@ -18,7 +18,7 @@ import { LayoutComponent, MeterTitle, Spacer } from '../components/index'
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs)
 
 		// use prop meter options or regular meter options

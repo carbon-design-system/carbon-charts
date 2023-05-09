@@ -12,7 +12,7 @@ import { Grid, Boxplot, TwoDimensionalAxes, ZeroLine, Skeleton } from '../compon
 export class BoxplotChart extends AxisChart {
 	model = new BoxplotChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BoxplotChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BoxplotChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

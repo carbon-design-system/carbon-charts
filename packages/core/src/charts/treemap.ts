@@ -11,7 +11,7 @@ import { Treemap } from '../components/index'
 export class TreemapChart extends Chart {
 	model = new TreemapChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<TreemapChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<TreemapChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

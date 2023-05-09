@@ -16,7 +16,7 @@ import {
 } from '../components/index'
 
 export class LineChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<LineChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<LineChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

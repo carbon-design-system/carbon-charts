@@ -38,7 +38,7 @@ export class AxisChart extends Chart {
 	})
 	model: ChartModelCartesian = new ChartModelCartesian(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AxisChartOptions>) {
 		super(holder, chartConfigs)
 	}
 

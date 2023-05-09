@@ -9,7 +9,7 @@ import { Skeletons } from '../interfaces/enums'
 import { Grid, Ruler, Scatter, Lollipop, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class LollipopChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<LollipopChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<LollipopChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

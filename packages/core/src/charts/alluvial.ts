@@ -11,7 +11,7 @@ import { Alluvial } from '../components/index'
 export class AlluvialChart extends Chart {
 	model = new AlluvialChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<AlluvialChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AlluvialChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

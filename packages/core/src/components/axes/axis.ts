@@ -64,7 +64,7 @@ export class Axis extends Component {
 		}
 
 		// Identify the corresponding d3 axis function
-		let axisFunction
+		let axisFunction: any
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
 				axisFunction = axisLeft
@@ -145,7 +145,7 @@ export class Axis extends Component {
 		const axis = axisFunction(scale).tickSizeOuter(0)
 
 		if (scale.ticks) {
-			let numberOfTicks
+			let numberOfTicks: number
 
 			if (isNumberOfTicksProvided) {
 				numberOfTicks = numberOfTicksProvided

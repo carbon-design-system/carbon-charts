@@ -11,7 +11,7 @@ import { Tree } from '../components/index'
 export class TreeChart extends Chart {
 	model = new TreeChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<TreeChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<TreeChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

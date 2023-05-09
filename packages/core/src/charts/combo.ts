@@ -33,7 +33,7 @@ const graphComponentsMap = {
 }
 
 export class ComboChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ComboChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ComboChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

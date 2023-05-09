@@ -11,7 +11,7 @@ import { CirclePack } from '../components/index'
 export class CirclePackChart extends Chart {
 	model = new CirclePackChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<CirclePackChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<CirclePackChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

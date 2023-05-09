@@ -11,7 +11,7 @@ import { Grid, Histogram, BinnedRuler, TwoDimensionalAxes } from '../components/
 export class HistogramChart extends AxisChart {
 	model = new ChartModelBinned(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<HistogramChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<HistogramChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

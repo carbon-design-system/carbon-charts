@@ -9,7 +9,7 @@ import { Skeletons } from '../interfaces/enums'
 import { Grid, SimpleBar, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components/index'
 
 export class SimpleBarChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BarChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

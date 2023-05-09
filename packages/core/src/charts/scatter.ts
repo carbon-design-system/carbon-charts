@@ -9,7 +9,7 @@ import { Skeletons } from '../interfaces/enums'
 import { Grid, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class ScatterChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

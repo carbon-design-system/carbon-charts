@@ -9,7 +9,7 @@ import { Skeletons } from '../interfaces/enums'
 import { Grid, Ruler, Bubble, TwoDimensionalAxes, Skeleton } from '../components/index'
 
 export class BubbleChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<BubbleChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BubbleChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

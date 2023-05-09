@@ -41,12 +41,12 @@ export class Chart {
 	model: ChartModel = new ChartModel(this.services)
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Allow for subclasses to override the constructor with additional parameters or initialization logic without breaking the API contract of the Chart class
 	}
 
 	// Contains the code that uses properties that are overridable by the super-class
-	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
+	init(holder: HTMLDivElement, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
 		this.model.set({ holder }, { skipUpdate: true })
 
@@ -86,7 +86,7 @@ export class Chart {
 		}
 
 		// Update all services
-		Object.keys(this.services).forEach((serviceName) => {
+		Object.keys(this.services).forEach((serviceName: string) => {
 			const serviceObj = this.services[serviceName]
 			serviceObj.update()
 		})

@@ -16,7 +16,7 @@ import {
 } from '../components/index'
 
 export class StackedAreaChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AreaChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

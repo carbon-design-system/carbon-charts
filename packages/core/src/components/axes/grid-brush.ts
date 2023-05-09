@@ -141,7 +141,7 @@ export class ChartBrush extends Component {
 				brushArea.call(brush)
 			}
 
-			const zoomRatio = this.services.zoom.getZoomRatio()
+			const zoomRatio: number = this.services.zoom.getZoomRatio()
 			backdrop.on('click', function (event: MouseEvent) {
 				if (event.shiftKey) {
 					const holder = this.services.domUtils.getHolder()

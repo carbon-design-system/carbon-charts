@@ -10,7 +10,7 @@ import { Gauge } from '../components/index'
 
 export class GaugeChart extends Chart {
 	model = new GaugeChartModel(this.services)
-	constructor(holder: Element, chartConfigs: ChartConfig<GaugeChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<GaugeChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart

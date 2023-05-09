@@ -9,7 +9,7 @@ import { Skeletons } from '../interfaces/enums'
 import { Donut, Skeleton } from '../components/index'
 
 export class DonutChart extends PieChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<PieChartOptions>) {
 		super(holder, chartConfigs, true)
 
 		// Merge the default options for this chart
