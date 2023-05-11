@@ -29,9 +29,7 @@ export {
 		MarkerSquare,
 		MarkerTee
 	],
-	imports: [
-		CommonModule
-	],
+	imports: [CommonModule],
 	exports: [
 		Marker,
 		MarkerArrowLeft,

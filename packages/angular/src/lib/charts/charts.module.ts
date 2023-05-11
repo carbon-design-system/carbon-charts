@@ -57,9 +57,7 @@ import {
 		CirclePackChart,
 		WordCloudChart
 	],
-	imports: [
-		CommonModule
-	],
+	imports: [CommonModule],
 	exports: [
 		BaseChart,
 		AlluvialChart,
