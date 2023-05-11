@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { BubbleChart as BubbleChartCore } from '@carbon/charts'
-	import { BubbleChart} from '../../types'
+	import { BubbleChart } from '../../types'
 	import { bubbleDemos } from '@carbon/charts/demo'
 
 	const { bubbleDoubleLinearOptions: options, bubbleDoubleLinearData: data } = bubbleDemos
