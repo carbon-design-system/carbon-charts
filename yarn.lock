@@ -2033,9 +2033,10 @@ __metadata:
     prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
-    rxjs: ^7.8.1
+    rxjs: ~7.8.1
     storybook: ^7.1.0-0
     style-loader: 3.3.2
+    tslib: ^2.5.0
     typescript: ^5.0.4
     vite: ^4.3.5
     vite-plugin-dts: ^2.3.0
@@ -2203,7 +2204,7 @@ __metadata:
     "@carbon/colors": ^11.14.0
     "@carbon/import-once": ^10.7.0
     "@carbon/layout": ^11.13.0
-    "@carbon/styles": ^1.28.0
+    "@carbon/styles": ^1.29.0
     "@carbon/telemetry": ~0.1.0
     "@carbon/themes": ^11.18.0
     "@carbon/utils-position": ^1.1.4
@@ -2339,9 +2340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.28.0":
-  version: 1.28.0
-  resolution: "@carbon/styles@npm:1.28.0"
+"@carbon/styles@npm:^1.29.0":
+  version: 1.29.0
+  resolution: "@carbon/styles@npm:1.29.0"
   dependencies:
     "@carbon/colors": ^11.14.0
     "@carbon/feature-flags": ^0.13.0
@@ -2353,7 +2354,7 @@ __metadata:
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
-  checksum: f145673f6a0c81561ac51e94e42de7f383ce95ba5f6990f862a471e957bd4b58c4ecd682230b6804200ba5f0be2eeb239dc7a7d92d66f3108eaf05b6dcf3b3c0
+  checksum: e2d9586fbdafca78ceba022bba88adc0e9815334b056f001f576e6a639885fbb5e9bd91e91fe9de552feb5cab785f1da57909e960d65b970f4db6feae8db6d6f
   languageName: node
   linkType: hard
 
@@ -20053,7 +20054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.8.1, rxjs@npm:^7.5.5, rxjs@npm:^7.5.6, rxjs@npm:^7.8.0, rxjs@npm:^7.8.1":
+"rxjs@npm:7.8.1, rxjs@npm:^7.5.5, rxjs@npm:^7.5.6, rxjs@npm:^7.8.0, rxjs@npm:~7.8.1":
   version: 7.8.1
   resolution: "rxjs@npm:7.8.1"
   dependencies:
@@ -22091,21 +22092,21 @@ __metadata:
 
 "typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.3#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"
+  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bb309d320c59a26565fb3793dba550576ab861018ff3fd1b7fccabbe46ae4a35546bc45f342c0a0b6f265c801ccdf64ffd68f548f117ceb7f0eac4b805cd52a9
+  checksum: d26b6ba97b6d163c55dbdffd9bbb4c211667ebebc743accfeb2c8c0154aace7afd097b51165a72a5bad2cf65a4612259344ff60f8e642362aa1695c760d303ac
   languageName: node
   linkType: hard
 

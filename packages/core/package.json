@@ -82,7 +82,7 @@
 		"@carbon/colors": "^11.14.0",
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.13.0",
-		"@carbon/styles": "^1.28.0",
+		"@carbon/styles": "^1.29.0",
 		"@carbon/telemetry": "~0.1.0",
 		"@carbon/themes": "^11.18.0",
 		"@carbon/utils-position": "^1.1.4",
