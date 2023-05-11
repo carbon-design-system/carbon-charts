@@ -14,7 +14,7 @@
 		"start": "yarn storybook",
 		"test": "svelte-check --workspace=tests",
 		"lint": "prettier --plugin-search-dir . --check . && eslint . --ignore-path ../../.eslintignore",
-		"format": "prettier --plugin-search-dir . --write .  --ignore-path ../../.eslintignore",
+		"format": "prettier --plugin-search-dir . --write . --ignore-path ../../.eslintignore",
 		"clean": "rm -rf dist demo/bundle",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"

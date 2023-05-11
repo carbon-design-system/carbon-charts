@@ -1,5 +1,4 @@
-import { StackedBarChart as StackedBarChartCore } from '@carbon/charts'
-import type { StackedBarChartOptions } from '@carbon/charts/interfaces'
+import { StackedBarChart as StackedBarChartCore, type StackedBarChartOptions } from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class BarChartStacked extends BaseChart<

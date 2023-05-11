@@ -1,5 +1,4 @@
-import { BulletChart as BulletChartCore } from '@carbon/charts'
-import type { BulletChartOptions } from '@carbon/charts/interfaces'
+import { BulletChart as BulletChartCore, type BulletChartOptions } from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class BulletChart extends BaseChart<BulletChartCore, BulletChartOptions> {}

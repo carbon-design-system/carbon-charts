@@ -1,5 +1,4 @@
-import { ScatterChart as ScatterChartCore } from '@carbon/charts'
-import type { ScatterChartOptions } from '@carbon/charts/interfaces'
+import { ScatterChart as ScatterChartCore, type ScatterChartOptions } from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class ScatterChart extends BaseChart<ScatterChartCore, ScatterChartOptions> {}

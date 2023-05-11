@@ -1,5 +1,4 @@
-import { TreeChart as TreeChartCore } from '@carbon/charts'
-import type { TreeChartOptions } from '@carbon/charts/interfaces'
+import { TreeChart as TreeChartCore, type TreeChartOptions } from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 interface TreeNode {

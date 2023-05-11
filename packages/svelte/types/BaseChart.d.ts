@@ -1,14 +1,14 @@
 import type { SvelteComponentTyped } from 'svelte'
 import { HTMLAttributes } from 'svelte/elements'
-import { Chart as ChartCore, type interfaces } from '@carbon/charts/chart'
+import type { BaseChartOptions, Chart as ChartCore, ChartTabularData, ChartTheme } from '@carbon/charts'
 
 export interface BaseChartProps<
 	Chart = ChartCore,
-	ChartOptions = interfaces.BaseChartOptions,
-	ChartData = interfaces.ChartTabularData
+	ChartOptions = BaseChartOptions,
+	ChartData = ChartTabularData
 > extends HTMLAttributes<HTMLElementTagNameMap['div']> {
 	/**
-	 * Provide a Carbon chart class to instantiate
+	 * Provide a Carbon Chart class to instantiate
 	 * @default undefined
 	 */
 	Chart?: Chart
@@ -35,7 +35,7 @@ export interface BaseChartProps<
 	 * Specify the Carbon theme
 	 * @default "white"
 	 */
-	theme?: 'white' | 'g10' | 'g90' | 'g100'
+	theme?: ChartTheme // 'white' | 'g10' | 'g90' | 'g100'
 
 	/**
 	 * Specify the id for the chart holder element
@@ -50,19 +50,15 @@ export interface BaseChartProps<
 	ref?: null | HTMLDivElement
 }
 
-export default class BaseChart<
-	Chart = ChartCore,
-	ChartOptions = interfaces.BaseChartOptions,
-	ChartData = interfaces.ChartTabularData
-> extends SvelteComponentTyped<
-	BaseChartProps<Chart, ChartOptions, ChartData>,
+export default class BaseChart extends SvelteComponentTyped<
+	BaseChartProps,
 	{
 		load: CustomEvent<Chart>
 		update: CustomEvent<{
-			data: interfaces.ChartTabularData
+			data: ChartTabularData
 			options: ChartOptions
 		}>
 		destroy: CustomEvent<any>
 	},
-	{}
+	never
 > {}
