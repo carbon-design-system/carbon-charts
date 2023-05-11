@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { StackedBarChart as StackedBarChartCore } from '@carbon/charts'
 	import { barDemos } from '@carbon/charts/demo'
-	import { BarChartStacked } from '../../types'
+	import { BarChartStacked } from '../../dist'
 
 	const { stackedBarOptions: options, stackedBarData: data } = barDemos
 	let chart: StackedBarChartCore | null = null

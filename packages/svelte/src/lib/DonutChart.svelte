@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { DonutChart, type DonutChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: DonutChart
+	export let chart: DonutChartCore
 	export let options: DonutChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={DonutChart}
+	Chart={DonutChartCore}
 	{options}
 	{data}
 	bind:ref

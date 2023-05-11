@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ComboChart as ComboChartChartCore } from '@carbon/charts'
-	import { ComboChart } from '../../types'
+	import { ComboChart } from '../../dist'
 	import { comboDemos } from '@carbon/charts/demo'
 
 	const { comboSimpleOptions: options, comboSimpleData: data } = comboDemos

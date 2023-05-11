@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { AlluvialChart as AlluvialChartCore } from '@carbon/charts'
 	import { alluvialDemos } from '@carbon/charts/demo'
-	import { AlluvialChart } from '../../types'
+	import { AlluvialChart } from '../../dist'
 
 	const { alluvialSimpleOptions: options, alluvialSimpleData: data } = alluvialDemos
 	let chart: AlluvialChartCore | null = null

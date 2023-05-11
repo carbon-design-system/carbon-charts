@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { LineChart, type LineChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: LineChart
+	export let chart: LineChartCore
 	export let options: LineChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={LineChart}
+	Chart={LineChartCore}
 	{options}
 	{data}
 	bind:ref

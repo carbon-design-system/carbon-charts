@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { HistogramChart, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: HistogramChart
+	export let chart: HistogramChartCore
 	export let options: HistogramChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={HistogramChart}
+	Chart={HistogramChartCore}
 	{options}
 	{data}
 	bind:ref

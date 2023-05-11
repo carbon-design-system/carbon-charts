@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { BulletChart, type BulletChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: BulletChart
+	export let chart: BulletChartCore
 	export let options: BulletChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={BulletChart}
+	Chart={BulletChartCore}
 	{options}
 	{data}
 	bind:ref

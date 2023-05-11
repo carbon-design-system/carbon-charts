@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BoxplotChart as BoxplotChartCore } from '@carbon/charts'
 	import { boxplotDemos } from '@carbon/charts/demo'
-	import { BoxplotChart } from '../../types'
+	import { BoxplotChart } from '../../dist'
 
 	const { simpleBoxplotOptions: options, simpleBoxplotData: data } = boxplotDemos
 	let chart: BoxplotChartCore | null = null

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { TreeChart, type TreeChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { TreeChart as TreeChartCore, type TreeChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: TreeChart
+	export let chart: TreeChartCore
 	export let options: TreeChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={TreeChart}
+	Chart={TreeChartCore}
 	{options}
 	{data}
 	bind:ref

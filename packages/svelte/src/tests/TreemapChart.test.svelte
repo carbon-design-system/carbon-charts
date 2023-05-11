@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TreemapChart as TreemapChartCore } from '@carbon/charts'
-	import { TreemapChart } from '../../types'
+	import { TreemapChart } from '../../dist'
 	import { treemapDemos } from '@carbon/charts/demo'
 
 	const { treemapOptions: options, treemapData: data } = treemapDemos

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { WordCloudChart as WordCloudChartCore } from '@carbon/charts'
 	import { wordCloudDemos } from '@carbon/charts/demo'
-	import { WordCloudChart } from '../../types'
+	import { WordCloudChart } from '../../dist'
 
 	const { wordCloudOptions: options, wordCloudData: data } = wordCloudDemos
 	let chart: WordCloudChartCore | null = null

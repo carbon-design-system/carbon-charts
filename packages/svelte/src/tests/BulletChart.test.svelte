@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { BulletChart as BulletChartCore } from '@carbon/charts'
-	import { BulletChart } from '../../types'
+	import { BulletChart } from '../../dist'
 	import { bulletDemos } from '@carbon/charts/demo'
 
 	const { basicBulletOptions: options, basicBulletData: data } = bulletDemos

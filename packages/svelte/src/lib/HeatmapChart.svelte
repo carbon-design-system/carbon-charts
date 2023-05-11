@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { HeatmapChart, type HeatmapChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: HeatmapChart
+	export let chart: HeatmapChartCore
 	export let options: HeatmapChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={HeatmapChart}
+	Chart={HeatmapChartCore}
 	{options}
 	{data}
 	bind:ref

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LollipopChart as LollipopChartCore } from '@carbon/charts'
 	import { lollipopDemos } from '@carbon/charts/demo'
-	import LollipopChart from '../lib/LollipopChart.svelte'
+	import LollipopChart from '../../dist'
 
 	const { lollipopDiscreteOptions: options, lollipopDiscreteData: data } = lollipopDemos
 	let chart: LollipopChartCore | null = null

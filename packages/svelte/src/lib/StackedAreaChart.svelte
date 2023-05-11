@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {
-		StackedAreaChart,
+		StackedAreaChart as StackedAreaChartCore,
 		type StackedAreaChartOptions,
 		type ChartTabularData
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: StackedAreaChart
+	export let chart: StackedAreaChartCore
 	export let options: StackedAreaChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -14,7 +14,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={StackedAreaChart}
+	Chart={StackedAreaChartCore}
 	{options}
 	{data}
 	bind:ref

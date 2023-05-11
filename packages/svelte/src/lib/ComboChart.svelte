@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ComboChart, type ComboChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { ComboChart as ComboChartCore, type ComboChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: ComboChart
+	export let chart: ComboChartCore
 	export let options: ComboChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={ComboChart}
+	Chart={ComboChartCore}
 	{options}
 	{data}
 	bind:ref

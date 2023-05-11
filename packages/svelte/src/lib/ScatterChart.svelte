@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ScatterChart, type ScatterChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { ScatterChart as ScatterChartCore, type ScatterChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: ScatterChart
+	export let chart: ScatterChartCore
 	export let options: ScatterChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={ScatterChart}
+	Chart={ScatterChartCore}
 	{options}
 	{data}
 	bind:ref

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { GroupedBarChart, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: GroupedBarChart
+	export let chart: GroupedBarChartCore
 	export let options: BarChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={GroupedBarChart}
+	Chart={GroupedBarChartCore}
 	{options}
 	{data}
 	bind:ref

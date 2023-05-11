@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { GaugeChart, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: GaugeChart
+	export let chart: GaugeChartCore
 	export let options: GaugeChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={GaugeChart}
+	Chart={GaugeChartCore}
 	{options}
 	{data}
 	bind:ref

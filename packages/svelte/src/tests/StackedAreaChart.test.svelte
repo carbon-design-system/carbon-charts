@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { StackedAreaChart as StackedAreaChartCore } from '@carbon/charts'
 	import { areaDemos } from '@carbon/charts/demo'
-	import { StackedAreaChart } from '../../types'
+	import { StackedAreaChart } from '../../dist'
 
 	const { stackedAreaTimeSeriesOptions: options, stackedAreaTimeSeriesData: data } = areaDemos
 	let chart: StackedAreaChartCore | null = null

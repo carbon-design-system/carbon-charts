@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { PieChart, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: PieChart
+	export let chart: PieChartCore
 	export let options: PieChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={PieChart}
+	Chart={PieChartCore}
 	{options}
 	{data}
 	bind:ref

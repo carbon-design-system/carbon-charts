@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {
-		WordCloudChart,
+		WordCloudChart as WordCloudChartCore,
 		type WorldCloudChartOptions,
 		type ChartTabularData
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: WordCloudChart
+	export let chart: WordCloudChartCore
 	export let options: WorldCloudChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -14,7 +14,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={WordCloudChart}
+	Chart={WordCloudChartCore}
 	{options}
 	{data}
 	bind:ref

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {
-		CirclePackChart,
+		CirclePackChart as CirclePackChartCore,
 		type CirclePackChartOptions,
 		type ChartTabularData
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: CirclePackChart
+	export let chart: CirclePackChartCore
 	export let options: CirclePackChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -14,7 +14,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={CirclePackChart}
+	Chart={CirclePackChartCore}
 	{options}
 	{data}
 	bind:ref

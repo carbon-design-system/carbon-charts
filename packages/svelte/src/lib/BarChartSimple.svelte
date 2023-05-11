@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { SimpleBarChart, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
-	export let chart: SimpleBarChart
+	export let chart: SimpleBarChartCore
 	export let options: BarChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -9,7 +9,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={SimpleBarChart}
+	Chart={SimpleBarChartCore}
 	{options}
 	{data}
 	bind:ref

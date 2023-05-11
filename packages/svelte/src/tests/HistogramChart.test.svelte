@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HistogramChart as HistogramChartCore } from '@carbon/charts'
-	import { HistogramChart } from '../../types'
+	import { HistogramChart } from '../../dist'
 	import { histogramDemos } from '@carbon/charts/demo'
 
 	const { histogramContinueWithBinsOptions: options, histogramContinueData: data } = histogramDemos

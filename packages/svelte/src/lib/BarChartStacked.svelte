@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { StackedBarChart, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { StackedBarChart as StackedBarChartCore, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
-	export let chart: StackedBarChart
+	export let chart: StackedBarChartCore
 	export let options: BarChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -9,7 +9,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={StackedBarChart}
+	Chart={StackedBarChartCore}
 	{options}
 	{data}
 	bind:ref

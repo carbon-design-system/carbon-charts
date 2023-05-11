@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { BoxplotChart, type BoxplotChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: BoxplotChart
+	export let chart: BoxplotChartCore
 	export let options: BoxplotChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={BoxplotChart}
+	Chart={BoxplotChartCore}
 	{options}
 	{data}
 	bind:ref

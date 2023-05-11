@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { RadarChart, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: RadarChart
+	export let chart: RadarChartCore
 	export let options: RadarChartOptions
 	export let data: ChartTabularData
 	export let ref: HTMLDivElement
@@ -10,7 +10,7 @@
 
 <BaseChart
 	{...$$restProps}
-	Chart={RadarChart}
+	Chart={RadarChartCore}
 	{options}
 	{data}
 	bind:ref

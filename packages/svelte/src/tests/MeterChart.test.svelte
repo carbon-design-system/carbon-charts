@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { MeterChart as MeterChartCore } from '@carbon/charts'
 	import { meterDemos } from '@carbon/charts/demo'
-	import { MeterChart } from '../../types'
+	import { MeterChart } from '../../dist'
 
 	const { meterOptionsCustomColor: options, meterData: data } = meterDemos
 	let chart: MeterChartCore | null = null

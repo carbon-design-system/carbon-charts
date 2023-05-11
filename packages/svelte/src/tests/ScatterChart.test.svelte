@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ScatterChart as ScatterChartCore } from '@carbon/charts'
 	import { scatterDemos } from '@carbon/charts/demo'
-	import { ScatterChart } from '../../types'
+	import { ScatterChart } from '../../dist'
 
 	const { scatterDiscreteOptions: options, scatterDiscreteData: data } = scatterDemos
 	let chart: ScatterChartCore | null = null

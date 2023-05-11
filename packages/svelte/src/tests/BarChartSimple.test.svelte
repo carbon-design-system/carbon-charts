@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SimpleBarChart as SimpleBarChartCore } from '@carbon/charts'
 	import { barDemos } from '@carbon/charts/demo'
-	import { BarChartSimple } from '../../types'
+	import { BarChartSimple } from '../../dist'
 
 	const { simpleBarOptions: options, simpleBarData: data } = barDemos
 	let chart: SimpleBarChartCore | null = null

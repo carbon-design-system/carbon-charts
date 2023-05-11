@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GaugeChart as GaugeChartCore } from '@carbon/charts'
 	import { gaugeDemos } from '@carbon/charts/demo'
-	import { GaugeChart } from '../../types'
+	import { GaugeChart } from '../../dist'
 
 	const { gaugeOptionsSemi: options, gaugeData: data } = gaugeDemos
 	let chart: GaugeChartCore | null = null

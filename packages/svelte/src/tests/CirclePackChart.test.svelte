@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CirclePackChart as CirclePackChartCore } from '@carbon/charts'
-	import { CirclePackChart } from '../../types'
+	import { CirclePackChart } from '../../dist'
 	import { circlePackDemos } from '@carbon/charts/demo'
 
 	const { circlePackSingleOptions: options, circlePackThreeLevelData: data } = circlePackDemos
