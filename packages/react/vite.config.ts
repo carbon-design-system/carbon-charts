@@ -24,10 +24,7 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		disabled: true,
-		include: [
-			'@carbon/charts',
-			'@carbon/icons-react'
-		],
+		include: ['@carbon/charts', '@carbon/icons-react'],
 		exclude: [
 			// Will cause errors when running storybook if in the include list
 			'@carbon/telemetry'
@@ -38,8 +35,5 @@ export default defineConfig({
 			// '@storybook/react-dom-shim': '@storybook/react-dom-shim/dist/react-18'
 		}
 	},
-	plugins: [
-		react(),
-		dts()
-	]
+	plugins: [react(), dts()]
 })

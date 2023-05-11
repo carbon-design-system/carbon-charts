@@ -236,8 +236,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- **react:** add react 18 as peerDep, update componentDidMount logic for
-  strictmode
+- **react:** add react 18 as peerDep, update componentDidMount logic for strictmode
   ([#1364](https://github.com/carbon-design-system/carbon-charts/issues/1364))
   ([9af452f](https://github.com/carbon-design-system/carbon-charts/commit/9af452fa0ae63087ec09556fa34cba8c23bc4689))
 
@@ -352,8 +351,7 @@ All notable changes to this project will be documented in this file. See
 - **react diagrams:** add support for applying a custom class to the outer node
   ([#1222](https://github.com/carbon-design-system/carbon-charts/issues/1222))
   ([c7e8606](https://github.com/carbon-design-system/carbon-charts/commit/c7e8606e860702bf80ebfb9045a5965fcd2fa0ff)),
-  closes
-  [#1221](https://github.com/carbon-design-system/carbon-charts/issues/1221)
+  closes [#1221](https://github.com/carbon-design-system/carbon-charts/issues/1221)
 
 ## [0.52.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.52.3...v0.52.4) (2021-12-01)
 
@@ -478,8 +476,7 @@ All notable changes to this project will be documented in this file. See
 - **core:** create alluvial chart
   ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132))
   ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)),
-  closes
-  [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+  closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
 
 ## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
 
@@ -988,8 +985,7 @@ All notable changes to this project will be documented in this file. See
 - **types:** add peak, status properties to MeterChartOptions interface
   ([#924](https://github.com/carbon-design-system/carbon-charts/issues/924))
   ([ffff193](https://github.com/carbon-design-system/carbon-charts/commit/ffff19380e391fc603600e2630f7bb583a6a335b)),
-  closes
-  [#920](https://github.com/carbon-design-system/carbon-charts/issues/920)
+  closes [#920](https://github.com/carbon-design-system/carbon-charts/issues/920)
 
 ## [0.41.22](https://github.com/carbon-design-system/carbon-charts/compare/v0.41.21...v0.41.22) (2021-01-15)
 
@@ -1602,9 +1598,8 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-- **core, react, angular, vue:** default width & height to 100%, and call
-  setOptions on option change
-  ([db251b4](https://github.com/carbon-design-system/carbon-charts/commit/db251b4))
+- **core, react, angular, vue:** default width & height to 100%, and call setOptions on option
+  change ([db251b4](https://github.com/carbon-design-system/carbon-charts/commit/db251b4))
 
 ## [0.16.23](https://github.com/carbon-design-system/carbon-charts/compare/v0.16.22...v0.16.23) (2019-10-25)
 
@@ -1765,8 +1760,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-- **react:** handle data updates from state, and fix errors with width/height
-  prop
+- **react:** handle data updates from state, and fix errors with width/height prop
   ([a00294f](https://github.com/carbon-design-system/carbon-charts/commit/a00294f))
 
 ## [0.12.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.12.1...v0.12.2) (2019-06-07)
@@ -2099,8 +2093,7 @@ All notable changes to this project will be documented in this file. See
 - **core react angular:** carbon styling
   ([5064f63](https://github.com/carbon-design-system/carbon-charts/commit/5064f63))
 - **react wrappers storybook:** full react wrappers
-  ([4a456ee](https://github.com/carbon-design-system/carbon-charts/commit/4a456ee)),
-  closes
+  ([4a456ee](https://github.com/carbon-design-system/carbon-charts/commit/4a456ee)), closes
   [#117](https://github.com/carbon-design-system/carbon-charts/issues/117)
   [#115](https://github.com/carbon-design-system/carbon-charts/issues/115)
   [#120](https://github.com/carbon-design-system/carbon-charts/issues/120)

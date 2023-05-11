@@ -31,5 +31,5 @@ export default class BaseChart<Options = BaseChartOptions> extends React.Compone
 
 	componentWillUnmount() {
 		this.chart?.destroy()
-  }
+	}
 }

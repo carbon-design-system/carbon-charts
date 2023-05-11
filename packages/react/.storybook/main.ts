@@ -2,10 +2,7 @@
 import type { StorybookConfig } from '@storybook/react-webpack5'
 
 const config: StorybookConfig = {
-	stories: [
-		'../src/stories/**/*.mdx',
-		'../src/stories/**/*.stories.tsx'
-	],
+	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.tsx'],
 	staticDirs: ['../../core/.storybook/assets'],
 
 	// viteFinal: (config) => {

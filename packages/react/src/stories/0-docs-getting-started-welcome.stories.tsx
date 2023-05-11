@@ -62,4 +62,6 @@ introStories.add(
 				</div>
 			</div>
 		</div>
-	), noControls)
+	),
+	noControls
+)
