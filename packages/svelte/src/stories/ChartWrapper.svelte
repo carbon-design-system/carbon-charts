@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte'
-	import type { Demo } from '../../types/Demo'
+	import type { Demo } from '@carbon/charts/demo'
 
 	export let DemoComponent: ComponentType
 	export let chartType: string
