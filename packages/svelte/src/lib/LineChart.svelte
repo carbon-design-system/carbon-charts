@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		LineChart as LineChartCore,
+		type LineChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: LineChartCore

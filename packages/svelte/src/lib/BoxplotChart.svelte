@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		BoxplotChart as BoxplotChartCore,
+		type BoxplotChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: BoxplotChartCore

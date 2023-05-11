@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		SimpleBarChart as SimpleBarChartCore,
+		type BarChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 	export let chart: SimpleBarChartCore
 	export let options: BarChartOptions

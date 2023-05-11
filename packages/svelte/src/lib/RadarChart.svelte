@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { RadarChart as RadarChartCore, type RadarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		RadarChart as RadarChartCore,
+		type RadarChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: RadarChartCore

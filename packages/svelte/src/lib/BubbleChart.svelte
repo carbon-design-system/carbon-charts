@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		BubbleChart as BubbleChartCore,
+		type BubbleChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: BubbleChartCore

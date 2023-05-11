@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		AlluvialChart as AlluvialChartCore,
+		type AlluvialChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: AlluvialChartCore

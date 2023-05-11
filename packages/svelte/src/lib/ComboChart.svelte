@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { ComboChart as ComboChartCore, type ComboChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		ComboChart as ComboChartCore,
+		type ComboChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: ComboChartCore

@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { ScatterChart as ScatterChartCore, type ScatterChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		ScatterChart as ScatterChartCore,
+		type ScatterChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: ScatterChartCore

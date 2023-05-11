@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { AreaChart as AreaChartCore, type AreaChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		AreaChart as AreaChartCore,
+		type AreaChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: AreaChartCore

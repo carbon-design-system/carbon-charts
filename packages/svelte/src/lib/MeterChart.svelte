@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { MeterChart as MeterChartCore, type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		MeterChart as MeterChartCore,
+		type MeterChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: MeterChartCore

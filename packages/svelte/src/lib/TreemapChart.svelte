@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { TreemapChart as TreemapChartCore, type TreemapChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		TreemapChart as TreemapChartCore,
+		type TreemapChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: TreemapChartCore

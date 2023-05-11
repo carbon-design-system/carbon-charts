@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		GaugeChart as GaugeChartCore,
+		type GaugeChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: GaugeChartCore

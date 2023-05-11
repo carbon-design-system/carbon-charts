@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { LollipopChart as LollipopChartCore, type LollipopChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		LollipopChart as LollipopChartCore,
+		type LollipopChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: LollipopChartCore

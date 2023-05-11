@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		PieChart as PieChartCore,
+		type PieChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: PieChartCore

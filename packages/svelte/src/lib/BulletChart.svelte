@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { BulletChart as BulletChartCore, type BulletChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		BulletChart as BulletChartCore,
+		type BulletChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: BulletChartCore

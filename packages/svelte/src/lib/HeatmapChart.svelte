@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		HeatmapChart as HeatmapChartCore,
+		type HeatmapChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: HeatmapChartCore

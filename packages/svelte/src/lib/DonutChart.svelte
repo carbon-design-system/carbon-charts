@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		DonutChart as DonutChartCore,
+		type DonutChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: DonutChartCore

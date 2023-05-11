@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions, type ChartTabularData } from '@carbon/charts'
+	import {
+		GroupedBarChart as GroupedBarChartCore,
+		type BarChartOptions,
+		type ChartTabularData
+	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
 	export let chart: GroupedBarChartCore
