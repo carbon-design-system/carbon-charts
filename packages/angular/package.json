@@ -20,10 +20,10 @@
     "demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
     "build:demo": "yarn demo:mdx && ng run charts-angular:build-storybook",
     "build": "yarn build:package && yarn build:demo",
-    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
     "storybook": "ng run charts-angular:storybook",
     "start": "yarn storybook",
-    "format": "prettier --write src/ --ignore-path ../../.gitignore",
+    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
+    "format": "prettier --write src/ --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle"
   },
   "peerDependencies": {
@@ -35,7 +35,8 @@
     "@angular/core": "^16.0.1",
     "@carbon/charts": "workspace:*",
     "@carbon/icons-angular": "^11.2.2",
-    "@carbon/telemetry": "~0.1.0"
+    "@carbon/telemetry": "~0.1.0",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.1",
@@ -48,7 +49,7 @@
     "@angular/platform-browser-dynamic": "^16.0.1",
     "@babel/core": "^7.21.8",
     "@stackblitz/sdk": "^1.9.0",
-    "@storybook/addon-essentials": "^7.1.0-0",
+    "@storybook/addon-essentials": "^7.0.10",
     "@storybook/addon-interactions": "^7.1.0-0",
     "@storybook/addon-links": "^7.1.0-0",
     "@storybook/angular": "^7.1.0-0",
@@ -64,7 +65,7 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rxjs": "^7.8.1",
+    "rxjs": "~7.8.1",
     "storybook": "^7.1.0-0",
     "style-loader": "3.3.2",
     "typescript": "^5.0.4",

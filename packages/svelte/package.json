@@ -13,7 +13,7 @@
 		"storybook": "storybook dev -p 9006",
 		"start": "yarn storybook",
 		"test": "svelte-check --workspace=tests",
-		"lint": "prettier --plugin-search-dir . --check . && eslint . --ignore-path ../../.gitignore",
+		"lint": "prettier --plugin-search-dir . --check . && eslint . --ignore-path ../../.eslintignore",
 		"format": "prettier --plugin-search-dir . --write .  --ignore-path ../../.eslintignore",
 		"clean": "rm -rf dist demo/bundle",
 		"preview": "vite preview",

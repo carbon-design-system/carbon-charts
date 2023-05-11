@@ -32,10 +32,10 @@
     "build:package": "vite build && yarn postbundle",
     "build:demo": "storybook build -o demo/bundle --quiet",
     "build": "yarn build:package && yarn build:demo",
-    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.gitignore",
     "storybook": "storybook dev -p 9006",
     "start": "yarn storybook",
-    "format": "prettier --write src/ --ignore-path ../../.gitignore",
+    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
+    "format": "prettier --write src/ --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
@@ -56,7 +56,7 @@
     "@storybook/vue": "^7.0.10",
     "@storybook/vue-vite": "^7.0.10",
     "@types/node": "^20.1.2",
-    "@vitejs/plugin-vue": "^4.2.1",
+    "@vitejs/plugin-vue": "^4.2.2",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.3.2",

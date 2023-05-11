@@ -37,7 +37,7 @@
     "build": "yarn build:package && yarn build:demo",
     "storybook": "storybook dev -p 9006",
     "start": "yarn storybook",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.gitignore",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
     "format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle"
   },
