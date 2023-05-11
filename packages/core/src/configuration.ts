@@ -206,7 +206,7 @@ const chart: BaseChartOptions = {
 						{
 							type: ToolbarControlTypes.MAKE_FULLSCREEN
 						}
-					]
+				  ]
 				: []),
 			{
 				type: ToolbarControlTypes.EXPORT_CSV
@@ -449,7 +449,7 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 		deltaFontSize: (radius: number) => radius / 8,
 		valueFontSize: (radius: number) => radius / 2.5,
 		numberFormatter: (value: number) =>
-		Number(value.toFixed(2)) % 1 !== 0
+			Number(value.toFixed(2)) % 1 !== 0
 				? value.toFixed(2).toLocaleString()
 				: value.toFixed().toLocaleString(),
 		alignment: Alignments.LEFT

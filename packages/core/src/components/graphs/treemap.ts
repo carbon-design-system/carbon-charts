@@ -345,7 +345,9 @@ export class Treemap extends Component {
 					name: 'legend-hover-treemap'
 				})
 			)
-			.attr('opacity', (d: any) => (d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3))
+			.attr('opacity', (d: any) =>
+				d.parent.data.name === hoveredElement.datum()['name'] ? 1 : 0.3
+			)
 	}
 
 	handleLegendMouseOut = () => {

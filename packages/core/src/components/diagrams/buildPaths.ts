@@ -65,7 +65,14 @@ const buildElbowPathString = (source: Coordinates, target: Coordinates, percent 
  * @param cpy2 - Y coordinate for the second control point
  * @return The path string
  */
-const buildBezierPathString = (source: Coordinates, target: Coordinates, cpx1: number, cpy1: number, cpx2: number, cpy2: number) => {
+const buildBezierPathString = (
+	source: Coordinates,
+	target: Coordinates,
+	cpx1: number,
+	cpy1: number,
+	cpx2: number,
+	cpy2: number
+) => {
 	const sx = source.x
 	const sy = source.y
 	const tx = target.x

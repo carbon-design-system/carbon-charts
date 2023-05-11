@@ -130,7 +130,9 @@ export class Ruler extends Component {
 				})
 
 			// get elements on which we should trigger mouse events
-			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map((d: any) => d.domainValue)
+			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(
+				(d: any) => d.domainValue
+			)
 			const elementsToHighlight = dataPointElements.filter((d: any) => {
 				const domainValue = this.services.cartesianScales.getDomainValue(d) as number
 				return domainValuesMatchingRulerLine.includes(domainValue)

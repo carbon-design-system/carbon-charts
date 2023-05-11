@@ -69,7 +69,9 @@ export class WordCloud extends Component {
 			const textGroup = DOMUtils.appendOrSelect(svg, 'g.words')
 			textGroup.attr('transform', `translate(${layout.size()[0] / 2}, ${layout.size()[1] / 2})`)
 
-			const allText = textGroup.selectAll('text').data(words, (d: any) => `${d[groupMapsTo]}-${d.text}`)
+			const allText = textGroup
+				.selectAll('text')
+				.data(words, (d: any) => `${d[groupMapsTo]}-${d.text}`)
 
 			// Remove texts that are no longer needed
 			allText.exit().attr('opacity', 0).remove()

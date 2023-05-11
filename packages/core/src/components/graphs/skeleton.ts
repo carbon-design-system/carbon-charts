@@ -99,7 +99,7 @@ export class Skeleton extends Component {
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, 'rect.chart-skeleton-backdrop')
 		backdropRect.attr('width', '100%').attr('height', '100%')
 
-		const [xScaleStart, ] = this.xScale.range()
+		const [xScaleStart] = this.xScale.range()
 		const [, yScaleStart] = this.yScale.range()
 
 		this.backdrop.merge(backdropRect).attr('x', xScaleStart).attr('y', yScaleStart)

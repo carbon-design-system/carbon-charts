@@ -267,12 +267,7 @@ export class CartesianScales extends Service {
 		return this.scales[this.getMainYAxisPosition()]
 	}
 
-	getValueFromScale(
-		scale: any,
-		scaleType: ScaleTypes,
-		axisPosition: AxisPositions,
-		datum: any
-	) {
+	getValueFromScale(scale: any, scaleType: ScaleTypes, axisPosition: AxisPositions, datum: any) {
 		const options = this.model.getOptions()
 		const axesOptions = getProperty(options, 'axes')
 		const axisOptions = axesOptions[axisPosition]
@@ -407,7 +402,10 @@ export class CartesianScales extends Service {
 		return { primary: AxisPositions.BOTTOM, secondary: AxisPositions.TOP }
 	}
 
-	protected findDomainAndRangeAxesPositions(verticalAxesPositions: any, horizontalAxesPositions: any) {
+	protected findDomainAndRangeAxesPositions(
+		verticalAxesPositions: any,
+		horizontalAxesPositions: any
+	) {
 		const options = this.model.getOptions()
 
 		const mainVerticalAxisOptions = getProperty(options, 'axes', verticalAxesPositions.primary)

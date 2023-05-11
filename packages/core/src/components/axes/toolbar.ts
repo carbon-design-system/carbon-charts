@@ -32,8 +32,8 @@ export class Toolbar extends Component {
 		})
 	}
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		render(animate = true) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
 		const container = this.getComponentContainer()
 			.attr('role', 'toolbar')
 			.attr('aria-label', `chart-${this.services.domUtils.getChartID()} toolbar`)

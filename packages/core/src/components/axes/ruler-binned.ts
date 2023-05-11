@@ -97,7 +97,7 @@ export class BinnedRuler extends Ruler {
 											0
 										)
 									}
-								]
+							  ]
 							: [])
 					]
 				})

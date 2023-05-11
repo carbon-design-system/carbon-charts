@@ -73,8 +73,11 @@ export class DOMUtils extends Service {
 
 		const svgElement = svgSelector.node()
 
-		let bbox: DOMRect, bboxDimensions: Partial<DOMRect>, boundingRect: DOMRect, boundingRectDimensions: Partial<DOMRect>
-		
+		let bbox: DOMRect,
+			bboxDimensions: Partial<DOMRect>,
+			boundingRect: DOMRect,
+			boundingRectDimensions: Partial<DOMRect>
+
 		try {
 			// Not all SVG graphics elements have bounding boxes (eg <defs>, <title>, <styles>)
 			if (typeof svgElement.getBBox === 'function') {
@@ -412,9 +415,12 @@ export class DOMUtils extends Service {
 	setSVGMaxHeight() {
 		// if there is a set height on the holder, leave the chart svg height at 100%
 		if (!this.model.getOptions().height) {
-			const { height: chartHeight } = DOMUtils.getSVGElementSize(select(this.mainContainer) as any, {
-				useBBox: true
-			})
+			const { height: chartHeight } = DOMUtils.getSVGElementSize(
+				select(this.mainContainer) as any,
+				{
+					useBBox: true
+				}
+			)
 			const chartSVGSelector = select(this.mainContainer).attr('class')
 			const children = select(this.mainContainer).selectAll(`.${chartSVGSelector} > svg`)
 

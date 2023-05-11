@@ -165,7 +165,8 @@ export class Legend extends Component {
 	sortDataGroups(dataGroups: any, legendOrder: any) {
 		// Sort data in user defined order
 		dataGroups.sort(
-			(dataA: { name: string}, dataB: { name: string}) => legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+			(dataA: { name: string }, dataB: { name: string }) =>
+				legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
 		)
 
 		// If user only defined partial ordering, ordered items are placed before unordered ones
@@ -419,17 +420,19 @@ export class Legend extends Component {
 			}
 		})
 
-		svg.selectAll('div.legend-item div.checkbox').on('keydown', function (event: KeyboardEvent, d: any) {
-			if (event.key && event.key === ' ') {
-				event.preventDefault()
-				self.model.toggleDataLabel(d.name)
-			} else if (event.key && event.key === 'Tab') {
-				// Unhiglight group
-				self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {
-					hoveredElement: select(this)
-				})
-			}
-		})
+		svg
+			.selectAll('div.legend-item div.checkbox')
+			.on('keydown', function (event: KeyboardEvent, d: any) {
+				if (event.key && event.key === ' ') {
+					event.preventDefault()
+					self.model.toggleDataLabel(d.name)
+				} else if (event.key && event.key === 'Tab') {
+					// Unhiglight group
+					self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {
+						hoveredElement: select(this)
+					})
+				}
+			})
 
 		svg.selectAll('g.additional-item').on('mouseover', function (event: MouseEvent) {
 			const hoveredItem = select(this)

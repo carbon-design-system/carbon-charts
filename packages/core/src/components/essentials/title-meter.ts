@@ -73,7 +73,7 @@ export class MeterTitle extends Title {
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
-						})
+					  })
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
 		}
 
@@ -138,7 +138,9 @@ export class MeterTitle extends Title {
 			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
-				this.model.getStatus() && typeof containerWidth !== 'string' ? containerWidth - meter.total.paddingRight : containerWidth
+				this.model.getStatus() && typeof containerWidth !== 'string'
+					? containerWidth - meter.total.paddingRight
+					: containerWidth
 			)
 			.attr('y', '1em')
 			.attr('text-anchor', 'end')

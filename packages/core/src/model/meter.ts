@@ -44,7 +44,7 @@ export class MeterChartModel extends ChartModel {
 		const { value: totalValue } = dataValues
 			? dataValues.reduce((previous: any, current: any) => {
 					return { value: previous.value + current.value }
-				})
+			  })
 			: 0
 
 		// use max value if the percentage is bigger than 100%

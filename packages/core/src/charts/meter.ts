@@ -56,7 +56,7 @@ export class MeterChart extends Chart {
 							],
 							growth: LayoutGrowth.STRETCH
 						}
-					]
+				  ]
 				: []),
 			// Specify what to render inside the graph only
 			{

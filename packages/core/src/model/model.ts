@@ -1,4 +1,4 @@
-import { bin, scaleOrdinal, stack, stackOffsetDiverging  } from 'd3'
+import { bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import { color, legend } from '../configuration'
 import { histogram as histogramConfigs } from '../configuration-non-customizable'
 import {
@@ -73,7 +73,9 @@ export class ChartModel {
 				// Check for custom domain
 				if (mapsTo && axesOptions[axis].domain) {
 					if (scaleType === ScaleTypes.LABELS) {
-						allData = allData.filter((datum: any) => axesOptions[axis].domain.includes(datum[mapsTo]))
+						allData = allData.filter((datum: any) =>
+							axesOptions[axis].domain.includes(datum[mapsTo])
+						)
 					} else {
 						const [start, end] = axesOptions[axis].domain
 						// Filter out data outside domain if that datapoint is using that axis (has mapsTo property)
@@ -395,13 +397,12 @@ export class ChartModel {
 				dataGroupNames.forEach((name: any) => {
 					const denominator: number = maxByKey[d.sharedStackKey] as number
 					if (maxByKey[d.sharedStackKey]) {
-						d[name] = (d[name] / denominator) * 100;
+						d[name] = (d[name] / denominator) * 100
 					} else {
-						d[name] = 0;
+						d[name] = 0
 					}
-				});
-			});
-			
+				})
+			})
 		}
 
 		const stackToUse = divergent ? stack().offset(stackOffsetDiverging) : stack()
@@ -579,7 +580,9 @@ export class ChartModel {
 			return false
 		}
 
-		return dataGroups.some((dataGroup: any) => Object.keys(userProvidedScale).includes(dataGroup.name))
+		return dataGroups.some((dataGroup: any) =>
+			Object.keys(userProvidedScale).includes(dataGroup.name)
+		)
 	}
 
 	getColorClassName(configs: {

@@ -42,7 +42,12 @@ export class Alluvial extends Component {
 		const data = this.model.getDisplayData()
 
 		// Is gradient enabled or not
-		const isGradientAllowed: boolean = getProperty(this.getOptions(), 'color', 'gradient', 'enabled')
+		const isGradientAllowed: boolean = getProperty(
+			this.getOptions(),
+			'color',
+			'gradient',
+			'enabled'
+		)
 
 		// Set the custom node padding if provided
 		let nodePadding = alluvial.minNodePadding
@@ -122,7 +127,9 @@ export class Alluvial extends Component {
 			})
 			.attr('y', 20)
 			.attr('x', (d: any, i: number) => {
-				const elementID = this.services.domUtils.generateElementIDString(`alluvial-category-${i}`) as string
+				const elementID = this.services.domUtils.generateElementIDString(
+					`alluvial-category-${i}`
+				) as string
 
 				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
@@ -176,7 +183,9 @@ export class Alluvial extends Component {
 			.append('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
-			.attr('id', (d: any) => this.services.domUtils.generateElementIDString(`alluvial-line-${d.index}`))
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-line-${d.index}`)
+			)
 			.attr('class', (d: any) => {
 				// Use a single color for the lines
 				if (options.alluvial.monochrome) {
@@ -217,7 +226,9 @@ export class Alluvial extends Component {
 			.data(this.graph.nodes)
 			.enter()
 			.append('g')
-			.attr('id', (d: any) => this.services.domUtils.generateElementIDString(`alluvial-node-${d.index}`))
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-node-${d.index}`)
+			)
 			.classed('node-group', true)
 			.attr('transform', (d: any) => `translate(${d.x0}, ${d.y0})`)
 
@@ -262,7 +273,9 @@ export class Alluvial extends Component {
 			.append('rect')
 			.classed('node-text-bg', true)
 			.attr('width', (d: any, i: number) => {
-				const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`) as string
+				const elementID = this.services.domUtils.generateElementIDString(
+					`alluvial-node-text-${i}`
+				) as string
 
 				// Determine rectangle width based on text width
 				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
@@ -275,7 +288,9 @@ export class Alluvial extends Component {
 
 		// Position group based on text width
 		textNode.attr('transform', (d: any, i: number) => {
-			const elementID = this.services.domUtils.generateElementIDString(`alluvial-node-text-${i}`) as string
+			const elementID = this.services.domUtils.generateElementIDString(
+				`alluvial-node-text-${i}`
+			) as string
 
 			const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 

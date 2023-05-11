@@ -67,7 +67,12 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getIsFilled?: (datasetLabel: string, label?: string, data?: any, defaultFilled?: boolean) => boolean
+	getIsFilled?: (
+		datasetLabel: string,
+		label?: string,
+		data?: any,
+		defaultFilled?: boolean
+	) => boolean
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
@@ -76,7 +81,12 @@ export interface BaseChartOptions {
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
 	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
-	getStrokeColor?: (group: string, label?: string, data?: any, defaultStrokeColor?: string) => string
+	getStrokeColor?: (
+		group: string,
+		label?: string,
+		data?: any,
+		defaultStrokeColor?: string
+	) => string
 	/**
 	 * stylesheet options
 	 */
@@ -350,7 +360,10 @@ export interface PieChartOptions extends BaseChartOptions {
 		 * defaults to value
 		 */
 		valueMapsTo?: string
-		sortFunction?: (a: { group: string, value: number }, b: { group: string, value: number }) => number
+		sortFunction?: (
+			a: { group: string; value: number },
+			b: { group: string; value: number }
+		) => number
 	}
 }
 

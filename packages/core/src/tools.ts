@@ -179,23 +179,22 @@ export function getTranslationValues(elementRef: HTMLElement) {
  * @returns Returns an object with x and y offsets of the transform
  */
 export function getTransformOffsets(transform: string) {
-  const regExp = /\(([^)]+)\)/;
-  const match = regExp.exec(transform);
+	const regExp = /\(([^)]+)\)/
+	const match = regExp.exec(transform)
 
-  if (match && match.length > 1) {
-    const xyString = match[1].split(',');
+	if (match && match.length > 1) {
+		const xyString = match[1].split(',')
 
-    if (xyString.length > 1) {
-      return {
-        x: parseFloat(xyString[0]),
-        y: parseFloat(xyString[1]),
-      };
-    }
-  }
+		if (xyString.length > 1) {
+			return {
+				x: parseFloat(xyString[0]),
+				y: parseFloat(xyString[1])
+			}
+		}
+	}
 
-  return { x: 0, y: 0 };
+	return { x: 0, y: 0 }
 }
-
 
 /**
  * Returns string value for height/width using pixels if there isn't a specified unit of measure
@@ -234,7 +233,8 @@ export function capitalizeFirstLetter(word: string) {
  * @returns The percentage in the form of a number (1 significant digit if necessary)
  */
 export function convertValueToPercentage(item: any, fullData: any, key = 'value') {
-	const percentage = (item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
+	const percentage =
+		(item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
 	// if the value has any significant figures, keep 1
 	return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
 }

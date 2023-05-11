@@ -111,7 +111,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (
 								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
-							).toLocaleString()
+						  ).toLocaleString()
 						: '&ndash;',
 					outliers.map((d: any) => d.toLocaleString()).join(',')
 				]

@@ -213,7 +213,13 @@ export class ColorScaleLegend extends Legend {
 	 * Renders quantized legend
 	 * @returns number (range start)
 	 */
-	drawQuantize(colorPairing: any, colorScheme: any, customColorsEnabled: any, legendGroupElement: any, barWidth: any) {
+	drawQuantize(
+		colorPairing: any,
+		colorScheme: any,
+		customColorsEnabled: any,
+		legendGroupElement: any,
+		barWidth: any
+	) {
 		// If divergent && non-custom color, remove 0/white from being displayed
 		if (!customColorsEnabled && colorScheme === 'diverge') {
 			colorPairing.splice(colorPairing.length / 2, 1)

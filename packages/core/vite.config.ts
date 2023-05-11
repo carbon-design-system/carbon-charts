@@ -21,7 +21,7 @@ export default defineConfig({
 			name: 'CarbonCharts'
 		},
 		rollupOptions: {
-			external: [ 'd3', 'd3-cloud', 'd3-sankey'] // Note d3-cloud and d3-sankey are not included in d3
+			external: ['d3', 'd3-cloud', 'd3-sankey'] // Note d3-cloud and d3-sankey are not included in d3
 		}
 	},
 	optimizeDeps: {

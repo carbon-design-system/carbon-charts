@@ -241,10 +241,7 @@ export class ZoomBar extends Component {
 				// don't update brushHandle to avoid flash
 			} else if (zoomDomain[0].valueOf() === zoomDomain[1].valueOf()) {
 				brushArea.call(this.brush.move, this.xScale.range()) // default to full range
-				this.updateBrushHandle(
-					this.getComponentContainer(),
-					this.xScale.range()
-				)
+				this.updateBrushHandle(this.getComponentContainer(), this.xScale.range())
 			} else {
 				const selected = zoomDomain.map((domain: any) => this.xScale(domain))
 				if (selected[1] - selected[0] < this.MIN_SELECTION_DIFF) {
@@ -470,7 +467,14 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	updateClipPath(svg: any, clipId: string, x: number | string, y: number | string, width: number | string, height: number | string) {
+	updateClipPath(
+		svg: any,
+		clipId: string,
+		x: number | string,
+		y: number | string,
+		width: number | string,
+		height: number | string
+	) {
 		const zoomBarClipPath = DOMUtils.appendOrSelect(svg, `clipPath`).attr('id', clipId)
 		DOMUtils.appendOrSelect(zoomBarClipPath, 'rect')
 			.attr('x', x)
@@ -506,7 +510,12 @@ export class ZoomBar extends Component {
 		return zoomBarData
 	}
 
-	renderZoomBarBaseline(container: HTMLElement, startX: number, endX: number, skeletonClass = false) {
+	renderZoomBarBaseline(
+		container: HTMLElement,
+		startX: number,
+		endX: number,
+		skeletonClass = false
+	) {
 		const zoombarType = getProperty(this.model.getOptions(), 'zoomBar', AxisPositions.TOP, 'type')
 		const zoombarHeight = zoomBar.height[zoombarType]
 		const baselineGenerator = line()([

@@ -338,7 +338,7 @@ export class Axis extends Component {
 					}
 					break
 				case AxisPositions.TOP:
-					({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
+					;({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
 						useBBox: true
 					}))
 					axisTitleRef

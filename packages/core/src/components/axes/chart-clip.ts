@@ -47,13 +47,13 @@ export class ChartClip extends Component {
 			this.chartClipId
 		)
 		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`)
-		
+
 		if (xScaleEnd - xScaleStart > 0) {
 			clipRect
-			.attr('x', xScaleStart)
-			.attr('y', yScaleStart)
-			.attr('width', xScaleEnd - xScaleStart)
-			.attr('height', yScaleEnd - yScaleStart)
+				.attr('x', xScaleStart)
+				.attr('y', yScaleStart)
+				.attr('width', xScaleEnd - xScaleStart)
+				.attr('height', yScaleEnd - yScaleStart)
 		}
 
 		this.chartClipPath.merge(clipRect).lower()

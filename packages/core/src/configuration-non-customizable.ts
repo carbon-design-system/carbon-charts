@@ -1,7 +1,6 @@
 import { easeCubicInOut } from 'd3'
 import { ZoomBarTypes, LegendItemType } from './interfaces'
 
-
 export const carbonPrefix = 'cds'
 
 export const area = {

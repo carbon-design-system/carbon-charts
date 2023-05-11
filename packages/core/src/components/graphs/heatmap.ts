@@ -95,7 +95,8 @@ export class Heatmap extends Component {
 			.classed('cell', true)
 			.attr(
 				'transform',
-				(d: any) => `translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(d[rangeIdentifier])})`
+				(d: any) =>
+					`translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(d[rangeIdentifier])})`
 			)
 			.append('rect')
 			.attr('class', (d: any) => {

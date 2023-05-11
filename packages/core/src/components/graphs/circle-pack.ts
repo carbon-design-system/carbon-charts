@@ -12,7 +12,7 @@ export class CirclePack extends Component {
 	renderType = RenderTypes.SVG
 
 	focal: any
-	
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
@@ -134,7 +134,10 @@ export class CirclePack extends Component {
 
 	getZoomClass(node: any) {
 		if (this.model.getHierarchyLevel() === 3 && this.focal) {
-			if (node.data === this.focal.data || this.focal.children.some((d: any) => d.data === node.data)) {
+			if (
+				node.data === this.focal.data ||
+				this.focal.children.some((d: any) => d.data === node.data)
+			) {
 				return 'focal'
 			}
 		}

@@ -1,4 +1,4 @@
-import { arc, interpolate, pie , select } from 'd3'
+import { arc, interpolate, pie, select } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { convertValueToPercentage, getProperty } from '../../tools'
@@ -347,7 +347,9 @@ export class Pie extends Component {
 					name: 'legend-hover-bar'
 				})
 			)
-			.attr('opacity', (d: any) => (d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
+			.attr('opacity', (d: any) =>
+				d.data[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1
+			)
 	}
 
 	// Un-highlight all elements

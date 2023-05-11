@@ -127,7 +127,7 @@ export class Radar extends Component {
 					.attr('opacity', 0)
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
-					.call((selection: any) => 
+					.call((selection: any) =>
 						selection
 							.transition() // BUG: 19 console error for charts with missing datapoints (generated path has NaN in it)
 							.call((t: any) =>
@@ -246,14 +246,19 @@ export class Radar extends Component {
 					.attr('opacity', 0)
 					.attr(
 						'x',
-						(key: any) => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x
+						(key: any) =>
+							polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x
 					)
 					.attr(
 						'y',
-						(key: any) => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y
+						(key: any) =>
+							polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y
 					)
 					.style('text-anchor', (key: any) => radialLabelPlacement(xScale(key)).textAnchor)
-					.style('dominant-baseline', (key: any) => radialLabelPlacement(xScale(key)).dominantBaseline)
+					.style(
+						'dominant-baseline',
+						(key: any) => radialLabelPlacement(xScale(key)).dominantBaseline
+					)
 					.call((selection: any) =>
 						selection
 							.transition()
@@ -280,11 +285,13 @@ export class Radar extends Component {
 						.attr('opacity', 1)
 						.attr(
 							'x',
-							(key: any) => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x
+							(key: any) =>
+								polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x
 						)
 						.attr(
 							'y',
-							(key: any) => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y
+							(key: any) =>
+								polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y
 						)
 						.end()
 						.finally(() => {
@@ -356,7 +363,9 @@ export class Radar extends Component {
 								.attr('transform', `translate(${c.x}, ${c.y})`)
 						}
 
-						selectionUpdate.attr('opacity', 1).attr('d', (group: any) => radialLineGenerator(group.data))
+						selectionUpdate
+							.attr('opacity', 1)
+							.attr('d', (group: any) => radialLineGenerator(group.data))
 					}),
 			(update: any) => {
 				update
@@ -667,7 +676,9 @@ export class Radar extends Component {
 				axisLine.classed('hovered', true).attr('stroke-dasharray', '4 4')
 				dots
 					.classed('hovered', true)
-					.attr('opacity', (d: any) => (activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0))
+					.attr('opacity', (d: any) =>
+						activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0
+					)
 					.attr('r', radar.dotsRadius)
 
 				// get the items that should be highlighted

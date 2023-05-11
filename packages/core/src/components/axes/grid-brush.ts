@@ -1,4 +1,4 @@
-import { brushX, pointer, scaleTime} from 'd3'
+import { brushX, pointer, scaleTime } from 'd3'
 import { Component } from '../component'
 import { RenderTypes, ScaleTypes } from '../../interfaces'
 import { DOMUtils } from '../../services'
@@ -133,7 +133,7 @@ export class ChartBrush extends Component {
 				brush = brushX()
 					.extent([
 						[0, 0],
-						[ width - 1, height]
+						[width - 1, height]
 					])
 					.on('start brush end', brushEventHandler)
 					.on('end.brushed', brushed)
