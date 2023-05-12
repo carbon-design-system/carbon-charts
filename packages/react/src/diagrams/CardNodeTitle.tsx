@@ -9,10 +9,10 @@ type CardNodeTitleProps = {
 const CardNodeTitle: React.FC<CardNodeTitleProps & React.HTMLAttributes<HTMLDivElement>> = ({
 	children,
 	...rest
-}: any) => {
+}) => {
 	const namespace = `${carbonPrefix}--cc--card-node`
 	const classes = classnames(`${namespace}__title`, {
-		[rest.className]: rest.className
+		...(rest.className ? { [rest.className]: true } : {})
 	})
 
 	return (

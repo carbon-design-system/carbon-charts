@@ -15,14 +15,14 @@ type CardNodeProps = {
 
 const CardNode: React.FC<
 	CardNodeProps & React.HTMLAttributes<HTMLAnchorElement | HTMLDivElement | HTMLButtonElement>
-> = ({ tag = 'div', children, color, href, position = 'static', stacked, ...rest }: any) => {
+> = ({ tag = 'div', children, color, href, position = 'static', stacked, ...rest }) => {
 	const Component = href ? 'a' : rest.onClick ? 'button' : tag
 
 	const namespace = `${carbonPrefix}--cc--card-node`
 	const cardClasses = classnames(namespace, {
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${Component}`]: Component,
-		[rest.className]: rest.className
+		[rest.className as string]: rest.className
 	})
 
 	return (
@@ -35,5 +35,6 @@ const CardNode: React.FC<
 		</Component>
 	)
 }
+
 
 export { CardNode }

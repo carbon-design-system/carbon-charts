@@ -9,10 +9,10 @@ type CardNodeLabelProps = {
 const CardNodeLabel: React.FC<CardNodeLabelProps & React.HTMLAttributes<HTMLLabelElement>> = ({
 	children,
 	...rest
-}: any) => {
+}) => {
 	const namespace = `${carbonPrefix}--cc--card-node`
 	const classes = classnames(`${namespace}__label`, {
-		[rest.className]: rest.className
+		...(rest.className ? { [rest.className]: true } : {})
 	})
 
 	return (

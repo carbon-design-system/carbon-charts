@@ -74,7 +74,7 @@ stories.add(
 stories.add(
 	'As button',
 	() => (
-		<CardNode onClick={() => {}}>
+		<CardNode onClick={() => console.log('Clicked CardNode')}>
 			<CardNodeColumn>
 				<User />
 			</CardNodeColumn>

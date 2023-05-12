@@ -55,7 +55,7 @@ introStories.add(
 					</ul>
 					<span className="netlify">
 						Deploys by{' '}
-						<a href="https://netlify.com" target="_blank">
+						<a href="https://netlify.com" target="_blank" rel="noreferrer">
 							Netlify
 						</a>
 					</span>

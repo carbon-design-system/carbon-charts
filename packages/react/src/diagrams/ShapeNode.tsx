@@ -41,7 +41,7 @@ const ShapeNode: React.FC<
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${shape}`]: shape,
 		[`${namespace}--${tag}`]: tag,
-		[rest.className ?? '']: rest.className
+		[rest.className as string]: rest.className
 	})
 
 	const titleElement = title ? <div className={`${namespace}__title`}>{title}</div> : null

@@ -11,11 +11,11 @@ const CardNodeColumn: React.FC<CardNodeColumnProps & React.HTMLAttributes<HTMLDi
 	children,
 	farsideColumn = false,
 	...rest
-}: any) => {
+}) => {
 	const namespace = `${carbonPrefix}--cc--card-node`
 	const classes = classnames(`${namespace}__column`, {
 		[`${namespace}__column--farside`]: farsideColumn,
-		[rest.className]: rest.className
+		...(rest.className ? { [rest.className]: true } : {})
 	})
 
 	return (

@@ -7,6 +7,7 @@ type Coordinates = {
 	x: number
 	y: number
 }
+
 type EdgeProps = {
 	color?: string
 	markerStart?: string
@@ -17,7 +18,9 @@ type EdgeProps = {
 	variant?: string // 'dash-sm' | 'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'
 }
 
-const Edge: React.FC<EdgeProps /*& React.SVGProps<SVGGElement>*/> = ({
+type EdgeSVGProps = Omit<React.SVGProps<SVGGElement>, 'target'>
+
+const Edge: React.FC<EdgeProps & EdgeSVGProps> = ({
 	color,
 	markerEnd,
 	markerStart,
@@ -26,14 +29,19 @@ const Edge: React.FC<EdgeProps /*& React.SVGProps<SVGGElement>*/> = ({
 	target,
 	variant = null,
 	...rest
-}: any) => {
+}) => {
 	const namespace = `${carbonPrefix}--cc--edge`
 	const pathClasses = classnames(namespace, {
 		[`${namespace}--${variant}`]: variant,
-		[rest.className]: rest.className
+		...(rest.className ? { [rest.className]: true } : {})
 	})
 
-	const d = path || buildStraightPathString(source, target)
+	let d = path
+	if (!d && source && target) {
+		d = buildStraightPathString(source, target)
+	}
+
+	if (!d) throw Error('Missing parameters for Edge component: path or source and target.')
 
 	return (
 		<g className={pathClasses} {...rest}>

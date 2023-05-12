@@ -1,52 +1,51 @@
 import AlluvialChart from './AlluvialChart'
 import AreaChart from './AreaChart'
-import StackedAreaChart from './StackedAreaChart'
-import GroupedBarChart from './GroupedBarChart'
-import SimpleBarChart from './SimpleBarChart'
-import StackedBarChart from './StackedBarChart'
 import BoxplotChart from './BoxplotChart'
 import BubbleChart from './BubbleChart'
 import BulletChart from './BulletChart'
+import CirclePackChart from './CirclePackChart'
+import ComboChart from './ComboChart'
 import DonutChart from './DonutChart'
 import GaugeChart from './GaugeChart'
+import GroupedBarChart from './GroupedBarChart'
+import HeatmapChart from './HeatmapChart'
 import HistogramChart from './HistogramChart'
 import LineChart from './LineChart'
 import LollipopChart from './LollipopChart'
-import PieChart from './PieChart'
-import ScatterChart from './ScatterChart'
 import MeterChart from './MeterChart'
+import PieChart from './PieChart'
 import RadarChart from './RadarChart'
-import ComboChart from './ComboChart'
+import ScatterChart from './ScatterChart'
+import SimpleBarChart from './SimpleBarChart'
+import StackedAreaChart from './StackedAreaChart'
+import StackedBarChart from './StackedBarChart'
 import TreeChart from './TreeChart'
 import TreemapChart from './TreemapChart'
-import CirclePackChart from './CirclePackChart'
 import WordCloudChart from './WordCloudChart'
 
-import HeatmapChart from './HeatmapChart'
-
 export {
+	AlluvialChart,
 	AreaChart,
-	StackedAreaChart,
-	GroupedBarChart,
-	SimpleBarChart,
-	StackedBarChart,
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
+	CirclePackChart,
+	ComboChart,
 	DonutChart,
 	GaugeChart,
+	GroupedBarChart,
+	HeatmapChart,
 	HistogramChart,
 	LineChart,
 	LollipopChart,
-	PieChart,
-	ScatterChart,
 	MeterChart,
+	PieChart,
 	RadarChart,
-	ComboChart,
+	ScatterChart,
+	SimpleBarChart,
+	StackedAreaChart,
+	StackedBarChart,
 	TreeChart,
 	TreemapChart,
-	CirclePackChart,
-	WordCloudChart,
-	AlluvialChart,
-	HeatmapChart
+	WordCloudChart
 }

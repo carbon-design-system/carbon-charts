@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { SVGProps } from 'react'
 import classnames from 'classnames'
 import { carbonPrefix } from './utils'
 import { arrowLeft, arrowRight, circle, diamond, square, tee } from '@carbon/charts'
 
-type MarkerProps = {
+interface MarkerProps extends SVGProps<SVGMarkerElement> {
 	id?: string
 	d?: string
 	color?: string
 	position?: 'start' | 'end'
 	orient?: string | number
-	height?: string | number
-	width?: string | number
+	height?: number
+	width?: number
+	refX?: number
+	refY?: number
 }
 
-const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
+const Marker: React.FC<MarkerProps> = ({
 	color,
 	d,
 	id,
@@ -21,15 +23,16 @@ const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
 	height,
 	width,
 	position = 'end',
+	className,
+	refX,
+	refY,
 	...rest
-}: any) => {
+}) => {
 	const namespace = `${carbonPrefix}--cc--marker`
-	const classes = classnames(namespace, {
-		[rest.className]: rest.className
-	})
+	const classes = classnames(namespace, className)
 
-	const xPos = position === 'end' ? width / 2 + 0.5 : 0.5
-	const yPos = height / 2
+	const xPos = position === 'end' ? (width || 0) / 2 + 0.5 : 0.5
+	const yPos = (height || 0) / 2
 
 	return (
 		<marker
@@ -38,8 +41,8 @@ const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
 			markerWidth={width}
 			orient={orient}
 			id={id}
-			refX={rest.refX || xPos}
-			refY={rest.refY || yPos}
+			refX={refX || xPos}
+			refY={refY || yPos}
 			markerUnits="userSpaceOnUse"
 			{...rest}>
 			<path d={d} style={{ fill: color }} />
@@ -47,12 +50,12 @@ const Marker: React.FC<MarkerProps & React.SVGProps<SVGGElement>> = ({
 	)
 }
 
-const ArrowLeftMarker = ({ ...rest }) => <Marker {...arrowLeft} {...rest} />
-const ArrowRightMarker = ({ ...rest }) => <Marker {...arrowRight} {...rest} />
-const CircleMarker = ({ ...rest }) => <Marker {...circle} {...rest} />
-const DiamondMarker = ({ ...rest }) => <Marker {...diamond} {...rest} />
-const SquareMarker = ({ ...rest }) => <Marker {...square} {...rest} />
-const TeeMarker = ({ ...rest }) => <Marker {...tee} {...rest} />
+const ArrowLeftMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={arrowLeft.d} {...props} />
+const ArrowRightMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={arrowRight.d} {...props} />
+const CircleMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={circle.d} {...props} />
+const DiamondMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={diamond.d} {...props} />
+const SquareMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={square.d} {...props} />
+const TeeMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={tee.d} {...props} />
 
 export {
 	Marker,

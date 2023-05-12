@@ -62,7 +62,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				return (
 					<div className="container" ref={demoRef}>
 						<div className="v10-banner">
-							This version relies on <b>Carbon v11</b>. If you're using Carbon v10,{' '}
+							This version relies on <b>Carbon v11</b>. If you&apos;re using Carbon v10,{' '}
 							<a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">
 								see the legacy demo site
 							</a>
@@ -78,7 +78,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							,{' '}
 							<a
 								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
-								target="_blank">
+								target="_blank" rel="noreferrer">
 								options
 							</a>
 						</p>

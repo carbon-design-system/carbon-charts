@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
-import { buildElbowPathString } from '@carbon/charts'
+import { buildElbowPathString, type Coordinates } from '@carbon/charts'
 import {
 	CardNode,
 	CardNodeColumn,
@@ -136,7 +136,7 @@ const SimpleStatic = () => (
 				transform={`translate(0, 16)`}
 				height={nodeHeight}
 				width={nodeWidth}>
-				<CardNode onClick={() => {}}>
+				<CardNode onClick={() => console.log('CardNode was clicked')}>
 					<CardNodeColumn>
 						<User />
 					</CardNodeColumn>
@@ -148,7 +148,7 @@ const SimpleStatic = () => (
 			</foreignObject>
 
 			<foreignObject style={{ overflow: 'visible' }} transform={`translate(400, 16)`}>
-				<ShapeNode title={'Title'} size={ShapeNodeSize} onClick={() => {}} renderIcon={<Wikis />} />
+				<ShapeNode title={'Title'} size={ShapeNodeSize} onClick={() => console.log('ShapeNode was clicked')} renderIcon={<Wikis />} />
 			</foreignObject>
 		</svg>
 	</div>
@@ -175,12 +175,12 @@ const ProgrammaticStatic = () => {
 		{
 			source: 'c',
 			target: 'b',
-			path: (source: any, target: any) => buildElbowPathString(source, target)
+			path: (source: Coordinates, target: Coordinates) => buildElbowPathString(source, target)
 		},
 		{
 			source: 'd',
 			target: 'c',
-			path: (source: any, target: any) => buildElbowPathString(source, target),
+			path: (source: Coordinates, target: Coordinates) => buildElbowPathString(source, target),
 			variant: 'tunnel'
 		}
 	]
@@ -189,15 +189,19 @@ const ProgrammaticStatic = () => {
 		const sourceNode = nodeData.find((node) => node.id === link.source)
 		const targetNode = nodeData.find((node) => node.id === link.target)
 
+		if (!sourceNode || !targetNode) {
+			throw new Error('Source or target node not found')
+		}
+
 		return {
 			...link,
 			source: {
-				x: sourceNode!.x + sourceNode!.nodeWidth / 2,
-				y: sourceNode!.y + sourceNode!.nodeHeight / 2
+				x: sourceNode.x + sourceNode.nodeWidth / 2,
+				y: sourceNode.y + sourceNode.nodeHeight / 2
 			},
 			target: {
-				x: targetNode!.x + targetNode!.nodeWidth / 2,
-				y: targetNode!.y + targetNode!.nodeHeight / 2
+				x: targetNode.x + targetNode.nodeWidth / 2,
+				y: targetNode.y + targetNode.nodeHeight / 2
 			}
 		}
 	})
@@ -211,14 +215,14 @@ const ProgrammaticStatic = () => {
 			width={node.nodeWidth}>
 			{node.ShapeNode ? (
 				<ShapeNode
-					onClick={() => {}}
+					onClick={() => console.log('ShapeNode was clicked')}
 					title={'Title'}
 					size={ShapeNodeSize}
 					description={'Description'}
 					renderIcon={node.icon}
 				/>
 			) : (
-				<CardNode onClick={() => {}}>
+				<CardNode onClick={() => console.log('CardNode was clicked')}>
 					<CardNodeColumn>{node.icon}</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
