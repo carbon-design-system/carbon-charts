@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { storiesOf, type Args } from '@storybook/react'
 import sdk from '@stackblitz/sdk'
 import { color, ChartTheme } from '@carbon/charts'
@@ -24,35 +24,32 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		demo.options.theme = DEFAULT_THEME
 		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 
+		// Define DemoComponent
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
 		groupStories.add(
 			demo.title,
 			(args: Args) => {
-				/* Storybook seems to be skipping re-render when chartRef starts
-				 * populating, adding this as a quick hack */
-				// This was a problem with Storybook Knobs which was replaced by Controls
-				const [update, setUpdate] = React.useState(false)
+				const demoRef = useRef(null)
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				const chartRef = useRef<{ chart: any }>({ chart: null })
 
-				const demoRef = React.useRef(null)
-				const chartRef = React.useRef<{ chart: any }>({ chart: null })
+				// Using useEffect to update when demoRef or chartRef changes
+				useEffect(() => {
+					if (demoRef.current && chartRef.current) {
+						const container = demoRef.current
+						const chart = chartRef.current.chart
 
-				if (demoRef.current && chartRef.current) {
-					const container = demoRef.current
-					const chart = chartRef.current.chart
+						addControls(container, demoGroup, chart, {
+							colorPairingOptions
+						})
 
-					addControls(container, demoGroup, chart, {
-						colorPairingOptions
-					})
-
-					addOtherVersions(container, demoGroup, demo, {
-						currentVersion: 'react'
-					})
-				}
-
-				React.useEffect(() => {
-					setUpdate(!update)
-				}, [demoRef, chartRef])
+						addOtherVersions(container, demoGroup, demo, {
+							currentVersion: 'react'
+						})
+					}
+				}, [demoRef.current, chartRef.current])
 
 				const openSandbox = (event: React.MouseEvent<HTMLAnchorElement>) => {
 					event.preventDefault()
@@ -78,7 +75,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							,{' '}
 							<a
 								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
-								target="_blank" rel="noreferrer">
+								target="_blank"
+								rel="noreferrer">
 								options
 							</a>
 						</p>
