@@ -20,6 +20,6 @@ export default class SimpleBarChart extends BaseChart<BarChartOptions> {
 	}
 
 	render() {
-		return <div ref={(chartRef) => (this.chartRef = chartRef!)} className="chart-holder"></div>
+		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
 	}
 }

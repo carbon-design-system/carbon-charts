@@ -20,6 +20,6 @@ export default class HeatmapChart extends BaseChart<HeatmapChartOptions> {
 	}
 
 	render() {
-		return <div ref={(chartRef) => (this.chartRef = chartRef!)} className="chart-holder"></div>
+		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
 	}
 }

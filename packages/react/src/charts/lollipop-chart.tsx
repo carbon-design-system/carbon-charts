@@ -12,7 +12,7 @@ export default class LollipopChart extends BaseChart<LollipopChartOptions> {
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {
-			this.chart = new LollipopChartCore(this.chartRef!, {
+			this.chart = new LollipopChartCore(this.chartRef, {
 				data: this.props.data as ChartTabularData,
 				options: this.props.options as LollipopChartOptions
 			})
@@ -20,6 +20,6 @@ export default class LollipopChart extends BaseChart<LollipopChartOptions> {
 	}
 
 	render() {
-		return <div ref={(chartRef) => (this.chartRef = chartRef!)} className="chart-holder"></div>
+		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
 	}
 }

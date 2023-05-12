@@ -87,7 +87,7 @@ stories.add(
 				<h3 {...h3Style}>3. Layouts using external dependencies</h3>
 
 				<p>
-					Here's an example using <b>elkjs</b> in react
+					Here&apos;s an example using <b>elkjs</b> in react
 				</p>
 
 				<iframe

@@ -20,6 +20,6 @@ export default class RadarChart extends BaseChart<RadarChartOptions> {
 	}
 
 	render() {
-		return <div ref={(chartRef) => (this.chartRef = chartRef!)} className="chart-holder"></div>
+		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
 	}
 }

@@ -12,7 +12,7 @@ export default class LineChart extends BaseChart<LineChartOptions> {
 
 	componentDidMount() {
 		if (hasChartBeenInitialized(this.chartRef) === false) {
-			this.chart = new LineChartCore(this.chartRef!, {
+			this.chart = new LineChartCore(this.chartRef, {
 				data: this.props.data as ChartTabularData,
 				options: this.props.options as LineChartOptions
 			})
@@ -20,6 +20,6 @@ export default class LineChart extends BaseChart<LineChartOptions> {
 	}
 
 	render() {
-		return <div ref={(chartRef) => (this.chartRef = chartRef!)} className="chart-holder"></div>
+		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
 	}
 }
