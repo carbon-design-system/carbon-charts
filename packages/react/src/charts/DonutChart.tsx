@@ -1,5 +1,9 @@
 import React from 'react'
-import { DonutChart as DonutChartCore, type DonutChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	DonutChart as DonutChartCore,
+	type DonutChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class DonutChart extends BaseChart<DonutChartOptions> {

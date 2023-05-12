@@ -18,17 +18,19 @@
 </p>
 
 ## Packages
--   [Vanilla](./packages/core)
--   [React](./packages/react)
--   [Angular](./packages/angular)
--   [Vue](./packages/vue)
--   [Svelte](./packages/svelte)
+
+- [Vanilla](./packages/core)
+- [React](./packages/react)
+- [Angular](./packages/angular)
+- [Vue](./packages/vue)
+- [Svelte](./packages/svelte)
 
 <a href="https://www.netlify.com" target="_blank">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
 </a>
 
 ## Design specifications
+
 <a href="https://www.carbondesignsystem.com/data-visualization/getting-started" target="_blank">
   <img src="./assets/dv_dark_theme.png" width=700 />
 </a>
@@ -37,56 +39,55 @@ Carbon data visualization design specifications can be found
 [here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
-Read the release change logs
-[here](https://github.com/carbon-design-system/carbon-charts/releases)
+
+Read the release change logs [here](https://github.com/carbon-design-system/carbon-charts/releases)
 
 ## Component status
+
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
-| Component          | Vanilla            | Angular            | React              | Vue                | Svelte             |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| Simple Bar         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Grouped Bar        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Stacked Bar        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Floating Bar       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Donut              | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Line               | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curved Line        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Pie                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Step               | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Scatter            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Radar              | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Area               | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Gauge              | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Meter              | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Sparkline          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Treemap            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Combo              | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Wordcloud          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Bullet             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Circle Pack        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Network diagrams   | —                  | :white_check_mark: | :white_check_mark: | —                  | —                  |
-| Proportional meter | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Histogram          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Tree               | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Alluvial           | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Heatmap            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Component            | Vanilla                  | Angular                  | React                    | Vue                      | Svelte                   |
+| -------------------- | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| Simple Bar           | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Grouped Bar          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Stacked Bar          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Floating Bar         | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Donut                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Line                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Curved Line          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Pie                  | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Step                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Scatter              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Radar                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Area                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Gauge                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Meter                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Sparkline            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Treemap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Combo                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Wordcloud            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Bullet               | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Circle Pack          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Network diagrams     | —                        | :white_check_mark:       | :white_check_mark:       | —                        | —                        |
+| Proportional meter   | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Histogram            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Tree                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Alluvial             | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+| Heatmap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
 | Parallel coordinates | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 
 Have a bug or a feature request? First read the
 [issue guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md#issue-guidelines)
-and search for existing and closed issues. If your problem or idea is not
-addressed yet,
+and search for existing and closed issues. If your problem or idea is not addressed yet,
 [open a new issue](https://github.com/carbon-design-system/carbon-charts/issues/new).
 
 ## Contributing
 
 See our
 [contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/.github/CONTRIBUTING.md).
-Included are instructions for opening issues, coding guidelines, and submitting
-pull requests.
+Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
 
@@ -94,9 +95,8 @@ Get updates on Charts' development and chat with the core team and community. --
 
 ## Versioning
 
-We use the **semantic-release** library to automatically version our releases
-within the guidelines of Semantic Versioning
-[Semantic Versioning guidelines](http://semver.org/).
+We use the **semantic-release** library to automatically version our releases within the guidelines
+of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
 See our
 [release change logs](https://github.com/carbon-design-system/carbon-charts/blob/master/CHANGELOG.md)

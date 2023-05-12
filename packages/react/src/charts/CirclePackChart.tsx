@@ -1,5 +1,9 @@
 import React from 'react'
-import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	CirclePackChart as CirclePackChartCore,
+	type CirclePackChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class CirclePackChart extends BaseChart<CirclePackChartOptions> {

@@ -1,5 +1,9 @@
 import React from 'react'
-import { StackedAreaChart as StackedAreaChartCore, type StackedAreaChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	StackedAreaChart as StackedAreaChartCore,
+	type StackedAreaChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class StackedAreaChart extends BaseChart<StackedAreaChartOptions> {

@@ -1,5 +1,9 @@
 import React from 'react'
-import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	BoxplotChart as BoxplotChartCore,
+	type BoxplotChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class BoxplotChart extends BaseChart<BoxplotChartOptions> {

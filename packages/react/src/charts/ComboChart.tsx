@@ -1,5 +1,9 @@
 import React from 'react'
-import { ComboChart as ComboChartCore, type ComboChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	ComboChart as ComboChartCore,
+	type ComboChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class ComboChart extends BaseChart<ComboChartOptions> {

@@ -1,5 +1,9 @@
 import React from 'react'
-import { GaugeChart as GaugeChartCore, type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	GaugeChart as GaugeChartCore,
+	type GaugeChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class GaugeChart extends BaseChart<GaugeChartOptions> {

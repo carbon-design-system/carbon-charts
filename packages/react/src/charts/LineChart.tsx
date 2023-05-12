@@ -1,5 +1,9 @@
 import React from 'react'
-import { LineChart as LineChartCore, type LineChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	LineChart as LineChartCore,
+	type LineChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class LineChart extends BaseChart<LineChartOptions> {

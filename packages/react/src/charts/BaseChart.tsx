@@ -12,7 +12,9 @@ const chartsPrefix = 'cc'
 export const hasChartBeenInitialized = (chartHolder: HTMLElement) =>
 	!!chartHolder.querySelector(`div.${carbonPrefix}--${chartsPrefix}--chart-wrapper`)
 
-export default class BaseChart<Options extends BaseChartOptions = BaseChartOptions> extends React.Component<Props<Options>> {
+export default class BaseChart<
+	Options extends BaseChartOptions = BaseChartOptions
+> extends React.Component<Props<Options>> {
 	data: ChartTabularData
 	options: Options
 	chart!: BaseChartCore
@@ -49,9 +51,15 @@ export default class BaseChart<Options extends BaseChartOptions = BaseChartOptio
 		if (this.chartRef && !hasChartBeenInitialized(this.chartRef)) {
 			this.chart = this.createChart(this.chartRef, this.props.data, this.props.options)
 		}
-	}	
+	}
 
 	render() {
-		return <div ref={(chartRef) => { if (chartRef) this.chartRef = chartRef }} className="chart-holder"></div>
+		return (
+			<div
+				ref={(chartRef) => {
+					if (chartRef) this.chartRef = chartRef
+				}}
+				className="chart-holder"></div>
+		)
 	}
 }

@@ -1,5 +1,9 @@
 import React from 'react'
-import { MeterChart as MeterChartCore, type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	MeterChart as MeterChartCore,
+	type MeterChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class MeterChart extends BaseChart<MeterChartOptions> {

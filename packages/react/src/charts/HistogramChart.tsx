@@ -1,5 +1,9 @@
 import React from 'react'
-import { HistogramChart as HistogramChartCore, type HistogramChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	HistogramChart as HistogramChartCore,
+	type HistogramChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class HistogramChart extends BaseChart<HistogramChartOptions> {

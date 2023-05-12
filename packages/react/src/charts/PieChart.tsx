@@ -1,5 +1,9 @@
 import React from 'react'
-import { PieChart as PieChartCore, type PieChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	PieChart as PieChartCore,
+	type PieChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class PieChart extends BaseChart<PieChartOptions> {

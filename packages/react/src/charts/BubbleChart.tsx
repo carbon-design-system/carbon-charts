@@ -1,5 +1,9 @@
 import React from 'react'
-import { BubbleChart as BubbleChartCore, type BubbleChartOptions, type ChartTabularData } from '@carbon/charts'
+import {
+	BubbleChart as BubbleChartCore,
+	type BubbleChartOptions,
+	type ChartTabularData
+} from '@carbon/charts'
 import BaseChart from './BaseChart'
 
 export default class BubbleChart extends BaseChart<BubbleChartOptions> {
