@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	TreeChart as TreeChartCore,
 	type TreeChartOptions,

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	WordCloudChart as WordCloudChartCore,
 	type WorldCloudChartOptions,

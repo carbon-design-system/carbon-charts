@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	MeterChart as MeterChartCore,
 	type MeterChartOptions,

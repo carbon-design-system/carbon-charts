@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	ScatterChart as ScatterChartCore,
 	type ScatterChartOptions,

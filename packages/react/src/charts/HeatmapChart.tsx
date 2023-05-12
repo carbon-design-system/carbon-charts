@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	HeatmapChart as HeatmapChartCore,
 	type HeatmapChartOptions,

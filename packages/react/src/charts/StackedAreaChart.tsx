@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	StackedAreaChart as StackedAreaChartCore,
 	type StackedAreaChartOptions,

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	GroupedBarChart as GroupedBarChartCore,
 	type BarChartOptions,

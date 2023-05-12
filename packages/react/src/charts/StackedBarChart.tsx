@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	StackedBarChart as StackedBarChartCore,
 	type StackedBarChartOptions,

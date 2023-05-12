@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	LineChart as LineChartCore,
 	type LineChartOptions,

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	TreemapChart as TreemapChartCore,
 	type TreemapChartOptions,

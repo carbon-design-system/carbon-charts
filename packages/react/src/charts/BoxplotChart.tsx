@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	BoxplotChart as BoxplotChartCore,
 	type BoxplotChartOptions,

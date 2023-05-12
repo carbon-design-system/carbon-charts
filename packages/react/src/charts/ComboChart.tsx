@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	ComboChart as ComboChartCore,
 	type ComboChartOptions,

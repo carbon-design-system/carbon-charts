@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	RadarChart as RadarChartCore,
 	type RadarChartOptions,

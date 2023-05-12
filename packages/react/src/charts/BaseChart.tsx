@@ -6,41 +6,29 @@ interface Props<Options extends BaseChartOptions> {
 	data: ChartTabularData
 }
 
-const carbonPrefix = 'cds'
-const chartsPrefix = 'cc'
-
-export const hasChartBeenInitialized = (chartHolder: HTMLElement) =>
-	!!chartHolder.querySelector(`div.${carbonPrefix}--${chartsPrefix}--chart-wrapper`)
-
+// TODO: add abstract keyword once React 16 support no longer needed
 export default class BaseChart<
 	Options extends BaseChartOptions = BaseChartOptions
-> extends React.Component<Props<Options>> {
-	data: ChartTabularData
-	options: Options
-	chart!: BaseChartCore
-	chartRef?: HTMLDivElement = undefined
+> extends React.PureComponent<Props<Options>, unknown> {
+	chart?: BaseChartCore
+	chartRef = React.createRef<HTMLDivElement>()
 
-	constructor(props: Props<Options>) {
-		super(props)
-
-		this.data = props.data
-		this.options = props.options
-
-		Object.assign(this, this.chart)
-	}
-
-	// Derived classes must override to create their specific chart
+	// TODO: add abstract keyword once React 16 support no longer needed then remove the next 3 comments
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	createChart(chartRef: HTMLDivElement, data: ChartTabularData, options: Options): BaseChartCore {
 		throw new Error('Method not implemented.')
 	}
 
-	shouldComponentUpdate(nextProps: Props<Options>) {
-		return this.props.data !== nextProps.data || this.props.options !== nextProps.options
-	}
+	componentDidUpdate(prevProps: Props<Options>) {
+		if (this.props.data !== prevProps.data) {
+			this.chart?.model.setData(this.props.data)
+		}
 
-	componentDidUpdate() {
-		this.chart.model.setData(this.props.data)
-		this.chart.model.setOptions(this.props.options)
+		if (this.props.options !== prevProps.options) {
+			this.chart?.model.setOptions(this.props.options)
+		}
 	}
 
 	componentWillUnmount() {
@@ -48,18 +36,12 @@ export default class BaseChart<
 	}
 
 	componentDidMount() {
-		if (this.chartRef && !hasChartBeenInitialized(this.chartRef)) {
-			this.chart = this.createChart(this.chartRef, this.props.data, this.props.options)
+		if (this.chartRef.current && !this.chart) {
+			this.chart = this.createChart(this.chartRef.current, this.props.data, this.props.options)
 		}
 	}
 
 	render() {
-		return (
-			<div
-				ref={(chartRef) => {
-					if (chartRef) this.chartRef = chartRef
-				}}
-				className="chart-holder"></div>
-		)
+		return <div ref={this.chartRef} className="chart-holder"></div>
 	}
 }
