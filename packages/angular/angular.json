@@ -5,7 +5,7 @@
   "projects": {
     "charts-angular": {
       "projectType": "library",
-      "root": "./",
+      "root": ".",
       "sourceRoot": "src",
       "prefix": "ibm",
       "architect": {
@@ -29,7 +29,10 @@
           "options": {
             "main": "src/test.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         },
         "storybook": {
@@ -65,17 +68,24 @@
             "outputDir": "demo/bundle",
             "quiet": true
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "./**/*.ts",
+              "./**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
     "analytics": false,
-    "packageManager": "yarn"
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "ibm"
-    }
+    "packageManager": "yarn",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -4,6 +4,7 @@
   "name": "root",
   "packages": ["packages/*"],
   "npmClient": "yarn",
+  "useNx": false,
   "useWorkspaces": true,
   "command": {
     "publish": {

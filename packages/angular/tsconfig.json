@@ -3,10 +3,24 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     // Package-specific
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "outDir": "./dist/out-tsc",
+    // "paths": {
+    //   "charts-angular": [
+    //     "dist"
+    //   ]
+    // },
     "types": [
       "vite/client" // for experimental builds `yarn build:package:vite` only
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "include": [
     "src",
@@ -21,11 +35,9 @@
     }
   ],
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
+    "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

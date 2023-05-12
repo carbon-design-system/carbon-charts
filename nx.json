@@ -1,0 +1,4 @@
+{
+  "extends": "nx/presets/npm.json",
+  "npmScope": "carbon"
+}
