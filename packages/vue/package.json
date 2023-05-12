@@ -38,6 +38,9 @@
     "format": "prettier --write src/ --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle"
   },
+  "peerDependencies": {
+    "vue": "*"
+  },
   "dependencies": {
     "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "~0.1.0",
