@@ -9,6 +9,6 @@ import { carbonPrefix } from '../../config'
 		</xhtml:div>
 	`
 })
-export class CardNodeSubtitle {
+export class CardNodeSubtitleComponent {
 	namespace = `${carbonPrefix}--cc--card-node__subtitle`
 }

@@ -20,7 +20,7 @@ const template = `
 	selector: '[ibm-graph-marker]',
 	template
 })
-export class Marker {
+export class MarkerComponent {
 	@Input() d = ''
 	@Input() color = ''
 	@Input() id = ''
@@ -60,7 +60,7 @@ export class Marker {
 	selector: '[ibm-graph-marker-arrow-left]',
 	template
 })
-export class MarkerArrowLeft extends Marker implements OnInit {
+export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...arrowLeft })
 	}
@@ -69,7 +69,7 @@ export class MarkerArrowLeft extends Marker implements OnInit {
 	selector: '[ibm-graph-marker-arrow-right]',
 	template
 })
-export class MarkerArrowRight extends Marker implements OnInit {
+export class MarkerArrowRightComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...arrowRight })
 	}
@@ -78,7 +78,7 @@ export class MarkerArrowRight extends Marker implements OnInit {
 	selector: '[ibm-graph-marker-circle]',
 	template
 })
-export class MarkerShapeNode extends Marker implements OnInit {
+export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...circle })
 	}
@@ -87,7 +87,7 @@ export class MarkerShapeNode extends Marker implements OnInit {
 	selector: '[ibm-graph-marker-diamond]',
 	template
 })
-export class MarkerDiamond extends Marker implements OnInit {
+export class MarkerDiamondComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...diamond })
 	}
@@ -96,7 +96,7 @@ export class MarkerDiamond extends Marker implements OnInit {
 	selector: '[ibm-graph-marker-square]',
 	template
 })
-export class MarkerSquare extends Marker implements OnInit {
+export class MarkerSquareComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...square })
 	}
@@ -105,7 +105,7 @@ export class MarkerSquare extends Marker implements OnInit {
 	selector: '[ibm-graph-marker-tee]',
 	template
 })
-export class MarkerTee extends Marker implements OnInit {
+export class MarkerTeeComponent extends MarkerComponent implements OnInit {
 	ngOnInit() {
 		this.setAttributes({ ...tee })
 	}

@@ -26,7 +26,7 @@ interface Coordinates {
 		</svg:g>
 	`
 })
-export class Edge {
+export class EdgeComponent {
 	@Input() color = ''
 	@Input() markerEnd = ''
 	@Input() markerStart = ''

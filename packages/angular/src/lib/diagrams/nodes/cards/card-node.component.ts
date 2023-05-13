@@ -69,19 +69,19 @@ import { carbonPrefix } from '../../config'
 		</ng-template>
 	`
 })
-export class CardNode implements OnInit {
+export class CardNodeComponent implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
 	@Input() color = ''
 	@Input() stacked = false
-	@Input() position: string = 'static'
+	@Input() position = 'static'
 
-	@Output() click: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()
+	@Output() click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseEnter: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseOver: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseOut: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseLeave: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseMove: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 
 	namespace = `${carbonPrefix}--cc--card-node`
 

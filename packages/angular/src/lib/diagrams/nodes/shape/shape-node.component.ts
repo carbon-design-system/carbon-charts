@@ -87,7 +87,7 @@ import { carbonPrefix } from '../../config'
 		</ng-template>
 	`
 })
-export class ShapeNode implements OnInit {
+export class ShapeNodeComponent implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
 	@Input() renderIcon?: TemplateRef<any>
@@ -96,15 +96,15 @@ export class ShapeNode implements OnInit {
 	@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'
 	@Input() subtitle = ''
 	@Input() title = ''
-	@Input() position: string = 'fixed'
-	@Input() bodyPosition: string = 'absolute'
+	@Input() position = 'fixed'
+	@Input() bodyPosition = 'absolute'
 
-	@Output() click: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseEnter: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseOver: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseOut: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>()
-	@Output() mouseMove: EventEmitter<any> = new EventEmitter<any>()
+	@Output() click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseEnter: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseOver: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseOut: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseLeave: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+	@Output() mouseMove: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 
 	namespace = `${carbonPrefix}--cc--shape-node`
 	component = 'div'

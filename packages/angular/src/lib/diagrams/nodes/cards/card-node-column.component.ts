@@ -9,7 +9,7 @@ import { carbonPrefix } from '../../config'
 		</xhtml:div>
 	`
 })
-export class CardNodeColumn {
+export class CardNodeColumnComponent {
 	@Input() farsideColumn = false
 
 	@HostBinding('class') get class() {

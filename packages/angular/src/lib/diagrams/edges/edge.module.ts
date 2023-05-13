@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { Edge } from './edge.component'
-export { Edge } from './edge.component'
+import { EdgeComponent } from './edge.component'
+export { EdgeComponent } from './edge.component'
 
 @NgModule({
-	declarations: [Edge],
+	declarations: [EdgeComponent],
 	imports: [CommonModule],
-	exports: [Edge]
+	exports: [EdgeComponent]
 })
 export class EdgeModule {}

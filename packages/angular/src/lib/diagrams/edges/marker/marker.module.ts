@@ -1,43 +1,43 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
-	Marker,
-	MarkerArrowLeft,
-	MarkerArrowRight,
-	MarkerShapeNode,
-	MarkerDiamond,
-	MarkerSquare,
-	MarkerTee
+	MarkerComponent,
+	MarkerArrowLeftComponent,
+	MarkerArrowRightComponent,
+	MarkerShapeNodeComponent,
+	MarkerDiamondComponent,
+	MarkerSquareComponent,
+	MarkerTeeComponent
 } from './marker.component'
 
 export {
-	Marker,
-	MarkerArrowLeft,
-	MarkerArrowRight,
-	MarkerShapeNode,
-	MarkerDiamond,
-	MarkerSquare,
-	MarkerTee
+	MarkerComponent,
+	MarkerArrowLeftComponent,
+	MarkerArrowRightComponent,
+	MarkerShapeNodeComponent,
+	MarkerDiamondComponent,
+	MarkerSquareComponent,
+	MarkerTeeComponent
 }
 @NgModule({
 	declarations: [
-		Marker,
-		MarkerArrowLeft,
-		MarkerArrowRight,
-		MarkerShapeNode,
-		MarkerDiamond,
-		MarkerSquare,
-		MarkerTee
+		MarkerComponent,
+		MarkerArrowLeftComponent,
+		MarkerArrowRightComponent,
+		MarkerShapeNodeComponent,
+		MarkerDiamondComponent,
+		MarkerSquareComponent,
+		MarkerTeeComponent
 	],
 	imports: [CommonModule],
 	exports: [
-		Marker,
-		MarkerArrowLeft,
-		MarkerArrowRight,
-		MarkerShapeNode,
-		MarkerDiamond,
-		MarkerSquare,
-		MarkerTee
+		MarkerComponent,
+		MarkerArrowLeftComponent,
+		MarkerArrowRightComponent,
+		MarkerShapeNodeComponent,
+		MarkerDiamondComponent,
+		MarkerSquareComponent,
+		MarkerTeeComponent
 	]
 })
 export class MarkerModule {}

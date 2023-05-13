@@ -31,22 +31,22 @@ export {
 	TreemapChartComponent,
 	WordCloudChartComponent,
 	// diagrams
-	CardNodeColumn,
-	CardNode,
-	CardNodeLabel,
-	CardNodeSubtitle,
-	CardNodeTitle,
+	CardNodeColumnComponent,
+	CardNodeComponent,
+	CardNodeLabelComponent,
+	CardNodeSubtitleComponent,
+	CardNodeTitleComponent,
 	CardNodeModule, // <-- Module
-	Edge,
+	EdgeComponent,
 	EdgeModule, // <-- Module
-	MarkerArrowLeft,
-	MarkerArrowRight,
-	Marker,
-	MarkerDiamond,
+	MarkerArrowLeftComponent,
+	MarkerArrowRightComponent,
+	MarkerComponent,
+	MarkerDiamondComponent,
 	MarkerModule, // <-- Module
-	MarkerShapeNode,
-	MarkerSquare,
-	MarkerTee,
-	ShapeNode,
+	MarkerShapeNodeComponent,
+	MarkerSquareComponent,
+	MarkerTeeComponent,
+	ShapeNodeComponent,
 	ShapeNodeModule // <-- Module
 } from './lib'
