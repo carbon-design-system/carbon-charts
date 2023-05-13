@@ -90,7 +90,7 @@ import { carbonPrefix } from '../../config'
 export class ShapeNodeComponent implements OnInit {
 	@Input() as = 'div'
 	@Input() href = ''
-	@Input() renderIcon?: TemplateRef<any>
+	@Input() renderIcon?: TemplateRef<void>
 	@Input() size = 48
 	@Input() stacked = false
 	@Input() shape: 'circle' | 'square' | 'rounded-square' = 'circle'
@@ -99,6 +99,7 @@ export class ShapeNodeComponent implements OnInit {
 	@Input() position = 'fixed'
 	@Input() bodyPosition = 'absolute'
 
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseEnter: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseOver: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()

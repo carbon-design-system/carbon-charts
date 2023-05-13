@@ -8,7 +8,7 @@ interface Coordinates {
 	y: number
 }
 @Component({
-	selector: '[ibm-graph-edge]',
+	selector: 'ibm-graph-edge, [ibm-graph-edge]',
 	template: `
 		<svg:g [ngClass]="[namespace, variant ? namespace + '--' + variant : '']">
 			<svg:path

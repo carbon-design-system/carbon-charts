@@ -17,7 +17,7 @@ const template = `
 `
 
 @Component({
-	selector: '[ibm-graph-marker]',
+	selector: 'ibm-graph-marker,[ibm-graph-marker]',
 	template
 })
 export class MarkerComponent {
@@ -57,7 +57,7 @@ export class MarkerComponent {
 }
 
 @Component({
-	selector: '[ibm-graph-marker-arrow-left]',
+	selector: 'ibm-graph-marker-arrow-left,[ibm-graph-marker-arrow-left]',
 	template
 })
 export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {
@@ -66,7 +66,7 @@ export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit 
 	}
 }
 @Component({
-	selector: '[ibm-graph-marker-arrow-right]',
+	selector: 'ibm-graph-marker-arrow-right,[ibm-graph-marker-arrow-right]',
 	template
 })
 export class MarkerArrowRightComponent extends MarkerComponent implements OnInit {
@@ -75,7 +75,7 @@ export class MarkerArrowRightComponent extends MarkerComponent implements OnInit
 	}
 }
 @Component({
-	selector: '[ibm-graph-marker-circle]',
+	selector: 'ibm-graph-marker-circle,[ibm-graph-marker-circle]',
 	template
 })
 export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {
@@ -84,7 +84,7 @@ export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit 
 	}
 }
 @Component({
-	selector: '[ibm-graph-marker-diamond]',
+	selector: 'ibm-graph-marker-diamond,[ibm-graph-marker-diamond]',
 	template
 })
 export class MarkerDiamondComponent extends MarkerComponent implements OnInit {
@@ -93,7 +93,7 @@ export class MarkerDiamondComponent extends MarkerComponent implements OnInit {
 	}
 }
 @Component({
-	selector: '[ibm-graph-marker-square]',
+	selector: 'ibm-graph-marker-square,[ibm-graph-marker-square]',
 	template
 })
 export class MarkerSquareComponent extends MarkerComponent implements OnInit {
@@ -102,7 +102,7 @@ export class MarkerSquareComponent extends MarkerComponent implements OnInit {
 	}
 }
 @Component({
-	selector: '[ibm-graph-marker-tee]',
+	selector: 'ibm-graph-marker-tee,[ibm-graph-marker-tee]',
 	template
 })
 export class MarkerTeeComponent extends MarkerComponent implements OnInit {
