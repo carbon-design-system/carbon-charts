@@ -29,7 +29,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "lib",
+            "prefix": "ibm",
             "style": "kebab-case"
           }
         ]

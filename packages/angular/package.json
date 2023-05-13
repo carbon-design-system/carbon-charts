@@ -22,7 +22,8 @@
     "build": "yarn build:package && yarn build:demo",
     "storybook": "ng run charts-angular:storybook",
     "start": "yarn storybook",
-    "lint": "ng lint --ignore-path ../../.eslintignore",
+    "lint:angular": "ng lint --ignore-path ../../.eslintignore",
+    "lint": "eslint . --ignore-path ../../.eslintignore",
     "format": "prettier --write src/ --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle"
   },
