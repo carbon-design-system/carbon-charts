@@ -73,7 +73,7 @@ export class MeterTitle extends Title {
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
-					  })
+						})
 					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
 		}
 

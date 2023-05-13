@@ -57,7 +57,7 @@ export class Chart {
 		})
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e: any) => {
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, () => {
 			this.update()
 		})
 

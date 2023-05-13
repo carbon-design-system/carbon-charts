@@ -88,14 +88,14 @@ export class ChartModelCartesian extends ChartModel {
 							datum[secondaryDomain.identifier] === null
 								? '&ndash;'
 								: datum[secondaryDomain.identifier]
-					  ]
+						]
 					: []),
 				...(secondaryRange
 					? [
 							datum[secondaryRange.identifier] === null || isNaN(datum[secondaryRange.identifier])
 								? '&ndash;'
 								: datum[secondaryRange.identifier]
-					  ]
+						]
 					: [])
 			])
 		]

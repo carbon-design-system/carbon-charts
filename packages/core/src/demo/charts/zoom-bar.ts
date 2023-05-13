@@ -36,7 +36,7 @@ export const addZoomBarToOptions = (
 				...(configs.sliderView
 					? {
 							type: 'slider_view'
-					  }
+						}
 					: null)
 			}
 		}
@@ -48,7 +48,7 @@ export const addZoomBarToOptions = (
 				...(configs.sliderView
 					? {
 							type: 'slider_view'
-					  }
+						}
 					: null)
 			}
 		}

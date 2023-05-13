@@ -206,7 +206,7 @@ const chart: BaseChartOptions = {
 						{
 							type: ToolbarControlTypes.MAKE_FULLSCREEN
 						}
-				  ]
+					]
 				: []),
 			{
 				type: ToolbarControlTypes.EXPORT_CSV
