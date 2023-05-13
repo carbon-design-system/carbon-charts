@@ -1,9 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/blocks'
-import { DiagramExample1 } from './diagram-example1.component'
-import '@carbon/charts/demo/styles.css'
+import * as Diagram1Stories from './example1/diagram-example1.stories'
 
-<Meta title="Diagrams/Example 1" component={DiagramExample1} />
-export const Template = args => ({ props: args })
+<Meta of={Diagram1Stories} />
 
 # Diagrams
 
@@ -13,11 +11,7 @@ Angular components for building diagram experiences, using the Carbon Design Sys
 
 ## Example 1: Simple static layout
 
-<Canvas>
-	<Story name="Example 1">
-	  {Template.bind({})}
-	</Story>
-</Canvas>
+<Canvas of={Diagram1Stories.Primary} />
 
 ```ts
 // diagram-example.component.ts

@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { buildElbowPathString } from '@carbon/charts'
+import { buildElbowPathString, type Coordinates } from '@carbon/charts'
 import { UserModule, WikisModule } from '@carbon/icons-angular'
 import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
@@ -150,12 +150,12 @@ const edgeData = [
 	{
 		source: 'c',
 		target: 'b',
-		path: (source: any, target: any) => buildElbowPathString(source, target)
+		path: (source: Coordinates, target: Coordinates) => buildElbowPathString(source, target)
 	},
 	{
 		source: 'd',
 		target: 'c',
-		path: (source: any, target: any) => buildElbowPathString(source, target),
+		path: (source: Coordinates, target: Coordinates) => buildElbowPathString(source, target),
 		variant: 'tunnel'
 	}
 ]
@@ -164,15 +164,18 @@ const edgeMapped = edgeData.map((link) => {
 	const sourceNode = nodeData.find((node) => node.id === link.source)
 	const targetNode = nodeData.find((node) => node.id === link.target)
 
+	if (!sourceNode || !targetNode)
+		throw new Error('Either sourceNode or targetNode were not defined.')
+
 	return {
 		...link,
 		source: {
-			x: sourceNode!.x + sourceNode!.nodeWidth / 2,
-			y: sourceNode!.y + sourceNode!.nodeHeight / 2
+			x: sourceNode.x + sourceNode.nodeWidth / 2,
+			y: sourceNode.y + sourceNode.nodeHeight / 2
 		},
 		target: {
-			x: targetNode!.x + targetNode!.nodeWidth / 2,
-			y: targetNode!.y + targetNode!.nodeHeight / 2
+			x: targetNode.x + targetNode.nodeWidth / 2,
+			y: targetNode.y + targetNode.nodeHeight / 2
 		}
 	}
 })
