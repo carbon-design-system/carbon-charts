@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	StackedAreaChart as StackedAreaChartCore,
 	type StackedAreaChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-stacked-area-chart',
 	template: ``
 })
-export class StackedAreaChart extends BaseChart implements AfterViewInit {
+export class StackedAreaChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

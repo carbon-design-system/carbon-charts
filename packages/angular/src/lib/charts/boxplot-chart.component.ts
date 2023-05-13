@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	BoxplotChart as BoxplotChartCore,
 	type ChartTabularData,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-boxplot-chart',
 	template: ``
 })
-export class BoxplotChart extends BaseChart implements AfterViewInit {
+export class BoxplotChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	GaugeChart as GaugeChartCore,
 	type GaugeChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-gauge-chart',
 	template: ``
 })
-export class GaugeChart extends BaseChart implements AfterViewInit {
+export class GaugeChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

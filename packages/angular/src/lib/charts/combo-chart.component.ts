@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	ComboChart as ComboChartCore,
 	type ComboChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-combo-chart',
 	template: ``
 })
-export class ComboChart extends BaseChart implements AfterViewInit {
+export class ComboChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

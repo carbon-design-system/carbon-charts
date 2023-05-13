@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	CirclePackChart as CirclePackChartCore,
 	type CirclePackChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-circle-pack-chart',
 	template: ``
 })
-export class CirclePackChart extends BaseChart implements AfterViewInit {
+export class CirclePackChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

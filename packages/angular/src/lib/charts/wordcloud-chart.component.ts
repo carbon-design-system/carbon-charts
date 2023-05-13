@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	WordCloudChart as WordCloudChartCore,
 	type WorldCloudChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-wordcloud-chart',
 	template: ``
 })
-export class WordCloudChart extends BaseChart implements AfterViewInit {
+export class WordCloudChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

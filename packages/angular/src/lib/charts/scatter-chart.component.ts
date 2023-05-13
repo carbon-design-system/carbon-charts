@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	ScatterChart as ScatterChartCore,
 	type ScatterChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-scatter-chart',
 	template: ``
 })
-export class ScatterChart extends BaseChart implements AfterViewInit {
+export class ScatterChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

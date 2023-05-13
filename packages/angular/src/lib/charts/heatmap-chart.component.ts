@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	HeatmapChart as HeatmapChartCore,
 	type HeatmapChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-heatmap-chart',
 	template: ``
 })
-export class HeatmapChart extends BaseChart implements AfterViewInit {
+export class HeatmapChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

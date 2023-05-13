@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	TreemapChart as TreemapChartCore,
 	type TreemapChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-treemap-chart',
 	template: ``
 })
-export class TreemapChart extends BaseChart implements AfterViewInit {
+export class TreemapChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	BulletChart as BulletChartCore,
 	type BulletChartOptions,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-bullet-chart',
 	template: ``
 })
-export class BulletChart extends BaseChart implements AfterViewInit {
+export class BulletChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

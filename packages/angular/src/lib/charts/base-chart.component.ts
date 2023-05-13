@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core'
-import type { ChartTabularData } from '@carbon/charts'
+import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
 
 /**
  * Wrapper around `BaseChart` in carbon charts library
@@ -10,7 +10,7 @@ import type { ChartTabularData } from '@carbon/charts'
 	selector: 'ibm-base-chart',
 	template: ``
 })
-export class BaseChart implements AfterViewInit, OnInit {
+export class BaseChartComponent implements AfterViewInit, OnInit {
 	/**
 	 * Data passed to charts library for displaying
 	 */
@@ -32,7 +32,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Options passed to charts library
 	 */
-	@Input() set options(newOptions: any) {
+	@Input() set options(newOptions: BaseChartOptions) {
 		// If data already exists, that means the chart has been initialized
 		const optionsExistAlready = !!this._options
 
@@ -68,10 +68,10 @@ export class BaseChart implements AfterViewInit, OnInit {
 	 * You can use this to do whatever you would normally do with a chart if you used
 	 * charts library directly.
 	 */
-	chart: any
+	chart!: Charts
 
 	private _data!: ChartTabularData
-	private _options: any
+	private _options!: BaseChartOptions
 
 	constructor(protected elementRef: ElementRef) {}
 
@@ -90,5 +90,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 */
-	ngAfterViewInit() {}
+	ngAfterViewInit() {
+		console.log('Class that extended BaseChartComponent did not implement ngAfterViewInit().')
+	}
 }

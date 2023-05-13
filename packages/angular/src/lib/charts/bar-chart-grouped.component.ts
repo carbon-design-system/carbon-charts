@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { BaseChart } from './base-chart.component'
+import { BaseChartComponent } from './base-chart.component'
 import {
 	GroupedBarChart as GroupedBarChartCore,
 	type ChartTabularData,
@@ -15,7 +15,7 @@ import {
 	selector: 'ibm-grouped-bar-chart',
 	template: ``
 })
-export class GroupedBarChart extends BaseChart implements AfterViewInit {
+export class GroupedBarChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
