@@ -8,6 +8,11 @@ import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefi
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 
+export interface Dimensions {
+  height: number
+  width: number
+}
+
 export interface getSVGElementSizeOptions {
 	useAttrs?: boolean
 	useClientDimensions?: boolean
@@ -16,8 +21,7 @@ export interface getSVGElementSizeOptions {
 }
 
 export class DOMUtils extends Service {
-	// Initialized in init
-	private chartID: string
+	private chartID = '' // initialized in initializeID() called by init()
 
 	constructor(model: ChartModel, services: any) {
 		super(model, services)
@@ -40,7 +44,7 @@ export class DOMUtils extends Service {
 		}
 	) {
 		if (!svgSelector.attr) {
-			svgSelector = select(svgSelector as any)
+			svgSelector = select<SVGGraphicsElement, any>(svgSelector)
 		}
 
 		const finalDimensions = {
@@ -74,13 +78,13 @@ export class DOMUtils extends Service {
 		const svgElement = svgSelector.node()
 
 		let bbox: DOMRect,
-			bboxDimensions: Partial<DOMRect>,
+			bboxDimensions: Dimensions,
 			boundingRect: DOMRect,
-			boundingRectDimensions: Partial<DOMRect>
+			boundingRectDimensions: Dimensions
 
 		try {
 			// Not all SVG graphics elements have bounding boxes (eg <defs>, <title>, <styles>)
-			if (typeof svgElement.getBBox === 'function') {
+			if (typeof svgElement?.getBBox === 'function') {
 				bbox = svgElement.getBBox()
 				bboxDimensions = {
 					width: bbox.width,
@@ -93,7 +97,7 @@ export class DOMUtils extends Service {
 
 		try {
 			// Not all SVG graphics elements have...
-			if (typeof svgElement.getBoundingClientRect === 'function') {
+			if (typeof svgElement?.getBoundingClientRect === 'function') {
 				boundingRect = svgElement.getBoundingClientRect()
 				boundingRectDimensions = {
 					width: boundingRect.width,
@@ -105,7 +109,7 @@ export class DOMUtils extends Service {
 		}
 
 		// Not all SVG graphics elements have...
-		let clientDimensions: Partial<DOMRect>
+		let clientDimensions: Dimensions
 		if (svgElement instanceof SVGSVGElement) {
 			clientDimensions = {
 				width: svgElement.clientWidth,
@@ -164,7 +168,7 @@ export class DOMUtils extends Service {
 		return finalDimensions
 	}
 
-	static appendOrSelect(parent: any, query: string) {
+	static appendOrSelect(parent: Selection<SVGGraphicsElement, any, HTMLElement, any>, query: string) {
 		const selection = parent.select(`${query}`)
 
 		if (selection.empty()) {

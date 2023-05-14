@@ -1,9 +1,11 @@
-// Internal Imports
+import type { Selection as D3Selection } from 'd3'
 import { Title } from './title'
 import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { RenderTypes, Statuses } from '../../interfaces/enums'
 import { meter } from '../../configuration'
+import { MeterChartModel } from '../../model'
+import { Dimensions } from '../../services/essentials/dom-utils'
 
 export class MeterTitle extends Title {
 	type = 'meter-title'
@@ -55,7 +57,7 @@ export class MeterTitle extends Title {
 	displayBreakdownTitle() {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
-		const datasetsTotal = this.model.getMaximumDomain(this.model.getDisplayData())
+		const datasetsTotal = (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
 		const total = getProperty(options, 'meter', 'proportional', 'total')
 		const unit = getProperty(options, 'meter', 'proportional', 'unit')
 			? getProperty(options, 'meter', 'proportional', 'unit')
@@ -108,7 +110,7 @@ export class MeterTitle extends Title {
 
 		const totalValue = total
 			? getProperty(options, 'meter', 'proportional', 'total')
-			: this.model.getMaximumDomain(this.model.getDisplayData())
+			: (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
 
 		const unit = getProperty(options, 'meter', 'proportional', 'unit')
 			? getProperty(options, 'meter', 'proportional', 'unit')
@@ -156,7 +158,7 @@ export class MeterTitle extends Title {
 		const self = this
 		const svg = this.getComponentContainer()
 
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
+		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer()) as Dimensions
 
 		// need to check if the width is 0, and try to use the parent attribute
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
@@ -172,7 +174,7 @@ export class MeterTitle extends Title {
 			.attr('transform', `translate(${containerWidth - radius}, 0)`)
 
 		const data = status ? [status] : []
-		const icon = statusGroup.selectAll('circle.status').data(data)
+		const icon = statusGroup.selectAll('circle.status').data(data) as D3Selection<SVGCircleElement, any, Element, any>
 
 		icon
 			.enter()
@@ -181,7 +183,7 @@ export class MeterTitle extends Title {
 			.attr('class', 'status')
 			.attr('r', radius)
 			.attr('cx', 0)
-			.attr('cy', `calc(1em / 2)`)
+			.attr('cy', 8) // replaced `calc(1em / 2)` which is not an acceptable value for an SVG element's cy value
 
 		const innerIcon = statusGroup.selectAll('path.innerFill').data(data)
 
@@ -260,10 +262,10 @@ export class MeterTitle extends Title {
 
 		const proportional = getProperty(this.getOptions(), 'meter', 'proportional')
 
-		// need to check if the width is 0, and try to use the parent attribute
+		// Use parent's width if container has no width
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute('width')
+			: this.parent.node().getBoundingClientRect().width // fix to ensure a number and not a percentage
 
 		if (proportional !== null) {
 			const total = DOMUtils.appendOrSelect(this.parent, 'text.proportional-meter-total').node()

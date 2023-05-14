@@ -1,4 +1,4 @@
-import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, select } from 'd3'
+import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, select, type Selection as D3Selection } from 'd3'
 import { Component } from '../component'
 import { AxisPositions, Events, ScaleTypes, Roles, TruncationTypes } from '../../interfaces'
 import { clamp, getProperty, getTranslationValues, truncateLabel } from '../../tools'
@@ -34,11 +34,11 @@ export class Axis extends Component {
 	}
 
 	render(animate = true) {
-		const { position: axisPosition } = this.configs
+		const { position: axisPosition }: { position: AxisPositions } = this.configs
 		const options = this.getOptions()
 		const isAxisVisible = getProperty(options, 'axes', axisPosition, 'visible')
 
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})
@@ -235,7 +235,7 @@ export class Axis extends Component {
 		const [lowerBound, upperBound] = this.services.cartesianScales
 			.getScaleByPosition(axisPosition)
 			.domain()
-		let validTicks
+		let validTicks: any
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
 				// sanitize user-provided tick values
@@ -414,7 +414,7 @@ export class Axis extends Component {
 				// If we're dealing with a discrete scale type
 				// We're able to grab the spacing between the ticks
 				if (scale.step) {
-					const textNodes = invisibleAxisRef.selectAll('g.tick text').nodes()
+					const textNodes = invisibleAxisRef.selectAll('g.tick text').nodes() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
@@ -430,7 +430,7 @@ export class Axis extends Component {
 
 					const averageLetterWidth = DOMUtils.getSVGElementSize(mockTextPiece.node(), {
 						useBBox: true
-					}).width
+					}).width as number
 
 					let lastStartPosition: any
 

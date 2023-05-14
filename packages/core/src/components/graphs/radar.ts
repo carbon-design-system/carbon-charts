@@ -1,4 +1,4 @@
-import { curveLinearClosed, extent, lineRadial, max, min, scaleBand, scaleLinear, select } from 'd3'
+import { curveLinearClosed, extent, lineRadial, max, min, scaleBand, scaleLinear, select, type Selection as D3Selection, type Transition } from 'd3'
 import { Component } from '../component'
 import { DOMUtils } from '../../services'
 import { Events, Roles, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
@@ -127,18 +127,17 @@ export class Radar extends Component {
 					.attr('opacity', 0)
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
-					.call((selection: any) =>
-						selection
-							.transition() // BUG: 19 console error for charts with missing datapoints (generated path has NaN in it)
-							.call((t: any) =>
-								this.services.transitions.setupTransition({
-									transition: t,
-									name: 'radar_y_axes_enter',
-									animate
-								})
-							)
-							.attr('opacity', 1)
-							.attr('d', (tick: any) => radialLineGenerator(shapeData(tick)))
+					.call((selection: D3Selection<Element, any, Element, any>) => selection
+						.transition() // BUG: 19 console error for charts with missing datapoints (generated path has NaN in it)
+						.call((t: Transition<Element, any, Element, any>) =>
+							this.services.transitions.setupTransition({
+								transition: t,
+								name: 'radar_y_axes_enter',
+								animate
+							})
+						)
+						.attr('opacity', 1)
+						.attr('d', (tick: number) => radialLineGenerator(shapeData(tick)))
 					),
 			(update: any) =>
 				update.call((selection: any) =>
@@ -582,7 +581,7 @@ export class Radar extends Component {
 		const options = this.getOptions()
 		const { angle, value } = getProperty(options, 'radar', 'axes')
 		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
-		return dataset.map(({ name, data }: { name: any, data: any}) => {
+		return dataset.map(({ name, data }: { name: any; data: any }) => {
 			const completeBlankData = this.uniqueKeys.map((k: any) => ({
 				[groupMapsTo]: name,
 				[angle]: k,
