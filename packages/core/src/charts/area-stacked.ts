@@ -1,8 +1,8 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
+import { type ChartConfig, type AreaChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
+import type { Component } from '../components'
 
 // Components
 import {
@@ -29,7 +29,7 @@ export class StackedAreaChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new StackedRuler(this.model, this.services),
@@ -45,7 +45,7 @@ export class StackedAreaChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

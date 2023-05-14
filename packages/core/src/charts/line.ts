@@ -1,11 +1,9 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import type { ChartConfig, LineChartOptions } from '../interfaces/index'
+import type { ChartConfig, LineChartOptions } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-
-// Components
 import {
+	type Component,
 	Grid,
 	Line,
 	Ruler,
@@ -13,7 +11,7 @@ import {
 	TwoDimensionalAxes,
 	ZeroLine,
 	SkeletonLines
-} from '../components/index'
+} from '../components'
 
 export class LineChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<LineChartOptions>) {
@@ -29,7 +27,7 @@ export class LineChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
@@ -39,7 +37,7 @@ export class LineChart extends AxisChart {
 			new ZeroLine(this.model, this.services)
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

@@ -1,11 +1,8 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import { ChartConfig, AreaChartOptions, Skeletons } from '../interfaces/index'
+import { type ChartConfig, type AreaChartOptions, Skeletons } from '../interfaces'
 import { clone, mergeDefaultChartOptions } from '../tools'
-
-// Components
-import { Grid, Area, Line, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
+import { type Component, Grid, Area, Line, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components'
 
 export class AreaChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AreaChartOptions>) {
@@ -21,7 +18,7 @@ export class AreaChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
@@ -36,7 +33,7 @@ export class AreaChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

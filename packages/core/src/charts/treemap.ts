@@ -1,12 +1,9 @@
-// Internal Imports
 import { Chart } from '../chart'
-import { TreemapChartModel } from '../model/treemap'
-import type { ChartConfig, TreemapChartOptions } from '../interfaces/index'
+import { TreemapChartModel } from '../model'
+import type { ChartConfig, TreemapChartOptions } from '../interfaces'
 import { options } from '../configuration'
 import { mergeDefaultChartOptions } from '../tools'
-
-// Components
-import { Treemap } from '../components/index'
+import { type Component, Treemap } from '../components'
 
 export class TreemapChart extends Chart {
 	model = new TreemapChartModel(this.services)
@@ -24,10 +21,10 @@ export class TreemapChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [new Treemap(this.model, this.services)]
+		const graphFrameComponents: Component[] = [new Treemap(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

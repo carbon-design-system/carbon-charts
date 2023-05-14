@@ -1,13 +1,9 @@
-// Internal Imports
-import { BoxplotChartModel } from '../model/boxplot'
+import { BoxplotChartModel } from '../model'
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import type { BoxplotChartOptions, ChartConfig } from '../interfaces/index'
+import { type BoxplotChartOptions, type ChartConfig, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Grid, Boxplot, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components/index'
+import { type Component, Grid, Boxplot, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components'
 
 export class BoxplotChart extends AxisChart {
 	model = new BoxplotChartModel(this.services)
@@ -25,7 +21,7 @@ export class BoxplotChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Boxplot(this.model, this.services),
@@ -35,7 +31,7 @@ export class BoxplotChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents, {
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents, {
 			legend: {
 				enabled: false
 			}

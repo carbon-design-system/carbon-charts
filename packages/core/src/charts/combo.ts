@@ -1,11 +1,9 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options as configOptions } from '../configuration'
-import { ChartConfig, ComboChartOptions, ChartTypes, Skeletons } from '../interfaces/index'
+import { type ChartConfig, type ComboChartOptions, ChartTypes, Skeletons } from '../interfaces'
 import { camelCase, flatten, merge, mergeDefaultChartOptions } from '../tools'
-
-// Components
 import {
+	type Component,
 	Grid,
 	GroupedBar,
 	SimpleBar,
@@ -20,7 +18,7 @@ import {
 	Ruler,
 	StackedRuler,
 	Skeleton
-} from '../components/index'
+} from '../components'
 
 const graphComponentsMap = {
 	[ChartTypes.LINE]: [Line, Scatter],
@@ -56,9 +54,9 @@ export class ComboChart extends AxisChart {
 	}
 
 	getGraphComponents() {
-		const { comboChartTypes } = this.model.getOptions()
+		const { comboChartTypes }: { comboChartTypes: Component[] } = this.model.getOptions()
 		let counter = 0
-		const graphComponents = comboChartTypes
+		const graphComponents: Component[] = comboChartTypes
 			.map((graph: any) => {
 				const type = graph.type
 				let options: any
@@ -127,7 +125,7 @@ export class ComboChart extends AxisChart {
 			...this.getGraphComponents()
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 
 		return components
 	}

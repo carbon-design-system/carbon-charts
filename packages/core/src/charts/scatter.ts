@@ -1,12 +1,8 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import type { ChartConfig, ScatterChartOptions } from '../interfaces/index'
+import  { type ChartConfig, type ScatterChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Grid, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components/index'
+import { type Component, Grid, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components'
 
 export class ScatterChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ScatterChartOptions>) {
@@ -22,7 +18,7 @@ export class ScatterChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
@@ -32,7 +28,7 @@ export class ScatterChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

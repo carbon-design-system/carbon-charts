@@ -1,12 +1,8 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import type { BarChartOptions, ChartConfig } from '../interfaces/index'
+import { type BarChartOptions, type ChartConfig, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Grid, SimpleBar, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components/index'
+import { type Component, Grid, SimpleBar, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components'
 
 export class SimpleBarChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BarChartOptions>) {
@@ -22,7 +18,7 @@ export class SimpleBarChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new SimpleBar(this.model, this.services),
@@ -32,7 +28,7 @@ export class SimpleBarChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

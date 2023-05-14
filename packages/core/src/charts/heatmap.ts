@@ -1,19 +1,18 @@
-// Internal Imports
-import { HeatmapModel } from '../model/heatmap'
+import { HeatmapModel } from '../model'
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
 import { getProperty, mergeDefaultChartOptions } from '../tools'
-
 import {
-	HeatmapChartOptions,
+	type HeatmapChartOptions,
 	LayoutDirection,
 	LayoutGrowth,
-	ChartConfig,
+	type ChartConfig,
 	RenderTypes,
 	LayoutAlignItems
-} from '../interfaces/index'
+} from '../interfaces'
 
 import {
+	type Component,
 	Heatmap,
 	TwoDimensionalAxes,
 	Modal,
@@ -128,7 +127,7 @@ export class HeatmapChart extends AxisChart {
 			growth: LayoutGrowth.STRETCH
 		}
 
-		const topLevelLayoutComponents = []
+		const topLevelLayoutComponents: any[] = []
 		// header component is required for either title or toolbar
 		if (titleAvailable || toolbarEnabled) {
 			topLevelLayoutComponents.push(headerComponent)
@@ -156,12 +155,12 @@ export class HeatmapChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Heatmap(this.model, this.services)
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

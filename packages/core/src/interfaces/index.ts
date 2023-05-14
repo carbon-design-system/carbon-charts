@@ -63,6 +63,8 @@ export type { Coordinates, LayoutConfigs } from './layout'
 
 export type { ChartConfig, ChartData, ChartTabularData, DataSet } from './model'
 
+export type { Services } from './services'
+
 export type { TruncationOptions } from './truncation'
 
 export {

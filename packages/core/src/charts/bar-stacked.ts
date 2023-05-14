@@ -1,19 +1,16 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
 import { options } from '../configuration'
-import type { ChartConfig, BarChartOptions } from '../interfaces/index'
+import { type BarChartOptions, type ChartConfig, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
 import {
+	type Component,
 	Grid,
 	StackedBar,
 	StackedRuler,
 	TwoDimensionalAxes,
 	ZeroLine,
 	Skeleton
-} from '../components/index'
+} from '../components'
 
 export class StackedBarChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BarChartOptions>) {
@@ -29,7 +26,7 @@ export class StackedBarChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new StackedRuler(this.model, this.services),
@@ -40,7 +37,7 @@ export class StackedBarChart extends AxisChart {
 			new ZeroLine(this.model, this.services)
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

@@ -1,13 +1,9 @@
-// Internal Imports
-import { WordCloudModel } from '../model/wordcloud'
+import { WordCloudModel } from '../model'
 import { Chart } from '../chart'
 import { options } from '../configuration'
-import type { ChartConfig, WorldCloudChartOptions } from '../interfaces/index'
+import { type ChartConfig, type WorldCloudChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { WordCloud, Skeleton } from '../components/index'
+import {type Component, Skeleton, WordCloud } from '../components'
 
 export class WordCloudChart extends Chart {
 	model = new WordCloudModel(this.services)
@@ -25,7 +21,7 @@ export class WordCloudChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new WordCloud(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.PIE
@@ -33,7 +29,7 @@ export class WordCloudChart extends Chart {
 		]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

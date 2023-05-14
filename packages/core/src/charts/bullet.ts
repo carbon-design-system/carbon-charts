@@ -1,13 +1,9 @@
-// Internal Imports
 import { AxisChart } from '../axis-chart'
-import { BulletChartModel } from '../model/bullet'
+import { BulletChartModel } from '../model'
 import { options } from '../configuration'
-import type { ChartConfig, BulletChartOptions } from '../interfaces/index'
+import { type ChartConfig, type BulletChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Bullet, Grid, TwoDimensionalAxes, Skeleton } from '../components/index'
+import { Bullet, type Component, Grid, TwoDimensionalAxes, Skeleton } from '../components'
 
 export class BulletChart extends AxisChart {
 	model = new BulletChartModel(this.services)
@@ -25,7 +21,7 @@ export class BulletChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Bullet(this.model, this.services),
@@ -34,7 +30,7 @@ export class BulletChart extends AxisChart {
 			})
 		]
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
 		return components
 	}
 }

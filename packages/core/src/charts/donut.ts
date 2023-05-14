@@ -1,12 +1,8 @@
-// Internal Imports
 import { PieChart } from './pie'
 import { options } from '../configuration'
-import type { ChartConfig, PieChartOptions } from '../interfaces/index'
+import  { type ChartConfig, type PieChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Donut, Skeleton } from '../components/index'
+import { type Component, Donut, Skeleton } from '../components'
 
 export class DonutChart extends PieChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<PieChartOptions>) {
@@ -22,14 +18,14 @@ export class DonutChart extends PieChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new Donut(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.DONUT
 			})
 		]
 
-		const components: any[] = this.getChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

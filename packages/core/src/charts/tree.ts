@@ -1,12 +1,9 @@
-// Internal Imports
 import { Chart } from '../chart'
-import { TreeChartModel } from '../model/tree'
+import { TreeChartModel } from '../model'
 import { options } from '../configuration'
-import type { ChartConfig, TreeChartOptions } from '../interfaces/index'
+import type { ChartConfig, TreeChartOptions } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-
-// Components
-import { Tree } from '../components/index'
+import { type Component, Tree } from '../components'
 
 export class TreeChart extends Chart {
 	model = new TreeChartModel(this.services)
@@ -24,10 +21,10 @@ export class TreeChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [new Tree(this.model, this.services)]
+		const graphFrameComponents: Component[] = [new Tree(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents, {
+		const components: Component[] = this.getChartComponents(graphFrameComponents, {
 			excludeLegend: true
 		})
 		return components

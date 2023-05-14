@@ -1,19 +1,15 @@
-// Internal Imports
-import { MeterChartModel } from '../model/meter'
+import { MeterChartModel } from '../model'
 import { Chart } from '../chart'
 import { options as configOptions } from '../configuration'
 import {
-	ChartConfig,
-	MeterChartOptions,
+	type ChartConfig,
+	type MeterChartOptions,
 	LayoutGrowth,
 	LayoutDirection,
 	RenderTypes
-} from '../interfaces/index'
+} from '../interfaces'
 import { clone, getProperty, merge } from '../tools'
-import { Meter } from '../components/graphs/meter'
-
-// Components
-import { LayoutComponent, MeterTitle, Spacer } from '../components/index'
+import { type Component, LayoutComponent, Meter, MeterTitle, Spacer } from '../components'
 
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services)
@@ -68,14 +64,14 @@ export class MeterChart extends Chart {
 		]
 
 		// the graph frame for meter includes the custom title (and spacer)
-		const graphFrame = [
+		const graphFrame: Component[] = [
 			new LayoutComponent(this.model, this.services, meterComponents, {
 				direction: LayoutDirection.COLUMN
 			})
 		]
 
 		// add the meter title as a top level component
-		const components: any[] = this.getChartComponents(graphFrame, {
+		const components: Component[] = this.getChartComponents(graphFrame, {
 			graphFrameRenderType: RenderTypes.HTML
 		})
 

@@ -1,13 +1,9 @@
-// Internal Imports
-import { PieChartModel } from '../model/pie'
+import { PieChartModel } from '../model'
 import { Chart } from '../chart'
 import { options } from '../configuration'
-import type { ChartConfig, PieChartOptions } from '../interfaces/index'
+import { type ChartConfig, type PieChartOptions, Skeletons } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Skeletons } from '../interfaces/enums'
-
-// Components
-import { Pie, Skeleton } from '../components/index'
+import { type Component, Pie, Skeleton } from '../components'
 
 export class PieChart extends Chart {
 	model = new PieChartModel(this.services)
@@ -35,7 +31,7 @@ export class PieChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new Pie(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.PIE
@@ -43,7 +39,7 @@ export class PieChart extends Chart {
 		]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

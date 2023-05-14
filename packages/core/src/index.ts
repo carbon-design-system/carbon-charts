@@ -104,6 +104,7 @@ export type {
 	Coordinates,
 	LegendItem,
 	LayoutComponentChild,
+	Services,
 	ToolbarControl
 } from './interfaces'
 

@@ -1,10 +1,10 @@
 // Internal Imports
-import { RadarChartModel } from '../model/radar'
+import { RadarChartModel } from '../model'
 import { Chart } from '../chart'
 import { options } from '../configuration'
-import type { ChartConfig, RadarChartOptions } from '../interfaces/index'
+import type { ChartConfig, RadarChartOptions } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-import { Radar } from '../components/graphs/radar'
+import { type Component, Radar } from '../components'
 
 export class RadarChart extends Chart {
 	model = new RadarChartModel(this.services)
@@ -22,10 +22,10 @@ export class RadarChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [new Radar(this.model, this.services)]
+		const graphFrameComponents: Component[] = [new Radar(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

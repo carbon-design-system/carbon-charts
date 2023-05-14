@@ -1,12 +1,9 @@
-// Internal Imports
 import { Chart } from '../chart'
-import { AlluvialChartModel } from '../model/alluvial'
+import { AlluvialChartModel } from '../model'
 import { options } from '../configuration'
-import type { ChartConfig, AlluvialChartOptions } from '../interfaces/index'
+import type { ChartConfig, AlluvialChartOptions } from '../interfaces'
 import { mergeDefaultChartOptions } from '../tools'
-
-// Components
-import { Alluvial } from '../components/index'
+import { Alluvial, type Component } from '../components'
 
 export class AlluvialChart extends Chart {
 	model = new AlluvialChartModel(this.services)
@@ -24,9 +21,9 @@ export class AlluvialChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any = [new Alluvial(this.model, this.services)]
+		const graphFrameComponents: Component[] = [new Alluvial(this.model, this.services)]
 
-		const components: any[] = this.getChartComponents(graphFrameComponents, {
+		const components: Component[] = this.getChartComponents(graphFrameComponents, {
 			excludeLegend: true
 		})
 		return components

@@ -1,10 +1,11 @@
 import type { ChartModel } from '../model/model'
+import type { Services } from '../interfaces'
 
 export class Service {
 	protected model: ChartModel
-	protected services: any
+	protected services: Services
 
-	constructor(model: ChartModel, services: any) {
+	constructor(model: ChartModel, services: Services) {
 		this.model = model
 		this.services = services
 
@@ -25,7 +26,7 @@ export class Service {
 	}
 
 	// Used to pass down services to the components
-	setServices(newObj: any) {
+	setServices(newObj: Services) {
 		this.services = newObj
 	}
 }

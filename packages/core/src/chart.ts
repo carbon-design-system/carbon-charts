@@ -29,14 +29,14 @@ import { getProperty } from './tools'
 import { CanvasZoom, DOMUtils, Events, Files, GradientUtils, Transitions } from './services/index'
 
 export class Chart {
-	components: Component[]
+	components: Component[] = []
 	services: any = {
+		canvasZoom: CanvasZoom,
 		domUtils: DOMUtils,
-		files: Files,
 		events: Events,
+		files: Files,
 		gradientUtils: GradientUtils,
-		transitions: Transitions,
-		canvasZoom: CanvasZoom
+		transitions: Transitions
 	}
 	model: ChartModel = new ChartModel(this.services)
 
@@ -74,10 +74,10 @@ export class Chart {
 		this.update()
 	}
 
-	getComponents(): any[] {
+	getComponents(): Component[] {
 		console.error('getComponents() method is not implemented')
 
-		return null
+		return []
 	}
 
 	update() {
@@ -227,7 +227,7 @@ export class Chart {
 		}
 
 		// Add chart title if it exists
-		const topLevelLayoutComponents = []
+		const topLevelLayoutComponents: any[] = []
 
 		if (titleAvailable || toolbarEnabled) {
 			topLevelLayoutComponents.push(headerComponent)

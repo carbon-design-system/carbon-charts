@@ -1,24 +1,24 @@
-import { select } from 'd3'
+import { select, type Selection as D3Selection } from 'd3'
 import type { ChartModel } from '../model/model'
 import { DOMUtils } from '../services'
-import { RenderTypes } from '../interfaces'
+import { RenderTypes, Services } from '../interfaces'
 import { getProperty, merge } from '../tools'
 import { carbonPrefix } from '../configuration-non-customizable' // CSS prefix
 
 export class Component {
-	public type: string
+	public type = ''
 	public renderType = RenderTypes.HTML
 
-	public id: string
+	public id = ''
 
-	protected parent: any
+	protected parent: D3Selection<SVGGraphicsElement|HTMLDivElement, any, HTMLElement, any> | undefined = undefined
 
 	protected configs: any = {}
 
-	protected model: any
-	protected services: any
+	protected model: ChartModel
+	protected services: Services
 
-	constructor(model: ChartModel, services: any, configs?: any) {
+	constructor(model: ChartModel, services: Services, configs?: any) {
 		this.model = model
 		this.services = services
 
@@ -32,7 +32,7 @@ export class Component {
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(select(this.services.domUtils.getMainContainer()))
+			this.setParent(select<SVGGraphicsElement|HTMLDivElement, any>(this.services.domUtils.getMainContainer() as HTMLDivElement))
 		}
 	}
 
@@ -69,7 +69,7 @@ export class Component {
 
 		if (this.type) {
 			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
-			this.parent.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, true)
+			this.parent?.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, true)
 
 			if (oldParent) {
 				oldParent.classed(`${carbonPrefix}--${chartprefix}--${this.type}`, false)
@@ -82,6 +82,7 @@ export class Component {
 	}
 
 	getComponentContainer(configs = { withinChartClip: false }) {
+
 		if (this.type) {
 			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 
@@ -116,7 +117,6 @@ export class Component {
 
 			return container.attr('width', '100%').attr('height', '100%')
 		}
-
 		return this.parent
 	}
 
