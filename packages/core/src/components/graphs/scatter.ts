@@ -279,7 +279,7 @@ export class Scatter extends Component {
 	// Extended in bubble graphs
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getTooltipAdditionalItems(datum: any) {
-		return null
+		return null as any
 	}
 
 	addEventListeners() {

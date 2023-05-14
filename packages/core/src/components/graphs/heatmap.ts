@@ -5,6 +5,7 @@ import { heatmap } from '../../configuration'
 import { Events, RenderTypes, DividerStatus } from '../../interfaces'
 import { getProperty, getTransformOffsets } from '../../tools'
 import { DOMUtils } from '../../services'
+import { HeatmapModel } from '../../model'
 
 export class Heatmap extends Component {
 	type = 'heatmap'
@@ -41,7 +42,7 @@ export class Heatmap extends Component {
 		svg.lower()
 
 		const { cartesianScales } = this.services
-		this.matrix = this.model.getMatrix()
+		this.matrix = (this.model as HeatmapModel).getMatrix()
 
 		svg.html('')
 
@@ -56,11 +57,11 @@ export class Heatmap extends Component {
 		const rangeIdentifier = cartesianScales.getRangeIdentifier()
 
 		// Get unique axis values & create a matrix
-		const uniqueDomain = this.model.getUniqueDomain()
-		const uniqueRange = this.model.getUniqueRanges()
+		const uniqueDomain = (this.model as HeatmapModel).getUniqueDomain()
+		const uniqueRange = (this.model as HeatmapModel).getUniqueRanges()
 
 		// Get matrix in the form of an array to create a single heatmap group
-		const matrixArray = this.model.getMatrixAsArray()
+		const matrixArray = (this.model as HeatmapModel).getMatrixAsArray()
 
 		// Get available chart area
 		const xRange = mainXScale.range()
@@ -308,8 +309,8 @@ export class Heatmap extends Component {
 		const { detail } = event
 		const { datum } = detail
 		// Unique ranges and domains
-		const ranges = this.model.getUniqueRanges()
-		const domains = this.model.getUniqueDomain()
+		const ranges = (this.model as HeatmapModel).getUniqueRanges()
+		const domains = (this.model as HeatmapModel).getUniqueDomain()
 		// Labels
 		const domainLabel = this.services.cartesianScales.getDomainLabel()
 		const rangeLabel = this.services.cartesianScales.getRangeLabel()

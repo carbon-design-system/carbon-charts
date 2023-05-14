@@ -63,7 +63,7 @@ export class SimpleBar extends Bar {
 				})
 			)
 			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d: any, i: number) => {
+			.attr('d', (d: any) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -79,13 +79,13 @@ export class SimpleBar extends Bar {
 				let y0: number, y1: number
 				if (Array.isArray(value) && value.length === 2) {
 					y0 = this.services.cartesianScales.getRangeValue(value[0])
-					y1 = this.services.cartesianScales.getRangeValue(value[1], i)
+					y1 = this.services.cartesianScales.getRangeValue(value[1])
 				} else {
 					const rangeScale = this.services.cartesianScales.getRangeScale()
-					const yScaleDomainStart = rangeScale.domain()[0]
+					const yScaleDomainStart = rangeScale.domain()[0] as number
 
 					y0 = this.services.cartesianScales.getRangeValue(Math.max(0, yScaleDomainStart))
-					y1 = this.services.cartesianScales.getRangeValue(d, i)
+					y1 = this.services.cartesianScales.getRangeValue(d)
 				}
 
 				const difference = Math.abs(y1 - y0)

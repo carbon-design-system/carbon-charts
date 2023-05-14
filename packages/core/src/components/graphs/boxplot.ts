@@ -1,4 +1,5 @@
 import { select } from 'd3'
+import { BoxplotChartModel } from '../../model'
 import { Component } from '../component'
 import {
 	CartesianOrientations,
@@ -49,7 +50,7 @@ export class Boxplot extends Component {
 		const gridSize = Math.floor((isInVerticalOrientation ? width : height) / dataGroupNames.length)
 		const boxWidth = Math.min(gridSize / 2, 16)
 
-		const boxplotData = this.model.getBoxplotData()
+		const boxplotData = (this.model as BoxplotChartModel).getBoxplotData()
 
 		/*
 		 * update or initialize all box groups

@@ -3,6 +3,7 @@ import { Component } from '../component'
 import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
 import { generateSVGPathString, getProperty } from '../../tools'
 import { DOMUtils } from '../../services'
+import { BulletChartModel } from '../..'
 
 export class Bullet extends Component {
 	type = 'bullet'
@@ -136,7 +137,7 @@ export class Bullet extends Component {
 					})
 				)
 				.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-				.attr('d', (d: any, i: number) => {
+				.attr('d', (d: any) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -144,10 +145,10 @@ export class Bullet extends Component {
 					 * generateSVGPathString() to decide whether it needs to flip them
 					 */
 					const barWidth = 8
-					const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2
+					const x0 = this.services.cartesianScales.getDomainValue(d) - barWidth / 2
 					const x1 = x0 + barWidth
 					const y0 = this.services.cartesianScales.getRangeValue(0) + 1
-					const y1 = this.services.cartesianScales.getRangeValue(d, i)
+					const y1 = this.services.cartesianScales.getRangeValue(d)
 
 					return generateSVGPathString(
 						{ x0, x1, y0, y1 },
@@ -187,7 +188,7 @@ export class Bullet extends Component {
 						animate
 					})
 				)
-				.attr('d', (d: any, i: number) => {
+				.attr('d', (d: any) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -195,9 +196,9 @@ export class Bullet extends Component {
 					 * generateSVGPathString() to decide whether it needs to flip them
 					 */
 					const lineHeight = 24
-					const x0 = this.services.cartesianScales.getDomainValue(d, i) - lineHeight / 2
+					const x0 = this.services.cartesianScales.getDomainValue(d) - lineHeight / 2
 					const x1 = x0 + lineHeight
-					const y0 = this.services.cartesianScales.getRangeValue(d.marker, i)
+					const y0 = this.services.cartesianScales.getRangeValue(d.marker)
 					const y1 = y0
 
 					return generateSVGPathString(
@@ -247,7 +248,7 @@ export class Bullet extends Component {
 						animate
 					})
 				)
-				.attr('d', ({ datum: d, value }, i: number) => {
+				.attr('d', ({ datum: d, value }: { datum: any, value: any }) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -261,9 +262,9 @@ export class Bullet extends Component {
 						lineHeight = 8
 					}
 
-					const x0 = this.services.cartesianScales.getDomainValue(d, i) - lineHeight / 2
+					const x0 = this.services.cartesianScales.getDomainValue(d) - lineHeight / 2
 					const x1 = x0 + lineHeight
-					const y0 = this.services.cartesianScales.getRangeValue(value, i)
+					const y0 = this.services.cartesianScales.getRangeValue(value)
 					const y1 = y0
 
 					return generateSVGPathString(
@@ -334,7 +335,7 @@ export class Bullet extends Component {
 				})
 
 				const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
-				const matchingRangeIndex = self.model.getMatchingRangeIndexForDatapoint(datum)
+				const matchingRangeIndex = (self.model as BulletChartModel).getMatchingRangeIndexForDatapoint(datum)
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,

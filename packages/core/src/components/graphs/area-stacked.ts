@@ -33,12 +33,12 @@ export class StackedArea extends Component {
 			groups: this.configs.groups
 		})
 
-		const firstDatum = getProperty(stackedData, 0, 0)
+		const datum = getProperty(stackedData, 0, 0) as number[] // firstDatum name could not be used by getDomainAxisPosition() and getRangeAxisPosition() below
 
-		// area doesnt have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
+		// area doesn't have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
 		// however area _cannot_ have multiple datasets that are mapped to _different_ ranges and domains so we can use the first data item
-		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition({ firstDatum })
-		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition({ firstDatum })
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition({ datum })
+		const rangeAxisPosition = this.services.cartesianScales.getRangeAxisPosition({ datum })
 		const mainYScale = this.services.cartesianScales.getScaleByPosition(rangeAxisPosition)
 
 		const areas = svg
@@ -47,11 +47,10 @@ export class StackedArea extends Component {
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			.x((d: any, i) =>
+			.x((d: any) =>
 				this.services.cartesianScales.getValueThroughAxisPosition(
 					domainAxisPosition,
-					d.data.sharedStackKey,
-					i
+					d.data.sharedStackKey
 				)
 			)
 			.y0((d: any) => mainYScale(d[0]))

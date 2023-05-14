@@ -328,7 +328,7 @@ export class CartesianScales extends Service {
 		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
 
-	getRangeValue(d: string | object) {
+	getRangeValue(d: number | string | object) {
 		const axisPosition = this.getRangeAxisPosition({ datum: d })
 		return this.getValueThroughAxisPosition(axisPosition, d)
 	}
@@ -618,7 +618,7 @@ export class CartesianScales extends Service {
 		return scale
 	}
 
-	protected getHighestDomainThreshold(): null | {
+	getHighestDomainThreshold(): null | {
 		threshold: ThresholdOptions
 		scaleValue: number
 	} {
@@ -650,7 +650,7 @@ export class CartesianScales extends Service {
 		}
 	}
 
-	protected getHighestRangeThreshold(): null | {
+	getHighestRangeThreshold(): null | {
 		threshold: ThresholdOptions
 		scaleValue: number
 	} {

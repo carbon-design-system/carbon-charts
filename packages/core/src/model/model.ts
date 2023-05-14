@@ -587,7 +587,7 @@ export class ChartModel {
 
 	getColorClassName(configs: {
 		classNameTypes: ColorClassNameTypes[]
-		dataGroupName?: string
+		dataGroupName?: string | number
 		originalClassName?: string
 	}) {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName)
@@ -605,7 +605,7 @@ export class ChartModel {
 	/**
 	 * For charts that might hold an associated status for their dataset
 	 */
-	getStatus() {
+	getStatus(): any {
 		return null
 	}
 

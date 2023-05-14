@@ -582,7 +582,7 @@ export class Radar extends Component {
 		const options = this.getOptions()
 		const { angle, value } = getProperty(options, 'radar', 'axes')
 		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
-		return dataset.map(({ name, data }) => {
+		return dataset.map(({ name, data }: { name: any, data: any}) => {
 			const completeBlankData = this.uniqueKeys.map((k: any) => ({
 				[groupMapsTo]: name,
 				[angle]: k,

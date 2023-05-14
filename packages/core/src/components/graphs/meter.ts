@@ -4,6 +4,7 @@ import { DOMUtils } from '../../services'
 import { getProperty } from '../../tools'
 import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
 import { meter } from '../../configuration'
+import { MeterChartModel } from '../..'
 
 export class Meter extends Component {
 	type = 'meter'
@@ -51,7 +52,7 @@ export class Meter extends Component {
 			domainMax = 100
 		} else {
 			const total = getProperty(options, 'meter', 'proportional', 'total')
-			domainMax = total ? total : this.model.getMaximumDomain(this.model.getDisplayData())
+			domainMax = total ? total : (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
 		}
 
 		// each meter has a scale for the value but no visual axis

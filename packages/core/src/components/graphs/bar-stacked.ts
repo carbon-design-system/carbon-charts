@@ -92,7 +92,7 @@ export class StackedBar extends Bar {
 				})
 			)
 			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d: any, i: number) => {
+			.attr('d', (d: any) => {
 				const key = d.data.sharedStackKey as string
 
 				/*
@@ -104,8 +104,8 @@ export class StackedBar extends Bar {
 				const barWidth = this.getBarWidth()
 				const x0 = this.services.cartesianScales.getDomainValue(key) - barWidth / 2
 				const x1 = x0 + barWidth
-				const y0 = this.services.cartesianScales.getRangeValue(d[0], i)
-				let y1 = this.services.cartesianScales.getRangeValue(d[1], i)
+				const y0 = this.services.cartesianScales.getRangeValue(d[0])
+				let y1 = this.services.cartesianScales.getRangeValue(d[1])
 
 				// don't show if part of bar is out of zoom domain
 				if (this.isOutsideZoomedDomain(x0, x1)) {

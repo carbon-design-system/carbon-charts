@@ -178,7 +178,7 @@ export class Treemap extends Component {
 						})
 				},
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				(update: any) => null,
+				(update: any) => null as any,
 				(exit: any) => exit.remove()
 			)
 
@@ -235,7 +235,7 @@ export class Treemap extends Component {
 			.selectAll('rect.leaf')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
-				let fillColor = getComputedStyle(this, null).getPropertyValue('fill')
+				let fillColor = getComputedStyle(this as Element, null).getPropertyValue('fill')
 
 				let parent = datum
 				while (parent.depth > 1) parent = parent.parent

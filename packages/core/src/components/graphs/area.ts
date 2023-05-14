@@ -74,7 +74,7 @@ export class Area extends Component {
 				: cartesianScales.getRangeValue(d)
 
 		if (orientation === CartesianOrientations.VERTICAL) {
-			domain = cartesianScales.getMainYScale().domain()
+			domain = cartesianScales.getMainYScale().domain() as number[]
 			includeZeroInRangeValue(cartesianScales.getMainYAxisPosition(), domain)
 
 			areaGenerator
@@ -82,7 +82,7 @@ export class Area extends Component {
 				.y0((d: any) => upperBound(d))
 				.y1((d: any) => lowerBound(d))
 		} else {
-			domain = cartesianScales.getMainXScale().domain()
+			domain = cartesianScales.getMainXScale().domain() as number[]
 			includeZeroInRangeValue(cartesianScales.getMainXAxisPosition(), domain)
 
 			areaGenerator

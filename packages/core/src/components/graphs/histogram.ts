@@ -78,7 +78,7 @@ export class Histogram extends Component {
 				})
 			)
 			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
-			.attr('d', (d: any, i: number) => {
+			.attr('d', (d: any) => {
 				const bin = get(d, 'data')
 
 				if (!bin) {
@@ -92,11 +92,11 @@ export class Histogram extends Component {
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
 				const barWidth = x(bin.x1) - x(bin.x0) - 1
-				const x0 = this.services.cartesianScales.getDomainValue(bin.x0, i) as number
+				const x0 = this.services.cartesianScales.getDomainValue(bin.x0) as number
 				const x1 = x0 + barWidth
 
-				const y0 = this.services.cartesianScales.getRangeValue(d[0], i) as number
-				let y1 = this.services.cartesianScales.getRangeValue(d[1], i) as number
+				const y0 = this.services.cartesianScales.getRangeValue(d[0]) as number
+				let y1 = this.services.cartesianScales.getRangeValue(d[1]) as number
 
 				// Add the divider gap
 				if (Math.abs(y1 - y0) > 0 && Math.abs(y1 - y0) > options.bars.dividerSize) {

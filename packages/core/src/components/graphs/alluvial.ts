@@ -91,7 +91,7 @@ export class Alluvial extends Component {
 		this.graph.nodes = this.graph.nodes.filter((node: any) => node.value !== 0)
 
 		// Determine the category name placement x position
-		const nodeCoordinates = {}
+		const nodeCoordinates: any = {}
 		this.graph.nodes.forEach((element: any) => {
 			const point = element.x0
 
@@ -354,7 +354,7 @@ export class Alluvial extends Component {
 				debouncedLineHighlight(this, 'mouseover')
 				hoveredElement.classed('link-hovered', true)
 
-				const strokeColor = getComputedStyle(this).getPropertyValue('stroke')
+				const strokeColor = getComputedStyle(this as Element).getPropertyValue('stroke')
 
 				// Dispatch mouse over event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEOVER, {
