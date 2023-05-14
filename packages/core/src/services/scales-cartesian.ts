@@ -1,4 +1,4 @@
-import { extent, max, scaleBand, scaleLinear, scaleTime, scaleLog } from 'd3'
+import { extent, max, scaleBand, scaleLinear, scaleTime, scaleLog, type ScaleTime, type ScaleBand, type ScaleLinear } from 'd3'
 import {
 	differenceInYears,
 	addYears,
@@ -24,19 +24,21 @@ import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
 import { flatten, getProperty, removeArrayDuplicates } from '../tools'
 
+type ScaleFunction = ScaleTime<number, number, never> | ScaleBand<string> | ScaleLinear<number, number, never>
+
 export class CartesianScales extends Service {
 	protected scaleTypes = {
-		top: null,
-		right: null,
-		bottom: null,
-		left: null
+		top: null as ScaleTypes,
+		right: null as ScaleTypes,
+		bottom: null as ScaleTypes,
+		left: null as ScaleTypes
 	}
 
-	protected scales = {
-		top: null,
-		right: null,
-		bottom: null,
-		left: null
+	protected scales = { // null or function
+		top: null as ScaleFunction,
+		right: null as ScaleFunction,
+		bottom: null as ScaleFunction,
+		left: null as ScaleFunction
 	}
 
 	protected domainAxisPosition: AxisPositions
@@ -48,7 +50,7 @@ export class CartesianScales extends Service {
 
 	protected orientation: CartesianOrientations
 
-	getDomainAxisPosition({ datum = null } = {}) {
+	getDomainAxisPosition({ datum = null }: { datum?: any } = {}) {
 		if (this.dualAxes && datum) {
 			const options = this.model.getOptions()
 			const { groupMapsTo } = options.data
@@ -64,7 +66,7 @@ export class CartesianScales extends Service {
 		return this.domainAxisPosition
 	}
 
-	getRangeAxisPosition({ datum = null, groups = null } = {}) {
+	getRangeAxisPosition({ datum = null, groups = null }: { datum?: any, groups?: any } = {}) {
 		if (this.dualAxes) {
 			const options = this.model.getOptions()
 			const { groupMapsTo } = options.data
@@ -123,8 +125,8 @@ export class CartesianScales extends Service {
 		this.determineAxisDuality()
 		this.findDomainAndRangeAxes()
 		this.determineOrientation()
-		const axisPositions = Object.keys(AxisPositions).map(
-			(axisPositionKey: any) => AxisPositions[axisPositionKey]
+		const axisPositions: AxisPositions[] = Object.keys(AxisPositions).map(
+			(axisPositionKey: string) => AxisPositions[axisPositionKey as keyof typeof AxisPositions]
 		)
 		axisPositions.forEach((axisPosition) => {
 			this.scales[axisPosition] = this.createScale(axisPosition)
@@ -315,7 +317,7 @@ export class CartesianScales extends Service {
 	}
 
 	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any) {
-		const scaleType = this.scaleTypes[axisPosition]
+		const scaleType = this.scaleTypes[axisPosition] as ScaleTypes
 		const scale = this.scales[axisPosition]
 
 		return this.getValueFromScale(scale, scaleType, axisPosition, datum)
@@ -415,10 +417,10 @@ export class CartesianScales extends Service {
 		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR
 
 		const result = {
-			primaryDomainAxisPosition: null,
-			secondaryDomainAxisPosition: null,
-			primaryRangeAxisPosition: null,
-			secondaryRangeAxisPosition: null
+			primaryDomainAxisPosition: null as AxisPositions,
+			secondaryDomainAxisPosition: null as AxisPositions,
+			primaryRangeAxisPosition: null as AxisPositions,
+			secondaryRangeAxisPosition: null as AxisPositions
 		}
 
 		// assign to to be a vertical chart by default
@@ -447,7 +449,7 @@ export class CartesianScales extends Service {
 		return result
 	}
 
-	protected getScaleDomain(axisPosition: AxisPositions) {
+	getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions()
 		const axisOptions = getProperty(options, 'axes', axisPosition)
 		const bounds = getProperty(options, 'bounds')
@@ -600,7 +602,7 @@ export class CartesianScales extends Service {
 		const scaleType = getProperty(axisOptions, 'scaleType') || ScaleTypes.LINEAR
 		this.scaleTypes[axisPosition] = scaleType
 
-		let scale
+		let scale: ScaleFunction
 		if (scaleType === ScaleTypes.TIME) {
 			scale = scaleTime()
 		} else if (scaleType === ScaleTypes.LOG) {
