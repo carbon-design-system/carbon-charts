@@ -128,7 +128,16 @@ export class Radar extends Component {
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
 					.call((selection: D3Selection<Element, any, Element, any>) => selection
-						.transition() // BUG: 19 console error for charts with missing datapoints (generated path has NaN in it)
+						/*
+						 	BUG (D3): when "Radar - Missing datapoints" is displayed, the path that represents the third
+							blob (shaded area for Water) generates a d="M0,-59L118.248,-38.421L29.879,41.125L-25.079,34.518LNaN,NaNZ"
+							value because of the intentionally missing datapoint for the path (other paths have 5 points, this one has 4).
+							In this case, D3 should generate a d="M0,-59L118.248,-38.421L29.879,41.125L-25.079,34.518". Because the path ends
+							with "LNaN,NaNZ", browsers render the path up to that point creating the desired look but
+							causing D3 to throw an error (that we cannot catch because it's async). The error fires on
+							d3-transition/src/transition/attrTween.js:5 (but it's a long call-chain).
+						*/
+						.transition()
 						.call((t: Transition<Element, any, Element, any>) =>
 							this.services.transitions.setupTransition({
 								transition: t,
