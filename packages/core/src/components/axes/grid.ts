@@ -1,8 +1,8 @@
 import { axisBottom, axisLeft } from 'd3'
-import { Component } from '../component'
-import { getProperty, getTranslationValues } from '../../tools'
-import { DOMUtils } from '../../services'
-import { RenderTypes } from '../../interfaces'
+import { getProperty, getTranslationValues } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { RenderTypes } from '@/interfaces/enums'
 
 export class Grid extends Component {
 	type = 'grid'

@@ -1,9 +1,11 @@
-import { Chart } from '../chart'
-import { options } from '../configuration'
-import type { ChartConfig, GaugeChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { GaugeChartModel } from '../model'
-import { type Component, Gauge } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { GaugeChartOptions } from '@/interfaces/charts'
+import { GaugeChartModel } from '@/model/gauge'
+import type { Component } from '@/components/component'
+import { Gauge } from '@/components/graphs/gauge'
 
 export class GaugeChart extends Chart {
 	model = new GaugeChartModel(this.services)

@@ -1,8 +1,9 @@
 import { line } from 'd3'
-import { Component } from '../component'
-import { lines } from '../../configuration'
-import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '@/tools'
+import { lines } from '@/configuration'
+import { Component } from '@/components/component'
+import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Line extends Component {
 	type = 'line'

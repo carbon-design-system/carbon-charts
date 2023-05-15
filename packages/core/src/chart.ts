@@ -1,32 +1,30 @@
-// Internal Imports
+import { getProperty } from '@/tools'
+import { ChartModel } from '@/model/model'
+import { ChartConfig } from '@/interfaces/model'
+import { BaseChartOptions } from '@/interfaces/charts'
 import {
-	ChartConfig,
-	BaseChartOptions,
 	LayoutGrowth,
 	LayoutAlignItems,
 	LayoutDirection,
 	LegendOrientations,
 	Events as ChartEvents,
 	RenderTypes
-} from './interfaces'
-
-// Misc
-import { ChartModel } from './model/model'
-import {
-	Component,
-	Modal,
-	Title,
-	Legend,
-	LayoutComponent,
-	Toolbar,
-	Tooltip,
-	Spacer,
-	CanvasChartClip
-} from './components'
-import { getProperty } from './tools'
-
-// Services
-import { CanvasZoom, DOMUtils, Events, Files, GradientUtils, Transitions } from './services/index'
+} from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Toolbar } from '@/components/axes/toolbar'
+import { LayoutComponent } from '@/components/layout'
+import { Spacer } from '@/components/layout/spacer'
+import { Modal } from '@/components/essentials/modal'
+import { Title } from '@/components/essentials/title'
+import { Legend } from '@/components/essentials/legend'
+import { CanvasChartClip } from '@/components/essentials/canvas-chart-clip'
+import { Tooltip } from '@/components/essentials/tooltip'
+import { CanvasZoom } from '@/services/canvas-zoom'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events } from '@/services/essentials/events'
+import { Files } from '@/services/essentials/files'
+import { GradientUtils } from '@/services/essentials/gradient-utils'
+import { Transitions } from '@/services/essentials/transitions'
 
 export class Chart {
 	components: Component[] = []

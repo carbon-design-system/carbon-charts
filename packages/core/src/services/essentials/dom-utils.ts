@@ -1,10 +1,10 @@
 import { select, Selection } from 'd3'
 import domToImage from 'dom-to-image-more'
-import type { ChartModel } from '../..'
-import { Service } from '../service'
-import { Events } from '../../interfaces'
-import { debounce, getProperty } from '../../tools'
-import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
+import { debounce, getProperty } from '@/tools'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import type { ChartModel } from '@/model/model'
+import { Service } from '@/services/service'
+import { Events } from '@/interfaces/enums'
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 

@@ -1,4 +1,4 @@
-import { TextAnchor, DominantBaseline } from '../interfaces/enums'
+import { TextAnchor, DominantBaseline } from '@/interfaces/enums'
 
 export interface Point {
 	x: number

@@ -1,7 +1,6 @@
-// Internal Imports
+import { getProperty, merge, updateLegendAdditionalItems } from '@/tools'
 import { ChartModel } from './model'
-import { getProperty, merge, updateLegendAdditionalItems } from '../tools'
-import { LegendItemType } from '../interfaces/enums'
+import { LegendItemType } from '@/interfaces/enums'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */

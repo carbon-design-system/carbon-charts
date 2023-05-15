@@ -1,15 +1,15 @@
 import { select } from 'd3'
-import { BoxplotChartModel } from '../../model'
-import { Component } from '../component'
+import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '@/tools'
+import { boxplot } from '@/configuration'
+import { BoxplotChartModel } from '@/model/boxplot'
+import { Component } from '@/components/component'
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
-	RenderTypes,
-	Roles
-} from '../../interfaces'
-import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '../../tools'
-import { boxplot } from '../../configuration'
+	RenderTypes
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Boxplot extends Component {
 	type = 'boxplot'

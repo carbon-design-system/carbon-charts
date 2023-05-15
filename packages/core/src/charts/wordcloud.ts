@@ -1,9 +1,13 @@
-import { WordCloudModel } from '../model'
-import { Chart } from '../chart'
-import { options } from '../configuration'
-import { type ChartConfig, type WorldCloudChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import {type Component, Skeleton, WordCloud } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { WordCloudModel } from '@/model/wordcloud'
+import type { ChartConfig } from '@/interfaces/model'
+import type { WorldCloudChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Skeleton } from '@/components/graphs/skeleton'
+import { WordCloud } from '@/components/graphs/wordcloud'
 
 export class WordCloudChart extends Chart {
 	model = new WordCloudModel(this.services)

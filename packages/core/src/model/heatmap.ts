@@ -1,7 +1,7 @@
 import { extent, scaleQuantize, scaleLinear } from 'd3'
-import { AxisFlavor, ScaleTypes } from '../interfaces'
+import { clone, getProperty, isEmpty } from '@/tools'
+import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
 import { ChartModelCartesian } from './cartesian-charts'
-import { clone, getProperty, isEmpty } from '../tools'
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {

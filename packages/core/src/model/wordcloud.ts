@@ -1,4 +1,3 @@
-// Internal Imports
 import { ChartModel } from './model'
 
 /** The charting model layer which includes mainly the chart data and options,

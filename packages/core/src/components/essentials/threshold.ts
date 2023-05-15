@@ -1,12 +1,12 @@
 import { select, pointer } from 'd3'
 import Position, { PLACEMENTS } from '@carbon/utils-position' // position services
-import { Component } from '../component'
-import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
-import { DOMUtils } from '../../services'
-import type { ChartModel } from '../../model/model'
-import { AxisPositions, Events, RenderTypes, ScaleTypes } from '../../interfaces'
-import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
-import { formatTick, computeTimeIntervalName } from '../../services/time-series'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModel } from '@/model/model'
+import { AxisPositions, Events, RenderTypes, ScaleTypes } from '@/interfaces/enums'
+import { formatTick, computeTimeIntervalName } from '@/services/time-series'
 
 export class Threshold extends Component {
 	type = 'threshold'

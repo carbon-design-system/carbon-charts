@@ -1,8 +1,8 @@
 import { expect, it } from 'vitest'
 import { fr as localeObject } from 'date-fns/locale'
+import { timeScale } from '@/configuration'
 import { formatTick, computeTimeIntervalName } from './time-series'
-import { TimeScaleOptions } from '../interfaces'
-import { timeScale } from '../configuration'
+import { TimeScaleOptions } from '@/interfaces/axis-scales'
 
 type TickTuple = [Date, string]
 type Dataset = TickTuple[]

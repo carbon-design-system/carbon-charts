@@ -1,12 +1,10 @@
-// Internal Imports
-import { Component } from '../component'
-import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces'
+import { getProperty } from '@/tools'
 import { Axis } from './axis'
-import { getProperty } from '../../tools'
-import { DOMUtils } from '../../services'
-import type { Threshold } from '../essentials/threshold'
-import { Events } from '../../interfaces'
 import { HoverAxis } from './hover-axis'
+import { Component } from '@/components/component'
+import type { Threshold } from '@/components/essentials/threshold'
+import { AxisPositions, Events, RenderTypes, AxisFlavor } from '@/interfaces/enums'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class TwoDimensionalAxes extends Component {
 	type = '2D-axes'

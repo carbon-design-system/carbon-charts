@@ -1,9 +1,14 @@
-import { ChartModelBinned } from '../model'
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import type { ChartConfig, HistogramChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Grid, Histogram, BinnedRuler, TwoDimensionalAxes } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { ChartModelBinned } from '@/model/binned-charts'
+import type { HistogramChartOptions } from '@/interfaces/charts'
+import type { ChartConfig } from '@/interfaces/model'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Histogram } from '@/components/graphs/histogram'
+import { BinnedRuler } from '@/components/axes/ruler-binned'
 
 export class HistogramChart extends AxisChart {
 	model = new ChartModelBinned(this.services)

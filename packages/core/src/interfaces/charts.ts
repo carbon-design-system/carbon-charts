@@ -10,14 +10,16 @@ import type {
 	ChartTheme
 } from './enums'
 import type {
-	LegendOptions,
-	TooltipOptions,
+	BarOptions,
 	GridOptions,
-	AxesOptions,
+	LegendOptions,
+	StackedBarOptions,
+	ToolbarOptions,
+	TooltipOptions,
 	ZoomBarsOptions
-} from './index'
-import type { BarOptions, StackedBarOptions, ToolbarOptions } from './components'
+} from './components'
 import type {
+	AxesOptions,
 	AxisOptions,
 	BinnedAxisOptions,
 	ComboChartAxisOptions,

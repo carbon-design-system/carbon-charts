@@ -1,9 +1,11 @@
-import { Chart } from '../chart'
-import { AlluvialChartModel } from '../model'
-import { options } from '../configuration'
-import type { ChartConfig, AlluvialChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { Alluvial, type Component } from '../components'
+import { Chart } from '@/chart'
+import { AlluvialChartModel } from '@/model/alluvial'
+import { options } from '@/configuration'
+import type { ChartConfig } from '@/interfaces/model'
+import type { AlluvialChartOptions } from '@/interfaces/charts'
+import { mergeDefaultChartOptions } from '@/tools'
+import { Alluvial } from '@/components/graphs/alluvial'
+import type { Component } from '@/components/component'
 
 export class AlluvialChart extends Chart {
 	model = new AlluvialChartModel(this.services)

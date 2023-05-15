@@ -1,5 +1,5 @@
 import { easeCubicInOut } from 'd3'
-import { ZoomBarTypes, LegendItemType } from './interfaces'
+import { LegendItemType, ZoomBarTypes,  } from '@/interfaces/enums'
 
 export const carbonPrefix = 'cds'
 

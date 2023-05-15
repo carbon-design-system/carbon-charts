@@ -16,12 +16,10 @@ import {
 	fromPairs,
 	some
 } from 'lodash-es'
-import { CartesianOrientations, ScaleTypes, TruncationTypes } from './interfaces'
+import { CartesianOrientations, ScaleTypes, TruncationTypes } from '@/interfaces/enums'
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 
-// Functions
-
-// Export these functions from lodash
+// lodash-es functions to export
 export {
 	debounce,
 	merge,

@@ -1,6 +1,4 @@
 import { bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
-import { color, legend } from '../configuration'
-import { histogram as histogramConfigs } from '../configuration-non-customizable'
 import {
 	clone,
 	fromPairs,
@@ -9,10 +7,12 @@ import {
 	merge,
 	removeArrayDuplicates,
 	updateLegendAdditionalItems
-} from '../tools'
-import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces'
-import { formatDateTillMilliSeconds } from '../services/time-series'
-import type { ChartTabularData } from '../interfaces'
+} from '@/tools'
+import { color, legend } from '@/configuration'
+import { histogram as histogramConfigs } from '@/configuration-non-customizable'
+import { Events, ScaleTypes, ColorClassNameTypes } from '@/interfaces/enums'
+import { formatDateTillMilliSeconds } from '@/services/time-series'
+import type { ChartTabularData } from '@/interfaces/model'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */

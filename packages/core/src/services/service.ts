@@ -1,5 +1,5 @@
-import type { ChartModel } from '../model/model'
-import type { Services } from '../interfaces'
+import type { ChartModel } from '@/model/model'
+import type { Services } from '@/interfaces/services'
 
 export class Service {
 	protected model: ChartModel

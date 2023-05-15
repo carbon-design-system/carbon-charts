@@ -1,8 +1,9 @@
 import { area } from 'd3'
-import { Component } from '../component'
-import { getProperty } from '../../tools'
-import { area as configArea } from '../../configuration'
-import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
+import { getProperty } from '@/tools'
+import { area as configArea } from '@/configuration'
+import { Component } from '@/components/component'
+import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class StackedArea extends Component {
 	type = 'area-stacked'

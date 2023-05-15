@@ -1,10 +1,7 @@
-// Internal Imports
-import { ChartModel } from './model'
-import { clone, getProperty, removeArrayDuplicates } from '../tools'
-import { ScaleTypes, AxisPositions, AxisFlavor } from '../interfaces'
-
-// date formatting
 import { format } from 'date-fns'
+import { clone, getProperty, removeArrayDuplicates } from '@/tools'
+import { ChartModel } from './model'
+import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
 
 /**
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel

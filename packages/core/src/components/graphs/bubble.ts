@@ -1,8 +1,9 @@
 import { extent, scaleLinear, type Selection } from 'd3'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
 import { Scatter } from './scatter'
-import { DOMUtils } from '../../services'
-import { Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Bubble extends Scatter {
 	type = 'bubble'

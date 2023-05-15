@@ -1,17 +1,17 @@
 import { select } from 'd3'
-import { Component } from '../component'
-import { getProperty, truncateLabel } from '../../tools'
+import { getProperty, truncateLabel } from '@/tools'
+import { legend } from '@/configuration'
+import * as Configuration from '@/configuration'
+import { Component } from '@/components/component'
 import {
 	Alignments,
 	ColorClassNameTypes,
 	LegendItemType,
 	RenderTypes,
-	Roles,
 	Events,
 	TruncationTypes
-} from '../../interfaces'
-import { legend } from '../../configuration'
-import * as Configuration from '../../configuration'
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Legend extends Component {
 	type = 'legend'

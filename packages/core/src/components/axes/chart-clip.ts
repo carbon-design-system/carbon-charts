@@ -1,8 +1,7 @@
-// Internal Imports
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import type { ChartModel } from '../../model/model'
-import { RenderTypes } from '../../interfaces'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModel } from '@/model/model'
+import { RenderTypes } from '@/interfaces/enums'
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior

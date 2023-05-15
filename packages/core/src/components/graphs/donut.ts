@@ -1,8 +1,8 @@
 import { interpolateNumber, interpolateRound, select } from 'd3'
+import { getProperty } from '@/tools'
 import { Pie } from './pie'
-import { DOMUtils } from '../../services'
-import { getProperty } from '../../tools'
-import { RenderTypes } from '../../interfaces'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { RenderTypes } from '@/interfaces/enums'
 
 export class Donut extends Pie {
 	type = 'donut'

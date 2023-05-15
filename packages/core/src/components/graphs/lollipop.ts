@@ -1,8 +1,7 @@
-// Internal Imports
+import { flipDomainAndRangeBasedOnOrientation } from '@/tools'
+import { lines } from '@/configuration'
 import { Scatter } from './scatter'
-import { flipDomainAndRangeBasedOnOrientation } from '../../tools'
-import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import { lines } from '../../configuration'
+import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 
 export class Lollipop extends Scatter {
 	type = 'lollipop'

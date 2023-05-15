@@ -1,16 +1,16 @@
 import { arc, interpolate, pie, select } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { convertValueToPercentage, getProperty } from '../../tools'
+import { convertValueToPercentage, getProperty } from '@/tools'
+import { pie as configPie } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 import {
 	CalloutDirections,
-	Roles,
 	Events,
 	Alignments,
 	ColorClassNameTypes,
 	RenderTypes
-} from '../../interfaces'
-import { pie as configPie } from '../../configuration'
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 // Pie slice tween function
 function arcTween(a: any, arcFunc: any) {

@@ -1,24 +1,24 @@
-import { AxisChart } from '../axis-chart'
-import { options as configOptions } from '../configuration'
-import { type ChartConfig, type ComboChartOptions, ChartTypes, Skeletons } from '../interfaces'
-import { camelCase, flatten, merge, mergeDefaultChartOptions } from '../tools'
-import {
-	type Component,
-	Grid,
-	GroupedBar,
-	SimpleBar,
-	StackedBar,
-	Line,
-	TwoDimensionalAxes,
-	ZeroLine,
-	Scatter,
-	StackedScatter,
-	Area,
-	StackedArea,
-	Ruler,
-	StackedRuler,
-	Skeleton
-} from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options as configOptions } from '@/configuration'
+import { camelCase, flatten, merge, mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import { ChartTypes, Skeletons } from '@/interfaces/enums'
+import type { ComboChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Line } from '@/components/graphs/line'
+import { Skeleton } from '@/components/graphs/skeleton'
+import { SimpleBar } from '@/components/graphs/bar-simple'
+import { GroupedBar } from '@/components/graphs/bar-grouped'
+import { StackedRuler } from '@/components/axes/ruler-stacked'
+import { Area } from '@/components/graphs/area'
+import { Ruler } from '@/components/axes/ruler'
+import { Scatter } from '@/components/graphs/scatter'
+import { ZeroLine } from '@/components/axes/zero-line'
+import { StackedArea } from '@/components/graphs/area-stacked'
+import { StackedBar } from '@/components/graphs/bar-stacked'
+import { StackedScatter } from '@/components/graphs/scatter-stacked'
 
 const graphComponentsMap = {
 	[ChartTypes.LINE]: [Line, Scatter],

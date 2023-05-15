@@ -1,9 +1,15 @@
-import { AxisChart } from '../axis-chart'
-import { BulletChartModel } from '../model'
-import { options } from '../configuration'
-import { type ChartConfig, type BulletChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { Bullet, type Component, Grid, TwoDimensionalAxes, Skeleton } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { BulletChartModel } from '@/model/bullet'
+import type { BulletChartOptions } from '@/interfaces/charts'
+import type { ChartConfig } from '@/interfaces/model'
+import { Skeletons } from '@/interfaces/enums'
+import { Bullet } from '@/components/graphs/bullet'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class BulletChart extends AxisChart {
 	model = new BulletChartModel(this.services)

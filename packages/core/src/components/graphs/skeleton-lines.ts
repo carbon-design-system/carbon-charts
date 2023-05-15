@@ -1,7 +1,6 @@
-// Internal Imports
+import { getProperty } from '@/tools'
 import { Skeleton } from './skeleton'
-import { DOMUtils } from '../../services'
-import { getProperty } from '../../tools'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class SkeletonLines extends Skeleton {
 	type = 'skeleton-lines'

@@ -1,9 +1,9 @@
 import { color, hierarchy as d3Hierarchy, hsl, treemap as d3Treemap, select } from 'd3'
 import { colors } from '@carbon/colors'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
 
 const findColorShade = (hex: string) => {
 	if (!hex) {

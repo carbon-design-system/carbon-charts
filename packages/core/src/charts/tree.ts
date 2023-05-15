@@ -1,9 +1,11 @@
-import { Chart } from '../chart'
-import { TreeChartModel } from '../model'
-import { options } from '../configuration'
-import type { ChartConfig, TreeChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Tree } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { TreeChartModel } from '@/model/tree'
+import type { ChartConfig } from '@/interfaces/model'
+import type { TreeChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Tree } from '@/components/graphs/tree'
 
 export class TreeChart extends Chart {
 	model = new TreeChartModel(this.services)

@@ -1,10 +1,11 @@
-// Internal Imports
-import { RadarChartModel } from '../model'
-import { Chart } from '../chart'
-import { options } from '../configuration'
-import type { ChartConfig, RadarChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Radar } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { RadarChartModel } from '@/model/radar'
+import type { ChartConfig } from '@/interfaces/model'
+import type { RadarChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Radar } from '@/components/graphs/radar'
 
 export class RadarChart extends Chart {
 	model = new RadarChartModel(this.services)

@@ -1,6 +1,7 @@
 // Services
 
 export {
+	type Dimensions,
 	DOMUtils,
 	Events,
 	Files,

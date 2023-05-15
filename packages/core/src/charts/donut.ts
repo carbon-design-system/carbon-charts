@@ -1,8 +1,12 @@
 import { PieChart } from './pie'
-import { options } from '../configuration'
-import  { type ChartConfig, type PieChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Donut, Skeleton } from '../components'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { PieChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Donut } from '@/components/graphs/donut'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class DonutChart extends PieChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<PieChartOptions>) {

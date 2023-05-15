@@ -1,5 +1,5 @@
 import settings from 'carbon-components/es/globals/js/settings' // CSS prefix
-import { ChartTypes } from '../'
+import { ChartTypes } from '@/interfaces/enums'
 
 export const makeChartID = (chartType: ChartTypes) => `${chartType}-chart-holder`
 

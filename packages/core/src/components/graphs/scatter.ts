@@ -1,7 +1,8 @@
 import { select, Selection } from 'd3'
-import { Component } from '../component'
-import { Roles, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { flipDomainAndRangeBasedOnOrientation, getProperty } from '../../tools'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Scatter extends Component {
 	type = 'scatter'

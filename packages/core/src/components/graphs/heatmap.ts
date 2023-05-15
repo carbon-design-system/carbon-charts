@@ -1,11 +1,11 @@
 import { min, select } from 'd3'
 import { get } from 'lodash-es'
-import { Component } from '../component'
-import { heatmap } from '../../configuration'
-import { Events, RenderTypes, DividerStatus } from '../../interfaces'
-import { getProperty, getTransformOffsets } from '../../tools'
-import { DOMUtils } from '../../services'
-import { HeatmapModel } from '../../model'
+import { getProperty, getTransformOffsets } from '@/tools'
+import { heatmap } from '@/configuration'
+import { Component } from '@/components/component'
+import { Events, RenderTypes, DividerStatus } from '@/interfaces/enums'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { HeatmapModel } from '@/model/heatmap'
 
 export class Heatmap extends Component {
 	type = 'heatmap'

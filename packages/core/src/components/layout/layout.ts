@@ -1,17 +1,17 @@
 import { select } from 'd3'
-import { Component } from '../component'
+import { getProperty } from '@/tools'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import { Component } from '@/components/component'
 import {
 	LayoutDirection,
 	LayoutGrowth,
-	LayoutComponentChild,
-	LayoutConfigs,
 	RenderTypes,
 	LayoutAlignItems
-} from '../../interfaces/index'
-import { getProperty } from '../../tools'
-import { DOMUtils } from '../../services'
-import type { ChartModel } from '../../model/model'
-import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
+} from '@/interfaces/enums'
+import { LayoutConfigs } from '@/interfaces/layout'
+import { LayoutComponentChild } from '@/interfaces/components'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModel } from '@/model/model'
 
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID

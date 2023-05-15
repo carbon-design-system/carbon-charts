@@ -1,19 +1,17 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type ChartConfig, type AreaChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import type { Component } from '../components'
-
-// Components
-import {
-	Grid,
-	StackedArea,
-	StackedRuler,
-	TwoDimensionalAxes,
-	Line,
-	StackedScatter,
-	Skeleton
-} from '../components/index'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { Component } from '@/components/component'
+import type { ChartConfig } from '@/interfaces/model'
+import type { AreaChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import { Grid } from '@/components/axes/grid'
+import { StackedArea } from '@/components/graphs/area-stacked'
+import { StackedRuler } from '@/components/axes/ruler-stacked'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Line } from '@/components/graphs/line'
+import { StackedScatter } from '@/components/graphs/scatter-stacked'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class StackedAreaChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AreaChartOptions>) {

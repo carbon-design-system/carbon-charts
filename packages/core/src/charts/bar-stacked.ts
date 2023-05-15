@@ -1,16 +1,16 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type BarChartOptions, type ChartConfig, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import {
-	type Component,
-	Grid,
-	StackedBar,
-	StackedRuler,
-	TwoDimensionalAxes,
-	ZeroLine,
-	Skeleton
-} from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import { Skeletons } from '@/interfaces/enums'
+import type { BarChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { StackedBar } from '@/components/graphs/bar-stacked'
+import { StackedRuler } from '@/components/axes/ruler-stacked'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { ZeroLine } from '@/components/axes/zero-line'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class StackedBarChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BarChartOptions>) {

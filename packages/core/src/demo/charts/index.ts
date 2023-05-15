@@ -1,4 +1,5 @@
-import { BaseChartOptions, ChartTabularData } from '../../interfaces'
+import { BaseChartOptions } from '@/interfaces/charts'
+import { ChartTabularData } from '@/interfaces/model'
 import * as areaDemos from './area'
 import * as barDemos from './bar'
 import * as boxplotDemos from './boxplot'

@@ -1,9 +1,10 @@
 import { extent } from 'd3'
-import { AxisPositions, Events, ScaleTypes } from '../interfaces'
+import { getProperty } from '@/tools'
+import { zoomBar } from '@/configuration'
+import { AxisPositions, Events, ScaleTypes } from '@/interfaces/enums'
 import { Service } from './service'
-import { getProperty } from '../tools'
-import { zoomBar } from '../configuration'
-import type { ChartModelCartesian } from '../model/cartesian-charts'
+
+import type { ChartModelCartesian } from '../model'
 
 export class Zoom extends Service {
 	protected model: ChartModelCartesian
@@ -152,6 +153,7 @@ export class Zoom extends Service {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get('zoomDomain')
 		const xScale = this.services.cartesianScales.getMainXScale().copy()
+console.log(xScale)
 		xScale.domain(this.getDefaultZoomBarDomain()) // reset domain to default full domain
 
 		// use scale range (rather than domain) to calculate

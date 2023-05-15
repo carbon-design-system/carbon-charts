@@ -1,8 +1,7 @@
-import { Tooltip } from './tooltip'
-import { ColorClassNameTypes } from '../../interfaces'
-import { getProperty } from '../../tools'
-
 import { get } from 'lodash-es'
+import { getProperty } from '@/tools'
+import { Tooltip } from './tooltip'
+import { ColorClassNameTypes } from '@/interfaces/enums'
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {

@@ -1,9 +1,16 @@
-import { BoxplotChartModel } from '../model'
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type BoxplotChartOptions, type ChartConfig, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Grid, Boxplot, TwoDimensionalAxes, ZeroLine, Skeleton } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { BoxplotChartModel } from '@/model/boxplot'
+import type { BoxplotChartOptions } from '@/interfaces/charts'
+import type { ChartConfig } from '@/interfaces/model'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Boxplot } from '@/components/graphs/boxplot'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { ZeroLine } from '@/components/axes/zero-line'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class BoxplotChart extends AxisChart {
 	model = new BoxplotChartModel(this.services)

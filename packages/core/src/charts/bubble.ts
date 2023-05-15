@@ -1,8 +1,15 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type ChartConfig, type BubbleChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Grid, Ruler, Bubble, TwoDimensionalAxes, Skeleton } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import { Skeletons } from '@/interfaces/enums'
+import type { BubbleChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Ruler } from '@/components/axes/ruler'
+import { Bubble } from '@/components/graphs/bubble'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class BubbleChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BubbleChartOptions>) {

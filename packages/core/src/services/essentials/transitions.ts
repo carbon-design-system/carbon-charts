@@ -1,8 +1,7 @@
-// Internal Imports
-import { Service } from '../service'
-import { transitions } from '../../configuration'
-import { Events } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { transitions } from '@/configuration'
+import { Service } from '@/services/service'
+import { Events } from '@/interfaces/enums'
 
 export interface setupTransitionConfigs {
 	transition?: any // d3 types are causing issues here, hence why using `any`

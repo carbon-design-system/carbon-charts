@@ -1,13 +1,13 @@
 import { select } from 'd3'
+import { generateSVGPathString } from '@/tools'
 import { Bar } from './bar'
 import {
 	Events,
-	Roles,
 	RenderTypes,
 	ColorClassNameTypes,
 	CartesianOrientations
-} from '../../interfaces'
-import { generateSVGPathString } from '../../tools'
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class SimpleBar extends Bar {
 	type = 'simple-bar'

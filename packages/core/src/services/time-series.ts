@@ -1,7 +1,7 @@
 import { min } from 'd3'
 import { format } from 'date-fns'
-import type { TimeScaleOptions } from '../interfaces/axis-scales'
-import { getProperty } from '../tools'
+import { getProperty } from '@/tools'
+import type { TimeScaleOptions } from '@/interfaces/axis-scales'
 
 export const TIME_INTERVALS = [
 	['15seconds', 15 * 1000],

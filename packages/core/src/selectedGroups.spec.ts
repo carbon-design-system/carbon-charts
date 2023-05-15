@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import ResizeObserver from 'resize-observer-polyfill'
 import { select } from 'd3'
-import { TestEnvironment } from './tests/index'
+import { TestEnvironment } from './tests'
 import settings from 'carbon-components/es/globals/js/settings' // CSS prefixes
-import { ScatterChart } from './charts'
+import { ScatterChart } from '@/charts/scatter'
 import { options } from './configuration'
-import { Events } from './interfaces'
+import { Events } from '@/interfaces/enums'
 
 global.ResizeObserver = ResizeObserver
 let chart: ScatterChart

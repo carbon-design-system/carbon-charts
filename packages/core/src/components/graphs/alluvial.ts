@@ -6,11 +6,11 @@ import {
 	sankeyRight,
 	sankeyJustify
 } from 'd3-sankey'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { debounce, getProperty, getTransformOffsets } from '../../tools'
-import { alluvial } from '../../configuration'
-import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
+import { debounce, getProperty, getTransformOffsets } from '@/tools'
+import { alluvial } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '@/interfaces/enums'
 
 // BUG: Typing is not working for this.services.domUtils from the base class Component.
 // DOMUtils is already imported directly to this module so why bother using this.services.domUtils?

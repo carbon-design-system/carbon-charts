@@ -1,6 +1,5 @@
-// Internal Imports
-import { Service } from '../service'
-import { ChartModel } from '../..'
+import { Service } from '@/services/service'
+import { ChartModel } from '@/model/model'
 
 export class Files extends Service {
 	constructor(model: ChartModel, services: any) {

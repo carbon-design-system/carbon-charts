@@ -1,6 +1,5 @@
-// Internal Imports
+import { getProperty } from '@/tools'
 import { ChartModel } from './model'
-import { getProperty } from '../tools'
 
 /**
  * The treemap chart model layer

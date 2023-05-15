@@ -1,8 +1,8 @@
 import { select } from 'd3'
 import { Service } from './service'
-import { Events } from '../interfaces/enums'
-import { canvasZoomSettings } from '../configuration'
-import { DOMUtils } from './essentials/dom-utils'
+import { Events } from '@/interfaces/enums'
+import { canvasZoomSettings } from '@/configuration'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class CanvasZoom extends Service {
 	protected model: any

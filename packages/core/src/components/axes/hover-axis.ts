@@ -1,10 +1,10 @@
 import { select } from 'd3'
+import { getProperty } from '@/tools'
+import { axis } from '@/configuration'
 import { Axis } from './axis'
-import { AxisPositions, Events, ScaleTypes } from '../../interfaces'
-import type { ChartModel } from '../../model/model'
-import { DOMUtils } from '../../services'
-import { getProperty } from '../../tools'
-import { axis } from '../../configuration'
+import { AxisPositions, Events, ScaleTypes } from '@/interfaces/enums'
+import type { ChartModel } from '@/model/model'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class HoverAxis extends Axis {
 	constructor(model: ChartModel, services: any, configs?: any) {

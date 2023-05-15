@@ -1,28 +1,25 @@
-import { HeatmapModel } from '../model'
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { getProperty, mergeDefaultChartOptions } from '../tools'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { getProperty, mergeDefaultChartOptions } from '@/tools'
+import { HeatmapModel } from '@/model/heatmap'
+import type { HeatmapChartOptions } from '@/interfaces/charts'
+import type { ChartConfig } from '@/interfaces/model'
 import {
-	type HeatmapChartOptions,
 	LayoutDirection,
 	LayoutGrowth,
-	type ChartConfig,
 	RenderTypes,
 	LayoutAlignItems
-} from '../interfaces'
-
-import {
-	type Component,
-	Heatmap,
-	TwoDimensionalAxes,
-	Modal,
-	LayoutComponent,
-	ColorScaleLegend,
-	Title,
-	AxisChartsTooltip,
-	Spacer,
-	Toolbar
-} from '../components'
+} from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Heatmap } from '@/components/graphs/heatmap'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Modal } from '@/components/essentials/modal'
+import { LayoutComponent } from '@/components/layout/layout'
+import { ColorScaleLegend } from '@/components/essentials/color-scale-legend'
+import { Title } from '@/components/essentials/title'
+import { AxisChartsTooltip } from '@/components/essentials/tooltip-axis'
+import { Spacer } from '@/components/layout/spacer'
+import { Toolbar } from '@/components/axes/toolbar'
 
 export class HeatmapChart extends AxisChart {
 	model = new HeatmapModel(this.services)

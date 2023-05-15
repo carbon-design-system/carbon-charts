@@ -1,17 +1,16 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import type { ChartConfig, LineChartOptions } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import {
-	type Component,
-	Grid,
-	Line,
-	Ruler,
-	Scatter,
-	TwoDimensionalAxes,
-	ZeroLine,
-	SkeletonLines
-} from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { LineChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Ruler } from '@/components/axes/ruler'
+import { Line } from '@/components/graphs/line'
+import { Scatter } from '@/components/graphs/scatter'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { ZeroLine } from '@/components/axes/zero-line'
+import { SkeletonLines } from '@/components/graphs/skeleton-lines'
 
 export class LineChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<LineChartOptions>) {

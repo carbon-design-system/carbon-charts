@@ -1,6 +1,6 @@
 // Internal Imports
-import { ChartClip } from '../axes/chart-clip'
-import { DOMUtils } from '../../services'
+import { ChartClip } from '@/components/axes/chart-clip'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior

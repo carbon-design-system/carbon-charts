@@ -1,15 +1,19 @@
-import { MeterChartModel } from '../model'
-import { Chart } from '../chart'
-import { options as configOptions } from '../configuration'
+import { Chart } from '@/chart'
+import { options as configOptions } from '@/configuration'
+import { clone, getProperty, merge } from '@/tools'
+import { MeterChartModel } from '@/model/meter'
+import type { ChartConfig } from '@/interfaces/model'
+import type { MeterChartOptions } from '@/interfaces/charts'
 import {
-	type ChartConfig,
-	type MeterChartOptions,
 	LayoutGrowth,
 	LayoutDirection,
 	RenderTypes
-} from '../interfaces'
-import { clone, getProperty, merge } from '../tools'
-import { type Component, LayoutComponent, Meter, MeterTitle, Spacer } from '../components'
+} from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { LayoutComponent } from '@/components/layout'
+import { Meter } from '@/components/graphs/meter'
+import { MeterTitle } from '@/components/essentials/title-meter'
+import { Spacer } from '@/components/layout/spacer'
 
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services)

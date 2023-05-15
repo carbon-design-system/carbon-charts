@@ -1,9 +1,13 @@
-import { PieChartModel } from '../model'
-import { Chart } from '../chart'
-import { options } from '../configuration'
-import { type ChartConfig, type PieChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Pie, Skeleton } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { PieChartModel } from '@/model/pie'
+import type { ChartConfig } from '@/interfaces/model'
+import type { PieChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Pie } from '@/components/graphs/pie'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class PieChart extends Chart {
 	model = new PieChartModel(this.services)

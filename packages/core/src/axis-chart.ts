@@ -1,34 +1,33 @@
 import { Chart } from './chart'
-import { ChartModelCartesian } from './model/cartesian-charts'
+import { getProperty } from './tools'
+import { ChartModelCartesian } from '@/model/cartesian-charts'
+import { AxisChartOptions } from '@/interfaces/charts'
+import { ChartConfig } from '@/interfaces/model'
 import {
+	AxisPositions,
+	LayoutAlignItems,
 	LayoutDirection,
 	LayoutGrowth,
 	LegendOrientations,
 	LegendPositions,
-	ChartConfig,
-	AxisChartOptions,
-	AxisPositions,
-	ScaleTypes,
 	RenderTypes,
-	LayoutAlignItems
-} from './interfaces'
-import {
-	ChartBrush,
-	ChartClip,
-	Modal,
-	LayoutComponent,
-	Legend,
-	Threshold,
-	Highlight,
-	Title,
-	AxisChartsTooltip,
-	Spacer,
-	Toolbar,
-	ZoomBar
-} from './components'
-import { getProperty } from './tools'
-
-import { CartesianScales, Curves, Zoom } from './services'
+	ScaleTypes
+} from '@/interfaces/enums'
+import { ChartBrush } from '@/components/axes/grid-brush'
+import { ChartClip } from '@/components/axes/chart-clip'
+import { Toolbar } from '@/components/axes/toolbar'
+import { ZoomBar } from '@/components/axes/zoom-bar'
+import { LayoutComponent } from '@/components/layout'
+import { Spacer } from '@/components/layout/spacer'
+import { Modal } from '@/components/essentials/modal'
+import { Legend } from '@/components/essentials/legend'
+import { Threshold } from '@/components/essentials/threshold'
+import { Highlight } from '@/components/essentials/highlights'
+import { Title } from '@/components/essentials/title'
+import { AxisChartsTooltip } from '@/components/essentials/tooltip-axis'
+import { CartesianScales } from '@/services/scales-cartesian'
+import { Curves } from '@/services/curves'
+import { Zoom } from '@/services/zoom'
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {

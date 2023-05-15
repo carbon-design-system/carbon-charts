@@ -1,7 +1,7 @@
 import { select } from 'd3'
-import { Component } from '../component'
-import { Events, RenderTypes, ToolbarControlTypes } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { Events, RenderTypes, ToolbarControlTypes } from '@/interfaces/enums'
 
 export class Toolbar extends Component {
 	static buttonID = 0

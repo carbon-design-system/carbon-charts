@@ -1,5 +1,4 @@
-// Internal Imports
-import { Service } from '../service'
+import { Service } from '@/services/service'
 
 export class GradientUtils extends Service {
 	static appendOrUpdateLinearGradient(configs: any) {

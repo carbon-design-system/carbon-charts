@@ -1,9 +1,9 @@
 import { area, select } from 'd3'
-import { Component } from '../component'
-import { area as configArea } from '../../configuration'
-import { CartesianOrientations, Events, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { GradientUtils } from '../../services'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { area as configArea } from '@/configuration'
+import { Component } from '@/components/component'
+import { CartesianOrientations, Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { GradientUtils } from '@/services/essentials/gradient-utils'
 
 export class Area extends Component {
 	type = 'area'

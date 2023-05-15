@@ -1,8 +1,9 @@
 import { cluster as d3Cluster, tree as d3Tree, hierarchy, linkHorizontal, select } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { type Coordinates, Events, RenderTypes, TreeTypes } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, RenderTypes, TreeTypes } from '@/interfaces/enums'
+import type { Coordinates } from '@/interfaces/layout'
 
 const NODE_OFFSET = 6
 

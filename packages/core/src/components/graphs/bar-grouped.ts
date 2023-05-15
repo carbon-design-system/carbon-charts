@@ -1,13 +1,13 @@
 import { ScaleBand, scaleBand, select } from 'd3'
+import { generateSVGPathString, getProperty, removeArrayDuplicates } from '@/tools'
 import { Bar } from './bar'
-import { generateSVGPathString, getProperty, removeArrayDuplicates } from '../../tools'
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
-	RenderTypes,
-	Roles
-} from '../../interfaces'
+	RenderTypes
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class GroupedBar extends Bar {
 	type = 'grouped-bar'

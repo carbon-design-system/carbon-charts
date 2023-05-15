@@ -1,8 +1,17 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type ChartConfig, type AreaChartOptions, Skeletons } from '../interfaces'
-import { clone, mergeDefaultChartOptions } from '../tools'
-import { type Component, Grid, Area, Line, Ruler, Scatter, TwoDimensionalAxes, Skeleton } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { clone, mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { AreaChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Area } from '@/components/graphs/area'
+import { Line } from '@/components/graphs/line'
+import { Ruler } from '@/components/axes/ruler'
+import { Scatter } from '@/components/graphs/scatter'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class AreaChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<AreaChartOptions>) {

@@ -1,6 +1,5 @@
-// Internal Imports
-import { Component } from '../component'
-import { spacers } from '../../configuration'
+import { spacers } from '@/configuration'
+import { Component } from '@/components/component'
 
 export class Spacer extends Component {
 	type = 'spacer'

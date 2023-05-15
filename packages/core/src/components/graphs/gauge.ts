@@ -1,16 +1,16 @@
 import { arc, select } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
+import { clamp, getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 import {
-	Roles,
 	Events,
 	GaugeTypes,
 	ArrowDirections,
 	ColorClassNameTypes,
 	Alignments,
 	RenderTypes
-} from '../../interfaces'
-import { clamp, getProperty } from '../../tools'
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 // arrow paths for delta
 const ARROW_UP_PATH_STRING = '4,10 8,6 12,10'

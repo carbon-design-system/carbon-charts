@@ -1,10 +1,10 @@
 import { area, brushX, extent, line } from 'd3'
-import { Component } from '../component'
-import type { ChartModelCartesian } from '../../model/cartesian-charts'
-import { clone, getProperty, isEmpty, merge } from '../../tools'
-import { AxisPositions, Events, RenderTypes, ScaleTypes, ZoomBarTypes } from '../../interfaces'
-import { DOMUtils } from '../../services'
-import { zoomBar } from '../../configuration'
+import { clone, getProperty, isEmpty, merge } from '@/tools'
+import { zoomBar } from '@/configuration'
+import { Component } from '@/components/component'
+import type { ChartModelCartesian } from '@/model/cartesian-charts'
+import { AxisPositions, Events, RenderTypes, ScaleTypes, ZoomBarTypes } from '@/interfaces/enums'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class ZoomBar extends Component {
 	type = 'zoom-bar'

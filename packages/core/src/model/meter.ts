@@ -1,7 +1,6 @@
-// Internal Imports
+import { getProperty } from '@/tools'
 import { ChartModel } from './model'
-import { getProperty } from '../tools'
-import { ChartTabularData } from '..'
+import { ChartTabularData } from '@/interfaces/model'
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset

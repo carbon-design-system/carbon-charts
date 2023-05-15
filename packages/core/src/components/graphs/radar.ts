@@ -1,8 +1,10 @@
 import { curveLinearClosed, extent, lineRadial, max, min, scaleBand, scaleLinear, select, type Selection as D3Selection, type Transition } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { Events, Roles, ColorClassNameTypes, RenderTypes, Alignments } from '../../interfaces'
-import { flatMapDeep, getProperty, kebabCase, merge } from '../../tools'
+import { flatMapDeep, getProperty, kebabCase, merge } from '@/tools'
+import { radar } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 import {
 	Point,
 	Angle,
@@ -10,8 +12,7 @@ import {
 	radToDeg,
 	polarToCartesianCoords,
 	distanceBetweenPointOnCircAndVerticalDiameter
-} from '../../services/angle-utils'
-import { radar } from '../../configuration'
+} from '@/services/angle-utils'
 
 export class Radar extends Component {
 	type = 'radar'

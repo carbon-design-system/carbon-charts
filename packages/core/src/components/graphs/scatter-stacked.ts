@@ -1,7 +1,7 @@
-// Internal Imports
+import { getProperty } from '@/tools'
 import { Scatter } from './scatter'
-import { RenderTypes, Roles } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class StackedScatter extends Scatter {
 	type = 'scatter-stacked'

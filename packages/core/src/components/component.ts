@@ -1,9 +1,10 @@
 import { select, type Selection as D3Selection } from 'd3'
-import type { ChartModel } from '../model/model'
-import { DOMUtils } from '../services'
-import { RenderTypes, Services } from '../interfaces'
-import { getProperty, merge } from '../tools'
-import { carbonPrefix } from '../configuration-non-customizable' // CSS prefix
+import { getProperty, merge } from '@/tools'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import type { ChartModel } from '@/model/model'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { RenderTypes } from '@/interfaces/enums'
+import { Services } from '@/interfaces/services'
 
 export class Component {
 	public type = ''

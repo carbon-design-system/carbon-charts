@@ -1,8 +1,7 @@
-// Internal Imports
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { Events, RenderTypes } from '../../interfaces'
-import { getProperty } from '../../tools'
+import { getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, RenderTypes } from '@/interfaces/enums'
 
 export class Title extends Component {
 	type = 'title'

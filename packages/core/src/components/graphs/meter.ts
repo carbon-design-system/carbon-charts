@@ -1,10 +1,11 @@
 import { scaleLinear, select } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { getProperty } from '../../tools'
-import { Roles, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import { meter } from '../../configuration'
-import { MeterChartModel } from '../..'
+import { getProperty } from '@/tools'
+import { meter } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
+import { MeterChartModel } from '@/model/meter'
 
 export class Meter extends Component {
 	type = 'meter'

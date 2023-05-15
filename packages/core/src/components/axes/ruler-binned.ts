@@ -1,9 +1,9 @@
 import { select } from 'd3'
 import { get } from 'lodash-es'
+import { isEqual, getProperty } from '@/tools'
 import { GenericSvgSelection, Ruler } from './ruler'
-import { DOMUtils } from '../../services'
-import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '../../interfaces'
-import { isEqual, getProperty } from '../../tools'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 
 export class BinnedRuler extends Ruler {
 	type = 'ruler-binned'

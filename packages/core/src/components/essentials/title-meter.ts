@@ -1,11 +1,10 @@
 import type { Selection as D3Selection } from 'd3'
+import { getProperty } from '@/tools'
+import { meter } from '@/configuration'
 import { Title } from './title'
-import { DOMUtils } from '../../services'
-import { getProperty } from '../../tools'
-import { RenderTypes, Statuses } from '../../interfaces/enums'
-import { meter } from '../../configuration'
-import { MeterChartModel } from '../../model'
-import { Dimensions } from '../../services/essentials/dom-utils'
+import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
+import { RenderTypes, Statuses } from '@/interfaces/enums'
+import { MeterChartModel } from '@/model/meter'
 
 export class MeterTitle extends Title {
 	type = 'meter-title'

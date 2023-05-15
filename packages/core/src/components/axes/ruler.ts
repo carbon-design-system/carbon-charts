@@ -1,8 +1,8 @@
 import { Selection, pointer } from 'd3'
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { CartesianOrientations, Events, RenderTypes } from '../../interfaces'
-import { debounceWithD3MousePosition, getProperty, isEqual } from '../../tools'
+import { debounceWithD3MousePosition, getProperty, isEqual } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { CartesianOrientations, Events, RenderTypes } from '@/interfaces/enums'
 
 export type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>
 

@@ -1,6 +1,5 @@
-// Internal Imports
+import { getProperty } from '@/tools'
 import { ChartModelCartesian } from './cartesian-charts'
-import { getProperty } from '../tools'
 
 /**
  * Bullet chart model layer

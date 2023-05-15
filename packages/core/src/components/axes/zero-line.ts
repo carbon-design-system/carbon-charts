@@ -1,8 +1,7 @@
-// Internal Imports
-import { Component } from '../component'
-import { DOMUtils } from '../../services'
-import { flipSVGCoordinatesBasedOnOrientation } from '../../tools'
-import { RenderTypes } from '../../interfaces'
+import { flipSVGCoordinatesBasedOnOrientation } from '@/tools'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { RenderTypes } from '@/interfaces/enums'
 
 export class ZeroLine extends Component {
 	type = 'zero-line'

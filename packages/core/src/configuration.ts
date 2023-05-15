@@ -1,3 +1,5 @@
+import { enUS as localeObject } from 'date-fns/locale'
+import { circlePack } from './configuration-non-customizable'
 import { merge } from './tools'
 import {
 	BaseChartOptions,
@@ -14,6 +16,7 @@ import {
 	DonutChartOptions,
 	BubbleChartOptions,
 	BulletChartOptions,
+	HeatmapChartOptions,
 	HistogramChartOptions,
 	RadarChartOptions,
 	ComboChartOptions,
@@ -22,21 +25,11 @@ import {
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	AlluvialChartOptions,
-	// Components
-	AxisOptions,
-	GridOptions,
-	RulerOptions,
-	AxesOptions,
-	TimeScaleOptions,
-	TooltipOptions,
-	WordCloudChartTooltipOptions,
-	LegendOptions,
-	StackedBarOptions,
 	MeterChartOptions,
 	ProportionalMeterChartOptions,
-	ToolbarOptions,
-	ZoomBarsOptions,
-	// ENUMS
+	WordCloudChartTooltipOptions
+} from '@/interfaces/charts'
+import {
 	Alignments,
 	GaugeTypes,
 	LegendPositions,
@@ -45,12 +38,19 @@ import {
 	ZoomBarTypes,
 	LegendItemType,
 	TreeTypes,
-	HeatmapChartOptions,
 	DividerStatus,
 	ChartTheme
-} from './interfaces'
-import { enUS as localeObject } from 'date-fns/locale'
-import { circlePack } from './configuration-non-customizable'
+} from '@/interfaces/enums'
+import { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
+import {
+	GridOptions,
+	RulerOptions,
+	TooltipOptions,
+	LegendOptions,
+	StackedBarOptions,
+	ToolbarOptions,
+	ZoomBarsOptions,
+} from '@/interfaces/components'
 
 /*
  *****************************

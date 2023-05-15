@@ -1,9 +1,11 @@
-import { Chart } from '../chart'
-import { CirclePackChartModel } from '../model'
-import type { ChartConfig, CirclePackChartOptions } from '../interfaces'
-import { options } from '../configuration'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, CirclePack } from '../components'
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { CirclePackChartModel } from '@/model/circle-pack'
+import type { ChartConfig } from '@/interfaces/model'
+import type { CirclePackChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { CirclePack } from '@/components/graphs/circle-pack'
 
 export class CirclePackChart extends Chart {
 	model = new CirclePackChartModel(this.services)

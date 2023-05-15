@@ -1,4 +1,3 @@
-// Internal Imports
 import { ChartModel } from './model'
 
 /**

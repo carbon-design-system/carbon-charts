@@ -1,13 +1,13 @@
 import { select, pointer } from 'd3'
 import { format } from 'date-fns'
 import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
-import { Component } from '../component'
-import { getProperty, truncateLabel } from '../../tools'
-import { DOMUtils } from '../../services'
-import type { ChartModel } from '../../model/model'
-import { Events, RenderTypes, TruncationTypes } from '../../interfaces'
-import { zoomBar, tooltips } from '../../configuration'
-import { carbonPrefix } from '../../configuration-non-customizable' // CSS prefix
+import { getProperty, truncateLabel } from '@/tools'
+import { zoomBar, tooltips } from '@/configuration'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModel } from '@/model/model'
+import { Events, RenderTypes, TruncationTypes } from '@/interfaces/enums'
 
 export class Tooltip extends Component {
 	type = 'tooltip'

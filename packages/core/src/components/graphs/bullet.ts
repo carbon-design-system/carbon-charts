@@ -1,9 +1,10 @@
 import { select } from 'd3'
-import { Component } from '../component'
-import { Events, Roles, ColorClassNameTypes, RenderTypes } from '../../interfaces'
-import { generateSVGPathString, getProperty } from '../../tools'
-import { DOMUtils } from '../../services'
-import { BulletChartModel } from '../..'
+import { generateSVGPathString, getProperty } from '@/tools'
+import { Component } from '@/components/component'
+import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { BulletChartModel } from '@/model/bullet'
 
 export class Bullet extends Component {
 	type = 'bullet'

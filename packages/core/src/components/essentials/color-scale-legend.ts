@@ -1,9 +1,9 @@
 import { axisBottom, interpolateNumber, quantize, scaleBand, scaleLinear } from 'd3'
-import { getProperty, isEmpty } from '../../tools'
-import { ColorLegendType, Events, RenderTypes } from '../../interfaces'
-import { legend } from '../../configuration'
+import { getProperty, isEmpty } from '@/tools'
+import { legend } from '@/configuration'
+import { ColorLegendType, Events, RenderTypes } from '@/interfaces/enums'
 import { Legend } from './legend'
-import { DOMUtils } from '../../services'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class ColorScaleLegend extends Legend {
 	type = 'color-legend'

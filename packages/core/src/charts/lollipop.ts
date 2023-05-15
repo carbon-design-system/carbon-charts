@@ -1,8 +1,16 @@
-import { AxisChart } from '../axis-chart'
-import { options } from '../configuration'
-import { type ChartConfig, type LollipopChartOptions, Skeletons } from '../interfaces'
-import { mergeDefaultChartOptions } from '../tools'
-import { type Component, Grid, Ruler, Scatter, Lollipop, TwoDimensionalAxes, Skeleton } from '../components'
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { LollipopChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Ruler } from '@/components/axes/ruler'
+import { Scatter } from '@/components/graphs/scatter'
+import { Lollipop } from '@/components/graphs/lollipop'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class LollipopChart extends AxisChart {
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<LollipopChartOptions>) {

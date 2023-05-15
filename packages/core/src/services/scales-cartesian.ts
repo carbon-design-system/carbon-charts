@@ -19,10 +19,11 @@ import {
 	subSeconds,
 	addSeconds
 } from 'date-fns'
-import { axis } from '../configuration'
+import { flatten, getProperty, removeArrayDuplicates } from '@/tools'
+import { axis } from '@/configuration'
 import { Service } from './service'
-import { AxisPositions, CartesianOrientations, ScaleTypes, ThresholdOptions } from '../interfaces'
-import { flatten, getProperty, removeArrayDuplicates } from '../tools'
+import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'
+import { ThresholdOptions } from '@/interfaces/components'
 
 type ScaleFunction = ScaleTime<number, number, never> | ScaleBand<string> | ScaleLinear<number, number, never>
 

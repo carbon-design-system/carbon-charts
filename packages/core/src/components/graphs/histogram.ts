@@ -1,14 +1,14 @@
 import { select } from 'd3'
 import { get } from 'lodash-es'
-import { generateSVGPathString, getProperty } from '../../tools'
+import { generateSVGPathString, getProperty } from '@/tools'
 import {
-	Roles,
 	Events,
 	CartesianOrientations,
 	ColorClassNameTypes,
 	RenderTypes
-} from '../../interfaces'
-import { Component } from '../component'
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
+import { Component } from '@/components/component'
 
 export class Histogram extends Component {
 	type = 'histogram'

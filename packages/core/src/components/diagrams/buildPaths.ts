@@ -1,5 +1,6 @@
 import { path as d3Path } from 'd3'
-import type { Coordinates } from '../../'
+import type { Coordinates } from '@/interfaces/layout'
+
 /**
  * Returns a path string for a straight path
  * @param source - The source coordinates

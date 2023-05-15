@@ -5,7 +5,7 @@ import type {
 	ToolbarControlTypes,
 	ZoomBarTypes
 } from './enums'
-import type { Component } from '../components/component'
+import type { Component } from '../components'
 import type { TruncationOptions } from './truncation'
 
 /**
