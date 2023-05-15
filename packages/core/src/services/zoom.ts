@@ -49,8 +49,10 @@ export class Zoom extends Service {
 	}
 
 	getDefaultZoomBarDomain(zoomBarData?: any) {
+		if (!this.services.zoom) throw new Error('Services zoom not defined')
 		const allZoomBarData = zoomBarData || this.services.zoom.getZoomBarData()
 		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Services cartesianScales undefined')
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition()
 		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
@@ -62,6 +64,7 @@ export class Zoom extends Service {
 		}
 
 		// default to full range with extended domain
+		if (!mainXAxisPosition) throw new Error('Not defined: mainXAxisPosition')
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
 			extent(allZoomBarData, (d: any) => d[domainIdentifier])
@@ -71,7 +74,7 @@ export class Zoom extends Service {
 	handleDomainChange(newDomain: any, configs = { dispatchEvent: true }) {
 		this.model.set({ zoomDomain: newDomain }, { animate: false })
 		if (configs.dispatchEvent) {
-			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+			this.services.events?.dispatchEvent(Events.ZoomDomain.CHANGE, {
 				newDomain
 			})
 		}
@@ -93,7 +96,7 @@ export class Zoom extends Service {
 		if (this.isZoomBarEnabled() && shouldUpdateRangeAxis && zoomDomain) {
 			const domainIdentifier = mergedConfigs.stacked
 				? 'sharedStackKey'
-				: this.services.cartesianScales.getDomainIdentifier()
+				: this.services.cartesianScales?.getDomainIdentifier()
 			const filteredData = displayData.filter(
 				(datum: any) =>
 					new Date(datum[domainIdentifier]) >= zoomDomain[0] &&
@@ -113,7 +116,7 @@ export class Zoom extends Service {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get('zoomDomain')
 		const handleWidth = zoomBar.handleWidth
-		const xScale = this.services.cartesianScales.getMainXScale().copy()
+		const xScale = this.services.cartesianScales?.getMainXScale().copy()
 		xScale.domain(this.getDefaultZoomBarDomain()) // reset domain to default full domain
 
 		// use scale range (rather than domain) to calculate
@@ -152,8 +155,10 @@ export class Zoom extends Service {
 	zoomOut(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get('zoomDomain')
+
+		if (!this.services.cartesianScales) throw new Error('Services cartesianScales undefined')
 		const xScale = this.services.cartesianScales.getMainXScale().copy()
-console.log(xScale)
+
 		xScale.domain(this.getDefaultZoomBarDomain()) // reset domain to default full domain
 
 		// use scale range (rather than domain) to calculate

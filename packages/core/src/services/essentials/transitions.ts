@@ -2,6 +2,7 @@ import { getProperty } from '@/tools'
 import { transitions } from '@/configuration'
 import { Service } from '@/services/service'
 import { Events } from '@/interfaces/enums'
+import type { Transition } from 'd3'
 
 export interface setupTransitionConfigs {
 	transition?: any // d3 types are causing issues here, hence why using `any`
@@ -10,7 +11,7 @@ export interface setupTransitionConfigs {
 }
 
 export class Transitions extends Service {
-	pendingTransitions = {}
+	pendingTransitions: Record<number, Transition<any, any, any, any>> = {}
 
 	init() {
 		this.services.events?.addEventListener(Events.Model.UPDATE, () => {

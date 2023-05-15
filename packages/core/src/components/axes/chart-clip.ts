@@ -2,6 +2,7 @@ import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
 import { RenderTypes } from '@/interfaces/enums'
+import type { Selection } from 'd3'
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior
@@ -25,7 +26,9 @@ export class ChartClip extends Component {
 		this.model.set({ chartClipId: this.chartClipId }, { skipUpdate: true })
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// Create the clipPath
 		this.createClipPath()
@@ -34,6 +37,7 @@ export class ChartClip extends Component {
 	createClipPath() {
 		const svg = this.parent
 		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Service cartesianScales was undefined')
 		const mainXScale = cartesianScales.getMainXScale()
 		const mainYScale = cartesianScales.getMainYScale()
 
@@ -41,11 +45,15 @@ export class ChartClip extends Component {
 		const [yScaleEnd, yScaleStart]: number[] = mainYScale.range()
 
 		// Get height
-		this.chartClipPath = DOMUtils.appendOrSelect(svg, `clipPath.${this.type}`).attr(
+		if (!svg) {
+			throw new Error('svg is undefined');
+		}
+	
+		this.chartClipPath = DOMUtils.appendOrSelect(svg as Selection<SVGGraphicsElement, any, HTMLElement, any>, `clipPath.${this.type}`).attr(
 			'id',
 			this.chartClipId
 		)
-		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`)
+		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`) as Selection<any, any, HTMLElement, any>
 
 		if (xScaleEnd - xScaleStart > 0) {
 			clipRect
