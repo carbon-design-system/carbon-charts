@@ -599,7 +599,7 @@ export class ChartModel {
 					: `${type}-${colorPairingTag}`)
 		)
 
-		return className
+		return className || ''
 	}
 
 	/**

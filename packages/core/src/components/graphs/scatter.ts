@@ -12,8 +12,10 @@ export class Scatter extends Component {
 
 	init() {
 		const { events } = this.services
+		if (!events) throw new Error('Services events are undefined.')
+
 		// Highlight correct circle on legend item hovers
-		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover)
+		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover as EventListenerOrEventListenerObject)
 		// Un-highlight circles on legend item mouseouts
 		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 
@@ -27,7 +29,10 @@ export class Scatter extends Component {
 	}
 
 	filterBasedOnZoomDomain(data: any) {
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(data)
+		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Services cartesianScales are undefined.')
+
+		const domainIdentifier = cartesianScales.getDomainIdentifier(data)
 		const zoomDomain = this.model.get('zoomDomain')
 		if (zoomDomain !== undefined) {
 			return data.filter(
@@ -52,8 +57,10 @@ export class Scatter extends Component {
 				percentage
 			})
 		} else {
+			const { cartesianScales } = this.services
+			if (!cartesianScales) throw new Error('Services cartesianScales are undefined.')
 			scatterData = this.model.getDisplayData(this.configs.groups).filter((d: any) => {
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)
+				const rangeIdentifier = cartesianScales.getRangeIdentifier(d)
 				return d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null
 			})
 		}
@@ -77,7 +84,9 @@ export class Scatter extends Component {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier()
+		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Services cartesianScales are undefined.')
+		const domainIdentifier = cartesianScales.getDomainIdentifier()
 
 		// Update data on dot groups
 		const circles = svg
@@ -85,7 +94,7 @@ export class Scatter extends Component {
 			.data(
 				this.getScatterData(),
 				(datum: any) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
-			)
+			) as  Selection<SVGCircleElement, any, HTMLElement, any>
 
 		// Remove circles that need to be removed
 		circles.exit().attr('opacity', 0).remove()
@@ -109,18 +118,20 @@ export class Scatter extends Component {
 		}
 
 		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Cartesian scales service is undefined')
+
 		const orientation = cartesianScales.getOrientation()
 
 		// Get highest domain and range thresholds
 		const [xThreshold, yThreshold] = flipDomainAndRangeBasedOnOrientation(
-			this.services.cartesianScales.getHighestDomainThreshold(),
-			this.services.cartesianScales.getHighestRangeThreshold(),
+			cartesianScales.getHighestDomainThreshold(),
+			cartesianScales.getHighestRangeThreshold(),
 			orientation
 		)
 
 		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
-			(d: any) => this.services.cartesianScales.getDomainValue(d),
-			(d: any) => this.services.cartesianScales.getRangeValue(d),
+			(d: any) => cartesianScales.getDomainValue(d),
+			(d: any) => cartesianScales.getRangeValue(d),
 			orientation
 		)
 
@@ -141,13 +152,16 @@ export class Scatter extends Component {
 		if (xThreshold) {
 			return xValue >= xThreshold.scaleValue
 		}
+
+		return false
 	}
 
-	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
+	styleCircles(selection: Selection<SVGCircleElement, any, Element, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions()
 		const { filled, fillOpacity } = options.points
 		const { cartesianScales } = this.services
+		if (!cartesianScales) throw new Error('Cartesian scales service is undefined')
 
 		const { groupMapsTo } = options.data
 
@@ -160,10 +174,11 @@ export class Scatter extends Component {
 		)
 
 		const { fadeInOnChartHolderMouseover } = this.configs
+
 		selection
 			.raise()
 			.classed('dot', true)
-			.attr('class', (d: any) => {
+			.attr('class', (d: any) => { // one element in ChartTabularData (Record<string, any>)
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				const isFilled = this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 				const classNamesNeeded = isFilled
@@ -174,7 +189,7 @@ export class Scatter extends Component {
 					classNameTypes: classNamesNeeded,
 					dataGroupName: d[groupMapsTo],
 					originalClassName: 'dot'
-				})
+				}) || ''
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed('threshold-anomaly', (d: any) => this.isDatapointThresholdAnomaly(d))
@@ -188,7 +203,7 @@ export class Scatter extends Component {
 			})
 			.transition()
 			.call((t: any) =>
-				this.services.transitions.setupTransition({
+				this.services.transitions?.setupTransition({
 					transition: t,
 					name: 'scatter-update-enter',
 					animate
@@ -222,11 +237,12 @@ export class Scatter extends Component {
 	}
 
 	handleChartHolderOnHover = () => {
+		if (!this.parent) throw new Error('Parent not defined')
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-hover-scatter')
 			.call((t: any) =>
-				this.services.transitions.setupTransition({
+				this.services.transitions?.setupTransition({
 					transition: t,
 					name: 'chart-holder-hover-scatter'
 				})
@@ -235,11 +251,12 @@ export class Scatter extends Component {
 	}
 
 	handleChartHolderOnMouseOut = () => {
+		if (!this.parent) throw new Error('Parent not defined')
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-mouseout-scatter')
 			.call((t: any) =>
-				this.services.transitions.setupTransition({
+				this.services.transitions?.setupTransition({
 					transition: t,
 					name: 'chart-holder-mouseout-scatter'
 				})
@@ -247,16 +264,17 @@ export class Scatter extends Component {
 			.attr('opacity', 0)
 	}
 
-	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail
-
+	// TODO: follow signature of EventListenerOrEventListenerObject
+	handleLegendOnHover = (evt: CustomEvent) => {
+		const { hoveredElement } = evt.detail
 		const { groupMapsTo } = this.getOptions().data
 
+		if (!this.parent) throw new Error('Parent not defined')
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-hover-scatter')
 			.call((t: any) =>
-				this.services.transitions.setupTransition({
+				this.services.transitions?.setupTransition({
 					transition: t,
 					name: 'legend-hover-scatter'
 				})
@@ -265,11 +283,13 @@ export class Scatter extends Component {
 	}
 
 	handleLegendMouseOut = () => {
+		if (!this.parent) throw new Error('Parent not defined')
+
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-mouseout-scatter')
 			.call((t: any) =>
-				this.services.transitions.setupTransition({
+				this.services.transitions?.setupTransition({
 					transition: t,
 					name: 'legend-mouseout-scatter'
 				})
@@ -278,6 +298,8 @@ export class Scatter extends Component {
 	}
 
 	// Extended in bubble graphs
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getTooltipAdditionalItems(datum: any) {
 		return null as any
@@ -287,10 +309,11 @@ export class Scatter extends Component {
 		const self = this
 		const { groupMapsTo } = self.getOptions().data
 
+		if (!this.parent) throw new Error('Parent not defined')
 		this.parent
 			.selectAll('circle')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
-				const hoveredElement = select(this)
+				const hoveredElement = select(this) 
 
 				hoveredElement
 					.classed('hovered', true)
@@ -302,13 +325,13 @@ export class Scatter extends Component {
 						})
 					)
 					.style('fill', (d: any) => {
-						const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(d)
+						const domainIdentifier = self.services.cartesianScales?.getDomainIdentifier(d)
 						return self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 					})
 					.classed('unfilled', false)
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				self.services.events?.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement,
 					data: [datum],
@@ -316,7 +339,7 @@ export class Scatter extends Component {
 				})
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOVER, {
+				self.services.events?.dispatchEvent(Events.Scatter.SCATTER_MOUSEOVER, {
 					event,
 					element: hoveredElement,
 					datum
@@ -326,19 +349,19 @@ export class Scatter extends Component {
 				const hoveredElement = select(this)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEMOVE, {
+				self.services.events?.dispatchEvent(Events.Scatter.SCATTER_MOUSEMOVE, {
 					event,
 					element: hoveredElement,
 					datum
 				})
 
-				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+				self.services.events?.dispatchEvent(Events.Tooltip.MOVE, {
 					event
 				})
 			})
 			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
+				self.services.events?.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
 					event,
 					element: select(this),
 					datum
@@ -350,7 +373,7 @@ export class Scatter extends Component {
 
 				if (!self.configs.filled) {
 					const { filled } = self.getOptions().points
-					const domainIdentifier = self.services.cartesianScales.getDomainIdentifier(datum)
+					const domainIdentifier = self.services.cartesianScales?.getDomainIdentifier(datum)
 					const isFilled = self.model.getIsFilled(
 						datum[groupMapsTo],
 						datum[domainIdentifier],
@@ -366,14 +389,14 @@ export class Scatter extends Component {
 				}
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOUT, {
+				self.services.events?.dispatchEvent(Events.Scatter.SCATTER_MOUSEOUT, {
 					event,
 					element: hoveredElement,
 					datum
 				})
 
 				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+				self.services.events?.dispatchEvent(Events.Tooltip.HIDE, {
 					hoveredElement
 				})
 			})
@@ -381,11 +404,12 @@ export class Scatter extends Component {
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll('circle').on('mousemove', null).on('mouseout', null)
+		this.parent?.selectAll('circle').on('mousemove', null).on('mouseout', null)
 
 		// Remove legend listeners
 		const { events } = this.services
-		events.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover)
+		if (!events) throw new Error('Services events undefined')
+		events.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover as EventListenerOrEventListenerObject)
 		events.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 		events.removeEventListener(Events.Chart.MOUSEOVER, this.handleChartHolderOnHover)
 		events.removeEventListener(Events.Chart.MOUSEOUT, this.handleChartHolderOnMouseOut)

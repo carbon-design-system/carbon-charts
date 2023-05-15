@@ -13,7 +13,7 @@ export class Transitions extends Service {
 	pendingTransitions = {}
 
 	init() {
-		this.services.events.addEventListener(Events.Model.UPDATE, () => {
+		this.services.events?.addEventListener(Events.Model.UPDATE, () => {
 			this.pendingTransitions = {}
 		})
 	}
