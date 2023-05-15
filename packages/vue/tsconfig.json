@@ -4,8 +4,12 @@
   "compilerOptions": {
     // Package-specific
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "noEmit": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.vite.json" }],
