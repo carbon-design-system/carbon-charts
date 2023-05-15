@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -41,6 +42,11 @@ export default defineConfig({
 			'@carbon/styles',
 			'@carbon/telemetry'
 		]
+	},
+	resolve: {
+		alias: {
+			'@': fileURLToPath(new URL('./src', import.meta.url))
+		}
 	},
 	plugins: [
 		// equivalent to: npx tsc src/*.ts --declaration --emitDeclarationOnly --declarationDir dist/ --resolveJsonModule --esModuleInterop

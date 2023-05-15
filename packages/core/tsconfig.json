@@ -3,9 +3,13 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		// Package-specific settings
+		"baseUrl": ".",
 		"noImplicitAny": false,
 		"noUnusedParameters": false,
 		"noFallthroughCasesInSwitch": false,
+		"paths": {
+      "@/*": ["src/*"]
+    },
 		"useDefineForClassFields": false, // TODO: Fix the 7 issues so this setting can be dropped
 		"strict": false // TODO: Fix all TypeScript issues so strict can be true
 	},
