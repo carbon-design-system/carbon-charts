@@ -55,7 +55,7 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 const generateColorPalettePickerHTML = (
 	container: HTMLDivElement,
 	chart: any,
-	configs = { colorPairingOptions: null }
+	configs: any = { colorPairingOptions: null }
 ) => {
 	const { colorPairingOptions } = configs
 

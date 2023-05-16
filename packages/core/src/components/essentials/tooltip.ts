@@ -229,7 +229,7 @@ export class Tooltip extends Component {
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
-			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type')
+			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type') as 'graph_view' | 'slider_view'
 			const zoombarHeight = zoomBar.height[zoombarType]
 
 			// if the mouse position is from event (ruler)

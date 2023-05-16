@@ -11,10 +11,10 @@ const findColorShade = (hex: string) => {
 	}
 
 	for (const colorName of Object.keys(colors)) {
-		const colorShades = colors[colorName]
+		const colorShades =  colors[colorName as keyof typeof colors]
 
 		for (const colorShadeLevel of Object.keys(colorShades)) {
-			const colorShade = colorShades[colorShadeLevel]
+			const colorShade = colorShades[+colorShadeLevel]
 
 			if (colorShade === hex) {
 				return colorShadeLevel
@@ -121,7 +121,7 @@ export class Treemap extends Component {
 			.attr('width', 0)
 			.attr('height', 0)
 			.attr('id', function () {
-				const uid = select(this.parentNode as any).attr('data-uid')
+				const uid: any = select(this.parentNode as any).attr('data-uid')
 				return `${options.style.prefix}-leaf-${uid}`
 			})
 			.attr('class', (d: any) => {
