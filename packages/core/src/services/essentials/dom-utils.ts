@@ -1,4 +1,4 @@
-import { select, Selection } from 'd3'
+import { select, type Selection } from 'd3'
 import domToImage from 'dom-to-image-more'
 import { debounce, getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
@@ -8,6 +8,7 @@ import { Events } from '@/interfaces/enums'
 
 const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 
+// Functions like validateAndSetDimensions() may return strings or numbers
 export interface Dimensions {
   height: number
   width: number
@@ -35,7 +36,7 @@ export class DOMUtils extends Service {
 	}
 
 	static getSVGElementSize(
-		svgSelector: Selection<SVGGraphicsElement, any, HTMLElement, any>,
+		svgSelector: Selection<SVGGraphicsElement, any, Element, any>,
 		options: getSVGElementSizeOptions = {
 			useAttrs: false,
 			useClientDimensions: false,
@@ -44,7 +45,7 @@ export class DOMUtils extends Service {
 		}
 	) {
 		if (!svgSelector.attr) {
-			svgSelector = select<SVGGraphicsElement, any>(svgSelector)
+			svgSelector = select<SVGGraphicsElement, any>(svgSelector as any) // issue with @types/d3 - select can handle Selection parameters just fine
 		}
 
 		const finalDimensions = {
@@ -52,6 +53,7 @@ export class DOMUtils extends Service {
 			height: 0
 		}
 
+		// Dimensions can be width and height as numbers or strings
 		const validateAndSetDimensions = (dimensions: any) => {
 			if (dimensions) {
 				Object.keys(finalDimensions).forEach((dimensionKey) => {
@@ -84,7 +86,7 @@ export class DOMUtils extends Service {
 
 		try {
 			// Not all SVG graphics elements have bounding boxes (eg <defs>, <title>, <styles>)
-			if (typeof svgElement?.getBBox === 'function') {
+			if (typeof svgElement.getBBox === 'function') {
 				bbox = svgElement.getBBox()
 				bboxDimensions = {
 					width: bbox.width,
@@ -168,7 +170,7 @@ export class DOMUtils extends Service {
 		return finalDimensions
 	}
 
-	static appendOrSelect(parent: Selection<SVGGraphicsElement, any, HTMLElement, any>, query: string) {
+	static appendOrSelect(parent: Selection<SVGElement | HTMLDivElement, any, Element, any>, query: string) {
 		const selection = parent.select(`${query}`)
 
 		if (selection.empty()) {
@@ -308,7 +310,7 @@ export class DOMUtils extends Service {
 				}
 			})
 			.then(function (dataUrl: string) {
-				self.services.files.downloadImage(dataUrl, 'myChart.jpg')
+				self.services.files?.downloadImage(dataUrl, 'myChart.jpg')
 				holderSelection.classed('filled', false)
 			})
 	}
@@ -337,7 +339,7 @@ export class DOMUtils extends Service {
 				}
 			})
 			.then(function (dataUrl: string) {
-				self.services.files.downloadImage(dataUrl, 'myChart.png')
+				self.services.files?.downloadImage(dataUrl, 'myChart.png')
 				holderSelection.classed('filled', false)
 			})
 			.catch(function (error: Error) {
@@ -460,11 +462,11 @@ export class DOMUtils extends Service {
 		select(holder)
 			.on('mouseover', () => {
 				// Dispatch event
-				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER)
+				this.services.events?.dispatchEvent(Events.Chart.MOUSEOVER)
 			})
 			.on('mouseout', () => {
 				// Dispatch event
-				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT)
+				this.services.events?.dispatchEvent(Events.Chart.MOUSEOUT)
 			})
 	}
 
@@ -492,7 +494,7 @@ export class DOMUtils extends Service {
 				containerWidth = holder.clientWidth
 				containerHeight = holder.clientHeight
 
-				this.services.events.dispatchEvent(Events.Chart.RESIZE)
+				this.services.events?.dispatchEvent(Events.Chart.RESIZE)
 			}
 		}, 12.5)
 
