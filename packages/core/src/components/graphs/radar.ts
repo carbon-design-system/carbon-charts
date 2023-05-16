@@ -400,6 +400,7 @@ export class Radar extends Component {
 						.attr('transform', `translate(${c.x}, ${c.y})`)
 						.attr('d', (group: any) => radialLineGenerator(group.data))
 				)
+				return update
 			},
 			(exit: any) =>
 				exit.call((selection: any) => {
