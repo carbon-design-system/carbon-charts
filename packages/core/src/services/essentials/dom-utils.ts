@@ -356,18 +356,18 @@ export class DOMUtils extends Service {
 		if (
 			isFullScreen &&
 			(document.fullscreenElement ||
-				document['webkitFullscreenElement' as keyof typeof document] ||
-				document['mozFullScreenElement' as keyof typeof document] ||
-				document['msFullscreenElement' as keyof typeof document])
+				document['webkitFullscreenElement'] ||
+				document['mozFullScreenElement'] ||
+				document['msFullscreenElement'])
 		) {
 			// Call the correct function depending on the browser
 			if (document.exitFullscreen) {
 				document.exitFullscreen()
-			} else if (document['webkitExitFullscreen' as keyof typeof document]) {
+			} else if (document['webkitExitFullscreen']) {
 				document['webkitExitFullscreen']()
-			} else if (document['mozCancelFullScreen' as keyof typeof document]) {
+			} else if (document['mozCancelFullScreen']) {
 				document['mozCancelFullScreen']()
-			} else if (document['msExitFullscreen' as keyof typeof document]) {
+			} else if (document['msExitFullscreen']) {
 				document['msExitFullscreen']()
 			}
 		} else {
