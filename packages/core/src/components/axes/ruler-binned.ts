@@ -1,4 +1,4 @@
-import { select, type ScaleTime, type ScaleLinear, type Selection } from 'd3'
+import { select, type Selection } from 'd3'
 import { get } from 'lodash-es'
 import { isEqual, getProperty } from '@/tools'
 import { Ruler } from './ruler'

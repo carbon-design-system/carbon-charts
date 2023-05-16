@@ -5,7 +5,7 @@ import { ChartModelCartesian } from './cartesian-charts'
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
-	protected axisFlavor = AxisFlavor.HOVERABLE
+	axisFlavor = AxisFlavor.HOVERABLE
 	private _colorScale: any = undefined
 
 	// List of unique ranges and domains

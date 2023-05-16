@@ -38,7 +38,9 @@ export class Chart {
 	}
 	model: ChartModel = new ChartModel(this.services)
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Allow for subclasses to override the constructor with additional parameters or initialization logic without breaking the API contract of the Chart class
 	}

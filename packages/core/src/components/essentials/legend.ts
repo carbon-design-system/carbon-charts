@@ -68,7 +68,7 @@ export class Legend extends Component {
 			.merge(legendItems.select('div.checkbox'))
 			.attr('role', Roles.CHECKBOX)
 			.attr('tabindex', legendClickable ? 0 : -1)
-			.attr('aria-labelledby', (d: any, i: number) =>
+			.attr('aria-labelledby', (_: any, i: number) =>
 				this.services.domUtils.generateElementIDString(`legend-datagroup-${i}-title`)
 			)
 			.attr('aria-checked', ({ status }) => status === legend.items.status.ACTIVE)
@@ -121,7 +121,7 @@ export class Legend extends Component {
 				.merge(additionalItems as any)
 				.classed('legend-item', true)
 				.classed('additional', true)
-				.attr('aria-labelledby', (d: any, i: number) =>
+				.attr('aria-labelledby', (_: any, i: number) =>
 					this.services.domUtils.generateElementIDString(
 						`legend-datagroup-${allCheckboxes.size() + i}-title`
 					)
@@ -270,7 +270,7 @@ export class Legend extends Component {
 
 			quartileEnter
 				.append('rect')
-				.attr('class', (d: any, i: number) => `quartile-${i === 0 ? 'wrapper' : 'line'}`)
+				.attr('class', (_: any, i: number) => `quartile-${i === 0 ? 'wrapper' : 'line'}`)
 				.attr('x', (d: any) => d.x)
 				.attr('y', (d: any) => d.y)
 				.attr('width', (d: any) => d.width)
