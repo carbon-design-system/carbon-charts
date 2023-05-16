@@ -63,7 +63,7 @@ export class StackedArea extends Component {
 		const enteringAreas = areas.enter().append('path').attr('opacity', 0)
 
 		enteringAreas
-			.merge(areas)
+			.merge(areas as any)
 			.data(stackedData, (d: any) => getProperty(d, 0, groupMapsTo))
 			.attr('class', 'area')
 			.attr('class', (d: any) =>

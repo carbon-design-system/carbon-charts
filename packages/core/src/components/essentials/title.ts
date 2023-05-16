@@ -7,7 +7,9 @@ export class Title extends Component {
 	type = 'title'
 	renderType = RenderTypes.HTML
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer()
 		const title = getProperty(this.getOptions(), 'title')
@@ -20,7 +22,7 @@ export class Title extends Component {
 			.classed('title', true)
 			.attr('role', 'heading')
 			.attr('aria-level', 2)
-			.merge(text)
+			.merge(text as any)
 			.html((d: any) => d)
 
 		// check if title needs truncation (and tooltip support)

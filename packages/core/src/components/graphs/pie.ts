@@ -93,7 +93,7 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		const allPaths = enteringPaths
-			.merge(paths)
+			.merge(paths as any)
 			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
@@ -149,7 +149,7 @@ export class Pie extends Component {
 		// Update styles & position on existing & entering labels
 		const calloutData: any[] = []
 		enteringLabels
-			.merge(labels)
+			.merge(labels as any)
 			.style('text-anchor', 'middle')
 			.text((d: any) => {
 				if (options.pie.labels.formatter) {
@@ -219,7 +219,7 @@ export class Pie extends Component {
 		const optionName = getProperty(options, 'donut') ? 'donut' : 'pie'
 		const alignment = getProperty(options, optionName, 'alignment')
 
-		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
+		const { width } = DOMUtils.getSVGElementSize(this.getParent() as any, {
 			useAttrs: true
 		})
 
@@ -266,7 +266,7 @@ export class Pie extends Component {
 
 		// Update data values for each callout
 		// For the horizontal and vertical lines to use
-		enteringCallouts.merge(callouts).datum(function (d: any) {
+		enteringCallouts.merge(callouts as any).datum(function (d: any) {
 			const { xPosition, yPosition, direction } = d
 
 			if (direction === CalloutDirections.RIGHT) {
@@ -310,7 +310,7 @@ export class Pie extends Component {
 		enteringVerticalLines
 			.merge(svg.selectAll('line.vertical-line'))
 			.datum(function () {
-				return select(this.parentNode).datum()
+				return select(this.parentNode as any).datum()
 			})
 			.style('stroke-width', '1px')
 			.attr('x1', (d: any) => d.startPos.x)
@@ -324,7 +324,7 @@ export class Pie extends Component {
 		enteringHorizontalLines
 			.merge(svg.selectAll('line.horizontal-line'))
 			.datum(function () {
-				return select(this.parentNode).datum()
+				return select(this.parentNode as any).datum()
 			})
 			.style('stroke-width', '1px')
 			.attr('x1', (d: any) => d.intersectPointX)
@@ -457,7 +457,7 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 

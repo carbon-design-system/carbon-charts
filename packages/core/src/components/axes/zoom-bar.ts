@@ -41,8 +41,10 @@ export class ZoomBar extends Component {
 		// load up the zoomBarData into this model
 		this.model.setZoomBarData(definedZoomBarData)
 	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer()
 

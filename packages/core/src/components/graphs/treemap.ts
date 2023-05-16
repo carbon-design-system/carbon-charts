@@ -96,7 +96,7 @@ export class Treemap extends Component {
 			.attr('data-name', 'leaf')
 			.attr('data-uid', () => uidCounter++)
 
-		const allLeafGroups = enteringLeafGroups.merge(leafGroups)
+		const allLeafGroups = enteringLeafGroups.merge(leafGroups as any)
 
 		allLeafGroups
 			.attr('data-name', 'leaf')
@@ -117,11 +117,11 @@ export class Treemap extends Component {
 		const enteringRects = rects.enter().append('rect').classed('leaf', true)
 
 		enteringRects
-			.merge(rects)
+			.merge(rects as any)
 			.attr('width', 0)
 			.attr('height', 0)
 			.attr('id', function () {
-				const uid = select(this.parentNode).attr('data-uid')
+				const uid = select(this.parentNode as any).attr('data-uid')
 				return `${options.style.prefix}-leaf-${uid}`
 			})
 			.attr('class', (d: any) => {
@@ -177,6 +177,8 @@ export class Treemap extends Component {
 							return new URL(`#${leafID}`, windowLocation) + ''
 						})
 				},
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				(update: any) => null as any,
 				(exit: any) => exit.remove()

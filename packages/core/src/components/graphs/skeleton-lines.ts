@@ -8,7 +8,9 @@ export class SkeletonLines extends Skeleton {
 	yScale: any
 	backdrop: any
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
@@ -46,7 +48,7 @@ export class SkeletonLines extends Skeleton {
 		update
 			.enter()
 			.append('line')
-			.merge(update)
+			.merge(update as any)
 			.attr('x1', 0)
 			.attr('x2', width)
 			.attr('y1', (d: any) => d)

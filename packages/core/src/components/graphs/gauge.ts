@@ -75,7 +75,9 @@ export class Gauge extends Component {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
 		const options = this.getOptions()
@@ -115,7 +117,7 @@ export class Gauge extends Component {
 		const arcEnter = arcValue.enter().append('path')
 
 		arcEnter
-			.merge(arcValue)
+			.merge(arcValue as any)
 			.attr(
 				'class',
 				this.model.getColorClassName({
@@ -139,7 +141,7 @@ export class Gauge extends Component {
 
 		const alignment = getProperty(options, 'gauge', 'alignment')
 
-		const { width } = DOMUtils.getSVGElementSize(this.getParent(), {
+		const { width } = DOMUtils.getSVGElementSize(this.getParent() as any, {
 			useAttrs: true
 		})
 
@@ -204,7 +206,7 @@ export class Gauge extends Component {
 			.enter()
 			.append('text')
 			.attr('class', 'gauge-value-number')
-			.merge(valueNumber)
+			.merge(valueNumber as any)
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
 			.text((d: any) => numberFormatter(d))
@@ -300,7 +302,7 @@ export class Gauge extends Component {
 			deltaArrow
 				.enter()
 				.append('svg')
-				.merge(deltaArrow)
+				.merge(deltaArrow as any)
 				.attr('class', 'gauge-delta-arrow')
 				.attr('x', -arrowSize(radius) - deltaNumberWidth / 2)
 				.attr('y', -arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35)
@@ -386,7 +388,7 @@ export class Gauge extends Component {
 		const options = this.getOptions()
 		const arcType = getProperty(options, 'gauge', 'type')
 
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 		const radius =

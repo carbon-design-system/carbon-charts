@@ -10,7 +10,9 @@ export class MeterTitle extends Title {
 	type = 'meter-title'
 	renderType = RenderTypes.SVG
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
@@ -30,7 +32,7 @@ export class MeterTitle extends Title {
 				.enter()
 				.append('text')
 				.classed('meter-title', true)
-				.merge(title)
+				.merge(title as any)
 				.attr('x', 0)
 				.attr('y', '1em')
 				.text((d: any) => d)
@@ -85,7 +87,7 @@ export class MeterTitle extends Title {
 			.enter()
 			.append('text')
 			.classed('proportional-meter-title', true)
-			.merge(title)
+			.merge(title as any)
 			.attr('x', 0)
 			.attr('y', '1em')
 			.text((d: any) => d)
@@ -135,7 +137,7 @@ export class MeterTitle extends Title {
 			.enter()
 			.append('text')
 			.classed('proportional-meter-total', true)
-			.merge(title)
+			.merge(title as any)
 			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
@@ -189,7 +191,7 @@ export class MeterTitle extends Title {
 		innerIcon
 			.enter()
 			.append('path')
-			.merge(innerIcon)
+			.merge(innerIcon as any)
 			.attr('d', self.getStatusIconPathString(status))
 			.attr('transform', `translate(-${radius}, 0)`)
 			.attr('class', 'innerFill')
@@ -225,7 +227,7 @@ export class MeterTitle extends Title {
 			.enter()
 			.append('text')
 			.classed('percent-value', true)
-			.merge(percentage)
+			.merge(percentage as any)
 			.text((d: any) => `${d}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))

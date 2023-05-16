@@ -79,7 +79,7 @@ export class WordCloud extends Component {
 			const enteringText = allText.enter().append('text').attr('opacity', 0)
 
 			enteringText
-				.merge(allText)
+				.merge(allText as any)
 				.style('font-size', (d: any) => `${d.size}px`)
 				.text(function (d: any) {
 					return d.text

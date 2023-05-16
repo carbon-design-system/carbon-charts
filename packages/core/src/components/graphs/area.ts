@@ -155,7 +155,7 @@ export class Area extends Component {
 			// make sure there is no linearGradient if no gradient is allowed
 			if (!this.parent.selectAll('defs linearGradient').empty()) {
 				this.parent.selectAll('defs linearGradient').each(function () {
-					this.parentNode.remove()
+					(this as any).parentNode.remove()
 				})
 			}
 		}
@@ -166,7 +166,7 @@ export class Area extends Component {
 		const enteringAreas = areas.enter().append('path')
 		if (isGradientAllowed) {
 			enteringAreas
-				.merge(areas)
+				.merge(areas as any)
 				.style(
 					'fill',
 					(group: any) =>
@@ -189,7 +189,7 @@ export class Area extends Component {
 		} else {
 			enteringAreas
 				.attr('opacity', 0)
-				.merge(areas)
+				.merge(areas as any)
 				.attr('class', 'area')
 				.attr('class', (group: any) =>
 					this.model.getColorClassName({

@@ -11,7 +11,9 @@ export class Skeleton extends Component {
 	yScale: any
 	backdrop: any
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
@@ -88,7 +90,7 @@ export class Skeleton extends Component {
 
 	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg as any, {
 			useAttrs: true
 		})
 
@@ -125,7 +127,7 @@ export class Skeleton extends Component {
 		update
 			.enter()
 			.append('line')
-			.merge(update)
+			.merge(update as any)
 			.attr('x1', (d: any) => d)
 			.attr('x2', (d: any) => d)
 			.attr('y1', 0)
@@ -154,7 +156,7 @@ export class Skeleton extends Component {
 		update
 			.enter()
 			.append('line')
-			.merge(update)
+			.merge(update as any)
 			.attr('x1', 0)
 			.attr('x2', width)
 			.attr('y1', (d: any) => d)
@@ -174,7 +176,7 @@ export class Skeleton extends Component {
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
 		const svg = this.parent
-		const { width, height } = DOMUtils.getSVGElementSize(svg, {
+		const { width, height } = DOMUtils.getSVGElementSize(svg as any, {
 			useAttrs: true
 		})
 
@@ -226,7 +228,7 @@ export class Skeleton extends Component {
 
 	// same logic in pie
 	computeOuterRadius() {
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 		const radius = Math.min(width, height) / 2
@@ -245,14 +247,14 @@ export class Skeleton extends Component {
 		const stopBgShimmerClass = 'stop-bg-shimmer'
 		const stopShimmerClass = 'stop-shimmer'
 		const container = this.parent.select('.chart-skeleton')
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 		const startPoint = 0
 		const endPoint = width
 
 		// append the defs as first child of container
-		const defs = DOMUtils.appendOrSelect(container, 'defs').lower()
+		const defs = DOMUtils.appendOrSelect(container as any, 'defs').lower()
 		const linearGradient = DOMUtils.appendOrSelect(defs, 'linearGradient')
 			.attr('id', this.services.domUtils.generateElementIDString(gradientId))
 			.attr('class', gradientId)

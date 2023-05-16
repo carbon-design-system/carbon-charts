@@ -79,7 +79,7 @@ export class LayoutComponent extends Component {
 		// Get parent element to render inside of
 		const parent = this.parent
 
-		const { width, height } = DOMUtils.getHTMLElementSize(parent.node())
+		const { width, height } = DOMUtils.getHTMLElementSize(parent.node() as any)
 
 		const horizontal =
 			this.configs.direction === LayoutDirection.ROW ||
@@ -154,7 +154,7 @@ export class LayoutComponent extends Component {
 						? DOMUtils.getSVGElementSize(select(this).select('svg.layout-svg-wrapper'), {
 								useBBox: true
 							})
-						: DOMUtils.getHTMLElementSize(this)
+						: DOMUtils.getHTMLElementSize(this as any)
 
 				if (growth === LayoutGrowth.PREFERRED) {
 					const matchingElementWidth = horizontal

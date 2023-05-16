@@ -84,7 +84,7 @@ export class Line extends Component {
 
 		// Apply styles and datum
 		enteringLines
-			.merge(lines)
+			.merge(lines as any)
 			.data(data, (group: any) => group.name)
 			.attr('class', (group: any) =>
 				this.model.getColorClassName({

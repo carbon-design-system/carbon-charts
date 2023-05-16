@@ -14,11 +14,13 @@ export class CirclePack extends Component {
 
 	focal: any
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 
@@ -73,7 +75,7 @@ export class CirclePack extends Component {
 		const enteringCircles = circles.enter().append('circle').classed('node', true)
 
 		enteringCircles
-			.merge(circles)
+			.merge(circles as any)
 			.attr('class', (d: any) => {
 				const originalClass = canvasZoomEnabled && hierarchyLevel === 3 ? this.getZoomClass(d) : ''
 				return this.model.getColorClassName({

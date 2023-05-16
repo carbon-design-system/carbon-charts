@@ -104,7 +104,7 @@ export class Meter extends Component {
 			.enter()
 			.append('rect')
 			.classed('value', true)
-			.merge(valued)
+			.merge(valued as any)
 			.attr('x', (d: any) => {
 				return d.x
 			})
@@ -162,7 +162,7 @@ export class Meter extends Component {
 			.enter()
 			.append('line')
 			.classed('peak', true)
-			.merge(peak)
+			.merge(peak as any)
 			.attr('y1', 0)
 			.attr('y2', () => {
 				const userProvidedHeight = getProperty(options, 'meter', 'height')
