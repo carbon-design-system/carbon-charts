@@ -72,9 +72,10 @@ export class ComboChart extends AxisChart {
 						return null
 					}
 					let stacked = false
+					const key = `${camelCase(graph.type)}Chart` as keyof typeof configOptions;
 					options = merge(
 						{},
-						configOptions[`${camelCase(graph.type)}Chart`],
+						configOptions[key],
 						this.model.getOptions(),
 						graph.options
 					)
@@ -82,7 +83,7 @@ export class ComboChart extends AxisChart {
 					if (graph.type === ChartTypes.STACKED_AREA) {
 						stacked = true
 					}
-					return graphComponentsMap[graph.type].map(
+					return graphComponentsMap[graph.type as keyof typeof graphComponentsMap].map(
 						(Component: any) =>
 							new Component(this.model, this.services, {
 								groups: graph.correspondingDatasets,

@@ -14,6 +14,13 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '@/interfaces/enums'
 import { formatDateTillMilliSeconds } from '@/services/time-series'
 import type { ChartTabularData } from '@/interfaces/model'
 
+type StackKeysParams = {
+  bins?: any
+  groups?: any
+	percentage?: any
+	divergent?: any
+}
+
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
@@ -249,7 +256,7 @@ export class ChartModel {
 				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
-					.map((key) => {
+					.map((key: any) => {
 						const element = series[key]
 						element[groupMapsTo] = dataGroupNames[i]
 
@@ -260,7 +267,7 @@ export class ChartModel {
 
 	getGroupedData(groups?: any) {
 		const displayData = this.getDisplayData(groups)
-		const groupedData = {}
+		const groupedData: any = {}
 		const { groupMapsTo } = this.getOptions().data
 
 		displayData.map((datum: any) => {
@@ -278,12 +285,12 @@ export class ChartModel {
 		}))
 	}
 
-	getStackKeys({ bins = null, groups = null } = { bins: null, groups: null }) {
+	getStackKeys({ bins = null, groups = null }: StackKeysParams = { bins: null, groups: null }) {
 		const options = this.getOptions()
 
 		const displayData = this.getDisplayData(groups)
 
-		let stackKeys
+		let stackKeys: any
 		if (bins) {
 			stackKeys = bins.map((bin: any) => `${bin.x0}-${bin.x1}`)
 		} else {
@@ -321,7 +328,7 @@ export class ChartModel {
 		return stackKeys
 	}
 
-	getDataValuesGroupedByKeys({ bins = null, groups = null }) {
+	getDataValuesGroupedByKeys({ bins = null, groups = null }: StackKeysParams) {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const displayData = this.getDisplayData(groups)
@@ -333,12 +340,12 @@ export class ChartModel {
 			return stackKeys.map((key: any) => {
 				const [binStart, binEnd] = key.split('-')
 
-				const correspondingValues = { x0: binStart, x1: binEnd }
+				const correspondingValues: any = { x0: binStart, x1: binEnd }
 				const correspondingBin = bins.find((bin: any) => bin.x0.toString() === binStart.toString())
 
 				dataGroupNames.forEach((dataGroupName: any) => {
 					correspondingValues[dataGroupName] = correspondingBin.filter(
-						(binItem) => binItem[groupMapsTo] === dataGroupName
+						(binItem: any) => binItem[groupMapsTo] === dataGroupName
 					).length
 				})
 
@@ -347,7 +354,7 @@ export class ChartModel {
 		}
 
 		return stackKeys.map((key: any) => {
-			const correspondingValues = { sharedStackKey: key }
+			const correspondingValues: any = { sharedStackKey: key }
 			dataGroupNames.forEach((dataGroupName: any) => {
 				const correspondingDatum = displayData.find((datum: any) => {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
@@ -372,7 +379,7 @@ export class ChartModel {
 		}) as any
 	}
 
-	getStackedData({ percentage = false, groups = null, divergent = false }) {
+	getStackedData({ percentage = false, groups = null, divergent = false }: StackKeysParams) {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
@@ -643,7 +650,7 @@ export class ChartModel {
 					group = datasetLabel
 				}
 
-				const updatedDatum = {
+				const updatedDatum: any = {
 					group,
 					key: labels[i]
 				}
@@ -800,8 +807,9 @@ export class ChartModel {
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants
 
 		// Use default palette if user choice is not in range
+		const key = `${numberOfColors}-color` as keyof typeof colorPairingCounts
 		pairingOption =
-			pairingOption <= colorPairingCounts[`${numberOfColors}-color`] ? pairingOption : 1
+			pairingOption <= colorPairingCounts[key] ? pairingOption : 1
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(

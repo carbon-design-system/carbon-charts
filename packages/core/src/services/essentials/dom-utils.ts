@@ -56,7 +56,7 @@ export class DOMUtils extends Service {
 		// Dimensions can be width and height as numbers or strings
 		const validateAndSetDimensions = (dimensions: any) => {
 			if (dimensions) {
-				Object.keys(finalDimensions).forEach((dimensionKey) => {
+				Object.keys(finalDimensions).forEach((dimensionKey: 'width' | 'height') => {
 					if (dimensions[dimensionKey]) {
 						const dimension = dimensions[dimensionKey]
 						const dimensionNumber = parseFloat(dimension)
@@ -356,18 +356,18 @@ export class DOMUtils extends Service {
 		if (
 			isFullScreen &&
 			(document.fullscreenElement ||
-				document['webkitFullscreenElement'] ||
-				document['mozFullScreenElement'] ||
-				document['msFullscreenElement'])
+				document['webkitFullscreenElement' as keyof typeof document] ||
+				document['mozFullScreenElement' as keyof typeof document] ||
+				document['msFullscreenElement' as keyof typeof document])
 		) {
 			// Call the correct function depending on the browser
 			if (document.exitFullscreen) {
 				document.exitFullscreen()
-			} else if (document['webkitExitFullscreen']) {
+			} else if (document['webkitExitFullscreen' as keyof typeof document]) {
 				document['webkitExitFullscreen']()
-			} else if (document['mozCancelFullScreen']) {
+			} else if (document['mozCancelFullScreen' as keyof typeof document]) {
 				document['mozCancelFullScreen']()
-			} else if (document['msExitFullscreen']) {
+			} else if (document['msExitFullscreen' as keyof typeof document]) {
 				document['msExitFullscreen']()
 			}
 		} else {

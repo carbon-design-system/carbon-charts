@@ -23,11 +23,11 @@ export class TwoDimensionalAxes extends Component {
 	}
 
 	render(animate = false) {
-		const axes = {}
+		const axes: any = {}
 		const axisPositions = Object.keys(AxisPositions)
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 
-		axisPositions.forEach((axisPosition: string) => {
+		axisPositions.forEach((axisPosition: keyof typeof AxisPositions) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]]
 			if (axisOptions) {
 				axes[AxisPositions[axisPosition]] = true
@@ -37,7 +37,7 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach((axisPositionKey: string) => {
+		axisPositions.forEach((axisPositionKey: keyof typeof AxisPositions) => {
 			const axisPosition = AxisPositions[axisPositionKey]
 			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const configs = {
@@ -110,7 +110,7 @@ export class TwoDimensionalAxes extends Component {
 		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE)
 
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some((marginKey: any) => {
+		const isNotEqual = Object.keys(margins).some((marginKey: 'top' | 'right' | 'bottom' | 'left') => {
 			return this.margins[marginKey] !== margins[marginKey]
 		})
 
