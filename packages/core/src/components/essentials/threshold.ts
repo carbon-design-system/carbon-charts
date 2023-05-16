@@ -123,15 +123,15 @@ export class Threshold extends Component {
 					)
 					.attr('y1', yScaleStart)
 					.attr('y2', yScaleEnd)
-					.attr('x1', ({ datum }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.attr('x2', ({ datum }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.style('stroke', ({ fillColor }) => fillColor)
+					.attr('x1', ({ datum }: { datum: any }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.attr('x2', ({ datum }: { datum: any }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.style('stroke', ({ fillColor }: { fillColor: string }) => fillColor)
 
 				// Set hoverable area width and rotate it
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', 0)
-					.attr('y', ({ datum }) => -getXValue(datum))
+					.attr('y', ({ datum }: { datum: any }) => -getXValue(datum))
 					.attr('width', Math.abs(yScaleEnd - yScaleStart))
 					.classed('rotate', true)
 			} else {
@@ -147,15 +147,15 @@ export class Threshold extends Component {
 					)
 					.attr('x1', xScaleStart)
 					.attr('x2', xScaleEnd)
-					.attr('y1', ({ datum }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.attr('y2', ({ datum }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.style('stroke', ({ fillColor }) => fillColor)
+					.attr('y1', ({ datum }: { datum: any }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.attr('y2', ({ datum }: { datum: any }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.style('stroke', ({ fillColor }: { fillColor: string }) => fillColor)
 
 				// Set hoverable area width
 				group
 					.selectAll('rect.threshold-hoverable-area')
 					.attr('x', xScaleStart)
-					.attr('y', ({ datum }) => getYValue(datum))
+					.attr('y', ({ datum }: { datum: any }) => getYValue(datum))
 					.attr('width', Math.abs(xScaleEnd - xScaleStart))
 					.classed('rotate', false)
 			}
@@ -209,7 +209,7 @@ export class Threshold extends Component {
 		).classed('hidden', true)
 	}
 
-	setThresholdLabelPosition({ event, datum }) {
+	setThresholdLabelPosition({ event, datum }: { event: CustomEvent, datum: any}) {
 		const holder = this.services.domUtils.getHolder()
 		const mouseRelativePos = pointer(event, holder)
 
@@ -254,7 +254,7 @@ export class Threshold extends Component {
 
 	// Constructs object to pass in scale functions
 	constructDatumObj(d: any, element: any) {
-		const datum = {}
+		const datum: any = {}
 
 		// We only need to specify group only if correpsonding dataset is defined
 		if (d.correspondingDatasets) {

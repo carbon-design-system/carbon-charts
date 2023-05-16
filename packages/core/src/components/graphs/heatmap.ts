@@ -11,7 +11,7 @@ export class Heatmap extends Component {
 	type = 'heatmap'
 	renderType = RenderTypes.SVG
 
-	private matrix = {}
+	private matrix: any = {}
 	private xBandwidth = 0
 	private yBandwidth = 0
 	private translationUnits = {

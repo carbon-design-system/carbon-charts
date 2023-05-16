@@ -12,7 +12,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	private _domains: any[] = []
 	private _ranges: any[] = []
 
-	private _matrix = {}
+	private _matrix: any = {}
 
 	constructor(services: any) {
 		super(services)
@@ -150,7 +150,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
 			// Create a column
-			const range = {}
+			const range: any = {}
 			uniqueRange.forEach((ran: any) => {
 				// Initialize matrix to empty state
 				range[ran] = {
@@ -215,7 +215,7 @@ export class HeatmapModel extends ChartModelCartesian {
 		const arr: any[] = []
 		uniqueDomain.forEach((domain) => {
 			uniqueRange.forEach((range) => {
-				const element = {
+				const element: any = {
 					value: this._matrix[domain][range].value,
 					index: this._matrix[domain][range].index
 				}

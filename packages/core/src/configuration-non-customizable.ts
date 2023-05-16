@@ -101,28 +101,28 @@ export const legend = {
 			{ cx: 7, cy: 7, r: 6.5 },
 			{ cx: 7, cy: 10, r: 3.5 }
 		],
-		fill: null,
+		fill: null as any,
 		stroke: '#8c8c8c'
 	},
 	line: {
 		yPosition: 6,
 		width: 24,
 		strokeWidth: 1.4,
-		fill: null,
+		fill: null as any,
 		stroke: '#999999'
 	},
 	area: {
 		width: 24,
 		height: 14,
 		fill: '#6f6f6f',
-		stroke: null
+		stroke: null as any
 	},
 	size: {
 		iconData: [
 			{ width: 23, height: 12 },
 			{ width: 13, height: 6 }
 		],
-		fill: null,
+		fill: null as any,
 		stroke: '#8D8D8D'
 	},
 	quartile: {

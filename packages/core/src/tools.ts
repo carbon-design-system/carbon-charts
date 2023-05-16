@@ -303,17 +303,17 @@ export function updateLegendAdditionalItems(defaultOptions: any, providedOptions
  */
 export function arrayDifferences(oldArray: any[], newArray: any[]) {
 	const difference = {
-		missing: [],
-		added: []
+		missing: [] as any[],
+		added: [] as any[]
 	}
 
-	oldArray.forEach((element) => {
+	oldArray.forEach((element: any) => {
 		if (newArray.indexOf(element) === -1) {
 			difference.missing.push(element)
 		}
 	})
 
-	newArray.forEach((element) => {
+	newArray.forEach((element: any) => {
 		if (oldArray.indexOf(element) === -1) {
 			difference.added.push(element)
 		}

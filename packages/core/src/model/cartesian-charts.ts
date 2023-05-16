@@ -23,15 +23,15 @@ export class ChartModelCartesian extends ChartModel {
 		const scales = {
 			primaryDomain: cartesianScales.domainAxisPosition,
 			primaryRange: cartesianScales.rangeAxisPosition,
-			secondaryDomain: null,
-			secondaryRange: null
+			secondaryDomain: null as any,
+			secondaryRange: null as any
 		}
 		if (isDualAxes) {
 			scales.secondaryDomain = cartesianScales.secondaryDomainAxisPosition
 			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition
 		}
 
-		Object.keys(scales).forEach((scale: any) => {
+		Object.keys(scales).forEach((scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
 			const position = scales[scale]
 			if (cartesianScales.scales[position]) {
 				scales[scale] = {
@@ -143,7 +143,7 @@ export class ChartModelCartesian extends ChartModel {
 			// And get corresponding data from each dataset
 			zoomBarNormalizedValues = allDates.map((date: Date) => {
 				let sum = 0
-				const datum = {}
+				const datum: any = {}
 
 				sanitizedData.forEach((data: any) => {
 					if (data[domainIdentifier].getTime() === date) {
@@ -172,7 +172,7 @@ export class ChartModelCartesian extends ChartModel {
 		}
 
 		const keysToCheck: any[] = []
-		Object.keys(AxisPositions).forEach((axisPositionKey) => {
+		Object.keys(AxisPositions).forEach((axisPositionKey: keyof typeof AxisPositions) => {
 			const axisPosition = AxisPositions[axisPositionKey]
 			const axisOptions = options.axes[axisPosition]
 
