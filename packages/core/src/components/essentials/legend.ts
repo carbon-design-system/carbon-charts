@@ -324,7 +324,7 @@ export class Legend extends Component {
 
 		// Add an ID for the checkbox to use through `aria-labelledby`
 		addedLegendItemsText.attr('id', function () {
-			const elementToReference = (this as any).parentNode.querySelector('div.checkbox') || (this as any).parentNode
+			const elementToReference: any = (this as any).parentNode.querySelector('div.checkbox') || (this as any).parentNode
 
 			return elementToReference.getAttribute('aria-labelledby')
 		})

@@ -1,16 +1,21 @@
 interface Document {
-  webkitFullscreenElement?: Element;
-  mozFullScreenElement?: Element;
-  msFullscreenElement?: Element;
-
-  webkitExitFullscreen?: () => void;
-  mozCancelFullScreen?: () => void;
-  msExitFullscreen?: () => void;
+	webkitFullscreenElement?: Element
+	mozFullScreenElement?: Element
+	msFullscreenElement?: Element
+  webkitFullscreenEnabled?: boolean
+  mozFullScreenEnabled?: boolean
+  msFullscreenEnabled?: boolean
+	webkitExitFullscreen?: () => void
+	mozCancelFullScreen?: () => void
+	msExitFullscreen?: () => void
 }
 
 interface HTMLElement {
-  webkitRequestFullscreen?: () => void;
-  mozRequestFullScreen?: () => void;
-  msRequestFullscreen?: () => void;
+	webkitRequestFullscreen?: () => void
+	mozRequestFullScreen?: () => void
+	msRequestFullscreen?: () => void
 }
 
+interface Navigator {
+	msSaveBlob?: any
+}

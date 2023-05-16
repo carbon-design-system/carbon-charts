@@ -43,7 +43,7 @@ export class Curves extends Service {
 	}
 
 	getD3Curve() {
-		let curveName = 'curveLinear'
+		let curveName = 'curveLinear' as keyof typeof this.curveTypes
 		const curveOptions = this.model.getOptions().curve
 
 		// Parse curve type whether the user provided a string
@@ -51,7 +51,7 @@ export class Curves extends Service {
 		if (curveOptions) {
 			if (typeof curveOptions === 'string') {
 				// curve: 'string'
-				curveName = curveOptions
+				curveName = curveOptions as keyof typeof this.curveTypes
 			} else {
 				// curve: { name: 'string' }
 				curveName = curveOptions.name
@@ -60,7 +60,7 @@ export class Curves extends Service {
 
 		if (this.curveTypes[curveName]) {
 			// Grab correct d3 curve function
-			let curve = this.curveTypes[curveName]
+			let curve = this.curveTypes[curveName] as any
 
 			// Apply user-provided options to the d3 curve
 			if (curveOptions) {

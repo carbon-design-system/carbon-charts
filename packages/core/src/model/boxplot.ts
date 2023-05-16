@@ -34,8 +34,8 @@ export class BoxplotChartModel extends ChartModelCartesian {
 				[groupMapsTo]: group,
 				counts: values,
 				quartiles: this.getBoxQuartiles(values),
-				outliers: null,
-				whiskers: null
+				outliers: null as any,
+				whiskers: null as any
 			}
 
 			const q1 = record.quartiles.q_25
