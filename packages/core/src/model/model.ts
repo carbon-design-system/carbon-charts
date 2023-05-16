@@ -494,7 +494,7 @@ export class ChartModel {
 			// Activate all items
 			if (activeItems.length === 1 && activeItems[0].name === changedLabel) {
 				// If every item is active, then enable "changedLabel" and disable all other items
-				dataGroups.forEach((group: any, i: number) => {
+				dataGroups.forEach((_: any, i: number) => {
 					dataGroups[i].status = ACTIVE
 				})
 			} else {
@@ -805,7 +805,7 @@ export class ChartModel {
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) => `${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
+			(_, index) => `${numberOfColors}-${pairingOption}-${(index % 14) + 1}`
 		)
 
 		// Create default color classnames

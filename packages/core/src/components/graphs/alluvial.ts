@@ -117,7 +117,7 @@ export class Alluvial extends Component {
 		// Add the category text
 		alluvialCategory
 			.append('text')
-			.attr('id', (d: any, i: number) =>
+			.attr('id', (_: any, i: number) =>
 				this.services.domUtils.generateElementIDString(`alluvial-category-${i}`)
 			)
 			.style('font-size', '14px')
@@ -274,7 +274,7 @@ export class Alluvial extends Component {
 		textNode
 			.append('rect')
 			.classed('node-text-bg', true)
-			.attr('width', (d: any, i: number) => {
+			.attr('width', (_: any, i: number) => {
 				const elementID = this.services.domUtils.generateElementIDString(
 					`alluvial-node-text-${i}`
 				) as string

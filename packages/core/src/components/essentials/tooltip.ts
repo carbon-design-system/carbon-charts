@@ -52,7 +52,7 @@ export class Tooltip extends Component {
 		}
 
 		// Apply custom background colors
-		tooltipTextContainer.selectAll('.datapoint-tooltip').each(function (datum: any, i: number) {
+		tooltipTextContainer.selectAll('.datapoint-tooltip').each(function (_: any, i: number) {
 			const item = formattedItems[i]
 
 			if (formattedItems[i] && formattedItems[i].color) {
