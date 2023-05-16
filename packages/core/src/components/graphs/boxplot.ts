@@ -327,7 +327,7 @@ export class Boxplot extends Component {
 			.selectAll('path.highlight-area')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
-				const parentElement = select(this.parentNode)
+				const parentElement = select((this as any).parentNode)
 				parentElement
 					.select('path.box')
 					.classed('hovered', true)
@@ -403,7 +403,7 @@ export class Boxplot extends Component {
 			})
 			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
-				const parentElement = select(this.parentNode)
+				const parentElement = select((this as any).parentNode)
 				parentElement
 					.select('path.box')
 					.classed('hovered', false)

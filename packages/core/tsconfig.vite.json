@@ -3,6 +3,10 @@
 	"extends": "../../tsconfig.vite.json",
 	"compilerOptions": {
 		// Package-specific stuff goes here
+		// "baseUrl": ".",
+		// "paths": {
+    //   "@/*": ["src/*"]
+    // }
 	},
 	"include": ["vite.config.ts"]
 }

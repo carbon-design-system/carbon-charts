@@ -56,7 +56,7 @@ export class Axis extends Component {
 
 		// Grab the scale off of the Scales service
 		if (!this.services.cartesianScales) throw new Error('Services cartesianScales undefineds')
-		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition)
+		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition) as any
 
 		if (this.scaleType === ScaleTypes.LABELS || this.scaleType === ScaleTypes.LABELS_RATIO) {
 			scale.rangeRound([startPosition, endPosition])
@@ -199,7 +199,7 @@ export class Axis extends Component {
 		}
 
 		// create the right ticks formatter
-		let formatter
+		let formatter: any
 		const userProvidedFormatter = getProperty(axisOptions, 'ticks', 'formatter')
 		if (isTimeScaleType) {
 			const timeInterval = computeTimeIntervalName(axis.tickValues())
@@ -367,7 +367,7 @@ export class Axis extends Component {
 							name: 'axis-update',
 							animate
 						})
-				)
+				) as any
 			}
 			axisRef = axisRef.call(axis)
 
@@ -395,7 +395,7 @@ export class Axis extends Component {
 							animate
 						})
 					)
-					.call(axis)
+					.call(axis) as any
 			}
 		}
 
@@ -419,7 +419,7 @@ export class Axis extends Component {
 				if (scale.step) {
 					const textNodes = invisibleAxisRef
 						.selectAll('g.tick text')
-						.nodes() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
+						.nodes() as any
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
@@ -433,7 +433,7 @@ export class Axis extends Component {
 
 					const mockTextPiece = invisibleAxisRef.append('text').text('A')
 
-					const averageLetterWidth = DOMUtils.getSVGElementSize(mockTextPiece.node(), {
+					const averageLetterWidth = DOMUtils.getSVGElementSize(mockTextPiece.node() as any, {
 						useBBox: true
 					}).width as number
 
@@ -442,7 +442,7 @@ export class Axis extends Component {
 					// Find out whether any text nodes roughly collide
 					invisibleAxisRef.selectAll('g.tick').each(function () {
 						const selection = select(this)
-						const xTransformation = parseFloat(getProperty(getTranslationValues(this), 'tx'))
+						const xTransformation = parseFloat(getProperty(getTranslationValues(this as any), 'tx'))
 
 						if (
 							xTransformation !== null &&

@@ -44,7 +44,7 @@ export class SimpleBar extends Bar {
 		const barsEnter = bars.enter().append('path').attr('opacity', 0)
 
 		barsEnter
-			.merge(bars)
+			.merge(bars as any)
 			.classed('bar', true)
 			.attr('width', this.getBarWidth.bind(this))
 			.transition()

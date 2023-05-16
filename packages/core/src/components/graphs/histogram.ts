@@ -59,7 +59,7 @@ export class Histogram extends Component {
 		bars
 			.enter()
 			.append('path')
-			.merge(bars)
+			.merge(bars as any)
 			.classed('bar', true)
 			.attr(groupIdentifier, (_: any, i: number) => i)
 			.transition()

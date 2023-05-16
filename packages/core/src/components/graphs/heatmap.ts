@@ -102,12 +102,11 @@ export class Heatmap extends Component {
 					`translate(${mainXScale(d[domainIdentifier])}, ${mainYScale(d[rangeIdentifier])})`
 			)
 			.append('rect')
-			.attr('class', (d: any) => {
-				return this.model.getColorClassName({
+			.attr('class', (d: any) =>  this.model.getColorClassName({
 					value: d.value,
 					originalClassName: `heat-${d.index}`
 				})
-			})
+			)
 			.classed('heat', true)
 			.classed('null-state', (d: any) => (d.index === -1 || d.value === null ? true : false))
 			.attr('width', this.xBandwidth)

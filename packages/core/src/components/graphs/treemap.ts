@@ -163,7 +163,7 @@ export class Treemap extends Component {
 			)
 			.join(
 				(enter: any) => {
-					enter
+					return enter
 						.append('clipPath')
 						.attr('id', function () {
 							const uid = select(this.parentNode).attr('data-uid')
@@ -222,6 +222,7 @@ export class Treemap extends Component {
 							return `url(${new URL(`#${clipPathID}`, windowLocation) + ''})`
 						})
 					}
+					return addedText
 				},
 				(update: any) => update.text((d: any) => d.text).style('fill', textFillColor),
 				(exit: any) => exit.remove()

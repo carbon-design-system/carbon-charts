@@ -67,7 +67,7 @@ export class GroupedBar extends Bar {
 			.attr('data-name', 'bars')
 
 		// Update data on all bars
-		const allBarGroups = barGroupsEnter.merge(barGroups)
+		const allBarGroups = barGroupsEnter.merge(barGroups as any)
 
 		allBarGroups
 			// Transition
@@ -104,7 +104,7 @@ export class GroupedBar extends Bar {
 
 		// code for vertical grouped bar charts
 		barsEnter
-			.merge(bars)
+			.merge(bars as any)
 			.classed('bar', true)
 			.transition()
 			.call((t: any) =>
@@ -285,11 +285,11 @@ export class GroupedBar extends Bar {
 	}
 
 	protected getDomainScaleStep() {
-		const domainScale = this.services.cartesianScales.getDomainScale()
+		const domainScale = this.services.cartesianScales.getDomainScale() as unknown as ScaleBand<string>
 		const activeData = this.model.getGroupedData(this.configs.groups)
 
 		let step = this.defaultStepFactor
-		if (typeof domainScale.step === 'function') {
+		if (typeof (domainScale as any).step === 'function') {
 			step = domainScale.step()
 		} else if (activeData.length > 0) {
 			// as a fallback use distance between first bars of adjacent bar groups

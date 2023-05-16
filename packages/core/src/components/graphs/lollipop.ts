@@ -52,7 +52,7 @@ export class Lollipop extends Scatter {
 		const enteringLines = lines.enter().append('line').attr('opacity', 0)
 
 		const allLines = enteringLines
-			.merge(lines)
+			.merge(lines as any)
 			.classed('line', true)
 			.attr('class', (d: any) =>
 				this.model.getColorClassName({

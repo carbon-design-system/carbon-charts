@@ -67,7 +67,7 @@ export class Bullet extends Component {
 			const rangeBoxesEnter = rangeBoxes.enter().append('path').attr('opacity', 0)
 
 			rangeBoxesEnter
-				.merge(rangeBoxes)
+				.merge(rangeBoxes as any)
 				.attr('class', (d: any) => `range-box order-${d.order}`)
 				.transition()
 				.call((t: any) =>
@@ -120,7 +120,7 @@ export class Bullet extends Component {
 			const barsEnter = bars.enter().append('path').attr('opacity', 0)
 
 			barsEnter
-				.merge(bars)
+				.merge(bars as any)
 				.classed('bar', true)
 				.transition()
 				.call((t: any) =>
@@ -179,7 +179,7 @@ export class Bullet extends Component {
 			const linesEnter = lines.enter().append('path').attr('opacity', 0)
 
 			linesEnter
-				.merge(lines)
+				.merge(lines as any)
 				.classed('marker', true)
 				.transition()
 				.call((t: any) =>
@@ -237,7 +237,7 @@ export class Bullet extends Component {
 			const linesEnter = lines.enter().append('path').attr('opacity', 0)
 
 			linesEnter
-				.merge(lines)
+				.merge(lines as any)
 				.attr('class', (d: any) => {
 					return `quartile ${d.value <= d.barValue ? 'over-bar' : ''}`
 				})

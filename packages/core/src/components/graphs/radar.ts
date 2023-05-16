@@ -356,7 +356,6 @@ export class Radar extends Component {
 					.style('fill', (group: any) => colorScale(group.name))
 					.style('fill-opacity', radar.opacity.selected)
 					.style('stroke', (group: any) => colorScale(group.name))
-
 					.call((selection: any) => {
 						const selectionUpdate = selection.transition().call((t: any) =>
 							this.services.transitions.setupTransition({

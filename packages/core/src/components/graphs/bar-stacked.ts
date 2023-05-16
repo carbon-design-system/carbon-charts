@@ -74,7 +74,7 @@ export class StackedBar extends Bar {
 		bars
 			.enter()
 			.append('path')
-			.merge(bars)
+			.merge(bars as any)
 			.classed('bar', true)
 			.transition()
 			.call((t: any) =>
@@ -271,7 +271,7 @@ export class StackedBar extends Bar {
 			return options.bars.width as number
 		}
 		const mainXScale = this.services.cartesianScales.getMainXScale()
-		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
+		const chartWidth = DOMUtils.getSVGElementSize((this as any).parent, {
 			useAttrs: true
 		}).width
 
@@ -279,10 +279,10 @@ export class StackedBar extends Bar {
 
 		const spacingFactor = getProperty(options, 'bars', 'spacingFactor')
 
-		if (!mainXScale.step) {
+		if (!(mainXScale as any).step) {
 			return Math.min(options.bars.maxWidth, (chartWidth * spacingFactor) / numberOfDomainValues)
 		}
-		return Math.min(options.bars.maxWidth, mainXScale.step() / 2)
+		return Math.min(options.bars.maxWidth, (mainXScale as any).step() / 2)
 	}
 
 	destroy() {

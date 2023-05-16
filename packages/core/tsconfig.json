@@ -4,14 +4,15 @@
 	"compilerOptions": {
 		// Package-specific settings
 		"baseUrl": ".",
-		"noImplicitAny": false,
-		"noUnusedParameters": false,
-		"noFallthroughCasesInSwitch": false,
+		"noImplicitAny": false, // TODO: 135 errors in 40 files
+		"noUnusedParameters": false, // TODO: 45 errors in 20 files
+		"noFallthroughCasesInSwitch": false, // TODO: 39 errors in 16 files
 		"paths": {
       "@/*": ["src/*"]
     },
-		"useDefineForClassFields": false, // TODO: Fix the 7 issues so this setting can be dropped
-		"strict": false // TODO: Fix all TypeScript issues so strict can be true
+		"useDefineForClassFields": false, // TODO: 46 errors in 21 files
+		"strict": false // TODO: 1173 errors in 64 files
+		// TODO: Nothing turned on: 39 errors in 16 files
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.vite.json" }]

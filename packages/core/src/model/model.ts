@@ -586,9 +586,10 @@ export class ChartModel {
 	}
 
 	getColorClassName(configs: {
-		classNameTypes: ColorClassNameTypes[]
+		classNameTypes?: ColorClassNameTypes[] // heatmaps do not pass this value
 		dataGroupName?: string | number
 		originalClassName?: string
+		value?: number // required for heatmap override
 	}) {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName)
 		let className = configs.originalClassName

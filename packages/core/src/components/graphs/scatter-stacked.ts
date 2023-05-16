@@ -41,7 +41,7 @@ export class StackedScatter extends Scatter {
 
 		// Update data on all circles
 		const circles = circleGroupsEnter
-			.merge(circleGroups)
+			.merge(circleGroups as any)
 			.selectAll('circle.dot')
 			.data((d: any) => d)
 
@@ -52,7 +52,7 @@ export class StackedScatter extends Scatter {
 		const enteringCircles = circles.enter().append('circle').classed('dot', true).attr('opacity', 0)
 
 		// Apply styling & position
-		const circlesToStyle = enteringCircles.merge(circles).datum((d: any) => {
+		const circlesToStyle = enteringCircles.merge(circles as any).datum((d: any) => {
 			const group = d[groupMapsTo]
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(d)

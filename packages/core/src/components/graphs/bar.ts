@@ -13,17 +13,17 @@ export class Bar extends Component {
 
 		const numberOfDatapoints = this.model.getDisplayData().length
 		const mainXScale = this.services.cartesianScales.getMainXScale()
-		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
+		const chartWidth = DOMUtils.getSVGElementSize((this as any).parent, {
 			useAttrs: true
 		}).width
 
-		if (!mainXScale.step) {
+		if (!(mainXScale as any).step) {
 			const spacingFactor = getProperty(options, 'bars', 'spacingFactor')
 
 			return Math.min(options.bars.maxWidth, (chartWidth * spacingFactor) / numberOfDatapoints)
 		}
 
-		return Math.min(options.bars.maxWidth, mainXScale.step() / 2)
+		return Math.min(options.bars.maxWidth, (mainXScale as any).step() / 2)
 	}
 
 	protected isOutsideZoomedDomain(x0: number, x1: number) {

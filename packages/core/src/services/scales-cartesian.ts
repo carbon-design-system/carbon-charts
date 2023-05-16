@@ -130,7 +130,7 @@ export class CartesianScales extends Service {
 			(axisPositionKey: string) => AxisPositions[axisPositionKey as keyof typeof AxisPositions]
 		)
 		axisPositions.forEach((axisPosition) => {
-			this.scales[axisPosition] = this.createScale(axisPosition)
+			this.scales[axisPosition as string] = this.createScale(axisPosition)
 		})
 	}
 

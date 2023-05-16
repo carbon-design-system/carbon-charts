@@ -110,7 +110,7 @@ export class Tree extends Component {
 						animate: true
 					})
 				)
-				.attr('viewBox', [-margin.left, left.x, width, height])
+				.attr('viewBox', [-margin.left, left.x, width, height].join(' ')) // viewBox expects a delimited string
 
 			// Update data on nodes
 			const nodeGroups = nodeGroup.selectAll('g').data(nodes, (d: any) => d.id)

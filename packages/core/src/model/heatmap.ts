@@ -258,7 +258,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	}
 
 	// Uses quantize scale to return class names
-	getColorClassName(configs: { value?: number; originalClassName?: string }) {
+	getColorClassName(configs: { value?: number, originalClassName?: string }) {
 		return `${configs.originalClassName} ${this._colorScale(configs.value as number)}`
 	}
 

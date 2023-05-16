@@ -1,3 +1,4 @@
+import type { Selection } from 'd3'
 import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
@@ -14,7 +15,7 @@ export class Title extends Component {
 		const svg = this.getComponentContainer()
 		const title = getProperty(this.getOptions(), 'title')
 
-		const text = svg.selectAll('p.title').data([title])
+		const text = svg.selectAll('p.title').data([title]) as Selection<HTMLParagraphElement, any, Element, any>
 
 		text
 			.enter()
@@ -109,7 +110,7 @@ export class Title extends Component {
 
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
-		return DOMUtils.getSVGElementSize(this.parent.node(), {
+		return DOMUtils.getSVGElementSize(this.parent.node() as any, {
 			useAttrs: true
 		}).width
 	}
