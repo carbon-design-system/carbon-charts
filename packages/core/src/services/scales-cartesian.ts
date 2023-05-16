@@ -36,10 +36,10 @@ export class CartesianScales extends Service {
 	}
 
 	protected scales = { // null or function
-		top: null as ScaleFunction,
-		right: null as ScaleFunction,
-		bottom: null as ScaleFunction,
-		left: null as ScaleFunction
+		top: null as ScaleLinear<number, number, never>,
+		right: null as ScaleLinear<number, number, never>,
+		bottom: null as ScaleLinear<number, number, never>,
+		left: null as ScaleLinear<number, number, never>
 	}
 
 	protected domainAxisPosition: AxisPositions

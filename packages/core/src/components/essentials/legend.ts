@@ -17,7 +17,9 @@ export class Legend extends Component {
 	type = 'legend'
 	renderType = RenderTypes.HTML
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
@@ -116,7 +118,7 @@ export class Legend extends Component {
 			const addedAdditionalItems = additionalItems
 				.enter()
 				.append('div')
-				.merge(additionalItems)
+				.merge(additionalItems as any)
 				.classed('legend-item', true)
 				.classed('additional', true)
 				.attr('aria-labelledby', (d: any, i: number) =>
@@ -322,7 +324,7 @@ export class Legend extends Component {
 
 		// Add an ID for the checkbox to use through `aria-labelledby`
 		addedLegendItemsText.attr('id', function () {
-			const elementToReference = this.parentNode.querySelector('div.checkbox') || this.parentNode
+			const elementToReference = (this as any).parentNode.querySelector('div.checkbox') || (this as any).parentNode
 
 			return elementToReference.getAttribute('aria-labelledby')
 		})

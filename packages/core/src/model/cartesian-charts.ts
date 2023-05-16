@@ -7,7 +7,7 @@ import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
  * This supports adding X and Y Cartesian[2D] zoom data to a ChartModel
  * */
 export class ChartModelCartesian extends ChartModel {
-	protected axisFlavor = AxisFlavor.DEFAULT
+	axisFlavor = AxisFlavor.DEFAULT // can't be protected as it's used by two-dimensional-axes.ts
 
 	constructor(services: any) {
 		super(services)

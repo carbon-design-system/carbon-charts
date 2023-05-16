@@ -5,6 +5,7 @@ import { Component } from '@/components/component'
 import type { Threshold } from '@/components/essentials/threshold'
 import { AxisPositions, Events, RenderTypes, AxisFlavor } from '@/interfaces/enums'
 import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModelCartesian } from '@/model/cartesian-charts'
 
 export class TwoDimensionalAxes extends Component {
 	type = '2D-axes'
@@ -26,7 +27,7 @@ export class TwoDimensionalAxes extends Component {
 		const axisPositions = Object.keys(AxisPositions)
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 
-		axisPositions.forEach((axisPosition: any) => {
+		axisPositions.forEach((axisPosition: string) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]]
 			if (axisOptions) {
 				axes[AxisPositions[axisPosition]] = true
@@ -36,7 +37,7 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach((axisPositionKey: any) => {
+		axisPositions.forEach((axisPositionKey: string) => {
 			const axisPosition = AxisPositions[axisPositionKey]
 			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const configs = {
@@ -46,7 +47,7 @@ export class TwoDimensionalAxes extends Component {
 				}
 
 				const axisComponent =
-					this.model.axisFlavor === AxisFlavor.DEFAULT
+					(this.model as ChartModelCartesian).axisFlavor === AxisFlavor.DEFAULT
 						? new Axis(this.model, this.services, configs)
 						: new HoverAxis(this.model, this.services, configs)
 
@@ -78,7 +79,7 @@ export class TwoDimensionalAxes extends Component {
 			const invisibleAxisRef = child.getInvisibleAxisRef()
 			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true })
 
-			let offset
+			let offset: any
 			if (child.getTitleRef().empty()) {
 				offset = 0
 			} else {

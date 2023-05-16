@@ -38,7 +38,7 @@ export class Grid extends Component {
 		const height = this.backdrop.attr('height')
 
 		const mainXScale = this.services.cartesianScales.getMainXScale()
-		const xGrid = axisBottom(mainXScale).tickSizeInner(-height).tickSizeOuter(0)
+		const xGrid = axisBottom(mainXScale as any).tickSizeInner(-height).tickSizeOuter(0)
 
 		// if the main range axis has a custom domain, align the gridlines to the ticks
 		const alignToTicks = getProperty(this.getOptions(), 'grid', 'x', 'alignWithAxisTicks')
@@ -71,9 +71,9 @@ export class Grid extends Component {
 						animate
 					})
 				)
-				.call(xGrid)
+				.call(xGrid as any)
 		} else {
-			g.call(xGrid)
+			g.call(xGrid as any)
 		}
 
 		this.cleanGrid(g)
@@ -84,7 +84,7 @@ export class Grid extends Component {
 		const width = this.backdrop.attr('width')
 
 		const mainYScale = this.services.cartesianScales.getMainYScale()
-		const yGrid = axisLeft(mainYScale).tickSizeInner(-width).tickSizeOuter(0)
+		const yGrid = axisLeft(mainYScale as any).tickSizeInner(-width).tickSizeOuter(0)
 
 		// if the main range axis has a custom domain, align the gridlines to the ticks
 		const alignToTicks = getProperty(this.getOptions(), 'grid', 'y', 'alignWithAxisTicks')
@@ -117,9 +117,9 @@ export class Grid extends Component {
 						animate
 					})
 				)
-				.call(yGrid)
+				.call(yGrid as any)
 		} else {
-			g.call(yGrid)
+			g.call(yGrid as any)
 		}
 
 		this.cleanGrid(g)
@@ -163,16 +163,16 @@ export class Grid extends Component {
 		// we can use the chart edge to determind the threshold for the gridlines
 		if (!line1) {
 			// we are between the first gridline and the chart edge
-			lineSpacing = +getTranslationValues(line2).tx
+			lineSpacing = +getTranslationValues(line2 as any).tx
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
 			const gridElement = svg.select('rect.chart-grid-backdrop').node()
-			const width = DOMUtils.getSVGElementSize(gridElement).width
+			const width = DOMUtils.getSVGElementSize(gridElement as any).width
 
-			lineSpacing = width - +getTranslationValues(line1).tx
+			lineSpacing = width - +getTranslationValues(line1 as any).tx
 		} else {
 			// there are two gridlines to use
-			lineSpacing = +getTranslationValues(line2).tx - +getTranslationValues(line1).tx
+			lineSpacing = +getTranslationValues(line2 as any).tx - +getTranslationValues(line1 as any).tx
 		}
 		const { threshold } = this.getOptions().tooltip.gridline
 		// return the threshold
@@ -191,7 +191,7 @@ export class Grid extends Component {
 		const svg = this.parent
 
 		const xGridlines = svg.selectAll('.x.grid .tick').filter(function () {
-			const translations = getTranslationValues(this)
+			const translations = getTranslationValues(this as any)
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {

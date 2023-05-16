@@ -4,7 +4,7 @@ import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { CartesianOrientations, Events, RenderTypes } from '@/interfaces/enums'
 
-export type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>
+export type GenericSvgSelection = Selection<SVGGraphicsElement, any, Element, any>
 
 const THRESHOLD = 5
 
@@ -28,7 +28,9 @@ export class Ruler extends Component {
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
 

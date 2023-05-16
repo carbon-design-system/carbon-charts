@@ -52,7 +52,7 @@ export class Highlight extends Component {
 		// Add the axis highlight groups that need to be introduced
 		const highlightAxisGroupsEnter = highlightAxisGroups.enter().append('g')
 
-		const highlightAxisGroupsMerge = highlightAxisGroupsEnter.merge(highlightAxisGroups)
+		const highlightAxisGroupsMerge = highlightAxisGroupsEnter.merge(highlightAxisGroups as any)
 		highlightAxisGroupsMerge.attr('class', (d: any) => `axis-highlight ${d.axisPosition}`)
 
 		const highlightGroups = highlightAxisGroupsMerge.selectAll('g.highlight-group').data((d: any) =>
@@ -75,7 +75,7 @@ export class Highlight extends Component {
 		highlightGroupsEnter.append('rect').attr('class', 'highlight-bar')
 		highlightGroupsEnter.append('line').attr('class', 'highlight-line')
 
-		const highlightGroupsMerge = highlightGroupsEnter.merge(highlightGroups)
+		const highlightGroupsMerge = highlightGroupsEnter.merge(highlightGroups as any)
 		highlightGroupsMerge.attr('class', 'highlight-group')
 
 		const self = this

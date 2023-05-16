@@ -4,6 +4,7 @@ import { legend } from '@/configuration'
 import { ColorLegendType, Events, RenderTypes } from '@/interfaces/enums'
 import { Legend } from './legend'
 import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { HeatmapModel } from '@/model'
 
 export class ColorScaleLegend extends Legend {
 	type = 'color-legend'
@@ -68,7 +69,9 @@ export class ColorScaleLegend extends Legend {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
@@ -93,7 +96,7 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		const customColorsEnabled = !isEmpty(customColors)
-		const domain = this.model.getValueDomain()
+		const domain = (this.model as HeatmapModel).getValueDomain()
 
 		const useDefaultBarWidth = !(width <= legend.color.barWidth)
 		const barWidth = useDefaultBarWidth ? legend.color.barWidth : width

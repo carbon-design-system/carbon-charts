@@ -1,7 +1,7 @@
-import { select } from 'd3'
+import { select, type ScaleTime, type ScaleLinear, type Selection } from 'd3'
 import { get } from 'lodash-es'
 import { isEqual, getProperty } from '@/tools'
-import { GenericSvgSelection, Ruler } from './ruler'
+import { Ruler } from './ruler'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 
@@ -9,17 +9,22 @@ export class BinnedRuler extends Ruler {
 	type = 'ruler-binned'
 	renderType = RenderTypes.SVG
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 
 		const options = this.model.getOptions()
+		const { cartesianScales } = this.services
 
-		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation()
+		const orientation: CartesianOrientations = cartesianScales.getOrientation()
 
-		const rangeScale = this.services.cartesianScales.getRangeScale()
+		const rangeScale = cartesianScales.getRangeScale()
 		const [yScaleEnd, yScaleStart] = rangeScale.range()
 
-		const domainScale = this.services.cartesianScales.getDomainScale()
+		const domainScale = cartesianScales.getDomainScale()
+
 		const correspondingDomainValue = domainScale.invert(
 			orientation === CartesianOrientations.VERTICAL ? x : y
 		)
@@ -27,7 +32,7 @@ export class BinnedRuler extends Ruler {
 		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler').attr('aria-label', 'ruler')
 		const rulerLine = DOMUtils.appendOrSelect(ruler, 'line.ruler-line')
 
-		const dataPointElements: GenericSvgSelection = svg.selectAll('[role=graphics-symbol]')
+		const dataPointElements = svg.selectAll('[role=graphics-symbol]') as Selection<SVGGraphicsElement, any, Element, any>
 
 		const elementsToHighlight = dataPointElements.filter((d: any) => {
 			if (

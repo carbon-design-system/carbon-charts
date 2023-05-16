@@ -56,7 +56,7 @@ export class ZoomBar extends Component {
 
 		const zoombarHeight = zoomBar.height[zoombarType]
 
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 		// initialization is not completed yet
@@ -198,7 +198,7 @@ export class ZoomBar extends Component {
 				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0)
 				this.renderZoomBarArea(container, 'path.zoom-graph-area', zoomBarData, this.clipId)
 				// Draw the zoom bar base line
-				this.renderZoomBarBaseline(container, axesLeftMargin, width)
+				this.renderZoomBarBaseline(container as any, axesLeftMargin, width)
 
 				if (highlight) {
 					const startHighlight = highlight.highlightStartMapsTo
@@ -428,7 +428,7 @@ export class ZoomBar extends Component {
 		const container = svg.select('svg.zoom-container')
 
 		// Draw zoombar background line
-		DOMUtils.appendOrSelect(container, 'rect.zoom-slider-selected-area')
+		DOMUtils.appendOrSelect(container as any, 'rect.zoom-slider-selected-area')
 			.attr('x', selection[0])
 			.attr('y', zoombarHeight / 2 - 1)
 			.attr('width', selection[1] - selection[0])
@@ -443,8 +443,8 @@ export class ZoomBar extends Component {
 		const mainYScaleType = cartesianScales.getMainYScaleType()
 
 		const accessorFunction = (scale: any, scaleType: any, axisPosition: any) => {
-			return (d: any, i: number) => {
-				return cartesianScales.getValueFromScale(scale, scaleType, axisPosition, d, i)
+			return (d: any) => {
+				return cartesianScales.getValueFromScale(scale, scaleType, axisPosition, d)
 			}
 		}
 
@@ -454,9 +454,9 @@ export class ZoomBar extends Component {
 		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type')
 		const zoombarHeight = zoomBar.height[zoombarType]
 		const areaGenerator = area()
-			.x((d: any, i: number) => xAccessor(d, i))
+			.x((d: any) => xAccessor(d))
 			.y0(zoombarHeight)
-			.y1((d: any, i: number) => zoombarHeight - yAccessor(d, i))
+			.y1((d: any) => zoombarHeight - yAccessor(d))
 
 		const areaGraph = DOMUtils.appendOrSelect(container, querySelector)
 			.datum(data)
@@ -522,7 +522,7 @@ export class ZoomBar extends Component {
 			[startX, zoombarHeight],
 			[endX, zoombarHeight]
 		])
-		DOMUtils.appendOrSelect(container, 'path.zoom-bg-baseline')
+		DOMUtils.appendOrSelect(container as any, 'path.zoom-bg-baseline')
 			.attr('d', baselineGenerator)
 			.classed('zoom-bg-baseline-skeleton', skeletonClass)
 			.style(

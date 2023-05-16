@@ -359,12 +359,14 @@ export class Axis extends Component {
 			const axisRefSelection = axisRef
 
 			if (animate) {
-				axisRef = axisRef.transition().call((t: any) =>
-					this.services.transitions.setupTransition({
-						transition: t,
-						name: 'axis-update',
-						animate
-					})
+				axisRef = axisRef
+					.transition()
+					.call((t: any) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'axis-update',
+							animate
+						})
 				)
 			}
 			axisRef = axisRef.call(axis)
@@ -415,11 +417,13 @@ export class Axis extends Component {
 				// If we're dealing with a discrete scale type
 				// We're able to grab the spacing between the ticks
 				if (scale.step) {
-					const textNodes = invisibleAxisRef.selectAll('g.tick text').nodes() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
+					const textNodes = invisibleAxisRef
+						.selectAll('g.tick text')
+						.nodes() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
-						(textNode: any) =>
+						(textNode: D3Selection<SVGGraphicsElement, any, Element, any>) =>
 							DOMUtils.getSVGElementSize(textNode, {
 								useBBox: true
 							}).width >= scale.step()

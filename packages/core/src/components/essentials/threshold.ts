@@ -1,4 +1,4 @@
-import { select, pointer } from 'd3'
+import { select, pointer, type ScaleBand, type ScaleTime } from 'd3'
 import Position, { PLACEMENTS } from '@carbon/utils-position' // position services
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
@@ -54,7 +54,7 @@ export class Threshold extends Component {
 		// Add the axis threshold groups that need to be introduced
 		const thresholdAxisGroupsEnter = thresholdAxisGroups.enter().append('g')
 
-		const thresholdAxisGroupsMerge = thresholdAxisGroupsEnter.merge(thresholdAxisGroups)
+		const thresholdAxisGroupsMerge = thresholdAxisGroupsEnter.merge(thresholdAxisGroups as any)
 		thresholdAxisGroupsMerge.attr('class', (d: any) => `axis-thresholds ${d.axisPosition}`)
 
 		const thresholdGroups = thresholdAxisGroupsMerge.selectAll('g.threshold-group').data((d: any) =>
@@ -75,12 +75,12 @@ export class Threshold extends Component {
 		thresholdGroupsEnter.append('line').attr('class', 'threshold-line')
 		thresholdGroupsEnter.append('rect').attr('class', 'threshold-hoverable-area')
 
-		const thresholdGroupsMerge = thresholdGroupsEnter.merge(thresholdGroups)
+		const thresholdGroupsMerge = thresholdGroupsEnter.merge(thresholdGroups as any)
 		thresholdGroupsMerge.attr('class', 'threshold-group')
 
 		const self = this
-		thresholdAxisGroupsMerge.each(function ({ axisPosition }) {
-			const scale = self.services.cartesianScales.getScaleByPosition(axisPosition)
+		thresholdAxisGroupsMerge.each(function ({ axisPosition }: { axisPosition: AxisPositions}) {
+			const scale = self.services.cartesianScales.getScaleByPosition(axisPosition) as unknown as ScaleBand<string>
 			const scaleType = self.services.cartesianScales.getScaleTypeByPosition(axisPosition)
 
 			let xScale = null
@@ -277,7 +277,7 @@ export class Threshold extends Component {
 		svg
 			.selectAll('rect.threshold-hoverable-area')
 			.on('mouseover mousemove', function (event: MouseEvent) {
-				select(this.parentNode).select('line.threshold-line').classed('active', true)
+				select((this as any).parentNode).select('line.threshold-line').classed('active', true)
 
 				self.services.events.dispatchEvent(Events.Threshold.SHOW, {
 					event,
@@ -286,7 +286,7 @@ export class Threshold extends Component {
 				})
 			})
 			.on('mouseout', function (event: MouseEvent) {
-				select(this.parentNode).select('line.threshold-line').classed('active', false)
+				select((this as any).parentNode).select('line.threshold-line').classed('active', false)
 
 				self.services.events.dispatchEvent(Events.Threshold.HIDE, {
 					event,

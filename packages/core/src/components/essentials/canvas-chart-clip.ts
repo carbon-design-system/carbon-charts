@@ -13,7 +13,7 @@ export class CanvasChartClip extends ChartClip {
 
 	createClipPath() {
 		const svg = this.parent
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})
 

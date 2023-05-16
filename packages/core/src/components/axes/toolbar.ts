@@ -79,7 +79,7 @@ export class Toolbar extends Component {
 
 			const self = this
 			enteringToolbarControls
-				.merge(toolbarControls)
+				.merge(toolbarControls as any)
 				.classed('disabled', (d: any) => d.shouldBeDisabled())
 				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 				.attr('aria-label', (d: any) => d.title)
