@@ -1,4 +1,4 @@
-import { arc, easeLinear, scaleLinear } from 'd3'
+import { arc, easeLinear, scaleLinear, type ScaleLinear, type Selection } from 'd3'
 import { getProperty } from '@/tools'
 import { pie } from '@/configuration'
 import { Component } from '@/components/component'
@@ -7,9 +7,9 @@ import { Skeletons, CartesianOrientations, Alignments } from '@/interfaces/enums
 
 export class Skeleton extends Component {
 	type = 'skeleton'
-	xScale: any
-	yScale: any
-	backdrop: any
+	xScale: ScaleLinear<number, number>
+	yScale: ScaleLinear<number, number>
+	backdrop: Selection<SVGElement | HTMLDivElement, unknown, Element, any>
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -118,7 +118,7 @@ export class Skeleton extends Component {
 	}
 
 	drawXGrid(showShimmerEffect: boolean) {
-		const width = this.backdrop.attr('width')
+		const width = +this.backdrop.attr('width')
 		const ticksNumber = getProperty(this.getOptions(), 'grid', 'x', 'numberOfTicks')
 		const ticksValues = this.xScale.ticks(ticksNumber).map((d: any) => d * width)
 
@@ -146,7 +146,7 @@ export class Skeleton extends Component {
 	}
 
 	drawYGrid(showShimmerEffect: boolean) {
-		const height = this.backdrop.attr('height')
+		const height = +this.backdrop.attr('height')
 		const width = this.backdrop.attr('width')
 		const ticksNumber = getProperty(this.getOptions(), 'grid', 'y', 'numberOfTicks')
 		const ticksValues = this.xScale.ticks(ticksNumber).map((d: any) => d * height)

@@ -4,12 +4,11 @@
 	"compilerOptions": {
 		// Package-specific settings
 		"baseUrl": ".",
-		"noImplicitAny": false, // TODO: 97 errors in 27 files
 		"paths": {
       "@/*": ["src/*"]
     },
-		"strict": false, // TODO: 1157 errors in 64 files
-		"useDefineForClassFields": false // TODO: 7 errors in 5 files
+		"strict": false, // TODO: 1140 errors in 63 files
+		"useDefineForClassFields": false // TODO: 7 errors in 5 files - also breaks project if true
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.vite.json" }]

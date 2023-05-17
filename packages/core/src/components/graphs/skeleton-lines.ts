@@ -1,12 +1,13 @@
+import type { ScaleLinear, Selection } from 'd3'
 import { getProperty } from '@/tools'
 import { Skeleton } from './skeleton'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class SkeletonLines extends Skeleton {
 	type = 'skeleton-lines'
-	xScale: any
-	yScale: any
-	backdrop: any
+	xScale: ScaleLinear<number, number>
+	yScale: ScaleLinear<number, number>
+	backdrop: Selection<SVGElement | HTMLDivElement, unknown, Element, any>
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
