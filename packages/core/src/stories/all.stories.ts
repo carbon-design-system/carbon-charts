@@ -55,7 +55,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
-		const ClassToInitialize = ChartComponents[demo.chartType.vanilla]
+		const key = demo.chartType.vanilla as keyof typeof ChartComponents
+		const ClassToInitialize = ChartComponents[key]
 
 		// Loop through the demos for the group
 		groupStories.add(
