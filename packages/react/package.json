@@ -91,7 +91,7 @@
 		"storybook": "^7.0.12",
 		"style-loader": "^3.3.2",
 		"typescript": "^5.0.4",
-		"vite": "^4.3.6",
+		"vite": "^4.3.7",
 		"vite-plugin-dts": "~2.3.0"
 	},
 	"prettier": "../../prettier.config.cjs",
