@@ -37,7 +37,7 @@
     "@carbon/charts": "workspace:*",
     "@carbon/icons-angular": "^11.2.2",
     "@carbon/telemetry": "~0.1.0",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.2",

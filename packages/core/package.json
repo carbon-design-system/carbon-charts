@@ -94,7 +94,7 @@
 		"dom-to-image-more": "^3.1.6",
 		"lodash-es": "^4.17.21",
 		"resize-observer-polyfill": "^1.5.1",
-		"tslib": "^2.5.0"
+		"tslib": "^2.5.1"
 	},
 	"peerDependencies": {
 		"d3": "^7.0.0",
