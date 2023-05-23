@@ -300,6 +300,41 @@ export const lineTimeSeriesQuarterlyOptions = {
 	},
 };
 
+// time-interval override
+export const lineTimeSeriesDataIntervalOverride = {
+	labels: ['Qty'],
+	datasets: [
+		{
+			label: 'Dataset 1',
+			data: [
+				{ date: new Date(2018, 0), value: 10 },
+				{ date: new Date(2018, 3), value: 10 },
+				{ date: new Date(2018, 6), value: 10 },
+				{ date: new Date(2018, 9), value: 10 },
+				{ date: new Date(2019, 0), value: 10 },
+				{ date: new Date(2019, 3), value: 10 },
+				{ date: new Date(2019, 6), value: 10 },
+			],
+		},
+	],
+};
+
+export const lineTimeSeriesIntervalOverrideOptions = {
+	title: 'Line (time series) - Time interval override',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: 'time',
+		},
+	},
+	timeScale: {
+		timeInterval: 'monthly',
+	},
+	legend: {
+		clickable: false,
+	},
+};
+
 // yearly
 export const lineTimeSeriesDataYearly = {
 	labels: ['Qty'],

@@ -1,5 +1,9 @@
 import { format } from 'date-fns';
-import { TimeScaleOptions } from '../interfaces/axis-scales';
+import {
+	TimeIntervalFormats,
+	TimeIntervalNames,
+	TimeScaleOptions,
+} from '../interfaces/axis-scales';
 import * as Tools from '../tools';
 
 // D3 Imports
@@ -102,7 +106,7 @@ export function formatTick(
 		: secondary;
 
 	// if the interval, and the timestamp includes milliseconds value
-	if (interval === '15seconds' && date.getMilliseconds() !== 0){
+	if (interval === '15seconds' && date.getMilliseconds() !== 0) {
 		// show milliseconds in tick
 		formatString = formatString.replace('pp', 'h:mm:ss.SSS a');
 	}
@@ -149,7 +153,14 @@ function closestTimeIntervalName(duration: number): string {
 
 // Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
-export function computeTimeIntervalName(ticks: number[]): string {
+export function computeTimeIntervalName(
+	ticks: number[],
+	intervalOverride?: keyof TimeIntervalFormats
+): string {
+	if (TimeIntervalNames[intervalOverride]) {
+		return intervalOverride;
+	}
+
 	// special case: if the dataset has only one datum, we show the tick in the most detailed way possible
 	if (ticks.length === 1) {
 		return '15seconds';

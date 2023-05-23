@@ -263,7 +263,11 @@ export class Threshold extends Component {
 			const scale = isVertical ? mainYScale : mainXScale;
 
 			const timeScaleOptions = Tools.getProperty(options, 'timeScale');
-			const timeInterval = computeTimeIntervalName(scale.ticks());
+			const timeInterval = computeTimeIntervalName(
+				scale.ticks(),
+				Tools.getProperty(options, 'timeScale', 'timeInterval')
+			);
+
 			return formatTick(
 				value,
 				0,

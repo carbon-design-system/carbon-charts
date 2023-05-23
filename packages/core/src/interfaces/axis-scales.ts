@@ -168,6 +168,11 @@ export interface TimeScaleOptions {
 	 */
 	showDayName?: boolean;
 	/**
+	 * this can be used to override the time interval
+	 * that's chosen by the library
+	 */
+	timeInterval?: TimeIntervalNames;
+	/**
 	 * formats for each time interval
 	 */
 	timeIntervalFormats?: TimeIntervalFormats;
@@ -185,6 +190,18 @@ export interface TimeScaleOptions {
 export interface TickFormats {
 	primary?: string;
 	secondary?: string;
+}
+
+export enum TimeIntervalNames {
+	'15seconds' = '15seconds',
+	minute = 'minute',
+	'30minutes' = '30minutes',
+	hourly = 'hourly',
+	daily = 'daily',
+	weekly = 'weekly',
+	monthly = 'monthly',
+	quarterly = 'quarterly',
+	yearly = 'yearly',
 }
 
 export interface TimeIntervalFormats {
