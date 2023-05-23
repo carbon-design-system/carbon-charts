@@ -8,7 +8,7 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 // D3
 import { scaleOrdinal } from 'd3-scale';
 import { stack, stackOffsetDiverging } from 'd3-shape';
-import { histogram } from 'd3-array';
+import { bin } from 'd3-array';
 import { formatDateTillMilliSeconds } from '../services/time-series';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -205,7 +205,7 @@ export class ChartModel {
 		const areBinsDefined = Array.isArray(axisBins);
 
 		// Get Histogram bins
-		const bins = histogram()
+		const bins = bin()
 			.value((d) => d[domainIdentifier])
 			.thresholds(axisBins)(data);
 

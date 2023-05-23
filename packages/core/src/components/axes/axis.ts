@@ -285,7 +285,10 @@ export class Axis extends Component {
 			'formatter'
 		);
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues());
+			const timeInterval = computeTimeIntervalName(
+				axis.tickValues(),
+				Tools.getProperty(options, 'timeScale', 'timeInterval')
+			);
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
 					formatTick(
@@ -466,7 +469,10 @@ export class Axis extends Component {
 
 		// Apply new axis to the axis element
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues());
+			const timeInterval = computeTimeIntervalName(
+				axis.tickValues(),
+				Tools.getProperty(options, 'timeScale', 'timeInterval')
+			);
 			const showDayName = timeScaleOptions.showDayName;
 			const axisRefSelection = axisRef;
 

@@ -1,24 +1,17 @@
 {
-	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
-	"version": "1.7.1",
-	"name": "root",
-	"packages": [
-		"packages/*"
-	],
-	"npmClient": "yarn",
-	"useWorkspaces": true,
-	"command": {
-		"publish": {
-			"ignoreChanges": [
-				"packages/*/demo/bundle",
-				"**/*.md"
-			]
-		},
-		"bootstrap": {
-      "npmClientArgs": [
-        "--cached"
-      ]
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "1.7.6",
+  "name": "root",
+  "packages": ["packages/*"],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": ["packages/*/demo/bundle", "**/*.md"]
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--cached"]
     }
-	},
+  },
   "commandVersion": "6.6.1"
 }

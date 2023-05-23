@@ -258,12 +258,17 @@ export class Threshold extends Component {
 				AxisPositions.LEFT,
 				AxisPositions.RIGHT,
 			].includes(axisPosition);
+
 			const mainXScale = this.services.cartesianScales.getMainXScale();
 			const mainYScale = this.services.cartesianScales.getMainYScale();
 			const scale = isVertical ? mainYScale : mainXScale;
 
 			const timeScaleOptions = Tools.getProperty(options, 'timeScale');
-			const timeInterval = computeTimeIntervalName(scale.ticks());
+			const timeInterval = computeTimeIntervalName(
+				scale.ticks(),
+				Tools.getProperty(options, 'timeScale', 'timeInterval')
+			);
+
 			return formatTick(
 				value,
 				0,

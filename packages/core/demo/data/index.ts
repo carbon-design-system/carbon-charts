@@ -167,6 +167,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataIntervalOverride,
+				options: timeSeriesAxisDemos.lineTimeSeriesIntervalOverrideOptions,
+				chartType: chartTypes.LineChart,
+			},
+			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
 				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
 				chartType: chartTypes.LineChart,
