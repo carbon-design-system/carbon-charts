@@ -2738,8 +2738,8 @@ __metadata:
     vite-plugin-dts: ^2.3.0
     zone.js: ~0.13.0
   peerDependencies:
-    "@angular/common": "*"
-    "@angular/core": "*"
+    "@angular/common": ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    "@angular/core": ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   languageName: unknown
   linkType: soft
 
@@ -2891,7 +2891,7 @@ __metadata:
     vue: ^2.7.14
     vue-template-compiler: ^2.7.14
   peerDependencies:
-    vue: "*"
+    vue: ^2.0.0 || ^3.0.0
   languageName: unknown
   linkType: soft
 

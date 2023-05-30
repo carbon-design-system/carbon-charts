@@ -28,8 +28,8 @@
     "clean": "rm -rf dist demo/bundle"
   },
   "peerDependencies": {
-    "@angular/common": ">= 12.0.0 && < 17.0.0",
-    "@angular/core": ">= 12.0.0 && < 17.0.0"
+    "@angular/common": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "dependencies": {
     "@angular/common": "^16.0.3",
