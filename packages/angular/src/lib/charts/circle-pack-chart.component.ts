@@ -7,7 +7,7 @@ import {
 } from '@carbon/charts'
 
 /**
- * Wrapper around `BubbleChart` in carbon charts library
+ * Wrapper around `CirclePackChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */
