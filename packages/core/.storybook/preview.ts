@@ -41,24 +41,3 @@ const preview: Preview = {
 }
 
 export default preview
-
-/*
-Notes:
-
-div.container {
-  color: var(--cds-text-primary, #161616);
-  background-color: var(--cds-background, #ffffff);
-  font-family: "IBM Plex Sans", Arial, sans-serif;
-  padding: 30px;
-}
-
-Classes that do not seem to be defined/used:
-	theme--white on div
-	intro
-	welcome__container
-	welcome__content
-	welcome__heading
-	welcome__heading--subtitle
-	welcome__heading--other
-	netlify
-*/
