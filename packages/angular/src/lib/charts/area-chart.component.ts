@@ -17,7 +17,7 @@ import {
 })
 export class AreaChartComponent extends BaseChartComponent implements AfterViewInit {
 	/**
-	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
+	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
 		this.chart = new AreaChartCore(this.elementRef.nativeElement, {

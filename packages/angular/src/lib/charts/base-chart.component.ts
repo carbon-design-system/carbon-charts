@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core'
+import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core'
 import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
 
 /**
@@ -58,11 +58,6 @@ export class BaseChartComponent implements AfterViewInit, OnInit {
 	@Input() height?: string
 
 	/**
-	 * Chart container element ref
-	 */
-	@ViewChild('chartRef') chartRef!: ElementRef<HTMLElement>
-
-	/**
 	 * Chart object instance
 	 *
 	 * You can use this to do whatever you would normally do with a chart if you used
@@ -88,7 +83,7 @@ export class BaseChartComponent implements AfterViewInit, OnInit {
 	}
 
 	/**
-	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
+	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	ngAfterViewInit() {
 		console.log('Class that extended BaseChartComponent did not implement ngAfterViewInit().')
