@@ -49,8 +49,7 @@
 	},
 	"files": [
 		"dist",
-		"CHANGELOG.md",
-		"LICENSE.md"
+		"CHANGELOG.md"
 	],
 	"scripts": {
 		"postinstall": "carbon-telemetry collect --install",
@@ -58,7 +57,6 @@
 		"file:css:charts": "sass src/styles/styles.scss dist/styles.css --load-path=./node_modules",
 		"file:css:min:charts": "sass src/styles/styles.scss dist/styles.min.css --style=compressed --load-path=./node_modules",
 		"file:css:demo": "sass src/demo/styles.scss dist/demo/styles.css --load-path=./node_modules",
-		"file:license": "cp ../../LICENSE.md ./",
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build:package": "vite build && yarn postbundle",
 		"demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",

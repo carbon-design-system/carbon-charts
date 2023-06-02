@@ -21,15 +21,12 @@
 	},
 	"files": [
 		"dist",
-		"README.md",
-		"LICENSE.md"
+		"README.md"
 	],
 	"scripts": {
 		"postinstall": "carbon-telemetry collect --install",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"file:license": "cp ../../LICENSE.md ./",
-		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "vite build && yarn postbundle",
+		"build:package": "vite build && yarn file:styles",
 		"demo:mdx:react": "cp ../core/src/stories/getting-started/react.stories.mdx src/stories",
 		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
 		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",

@@ -21,15 +21,12 @@
   },
   "files": [
     "dist",
-    "CHANGELOG.md",
-    "LICENSE.md"
+    "CHANGELOG.md"
   ],
   "scripts": {
     "postinstall": "carbon-telemetry collect --install",
     "file:styles": "cp ../core/dist/styles.* dist",
-    "file:license": "cp ../../LICENSE.md ./",
-    "postbundle": "concurrently \"yarn:file:*\"",
-    "build:package": "vite build && yarn postbundle",
+    "build:package": "vite build && yarn file:styles",
     "build:demo": "storybook build -o demo/bundle --quiet",
     "build": "yarn build:package && yarn build:demo",
     "storybook": "storybook dev -p 9006",
@@ -63,7 +60,6 @@
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
     "codesandbox": "^2.2.3",
-    "concurrently": "^8.1.0",
     "eslint": "^8.41.0",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-vue": "^9.14.1",
