@@ -32,7 +32,6 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			// '@storybook/react-dom-shim': '@storybook/react-dom-shim/dist/react-18'
 		}
 	},
 	plugins: [react(), dts()]

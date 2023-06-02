@@ -1,13 +1,12 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 
-// This file is really for building storybook as SvelteKit builds dist
+// Primarily for building Storybook as SvelteKit builds dist
 export default defineConfig({
 	plugins: [sveltekit()],
 	// Note: everything in Svelte is a dev dependency as it has no runtime
 	build: {
 		rollupOptions: {
-			// external: ['@carbon/charts/demo']
 		}
 	},
 	optimizeDeps: {
