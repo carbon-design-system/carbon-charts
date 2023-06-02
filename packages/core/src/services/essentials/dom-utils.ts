@@ -212,7 +212,6 @@ export class DOMUtils extends Service {
 		this.initializeID()
 
 		this.addMainContainer()
-		this.verifyCSSStylesBeingApplied()
 
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener()
@@ -391,30 +390,6 @@ export class DOMUtils extends Service {
 
 			// Toggle the `fullscreen` classname
 			holderSelection.classed('fullscreen', !isFullScreen)
-		})
-	}
-
-	verifyCSSStylesBeingApplied() {
-		// This code was triggering erroneous messages even when styles were loaded
-		// setTimeout is needed here since in `addSVGElement()` we're appending the
-		// CSS verifier element, and need to allow some time for it to become available
-		// in the DOM
-		setTimeout(() => {
-			/*const cssVerifierElement = */ select(this.mainContainer)
-				.select(`g.${CSS_VERIFIER_ELEMENT_CLASSNAME}`) // BUG: weird to add a <g> element to a <div> (perhaps change it to a comment?)
-				.node()
-			/*
-			const computedStyles = getComputedStyle(cssVerifierElement as any)
-
-			if ( // true even when styles are properly loaded
-				computedStyles.getPropertyValue('overflow') !== 'hidden' ||
-				computedStyles.getPropertyValue('opacity') !== '0'
-			) {
-				console.error(
-					'Missing CSS styles for Carbon Charts. Please read the Carbon Charts getting started guide.'
-				)
-			}
-			*/
 		})
 	}
 
