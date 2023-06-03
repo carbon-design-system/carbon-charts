@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.6...v1.8.0) (2023-06-03)
+
+### Features
+
+- **core:** Add choropleth chart
+  ([#1487](https://github.com/carbon-design-system/carbon-charts/issues/1487))
+  ([62caeb1](https://github.com/carbon-design-system/carbon-charts/commit/62caeb1fd6fab9e2a39d85b024f2d9b97f8bd1fa))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.7.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.5...v1.7.6) (2023-05-01)
 
 **Note:** Version bump only for package @carbon/charts-angular

@@ -2,32 +2,34 @@ import { enUS as localeObject } from 'date-fns/locale'
 import { circlePack } from './configuration-non-customizable'
 import { merge } from './tools'
 import {
-	BaseChartOptions,
-	AxisChartOptions,
-	ScatterChartOptions,
-	LollipopChartOptions,
-	LineChartOptions,
-	BarChartOptions,
-	StackedBarChartOptions,
-	BoxplotChartOptions,
+	AlluvialChartOptions,
 	AreaChartOptions,
-	PieChartOptions,
-	GaugeChartOptions,
-	DonutChartOptions,
+	AxisChartOptions,
+	BarChartOptions,
+	BaseChartOptions,
+	BoxplotChartOptions,
 	BubbleChartOptions,
 	BulletChartOptions,
+	ChoroplethChartOptions,
+	CirclePackChartOptions,
+	ComboChartOptions,
+	DonutChartOptions,
+	GaugeChartOptions,
 	HeatmapChartOptions,
 	HistogramChartOptions,
+	LollipopChartOptions,
+	LineChartOptions,
+	MeterChartOptions,
+	PieChartOptions,
+	ProportionalMeterChartOptions,
 	RadarChartOptions,
-	ComboChartOptions,
+	ScatterChartOptions,
+	StackedBarChartOptions,
+	ThematicChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	CirclePackChartOptions,
-	WorldCloudChartOptions,
-	AlluvialChartOptions,
-	MeterChartOptions,
-	ProportionalMeterChartOptions,
-	WordCloudChartTooltipOptions
+	WordCloudChartTooltipOptions,
+	WorldCloudChartOptions
 } from '@/interfaces/charts'
 import {
 	Alignments,
@@ -39,6 +41,7 @@ import {
 	LegendItemType,
 	TreeTypes,
 	DividerStatus,
+	Projection,
 	ChartTheme
 } from '@/interfaces/enums'
 import { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
@@ -220,6 +223,15 @@ const chart: BaseChartOptions = {
 		]
 	} as ToolbarOptions
 }
+
+/**
+ * Options common to any thematic chart
+ */
+const thematicChart: ThematicChartOptions = merge({}, chart, {
+	thematic: {
+		projection: Projection.geoNaturalEarth1,
+	},
+});
 
 /**
  * Options common to any chart with an axis
@@ -574,34 +586,44 @@ const heatmapChart: HeatmapChartOptions = merge({}, chart, {
 	}
 } as HeatmapChartOptions)
 
+const choroplethChart: ChoroplethChartOptions = merge({}, thematicChart, {
+	choropleth: {
+		colorLegend: {
+			type: 'linear',
+		},
+	},
+} as ChoroplethChartOptions);
+
 export const options = {
-	chart,
+	alluvialChart,
+	areaChart,
 	axisChart,
-	simpleBarChart,
-	groupedBarChart,
-	stackedBarChart,
 	boxplotChart,
 	bubbleChart,
 	bulletChart,
+	chart,
+	circlePackChart,
+	choroplethChart,
+	comboChart,
+	donutChart,
+	gaugeChart,
+	groupedBarChart,
+	heatmapChart,
 	histogramChart,
 	lineChart,
-	areaChart,
-	stackedAreaChart,
-	scatterChart,
 	lollipopChart,
-	pieChart,
-	donutChart,
 	meterChart,
+	pieChart,
 	proportionalMeterChart,
 	radarChart,
-	gaugeChart,
-	comboChart,
+	scatterChart,
+	simpleBarChart,
+	stackedAreaChart,
+	stackedBarChart,
+	thematicChart,
 	treeChart,
 	treemapChart,
-	circlePackChart,
 	wordCloudChart,
-	alluvialChart,
-	heatmapChart
 }
 
 export {

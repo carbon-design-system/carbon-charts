@@ -7,6 +7,7 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
+	ExperimentalChoroplethChart,
 	DonutChart,
 	GaugeChart,
 	HistogramChart,

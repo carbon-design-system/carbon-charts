@@ -1,8 +1,8 @@
-import { AxisChart } from '@/axis-chart'
+import { Chart } from '@/chart'
 import { options } from '@/configuration'
 import { getProperty, mergeDefaultChartOptions } from '@/tools'
-import { HeatmapModel } from '@/model/heatmap'
-import type { HeatmapChartOptions } from '@/interfaces/charts'
+import { ChoroplethModel } from '@/model/choropleth'
+import type { ChoroplethChartOptions } from '@/interfaces/charts'
 import type { ChartConfig } from '@/interfaces/model'
 import {
 	LayoutDirection,
@@ -11,25 +11,26 @@ import {
 	LayoutAlignItems
 } from '@/interfaces/enums'
 import type { Component } from '@/components/component'
-import { Heatmap } from '@/components/graphs/heatmap'
-import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Choropleth } from '@/components/graphs/choropleth'
 import { Modal } from '@/components/essentials/modal'
 import { LayoutComponent } from '@/components/layout/layout'
 import { ColorScaleLegend } from '@/components/essentials/color-scale-legend'
 import { Title } from '@/components/essentials/title'
-import { AxisChartsTooltip } from '@/components/essentials/tooltip-axis'
 import { Spacer } from '@/components/layout/spacer'
 import { Toolbar } from '@/components/axes/toolbar'
+import { Tooltip } from '@/components/essentials/tooltip'
 
-export class HeatmapChart extends AxisChart {
-	model = new HeatmapModel(this.services)
+export class ExperimentalChoroplethChart extends Chart {
+	model = new ChoroplethModel(this.services)
 
-	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<HeatmapChartOptions>) {
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ChoroplethChartOptions>) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(mergeDefaultChartOptions(options.heatmapChart, chartConfigs.options))
+		this.model.setOptions(
+			mergeDefaultChartOptions(options.choroplethChart, chartConfigs.options)
+		)
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)
@@ -37,13 +38,9 @@ export class HeatmapChart extends AxisChart {
 
 	// Custom getChartComponents - Implements getChartComponents
 	// Removes zoombar support and additional `features` that are not supported in heatmap
-	protected getAxisChartComponents(graphFrameComponents: any[], configs?: any) {
+	protected getChartComponents(graphFrameComponents: any[], configs?: any) {
 		const options = this.model.getOptions()
 		const toolbarEnabled = getProperty(options, 'toolbar', 'enabled')
-
-		this.services.cartesianScales.determineAxisDuality()
-		this.services.cartesianScales.findDomainAndRangeAxes() // need to do this before getMainXAxisPosition()
-		this.services.cartesianScales.determineOrientation()
 
 		const titleAvailable = !!this.model.getOptions().title
 		const titleComponent = {
@@ -82,8 +79,8 @@ export class HeatmapChart extends AxisChart {
 			id: 'legend',
 			components: [
 				new ColorScaleLegend(this.model, this.services, {
-					chartType: 'heatmap',
-				}),
+					chartType: 'choropleth'
+				})
 			],
 			growth: LayoutGrowth.PREFERRED,
 			renderType: RenderTypes.SVG
@@ -128,7 +125,7 @@ export class HeatmapChart extends AxisChart {
 			growth: LayoutGrowth.STRETCH
 		}
 
-		const topLevelLayoutComponents: any[] = []
+		const topLevelLayoutComponents = []
 		// header component is required for either title or toolbar
 		if (titleAvailable || toolbarEnabled) {
 			topLevelLayoutComponents.push(headerComponent)
@@ -146,7 +143,7 @@ export class HeatmapChart extends AxisChart {
 		topLevelLayoutComponents.push(fullFrameComponent)
 
 		return [
-			new AxisChartsTooltip(this.model, this.services),
+			new Tooltip(this.model, this.services),
 			new Modal(this.model, this.services),
 			new LayoutComponent(this.model, this.services, topLevelLayoutComponents, {
 				direction: LayoutDirection.COLUMN
@@ -156,12 +153,9 @@ export class HeatmapChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: Component[] = [
-			new TwoDimensionalAxes(this.model, this.services),
-			new Heatmap(this.model, this.services)
-		]
+		const graphFrameComponents: Component[] = [new Choropleth(this.model, this.services)]
 
-		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
 		return components
 	}
 }

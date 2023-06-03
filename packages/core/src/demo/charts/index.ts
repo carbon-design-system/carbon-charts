@@ -5,6 +5,7 @@ import * as barDemos from './bar'
 import * as boxplotDemos from './boxplot'
 import * as bubbleDemos from './bubble'
 import * as bulletDemos from './bullet'
+import * as choroplethDemos from './choropleth'
 import * as comboDemos from './combo'
 import * as donutDemos from './donut'
 import * as gaugeDemos from './gauge'
@@ -33,6 +34,7 @@ export {
 	boxplotDemos,
 	bubbleDemos,
 	bulletDemos,
+	choroplethDemos,
 	comboDemos,
 	donutDemos,
 	gaugeDemos,
@@ -1135,6 +1137,29 @@ const simpleChartDemos = [
 })
 
 const complexChartDemos = [
+	{
+		title: 'Choropleth (experimental)',
+		configs: {
+			excludeColorPaletteControl: true,
+			includeProjectionControl: true,
+		},
+		demos: [
+			{
+				options: choroplethDemos.options,
+				data: choroplethDemos.data,
+				chartType: chartTypes.ChoroplethChart,
+				mainDemo: true,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
+			},
+			{
+				options: choroplethDemos.missingDataOptions,
+				data: choroplethDemos.missingData,
+				chartType: chartTypes.ChoroplethChart,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
+			},
+		],
+		disableProps: true,
+	},
 	{
 		title: 'Alluvial',
 		demos: [

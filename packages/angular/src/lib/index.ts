@@ -9,6 +9,7 @@ export {
 	CirclePackChartComponent,
 	ComboChartComponent,
 	DonutChartComponent,
+	ExperimentalChoroplethChartComponent,
 	GaugeChartComponent,
 	GroupedBarChartComponent,
 	HeatmapChartComponent,

@@ -14,7 +14,7 @@ import { Events, ScaleTypes, ColorClassNameTypes } from '@/interfaces/enums'
 import { formatDateTillMilliSeconds } from '@/services/time-series'
 import type { ChartTabularData } from '@/interfaces/model'
 
-type StackKeysParams = {
+export type StackKeysParams = {
   bins?: any
   groups?: any
 	percentage?: any

@@ -4,19 +4,30 @@ import { legend } from '@/configuration'
 import { ColorLegendType, Events, RenderTypes } from '@/interfaces/enums'
 import { Legend } from './legend'
 import { DOMUtils } from '@/services/essentials/dom-utils'
-import type { HeatmapModel } from '@/model'
+import { getDomain } from '@/services/color-scale-utils'
+import type { ChartModel } from '@/model'
 
 export class ColorScaleLegend extends Legend {
 	type = 'color-legend'
 	renderType = RenderTypes.SVG
 
-	private gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
+	private gradient_id =	`gradient-id-${Math.floor(Math.random() * 99999999999)}`
+	private chartType: string
+
+	constructor(model: ChartModel, services: any, configs?: any) {
+		super(model, services, configs);
+		this.chartType = configs.chartType;
+	}
 
 	init() {
-		const eventsFragment = this.services.events
-
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener(Events.Axis.RENDER_COMPLETE, this.handleAxisCompleteEvent)
+		if (this.chartType === 'heatmap') {
+			const eventsFragment = this.services.events;
+			eventsFragment.addEventListener(
+				Events.Axis.RENDER_COMPLETE,
+				this.handleAxisCompleteEvent
+			);
+		}
 	}
 
 	// Position legend after axis have rendered
@@ -81,7 +92,12 @@ export class ColorScaleLegend extends Legend {
 
 		const customColors = getProperty(options, 'color', 'gradient', 'colors')
 
-		const colorScaleType = getProperty(options, 'heatmap', 'colorLegend', 'type')
+		const colorScaleType = getProperty(
+			options,
+			this.chartType,
+			'colorLegend',
+			'type'
+		)
 
 		let colorPairingOption = getProperty(options, 'color', 'pairing', 'option')
 
@@ -96,7 +112,7 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		const customColorsEnabled = !isEmpty(customColors)
-		const domain = (this.model as HeatmapModel).getValueDomain()
+		const domain = getDomain(this.model.getDisplayData())
 
 		const useDefaultBarWidth = !(width <= legend.color.barWidth)
 		const barWidth = useDefaultBarWidth ? legend.color.barWidth : width
@@ -184,7 +200,12 @@ export class ColorScaleLegend extends Legend {
 			.style('text-anchor', useDefaultBarWidth ? 'middle' : 'end')
 		axisElement
 			.select('g.tick:first-of-type text')
-			.style('text-anchor', useDefaultBarWidth ? 'middle' : 'start')
+			.style(
+				'text-anchor',
+				useDefaultBarWidth && this.chartType !== 'choropleth'
+					? 'middle'
+					: 'start'
+			)
 	}
 
 	// Renders gradient legend
@@ -248,8 +269,13 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	destroy() {
-		// Remove legend listeners
-		const eventsFragment = this.services.events
-		eventsFragment.removeEventListener(Events.Axis.RENDER_COMPLETE, this.handleAxisCompleteEvent)
+		if (this.chartType === 'heatmap') {
+			// Remove legend listeners
+			const eventsFragment = this.services.events;
+			eventsFragment.removeEventListener(
+				Events.Axis.RENDER_COMPLETE,
+				this.handleAxisCompleteEvent
+			)
+		}
 	}
 }

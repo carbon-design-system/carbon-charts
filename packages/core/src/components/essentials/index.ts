@@ -1,6 +1,7 @@
 export { AxisChartsTooltip } from './tooltip-axis'
 export { CanvasChartClip } from './canvas-chart-clip'
 export { ColorScaleLegend } from './color-scale-legend'
+export { GeoProjection } from './geo-projection'
 export { Highlight } from './highlights'
 export { Legend } from './legend'
 export { MeterTitle } from './title-meter'

@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.7.6",
+	"version": "1.8.0",
 	"description": "Carbon charting components",
 	"module": "./dist/index.mjs",
 	"main": "./dist/index.js",
@@ -92,6 +92,7 @@
 		"dom-to-image-more": "^3.1.6",
 		"lodash-es": "^4.17.21",
 		"resize-observer-polyfill": "^1.5.1",
+		"topojson-client": "3.1.0",
 		"tslib": "^2.5.3"
 	},
 	"peerDependencies": {
@@ -114,7 +115,8 @@
 		"@types/d3": "^7.4.0",
 		"@types/d3-cloud": "^1.2.5",
 		"@types/d3-sankey": "^0.12.1",
-		"@types/lodash-es": "4.17.7",
+		"@types/lodash-es": "^4.17.7",
+		"@types/topojson": "^3.2.3",
 		"@typescript-eslint/eslint-plugin": "^5.59.8",
 		"@typescript-eslint/parser": "^5.59.8",
 		"codesandbox": "^2.2.3",
@@ -132,7 +134,7 @@
 		"typescript": "^5.0.4",
 		"vite": "^4.3.9",
 		"vite-plugin-dts": "~2.3.0",
-		"vitest": "0.31.4"
+		"vitest": "^0.31.4"
 	},
 	"prettier": "../../prettier.config.cjs",
 	"publishConfig": {

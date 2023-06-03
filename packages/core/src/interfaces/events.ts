@@ -254,3 +254,13 @@ export enum Heatmap {
 	HEATMAP_MOUSEOUT = 'heatmap-mouseout',
 	HEATMAP_MOUSEMOVE = 'hetmap-mousemove'
 }
+
+/**
+ * enum of all choropleth related events
+ */
+export enum Choropleth {
+	CHOROPLETH_MOUSEOVER = 'choropleth-mouseover',
+	CHOROPLETH_CLICK = 'choropleth-click',
+	CHOROPLETH_MOUSEOUT = 'choropleth-mouseout',
+	CHOROPLETH_MOUSEMOVE = 'choropleth-mousemove',
+}

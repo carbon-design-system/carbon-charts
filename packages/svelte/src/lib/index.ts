@@ -6,6 +6,7 @@ import BarChartStacked from './BarChartStacked.svelte'
 import BoxplotChart from './BoxplotChart.svelte'
 import BubbleChart from './BubbleChart.svelte'
 import BulletChart from './BulletChart.svelte'
+import ExperimentalChoroplethChart from './ChoroplethChart.svelte'
 import CirclePackChart from './CirclePackChart.svelte'
 import ComboChart from './ComboChart.svelte'
 import DonutChart from './DonutChart.svelte'
@@ -32,6 +33,7 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
+	ExperimentalChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

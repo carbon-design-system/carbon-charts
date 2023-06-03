@@ -320,6 +320,61 @@ $monochrome-quantize-colors: (
 	)
 );
 
+$dark-monochrome-quantize-colors: (
+	'mono-1': (
+		'1': getColorValue(purple, 100),
+		'2': getColorValue(purple, 90),
+		'3': getColorValue(purple, 80),
+		'4': getColorValue(purple, 70),
+		'5': getColorValue(purple, 60),
+		'6': getColorValue(purple, 50),
+		'7': getColorValue(purple, 40),
+		'8': getColorValue(purple, 30),
+		'9': getColorValue(purple, 20),
+		'10': getColorValue(purple, 10),
+		'11': #ffffff,
+	),
+	'mono-2': (
+		'1': getColorValue(blue, 100),
+		'2': getColorValue(blue, 90),
+		'3': getColorValue(blue, 80),
+		'4': getColorValue(blue, 70),
+		'5': getColorValue(blue, 60),
+		'6': getColorValue(blue, 50),
+		'7': getColorValue(blue, 40),
+		'8': getColorValue(blue, 30),
+		'9': getColorValue(blue, 20),
+		'10': getColorValue(blue, 10),
+		'11': #ffffff,
+	),
+	'mono-3': (
+		'1': getColorValue(cyan, 100),
+		'2': getColorValue(cyan, 90),
+		'3': getColorValue(cyan, 80),
+		'4': getColorValue(cyan, 70),
+		'5': getColorValue(cyan, 60),
+		'6': getColorValue(cyan, 50),
+		'7': getColorValue(cyan, 40),
+		'8': getColorValue(cyan, 30),
+		'9': getColorValue(cyan, 20),
+		'10': getColorValue(cyan, 10),
+		'11': #ffffff,
+	),
+	'mono-4': (
+		'1': getColorValue(teal, 100),
+		'2': getColorValue(teal, 90),
+		'3': getColorValue(teal, 80),
+		'4': getColorValue(teal, 70),
+		'5': getColorValue(teal, 60),
+		'6': getColorValue(teal, 50),
+		'7': getColorValue(teal, 40),
+		'8': getColorValue(teal, 30),
+		'9': getColorValue(teal, 20),
+		'10': getColorValue(teal, 10),
+		'11': #ffffff,
+	),
+);
+
 $divergent-quantize-colors: (
 	'diverge-1': (
 		'1': getColorValue(red, 80),
@@ -359,4 +414,45 @@ $divergent-quantize-colors: (
 		'16': getColorValue(teal, 70),
 		'17': getColorValue(teal, 80)
 	)
+);
+
+$dark-divergent-quantize-colors: (
+	'diverge-1': (
+		'1': getColorValue(red, 10),
+		'2': getColorValue(red, 20),
+		'3': getColorValue(red, 30),
+		'4': getColorValue(red, 40),
+		'5': getColorValue(red, 50),
+		'6': getColorValue(red, 60),
+		'7': getColorValue(red, 70),
+		'8': getColorValue(red, 80),
+		'9': #ffffff,
+		'10': getColorValue(cyan, 80),
+		'11': getColorValue(cyan, 70),
+		'12': getColorValue(cyan, 60),
+		'13': getColorValue(cyan, 50),
+		'14': getColorValue(cyan, 40),
+		'15': getColorValue(cyan, 30),
+		'16': getColorValue(cyan, 20),
+		'17': getColorValue(cyan, 10),
+	),
+	'diverge-2': (
+		'1': getColorValue(purple, 10),
+		'2': getColorValue(purple, 20),
+		'3': getColorValue(purple, 30),
+		'4': getColorValue(purple, 40),
+		'5': getColorValue(purple, 50),
+		'6': getColorValue(purple, 60),
+		'7': getColorValue(purple, 70),
+		'8': getColorValue(purple, 80),
+		'9': #ffffff,
+		'10': getColorValue(teal, 80),
+		'11': getColorValue(teal, 70),
+		'12': getColorValue(teal, 60),
+		'13': getColorValue(teal, 50),
+		'14': getColorValue(teal, 40),
+		'15': getColorValue(teal, 30),
+		'16': getColorValue(teal, 20),
+		'17': getColorValue(teal, 10),
+	),
 );

@@ -25,7 +25,7 @@ import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'
 import { ThresholdOptions } from '@/interfaces/components'
 
-type ScaleFunction = ScaleTime<number, number, never> | ScaleBand<string> | ScaleLinear<number, number, never>
+export type ScaleFunction = ScaleTime<number, number, never> | ScaleBand<string> | ScaleLinear<number, number, never>
 
 export class CartesianScales extends Service {
 	protected scaleTypes = {

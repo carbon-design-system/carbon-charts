@@ -62,7 +62,12 @@ export const createChartSandbox = (chartTemplate: any) => {
 
 export const createVanillaChartApp = (demo: any) => {
 	const chartData = JSON.stringify(demo.data, null, '\t')
-	const chartOptions = JSON.stringify(demo.options, null, '\t')
+	const isGeoDemo = demo.options.geoData
+	const _demoOptions = { ...demo.options }
+	if (isGeoDemo) {
+		delete _demoOptions.geoData
+	}
+	const chartOptions = JSON.stringify(_demoOptions, null, isGeoDemo ? '\t\t\t' : '\t')
 	const chartComponent = demo.chartType.vanilla
 
 	const indexHtml = `	<html>
@@ -88,11 +93,33 @@ export const createVanillaChartApp = (demo: any) => {
 
 	const indexJs = `
 import { ${chartComponent} } from '@carbon/charts'
+${isGeoDemo ? 'import * as d3 from "d3"' : ''}
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
 
 const data = ${chartData}
 
+${
+	isGeoDemo
+		? `
+/* this data is only used for demo purposes, and is not an accurate representation of the world map */
+d3.json(
+  'https://raw.githubusercontent.com/Akshat55/carbon-charts/c565fc9ed1364465b641e7e3f2149f0631f0fd0b/packages/core/demo/data/topojson-110-data.json',
+  function (error, topoData) {
+		if (error) throw error
+
+		const options = { "geoData": topoData, ${chartOptions.slice(1, -1)} }
+
+		// Grab chart holder HTML element and initialize the chart
+		const chartHolder = document.getElementById("app")
+		new ${chartComponent}(chartHolder, {
+			data,
+			options
+		})
+  }
+)
+`
+		: `
 const options = ${chartOptions}
 
 // Grab chart holder HTML element and initialize the chart
@@ -100,7 +127,8 @@ const chartHolder = document.getElementById("app")
 new ${chartComponent}(chartHolder, {
 	data,
 	options
-})
+})`
+}
 `
 
 	const packageJson = JSON.stringify(
@@ -109,7 +137,7 @@ new ${chartComponent}(chartHolder, {
 			version: '0.0.0',
 			dependencies: {
 				'@carbon/charts': libraryVersion,
-				'@carbon/styles': '^1.28.0',
+				'@carbon/styles': '^1.30.0',
 				d3: D3VERSION
 			}
 		},
@@ -203,7 +231,7 @@ export const createAngularChartApp = (demo: any) => {
 				'@angular/platform-browser': '^15.2.8',
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-angular': libraryVersion,
-				'@carbon/styles': '^1.28.0',
+				'@carbon/styles': '^1.30.0',
 				d3: D3VERSION,
 				rxjs: '~7.8.1',
 				tslib: '^2.5.0',
@@ -358,7 +386,7 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-react': libraryVersion,
-				'@carbon/styles': '^1.28.0',
+				'@carbon/styles': '^1.30.0',
 				d3: D3VERSION,
 				react: '^18.2.0',
 				'react-dom': '^18.2.0',
@@ -492,16 +520,16 @@ import '@carbon/charts/styles.css'
 			devDependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-svelte': libraryVersion,
-				'@carbon/styles': '^1.28.0',
-				'@sveltejs/adapter-auto': '^2.0.1',
-				'@sveltejs/kit': '^1.15.9',
+				'@carbon/styles': '^1.30.0',
+				'@sveltejs/adapter-auto': '^2.1.0',
+				'@sveltejs/kit': '^1.20.1',
 				d3: D3VERSION,
 				// sass: '^1.60.0',
-				svelte: '^3.58.0',
-				'svelte-check': '^3.2.0',
-				tslib: '^2.5.0',
+				svelte: '^3.59.1',
+				'svelte-check': '^3.4.3',
+				tslib: '^2.5.3',
 				typescript: '^5.0.4',
-				vite: '^4.3.3'
+				vite: '^4.3.9'
 			},
 			engines: {
 				node: '>=16.12.0'
@@ -620,7 +648,7 @@ new Vue({
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
-				'@carbon/styles': '^1.28.0',
+				'@carbon/styles': '^1.30.0',
 				vue: '^2.7.14'
 			}
 		},

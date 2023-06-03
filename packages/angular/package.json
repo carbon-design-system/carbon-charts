@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.7.6",
+  "version": "1.8.0",
   "description": "Carbon charting components for Angular",
   "exports": {
     "./styles.min.css": "./dist/styles.min.css",
@@ -9,7 +9,6 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "carbon-telemetry collect --install",
-    "file:license": "cp ../../LICENSE.md dist",
     "file:md": "cp *.md dist",
     "file:styles": "cp ../core/dist/styles.* dist",
     "postbundle": "concurrently \"yarn:file:*\"",

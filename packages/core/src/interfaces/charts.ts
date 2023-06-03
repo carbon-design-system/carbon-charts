@@ -1,13 +1,14 @@
 import type {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections,
 	Alignments,
+	ArrowDirections,
+	ChartTheme,
 	ChartTypes,
-	TreeTypes,
-	DividerStatus,
 	ColorLegendType,
-	ChartTheme
+	DividerStatus,
+	GaugeTypes,
+	Projection,
+	Statuses,
+	TreeTypes
 } from './enums'
 import type {
 	BarOptions,
@@ -540,6 +541,35 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		divider?: {
 			state?: DividerStatus
 		}
+		/**
+		 * customize color legend
+		 * enabled by default on select charts
+		 */
+		colorLegend?: {
+			/**
+			 * Text to display beside or on top of the legend
+			 * Position is determined by text length
+			 */
+			title?: string
+			type: ColorLegendType
+		}
+	}
+}
+
+/**
+ * Options common to any thematic chart
+ */
+export interface ThematicChartOptions extends BaseChartOptions {
+	thematic: {
+		projection: Projection
+	}
+}
+
+/**
+ * Options common to any thematic chart
+ */
+export interface ChoroplethChartOptions extends ThematicChartOptions {
+	choropleth: {
 		/**
 		 * customize color legend
 		 * enabled by default on select charts

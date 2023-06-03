@@ -52,6 +52,51 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 	container.querySelector('#charting-controls')?.appendChild(div)
 }
 
+const generateProjectionPickerHTML = (container: HTMLDivElement, chart: any) => {
+	const projections = [
+		'geoEqualEarth',
+		'geoAlbers',
+		'geoConicEqualArea',
+		'geoConicEquidistant',
+		'geoEquirectangular',
+		'geoMercator',
+		'geoNaturalEarth1'
+	]
+
+	const chartOptions = chart.model.getOptions()
+
+	const div = document.createElement('div')
+	div.id = 'projection-picker'
+	div.innerHTML = `
+<div class="cds--form-item">
+	<div class="cds--select">
+		<label for="projection-select" class="cds--label">Projections</label>
+		<div class="cds--select-input__wrapper">
+			<select id="projection-select" class="cds--select-input">
+				<option class="cds--select-option" value="" disabled selected hidden>
+					Choose an option
+				</option>
+				${projections
+					.map((projection) => {
+						return `<option class="cds--select-option" value="${projection}">${projection}</option>`
+					})
+					.join('')}
+
+			</select>
+			<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+		</div>
+	</div>
+</div>`
+
+	div.querySelector('#projection-select').addEventListener('change', (e: any) => {
+		const { value } = e.target
+		chartOptions.thematic.projection = value
+		chart.model.setOptions(chartOptions)
+	})
+
+	container.querySelector('#charting-controls').appendChild(div)
+}
+
 const generateColorPalettePickerHTML = (
 	container: HTMLDivElement,
 	chart: any,
@@ -151,6 +196,10 @@ export const addControls = (
 
 	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
 		generateColorPalettePickerHTML(container, chart, configs)
+	}
+
+	if (demoGroup?.configs?.includeProjectionControl) {
+		generateProjectionPickerHTML(container, chart)
 	}
 
 	addRadioButtonEventListeners(container, chart)

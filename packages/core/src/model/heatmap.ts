@@ -1,7 +1,9 @@
 import { extent, scaleQuantize, scaleLinear } from 'd3'
 import { clone, getProperty, isEmpty } from '@/tools'
 import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
+import { getColorScale } from '@/services'
 import { ChartModelCartesian } from './cartesian-charts'
+
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
@@ -297,5 +299,7 @@ export class HeatmapModel extends ChartModelCartesian {
 		this._colorScale = scaleQuantize()
 			.domain(domain as [number, number])
 			.range(colorPairing)
+		const colorOptions = getProperty(this.getOptions(), 'color')
+		this._colorScale = getColorScale(this.getDisplayData(), colorOptions)
 	}
 }

@@ -1,5 +1,4 @@
-// Services
-
+export { getColorScale, getDomain } from './color-scale-utils'
 export {
 	type Dimensions,
 	DOMUtils,
@@ -10,7 +9,6 @@ export {
 	type setupTransitionConfigs,
 	Transitions
 } from './essentials'
-
 export {
 	type Angle,
 	degToRad,
@@ -21,12 +19,10 @@ export {
 	radialLabelPlacement,
 	radToDeg
 } from './angle-utils'
-
 export { CanvasZoom } from './canvas-zoom'
 export { Curves } from './curves'
-export { CartesianScales } from './scales-cartesian'
+export { CartesianScales, type ScaleFunction } from './scales-cartesian'
 export { Service } from './service'
-
 export {
 	computeTimeIntervalName,
 	formatDateTillMilliSeconds,
@@ -35,5 +31,4 @@ export {
 	isTickPrimary,
 	TIME_INTERVALS
 } from './time-series'
-
 export { Zoom } from './zoom'
