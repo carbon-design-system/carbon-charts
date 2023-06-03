@@ -45,7 +45,6 @@ introStories.add('Welcome', () => {
 
 // Loop through all demo groups
 storybookDemoGroups.forEach((demoGroup) => {
-
 	// Create story group for each demo group
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
@@ -104,10 +103,14 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div class="marginTop-45" id="chart-demo">
 </div>
 
-<h3 class="marginTop-45">Code Sample</h3>
+${
+	demo.codesandbox.vanilla
+		? `<h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
 	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on Codesandbox">
-</a>
+</a>`
+		: ''
+}
 
 <h3 class="marginTop-45">Other versions</h3>
 <p style="opacity: 0.75;">(currently on <strong>vanilla</strong>)</p>

@@ -1,5 +1,9 @@
 import { worldTopoJson } from './topojson-110';
 
+/* The data used here is only used for demo purposes,
+ * and is not an accurate representation of the world map
+ */
+
 export const data = [
 	{
 		name: 'Fiji',

@@ -24,7 +24,12 @@ export const createChartSandbox = (chartTemplate: any) => {
 
 export const createVanillaChartApp = (demo: any) => {
 	const chartData = JSON.stringify(demo.data, null, '\t');
-	const chartOptions = JSON.stringify(demo.options, null, '\t');
+
+	const _demoOptions = { ...demo.option };
+	if (_demoOptions.geoData) {
+		delete _demoOptions.geoData;
+	}
+	const chartOptions = JSON.stringify(_demoOptions, null, '\t');
 	const chartComponent = demo.chartType.vanilla;
 
 	const indexHtml = `<html>

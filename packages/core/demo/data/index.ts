@@ -1119,11 +1119,13 @@ const complexChartDemos = [
 				data: choroplethDemos.data,
 				chartType: chartTypes.ChoroplethChart,
 				mainDemo: true,
+				// includeCodesandbox: false,
 			},
 			{
 				options: choroplethDemos.missingDataOptions,
 				data: choroplethDemos.missingData,
 				chartType: chartTypes.ChoroplethChart,
+				// includeCodesandbox: false,
 			},
 		],
 		disableProps: true,
@@ -1304,21 +1306,26 @@ const mapDemoGroups = (demoGroups) =>
 				// if there isnt a height set in the chart options, use 400
 				demo.options.height = demo.options.height ?? '400px';
 
-				if (!demo.codesandbox) {
+				if (demo.includeCodesandbox !== false) {
+					if (!demo.codesandbox) {
+						demo.codesandbox = {};
+					}
+
+					demo.codesandbox.react = createChartSandbox(
+						createReactChartApp(demo)
+					);
+					demo.codesandbox.vue = createChartSandbox(
+						createVueChartApp(demo)
+					);
+					demo.codesandbox.vanilla = createChartSandbox(
+						createVanillaChartApp(demo)
+					);
+					demo.codesandbox.svelte = createChartSandbox(
+						createSvelteChartApp(demo)
+					);
+				} else {
 					demo.codesandbox = {};
 				}
-				demo.codesandbox.react = createChartSandbox(
-					createReactChartApp(demo)
-				);
-				demo.codesandbox.vue = createChartSandbox(
-					createVueChartApp(demo)
-				);
-				demo.codesandbox.vanilla = createChartSandbox(
-					createVanillaChartApp(demo)
-				);
-				demo.codesandbox.svelte = createChartSandbox(
-					createSvelteChartApp(demo)
-				);
 
 				if (!demo.code) {
 					demo.code = {};
