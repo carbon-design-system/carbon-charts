@@ -104,7 +104,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 					</div>
 
 					{demo.codesandbox.react && (
-						<>
+						<div>
 							<h3 className="marginTop-30">Code sample</h3>
 							<a href={demo.codesandbox.react} target="_blank">
 								<img
@@ -113,7 +113,7 @@ storybookDemoGroups.forEach((demoGroup) => {
 									alt="Edit on Codesandbox"
 								/>
 							</a>
-						</>
+						</div>
 					)}
 
 					<h3 className="marginTop-45">Other versions</h3>
