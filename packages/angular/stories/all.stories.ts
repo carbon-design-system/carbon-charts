@@ -26,7 +26,6 @@ const getTemplate = (demo) => `
 			</${demo.chartType.angular}>
 		</div>
 
-
 		<ng-container *ngIf="codeFiles.length">
 			<h3 class="marginTop-30">Code sample</h3>
 

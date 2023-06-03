@@ -1119,13 +1119,13 @@ const complexChartDemos = [
 				data: choroplethDemos.data,
 				chartType: chartTypes.ChoroplethChart,
 				mainDemo: true,
-				// includeCodesandbox: false,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
 			},
 			{
 				options: choroplethDemos.missingDataOptions,
 				data: choroplethDemos.missingData,
 				chartType: chartTypes.ChoroplethChart,
-				// includeCodesandbox: false,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
 			},
 		],
 		disableProps: true,
@@ -1306,31 +1306,56 @@ const mapDemoGroups = (demoGroups) =>
 				// if there isnt a height set in the chart options, use 400
 				demo.options.height = demo.options.height ?? '400px';
 
-				if (demo.includeCodesandbox !== false) {
-					if (!demo.codesandbox) {
-						demo.codesandbox = {};
-					}
+				if (!demo.codesandbox) {
+					demo.codesandbox = {};
+				}
 
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('react')
+				) {
 					demo.codesandbox.react = createChartSandbox(
 						createReactChartApp(demo)
 					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('vue')
+				) {
 					demo.codesandbox.vue = createChartSandbox(
 						createVueChartApp(demo)
 					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('vanilla')
+				) {
 					demo.codesandbox.vanilla = createChartSandbox(
 						createVanillaChartApp(demo)
 					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('svelte')
+				) {
 					demo.codesandbox.svelte = createChartSandbox(
 						createSvelteChartApp(demo)
 					);
-				} else {
-					demo.codesandbox = {};
 				}
 
 				if (!demo.code) {
 					demo.code = {};
 				}
-				demo.code.angular = createAngularChartApp(demo);
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('angular')
+				) {
+					demo.code.angular = createAngularChartApp(demo);
+				}
 
 				return demo;
 			});
