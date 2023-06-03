@@ -60,10 +60,14 @@ storybookDemoGroups.forEach(demoGroup => {
 				data: {
 					// Only using object knob when chart is NOT choropleth, otherwise props will show even when 'disabled'
 					// This approach is used to bypass storybook bug
-					default: demoGroup.disableProps ? demo.data : object('Data', demo.data),
+					default: demoGroup.disableProps
+						? demo.data
+						: object('Data', demo.data),
 				},
 				options: {
-					default: demoGroup.disableProps ? demo.options : object('Options', demo.options),
+					default: demoGroup.disableProps
+						? demo.options
+						: object('Options', demo.options),
 				},
 			},
 			template: `
@@ -85,10 +89,14 @@ storybookDemoGroups.forEach(demoGroup => {
 						<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
 					</div>
 
-					<h3 class="marginTop-30">Code sample</h3>
+					${
+						demo.codesandbox.vue
+							? `<h3 class="marginTop-30">Code sample</h3>
 					<a href="${demo.codesandbox.vue}" target="_blank">
 						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
-					</a>
+					</a>`
+							: ''
+					}
 				</div>
 			`,
 		}));
