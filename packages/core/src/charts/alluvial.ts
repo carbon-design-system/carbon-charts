@@ -3,7 +3,7 @@ import { Chart } from '../chart';
 import { AlluvialChartModel } from '../model/alluvial';
 import * as Configuration from '../configuration';
 import { ChartConfig, AlluvialChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 // Components
 import {

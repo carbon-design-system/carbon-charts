@@ -1,4 +1,4 @@
-import { Tools } from './tools';
+import * as Tools from './tools';
 
 describe('Tools.getProperty', () => {
 	it('works with a simple nested object containing a number > 0', () => {

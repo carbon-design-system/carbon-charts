@@ -7,7 +7,7 @@ import {
 	RenderTypes,
 	Roles,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import * as Configuration from '../../configuration';
 
 // D3 Imports

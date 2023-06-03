@@ -1,4 +1,4 @@
-const carbonPrefix = 'bx';
+const carbonPrefix = 'cds';
 const chartsPrefix = 'cc';
 
 export const hasChartBeenInitialized = (chartHolder: HTMLElement) =>

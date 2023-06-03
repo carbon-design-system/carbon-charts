@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from './bar';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,
@@ -341,7 +341,7 @@ export class GroupedBar extends Bar {
 			}
 		}
 		return step;
-	} 
+	}
 
 	protected getTotalGroupPadding() {
 		const activeData = this.model.getGroupedData(this.configs.groups);

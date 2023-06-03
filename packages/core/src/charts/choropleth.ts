@@ -2,7 +2,7 @@
 import { Chart } from '../chart';
 import { ChoroplethModel } from '../model/choropleth';
 import * as Configuration from '../configuration';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 
 import {
 	ChoroplethChartOptions,

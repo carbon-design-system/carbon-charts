@@ -1,7 +1,7 @@
 // Internal Imports
 import { Title } from './title';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { RenderTypes, Statuses } from './../../interfaces/enums';
 import * as Configuration from '../../configuration';
 
@@ -171,7 +171,7 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width
 			? containerBounds.width
-			: this.parent.node().getAttribute('width');
+			: <string | number>this.parent.node().getAttribute('width');
 
 		const title = svg
 			.selectAll('text.proportional-meter-total')
@@ -185,7 +185,7 @@ export class MeterTitle extends Title {
 			// Position the total text -24 pixels to add spacing between text and status icon (if status exists)
 			.attr(
 				'x',
-				this.model.getStatus()
+				this.model.getStatus() && typeof containerWidth !== 'string'
 					? containerWidth - Configuration.meter.total.paddingRight
 					: containerWidth
 			)

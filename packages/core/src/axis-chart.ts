@@ -26,7 +26,7 @@ import {
 	Toolbar,
 	ZoomBar,
 } from './components';
-import { Tools } from './tools';
+import * as Tools from './tools';
 
 import { CartesianScales, Curves, Zoom } from './services';
 

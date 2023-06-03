@@ -1,7 +1,7 @@
 // Internal Imports
 import { Pie } from './pie';
 import { DOMUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { RenderTypes } from '../../interfaces';
 
 // D3 Imports

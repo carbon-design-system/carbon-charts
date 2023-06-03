@@ -69,7 +69,10 @@
 			&.bold {
 				// TODO-V11
 				// font-weight: font-weight('semibold');
-				font-weight: 600;
+
+				div.label p {
+					font-weight: 600;
+				}
 			}
 
 			p {

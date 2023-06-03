@@ -1,8 +1,8 @@
 // Internal Imports
 import { AxisFlavor, ScaleTypes } from '../interfaces';
 import { ChartModelCartesian } from './cartesian-charts';
-import { Tools } from '../tools';
 import { getColorScale } from '../services';
+import * as Tools from '../tools';
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {

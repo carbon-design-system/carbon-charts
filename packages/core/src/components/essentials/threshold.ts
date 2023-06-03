@@ -1,5 +1,5 @@
 import { Component } from '../component';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { DOMUtils } from '../../services';
 import { ChartModel } from '../../model/model';
 import {
@@ -319,6 +319,8 @@ export class Threshold extends Component {
 				PLACEMENTS.BOTTOM,
 			],
 			() => ({
+				top: undefined, // other package lists this as non-optional
+				left: undefined, // ditto
 				width: holder.offsetWidth,
 				height: holder.offsetHeight,
 			})

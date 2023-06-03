@@ -2,13 +2,13 @@
 import * as Configuration from '../configuration';
 import { histogram as histogramConfigs } from '../configuration-non-customizable';
 
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Events, ScaleTypes, ColorClassNameTypes } from '../interfaces';
 
 // D3
 import { scaleOrdinal } from 'd3-scale';
 import { stack, stackOffsetDiverging } from 'd3-shape';
-import { histogram } from 'd3-array';
+import { bin } from 'd3-array';
 import { formatDateTillMilliSeconds } from '../services/time-series';
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -205,7 +205,7 @@ export class ChartModel {
 		const areBinsDefined = Array.isArray(axisBins);
 
 		// Get Histogram bins
-		const bins = histogram()
+		const bins = bin()
 			.value((d) => d[domainIdentifier])
 			.thresholds(axisBins)(data);
 
@@ -746,7 +746,20 @@ export class ChartModel {
 			csvString += i < data.length ? csvData + '\n' : csvData;
 		});
 
-		this.services.files.downloadCSV(csvString, 'myChart.csv');
+		const options = this.getOptions();
+
+		let fileName = 'myChart';
+		const customFilename = Tools.getProperty(
+			options,
+			'fileDownload',
+			'fileName'
+		);
+
+		if (typeof customFilename === 'function') {
+			fileName = customFilename('csv');
+		}
+
+		this.services.files.downloadCSV(csvString, `${fileName}.csv`);
 	}
 
 	protected getTabularData(data) {

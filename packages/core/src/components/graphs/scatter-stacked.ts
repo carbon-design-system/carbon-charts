@@ -1,7 +1,7 @@
 // Internal Imports
 import { Scatter } from './scatter';
 import { RenderTypes, Roles } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 export class StackedScatter extends Scatter {
 	type = 'scatter-stacked';

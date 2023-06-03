@@ -1,13 +1,16 @@
-dist
-**/demo/bundle
-**/demo/dist
-node_modules
-.DS_Store
+# Global
+**/node_modules/
+**/*.log
+
+# Root-level of monorepo
 .vscode/
-.idea/
-*.log
-storybook-dist
-package-lock.json
-.cache/
+.yarn/cache
 pages/
-storybook-static/
+yarn-offline-mirror-cache/
+
+# Package-level
+**/.angular/
+**/.DS_Store
+**/.svelte-kit/
+**/dist/
+**/demo/bundle/

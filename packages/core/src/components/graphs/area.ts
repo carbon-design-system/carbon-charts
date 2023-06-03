@@ -8,7 +8,7 @@ import {
 	RenderTypes,
 } from '../../interfaces';
 import { GradientUtils } from '../../services';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 // D3 Imports
 import { area } from 'd3-shape';

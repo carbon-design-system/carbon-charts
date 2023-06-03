@@ -1,6 +1,6 @@
 import { Tooltip } from './tooltip';
 import { ColorClassNameTypes } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 
 import { get } from 'lodash-es';
 
@@ -11,7 +11,7 @@ export class AxisChartsTooltip extends Tooltip {
 		}
 
 		const data = e.detail.data;
-		if (!data.length || !data[0]) {
+		if (!Array.isArray(data) || !data.length || !data[0]) {
 			return [];
 		}
 

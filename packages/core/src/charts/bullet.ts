@@ -3,7 +3,7 @@ import { AxisChart } from '../axis-chart';
 import { BulletChartModel } from '../model/bullet';
 import * as Configuration from '../configuration';
 import { ChartConfig, BulletChartOptions } from '../interfaces/index';
-import { Tools } from '../tools';
+import * as Tools from '../tools';
 import { Skeletons } from '../interfaces/enums';
 
 // Components

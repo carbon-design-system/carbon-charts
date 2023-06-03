@@ -7,7 +7,7 @@ import {
 	Roles,
 	TruncationTypes,
 } from '../../interfaces';
-import { Tools } from '../../tools';
+import * as Tools from '../../tools';
 import { ChartModel } from '../../model/model';
 import { DOMUtils } from '../../services';
 import {
@@ -613,7 +613,7 @@ export class Axis extends Component {
 				container
 					.selectAll('g.ticks g.tick text')
 					.attr('transform', `rotate(-45)`)
-					.style(
+					.attr(
 						'text-anchor',
 						axisPosition === AxisPositions.TOP ? 'start' : 'end'
 					);
@@ -621,7 +621,7 @@ export class Axis extends Component {
 				container
 					.selectAll('g.ticks g.tick text')
 					.attr('transform', null)
-					.style('text-anchor', null);
+					.attr('text-anchor', null);
 			}
 		}
 

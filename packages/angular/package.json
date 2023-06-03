@@ -1,103 +1,103 @@
 {
-	"name": "@carbon/charts-angular",
-	"version": "1.6.4",
-	"description": "Carbon charting components for Angular",
-	"main": "index.js",
-	"scripts": {
-		"build": "bash build.sh",
-		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
-		"clean": "rm -rf dist demo/bundle",
-		"start": "yarn storybook"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
-	},
-	"license": "Apache-2.0",
-	"author": "IBM",
-	"keywords": [
-		"carbon",
-		"charts",
-		"angular",
-		"dataviz",
-		"data-visualization",
-		"visualizations",
-		"d3",
-		"svg",
-		"component",
-		"components",
-		"css",
-		"html",
-		"ibm",
-		"typescript",
-		"javascript",
-		"js",
-		"library",
-		"pattern",
-		"patterns",
-		"sass",
-		"scss"
-	],
-	"dependencies": {
-		"@carbon/charts": "^1.6.4",
-		"@carbon/telemetry": "0.1.0"
-	},
-	"peerDependencies": {
-		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
-		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
-		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
-		"rxjs": "^6.0.0 || ^7.0.0",
-		"zone.js": "^0.8.29 || ^0.9.0 || ^0.10.0 || ^0.11.0"
-	},
-	"devDependencies": {
-		"@angular-devkit/build-angular": "0.13.9",
-		"@angular-devkit/build-ng-packagr": "0.13.9",
-		"@angular-devkit/core": "8.2.2",
-		"@angular/animations": "7.2.15",
-		"@angular/cli": "~7.3.9",
-		"@angular/common": "7.2.15",
-		"@angular/compiler": "7.2.15",
-		"@angular/compiler-cli": "7.2.15",
-		"@angular/core": "7.2.15",
-		"@angular/forms": "7.2.15",
-		"@angular/platform-browser": "7.2.15",
-		"@angular/platform-browser-dynamic": "7.2.15",
-		"@babel/core": "7.3.4",
-		"@carbon/icons-angular": "11.2.1",
-		"@storybook/addon-knobs": "5.3.12",
-		"@storybook/addon-options": "5.3.12",
-		"@storybook/angular": "5.3.12",
-		"@types/node": "12.11.7",
-		"babel-loader": "8.0.5",
-		"core-js": "3.0.0",
-		"karma-webpack": "4.0.2",
-		"ng-packagr": "5.7.1",
-		"rxjs": "6.3.3",
-		"sass-loader": "8.0.0",
-		"tsickle": "0.37.1",
-		"tslib": "1.10.0",
-		"tslint": "5.20.1",
-		"typescript": "3.2.2",
-		"zone.js": "0.8.29"
-	},
-	"publishConfig": {
-		"directory": "dist",
-		"access": "public"
-	},
-	"maintainers": [
-		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
-		}
-	],
-	"contributors": [
-		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
-		}
-	]
+  "name": "@carbon/charts-angular",
+  "version": "1.7.6",
+  "description": "Carbon charting components for Angular",
+  "main": "index.js",
+  "scripts": {
+    "build": "bash build.sh",
+    "storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
+    "demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
+    "clean": "rm -rf dist demo/bundle",
+    "start": "yarn storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carbon-design-system/carbon-charts.git",
+    "homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
+  },
+  "license": "Apache-2.0",
+  "author": "IBM",
+  "keywords": [
+    "carbon",
+    "charts",
+    "angular",
+    "dataviz",
+    "data-visualization",
+    "visualizations",
+    "d3",
+    "svg",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "typescript",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss"
+  ],
+  "dependencies": {
+    "@carbon/charts": "^1.7.6",
+    "@carbon/telemetry": "0.1.0"
+  },
+  "peerDependencies": {
+    "@angular/common": ">= 6.0.0 && < 16.0.0",
+    "@angular/compiler": ">= 6.0.0 && < 16.0.0",
+    "@angular/core": ">= 6.0.0 && < 16.0.0",
+    "rxjs": ">= 6.0.0 && < 7.9.0",
+    "zone.js": ">= 0.8.29 && < 0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "0.13.9",
+    "@angular-devkit/build-ng-packagr": "0.13.9",
+    "@angular-devkit/core": "8.2.2",
+    "@angular/animations": "7.2.15",
+    "@angular/cli": "~7.3.9",
+    "@angular/common": "7.2.15",
+    "@angular/compiler": "7.2.15",
+    "@angular/compiler-cli": "7.2.15",
+    "@angular/core": "7.2.15",
+    "@angular/forms": "7.2.15",
+    "@angular/platform-browser": "7.2.15",
+    "@angular/platform-browser-dynamic": "7.2.15",
+    "@babel/core": "7.3.4",
+    "@carbon/icons-angular": "11.2.1",
+    "@storybook/addon-knobs": "5.3.12",
+    "@storybook/addon-options": "5.3.12",
+    "@storybook/angular": "5.3.12",
+    "@types/node": "^12.0.0",
+    "babel-loader": "8.0.5",
+    "core-js": "3.0.0",
+    "karma-webpack": "4.0.2",
+    "ng-packagr": "5.7.1",
+    "rxjs": "6.3.3",
+    "sass-loader": "8.0.0",
+    "tsickle": "0.37.1",
+    "tslib": "1.10.0",
+    "tslint": "5.20.1",
+    "typescript": "3.2.2",
+    "zone.js": "0.8.29"
+  },
+  "publishConfig": {
+    "directory": "dist",
+    "access": "public"
+  },
+  "maintainers": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ]
 }
