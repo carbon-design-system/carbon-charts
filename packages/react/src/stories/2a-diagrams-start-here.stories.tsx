@@ -17,7 +17,6 @@ const nodeWidth = 200
 const ShapeNodeSize = 64
 
 const stories = storiesOf('Diagrams', module)
-// stories.addDecorator((story) => <div className="container theme--white">{story()}</div>)
 
 stories.add(
 	'Start here',
@@ -87,22 +86,18 @@ stories.add(
 				<h3 {...h3Style}>3. Layouts using external dependencies</h3>
 
 				<p>
-					Here&apos;s an example using <b>elkjs</b> in react
+					Here&apos;s an example using <b>elkjs</b> in React
 				</p>
 
 				<iframe
 					src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
 					style={{
 						width: '100%',
-						height: '500px',
-						marginTop: '2em',
+						height: '47rem',
+						marginTop: '1em',
 						border: 0,
-						borderRadius: '4px',
-						overflow: 'hidden'
-					}}
-					title="carbon-charts-react-elkjs-diagram"
-					allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-					sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+						borderRadius: '.25rem'
+					}}></iframe>
 			</div>
 		)
 	},
