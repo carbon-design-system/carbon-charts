@@ -1,10 +1,11 @@
-// import type { StorybookConfig } from '@storybook/react-vite'
-import type { StorybookConfig } from '@storybook/react-webpack5'
+// import type { StorybookConfig } from '@storybook/react-vite' // Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
+import type { StorybookConfig } from '@storybook/react-webpack5' // Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
 
 const config: StorybookConfig = {
 	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.tsx'],
 	staticDirs: ['../../core/.storybook/assets'],
 
+	// Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
 	// viteFinal: (config) => {
 	// 	if (config.build) {
 	// 		config.build.chunkSizeWarningLimit = 1800
@@ -16,6 +17,7 @@ const config: StorybookConfig = {
 	// 	return config
 	// },
 
+	// Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
 	webpackFinal: async (config) => {
 		config.module?.rules?.push({
 			test: /\.scss$/,
@@ -38,8 +40,8 @@ const config: StorybookConfig = {
 		}
 	],
 	framework: {
-		// name: '@storybook/react-vite',
-		name: '@storybook/react-webpack5',
+		// name: '@storybook/react-vite', // Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
+		name: '@storybook/react-webpack5', // Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
 		options: {}
 	},
 	docs: {
