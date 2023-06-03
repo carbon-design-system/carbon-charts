@@ -75,7 +75,7 @@ ${
 		? `
 /* this data is only used for demo purposes, and is not an accurate representation of the world map */
 d3.json(
-  "https://raw.githubusercontent.com/Akshat55/carbon-charts/4e0f2679e68d1940754579fc318beb3f2f276ec7/packages/core/demo/data/topojson-110.json",
+  "https://raw.githubusercontent.com/Akshat55/carbon-charts/c565fc9ed1364465b641e7e3f2149f0631f0fd0b/packages/core/demo/data/topojson-110-data.json",
   function (error, topoData) {
 		if (error) throw error;
 
