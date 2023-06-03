@@ -21,7 +21,6 @@ introStories.add(
 		// container creation
 		const container = document.createElement('div')
 		container.setAttribute('class', 'container intro')
-		// container.style.backgroundColor = DEFAULT_THEME
 
 		container.innerHTML = `
 				<div class="welcome__container" style="background: url(./welcome.png) no-repeat center center fixed; background-size: cover;">
