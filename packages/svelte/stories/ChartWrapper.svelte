@@ -40,15 +40,17 @@
 		/>
 	</div>
 
-	<h3 class="marginTop-30">Code sample</h3>
+	{#if demo.codesandbox.svelte}
+		<h3 class="marginTop-30">Code sample</h3>
 
-	<a href={demo.codesandbox.svelte} target="_blank">
-		<img
-			src="https://codesandbox.io/static/img/play-codesandbox.svg"
-			alt="Edit on CodeSandbox"
-			class="marginTop"
-		/>
-	</a>
+		<a href={demo.codesandbox.svelte} target="_blank">
+			<img
+				src="https://codesandbox.io/static/img/play-codesandbox.svg"
+				alt="Edit on CodeSandbox"
+				class="marginTop"
+			/>
+		</a>
+	{/if}
 
 	<div
 		class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30"

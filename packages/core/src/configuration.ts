@@ -22,6 +22,8 @@ import {
 	CirclePackChartOptions,
 	WorldCloudChartOptions,
 	AlluvialChartOptions,
+	ThematicChartOptions,
+	ChoroplethChartOptions,
 	// Components
 	AxisOptions,
 	GridOptions,
@@ -48,6 +50,7 @@ import {
 	HeatmapChartOptions,
 	DividerStatus,
 	ChartTheme,
+	Projection,
 } from './interfaces';
 import enUSLocaleObject from 'date-fns/locale/en-US/index';
 import { circlePack } from './configuration-non-customizable';
@@ -220,6 +223,15 @@ const chart: BaseChartOptions = {
 		],
 	} as ToolbarOptions,
 };
+
+/**
+ * Options common to any thematic chart
+ */
+const thematicChart: ThematicChartOptions = Tools.merge({}, chart, {
+	thematic: {
+		projection: Projection.geoNaturalEarth1,
+	},
+});
 
 /**
  * Options common to any chart with an axis
@@ -609,9 +621,18 @@ const heatmapChart: HeatmapChartOptions = Tools.merge({}, chart, {
 	},
 } as HeatmapChartOptions);
 
+const choroplethChart: ChoroplethChartOptions = Tools.merge({}, thematicChart, {
+	choropleth: {
+		colorLegend: {
+			type: 'linear',
+		},
+	},
+} as ChoroplethChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
+	thematicChart,
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
@@ -637,6 +658,7 @@ export const options = {
 	wordCloudChart,
 	alluvialChart,
 	heatmapChart,
+	choroplethChart,
 };
 
 export * from './configuration-non-customizable';

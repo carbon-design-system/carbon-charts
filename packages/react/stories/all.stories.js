@@ -15,7 +15,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs({ escapeHTML: false }));
+	);
+
+	if (!demoGroup.disableProps) {
+		groupStories.addDecorator(withKnobs({ escapeHTML: false }));
+	}
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach((demo) => {
@@ -51,8 +55,8 @@ storybookDemoGroups.forEach((demoGroup) => {
 			return (
 				<div className="container theme--g100" ref={demoRef}>
 					<div className="v10-banner">
-						This version relies on <b>Carbon v11</b>.
-						If you're using Carbon v10,{' '}
+						This version relies on <b>Carbon v11</b>. If you're
+						using Carbon v10,{' '}
 						<a
 							href="https://carbon-charts-0x.netlify.app"
 							target="_blank"
@@ -83,20 +87,34 @@ storybookDemoGroups.forEach((demoGroup) => {
 
 					<div className="marginTop-30" id="chart-demo">
 						<DemoComponent
-							data={object('Data', demo.data)}
-							options={object('Options', demo.options)}
+							// Only using object knob when chart is NOT choropleth, otherwise props will show even when 'disabled'
+							// This approach is used to bypass storybook bug
+							data={
+								demoGroup.disableProps
+									? demo.data
+									: object('Data', demo.data)
+							}
+							options={
+								demoGroup.disableProps
+									? demo.options
+									: object('Options', demo.options)
+							}
 							ref={chartRef}
 						/>
 					</div>
 
-					<h3 className="marginTop-30">Code sample</h3>
-					<a href={demo.codesandbox.react} target="_blank">
-						<img
-							src="https://codesandbox.io/static/img/play-codesandbox.svg"
-							className="marginTop"
-							alt="Edit on Codesandbox"
-						/>
-					</a>
+					{demo.codesandbox.react && (
+						<div>
+							<h3 className="marginTop-30">Code sample</h3>
+							<a href={demo.codesandbox.react} target="_blank">
+								<img
+									src="https://codesandbox.io/static/img/play-codesandbox.svg"
+									className="marginTop"
+									alt="Edit on Codesandbox"
+								/>
+							</a>
+						</div>
+					)}
 
 					<h3 className="marginTop-45">Other versions</h3>
 					<p style={{ opacity: 0.75 }}>

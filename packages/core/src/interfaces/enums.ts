@@ -277,3 +277,21 @@ export enum AxisFlavor {
 	DEFAULT = 'default',
 	HOVERABLE = 'hoverable',
 }
+
+/**
+ * enum of supported projection types
+ */
+export enum Projection {
+	// Azimuthal Projections
+	geoEqualEarth = 'geoEqualEarth',
+
+	// Conic projections
+	geoAlbers = 'geoAlbers',
+	geoConicEqualArea = 'geoConicEqualArea',
+	geoConicEquidistant = 'geoConicEquidistant',
+
+	// Cylindrical projections
+	geoEquirectangular = 'geoEquirectangular',
+	geoMercator = 'geoMercator',
+	geoNaturalEarth1 = 'geoNaturalEarth1',
+}

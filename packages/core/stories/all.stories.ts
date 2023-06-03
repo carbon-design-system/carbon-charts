@@ -49,7 +49,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs);
+	);
+
+	if (!demoGroup.disableProps) {
+		groupStories.addDecorator(withKnobs);
+	}
 
 	demoGroup.demos.forEach((demo) => {
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
@@ -99,10 +103,14 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 <div class="marginTop-45" id="chart-demo">
 </div>
 
-<h3 class="marginTop-45">Code Sample</h3>
+${
+	demo.codesandbox.vanilla
+		? `<h3 class="marginTop-45">Code Sample</h3>
 <a href="${demo.codesandbox.vanilla}" target="_blank">
 	<img class="marginTop" src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on Codesandbox">
-</a>
+</a>`
+		: ''
+}
 
 <h3 class="marginTop-45">Other versions</h3>
 <p style="opacity: 0.75;">(currently on <strong>vanilla</strong>)</p>
@@ -114,13 +122,21 @@ ${demo.isHighScale ? storyUtils.generateHighScaleDemoDataForm() : ''}
 			const chart = new ClassToInitialize(
 				container.querySelector('div#chart-demo'),
 				{
-					data: object(
-						'Data',
-						demo.isHighScale
-							? storyUtils.generateRandomData(100, 100, 500)
-							: demo.data
-					),
-					options: object('Options', demo.options),
+					data: demoGroup.disableProps
+						? demo.data
+						: object(
+								'Data',
+								demo.isHighScale
+									? storyUtils.generateRandomData(
+											100,
+											100,
+											500
+									  )
+									: demo.data
+						  ),
+					options: demoGroup.disableProps
+						? demo.options
+						: object('Options', demo.options),
 				}
 			);
 

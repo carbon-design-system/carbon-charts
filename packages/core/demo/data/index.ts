@@ -25,6 +25,7 @@ import * as highScaleDemos from './high-scale';
 import * as alluvialDemos from './alluvial';
 import * as highlightDemos from './hightlight';
 import * as heatmapDemos from './heatmap';
+import * as choroplethDemos from './choropleth';
 
 export * from './area';
 export * from './bar';
@@ -51,6 +52,7 @@ export * from './zoom-bar';
 export * from './high-scale';
 export * from './alluvial';
 export * from './heatmap';
+export * from './choropleth';
 
 import {
 	createChartSandbox,
@@ -1106,6 +1108,29 @@ const simpleChartDemos = [
 
 const complexChartDemos = [
 	{
+		title: 'Choropleth (experimental)',
+		configs: {
+			excludeColorPaletteControl: true,
+			includeProjectionControl: true,
+		},
+		demos: [
+			{
+				options: choroplethDemos.options,
+				data: choroplethDemos.data,
+				chartType: chartTypes.ChoroplethChart,
+				mainDemo: true,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
+			},
+			{
+				options: choroplethDemos.missingDataOptions,
+				data: choroplethDemos.missingData,
+				chartType: chartTypes.ChoroplethChart,
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
+			},
+		],
+		disableProps: true,
+	},
+	{
 		title: 'Alluvial',
 		demos: [
 			{
@@ -1284,23 +1309,53 @@ const mapDemoGroups = (demoGroups) =>
 				if (!demo.codesandbox) {
 					demo.codesandbox = {};
 				}
-				demo.codesandbox.react = createChartSandbox(
-					createReactChartApp(demo)
-				);
-				demo.codesandbox.vue = createChartSandbox(
-					createVueChartApp(demo)
-				);
-				demo.codesandbox.vanilla = createChartSandbox(
-					createVanillaChartApp(demo)
-				);
-				demo.codesandbox.svelte = createChartSandbox(
-					createSvelteChartApp(demo)
-				);
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('react')
+				) {
+					demo.codesandbox.react = createChartSandbox(
+						createReactChartApp(demo)
+					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('vue')
+				) {
+					demo.codesandbox.vue = createChartSandbox(
+						createVueChartApp(demo)
+					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('vanilla')
+				) {
+					demo.codesandbox.vanilla = createChartSandbox(
+						createVanillaChartApp(demo)
+					);
+				}
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('svelte')
+				) {
+					demo.codesandbox.svelte = createChartSandbox(
+						createSvelteChartApp(demo)
+					);
+				}
 
 				if (!demo.code) {
 					demo.code = {};
 				}
-				demo.code.angular = createAngularChartApp(demo);
+
+				if (
+					!demo.disabledSandboxes ||
+					!demo.disabledSandboxes.includes('angular')
+				) {
+					demo.code.angular = createAngularChartApp(demo);
+				}
 
 				return demo;
 			});

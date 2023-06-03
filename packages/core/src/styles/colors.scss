@@ -18,9 +18,17 @@
 	}
 }
 
-@function getGradientColors() {
-	$monochrome: color-property(null, $monochrome-quantize-colors);
-	$divergent: color-property(null, $divergent-quantize-colors);
+@function getGradientColors($theme_type) {
+	$monochrome: ();
+	$divergent: ();
+
+	@if $theme_type == 'dark' {
+		$monochrome: color-property(null, $dark-monochrome-quantize-colors);
+		$divergent: color-property(null, $dark-divergent-quantize-colors);
+	} @else {
+		$monochrome: color-property(null, $monochrome-quantize-colors);
+		$divergent: color-property(null, $divergent-quantize-colors);
+	}
 
 	@return map-merge($monochrome, $divergent);
 }
@@ -28,9 +36,9 @@
 @function color-property($name, $theme-colors) {
 	$color-items: ();
 
-	@if type-of($theme-colors) == map {
+	@if type-of($theme-colors) ==map {
 		@each $category, $value in $theme-colors {
-			@if $name == null {
+			@if $name ==null {
 				$color-items: map-merge(
 					$color-items,
 					color-property('#{$category}', $value)
@@ -42,13 +50,18 @@
 				);
 			}
 		}
+
 		@return $color-items;
 	} @else {
 		@return (#{$name}: $theme-colors);
 	}
 }
 
-$color-map-light: map-merge(getThemeColors('light'), getGradientColors());
+$color-map-light: map-merge(
+	getThemeColors('light'),
+	getGradientColors('light')
+);
+
 .#{$prefix}--chart-holder {
 	@each $token, $color in $color-map-light {
 		--cds-charts-#{$token}: #{$color};
@@ -56,7 +69,8 @@ $color-map-light: map-merge(getThemeColors('light'), getGradientColors());
 	}
 }
 
-$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
+$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors('dark'));
+
 .#{$prefix}--chart-holder[data-carbon-theme='g90'],
 .#{$prefix}--chart-holder[data-carbon-theme='g100'] {
 	@each $token, $color in $color-map-dark {
@@ -65,7 +79,8 @@ $color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
 	}
 }
 
-$color-map: map-merge(getThemeColors('light'), getGradientColors());
+$color-map: map-merge(getThemeColors('light'), getGradientColors('light'));
+
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	@each $token, $color in $color-map {
 		.fill-#{$token} {

@@ -3,7 +3,8 @@ import * as Tools from '../../tools';
 import { ColorLegendType, Events, RenderTypes } from '../../interfaces';
 import * as Configuration from '../../configuration';
 import { Legend } from './legend';
-import { DOMUtils } from '../../services';
+import { DOMUtils, getDomain } from '../../services';
+import { ChartModel } from '../../model/model';
 
 // D3 imports
 import { axisBottom } from 'd3-axis';
@@ -16,15 +17,22 @@ export class ColorScaleLegend extends Legend {
 
 	private gradient_id =
 		'gradient-id-' + Math.floor(Math.random() * 99999999999);
+	private chartType: string;
+
+	constructor(model: ChartModel, services: any, configs?: any) {
+		super(model, services, configs);
+		this.chartType = configs.chartType;
+	}
 
 	init() {
-		const eventsFragment = this.services.events;
-
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener(
-			Events.Axis.RENDER_COMPLETE,
-			this.handleAxisCompleteEvent
-		);
+		if (this.chartType === 'heatmap') {
+			const eventsFragment = this.services.events;
+			eventsFragment.addEventListener(
+				Events.Axis.RENDER_COMPLETE,
+				this.handleAxisCompleteEvent
+			);
+		}
 	}
 
 	// Position legend after axis have rendered
@@ -116,7 +124,7 @@ export class ColorScaleLegend extends Legend {
 
 		const colorScaleType = Tools.getProperty(
 			options,
-			'heatmap',
+			this.chartType,
 			'colorLegend',
 			'type'
 		);
@@ -148,7 +156,7 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		const customColorsEnabled = !Tools.isEmpty(customColors);
-		const domain = this.model.getValueDomain();
+		const domain = getDomain(this.model.getDisplayData());
 
 		const useDefaultBarWidth = !(
 			width <= Configuration.legend.color.barWidth
@@ -263,7 +271,12 @@ export class ColorScaleLegend extends Legend {
 			.style('text-anchor', useDefaultBarWidth ? 'middle' : 'end');
 		axisElement
 			.select('g.tick:first-of-type text')
-			.style('text-anchor', useDefaultBarWidth ? 'middle' : 'start');
+			.style(
+				'text-anchor',
+				useDefaultBarWidth && this.chartType !== 'choropleth'
+					? 'middle'
+					: 'start'
+			);
 	}
 
 	// Renders gradient legend
@@ -337,11 +350,13 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	destroy() {
-		// Remove legend listeners
-		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener(
-			Events.Axis.RENDER_COMPLETE,
-			this.handleAxisCompleteEvent
-		);
+		if (this.chartType === 'heatmap') {
+			// Remove legend listeners
+			const eventsFragment = this.services.events;
+			eventsFragment.removeEventListener(
+				Events.Axis.RENDER_COMPLETE,
+				this.handleAxisCompleteEvent
+			);
+		}
 	}
 }

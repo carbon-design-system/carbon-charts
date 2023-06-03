@@ -40,7 +40,11 @@ storybookDemoGroups.forEach(demoGroup => {
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs({ escapeHTML: false }));
+	);
+
+	if (!demoGroup.disableProps) {
+		groupStories.addDecorator(withKnobs({ escapeHTML: false }));
+	}
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
@@ -54,10 +58,16 @@ storybookDemoGroups.forEach(demoGroup => {
 			},
 			props: {
 				data: {
-					default: object('Data', demo.data),
+					// Only using object knob when chart is NOT choropleth, otherwise props will show even when 'disabled'
+					// This approach is used to bypass storybook bug
+					default: demoGroup.disableProps
+						? demo.data
+						: object('Data', demo.data),
 				},
 				options: {
-					default: object('Options', demo.options),
+					default: demoGroup.disableProps
+						? demo.options
+						: object('Options', demo.options),
 				},
 			},
 			template: `
@@ -68,9 +78,9 @@ storybookDemoGroups.forEach(demoGroup => {
 
 					<h3>
 						<b>Component:</b>
-						<span class="cds--tag cds--tag--green component-name">${
-							demo.chartType.vue
-						}</span>
+						<span class="cds--tag cds--tag--green component-name">
+							${demo.chartType.vue}
+						</span>
 					</h3>
 
 					<p class="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
@@ -79,10 +89,14 @@ storybookDemoGroups.forEach(demoGroup => {
 						<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
 					</div>
 
-					<h3 class="marginTop-30">Code sample</h3>
+					${
+						demo.codesandbox.vue
+							? `<h3 class="marginTop-30">Code sample</h3>
 					<a href="${demo.codesandbox.vue}" target="_blank">
 						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
-					</a>
+					</a>`
+							: ''
+					}
 				</div>
 			`,
 		}));

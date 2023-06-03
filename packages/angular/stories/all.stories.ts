@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/angular';
-import { withKnobs, object } from '@storybook/addon-knobs';
+import { withKnobs, object } from '@storybook/addon-knobs/angular';
 
 import { ChartsModule } from '../src/charts.module';
 
@@ -26,18 +26,19 @@ const getTemplate = (demo) => `
 			</${demo.chartType.angular}>
 		</div>
 
+		<ng-container *ngIf="codeFiles.length">
+			<h3 class="marginTop-30">Code sample</h3>
 
-		<h3 class="marginTop-30">Code sample</h3>
+			<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
+				<h5>{{codeFile}}</h5>
 
-		<div class="marginTop-30" *ngFor="let codeFile of codeFiles;">
-			<h5>{{codeFile}}</h5>
-
-			<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15" data-code-snippet>
-				<div class="cds--snippet-container" aria-label="Code Snippet Text">
-					<pre><code>{{code[codeFile]}}</code></pre>
+				<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-15" data-code-snippet>
+					<div class="cds--snippet-container" aria-label="Code Snippet Text">
+						<pre><code>{{code[codeFile]}}</code></pre>
+					</div>
 				</div>
 			</div>
-		</div>
+		</ng-container>
 	</div>
 `;
 
@@ -76,7 +77,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 	const groupStories = storiesOf(
 		`${demoGroup.storyGroupTitle}|${demoGroup.title}`,
 		module
-	).addDecorator(withKnobs({ escapeHTML: false }));
+	);
+
+	if (!demoGroup.disableProps) {
+		groupStories.addDecorator(withKnobs({ escapeHTML: false }))
+	}
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach((demo) => {
@@ -89,9 +94,11 @@ storybookDemoGroups.forEach((demoGroup) => {
 				imports: [ChartsModule],
 			},
 			props: {
-				data: object('Data', demo.data),
-				options: object('Options', demo.options),
-				codeFiles: Object.keys(demo.code.angular),
+				// Only using object knob when chart is NOT choropleth, otherwise props will show even when 'disabled'
+				// This approach is used to bypass storybook bug
+				data: demoGroup.disableProps ? demo.data : object('Data', demo.data),
+				options: demoGroup.disableProps ? demo.options: object('Options', demo.options),
+				codeFiles: demoGroup.disableProps ? [] : Object.keys(demo.code.angular),
 				code: demo.code.angular,
 			},
 		}));

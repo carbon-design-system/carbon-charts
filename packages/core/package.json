@@ -47,7 +47,7 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
-    "@carbon/styles": "^1.26.0",
+    "@carbon/styles": "^1.4.0",
     "@carbon/telemetry": "^0.1.0",
     "@carbon/utils-position": "^1.1.4",
     "carbon-components": "^10.58.3",
@@ -56,7 +56,8 @@
     "date-fns": "2.8.1",
     "dom-to-image-more": "^3.1.6",
     "lodash-es": "4.17.21",
-    "resize-observer-polyfill": "1.5.0"
+    "resize-observer-polyfill": "1.5.0",
+    "topojson-client": "3.1.0"
   },
   "peerDependencies": {
     "d3": "7.x"
