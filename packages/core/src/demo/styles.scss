@@ -17,7 +17,7 @@ $prefix: 'cds';
 @use '@carbon/styles/scss/theme';
 
 // Custom charting tokens
-@import '../src/styles/tokens.scss';
+@import '../styles/tokens.scss';
 @include theme.add-component-tokens($custom-charting-tokens);
 
 @import '@carbon/import-once/scss/import-once';
@@ -31,11 +31,11 @@ $prefix: 'cds';
 }
 
 // Internal
-@import '../src/styles/colors.scss';
-@import '../src/styles/components/index.scss';
-@import '../src/styles/graphs/index.scss';
-@import '../src/styles/type';
-@import '../src/styles/chart-holder';
+@import '../styles/colors.scss';
+@import '../styles/components/index.scss';
+@import '../styles/graphs/index.scss';
+@import '../styles/type';
+@import '../styles/chart-holder';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;
