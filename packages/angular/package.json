@@ -80,6 +80,7 @@
     "typescript": "~5.0.4",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
+    "webpack": "5.85.1",
     "zone.js": "~0.13.0"
   },
   "prettier": "../../prettier.config.cjs",

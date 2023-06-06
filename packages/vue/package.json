@@ -53,7 +53,6 @@
     "@storybook/manager-api": "^7.0.18",
     "@storybook/testing-library": "^0.1.0",
     "@storybook/theming": "^7.0.18",
-    "@storybook/vue": "^7.0.18",
     "@storybook/vue-vite": "^7.0.18",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
@@ -72,9 +71,6 @@
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-vue2": "^2.0.3",
     "vue-template-compiler": "^2.7.14"
-  },
-  "resolutions": {
-    "axios": "^1.4.0"
   },
   "publishConfig": {
     "access": "public"
