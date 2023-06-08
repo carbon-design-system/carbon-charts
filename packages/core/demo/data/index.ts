@@ -309,6 +309,11 @@ const utilityDemoGroups = [
 				data: toolbarDemos.toolbarLineTimeSeriesData,
 				chartType: chartTypes.LineChart,
 			},
+			{
+				options: toolbarDemos.toolbarBarSimpleOptions,
+				data: toolbarDemos.toolbarBarSimpleData,
+				chartType: chartTypes.SimpleBarChart,
+			},
 		],
 	},
 	{
