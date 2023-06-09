@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default defineComponent({
+	name: 'ExperimentalCcvChoroplethChart',
 	extends: CcvBaseChart,
 	props: {
 		data: {

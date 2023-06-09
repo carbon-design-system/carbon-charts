@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default defineComponent({
+	name: 'CcvBoxplotChart',
 	extends: CcvBaseChart,
 	props: {
 		data: {

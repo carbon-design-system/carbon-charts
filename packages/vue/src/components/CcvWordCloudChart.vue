@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default defineComponent({
+	name: 'CcvWordCloudChart',
 	extends: CcvBaseChart,
 	props: {
 		data: {

@@ -10,6 +10,7 @@ export interface CoreChart<T> {
 }
 
 export default defineComponent({
+	name: 'CcvBaseChart',
 	props: {
 		data: { type: Object as () => ChartTabularData, required: true },
 		options: { type: Object, required: true }

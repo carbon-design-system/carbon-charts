@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default defineComponent({
+	name: 'CcvBulletChart',
 	extends: CcvBaseChart,
 	props: {
 		data: {

@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default defineComponent({
+	name: 'CcvAreaChart',
 	extends: CcvBaseChart,
 	props: {
 		data: {
