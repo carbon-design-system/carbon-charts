@@ -9,6 +9,7 @@
 		"./package.json": "./package.json",
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css",
+		"./styles.scss": "./dist/styles/styles.scss",
 		".": {
 			"types": "./dist/index.d.ts",
 			"browser": {
@@ -122,6 +123,7 @@
 		"@typescript-eslint/parser": "^5.59.9",
 		"codesandbox": "^2.2.3",
 		"concurrently": "^8.1.0",
+		"downlevel-dts": "^0.11.0",
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.12",
@@ -136,6 +138,9 @@
 		"vite": "^4.3.9",
 		"vite-plugin-dts": "~2.3.0",
 		"vitest": "^0.31.4"
+	},
+	"typesVersions": {
+		"<5.0": { "*": ["ts3.4/*"] }
 	},
 	"prettier": "../../prettier.config.cjs",
 	"publishConfig": {
