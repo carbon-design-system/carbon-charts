@@ -649,6 +649,7 @@ new Vue({
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
 				'@carbon/styles': '^1.30.0',
+				d3: D3VERSION,
 				vue: '^2.7.14'
 			}
 		},
