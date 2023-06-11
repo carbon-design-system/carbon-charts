@@ -1,6 +1,5 @@
 declare module '@carbon/colors' {
   interface Color {
-    100?: string;
     [key: number]: string;
   }
 
