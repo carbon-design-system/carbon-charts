@@ -2731,13 +2731,13 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.59.9
     "@typescript-eslint/parser": ^5.59.9
     carbon-components: ^10.58.7
-    codesandbox: ^2.2.3
     concurrently: ^8.1.0
-    d3: 7.8.5
+    d3: ^7.8.5
     d3-cloud: ^1.2.5
     d3-sankey: ^0.12.3
     date-fns: ^2.30.0
     dom-to-image-more: ^3.1.6
+    downlevel-dts: ^0.11.0
     eslint: ^8.42.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.12
@@ -11870,7 +11870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3@npm:7.8.5":
+"d3@npm:^7.8.5":
   version: 7.8.5
   resolution: "d3@npm:7.8.5"
   dependencies:
@@ -12489,6 +12489,19 @@ __metadata:
   version: 10.0.0
   resolution: "dotenv@npm:10.0.0"
   checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
+  languageName: node
+  linkType: hard
+
+"downlevel-dts@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "downlevel-dts@npm:0.11.0"
+  dependencies:
+    semver: ^7.3.2
+    shelljs: ^0.8.3
+    typescript: next
+  bin:
+    downlevel-dts: index.js
+  checksum: 846ad69da03795340b2fbd9432ff41605b885bf5a7d6636faa86342e91d9e4b27a49c2f68380a2f7ba26ddc28a11b3b02581a41c6b5c7034b8b0fb099c017307
   languageName: node
   linkType: hard
 
@@ -21963,7 +21976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shelljs@npm:^0.8.5":
+"shelljs@npm:^0.8.3, shelljs@npm:^0.8.5":
   version: 0.8.5
   resolution: "shelljs@npm:0.8.5"
   dependencies:
@@ -23630,6 +23643,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:next":
+  version: 5.2.0-dev.20230610
+  resolution: "typescript@npm:5.2.0-dev.20230610"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 6c9ae55b0fa694b0f10ba03a5f85e8fcf815f3bf2093164c5c912d3025d38ee211e681406a97fa94347cba5188e0934025fe36e43d6e83d9b238281684eb9b20
+  languageName: node
+  linkType: hard
+
 "typescript@npm:~5.0.4":
   version: 5.0.4
   resolution: "typescript@npm:5.0.4"
@@ -23657,6 +23680,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 32a25b2e128a4616f999d4ee502aabb1525d5647bc8955e6edf05d7fbc53af8aa98252e2f6ba80bcedfc0260c982b885f3c09cfac8bb65d2924f3133ad1e1e62
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@next#~builtin<compat/typescript>":
+  version: 5.2.0-dev.20230610
+  resolution: "typescript@patch:typescript@npm%3A5.2.0-dev.20230610#~builtin<compat/typescript>::version=5.2.0-dev.20230610&hash=77c9e2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 687ea36ab9be18169522836f9c3d0dd5c4ce6b8a433d8ca522110bb33ce4c70ad9a8402b29aa90b82e66c4e253d7ae761f29b0b5eadd7a4a3842824eab3e02da
   languageName: node
   linkType: hard
 

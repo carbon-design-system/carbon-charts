@@ -58,6 +58,7 @@
 		"file:css:charts": "sass src/styles/styles.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:min:charts": "sass src/styles/styles.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:demo": "sass src/demo/styles.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
+		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build:package": "vite build && yarn postbundle",
 		"demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",
@@ -121,7 +122,6 @@
 		"@types/topojson": "^3.2.3",
 		"@typescript-eslint/eslint-plugin": "^5.59.9",
 		"@typescript-eslint/parser": "^5.59.9",
-		"codesandbox": "^2.2.3",
 		"concurrently": "^8.1.0",
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^8.42.0",
@@ -138,9 +138,6 @@
 		"vite": "^4.3.9",
 		"vite-plugin-dts": "~2.3.0",
 		"vitest": "^0.31.4"
-	},
-	"typesVersions": {
-		"<5.0": { "*": ["ts3.4/*"] }
 	},
 	"prettier": "../../prettier.config.cjs",
 	"publishConfig": {

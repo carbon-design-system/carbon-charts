@@ -36,7 +36,7 @@
     "clean": "rm -rf dist demo/bundle"
   },
   "peerDependencies": {
-    "vue": "^2.0.0 || ^3.0.0"
+    "vue": "^2.5.21 || ^3.0.0"
   },
   "dependencies": {
     "@carbon/charts": "workspace:*",
