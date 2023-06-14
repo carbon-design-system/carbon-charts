@@ -18,7 +18,7 @@ git stash
 # Checkout master to get out of detached HEAD state
 git checkout master
 
-# Create release with lerna
+# Create release with lerna and set version variable
 npx lerna version --conventional-commits --yes --force-publish --create-release github
 
 echo "Rebuild packages and demos.."
@@ -31,3 +31,8 @@ echo "Publish to NPM..."
 # Do NOT specify --contents! Use package.json publishConfig.directory per package for better granularity.
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
 npx lerna publish from-git --yes --force-publish --no-verify-access
+
+# Fetch latest version of @carbon/charts-angular
+version=$(npm view @carbon/charts-angular version)
+npm dist-tag add @carbon/charts-angular@1.8.0 latest
+npm dist-tag add @carbon/charts-angular@$version next
