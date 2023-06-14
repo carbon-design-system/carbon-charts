@@ -32,7 +32,7 @@ echo "Publish to NPM..."
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
 npx lerna publish from-git --yes --force-publish --no-verify-access
 
-# Fetch latest version of @carbon/charts-angular
+# Fetch latest version of @carbon/charts-angular and re-tag
 version=$(npm view @carbon/charts-angular version)
 npm dist-tag add @carbon/charts-angular@1.8.0 latest
 npm dist-tag add @carbon/charts-angular@$version next
