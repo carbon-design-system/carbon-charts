@@ -12,14 +12,6 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "outDir": "./dist/out-tsc",
-    // "paths": {
-    //   "charts-angular": [
-    //     "dist"
-    //   ]
-    // },
-    "types": [
-      "vite/client" // for experimental builds `yarn build:package:vite` only
-    ],
     "useDefineForClassFields": false
   },
   "include": [
@@ -28,11 +20,6 @@
   ],
   "exclude": [
     "src/test.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.vite.json"
-    }
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
