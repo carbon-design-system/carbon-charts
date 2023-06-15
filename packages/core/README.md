@@ -1,23 +1,23 @@
-# Notice
+# Carbon Charts
 
-### This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on D3.js, a peer dependency.
 
-## `@carbon/charts`
+The required styles should be imported from `@carbon/charts/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
-> Carbon Charting components
+> Notice: This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
 
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts d3
+npm install -S @carbon/charts @carbon/styles d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts d3
+yarn add @carbon/charts @carbon/styles d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a bundled version of
@@ -28,11 +28,11 @@ the library.
 Read
 [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vanilla)
 
-## Codesandbox examples
+## StackBlitz examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts).
 
-**When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an
+**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
 isolated project showing you how to reproduce the demo.
 
 ## Charting data & options

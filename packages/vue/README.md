@@ -1,10 +1,10 @@
-# Notice
+# Carbon Charts Vue
 
-### This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency.
 
-## `@carbon/charts-vue`
+The required styles should be imported from `@carbon/charts-vue/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
-> Carbon Charting Vue Wrappers
+> Notice: This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
 
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
@@ -12,21 +12,21 @@
 
 ## Maintenance & support
 
-These Vue wrappers are community-maintained.
+This component library is community-maintained.
 
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-vue d3
+npm install -S @carbon/charts-vue @carbon/styles d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-vue d3
+yarn add @carbon/charts-vue @carbon/styles d3
 ```
 
 **Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
@@ -35,11 +35,11 @@ yarn add @carbon/charts @carbon/charts-vue d3
 
 Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vue)
 
-## Codesandbox examples
+## CodeSandbox examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
 
-**When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
+**When opening the link above**, click on the **Edit on CodeSandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
 
