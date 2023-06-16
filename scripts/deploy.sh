@@ -2,6 +2,9 @@
 
 set -e # exit with nonzero exit code if anything fails
 
+# If no parameter is given, "latest" is used as the default value.
+distTag=${1:-latest}
+
 # Git user info configs
 git config --global user.email "carbon@us.ibm.com"
 git config --global user.name "carbon-bot"
@@ -30,7 +33,7 @@ npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 echo "Publish to NPM..."
 # Do NOT specify --contents! Use package.json publishConfig.directory per package for better granularity.
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
-npx lerna publish from-git --yes --force-publish --no-verify-access
+npx lerna publish from-git --yes --force-publish --no-verify-access --dist-tag $distTag
 
 # Fetch latest version of @carbon/charts-angular and re-tag
 version=$(npm view @carbon/charts-angular version)
