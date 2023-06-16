@@ -5,9 +5,7 @@
 	"scripts": {
 		"postinstall": "carbon-telemetry collect --install",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"file:downlevel:dts": "downlevel-dts dist dist",
-		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "svelte-kit sync && svelte-package && yarn postbundle",
+		"build:package": "svelte-kit sync && svelte-package && yarn file:styles",
 		"build:demo": "storybook build -o demo/bundle --quiet",
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",
@@ -20,13 +18,13 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
 	},
 	"type": "module",
+	"types": "./dist/index.d.ts",
+	"svelte": "./dist/index.js",
+	"module": "./dist/index.js",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js",
-			"browser": {
-				"import": "./dist/index.js"
-			},
 			"import": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
@@ -53,13 +51,11 @@
 		"@storybook/testing-library": "^0.1.0",
 		"@storybook/theming": "^7.0.21",
 		"@sveltejs/adapter-auto": "^2.1.0",
-		"@sveltejs/kit": "^1.20.2",
+		"@sveltejs/kit": "^1.20.4",
 		"@sveltejs/package": "^2.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.59.11",
 		"@typescript-eslint/parser": "^5.59.11",
 		"codesandbox": "^2.2.3",
-		"concurrently": "^8.2.0",
-		"downlevel-dts": "^0.11.0",
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-storybook": "^0.6.12",
