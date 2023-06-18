@@ -12,7 +12,15 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "outDir": "./dist/out-tsc",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@carbon/charts-angular": [
+        "dist"
+      ],
+      "@carbon/charts-angular/*": [
+        "dist/*"
+      ]
+    }
   },
   "include": [
     "src",
