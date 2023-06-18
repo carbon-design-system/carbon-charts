@@ -3,10 +3,7 @@
 @use '@carbon/styles/scss/utilities/component-tokens';
 @use '@carbon/colors' as *;
 
-/*
- *
- * THEMES
- */
+// THEMES
 $color-scheme: (
 	fallback: light,
 	values: (
@@ -29,10 +26,7 @@ $color-scheme: (
 	)
 ) !default;
 
-/*
- *
- * ELEMENTS
- */
+// ELEMENTS
 $alert-stroke: (
 	fallback: #b28600,
 	values: (
@@ -121,10 +115,7 @@ $null-state: (
 	)
 ) !default;
 
-/*
- *
- * GRID
- */
+// GRID
 $grid-bg: (
 	fallback: map.get(themes.$white, background),
 	values: (

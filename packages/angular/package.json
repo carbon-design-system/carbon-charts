@@ -2,11 +2,11 @@
   "name": "@carbon/charts-angular",
   "version": "1.8.0",
   "description": "Carbon Charts component library for Angular",
-  "type": "module",
   "exports": {
     "./styles.min.css": "./dist/styles.min.css",
     "./styles.css": "./dist/styles.css"
   },
+  "sideEffects": false,
   "scripts": {
     "ng": "ng",
     "postinstall": "carbon-telemetry collect --install",
