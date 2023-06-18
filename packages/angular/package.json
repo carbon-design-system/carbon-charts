@@ -14,7 +14,7 @@
     "file:styles": "cp ../core/dist/styles.* dist",
     "disabled:file:downlevel:dts": "downlevel-dts dist dist",
     "postbundle": "concurrently \"yarn:file:*\"",
-    "build:package": "ng build && yarn postbundle",
+    "build:package": "ng build -c production && yarn postbundle",
     "demo:mdx:angular": "cp ../core/src/stories/getting-started/angular.stories.mdx src/stories",
     "demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
     "demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
