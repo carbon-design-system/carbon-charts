@@ -20,17 +20,17 @@ $prefix: 'cds';
 @import '@carbon/import-once/scss/import-once';
 
 // Carbon imports
-@import '@carbon/colors/index.scss';
-@import '@carbon/styles/scss/components/button/_tokens.scss';
+@import '@carbon/colors';
+@import '@carbon/styles/scss/components/button/tokens';
 
 @mixin default_transition {
 	transition: all 0.1s ease-out;
 }
 
 // Internal
-@import './colors.scss';
-@import './components/index.scss';
-@import './graphs/index.scss';
+@import './colors';
+@import './components';
+@import './graphs';
 @import './type';
 @import './chart-holder';
 
