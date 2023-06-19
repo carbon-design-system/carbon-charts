@@ -1,39 +1,33 @@
 $charts-prefix: 'cc';
 
-$css--reset: false;
-$css--default-type: false;
+// Variables picked up by @carbon/styles/scss/config in imports
+$prefix: 'cds'; // Default value
+$css--default-type: false; // Do not include default type
+$css--reset: false; // Do not include reset CSS
 
-$prefix: 'cds';
-
-// $carbon--font-path
-// Fonts for demo are loaded in .storybook/preview-head.html - don't include here
+// IBM Plex font for demo is loaded in .storybook/preview-head.html - don't include here
 @use '@carbon/styles/scss/config' with (
-		$css--font-face: false,
-		// $font-path: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@300;400&family=IBM+Plex+Sans:wght@400;600&display=swap'
-	);
-
-@use '@carbon/styles';
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme';
+	$css--font-face: false
+);
+@use '@carbon/styles'; // primarily needed for toolbar
+@use '@carbon/styles/scss/type' as *; // used on line 230
 
 // Custom charting tokens
-@import '../../scss/tokens.scss';
+@use '@carbon/styles/scss/theme';
+@import '../../scss/tokens';
 @include theme.add-component-tokens($custom-charting-tokens);
+@import '@carbon/styles/scss/components/button/tokens.scss';
 
-@import '@carbon/import-once/scss/import-once';
-
-// Carbon imports
-@import '@carbon/colors/index.scss';
-@import '@carbon/styles/scss/components/button/_tokens.scss';
-
-@mixin default_transition {
+@mixin default_transition { // used by colors
 	transition: all 0.1s ease-out;
 }
+@import '@carbon/colors';
+@import '../../scss/colors';
 
-// Internal
-@import '../../scss/colors.scss';
-@import '../../scss/components/index.scss';
-@import '../../scss/graphs/index.scss';
+@import '@carbon/import-once/scss';
+@import '../../scss/components';
+
+@import '../../scss/graphs';
 @import '../../scss/type';
 @import '../../scss/chart-holder';
 
@@ -62,19 +56,6 @@ div.container {
 	background-color: theme.$background;
 	font-family: 'IBM Plex Sans', Arial, sans-serif;
 	padding: 30px;
-
-	div.v10-banner {
-		padding: 1rem 30px;
-		margin: -30px -30px 30px -30px;
-		background-color: var(--cds-field, #f4f4f4);
-		color: var(--cds-text-primary, #161616);
-		font-size: 0.95rem;
-		line-height: 1.5;
-
-		b {
-			font-weight: 600;
-		}
-	}
 
 	div#color-palette-picker,
 	div#projection-picker {

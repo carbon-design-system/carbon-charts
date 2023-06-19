@@ -4,8 +4,6 @@ Carbon Charts is a component library for vanilla JavaScript. Chart visualization
 
 The required styles should be imported from `@carbon/charts/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
-> Notice: This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
-
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):

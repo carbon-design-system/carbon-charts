@@ -6,8 +6,6 @@ The required styles should be imported from `@carbon/charts-angular/styles.css` 
 
 If you need support for older versions of Angular (or encounter problems with this module), please revert to `@carbon/charts-angular@latest`.
 
-> Notice: This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
-
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/angular)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**

@@ -28,15 +28,15 @@ $color-scheme: (
 
 // ELEMENTS
 $alert-stroke: (
-	fallback: #b28600,
+	fallback: $yellow-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: #b28600
+			value: $yellow-50
 		),
 		(
 			theme: themes.$g10,
-			value: #b28600
+			value: $yellow-50
 		),
 		(
 			theme: themes.$g90,

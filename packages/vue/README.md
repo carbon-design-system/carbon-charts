@@ -4,8 +4,6 @@ Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon
 
 The required styles should be imported from `@carbon/charts-vue/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
-> Notice: This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
-
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**

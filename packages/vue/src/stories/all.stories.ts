@@ -60,11 +60,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				},
 				template: `
 					<div class="container">
-
-						<div class="v10-banner">
-							This version relies on <b>Carbon v11</b>. If you're using Carbon v10, <a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">see the legacy demo site</a>
-						</div>
-
 						<h3>
 							<b>Component:</b>
 							<span class="cds--tag cds--tag--green component-name">${demo.chartType.vue}</span>

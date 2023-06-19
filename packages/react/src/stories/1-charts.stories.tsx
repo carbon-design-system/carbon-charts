@@ -58,12 +58,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 				return (
 					<div className="container" ref={demoRef}>
-						<div className="v10-banner">
-							This version relies on <b>Carbon v11</b>. If you&apos;re using Carbon v10,{' '}
-							<a href="https://carbon-charts-0x.netlify.app" target="_blank" rel="noreferrer">
-								see the legacy demo site
-							</a>
-						</div>
 
 						<h3>
 							<b>Component:</b>
