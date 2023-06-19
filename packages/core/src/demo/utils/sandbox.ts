@@ -4,6 +4,7 @@ import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
 import packageJSON from '../../../package.json'
 const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']
+const carbonStylesVersion = packageJSON.dependencies['@carbon/styles']
 
 const sandboxConfig = `{
   "infiniteLoopProtection": true,
@@ -84,9 +85,16 @@ export const createVanillaChartApp = (demo: any) => {
       rel="stylesheet"
       crossorigin="anonymous"
     />
+		<style>
+		  .p-1 {
+			  padding: 2rem;
+		  }
+    </style>
   </head>
   <body>
-    <div id="app" style="width: 100%; height: 100%"></div>
+	  <div class="p-1">
+      <div id="app" style="width: 100%; height: 100%"></div>
+		</div>
     <script src="src/index.js"></script>
   </body>
 </html>`
@@ -137,7 +145,7 @@ new ${chartComponent}(chartHolder, {
 			version: '0.0.0',
 			dependencies: {
 				'@carbon/charts': libraryVersion,
-				'@carbon/styles': '^1.30.0',
+				'@carbon/styles': carbonStylesVersion,
 				d3: D3VERSION
 			}
 		},
@@ -168,13 +176,13 @@ export const createAngularChartApp = (demo: any) => {
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "assets": [],
-            "styles": ["src/global_styles.css"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -224,24 +232,18 @@ export const createAngularChartApp = (demo: any) => {
 				build: 'NG_CLI_ANALYTICS=false ng build'
 			},
 			dependencies: {
-				'@angular/animations': '^15.2.8',
-				'@angular/common': '^15.2.8',
-				'@angular/compiler': '^15.2.8',
-				'@angular/core': '^15.2.8',
-				'@angular/platform-browser': '^15.2.8',
-				'@carbon/charts': libraryVersion,
-				'@carbon/charts-angular': libraryVersion,
-				'@carbon/styles': '^1.30.0',
+				'@angular/animations': '^16.1.1',
+				'@angular/common': '^16.1.1',
+				'@angular/compiler': '^16.1.1',
+				'@angular/core': '^16.1.1',
+				'@angular/platform-browser': '^16.1.1',
+				'@carbon/charts': 'next',
+				'@carbon/charts-angular': 'next',
+				'@carbon/styles': carbonStylesVersion,
 				d3: D3VERSION,
 				rxjs: '~7.8.1',
-				tslib: '^2.5.0',
-				'zone.js': '~0.13.0'
-			},
-			devDependencies: {
-				'@angular-devkit/build-angular': '^15.2.7',
-				'@angular/cli': '~15.2.7',
-				'@angular/compiler-cli': '^15.2.8',
-				typescript: '~4.9.5'
+				tslib: '^2.5.3',
+				'zone.js': '~0.13.1'
 			}
 		},
 		null,
@@ -282,9 +284,16 @@ export const createAngularChartApp = (demo: any) => {
 		rel="stylesheet"
 		crossorigin="anonymous"
 	/>
+  <style>
+	  .p-1 {
+		  padding: 2rem;
+	  }
+  </style>
 </head>
 <body>
-  <my-app></my-app>
+  <div class="p-1">
+    <my-app></my-app>
+	</div>
 </body>
 </html>`
 
@@ -323,7 +332,7 @@ bootstrapApplication(App)
 		'tsconfig.json': tsConfig,
 		'src/index.html': indexHtml,
 		'src/main.ts': mainTs,
-		'src/global_styles.css': stylesScss
+		'src/styles.css': stylesScss
 	}
 }
 
@@ -346,9 +355,16 @@ export const createReactChartApp = (demo: any) => {
 		rel="stylesheet"
 		crossorigin="anonymous"
 	/>
+  <style>
+	  .p-1 {
+		  padding: 2rem;
+	  }
+  </style>
 </head>
 <body>
-	<div id="root"></div>
+  <div class="p-1">
+	  <div id="root"></div>
+  </div>
 </body>
 </html>`
 
@@ -386,7 +402,7 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-react': libraryVersion,
-				'@carbon/styles': '^1.30.0',
+				'@carbon/styles': carbonStylesVersion,
 				d3: D3VERSION,
 				react: '^18.2.0',
 				'react-dom': '^18.2.0',
@@ -482,10 +498,17 @@ export const createSvelteChartApp = (demo: any) => {
 			rel="stylesheet"
 			crossorigin="anonymous"
 		/>
+		<style>
+	    .p-1 {
+		    padding: 2rem;
+	    }
+    </style>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
+	  <div class="p-1">
+		  <div style="display: contents">%sveltekit.body%</div>
+		</div>
 	</body>
 </html>`
 
@@ -520,15 +543,15 @@ import '@carbon/charts/styles.css'
 			devDependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-svelte': libraryVersion,
-				'@carbon/styles': '^1.30.0',
+				'@carbon/styles': carbonStylesVersion,
 				'@sveltejs/adapter-auto': '^2.1.0',
-				'@sveltejs/kit': '^1.20.1',
+				'@sveltejs/kit': '^1.20.4',
 				d3: D3VERSION,
-				// sass: '^1.60.0',
+				// sass: '^1.63.4',
 				svelte: '^3.59.1',
 				'svelte-check': '^3.4.3',
 				tslib: '^2.5.3',
-				typescript: '^5.0.4',
+				typescript: '^5.1.3',
 				vite: '^4.3.9'
 			},
 			engines: {
@@ -608,7 +631,7 @@ export const createVueChartApp = (demo: any) => {
 	const chartComponent = demo.chartType.vue
 
 	const appVue = `<template>
-  <div id="app">
+  <div id="app" class="p-1">
 	  <${chartComponent} :data="data" :options="options" />
   </div>
 </template>
@@ -628,6 +651,9 @@ export default {
   @import "@carbon/styles/css/styles.css";
   @import "@carbon/charts/styles.css";
   @import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+	.p-1 {
+		padding: 2rem;
+	}
 </style>`
 
 	const mainJs = `import Vue from 'vue'
@@ -648,7 +674,7 @@ new Vue({
 			dependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-vue': libraryVersion,
-				'@carbon/styles': '^1.30.0',
+				'@carbon/styles': carbonStylesVersion,
 				d3: D3VERSION,
 				vue: '^2.7.14'
 			}
