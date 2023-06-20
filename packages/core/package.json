@@ -1,186 +1,186 @@
 {
-	"name": "@carbon/charts",
-	"version": "1.8.0",
-	"description": "Carbon Charts component library",
-	"module": "./dist/index.mjs",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		"./package.json": "./package.json",
-		"./styles.min.css": "./dist/styles.min.css",
-		"./styles.css": "./dist/styles.css",
-		"./styles/styles.scss": "./scss/index.scss",
-		"./scss/index.scss": "./scss/index.scss",
-		".": {
-			"types": "./dist/index.d.ts",
-			"browser": {
-				"import": "./dist/index.mjs",
-				"require": "./dist/index.js"
-			},
-			"node": {
-				"import": "./dist/index.mjs",
-				"require": "./dist/index.js"
-			}
-		},
-		"./components": {
-			"types": "./dist/components/index.d.ts",
-			"import": "./dist/components/index.mjs",
-			"require": "./dist/components/index.js"
-		},
-		"./demo/styles.css": "./dist/demo/styles.css",
-		"./demo": {
-			"types": "./dist/demo/index.d.ts",
-			"import": "./dist/demo/index.mjs",
-			"require": "./dist/demo/index.js"
-		},
-		"./interfaces": {
-			"types": "./dist/interfaces/index.d.ts",
-			"import": "./dist/interfaces/index.mjs",
-			"require": "./dist/interfaces/index.js"
-		},
-		"./model": {
-			"types": "./dist/model/index.d.ts",
-			"import": "./dist/model/index.mjs",
-			"require": "./dist/model/index.js"
-		},
-		"./services": {
-			"types": "./dist/services/index.d.ts",
-			"import": "./dist/services/index.mjs",
-			"require": "./dist/services/index.js"
-		}
-	},
-	"files": [
-		"dist",
-		"scss",
-		"CHANGELOG.md"
-	],
-	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
-		"file:css:charts": "sass scss/index.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
-		"file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
-		"file:css:demo": "sass src/demo/styles.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
-		"file:downlevel:dts": "downlevel-dts dist dist",
-		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "vite build && yarn postbundle",
-		"demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",
-		"demo:storybook": "storybook build -o demo/bundle --quiet",
-		"build:demo": "concurrently \"yarn:demo:*\"",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
-		"test": "vitest",
-		"test:coverage": "vitest run --coverage",
-		"lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore",
-		"clean": "rm -rf dist demo/bundle"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
-	},
-	"dependencies": {
-		"@carbon/colors": "^11.16.0",
-		"@carbon/import-once": "^10.7.0",
-		"@carbon/layout": "^11.15.0",
-		"@carbon/styles": "^1.31.2",
-		"@carbon/telemetry": "~0.1.0",
-		"@carbon/themes": "^11.20.0",
-		"@carbon/utils-position": "^1.1.4",
-		"carbon-components": "^10.58.7",
-		"d3": "^7.8.5",
-		"d3-cloud": "^1.2.5",
-		"d3-sankey": "^0.12.3",
-		"date-fns": "^2.30.0",
-		"dom-to-image-more": "^3.1.6",
-		"lodash-es": "^4.17.21",
-		"resize-observer-polyfill": "^1.5.1",
-		"topojson-client": "3.1.0",
-		"tslib": "^2.5.3"
-	},
-	"peerDependencies": {
-		"d3": "^7.0.0",
-		"d3-cloud": "^1.2.5",
-		"d3-sankey": "^0.12.3"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.22.5",
-		"@rushstack/eslint-patch": "^1.3.2",
-		"@stackblitz/sdk": "^1.9.0",
-		"@storybook/addon-essentials": "^7.0.22",
-		"@storybook/addon-interactions": "^7.0.22",
-		"@storybook/addon-links": "^7.0.22",
-		"@storybook/blocks": "^7.0.22",
-		"@storybook/html": "^7.0.22",
-		"@storybook/html-vite": "^7.0.22",
-		"@storybook/manager-api": "^7.0.22",
-		"@storybook/testing-library": "^0.1.0",
-		"@storybook/theming": "^7.0.22",
-		"@types/d3": "^7.4.0",
-		"@types/d3-cloud": "^1.2.5",
-		"@types/d3-sankey": "^0.12.1",
-		"@types/lodash-es": "^4.17.7",
-		"@types/topojson": "^3.2.3",
-		"@typescript-eslint/eslint-plugin": "^5.60.0",
-		"@typescript-eslint/parser": "^5.60.0",
-		"codesandbox": "^2.2.3",
-		"concurrently": "^8.2.0",
-		"downlevel-dts": "^0.11.0",
-		"eslint": "^8.43.0",
-		"eslint-config-prettier": "^8.8.0",
-		"eslint-plugin-storybook": "^0.6.12",
-		"jsdom": "^22.1.0",
-		"prettier": "^2.8.8",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"sass": "^1.63.4",
-		"storybook": "^7.0.22",
-		"typedoc": "^0.24.8",
-		"typescript": "^5.1.3",
-		"vite": "^4.3.9",
-		"vite-plugin-dts": "~2.3.0",
-		"vitest": "^0.32.2"
-	},
-	"prettier": "../../prettier.config.cjs",
-	"publishConfig": {
-		"access": "public"
-	},
-	"keywords": [
-		"carbon",
-		"charts",
-		"dataviz",
-		"data-visualization",
-		"visualizations",
-		"d3",
-		"svg",
-		"component",
-		"components",
-		"css",
-		"html",
-		"ibm",
-		"typescript",
-		"javascript",
-		"js",
-		"library",
-		"pattern",
-		"patterns",
-		"sass",
-		"scss"
-	],
-	"author": "IBM",
-	"license": "Apache-2.0",
-	"maintainers": [
-		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
-		}
-	],
-	"contributors": [
-		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
-		}
-	]
+  "name": "@carbon/charts",
+  "version": "1.9.0-next.0",
+  "description": "Carbon Charts component library",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    "./styles.min.css": "./dist/styles.min.css",
+    "./styles.css": "./dist/styles.css",
+    "./styles/styles.scss": "./scss/index.scss",
+    "./scss/index.scss": "./scss/index.scss",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "node": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      }
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.mjs",
+      "require": "./dist/components/index.js"
+    },
+    "./demo/styles.css": "./dist/demo/styles.css",
+    "./demo": {
+      "types": "./dist/demo/index.d.ts",
+      "import": "./dist/demo/index.mjs",
+      "require": "./dist/demo/index.js"
+    },
+    "./interfaces": {
+      "types": "./dist/interfaces/index.d.ts",
+      "import": "./dist/interfaces/index.mjs",
+      "require": "./dist/interfaces/index.js"
+    },
+    "./model": {
+      "types": "./dist/model/index.d.ts",
+      "import": "./dist/model/index.mjs",
+      "require": "./dist/model/index.js"
+    },
+    "./services": {
+      "types": "./dist/services/index.d.ts",
+      "import": "./dist/services/index.mjs",
+      "require": "./dist/services/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "scss",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "postinstall": "carbon-telemetry collect --install",
+    "file:css:charts": "sass scss/index.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
+    "file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
+    "file:css:demo": "sass src/demo/styles.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
+    "file:downlevel:dts": "downlevel-dts dist dist",
+    "postbundle": "concurrently \"yarn:file:*\"",
+    "build:package": "vite build && yarn postbundle",
+    "demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",
+    "demo:storybook": "storybook build -o demo/bundle --quiet",
+    "build:demo": "concurrently \"yarn:demo:*\"",
+    "build": "yarn build:package && yarn build:demo",
+    "storybook": "storybook dev -p 9006",
+    "start": "yarn storybook",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
+    "format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore",
+    "clean": "rm -rf dist demo/bundle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carbon-design-system/carbon-charts.git",
+    "homepage": "https://carbon-design-system.github.io/carbon-charts/"
+  },
+  "dependencies": {
+    "@carbon/colors": "^11.16.0",
+    "@carbon/import-once": "^10.7.0",
+    "@carbon/layout": "^11.15.0",
+    "@carbon/styles": "^1.31.2",
+    "@carbon/telemetry": "~0.1.0",
+    "@carbon/themes": "^11.20.0",
+    "@carbon/utils-position": "^1.1.4",
+    "carbon-components": "^10.58.7",
+    "d3": "^7.8.5",
+    "d3-cloud": "^1.2.5",
+    "d3-sankey": "^0.12.3",
+    "date-fns": "^2.30.0",
+    "dom-to-image-more": "^3.1.6",
+    "lodash-es": "^4.17.21",
+    "resize-observer-polyfill": "^1.5.1",
+    "topojson-client": "3.1.0",
+    "tslib": "^2.5.3"
+  },
+  "peerDependencies": {
+    "d3": "^7.0.0",
+    "d3-cloud": "^1.2.5",
+    "d3-sankey": "^0.12.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@rushstack/eslint-patch": "^1.3.2",
+    "@stackblitz/sdk": "^1.9.0",
+    "@storybook/addon-essentials": "^7.0.22",
+    "@storybook/addon-interactions": "^7.0.22",
+    "@storybook/addon-links": "^7.0.22",
+    "@storybook/blocks": "^7.0.22",
+    "@storybook/html": "^7.0.22",
+    "@storybook/html-vite": "^7.0.22",
+    "@storybook/manager-api": "^7.0.22",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/theming": "^7.0.22",
+    "@types/d3": "^7.4.0",
+    "@types/d3-cloud": "^1.2.5",
+    "@types/d3-sankey": "^0.12.1",
+    "@types/lodash-es": "^4.17.7",
+    "@types/topojson": "^3.2.3",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "codesandbox": "^2.2.3",
+    "concurrently": "^8.2.0",
+    "downlevel-dts": "^0.11.0",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-storybook": "^0.6.12",
+    "jsdom": "^22.1.0",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.63.4",
+    "storybook": "^7.0.22",
+    "typedoc": "^0.24.8",
+    "typescript": "^5.1.3",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "~2.3.0",
+    "vitest": "^0.32.2"
+  },
+  "prettier": "../../prettier.config.cjs",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "carbon",
+    "charts",
+    "dataviz",
+    "data-visualization",
+    "visualizations",
+    "d3",
+    "svg",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "typescript",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss"
+  ],
+  "author": "IBM",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com",
+      "url": "https://github.com/theiliad"
+    }
+  ]
 }
