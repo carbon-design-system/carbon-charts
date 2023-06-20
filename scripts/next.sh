@@ -18,7 +18,7 @@ git pull
 yarn install
 
 # Create next version using existing commit (eg 1.9.0-next.2, etc.)
-npx lerna version prepatch --preid next --amend --force-publish
+npx lerna version prerelease --preid next --force-publish
 
 # For angular package, copies the version to dist/package.json using ng-packagr
 yarn build
