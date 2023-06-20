@@ -9,16 +9,21 @@ git config --global user.name "carbon-bot"
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
+# Get git into the right state, ensure local branch is up-to-date
 git stash
 git checkout pr-1554
-# As you might have an outdated local branch (and are not a CI)
 git pull
 
+# Use latest dependencies
+yarn install
+
+# Create next version using existing commit (eg 1.9.0-next.2, etc.)
 npx lerna version prepatch --preid next --amend --force-publish
 
-# For angular package, copies the version to dist/package.json
+# For angular package, copies the version to dist/package.json using ng-packagr
 yarn build
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-npx lerna publish from-package prepatch --force-publish --preid next --pre-dist-tag next
+# Lerna is supposed to support yarn workspaces and replace "workspace:*" in dist/package.json with current version
+npx lerna publish from-package prepatch --preid next --pre-dist-tag next --force-publish 
