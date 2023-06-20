@@ -2,9 +2,6 @@
 
 set -e # exit with nonzero exit code if anything fails
 
-# If no parameter is given, "latest" is used as the default value.
-distTag=${1:-latest}
-
 # Git user info configs
 git config --global user.email "carbon@us.ibm.com"
 git config --global user.name "carbon-bot"
@@ -18,26 +15,21 @@ echo "Publish to Github..."
 # Stash uncommitted changes
 git stash
 
-# Checkout master to get out of detached HEAD state
+# Create release with lerna using master branch and set version variable
 git checkout master
-
-# Create release with lerna and set version variable
 npx lerna version --conventional-commits --yes --force-publish --create-release github
 
-echo "Rebuild packages and demos.."
+echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 echo "Publish to NPM..."
-# Do NOT specify --contents! Use package.json publishConfig.directory per package for better granularity.
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
 npx lerna publish from-git --yes --force-publish --no-verify-access --dist-tag $distTag
 
-if [ "$distTag" = "latest" ]; then
-  # Fetch latest version of @carbon/charts-angular and re-tag
-  version=$(npm view @carbon/charts-angular version)
-  npm dist-tag add @carbon/charts-angular@1.8.0 latest
-  npm dist-tag add @carbon/charts-angular@$version next
-fi
+# Keep @carbon/charts-angular 1.8.0 with latest tag
+version=$(npm view @carbon/charts-angular version)
+npm dist-tag add @carbon/charts-angular@1.8.0 latest
+npm dist-tag add @carbon/charts-angular@$version next

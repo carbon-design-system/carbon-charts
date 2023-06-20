@@ -10,7 +10,7 @@
     "build:demos": "bash scripts/build-demos.sh",
     "build": "bash scripts/build-packages-and-demos.sh",
     "deploy": "bash scripts/deploy.sh",
-    "deploy:next": "bash scripts/deploy.sh next",
+    "deploy:next": "bash scripts/next.sh",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
