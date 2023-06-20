@@ -27,5 +27,5 @@ npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 echo "Publish to NPM..."
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
-# The angular package also adds the tag "next" automatically
-npx lerna publish from-git --yes --force-publish --no-verify-access
+# The angular package also adds the tag "next" automatically.
+npx lerna publish from-git --yes --force-publish
