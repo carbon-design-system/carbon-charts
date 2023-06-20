@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This script is for working LOCALLY
+# This script is for working LOCALLY. Allow it to commit to pr-1554 so the version increments properly.
 
 set -e # exit with nonzero exit code if anything fails
 

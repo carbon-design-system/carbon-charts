@@ -54,7 +54,7 @@
     "@storybook/addon-links": "^7.0.22",
     "@storybook/blocks": "^7.0.22",
     "@storybook/manager-api": "^7.0.22",
-    "@storybook/testing-library": "^0.1.0",
+    "@storybook/testing-library": "^0.2.0",
     "@storybook/theming": "^7.0.22",
     "@storybook/vue-vite": "^7.0.22",
     "@vitejs/plugin-vue": "^4.2.3",

@@ -67,7 +67,7 @@
     "@storybook/react": "^7.0.22",
     "@storybook/react-vite": "^7.0.22",
     "@storybook/react-webpack5": "^7.0.22",
-    "@storybook/testing-library": "^0.1.0",
+    "@storybook/testing-library": "^0.2.0",
     "@storybook/theming": "^7.0.22",
     "@types/carbon__icons-react": "^11.20.0",
     "@types/react": "^18.2.13",
