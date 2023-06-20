@@ -84,6 +84,7 @@
   },
   "prettier": "../../prettier.config.cjs",
   "publishConfig": {
+    "tag": "next",
     "directory": "dist",
     "access": "public"
   },

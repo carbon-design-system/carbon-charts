@@ -27,9 +27,5 @@ npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 echo "Publish to NPM..."
 # All packages except angular are published from their root with publishing content filtered via files array in package.json.
-npx lerna publish from-git --yes --force-publish --no-verify-access --dist-tag $distTag
-
-# Keep @carbon/charts-angular 1.8.0 with latest tag
-version=$(npm view @carbon/charts-angular version)
-npm dist-tag add @carbon/charts-angular@1.8.0 latest
-npm dist-tag add @carbon/charts-angular@$version next
+# The angular package also adds the tag "next" automatically
+npx lerna publish from-git --yes --force-publish --no-verify-access
