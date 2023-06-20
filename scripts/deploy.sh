@@ -20,7 +20,7 @@ yarn install
 
 # Create version, changelogs and Github release
 echo "Creating version, changelogs and publishing to Github..."
-npx lerna version --yes --force-publish --conventional-commits --create-release github
+npx lerna version minor --yes --force-publish --conventional-commits --create-release github
 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
