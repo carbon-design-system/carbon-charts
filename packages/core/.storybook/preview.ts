@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/html'
 import { themes } from '@storybook/theming'
 
-import '../src/demo/styles.scss'
+import '../scss/demos.scss'
 
 const preview: Preview = {
 	parameters: {

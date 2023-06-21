@@ -9,7 +9,7 @@ $css--reset: false; // Do not include reset CSS
 
 // Custom charting tokens
 @use '@carbon/styles/scss/theme' as theme;
-@import './tokens';
+@import 'tokens';
 @include theme.add-component-tokens($custom-charting-tokens);
 @import '@carbon/styles/scss/components/button/tokens';
 
@@ -17,14 +17,14 @@ $css--reset: false; // Do not include reset CSS
 	transition: all 0.1s ease-out;
 }
 @import '@carbon/colors';
-@import './colors'; // mixins, color palette, color maps, tooltip and legend color settings
+@import 'colors'; // mixins, color palette, color maps, tooltip and legend color settings
 
 @import '@carbon/import-once/scss'; // exports mixin
-@import './components'; // use exports mixin to ensure component modules only loaded once
+@import 'components'; // use exports mixin to ensure component modules only loaded once
 
-@import './graphs'; // chart-specific
-@import './type'; // font size, fill, color, weight (but not family)
-@import './chart-holder'; // container settings
+@import 'graphs'; // chart-specific
+@import 'type'; // font size, fill, color, weight (but not family)
+@import 'chart-holder'; // container settings
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;

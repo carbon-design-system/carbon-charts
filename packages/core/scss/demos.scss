@@ -14,7 +14,7 @@ $css--reset: false; // Do not include reset CSS
 
 // Custom charting tokens
 @use '@carbon/styles/scss/theme';
-@import '../../scss/tokens';
+@import 'tokens';
 @include theme.add-component-tokens($custom-charting-tokens);
 @import '@carbon/styles/scss/components/button/tokens.scss';
 
@@ -22,14 +22,14 @@ $css--reset: false; // Do not include reset CSS
 	transition: all 0.1s ease-out;
 }
 @import '@carbon/colors';
-@import '../../scss/colors';
+@import 'colors';
 
 @import '@carbon/import-once/scss';
-@import '../../scss/components';
+@import 'components';
 
-@import '../../scss/graphs';
-@import '../../scss/type';
-@import '../../scss/chart-holder';
+@import 'graphs';
+@import 'type';
+@import 'chart-holder';
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;
