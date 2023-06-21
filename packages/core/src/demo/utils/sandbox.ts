@@ -6,44 +6,6 @@ const libraryVersion = packageJSON.version
 const D3VERSION = packageJSON.peerDependencies['d3']
 const carbonStylesVersion = packageJSON.dependencies['@carbon/styles']
 
-const sandboxConfig = `{
-  "infiniteLoopProtection": true,
-  "hardReloadOnChange": false,
-  "view": "browser",
-  "container": {
-    "node": "16"
-  }
-}`
-
-const codeSandboxTasks = `{
-	"$schema": "https://codesandbox.io/schemas/tasks.json",
-	"setupTasks": [
-		{
-			"name": "Install Dependencies",
-			"command": "yarn install"
-		}
-	],
-
-	// These tasks can be run from CodeSandbox. Running one will open a log in the app.
-	"tasks": {
-		"dev": {
-			"name": "dev",
-			"command": "yarn dev",
-			"runAtStart": true
-		},
-		"build": {
-			"name": "build",
-			"command": "yarn build",
-			"runAtStart": false
-		},
-		"preview": {
-			"name": "preview",
-			"command": "yarn preview",
-			"runAtStart": false
-		}
-	}
-}`
-
 export const createChartSandbox = (chartTemplate: any) => {
 	const files: IFiles = {}
 	Object.keys(chartTemplate).forEach((filePath) => {
@@ -440,54 +402,32 @@ export const createSvelteChartApp = (demo: any) => {
 			break
 	}
 
-	const svelteKitTsConfig = `{
-	"compilerOptions": {
-		"paths": {
-			"$lib": [
-				"../src/lib"
-			],
-			"$lib/*": [
-				"../src/lib/*"
-			]
-		},
-		"rootDirs": [
-			"..",
-			"./types"
-		],
-		"importsNotUsedAsValues": "error",
-		"isolatedModules": true,
-		"preserveValueImports": true,
-		"lib": [
-			"esnext",
-			"DOM",
-			"DOM.Iterable"
-		],
-		"moduleResolution": "node",
-		"module": "esnext",
-		"target": "esnext",
-		"ignoreDeprecations": "5.0"
-	},
-	"include": [
-		"ambient.d.ts",
-		"./types/**/$types.d.ts",
-		"../vite.config.ts",
-		"../src/**/*.js",
-		"../src/**/*.ts",
-		"../src/**/*.svelte",
-		"../tests/**/*.js",
-		"../tests/**/*.ts",
-		"../tests/**/*.svelte"
-	],
-	"exclude": [
-		"../node_modules/**",
-		"./[!ambient.d.ts]**",
-		"../src/service-worker.js",
-		"../src/service-worker.ts",
-		"../src/service-worker.d.ts"
-	]
-}`
+	const appSvelte =
+`<script lang="ts">
+	import { ${chartComponent} } from '@carbon/charts-svelte'
+	import '@carbon/styles/css/styles.css'
+	import '@carbon/charts/styles.css'
+</script>
+	
+<${chartComponent} data={${data}} options={${options}} style="padding:2rem;" />
+`
 
-	const appHtml = `<!DOCTYPE html>
+	const svelteMainTs =
+`import App from './App.svelte';
+
+const app = new App({
+  target: document.getElementById('app'),
+});
+
+export default app;
+`
+
+	const svelteViteEnvDts =
+`/// <reference types="svelte" />
+/// <reference types="vite/client" />
+`
+
+const svelteHtml = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -498,128 +438,99 @@ export const createSvelteChartApp = (demo: any) => {
 			rel="stylesheet"
 			crossorigin="anonymous"
 		/>
-		<style>
-	    .p-1 {
-		    padding: 2rem;
-	    }
-    </style>
-		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover">
-	  <div class="p-1">
-		  <div style="display: contents">%sveltekit.body%</div>
-		</div>
-	</body>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>`
-
-	const appDts = `declare global {
-	namespace App {
-	}
-}
-
-export {}
-`
-
-	const pageSvelte = `<script lang="ts">
-import { ${chartComponent} } from '@carbon/charts-svelte'
-import '@carbon/styles/css/styles.css'
-import '@carbon/charts/styles.css'
-</script>
-
-<${chartComponent} data={${data}} options={${options}} />`
 
 	const packageJson = JSON.stringify(
 		{
 			name: 'carbon-charts-svelte-example',
 			version: '0.0.0',
 			type: 'module',
-			license: 'MIT',
 			scripts: {
-				dev: 'vite dev',
-				start: 'vite dev',
+				dev: 'vite',
 				build: 'vite build',
-				preview: 'vite preview'
+				preview: 'vite preview',
+				check: 'svelte-check --tsconfig ./tsconfig.json'
 			},
 			devDependencies: {
 				'@carbon/charts': libraryVersion,
 				'@carbon/charts-svelte': libraryVersion,
 				'@carbon/styles': carbonStylesVersion,
-				'@sveltejs/adapter-auto': '^2.1.0',
-				'@sveltejs/kit': '^1.20.4',
+				'@sveltejs/vite-plugin-svelte': '^2.4.1',
+				'@tsconfig/svelte': '^4.0.1',
 				d3: D3VERSION,
-				// sass: '^1.63.4',
-				svelte: '^3.59.1',
+				svelte: '^3.59.2',
 				'svelte-check': '^3.4.3',
 				tslib: '^2.5.3',
 				typescript: '^5.1.3',
 				vite: '^4.3.9'
-			},
-			engines: {
-				node: '>=16.12.0'
 			}
 		},
 		null,
 		2
 	)
 
-	const svelteKitConfig = `import adapter from '@sveltejs/adapter-auto'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+	const svelteConfig =
+`import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	preprocess: vitePreprocess(),
+export default {
+  preprocess: vitePreprocess(),
+};
+`
 
-	kit: {
-		adapter: adapter()
-	}
-}
-
-export default config`
-
-	const tsConfig = `{
-	"extends": "./.svelte-kit/tsconfig.json",
+	const svelteTsConfig =
+`{
+	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"resolveJsonModule": true,
 		"allowJs": true,
 		"checkJs": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"sourceMap": true,
-		"strict": true
-	}
+		"isolatedModules": true
+	},
+	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }`
 
-	const viteConfig = `import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vite'
+	const svelteTsconfigNode = 
+`{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["vite.config.ts"]
+}`
+
+	const svelteViteConfig =
+`import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [svelte()],
 	optimizeDeps: {
 		include: ['@carbon/charts', 'carbon-components'],
 		exclude: ['@carbon/telemetry']
-	},
-	ssr: {
-		external: ['@carbon/charts']
-		// noExternal: ['@carbon/charts', '@carbon/telemetry', 'carbon-components']
 	}
 })`
 
 	return {
-		// '.codesandbox/Dockerfile': dockerFile, // works but adds a lot of time to the startup process
-		'.codesandbox/tasks.json': codeSandboxTasks,
-		'.svelte-kit/tsconfig.json': svelteKitTsConfig,
-		'src/app.html': appHtml,
-		'src/app.d.ts': appDts,
-		'src/routes/+page.svelte': pageSvelte,
-		'src/static/.gitkeep': ' ',
-		'.npmrc': 'engine-strict=true',
+		'src/App.svelte': appSvelte,
+		'src/main.ts': svelteMainTs,
+		'src/vite-env.d.ts': svelteViteEnvDts,
+		'index.html': svelteHtml,
 		'package.json': packageJson,
-		'README.md': `# Carbon Charts Svelte Example`,
-		'sandbox.config.json': sandboxConfig,
-		'svelte.config.js': svelteKitConfig,
-		'tsconfig.json': tsConfig,
-		'vite.config.ts': viteConfig
+		'svelte.config.js': svelteConfig,
+		'tsconfig.json': svelteTsConfig,
+		'tsconfig.node.json': svelteTsconfigNode,
+		'vite.config.ts': svelteViteConfig
 	}
 }
 

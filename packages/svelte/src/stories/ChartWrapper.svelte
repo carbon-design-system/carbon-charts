@@ -1,25 +1,14 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte'
+	import sdk from '@stackblitz/sdk'
 	import type { Demo } from '@carbon/charts/demo'
 
 	export let DemoComponent: ComponentType
 	export let chartType: string
 	export let demo: Demo
 
-	const openSandbox = async () => {
-		try {
-			const response = await fetch(`${demo.codesandbox.svelte}&json=1`)
-
-			if (!response.ok) {
-				throw new Error('Network response from CodeSandbox was not ok')
-			}
-			const data = await response.json()
-			const sandboxUrl = `https://codesandbox.io/p/sandbox/${data.sandbox_id}`
-			window.open(sandboxUrl, '_blank')
-		} catch (error) {
-			console.error('There was a problem opening the Cloud Sandbox:', error)
-			throw error
-		}
+	const openSandbox = () => {
+		sdk.openProject(demo.code.svelte, { newWindow: true })
 	}
 </script>
 
@@ -51,9 +40,10 @@
 
 	<a on:click|preventDefault={openSandbox} href={'#'} target="_blank">
 		<img
-			src="https://codesandbox.io/static/img/play-codesandbox.svg"
-			alt="Edit on CodeSandbox"
-			class="marginTop" />
+			src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
+			class="marginTop"
+			alt="Edit on StackBlitz"
+		/>
 	</a>
 
 	<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30" data-code-snippet>

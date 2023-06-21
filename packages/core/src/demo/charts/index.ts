@@ -112,7 +112,7 @@ enum DemoGroupTypes {
 }
 
 const libraryVersion = packageJSON.version
-const D3VERSION = packageJSON.peerDependencies['d3']
+const D3VERSION = packageJSON.dependencies['d3']
 const stylesVersion = packageJSON.dependencies['@carbon/styles']
 
 const utilityDemoGroups = [
@@ -1319,7 +1319,6 @@ const mapDemoGroups = (demoGroups: any) =>
 				demo.options.height = demo.options.height ?? '400px'
 
 				demo.codesandbox = {} // VanillaJS, Angular and React use StackBlitz via demo.code.vanilla, angular, react
-				demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo)) // TODO: move to StackBlitz (template: 'svelte-ts')
 				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
 
 				const project = {
@@ -1332,7 +1331,7 @@ const mapDemoGroups = (demoGroups: any) =>
 						d3: D3VERSION
 					}
 				}
-				demo.code = {} // Svelte and Vue use CodeSandbox
+				demo.code = {} // Vue uses CodeSandbox
 
 				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
 
@@ -1359,7 +1358,18 @@ const mapDemoGroups = (demoGroups: any) =>
 					}
 				}
 
-				// We could define code.svelte and code.vue using a `node` template (Web Container). Note: StackBlitz `vue` template is Vue 3 only.
+				demo.code.svelte = {
+					...project,
+					files: createSvelteChartApp(demo),
+					template: 'node',
+					title: 'Carbon Charts Svelte Example',
+					dependencies: {
+						...project.dependencies,
+						'@carbon/charts-svelte': libraryVersion
+					}
+				}
+
+				// TODO: define code.vue using a `node` template (Web Container). Note: StackBlitz `vue` template is Vue 3 only (might be ok)
 
 				return demo
 			})
