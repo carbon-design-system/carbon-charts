@@ -38,7 +38,7 @@
     "CHANGELOG.md"
   ],
   "peerDependencies": {
-    "svelte": "^3.31.0"
+    "svelte": "^3.31.0 || ^4.0.0"
   },
   "devDependencies": {
     "@carbon/charts": "workspace:*",
@@ -69,7 +69,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.23",
-    "svelte": "^3.59.2",
+    "svelte": "^4.0.0",
     "svelte-check": "^3.4.4",
     "tslib": "^2.5.3",
     "typescript": "^5.1.3",
