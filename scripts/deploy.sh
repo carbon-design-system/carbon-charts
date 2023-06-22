@@ -25,6 +25,8 @@ npx lerna version minor --yes --force-publish --conventional-commits --create-re
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
+node scripts/update-angular-dependency-version.cjs
+
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 

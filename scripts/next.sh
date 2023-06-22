@@ -23,7 +23,9 @@ npx lerna version prerelease --preid next --force-publish
 # For angular package, copies the version to dist/package.json using ng-packagr
 yarn build
 
-npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+node scripts/update-angular-dependency-version.cjs
 
-# Lerna is supposed to support yarn workspaces and replace "workspace:*" in dist/package.json with current version
-npx lerna publish from-package --pre-dist-tag next --force-publish 
+# npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
+# # Lerna is supposed to support yarn workspaces and replace "workspace:*" in dist/package.json with current version
+# npx lerna publish from-package --pre-dist-tag next --force-publish 
