@@ -4,9 +4,7 @@ import { dirname } from 'path'
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx)',
-		'../../core/src/stories/getting-started/svelte.stories.mdx',
-		'../../core/src/stories/tutorials/*.stories.mdx'
+		'../src/**/*.stories.@(js|jsx|ts|tsx)'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
 	addons: [
@@ -18,15 +16,11 @@ const config: StorybookConfig = {
 		}
 	],
 	async viteFinal(config) {
-		// Solves issue related to loading stories from core
-		if (config.resolve) {
-			config.resolve.alias = {
-				...config.resolve.alias,
-				'@storybook/blocks': dirname(require.resolve('@storybook/blocks/package.json'))
-			}
-		}
 		if (config.build) {
 			config.build.chunkSizeWarningLimit = 1600
+		}
+		if (config.server?.fs) {
+			config.server.fs.allow = ['../src']
 		}
 		return config
 	},

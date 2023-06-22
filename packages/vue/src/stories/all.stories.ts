@@ -1,4 +1,5 @@
 import { storiesOf, type Args } from '@storybook/vue'
+import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@carbon/charts'
 import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
 import * as ChartComponents from '../components'
@@ -42,13 +43,13 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
 		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
-		const component = ChartComponents[demo.chartType.vue]
+		const component = ChartComponents[demo.chartType.vue as keyof typeof ChartComponents]
 
 		groupStories.add(
 			demo.title,
 			(args: Args) => ({
 				components: {
-					[demo.chartType.vue]: component
+					[demo.chartType.vue as string]: component
 				},
 				props: {
 					data: {
@@ -56,6 +57,11 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					},
 					options: {
 						default: { ...demo.options, ...args?.options }
+					}
+				},
+				methods: {
+					openSandbox() {
+						sdk.openProject(demo.code.vue, { newWindow: true })
 					}
 				},
 				template: `
@@ -75,8 +81,8 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 						<h3 class="marginTop-30">Code sample</h3>
 
-						<a href="${demo.codesandbox.vue}" target="_blank">
-							<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" alt="Edit on Codesandbox" />
+						<a href="#" @click.prevent="openSandbox()">
+							<img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" class="marginTop" alt="Edit on StackBlitz" />
 						</a>
 
 					</div>`

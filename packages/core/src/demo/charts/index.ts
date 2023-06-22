@@ -57,12 +57,12 @@ export {
 	highlightDemos,
 	heatmapDemos
 }
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import packageJSON from '../../../package.json'
 
 import {
-	createChartSandbox,
 	createVanillaChartApp,
 	createAngularChartApp,
 	createReactChartApp,
@@ -83,13 +83,6 @@ export interface Demo {
 	}
 	data: ChartTabularData
 	options: BaseChartOptions
-	codesandbox: {
-		vanilla: string
-		angular?: string
-		react?: string
-		svelte?: string
-		vue?: string
-	}
 	code: {
 		vanilla: any
 		angular?: any
@@ -1318,9 +1311,6 @@ const mapDemoGroups = (demoGroups: any) =>
 				// If height not specified in options, use 400px
 				demo.options.height = demo.options.height ?? '400px'
 
-				demo.codesandbox = {} // VanillaJS, Angular and React use StackBlitz via demo.code.vanilla, angular, react
-				demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo))
-
 				const project = {
 					title: 'Carbon Charts Example',
 					template: 'javascript',
@@ -1331,7 +1321,8 @@ const mapDemoGroups = (demoGroups: any) =>
 						d3: D3VERSION
 					}
 				}
-				demo.code = {} // Vue uses CodeSandbox
+
+				demo.code = {}
 
 				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
 
@@ -1369,14 +1360,24 @@ const mapDemoGroups = (demoGroups: any) =>
 					}
 				}
 
-				// TODO: define code.vue using a `node` template (Web Container). Note: StackBlitz `vue` template is Vue 3 only (might be ok)
+				demo.code.vue = {
+					...project,
+					files: createVueChartApp(demo),
+					template: 'node',
+					title: 'Carbon Charts Vue Example',
+					dependencies: {
+						...project.dependencies,
+						'@carbon/charts-vue': libraryVersion
+					}
+				}
 
 				return demo
 			})
 
 			return demoGroup
 		})
-// add codesandbox and code to demos
+
+// add code to demos
 allDemoGroups = mapDemoGroups(allDemoGroups)
 
 // in the storybook we want to show all the demos

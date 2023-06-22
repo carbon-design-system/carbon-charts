@@ -1,25 +1,17 @@
-import { getParameters } from 'codesandbox/lib/api/define'
-import type { IFiles } from 'codesandbox-import-utils/lib/api/define'
-
 import packageJSON from '../../../package.json'
-const libraryVersion = packageJSON.version
-const D3VERSION = packageJSON.peerDependencies['d3']
-const carbonStylesVersion = packageJSON.dependencies['@carbon/styles']
 
-export const createChartSandbox = (chartTemplate: any) => {
-	const files: IFiles = {}
-	Object.keys(chartTemplate).forEach((filePath) => {
-		files[filePath] = {
-			content: chartTemplate[filePath],
-			isBinary: false
-		}
-	})
-	const parameters = getParameters({ files })
-	const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${encodeURIComponent(
-		parameters
-	)}`
-	return url
+const version = {
+	carbonCharts: packageJSON.version,
+	carbonStyles: packageJSON.dependencies['@carbon/styles'],
+	d3: packageJSON.dependencies['d3'],
+	d3Cloud: packageJSON.dependencies['d3-cloud'],
+	d3Sankey: packageJSON.dependencies['d3-sankey']
 }
+
+const stackBlitzRC =
+`{
+	"startCommand": "yarn dev"
+}`
 
 // Charts Vanilla JavaScript
 
@@ -33,7 +25,8 @@ export const createVanillaChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(_demoOptions, null, isGeoDemo ? '\t\t\t' : '\t')
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `	<html>
+	const indexHtml =
+`<html>
   <head>
     <title>Carbon Charts Vanilla JavaScript Example</title>
     <meta charset="UTF-8" />
@@ -106,9 +99,11 @@ new ${chartComponent}(chartHolder, {
 			description: 'Carbon Charts Vanilla JavaScript Example',
 			version: '0.0.0',
 			dependencies: {
-				'@carbon/charts': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
-				d3: D3VERSION
+				'@carbon/charts': version.carbonCharts,
+				'@carbon/styles': version.carbonStyles,
+				d3: version.d3,
+				'd3-cloud': version.d3Cloud,
+				'd3-sankey': version.d3Sankey
 			}
 		},
 		null,
@@ -186,7 +181,7 @@ export const createAngularChartApp = (demo: any) => {
 
 	const packageJson = JSON.stringify(
 		{
-			name: 'carbon-charts-example',
+			name: 'carbon-charts-angular-example',
 			version: '0.0.0',
 			scripts: {
 				ng: 'ng',
@@ -194,15 +189,17 @@ export const createAngularChartApp = (demo: any) => {
 				build: 'NG_CLI_ANALYTICS=false ng build'
 			},
 			dependencies: {
-				'@angular/animations': '^16.1.1',
-				'@angular/common': '^16.1.1',
-				'@angular/compiler': '^16.1.1',
-				'@angular/core': '^16.1.1',
-				'@angular/platform-browser': '^16.1.1',
-				'@carbon/charts': 'next',
-				'@carbon/charts-angular': 'next',
-				'@carbon/styles': carbonStylesVersion,
-				d3: D3VERSION,
+				'@angular/animations': '^16.1.2',
+				'@angular/common': '^16.1.2',
+				'@angular/compiler': '^16.1.2',
+				'@angular/core': '^16.1.2',
+				'@angular/platform-browser': '^16.1.2',
+				'@carbon/charts': version.carbonCharts,
+				'@carbon/charts-angular': version.carbonCharts,
+				'@carbon/styles': version.carbonStyles,
+				d3: version.d3,
+				'd3-cloud': version.d3Cloud,
+				'd3-sankey': version.d3Sankey,
 				rxjs: '~7.8.1',
 				tslib: '^2.5.3',
 				'zone.js': '~0.13.1'
@@ -362,13 +359,14 @@ ReactDOM.render(<App />, document.getElementById("root"))`
 				preview: 'vite preview'
 			},
 			dependencies: {
-				'@carbon/charts': libraryVersion,
-				'@carbon/charts-react': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
-				d3: D3VERSION,
+				'@carbon/charts': version.carbonCharts,
+				'@carbon/charts-react': version.carbonCharts,
+				'@carbon/styles': version.carbonStyles,
+				d3: version.d3,
+				'd3-cloud': version.d3Cloud,
+				'd3-sankey': version.d3Sankey,
 				react: '^18.2.0',
-				'react-dom': '^18.2.0',
-				'react-scripts': '^5.0.1' // needed?
+				'react-dom': '^18.2.0'
 			}
 		},
 		null,
@@ -457,12 +455,14 @@ const svelteHtml = `<!DOCTYPE html>
 				check: 'svelte-check --tsconfig ./tsconfig.json'
 			},
 			devDependencies: {
-				'@carbon/charts': libraryVersion,
-				'@carbon/charts-svelte': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
+				'@carbon/charts': version.carbonCharts,
+				'@carbon/charts-svelte': version.carbonCharts,
+				'@carbon/styles': version.carbonStyles,
 				'@sveltejs/vite-plugin-svelte': '^2.4.1',
 				'@tsconfig/svelte': '^4.0.1',
-				d3: D3VERSION,
+				d3: version.d3,
+				'd3-cloud': version.d3Cloud,
+				'd3-sankey': version.d3Sankey,
 				svelte: '^3.59.2',
 				'svelte-check': '^3.4.3',
 				tslib: '^2.5.3',
@@ -525,6 +525,7 @@ export default defineConfig({
 		'src/App.svelte': appSvelte,
 		'src/main.ts': svelteMainTs,
 		'src/vite-env.d.ts': svelteViteEnvDts,
+		'.stackblitzrc': stackBlitzRC,
 		'index.html': svelteHtml,
 		'package.json': packageJson,
 		'svelte.config.js': svelteConfig,
@@ -561,7 +562,6 @@ export default {
 <style>
   @import "@carbon/styles/css/styles.css";
   @import "@carbon/charts/styles.css";
-  @import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 	.p-1 {
 		padding: 2rem;
 	}
@@ -582,21 +582,83 @@ new Vue({
 			name: 'carbon-charts-vue-example',
 			description: 'Carbon Charts Vue Example',
 			version: '0.0.0',
+			scripts: {
+				dev: 'vite',
+				build: 'vite build',
+				serve: 'vite preview'
+			},
 			dependencies: {
-				'@carbon/charts': libraryVersion,
-				'@carbon/charts-vue': libraryVersion,
-				'@carbon/styles': carbonStylesVersion,
-				d3: D3VERSION,
+				'@carbon/charts': version.carbonCharts,
+				'@carbon/charts-vue': version.carbonCharts,
+				'@carbon/styles': version.carbonStyles,
+				d3: version.d3,
+				'd3-cloud': version.d3Cloud,
+				'd3-sankey': version.d3Sankey,
 				vue: '^2.7.14'
+			},
+			devDependencies: {
+				vite: '^4.3.9',
+				'vite-plugin-vue2': '^2.0.3',
+				'vue-template-compiler': '^2.7.14'
 			}
 		},
 		null,
 		2
 	)
 
+	const viteConfig =
+	`import { fileURLToPath } from 'url'
+	import { defineConfig } from 'vite'
+	import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
+	
+	export default defineConfig({
+		plugins: [
+			vue2({
+				jsx: true
+			})
+		],
+		resolve: {
+			alias: {
+				'@': fileURLToPath(new URL('./src', import.meta.url)),
+				vue: 'vue/dist/vue.esm.js'
+			}
+		},
+		build: {
+			brotliSize: false // unsupported in StackBlitz
+		}
+	})
+`
+
+
+
+	const indexHtml =
+	`<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<link rel="icon" href="/favicon.ico" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Carbon Charts Vue Example</title>
+			<link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
+			<link
+				href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
+				rel="stylesheet"
+				crossorigin="anonymous"
+			/>
+		</head>
+		<body>
+			<div id="app"></div>
+			<script type="module" src="/src/main.js"></script>
+		</body>
+	</html>
+	`
+
 	return {
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
-		'package.json': packageJson
+		'.stackblitzrc': stackBlitzRC,
+		'index.html': indexHtml,
+		'package.json': packageJson,
+		'vite.config.js': viteConfig
 	}
 }

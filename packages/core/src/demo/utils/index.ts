@@ -1,5 +1,4 @@
 export {
-	createChartSandbox,
 	createVanillaChartApp,
 	createAngularChartApp,
 	createReactChartApp,
