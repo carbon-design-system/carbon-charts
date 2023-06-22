@@ -1,6 +1,6 @@
 # Carbon Charts Vue
 
-Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency.
+Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. This version is for Vue.js ^2.7.0. For Vue.js 3.x support, check for the availability of `@carbon/charts-vue@next`.
 
 The required styles should be imported from `@carbon/charts-vue/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
@@ -17,27 +17,25 @@ This component library is community-maintained.
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts-vue @carbon/styles d3
+npm install -S @carbon/charts-vue @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts-vue @carbon/styles d3
+yarn add @carbon/charts-vue @carbon/styles d3 d3-cloud d3-sankey
 ```
-
-**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
 
 ## Step-by-step instructions
 
 Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vue)
 
-## CodeSandbox examples
+## StackBlitz examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
 
-**When opening the link above**, click on the **Edit on CodeSandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
+**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
 

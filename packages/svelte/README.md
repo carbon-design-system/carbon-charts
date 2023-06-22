@@ -17,13 +17,13 @@ Please direct all questions regarding support, bug fixes, and feature requests t
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte @carbon/styles d3
+npm install -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte @carbon/styles d3
+yarn add -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 ## Setup

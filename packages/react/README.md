@@ -13,17 +13,14 @@ The required styles should be imported from `@carbon/charts-react/styles.css` an
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts-react @carbon/styles d3
+npm install -S @carbon/charts-react @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts-react @carbon/styles d3
+yarn add @carbon/charts-react @carbon/styles d3 d3-cloud d3-sankey
 ```
-
-**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of
-the library.
 
 ## Step-by-step instructions
 
