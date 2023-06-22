@@ -33,10 +33,7 @@ Read
 
 ## Charting data & options
 
-Although we will introduce new models in the future as we start
-shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
-
-For instance, in the case of a donut chart, you're able to pass in an additional field called `center` in your options configuring the donut center.
+Although new charts will be introduced in the future (such as a choropleth), data and options follow the same model for all charts with minor exceptions. For example, in the case of a donut chart, you're able to pass in an additional field called `center` in your options to configure the donut center.
 
 For instructions on using the **tabular data format**, see
 [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
