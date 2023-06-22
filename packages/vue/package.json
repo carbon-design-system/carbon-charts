@@ -44,7 +44,7 @@
     "vue": "^2.7.0"
   },
   "dependencies": {
-    "@carbon/charts": "workspace:*",
+    "@carbon/charts": "1.9.0-next.2",
     "@carbon/telemetry": "~0.1.0",
     "vue": "^2.7.14"
   },
@@ -111,5 +111,6 @@
     "patterns",
     "sass",
     "scss"
-  ]
+  ],
+  "gitHead": "f7037103474e53901678dd9e62095b0b1f0f62c4"
 }

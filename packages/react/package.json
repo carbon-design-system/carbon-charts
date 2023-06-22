@@ -41,7 +41,7 @@
     "clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
-    "@carbon/charts": "workspace:*",
+    "@carbon/charts": "1.9.0-next.2",
     "@carbon/icons-react": "^11.21.0",
     "@carbon/telemetry": "~0.1.0"
   },
@@ -146,5 +146,6 @@
       "email": "iliadm@ca.ibm.com",
       "url": "https://github.com/theiliad"
     }
-  ]
+  ],
+  "gitHead": "f7037103474e53901678dd9e62095b0b1f0f62c4"
 }

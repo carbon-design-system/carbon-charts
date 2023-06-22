@@ -32,7 +32,7 @@
     "@angular/core": "^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "@carbon/charts": "workspace:*",
+    "@carbon/charts": "1.9.0-next.2",
     "@carbon/telemetry": "~0.1.0",
     "tslib": "^2.5.3"
   },
@@ -131,5 +131,6 @@
       "email": "iliadm@ca.ibm.com",
       "url": "https://github.com/theiliad"
     }
-  ]
+  ],
+  "gitHead": "f7037103474e53901678dd9e62095b0b1f0f62c4"
 }
