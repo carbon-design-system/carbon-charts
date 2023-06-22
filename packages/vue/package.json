@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-vue",
-  "version": "1.9.0-next.2",
+  "version": "1.9.0-next.3",
   "description": "Carbon Charts component library for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -44,7 +44,7 @@
     "vue": "^2.7.0"
   },
   "dependencies": {
-    "@carbon/charts": "1.9.0-next.2",
+    "@carbon/charts": "^1.9.0-next.3",
     "@carbon/telemetry": "~0.1.0",
     "vue": "^2.7.14"
   },
