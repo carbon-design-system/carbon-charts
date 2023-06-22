@@ -25,7 +25,7 @@ yarn build
 
 node scripts/update-angular-dependency-version.cjs
 
-# npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-# # Lerna is supposed to support yarn workspaces and replace "workspace:*" in dist/package.json with current version
-# npx lerna publish from-package --pre-dist-tag next --force-publish 
+# Lerna is supposed to support yarn workspaces and replace "workspace:*" in dist/package.json with current version
+npx lerna publish from-package --pre-dist-tag next --force-publish
