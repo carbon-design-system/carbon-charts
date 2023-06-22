@@ -12,8 +12,6 @@
     "deploy": "bash scripts/deploy.sh",
     "deploy:next": "bash scripts/next.sh",
     "postinstall": "husky install",
-    "prepack": "pinst --disable",
-    "postpack": "pinst --enable",
     "lint": "lerna run lint",
     "format": "lerna run format",
     "test": "lerna run test"
