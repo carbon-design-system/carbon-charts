@@ -567,25 +567,23 @@ export default {
 	}
 </style>`
 
-	const mainJs = `import Vue from 'vue'
+	const mainJs =
+`import { createApp } from 'vue';
 import ChartsVue from '@carbon/charts-vue'
-import App from './App.vue'
-
-Vue.use(ChartsVue)
-Vue.config.productionTip = false
-new Vue({
-  render: (h) => h(App)
-}).$mount('#app')`
+import App from "./App.vue";
+const app = createApp(App);
+app.use(ChartsVue);
+app.mount('#app');`
 
 	const packageJson = JSON.stringify(
 		{
 			name: 'carbon-charts-vue-example',
 			description: 'Carbon Charts Vue Example',
 			version: '0.0.0',
-			scripts: {
-				dev: 'vite',
-				build: 'vite build',
-				serve: 'vite preview'
+			"scripts": {
+				"serve": "vue-cli-service serve",
+				"build": "vue-cli-service build",
+				"lint": "vue-cli-service lint"
 			},
 			dependencies: {
 				'@carbon/charts': version.carbonCharts,
@@ -594,42 +592,12 @@ new Vue({
 				d3: version.d3,
 				'd3-cloud': version.d3Cloud,
 				'd3-sankey': version.d3Sankey,
-				vue: '^2.7.14'
-			},
-			devDependencies: {
-				vite: '^4.3.9',
-				'vite-plugin-vue2': '^2.0.3',
-				'vue-template-compiler': '^2.7.14'
+				vue: '^3.3.4'
 			}
 		},
 		null,
 		2
 	)
-
-	const viteConfig =
-	`import { fileURLToPath } from 'url'
-	import { defineConfig } from 'vite'
-	import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
-	
-	export default defineConfig({
-		plugins: [
-			vue2({
-				jsx: true
-			})
-		],
-		resolve: {
-			alias: {
-				'@': fileURLToPath(new URL('./src', import.meta.url)),
-				vue: 'vue/dist/vue.esm.js'
-			}
-		},
-		build: {
-			brotliSize: false // unsupported in StackBlitz
-		}
-	})
-`
-
-
 
 	const indexHtml =
 	`<!DOCTYPE html>
@@ -648,17 +616,14 @@ new Vue({
 		</head>
 		<body>
 			<div id="app"></div>
-			<script type="module" src="/src/main.js"></script>
 		</body>
 	</html>
 	`
 
 	return {
+		'public/index.html': indexHtml,
 		'src/App.vue': appVue,
 		'src/main.js': mainJs,
-		'.stackblitzrc': stackBlitzRC,
-		'index.html': indexHtml,
-		'package.json': packageJson,
-		'vite.config.js': viteConfig
+		'package.json': packageJson
 	}
 }

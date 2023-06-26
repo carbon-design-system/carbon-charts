@@ -1,4 +1,4 @@
-import { storiesOf, type Args } from '@storybook/vue'
+import { storiesOf, type Args } from '@storybook/vue3'
 import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@carbon/charts'
 import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'

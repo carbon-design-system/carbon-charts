@@ -1363,7 +1363,7 @@ const mapDemoGroups = (demoGroups: any) =>
 				demo.code.vue = {
 					...project,
 					files: createVueChartApp(demo),
-					template: 'node',
+					template: 'vue',
 					title: 'Carbon Charts Vue Example',
 					dependencies: {
 						...project.dependencies,
