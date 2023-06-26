@@ -21,7 +21,7 @@ yarn add @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
 ## Step-by-step instructions
 
 Read
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vanilla)
+[Getting Started](https://charts.carbondesignsystem.com/?path=/docs/docs-getting-started-vanilla-javascript--docs)
 
 ## StackBlitz examples
 
@@ -35,10 +35,7 @@ isolated project showing you how to reproduce the demo.
 Although new charts will be introduced in the future (such as a choropleth), data and options follow the same model for all charts with minor exceptions. For example, in the case of a donut chart, you're able to pass in an additional field called `center` in your options to configure the donut center.
 
 For instructions on using the **tabular data format**, see
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
-
-Additional options are available depending on the chart type being used,
-[see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data).
+[here](https://charts.carbondesignsystem.com/?path=/docs/docs-tutorials-tabular-data-format--docs)
 
 Customizable options (specific to chart type) can be found
-[here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)
+[here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)

@@ -68,7 +68,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format--docs">data</a>
 							,{' '}
 							<a
-								href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
+								href="https://charts.carbondesignsystem.com/documentation/modules/interfaces.html"
 								target="_blank"
 								rel="noreferrer">
 								options
