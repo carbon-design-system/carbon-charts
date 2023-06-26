@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-react",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Carbon Charts component library for React",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -41,7 +41,7 @@
     "clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
-    "@carbon/charts": "^1.9.0",
+    "@carbon/charts": "^1.10.0",
     "@carbon/icons-react": "^11.21.0",
     "@carbon/telemetry": "~0.1.0"
   },
