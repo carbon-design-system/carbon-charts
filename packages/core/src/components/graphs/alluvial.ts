@@ -1,83 +1,75 @@
-// Internal imports
-import { Component } from '../component';
-import { DOMUtils } from '../../services';
-import * as Tools from '../../tools';
-import * as Configuration from '../../configuration';
-import {
-	Events,
-	ColorClassNameTypes,
-	RenderTypes,
-	Alignments,
-} from '../../interfaces';
-
-// D3 imports
-import { select } from 'd3-selection';
+import { select } from 'd3'
 import {
 	sankey as d3Sankey,
 	sankeyLinkHorizontal,
 	sankeyLeft,
 	sankeyRight,
-	sankeyJustify,
-} from 'd3-sankey';
+	sankeyJustify
+} from 'd3-sankey'
+import { debounce, getProperty, getTransformOffsets } from '@/tools'
+import { alluvial } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '@/interfaces/enums'
+
+// BUG: Typing is not working for this.services.domUtils from the base class Component.
+// DOMUtils is already imported directly to this module so why bother using this.services.domUtils?
 
 export class Alluvial extends Component {
-	type = 'alluvial';
-	renderType = RenderTypes.SVG;
+	type = 'alluvial'
+	renderType = RenderTypes.SVG
 
-	private graph: any;
-	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999);
+	private graph: any
+	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getComponentContainer({ withinChartClip: true });
-		svg.html('');
+		const svg = this.getComponentContainer({ withinChartClip: true })
+		svg.html('')
 
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+			useAttrs: true
+		})
 
 		// Because of a Firefox bug with regards to sizing & d3 packs,
 		// rather than checking if height or width aren't 0,
 		// we have to make sure they're not smaller than 1
 		if (width < 1 || height < 1) {
-			return;
+			return
 		}
-		const options = this.model.getOptions();
-		const data = this.model.getDisplayData();
+		const options = this.model.getOptions()
+		const data = this.model.getDisplayData()
 
 		// Is gradient enabled or not
-		const isGradientAllowed = Tools.getProperty(
+		const isGradientAllowed: boolean = getProperty(
 			this.getOptions(),
 			'color',
 			'gradient',
 			'enabled'
-		);
+		)
 
 		// Set the custom node padding if provided
-		let nodePadding = Configuration.alluvial.minNodePadding;
-		if (
-			options.alluvial.nodePadding > Configuration.alluvial.minNodePadding
-		) {
-			nodePadding = options.alluvial.nodePadding;
+		let nodePadding = alluvial.minNodePadding
+		if (options.alluvial.nodePadding > alluvial.minNodePadding) {
+			nodePadding = options.alluvial.nodePadding
 		}
 
-		const alignment = Tools.getProperty(
-			options,
-			'alluvial',
-			'nodeAlignment'
-		);
+		const alignment = getProperty(options, 'alluvial', 'nodeAlignment')
 
-		let nodeAlignment = sankeyJustify;
+		let nodeAlignment = sankeyJustify
 
 		if (alignment === Alignments.LEFT) {
-			nodeAlignment = sankeyLeft;
+			nodeAlignment = sankeyLeft
 		} else if (alignment === Alignments.RIGHT) {
-			nodeAlignment = sankeyRight;
+			nodeAlignment = sankeyRight
 		}
 
 		const sankey = d3Sankey()
-			.nodeId((d) => d.name)
-			.nodeWidth(Configuration.alluvial.nodeWidth)
+			.nodeId((node: any) => node.name)
+			.nodeWidth(alluvial.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
 			// Alignment of nodes within chart
@@ -87,29 +79,29 @@ export class Alluvial extends Component {
 			// Chart starts from 30 so node categories can be displayed
 			.extent([
 				[2, 30],
-				[width - 2, height],
-			]);
+				[width - 2, height]
+			])
 
 		// Construct a graph with the provided user data
 		// Data must be deep cloned to ensure user passed data isn't deleted when themes change
 		this.graph = sankey({
-			nodes: options.alluvial.nodes.map((d) => Object.assign({}, d)),
-			links: data.map((d) => Object.assign({}, d)),
-		});
+			nodes: options.alluvial.nodes.map((d: any) => Object.assign({}, d)),
+			links: data.map((d: any) => Object.assign({}, d))
+		})
 
 		// Filter out unused nodes so they are not rendered
-		this.graph.nodes = this.graph.nodes.filter((node) => node.value !== 0);
+		this.graph.nodes = this.graph.nodes.filter((node: any) => node.value !== 0)
 
 		// Determine the category name placement x position
-		const nodeCoordinates = {};
-		this.graph.nodes.forEach((element) => {
-			const point = element.x0;
+		const nodeCoordinates: any = {}
+		this.graph.nodes.forEach((element: any) => {
+			const point = element.x0
 
 			// Only 1 category per x-value
 			if (element.category) {
-				nodeCoordinates[point] = element?.category;
+				nodeCoordinates[point] = element?.category
 			}
-		});
+		})
 
 		// Add node category text
 		const alluvialCategory = svg
@@ -118,87 +110,74 @@ export class Alluvial extends Component {
 			.selectAll('g')
 			.data(Object.keys(nodeCoordinates))
 			.join('g')
-			.attr('transform', (d) => {
-				return `translate(${d}, 0)`;
-			});
+			.attr('transform', (d: any) => {
+				return `translate(${d}, 0)`
+			})
 
 		// Add the category text
 		alluvialCategory
 			.append('text')
-			.attr('id', (d, i) =>
-				this.services.domUtils.generateElementIDString(
-					`alluvial-category-${i}`
-				)
+			.attr('id', (_: any, i: number) =>
+				this.services.domUtils.generateElementIDString(`alluvial-category-${i}`)
 			)
 			.style('font-size', '14px')
-			.text((d) => {
+			.text((d: any) => {
 				if (nodeCoordinates[d]) {
-					return nodeCoordinates[d];
+					return nodeCoordinates[d]
 				}
-				return '';
+				return ''
 			})
 			.attr('y', 20)
-			.attr('x', (d, i) => {
+			.attr('x', (d: any, i: number) => {
 				const elementID = this.services.domUtils.generateElementIDString(
 					`alluvial-category-${i}`
-				);
+				) as string
 
-				const { width } = DOMUtils.getSVGElementSize(
-					select(`text#${elementID}`),
-					{ useBBox: true }
-				);
+				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
 				// Make the text on the left on node group (except first column)
-				let x = 0;
+				let x = 0
 				if (d + x >= width) {
-					x = -width + 4;
+					x = -width + 4
 				}
-				return x;
-			});
+				return x
+			})
 
 		// Draws the links (Waves)
-		const links = svg
-			.append('g')
-			.attr('fill', 'none')
-			.selectAll('g')
-			.data(this.graph.links);
+		const links = svg.append('g').attr('fill', 'none').selectAll('g').data(this.graph.links)
 
 		// Exit so we can have multiple appends in group
-		links.exit().remove();
+		links.exit().remove()
 
 		// Add gradient if requsted
 		if (isGradientAllowed) {
-			const scale = Tools.getProperty(
-				this.getOptions(),
-				'color',
-				'scale'
-			);
+			const scale = getProperty(this.getOptions(), 'color', 'scale')
 
 			if (scale) {
 				links
 					.enter()
 					.append('linearGradient')
-					.attr('id', (d) => `${this.gradient_id}-link-${d.index}`)
+					.attr('id', (d: any) => `${this.gradient_id}-link-${d.index}`)
 					.attr('gradientUnits', 'userSpaceOnUse')
-					.call((gradient) =>
+					.call((gradient: any) =>
 						gradient
 							.append('stop')
 							.attr('offset', '0%')
-							.attr('stop-color', (d) => {
-								return scale[d.source.name];
+							.attr('stop-color', (d: any) => {
+								return scale[d.source.name]
 							})
 					)
-					.call((gradient) =>
+					.call((gradient: any) =>
 						gradient
 							.append('stop')
 							.attr('offset', '100%')
-							.attr('stop-color', (d) => {
-								return scale[d.target.name];
+							.attr('stop-color', (d: any) => {
+								return scale[d.target.name]
 							})
-					);
+					)
 			}
 			// Exit so path can be appended to the group
-			links.exit().remove();
+			links.exit().remove()
 		}
 
 		links
@@ -206,45 +185,41 @@ export class Alluvial extends Component {
 			.append('path')
 			.classed('link', true)
 			.attr('d', sankeyLinkHorizontal())
-			.attr('id', (d) =>
-				this.services.domUtils.generateElementIDString(
-					`alluvial-line-${d.index}`
-				)
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-line-${d.index}`)
 			)
-			.attr('class', (d) => {
+			.attr('class', (d: any) => {
 				// Use a single color for the lines
 				if (options.alluvial.monochrome) {
 					return this.model.getColorClassName({
 						classNameTypes: [ColorClassNameTypes.STROKE],
 						dataGroupName: 0,
-						originalClassName: 'link',
-					});
+						originalClassName: 'link'
+					})
 				}
 
 				return this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
 					dataGroupName: d.source.index,
-					originalClassName: 'link',
-				});
+					originalClassName: 'link'
+				})
 			})
-			.style('stroke', (d) => {
+			.style('stroke', (d: any) => {
 				if (isGradientAllowed) {
-					return `url(#${this.gradient_id}-link-${d.index})`;
+					return `url(#${this.gradient_id}-link-${d.index})`
 				}
 
-				return this.model.getFillColor(d.source.name);
+				return this.model.getFillColor(d.source.name)
 			})
-			.attr('stroke-width', (d) => Math.max(1, d.width))
-			.style('stroke-opacity', Configuration.alluvial.opacity.default)
+			.attr('stroke-width', (d: any) => Math.max(1, d.width))
+			.style('stroke-opacity', alluvial.opacity.default)
 			.attr(
 				'aria-label',
-				(d) =>
+				(d: any) =>
 					`${d.source.name} → ${d.target.name} (${d.value}${
-						options.alluvial.units
-							? ' ' + options.alluvial.units
-							: ''
+						options.alluvial.units ? ' ' + options.alluvial.units : ''
 					})`
-			);
+			)
 
 		// Creating the groups
 		const node = svg
@@ -253,37 +228,32 @@ export class Alluvial extends Component {
 			.data(this.graph.nodes)
 			.enter()
 			.append('g')
-			.attr('id', (d) =>
-				this.services.domUtils.generateElementIDString(
-					`alluvial-node-${d.index}`
-				)
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-node-${d.index}`)
 			)
 			.classed('node-group', true)
-			.attr('transform', (d) => `translate(${d.x0}, ${d.y0})`);
+			.attr('transform', (d: any) => `translate(${d.x0}, ${d.y0})`)
 
 		// Creating the nodes
-		node.append('rect')
+		node
+			.append('rect')
 			.classed('node', true)
-			.attr('height', (d) => d.y1 - d.y0)
-			.attr('width', (d) => d.x1 - d.x0)
-			.attr('fill', 'black');
+			.attr('height', (d: any) => d.y1 - d.y0)
+			.attr('width', (d: any) => d.x1 - d.x0)
+			.attr('fill', 'black')
 
 		// Group to hold the text & rectangle background
 		const textNode = node
 			.append('g')
-			.attr('id', (d) =>
-				this.services.domUtils.generateElementIDString(
-					`alluvial-node-title-${d.index}`
-				)
-			);
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-node-title-${d.index}`)
+			)
 
 		// Node title - text
 		textNode
 			.append('text')
-			.attr('id', (d) =>
-				this.services.domUtils.generateElementIDString(
-					`alluvial-node-text-${d.index}`
-				)
+			.attr('id', (d: any) =>
+				this.services.domUtils.generateElementIDString(`alluvial-node-text-${d.index}`)
 			)
 			.attr('class', 'node-text')
 			.style('font-size', '12px')
@@ -293,124 +263,107 @@ export class Alluvial extends Component {
 			.attr('x', 4)
 			// shift 13 pixels down to fit background container
 			.attr('dy', 13)
-			.text((d) => {
-				return `${d.name} (${d.value})`;
+			.text((d: any) => {
+				return `${d.name} (${d.value})`
 			})
-			.attr('aria-label', (d) => {
-				return `${d.name} (${d.value})`;
-			});
+			.attr('aria-label', (d: any) => {
+				return `${d.name} (${d.value})`
+			})
 
 		// Text background
 		textNode
 			.append('rect')
 			.classed('node-text-bg', true)
-			.attr('width', (d, i) => {
+			.attr('width', (_: any, i: number) => {
 				const elementID = this.services.domUtils.generateElementIDString(
 					`alluvial-node-text-${i}`
-				);
+				) as string
 
 				// Determine rectangle width based on text width
-				const { width } = DOMUtils.getSVGElementSize(
-					select(`text#${elementID}`),
-					{ useBBox: true }
-				);
+				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
-				return width + 8;
+				return width + 8
 			})
 			.attr('height', 18)
 			.attr('stroke-width', 2)
-			.lower();
+			.lower()
 
 		// Position group based on text width
-		textNode.attr('transform', (d, i) => {
+		textNode.attr('transform', (d: any, i: number) => {
 			const elementID = this.services.domUtils.generateElementIDString(
 				`alluvial-node-text-${i}`
-			);
+			) as string
 
-			const { width } = DOMUtils.getSVGElementSize(
-				select(`text#${elementID}`),
-				{ useBBox: true }
-			);
+			const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
 			// Subtracting 9 since text background is 18 to center
-			const y = (d.y1 - d.y0) / 2 - 9;
+			const y = (d.y1 - d.y0) / 2 - 9
 			// Node width
-			let x = d.x1 - d.x0;
+			let x = d.x1 - d.x0
 
 			// Display bars on the right instead of left of the node
 			if (d.x1 >= width) {
 				// 16 = node width (4) + text container padding (8) + distance between node and text container (4)
-				x = x - (width + 16);
+				x = x - (width + 16)
 			} else {
 				// Add padding to text containers
-				x += 4;
+				x += 4
 			}
 
-			return `translate(${x}, ${y})`;
-		});
+			return `translate(${x}, ${y})`
+		})
 
-		this.addLineEventListener();
-		this.addNodeEventListener();
+		this.addLineEventListener()
+		this.addNodeEventListener()
 	}
 
 	addLineEventListener() {
-		const options = this.getOptions();
-		const self = this;
+		const options = this.getOptions()
+		const self = this
 
 		// Set delay to counter flashy behaviour
-		const debouncedLineHighlight = Tools.debounce(
-			(link, event = 'mouseover') => {
-				const allLinks = self.parent
-					.selectAll('path.link')
-					.transition()
-					.call((t) =>
-						self.services.transitions.setupTransition({
-							transition: t,
-							name: 'alluvial-links-mouse-highlight',
-						})
-					);
+		const debouncedLineHighlight = debounce((link, event = 'mouseover') => {
+			const allLinks = self.parent
+				.selectAll('path.link')
+				.transition()
+				.call((t: any) =>
+					self.services.transitions.setupTransition({
+						transition: t,
+						name: 'alluvial-links-mouse-highlight'
+					})
+				)
 
-				if (event === 'mouseout') {
-					select(link).lower();
-					allLinks.style(
-						'stroke-opacity',
-						Configuration.alluvial.opacity.default
-					);
-				} else {
-					allLinks.style('stroke-opacity', function () {
-						// highlight and raise if link is this
-						if (link === this) {
-							select(this).raise();
-							return Configuration.alluvial.opacity.selected;
-						}
+			if (event === 'mouseout') {
+				select(link).lower()
+				allLinks.style('stroke-opacity', alluvial.opacity.default)
+			} else {
+				allLinks.style('stroke-opacity', function () {
+					// highlight and raise if link is this
+					if (link === this) {
+						select(this).raise()
+						return alluvial.opacity.selected
+					}
 
-						return Configuration.alluvial.opacity.unfocus;
-					});
-				}
-			},
-			33
-		);
+					return alluvial.opacity.unfocus
+				})
+			}
+		}, 33)
 
 		this.parent
 			.selectAll('path.link')
-			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
-				debouncedLineHighlight(this, 'mouseover');
-				hoveredElement.classed('link-hovered', true);
+			.on('mouseover', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
+				debouncedLineHighlight(this, 'mouseover')
+				hoveredElement.classed('link-hovered', true)
 
-				const strokeColor = getComputedStyle(this).getPropertyValue(
-					'stroke'
-				);
+				const strokeColor = getComputedStyle(this as Element).getPropertyValue('stroke')
 
 				// Dispatch mouse over event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.LINE_MOUSEOVER,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEOVER, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				// Dispatch tooltip show event
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -419,289 +372,225 @@ export class Alluvial extends Component {
 					items: [
 						{
 							label: datum.target.name,
-							value:
-								datum.value +
-								(options.alluvial.units
-									? ` ${options.alluvial.units}`
-									: ''),
+							value: datum.value + (options.alluvial.units ? ` ${options.alluvial.units}` : ''),
 							color: strokeColor,
-							labelIcon: self.getRightArrowIcon(),
-						},
-					],
-				});
+							labelIcon: self.getRightArrowIcon()
+						}
+					]
+				})
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse move event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.LINE_MOUSEMOVE,
-					{
-						event,
-						element: select(this),
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEMOVE, {
+					event,
+					element: select(this),
+					datum
+				})
 				// Dispatch tooltip move event
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+					event
+				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.LINE_CLICK, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
-				debouncedLineHighlight(this, 'mouseout');
-				hoveredElement.classed('link-hovered', false);
+			.on('mouseout', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
+				debouncedLineHighlight(this, 'mouseout')
+				hoveredElement.classed('link-hovered', false)
 
 				// Dispatch mouse out event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.LINE_MOUSEOUT,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Alluvial.LINE_MOUSEOUT, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				// Dispatch hide tooltip event
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
 					event,
-					hoveredElement,
-				});
-			});
+					hoveredElement
+				})
+			})
 	}
 
 	addNodeEventListener() {
-		const self = this;
+		const self = this
 
 		// Set delay to counter flashy behaviour
-		const debouncedLineHighlight = Tools.debounce(
-			(links = [], event = 'mouseover') => {
-				if (event === 'mouseout' || links.length === 0) {
-					// set all links to default opacity & corret link order
-					self.parent
-						.selectAll('path.link')
-						.classed('link-hovered', false)
-						.data(this.graph.links, (d) => d.index)
-						.order()
-						.style(
-							'stroke-opacity',
-							Configuration.alluvial.opacity.default
-						);
+		const debouncedLineHighlight = debounce((links = [], event = 'mouseover') => {
+			if (event === 'mouseout' || links.length === 0) {
+				// set all links to default opacity & corret link order
+				self.parent
+					.selectAll('path.link')
+					.classed('link-hovered', false)
+					.data(this.graph.links, (d: any) => d.index)
+					.order()
+					.style('stroke-opacity', alluvial.opacity.default)
 
-					return;
+				return
+			}
+
+			// Highlight all nodes
+			const allLinks = self.parent
+				.selectAll('path.link')
+				.transition()
+				.call((t: any) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'alluvial-link-mouse-highlight'
+					})
+				)
+
+			allLinks.style('stroke-opacity', function (d: any) {
+				// Raise the links & increase stroke-opacity to selected
+				if (links.some((element: any) => element === d.index)) {
+					select(this).classed('link-hovered', true).raise()
+					return alluvial.opacity.selected
 				}
 
-				// Highlight all nodes
-				const allLinks = self.parent
-					.selectAll('path.link')
-					.transition()
-					.call((t) =>
-						this.services.transitions.setupTransition({
-							transition: t,
-							name: 'alluvial-link-mouse-highlight',
-						})
-					);
-
-				allLinks.style('stroke-opacity', function (d) {
-					// Raise the links & increase stroke-opacity to selected
-					if (links.some((element) => element === d.index)) {
-						select(this).classed('link-hovered', true).raise();
-						return Configuration.alluvial.opacity.selected;
-					}
-
-					return Configuration.alluvial.opacity.unfocus;
-				});
-			},
-			66
-		);
+				return alluvial.opacity.unfocus
+			})
+		}, 66)
 
 		self.parent
 			.selectAll('.node-group')
-			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseover', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Highlight all links that pass through node
-				const paths = [];
+				const paths: any[] = []
 
 				// Outgoing links
-				self.traverse(
-					{ link: 'sourceLinks', node: 'target' },
-					datum,
-					paths
-				);
+				self.traverse({ link: 'sourceLinks', node: 'target' }, datum, paths)
 
 				//Incoming links
-				self.traverse(
-					{ link: 'targetLinks', node: 'source' },
-					datum,
-					paths
-				);
+				self.traverse({ link: 'targetLinks', node: 'source' }, datum, paths)
 
 				// Highlight all linked lines in the graph data structure
 				if (paths.length) {
 					// Get transformation value of node
-					const nodeMatrix = Tools.getTranformOffsets(
-						hoveredElement.attr('transform')
-					);
+					const nodeMatrix = getTransformOffsets(hoveredElement.attr('transform'))
 
 					// Move node to the left by 2 to grow node from the center
-					hoveredElement.attr(
-						'transform',
-						`translate(${nodeMatrix.x - 2}, ${nodeMatrix.y})`
-					);
+					hoveredElement.attr('transform', `translate(${nodeMatrix.x - 2}, ${nodeMatrix.y})`)
 
-					hoveredElement
-						.classed('node-hovered', true)
-						.selectAll('rect.node')
-						.attr('width', 8);
+					hoveredElement.classed('node-hovered', true).selectAll('rect.node').attr('width', 8)
 
 					// Translate first column text container to the
 					// right so it doesn't clash with expanding node
 					if (datum.x0 - 2 === 0) {
 						const elementID = self.services.domUtils.generateElementIDString(
 							`alluvial-node-title-${datum.index}`
-						);
+						)
 
-						const titleContainer = self.parent.select(
-							`g#${elementID}`
-						);
-						const titleMatrix = Tools.getTranformOffsets(
-							titleContainer.attr('transform')
-						);
+						const titleContainer = self.parent.select(`g#${elementID}`)
+						const titleMatrix = getTransformOffsets(titleContainer.attr('transform'))
 
-						titleContainer.attr(
-							'transform',
-							`translate(${titleMatrix.x + 4},${titleMatrix.y})`
-						);
+						titleContainer.attr('transform', `translate(${titleMatrix.x + 4},${titleMatrix.y})`)
 					}
 
 					const elementID = self.services.domUtils.generateElementIDString(
 						`alluvial-node-text-${datum.index}`
-					);
+					)
 
-					self.parent
-						.select(`text#${elementID}`)
-						.style('font-weight', 'bold');
+					self.parent.select(`text#${elementID}`).style('font-weight', 'bold')
 
-					debouncedLineHighlight(paths, 'mouseover');
+					debouncedLineHighlight(paths, 'mouseover')
 
 					// Dispatch mouse over event
-					self.services.events.dispatchEvent(
-						Events.Alluvial.NODE_MOUSEOVER,
-						{
-							event,
-							element: hoveredElement,
-							datum,
-						}
-					);
+					self.services.events.dispatchEvent(Events.Alluvial.NODE_MOUSEOVER, {
+						event,
+						element: hoveredElement,
+						datum
+					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse move event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.NODE_MOUSEMOVE,
-					{
-						event,
-						element: select(this),
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Alluvial.NODE_MOUSEMOVE, {
+					event,
+					element: select(this),
+					datum
+				})
 
 				// Dispatch tooltip move event
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+					event
+				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse click event
 				self.services.events.dispatchEvent(Events.Alluvial.NODE_CLICK, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseout', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Set the node position to initial state (unexpanded)
-				const nodeMatrix = Tools.getTranformOffsets(
-					hoveredElement.attr('transform')
-				);
+				const nodeMatrix = getTransformOffsets(hoveredElement.attr('transform'))
 
 				hoveredElement
 					.classed('node-hovered', false)
-					.attr(
-						'transform',
-						`translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`
-					)
+					.attr('transform', `translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`)
 					.select('rect.node')
-					.attr('width', Configuration.alluvial.nodeWidth);
+					.attr('width', alluvial.nodeWidth)
 
 				// Translate text container back to initial state
 				if (datum.x0 - 2 === 0) {
 					const elementID = self.services.domUtils.generateElementIDString(
 						`alluvial-node-title-${datum.index}`
-					);
+					)
 
-					const titleContainer = self.parent.select(`g#${elementID}`);
-					const titleMatrix = Tools.getTranformOffsets(
-						titleContainer.attr('transform')
-					);
+					const titleContainer = self.parent.select(`g#${elementID}`)
+					const titleMatrix = getTransformOffsets(titleContainer.attr('transform'))
 
-					titleContainer.attr(
-						'transform',
-						`translate(${titleMatrix.x - 4},${titleMatrix.y})`
-					);
+					titleContainer.attr('transform', `translate(${titleMatrix.x - 4},${titleMatrix.y})`)
 				}
 
 				const elementID = self.services.domUtils.generateElementIDString(
 					`alluvial-node-text-${datum.index}`
-				);
+				)
 
-				self.parent
-					.select(`text#${elementID}`)
-					.style('font-weight', 'normal');
+				self.parent.select(`text#${elementID}`).style('font-weight', 'normal')
 
-				debouncedLineHighlight([], 'mouseout');
+				debouncedLineHighlight([], 'mouseout')
 
 				// Dispatch mouse out event
-				self.services.events.dispatchEvent(
-					Events.Alluvial.NODE_MOUSEOUT,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Alluvial.NODE_MOUSEOUT, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				// Dispatch hide tooltip event
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
-			});
+					hoveredElement
+				})
+			})
 	}
 
 	// Traverse graph and get all connected links to node
 	private traverse(
-		direction:
-			| { link: 'sourceLinks'; node: 'target' }
-			| { link: 'targetLinks'; node: 'source' },
-		node,
-		visited = []
+		direction: { link: 'sourceLinks'; node: 'target' } | { link: 'targetLinks'; node: 'source' },
+		node: any,
+		visited: any[] = []
 	) {
-		const links = node[direction.link].map((element) => {
-			visited.push(element.index);
-			return element[direction.node];
-		});
+		const links = node[direction.link].map((element: any) => {
+			visited.push(element.index)
+			return element[direction.node]
+		})
 
 		// Retrieve the child nodes
-		links.forEach((element) => this.traverse(direction, element, visited));
+		links.forEach((element: any) => this.traverse(direction, element, visited))
 	}
 
 	getRightArrowIcon() {
@@ -709,7 +598,7 @@ export class Alluvial extends Component {
 		<svg xmlns="http://www.w3.org/2000/svg" class="arrow-right" width="32" height="32" viewBox="0 0 32 32">
 			<polygon points="18 6 16.57 7.393 24.15 15 4 15 4 17 24.15 17 16.57 24.573 18 26 28 16 18 6"/>
 			<rect width="32" height="32"/>
-		</svg>`;
+		</svg>`
 	}
 
 	// Remove event listeners
@@ -719,6 +608,6 @@ export class Alluvial extends Component {
 			.on('mouseover', null)
 			.on('mousemove', null)
 			.on('click', null)
-			.on('mouseout', null);
+			.on('mouseout', null)
 	}
 }

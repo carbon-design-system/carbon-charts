@@ -1,28 +1,15 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"composite": true,
+		// Package-specific settings
 		"baseUrl": ".",
-		"declaration": true,
-		"lib": ["es2015", "dom"],
-		"esModuleInterop": true,
-		"sourceMap": true,
-		"mapRoot": "./",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"outDir": "./dist/build",
-		"rootDir": ".",
-		"target": "es5",
-		"inlineSources": true,
-		"types": ["node", "jasmine"],
-		"typeRoots": ["./node_modules/@types", "./custom.d.ts"]
+		"paths": {
+      "@/*": ["src/*"]
+    },
+		"strict": false, // TODO: 1140 errors in 63 files
+		"useDefineForClassFields": false // MUST BE FALSE - see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier
 	},
-	"exclude": [
-		"./src/**/*.spec.ts",
-		"./src/tests",
-		"./node_modules",
-		"../../node_modules"
-	],
-	"references": [{ "path": "src" }, { "path": "demo" }],
-	"files": []
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.vite.json" }]
 }

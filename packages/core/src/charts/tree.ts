@@ -1,51 +1,34 @@
-// Internal Imports
-import { Chart } from '../chart';
-import { TreeChartModel } from '../model/tree';
-import * as Configuration from '../configuration';
-import { ChartConfig, TreeChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-
-// Components
-import {
-	Tree,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { TreeChartModel } from '@/model/tree'
+import type { ChartConfig } from '@/interfaces/model'
+import type { TreeChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Tree } from '@/components/graphs/tree'
 
 export class TreeChart extends Chart {
-	model = new TreeChartModel(this.services);
+	model = new TreeChartModel(this.services)
 
-	constructor(holder: Element, chartConfigs: ChartConfig<TreeChartOptions>) {
-		super(holder, chartConfigs);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<TreeChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.treeChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.treeChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
-			new Tree(this.model, this.services),
-		];
+		const graphFrameComponents: Component[] = [new Tree(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(
-			graphFrameComponents,
-			{
-				excludeLegend: true,
-			}
-		);
-		return components;
+		const components: Component[] = this.getChartComponents(graphFrameComponents, {
+			excludeLegend: true
+		})
+		return components
 	}
 }

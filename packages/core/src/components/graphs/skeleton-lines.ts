@@ -1,68 +1,59 @@
-// Internal Imports
-import { Skeleton } from '../graphs/skeleton';
-import { DOMUtils } from '../../services';
-import * as Tools from '../../tools';
+import type { ScaleLinear, Selection } from 'd3'
+import { getProperty } from '@/tools'
+import { Skeleton } from './skeleton'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 
 export class SkeletonLines extends Skeleton {
-	type = 'skeleton-lines';
-	xScale: any;
-	yScale: any;
-	backdrop: any;
+	type = 'skeleton-lines'
+	xScale: ScaleLinear<number, number>
+	yScale: ScaleLinear<number, number>
+	backdrop: Selection<SVGElement | HTMLDivElement, unknown, Element, any>
 
-	render() {
-		const isDataLoading = Tools.getProperty(
-			this.getOptions(),
-			'data',
-			'loading'
-		);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
+		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
 		const isSparkline =
-			!Tools.getProperty(this.getOptions(), 'grid', 'x', 'enabled') &&
-			!Tools.getProperty(this.getOptions(), 'grid', 'y', 'enabled') &&
-			!Tools.getProperty(
-				this.getOptions(),
-				'axes',
-				'bottom',
-				'visible'
-			) &&
-			!Tools.getProperty(this.getOptions(), 'axes', 'left', 'visible');
+			!getProperty(this.getOptions(), 'grid', 'x', 'enabled') &&
+			!getProperty(this.getOptions(), 'grid', 'y', 'enabled') &&
+			!getProperty(this.getOptions(), 'axes', 'bottom', 'visible') &&
+			!getProperty(this.getOptions(), 'axes', 'left', 'visible')
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
 		if (isDataLoading && !isSparkline) {
-			super.renderGridSkeleton(isDataLoading);
+			super.renderGridSkeleton(isDataLoading)
 		} else if (isDataLoading && isSparkline) {
-			this.renderSparklineSkeleton(isDataLoading);
+			this.renderSparklineSkeleton(isDataLoading)
 		} else {
-			this.removeSkeleton();
+			this.removeSkeleton()
 		}
 	}
 
 	renderSparklineSkeleton(showShimmerEffect: boolean) {
-		this.setScales();
-		this.drawBackdrop(showShimmerEffect);
-		this.drawSparkline(showShimmerEffect);
-		this.updateBackdropStyle();
+		this.setScales()
+		this.drawBackdrop(showShimmerEffect)
+		this.drawSparkline(showShimmerEffect)
+		this.updateBackdropStyle()
 		if (showShimmerEffect) {
-			this.setShimmerEffect('shimmer-lines');
+			this.setShimmerEffect('shimmer-lines')
 		}
 	}
 
 	drawSparkline(showShimmerEffect: boolean) {
-		const width = this.backdrop.attr('width');
-		const ticksValues = [100];
-		const sparklineSkeleton = DOMUtils.appendOrSelect(
-			this.backdrop,
-			'g.y.skeleton'
-		);
-		const update = sparklineSkeleton.selectAll('line').data(ticksValues);
+		const width = this.backdrop.attr('width')
+		const ticksValues = [100]
+		const sparklineSkeleton = DOMUtils.appendOrSelect(this.backdrop, 'g.y.skeleton')
+		const update = sparklineSkeleton.selectAll('line').data(ticksValues)
 		update
 			.enter()
 			.append('line')
-			.merge(update)
+			.merge(update as any)
 			.attr('x1', 0)
 			.attr('x2', width)
-			.attr('y1', (d) => d)
-			.attr('y2', (d) => d);
+			.attr('y1', (d: any) => d)
+			.attr('y2', (d: any) => d)
 
 		sparklineSkeleton
 			.selectAll('line')
@@ -71,25 +62,20 @@ export class SkeletonLines extends Skeleton {
 			.style(
 				'stroke',
 				showShimmerEffect
-					? `url(#${this.services.domUtils.generateElementIDString(
-							`shimmer-lines`
-					  )})`
+					? `url(#${this.services.domUtils.generateElementIDString(`shimmer-lines`)})`
 					: null
-			);
+			)
 	}
 
 	updateBackdropStyle() {
-		const svg = this.parent;
+		const svg = this.parent
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII');
-		const backdropRect = DOMUtils.appendOrSelect(
-			this.backdrop,
-			'rect.chart-skeleton-backdrop'
-		);
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
+		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, 'rect.chart-skeleton-backdrop')
 
 		backdropRect
 			.classed('shimmer-effect-lines', false)
 			.classed('shimmer-effect-sparkline', true)
-			.style('stroke', null);
+			.style('stroke', null)
 	}
 }

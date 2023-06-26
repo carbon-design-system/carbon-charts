@@ -1,53 +1,39 @@
-// Internal Imports
-import { WordCloudModel } from '../model/wordcloud';
-import { Chart } from '../chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, WorldCloudChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
-
-// Components
-import {
-	WordCloud,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { WordCloudModel } from '@/model/wordcloud'
+import type { ChartConfig } from '@/interfaces/model'
+import type { WorldCloudChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Skeleton } from '@/components/graphs/skeleton'
+import { WordCloud } from '@/components/graphs/wordcloud'
 
 export class WordCloudChart extends Chart {
-	model = new WordCloudModel(this.services);
+	model = new WordCloudModel(this.services)
 
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<WorldCloudChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<WorldCloudChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.wordCloudChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.wordCloudChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new WordCloud(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.PIE,
-			}),
-		];
+				skeleton: Skeletons.PIE
+			})
+		]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

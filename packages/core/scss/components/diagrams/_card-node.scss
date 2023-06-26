@@ -1,0 +1,97 @@
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+@mixin stacked-card-node {
+	content: '';
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 0;
+	border-top: 0.125rem solid $layer-accent-01;
+	border-right: 0.125rem solid $layer-accent-01;
+	pointer-events: none;
+}
+
+@include exports('cc-card-node') {
+	.#{$prefix}--#{$charts-prefix}--card-node {
+		display: flex;
+		position: relative;
+		background-color: $layer-01;
+		z-index: 1;
+		box-sizing: border-box;
+		font-family: font-family('sans');
+		width: 100%;
+		height: 100%;
+		padding: $spacing-05 $spacing-03;
+		border-left: 0.25rem solid $border-inverse;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a,
+	.#{$prefix}--#{$charts-prefix}--card-node--button {
+		border-top: none;
+		border-right: none;
+		border-bottom: none;
+		color: inherit;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--button {
+		font-family: font-family('sans');
+		text-align: left;
+		width: 100%;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--a:hover,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:hover {
+		background-color: $network-diagrams-background-hover;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--a:focus,
+	.#{$prefix}--#{$charts-prefix}--card-node--button:focus {
+		@include focus-outline($type: outline);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node--stacked {
+		&::before {
+			@include stacked-card-node();
+			left: 0.3125rem;
+			bottom: 0.3125rem;
+		}
+
+		&::after {
+			@include stacked-card-node();
+			left: 0.6875rem;
+			bottom: 0.6875rem;
+		}
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__column {
+		padding: 0 $spacing-03;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__column--farside {
+		margin-left: auto;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__title {
+		@include type-style($name: productive-heading-01);
+		margin: 0;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__subtitle {
+		@include type-style($name: body-short-01);
+		margin: 0;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--card-node__label {
+		display: block;
+		@include type-style($name: label-01);
+		color: $text-secondary;
+		padding-top: $spacing-06;
+	}
+}

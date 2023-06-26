@@ -1,7 +1,7 @@
-import { Ruler } from './ruler';
+import { Ruler } from './ruler'
 
 export class StackedRuler extends Ruler {
-	formatTooltipData(tooltipData) {
-		return tooltipData.reverse();
+	formatTooltipData(tooltipData: any) {
+		return tooltipData.reverse()
 	}
 }

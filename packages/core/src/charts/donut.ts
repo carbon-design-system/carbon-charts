@@ -1,46 +1,35 @@
-// Internal Imports
-import { PieChart } from './pie';
-import * as Configuration from '../configuration';
-import { ChartConfig, PieChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
-
-// Components
-import {
-	Donut,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { PieChart } from './pie'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { PieChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Donut } from '@/components/graphs/donut'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class DonutChart extends PieChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
-		super(holder, chartConfigs, true);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<PieChartOptions>) {
+		super(holder, chartConfigs, true)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.donutChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.donutChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new Donut(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.DONUT,
-			}),
-		];
+				skeleton: Skeletons.DONUT
+			})
+		]
 
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

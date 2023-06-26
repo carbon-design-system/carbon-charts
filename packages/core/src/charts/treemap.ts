@@ -1,47 +1,32 @@
-// Internal Imports
-import { Chart } from '../chart';
-import { TreemapChartModel } from '../model/treemap';
-import { ChartConfig, TreemapChartOptions } from '../interfaces/index';
-import * as Configuration from '../configuration';
-import * as Tools from '../tools';
-
-// Components
-import {
-	Treemap,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { TreemapChartModel } from '@/model/treemap'
+import type { ChartConfig } from '@/interfaces/model'
+import type { TreemapChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { Treemap } from '@/components/graphs/treemap'
 
 export class TreemapChart extends Chart {
-	model = new TreemapChartModel(this.services);
+	model = new TreemapChartModel(this.services)
 
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<TreemapChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<TreemapChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.treemapChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.treemapChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [new Treemap(this.model, this.services)];
+		const graphFrameComponents: Component[] = [new Treemap(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

@@ -1,0 +1,34 @@
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--meter {
+	rect.container {
+		fill: $layer-01;
+	}
+
+	line.rangeIndicator {
+		stroke: $meter-range-indicator;
+		stroke-width: 1px;
+	}
+
+	rect.value {
+		&.status--danger {
+			fill: $support-error;
+		}
+
+		&.status--warning {
+			fill: $support-warning;
+			stroke-width: 1px;
+			stroke: $alert-stroke;
+		}
+
+		&.status--success {
+			fill: $support-success;
+		}
+	}
+
+	line.peak {
+		stroke: $border-inverse;
+		stroke-width: 2px;
+	}
+}

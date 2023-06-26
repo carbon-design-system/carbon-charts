@@ -1,20 +1,20 @@
 // Internal Imports
-import { ChartModel } from './model';
-import * as Tools from '../tools';
-import { getColorScale } from '../services';
+import { ChartModel } from './model'
+import { getProperty, isEmpty } from '@/tools'
+import { getColorScale } from '@/services/color-scale-utils'
 
 /**
  * Base thematic maps chart model layer
  */
 export class ChoroplethModel extends ChartModel {
-	private _colorScale: any = undefined;
+	private _colorScale: any = undefined
 
 	// Holds a mapping of geometry objects to data objects
 	// Allows us to access data faster
-	private _matrix = {};
+	private _matrix = {}
 
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
 	/**
@@ -23,20 +23,17 @@ export class ChoroplethModel extends ChartModel {
 	 * @returns string
 	 */
 	getFillColor(value: number) {
-		return this._colorScale(value);
+		return this._colorScale(value)
 	}
 
 	/**
 	 * Helper function that will generate a dictionary
 	 */
 	getCombinedData() {
-		if (Tools.isEmpty(this._matrix)) {
-			const options = this.getOptions();
-			const data = this.getDisplayData();
-			if (
-				!Tools.isEmpty(data) &&
-				!Tools.isEmpty(options.geoData.objects.countries)
-			) {
+		if (isEmpty(this._matrix)) {
+			const options = this.getOptions()
+			const data = this.getDisplayData()
+			if (!isEmpty(data) && !isEmpty(options.geoData.objects.countries)) {
 				/**
 				 * @todo
 				 * We can either use name or id by default to generate this dictionary
@@ -45,25 +42,21 @@ export class ChoroplethModel extends ChartModel {
 				 *
 				 * May need to provide users with the option to pass in keys to create dictionary with
 				 */
-				options.geoData.objects.countries.geometries.forEach(
-					(country) => {
-						this._matrix[country.properties.NAME] = country;
-					}
-				);
+				options.geoData.objects.countries.geometries.forEach((country) => {
+					this._matrix[country.properties.NAME] = country
+				})
 
 				data.forEach((value) => {
 					if (this._matrix[value.name]) {
-						this._matrix[value.name]['value'] = value.value || null;
+						this._matrix[value.name]['value'] = value.value || null
 					} else {
-						console.warn(
-							`Data point ${value} is missing geographical data.`
-						);
+						console.warn(`Data point ${value} is missing geographical data.`)
 					}
-				});
+				})
 			}
 		}
 
-		return this._matrix;
+		return this._matrix
 	}
 
 	/**
@@ -71,29 +64,27 @@ export class ChoroplethModel extends ChartModel {
 	 * @returns Array<Object>
 	 */
 	getTabularDataArray() {
-		const displayData = this.getDisplayData();
+		const displayData = this.getDisplayData()
 
 		const result = [
 			['Country ID', 'Country Name', 'Value'],
 			...displayData.map((datum) => [
 				datum['id'] === null ? '&ndash;' : datum['id'],
 				datum['name'],
-				datum['value'],
-			]),
-		];
+				datum['value']
+			])
+		]
 
-		return result;
+		return result
 	}
 
 	// Uses quantize scale to return class names
 	getColorClassName(configs: { value?: number; originalClassName?: string }) {
-		return `${configs.originalClassName} ${this._colorScale(
-			configs.value as number
-		)}`;
+		return `${configs.originalClassName} ${this._colorScale(configs.value as number)}`
 	}
 
 	protected setColorClassNames() {
-		const colorOptions = Tools.getProperty(this.getOptions(), 'color');
-		this._colorScale = getColorScale(this.getDisplayData(), colorOptions);
+		const colorOptions = getProperty(this.getOptions(), 'color')
+		this._colorScale = getColorScale(this.getDisplayData(), colorOptions)
 	}
 }

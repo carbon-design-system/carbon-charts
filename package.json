@@ -1,62 +1,65 @@
 {
-	"name": "@carbon/charts-monorepo",
-	"private": true,
-	"description": "Carbon charting components, lerna monorepo",
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git"
-	},
-	"keywords": [
-		"charts"
-	],
-	"author": "IBM",
-	"license": "Apache-2.0",
-	"scripts": {
-		"clean": "lerna clean && lerna run clean && rm -rf node_modules",
-		"commit": "git-cz",
-		"format": "lerna run format",
-		"test": "lerna run test",
-		"lint": "lerna run lint",
-		"build": "yarn build-all",
-		"build-all": "bash scripts/build-packages-and-demos.sh",
-		"build-packages": "bash scripts/build-packages.sh",
-		"build-all-demos": "bash scripts/build-demos.sh",
-		"deploy": "bash scripts/deploy.sh"
-	},
-	"workspaces": [
-		"packages/*"
-	],
-	"husky": {
-		"hooks": {
-			"pre-commit": "bash scripts/precommit.sh"
-		}
-	},
-	"release": {
-		"branch": "master"
-	},
-	"engines": {
-		"node": "^14.21.3",
-		"yarn": "^1.22.19"
-	},
-	"devDependencies": {
-		"@types/node": "^12.0.0",
-		"commitizen": "4.0.3",
-		"cz-conventional-changelog": "3.1.0",
-		"husky": "4.2.1",
-		"lerna": "^6.6.1",
-		"prettier": "2.2.1",
-		"prettier-config-carbon": "0.4.0"
-	},
-	"config": {
-		"commitizen": {
-			"path": "cz-conventional-changelog"
-		}
-	},
-	"maintainers": [
-		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com"
-		}
-	],
-	"packageManager": "yarn@1.22.19"
+  "name": "@carbon/charts-monorepo",
+  "private": true,
+  "description": "Carbon charting components, lerna monorepo",
+  "scripts": {
+    "clean:root": "rm -rf node_modules yarn.lock .yarn/cache .yarn/install-state.gz",
+    "clean": "lerna clean && lerna run clean && yarn clean:root",
+    "commit": "git-cz",
+    "build:packages": "lerna run --stream build:package",
+    "build:demos": "bash scripts/build-demos.sh",
+    "build": "bash scripts/build-packages-and-demos.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "deploy:next": "bash scripts/next.sh",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "lint": "lerna run lint",
+    "format": "lerna run format",
+    "test": "lerna run test"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "^18.16.0"
+  },
+  "packageManager": "yarn@3.5.1",
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
+    "lerna": "^7.0.2",
+    "pinst": "^3.0.0",
+    "prettier": "^2.8.8",
+    "prettier-config-carbon": "^0.11.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bash scripts/precommit.sh"
+    }
+  },
+  "release": {
+    "branch": "master"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carbon-design-system/carbon-charts.git"
+  },
+  "keywords": [
+    "charts"
+  ],
+  "author": "IBM",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "Eliad Moosavi",
+      "email": "iliadm@ca.ibm.com"
+    }
+  ]
 }

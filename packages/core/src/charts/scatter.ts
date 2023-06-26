@@ -1,58 +1,41 @@
-// Internal Imports
-import { AxisChart } from '../axis-chart';
-import * as Configuration from '../configuration';
-import { ChartConfig, ScatterChartOptions } from '../interfaces/index';
-import * as Tools from '../tools';
-import { Skeletons } from '../interfaces/enums';
-
-// Components
-import {
-	Grid,
-	Ruler,
-	Scatter,
-	TwoDimensionalAxes,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { AxisChart } from '@/axis-chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import type { ChartConfig } from '@/interfaces/model'
+import type { ScatterChartOptions } from '@/interfaces/charts'
+import { Skeletons } from '@/interfaces/enums'
+import type { Component } from '@/components/component'
+import { Grid } from '@/components/axes/grid'
+import { Ruler } from '@/components/axes/ruler'
+import { Scatter } from '@/components/graphs/scatter'
+import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
+import { Skeleton } from '@/components/graphs/skeleton'
 
 export class ScatterChart extends AxisChart {
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<ScatterChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ScatterChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.scatterChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.scatterChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [
+		const graphFrameComponents: Component[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
-			}),
-		];
+				skeleton: Skeletons.GRID
+			})
+		]
 
-		const components: any[] = this.getAxisChartComponents(
-			graphFrameComponents
-		);
-		return components;
+		const components: Component[] = this.getAxisChartComponents(graphFrameComponents)
+		return components
 	}
 }

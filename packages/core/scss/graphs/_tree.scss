@@ -1,0 +1,46 @@
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper .#{$prefix}--#{$charts-prefix}--tree {
+	g.links {
+		fill: none;
+		stroke: $border-strong-01;
+		stroke-opacity: 0.4;
+		stroke-width: 1.5;
+	}
+
+	g.clickable {
+		cursor: pointer;
+
+		&:hover {
+			text {
+				// TODO-V11
+				// font-weight: font-weight('semibold');
+				font-weight: 600;
+			}
+
+			circle {
+				fill: $text-primary;
+				@include default_transition;
+			}
+		}
+	}
+
+	circle {
+		&.parent {
+			fill: $text-secondary;
+		}
+
+		&.child {
+			fill: $border-strong-01;
+		}
+	}
+
+	text {
+		fill: $text-primary;
+
+		&.text-stroke {
+			stroke: $text-inverse;
+			stroke-width: 2px;
+		}
+	}
+}

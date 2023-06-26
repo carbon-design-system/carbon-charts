@@ -1,7 +1,6 @@
-// Internal Imports
-import * as Configuration from '../configuration';
-import { ChartModel } from './model';
-import * as Tools from '../tools';
+import { getProperty } from '@/tools'
+import { ChartModel } from './model'
+import { ChartTabularData } from '@/interfaces/model'
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only uses 1 dataset
@@ -9,15 +8,12 @@ import * as Tools from '../tools';
 
 export class MeterChartModel extends ChartModel {
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
-	getMaximumDomain(data) {
-		const max = data.reduce(
-			(accumulator, datum) => accumulator + datum.value,
-			0
-		);
-		return max;
+	getMaximumDomain(data: any) {
+		const max = data.reduce((accumulator: number, datum: any) => accumulator + datum.value, 0)
+		return max
 	}
 
 	/**
@@ -26,14 +22,14 @@ export class MeterChartModel extends ChartModel {
 	 * @param group dataset group label
 	 */
 	getFillColor(group: string) {
-		const options = this.getOptions();
-		const userProvidedScale = Tools.getProperty(options, 'color', 'scale');
-		const status = this.getStatus();
+		const options = this.getOptions()
+		const userProvidedScale = getProperty(options, 'color', 'scale')
+		const status = this.getStatus()
 		// user provided a fill color or there isn't a status we can use the colorScale
 		if (userProvidedScale || !status) {
-			return super.getFillColor(group);
+			return super.getFillColor(group)
 		} else {
-			return null;
+			return null
 		}
 	}
 
@@ -41,84 +37,69 @@ export class MeterChartModel extends ChartModel {
 	 * Get the associated status for the data by checking the ranges
 	 */
 	getStatus() {
-		const options = this.getOptions();
-		const dataValues = Tools.getProperty(this.getDisplayData());
+		const options = this.getOptions()
+		const dataValues = getProperty(this.getDisplayData())
 
 		const { value: totalValue } = dataValues
-			? dataValues.reduce((previous, current) => {
-					return { value: previous.value + current.value };
-			  })
-			: 0;
+			? dataValues.reduce((previous: any, current: any) => {
+					return { value: previous.value + current.value }
+				})
+			: 0
 
 		// use max value if the percentage is bigger than 100%
-		const boundedValue = Tools.getProperty(options, 'meter', 'proportional')
+		const boundedValue = getProperty(options, 'meter', 'proportional')
 			? totalValue
 			: totalValue > 100
 			? 100
-			: totalValue;
+			: totalValue
 
 		// user needs to supply ranges
-		const allRanges = Tools.getProperty(
-			options,
-			'meter',
-			'status',
-			'ranges'
-		);
+		const allRanges = getProperty(options, 'meter', 'status', 'ranges')
 
 		if (allRanges) {
 			const result = allRanges.filter(
-				(step) =>
-					step.range[0] <= boundedValue &&
-					boundedValue <= step.range[1]
-			);
+				(step: any) => step.range[0] <= boundedValue && boundedValue <= step.range[1]
+			)
 			if (result.length > 0) {
-				return result[0].status;
+				return result[0].status
 			}
 		}
 
-		return null;
+		return null
 	}
 
 	getTabularDataArray() {
-		const displayData = this.getDisplayData();
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-		const status = this.getStatus();
-		const proportional = Tools.getProperty(
-			options,
-			'meter',
-			'proportional'
-		);
+		const displayData = this.getDisplayData()
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
+		const status = this.getStatus()
+		const proportional = getProperty(options, 'meter', 'proportional')
 
-		let result = [];
-		let domainMax;
+		let result: ChartTabularData = []
+		let domainMax: number
 		// Display the appropriate columns and fields depending on the type of meter
 		if (proportional === null) {
-			domainMax = 100;
-			const datum = displayData[0];
+			domainMax = 100
+			const datum = displayData[0]
 
 			result = [
 				['Group', 'Value', ...(status ? ['Status'] : [])],
-				[
-					datum[groupMapsTo],
-					datum['value'],
-					...(status ? [status] : []),
-				],
-			];
+				[datum[groupMapsTo], datum['value'], ...(status ? [status] : [])]
+			]
 		} else {
-			const total = Tools.getProperty(proportional, 'total');
-			domainMax = total ? total : this.getMaximumDomain(displayData);
+			const total = getProperty(proportional, 'total')
+			domainMax = total ? total : this.getMaximumDomain(displayData)
 
 			result = [
 				['Group', 'Value', 'Percentage of total'],
-				...displayData.map((datum) => [
+				...displayData.map((datum: any) => [
 					datum[groupMapsTo],
 					datum['value'],
-					((datum['value'] / domainMax) * 100).toFixed(2) + ' %',
-				]),
-			];
+					((datum['value'] / domainMax) * 100).toFixed(2) + ' %'
+				])
+			]
 		}
 
-		return result;
+		return result
 	}
 }

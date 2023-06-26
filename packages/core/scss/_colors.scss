@@ -1,0 +1,131 @@
+@use 'sass:color';
+@use 'sass:map';
+
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
+
+@import 'color-palette';
+
+@function generateCSSCustomProperty($token, $fallback) {
+	@return var(--cds-charts-#{$token}, $fallback);
+}
+
+@function getThemeColors($theme_type) {
+	@if $theme_type == 'dark' {
+		@return color-property(null, $dark-theme-colors);
+	} @else {
+		@return color-property(null, $white-theme-colors);
+	}
+}
+
+@function getGradientColors() {
+	$monochrome: color-property(null, $monochrome-quantize-colors);
+	$divergent: color-property(null, $divergent-quantize-colors);
+
+	@return map-merge($monochrome, $divergent);
+}
+
+@function color-property($name, $theme-colors) {
+	$color-items: ();
+
+	@if type-of($theme-colors) == map {
+		@each $category, $value in $theme-colors {
+			@if $name == null {
+				$color-items: map-merge($color-items, color-property('#{$category}', $value));
+			} @else {
+				$color-items: map-merge($color-items, color-property('#{$name}-#{$category}', $value));
+			}
+		}
+		@return $color-items;
+	} @else {
+		@return (#{$name}: $theme-colors);
+	}
+}
+
+$color-map-light: map-merge(getThemeColors('light'), getGradientColors());
+.#{$prefix}--chart-holder {
+	@each $token, $color in $color-map-light {
+		--cds-charts-#{$token}: #{$color};
+		--cds-charts-#{$token}-hovered: #{darken($color, 7%)};
+	}
+}
+
+$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
+.#{$prefix}--chart-holder[data-carbon-theme='g90'],
+.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
+	@each $token, $color in $color-map-dark {
+		--cds-charts-#{$token}: #{$color};
+		--cds-charts-#{$token}-hovered: #{darken($color, 7%)};
+	}
+}
+
+$color-map: map-merge(getThemeColors('light'), getGradientColors());
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+	@each $token, $color in $color-map {
+		.fill-#{$token} {
+			fill: generateCSSCustomProperty($token, $color);
+
+			&.hovered {
+				fill: generateCSSCustomProperty(#{$token}-hovered, $color);
+				@include default_transition;
+			}
+		}
+
+		.background-#{$token} {
+			background-color: generateCSSCustomProperty($token, $color);
+
+			&.hovered {
+				background-color: generateCSSCustomProperty(#{$token}-hovered, $color);
+				@include default_transition;
+			}
+		}
+
+		.stroke-#{$token} {
+			stroke: generateCSSCustomProperty($token, $color);
+		}
+
+		.stop-color-#{$token} {
+			stop-color: generateCSSCustomProperty($token, $color);
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--tooltip {
+	$color-map: getThemeColors('light');
+
+	@each $token, $color in $color-map {
+		.tooltip-#{$token} {
+			background-color: generateCSSCustomProperty($token, $color);
+		}
+	}
+}
+
+.#{$prefix}--#{$charts-prefix}--legend {
+	.additional > .icon {
+		.area-1 {
+			fill: $zone-fill-01;
+			stroke: $zone-stroke-01;
+		}
+
+		.area-2 {
+			fill: $zone-fill-02;
+			stroke: $zone-stroke-02;
+		}
+
+		.area-3 {
+			fill: $zone-fill-03;
+			stroke: $zone-stroke-03;
+		}
+
+		.quartile {
+			&-wrapper {
+				fill: $zone-fill-02;
+				stroke: $zone-stroke-01;
+			}
+
+			&-line {
+				fill: $layer-inverse-absolute;
+			}
+		}
+	}
+}

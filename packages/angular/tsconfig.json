@@ -1,30 +1,38 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist",
-		"rootDir": "src",
-		"sourceMap": true,
-		"inlineSources": true,
-		"declaration": true,
-		"moduleResolution": "node",
-		"module": "es2015",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"downlevelIteration": true,
-		"importHelpers": true,
-		"target": "es2015",
-		"typeRoots": ["./node_modules/@types"],
-		"lib": ["es2017", "dom"]
-	},
-	"include": ["src/**/*"],
-	"exclude": ["./node_modules", "../../node_modules"],
-	"angularCompilerOptions": {
-		"annotateForClosureCompiler": true,
-		"skipTemplateCodegen": true,
-		"strictMetadataEmit": true,
-		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true,
-		"enableResourceInlining": true
-	}
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // Package-specific
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "outDir": "./dist/out-tsc",
+    "useDefineForClassFields": false,
+    "paths": {
+      "@carbon/charts-angular": [
+        "dist"
+      ],
+      "@carbon/charts-angular/*": [
+        "dist/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "./package.json"
+  ],
+  "exclude": [
+    "src/test.ts"
+  ],
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

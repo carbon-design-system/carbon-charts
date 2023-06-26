@@ -1,20 +1,14 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"declaration": true,
-		"outDir": "dist",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"jsx": "react",
-		"lib": ["ESNext", "DOM"],
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"skipLibCheck": true,
-		"strict": true,
-		"target": "es5",
-		"baseUrl": "./",
-		"paths": {
-			"@carbon/charts": ["../core"]
-		}
+		// Package-specific
+		"allowImportingTsExtensions": true,
+		"jsx": "react-jsx",
+		"noEmit": true,
+		"noUnusedLocals": false // Only while Storybook's webpack 5 builder is used
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"exclude": ["src/all.test.tsx"],
+	"references": [{ "path": "./tsconfig.vite.json" }]
 }

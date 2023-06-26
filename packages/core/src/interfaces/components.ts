@@ -1,88 +1,88 @@
-import {
+import type {
 	LayoutGrowth,
 	LegendPositions,
 	Alignments,
 	ToolbarControlTypes,
-	ZoomBarTypes,
-} from './enums';
-import { Component } from '../components/component';
-import { TruncationOptions } from './truncation';
+	ZoomBarTypes
+} from './enums'
+import type { Component } from '../components'
+import type { TruncationOptions } from './truncation'
 
 /**
  * customize the overlay contents
  */
 export interface LayoutComponentChild {
-	id: string;
+	id: string
 	/**
 	 * the component that'll be rendered inside layout child
 	 */
-	components: Component[];
+	components: Component[]
 	/**
 	 * size of the layout child
 	 */
-	size?: number;
+	size?: number
 	/**
 	 * how the layout child will grow or shrink
 	 */
-	growth: LayoutGrowth;
+	growth: LayoutGrowth
 }
 
 /**
  * customize the legend component
  */
 export interface LegendOptions {
-	enabled?: boolean;
-	position?: LegendPositions;
+	enabled?: boolean
+	position?: LegendPositions
 	/**
 	 * the clickability of legend items
 	 */
-	clickable?: boolean;
-	truncation?: TruncationOptions;
-	alignment?: Alignments;
-	order?: string[];
+	clickable?: boolean
+	truncation?: TruncationOptions
+	alignment?: Alignments
+	order?: string[]
 	/**
 	 * customized legend items
 	 */
-	additionalItems?: LegendItem[];
+	additionalItems?: LegendItem[]
 }
 
 /**
  * customize the legend item
  */
 export interface LegendItem {
-	type: string;
-	name: string;
-	fill?: string;
-	stroke?: string;
+	type: string
+	name: string
+	fill?: string
+	stroke?: string
 }
 
 export interface TooltipOptions {
 	/**
 	 * enable or disable tooltip
 	 */
-	enabled?: boolean;
+	enabled?: boolean
 	/**
 	 * a function to format the tooltip values
 	 */
-	valueFormatter?: Function;
+	valueFormatter?: (value: any, label: string) => string
 	/**
 	 * custom function for returning tooltip HTML
 	 * passed an array or object with the data, and then the default tooltip markup
 	 */
-	customHTML?: Function;
+	customHTML?: (data: any, defaultHTML: string) => string
 	/**
 	 * customizes the `Group` label shown inside tooltips
 	 */
-	groupLabel?: string;
+	groupLabel?: string
 	/**
 	 * show total of items
 	 */
-	showTotal?: boolean;
+	showTotal?: boolean
 	/**
 	 * customizes the `Total` label shown inside tooltips
 	 */
-	totalLabel?: string;
-	truncation?: TruncationOptions;
+	totalLabel?: string
+	truncation?: TruncationOptions
 }
 
 /**
@@ -92,53 +92,53 @@ export interface ThresholdOptions {
 	/**
 	 * threshold value
 	 */
-	value: number | Date;
+	value: number | Date
 	/**
 	 * a function to format the threshold values
 	 */
-	valueFormatter?: Function;
+	valueFormatter?: (value: any) => string
 	/**
 	 * hex threshold line color
 	 */
-	fillColor: string;
+	fillColor: string
 	/**
 	 * threshold label
 	 */
-	label: string;
+	label: string
 }
 
 export interface GridOptions {
 	y?: {
-		enabled?: boolean;
-		numberOfTicks?: number;
-		alignWithAxisTicks?: boolean;
-	};
+		enabled?: boolean
+		numberOfTicks?: number
+		alignWithAxisTicks?: boolean
+	}
 	x?: {
-		enabled?: boolean;
-		numberOfTicks?: number;
-		alignWithAxisTicks?: boolean;
-	};
+		enabled?: boolean
+		numberOfTicks?: number
+		alignWithAxisTicks?: boolean
+	}
 }
 
 /**
  * Ruler options
  */
 export interface RulerOptions {
-	enabled?: boolean;
+	enabled?: boolean
 }
 
 export interface BarOptions {
-	width?: number;
-	maxWidth?: number;
+	width?: number
+	maxWidth?: number
 	/*
 	 * can be used to manually modify spacing between bars
 	 * @default 0.25
 	 */
-	spacingFactor?: number;
+	spacingFactor?: number
 }
 
 export interface StackedBarOptions extends BarOptions {
-	dividerSize?: number;
+	dividerSize?: number
 }
 
 /**
@@ -148,17 +148,17 @@ export interface ToolbarOptions {
 	/**
 	 * is the toolbar visible or not
 	 */
-	enabled?: boolean;
+	enabled?: boolean
 	/**
 	 * the maximum toolbar controls to be displayed as icons
 	 * controls more than this number will appear in the overflow menu
 	 * minimum is 1. (all toolbar controls are in overflow menu)
 	 */
-	numberOfIcons?: number;
+	numberOfIcons?: number
 	/**
 	 * toolbar controls which will be displayed following the array order
 	 */
-	controls?: ToolbarControl[];
+	controls?: ToolbarControl[]
 }
 
 /**
@@ -168,35 +168,35 @@ export interface ToolbarControl {
 	/**
 	 * the toolbar control type
 	 */
-	type: ToolbarControlTypes;
+	type: ToolbarControlTypes
 	/**
 	 * used as aria-label for toolbar control
 	 */
-	title?: string;
+	title?: string
 	/**
 	 * the text to display (if this control is displayed in overflow menu)
 	 * type value will be displayed if text is not available
 	 */
-	text?: string;
+	text?: string
 	/**
 	 * custom id for button
 	 */
-	id?: String;
+	id?: string
 	/**
 	 * SVG HTML element
 	 */
 	iconSVG?: {
-		content?: string;
-		height?: string;
-		width?: string;
-	};
-	shouldBeDisabled?: Function;
+		content?: string
+		height?: string
+		width?: string
+	}
+	shouldBeDisabled?: () => boolean
 	/**
 	 * function to execute on button click
 	 * alternatively, users can choose to not pass in a function and can
 	 * listen for events to execute asynchronously
 	 */
-	clickFunction?: Function;
+	clickFunction?: () => void
 }
 
 /**
@@ -207,20 +207,20 @@ export interface ZoomBarsOptions {
 	 * a variable to handle default zoom in ratio (0 ~ 1.0)
 	 * ex: shift click zoom in ratio
 	 */
-	zoomRatio?: number;
+	zoomRatio?: number
 	/**
 	 * a variable to define the minimum zoom ratio (0 ~ 1.0)
 	 * If  ( zoom domain / max domain ) < minZoomRatio, zoom-in functions will be disabled
 	 */
-	minZoomRatio?: number;
+	minZoomRatio?: number
 	/**
 	 * currently only the top position is supported
 	 */
-	top?: ZoomBarOptions;
+	top?: ZoomBarOptions
 	/**
 	 * whether keep updating range axis in real time while zoom domain is changing
 	 */
-	updateRangeAxis?: boolean;
+	updateRangeAxis?: boolean
 }
 
 /**
@@ -230,25 +230,25 @@ export interface ZoomBarOptions {
 	/**
 	 * is the zoom-bar visible or not
 	 */
-	enabled?: boolean;
+	enabled?: boolean
 	/**
 	 * is the zoom-bar in loading state
 	 */
-	loading?: boolean;
+	loading?: boolean
 	/**
 	 * is the zoom-bar in locked state
 	 */
-	locked?: boolean;
+	locked?: boolean
 	/**
 	 * whether the zoom bar is showing a slider view or a graph view etc.
 	 */
-	type?: ZoomBarTypes;
+	type?: ZoomBarTypes
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */
-	initialZoomDomain?: Object[];
+	initialZoomDomain?: object[]
 	/**
 	 * options related to zoom bar data
 	 */
-	data?: Object[];
+	data?: object[]
 }

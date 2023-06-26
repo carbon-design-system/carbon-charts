@@ -1,13 +1,12 @@
-// Internal Imports
-import { ChartModelCartesian } from './cartesian-charts';
-import * as Tools from '../tools';
+import { getProperty } from '@/tools'
+import { ChartModelCartesian } from './cartesian-charts'
 
 /**
  * Bullet chart model layer
  */
 export class BulletChartModel extends ChartModelCartesian {
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
 	/**
@@ -15,52 +14,42 @@ export class BulletChartModel extends ChartModelCartesian {
 	 * @param datum
 	 * @returns number
 	 */
-	getMatchingRangeIndexForDatapoint(datum) {
-		let matchingRangeIndex;
+	getMatchingRangeIndexForDatapoint(datum: any) {
+		let matchingRangeIndex
 		for (let i = datum.ranges.length - 1; i > 0; i--) {
-			const range = datum.ranges[i];
+			const range = datum.ranges[i]
 			if (datum.value >= range) {
-				matchingRangeIndex = i;
+				matchingRangeIndex = i
 
-				return matchingRangeIndex;
+				return matchingRangeIndex
 			}
 		}
 
-		return 0;
+		return 0
 	}
 
 	getTabularDataArray() {
-		const displayData = this.getDisplayData();
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const displayData = this.getDisplayData()
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
-		const performanceAreaTitles = Tools.getProperty(
-			options,
-			'bullet',
-			'performanceAreaTitles'
-		);
+		const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
 
 		const result = [
 			['Title', 'Group', 'Value', 'Target', 'Percentage', 'Performance'],
-			...displayData.map((datum) => [
+			...displayData.map((datum: any) => [
 				datum['title'],
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'],
-				Tools.getProperty(datum, 'marker') === null
+				getProperty(datum, 'marker') === null ? '&ndash;' : datum['marker'],
+				getProperty(datum, 'marker') === null
 					? '&ndash;'
-					: datum['marker'],
-				Tools.getProperty(datum, 'marker') === null
-					? '&ndash;'
-					: `${Math.floor(
-							(datum[rangeIdentifier] / datum.marker) * 100
-					  )}%`,
-				performanceAreaTitles[
-					this.getMatchingRangeIndexForDatapoint(datum)
-				],
-			]),
-		];
+					: `${Math.floor((datum[rangeIdentifier] / datum.marker) * 100)}%`,
+				performanceAreaTitles[this.getMatchingRangeIndexForDatapoint(datum)]
+			])
+		]
 
-		return result;
+		return result
 	}
 }

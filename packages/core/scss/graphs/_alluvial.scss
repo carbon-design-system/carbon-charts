@@ -1,0 +1,17 @@
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--alluvial {
+	rect.node,
+	rect.node-text-bg {
+		fill: $layer-inverse-absolute;
+	}
+
+	text.node-text {
+		fill: $layer-01-absolute;
+	}
+
+	polygon.arrow-down {
+		fill: $layer-01;
+	}
+}

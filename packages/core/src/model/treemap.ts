@@ -1,33 +1,29 @@
-// Internal Imports
-import { ChartModel } from './model';
-import * as Tools from '../tools';
+import { getProperty } from '@/tools'
+import { ChartModel } from './model'
 
 /**
  * The treemap chart model layer
  */
 export class TreemapChartModel extends ChartModel {
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
 	getTabularDataArray() {
-		const displayData = this.getDisplayData();
+		const displayData = this.getDisplayData()
 
-		const result = [['Child', 'Group', 'Value']];
+		const result = [['Child', 'Group', 'Value']]
 
-		displayData.forEach((datum) => {
+		displayData.forEach((datum: any) => {
 			if (Array.isArray(datum.children)) {
-				datum.children.forEach((child) => {
-					result.push([child.name, datum.name, child.value]);
-				});
-			} else if (
-				Tools.getProperty(datum.name) !== null &&
-				Tools.getProperty(datum.value)
-			) {
-				result.push(['–', datum.name, datum.value]);
+				datum.children.forEach((child: any) => {
+					result.push([child.name, datum.name, child.value])
+				})
+			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {
+				result.push(['–', datum.name, datum.value])
 			}
-		});
+		})
 
-		return result;
+		return result
 	}
 }

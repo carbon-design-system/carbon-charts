@@ -8,5 +8,5 @@ export enum Roles {
 	BUTTON = 'button',
 	MENU = 'menu',
 	MENU_ITEM = 'menuitem',
-	IMG = 'img',
+	IMG = 'img'
 }

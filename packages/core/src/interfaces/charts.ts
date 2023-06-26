@@ -1,29 +1,31 @@
-import {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections,
+import type {
 	Alignments,
-	ChartTypes,
-	TreeTypes,
-	DividerStatus,
-	ColorLegendType,
+	ArrowDirections,
 	ChartTheme,
+	ChartTypes,
+	ColorLegendType,
+	DividerStatus,
+	GaugeTypes,
 	Projection,
-} from './enums';
-import {
-	LegendOptions,
-	TooltipOptions,
+	Statuses,
+	TreeTypes
+} from './enums'
+import type {
+	BarOptions,
 	GridOptions,
+	LegendOptions,
+	StackedBarOptions,
+	ToolbarOptions,
+	TooltipOptions,
+	ZoomBarsOptions
+} from './components'
+import type {
 	AxesOptions,
-	ZoomBarsOptions,
-} from './index';
-import { BarOptions, StackedBarOptions, ToolbarOptions } from './components';
-import {
 	AxisOptions,
 	BinnedAxisOptions,
 	ComboChartAxisOptions,
-	TimeScaleOptions,
-} from './axis-scales';
+	TimeScaleOptions
+} from './axis-scales'
 
 /**
  * Base chart options common to any chart
@@ -32,67 +34,62 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a title for the chart
 	 */
-	title?: string;
+	title?: string
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
-	animations?: boolean;
+	animations?: boolean
 	/**
 	 * boolean to prevent the container from resizing
 	 */
-	resizable?: boolean;
+	resizable?: boolean
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: string;
+	width?: string
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: string;
+	height?: string
 	/**
 	 * Optionally specify a theme for the chart
 	 */
-	theme?: ChartTheme;
+	theme?: ChartTheme
 	/**
 	 * tooltip configuration
 	 */
-	tooltip?: TooltipOptions;
+	tooltip?: TooltipOptions
 	/**
 	 * legend configuration
 	 */
-	legend?: LegendOptions;
+	legend?: LegendOptions
 	/**
 	 * toolbar configurations
 	 */
-	toolbar?: ToolbarOptions;
+	toolbar?: ToolbarOptions
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
 	getIsFilled?: (
-		datasetLabel: any,
-		label?: any,
+		datasetLabel: string,
+		label?: string,
 		data?: any,
 		defaultFilled?: boolean
-	) => boolean;
+	) => boolean
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
-	getFillColor?: (
-		group: string,
-		label?: string,
-		data?: any,
-		defaultFillColor?: string
-	) => string;
+	getFillColor?: (group: string, label?: string, data?: any, defaultFillColor?: string) => string
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
 	 * (note) - not all chart types support the stroke color (e.g. wordcloud)
 	 */
 	getStrokeColor?: (
 		group: string,
-		label?: any,
+		label?: string,
 		data?: any,
 		defaultStrokeColor?: string
-	) => string;
+	) => string
 	/**
 	 * stylesheet options
 	 */
@@ -100,8 +97,8 @@ export interface BaseChartOptions {
 		/**
 		 * optional prefixing string for css classes (defaults to 'cc')
 		 */
-		prefix?: string;
-	};
+		prefix?: string
+	}
 	/**
 	 * options related to charting data
 	 */
@@ -109,25 +106,26 @@ export interface BaseChartOptions {
 		/**
 		 * identifier for data groups
 		 */
-		groupMapsTo?: string;
+		groupMapsTo?: string
 		/**
 		 * used to simulate data loading in skeleton way
 		 */
-		loading?: boolean;
+		loading?: boolean
 		/**
 		 * options related to pre-selected data groups
 		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
 		 */
-		selectedGroups?: string[];
-	};
+		selectedGroups?: string[]
+	}
 	/**
 	 * options related to color scales
 	 */
 	color?: {
 		/**
-		 * e.g. { 'Dataset 1': 'blue' }
+		 @example
+		 { 'Dataset 1': 'blue' }
 		 */
-		scale?: object;
+		scale?: object
 		/**
 		 * use a carbon dataviz preset color palette
 		 * put the index (selection of which variant)
@@ -136,79 +134,74 @@ export interface BaseChartOptions {
 			/**
 			 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
 			 */
-			numberOfVariants?: number;
+			numberOfVariants?: number
 			/**
 			 * the option number of the color paring
 			 */
-			option?: number;
-		};
+			option?: number
+		}
 		/*
 		 * options related to gradient
 		 * e.g. { enabled: true }
 		 */
 		gradient?: {
-			enabled?: boolean;
+			enabled?: boolean
 			/**
 			 * hex color array
 			 * e.g. ['#fff', '#000', ...]
 			 */
-			colors?: Array<String>;
-		};
-	};
-	/*
-	 * options related to (CSV|PNG|JPG) file downloads
+			colors?: Array<string>
+		}
+	}
+	/**
+	 * whether this type of chart is experimental
 	 */
-	fileDownload?: {
-		/**
-		 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
-		 */
-		fileName?: (type: 'png' | 'jpg' | 'csv') => string;
-	};
+	experimental?: boolean
 }
 
 /**
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
-	axes?: AxesOptions<AxisOptions>;
-	grid?: GridOptions;
-	timeScale?: TimeScaleOptions;
+	axes?: AxesOptions<AxisOptions>
+	grid?: GridOptions
+	timeScale?: TimeScaleOptions
 	/**
 	 * zoombar configuration
 	 */
-	zoomBar?: ZoomBarsOptions;
+	zoomBar?: ZoomBarsOptions
 }
 
 /**
  * Options common to binned charts with an axis
  */
 export interface BinnedAxisChartOptions extends AxisChartOptions {
-	axes?: AxesOptions<BinnedAxisOptions>;
-	grid?: GridOptions;
-	timeScale?: TimeScaleOptions;
+	axes?: AxesOptions<BinnedAxisOptions>
+	grid?: GridOptions
+	timeScale?: TimeScaleOptions
 	/**
 	 * zoombar configuration
 	 */
-	zoomBar?: ZoomBarsOptions;
+	zoomBar?: ZoomBarsOptions
 }
 
 /**
  * options specific to boxplot charts
  */
-export interface BoxplotChartOptions extends AxisChartOptions {}
+export type BoxplotChartOptions = AxisChartOptions
 
 /**
  * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
-	bars?: BarOptions;
+	bars?: BarOptions
 }
 
 /**
  * options specific to stacked bar charts
  */
 export interface StackedBarChartOptions extends BarChartOptions {
-	bars?: StackedBarOptions;
+	bars?: StackedBarOptions
 }
 
 /**
@@ -222,17 +215,17 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		/**
 		 * sets the radius of the point
 		 */
-		radius: number;
-		fillOpacity?: number;
-		filled?: boolean;
-		enabled?: boolean;
-	};
+		radius: number
+		fillOpacity?: number
+		filled?: boolean
+		enabled?: boolean
+	}
 }
 
 /**
  * options specific to lollipop charts
  */
-export interface LollipopChartOptions extends ScatterChartOptions {}
+export type LollipopChartOptions = ScatterChartOptions
 
 /**
  * options specific to bubble charts
@@ -245,25 +238,25 @@ export interface BubbleChartOptions extends AxisChartOptions {
 		/**
 		 * the key to lookup in charting data for the bubble radius value
 		 */
-		radiusMapsTo?: string;
+		radiusMapsTo?: string
 		/**
 		 * options for what the bubble radius value maps to
 		 */
-		radiusLabel?: string;
+		radiusLabel?: string
 		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */
-		radiusRange?: Function;
+		radiusRange?: (min: number, max: number) => number[]
 		/**
 		 * Opacity of the fills used within each circle
 		 */
-		fillOpacity?: number;
+		fillOpacity?: number
 		/**
 		 * enabled scatter dot or not
 		 */
-		enabled?: boolean;
-	};
+		enabled?: boolean
+	}
 }
 
 /**
@@ -274,8 +267,8 @@ export interface BulletChartOptions extends AxisChartOptions {
 	 * options for the individual bullets
 	 */
 	bullet?: {
-		performanceAreaTitles?: string[];
-	};
+		performanceAreaTitles?: string[]
+	}
 }
 
 /**
@@ -286,8 +279,8 @@ export interface HistogramChartOptions extends AxisChartOptions {
 	 * options related to bins
 	 */
 	bins?: {
-		rangeLabel?: string;
-	};
+		rangeLabel?: string
+	}
 }
 
 /**
@@ -297,7 +290,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | { name: string };
+	curve?: string | { name: string }
 }
 
 /**
@@ -307,14 +300,14 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | { name: string };
+	curve?: string | { name: string }
 	/**
 	 * options to bound the area of the chart
 	 */
 	bounds?: {
-		upperBoundMapsTo?: string;
-		lowerBoundMapsTo?: string;
-	};
+		upperBoundMapsTo?: string
+		lowerBoundMapsTo?: string
+	}
 }
 
 /**
@@ -324,7 +317,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | { name: string };
+	curve?: string | { name: string }
 }
 
 /**
@@ -332,24 +325,27 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
  */
 export interface WordCloudChartTooltipOptions extends TooltipOptions {
 	/** the label that shows up by the highlighted word in the tooltip */
-	wordLabel?: string;
+	wordLabel?: string
 	/** the label that shows up by the value of the highlighted word in the tooltip */
-	valueLabel?: string;
+	valueLabel?: string
 }
 
 export interface WorldCloudChartOptions extends BaseChartOptions {
 	wordCloud?: {
 		/** what key in your charting data will the font sizes map to? */
-		fontSizeMapsTo?: string;
-		/** a function (chartSize, data) => {} that'll decide the range of font sizes, e.g. [10, 80] */
-		fontSizeRange?: Function;
+		fontSizeMapsTo?: string
+		/** a function that'll decide the range of font sizes, e.g. [10, 80]
+		 * @example
+		 * (chartSize, data) => {}
+		 * */
+		fontSizeRange?: (chartSize: any, data: any) => object
 		/** what key in your charting data will the words map to? */
-		wordMapsTo?: string;
-	};
+		wordMapsTo?: string
+	}
 	/**
 	 * tooltip configuration
 	 */
-	tooltip?: WordCloudChartTooltipOptions;
+	tooltip?: WordCloudChartTooltipOptions
 }
 
 /**
@@ -358,17 +354,20 @@ export interface WorldCloudChartOptions extends BaseChartOptions {
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
 		labels?: {
-			formatter?: Function;
-			enabled?: Boolean;
-		};
-		alignment?: Alignments;
+			formatter?: (data: any) => string
+			enabled?: boolean
+		}
+		alignment?: Alignments
 		/**
 		 * identifier for value key in your charting data
 		 * defaults to value
 		 */
-		valueMapsTo?: string;
-		sortFunction?: (a: any, b: any) => number;
-	};
+		valueMapsTo?: string
+		sortFunction?: (
+			a: { group: string; value: number },
+			b: { group: string; value: number }
+		) => number
+	}
 }
 
 /**
@@ -376,21 +375,21 @@ export interface PieChartOptions extends BaseChartOptions {
  */
 export interface GaugeChartOptions extends BaseChartOptions {
 	gauge?: {
-		arcWidth?: number;
+		arcWidth?: number
 		deltaArrow?: {
-			direction?: ArrowDirections;
-			size?: Function;
-			enabled: Boolean;
-		};
-		showPercentageSymbol?: Boolean;
-		status?: Statuses;
-		deltaFontSize?: Function;
-		numberSpacing?: number;
-		numberFormatter?: Function;
-		valueFontSize?: Function;
-		type?: GaugeTypes;
-		alignment?: Alignments;
-	};
+			direction?: ArrowDirections
+			size?: (value: number) => number | string
+			enabled: boolean
+		}
+		showPercentageSymbol?: boolean
+		status?: Statuses
+		deltaFontSize?: (value: number) => number | string
+		numberSpacing?: number
+		numberFormatter?: (value: number) => string
+		valueFontSize?: (value: number) => number | string
+		type?: GaugeTypes
+		alignment?: Alignments
+	}
 }
 
 /**
@@ -399,50 +398,50 @@ export interface GaugeChartOptions extends BaseChartOptions {
 export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
-			label?: string;
-			number?: number;
-			numberFontSize?: Function;
-			titleFontSize?: Function;
-			titleYPosition?: Function;
-			numberFormatter?: Function;
-		};
-		alignment?: Alignments;
-	};
+			label?: string
+			number?: number
+			numberFontSize?: (value: number) => number | string
+			titleFontSize?: (value: number) => number | string
+			titleYPosition?: (value: number) => number
+			numberFormatter?: (value: number) => string
+		}
+		alignment?: Alignments
+	}
 }
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
-		showLabels?: boolean;
+		showLabels?: boolean
 		proportional?: {
-			total?: number;
-			unit?: string;
-		};
-		peak?: number;
+			total?: number
+			unit?: string
+		}
+		peak?: number
 		status?: {
 			ranges: Array<{
-				range: [number, number];
-				status: Statuses;
-			}>;
-		};
-		height?: number;
+				range: [number, number]
+				status: Statuses
+			}>
+		}
+		height?: number
 		title?: {
 			percentageIndicator?: {
 				/**
 				 * rendering of the percentage value relative to the dataset within title
 				 */
-				enabled?: boolean;
-			};
-		};
-	};
+				enabled?: boolean
+			}
+		}
+	}
 }
 
 export interface ProportionalMeterChartOptions extends BaseChartOptions {
 	meter?: {
 		proportional?: {
-			total?: number;
-			unit?: string;
-		};
-	};
+			total?: number
+			unit?: string
+		}
+	}
 }
 
 /**
@@ -451,38 +450,38 @@ export interface ProportionalMeterChartOptions extends BaseChartOptions {
 export interface RadarChartOptions extends BaseChartOptions {
 	radar?: {
 		axes: {
-			angle: string;
-			value: string;
-		};
-		alignment?: Alignments;
-	};
+			angle: string
+			value: string
+		}
+		alignment?: Alignments
+	}
 }
 
 /**
  * options specific to combo charts
  */
 export interface ComboChartOptions extends AxisChartOptions {
-	axes?: AxesOptions<ComboChartAxisOptions>;
+	axes?: AxesOptions<ComboChartAxisOptions>
 	comboChartTypes: Array<{
-		type: ChartTypes | any;
-		options?: object;
-		correspondingDatasets: Array<string>;
-	}>;
+		type: ChartTypes | any
+		options?: object
+		correspondingDatasets: Array<string>
+	}>
 }
 
 /*
  * options specific to treemap charts
  */
-export interface TreemapChartOptions extends BaseChartOptions {}
+export type TreemapChartOptions = BaseChartOptions
 
 /*
  * options specific to tree charts
  */
 export interface TreeChartOptions extends BaseChartOptions {
 	tree?: {
-		type?: TreeTypes;
-		rootTitle?: string;
-	};
+		type?: TreeTypes
+		rootTitle?: string
+	}
 }
 
 /*
@@ -491,15 +490,15 @@ export interface TreeChartOptions extends BaseChartOptions {
 export interface CirclePackChartOptions extends BaseChartOptions {
 	circlePack?: {
 		circles: {
-			fillOpacity: number;
-		};
+			fillOpacity: number
+		}
 		// depth of nodes to display
-		hierachyLevel: number;
+		hierachyLevel: number
 		padding?: {
-			outer?: number;
-			inner?: number;
-		};
-	};
+			outer?: number
+			inner?: number
+		}
+	}
 }
 
 /**
@@ -507,27 +506,27 @@ export interface CirclePackChartOptions extends BaseChartOptions {
  */
 export interface AlluvialChartOptions extends BaseChartOptions {
 	alluvial: {
-		units?: string;
+		units?: string
 		/**
 		 * List of nodes to draw
 		 */
 		nodes: Array<{
-			name: string;
-			category?: string;
-		}>;
+			name: string
+			category?: string
+		}>
 		/**
 		 * Node alignment (Default is center)
 		 */
-		nodeAlignment?: Alignments;
+		nodeAlignment?: Alignments
 		/**
 		 * Set the node padding
 		 */
-		nodePadding?: number;
+		nodePadding?: number
 		/**
 		 * Enable single color usage for lines
 		 */
-		monochrome?: boolean;
-	};
+		monochrome?: boolean
+	}
 }
 
 /**
@@ -540,8 +539,8 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		 * No cell divider for cell dimensions less than 16
 		 */
 		divider?: {
-			state?: DividerStatus;
-		};
+			state?: DividerStatus
+		}
 		/**
 		 * customize color legend
 		 * enabled by default on select charts
@@ -551,10 +550,10 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 			 * Text to display beside or on top of the legend
 			 * Position is determined by text length
 			 */
-			title?: string;
-			type: ColorLegendType;
-		};
-	};
+			title?: string
+			type: ColorLegendType
+		}
+	}
 }
 
 /**
@@ -562,8 +561,8 @@ export interface HeatmapChartOptions extends BaseChartOptions {
  */
 export interface ThematicChartOptions extends BaseChartOptions {
 	thematic: {
-		projection: Projection;
-	};
+		projection: Projection
+	}
 }
 
 /**
@@ -580,8 +579,33 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			 * Text to display beside or on top of the legend
 			 * Position is determined by text length
 			 */
-			title?: string;
-			type: ColorLegendType;
-		};
-	};
+			title?: string
+			type: ColorLegendType
+		}
+	}
 }
+
+export type ChartOptions =
+	| AlluvialChartOptions
+	| AreaChartOptions
+	| BarChartOptions
+	| BoxplotChartOptions
+	| BubbleChartOptions
+	| BulletChartOptions
+	| CirclePackChartOptions
+	| ComboChartOptions
+	| DonutChartOptions
+	| GaugeChartOptions
+	| HeatmapChartOptions
+	| HistogramChartOptions
+	| LineChartOptions
+	| LollipopChartOptions
+	| MeterChartOptions
+	| PieChartOptions
+	| RadarChartOptions
+	| ScatterChartOptions
+	| StackedAreaChartOptions
+	| StackedBarChartOptions
+	| TreeChartOptions
+	| TreemapChartOptions
+	| WorldCloudChartOptions

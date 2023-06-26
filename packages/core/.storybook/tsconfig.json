@@ -1,0 +1,16 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../demo/bundle",
+		"types": ["node", "vite/client"],
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"declaration": false,
+		"noImplicitAny": false,
+		"strict": false,
+		"skipLibCheck": true
+	},
+	"exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../demo/bundle/**.*"],
+	"include": ["../src/**/*", "./preview.ts"],
+	"files": ["./typings.d.ts"]
+}

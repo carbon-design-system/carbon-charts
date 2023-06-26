@@ -1,77 +1,66 @@
-// Internal Imports
-import { Component } from '../component';
+import { select } from 'd3'
+import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '@/tools'
+import { boxplot } from '@/configuration'
+import { BoxplotChartModel } from '@/model/boxplot'
+import { Component } from '@/components/component'
 import {
 	CartesianOrientations,
 	ColorClassNameTypes,
 	Events,
-	RenderTypes,
-	Roles,
-} from '../../interfaces';
-import * as Tools from '../../tools';
-import * as Configuration from '../../configuration';
-
-// D3 Imports
-import { select } from 'd3-selection';
+	RenderTypes
+} from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
 
 export class Boxplot extends Component {
-	type = 'boxplot';
-	renderType = RenderTypes.SVG;
+	type = 'boxplot'
+	renderType = RenderTypes.SVG
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true });
+		const svg = this.getComponentContainer({ withinChartClip: true })
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const dataGroupNames = this.model.getDataGroupNames();
+		const dataGroupNames = this.model.getDataGroupNames()
 
 		/*
 		 * Get graphable dimensions
 		 */
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
-		const [xScaleStart, xScaleEnd] = mainXScale.range();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
-		const width = xScaleEnd - xScaleStart;
-		const height = yScaleEnd - yScaleStart;
+		const mainXScale = this.services.cartesianScales.getMainXScale()
+		const mainYScale = this.services.cartesianScales.getMainYScale()
+		const [xScaleStart, xScaleEnd] = mainXScale.range()
+		const [yScaleEnd, yScaleStart] = mainYScale.range()
+		const width = xScaleEnd - xScaleStart
+		const height = yScaleEnd - yScaleStart
 		if (width === 0) {
-			return;
+			return
 		}
 
 		// Get orientation of the chart
-		const { cartesianScales } = this.services;
-		const orientation = cartesianScales.getOrientation();
-		const isInVerticalOrientation =
-			orientation === CartesianOrientations.VERTICAL;
-		const [
-			getXValue,
-			getYValue,
-		] = Tools.flipDomainAndRangeBasedOnOrientation(
-			(d, i?) => this.services.cartesianScales.getDomainValue(d, i),
-			(d, i?) => this.services.cartesianScales.getRangeValue(d, i),
+		const { cartesianScales } = this.services
+		const orientation = cartesianScales.getOrientation()
+		const isInVerticalOrientation = orientation === CartesianOrientations.VERTICAL
+		const [getXValue, getYValue] = flipDomainAndRangeBasedOnOrientation(
+			(d: any) => this.services.cartesianScales.getDomainValue(d),
+			(d: any) => this.services.cartesianScales.getRangeValue(d),
 			orientation
-		);
+		)
 
-		const gridSize = Math.floor(
-			(isInVerticalOrientation ? width : height) / dataGroupNames.length
-		);
-		const boxWidth = Math.min(gridSize / 2, 16);
+		const gridSize = Math.floor((isInVerticalOrientation ? width : height) / dataGroupNames.length)
+		const boxWidth = Math.min(gridSize / 2, 16)
 
-		const boxplotData = this.model.getBoxplotData();
+		const boxplotData = (this.model as BoxplotChartModel).getBoxplotData()
 
 		/*
 		 * update or initialize all box groups
 		 */
-		const boxGroups = svg.selectAll('.box-group').data(boxplotData);
-		boxGroups.exit().remove();
+		const boxGroups = svg.selectAll('.box-group').data(boxplotData)
+		boxGroups.exit().remove()
 
-		const boxGroupsEnter = boxGroups
-			.enter()
-			.append('g')
-			.attr('class', 'box-group');
+		const boxGroupsEnter = boxGroups.enter().append('g').attr('class', 'box-group')
 
-		const allBoxGroups = boxGroups.merge(boxGroupsEnter);
+		const allBoxGroups = boxGroups.merge(boxGroupsEnter)
 
 		/*
 		 * draw the 2 range lines for each box
@@ -83,30 +72,27 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'vertical-line start',
+					originalClassName: 'vertical-line start'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-verticalstartline',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
-				const x1 = x0;
-				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
-				const y1 = cartesianScales.getRangeValue(d.quartiles.q_25);
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo])
+				const x1 = x0
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
+				const y1 = cartesianScales.getRangeValue(d.quartiles.q_25)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		// End range line
 		boxGroupsEnter
@@ -115,30 +101,27 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'vertical-line end',
+					originalClassName: 'vertical-line end'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-verticalendline',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]);
-				const x1 = x0;
-				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
-				const y1 = cartesianScales.getRangeValue(d.quartiles.q_75);
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo])
+				const x1 = x0
+				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
+				const y1 = cartesianScales.getRangeValue(d.quartiles.q_75)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update the boxes
@@ -148,49 +131,38 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.box'))
 			.attr('class', () =>
 				this.model.getColorClassName({
-					classNameTypes: [
-						ColorClassNameTypes.FILL,
-						ColorClassNameTypes.STROKE,
-					],
-					originalClassName: 'box',
+					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
+					originalClassName: 'box'
 				})
 			)
-			.attr('fill-opacity', Configuration.boxplot.box.opacity.default)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.default)
+			.attr('fill-opacity', boxplot.box.opacity.default)
+			.attr('stroke-width', boxplot.strokeWidth.default)
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'box')
-			.attr('aria-label', (d) => d[groupMapsTo])
+			.attr('aria-label', (d: any) => d[groupMapsTo])
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-quartiles',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 =
-					cartesianScales.getDomainValue(d[groupMapsTo]) -
-					boxWidth / 2;
-				const x1 = x0 + boxWidth;
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
+				const x1 = x0 + boxWidth
 				const y0 = cartesianScales.getRangeValue(
-					Math[isInVerticalOrientation ? 'max' : 'min'](
-						d.quartiles.q_75,
-						d.quartiles.q_25
-					)
-				);
+					Math[isInVerticalOrientation ? 'max' : 'min'](d.quartiles.q_75, d.quartiles.q_25)
+				)
 				const y1 =
 					y0 +
 					Math.abs(
 						cartesianScales.getRangeValue(d.quartiles.q_75) -
 							cartesianScales.getRangeValue(d.quartiles.q_25)
-					);
+					)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update highlight areas
@@ -200,19 +172,14 @@ export class Boxplot extends Component {
 			.merge(boxGroups.select('path.highlight-area'))
 			.attr('class', 'highlight-area')
 			.attr('opacity', 0)
-			.attr('d', (d) => {
-				const x0 =
-					cartesianScales.getDomainValue(d[groupMapsTo]) -
-					boxWidth / 2;
-				const x1 = x0 + boxWidth;
-				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
-				const y1 = cartesianScales.getRangeValue(d.whiskers.max);
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
+				const x1 = x0 + boxWidth
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
+				const y1 = cartesianScales.getRangeValue(d.whiskers.max)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update the starting whisker
@@ -223,32 +190,27 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'whisker start',
+					originalClassName: 'whisker start'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
+			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-startingwhisker',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 =
-					cartesianScales.getDomainValue(d[groupMapsTo]) -
-					boxWidth / 4;
-				const x1 = x0 + boxWidth / 2;
-				const y0 = cartesianScales.getRangeValue(d.whiskers.min);
-				const y1 = cartesianScales.getRangeValue(d.whiskers.min);
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 4
+				const x1 = x0 + boxWidth / 2
+				const y0 = cartesianScales.getRangeValue(d.whiskers.min)
+				const y1 = cartesianScales.getRangeValue(d.whiskers.min)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update the median line
@@ -260,31 +222,26 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'median',
+					originalClassName: 'median'
 				})
 			)
 			.attr('stroke-width', 2)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-median',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 =
-					cartesianScales.getDomainValue(d[groupMapsTo]) -
-					boxWidth / 2;
-				const x1 = x0 + boxWidth;
-				const y0 = cartesianScales.getRangeValue(d.quartiles.q_50);
-				const y1 = y0;
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 2
+				const x1 = x0 + boxWidth
+				const y0 = cartesianScales.getRangeValue(d.quartiles.q_50)
+				const y1 = y0
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update the ending whisker
@@ -295,97 +252,86 @@ export class Boxplot extends Component {
 			.attr('class', () =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.STROKE],
-					originalClassName: 'whisker end',
+					originalClassName: 'whisker end'
 				})
 			)
-			.attr('stroke-width', Configuration.boxplot.strokeWidth.thicker)
+			.attr('stroke-width', boxplot.strokeWidth.thicker)
 			.attr('fill', 'none')
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-endingwhisker',
-					animate,
+					animate
 				})
 			)
-			.attr('d', (d) => {
-				const x0 =
-					cartesianScales.getDomainValue(d[groupMapsTo]) -
-					boxWidth / 4;
-				const x1 = x0 + boxWidth / 2;
-				const y0 = cartesianScales.getRangeValue(d.whiskers.max);
-				const y1 = cartesianScales.getRangeValue(d.whiskers.max);
+			.attr('d', (d: any) => {
+				const x0 = cartesianScales.getDomainValue(d[groupMapsTo]) - boxWidth / 4
+				const x1 = x0 + boxWidth / 2
+				const y0 = cartesianScales.getRangeValue(d.whiskers.max)
+				const y1 = cartesianScales.getRangeValue(d.whiskers.max)
 
-				return Tools.generateSVGPathString(
-					{ x0, x1, y0, y1 },
-					orientation
-				);
-			});
+				return generateSVGPathString({ x0, x1, y0, y1 }, orientation)
+			})
 
 		/*
 		 * Draw out and update the outlier circles
 		 */
-		const circles = allBoxGroups.selectAll('circle.outlier').data((d) =>
-			d.outliers.map((outlier) => {
+		const circles = allBoxGroups.selectAll('circle.outlier').data((d: any) =>
+			d.outliers.map((outlier: any) => {
 				return {
 					min: d.whiskers.min,
 					max: d.whiskers.max,
 					[groupMapsTo]: d[groupMapsTo],
-					value: outlier,
-				};
+					value: outlier
+				}
 			})
-		);
+		)
 
-		circles.exit().remove();
+		circles.exit().remove()
 
-		const circlesEnter = circles.enter().append('circle');
+		const circlesEnter = circles.enter().append('circle')
 
 		circles
 			.merge(circlesEnter)
-			.attr('r', Configuration.boxplot.circle.radius)
+			.attr('r', boxplot.circle.radius)
 			.attr('class', () =>
 				this.model.getColorClassName({
-					classNameTypes: [
-						ColorClassNameTypes.FILL,
-						ColorClassNameTypes.STROKE,
-					],
-					originalClassName: 'outlier',
+					classNameTypes: [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE],
+					originalClassName: 'outlier'
 				})
 			)
-			.attr('fill-opacity', Configuration.boxplot.circle.opacity.default)
+			.attr('fill-opacity', boxplot.circle.opacity.default)
 			.attr('cx', getXValue)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'boxplot-update-circles',
-					animate,
+					animate
 				})
 			)
-			.attr('cy', getYValue);
+			.attr('cy', getYValue)
 
-		this.addBoxEventListeners();
-		this.addCircleEventListeners();
+		this.addBoxEventListeners()
+		this.addCircleEventListeners()
 	}
 
 	addBoxEventListeners() {
-		const self = this;
+		const self = this
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
 		this.parent
 			.selectAll('path.highlight-area')
-			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
-				const parentElement = select(this.parentNode);
+			.on('mouseover', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
+				const parentElement = select((this as any).parentNode)
 				parentElement
 					.select('path.box')
 					.classed('hovered', true)
-					.attr(
-						'fill-opacity',
-						Configuration.boxplot.box.opacity.hovered
-					);
+					.attr('fill-opacity', boxplot.box.opacity.hovered)
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -396,119 +342,104 @@ export class Boxplot extends Component {
 							label: options.tooltip.groupLabel,
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
-								classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							}),
+								classNameTypes: [ColorClassNameTypes.TOOLTIP]
+							})
 						},
 						{
 							label: 'Minimum',
-							value: datum.whiskers.min,
+							value: datum.whiskers.min
 						},
 						{
 							label: 'Q1',
-							value: datum.quartiles.q_25,
+							value: datum.quartiles.q_25
 						},
 						{
 							label: 'Median',
-							value: datum.quartiles.q_50,
+							value: datum.quartiles.q_50
 						},
 						{
 							label: 'Q3',
-							value: datum.quartiles.q_75,
+							value: datum.quartiles.q_75
 						},
 						{
 							label: 'Maximum',
-							value: datum.whiskers.max,
+							value: datum.whiskers.max
 						},
 						{
 							label: 'IQR',
-							value: datum.quartiles.q_75 - datum.quartiles.q_25,
-						},
-					],
-				});
+							value: datum.quartiles.q_75 - datum.quartiles.q_25
+						}
+					]
+				})
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.BOX_MOUSEOVER,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.BOX_MOUSEOVER, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 			})
-			.on('mousemove', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mousemove', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.BOX_MOUSEMOVE,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.BOX_MOUSEMOVE, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+					event
+				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Boxplot.BOX_CLICK, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
-				const parentElement = select(this.parentNode);
+			.on('mouseout', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
+				const parentElement = select((this as any).parentNode)
 				parentElement
 					.select('path.box')
 					.classed('hovered', false)
-					.attr(
-						'fill-opacity',
-						Configuration.boxplot.box.opacity.default
-					);
+					.attr('fill-opacity', boxplot.box.opacity.default)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.BOX_MOUSEOUT,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.BOX_MOUSEOUT, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
-			});
+					hoveredElement
+				})
+			})
 	}
 
 	addCircleEventListeners() {
-		const self = this;
+		const self = this
 
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
 		this.parent
 			.selectAll('circle')
-			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseover', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				hoveredElement
 					.classed('hovered', true)
-					.attr(
-						'fill-opacity',
-						Configuration.boxplot.circle.opacity.hovered
-					)
-					.classed('unfilled', false);
+					.attr('fill-opacity', boxplot.circle.opacity.hovered)
+					.classed('unfilled', false)
 
 				// Show tooltip for single datapoint
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -519,77 +450,62 @@ export class Boxplot extends Component {
 							label: options.tooltip.groupLabel,
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
-								classNameTypes: [ColorClassNameTypes.TOOLTIP],
-							}),
+								classNameTypes: [ColorClassNameTypes.TOOLTIP]
+							})
 						},
 						{
 							label: 'Outlier',
-							value: datum[rangeIdentifier],
-						},
-					],
-				});
+							value: datum[rangeIdentifier]
+						}
+					]
+				})
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.OUTLIER_MOUSEOVER,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_MOUSEOVER, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 			})
-			.on('mousemove', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mousemove', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.OUTLIER_MOUSEMOVE,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_MOUSEMOVE, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-					event,
-				});
+					event
+				})
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.OUTLIER_CLICK,
-					{
-						event,
-						element: select(this),
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_CLICK, {
+					event,
+					element: select(this),
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseout', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 				hoveredElement
 					.classed('hovered', false)
-					.attr(
-						'fill-opacity',
-						Configuration.boxplot.circle.opacity.default
-					);
+					.attr('fill-opacity', boxplot.circle.opacity.default)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Boxplot.OUTLIER_MOUSEOUT,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Boxplot.OUTLIER_MOUSEOUT, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
-				});
-			});
+					hoveredElement
+				})
+			})
 	}
 }

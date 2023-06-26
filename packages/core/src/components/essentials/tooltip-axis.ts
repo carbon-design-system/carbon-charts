@@ -1,76 +1,75 @@
-import { Tooltip } from './tooltip';
-import { ColorClassNameTypes } from '../../interfaces';
-import * as Tools from '../../tools';
-
-import { get } from 'lodash-es';
+import { get } from 'lodash-es'
+import { getProperty } from '@/tools'
+import { Tooltip } from './tooltip'
+import { ColorClassNameTypes } from '@/interfaces/enums'
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
 		if (e.detail.items) {
-			return e.detail.items;
+			return e.detail.items
 		}
 
-		const data = e.detail.data;
-		if (!Array.isArray(data) || !data.length || !data[0]) {
-			return [];
+		const data = e.detail.data
+		if (!data.length || !data[0]) {
+			return []
 		}
 
-		const options = this.getOptions();
-		const { cartesianScales } = this.services;
-		const domainIdentifier = cartesianScales.getDomainIdentifier();
-		const dualAxes = cartesianScales.isDualAxes();
+		const options = this.getOptions()
+		const { cartesianScales } = this.services
+		const domainIdentifier = cartesianScales.getDomainIdentifier()
+		const dualAxes = cartesianScales.isDualAxes()
 
 		// Generate default tooltip
-		const { groupMapsTo } = options.data;
-		const domainLabel = cartesianScales.getDomainLabel();
-		let rangeLabel = cartesianScales.getRangeLabel();
+		const { groupMapsTo } = options.data
+		const domainLabel = cartesianScales.getDomainLabel()
+		let rangeLabel = cartesianScales.getRangeLabel()
 
-		let domainValue = data[0][domainIdentifier];
-		let items: any[];
+		const domainValue = data[0][domainIdentifier]
+		let items: any[]
 		if (data.length === 1) {
-			const datum = data[0];
-			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum);
+			const datum = data[0]
+			const rangeIdentifier = cartesianScales.getRangeIdentifier(datum)
 
 			if (dualAxes) {
 				const position = cartesianScales.getRangeAxisPosition({
 					datum,
-					groups: [datum[groupMapsTo]],
-				});
-				rangeLabel = cartesianScales.getScaleLabel(position);
+					groups: [datum[groupMapsTo]]
+				})
+				rangeLabel = cartesianScales.getScaleLabel(position)
 			}
-			const value = datum[rangeIdentifier];
+			const value = datum[rangeIdentifier]
 
 			items = [
 				{
 					label: domainLabel,
-					value: domainValue,
+					value: domainValue
 				},
 				...(Array.isArray(value) && value.length === 2
 					? [
 							{
 								label: 'Start',
-								value: value[0],
+								value: value[0]
 							},
 							{
 								label: 'End',
-								value: value[1],
-							},
-					  ]
+								value: value[1]
+							}
+						]
 					: [
 							{
 								label: rangeLabel,
-								value: datum[rangeIdentifier],
-							},
-					  ]),
-			];
+								value: datum[rangeIdentifier]
+							}
+						])
+			]
 
 			if (e.detail.additionalItems) {
-				e.detail.additionalItems.forEach((additionalItem) =>
+				e.detail.additionalItems.forEach((additionalItem: any) =>
 					items.push({
 						label: additionalItem.label,
-						value: additionalItem.value,
+						value: additionalItem.value
 					})
-				);
+				)
 			}
 
 			items.push({
@@ -79,58 +78,51 @@ export class AxisChartsTooltip extends Tooltip {
 				color: this.model.getFillColor(datum[groupMapsTo]),
 				class: this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.TOOLTIP],
-					dataGroupName: datum[groupMapsTo],
-				}),
-			});
+					dataGroupName: datum[groupMapsTo]
+				})
+			})
 		} else if (data.length > 1) {
 			items = [
 				{
 					label: domainLabel,
-					value: domainValue,
-				},
-			];
+					value: domainValue
+				}
+			]
 
 			items = items.concat(
 				data
-					.map((datum) => {
+					.map((datum: any) => {
 						// Format value if is array
-						const value =
-							datum[cartesianScales.getRangeIdentifier(datum)];
+						const value = datum[cartesianScales.getRangeIdentifier(datum)]
 
 						return {
 							label: datum[groupMapsTo],
 							value:
-								Array.isArray(value) && value.length === 2
-									? `${value[0]} - ${value[1]}`
-									: value,
+								Array.isArray(value) && value.length === 2 ? `${value[0]} - ${value[1]}` : value,
 							color: this.model.getFillColor(datum[groupMapsTo]),
 							class: this.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
-								dataGroupName: datum[groupMapsTo],
-							}),
-						};
+								dataGroupName: datum[groupMapsTo]
+							})
+						}
 					})
-					.sort((a, b) => b.value - a.value)
-			);
+					.sort((a: any, b: any) => b.value - a.value)
+			)
 
-			if (
-				!dualAxes &&
-				Tools.getProperty(options, 'tooltip', 'showTotal') === true
-			) {
+			if (!dualAxes && getProperty(options, 'tooltip', 'showTotal') === true) {
 				// use the primary/only range id
-				const rangeIdentifier = cartesianScales.getRangeIdentifier();
+				const rangeIdentifier = cartesianScales.getRangeIdentifier()
 				items.push({
 					label: get(options, 'tooltip.totalLabel') || 'Total',
 					value: data.reduce(
-						(accumulator, datum) =>
-							accumulator + datum[rangeIdentifier],
+						(accumulator: number, datum: any) => accumulator + datum[rangeIdentifier],
 						0
 					),
-					bold: true,
-				});
+					bold: true
+				})
 			}
 		}
 
-		return items;
+		return items
 	}
 }

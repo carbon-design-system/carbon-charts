@@ -1,194 +1,142 @@
-// Internal Imports
-import { ChartModelCartesian } from './cartesian-charts';
-import * as Configuration from '../configuration';
-import * as Tools from '../tools';
-
-// D3 Imports
-import { ascending, min, max, quantile } from 'd3-array';
-import { scaleOrdinal } from 'd3-scale';
+import { ascending, min, max, quantile, scaleOrdinal } from 'd3'
+import { getProperty } from '@/tools'
+import { color } from '@/configuration'
+import { ChartModelCartesian } from './cartesian-charts'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class BoxplotChartModel extends ChartModelCartesian {
 	constructor(services: any) {
-		super(services);
+		super(services)
 	}
 
-	getBoxQuartiles(d) {
+	getBoxQuartiles(d: any) {
 		return {
 			q_25: quantile(d, 0.25),
 			q_50: quantile(d, 0.5),
-			q_75: quantile(d, 0.75),
-		};
+			q_75: quantile(d, 0.75)
+		}
 	}
 
 	getBoxplotData() {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const groupedData = this.getGroupedData();
+		const groupedData = this.getGroupedData()
 
 		// Prepare the data for the box plots
-		const boxplotData = [];
+		const boxplotData = []
 		for (const { name: group, data } of groupedData) {
-			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-			const values = data.map((d) => d[rangeIdentifier]).sort(ascending);
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
+			const values = data.map((d: any) => d[rangeIdentifier]).sort(ascending)
 
 			const record = {
 				[groupMapsTo]: group,
 				counts: values,
 				quartiles: this.getBoxQuartiles(values),
-				outliers: null,
-				whiskers: null,
-			};
+				outliers: null as any,
+				whiskers: null as any
+			}
 
-			const q1 = record.quartiles.q_25;
-			const q3 = record.quartiles.q_75;
+			const q1 = record.quartiles.q_25
+			const q3 = record.quartiles.q_75
 
-			const iqr = (q3 - q1) * 1.5;
-			const irq1 = q1 - iqr;
-			const irq3 = q3 + iqr;
+			const iqr = (q3 - q1) * 1.5
+			const irq1 = q1 - iqr
+			const irq3 = q3 + iqr
 
-			const outliers = [];
-			const normalValues = [];
+			const outliers = []
+			const normalValues = []
 
 			for (const value of values) {
 				if (value < irq1) {
-					outliers.push(value);
+					outliers.push(value)
 				} else if (value > irq3) {
-					outliers.push(value);
+					outliers.push(value)
 				} else {
-					normalValues.push(value);
+					normalValues.push(value)
 				}
 			}
 
-			record.outliers = outliers;
+			record.outliers = outliers
 
-			const minNormalValue = min(normalValues);
-			const maxNormalValue = max(normalValues);
+			const minNormalValue = min(normalValues)
+			const maxNormalValue = max(normalValues)
 			record.whiskers = {
 				min: minNormalValue
 					? minNormalValue
-					: min([
-							record.quartiles.q_25,
-							record.quartiles.q_50,
-							record.quartiles.q_75,
-					  ]),
+					: min([record.quartiles.q_25, record.quartiles.q_50, record.quartiles.q_75]),
 				max: maxNormalValue
 					? maxNormalValue
-					: max([
-							record.quartiles.q_25,
-							record.quartiles.q_50,
-							record.quartiles.q_75,
-					  ]),
-			};
+					: max([record.quartiles.q_25, record.quartiles.q_50, record.quartiles.q_75])
+			}
 
-			boxplotData.push(record);
+			boxplotData.push(record)
 		}
 
-		return boxplotData;
+		return boxplotData
 	}
 
 	getTabularDataArray() {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
 
-		const boxplotData = this.getBoxplotData();
+		const boxplotData = this.getBoxplotData()
 
 		const result = [
-			[
-				'Group',
-				'Minimum',
-				'Q1',
-				'Median',
-				'Q3',
-				'Maximum',
-				'IQR',
-				'Outlier(s)',
-			],
+			['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)'],
 			...boxplotData.map((datum) => {
-				let outliers = Tools.getProperty(datum, 'outliers');
+				let outliers = getProperty(datum, 'outliers')
 				if (outliers === null || outliers.length === 0) {
-					outliers = ['&ndash;'];
+					outliers = ['&ndash;']
 				}
 				return [
 					datum[groupMapsTo],
-					Tools.getProperty(datum, 'whiskers', 'min') !== null
-						? Tools.getProperty(
-								datum,
-								'whiskers',
-								'min'
-						  ).toLocaleString()
+					getProperty(datum, 'whiskers', 'min') !== null
+						? getProperty(datum, 'whiskers', 'min').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
-						? Tools.getProperty(
-								datum,
-								'quartiles',
-								'q_25'
-						  ).toLocaleString()
+					getProperty(datum, 'quartiles', 'q_25') !== null
+						? getProperty(datum, 'quartiles', 'q_25').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_50') !== null
-						? Tools.getProperty(
-								datum,
-								'quartiles',
-								'q_50'
-						  ).toLocaleString()
+					getProperty(datum, 'quartiles', 'q_50') !== null
+						? getProperty(datum, 'quartiles', 'q_50').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_75') !== null
-						? Tools.getProperty(
-								datum,
-								'quartiles',
-								'q_75'
-						  ).toLocaleString()
+					getProperty(datum, 'quartiles', 'q_75') !== null
+						? getProperty(datum, 'quartiles', 'q_75').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'whiskers', 'max') !== null
-						? Tools.getProperty(
-								datum,
-								'whiskers',
-								'max'
-						  ).toLocaleString()
+					getProperty(datum, 'whiskers', 'max') !== null
+						? getProperty(datum, 'whiskers', 'max').toLocaleString()
 						: '&ndash;',
-					Tools.getProperty(datum, 'quartiles', 'q_75') !== null &&
-					Tools.getProperty(datum, 'quartiles', 'q_25') !== null
+					getProperty(datum, 'quartiles', 'q_75') !== null &&
+					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (
-								Tools.getProperty(datum, 'quartiles', 'q_75') -
-								Tools.getProperty(datum, 'quartiles', 'q_25')
-						  ).toLocaleString()
+								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
+							).toLocaleString()
 						: '&ndash;',
-					outliers.map((d) => d.toLocaleString()).join(','),
-				];
-			}),
-		];
+					outliers.map((d: any) => d.toLocaleString()).join(',')
+				]
+			})
+		]
 
-		return result;
+		return result
 	}
 
 	protected setColorClassNames() {
 		// monochrome
-		const numberOfColors = 1;
+		const numberOfColors = 1
 
-		const colorPairingOptions = Tools.getProperty(
-			this.getOptions(),
-			'color',
-			'pairing'
-		);
-		let pairingOption = Tools.getProperty(colorPairingOptions, 'option');
-		const colorPairingCounts = Configuration.color.pairingOptions;
+		const colorPairingOptions = getProperty(this.getOptions(), 'color', 'pairing')
+		let pairingOption = getProperty(colorPairingOptions, 'option')
+		const colorPairingCounts = color.pairingOptions
 
 		// Use default palette if user choice is not in range
 		pairingOption =
-			pairingOption <= colorPairingCounts[`${numberOfColors}-color`]
-				? pairingOption
-				: 1;
+			pairingOption <= colorPairingCounts[`${numberOfColors}-color`] ? pairingOption : 1
 
 		// Create color classes for graph, tooltip and stroke use
-		const colorPairing = this.allDataGroups.map(
-			(dataGroup, index) => `${numberOfColors}-${pairingOption}-1`
-		);
+		const colorPairing = this.allDataGroups.map(() => `${numberOfColors}-${pairingOption}-1`)
 
 		// Create default color classnames
-		this.colorClassNames = scaleOrdinal()
-			.range(colorPairing)
-			.domain(this.allDataGroups);
+		this.colorClassNames = scaleOrdinal().range(colorPairing).domain(this.allDataGroups)
 	}
 }

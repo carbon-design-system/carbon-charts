@@ -1,0 +1,65 @@
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/import-once/scss/index';
+
+@include exports('cc-edge') {
+	.#{$prefix}--#{$charts-prefix}--edge {
+		fill: transparent;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge__container {
+		stroke-width: $spacing-06;
+		stroke: transparent;
+		stroke-dasharray: none;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge__inner {
+		stroke-width: 0.0625rem;
+		stroke: $border-inverse;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge__outer {
+		stroke-width: 0.15625rem;
+		stroke: transparent;
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge:hover {
+		.#{$prefix}--#{$charts-prefix}--edge__inner {
+			stroke-width: 0.15625rem;
+		}
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-sm {
+		stroke-dasharray: mini-units(0.25) mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-md {
+		stroke-dasharray: mini-units(0.5) mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-lg {
+		stroke-dasharray: mini-units(1) mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--dash-xl {
+		stroke-dasharray: mini-units(2) mini-units(0.5);
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--tunnel {
+		.#{$prefix}--#{$charts-prefix}--edge__outer {
+			stroke: $layer-accent-01;
+			stroke-width: mini-units(0.75);
+		}
+	}
+
+	.#{$prefix}--#{$charts-prefix}--edge--double {
+		.#{$prefix}--#{$charts-prefix}--edge__inner {
+			stroke: $background;
+		}
+
+		.#{$prefix}--#{$charts-prefix}--edge__outer {
+			stroke: $border-inverse;
+			stroke-width: mini-units(0.5625);
+		}
+	}
+}

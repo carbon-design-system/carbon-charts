@@ -4,7 +4,8 @@ set -e
 
 GITHUB_UPSTREAM=git@github.com:carbon-design-system/carbon-charts.git
 
-lerna run lint
+# Lint each package
+npx lerna run lint
 
 if [ $? -ne 0 ]
 then
@@ -12,7 +13,7 @@ then
 	exit 1
 fi
 
-# Refresh code
+# Get latest code
 git pull upstream master
 
 if [ $? -ne 0 ]
@@ -22,19 +23,13 @@ then
 	exit 1
 fi
 
-if [ $? -ne 0 ]
+# Check to see if yarn.lock was modified since last commit and add it, if it was
+if [ ! -z "`git ls-files -m | grep yarn.lock`" ]
 then
-	echo "There was an error running lerna bootstrap."
-	exit 1
+	git add yarn.lock
+	git commit -m "chore(monorepo): update yarn.lock"
 fi
 
-# if package locks updated, add them
-if [ ! -z "`git ls-files -m | grep package-lock.json`" ]
-then
-	git add package-lock.json ./packages/*/package-lock.json
-	git commit -m "Update package-lock.json files"
-fi
-
-lerna run format
+npx lerna run format
 
 #exit 1  # stops push from running, good for testing

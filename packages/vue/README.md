@@ -1,10 +1,8 @@
-# Notice
+# Carbon Charts Vue
 
-### This version relies on **Carbon v11**. If you're using Carbon v10, [see the legacy demo site](https://carbon-charts-0x.netlify.app)
+Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. This version is for Vue.js ^2.7.0. For Vue.js 3.x support, check for the availability of `@carbon/charts-vue@next`.
 
-## `@carbon/charts-vue`
-
-> Carbon Charting Vue Wrappers
+The required styles should be imported from `@carbon/charts-vue/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
@@ -12,40 +10,36 @@
 
 ## Maintenance & support
 
-These Vue wrappers are community-maintained.
+This component library is community-maintained.
 
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-vue d3
+npm install -S @carbon/charts-vue @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-vue d3
+yarn add @carbon/charts-vue @carbon/styles d3 d3-cloud d3-sankey
 ```
-
-**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
 
 ## Step-by-step instructions
 
 Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-getting-started--vue)
 
-## Codesandbox examples
+## StackBlitz examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
 
-**When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
+**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
 
-Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
-
-For instance in the case of a donut chart you're able to pass in an additional field called `center` in your options configuring the donut center.
+Although new charts will be introduced in the future (such as a choropleth), data and options follow the same model for all charts with minor exceptions. For example, in the case of a donut chart, you're able to pass in an additional field called `center` in your options to configure the donut center.
 
 For instructions on using the **tabular data format**, see [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
 

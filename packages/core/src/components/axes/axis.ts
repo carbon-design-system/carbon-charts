@@ -1,300 +1,211 @@
-// Internal Imports
-import { Component } from '../component';
-import {
-	AxisPositions,
-	Events,
-	ScaleTypes,
-	Roles,
-	TruncationTypes,
-} from '../../interfaces';
-import * as Tools from '../../tools';
-import { ChartModel } from '../../model/model';
-import { DOMUtils } from '../../services';
-import {
-	AxisTitleOrientations,
-	RenderTypes,
-	TickRotations,
-} from '../../interfaces/enums';
-import * as Configuration from '../../configuration';
-import {
-	computeTimeIntervalName,
-	formatTick,
-	isTickPrimary,
-} from '../../services/time-series';
-
-// D3 Imports
-import { select } from 'd3-selection';
-import { axisBottom, axisLeft, axisRight, axisTop } from 'd3-axis';
+import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, select, type Selection as D3Selection } from 'd3'
+import { axis } from '@/configuration'
+import { clamp, getProperty, getTranslationValues, truncateLabel } from '@/tools'
+import { Component } from '@/components/component'
+import { AxisPositions, Events, ScaleTypes, TruncationTypes, AxisTitleOrientations, RenderTypes, TickRotations } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
+import type { ChartModel } from '@/model/model'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { computeTimeIntervalName, formatTick, isTickPrimary } from '@/services/time-series'
 
 export class Axis extends Component {
-	type = 'axes';
-	renderType = RenderTypes.SVG;
+	type = 'axes'
+	renderType = RenderTypes.SVG
 
-	margins: any;
+	margins: any
 	truncation = {
 		[AxisPositions.LEFT]: false,
 		[AxisPositions.RIGHT]: false,
 		[AxisPositions.TOP]: false,
-		[AxisPositions.BOTTOM]: false,
-	};
+		[AxisPositions.BOTTOM]: false
+	}
 
-	scale: any;
-	scaleType: ScaleTypes;
+	scale: AxisScale<any>
+	scaleType: ScaleTypes
 
 	constructor(model: ChartModel, services: any, configs?: any) {
-		super(model, services, configs);
+		super(model, services, configs)
 
 		if (configs) {
-			this.configs = configs;
+			this.configs = configs
 		}
 
-		this.margins = this.configs.margins;
+		this.margins = this.configs.margins
 	}
 
 	render(animate = true) {
-		const { position: axisPosition } = this.configs;
-		const options = this.getOptions();
-		const isAxisVisible = Tools.getProperty(
-			options,
-			'axes',
-			axisPosition,
-			'visible'
-		);
+		const { position: axisPosition }: { position: AxisPositions } = this.configs
+		const options = this.getOptions()
+		const isAxisVisible = getProperty(options, 'axes', axisPosition, 'visible')
 
-		const svg = this.getComponentContainer();
+		const svg = this.getComponentContainer() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+			useAttrs: true
+		})
 
 		// Add axis into the parent
-		const container = DOMUtils.appendOrSelect(
-			svg,
-			`g.axis.${axisPosition}`
-		);
-		let startPosition, endPosition;
-		if (
-			axisPosition === AxisPositions.BOTTOM ||
-			axisPosition === AxisPositions.TOP
-		) {
-			startPosition = this.configs.axes[AxisPositions.LEFT]
-				? this.margins.left
-				: 0;
-			endPosition = this.configs.axes[AxisPositions.RIGHT]
-				? width - this.margins.right
-				: width;
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
+		let startPosition: number, endPosition: number
+		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
+			startPosition = this.configs.axes[AxisPositions.LEFT] ? this.margins.left : 0
+			endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width
 		} else {
-			startPosition = height - this.margins.bottom;
-			endPosition = this.margins.top;
+			startPosition = height - this.margins.bottom
+			endPosition = this.margins.top
 		}
 
 		// Grab the scale off of the Scales service
-		const scale = this.services.cartesianScales.getScaleByPosition(
-			axisPosition
-		);
+		if (!this.services.cartesianScales) throw new Error('Services cartesianScales undefineds')
+		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition) as any
 
-		if (
-			this.scaleType === ScaleTypes.LABELS ||
-			this.scaleType === ScaleTypes.LABELS_RATIO
-		) {
-			scale.rangeRound([startPosition, endPosition]);
+		if (this.scaleType === ScaleTypes.LABELS || this.scaleType === ScaleTypes.LABELS_RATIO) {
+			scale.rangeRound([startPosition, endPosition])
 		} else {
-			scale.range([startPosition, endPosition]);
+			scale.range([startPosition, endPosition])
 		}
 
 		// Identify the corresponding d3 axis function
-		let axisFunction;
+		let axisFunction: any
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
-				axisFunction = axisLeft;
-				break;
+				axisFunction = axisLeft
+				break
 			case AxisPositions.BOTTOM:
-				axisFunction = axisBottom;
-				break;
+				axisFunction = axisBottom
+				break
 			case AxisPositions.RIGHT:
-				axisFunction = axisRight;
-				break;
+				axisFunction = axisRight
+				break
 			case AxisPositions.TOP:
-				axisFunction = axisTop;
-				break;
+				axisFunction = axisTop
+				break
 		}
 
-		container.attr('aria-label', `${axisPosition} axis`);
-		const axisRefExists = !container.select(`g.ticks`).empty();
-		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
+		container.attr('aria-label', `${axisPosition} axis`)
+		const axisRefExists = !container.select(`g.ticks`).empty()
+		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`)
 		if (!axisRefExists) {
-			axisRef.attr('role', `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
-			axisRef.attr('aria-label', `${axisPosition} ticks`);
+			axisRef.attr('role', `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`)
+			axisRef.attr('aria-label', `${axisPosition} ticks`)
 		}
 
 		// We draw the invisible axis because of the async nature of d3 transitions
 		// To be able to tell the final width & height of the axis when initiaing the transition
 		// The invisible axis is updated instantly and without a transition
-		const invisibleAxisRef = DOMUtils.appendOrSelect(
-			container,
-			`g.ticks.invisible`
-		)
+		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
 			.style('opacity', '0')
 			.style('pointer-events', 'none')
 			.attr('aria-hidden', true)
-			.attr('aria-label', `invisible ${axisPosition} ticks`);
+			.attr('aria-label', `invisible ${axisPosition} ticks`)
 
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
+		const axisOptions = getProperty(options, 'axes', axisPosition)
 		const isTimeScaleType =
-			this.scaleType === ScaleTypes.TIME ||
-			axisOptions.scaleType === ScaleTypes.TIME;
+			this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME
 		const isVerticalAxis =
-			axisPosition === AxisPositions.LEFT ||
-			axisPosition === AxisPositions.RIGHT;
+			axisPosition === AxisPositions.LEFT || axisPosition === AxisPositions.RIGHT
 
 		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
 		// update scale domain to zoomDomain.
-		const zoomDomain = this.model.get('zoomDomain');
+		const zoomDomain = this.model.get('zoomDomain')
 		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
-			scale.domain(zoomDomain);
+			scale.domain(zoomDomain)
 		}
 
 		if (!isAxisVisible) {
-			axisRef.attr('aria-hidden', true);
-			return;
+			axisRef.attr('aria-hidden', true)
+			return
 		}
 
-		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType');
-		const isDataLoading = Tools.getProperty(options, 'data', 'loading');
-		const numberOfTicksProvided = Tools.getProperty(
-			axisOptions,
-			'ticks',
-			'number'
-		);
+		const axisScaleType = getProperty(axisOptions, 'scaleType')
+		const isDataLoading = getProperty(options, 'data', 'loading')
+		const numberOfTicksProvided = getProperty(axisOptions, 'ticks', 'number')
 
 		// user can provide custom ticks to be displayed
 		// ticks need to be in the domain of the axis data
-		const userProvidedTickValues = Tools.getProperty(
-			axisOptions,
-			'ticks',
-			'values'
-		);
+		const userProvidedTickValues = getProperty(axisOptions, 'ticks', 'values')
 
 		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(
-			axisOptions,
-			'truncation',
-			'type'
-		);
-		const truncationThreshold = Tools.getProperty(
-			axisOptions,
-			'truncation',
-			'threshold'
-		);
-		const truncationNumCharacter = Tools.getProperty(
-			axisOptions,
-			'truncation',
-			'numCharacter'
-		);
+		const truncationType = getProperty(axisOptions, 'truncation', 'type')
+		const truncationThreshold = getProperty(axisOptions, 'truncation', 'threshold')
+		const truncationNumCharacter = getProperty(axisOptions, 'truncation', 'numCharacter')
 
-		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
-		const timeScaleOptions = Tools.getProperty(options, 'timeScale');
+		const isNumberOfTicksProvided = numberOfTicksProvided !== null
+		const timeScaleOptions = getProperty(options, 'timeScale')
 
 		// Append to DOM a fake tick to get the right computed font height
-		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
-		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text(
-			'0'
-		);
+		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`)
+		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text('0')
 		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), {
-			useBBox: true,
-		}).height;
-		fakeTick.remove();
+			useBBox: true
+		}).height
+		fakeTick.remove()
 
-		const scaleType =
-			this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
+		const scaleType = this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR
 
 		// Initialize axis object
-		const axis = axisFunction(scale).tickSizeOuter(0);
+		const axis = axisFunction(scale).tickSizeOuter(0)
 
 		if (scale.ticks) {
-			let numberOfTicks;
+			let numberOfTicks: number
 
 			if (isNumberOfTicksProvided) {
-				numberOfTicks = numberOfTicksProvided;
+				numberOfTicks = numberOfTicksProvided
 			} else {
-				numberOfTicks = Configuration.axis.ticks.number;
+				numberOfTicks = axis.ticks.number
 				if (isVerticalAxis) {
 					// Set how many ticks based on height
 					numberOfTicks = this.getNumberOfFittingTicks(
 						height,
 						tickHeight,
-						Configuration.axis.ticks.verticalSpaceRatio
-					);
+						axis.ticks.verticalSpaceRatio
+					)
 				}
 			}
 
 			// scale continuous
 			// remove 0 ticks for skeleton
 			if (scale.ticks().length === 1 && scale.ticks()[0] === 0) {
-				numberOfTicks = 0;
+				numberOfTicks = 0
 			}
 
-			axis.ticks(numberOfTicks);
+			axis.ticks(numberOfTicks)
 
 			if (isTimeScaleType) {
 				if (!scale.ticks(numberOfTicks).length) {
-					axis.tickValues([]);
+					axis.tickValues([])
 				} else {
-					const addSpaceOnEdges = Tools.getProperty(
-						options,
-						'timeScale',
-						'addSpaceOnEdges'
-					);
+					const addSpaceOnEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
 
-					const customDomain = Tools.getProperty(
-						options,
-						'axes',
-						axisPosition,
-						'domain'
-					);
+					const customDomain = getProperty(options, 'axes', axisPosition, 'domain')
 
-					let tickValues;
 					// scale.nice() will change scale domain which causes extra space near chart edge
 					// so use another scale instance to avoid impacts to original scale
-					const tempScale = scale.copy();
+					const tempScale = scale.copy()
 					if (addSpaceOnEdges && !customDomain) {
-						tempScale.nice(numberOfTicks);
+						tempScale.nice(numberOfTicks)
 					}
-					tickValues = tempScale.ticks(numberOfTicks);
+					const tickValues = tempScale.ticks(numberOfTicks)
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (
-						addSpaceOnEdges &&
-						tickValues.length > 2 &&
-						!customDomain
-					) {
-						tickValues.splice(tickValues.length - 1, 1);
-						tickValues.splice(0, 1);
+					if (addSpaceOnEdges && tickValues.length > 2 && !customDomain) {
+						tickValues.splice(tickValues.length - 1, 1)
+						tickValues.splice(0, 1)
 					}
 
-					axis.tickValues(tickValues);
+					axis.tickValues(tickValues)
 				}
 			}
 		}
 
 		// create the right ticks formatter
-		let formatter;
-		const userProvidedFormatter = Tools.getProperty(
-			axisOptions,
-			'ticks',
-			'formatter'
-		);
+		let formatter: any
+		const userProvidedFormatter = getProperty(axisOptions, 'ticks', 'formatter')
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues());
+			const timeInterval = computeTimeIntervalName(axis.tickValues())
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
-					formatTick(
-						t,
-						i,
-						axis.tickValues(),
-						timeInterval,
-						timeScaleOptions
-					);
+					formatTick(t, i, axis.tickValues(), timeInterval, timeScaleOptions)
 			} else {
 				formatter = (t: number, i: number) => {
 					const defaultFormattedValue = formatTick(
@@ -303,104 +214,88 @@ export class Axis extends Component {
 						axis.tickValues(),
 						timeInterval,
 						timeScaleOptions
-					);
-					return userProvidedFormatter(t, i, defaultFormattedValue);
-				};
+					)
+					return userProvidedFormatter(t, i, defaultFormattedValue)
+				}
 			}
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = (t) => t.toLocaleString();
+					formatter = (t: any) => t.toLocaleString()
 				}
 			} else {
-				formatter = userProvidedFormatter;
+				formatter = userProvidedFormatter
 			}
 		}
 
 		// Set ticks formatter
-		axis.tickFormat(formatter);
+		axis.tickFormat(formatter)
 
 		// prioritize using a custom array of values rather than number of ticks
 		// if both are provided. custom tick values need to be within the domain of the scale
-		const [
-			lowerBound,
-			upperBound,
-		] = this.services.cartesianScales
+		const [lowerBound, upperBound] = this.services.cartesianScales
 			.getScaleByPosition(axisPosition)
-			.domain();
-		let validTicks;
+			.domain()
+		let validTicks: any
 		if (userProvidedTickValues) {
 			if (isTimeScaleType) {
 				// sanitize user-provided tick values
-				userProvidedTickValues.forEach((userProvidedTickValue, i) => {
+				userProvidedTickValues.forEach((userProvidedTickValue: any, i: number) => {
 					if (userProvidedTickValue.getTime === undefined) {
-						userProvidedTickValues[i] = new Date(
-							userProvidedTickValue
-						);
+						userProvidedTickValues[i] = new Date(userProvidedTickValue)
 					}
-				});
+				})
 
 				// check the supplied ticks are within the time domain
-				validTicks = userProvidedTickValues.filter((tick) => {
-					const tickTimestamp = tick.getTime();
+				validTicks = userProvidedTickValues.filter((tick: any) => {
+					const tickTimestamp = tick.getTime()
 					return (
 						tickTimestamp >= new Date(lowerBound).getTime() &&
 						tickTimestamp <= new Date(upperBound).getTime()
-					);
-				});
+					)
+				})
 			} else if (axisScaleType === ScaleTypes.LABELS) {
 				const discreteDomain = this.services.cartesianScales
 					.getScaleByPosition(axisPosition)
-					.domain();
-				validTicks = userProvidedTickValues.filter((tick) =>
-					discreteDomain.includes(tick)
-				);
+					.domain()
+				validTicks = userProvidedTickValues.filter((tick: any) => discreteDomain.includes(tick))
 			} else {
 				// continuous scales
 				validTicks = userProvidedTickValues.filter(
-					(tick) => tick >= lowerBound && tick <= upperBound
-				);
+					(tick: any) => tick >= lowerBound && tick <= upperBound
+				)
 			}
 
-			axis.tickValues(validTicks);
+			axis.tickValues(validTicks)
 		}
 
 		// Position and transition the axis
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
-				axisRef.attr('transform', `translate(${this.margins.left}, 0)`);
-				break;
+				axisRef.attr('transform', `translate(${this.margins.left}, 0)`)
+				break
 			case AxisPositions.BOTTOM:
-				axisRef.attr(
-					'transform',
-					`translate(0, ${height - this.margins.bottom})`
-				);
-				break;
+				axisRef.attr('transform', `translate(0, ${height - this.margins.bottom})`)
+				break
 			case AxisPositions.RIGHT:
-				axisRef.attr(
-					'transform',
-					`translate(${width - this.margins.right}, 0)`
-				);
-				break;
+				axisRef.attr('transform', `translate(${width - this.margins.right}, 0)`)
+				break
 			case AxisPositions.TOP:
-				axisRef.attr('transform', `translate(0, ${this.margins.top})`);
-				break;
+				axisRef.attr('transform', `translate(0, ${this.margins.top})`)
+				break
 		}
 
 		// Position the axis title
 		// check that data exists, if they don't, doesn't show the title axis
-		const isDataEmpty = this.model.isDataEmpty();
+		const isDataEmpty = this.model.isDataEmpty()
 		if (axisOptions.title) {
-			const axisTitleRef = DOMUtils.appendOrSelect(
-				container,
-				`text.axis-title`
-			).html(isDataEmpty || isDataLoading ? '' : axisOptions.title);
+			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`).html(
+				isDataEmpty || isDataLoading ? '' : axisOptions.title
+			)
 
 			// vertical axes can have override for title orientation
-			const titleOrientation = Tools.getProperty(
-				axisOptions,
-				'titleOrientation'
-			);
+			const titleOrientation = getProperty(axisOptions, 'titleOrientation')
+			let titleHeight // avoid lexical declaration in case block
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
 					if (titleOrientation === AxisTitleOrientations.RIGHT) {
@@ -409,130 +304,112 @@ export class Axis extends Component {
 							.attr('y', 0)
 							.attr('x', scale.range()[0] / 2)
 							.attr('dy', '-0.5em')
-							.style('text-anchor', 'middle');
+							.style('text-anchor', 'middle')
 					} else {
 						axisTitleRef
 							.attr('transform', 'rotate(-90)')
 							.attr('y', 0)
 							.attr('x', -(scale.range()[0] / 2))
 							.attr('dy', '0.75em')
-							.style('text-anchor', 'middle');
+							.style('text-anchor', 'middle')
 					}
-					break;
+					break
 				case AxisPositions.BOTTOM:
 					axisTitleRef
 						.attr(
 							'transform',
-							`translate(${
-								this.margins.left / 2 + scale.range()[1] / 2
-							}, ${height + 4})`
+							`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${height + 4})`
 						)
-						.style('text-anchor', 'middle');
-					break;
+						.style('text-anchor', 'middle')
+					break
 				case AxisPositions.RIGHT:
 					if (titleOrientation === AxisTitleOrientations.LEFT) {
 						axisTitleRef
 							.attr('transform', 'rotate(-90)')
 							.attr('y', width)
 							.attr('x', -(scale.range()[0] / 2))
-							.style('text-anchor', 'middle');
+							.style('text-anchor', 'middle')
 					} else {
 						axisTitleRef
 							.attr('transform', 'rotate(90)')
 							.attr('y', -width)
 							.attr('x', scale.range()[0] / 2)
 							.attr('dy', '0.75em')
-							.style('text-anchor', 'middle');
+							.style('text-anchor', 'middle')
 					}
-					break;
+					break
 				case AxisPositions.TOP:
-					const { height: titleHeight } = DOMUtils.getSVGElementSize(
-						axisTitleRef,
-						{
-							useBBox: true,
-						}
-					);
+					({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
+						useBBox: true
+					}))
 					axisTitleRef
 						.attr(
 							'transform',
-							`translate(${
-								this.margins.left / 2 + scale.range()[1] / 2
-							}, ${titleHeight / 2})`
+							`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleHeight / 2})`
 						)
-						.style('text-anchor', 'middle');
-					break;
+						.style('text-anchor', 'middle')
+					break
 			}
 		}
 
 		// Apply new axis to the axis element
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues());
-			const showDayName = timeScaleOptions.showDayName;
-			const axisRefSelection = axisRef;
+			const timeInterval = computeTimeIntervalName(axis.tickValues())
+			const showDayName = timeScaleOptions.showDayName
+			const axisRefSelection = axisRef
 
 			if (animate) {
-				axisRef = axisRef.transition().call((t) =>
-					this.services.transitions.setupTransition({
-						transition: t,
-						name: 'axis-update',
-						animate,
-					})
-				);
+				axisRef = axisRef
+					.transition()
+					.call((t: any) =>
+						this.services.transitions.setupTransition({
+							transition: t,
+							name: 'axis-update',
+							animate
+						})
+				) as any
 			}
-			axisRef = axisRef.call(axis);
+			axisRef = axisRef.call(axis)
 
 			// Manipulate tick labels to make bold those that are in long format
 			const ticks = axisRefSelection
 				.selectAll('.tick')
 				.data(axis.tickValues(), scale)
 				.order()
-				.select('text');
+				.select('text')
 			ticks.style('font-weight', (tick: number, i: number) => {
-				return isTickPrimary(
-					tick,
-					i,
-					axis.tickValues(),
-					timeInterval,
-					showDayName
-				)
+				return isTickPrimary(tick, i, axis.tickValues(), timeInterval, showDayName)
 					? 'bold'
-					: 'normal';
-			});
+					: 'normal'
+			})
 		} else {
 			if (!animate || !axisRefExists) {
-				axisRef = axisRef.call(axis);
+				axisRef = axisRef.call(axis)
 			} else {
 				axisRef = axisRef
 					.transition()
-					.call((t) =>
+					.call((t: any) =>
 						this.services.transitions.setupTransition({
 							transition: t,
 							name: 'axis-update',
-							animate,
+							animate
 						})
 					)
-					.call(axis);
+					.call(axis) as any
 			}
 		}
 
-		invisibleAxisRef.call(axis);
+		invisibleAxisRef.call(axis)
 
-		if (
-			axisPosition === AxisPositions.BOTTOM ||
-			axisPosition === AxisPositions.TOP
-		) {
-			let shouldRotateTicks = false;
+		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
+			let shouldRotateTicks = false
 			// user could decide if tick rotation is required during zoom domain changing
-			const tickRotation = Tools.getProperty(
-				axisOptions,
-				'ticks',
-				'rotation'
-			);
+			const tickRotation = getProperty(axisOptions, 'ticks', 'rotation')
 
 			if (tickRotation === TickRotations.ALWAYS) {
-				shouldRotateTicks = true;
+				shouldRotateTicks = true
 			} else if (tickRotation === TickRotations.NEVER) {
-				shouldRotateTicks = false;
+				shouldRotateTicks = false
 			} else if (!tickRotation || tickRotation === TickRotations.AUTO) {
 				// if the option is not set or set to AUTO
 
@@ -542,100 +419,77 @@ export class Axis extends Component {
 				if (scale.step) {
 					const textNodes = invisibleAxisRef
 						.selectAll('g.tick text')
-						.nodes();
+						.nodes() as any
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
-						(textNode) =>
+						(textNode: D3Selection<SVGGraphicsElement, any, Element, any>) =>
 							DOMUtils.getSVGElementSize(textNode, {
-								useBBox: true,
+								useBBox: true
 							}).width >= scale.step()
-					);
+					)
 				} else {
-					shouldRotateTicks = false;
+					shouldRotateTicks = false
 
-					const mockTextPiece = invisibleAxisRef
-						.append('text')
-						.text('A');
+					const mockTextPiece = invisibleAxisRef.append('text').text('A')
 
-					const averageLetterWidth = DOMUtils.getSVGElementSize(
-						mockTextPiece.node(),
-						{
-							useBBox: true,
-						}
-					).width;
+					const averageLetterWidth = DOMUtils.getSVGElementSize(mockTextPiece.node() as any, {
+						useBBox: true
+					}).width as number
 
-					let lastStartPosition;
+					let lastStartPosition: any
 
 					// Find out whether any text nodes roughly collide
 					invisibleAxisRef.selectAll('g.tick').each(function () {
-						const selection = select(this);
-						const xTransformation = parseFloat(
-							Tools.getProperty(
-								Tools.getTranslationValues(this),
-								'tx'
-							)
-						);
+						const selection = select(this)
+						const xTransformation = parseFloat(getProperty(getTranslationValues(this as any), 'tx'))
 
 						if (
 							xTransformation !== null &&
-							lastStartPosition +
-								selection.text().length *
-									averageLetterWidth *
-									0.8 >=
+							lastStartPosition + selection.text().length * averageLetterWidth * 0.8 >=
 								xTransformation
 						) {
-							shouldRotateTicks = true;
+							shouldRotateTicks = true
 						}
 
-						lastStartPosition = xTransformation;
-					});
+						lastStartPosition = xTransformation
+					})
 
 					// Cleanup mock text piece
-					mockTextPiece.remove();
+					mockTextPiece.remove()
 				}
 			}
 
 			if (shouldRotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
-						this.getNumberOfFittingTicks(
-							width,
-							tickHeight,
-							Configuration.axis.ticks.horizontalSpaceRatio
-						)
-					);
+						this.getNumberOfFittingTicks(width, tickHeight, axis.ticks.horizontalSpaceRatio)
+					)
 
-					invisibleAxisRef.call(axis);
-					axisRef.call(axis);
+					invisibleAxisRef.call(axis)
+					axisRef.call(axis)
 				}
 
 				container
 					.selectAll('g.ticks g.tick text')
 					.attr('transform', `rotate(-45)`)
-					.attr(
-						'text-anchor',
-						axisPosition === AxisPositions.TOP ? 'start' : 'end'
-					);
+					.attr('text-anchor', axisPosition === AxisPositions.TOP ? 'start' : 'end')
 			} else {
-				container
-					.selectAll('g.ticks g.tick text')
-					.attr('transform', null)
-					.attr('text-anchor', null);
+				container.selectAll('g.ticks g.tick text').attr('transform', null).attr('text-anchor', null)
 			}
 		}
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
 		if (isDataLoading) {
-			container.attr('opacity', 0);
+			container.attr('opacity', 0)
 		} else {
-			container.attr('opacity', 1);
+			container.attr('opacity', 1)
 		}
 
-		axisRef.selectAll('g.tick').attr('aria-label', (d) => d);
+		axisRef.selectAll('g.tick').attr('aria-label', (d: any) => d)
 
-		invisibleAxisRef.selectAll('g.tick').attr('aria-label', (d) => d);
+		invisibleAxisRef.selectAll('g.tick').attr('aria-label', (d: any) => d)
 
 		// truncate the label if it's too long
 		// only applies to discrete type
@@ -644,179 +498,135 @@ export class Axis extends Component {
 			axisScaleType === ScaleTypes.LABELS &&
 			!userProvidedTickValues
 		) {
-			const axisTickLabels = this.services.cartesianScales.getScaleDomain(
-				axisPosition
-			);
+			const axisTickLabels = this.services.cartesianScales.getScaleDomain(axisPosition)
 			if (axisTickLabels.length > 0) {
-				const tick_html = svg
-					.select(`g.axis.${axisPosition} g.ticks g.tick`)
-					.html();
+				const tick_html = svg.select(`g.axis.${axisPosition} g.ticks g.tick`).html()
 
-				container.selectAll('g.ticks g.tick').html(tick_html);
+				container.selectAll('g.ticks g.tick').html(tick_html)
 
-				const self = this;
+				const self = this
 				container
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function (d) {
+					.text(function (d: any) {
 						if (d.length > truncationThreshold) {
-							self.truncation[axisPosition] = true;
-							return Tools.truncateLabel(
-								d,
-								truncationType,
-								truncationNumCharacter
-							);
+							self.truncation[axisPosition] = true
+							return truncateLabel(d, truncationType, truncationNumCharacter)
 						} else {
-							return d;
+							return d
 						}
-					});
+					})
 
 				this.getInvisibleAxisRef()
 					.selectAll('g.tick text')
 					.data(axisTickLabels)
-					.text(function (d) {
+					.text(function (d: any) {
 						if (d.length > truncationThreshold) {
-							return Tools.truncateLabel(
-								d,
-								truncationType,
-								truncationNumCharacter
-							);
+							return truncateLabel(d, truncationType, truncationNumCharacter)
 						} else {
-							return d;
+							return d
 						}
-					});
+					})
 
-				container
-					.selectAll('g.ticks')
-					.html(this.getInvisibleAxisRef().html());
+				container.selectAll('g.ticks').html(this.getInvisibleAxisRef().html())
 
-				container.selectAll('g.tick text').data(axisTickLabels);
+				container.selectAll('g.tick text').data(axisTickLabels)
 			}
 		}
 		// Add event listeners to elements drawn
-		this.addEventListeners();
+		this.addEventListeners()
 	}
 
 	addEventListeners() {
-		const svg = this.getComponentContainer();
-		const { position: axisPosition } = this.configs;
-		const container = DOMUtils.appendOrSelect(
-			svg,
-			`g.axis.${axisPosition}`
-		);
-		const options = this.getOptions();
-		const axisOptions = Tools.getProperty(options, 'axes', axisPosition);
-		const axisScaleType = Tools.getProperty(axisOptions, 'scaleType');
-		const truncationThreshold = Tools.getProperty(
-			axisOptions,
-			'truncation',
-			'threshold'
-		);
+		const svg = this.getComponentContainer()
+		const { position: axisPosition } = this.configs
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
+		const options = this.getOptions()
+		const axisOptions = getProperty(options, 'axes', axisPosition)
+		const axisScaleType = getProperty(axisOptions, 'scaleType')
+		const truncationThreshold = getProperty(axisOptions, 'truncation', 'threshold')
 
-		const self = this;
+		const self = this
 		container
 			.selectAll('g.tick text')
-			.on('mouseover', function (event, datum) {
+			.on('mouseover', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Axis.LABEL_MOUSEOVER,
-					{
-						event,
-						element: select(this),
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
+					event,
+					element: select(this),
+					datum
+				})
 
-				if (
-					axisScaleType === ScaleTypes.LABELS &&
-					datum.length > truncationThreshold
-				) {
+				if (axisScaleType === ScaleTypes.LABELS && datum.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
 						hoveredElement: select(this),
-						content: datum,
-					});
+						content: datum
+					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
+			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Axis.LABEL_MOUSEMOVE,
-					{
-						event,
-						element: select(this),
-						datum,
-					}
-				);
-				if (
-					axisScaleType === ScaleTypes.LABELS &&
-					datum.length > truncationThreshold
-				) {
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
+					event,
+					element: select(this),
+					datum
+				})
+				if (axisScaleType === ScaleTypes.LABELS && datum.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-						event,
-					});
+						event
+					})
 				}
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
+			.on('mouseout', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 
 				if (axisScaleType === ScaleTypes.LABELS) {
-					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE)
 				}
-			});
+			})
 	}
 
 	getInvisibleAxisRef() {
-		const { position: axisPosition } = this.configs;
+		const { position: axisPosition } = this.configs
 
-		return this.getComponentContainer().select(
-			`g.axis.${axisPosition} g.ticks.invisible`
-		);
+		return this.getComponentContainer().select(`g.axis.${axisPosition} g.ticks.invisible`)
 	}
 
 	getTitleRef() {
-		const { position: axisPosition } = this.configs;
+		const { position: axisPosition } = this.configs
 
-		return this.getComponentContainer().select(
-			`g.axis.${axisPosition} text.axis-title`
-		);
+		return this.getComponentContainer().select(`g.axis.${axisPosition} text.axis-title`)
 	}
 
-	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
-		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
-		return Tools.clamp(
-			numberOfTicksFit,
-			2,
-			Configuration.axis.ticks.number
-		);
+	getNumberOfFittingTicks(size: number, tickSize: number, spaceRatio: number) {
+		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio))
+		return clamp(numberOfTicksFit, 2, axis.ticks.number)
 	}
 
 	destroy() {
-		const svg = this.getComponentContainer();
-		const { position: axisPosition } = this.configs;
-		const container = DOMUtils.appendOrSelect(
-			svg,
-			`g.axis.${axisPosition}`
-		);
+		const svg = this.getComponentContainer()
+		const { position: axisPosition } = this.configs
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 
 		// Remove event listeners
 		container
 			.selectAll('g.tick text')
 			.on('mouseover', null)
 			.on('mousemove', null)
-			.on('mouseout', null);
+			.on('mouseout', null)
 	}
 }

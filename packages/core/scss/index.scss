@@ -1,0 +1,31 @@
+$charts-prefix: 'cc';
+
+// Variables picked up by @carbon/styles/scss/config in imports
+$prefix: 'cds'; // Default value
+$css--body: false; // Do not emit styles for body element
+$css--default-type: false; // Do not include default type
+$css--font-face: false; // Do not include font face mixins from scss/fonts
+$css--reset: false; // Do not include reset CSS
+
+// Custom charting tokens
+@use '@carbon/styles/scss/theme' as theme;
+@import 'tokens';
+@include theme.add-component-tokens($custom-charting-tokens);
+@import '@carbon/styles/scss/components/button/tokens';
+
+@mixin default_transition { // used by ./colors
+	transition: all 0.1s ease-out;
+}
+@import '@carbon/colors';
+@import 'colors'; // mixins, color palette, color maps, tooltip and legend color settings
+
+@import '@carbon/import-once/scss'; // exports mixin
+@import 'components'; // use exports mixin to ensure component modules only loaded once
+
+@import 'graphs'; // chart-specific
+@import 'type'; // font size, fill, color, weight (but not family)
+@import 'chart-holder'; // container settings
+
+.#{$prefix}--#{$charts-prefix}--chart-wrapper {
+	overflow: visible;
+}

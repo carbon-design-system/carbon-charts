@@ -2,9 +2,7 @@
 library:
   id: carbon-charts
   name: Carbon Charts Vanilla
-  description:
-    Tell accurate stories around data with beautiful and accessible
-    visualizations.
+  description: Tell accurate stories around data with beautiful and accessible visualizations.
   externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
   demoLinks:
     - type: storybook
@@ -276,10 +274,9 @@ assets:
     status:
       key: experimental
       note:
-        This is not a stable release of this component, certain pieces might be
-        added or modified in the future. Additionally, the current
-        implementation might have issues that we have not uncovered yet, and
-        will work to resolve through our stable release of the component.
+        This is not a stable release of this component, certain pieces might be added or modified in
+        the future. Additionally, the current implementation might have issues that we have not
+        uncovered yet, and will work to resolve through our stable release of the component.
     type: component
     tags:
       - data-visualization

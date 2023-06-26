@@ -1,10 +1,21 @@
 {
-	"extends": "../tsconfig.json",
-	"exclude": [
-		"../src/test.ts",
-		"../src/**/*.spec.ts",
-		"./node_modules",
-		"../../node_modules"
-	],
-	"include": ["../src/**/*"]
+  "extends": "../tsconfig.lib.json",
+  "compilerOptions": {
+    "baseUrl": "../",
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "declarationMap": false,
+    "strict": true
+  },
+  "exclude": [
+    "../src/test.ts",
+    "../src/**/*.spec.ts"
+  ],
+  "include": [
+    "../src/**/*",
+    "./preview.ts"
+  ],
+  "files": [
+    "./typings.d.ts"
+  ]
 }

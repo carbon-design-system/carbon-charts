@@ -1,17 +1,14 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "1.8.0",
-  "name": "root",
+  "version": "1.9.0-next.3",
   "packages": ["packages/*"],
   "npmClient": "yarn",
-  "useWorkspaces": true,
   "command": {
     "publish": {
       "ignoreChanges": ["packages/*/demo/bundle", "**/*.md"]
     },
-    "bootstrap": {
-      "npmClientArgs": ["--cached"]
+    "version": {
+      "message": "chore(release): publish %v"
     }
-  },
-  "commandVersion": "6.6.1"
+  }
 }

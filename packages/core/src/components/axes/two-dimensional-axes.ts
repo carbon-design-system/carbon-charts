@@ -1,143 +1,132 @@
-// Internal Imports
-import { Component } from '../component';
-import { AxisPositions, RenderTypes, AxisFlavor } from '../../interfaces';
-import { Axis } from './axis';
-import * as Tools from '../../tools';
-import { DOMUtils } from '../../services';
-import { Threshold } from '../essentials/threshold';
-import { Events } from './../../interfaces';
-import { HoverAxis } from './hover-axis';
+import { getProperty } from '@/tools'
+import { Axis } from './axis'
+import { HoverAxis } from './hover-axis'
+import { Component } from '@/components/component'
+import type { Threshold } from '@/components/essentials/threshold'
+import { AxisPositions, Events, RenderTypes, AxisFlavor } from '@/interfaces/enums'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModelCartesian } from '@/model/cartesian-charts'
 
 export class TwoDimensionalAxes extends Component {
-	type = '2D-axes';
-	renderType = RenderTypes.SVG;
+	type = '2D-axes'
+	renderType = RenderTypes.SVG
 
-	children: any = {};
+	children: any = {}
 
-	thresholds: Threshold[] = [];
+	thresholds: Threshold[] = []
 
 	margins = {
 		top: 0,
 		right: 0,
 		bottom: 0,
-		left: 0,
-	};
+		left: 0
+	}
 
 	render(animate = false) {
-		const axes = {};
-		const axisPositions = Object.keys(AxisPositions);
-		const axesOptions = Tools.getProperty(this.getOptions(), 'axes');
+		const axes: any = {}
+		const axisPositions = Object.keys(AxisPositions)
+		const axesOptions = getProperty(this.getOptions(), 'axes')
 
-		axisPositions.forEach((axisPosition) => {
-			const axisOptions = axesOptions[AxisPositions[axisPosition]];
+		axisPositions.forEach((axisPosition: keyof typeof AxisPositions) => {
+			const axisOptions = axesOptions[AxisPositions[axisPosition]]
 			if (axisOptions) {
-				axes[AxisPositions[axisPosition]] = true;
+				axes[AxisPositions[axisPosition]] = true
 			}
-		});
+		})
 
-		this.configs.axes = axes;
+		this.configs.axes = axes
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach((axisPositionKey) => {
-			const axisPosition = AxisPositions[axisPositionKey];
-			if (
-				this.configs.axes[axisPosition] &&
-				!this.children[axisPosition]
-			) {
+		axisPositions.forEach((axisPositionKey: keyof typeof AxisPositions) => {
+			const axisPosition = AxisPositions[axisPositionKey]
+			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const configs = {
 					position: axisPosition,
 					axes: this.configs.axes,
-					margins: this.margins,
-				};
+					margins: this.margins
+				}
 
 				const axisComponent =
-					this.model.axisFlavor === AxisFlavor.DEFAULT
+					(this.model as ChartModelCartesian).axisFlavor === AxisFlavor.DEFAULT
 						? new Axis(this.model, this.services, configs)
-						: new HoverAxis(this.model, this.services, configs);
+						: new HoverAxis(this.model, this.services, configs)
 
 				// Set model, services & parent for the new axis component
-				axisComponent.setModel(this.model);
-				axisComponent.setServices(this.services);
-				axisComponent.setParent(this.parent);
+				axisComponent.setModel(this.model)
+				axisComponent.setServices(this.services)
+				axisComponent.setParent(this.parent)
 
-				this.children[axisPosition] = axisComponent;
+				this.children[axisPosition] = axisComponent
 			}
-		});
+		})
 
-		Object.keys(this.children).forEach((childKey) => {
-			const child = this.children[childKey];
-			child.render(animate);
-		});
+		Object.keys(this.children).forEach((childKey: any) => {
+			const child = this.children[childKey]
+			child.render(animate)
+		})
 
-		const margins = {} as any;
+		const margins = {} as any
 
-		Object.keys(this.children).forEach((childKey) => {
-			const child = this.children[childKey];
-			const axisPosition = child.configs.position;
+		Object.keys(this.children).forEach((childKey: any) => {
+			const child = this.children[childKey]
+			const axisPosition = child.configs.position
 
 			// Grab the invisibly rendered axis' width & height, and set margins
 			// Based off of that
 			// We draw the invisible axis because of the async nature of d3 transitions
 			// To be able to tell the final width & height of the axis when initiaing the transition
 			// The invisible axis is updated instantly and without a transition
-			const invisibleAxisRef = child.getInvisibleAxisRef();
-			const {
-				width,
-				height,
-			} = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+			const invisibleAxisRef = child.getInvisibleAxisRef()
+			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true })
 
-			let offset;
+			let offset: any
 			if (child.getTitleRef().empty()) {
-				offset = 0;
+				offset = 0
 			} else {
 				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
-					useBBox: true,
-				}).height;
+					useBBox: true
+				}).height
 
-				if (
-					axisPosition === AxisPositions.LEFT ||
-					axisPosition === AxisPositions.RIGHT
-				) {
-					offset += 5;
+				if (axisPosition === AxisPositions.LEFT || axisPosition === AxisPositions.RIGHT) {
+					offset += 5
 				}
 			}
-
 			switch (axisPosition) {
 				case AxisPositions.TOP:
-					margins.top = height + offset;
-					break;
+					margins.top = height + offset
+					break
 				case AxisPositions.BOTTOM:
-					margins.bottom = height + offset;
-					break;
+					margins.bottom = height + offset
+					break
 				case AxisPositions.LEFT:
-					margins.left = width + offset;
-					break;
+					margins.left = width + offset
+					break
 				case AxisPositions.RIGHT:
-					margins.right = width + offset;
-					break;
+					margins.right = width + offset
+					break
 			}
-		});
+		})
 
-		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE);
+		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE)
 
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some((marginKey) => {
-			return this.margins[marginKey] !== margins[marginKey];
-		});
+		const isNotEqual = Object.keys(margins).some((marginKey: 'top' | 'right' | 'bottom' | 'left') => {
+			return this.margins[marginKey] !== margins[marginKey]
+		})
 
 		if (isNotEqual) {
-			this.margins = Object.assign(this.margins, margins);
+			this.margins = Object.assign(this.margins, margins)
 
 			// also set new margins to model to allow external components to access
-			this.model.set({ axesMargins: this.margins }, { skipUpdate: true });
-			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE);
+			this.model.set({ axesMargins: this.margins }, { skipUpdate: true })
+			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE)
 
-			Object.keys(this.children).forEach((childKey) => {
-				const child = this.children[childKey];
-				child.margins = this.margins;
-			});
+			Object.keys(this.children).forEach((childKey: any) => {
+				const child = this.children[childKey]
+				child.margins = this.margins
+			})
 
-			this.render(true);
+			this.render(true)
 		}
 	}
 }

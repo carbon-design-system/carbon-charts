@@ -10,21 +10,27 @@ git config --global user.name "carbon-bot"
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-echo "Publish to Github"
+# Get git into the right state, ensure local branch is up-to-date
 git stash
-
-# checkout master to get out of detached HEAD state
 git checkout master
+git pull
 
-lerna version --conventional-commits --yes --force-publish --create-release github
+# Use latest dependencies
+yarn install
 
-echo "Publish to NPM"
+# Create version, changelogs and Github release
+echo "Creating version, changelogs and publishing to Github..."
+npx lerna version minor --yes --force-publish --conventional-commits --create-release github
 
+echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
-# authenticate with the npm registry
+node scripts/update-angular-dependency-version.cjs
+
+# Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-node scripts/add-telemetry-to-packages.js
-
-lerna publish from-git --yes --force-publish --no-verify-access --contents dist
+echo "Publish to registry..."
+# All packages except angular are published from their root with publishing content filtered via files array in package.json.
+# The angular package adds the tag "next" automatically (package.json/publishConfig.tag).
+npx lerna publish from-git --yes --force-publish

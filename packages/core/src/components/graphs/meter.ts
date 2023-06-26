@@ -1,92 +1,66 @@
-// Internal Imports
-import { Component } from '../component';
-import { DOMUtils } from '../../services';
-import * as Tools from '../../tools';
-import {
-	Roles,
-	ColorClassNameTypes,
-	Events,
-	RenderTypes,
-} from '../../interfaces';
-import * as Configuration from '../../configuration';
-
-// D3 Imports
-import { scaleLinear } from 'd3-scale';
-import { select } from 'd3-selection';
+import { scaleLinear, select } from 'd3'
+import { getProperty } from '@/tools'
+import { meter } from '@/configuration'
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import { ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
+import { Roles } from '@/interfaces/a11y'
+import { MeterChartModel } from '@/model/meter'
 
 export class Meter extends Component {
-	type = 'meter';
-	renderType = RenderTypes.SVG;
+	type = 'meter'
+	renderType = RenderTypes.SVG
 
-	getStackedBounds(data, scale) {
-		let prevX = 0;
-		const stackedData = data.map((d, i) => {
+	getStackedBounds(data: any, scale: any) {
+		let prevX = 0
+		const stackedData = data.map((d: any, i: number) => {
 			if (i !== 0) {
-				prevX += scale(d.value);
+				prevX += scale(d.value)
 				return {
 					...d,
-					width: Math.abs(
-						scale(d.value) - Configuration.meter.dividerWidth
-					),
-					x: prevX - scale(d.value),
-				};
+					width: Math.abs(scale(d.value) - meter.dividerWidth),
+					x: prevX - scale(d.value)
+				}
 			} else {
-				prevX = scale(d.value);
+				prevX = scale(d.value)
 				return {
 					...d,
-					width: Math.abs(
-						scale(d.value) - Configuration.meter.dividerWidth
-					),
-					x: 0,
-				};
+					width: Math.abs(scale(d.value) - meter.dividerWidth),
+					x: 0
+				}
 			}
-		});
+		})
 
-		return stackedData;
+		return stackedData
 	}
 
 	render(animate = true) {
-		const self = this;
-		const svg = this.getComponentContainer();
-		const options = this.getOptions();
-		const proportional = Tools.getProperty(
-			options,
-			'meter',
-			'proportional'
-		);
-		const data = this.model.getDisplayData();
-		const status = this.model.getStatus();
+		const self = this
+		const svg = this.getComponentContainer()
+		const options = this.getOptions()
+		const proportional = getProperty(options, 'meter', 'proportional')
+		const data = this.model.getDisplayData()
+		const status = this.model.getStatus()
 
 		const { width } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
-		});
+			useAttrs: true
+		})
 
-		const { groupMapsTo } = options.data;
+		const { groupMapsTo } = options.data
 
-		let domainMax;
-		if (Tools.getProperty(options, 'meter', 'proportional') === null) {
-			domainMax = 100;
+		let domainMax: number
+		if (getProperty(options, 'meter', 'proportional') === null) {
+			domainMax = 100
 		} else {
-			const total = Tools.getProperty(
-				options,
-				'meter',
-				'proportional',
-				'total'
-			);
-			domainMax = total
-				? total
-				: this.model.getMaximumDomain(this.model.getDisplayData());
+			const total = getProperty(options, 'meter', 'proportional', 'total')
+			domainMax = total ? total : (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
 		}
 
 		// each meter has a scale for the value but no visual axis
-		const xScale = scaleLinear().domain([0, domainMax]).range([0, width]);
-		const stackedData = this.getStackedBounds(data, xScale);
+		const xScale = scaleLinear().domain([0, domainMax]).range([0, width])
+		const stackedData = this.getStackedBounds(data, xScale)
 
-		const userProvidedHeight = Tools.getProperty(
-			options,
-			'meter',
-			'height'
-		);
+		const userProvidedHeight = getProperty(options, 'meter', 'height')
 
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, 'rect.container')
@@ -98,9 +72,9 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
-			);
+					? meter.height.proportional
+					: meter.height.default
+			)
 
 		// draw the container max range value indicator
 		DOMUtils.appendOrSelect(svg, 'line.rangeIndicator')
@@ -112,157 +86,138 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default
-			);
+					? meter.height.proportional
+					: meter.height.default
+			)
 
 		// rect with the value binded
-		const valued = svg.selectAll('rect.value').data(stackedData);
+		const valued = svg.selectAll('rect.value').data(stackedData)
 
 		// if user provided a color for the bar, we dont want to attach a status class
 		const className =
-			status != null &&
-			!self.model.isUserProvidedColorScaleValid() &&
-			!proportional
+			status != null && !self.model.isUserProvidedColorScaleValid() && !proportional
 				? `value status--${status}`
-				: 'value';
+				: 'value'
 
 		// draw the value bar
 		valued
 			.enter()
 			.append('rect')
 			.classed('value', true)
-			.merge(valued)
-			.attr('x', (d) => {
-				return d.x;
+			.merge(valued as any)
+			.attr('x', (d: any) => {
+				return d.x
 			})
 			.attr('y', 0)
 			.attr('height', () => {
-				const userProvidedHeight = Tools.getProperty(
-					options,
-					'meter',
-					'height'
-				);
+				const userProvidedHeight = getProperty(options, 'meter', 'height')
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default;
+					? meter.height.proportional
+					: meter.height.default
 			})
-			.attr('class', (d) =>
+			.attr('class', (d: any) =>
 				this.model.getColorClassName({
 					classNameTypes: [ColorClassNameTypes.FILL],
 					dataGroupName: d[groupMapsTo],
-					originalClassName: className,
+					originalClassName: className
 				})
 			)
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'meter-bar-update',
-					animate,
+					animate
 				})
 			)
-			.attr('width', (d, i) => {
-				return d.value > domainMax ? xScale(domainMax) : d.width;
+			.attr('width', (d: any) => {
+				return d.value > domainMax ? xScale(domainMax) : d.width
 			})
-			.style('fill', (d) => self.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
-			.attr('aria-label', (d) => d.value);
+			.attr('aria-label', (d: any) => d.value)
 
-		valued.exit().remove();
+		valued.exit().remove()
 
 		// draw the peak
-		const peakValue = Tools.getProperty(options, 'meter', 'peak');
+		const peakValue = getProperty(options, 'meter', 'peak')
 
-		let peakData = peakValue;
+		let peakData = peakValue
 		if (peakValue !== null) {
 			if (peakValue > domainMax) {
-				peakData = domainMax;
+				peakData = domainMax
 			} else if (peakValue < data[0].value) {
-				peakData =
-					data[0].value > domainMax ? domainMax : data[0].value;
+				peakData = data[0].value > domainMax ? domainMax : data[0].value
 			}
 		}
 
 		// if a peak is supplied within the domain, we want to render it
-		const peak = svg
-			.selectAll('line.peak')
-			.data(peakData == null ? [] : [peakData]);
+		const peak = svg.selectAll('line.peak').data(peakData == null ? [] : [peakData])
 
-		peak.enter()
+		peak
+			.enter()
 			.append('line')
 			.classed('peak', true)
-			.merge(peak)
+			.merge(peak as any)
 			.attr('y1', 0)
 			.attr('y2', () => {
-				const userProvidedHeight = Tools.getProperty(
-					options,
-					'meter',
-					'height'
-				);
+				const userProvidedHeight = getProperty(options, 'meter', 'height')
 
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? Configuration.meter.height.proportional
-					: Configuration.meter.height.default;
+					? meter.height.proportional
+					: meter.height.default
 			})
 			.transition()
-			.call((t) =>
+			.call((t: any) =>
 				this.services.transitions.setupTransition({
 					transition: t,
 					name: 'peak-line-update',
-					animate,
+					animate
 				})
 			)
-			.attr('x1', (d) => xScale(d))
-			.attr('x2', (d) => xScale(d))
+			.attr('x1', (d: any) => xScale(d))
+			.attr('x2', (d: any) => xScale(d))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'peak')
-			.attr('aria-label', (d) => d);
+			.attr('aria-label', (d: any) => d)
 
-		peak.exit().remove();
+		peak.exit().remove()
 
 		// this forces the meter chart to only take up as much height as needed (if no height is provided)
-		this.services.domUtils.setSVGMaxHeight();
+		this.services.domUtils.setSVGMaxHeight()
 
 		// Add event listeners to elements and legend
-		this.addEventListeners();
+		this.addEventListeners()
 	}
 
 	// add event listeners for tooltips on proportional meter bars
 	addEventListeners() {
-		const options = this.getOptions();
-		const { groupMapsTo } = options.data;
-		const self = this;
-		const proportional = Tools.getProperty(
-			options,
-			'meter',
-			'proportional'
-		);
+		const options = this.getOptions()
+		const { groupMapsTo } = options.data
+		const self = this
+		const proportional = getProperty(options, 'meter', 'proportional')
 
 		this.parent
 			.selectAll('rect.value')
-			.on('mouseover', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseover', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Meter.METER_MOUSEOVER,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOVER, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				if (proportional) {
-					hoveredElement.classed('hovered', true);
+					hoveredElement.classed('hovered', true)
 
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
@@ -271,60 +226,54 @@ export class Meter extends Component {
 						items: [
 							{
 								label: datum[groupMapsTo],
-								value: datum.value,
-							},
-						],
-					});
+								value: datum.value
+							}
+						]
+					})
 				}
 			})
-			.on('mousemove', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mousemove', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Meter.METER_MOUSEMOVE,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEMOVE, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				if (proportional) {
 					self.services.events.dispatchEvent(Events.Tooltip.MOVE, {
-						event,
-					});
+						event
+					})
 				}
 			})
-			.on('click', function (event, datum) {
+			.on('click', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Meter.METER_CLICK, {
 					event,
 					element: select(this),
-					datum,
-				});
+					datum
+				})
 			})
-			.on('mouseout', function (event, datum) {
-				const hoveredElement = select(this);
+			.on('mouseout', function (event: MouseEvent, datum: any) {
+				const hoveredElement = select(this)
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(
-					Events.Meter.METER_MOUSEOUT,
-					{
-						event,
-						element: hoveredElement,
-						datum,
-					}
-				);
+				self.services.events.dispatchEvent(Events.Meter.METER_MOUSEOUT, {
+					event,
+					element: hoveredElement,
+					datum
+				})
 
 				if (proportional) {
-					hoveredElement.classed('hovered', false);
+					hoveredElement.classed('hovered', false)
 
 					// Hide tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-						hoveredElement,
-					});
+						hoveredElement
+					})
 				}
-			});
+			})
 	}
 
 	destroy() {
@@ -334,6 +283,6 @@ export class Meter extends Component {
 			.on('mouseover', null)
 			.on('mousemove', null)
 			.on('mouseout', null)
-			.on('click', null);
+			.on('click', null)
 	}
 }

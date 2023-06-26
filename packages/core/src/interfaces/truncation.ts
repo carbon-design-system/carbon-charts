@@ -5,13 +5,13 @@ export interface TruncationOptions {
 	/**
 	 * truncation type
 	 */
-	type?: string;
+	type?: string
 	/**
 	 * truncation threshold
 	 */
-	threshold?: Number;
+	threshold?: number
 	/**
 	 * how many characters to be shown
 	 */
-	numCharacter?: Number;
+	numCharacter?: number
 }

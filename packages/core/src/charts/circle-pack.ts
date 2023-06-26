@@ -1,49 +1,32 @@
-// Internal Imports
-import { Chart } from '../chart';
-import { CirclePackChartModel } from '../model/circle-pack';
-import { ChartConfig, CirclePackChartOptions } from '../interfaces/index';
-import * as Configuration from '../configuration';
-import * as Tools from '../tools';
-
-// Components
-import {
-	CirclePack,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
-	Skeleton,
-} from '../components/index';
+import { Chart } from '@/chart'
+import { options } from '@/configuration'
+import { mergeDefaultChartOptions } from '@/tools'
+import { CirclePackChartModel } from '@/model/circle-pack'
+import type { ChartConfig } from '@/interfaces/model'
+import type { CirclePackChartOptions } from '@/interfaces/charts'
+import type { Component } from '@/components/component'
+import { CirclePack } from '@/components/graphs/circle-pack'
 
 export class CirclePackChart extends Chart {
-	model = new CirclePackChartModel(this.services);
+	model = new CirclePackChartModel(this.services)
 
-	constructor(
-		holder: Element,
-		chartConfigs: ChartConfig<CirclePackChartOptions>
-	) {
-		super(holder, chartConfigs);
+	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<CirclePackChartOptions>) {
+		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(
-			Tools.mergeDefaultChartOptions(
-				Configuration.options.circlePackChart,
-				chartConfigs.options
-			)
-		);
+		this.model.setOptions(mergeDefaultChartOptions(options.circlePackChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
-		this.init(holder, chartConfigs);
+		this.init(holder, chartConfigs)
 	}
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
-			new CirclePack(this.model, this.services),
-		];
+		const graphFrameComponents: Component[] = [new CirclePack(this.model, this.services)]
 
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		return components;
+		const components: Component[] = this.getChartComponents(graphFrameComponents)
+		return components
 	}
 }

@@ -167,8 +167,7 @@ All notable changes to this project will be documented in this file. See
 - **core:** allow theme to be set via options prop
   ([#1412](https://github.com/carbon-design-system/carbon-charts/issues/1412))
   ([6288548](https://github.com/carbon-design-system/carbon-charts/commit/62885487a700e2222d51f70aea790eddd5d6d086)),
-  closes
-  [#1411](https://github.com/carbon-design-system/carbon-charts/issues/1411)
+  closes [#1411](https://github.com/carbon-design-system/carbon-charts/issues/1411)
 
 ## [1.3.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.3.1...v1.3.2) (2022-06-30)
 
@@ -374,8 +373,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree
-  charts
+- **svelte:** add TypeScript definitions for Alluvial, Histogram, and Tree charts
   ([#1219](https://github.com/carbon-design-system/carbon-charts/issues/1219))
   ([3e7fcc2](https://github.com/carbon-design-system/carbon-charts/commit/3e7fcc2f16d16d67c4f39f4d4389878b5d829aba))
 
@@ -478,8 +476,7 @@ All notable changes to this project will be documented in this file. See
 - **core:** create alluvial chart
   ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132))
   ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)),
-  closes
-  [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+  closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
 
 ## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
 

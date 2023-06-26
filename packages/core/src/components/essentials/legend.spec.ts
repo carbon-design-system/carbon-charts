@@ -1,61 +1,56 @@
-import { TestEnvironment } from '../../tests/index';
+import { afterEach, beforeEach, expect, describe, it } from 'vitest'
+import ResizeObserver from 'resize-observer-polyfill'
+import { select } from 'd3'
+import settings from 'carbon-components/es/globals/js/settings' // CSS prefixes
+import { ScatterChart } from '@/charts'
+import { options } from '@/configuration'
+import { TestEnvironment } from '@/tests/test-environment'
+import { Events } from '@/interfaces/enums'
 
-// import the settings for the css prefixes
-import settings from 'carbon-components/es/globals/js/settings';
-
-import { options } from './../../configuration';
-import { Events } from './../../interfaces';
-
-import { select } from 'd3-selection';
+global.ResizeObserver = ResizeObserver
+let chart: ScatterChart
+let testEnvironment: TestEnvironment
 
 describe('legend component', () => {
 	beforeEach(function () {
-		const testEnvironment = new TestEnvironment();
-		testEnvironment.render();
-
-		this.chart = testEnvironment.getChartReference();
-		this.testEnvironment = testEnvironment;
-	});
+		testEnvironment = new TestEnvironment()
+		testEnvironment.render()
+		chart = testEnvironment.getChartReference()
+	})
 
 	describe('content', () => {
-		it('should have same amount of datasets', async function (done) {
-			const data = this.testEnvironment.chartData;
+		it('should have same amount of datasets', async function (done: () => void) {
+			const data = testEnvironment.chartData
 			const uniqueDatagroups = data
-				.map((d) => d.group)
+				.map((d: any) => d.group)
 				.filter(function (value, index, self) {
-					return self.indexOf(value) === index;
-				});
+					return self.indexOf(value) === index
+				})
 
-			const numberOfDatagroups = uniqueDatagroups.length;
+			const numberOfDatagroups = uniqueDatagroups.length
 
-			const chartEventsService = this.chart.services.events;
+			const chartEventsService = chart.services.events
 
 			const renderCb = () => {
 				// Remove render event listener
-				chartEventsService.removeEventListener(
-					Events.Chart.RENDER_FINISHED,
-					renderCb
-				);
+				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 
 				const numberOfLegendItems = select(
-					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
+					`g.${settings.prefix}--${options.chart.style?.prefix}--legend`
 				)
 					.selectAll('g.legend-item')
-					.size();
-				expect(numberOfLegendItems).toEqual(numberOfDatagroups);
+					.size()
+				expect(numberOfLegendItems).toEqual(numberOfDatagroups)
 
-				done();
-			};
+				done()
+			}
 
 			// Add event listener for when chart render is finished
-			chartEventsService.addEventListener(
-				Events.Chart.RENDER_FINISHED,
-				renderCb
-			);
-		});
-	});
+			chartEventsService.addEventListener(Events.Chart.RENDER_FINISHED, renderCb)
+		})
+	})
 
 	afterEach(function () {
-		this.testEnvironment.destroy();
-	});
-});
+		testEnvironment.destroy()
+	})
+})

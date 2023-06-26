@@ -1,65 +1,53 @@
-import { Component } from '../component';
-import * as Tools from '../../tools';
-import { DOMUtils } from '../../services';
-import { ChartModel } from '../../model/model';
-import { Events } from '../../interfaces';
+import { select } from 'd3'
+import { get } from 'lodash-es'
+import { Modal as CarbonModalComponent } from 'carbon-components' // Carbon model
+import { getProperty } from '@/tools'
+import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
+import { Component } from '@/components/component'
+import { DOMUtils } from '@/services/essentials/dom-utils'
+import type { ChartModel } from '@/model/model'
+import { Events } from '@/interfaces/enums'
 
-// Carbon modal
-import { Modal as CarbonModalComponent } from 'carbon-components';
-
-// import the settings for the css prefix
-import { carbonPrefix } from '../../configuration-non-customizable';
-
-// D3 Imports
-import { select } from 'd3-selection';
-
-import { get } from 'lodash-es';
 
 export class Modal extends Component {
-	type = 'modal';
+	type = 'modal'
 
 	// flag for checking whether tooltip event listener is added or not
-	isEventListenerAdded = false;
-	modal: any;
+	isEventListenerAdded = false
+	modal: any
 
 	constructor(model: ChartModel, services: any, configs?: any) {
-		super(model, services, configs);
+		super(model, services, configs)
 
-		this.init();
+		this.init()
 	}
 
 	handleShowModal = () => {
-		this.modal.html(this.getModalHTML());
+		this.modal.html(this.getModalHTML())
 		this.modal
 			.select('div.cds--modal-footer button.cds--btn')
-			.on('click', () => this.model.exportToCSV());
+			.on('click', () => this.model.exportToCSV())
 
-		const modalInstance = CarbonModalComponent.create(this.modal.node());
-		modalInstance.show();
-	};
+		const modalInstance = CarbonModalComponent.create(this.modal.node())
+		modalInstance.show()
+	}
 
 	addEventListeners() {
 		// listen to show-modal Custom Events to render the modal
-		this.services.events.addEventListener(
-			Events.Modal.SHOW,
-			this.handleShowModal
-		);
+		this.services.events.addEventListener(Events.Modal.SHOW, this.handleShowModal)
 	}
 
 	removeEventListeners() {
 		// remove show-modal Custom Events
-		this.services.events.removeEventListener(
-			Events.Modal.SHOW,
-			this.handleShowModal
-		);
+		this.services.events.removeEventListener(Events.Modal.SHOW, this.handleShowModal)
 	}
 
 	getModalHTML() {
-		const options = this.model.getOptions();
+		const options = this.model.getOptions()
 
-		const chartprefix = Tools.getProperty(options, 'style', 'prefix');
+		const chartprefix = getProperty(options, 'style', 'prefix')
 
-		const tableArray = this.model.getTabularDataArray();
+		const tableArray = this.model.getTabularDataArray()
 
 		return `
 		<div class="cds--modal-container cds--modal-container">
@@ -83,7 +71,7 @@ export class Modal extends Component {
 						<tr>
 							${get(tableArray, 0)
 								.map(
-									(heading) => `<th scope="col">
+									(heading: any) => `<th scope="col">
 								<div class="cds--table-header-label cds--table-header-label">${heading}</div>
 							</th>`
 								)
@@ -94,9 +82,9 @@ export class Modal extends Component {
 					<tbody>${tableArray
 						.slice(1)
 						.map(
-							(row) => `
+							(row: any) => `
 							<tr>
-								${row.map((column) => `<td>${column}</td>`).join('')}
+								${row.map((column: any) => `<td>${column}</td>`).join('')}
 							</tr>`
 						)
 						.join('')}
@@ -108,22 +96,22 @@ export class Modal extends Component {
 			  <div class="${carbonPrefix}--${chartprefix}-modal-footer-spacer"></div>
 			  <button class="cds--btn cds--btn--primary cds--btn cds--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>
 			</div>
-		</div>`;
+		</div>`
 	}
 
-	render() {
-		const options = this.model.getOptions();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	render(animate = true) {
+		const options = this.model.getOptions()
 		if (!this.isEventListenerAdded) {
 			// Grab the tooltip element
-			const holder = select(this.services.domUtils.getHolder());
-			const chartprefix = Tools.getProperty(options, 'style', 'prefix');
-			this.modal = DOMUtils.appendOrSelect(
-				holder,
-				`div.${carbonPrefix}--${chartprefix}--modal`
-			);
+			const holder = select(this.services.domUtils.getHolder())
+			const chartprefix = getProperty(options, 'style', 'prefix')
+			this.modal = DOMUtils.appendOrSelect(holder, `div.${carbonPrefix}--${chartprefix}--modal`)
 
-			this.addEventListeners();
-			this.isEventListenerAdded = true;
+			this.addEventListeners()
+			this.isEventListenerAdded = true
 			this.modal
 				.attr('data-modal', true)
 				.attr('class', 'cds--modal cds--modal')
@@ -131,13 +119,13 @@ export class Modal extends Component {
 				.attr('aria-modal', true)
 				.attr('aria-labelledby', 'modal-title')
 				.attr('aria-describedby', 'modal-description')
-				.attr('tabindex', -1);
+				.attr('tabindex', -1)
 		}
 	}
 
 	destroy() {
 		// remove tooltip eventListener
-		this.removeEventListeners();
-		this.isEventListenerAdded = false;
+		this.removeEventListeners()
+		this.isEventListenerAdded = false
 	}
 }
