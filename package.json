@@ -22,7 +22,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.16.0"
+    "node": "^18.16.1"
   },
   "packageManager": "yarn@3.5.1",
   "devDependencies": {
