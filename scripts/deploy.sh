@@ -11,7 +11,6 @@ git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
 # Get git into the right state, ensure local branch is up-to-date
-git stash
 git checkout master
 
 # Create version, changelogs and Github release
