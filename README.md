@@ -79,7 +79,7 @@ Read the release change logs [here](https://github.com/carbon-design-system/carb
 | Alluvial             | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
 | Heatmap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
 | Parallel coordinates | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
-| Choropleth           | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand  | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Choropleth           | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 
