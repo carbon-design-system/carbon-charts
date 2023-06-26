@@ -29,8 +29,7 @@ npx lerna version --yes --force-publish --conventional-commits --create-release 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
-# Should not be needed
-# node scripts/update-angular-dependency-version.cjs
+node scripts/update-angular-dependency-version.cjs
 
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
