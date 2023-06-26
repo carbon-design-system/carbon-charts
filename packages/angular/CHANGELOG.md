@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.10.1...v1.10.2) (2023-06-26)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.10.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.10.0...v1.10.1) (2023-06-26)
+
+### Bug Fixes
+
+- **package.json:** missing devDependencies for storybook
+  ([#1580](https://github.com/carbon-design-system/carbon-charts/issues/1580))
+  ([e208fcc](https://github.com/carbon-design-system/carbon-charts/commit/e208fcc77f2adee30800356f974e7f6d0a5103e1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.10.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.9.0...v1.10.0) (2023-06-26)
 
 **Note:** Version bump only for package @carbon/charts-angular

@@ -18,9 +18,13 @@ git pull
 # Use latest dependencies
 yarn install
 
+# At this point, there could be a new yarn.lock (install-state.gz is now gitignored)
+git add yarn.lock
+git commit --allow-empty -m "chore(repo): yarn lock preventative commit"
+
 # Create version, changelogs and Github release
 echo "Creating version, changelogs and publishing to Github..."
-npx lerna version minor --yes --force-publish --conventional-commits --create-release github
+npx lerna version --yes --force-publish --conventional-commits --create-release github
 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
