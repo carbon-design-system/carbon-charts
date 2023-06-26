@@ -109,6 +109,9 @@
     },
     "d3-sankey": {
       "optional": true
+    },
+    "sass": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -129,8 +132,8 @@
     "@types/d3-sankey": "^0.12.1",
     "@types/lodash-es": "^4.17.7",
     "@types/topojson": "^3.2.3",
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@typescript-eslint/parser": "^5.60.0",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
     "concurrently": "^8.2.0",
     "downlevel-dts": "^0.11.0",
     "eslint": "^8.43.0",

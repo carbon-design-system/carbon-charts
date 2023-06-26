@@ -44,7 +44,7 @@
     "vue": "^2.7.0"
   },
   "dependencies": {
-    "@carbon/charts": "^1.10.0",
+    "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "~0.1.0",
     "vue": "^2.7.14"
   },
