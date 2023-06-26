@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.8.0...v1.9.0) (2023-06-26)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.8.0](https://github.com/carbon-design-system/carbon-charts/compare/v1.7.6...v1.8.0) (2023-06-03)
 
 ### Features
@@ -131,8 +140,7 @@ All notable changes to this project will be documented in this file. See
 - **angular:** add angular 14 support
   ([#1450](https://github.com/carbon-design-system/carbon-charts/issues/1450))
   ([5e8f4ce](https://github.com/carbon-design-system/carbon-charts/commit/5e8f4ceb1fa6b1411dbc59fef9d0f214e564bfeb)),
-  closes
-  [#1445](https://github.com/carbon-design-system/carbon-charts/issues/1445)
+  closes [#1445](https://github.com/carbon-design-system/carbon-charts/issues/1445)
 
 ## [1.5.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.5.7...v1.5.8) (2022-09-26)
 
@@ -473,8 +481,7 @@ All notable changes to this project will be documented in this file. See
 - **core:** create alluvial chart
   ([#1132](https://github.com/carbon-design-system/carbon-charts/issues/1132))
   ([08fa194](https://github.com/carbon-design-system/carbon-charts/commit/08fa194f1c59ab2110c0d221886fc0174c936194)),
-  closes
-  [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
+  closes [#871](https://github.com/carbon-design-system/carbon-charts/issues/871)
 
 ## [0.48.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.48.3...v0.48.4) (2021-09-13)
 
@@ -1514,9 +1521,8 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-- **core, react, angular, vue:** default width & height to 100%, and call
-  setOptions on option change
-  ([db251b4](https://github.com/carbon-design-system/carbon-charts/commit/db251b4))
+- **core, react, angular, vue:** default width & height to 100%, and call setOptions on option
+  change ([db251b4](https://github.com/carbon-design-system/carbon-charts/commit/db251b4))
 
 ## [0.16.23](https://github.com/carbon-design-system/carbon-charts/compare/v0.16.22...v0.16.23) (2019-10-25)
 
@@ -1896,8 +1902,7 @@ All notable changes to this project will be documented in this file. See
 - **core react angular:** carbon styling
   ([5064f63](https://github.com/carbon-design-system/carbon-charts/commit/5064f63))
 - **react wrappers storybook:** full react wrappers
-  ([4a456ee](https://github.com/carbon-design-system/carbon-charts/commit/4a456ee)),
-  closes
+  ([4a456ee](https://github.com/carbon-design-system/carbon-charts/commit/4a456ee)), closes
   [#117](https://github.com/carbon-design-system/carbon-charts/issues/117)
   [#115](https://github.com/carbon-design-system/carbon-charts/issues/115)
   [#120](https://github.com/carbon-design-system/carbon-charts/issues/120)
