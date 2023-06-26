@@ -10,6 +10,10 @@ git config --global user.name "carbon-bot"
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
+# Get git into the right state, ensure local branch is up-to-date
+git stash
+git checkout master
+
 # Create version, changelogs and Github release
 echo "Creating version, changelogs and publishing to Github..."
 npx lerna version --yes --force-publish --conventional-commits --create-release github
