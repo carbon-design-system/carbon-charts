@@ -51,12 +51,18 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				components: {
 					[demo.chartType.vue as string]: component
 				},
-				props: {
-					data: {
-						default: { ...demo.data, ...args?.data }
-					},
-					options: {
-						default: { ...demo.options, ...args?.options }
+				// props: {
+				// 	data: {
+				// 		default: { ...demo.data, ...args?.data }
+				// 	},
+				// 	options: {
+				// 		default: { ...demo.options, ...args?.options }
+				// 	}
+				// },
+				data() {
+					return { // problem is we aren't getting args.data and args.options so no updates from Storybook
+						data: demo.data,
+						options: demo.options
 					}
 				},
 				methods: {
