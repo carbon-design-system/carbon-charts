@@ -4,7 +4,6 @@
 
 # Root-level of monorepo
 .vscode/
-.yarn/cache
 pages/
 
 # Package-level
