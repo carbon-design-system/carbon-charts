@@ -43,7 +43,7 @@ const getTemplate = (componentSelector: string) => `
 			<span class="cds--tag cds--tag--green component-name">${componentSelector}</span>
 		</h3>
 		<p class="props">
-		  <b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
+		  <b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
 		</p>
 		<div class="marginTop-30" id="chart-demo">
 			<${componentSelector} [data]="data" [options]="options"></${componentSelector}>

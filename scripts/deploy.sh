@@ -10,18 +10,6 @@ git config --global user.name "carbon-bot"
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-# Get git into the right state, ensure local branch is up-to-date
-git stash
-git checkout master
-git pull
-
-# Use latest dependencies
-yarn install
-
-# At this point, there could be a new yarn.lock (install-state.gz is now gitignored)
-git add yarn.lock
-git commit --allow-empty -m "chore(repo): yarn lock preventative commit"
-
 # Create version, changelogs and Github release
 echo "Creating version, changelogs and publishing to Github..."
 npx lerna version --yes --force-publish --conventional-commits --create-release github
@@ -29,6 +17,7 @@ npx lerna version --yes --force-publish --conventional-commits --create-release 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
+# Update packages/angular/dist/package.json @carbon/charts dependency version
 node scripts/update-angular-dependency-version.cjs
 
 # Authenticate with npm registry

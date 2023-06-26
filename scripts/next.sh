@@ -28,7 +28,7 @@ npx lerna version prerelease --preid next --force-publish
 yarn build
 
 # Should not be needed
-# node scripts/update-angular-dependency-version.cjs
+node scripts/update-angular-dependency-version.cjs
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
