@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.10.4...v1.10.5) (2023-06-27)
+
+### Bug Fixes
+
+- **1592:** cp styles from dist to packages/core
+  ([#1594](https://github.com/carbon-design-system/carbon-charts/issues/1594))
+  ([e6f1b98](https://github.com/carbon-design-system/carbon-charts/commit/e6f1b984d63f1dd6e040510687c4e510258e2a99))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.10.4](https://github.com/carbon-design-system/carbon-charts/compare/v1.10.3...v1.10.4) (2023-06-27)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
