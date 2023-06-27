@@ -211,7 +211,7 @@ div.container {
 		.welcome__heading {
 			@include type-style('productive-heading-07');
 
-			color: theme.$text-inverse;
+			color: #fff; // theme.$text-inverse;
 		}
 
 		.welcome__heading--subtitle {

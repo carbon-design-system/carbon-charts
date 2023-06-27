@@ -24,7 +24,7 @@
 		<b>Props:</b>
 		<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
-			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html"
+			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html"
 			target="_blank">
 			options
 		</a>

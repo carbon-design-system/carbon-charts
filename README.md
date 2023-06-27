@@ -17,18 +17,21 @@
 	</p>
 </p>
 
-
 ## Packages
 
-- [Vanilla](./packages/core)
+- [Vanilla JavaScript](./packages/core)
 - [React](./packages/react)
 - [Angular](./packages/angular)
-- [Vue](./packages/vue)
 - [Svelte](./packages/svelte)
+- [Vue](./packages/vue)
 
 <a href="https://www.netlify.com" target="_blank">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
 </a>
+
+## Demos
+
+Visit [the demo website](https://charts.carbondesignsystem.com/?path=/story/docs--welcome)
 
 ## Design specifications
 
@@ -76,6 +79,7 @@ Read the release change logs [here](https://github.com/carbon-design-system/carb
 | Alluvial             | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
 | Heatmap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
 | Parallel coordinates | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Choropleth           | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 

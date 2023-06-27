@@ -78,7 +78,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 						</h3>
 
 						<p class="props">
-							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a>
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
 						</p>
 
 						<div class="marginTop-30" id="chart-demo">
