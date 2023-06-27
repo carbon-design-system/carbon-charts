@@ -8,11 +8,6 @@ const version = {
 	d3Sankey: packageJSON.dependencies['d3-sankey']
 }
 
-const stackBlitzRC =
-`{
-	"startCommand": "yarn dev"
-}`
-
 // Charts Vanilla JavaScript
 
 export const createVanillaChartApp = (demo: any) => {
@@ -120,7 +115,8 @@ new ${chartComponent}(chartHolder, {
 // Charts Angular
 
 export const createAngularChartApp = (demo: any) => {
-	const angularJson = `{
+	const angularJson =
+`{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -201,7 +197,7 @@ export const createAngularChartApp = (demo: any) => {
 				'd3-cloud': version.d3Cloud,
 				'd3-sankey': version.d3Sankey,
 				rxjs: '~7.8.1',
-				tslib: '^2.5.3',
+				tslib: '^2.6.0',
 				'zone.js': '~0.13.1'
 			}
 		},
@@ -209,29 +205,31 @@ export const createAngularChartApp = (demo: any) => {
 		2
 	)
 
-	const tsConfig = `{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["esnext", "dom"]
-  },
-  "angularCompilerOptions": {
-    "strictTemplates": true,
-    "strictInjectionParameters": true
-  }
+	const tsConfig =
+`{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "esnext",
+		"typeRoots": ["node_modules/@types"],
+		"lib": ["esnext", "dom"]
+	},
+	"angularCompilerOptions": {
+		"strictTemplates": true,
+		"strictInjectionParameters": true
+	}
 }`
 
-	const indexHtml = `<!doctype html>
+	const indexHtml =
+`<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -260,7 +258,8 @@ export const createAngularChartApp = (demo: any) => {
 	const chartData = JSON.stringify(demo.data, null, 2)
 	const chartOptions = JSON.stringify(demo.options, null, 2)
 
-	const mainTs = `import 'zone.js/dist/zone'
+	const mainTs =
+`import 'zone.js/dist/zone'
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
@@ -276,7 +275,6 @@ export class App {
 	options = ${chartOptions}
 
 	data = ${chartData}
-
 }
 
 bootstrapApplication(App)
@@ -302,7 +300,8 @@ export const createReactChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vanilla
 
-	const indexHtml = `<!doctype html>
+	const indexHtml =
+`<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -347,7 +346,8 @@ class App extends React.Component {
 		</${chartComponent}>
 	)
 }
-ReactDOM.render(<App />, document.getElementById("root"))`
+ReactDOM.render(<App />, document.getElementById('root'))
+`
 
 	const packageJson = JSON.stringify(
 		{
@@ -411,21 +411,26 @@ export const createSvelteChartApp = (demo: any) => {
 `
 
 	const svelteMainTs =
-`import App from './App.svelte';
+`import App from './App.svelte'
 
 const app = new App({
-  target: document.getElementById('app'),
-});
+  target: document.getElementById('app')
+})
 
-export default app;
+export default app
 `
 
 	const svelteViteEnvDts =
 `/// <reference types="svelte" />
 /// <reference types="vite/client" />
 `
+const stackBlitzRC =
+`{
+	"startCommand": "yarn dev"
+}`
 
-const svelteHtml = `<!DOCTYPE html>
+const svelteHtml =
+`<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -465,7 +470,7 @@ const svelteHtml = `<!DOCTYPE html>
 				'd3-sankey': version.d3Sankey,
 				svelte: '^3.59.2',
 				'svelte-check': '^3.4.3',
-				tslib: '^2.5.3',
+				tslib: '^2.6.0',
 				typescript: '^5.1.3',
 				vite: '^4.3.9'
 			}
@@ -475,11 +480,11 @@ const svelteHtml = `<!DOCTYPE html>
 	)
 
 	const svelteConfig =
-`import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+`import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 export default {
-  preprocess: vitePreprocess(),
-};
+  preprocess: vitePreprocess()
+}
 `
 
 	const svelteTsConfig =
@@ -510,8 +515,8 @@ export default {
 }`
 
 	const svelteViteConfig =
-`import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+`import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
 	plugins: [svelte()],
@@ -519,7 +524,8 @@ export default defineConfig({
 		include: ['@carbon/charts', 'carbon-components'],
 		exclude: ['@carbon/telemetry']
 	}
-})`
+})
+`
 
 	return {
 		'src/App.svelte': appSvelte,
@@ -542,7 +548,8 @@ export const createVueChartApp = (demo: any) => {
 	const options = JSON.stringify(demo.options, null, 2)
 	const chartComponent = demo.chartType.vue
 
-	const appVue = `<template>
+	const appVue =
+`<template>
   <div id="app" class="p-1">
 	  <${chartComponent} :data="data" :options="options" />
   </div>
@@ -568,22 +575,23 @@ export default {
 </style>`
 
 	const mainJs =
-`import { createApp } from 'vue';
+`import { createApp } from 'vue'
 import ChartsVue from '@carbon/charts-vue'
-import App from "./App.vue";
-const app = createApp(App);
-app.use(ChartsVue);
-app.mount('#app');`
+import App from './App.vue'
+const app = createApp(App)
+app.use(ChartsVue)
+app.mount('#app')
+`
 
 	const packageJson = JSON.stringify(
 		{
 			name: 'carbon-charts-vue-example',
 			description: 'Carbon Charts Vue Example',
 			version: '0.0.0',
-			"scripts": {
-				"serve": "vue-cli-service serve",
-				"build": "vue-cli-service build",
-				"lint": "vue-cli-service lint"
+			scripts: {
+				serve: "vue-cli-service serve",
+				build: "vue-cli-service build",
+				lint: "vue-cli-service lint"
 			},
 			dependencies: {
 				'@carbon/charts': version.carbonCharts,
@@ -617,8 +625,7 @@ app.mount('#app');`
 		<body>
 			<div id="app"></div>
 		</body>
-	</html>
-	`
+	</html>`
 
 	return {
 		'public/index.html': indexHtml,
