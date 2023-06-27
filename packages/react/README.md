@@ -26,7 +26,7 @@ yarn add @carbon/charts-react @carbon/styles d3 d3-cloud d3-sankey
 
 Read [Getting Started](https://charts.carbondesignsystem.com/?path=/docs/docs-getting-started-react--docs)
 
-## StackBlitz examples
+## Storybook and StackBlitz Examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/react).
 
