@@ -27,12 +27,10 @@ export function chartFactory<T extends ChartOptions>(chartType: any, chartName: 
       })
 
       watch(data, (newData: ChartTabularData) => {
-        console.log('data changed but chart did not update')
         chart.value?.model.setData(newData)
       }, { immediate: true })
 
       watch(options as T, (newOptions: T) => {
-        console.log('options changed but chart did not update')
         chart.value?.model.setOptions(newOptions)
       })
 

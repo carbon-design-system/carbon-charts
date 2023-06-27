@@ -1333,7 +1333,6 @@ const mapDemoGroups = (demoGroups: any) =>
 					title: 'Carbon Charts Angular Example',
 					dependencies: {
 						...project.dependencies,
-						'@carbon/charts': libraryVersion,
 						'@carbon/charts-angular': libraryVersion
 					}
 				}

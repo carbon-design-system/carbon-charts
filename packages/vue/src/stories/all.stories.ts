@@ -1,4 +1,5 @@
 import { storiesOf, type Args } from '@storybook/vue3'
+import { ref } from 'vue'
 import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@carbon/charts'
 import { type Demo, type DemoGroup, storybookDemoGroups } from '@carbon/charts/demo'
@@ -51,24 +52,15 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				components: {
 					[demo.chartType.vue as string]: component
 				},
-				// props: {
-				// 	data: {
-				// 		default: { ...demo.data, ...args?.data }
-				// 	},
-				// 	options: {
-				// 		default: { ...demo.options, ...args?.options }
-				// 	}
-				// },
-				data() {
-					return { // problem is we aren't getting args.data and args.options so no updates from Storybook
-						data: demo.data,
-						options: demo.options
-					}
-				},
-				methods: {
-					openSandbox() {
+				setup() {
+					const data = ref(demo.data)
+					const options = ref(demo.options)
+
+					function openSandbox() {
 						sdk.openProject(demo.code.vue, { newWindow: true })
 					}
+
+					return { data, options, openSandbox, args }
 				},
 				template: `
 					<div class="container">
@@ -82,7 +74,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 						</p>
 
 						<div class="marginTop-30" id="chart-demo">
-							<${demo.chartType.vue} :data="data" :options="options"></${demo.chartType.vue}>
+							<${demo.chartType.vue} :data="args.data" :options="args.options"></${demo.chartType.vue}>
 						</div>
 
 						<h3 class="marginTop-30">Code sample</h3>
