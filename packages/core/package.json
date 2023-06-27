@@ -52,6 +52,8 @@
   "files": [
     "dist",
     "scss",
+    "styles.css",
+    "styles.min.css",
     "CHANGELOG.md"
   ],
   "scripts": {
