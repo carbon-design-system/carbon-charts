@@ -23,9 +23,9 @@ yarn add @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
 Read
 [Getting Started](https://charts.carbondesignsystem.com/?path=/docs/docs-getting-started-vanilla-javascript--docs)
 
-## StackBlitz examples
+## Storybook and StackBlitz Examples
 
-[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts).
+[Live examples](https://carbon-design-system.github.io/carbon-charts).
 
 **When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
 isolated project showing you how to reproduce the demo.
