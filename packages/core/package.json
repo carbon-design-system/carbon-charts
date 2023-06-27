@@ -61,7 +61,7 @@
     "file:css:demo": "sass scss/demos.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
     "file:downlevel:dts": "downlevel-dts dist dist",
     "postbundle": "concurrently \"yarn:file:*\"",
-    "build:package": "vite build && yarn postbundle",
+    "build:package": "vite build && yarn postbundle && cp dist/styles*.css ./",
     "demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",
     "demo:storybook": "storybook build -o demo/bundle --quiet",
     "build:demo": "concurrently \"yarn:demo:*\"",
