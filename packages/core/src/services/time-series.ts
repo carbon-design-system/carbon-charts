@@ -28,7 +28,6 @@ export function isTickPrimary(
 	const isFirstQuarter = Number(format(new Date(tick), 'q')) === 1
 	const previousTick = i !== 0 ? allTicks[i - 1] : null
 
-	console.log('showDayName', showDayName)
 	switch (interval) {
 		case '15seconds':
 			return (
