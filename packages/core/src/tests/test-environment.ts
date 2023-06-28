@@ -23,7 +23,7 @@ export class TestEnvironment {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const holder = createChartHolder('scatter')
 
 		this.chart = new ScatterChart(holder, {
