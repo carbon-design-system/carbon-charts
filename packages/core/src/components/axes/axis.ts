@@ -1,8 +1,24 @@
-import { axisBottom, axisLeft, axisRight, axisTop, type AxisScale, select, type Selection as D3Selection } from 'd3'
+import {
+	axisBottom,
+	axisLeft,
+	axisRight,
+	axisTop,
+	type AxisScale,
+	select,
+	type Selection as D3Selection
+} from 'd3'
 import { axis } from '@/configuration'
 import { clamp, getProperty, getTranslationValues, truncateLabel } from '@/tools'
 import { Component } from '@/components/component'
-import { AxisPositions, Events, ScaleTypes, TruncationTypes, AxisTitleOrientations, RenderTypes, TickRotations } from '@/interfaces/enums'
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	TruncationTypes,
+	AxisTitleOrientations,
+	RenderTypes,
+	TickRotations
+} from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
 import type { ChartModel } from '@/model/model'
 import { DOMUtils } from '@/services/essentials/dom-utils'
@@ -38,7 +54,12 @@ export class Axis extends Component {
 		const options = this.getOptions()
 		const isAxisVisible = getProperty(options, 'axes', axisPosition, 'visible')
 
-		const svg = this.getComponentContainer() as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
+		const svg = this.getComponentContainer() as D3Selection<
+			SVGGraphicsElement,
+			any,
+			HTMLElement,
+			any
+		>
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})
@@ -202,7 +223,11 @@ export class Axis extends Component {
 		let formatter: any
 		const userProvidedFormatter = getProperty(axisOptions, 'ticks', 'formatter')
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues())
+			const timeInterval = computeTimeIntervalName(
+				axis.tickValues(),
+				getProperty(options, 'timeScale', 'timeInterval')
+			)
+
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
 					formatTick(t, i, axis.tickValues(), timeInterval, timeScaleOptions)
@@ -339,7 +364,7 @@ export class Axis extends Component {
 					}
 					break
 				case AxisPositions.TOP:
-					({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
+					;({ height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, {
 						useBBox: true
 					}))
 					axisTitleRef
@@ -354,19 +379,21 @@ export class Axis extends Component {
 
 		// Apply new axis to the axis element
 		if (isTimeScaleType) {
-			const timeInterval = computeTimeIntervalName(axis.tickValues())
+			const timeInterval = computeTimeIntervalName(
+				axis.tickValues(),
+				getProperty(options, 'timeScale', 'timeInterval')
+			)
+
 			const showDayName = timeScaleOptions.showDayName
 			const axisRefSelection = axisRef
 
 			if (animate) {
-				axisRef = axisRef
-					.transition()
-					.call((t: any) =>
-						this.services.transitions.setupTransition({
-							transition: t,
-							name: 'axis-update',
-							animate
-						})
+				axisRef = axisRef.transition().call((t: any) =>
+					this.services.transitions.setupTransition({
+						transition: t,
+						name: 'axis-update',
+						animate
+					})
 				) as any
 			}
 			axisRef = axisRef.call(axis)
@@ -417,9 +444,7 @@ export class Axis extends Component {
 				// If we're dealing with a discrete scale type
 				// We're able to grab the spacing between the ticks
 				if (scale.step) {
-					const textNodes = invisibleAxisRef
-						.selectAll('g.tick text')
-						.nodes() as any
+					const textNodes = invisibleAxisRef.selectAll('g.tick text').nodes() as any
 
 					// If any ticks are any larger than the scale step size
 					shouldRotateTicks = textNodes.some(
