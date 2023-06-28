@@ -72,7 +72,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							<span class="cds--tag cds--tag--green component-name">${demo.chartType.vanilla}</span>
 						</h3>
 						<p class="props">
-							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options (opens in new window)</a></span>
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options (opens in new window)</a></span>
 						</p>
 						${
 							demo.options.experimental

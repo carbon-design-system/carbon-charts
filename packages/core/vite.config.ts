@@ -22,25 +22,20 @@ export default defineConfig({
 			name: 'CarbonCharts'
 		},
 		rollupOptions: {
-			external: ['d3', 'd3-cloud', 'd3-sankey'] // Note d3-cloud and d3-sankey are not included in d3
+			external: ['d3', 'd3-cloud', 'd3-sankey'] // d3-cloud and d3-sankey are not included in d3
 		}
 	},
 	optimizeDeps: {
 		include: [
 			'@carbon/colors',
-			'@carbon/layout',
-			'@carbon/themes',
 			'@carbon/utils-position',
 			'carbon-components',
-			'date-fns', // widely used - perhaps make a peerDependency and externalize
+			'date-fns', // make peerDependency and externalize in next major
 			'dom-to-image-more',
-			'lodash-es' // widely used - perhaps make a peerDependency and externalize
+			'lodash-es' // make peerDependency and externalize in next major (or replace with modern TypeScript alternatives)
 		],
 		exclude: [
-			// Storybook will not run if these are in the include list
-			'@carbon/import-once',
-			'@carbon/styles',
-			'@carbon/telemetry'
+			'@carbon/telemetry' // prevent Storybook issue
 		]
 	},
 	resolve: {

@@ -11,20 +11,16 @@ git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
 # Get git into the right state, ensure local branch is up-to-date
-git stash
 git checkout master
-git pull
-
-# Use latest dependencies
-yarn install
 
 # Create version, changelogs and Github release
 echo "Creating version, changelogs and publishing to Github..."
-npx lerna version minor --yes --force-publish --conventional-commits --create-release github
+npx lerna version --yes --force-publish --conventional-commits --create-release github
 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
+# Update packages/angular/dist/package.json @carbon/charts dependency version
 node scripts/update-angular-dependency-version.cjs
 
 # Authenticate with npm registry
