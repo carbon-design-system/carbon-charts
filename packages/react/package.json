@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-react",
-  "version": "1.10.6",
+  "version": "1.11.1",
   "description": "Carbon Charts component library for React",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -96,7 +96,7 @@
     "typescript": "^5.1.5",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
-    "webpack": "5.88.0"
+    "webpack": "5.88.1"
   },
   "prettier": "../../prettier.config.cjs",
   "publishConfig": {

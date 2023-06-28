@@ -1,7 +1,8 @@
 import { min } from 'd3'
 import { format } from 'date-fns'
+
 import { getProperty } from '@/tools'
-import type { TimeScaleOptions } from '@/interfaces/axis-scales'
+import { TimeIntervalFormats, TimeIntervalNames, TimeScaleOptions } from '@/interfaces/axis-scales'
 
 export const TIME_INTERVALS = [
 	['15seconds', 15 * 1000],
@@ -26,6 +27,7 @@ export function isTickPrimary(
 	const hasANewWeekStarted = Number(format(new Date(tick), 'c')) === 2
 	const isFirstQuarter = Number(format(new Date(tick), 'q')) === 1
 	const previousTick = i !== 0 ? allTicks[i - 1] : null
+
 	switch (interval) {
 		case '15seconds':
 			return (
@@ -63,6 +65,8 @@ export function isTickPrimary(
 				// weekly
 				return isFirstTick || hasANewWeekStarted || isYearChanged(tick)
 			}
+		case 'weekly':
+			return isFirstTick || hasANewWeekStarted || isYearChanged(tick)
 		case 'monthly':
 			return isFirstTick || isYearChanged(tick)
 		case 'quarterly':
@@ -138,7 +142,14 @@ function closestTimeIntervalName(duration: number): string {
 
 // Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
-export function computeTimeIntervalName(ticks: number[]): string {
+export function computeTimeIntervalName(
+	ticks: number[],
+	intervalOverride?: keyof TimeIntervalFormats
+): string {
+	if (TimeIntervalNames[intervalOverride]) {
+		return intervalOverride
+	}
+
 	// special case: if the dataset has only one datum, we show the tick in the most detailed way possible
 	if (ticks.length === 1) {
 		return '15seconds'
