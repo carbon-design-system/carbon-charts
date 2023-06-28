@@ -1,5 +1,4 @@
-import type { StorybookConfig } from '@storybook/vue-vite'
-import { dirname } from 'path'
+import type { StorybookConfig } from '@storybook/vue3-vite'
 
 const config: StorybookConfig = {
 	stories: [
@@ -24,7 +23,7 @@ const config: StorybookConfig = {
 		return config
 	},
 	framework: {
-		name: '@storybook/vue-vite',
+		name: '@storybook/vue3-vite',
 		options: {}
 	},
 	core: {
