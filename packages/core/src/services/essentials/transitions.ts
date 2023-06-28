@@ -1,5 +1,5 @@
 import { getProperty } from '@/tools'
-import { transitions } from '@/configuration'
+import { transitions as transitionConfigs } from '@/configuration'
 import { Service } from '@/services/service'
 import { Events } from '@/interfaces/enums'
 import type { Transition } from 'd3'
@@ -29,7 +29,7 @@ export class Transitions extends Service {
 			return t.duration(0)
 		}
 
-		return t.duration(getProperty(transitions, name, 'duration') || transitions.default.duration)
+		return t.duration(getProperty(transitionConfigs, name, 'duration') || transitionConfigs.default.duration)
 	}
 
 	getPendingTransitions() {

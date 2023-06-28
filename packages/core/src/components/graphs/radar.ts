@@ -1,6 +1,17 @@
-import { curveLinearClosed, extent, lineRadial, max, min, scaleBand, scaleLinear, select, type Selection as D3Selection, type Transition } from 'd3'
+import {
+	curveLinearClosed,
+	extent,
+	lineRadial,
+	max,
+	min,
+	scaleBand,
+	scaleLinear,
+	select,
+	type Selection as D3Selection,
+	type Transition
+} from 'd3'
 import { flatMapDeep, getProperty, kebabCase, merge } from '@/tools'
-import { radar } from '@/configuration'
+import { radar as radarConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '@/interfaces/enums'
@@ -49,7 +60,7 @@ export class Radar extends Component {
 
 		const { angle, value } = getProperty(options, 'radar', 'axes')
 
-		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight } = radar
+		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight } = radarConfigs
 
 		this.uniqueKeys = Array.from(new Set(data.map((d: any) => d[angle])))
 		this.uniqueGroups = Array.from(new Set(data.map((d: any) => d[groupMapsTo])))
@@ -128,8 +139,9 @@ export class Radar extends Component {
 					.attr('opacity', 0)
 					.attr('transform', `translate(${c.x}, ${c.y})`)
 					.attr('fill', 'none')
-					.call((selection: D3Selection<Element, any, Element, any>) => selection
-						/*
+					.call((selection: D3Selection<Element, any, Element, any>) =>
+						selection
+							/*
 						 	BUG (D3): when "Radar - Missing datapoints" is displayed, the path that represents the third
 							blob (shaded area for Water) generates a d="M0,-59L118.248,-38.421L29.879,41.125L-25.079,34.518LNaN,NaNZ"
 							value because of the intentionally missing datapoint for the path (other paths have 5 points, this one has 4).
@@ -138,16 +150,16 @@ export class Radar extends Component {
 							causing D3 to throw an error (that we cannot catch because it's async). The error fires on
 							d3-transition/src/transition/attrTween.js:5 (but it's a long call-chain).
 						*/
-						.transition()
-						.call((t: Transition<Element, any, Element, any>) =>
-							this.services.transitions.setupTransition({
-								transition: t,
-								name: 'radar_y_axes_enter',
-								animate
-							})
-						)
-						.attr('opacity', 1)
-						.attr('d', (tick: number) => radialLineGenerator(shapeData(tick)))
+							.transition()
+							.call((t: Transition<Element, any, Element, any>) =>
+								this.services.transitions.setupTransition({
+									transition: t,
+									name: 'radar_y_axes_enter',
+									animate
+								})
+							)
+							.attr('opacity', 1)
+							.attr('d', (tick: number) => radialLineGenerator(shapeData(tick)))
 					),
 			(update: any) =>
 				update.call((selection: any) =>
@@ -354,7 +366,7 @@ export class Radar extends Component {
 							: `translate(${c.x}, ${c.y})`
 					)
 					.style('fill', (group: any) => colorScale(group.name))
-					.style('fill-opacity', radar.opacity.selected)
+					.style('fill-opacity', radarConfigs.opacity.selected)
 					.style('stroke', (group: any) => colorScale(group.name))
 					.call((selection: any) => {
 						const selectionUpdate = selection.transition().call((t: any) =>
@@ -614,13 +626,13 @@ export class Radar extends Component {
 			)
 			.style('fill-opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return radar.opacity.unselected
+					return radarConfigs.opacity.unselected
 				}
-				return radar.opacity.selected
+				return radarConfigs.opacity.selected
 			})
 			.style('stroke-opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return radar.opacity.unselected
+					return radarConfigs.opacity.unselected
 				}
 				return 1
 			})
@@ -636,7 +648,7 @@ export class Radar extends Component {
 					name: 'legend-mouseout-blob'
 				})
 			)
-			.style('fill-opacity', radar.opacity.selected)
+			.style('fill-opacity', radarConfigs.opacity.selected)
 			.style('stroke-opacity', 1)
 	}
 
@@ -688,7 +700,7 @@ export class Radar extends Component {
 					.attr('opacity', (d: any) =>
 						activeDataGroupNames.indexOf(d[groupMapsTo]) !== -1 ? 1 : 0
 					)
-					.attr('r', radar.dotsRadius)
+					.attr('r', radarConfigs.dotsRadius)
 
 				// get the items that should be highlighted
 				const itemsToHighlight = self.fullDataNormalized.filter(
@@ -700,14 +712,14 @@ export class Radar extends Component {
 					event,
 					hoveredElement,
 					items: itemsToHighlight
-						.filter((datum: any) => typeof datum[valueMapsTo] === 'number')
-						.map((datum: any) => ({
-							label: datum[groupMapsTo],
-							value: datum[valueMapsTo],
-							color: self.model.getFillColor(datum[groupMapsTo]),
+						.filter((d: any) => typeof d[valueMapsTo] === 'number')
+						.map((d: any) => ({
+							label: d[groupMapsTo],
+							value: d[valueMapsTo],
+							color: self.model.getFillColor(d[groupMapsTo]),
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
-								dataGroupName: datum[groupMapsTo]
+								dataGroupName: d[groupMapsTo]
 							})
 						}))
 				})

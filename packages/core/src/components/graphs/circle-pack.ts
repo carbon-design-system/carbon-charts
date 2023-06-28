@@ -1,8 +1,7 @@
 import { hierarchy as d3Hierarchy, pack as D3Pack, select } from 'd3'
 import { get } from 'lodash-es'
 import { getProperty } from '@/tools'
-import * as Configuration from '@/configuration'
-import { canvasZoomSettings, circlePack } from '@/configuration'
+import { canvasZoomSettings, circlePack as circlePackConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
@@ -14,9 +13,9 @@ export class CirclePack extends Component {
 
 	focal: any
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
@@ -56,7 +55,7 @@ export class CirclePack extends Component {
 			.size([width, height])
 			.padding((d: any) => {
 				// add 3 px to account for the stroke width 1.5px
-				return d.depth >= 1 ? circlePack.padding.children + 3 : circlePack.padding.mainGroup + 3
+				return d.depth >= 1 ? circlePackConfigs.padding.children + 3 : circlePackConfigs.padding.mainGroup + 3
 			})
 
 		const nodeData = packLayout(root)
@@ -99,7 +98,7 @@ export class CirclePack extends Component {
 			)
 			.attr('r', (d: any) => d.r)
 			.attr('opacity', 1)
-			.attr('fill-opacity', circlePack.circles.fillOpacity)
+			.attr('fill-opacity', circlePackConfigs.circles.fillOpacity)
 
 		if (canvasZoomEnabled === true && this.focal) {
 			this.services.canvasZoom.zoomIn(this.focal, enteringCircles, canvasZoomSettings)
@@ -132,7 +131,7 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.filter((d: any) => data.some((datum: any) => datum === d.data) && d.depth > 1)
-			.style('stroke', circlePack.circles.hover.stroke)
+			.style('stroke', circlePackConfigs.circles.hover.stroke)
 	}
 
 	getZoomClass(node: any) {
@@ -164,13 +163,12 @@ export class CirclePack extends Component {
 		const chartSvg = select(this.services.domUtils.getMainContainer())
 		const self = this
 		const canvasSelection = this.parent.selectAll('circle.node')
-		const zoomSetting = getProperty(Configuration, 'canvasZoomSettings')
 
 		chartSvg.on('click', () => {
 			self.focal = null as any
-			(self.model as CirclePackChartModel).updateHierarchyLevel(2)
+			;(self.model as CirclePackChartModel).updateHierarchyLevel(2)
 			chartSvg.classed('zoomed-in', false)
-			self.services.canvasZoom.zoomOut(canvasSelection, zoomSetting)
+			self.services.canvasZoom.zoomOut(canvasSelection, canvasZoomSettings)
 		})
 	}
 
@@ -189,7 +187,7 @@ export class CirclePack extends Component {
 			.attr('opacity', (d: any) => {
 				return d.data.dataGroupName === hoveredElement.datum()['name']
 					? 1
-					: circlePack.circles.fillOpacity
+					: circlePackConfigs.circles.fillOpacity
 			})
 	}
 
@@ -344,7 +342,7 @@ export class CirclePack extends Component {
 					const chartSvg = select(self.services.domUtils.getMainContainer())
 					chartSvg.classed('zoomed-in', false)
 					self.focal = null as any
-					(self.model as CirclePackChartModel).updateHierarchyLevel(2)
+					;(self.model as CirclePackChartModel).updateHierarchyLevel(2)
 					self.services.canvasZoom.zoomOut(canvasSelection, canvasZoomSettings)
 				}
 				// zoom if chart has zoom enabled and if its a depth 2 circle that has children
@@ -353,7 +351,7 @@ export class CirclePack extends Component {
 					const chartSvg = select(self.services.domUtils.getMainContainer())
 					chartSvg.classed('zoomed-in', true)
 					self.focal = datum as any
-					(self.model as CirclePackChartModel).updateHierarchyLevel(3)
+					;(self.model as CirclePackChartModel).updateHierarchyLevel(3)
 					self.services.canvasZoom.zoomIn(datum, canvasSelection, canvasZoomSettings)
 					// don't want the click event to propagate to the background zoom out
 					// does not clash with the tooltip/other events because it does need to close the

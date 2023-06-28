@@ -1,6 +1,6 @@
 import { arc, easeLinear, scaleLinear, type ScaleLinear, type Selection } from 'd3'
 import { getProperty } from '@/tools'
-import { pie } from '@/configuration'
+import { pie as pieConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Skeletons, CartesianOrientations, Alignments } from '@/interfaces/enums'
@@ -200,7 +200,7 @@ export class Skeleton extends Component {
 			.endAngle(Math.PI * 2)
 
 		// centering circle inside the container
-		const tcx = outerRadius + Math.abs(pie.radiusOffset)
+		const tcx = outerRadius + Math.abs(pieConfigs.radiusOffset)
 		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2
 
 		const skeletonAreaShape = DOMUtils.appendOrSelect(container, 'path')
@@ -215,14 +215,14 @@ export class Skeleton extends Component {
 			)
 
 		// Position skeleton
-		let translateX = outerRadius + pie.xOffset
+		let translateX = outerRadius + pieConfigs.xOffset
 		if (alignment === Alignments.CENTER) {
 			translateX = width / 2
 		} else if (alignment === Alignments.RIGHT) {
-			translateX = width - outerRadius - pie.xOffset
+			translateX = width - outerRadius - pieConfigs.xOffset
 		}
 
-		const translateY = outerRadius + pie.yOffset
+		const translateY = outerRadius + pieConfigs.yOffset
 		skeletonAreaShape.attr('transform', `translate(${translateX}, ${translateY})`)
 	}
 
@@ -232,7 +232,7 @@ export class Skeleton extends Component {
 			useAttrs: true
 		})
 		const radius = Math.min(width, height) / 2
-		return radius + pie.radiusOffset
+		return radius + pieConfigs.radiusOffset
 	}
 
 	// same logic in donut

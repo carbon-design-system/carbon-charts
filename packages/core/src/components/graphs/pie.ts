@@ -1,6 +1,6 @@
 import { arc, interpolate, pie, select } from 'd3'
 import { convertValueToPercentage, getProperty } from '@/tools'
-import { pie as configPie } from '@/configuration'
+import { pie as pieConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import {
@@ -43,7 +43,7 @@ export class Pie extends Component {
 	}
 
 	getInnerRadius() {
-		return configPie.innerRadius
+		return pieConfigs.innerRadius
 	}
 
 	render(animate = true) {
@@ -65,13 +65,13 @@ export class Pie extends Component {
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(this.getInnerRadius())
-			.outerRadius(radius + configPie.hoverArc.outerRadiusOffset)
+			.outerRadius(radius + pieConfigs.hoverArc.outerRadiusOffset)
 
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d[valueMapsTo])
 			.sort(getProperty(options, 'pie', 'sortFunction'))
-			.padAngle(configPie.padAngle)
+			.padAngle(pieConfigs.padAngle)
 
 		// Add data to pie layout
 		const pieLayoutData = pieLayout(displayData)
@@ -180,15 +180,15 @@ export class Pie extends Component {
 
 				// check if last 2 slices (or just last) are < the threshold
 				if (i >= totalSlices - 2) {
-					if (sliceAngleDeg < configPie.callout.minSliceDegree) {
+					if (sliceAngleDeg < pieConfigs.callout.minSliceDegree) {
 						let labelTranslateX, labelTranslateY
 						if (d.index === totalSlices - 1) {
 							labelTranslateX =
 								d.xPosition +
-								configPie.callout.offsetX +
-								configPie.callout.textMargin +
+								pieConfigs.callout.offsetX +
+								pieConfigs.callout.textMargin +
 								d.textOffsetX
-							labelTranslateY = d.yPosition - configPie.callout.offsetY
+							labelTranslateY = d.yPosition - pieConfigs.callout.offsetY
 
 							// Set direction of callout
 							d.direction = CalloutDirections.RIGHT
@@ -196,10 +196,10 @@ export class Pie extends Component {
 						} else {
 							labelTranslateX =
 								d.xPosition -
-								configPie.callout.offsetX -
+								pieConfigs.callout.offsetX -
 								d.textOffsetX -
-								configPie.callout.textMargin
-							labelTranslateY = d.yPosition - configPie.callout.offsetY
+								pieConfigs.callout.textMargin
+							labelTranslateY = d.yPosition - pieConfigs.callout.offsetY
 
 							// Set direction of callout
 							d.direction = CalloutDirections.LEFT
@@ -224,20 +224,20 @@ export class Pie extends Component {
 		})
 
 		// don't add padding for labels & callouts if they are disabled
-		const xOffset = renderLabels ? configPie.xOffset : 0
-		const yOffset = renderLabels ? configPie.yOffset : 0
+		const xOffset = renderLabels ? pieConfigs.xOffset : 0
+		const yOffset = renderLabels ? pieConfigs.yOffset : 0
 
 		// Position Pie
 		let pieTranslateX = radius + xOffset
 		if (alignment === Alignments.CENTER) {
 			pieTranslateX = width / 2
 		} else if (alignment === Alignments.RIGHT) {
-			pieTranslateX = width - radius - configPie.xOffset
+			pieTranslateX = width - radius - pieConfigs.xOffset
 		}
 
 		let pieTranslateY = radius + yOffset
 		if (calloutData.length > 0) {
-			pieTranslateY += configPie.yOffsetCallout
+			pieTranslateY += pieConfigs.yOffsetCallout
 		}
 
 		svg.attr('x', pieTranslateX + 7).attr('y', pieTranslateY)
@@ -277,12 +277,12 @@ export class Pie extends Component {
 
 				// end position for the callout line
 				d.endPos = {
-					x: xPosition + configPie.callout.offsetX,
-					y: yPosition - configPie.callout.offsetY + d.textOffsetY
+					x: xPosition + pieConfigs.callout.offsetX,
+					y: yPosition - pieConfigs.callout.offsetY + d.textOffsetY
 				}
 
 				// the intersection point of the vertical and horizontal line
-				d.intersectPointX = d.endPos.x - configPie.callout.horizontalLineLength
+				d.intersectPointX = d.endPos.x - pieConfigs.callout.horizontalLineLength
 			} else {
 				// start position for the callout line
 				d.startPos = {
@@ -292,12 +292,12 @@ export class Pie extends Component {
 
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
-					x: xPosition - configPie.callout.offsetX,
-					y: yPosition - configPie.callout.offsetY + d.textOffsetY
+					x: xPosition - pieConfigs.callout.offsetX,
+					y: yPosition - pieConfigs.callout.offsetY + d.textOffsetY
 				}
 
 				// the intersection point of the vertical and horizontal line
-				d.intersectPointX = d.endPos.x + configPie.callout.horizontalLineLength
+				d.intersectPointX = d.endPos.x + pieConfigs.callout.horizontalLineLength
 			}
 
 			// Store the necessary data in the DOM element
@@ -465,6 +465,6 @@ export class Pie extends Component {
 		const radius: number = Math.min(width, height) / 2
 		const renderLabels = options.pie.labels.enabled
 
-		return renderLabels ? radius + configPie.radiusOffset : radius
+		return renderLabels ? radius + pieConfigs.radiusOffset : radius
 	}
 }
