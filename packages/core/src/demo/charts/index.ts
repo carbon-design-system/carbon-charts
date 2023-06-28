@@ -198,6 +198,11 @@ const utilityDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataIntervalOverride,
+				options: timeSeriesAxisDemos.lineTimeSeriesIntervalOverrideOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
 				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
 				chartType: chartTypes.LineChart
@@ -1134,7 +1139,7 @@ const complexChartDemos = [
 		title: 'Choropleth (experimental)',
 		configs: {
 			excludeColorPaletteControl: true,
-			includeProjectionControl: true,
+			includeProjectionControl: true
 		},
 		demos: [
 			{
@@ -1142,16 +1147,16 @@ const complexChartDemos = [
 				data: choroplethDemos.data,
 				chartType: chartTypes.ChoroplethChart,
 				mainDemo: true,
-				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte']
 			},
 			{
 				options: choroplethDemos.missingDataOptions,
 				data: choroplethDemos.missingData,
 				chartType: chartTypes.ChoroplethChart,
-				disabledSandboxes: ['react', 'angular', 'vue', 'svelte'],
-			},
+				disabledSandboxes: ['react', 'angular', 'vue', 'svelte']
+			}
 		],
-		disableProps: true,
+		disableProps: true
 	},
 	{
 		title: 'Alluvial',

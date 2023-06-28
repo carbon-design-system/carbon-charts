@@ -17,7 +17,7 @@ export const lineTimeSeriesData15seconds = [
 		date: new Date(2020, 11, 10, 23, 59, 45),
 		value: 7
 	},
-	{ 
+	{
 		group: 'Dataset 1',
 		date: new Date(2020, 11, 11, 0, 0, 0),
 		value: 2
@@ -266,7 +266,6 @@ export const lineTimeSeriesDataDaily = [
 	}
 ]
 
-
 export const lineTimeSeriesDailyOptions = {
 	title: 'Line (time series) - Time interval daily',
 	axes: {
@@ -318,7 +317,6 @@ export const lineTimeSeriesDataWeekly = [
 		value: 10
 	}
 ]
-
 
 export const lineTimeSeriesWeeklyOptions = {
 	title: 'Line (time series) - Time interval weekly',
@@ -374,7 +372,6 @@ export const lineTimeSeriesDataMonthlyDefaultLocale = [
 		value: 10
 	}
 ]
-
 
 export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 	title: 'Line (time series) - Time interval monthly with default locale',
@@ -447,7 +444,6 @@ export const lineTimeSeriesDataQuarterly = [
 	}
 ]
 
-
 export const lineTimeSeriesQuarterlyOptions = {
 	title: 'Line (time series) - Time interval quarterly',
 	axes: {
@@ -455,6 +451,41 @@ export const lineTimeSeriesQuarterlyOptions = {
 		bottom: {
 			scaleType: 'time'
 		}
+	},
+	legend: {
+		clickable: false
+	}
+}
+
+// time-interval override
+export const lineTimeSeriesDataIntervalOverride = {
+	labels: ['Qty'],
+	datasets: [
+		{
+			label: 'Dataset 1',
+			data: [
+				{ date: new Date(2018, 0), value: 10 },
+				{ date: new Date(2018, 3), value: 10 },
+				{ date: new Date(2018, 6), value: 10 },
+				{ date: new Date(2018, 9), value: 10 },
+				{ date: new Date(2019, 0), value: 10 },
+				{ date: new Date(2019, 3), value: 10 },
+				{ date: new Date(2019, 6), value: 10 }
+			]
+		}
+	]
+}
+
+export const lineTimeSeriesIntervalOverrideOptions = {
+	title: 'Line (time series) - Time interval override',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: 'time'
+		}
+	},
+	timeScale: {
+		timeInterval: 'monthly'
 	},
 	legend: {
 		clickable: false
@@ -499,7 +530,6 @@ export const lineTimeSeriesDataYearly = [
 		value: 10
 	}
 ]
-
 
 export const lineTimeSeriesYearlyOptions = {
 	title: 'Line (time series) - Time interval yearly',
@@ -604,7 +634,6 @@ export const lineTimeSeriesDataTwoIdenticalLabels = [
 		value: 10
 	}
 ]
-
 
 export const lineTimeSeriesTwoIdenticalLabelsOptions = {
 	title: 'Line (time series) - Two identical labels',
