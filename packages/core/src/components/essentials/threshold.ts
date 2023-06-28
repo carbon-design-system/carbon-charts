@@ -79,8 +79,10 @@ export class Threshold extends Component {
 		thresholdGroupsMerge.attr('class', 'threshold-group')
 
 		const self = this
-		thresholdAxisGroupsMerge.each(function ({ axisPosition }: { axisPosition: AxisPositions}) {
-			const scale = self.services.cartesianScales.getScaleByPosition(axisPosition) as unknown as ScaleBand<string>
+		thresholdAxisGroupsMerge.each(function ({ axisPosition }: { axisPosition: AxisPositions }) {
+			const scale = self.services.cartesianScales.getScaleByPosition(
+				axisPosition
+			) as unknown as ScaleBand<string>
 			const scaleType = self.services.cartesianScales.getScaleTypeByPosition(axisPosition)
 
 			let xScale = null
@@ -123,8 +125,16 @@ export class Threshold extends Component {
 					)
 					.attr('y1', yScaleStart)
 					.attr('y2', yScaleEnd)
-					.attr('x1', ({ datum }: { datum: any }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.attr('x2', ({ datum }: { datum: any }) => getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.attr(
+						'x1',
+						({ datum }: { datum: any }) =>
+							getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0)
+					)
+					.attr(
+						'x2',
+						({ datum }: { datum: any }) =>
+							getXValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0)
+					)
 					.style('stroke', ({ fillColor }: { fillColor: string }) => fillColor)
 
 				// Set hoverable area width and rotate it
@@ -147,8 +157,16 @@ export class Threshold extends Component {
 					)
 					.attr('x1', xScaleStart)
 					.attr('x2', xScaleEnd)
-					.attr('y1', ({ datum }: { datum: any }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
-					.attr('y2', ({ datum }: { datum: any }) => getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0))
+					.attr(
+						'y1',
+						({ datum }: { datum: any }) =>
+							getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0)
+					)
+					.attr(
+						'y2',
+						({ datum }: { datum: any }) =>
+							getYValue(datum) + (isScaleTypeLabels ? scale.step() / 2 : 0)
+					)
 					.style('stroke', ({ fillColor }: { fillColor: string }) => fillColor)
 
 				// Set hoverable area width
@@ -191,7 +209,11 @@ export class Threshold extends Component {
 			const scale = isVertical ? mainYScale : mainXScale
 
 			const timeScaleOptions = getProperty(options, 'timeScale')
-			const timeInterval = computeTimeIntervalName(scale.ticks())
+			const timeInterval = computeTimeIntervalName(
+				scale.ticks(),
+				getProperty(timeScaleOptions, 'timeInterval')
+			)
+
 			return formatTick(value, 0, scale.ticks(), timeInterval, timeScaleOptions)
 		}
 
@@ -209,7 +231,7 @@ export class Threshold extends Component {
 		).classed('hidden', true)
 	}
 
-	setThresholdLabelPosition({ event, datum }: { event: CustomEvent, datum: any}) {
+	setThresholdLabelPosition({ event, datum }: { event: CustomEvent; datum: any }) {
 		const holder = this.services.domUtils.getHolder()
 		const mouseRelativePos = pointer(event, holder)
 
@@ -277,7 +299,9 @@ export class Threshold extends Component {
 		svg
 			.selectAll('rect.threshold-hoverable-area')
 			.on('mouseover mousemove', function (event: MouseEvent) {
-				select((this as any).parentNode).select('line.threshold-line').classed('active', true)
+				select((this as any).parentNode)
+					.select('line.threshold-line')
+					.classed('active', true)
 
 				self.services.events.dispatchEvent(Events.Threshold.SHOW, {
 					event,
@@ -286,7 +310,9 @@ export class Threshold extends Component {
 				})
 			})
 			.on('mouseout', function (event: MouseEvent) {
-				select((this as any).parentNode).select('line.threshold-line').classed('active', false)
+				select((this as any).parentNode)
+					.select('line.threshold-line')
+					.classed('active', false)
 
 				self.services.events.dispatchEvent(Events.Threshold.HIDE, {
 					event,

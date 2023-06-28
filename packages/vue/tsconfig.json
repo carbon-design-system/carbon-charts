@@ -3,17 +3,16 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     // Package-specific
+    "declaration": true,
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "jsx": "preserve",
     "paths": {
       "@/*": ["src/*"]
     },
-    "noEmit": true
+    "noEmit": true,
+    "useDefineForClassFields": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.vite.json" }],
-  "vueCompilerOptions": {
-    "target": 2.7
-  }
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.vite.json" }]
 }
