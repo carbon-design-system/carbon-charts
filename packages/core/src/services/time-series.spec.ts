@@ -1,13 +1,11 @@
 import { expect, it } from 'vitest'
 import { fr as localeObject } from 'date-fns/locale'
-import { timeScale } from '@/configuration'
+import { timeScale as timeScaleConfigs } from '@/configuration'
 import { formatTick, computeTimeIntervalName } from './time-series'
 import { TimeScaleOptions } from '@/interfaces/axis-scales'
 
 type TickTuple = [Date, string]
 type Dataset = TickTuple[]
-
-const timeScaleDefaultOptions = timeScale
 
 const format = (
 	ticks: number[],
@@ -36,7 +34,7 @@ it('should format ticks with timeInterval 15seconds', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('15seconds')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
+	expect(format(timestamps, timeInterval, timeScaleConfigs)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval minute', () => {
@@ -57,7 +55,7 @@ it('should format ticks with timeInterval minute', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('minute')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
+	expect(format(timestamps, timeInterval, timeScaleConfigs)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval 30minutes', () => {
@@ -73,7 +71,7 @@ it('should format ticks with timeInterval 30minutes', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('30minutes')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
+	expect(format(timestamps, timeInterval, timeScaleConfigs)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval hourly', () => {
@@ -97,7 +95,7 @@ it('should format ticks with timeInterval hourly', () => {
 	const timeIntervalDefaultFormats = computeTimeIntervalName(timestampsDefaultFormats)
 	expect(timeIntervalDefaultFormats).toEqual('hourly')
 	expect(
-		format(timestampsDefaultFormats, timeIntervalDefaultFormats, timeScaleDefaultOptions)[0]
+		format(timestampsDefaultFormats, timeIntervalDefaultFormats, timeScaleConfigs)[0]
 	).toEqual(formattedTicksDefaultFormats[0])
 
 	// hourly with custom formats
@@ -120,7 +118,7 @@ it('should format ticks with timeInterval hourly', () => {
 	const timeIntervalCustomFormats = computeTimeIntervalName(timestampsCustomFormats)
 	expect(timeIntervalCustomFormats).toEqual('hourly')
 	const timeScaleCustomOptions = {
-		...timeScaleDefaultOptions,
+		...timeScaleConfigs,
 		timeIntervalFormats: {
 			hourly: { primary: 'MMM d, HH:mm', secondary: 'HH:mm' }
 		}
@@ -148,7 +146,7 @@ it('should format ticks with timeInterval daily', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('daily')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)[0]).toEqual(formattedTicks[0])
+	expect(format(timestamps, timeInterval, timeScaleConfigs)[0]).toEqual(formattedTicks[0])
 })
 
 it('should format ticks with timeInterval weekly', () => {
@@ -170,7 +168,7 @@ it('should format ticks with timeInterval weekly', () => {
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('daily')
 	const timeScaleCustomOptions = {
-		...timeScaleDefaultOptions,
+		...timeScaleConfigs,
 		showDayName: true
 	}
 	expect(format(timestamps, timeInterval, timeScaleCustomOptions)).toEqual(formattedTicks)
@@ -197,7 +195,7 @@ it('should format ticks with timeInterval monthly', () => {
 	const timeIntervaldefaultFormats = computeTimeIntervalName(timestampsdefaultFormats)
 	expect(timeIntervaldefaultFormats).toEqual('monthly')
 	expect(
-		format(timestampsdefaultFormats, timeIntervaldefaultFormats, timeScaleDefaultOptions)
+		format(timestampsdefaultFormats, timeIntervaldefaultFormats, timeScaleConfigs)
 	).toEqual(formattedTicksdefaultFormats)
 
 	// monthly with custom formats
@@ -220,7 +218,7 @@ it('should format ticks with timeInterval monthly', () => {
 	const timeIntervalCustomFormats = computeTimeIntervalName(timestampsCustomFormats)
 	expect(timeIntervalCustomFormats).toEqual('monthly')
 	const timeScaleCustomOptions = {
-		...timeScaleDefaultOptions,
+		...timeScaleConfigs,
 		localeObject
 	}
 	expect(
@@ -246,7 +244,7 @@ it('should format ticks with timeInterval quarterly', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('quarterly')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleConfigs)).toEqual(formattedTicks)
 })
 
 it('should format ticks with timeInterval yearly', () => {
@@ -267,5 +265,5 @@ it('should format ticks with timeInterval yearly', () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset)
 	const timeInterval = computeTimeIntervalName(timestamps)
 	expect(timeInterval).toEqual('yearly')
-	expect(format(timestamps, timeInterval, timeScaleDefaultOptions)).toEqual(formattedTicks)
+	expect(format(timestamps, timeInterval, timeScaleConfigs)).toEqual(formattedTicks)
 })

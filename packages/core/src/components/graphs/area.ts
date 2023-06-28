@@ -1,6 +1,6 @@
 import { area, select } from 'd3'
 import { getProperty } from '@/tools'
-import { area as configArea } from '@/configuration'
+import { area as areaConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { CartesianOrientations, Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
 import { GradientUtils } from '@/services/essentials/gradient-utils'
@@ -54,11 +54,11 @@ export class Area extends Component {
 
 		let upperBoundRangeValue = 0
 		// If includeZero is enabled, we want to replace upperBoundRange from 0 to domain value
-		const includeZeroInRangeValue = (position: any, domain: any) => {
+		const includeZeroInRangeValue = (position: any, _domain: any) => {
 			if (getProperty(options, 'axes', position, 'includeZero') === false) {
 				// Replace upperBoundRangeValue if domain is positive
-				if (domain[0] > 0 && domain[1] > 0) {
-					upperBoundRangeValue = domain[0]
+				if (_domain[0] > 0 && _domain[1] > 0) {
+					upperBoundRangeValue = _domain[0]
 				}
 			}
 		}
@@ -207,7 +207,7 @@ export class Area extends Component {
 						animate
 					})
 				)
-				.attr('opacity', boundsEnabled ? 1 : configArea.opacity.selected)
+				.attr('opacity', boundsEnabled ? 1 : areaConfigs.opacity.selected)
 				.attr('d', (group: any) => {
 					const { data } = group
 					return areaGenerator(data)
@@ -215,7 +215,7 @@ export class Area extends Component {
 
 			if (boundsEnabled) {
 				enteringAreas
-					.attr('fill-opacity', configArea.opacity.selected)
+					.attr('fill-opacity', areaConfigs.opacity.selected)
 					.style('stroke', (group: any) => self.model.getStrokeColor(group.name))
 					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 0.7 + 'px')
@@ -237,10 +237,10 @@ export class Area extends Component {
 			)
 			.attr('opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum()['name']) {
-					return configArea.opacity.unselected
+					return areaConfigs.opacity.unselected
 				}
 
-				return configArea.opacity.selected
+				return areaConfigs.opacity.selected
 			})
 	}
 
@@ -254,7 +254,7 @@ export class Area extends Component {
 					name: 'legend-mouseout-area'
 				})
 			)
-			.attr('opacity', configArea.opacity.selected)
+			.attr('opacity', areaConfigs.opacity.selected)
 	}
 
 	destroy() {

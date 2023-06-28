@@ -1,4 +1,4 @@
-import { bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
+import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import {
 	clone,
 	fromPairs,
@@ -8,15 +8,15 @@ import {
 	removeArrayDuplicates,
 	updateLegendAdditionalItems
 } from '@/tools'
-import { color, legend } from '@/configuration'
+import { color as colorConfigs, legend as legendConfigs } from '@/configuration'
 import { histogram as histogramConfigs } from '@/configuration-non-customizable'
 import { Events, ScaleTypes, ColorClassNameTypes } from '@/interfaces/enums'
 import { formatDateTillMilliSeconds } from '@/services/time-series'
 import type { ChartTabularData } from '@/interfaces/model'
 
 export type StackKeysParams = {
-  bins?: any
-  groups?: any
+	bins?: any
+	groups?: any
 	percentage?: any
 	divergent?: any
 }
@@ -108,7 +108,7 @@ export class ChartModel {
 			return null
 		}
 
-		const { ACTIVE } = legend.items.status
+		const { ACTIVE } = legendConfigs.items.status
 		const dataGroups = this.getDataGroups(groups)
 		const { groupMapsTo } = this.getOptions().data
 		const allDataFromDomain = this.getAllDataFromDomain(groups)
@@ -160,7 +160,7 @@ export class ChartModel {
 	}
 
 	getActiveDataGroups(groups?: any) {
-		const { ACTIVE } = legend.items.status
+		const { ACTIVE } = legendConfigs.items.status
 
 		return this.getDataGroups(groups).filter((dataGroup: any) => dataGroup.status === ACTIVE)
 	}
@@ -193,7 +193,7 @@ export class ChartModel {
 		const areBinsDefined = Array.isArray(axisBins)
 
 		// Get Histogram bins
-		const bins = bin()
+		const bins = d3Bin()
 			.value((d: any) => d[domainIdentifier])
 			.thresholds(axisBins)(data)
 
@@ -489,7 +489,7 @@ export class ChartModel {
 	 * Data labels
 	 */
 	toggleDataLabel(changedLabel: string) {
-		const { ACTIVE, DISABLED } = legend.items.status
+		const { ACTIVE, DISABLED } = legendConfigs.items.status
 		const dataGroups = this.getDataGroups()
 
 		const hasDeactivatedItems = dataGroups.some((group: any) => group.status === DISABLED)
@@ -731,7 +731,7 @@ export class ChartModel {
 
 	protected generateDataGroups(data: any) {
 		const { groupMapsTo } = this.getOptions().data
-		const { ACTIVE, DISABLED } = legend.items.status
+		const { ACTIVE, DISABLED } = legendConfigs.items.status
 		const options = this.getOptions()
 
 		const uniqueDataGroups = removeArrayDuplicates(data.map((datum: any) => datum[groupMapsTo]))
@@ -801,15 +801,14 @@ export class ChartModel {
 		}
 
 		let pairingOption = getProperty(colorPairingOptions, 'option')
-		const colorPairingCounts = color.pairingOptions
+		const colorPairingCounts = colorConfigs.pairingOptions
 
 		// If number of dataGroups is greater than 5, user 14-color palette
 		const numberOfColors = numberOfVariants > 5 ? 14 : numberOfVariants
 
 		// Use default palette if user choice is not in range
 		const key = `${numberOfColors}-color` as keyof typeof colorPairingCounts
-		pairingOption =
-			pairingOption <= colorPairingCounts[key] ? pairingOption : 1
+		pairingOption = pairingOption <= colorPairingCounts[key] ? pairingOption : 1
 
 		// Create color classes for graph, tooltip and stroke use
 		const colorPairing = this.allDataGroups.map(
