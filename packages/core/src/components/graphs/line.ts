@@ -1,6 +1,6 @@
 import { line } from 'd3'
 import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '@/tools'
-import { lines } from '@/configuration'
+import { lines as lineConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
@@ -136,10 +136,10 @@ export class Line extends Component {
 			)
 			.attr('opacity', (group: any) => {
 				if (group.name !== hoveredElement.datum()['name']) {
-					return lines.opacity.unselected
+					return lineConfigs.opacity.unselected
 				}
 
-				return lines.opacity.selected
+				return lineConfigs.opacity.selected
 			})
 	}
 
@@ -153,7 +153,7 @@ export class Line extends Component {
 					name: 'legend-mouseout-line'
 				})
 			)
-			.attr('opacity', lines.opacity.selected)
+			.attr('opacity', lineConfigs.opacity.selected)
 	}
 
 	destroy() {

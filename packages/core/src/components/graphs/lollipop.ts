@@ -1,5 +1,5 @@
 import { flipDomainAndRangeBasedOnOrientation } from '@/tools'
-import { lines } from '@/configuration'
+import { lines as lineConfigs } from '@/configuration'
 import { Scatter } from './scatter'
 import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 
@@ -113,16 +113,16 @@ export class Lollipop extends Scatter {
 
 		this.parent.selectAll('line.line').attr('stroke-width', (d: any) => {
 			if (d[groupMapsTo] !== hoveredElement.datum[groupMapsTo]) {
-				return lines.weight.unselected
+				return lineConfigs.weight.unselected
 			}
 			// apply selected weight
-			return lines.weight.selected
+			return lineConfigs.weight.selected
 		})
 	}
 
 	// on mouse out remove the stroke width assertion
 	handleScatterOnMouseOut = () => {
-		this.parent.selectAll('line.line').attr('stroke-width', lines.weight.unselected)
+		this.parent.selectAll('line.line').attr('stroke-width', lineConfigs.weight.unselected)
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -142,10 +142,10 @@ export class Lollipop extends Scatter {
 			)
 			.attr('opacity', (d: any) => {
 				if (d[groupMapsTo] !== hoveredElement.datum()['name']) {
-					return lines.opacity.unselected
+					return lineConfigs.opacity.unselected
 				}
 
-				return lines.opacity.selected
+				return lineConfigs.opacity.selected
 			})
 	}
 
@@ -159,7 +159,7 @@ export class Lollipop extends Scatter {
 					name: 'legend-mouseout-line'
 				})
 			)
-			.attr('opacity', lines.opacity.selected)
+			.attr('opacity', lineConfigs.opacity.selected)
 	}
 
 	destroy() {

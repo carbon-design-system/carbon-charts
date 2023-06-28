@@ -1,6 +1,6 @@
 import { area } from 'd3'
 import { getProperty } from '@/tools'
-import { area as configArea } from '@/configuration'
+import { area as areaConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
@@ -85,7 +85,7 @@ export class StackedArea extends Component {
 					animate
 				})
 			)
-			.attr('opacity', configArea.opacity.selected)
+			.attr('opacity', areaConfigs.opacity.selected)
 			.attr('d', this.areaGenerator)
 	}
 
@@ -105,10 +105,10 @@ export class StackedArea extends Component {
 			)
 			.attr('opacity', (d: any) => {
 				if (getProperty(d, 0, groupMapsTo) !== hoveredElement.datum().name) {
-					return configArea.opacity.unselected
+					return areaConfigs.opacity.unselected
 				}
 
-				return configArea.opacity.selected
+				return areaConfigs.opacity.selected
 			})
 	}
 
@@ -122,6 +122,6 @@ export class StackedArea extends Component {
 					name: 'legend-mouseout-area'
 				})
 			)
-			.attr('opacity', configArea.opacity.selected)
+			.attr('opacity', areaConfigs.opacity.selected)
 	}
 }

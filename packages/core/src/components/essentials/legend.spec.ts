@@ -3,7 +3,7 @@ import ResizeObserver from 'resize-observer-polyfill'
 import { select } from 'd3'
 import settings from 'carbon-components/es/globals/js/settings' // CSS prefixes
 import { ScatterChart } from '@/charts'
-import { options } from '@/configuration'
+import { options as optionsConfigs } from '@/configuration'
 import { TestEnvironment } from '@/tests/test-environment'
 import { Events } from '@/interfaces/enums'
 
@@ -36,7 +36,7 @@ describe('legend component', () => {
 				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 
 				const numberOfLegendItems = select(
-					`g.${settings.prefix}--${options.chart.style?.prefix}--legend`
+					`g.${settings.prefix}--${optionsConfigs.chart.style?.prefix}--legend`
 				)
 					.selectAll('g.legend-item')
 					.size()

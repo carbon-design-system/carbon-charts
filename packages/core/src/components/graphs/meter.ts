@@ -1,6 +1,6 @@
 import { scaleLinear, select } from 'd3'
 import { getProperty } from '@/tools'
-import { meter } from '@/configuration'
+import { meter as meterConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
@@ -18,14 +18,14 @@ export class Meter extends Component {
 				prevX += scale(d.value)
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - meter.dividerWidth),
+					width: Math.abs(scale(d.value) - meterConfigs.dividerWidth),
 					x: prevX - scale(d.value)
 				}
 			} else {
 				prevX = scale(d.value)
 				return {
 					...d,
-					width: Math.abs(scale(d.value) - meter.dividerWidth),
+					width: Math.abs(scale(d.value) - meterConfigs.dividerWidth),
 					x: 0
 				}
 			}
@@ -53,7 +53,9 @@ export class Meter extends Component {
 			domainMax = 100
 		} else {
 			const total = getProperty(options, 'meter', 'proportional', 'total')
-			domainMax = total ? total : (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
+			domainMax = total
+				? total
+				: (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
 		}
 
 		// each meter has a scale for the value but no visual axis
@@ -72,8 +74,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meter.height.proportional
-					: meter.height.default
+					? meterConfigs.height.proportional
+					: meterConfigs.height.default
 			)
 
 		// draw the container max range value indicator
@@ -86,8 +88,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meter.height.proportional
-					: meter.height.default
+					? meterConfigs.height.proportional
+					: meterConfigs.height.default
 			)
 
 		// rect with the value binded
@@ -110,12 +112,11 @@ export class Meter extends Component {
 			})
 			.attr('y', 0)
 			.attr('height', () => {
-				const userProvidedHeight = getProperty(options, 'meter', 'height')
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meter.height.proportional
-					: meter.height.default
+					? meterConfigs.height.proportional
+					: meterConfigs.height.default
 			})
 			.attr('class', (d: any) =>
 				this.model.getColorClassName({
@@ -165,13 +166,11 @@ export class Meter extends Component {
 			.merge(peak as any)
 			.attr('y1', 0)
 			.attr('y2', () => {
-				const userProvidedHeight = getProperty(options, 'meter', 'height')
-
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meter.height.proportional
-					: meter.height.default
+					? meterConfigs.height.proportional
+					: meterConfigs.height.default
 			})
 			.transition()
 			.call((t: any) =>

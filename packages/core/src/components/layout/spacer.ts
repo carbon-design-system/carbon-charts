@@ -1,4 +1,4 @@
-import { spacers } from '@/configuration'
+import { spacers as spacerConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 
 export class Spacer extends Component {
@@ -9,8 +9,8 @@ export class Spacer extends Component {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		this.getComponentContainer()
-			.style('width', `${this.configs.size || spacers.default.size}px`)
-			.style('height', `${this.configs.size || spacers.default.size}px`)
+			.style('width', `${this.configs.size || spacerConfigs.default.size}px`)
+			.style('height', `${this.configs.size || spacerConfigs.default.size}px`)
 			.attr('opacity', 0)
 	}
 }

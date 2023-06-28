@@ -1,7 +1,7 @@
 import { min, select } from 'd3'
 import { get } from 'lodash-es'
 import { getProperty, getTransformOffsets } from '@/tools'
-import { heatmap } from '@/configuration'
+import { heatmap as heatmapConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { Events, RenderTypes, DividerStatus } from '@/interfaces/enums'
 import { DOMUtils } from '@/services/essentials/dom-utils'
@@ -187,8 +187,8 @@ export class Heatmap extends Component {
 		if (dividerStatus !== DividerStatus.OFF) {
 			if (
 				(dividerStatus === DividerStatus.AUTO &&
-					heatmap.minCellDividerDimension <= this.xBandwidth &&
-					heatmap.minCellDividerDimension <= this.yBandwidth) ||
+					heatmapConfigs.minCellDividerDimension <= this.xBandwidth &&
+					heatmapConfigs.minCellDividerDimension <= this.yBandwidth) ||
 				dividerStatus === DividerStatus.ON
 			) {
 				return true

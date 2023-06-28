@@ -1,6 +1,6 @@
 import { select, type Selection } from 'd3'
 import { getProperty } from '@/tools'
-import { axis } from '@/configuration'
+import { axis as axisConfigs } from '@/configuration'
 import { Axis } from './axis'
 import { AxisPositions, Events, ScaleTypes } from '@/interfaces/enums'
 import type { ChartModel } from '@/model/model'
@@ -69,9 +69,9 @@ export class HoverAxis extends Axis {
 			// Translates x position -4 left to keep center after padding
 			// Adds padding on left & right
 			rectangle
-				.attr('x', x - axis.hover.rectanglePadding)
+				.attr('x', x - axisConfigs.hover.rectanglePadding)
 				.attr('y', y)
-				.attr('width', width + axis.hover.rectanglePadding * 2)
+				.attr('width', width + axisConfigs.hover.rectanglePadding * 2)
 				.attr('height', height)
 				.lower()
 		})
