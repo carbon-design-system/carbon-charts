@@ -2384,7 +2384,7 @@ __metadata:
     storybook: ^7.0.24
     style-loader: ^3.3.3
     tslib: ^2.6.0
-    typescript: ~5.1.3
+    typescript: ~5.1.6
     zone.js: ~0.13.1
   peerDependencies:
     "@angular/common": ^16.0.0
@@ -2456,7 +2456,7 @@ __metadata:
     sass: ^1.63.6
     storybook: ^7.0.24
     style-loader: ^3.3.3
-    typescript: ^5.1.5
+    typescript: ^5.1.6
     vite: ^4.3.9
     vite-plugin-dts: ^2.3.0
     webpack: 5.88.1
@@ -2483,7 +2483,7 @@ __metadata:
     "@storybook/testing-library": ^0.2.0
     "@storybook/theming": ^7.0.24
     "@sveltejs/adapter-auto": ^2.1.0
-    "@sveltejs/kit": ^1.20.5
+    "@sveltejs/kit": ^1.21.0
     "@sveltejs/package": ^2.1.0
     "@typescript-eslint/eslint-plugin": ^5.60.1
     "@typescript-eslint/parser": ^5.60.1
@@ -2504,7 +2504,7 @@ __metadata:
     svelte: ^4.0.0
     svelte-check: ^3.4.4
     tslib: ^2.6.0
-    typescript: ^5.1.5
+    typescript: ^5.1.6
     vite: ^4.3.9
   peerDependencies:
     svelte: ^3.31.0 || ^4.0.0
@@ -2543,7 +2543,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     storybook: ^7.0.24
-    typescript: ^5.1.5
+    typescript: ^5.1.6
     vite: ^4.3.9
     vite-plugin-dts: ^2.3.0
     vue: ^3.3.4
@@ -2605,7 +2605,7 @@ __metadata:
     topojson-client: ^3.1.0
     tslib: ^2.6.0
     typedoc: ^0.24.8
-    typescript: ^5.1.5
+    typescript: ^5.1.6
     vite: ^4.3.9
     vite-plugin-dts: ^2.3.0
     vitest: ^0.32.2
@@ -5435,9 +5435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.20.5":
-  version: 1.20.5
-  resolution: "@sveltejs/kit@npm:1.20.5"
+"@sveltejs/kit@npm:^1.21.0":
+  version: 1.21.0
+  resolution: "@sveltejs/kit@npm:1.21.0"
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^2.4.1
     "@types/cookie": ^0.5.1
@@ -5456,7 +5456,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 77b84a21d9fcbbb9597beee19e3904adab0ddd0bcb137d6c49a45e9b409e3c96c9d78c021bb67cb724c91138f08fc4df1eb71f652fc2fb11feb10e7b177f6a24
+  checksum: c0810e3a843f8d4c9969cf8da15640a5a43f9be25556da84c99c8702e859a624a2a41767ee077646145e97e0057c2f017201ed3cb8e53376a7cd25d6a71ca89b
   languageName: node
   linkType: hard
 
@@ -19804,7 +19804,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:>=3 < 6, typescript@npm:^4.6.4 || ^5.0.0, typescript@npm:^5.0.3, typescript@npm:^5.1.5, typescript@npm:~5.1.3":
+"typescript@npm:>=3 < 6, typescript@npm:^4.6.4 || ^5.0.0, typescript@npm:^5.0.3":
   version: 5.1.5
   resolution: "typescript@npm:5.1.5"
   bin:
@@ -19821,6 +19821,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.1.6, typescript@npm:~5.1.6":
+  version: 5.1.6
+  resolution: "typescript@npm:5.1.6"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: b2f2c35096035fe1f5facd1e38922ccb8558996331405eb00a5111cc948b2e733163cc22fab5db46992aba7dd520fff637f2c1df4996ff0e134e77d3249a7350
   languageName: node
   linkType: hard
 
@@ -19844,7 +19854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.3#~builtin<compat/typescript>, typescript@patch:typescript@^5.1.5#~builtin<compat/typescript>, typescript@patch:typescript@~5.1.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.3#~builtin<compat/typescript>":
   version: 5.1.5
   resolution: "typescript@patch:typescript@npm%3A5.1.5#~builtin<compat/typescript>::version=5.1.5&hash=77c9e2"
   bin:
@@ -19861,6 +19871,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>, typescript@patch:typescript@~5.1.6#~builtin<compat/typescript>":
+  version: 5.1.6
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=77c9e2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 21e88b0a0c0226f9cb9fd25b9626fb05b4c0f3fddac521844a13e1f30beb8f14e90bd409a9ac43c812c5946d714d6e0dee12d5d02dfc1c562c5aacfa1f49b606
   languageName: node
   linkType: hard
 

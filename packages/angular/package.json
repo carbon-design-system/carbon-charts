@@ -82,7 +82,7 @@
     "rxjs": "~7.8.1",
     "storybook": "^7.0.24",
     "style-loader": "^3.3.3",
-    "typescript": "~5.1.3",
+    "typescript": "~5.1.6",
     "zone.js": "~0.13.1"
   },
   "prettier": "../../prettier.config.cjs",
