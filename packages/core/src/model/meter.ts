@@ -40,11 +40,13 @@ export class MeterChartModel extends ChartModel {
 		const options = this.getOptions()
 		const dataValues = getProperty(this.getDisplayData())
 
-		const { value: totalValue } = dataValues
-			? dataValues.reduce((previous: any, current: any) => {
+		const { value: totalValue } =
+			dataValues?.reduce(
+				(previous: any, current: any) => {
 					return { value: previous.value + current.value }
-				})
-			: 0
+				},
+				{ value: 0 }
+			) ?? 0
 
 		// use max value if the percentage is bigger than 100%
 		const boundedValue = getProperty(options, 'meter', 'proportional')
