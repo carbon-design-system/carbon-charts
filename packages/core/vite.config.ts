@@ -31,7 +31,7 @@ export default defineConfig({
 			'@carbon/utils-position',
 			'carbon-components',
 			'date-fns', // make peerDependency and externalize in next major
-			'dom-to-image',
+			'dom-to-image-more',
 			'lodash-es' // make peerDependency and externalize in next major (or replace with modern TypeScript alternatives)
 		],
 		exclude: [
