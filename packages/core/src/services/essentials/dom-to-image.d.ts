@@ -1,4 +1,4 @@
-declare module 'dom-to-image-more' {
+declare module 'dom-to-image' {
 	export type DomToImageOptions = {
 		bgcolor?: string
 		quality?: number
