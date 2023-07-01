@@ -79,7 +79,9 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 				// StackBlitz
 				openSandbox: (event: Event) => {
 					event.preventDefault()
-					sdk.openProject(demo.code.angular, { newWindow: true })
+					if (demo.code.angular) {
+						sdk.openProject(demo.code.angular, { newWindow: true })
+					}
 				}
 			}
 		})

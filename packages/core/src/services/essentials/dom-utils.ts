@@ -1,5 +1,5 @@
 import { select, type Selection } from 'd3'
-import domToImage from 'dom-to-image'
+import domToImage from 'dom-to-image-more'
 import { debounce, getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import type { ChartModel } from '@/model/model'

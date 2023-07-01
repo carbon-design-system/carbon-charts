@@ -2589,7 +2589,6 @@ __metadata:
     d3-cloud: ^1.2.5
     d3-sankey: ^0.12.3
     date-fns: ^2.30.0
-    dom-to-image: ^2.6.0
     dom-to-image-more: ^3.1.6
     downlevel-dts: ^0.11.0
     eslint: ^8.44.0
@@ -10268,13 +10267,6 @@ __metadata:
   version: 3.1.6
   resolution: "dom-to-image-more@npm:3.1.6"
   checksum: ea47d516528e77d51d9937b334c0a61fbeb9ac9a9fd3cc5fbf62e505d33fa00a7cf37b8b1080dcc9f204117b06e9299bb1bbb8af0dd5c449ab3a8f3b79b759e0
-  languageName: node
-  linkType: hard
-
-"dom-to-image@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "dom-to-image@npm:2.6.0"
-  checksum: 0d1f450b776d36f3ec982783d2a3898baaa3697f135ed0a9c70085db6bc5ac6def02f5ed7affc6acb92ef4fb3248905fabec915fed541994383d317260f784a2
   languageName: node
   linkType: hard
 

@@ -1,3 +1,4 @@
+import type { Project } from '@stackblitz/sdk'
 import { BaseChartOptions } from '@/interfaces/charts'
 import { ChartTabularData } from '@/interfaces/model'
 import * as areaDemos from './area'
@@ -27,6 +28,14 @@ import * as zoomBarDemos from './zoom-bar'
 import * as alluvialDemos from './alluvial'
 import * as highlightDemos from './hightlight'
 import * as heatmapDemos from './heatmap'
+
+import {
+	buildVanillaJsExample,
+	buildAngularExample,
+	buildReactExample,
+	buildSvelteExample,
+	buildVueExample
+} from '../utils'
 
 export {
 	areaDemos,
@@ -58,18 +67,6 @@ export {
 	heatmapDemos
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import packageJSON from '../../../package.json'
-
-import {
-	createVanillaChartApp,
-	createAngularChartApp,
-	createReactChartApp,
-	createSvelteChartApp,
-	createVueChartApp
-} from '../utils'
-
 import chartTypes from './chart-types'
 
 export interface Demo {
@@ -82,13 +79,13 @@ export interface Demo {
 		vue?: string
 	}
 	data: ChartTabularData
-	options: BaseChartOptions
+	options: BaseChartOptions & { geoData?: object }
 	code: {
-		vanilla: any
-		angular?: any
-		react?: any
-		svelte?: any
-		vue?: any
+		vanilla: Project
+		angular?: Project
+		react?: Project
+		svelte?: Project
+		vue?: Project
 	}
 }
 
@@ -103,10 +100,6 @@ enum DemoGroupTypes {
 	SIMPLE_CHART = 'simple-chart',
 	COMPLEX_CHART = 'complex-chart'
 }
-
-const libraryVersion = packageJSON.version
-const D3VERSION = packageJSON.dependencies['d3']
-const stylesVersion = packageJSON.dependencies['@carbon/styles']
 
 const utilityDemoGroups = [
 	{
@@ -1316,63 +1309,12 @@ const mapDemoGroups = (demoGroups: any) =>
 				// If height not specified in options, use 400px
 				demo.options.height = demo.options.height ?? '400px'
 
-				const project = {
-					title: 'Carbon Charts Example',
-					template: 'javascript',
-					description: demo.title,
-					dependencies: {
-						'@carbon/charts': libraryVersion,
-						'@carbon/styles': stylesVersion,
-						d3: D3VERSION
-					}
-				}
-
-				demo.code = {}
-
-				demo.code.vanilla = { ...project, files: createVanillaChartApp(demo) }
-
-				demo.code.angular = {
-					...project,
-					files: createAngularChartApp(demo),
-					template: 'angular-cli',
-					title: 'Carbon Charts Angular Example',
-					dependencies: {
-						...project.dependencies,
-						'@carbon/charts-angular': libraryVersion
-					}
-				}
-
-				demo.code.react = {
-					...project,
-					files: createReactChartApp(demo),
-					template: 'create-react-app',
-					title: 'Carbon Charts React Example',
-					dependencies: {
-						...project.dependencies,
-						'@carbon/charts-react': libraryVersion
-					}
-				}
-
-				demo.code.svelte = {
-					...project,
-					files: createSvelteChartApp(demo),
-					template: 'node',
-					title: 'Carbon Charts Svelte Example',
-					dependencies: {
-						...project.dependencies,
-						'@carbon/charts-svelte': libraryVersion
-					}
-				}
-
-				demo.code.vue = {
-					...project,
-					files: createVueChartApp(demo),
-					template: 'vue',
-					title: 'Carbon Charts Vue Example',
-					dependencies: {
-						...project.dependencies,
-						'@carbon/charts-vue': libraryVersion
-					}
+				demo.code = {
+					vanilla: buildVanillaJsExample(demo),
+					angular: buildAngularExample(demo),
+					react: buildReactExample(demo),
+					svelte: buildSvelteExample(demo),
+					vue: buildVueExample(demo)
 				}
 
 				return demo
