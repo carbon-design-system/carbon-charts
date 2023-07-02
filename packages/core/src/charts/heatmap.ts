@@ -1,5 +1,5 @@
 import { AxisChart } from '@/axis-chart'
-import { options } from '@/configuration'
+import { options as configOptions } from '@/configuration'
 import { getProperty, mergeDefaultChartOptions } from '@/tools'
 import { HeatmapModel } from '@/model/heatmap'
 import type { HeatmapChartOptions } from '@/interfaces/charts'
@@ -29,7 +29,7 @@ export class HeatmapChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(mergeDefaultChartOptions(options.heatmapChart, chartConfigs.options))
+		this.model.setOptions(mergeDefaultChartOptions(configOptions.heatmapChart, chartConfigs.options))
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)
