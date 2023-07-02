@@ -44,9 +44,9 @@ export default defineConfig({
 		}
 	},
 	plugins: [
-		// equivalent to: npx tsc src/*.ts --declaration --emitDeclarationOnly --declarationDir dist/ --resolveJsonModule --esModuleInterop
+		// equivalent to: npx tsc --declaration --emitDeclarationOnly --rootDir src
 		dts({
-			logLevel: 'silent'
+			logLevel: 'silent' // src/demo/package-versions.ts imports JSON outside of rootDir (still exports d.ts files)
 		})
 	]
 })
