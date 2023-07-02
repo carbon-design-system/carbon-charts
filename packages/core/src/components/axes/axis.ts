@@ -76,7 +76,7 @@ export class Axis extends Component {
         }
 
         // Grab the scale off of the Scales service
-        if (!this.services.cartesianScales) throw new Error('Services cartesianScales undefineds')
+        if (!this.services.cartesianScales) throw new Error('Services cartesianScales undefined')
         const scale = this.services.cartesianScales.getScaleByPosition(axisPosition) as any
 
         if (this.scaleType === ScaleTypes.LABELS || this.scaleType === ScaleTypes.LABELS_RATIO) {
