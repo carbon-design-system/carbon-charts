@@ -47,7 +47,7 @@ export function buildVanillaJsExample(demo: Demo): Project {
 
 async function loadTopoData() {
   try {
-    const response = await fetch('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap')
+    const response = await fetch('https://raw.githubusercontent.com/Akshat55/carbon-charts/c565fc9ed1364465b641e7e3f2149f0631f0fd0b/packages/core/demo/data/topojson-110-data.json')
     if (!response.ok) {
       throw new Error('Error loading Topology JSON file')
     }
