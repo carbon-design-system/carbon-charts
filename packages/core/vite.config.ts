@@ -46,8 +46,6 @@ export default defineConfig({
 	plugins: [
 		// equivalent to: npx tsc src/*.ts --declaration --emitDeclarationOnly --declarationDir dist/ --resolveJsonModule --esModuleInterop
 		dts({
-			exclude: './package.json',
-			skipDiagnostics: true,
 			logLevel: 'silent'
 		})
 	]
