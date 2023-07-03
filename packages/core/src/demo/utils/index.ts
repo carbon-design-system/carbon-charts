@@ -1,9 +1,9 @@
 export {
-	createVanillaChartApp,
-	createAngularChartApp,
-	createReactChartApp,
-	createSvelteChartApp,
-	createVueChartApp
-} from './sandbox'
+	buildVanillaJsExample,
+	buildAngularExample,
+	buildReactExample,
+	buildSvelteExample,
+	buildVueExample
+} from './stackblitz'
 
 export { addControls, addOtherVersions, addRadioButtonEventListeners } from './story-widgets'

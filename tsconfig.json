@@ -9,6 +9,7 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -20,6 +21,5 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true
-  },
-  "exclude": ["pages"]
+  }
 }

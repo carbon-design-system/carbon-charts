@@ -196,7 +196,7 @@ export class Tooltip extends Component {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const options = this.getOptions()
 		const isTooltipEnabled = getProperty(options, 'tooltip', 'enabled')
 		if (isTooltipEnabled) {

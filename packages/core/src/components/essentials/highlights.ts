@@ -44,7 +44,7 @@ export class Highlight extends Component {
 		// Update data on all axis highlight groups
 		const highlightAxisGroups = svg
 			.selectAll('g.axis-highlight')
-			.data(highlightData, (highlightData: any) => highlightData.axisPosition)
+			.data(highlightData, (d: any) => d.axisPosition)
 
 		// Remove axis highlight groups that are no longer needed
 		highlightAxisGroups.exit().attr('opacity', 0).remove()

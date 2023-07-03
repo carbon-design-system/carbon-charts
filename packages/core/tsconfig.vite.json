@@ -4,5 +4,6 @@
 	"compilerOptions": {
 		// Package-specific stuff goes here
 	},
-	"include": ["vite.config.ts"]
+	"include": ["vite.config.ts"],
+	"exclude": ["src/tests"]
 }

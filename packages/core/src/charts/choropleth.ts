@@ -1,5 +1,5 @@
 import { Chart } from '@/chart'
-import { options } from '@/configuration'
+import { options as configOptions } from '@/configuration'
 import { getProperty, mergeDefaultChartOptions } from '@/tools'
 import { ChoroplethModel } from '@/model/choropleth'
 import type { ChoroplethChartOptions } from '@/interfaces/charts'
@@ -29,7 +29,7 @@ export class ExperimentalChoroplethChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			mergeDefaultChartOptions(options.choroplethChart, chartConfigs.options)
+			mergeDefaultChartOptions(configOptions.choroplethChart, chartConfigs.options)
 		)
 
 		// Initialize data, services, components etc.

@@ -153,7 +153,7 @@ export class CirclePackChartModel extends ChartModel {
 		const grandParent = parent
 
 		children.forEach((child: any) => {
-			const parent = child.name
+			const parentWithinIteration = child.name
 			let sum = 0
 
 			if (child.children) {
@@ -162,8 +162,8 @@ export class CirclePackChartModel extends ChartModel {
 						totalSum += child.value
 					}
 
-					sum += this.getChildrenDatums(child.children, parent, result, sum)
-					result.push([parent, grandParent, sum])
+					sum += this.getChildrenDatums(child.children, parentWithinIteration, result, sum)
+					result.push([parentWithinIteration, grandParent, sum])
 					totalSum += sum
 				}
 			} else {

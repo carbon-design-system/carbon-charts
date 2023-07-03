@@ -13,7 +13,7 @@ export class MeterTitle extends Title {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()

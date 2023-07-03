@@ -4,12 +4,14 @@
 	"compilerOptions": {
 		// Package-specific settings
 		"baseUrl": ".",
+		"declarationDir": "dist",
 		"paths": {
       "@/*": ["src/*"]
     },
 		"strict": false, // TODO: 1140 errors in 63 files
 		"useDefineForClassFields": false // MUST BE FALSE - see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier
 	},
-	"include": ["src"],
+	"include": ["src" ],
+	"exclude": ["src/tests", "src/stories", "**/*.spec.ts"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }
