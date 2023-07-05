@@ -44,9 +44,13 @@ export default defineConfig({
 		}
 	},
 	plugins: [
-		// equivalent to: npx tsc --declaration --emitDeclarationOnly --rootDir src
+		// Equivalent to: npx tsc --declaration --emitDeclarationOnly --rootDir src
+		// However, tsc does not translate '@/' correctly so we need to use vite-plugin-dts. TypeScript, on its own, only allows
+		// type, not compilation, error suppression.
 		dts({
-			logLevel: 'silent' // src/demo/package-versions.ts imports JSON outside of rootDir (still exports d.ts files)
+			// src/demo/utils/package-versions.ts imports package.json files from other packages which are outside of the root directory.
+			// Version 2.3.0 creates the d.ts files despite this known compilation error. Version 3+ will NOT output d.ts files.
+			logLevel: 'silent' // Suppress the known errors because package.json files don't need d.ts files
 		})
 	]
 })
