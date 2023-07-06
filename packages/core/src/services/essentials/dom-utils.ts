@@ -1,5 +1,5 @@
 import { select, type Selection } from 'd3'
-import domToImage from 'dom-to-image-more'
+import { toPng, toJpeg } from 'html-to-image'
 import { debounce, getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import type { ChartModel } from '@/model/model'
@@ -292,14 +292,9 @@ export class DOMUtils extends Service {
 		const holderSelection = select(holder)
 		holderSelection.classed('filled', true)
 
-		domToImage
-			.toJpeg(this.getMainContainer(), {
-				bgcolor:
-					typeof window !== 'undefined'
-						? window.getComputedStyle(holder).getPropertyValue('background-color')
-						: undefined,
+		toJpeg(this.getMainContainer(), {
 				quality: 1,
-				// Remove the toolbar
+				// Remove toolbar
 				filter: (node: any) => {
 					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
 						return false
@@ -321,14 +316,9 @@ export class DOMUtils extends Service {
 		const holderSelection = select(holder)
 		holderSelection.classed('filled', true)
 
-		domToImage
-			.toPng(this.getMainContainer(), {
-				bgcolor:
-					typeof window !== 'undefined'
-						? window.getComputedStyle(holder).getPropertyValue('background-color')
-						: undefined,
+			toPng(this.getMainContainer(), {
 				quality: 1,
-				// Remove the toolbar
+				// Remove toolbar
 				filter: (node: HTMLElement) => {
 					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
 						return false
