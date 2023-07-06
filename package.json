@@ -25,6 +25,7 @@
     "node": "^18.16.0"
   },
   "packageManager": "yarn@3.5.1",
+  "prettier": "./prettier.config.cjs",
   "devDependencies": {
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",

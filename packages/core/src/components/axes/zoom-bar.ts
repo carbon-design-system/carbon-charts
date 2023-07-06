@@ -1,6 +1,6 @@
 import { area, brushX, extent, line } from 'd3'
 import { clone, getProperty, isEmpty, merge } from '@/tools'
-import { zoomBar } from '@/configuration'
+import { zoomBar as zoomBarConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import type { ChartModelCartesian } from '@/model/cartesian-charts'
 import { AxisPositions, Events, RenderTypes, ScaleTypes, ZoomBarTypes } from '@/interfaces/enums'
@@ -41,22 +41,24 @@ export class ZoomBar extends Component {
 		// load up the zoomBarData into this model
 		this.model.setZoomBarData(definedZoomBarData)
 	}
-	
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer()
 
 		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(AxisPositions.TOP)
 		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(AxisPositions.TOP)
 
-		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as 'graph_view' | 'slider_view'
+		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as
+			| 'graph_view'
+			| 'slider_view'
 
 		// As zoom current only available on top only highlights corresponding to bottom axis will be shown
 		const highlight = getProperty(this.getOptions(), 'axes', AxisPositions.BOTTOM, 'highlights')
 
-		const zoombarHeight = zoomBar.height[zoombarType]
+		const zoombarHeight = zoomBarConfigs.height[zoombarType]
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
@@ -81,7 +83,7 @@ export class ZoomBar extends Component {
 			.attr('x', 0)
 			.attr('y', zoombarHeight)
 			.attr('width', '100%')
-			.attr('height', zoomBar.spacerHeight)
+			.attr('height', zoomBarConfigs.spacerHeight)
 			.attr('opacity', 1)
 			.attr('fill', 'none')
 
@@ -278,8 +280,10 @@ export class ZoomBar extends Component {
 			}
 		}
 
-		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as 'graph_view' | 'slider_view'
-		const zoombarHeight = zoomBar.height[zoombarType]
+		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as
+			| 'graph_view'
+			| 'slider_view'
+		const zoombarHeight = zoomBarConfigs.height[zoombarType]
 
 		// Initialize the d3 brush
 		this.brush
@@ -344,14 +348,16 @@ export class ZoomBar extends Component {
 
 	updateBrushHandle(svg: any, selection: any) {
 		const self = this
-		const handleWidth = zoomBar.handleWidth
+		const handleWidth = zoomBarConfigs.handleWidth
 
-		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type')  as 'graph_view' | 'slider_view'
-		const handleHeight = zoomBar.height[zoombarType]
+		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as
+			| 'graph_view'
+			| 'slider_view'
+		const handleHeight = zoomBarConfigs.height[zoombarType]
 		const handleXDiff = -handleWidth / 2
 
-		const handleBarWidth = zoomBar.handleBarWidth
-		const handleBarHeight = zoombarType === ZoomBarTypes.GRAPH_VIEW ? zoomBar.handleBarHeight : 6
+		const handleBarWidth = zoomBarConfigs.handleBarWidth
+		const handleBarHeight = zoombarType === ZoomBarTypes.GRAPH_VIEW ? zoomBarConfigs.handleBarHeight : 6
 		const handleBarXDiff = -handleBarWidth / 2
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2
 
@@ -423,8 +429,10 @@ export class ZoomBar extends Component {
 	}
 
 	updateSliderSelectedArea(selection: any) {
-		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as 'graph_view' | 'slider_view'
-		const zoombarHeight = zoomBar.height[zoombarType]
+		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as
+			| 'graph_view'
+			| 'slider_view'
+		const zoombarHeight = zoomBarConfigs.height[zoombarType]
 
 		const svg = this.getComponentContainer()
 		const container = svg.select('svg.zoom-container')
@@ -453,8 +461,10 @@ export class ZoomBar extends Component {
 		const xAccessor = accessorFunction(this.xScale, mainXScaleType, mainXAxisPosition)
 		const yAccessor = accessorFunction(this.yScale, mainYScaleType, mainYAxisPosition)
 
-		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as 'graph_view' | 'slider_view'
-		const zoombarHeight = zoomBar.height[zoombarType]
+		const zoombarType = getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as
+			| 'graph_view'
+			| 'slider_view'
+		const zoombarHeight = zoomBarConfigs.height[zoombarType]
 		const areaGenerator = area()
 			.x((d: any) => xAccessor(d))
 			.y0(zoombarHeight)
@@ -518,8 +528,13 @@ export class ZoomBar extends Component {
 		endX: number,
 		skeletonClass = false
 	) {
-		const zoombarType = getProperty(this.model.getOptions(), 'zoomBar', AxisPositions.TOP, 'type') as 'graph_view' | 'slider_view'
-		const zoombarHeight = zoomBar.height[zoombarType]
+		const zoombarType = getProperty(
+			this.model.getOptions(),
+			'zoomBar',
+			AxisPositions.TOP,
+			'type'
+		) as 'graph_view' | 'slider_view'
+		const zoombarHeight = zoomBarConfigs.height[zoombarType]
 		const baselineGenerator = line()([
 			[startX, zoombarHeight],
 			[endX, zoombarHeight]

@@ -20,7 +20,7 @@ import {
 	addSeconds
 } from 'date-fns'
 import { flatten, getProperty, removeArrayDuplicates } from '@/tools'
-import { axis } from '@/configuration'
+import { axis as axisConfigs } from '@/configuration'
 import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'
 import { ThresholdOptions } from '@/interfaces/components'
@@ -359,7 +359,7 @@ export class CartesianScales extends Service {
 			const spaceToAddToEdges = getProperty(options, 'timeScale', 'addSpaceOnEdges')
 			return addSpacingToTimeDomain(domain, spaceToAddToEdges)
 		} else {
-			return addSpacingToContinuousDomain(domain, axis.paddingRatio, axisOptions.scaleType)
+			return addSpacingToContinuousDomain(domain, axisConfigs.paddingRatio, axisOptions.scaleType)
 		}
 	}
 
@@ -474,7 +474,7 @@ export class CartesianScales extends Service {
 
 		const displayData = this.model.getDisplayData()
 		const { extendLinearDomainBy, mapsTo, percentage, thresholds } = axisOptions
-		const { reference: ratioReference, compareTo: ratioCompareTo } = axis.ratio
+		const { reference: ratioReference, compareTo: ratioCompareTo } = axisConfigs.ratio
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {

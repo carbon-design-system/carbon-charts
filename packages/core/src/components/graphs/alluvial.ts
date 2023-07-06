@@ -7,7 +7,7 @@ import {
 	sankeyJustify
 } from 'd3-sankey'
 import { debounce, getProperty, getTransformOffsets } from '@/tools'
-import { alluvial } from '@/configuration'
+import { alluvial as alluvialConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, ColorClassNameTypes, RenderTypes, Alignments } from '@/interfaces/enums'
@@ -52,8 +52,8 @@ export class Alluvial extends Component {
 		)
 
 		// Set the custom node padding if provided
-		let nodePadding = alluvial.minNodePadding
-		if (options.alluvial.nodePadding > alluvial.minNodePadding) {
+		let nodePadding = alluvialConfigs.minNodePadding
+		if (options.alluvial.nodePadding > alluvialConfigs.minNodePadding) {
 			nodePadding = options.alluvial.nodePadding
 		}
 
@@ -69,7 +69,7 @@ export class Alluvial extends Component {
 
 		const sankey = d3Sankey()
 			.nodeId((node: any) => node.name)
-			.nodeWidth(alluvial.nodeWidth)
+			.nodeWidth(alluvialConfigs.nodeWidth)
 			// Distance nodes are apart from each other
 			.nodePadding(nodePadding)
 			// Alignment of nodes within chart
@@ -133,12 +133,12 @@ export class Alluvial extends Component {
 					`alluvial-category-${i}`
 				) as string
 
-				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
 				// Make the text on the left on node group (except first column)
 				let x = 0
-				if (d + x >= width) {
-					x = -width + 4
+				if (d + x >= textWidth) {
+					x = -textWidth + 4
 				}
 				return x
 			})
@@ -212,7 +212,7 @@ export class Alluvial extends Component {
 				return this.model.getFillColor(d.source.name)
 			})
 			.attr('stroke-width', (d: any) => Math.max(1, d.width))
-			.style('stroke-opacity', alluvial.opacity.default)
+			.style('stroke-opacity', alluvialConfigs.opacity.default)
 			.attr(
 				'aria-label',
 				(d: any) =>
@@ -280,9 +280,9 @@ export class Alluvial extends Component {
 				) as string
 
 				// Determine rectangle width based on text width
-				const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
-				return width + 8
+				return textWidth + 8
 			})
 			.attr('height', 18)
 			.attr('stroke-width', 2)
@@ -294,7 +294,7 @@ export class Alluvial extends Component {
 				`alluvial-node-text-${i}`
 			) as string
 
-			const { width } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+			const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
 
 			// Subtracting 9 since text background is 18 to center
 			const y = (d.y1 - d.y0) / 2 - 9
@@ -302,9 +302,9 @@ export class Alluvial extends Component {
 			let x = d.x1 - d.x0
 
 			// Display bars on the right instead of left of the node
-			if (d.x1 >= width) {
+			if (d.x1 >= textWidth) {
 				// 16 = node width (4) + text container padding (8) + distance between node and text container (4)
-				x = x - (width + 16)
+				x = x - (textWidth + 16)
 			} else {
 				// Add padding to text containers
 				x += 4
@@ -335,16 +335,16 @@ export class Alluvial extends Component {
 
 			if (event === 'mouseout') {
 				select(link).lower()
-				allLinks.style('stroke-opacity', alluvial.opacity.default)
+				allLinks.style('stroke-opacity', alluvialConfigs.opacity.default)
 			} else {
 				allLinks.style('stroke-opacity', function () {
 					// highlight and raise if link is this
 					if (link === this) {
 						select(this).raise()
-						return alluvial.opacity.selected
+						return alluvialConfigs.opacity.selected
 					}
 
-					return alluvial.opacity.unfocus
+					return alluvialConfigs.opacity.unfocus
 				})
 			}
 		}, 33)
@@ -431,7 +431,7 @@ export class Alluvial extends Component {
 					.classed('link-hovered', false)
 					.data(this.graph.links, (d: any) => d.index)
 					.order()
-					.style('stroke-opacity', alluvial.opacity.default)
+					.style('stroke-opacity', alluvialConfigs.opacity.default)
 
 				return
 			}
@@ -451,10 +451,10 @@ export class Alluvial extends Component {
 				// Raise the links & increase stroke-opacity to selected
 				if (links.some((element: any) => element === d.index)) {
 					select(this).classed('link-hovered', true).raise()
-					return alluvial.opacity.selected
+					return alluvialConfigs.opacity.selected
 				}
 
-				return alluvial.opacity.unfocus
+				return alluvialConfigs.opacity.unfocus
 			})
 		}, 66)
 
@@ -542,7 +542,7 @@ export class Alluvial extends Component {
 					.classed('node-hovered', false)
 					.attr('transform', `translate(${nodeMatrix.x + 2}, ${nodeMatrix.y})`)
 					.select('rect.node')
-					.attr('width', alluvial.nodeWidth)
+					.attr('width', alluvialConfigs.nodeWidth)
 
 				// Translate text container back to initial state
 				if (datum.x0 - 2 === 0) {

@@ -99,7 +99,7 @@ export class Tree extends Component {
 				if (node.x > right.x) right = node
 			})
 
-			const height = right.x - left.x
+			const updateHeight = right.x - left.x
 
 			const transition = svg
 				.transition()
@@ -110,7 +110,7 @@ export class Tree extends Component {
 						animate: true
 					})
 				)
-				.attr('viewBox', [-margin.left, left.x, width, height].join(' ')) // viewBox expects a delimited string
+				.attr('viewBox', [-margin.left, left.x, width, updateHeight].join(' ')) // viewBox expects a delimited string
 
 			// Update data on nodes
 			const nodeGroups = nodeGroup.selectAll('g').data(nodes, (d: any) => d.id)

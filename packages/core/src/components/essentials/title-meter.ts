@@ -1,6 +1,6 @@
 import type { Selection as D3Selection } from 'd3'
 import { getProperty } from '@/tools'
-import { meter } from '@/configuration'
+import { meter as meterConfigs } from '@/configuration'
 import { Title } from './title'
 import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes, Statuses } from '@/interfaces/enums'
@@ -13,7 +13,7 @@ export class MeterTitle extends Title {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
@@ -142,7 +142,7 @@ export class MeterTitle extends Title {
 			.attr(
 				'x',
 				this.model.getStatus() && typeof containerWidth !== 'string'
-					? containerWidth - meter.total.paddingRight
+					? containerWidth - meterConfigs.total.paddingRight
 					: containerWidth
 			)
 			.attr('y', '1em')
@@ -167,7 +167,7 @@ export class MeterTitle extends Title {
 
 		// get the status from the model
 		const status = this.model.getStatus()
-		const radius = meter.status.indicatorSize / 2
+		const radius = meterConfigs.status.indicatorSize / 2
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
@@ -221,7 +221,7 @@ export class MeterTitle extends Title {
 		const percentage = svg.selectAll('text.percent-value').data(data)
 
 		// the horizontal offset of the percentage value from the title
-		const offset = meter.statusBar.paddingRight
+		const offset = meterConfigs.statusBar.paddingRight
 
 		percentage
 			.enter()
@@ -246,7 +246,7 @@ export class MeterTitle extends Title {
 
 		// update the position on the percentage to be inline with the title
 		const tspan = DOMUtils.appendOrSelect(this.parent, 'tspan')
-		const offset = meter.statusBar.paddingRight
+		const offset = meterConfigs.statusBar.paddingRight
 		const tspanLength = Math.ceil(tspan.node().getComputedTextLength())
 
 		const percentage = DOMUtils.appendOrSelect(this.parent, 'text.percent-value')
@@ -275,16 +275,16 @@ export class MeterTitle extends Title {
 				useBBox: true
 			}).width
 
-			return containerWidth - totalWidth - meter.total.paddingLeft
+			return containerWidth - totalWidth - meterConfigs.total.paddingLeft
 		} else {
 			const percentage = DOMUtils.appendOrSelect(this.parent, 'text.percent-value')
 			// the title needs to fit the width of the container without crowding the status, and percentage value
-			const offset = meter.statusBar.paddingRight
+			const offset = meterConfigs.statusBar.paddingRight
 			const percentageWidth = percentage.node().getComputedTextLength()
 
 			const statusGroup = DOMUtils.appendOrSelect(this.parent, 'g.status-indicator').node()
 			const statusWidth =
-				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width + meter.status.paddingLeft
+				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width + meterConfigs.status.paddingLeft
 
 			return containerWidth - percentageWidth - offset - statusWidth
 		}

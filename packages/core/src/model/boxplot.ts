@@ -1,6 +1,6 @@
 import { ascending, min, max, quantile, scaleOrdinal } from 'd3'
 import { getProperty } from '@/tools'
-import { color } from '@/configuration'
+import { color as colorConfigs } from '@/configuration'
 import { ChartModelCartesian } from './cartesian-charts'
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -127,7 +127,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 
 		const colorPairingOptions = getProperty(this.getOptions(), 'color', 'pairing')
 		let pairingOption = getProperty(colorPairingOptions, 'option')
-		const colorPairingCounts = color.pairingOptions
+		const colorPairingCounts = colorConfigs.pairingOptions
 
 		// Use default palette if user choice is not in range
 		pairingOption =

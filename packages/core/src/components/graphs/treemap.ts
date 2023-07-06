@@ -1,4 +1,4 @@
-import { color, hierarchy as d3Hierarchy, hsl, treemap as d3Treemap, select } from 'd3'
+import { color as d3Color, hierarchy as d3Hierarchy, hsl, treemap as d3Treemap, select } from 'd3'
 import { colors } from '@carbon/colors'
 import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
@@ -30,7 +30,7 @@ const textFillColor = function () {
 	const correspondingLeafFill = getComputedStyle(correspondingLeaf.node(), null).getPropertyValue(
 		'fill'
 	)
-	const cl = color(correspondingLeafFill) as any
+	const cl = d3Color(correspondingLeafFill) as any
 
 	let colorShade: any
 	if (cl) {
@@ -256,7 +256,7 @@ export class Treemap extends Component {
 						if (customColor) {
 							fillColor = customColor
 						}
-						return color(fillColor).darker(0.7).toString()
+						return d3Color(fillColor).darker(0.7).toString()
 					})
 
 				// Show tooltip

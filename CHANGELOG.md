@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.5...v1.11.6) (2023-07-06)
+
+### Bug Fixes
+
+- **meter.ts:** meter chart no longer have reduce error on empty data
+  ([#1605](https://github.com/carbon-design-system/carbon-charts/issues/1605))
+  ([fae76d4](https://github.com/carbon-design-system/carbon-charts/commit/fae76d4303ad4a4b8e0a66712c3db7e27bab885f)),
+  closes [#1604](https://github.com/carbon-design-system/carbon-charts/issues/1604)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.4...v1.11.5) (2023-07-06)
+
+### Bug Fixes
+
+- **lerna:** revert prettier to 2.8.8 for now
+  ([#1609](https://github.com/carbon-design-system/carbon-charts/issues/1609))
+  ([0bd1503](https://github.com/carbon-design-system/carbon-charts/commit/0bd1503d7ae0bbec68c3d0e1ad818b8abc6b5c73))
+- **react:** remount issues
+  ([#1606](https://github.com/carbon-design-system/carbon-charts/issues/1606))
+  ([aad4838](https://github.com/carbon-design-system/carbon-charts/commit/aad4838771a398b7e37484c60b4f9fc0060e1a90))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.4](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.3...v1.11.4) (2023-07-06)
+
+### Bug Fixes
+
+- **image download:** fixes 1566
+  ([#1607](https://github.com/carbon-design-system/carbon-charts/issues/1607))
+  ([eee0808](https://github.com/carbon-design-system/carbon-charts/commit/eee080845ea76dda142c748cf7c5c6287592aea7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.3](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.2...v1.11.3) (2023-07-03)
+
+### Bug Fixes
+
+- StackBlitz dependencies & render(animate: boolean) values
+  ([#1601](https://github.com/carbon-design-system/carbon-charts/issues/1601))
+  ([40cb8ec](https://github.com/carbon-design-system/carbon-charts/commit/40cb8ecb810cdacd3a9bd89c64b6f1bde3b3a202))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.2](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.1...v1.11.2) (2023-06-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.11.1](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.0...v1.11.1) (2023-06-28)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

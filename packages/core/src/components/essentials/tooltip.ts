@@ -2,7 +2,7 @@ import { select, pointer } from 'd3'
 import { format } from 'date-fns'
 import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
-import { zoomBar, tooltips } from '@/configuration'
+import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
@@ -196,7 +196,7 @@ export class Tooltip extends Component {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const options = this.getOptions()
 		const isTooltipEnabled = getProperty(options, 'tooltip', 'enabled')
 		if (isTooltipEnabled) {
@@ -230,12 +230,12 @@ export class Tooltip extends Component {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
 			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type') as 'graph_view' | 'slider_view'
-			const zoombarHeight = zoomBar.height[zoombarType]
+			const zoombarHeight = zoomBarConfigs.height[zoombarType]
 
 			// if the mouse position is from event (ruler)
 			// we need add zoom bar height
 			if (isTopZoomBarEnabled) {
-				mouseRelativePos[1] += zoombarHeight + zoomBar.spacerHeight
+				mouseRelativePos[1] += zoombarHeight + zoomBarConfigs.spacerHeight
 
 				// TODO - we need to add toolbar height when toolbar is available
 			}
@@ -267,7 +267,7 @@ export class Tooltip extends Component {
 			)
 		}
 
-		let { horizontalOffset } = tooltips
+		let { horizontalOffset } = tooltipConfigs
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1
 		}

@@ -46,7 +46,7 @@ export class Threshold extends Component {
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg
 			.selectAll('g.axis-thresholds')
-			.data(thresholdData, (thresholdData: any) => thresholdData.axisPosition)
+			.data(thresholdData, (d: any) => d.axisPosition)
 
 		// Remove axis threshold groups that are no longer needed
 		thresholdAxisGroups.exit().attr('opacity', 0).remove()

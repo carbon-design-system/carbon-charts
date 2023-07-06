@@ -33,6 +33,7 @@ export default class BaseChart<
 
 	componentWillUnmount() {
 		this.chart?.destroy()
+		this.chart = undefined // reset instance property for next time component is mounted
 	}
 
 	componentDidMount() {

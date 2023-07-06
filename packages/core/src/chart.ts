@@ -57,8 +57,9 @@ export class Chart {
 		})
 
 		// Call update() when model has been updated
-		this.services.events.addEventListener(ChartEvents.Model.UPDATE, () => {
-			this.update()
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e: CustomEvent) => {
+			const animate = !!getProperty(e, 'detail', 'animate');
+			this.update(animate)
 		})
 
 		// Set model data & options
@@ -66,7 +67,7 @@ export class Chart {
 
 		// Set chart resize event listener
 		this.services.events.addEventListener(ChartEvents.Chart.RESIZE, () => {
-			this.update()
+			this.update(false)
 		})
 
 		this.components = this.getComponents()
@@ -80,7 +81,7 @@ export class Chart {
 		return []
 	}
 
-	update() {
+	update(animate = true) { // Called 4 times whenever a chart is displayed
 		if (!this.components) {
 			return
 		}
@@ -92,7 +93,7 @@ export class Chart {
 		})
 
 		// Render all components
-		this.components.forEach((component) => component.render(true))
+		this.components.forEach((component) => component.render(animate))
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
@@ -179,7 +180,7 @@ export class Chart {
 
 		const isLegendEnabled =
 			getProperty(configs, 'excludeLegend') !== true && options.legend.enabled !== false
-		// TODORF - REUSE BETWEEN AXISCHART & CHART
+		// TODO: REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN
 		if (isLegendEnabled) {

@@ -1,6 +1,6 @@
 import { extent } from 'd3'
 import { getProperty } from '@/tools'
-import { zoomBar } from '@/configuration'
+import { zoomBar as zoomBarConfigs } from '@/configuration'
 import { AxisPositions, Events, ScaleTypes } from '@/interfaces/enums'
 import { Service } from './service'
 
@@ -115,7 +115,7 @@ export class Zoom extends Service {
 	zoomIn(zoomRatio = this.getZoomRatio()) {
 		// get current zoomDomain
 		const currentZoomDomain = this.model.get('zoomDomain')
-		const handleWidth = zoomBar.handleWidth
+		const handleWidth = zoomBarConfigs.handleWidth
 		const xScale = this.services.cartesianScales?.getMainXScale().copy()
 		xScale.domain(this.getDefaultZoomBarDomain()) // reset domain to default full domain
 

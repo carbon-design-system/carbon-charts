@@ -1,7 +1,6 @@
 import { select } from 'd3'
 import { getProperty, truncateLabel } from '@/tools'
-import { legend } from '@/configuration'
-import * as Configuration from '@/configuration'
+import { legend as legendConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import {
 	Alignments,
@@ -20,7 +19,7 @@ export class Legend extends Component {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-	render(animate = true) {
+	render(animate = false) {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
 		const alignment = getProperty(legendOptions, 'alignment')
@@ -30,7 +29,7 @@ export class Legend extends Component {
 		let dataGroups = this.model.getDataGroups()
 
 		// Check if there are disabled legend items
-		const { DISABLED } = legend.items.status
+		const { DISABLED } = legendConfigs.items.status
 		const hasDeactivatedItems = dataGroups.some((dataGroup: any) => dataGroup.status === DISABLED)
 		const userProvidedOrder = getProperty(legendOptions, 'order')
 
@@ -54,13 +53,13 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems.enter().append('div').attr('class', 'legend-item')
 
 		addedLegendItems.merge(svg.selectAll('div.legend-item')).classed('active', function (d: any) {
-			return d.status === legend.items.status.ACTIVE
+			return d.status === legendConfigs.items.status.ACTIVE
 		})
 
 		const legendClickable = getProperty(this.getOptions(), 'legend', 'clickable')
 		svg.classed('clickable', legendClickable && dataGroups.length > 1)
 
-		const checkboxRadius = legend.checkbox.radius
+		const checkboxRadius = legendConfigs.checkbox.radius
 
 		const addedCheckboxes = addedLegendItems.append('div').classed('checkbox', true)
 
@@ -71,7 +70,7 @@ export class Legend extends Component {
 			.attr('aria-labelledby', (_: any, i: number) =>
 				this.services.domUtils.generateElementIDString(`legend-datagroup-${i}-title`)
 			)
-			.attr('aria-checked', ({ status }) => status === legend.items.status.ACTIVE)
+			.attr('aria-checked', ({ status }) => status === legendConfigs.items.status.ACTIVE)
 			.attr('width', checkboxRadius * 2)
 			.attr('height', checkboxRadius * 2)
 			.attr('class', (d: any) =>
@@ -82,12 +81,12 @@ export class Legend extends Component {
 				})
 			)
 			.style('background', (d: any) =>
-				d.status === legend.items.status.ACTIVE
+				d.status === legendConfigs.items.status.ACTIVE
 					? this.model.getFillColor(d.name) || this.model.getStrokeColor(d.name)
 					: null
 			)
 			.classed('active', function (d: any) {
-				return d.status === legend.items.status.ACTIVE
+				return d.status === legendConfigs.items.status.ACTIVE
 			})
 
 		addedCheckboxes
@@ -182,7 +181,7 @@ export class Legend extends Component {
 	}
 
 	addAdditionalItem(additionalItem: any, itemConfig: any, indexOfItem: any) {
-		const { width, height } = legend.area
+		const { width, height } = legendConfigs.area
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
 			// Circular icon
@@ -192,7 +191,7 @@ export class Legend extends Component {
 		}
 
 		if (itemConfig.type === LegendItemType.RADIUS) {
-			const { iconData, fill, stroke } = legend.radius
+			const { iconData, fill, stroke } = legendConfigs.radius
 
 			const circleEnter = additionalItem
 				.attr('fill', 'none')
@@ -211,7 +210,7 @@ export class Legend extends Component {
 				.style('fill', itemConfig.fill ? itemConfig.fill : fill)
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 		} else if (itemConfig.type === LegendItemType.LINE) {
-			const lineConfig = legend.line
+			const lineConfig = legendConfigs.line
 
 			if (additionalItem.select('line.line').empty()) {
 				additionalItem
@@ -235,11 +234,14 @@ export class Legend extends Component {
 					.attr('aria-label', 'area')
 					.attr('width', width)
 					.attr('height', height)
-					.style('fill', indexOfItem > 3 && !itemConfig.fill ? legend.area.fill : itemConfig.fill)
+					.style(
+						'fill',
+						indexOfItem > 3 && !itemConfig.fill ? legendConfigs.area.fill : itemConfig.fill
+					)
 					.style('stroke', itemConfig.stroke)
 			}
 		} else if (itemConfig.type === LegendItemType.SIZE) {
-			const { iconData, fill, stroke } = legend.size
+			const { iconData, fill, stroke } = legendConfigs.size
 
 			const sizeEnter = additionalItem
 				.attr('fill', 'none')
@@ -259,7 +261,7 @@ export class Legend extends Component {
 				.style('stroke', itemConfig.stroke ? itemConfig.stroke : stroke)
 				.style('stroke-width', 1)
 		} else if (itemConfig.type === LegendItemType.QUARTILE) {
-			const { iconData } = legend.quartile
+			const { iconData } = legendConfigs.quartile
 
 			const quartileEnter = additionalItem
 				.selectAll('rect')
@@ -276,7 +278,7 @@ export class Legend extends Component {
 				.attr('width', (d: any) => d.width)
 				.attr('height', (d: any) => d.height)
 		} else if (itemConfig.type === LegendItemType.ZOOM) {
-			const { iconData, color } = getProperty(Configuration, 'legend', 'zoom')
+			const { iconData, color } = getProperty(legendConfigs, 'zoom')
 
 			const zoomEnter = additionalItem
 				.attr('role', Roles.IMG)
@@ -324,7 +326,8 @@ export class Legend extends Component {
 
 		// Add an ID for the checkbox to use through `aria-labelledby`
 		addedLegendItemsText.attr('id', function () {
-			const elementToReference: any = (this as any).parentNode.querySelector('div.checkbox') || (this as any).parentNode
+			const elementToReference: any =
+				(this as any).parentNode.querySelector('div.checkbox') || (this as any).parentNode
 
 			return elementToReference.getAttribute('aria-labelledby')
 		})
