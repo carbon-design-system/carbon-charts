@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.5...v1.11.6) (2023-07-06)
+
+### Bug Fixes
+
+- **meter.ts:** meter chart no longer have reduce error on empty data
+  ([#1605](https://github.com/carbon-design-system/carbon-charts/issues/1605))
+  ([fae76d4](https://github.com/carbon-design-system/carbon-charts/commit/fae76d4303ad4a4b8e0a66712c3db7e27bab885f)),
+  closes [#1604](https://github.com/carbon-design-system/carbon-charts/issues/1604)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.11.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.4...v1.11.5) (2023-07-06)
 
 ### Bug Fixes
