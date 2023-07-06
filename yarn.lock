@@ -2682,7 +2682,7 @@ __metadata:
     husky: ^8.0.3
     lerna: ^7.1.1
     pinst: ^3.0.0
-    prettier: ^3.0.0
+    prettier: ^2.8.8
     prettier-config-carbon: ^0.11.0
   languageName: unknown
   linkType: soft
@@ -2737,7 +2737,7 @@ __metadata:
     storybook: ^7.0.26
     style-loader: ^3.3.3
     typescript: ^5.1.6
-    vite: ^4.4.0
+    vite: ^4.4.1
     vite-plugin-dts: ^3.1.0
     webpack: 5.88.1
   peerDependencies:
@@ -2763,7 +2763,7 @@ __metadata:
     "@storybook/testing-library": ^0.2.0
     "@storybook/theming": ^7.0.26
     "@sveltejs/adapter-auto": ^2.1.0
-    "@sveltejs/kit": ^1.22.0
+    "@sveltejs/kit": ^1.22.1
     "@sveltejs/package": ^2.1.0
     "@typescript-eslint/eslint-plugin": ^5.61.0
     "@typescript-eslint/parser": ^5.61.0
@@ -2780,11 +2780,11 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     storybook: ^7.0.26
-    svelte: ^4.0.4
+    svelte: ^4.0.5
     svelte-check: ^3.4.5
     tslib: ^2.6.0
     typescript: ^5.1.6
-    vite: ^4.4.0
+    vite: ^4.4.1
   peerDependencies:
     svelte: ^3.31.0 || ^4.0.0
   languageName: unknown
@@ -2822,7 +2822,7 @@ __metadata:
     react-dom: ^18.2.0
     storybook: ^7.0.26
     typescript: ^5.1.6
-    vite: ^4.4.0
+    vite: ^4.4.1
     vite-plugin-dts: ^3.1.0
     vue: ^3.3.4
     vue-tsc: ^1.8.4
@@ -2883,7 +2883,7 @@ __metadata:
     tslib: ^2.6.0
     typedoc: ^0.24.8
     typescript: ^5.1.6
-    vite: ^4.4.0
+    vite: ^4.4.1
     vite-plugin-dts: ^2.3.0
     vitest: ^0.33.0
   peerDependencies:
@@ -5952,9 +5952,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.22.0":
-  version: 1.22.0
-  resolution: "@sveltejs/kit@npm:1.22.0"
+"@sveltejs/kit@npm:^1.22.1":
+  version: 1.22.1
+  resolution: "@sveltejs/kit@npm:1.22.1"
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^2.4.1
     "@types/cookie": ^0.5.1
@@ -5973,7 +5973,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: a83456e21ad606dbe23a6deb9b138768f49039639928fbf69a18b424f0697b08b3719398fd98429778528984bc95315ad9eface2af14d4f8c25595f7607eb83d
+  checksum: 32f831bd8a24cd3f6f6243d0a9ee9f0406dd2e2f7d45f8027e9c3eccf6556bb205b8eab665c3a8260a3d35077b31d30e09828f6c644cf6b072d3c4231d71d3f5
   languageName: node
   linkType: hard
 
@@ -17578,21 +17578,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.5.1, prettier@npm:^2.8.0":
+"prettier@npm:^2.5.1, prettier@npm:^2.8.0, prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
     prettier: bin-prettier.js
   checksum: b49e409431bf129dd89238d64299ba80717b57ff5a6d1c1a8b1a28b590d998a34e083fa13573bc732bb8d2305becb4c9a4407f8486c81fa7d55100eb08263cf8
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "prettier@npm:3.0.0"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 6a832876a1552dc58330d2467874e5a0b46b9ccbfc5d3531eb69d15684743e7f83dc9fbd202db6270446deba9c82b79d24383d09924c462b457136a759425e33
   languageName: node
   linkType: hard
 
@@ -19948,9 +19939,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "svelte@npm:4.0.4"
+"svelte@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "svelte@npm:4.0.5"
   dependencies:
     "@ampproject/remapping": ^2.2.1
     "@jridgewell/sourcemap-codec": ^1.4.15
@@ -19965,7 +19956,7 @@ __metadata:
     locate-character: ^3.0.0
     magic-string: ^0.30.0
     periscopic: ^3.1.0
-  checksum: 22ce120b1d588db0245f22a3d4bb9d386aeb0d993c5c63b85f80d8688d3376e2080558aaa4ead0a8225eddc74b75e2a42dbd12281548cd86e0069cc49b0a0ada
+  checksum: df3ab2baeabc50428ab0e82655bcaf801207f8c25b06c6e9907d678d49b7eec6fe17280e931b257f3a7233355a06669fc62fb77cc0c27de5387198c3b11608f3
   languageName: node
   linkType: hard
 
@@ -21168,9 +21159,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "vite@npm:4.4.0"
+"vite@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "vite@npm:4.4.1"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -21204,7 +21195,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: a0565345836d2bd5471aa784a3769c19c2c7b5f1df05f3b30948ccba691c0a37300ff40bcbb288a7a189aba13063b04b91abbb49dffe9ec45472e95bf4a9ab17
+  checksum: c91d5228cd0b2410e95ea4b17279640a414f1a2d5290a01baec77351af2dda7d5901c240ed6a62de2b465567e328168d386da2aaa262d3a138fde827b289592d
   languageName: node
   linkType: hard
 
