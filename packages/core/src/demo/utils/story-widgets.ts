@@ -1,7 +1,7 @@
 const generateThemePickerHTML = (container: HTMLDivElement) => {
-	const div = document.createElement('div')
-	div.id = 'theme-picker'
-	div.innerHTML = `
+  const div = document.createElement('div')
+  div.id = 'theme-picker'
+  div.innerHTML = `
 		<fieldset class="cds--fieldset marginTop-45">
 			<legend class="cds--label">Active theme</legend>
 
@@ -42,32 +42,32 @@ const generateThemePickerHTML = (container: HTMLDivElement) => {
 			</div>
 		</fieldset>`
 
-	const currentTheme = document.documentElement.getAttribute('data-carbon-theme')
-	if (currentTheme) {
-		div.querySelector(`input#theme__${currentTheme}`)?.setAttribute('checked', 'true')
-	} else {
-		div.querySelector(`input#theme__white`)?.setAttribute('checked', 'true')
-	}
+  const currentTheme = document.documentElement.getAttribute('data-carbon-theme')
+  if (currentTheme) {
+    div.querySelector(`input#theme__${currentTheme}`)?.setAttribute('checked', 'true')
+  } else {
+    div.querySelector(`input#theme__white`)?.setAttribute('checked', 'true')
+  }
 
-	container.querySelector('#charting-controls')?.appendChild(div)
+  container.querySelector('#charting-controls')?.appendChild(div)
 }
 
 const generateProjectionPickerHTML = (container: HTMLDivElement, chart: any) => {
-	const projections = [
-		'geoEqualEarth',
-		'geoAlbers',
-		'geoConicEqualArea',
-		'geoConicEquidistant',
-		'geoEquirectangular',
-		'geoMercator',
-		'geoNaturalEarth1'
-	]
+  const projections = [
+    'geoEqualEarth',
+    'geoAlbers',
+    'geoConicEqualArea',
+    'geoConicEquidistant',
+    'geoEquirectangular',
+    'geoMercator',
+    'geoNaturalEarth1'
+  ]
 
-	const chartOptions = chart.model.getOptions()
+  const chartOptions = chart.model.getOptions()
 
-	const div = document.createElement('div')
-	div.id = 'projection-picker'
-	div.innerHTML = `
+  const div = document.createElement('div')
+  div.id = 'projection-picker'
+  div.innerHTML = `
 <div class="cds--form-item">
 	<div class="cds--select">
 		<label for="projection-select" class="cds--label">Projections</label>
@@ -77,10 +77,10 @@ const generateProjectionPickerHTML = (container: HTMLDivElement, chart: any) => 
 					Choose an option
 				</option>
 				${projections
-					.map((projection) => {
-						return `<option class="cds--select-option" value="${projection}">${projection}</option>`
-					})
-					.join('')}
+          .map((projection) => {
+            return `<option class="cds--select-option" value="${projection}">${projection}</option>`
+          })
+          .join('')}
 
 			</select>
 			<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
@@ -88,38 +88,38 @@ const generateProjectionPickerHTML = (container: HTMLDivElement, chart: any) => 
 	</div>
 </div>`
 
-	div.querySelector('#projection-select').addEventListener('change', (e: any) => {
-		const { value } = e.target
-		chartOptions.thematic.projection = value
-		chart.model.setOptions(chartOptions)
-	})
+  div.querySelector('#projection-select').addEventListener('change', (e: any) => {
+    const { value } = e.target
+    chartOptions.thematic.projection = value
+    chart.model.setOptions(chartOptions)
+  })
 
-	container.querySelector('#charting-controls').appendChild(div)
+  container.querySelector('#charting-controls').appendChild(div)
 }
 
 const generateColorPalettePickerHTML = (
-	container: HTMLDivElement,
-	chart: any,
-	configs: any = { colorPairingOptions: null }
+  container: HTMLDivElement,
+  chart: any,
+  configs: any = { colorPairingOptions: null }
 ) => {
-	const { colorPairingOptions } = configs
+  const { colorPairingOptions } = configs
 
-	const chartOptions = chart.model.getOptions()
-	const { numberOfVariants: variants, option } = chartOptions.color.pairing
+  const chartOptions = chart.model.getOptions()
+  const { numberOfVariants: variants, option } = chartOptions.color.pairing
 
-	const numberOfChartDataGroups = chart.model.getAllDataGroupsNames().length
-	const numberOfVariants = variants || numberOfChartDataGroups
+  const numberOfChartDataGroups = chart.model.getAllDataGroupsNames().length
+  const numberOfVariants = variants || numberOfChartDataGroups
 
-	let onlyCategoricalPaletteIsApplicable = false
-	if (numberOfChartDataGroups > 5) {
-		onlyCategoricalPaletteIsApplicable = true
-	}
+  let onlyCategoricalPaletteIsApplicable = false
+  if (numberOfChartDataGroups > 5) {
+    onlyCategoricalPaletteIsApplicable = true
+  }
 
-	const selectedColorPalette = `${numberOfVariants}-${option}`
+  const selectedColorPalette = `${numberOfVariants}-${option}`
 
-	const div = document.createElement('div')
-	div.id = 'color-palette-picker'
-	div.innerHTML = `
+  const div = document.createElement('div')
+  div.id = 'color-palette-picker'
+  div.innerHTML = `
 		<div class="cds--form-item">
 			<div class="cds--select">
 				<label for="color-palette-select" class="cds--label">Active color palette</label>
@@ -129,44 +129,44 @@ const generateColorPalettePickerHTML = (
 						Choose an option
 						</option>
 					${
-						colorPairingOptions
-							? Object.keys(colorPairingOptions)
-									.map((colorGroup) => {
-										const optionsCount: number = colorPairingOptions
-											? colorPairingOptions[colorGroup]
-											: 0
-										let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
+            colorPairingOptions
+              ? Object.keys(colorPairingOptions)
+                  .map((colorGroup) => {
+                    const optionsCount: number = colorPairingOptions
+                      ? colorPairingOptions[colorGroup]
+                      : 0
+                    let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
 
-										const numberOfVariants = parseInt(colorGroup)
+                    const numberOfVariants = parseInt(colorGroup)
 
-										if (numberOfVariants !== 14) {
-											for (let i = 1; i <= optionsCount; i++) {
-												optionsHTML += `
+                    if (numberOfVariants !== 14) {
+                      for (let i = 1; i <= optionsCount; i++) {
+                        optionsHTML += `
 								<option class="cds--select-option" ${
-									onlyCategoricalPaletteIsApplicable || numberOfVariants < numberOfChartDataGroups
-										? 'disabled'
-										: ''
-								} value="${colorGroup}-option-${i}" ${
-													selectedColorPalette === `${numberOfVariants}-${i}` ? 'selected' : ''
-												}>
+                  onlyCategoricalPaletteIsApplicable || numberOfVariants < numberOfChartDataGroups
+                    ? 'disabled'
+                    : ''
+                } value="${colorGroup}-option-${i}" ${
+                          selectedColorPalette === `${numberOfVariants}-${i}` ? 'selected' : ''
+                        }>
 									${numberOfVariants}-color groups, option ${i}
 								</option>`
-											}
-										} else {
-											optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
-												selectedColorPalette === `14-1` || onlyCategoricalPaletteIsApplicable
-													? 'selected'
-													: ''
-											}>
+                      }
+                    } else {
+                      optionsHTML += `<option class="cds--select-option" value="14-color-option-1" ${
+                        selectedColorPalette === `14-1` || onlyCategoricalPaletteIsApplicable
+                          ? 'selected'
+                          : ''
+                      }>
 								Categorical palette
 							</option>`
-										}
+                    }
 
-										return optionsHTML
-									})
-									.join('')
-							: ''
-					}
+                    return optionsHTML
+                  })
+                  .join('')
+              : ''
+          }
 						</select>
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="cds--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
 					</div>
@@ -174,117 +174,122 @@ const generateColorPalettePickerHTML = (
 			</div>
 		</div>`
 
-	div?.querySelector('#color-palette-select')?.addEventListener('change', (e: any) => {
-		const { value } = e.target
-		const [numberOfVariants, pairingOption] = value.split('-color-option-')
+  div?.querySelector('#color-palette-select')?.addEventListener('change', (e: any) => {
+    const { value } = e.target
+    const [numberOfVariants, pairingOption] = value.split('-color-option-')
 
-		chartOptions.color.pairing.numberOfVariants = numberOfVariants
-		chartOptions.color.pairing.option = pairingOption
-		chart.model.setOptions(chartOptions)
-	})
+    chartOptions.color.pairing.numberOfVariants = numberOfVariants
+    chartOptions.color.pairing.option = pairingOption
+    chart.model.setOptions(chartOptions)
+  })
 
-	container?.querySelector('#charting-controls')?.appendChild(div)
+  container?.querySelector('#charting-controls')?.appendChild(div)
 }
 
 export const addControls = (
-	container: HTMLDivElement,
-	demoGroup: any,
-	chart: any,
-	configs: { colorPairingOptions: any } = { colorPairingOptions: null }
+  container: HTMLDivElement,
+  demoGroup: any,
+  chart: any,
+  configs: { colorPairingOptions: any } = { colorPairingOptions: null }
 ) => {
-	generateThemePickerHTML(container)
+  // Clear out controls div
+  if (container.querySelector('#charting-controls')) {
+    container.querySelector('#charting-controls').innerHTML = ''
+  }
 
-	if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
-		generateColorPalettePickerHTML(container, chart, configs)
-	}
+  generateThemePickerHTML(container)
 
-	if (demoGroup?.configs?.includeProjectionControl) {
-		generateProjectionPickerHTML(container, chart)
-	}
+  if (demoGroup?.configs?.excludeColorPaletteControl !== true) {
+    generateColorPalettePickerHTML(container, chart, configs)
+  }
 
-	addRadioButtonEventListeners(container, chart)
+  if (demoGroup?.configs?.includeProjectionControl) {
+    generateProjectionPickerHTML(container, chart)
+  }
+
+  addRadioButtonEventListeners(container, chart)
 }
 
 export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: any) => {
-	// Add event listeners for radio buttons
-	const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
+  // Add event listeners for radio buttons
+  const radioButtons = container.querySelectorAll('div#theme-picker input.cds--radio-button')
 
-	const currentTheme = document.documentElement.getAttribute('data-carbon-theme') // || 'g100'
-	if (currentTheme) {
-		chart.services.domUtils.getHolder().setAttribute('data-carbon-theme', currentTheme)
-	}
+  const currentTheme = document.documentElement.getAttribute('data-carbon-theme') // || 'g100'
+  if (currentTheme) {
+    chart.services.domUtils.getHolder().setAttribute('data-carbon-theme', currentTheme)
+  }
 
-	radioButtons.forEach((radioButton) => {
-		radioButton.addEventListener('click', (e: any) => {
-			const theme = e.target.value
+  radioButtons.forEach((radioButton) => {
+    radioButton.addEventListener('click', (e: any) => {
+      const theme = e.target.value
 
-			document.documentElement.setAttribute('data-carbon-theme', theme)
-			// Set selected theme to options
-			chart.model.setOptions({ ...chart.model.getOptions(), theme })
-			// TODO: Would be good to set the demo.data.theme so what appears in the Controls area aligns
-		})
-	})
+      document.documentElement.setAttribute('data-carbon-theme', theme)
+      // Set selected theme to options
+      chart.model.setOptions({ ...chart.model.getOptions(), theme })
+      // TODO: Would be good to set the demo.data.theme so what appears in the Controls area aligns
+    })
+  })
 }
 
 export const addOtherVersions = (
-	container: HTMLElement,
-	demoGroup: any,
-	demo: any,
-	configs = { currentVersion: 'vanilla' }
+  container: HTMLElement,
+  demoGroup: any,
+  demo: any,
+  configs = { currentVersion: 'vanilla' }
 ) => {
-	const { currentVersion } = configs
+  const { currentVersion } = configs
 
-	const demoGroupClassification = (demoGroup.type || '').replace('-chart', '')
+  const demoGroupClassification = (demoGroup.type || '').replace('-chart', '')
 
-	const div = document.createElement('div')
-	div.setAttribute('class', 'cds--row resource-card-group')
+  const div = document.createElement('div')
+  div.setAttribute('class', 'cds--row resource-card-group')
 
-	let htmlContent = ''
-	const otherVersions = [
-		...(currentVersion !== 'vanilla'
-			? [
-					{
-						name: 'Vanilla JavaScript',
-						link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-					}
-				]
-			: []),
-		...(currentVersion !== 'react'
-			? [
-					{
-						name: 'React',
-						link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-					}
-				]
-			: []),
-		...(currentVersion !== 'angular'
-			? [
-					{
-						name: 'Angular',
-						link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-					}
-				]
-			: []),
-		...(currentVersion !== 'vue'
-			? [
-					{
-						name: 'Vue',
-						link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-					}
-				]
-			: []),
-		...(currentVersion !== 'svelte'
-			? [
-					{
-						name: 'Svelte',
-						link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-					}
-				]
-			: [])
-	]
+  let htmlContent = ''
+  const otherVersions = [
+    ...(currentVersion !== 'vanilla'
+      ? [
+          {
+            name: 'Vanilla JavaScript',
+            link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
+          }
+        ]
+      : []),
+    ...(currentVersion !== 'react'
+      ? [
+          {
+            name: 'React',
+            link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
+          }
+        ]
+      : []),
+    ...(currentVersion !== 'angular'
+      ? [
+          {
+            name: 'Angular',
+            link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
+          }
+        ]
+      : []),
+    ...(currentVersion !== 'vue'
+      ? [
+          {
+            name: 'Vue',
+            link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
+          }
+        ]
+      : []),
+    ...(currentVersion !== 'svelte'
+      ? [
+          {
+            name: 'Svelte',
+            link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
+          }
+        ]
+      : [])
+  ]
 
-	otherVersions.forEach((otherVersion) => {
-		htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
+  otherVersions.forEach((otherVersion) => {
+    htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
 		<div class="cds--resource-card">
 		  <div class="cds--aspect-ratio cds--aspect-ratio--2x1">
 			<div class="cds--aspect-ratio--object">
@@ -302,8 +307,8 @@ export const addOtherVersions = (
 		  </div>
 		</div>
 	  </div>`
-	})
+  })
 
-	div.innerHTML = htmlContent
-	container?.querySelector('#other-versions')?.appendChild(div)
+  div.innerHTML = htmlContent
+  container?.querySelector('#other-versions')?.appendChild(div)
 }
