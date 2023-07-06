@@ -1,5 +1,22 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.4...v1.11.5) (2023-07-06)
+
+
+### Bug Fixes
+
+* **lerna:** revert prettier to 2.8.8 for now ([#1609](https://github.com/carbon-design-system/carbon-charts/issues/1609)) ([0bd1503](https://github.com/carbon-design-system/carbon-charts/commit/0bd1503d7ae0bbec68c3d0e1ad818b8abc6b5c73))
+* **react:** remount issues ([#1606](https://github.com/carbon-design-system/carbon-charts/issues/1606)) ([aad4838](https://github.com/carbon-design-system/carbon-charts/commit/aad4838771a398b7e37484c60b4f9fc0060e1a90))
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
