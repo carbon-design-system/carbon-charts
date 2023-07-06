@@ -109,7 +109,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.22.6",
+    "@babel/core": "^7.22.8",
     "@carbon/import-once": "^10.7.0",
     "@carbon/layout": "^11.15.0",
     "@carbon/styles": "^1.32.0",
@@ -138,7 +138,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.12",
     "jsdom": "^22.1.0",
-    "prettier": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
@@ -146,11 +145,10 @@
     "storybook": "^7.0.26",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9",
+    "vite": "^4.4.0",
     "vite-plugin-dts": "^2.3.0",
-    "vitest": "^0.32.4"
+    "vitest": "^0.33.0"
   },
-  "prettier": "../../prettier.config.cjs",
   "publishConfig": {
     "access": "public"
   },
