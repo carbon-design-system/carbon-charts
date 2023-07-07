@@ -24,6 +24,40 @@ import TreeChart from './TreeChart.svelte'
 import TreemapChart from './TreemapChart.svelte'
 import WordCloudChart from './WordCloudChart.svelte'
 
+// Republish essential types from core so it's not a required dependency
+export type {
+	ChartTabularData,
+	AlluvialChartOptions,
+	AreaChartOptions,
+	BarChartOptions,
+	BoxplotChartOptions,
+	BubbleChartOptions,
+	BulletChartOptions,
+	ChoroplethChartOptions,
+	CirclePackChartOptions,
+	ComboChartOptions,
+	DonutChartOptions,
+	GaugeChartOptions,
+	HeatmapChartOptions,
+	HistogramChartOptions,
+	LineChartOptions,
+	LollipopChartOptions,
+	MeterChartOptions,
+	PieChartOptions,
+	RadarChartOptions,
+	ScatterChartOptions,
+	StackedAreaChartOptions,
+	TreeChartOptions,
+	TreemapChartOptions,
+	WorldCloudChartOptions
+} from '@carbon/charts'
+
+// Commonly-used enums
+export {
+	Alignments,
+	ScaleTypes 
+} from '@carbon/charts'
+
 export {
 	AlluvialChart,
 	AreaChart,
