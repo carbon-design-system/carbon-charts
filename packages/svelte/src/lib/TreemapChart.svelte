@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: TreemapChartCore
 	export let options: TreemapChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: TreemapChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

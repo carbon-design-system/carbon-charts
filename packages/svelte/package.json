@@ -38,6 +38,7 @@
     "CHANGELOG.md"
   ],
   "peerDependencies": {
+    "@carbon/charts": "^1.11.8",
     "svelte": "^3.31.0 || ^4.0.0"
   },
   "devDependencies": {
@@ -56,8 +57,8 @@
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.22.1",
     "@sveltejs/package": "^2.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "concurrently": "^8.2.0",
     "d3": "^7.8.5",
     "d3-cloud": "^1.2.5",
