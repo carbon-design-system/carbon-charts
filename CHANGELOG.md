@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.7...v1.11.8) (2023-07-07)
+
+### Bug Fixes
+
+- **svelte:** make ref and chart props optional
+  ([#1612](https://github.com/carbon-design-system/carbon-charts/issues/1612))
+  ([624aa66](https://github.com/carbon-design-system/carbon-charts/commit/624aa669ca290962cf420117c56c018f40ca3edc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.6...v1.11.7) (2023-07-06)
+
+### Bug Fixes
+
+- **react:** remounting errors
+  ([#1611](https://github.com/carbon-design-system/carbon-charts/issues/1611))
+  ([70c74a0](https://github.com/carbon-design-system/carbon-charts/commit/70c74a0d3bd60873c844df15f4f033b8fc20496c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.11.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.5...v1.11.6) (2023-07-06)
 
 ### Bug Fixes

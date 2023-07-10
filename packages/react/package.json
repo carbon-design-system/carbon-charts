@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-react",
-  "version": "1.11.6",
+  "version": "1.11.8",
   "description": "Carbon Charts component library for React",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@carbon/charts": "workspace:*",
-    "@carbon/icons-react": "^11.21.0",
+    "@carbon/icons-react": "^11.22.0",
     "@carbon/telemetry": "~0.1.0"
   },
   "peerDependencies": {
@@ -93,8 +93,8 @@
     "storybook": "^7.0.26",
     "style-loader": "^3.3.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.1",
-    "vite-plugin-dts": "^3.1.0",
+    "vite": "^4.4.2",
+    "vite-plugin-dts": "^3.1.1",
     "webpack": "5.88.1"
   },
   "publishConfig": {
