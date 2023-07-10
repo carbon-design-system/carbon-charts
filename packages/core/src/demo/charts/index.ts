@@ -10,6 +10,7 @@ import * as choroplethDemos from './choropleth'
 import * as comboDemos from './combo'
 import * as donutDemos from './donut'
 import * as gaugeDemos from './gauge'
+import * as gaugeSegmentedDemos from './gauge-segmented'
 import * as histogramDemos from './histogram'
 import * as lineDemos from './line'
 import * as lollipopDemos from './lollipop'
@@ -47,6 +48,7 @@ export {
 	comboDemos,
 	donutDemos,
 	gaugeDemos,
+	gaugeSegmentedDemos,
 	histogramDemos,
 	lineDemos,
 	lollipopDemos,
@@ -853,6 +855,27 @@ const simpleChartDemos = [
 				options: gaugeDemos.gaugeOptionsCircularNoDelta,
 				data: gaugeDemos.gaugeDataNoDelta,
 				chartType: chartTypes.GaugeChart
+			}
+		]
+	},
+	{
+		title: 'Gauge (Segmented)',
+		demos: [
+			{
+				options: gaugeDemos.gaugeOptionsSemi,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.EXPERIMENTAL_GaugeChart,
+				mainDemo: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircular,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.EXPERIMENTAL_GaugeChart
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircularNoDelta,
+				data: gaugeDemos.gaugeDataNoDelta,
+				chartType: chartTypes.EXPERIMENTAL_GaugeChart
 			}
 		]
 	},

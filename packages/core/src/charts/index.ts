@@ -8,6 +8,7 @@ import { CirclePackChart } from './circle-pack'
 import { ComboChart } from './combo'
 import { DonutChart } from './donut'
 import { GaugeChart } from './gauge'
+import { EXPERIMENTAL_SegmentedGaugeChart } from './gauge-segmented'
 import { GroupedBarChart } from './bar-grouped'
 import { HeatmapChart } from './heatmap'
 import { HistogramChart } from './histogram'
@@ -35,6 +36,7 @@ export {
 	ComboChart,
 	DonutChart,
 	GaugeChart,
+	EXPERIMENTAL_SegmentedGaugeChart,
 	GroupedBarChart,
 	HeatmapChart,
 	HistogramChart,

@@ -10,6 +10,7 @@ export {
 	comboDemos,
 	donutDemos,
 	gaugeDemos,
+	gaugeSegmentedDemos,
 	histogramDemos,
 	lineDemos,
 	lollipopDemos,
