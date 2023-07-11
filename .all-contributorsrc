@@ -194,6 +194,17 @@
 			"contributions": [
 				"code"
 			]
+		},
+		{
+			"login": "nstuyvesant",
+			"name": "Nate Stuyvesant",
+			"avatar_url": "https://avatars.githubusercontent.com/u/5770938?v=4",
+			"profile": "https://github.com/nstuyvesant",
+			"contributions": [
+				"code",
+				"doc",
+				"example"
+			]
 		}
 	],
 	"commitConvention": "none"
