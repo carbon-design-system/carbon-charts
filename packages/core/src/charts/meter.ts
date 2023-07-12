@@ -1,6 +1,7 @@
+import { cloneDeep } from "lodash-es";
 import { Chart } from '@/chart'
 import { options as configOptions } from '@/configuration'
-import { clone, getProperty, merge } from '@/tools'
+import { getProperty, merge } from '@/tools'
 import { MeterChartModel } from '@/model/meter'
 import type { ChartConfig } from '@/interfaces/model'
 import type { MeterChartOptions } from '@/interfaces/charts'
@@ -23,8 +24,8 @@ export class MeterChart extends Chart {
 
 		// use prop meter options or regular meter options
 		const options = chartConfigs.options.meter?.proportional
-			? merge(clone(configOptions.proportionalMeterChart), chartConfigs.options)
-			: merge(clone(configOptions.meterChart), chartConfigs.options)
+			? merge(cloneDeep(configOptions.proportionalMeterChart), chartConfigs.options)
+			: merge(cloneDeep(configOptions.meterChart), chartConfigs.options)
 
 		// Merge the default options for this chart
 		// With the user provided options

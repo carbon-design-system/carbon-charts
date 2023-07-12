@@ -1,5 +1,6 @@
+import { cloneDeep } from "lodash-es";
 import { area, brushX, extent, line } from 'd3'
-import { clone, getProperty, isEmpty, merge } from '@/tools'
+import { getProperty, isEmpty, merge } from '@/tools'
 import { zoomBar as zoomBarConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import type { ChartModelCartesian } from '@/model/cartesian-charts'
@@ -500,7 +501,7 @@ export class ZoomBar extends Component {
 		if (!data || data.length < 2) {
 			return
 		}
-		const zoomBarData = clone(data)
+		const zoomBarData = cloneDeep(data)
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier()
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()

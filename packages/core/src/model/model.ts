@@ -1,6 +1,6 @@
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
+import { cloneDeep } from "lodash-es";
 import {
-	clone,
 	fromPairs,
 	getProperty,
 	groupBy,
@@ -133,7 +133,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData: any) {
-		const sanitizedData = this.sanitize(clone(newData))
+		const sanitizedData = this.sanitize(cloneDeep(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({
@@ -545,7 +545,7 @@ export class ChartModel {
 	 * Should the data point be filled?
 	 * @param group
 	 * @param key
-	 * @param value
+	 * @param data
 	 * @param defaultFilled the default for this chart
 	 */
 	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {

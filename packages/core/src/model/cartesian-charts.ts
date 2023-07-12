@@ -1,5 +1,6 @@
+import { cloneDeep } from "lodash-es";
 import { format } from 'date-fns'
-import { clone, getProperty, removeArrayDuplicates } from '@/tools'
+import { getProperty, removeArrayDuplicates } from '@/tools'
 import { ChartModel } from './model'
 import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
 
@@ -126,7 +127,7 @@ export class ChartModelCartesian extends ChartModel {
 	 */
 	setZoomBarData(newZoomBarData?: any) {
 		const sanitizedData = newZoomBarData
-			? this.sanitize(clone(newZoomBarData))
+			? this.sanitize(cloneDeep(newZoomBarData))
 			: this.getDisplayData() // if we're not passed explicit zoom data use the model
 
 		let zoomBarNormalizedValues = sanitizedData
