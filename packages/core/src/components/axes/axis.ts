@@ -7,8 +7,9 @@ import {
     select,
     type Selection as D3Selection
 } from 'd3'
+import { clamp } from 'lodash-es'
 import { axis as axisConfigs } from '@/configuration'
-import { clamp, getProperty, getTranslationValues, truncateLabel } from '@/tools'
+import { getProperty, getTranslationValues, truncateLabel } from '@/tools'
 import { Component } from '@/components/component'
 import {
     AxisPositions,

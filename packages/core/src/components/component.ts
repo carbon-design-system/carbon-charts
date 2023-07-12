@@ -1,5 +1,6 @@
 import { select, type Selection as D3Selection } from 'd3'
-import { getProperty, merge } from '@/tools'
+import { merge } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import type { ChartModel } from '@/model/model'
 import { DOMUtils } from '@/services/essentials/dom-utils'

@@ -10,7 +10,8 @@ import {
 	type Selection as D3Selection,
 	type Transition
 } from 'd3'
-import { flatMapDeep, getProperty, kebabCase, merge } from '@/tools'
+import { flatMapDeep, kebabCase, merge } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { radar as radarConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'

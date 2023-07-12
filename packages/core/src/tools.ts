@@ -1,41 +1,11 @@
 import { pointer, type Numeric } from 'd3'
 import {
-	debounce,
 	merge,
 	cloneDeep,
 	unionBy,
-	uniq,
-	clamp,
-	flatten,
-	groupBy,
-	camelCase,
-	isEmpty,
-	isEqual,
-	flatMapDeep,
-	kebabCase,
-	fromPairs,
-	some
 } from 'lodash-es'
 import { CartesianOrientations, ScaleTypes, TruncationTypes } from '@/interfaces/enums'
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
-
-// lodash-es functions to export
-export {
-	debounce,
-	merge,
-	unionBy,
-	clamp,
-	flatten,
-	groupBy,
-	camelCase,
-	isEmpty,
-	isEqual,
-	flatMapDeep,
-	kebabCase,
-	fromPairs,
-	some,
-	uniq
-}
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null

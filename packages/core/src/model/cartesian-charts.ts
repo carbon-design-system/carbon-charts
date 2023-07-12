@@ -1,6 +1,6 @@
-import { cloneDeep } from "lodash-es";
 import { format } from 'date-fns'
-import { getProperty, uniq } from '@/tools'
+import { cloneDeep, uniq } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { ChartModel } from './model'
 import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
 

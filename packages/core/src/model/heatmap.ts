@@ -1,6 +1,6 @@
-import { cloneDeep } from "lodash-es";
 import { extent, scaleQuantize, scaleLinear } from 'd3'
-import { getProperty, isEmpty } from '@/tools'
+import { cloneDeep, isEmpty } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
 import { getColorScale } from '@/services'
 import { ChartModelCartesian } from './cartesian-charts'

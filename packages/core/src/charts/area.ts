@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from 'lodash-es'
 import { AxisChart } from '@/axis-chart'
 import { options } from '@/configuration'
 import { mergeDefaultChartOptions } from '@/tools'

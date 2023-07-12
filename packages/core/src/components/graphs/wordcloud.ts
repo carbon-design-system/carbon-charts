@@ -1,6 +1,6 @@
 import { extent, scaleLinear, select } from 'd3'
 import cloud from 'd3-cloud'
-import { debounce } from '@/tools'
+import { debounce } from 'lodash-es'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'

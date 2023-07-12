@@ -19,7 +19,8 @@ import {
 	subSeconds,
 	addSeconds
 } from 'date-fns'
-import { flatten, getProperty, uniq } from '@/tools'
+import { flatten, uniq } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { axis as axisConfigs } from '@/configuration'
 import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'

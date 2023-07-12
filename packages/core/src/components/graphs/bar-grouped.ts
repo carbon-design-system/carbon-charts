@@ -1,5 +1,6 @@
 import { ScaleBand, scaleBand, select } from 'd3'
-import { generateSVGPathString, getProperty, uniq } from '@/tools'
+import { uniq } from 'lodash-es'
+import { generateSVGPathString, getProperty } from '@/tools'
 import { Bar } from './bar'
 import {
 	CartesianOrientations,

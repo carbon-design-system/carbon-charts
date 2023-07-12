@@ -1,6 +1,6 @@
-import { cloneDeep } from "lodash-es";
+import { cloneDeep, isEmpty, merge } from 'lodash-es'
 import { area, brushX, extent, line } from 'd3'
-import { getProperty, isEmpty, merge } from '@/tools'
+import { getProperty } from '@/tools'
 import { zoomBar as zoomBarConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import type { ChartModelCartesian } from '@/model/cartesian-charts'

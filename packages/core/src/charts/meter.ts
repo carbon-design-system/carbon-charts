@@ -1,7 +1,7 @@
-import { cloneDeep } from "lodash-es";
+import { cloneDeep, merge } from 'lodash-es'
 import { Chart } from '@/chart'
 import { options as configOptions } from '@/configuration'
-import { getProperty, merge } from '@/tools'
+import { getProperty } from '@/tools'
 import { MeterChartModel } from '@/model/meter'
 import type { ChartConfig } from '@/interfaces/model'
 import type { MeterChartOptions } from '@/interfaces/charts'
