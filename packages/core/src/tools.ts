@@ -33,9 +33,9 @@ export {
 	flatMapDeep,
 	kebabCase,
 	fromPairs,
-	some
+	some,
+	uniq
 }
-export const removeArrayDuplicates = uniq
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null

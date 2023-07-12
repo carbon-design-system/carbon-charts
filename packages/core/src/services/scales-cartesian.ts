@@ -19,7 +19,7 @@ import {
 	subSeconds,
 	addSeconds
 } from 'date-fns'
-import { flatten, getProperty, removeArrayDuplicates } from '@/tools'
+import { flatten, getProperty, uniq } from '@/tools'
 import { axis as axisConfigs } from '@/configuration'
 import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'
@@ -496,7 +496,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return removeArrayDuplicates(displayData.map((d: any) => d[mapsTo]))
+			return uniq(displayData.map((d: any) => d[mapsTo]))
 		}
 
 		// Get the extent of the domain

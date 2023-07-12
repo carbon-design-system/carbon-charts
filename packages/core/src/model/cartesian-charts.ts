@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash-es";
 import { format } from 'date-fns'
-import { getProperty, removeArrayDuplicates } from '@/tools'
+import { getProperty, uniq } from '@/tools'
 import { ChartModel } from './model'
 import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
 
@@ -138,7 +138,7 @@ export class ChartModelCartesian extends ChartModel {
 			const rangeIdentifier = cartesianScales.getRangeIdentifier()
 			// get all dates (Number) in displayData
 			let allDates = sanitizedData.map((datum: any) => datum[domainIdentifier].getTime())
-			allDates = removeArrayDuplicates(allDates).sort()
+			allDates = uniq(allDates).sort()
 
 			// Go through all date values
 			// And get corresponding data from each dataset

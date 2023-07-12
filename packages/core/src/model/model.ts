@@ -5,7 +5,7 @@ import {
 	getProperty,
 	groupBy,
 	merge,
-	removeArrayDuplicates,
+	uniq,
 	updateLegendAdditionalItems
 } from '@/tools'
 import { color as colorConfigs, legend as legendConfigs } from '@/configuration'
@@ -294,7 +294,7 @@ export class ChartModel {
 		if (bins) {
 			stackKeys = bins.map((bin: any) => `${bin.x0}-${bin.x1}`)
 		} else {
-			stackKeys = removeArrayDuplicates(
+			stackKeys = uniq(
 				displayData.map((datum: any) => {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
@@ -734,7 +734,7 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = legendConfigs.items.status
 		const options = this.getOptions()
 
-		const uniqueDataGroups = removeArrayDuplicates(data.map((datum: any) => datum[groupMapsTo]))
+		const uniqueDataGroups = uniq(data.map((datum: any) => datum[groupMapsTo]))
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {

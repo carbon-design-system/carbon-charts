@@ -1,5 +1,5 @@
 import { ScaleBand, scaleBand, select } from 'd3'
-import { generateSVGPathString, getProperty, removeArrayDuplicates } from '@/tools'
+import { generateSVGPathString, getProperty, uniq } from '@/tools'
 import { Bar } from './bar'
 import {
 	CartesianOrientations,
@@ -42,7 +42,7 @@ export class GroupedBar extends Bar {
 		// Grab container SVG
 		const svg = this.getComponentContainer({ withinChartClip: true })
 
-		const allDataLabels = removeArrayDuplicates(
+		const allDataLabels = uniq(
 			displayData.map((datum: any) => {
 				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
