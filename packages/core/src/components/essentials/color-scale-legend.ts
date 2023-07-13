@@ -1,5 +1,6 @@
 import { axisBottom, interpolateNumber, quantize, scaleBand, scaleLinear } from 'd3'
-import { getProperty, isEmpty } from '@/tools'
+import { isEmpty } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { legend as legendConfigs } from '@/configuration'
 import { ColorLegendType, Events, RenderTypes } from '@/interfaces/enums'
 import { Legend } from './legend'

@@ -1,6 +1,7 @@
+import { camelCase, flatten, merge } from 'lodash-es'
 import { AxisChart } from '@/axis-chart'
 import { options as configOptions } from '@/configuration'
-import { camelCase, flatten, merge, mergeDefaultChartOptions } from '@/tools'
+import { mergeDefaultChartOptions } from '@/tools'
 import type { ChartConfig } from '@/interfaces/model'
 import { ChartTypes, Skeletons } from '@/interfaces/enums'
 import type { ComboChartOptions } from '@/interfaces/charts'

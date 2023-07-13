@@ -1,6 +1,7 @@
 import { select, type Selection } from 'd3'
 import { toPng, toJpeg } from 'html-to-image'
-import { debounce, getProperty } from '@/tools'
+import { debounce } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import type { ChartModel } from '@/model/model'
 import { Service } from '@/services/service'

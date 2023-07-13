@@ -1,5 +1,6 @@
 import { line } from 'd3'
-import { flipDomainAndRangeBasedOnOrientation, getProperty, some } from '@/tools'
+import { some } from 'lodash-es'
+import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
 import { lines as lineConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'

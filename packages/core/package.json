@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "1.11.8",
+  "version": "1.11.9",
   "description": "Carbon Charts component library",
   "module": "./dist/index.mjs",
   "main": "./dist/index.js",

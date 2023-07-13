@@ -6,7 +6,8 @@ import {
 	sankeyRight,
 	sankeyJustify
 } from 'd3-sankey'
-import { debounce, getProperty, getTransformOffsets } from '@/tools'
+import { debounce } from 'lodash-es'
+import { getProperty, getTransformOffsets } from '@/tools'
 import { alluvial as alluvialConfigs } from '@/configuration'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
