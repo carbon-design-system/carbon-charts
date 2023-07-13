@@ -128,7 +128,7 @@
     "@types/d3": "^7.4.0",
     "@types/d3-cloud": "^1.2.5",
     "@types/d3-sankey": "^0.12.1",
-    "@types/lodash-es": "^4.17.7",
+    "@types/lodash-es": "^4.17.8",
     "@types/topojson": "^3.2.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",

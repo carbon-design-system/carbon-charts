@@ -38,12 +38,13 @@
     "CHANGELOG.md"
   ],
   "peerDependencies": {
-    "@carbon/charts": "^1.11.8",
     "svelte": "^3.31.0 || ^4.0.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "@carbon/charts": "workspace:*",
-    "@carbon/telemetry": "~0.1.0",
+    "@carbon/telemetry": "~0.1.0"
+  },
+  "devDependencies": {
     "@stackblitz/sdk": "^1.9.0",
     "@storybook/addon-essentials": "^7.0.27",
     "@storybook/addon-interactions": "^7.0.27",
