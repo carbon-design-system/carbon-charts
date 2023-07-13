@@ -1,5 +1,6 @@
 import { Selection, pointer } from 'd3'
-import { debounceWithD3MousePosition, getProperty, isEqual } from '@/tools'
+import { isEqual } from 'lodash-es'
+import { debounceWithD3MousePosition, getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { CartesianOrientations, Events, RenderTypes } from '@/interfaces/enums'
