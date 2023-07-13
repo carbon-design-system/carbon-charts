@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: AlluvialChartCore
 	export let options: AlluvialChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: AlluvialChartCore | null = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: GaugeChartCore
 	export let options: GaugeChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: GaugeChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

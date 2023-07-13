@@ -137,11 +137,7 @@ export default {
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
-	plugins: [svelte()],
-	optimizeDeps: {
-		include: ['@carbon/charts', 'carbon-components'],
-		exclude: ['@carbon/telemetry']
-	}
+	plugins: [svelte()]
 })
 `
 

@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: GroupedBarChartCore
 	export let options: BarChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: GroupedBarChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart
