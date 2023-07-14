@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.10](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.9...v1.11.10) (2023-07-14)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.11.9](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.8...v1.11.9) (2023-07-13)
 
 **Note:** Version bump only for package @carbon/charts
