@@ -17,13 +17,13 @@ Please direct all questions regarding support, bug fixes and feature requests to
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
+npm install -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
+yarn add -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 ### SvelteKit
@@ -92,7 +92,7 @@ import '@carbon/charts-svelte/styles.css'
 ### Theming
 
 `@carbon/styles` uses
-[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for dynamic, client-side theming. Care should be exercised as the styles apply to your HTML body.
+[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for dynamic, client-side theming. Care should be exercised as the styles apply to the HTML body.
 
 ### Dispatched events
 
