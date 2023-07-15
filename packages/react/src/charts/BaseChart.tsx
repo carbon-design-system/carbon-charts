@@ -4,6 +4,7 @@ import type { Chart as BaseChartCore, BaseChartOptions, ChartTabularData } from 
 interface Props<Options extends BaseChartOptions> {
   options: Options
   data: ChartTabularData
+  id?: string
 }
 
 // TODO: add abstract keyword once React 16 support no longer needed
@@ -12,6 +13,12 @@ export default class BaseChart<
 > extends React.PureComponent<Props<Options>, unknown> {
   chart?: BaseChartCore
   chartRef = React.createRef<HTMLDivElement>()
+  id: string
+
+  constructor(props: Props<Options>) {
+    super(props)
+    this.id = props.id || `chart-${Math.random().toString(36)}`
+  }
 
   // TODO: add abstract keyword once React 16 support no longer needed then remove the next 3 comments
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -38,6 +45,6 @@ export default class BaseChart<
   }
 
   render() {
-    return <div ref={this.chartRef} className="chart-holder"></div>
+    return <div ref={this.chartRef} id={this.id} className="chart-holder"></div>
   }
 }

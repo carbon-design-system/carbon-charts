@@ -32,9 +32,9 @@ You can find out more at [W3 Developer](https://w3.ibm.com/developer/docs/open-s
 We use Lerna to manage all `@carbon/charts` related packages.
 
 **These are the Node & NPM versions we recommend:**
-- Node Version: `12.16.1`
-- Yarn Version: `1.6.0`
-- NPM Version: `6.4.1`
+- Node Version: `18.16.1`
+- Yarn Version: `3.5.1`
+- NPM Version: `9.8.0`
 
 To get charts running locally on your machine:
 1. Fork this repo
