@@ -170,6 +170,7 @@ for the changelog of each version of Charts.
     <td align="center"><a href="https://github.com/rmathur16"><img src="https://avatars.githubusercontent.com/u/38890232?v=4?s=100" width="100px;" alt=""/><br /><sub><b>rmathur16</b></sub></a><br /><a href="#research-rmathur16" title="Research">🔬</a></td>
     <td align="center"><a href="https://github.com/tw15egan"><img src="https://avatars.githubusercontent.com/u/11928039?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TJ Egan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=tw15egan" title="Code">💻</a></td>
     <td align="center"><a href="http://www.johnpeng47.com"><img src="https://avatars3.githubusercontent.com/u/9957837?v=4?s=100" width="100px;" alt=""/><br /><sub><b>John Peng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JohnPeng47" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nstuyvesant"><img src="https://avatars.githubusercontent.com/u/5770938?v=4" width="100px;" alt=""/><br /><sub><b>Nate Stuyvesant</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/additions?author=nstuyvesant" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=nstuyvesant" title="Documentation">📖</a> <a href="#example-nstuyvesant" title="Examples">💡</a></td>
   </tr>
 </table>
 
