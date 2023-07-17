@@ -30,7 +30,7 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3",
-    "lerna": "^7.1.3",
+    "lerna": "^7.1.4",
     "pinst": "^3.0.0",
     "prettier": "^2.8.8",
     "prettier-config-carbon": "^0.11.0"

@@ -57,16 +57,16 @@
     "d3": "^7.8.5",
     "d3-cloud": "^1.2.5",
     "d3-sankey": "^0.12.3",
-    "eslint": "^8.44.0",
+    "eslint": "^8.45.0",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-vue": "^9.15.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.27",
     "typescript": "^5.1.6",
-    "vite": "^4.4.3",
-    "vite-plugin-dts": "^3.2.0",
-    "vue-tsc": "^1.8.4"
+    "vite": "^4.4.4",
+    "vite-plugin-dts": "^3.3.1",
+    "vue-tsc": "^1.8.5"
   },
   "publishConfig": {
     "access": "public",

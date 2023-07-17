@@ -36,7 +36,7 @@ body:
     attributes:
       label: Version
       description: What version of our packages are you using?
-      placeholder: e.g. `@carbon/charts@0.46.3`
+      placeholder: e.g. `@carbon/charts@1.11.10`
     validations:
       required: true
   - type: textarea
@@ -58,9 +58,9 @@ body:
       description: >
         Do you have a sandbox where we can see the issue reproduced?
         
-        **Most of our demos offer a codesandbox that can help you get started**
+        **Most of our demos offer a StackBlitz example that can help you get started**
         https://carbon-design-system.github.io/carbon-charts/
-      placeholder: ex. https://codesandbox.io/...
+      placeholder: ex. https://www.stackblitz.com/...
     validations:
       required: false
   - type: dropdown

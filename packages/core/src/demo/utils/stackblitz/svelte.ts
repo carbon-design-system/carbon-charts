@@ -6,7 +6,6 @@ import { version } from '../package-versions'
 export function buildSvelteExample(demo: Demo): Project {
 
   const devDependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
     '@carbon/charts-svelte': version.carbonCharts,
     '@carbon/styles': version.carbonStyles,
     '@sveltejs/vite-plugin-svelte': version.svelteVite,
