@@ -10,7 +10,7 @@ Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@ca
 
 These Svelte wrappers were developed by Eric Liu.
 
-Please direct all questions regarding support, bug fixes and feature requests to [@metonym](https://github.com/metonym).
+Please direct all questions regarding support, bug fixes and feature requests to [@nstuyvesant](https://github.com/nstuyvesant) and [@metonym](https://github.com/metonym).
 
 ## Getting started
 
