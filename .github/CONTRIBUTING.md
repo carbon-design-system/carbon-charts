@@ -31,21 +31,20 @@ You can find out more at [W3 Developer](https://w3.ibm.com/developer/docs/open-s
 ## Run Charts in Local Environment
 We use Lerna to manage all `@carbon/charts` related packages.
 
-**These are the Node & NPM versions we recommend:**
-- Node Version: `18.16.1`
-- Yarn Version: `3.5.1`
-- NPM Version: `9.8.0`
+**These are the Node and Yarn versions we recommend:**
+- Node Version: `18.x`
+- Yarn Version: `3.5.x`
 
 To get charts running locally on your machine:
 1. Fork this repo
-2. Clone your fork
-3. Run `yarn` (this would install all packages and get **lerna** setup)
+2. Git clone your fork locally
+3. Run `yarn install` (this would install all packages and get **lerna** setup)
 4. Run `yarn build` to do an initial build of the monorepo and correctly link all the packages
 
 All packages use Storybook for demos:
 
 ```sh
-yarn run storybook
+yarn start
 ```
 
 ## Issue guidelines
