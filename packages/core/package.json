@@ -130,8 +130,8 @@
     "@types/d3-sankey": "^0.12.1",
     "@types/lodash-es": "^4.17.8",
     "@types/topojson": "^3.2.3",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "concurrently": "^8.2.0",
     "downlevel-dts": "^0.11.0",
     "eslint": "^8.45.0",
@@ -146,7 +146,7 @@
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
     "vite": "^4.4.4",
-    "vite-plugin-dts": "^3.3.0",
+    "vite-plugin-dts": "^3.3.1",
     "vitest": "^0.33.0"
   },
   "publishConfig": {
