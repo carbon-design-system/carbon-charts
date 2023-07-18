@@ -110,7 +110,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					</main>`
 
 				const sandboxButton = container.querySelector('#sandbox')
-				sandboxButton.addEventListener('click', () => {
+				sandboxButton?.addEventListener('click', () => {
 					sdk.openProject(demo.code.vanilla, { newWindow: true })
 				})
 
@@ -124,9 +124,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					colorPairingOptions
 				})
 
-				addOtherVersions(container, demoGroup, demo, {
-					currentVersion: 'vanilla'
-				})
+				addOtherVersions(container, 'Vanilla JavaScript')
 
 				return container
 			},
