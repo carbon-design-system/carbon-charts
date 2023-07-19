@@ -45,9 +45,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							colorPairingOptions
 						})
 
-						addOtherVersions(container, demoGroup, demo, {
-							currentVersion: 'react'
-						})
+						addOtherVersions(container, 'React')
 					}
 				}, [demoRef.current, chartRef.current])
 

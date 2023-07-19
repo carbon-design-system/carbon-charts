@@ -1,3 +1,5 @@
+import { DemoGroup } from '@/demo'
+
 const generateThemePickerHTML = (container: HTMLDivElement) => {
   const div = document.createElement('div')
   div.id = 'theme-picker'
@@ -137,19 +139,19 @@ const generateColorPalettePickerHTML = (
                       : 0
                     let optionsHTML = `<optgroup class="cds--select-optgroup" label="${colorGroup} groups">`
 
-                    const numberOfVariants = parseInt(colorGroup)
+                    const numVariants = parseInt(colorGroup)
 
-                    if (numberOfVariants !== 14) {
+                    if (numVariants !== 14) {
                       for (let i = 1; i <= optionsCount; i++) {
                         optionsHTML += `
 								<option class="cds--select-option" ${
-                  onlyCategoricalPaletteIsApplicable || numberOfVariants < numberOfChartDataGroups
+                  onlyCategoricalPaletteIsApplicable || numVariants < numberOfChartDataGroups
                     ? 'disabled'
                     : ''
                 } value="${colorGroup}-option-${i}" ${
-                          selectedColorPalette === `${numberOfVariants}-${i}` ? 'selected' : ''
+                          selectedColorPalette === `${numVariants}-${i}` ? 'selected' : ''
                         }>
-									${numberOfVariants}-color groups, option ${i}
+									${numVariants}-color groups, option ${i}
 								</option>`
                       }
                     } else {
@@ -176,9 +178,9 @@ const generateColorPalettePickerHTML = (
 
   div?.querySelector('#color-palette-select')?.addEventListener('change', (e: any) => {
     const { value } = e.target
-    const [numberOfVariants, pairingOption] = value.split('-color-option-')
+    const [numVariants, pairingOption] = value.split('-color-option-')
 
-    chartOptions.color.pairing.numberOfVariants = numberOfVariants
+    chartOptions.color.pairing.numberOfVariants = numVariants
     chartOptions.color.pairing.option = pairingOption
     chart.model.setOptions(chartOptions)
   })
@@ -188,7 +190,7 @@ const generateColorPalettePickerHTML = (
 
 export const addControls = (
   container: HTMLDivElement,
-  demoGroup: any,
+  demoGroup: DemoGroup,
   chart: any,
   configs: { colorPairingOptions: any } = { colorPairingOptions: null }
 ) => {
@@ -231,63 +233,39 @@ export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: a
   })
 }
 
-export const addOtherVersions = (
-  container: HTMLElement,
-  demoGroup: any,
-  demo: any,
-  configs = { currentVersion: 'vanilla' }
-) => {
-  const { currentVersion } = configs
+const getLink = (name: string) => `https://carbon-design-system.github.io/carbon-charts/${ name !== 'vanilla' ? `${name}/`: ''}${window.parent.location.search}`
 
-  const demoGroupClassification = (demoGroup.type || '').replace('-chart', '')
+export const addOtherVersions = (container: HTMLElement, framework: string) => {
+
+  let otherVersions = [
+    {
+      name: 'Vanilla JavaScript',
+      link: getLink('vanilla')
+    },
+    {
+      name: 'Angular',
+      link: getLink('angular')
+    },
+    {
+      name: 'React',
+      link: getLink('react')
+    },
+    {
+      name: 'Svelte',
+      link: getLink('svelte')
+    },
+    {
+      name: 'Vue',
+      link: getLink('vue')
+    }
+  ]
+  otherVersions = otherVersions.filter((item) => item.name !== framework)
 
   const div = document.createElement('div')
   div.setAttribute('class', 'cds--row resource-card-group')
 
   let htmlContent = ''
-  const otherVersions = [
-    ...(currentVersion !== 'vanilla'
-      ? [
-          {
-            name: 'Vanilla JavaScript',
-            link: `https://carbon-design-system.github.io/carbon-charts/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-          }
-        ]
-      : []),
-    ...(currentVersion !== 'react'
-      ? [
-          {
-            name: 'React',
-            link: `https://carbon-design-system.github.io/carbon-charts/react/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-          }
-        ]
-      : []),
-    ...(currentVersion !== 'angular'
-      ? [
-          {
-            name: 'Angular',
-            link: `https://carbon-design-system.github.io/carbon-charts/angular/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-          }
-        ]
-      : []),
-    ...(currentVersion !== 'vue'
-      ? [
-          {
-            name: 'Vue',
-            link: `https://carbon-design-system.github.io/carbon-charts/vue/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-          }
-        ]
-      : []),
-    ...(currentVersion !== 'svelte'
-      ? [
-          {
-            name: 'Svelte',
-            link: `https://carbon-design-system.github.io/carbon-charts/svelte/?path=/story/${demoGroupClassification}-charts-${demo.id}`
-          }
-        ]
-      : [])
-  ]
-
+  
   otherVersions.forEach((otherVersion) => {
     htmlContent += `<div class="cds--no-gutter-sm cds--col-md-6 cds--col-lg-6">
 		<div class="cds--resource-card">
