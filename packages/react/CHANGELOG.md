@@ -1,5 +1,18 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.11.13](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.12...v1.11.13) (2023-07-20)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
