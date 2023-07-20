@@ -1,5 +1,5 @@
 {
   "prettier.configPath": "prettier.config.cjs",
-  "prettier.ignorePath": ".eslintignore",
+  "prettier.ignorePath": ".prettierignore",
   "prettier.prettierPath": ""
 }
