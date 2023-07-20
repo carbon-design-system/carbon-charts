@@ -2447,6 +2447,7 @@ __metadata:
     pinst: ^3.0.0
     prettier: ^3.0.0
     prettier-config-carbon: ^0.11.0
+    prettier-plugin-svelte: ^3.0.0
   languageName: unknown
   linkType: soft
 
