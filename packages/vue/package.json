@@ -51,7 +51,7 @@
     "@storybook/vue3": "^7.1.0",
     "@storybook/vue3-vite": "^7.1.0",
     "@types/d3": "^7.4.0",
-    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "concurrently": "^8.2.0",
     "d3": "^7.8.5",
@@ -64,7 +64,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.1.0",
     "typescript": "^5.1.6",
-    "vite": "^4.4.4",
+    "vite": "^4.4.5",
     "vite-plugin-dts": "^3.3.1",
     "vue-tsc": "^1.8.5"
   },

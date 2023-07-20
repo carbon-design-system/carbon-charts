@@ -73,11 +73,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.1.0",
-    "svelte": "^4.1.0",
+    "svelte": "^4.1.1",
     "svelte-check": "^3.4.6",
     "tslib": "^2.6.0",
     "typescript": "^5.1.6",
-    "vite": "^4.4.4"
+    "vite": "^4.4.5"
   },
   "publishConfig": {
     "access": "public"
