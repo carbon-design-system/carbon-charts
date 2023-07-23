@@ -2447,6 +2447,7 @@ __metadata:
     pinst: ^3.0.0
     prettier: ^3.0.0
     prettier-config-carbon: ^0.11.0
+    prettier-plugin-svelte: ^3.0.0
   languageName: unknown
   linkType: soft
 
@@ -2462,7 +2463,7 @@ __metadata:
     "@babel/preset-react": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
     "@carbon/charts": "workspace:*"
-    "@carbon/icons-react": ^11.22.1
+    "@carbon/icons-react": ^11.23.0
     "@carbon/telemetry": ~0.1.0
     "@rushstack/eslint-patch": ^1.3.2
     "@stackblitz/sdk": 1.9.0
@@ -2496,11 +2497,11 @@ __metadata:
     eslint-plugin-storybook: ^0.6.13
     react: ^18.2.0
     react-dom: ^18.2.0
-    sass: ^1.64.0
+    sass: ^1.64.1
     storybook: ^7.1.0
     style-loader: ^3.3.3
     typescript: ^5.1.6
-    vite: ^4.4.5
+    vite: ^4.4.6
     vite-plugin-dts: ^3.3.1
     webpack: 5.88.2
   peerDependencies:
@@ -2547,7 +2548,7 @@ __metadata:
     svelte-check: ^3.4.6
     tslib: ^2.6.0
     typescript: ^5.1.6
-    vite: ^4.4.5
+    vite: ^4.4.6
   peerDependencies:
     svelte: ^3.31.0 || ^4.0.0
   languageName: unknown
@@ -2585,10 +2586,10 @@ __metadata:
     react-dom: ^18.2.0
     storybook: ^7.1.0
     typescript: ^5.1.6
-    vite: ^4.4.5
+    vite: ^4.4.6
     vite-plugin-dts: ^3.3.1
     vue: ^3.3.4
-    vue-tsc: ^1.8.5
+    vue-tsc: ^1.8.6
   peerDependencies:
     vue: ^3.3.0
   languageName: unknown
@@ -2599,12 +2600,12 @@ __metadata:
   resolution: "@carbon/charts@workspace:packages/core"
   dependencies:
     "@babel/core": ^7.22.9
-    "@carbon/colors": ^11.17.1
+    "@carbon/colors": ^11.18.0
     "@carbon/import-once": ^10.7.0
-    "@carbon/layout": ^11.16.1
-    "@carbon/styles": ^1.33.1
+    "@carbon/layout": ^11.17.0
+    "@carbon/styles": ^1.34.0
     "@carbon/telemetry": ~0.1.0
-    "@carbon/themes": ^11.21.1
+    "@carbon/themes": ^11.22.0
     "@carbon/utils-position": ^1.1.4
     "@rushstack/eslint-patch": ^1.3.2
     "@stackblitz/sdk": ^1.9.0
@@ -2640,13 +2641,13 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     resize-observer-polyfill: ^1.5.1
-    sass: ^1.64.0
+    sass: ^1.64.1
     storybook: ^7.1.0
     topojson-client: ^3.1.0
     tslib: ^2.6.0
     typedoc: ^0.24.8
     typescript: ^5.1.6
-    vite: ^4.4.5
+    vite: ^4.4.6
     vite-plugin-dts: ^3.3.1
     vitest: ^0.33.0
   peerDependencies:
@@ -2661,10 +2662,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.17.1":
-  version: 11.17.1
-  resolution: "@carbon/colors@npm:11.17.1"
-  checksum: 500764927dfb2e50d69cd365951a8fbd2fe031747f8fbae771751bda1f833608264c4690301879cdc8517232c0dfc93f0c40609fa985e66a35e36c0296f47c47
+"@carbon/colors@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "@carbon/colors@npm:11.18.0"
+  checksum: 6df1aada98f0e421063e70ffb424f867d5e20c332f5a0549a8c4011325b4a941eec1fc8c1564ad20bf95d21dceb919b707e1b562f5277ddb542f57d8c8389120
   languageName: node
   linkType: hard
 
@@ -2675,12 +2676,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.16.1":
-  version: 11.16.1
-  resolution: "@carbon/grid@npm:11.16.1"
+"@carbon/grid@npm:^11.17.0":
+  version: 11.17.0
+  resolution: "@carbon/grid@npm:11.17.0"
   dependencies:
-    "@carbon/layout": ^11.16.1
-  checksum: 70475ec21a7614c1c1ceca691b2e59f7d54115c222027f485120f89606aa97710bbe88d51c1db0509cd4bc94acf3914e9d48ca7e78b11ade8ca6498889385987
+    "@carbon/layout": ^11.17.0
+  checksum: e11a02709e79f40fcc8f5524ac41c172b5eb4d2a57d1a9333c3068c29762a34e2bb31a83709d42cc4ba1a6a8c0182329744536f599dab74d43b8448449e12d1f
   languageName: node
   linkType: hard
 
@@ -2691,10 +2692,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.42.1":
-  version: 10.42.1
-  resolution: "@carbon/icon-helpers@npm:10.42.1"
-  checksum: 98981041d7fb44258c227825eb704b0f25fc6f1cc84d500d5cf0feba71307f5c1e1734f37608c9bb9836b5c864bafc8c6aa9f422f99250f662f67ad2c87708f7
+"@carbon/icon-helpers@npm:^10.43.0":
+  version: 10.43.0
+  resolution: "@carbon/icon-helpers@npm:10.43.0"
+  checksum: ca1e607cfe5c50dc2e0ddc7632ad4a81e8e1304d2dc91508223e51b6e1b17f42f2bf8bf97c87eb636ae1c537bde12fd46483cc173db77bf268c03d590e8797b7
   languageName: node
   linkType: hard
 
@@ -2710,16 +2711,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.22.1":
-  version: 11.22.1
-  resolution: "@carbon/icons-react@npm:11.22.1"
+"@carbon/icons-react@npm:^11.23.0":
+  version: 11.23.0
+  resolution: "@carbon/icons-react@npm:11.23.0"
   dependencies:
-    "@carbon/icon-helpers": ^10.42.1
+    "@carbon/icon-helpers": ^10.43.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
-  checksum: f1e637c12295275f31d4123f5089334fd9a2c6a2be6f73f41f27f3aa49989a734c8f766b5ac3c8cd32ade3f1de52cd0a2844fd95faa201600c3d2061ad5900fd
+  checksum: db5383bac2cd2c31f484b5d797ee40b74a43f606e9a71cd4172142a15708f2bb7f108ccf732106b855d7baac93ab022373cc6e6c69f726a1a00e3cec52d56bef
   languageName: node
   linkType: hard
 
@@ -2730,38 +2731,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.16.1":
-  version: 11.16.1
-  resolution: "@carbon/layout@npm:11.16.1"
-  checksum: 83660f70dbbdac09bd3fb9d94c3c9c53b84557fb88f011452db84939a898d28bd57030e6c233088b6a9f68dfec8f76bdc073945b922d4bfdc76e055787201a65
+"@carbon/layout@npm:^11.17.0":
+  version: 11.17.0
+  resolution: "@carbon/layout@npm:11.17.0"
+  checksum: cb9731036ce80b282cd0685bd8d2ad6510996b9dedf2602e2abe2f8822ae6d3425254ca007c076465d61f67ed9bb8400da3d92b6835bd99e7b2a4ddad1c2ef00
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.13.1":
-  version: 11.13.1
-  resolution: "@carbon/motion@npm:11.13.1"
-  checksum: 0aa6aa062be02225c5ca2c34d4a9667ef09dc4ce415d29308d43e458ab0fca73655274632a08d8b72e8274c523088c03e680ad8778be033e6eb92f58ee5b2735
+"@carbon/motion@npm:^11.14.0":
+  version: 11.14.0
+  resolution: "@carbon/motion@npm:11.14.0"
+  checksum: 1e9f1f27af290ee00b8d26b926bb7309b1ce69a301c3d24c7690d2b62f7fe38bf756917b89e20378532bb368a026c21fb0469215932883d0fbb0cbe146ad3b1c
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.33.1":
-  version: 1.33.1
-  resolution: "@carbon/styles@npm:1.33.1"
+"@carbon/styles@npm:^1.34.0":
+  version: 1.34.0
+  resolution: "@carbon/styles@npm:1.34.0"
   dependencies:
-    "@carbon/colors": ^11.17.1
+    "@carbon/colors": ^11.18.0
     "@carbon/feature-flags": ^0.15.0
-    "@carbon/grid": ^11.16.1
-    "@carbon/layout": ^11.16.1
-    "@carbon/motion": ^11.13.1
-    "@carbon/themes": ^11.21.1
-    "@carbon/type": ^11.20.1
+    "@carbon/grid": ^11.17.0
+    "@carbon/layout": ^11.17.0
+    "@carbon/motion": ^11.14.0
+    "@carbon/themes": ^11.22.0
+    "@carbon/type": ^11.21.0
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: a88a2001490582f6f204c73c02905fec463d27e6a9de0a2b4c1fa31516ce29e998b5e217b09fbac8ca8a463c697420874bdcbaa8f69786f68f1f26708af2c3c1
+  checksum: cd924884b1eaa5d7c96549cc8ebfc36cc3fff02c820b06a9647c2ac671b824cde609a9ee9c57191935e5ec1cc1276566d70aea96e9e8e3f0672a59c4848054a4
   languageName: node
   linkType: hard
 
@@ -2774,25 +2775,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.21.1":
-  version: 11.21.1
-  resolution: "@carbon/themes@npm:11.21.1"
+"@carbon/themes@npm:^11.22.0":
+  version: 11.22.0
+  resolution: "@carbon/themes@npm:11.22.0"
   dependencies:
-    "@carbon/colors": ^11.17.1
-    "@carbon/layout": ^11.16.1
-    "@carbon/type": ^11.20.1
+    "@carbon/colors": ^11.18.0
+    "@carbon/layout": ^11.17.0
+    "@carbon/type": ^11.21.0
     color: ^4.0.0
-  checksum: e4e24dcb81093a082acf1901e69f92303a6cc6f1de9cb28435f47ee2062f17c729ecfa7cf9d98222f11b6365ba951a3c5164f8690572696e91033d6e9b58f0a4
+  checksum: 8ea7a80a29f617b5f960dc477f4c11b5951519ede2f3526cddbad88fe72ed6905c8e0194dfbd9a57e7c00c4f0091e6fa3c87f4a9b0999ec389264007d68d8d1c
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.20.1":
-  version: 11.20.1
-  resolution: "@carbon/type@npm:11.20.1"
+"@carbon/type@npm:^11.21.0":
+  version: 11.21.0
+  resolution: "@carbon/type@npm:11.21.0"
   dependencies:
-    "@carbon/grid": ^11.16.1
-    "@carbon/layout": ^11.16.1
-  checksum: ff08229e71ccb40f420cbc94ac79b63449d4a77d777619383fcc4e44e9e34792158e85a0b170418b50165a130e712155765025dc939625658db285dcaa7bc166
+    "@carbon/grid": ^11.17.0
+    "@carbon/layout": ^11.17.0
+  checksum: 2c69a81dd8431849190e29f680afd5fb4b713be7f81bab207a3ced7300e3434e4b86aafb395207e52acadf50b1f45c46d86ed7ba55a1ff65135657c0ca8a2401
   languageName: node
   linkType: hard
 
@@ -7665,9 +7666,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/language-core@npm:1.8.5":
-  version: 1.8.5
-  resolution: "@vue/language-core@npm:1.8.5"
+"@vue/language-core@npm:1.8.6":
+  version: 1.8.6
+  resolution: "@vue/language-core@npm:1.8.6"
   dependencies:
     "@volar/language-core": ~1.9.0
     "@volar/source-map": ~1.9.0
@@ -7682,7 +7683,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: ff5c997ba21148334c6788f8babbf8fd5bce89e569795f90ad1fd5d9414c8dc0a817150368d774aad7c1141ec242cd2aa4bba60baea7f6a81da1e12a7b81171d
+  checksum: e69dd67e31a41264b049aa7873719fde0e209d22ce169b844a5c5705492f1fcfd06df3985fcebe24254723bc7e3ed34c6ab200913b9f39acabf793dc6ed05c6a
   languageName: node
   linkType: hard
 
@@ -7758,13 +7759,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/typescript@npm:1.8.5":
-  version: 1.8.5
-  resolution: "@vue/typescript@npm:1.8.5"
+"@vue/typescript@npm:1.8.6":
+  version: 1.8.6
+  resolution: "@vue/typescript@npm:1.8.6"
   dependencies:
     "@volar/typescript": ~1.9.0
-    "@vue/language-core": 1.8.5
-  checksum: a59124617cee80fccdff5f51cc358ac69b59ce21fa7d9f64237fdb3f5d19b5397310125ebdfad90bd136aff283d8109e79ada52ecb082cc411641d395f43483e
+    "@vue/language-core": 1.8.6
+  checksum: 1fffbc484787015138f0b5ff7eb33b74dd0df0e98b5a964dfa885d63d8ce0bd085672814cfb3cb5bd7ef364b3e2cb28460ec2118dd18026d24bf6d65eeeddb40
   languageName: node
   linkType: hard
 
@@ -19137,16 +19138,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.64.0":
-  version: 1.64.0
-  resolution: "sass@npm:1.64.0"
+"sass@npm:^1.64.1":
+  version: 1.64.1
+  resolution: "sass@npm:1.64.1"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: b4eb9b1bdeb1c00e76427d7fe3e5f80d831327178cdee657aa4e014edfc64ebbfe43177147403da1e04d76a24f4093f5a9b1c8d9d80c94579937d8adc5a6ef66
+  checksum: e908f96f3d5fa5869e2f2aec97548c93d6ef390680af89870fcae8bdbaee2392ac650fbeae8d2ef8e4c99cb9f81e6b3624e1cb659af6d6e746332a22233b5ad8
   languageName: node
   linkType: hard
 
@@ -21396,9 +21397,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.5":
-  version: 4.4.5
-  resolution: "vite@npm:4.4.5"
+"vite@npm:^4.4.6":
+  version: 4.4.6
+  resolution: "vite@npm:4.4.6"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -21432,7 +21433,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 825d8c13511b764710ca503e603746e20a7cb963194033dc606c46b1650a0d8986b577ba92507b54143cbf467032e9868ea04913a86a8fcb88b69c5b8551938b
+  checksum: 5a821897f1e03f9786f827acb89e3117a79b8901d184bbc3a2e48d6404b37975a5cdeb6b6969ec24ed1e81d96f1959ed6f9426cbb64501d1e4770bdb20f9c02f
   languageName: node
   linkType: hard
 
@@ -21623,18 +21624,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^1.8.5":
-  version: 1.8.5
-  resolution: "vue-tsc@npm:1.8.5"
+"vue-tsc@npm:^1.8.6":
+  version: 1.8.6
+  resolution: "vue-tsc@npm:1.8.6"
   dependencies:
-    "@vue/language-core": 1.8.5
-    "@vue/typescript": 1.8.5
+    "@vue/language-core": 1.8.6
+    "@vue/typescript": 1.8.6
     semver: ^7.3.8
   peerDependencies:
     typescript: "*"
   bin:
     vue-tsc: bin/vue-tsc.js
-  checksum: 20a7a9e62107423e1715159cc031302822fba6aa4053ae75fbfec27fb67bb9e629e2bf8a12a28115d3add5e21f384e8560751428f2858a308676463d4659ead5
+  checksum: 6d30a935068f8becd2f6768bb346587dcb738a68b63b134eaa6aed3056eac043ee2c7789e9f2dbae7547c8b9b6b80b40976eea020527658ed10b3d77c454608d
   languageName: node
   linkType: hard
 

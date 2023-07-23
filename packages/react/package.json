@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@carbon/charts": "workspace:*",
-    "@carbon/icons-react": "^11.22.1",
+    "@carbon/icons-react": "^11.23.0",
     "@carbon/telemetry": "~0.1.0"
   },
   "peerDependencies": {
@@ -89,11 +89,11 @@
     "eslint-plugin-storybook": "^0.6.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.64.0",
+    "sass": "^1.64.1",
     "storybook": "^7.1.0",
     "style-loader": "^3.3.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.5",
+    "vite": "^4.4.6",
     "vite-plugin-dts": "^3.3.1",
     "webpack": "5.88.2"
   },
