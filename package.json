@@ -22,9 +22,9 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.16.1"
+    "node": "^18.17.0"
   },
-  "packageManager": "yarn@3.5.1",
+  "packageManager": "yarn@3.6.1",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
     "commitizen": "^4.3.0",
@@ -33,8 +33,7 @@
     "lerna": "^7.1.4",
     "pinst": "^3.0.0",
     "prettier": "^3.0.0",
-    "prettier-config-carbon": "^0.11.0",
-    "prettier-plugin-svelte": "^3.0.0"
+    "prettier-config-carbon": "^0.11.0"
   },
   "husky": {
     "hooks": {
