@@ -38,7 +38,8 @@
     "start": "yarn storybook",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
     "format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
-    "clean": "rm -rf dist demo/bundle"
+    "clean": "rm -rf dist demo/bundle",
+    "pub:demo": "cp -a demo/bundle/. ../../pages/react"
   },
   "dependencies": {
     "@carbon/charts": "workspace:*",
@@ -72,8 +73,8 @@
     "@types/carbon__icons-react": "^11.20.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
     "@vitejs/plugin-react": "^4.0.3",
     "classnames": "^2.3.2",
     "concurrently": "^8.2.0",
@@ -93,7 +94,7 @@
     "storybook": "^7.1.0",
     "style-loader": "^3.3.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.6",
+    "vite": "^4.4.7",
     "vite-plugin-dts": "^3.3.1",
     "webpack": "5.88.2"
   },
