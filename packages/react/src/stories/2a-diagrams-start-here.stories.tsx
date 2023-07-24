@@ -142,8 +142,17 @@ const SimpleStatic = () => (
 				</CardNode>
 			</foreignObject>
 
-			<foreignObject style={{ overflow: 'visible' }} transform={`translate(400, 16)`}>
-				<ShapeNode title={'Title'} size={ShapeNodeSize} onClick={() => console.log('ShapeNode was clicked')} renderIcon={<Wikis />} />
+			<foreignObject
+				style={{ overflow: 'visible' }}
+				transform={`translate(400, 16)`}
+				height={nodeHeight}
+				width={nodeWidth}>
+				<ShapeNode
+					title={'Title'}
+					size={ShapeNodeSize}
+					onClick={() => console.log('ShapeNode was clicked')}
+					renderIcon={<Wikis size={20} fill={'black'} />}
+				/>
 			</foreignObject>
 		</svg>
 	</div>
