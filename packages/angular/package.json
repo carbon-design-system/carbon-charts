@@ -35,7 +35,7 @@
   "dependencies": {
     "@carbon/charts": "workspace:*",
     "@carbon/telemetry": "~0.1.0",
-    "tslib": "^2.6.0"
+    "tslib": "^2.6.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.1.5",
@@ -56,14 +56,14 @@
     "@babel/core": "^7.22.9",
     "@carbon/icons-angular": "^11.2.2",
     "@stackblitz/sdk": "^1.9.0",
-    "@storybook/addon-essentials": "^7.1.0",
-    "@storybook/addon-interactions": "^7.1.0",
-    "@storybook/addon-links": "^7.1.0",
-    "@storybook/angular": "^7.1.0",
-    "@storybook/blocks": "^7.1.0",
-    "@storybook/manager-api": "^7.1.0",
+    "@storybook/addon-essentials": "^7.1.1",
+    "@storybook/addon-interactions": "^7.1.1",
+    "@storybook/addon-links": "^7.1.1",
+    "@storybook/angular": "^7.1.1",
+    "@storybook/blocks": "^7.1.1",
+    "@storybook/manager-api": "^7.1.1",
     "@storybook/testing-library": "^0.2.0",
-    "@storybook/theming": "^7.1.0",
+    "@storybook/theming": "^7.1.1",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "concurrently": "^8.2.0",
@@ -80,7 +80,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "~7.8.1",
-    "storybook": "^7.1.0",
+    "storybook": "^7.1.1",
     "style-loader": "^3.3.3",
     "typescript": "~5.1.6",
     "zone.js": "~0.13.1"
