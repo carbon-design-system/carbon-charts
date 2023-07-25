@@ -1,12 +1,11 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
-
+import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildReactExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
     '@carbon/charts-react': version.carbonCharts,
     '@carbon/styles': version.carbonStyles,
     d3: version.d3,
@@ -47,8 +46,8 @@ export function buildReactExample(demo: Demo): Project {
 `import React from 'react'
 import ReactDOM from 'react-dom'
 import { ${demo.chartType.vanilla} } from '@carbon/charts-react'
-import data from './data.json'
-import options from './options.json'
+import data from './data.js'
+import options from './options.js'
 
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts-react/styles.css'
@@ -87,9 +86,9 @@ ReactDOM.render(<App />, document.getElementById('root'))
     dependencies,
     files: {
       'public/index.html': indexHtml,
-      'src/data.json': JSON.stringify(demo.data, null, 2),
+      'src/data.js': objectToString(demo.data),
       'src/index.js': indexJs,
-      'src/options.json': JSON.stringify(demo.options, null, 2),
+      'src/options.js': objectToString(demo.options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }
