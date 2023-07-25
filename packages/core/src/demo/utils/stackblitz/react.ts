@@ -44,7 +44,7 @@ export function buildReactExample(demo: Demo): Project {
 
   const indexJs =
 `import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { ${demo.chartType.vanilla} } from '@carbon/charts-react'
 import data from './data.js'
 import options from './options.js'
@@ -65,7 +65,10 @@ class App extends React.Component {
     ></ ${demo.chartType.vanilla}>
   )
 }
-ReactDOM.render(<App />, document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+  <App />
+)
 `
 
   const packageJson = {
