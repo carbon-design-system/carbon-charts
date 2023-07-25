@@ -16,6 +16,8 @@ const nodeHeight = 64
 const nodeWidth = 200
 const ShapeNodeSize = 64
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 const stories = storiesOf('Diagrams', module)
 
 stories.add(

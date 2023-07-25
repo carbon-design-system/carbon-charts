@@ -8,6 +8,8 @@ const getTemplate = (content: string) => `
 	</div>
 `
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 storiesOf('Diagrams/Nodes/Card', module)
 	.addDecorator(
 		moduleMetadata({

@@ -3,6 +3,8 @@ import { ScreenModule } from '@carbon/icons-angular'
 import { ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 storiesOf('Diagrams/Nodes/Shape', module)
 	.addDecorator(
 		moduleMetadata({

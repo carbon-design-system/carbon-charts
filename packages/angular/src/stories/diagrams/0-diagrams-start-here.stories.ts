@@ -15,6 +15,8 @@ stories.addDecorator(
 	})
 )
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 stories.add(
 	'Start here',
 	() => ({

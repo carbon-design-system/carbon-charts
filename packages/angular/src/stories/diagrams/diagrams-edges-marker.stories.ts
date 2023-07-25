@@ -5,6 +5,8 @@ import { getTemplate } from './utils'
 const linkSource = { x: 0, y: 0 }
 const linkTarget = { x: 300, y: 0 }
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 storiesOf('Diagrams/Edges/Marker', module)
 	.addDecorator(
 		moduleMetadata({

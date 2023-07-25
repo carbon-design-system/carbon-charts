@@ -8,6 +8,9 @@ const noControls = {
 		hideNoControlsWarning: true
 	}
 }
+
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 const stories = storiesOf('Diagrams/Cards', module)
 
 stories.addDecorator((story) => (

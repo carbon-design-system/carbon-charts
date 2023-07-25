@@ -7,6 +7,8 @@ const linkSource = { x: 0, y: 0 }
 const linkTarget = { x: 400, y: 0 }
 const linkTargetCurve = { x: 400, y: 200 }
 
+document.documentElement.setAttribute('data-carbon-theme', 'white')
+
 storiesOf('Diagrams/Edges', module)
 	.addDecorator(
 		moduleMetadata({
