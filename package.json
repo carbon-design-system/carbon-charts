@@ -24,7 +24,7 @@
   "engines": {
     "node": "^18.16.1"
   },
-  "packageManager": "yarn@3.5.1",
+  "packageManager": "yarn@3.6.1",
   "prettier": "./prettier.config.cjs",
   "devDependencies": {
     "commitizen": "^4.3.0",
