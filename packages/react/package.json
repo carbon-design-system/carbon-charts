@@ -70,7 +70,7 @@
     "@storybook/testing-library": "^0.2.0",
     "@storybook/theming": "^7.1.1",
     "@types/carbon__icons-react": "^11.20.0",
-    "@types/react": "^18.2.16",
+    "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
