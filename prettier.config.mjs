@@ -1,6 +1,8 @@
-module.exports = {
+import carbonPrettierSettings from 'prettier-config-carbon'
+
+export default {
 	$schema: 'https://json.schemastore.org/prettierrc',
-	...require('prettier-config-carbon'), // Carbon prettier plus overrides...
+	...carbonPrettierSettings, // Carbon prettier plus overrides...
 	arrowParens: 'avoid',
 	semi: false,
 	tabWidth: 2,
