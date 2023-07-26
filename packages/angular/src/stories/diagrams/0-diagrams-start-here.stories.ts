@@ -1,9 +1,10 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { buildElbowPathString, type Coordinates } from '@carbon/charts'
+import { buildElbowPathString, ChartTheme, type Coordinates } from '@carbon/charts'
 import { UserModule, WikisModule } from '@carbon/icons-angular'
 import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
 
+const DEFAULT_THEME = ChartTheme.WHITE
 const nodeHeight = 64
 const nodeWidth = 200
 const circleSize = 64
@@ -15,7 +16,10 @@ stories.addDecorator(
 	})
 )
 
-document.documentElement.setAttribute('data-carbon-theme', 'white')
+stories.addDecorator(story => {
+	document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+	return story()
+})
 
 stories.add(
 	'Start here',
@@ -84,6 +88,10 @@ stories.add(
 		}
 	}),
 	{
+		backgrounds: {
+			default: 'white',
+			values: [{ name: 'white', value: '#fff' }]
+		},
 		controls: {
 			hideNoControlsWarning: true
 		}
@@ -162,9 +170,9 @@ const edgeData = [
 	}
 ]
 
-const edgeMapped = edgeData.map((link) => {
-	const sourceNode = nodeData.find((node) => node.id === link.source)
-	const targetNode = nodeData.find((node) => node.id === link.target)
+const edgeMapped = edgeData.map(link => {
+	const sourceNode = nodeData.find(node => node.id === link.source)
+	const targetNode = nodeData.find(node => node.id === link.target)
 
 	if (!sourceNode || !targetNode)
 		throw new Error('Either sourceNode or targetNode were not defined.')

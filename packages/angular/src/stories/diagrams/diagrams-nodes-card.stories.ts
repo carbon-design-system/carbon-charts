@@ -1,6 +1,9 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { CardNodeModule } from '../../'
+import { ChartTheme } from '@carbon/charts'
 import { ScreenModule, ChevronDownModule } from '@carbon/icons-angular'
+import { CardNodeModule } from '../../'
+
+const DEFAULT_THEME = ChartTheme.WHITE
 
 const getTemplate = (content: string) => `
 	<div class="container theme--white" style="max-width: 400px;">
@@ -8,14 +11,16 @@ const getTemplate = (content: string) => `
 	</div>
 `
 
-document.documentElement.setAttribute('data-carbon-theme', 'white')
-
 storiesOf('Diagrams/Nodes/Card', module)
 	.addDecorator(
 		moduleMetadata({
 			imports: [CardNodeModule, ScreenModule, ChevronDownModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Default',
 		() => ({

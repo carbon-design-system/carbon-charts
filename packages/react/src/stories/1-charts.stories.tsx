@@ -19,14 +19,19 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
+	groupStories.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
+
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
-		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 
 		// Define DemoComponent
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
+
 
 		groupStories.add(
 			demo.title,

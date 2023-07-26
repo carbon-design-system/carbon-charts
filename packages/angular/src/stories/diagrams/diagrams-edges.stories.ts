@@ -1,13 +1,12 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
 import { EdgeModule } from '../../'
-import { buildBezierPathString, buildElbowPathString } from '@carbon/charts'
+import { buildBezierPathString, buildElbowPathString, ChartTheme } from '@carbon/charts'
 import { getTemplate } from './utils'
 
+const DEFAULT_THEME = ChartTheme.WHITE
 const linkSource = { x: 0, y: 0 }
 const linkTarget = { x: 400, y: 0 }
 const linkTargetCurve = { x: 400, y: 200 }
-
-document.documentElement.setAttribute('data-carbon-theme', 'white')
 
 storiesOf('Diagrams/Edges', module)
 	.addDecorator(
@@ -15,6 +14,10 @@ storiesOf('Diagrams/Edges', module)
 			imports: [EdgeModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Default',
 		() => ({

@@ -43,7 +43,7 @@ const getTemplate = (componentSelector: string) => `
 			<span class="cds--tag cds--tag--green component-name">${componentSelector}</span>
 		</h3>
 		<p class="props">
-		  <b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
+		  <b>Props:</b>&nbsp;<a href="/?path=/docs/docs-tutorials-tabular-data-format--docs">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
 		</p>
 		<div class="marginTop-30" id="chart-demo">
 			<${componentSelector} [data]="data" [options]="options"></${componentSelector}>
@@ -64,10 +64,14 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
+	groupStories.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
+
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
-		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const demoStory: StoryFn = (args: Args) => ({
 			template: getTemplate(demo.chartType.angular as string),
 			moduleMetadata: {

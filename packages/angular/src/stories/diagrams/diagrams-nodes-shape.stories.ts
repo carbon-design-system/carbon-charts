@@ -1,9 +1,10 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
+import { ChartTheme } from '@carbon/charts'
 import { ScreenModule } from '@carbon/icons-angular'
 import { ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
 
-document.documentElement.setAttribute('data-carbon-theme', 'white')
+const DEFAULT_THEME = ChartTheme.WHITE
 
 storiesOf('Diagrams/Nodes/Shape', module)
 	.addDecorator(
@@ -11,6 +12,10 @@ storiesOf('Diagrams/Nodes/Shape', module)
 			imports: [ShapeNodeModule, ScreenModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Default',
 		() => ({

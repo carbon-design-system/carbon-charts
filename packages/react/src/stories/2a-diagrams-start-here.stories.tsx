@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
-import { buildElbowPathString, type Coordinates } from '@carbon/charts'
+import { buildElbowPathString, ChartTheme, type Coordinates } from '@carbon/charts'
 import {
 	CardNode,
 	CardNodeColumn,
@@ -12,103 +12,111 @@ import {
 	ArrowRightMarker
 } from '../diagrams'
 
+const DEFAULT_THEME = ChartTheme.WHITE
 const nodeHeight = 64
 const nodeWidth = 200
 const ShapeNodeSize = 64
 
-document.documentElement.setAttribute('data-carbon-theme', 'white')
+storiesOf('Diagrams', module)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
+	.add(
+		'Start here',
+		() => {
+			const paragraphStyle = {
+				style: {
+					maxWidth: 600,
+					fontSize: '1rem',
+					fontWeight: 400,
+					lineHeight: 1.5,
+					letterSpacing: 0
+				}
+			}
 
-const stories = storiesOf('Diagrams', module)
+			const h3Style = {
+				style: {
+					paddingTop: '1rem'
+				}
+			}
 
-stories.add(
-	'Start here',
-	() => {
-		const paragraphStyle = {
-			style: {
-				maxWidth: 600,
-				fontSize: '1rem',
-				fontWeight: 400,
-				lineHeight: 1.5,
-				letterSpacing: 0
+			const h2Style = {
+				style: {
+					paddingTop: '2rem'
+				}
+			}
+
+			return (
+				<div>
+					<h1>Diagrams</h1>
+
+					<p {...paragraphStyle}>
+						React components for building diagram experiences, using the Carbon Design System.
+					</p>
+
+					<p {...paragraphStyle}>
+						<b>
+							Note that Carbon Charts does not provide layouts for diagrams. You can utilize these
+							components alongside graphing libraries, or by composing your own layouts (see section
+							3).
+						</b>
+					</p>
+
+					<h2 {...h2Style}>Examples</h2>
+
+					<h3 {...h3Style}>1. Simple static layout</h3>
+
+					<p {...paragraphStyle}>
+						A simple composed diagram, using statically defined x and y coordinates.{' '}
+						<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
+							View source
+						</a>
+					</p>
+
+					<SimpleStatic />
+
+					<h3 {...h3Style}>2. Programmatic static layout</h3>
+
+					<p {...paragraphStyle}>
+						A composed diagram, rendered using arrays of statically defined x and y coordinates.{' '}
+						<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
+							View source
+						</a>
+					</p>
+
+					<ProgrammaticStatic />
+
+					<h3 {...h3Style}>3. Layouts using external dependencies</h3>
+
+					<p>
+						Here&apos;s an example using <b>elkjs</b> in React
+					</p>
+
+					<iframe
+						src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+						style={{
+							width: '100%',
+							height: '47rem',
+							marginTop: '1em',
+							border: 0,
+							borderRadius: '.25rem'
+						}}></iframe>
+				</div>
+			)
+		},
+		{
+			backgrounds: {
+				default: 'white',
+				values: [
+					{ name: 'white', value: '#fff' }
+				]
+			},
+			controls: {
+				hideNoControlsWarning: true
 			}
 		}
-
-		const h3Style = {
-			style: {
-				paddingTop: '1rem'
-			}
-		}
-
-		const h2Style = {
-			style: {
-				paddingTop: '2rem'
-			}
-		}
-
-		return (
-			<div>
-				<h1>Diagrams</h1>
-
-				<p {...paragraphStyle}>
-					React components for building diagram experiences, using the Carbon Design System.
-				</p>
-
-				<p {...paragraphStyle}>
-					<b>
-						Note that Carbon Charts does not provide layouts for diagrams. You can utilize these
-						components alongside graphing libraries, or by composing your own layouts (see section
-						3).
-					</b>
-				</p>
-
-				<h2 {...h2Style}>Examples</h2>
-
-				<h3 {...h3Style}>1. Simple static layout</h3>
-
-				<p {...paragraphStyle}>
-					A simple composed diagram, using statically defined x and y coordinates.{' '}
-					<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
-						View source
-					</a>
-				</p>
-
-				<SimpleStatic />
-
-				<h3 {...h3Style}>2. Programmatic static layout</h3>
-
-				<p {...paragraphStyle}>
-					A composed diagram, rendered using arrays of statically defined x and y coordinates.{' '}
-					<a href="https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories/diagrams/0_Diagrams.stories.js">
-						View source
-					</a>
-				</p>
-
-				<ProgrammaticStatic />
-
-				<h3 {...h3Style}>3. Layouts using external dependencies</h3>
-
-				<p>
-					Here&apos;s an example using <b>elkjs</b> in React
-				</p>
-
-				<iframe
-					src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-					style={{
-						width: '100%',
-						height: '47rem',
-						marginTop: '1em',
-						border: 0,
-						borderRadius: '.25rem'
-					}}></iframe>
-			</div>
-		)
-	},
-	{
-		controls: {
-			hideNoControlsWarning: true
-		}
-	}
-)
+	)
 
 const DesktopOnlyMessage = () => <div className="cp-message">This is a desktop-only example</div>
 
@@ -135,7 +143,7 @@ const SimpleStatic = () => (
 				width={nodeWidth}>
 				<CardNode onClick={() => console.log('CardNode was clicked')}>
 					<CardNodeColumn>
-						<User />
+						<User size={20} />
 					</CardNodeColumn>
 					<CardNodeColumn>
 						<CardNodeTitle>Title</CardNodeTitle>
@@ -162,18 +170,18 @@ const SimpleStatic = () => (
 
 const ProgrammaticStatic = () => {
 	const nodeData = [
-		{ id: 'a', x: 0, y: 16, icon: <User />, nodeWidth, nodeHeight },
-		{ id: 'b', x: 250, y: 16, icon: <Wikis />, nodeWidth, nodeHeight },
+		{ id: 'a', x: 0, y: 16, icon: <User  size={20} />, nodeWidth, nodeHeight },
+		{ id: 'b', x: 250, y: 16, icon: <Wikis size={20}/>, nodeWidth, nodeHeight },
 		{
 			id: 'c',
 			x: 600,
 			y: 200,
-			icon: <Debug />,
+			icon: <Debug size={20} />,
 			ShapeNode: true,
 			nodeWidth: ShapeNodeSize,
 			nodeHeight: ShapeNodeSize
 		},
-		{ id: 'd', x: 0, y: 150, icon: <Wikis />, nodeWidth, nodeHeight }
+		{ id: 'd', x: 0, y: 150, icon: <Wikis size={20} />, nodeWidth, nodeHeight }
 	]
 
 	const edgeData = [
