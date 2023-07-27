@@ -68,7 +68,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.13",
     "eslint-plugin-svelte3": "^4.0.0",
-    "prettier-plugin-svelte": "^3.0.1",
+    "prettier-plugin-svelte": "^3.0.2",
     "publint": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

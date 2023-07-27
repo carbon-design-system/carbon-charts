@@ -2347,7 +2347,7 @@ __metadata:
     eslint-config-prettier: ^8.8.0
     eslint-plugin-storybook: ^0.6.13
     eslint-plugin-svelte3: ^4.0.0
-    prettier-plugin-svelte: ^3.0.1
+    prettier-plugin-svelte: ^3.0.2
     publint: ^0.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -17114,13 +17114,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-svelte@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "prettier-plugin-svelte@npm:3.0.1"
+"prettier-plugin-svelte@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "prettier-plugin-svelte@npm:3.0.2"
   peerDependencies:
     prettier: ^3.0.0
     svelte: ^3.2.0 || ^4.0.0-next.0
-  checksum: e2e3bebc8b1978b46f454a55367710f5784ff8d3525f51d8def4341198239736b12d491b1695d2afbbb1de0daa0883c58b94a7118deabf92793c2ef841d08987
+  checksum: 409fc154777a4aca16411162148883ecc4d84681c24ffd3cf91e4756da037a8406a3cae28094854fef28d763ad0a45dbff2282ea093c5d13d4e2c8ba6c2c5ef4
   languageName: node
   linkType: hard
 
