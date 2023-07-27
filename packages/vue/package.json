@@ -27,7 +27,8 @@
     "start": "yarn storybook",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
     "format": "prettier --write src/ --ignore-path ../../.eslintignore",
-    "clean": "rm -rf dist demo/bundle"
+    "clean": "rm -rf dist demo/bundle",
+    "pub:demo": "cp -a demo/bundle/. ../../pages/vue"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
@@ -92,6 +93,7 @@
     "heatmap",
     "wordcloud",
     "histogram",
+    "alluvial",
     "geo",
     "bar",
     "bullet",

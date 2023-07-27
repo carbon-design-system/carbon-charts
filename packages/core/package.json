@@ -74,7 +74,8 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
     "format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore",
-    "clean": "rm -rf dist demo/bundle"
+    "clean": "rm -rf dist demo/bundle",
+    "pub:demo": "cp -a demo/bundle/. ../../pages"
   },
   "repository": {
     "type": "git",
@@ -165,6 +166,7 @@
     "heatmap",
     "wordcloud",
     "histogram",
+    "alluvial",
     "geo",
     "bar",
     "bullet",

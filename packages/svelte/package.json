@@ -18,7 +18,8 @@
     "format": "prettier --plugin-search-dir . --write . --ignore-path ../../.eslintignore",
     "clean": "rm -rf dist demo/bundle",
     "preview": "vite preview",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "pub:demo": "cp -a demo/bundle/. ../../pages/svelte"
   },
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -118,6 +119,7 @@
     "heatmap",
     "wordcloud",
     "histogram",
+    "alluvial",
     "geo",
     "bar",
     "bullet",
