@@ -2226,7 +2226,7 @@ __metadata:
     d3-sankey: ^0.12.3
     downlevel-dts: ^0.11.0
     eslint: ^8.45.0
-    eslint-config-prettier: ^8.8.0
+    eslint-config-prettier: ^8.9.0
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-storybook: ^0.6.13
     ng-packagr: ^16.1.0
@@ -2299,7 +2299,7 @@ __metadata:
     d3-sankey: ^0.12.3
     downlevel-dts: ^0.11.0
     eslint: ^8.45.0
-    eslint-config-prettier: ^8.8.0
+    eslint-config-prettier: ^8.9.0
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-react: ^7.33.0
     eslint-plugin-storybook: ^0.6.13
@@ -2344,10 +2344,10 @@ __metadata:
     d3-cloud: ^1.2.5
     d3-sankey: ^0.12.3
     eslint: ^8.45.0
-    eslint-config-prettier: ^8.8.0
+    eslint-config-prettier: ^8.9.0
     eslint-plugin-storybook: ^0.6.13
     eslint-plugin-svelte3: ^4.0.0
-    prettier-plugin-svelte: ^3.0.2
+    prettier-plugin-svelte: ^3.0.3
     publint: ^0.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -2441,7 +2441,7 @@ __metadata:
     date-fns: ^2.30.0
     downlevel-dts: ^0.11.0
     eslint: ^8.45.0
-    eslint-config-prettier: ^8.8.0
+    eslint-config-prettier: ^8.9.0
     eslint-plugin-storybook: ^0.6.13
     html-to-image: ^1.11.11
     jsdom: ^22.1.0
@@ -11127,6 +11127,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-prettier@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "eslint-config-prettier@npm:8.9.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: a675d0dabd76b700ef2d062b5ec6a634e105a8e8c070f95281fd2ccb614527fac60b4c758132058c50f0521fd19313f1f5be45ce9ebf081f2e5f77ae6eb7d8db
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-prettier@npm:^5.0.0":
   version: 5.0.0
   resolution: "eslint-plugin-prettier@npm:5.0.0"
@@ -17114,13 +17125,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-svelte@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "prettier-plugin-svelte@npm:3.0.2"
+"prettier-plugin-svelte@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "prettier-plugin-svelte@npm:3.0.3"
   peerDependencies:
     prettier: ^3.0.0
     svelte: ^3.2.0 || ^4.0.0-next.0
-  checksum: 409fc154777a4aca16411162148883ecc4d84681c24ffd3cf91e4756da037a8406a3cae28094854fef28d763ad0a45dbff2282ea093c5d13d4e2c8ba6c2c5ef4
+  checksum: 411e50afabb5925bd73e85d35f989f3ffbd9b96764aebe733ea03f0b0eeb8add5a7452d5c1e68a1dff20b8615f99fa2c92db62f2d8b7d892325bdb587284f46e
   languageName: node
   linkType: hard
 
