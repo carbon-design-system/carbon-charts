@@ -1,16 +1,8 @@
-import { arc as d3Arc, interpolateHsl, line, rgb, scaleLinear } from 'd3'
-import { clamp, getProperty } from '@/tools'
+import { arc as d3Arc, line, scaleLinear } from 'd3'
+
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
-import {
-  Events,
-  GaugeTypes,
-  ArrowDirections,
-  ColorClassNameTypes,
-  Alignments,
-  RenderTypes
-} from '@/interfaces/enums'
-import { Roles } from '@/interfaces/a11y'
+import { RenderTypes } from '@/interfaces/enums'
 import { segmentedGauge as segmentedGaugeConfigs } from '@/configuration'
 
 export class EXPERIMENTAL_SegmentedGauge extends Component {
@@ -70,10 +62,8 @@ export class EXPERIMENTAL_SegmentedGauge extends Component {
     )
 
     // Update data on all bars
-    const numberOfTicks = 3;
-    const arcPaths = arcs
-      .selectAll('path')
-      .data(Array(numberOfTicks).fill(1 / numberOfTicks))
+    const numberOfTicks = 3
+    const arcPaths = arcs.selectAll('path').data(Array(numberOfTicks).fill(1 / numberOfTicks))
 
     // Remove bars that are no longer needed
     arcPaths.exit().attr('opacity', 0).remove()
@@ -138,7 +128,13 @@ export class EXPERIMENTAL_SegmentedGauge extends Component {
         const newAngle =
           segmentedGaugeConfigs.startAngle +
           ratio * (segmentedGaugeConfigs.endAngle - segmentedGaugeConfigs.startAngle)
-        return 'rotate(' + newAngle + ') translate(0,' + (segmentedGaugeConfigs.ticksDistance - radius) + ')'
+        return (
+          'rotate(' +
+          newAngle +
+          ') translate(0,' +
+          (segmentedGaugeConfigs.ticksDistance - radius) +
+          ')'
+        )
       })
       .attr('text-anchor', function (_, i) {
         if (i === ticks.length - 1) {
