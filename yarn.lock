@@ -2205,8 +2205,8 @@ __metadata:
     "@angular/platform-browser-dynamic": ^16.1.7
     "@babel/core": ^7.22.9
     "@carbon/charts": "workspace:*"
-    "@carbon/icon-helpers": ^10.43.0
-    "@carbon/icons": ^11.23.0
+    "@carbon/icon-helpers": ^10.43.1
+    "@carbon/icons": ^11.23.1
     "@carbon/telemetry": ~0.1.0
     "@stackblitz/sdk": ^1.9.0
     "@storybook/addon-essentials": ^7.1.1
@@ -2271,7 +2271,7 @@ __metadata:
     "@babel/preset-react": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
     "@carbon/charts": "workspace:*"
-    "@carbon/icons-react": ^11.23.0
+    "@carbon/icons-react": ^11.23.1
     "@carbon/telemetry": ~0.1.0
     "@rushstack/eslint-patch": ^1.3.2
     "@stackblitz/sdk": 1.9.0
@@ -2408,12 +2408,12 @@ __metadata:
   resolution: "@carbon/charts@workspace:packages/core"
   dependencies:
     "@babel/core": ^7.22.9
-    "@carbon/colors": ^11.18.0
+    "@carbon/colors": ^11.18.1
     "@carbon/import-once": ^10.7.0
-    "@carbon/layout": ^11.17.0
-    "@carbon/styles": ^1.34.0
+    "@carbon/layout": ^11.17.1
+    "@carbon/styles": ^1.34.1
     "@carbon/telemetry": ~0.1.0
-    "@carbon/themes": ^11.22.0
+    "@carbon/themes": ^11.22.1
     "@carbon/utils-position": ^1.1.4
     "@rushstack/eslint-patch": ^1.3.2
     "@stackblitz/sdk": ^1.9.0
@@ -2470,10 +2470,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.18.0":
-  version: 11.18.0
-  resolution: "@carbon/colors@npm:11.18.0"
-  checksum: 6df1aada98f0e421063e70ffb424f867d5e20c332f5a0549a8c4011325b4a941eec1fc8c1564ad20bf95d21dceb919b707e1b562f5277ddb542f57d8c8389120
+"@carbon/colors@npm:^11.18.1":
+  version: 11.18.1
+  resolution: "@carbon/colors@npm:11.18.1"
+  checksum: e27de1b09e50e02380c09d44915e6ba3522fba6215d1c9cd5ef4e6c72be2bd411f4514b6ef43fb999aa585da8dad3fede6da91e4bb5ee42aa74891c37d5a8172
   languageName: node
   linkType: hard
 
@@ -2484,39 +2484,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.17.0":
-  version: 11.17.0
-  resolution: "@carbon/grid@npm:11.17.0"
+"@carbon/grid@npm:^11.17.1":
+  version: 11.17.1
+  resolution: "@carbon/grid@npm:11.17.1"
   dependencies:
-    "@carbon/layout": ^11.17.0
-  checksum: e11a02709e79f40fcc8f5524ac41c172b5eb4d2a57d1a9333c3068c29762a34e2bb31a83709d42cc4ba1a6a8c0182329744536f599dab74d43b8448449e12d1f
+    "@carbon/layout": ^11.17.1
+  checksum: d4c898f972ac4d5383bd3322e5bde1682590cdcc500b7d5cddceb8e8af10f48189e2cc37a5aec664034f933e6ca8114259b1ace917bf0574c7935468a960191c
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.43.0":
-  version: 10.43.0
-  resolution: "@carbon/icon-helpers@npm:10.43.0"
-  checksum: ca1e607cfe5c50dc2e0ddc7632ad4a81e8e1304d2dc91508223e51b6e1b17f42f2bf8bf97c87eb636ae1c537bde12fd46483cc173db77bf268c03d590e8797b7
+"@carbon/icon-helpers@npm:^10.43.1":
+  version: 10.43.1
+  resolution: "@carbon/icon-helpers@npm:10.43.1"
+  checksum: b77039f58dfb28ee42c832387a59f787fd14c2ebac98a36c6fb5cdcff84fb19c35a5854f0066e1ddead55440cad783e1e52923d2706a482ec1a7067dcf23330b
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.23.0":
-  version: 11.23.0
-  resolution: "@carbon/icons-react@npm:11.23.0"
+"@carbon/icons-react@npm:^11.23.1":
+  version: 11.23.1
+  resolution: "@carbon/icons-react@npm:11.23.1"
   dependencies:
-    "@carbon/icon-helpers": ^10.43.0
+    "@carbon/icon-helpers": ^10.43.1
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
-  checksum: db5383bac2cd2c31f484b5d797ee40b74a43f606e9a71cd4172142a15708f2bb7f108ccf732106b855d7baac93ab022373cc6e6c69f726a1a00e3cec52d56bef
+  checksum: 21cf57c4100e6799db5e43a15dfb28604e4497457aefc1ce00c8c8a0df6803233277b34a077b4a61ff15a39766e451d0cc5f3cfc4ccca212063d5788d217b840
   languageName: node
   linkType: hard
 
-"@carbon/icons@npm:^11.23.0":
-  version: 11.23.0
-  resolution: "@carbon/icons@npm:11.23.0"
-  checksum: a5f3979be43f50a905879a6882cc18e0107129ae39e65c354f82b84ad56c88d05ac3152712227133e36b32dbdc3914557fd85b1a529ec2dca642ce3cf0bc8c30
+"@carbon/icons@npm:^11.23.1":
+  version: 11.23.1
+  resolution: "@carbon/icons@npm:11.23.1"
+  checksum: 795ec41349df8d53399a8c8e92e0ec385fe8bb9e26f12749a980eca2590b306da478ecce32a8370c53d5296c28412d40c9e87c73764167a585d9f5c84bdd823c
   languageName: node
   linkType: hard
 
@@ -2527,38 +2527,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.17.0":
-  version: 11.17.0
-  resolution: "@carbon/layout@npm:11.17.0"
-  checksum: cb9731036ce80b282cd0685bd8d2ad6510996b9dedf2602e2abe2f8822ae6d3425254ca007c076465d61f67ed9bb8400da3d92b6835bd99e7b2a4ddad1c2ef00
+"@carbon/layout@npm:^11.17.1":
+  version: 11.17.1
+  resolution: "@carbon/layout@npm:11.17.1"
+  checksum: ebf5d3173ac2f05e8b3a1771ab0341da429096326452f38470a4a0f783d5f70e1f7914854fe4f31f1bcdd9c6bf23e2e8141d9fc0cce89dee643e2fe83289f5da
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.14.0":
-  version: 11.14.0
-  resolution: "@carbon/motion@npm:11.14.0"
-  checksum: 1e9f1f27af290ee00b8d26b926bb7309b1ce69a301c3d24c7690d2b62f7fe38bf756917b89e20378532bb368a026c21fb0469215932883d0fbb0cbe146ad3b1c
+"@carbon/motion@npm:^11.14.1":
+  version: 11.14.1
+  resolution: "@carbon/motion@npm:11.14.1"
+  checksum: 640650f85c04ebb343fc6cd87758fd4c368cecac7f140180c91d776a91ff881b93ff5b86d2066c5a8bb678fa7b6fb2648c6910a5d2ab001a53b9b597089e16f8
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.34.0":
-  version: 1.34.0
-  resolution: "@carbon/styles@npm:1.34.0"
+"@carbon/styles@npm:^1.34.1":
+  version: 1.34.1
+  resolution: "@carbon/styles@npm:1.34.1"
   dependencies:
-    "@carbon/colors": ^11.18.0
+    "@carbon/colors": ^11.18.1
     "@carbon/feature-flags": ^0.15.0
-    "@carbon/grid": ^11.17.0
-    "@carbon/layout": ^11.17.0
-    "@carbon/motion": ^11.14.0
-    "@carbon/themes": ^11.22.0
-    "@carbon/type": ^11.21.0
+    "@carbon/grid": ^11.17.1
+    "@carbon/layout": ^11.17.1
+    "@carbon/motion": ^11.14.1
+    "@carbon/themes": ^11.22.1
+    "@carbon/type": ^11.21.1
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: cd924884b1eaa5d7c96549cc8ebfc36cc3fff02c820b06a9647c2ac671b824cde609a9ee9c57191935e5ec1cc1276566d70aea96e9e8e3f0672a59c4848054a4
+  checksum: a33281dc7c6cbbe63373b2f853a8d8734ded4af667bc899a0b9e54dfd5ed7ec377c5723057608bcdc837566eeee239174271510427a92b67207ee29507cbfadf
   languageName: node
   linkType: hard
 
@@ -2571,25 +2571,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.22.0":
-  version: 11.22.0
-  resolution: "@carbon/themes@npm:11.22.0"
+"@carbon/themes@npm:^11.22.1":
+  version: 11.22.1
+  resolution: "@carbon/themes@npm:11.22.1"
   dependencies:
-    "@carbon/colors": ^11.18.0
-    "@carbon/layout": ^11.17.0
-    "@carbon/type": ^11.21.0
+    "@carbon/colors": ^11.18.1
+    "@carbon/layout": ^11.17.1
+    "@carbon/type": ^11.21.1
     color: ^4.0.0
-  checksum: 8ea7a80a29f617b5f960dc477f4c11b5951519ede2f3526cddbad88fe72ed6905c8e0194dfbd9a57e7c00c4f0091e6fa3c87f4a9b0999ec389264007d68d8d1c
+  checksum: 373971bfcfb4acfb5e18656791912bcf4a10a96b88cba589711fcb69e2db8a1d1848ac78aff488b392ba0ecd79bed9a5a2e92562234263f080e9442ff7a83fb2
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.21.0":
-  version: 11.21.0
-  resolution: "@carbon/type@npm:11.21.0"
+"@carbon/type@npm:^11.21.1":
+  version: 11.21.1
+  resolution: "@carbon/type@npm:11.21.1"
   dependencies:
-    "@carbon/grid": ^11.17.0
-    "@carbon/layout": ^11.17.0
-  checksum: 2c69a81dd8431849190e29f680afd5fb4b713be7f81bab207a3ced7300e3434e4b86aafb395207e52acadf50b1f45c46d86ed7ba55a1ff65135657c0ca8a2401
+    "@carbon/grid": ^11.17.1
+    "@carbon/layout": ^11.17.1
+  checksum: 190ab4f37cdc1cae5a3c37766a38af0ec29ca81285e206a6570b9ae7d531ff61f43c52e3dad298cf94af11ab6368ce75bb97f3e2c9643099b77e8295fee89894
   languageName: node
   linkType: hard
 
