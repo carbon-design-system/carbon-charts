@@ -80,7 +80,7 @@ export class EXPERIMENTAL_SegmentedGauge extends Component {
       //   })
       // )
       // .style('fill', () => getProperty(this.getOptions(), 'color', 'scale', 'value'))
-      .attr('fill', function (d: any, i) {
+      .attr('fill', function (_, i) {
         if (i === 0) {
           return 'var(--cds-support-success, #42be65)'
         } else if (i === 1) {
