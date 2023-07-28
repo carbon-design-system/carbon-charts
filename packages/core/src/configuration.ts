@@ -636,6 +636,7 @@ export {
 	circlePack,
 	color,
 	defaultLegendAdditionalItems,
+	segmentedGauge,
 	heatmap,
 	histogram,
 	legend,

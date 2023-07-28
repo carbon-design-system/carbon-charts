@@ -1,0 +1,9 @@
+@use '@carbon/styles/scss/theme' as *;
+
+.#{$prefix}--#{$charts-prefix}--gauge-segmented {
+	overflow: visible;
+
+	g.pointer path {
+		fill: $background-inverse;
+	}
+}

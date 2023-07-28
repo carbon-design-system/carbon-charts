@@ -1,5 +1,6 @@
 import { arc, select } from 'd3'
-import { clamp, getProperty } from '@/tools'
+import { clamp } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import {
