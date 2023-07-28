@@ -1,6 +1,9 @@
+// External Imports
+import { isEmpty } from 'lodash-es'
+
 // Internal Imports
 import { ChartModel } from './model'
-import { getProperty, isEmpty } from '@/tools'
+import { getProperty } from '@/tools'
 import { getColorScale } from '@/services/color-scale-utils'
 
 /**

@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: RadarChartCore
 	export let options: RadarChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: RadarChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

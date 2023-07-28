@@ -1,6 +1,6 @@
 # Carbon Charts React
 
-Carbon Charts React is a thin React wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency.
+Carbon Charts React is a thin React wrapper around the vanilla JavaScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency.
 
 The required styles should be imported from `@carbon/charts-react/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 

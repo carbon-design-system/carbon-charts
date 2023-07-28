@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
-import { clone, getProperty, removeArrayDuplicates } from '@/tools'
+import { cloneDeep, uniq } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { ChartModel } from './model'
 import { ScaleTypes, AxisPositions, AxisFlavor } from '@/interfaces/enums'
 
@@ -126,7 +127,7 @@ export class ChartModelCartesian extends ChartModel {
 	 */
 	setZoomBarData(newZoomBarData?: any) {
 		const sanitizedData = newZoomBarData
-			? this.sanitize(clone(newZoomBarData))
+			? this.sanitize(cloneDeep(newZoomBarData))
 			: this.getDisplayData() // if we're not passed explicit zoom data use the model
 
 		let zoomBarNormalizedValues = sanitizedData
@@ -137,7 +138,7 @@ export class ChartModelCartesian extends ChartModel {
 			const rangeIdentifier = cartesianScales.getRangeIdentifier()
 			// get all dates (Number) in displayData
 			let allDates = sanitizedData.map((datum: any) => datum[domainIdentifier].getTime())
-			allDates = removeArrayDuplicates(allDates).sort()
+			allDates = uniq(allDates).sort()
 
 			// Go through all date values
 			// And get corresponding data from each dataset

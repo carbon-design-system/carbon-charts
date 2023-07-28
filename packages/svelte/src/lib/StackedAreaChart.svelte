@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: StackedAreaChartCore
 	export let options: StackedAreaChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: StackedAreaChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

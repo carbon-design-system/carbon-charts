@@ -1,42 +1,11 @@
 import { pointer, type Numeric } from 'd3'
 import {
-	debounce,
 	merge,
 	cloneDeep,
 	unionBy,
-	uniq,
-	clamp,
-	flatten,
-	groupBy,
-	camelCase,
-	isEmpty,
-	isEqual,
-	flatMapDeep,
-	kebabCase,
-	fromPairs,
-	some
 } from 'lodash-es'
 import { CartesianOrientations, ScaleTypes, TruncationTypes } from '@/interfaces/enums'
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
-
-// lodash-es functions to export
-export {
-	debounce,
-	merge,
-	unionBy,
-	clamp,
-	flatten,
-	groupBy,
-	camelCase,
-	isEmpty,
-	isEqual,
-	flatMapDeep,
-	kebabCase,
-	fromPairs,
-	some
-}
-export const clone = cloneDeep
-export const removeArrayDuplicates = uniq
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null
@@ -66,7 +35,7 @@ export function debounceWithD3MousePosition(fn: any, delay: number, holder: any)
  * @returns merged options
  */
 export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
-	const clonedDefaultOptions = clone(defaultOptions)
+	const clonedDefaultOptions = cloneDeep(defaultOptions)
 	const providedAxesNames = Object.keys(providedOptions.axes || {})
 
 	// Use provide controls list if it exists
@@ -132,9 +101,9 @@ export function getDimensions(el: any) {
 }
 
 /**
- * Gets elements's x and y translations from transform attribute or returns null
+ * Gets elements' x and y translations from transform attribute or returns null
  *
- * @param {HTMLElement} element
+ * @param {HTMLElement} elementRef
  * @returns an object containing the translated x and y values or null
  */
 export function getTranslationValues(elementRef: HTMLElement) {
@@ -215,7 +184,7 @@ export function formatWidthHeightValues(value: string | number) {
  * Capitalizes first letter of a string
  *
  * @export
- * @param {any} string the input string to perform first letter capitalization with
+ * @param {any} word the input string to perform first letter capitalization with
  * @returns The transformed string after first letter is capitalized
  */
 export function capitalizeFirstLetter(word: string) {
@@ -326,7 +295,7 @@ export function arrayDifferences(oldArray: any[], newArray: any[]) {
  * Gets the duplicated keys from an array of data
  *
  * @export
- * @param {*} data - array of data
+ * @param {*} arr - array of data
  * @returns A list of the duplicated keys in data
  */
 export function getDuplicateValues(arr: any) {

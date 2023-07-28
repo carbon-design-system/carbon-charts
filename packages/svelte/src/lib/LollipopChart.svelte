@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: LollipopChartCore
 	export let options: LollipopChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: LollipopChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

@@ -27,8 +27,8 @@ npx lerna version prerelease --preid next --force-publish
 # For angular package, copies the version to dist/package.json using ng-packagr
 yarn build
 
-# Should not be needed
-node scripts/update-angular-dependency-version.cjs
+# As angular publishes from dist, lerna does not replace the "workspace:*" with the version
+node scripts/update-angular-dependency-version.mjs
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 

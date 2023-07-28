@@ -1,5 +1,6 @@
 import { extent, scaleLinear, scaleQuantize } from 'd3'
-import { getProperty, isEmpty } from '@/tools'
+import { isEmpty } from 'lodash-es'
+import { getProperty } from '@/tools'
 
 export function getDomain(data: any) {
 	const limits = extent(data, (d: any) => d.value)

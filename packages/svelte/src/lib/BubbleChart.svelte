@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: BubbleChartCore
 	export let options: BubbleChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: BubbleChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart
