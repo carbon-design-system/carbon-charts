@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: MeterChartCore
 	export let options: MeterChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: MeterChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

@@ -1,13 +1,12 @@
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import {
-	clone,
+	cloneDeep,
 	fromPairs,
-	getProperty,
 	groupBy,
 	merge,
-	removeArrayDuplicates,
-	updateLegendAdditionalItems
-} from '@/tools'
+	uniq,
+} from 'lodash-es'
+import { getProperty, updateLegendAdditionalItems } from '@/tools'
 import { color as colorConfigs, legend as legendConfigs } from '@/configuration'
 import { histogram as histogramConfigs } from '@/configuration-non-customizable'
 import { Events, ScaleTypes, ColorClassNameTypes } from '@/interfaces/enums'
@@ -133,7 +132,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData: any) {
-		const sanitizedData = this.sanitize(clone(newData))
+		const sanitizedData = this.sanitize(cloneDeep(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({
@@ -294,7 +293,7 @@ export class ChartModel {
 		if (bins) {
 			stackKeys = bins.map((bin: any) => `${bin.x0}-${bin.x1}`)
 		} else {
-			stackKeys = removeArrayDuplicates(
+			stackKeys = uniq(
 				displayData.map((datum: any) => {
 					const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datum)
 
@@ -545,7 +544,7 @@ export class ChartModel {
 	 * Should the data point be filled?
 	 * @param group
 	 * @param key
-	 * @param value
+	 * @param data
 	 * @param defaultFilled the default for this chart
 	 */
 	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
@@ -734,7 +733,7 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = legendConfigs.items.status
 		const options = this.getOptions()
 
-		const uniqueDataGroups = removeArrayDuplicates(data.map((datum: any) => datum[groupMapsTo]))
+		const uniqueDataGroups = uniq(data.map((datum: any) => datum[groupMapsTo]))
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {

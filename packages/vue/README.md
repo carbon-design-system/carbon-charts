@@ -1,6 +1,6 @@
 # Carbon Charts Vue
 
-Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. This version is for Vue.js ^3.3.0. For Vue.js 2.x support, please use `@carbon/charts-vue@latest`.
+Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavaScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. This version is for Vue.js ^3.3.0. For Vue.js 2.x support, please use `@carbon/charts-vue@latest`.
 
 The required styles should be imported from `@carbon/charts-vue/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
 

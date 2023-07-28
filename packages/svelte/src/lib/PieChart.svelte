@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: PieChartCore
 	export let options: PieChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: PieChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

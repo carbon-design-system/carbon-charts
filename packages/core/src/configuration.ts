@@ -1,6 +1,6 @@
 import { enUS as localeObject } from 'date-fns/locale'
+import { merge } from 'lodash-es'
 import { circlePack } from './configuration-non-customizable'
-import { merge } from './tools'
 import {
 	AlluvialChartOptions,
 	AreaChartOptions,

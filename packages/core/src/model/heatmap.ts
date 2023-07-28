@@ -1,5 +1,6 @@
 import { extent, scaleQuantize, scaleLinear } from 'd3'
-import { clone, getProperty, isEmpty } from '@/tools'
+import { cloneDeep, isEmpty } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
 import { getColorScale } from '@/services'
 import { ChartModelCartesian } from './cartesian-charts'
@@ -163,7 +164,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 			// Complete the matrix by cloning the column to all domains
 			uniqueDomain.forEach((dom: any) => {
-				this._matrix[dom] = clone(range)
+				this._matrix[dom] = cloneDeep(range)
 			})
 
 			// Fill in user passed data
@@ -183,7 +184,7 @@ export class HeatmapModel extends ChartModelCartesian {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData: any) {
-		const sanitizedData = this.sanitize(clone(newData))
+		const sanitizedData = this.sanitize(cloneDeep(newData))
 		const dataGroups = this.generateDataGroups(sanitizedData)
 
 		this.set({

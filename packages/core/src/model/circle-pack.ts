@@ -1,4 +1,5 @@
-import { getProperty, merge, updateLegendAdditionalItems } from '@/tools'
+import { merge } from 'lodash-es'
+import { getProperty, updateLegendAdditionalItems } from '@/tools'
 import { ChartModel } from './model'
 import { LegendItemType } from '@/interfaces/enums'
 

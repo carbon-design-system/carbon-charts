@@ -6,10 +6,10 @@
 	} from '@carbon/charts'
 	import BaseChart from './BaseChart.svelte'
 
-	export let chart: WordCloudChartCore
 	export let options: WorldCloudChartOptions
 	export let data: ChartTabularData
-	export let ref: HTMLDivElement
+	export let chart: WordCloudChartCore | null  = null
+	export let ref: HTMLDivElement | null  = null
 </script>
 
 <BaseChart

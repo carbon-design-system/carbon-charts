@@ -20,8 +20,8 @@ npx lerna version --yes --force-publish --conventional-commits --create-release 
 echo "Rebuild packages and demos so dist and demo/bundle directories are updated..."
 yarn build
 
-# Update packages/angular/dist/package.json @carbon/charts dependency version
-node scripts/update-angular-dependency-version.cjs
+# As angular publishes from dist, lerna does not replace the "workspace:*" with the version
+node scripts/update-angular-dependency-version.mjs
 
 # Authenticate with npm registry
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
