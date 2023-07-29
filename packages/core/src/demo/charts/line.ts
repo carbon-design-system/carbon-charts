@@ -271,7 +271,7 @@ export const lineTimeSeriesWithThresholdsOptions = {
 				{
 					value: new Date(2019, 0, 11),
 					label: 'Custom formatter',
-					valueFormatter: e => new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(e)
+					valueFormatter: e => new Intl.DateTimeFormat('en-CA', { month: 'short', day: '2-digit' }).format(e)
 				}
 			]
 		},
