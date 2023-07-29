@@ -65,7 +65,7 @@
     "d3": "^7.8.5",
     "d3-cloud": "^1.2.5",
     "d3-sankey": "^0.12.3",
-    "eslint": "^8.45.0",
+    "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-plugin-storybook": "^0.6.13",
     "eslint-plugin-svelte3": "^4.0.0",
