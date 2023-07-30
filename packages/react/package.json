@@ -86,7 +86,7 @@
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-storybook": "^0.6.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -95,7 +95,7 @@
     "style-loader": "^3.3.3",
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
-    "vite-plugin-dts": "^3.3.1",
+    "vite-plugin-dts": "^3.4.0",
     "webpack": "5.88.2"
   },
   "publishConfig": {
