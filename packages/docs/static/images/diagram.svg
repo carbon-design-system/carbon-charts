@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="239px" height="239px" viewBox="0 0 239 239" version="1.1"
+	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>network-diagram copy</title>
+	<g id="network-diagram--copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="Group-3" transform="translate(32.000000, 102.000000)">
+			<rect id="Rectangle" fill="#A6C8FF" x="0" y="0" width="29.3193717" height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-2" fill="#A6C8FF" x="47.6439791" y="4.70734562e-14"
+				width="29.3193717" height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-6" fill="#A6C8FF" x="95.2879581" y="4.70734562e-14"
+				width="29.3193717" height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-11" fill="#A6C8FF" x="95.2879581" y="39.5212905" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-10" fill="#A6C8FF" x="95.2879581" y="19.7606452" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-16" fill="#A6C8FF" x="145.680628" y="39.5212905" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-17" fill="#A6C8FF" x="145.680628" y="59.2819357" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-18" fill="#A6C8FF" x="145.680628" y="79.042581" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-23" fill="#A6C8FF" x="145.680628" y="4.70734562e-14"
+				width="29.3193717" height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-3" fill="#A6C8FF" x="47.6439791" y="19.7606452" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-5" fill="#A6C8FF" x="47.6439791" y="39.5212905" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-12" fill="#A6C8FF" x="47.6439791" y="79.042581" width="29.3193717"
+				height="12.4804075"></rect>
+			<rect id="Rectangle-Copy-9" fill="#A6C8FF" x="47.6439791" y="59.2819357" width="29.3193717"
+				height="12.4804075"></rect>
+			<path
+				d="M125.52356,9.36030564 L132.249769,9.36030564 C133.178465,9.36030564 133.931321,10.1053281 133.931321,11.02436 L133.931321,25.2917046 C133.931321,26.1243411 134.579967,27.040883 135.627568,27.040883 C136.32597,27.040883 138.455349,27.040883 142.015707,27.040883"
+				id="Rectangle-Copy-15" stroke="#0F62FE" stroke-width="0.68607"
+				stroke-dasharray="0.7318079960346222,0.7318079960346222"
+				transform="translate(133.769634, 18.200594) scale(1, -1) translate(-133.769634, -18.200594) "></path>
+			<g id="Group-2" transform="translate(29.319372, 2.412180)">
+				<line x1="0" y1="1.74795624" x2="16.4921466" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(16.760144, 1.747956) scale(-1, 1) translate(-16.760144, -1.747956) "
+					points="18.1344895 -1.98756004e-13 18.1344895 3.49591247 15.3857984 1.74795624"></polygon>
+			</g>
+			<g id="Group-2-Copy" transform="translate(76.963351, 2.412180)">
+				<line x1="0" y1="1.74795624" x2="16.4921466" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(16.760144, 1.747956) scale(-1, 1) translate(-16.760144, -1.747956) "
+					points="18.1344895 -1.98756004e-13 18.1344895 3.49591247 15.3857984 1.74795624"></polygon>
+			</g>
+			<g id="Group-2-Copy-4"
+				transform="translate(135.507035, 4.160136) scale(-1, 1) translate(-135.507035, -4.160136) translate(124.607330, 2.412180)">
+				<line x1="0" y1="1.74795624" x2="19.2408377" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(20.425065, 1.747956) scale(-1, 1) translate(-20.425065, -1.747956) "
+					points="21.799411 -1.98756004e-13 21.799411 3.49591247 19.0507199 1.74795624"></polygon>
+			</g>
+			<g id="Group-2-Copy-5"
+				transform="translate(135.507035, 43.681426) scale(-1, 1) translate(-135.507035, -43.681426) translate(124.607330, 41.933470)">
+				<line x1="0" y1="1.74795624" x2="19.2408377" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(20.425065, 1.747956) scale(-1, 1) translate(-20.425065, -1.747956) "
+					points="21.799411 -1.98756004e-13 21.799411 3.49591247 19.0507199 1.74795624"></polygon>
+			</g>
+			<g id="Group-2-Copy-2" transform="translate(76.963351, 22.172825)">
+				<line x1="0" y1="1.74795624" x2="16.4921466" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(16.760144, 1.747956) scale(-1, 1) translate(-16.760144, -1.747956) "
+					points="18.1344895 -1.98756004e-13 18.1344895 3.49591247 15.3857984 1.74795624"></polygon>
+			</g>
+			<g id="Group-2-Copy-3" transform="translate(76.963351, 41.933470)">
+				<line x1="0" y1="1.74795624" x2="16.4921466" y2="1.74795624" id="Path-2" stroke="#0F62FE"
+					stroke-width="0.68607"></line>
+				<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+					transform="translate(16.760144, 1.747956) scale(-1, 1) translate(-16.760144, -1.747956) "
+					points="18.1344895 -1.98756004e-13 18.1344895 3.49591247 15.3857984 1.74795624"></polygon>
+			</g>
+			<polygon id="Rectangle-Copy-14" fill="#0F62FE"
+				transform="translate(46.079516, 23.920781) scale(-1, 1) translate(-46.079516, -23.920781) "
+				points="47.4538613 22.1728249 47.4538613 25.6687373 44.7051702 23.9207811"></polygon>
+			<g id="Group" transform="translate(35.732984, 20.800679)">
+				<polygon id="Rectangle-Copy-21" fill="#0F62FE"
+					transform="translate(10.346531, 22.880747) scale(-1, 1) translate(-10.346531, -22.880747) "
+					points="11.720877 21.1327909 11.720877 24.6287034 8.97218586 22.8807471"></polygon>
+				<path
+					d="M-1.77635684e-15,0 L-1.77635684e-15,21.0512271 C-1.65261657e-15,22.0616431 0.819104004,22.8807471 1.82952,22.8807471 L9.16230366,22.8807471 L9.16230366,22.8807471"
+					id="Path-3-Copy" stroke="#0F62FE" stroke-width="0.68607"></path>
+			</g>
+			<g id="Group-Copy" transform="translate(35.732984, 40.561324)">
+				<polygon id="Rectangle-Copy-21" fill="#0F62FE"
+					transform="translate(10.346531, 22.880747) scale(-1, 1) translate(-10.346531, -22.880747) "
+					points="11.720877 21.1327909 11.720877 24.6287034 8.97218586 22.8807471"></polygon>
+				<path
+					d="M-1.77635684e-15,0 L-1.77635684e-15,21.0512271 C-1.43057196e-15,22.0616431 0.819104004,22.8807471 1.82952,22.8807471 L9.16230366,22.8807471 L9.16230366,22.8807471"
+					id="Path-3-Copy" stroke="#0F62FE" stroke-width="0.68607"></path>
+			</g>
+			<g id="Group-Copy-2" transform="translate(35.732984, 60.321970)">
+				<polygon id="Rectangle-Copy-21" fill="#0F62FE"
+					transform="translate(10.346531, 22.880747) scale(-1, 1) translate(-10.346531, -22.880747) "
+					points="11.720877 21.1327909 11.720877 24.6287034 8.97218586 22.8807471"></polygon>
+				<path
+					d="M-1.77635684e-15,0 L-1.77635684e-15,21.0512271 C1.42242796e-16,22.0616431 0.819104004,22.8807471 1.82952,22.8807471 L9.16230366,22.8807471 L9.16230366,22.8807471"
+					id="Path-3-Copy" stroke="#0F62FE" stroke-width="0.68607"></path>
+			</g>
+			<g id="Group-Copy-3" transform="translate(135.602094, 60.321970)">
+				<polygon id="Rectangle-Copy-21" fill="#0F62FE"
+					transform="translate(8.514071, 22.880747) scale(-1, 1) translate(-8.514071, -22.880747) "
+					points="9.88841623 21.1327909 9.88841623 24.6287034 7.13972513 22.8807471"></polygon>
+				<path
+					d="M0,0 L0,21.0512271 C3.45784876e-16,22.0616431 0.819104004,22.8807471 1.82952,22.8807471 L7.32984293,22.8807471 L7.32984293,22.8807471"
+					id="Path-3-Copy" stroke="#0F62FE" stroke-width="0.68607"></path>
+			</g>
+			<path
+				d="M29.3193717,4.16013584 L33.9034643,4.16013584 C34.9138803,4.16013584 35.7329843,4.97923985 35.7329843,5.98965584 L35.7329843,22.0912611 C35.7329843,23.1016771 36.5520883,23.9207811 37.5625043,23.9207811 L44.895288,23.9207811 L44.895288,23.9207811"
+				id="Path-3" stroke="#0F62FE" stroke-width="0.68607"></path>
+			<path
+				d="M129.188482,43.6814263 L133.772574,43.6814263 C134.78299,43.6814263 135.602094,44.5005303 135.602094,45.5109463 L135.602094,61.6125516 C135.602094,62.6229676 136.421198,63.4420716 137.431614,63.4420716 L144.764398,63.4420716 L144.764398,63.4420716"
+				id="Path-3-Copy-2" stroke="#0F62FE" stroke-width="0.68607"></path>
+			<polygon id="Rectangle-Copy-13" fill="#0F62FE"
+				transform="translate(144.116165, 63.442072) scale(-1, 1) translate(-144.116165, -63.442072) "
+				points="145.49051 61.6941153 145.49051 65.1900278 142.741819 63.4420716"></polygon>
+			<polygon id="Rectangle-Copy-19" fill="#0F62FE"
+				transform="translate(144.306283, 9.360306) scale(-1, 1) translate(-144.306283, -9.360306) "
+				points="145.680628 7.61234941 145.680628 11.1082619 142.931937 9.36030564"></polygon>
+		</g>
+	</g>
+</svg>
