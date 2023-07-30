@@ -36,6 +36,10 @@ $css--reset: false; // Do not include reset CSS
 }
 
 html {
+	@include styles.theme(styles.$g100);
+}
+
+html[data-carbon-theme='white'] {
 	@include styles.theme(styles.$white);
 }
 

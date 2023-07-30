@@ -1,16 +1,17 @@
 {
   "name": "@carbon/charts-monorepo",
   "private": true,
-  "description": "Carbon charting components, lerna monorepo",
+  "description": "Carbon Charts component libraries for JavaScript, Angular, React, Svelte and Vue",
   "scripts": {
     "clean:root": "rm -rf node_modules yarn.lock .yarn/cache .yarn/install-state.gz",
+    "clean:pages": "rm -rf pages && mkdir -p pages && touch pages/.nojekyll && echo 'charts.carbondesignsystem.com' > pages/CNAME",
     "clean": "lerna clean && lerna run clean && yarn clean:root",
     "commit": "git-cz",
     "build:packages": "lerna run --stream build:package",
-    "build:demos": "bash scripts/build-demos.sh",
-    "build": "bash scripts/build-packages-and-demos.sh",
+    "build:demos": "NODE_ENV=production lerna run --stream build:demo",
+    "pub:demos": "lerna run pub:demo",
+    "build": "yarn build:packages && yarn build:demos && yarn clean:pages && yarn pub:demos",
     "deploy": "bash scripts/deploy.sh",
-    "deploy:next": "bash scripts/next.sh",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
@@ -22,10 +23,10 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.16.1"
+    "node": "^18.17.0"
   },
-  "packageManager": "yarn@3.5.1",
-  "prettier": "./prettier.config.cjs",
+  "packageManager": "yarn@3.6.1",
+  "prettier": "./prettier.config.mjs",
   "devDependencies": {
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -33,8 +34,7 @@
     "lerna": "^7.1.4",
     "pinst": "^3.0.0",
     "prettier": "^3.0.0",
-    "prettier-config-carbon": "^0.11.0",
-    "prettier-plugin-svelte": "^3.0.0"
+    "prettier-config-carbon": "^0.11.0"
   },
   "husky": {
     "hooks": {
@@ -54,7 +54,36 @@
     "url": "git@github.com:carbon-design-system/carbon-charts.git"
   },
   "keywords": [
-    "charts"
+    "charts",
+    "graphs",
+    "radar",
+    "gauge",
+    "donut",
+    "pie",
+    "sparkline",
+    "tree",
+    "treemap",
+    "heatmap",
+    "wordcloud",
+    "histogram",
+    "alluvial",
+    "geo",
+    "bar",
+    "bullet",
+    "scatter",
+    "meter",
+    "line",
+    "javascript",
+    "angular",
+    "react",
+    "svelte",
+    "vue",
+    "component",
+    "carbon",
+    "ibm",
+    "svg",
+    "data",
+    "typescript"
   ],
   "author": "IBM",
   "license": "Apache-2.0",

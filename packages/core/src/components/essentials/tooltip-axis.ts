@@ -9,8 +9,8 @@ export class AxisChartsTooltip extends Tooltip {
 			return e.detail.items
 		}
 
-		const data = e.detail.data
-		if (!data.length || !data[0]) {
+		const { data } = e.detail
+		if (!data || !data.length || !data[0]) {
 			return []
 		}
 

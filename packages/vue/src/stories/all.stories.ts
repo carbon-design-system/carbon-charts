@@ -40,10 +40,14 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	// Create story group
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
+	groupStories.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
+
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
-		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		const component = ChartComponents[demo.chartType.vue as keyof typeof ChartComponents]
 
 		groupStories.add(
@@ -70,7 +74,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 						</h3>
 
 						<p class="props">
-							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
+							<b>Props:</b>&nbsp;<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options</a>
 						</p>
 
 						<div class="marginTop-30" id="chart-demo">

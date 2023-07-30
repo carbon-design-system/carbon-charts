@@ -82,7 +82,7 @@ export interface BasedAxisOptions {
 		/**
 		 * function to format the ticks
 		 */
-		formatter?: (tick: number, i: number) => string
+		formatter?: (tick: number | Date, i: number) => string
 		/**
 		 * optional custom array of tick values that is within the domain of data
 		 */

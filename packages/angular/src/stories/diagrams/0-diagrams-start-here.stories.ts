@@ -1,19 +1,29 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { buildElbowPathString, type Coordinates } from '@carbon/charts'
-import { UserModule, WikisModule } from '@carbon/icons-angular'
+import { buildElbowPathString, ChartTheme, type Coordinates } from '@carbon/charts'
+import { getAttributes, toString } from '@carbon/icon-helpers'
+import userIcon from '@carbon/icons/es/user/20'
+import wikisIcon from '@carbon/icons/es/wikis/20'
 import { CardNodeModule, EdgeModule, MarkerModule, ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
 
+const DEFAULT_THEME = ChartTheme.WHITE
 const nodeHeight = 64
 const nodeWidth = 200
 const circleSize = 64
+const userIconStr = toString({ ...userIcon, attrs: getAttributes(userIcon.attrs) })
+const wikisIconStr = toString({ ...wikisIcon, attrs: getAttributes(wikisIcon.attrs) })
 
 const stories = storiesOf('Diagrams', module)
 stories.addDecorator(
 	moduleMetadata({
-		imports: [ShapeNodeModule, CardNodeModule, EdgeModule, MarkerModule, UserModule, WikisModule]
+		imports: [ShapeNodeModule, CardNodeModule, EdgeModule, MarkerModule]
 	})
 )
+
+stories.addDecorator(story => {
+	document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+	return story()
+})
 
 stories.add(
 	'Start here',
@@ -82,6 +92,10 @@ stories.add(
 		}
 	}),
 	{
+		backgrounds: {
+			default: 'white',
+			values: [{ name: 'white', value: '#fff' }]
+		},
 		controls: {
 			hideNoControlsWarning: true
 		}
@@ -103,7 +117,7 @@ const SimpleStatic = `
 				<xhtml:div>
 					<ibm-diagram-card-node as="button">
 						<ibm-diagram-card-node-column>
-							<svg ibmIconUser size="20"></svg>
+							${userIconStr}
 						</ibm-diagram-card-node-column>
 						<ibm-diagram-card-node-column>
 							<ibm-diagram-card-node-title>
@@ -125,7 +139,7 @@ const SimpleStatic = `
 		</svg>
 
 		<ng-template #wikiTemplate>
-			<svg ibmIconWikis size="20"></svg>
+			${wikisIconStr}
 		</ng-template>
 	</div>
 `
@@ -160,9 +174,9 @@ const edgeData = [
 	}
 ]
 
-const edgeMapped = edgeData.map((link) => {
-	const sourceNode = nodeData.find((node) => node.id === link.source)
-	const targetNode = nodeData.find((node) => node.id === link.target)
+const edgeMapped = edgeData.map(link => {
+	const sourceNode = nodeData.find(node => node.id === link.source)
+	const targetNode = nodeData.find(node => node.id === link.target)
 
 	if (!sourceNode || !targetNode)
 		throw new Error('Either sourceNode or targetNode were not defined.')
@@ -193,7 +207,7 @@ const ProgrammaticStatic = `
 				<xhtml:div *ngIf="!node.circle">
 					<ibm-diagram-card-node as="button">
 						<ibm-diagram-card-node-column>
-							<svg ibmIconUser size="20"></svg>
+							${userIconStr}
 						</ibm-diagram-card-node-column>
 						<ibm-diagram-card-node-column>
 							<ibm-diagram-card-node-title>
@@ -209,11 +223,11 @@ const ProgrammaticStatic = `
 		</svg>
 
 		<ng-template #userTemplate>
-			<svg ibmIconUser size="20"></svg>
+			${userIconStr}
 		</ng-template>
 
 		<ng-template #wikiTemplate>
-			<svg ibmIconWikis size="20"></svg>
+			${wikisIconStr}
 		</ng-template>
 	</div>
 `

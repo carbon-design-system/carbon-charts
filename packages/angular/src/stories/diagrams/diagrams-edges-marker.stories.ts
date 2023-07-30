@@ -1,7 +1,9 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
+import { ChartTheme } from '@carbon/charts'
 import { EdgeModule, MarkerModule } from '../../'
 import { getTemplate } from './utils'
 
+const DEFAULT_THEME = ChartTheme.WHITE
 const linkSource = { x: 0, y: 0 }
 const linkTarget = { x: 300, y: 0 }
 
@@ -11,6 +13,10 @@ storiesOf('Diagrams/Edges/Marker', module)
 			imports: [MarkerModule, EdgeModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Arrow left',
 		() => ({

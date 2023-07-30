@@ -6,28 +6,32 @@ import ChartWrapper from './ChartWrapper.svelte'
 import Welcome from './Welcome.svelte'
 
 const DEFAULT_THEME = ChartTheme.G100
-const introStories = storiesOf('Docs', module) // API to be deprecated soon
 
-introStories.add(
-	'Welcome',
-	() => ({
-		Component: Welcome
-	}),
-	{
-		controls: {
-			hideNoControlsWarning: true
+storiesOf('Docs', module)
+	.add(
+		'Welcome',
+		() => ({
+			Component: Welcome
+		}),
+		{
+			controls: {
+				hideNoControlsWarning: true
+			}
 		}
-	}
-)
+	)
 
 // Loop through demos for group
 storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 	const groupStories = storiesOf(`${demoGroup.storyGroupTitle}/${demoGroup.title}`, module)
 
+	groupStories.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
+
 	// Create stories within story group
 	demoGroup.demos.forEach((demo: Demo) => {
 		demo.options.theme = DEFAULT_THEME
-		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
 		let chartType = demo.chartType.vanilla
 
 		switch (chartType) {
