@@ -1,24 +1,25 @@
 <script lang="ts">
-  import { base } from '$app/paths'
   import {
 		Header,
 		SideNav,
 		SideNavItems,
 		SideNavMenu,
 		SideNavMenuItem,
-		SideNavLink,
 		SideNavDivider,
 		SkipToContent,
 		Content,
 		Grid,
 		Row,
-		Column
+		Column,
+		HeaderUtilities,
+		HeaderGlobalAction
 	} from 'carbon-components-svelte'
-
-  import Launch from 'carbon-components-svelte/src/icons/Launch.svelte'
+	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte'
+	import { base } from '$app/paths'
 
 	import 'carbon-components-svelte/css/g10.css'
 	import '../styles/index.scss'
+	import { goto } from '$app/navigation'
 </script>
 
 <!-- May need urls to start with {base}/ for GitHub -->
@@ -26,34 +27,34 @@
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
+	<HeaderUtilities>
+		<HeaderGlobalAction on:click={()=> goto('https://github.com/carbon-design-system/carbon-charts')} aria-label="GitHub" icon={LogoGithub}/>
+	</HeaderUtilities>
 </Header>
 
 <SideNav isOpen={true}>
 	<SideNavItems>
-		<SideNavMenu text="The basics" expanded={true}>
-			<SideNavMenuItem href="{base}/" text="Getting started" />
+		<SideNavMenu text="Getting started" expanded={true}>
+			<SideNavMenuItem href="{base}/" text="Introduction" />
+			<SideNavMenuItem href="{base}/installation" text="Installation &amp setup" />
 			<SideNavMenuItem href="{base}/anatomy" text="Chart anatomy" />
-			<SideNavMenuItem href="{base}/data" text="Tabular data format" />
-			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />
 		</SideNavMenu>
 
 		<SideNavDivider />
 
-		<SideNavMenu text="Configuration" expanded={true}>
+		<SideNavMenu text="Data &amp; configuration" expanded={true}>
+			<SideNavMenuItem href="{base}/data" text="Tabular data format" />
+			<SideNavMenuItem href="{base}/data" text="Chart options" />
+		</SideNavMenu>
+
+		<SideNavDivider />
+
+		<SideNavMenu text="Design" expanded={true}>
 			<SideNavMenuItem href="{base}/themes" text="Themes" />
 			<SideNavMenuItem href="{base}/axes" text="Axes and labels" />
 			<SideNavMenuItem href="{base}/color" text="Color palettes" />
 			<SideNavMenuItem href="{base}/axes#dual" text="Dual axes" />
-		</SideNavMenu>
-
-		<SideNavDivider />
-
-		<SideNavMenu text="Development frameworks" expanded={true}>
-			<SideNavMenuItem href="{base}/vanilla" text="Vanilla JavaScript" /><!--includes API, event listeners-->
-			<SideNavMenuItem href="{base}/angular" text="Angular" />
-			<SideNavMenuItem href="{base}/react" text="React" />
-			<SideNavMenuItem href="{base}/svelte" text="Svelte" />
-			<SideNavMenuItem href="{base}/vue" text="Vue" />
+			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />
 		</SideNavMenu>
 
 		<SideNavDivider />
@@ -87,9 +88,6 @@
 			<SideNavMenuItem href="{base}/wordcloud" text="Word cloud" />
 		</SideNavMenu>
 
-		<SideNavDivider />
-
-		<SideNavLink href="https://github.com/carbon-design-system/carbon-charts" text="GitHub" target="_blank" icon={Launch} />
 	</SideNavItems>
 </SideNav>
 

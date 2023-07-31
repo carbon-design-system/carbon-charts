@@ -9,7 +9,7 @@
     color: white;
     background: black;
     padding: 4rem 0 3rem 4rem;
-    margin: -2rem -4.75rem 4rem -4.75rem;
+    margin: -2rem -4.75rem 3rem -4rem;
     font-size: 3rem;
   }
 </style>

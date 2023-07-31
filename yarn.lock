@@ -2256,6 +2256,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.2.0
     "@typescript-eslint/parser": ^6.2.0
     carbon-components-svelte: ^0.79.0
+    carbon-icons-svelte: ^12.1.0
     eslint: ^8.46.0
     eslint-config-prettier: ^8.9.0
     eslint-plugin-svelte: ^2.32.4
@@ -8631,6 +8632,13 @@ __metadata:
     lodash.debounce: ^4.0.8
     warning: ^3.0.0
   checksum: 1cb5eb8d9036522aae79ee0fcf8c92cda79c9b623454a636aea81023d8bb06d3da703f160dc064f3f2ea699d9a42668260676973a00aabe87437b90ce66f0b17
+  languageName: node
+  linkType: hard
+
+"carbon-icons-svelte@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "carbon-icons-svelte@npm:12.1.0"
+  checksum: 6ddaab191b5ee11ec4e0b3fa775bee0c03a48de939050fca866002467d45f07bc614840be674536737cd87f4c3b987c77345f3eb362e5905ccd48d66d57651c9
   languageName: node
   linkType: hard
 

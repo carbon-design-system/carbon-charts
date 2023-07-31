@@ -4,13 +4,19 @@
   import ChartTypeButton from '$lib/ChartTypeButton.svelte'
 </script>
 
-<PageTitle title="Getting started"/>
+<PageTitle title="Introduction"/>
 
 <p>
-  Carbon Charts is a component library of 25 charts for vanilla <a href="{base}/vanilla">JavaScript</a>, <a href="{base}/svelte">Svelte</a>, <a href="{base}/react">React</a>, <a href="{base}/vue">Vue</a> and <a href="{base}/angular">Angular</a>. 
+  Carbon Charts is a component library of 25 charts for vanilla JavaScript, Svelte, React, Vue and Angular. 
   Detailed documentation and StackBlitz examples are provided to get you up and running quickly.
-  Its components are highly customizable with advanced functionality such as themes, dual axes, color palettes, combo charts, and event
+  Its components are highly customizable with advanced functionality such as <a href="{base}/themes">themes</a>, <a href="{base}/axes#dual">dual axes</a>, <a href="{base}/color">color palettes</a>, <a href="{base}/combo">combo charts</a>, and event
   handling.
+</p>
+
+<p>
+  To get started, go to the <a href="{base}/installation">Installation &amp; setup</a> page and select your preferred framework.
+  Alternatively, jump ahead to the StackBlitz examples provided for each of the chart types by clicking
+  the icons below.
 </p>
 
 <h2>Comparisons</h2>
