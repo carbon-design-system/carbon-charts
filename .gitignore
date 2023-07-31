@@ -15,5 +15,6 @@ pages/
 **/.angular/
 **/.DS_Store
 **/.svelte-kit/
+**/build/
 **/dist/
 **/demo/bundle/
