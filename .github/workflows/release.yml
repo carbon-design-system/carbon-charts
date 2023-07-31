@@ -25,10 +25,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Set git user
+      - name: Set git user and get git into the right state
         run: |
           git config --global user.email "carbon@us.ibm.com"
           git config --global user.name "carbon-bot"
+          git checkout master
 
       - name: Create version and change logs
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
