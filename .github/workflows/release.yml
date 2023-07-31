@@ -32,6 +32,8 @@ jobs:
           git checkout master
 
       - name: Create version and change logs
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
       - name: Rebuild packages and demos for publication and deployment
