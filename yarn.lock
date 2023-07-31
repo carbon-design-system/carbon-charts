@@ -2606,7 +2606,7 @@ __metadata:
     d3-sankey: ^0.12.3
     eslint: ^8.46.0
     eslint-plugin-storybook: ^0.6.13
-    eslint-plugin-vue: ^9.16.0
+    eslint-plugin-vue: ^9.16.1
     react: ^18.2.0
     react-dom: ^18.2.0
     storybook: ^7.1.1
@@ -11779,9 +11779,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:^9.16.0":
-  version: 9.16.0
-  resolution: "eslint-plugin-vue@npm:9.16.0"
+"eslint-plugin-vue@npm:^9.16.1":
+  version: 9.16.1
+  resolution: "eslint-plugin-vue@npm:9.16.1"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
     natural-compare: ^1.4.0
@@ -11792,7 +11792,7 @@ __metadata:
     xml-name-validator: ^4.0.0
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-  checksum: 709f875e88d960bac33cf695bb32922aa80649ace72aeb3d7408b29a64f6c7c736665af8eac9d668a537c680d45f20073b4c1f6eeff8dadd4f9e31ee4ce1ac56
+  checksum: b2f9d0deefb124faacbd1aaf3f593962cd13547f8816782987299cb089693cec5e6e4036227242ad1dc17b6772fb579bc2042942486017a00c3c05eefeea36bd
   languageName: node
   linkType: hard
 
