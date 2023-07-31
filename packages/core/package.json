@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "description": "Carbon Charts component library",
   "module": "./dist/index.mjs",
   "main": "./dist/index.js",
@@ -131,8 +131,8 @@
     "@types/d3-sankey": "^0.12.1",
     "@types/lodash-es": "^4.17.8",
     "@types/topojson": "^3.2.3",
-    "@typescript-eslint/eslint-plugin": "^6.2.0",
-    "@typescript-eslint/parser": "^6.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
     "concurrently": "^8.2.0",
     "downlevel-dts": "^0.11.0",
     "eslint": "^8.46.0",
