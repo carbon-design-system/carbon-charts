@@ -38,11 +38,10 @@ jobs:
           yarn build
           node scripts/update-angular-dependency-version.mjs
 
-      - name: Set npmjs token for publishing
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
-
-      - name: Publish to npmjs registry
-        run: npx lerna publish from-git --yes --force-publish
+      - name: Publish to npmjs registry and Github
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
+          npx lerna publish from-git --yes --force-publish
 
       - name: Deploy demos and documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
