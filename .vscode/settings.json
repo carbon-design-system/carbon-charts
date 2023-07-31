@@ -1,6 +1,5 @@
 {
   "prettier.configPath": "prettier.config.mjs",
   "prettier.ignorePath": ".prettierignore",
-  "prettier.prettierPath": "",
-  "editor.formatOnSave": true
+  "prettier.prettierPath": ""
 }

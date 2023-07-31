@@ -65,6 +65,7 @@
     "@storybook/manager-api": "^7.1.1",
     "@storybook/testing-library": "^0.2.0",
     "@storybook/theming": "^7.1.1",
+    "@types/carbon__icon-helpers": "^10.7.2",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "concurrently": "^8.2.0",

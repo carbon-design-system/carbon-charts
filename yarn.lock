@@ -2217,6 +2217,7 @@ __metadata:
     "@storybook/manager-api": ^7.1.1
     "@storybook/testing-library": ^0.2.0
     "@storybook/theming": ^7.1.1
+    "@types/carbon__icon-helpers": ^10.7.2
     "@typescript-eslint/eslint-plugin": ^6.2.0
     "@typescript-eslint/parser": ^6.2.0
     concurrently: ^8.2.0
@@ -5794,6 +5795,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: bfcadb042a41b124c4e3de4925e3be6d35b78f93f27c4535d5ff86980dc0f8bc407ed99b9b54528952dc62834d5a779392f7a12c2947dd19330eb05a6bcae15a
+  languageName: node
+  linkType: hard
+
+"@types/carbon__icon-helpers@npm:^10.7.2":
+  version: 10.7.2
+  resolution: "@types/carbon__icon-helpers@npm:10.7.2"
+  checksum: 9a87f1bf433fcab48e1b162d01f30b9c48b8b5d4a6b08aba7e056e95c4372589a177ec9e5dbd64a1005031280cbc928ec1338acc600d36516d2305874d19ca5e
   languageName: node
   linkType: hard
 
