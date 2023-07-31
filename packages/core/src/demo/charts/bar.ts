@@ -1,5 +1,3 @@
-import { tr as localeObject } from 'date-fns/locale'
-
 export const groupedBarData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 65000 },
 	{ group: 'Dataset 1', key: 'More', value: -29123 },
@@ -467,18 +465,31 @@ export const simpleBarTimeSeriesOptions = {
 
 export const simpleBarTurkishLocaleData = simpleBarTimeSeriesData
 
+// More complete in that it reformats everything to Turkish - both axes and tooltip
 export const simpleBarTurkishLocaleOptions = {
-	title: 'Turkish locale (date-fns locales)',
+	title: 'Turkish locale',
 	axes: {
 		left: {
-			mapsTo: 'value'
+			mapsTo: 'value',
+			ticks: {
+				formatter: ticks => ticks.toLocaleString('tr-TR')
+			}
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: 'time',
+			ticks: {
+				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', 'day': 'numeric' })
+			}
 		}
 	},
-	timeScale: { localeObject }
+	tooltip: {
+		valueFormatter: (value: any, category: string) => {
+			if (category == 'x-value') return value.toLocaleDateString('tr-TR', { month: 'long', 'day': 'numeric' })
+			if (category == 'y-value') return value.toLocaleString('tr-TR')
+			return value
+		}
+	}
 }
 
 // Horizontal simple time series
@@ -497,17 +508,29 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 
 // Vertical simple time series with dense data
 export const simpleBarTimeSeriesDenseOptions = {
-	title: 'Vertical simple bar (time series - dense data)',
+	title: 'Vertical simple bar (time series - dense data, Turkish)',
 	axes: {
 		left: {
-			mapsTo: 'value'
+			mapsTo: 'value',
+			ticks: {
+				formatter: (ticks: number) => ticks.toLocaleString('tr-TR')
+			}
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: 'time',
+			ticks: {
+				formatter: (ticks: Date) => ticks.toLocaleDateString('tr-TR', { month: 'short', 'day': 'numeric' })
+			}
 		}
 	},
-	timeScale: { localeObject },
+	tooltip: {
+		valueFormatter: (value: any, category: string) => {
+			if (category == 'x-value') return value.toLocaleDateString('tr-TR', { month: 'long', 'day': 'numeric' })
+			if (category == 'y-value') return value.toLocaleString('tr-TR')
+			return value
+		}
+	},
 	bars: { maxWidth: 200 }
 }
 

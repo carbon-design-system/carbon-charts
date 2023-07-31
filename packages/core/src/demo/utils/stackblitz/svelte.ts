@@ -1,6 +1,6 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
-
+import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildSvelteExample(demo: Demo): Project {
@@ -38,8 +38,8 @@ export function buildSvelteExample(demo: Demo): Project {
 import { ${chartComponent} } from '@carbon/charts-svelte'
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
-import options from './options'
-import data from './data.json'
+import options from './options.js'
+import data from './data.js'
 </script>
 
 <${chartComponent} {data} {options} style="padding:2rem;" />
@@ -145,9 +145,9 @@ export default defineConfig({
     title: 'Carbon Charts Svelte Example',
     files: {
       'src/App.svelte': appSvelte,
-      'src/data.json': JSON.stringify(demo.data, null, 2),
+      'src/data.js': objectToString(demo.data),
       'src/main.ts': mainTs,
-      'src/options.json': JSON.stringify(demo.options, null, 2),
+      'src/options.js': objectToString(demo.options),
       'src/vite-env.d.ts': viteEnvDts,
       '.stackblitzrc': stackBlitzRc,
       'index.html': indexHtml,

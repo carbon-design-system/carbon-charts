@@ -21,8 +21,7 @@
 	</h3>
 
 	<p class="props">
-		<b>Props:</b>
-		<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
+		<b>Props:</b>&nbsp;<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
 			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html"
 			target="_blank">

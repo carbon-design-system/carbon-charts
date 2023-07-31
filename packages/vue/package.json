@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-vue",
-  "version": "1.11.13",
+  "version": "1.11.14",
   "description": "Carbon Charts component library for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -27,7 +27,8 @@
     "start": "yarn storybook",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
     "format": "prettier --write src/ --ignore-path ../../.eslintignore",
-    "clean": "rm -rf dist demo/bundle"
+    "clean": "rm -rf dist demo/bundle",
+    "pub:demo": "cp -a demo/bundle/. ../../pages/vue"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
@@ -80,26 +81,32 @@
   "license": "Apache-2.0",
   "author": "IBM",
   "keywords": [
-    "carbon",
     "charts",
+    "graphs",
+    "radar",
+    "gauge",
+    "donut",
+    "pie",
+    "sparkline",
+    "tree",
+    "treemap",
+    "heatmap",
+    "wordcloud",
+    "histogram",
+    "alluvial",
+    "geo",
+    "bar",
+    "bullet",
+    "scatter",
+    "meter",
+    "line",
     "vue",
-    "dataviz",
-    "data-visualization",
-    "visualizations",
-    "d3",
-    "svg",
+    "vue3",
     "component",
-    "components",
-    "css",
-    "html",
+    "carbon",
     "ibm",
-    "typescript",
-    "javascript",
-    "js",
-    "library",
-    "pattern",
-    "patterns",
-    "sass",
-    "scss"
+    "svg",
+    "data",
+    "typescript"
   ]
 }

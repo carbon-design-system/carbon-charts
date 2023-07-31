@@ -6,24 +6,26 @@ on:
       - master
 jobs:
   build:
-    if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v18.16.1
+    if:
+      github.actor != 'carbon-bot'
+      &&	!startsWith(github.event.head_commit.message, 'skip-release')
+    name: Create release - Node.js v18.17.0
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use Node.js 18.16.1
+      - name: Use Node.js 18.17.0
         uses: actions/setup-node@v2
         with:
-          node-version: '18.16.1'
+          node-version: '18.17.0'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Deploy to Github & NPM 🚀
+      - name: Deploy to Github & npmjs 🚀
         run: yarn deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
