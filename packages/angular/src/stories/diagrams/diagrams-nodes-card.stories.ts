@@ -1,6 +1,16 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
+import { ChartTheme } from '@carbon/charts'
+import { getAttributes, toString } from '@carbon/icon-helpers'
+import screenIcon from '@carbon/icons/es/screen/16'
+import chevronDownIcon from '@carbon/icons/es/chevron--down/16'
 import { CardNodeModule } from '../../'
-import { ScreenModule, ChevronDownModule } from '@carbon/icons-angular'
+
+const DEFAULT_THEME = ChartTheme.WHITE
+const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) })
+const chevronDownIconStr = toString({
+	...chevronDownIcon,
+	attrs: getAttributes(chevronDownIcon.attrs)
+})
 
 const getTemplate = (content: string) => `
 	<div class="container theme--white" style="max-width: 400px;">
@@ -11,9 +21,13 @@ const getTemplate = (content: string) => `
 storiesOf('Diagrams/Nodes/Card', module)
 	.addDecorator(
 		moduleMetadata({
-			imports: [CardNodeModule, ScreenModule, ChevronDownModule]
+			imports: [CardNodeModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Default',
 		() => ({
@@ -100,7 +114,7 @@ storiesOf('Diagrams/Nodes/Card', module)
 			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			${screenIconStr}
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -183,7 +197,7 @@ storiesOf('Diagrams/Nodes/Card', module)
 			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			${screenIconStr}
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -216,7 +230,7 @@ storiesOf('Diagrams/Nodes/Card', module)
 			template: getTemplate(`
 	<ibm-diagram-card-node [color]="color">
 		<ibm-diagram-card-node-column>
-			<svg ibmIconScreen size="16"></svg>
+			${screenIconStr}
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column>
 			<ibm-diagram-card-node-title>
@@ -227,7 +241,7 @@ storiesOf('Diagrams/Nodes/Card', module)
 			</ibm-diagram-card-node-subtitle>
 		</ibm-diagram-card-node-column>
 		<ibm-diagram-card-node-column [farsideColumn]="farsideColumn">
-			<svg ibmIconChevronDown size="16"></svg>
+			${chevronDownIconStr}
 		</ibm-diagram-card-node-column>
 	</ibm-diagram-card-node>
 	`),

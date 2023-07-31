@@ -102,7 +102,7 @@ export class ChartModelCartesian extends ChartModel {
 	}
 
 	setData(newData: any) {
-		let data
+		let data: any
 		if (newData) {
 			data = super.setData(newData)
 			if (getProperty(this.getOptions(), 'zoomBar', AxisPositions.TOP, 'enabled')) {

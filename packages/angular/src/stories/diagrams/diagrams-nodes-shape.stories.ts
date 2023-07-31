@@ -1,14 +1,23 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular'
-import { ScreenModule } from '@carbon/icons-angular'
+import { ChartTheme } from '@carbon/charts'
+import { getAttributes, toString } from '@carbon/icon-helpers'
+import screenIcon from '@carbon/icons/es/screen/16'
 import { ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
+
+const DEFAULT_THEME = ChartTheme.WHITE
+const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) })
 
 storiesOf('Diagrams/Nodes/Shape', module)
 	.addDecorator(
 		moduleMetadata({
-			imports: [ShapeNodeModule, ScreenModule]
+			imports: [ShapeNodeModule]
 		})
 	)
+	.addDecorator(story => {
+		document.documentElement.setAttribute('data-carbon-theme', DEFAULT_THEME)
+		return story()
+	})
 	.add(
 		'Default',
 		() => ({
@@ -16,7 +25,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),
@@ -37,7 +46,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),
@@ -59,7 +68,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [shape]="shape"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),
@@ -81,7 +90,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [as]="component"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),
@@ -103,7 +112,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div>
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [href]="href"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),
@@ -125,7 +134,7 @@ storiesOf('Diagrams/Nodes/Shape', module)
 		<div style="height: 64px; width: 64px; position: relative;">
 			<ibm-diagram-shape-node [title]="title" [renderIcon]="iconTemplate" [size]="'100%'" position="static"></ibm-diagram-shape-node>
 			<ng-template #iconTemplate>
-				<svg ibmIconScreen size="16"></svg>
+				${screenIconStr}
 			</ng-template>
 		</div>
 	`),

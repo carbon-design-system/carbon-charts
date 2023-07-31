@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Deploy to Github & NPM 🚀
+      - name: Deploy to Github & npmjs 🚀
         run: yarn deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

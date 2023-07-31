@@ -1,5 +1,3 @@
-import { timeFormat } from 'd3'
-
 export const lineData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 1', key: 'More', value: 23500 },
@@ -273,7 +271,7 @@ export const lineTimeSeriesWithThresholdsOptions = {
 				{
 					value: new Date(2019, 0, 11),
 					label: 'Custom formatter',
-					valueFormatter: timeFormat('%b %d')
+					valueFormatter: e => new Intl.DateTimeFormat('en-CA', { month: 'short', day: '2-digit' }).format(e)
 				}
 			]
 		},

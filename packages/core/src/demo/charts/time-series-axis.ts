@@ -1,6 +1,3 @@
-import { fr as localeObject } from 'date-fns/locale'
-
-// 15seconds
 export const lineTimeSeriesData15seconds = [
 	{
 		group: 'Dataset 1',
@@ -390,15 +387,26 @@ export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 export const lineTimeSeriesDataMonthlyCustomLocale = lineTimeSeriesDataMonthlyDefaultLocale
 
 export const lineTimeSeriesMonthlyCustomLocaleOptions = {
-	title: 'Line (time series) - Time interval monthly with custom locale (fr)',
+	title: 'Line (time series) - Time interval monthly with French locale',
 	axes: {
-		left: {},
+		left: {
+			ticks: {
+				formatter: (ticks: number) => ticks.toLocaleString('fr-FR')
+			}
+		},
 		bottom: {
-			scaleType: 'time'
+			scaleType: 'time',
+			ticks: {
+				formatter: (ticks: Date) => ticks.toLocaleDateString('fr-FR', { month: 'short', 'day': 'numeric' })
+			}
 		}
 	},
-	timeScale: {
-		localeObject
+	tooltip: {
+		valueFormatter: (value: any, category: string) => {
+			if (category == 'x-value') return value.toLocaleDateString('fr-FR', { month: 'long', 'day': 'numeric' })
+			if (category == 'y-value') return value.toLocaleString('fr-FR')
+			return value
+		}
 	},
 	legend: {
 		clickable: false
