@@ -13,9 +13,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Use Node.js 18.17.0
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18.17.0'
           registry-url: 'https://registry.npmjs.org'
@@ -23,13 +25,26 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Deploy to Github & npmjs 🚀
-        run: yarn deploy
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Set git user
+        run: |
+          git config --global user.email "carbon@us.ibm.com"
+          git config --global user.name "carbon-bot"
 
-      - name: Deploy to Github Pages 🚀
+      - name: Create version and change logs
+        run: npx lerna version --yes --force-publish --conventional-commits --create-release github
+
+      - name: Rebuild packages and demos for publication and deployment
+        run: |
+          yarn build
+          node scripts/update-angular-dependency-version.mjs
+
+      - name: Set npmjs token for publishing
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
+
+      - name: Publish to npmjs registry
+        run: npx lerna publish from-git --yes --force-publish
+
+      - name: Deploy demos and documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
