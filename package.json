@@ -11,7 +11,6 @@
     "build:demos": "NODE_ENV=production lerna run --stream build:demo",
     "pub:demos": "lerna run pub:demo",
     "build": "yarn build:packages && yarn build:demos && yarn clean:pages && yarn pub:demos",
-    "deploy": "bash scripts/deploy.sh",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
