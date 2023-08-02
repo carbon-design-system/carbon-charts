@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.16 (2023-08-02)
+
+
+### Bug Fixes
+
+* **core/scss:** Replace hard-coded font-family set by mixin to CSS custom properties then reuse ([#1639](https://github.com/carbon-design-system/carbon-charts/issues/1639)) ([5440d24](https://github.com/carbon-design-system/carbon-charts/commit/5440d249c5326516e866b0e449d914395adbc023))
+
+
+
+
+
 ## 1.11.15 (2023-07-31)
 
 **Note:** Version bump only for package @carbon/charts-react
