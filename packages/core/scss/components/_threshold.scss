@@ -37,7 +37,7 @@
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: var(--#{$charts-prefix}-font-family-condensed);
+	font-family: var(--#{$prefix}-charts-font-family-condensed);
 
 	color: $text-primary;
 	line-height: 16px;

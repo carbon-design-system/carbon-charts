@@ -5,7 +5,7 @@
 	p.title {
 		color: $text-primary;
 		font-size: 16px;
-		font-family: var(--#{$charts-prefix}-font-family);
+		font-family: var(--#{$prefix}-charts-font-family);
 		// TODO-V11
 		// font-weight: font-weight('semibold');
 		font-weight: 600;
