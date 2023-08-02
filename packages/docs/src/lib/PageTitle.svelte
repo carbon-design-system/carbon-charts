@@ -8,8 +8,8 @@
   .page-title {
     color: white;
     background: black;
-    padding: 4rem 0 3rem 4rem;
-    margin: -2rem -4.75rem 3rem -4rem;
+    padding: 4rem 0 3rem 4.5rem;
+    margin: -2rem -4.5rem 3rem -4.5rem;
     font-size: 3rem;
   }
 </style>
