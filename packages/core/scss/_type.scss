@@ -3,7 +3,11 @@
 @use '@carbon/layout' as *;
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	font-family: font-family('sans-condensed');
+	// Set CSS custom properties using font-family mixin then reuse them
+	--#{$charts-prefix}-font-family: #{font-family('sans')};
+	--#{$charts-prefix}-font-family-condensed: #{font-family('sans-condensed')};
+
+	font-family: var(--#{$charts-prefix}-font-family-condensed);
 
 	p {
 		padding: 0;
@@ -24,7 +28,7 @@
 	}
 
 	g.gauge-numbers text.gauge-value-number {
-		font-family: font-family('sans');
+		font-family: var(--#{$charts-prefix}-font-family);
 		// TODO-V11
 		// font-weight: font-weight('light');
 		font-weight: 300;
@@ -33,7 +37,7 @@
 	text.meter-title,
 	text.percent-value {
 		font-size: $base-font-size;
-		font-family: font-family('sans');
+		font-family: var(--#{$charts-prefix}-font-family);
 	}
 
 	text.meter-title {

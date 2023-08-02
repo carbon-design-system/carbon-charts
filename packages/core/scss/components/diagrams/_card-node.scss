@@ -21,7 +21,7 @@
 		background-color: $layer-01;
 		z-index: 1;
 		box-sizing: border-box;
-		font-family: font-family('sans');
+		font-family: var(--#{$charts-prefix}-font-family);
 		width: 100%;
 		height: 100%;
 		padding: $spacing-05 $spacing-03;
@@ -39,7 +39,7 @@
 	}
 
 	.#{$prefix}--#{$charts-prefix}--card-node--button {
-		font-family: font-family('sans');
+		font-family: var(--#{$charts-prefix}-font-family);
 		text-align: left;
 		width: 100%;
 	}
