@@ -86,7 +86,7 @@
     "@carbon/colors": "^11.18.1",
     "@carbon/telemetry": "~0.1.0",
     "@carbon/utils-position": "^1.1.4",
-    "carbon-components": "^10.58.3",
+    "carbon-components": "^10.58.8",
     "d3": "^7.8.5",
     "d3-cloud": "^1.2.5",
     "d3-sankey": "^0.12.3",

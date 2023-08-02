@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Use Node.js 18.17.0
         uses: actions/setup-node@v3
@@ -23,11 +25,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Set git user and get git into the right state
+      - name: Set git user
         run: |
           git config --global user.email "carbon@us.ibm.com"
           git config --global user.name "carbon-bot"
-          git checkout master
 
       - name: Create version and change logs
         env:
