@@ -30,7 +30,7 @@
 
 		g.tick text {
 			fill: $text-secondary;
-			font-family: font-family('sans-condensed');
+			font-family: var(--#{$prefix}-charts-font-family-condensed);
 		}
 
 		g.tick line {
@@ -42,7 +42,7 @@
 		}
 
 		.axis-title {
-			font-family: font-family('sans');
+			font-family: var(--#{$prefix}-charts-font-family);
 			// TODO-V11
 			// font-weight: font-weight('semibold');
 			font-weight: 600;
