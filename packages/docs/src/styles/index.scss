@@ -3,11 +3,33 @@ p {
 }
 
 h2 {
-  margin-top: 1rem;
+  // font-size: 1.5rem;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: .5rem;
 }
 
 // Introduction page's chart buttons
 .bx--btn--ghost {
   background-color: white;
+}
+
+.bx--tabs {
+  margin-bottom: .5rem;
+}
+
+// Don't add padding to <TabContent> component
+.bx--tab-content {
+  padding: 0;
+}
+
+.bx--snippet {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
