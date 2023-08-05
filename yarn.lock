@@ -2226,7 +2226,7 @@ __metadata:
     d3-sankey: ^0.12.3
     downlevel-dts: ^0.11.0
     eslint: ^8.46.0
-    eslint-config-prettier: ^8.10.0
+    eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-storybook: ^0.6.13
     ng-packagr: ^16.1.0
@@ -2299,7 +2299,7 @@ __metadata:
     d3-sankey: ^0.12.3
     downlevel-dts: ^0.11.0
     eslint: ^8.46.0
-    eslint-config-prettier: ^8.10.0
+    eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-react: ^7.33.1
     eslint-plugin-storybook: ^0.6.13
@@ -2344,7 +2344,7 @@ __metadata:
     d3-cloud: ^1.2.5
     d3-sankey: ^0.12.3
     eslint: ^8.46.0
-    eslint-config-prettier: ^8.10.0
+    eslint-config-prettier: ^9.0.0
     eslint-plugin-storybook: ^0.6.13
     eslint-plugin-svelte3: ^4.0.0
     prettier-plugin-svelte: ^3.0.3
@@ -2441,7 +2441,7 @@ __metadata:
     date-fns: ^2.30.0
     downlevel-dts: ^0.11.0
     eslint: ^8.46.0
-    eslint-config-prettier: ^8.10.0
+    eslint-config-prettier: ^9.0.0
     eslint-plugin-storybook: ^0.6.13
     html-to-image: ^1.11.11
     jsdom: ^22.1.0
@@ -11592,17 +11592,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.10.0":
-  version: 8.10.0
-  resolution: "eslint-config-prettier@npm:8.10.0"
-  peerDependencies:
-    eslint: ">=7.0.0"
-  bin:
-    eslint-config-prettier: bin/cli.js
-  checksum: 153266badd477e49b0759816246b2132f1dbdb6c7f313ca60a9af5822fd1071c2bc5684a3720d78b725452bbac04bb130878b2513aea5e72b1b792de5a69fec8
-  languageName: node
-  linkType: hard
-
 "eslint-config-prettier@npm:^8.8.0":
   version: 8.8.0
   resolution: "eslint-config-prettier@npm:8.8.0"
@@ -11611,6 +11600,17 @@ __metadata:
   bin:
     eslint-config-prettier: bin/cli.js
   checksum: 1e94c3882c4d5e41e1dcfa2c368dbccbfe3134f6ac7d40101644d3bfbe3eb2f2ffac757f3145910b5eacf20c0e85e02b91293d3126d770cbf3dc390b3564681c
+  languageName: node
+  linkType: hard
+
+"eslint-config-prettier@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "eslint-config-prettier@npm:9.0.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: 362e991b6cb343f79362bada2d97c202e5303e6865888918a7445c555fb75e4c078b01278e90be98aa98ae22f8597d8e93d48314bec6824f540f7efcab3ce451
   languageName: node
   linkType: hard
 

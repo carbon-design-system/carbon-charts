@@ -136,7 +136,7 @@
     "concurrently": "^8.2.0",
     "downlevel-dts": "^0.11.0",
     "eslint": "^8.46.0",
-    "eslint-config-prettier": "^8.10.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-storybook": "^0.6.13",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
