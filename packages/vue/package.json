@@ -8,7 +8,11 @@
   "exports": {
     "./styles.min.css": "./dist/styles.min.css",
     "./styles.css": "./dist/styles.css",
-    "./*": "./*"
+    ".": {
+      "style": "./dist/styles.css",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
   },
   "files": [
     "dist",
