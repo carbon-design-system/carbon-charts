@@ -1,11 +1,11 @@
 p {
-  margin-bottom: 1rem;
+  margin: 1rem 0 1rem 0;
 }
 
 h2 {
   // font-size: 1.5rem;
   margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
@@ -21,7 +21,7 @@ h3 {
 }
 
 .bx--tabs {
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 }
 
 // Don't add padding to <TabContent> component
@@ -30,6 +30,14 @@ h3 {
 }
 
 .bx--snippet {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.25rem;
 }
+
+.bx--snippet--multi .bx--snippet-container pre {
+    padding-bottom: 0;
+}
+
+// .bx--grid {
+//   padding-left: 0;
+// }
