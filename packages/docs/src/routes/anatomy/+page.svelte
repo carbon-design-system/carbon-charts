@@ -2,14 +2,14 @@
   import { base } from '$app/paths'
 
   import PageTitle from '$lib/PageTitle.svelte'
-	import { Grid, Row, Column } from 'carbon-components-svelte'
+	import { Grid, Row, Column, OrderedList, ListItem } from 'carbon-components-svelte'
 </script>
 
 <PageTitle title="Chart Anatomy"/>
 
 <Grid>
-	<Row>
-		<Column>
+  <Row>
+    <Column>
       <h2>Rectangular Charts</h2>
 
       <p>
@@ -18,8 +18,31 @@
         are typically constructed with a set of common elements including a
         legend, axis titles, and navigation tools like a zoom bar and tooltip.
       </p>
+    </Column>
+    <Column>&nbsp;</Column>
+  </Row>
 
+	<Row>
+		<Column>
       <p><img class="diagram" src="{base}/images/chart-anatomy-rectangular.png" alt="Anatomy of a rectangular chart"></p>
+    </Column>
+    <Column>
+      <OrderedList native>
+        <ListItem>Chart title</ListItem>
+        <ListItem>Axes</ListItem>
+        <ListItem>Ticks</ListItem>
+        <ListItem>Axis title</ListItem>
+        <ListItem>Legends</ListItem>
+        <ListItem>Toolbar</ListItem>
+        <ListItem>Zoom bar</ListItem>
+        <ListItem>Graph frame</ListItem>
+        <ListItem>Tooltip</ListItem>
+      </OrderedList>
+    </Column>
+  </Row>
+
+  <Row>
+    <Column>
 
       <h3>Titles, labels, and legends</h3>
 
@@ -56,8 +79,26 @@
       <h2>Circular Charts</h2>
 
       <p>Pie, donut and radar charts are examples of circular charts.</p>
-
+    </Column>
+    <Column>&nbsp;</Column>
+  </Row>
+  <Row>
+    <Column>
       <p><img class="diagram" src="{base}/images/chart-anatomy-circular.png" alt="Anatomy of a circular chart"></p>
+    </Column>
+    <Column>
+      <OrderedList native>
+        <ListItem>Chart title</ListItem>
+        <ListItem>Label</ListItem>
+        <ListItem>Tooltip</ListItem>
+        <ListItem>Legend</ListItem>
+        <ListItem>Graph frame</ListItem>
+        <ListItem>Big number</ListItem>
+      </OrderedList>
+    </Column>
+  </Row>
+  <Row>
+    <Column>
 
       <h3>Labels</h3>
 
@@ -91,4 +132,6 @@
   .diagram {
     width: 100%;
   }
+
+
 </style>
