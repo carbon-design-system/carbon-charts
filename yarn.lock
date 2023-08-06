@@ -3244,7 +3244,7 @@ __metadata:
     pirates: ^4.0.4
     slash: ^3.0.0
     write-file-atomic: ^4.0.2
-  checksum: ffb8c3c344cd48bedadec295d9c436737eccc39c1f0868aa9753b76397b33b2e5b121058af6f287ba6f2036181137e37df1212334bfa9d9a712986a4518cdc18
+  checksum: 1635cd66e4b3dbba0689ecefabc6137301756c9c12d1d23e25124dd0dd9b4a6a38653d51e825e90f74faa022152ac1eaf200591fb50417aa7e1f7d1d1c2bc11d
   languageName: node
   linkType: hard
 
@@ -5934,15 +5934,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-static@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@sveltejs/adapter-static@npm:2.0.3"
-  peerDependencies:
-    "@sveltejs/kit": ^1.5.0
-  checksum: 75559b2bb5145c70766a619bf64d7a6f1de7b1f10a79d962bddbb599bce938ef46ee624f880de648019fe5aec30a09ca317838c3e4deb6c46934b79f1fa18149
-  languageName: node
-  linkType: hard
-
 "@sveltejs/kit@npm:^1.22.4":
   version: 1.22.4
   resolution: "@sveltejs/kit@npm:1.22.4"
@@ -7022,6 +7013,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 10ce3f8b80eadd66178a53845bddf264fa109fcfe0a615a0dce7e027dc426768573e87aee3eba7c53a2a867e159bba928bd86cac92ba93c5bd0152a63a49ccad
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.2.18":
+  version: 18.2.18
+  resolution: "@types/react@npm:18.2.18"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 2e0d75de2b618e76780019e52478b1bec2b015a9187aea30f84518c0c3ddc639055bdfea50864aece937bad0cb0544d0100b80d30f5461e72fbc1c3c0be8b140
   languageName: node
   linkType: hard
 
@@ -9108,15 +9110,6 @@ __metadata:
   version: 1.0.30001518
   resolution: "caniuse-lite@npm:1.0.30001518"
   checksum: 1b63272f6e3d628ac52e2547e0b75fc477004d4b19b63e34b2c045de7f2e48909f9ea513978fc5a46c4ab5ac6c9daf9cc5e6a78466e90684fb824c3f2105e8f5
-  languageName: node
-  linkType: hard
-
-"carbon-components-svelte@npm:^0.79.0":
-  version: 0.79.0
-  resolution: "carbon-components-svelte@npm:0.79.0"
-  dependencies:
-    flatpickr: 4.6.9
-  checksum: 5afce573df48cbe8a4df7e116dcd670e3ab81ee0eaeb58a6bae4aec21f0e16a974da2e3383ed1417505e945454dde9e8340e7e231d1adcd30e021cc03e6c3388
   languageName: node
   linkType: hard
 
@@ -19212,7 +19205,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.55.0, sass@npm:^1.64.2":
+"sass@npm:^1.55.0":
+  version: 1.64.1
+  resolution: "sass@npm:1.64.1"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: e908f96f3d5fa5869e2f2aec97548c93d6ef390680af89870fcae8bdbaee2392ac650fbeae8d2ef8e4c99cb9f81e6b3624e1cb659af6d6e746332a22233b5ad8
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.64.2":
   version: 1.64.2
   resolution: "sass@npm:1.64.2"
   dependencies:
@@ -21427,16 +21433,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile-message@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "vfile-message@npm:2.0.4"
-  dependencies:
-    "@types/unist": ^2.0.0
-    unist-util-stringify-position: ^2.0.0
-  checksum: 1bade499790f46ca5aba04bdce07a1e37c2636a8872e05cf32c26becc912826710b7eb063d30c5754fdfaeedc8a7658e78df10b3bc535c844890ec8a184f5643
-  languageName: node
-  linkType: hard
-
 "vite-node@npm:0.34.1":
   version: 0.34.1
   resolution: "vite-node@npm:0.34.1"
@@ -21510,7 +21506,47 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.4.8":
+"vite@npm:^3.0.0 || ^4.0.0":
+  version: 4.4.7
+  resolution: "vite@npm:4.4.7"
+  dependencies:
+    esbuild: ^0.18.10
+    fsevents: ~2.3.2
+    postcss: ^8.4.26
+    rollup: ^3.25.2
+  peerDependencies:
+    "@types/node": ">= 14"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 787c4d891da18d0a0545bee07dec73c3201979dcf2b1ea3dc13fdd2d3b9ad76d413bcc0e68502183e309007a612c1f4116adefe0093d95fbbb9cf1c1755f7e41
+  languageName: node
+  linkType: hard
+
+"vite@npm:^4.4.8":
   version: 4.4.8
   resolution: "vite@npm:4.4.8"
   dependencies:

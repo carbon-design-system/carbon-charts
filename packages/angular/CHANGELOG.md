@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.17 (2023-08-06)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
 ## 1.11.16 (2023-08-02)
 
 
