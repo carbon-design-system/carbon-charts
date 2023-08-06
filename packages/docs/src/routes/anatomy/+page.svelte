@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { Grid, Row, Column, OrderedList, ListItem } from 'carbon-components-svelte'
   import { base } from '$app/paths'
-
   import PageTitle from '$lib/PageTitle.svelte'
-	import { Grid, Row, Column, OrderedList, ListItem } from 'carbon-components-svelte'
 </script>
 
 <PageTitle title="Chart Anatomy"/>

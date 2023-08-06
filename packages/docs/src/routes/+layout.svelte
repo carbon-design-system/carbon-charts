@@ -44,16 +44,15 @@
 
 		<SideNavMenu text="Data &amp; configuration" expanded={true}>
 			<SideNavMenuItem href="{base}/data" text="Tabular data format" />
-			<SideNavMenuItem href="{base}/data" text="Chart options" />
+			<SideNavMenuItem href="{base}/options" text="Chart options" />
 		</SideNavMenu>
 
 		<SideNavDivider />
 
 		<SideNavMenu text="Design" expanded={true}>
 			<SideNavMenuItem href="{base}/themes" text="Themes" />
-			<SideNavMenuItem href="{base}/axes" text="Axes and labels" />
+			<SideNavMenuItem href="{base}/axes" text="Axes" />
 			<SideNavMenuItem href="{base}/color" text="Color palettes" />
-			<SideNavMenuItem href="{base}/axes#dual" text="Dual axes" />
 			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />
 		</SideNavMenu>
 
