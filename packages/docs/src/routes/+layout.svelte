@@ -52,14 +52,13 @@
 		<SideNavMenu text="Design" expanded={true}>
 			<SideNavMenuItem href="{base}/themes" text="Themes" />
 			<SideNavMenuItem href="{base}/axes" text="Axes" />
-			<SideNavMenuItem href="{base}/color" text="Color palettes" />
 			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />
 		</SideNavMenu>
 
 		<SideNavDivider />
 
 		<SideNavMenu text="Chart types" expanded={true}>
-			<SideNavMenuItem href="{base}/alluvial" text="Alluvial" />
+			<SideNavMenuItem href="{base}/alluvial" text="Alluvial / Sankey" />
 			<SideNavMenuItem href="{base}/area" text="Area" />
 			<SideNavMenuItem href="{base}/area#stacked" text="Area (stacked)" />
 			<SideNavMenuItem href="{base}/bar" text="Bar" />
@@ -80,7 +79,7 @@
 			<SideNavMenuItem href="{base}/meter" text="Meter" />
 			<SideNavMenuItem href="{base}/diagram" text="Network diagrams" />
 			<SideNavMenuItem href="{base}/pie" text="Pie" />
-			<SideNavMenuItem href="{base}/radar" text="Radar / kiviat" />
+			<SideNavMenuItem href="{base}/radar" text="Radar / Kiviat" />
 			<SideNavMenuItem href="{base}/scatter" text="Scatter" />
 			<SideNavMenuItem href="{base}/tree" text="Tree" />
 			<SideNavMenuItem href="{base}/treemap" text="Treemap" />

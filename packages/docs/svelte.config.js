@@ -1,16 +1,14 @@
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/kit/vite'
-// import { mdsvex } from 'mdsvex'
 
 // See https://kit.svelte.dev/docs/adapter-static#github-pages
 const dev = process.argv.includes('dev')
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte', '.svx', '.md'],
+	extensions: ['.svelte'],
 	preprocess: [
-		vitePreprocess(),
-		// mdsvex({ extensions: ['.svx', '.md'] })
+		vitePreprocess()
 	],
 
 	kit: {

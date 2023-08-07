@@ -1,6 +1,22 @@
 <script lang="ts">
-	import { Grid, Row, Column, Tabs, Tab, TabContent, CodeSnippet, InlineNotification } from 'carbon-components-svelte'
+	import { onMount } from 'svelte'
+	import {
+		Grid,
+		Row,
+		Column,
+		Tabs,
+		Tab,
+		TabContent,
+		CodeSnippet,
+		InlineNotification
+	} from 'carbon-components-svelte'
+	// import hljs from 'highlight.js/lib/core'
+  // import typescript from 'highlight.js/lib/languages/typescript'
 	import PageTitle from '$lib/PageTitle.svelte'
+
+	// onMount(() => {
+	// 	hljs.registerLanguage('typescript', typescript)
+	// })
 
 	let selected = 0
 
@@ -11,75 +27,173 @@
 
 <PageTitle title="Installation &amp; setup" />
 
+
+
 <Grid>
 	<Row>
 		<Column>
-
 			<h2>Select your development framework</h2>
 
 			<Tabs bind:selected>
 				<Tab label="Vanilla JavaScript" />
 				<Tab label="Svelte" />
 				<Tab label="React" />
-				<Tab label="Vue" />
+				<Tab label="Vue.js" />
 				<Tab label="Angular" />
-			</Tabs>
-
-			<h3>Installing into your project</h3>
-
-			<Tabs>
-				<Tab label="yarn" />
-				<Tab label="npm" />
-				<Tab label="Load in web page" />
 				<svelte:fragment slot="content">
-					<TabContent
-						><CodeSnippet
-							code={`yarn add @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
-					<TabContent
-						><CodeSnippet
-							code={`npm install -S @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
-					<TabContent
-						><CodeSnippet
+					<h3>Consuming with a bundler (eg Vite)</h3>
+
+					<Tabs>
+						<Tab label="yarn" />
+						<Tab label="npm" />
+
+						<svelte:fragment slot="content">
+							<TabContent
+								><CodeSnippet
+									code={`yarn add @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
+							<TabContent
+								><CodeSnippet
+									code={`npm install -S @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
+						</svelte:fragment>
+					</Tabs>
+
+					<InlineNotification
+						title="Note:"
+						subtitle={`The last three packages are optional except for these situations: d3-cloud (for Alluvial Charts), d3-word (for Word Cloud Charts), @carbon/styles (for charts that display a toolbar).`}
+						lowContrast
+						kind="info-square"
+						hideCloseButton />
+
+					<TabContent>
+						<strong>index.html</strong>
+						<CodeSnippet
 							type="multi"
-							code={`<script src="https://unpkg.com/@carbon/charts@latest/dist/index.js" defer></script>
-<link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
-<link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" defer integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js" defer integrity="sha512-HjKxWye8lJGPu5q1u/ZYkHlJrJdm6KGr89E6tOrXeKm1mItb1xusPU8QPcKVhP8F9LjpZT7vsu1Fa+dQywP4eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js" defer integrity="sha512-KK15oKpabNDaLpWinMtNfTqy/V7pzlc2FRG174PfASes7RRx6TAsua8HJdRTKo8+BLvPBKNIkL7kXWcz5HoqqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />`} /></TabContent>
+							code={`...
+	<div id="my-bar-chart"></div>
+	...`} />
+
+						<strong>index.js</strong>
+						<CodeSnippet
+							type="multi"
+							code={`import { StackedBarChart } from '@carbon/charts'
+	
+	import '@carbon/styles/css/styles.css' // adds styling to body element
+	import '@carbon/charts/styles.css'
+	
+	// grab chart holder DOM element
+	const chartHolder = document.getElementById('my-bar-chart')
+	
+	// initialize the chart
+	new StackedBarChart(chartHolder, {
+		data: stackedBarData,
+		options: stackedBarOptions,
+	})`} />
+
+						<h3>Consuming in a browser environment</h3>
+
+						<CodeSnippet
+							type="multi"
+							code={`<!DOCTYPE html>
+		<html>
+			<head>
+				<!-- Load Carbon Charts as Charts (UMD) and D3.js as d3 -->
+				<script src="https://unpkg.com/@carbon/charts@latest/dist/index.js" defer></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" defer integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
+				<!-- Load required stylesheets -->
+				<link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
+				<link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
+		
+				<!-- Load font used by Carbon Charts -->
+				<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />
+			</head>
+			<body>
+				<!-- Define a div to act as the chart holder -->
+				<div id="my-bar-chart"></div>
+		
+				<script>
+					// Get a reference to the chart holder DOM element
+					const chartHolder = document.getElementById('my-bar-chart')
+		
+					const data = [
+						// refer to tabular data format tutorial
+					]
+		
+					const options = {
+						// refer to chart specific options
+					}
+		
+					// initialize the chart
+				 new Charts.StackedBarChart(chartHolder, {
+					 data,
+					 options
+				 })
+				</script>
+			</body>
+		</html>`} />
+					</TabContent>
+					<TabContent>
+						<h3>SvelteKit Vite Configuration</h3>
+
+						<p>
+							Carbon Charts Svelte is unique among the component libraries because it is provided in
+							source / unbundled form. This means when you build your Svelte app using it, you are
+							compiling the source of Carbon Charts Svelte and its dependency, Carbon Charts.
+						</p>
+						<p>
+							Carbon Charts expects to run in a browser environment. This will cause an error when
+							using server-side rendering (SSR). To avoid this, configure Vite to prevent
+							@carbon/charts from being externalized for SSR.
+						</p>
+						<p><strong>vite.config.mjs</strong></p>
+						<CodeSnippet
+							type="multi"
+							code={`
+		import { sveltekit } from '@sveltejs/kit/vite'
+		import { defineConfig } from 'vite'
+		
+		export default defineConfig({
+			plugins: [sveltekit()],
+				ssr: {
+					noExternal: ${`process`}.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
+			}
+		})`} />
+
+						<p><strong>Example.svelte</strong></p>
+						<CodeSnippet
+							type="multi"
+							code={`<script lang="ts">
+	import { DonutChart, DonutChartOptions } from '@carbon/charts-svelte'
+	import '@carbon/styles/css/styles.css' // affects body element
+	import '@carbon/charts-svelte/styles.css'
+	import { data, options } from '../../stores'
+</script>
+
+<DonutChart {data} {options}/>`} />
+					</TabContent>
+					<TabContent>React Sample</TabContent>
+					<TabContent>
+						<h3>Vue.js version support</h3>
+
+						<p>
+							In order to avoid a breaking change, installing <strong
+								>@carbon/charts-vue@latest</strong>
+							supports Vue.js 2.7+. For Vue.js 3.3+, install
+							<strong>@carbon/charts-vue@next</strong>.
+						</p>
+					</TabContent>
+					<TabContent>
+						<h3>Angular version support</h3>
+
+						<p>
+							In order to avoid a breaking change, installing <strong
+								>@carbon/charts-angular@latest</strong>
+							supports Angular 6 to 15. For Angular 16+, install
+							<strong>@carbon/charts-angular@next</strong>.
+						</p>
+					</TabContent>
 				</svelte:fragment>
 			</Tabs>
-
-			<InlineNotification
-				title="Note:"
-				subtitle={`The last three packages are optional except for these situations: d3-cloud (for Alluvial Charts), d3-word (for Word Cloud Charts), @carbon/styles (for charts that display a toolbar).`}
-				lowContrast
-				kind="info-square"
-				hideCloseButton />
-
-			{#if selected == 1}
-				<h3>SvelteKit Vite Configuration</h3>
-
-				<p>
-					Carbon Charts expects to run in a browser environment. This will cause an error when using server-side rendering (SSR).
-					To avoid this, configure Vite to prevent @carbon/charts from being externalized for SSR.
-				</p>
-				<CodeSnippet
-							type="multi"
-							code={
-`// vite.config.mjs
-import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [sveltekit()],
-    ssr: {
-      noExternal: ${`process`}.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
-  }
-})`
-							} />
-			{/if}
 
 			<h3>Styles</h3>
 
