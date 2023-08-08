@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	// import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 	import {
 		Grid,
 		Row,
@@ -13,6 +14,7 @@
 	// import hljs from 'highlight.js/lib/core'
   // import typescript from 'highlight.js/lib/languages/typescript'
 	import PageTitle from '$lib/PageTitle.svelte'
+	import CodeSample from '$lib/CodeSample.svelte'
 
 	// onMount(() => {
 	// 	hljs.registerLanguage('typescript', typescript)
@@ -21,17 +23,52 @@
 	let selected = 0
 
 	const packageExtension = ['', '-svelte', '-react', '-vue', '-angular']
+	const data =
+`export default [
+	{
+		group: 'Qty',
+		value: 65000
+	},
+	{
+		group: 'More',
+		value: 29123
+	},
+	{
+		group: 'Sold',
+		value: 35213
+	},
+	{
+		group: 'Restocking',
+		value: 51213
+	},
+	{
+		group: 'Misc',
+		value: 16932
+	}
+]`
+	const options =
+`export default {
+  title: 'Vertical simple bar (discrete)',
+  axes: {
+    left: {
+      mapsTo: 'value'
+    },
+    bottom: {
+      mapsTo: 'group',
+      scaleType: 'labels'
+    }
+  },
+  height: '400px'
+}`
 
 	$: packageSuffix = packageExtension[selected]
 </script>
 
 <PageTitle title="Installation &amp; setup" />
 
-
-
 <Grid>
 	<Row>
-		<Column>
+		<Column lg={9}>
 			<h2>Select your development framework</h2>
 
 			<Tabs bind:selected>
@@ -65,31 +102,14 @@
 						hideCloseButton />
 
 					<TabContent>
-						<strong>index.html</strong>
-						<CodeSnippet
-							type="multi"
-							code={`...
-	<div id="my-bar-chart"></div>
-	...`} />
+						<h3>StackBlitz Example</h3>
+						<CodeSample framework="vanilla" chartType="SimpleBarChart" {data} {options}/>
 
-						<strong>index.js</strong>
-						<CodeSnippet
-							type="multi"
-							code={`import { StackedBarChart } from '@carbon/charts'
-	
-	import '@carbon/styles/css/styles.css' // adds styling to body element
-	import '@carbon/charts/styles.css'
-	
-	// grab chart holder DOM element
-	const chartHolder = document.getElementById('my-bar-chart')
-	
-	// initialize the chart
-	new StackedBarChart(chartHolder, {
-		data: stackedBarData,
-		options: stackedBarOptions,
-	})`} />
 
 						<h3>Consuming in a browser environment</h3>
+
+						<CodeSample framework="html" chartType="SimpleBarChart" {data} {options}/>
+
 
 						<CodeSnippet
 							type="multi"

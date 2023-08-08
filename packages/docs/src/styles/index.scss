@@ -32,7 +32,30 @@ h3 {
 .bx--snippet {
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
+  color: #fff;
+  background-color: black;
+  border-radius: 0.25rem;
 }
+
+.bx--copy-btn {
+  background-color: black;
+  color: #fff;
+  // border: 1px solid black !important;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.bx--copy-btn:hover {
+  background-color: #393939;
+}
+
+.bx--snippet__icon {
+  fill: #fff;
+}
+
+// .bx--copy-btn:hover>svg {
+//  fill: black;
+// }
 
 .bx--snippet--multi .bx--snippet-container pre {
     padding-bottom: 0;
