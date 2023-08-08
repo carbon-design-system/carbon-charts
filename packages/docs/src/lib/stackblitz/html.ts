@@ -11,8 +11,7 @@ export function getHtmlProject(chartType: string, data: string, options: string)
   <meta charset="UTF-8" />
 
   <!-- Load Carbon Charts as Charts (UMD) and D3.js as d3 -->
-  <script src="https://unpkg.com/@carbon/charts@latest/dist/index.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/@carbon/charts@latest/dist/umd/bundle.umd.js"></script>
 		
   <!-- Load required stylesheets -->
   <link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
