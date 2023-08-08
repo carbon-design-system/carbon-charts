@@ -3,7 +3,7 @@
   "version": "1.11.17",
   "description": "Carbon Charts component library",
   "module": "./dist/index.mjs",
-  "main": "./dist/index.js",
+  "main": "./dist/umd/bundle.umd.js",
   "types": "./dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
@@ -15,38 +15,33 @@
       "types": "./dist/index.d.ts",
       "browser": {
         "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
+        "require": "./dist/umd/bundle.umd.js"
       },
       "node": {
         "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
+        "require": "./dist/umd/bundle.umd.js"
       }
     },
     "./components": {
       "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.mjs",
-      "require": "./dist/components/index.js"
+      "import": "./dist/components/index.mjs"
     },
     "./demo/styles.css": "./dist/demo/styles.css",
     "./demo": {
       "types": "./dist/demo/index.d.ts",
-      "import": "./dist/demo/index.mjs",
-      "require": "./dist/demo/index.js"
+      "import": "./dist/demo/index.mjs"
     },
     "./interfaces": {
       "types": "./dist/interfaces/index.d.ts",
-      "import": "./dist/interfaces/index.mjs",
-      "require": "./dist/interfaces/index.js"
+      "import": "./dist/interfaces/index.mjs"
     },
     "./model": {
       "types": "./dist/model/index.d.ts",
-      "import": "./dist/model/index.mjs",
-      "require": "./dist/model/index.js"
+      "import": "./dist/model/index.mjs"
     },
     "./services": {
       "types": "./dist/services/index.d.ts",
-      "import": "./dist/services/index.mjs",
-      "require": "./dist/services/index.js"
+      "import": "./dist/services/index.mjs"
     }
   },
   "files": [
@@ -63,7 +58,7 @@
     "file:css:demo": "sass scss/demos.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
     "file:downlevel:dts": "downlevel-dts dist dist",
     "postbundle": "concurrently \"yarn:file:*\"",
-    "build:package": "vite build && yarn postbundle && cp dist/styles*.css* ./",
+    "build:package": "vite build  -c ./vite.es.config.ts && vite build  -c ./vite.umd.config.ts && yarn postbundle && cp dist/styles*.css* ./",
     "demo:docs": "typedoc ./src/index.ts --out ./demo/bundle/documentation",
     "demo:storybook": "storybook build -o demo/bundle --quiet",
     "build:demo": "concurrently \"yarn:demo:*\"",

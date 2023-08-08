@@ -19,7 +19,7 @@ export default defineConfig({
 				'services/index': 'src/services/index.ts',
 				'demo/index': 'src/demo/index.ts'
 			},
-			name: 'CarbonCharts'
+			formats: ['es']
 		},
 		rollupOptions: {
 			external: ['d3', 'd3-cloud', 'd3-sankey'] // d3-cloud and d3-sankey are not included in d3
