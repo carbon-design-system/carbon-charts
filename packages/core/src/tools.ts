@@ -9,7 +9,7 @@ import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null
-	return (...args: any) => {
+	return function(...args: any) {
 		const context = this
 
 		// Get D3 event here
