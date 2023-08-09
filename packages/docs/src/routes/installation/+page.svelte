@@ -105,52 +105,10 @@
 						<h3>StackBlitz Example</h3>
 						<CodeSample framework="vanilla" chartType="SimpleBarChart" {data} {options}/>
 
-
 						<h3>Consuming in a browser environment</h3>
 
 						<CodeSample framework="html" chartType="SimpleBarChart" {data} {options}/>
 
-
-						<CodeSnippet
-							type="multi"
-							code={`<!DOCTYPE html>
-		<html>
-			<head>
-				<!-- Load Carbon Charts as Charts (UMD) and D3.js as d3 -->
-				<script src="https://unpkg.com/@carbon/charts@latest/dist/index.js" defer></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" defer integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		
-				<!-- Load required stylesheets -->
-				<link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
-				<link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
-		
-				<!-- Load font used by Carbon Charts -->
-				<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />
-			</head>
-			<body>
-				<!-- Define a div to act as the chart holder -->
-				<div id="my-bar-chart"></div>
-		
-				<script>
-					// Get a reference to the chart holder DOM element
-					const chartHolder = document.getElementById('my-bar-chart')
-		
-					const data = [
-						// refer to tabular data format tutorial
-					]
-		
-					const options = {
-						// refer to chart specific options
-					}
-		
-					// initialize the chart
-				 new Charts.StackedBarChart(chartHolder, {
-					 data,
-					 options
-				 })
-				</script>
-			</body>
-		</html>`} />
 					</TabContent>
 					<TabContent>
 						<h3>SvelteKit Vite Configuration</h3>
@@ -168,21 +126,22 @@
 						<p><strong>vite.config.mjs</strong></p>
 						<CodeSnippet
 							type="multi"
-							code={`
-		import { sveltekit } from '@sveltejs/kit/vite'
-		import { defineConfig } from 'vite'
-		
-		export default defineConfig({
-			plugins: [sveltekit()],
-				ssr: {
-					noExternal: ${`process`}.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
-			}
-		})`} />
+							code={
+`import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+	plugins: [sveltekit()],
+		ssr: {
+			noExternal: ${`process`}.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
+	}
+})`} />
 
 						<p><strong>Example.svelte</strong></p>
 						<CodeSnippet
 							type="multi"
-							code={`<script lang="ts">
+							code={
+`<script lang="ts">
 	import { DonutChart, DonutChartOptions } from '@carbon/charts-svelte'
 	import '@carbon/styles/css/styles.css' // affects body element
 	import '@carbon/charts-svelte/styles.css'
