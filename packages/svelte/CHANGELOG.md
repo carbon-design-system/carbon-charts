@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.19 (2023-08-09)
+
+
+### Bug Fixes
+
+* **1633:** use of arrow function lost lexical this ([#1645](https://github.com/carbon-design-system/carbon-charts/issues/1645)) ([3303b8f](https://github.com/carbon-design-system/carbon-charts/commit/3303b8fbc29f7cb82c0d8f441199f7f9bca2d8a1))
+
+
+
+
+
 ## 1.11.18 (2023-08-09)
 
 
