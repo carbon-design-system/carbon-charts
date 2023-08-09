@@ -39,7 +39,7 @@ export function getHtmlProject(chartType: string, data: string, options: string)
 
     const options = ${options.replace('export default', '')}
 
-    new CarbonCharts.${chartType}(chartHolder, {
+    new Charts.${chartType}(chartHolder, {
       data,
       options
     })
