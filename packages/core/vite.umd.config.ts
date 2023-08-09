@@ -10,7 +10,7 @@ export default defineConfig({
 			entry: 'src/index.ts',
 			formats: ['umd'],
 			fileName: 'bundle',
-			name: 'CarbonCharts'
+			name: 'Charts'
 		}
 	},
 	optimizeDeps: {
