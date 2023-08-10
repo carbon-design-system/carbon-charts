@@ -22,7 +22,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.17.0"
+    "node": "^18.17.1"
   },
   "packageManager": "yarn@3.6.1",
   "prettier": "./prettier.config.mjs",
