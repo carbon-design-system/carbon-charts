@@ -47,7 +47,7 @@ jobs:
           npx lerna publish from-git --yes --force-publish
 
       - name: Deploy demos and documentation to Github Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
