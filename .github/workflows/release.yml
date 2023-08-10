@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -22,7 +22,7 @@ jobs:
           node-version: '18.17.1'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
+      - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
 
       - name: Set git user and get git into the right state
@@ -31,12 +31,12 @@ jobs:
           git config --global user.name "carbon-bot"
           git checkout master
 
-      - name: Create version and change logs
+      - name: Create version and change logs 
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
-      - name: Rebuild packages and demos for publication and deployment
+      - name: Rebuild packages and demos for publication and deployment 🔧
         run: |
           yarn build
           node scripts/update-angular-dependency-version.mjs
