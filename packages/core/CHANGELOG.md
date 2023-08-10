@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.19 (2023-08-09)
+
+
+### Bug Fixes
+
+* **1633:** use of arrow function lost lexical this ([#1645](https://github.com/carbon-design-system/carbon-charts/issues/1645)) ([3303b8f](https://github.com/carbon-design-system/carbon-charts/commit/3303b8fbc29f7cb82c0d8f441199f7f9bca2d8a1))
+
+
+
+
+
+## 1.11.18 (2023-08-09)
+
+
+### Bug Fixes
+
+* **umd:** close issue 1643 - UMD bundle not generated ([#1644](https://github.com/carbon-design-system/carbon-charts/issues/1644)) ([d0313dc](https://github.com/carbon-design-system/carbon-charts/commit/d0313dcc59cf857ca92cbe3886f12dd6fa76a9b5))
+
+
+
+
+
 ## 1.11.17 (2023-08-06)
 
 **Note:** Version bump only for package @carbon/charts
