@@ -137,7 +137,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
-    "sass": "^1.64.2",
+    "sass": "~1.64.2",
     "storybook": "^7.2.2",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
