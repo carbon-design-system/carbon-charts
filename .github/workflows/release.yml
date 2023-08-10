@@ -7,22 +7,22 @@ on:
 jobs:
   build:
     if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v18.17.0
+    name: Create release - Node.js v18.17.1
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 18.17.0
+      - name: Use Node.js 18.17.1
         uses: actions/setup-node@v3
         with:
-          node-version: '18.17.0'
+          node-version: '18.17.1'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
+      - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
 
       - name: Set git user
@@ -30,12 +30,12 @@ jobs:
           git config --global user.email "carbon@us.ibm.com"
           git config --global user.name "carbon-bot"
 
-      - name: Create version and change logs
+      - name: Create version and change logs 
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
-      - name: Rebuild packages and demos for publication and deployment
+      - name: Rebuild packages and demos for publication and deployment 🔧
         run: |
           yarn build
           node scripts/update-angular-dependency-version.mjs
@@ -46,9 +46,9 @@ jobs:
           npx lerna publish from-git --yes --force-publish
 
       - name: Deploy demos and documentation to Github Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: pages # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: pages # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch

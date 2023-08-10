@@ -22,7 +22,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.17.0"
+    "node": "^18.17.1"
   },
   "packageManager": "yarn@3.6.1",
   "prettier": "./prettier.config.mjs",
@@ -30,7 +30,7 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3",
-    "lerna": "^7.1.4",
+    "lerna": "^7.1.5",
     "pinst": "^3.0.0",
     "prettier": "^3.0.1",
     "prettier-config-carbon": "^0.11.0"
