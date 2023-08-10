@@ -68,7 +68,7 @@
 
 <Grid>
 	<Row>
-		<Column lg={9}>
+		<Column lg={12}>
 			<h2>Select your development framework</h2>
 
 			<Tabs bind:selected>

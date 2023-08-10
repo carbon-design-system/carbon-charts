@@ -2488,7 +2488,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     resize-observer-polyfill: ^1.5.1
-    sass: ^1.64.2
+    sass: ~1.64.2
     storybook: ^7.2.2
     topojson-client: ^3.1.0
     tslib: ^2.6.1
@@ -19407,7 +19407,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.55.0, sass@npm:^1.64.2":
+"sass@npm:^1.55.0, sass@npm:^1.64.2, sass@npm:~1.64.2":
   version: 1.64.2
   resolution: "sass@npm:1.64.2"
   dependencies:
