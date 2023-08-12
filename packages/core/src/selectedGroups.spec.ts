@@ -2,11 +2,12 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import ResizeObserver from 'resize-observer-polyfill'
 import { select } from 'd3'
 import { TestEnvironment } from './tests'
-import settings from 'carbon-components/es/globals/js/settings' // CSS prefixes
+import { prefix } from '@/tests'
 import { ScatterChart } from '@/charts/scatter'
 import { options } from './configuration'
 import { Events } from '@/interfaces/enums'
 
+const prefix = 'bx'
 global.ResizeObserver = ResizeObserver
 let chart: ScatterChart
 let testEnvironment: TestEnvironment
@@ -29,7 +30,7 @@ describe('selectedGroups option', () => {
 				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 
 				const selectedLegendLabels = select(
-					`g.${settings.prefix}--${options.chart.style?.prefix}--legend`
+					`g.${prefix}--${options.chart.style?.prefix}--legend`
 				)
 					.selectAll<SVGGElement, unknown>('g.legend-item.active > text')
 					.nodes()

@@ -4,11 +4,3 @@ declare module 'carbon-components' {
 	}
 }
 
-declare module 'carbon-components/es/globals/js/settings' {
-	export default {
-		disableAutoInit: boolean,
-		prefix: string,
-		selectorTabbable: string,
-		selectorFocusable: string
-	}
-}
