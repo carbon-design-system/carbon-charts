@@ -1,13 +1,13 @@
-import { select } from 'd3'
+import { select, type Selection } from 'd3'
 import { get } from 'lodash-es'
-import { Modal as CarbonModalComponent } from 'carbon-components' // Carbon model
+import { Modal as CarbonModalComponent } from 'carbon-components' // /es/components/modal
 import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
+import type { ChartOptions } from '@/interfaces/charts'
 import { Events } from '@/interfaces/enums'
-
 
 export class Modal extends Component {
 	type = 'modal'
@@ -103,11 +103,11 @@ export class Modal extends Component {
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
-		const options = this.model.getOptions()
+		const options = this.model.getOptions() as ChartOptions
 		if (!this.isEventListenerAdded) {
 			// Grab the tooltip element
-			const holder = select(this.services.domUtils.getHolder())
-			const chartprefix = getProperty(options, 'style', 'prefix')
+			const holder = select(this.services.domUtils.getHolder()) as Selection<HTMLDivElement, any, Element, any>
+			const chartprefix = getProperty(options, 'style', 'prefix') as string
 			this.modal = DOMUtils.appendOrSelect(holder, `div.${carbonPrefix}--${chartprefix}--modal`)
 
 			this.addEventListeners()
