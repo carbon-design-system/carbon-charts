@@ -70,7 +70,7 @@
 		"storybook": "^7.2.3",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.9",
-		"vite-plugin-dts": "^3.5.1",
+		"vite-plugin-dts": "^3.5.2",
 		"vue-tsc": "^1.8.8"
 	},
 	"publishConfig": {
