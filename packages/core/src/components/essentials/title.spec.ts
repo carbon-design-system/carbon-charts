@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import ResizeObserver from 'resize-observer-polyfill'
-import settings from 'carbon-components/es/globals/js/settings' // CSS prefixes
+import { prefix } from '@/tests'
 import { select } from 'd3'
 import { options as optionsConfigs } from '@/configuration'
 import { ScatterChart } from '@/charts/scatter'
@@ -25,7 +25,7 @@ describe('title component', () => {
 
 			const chartEventsService = chart.services.events
 			const renderCb = () => {
-				const title = select(`g.${settings.prefix}--${optionsConfigs.chart.style?.prefix}--title`)
+				const title = select(`g.${prefix}--${optionsConfigs.chart.style?.prefix}--title`)
 
 				// Remove event listener for when chart render is finished
 				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)

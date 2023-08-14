@@ -1,7 +1,7 @@
 import { easeCubicInOut } from 'd3'
 import { LegendItemType, ZoomBarTypes,  } from '@/interfaces/enums'
 
-export const carbonPrefix = 'cds'
+export const carbonPrefix = 'cds' as string
 
 export const area = {
 	opacity: {
