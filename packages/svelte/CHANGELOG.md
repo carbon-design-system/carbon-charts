@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.21 (2023-08-14)
+
+### Bug Fixes
+
+- **umd:** Issue 1646 - change process.env.NODE_ENV to string
+  ([#1649](https://github.com/carbon-design-system/carbon-charts/issues/1649))
+  ([8e11271](https://github.com/carbon-design-system/carbon-charts/commit/8e11271903e92b54aa71c5fabc6ea21103fc5d91))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.11.20 (2023-08-10)
 
 ### Bug Fixes
