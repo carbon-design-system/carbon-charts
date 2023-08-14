@@ -78,7 +78,7 @@
 				<Tab label="Vue.js" />
 				<Tab label="Angular" />
 				<svelte:fragment slot="content">
-					<h3>Consuming with a bundler (eg Vite)</h3>
+					<h3>Installing with package managers</h3>
 
 					<Tabs>
 						<Tab label="yarn" />
@@ -102,14 +102,92 @@
 						hideCloseButton />
 
 					<TabContent>
-						<h3>StackBlitz Example</h3>
+						<h3>Using ES modules (recommended)</h3>
 						<CodeSample framework="vanilla" chartType="SimpleBarChart" {data} {options}/>
 
-						<h3>Consuming in a browser environment</h3>
+						<p>The example above consists of these files:</p>
+						<Grid>
+							<Row>
+								<Column sm={1} md={4} lg={4}>index.html</Column>
+								<Column sm={1} md={2} lg={12}>
+									The HTML file that loads the IBM Plex Sans and Sans Condensed fonts, defines a
+									DIV container for the chart with the id of "app" and loads the main JavaScript module.
+									To use different fonts, override two custom CSS properties for the CSS class that is
+									automatically associated with the chart container like this...
+									<CodeSnippet
+										type="multi"
+										code={
+`.cds--cc--chart-wrapper {
+  --cds-charts-font-family: Roboto;
+  --cds-charts-font-family-condensed: 'Roboto Condensed';
+}`} />
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>index.js</Column>
+								<Column sm={1} md={2} lg={12}>
+									ES module that imports the SimpleBarChart class plus two modules - one for the chart
+									display options and another containing the data. This module uses the import statement to import
+									the styles necessary to display the chart in a manner that helps Vite optimize hot module reloading (HMR).
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>@carbon/styles/css/styles.css</Column>
+								<Column sm={1} md={2} lg={12}>
+									This CSS stylesheet is only needed if you are displaying the toolbar (turned on by default in options). It
+									contains styling necessary to display the tabular representation of the data in a modal dialog and for the
+									display of the toolbar buttons.
+									<InlineNotification
+									title="Caution:"
+									subtitle={`Loading @carbon/styles CSS applies styles to the body element that may interfere with other styling like Bootstrap or Material Design. For these situations, use SCSS instead.`}
+									lowContrast
+									kind="warning"
+									hideCloseButton />
+									If you want to prevent the body element from being restyled, here's how to load <strong>@carbon/styles</strong> using SCSS:
+									<p>
+										<CodeSnippet
+											type="multi"
+											code={
+`// Your SCSS file
+@use '@carbon/styles' with (
+  $css--body: false // Do not emit styles for body element
+);`} />
+									</p>
+									<p>The module <strong>@carbon/import-once</strong> is required when using <strong>@carbon/styles</strong> with SCSS.</p>
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>@carbon/charts/styles.css</Column>
+								<Column sm={1} md={2} lg={12}>
+									CSS stylesheet required for all charts.
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>data.js</Column>
+								<Column sm={1} md={2} lg={12}>
+									ES module containing data for the chart in <a href="/data">Tabular data format</a>.
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>options.js</Column>
+								<Column sm={1} md={2} lg={12}>
+									ES module with display <a href="/options">options</a> for the chart.
+								</Column>
+							</Row>
+							<Row>
+								<Column sm={1} md={4} lg={4}>package.json</Column>
+								<Column sm={1} md={2} lg={12}>
+									Package file with basic dependencies.
+								</Column>
+							</Row>
+						</Grid>
+
+						<h3>Using the UMD bundle in a browser environment</h3>
 
 						<CodeSample framework="html" chartType="SimpleBarChart" {data} {options}/>
 
 					</TabContent>
+
 					<TabContent>
 						<h3>SvelteKit Vite Configuration</h3>
 
