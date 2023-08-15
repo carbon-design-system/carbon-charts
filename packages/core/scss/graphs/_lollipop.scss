@@ -1,4 +1,6 @@
-.#{$prefix}--#{$charts-prefix}--lollipop {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--lollipop {
 	line.line {
 		pointer-events: none;
 	}

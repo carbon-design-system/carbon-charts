@@ -1,25 +1,23 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-@use '@carbon/styles/scss/motion' as *;
-
-.#{$prefix}--#{$charts-prefix}--bullet {
+.#{globals.$prefix}--#{globals.$charts-prefix}--bullet {
 	path.range-box {
 		pointer-events: none;
 
 		&.order-1 {
-			fill: $zone-fill-01;
-			stroke: $zone-stroke-01;
+			fill: tokens.$zone-fill-01;
+			stroke: tokens.$zone-stroke-01;
 		}
 
 		&.order-2 {
-			fill: $zone-fill-02;
-			stroke: $zone-stroke-02;
+			fill: tokens.$zone-fill-02;
+			stroke: tokens.$zone-stroke-02;
 		}
 
 		&.order-3 {
-			fill: $zone-fill-03;
-			stroke: $zone-stroke-03;
+			fill: tokens.$zone-fill-03;
+			stroke: tokens.$zone-stroke-03;
 		}
 	}
 
@@ -27,10 +25,10 @@
 	path.quartile {
 		pointer-events: none;
 		stroke-width: 1.5px;
-		stroke: $layer-inverse-absolute;
+		stroke: tokens.$layer-inverse-absolute;
 	}
 
 	path.quartile.over-bar {
-		stroke: $layer-01-absolute;
+		stroke: tokens.$layer-01-absolute;
 	}
 }

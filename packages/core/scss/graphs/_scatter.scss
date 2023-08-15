@@ -1,15 +1,16 @@
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as motion;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--scatter {
+.#{globals.$prefix}--#{globals.$charts-prefix}--scatter {
 	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all 0.1s;
-		@include motion(standard, expressive);
+		@include motion.motion(standard, expressive);
 	}
 
 	circle.dot.unfilled {
-		fill: $layer-01;
+		fill: theme.$layer-01;
 		stroke-width: 1.5;
 	}
 

@@ -1,4 +1,6 @@
-.#{$prefix}--#{$charts-prefix}--wordcloud {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--wordcloud {
 	text.word {
 		&.light {
 			// TODO-V11

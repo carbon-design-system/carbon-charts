@@ -1,6 +1,9 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/colors';
+@use '../globals';
 
-div.#{$prefix}--#{$charts-prefix}--legend {
+div.#{globals.$prefix}--#{globals.$charts-prefix}--legend {
+	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 	display: flex;
 	user-select: none;
 	-webkit-flex-wrap: wrap;
@@ -21,7 +24,7 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 			height: 13px;
 			margin-right: 4px;
 			border-radius: 2px;
-			border: solid 1px $background;
+			border: solid 1px theme.$background;
 			box-shadow: 0 0 0 2px transparent;
 
 			@media (forced-colors: active) {
@@ -29,15 +32,15 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 			}
 
 			&:not(.active) {
-				border-color: $text-secondary;
-				background: $background;
+				border-color: theme.$text-secondary;
+				background: theme.$background;
 			}
 
 			svg {
 				display: none;
 				vertical-align: text-top;
-				fill: $background;
-				stroke: $background;
+				fill: theme.$background;
+				stroke: theme.$background;
 			}
 		}
 
@@ -49,7 +52,7 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 
 		p {
 			font-size: 12px;
-			fill: $text-secondary;
+			fill: theme.$text-secondary;
 			line-height: 1rem;
 		}
 	}
@@ -86,11 +89,11 @@ div.#{$prefix}--#{$charts-prefix}--legend {
 		cursor: pointer;
 
 		div.checkbox {
-			border: solid 1px $background;
-			box-shadow: 0 0 0 2px $blue-60;
+			border: solid 1px theme.$background;
+			box-shadow: 0 0 0 2px colors.$blue-60;
 
 			&:not(.active) {
-				border-color: $text-secondary;
+				border-color: theme.$text-secondary;
 			}
 		}
 	}

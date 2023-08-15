@@ -1,8 +1,8 @@
 @use 'sass:map';
-@use '@carbon/styles/scss/colors';
+@use '@carbon/colors';
 
 @function getColorValue($color, $scale) {
-	@return map.get($colors, $color, $scale);
+	@return map.get(colors.$colors, $color, $scale);
 }
 
 $white-theme-colors: (

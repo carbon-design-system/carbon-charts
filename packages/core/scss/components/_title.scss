@@ -1,11 +1,11 @@
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--title {
+.#{globals.$prefix}--#{globals.$charts-prefix}--title {
 	p.title {
-		color: $text-primary;
+		color: theme.$text-primary;
 		font-size: 16px;
-		font-family: var(--#{$prefix}-charts-font-family);
+		font-family: var(--#{globals.$prefix}-charts-font-family);
 		// TODO-V11
 		// font-weight: font-weight('semibold');
 		font-weight: 600;

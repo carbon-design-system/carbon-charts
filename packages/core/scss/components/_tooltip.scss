@@ -1,29 +1,30 @@
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--tooltip {
-	background-color: $layer-02;
+.#{globals.$prefix}--#{globals.$charts-prefix}--tooltip {
+	background-color: theme.$layer-02;
 	pointer-events: none;
-	@include motion(standard, expressive);
+	@include motion.motion(standard, expressive);
 	display: inline;
 	visibility: visible;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: var(--#{$prefix}-charts-font-family-condensed);
+	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 	transition: visibility 0s linear 0.1s, opacity 0.1s;
 
 	&.hidden {
 		opacity: 0;
 		visibility: hidden;
 		transition: visibility 0s linear 0s, opacity 0.1s;
-		@include motion(standard, expressive);
+		@include motion.motion(standard, expressive);
 	}
 
 	.content-box {
-		color: $text-primary;
+		color: theme.$text-primary;
 
 		.title-tooltip {
 			width: auto;
@@ -62,7 +63,7 @@
 					vertical-align: top;
 					padding-left: 4px;
 					width: auto;
-					fill: $layer-inverse-absolute;
+					fill: tokens.$layer-inverse-absolute;
 				}
 			}
 
@@ -102,7 +103,7 @@
 				position: relative;
 
 				&:not(:last-child) {
-					border-bottom: 1px solid $tooltip-line-border;
+					border-bottom: 1px solid tokens.$tooltip-line-border;
 				}
 			}
 		}
