@@ -12,12 +12,10 @@ export function buildAngularExample(demo: Demo): Project {
 		'@angular/platform-browser': version.angular,
     '@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
-		'@carbon/styles': version.carbonStyles,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
 		'd3-sankey': version.d3Sankey,
 		rxjs: version.rxjs,
-		sass: version.sass,
 		tslib: version.tslib,
 		'zone.js': version.zoneJs
 	}
@@ -69,9 +67,8 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesCss = `@import '@carbon/styles/css/styles.css';
-@import '@carbon/charts/styles.css';
-`
+	const stylesCss = `@import '@carbon/charts/styles.css';
+  `
 
 	const angularJson = `{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",

@@ -7,11 +7,9 @@ export function buildVueExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts-vue': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
-    'sass': version.sass,
     'vue': version.vue
   }
 
@@ -57,7 +55,6 @@ export default {
 </script>
 
 <style>
-@import '@carbon/styles/css/styles.css';
 @import '@carbon/charts-vue/styles.css';
 .p-1 {
 padding: 2rem;
