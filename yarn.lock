@@ -6273,6 +6273,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sveltejs/adapter-static@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@sveltejs/adapter-static@npm:2.0.3"
+  peerDependencies:
+    "@sveltejs/kit": ^1.5.0
+  checksum: 75559b2bb5145c70766a619bf64d7a6f1de7b1f10a79d962bddbb599bce938ef46ee624f880de648019fe5aec30a09ca317838c3e4deb6c46934b79f1fa18149
+  languageName: node
+  linkType: hard
+
 "@sveltejs/kit@npm:^1.22.6":
   version: 1.22.6
   resolution: "@sveltejs/kit@npm:1.22.6"
@@ -9485,6 +9494,15 @@ __metadata:
   version: 1.0.30001520
   resolution: "caniuse-lite@npm:1.0.30001520"
   checksum: 59991ad8f36cf282f81abbcc6074c3097c21914cdd54bd2b3f73ac9462f57fc74e90371cd22bcdff4d085d09da42a07dcea384cb81e4ac260496e1bd79e1fe7c
+  languageName: node
+  linkType: hard
+
+"carbon-components-svelte@npm:^0.79.0":
+  version: 0.79.0
+  resolution: "carbon-components-svelte@npm:0.79.0"
+  dependencies:
+    flatpickr: 4.6.9
+  checksum: 5afce573df48cbe8a4df7e116dcd670e3ab81ee0eaeb58a6bae4aec21f0e16a974da2e3383ed1417505e945454dde9e8340e7e231d1adcd30e021cc03e6c3388
   languageName: node
   linkType: hard
 
@@ -18328,7 +18346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.10, postcss@npm:^8.2.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.26, postcss@npm:^8.4.27":
+"postcss@npm:^8.1.10, postcss@npm:^8.2.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.25, postcss@npm:^8.4.26, postcss@npm:^8.4.27, postcss@npm:^8.4.5":
   version: 8.4.28
   resolution: "postcss@npm:8.4.28"
   dependencies:
