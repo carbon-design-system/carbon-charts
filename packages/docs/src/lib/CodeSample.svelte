@@ -11,14 +11,13 @@
 
   type Framework = 'vanilla' | 'svelte' | 'react' | 'vue' | 'angular' | 'html'
 
-	export let id = `stackblitz-example-${Math.random().toString(36)}` // may not need
-  export let ref: HTMLDivElement //| null = null
   export let framework: Framework
   export let chartType: string = ''
   export let data: string = ''
   export let options: string = ''
+  let ref: HTMLDivElement
 
-  const embedOptions: EmbedOptions = { height: 600 }
+  const embedOptions: EmbedOptions = { height: 600, view: 'default', showSidebar: true }
   const getProject = {
     'vanilla': getVanillaProject,
     'svelte': getSvelteProject,
@@ -33,4 +32,4 @@
   })
 </script>
 
-<div {id} bind:this={ref}></div>
+<div bind:this={ref}></div>

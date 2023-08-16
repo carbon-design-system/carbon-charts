@@ -64,6 +64,12 @@
   height: '400px'
 }`
 
+// Directions needed because StackBlitz won't show in Both mode for anything but first tab
+const directions = `<p>
+	Click <strong>Preview</strong> above to see the chart. The top-left icon (Project) allows
+	you to browse all the files in the project.
+</p>`
+
 	$: packageSuffix = packageExtension[selected]
 </script>
 
@@ -207,6 +213,7 @@ export default defineConfig({
 					</TabContent>
 					<TabContent>
 						<CodeSample framework="react" chartType="SimpleBarChart" {data} {options} />
+						{@html directions}
 					</TabContent>
 					<TabContent>
 						<h3>Vue.js version support</h3>
@@ -219,6 +226,7 @@ export default defineConfig({
 						</p>
 
 						<CodeSample framework="vue" chartType="CcvSimpleBarChart" {data} {options} />
+						{@html directions}
 					</TabContent>
 					<TabContent>
 						<h3>Angular version support</h3>
