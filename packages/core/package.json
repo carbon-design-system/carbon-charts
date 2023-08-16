@@ -106,6 +106,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.10",
+		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.18.0",
 		"@carbon/styles": "^1.35.0",
 		"@carbon/themes": "^11.23.0",

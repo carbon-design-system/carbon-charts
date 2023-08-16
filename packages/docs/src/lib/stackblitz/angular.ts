@@ -10,11 +10,13 @@ export function getAngularProject(chartType: string, data: string, options: stri
 		'@angular/platform-browser': version.angular,
     '@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
+    // TODO: remove next line
 		'@carbon/styles': version.carbonStyles,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
 		'd3-sankey': version.d3Sankey,
 		rxjs: version.rxjs,
+    // TODO: remove next line
 		sass: version.sass,
 		tslib: version.tslib,
 		'zone.js': version.zoneJs
@@ -67,7 +69,8 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesCss = `@import '@carbon/styles/css/styles.css';
+	const stylesCss = `// TODO: remove next line
+@import '@carbon/styles/css/styles.css';
 @import '@carbon/charts/styles.css';
 `
 

@@ -9,10 +9,15 @@
 		Tab,
 		TabContent,
 		CodeSnippet,
-		InlineNotification
+		InlineNotification,
+		StructuredList,
+		StructuredListHead,
+		StructuredListRow,
+		StructuredListCell,
+		StructuredListBody
 	} from 'carbon-components-svelte'
 	// import hljs from 'highlight.js/lib/core'
-  // import typescript from 'highlight.js/lib/languages/typescript'
+	// import typescript from 'highlight.js/lib/languages/typescript'
 	import PageTitle from '$lib/PageTitle.svelte'
 	import CodeSample from '$lib/CodeSample.svelte'
 
@@ -23,8 +28,7 @@
 	let selected = 0
 
 	const packageExtension = ['', '-svelte', '-react', '-vue', '-angular']
-	const data =
-`export default [
+	const data = `export default [
 	{
 		group: 'Qty',
 		value: 65000
@@ -46,8 +50,7 @@
 		value: 16932
 	}
 ]`
-	const options =
-`export default {
+	const options = `export default {
   title: 'Vertical simple bar (discrete)',
   axes: {
     left: {
@@ -66,129 +69,116 @@
 
 <PageTitle title="Installation &amp; setup" />
 
-<Grid>
-	<Row>
-		<Column lg={12}>
-			<h2>Select your development framework</h2>
+<h2>Select your development framework</h2>
 
-			<Tabs bind:selected>
-				<Tab label="Vanilla JavaScript" />
-				<Tab label="Svelte" />
-				<Tab label="React" />
-				<Tab label="Vue.js" />
-				<Tab label="Angular" />
-				<svelte:fragment slot="content">
-					<h3>Installing with package managers</h3>
+<Tabs bind:selected>
+	<Tab label="Vanilla JavaScript" />
+	<Tab label="Svelte" />
+	<Tab label="React" />
+	<Tab label="Vue.js" />
+	<Tab label="Angular" />
 
-					<Tabs>
-						<Tab label="yarn" />
-						<Tab label="npm" />
+	<svelte:fragment slot="content">
 
-						<svelte:fragment slot="content">
-							<TabContent
-								><CodeSnippet
-									code={`yarn add @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
-							<TabContent
-								><CodeSnippet
-									code={`npm install -S @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey @carbon/styles`} /></TabContent>
-						</svelte:fragment>
-					</Tabs>
+		<h3>Installing with package managers</h3>
 
-					<InlineNotification
-						title="Note:"
-						subtitle={`The last three packages are optional except for these situations: d3-cloud (for Alluvial Charts), d3-word (for Word Cloud Charts), @carbon/styles (for charts that display a toolbar).`}
-						lowContrast
-						kind="info-square"
-						hideCloseButton />
+		<Tabs>
+			<Tab label="yarn" />
+			<Tab label="npm" />
+
+			<svelte:fragment slot="content">
+				<p>
+				<TabContent
+					><CodeSnippet
+						code={`yarn add @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey`} /></TabContent>
+				<TabContent
+					><CodeSnippet
+						code={`npm install -S @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey`} /></TabContent>
+					</p>
+			</svelte:fragment>
+		</Tabs>
+
+		<InlineNotification
+			title="Note:"
+			subtitle={`The last two packages are optional except for these situations: d3-cloud (for Alluvial Charts) and d3-word (for Word Cloud Charts).`}
+			lowContrast
+			kind="info-square"
+			hideCloseButton />
 
 					<TabContent>
 						<h3>Using ES modules (recommended)</h3>
-						<CodeSample framework="vanilla" chartType="SimpleBarChart" {data} {options}/>
+						<CodeSample framework="vanilla" chartType="SimpleBarChart" {data} {options} />
 
 						<p>The example above consists of these files:</p>
-						<Grid>
-							<Row>
-								<Column sm={1} md={4} lg={4}>index.html</Column>
-								<Column sm={1} md={2} lg={12}>
-									The HTML file that loads the IBM Plex Sans and Sans Condensed fonts, defines a
-									DIV container for the chart with the id of "app" and loads the main JavaScript module.
-									To use different fonts, override two custom CSS properties for the CSS class that is
-									automatically associated with the chart container like this...
-									<CodeSnippet
+						<StructuredList class="file-list">
+							<StructuredListHead>
+								<StructuredListRow head>
+									<StructuredListCell head>File</StructuredListCell>
+									<StructuredListCell head>Purpose</StructuredListCell>
+								</StructuredListRow>
+							</StructuredListHead>
+							<StructuredListBody>
+								<StructuredListRow>
+									<StructuredListCell noWrap>index.html</StructuredListCell>
+									<StructuredListCell>
+										The HTML file that loads the IBM Plex Sans and Sans Condensed fonts, defines a DIV
+										container for the chart with the id of "app" and loads the main JavaScript module.
+										To use different fonts, override two custom CSS properties for the CSS class that
+										is automatically associated with the chart container like this...
+										<CodeSnippet
 										type="multi"
-										code={
-`.cds--cc--chart-wrapper {
+										code={`.cds--cc--chart-wrapper {
   --cds-charts-font-family: Roboto;
   --cds-charts-font-family-condensed: 'Roboto Condensed';
 }`} />
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>index.js</Column>
-								<Column sm={1} md={2} lg={12}>
-									ES module that imports the SimpleBarChart class plus two modules - one for the chart
-									display options and another containing the data. This module uses the import statement to import
-									the styles necessary to display the chart in a manner that helps Vite optimize hot module reloading (HMR).
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>@carbon/styles/css/styles.css</Column>
-								<Column sm={1} md={2} lg={12}>
-									This CSS stylesheet is only needed if you are displaying the toolbar (turned on by default in options). It
-									contains styling necessary to display the tabular representation of the data in a modal dialog and for the
-									display of the toolbar buttons.
-									<InlineNotification
-									title="Caution:"
-									subtitle={`Loading @carbon/styles CSS applies styles to the body element that may interfere with other styling like Bootstrap or Material Design. For these situations, use SCSS instead.`}
-									lowContrast
-									kind="warning"
-									hideCloseButton />
-									If you want to prevent the body element from being restyled, here's how to load <strong>@carbon/styles</strong> using SCSS:
-									<p>
-										<CodeSnippet
-											type="multi"
-											code={
-`// Your SCSS file
-@use '@carbon/styles' with (
-  $css--body: false // Do not emit styles for body element
-);`} />
-									</p>
-									<p>The module <strong>@carbon/import-once</strong> is required when using <strong>@carbon/styles</strong> with SCSS.</p>
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>@carbon/charts/styles.css</Column>
-								<Column sm={1} md={2} lg={12}>
-									CSS stylesheet required for all charts.
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>data.js</Column>
-								<Column sm={1} md={2} lg={12}>
-									ES module containing data for the chart in <a href="/data">Tabular data format</a>.
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>options.js</Column>
-								<Column sm={1} md={2} lg={12}>
-									ES module with display <a href="/options">options</a> for the chart.
-								</Column>
-							</Row>
-							<Row>
-								<Column sm={1} md={4} lg={4}>package.json</Column>
-								<Column sm={1} md={2} lg={12}>
-									Package file with basic dependencies.
-								</Column>
-							</Row>
-						</Grid>
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>index.js</StructuredListCell>
+									<StructuredListCell>
+										ES module that imports the SimpleBarChart class plus two modules - one for the
+										chart display options and another containing the data. This module uses the import
+										statement to import the styles necessary to display the chart in a manner that
+										helps Vite optimize hot module reloading (HMR).
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>@carbon/charts/styles.css</StructuredListCell>
+									<StructuredListCell>CSS stylesheet required for all charts.</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>data.js</StructuredListCell>
+									<StructuredListCell>
+										ES module containing data for the chart in <a href="/data">Tabular data format</a>.
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>options.js</StructuredListCell>
+									<StructuredListCell>ES module with display <a href="/options">options</a> for the chart.</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>package.json</StructuredListCell>
+									<StructuredListCell>Package file with basic dependencies.</StructuredListCell>
+								</StructuredListRow>
+							</StructuredListBody>
+						</StructuredList>
 
 						<h3>Using the UMD bundle in a browser environment</h3>
 
-						<CodeSample framework="html" chartType="SimpleBarChart" {data} {options}/>
+						<CodeSample framework="html" chartType="SimpleBarChart" {data} {options} />
 
+						<p>
+							The HTML example above loads the UMD bundle and styles in the head of the document
+							from https://unpkg.com. The fonts are loaded from Google's CDN. The JavaScript
+							executes once the DOM has loaded. It gets the HTML id of the div that will
+							contain the chart. It then passes the data and options to it.
+						</p>
 					</TabContent>
 
 					<TabContent>
+						<CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} />
+						<p>The example must be opened in StackBlitz to see the preview if you are not using Chrome.</p>
+
 						<h3>SvelteKit Vite Configuration</h3>
 
 						<p>
@@ -204,8 +194,7 @@
 						<p><strong>vite.config.mjs</strong></p>
 						<CodeSnippet
 							type="multi"
-							code={
-`import { sveltekit } from '@sveltejs/kit/vite'
+							code={`import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -215,20 +204,10 @@ export default defineConfig({
 	}
 })`} />
 
-						<p><strong>Example.svelte</strong></p>
-						<CodeSnippet
-							type="multi"
-							code={
-`<script lang="ts">
-	import { DonutChart, DonutChartOptions } from '@carbon/charts-svelte'
-	import '@carbon/styles/css/styles.css' // affects body element
-	import '@carbon/charts-svelte/styles.css'
-	import { data, options } from '../../stores'
-</script>
-
-<DonutChart {data} {options}/>`} />
 					</TabContent>
-					<TabContent>React Sample</TabContent>
+					<TabContent>
+						<CodeSample framework="react" chartType="SimpleBarChart" {data} {options} />
+					</TabContent>
 					<TabContent>
 						<h3>Vue.js version support</h3>
 
@@ -238,6 +217,8 @@ export default defineConfig({
 							supports Vue.js 2.7+. For Vue.js 3.3+, install
 							<strong>@carbon/charts-vue@next</strong>.
 						</p>
+
+						<CodeSample framework="vue" chartType="CcvSimpleBarChart" {data} {options} />
 					</TabContent>
 					<TabContent>
 						<h3>Angular version support</h3>
@@ -248,46 +229,11 @@ export default defineConfig({
 							supports Angular 6 to 15. For Angular 16+, install
 							<strong>@carbon/charts-angular@next</strong>.
 						</p>
+
+						<CodeSample framework="angular" chartType="SimpleBarChartComponent" {data} {options} />
 					</TabContent>
 				</svelte:fragment>
 			</Tabs>
-
-			<h3>Styles</h3>
-
-			<p>
-				When using a bundler like <a href="https://vitejs.dev/" target="_blank">Vite</a>, import
-				styles with your TypeScript/JavaScript code to optimize hot module reloading:
-				<CodeSnippet code={`import '@carbon/charts${packageSuffix}/styles.css'`} />
-			</p>
-
-			<p>
-				If you are using toolbars with your charts, <strong>@carbon/styles</strong> is required.
-				<CodeSnippet code="import '@carbon/styles/css/styles.css'" />
-			</p>
-
-			<InlineNotification
-				title="Caution:"
-				subtitle={`Loading @carbon/styles CSS applies styles to the body element that may interfere with other styling like Bootstrap or Material Design. For these situations, use SCSS instead.`}
-				lowContrast
-				kind="warning"
-				hideCloseButton />
-
-			<p>
-				<CodeSnippet
-					type="multi"
-					code={`// Your SCSS file
-@use '@carbon/styles' with (
-  $css--body: false // Do not emit styles for body element
-);`} />
-			</p>
-
-			<p>
-				More information on using <strong>@carbon/styles</strong> with SCSS can be found
-				<a
-					href="https://github.com/carbon-design-system/carbon/blob/HEAD/packages/styles/docs/sass.md#files"
-					target="_blank">here</a
-				>.
-			</p>
 
 			<h3>Fonts</h3>
 
@@ -298,7 +244,7 @@ export default defineConfig({
 				and
 				<a href="https://fonts.google.com/specimen/IBM+Plex+Sans+Condensed" target="_blank"
 					>IBM Plex Sans Condensed</a>
-				which can be loaded in your HTML template:
+				which can be loaded in your HTML template from Google's Content Distribution Network (CDN):
 				<CodeSnippet
 					code={`<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />`} />
 			</p>
@@ -313,13 +259,8 @@ export default defineConfig({
   --cds-charts-font-family-condensed: 'Roboto Condensed';
 }`} />
 			</p>
-		</Column>
-		<Column>&nbsp;</Column>
-	</Row>
-</Grid>
+
 
 <style lang="scss">
-	// h3 {
-	// 	margin-top: 2rem;
-	// }
+
 </style>

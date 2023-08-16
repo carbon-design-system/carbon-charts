@@ -2462,6 +2462,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.10
     "@carbon/colors": ^11.19.0
+    "@carbon/import-once": ^10.7.0
     "@carbon/layout": ^11.18.0
     "@carbon/styles": ^1.35.0
     "@carbon/telemetry": ~0.1.0
@@ -2570,6 +2571,13 @@ __metadata:
   version: 11.24.0
   resolution: "@carbon/icons@npm:11.24.0"
   checksum: 8063c15eb24ffb87bc402badc66ee60ef97077337577787886267ece63efeb1c45ea1922fdcab3db6f3f44acda50b9105ee77e2a6f3c7929b1873dd14e15fa0f
+  languageName: node
+  linkType: hard
+
+"@carbon/import-once@npm:^10.7.0":
+  version: 10.7.0
+  resolution: "@carbon/import-once@npm:10.7.0"
+  checksum: c92625bc34833073a2b113a9cf014353210570ed1105225e70c6c6d06e5203407aa472d95685a53b6460794408897641b8d8cd5fd6416f8b0fa36c28919bf5f0
   languageName: node
   linkType: hard
 

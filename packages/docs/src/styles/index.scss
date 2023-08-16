@@ -1,5 +1,12 @@
+* {
+  --docs-content-width: 75%;
+  --docs-box-radius: 0.25rem;
+}
+
+
 p {
   margin: 1rem 0 1rem 0;
+  width: var(--docs-content-width);
 }
 
 h2 {
@@ -34,7 +41,7 @@ h3 {
   margin-bottom: 0.25rem;
   color: #fff;
   background-color: black;
-  // border-radius: 0.25rem;
+  // border-radius: var(--docs-box-radius);
   width: 100%;
 }
 
@@ -42,8 +49,8 @@ h3 {
   background-color: black;
   color: #fff;
   // border: 1px solid black !important;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: var(--docs-box-radius);
+  border-bottom-right-radius: var(--docs-box-radius);
 }
 
 .bx--copy-btn:hover {
@@ -54,20 +61,26 @@ h3 {
   fill: #fff;
 }
 
-// .bx--copy-btn:hover>svg {
-//  fill: black;
-// }
-
 .bx--snippet--multi .bx--snippet-container pre {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
-
-// .bx--grid {
-//   padding-left: 0;
-// }
 
 // OrderedList is only used for legends
 .bx--list--ordered--native {
   margin-left: 2rem;
   margin-top: 4rem;
+}
+
+// Structured (file) lists should be 3/4ths of the container
+.bx--structured-list {
+  width: var(--docs-content-width);
+}
+
+// Code samples should be width of container
+.bx--snippet {
+  max-width: unset;
+}
+
+.bx--inline-notification {
+  max-width: var(--docs-content-width);
 }

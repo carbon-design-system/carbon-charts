@@ -5,10 +5,12 @@ export function getVanillaProject(chartType: string, data: string, options: stri
 
   const dependencies: Record<string, string> = {
     '@carbon/charts': version.carbonCharts,
+    // TODO: remove next line
     '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
+    // TODO: remove next line
     'sass': version.sass
   }
 
@@ -76,6 +78,7 @@ new ${chartType}(chartHolder, {
 import { ${chartType} } from '@carbon/charts'
 import options from './options.js'
 import data from './data.js'
+// TODO: remove next line
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
 

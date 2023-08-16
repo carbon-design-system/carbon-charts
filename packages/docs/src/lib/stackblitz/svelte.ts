@@ -5,6 +5,7 @@ export function getSvelteProject(chartType: string, data: string, options: strin
 
   const devDependencies: Record<string, string> = {
     '@carbon/charts-svelte': version.carbonCharts,
+    // TODO: remove next line
     '@carbon/styles': version.carbonStyles,
     '@sveltejs/vite-plugin-svelte': version.svelteVite,
     '@tsconfig/svelte': version.svelteTsConfig,
@@ -34,10 +35,11 @@ export function getSvelteProject(chartType: string, data: string, options: strin
   const appSvelte =
 `<script lang="ts">
 import { ${chartComponent} } from '@carbon/charts-svelte'
+// TODO: remove next line
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
-import options from './options.js'
-import data from './data.js'
+import options from './options'
+import data from './data'
 </script>
 
 <${chartComponent} {data} {options} style="padding:2rem;" />
@@ -143,9 +145,9 @@ export default defineConfig({
     title: 'Carbon Charts Svelte Example',
     files: {
       'src/App.svelte': appSvelte,
-      'src/data.js': data,
+      'src/data.ts': data,
       'src/main.ts': mainTs,
-      'src/options.js': options,
+      'src/options.ts': options,
       'src/vite-env.d.ts': viteEnvDts,
       '.stackblitzrc': stackBlitzRc,
       'index.html': indexHtml,

@@ -14,6 +14,7 @@ export function getHtmlProject(chartType: string, data: string, options: string)
   <script src="https://unpkg.com/@carbon/charts@latest/dist/umd/bundle.umd.js"></script>
 		
   <!-- Load required stylesheets -->
+  <!--TODO: remove next line -->
   <link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
   <link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
 

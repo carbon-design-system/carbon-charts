@@ -5,12 +5,14 @@ export function getReactProject(chartType: string, data: string, options: string
 
   const dependencies: Record<string, string> = {
     '@carbon/charts-react': version.carbonCharts,
+    // TODO: remove next line
     '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
     'react': version.react,
     'react-dom': version.react,
+    // TODO: remove next line
     'sass': version.sass
   }
 
@@ -46,7 +48,7 @@ import ReactDOM from 'react-dom/client'
 import { ${chartType} } from '@carbon/charts-react'
 import data from './data.js'
 import options from './options.js'
-
+// TODO: remove next line
 import '@carbon/styles/css/styles.css'
 import '@carbon/charts-react/styles.css'
 

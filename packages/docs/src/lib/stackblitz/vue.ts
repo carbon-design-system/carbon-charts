@@ -5,6 +5,7 @@ export function getVueProject(chartType: string, data: string, options: string):
 
   const dependencies: Record<string, string> = {
     '@carbon/charts-vue': version.carbonCharts,
+    // TODO: remove next line
     '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
@@ -55,6 +56,7 @@ export default {
 </script>
 
 <style>
+/* TODO: remove next line */
 @import '@carbon/styles/css/styles.css';
 @import '@carbon/charts-vue/styles.css';
 .p-1 {
