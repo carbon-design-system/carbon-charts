@@ -1,3 +1,5 @@
-.#{$prefix}--#{$charts-prefix}--donut {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--donut {
 	overflow: visible;
 }

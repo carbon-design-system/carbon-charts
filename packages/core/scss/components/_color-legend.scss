@@ -1,11 +1,11 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-svg.#{$prefix}--#{$charts-prefix}--color-legend {
+svg.#{globals.$prefix}--#{globals.$charts-prefix}--color-legend {
 	display: flex;
 	user-select: none;
 
 	g.legend-title text {
-		fill: $layer-inverse-absolute;
+		fill: tokens.$layer-inverse-absolute;
 	}
 }

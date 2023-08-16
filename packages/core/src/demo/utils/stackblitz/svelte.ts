@@ -7,7 +7,6 @@ export function buildSvelteExample(demo: Demo): Project {
 
   const devDependencies: Record<string, string> = {
     '@carbon/charts-svelte': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     '@sveltejs/vite-plugin-svelte': version.svelteVite,
     '@tsconfig/svelte': version.svelteTsConfig,
     d3: version.d3,
@@ -36,7 +35,6 @@ export function buildSvelteExample(demo: Demo): Project {
   const appSvelte =
 `<script lang="ts">
 import { ${chartComponent} } from '@carbon/charts-svelte'
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
 import options from './options.js'
 import data from './data.js'

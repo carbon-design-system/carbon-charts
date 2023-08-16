@@ -1,10 +1,11 @@
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/colors';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--threshold {
+.#{globals.$prefix}--#{globals.$charts-prefix}--threshold {
 	line.threshold-line {
-		stroke: $red-50;
+		stroke: colors.$red-50;
 		stroke-width: 1;
 		stroke-dasharray: 4;
 		cursor: pointer;
@@ -27,19 +28,19 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--threshold--label {
-	background-color: $red-50;
+.#{globals.$prefix}--#{globals.$charts-prefix}--threshold--label {
+	background-color: colors.$red-50;
 	pointer-events: none;
 	transition: opacity 0.1s;
-	@include motion(standard, expressive);
+	@include motion.motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	font-family: var(--#{$prefix}-charts-font-family-condensed);
+	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 
-	color: $text-primary;
+	color: theme.$text-primary;
 	line-height: 16px;
 	font-size: 12px;
 	padding: 4px;
@@ -48,6 +49,6 @@
 	&.hidden {
 		opacity: 0;
 		transition: opacity 0.1s;
-		@include motion(standard, expressive);
+		@include motion.motion(standard, expressive);
 	}
 }

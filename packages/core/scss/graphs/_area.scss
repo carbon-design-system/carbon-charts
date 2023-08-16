@@ -1,4 +1,6 @@
-.#{$prefix}--#{$charts-prefix}--area path.area,
-.#{$prefix}--#{$charts-prefix}--area-stacked path.area {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--area path.area,
+.#{globals.$prefix}--#{globals.$charts-prefix}--area-stacked path.area {
 	pointer-events: none;
 }

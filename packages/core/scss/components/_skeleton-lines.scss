@@ -1,14 +1,17 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/colors';
+@use '../globals';
+@use '../tokens';
 
-$lines-bg-color: $layer-accent-01;
-$lines-shimmer-color: $white-0;
+$lines-bg-color: theme.$layer-accent-01;
+$lines-shimmer-color: colors.$white-0;
 $areas-bg-color: rgba(127, 127, 127, 0.1);
-$areas-shimmer-color: rgba($white-0, 0.15);
+$areas-shimmer-color: rgba(colors.$white-0, 0.15);
 
-.#{$prefix}--#{$charts-prefix}--skeleton-lines {
+.#{globals.$prefix}--#{globals.$charts-prefix}--skeleton-lines {
 	// lines
 	rect.chart-skeleton-backdrop {
-		fill: $grid-bg;
+		fill: tokens.$grid-bg;
 	}
 
 	.shimmer-effect-lines {

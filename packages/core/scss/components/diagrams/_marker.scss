@@ -1,7 +1,6 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../../globals';
 
-@include exports('cc-marker') {
-	.#{$prefix}--#{$charts-prefix}--marker {
-		fill: $border-inverse;
-	}
+.#{globals.$prefix}--#{globals.$charts-prefix}--marker {
+	fill: theme.$border-inverse;
 }

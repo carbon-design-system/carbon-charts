@@ -1,7 +1,7 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--heatmap {
+.#{globals.$prefix}--#{globals.$charts-prefix}--heatmap {
 	g.highlighter-hidden {
 		visibility: hidden;
 	}
@@ -28,7 +28,7 @@
 	}
 
 	rect.pattern-fill {
-		fill: $border-strong-01;
+		fill: theme.$border-strong-01;
 	}
 
 	g.shadows {
@@ -51,10 +51,10 @@
 
 	rect.heat {
 		stroke-width: 0px;
-		stroke: $background;
+		stroke: theme.$background;
 	}
 
 	rect.null-state {
-		fill: $icon-inverse;
+		fill: theme.$icon-inverse;
 	}
 }

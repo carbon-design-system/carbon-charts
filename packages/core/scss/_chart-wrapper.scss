@@ -1,0 +1,5 @@
+@use 'globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper {
+	overflow: visible;
+}

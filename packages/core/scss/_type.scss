@@ -1,14 +1,14 @@
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/layout' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/layout';
+@use 'globals';
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper {
-	// Set CSS custom properties using font-family mixin then reuse them
-	--#{$prefix}-charts-font-family: #{font-family('sans')};
-	--#{$prefix}-charts-font-family-condensed: #{font-family('sans-condensed')};
+.#{globals.$prefix}--chart-holder {
+	--#{globals.$prefix}-charts-font-family: #{globals.$font-family};
+	--#{globals.$prefix}-charts-font-family-condensed: #{globals.$font-family-condensed};
+	font-family: var(--#{globals.$prefix}-charts-font-family);
+}
 
-	font-family: var(--#{$prefix}-charts-font-family-condensed);
-
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper {
 	p {
 		padding: 0;
 		margin: 0;
@@ -16,7 +16,7 @@
 		// TODO-V11
 		// font-weight: font-weight('regular');
 		font-weight: 400;
-		color: $text-secondary;
+		color: theme.$text-secondary;
 	}
 
 	text {
@@ -24,11 +24,11 @@
 		// TODO-V11
 		// font-weight: font-weight('regular');
 		font-weight: 400;
-		fill: $text-secondary;
+		fill: theme.$text-secondary;
 	}
 
 	g.gauge-numbers text.gauge-value-number {
-		font-family: var(--#{$prefix}-charts-font-family);
+		font-family: var(--#{globals.$prefix}-charts-font-family);
 		// TODO-V11
 		// font-weight: font-weight('light');
 		font-weight: 300;
@@ -36,8 +36,8 @@
 
 	text.meter-title,
 	text.percent-value {
-		font-size: $base-font-size;
-		font-family: var(--#{$prefix}-charts-font-family);
+		font-size: layout.$base-font-size;
+		font-family: var(--#{globals.$prefix}-charts-font-family);
 	}
 
 	text.meter-title {

@@ -1,7 +1,8 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
+@use 'globals';
 
-.#{$prefix}--chart-holder {
+.#{globals.$prefix}--chart-holder {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -9,39 +10,39 @@
 
 	&.filled,
 	&.fullscreen {
-		background-color: $background;
+		background-color: theme.$background;
 
-		.#{$prefix}--#{$charts-prefix}--chart-wrapper {
-			background-color: $background;
+		.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper {
+			background-color: theme.$background;
 		}
 	}
 
+	// May not be needed any longer
 	.DONT_STYLE_ME_css_styles_verifier {
 		overflow: hidden;
 		opacity: 0;
 	}
 }
 
-.#{$prefix}--chart-holder {
-	@include theme(themes.$white);
+.#{globals.$prefix}--chart-holder {
+	@include theme.theme(themes.$white);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme='g10'] {
-	@include theme(themes.$g10);
+.#{globals.$prefix}--chart-holder[data-carbon-theme='g10'] {
+	@include theme.theme(themes.$g10);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme='g90'] {
-	@include theme(themes.$g90);
+.#{globals.$prefix}--chart-holder[data-carbon-theme='g90'] {
+	@include theme.theme(themes.$g90);
 }
 
-.#{$prefix}--chart-holder[data-carbon-theme='g100'] {
-	@include theme(themes.$g100);
+.#{globals.$prefix}--chart-holder[data-carbon-theme='g100'] {
+	@include theme.theme(themes.$g100);
 }
 
-.#{$prefix}--chart-holder.fullscreen,
-.#{$prefix}--chart-holder:-webkit-full-screen {
-	/* !important is used here to get closer to
-	a truly fullscreen experience */
+.#{globals.$prefix}--chart-holder.fullscreen,
+.#{globals.$prefix}--chart-holder:-webkit-full-screen {
+	// important used to ensure full-screen experience
 	width: 100% !important;
 	height: 100% !important;
 	max-width: unset !important;

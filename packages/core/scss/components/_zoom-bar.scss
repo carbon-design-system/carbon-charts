@@ -1,42 +1,44 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/colors';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--zoom-bar {
+.#{globals.$prefix}--#{globals.$charts-prefix}--zoom-bar {
 	rect.zoom-bg {
-		fill: $background;
-		stroke: $layer-01;
+		fill: theme.$background;
+		stroke: theme.$layer-01;
 	}
 
 	rect.zoom-slider-bg {
-		fill: $layer-01;
+		fill: theme.$layer-01;
 	}
 
 	rect.zoom-slider-selected-area {
-		fill: $icon-secondary;
+		fill: theme.$icon-secondary;
 	}
 
 	path.zoom-bg-baseline {
-		stroke: $border-strong-01;
+		stroke: theme.$border-strong-01;
 		stroke-width: 2;
 	}
 
 	path.zoom-graph-area {
-		fill: $layer-accent-01;
-		stroke: $border-strong-01;
+		fill: theme.$layer-accent-01;
+		stroke: theme.$border-strong-01;
 		stroke-width: 1;
 	}
 
 	path.zoom-graph-area-unselected {
-		fill: $layer-01;
+		fill: theme.$layer-01;
 		stroke: none;
 	}
 
 	g.zoom-bar-brush {
 		rect.handle {
-			fill: $icon-secondary;
+			fill: theme.$icon-secondary;
 		}
 
 		rect.handle-bar {
-			fill: $layer-02;
+			fill: theme.$layer-02;
 		}
 
 		// clear d3.brush selection style
@@ -47,7 +49,7 @@
 	}
 
 	rect[class^='highlight-'] {
-		fill: $magenta-50;
-		stroke: $magenta-50;
+		fill: colors.$magenta-50;
+		stroke: colors.$magenta-50;
 	}
 }

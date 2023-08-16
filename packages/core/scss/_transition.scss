@@ -1,0 +1,4 @@
+// Used by ./colors and ./components/tree
+@mixin default_transition {
+	transition: all 0.1s ease-out;
+}

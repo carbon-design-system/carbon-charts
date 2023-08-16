@@ -1,34 +1,35 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--meter {
+.#{globals.$prefix}--#{globals.$charts-prefix}--meter {
 	rect.container {
-		fill: $layer-01;
+		fill: theme.$layer-01;
 	}
 
 	line.rangeIndicator {
-		stroke: $meter-range-indicator;
+		stroke: tokens.$meter-range-indicator;
 		stroke-width: 1px;
 	}
 
 	rect.value {
 		&.status--danger {
-			fill: $support-error;
+			fill: theme.$support-error;
 		}
 
 		&.status--warning {
-			fill: $support-warning;
+			fill: theme.$support-warning;
 			stroke-width: 1px;
-			stroke: $alert-stroke;
+			stroke: tokens.$alert-stroke;
 		}
 
 		&.status--success {
-			fill: $support-success;
+			fill: theme.$support-success;
 		}
 	}
 
 	line.peak {
-		stroke: $border-inverse;
+		stroke: theme.$border-inverse;
 		stroke-width: 2px;
 	}
 }
