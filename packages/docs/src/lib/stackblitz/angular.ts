@@ -3,11 +3,6 @@ import { version } from './package-versions'
 
 export function getAngularProject(chartType: string, data: string, options: string): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/animations': version.angular,
-		'@angular/common': version.angular,
-		'@angular/compiler': version.angular,
-		'@angular/core': version.angular,
-		'@angular/platform-browser': version.angular,
     // TODO: remove next line
     '@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
@@ -16,11 +11,8 @@ export function getAngularProject(chartType: string, data: string, options: stri
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
 		'd3-sankey': version.d3Sankey,
-		rxjs: version.rxjs,
     // TODO: remove next line
-		sass: version.sass,
-		tslib: version.tslib,
-		'zone.js': version.zoneJs
+		sass: version.sass
 	}
 
 	const indexHtml = 

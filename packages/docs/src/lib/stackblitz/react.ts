@@ -10,8 +10,6 @@ export function getReactProject(chartType: string, data: string, options: string
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
-    'react': version.react,
-    'react-dom': version.react,
     // TODO: remove next line
     'sass': version.sass
   }
