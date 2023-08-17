@@ -68,7 +68,7 @@ const options = <LineChartOptions>{
 </p>
 
 <p>
-  <Grid>
+  <Grid noGutter>
     <Row>
       <Column>
         <img class="example" src="{base}/images/axislabel-zero-good.png" alt="Chart where it makes sense to start with zero"/>

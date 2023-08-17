@@ -45,6 +45,7 @@
 		<SideNavMenu text="Data &amp; configuration" expanded={true}>
 			<SideNavMenuItem href="{base}/data" text="Tabular data format" />
 			<SideNavMenuItem href="{base}/options" text="Chart options" />
+			<SideNavMenuItem href="{base}/api" text="API" />
 		</SideNavMenu>
 
 		<SideNavDivider />
@@ -52,6 +53,7 @@
 		<SideNavMenu text="Design" expanded={true}>
 			<SideNavMenuItem href="{base}/themes" text="Themes" />
 			<SideNavMenuItem href="{base}/axes" text="Axes" />
+			<SideNavMenuItem href="{base}/palette" text="Color Palette" />
 			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />
 		</SideNavMenu>
 

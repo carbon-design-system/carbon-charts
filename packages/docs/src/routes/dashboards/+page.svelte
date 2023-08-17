@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { base } from '$app/paths'
   import PageTitle from '$lib/PageTitle.svelte'
 </script>
 
 <PageTitle title="Dashboards"/>
+
+<p>
+  <img src="{base}/images/dashboard.png" alt="Dashboard" class="dashboard" />
+</p>
 
 <p>Context is everything. Dashboards will vary widely depending on the context they are designed for and must be carefully considered.</p>
 
@@ -50,3 +55,9 @@
 <h4>Annotation</h4>
 
 <p>Use annotations to highlight trends, averages, peaks, and valleys to provide additional information. Annotations should help users interpret fluctuations in the data. Avoid annotations that obstruct the view of data.</p>
+
+<style lang="scss">
+  .dashboard {
+    width: 85%;
+  }
+</style>
