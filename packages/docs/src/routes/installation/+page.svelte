@@ -1,10 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	// import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 	import {
-		Grid,
-		Row,
-		Column,
 		Tabs,
 		Tab,
 		TabContent,
@@ -18,10 +13,6 @@
 	} from 'carbon-components-svelte'
 	import PageTitle from '$lib/PageTitle.svelte'
 	import CodeSample from '$lib/CodeSample.svelte'
-
-	// onMount(() => {
-	// 	hljs.registerLanguage('typescript', typescript)
-	// })
 
 	let selected = 0
 
@@ -64,7 +55,7 @@
 
 // Directions needed because StackBlitz won't show in Both mode for anything but first tab
 const directions = `<p>
-	Click <strong>Preview</strong> above to see the chart. The top-left icon (Project) allows
+	Click <strong>Preview</strong> or <strong>Both</strong> on the lower left of the example to see the chart. The top-left icon (Project) allows
 	you to browse all the files in the project.
 </p>`
 
@@ -180,7 +171,7 @@ const directions = `<p>
 					</TabContent>
 
 					<TabContent>
-						<!-- <CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} /> -->
+						<CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} />
 						<p>The example must be opened in StackBlitz to see the preview if you are not using Chrome.</p>
 
 						<h3>SvelteKit Vite Configuration</h3>
@@ -210,7 +201,7 @@ export default defineConfig({
 
 					</TabContent>
 					<TabContent>
-						<!-- <CodeSample framework="react" chartType="SimpleBarChart" {data} {options} /> -->
+						<CodeSample framework="react" chartType="SimpleBarChart" {data} {options} />
 						{@html directions}
 					</TabContent>
 					<TabContent>
@@ -237,6 +228,7 @@ export default defineConfig({
 						</p>
 
 						<CodeSample framework="angular" chartType="ibm-simple-bar-chart" {data} {options} />
+						{@html directions}
 					</TabContent>
 				</svelte:fragment>
 			</Tabs>

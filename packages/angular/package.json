@@ -3,8 +3,8 @@
 	"version": "1.11.21",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
-		"./styles.min.css": "./dist/styles.min.css",
-		"./styles.css": "./dist/styles.css"
+		"./styles.min.css": "./styles.min.css",
+		"./styles.css": "./styles.css"
 	},
 	"sideEffects": false,
 	"scripts": {

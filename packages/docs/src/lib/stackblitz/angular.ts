@@ -8,6 +8,7 @@ export function getAngularProject(chartType: string, data: string, options: stri
 		'@angular/compiler': version.angular,
 		'@angular/core': version.angular,
 		'@angular/platform-browser': version.angular,
+    // TODO: remove next line
     '@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
     // TODO: remove next line
@@ -68,6 +69,7 @@ bootstrapApplication(App)
 
 	const stylesCss = `/* TODO: remove next line */
 @import '@carbon/styles/css/styles.css';
+/* TODO: change next line to charts-angular */
 @import '@carbon/charts/styles.css';
 `
 
@@ -155,9 +157,9 @@ bootstrapApplication(App)
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "esnext",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"]
+    "lib": ["esnext", "dom"]
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
