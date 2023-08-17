@@ -22,13 +22,10 @@ export function getAngularProject(chartType: string, data: string, options: stri
 		'zone.js': version.zoneJs
 	}
 
-	const indexHtml = `<!doctype html>
-<html lang="en">
+	const indexHtml = 
+`<html>
 <head>
-  <meta charset="utf-8">
   <title>Carbon Charts Angular Example</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link
 		href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
 		rel="stylesheet"
@@ -59,7 +56,7 @@ import data from './data'
   selector: 'my-app',
   standalone: true,
   imports: [CommonModule, ChartsModule],
-	template: '<${chartType} [data]="data" [options]="options"></${demo.chartType.angular}>'
+	template: '<${chartType} [data]="data" [options]="options"></${chartType}>'
 })
 export class App {
 	options = options
@@ -69,7 +66,7 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesCss = `// TODO: remove next line
+	const stylesCss = `/* TODO: remove next line */
 @import '@carbon/styles/css/styles.css';
 @import '@carbon/charts/styles.css';
 `
@@ -139,8 +136,8 @@ bootstrapApplication(App)
 		version: '0.0.0',
 		scripts: {
 			ng: 'ng',
-			start: 'NG_CLI_ANALYTICS=false ng serve',
-			build: 'NG_CLI_ANALYTICS=false ng build'
+			start: 'ng serve',
+			build: 'ng build'
 		},
 		dependencies
 	}
@@ -148,6 +145,7 @@ bootstrapApplication(App)
 	const TsConfigJson = `{
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -157,10 +155,9 @@ bootstrapApplication(App)
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "resolveJsonModule": true,
-    "target": "esnext",
+    "target": "es2015",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["esnext", "dom"]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "strictTemplates": true,

@@ -16,8 +16,6 @@
 		StructuredListCell,
 		StructuredListBody
 	} from 'carbon-components-svelte'
-	// import hljs from 'highlight.js/lib/core'
-	// import typescript from 'highlight.js/lib/languages/typescript'
 	import PageTitle from '$lib/PageTitle.svelte'
 	import CodeSample from '$lib/CodeSample.svelte'
 
@@ -182,7 +180,7 @@ const directions = `<p>
 					</TabContent>
 
 					<TabContent>
-						<CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} />
+						<!-- <CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} /> -->
 						<p>The example must be opened in StackBlitz to see the preview if you are not using Chrome.</p>
 
 						<h3>SvelteKit Vite Configuration</h3>
@@ -212,7 +210,7 @@ export default defineConfig({
 
 					</TabContent>
 					<TabContent>
-						<CodeSample framework="react" chartType="SimpleBarChart" {data} {options} />
+						<!-- <CodeSample framework="react" chartType="SimpleBarChart" {data} {options} /> -->
 						{@html directions}
 					</TabContent>
 					<TabContent>
@@ -238,7 +236,7 @@ export default defineConfig({
 							<strong>@carbon/charts-angular@next</strong>.
 						</p>
 
-						<CodeSample framework="angular" chartType="SimpleBarChartComponent" {data} {options} />
+						<CodeSample framework="angular" chartType="ibm-simple-bar-chart" {data} {options} />
 					</TabContent>
 				</svelte:fragment>
 			</Tabs>
