@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { UnorderedList, ListItem } from 'carbon-components-svelte'
-
 	import PageTitle from '$lib/PageTitle.svelte'
+  import { chartType, examples } from './examples'
 </script>
 
 <PageTitle title="Alluvial / Sankey Charts" />
@@ -19,11 +19,9 @@
 
 <h2>Examples</h2>
 <UnorderedList>
-  <ListItem>Gradient</ListItem>
-  <ListItem>Multiple Categories</ListItem>
-  <ListItem>Monochrome with Custom Node Padding</ListItem>
-  <ListItem>Aligned Nodes</ListItem>
-  <ListItem>Custom Colors</ListItem>
+  {#each examples as example}
+    <ListItem>{example.name}</ListItem>
+  {/each}
 </UnorderedList>
 
 <h2>Selects</h2>
