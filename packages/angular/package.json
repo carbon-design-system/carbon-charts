@@ -55,7 +55,7 @@
 		"@angular/platform-browser-dynamic": "^16.2.1",
 		"@babel/core": "^7.22.10",
 		"@carbon/icon-helpers": "^10.44.0",
-		"@carbon/icons": "^11.24.0",
+		"@carbon/icons": "^11.25.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@storybook/addon-essentials": "^7.3.1",
 		"@storybook/addon-interactions": "^7.3.1",
