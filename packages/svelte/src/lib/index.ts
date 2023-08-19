@@ -27,6 +27,7 @@ import WordCloudChart from './WordCloudChart.svelte'
 // Republish essential types from core so it's not a required dependency
 export type {
 	ChartTabularData,
+	ChartOptions,
 	AlluvialChartOptions,
 	AreaChartOptions,
 	BarChartOptions,
@@ -55,7 +56,8 @@ export type {
 // Commonly-used enums
 export {
 	Alignments,
-	ScaleTypes 
+	ChartTheme,
+	ScaleTypes
 } from '@carbon/charts'
 
 export {

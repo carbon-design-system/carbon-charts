@@ -1,7 +1,9 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import { objectToString } from './object-to-string'
 
-export function getVanillaProject(chartType: string, data: string, options: string): Project {
+export function getVanillaProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts': version.carbonCharts,
@@ -97,10 +99,10 @@ ${ isGeoDemo ? instantiateForGeo: instantiateNormally}
     title: 'Carbon Charts Vanilla JavaScript Example',
     dependencies,
     files: {
-      'data.js': data,
+      'data.js': objectToString(data),
       'index.html': indexHtml,
       'index.js': indexJs,
-      'options.js': options,
+      'options.js': objectToString(options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

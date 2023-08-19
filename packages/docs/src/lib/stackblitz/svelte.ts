@@ -1,7 +1,9 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import { objectToString } from './object-to-string'
 
-export function getSvelteProject(chartType: string, data: string, options: string): Project {
+export function getSvelteProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
 
   const devDependencies: Record<string, string> = {
     '@carbon/charts-svelte': version.carbonCharts,
@@ -145,9 +147,9 @@ export default defineConfig({
     title: 'Carbon Charts Svelte Example',
     files: {
       'src/App.svelte': appSvelte,
-      'src/data.ts': data,
+      'src/data.ts': objectToString(data),
       'src/main.ts': mainTs,
-      'src/options.ts': options,
+      'src/options.ts': objectToString(options),
       'src/vite-env.d.ts': viteEnvDts,
       '.stackblitzrc': stackBlitzRc,
       'index.html': indexHtml,

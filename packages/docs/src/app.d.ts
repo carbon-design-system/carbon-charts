@@ -7,6 +7,22 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	interface ChartTypes {
+		vanilla: string
+		svelte: string
+		react: string
+		vue: string
+		angular: string
+	}
+
+	interface Example {
+		name: string
+		data: ChartTabularData
+		options: ChartOptions
+	}
+
+	type Framework = 'vanilla' | 'svelte' | 'react' | 'vue' | 'angular' | 'html'
 }
 
-export {};
+export {}

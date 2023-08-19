@@ -11,7 +11,7 @@ export const version = {
 	d3Sankey: core.dependencies['d3-sankey'] as string,
   // TODO: remove next line
   sass: core.devDependencies['sass'] as string,
-  svelteVite: '^2.4.2' as string,
+  svelteVite: '^2.4.5' as string,
   svelteTsConfig: '^5.0.0' as string,
   svelte: svelte.devDependencies['svelte'] as string,
   svelteCheck: svelte.devDependencies['svelte-check'] as string,

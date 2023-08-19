@@ -1,7 +1,9 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import { objectToString } from './object-to-string'
 
-export function getVueProject(chartType: string, data: string, options: string): Project {
+export function getVueProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts-vue': version.carbonCharts,
@@ -93,9 +95,9 @@ app.mount('#app')
     files: {
       'public/index.html': indexHtml,
       'src/App.vue': appVue,
-      'src/data.js': data,
+      'src/data.js': objectToString(data),
       'src/main.js': mainJs,
-      'src/options.js': options,
+      'src/options.js': objectToString(options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

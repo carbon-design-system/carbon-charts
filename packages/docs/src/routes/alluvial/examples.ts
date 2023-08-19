@@ -1,3 +1,4 @@
+import { type AlluvialChartOptions, type ChartTabularData, ChartTheme } from '@carbon/charts-svelte'
 const vanilla = 'AlluvialChart'
 
 export const chartType = {
@@ -9,9 +10,9 @@ export const chartType = {
 }
 
 // Base options
-const options = {
-	title: 'Alluvial',
-  theme: 'white',
+const options: AlluvialChartOptions = {
+	title: 'Basic',
+  theme: ChartTheme.WHITE,
 	alluvial: {
 		nodes: [
 			{
@@ -60,7 +61,7 @@ const options = {
 }
 
 // Base data
-const data = [
+const data: ChartTabularData = [
 	{
 		source: 'About Modal',
 		target: 'Data and AI, AI Apps',
@@ -197,7 +198,7 @@ export const examples = [
           enabled: true
         }
       }
-    }
+    } as AlluvialChartOptions
   },
   {
     name: 'Multiple Categories',
@@ -272,9 +273,11 @@ export const examples = [
         target: 'No',
         value: 120
       }
-    ],
+    ] as ChartTabularData,
     options: {
-      title: 'Alluvial (multiple categories)',
+      title: 'Multiple Categories',
+      theme: ChartTheme.WHITE,
+      height: '400px',
       alluvial: {
         nodes: [
           { name: '1st', category: 'Class' },
@@ -288,7 +291,7 @@ export const examples = [
           { name: 'No', category: 'Survived' }
         ]
       }
-    }
+    } as AlluvialChartOptions
   },
   {
     name: 'Monochrome with Custom Node Padding',
@@ -302,9 +305,11 @@ export const examples = [
       { source: 'C', target: 'X', value: 5 },
       { source: 'C', target: 'Y', value: 5 },
       { source: 'C', target: 'Z', value: 1 }
-    ],
+    ] as ChartTabularData,
     options: {
       title: 'Monochrome with Custom Node Padding',
+      theme: ChartTheme.WHITE,
+      height: '400px',
       alluvial: {
         nodes: [
           { name: 'A', category: 'Start' },
@@ -317,7 +322,7 @@ export const examples = [
         monochrome: true,
         nodePadding: 33
       }
-    }
+    } as AlluvialChartOptions
   },
   {
     name: 'Aligned Nodes',
@@ -328,9 +333,11 @@ export const examples = [
       { source: 'B', target: 'Y', value: 3 },
       { source: 'C', target: 'X', value: 5 },
       { source: 'Y', target: 'Z', value: 13 }
-    ],
+    ] as ChartTabularData,
     options: {
       title: 'Aligned Nodes',
+      theme: ChartTheme.WHITE,
+      height: '400px',
       alluvial: {
         nodes: [
           { name: 'A', category: 'Start' },
@@ -342,7 +349,7 @@ export const examples = [
         ],
         nodeAlignment: 'left'
       }
-    }
+    } as AlluvialChartOptions
   },
   {
     name: 'Custom Colors',
@@ -357,6 +364,6 @@ export const examples = [
           C: '#6fdc8c'
         }
       }
-    }
+    } as AlluvialChartOptions
   }
 ]

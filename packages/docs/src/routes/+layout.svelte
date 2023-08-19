@@ -51,7 +51,7 @@
 		<SideNavDivider />
 
 		<SideNavMenu text="Design" expanded={true}>
-			<SideNavMenuItem href="{base}/themes" text="Themes" />
+			<SideNavMenuItem href="{base}/themes" text="Themes (dark &amp; light)" />
 			<SideNavMenuItem href="{base}/axes" text="Axes" />
 			<SideNavMenuItem href="{base}/palette" text="Color Palette" />
 			<SideNavMenuItem href="{base}/dashboards" text="Dashboards" />

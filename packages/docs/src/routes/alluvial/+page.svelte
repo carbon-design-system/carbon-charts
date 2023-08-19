@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { UnorderedList, ListItem } from 'carbon-components-svelte'
+	import { AlluvialChart } from '@carbon/charts-svelte'
+  import StackBlitzLauncher from '$lib/StackBlitzLauncher.svelte'
 	import PageTitle from '$lib/PageTitle.svelte'
-  import { chartType, examples } from './examples'
+	import { chartType, examples } from './examples'
+	import '@carbon/charts-svelte/styles.css'
 </script>
 
 <PageTitle title="Alluvial / Sankey Charts" />
@@ -18,14 +20,16 @@
 </p>
 
 <h2>Examples</h2>
-<UnorderedList>
-  {#each examples as example}
-    <ListItem>{example.name}</ListItem>
-  {/each}
-</UnorderedList>
 
-<h2>Selects</h2>
-<UnorderedList>
-  <ListItem>Theme</ListItem>
-  <ListItem>Color Palette</ListItem>
-</UnorderedList>
+{#each examples as example}
+	<p class="chart">
+		<AlluvialChart data={example.data} options={example.options} />
+    <StackBlitzLauncher {example} {chartType} />
+	</p>
+{/each}
+
+<style lang="scss">
+	p.chart {
+		margin-bottom: 3rem;
+	}
+</style>

@@ -1,7 +1,9 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import { objectToString } from './object-to-string'
 
-export function getReactProject(chartType: string, data: string, options: string): Project {
+export function getReactProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts-react': version.carbonCharts,
@@ -87,9 +89,9 @@ root.render(
     dependencies,
     files: {
       'public/index.html': indexHtml,
-      'src/data.js': data,
+      'src/data.js': objectToString(data),
       'src/index.js': indexJs,
-      'src/options.js': options,
+      'src/options.js': objectToString(options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

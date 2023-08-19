@@ -1,7 +1,9 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
 import { version } from './package-versions'
+import { objectToString } from './object-to-string'
 
-export function getAngularProject(chartType: string, data: string, options: string): Project {
+export function getAngularProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
 	const dependencies: Record<string, string> = {
     // TODO: remove next line
     '@carbon/charts': version.carbonCharts,
@@ -164,10 +166,10 @@ bootstrapApplication(App)
 		title: 'Carbon Charts Angular Example',
 		dependencies,
 		files: {
-			'src/data.ts': data,
+			'src/data.ts': objectToString(data),
 			'src/index.html': indexHtml,
 			'src/main.ts': mainTs,
-			'src/options.ts': options,
+			'src/options.ts': objectToString(options),
 			'src/styles.css': stylesCss,
 			'angular.json': angularJson,
 			'package.json': JSON.stringify(packageJson, null, 2),

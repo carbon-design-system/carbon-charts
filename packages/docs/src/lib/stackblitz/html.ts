@@ -1,6 +1,11 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import { objectToString } from './object-to-string'
 
-export function getHtmlProject(chartType: string, data: string, options: string): Project {
+export function getHtmlProject(chartType: string, data: ChartTabularData, options: ChartOptions): Project {
+
+  const dataStr = objectToString(data)
+  const optionsStr = objectToString(options)
 
   const indexHtml =
 `<!DOCTYPE html>
@@ -36,9 +41,9 @@ export function getHtmlProject(chartType: string, data: string, options: string)
     // Get reference to chart holder DOM element
     const chartHolder = document.getElementById('app')
 
-    const data = ${data.replace('export default', '')}
+    const data = ${dataStr.replace('export default', '')}
 
-    const options = ${options.replace('export default', '')}
+    const options = ${optionsStr.replace('export default', '')}
 
     new Charts.${chartType}(chartHolder, {
       data,
