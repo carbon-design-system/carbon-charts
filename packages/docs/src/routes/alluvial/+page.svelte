@@ -27,7 +27,7 @@
 	each framework.
 </p>
 
-<h2>Examples</h2>
+<h2>Examples for supported framweworks</h2>
 
 {#each examples as example}
 	<p class="chart">
