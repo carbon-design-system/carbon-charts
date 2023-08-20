@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import {
 		Tabs,
 		Tab,
@@ -16,6 +17,19 @@
 	import CodeSample from '$lib/CodeSample.svelte'
 
 	let selected = 0
+
+	let isChrome = false
+
+	onMount(() => {
+		// Check if the browser is Chrome
+		const ua = window.navigator.userAgent
+		const isChromium = ua.indexOf('Chrome') > -1
+		const isOpera = ua.indexOf('OPR') > -1
+		const isYandex = ua.indexOf('YaBrowser') > -1
+		if (isChromium && !isOpera && !isYandex) {
+			isChrome = true
+		}
+	})
 
 	const packageExtension = ['', '-svelte', '-react', '-vue', '-angular']
 
@@ -176,7 +190,11 @@
 		<TabContent>
 			<CodeSample framework="svelte" chartType="SimpleBarChart" {data} {options} />
 			<p>
-				The example must be opened in StackBlitz to see the preview if you are not using Chrome.
+				{#if isChrome}
+				  {directions}
+				{:else}
+					The example must be opened in StackBlitz to see the preview since you are not using Chrome.
+				{/if}
 			</p>
 
 			<h3>SvelteKit Vite Configuration</h3>
