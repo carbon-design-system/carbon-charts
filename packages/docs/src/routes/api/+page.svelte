@@ -47,6 +47,11 @@ console.log(myChart)
 
 <h2>Full Documentation</h2>
 
-<p>
-  For details on classes, interfaces, enums and functions, see the <a href="https://charts.carbondesignsystem.com/documentation/modules.html">API documentation</a>
-</p>
+<iframe title="API Documentation" class="api" src="https://charts.carbondesignsystem.com/documentation/"></iframe>
+
+<style lang="scss">
+  .api {
+    width: 100%;
+    height: 1000px;
+  }
+</style>

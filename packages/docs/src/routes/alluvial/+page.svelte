@@ -18,6 +18,14 @@
 	between indicators that are not directly connected. This is usually emphasized using a different
 	set of colors for each block.
 </p>
+<p>Details on the Alluvial chart options can be found <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AlluvialChartOptions.html" target="_blank">here</a>.</p>
+<p>
+	Each example has buttons below to open a StackBlitz project for the framework you selected.
+	The examples separate the data, options and templates to make it easier to follow. The fonts are loaded
+	in the head of the HTML template. The styles are loaded in various ways according the the standards for their
+	framework. Please note that Carbon Charts components have slightly different names for the same chart type in
+	each framework.
+</p>
 
 <h2>Examples</h2>
 
