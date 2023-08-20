@@ -15,9 +15,9 @@
 <div class="launch-buttons">
   <Button on:click={() => openStackBlitz('vanilla', chartTypes.vanilla)} icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">JavaScript</Button>
   <Button on:click={() => openStackBlitz('svelte', chartTypes.svelte)} icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">Svelte</Button>
-  <Button icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">React</Button>
-  <Button icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">Vue.js</Button>
-  <Button icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">Angular</Button>
+  <Button on:click={() => openStackBlitz('react', chartTypes.react)} icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">React</Button>
+  <Button on:click={() => openStackBlitz('vue', chartTypes.vue)} icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">Vue.js</Button>
+  <Button on:click={() => openStackBlitz('angular', chartTypes.angular)} icon={Launch} iconDescription="StackBlitz" size="field" kind="secondary">Angular</Button>
 </div>
 
 <style lang="scss">

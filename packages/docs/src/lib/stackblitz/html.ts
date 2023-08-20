@@ -41,9 +41,9 @@ export function getHtmlProject(chartType: string, data: ChartTabularData, option
     // Get reference to chart holder DOM element
     const chartHolder = document.getElementById('app')
 
-    const data = ${dataStr.replace('export default', '')}
+    const data = ${dataStr.replace('export default ', '')}
 
-    const options = ${optionsStr.replace('export default', '')}
+    const options = ${optionsStr.replace('export default ', '')}
 
     new Charts.${chartType}(chartHolder, {
       data,

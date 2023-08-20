@@ -2,7 +2,7 @@
 	import { AlluvialChart } from '@carbon/charts-svelte'
   import StackBlitzLauncher from '$lib/StackBlitzLauncher.svelte'
 	import PageTitle from '$lib/PageTitle.svelte'
-	import { chartType, examples } from './examples'
+	import { chartTypes, examples } from './examples'
 	import '@carbon/charts-svelte/styles.css'
 </script>
 
@@ -24,7 +24,7 @@
 {#each examples as example}
 	<p class="chart">
 		<AlluvialChart data={example.data} options={example.options} />
-    <StackBlitzLauncher {example} {chartType} />
+    <StackBlitzLauncher {example} {chartTypes} />
 	</p>
 {/each}
 

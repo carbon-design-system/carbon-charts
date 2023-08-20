@@ -1,7 +1,7 @@
-import { type AlluvialChartOptions, type ChartTabularData, ChartTheme } from '@carbon/charts-svelte'
+import type { AlluvialChartOptions, ChartTabularData } from '@carbon/charts-svelte'
 const vanilla = 'AlluvialChart'
 
-export const chartType = {
+export const chartTypes: ChartTypes = {
   vanilla,
   svelte: vanilla,
   react: vanilla,
@@ -12,7 +12,6 @@ export const chartType = {
 // Base options
 const options: AlluvialChartOptions = {
 	title: 'Basic',
-  theme: ChartTheme.WHITE,
 	alluvial: {
 		nodes: [
 			{
@@ -276,7 +275,6 @@ export const examples = [
     ] as ChartTabularData,
     options: {
       title: 'Multiple Categories',
-      theme: ChartTheme.WHITE,
       height: '400px',
       alluvial: {
         nodes: [
@@ -308,7 +306,6 @@ export const examples = [
     ] as ChartTabularData,
     options: {
       title: 'Monochrome with Custom Node Padding',
-      theme: ChartTheme.WHITE,
       height: '400px',
       alluvial: {
         nodes: [
@@ -336,7 +333,6 @@ export const examples = [
     ] as ChartTabularData,
     options: {
       title: 'Aligned Nodes',
-      theme: ChartTheme.WHITE,
       height: '400px',
       alluvial: {
         nodes: [
