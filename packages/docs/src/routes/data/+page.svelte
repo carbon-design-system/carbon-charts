@@ -141,7 +141,7 @@ const bubbleDoubleLinearData = [
 
 <p>
   For Svelte, React, Vue and Angular, data is reactive.
-  For vanilla JavaScript, updates to data must be made via <a href="https://charts.carbondesignsystem.com/documentation/classes/ChartModel.html#setData" target="_blank">ChartModel.setData()</a>.
+  For vanilla JavaScript, updates to data must be made via <a href="https://charts.carbondesignsystem.com/api/classes/ChartModel.html#setData" target="_blank">ChartModel.setData()</a>.
 </p>
 
 <CodeSnippet

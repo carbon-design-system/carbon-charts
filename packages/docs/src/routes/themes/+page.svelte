@@ -10,7 +10,7 @@
   represent shades of gray where g10 is 10% and g100 is 100% (black).
 </p>
 
-<p>All chart types support the <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BaseChartOptions.html#theme" target="_blank">theme</a> property.</p>
+<p>All chart types support the <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.BaseChartOptions.html#theme" target="_blank">theme</a> property.</p>
 
 <CodeSnippet
   type="multi"

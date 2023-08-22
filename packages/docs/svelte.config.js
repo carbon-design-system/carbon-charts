@@ -13,7 +13,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: 'index.html'
+			fallback: 'index.html',
+			pages: '../../pages/docs',
+			assets: '../../pages/docs'
 		}),
 		paths: {
 			base: dev ? '' : process.env.BASE_PATH

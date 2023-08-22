@@ -6,8 +6,8 @@
 <PageTitle title="Chart Options"/>
 
 <p>
-  Options for all chart types extend from <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BaseChartOptions.html" target="_blank">BaseChartOptions</a>,
-  <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.ScatterChartOptions.html" target="_blank">ScatterChartOptions</a>, or <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AxisChartOptions.html" target="_blank">AxisChartOptions</a>.
+  Options for all chart types extend from <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.BaseChartOptions.html" target="_blank">BaseChartOptions</a>,
+  <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.ScatterChartOptions.html" target="_blank">ScatterChartOptions</a>, or <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AxisChartOptions.html" target="_blank">AxisChartOptions</a>.
   To see examples for each type of chart, navigate to <strong>Chart types</strong> on left.
 </p>
 
@@ -15,7 +15,7 @@
 
 <p>
   For Svelte, React, Vue and Angular, most options are reactive (with certain exceptions like positioning of the Legend and data grouping).
-  For vanilla JavaScript, updates to options must be made via <a href="https://charts.carbondesignsystem.com/documentation/classes/ChartModel.html#setOptions" target="_blank">ChartModel.setOptions()</a>.
+  For vanilla JavaScript, updates to options must be made via <a href="https://charts.carbondesignsystem.com/api/classes/ChartModel.html#setOptions" target="_blank">ChartModel.setOptions()</a>.
 </p>
 
 <CodeSnippet type="multi" code={

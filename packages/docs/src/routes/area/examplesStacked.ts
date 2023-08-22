@@ -1,5 +1,4 @@
 import { type StackedAreaChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-svelte'
-import { Scale } from 'carbon-icons-svelte'
 
 const vanilla = 'StackedAreaChart'
 export const chartTypesStacked: ChartTypes = {
@@ -9,7 +8,6 @@ export const chartTypesStacked: ChartTypes = {
 	angular: 'ibm-stacked-area-chart',
 	vue: `Ccv${vanilla}`
 }
-
 
 const options: StackedAreaChartOptions = {
 	title: 'Time Series',

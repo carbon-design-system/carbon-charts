@@ -9,14 +9,14 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build:package": "vite build",
+		"pub:api": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
+		"build:package": "vite build && yarn pub:api",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . --ignore-path ../../.eslintignore && eslint .  --ignore-path ../../.eslintignore",
 		"format": "prettier --plugin-search-dir . --write .",
-		"clean": "rm -rf build",
-		"pub:demo": "cp -a build/. ../../pages/docs"
+		"clean": "rm -rf ../../pages/docs"
 	},
 	"devDependencies": {
 		"@carbon/charts-svelte": "workspace:*",
@@ -37,6 +37,7 @@
 		"svelte": "^4.2.0",
 		"svelte-check": "^3.5.0",
 		"tslib": "^2.6.2",
+		"typedoc": "^0.24.8",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.9"
 	},

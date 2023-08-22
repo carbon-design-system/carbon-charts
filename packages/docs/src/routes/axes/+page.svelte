@@ -138,7 +138,7 @@ const options = <LineChartOptions>{
 <h2 id="labels">Logarithmic scale</h2>
 
 <p>
-  Axis charts have a <a href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AxisOptions.html#scaleType" target="_blank">scaleType</a> property for their axes. A value of "log"
+  Axis charts have a <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AxisOptions.html#scaleType" target="_blank">scaleType</a> property for their axes. A value of "log"
   will display that axis using a logarithmic scale.
 </p>
 
