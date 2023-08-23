@@ -47,7 +47,7 @@ console.log(myChart)
 
 <h2>Full Documentation</h2>
 
-<iframe title="API Documentation" class="api" src="https://charts.carbondesignsystem.com/api/"></iframe>
+<iframe title="API Documentation" class="api" src="https://charts.carbondesignsystem.com/documentation/"></iframe>
 
 <style lang="scss">
   .api {
