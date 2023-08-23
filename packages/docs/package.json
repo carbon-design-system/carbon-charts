@@ -23,7 +23,7 @@
 		"@carbon/styles": "^1.36.0",
 		"@stackblitz/sdk": "1.9.0",
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.22.6",
+		"@sveltejs/kit": "^1.23.0",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.4.1",
 		"carbon-components-svelte": "^0.79.0",
