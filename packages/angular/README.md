@@ -15,14 +15,14 @@ The required styles should be imported from `@carbon/charts-angular/styles.css` 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts-angular@next @carbon/styles d3 d3-cloud d3-sankey
+npm install -S @carbon/charts-angular@latest @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts-angular@next @carbon/styles d3 d3-cloud d3-sankey
+yarn add @carbon/charts-angular@latest @carbon/styles d3 d3-cloud d3-sankey
 ```
 
 ## Step-by-step instructions
