@@ -1,7 +1,7 @@
 {
   "name": "@carbon/charts-angular",
-  "version": "1.8.0",
-  "description": "Carbon charting components for Angular",
+  "version": "1.8.1",
+  "description": "Carbon Charts component library for Angular",
   "main": "index.js",
   "scripts": {
     "build": "bash build.sh",
@@ -41,7 +41,7 @@
     "scss"
   ],
   "dependencies": {
-    "@carbon/charts": "^1.8.0",
+    "@carbon/charts": "~1.8.0",
     "@carbon/telemetry": "0.1.0"
   },
   "peerDependencies": {
