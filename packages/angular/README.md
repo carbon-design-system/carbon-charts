@@ -1,4 +1,4 @@
-# Carbon Charts Angular
+# Carbon Charts - Angular
 
 Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts` component library. This release is for Angular >= 7 and < 16.
 
