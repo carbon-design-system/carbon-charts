@@ -6,6 +6,9 @@
 <PageTitle title="Chart Options"/>
 
 <p>
+  <a href="https://charts.carbondesignsystem.com/documentation/variables/configurations.options.html" target="_blank">API guide for chart options</a>.
+</p>
+<p>
   Options for all chart types extend from <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.BaseChartOptions.html" target="_blank">BaseChartOptions</a>,
   <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.ScatterChartOptions.html" target="_blank">ScatterChartOptions</a>, or <a href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AxisChartOptions.html" target="_blank">AxisChartOptions</a>.
   To see examples for each type of chart, navigate to <strong>Chart types</strong> on left.
