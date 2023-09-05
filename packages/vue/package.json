@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.11.21",
+	"version": "1.12.0",
 	"description": "Carbon Charts component library for Vue",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -48,6 +48,7 @@
 		"@types/d3": "^7.4.0",
 		"@vue/eslint-config-prettier": "^8.0.0",
 		"@vue/eslint-config-typescript": "^11.0.3",
+		"concurrently": "^8.2.1",
 		"concurrently": "^8.2.1",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",

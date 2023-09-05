@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.11.21",
+	"version": "1.12.0",
 	"description": "Carbon Charts component library for React",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -44,6 +44,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/icons-react": "^11.25.0",
+		"@carbon/icons-react": "^11.25.0",
 		"@carbon/telemetry": "~0.1.0"
 	},
 	"peerDependencies": {
@@ -61,6 +62,7 @@
 		"@vitejs/plugin-react": "^4.0.4",
 		"classnames": "^2.3.2",
 		"concurrently": "^8.2.1",
+		"concurrently": "^8.2.1",
 		"css-loader": "6.8.1",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
@@ -69,6 +71,7 @@
 		"eslint": "^8.48.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-react": "^7.33.2",
 		"eslint-plugin-react": "^7.33.2",
 		"eslint-plugin-storybook": "^0.6.13",
 		"react": "^18.2.0",

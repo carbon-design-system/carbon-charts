@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.12.0 (2023-09-05)
+
+### Features
+
+- **scss:** Optimized SCSS to remove need to separately load @carbon/styles
+  ([#1652](https://github.com/carbon-design-system/carbon-charts/issues/1652))
+  ([d970944](https://github.com/carbon-design-system/carbon-charts/commit/d970944e49da6f0ca5cc4f290be9b2895e521e7d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.11.21 (2023-08-14)
 
 ### Bug Fixes
