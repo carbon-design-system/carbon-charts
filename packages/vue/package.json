@@ -49,7 +49,6 @@
 		"@vue/eslint-config-prettier": "^8.0.0",
 		"@vue/eslint-config-typescript": "^11.0.3",
 		"concurrently": "^8.2.1",
-		"concurrently": "^8.2.1",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",

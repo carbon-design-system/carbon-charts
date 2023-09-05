@@ -48,10 +48,10 @@
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
 		"@sveltejs/adapter-auto": "^2.1.0",
-		"@sveltejs/kit": "^1.24.0",
+		"@sveltejs/kit": "^1.24.1",
 		"@sveltejs/package": "^2.2.2",
-		"@typescript-eslint/eslint-plugin": "^6.5.0",
-		"@typescript-eslint/parser": "^6.5.0",
+		"@typescript-eslint/eslint-plugin": "^6.6.0",
+		"@typescript-eslint/parser": "^6.6.0",
 		"concurrently": "^8.2.1",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
