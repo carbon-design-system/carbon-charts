@@ -1,14 +1,17 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/components/modal';
+@use '@carbon/styles/scss/components/data-table';
+@use '@carbon/styles/scss/components/button';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--chart-holder {
-	.#{$prefix}--modal {
+.#{globals.$prefix}--chart-holder {
+	.#{globals.$prefix}--modal {
 		&.is-visible {
 			z-index: 99999;
 		}
 
-		.#{$prefix}--modal-container {
-			.#{$prefix}--modal-header {
+		.#{globals.$prefix}--modal-container {
+			.#{globals.$prefix}--modal-header {
 				&__label {
 					margin-top: 0;
 					margin-bottom: 0;
@@ -20,10 +23,10 @@
 				}
 			}
 
-			.#{$prefix}--modal-content {
+			.#{globals.$prefix}--modal-content {
 				padding: 0;
 				margin-bottom: 0;
-				color-scheme: $color-scheme;
+				color-scheme: tokens.$color-scheme;
 
 				table {
 					position: relative;
@@ -36,10 +39,10 @@
 				}
 			}
 
-			.#{$prefix}--modal-footer {
+			.#{globals.$prefix}--modal-footer {
 				background-color: transparent;
 
-				.#{$prefix}--#{$charts-prefix}-modal-footer-spacer {
+				.#{globals.$prefix}--#{globals.$charts-prefix}-modal-footer-spacer {
 					width: 50%;
 				}
 			}

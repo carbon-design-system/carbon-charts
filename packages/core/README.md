@@ -2,20 +2,20 @@
 
 Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on D3.js, a peer dependency.
 
-The required styles should be imported from `@carbon/charts/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
+The required styles should be imported from `@carbon/charts/styles.css`. Additional documentation is provided in the Storybook demos.
 
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
+npm install -S @carbon/charts d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts @carbon/styles d3 d3-cloud d3-sankey
+yarn add @carbon/charts d3 d3-cloud d3-sankey
 ```
 
 ## Step-by-step instructions

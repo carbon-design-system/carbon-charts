@@ -1,17 +1,18 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--alluvial {
+.#{globals.$prefix}--#{globals.$charts-prefix}--alluvial {
 	rect.node,
 	rect.node-text-bg {
-		fill: $layer-inverse-absolute;
+		fill: tokens.$layer-inverse-absolute;
 	}
 
 	text.node-text {
-		fill: $layer-01-absolute;
+		fill: tokens.$layer-01-absolute;
 	}
 
 	polygon.arrow-down {
-		fill: $layer-01;
+		fill: theme.$layer-01;
 	}
 }

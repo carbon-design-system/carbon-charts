@@ -1,6 +1,7 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--circle-pack {
+.#{globals.$prefix}--#{globals.$charts-prefix}--circle-pack {
 	circle.node {
 		stroke-width: 1.5px;
 
@@ -9,9 +10,9 @@
 		}
 
 		&.non-focal {
-			fill: $icon-disabled;
+			fill: theme.$icon-disabled;
 			fill-opacity: 30%;
-			stroke: $icon-disabled;
+			stroke: theme.$icon-disabled;
 		}
 
 		&.clickable {
@@ -20,9 +21,9 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper.zoomed-in {
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper.zoomed-in {
 	cursor: zoom-out;
-	.#{$prefix}--#{$charts-prefix}--circle-pack {
+	.#{globals.$prefix}--#{globals.$charts-prefix}--circle-pack {
 		circle.node {
 			&.hovered-child {
 				stroke: 1.5px solid initial;

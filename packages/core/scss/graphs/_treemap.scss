@@ -1,4 +1,6 @@
-.#{$prefix}--#{$charts-prefix}--treemap {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--treemap {
 	text {
 		pointer-events: none;
 	}

@@ -1,37 +1,39 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/colors';
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--meter-title {
+.#{globals.$prefix}--#{globals.$charts-prefix}--meter-title {
 	overflow: visible;
 
 	text.meter-title,
 	text.proportional-meter-title,
 	text.proportional-meter-total,
 	text.percent-value {
-		fill: $text-primary;
+		fill: theme.$text-primary;
 	}
 
 	g.status-indicator {
 		&.status--danger circle.status {
-			fill: $support-error;
+			fill: theme.$support-error;
 		}
 
 		&.status--warning {
 			circle.status {
-				fill: $support-warning;
+				fill: theme.$support-warning;
 			}
 
 			path.innerFill {
-				fill: $black-100;
+				fill: colors.$black-100;
 			}
 		}
 
 		&.status--success circle.status {
-			fill: $support-success;
+			fill: theme.$support-success;
 		}
 
 		path.innerFill {
-			fill: $layer-01-absolute;
+			fill: tokens.$layer-01-absolute;
 		}
 	}
 }

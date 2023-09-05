@@ -33,6 +33,7 @@ $css--reset: false; // Do not include reset CSS
 
 .#{$prefix}--#{$charts-prefix}--chart-wrapper {
 	overflow: visible;
+	font-family: var(--#{$prefix}-charts-font-family-condensed);
 }
 
 html {

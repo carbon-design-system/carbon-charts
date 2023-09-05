@@ -1,7 +1,8 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--radar {
+.#{globals.$prefix}--#{globals.$charts-prefix}--radar {
 	.blobs path {
 		stroke-width: 1.5px;
 	}
@@ -9,10 +10,10 @@
 	.y-axes path,
 	.x-axes line {
 		stroke-width: 1px;
-		stroke: $layer-accent-01;
+		stroke: theme.$layer-accent-01;
 	}
 
 	.x-axes line.hovered {
-		stroke: $layer-inverse-absolute;
+		stroke: tokens.$layer-inverse-absolute;
 	}
 }

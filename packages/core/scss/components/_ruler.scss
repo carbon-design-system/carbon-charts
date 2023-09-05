@@ -1,7 +1,10 @@
-.#{$prefix}--#{$charts-prefix}--ruler,
-.#{$prefix}--#{$charts-prefix}--ruler-binned {
+@use '../globals';
+@use '../tokens';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--ruler,
+.#{globals.$prefix}--#{globals.$charts-prefix}--ruler-binned {
 	line.ruler-line {
-		stroke: $layer-inverse-absolute;
+		stroke: tokens.$layer-inverse-absolute;
 		stroke-width: 1px;
 		stroke-dasharray: 2;
 		pointer-events: none;

@@ -17,13 +17,13 @@ Please direct all questions regarding support, bug fixes and feature requests to
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
+npm install -D @carbon/charts-svelte d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
+yarn add -D @carbon/charts-svelte d3 d3-cloud d3-sankey
 ```
 
 ### SvelteKit
@@ -54,10 +54,9 @@ You may see circular dependency warnings for `d3` packages. These can be safely 
 
 ## Usage
 
-Styles must be imported from both `@carbon/charts-svelte` and `@carbon/styles`. The latter is only required if you use the toolbar.
+Styles must be imported from `@carbon/charts-svelte`.
 
 ```js
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
 ```
 
@@ -65,7 +64,6 @@ import '@carbon/charts-svelte/styles.css'
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
 	import { BarChartSimple } from '@carbon/charts-svelte'
 </script>
@@ -114,7 +112,6 @@ server-side rendering.
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
 	import { onMount } from 'svelte'
 
@@ -152,7 +149,6 @@ In this example, an event listener is attached to the `BarChartSimple` component
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
 	import { onDestroy, onMount } from 'svelte'
 	import { BarChartSimple } from '@carbon/charts-svelte'

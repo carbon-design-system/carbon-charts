@@ -1,15 +1,15 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/components/overflow-menu';
+@use '../globals';
 
-$css--reset: false;
-
-.#{$prefix}--chart-holder {
+.#{globals.$prefix}--chart-holder {
 	.cds--overflow-menu,
 	.cds--overflow-menu__trigger {
 		width: 2rem;
 		height: 2rem;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--toolbar {
+	.#{globals.$prefix}--#{globals.$charts-prefix}--toolbar {
 		display: flex;
 
 		div.toolbar-control {
@@ -29,7 +29,7 @@ $css--reset: false;
 				}
 
 				svg {
-					fill: $icon-on-color-disabled;
+					fill: theme.$icon-on-color-disabled;
 				}
 			}
 		}

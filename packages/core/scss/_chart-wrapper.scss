@@ -1,0 +1,6 @@
+@use 'globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper {
+	overflow: visible;
+	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
+}

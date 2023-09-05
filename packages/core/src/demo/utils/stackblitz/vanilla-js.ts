@@ -7,11 +7,9 @@ export function buildVanillaJsExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey,
-    'sass': version.sass
+    'd3-sankey': version.d3Sankey
   }
 
   const indexHtml =
@@ -77,7 +75,6 @@ new ${demo.chartType.vanilla}(chartHolder, {
 import { ${demo.chartType.vanilla} } from '@carbon/charts'
 import options from './options.js'
 import data from './data.js'
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts/styles.css'
 
 ${ isGeoDemo ? instantiateForGeo: instantiateNormally}
