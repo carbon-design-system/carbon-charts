@@ -117,22 +117,22 @@
 		"@types/d3-sankey": "^0.12.1",
 		"@types/lodash-es": "^4.17.9",
 		"@types/topojson": "^3.2.3",
-		"@typescript-eslint/eslint-plugin": "^6.6.0",
-		"@typescript-eslint/parser": "^6.6.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.0",
+		"@typescript-eslint/parser": "^6.7.0",
 		"concurrently": "^8.2.1",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^8.48.0",
+		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-storybook": "^0.6.13",
 		"jsdom": "^22.1.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.66.1",
-		"storybook": "^7.4.0",
+		"storybook": "^7.4.1",
 		"typedoc": "^0.25.1",
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
 		"vite-plugin-dts": "^3.5.3",
-		"vitest": "^0.34.3"
+		"vitest": "^0.34.4"
 	},
 	"publishConfig": {
 		"access": "public"
