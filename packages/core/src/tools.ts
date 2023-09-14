@@ -199,11 +199,16 @@ export function capitalizeFirstLetter(word: string) {
  * @param {string} key
  * @returns The percentage in the form of a number (1 significant digit if necessary)
  */
-export function convertValueToPercentage(item: any, fullData: any, key = 'value') {
+export function convertValueToPercentage(item: any, fullData: any, key = 'value',entireValue=false) {
 	const percentage =
 		(item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
-	// if the value has any significant figures, keep 1
-	return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
+	//in need for whole percentage value
+	if(entireValue){
+		return percentage;
+	}else{
+		// if the value has any significant figures, keep 1
+		return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
+	}
 }
 
 /**
