@@ -152,11 +152,12 @@ export class Pie extends Component {
 			.merge(labels as any)
 			.style('text-anchor', 'middle')
 			.text((d: any) => {
+				let percentageValue=convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo, true);
+				d={...d,percentageValue};
 				if (options.pie.labels.formatter) {
 					return options.pie.labels.formatter(d)
 				}
-
-				return convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
+				return percentageValue;
 			})
 			// Calculate dimensions in order to transform
 			.datum(function (d: any) {
