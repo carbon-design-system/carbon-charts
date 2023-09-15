@@ -1,13 +1,13 @@
 {
-  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "1.11.8",
-  "npmClient": "yarn",
-  "command": {
-    "publish": {
-      "ignoreChanges": ["packages/*/demo/bundle", "**/*.md"]
-    },
-    "version": {
-      "message": "chore(release): publish %v"
-    }
-  }
+	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
+	"version": "1.12.0",
+	"npmClient": "yarn",
+	"command": {
+		"publish": {
+			"ignoreChanges": ["packages/*/demo/bundle", "**/*.md"]
+		},
+		"version": {
+			"message": "chore(release): publish %v"
+		}
+	}
 }

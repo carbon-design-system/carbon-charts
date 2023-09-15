@@ -19,7 +19,7 @@ export default defineConfig({
 				'services/index': 'src/services/index.ts',
 				'demo/index': 'src/demo/index.ts'
 			},
-			name: 'CarbonCharts'
+			formats: ['es']
 		},
 		rollupOptions: {
 			external: ['d3', 'd3-cloud', 'd3-sankey'] // d3-cloud and d3-sankey are not included in d3
@@ -48,16 +48,7 @@ export default defineConfig({
 		// However, tsc does not translate '@/' correctly so we need to use vite-plugin-dts. TypeScript, on its own, only allows
 		// type, not compilation, error suppression.
 		dts({
-			/*
-			* Note: src/demo/utils/package-versions.ts imports package.json files from other packages which are outside of the root directory.
-			* This causes vite-plugin-dts to redefine the rootDir which results in type declarations going into dist/dist/core/src.
-			* The function below fixes their path.
-			*/
-			// Leave for next version of vite-plugin-dts
-			// beforeWriteFile: (filePath: string, content: string) => {
-			// 	filePath = filePath.replace('/dist/dist/core/src/','/dist/')
-			// 	return { filePath, content }
-			// },
+			entryRoot: 'src',
 			logLevel: 'silent' // Suppress the known errors because package.json files don't need d.ts files
 		}) as unknown as PluginOption
 	]

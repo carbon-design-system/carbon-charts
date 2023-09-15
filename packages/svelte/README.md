@@ -1,6 +1,6 @@
 # Carbon Charts Svelte
 
-Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. Documentation is provided below and in the Storybook demos.
+Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. Documentation is provided below and in the Storybook demos.
 
 **[Storybook demos](https://carbon-design-system.github.io/carbon-charts/svelte)**
 
@@ -10,67 +10,38 @@ Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavScript `@car
 
 These Svelte wrappers were developed by Eric Liu.
 
-Please direct all questions regarding support, bug fixes, and feature requests to [@metonym](https://github.com/metonym).
+Please direct all questions regarding support, bug fixes and feature requests to [@nstuyvesant](https://github.com/nstuyvesant) and [@metonym](https://github.com/metonym).
 
 ## Getting started
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
+npm install -D @carbon/charts-svelte d3 d3-cloud d3-sankey
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte @carbon/styles d3 d3-cloud d3-sankey
+yarn add -D @carbon/charts-svelte d3 d3-cloud d3-sankey
 ```
-
-## Setup
-
-This is an overview of using Carbon Charts with common Svelte setups.
-
-- [SvelteKit](#sveltekit)
-- [Vite](#vite)
 
 ### SvelteKit
 
-[SvelteKit](https://github.com/sveltejs/kit) is the official framework for building apps that
-support client-side rendering (CSR) and server-side rendering (SSR). SvelteKit is powered by
-[Vite](https://github.com/vitest-dev/vitest).
+While this component library can be used with any build environments for Svelte, [SvelteKit](https://kit.svelte.dev) is the official framework for building Svelte apps supporting client-side and server-side rendering (SSR). SvelteKit is powered by
+[Vite](https://vitejs.dev).
 
-Modules `@carbon/charts` and `carbon-components` should not be externalized for SSR when building for production.
+The module `@carbon/charts` should not be externalized for SSR when building for production.
 
 ```js
-// vite.config.js
+// vite.config.mjs
 import { sveltekit } from '@sveltejs/kit/vite'
 
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [sveltekit()],
 	ssr: {
-		noExternal: process.env.NODE_ENV === 'production' ? ['@carbon/charts', 'carbon-components'] : []
-	}
-}
-
-export default config
-```
-
-### Vite
-
-You can also use Vite without SvelteKit. Instruct `vite` to optimize `@carbon/charts` in
-`vite.config.js`.
-
-```js
-// vite.config.js
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-
-/** @type {import('vite').UserConfig} */
-const config = {
-	plugins: [svelte()],
-	optimizeDeps: {
-		include: ['@carbon/charts', 'carbon-components'],
-		exclude: ['@carbon/telemetry']
+		noExternal: process.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
 	}
 }
 
@@ -79,34 +50,13 @@ export default config
 
 #### Circular dependency warnings
 
-You may see circular dependency warnings for `d3` and `@carbon/charts` packages that can be safely ignored.
-
-Use the `onwarn` option to selectively ignore these warnings.
-
-```js
-// rollup.config.js
-export default {
-	onwarn: (warning, warn) => {
-		// omit circular dependency warnings emitted from
-		// "d3-*" packages and "@carbon/charts"
-		if (warning.code === 'CIRCULAR_DEPENDENCY') {
-			if (warning.ids.some((id) => /node_modules\/(d3-|@carbon\/charts)/.test(id))) {
-				return
-			}
-		}
-
-		// preserve all other warnings
-		warn(warning)
-	}
-}
-```
+You may see circular dependency warnings for `d3` packages. These can be safely ignored.
 
 ## Usage
 
-Styles must be imported from both `@carbon/charts-svelte` and `@carbon/styles`.
+Styles must be imported from `@carbon/charts-svelte`.
 
 ```js
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
 ```
 
@@ -114,7 +64,6 @@ import '@carbon/charts-svelte/styles.css'
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
 	import { BarChartSimple } from '@carbon/charts-svelte'
 </script>
@@ -128,6 +77,7 @@ import '@carbon/charts-svelte/styles.css'
 		{ group: 'Misc', value: 16932 }
 	]}
 	options={{
+		theme: 'g90',
 		title: 'Simple bar (discrete)',
 		height: '400px',
 		axes: {
@@ -140,24 +90,7 @@ import '@carbon/charts-svelte/styles.css'
 ### Theming
 
 `@carbon/styles` uses
-[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for dynamic, client-side theming. Update the Carbon theme using the `theme` prop.
-
-Supported themes include:
-
-- `"white"`
-- `"g10"` (Gray 10)
-- `"g90"` (Gray 90)
-- `"g100"` (Gray 100)
-
-The default theme is `"white"`.
-
-```svelte
-<BarChartSimple
-  theme="g90"
-  data={/* ... */}
-  options={/* ... */}
-/>
-```
+[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for dynamic, client-side theming. Care should be exercised as the styles apply to the HTML body.
 
 ### Dispatched events
 
@@ -174,11 +107,11 @@ Each Svelte chart component dispatches the following events:
 ### Dynamic import
 
 Dynamically import a chart and instantiate it using the
-[svelte:component API](https://svelte.dev/docs#svelte_component).
+[svelte:component API](https://svelte.dev/docs/special-elements#svelte-component). By importing `@carbon/charts` within `onMount()`, you avoid problems with
+server-side rendering.
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
 	import { onMount } from 'svelte'
 
@@ -200,6 +133,7 @@ Dynamically import a chart and instantiate it using the
 		{ group: 'Misc', value: 16932 }
 	]}
 	options={{
+		theme: 'white',
 		title: 'Simple bar (discrete)',
 		height: '400px',
 		axes: {
@@ -215,9 +149,8 @@ In this example, an event listener is attached to the `BarChartSimple` component
 
 ```svelte
 <script>
-	import '@carbon/styles/css/styles.css'
 	import '@carbon/charts-svelte/styles.css'
-	import { onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 	import { BarChartSimple } from '@carbon/charts-svelte'
 
 	let chart
@@ -227,8 +160,12 @@ In this example, an event listener is attached to the `BarChartSimple` component
 	}
 
 	onMount(() => {
-		return () => {
-			if (chart) chart.services.events.removeEventListener('bar-mouseover', barMouseOver)
+		// do something
+	})
+
+	onDestroy(() => {
+		if (chart) {
+			chart.services.events.removeEventListener('bar-mouseover', barMouseOver)
 		}
 	})
 
@@ -254,26 +191,23 @@ In this example, an event listener is attached to the `BarChartSimple` component
 	}} />
 ```
 
-## CodeSandbox examples
+## StackBlitz examples
 
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/svelte).
 
-**When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
+**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
 
-Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
+Although new charts will be introduced in the future (such as a choropleth), data and options follow the same model for all charts with minor exceptions. For example, in the case of a donut chart, you're able to pass in an additional field called `center` in your options to configure the donut center.
 
-For instance, in the case of a donut chart, you're able to pass in an additional field called `center` in your options configuring the donut center.
+[Instructions for using the **tabular data format**](https://charts.carbondesignsystem.com/svelte/?path=/docs/docs-tutorials-tabular-data-format--docs)
 
-For instructions on using the **tabular data format**, see
-[here](https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format)
-
-There are additional options available depending on the chart type being used, [see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data).
+Additional options are available depending on the chart type being used, [see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/demo/charts).
 
 Customizable options (specific to chart type) can be found
-[here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html)
+[here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)
 
 ## TypeScript support
 
-Svelte version 3.31 or greater is required to use this library with TypeScript.
+Svelte version 3.31 or greater is required to use this library with TypeScript. Svelte 4.x+ is recommended.

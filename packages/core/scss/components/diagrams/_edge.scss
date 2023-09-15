@@ -1,66 +1,63 @@
-@use '@carbon/styles/scss/utilities/focus-outline' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '../../globals';
 
-@include exports('cc-edge') {
-	.#{$prefix}--#{$charts-prefix}--edge {
-		fill: transparent;
-	}
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge {
+	fill: transparent;
+}
 
-	.#{$prefix}--#{$charts-prefix}--edge__container {
-		stroke-width: $spacing-06;
-		stroke: transparent;
-		stroke-dasharray: none;
-	}
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge__container {
+	stroke-width: spacing.$spacing-06;
+	stroke: transparent;
+	stroke-dasharray: none;
+}
 
-	.#{$prefix}--#{$charts-prefix}--edge__inner {
-		stroke-width: 0.0625rem;
-		stroke: $border-strong-01;
-	}
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge__inner {
+	stroke-width: 0.0625rem;
+	stroke: theme.$border-strong-01;
+}
 
-	.#{$prefix}--#{$charts-prefix}--edge__outer {
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge__outer {
+	stroke-width: 0.15625rem;
+	stroke: transparent;
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge:hover {
+	.#{globals.$prefix}--#{globals.$charts-prefix}--edge__inner {
 		stroke-width: 0.15625rem;
-		stroke: transparent;
+	}
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--dash-sm {
+	stroke-dasharray: 2 4;
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--dash-md {
+	stroke-dasharray: 4 4;
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--dash-lg {
+	stroke-dasharray: 8 4;
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--dash-xl {
+	stroke-dasharray: 16 4;
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--tunnel {
+	.#{globals.$prefix}--#{globals.$charts-prefix}--edge__outer {
+		stroke: theme.$layer-accent-01;
+		stroke-width: 0.375rem;
+	}
+}
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--edge--double {
+	.#{globals.$prefix}--#{globals.$charts-prefix}--edge__inner {
+		stroke: theme.$background;
 	}
 
-	.#{$prefix}--#{$charts-prefix}--edge:hover {
-		.#{$prefix}--#{$charts-prefix}--edge__inner {
-			stroke-width: 0.15625rem;
-		}
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--dash-sm {
-		stroke-dasharray: 2 4;
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--dash-md {
-		stroke-dasharray: 4 4;
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--dash-lg {
-		stroke-dasharray: 8 4;
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--dash-xl {
-		stroke-dasharray: 16 4;
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--tunnel {
-		.#{$prefix}--#{$charts-prefix}--edge__outer {
-			stroke: $layer-accent-01;
-			stroke-width: 0.375rem;
-		}
-	}
-
-	.#{$prefix}--#{$charts-prefix}--edge--double {
-		.#{$prefix}--#{$charts-prefix}--edge__inner {
-			stroke: $background;
-		}
-
-		.#{$prefix}--#{$charts-prefix}--edge__outer {
-			stroke: $border-inverse;
-			stroke-width: 0.28125rem;
-		}
+	.#{globals.$prefix}--#{globals.$charts-prefix}--edge__outer {
+		stroke: theme.$border-inverse;
+		stroke-width: 0.28125rem;
 	}
 }

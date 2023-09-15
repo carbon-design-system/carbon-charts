@@ -1,7 +1,8 @@
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '../globals';
+@use '@carbon/styles/scss/theme';
 
-.#{$prefix}--#{$charts-prefix}--axes {
+.#{globals.$prefix}--#{globals.$charts-prefix}--axes {
+	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 	overflow: visible;
 
 	g.axis {
@@ -18,19 +19,19 @@
 		g.tick-hover:hover,
 		g.tick-hover:focus {
 			rect.axis-holder {
-				fill: $layer-selected-inverse;
-				stroke: $layer-selected-inverse;
+				fill: theme.$layer-selected-inverse;
+				stroke: theme.$layer-selected-inverse;
 				stroke-width: 2px;
 			}
 
 			text {
-				fill: $layer-selected;
+				fill: theme.$layer-selected;
 			}
 		}
 
 		g.tick text {
-			fill: $text-secondary;
-			font-family: font-family('sans-condensed');
+			fill: theme.$text-secondary;
+			font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 		}
 
 		g.tick line {
@@ -38,15 +39,15 @@
 		}
 
 		path.domain {
-			stroke: $border-strong-01;
+			stroke: theme.$border-strong-01;
 		}
 
 		.axis-title {
-			font-family: font-family('sans');
+			font-family: var(--#{globals.$prefix}-charts-font-family);
 			// TODO-V11
 			// font-weight: font-weight('semibold');
 			font-weight: 600;
-			fill: $text-primary;
+			fill: theme.$text-primary;
 		}
 	}
 }

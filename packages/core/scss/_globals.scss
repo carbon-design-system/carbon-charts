@@ -1,0 +1,8 @@
+@use '@carbon/type/scss/font-family' as font;
+$prefix: 'cds'; // Carbon Design System
+$charts-prefix: 'cc'; // Carbon Charts
+
+// Sets CSS custom property associated with chart wrapper,
+// tooltips and the Tabular representation in the modal
+$font-family: font.font-family('sans');
+$font-family-condensed: font.font-family('sans-condensed');

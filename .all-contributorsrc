@@ -12,6 +12,17 @@
 	"contributorsPerLine": 5,
 	"contributors": [
 		{
+			"login": "nstuyvesant",
+			"name": "Nate Stuyvesant",
+			"avatar_url": "https://avatars.githubusercontent.com/u/5770938?v=4",
+			"profile": "https://github.com/nstuyvesant",
+			"contributions": [
+				"code",
+				"doc",
+				"example"
+			]
+		},
+		{
 			"login": "DianaStanciulescu",
 			"name": "DianaStanciulescu",
 			"avatar_url": "https://avatars.githubusercontent.com/u/51086727?v=4",

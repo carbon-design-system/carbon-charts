@@ -1,20 +1,17 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
-
+import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildReactExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
     '@carbon/charts-react': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
     'react': version.react,
-    'react-dom': version.react,
-    'sass': version.sass
+    'react-dom': version.react
   }
 
   const indexHtml =
@@ -45,12 +42,10 @@ export function buildReactExample(demo: Demo): Project {
 
   const indexJs =
 `import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { ${demo.chartType.vanilla} } from '@carbon/charts-react'
-import data from './data.json'
-import options from './options.json'
-
-import '@carbon/styles/css/styles.css'
+import data from './data.js'
+import options from './options.js'
 import '@carbon/charts-react/styles.css'
 
 class App extends React.Component {
@@ -66,7 +61,10 @@ class App extends React.Component {
     ></ ${demo.chartType.vanilla}>
   )
 }
-ReactDOM.render(<App />, document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+  <App />
+)
 `
 
   const packageJson = {
@@ -87,9 +85,9 @@ ReactDOM.render(<App />, document.getElementById('root'))
     dependencies,
     files: {
       'public/index.html': indexHtml,
-      'src/data.json': JSON.stringify(demo.data, null, 2),
+      'src/data.js': objectToString(demo.data),
       'src/index.js': indexJs,
-      'src/options.json': JSON.stringify(demo.options, null, 2),
+      'src/options.js': objectToString(demo.options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

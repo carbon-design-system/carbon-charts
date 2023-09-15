@@ -1,7 +1,0 @@
-@import '@carbon/import-once/scss/index';
-
-@include exports('cc-marker') {
-	.#{$prefix}--#{$charts-prefix}--marker {
-		fill: $border-inverse;
-	}
-}

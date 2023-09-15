@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@carbon/styles/scss/themes';
+@use '@carbon/colors';
 @use '@carbon/styles/scss/utilities/component-tokens';
-@use '@carbon/colors' as *;
 
 // THEMES
 $color-scheme: (
@@ -28,15 +28,15 @@ $color-scheme: (
 
 // ELEMENTS
 $alert-stroke: (
-	fallback: $yellow-50,
+	fallback: colors.$yellow-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $yellow-50
+			value: colors.$yellow-50
 		),
 		(
 			theme: themes.$g10,
-			value: $yellow-50
+			value: colors.$yellow-50
 		),
 		(
 			theme: themes.$g90,
@@ -50,45 +50,45 @@ $alert-stroke: (
 ) !default;
 
 $layer-01-absolute: (
-	fallback: $white-0,
+	fallback: colors.$white-0,
 	values: (
 		(
 			theme: themes.$white,
-			value: $white-0
+			value: colors.$white-0
 		),
 		(
 			theme: themes.$g10,
-			value: $white-0
+			value: colors.$white-0
 		),
 		(
 			theme: themes.$g90,
-			value: $black-100
+			value: colors.$black-100
 		),
 		(
 			theme: themes.$g100,
-			value: $black-100
+			value: colors.$black-100
 		)
 	)
 ) !default;
 
 $layer-inverse-absolute: (
-	fallback: $black-100,
+	fallback: colors.$black-100,
 	values: (
 		(
 			theme: themes.$white,
-			value: $black-100
+			value: colors.$black-100
 		),
 		(
 			theme: themes.$g10,
-			value: $black-100
+			value: colors.$black-100
 		),
 		(
 			theme: themes.$g90,
-			value: $white-0
+			value: colors.$white-0
 		),
 		(
 			theme: themes.$g100,
-			value: $white-0
+			value: colors.$white-0
 		)
 	)
 ) !default;
@@ -129,7 +129,7 @@ $grid-bg: (
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-100
+			value: colors.$gray-100
 		),
 		(
 			theme: themes.$g100,
@@ -140,23 +140,23 @@ $grid-bg: (
 
 // METER
 $meter-range-indicator: (
-	fallback: $gray-40,
+	fallback: colors.$gray-40,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-40
+			value: colors.$gray-40
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-40
+			value: colors.$gray-40
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60
+			value: colors.$gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60
+			value: colors.$gray-60
 		)
 	)
 ) !default;
@@ -209,130 +209,130 @@ $tooltip-line-border: (
 
 // ZONES
 $zone-fill-01: (
-	fallback: $gray-10,
+	fallback: colors.$gray-10,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-10
+			value: colors.$gray-10
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-10
+			value: colors.$gray-10
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-90
+			value: colors.$gray-90
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-90
+			value: colors.$gray-90
 		)
 	)
 ) !default;
 $zone-stroke-01: (
-	fallback: $gray-50,
+	fallback: colors.$gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60
+			value: colors.$gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60
+			value: colors.$gray-60
 		)
 	)
 ) !default;
 
 $zone-fill-02: (
-	fallback: $gray-20,
+	fallback: colors.$gray-20,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-20
+			value: colors.$gray-20
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-20
+			value: colors.$gray-20
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-80
+			value: colors.$gray-80
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-80
+			value: colors.$gray-80
 		)
 	)
 ) !default;
 $zone-stroke-02: (
-	fallback: $gray-50,
+	fallback: colors.$gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60
+			value: colors.$gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60
+			value: colors.$gray-60
 		)
 	)
 ) !default;
 
 $zone-fill-03: (
-	fallback: $gray-30,
+	fallback: colors.$gray-30,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-30
+			value: colors.$gray-30
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-30
+			value: colors.$gray-30
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-70
+			value: colors.$gray-70
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-70
+			value: colors.$gray-70
 		)
 	)
 ) !default;
 $zone-stroke-03: (
-	fallback: $gray-50,
+	fallback: colors.$gray-50,
 	values: (
 		(
 			theme: themes.$white,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g10,
-			value: $gray-50
+			value: colors.$gray-50
 		),
 		(
 			theme: themes.$g90,
-			value: $gray-60
+			value: colors.$gray-60
 		),
 		(
 			theme: themes.$g100,
-			value: $gray-60
+			value: colors.$gray-60
 		)
 	)
 ) !default;

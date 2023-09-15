@@ -82,26 +82,24 @@ export interface Demo {
 	options: BaseChartOptions & { geoData?: object }
 	code: {
 		vanilla: Project
-		angular?: Project
-		react?: Project
-		svelte?: Project
-		vue?: Project
+		angular: Project
+		react: Project
+		svelte: Project
+		vue: Project
 	}
 }
 
 export interface DemoGroup {
-	storyGroupTitle: string
+	storyGroupTitle: 'Complex charts' | 'Simple charts' | 'Utility'
 	title: string
 	demos: Demo[]
+	configs?: {
+		excludeColorPaletteControl?: boolean
+		includeProjectionControl?: boolean
+	}
 }
 
-enum DemoGroupTypes {
-	UTILITY = 'utility',
-	SIMPLE_CHART = 'simple-chart',
-	COMPLEX_CHART = 'complex-chart'
-}
-
-const utilityDemoGroups = [
+const utilityDemoGroups: DemoGroup[] = [
 	{
 		title: 'Axes',
 		demos: [
@@ -423,12 +421,11 @@ const utilityDemoGroups = [
 		]
 	}
 ].map((demoGroup: any) => {
-	demoGroup.type = DemoGroupTypes.UTILITY
-
+	demoGroup.storyGroupTitle = 'Utility'
 	return demoGroup
 })
 
-const simpleChartDemos = [
+const simpleChartDemos: DemoGroup[] = [
 	{
 		title: 'Area (simple)',
 		description:
@@ -1122,8 +1119,7 @@ const simpleChartDemos = [
 		]
 	}
 ].map((demoGroup: any) => {
-	demoGroup.type = DemoGroupTypes.SIMPLE_CHART
-
+	demoGroup.storyGroupTitle = 'Simple charts'
 	return demoGroup
 })
 
@@ -1276,12 +1272,11 @@ const complexChartDemos = [
 		]
 	}
 ].map((demoGroup: any) => {
-	demoGroup.type = DemoGroupTypes.COMPLEX_CHART
-
+	demoGroup.storyGroupTitle = 'Complex charts'
 	return demoGroup
 })
 
-let allDemoGroups = utilityDemoGroups.concat(simpleChartDemos).concat(complexChartDemos)
+let allDemoGroups: DemoGroup[] = [ ...utilityDemoGroups, ...simpleChartDemos, ...complexChartDemos]
 
 const formatTitleString = (str: string) =>
 	str
@@ -1294,13 +1289,6 @@ const mapDemoGroups = (demoGroups: any) =>
 	demoGroups
 		.sort((a: any, b: any) => b.title - a.title)
 		.map((demoGroup: any) => {
-			if (demoGroup.type === DemoGroupTypes.SIMPLE_CHART) {
-				demoGroup.storyGroupTitle = 'Simple charts'
-			} else if (demoGroup.type === DemoGroupTypes.COMPLEX_CHART) {
-				demoGroup.storyGroupTitle = 'Complex charts'
-			} else {
-				demoGroup.storyGroupTitle = 'Utility'
-			}
 
 			demoGroup.demos = demoGroup.demos.map((demo: any) => {
 				demo.title = demo.options.title

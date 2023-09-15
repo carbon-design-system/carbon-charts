@@ -1,5 +1,6 @@
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--zero-line line.domain {
-	stroke: $border-strong-01;
+.#{globals.$prefix}--#{globals.$charts-prefix}--zero-line line.domain {
+	stroke: theme.$border-strong-01;
 }

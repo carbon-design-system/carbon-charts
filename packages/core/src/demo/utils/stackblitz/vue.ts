@@ -1,18 +1,15 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
-
+import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildVueExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
     '@carbon/charts-vue': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
     'd3-sankey': version.d3Sankey,
-    'sass': version.sass,
     'vue': version.vue
   }
 
@@ -44,8 +41,8 @@ export function buildVueExample(demo: Demo): Project {
 </template>
 
 <script>
-import data from './data.json';
-import options from './options.json';
+import data from './data.js';
+import options from './options.js';
 
 export default {
   data() {
@@ -58,8 +55,7 @@ export default {
 </script>
 
 <style>
-@import '@carbon/styles/css/styles.css';
-@import '@carbon/charts/styles.css';
+@import '@carbon/charts-vue/styles.css';
 .p-1 {
 padding: 2rem;
 }
@@ -94,9 +90,9 @@ app.mount('#app')
     files: {
       'public/index.html': indexHtml,
       'src/App.vue': appVue,
-      'src/data.json': JSON.stringify(demo.data, null, 2),
+      'src/data.js': objectToString(demo.data),
       'src/main.js': mainJs,
-      'src/options.json': JSON.stringify(demo.options, null, 2),
+      'src/options.js': objectToString(demo.options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

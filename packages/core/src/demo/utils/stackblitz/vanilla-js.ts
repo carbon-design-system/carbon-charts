@@ -1,16 +1,15 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
 import { version } from '../package-versions'
+import { objectToString } from './object-to-string'
 
 export function buildVanillaJsExample(demo: Demo): Project {
 
   const dependencies: Record<string, string> = {
     '@carbon/charts': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
     d3: version.d3,
     'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey,
-    'sass': version.sass
+    'd3-sankey': version.d3Sankey
   }
 
   const indexHtml =
@@ -74,9 +73,8 @@ new ${demo.chartType.vanilla}(chartHolder, {
   const indexJs =
 `
 import { ${demo.chartType.vanilla} } from '@carbon/charts'
-import options from './options.json'
-import data from './data.json'
-import '@carbon/styles/css/styles.css'
+import options from './options.js'
+import data from './data.js'
 import '@carbon/charts/styles.css'
 
 ${ isGeoDemo ? instantiateForGeo: instantiateNormally}
@@ -94,10 +92,10 @@ ${ isGeoDemo ? instantiateForGeo: instantiateNormally}
     title: 'Carbon Charts Vanilla JavaScript Example',
     dependencies,
     files: {
-      'data.json': JSON.stringify(demo.data, null, 2),
+      'data.js': objectToString(demo.data),
       'index.html': indexHtml,
       'index.js': indexJs,
-      'options.json': JSON.stringify(demo.options, null, 2),
+      'options.js': objectToString(demo.options),
       'package.json': JSON.stringify(packageJson, null, 2)
     }
   }

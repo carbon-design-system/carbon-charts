@@ -1,7 +1,10 @@
-.#{$prefix}--#{$charts-prefix}--highlight {
+@use '../globals';
+@use '@carbon/colors';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--highlight {
 	rect.highlight-bar {
 		pointer-events: none;
-		fill: $magenta-50;
-		stroke: $magenta-50;
+		fill: colors.$magenta-50;
+		stroke: colors.$magenta-50;
 	}
 }

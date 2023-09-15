@@ -1,0 +1,17 @@
+# Root-level only
+.git
+.yarn
+pages
+yarn.lock
+
+# All packages
+**/.angular
+**/.DS_Store
+**/.svelte-kit
+**/dist
+**/demo/bundle
+**/node_modules
+**/LICENSE.md
+
+# Prettier (which shares this config) totally messess up Storybook MDX files right now
+*.mdx

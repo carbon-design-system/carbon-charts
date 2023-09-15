@@ -1,18 +1,18 @@
-@use "@carbon/styles/scss/themes";
-@use "@carbon/styles/scss/theme" as *;
+@use "@carbon/styles/scss/theme";
+@use '../globals';
 
-.#{$prefix}--#{$charts-prefix}--choropleth {
+.#{globals.$prefix}--#{globals.$charts-prefix}--choropleth {
 	path.border {
-		stroke: $border-subtle-selected-01;
+		stroke: theme.$border-subtle-selected-01;
 	}
 
 	g.missing-data path {
-		stroke: $border-subtle-selected-01;
-		fill: $background;
+		stroke: theme.$border-subtle-selected-01;
+		fill: theme.$background;
 	}
 
 	pattern path.pattern-fill {
-		stroke: $border-strong-01;
+		stroke: theme.$border-strong-01;
 		stroke-width: 0.5px;
 	}
 }

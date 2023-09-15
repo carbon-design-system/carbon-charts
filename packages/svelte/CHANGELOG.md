@@ -1,46 +1,128 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.11.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.7...v1.11.8) (2023-07-07)
+# 1.12.0 (2023-09-05)
 
+### Features
+
+- **scss:** Optimized SCSS to remove need to separately load @carbon/styles
+  ([#1652](https://github.com/carbon-design-system/carbon-charts/issues/1652))
+  ([d970944](https://github.com/carbon-design-system/carbon-charts/commit/d970944e49da6f0ca5cc4f290be9b2895e521e7d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.11.21 (2023-08-14)
 
 ### Bug Fixes
 
-* **svelte:** make ref and chart props optional ([#1612](https://github.com/carbon-design-system/carbon-charts/issues/1612)) ([624aa66](https://github.com/carbon-design-system/carbon-charts/commit/624aa669ca290962cf420117c56c018f40ca3edc))
+- **umd:** Issue 1646 - change process.env.NODE_ENV to string
+  ([#1649](https://github.com/carbon-design-system/carbon-charts/issues/1649))
+  ([8e11271](https://github.com/carbon-design-system/carbon-charts/commit/8e11271903e92b54aa71c5fabc6ea21103fc5d91))
 
+# Change Log
 
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.20 (2023-08-10)
 
+### Bug Fixes
+
+- **umd:** simplify exports
+  ([#1647](https://github.com/carbon-design-system/carbon-charts/issues/1647))
+  ([712f36e](https://github.com/carbon-design-system/carbon-charts/commit/712f36ea2a45a3ba7f8cb3b5672f150ee9f31d72))
+
+## 1.11.19 (2023-08-09)
+
+### Bug Fixes
+
+- **1633:** use of arrow function lost lexical this
+  ([#1645](https://github.com/carbon-design-system/carbon-charts/issues/1645))
+  ([3303b8f](https://github.com/carbon-design-system/carbon-charts/commit/3303b8fbc29f7cb82c0d8f441199f7f9bca2d8a1))
+
+## 1.11.18 (2023-08-09)
+
+### Bug Fixes
+
+- **umd:** close issue 1643 - UMD bundle not generated
+  ([#1644](https://github.com/carbon-design-system/carbon-charts/issues/1644))
+  ([d0313dc](https://github.com/carbon-design-system/carbon-charts/commit/d0313dcc59cf857ca92cbe3886f12dd6fa76a9b5))
+
+## 1.11.17 (2023-08-06)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## 1.11.16 (2023-08-02)
+
+### Bug Fixes
+
+- **core/scss:** Replace hard-coded font-family set by mixin to CSS custom properties then reuse
+  ([#1639](https://github.com/carbon-design-system/carbon-charts/issues/1639))
+  ([5440d24](https://github.com/carbon-design-system/carbon-charts/commit/5440d249c5326516e866b0e449d914395adbc023))
+
+## 1.11.15 (2023-07-31)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.14](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.13...v1.11.14) (2023-07-30)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.13](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.12...v1.11.13) (2023-07-20)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.12](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.11...v1.11.12) (2023-07-19)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.11](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.10...v1.11.11) (2023-07-17)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.10](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.9...v1.11.10) (2023-07-14)
+
+### Bug Fixes
+
+- **prettier:** downgrade for now
+  ([#1621](https://github.com/carbon-design-system/carbon-charts/issues/1621))
+  ([22509a2](https://github.com/carbon-design-system/carbon-charts/commit/22509a29e15d5aff951db66607965b9e59f898df))
+
+## [1.11.9](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.8...v1.11.9) (2023-07-13)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+## [1.11.8](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.7...v1.11.8) (2023-07-07)
+
+### Bug Fixes
+
+- **svelte:** make ref and chart props optional
+  ([#1612](https://github.com/carbon-design-system/carbon-charts/issues/1612))
+  ([624aa66](https://github.com/carbon-design-system/carbon-charts/commit/624aa669ca290962cf420117c56c018f40ca3edc))
 
 ## [1.11.7](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.6...v1.11.7) (2023-07-06)
 
 **Note:** Version bump only for package @carbon/charts-svelte
 
-
-
-
-
 ## [1.11.6](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.5...v1.11.6) (2023-07-06)
 
 **Note:** Version bump only for package @carbon/charts-svelte
 
-
-
-
-
 ## [1.11.5](https://github.com/carbon-design-system/carbon-charts/compare/v1.11.4...v1.11.5) (2023-07-06)
-
 
 ### Bug Fixes
 
-* **lerna:** revert prettier to 2.8.8 for now ([#1609](https://github.com/carbon-design-system/carbon-charts/issues/1609)) ([0bd1503](https://github.com/carbon-design-system/carbon-charts/commit/0bd1503d7ae0bbec68c3d0e1ad818b8abc6b5c73))
-* **react:** remount issues ([#1606](https://github.com/carbon-design-system/carbon-charts/issues/1606)) ([aad4838](https://github.com/carbon-design-system/carbon-charts/commit/aad4838771a398b7e37484c60b4f9fc0060e1a90))
-
-
-
-
+- **lerna:** revert prettier to 2.8.8 for now
+  ([#1609](https://github.com/carbon-design-system/carbon-charts/issues/1609))
+  ([0bd1503](https://github.com/carbon-design-system/carbon-charts/commit/0bd1503d7ae0bbec68c3d0e1ad818b8abc6b5c73))
+- **react:** remount issues
+  ([#1606](https://github.com/carbon-design-system/carbon-charts/issues/1606))
+  ([aad4838](https://github.com/carbon-design-system/carbon-charts/commit/aad4838771a398b7e37484c60b4f9fc0060e1a90))
 
 # Change Log
 

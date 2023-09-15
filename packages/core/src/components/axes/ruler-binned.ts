@@ -1,6 +1,6 @@
 import { select, type Selection } from 'd3'
-import { get } from 'lodash-es'
-import { isEqual, getProperty } from '@/tools'
+import { get, isEqual } from 'lodash-es'
+import { getProperty } from '@/tools'
 import { Ruler } from './ruler'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'

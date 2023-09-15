@@ -1,30 +1,26 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import type { Demo } from '@/demo'
-
+import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildAngularExample(demo: Demo): Project {
-
-  const dependencies: Record<string, string> = {
-    '@angular/animations': version.angular,
-    '@angular/common': version.angular,
-    '@angular/compiler': version.angular,
-    '@angular/core': version.angular,
-    '@angular/platform-browser': version.angular,
+	const dependencies: Record<string, string> = {
+		'@angular/animations': version.angular,
+		'@angular/common': version.angular,
+		'@angular/compiler': version.angular,
+		'@angular/core': version.angular,
+		'@angular/platform-browser': version.angular,
     '@carbon/charts': version.carbonCharts,
-    '@carbon/charts-angular': version.carbonCharts,
-    '@carbon/styles': version.carbonStyles,
-    d3: version.d3,
-    'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey,
-    'rxjs': version.rxjs,
-    'sass': version.sass,
-    'tslib': version.tslib,
-    'zone.js': version.zoneJs
-  }
+		'@carbon/charts-angular': version.carbonCharts,
+		d3: version.d3,
+		'd3-cloud': version.d3Cloud,
+		'd3-sankey': version.d3Sankey,
+		rxjs: version.rxjs,
+		tslib: version.tslib,
+		'zone.js': version.zoneJs
+	}
 
-  const indexHtml =
-`<!doctype html>
+	const indexHtml = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -49,14 +45,13 @@ export function buildAngularExample(demo: Demo): Project {
 </body>
 </html>`
 
-  const mainTs =
-`import 'zone.js/dist/zone'
+	const mainTs = `import 'zone.js/dist/zone'
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
 import { ChartsModule } from '@carbon/charts-angular'
-import optionsJson from './options.json'
-import dataJson from './data.json'
+import options from './options'
+import data from './data'
 
 @Component({
   selector: 'my-app',
@@ -65,20 +60,17 @@ import dataJson from './data.json'
 	template: '<${demo.chartType.angular} [data]="data" [options]="options"></${demo.chartType.angular}>'
 })
 export class App {
-	options = optionsJson
-	data = dataJson
+	options = options
+	data = data
 }
 
 bootstrapApplication(App)
 `
 
-  const stylesCss =
-`@import '@carbon/styles/css/styles.css';
-@import '@carbon/charts/styles.css';
-`
+	const stylesCss = `@import '@carbon/charts/styles.css';
+  `
 
-  const angularJson =
-`{
+	const angularJson = `{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -137,20 +129,19 @@ bootstrapApplication(App)
   "defaultProject": "demo"
 }`
 
-  const packageJson = {
-    name: 'carbon-charts-angular-example',
-    description: 'Carbon Charts Angular Example',
-    version: '0.0.0',
-    scripts: {
-      ng: 'ng',
-      start: 'NG_CLI_ANALYTICS=false ng serve',
-      build: 'NG_CLI_ANALYTICS=false ng build'
-    },
-    dependencies
-  }
+	const packageJson = {
+		name: 'carbon-charts-angular-example',
+		description: 'Carbon Charts Angular Example',
+		version: '0.0.0',
+		scripts: {
+			ng: 'ng',
+			start: 'NG_CLI_ANALYTICS=false ng serve',
+			build: 'NG_CLI_ANALYTICS=false ng build'
+		},
+		dependencies
+	}
 
-  const TsConfigJson =
-`{
+	const TsConfigJson = `{
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -173,19 +164,19 @@ bootstrapApplication(App)
   }
 }`
 
-  return {
-    template: 'angular-cli' as ProjectTemplate,
-    title: 'Carbon Charts Angular Example',
-    dependencies,
-    files: {
-      'src/data.json': JSON.stringify(demo.data, null, 2),
-      'src/index.html': indexHtml,
-      'src/main.ts': mainTs,
-      'src/options.json': JSON.stringify(demo.options, null, 2),
-      'src/styles.css': stylesCss,
-      'angular.json': angularJson,
-      'package.json': JSON.stringify(packageJson, null, 2),
-      'tsconfig.json': TsConfigJson
-    }
-  }
+	return {
+		template: 'angular-cli' as ProjectTemplate,
+		title: 'Carbon Charts Angular Example',
+		dependencies,
+		files: {
+			'src/data.ts': objectToString(demo.data),
+			'src/index.html': indexHtml,
+			'src/main.ts': mainTs,
+			'src/options.ts': objectToString(demo.options),
+			'src/styles.css': stylesCss,
+			'angular.json': angularJson,
+			'package.json': JSON.stringify(packageJson, null, 2),
+			'tsconfig.json': TsConfigJson
+		}
+	}
 }

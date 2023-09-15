@@ -1,17 +1,18 @@
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
+@use '../globals';
+@use '../tokens';
 
-.#{$prefix}--#{$charts-prefix}--grid {
+.#{globals.$prefix}--#{globals.$charts-prefix}--grid {
 	rect.chart-grid-backdrop {
-		fill: $grid-bg;
+		fill: tokens.$grid-bg;
 	}
 
 	rect.chart-grid-backdrop.stroked {
-		stroke: $layer-accent-01;
+		stroke: theme.$layer-accent-01;
 	}
 
 	rect.stroke {
-		stroke: $layer-accent-01;
+		stroke: theme.$layer-accent-01;
 	}
 
 	g.x.grid g.tick,
@@ -19,12 +20,12 @@
 		line {
 			pointer-events: none;
 			stroke-width: 1px;
-			stroke: $layer-accent-01;
+			stroke: theme.$layer-accent-01;
 		}
 
 		&.active line {
 			stroke-dasharray: 2px;
-			stroke: $focus;
+			stroke: theme.$focus;
 		}
 	}
 }

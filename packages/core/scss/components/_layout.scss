@@ -1,4 +1,6 @@
-.#{$prefix}--#{$charts-prefix}--layout {
+@use '../globals';
+
+.#{globals.$prefix}--#{globals.$charts-prefix}--layout {
 	&-row {
 		display: flex;
 		flex-direction: row;
@@ -24,11 +26,11 @@
 	}
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper .layout-child {
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper .layout-child {
 	overflow: visible;
 }
 
-.#{$prefix}--#{$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper svg.layout-svg-wrapper {
 	height: inherit;
 	width: inherit;
 	overflow: visible;

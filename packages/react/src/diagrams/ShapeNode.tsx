@@ -40,7 +40,7 @@ const ShapeNode: React.FC<
 	const circleClasses = classnames(namespace, {
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${shape}`]: shape,
-		[`${namespace}--${tag}`]: tag,
+		[`${namespace}--${Component}`]: Component,
 		[rest.className as string]: rest.className
 	})
 
