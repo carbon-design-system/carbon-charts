@@ -153,6 +153,15 @@ export interface BaseChartOptions {
 			colors?: Array<string>
 		}
 	}
+	/*
+	 * options related to (CSV|PNG|JPG) file downloads
+	 */
+	fileDownload?: {
+		/**
+		 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
+		 */
+		fileName?: (type: 'png' | 'jpg' | 'csv') => string
+	}
 	/**
 	 * whether this type of chart is experimental
 	 */
