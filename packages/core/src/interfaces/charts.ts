@@ -160,7 +160,7 @@ export interface BaseChartOptions {
 		/**
 		 * the number of color variants in the palette (defaults to using the number of data groups in the given data)
 		 */
-		fileName?: (type: 'png' | 'jpg' | 'csv') => string
+		fileName?: string | ((type: 'png' | 'jpg' | 'csv') => string)
 	}
 	/**
 	 * whether this type of chart is experimental
