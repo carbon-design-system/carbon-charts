@@ -684,7 +684,22 @@ export class ChartModel {
 			csvString += i < data.length ? csvData + '\n' : csvData
 		})
 
-		this.services.files.downloadCSV(csvString, 'myChart.csv')
+		const options = this.getOptions();
+
+		let fileName = 'myChart';
+		const customFilename = getProperty(
+			options,
+			'fileDownload',
+			'fileName'
+		);
+
+		if (typeof customFilename === 'function') {
+			fileName = customFilename('csv');
+		} else if (typeof customFilename === 'string') {
+			fileName = customFilename;
+		}
+
+		this.services.files.downloadCSV(csvString, `${fileName}.csv`);
 	}
 
 	protected getTabularData(data: any) {
