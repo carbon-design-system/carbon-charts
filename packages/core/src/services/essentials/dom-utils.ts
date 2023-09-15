@@ -315,6 +315,8 @@ export class DOMUtils extends Service {
 
 				if (typeof customFilename === 'function') {
 					fileName = customFilename('jpg')
+				} else if (typeof customFilename === 'string') {
+					fileName = customFilename;
 				}
 
 				self.services.files?.downloadImage(dataUrl, `${fileName}.jpg`)
@@ -352,6 +354,8 @@ export class DOMUtils extends Service {
 
 				if (typeof customFilename === 'function') {
 					fileName = customFilename('png')
+				} else if (typeof customFilename === 'string') {
+					fileName = customFilename;
 				}
 
 				self.services.files?.downloadImage(dataUrl, `${fileName}.png`)

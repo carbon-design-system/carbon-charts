@@ -695,6 +695,8 @@ export class ChartModel {
 
 		if (typeof customFilename === 'function') {
 			fileName = customFilename('csv');
+		} else if (typeof customFilename === 'string') {
+			fileName = customFilename;
 		}
 
 		this.services.files.downloadCSV(csvString, `${fileName}.csv`);
