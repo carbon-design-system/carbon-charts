@@ -1,15 +1,11 @@
 import { pointer, type Numeric } from 'd3'
-import {
-	merge,
-	cloneDeep,
-	unionBy,
-} from 'lodash-es'
+import { merge, cloneDeep, unionBy } from 'lodash-es'
 import { CartesianOrientations, ScaleTypes, TruncationTypes } from '@/interfaces/enums'
 import { defaultLegendAdditionalItems } from './configuration-non-customizable'
 
 export function debounceWithD3MousePosition(fn: any, delay: number, holder: any) {
 	let timer: any = null
-	return function(...args: any) {
+	return function (...args: any) {
 		const context = this
 
 		// Get D3 event here
@@ -199,11 +195,21 @@ export function capitalizeFirstLetter(word: string) {
  * @param {string} key
  * @returns The percentage in the form of a number (1 significant digit if necessary)
  */
-export function convertValueToPercentage(item: any, fullData: any, key = 'value') {
+export function convertValueToPercentage(
+	item: any,
+	fullData: any,
+	key = 'value',
+	entireValue = false
+) {
 	const percentage =
 		(item / fullData.reduce((accum: number, val: any) => accum + val[key], 0)) * 100
-	// if the value has any significant figures, keep 1
-	return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
+	//in need for entire float percentage value
+	if (entireValue) {
+		return percentage
+	} else {
+		// if the value has any significant figures, keep 1
+		return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage
+	}
 }
 
 /**
@@ -244,7 +250,7 @@ export function updateLegendAdditionalItems(defaultOptions: any, providedOptions
 
 		// Get default items in default options but not in provided options
 		const updatedDefaultItems = defaultLegendAdditionalItems.filter(
-			(item) => defaultTypes.includes(item.type) && !providedTypes.includes(item.type)
+			item => defaultTypes.includes(item.type) && !providedTypes.includes(item.type)
 		)
 
 		defaultOptions.legend.additionalItems = updatedDefaultItems
