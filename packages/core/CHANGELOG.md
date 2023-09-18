@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.1 (2023-09-18)
+
+### Bug Fixes
+
+- **pie-donut:** formatter not recieving entire value
+  ([#1662](https://github.com/carbon-design-system/carbon-charts/issues/1662))
+  ([9facba4](https://github.com/carbon-design-system/carbon-charts/commit/9facba43ac812edd191468f85edba0c64856f83e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.13.0 (2023-09-15)
 
 ### Features
