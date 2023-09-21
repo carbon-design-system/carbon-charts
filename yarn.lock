@@ -2344,7 +2344,7 @@ __metadata:
     storybook: ^7.4.3
     typescript: ^5.2.2
     vite: ^4.4.9
-    vite-plugin-dts: ^3.5.3
+    vite-plugin-dts: ^3.5.4
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -2403,7 +2403,7 @@ __metadata:
     storybook: ^7.4.3
     typescript: ^5.2.2
     vite: ^4.4.9
-    vite-plugin-dts: ^3.5.3
+    vite-plugin-dts: ^3.5.4
     vue: ^3.3.4
     vue-tsc: ^1.8.13
   peerDependencies:
@@ -2452,7 +2452,7 @@ __metadata:
     typedoc: ^0.25.1
     typescript: ^5.2.2
     vite: ^4.4.9
-    vite-plugin-dts: ^3.5.3
+    vite-plugin-dts: ^3.5.4
     vitest: ^0.34.4
   peerDependencies:
     d3: ^7.0.0
@@ -22079,9 +22079,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:^3.5.3":
-  version: 3.5.3
-  resolution: "vite-plugin-dts@npm:3.5.3"
+"vite-plugin-dts@npm:^3.5.4":
+  version: 3.5.4
+  resolution: "vite-plugin-dts@npm:3.5.4"
   dependencies:
     "@microsoft/api-extractor": ^7.36.4
     "@rollup/pluginutils": ^5.0.2
@@ -22095,7 +22095,7 @@ __metadata:
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: cb4a997565f0a2ecf446d7bc222484914644f85e8154b12c611cb56ec352495cab2cfda4438868a5bce4242799491a9bec45d6eb707e06fdafba596660a0f322
+  checksum: d486220c478e9cb18cbb55867785d4f435bb780e7988e61a877d4cbb1ae6e58a3e85aca67f90a493a75db551afa15be1b0626764d75ed3907ab9084a0c02eaad
   languageName: node
   linkType: hard
 
