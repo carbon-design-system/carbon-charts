@@ -17,8 +17,8 @@ export class Legend extends Component {
 	renderType = RenderTypes.HTML
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
@@ -367,6 +367,7 @@ export class Legend extends Component {
 				const hoveredItemData = hoveredItem.datum() as any
 				if (
 					hoveredItemData.name.length > truncation.threshold &&
+					truncation.numCharacter <= hoveredItemData.name.length &&
 					truncation.type !== TruncationTypes.NONE
 				) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
