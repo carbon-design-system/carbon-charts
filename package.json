@@ -22,18 +22,46 @@
     "packages/*"
   ],
   "engines": {
-    "node": "^18.17.1"
+    "node": "^18.18.0"
   },
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "yarn@3.6.3",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/plugin-external-helpers": "^7.22.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-transform-react-jsx": "^7.22.15",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@storybook/addon-essentials": "^7.4.3",
+    "@storybook/addon-interactions": "^7.4.3",
+    "@storybook/addon-links": "^7.4.3",
+    "@storybook/blocks": "^7.4.3",
+    "@storybook/html-vite": "^7.4.3",
+    "@storybook/manager-api": "^7.4.3",
+    "@storybook/react": "^7.4.3",
+    "@storybook/react-vite": "^7.4.3",
+    "@storybook/react-webpack5": "^7.4.3",
+    "@storybook/svelte": "^7.4.3",
+    "@storybook/sveltekit": "^7.4.3",
+    "@storybook/testing-library": "^0.2.1",
+    "@storybook/theming": "^7.4.3",
+    "@storybook/vue3": "^7.4.3",
+    "@storybook/vue3-vite": "^7.4.3",
     "commitizen": "^4.3.0",
+    "css-loader": "6.8.1",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint-plugin-storybook": "^0.6.14",
     "husky": "^8.0.3",
-    "lerna": "^7.1.5",
+    "lerna": "^7.3.0",
     "pinst": "^3.0.0",
-    "prettier": "^3.0.2",
-    "prettier-config-carbon": "^0.11.0"
+    "prettier": "^3.0.3",
+    "prettier-config-carbon": "^0.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "style-loader": "^3.3.3",
+    "webpack": "5.88.2"
   },
   "husky": {
     "hooks": {
