@@ -335,7 +335,7 @@ export class Legend extends Component {
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d: any) {
-				if (d.name.length > truncationThreshold) {
+				if (d.name.length > truncationThreshold && d.name.length !== truncationNumCharacter) {
 					return truncateLabel(d.name, truncationType, truncationNumCharacter)
 				} else {
 					return d.name
@@ -367,7 +367,7 @@ export class Legend extends Component {
 				const hoveredItemData = hoveredItem.datum() as any
 				if (
 					hoveredItemData.name.length > truncation.threshold &&
-					truncation.numCharacter <= hoveredItemData.name.length &&
+					truncation.numCharacter < hoveredItemData.name.length &&
 					truncation.type !== TruncationTypes.NONE
 				) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
