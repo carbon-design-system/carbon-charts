@@ -52,6 +52,11 @@
         transition: background-color .11s cubic-bezier(0,0,.38,.9);
 
         .#{globals.$prefix}--overflow-menu-options__btn {
+          &:focus {
+            outline: 2px solid var(--cds-focus,#0f62fe);
+            outline-offset: -2px;
+          }
+
           font-size: var(--#{globals.$prefix}-body-compact-01-font-size, .875rem);
           font-weight: var(--#{globals.$prefix}-body-compact-01-font-weight, 400);
           line-height: var(--#{globals.$prefix}-body-compact-01-line-height, 1.28572);
@@ -105,6 +110,11 @@
 
       &:hover {
         background-color: var(--#{globals.$prefix}-layer-hover);
+      }
+
+      &:focus {
+        outline: 2px solid var(--cds-focus,#0f62fe);
+        outline-offset: -2px;
       }
 
       *, 

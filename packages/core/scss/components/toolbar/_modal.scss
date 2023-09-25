@@ -128,6 +128,11 @@
             background-color: var(--#{globals.$prefix}-layer-hover);
           }
 
+          &:focus {
+            border-color: var(--cds-focus,#0f62fe);
+            outline: none;
+          }
+
           position: absolute;
           z-index: 2;
           top: 0;
@@ -293,6 +298,11 @@
           &:hover {
             color: var(--#{globals.$prefix}-text-on-color, #ffffff);
             background-color: var(--#{globals.$prefix}-button-primary-hover, #0050e6);
+          }
+
+          &:focus {
+            border-color: var(--cds-button-focus-color,var(--cds-focus,#0f62fe));
+            box-shadow: inset 0 0 0 1px var(--cds-button-focus-color,var(--cds-focus,#0f62fe)),inset 0 0 0 2px var(--cds-background,#ffffff);
           }
 
           border-width: 1px;
