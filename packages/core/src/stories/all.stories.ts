@@ -14,6 +14,7 @@ const DEFAULT_THEME = ChartTheme.G100
 
 const introStories = storiesOf('Docs', module)
 
+
 // Loop through the demos for the group
 introStories.add(
 	'Welcome',

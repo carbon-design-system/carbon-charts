@@ -1,4 +1,4 @@
-@use '@carbon/styles/scss/theme';
+@use '@carbon/themes/scss/generated/tokens' as theme;
 @use '../globals';
 
 .#{globals.$prefix}--#{globals.$charts-prefix}--title {
@@ -16,7 +16,9 @@
 	}
 }
 
-.layout-child.title {
-	height: unset !important;
-	overflow: hidden;
+.#{globals.$prefix}--chart-holder {
+	.layout-child.title {
+		height: unset !important;
+		overflow: hidden;
+	}
 }

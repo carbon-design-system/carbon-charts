@@ -228,7 +228,6 @@ export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: a
       document.documentElement.setAttribute('data-carbon-theme', theme)
       // Set selected theme to options
       chart.model.setOptions({ ...chart.model.getOptions(), theme })
-      // TODO: Would be good to set the demo.data.theme so what appears in the Controls area aligns
     })
   })
 }
