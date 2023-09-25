@@ -131,7 +131,9 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const renderLabels = options.pie.labels.enabled
-		const labelData = renderLabels ? pieLayoutData.filter((x) => (x.data as any)[valueMapsTo] > 0) : []
+		const labelData = renderLabels
+			? pieLayoutData.filter(x => (x.data as any)[valueMapsTo] > 0)
+			: []
 		const labelsGroup = DOMUtils.appendOrSelect(svg, 'g.labels')
 			.attr('role', Roles.GROUP)
 			.attr('data-name', 'labels')
@@ -153,9 +155,16 @@ export class Pie extends Component {
 			.style('text-anchor', 'middle')
 			.text((d: any) => {
 				if (options.pie.labels.formatter) {
-					return options.pie.labels.formatter(d)
+					return options.pie.labels.formatter({
+						...d,
+						percentageValue: convertValueToPercentage(
+							d.data[valueMapsTo],
+							displayData,
+							valueMapsTo,
+							true
+						)
+					})
 				}
-
 				return convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
 			})
 			// Calculate dimensions in order to transform

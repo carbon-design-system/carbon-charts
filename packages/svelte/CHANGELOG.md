@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.4 (2023-09-25)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.3 (2023-09-22)
+
+### Bug Fixes
+
+- **scss:** load tokens at beginning of \_chart-holder.scss
+  ([#1666](https://github.com/carbon-design-system/carbon-charts/issues/1666))
+  ([007f9a5](https://github.com/carbon-design-system/carbon-charts/commit/007f9a58943785b2783549c53641814eda374e3a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.2 (2023-09-21)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.1 (2023-09-18)
+
+### Bug Fixes
+
+- **pie-donut:** formatter not recieving entire value
+  ([#1662](https://github.com/carbon-design-system/carbon-charts/issues/1662))
+  ([9facba4](https://github.com/carbon-design-system/carbon-charts/commit/9facba43ac812edd191468f85edba0c64856f83e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.13.0 (2023-09-15)
+
+### Features
+
+- **exports:** custom fileDownload.fileName function
+  ([#1661](https://github.com/carbon-design-system/carbon-charts/issues/1661))
+  ([1dc22cc](https://github.com/carbon-design-system/carbon-charts/commit/1dc22cc73cba69d8fd1a06ff761e2f28797157a7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.12.0 (2023-09-05)
 
 ### Features
