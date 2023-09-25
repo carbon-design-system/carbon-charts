@@ -2276,22 +2276,22 @@ __metadata:
   resolution: "@carbon/charts-docs@workspace:packages/docs"
   dependencies:
     "@carbon/charts-svelte": "workspace:*"
-    "@carbon/styles": ^1.37.0
+    "@carbon/styles": ^1.38.0
     "@stackblitz/sdk": 1.9.0
     "@sveltejs/adapter-static": ^2.0.3
-    "@sveltejs/kit": ^1.24.1
-    "@typescript-eslint/eslint-plugin": ^6.7.0
-    "@typescript-eslint/parser": ^6.7.0
+    "@sveltejs/kit": ^1.25.1
+    "@typescript-eslint/eslint-plugin": ^6.7.2
+    "@typescript-eslint/parser": ^6.7.2
     carbon-components-svelte: ^0.80.0
     carbon-icons-svelte: ^12.3.0
-    eslint: ^8.49.0
+    eslint: ^8.50.0
     eslint-config-prettier: ^9.0.0
-    eslint-plugin-svelte: ^2.33.1
+    eslint-plugin-svelte: ^2.33.2
     highlight.js: ^11.8.0
     prettier-plugin-svelte: ^3.0.3
-    sass: ^1.66.1
-    svelte: ^4.2.0
-    svelte-check: ^3.5.1
+    sass: ^1.68.0
+    svelte: ^4.2.1
+    svelte-check: ^3.5.2
     tslib: ^2.6.2
     typedoc: ^0.25.1
     typescript: ^5.2.2
@@ -2565,7 +2565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.37.0, @carbon/styles@npm:^1.38.0":
+"@carbon/styles@npm:^1.38.0":
   version: 1.38.0
   resolution: "@carbon/styles@npm:1.38.0"
   dependencies:
@@ -6275,7 +6275,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.24.1, @sveltejs/kit@npm:^1.25.1":
+"@sveltejs/kit@npm:^1.25.1":
   version: 1.25.1
   resolution: "@sveltejs/kit@npm:1.25.1"
   dependencies:
@@ -12259,7 +12259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-svelte@npm:^2.33.1":
+"eslint-plugin-svelte@npm:^2.33.2":
   version: 2.33.2
   resolution: "eslint-plugin-svelte@npm:2.33.2"
   dependencies:
@@ -12394,7 +12394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.49.0, eslint@npm:^8.50.0, eslint@npm:^8.7.0":
+"eslint@npm:^8.50.0, eslint@npm:^8.7.0":
   version: 8.50.0
   resolution: "eslint@npm:8.50.0"
   dependencies:
@@ -19945,7 +19945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.55.0, sass@npm:^1.66.1, sass@npm:^1.68.0":
+"sass@npm:^1.55.0, sass@npm:^1.68.0":
   version: 1.68.0
   resolution: "sass@npm:1.68.0"
   dependencies:
@@ -20875,7 +20875,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-check@npm:^3.5.1, svelte-check@npm:^3.5.2":
+"svelte-check@npm:^3.5.2":
   version: 3.5.2
   resolution: "svelte-check@npm:3.5.2"
   dependencies:
@@ -20981,7 +20981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^4.2.0, svelte@npm:^4.2.1":
+"svelte@npm:^4.2.1":
   version: 4.2.1
   resolution: "svelte@npm:4.2.1"
   dependencies:
