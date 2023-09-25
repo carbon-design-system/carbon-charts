@@ -58,7 +58,7 @@
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
 		"vite-plugin-dts": "^3.5.4",
-		"vue-tsc": "^1.8.13"
+		"vue-tsc": "^1.8.14"
 	},
 	"publishConfig": {
 		"access": "public",
