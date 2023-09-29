@@ -107,18 +107,18 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.19.0",
-		"@carbon/styles": "^1.38.0",
+		"@carbon/styles": "^1.39.0",
 		"@carbon/themes": "^11.25.0",
 		"@rollup/plugin-replace": "^5.0.2",
-		"@rushstack/eslint-patch": "^1.4.0",
+		"@rushstack/eslint-patch": "^1.5.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.1",
 		"@types/d3-cloud": "^1.2.6",
 		"@types/d3-sankey": "^0.12.2",
 		"@types/lodash-es": "^4.17.9",
 		"@types/topojson": "^3.2.4",
-		"@typescript-eslint/eslint-plugin": "^6.7.2",
-		"@typescript-eslint/parser": "^6.7.2",
+		"@typescript-eslint/eslint-plugin": "^6.7.3",
+		"@typescript-eslint/parser": "^6.7.3",
 		"concurrently": "^8.2.1",
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^8.50.0",
@@ -130,8 +130,8 @@
 		"typedoc": "^0.25.1",
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
-		"vite-plugin-dts": "^3.5.4",
-		"vitest": "^0.34.5"
+		"vite-plugin-dts": "^3.6.0",
+		"vitest": "^0.34.6"
 	},
 	"publishConfig": {
 		"access": "public"
