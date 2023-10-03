@@ -32,20 +32,46 @@ export class ChartModelCartesian extends ChartModel {
 			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition
 		}
 
-		Object.keys(scales).forEach((scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
-			const position = scales[scale]
-			if (cartesianScales.scales[position]) {
-				scales[scale] = {
-					position: position,
-					label: cartesianScales.getScaleLabel(position),
-					identifier: getProperty(options, 'axes', position, 'mapsTo')
+		Object.keys(scales).forEach(
+			(scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
+				const position = scales[scale]
+				if (cartesianScales.scales[position]) {
+					scales[scale] = {
+						position: position,
+						label: cartesianScales.getScaleLabel(position),
+						identifier: getProperty(options, 'axes', position, 'mapsTo')
+					}
+				} else {
+					scales[scale] = null
 				}
-			} else {
-				scales[scale] = null
 			}
-		})
+		)
 
 		return scales
+	}
+
+	dateFormatter(value: any) {
+		const options = this.getOptions()
+		const valueFormatter = getProperty(options, 'dateFormatter')
+
+		if (valueFormatter) {
+			return valueFormatter(value)
+		}
+
+		if (typeof value.getTime === 'function') {
+			return format(value, 'MMM d, yyyy')
+		}
+
+		try {
+			// it's a correct ISO format Date string
+			if (typeof value === 'string' && /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(value)) {
+				return format(Date.parse(value), 'MMM d, yyyy')
+			}
+		} catch (e) {
+			// not a valid ISO format string
+		}
+
+		return value.toLocaleString()
 	}
 
 	getTabularDataArray() {
@@ -60,7 +86,7 @@ export class ChartModelCartesian extends ChartModel {
 		const domainScaleType = cartesianScales.getDomainAxisScaleType()
 		let domainValueFormatter: any
 		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
+			domainValueFormatter = (d: any) => this.dateFormatter(d)
 		}
 
 		const result = [
@@ -86,14 +112,14 @@ export class ChartModelCartesian extends ChartModel {
 							datum[secondaryDomain.identifier] === null
 								? '&ndash;'
 								: datum[secondaryDomain.identifier]
-						]
+					  ]
 					: []),
 				...(secondaryRange
 					? [
 							datum[secondaryRange.identifier] === null || isNaN(datum[secondaryRange.identifier])
 								? '&ndash;'
 								: datum[secondaryRange.identifier]
-						]
+					  ]
 					: [])
 			])
 		]
