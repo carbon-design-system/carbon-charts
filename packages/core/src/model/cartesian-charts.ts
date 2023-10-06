@@ -50,9 +50,9 @@ export class ChartModelCartesian extends ChartModel {
 		return scales
 	}
 
-	dateFormatter(value: any) {
+	modelDateFormatter(value: any) {
 		const options = this.getOptions()
-		const valueFormatter = getProperty(options, 'dateFormatter')
+		const valueFormatter = getProperty(options, 'model', 'dateFormatter')
 
 		if (valueFormatter) {
 			return valueFormatter(value)
@@ -86,7 +86,7 @@ export class ChartModelCartesian extends ChartModel {
 		const domainScaleType = cartesianScales.getDomainAxisScaleType()
 		let domainValueFormatter: any
 		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d: any) => this.dateFormatter(d)
+			domainValueFormatter = (d: any) => this.modelDateFormatter(d)
 		}
 
 		const result = [
