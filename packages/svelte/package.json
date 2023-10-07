@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-svelte",
-	"version": "1.13.4",
+	"version": "1.13.5",
 	"description": "Carbon Charts component library for Svelte",
 	"scripts": {
 		"postinstall": "carbon-telemetry collect --install",
@@ -60,7 +60,7 @@
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"prettier-plugin-svelte": "^3.0.3",
-		"publint": "^0.2.2",
+		"publint": "^0.2.3",
 		"storybook": "^7.4.5",
 		"svelte": "^4.2.1",
 		"svelte-check": "^3.5.2",

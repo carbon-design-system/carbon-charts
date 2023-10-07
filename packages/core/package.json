@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.13.4",
+	"version": "1.13.5",
 	"description": "Carbon Charts component library",
 	"module": "./dist/index.mjs",
 	"main": "./dist/umd/bundle.umd.js",
@@ -107,10 +107,10 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.19.0",
-		"@carbon/styles": "^1.38.0",
+		"@carbon/styles": "^1.39.0",
 		"@carbon/themes": "^11.25.0",
 		"@rollup/plugin-replace": "^5.0.2",
-		"@rushstack/eslint-patch": "^1.4.0",
+		"@rushstack/eslint-patch": "^1.5.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.1",
 		"@types/d3-cloud": "^1.2.6",
@@ -130,8 +130,8 @@
 		"typedoc": "^0.25.1",
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
-		"vite-plugin-dts": "^3.5.4",
-		"vitest": "^0.34.5"
+		"vite-plugin-dts": "^3.6.0",
+		"vitest": "^0.34.6"
 	},
 	"publishConfig": {
 		"access": "public"
