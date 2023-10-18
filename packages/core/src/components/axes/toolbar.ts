@@ -77,7 +77,6 @@ export class Toolbar extends Component {
 				.enter()
 				.append('div')
 				.attr('class', 'toolbar-control cds--overflow-menu cds--overflow-menu')
-				.attr('role', 'button')
 
 			const self = this
 			enteringToolbarControls
