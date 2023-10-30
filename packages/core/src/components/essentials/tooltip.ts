@@ -142,9 +142,12 @@ export class Tooltip extends Component {
 
 				return item
 			})
+		} else {
+			return items.map((item: any) => {
+				item.value = item.value ? this.valueFormatter(item.value, item.label) : item.value
+				return item
+			})
 		}
-
-		return items
 	}
 
 	getTooltipHTML(formattedItems: any) {
@@ -192,10 +195,10 @@ export class Tooltip extends Component {
 
 		return value.toLocaleString()
 	}
-	
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.getOptions()
 		const isTooltipEnabled = getProperty(options, 'tooltip', 'enabled')
@@ -229,7 +232,9 @@ export class Tooltip extends Component {
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
-			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type') as 'graph_view' | 'slider_view'
+			const zoombarType = getProperty(options, 'zoomBar', 'top', 'type') as
+				| 'graph_view'
+				| 'slider_view'
 			const zoombarHeight = zoomBarConfigs.height[zoombarType]
 
 			// if the mouse position is from event (ruler)
