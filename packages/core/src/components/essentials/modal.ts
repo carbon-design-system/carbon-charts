@@ -23,6 +23,15 @@ export class Modal extends Component {
 	}
 
 	handleShowModal = () => {
+		this.modal
+			.attr('data-modal', true)
+			.attr('class', 'cds--modal cds--modal')
+			.attr('role', 'dialog')
+			.attr('aria-modal', true)
+			.attr('aria-labelledby', 'modal-title')
+			.attr('aria-describedby', 'modal-description')
+			.attr('tabindex', -1)
+
 		this.modal.html(this.getModalHTML())
 		this.modal
 			.select('div.cds--modal-footer button.cds--btn')
@@ -30,6 +39,21 @@ export class Modal extends Component {
 
 		const modalInstance = CarbonModalComponent.create(this.modal.node())
 		modalInstance.show()
+
+		//catches when modal gets closed
+		document.addEventListener('modal-hidden', this.handleHideModal)
+	}
+
+	handleHideModal = () => {
+		this.modal
+			.attr('role', null)
+			.attr('aria-modal', null)
+			.attr('aria-labelledby', null)
+			.attr('aria-describedby', null)
+			.attr('tabindex', null)
+
+		//removes event listener when modal is closed
+		document.removeEventListener('modal-hidden', this.handleHideModal)
 	}
 
 	addEventListeners() {
@@ -99,27 +123,24 @@ export class Modal extends Component {
 		</div>`
 	}
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.model.getOptions() as ChartOptions
 		if (!this.isEventListenerAdded) {
 			// Grab the tooltip element
-			const holder = select(this.services.domUtils.getHolder()) as Selection<HTMLDivElement, any, Element, any>
+			const holder = select(this.services.domUtils.getHolder()) as Selection<
+				HTMLDivElement,
+				any,
+				Element,
+				any
+			>
 			const chartprefix = getProperty(options, 'style', 'prefix') as string
 			this.modal = DOMUtils.appendOrSelect(holder, `div.${carbonPrefix}--${chartprefix}--modal`)
 
 			this.addEventListeners()
 			this.isEventListenerAdded = true
-			this.modal
-				.attr('data-modal', true)
-				.attr('class', 'cds--modal cds--modal')
-				.attr('role', 'dialog')
-				.attr('aria-modal', true)
-				.attr('aria-labelledby', 'modal-title')
-				.attr('aria-describedby', 'modal-description')
-				.attr('tabindex', -1)
 		}
 	}
 
