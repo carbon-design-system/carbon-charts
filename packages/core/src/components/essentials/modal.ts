@@ -25,7 +25,7 @@ export class Modal extends Component {
 	handleShowModal = () => {
 		this.modal
 			.attr('data-modal', true)
-			.attr('class', 'cds--modal cds--modal')
+			.attr('class', 'cds--modal')
 			.attr('role', 'dialog')
 			.attr('aria-modal', true)
 			.attr('aria-labelledby', 'modal-title')
