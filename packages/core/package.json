@@ -107,7 +107,7 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.20.1",
-		"@carbon/styles": "1.42.0",
+		"@carbon/styles": "1.42.1",
 		"@carbon/themes": "^11.27.1",
 		"@rollup/plugin-replace": "^5.0.5",
 		"@rushstack/eslint-patch": "^1.5.1",

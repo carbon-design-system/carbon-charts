@@ -3297,7 +3297,7 @@ __metadata:
     "@carbon/colors": "npm:^11.20.1"
     "@carbon/import-once": "npm:^10.7.0"
     "@carbon/layout": "npm:^11.20.1"
-    "@carbon/styles": "npm:1.42.0"
+    "@carbon/styles": "npm:1.42.1"
     "@carbon/telemetry": "npm:~0.1.0"
     "@carbon/themes": "npm:^11.27.1"
     "@carbon/utils-position": "npm:^1.1.4"
@@ -3429,16 +3429,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:1.42.0":
-  version: 1.42.0
-  resolution: "@carbon/styles@npm:1.42.0"
+"@carbon/styles@npm:1.42.1":
+  version: 1.42.1
+  resolution: "@carbon/styles@npm:1.42.1"
   dependencies:
     "@carbon/colors": "npm:^11.20.0"
     "@carbon/feature-flags": "npm:^0.16.0"
     "@carbon/grid": "npm:^11.21.0"
     "@carbon/layout": "npm:^11.20.0"
     "@carbon/motion": "npm:^11.16.0"
-    "@carbon/themes": "npm:^11.27.0"
+    "@carbon/themes": "npm:^11.27.1"
     "@carbon/type": "npm:^11.25.0"
     "@ibm/plex": "npm:6.0.0-next.6"
   peerDependencies:
@@ -3446,7 +3446,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 5ac0dcae9695cb933ca5d7d4937471643e071db9d6d82736da159142c4c1e2516b9d8bf118110e7395c4c8b98c7653b9577a00f75336bf6a357b5687a69fe883
+  checksum: de8895e91be978c257110be0e0018b7db78b14250023ceef5f8f6594e6b8155926f51be5587375fc09cccedc240e89eddc6ce8c79420ba28d405bb3ff97708df
   languageName: node
   linkType: hard
 
@@ -3459,7 +3459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.27.0, @carbon/themes@npm:^11.27.1":
+"@carbon/themes@npm:^11.27.1":
   version: 11.27.1
   resolution: "@carbon/themes@npm:11.27.1"
   dependencies:
