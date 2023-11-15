@@ -24,7 +24,7 @@
   "engines": {
     "node": "^18.18.0"
   },
-  "packageManager": "yarn@4.0.1",
+  "packageManager": "yarn@4.0.2",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
     "@babel/core": "^7.23.3",
