@@ -8,6 +8,7 @@
 		"paths": {
       "@/*": ["src/*"]
     },
+		"types": ["node"],
 		"strict": false, // TODO: 1140 errors in 63 files
 		// TODO: Add explicit initializers or declare modifier to class properties to update this project's TypeScript from 3.7 to 5.x.
 		// See https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier.
