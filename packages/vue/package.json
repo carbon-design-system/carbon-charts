@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.13.6",
+	"version": "1.13.8",
 	"description": "Carbon Charts component library for Vue",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -40,25 +40,26 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/telemetry": "~0.1.0",
-		"vue": "^3.3.4"
+		"vue": "^3.3.8"
 	},
 	"devDependencies": {
-		"@rushstack/eslint-patch": "^1.5.0",
+		"@rushstack/eslint-patch": "^1.5.1",
 		"@stackblitz/sdk": "^1.9.0",
-		"@types/d3": "^7.4.1",
+		"@types/d3": "^7.4.3",
+		"@vitejs/plugin-vue": "^4.4.1",
 		"@vue/eslint-config-prettier": "^8.0.0",
 		"@vue/eslint-config-typescript": "^12.0.0",
-		"concurrently": "^8.2.1",
+		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"eslint": "^8.50.0",
-		"eslint-plugin-vue": "^9.17.0",
-		"storybook": "^7.4.5",
+		"eslint": "^8.53.0",
+		"eslint-plugin-vue": "^9.18.1",
+		"storybook": "^7.5.3",
 		"typescript": "^5.2.2",
-		"vite": "^4.4.9",
-		"vite-plugin-dts": "^3.6.0",
-		"vue-tsc": "^1.8.15"
+		"vite": "^4.5.0",
+		"vite-plugin-dts": "^3.6.3",
+		"vue-tsc": "^1.8.22"
 	},
 	"publishConfig": {
 		"access": "public",

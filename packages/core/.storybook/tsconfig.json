@@ -5,8 +5,8 @@
 		"types": ["node", "vite/client"],
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
-		"declaration": false,
 		"noImplicitAny": false,
+		"rootDir": "../",
 		"strict": false,
 		"skipLibCheck": true
 	},

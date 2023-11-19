@@ -103,6 +103,7 @@ export type {
 	// Formats
 	TickFormats,
 	TimeIntervalFormats,
+	TimeIntervalNames,
 	// Other
 	Coordinates,
 	LegendItem,
