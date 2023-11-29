@@ -9,6 +9,10 @@
 !.yarn/sdks
 !.yarn/versions
 
+# Lerna
+.nx/cache
+
+# Published Storybook websites for GitHub Pages
 pages/
 
 # Package-level
