@@ -9,6 +9,8 @@
 !.yarn/sdks
 !.yarn/versions
 
+.nx/cache
+
 pages/
 
 # Package-level
