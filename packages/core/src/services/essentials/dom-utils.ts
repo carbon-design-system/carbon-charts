@@ -23,14 +23,12 @@ export interface getSVGElementSizeOptions {
 }
 
 export class DOMUtils extends Service {
-	private chartID = '' // initialized in the constructor
+	// This value will be lazy loaded upon the first time it is
+	// requested.
+	private chartID = ''
 
 	constructor(model: ChartModel, services: any) {
 		super(model, services)
-
-		// An id should be assigned at the creation of each instance
-		// so component ids can be unique.
-		this.initializeID()
 	}
 
 	static getHTMLElementSize(element: HTMLElement) {
@@ -225,6 +223,10 @@ export class DOMUtils extends Service {
 	}
 
 	getChartID() {
+		if (!this.chartID) {
+			this.initializeID()
+		}
+
 		return this.chartID
 	}
 
