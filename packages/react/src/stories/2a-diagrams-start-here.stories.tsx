@@ -1,4 +1,3 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { User, Wikis, Debug } from '@carbon/icons-react'
 import { buildElbowPathString, ChartTheme, type Coordinates } from '@carbon/charts'
