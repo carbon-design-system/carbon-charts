@@ -16,23 +16,13 @@ export default defineConfig({
 			external: ['react', 'react-dom'],
 			output: {
 				globals: {
-					react: 'React'
+					react: 'React',
+					'react-dom': 'ReactDOM'
 				},
 				exports: 'named'
 			}
 		}
 	},
-	optimizeDeps: {
-		disabled: true,
-		include: ['@carbon/charts', '@carbon/icons-react'],
-		exclude: [
-			// Will cause errors when running storybook if in the include list
-			'@carbon/telemetry'
-		]
-	},
-	resolve: {
-		alias: {
-		}
-	},
+
 	plugins: [react(), dts()]
 })
