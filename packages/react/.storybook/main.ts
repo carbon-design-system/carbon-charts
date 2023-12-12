@@ -13,7 +13,6 @@ const config: StorybookConfig = {
 				actions: false
 			}
 		},
-		"@storybook/addon-onboarding",
     "@storybook/addon-interactions"
 	],
 
