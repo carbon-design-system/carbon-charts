@@ -54,7 +54,7 @@ You may see circular dependency warnings for `d3` packages. These can be safely 
 
 ## Usage
 
-Styles must be imported from `@carbon/charts-svelte`.
+Styles must be imported from `@carbon/charts-svelte/styles.css`.
 
 ```js
 import '@carbon/charts-svelte/styles.css'
@@ -86,11 +86,6 @@ import '@carbon/charts-svelte/styles.css'
 		}
 	}} />
 ```
-
-### Theming
-
-`@carbon/styles` uses
-[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for dynamic, client-side theming. Care should be exercised as the styles apply to the HTML body.
 
 ### Dispatched events
 
