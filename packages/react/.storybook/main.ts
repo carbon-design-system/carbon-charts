@@ -25,9 +25,9 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 
-	typescript: {
-		reactDocgen: 'react-docgen'
-	},
+	// typescript: {
+	// 	reactDocgen: 'react-docgen'
+	// },
 
 	async viteFinal(config: InlineConfig) {
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
@@ -35,13 +35,15 @@ const config: StorybookConfig = {
 			build: {
 				chunkSizeWarningLimit: 1800,
 				rollupOptions: {
+					// treeshake: false,
+					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
           external: [
-            /sb-preview\/runetime.js$/,
+						/\/sb-preview\/runtime.js$/ // does not prevent error
           ]
         }
 			},
 			optimizeDeps: {
-				include: [
+				include: [ // prevents "Can't find variable: dc" when running locally
 					'@carbon/charts'
 				]
 			}
