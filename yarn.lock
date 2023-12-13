@@ -2248,7 +2248,7 @@ __metadata:
     "@carbon/telemetry": "npm:~0.1.0"
     "@stackblitz/sdk": "npm:^1.9.0"
     "@sveltejs/adapter-auto": "npm:^2.1.1"
-    "@sveltejs/kit": "npm:^1.30.1"
+    "@sveltejs/kit": "npm:^1.30.2"
     "@sveltejs/package": "npm:^2.2.3"
     concurrently: "npm:^8.2.2"
     d3: "npm:^7.8.5"
@@ -5946,9 +5946,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^1.30.1":
-  version: 1.30.1
-  resolution: "@sveltejs/kit@npm:1.30.1"
+"@sveltejs/kit@npm:^1.30.2":
+  version: 1.30.2
+  resolution: "@sveltejs/kit@npm:1.30.2"
   dependencies:
     "@sveltejs/vite-plugin-svelte": "npm:^2.5.0"
     "@types/cookie": "npm:^0.5.1"
@@ -5968,7 +5968,7 @@ __metadata:
     vite: ^4.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 612fb8602115187e3ebe0ec19941436d5fb93e397808a5bbe1cecb05221d2f1fc46d9ce10c730638cf0e3e4bbfd1c2623d014fb3c8913af08c22e802abda7695
+  checksum: ed130b77bb589df4579fe115f3bef894fa57ec8b395617dc49836d4ea905451bb185c2d4d649f022f72a5a897358f17c9e3326e5d3bfef12152c4bb3c037122c
   languageName: node
   linkType: hard
 
