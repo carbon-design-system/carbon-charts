@@ -25,9 +25,9 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 
-	// typescript: {
-	// 	reactDocgen: 'react-docgen'
-	// },
+	typescript: {
+		reactDocgen: 'react-docgen'
+	},
 
 	async viteFinal(config: InlineConfig) {
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
