@@ -35,7 +35,7 @@ const config: StorybookConfig = {
 			build: {
 				chunkSizeWarningLimit: 1800,
 				rollupOptions: {
-					// treeshake: false,
+					treeshake: false,
 					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
           external: [
 						/\/sb-preview\/runtime.js$/ // does not prevent error
