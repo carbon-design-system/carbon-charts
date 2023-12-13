@@ -6,14 +6,12 @@ const config: StorybookConfig = {
 	staticDirs: ['../../core/.storybook/assets'],
 
 	addons: [
-		"@storybook/addon-links",
 		{
 			name: '@storybook/addon-essentials',
 			options: {
 				actions: false
 			}
-		},
-    "@storybook/addon-interactions"
+		}
 	],
 
 	framework: {
@@ -25,9 +23,9 @@ const config: StorybookConfig = {
 		autodocs: 'tag'
 	},
 
-	typescript: {
-		reactDocgen: 'react-docgen'
-	},
+	// typescript: {
+	// 	reactDocgen: 'react-docgen'
+	// },
 
 	async viteFinal(config: InlineConfig) {
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
@@ -35,7 +33,7 @@ const config: StorybookConfig = {
 			build: {
 				chunkSizeWarningLimit: 1800,
 				rollupOptions: {
-					treeshake: false,
+					// treeshake: false,
 					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
           external: [
 						/\/sb-preview\/runtime.js$/ // does not prevent error
