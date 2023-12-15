@@ -121,10 +121,10 @@
 		"jsdom": "^23.0.1",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.69.5",
-		"storybook": "~7.6.4",
+		"storybook": "~7.6.5",
 		"typedoc": "^0.25.4",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.8",
+		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.6.4",
 		"vitest": "^1.0.4"
 	},

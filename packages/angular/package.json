@@ -56,7 +56,7 @@
 		"@carbon/icon-helpers": "^10.45.1",
 		"@carbon/icons": "^11.32.0",
 		"@stackblitz/sdk": "^1.9.0",
-		"@storybook/angular": "^7.6.4",
+		"@storybook/angular": "^7.6.5",
 		"@types/carbon__icon-helpers": "^10.7.4",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
@@ -65,7 +65,7 @@
 		"downlevel-dts": "^0.11.0",
 		"ng-packagr": "^16.2.3",
 		"rxjs": "~7.8.1",
-		"storybook": "~7.6.4",
+		"storybook": "~7.6.5",
 		"style-loader": "^3.3.3",
 		"typescript": "~5.1.6",
 		"zone.js": "~0.14.2"

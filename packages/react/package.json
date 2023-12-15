@@ -35,7 +35,7 @@
 		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
 		"build:demo": "yarn demo:mdx && NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --debug",
 		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
+		"storybook": "VITE_CJS_TRACE=true storybook dev -p 9006",
 		"start": "yarn storybook",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
@@ -65,9 +65,9 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.69.5",
-		"storybook": "~7.6.4",
+		"storybook": "~7.6.5",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.8",
+		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.6.4"
 	},
 	"publishConfig": {
