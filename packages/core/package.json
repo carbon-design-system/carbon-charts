@@ -107,7 +107,7 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.20.1",
-		"@carbon/styles": "1.45.0",
+		"@carbon/styles": "1.46.0",
 		"@carbon/themes": "^11.28.0",
 		"@rollup/plugin-replace": "^5.0.5",
 		"@stackblitz/sdk": "^1.9.0",

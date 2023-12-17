@@ -54,7 +54,7 @@
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
 		"@carbon/icon-helpers": "^10.45.1",
-		"@carbon/icons": "^11.32.0",
+		"@carbon/icons": "^11.33.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@storybook/angular": "^7.6.5",
 		"@types/carbon__icon-helpers": "^10.7.4",
