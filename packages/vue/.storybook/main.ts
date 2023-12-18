@@ -1,3 +1,4 @@
+import { mergeConfig} from 'vite'
 import type { StorybookConfig } from '@storybook/vue3-vite'
 
 const config: StorybookConfig = {
@@ -6,6 +7,10 @@ const config: StorybookConfig = {
 		'../src/**/*.stories.@(js|jsx|ts|tsx)'
 	],
 	staticDirs: ['../../core/.storybook/assets'],
+	framework: {
+		name: '@storybook/vue3-vite',
+		options: {}
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -14,23 +19,17 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-	viteFinal: (config) => {
-		if (config.build) {
-      config.build.chunkSizeWarningLimit = 1900
-		}
-		// Disable declaration generation for Storybook
-		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
-		return config
-	},
-	framework: {
-		name: '@storybook/vue3-vite',
-		options: {}
-	},
 	core: {
-    // disableTelemetry: true
+    disableTelemetry: true
   },
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
+	},
+	viteFinal: (config) => {
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !=='vite:dts')
+		return mergeConfig(config, {
+			build: { chunkSizeWarningLimit: 1900 }
+		})
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

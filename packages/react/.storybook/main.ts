@@ -1,35 +1,12 @@
-// import type { StorybookConfig } from '@storybook/react-vite' // Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
-import type { StorybookConfig } from '@storybook/react-webpack5' // Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
+import { mergeConfig, type InlineConfig } from 'vite'
+import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
-	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.tsx'],
+	stories: ['../src/stories/**/*.stories.tsx', '../src/stories/**/*.mdx'],
 	staticDirs: ['../../core/.storybook/assets'],
-
-	// Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
-	// viteFinal: (config) => {
-	// 	if (config.build) {
-	// 		config.build.chunkSizeWarningLimit = 1800
-	// 	}
-
-	// 	// Remove vite:dts - no need for declarations
-	// 	config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts' /* || plugin!.name !== 'storybook:react-docgen-plugin'*/)
-
-	// 	return config
-	// },
-
-	// Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
-	webpackFinal: async (config) => {
-		config.module?.rules?.push({
-			test: /\.scss$/,
-			use: ['style-loader', 'css-loader']
-		})
-		config.performance = {
-			hints: 'warning',
-			maxAssetSize: 1024 * 1024 * 2.5, // 2.5 MB
-			maxEntrypointSize: 1024 * 1024 * 5 // 5 MB
-		}
-
-		return config
+	framework: {
+		name: '@storybook/react-vite',
+		options: {}
 	},
 	addons: [
 		{
@@ -39,13 +16,36 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-	framework: {
-		// name: '@storybook/react-vite', // Uncomment once https://github.com/storybookjs/storybook/issues/22435 is resolved
-		name: '@storybook/react-webpack5', // Remove once https://github.com/storybookjs/storybook/issues/22435 is resolved
-		options: {}
-	},
+	core: {
+    disableTelemetry: true
+  },
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
+	},
+	typescript: {
+		reactDocgen: false // Required to overcome https://github.com/storybookjs/storybook/issues/25247
+	},
+	async viteFinal(config) {
+		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
+		const newConfig: InlineConfig = mergeConfig(config, {
+			build: {
+				chunkSizeWarningLimit: 1800,
+				// Leave commented properties here until Storybook has a solution for this non-blocking error
+				// rollupOptions: {
+					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
+          // external: [
+					// 	/\/sb-preview\/runtime.js$/ // does not prevent error
+          // ]
+        // }
+			},
+			optimizeDeps: {
+				include: [
+					'@carbon/charts'
+				],
+				exclude: ['@carbon/telemetry']
+			}
+		})
+		return newConfig
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

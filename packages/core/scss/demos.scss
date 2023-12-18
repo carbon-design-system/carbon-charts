@@ -1,10 +1,9 @@
+@use '@carbon/styles/scss/config' with (
+  $css--font-face: false // Don't load Plex from ~@ibm/plex
+);
+
 @use 'globals'; // Load Carbon Charts global variables
 @use 'index'; // Load Carbon Charts styles
-
-$css--font-face: false; // Don't load Plex
-$css--default-type: false; // Do not include default type
-$css--reset: false; // Do not include reset CSS
-
 @use '@carbon/styles';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/theme';

@@ -22,7 +22,10 @@ export default defineConfig({
 			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['d3', 'd3-cloud', 'd3-sankey'] // d3-cloud and d3-sankey are not included in d3
+			external: ['d3', 'd3-cloud', 'd3-sankey'], // d3-cloud and d3-sankey are not included in d3
+			output: {
+				exports: 'named'
+			}
 		}
 	},
 	optimizeDeps: {
