@@ -202,3 +202,58 @@ Customizable options (specific to chart type) can be found
 ## TypeScript support
 
 Svelte version 3.31 or greater is required to use this library with TypeScript. Svelte 4.x+ is recommended.
+
+### Enums and types
+
+For your convenience, enums and types from `@carbon/charts` are re-exported from
+`@carbon/charts-svelte`.
+
+```ts
+import { ScaleTypes, type BarChartOptions } from '@carbon/charts-svelte'
+
+const options: BarChartOptions = {
+	title: 'Simple bar (discrete)',
+	height: '400px',
+	axes: {
+		left: { mapsTo: 'value' },
+		bottom: {
+			mapsTo: 'group',
+			scaleType: ScaleTypes.LABELS
+		}
+	}
+}
+```
+
+### Component type
+
+Use the `ComponentType` utility type from `svelte` to extract the component type for chart
+components.
+
+```ts
+import { onMount, type ComponentType } from 'svelte'
+import type { BarChartSimple } from '@carbon/charts-svelte'
+
+let component: ComponentType<BarChartSimple> = null
+
+onMount(async () => {
+	component = (await import('@carbon/charts-svelte')).BarChartSimple
+})
+```
+
+### Component props
+
+Use the `ComponentProps` utility type from `svelte` to extract the props for chart components.
+
+You can then use an
+[indexed access type](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) to
+extract types for individual properties.
+
+```ts
+import { type ComponentProps } from 'svelte'
+import { BarChartSimple } from '@carbon/charts-svelte'
+
+type ChartProps = ComponentProps<BarChartSimple>
+
+// Indexed access type to access the type of the `chart` property
+let chart: ChartProps['chart'] = null
+```
