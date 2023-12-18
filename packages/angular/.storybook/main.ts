@@ -17,7 +17,7 @@ const config: StorybookConfig = {
 	},
 	logLevel: 'error',
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
 	},
 	webpackFinal: async config => {
 		config?.module?.rules?.push({

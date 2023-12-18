@@ -8,17 +8,12 @@ export default defineConfig({
 		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: 'src/index.ts',
-			name: 'ChartsReact',
-			formats: ['es', 'umd'],
+			formats: ['es'],
 			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			external: ['react', 'react-dom'],
 			output: {
-				globals: {
-					react: 'React',
-					'react-dom': 'ReactDOM'
-				},
 				exports: 'named'
 			}
 		}

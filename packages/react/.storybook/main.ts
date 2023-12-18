@@ -4,7 +4,10 @@ import type { StorybookConfig } from '@storybook/react-vite'
 const config: StorybookConfig = {
 	stories: ['../src/stories/**/*.stories.tsx', '../src/stories/**/*.mdx'],
 	staticDirs: ['../../core/.storybook/assets'],
-
+	framework: {
+		name: '@storybook/react-vite',
+		options: {}
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -13,32 +16,21 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-
-	// core: {
-  //   builder: '@storybook/builder-vite'
-  // },
-
-	framework: {
-		name: '@storybook/react-vite',
-		options: {}
-	},
-
+	core: {
+    disableTelemetry: true
+  },
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
 	},
-
-	// typescript: {
-	// 	reactDocgen: 'react-docgen'
-	// },
-
+	typescript: {
+		reactDocgen: false // Required to overcome https://github.com/storybookjs/storybook/issues/25247
+	},
 	async viteFinal(config: InlineConfig) {
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
 		const newConfig: InlineConfig = mergeConfig(config, {
 			build: {
 				chunkSizeWarningLimit: 1800,
-				// emptyOutDir: true,
 				// rollupOptions: {
-					// treeshake: false,
 					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
           // external: [
 					// 	/\/sb-preview\/runtime.js$/ // does not prevent error
@@ -46,15 +38,14 @@ const config: StorybookConfig = {
         // }
 			},
 			optimizeDeps: {
-				include: [ // prevents "Can't find variable: dc" only when running locally
+				include: [
 					'@carbon/charts'
-				]
+				],
+				exclude: ['@carbon/telemetry']
 			}
 		})
-		// console.log('Vite Config', newConfig)
 		return newConfig
 	},
-
 	features: {
 		storyStoreV7: false // required for storiesOf API
 	}
