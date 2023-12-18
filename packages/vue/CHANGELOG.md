@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.11 (2023-12-18)
+
+### Bug Fixes
+
+- **svelte:** strongly type dispatched events
+  ([#1703](https://github.com/carbon-design-system/carbon-charts/issues/1703))
+  ([1a37ef2](https://github.com/carbon-design-system/carbon-charts/commit/1a37ef2be692400b257446f62d1350899e27dd59))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.10 (2023-12-18)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.9 (2023-12-06)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.8 (2023-11-15)
 
 **Note:** Version bump only for package @carbon/charts-vue

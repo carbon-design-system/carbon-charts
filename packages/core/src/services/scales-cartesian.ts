@@ -1,4 +1,14 @@
-import { extent, max, scaleBand, scaleLinear, scaleTime, scaleLog, type ScaleTime, type ScaleBand, type ScaleLinear } from 'd3'
+import {
+	extent,
+	max,
+	scaleBand,
+	scaleLinear,
+	scaleTime,
+	scaleLog,
+	type ScaleTime,
+	type ScaleBand,
+	type ScaleLinear
+} from 'd3'
 import {
 	differenceInYears,
 	addYears,
@@ -26,7 +36,10 @@ import { Service } from './service'
 import { AxisPositions, CartesianOrientations, ScaleTypes } from '@/interfaces/enums'
 import { ThresholdOptions } from '@/interfaces/components'
 
-export type ScaleFunction = ScaleTime<number, number, never> | ScaleBand<string> | ScaleLinear<number, number, never>
+export type ScaleFunction =
+	| ScaleTime<number, number, never>
+	| ScaleBand<string>
+	| ScaleLinear<number, number, never>
 
 export class CartesianScales extends Service {
 	protected scaleTypes = {
@@ -36,7 +49,8 @@ export class CartesianScales extends Service {
 		left: null as ScaleTypes
 	}
 
-	protected scales = { // null or function
+	protected scales = {
+		// null or function
 		top: null as ScaleLinear<number, number, never>,
 		right: null as ScaleLinear<number, number, never>,
 		bottom: null as ScaleLinear<number, number, never>,
@@ -68,7 +82,7 @@ export class CartesianScales extends Service {
 		return this.domainAxisPosition
 	}
 
-	getRangeAxisPosition({ datum = null, groups = null }: { datum?: any, groups?: any } = {}) {
+	getRangeAxisPosition({ datum = null, groups = null }: { datum?: any; groups?: any } = {}) {
 		if (this.dualAxes) {
 			const options = this.model.getOptions()
 			const { groupMapsTo } = options.data
@@ -130,8 +144,12 @@ export class CartesianScales extends Service {
 		const axisPositions: AxisPositions[] = Object.keys(AxisPositions).map(
 			(axisPositionKey: string) => AxisPositions[axisPositionKey as keyof typeof AxisPositions]
 		)
-		axisPositions.forEach((axisPosition) => {
-			this.scales[axisPosition] = this.createScale(axisPosition) as ScaleLinear<number, number, never>
+		axisPositions.forEach(axisPosition => {
+			this.scales[axisPosition] = this.createScale(axisPosition) as ScaleLinear<
+				number,
+				number,
+				never
+			>
 		})
 	}
 
@@ -250,7 +268,7 @@ export class CartesianScales extends Service {
 		const possibleXAxisPositions = [AxisPositions.BOTTOM, AxisPositions.TOP]
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
-			(position) => possibleXAxisPositions.indexOf(position) > -1
+			position => possibleXAxisPositions.indexOf(position) > -1
 		)
 	}
 
@@ -259,7 +277,7 @@ export class CartesianScales extends Service {
 		const possibleYAxisPositions = [AxisPositions.LEFT, AxisPositions.RIGHT]
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
-			(position) => possibleYAxisPositions.indexOf(position) > -1
+			position => possibleYAxisPositions.indexOf(position) > -1
 		)
 	}
 
@@ -470,7 +488,7 @@ export class CartesianScales extends Service {
 			const { bins } = this.model.getBinConfigurations()
 			const stackKeys = this.model.getStackKeys({ bins })
 
-			return [stackKeys[0].split('-')[0], stackKeys[stackKeys.length - 1].split('-')[1]]
+			return [stackKeys[0].split(':')[0], stackKeys[stackKeys.length - 1].split(':')[1]]
 		}
 
 		const displayData = this.model.getDisplayData()

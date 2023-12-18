@@ -1,21 +1,24 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
 	root: true,
+	env: { browser: true, es2020: true },
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-		'plugin:react/recommended',
+		'plugin:react-hooks/recommended',
 		'prettier',
 		'plugin:storybook/recommended'
 	],
+	ignorePatterns: ['dist', '.eslintrc.cjs'],
 	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module'
-	},
-	plugins: ['react', '@typescript-eslint', 'prettier'],
+	plugins: ['react-refresh', 'prettier'],
+	rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+  },
 	settings: {
     react: {
       version: '16.0'

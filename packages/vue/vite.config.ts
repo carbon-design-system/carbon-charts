@@ -9,16 +9,12 @@ export default defineConfig({
 		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: 'src/index.ts',
-			name: 'ChartsVue',
-			formats: ['es', 'umd'],
+			formats: ['es'],
 			fileName: format => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			external: ['vue'],
 			output: {
-				globals: {
-					vue: 'Vue'
-				},
 				exports: 'named'
 			}
 		}

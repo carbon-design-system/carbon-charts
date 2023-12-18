@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef, type MouseEvent } from 'react'
 import { storiesOf, type Args } from '@storybook/react'
 import sdk from '@stackblitz/sdk'
 import { color, ChartTheme } from '@carbon/charts'
@@ -54,7 +54,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					}
 				}, [demoRef.current, chartRef.current])
 
-				const openSandbox = (event: React.MouseEvent<HTMLAnchorElement>) => {
+				const openSandbox = (event: MouseEvent<HTMLAnchorElement>) => {
 					event.preventDefault()
 					sdk.openProject(demo.code.react, { newWindow: true })
 				}

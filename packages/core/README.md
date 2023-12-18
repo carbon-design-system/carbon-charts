@@ -2,7 +2,7 @@
 
 Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on D3.js, a peer dependency.
 
-The required styles should be imported from `@carbon/charts/styles.css`. Additional documentation is provided in the Storybook demos.
+The required styles should be imported from `@carbon/charts/dist/styles.css`. Additional documentation is provided in the Storybook demos.
 
 ## Getting started
 
