@@ -150,7 +150,7 @@ In this example, an event listener is attached to the `BarChartSimple` component
 ```svelte
 <script>
 	import '@carbon/charts-svelte/styles.css'
-	import { onDestroy, onMount } from 'svelte'
+	import { onMount } from 'svelte'
 	import { BarChartSimple } from '@carbon/charts-svelte'
 
 	let chart
@@ -160,16 +160,12 @@ In this example, an event listener is attached to the `BarChartSimple` component
 	}
 
 	onMount(() => {
-		// do something
-	})
+		chart.services.events.addEventListener('bar-mouseover', barMouseOver)
 
-	onDestroy(() => {
-		if (chart) {
-			chart.services.events.removeEventListener('bar-mouseover', barMouseOver)
+		return () => {
+			chart?.services.events.removeEventListener('bar-mouseover', barMouseOver)
 		}
 	})
-
-	$: if (chart) chart.services.events.addEventListener('bar-mouseover', barMouseOver)
 </script>
 
 <BarChartSimple
