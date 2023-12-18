@@ -14,7 +14,13 @@
 	export let ref: HTMLDivElement | null = null // reference to chart's div so parent can manipulate it
 	export let id = `chart-${Math.random().toString(36)}` // id for chart holder element
 
-	const dispatch = createEventDispatcher()
+	interface DispatchedEvents {
+		load: null
+		update: { data: ChartTabularData; options: ChartOptions }
+		destroy: null
+	}
+
+	const dispatch = createEventDispatcher<DispatchedEvents>()
 
 	onMount(() => {
 		try {
