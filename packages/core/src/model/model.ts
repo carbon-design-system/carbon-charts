@@ -1,11 +1,6 @@
+import { format } from 'date-fns'
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
-import {
-	cloneDeep,
-	fromPairs,
-	groupBy,
-	merge,
-	uniq,
-} from 'lodash-es'
+import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
 import { color as colorConfigs, legend as legendConfigs } from '@/configuration'
 import { histogram as histogramConfigs } from '@/configuration-non-customizable'
@@ -46,6 +41,34 @@ export class ChartModel {
 		this.services = services
 	}
 
+	formatTable(headingLabels, tabelData) {
+		const options = this.getOptions()
+		const headingFormatter = getProperty(options, 'modal', 'headingFormatter')
+		const valueFormatter = getProperty(options, 'modal', 'valueFormatter')
+		const tableFormatter = getProperty(options, 'modal', 'tableFormatter')
+		const { cartesianScales } = this.services
+		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
+		let domainValueFormatter: any
+		if (domainScaleType === ScaleTypes.TIME) {
+			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
+		}
+		const result = [
+			headingFormatter && typeof headingFormatter === 'function'
+				? headingFormatter(headingLabels)
+				: headingLabels,
+			...tabelData.map((data: (string | number)[]) => {
+				const dataCopy = [...data]
+				if (domainValueFormatter) {
+					dataCopy[1] = domainValueFormatter(dataCopy[1]) as string
+				}
+				return valueFormatter && typeof valueFormatter === 'function'
+					? valueFormatter(data)
+					: dataCopy
+			})
+		]
+		return tableFormatter && typeof tableFormatter === 'function' ? tableFormatter(result) : result
+	}
+
 	getAllDataFromDomain(groups?: any) {
 		if (!this.getData()) {
 			return null
@@ -63,7 +86,7 @@ export class ChartModel {
 		}
 
 		if (axesOptions) {
-			Object.keys(axesOptions).forEach((axis) => {
+			Object.keys(axesOptions).forEach(axis => {
 				const mapsTo = axesOptions[axis].mapsTo
 				const scaleType = axesOptions[axis].scaleType
 				// make sure linear/log values are numbers
@@ -216,7 +239,7 @@ export class ChartModel {
 		const histogramData = []
 
 		// Group data by bin
-		bins.forEach((bin) => {
+		bins.forEach(bin => {
 			const key = `${bin.x0}-${bin.x1}`
 			const aggregateDataByGroup = this.aggregateBinDataByGroup(bin)
 
@@ -278,7 +301,7 @@ export class ChartModel {
 			}
 		})
 
-		return Object.keys(groupedData).map((groupName) => ({
+		return Object.keys(groupedData).map(groupName => ({
 			name: groupName,
 			data: groupedData[groupName]
 		}))
@@ -600,7 +623,7 @@ export class ChartModel {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName)
 		let className = configs.originalClassName
 		configs.classNameTypes.forEach(
-			(type) =>
+			type =>
 				(className = configs.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
@@ -669,11 +692,12 @@ export class ChartModel {
 	}
 
 	getTabularDataArray(): ChartTabularData {
+		//apply tableFormatter
 		return []
 	}
 
 	exportToCSV() {
-		const data = this.getTabularDataArray().map((row) =>
+		const data = this.getTabularDataArray().map(row =>
 			row.map((column: any) => `"${column === '&ndash;' ? '–' : column}"`)
 		)
 
@@ -684,22 +708,18 @@ export class ChartModel {
 			csvString += i < data.length ? csvData + '\n' : csvData
 		})
 
-		const options = this.getOptions();
+		const options = this.getOptions()
 
-		let fileName = 'myChart';
-		const customFilename = getProperty(
-			options,
-			'fileDownload',
-			'fileName'
-		);
+		let fileName = 'myChart'
+		const customFilename = getProperty(options, 'fileDownload', 'fileName')
 
 		if (typeof customFilename === 'function') {
-			fileName = customFilename('csv');
+			fileName = customFilename('csv')
 		} else if (typeof customFilename === 'string') {
-			fileName = customFilename;
+			fileName = customFilename
 		}
 
-		this.services.files.downloadCSV(csvString, `${fileName}.csv`);
+		this.services.files.downloadCSV(csvString, `${fileName}.csv`)
 	}
 
 	protected getTabularData(data: any) {
@@ -766,7 +786,7 @@ export class ChartModel {
 				? ACTIVE
 				: DISABLED
 
-		return uniqueDataGroups.map((groupName) => ({
+		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
 			status: getStatus(groupName)
 		}))
@@ -783,7 +803,7 @@ export class ChartModel {
 		const options = this.getOptions()
 		const userProvidedScale = getProperty(options, 'color', 'scale')
 
-		Object.keys(userProvidedScale).forEach((dataGroup) => {
+		Object.keys(userProvidedScale).forEach(dataGroup => {
 			if (!this.allDataGroups.includes(dataGroup)) {
 				console.warn(`"${dataGroup}" does not exist in data groups.`)
 			}
@@ -793,12 +813,10 @@ export class ChartModel {
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
 		 */
-		const providedDataGroups = this.allDataGroups.filter(
-			(dataGroup) => userProvidedScale[dataGroup]
-		)
+		const providedDataGroups = this.allDataGroups.filter(dataGroup => userProvidedScale[dataGroup])
 
 		providedDataGroups.forEach(
-			(dataGroup) => (this.colorScale[dataGroup] = userProvidedScale[dataGroup])
+			dataGroup => (this.colorScale[dataGroup] = userProvidedScale[dataGroup])
 		)
 	}
 

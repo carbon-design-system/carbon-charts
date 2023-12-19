@@ -16,15 +16,14 @@ export class GaugeChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-
-		const result = [
-			['Group', 'Value'],
+		const headingLabels = ['Group', 'Value']
+		const tabelData = [
 			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'].toLocaleString()
 			])
 		]
 
-		return result
+		return super.formatTable(headingLabels, tabelData)
 	}
 }
