@@ -47,9 +47,9 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.3",
-		"@sveltejs/package": "^2.2.3",
+		"@sveltejs/adapter-auto": "^3.0.1",
+		"@sveltejs/kit": "^2.0.4",
+		"@sveltejs/package": "^2.2.4",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
