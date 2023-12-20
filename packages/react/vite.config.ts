@@ -9,15 +9,11 @@ export default defineConfig({
 		lib: {
 			entry: 'src/index.ts',
 			formats: ['es'],
-			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
+			fileName: 'index.mjs'
 		},
 		rollupOptions: {
-			external: ['react', 'react-dom'],
-			output: {
-				exports: 'named'
-			}
+			external: ['react', 'react-dom']
 		}
 	},
-
 	plugins: [react(), dts()]
 })

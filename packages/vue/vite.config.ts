@@ -10,18 +10,11 @@ export default defineConfig({
 		lib: {
 			entry: 'src/index.ts',
 			formats: ['es'],
-			fileName: format => `index.${format === 'es' ? 'm' : ''}js`
+			fileName: 'index.mjs'
 		},
 		rollupOptions: {
-			external: ['vue'],
-			output: {
-				exports: 'named'
-			}
+			external: ['vue']
 		}
-	},
-	optimizeDeps: {
-		include: ['@carbon/charts'],
-		exclude: ['@carbon/telemetry']
 	},
 	resolve: {
 		alias: {
