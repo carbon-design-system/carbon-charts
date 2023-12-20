@@ -2,6 +2,7 @@
 	"name": "@carbon/charts",
 	"version": "1.13.13",
 	"description": "Carbon Charts component library",
+	"type": "module",
 	"module": "./dist/index.mjs",
 	"main": "./dist/umd/bundle.umd.js",
 	"types": "./dist/index.d.ts",

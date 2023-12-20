@@ -7,6 +7,7 @@
 		"./styles.css": "./styles.css"
 	},
 	"sideEffects": false,
+	"type": "module",
 	"scripts": {
 		"ng": "ng",
 		"postinstall": "carbon-telemetry collect --install",
