@@ -1,5 +1,5 @@
 import { min } from 'd3'
-import { format } from 'date-fns'
+import { format } from 'date-fns/format'
 
 import { getProperty } from '@/tools'
 import { TimeIntervalFormats, TimeIntervalNames, TimeScaleOptions } from '@/interfaces/axis-scales'

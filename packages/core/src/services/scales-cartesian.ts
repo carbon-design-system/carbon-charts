@@ -9,26 +9,24 @@ import {
 	type ScaleBand,
 	type ScaleLinear
 } from 'd3'
-import {
-	differenceInYears,
-	addYears,
-	subYears,
-	differenceInMonths,
-	addMonths,
-	subMonths,
-	differenceInDays,
-	addDays,
-	subDays,
-	differenceInHours,
-	addHours,
-	subHours,
-	differenceInMinutes,
-	addMinutes,
-	subMinutes,
-	differenceInSeconds,
-	subSeconds,
-	addSeconds
-} from 'date-fns'
+import { differenceInYears } from 'date-fns/differenceInYears'
+import { addYears } from 'date-fns/addYears'
+import { subYears } from 'date-fns/subYears'
+import { differenceInMonths } from 'date-fns/differenceInMonths'
+import { addMonths } from 'date-fns/addMonths'
+import { subMonths } from 'date-fns/subMonths'
+import { differenceInDays } from 'date-fns/differenceInDays'
+import { addDays } from 'date-fns/addDays'
+import { subDays } from 'date-fns/subDays'
+import { differenceInHours } from 'date-fns/differenceInHours'
+import { addHours } from 'date-fns/addHours'
+import { subHours } from 'date-fns/subHours'
+import { differenceInMinutes } from 'date-fns/differenceInMinutes'
+import { addMinutes } from 'date-fns/addMinutes'
+import { subMinutes } from 'date-fns/subMinutes'
+import { differenceInSeconds } from 'date-fns/differenceInSeconds'
+import { subSeconds } from 'date-fns/subSeconds'
+import { addSeconds } from 'date-fns/addSeconds'
 import { flatten, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { axis as axisConfigs } from '@/configuration'

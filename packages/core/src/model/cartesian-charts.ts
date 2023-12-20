@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format } from 'date-fns/format'
 import { cloneDeep, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { ChartModel } from './model'
