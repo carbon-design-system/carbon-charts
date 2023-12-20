@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.13 (2023-12-20)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.12 (2023-12-18)
 
 **Note:** Version bump only for package @carbon/charts-react
