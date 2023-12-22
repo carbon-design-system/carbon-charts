@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.13.14",
+	"version": "1.13.15",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
