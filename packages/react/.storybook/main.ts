@@ -39,9 +39,6 @@ const config: StorybookConfig = {
         // }
 			},
 			optimizeDeps: {
-				include: [
-					'@carbon/charts'
-				],
 				exclude: ['@carbon/telemetry']
 			}
 		})
