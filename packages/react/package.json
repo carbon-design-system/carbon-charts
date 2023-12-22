@@ -3,19 +3,13 @@
 	"version": "1.13.14",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
-	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"types": "./dist/index.d.ts",
-			"browser": {
-				"import": "./dist/index.mjs",
-				"require": "./dist/index.js"
-			},
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
+			"import": "./dist/index.mjs"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"

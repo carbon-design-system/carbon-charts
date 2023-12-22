@@ -48,7 +48,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.0",
+    "eslint-plugin-prettier": "^5.1.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.6.15",
@@ -66,11 +66,6 @@
     "storybook": "~7.6.6",
     "vite": "^5.0.10",
     "vue": "^3.3.13"
-  },
-  "resolutions": {
-    "@joshwooding/vite-plugin-react-docgen-typescript": "^0.3.1",
-    "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.8"
   },
   "husky": {
     "hooks": {

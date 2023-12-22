@@ -27,7 +27,7 @@ const config: StorybookConfig = {
 	},
 	async viteFinal(config) {
 		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
-		const newConfig: InlineConfig = mergeConfig(config, {
+		return mergeConfig(config, {
 			build: {
 				chunkSizeWarningLimit: 1800,
 				// Leave commented properties here until Storybook has a solution for this non-blocking error
@@ -39,13 +39,9 @@ const config: StorybookConfig = {
         // }
 			},
 			optimizeDeps: {
-				include: [
-					'@carbon/charts'
-				],
 				exclude: ['@carbon/telemetry']
 			}
 		})
-		return newConfig
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API
