@@ -2315,7 +2315,7 @@ __metadata:
     d3: "npm:^7.8.5"
     d3-cloud: "npm:^1.2.7"
     d3-sankey: "npm:^0.12.3"
-    date-fns: "npm:^3.0.5"
+    date-fns: "npm:^3.0.6"
     downlevel-dts: "npm:^0.11.0"
     html-to-image: "npm:^1.11.11"
     jsdom: "npm:^23.0.1"
@@ -10609,10 +10609,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "date-fns@npm:3.0.5"
-  checksum: 25667a6810f8e5d31aef59952809ac3be40c7da518752864cca179854d804b9a0d9334f85cce9bf71fe0e43cfda3378db2ed1dd7571f908e6eaeba4237b03466
+"date-fns@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "date-fns@npm:3.0.6"
+  checksum: ca6ac81aca623fd6d12a43da59cc216e13a75a2eecf7fac692654524fca625e073f5cd36951ef0deac9621ead564eb06b4c3723f77b34e86f21ca3c0c3b32ff7
   languageName: node
   linkType: hard
 
