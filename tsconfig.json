@@ -1,4 +1,4 @@
-// Common tsconfig for IDEs
+// Common tsconfig for IDEs except for angular and svelte
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
@@ -22,5 +22,5 @@
     "sourceMap": true,
     "strict": true
   },
-  "exclude": ["**/.svelte-kit/[!ambient.d.ts]**"],
+  "exclude": ["packages/angular", "packages/svelte"],
 }
