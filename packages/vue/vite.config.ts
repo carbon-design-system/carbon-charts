@@ -9,11 +9,13 @@ export default defineConfig({
 		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: 'src/index.ts',
-			formats: ['es'],
-			fileName: 'index.mjs'
+			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['vue']
+			external: ['vue'],
+			output: {
+				entryFileNames: '[name].mjs'
+			}
 		}
 	},
 	resolve: {
