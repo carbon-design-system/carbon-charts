@@ -22,5 +22,5 @@
     "sourceMap": true,
     "strict": true
   },
-  "exclude": ["packages/angular", "packages/svelte"],
+  "exclude": ["packages/angular", "packages/svelte"]
 }
