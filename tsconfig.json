@@ -21,5 +21,6 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true
-  }
+  },
+  "exclude": ["**/.svelte-kit/[!ambient.d.ts]**"],
 }
