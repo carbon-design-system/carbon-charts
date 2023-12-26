@@ -5,6 +5,9 @@ import replace from '@rollup/plugin-replace'
 export default defineConfig({
 	build: {
 		rollupOptions: {
+			output: {
+				entryFileNames: 'bundle.umd.js'
+			},
 			plugins: [
 				replace({
           'process.env.NODE_ENV': JSON.stringify('production'),
