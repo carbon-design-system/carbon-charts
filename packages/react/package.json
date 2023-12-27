@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.13.15",
+	"version": "1.13.16",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -52,7 +52,7 @@
 		"@types/react": "^18.2.45",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.2.1",
-		"classnames": "^2.3.2",
+		"classnames": "^2.4.0",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
@@ -62,7 +62,7 @@
 		"storybook": "~7.6.6",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
-		"vite-plugin-dts": "^3.6.4"
+		"vite-plugin-dts": "^3.7.0"
 	},
 	"publishConfig": {
 		"access": "public"

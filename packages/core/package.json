@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.13.15",
+	"version": "1.13.16",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -126,7 +126,7 @@
 		"typedoc": "^0.25.4",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
-		"vite-plugin-dts": "^3.6.4",
+		"vite-plugin-dts": "^3.7.0",
 		"vitest": "^1.1.0"
 	},
 	"publishConfig": {

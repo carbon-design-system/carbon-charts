@@ -24,7 +24,7 @@ export default defineConfig({
 		rollupOptions: {
 			external: ['d3', 'd3-cloud', 'd3-sankey'], // latter two not included in d3
 			output: {
-				entryFileNames: '[name].mjs', // force mjs extension for ESM build
+				entryFileNames: '[name].mjs',
         chunkFileNames: '[name]-[hash].mjs',
 			}
 		}
