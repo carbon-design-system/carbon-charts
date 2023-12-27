@@ -11,8 +11,8 @@ const CSS_VERIFIER_ELEMENT_CLASSNAME = 'DONT_STYLE_ME_css_styles_verifier'
 
 // Functions like validateAndSetDimensions() may return strings or numbers
 export interface Dimensions {
-  height: number
-  width: number
+	height: number
+	width: number
 }
 
 export interface getSVGElementSizeOptions {
@@ -171,7 +171,10 @@ export class DOMUtils extends Service {
 		return finalDimensions
 	}
 
-	static appendOrSelect(parent: Selection<SVGElement | HTMLDivElement, any, Element, any>, query: string) {
+	static appendOrSelect(
+		parent: Selection<SVGElement | HTMLDivElement, any, Element, any>,
+		query: string
+	) {
 		const selection = parent.select(`${query}`)
 
 		if (selection.empty()) {
@@ -295,34 +298,29 @@ export class DOMUtils extends Service {
 		holderSelection.classed('filled', true)
 
 		toJpeg(this.getMainContainer(), {
-				quality: 1,
-				// Remove toolbar
-				filter: (node: any) => {
-					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
-						return false
-					}
-
-					return true
-				}
-			})
-			.then(function (dataUrl: string) {
-				let fileName = 'myChart'
-				const customFilename = getProperty(
-					options,
-					'fileDownload',
-					'fileName'
-				)
-
-				if (typeof customFilename === 'function') {
-					fileName = customFilename('jpg')
-				} else if (typeof customFilename === 'string') {
-					fileName = customFilename;
+			quality: 1,
+			// Remove toolbar
+			filter: (node: any) => {
+				if (node.classList && node.classList.contains('cds--cc--toolbar')) {
+					return false
 				}
 
-				self.services.files?.downloadImage(dataUrl, `${fileName}.jpg`)
+				return true
+			}
+		}).then(function (dataUrl: string) {
+			let fileName = 'myChart'
+			const customFilename = getProperty(options, 'fileDownload', 'fileName')
 
-				holderSelection.classed('filled', false)
-			})
+			if (typeof customFilename === 'function') {
+				fileName = customFilename('jpg')
+			} else if (typeof customFilename === 'string') {
+				fileName = customFilename
+			}
+
+			self.services.files?.downloadImage(dataUrl, `${fileName}.jpg`)
+
+			holderSelection.classed('filled', false)
+		})
 	}
 
 	exportToPNG() {
@@ -333,29 +331,25 @@ export class DOMUtils extends Service {
 		const holderSelection = select(holder)
 		holderSelection.classed('filled', true)
 
-			toPng(this.getMainContainer(), {
-				quality: 1,
-				// Remove toolbar
-				filter: (node: HTMLElement) => {
-					if (node.classList && node.classList.contains('cds--cc--toolbar')) {
-						return false
-					}
-
-					return true
+		toPng(this.getMainContainer(), {
+			quality: 1,
+			// Remove toolbar
+			filter: (node: HTMLElement) => {
+				if (node.classList && node.classList.contains('cds--cc--toolbar')) {
+					return false
 				}
-			})
+
+				return true
+			}
+		})
 			.then(function (dataUrl: string) {
 				let fileName = 'myChart'
-				const customFilename = getProperty(
-					options,
-					'fileDownload',
-					'fileName'
-				)
+				const customFilename = getProperty(options, 'fileDownload', 'fileName')
 
 				if (typeof customFilename === 'function') {
 					fileName = customFilename('png')
 				} else if (typeof customFilename === 'string') {
-					fileName = customFilename;
+					fileName = customFilename
 				}
 
 				self.services.files?.downloadImage(dataUrl, `${fileName}.png`)

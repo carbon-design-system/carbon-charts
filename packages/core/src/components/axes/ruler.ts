@@ -29,9 +29,9 @@ export class Ruler extends Component {
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
 
@@ -54,8 +54,8 @@ export class Ruler extends Component {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 
@@ -82,7 +82,7 @@ export class Ruler extends Component {
 			this.pointsWithinLine &&
 			pointsWithinLine.length === this.pointsWithinLine.length &&
 			pointsWithinLine.map((point: any) => point.domainValue).join() ===
-				this.pointsWithinLine.map((point) => point.domainValue).join()
+				this.pointsWithinLine.map(point => point.domainValue).join()
 		) {
 			this.pointsWithinLine = pointsWithinLine
 			return this.services.events.dispatchEvent(Events.Tooltip.MOVE, {

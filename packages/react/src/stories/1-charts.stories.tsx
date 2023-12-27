@@ -32,7 +32,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
-
 		groupStories.add(
 			demo.title,
 			(args: Args) => {
@@ -61,7 +60,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 
 				return (
 					<div className="container" ref={demoRef}>
-
 						<h3>
 							<b>Component:</b>
 							<span className="cds--tag cds--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>

@@ -49,8 +49,8 @@ export class MeterChartModel extends ChartModel {
 		const boundedValue = getProperty(options, 'meter', 'proportional')
 			? totalValue
 			: totalValue > 100
-			? 100
-			: totalValue
+				? 100
+				: totalValue
 
 		// user needs to supply ranges
 		const allRanges = getProperty(options, 'meter', 'status', 'ranges')

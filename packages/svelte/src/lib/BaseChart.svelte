@@ -47,7 +47,7 @@
 		if (chart) {
 			dispatch('destroy')
 			// Almost the same as core's Chart.destroy() but without getting rid of the chart holder
-			chart.components.forEach((component) => component.destroy())
+			chart.components.forEach(component => component.destroy())
 			chart.model.set({ destroyed: true }, { skipUpdate: true })
 			chart = null
 		}

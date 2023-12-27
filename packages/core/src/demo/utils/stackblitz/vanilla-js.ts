@@ -4,16 +4,14 @@ import { version } from '../package-versions'
 import { objectToString } from './object-to-string'
 
 export function buildVanillaJsExample(demo: Demo): Project {
+	const dependencies: Record<string, string> = {
+		'@carbon/charts': version.carbonCharts,
+		d3: version.d3,
+		'd3-cloud': version.d3Cloud,
+		'd3-sankey': version.d3Sankey
+	}
 
-  const dependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
-    d3: version.d3,
-    'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey
-  }
-
-  const indexHtml =
-`<html>
+	const indexHtml = `<html>
 <head>
   <title>Carbon Charts Vanilla JavaScript Example</title>
   <meta charset="UTF-8" />
@@ -41,8 +39,7 @@ export function buildVanillaJsExample(demo: Demo): Project {
 </body>
 </html>`
 
-  const instantiateForGeo =
-`/* Disclaimer: Data only used for demo purposes - not an accurate representation of world map */
+	const instantiateForGeo = `/* Disclaimer: Data only used for demo purposes - not an accurate representation of world map */
 
 async function loadTopoData() {
   try {
@@ -61,42 +58,40 @@ async function loadTopoData() {
 loadTopoData()
 `
 
-  const isGeoDemo = demo.chartType.vanilla == 'ExperimentalChoropleth'
+	const isGeoDemo = demo.chartType.vanilla == 'ExperimentalChoropleth'
 
-  const instantiateNormally =
-`const chartHolder = document.getElementById('app')
+	const instantiateNormally = `const chartHolder = document.getElementById('app')
 new ${demo.chartType.vanilla}(chartHolder, {
 	data,
 	options
 })`
 
-  const indexJs =
-`
+	const indexJs = `
 import { ${demo.chartType.vanilla} } from '@carbon/charts'
 import options from './options.js'
 import data from './data.js'
 import '@carbon/charts/styles.css'
 
-${ isGeoDemo ? instantiateForGeo: instantiateNormally}
+${isGeoDemo ? instantiateForGeo : instantiateNormally}
 `
 
-  const packageJson = {
-    name: 'carbon-charts-vanilla-js-example',
-    description: 'Carbon Charts Vanilla JavaScript Example',
-    version: '0.0.0',
-    dependencies
-  }
+	const packageJson = {
+		name: 'carbon-charts-vanilla-js-example',
+		description: 'Carbon Charts Vanilla JavaScript Example',
+		version: '0.0.0',
+		dependencies
+	}
 
-  return {
-    template: 'javascript' as ProjectTemplate,
-    title: 'Carbon Charts Vanilla JavaScript Example',
-    dependencies,
-    files: {
-      'data.js': objectToString(demo.data),
-      'index.html': indexHtml,
-      'index.js': indexJs,
-      'options.js': objectToString(demo.options),
-      'package.json': JSON.stringify(packageJson, null, 2)
-    }
-  }
+	return {
+		template: 'javascript' as ProjectTemplate,
+		title: 'Carbon Charts Vanilla JavaScript Example',
+		dependencies,
+		files: {
+			'data.js': objectToString(demo.data),
+			'index.html': indexHtml,
+			'index.js': indexJs,
+			'options.js': objectToString(demo.options),
+			'package.json': JSON.stringify(packageJson, null, 2)
+		}
+	}
 }

@@ -3,12 +3,7 @@ import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '@/t
 import { boxplot as boxplotConfigs } from '@/configuration'
 import { BoxplotChartModel } from '@/model/boxplot'
 import { Component } from '@/components/component'
-import {
-	CartesianOrientations,
-	ColorClassNameTypes,
-	Events,
-	RenderTypes
-} from '@/interfaces/enums'
+import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
 
 export class Boxplot extends Component {

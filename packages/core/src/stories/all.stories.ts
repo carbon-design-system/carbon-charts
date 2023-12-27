@@ -3,17 +3,13 @@ import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@/interfaces/enums'
 import * as ChartComponents from '@/charts'
 import { color } from '@/configuration-non-customizable'
-import  { type Demo, type DemoGroup, storybookDemoGroups } from '@/demo/charts'
-import {
-	addControls,
-	addOtherVersions,
-} from '@/demo/utils/story-widgets'
+import { type Demo, type DemoGroup, storybookDemoGroups } from '@/demo/charts'
+import { addControls, addOtherVersions } from '@/demo/utils/story-widgets'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100
 
 const introStories = storiesOf('Docs', module)
-
 
 // Loop through the demos for the group
 introStories.add(

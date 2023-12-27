@@ -10,8 +10,8 @@ export class BinnedRuler extends Ruler {
 	renderType = RenderTypes.SVG
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 
@@ -32,7 +32,12 @@ export class BinnedRuler extends Ruler {
 		const ruler = DOMUtils.appendOrSelect(svg, 'g.ruler').attr('aria-label', 'ruler')
 		const rulerLine = DOMUtils.appendOrSelect(ruler, 'line.ruler-line')
 
-		const dataPointElements = svg.selectAll('[role=graphics-symbol]') as Selection<SVGGraphicsElement, any, Element, any>
+		const dataPointElements = svg.selectAll('[role=graphics-symbol]') as Selection<
+			SVGGraphicsElement,
+			any,
+			Element,
+			any
+		>
 
 		const elementsToHighlight = dataPointElements.filter((d: any) => {
 			if (

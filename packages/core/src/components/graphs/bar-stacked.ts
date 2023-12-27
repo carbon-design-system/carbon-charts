@@ -1,12 +1,7 @@
 import { select } from 'd3'
 import { generateSVGPathString, getProperty } from '@/tools'
 import { Bar } from './bar'
-import {
-	Events,
-	CartesianOrientations,
-	ColorClassNameTypes,
-	RenderTypes
-} from '@/interfaces/enums'
+import { Events, CartesianOrientations, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 

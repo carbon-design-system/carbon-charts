@@ -9,13 +9,13 @@ import type { GradientUtils } from '@/services/essentials/gradient-utils'
 import type { Zoom } from '@/services/zoom'
 
 export interface Services {
-  canvasZoom?: CanvasZoom,
-  cartesianScales?: CartesianScales,
-  curves?: Curves,
-  domUtils?: DOMUtils,
-  events?: Events,
-  files?: Files,
-  gradientUtils?: GradientUtils,
-  transitions?: Transitions,
-  zoom?: Zoom
+	canvasZoom?: CanvasZoom
+	cartesianScales?: CartesianScales
+	curves?: Curves
+	domUtils?: DOMUtils
+	events?: Events
+	files?: Files
+	gradientUtils?: GradientUtils
+	transitions?: Transitions
+	zoom?: Zoom
 }

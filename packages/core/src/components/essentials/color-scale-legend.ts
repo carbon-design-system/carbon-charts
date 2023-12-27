@@ -12,22 +12,19 @@ export class ColorScaleLegend extends Legend {
 	type = 'color-legend'
 	renderType = RenderTypes.SVG
 
-	private gradient_id =	`gradient-id-${Math.floor(Math.random() * 99999999999)}`
+	private gradient_id = `gradient-id-${Math.floor(Math.random() * 99999999999)}`
 	private chartType: string
 
 	constructor(model: ChartModel, services: any, configs?: any) {
-		super(model, services, configs);
-		this.chartType = configs.chartType;
+		super(model, services, configs)
+		this.chartType = configs.chartType
 	}
 
 	init() {
 		// Highlight correct circle on legend item hovers
 		if (this.chartType === 'heatmap') {
-			const eventsFragment = this.services.events;
-			eventsFragment.addEventListener(
-				Events.Axis.RENDER_COMPLETE,
-				this.handleAxisCompleteEvent
-			);
+			const eventsFragment = this.services.events
+			eventsFragment.addEventListener(Events.Axis.RENDER_COMPLETE, this.handleAxisCompleteEvent)
 		}
 	}
 
@@ -82,8 +79,8 @@ export class ColorScaleLegend extends Legend {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
@@ -93,12 +90,7 @@ export class ColorScaleLegend extends Legend {
 
 		const customColors = getProperty(options, 'color', 'gradient', 'colors')
 
-		const colorScaleType = getProperty(
-			options,
-			this.chartType,
-			'colorLegend',
-			'type'
-		)
+		const colorScaleType = getProperty(options, this.chartType, 'colorLegend', 'type')
 
 		let colorPairingOption = getProperty(options, 'color', 'pairing', 'option')
 
@@ -189,7 +181,9 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		// Align axes at the bottom of the rectangle and delete the domain line
-		axisElement.attr('transform', `translate(0,${legendConfigs.color.axisYTranslation})`).call(legendAxis)
+		axisElement
+			.attr('transform', `translate(0,${legendConfigs.color.axisYTranslation})`)
+			.call(legendAxis)
 
 		// Remove auto generated axis bottom line
 		axisElement.select('.domain').remove()
@@ -203,9 +197,7 @@ export class ColorScaleLegend extends Legend {
 			.select('g.tick:first-of-type text')
 			.style(
 				'text-anchor',
-				useDefaultBarWidth && this.chartType !== 'choropleth'
-					? 'middle'
-					: 'start'
+				useDefaultBarWidth && this.chartType !== 'choropleth' ? 'middle' : 'start'
 			)
 	}
 
@@ -272,11 +264,8 @@ export class ColorScaleLegend extends Legend {
 	destroy() {
 		if (this.chartType === 'heatmap') {
 			// Remove legend listeners
-			const eventsFragment = this.services.events;
-			eventsFragment.removeEventListener(
-				Events.Axis.RENDER_COMPLETE,
-				this.handleAxisCompleteEvent
-			)
+			const eventsFragment = this.services.events
+			eventsFragment.removeEventListener(Events.Axis.RENDER_COMPLETE, this.handleAxisCompleteEvent)
 		}
 	}
 }

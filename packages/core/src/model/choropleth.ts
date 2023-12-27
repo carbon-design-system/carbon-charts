@@ -45,11 +45,11 @@ export class ChoroplethModel extends ChartModel {
 				 *
 				 * May need to provide users with the option to pass in keys to create dictionary with
 				 */
-				options.geoData.objects.countries.geometries.forEach((country) => {
+				options.geoData.objects.countries.geometries.forEach(country => {
 					this._matrix[country.properties.NAME] = country
 				})
 
-				data.forEach((value) => {
+				data.forEach(value => {
 					if (this._matrix[value.name]) {
 						this._matrix[value.name]['value'] = value.value || null
 					} else {
@@ -71,7 +71,7 @@ export class ChoroplethModel extends ChartModel {
 
 		const result = [
 			['Country ID', 'Country Name', 'Value'],
-			...displayData.map((datum) => [
+			...displayData.map(datum => [
 				datum['id'] === null ? '&ndash;' : datum['id'],
 				datum['name'],
 				datum['value']

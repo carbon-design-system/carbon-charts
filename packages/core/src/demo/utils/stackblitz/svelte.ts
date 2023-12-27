@@ -4,23 +4,22 @@ import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildSvelteExample(demo: Demo): Project {
+	const devDependencies: Record<string, string> = {
+		'@carbon/charts-svelte': version.carbonCharts,
+		'@sveltejs/vite-plugin-svelte': version.svelteVite,
+		'@tsconfig/svelte': version.svelteTsConfig,
+		d3: version.d3,
+		'd3-cloud': version.d3Cloud,
+		'd3-sankey': version.d3Sankey,
+		svelte: version.svelte,
+		'svelte-check': version.svelteCheck,
+		tslib: version.tslib,
+		typescript: version.typescript,
+		vite: version.vite
+	}
 
-  const devDependencies: Record<string, string> = {
-    '@carbon/charts-svelte': version.carbonCharts,
-    '@sveltejs/vite-plugin-svelte': version.svelteVite,
-    '@tsconfig/svelte': version.svelteTsConfig,
-    d3: version.d3,
-    'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey,
-    'svelte': version.svelte,
-    'svelte-check': version.svelteCheck,
-    'tslib': version.tslib,
-    'typescript': version.typescript,
-    'vite': version.vite
-  }
-
-  let chartComponent = demo.chartType.vanilla
-  switch (chartComponent) {
+	let chartComponent = demo.chartType.vanilla
+	switch (chartComponent) {
 		case 'SimpleBarChart':
 			chartComponent = 'BarChartSimple'
 			break
@@ -32,8 +31,7 @@ export function buildSvelteExample(demo: Demo): Project {
 			break
 	}
 
-  const appSvelte =
-`<script lang="ts">
+	const appSvelte = `<script lang="ts">
 import { ${chartComponent} } from '@carbon/charts-svelte'
 import '@carbon/charts-svelte/styles.css'
 import options from './options.js'
@@ -43,8 +41,7 @@ import data from './data.js'
 <${chartComponent} {data} {options} style="padding:2rem;" />
 `
 
-  const mainTs =
-`import App from './App.svelte'
+	const mainTs = `import App from './App.svelte'
 
 const app = new App({
   target: document.getElementById('app')
@@ -53,15 +50,13 @@ const app = new App({
 export default app
 `
 
-  const viteEnvDts =
-`/// <reference types="svelte" />
+	const viteEnvDts = `/// <reference types="svelte" />
 /// <reference types="vite/client" />
 `
 
-  const stackBlitzRc = `{ "installDependencies": true, "startCommand": "yarn dev" }`
+	const stackBlitzRc = `{ "installDependencies": true, "startCommand": "yarn dev" }`
 
-  const indexHtml =
-`<!DOCTYPE html>
+	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -79,31 +74,28 @@ export default app
   </body>
 </html>`
 
+	const packageJson = {
+		name: 'carbon-charts-svelte-example',
+		description: 'Carbon Charts Svelte Example',
+		version: '0.0.0',
+		type: 'module',
+		scripts: {
+			dev: 'vite dev',
+			build: 'vite build',
+			preview: 'vite preview',
+			check: 'svelte-check --tsconfig ./tsconfig.json'
+		},
+		devDependencies
+	}
 
-  const packageJson = {
-    name: 'carbon-charts-svelte-example',
-    description: 'Carbon Charts Svelte Example',
-    version: '0.0.0',
-    type: 'module',
-    scripts: {
-      dev: 'vite dev',
-      build: 'vite build',
-      preview: 'vite preview',
-      check: 'svelte-check --tsconfig ./tsconfig.json'
-    },
-    devDependencies
-  }
-
-  const svelteConfigJs =
-`import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+	const svelteConfigJs = `import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 export default {
   preprocess: vitePreprocess()
 }
 `
 
-  const tsConfigJson =
-`{
+	const tsConfigJson = `{
 	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
 		"target": "ESNext",
@@ -118,8 +110,7 @@ export default {
 	"references": [{ "path": "./tsconfig.node.json" }]
 }`
 
-  const tsConfigNodeJson =
-`{
+	const tsConfigNodeJson = `{
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
@@ -129,8 +120,7 @@ export default {
   "include": ["vite.config.ts"]
 }`
 
-  const viteConfigTs =
-`import { defineConfig } from 'vite'
+	const viteConfigTs = `import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
@@ -138,22 +128,22 @@ export default defineConfig({
 })
 `
 
-  return {
-    template: 'node' as ProjectTemplate,
-    title: 'Carbon Charts Svelte Example',
-    files: {
-      'src/App.svelte': appSvelte,
-      'src/data.js': objectToString(demo.data),
-      'src/main.ts': mainTs,
-      'src/options.js': objectToString(demo.options),
-      'src/vite-env.d.ts': viteEnvDts,
-      '.stackblitzrc': stackBlitzRc,
-      'index.html': indexHtml,
-      'package.json': JSON.stringify(packageJson, null, 2),
-      'svelte.config.js': svelteConfigJs,
-      'tsconfig.json': tsConfigJson,
-      'tsconfig.node.json': tsConfigNodeJson,
-      'vite.config.ts': viteConfigTs
-    }
-  }
+	return {
+		template: 'node' as ProjectTemplate,
+		title: 'Carbon Charts Svelte Example',
+		files: {
+			'src/App.svelte': appSvelte,
+			'src/data.js': objectToString(demo.data),
+			'src/main.ts': mainTs,
+			'src/options.js': objectToString(demo.options),
+			'src/vite-env.d.ts': viteEnvDts,
+			'.stackblitzrc': stackBlitzRc,
+			'index.html': indexHtml,
+			'package.json': JSON.stringify(packageJson, null, 2),
+			'svelte.config.js': svelteConfigJs,
+			'tsconfig.json': tsConfigJson,
+			'tsconfig.node.json': tsConfigNodeJson,
+			'vite.config.ts': viteConfigTs
+		}
+	}
 }

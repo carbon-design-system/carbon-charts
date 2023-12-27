@@ -25,7 +25,7 @@ export class Threshold extends Component {
 
 		const thresholdData: any[] = []
 
-		Object.keys(axesOptions).forEach((axisPosition) => {
+		Object.keys(axesOptions).forEach(axisPosition => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
 				const axisOptions = axesOptions[axisPosition]
 

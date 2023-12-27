@@ -1,4 +1,4 @@
-@use "@carbon/styles/scss/theme";
+@use '@carbon/styles/scss/theme';
 @use '../globals';
 
 .#{globals.$prefix}--#{globals.$charts-prefix}--choropleth {
