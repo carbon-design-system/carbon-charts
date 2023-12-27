@@ -8,11 +8,13 @@ export default defineConfig({
 		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: 'src/index.ts',
-			formats: ['es'],
-			fileName: 'index.mjs'
+			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['react', 'react-dom']
+			external: ['react', 'react-dom'],
+			output: {
+				entryFileNames: '[name].mjs'
+			}
 		}
 	},
 	plugins: [react(), dts()]
