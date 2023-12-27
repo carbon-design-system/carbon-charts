@@ -158,7 +158,7 @@ export class Toolbar extends Component {
 			.classed('cds--overflow-menu-options__option--disabled', (d: any) => d.shouldBeDisabled())
 			.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 			.selectAll('button')
-			.text((d: any) => d.text)
+			.text((d: any) => d.title)
 	}
 
 	isOverflowMenuOpen() {
@@ -366,7 +366,6 @@ export class Toolbar extends Component {
 	getControlConfigs() {
 		const numberOfIcons = getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
 		const controls = getProperty(this.getOptions(), 'toolbar', 'controls')
-
 		const overflowSpecificControls: any[] = []
 		const buttonList: any[] = []
 		const overflowList: any[] = []
@@ -467,6 +466,12 @@ export class Toolbar extends Component {
 			!this.services.zoom.isEmptyState()
 
 		const displayData = this.model.getDisplayData()
+		const options = this.model.getOptions()
+		const { toolbarExportAsCSV, toolbarExportAsJPG, toolbarExportAsPNG } = getProperty(
+			options,
+			'locale',
+			'translations'
+		)
 
 		let controlConfig: any
 		switch (controlType) {
@@ -538,7 +543,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
-					title: 'Export as CSV',
+					title: toolbarExportAsCSV,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -549,7 +554,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
-					title: 'Export as PNG',
+					title: toolbarExportAsPNG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -560,7 +565,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
-					title: 'Export as JPG',
+					title: toolbarExportAsJPG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)

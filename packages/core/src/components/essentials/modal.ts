@@ -69,6 +69,8 @@ export class Modal extends Component {
 	getModalHTML() {
 		const options = this.model.getOptions()
 
+		const { toolbarTabularModalTitle } = getProperty(options, 'locale', 'translations')
+
 		const chartprefix = getProperty(options, 'style', 'prefix')
 
 		const tableArray = this.model.getTabularDataArray()
@@ -76,7 +78,7 @@ export class Modal extends Component {
 		return `
 		<div class="cds--modal-container cds--modal-container">
 			<div class="cds--modal-header cds--modal-header">
-				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">Tabular representation</p>
+				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">${toolbarTabularModalTitle}</p>
 
 				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="modal-description">${
 					options.title

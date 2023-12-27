@@ -249,7 +249,7 @@ export class Bullet extends Component {
 						animate
 					})
 				)
-				.attr('d', ({ datum: d, value }: { datum: any, value: any }) => {
+				.attr('d', ({ datum: d, value }: { datum: any; value: any }) => {
 					/*
 					 * Orientation support for horizontal/vertical bar charts
 					 * Determine coordinates needed for a vertical set of paths
@@ -336,14 +336,19 @@ export class Bullet extends Component {
 				})
 
 				const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
-				const matchingRangeIndex = (self.model as BulletChartModel).getMatchingRangeIndexForDatapoint(datum)
+				const matchingRangeIndex = (
+					self.model as BulletChartModel
+				).getMatchingRangeIndexForDatapoint(datum)
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					event,
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel || 'Group',
+							label:
+								getProperty(options, 'locale', 'translations', 'group') ||
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],

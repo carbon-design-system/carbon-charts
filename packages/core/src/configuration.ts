@@ -53,6 +53,7 @@ import {
 	StackedBarOptions,
 	ToolbarOptions,
 	ZoomBarsOptions,
+	Locale
 } from '@/interfaces/components'
 
 /*
@@ -68,6 +69,23 @@ const standardTruncationOptions = {
 	type: TruncationTypes.END_LINE,
 	threshold: 16,
 	numCharacter: 14
+}
+
+/**
+ * Locale options
+ */
+const locale: Locale = {
+	code: navigator.language, // read from browser's navigator.language
+	number: value => value.toLocaleString(navigator.language), // based on code property if specified
+	date: value => value.toLocaleDateString(navigator.language), // based on code property if specified
+	translations: {
+		group: 'Group',
+		total: 'Total',
+		toolbarTabularModalTitle: 'Tabular representation',
+		toolbarExportAsCSV: 'Export to CSV',
+		toolbarExportAsJPG: 'Export to JPG',
+		toolbarExportAsPNG: 'Export to PNG'
+	}
 }
 
 /**
@@ -179,6 +197,7 @@ const chart: BaseChartOptions = {
 	theme: ChartTheme.WHITE,
 	tooltip: baseTooltip,
 	legend,
+	locale,
 	style: {
 		prefix: 'cc'
 	},
@@ -229,9 +248,9 @@ const chart: BaseChartOptions = {
  */
 const thematicChart: ThematicChartOptions = merge({}, chart, {
 	thematic: {
-		projection: Projection.geoNaturalEarth1,
-	},
-});
+		projection: Projection.geoNaturalEarth1
+	}
+})
 
 /**
  * Options common to any chart with an axis
@@ -474,10 +493,10 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 const donutChart: DonutChartOptions = merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: (radius) => `${Math.min((radius / 100) * 24, 24)}px`,
-			titleFontSize: (radius) => `${Math.min((radius / 100) * 15, 15)}px`,
-			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
-			numberFormatter: (number) => Math.floor(number).toLocaleString()
+			numberFontSize: radius => `${Math.min((radius / 100) * 24, 24)}px`,
+			titleFontSize: radius => `${Math.min((radius / 100) * 15, 15)}px`,
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		},
 		alignment: Alignments.LEFT
 	}
@@ -520,7 +539,7 @@ const radarChart: RadarChartOptions = merge({}, chart, {
 		gridline: {
 			enabled: true
 		},
-		valueFormatter: (value) => (value !== null && value !== undefined ? value : 'N/A')
+		valueFormatter: value => (value !== null && value !== undefined ? value : 'N/A')
 	}
 } as RadarChartOptions)
 
@@ -589,10 +608,10 @@ const heatmapChart: HeatmapChartOptions = merge({}, chart, {
 const choroplethChart: ChoroplethChartOptions = merge({}, thematicChart, {
 	choropleth: {
 		colorLegend: {
-			type: 'linear',
-		},
-	},
-} as ChoroplethChartOptions);
+			type: 'linear'
+		}
+	}
+} as ChoroplethChartOptions)
 
 export const options = {
 	alluvialChart,
@@ -623,7 +642,7 @@ export const options = {
 	thematicChart,
 	treeChart,
 	treemapChart,
-	wordCloudChart,
+	wordCloudChart
 }
 
 export {

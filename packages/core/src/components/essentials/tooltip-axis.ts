@@ -72,8 +72,10 @@ export class AxisChartsTooltip extends Tooltip {
 				)
 			}
 
+			console.log(options)
+
 			items.push({
-				label: options.tooltip.groupLabel,
+				label: get(options, 'locale.translations.group') || get(options, 'tooltip.groupLabel'),
 				value: datum[groupMapsTo],
 				color: this.model.getFillColor(datum[groupMapsTo]),
 				class: this.model.getColorClassName({
@@ -113,7 +115,10 @@ export class AxisChartsTooltip extends Tooltip {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier()
 				items.push({
-					label: get(options, 'tooltip.totalLabel') || 'Total',
+					label:
+						get(options, 'locale.translations.total') ||
+						get(options, 'tooltip.totalLabel') ||
+						'Total',
 					value: data.reduce(
 						(accumulator: number, datum: any) => accumulator + datum[rangeIdentifier],
 						0

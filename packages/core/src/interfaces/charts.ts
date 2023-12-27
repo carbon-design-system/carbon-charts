@@ -17,7 +17,8 @@ import type {
 	StackedBarOptions,
 	ToolbarOptions,
 	TooltipOptions,
-	ZoomBarsOptions
+	ZoomBarsOptions,
+	Locale
 } from './components'
 import type {
 	AxesOptions,
@@ -35,6 +36,10 @@ export interface BaseChartOptions {
 	 * Optionally specify a title for the chart
 	 */
 	title?: string
+	/**
+	 * Locale configuration
+	 */
+	locale?:Locale
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
