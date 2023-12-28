@@ -1,11 +1,5 @@
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
-import {
-	cloneDeep,
-	fromPairs,
-	groupBy,
-	merge,
-	uniq,
-} from 'lodash-es'
+import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
 import { color as colorConfigs, legend as legendConfigs } from '@/configuration'
 import { histogram as histogramConfigs } from '@/configuration-non-customizable'
@@ -63,7 +57,7 @@ export class ChartModel {
 		}
 
 		if (axesOptions) {
-			Object.keys(axesOptions).forEach((axis) => {
+			Object.keys(axesOptions).forEach(axis => {
 				const mapsTo = axesOptions[axis].mapsTo
 				const scaleType = axesOptions[axis].scaleType
 				// make sure linear/log values are numbers
@@ -216,7 +210,7 @@ export class ChartModel {
 		const histogramData = []
 
 		// Group data by bin
-		bins.forEach((bin) => {
+		bins.forEach(bin => {
 			const key = `${bin.x0}-${bin.x1}`
 			const aggregateDataByGroup = this.aggregateBinDataByGroup(bin)
 
@@ -278,7 +272,7 @@ export class ChartModel {
 			}
 		})
 
-		return Object.keys(groupedData).map((groupName) => ({
+		return Object.keys(groupedData).map(groupName => ({
 			name: groupName,
 			data: groupedData[groupName]
 		}))
@@ -291,7 +285,7 @@ export class ChartModel {
 
 		let stackKeys: any
 		if (bins) {
-			stackKeys = bins.map((bin: any) => `${bin.x0}-${bin.x1}`)
+			stackKeys = bins.map((bin: any) => `${bin.x0}:${bin.x1}`)
 		} else {
 			stackKeys = uniq(
 				displayData.map((datum: any) => {
@@ -337,11 +331,10 @@ export class ChartModel {
 		const stackKeys = this.getStackKeys({ bins, groups })
 		if (bins) {
 			return stackKeys.map((key: any) => {
-				const [binStart, binEnd] = key.split('-')
+				const [binStart, binEnd] = key.split(':')
 
 				const correspondingValues: any = { x0: binStart, x1: binEnd }
 				const correspondingBin = bins.find((bin: any) => bin.x0.toString() === binStart.toString())
-
 				dataGroupNames.forEach((dataGroupName: any) => {
 					correspondingValues[dataGroupName] = correspondingBin.filter(
 						(binItem: any) => binItem[groupMapsTo] === dataGroupName
@@ -600,7 +593,7 @@ export class ChartModel {
 		const colorPairingTag = this.colorClassNames(configs.dataGroupName)
 		let className = configs.originalClassName
 		configs.classNameTypes.forEach(
-			(type) =>
+			type =>
 				(className = configs.originalClassName
 					? `${className} ${type}-${colorPairingTag}`
 					: `${type}-${colorPairingTag}`)
@@ -673,7 +666,7 @@ export class ChartModel {
 	}
 
 	exportToCSV() {
-		const data = this.getTabularDataArray().map((row) =>
+		const data = this.getTabularDataArray().map(row =>
 			row.map((column: any) => `"${column === '&ndash;' ? '–' : column}"`)
 		)
 
@@ -684,7 +677,18 @@ export class ChartModel {
 			csvString += i < data.length ? csvData + '\n' : csvData
 		})
 
-		this.services.files.downloadCSV(csvString, 'myChart.csv')
+		const options = this.getOptions()
+
+		let fileName = 'myChart'
+		const customFilename = getProperty(options, 'fileDownload', 'fileName')
+
+		if (typeof customFilename === 'function') {
+			fileName = customFilename('csv')
+		} else if (typeof customFilename === 'string') {
+			fileName = customFilename
+		}
+
+		this.services.files.downloadCSV(csvString, `${fileName}.csv`)
 	}
 
 	protected getTabularData(data: any) {
@@ -751,7 +755,7 @@ export class ChartModel {
 				? ACTIVE
 				: DISABLED
 
-		return uniqueDataGroups.map((groupName) => ({
+		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
 			status: getStatus(groupName)
 		}))
@@ -768,7 +772,7 @@ export class ChartModel {
 		const options = this.getOptions()
 		const userProvidedScale = getProperty(options, 'color', 'scale')
 
-		Object.keys(userProvidedScale).forEach((dataGroup) => {
+		Object.keys(userProvidedScale).forEach(dataGroup => {
 			if (!this.allDataGroups.includes(dataGroup)) {
 				console.warn(`"${dataGroup}" does not exist in data groups.`)
 			}
@@ -778,12 +782,10 @@ export class ChartModel {
 		 * Go through allDataGroups. If a data group has a color value provided
 		 * by the user, add that to the color range
 		 */
-		const providedDataGroups = this.allDataGroups.filter(
-			(dataGroup) => userProvidedScale[dataGroup]
-		)
+		const providedDataGroups = this.allDataGroups.filter(dataGroup => userProvidedScale[dataGroup])
 
 		providedDataGroups.forEach(
-			(dataGroup) => (this.colorScale[dataGroup] = userProvidedScale[dataGroup])
+			dataGroup => (this.colorScale[dataGroup] = userProvidedScale[dataGroup])
 		)
 	}
 

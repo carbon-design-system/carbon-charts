@@ -1276,7 +1276,7 @@ const complexChartDemos = [
 	return demoGroup
 })
 
-let allDemoGroups: DemoGroup[] = [ ...utilityDemoGroups, ...simpleChartDemos, ...complexChartDemos]
+let allDemoGroups: DemoGroup[] = [...utilityDemoGroups, ...simpleChartDemos, ...complexChartDemos]
 
 const formatTitleString = (str: string) =>
 	str
@@ -1289,7 +1289,6 @@ const mapDemoGroups = (demoGroups: any) =>
 	demoGroups
 		.sort((a: any, b: any) => b.title - a.title)
 		.map((demoGroup: any) => {
-
 			demoGroup.demos = demoGroup.demos.map((demo: any) => {
 				demo.title = demo.options.title
 				demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`

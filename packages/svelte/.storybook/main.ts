@@ -1,12 +1,13 @@
+import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/sveltekit'
-import { dirname } from 'path'
 
 const config: StorybookConfig = {
-	stories: [
-		'../src/**/*.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx)'
-	],
+	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 	staticDirs: ['../../core/.storybook/assets'],
+	framework: {
+		name: '@storybook/sveltekit',
+		options: {}
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -15,24 +16,17 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-	async viteFinal(config) {
-		if (config.build) {
-			config.build.chunkSizeWarningLimit = 1600
-		}
-		if (config.server?.fs) {
-			config.server.fs.allow = ['../src']
-		}
-		return config
-	},
-	framework: {
-		name: '@storybook/sveltekit',
-		options: {}
-	},
 	core: {
-		// disableTelemetry: true
+		disableTelemetry: true
 	},
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
+	},
+	async viteFinal(config) {
+		return mergeConfig(config, {
+			build: { chunkSizeWarningLimit: 1600 },
+			server: { fs: { allow: ['../src'] } }
+		})
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

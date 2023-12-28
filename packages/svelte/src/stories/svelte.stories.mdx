@@ -20,17 +20,17 @@ npm install --save @carbon/charts-svelte d3 d3-cloud d3-sankey
 ```
 
 ## Getting started
-To start using the `StackedBarChart` component, try the example below:
+To start using the `DonutChart` component, try the example below:
 
 ```tsx
 <script lang="ts">
-  import { DonutChart, DonutChartOptions } from '@carbon/charts-svelte'
-  import '@carbon/styles/css/styles.css' // may affect global styles
+  import { DonutChart } from '@carbon/charts-svelte'
   import '@carbon/charts-svelte/styles.css'
-  import { data, options } from '../../stores'
+  import options from './options.js'
+  import data from './data.js'
 </script>
 
-<DonutChart {data} {options}/>
+<DonutChart {data} {options} />
 ```
 
 ## Data

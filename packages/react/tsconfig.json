@@ -3,10 +3,10 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		// Package-specific
+		"allowSyntheticDefaultImports": true,
 		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
-		"noEmit": true,
-		"noUnusedLocals": false // Only while Storybook's webpack 5 builder is used
+		"noEmit": true
 	},
 	"include": ["src"],
 	"exclude": ["src/all.test.tsx"],

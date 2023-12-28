@@ -1,10 +1,6 @@
-@use 'colors'; 
-@use 'tokens';
+@use 'colors';
 @use 'components';
 @use 'graphs';
 @use 'type';
 @use 'chart-holder';
 @use 'chart-wrapper';
-
-@use '@carbon/styles/scss/theme';
-@include theme.add-component-tokens(tokens.$custom-charting-tokens);

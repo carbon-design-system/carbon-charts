@@ -8,6 +8,7 @@ export type {
 	ComboChartAxisOptions,
 	TickFormats,
 	TimeIntervalFormats,
+	TimeIntervalNames,
 	TimeScaleOptions
 } from './axis-scales'
 

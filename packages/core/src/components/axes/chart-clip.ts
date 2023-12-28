@@ -27,8 +27,8 @@ export class ChartClip extends Component {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// Create the clipPath
 		this.createClipPath()
@@ -46,14 +46,19 @@ export class ChartClip extends Component {
 
 		// Get height
 		if (!svg) {
-			throw new Error('svg is undefined');
+			throw new Error('svg is undefined')
 		}
-	
-		this.chartClipPath = DOMUtils.appendOrSelect(svg as Selection<SVGGraphicsElement, any, HTMLElement, any>, `clipPath.${this.type}`).attr(
-			'id',
-			this.chartClipId
-		)
-		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`) as Selection<any, any, HTMLElement, any>
+
+		this.chartClipPath = DOMUtils.appendOrSelect(
+			svg as Selection<SVGGraphicsElement, any, HTMLElement, any>,
+			`clipPath.${this.type}`
+		).attr('id', this.chartClipId)
+		const clipRect = DOMUtils.appendOrSelect(this.chartClipPath, `rect.${this.type}`) as Selection<
+			any,
+			any,
+			HTMLElement,
+			any
+		>
 
 		if (xScaleEnd - xScaleStart > 0) {
 			clipRect

@@ -1,6 +1,8 @@
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 @use 'globals';
+@use 'tokens';
+@include theme.add-component-tokens(tokens.$custom-charting-tokens);
 
 .#{globals.$prefix}--chart-holder {
 	position: relative;

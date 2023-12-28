@@ -19,7 +19,7 @@ export class RadarChartModel extends ChartModelCartesian {
 
 		const result = [
 			['Group', ...additionalHeaders],
-			...groupedData.map((datum) => {
+			...groupedData.map(datum => {
 				return [
 					datum['name'],
 					...additionalHeaders.map((_: any, i: number) =>

@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format } from 'date-fns/format'
 import { cloneDeep, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { ChartModel } from './model'
@@ -32,18 +32,20 @@ export class ChartModelCartesian extends ChartModel {
 			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition
 		}
 
-		Object.keys(scales).forEach((scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
-			const position = scales[scale]
-			if (cartesianScales.scales[position]) {
-				scales[scale] = {
-					position: position,
-					label: cartesianScales.getScaleLabel(position),
-					identifier: getProperty(options, 'axes', position, 'mapsTo')
+		Object.keys(scales).forEach(
+			(scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
+				const position = scales[scale]
+				if (cartesianScales.scales[position]) {
+					scales[scale] = {
+						position: position,
+						label: cartesianScales.getScaleLabel(position),
+						identifier: getProperty(options, 'axes', position, 'mapsTo')
+					}
+				} else {
+					scales[scale] = null
 				}
-			} else {
-				scales[scale] = null
 			}
-		})
+		)
 
 		return scales
 	}
@@ -76,8 +78,8 @@ export class ChartModelCartesian extends ChartModel {
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter
-					? domainValueFormatter(datum[primaryDomain.identifier])
-					: datum[primaryDomain.identifier],
+						? domainValueFormatter(datum[primaryDomain.identifier])
+						: datum[primaryDomain.identifier],
 				datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
 					? '&ndash;'
 					: datum[primaryRange.identifier].toLocaleString(),

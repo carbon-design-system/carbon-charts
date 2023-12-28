@@ -1,4 +1,4 @@
-// Common vite tsconfig for React, Svelte, and Vue
+// Common vite tsconfig for all packages except angular
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
@@ -6,5 +6,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["packages/angular"]
 }

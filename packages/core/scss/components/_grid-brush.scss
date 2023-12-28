@@ -1,5 +1,5 @@
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/components/button';
+@use '@carbon/themes/scss/generated/tokens' as theme;
+@use '@carbon/styles/scss/components/button/tokens' as button;
 @use '../globals';
 
 .#{globals.$prefix}--#{globals.$charts-prefix}--grid-brush {

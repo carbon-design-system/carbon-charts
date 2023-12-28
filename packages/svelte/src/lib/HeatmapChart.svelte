@@ -8,8 +8,8 @@
 
 	export let options: HeatmapChartOptions
 	export let data: ChartTabularData
-	export let chart: HeatmapChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: HeatmapChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

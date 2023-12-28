@@ -8,8 +8,8 @@
 
 	export let options: PieChartOptions
 	export let data: ChartTabularData
-	export let chart: PieChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: PieChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

@@ -9,13 +9,18 @@ export class Title extends Component {
 	renderType = RenderTypes.HTML
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const svg = this.getComponentContainer()
 		const title = getProperty(this.getOptions(), 'title')
 
-		const text = svg.selectAll('p.title').data([title]) as Selection<HTMLParagraphElement, any, Element, any>
+		const text = svg.selectAll('p.title').data([title]) as Selection<
+			HTMLParagraphElement,
+			any,
+			Element,
+			any
+		>
 
 		text
 			.enter()

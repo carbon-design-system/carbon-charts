@@ -7,20 +7,19 @@ on:
 jobs:
   build:
     if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v18.17.1
+    name: Create release - Node.js v18.19.0
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 18.17.1
-        uses: actions/setup-node@v3
+      - name: Use Node.js 18.19.0
+        uses: actions/setup-node@v4
         with:
-          node-version: '18.17.1'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '18.19.0'
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache

@@ -1,20 +1,15 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.12.0",
+	"version": "1.13.16",
 	"description": "Carbon Charts component library for React",
-	"main": "./dist/index.js",
+	"type": "module",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"types": "./dist/index.d.ts",
-			"browser": {
-				"import": "./dist/index.mjs",
-				"require": "./dist/index.js"
-			},
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
+			"import": "./dist/index.mjs"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
@@ -43,60 +38,31 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.25.0",
-		"@carbon/telemetry": "~0.1.0"
+		"@carbon/icons-react": "^11.33.0",
+		"@carbon/telemetry": "~0.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
 	},
 	"peerDependencies": {
 		"react": "^16.0.0 || ^17.0.0 || ^18.0.0",
 		"react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.22.10",
-		"@babel/plugin-external-helpers": "^7.22.5",
-		"@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-		"@babel/plugin-transform-react-jsx": "^7.22.5",
-		"@babel/preset-env": "^7.22.10",
-		"@babel/preset-react": "^7.22.5",
-		"@babel/preset-typescript": "^7.22.5",
-		"@rushstack/eslint-patch": "^1.3.3",
 		"@stackblitz/sdk": "1.9.0",
-		"@storybook/addon-essentials": "^7.3.2",
-		"@storybook/addon-interactions": "^7.3.2",
-		"@storybook/addon-links": "^7.3.2",
-		"@storybook/blocks": "^7.3.2",
-		"@storybook/manager-api": "^7.3.2",
-		"@storybook/react": "^7.3.2",
-		"@storybook/react-vite": "^7.3.2",
-		"@storybook/react-webpack5": "^7.3.2",
-		"@storybook/testing-library": "^0.2.0",
-		"@storybook/theming": "^7.3.2",
-		"@types/carbon__icons-react": "^11.25.0",
-		"@types/react": "^18.2.21",
-		"@types/react-dom": "^18.2.7",
-		"@typescript-eslint/eslint-plugin": "^6.4.1",
-		"@typescript-eslint/parser": "^6.4.1",
-		"@vitejs/plugin-react": "^4.0.4",
-		"classnames": "^2.3.2",
-		"concurrently": "^8.2.1",
-		"css-loader": "6.8.1",
+		"@types/react": "^18.2.45",
+		"@types/react-dom": "^18.2.18",
+		"@vitejs/plugin-react": "^4.2.1",
+		"classnames": "^2.4.0",
+		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^8.47.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-prettier": "^5.0.0",
-		"eslint-plugin-react": "^7.33.2",
-		"eslint-plugin-storybook": "^0.6.13",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"sass": "^1.66.1",
-		"storybook": "^7.3.2",
-		"style-loader": "^3.3.3",
-		"typescript": "^5.1.6",
-		"vite": "^4.4.9",
-		"vite-plugin-dts": "^3.5.2",
-		"webpack": "5.88.2"
+		"sass": "^1.69.5",
+		"storybook": "~7.6.6",
+		"typescript": "^5.3.3",
+		"vite": "^5.0.10",
+		"vite-plugin-dts": "^3.7.0"
 	},
 	"publishConfig": {
 		"access": "public"

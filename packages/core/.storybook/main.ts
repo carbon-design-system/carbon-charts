@@ -1,8 +1,13 @@
+import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/html-vite'
 
 const config: StorybookConfig = {
 	stories: ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.ts'],
 	staticDirs: ['assets'],
+	framework: {
+		name: '@storybook/html-vite',
+		options: {}
+	},
 	addons: [
 		{
 			name: '@storybook/addon-essentials',
@@ -11,22 +16,17 @@ const config: StorybookConfig = {
 			}
 		}
 	],
-	framework: {
-		name: '@storybook/html-vite',
-		options: {}
+	core: {
+		disableTelemetry: true
 	},
 	docs: {
-		autodocs: 'tag'
+		autodocs: false
 	},
-	core: {
-		// disableTelemetry: true
-	},
-	async viteFinal(config, _) {
-		if (config.build) {
-			config.build.chunkSizeWarningLimit = 1600
-		}
-		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
-		return config
+	async viteFinal(config) {
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !== 'vite:dts')
+		return mergeConfig(config, {
+			build: { chunkSizeWarningLimit: 1600 }
+		})
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

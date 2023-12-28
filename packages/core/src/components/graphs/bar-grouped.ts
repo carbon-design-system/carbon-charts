@@ -2,12 +2,7 @@ import { ScaleBand, scaleBand, select } from 'd3'
 import { uniq } from 'lodash-es'
 import { generateSVGPathString, getProperty } from '@/tools'
 import { Bar } from './bar'
-import {
-	CartesianOrientations,
-	ColorClassNameTypes,
-	Events,
-	RenderTypes
-} from '@/interfaces/enums'
+import { CartesianOrientations, ColorClassNameTypes, Events, RenderTypes } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
 
 export class GroupedBar extends Bar {
@@ -286,7 +281,8 @@ export class GroupedBar extends Bar {
 	}
 
 	protected getDomainScaleStep() {
-		const domainScale = this.services.cartesianScales.getDomainScale() as unknown as ScaleBand<string>
+		const domainScale =
+			this.services.cartesianScales.getDomainScale() as unknown as ScaleBand<string>
 		const activeData = this.model.getGroupedData(this.configs.groups)
 
 		let step = this.defaultStepFactor

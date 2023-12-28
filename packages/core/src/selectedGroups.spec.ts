@@ -29,12 +29,10 @@ describe('selectedGroups option', () => {
 				// Remove render event listener
 				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb)
 
-				const selectedLegendLabels = select(
-					`g.${prefix}--${options.chart.style?.prefix}--legend`
-				)
+				const selectedLegendLabels = select(`g.${prefix}--${options.chart.style?.prefix}--legend`)
 					.selectAll<SVGGElement, unknown>('g.legend-item.active > text')
 					.nodes()
-					.map((item) => item.innerHTML)
+					.map(item => item.innerHTML)
 
 				expect(selectedLegendLabels).toEqual(sampleSelectedGroups)
 

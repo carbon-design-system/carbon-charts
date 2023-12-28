@@ -8,8 +8,8 @@
 
 	export let options: BoxplotChartOptions
 	export let data: ChartTabularData
-	export let chart: BoxplotChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: BoxplotChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart
