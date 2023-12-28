@@ -13,9 +13,9 @@ export const sanitizeHtml = (html: string) => {
 // This is a more restrictive version of sanitizeHtml that focuses on SVGs
 export const sanitizeSVG = (svgContent: string) => {
 	return DOMPurify.sanitize(svgContent, {
-        NAMESPACE: 'http://www.w3.org/2000/svg',
+		NAMESPACE: 'http://www.w3.org/2000/svg',
 		USE_PROFILES: {
-            html: true,
+			html: true,
 			svg: true,
 			svgFilters: true
 		}
