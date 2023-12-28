@@ -8,18 +8,20 @@ import type {
 import type { Component } from '../components'
 import type { TruncationOptions } from './truncation'
 
-
+/**
+ *Locale Options
+ */
 export interface Locale {
-	code?: string // BCP 47 language tag 
+	code?: string // BCP 47 language tag
 	number?: (value: number) => string
 	date?: (value: Date) => string
 	translations?: {
-	  group?: string // used by Tooltip and Toolbar / Tabular Representation
-	  total?:string // ditto
-	  toolbarTabularModalTitle?: string
-	  toolbarExportAsCSV?: string
-	  toolbarExportAsJPG?: string
-	  toolbarExportAsPNG?: string
+		group?: string // used by Tooltip and Toolbar / Tabular Representation
+		total?: string // ditto
+		toolbarTabularModalTitle?: string
+		toolbarExportAsCSV?: string
+		toolbarExportAsJPG?: string
+		toolbarExportAsPNG?: string
 	}
 }
 

@@ -39,7 +39,7 @@ export interface BaseChartOptions {
 	/**
 	 * Locale configuration
 	 */
-	locale?:Locale
+	locale?: Locale
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
