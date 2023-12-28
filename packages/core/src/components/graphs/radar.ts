@@ -588,7 +588,7 @@ export class Radar extends Component {
 		const groupMapsTo = getProperty(options, 'data', 'groupMapsTo')
 		const completeBlankData = flatMapDeep(
 			this.uniqueKeys.map((key: any) => {
-				return this.uniqueGroups.map((group) => ({
+				return this.uniqueGroups.map(group => ({
 					[angle]: key,
 					[groupMapsTo]: group,
 					[value]: null

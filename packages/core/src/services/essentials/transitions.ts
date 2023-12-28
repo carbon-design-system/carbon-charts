@@ -29,7 +29,9 @@ export class Transitions extends Service {
 			return t.duration(0)
 		}
 
-		return t.duration(getProperty(transitionConfigs, name, 'duration') || transitionConfigs.default.duration)
+		return t.duration(
+			getProperty(transitionConfigs, name, 'duration') || transitionConfigs.default.duration
+		)
 	}
 
 	getPendingTransitions() {

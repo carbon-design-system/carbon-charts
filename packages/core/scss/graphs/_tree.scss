@@ -2,7 +2,8 @@
 @use '../globals';
 @use '../transition';
 
-.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper .#{globals.$prefix}--#{globals.$charts-prefix}--tree {
+.#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper
+	.#{globals.$prefix}--#{globals.$charts-prefix}--tree {
 	g.links {
 		fill: none;
 		stroke: theme.$border-strong-01;

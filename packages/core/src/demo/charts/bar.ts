@@ -479,13 +479,14 @@ export const simpleBarTurkishLocaleOptions = {
 			mapsTo: 'date',
 			scaleType: 'time',
 			ticks: {
-				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', 'day': 'numeric' })
+				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
 			}
 		}
 	},
 	tooltip: {
 		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value') return value.toLocaleDateString('tr-TR', { month: 'long', 'day': 'numeric' })
+			if (category == 'x-value')
+				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
 			if (category == 'y-value') return value.toLocaleString('tr-TR')
 			return value
 		}
@@ -520,13 +521,15 @@ export const simpleBarTimeSeriesDenseOptions = {
 			mapsTo: 'date',
 			scaleType: 'time',
 			ticks: {
-				formatter: (ticks: Date) => ticks.toLocaleDateString('tr-TR', { month: 'short', 'day': 'numeric' })
+				formatter: (ticks: Date) =>
+					ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
 			}
 		}
 	},
 	tooltip: {
 		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value') return value.toLocaleDateString('tr-TR', { month: 'long', 'day': 'numeric' })
+			if (category == 'x-value')
+				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
 			if (category == 'y-value') return value.toLocaleString('tr-TR')
 			return value
 		}

@@ -5,11 +5,7 @@ import { getProperty } from '@/tools'
 import { MeterChartModel } from '@/model/meter'
 import type { ChartConfig } from '@/interfaces/model'
 import type { MeterChartOptions } from '@/interfaces/charts'
-import {
-	LayoutGrowth,
-	LayoutDirection,
-	RenderTypes
-} from '@/interfaces/enums'
+import { LayoutGrowth, LayoutDirection, RenderTypes } from '@/interfaces/enums'
 import type { Component } from '@/components/component'
 import { LayoutComponent } from '@/components/layout'
 import { Meter } from '@/components/graphs/meter'

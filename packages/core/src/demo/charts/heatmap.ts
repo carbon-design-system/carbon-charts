@@ -646,7 +646,7 @@ export const heatmapPositiveNegativeOptions = Object.assign({}, heatmapOptions, 
 	}
 })
 
-export const heatmapPositiveNegativeData = heatmapData.map((element) => ({
+export const heatmapPositiveNegativeData = heatmapData.map(element => ({
 	...element,
 	value: (element.value / 10) * (Math.round(Math.random()) ? -1 : 1)
 }))

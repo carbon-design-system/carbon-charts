@@ -8,8 +8,8 @@
 
 	export let options: BarChartOptions
 	export let data: ChartTabularData
-	export let chart: GroupedBarChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: GroupedBarChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

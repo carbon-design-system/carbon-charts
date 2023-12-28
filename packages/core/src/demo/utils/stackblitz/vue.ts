@@ -4,17 +4,15 @@ import { objectToString } from './object-to-string'
 import { version } from '../package-versions'
 
 export function buildVueExample(demo: Demo): Project {
+	const dependencies: Record<string, string> = {
+		'@carbon/charts-vue': version.carbonCharts,
+		d3: version.d3,
+		'd3-cloud': version.d3Cloud,
+		'd3-sankey': version.d3Sankey,
+		vue: version.vue
+	}
 
-  const dependencies: Record<string, string> = {
-    '@carbon/charts-vue': version.carbonCharts,
-    d3: version.d3,
-    'd3-cloud': version.d3Cloud,
-    'd3-sankey': version.d3Sankey,
-    'vue': version.vue
-  }
-
-  const indexHtml =
-`<!DOCTYPE html>
+	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,8 +31,7 @@ export function buildVueExample(demo: Demo): Project {
   </body>
 </html>`
 
-  const appVue =
-`<template>
+	const appVue = `<template>
 <div id="app" class="p-1">
   <${demo.chartType.vue} :data="data" :options="options" />
 </div>
@@ -62,8 +59,7 @@ padding: 2rem;
 </style>
 `
 
-  const mainJs =
-`import { createApp } from 'vue'
+	const mainJs = `import { createApp } from 'vue'
 import ChartsVue from '@carbon/charts-vue'
 import App from './App.vue'
 const app = createApp(App)
@@ -71,29 +67,29 @@ app.use(ChartsVue)
 app.mount('#app')
 `
 
-  const packageJson = {
-    name: 'carbon-charts-vue-example',
-    description: 'Carbon Charts Vue Example',
-    version: '0.0.0',
-    scripts: {
-      serve: 'vue-cli-service serve',
-      build: 'vue-cli-service build',
-      lint: 'vue-cli-service lint'
-    },
-    dependencies
-  }
+	const packageJson = {
+		name: 'carbon-charts-vue-example',
+		description: 'Carbon Charts Vue Example',
+		version: '0.0.0',
+		scripts: {
+			serve: 'vue-cli-service serve',
+			build: 'vue-cli-service build',
+			lint: 'vue-cli-service lint'
+		},
+		dependencies
+	}
 
-  return {
-    template: 'vue' as ProjectTemplate,
-    title: 'Carbon Charts Vue Example',
-    dependencies,
-    files: {
-      'public/index.html': indexHtml,
-      'src/App.vue': appVue,
-      'src/data.js': objectToString(demo.data),
-      'src/main.js': mainJs,
-      'src/options.js': objectToString(demo.options),
-      'package.json': JSON.stringify(packageJson, null, 2)
-    }
-  }
+	return {
+		template: 'vue' as ProjectTemplate,
+		title: 'Carbon Charts Vue Example',
+		dependencies,
+		files: {
+			'public/index.html': indexHtml,
+			'src/App.vue': appVue,
+			'src/data.js': objectToString(demo.data),
+			'src/main.js': mainJs,
+			'src/options.js': objectToString(demo.options),
+			'package.json': JSON.stringify(packageJson, null, 2)
+		}
+	}
 }

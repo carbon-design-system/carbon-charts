@@ -38,7 +38,9 @@ export class Grid extends Component {
 		const height = this.backdrop.attr('height')
 
 		const mainXScale = this.services.cartesianScales.getMainXScale()
-		const xGrid = axisBottom(mainXScale as any).tickSizeInner(-height).tickSizeOuter(0)
+		const xGrid = axisBottom(mainXScale as any)
+			.tickSizeInner(-height)
+			.tickSizeOuter(0)
 
 		// if the main range axis has a custom domain, align the gridlines to the ticks
 		const alignToTicks = getProperty(this.getOptions(), 'grid', 'x', 'alignWithAxisTicks')
@@ -84,7 +86,9 @@ export class Grid extends Component {
 		const width = this.backdrop.attr('width')
 
 		const mainYScale = this.services.cartesianScales.getMainYScale()
-		const yGrid = axisLeft(mainYScale as any).tickSizeInner(-width).tickSizeOuter(0)
+		const yGrid = axisLeft(mainYScale as any)
+			.tickSizeInner(-width)
+			.tickSizeOuter(0)
 
 		// if the main range axis has a custom domain, align the gridlines to the ticks
 		const alignToTicks = getProperty(this.getOptions(), 'grid', 'y', 'alignWithAxisTicks')

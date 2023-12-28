@@ -41,8 +41,7 @@
 		<img
 			src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
 			class="marginTop"
-			alt="Edit on StackBlitz"
-		/>
+			alt="Edit on StackBlitz" />
 	</a>
 
 	<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30" data-code-snippet>

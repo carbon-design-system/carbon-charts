@@ -74,8 +74,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meterConfigs.height.proportional
-					: meterConfigs.height.default
+						? meterConfigs.height.proportional
+						: meterConfigs.height.default
 			)
 
 		// draw the container max range value indicator
@@ -88,8 +88,8 @@ export class Meter extends Component {
 				userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meterConfigs.height.proportional
-					: meterConfigs.height.default
+						? meterConfigs.height.proportional
+						: meterConfigs.height.default
 			)
 
 		// rect with the value binded
@@ -115,8 +115,8 @@ export class Meter extends Component {
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meterConfigs.height.proportional
-					: meterConfigs.height.default
+						? meterConfigs.height.proportional
+						: meterConfigs.height.default
 			})
 			.attr('class', (d: any) =>
 				this.model.getColorClassName({
@@ -169,8 +169,8 @@ export class Meter extends Component {
 				return userProvidedHeight
 					? userProvidedHeight
 					: proportional
-					? meterConfigs.height.proportional
-					: meterConfigs.height.default
+						? meterConfigs.height.proportional
+						: meterConfigs.height.default
 			})
 			.transition()
 			.call((t: any) =>

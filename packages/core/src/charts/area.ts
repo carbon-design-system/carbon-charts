@@ -20,7 +20,9 @@ export class AreaChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(mergeDefaultChartOptions(cloneDeep(options.areaChart), chartConfigs.options))
+		this.model.setOptions(
+			mergeDefaultChartOptions(cloneDeep(options.areaChart), chartConfigs.options)
+		)
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)

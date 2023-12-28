@@ -50,12 +50,16 @@ const Marker: React.FC<MarkerProps> = ({
 	)
 }
 
-const ArrowLeftMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={arrowLeft.d} {...props} />
-const ArrowRightMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={arrowRight.d} {...props} />
-const CircleMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={circle.d} {...props} />
-const DiamondMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={diamond.d} {...props} />
-const SquareMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={square.d} {...props} />
-const TeeMarker: React.FC<Omit<MarkerProps, 'd'>> = (props) => <Marker d={tee.d} {...props} />
+const ArrowLeftMarker: React.FC<Omit<MarkerProps, 'd'>> = props => (
+	<Marker d={arrowLeft.d} {...props} />
+)
+const ArrowRightMarker: React.FC<Omit<MarkerProps, 'd'>> = props => (
+	<Marker d={arrowRight.d} {...props} />
+)
+const CircleMarker: React.FC<Omit<MarkerProps, 'd'>> = props => <Marker d={circle.d} {...props} />
+const DiamondMarker: React.FC<Omit<MarkerProps, 'd'>> = props => <Marker d={diamond.d} {...props} />
+const SquareMarker: React.FC<Omit<MarkerProps, 'd'>> = props => <Marker d={square.d} {...props} />
+const TeeMarker: React.FC<Omit<MarkerProps, 'd'>> = props => <Marker d={tee.d} {...props} />
 
 export {
 	Marker,
