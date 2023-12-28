@@ -24,6 +24,7 @@ import { Roles } from '@/interfaces/a11y'
 import type { ChartModel } from '@/model/model'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { computeTimeIntervalName, formatTick, isTickPrimary } from '@/services/time-series'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Axis extends Component {
 	type = 'axes'
@@ -316,7 +317,7 @@ export class Axis extends Component {
 		const isDataEmpty = this.model.isDataEmpty()
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`).html(
-				isDataEmpty || isDataLoading ? '' : axisOptions.title
+				isDataEmpty || isDataLoading ? '' : sanitizeText(axisOptions.title)
 			)
 
 			// vertical axes can have override for title orientation

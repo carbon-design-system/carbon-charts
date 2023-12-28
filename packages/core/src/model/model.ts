@@ -14,6 +14,20 @@ export type StackKeysParams = {
 	divergent?: any
 }
 
+function _sanitizeCsvCell(cellContent: string): string {
+	const _trimmedCell = cellContent.trim()
+	if (['=', '+', '-', '@', '\t', '\r'].includes(_trimmedCell.charAt(0))) {
+		return `\xA0${_trimmedCell}`
+	}
+
+	// Only add quotes if cell contains commas, newlines, or quotes
+	if (/[,\"\n]/.test(_trimmedCell)) {
+		return `"${_trimmedCell}"`
+	}
+
+	return _trimmedCell
+}
+
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class ChartModel {
@@ -667,15 +681,16 @@ export class ChartModel {
 
 	exportToCSV() {
 		const data = this.getTabularDataArray().map(row =>
-			row.map((column: any) => `"${column === '&ndash;' ? '–' : column}"`)
+			row.map((column: any) => {
+				const columnValue = column === '&ndash;' ? '–' : column
+
+				// Split by separators and quotes, then sanitize each part individually
+				const sanitizedParts = columnValue.split(/[,;'"`]/).map(part => _sanitizeCsvCell(part))
+				return `"${sanitizedParts.join('')}"`
+			})
 		)
 
-		let csvString = '',
-			csvData = ''
-		data.forEach(function (d, i) {
-			csvData = d.join(',')
-			csvString += i < data.length ? csvData + '\n' : csvData
-		})
+		const csvString = data.map(row => row.join(',')).join('\n')
 
 		const options = this.getOptions()
 

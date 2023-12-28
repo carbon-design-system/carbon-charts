@@ -3,6 +3,7 @@ import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, RenderTypes } from '@/interfaces/enums'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Title extends Component {
 	type = 'title'
@@ -29,7 +30,7 @@ export class Title extends Component {
 			.attr('role', 'heading')
 			.attr('aria-level', 2)
 			.merge(text as any)
-			.html((d: any) => d)
+			.html((d: any) => sanitizeText(d))
 
 		// check if title needs truncation (and tooltip support)
 		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {

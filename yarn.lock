@@ -2308,6 +2308,7 @@ __metadata:
     "@types/d3": "npm:^7.4.3"
     "@types/d3-cloud": "npm:^1.2.9"
     "@types/d3-sankey": "npm:^0.12.4"
+    "@types/dompurify": "npm:^3"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/topojson": "npm:^3.2.6"
     carbon-components: "npm:^10.58.12"
@@ -2316,6 +2317,7 @@ __metadata:
     d3-cloud: "npm:^1.2.7"
     d3-sankey: "npm:^0.12.3"
     date-fns: "npm:^3.0.6"
+    dompurify: "npm:^3.0.6"
     downlevel-dts: "npm:^0.11.0"
     html-to-image: "npm:^1.11.11"
     jsdom: "npm:^23.0.1"
@@ -6809,6 +6811,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dompurify@npm:^3":
+  version: 3.0.5
+  resolution: "@types/dompurify@npm:3.0.5"
+  dependencies:
+    "@types/trusted-types": "npm:*"
+  checksum: a34dcc4498ca250815ccf9aecbe82df96ba5db247d0440cf266a876757d47c52519c240db3475e794d7deb0d6b1af23328e02879be368ad0e26b20c0f0865dba
+  languageName: node
+  linkType: hard
+
 "@types/ejs@npm:^3.1.1":
   version: 3.1.5
   resolution: "@types/ejs@npm:3.1.5"
@@ -7290,6 +7301,13 @@ __metadata:
     "@types/topojson-simplify": "npm:*"
     "@types/topojson-specification": "npm:*"
   checksum: 98c42d89bfd3ac3d4b37dbf01113a2880389dba1e82237762d4dc12922afc923daf184c0a7c8554eff0ed72c98b46ea3219d0335107dc304caba203ca825f156
+  languageName: node
+  linkType: hard
+
+"@types/trusted-types@npm:*":
+  version: 2.0.7
+  resolution: "@types/trusted-types@npm:2.0.7"
+  checksum: 4c4855f10de7c6c135e0d32ce462419d8abbbc33713b31d294596c0cc34ae1fa6112a2f9da729c8f7a20707782b0d69da3b1f8df6645b0366d08825ca1522e0c
   languageName: node
   linkType: hard
 
@@ -11126,6 +11144,13 @@ __metadata:
   dependencies:
     domelementtype: "npm:^2.3.0"
   checksum: bba1e5932b3e196ad6862286d76adc89a0dbf0c773e5ced1eb01f9af930c50093a084eff14b8de5ea60b895c56a04d5de8bbc4930c5543d029091916770b2d2a
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "dompurify@npm:3.0.6"
+  checksum: defc5126e1724bbe5dd5835f0de838c6dc9726a73fc74893e4c661a3c1bd5c65189295013afee74ae7097b3be93499539ff9ec66118d3aa46e788266b1f7514c
   languageName: node
   linkType: hard
 
