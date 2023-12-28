@@ -8,6 +8,7 @@ import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
 import type { ChartOptions } from '@/interfaces/charts'
 import { Events } from '@/interfaces/enums'
+import { sanitizeHtml } from '@/utils/sanitizeHtml'
 
 export class Modal extends Component {
 	type = 'modal'
@@ -79,7 +80,7 @@ export class Modal extends Component {
 				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">Tabular representation</p>
 
 				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="modal-description">${
-					options.title
+					sanitizeHtml(options.title)
 				}</p>
 
 				<button class="cds--modal-close cds--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
@@ -96,7 +97,7 @@ export class Modal extends Component {
 							${get(tableArray, 0)
 								.map(
 									(heading: any) => `<th scope="col">
-								<div class="cds--table-header-label cds--table-header-label">${heading}</div>
+								<div class="cds--table-header-label cds--table-header-label">${sanitizeHtml(heading)}</div>
 							</th>`
 								)
 								.join('')}
@@ -108,7 +109,7 @@ export class Modal extends Component {
 						.map(
 							(row: any) => `
 							<tr>
-								${row.map((column: any) => `<td>${column}</td>`).join('')}
+								${row.map((column: any) => `<td>${sanitizeHtml(column)}</td>`).join('')}
 							</tr>`
 						)
 						.join('')}

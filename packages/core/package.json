@@ -89,6 +89,7 @@
 		"date-fns": "^3.0.6",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
+		"sanitize-html": "^2.11.0",
 		"topojson-client": "^3.1.0",
 		"tslib": "^2.6.2"
 	},
@@ -116,6 +117,7 @@
 		"@types/d3-cloud": "^1.2.9",
 		"@types/d3-sankey": "^0.12.4",
 		"@types/lodash-es": "^4.17.12",
+		"@types/sanitize-html": "^2",
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",

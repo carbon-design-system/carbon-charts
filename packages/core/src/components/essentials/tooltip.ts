@@ -8,6 +8,7 @@ import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
 import { Events, RenderTypes, TruncationTypes } from '@/interfaces/enums'
+import { sanitizeHtml } from '@/utils/sanitizeHtml'
 
 export class Tooltip extends Component {
 	type = 'tooltip'
@@ -31,9 +32,9 @@ export class Tooltip extends Component {
 		const formattedItems = this.formatItems(this.getItems(e))
 
 		if (e.detail.content) {
-			defaultHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`
+			defaultHTML = `<div class="title-tooltip"><p>${sanitizeHtml(e.detail.content)}</p></div>`
 		} else {
-			defaultHTML = this.getTooltipHTML(formattedItems)
+			defaultHTML = sanitizeHtml(this.getTooltipHTML(formattedItems))
 		}
 
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, 'div.content-box')
@@ -41,10 +42,14 @@ export class Tooltip extends Component {
 		// if there is a provided tooltip HTML function call it
 		if (getProperty(this.getOptions(), 'tooltip', 'customHTML')) {
 			if (e.detail.content) {
-				const labelHTML = `<div class="title-tooltip"><p>${e.detail.content}</p></div>`
+				const labelHTML = `<div class="title-tooltip"><p>${sanitizeHtml(e.detail.content)}</p></div>`
 				tooltipTextContainer.html(labelHTML)
 			} else {
-				tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML))
+				tooltipTextContainer.html(
+					`<div class="title-tooltip"><p>${sanitizeHtml(this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML))}</p></div>`
+				)
 			}
 		} else {
 			// Use default tooltip
