@@ -19,7 +19,6 @@ function _sanitizeCsvCell(cellContent: string): string {
 	if (['=', '+', '-', '@', '\t', '\r'].includes(_trimmedCell.charAt(0))) {
 		return `\xA0${_trimmedCell}`
 	}
-
 	// Only add quotes if cell contains commas, newlines, or quotes
 	if (/[,\"\n]/.test(_trimmedCell)) {
 		return `"${_trimmedCell}"`
