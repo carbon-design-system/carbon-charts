@@ -1,37 +1,28 @@
-import _sanitizeHtml from 'sanitize-html'
-export const sanitizeHtml = (html: string, options?: any) => {
-	return _sanitizeHtml(html, { ...SANITIZE_HTML_DEFAULT_OPTIONS, ...options })
+import DOMPurify from 'dompurify'
+
+export const sanitizeHtml = (html: string) => {
+	return DOMPurify.sanitize(html, {
+		USE_PROFILES: {
+			html: true,
+			svg: true,
+			svgFilters: true
+		}
+	})
 }
 
-export const SANITIZE_HTML_DEFAULT_OPTIONS = {
-	allowedAttributes: {
-		'*': [
-			'class',
-			'id',
-			'style',
-			'title',
-			'aria-label',
-			'aria-labelledby',
-			'aria-describedby',
-			'role',
-			'tabindex',
-			'lang',
-			'dir',
-			'contenteditable',
-			'name',
-			'value',
-			'placeholder',
-			'disabled',
-			'readonly',
-			'required',
-			'src',
-			'alt',
-			'width',
-			'height',
-			'controls',
-			'href',
-			'target',
-			'rel'
-		]
-	}
+// This is a more restrictive version of sanitizeHtml that focuses on SVGs
+export const sanitizeSVG = (svgContent: string) => {
+	return DOMPurify.sanitize(svgContent, {
+        NAMESPACE: 'http://www.w3.org/2000/svg',
+		USE_PROFILES: {
+            html: true,
+			svg: true,
+			svgFilters: true
+		}
+	})
+}
+
+// This is a more restrictive version of sanitizeHtml that only allows text
+export const sanitizeText = (html: string) => {
+	return DOMPurify.sanitize(html, { ALLOWED_TAGS: [] })
 }

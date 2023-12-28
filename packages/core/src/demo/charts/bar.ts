@@ -204,7 +204,7 @@ export const simpleBarOptions = {
 			mapsTo: 'group',
 			scaleType: 'labels'
 		}
-	},
+	}
 }
 
 export const simpleBarColorOverrideOptions = {
