@@ -40,9 +40,6 @@ jobs:
           yarn build
           node scripts/update-angular-dependency-version.mjs
 
-      - name: Commit any uncommitted changes
-        run: git diff-index --quiet HEAD || git commit -am "Commit changes during Lerna release"
-
       - name: Publish to npmjs registry and Github
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
