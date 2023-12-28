@@ -13,17 +13,17 @@ export class TreemapChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 
 		const headingLabels = ['Child', 'Group', 'Value']
-		const tabelData = []
+		const tableData = []
 		displayData.forEach((datum: any) => {
 			if (Array.isArray(datum.children)) {
 				datum.children.forEach((child: any) => {
-					tabelData.push([child.name, datum.name, child.value])
+					tableData.push([child.name, datum.name, child.value])
 				})
 			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {
-				tabelData.push(['–', datum.name, datum.value])
+				tableData.push(['–', datum.name, datum.value])
 			}
 		})
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 }

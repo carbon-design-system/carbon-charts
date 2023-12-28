@@ -84,7 +84,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		const boxplotData = this.getBoxplotData()
 
 		const headingLabels = ['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)']
-		const tabelData = [
+		const tableData = [
 			...boxplotData.map(datum => {
 				let outliers = getProperty(datum, 'outliers')
 				if (outliers === null || outliers.length === 0) {
@@ -118,7 +118,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 			})
 		]
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 
 	protected setColorClassNames() {

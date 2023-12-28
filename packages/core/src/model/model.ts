@@ -41,7 +41,7 @@ export class ChartModel {
 		this.services = services
 	}
 
-	formatTable(headingLabels, tabelData) {
+	formatTable(headingLabels, tableData) {
 		const options = this.getOptions()
 		const headingFormatter = getProperty(options, 'modal', 'headingFormatter')
 		const valueFormatter = getProperty(options, 'modal', 'valueFormatter')
@@ -56,7 +56,7 @@ export class ChartModel {
 			headingFormatter && typeof headingFormatter === 'function'
 				? headingFormatter(headingLabels)
 				: headingLabels,
-			...tabelData.map((data: (string | number)[]) => {
+			...tableData.map((data: (string | number)[]) => {
 				const dataCopy = [...data]
 				if (domainValueFormatter) {
 					dataCopy[1] = domainValueFormatter(dataCopy[1]) as string

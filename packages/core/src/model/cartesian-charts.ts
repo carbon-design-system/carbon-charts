@@ -62,7 +62,7 @@ export class ChartModelCartesian extends ChartModel {
 			...(secondaryDomain ? [secondaryDomain.label] : []),
 			...(secondaryRange ? [secondaryRange.label] : [])
 		]
-		const tabelData = displayData.map((datum: any) => [
+		const tableData = displayData.map((datum: any) => [
 			datum[groupMapsTo],
 			datum[primaryDomain.identifier] === null ? '&ndash;' : datum[primaryDomain.identifier],
 			datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
@@ -84,7 +84,7 @@ export class ChartModelCartesian extends ChartModel {
 				: [])
 		])
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 
 	setData(newData: any) {

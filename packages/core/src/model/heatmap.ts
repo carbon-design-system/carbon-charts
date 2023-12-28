@@ -241,7 +241,7 @@ export class HeatmapModel extends ChartModelCartesian {
 
 		let domainValueFormatter: any
 		const headingLabels = [primaryDomain.label, primaryRange.label, 'Value']
-		const tabelData = [
+		const tableData = [
 			...displayData.map((datum: any) => [
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
@@ -255,7 +255,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			])
 		]
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 
 	// Uses quantize scale to return class names

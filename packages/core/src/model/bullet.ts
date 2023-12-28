@@ -36,7 +36,7 @@ export class BulletChartModel extends ChartModelCartesian {
 
 		const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
 		const headingLabels = ['Title', 'Group', 'Value', 'Target', 'Percentage', 'Performance']
-		const tabelData = [
+		const tableData = [
 			...displayData.map((datum: any) => [
 				datum['title'],
 				datum[groupMapsTo],
@@ -49,6 +49,6 @@ export class BulletChartModel extends ChartModelCartesian {
 			])
 		]
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 }

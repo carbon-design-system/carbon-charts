@@ -74,19 +74,19 @@ export class MeterChartModel extends ChartModel {
 		const status = this.getStatus()
 		const proportional = getProperty(options, 'meter', 'proportional')
 		let headingLabels = []
-		let tabelData: ChartTabularData = []
+		let tableData: ChartTabularData = []
 		let domainMax: number
 		// Display the appropriate columns and fields depending on the type of meter
 		if (proportional === null) {
 			domainMax = 100
 			const datum = displayData[0]
 			headingLabels = ['Group', 'Value', ...(status ? ['Status'] : [])]
-			tabelData = [[datum[groupMapsTo], datum['value'], ...(status ? [status] : [])]]
+			tableData = [[datum[groupMapsTo], datum['value'], ...(status ? [status] : [])]]
 		} else {
 			const total = getProperty(proportional, 'total')
 			domainMax = total ? total : this.getMaximumDomain(displayData)
 			headingLabels = ['Group', 'Value', 'Percentage of total']
-			tabelData = [
+			tableData = [
 				...displayData.map((datum: any) => [
 					datum[groupMapsTo],
 					datum['value'],
@@ -95,6 +95,6 @@ export class MeterChartModel extends ChartModel {
 			]
 		}
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 }

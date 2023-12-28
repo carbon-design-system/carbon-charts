@@ -12,14 +12,14 @@ export class TreeChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 
 		const headingLabels = ['Child', 'Parent']
-		const tabelData = []
+		const tableData = []
 		displayData.forEach((datum: any) => {
 			// Call recurisve function
-			this.getChildrenDatums(datum, tabelData)
-			tabelData.push([datum.name, '&ndash;'])
+			this.getChildrenDatums(datum, tableData)
+			tableData.push([datum.name, '&ndash;'])
 		})
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 
 	/**

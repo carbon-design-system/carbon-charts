@@ -16,13 +16,13 @@ export class ChartModelBinned extends ChartModelCartesian {
 			get(options, 'bins.rangeLabel') || 'Range',
 			...binnedStackedData.map(datum => get(datum, `0.${groupMapsTo}`))
 		]
-		const tabelData = [
+		const tableData = [
 			...get(binnedStackedData, 0).map((d, i) => [
 				`${get(d, 'data.x0')} – ${get(d, 'data.x1')}`,
 				...binnedStackedData.map(datum => get(datum[i], `data.${get(datum[i], groupMapsTo)}`))
 			])
 		]
 
-		return super.formatTable(headingLabels, tabelData)
+		return super.formatTable(headingLabels, tableData)
 	}
 }
