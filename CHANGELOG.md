@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.14.0 (2023-12-28)
+
+### Features
+
+- **html & CSV:** sanitize user input
+  ([#1712](https://github.com/carbon-design-system/carbon-charts/issues/1712))
+  ([afb89d4](https://github.com/carbon-design-system/carbon-charts/commit/afb89d4cc240599fd12d853d2ecc4cfcda93dd8a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.16 (2023-12-27)
 
 ### Bug Fixes
