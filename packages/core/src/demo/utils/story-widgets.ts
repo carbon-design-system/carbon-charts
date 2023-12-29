@@ -233,7 +233,7 @@ export const addRadioButtonEventListeners = (container: HTMLDivElement, chart: a
 }
 
 const getLink = (name: string) =>
-	`https://carbon-design-system.github.io/carbon-charts/${name !== 'vanilla' ? `${name}/` : ''}${
+	`https://charts.carbondesignsystem.com/${name !== 'vanilla' ? `${name}/` : ''}${
 		window.parent.location.search
 	}`
 

@@ -27,7 +27,7 @@ Read
 
 ## Storybook and StackBlitz Examples
 
-[Live examples](https://carbon-design-system.github.io/carbon-charts).
+[Live examples](https://charts.carbondesignsystem.com).
 
 **When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
 isolated project showing you how to reproduce the demo.

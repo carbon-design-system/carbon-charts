@@ -23,7 +23,7 @@
 	<p class="props">
 		<b>Props:</b>&nbsp;<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
-			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html"
+			href="https://charts.carbondesignsystem.com/documentation/modules/interfaces.html"
 			target="_blank">
 			options
 		</a>
