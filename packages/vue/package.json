@@ -63,7 +63,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/vue/"
+		"homepage": "https://charts.carbondesignsystem.com/vue/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

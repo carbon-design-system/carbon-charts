@@ -6,7 +6,7 @@ library. The charts are based on D3.js, a peer dependency.
 The required styles should be imported from `@carbon/charts-react/dist/styles.css`. Additional
 documentation is provided in the Storybook demos.
 
-**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/react)**
+**[Storybook demos](https://charts.carbondesignsystem.com/react)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
@@ -31,7 +31,7 @@ Read
 
 ## Storybook and StackBlitz Examples
 
-[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/react).
+[Sample use cases can be seen here](https://charts.carbondesignsystem.com/react).
 
 **When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
 isolated project showing you how to reproduce the demo.
@@ -47,4 +47,4 @@ For instructions on using the **tabular data format**, see
 [here](https://charts.carbondesignsystem.com/react/?path=/docs/docs-tutorials-tabular-data-format--docs)
 
 Customizable options (specific to chart type) can be found
-[here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html)
+[here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)

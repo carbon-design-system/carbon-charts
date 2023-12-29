@@ -76,7 +76,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"dependencies": {
 		"@carbon/colors": "^11.20.1",

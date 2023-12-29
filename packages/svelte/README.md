@@ -4,7 +4,7 @@ Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@ca
 component library. The charts are based on D3.js, a peer dependency. Documentation is provided below
 and in the Storybook demos.
 
-**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/svelte)**
+**[Storybook demos](https://charts.carbondesignsystem.com/svelte)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
@@ -189,7 +189,7 @@ hovering over a bar.
 
 ## StackBlitz examples
 
-[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/svelte).
+[Sample use cases can be seen here](https://charts.carbondesignsystem.com/svelte).
 
 **When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
 isolated project showing you how to reproduce the demo.
