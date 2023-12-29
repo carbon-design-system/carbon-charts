@@ -2,6 +2,7 @@
   "name": "@carbon/charts-monorepo",
   "private": true,
   "description": "Carbon Charts component libraries for JavaScript, Angular, React, Svelte and Vue",
+  "type": "module",
   "scripts": {
     "clean:root": "rm -rf node_modules yarn.lock .yarn/cache .yarn/install-state.gz",
     "clean:pages": "rm -rf pages && mkdir -p pages && touch pages/.nojekyll && echo 'charts.carbondesignsystem.com' > pages/CNAME",
