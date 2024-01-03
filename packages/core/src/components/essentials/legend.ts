@@ -337,7 +337,10 @@ export class Legend extends Component {
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d: any) {
 				const _sanitizedLabel = sanitizeText(d.name)
-				if (_sanitizedLabel.length > truncationThreshold && _sanitizedLabel.length !== truncationNumCharacter) {
+				if (
+					_sanitizedLabel.length > truncationThreshold &&
+					_sanitizedLabel.length !== truncationNumCharacter
+				) {
 					return truncateLabel(_sanitizedLabel, truncationType, truncationNumCharacter)
 				} else {
 					return _sanitizedLabel
