@@ -13,5 +13,5 @@ yarn.lock
 **/node_modules
 **/LICENSE.md
 
-# Prettier (which shares this config) totally messess up Storybook MDX files right now
+# Prettier (which shares this config) has issues with Storybook MDX files
 *.mdx

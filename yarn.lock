@@ -2288,7 +2288,7 @@ __metadata:
     vue: "npm:^3.4.3"
     vue-tsc: "npm:^1.8.27"
   peerDependencies:
-    vue: ^3.3.0
+    vue: ^3.4.0
   languageName: unknown
   linkType: soft
 

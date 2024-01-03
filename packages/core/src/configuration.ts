@@ -1,7 +1,7 @@
 import { enUS as localeObject } from 'date-fns/locale'
 import { merge } from 'lodash-es'
 import { circlePack } from './configuration-non-customizable'
-import {
+import type {
 	AlluvialChartOptions,
 	AreaChartOptions,
 	AxisChartOptions,
@@ -44,8 +44,8 @@ import {
 	Projection,
 	ChartTheme
 } from '@/interfaces/enums'
-import { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
-import {
+import type { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
+import type {
 	GridOptions,
 	RulerOptions,
 	TooltipOptions,

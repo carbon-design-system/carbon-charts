@@ -35,7 +35,7 @@
 		"pub:demo": "cp -a demo/bundle/. ../../pages/vue"
 	},
 	"peerDependencies": {
-		"vue": "^3.3.0"
+		"vue": "^3.4.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
