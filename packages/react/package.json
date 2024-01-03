@@ -3,13 +3,15 @@
 	"version": "1.13.17",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
+	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs"
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
@@ -58,8 +60,8 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"sass": "^1.69.6",
-		"storybook": "~7.6.6",
+		"sass": "^1.69.7",
+		"storybook": "~7.6.7",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.7.0"

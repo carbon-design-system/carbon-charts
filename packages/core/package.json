@@ -123,13 +123,13 @@
 		"downlevel-dts": "^0.11.0",
 		"jsdom": "^23.0.1",
 		"resize-observer-polyfill": "^1.5.1",
-		"sass": "^1.69.6",
-		"storybook": "~7.6.6",
-		"typedoc": "^0.25.4",
+		"sass": "^1.69.7",
+		"storybook": "~7.6.7",
+		"typedoc": "^0.25.6",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.7.0",
-		"vitest": "^1.1.0"
+		"vitest": "^1.1.1"
 	},
 	"publishConfig": {
 		"access": "public"
