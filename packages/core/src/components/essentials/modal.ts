@@ -23,13 +23,14 @@ export class Modal extends Component {
 	}
 
 	handleShowModal = () => {
+		const id = this.services.domUtils.getChartID()
 		this.modal
 			.attr('data-modal', true)
 			.attr('class', 'cds--modal')
 			.attr('role', 'dialog')
 			.attr('aria-modal', true)
-			.attr('aria-labelledby', 'modal-title')
-			.attr('aria-describedby', 'modal-description')
+			.attr('aria-labelledby', `${id}__modal-title`)
+			.attr('aria-describedby', `${id}__modal-description`)
 			.attr('tabindex', -1)
 
 		this.modal.html(this.getModalHTML())
