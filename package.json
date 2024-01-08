@@ -41,8 +41,8 @@
     "@storybook/theming": "~7.6.7",
     "@storybook/vue3": "~7.6.7",
     "@storybook/vue3-vite": "~7.6.7",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "commitizen": "^4.3.0",
@@ -56,7 +56,7 @@
     "eslint-plugin-svelte3": "^4.0.0",
     "eslint-plugin-vue": "^9.19.2",
     "husky": "^8.0.3",
-    "lerna": "8.0.1",
+    "lerna": "8.0.2",
     "pinst": "^3.0.0",
     "prettier": "^3.1.1",
     "prettier-config-carbon": "^0.11.0",
@@ -65,8 +65,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "~7.6.7",
-    "vite": "^5.0.10",
-    "vue": "^3.4.3"
+    "vite": "^5.0.11",
+    "vue": "^3.4.6"
   },
   "husky": {
     "hooks": {
