@@ -28,15 +28,15 @@ export class PieChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-		const headingLabels = ['Group', 'Value']
-		const tableData = [
+		const headers = ['Group', 'Value']
+		const cells = [
 			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
 				datum['value'] === null ? '&ndash;' : datum['value'].toLocaleString()
 			])
 		]
 
-		return super.formatTable(headingLabels, tableData)
+		return super.formatTable({ headers, cells })
 	}
 
 	sanitize(data: any) {

@@ -41,10 +41,10 @@ export class ChartModel {
 		this.services = services
 	}
 
-	formatTable(headingLabels, tableData) {
+	formatTable({ headers, cells }) {
 		const options = this.getOptions()
-		const headingFormatter = getProperty(options, 'modal', 'headingFormatter')
-		const valueFormatter = getProperty(options, 'modal', 'valueFormatter')
+		const tableHeadingFormatter = getProperty(options, 'modal', 'tableHeadingFormatter')
+		const tableCellFormatter = getProperty(options, 'modal', 'tableCellFormatter')
 		const tableFormatter = getProperty(options, 'modal', 'tableFormatter')
 		const { cartesianScales } = this.services
 		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
@@ -53,20 +53,16 @@ export class ChartModel {
 			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
 		}
 		const result = [
-			headingFormatter && typeof headingFormatter === 'function'
-				? headingFormatter(headingLabels)
-				: headingLabels,
-			...tableData.map((data: (string | number)[]) => {
+			typeof tableHeadingFormatter === 'function' ? tableHeadingFormatter(headers) : headers,
+			...cells.map((data: (string | number)[]) => {
 				const dataCopy = [...data]
 				if (domainValueFormatter) {
 					dataCopy[1] = domainValueFormatter(dataCopy[1]) as string
 				}
-				return valueFormatter && typeof valueFormatter === 'function'
-					? valueFormatter(data)
-					: dataCopy
+				return typeof tableCellFormatter === 'function' ? tableCellFormatter(data) : dataCopy
 			})
 		]
-		return tableFormatter && typeof tableFormatter === 'function' ? tableFormatter(result) : result
+		return typeof tableFormatter === 'function' ? tableFormatter(result) : result
 	}
 
 	getAllDataFromDomain(groups?: any) {

@@ -55,14 +55,14 @@ export class ChartModelCartesian extends ChartModel {
 		const { groupMapsTo } = options.data
 		const { primaryDomain, primaryRange, secondaryDomain, secondaryRange } =
 			this.assignRangeAndDomains()
-		const headingLabels = [
+		const headers = [
 			'Group',
 			primaryDomain.label,
 			primaryRange.label,
 			...(secondaryDomain ? [secondaryDomain.label] : []),
 			...(secondaryRange ? [secondaryRange.label] : [])
 		]
-		const tableData = displayData.map((datum: any) => [
+		const cells = displayData.map((datum: any) => [
 			datum[groupMapsTo],
 			datum[primaryDomain.identifier] === null ? '&ndash;' : datum[primaryDomain.identifier],
 			datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
@@ -84,7 +84,7 @@ export class ChartModelCartesian extends ChartModel {
 				: [])
 		])
 
-		return super.formatTable(headingLabels, tableData)
+		return super.formatTable({ headers, cells })
 	}
 
 	setData(newData: any) {

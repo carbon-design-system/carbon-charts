@@ -13,8 +13,8 @@ export class WordCloudModel extends ChartModel {
 		const options = this.getOptions()
 		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud
 		const { groupMapsTo } = options.data
-		const headingLabels = [options.tooltip.wordLabel, 'Group', options.tooltip.valueLabel]
-		const tableData = [
+		const headers = [options.tooltip.wordLabel, 'Group', options.tooltip.valueLabel]
+		const cells = [
 			...displayData.map((datum: any) => [
 				datum[wordMapsTo],
 				datum[groupMapsTo],
@@ -22,6 +22,6 @@ export class WordCloudModel extends ChartModel {
 			])
 		]
 
-		return super.formatTable(headingLabels, tableData)
+		return super.formatTable({ headers, cells })
 	}
 }

@@ -14,11 +14,11 @@ export class AlluvialChartModel extends ChartModelCartesian {
 
 		// Sort array by source to get a close depiction of the alluvial chart
 		displayData.sort((a: any, b: any) => a['source'].localeCompare(b['source']))
-		const headingLabels = ['Source', 'Target', 'Value']
-		const tableData = [
+		const headers = ['Source', 'Target', 'Value']
+		const cells = [
 			...displayData.map((datum: any) => [datum['source'], datum['target'], datum['value']])
 		]
 
-		return super.formatTable(headingLabels, tableData)
+		return super.formatTable({ headers, cells })
 	}
 }
