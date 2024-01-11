@@ -1,5 +1,5 @@
 import type { AxisDomain } from 'd3'
-import type { Locale } from 'date-fns'
+import type { Locale } from 'date-fns/locale'
 import type { AxisTitleOrientations, ScaleTypes, TickRotations } from './enums'
 import type { ThresholdOptions } from './components'
 import type { TruncationOptions } from './truncation'

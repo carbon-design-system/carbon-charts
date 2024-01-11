@@ -4,7 +4,7 @@ Carbon Charts Vue is a thin Vue.js wrapper around the vanilla JavaScript `@carbo
 
 The required styles should be imported from `@carbon/charts-vue/styles.css`. Additional documentation is provided in the Storybook demos.
 
-**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/vue)**
+**[Storybook demos](https://charts.carbondesignsystem.com/vue)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
@@ -33,7 +33,7 @@ Read [Getting Started](https://charts.carbondesignsystem.com/?path=/docs/docs-ge
 
 ## Storybook and StackBlitz Examples
 
-[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
+[Sample use cases can be seen here](https://charts.carbondesignsystem.com/vue).
 
 **When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an isolated project showing you how to reproduce the demo.
 
@@ -45,4 +45,4 @@ For instructions on using the **tabular data format**, see
 [here](https://charts.carbondesignsystem.com/vue/?path=/docs/docs-tutorials-tabular-data-format--docs)
 
 Customizable options (specific to chart type) can be found
-[here](https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html)
+[here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)

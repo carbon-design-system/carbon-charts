@@ -7,6 +7,7 @@ import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
 import { AxisPositions, Events, RenderTypes, ScaleTypes } from '@/interfaces/enums'
 import { formatTick, computeTimeIntervalName } from '@/services/time-series'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Threshold extends Component {
 	type = 'threshold'
@@ -25,7 +26,7 @@ export class Threshold extends Component {
 
 		const thresholdData: any[] = []
 
-		Object.keys(axesOptions).forEach((axisPosition) => {
+		Object.keys(axesOptions).forEach(axisPosition => {
 			if (Object.values(AxisPositions).includes(axisPosition as any)) {
 				const axisOptions = axesOptions[axisPosition]
 
@@ -241,7 +242,7 @@ export class Threshold extends Component {
 			: this.getFormattedValue(datum)
 
 		this.label
-			.html(`${datum.label || 'Threshold'}: ${formattedValue}`)
+			.html(sanitizeText(`${datum.label || 'Threshold'}: ${formattedValue}`))
 			.style('background-color', datum.fillColor)
 
 		const target = this.label.node()

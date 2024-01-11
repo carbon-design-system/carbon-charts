@@ -11,7 +11,7 @@ const findColorShade = (hex: string) => {
 	}
 
 	for (const colorName of Object.keys(colors)) {
-		const colorShades =  colors[colorName as keyof typeof colors]
+		const colorShades = colors[colorName as keyof typeof colors]
 
 		for (const colorShadeLevel of Object.keys(colorShades)) {
 			const colorShade = colorShades[+colorShadeLevel]

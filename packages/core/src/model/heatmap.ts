@@ -246,8 +246,9 @@ export class HeatmapModel extends ChartModelCartesian {
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter
-					  ? domainValueFormatter(datum[primaryDomain.identifier])
-					  : datum[primaryDomain.identifier],
+						? domainValueFormatter(datum[primaryDomain.identifier])
+						: datum[primaryDomain.identifier],
+
 				datum[primaryRange.identifier] === null
 					? '&ndash;'
 					: datum[primaryRange.identifier].toLocaleString(),

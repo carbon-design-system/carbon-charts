@@ -22,18 +22,14 @@ export default defineConfig({
 			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['d3', 'd3-cloud', 'd3-sankey'] // d3-cloud and d3-sankey are not included in d3
+			external: ['d3', 'd3-cloud', 'd3-sankey'], // latter two not included in d3
+			output: {
+				entryFileNames: '[name].mjs',
+				chunkFileNames: '[name]-[hash].mjs'
+			}
 		}
 	},
 	optimizeDeps: {
-		include: [
-			'@carbon/colors',
-			'@carbon/utils-position',
-			'carbon-components',
-			'date-fns', // make peerDependency and externalize in next major
-			'html-to-image',
-			'lodash-es' // make peerDependency and externalize in next major (or replace with modern TypeScript alternatives)
-		],
 		exclude: [
 			'@carbon/telemetry' // prevent Storybook issue
 		]
@@ -45,11 +41,10 @@ export default defineConfig({
 	},
 	plugins: [
 		// Equivalent to: npx tsc --declaration --emitDeclarationOnly --rootDir src
-		// However, tsc does not translate '@/' correctly so we need to use vite-plugin-dts. TypeScript, on its own, only allows
-		// type, not compilation, error suppression.
+		// However, tsc does not resolve the alias '@/' so use vite-plugin-dts.
 		dts({
 			entryRoot: 'src',
-			logLevel: 'silent' // Suppress the known errors because package.json files don't need d.ts files
+			logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
 		}) as unknown as PluginOption
 	]
 })

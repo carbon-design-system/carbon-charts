@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef, type MouseEvent } from 'react'
 import { storiesOf, type Args } from '@storybook/react'
 import sdk from '@stackblitz/sdk'
 import { color, ChartTheme } from '@carbon/charts'
@@ -32,7 +32,6 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const DemoComponent = (ChartComponents as { [key: string]: any })[demo.chartType.vanilla]
 
-
 		groupStories.add(
 			demo.title,
 			(args: Args) => {
@@ -54,14 +53,13 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 					}
 				}, [demoRef.current, chartRef.current])
 
-				const openSandbox = (event: React.MouseEvent<HTMLAnchorElement>) => {
+				const openSandbox = (event: MouseEvent<HTMLAnchorElement>) => {
 					event.preventDefault()
 					sdk.openProject(demo.code.react, { newWindow: true })
 				}
 
 				return (
 					<div className="container" ref={demoRef}>
-
 						<h3>
 							<b>Component:</b>
 							<span className="cds--tag cds--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>

@@ -155,7 +155,7 @@ export class Area extends Component {
 			// make sure there is no linearGradient if no gradient is allowed
 			if (!this.parent.selectAll('defs linearGradient').empty()) {
 				this.parent.selectAll('defs linearGradient').each(function () {
-					(this as any).parentNode.remove()
+					;(this as any).parentNode.remove()
 				})
 			}
 		}

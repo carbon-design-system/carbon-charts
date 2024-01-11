@@ -1,14 +1,17 @@
 import { fileURLToPath } from 'url'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import replace from '@rollup/plugin-replace'
 
 export default defineConfig({
 	build: {
 		rollupOptions: {
+			output: {
+				entryFileNames: 'bundle.umd.js'
+			},
 			plugins: [
 				replace({
-          'process.env.NODE_ENV': JSON.stringify('production'),
-        })
+					'process.env.NODE_ENV': JSON.stringify('production')
+				}) as Plugin
 			]
 		},
 		outDir: 'dist/umd',

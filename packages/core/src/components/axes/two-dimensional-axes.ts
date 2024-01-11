@@ -110,9 +110,11 @@ export class TwoDimensionalAxes extends Component {
 		this.services.events.dispatchEvent(Events.Axis.RENDER_COMPLETE)
 
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some((marginKey: 'top' | 'right' | 'bottom' | 'left') => {
-			return this.margins[marginKey] !== margins[marginKey]
-		})
+		const isNotEqual = Object.keys(margins).some(
+			(marginKey: 'top' | 'right' | 'bottom' | 'left') => {
+				return this.margins[marginKey] !== margins[marginKey]
+			}
+		)
 
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins)

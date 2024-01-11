@@ -1,4 +1,3 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { User, ChevronDown } from '@carbon/icons-react'
 import { CardNode, CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitle } from '../'
@@ -6,9 +5,7 @@ import { CardNode, CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitl
 const noControls = {
 	backgrounds: {
 		default: 'white',
-		values: [
-			{ name: 'white', value: '#fff' }
-		]
+		values: [{ name: 'white', value: '#fff' }]
 	},
 	controls: {
 		hideNoControlsWarning: true
@@ -16,8 +13,7 @@ const noControls = {
 }
 
 storiesOf('Diagrams/Cards', module)
-
-	.addDecorator((story) => (
+	.addDecorator(story => (
 		<div className="container " style={{ maxWidth: 400 }}>
 			{story()}
 		</div>

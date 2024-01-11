@@ -9,23 +9,14 @@ export default defineConfig({
 		chunkSizeWarningLimit: 600,
 		lib: {
 			entry: 'src/index.ts',
-			name: 'ChartsVue',
-			formats: ['es', 'umd'],
-			fileName: format => `index.${format === 'es' ? 'm' : ''}js`
+			formats: ['es']
 		},
 		rollupOptions: {
 			external: ['vue'],
 			output: {
-				globals: {
-					vue: 'Vue'
-				},
-				exports: 'named'
+				entryFileNames: '[name].mjs'
 			}
 		}
-	},
-	optimizeDeps: {
-		include: ['@carbon/charts'],
-		exclude: ['@carbon/telemetry']
 	},
 	resolve: {
 		alias: {

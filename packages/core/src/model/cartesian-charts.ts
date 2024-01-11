@@ -1,3 +1,4 @@
+import { format } from 'date-fns/format'
 import { cloneDeep, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { ChartModel } from './model'
@@ -55,7 +56,8 @@ export class ChartModelCartesian extends ChartModel {
 		const { groupMapsTo } = options.data
 		const { primaryDomain, primaryRange, secondaryDomain, secondaryRange } =
 			this.assignRangeAndDomains()
-		const headers = [
+
+    const headers = [
 			'Group',
 			primaryDomain.label,
 			primaryRange.label,

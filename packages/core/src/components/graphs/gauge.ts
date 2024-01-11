@@ -76,9 +76,9 @@ export class Gauge extends Component {
 		}
 	}
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
 		const options = this.getOptions()
@@ -258,7 +258,9 @@ export class Gauge extends Component {
 			const deltaFontSize = delta ? getProperty(options, 'gauge', 'deltaFontSize') : () => 0
 
 			// use numberFormatter here only if there is a delta supplied
-			const numberFormatter = delta ? getProperty(options, 'gauge', 'numberFormatter') : (): any => null
+			const numberFormatter = delta
+				? getProperty(options, 'gauge', 'numberFormatter')
+				: (): any => null
 
 			const arrowSize = getProperty(options, 'gauge', 'deltaArrow', 'size')
 			const numberSpacing = getProperty(options, 'gauge', 'numberSpacing')

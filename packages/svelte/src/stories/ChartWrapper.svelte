@@ -23,7 +23,7 @@
 	<p class="props">
 		<b>Props:</b>&nbsp;<a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>,
 		<a
-			href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html"
+			href="https://charts.carbondesignsystem.com/documentation/modules/interfaces.html"
 			target="_blank">
 			options
 		</a>
@@ -41,8 +41,7 @@
 		<img
 			src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
 			class="marginTop"
-			alt="Edit on StackBlitz"
-		/>
+			alt="Edit on StackBlitz" />
 	</a>
 
 	<div class="cds--snippet cds--snippet--multi cds--snippet--expand marginTop-30" data-code-snippet>

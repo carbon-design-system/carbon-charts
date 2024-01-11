@@ -15,7 +15,10 @@ export class Scatter extends Component {
 		if (!events) throw new Error('Services events are undefined.')
 
 		// Highlight correct circle on legend item hovers
-		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover as EventListenerOrEventListenerObject)
+		events.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover as EventListenerOrEventListenerObject
+		)
 		// Un-highlight circles on legend item mouseouts
 		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 
@@ -51,7 +54,7 @@ export class Scatter extends Component {
 
 		let scatterData
 		if (stacked) {
-			const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)
+			const percentage = Object.keys(options.axes).some(axis => options.axes[axis].percentage)
 			scatterData = this.model.getStackedData({
 				groups: this.configs.groups,
 				percentage
@@ -94,7 +97,7 @@ export class Scatter extends Component {
 			.data(
 				this.getScatterData(),
 				(datum: any) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
-			) as  Selection<SVGCircleElement, any, HTMLElement, any>
+			) as Selection<SVGCircleElement, any, HTMLElement, any>
 
 		// Remove circles that need to be removed
 		circles.exit().attr('opacity', 0).remove()
@@ -178,18 +181,21 @@ export class Scatter extends Component {
 		selection
 			.raise()
 			.classed('dot', true)
-			.attr('class', (d: any) => { // one element in ChartTabularData (Record<string, any>)
+			.attr('class', (d: any) => {
+				// one element in ChartTabularData (Record<string, any>)
 				const domainIdentifier = cartesianScales.getDomainIdentifier(d)
 				const isFilled = this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 				const classNamesNeeded = isFilled
 					? [ColorClassNameTypes.FILL, ColorClassNameTypes.STROKE]
 					: [ColorClassNameTypes.STROKE]
 
-				return this.model.getColorClassName({
-					classNameTypes: classNamesNeeded,
-					dataGroupName: d[groupMapsTo],
-					originalClassName: 'dot'
-				}) || ''
+				return (
+					this.model.getColorClassName({
+						classNameTypes: classNamesNeeded,
+						dataGroupName: d[groupMapsTo],
+						originalClassName: 'dot'
+					}) || ''
+				)
 			})
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
 			.classed('threshold-anomaly', (d: any) => this.isDatapointThresholdAnomaly(d))
@@ -202,12 +208,13 @@ export class Scatter extends Component {
 				return !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)
 			})
 			.transition()
-			.call((t: any) =>
-				this.services.transitions?.setupTransition({
-					transition: t,
-					name: 'scatter-update-enter',
-					animate
-				})
+			.call(
+				(t: any) =>
+					this.services.transitions?.setupTransition({
+						transition: t,
+						name: 'scatter-update-enter',
+						animate
+					})
 			)
 			.attr('cx', getXValue)
 			.attr('cy', getYValue)
@@ -241,11 +248,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-hover-scatter')
-			.call((t: any) =>
-				this.services.transitions?.setupTransition({
-					transition: t,
-					name: 'chart-holder-hover-scatter'
-				})
+			.call(
+				(t: any) =>
+					this.services.transitions?.setupTransition({
+						transition: t,
+						name: 'chart-holder-hover-scatter'
+					})
 			)
 			.attr('opacity', 1)
 	}
@@ -255,11 +263,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('chart-holder-mouseout-scatter')
-			.call((t: any) =>
-				this.services.transitions?.setupTransition({
-					transition: t,
-					name: 'chart-holder-mouseout-scatter'
-				})
+			.call(
+				(t: any) =>
+					this.services.transitions?.setupTransition({
+						transition: t,
+						name: 'chart-holder-mouseout-scatter'
+					})
 			)
 			.attr('opacity', 0)
 	}
@@ -273,11 +282,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-hover-scatter')
-			.call((t: any) =>
-				this.services.transitions?.setupTransition({
-					transition: t,
-					name: 'legend-hover-scatter'
-				})
+			.call(
+				(t: any) =>
+					this.services.transitions?.setupTransition({
+						transition: t,
+						name: 'legend-hover-scatter'
+					})
 			)
 			.attr('opacity', (d: any) => (d[groupMapsTo] !== hoveredElement.datum()['name'] ? 0.3 : 1))
 	}
@@ -288,11 +298,12 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle.dot')
 			.transition('legend-mouseout-scatter')
-			.call((t: any) =>
-				this.services.transitions?.setupTransition({
-					transition: t,
-					name: 'legend-mouseout-scatter'
-				})
+			.call(
+				(t: any) =>
+					this.services.transitions?.setupTransition({
+						transition: t,
+						name: 'legend-mouseout-scatter'
+					})
 			)
 			.attr('opacity', 1)
 	}
@@ -313,7 +324,7 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll('circle')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
-				const hoveredElement = select(this) 
+				const hoveredElement = select(this)
 
 				hoveredElement
 					.classed('hovered', true)
@@ -409,7 +420,10 @@ export class Scatter extends Component {
 		// Remove legend listeners
 		const { events } = this.services
 		if (!events) throw new Error('Services events undefined')
-		events.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover as EventListenerOrEventListenerObject)
+		events.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover as EventListenerOrEventListenerObject
+		)
 		events.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut)
 		events.removeEventListener(Events.Chart.MOUSEOVER, this.handleChartHolderOnHover)
 		events.removeEventListener(Events.Chart.MOUSEOUT, this.handleChartHolderOnMouseOut)

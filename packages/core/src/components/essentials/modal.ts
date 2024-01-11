@@ -8,6 +8,7 @@ import { DOMUtils } from '@/services/essentials/dom-utils'
 import type { ChartModel } from '@/model/model'
 import type { ChartOptions } from '@/interfaces/charts'
 import { Events } from '@/interfaces/enums'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Modal extends Component {
 	type = 'modal'
@@ -23,13 +24,14 @@ export class Modal extends Component {
 	}
 
 	handleShowModal = () => {
+		const id = this.services.domUtils.getChartID()
 		this.modal
 			.attr('data-modal', true)
 			.attr('class', 'cds--modal')
 			.attr('role', 'dialog')
 			.attr('aria-modal', true)
-			.attr('aria-labelledby', 'modal-title')
-			.attr('aria-describedby', 'modal-description')
+			.attr('aria-labelledby', `${id}__modal-title`)
+			.attr('aria-describedby', `${id}__modal-description`)
 			.attr('tabindex', -1)
 
 		this.modal.html(this.getModalHTML())
@@ -67,6 +69,8 @@ export class Modal extends Component {
 	}
 
 	getModalHTML() {
+		const id = this.services.domUtils.getChartID()
+
 		const options = this.model.getOptions()
 
 		const chartprefix = getProperty(options, 'style', 'prefix')
@@ -76,11 +80,11 @@ export class Modal extends Component {
 		return `
 		<div class="cds--modal-container cds--modal-container">
 			<div class="cds--modal-header cds--modal-header">
-				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">Tabular representation</p>
+				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="${id}__modal-title">Tabular representation</p>
 
-				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="modal-description">${
+				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="${id}__modal-description">${sanitizeText(
 					options.title
-				}</p>
+				)}</p>
 
 				<button class="cds--modal-close cds--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
 					<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Close" width="20" height="20" viewBox="0 0 32 32" role="img" class="cds--modal-close__icon cds--modal-close__icon">
@@ -96,7 +100,7 @@ export class Modal extends Component {
 							${get(tableArray, 0)
 								.map(
 									(heading: any) => `<th scope="col">
-								<div class="cds--table-header-label cds--table-header-label">${heading}</div>
+								<div class="cds--table-header-label cds--table-header-label">${sanitizeText(heading)}</div>
 							</th>`
 								)
 								.join('')}
@@ -108,7 +112,7 @@ export class Modal extends Component {
 						.map(
 							(row: any) => `
 							<tr>
-								${row.map((column: any) => `<td>${column}</td>`).join('')}
+								${row.map((column: any) => `<td>${sanitizeText(column)}</td>`).join('')}
 							</tr>`
 						)
 						.join('')}

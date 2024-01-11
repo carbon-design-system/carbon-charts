@@ -4,10 +4,10 @@ Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@
 
 If you need support for older versions of Angular (or encounter problems with this module), please revert to `@carbon/charts-angular@latest`.
 
-The required styles should be imported from `@carbon/charts-angular/styles.css` and `@carbon/styles/css/styles.css`. Additional documentation is provided in the Storybook demos.
+The required styles should be imported from `@carbon/charts-angular/dist/styles.css`. Additional documentation is provided in the Storybook demos.
 
 
-**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/angular)**
+**[Storybook demos](https://charts.carbondesignsystem.com/angular)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 

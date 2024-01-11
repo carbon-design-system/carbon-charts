@@ -18,7 +18,7 @@ export class StackedScatter extends Scatter {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
-		const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)
+		const percentage = Object.keys(options.axes).some(axis => options.axes[axis].percentage)
 		const stackedData = this.model.getStackedData({
 			groups: this.configs.groups,
 			percentage
@@ -72,7 +72,7 @@ export class StackedScatter extends Scatter {
 	getTooltipData(hoveredX: number, hoveredY: number) {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-		const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)
+		const percentage = Object.keys(options.axes).some(axis => options.axes[axis].percentage)
 		const stackedData = this.model.getStackedData({
 			groups: this.configs.groups,
 			percentage
@@ -114,7 +114,7 @@ export class StackedScatter extends Scatter {
 			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(datapoint)
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier(datapoint)
 			return (
-				tooltipData.find((tooltipDatapoint) => {
+				tooltipData.find(tooltipDatapoint => {
 					return (
 						tooltipDatapoint[groupMapsTo] == datapoint[groupMapsTo] &&
 						tooltipDatapoint[domainIdentifier] == datapoint[domainIdentifier] &&
