@@ -43,9 +43,9 @@ export class ChartModel {
 
 	formatTable({ headers, cells }) {
 		const options = this.getOptions()
-		const tableHeadingFormatter = getProperty(options, 'modal', 'tableHeadingFormatter')
-		const tableCellFormatter = getProperty(options, 'modal', 'tableCellFormatter')
-		const tableFormatter = getProperty(options, 'modal', 'tableFormatter')
+		const tableHeadingFormatter = getProperty(options, 'tabularRepModal', 'tableHeadingFormatter')
+		const tableCellFormatter = getProperty(options, 'tabularRepModal', 'tableCellFormatter')
+		const tableFormatter = getProperty(options, 'tabularRepModal', 'tableFormatter')
 		const { cartesianScales } = this.services
 		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
 		let domainValueFormatter: any
