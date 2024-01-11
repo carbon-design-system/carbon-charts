@@ -28,6 +28,8 @@ export class PieChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
+		const { valueMapsTo } = options.pie
+
 		const headers = ['Group', 'Value']
 		const cells = [
 			...displayData.map((datum: any) => [
