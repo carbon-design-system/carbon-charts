@@ -68,6 +68,8 @@ export class Modal extends Component {
 	}
 
 	getModalHTML() {
+		const id = this.services.domUtils.getChartID()
+
 		const options = this.model.getOptions()
 
 		const chartprefix = getProperty(options, 'style', 'prefix')
@@ -77,9 +79,9 @@ export class Modal extends Component {
 		return `
 		<div class="cds--modal-container cds--modal-container">
 			<div class="cds--modal-header cds--modal-header">
-				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">Tabular representation</p>
+				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="${id}__modal-title">Tabular representation</p>
 
-				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="modal-description">${
+				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="${id}__modal-description">${
 					options.title
 				}</p>
 
