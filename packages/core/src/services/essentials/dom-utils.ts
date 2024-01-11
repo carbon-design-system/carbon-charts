@@ -23,7 +23,7 @@ export interface getSVGElementSizeOptions {
 }
 
 export class DOMUtils extends Service {
-	private chartID = '' // initialized in initializeID() called by init()
+	private chartID!: string // initialized in initializeID() called by init()
 
 	constructor(model: ChartModel, services: any) {
 		super(model, services)
@@ -209,11 +209,11 @@ export class DOMUtils extends Service {
 	protected height: string
 
 	init() {
-		// Add width & height to the chart holder if necessary, and add a classname
-		this.styleHolderElement()
-
 		// Initialize chart ID
 		this.initializeID()
+
+		// Add width & height to the chart holder if necessary, and add a classname
+		this.styleHolderElement()
 
 		this.addMainContainer()
 
