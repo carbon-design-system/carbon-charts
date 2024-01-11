@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.13.16",
+	"version": "1.13.18",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -35,22 +35,22 @@
 		"pub:demo": "cp -a demo/bundle/. ../../pages/vue"
 	},
 	"peerDependencies": {
-		"vue": "^3.3.0"
+		"vue": "^3.4.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/telemetry": "~0.1.0",
-		"vue": "^3.3.13"
+		"vue": "^3.4.3"
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.3",
-		"@vitejs/plugin-vue": "^5.0.0",
+		"@vitejs/plugin-vue": "^5.0.2",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"storybook": "~7.6.6",
+		"storybook": "~7.6.7",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.7.0",
@@ -63,7 +63,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/vue/"
+		"homepage": "https://charts.carbondesignsystem.com/vue/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://carbon-design-system.github.io/carbon-charts/">
+	<a href="https://charts.carbondesignsystem.com/">
 		<img src="packages/core/.storybook/assets/share.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts</h3>

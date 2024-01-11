@@ -10,8 +10,8 @@ export default defineConfig({
 			},
 			plugins: [
 				replace({
-          'process.env.NODE_ENV': JSON.stringify('production'),
-        }) as Plugin
+					'process.env.NODE_ENV': JSON.stringify('production')
+				}) as Plugin
 			]
 		},
 		outDir: 'dist/umd',

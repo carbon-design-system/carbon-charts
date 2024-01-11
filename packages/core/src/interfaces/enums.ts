@@ -293,5 +293,5 @@ export enum Projection {
 	// Cylindrical projections
 	geoEquirectangular = 'geoEquirectangular',
 	geoMercator = 'geoMercator',
-	geoNaturalEarth1 = 'geoNaturalEarth1',
+	geoNaturalEarth1 = 'geoNaturalEarth1'
 }

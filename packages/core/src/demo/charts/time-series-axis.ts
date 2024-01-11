@@ -397,13 +397,15 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 		bottom: {
 			scaleType: 'time',
 			ticks: {
-				formatter: (ticks: Date) => ticks.toLocaleDateString('fr-FR', { month: 'short', 'day': 'numeric' })
+				formatter: (ticks: Date) =>
+					ticks.toLocaleDateString('fr-FR', { month: 'short', day: 'numeric' })
 			}
 		}
 	},
 	tooltip: {
 		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value') return value.toLocaleDateString('fr-FR', { month: 'long', 'day': 'numeric' })
+			if (category == 'x-value')
+				return value.toLocaleDateString('fr-FR', { month: 'long', day: 'numeric' })
 			if (category == 'y-value') return value.toLocaleString('fr-FR')
 			return value
 		}

@@ -85,7 +85,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 
 		const result = [
 			['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)'],
-			...boxplotData.map((datum) => {
+			...boxplotData.map(datum => {
 				let outliers = getProperty(datum, 'outliers')
 				if (outliers === null || outliers.length === 0) {
 					outliers = ['&ndash;']

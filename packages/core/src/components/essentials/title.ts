@@ -3,19 +3,25 @@ import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, RenderTypes } from '@/interfaces/enums'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Title extends Component {
 	type = 'title'
 	renderType = RenderTypes.HTML
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const svg = this.getComponentContainer()
 		const title = getProperty(this.getOptions(), 'title')
 
-		const text = svg.selectAll('p.title').data([title]) as Selection<HTMLParagraphElement, any, Element, any>
+		const text = svg.selectAll('p.title').data([title]) as Selection<
+			HTMLParagraphElement,
+			any,
+			Element,
+			any
+		>
 
 		text
 			.enter()
@@ -24,7 +30,7 @@ export class Title extends Component {
 			.attr('role', 'heading')
 			.attr('aria-level', 2)
 			.merge(text as any)
-			.html((d: any) => d)
+			.html((d: any) => sanitizeText(d))
 
 		// check if title needs truncation (and tooltip support)
 		if (text.node() && text.node().offsetWidth < text.node().scrollWidth) {

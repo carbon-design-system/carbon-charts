@@ -15,7 +15,7 @@ export class Bubble extends Scatter {
 
 		const data = selection.data()
 		// Filter out any null/undefined values
-		const allRadii = data.map((d: any) => d[radiusMapsTo]).filter((radius) => radius)
+		const allRadii = data.map((d: any) => d[radiusMapsTo]).filter(radius => radius)
 		const chartSize = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 
 		// We need the ternary operator here in case the user

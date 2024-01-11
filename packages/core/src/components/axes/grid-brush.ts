@@ -16,15 +16,18 @@ export class ChartBrush extends Component {
 	frontSelectionSelector = 'rect.frontSelection' // needs to match the class name in _grid-brush.scss
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.parent
 
 		// use this area to display selection above all graphs
 		const frontSelectionArea = this.getComponentContainer()
 		if (!svg) throw new Error('SVG was not defined')
-		const backdrop = DOMUtils.appendOrSelect(svg as Selection<SVGGraphicsElement, any, HTMLElement, any>, 'svg.chart-grid-backdrop')
+		const backdrop = DOMUtils.appendOrSelect(
+			svg as Selection<SVGGraphicsElement, any, HTMLElement, any>,
+			'svg.chart-grid-backdrop'
+		)
 		// use this area to handle d3 brush events
 		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`)
 

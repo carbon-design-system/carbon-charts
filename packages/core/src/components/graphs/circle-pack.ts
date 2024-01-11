@@ -55,13 +55,15 @@ export class CirclePack extends Component {
 			.size([width, height])
 			.padding((d: any) => {
 				// add 3 px to account for the stroke width 1.5px
-				return d.depth >= 1 ? circlePackConfigs.padding.children + 3 : circlePackConfigs.padding.mainGroup + 3
+				return d.depth >= 1
+					? circlePackConfigs.padding.children + 3
+					: circlePackConfigs.padding.mainGroup + 3
 			})
 
 		const nodeData = packLayout(root)
 			.descendants()
 			.splice(1)
-			.filter((node) => {
+			.filter(node => {
 				// filter based on hierarchy level
 				return node.depth <= hierarchyLevel
 			})

@@ -1,4 +1,4 @@
-import { mergeConfig} from 'vite'
+import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/html-vite'
 
 const config: StorybookConfig = {
@@ -23,7 +23,7 @@ const config: StorybookConfig = {
 		autodocs: false
 	},
 	async viteFinal(config) {
-		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !== 'vite:dts')
 		return mergeConfig(config, {
 			build: { chunkSizeWarningLimit: 1600 }
 		})

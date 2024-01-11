@@ -3,17 +3,13 @@ import sdk from '@stackblitz/sdk'
 import { ChartTheme } from '@/interfaces/enums'
 import * as ChartComponents from '@/charts'
 import { color } from '@/configuration-non-customizable'
-import  { type Demo, type DemoGroup, storybookDemoGroups } from '@/demo/charts'
-import {
-	addControls,
-	addOtherVersions,
-} from '@/demo/utils/story-widgets'
+import { type Demo, type DemoGroup, storybookDemoGroups } from '@/demo/charts'
+import { addControls, addOtherVersions } from '@/demo/utils/story-widgets'
 
 const colorPairingOptions = color.pairingOptions
 const DEFAULT_THEME = ChartTheme.G100
 
 const introStories = storiesOf('Docs', module)
-
 
 // Loop through the demos for the group
 introStories.add(
@@ -73,7 +69,7 @@ storybookDemoGroups.forEach((demoGroup: DemoGroup) => {
 							<span class="cds--tag cds--tag--green component-name">${demo.chartType.vanilla}</span>
 						</h3>
 						<p class="props">
-							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/interfaces.html" target="_blank">options (opens in new window)</a></span>
+							<b>Props:</b> <a href="/?path=/docs/docs-tutorials-tabular-data-format">data</a>, </span><a href="https://charts.carbondesignsystem.com/documentation/modules/interfaces.html" target="_blank">options (opens in new window)</a></span>
 						</p>
 						${
 							demo.options.experimental
