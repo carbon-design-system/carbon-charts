@@ -240,15 +240,15 @@ export class HeatmapModel extends ChartModelCartesian {
 		const { primaryDomain, primaryRange } = this.assignRangeAndDomains()
 
 		let domainValueFormatter: any
-
-		const result = [
-			[primaryDomain.label, primaryRange.label, 'Value'],
+		const headers = [primaryDomain.label, primaryRange.label, 'Value']
+		const cells = [
 			...displayData.map((datum: any) => [
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter
 						? domainValueFormatter(datum[primaryDomain.identifier])
 						: datum[primaryDomain.identifier],
+
 				datum[primaryRange.identifier] === null
 					? '&ndash;'
 					: datum[primaryRange.identifier].toLocaleString(),
@@ -256,7 +256,7 @@ export class HeatmapModel extends ChartModelCartesian {
 			])
 		]
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	// Uses quantize scale to return class names

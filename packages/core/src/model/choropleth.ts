@@ -68,9 +68,8 @@ export class ChoroplethModel extends ChartModel {
 	 */
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-
-		const result = [
-			['Country ID', 'Country Name', 'Value'],
+		const headers = ['Country ID', 'Country Name', 'Value']
+		const cells = [
 			...displayData.map(datum => [
 				datum['id'] === null ? '&ndash;' : datum['id'],
 				datum['name'],
@@ -78,7 +77,7 @@ export class ChoroplethModel extends ChartModel {
 			])
 		]
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	// Uses quantize scale to return class names

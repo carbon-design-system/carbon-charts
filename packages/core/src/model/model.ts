@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
@@ -52,6 +53,31 @@ export class ChartModel {
 
 	constructor(services: any) {
 		this.services = services
+	}
+
+	formatTable({ headers, cells }) {
+		const options = this.getOptions()
+		const tableHeadingFormatter = getProperty(options, 'tabularRepModal', 'tableHeadingFormatter')
+		const tableCellFormatter = getProperty(options, 'tabularRepModal', 'tableCellFormatter')
+		const { cartesianScales } = this.services
+		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
+		let domainValueFormatter: any
+
+		if (domainScaleType === ScaleTypes.TIME) {
+			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
+		}
+		const result = [
+			typeof tableHeadingFormatter === 'function' ? tableHeadingFormatter(headers) : headers,
+			...(typeof tableCellFormatter === 'function'
+				? tableCellFormatter(cells)
+				: cells.map((data: (string | number)[]) => {
+						if (domainValueFormatter) {
+							data[1] = domainValueFormatter(data[1]) as string
+						}
+						return data
+					}))
+		]
+		return result
 	}
 
 	getAllDataFromDomain(groups?: any) {
@@ -676,6 +702,7 @@ export class ChartModel {
 	}
 
 	getTabularDataArray(): ChartTabularData {
+		//apply tableFormatter
 		return []
 	}
 
