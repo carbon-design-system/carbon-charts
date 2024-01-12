@@ -11,6 +11,7 @@ import {
 	TruncationTypes
 } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
+import { sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Legend extends Component {
 	type = 'legend'
@@ -335,14 +336,18 @@ export class Legend extends Component {
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d: any) {
-				if (d.name.length > truncationThreshold && d.name.length !== truncationNumCharacter) {
-					return truncateLabel(d.name, truncationType, truncationNumCharacter)
+				const _sanitizedLabel = sanitizeText(d.name)
+				if (
+					_sanitizedLabel.length > truncationThreshold &&
+					_sanitizedLabel.length !== truncationNumCharacter
+				) {
+					return truncateLabel(_sanitizedLabel, truncationType, truncationNumCharacter)
 				} else {
-					return d.name
+					return _sanitizedLabel
 				}
 			})
 		} else {
-			addedLegendItemsText.html((d: any) => d.name)
+			addedLegendItemsText.html((d: any) => sanitizeText(d.name))
 		}
 	}
 

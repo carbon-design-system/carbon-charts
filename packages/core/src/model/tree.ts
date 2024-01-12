@@ -11,15 +11,15 @@ export class TreeChartModel extends ChartModel {
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
 
-		const result = [['Child', 'Parent']]
-
+		const headers = ['Child', 'Parent']
+		const cells = []
 		displayData.forEach((datum: any) => {
 			// Call recurisve function
-			this.getChildrenDatums(datum, result)
-			result.push([datum.name, '&ndash;'])
+			this.getChildrenDatums(datum, cells)
+			cells.push([datum.name, '&ndash;'])
 		})
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	/**

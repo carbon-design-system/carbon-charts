@@ -2,6 +2,7 @@ import { select } from 'd3'
 import { getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import { Events, RenderTypes, ToolbarControlTypes } from '@/interfaces/enums'
+import { sanitizeSVG, sanitizeText } from '@/utils/sanitizeHtml'
 
 export class Toolbar extends Component {
 	static buttonID = 0
@@ -84,18 +85,18 @@ export class Toolbar extends Component {
 				.classed('disabled', (d: any) => d.shouldBeDisabled())
 				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 				.attr('aria-label', (d: any) => d.title)
-				.html(
-					(d: any) => `
+				.html((d: any) => {
+					return `
 			<button
 				class="cds--overflow-menu__trigger cds--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
-					`control-${d.id}`
-				)}" aria-label="${d.title}">
+					`control-${sanitizeText(d.id)}`
+				)}" aria-label="${sanitizeText(d.title)}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" class="cds--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
-					${d.iconSVG.content}
+					${sanitizeSVG(d.iconSVG.content)}
 				</svg>
 			</button>`
-				)
+				})
 				.each(function (d: any, index: number) {
 					select(this)
 						.select('svg')

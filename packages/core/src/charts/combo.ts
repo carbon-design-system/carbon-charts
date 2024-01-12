@@ -73,13 +73,8 @@ export class ComboChart extends AxisChart {
 						return null
 					}
 					let stacked = false
-					const key = `${camelCase(graph.type)}Chart` as keyof typeof configOptions;
-					options = merge(
-						{},
-						configOptions[key],
-						this.model.getOptions(),
-						graph.options
-					)
+					const key = `${camelCase(graph.type)}Chart` as keyof typeof configOptions
+					options = merge({}, configOptions[key], this.model.getOptions(), graph.options)
 					// if we are creating a stacked area, the contained Line chart needs to know it is stacked
 					if (graph.type === ChartTypes.STACKED_AREA) {
 						stacked = true

@@ -1,5 +1,5 @@
 @use '@carbon/styles/scss/config' with (
-  $css--font-face: false // Don't load Plex from ~@ibm/plex
+	$css--font-face: false // Don't load Plex from ~@ibm/plex
 );
 
 @use 'globals'; // Load Carbon Charts global variables
@@ -392,7 +392,8 @@ div.container {
 }
 
 // Disabled dark
-.#{globals.$prefix}--resource-card--disabled.#{globals.$prefix}--resource-card--dark .#{globals.$prefix}--tile:hover {
+.#{globals.$prefix}--resource-card--disabled.#{globals.$prefix}--resource-card--dark
+	.#{globals.$prefix}--tile:hover {
 	background: colors.$gray-90; //$background for gray 90 theme
 }
 

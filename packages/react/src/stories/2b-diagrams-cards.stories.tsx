@@ -5,9 +5,7 @@ import { CardNode, CardNodeColumn, CardNodeSubtitle, CardNodeLabel, CardNodeTitl
 const noControls = {
 	backgrounds: {
 		default: 'white',
-		values: [
-			{ name: 'white', value: '#fff' }
-		]
+		values: [{ name: 'white', value: '#fff' }]
 	},
 	controls: {
 		hideNoControlsWarning: true
@@ -15,8 +13,7 @@ const noControls = {
 }
 
 storiesOf('Diagrams/Cards', module)
-
-	.addDecorator((story) => (
+	.addDecorator(story => (
 		<div className="container " style={{ maxWidth: 400 }}>
 			{story()}
 		</div>

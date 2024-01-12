@@ -1,4 +1,3 @@
-import { format } from 'date-fns/format'
 import { cloneDeep, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { ChartModel } from './model'
@@ -32,18 +31,20 @@ export class ChartModelCartesian extends ChartModel {
 			scales.secondaryRange = cartesianScales.secondaryRangeAxisPosition
 		}
 
-		Object.keys(scales).forEach((scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
-			const position = scales[scale]
-			if (cartesianScales.scales[position]) {
-				scales[scale] = {
-					position: position,
-					label: cartesianScales.getScaleLabel(position),
-					identifier: getProperty(options, 'axes', position, 'mapsTo')
+		Object.keys(scales).forEach(
+			(scale: 'primaryDomain' | 'primaryRange' | 'secondaryDomain' | 'secondaryRange') => {
+				const position = scales[scale]
+				if (cartesianScales.scales[position]) {
+					scales[scale] = {
+						position: position,
+						label: cartesianScales.getScaleLabel(position),
+						identifier: getProperty(options, 'axes', position, 'mapsTo')
+					}
+				} else {
+					scales[scale] = null
 				}
-			} else {
-				scales[scale] = null
 			}
-		})
+		)
 
 		return scales
 	}
@@ -52,53 +53,39 @@ export class ChartModelCartesian extends ChartModel {
 		const displayData = this.getDisplayData()
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-
-		const { cartesianScales } = this.services
 		const { primaryDomain, primaryRange, secondaryDomain, secondaryRange } =
 			this.assignRangeAndDomains()
 
-		const domainScaleType = cartesianScales.getDomainAxisScaleType()
-		let domainValueFormatter: any
-		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
-		}
-
-		const result = [
-			[
-				'Group',
-				primaryDomain.label,
-				primaryRange.label,
-				...(secondaryDomain ? [secondaryDomain.label] : []),
-				...(secondaryRange ? [secondaryRange.label] : [])
-			],
-			...displayData.map((datum: any) => [
-				datum[groupMapsTo],
-				datum[primaryDomain.identifier] === null
-					? '&ndash;'
-					: domainValueFormatter
-					? domainValueFormatter(datum[primaryDomain.identifier])
-					: datum[primaryDomain.identifier],
-				datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
-					? '&ndash;'
-					: datum[primaryRange.identifier].toLocaleString(),
-				...(secondaryDomain
-					? [
-							datum[secondaryDomain.identifier] === null
-								? '&ndash;'
-								: datum[secondaryDomain.identifier]
-						]
-					: []),
-				...(secondaryRange
-					? [
-							datum[secondaryRange.identifier] === null || isNaN(datum[secondaryRange.identifier])
-								? '&ndash;'
-								: datum[secondaryRange.identifier]
-						]
-					: [])
-			])
+    const headers = [
+			'Group',
+			primaryDomain.label,
+			primaryRange.label,
+			...(secondaryDomain ? [secondaryDomain.label] : []),
+			...(secondaryRange ? [secondaryRange.label] : [])
 		]
+		const cells = displayData.map((datum: any) => [
+			datum[groupMapsTo],
+			datum[primaryDomain.identifier] === null ? '&ndash;' : datum[primaryDomain.identifier],
+			datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
+				? '&ndash;'
+				: datum[primaryRange.identifier].toLocaleString(),
+			...(secondaryDomain
+				? [
+						datum[secondaryDomain.identifier] === null
+							? '&ndash;'
+							: datum[secondaryDomain.identifier]
+				  ]
+				: []),
+			...(secondaryRange
+				? [
+						datum[secondaryRange.identifier] === null || isNaN(datum[secondaryRange.identifier])
+							? '&ndash;'
+							: datum[secondaryRange.identifier]
+				  ]
+				: [])
+		])
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	setData(newData: any) {

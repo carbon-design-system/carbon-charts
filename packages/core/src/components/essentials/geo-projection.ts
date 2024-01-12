@@ -47,7 +47,7 @@ export class GeoProjection extends Component {
 		// Separate countries that have data & countries with missing data
 		const withData = {}
 		const withoutData = {}
-		Object.keys(data).forEach((element) => {
+		Object.keys(data).forEach(element => {
 			if (typeof data[element].value === 'number') {
 				withData[element] = data[element]
 			} else {
@@ -75,7 +75,7 @@ export class GeoProjection extends Component {
 		const json = feature(geoData, {
 			// We need to specify that we are converting geometry collections
 			type: 'GeometryCollection',
-			geometries: Object.values(withData) as GeometryObject<{ [name: string]: any; }>[]
+			geometries: Object.values(withData) as GeometryObject<{ [name: string]: any }>[]
 		})
 
 		// Depending on the projection selected, we will need to scale/translate accordingly

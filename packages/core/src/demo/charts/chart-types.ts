@@ -32,7 +32,7 @@ export default {
 	ChoroplethChart: {
 		vanilla: 'ExperimentalChoroplethChart',
 		angular: 'ibm-experimental-choropleth-chart',
-		vue: 'ExperimentalCcvChoroplethChart',
+		vue: 'ExperimentalCcvChoroplethChart'
 	},
 	ComboChart: {
 		vanilla: 'ComboChart',

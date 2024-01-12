@@ -2,9 +2,9 @@ interface Document {
 	webkitFullscreenElement?: Element
 	mozFullScreenElement?: Element
 	msFullscreenElement?: Element
-  webkitFullscreenEnabled?: boolean
-  mozFullScreenEnabled?: boolean
-  msFullscreenEnabled?: boolean
+	webkitFullscreenEnabled?: boolean
+	mozFullScreenEnabled?: boolean
+	msFullscreenEnabled?: boolean
 	webkitExitFullscreen?: () => void
 	mozCancelFullScreen?: () => void
 	msExitFullscreen?: () => void

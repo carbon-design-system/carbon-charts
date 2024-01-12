@@ -52,7 +52,7 @@ export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: a
 
 			if (providedAxisOptions['primary'] || providedAxisOptions['secondary']) {
 				console.warn(
-					'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format'
+					'`primary` & `secondary` are no longer needed for axis configurations. Read more here https://charts.carbondesignsystem.com/?path=/story/docs-tutorials--tabular-data-format'
 				)
 			}
 

@@ -38,9 +38,9 @@ export class Chart {
 	}
 	model: ChartModel = new ChartModel(this.services)
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Allow for subclasses to override the constructor with additional parameters or initialization logic without breaking the API contract of the Chart class
 	}
@@ -51,14 +51,14 @@ export class Chart {
 		this.model.set({ holder }, { skipUpdate: true })
 
 		// Initialize all services
-		Object.keys(this.services).forEach((serviceName) => {
+		Object.keys(this.services).forEach(serviceName => {
 			const serviceObj = this.services[serviceName]
 			this.services[serviceName] = new serviceObj(this.model, this.services)
 		})
 
 		// Call update() when model has been updated
 		this.services.events.addEventListener(ChartEvents.Model.UPDATE, (e: CustomEvent) => {
-			const animate = !!getProperty(e, 'detail', 'animate');
+			const animate = !!getProperty(e, 'detail', 'animate')
 			this.update(animate)
 		})
 
@@ -81,7 +81,8 @@ export class Chart {
 		return []
 	}
 
-	update(animate = true) { // Called 4 times whenever a chart is displayed
+	update(animate = true) {
+		// Called 4 times whenever a chart is displayed
 		if (!this.components) {
 			return
 		}
@@ -93,14 +94,14 @@ export class Chart {
 		})
 
 		// Render all components
-		this.components.forEach((component) => component.render(animate))
+		this.components.forEach(component => component.render(animate))
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
 		// Since at the start of the transition
 		// Elements do not hold their final size or position
 		const pendingTransitions = this.services.transitions.getPendingTransitions()
-		const promises = Object.keys(pendingTransitions).map((transitionID) => {
+		const promises = Object.keys(pendingTransitions).map(transitionID => {
 			const transition = pendingTransitions[transitionID]
 			return transition.end().catch((e: any) => e) // Skip rejects since we don't care about those;
 		})
@@ -112,7 +113,7 @@ export class Chart {
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach((component) => component.destroy())
+		this.components.forEach(component => component.destroy())
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove()

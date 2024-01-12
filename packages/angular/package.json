@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.13.14",
+	"version": "1.13.20",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
@@ -39,14 +39,14 @@
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
-		"@angular-devkit/build-angular": "^16.2.10",
+		"@angular-devkit/build-angular": "^16.2.11",
 		"@angular-eslint/builder": "^16.3.1",
 		"@angular-eslint/eslint-plugin": "^16.3.1",
 		"@angular-eslint/eslint-plugin-template": "^16.3.1",
 		"@angular-eslint/schematics": "^16.3.1",
 		"@angular-eslint/template-parser": "^16.3.1",
 		"@angular/animations": "^16.2.12",
-		"@angular/cli": "^16.2.10",
+		"@angular/cli": "^16.2.11",
 		"@angular/common": "^16.2.12",
 		"@angular/compiler": "^16.2.12",
 		"@angular/compiler-cli": "^16.2.12",
@@ -57,7 +57,7 @@
 		"@carbon/icon-helpers": "^10.45.1",
 		"@carbon/icons": "^11.33.0",
 		"@stackblitz/sdk": "^1.9.0",
-		"@storybook/angular": "^7.6.6",
+		"@storybook/angular": "^7.6.7",
 		"@types/carbon__icon-helpers": "^10.7.4",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
@@ -66,7 +66,7 @@
 		"downlevel-dts": "^0.11.0",
 		"ng-packagr": "^16.2.3",
 		"rxjs": "~7.8.1",
-		"storybook": "~7.6.6",
+		"storybook": "~7.6.7",
 		"style-loader": "^3.3.3",
 		"typescript": "~5.1.6",
 		"zone.js": "~0.14.2"
@@ -79,7 +79,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
+		"homepage": "https://charts.carbondesignsystem.com/angular/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

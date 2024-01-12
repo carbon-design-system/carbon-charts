@@ -7,18 +7,17 @@ import Welcome from './Welcome.svelte'
 
 const DEFAULT_THEME = ChartTheme.G100
 
-storiesOf('Docs', module)
-	.add(
-		'Welcome',
-		() => ({
-			Component: Welcome
-		}),
-		{
-			controls: {
-				hideNoControlsWarning: true
-			}
+storiesOf('Docs', module).add(
+	'Welcome',
+	() => ({
+		Component: Welcome
+	}),
+	{
+		controls: {
+			hideNoControlsWarning: true
 		}
-	)
+	}
+)
 
 // Loop through demos for group
 storybookDemoGroups.forEach((demoGroup: DemoGroup) => {

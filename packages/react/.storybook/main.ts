@@ -17,8 +17,8 @@ const config: StorybookConfig = {
 		}
 	],
 	core: {
-    disableTelemetry: true
-  },
+		disableTelemetry: true
+	},
 	docs: {
 		autodocs: false
 	},
@@ -26,26 +26,22 @@ const config: StorybookConfig = {
 		reactDocgen: false // Required to overcome https://github.com/storybookjs/storybook/issues/25247
 	},
 	async viteFinal(config) {
-		config.plugins = config.plugins!.filter((plugin) => plugin!.name !== 'vite:dts')
-		const newConfig: InlineConfig = mergeConfig(config, {
+		config.plugins = config.plugins!.filter(plugin => plugin!.name !== 'vite:dts')
+		return mergeConfig(config, {
 			build: {
-				chunkSizeWarningLimit: 1800,
+				chunkSizeWarningLimit: 1800
 				// Leave commented properties here until Storybook has a solution for this non-blocking error
 				// rollupOptions: {
-					// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
-          // external: [
-					// 	/\/sb-preview\/runtime.js$/ // does not prevent error
-          // ]
-        // }
+				// Avoid error Failed to load url /sb-preview/runtime.js (resolved id: /sb-preview/runtime.js). Does the file exist?
+				// external: [
+				// 	/\/sb-preview\/runtime.js$/ // does not prevent error
+				// ]
+				// }
 			},
 			optimizeDeps: {
-				include: [
-					'@carbon/charts'
-				],
 				exclude: ['@carbon/telemetry']
 			}
 		})
-		return newConfig
 	},
 	features: {
 		storyStoreV7: false // required for storiesOf API

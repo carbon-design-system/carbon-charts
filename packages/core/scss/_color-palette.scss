@@ -332,7 +332,7 @@ $dark-monochrome-quantize-colors: (
 		'8': getColorValue(purple, 30),
 		'9': getColorValue(purple, 20),
 		'10': getColorValue(purple, 10),
-		'11': #ffffff,
+		'11': #ffffff
 	),
 	'mono-2': (
 		'1': getColorValue(blue, 100),
@@ -345,7 +345,7 @@ $dark-monochrome-quantize-colors: (
 		'8': getColorValue(blue, 30),
 		'9': getColorValue(blue, 20),
 		'10': getColorValue(blue, 10),
-		'11': #ffffff,
+		'11': #ffffff
 	),
 	'mono-3': (
 		'1': getColorValue(cyan, 100),
@@ -358,7 +358,7 @@ $dark-monochrome-quantize-colors: (
 		'8': getColorValue(cyan, 30),
 		'9': getColorValue(cyan, 20),
 		'10': getColorValue(cyan, 10),
-		'11': #ffffff,
+		'11': #ffffff
 	),
 	'mono-4': (
 		'1': getColorValue(teal, 100),
@@ -371,8 +371,8 @@ $dark-monochrome-quantize-colors: (
 		'8': getColorValue(teal, 30),
 		'9': getColorValue(teal, 20),
 		'10': getColorValue(teal, 10),
-		'11': #ffffff,
-	),
+		'11': #ffffff
+	)
 );
 
 $divergent-quantize-colors: (
@@ -434,7 +434,7 @@ $dark-divergent-quantize-colors: (
 		'14': getColorValue(cyan, 40),
 		'15': getColorValue(cyan, 30),
 		'16': getColorValue(cyan, 20),
-		'17': getColorValue(cyan, 10),
+		'17': getColorValue(cyan, 10)
 	),
 	'diverge-2': (
 		'1': getColorValue(purple, 10),
@@ -453,6 +453,6 @@ $dark-divergent-quantize-colors: (
 		'14': getColorValue(teal, 40),
 		'15': getColorValue(teal, 30),
 		'16': getColorValue(teal, 20),
-		'17': getColorValue(teal, 10),
-	),
+		'17': getColorValue(teal, 10)
+	)
 );

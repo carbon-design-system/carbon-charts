@@ -10,7 +10,7 @@ export function buildAngularExample(demo: Demo): Project {
 		'@angular/compiler': version.angular,
 		'@angular/core': version.angular,
 		'@angular/platform-browser': version.angular,
-    '@carbon/charts': version.carbonCharts,
+		'@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,

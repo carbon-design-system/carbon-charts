@@ -2,12 +2,7 @@ import { select } from 'd3'
 import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'
-import {
-	LayoutDirection,
-	LayoutGrowth,
-	RenderTypes,
-	LayoutAlignItems
-} from '@/interfaces/enums'
+import { LayoutDirection, LayoutGrowth, RenderTypes, LayoutAlignItems } from '@/interfaces/enums'
 import { LayoutConfigs } from '@/interfaces/layout'
 import { LayoutComponentChild } from '@/interfaces/components'
 import { DOMUtils } from '@/services/essentials/dom-utils'
@@ -170,7 +165,7 @@ export class LayoutComponent extends Component {
 
 		// Run through stretch x-items
 		this.children
-			.filter((child) => {
+			.filter(child => {
 				const growth = getProperty(child, 'growth')
 				return growth === LayoutGrowth.STRETCH
 			})

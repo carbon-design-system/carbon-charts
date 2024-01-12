@@ -14,12 +14,16 @@
 	word-wrap: break-word;
 	z-index: 1059;
 	font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
-	transition: visibility 0s linear 0.1s, opacity 0.1s;
+	transition:
+		visibility 0s linear 0.1s,
+		opacity 0.1s;
 
 	&.hidden {
 		opacity: 0;
 		visibility: hidden;
-		transition: visibility 0s linear 0s, opacity 0.1s;
+		transition:
+			visibility 0s linear 0s,
+			opacity 0.1s;
 		@include motion.motion(standard, expressive);
 	}
 
