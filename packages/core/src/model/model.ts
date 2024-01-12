@@ -59,24 +59,25 @@ export class ChartModel {
 		const options = this.getOptions()
 		const tableHeadingFormatter = getProperty(options, 'tabularRepModal', 'tableHeadingFormatter')
 		const tableCellFormatter = getProperty(options, 'tabularRepModal', 'tableCellFormatter')
-		const tableFormatter = getProperty(options, 'tabularRepModal', 'tableFormatter')
 		const { cartesianScales } = this.services
 		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
 		let domainValueFormatter: any
+
 		if (domainScaleType === ScaleTypes.TIME) {
 			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
 		}
 		const result = [
 			typeof tableHeadingFormatter === 'function' ? tableHeadingFormatter(headers) : headers,
-			...cells.map((data: (string | number)[]) => {
-				const dataCopy = [...data]
-				if (domainValueFormatter) {
-					dataCopy[1] = domainValueFormatter(dataCopy[1]) as string
-				}
-				return typeof tableCellFormatter === 'function' ? tableCellFormatter(data) : dataCopy
-			})
+			...(typeof tableCellFormatter === 'function'
+				? tableCellFormatter(cells)
+				: cells.map((data: (string | number)[]) => {
+						if (domainValueFormatter) {
+							data[1] = domainValueFormatter(data[1]) as string
+						}
+						return data
+					}))
 		]
-		return typeof tableFormatter === 'function' ? tableFormatter(result) : result
+		return result
 	}
 
 	getAllDataFromDomain(groups?: any) {
