@@ -18,7 +18,8 @@ import type {
 	ToolbarOptions,
 	TooltipOptions,
 	ZoomBarsOptions,
-	Locale
+	Locale,
+	TabularRepCustomizationOptions
 } from './components'
 import type {
 	AxesOptions,
@@ -171,6 +172,10 @@ export interface BaseChartOptions {
 	 * whether this type of chart is experimental
 	 */
 	experimental?: boolean
+	/**
+	 * options related to table data customization
+	 */
+	tabularRepModal?: TabularRepCustomizationOptions
 }
 
 /**
