@@ -128,18 +128,19 @@ export class CirclePackChartModel extends ChartModel {
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
 
-		const result = [['Child', 'Parent', 'Value']]
+		const headers = ['Child', 'Parent', 'Value']
+		const cells = []
 
 		displayData.forEach((datum: any) => {
 			let value = datum.value ? datum.value : 0
 			if (datum.children) {
 				// Call recursive function
-				value += this.getChildrenDatums(datum.children, datum.name, result, 0)
+				value += this.getChildrenDatums(datum.children, datum.name, cells, 0)
 			}
-			result.push(['&ndash;', datum.name, value])
+			cells.push(['&ndash;', datum.name, value])
 		})
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	/**

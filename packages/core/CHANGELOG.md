@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.21 (2024-01-12)
+
+### Bug Fixes
+
+- **types:** add tabularRepModal interface
+  ([#1725](https://github.com/carbon-design-system/carbon-charts/issues/1725))
+  ([a36a4f3](https://github.com/carbon-design-system/carbon-charts/commit/a36a4f31287fa1234123ce8c7c852b271e592669))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.20 (2024-01-12)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.19 (2024-01-11)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.18 (2024-01-03)
 
 **Note:** Version bump only for package @carbon/charts
