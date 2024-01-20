@@ -54,11 +54,7 @@ export type {
 } from '@carbon/charts'
 
 // Commonly-used enums
-export {
-	Alignments,
-	ChartTheme,
-	ScaleTypes
-} from '@carbon/charts'
+export { Alignments, ChartTheme, ScaleTypes } from '@carbon/charts'
 
 export {
 	AlluvialChart,

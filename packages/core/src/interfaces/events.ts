@@ -262,5 +262,5 @@ export enum Choropleth {
 	CHOROPLETH_MOUSEOVER = 'choropleth-mouseover',
 	CHOROPLETH_CLICK = 'choropleth-click',
 	CHOROPLETH_MOUSEOUT = 'choropleth-mouseout',
-	CHOROPLETH_MOUSEMOVE = 'choropleth-mousemove',
+	CHOROPLETH_MOUSEMOVE = 'choropleth-mousemove'
 }

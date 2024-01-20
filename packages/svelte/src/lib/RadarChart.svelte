@@ -8,8 +8,8 @@
 
 	export let options: RadarChartOptions
 	export let data: ChartTabularData
-	export let chart: RadarChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: RadarChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

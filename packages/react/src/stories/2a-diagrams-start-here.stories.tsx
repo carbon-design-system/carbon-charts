@@ -107,9 +107,7 @@ storiesOf('Diagrams', module)
 		{
 			backgrounds: {
 				default: 'white',
-				values: [
-					{ name: 'white', value: '#fff' }
-				]
+				values: [{ name: 'white', value: '#fff' }]
 			},
 			controls: {
 				hideNoControlsWarning: true
@@ -169,8 +167,8 @@ const SimpleStatic = () => (
 
 const ProgrammaticStatic = () => {
 	const nodeData = [
-		{ id: 'a', x: 0, y: 16, icon: <User  size={20} />, nodeWidth, nodeHeight },
-		{ id: 'b', x: 250, y: 16, icon: <Wikis size={20}/>, nodeWidth, nodeHeight },
+		{ id: 'a', x: 0, y: 16, icon: <User size={20} />, nodeWidth, nodeHeight },
+		{ id: 'b', x: 250, y: 16, icon: <Wikis size={20} />, nodeWidth, nodeHeight },
 		{
 			id: 'c',
 			x: 600,
@@ -198,9 +196,9 @@ const ProgrammaticStatic = () => {
 		}
 	]
 
-	const edgeMapped = edgeData.map((link) => {
-		const sourceNode = nodeData.find((node) => node.id === link.source)
-		const targetNode = nodeData.find((node) => node.id === link.target)
+	const edgeMapped = edgeData.map(link => {
+		const sourceNode = nodeData.find(node => node.id === link.source)
+		const targetNode = nodeData.find(node => node.id === link.target)
 
 		if (!sourceNode || !targetNode) {
 			throw new Error('Source or target node not found')

@@ -252,3 +252,17 @@ export interface ZoomBarOptions {
 	 */
 	data?: object[]
 }
+
+/**
+ * customize the Tabular Data
+ */
+export interface TabularRepCustomizationOptions {
+	/**
+	 * option to customize the Table Headers
+	 */
+	tableHeadingFormatter?: (headings: string[]) => string[]
+	/**
+	 * option to customize the Table Cells
+	 */
+	tableCellFormatter?: (cells: string[][]) => string[][]
+}

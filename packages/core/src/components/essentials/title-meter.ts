@@ -10,9 +10,9 @@ export class MeterTitle extends Title {
 	type = 'meter-title'
 	renderType = RenderTypes.SVG
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
@@ -58,7 +58,9 @@ export class MeterTitle extends Title {
 	displayBreakdownTitle() {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
-		const datasetsTotal = (this.model as MeterChartModel).getMaximumDomain(this.model.getDisplayData())
+		const datasetsTotal = (this.model as MeterChartModel).getMaximumDomain(
+			this.model.getDisplayData()
+		)
 		const total = getProperty(options, 'meter', 'proportional', 'total')
 		const unit = getProperty(options, 'meter', 'proportional', 'unit')
 			? getProperty(options, 'meter', 'proportional', 'unit')
@@ -159,7 +161,9 @@ export class MeterTitle extends Title {
 		const self = this
 		const svg = this.getComponentContainer()
 
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer()) as Dimensions
+		const containerBounds = DOMUtils.getHTMLElementSize(
+			this.services.domUtils.getMainContainer()
+		) as Dimensions
 
 		// need to check if the width is 0, and try to use the parent attribute
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
@@ -175,7 +179,12 @@ export class MeterTitle extends Title {
 			.attr('transform', `translate(${containerWidth - radius}, 0)`)
 
 		const data = status ? [status] : []
-		const icon = statusGroup.selectAll('circle.status').data(data) as D3Selection<SVGCircleElement, any, Element, any>
+		const icon = statusGroup.selectAll('circle.status').data(data) as D3Selection<
+			SVGCircleElement,
+			any,
+			Element,
+			any
+		>
 
 		icon
 			.enter()
@@ -284,7 +293,8 @@ export class MeterTitle extends Title {
 
 			const statusGroup = DOMUtils.appendOrSelect(this.parent, 'g.status-indicator').node()
 			const statusWidth =
-				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width + meterConfigs.status.paddingLeft
+				DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width +
+				meterConfigs.status.paddingLeft
 
 			return containerWidth - percentageWidth - offset - statusWidth
 		}

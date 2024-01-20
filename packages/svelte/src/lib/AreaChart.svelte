@@ -8,8 +8,8 @@
 
 	export let options: AreaChartOptions
 	export let data: ChartTabularData
-	export let chart: AreaChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: AreaChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

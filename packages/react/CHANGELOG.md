@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.22 (2024-01-15)
+
+### Bug Fixes
+
+- **types:** export TabularRepCustomizationOptions
+  ([#1726](https://github.com/carbon-design-system/carbon-charts/issues/1726))
+  ([60deab7](https://github.com/carbon-design-system/carbon-charts/commit/60deab7a9ed0533bf6539c8402f6b106651c23ae))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.21 (2024-01-12)
+
+### Bug Fixes
+
+- **types:** add tabularRepModal interface
+  ([#1725](https://github.com/carbon-design-system/carbon-charts/issues/1725))
+  ([a36a4f3](https://github.com/carbon-design-system/carbon-charts/commit/a36a4f31287fa1234123ce8c7c852b271e592669))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.20 (2024-01-12)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.19 (2024-01-11)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.18 (2024-01-03)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.17 (2023-12-29)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.16 (2023-12-27)
 
 ### Bug Fixes

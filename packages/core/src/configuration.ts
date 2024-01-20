@@ -1,7 +1,7 @@
 import { enUS as localeObject } from 'date-fns/locale'
 import { merge } from 'lodash-es'
 import { circlePack } from './configuration-non-customizable'
-import {
+import type {
 	AlluvialChartOptions,
 	AreaChartOptions,
 	AxisChartOptions,
@@ -44,15 +44,15 @@ import {
 	Projection,
 	ChartTheme
 } from '@/interfaces/enums'
-import { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
-import {
+import type { AxesOptions, AxisOptions, TimeScaleOptions } from '@/interfaces/axis-scales'
+import type {
 	GridOptions,
 	RulerOptions,
 	TooltipOptions,
 	LegendOptions,
 	StackedBarOptions,
 	ToolbarOptions,
-	ZoomBarsOptions,
+	ZoomBarsOptions
 } from '@/interfaces/components'
 
 /*
@@ -229,9 +229,9 @@ const chart: BaseChartOptions = {
  */
 const thematicChart: ThematicChartOptions = merge({}, chart, {
 	thematic: {
-		projection: Projection.geoNaturalEarth1,
-	},
-});
+		projection: Projection.geoNaturalEarth1
+	}
+})
 
 /**
  * Options common to any chart with an axis
@@ -474,10 +474,10 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 const donutChart: DonutChartOptions = merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: (radius) => `${Math.min((radius / 100) * 24, 24)}px`,
-			titleFontSize: (radius) => `${Math.min((radius / 100) * 15, 15)}px`,
-			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
-			numberFormatter: (number) => Math.floor(number).toLocaleString()
+			numberFontSize: radius => `${Math.min((radius / 100) * 24, 24)}px`,
+			titleFontSize: radius => `${Math.min((radius / 100) * 15, 15)}px`,
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		},
 		alignment: Alignments.LEFT
 	}
@@ -520,7 +520,7 @@ const radarChart: RadarChartOptions = merge({}, chart, {
 		gridline: {
 			enabled: true
 		},
-		valueFormatter: (value) => (value !== null && value !== undefined ? value : 'N/A')
+		valueFormatter: value => (value !== null && value !== undefined ? value : 'N/A')
 	}
 } as RadarChartOptions)
 
@@ -589,10 +589,10 @@ const heatmapChart: HeatmapChartOptions = merge({}, chart, {
 const choroplethChart: ChoroplethChartOptions = merge({}, thematicChart, {
 	choropleth: {
 		colorLegend: {
-			type: 'linear',
-		},
-	},
-} as ChoroplethChartOptions);
+			type: 'linear'
+		}
+	}
+} as ChoroplethChartOptions)
 
 export const options = {
 	alluvialChart,
@@ -623,7 +623,7 @@ export const options = {
 	thematicChart,
 	treeChart,
 	treemapChart,
-	wordCloudChart,
+	wordCloudChart
 }
 
 export {

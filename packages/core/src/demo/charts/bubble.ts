@@ -81,7 +81,7 @@ export const bubbleDiscreteOptions = {
 	}
 }
 
-export const bubbleTimeSeriesData = lineTimeSeriesData.map((datum) =>
+export const bubbleTimeSeriesData = lineTimeSeriesData.map(datum =>
 	Object.assign(datum, {
 		surplus: 50000 * Math.random() * ((datum['value'] || 1) / 2)
 	})

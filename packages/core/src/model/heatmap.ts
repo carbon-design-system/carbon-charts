@@ -5,7 +5,6 @@ import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
 import { getColorScale } from '@/services'
 import { ChartModelCartesian } from './cartesian-charts'
 
-
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
 	axisFlavor = AxisFlavor.HOVERABLE
@@ -216,8 +215,8 @@ export class HeatmapModel extends ChartModelCartesian {
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
 		const arr: any[] = []
-		uniqueDomain.forEach((domain) => {
-			uniqueRange.forEach((range) => {
+		uniqueDomain.forEach(domain => {
+			uniqueRange.forEach(range => {
 				const element: any = {
 					value: this._matrix[domain][range].value,
 					index: this._matrix[domain][range].index
@@ -241,15 +240,15 @@ export class HeatmapModel extends ChartModelCartesian {
 		const { primaryDomain, primaryRange } = this.assignRangeAndDomains()
 
 		let domainValueFormatter: any
-
-		const result = [
-			[primaryDomain.label, primaryRange.label, 'Value'],
+		const headers = [primaryDomain.label, primaryRange.label, 'Value']
+		const cells = [
 			...displayData.map((datum: any) => [
 				datum[primaryDomain.identifier] === null
 					? '&ndash;'
 					: domainValueFormatter
-					? domainValueFormatter(datum[primaryDomain.identifier])
-					: datum[primaryDomain.identifier],
+						? domainValueFormatter(datum[primaryDomain.identifier])
+						: datum[primaryDomain.identifier],
+
 				datum[primaryRange.identifier] === null
 					? '&ndash;'
 					: datum[primaryRange.identifier].toLocaleString(),
@@ -257,11 +256,11 @@ export class HeatmapModel extends ChartModelCartesian {
 			])
 		]
 
-		return result
+		return super.formatTable({ headers, cells })
 	}
 
 	// Uses quantize scale to return class names
-	getColorClassName(configs: { value?: number, originalClassName?: string }) {
+	getColorClassName(configs: { value?: number; originalClassName?: string }) {
 		return `${configs.originalClassName} ${this._colorScale(configs.value as number)}`
 	}
 

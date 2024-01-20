@@ -85,4 +85,3 @@ export {
 	ZoomDomainEvent,
 	ZoomBarTypes
 } from './interfaces'
-

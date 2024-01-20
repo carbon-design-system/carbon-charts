@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-svelte",
-	"version": "1.13.16",
+	"version": "1.13.22",
 	"description": "Carbon Charts component library for Svelte",
 	"scripts": {
 		"postinstall": "carbon-telemetry collect --install",
@@ -49,7 +49,7 @@
 		"@stackblitz/sdk": "^1.9.0",
 		"@sveltejs/adapter-auto": "^3.0.1",
 		"@sveltejs/kit": "^2.0.6",
-		"@sveltejs/package": "^2.2.4",
+		"@sveltejs/package": "^2.2.5",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
@@ -57,7 +57,7 @@
 		"d3-sankey": "^0.12.3",
 		"eslint": "^8.56.0",
 		"publint": "^0.2.7",
-		"storybook": "~7.6.6",
+		"storybook": "~7.6.7",
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.6.2",
 		"tslib": "^2.6.2",
@@ -70,7 +70,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/svelte/"
+		"homepage": "https://charts.carbondesignsystem.com/svelte/"
 	},
 	"bugs": {
 		"url": "https://github.com/carbon-design-system/carbon-charts/issues"

@@ -4,12 +4,7 @@ import { getProperty, mergeDefaultChartOptions } from '@/tools'
 import { HeatmapModel } from '@/model/heatmap'
 import type { HeatmapChartOptions } from '@/interfaces/charts'
 import type { ChartConfig } from '@/interfaces/model'
-import {
-	LayoutDirection,
-	LayoutGrowth,
-	RenderTypes,
-	LayoutAlignItems
-} from '@/interfaces/enums'
+import { LayoutDirection, LayoutGrowth, RenderTypes, LayoutAlignItems } from '@/interfaces/enums'
 import type { Component } from '@/components/component'
 import { Heatmap } from '@/components/graphs/heatmap'
 import { TwoDimensionalAxes } from '@/components/axes/two-dimensional-axes'
@@ -29,7 +24,9 @@ export class HeatmapChart extends AxisChart {
 
 		// Merge the default options for this chart
 		// With the user provided options
-		this.model.setOptions(mergeDefaultChartOptions(configOptions.heatmapChart, chartConfigs.options))
+		this.model.setOptions(
+			mergeDefaultChartOptions(configOptions.heatmapChart, chartConfigs.options)
+		)
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs)
@@ -82,8 +79,8 @@ export class HeatmapChart extends AxisChart {
 			id: 'legend',
 			components: [
 				new ColorScaleLegend(this.model, this.services, {
-					chartType: 'heatmap',
-				}),
+					chartType: 'heatmap'
+				})
 			],
 			growth: LayoutGrowth.PREFERRED,
 			renderType: RenderTypes.SVG

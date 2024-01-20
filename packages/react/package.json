@@ -1,15 +1,17 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.13.16",
+	"version": "1.13.22",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
+	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs"
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
@@ -49,17 +51,17 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.45",
+		"@types/react": "^18.2.46",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.2.1",
-		"classnames": "^2.4.0",
+		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"sass": "^1.69.5",
-		"storybook": "~7.6.6",
+		"sass": "^1.69.7",
+		"storybook": "~7.6.7",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vite-plugin-dts": "^3.7.0"
@@ -70,7 +72,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://carbon-design-system.github.io/carbon-charts/react/"
+		"homepage": "https://charts.carbondesignsystem.com/react/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

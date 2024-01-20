@@ -4,12 +4,7 @@ import { getProperty, mergeDefaultChartOptions } from '@/tools'
 import { ChoroplethModel } from '@/model/choropleth'
 import type { ChoroplethChartOptions } from '@/interfaces/charts'
 import type { ChartConfig } from '@/interfaces/model'
-import {
-	LayoutDirection,
-	LayoutGrowth,
-	RenderTypes,
-	LayoutAlignItems
-} from '@/interfaces/enums'
+import { LayoutDirection, LayoutGrowth, RenderTypes, LayoutAlignItems } from '@/interfaces/enums'
 import type { Component } from '@/components/component'
 import { Choropleth } from '@/components/graphs/choropleth'
 import { Modal } from '@/components/essentials/modal'

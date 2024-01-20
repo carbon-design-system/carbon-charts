@@ -27,7 +27,7 @@ export class StackedArea extends Component {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 
-		const percentage = Object.keys(options.axes).some((axis) => options.axes[axis].percentage)
+		const percentage = Object.keys(options.axes).some(axis => options.axes[axis].percentage)
 
 		const stackedData = this.model.getStackedData({
 			percentage,

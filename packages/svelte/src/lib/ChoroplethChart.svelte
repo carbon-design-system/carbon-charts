@@ -1,6 +1,6 @@
 <script lang="ts">
-		import {
-			ExperimentalChoroplethChart as ChoroplethChartCore,
+	import {
+		ExperimentalChoroplethChart as ChoroplethChartCore,
 		type ChoroplethChartOptions,
 		type ChartTabularData
 	} from '@carbon/charts'
@@ -8,8 +8,8 @@
 
 	export let options: ChoroplethChartOptions
 	export let data: ChartTabularData
-	export let chart: ChoroplethChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: ChoroplethChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

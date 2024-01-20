@@ -23,9 +23,9 @@ export class Alluvial extends Component {
 	private graph: any
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })
@@ -134,7 +134,9 @@ export class Alluvial extends Component {
 					`alluvial-category-${i}`
 				) as string
 
-				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), {
+					useBBox: true
+				})
 
 				// Make the text on the left on node group (except first column)
 				let x = 0
@@ -281,7 +283,9 @@ export class Alluvial extends Component {
 				) as string
 
 				// Determine rectangle width based on text width
-				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+				const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), {
+					useBBox: true
+				})
 
 				return textWidth + 8
 			})
@@ -295,7 +299,9 @@ export class Alluvial extends Component {
 				`alluvial-node-text-${i}`
 			) as string
 
-			const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), { useBBox: true })
+			const { width: textWidth } = DOMUtils.getSVGElementSize(select(`text#${elementID}`), {
+				useBBox: true
+			})
 
 			// Subtracting 9 since text background is 18 to center
 			const y = (d.y1 - d.y0) / 2 - 9

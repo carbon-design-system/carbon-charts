@@ -36,5 +36,4 @@ const CardNode: React.FC<
 	)
 }
 
-
 export { CardNode }

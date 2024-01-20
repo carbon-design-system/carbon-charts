@@ -1,11 +1,8 @@
-import { mergeConfig} from 'vite'
+import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/sveltekit'
 
 const config: StorybookConfig = {
-	stories: [
-		'../src/**/*.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx)'
-	],
+	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 	staticDirs: ['../../core/.storybook/assets'],
 	framework: {
 		name: '@storybook/sveltekit',
@@ -28,7 +25,7 @@ const config: StorybookConfig = {
 	async viteFinal(config) {
 		return mergeConfig(config, {
 			build: { chunkSizeWarningLimit: 1600 },
-			server: { fs: { allow: ['../src'] }}
+			server: { fs: { allow: ['../src'] } }
 		})
 	},
 	features: {

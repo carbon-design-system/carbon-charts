@@ -8,8 +8,8 @@
 
 	export let options: TreeChartOptions
 	export let data: ChartTabularData
-	export let chart: TreeChartCore | null  = null
-	export let ref: HTMLDivElement | null  = null
+	export let chart: TreeChartCore | null = null
+	export let ref: HTMLDivElement | null = null
 </script>
 
 <BaseChart

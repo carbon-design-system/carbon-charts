@@ -13,7 +13,9 @@ export class Component {
 
 	public id = ''
 
-	protected parent: D3Selection<SVGGraphicsElement|HTMLDivElement, any, HTMLElement, any> | undefined = undefined
+	protected parent:
+		| D3Selection<SVGGraphicsElement | HTMLDivElement, any, HTMLElement, any>
+		| undefined = undefined
 
 	protected configs: any = {}
 
@@ -34,7 +36,11 @@ export class Component {
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(select<SVGGraphicsElement|HTMLDivElement, any>(this.services.domUtils.getMainContainer() as HTMLDivElement))
+			this.setParent(
+				select<SVGGraphicsElement | HTMLDivElement, any>(
+					this.services.domUtils.getMainContainer() as HTMLDivElement
+				)
+			)
 		}
 	}
 
@@ -43,8 +49,8 @@ export class Component {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true): void {
 		console.error('Error: Component did not provide the required render function.')
 	}
@@ -86,7 +92,6 @@ export class Component {
 	}
 
 	getComponentContainer(configs = { withinChartClip: false }) {
-
 		if (this.type) {
 			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 

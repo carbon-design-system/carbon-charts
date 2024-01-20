@@ -1,8 +1,10 @@
 # Carbon Charts Svelte
 
-Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@carbon/charts` component library. The charts are based on D3.js, a peer dependency. Documentation is provided below and in the Storybook demos.
+Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@carbon/charts`
+component library. The charts are based on D3.js, a peer dependency. Documentation is provided below
+and in the Storybook demos.
 
-**[Storybook demos](https://carbon-design-system.github.io/carbon-charts/svelte)**
+**[Storybook demos](https://charts.carbondesignsystem.com/svelte)**
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
@@ -10,7 +12,8 @@ Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@ca
 
 These Svelte wrappers were developed by Eric Liu.
 
-Please direct all questions regarding support, bug fixes and feature requests to [@nstuyvesant](https://github.com/nstuyvesant) and [@metonym](https://github.com/metonym).
+Please direct all questions regarding support, bug fixes and feature requests to
+[@nstuyvesant](https://github.com/nstuyvesant) and [@metonym](https://github.com/metonym).
 
 ## Getting started
 
@@ -28,8 +31,9 @@ yarn add -D @carbon/charts-svelte d3 d3-cloud d3-sankey
 
 ### SvelteKit
 
-While this component library can be used with any build environments for Svelte, [SvelteKit](https://kit.svelte.dev) is the official framework for building Svelte apps supporting client-side and server-side rendering (SSR). SvelteKit is powered by
-[Vite](https://vitejs.dev).
+While this component library can be used with any build environments for Svelte,
+[SvelteKit](https://kit.svelte.dev) is the official framework for building Svelte apps supporting
+client-side and server-side rendering (SSR). SvelteKit is powered by [Vite](https://vitejs.dev).
 
 The module `@carbon/charts` should not be externalized for SSR when building for production.
 
@@ -102,8 +106,8 @@ Each Svelte chart component dispatches the following events:
 ### Dynamic import
 
 Dynamically import a chart and instantiate it using the
-[svelte:component API](https://svelte.dev/docs/special-elements#svelte-component). By importing `@carbon/charts` within `onMount()`, you avoid problems with
-server-side rendering.
+[svelte:component API](https://svelte.dev/docs/special-elements#svelte-component). By importing
+`@carbon/charts` within `onMount()`, you avoid problems with server-side rendering.
 
 ```svelte
 <script>
@@ -140,7 +144,8 @@ server-side rendering.
 
 ### Event listeners
 
-In this example, an event listener is attached to the `BarChartSimple` component that fires when hovering over a bar.
+In this example, an event listener is attached to the `BarChartSimple` component that fires when
+hovering over a bar.
 
 ```svelte
 <script>
@@ -184,24 +189,30 @@ In this example, an event listener is attached to the `BarChartSimple` component
 
 ## StackBlitz examples
 
-[Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/svelte).
+[Sample use cases can be seen here](https://charts.carbondesignsystem.com/svelte).
 
-**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an isolated project showing you how to reproduce the demo.
+**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
+isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
 
-Although new charts will be introduced in the future (such as a choropleth), data and options follow the same model for all charts with minor exceptions. For example, in the case of a donut chart, you're able to pass in an additional field called `center` in your options to configure the donut center.
+Although new charts will be introduced in the future (such as a choropleth), data and options follow
+the same model for all charts with minor exceptions. For example, in the case of a donut chart,
+you're able to pass in an additional field called `center` in your options to configure the donut
+center.
 
 [Instructions for using the **tabular data format**](https://charts.carbondesignsystem.com/svelte/?path=/docs/docs-tutorials-tabular-data-format--docs)
 
-Additional options are available depending on the chart type being used, [see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/demo/charts).
+Additional options are available depending on the chart type being used,
+[see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/demo/charts).
 
 Customizable options (specific to chart type) can be found
 [here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)
 
 ## TypeScript support
 
-Svelte version 3.31 or greater is required to use this library with TypeScript. Svelte 4.x+ is recommended.
+Svelte version 3.31 or greater is required to use this library with TypeScript. Svelte 4.x+ is
+recommended.
 
 ### Enums and types
 

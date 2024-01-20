@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
@@ -12,6 +13,20 @@ export type StackKeysParams = {
 	groups?: any
 	percentage?: any
 	divergent?: any
+}
+
+function _sanitizeCsvCell(cellContent: string): string {
+	const _trimmedCell = cellContent.trim()
+	if (['=', '+', '-', '@', '\t', '\r'].includes(_trimmedCell.charAt(0))) {
+		return `\xA0${_trimmedCell}`
+	}
+
+	// Only add quotes if cell contains commas, newlines, or quotes
+	if (/[,\"\n]/.test(_trimmedCell)) {
+		return `"${_trimmedCell}"`
+	}
+
+	return _trimmedCell
 }
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -38,6 +53,31 @@ export class ChartModel {
 
 	constructor(services: any) {
 		this.services = services
+	}
+
+	formatTable({ headers, cells }) {
+		const options = this.getOptions()
+		const tableHeadingFormatter = getProperty(options, 'tabularRepModal', 'tableHeadingFormatter')
+		const tableCellFormatter = getProperty(options, 'tabularRepModal', 'tableCellFormatter')
+		const { cartesianScales } = this.services
+		const domainScaleType = cartesianScales?.getDomainAxisScaleType()
+		let domainValueFormatter: any
+
+		if (domainScaleType === ScaleTypes.TIME) {
+			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
+		}
+		const result = [
+			typeof tableHeadingFormatter === 'function' ? tableHeadingFormatter(headers) : headers,
+			...(typeof tableCellFormatter === 'function'
+				? tableCellFormatter(cells)
+				: cells.map((data: (string | number)[]) => {
+						if (domainValueFormatter) {
+							data[1] = domainValueFormatter(data[1]) as string
+						}
+						return data
+					}))
+		]
+		return result
 	}
 
 	getAllDataFromDomain(groups?: any) {
@@ -619,7 +659,7 @@ export class ChartModel {
 	 */
 	protected transformToTabularData(data: any) {
 		console.warn(
-			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/docs-tutorials--tabular-data-format"
+			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://charts.carbondesignsystem.com/?path=/story/docs-tutorials--tabular-data-format"
 		)
 		const tabularData: ChartTabularData = []
 		const { datasets, labels } = data
@@ -662,20 +702,22 @@ export class ChartModel {
 	}
 
 	getTabularDataArray(): ChartTabularData {
+		//apply tableFormatter
 		return []
 	}
 
 	exportToCSV() {
 		const data = this.getTabularDataArray().map(row =>
-			row.map((column: any) => `"${column === '&ndash;' ? '–' : column}"`)
+			row.map((column: any) => {
+				const columnValue = column === '&ndash;' ? '–' : column
+
+				// Split by separators and quotes, then sanitize each part individually
+				const sanitizedParts = columnValue.split(/[,;'"`]/).map(part => _sanitizeCsvCell(part))
+				return `"${sanitizedParts.join('')}"`
+			})
 		)
 
-		let csvString = '',
-			csvData = ''
-		data.forEach(function (d, i) {
-			csvData = d.join(',')
-			csvString += i < data.length ? csvData + '\n' : csvData
-		})
+		const csvString = data.map(row => row.join(',')).join('\n')
 
 		const options = this.getOptions()
 
