@@ -60,7 +60,8 @@ export type {
 	ToolbarControl,
 	ToolbarOptions,
 	ZoomBarOptions,
-	ZoomBarsOptions
+	ZoomBarsOptions,
+	TabularRepCustomizationOptions
 } from './components'
 
 export type { Coordinates, LayoutConfigs } from './layout'

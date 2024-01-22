@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.23 (2024-01-20)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.22 (2024-01-15)
+
+### Bug Fixes
+
+- **types:** export TabularRepCustomizationOptions
+  ([#1726](https://github.com/carbon-design-system/carbon-charts/issues/1726))
+  ([60deab7](https://github.com/carbon-design-system/carbon-charts/commit/60deab7a9ed0533bf6539c8402f6b106651c23ae))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.21 (2024-01-12)
 
 ### Bug Fixes
