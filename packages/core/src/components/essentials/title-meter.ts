@@ -1,6 +1,6 @@
 import type { Selection as D3Selection } from 'd3'
 import { getProperty } from '@/tools'
-import { meter as meterConfigs, options } from '@/configuration'
+import { meter as meterConfigs } from '@/configuration'
 import { Title } from './title'
 import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes, Statuses } from '@/interfaces/enums'

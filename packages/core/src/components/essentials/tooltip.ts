@@ -1,5 +1,4 @@
 import { select, pointer } from 'd3'
-import { format } from 'date-fns/format'
 import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
 import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
