@@ -101,6 +101,7 @@ export type {
 	WordCloudChartTooltipOptions,
 	ZoomBarOptions,
 	ZoomBarsOptions,
+	TabularRepCustomizationOptions,
 	// Formats
 	TickFormats,
 	TimeIntervalFormats,
