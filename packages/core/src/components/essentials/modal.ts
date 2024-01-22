@@ -73,7 +73,11 @@ export class Modal extends Component {
 
 		const options = this.model.getOptions()
 
-		const { toolbarTabularModalTitle } = getProperty(options, 'locale', 'translations')
+		const { toolbarTabularModalTitle, tabularDownloadAsCSV } = getProperty(
+			options,
+			'locale',
+			'translations'
+		)
 
 		const chartprefix = getProperty(options, 'style', 'prefix')
 
@@ -125,7 +129,7 @@ export class Modal extends Component {
 
 			<div class="cds--modal-footer cds--modal-footer">
 			  <div class="${carbonPrefix}--${chartprefix}-modal-footer-spacer"></div>
-			  <button class="cds--btn cds--btn--primary cds--btn cds--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>
+			  <button class="cds--btn cds--btn--primary cds--btn cds--btn--primary" type="button" data-modal-primary-focus>${tabularDownloadAsCSV}</button>
 			</div>
 		</div>`
 	}

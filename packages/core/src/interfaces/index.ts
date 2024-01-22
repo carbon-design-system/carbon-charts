@@ -52,6 +52,7 @@ export type {
 	LayoutComponentChild,
 	LegendItem,
 	LegendOptions,
+	Locale,
 	RulerOptions,
 	StackedBarOptions,
 	ThresholdOptions,

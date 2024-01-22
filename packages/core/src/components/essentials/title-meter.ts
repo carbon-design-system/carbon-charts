@@ -1,6 +1,6 @@
 import type { Selection as D3Selection } from 'd3'
 import { getProperty } from '@/tools'
-import { meter as meterConfigs } from '@/configuration'
+import { meter as meterConfigs, options } from '@/configuration'
 import { Title } from './title'
 import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes, Statuses } from '@/interfaces/enums'
@@ -18,7 +18,7 @@ export class MeterTitle extends Title {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { groupMapsTo } = options.data
-
+		const meterTitle = getProperty(options, 'locale', 'translations', 'meterTitle')
 		const proportional = getProperty(options, 'meter', 'proportional')
 
 		if (proportional) {
@@ -26,8 +26,9 @@ export class MeterTitle extends Title {
 			this.displayBreakdownTitle()
 		} else {
 			// the title for a meter, is the label for that dataset
-			const title = svg.selectAll('text.meter-title').data([dataset[groupMapsTo]])
-
+			const title = svg
+				.selectAll('text.meter-title')
+				.data(meterTitle ? [meterTitle] : [dataset[groupMapsTo]])
 			title
 				.enter()
 				.append('text')
@@ -214,7 +215,7 @@ export class MeterTitle extends Title {
 	 */
 	appendPercentage() {
 		const dataValue = getProperty(this.model.getDisplayData(), 0, 'value')
-
+		const { code, number: numberFormatter } = getProperty(this.getOptions(), 'locale')
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer()
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title')
@@ -237,7 +238,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage as any)
-			.text((d: any) => `${d}%`)
+			.text((d: any) => `${numberFormatter(d, code)}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 

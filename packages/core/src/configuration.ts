@@ -1,6 +1,7 @@
 import { enUS as localeObject } from 'date-fns/locale'
 import { merge } from 'lodash-es'
 import { circlePack } from './configuration-non-customizable'
+
 import type {
 	AlluvialChartOptions,
 	AreaChartOptions,
@@ -76,15 +77,17 @@ const standardTruncationOptions = {
  */
 const locale: Locale = {
 	code: navigator.language, // read from browser's navigator.language
-	number: value => value.toLocaleString(navigator.language), // based on code property if specified
-	date: value => value.toLocaleDateString(navigator.language), // based on code property if specified
+	number: (value, language = navigator.language) => value.toLocaleString(language), // based on code property if specified
+	date: (value, language = navigator.language, options = {}) =>
+		value.toLocaleDateString(language, options), // based on code property if specified
 	translations: {
 		group: 'Group',
 		total: 'Total',
 		toolbarTabularModalTitle: 'Tabular representation',
 		toolbarExportAsCSV: 'Export to CSV',
 		toolbarExportAsJPG: 'Export to JPG',
-		toolbarExportAsPNG: 'Export to PNG'
+		toolbarExportAsPNG: 'Export to PNG',
+		tabularDownloadAsCSV: 'Download as CSV'
 	}
 }
 

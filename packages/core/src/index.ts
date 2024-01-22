@@ -90,6 +90,7 @@ export type {
 	ComboChartAxisOptions,
 	GridOptions,
 	LegendOptions,
+	Locale,
 	RulerOptions,
 	StackedBarOptions,
 	TimeScaleOptions,

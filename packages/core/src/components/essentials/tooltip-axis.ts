@@ -72,8 +72,6 @@ export class AxisChartsTooltip extends Tooltip {
 				)
 			}
 
-			console.log(options)
-
 			items.push({
 				label: get(options, 'locale.translations.group') || get(options, 'tooltip.groupLabel'),
 				value: datum[groupMapsTo],

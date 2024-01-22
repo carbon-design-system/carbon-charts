@@ -153,7 +153,7 @@ export class Histogram extends Component {
 	addEventListeners() {
 		const options = this.model.getOptions()
 		const { groupMapsTo } = options.data
-
+		const { code, number: numberFormatter } = getProperty(options, 'locale')
 		const self = this
 		this.parent
 			.selectAll('path.bar')
@@ -162,8 +162,8 @@ export class Histogram extends Component {
 
 				hoveredElement.classed('hovered', true)
 
-				const x0 = parseFloat(get(datum, 'data.x0'))
-				const x1 = parseFloat(get(datum, 'data.x1'))
+				const x0 = numberFormatter(parseFloat(get(datum, 'data.x0')), code)
+				const x1 = numberFormatter(parseFloat(get(datum, 'data.x1')), code)
 
 				const rangeAxisPosition = self.services.cartesianScales.getRangeAxisPosition()
 				const rangeScaleLabel = self.services.cartesianScales.getScaleLabel(rangeAxisPosition)
