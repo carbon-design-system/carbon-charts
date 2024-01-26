@@ -2227,7 +2227,7 @@ __metadata:
   dependencies:
     "@carbon/charts": "workspace:*"
     "@carbon/icons-react": "npm:^11.34.0"
-    "@carbon/telemetry": "npm:~0.1.0"
+    "@ibm/telemetry-js": "npm:^1.2.0"
     "@stackblitz/sdk": "npm:1.9.0"
     "@types/react": "npm:^18.2.48"
     "@types/react-dom": "npm:^18.2.18"
@@ -3202,6 +3202,15 @@ __metadata:
   version: 6.0.0-next.6
   resolution: "@ibm/plex@npm:6.0.0-next.6"
   checksum: 7f47f9535def1047dff51703fd1041c2f2915df1d405f1d62e785cc55b56478ea91af2e95b838692ef4142835ea765217935e2e336bac5a4437a9092ec0cfb4f
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ibm/telemetry-js@npm:1.2.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: 6b5a154067c52cc8f6abe7bf71308764aa5df361d3d867d8c96862e6196de67799eeb36435355f41ce201a57e75aa9a9279ab461ec7bd98ae5908f06694e3fc4
   languageName: node
   linkType: hard
 
