@@ -18,10 +18,11 @@
 	},
 	"files": [
 		"dist",
-		"README.md"
+		"README.md",
+		"telemetry.yml"
 	],
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
@@ -41,7 +42,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/icons-react": "^11.34.0",
-		"@carbon/telemetry": "~0.1.0",
+		"@ibm/telemetry-js": "^1.2.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
