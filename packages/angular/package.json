@@ -10,7 +10,7 @@
 	"type": "module",
 	"scripts": {
 		"ng": "ng",
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:md": "cp *.md dist",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"disabled:file:downlevel:dts": "downlevel-dts dist dist",
