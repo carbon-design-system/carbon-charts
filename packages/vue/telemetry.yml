@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://unpkg.com/@ibm/telemetry-config-schema@v1/dist/config.schema.json
+version: 1
+projectId: f37fae0f-81da-434b-86ac-22cfac61fe62
+endpoint: "https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics"
+collect:
+  npm:
+    dependencies: null

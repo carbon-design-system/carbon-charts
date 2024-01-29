@@ -50,10 +50,11 @@
 		"scss",
 		"styles.css",
 		"styles.min.css",
-		"CHANGELOG.md"
+		"CHANGELOG.md",
+		"telemetry.yml"
 	],
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:css:charts": "sass scss/index.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:demo": "sass scss/demos.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
@@ -80,8 +81,8 @@
 	},
 	"dependencies": {
 		"@carbon/colors": "^11.20.1",
-		"@carbon/telemetry": "~0.1.0",
 		"@carbon/utils-position": "^1.1.4",
+		"@ibm/telemetry-js": "1.2.0",
 		"carbon-components": "^10.58.13",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",

@@ -6,6 +6,6 @@
   },
   "allowedNonPeerDependencies": [
     "@carbon/charts",
-    "@carbon/telemetry"
+    "@ibm/telemetry-js"
   ]
 }
