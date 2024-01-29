@@ -8,7 +8,6 @@ import type {
 import type { Component } from '../components'
 import type { TruncationOptions } from './truncation'
 
-
 /**
  *Locale Options Interface
  */
@@ -16,6 +15,22 @@ export interface Locale {
 	code?: string // BCP 47 language tag
 	number?: (value: number, language: string) => string
 	date?: (value: Date, language: string, options) => string
+	time?: (value: Date, language: string, options) => string
+	optionsObject?: Record<
+		string,
+		{
+			obj?: {
+				month?: string
+				day?: string
+				hour?: string
+				minute?: string
+				fractionalSecondDigits?: number
+				weekday?: string
+				year?: string
+			}
+			type?: string
+		}
+	>
 	translations?: {
 		group?: string // used by Tooltip and Toolbar / Tabular Representation
 		total?: string // ditto
@@ -24,7 +39,7 @@ export interface Locale {
 		toolbarExportAsJPG?: string
 		toolbarExportAsPNG?: string
 		tabularDownloadAsCSV?: string
-		meterTitle?:string
+		meterTitle?: string
 	}
 }
 

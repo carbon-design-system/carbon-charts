@@ -80,6 +80,115 @@ const locale: Locale = {
 	number: (value, language = navigator.language) => value.toLocaleString(language), // based on code property if specified
 	date: (value, language = navigator.language, options = {}) =>
 		value.toLocaleDateString(language, options), // based on code property if specified
+	time: (value, language = navigator.language, options) =>
+		value.toLocaleTimeString(language, options), // based on code property if specified
+	optionsObject: {
+		'MMM d, pp': {
+			obj: {
+				month: 'short',
+				day: 'numeric'
+			},
+			type: 'time'
+		},
+		pp: {
+			obj: {},
+			type: 'time'
+		},
+		'MMM d, p': {
+			obj: {
+				month: 'short',
+				day: 'numeric',
+				hour: 'numeric',
+				minute: '2-digit'
+			},
+			type: 'time'
+		},
+		p: {
+			obj: {
+				hour: 'numeric',
+				minute: '2-digit'
+			},
+			type: 'time'
+		},
+		'MMM d, h:mm:ss.SSS a': {
+			obj: {
+				month: 'short',
+				day: 'numeric',
+				hour: 'numeric',
+				minute: '2-digit',
+				fractionalSecondDigits: 3
+			},
+			type: 'time'
+		},
+		'h:mm:ss.SSS a': {
+			obj: {
+				hour: 'numeric',
+				minute: '2-digit',
+				fractionalSecondDigits: 3
+			},
+			type: 'time'
+		},
+		'MMM d': {
+			obj: {
+				month: 'short',
+				day: 'numeric'
+			},
+			type: 'date'
+		},
+		d: {
+			obj: {
+				day: 'numeric'
+			},
+			type: 'date'
+		},
+		'MMM d, hh a': {
+			obj: {
+				month: 'short',
+				day: 'numeric',
+				hour: '2-digit'
+			},
+			type: 'time'
+		},
+		'hh a': {
+			obj: {
+				hour: '2-digit'
+			},
+			type: 'time'
+		},
+		'MMM yyyy': {
+			obj: {
+				month: 'short',
+				year: 'numeric'
+			},
+			type: 'date'
+		},
+		MMM: {
+			obj: {
+				month: 'short'
+			},
+			type: 'date'
+		},
+		'eee, MMM d': {
+			obj: {
+				weekday: 'short',
+				month: 'short',
+				day: 'numeric'
+			},
+			type: 'date'
+		},
+		eee: {
+			obj: {
+				weekday: 'short'
+			},
+			type: 'date'
+		},
+		yyyy: {
+			obj: {
+				year: 'numeric'
+			},
+			type: 'date'
+		}
+	},
 	translations: {
 		group: 'Group',
 		total: 'Total',

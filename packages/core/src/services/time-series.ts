@@ -84,8 +84,10 @@ export function formatTick(
 	i: number,
 	allTicks: Array<number>,
 	interval: string,
-	timeScaleOptions: TimeScaleOptions
+	timeScaleOptions: TimeScaleOptions,
+	options
 ): string {
+	const localeObject = getProperty(options, 'locale')
 	const showDayName = timeScaleOptions.showDayName
 	const intervalConsideringAlsoShowDayNameOption =
 		interval === 'daily' && showDayName ? 'weekly' : interval
@@ -104,8 +106,22 @@ export function formatTick(
 	}
 
 	const locale = timeScaleOptions.localeObject
-
-	return format(date, formatString, { locale })
+	const { code, optionsObject } = localeObject
+	if (interval === 'quarterly') {
+		const formattedDate = format(date, formatString, { locale })
+		const formatArr = formattedDate.split('').map(val => {
+			let num = Number(val)
+			if (!Number.isNaN(num)) {
+				return localeObject.number(num, code)
+			} else {
+				return val
+			}
+		})
+		return formatArr.join('')
+	} else {
+		const { type, obj } = optionsObject[formatString]
+		return localeObject[type](date, code, obj)
+	}
 }
 
 // Given a timestamp, return an object of useful time formats
