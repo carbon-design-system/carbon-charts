@@ -35,7 +35,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/telemetry": "~0.1.0",
+		"@ibm/telemetry-js": "1.2.0",
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {

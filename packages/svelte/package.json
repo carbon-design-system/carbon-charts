@@ -43,7 +43,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/telemetry": "~0.1.0"
+		"@ibm/telemetry-js": "1.2.0"
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",

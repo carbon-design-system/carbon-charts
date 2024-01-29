@@ -39,7 +39,7 @@ const config: StorybookConfig = {
 				// }
 			},
 			optimizeDeps: {
-				exclude: ['@carbon/telemetry']
+				exclude: ['@ibm/telemetry-js']
 			}
 		})
 	},
