@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.24 (2024-01-26)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.23 (2024-01-20)
 
 **Note:** Version bump only for package @carbon/charts
