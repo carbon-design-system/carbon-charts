@@ -94,7 +94,8 @@ export class Radar extends Component {
 			.nice(yTicksNumber)
 		const yTicks = yScale.ticks(yTicksNumber)
 
-		const colorScale = (group: string): string => this.model.getFillColor(group)
+		const colorScale = (group: string, key?: any, data?: any): string =>
+			this.model.getFillColor(group, key, data)
 
 		// constructs a new radial line generator
 		// the angle accessor returns the angle in radians with 0° at -y (12 o’clock)
@@ -366,9 +367,9 @@ export class Radar extends Component {
 							? () => `translate(${c.x}, ${c.y}) scale(${1 + Math.random() * 0.35})`
 							: `translate(${c.x}, ${c.y})`
 					)
-					.style('fill', (group: any) => colorScale(group.name))
+					.style('fill', (group: any) => colorScale(group.name, undefined, group.data))
 					.style('fill-opacity', radarConfigs.opacity.selected)
-					.style('stroke', (group: any) => colorScale(group.name))
+					.style('stroke', (group: any) => colorScale(group.name, undefined, group.data))
 					.call((selection: any) => {
 						const selectionUpdate = selection.transition().call((t: any) =>
 							this.services.transitions.setupTransition({
@@ -397,8 +398,8 @@ export class Radar extends Component {
 							originalClassName: 'blob'
 						})
 					)
-					.style('fill', (group: any) => colorScale(group.name))
-					.style('stroke', (group: any) => colorScale(group.name))
+					.style('fill', (group: any) => colorScale(group.name, undefined, group.data))
+					.style('stroke', (group: any) => colorScale(group.name, undefined, group.data))
 				update.call((selection: any) =>
 					selection
 						.transition()
@@ -717,7 +718,7 @@ export class Radar extends Component {
 						.map((d: any) => ({
 							label: d[groupMapsTo],
 							value: d[valueMapsTo],
-							color: self.model.getFillColor(d[groupMapsTo]),
+							color: self.model.getFillColor(d[groupMapsTo], undefined, d),
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
 								dataGroupName: d[groupMapsTo]

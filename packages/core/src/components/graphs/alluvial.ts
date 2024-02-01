@@ -211,8 +211,11 @@ export class Alluvial extends Component {
 				if (isGradientAllowed) {
 					return `url(#${this.gradient_id}-link-${d.index})`
 				}
-
-				return this.model.getFillColor(d.source.name)
+				return this.model.getFillColor(d.source.name, undefined, {
+					...d,
+					source: d.source.name,
+					target: d.target.name
+				})
 			})
 			.attr('stroke-width', (d: any) => Math.max(1, d.width))
 			.style('stroke-opacity', alluvialConfigs.opacity.default)

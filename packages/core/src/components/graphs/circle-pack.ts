@@ -87,8 +87,8 @@ export class CirclePack extends Component {
 						: `node node-leaf ${originalClass}`
 				})
 			})
-			.style('fill', (d: any) => this.model.getFillColor(d.data.dataGroupName))
-			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName))
+			.style('fill', (d: any) => this.model.getFillColor(d.data.dataGroupName, undefined, d.data))
+			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName, undefined, d.data))
 			.attr('cx', (d: any) => d.x)
 			.attr('cy', (d: any) => d.y)
 			.transition('circlepack-leaf-update-enter')
@@ -123,7 +123,7 @@ export class CirclePack extends Component {
 		this.parent
 			.selectAll('circle.node')
 			.filter((d: any) => data.some((datum: any) => datum === d.data) && d.depth > 1)
-			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName))
+			.style('stroke', (d: any) => this.model.getFillColor(d.data.dataGroupName, undefined, d.data))
 	}
 
 	// highlight the children circles with a stroke

@@ -57,7 +57,10 @@ export class SimpleBar extends Bar {
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => {
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
+				return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
+			})
 			.attr('d', (d: any) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
