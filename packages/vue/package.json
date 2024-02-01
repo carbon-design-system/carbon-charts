@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.13.24",
+	"version": "1.13.25",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -16,10 +16,11 @@
 	},
 	"files": [
 		"dist",
-		"CHANGELOG.md"
+		"CHANGELOG.md",
+		"telemetry.yml"
 	],
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"build:package": "vite build && yarn file:styles",
 		"demo:mdx:vue": "cp ../core/src/stories/getting-started/vue.stories.mdx src/stories",
@@ -39,7 +40,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/telemetry": "~0.1.0",
+		"@ibm/telemetry-js": "1.2.0",
 		"vue": "^3.4.15"
 	},
 	"devDependencies": {

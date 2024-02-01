@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.13.24",
+	"version": "1.13.25",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
@@ -10,7 +10,7 @@
 	"type": "module",
 	"scripts": {
 		"ng": "ng",
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:md": "cp *.md dist",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"disabled:file:downlevel:dts": "downlevel-dts dist dist",
@@ -35,7 +35,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/telemetry": "~0.1.0",
+		"@ibm/telemetry-js": "1.2.0",
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
