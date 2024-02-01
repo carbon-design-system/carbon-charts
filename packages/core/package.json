@@ -86,7 +86,7 @@
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"date-fns": "^3.3.0",
+		"date-fns": "^3.3.1",
 		"dompurify": "^3.0.8",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
@@ -109,8 +109,8 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.20.1",
-		"@carbon/styles": "1.48.0",
-		"@carbon/themes": "^11.29.0",
+		"@carbon/styles": "1.48.1",
+		"@carbon/themes": "^11.29.1",
 		"@rollup/plugin-replace": "^5.0.5",
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.3",
@@ -121,15 +121,15 @@
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
-		"jsdom": "^23.2.0",
+		"jsdom": "^24.0.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.10",
+		"storybook": "~7.6.12",
 		"typedoc": "^0.25.7",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.12",
-		"vite-plugin-dts": "^3.7.1",
-		"vitest": "^1.2.1"
+		"vite-plugin-dts": "^3.7.2",
+		"vitest": "^1.2.2"
 	},
 	"publishConfig": {
 		"access": "public"
