@@ -174,7 +174,7 @@ bootstrapApplication(App)
     "compilerOptions": {
       "outDir": "./dist/out-tsc",
       "forceConsistentCasingInFileNames": true,
-      "strict": true,
+      "strict": false,
       "noImplicitOverride": true,
       "noPropertyAccessFromIndexSignature": true,
       "noImplicitReturns": true,
