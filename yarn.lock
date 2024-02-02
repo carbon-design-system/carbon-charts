@@ -2195,7 +2195,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.6.15"
     eslint-plugin-svelte: "npm:^2.35.1"
     eslint-plugin-vue: "npm:^9.21.1"
-    husky: "npm:^9.0.8"
+    husky: "npm:^9.0.10"
     lerna: "npm:8.0.2"
     pinst: "npm:^3.0.0"
     prettier: "npm:^3.2.4"
@@ -14057,12 +14057,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.0.8":
-  version: 9.0.8
-  resolution: "husky@npm:9.0.8"
+"husky@npm:^9.0.10":
+  version: 9.0.10
+  resolution: "husky@npm:9.0.10"
   bin:
-    husky: bin.js
-  checksum: 939f1c279d0d126bf3493b7770f63ca620fdaa0879db426cd80ea2fb74b816ee624f6d4c815ebc8d1f9fda884498f47d5b2b07afb643dff351afdff6112b9d47
+    husky: bin.mjs
+  checksum: 585d95fec151d2e3fba1a8d97c1290dee40b83eb2b8850afae0805e183b3b3ec45bfeef97b2d0c4ae16f1c1bf19788b9129627d9ba02d924c874632207e33b93
   languageName: node
   linkType: hard
 
