@@ -1,3 +1,5 @@
+import { Alignments, ScaleTypes } from '@/interfaces'
+
 export const groupedBarData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 65000 },
 	{ group: 'Dataset 1', key: 'More', value: -29123 },
@@ -102,7 +104,7 @@ export const groupedBarOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		}
 	}
@@ -121,7 +123,7 @@ export const groupedBarSelectedGroupsOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		}
 	}
@@ -134,7 +136,7 @@ export const groupedHorizontalBarOptions = {
 	title: 'Horizontal grouped bar (discrete)',
 	axes: {
 		left: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		bottom: {
@@ -152,7 +154,7 @@ export const groupedBarTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 }
@@ -163,7 +165,7 @@ export const groupedBarHorizontalTimeSeriesOptions = {
 	axes: {
 		left: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		bottom: {
 			mapsTo: 'value'
@@ -180,7 +182,7 @@ export const groupedBarTimeSeriesDenseOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 }
@@ -202,7 +204,7 @@ export const simpleBarOptions = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -214,7 +216,7 @@ export const simpleBarColorOverrideOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'group'
 		}
 	},
@@ -237,7 +239,7 @@ export const simpleBarCustomLegendOrderOptions = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	legend: {
@@ -253,7 +255,7 @@ export const simpleBarAdditionalLegendItemsOptions = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	legend: {
@@ -307,7 +309,7 @@ export const simpleBarOptionsCustomTicks = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -322,11 +324,11 @@ export const simpleBarCenteredLegendOptions = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	legend: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	}
 }
 
@@ -338,7 +340,7 @@ export const simpleBarFixedDomainOptions = {
 			domain: [-100000, 100000]
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'group'
 		}
 	}
@@ -371,7 +373,7 @@ export const simpleHorizontalBarOptions = {
 	axes: {
 		left: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {
 			mapsTo: 'value'
@@ -386,14 +388,14 @@ export const simpleHorizontalBarCenteredLegendOptions = {
 	axes: {
 		left: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {
 			mapsTo: 'value'
 		}
 	},
 	legend: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	}
 }
 
@@ -402,7 +404,7 @@ export const simpleHorizontalBarLongLabelOptions = {
 	axes: {
 		left: {
 			mapsTo: 'group',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			truncation: {
 				type: 'mid_line',
 				threshold: 10,
@@ -458,7 +460,7 @@ export const simpleBarTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 }
@@ -477,7 +479,7 @@ export const simpleBarTurkishLocaleOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			ticks: {
 				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
 			}
@@ -499,7 +501,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 	axes: {
 		left: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		bottom: {
 			mapsTo: 'value'
@@ -519,7 +521,7 @@ export const simpleBarTimeSeriesDenseOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			ticks: {
 				formatter: (ticks: Date) =>
 					ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
@@ -553,7 +555,7 @@ export const floatingHorizontalBarTimeSeriesOptions = {
 	axes: {
 		left: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		bottom: {
 			mapsTo: 'value'
@@ -594,7 +596,7 @@ export const stackedBarOptions = {
 		},
 		bottom: {
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -633,7 +635,7 @@ export const stackedHorizontalBarOptions = {
 	title: 'Horizontal stacked bar (discrete)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {
 			stacked: true
@@ -673,7 +675,7 @@ export const stackedBarTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 }
@@ -710,7 +712,7 @@ export const stackedBarShortIntervalTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 }
@@ -727,7 +729,7 @@ export const stackedBarTimeSeriesOptionsCustomTicks = {
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			ticks: {
 				values: [new Date(2019, 0, 17)]
 			}
@@ -740,7 +742,7 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 	title: 'Horizontal stacked bar (time series)',
 	axes: {
 		left: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		bottom: {
 			stacked: true
@@ -757,7 +759,7 @@ export const simpleBarEmptyStateOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -769,7 +771,7 @@ export const simpleBarSkeletonOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	data: {
@@ -784,7 +786,7 @@ export const groupedBarEmptyStateOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -796,7 +798,7 @@ export const groupedBarSkeletonOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	data: {
@@ -811,7 +813,7 @@ export const stackedBarEmptyStateOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -823,7 +825,7 @@ export const stackedBarSkeletonOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	data: {
@@ -837,7 +839,7 @@ export const simpleHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal simple bar (empty state)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	}
@@ -849,7 +851,7 @@ export const simpleHorizontalBarSkeletonOptions = {
 	title: 'Horizontal simple bar (skeleton)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	},
@@ -864,7 +866,7 @@ export const groupedHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal grouped bar (empty state)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	}
@@ -876,7 +878,7 @@ export const groupedHorizontalBarSkeletonOptions = {
 	title: 'Horizontal grouped bar (skeleton)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	},
@@ -891,7 +893,7 @@ export const stackedHorizontalBarEmptyStateOptions = {
 	title: 'Horizontal stacked bar (empty state)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	}
@@ -903,7 +905,7 @@ export const stackedHorizontalBarSkeletonOptions = {
 	title: 'Horizontal stacked bar (skeleton)',
 	axes: {
 		left: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
 	},
@@ -930,7 +932,7 @@ export const floatingBarOptions = {
 		},
 		bottom: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -948,7 +950,7 @@ export const floatingHorizontalBarOptions = {
 	axes: {
 		left: {
 			mapsTo: 'group',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {
 			mapsTo: 'value',

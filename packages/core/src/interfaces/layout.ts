@@ -4,15 +4,15 @@ export interface LayoutConfigs {
 	/**
 	 * Direction/orientation of the layout
 	 */
-	direction?: LayoutDirection
+	direction?: LayoutDirection | string
 	/**
 	 * Whether to render through SVG or HTML
 	 */
-	renderType?: RenderTypes
+	renderType?: RenderTypes | string
 	/**
 	 * how the layout will align its children
 	 */
-	alignItems?: LayoutAlignItems
+	alignItems?: LayoutAlignItems | string
 }
 
 export interface Coordinates {

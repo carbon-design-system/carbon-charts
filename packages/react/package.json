@@ -41,7 +41,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.34.1",
+		"@carbon/icons-react": "^11.35.0",
 		"@ibm/telemetry-js": "^1.2.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
@@ -52,7 +52,7 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.51",
+		"@types/react": "^18.2.52",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.2.1",
 		"classnames": "^2.5.1",

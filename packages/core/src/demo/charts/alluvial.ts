@@ -1,3 +1,5 @@
+import { Alignments } from '@/interfaces'
+
 export const alluvialSimpleData = [
 	{
 		source: 'About Modal',
@@ -301,7 +303,7 @@ export const alluvialNodeAlignmentOptions = {
 			{ name: 'Y', category: 'Middle' },
 			{ name: 'Z', category: 'Finish' }
 		],
-		nodeAlignment: 'left'
+		nodeAlignment: Alignments.LEFT
 	}
 }
 

@@ -9,7 +9,7 @@ export const version = {
 	d3: core.dependencies['d3'] as string,
 	d3Cloud: core.dependencies['d3-cloud'] as string,
 	d3Sankey: core.dependencies['d3-sankey'] as string,
-	angular: angular.dependencies['@angular/core'] as string,
+	angular: '17.1.2', // angular.dependencies['@angular/core'] as string, // temporary StackBlitz issue
 	react: react.dependencies['react'] as string,
 	rxjs: angular.dependencies['rxjs'] as string,
 	svelteVite: '^2.4.6' as string,

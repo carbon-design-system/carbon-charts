@@ -28,7 +28,7 @@
   "packageManager": "yarn@4.0.2",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
-    "@nrwl/devkit": "^17.3.1",
+    "@nrwl/devkit": "^18.0.0",
     "@storybook/addon-essentials": "~7.6.12",
     "@storybook/addon-interactions": "~7.6.12",
     "@storybook/addon-links": "~7.6.12",
@@ -55,7 +55,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-svelte": "^2.35.1",
     "eslint-plugin-vue": "^9.21.1",
-    "husky": "^9.0.8",
+    "husky": "^9.0.10",
     "lerna": "8.0.2",
     "pinst": "^3.0.0",
     "prettier": "^3.2.4",
