@@ -95,7 +95,7 @@ bootstrapApplication(App)
 	const angularJson = `{
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "cli": {
-      "analytics": "1e1de97b-a744-405a-8b5a-0397bb3d01ce"
+      "analytics": false
     },
     "newProjectRoot": "projects",
     "projects": {
