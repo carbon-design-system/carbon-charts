@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const lineTimeSeriesData15seconds = [
 	{
 		group: 'Dataset 1',
@@ -41,7 +43,7 @@ export const lineTimeSeries15secondsOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -93,7 +95,7 @@ export const lineTimeSeriesMinuteOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -140,7 +142,7 @@ export const lineTimeSeries30minutesOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -193,7 +195,7 @@ export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -211,7 +213,7 @@ export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -268,7 +270,7 @@ export const lineTimeSeriesDailyOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -320,7 +322,7 @@ export const lineTimeSeriesWeeklyOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -375,7 +377,7 @@ export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -395,7 +397,7 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 			}
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			ticks: {
 				formatter: (ticks: Date) =>
 					ticks.toLocaleDateString('fr-FR', { month: 'short', day: 'numeric' })
@@ -459,7 +461,7 @@ export const lineTimeSeriesQuarterlyOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -491,7 +493,7 @@ export const lineTimeSeriesIntervalOverrideOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -546,7 +548,7 @@ export const lineTimeSeriesYearlyOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -568,7 +570,7 @@ export const lineTimeSeriesSingleDatumOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	legend: {
@@ -620,7 +622,7 @@ export const lineTimeSeriesNoExtendedDomainOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -650,7 +652,7 @@ export const lineTimeSeriesTwoIdenticalLabelsOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -666,7 +668,7 @@ export const lineTimeSeriesTwoIdenticalLabels2Options = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {
@@ -696,7 +698,7 @@ export const lineTimeSeriesAllLabelsInPrimaryFormatOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	},
 	timeScale: {

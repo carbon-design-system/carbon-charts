@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const heatmapData = [
 	{
 		letter: 'A',
@@ -607,12 +609,12 @@ export const heatmapOptions = {
 		bottom: {
 			title: 'Letters',
 			mapsTo: 'letter',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			title: 'Months',
 			mapsTo: 'month',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	heatmap: {
@@ -626,12 +628,12 @@ export const heatmapQuantizeLegendOption = {
 		bottom: {
 			title: 'Letters',
 			mapsTo: 'letter',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			title: 'Months',
 			mapsTo: 'month',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	heatmap: {
@@ -657,12 +659,12 @@ export const heatmapDomainOptions = {
 		bottom: {
 			title: 'Letters',
 			mapsTo: 'letter',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			title: 'Months',
 			mapsTo: 'month',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			domain: [
 				'January',
 				'February',
@@ -1133,12 +1135,12 @@ export const heatmapMissingDataOptions = {
 		bottom: {
 			title: 'Letters',
 			mapsTo: 'letter',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			title: 'Months',
 			mapsTo: 'month',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	heatmap: {
