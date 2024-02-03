@@ -28,7 +28,7 @@
   "packageManager": "yarn@4.0.2",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
-    "@nrwl/devkit": "^17.3.2",
+    "@nrwl/devkit": "^18.0.0",
     "@storybook/addon-essentials": "~7.6.12",
     "@storybook/addon-interactions": "~7.6.12",
     "@storybook/addon-links": "~7.6.12",
