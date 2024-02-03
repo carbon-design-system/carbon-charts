@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.27 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.26 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.25 (2024-01-29)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.24 (2024-01-26)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

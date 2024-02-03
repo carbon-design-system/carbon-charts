@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.13.24",
+	"version": "1.13.27",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -50,10 +50,11 @@
 		"scss",
 		"styles.css",
 		"styles.min.css",
-		"CHANGELOG.md"
+		"CHANGELOG.md",
+		"telemetry.yml"
 	],
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:css:charts": "sass scss/index.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:demo": "sass scss/demos.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
@@ -80,13 +81,13 @@
 	},
 	"dependencies": {
 		"@carbon/colors": "^11.20.1",
-		"@carbon/telemetry": "~0.1.0",
 		"@carbon/utils-position": "^1.1.4",
+		"@ibm/telemetry-js": "1.2.0",
 		"carbon-components": "^10.58.13",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"date-fns": "^3.3.0",
+		"date-fns": "^3.3.1",
 		"dompurify": "^3.0.8",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
@@ -109,8 +110,8 @@
 	"devDependencies": {
 		"@carbon/import-once": "^10.7.0",
 		"@carbon/layout": "^11.20.1",
-		"@carbon/styles": "1.48.0",
-		"@carbon/themes": "^11.29.0",
+		"@carbon/styles": "1.48.1",
+		"@carbon/themes": "^11.29.1",
 		"@rollup/plugin-replace": "^5.0.5",
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.3",
@@ -121,15 +122,15 @@
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
-		"jsdom": "^23.2.0",
+		"jsdom": "^24.0.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.10",
+		"storybook": "~7.6.12",
 		"typedoc": "^0.25.7",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.12",
-		"vite-plugin-dts": "^3.7.1",
-		"vitest": "^1.2.1"
+		"vite-plugin-dts": "^3.7.2",
+		"vitest": "^1.2.2"
 	},
 	"publishConfig": {
 		"access": "public"
