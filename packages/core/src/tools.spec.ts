@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { getProperty, mergeDefaultChartOptions } from './tools'
+import { ScaleTypes } from './interfaces/enums'
 
 describe('Tools.getProperty', () => {
 	it('works with simple nested object containing a number > 0', () => {
@@ -48,7 +49,7 @@ describe('Tools.mergeDefaultChartOptions', () => {
 					title: 'Title'
 				},
 				left: {
-					scaleType: 'time'
+					scaleType: ScaleTypes.TIME
 				}
 			}
 		}
@@ -83,7 +84,7 @@ describe('Tools.mergeDefaultChartOptions', () => {
 				},
 				left: {
 					includeZero: true,
-					scaleType: 'time',
+					scaleType: ScaleTypes.TIME,
 					mapsTo: 'date'
 				}
 			},
