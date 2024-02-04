@@ -11,7 +11,7 @@
 		".": {
 			"style": "./dist/styles.css",
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.mjs"
+			"import": "./dist/index.mjs"
 		}
 	},
 	"files": [
