@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const basicBulletData = [
 	{
 		title: 'Item E',
@@ -44,11 +46,11 @@ export const basicBulletOptions = {
 			extendLinearDomainBy: 'marker'
 		},
 		left: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'title'
 		},
 		right: {
-			scaleType: 'labels-ratio',
+			scaleType: ScaleTypes.LABELS_RATIO,
 			mapsTo: 'title'
 		}
 	}

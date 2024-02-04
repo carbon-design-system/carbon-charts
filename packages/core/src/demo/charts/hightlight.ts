@@ -1,5 +1,6 @@
 import { addZoomBarToOptions } from './zoom-bar'
 import { boundedAreaTimeSeriesData } from './area'
+import { ScaleTypes } from '@/interfaces'
 
 export const highlightBoundedAreaTimeSeriesData = boundedAreaTimeSeriesData
 
@@ -16,7 +17,7 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			highlights: {
 				highlightStartMapsTo: 'startHighlight',
 				highlightEndMapsTo: 'endHighlight',
@@ -37,7 +38,7 @@ export const boundedAreaTimeSeriesWithHighlightsOptions = {
 		},
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveNatural'

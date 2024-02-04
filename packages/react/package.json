@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.13.23",
+	"version": "1.13.28",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -18,10 +18,11 @@
 	},
 	"files": [
 		"dist",
-		"README.md"
+		"README.md",
+		"telemetry.yml"
 	],
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
@@ -40,8 +41,8 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.34.0",
-		"@carbon/telemetry": "~0.1.0",
+		"@carbon/icons-react": "^11.35.0",
+		"@ibm/telemetry-js": "^1.2.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
@@ -51,7 +52,7 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.48",
+		"@types/react": "^18.2.52",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.2.1",
 		"classnames": "^2.5.1",
@@ -61,10 +62,10 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.10",
+		"storybook": "~7.6.12",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.12",
-		"vite-plugin-dts": "^3.7.1"
+		"vite-plugin-dts": "^3.7.2"
 	},
 	"publishConfig": {
 		"access": "public"

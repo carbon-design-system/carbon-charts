@@ -1,3 +1,5 @@
+import { Alignments } from '@/interfaces'
+
 // simple radar
 export const radarData = [
 	{ product: 'Product 1', feature: 'Price', score: 60 },
@@ -33,13 +35,13 @@ export const radarCenteredOptions = {
 			angle: 'feature',
 			value: 'score'
 		},
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	},
 	data: {
 		groupMapsTo: 'product'
 	},
 	legend: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	}
 }
 

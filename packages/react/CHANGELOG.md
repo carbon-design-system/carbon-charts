@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.28 (2024-02-03)
+
+### Bug Fixes
+
+- **stackblitz:** env changes for angular examples to match latest StackBlitz Angular TypeScript
+  template ([#1738](https://github.com/carbon-design-system/carbon-charts/issues/1738))
+  ([2b62be8](https://github.com/carbon-design-system/carbon-charts/commit/2b62be8d329f52ae7a0ae525d54c81622fb71d22))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.27 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.26 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.25 (2024-01-29)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.24 (2024-01-26)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.23 (2024-01-20)
 
 **Note:** Version bump only for package @carbon/charts-react

@@ -1,3 +1,5 @@
+import { LegendPositions, LegendOrientations, ScaleTypes } from '@/interfaces'
+
 export const lineData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 1', key: 'More', value: 23500 },
@@ -27,12 +29,12 @@ export const lineOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -44,13 +46,13 @@ export const sparklineLoadingOptions = {
 			visible: false,
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			visible: false,
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	grid: {
@@ -126,12 +128,12 @@ export const lineLongLabelOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -142,14 +144,14 @@ export const lineCustomDomainOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			domain: ['Qty', 'More', 'Misc']
 		},
 		left: {
 			domain: [10000, 50000],
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -186,12 +188,12 @@ export const lineSelectedGroupsOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -202,12 +204,12 @@ export const lineCustomColorOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	color: {
@@ -249,12 +251,12 @@ export const lineTimeSeriesOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveMonotoneX'
@@ -266,20 +268,20 @@ export const lineTimeSeriesWithThresholdsOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			thresholds: [
 				{
 					value: new Date(2019, 0, 11),
 					label: 'Custom formatter',
-					valueFormatter: e =>
-						new Intl.DateTimeFormat('en-CA', { month: 'short', day: '2-digit' }).format(e)
+					valueFormatter: (d: Date) =>
+						new Intl.DateTimeFormat('en-CA', { month: 'short', day: '2-digit' }).format(d)
 				}
 			]
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			thresholds: [
 				{ value: 55000, label: 'Custom label', fillColor: 'orange' },
 				{ value: 10000, fillColor: '#03a9f4' }
@@ -338,12 +340,12 @@ export const lineTimeSeriesDenseOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveMonotoneX'
@@ -362,7 +364,7 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	width: '400px',
 	axes: {
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date',
 			ticks: {
 				rotation: 'always'
@@ -390,12 +392,12 @@ export const lineLogAxisOptions = {
 	width: '400px',
 	axes: {
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		left: {
 			mapsTo: 'value',
-			scaleType: 'log',
+			scaleType: ScaleTypes.LOG,
 			includeZero: false
 		}
 	}
@@ -409,12 +411,12 @@ export const lineEmptyStateOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveMonotoneX'
@@ -428,12 +430,12 @@ export const lineSkeletonOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveMonotoneX',
@@ -467,7 +469,7 @@ export const dualLine = {
 			mapsTo: 'temp'
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date',
 			title: 'Date'
 		},
@@ -486,16 +488,16 @@ export const lineOptionsLegendOrientation = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	legend: {
-		position: 'left',
-		orientation: 'vertical'
+		position: LegendPositions.LEFT,
+		orientation: LegendOrientations.VERTICAL
 	}
 }
