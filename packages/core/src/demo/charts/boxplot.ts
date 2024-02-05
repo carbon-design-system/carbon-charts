@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const simpleBoxplotData = [
 	{ group: 'Q1', key: 'Monday', value: 65000 },
 	{ group: 'Q1', key: 'Tuesday', value: 29123 },
@@ -28,7 +30,7 @@ export const simpleBoxplotOptions = {
 			mapsTo: 'value'
 		},
 		left: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'group'
 		}
 	}
@@ -42,7 +44,7 @@ export const simpleVerticalBoxplotOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'group'
 		}
 	}
