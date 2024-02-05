@@ -224,7 +224,7 @@ export class Axis extends Component {
 		// create the right ticks formatter
 		let formatter: any
 		const userProvidedFormatter = getProperty(axisOptions, 'ticks', 'formatter')
-		const { code, number: numberFormatter } = getProperty(options, 'locale')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		if (isTimeScaleType) {
 			const timeInterval = computeTimeIntervalName(
 				axis.tickValues(),
@@ -233,7 +233,7 @@ export class Axis extends Component {
 
 			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) =>
-					formatTick(t, i, axis.tickValues(), timeInterval, timeScaleOptions, options)
+					formatTick(t, i, axis.tickValues(), timeInterval, timeScaleOptions, options.locale)
 			} else {
 				formatter = (t: number, i: number) => {
 					const defaultFormattedValue = formatTick(
@@ -242,7 +242,7 @@ export class Axis extends Component {
 						axis.tickValues(),
 						timeInterval,
 						timeScaleOptions,
-						options
+						options.locale
 					)
 					return userProvidedFormatter(t, i, defaultFormattedValue)
 				}
@@ -250,7 +250,7 @@ export class Axis extends Component {
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = (t: any) => numberFormatter(t, code)
+					formatter = (t: any) => numberFormatter(t, localeCode)
 				}
 			} else {
 				formatter = userProvidedFormatter

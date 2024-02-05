@@ -201,7 +201,7 @@ export class Threshold extends Component {
 		const { value, axisPosition } = datum
 		const options = this.getOptions()
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition)
-		const { code, number: numberFormatter } = getProperty(options, 'locale')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		// If scale is time, format the threshold date as the ticks format
 		if (scaleType === ScaleTypes.TIME) {
 			const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(axisPosition)
@@ -215,10 +215,10 @@ export class Threshold extends Component {
 				getProperty(timeScaleOptions, 'timeInterval')
 			)
 
-			return formatTick(value, 0, scale.ticks(), timeInterval, timeScaleOptions, options)
+			return formatTick(value, 0, scale.ticks(), timeInterval, timeScaleOptions, options.locale)
 		}
 
-		return numberFormatter(value, code)
+		return numberFormatter(value, localeCode)
 	}
 
 	appendThresholdLabel() {

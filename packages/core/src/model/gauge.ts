@@ -17,13 +17,13 @@ export class GaugeChartModel extends ChartModel {
 		const displayData = this.getDisplayData()
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		const headers = ['Group', 'Value']
 		const cells = [
 			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
-				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], code)
+				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], localeCode)
 			])
 		]
 

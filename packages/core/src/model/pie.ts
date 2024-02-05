@@ -30,13 +30,13 @@ export class PieChartModel extends ChartModel {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const { valueMapsTo } = options.pie
-		const { number: numberFormatter, code } = getProperty(options, 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const headers = ['Group', 'Value']
 		const cells = [
 			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
-				datum[valueMapsTo] === null ? '&ndash;' : numberFormatter(datum[valueMapsTo], code)
+				datum[valueMapsTo] === null ? '&ndash;' : numberFormatter(datum[valueMapsTo], localeCode)
 			])
 		]
 

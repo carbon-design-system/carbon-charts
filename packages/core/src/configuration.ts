@@ -78,20 +78,29 @@ const standardTruncationOptions = {
 const locale: Locale = {
 	code: navigator.language, // read from browser's navigator.language
 	number: (value, language = navigator.language) => value.toLocaleString(language), // based on code property if specified
-	date: (value, language = navigator.language, options = {}) =>
-		value.toLocaleDateString(language, options), // based on code property if specified
-	time: (value, language = navigator.language, options) =>
-		value.toLocaleTimeString(language, options), // based on code property if specified
+	date: (value, language = navigator.language, options = {}, preformattedLocaleValue = null) =>
+		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleDateString(language, options), // based on code property if specified
+	time: (value, language = navigator.language, options = {}, preformattedLocaleValue = null) =>
+		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleTimeString(language, options), // based on code property if specified
 	optionsObject: {
 		'MMM d, pp': {
 			obj: {
 				month: 'short',
-				day: 'numeric'
+				day: 'numeric',
+				hour: 'numeric',
+				minute: '2-digit',
+				second: '2-digit',
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
 		pp: {
-			obj: {},
+			obj: {
+				hour: 'numeric',
+				minute: '2-digit',
+				second: '2-digit',
+				hourCycle: 'h12'
+			},
 			type: 'time'
 		},
 		'MMM d, p': {
@@ -99,14 +108,16 @@ const locale: Locale = {
 				month: 'short',
 				day: 'numeric',
 				hour: 'numeric',
-				minute: '2-digit'
+				minute: '2-digit',
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
 		p: {
 			obj: {
 				hour: 'numeric',
-				minute: '2-digit'
+				minute: '2-digit',
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
@@ -116,7 +127,8 @@ const locale: Locale = {
 				day: 'numeric',
 				hour: 'numeric',
 				minute: '2-digit',
-				fractionalSecondDigits: 3
+				fractionalSecondDigits: 3,
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
@@ -124,7 +136,8 @@ const locale: Locale = {
 			obj: {
 				hour: 'numeric',
 				minute: '2-digit',
-				fractionalSecondDigits: 3
+				fractionalSecondDigits: 3,
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
@@ -145,13 +158,15 @@ const locale: Locale = {
 			obj: {
 				month: 'short',
 				day: 'numeric',
-				hour: '2-digit'
+				hour: '2-digit',
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
 		'hh a': {
 			obj: {
-				hour: '2-digit'
+				hour: '2-digit',
+				hourCycle: 'h12'
 			},
 			type: 'time'
 		},
@@ -192,11 +207,18 @@ const locale: Locale = {
 	translations: {
 		group: 'Group',
 		total: 'Total',
-		toolbarTabularModalTitle: 'Tabular representation',
-		toolbarExportAsCSV: 'Export to CSV',
-		toolbarExportAsJPG: 'Export to JPG',
-		toolbarExportAsPNG: 'Export to PNG',
-		tabularDownloadAsCSV: 'Download as CSV'
+		meter: {
+			title: '' //default is emply string as meter title is dataset label
+		},
+		tabularRep: {
+			title: 'Tabular representation',
+			downloadAsCSV: 'Download as CSV'
+		},
+		toolbar: {
+			exportAsCSV: 'Export to CSV',
+			exportAsJPG: 'Export to JPG',
+			exportAsPNG: 'Export to PNG'
+		}
 	}
 }
 

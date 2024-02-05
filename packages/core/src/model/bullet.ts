@@ -33,7 +33,7 @@ export class BulletChartModel extends ChartModelCartesian {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
-		const { number: numberFormatter, code } = getProperty(options, 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const performanceAreaTitles = getProperty(options, 'bullet', 'performanceAreaTitles')
 		const headers = ['Title', 'Group', 'Value', 'Target', 'Percentage', 'Performance']
@@ -41,11 +41,13 @@ export class BulletChartModel extends ChartModelCartesian {
 			...displayData.map((datum: any) => [
 				datum['title'],
 				datum[groupMapsTo],
-				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], code),
-				getProperty(datum, 'marker') === null ? '&ndash;' : numberFormatter(datum['marker'], code),
+				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], localeCode),
 				getProperty(datum, 'marker') === null
 					? '&ndash;'
-					: `${numberFormatter(Math.floor((datum[rangeIdentifier] / datum.marker) * 100), code)}%`,
+					: numberFormatter(datum['marker'], localeCode),
+				getProperty(datum, 'marker') === null
+					? '&ndash;'
+					: `${numberFormatter(Math.floor((datum[rangeIdentifier] / datum.marker) * 100), localeCode)}%`,
 				performanceAreaTitles[this.getMatchingRangeIndexForDatapoint(datum)]
 			])
 		]

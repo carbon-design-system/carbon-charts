@@ -218,7 +218,9 @@ export class WordCloud extends Component {
 						},
 						{
 							label:
-								get(options, 'locale.translations.group') || get(options, 'tooltip.groupLabel'),
+								get(options, 'locale.translations.group') ||
+								get(options, 'tooltip.groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],

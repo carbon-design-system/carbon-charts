@@ -11,7 +11,7 @@ export class AlluvialChartModel extends ChartModelCartesian {
 
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		// Sort array by source to get a close depiction of the alluvial chart
 		displayData.sort((a: any, b: any) => a['source'].localeCompare(b['source']))
@@ -20,7 +20,7 @@ export class AlluvialChartModel extends ChartModelCartesian {
 			...displayData.map((datum: any) => [
 				datum['source'],
 				datum['target'],
-				numberFormatter(datum['value'], code)
+				numberFormatter(datum['value'], localeCode)
 			])
 		]
 

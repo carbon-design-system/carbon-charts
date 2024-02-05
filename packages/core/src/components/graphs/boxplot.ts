@@ -336,7 +336,8 @@ export class Boxplot extends Component {
 						{
 							label:
 								getProperty(options, 'locale', 'translations', 'group') ||
-								getProperty(options, 'tooltip', 'groupLabel'),
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP]
@@ -446,7 +447,8 @@ export class Boxplot extends Component {
 						{
 							label:
 								getProperty(options, 'locale', 'translations', 'group') ||
-								getProperty(options, 'tooltip', 'groupLabel'),
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP]

@@ -127,7 +127,7 @@ export class CirclePackChartModel extends ChartModel {
 
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		const headers = ['Child', 'Parent', 'Value']
 		const cells = []
@@ -138,7 +138,7 @@ export class CirclePackChartModel extends ChartModel {
 				// Call recursive function
 				value += this.getChildrenDatums(datum.children, datum.name, cells, 0)
 			}
-			cells.push(['&ndash;', datum.name, numberFormatter(value, code)])
+			cells.push(['&ndash;', datum.name, numberFormatter(value, localeCode)])
 		})
 
 		return super.formatTable({ headers, cells })
@@ -154,7 +154,7 @@ export class CirclePackChartModel extends ChartModel {
 	 */
 	private getChildrenDatums(children: any, parent: any, result: string[][] = [], totalSum = 0) {
 		const grandParent = parent
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		children.forEach((child: any) => {
 			const parentWithinIteration = child.name
@@ -167,7 +167,7 @@ export class CirclePackChartModel extends ChartModel {
 					}
 
 					sum += this.getChildrenDatums(child.children, parentWithinIteration, result, sum)
-					result.push([parentWithinIteration, grandParent, numberFormatter(sum, code)])
+					result.push([parentWithinIteration, grandParent, numberFormatter(sum, localeCode)])
 					totalSum += sum
 				}
 			} else {
@@ -176,7 +176,7 @@ export class CirclePackChartModel extends ChartModel {
 					value = child.value
 					totalSum += child.value
 				}
-				result.push([child.name, grandParent, numberFormatter(value, code)])
+				result.push([child.name, grandParent, numberFormatter(value, localeCode)])
 			}
 		})
 

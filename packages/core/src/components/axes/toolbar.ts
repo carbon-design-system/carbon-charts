@@ -468,10 +468,11 @@ export class Toolbar extends Component {
 
 		const displayData = this.model.getDisplayData()
 		const options = this.model.getOptions()
-		const { toolbarExportAsCSV, toolbarExportAsJPG, toolbarExportAsPNG } = getProperty(
+		const { exportAsCSV, exportAsJPG, exportAsPNG } = getProperty(
 			options,
 			'locale',
-			'translations'
+			'translations',
+			'toolbar'
 		)
 
 		let controlConfig: any
@@ -544,7 +545,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
-					title: toolbarExportAsCSV,
+					title: exportAsCSV,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -555,7 +556,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
-					title: toolbarExportAsPNG,
+					title: exportAsPNG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -566,7 +567,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
-					title: toolbarExportAsJPG,
+					title: exportAsJPG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)

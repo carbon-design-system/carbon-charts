@@ -11,17 +11,17 @@ export class TreemapChartModel extends ChartModel {
 
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
-		console.log(code,numberFormatter)
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
+
 		const headers = ['Child', 'Group', 'Value']
 		const cells = []
 		displayData.forEach((datum: any) => {
 			if (Array.isArray(datum.children)) {
 				datum.children.forEach((child: any) => {
-					cells.push([child.name, datum.name, numberFormatter(child.value,code)])
+					cells.push([child.name, datum.name, numberFormatter(child.value, localeCode)])
 				})
 			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {
-				cells.push(['–', datum.name, numberFormatter(datum.value,code)])
+				cells.push(['–', datum.name, numberFormatter(datum.value, localeCode)])
 			}
 		})
 

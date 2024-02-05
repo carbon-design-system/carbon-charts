@@ -55,7 +55,7 @@ export class ChartModelCartesian extends ChartModel {
 		const { groupMapsTo } = options.data
 		const { primaryDomain, primaryRange, secondaryDomain, secondaryRange } =
 			this.assignRangeAndDomains()
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		const headers = [
 			'Group',
@@ -69,7 +69,7 @@ export class ChartModelCartesian extends ChartModel {
 			datum[primaryDomain.identifier] === null ? '&ndash;' : datum[primaryDomain.identifier],
 			datum[primaryRange.identifier] === null || isNaN(datum[primaryRange.identifier])
 				? '&ndash;'
-				: numberFormatter(datum[primaryRange.identifier], code),
+				: numberFormatter(datum[primaryRange.identifier], localeCode),
 			...(secondaryDomain
 				? [
 						datum[secondaryDomain.identifier] === null

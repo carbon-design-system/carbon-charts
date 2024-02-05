@@ -12,7 +12,7 @@ export class RadarChartModel extends ChartModelCartesian {
 		const options = this.getOptions()
 		const groupedData = this.getGroupedData()
 		const { angle, value } = getProperty(options, 'radar', 'axes')
-		const { number: numberFormatter, code } = getProperty(options, 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const additionalHeaders = getProperty(groupedData, '0', 'data').map((d: any) => d[angle])
 		const headers = ['Group', ...additionalHeaders]
@@ -22,7 +22,7 @@ export class RadarChartModel extends ChartModelCartesian {
 					datum['name'],
 					...additionalHeaders.map((_: any, i: number) =>
 						getProperty(datum, 'data', i, value) !== null
-							? numberFormatter(getProperty(datum, 'data', i, value), code)
+							? numberFormatter(getProperty(datum, 'data', i, value), localeCode)
 							: '&ndash;'
 					)
 				]

@@ -1,6 +1,6 @@
 import { min } from 'd3'
 import { format } from 'date-fns/format'
-
+import { Locale } from '../interfaces/components'
 import { getProperty } from '@/tools'
 import { TimeIntervalFormats, TimeIntervalNames, TimeScaleOptions } from '@/interfaces/axis-scales'
 
@@ -85,9 +85,8 @@ export function formatTick(
 	allTicks: Array<number>,
 	interval: string,
 	timeScaleOptions: TimeScaleOptions,
-	options
+	localeOptions?: Locale
 ): string {
-	const localeObject = getProperty(options, 'locale')
 	const showDayName = timeScaleOptions.showDayName
 	const intervalConsideringAlsoShowDayNameOption =
 		interval === 'daily' && showDayName ? 'weekly' : interval
@@ -106,21 +105,24 @@ export function formatTick(
 	}
 
 	const locale = timeScaleOptions.localeObject
-	const { code, optionsObject } = localeObject
-	if (interval === 'quarterly') {
+	const { code: localeCode, optionsObject } = localeOptions
+
+	if (interval === 'quarterly' || !optionsObject[formatString]) {
 		const formattedDate = format(date, formatString, { locale })
 		const formatArr = formattedDate.split('').map(val => {
 			let num = Number(val)
-			if (!Number.isNaN(num)) {
-				return localeObject.number(num, code)
+			if (val !== ' ' && !Number.isNaN(num)) {
+				return num.toLocaleString(localeCode)
 			} else {
 				return val
 			}
 		})
-		return formatArr.join('')
+		return ['15seconds', 'minute', '30minutes', 'hourly'].includes(interval)
+			? localeOptions.time(date, localeCode, {}, formatArr.join(''))
+			: localeOptions.date(date, localeCode, {}, formatArr.join(''))
 	} else {
 		const { type, obj } = optionsObject[formatString]
-		return localeObject[type](date, code, obj)
+		return localeOptions[type](date, localeCode, obj)
 	}
 }
 

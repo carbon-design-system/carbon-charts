@@ -18,7 +18,7 @@ export class MeterTitle extends Title {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { groupMapsTo } = options.data
-		const meterTitle = getProperty(options, 'locale', 'translations', 'meterTitle')
+		const meterTitle = options.locale.translations.meter.title
 		const proportional = getProperty(options, 'meter', 'proportional')
 
 		if (proportional) {
@@ -215,7 +215,7 @@ export class MeterTitle extends Title {
 	 */
 	appendPercentage() {
 		const dataValue = getProperty(this.model.getDisplayData(), 0, 'value')
-		const { code, number: numberFormatter } = getProperty(this.getOptions(), 'locale')
+		const { code: localeCode, number: numberFormatter } = getProperty(this.getOptions(), 'locale')
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer()
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title')
@@ -238,7 +238,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage as any)
-			.text((d: any) => `${numberFormatter(d, code)}%`)
+			.text((d: any) => `${numberFormatter(d, localeCode)}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 

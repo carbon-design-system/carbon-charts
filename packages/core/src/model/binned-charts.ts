@@ -10,21 +10,21 @@ export class ChartModelBinned extends ChartModelCartesian {
 	getTabularDataArray() {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 		const binnedStackedData = this.getBinnedStackedData()
-		console.log(code)
+
 		const headers = [
 			get(options, 'bins.rangeLabel') || 'Range',
 			...binnedStackedData.map(datum => get(datum, `0.${groupMapsTo}`))
 		]
 		const cells = [
 			...get(binnedStackedData, 0).map((d, i) => [
-				`${numberFormatter(Number(get(d, 'data.x0')), code)} – ${numberFormatter(
+				`${numberFormatter(Number(get(d, 'data.x0')), localeCode)} – ${numberFormatter(
 					Number(get(d, 'data.x1')),
-					code
+					localeCode
 				)}`,
 				...binnedStackedData.map(datum =>
-					numberFormatter(get(datum[i], `data.${get(datum[i], groupMapsTo)}`), code)
+					numberFormatter(get(datum[i], `data.${get(datum[i], groupMapsTo)}`), localeCode)
 				)
 			])
 		]

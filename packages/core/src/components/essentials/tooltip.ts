@@ -181,27 +181,35 @@ export class Tooltip extends Component {
 	valueFormatter(value: any, label: string) {
 		const options = this.getOptions()
 		const valueFormatter = getProperty(options, 'tooltip', 'valueFormatter')
-		const { code, number: numberFormatter, date: dateFormatter } = getProperty(options, 'locale')
+		const {
+			code: localeCode,
+			number: numberFormatter,
+			date: dateFormatter
+		} = getProperty(options, 'locale')
 
 		if (valueFormatter) {
 			return valueFormatter(value, label)
 		}
 
 		if (typeof value.getTime === 'function') {
-			return dateFormatter(value, code, { month: 'short', day: 'numeric', year: 'numeric' })
+			return dateFormatter(value, localeCode, { month: 'short', day: 'numeric', year: 'numeric' })
 		}
 
 		try {
 			// it's a correct ISO format Date string
 			if (typeof value === 'string' && /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(value)) {
 				const newDate = new Date(value)
-				return dateFormatter(newDate, code, { month: 'short', day: 'numeric', year: 'numeric' })
+				return dateFormatter(newDate, localeCode, {
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric'
+				})
 			}
 		} catch (e) {
 			// not a valid ISO format string
 		}
 
-		return numberFormatter(value, code)
+		return numberFormatter(value, localeCode)
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment

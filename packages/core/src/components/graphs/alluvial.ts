@@ -252,7 +252,7 @@ export class Alluvial extends Component {
 				this.services.domUtils.generateElementIDString(`alluvial-node-title-${d.index}`)
 			)
 
-		const { code, number: numberFormatter } = getProperty(options, 'locale')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		// Node title - text
 		textNode
 			.append('text')
@@ -268,7 +268,7 @@ export class Alluvial extends Component {
 			// shift 13 pixels down to fit background container
 			.attr('dy', 13)
 			.text((d: any) => {
-				return `${d.name} (${numberFormatter(d.value, code)})`
+				return `${d.name} (${numberFormatter(d.value, localeCode)})`
 			})
 			.attr('aria-label', (d: any) => {
 				return `${d.name} (${d.value})`
@@ -328,7 +328,7 @@ export class Alluvial extends Component {
 	addLineEventListener() {
 		const options = this.getOptions()
 		const self = this
-		const { number: numberFormatter, code } = getProperty(this.getOptions(), 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 
 		// Set delay to counter flashy behaviour
 		const debouncedLineHighlight = debounce((link, event = 'mouseover') => {
@@ -382,7 +382,7 @@ export class Alluvial extends Component {
 						{
 							label: datum.target.name,
 							value:
-								numberFormatter(datum.value, code) +
+								numberFormatter(datum.value, localeCode) +
 								(options.alluvial.units ? ` ${options.alluvial.units}` : ''),
 							color: strokeColor,
 							labelIcon: self.getRightArrowIcon()

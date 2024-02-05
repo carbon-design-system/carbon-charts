@@ -14,8 +14,18 @@ import type { TruncationOptions } from './truncation'
 export interface Locale {
 	code?: string // BCP 47 language tag
 	number?: (value: number, language: string) => string
-	date?: (value: Date, language: string, options) => string
-	time?: (value: Date, language: string, options) => string
+	date?: (
+		value: Date,
+		language: string,
+		options: Intl.DateTimeFormatOptions,
+		preformattedLocaleValue?: string
+	) => string
+	time?: (
+		value: Date,
+		language: string,
+		options: Intl.DateTimeFormatOptions,
+		preformattedLocaleValue?: string
+	) => string
 	optionsObject?: Record<
 		string,
 		{
@@ -24,9 +34,13 @@ export interface Locale {
 				day?: string
 				hour?: string
 				minute?: string
+				second?: string
 				fractionalSecondDigits?: number
 				weekday?: string
 				year?: string
+				hourCycle?: string
+				hour12?: boolean
+				dayPeriod?: string
 			}
 			type?: string
 		}
@@ -34,12 +48,18 @@ export interface Locale {
 	translations?: {
 		group?: string // used by Tooltip and Toolbar / Tabular Representation
 		total?: string // ditto
-		toolbarTabularModalTitle?: string
-		toolbarExportAsCSV?: string
-		toolbarExportAsJPG?: string
-		toolbarExportAsPNG?: string
-		tabularDownloadAsCSV?: string
-		meterTitle?: string
+		meter?: {
+			title?: string
+		}
+		tabularRep: {
+			title?: string
+			downloadAsCSV?: string
+		}
+		toolbar: {
+			exportAsCSV?: string
+			exportAsJPG?: string
+			exportAsPNG?: string
+		}
 	}
 }
 

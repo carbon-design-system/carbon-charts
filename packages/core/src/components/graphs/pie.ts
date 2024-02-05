@@ -130,7 +130,7 @@ export class Pie extends Component {
 			})
 
 		// Draw the slice labels
-		const { code, number: numberFormatter } = getProperty(options, 'locale')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		const renderLabels = options.pie.labels.enabled
 		const labelData = renderLabels
 			? pieLayoutData.filter(x => (x.data as any)[valueMapsTo] > 0)
@@ -169,7 +169,7 @@ export class Pie extends Component {
 				return (
 					numberFormatter(
 						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo),
-						code
+						localeCode
 					) + '%'
 				)
 			})

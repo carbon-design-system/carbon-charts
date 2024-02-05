@@ -81,7 +81,7 @@ export class BoxplotChartModel extends ChartModelCartesian {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const boxplotData = this.getBoxplotData()
-		const { number: numberFormatter, code } = getProperty(options, 'locale')
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const headers = ['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)']
 		const cells = [
@@ -93,28 +93,28 @@ export class BoxplotChartModel extends ChartModelCartesian {
 				return [
 					datum[groupMapsTo],
 					getProperty(datum, 'whiskers', 'min') !== null
-						? numberFormatter(getProperty(datum, 'whiskers', 'min'), code)
+						? numberFormatter(getProperty(datum, 'whiskers', 'min'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_25') !== null
-						? numberFormatter(getProperty(datum, 'quartiles', 'q_25'), code)
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_25'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_50') !== null
-						? numberFormatter(getProperty(datum, 'quartiles', 'q_50'), code)
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_50'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_75') !== null
-						? numberFormatter(getProperty(datum, 'quartiles', 'q_75'), code)
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_75'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'whiskers', 'max') !== null
-						? numberFormatter(getProperty(datum, 'whiskers', 'max'), code)
+						? numberFormatter(getProperty(datum, 'whiskers', 'max'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_75') !== null &&
 					getProperty(datum, 'quartiles', 'q_25') !== null
 						? (numberFormatter(
 								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
 							),
-							code)
+							localeCode)
 						: '&ndash;',
-					outliers.map((d: any) => numberFormatter(d, code)).join(',')
+					outliers.map((d: any) => numberFormatter(d, localeCode)).join(',')
 				]
 			})
 		]
