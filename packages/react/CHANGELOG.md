@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.30 (2024-02-05)
+
+### Bug Fixes
+
+- **stackblitz/vue:** workaround for stackblitz bug
+  ([#1742](https://github.com/carbon-design-system/carbon-charts/issues/1742))
+  ([def9bc5](https://github.com/carbon-design-system/carbon-charts/commit/def9bc52c785c0fc9e7cf8a82204f6f288c15c25))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.29 (2024-02-04)
+
+### Bug Fixes
+
+- **stackblitz/vue:** remove export ambiguity
+  ([#1741](https://github.com/carbon-design-system/carbon-charts/issues/1741))
+  ([19b8492](https://github.com/carbon-design-system/carbon-charts/commit/19b849287bee73ce910545a6c25f80382567de40))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.28 (2024-02-03)
 
 ### Bug Fixes
