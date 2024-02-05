@@ -10,16 +10,8 @@ body:
   - type: input
     id: name
     attributes:
-      label: Name
-      description: What's your name?
-    validations:
-      required: true
-  - type: checkboxes
-    id: ibm
-    attributes:
-      label: Are you an IBM employee?
-      options:
-        - label: 'Yes'
+      label: Application/Team
+      description: If you are from IBM, which application/team are you from?
     validations:
       required: true
   - type: textarea
@@ -36,7 +28,7 @@ body:
     attributes:
       label: Version
       description: What version of our packages are you using?
-      placeholder: e.g. `@carbon/charts@1.11.10`
+      placeholder: e.g. `@carbon/charts@1.13.28`
     validations:
       required: true
   - type: textarea
@@ -54,13 +46,13 @@ body:
   - type: input
     id: sandbox
     attributes:
-      label: Codesandbox example
+      label: StackBlitz example
       description: >
-        Do you have a sandbox where we can see the issue reproduced?
+        Do you have a repro for this issue?
         
-        **Most of our demos offer a StackBlitz example that can help you get started**
+        **Get started** using the StackBlitz examples at
         https://carbon-design-system.github.io/carbon-charts/
-      placeholder: ex. https://www.stackblitz.com/...
+      placeholder: https://www.stackblitz.com/...
     validations:
       required: false
   - type: dropdown

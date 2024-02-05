@@ -13,6 +13,7 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
+		"outDir": "dist",
 
 		// Package-specific
 		"noImplicitThis": false

@@ -79,7 +79,7 @@ export interface LayoutComponentChild {
 	/**
 	 * how the layout child will grow or shrink
 	 */
-	growth: LayoutGrowth
+	growth: LayoutGrowth | string
 }
 
 /**
@@ -87,13 +87,13 @@ export interface LayoutComponentChild {
  */
 export interface LegendOptions {
 	enabled?: boolean
-	position?: LegendPositions
+	position?: LegendPositions | string
 	/**
 	 * the clickability of legend items
 	 */
 	clickable?: boolean
 	truncation?: TruncationOptions
-	alignment?: Alignments
+	alignment?: Alignments | string
 	order?: string[]
 	/**
 	 * customized legend items
@@ -223,7 +223,7 @@ export interface ToolbarControl {
 	/**
 	 * the toolbar control type
 	 */
-	type: ToolbarControlTypes
+	type: ToolbarControlTypes | string
 	/**
 	 * used as aria-label for toolbar control
 	 */
@@ -297,7 +297,7 @@ export interface ZoomBarOptions {
 	/**
 	 * whether the zoom bar is showing a slider view or a graph view etc.
 	 */
-	type?: ZoomBarTypes
+	type?: ZoomBarTypes | string
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */

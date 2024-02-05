@@ -31,7 +31,7 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		exclude: [
-			'@carbon/telemetry' // prevent Storybook issue
+			'@ibm/telemetry-js' // prevent Storybook issue
 		]
 	},
 	resolve: {

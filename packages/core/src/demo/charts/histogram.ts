@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const histogramContinueData = [
 	{ group: 'Dataset 1', age: 20 },
 	{ group: 'Dataset 2', age: 21 },
@@ -41,7 +43,7 @@ export const histogramContinueOptions = {
 		},
 		left: {
 			title: 'No. of participants',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			stacked: true,
 			binned: true
 		}
@@ -169,7 +171,7 @@ export const histogramContinueWithBinsNumberOptions = {
 		},
 		left: {
 			title: 'No. of transactions',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			binned: true
 		}
 	}
@@ -186,7 +188,7 @@ export const histogramContinueWithBinsOptions = {
 		},
 		left: {
 			title: 'No. of participants',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			stacked: true,
 			binned: true
 		}

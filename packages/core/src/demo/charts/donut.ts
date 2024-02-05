@@ -1,4 +1,5 @@
 import { pieData, pieDataMapsTo } from './pie'
+import { Alignments } from '@/interfaces'
 
 export const donutData = pieData
 
@@ -18,13 +19,13 @@ export const donutCenteredOptions = {
 	title: 'Donut (centered)',
 	resizable: true,
 	legend: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	},
 	donut: {
 		center: {
 			label: 'Browsers'
 		},
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	}
 }
 

@@ -1,5 +1,7 @@
 {
   "prettier.configPath": "prettier.config.mjs",
   "prettier.ignorePath": ".eslintignore",
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.debug": false,
+  "eslint.experimental.useFlatConfig": true
 }
