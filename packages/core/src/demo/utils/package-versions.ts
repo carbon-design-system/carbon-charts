@@ -9,16 +9,19 @@ export const version = {
 	d3: core.dependencies['d3'] as string,
 	d3Cloud: core.dependencies['d3-cloud'] as string,
 	d3Sankey: core.dependencies['d3-sankey'] as string,
-	angular: '17.1.2', // angular.dependencies['@angular/core'] as string, // temporary StackBlitz issue
+	angular: 'latest', // angular.dependencies['@angular/core'] as string, // temporary StackBlitz issue
 	react: react.dependencies['react'] as string,
 	rxjs: angular.dependencies['rxjs'] as string,
-	svelteVite: '^2.4.6' as string,
-	svelteTsConfig: '^5.0.2' as string,
+	svelteVite: svelte.devDependencies['@sveltejs/vite-plugin-svelte'] as string,
+	svelteTsConfig: 'latest' as string,
 	svelte: svelte.devDependencies['svelte'] as string,
 	svelteCheck: svelte.devDependencies['svelte-check'] as string,
 	tslib: angular.dependencies['tslib'] as string,
 	typescript: angular.dependencies['typescript'] as string,
 	vite: core.devDependencies['vite'] as string,
 	vue: vue.dependencies['vue'] as string,
+	vueTsc: vue.devDependencies['vue-tsc'] as string,
+	vueTypeScript: vue.devDependencies['typescript'] as string,
+	vueVitePlugin: vue.devDependencies['@vitejs/plugin-vue'] as string,
 	zoneJs: angular.dependencies['zone.js'] as string
 }
