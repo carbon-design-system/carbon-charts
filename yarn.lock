@@ -2168,7 +2168,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts-monorepo@workspace:."
   dependencies:
-    "@nrwl/devkit": "npm:^18.0.0"
+    "@nrwl/devkit": "npm:^18.0.1"
     "@storybook/addon-essentials": "npm:~7.6.12"
     "@storybook/addon-interactions": "npm:~7.6.12"
     "@storybook/addon-links": "npm:~7.6.12"
@@ -3727,12 +3727,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:18.0.0, @nrwl/devkit@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@nrwl/devkit@npm:18.0.0"
+"@nrwl/devkit@npm:18.0.1, @nrwl/devkit@npm:^18.0.1":
+  version: 18.0.1
+  resolution: "@nrwl/devkit@npm:18.0.1"
   dependencies:
-    "@nx/devkit": "npm:18.0.0"
-  checksum: 04424fd42db8c680704345d74fbfe7823e319706890ec33c508f04ea94f4e80119f38595ed452dffd3bb01d488cc55bf580be03e2b363e2e21eae007937eac9e
+    "@nx/devkit": "npm:18.0.1"
+  checksum: b4000d35c478159ed109337b9ddab345b412a6d3cad5c9673e16dc0f1224edafc401ccb2ee75fe2b04a30cdbef4d1e1c7c63743b9dfa9531a0053e99529338bf
   languageName: node
   linkType: hard
 
@@ -3792,11 +3792,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@nx/devkit@npm:18.0.0"
+"@nx/devkit@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@nx/devkit@npm:18.0.1"
   dependencies:
-    "@nrwl/devkit": "npm:18.0.0"
+    "@nrwl/devkit": "npm:18.0.1"
     ejs: "npm:^3.1.7"
     enquirer: "npm:~2.3.6"
     ignore: "npm:^5.0.4"
@@ -3806,7 +3806,7 @@ __metadata:
     yargs-parser: "npm:21.1.1"
   peerDependencies:
     nx: ">= 16 <= 18"
-  checksum: 843fdc91a06d670ba077bbcf28ebaf03190d50207d4152d9ee2248576801985a8b48a968ede9983b7b6f755c51237a0bb79c8de438e2d5fab7e6ae1ba7af87ae
+  checksum: 0472d00296b737bbfaf224000b58e22579f8d6cbe9018190031ddb568ca9be50a3f152c0c4d59e80abc8b4bd3eba9cbf419df2457d91c0a12deb6bf3694edd81
   languageName: node
   linkType: hard
 
