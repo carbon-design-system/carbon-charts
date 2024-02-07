@@ -26,25 +26,17 @@ export interface Locale {
 		options: Intl.DateTimeFormatOptions,
 		preformattedLocaleValue?: string
 	) => string
-	optionsObject?: Record<
-		string,
-		{
-			obj?: {
-				month?: string
-				day?: string
-				hour?: string
-				minute?: string
-				second?: string
-				fractionalSecondDigits?: number
-				weekday?: string
-				year?: string
-				hourCycle?: string
-				hour12?: boolean
-				dayPeriod?: string
-			}
-			type?: string
-		}
-	>
+	optionsObject?: {
+		'15seconds'?: localeTimeScaleOptions
+		minute?: localeTimeScaleOptions
+		'30minutes'?: localeTimeScaleOptions
+		hourly?: localeTimeScaleOptions
+		daily?: localeTimeScaleOptions
+		weekly?: localeTimeScaleOptions
+		monthly?: localeTimeScaleOptions
+		quarterly?: localeTimeScaleOptions
+		yearly?: localeTimeScaleOptions
+	}
 	translations?: {
 		group?: string // used by Tooltip and Toolbar / Tabular Representation
 		total?: string // ditto
@@ -61,6 +53,42 @@ export interface Locale {
 			exportAsPNG?: string
 		}
 	}
+}
+
+export interface localeTimeScaleOptions {
+	primary?: Record<
+		string,
+		{
+			month?: string
+			day?: string
+			hour?: string
+			minute?: string
+			second?: string
+			fractionalSecondDigits?: number
+			weekday?: string
+			year?: string
+			hourCycle?: string
+			hour12?: boolean
+			dayPeriod?: string
+		}
+	>
+	secondary?: Record<
+		string,
+		{
+			month?: string
+			day?: string
+			hour?: string
+			minute?: string
+			second?: string
+			fractionalSecondDigits?: number
+			weekday?: string
+			year?: string
+			hourCycle?: string
+			hour12?: boolean
+			dayPeriod?: string
+		}
+	>
+	type?: string
 }
 
 /**

@@ -83,123 +83,154 @@ const locale: Locale = {
 	time: (value, language = navigator.language, options = {}, preformattedLocaleValue = null) =>
 		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleTimeString(language, options), // based on code property if specified
 	optionsObject: {
-		'MMM d, pp': {
-			obj: {
-				month: 'short',
-				day: 'numeric',
-				hour: 'numeric',
-				minute: '2-digit',
-				second: '2-digit',
-				hourCycle: 'h12'
+		'15seconds': {
+			primary: {
+				'MMM d, pp': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					hourCycle: 'h12'
+				},
+				'MMM d, h:mm:ss.SSS a': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					fractionalSecondDigits: 3,
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				pp: {
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					hourCycle: 'h12'
+				},
+				'h:mm:ss.SSS a': {
+					hour: 'numeric',
+					minute: '2-digit',
+					fractionalSecondDigits: 3,
+					hourCycle: 'h12'
+				}
 			},
 			type: 'time'
 		},
-		pp: {
-			obj: {
-				hour: 'numeric',
-				minute: '2-digit',
-				second: '2-digit',
-				hourCycle: 'h12'
+		minute: {
+			primary: {
+				'MMM d, p': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				p: {
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
 			},
 			type: 'time'
 		},
-		'MMM d, p': {
-			obj: {
-				month: 'short',
-				day: 'numeric',
-				hour: 'numeric',
-				minute: '2-digit',
-				hourCycle: 'h12'
+		'30minutes': {
+			primary: {
+				'MMM d, p': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				p: {
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
 			},
 			type: 'time'
 		},
-		p: {
-			obj: {
-				hour: 'numeric',
-				minute: '2-digit',
-				hourCycle: 'h12'
+		hourly: {
+			primary: {
+				'MMM d, hh a': {
+					month: 'short',
+					day: 'numeric',
+					hour: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				'hh a': {
+					hour: '2-digit',
+					hourCycle: 'h12'
+				}
 			},
 			type: 'time'
 		},
-		'MMM d, h:mm:ss.SSS a': {
-			obj: {
-				month: 'short',
-				day: 'numeric',
-				hour: 'numeric',
-				minute: '2-digit',
-				fractionalSecondDigits: 3,
-				hourCycle: 'h12'
+		daily: {
+			primary: {
+				'MMM d': {
+					month: 'short',
+					day: 'numeric'
+				}
 			},
-			type: 'time'
-		},
-		'h:mm:ss.SSS a': {
-			obj: {
-				hour: 'numeric',
-				minute: '2-digit',
-				fractionalSecondDigits: 3,
-				hourCycle: 'h12'
-			},
-			type: 'time'
-		},
-		'MMM d': {
-			obj: {
-				month: 'short',
-				day: 'numeric'
+			secondary: {
+				d: {
+					day: 'numeric'
+				}
 			},
 			type: 'date'
 		},
-		d: {
-			obj: {
-				day: 'numeric'
+		weekly: {
+			primary: {
+				'eee, MMM d': {
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric'
+				}
+			},
+			secondary: {
+				eee: {
+					weekday: 'short'
+				}
 			},
 			type: 'date'
 		},
-		'MMM d, hh a': {
-			obj: {
-				month: 'short',
-				day: 'numeric',
-				hour: '2-digit',
-				hourCycle: 'h12'
+		monthly: {
+			primary: {
+				'MMM yyyy': {
+					month: 'short',
+					year: 'numeric'
+				}
 			},
-			type: 'time'
-		},
-		'hh a': {
-			obj: {
-				hour: '2-digit',
-				hourCycle: 'h12'
-			},
-			type: 'time'
-		},
-		'MMM yyyy': {
-			obj: {
-				month: 'short',
-				year: 'numeric'
+			secondary: {
+				MMM: {
+					month: 'short'
+				}
 			},
 			type: 'date'
 		},
-		MMM: {
-			obj: {
-				month: 'short'
-			},
+		quarterly: {
+			primary: {},
+			secondary: {},
 			type: 'date'
 		},
-		'eee, MMM d': {
-			obj: {
-				weekday: 'short',
-				month: 'short',
-				day: 'numeric'
+		yearly: {
+			primary: {
+				yyyy: {
+					year: 'numeric'
+				}
 			},
-			type: 'date'
-		},
-		eee: {
-			obj: {
-				weekday: 'short'
-			},
-			type: 'date'
-		},
-		yyyy: {
-			obj: {
-				year: 'numeric'
+			secondary: {
+				yyyy: {
+					year: 'numeric'
+				}
 			},
 			type: 'date'
 		}

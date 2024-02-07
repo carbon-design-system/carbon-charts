@@ -96,7 +96,8 @@ export function formatTick(
 	]
 	const primary = getProperty(formats, 'primary')
 	const secondary = getProperty(formats, 'secondary')
-	let formatString = isTickPrimary(tick, i, allTicks, interval, showDayName) ? primary : secondary
+	const primaryTickFlag = isTickPrimary(tick, i, allTicks, interval, showDayName)
+	let formatString = primaryTickFlag ? primary : secondary
 
 	// if the interval, and the timestamp includes milliseconds value
 	if (interval === '15seconds' && date.getMilliseconds() !== 0) {
@@ -106,8 +107,11 @@ export function formatTick(
 
 	const locale = timeScaleOptions.localeObject
 	const { code: localeCode, optionsObject } = localeOptions
+	const formatterType = optionsObject[interval]['type']
+	const formatterOptions =
+		optionsObject[interval][primaryTickFlag ? 'primary' : 'secondary'][formatString]
 
-	if (interval === 'quarterly' || !optionsObject[formatString]) {
+	if (interval === 'quarterly' || !formatterOptions) {
 		const formattedDate = format(date, formatString, { locale })
 		const formatArr = formattedDate.split('').map(val => {
 			let num = Number(val)
@@ -117,12 +121,9 @@ export function formatTick(
 				return val
 			}
 		})
-		return ['15seconds', 'minute', '30minutes', 'hourly'].includes(interval)
-			? localeOptions.time(date, localeCode, {}, formatArr.join(''))
-			: localeOptions.date(date, localeCode, {}, formatArr.join(''))
+		return localeOptions[formatterType](date, localeCode, {}, formatArr.join(''))
 	} else {
-		const { type, obj } = optionsObject[formatString]
-		return localeOptions[type](date, localeCode, obj)
+		return localeOptions[formatterType](date, localeCode, formatterOptions)
 	}
 }
 

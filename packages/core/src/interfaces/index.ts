@@ -53,6 +53,7 @@ export type {
 	LegendItem,
 	LegendOptions,
 	Locale,
+	localeTimeScaleOptions,
 	RulerOptions,
 	StackedBarOptions,
 	ThresholdOptions,

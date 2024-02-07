@@ -91,6 +91,7 @@ export type {
 	GridOptions,
 	LegendOptions,
 	Locale,
+	localeTimeScaleOptions,
 	RulerOptions,
 	StackedBarOptions,
 	TimeScaleOptions,
