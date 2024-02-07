@@ -718,7 +718,7 @@ export class Radar extends Component {
 						.map((d: any) => ({
 							label: d[groupMapsTo],
 							value: d[valueMapsTo],
-							color: self.model.getFillColor(d[groupMapsTo], undefined, d),
+							color: self.model.getFillColor(d[groupMapsTo], null, d),
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
 								dataGroupName: d[groupMapsTo]

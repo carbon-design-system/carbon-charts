@@ -211,7 +211,7 @@ export class Alluvial extends Component {
 				if (isGradientAllowed) {
 					return `url(#${this.gradient_id}-link-${d.index})`
 				}
-				return this.model.getFillColor(d.source.name, undefined, {
+				return this.model.getFillColor(d.source.name, null, {
 					...d,
 					source: d.source.name,
 					target: d.target.name

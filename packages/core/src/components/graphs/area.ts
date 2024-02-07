@@ -198,7 +198,7 @@ export class Area extends Component {
 						originalClassName: 'area'
 					})
 				)
-				.style('fill', (group: any) => self.model.getFillColor(group.name, undefined, group.data))
+				.style('fill', (group: any) => self.model.getFillColor(group.name, null, group.data))
 				.transition()
 				.call((t: any) =>
 					this.services.transitions.setupTransition({
