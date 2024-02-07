@@ -325,7 +325,7 @@
 					vertical-align: top;
 				}
 
-				.#{globals.$prefix}--btn-primary {
+				.#{globals.$prefix}--btn--primary {
 					&:hover {
 						color: var(--#{globals.$prefix}-text-on-color, #ffffff);
 						background-color: var(--#{globals.$prefix}-button-primary-hover, #0050e6);
