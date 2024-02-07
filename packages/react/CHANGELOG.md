@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.32 (2024-02-07)
+
+### Bug Fixes
+
+- **toolbar:** add minimized icon for fullscreen
+  ([#1744](https://github.com/carbon-design-system/carbon-charts/issues/1744))
+  ([4e43021](https://github.com/carbon-design-system/carbon-charts/commit/4e43021b51e4255b5a5ca2e887c83954f53412dc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.31 (2024-02-07)
 
 ### Bug Fixes
