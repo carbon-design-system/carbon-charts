@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.33 (2024-02-08)
+
+### Bug Fixes
+
+- **config:** UMD bundle errors when loaded in Salesforce LWC
+  ([#1747](https://github.com/carbon-design-system/carbon-charts/issues/1747))
+  ([e5a1f00](https://github.com/carbon-design-system/carbon-charts/commit/e5a1f00d46f07b2ff3072eed39876465d7d419cd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.32 (2024-02-07)
 
 ### Bug Fixes
