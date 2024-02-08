@@ -53,7 +53,7 @@
 		"d3-sankey": "^0.12.3",
 		"storybook": "~7.6.13",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.12",
+		"vite": "^5.1.0",
 		"vite-plugin-dts": "^3.7.2",
 		"vue-tsc": "^1.8.27"
 	},
