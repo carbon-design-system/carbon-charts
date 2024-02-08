@@ -162,14 +162,19 @@ export const timeScale: TimeScaleOptions = {
 	}
 }
 
-const isNotSalesforce = !window['Sfdc'] // Salesforce Lightning Web Security errors on fullscreenEnabled check
+// The following block has to be structured this way to get around Lightning Web Security (short-circuiting an if isn't good enough)
+let isFullScreenEnabled = false
 
-const isFullScreenEnabled =
-	typeof document !== 'undefined' && isNotSalesforce &&
-	(document['fullscreenEnabled'] ||
-		document['webkitFullscreenEnabled'] ||
-		document['mozFullScreenEnabled'] ||
-		document['msFullscreenEnabled'])
+try {
+	isFullScreenEnabled =
+		typeof document !== 'undefined' &&
+		(document['fullscreenEnabled'] ||
+			document['webkitFullscreenEnabled'] ||
+			document['mozFullScreenEnabled'] ||
+			document['msFullscreenEnabled'])
+} catch (e) {
+	console.warn('Fullscreen capabilities check failed: ', e.message)
+}
 
 /**
  * Base chart options common to any chart
