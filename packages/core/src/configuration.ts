@@ -162,7 +162,6 @@ export const timeScale: TimeScaleOptions = {
 	}
 }
 
-// The following block has to be structured this way to get around Lightning Web Security (short-circuiting an if isn't good enough)
 let isFullScreenEnabled = false
 
 try {
@@ -172,7 +171,7 @@ try {
 			document['webkitFullscreenEnabled'] ||
 			document['mozFullScreenEnabled'] ||
 			document['msFullscreenEnabled'])
-} catch (e) {
+} catch (e) { // some environments block access to fullscreenEnabled
 	console.warn('Fullscreen capabilities check failed: ', e.message)
 }
 
