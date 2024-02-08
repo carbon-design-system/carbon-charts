@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.13.33 (2024-02-08)
+
+### Bug Fixes
+
+- **modal:** padding of export to csv button
+  ([#1748](https://github.com/carbon-design-system/carbon-charts/issues/1748))
+  ([aa3caba](https://github.com/carbon-design-system/carbon-charts/commit/aa3caba334a0e810b6563c4c446c53a93b36ac7f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.32 (2024-02-07)
 
 ### Bug Fixes
