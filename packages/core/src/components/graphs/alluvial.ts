@@ -382,8 +382,9 @@ export class Alluvial extends Component {
 						{
 							label: datum.target.name,
 							value:
-								numberFormatter(datum.value, localeCode) +
-								(options.alluvial.units ? ` ${options.alluvial.units}` : ''),
+								(numberFormatter(datum.value, localeCode)
+									? `${numberFormatter(datum.value, localeCode)}`
+									: '-') + (options.alluvial.units ? ` ${options.alluvial.units}` : ''),
 							color: strokeColor,
 							labelIcon: self.getRightArrowIcon()
 						}

@@ -495,6 +495,40 @@ export const simpleBarTurkishLocaleOptions = {
 	}
 }
 
+//using locale interface to reformat everything to Arabic
+export const simpleBarArabicLocaleOptions = {
+	title: 'Arabic locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'ar-SA'
+	}
+}
+
+//using locale interface to reformat everything to Iranian
+export const simpleBarIranianLocaleOptions = {
+	title: 'Iranian locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'fa-IR'
+	}
+}
+
 // Horizontal simple time series
 export const simpleHorizontalBarTimeSeriesOptions = {
 	title: 'Horizontal simple bar (time series)',

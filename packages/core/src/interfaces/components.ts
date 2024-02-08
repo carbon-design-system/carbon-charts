@@ -27,15 +27,15 @@ export interface Locale {
 		preformattedLocaleValue?: string
 	) => string
 	optionsObject?: {
-		'15seconds'?: localeTimeScaleOptions
-		minute?: localeTimeScaleOptions
-		'30minutes'?: localeTimeScaleOptions
-		hourly?: localeTimeScaleOptions
-		daily?: localeTimeScaleOptions
-		weekly?: localeTimeScaleOptions
-		monthly?: localeTimeScaleOptions
-		quarterly?: localeTimeScaleOptions
-		yearly?: localeTimeScaleOptions
+		'15seconds'?: LocaleTimeScaleOptions
+		minute?: LocaleTimeScaleOptions
+		'30minutes'?: LocaleTimeScaleOptions
+		hourly?: LocaleTimeScaleOptions
+		daily?: LocaleTimeScaleOptions
+		weekly?: LocaleTimeScaleOptions
+		monthly?: LocaleTimeScaleOptions
+		quarterly?: LocaleTimeScaleOptions
+		yearly?: LocaleTimeScaleOptions
 	}
 	translations?: {
 		group?: string // used by Tooltip and Toolbar / Tabular Representation
@@ -55,7 +55,7 @@ export interface Locale {
 	}
 }
 
-export interface localeTimeScaleOptions {
+export interface LocaleTimeScaleOptions {
 	primary?: Record<
 		string,
 		{
