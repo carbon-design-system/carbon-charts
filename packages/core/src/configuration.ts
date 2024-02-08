@@ -162,8 +162,10 @@ export const timeScale: TimeScaleOptions = {
 	}
 }
 
+const isNotSalesforce = !window['Sfdc'] // Salesforce Lightning Web Security errors on fullscreenEnabled check
+
 const isFullScreenEnabled =
-	typeof document !== 'undefined' &&
+	typeof document !== 'undefined' && isNotSalesforce &&
 	(document['fullscreenEnabled'] ||
 		document['webkitFullscreenEnabled'] ||
 		document['mozFullScreenEnabled'] ||

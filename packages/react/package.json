@@ -52,8 +52,8 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.52",
-		"@types/react-dom": "^18.2.18",
+		"@types/react": "^18.2.55",
+		"@types/react-dom": "^18.2.19",
 		"@vitejs/plugin-react": "^4.2.1",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
@@ -62,7 +62,7 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.12",
+		"storybook": "~7.6.13",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.12",
 		"vite-plugin-dts": "^3.7.2"
