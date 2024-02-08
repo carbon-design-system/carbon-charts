@@ -228,6 +228,7 @@ export enum ToolbarControlTypes {
 	ZOOM_OUT = 'Zoom out',
 	RESET_ZOOM = 'Reset zoom',
 	MAKE_FULLSCREEN = 'Make fullscreen',
+	EXIT_FULLSCREEN = 'Exit fullscreen',
 	SHOW_AS_DATATABLE = 'Show as data-table',
 	CUSTOM = 'Custom'
 }
