@@ -2,7 +2,7 @@ import type { Selection as D3Selection } from 'd3'
 import { getProperty } from '@/tools'
 import { meter as meterConfigs } from '@/configuration'
 import { Title } from './title'
-import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes, Statuses } from '@/interfaces/enums'
 import { MeterChartModel } from '@/model/meter'
 
@@ -166,13 +166,7 @@ export class MeterTitle extends Title {
 		const self = this
 		const svg = this.getComponentContainer()
 
-		const containerBounds = DOMUtils.getHTMLElementSize(
-			this.services.domUtils.getMainContainer()
-		) as Dimensions
-
-		// need to check if the width is 0, and try to use the parent attribute
-		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
-		const containerWidth = containerBounds.width ? containerBounds.width : 0
+		const containerWidth = this.parent.node().getBoundingClientRect().width || 0
 
 		// get the status from the model
 		const status = this.model.getStatus()
@@ -272,15 +266,9 @@ export class MeterTitle extends Title {
 
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
-		// get a reference to the title elements to calculate the size the title can be
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
-
 		const proportional = getProperty(this.getOptions(), 'meter', 'proportional')
 
-		// Use parent's width if container has no width
-		const containerWidth = containerBounds.width
-			? containerBounds.width
-			: this.parent.node().getBoundingClientRect().width // fix to ensure a number and not a percentage
+		const containerWidth = this.parent.node().getBoundingClientRect().width
 
 		if (proportional !== null) {
 			const total = DOMUtils.appendOrSelect(this.parent, 'text.proportional-meter-total').node()
