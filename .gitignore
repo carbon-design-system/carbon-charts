@@ -1,5 +1,5 @@
 # Global
-**/node_modules/
+**/node_modules
 **/*.log
 
 # Yarn items to not include in repo as they are rebuilt by yarn install
@@ -16,9 +16,9 @@
 pages/
 
 # Package-level
-**/.angular/
+**/.angular
 **/.DS_Store
-**/.svelte-kit/
-**/build/
-**/dist/
-**/demo/bundle/
+**/.svelte-kit
+**/build
+**/dist
+**/demo/bundle

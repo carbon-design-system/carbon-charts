@@ -1,0 +1,91 @@
+{
+	"name": "@carbon/charts-docs",
+	"private": true,
+	"version": "1.13.33",
+	"description": "Carbon Charts Documentation",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"pub:api": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
+		"build:package": "vite build && yarn pub:api",
+		"preview": "vite preview",
+		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
+		"clean": "rm -rf ../../pages/docs"
+	},
+	"dependencies": {
+		"@carbon/charts": "workspace:*",
+		"@carbon/react": "^1.50.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.22.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.55",
+		"@types/react-dom": "^18.2.19",
+		"@vitejs/plugin-react-swc": "^3.6.0",
+		"eslint": "^8.56.0",
+		"prettier": "^3.2.5",
+		"sass": "^1.70.0",
+		"typedoc": "^0.25.8",
+		"typescript": "^5.3.3",
+		"vite": "^5.1.1"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://charts.carbondesignsystem.com/react/"
+	},
+	"license": "Apache-2.0",
+	"author": "IBM",
+	"keywords": [
+		"charts",
+		"graphs",
+		"radar",
+		"gauge",
+		"donut",
+		"pie",
+		"sparkline",
+		"tree",
+		"treemap",
+		"heatmap",
+		"wordcloud",
+		"histogram",
+		"alluvial",
+		"geo",
+		"bar",
+		"bullet",
+		"scatter",
+		"meter",
+		"line",
+		"react",
+		"reactive",
+		"component",
+		"carbon",
+		"ibm",
+		"svg",
+		"data",
+		"typescript"
+	],
+	"bugs": {
+		"url": "https://github.com/carbon-design-system/carbon-charts/issues"
+	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
+	"maintainers": [
+		{
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
+		}
+	],
+	"contributors": [
+		{
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
+		}
+	]
+}

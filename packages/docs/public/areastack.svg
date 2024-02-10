@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 29 Copy 3areastack</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="148" height="123"></rect>
+    </defs>
+    <g id="Data-vis-pages" stroke="none" stroke-width="1" transform="translate(48,72)" fill="none"
+        fill-rule="evenodd">
+        <g id="Dataviz-overview-1-Copy-2">
+            <g id="Group-29-Copy-3">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Mask"></g>
+                <g id="Group-29" mask="url(#mask-2)">
+                    <g transform="translate(-7.000000, 16.000000)">
+                        <polygon id="Line-Copy-10" stroke="#0062FF" stroke-width="1.5"
+                            fill="#B2CFFF" fill-rule="evenodd" stroke-linecap="square"
+                            points="0.622036262 57.5384615 30.3570432 38.9230769 53.5648536 12.6923077 80.3988842 0 105.057183 16.9230769 134.79219 16.9230769 158 39.7692308 155 110 0.622036262 110"></polygon>
+                        <path
+                            d="M29.2185284,81.993728 L54.1369407,60.0655252 L83.6228255,66.9622237 L105.704316,49.2770483 L134.270764,58.2720197 L159.106903,76.5189791 L159.698979,75.7130973 L134.796038,57.4170591 L134.650171,57.3430841 L105.495684,48.1629517 L83.3771745,65.8777763 L53.8630593,58.9744748 L28.7814716,81.046272 L7.0041249,84.1764861 L6.99757968,85.1877042 L29.2185284,81.993728 Z M83.1874372,66.0297379 L83.6138757,65.9331403 L83.3771745,65.8777763 L83.1874372,66.0297379 Z"
+                            id="Line-Copy-2" stroke="none" fill="#FFFFFF" fill-rule="nonzero"></path>
+                        <polygon id="Line-Copy" stroke="#0062FF" stroke-width="1.5" fill="#D3E4FF"
+                            fill-rule="evenodd" stroke-linecap="square"
+                            points="1.34728033 86.8181818 29.6317992 82.7272727 54.2900976 60.9090909 84.0251046 67.7272727 105.782427 50 134.066946 58.8636364 154.970619 74.3470389 158 76.5909091 158 110 1.34728033 110"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

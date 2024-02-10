@@ -1,0 +1,31 @@
+{
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		// Copied from ../../tsconfig.json
+		// Note: Not extending root tsconfig because SvelteKit really wants you to extend theirs
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["ESNext", "DOM"],
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"outDir": "dist",
+
+		// Package-specific
+		"noImplicitThis": false
+	},
+	"include": [
+		".svelte-kit/ambient.d.ts",
+		"types/**/$types.d.ts",
+		"vite.config.ts",
+		"src/**/*.svelte",
+		"src/**/*.ts",
+		"src/**/*.js"
+	],
+	"exclude": [".svelte-kit/[!ambient.d.ts]**"],
+	"references": [{ "path": "./tsconfig.vite.json" }]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="239px" height="239px" viewBox="0 0 239 239" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>floating</title>
+	<g id="floating" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="Group">
+			<g id="Group-20" transform="translate(48.000000, 104.500000)" fill="#0062FF">
+				<rect id="Rectangle-9" transform="translate(13.500000, 83.500000) rotate(90.000000) translate(-13.500000, -83.500000) " x="11.5" y="70" width="4" height="27"></rect>
+				<rect id="Rectangle-9" transform="translate(57.500000, 66.000000) rotate(90.000000) translate(-57.500000, -66.000000) " x="55.5" y="30" width="4" height="72"></rect>
+				<rect id="Rectangle-9" transform="translate(59.500000, 51.500000) rotate(90.000000) translate(-59.500000, -51.500000) " x="57.5" y="-8" width="4" height="119"></rect>
+				<rect id="Rectangle-9" transform="translate(29.500000, 36.500000) rotate(90.000000) translate(-29.500000, -36.500000) " x="27.5" y="8" width="4" height="57"></rect>
+				<rect id="Rectangle-9" transform="translate(93.500000, 19.500000) rotate(90.000000) translate(-93.500000, -19.500000) " x="91.5" y="-31" width="4" height="101"></rect>
+				<rect id="Rectangle-9-Copy" transform="translate(79.000000, 2.000000) rotate(90.000000) translate(-79.000000, -2.000000) " x="77" y="-45.5" width="4" height="95"></rect>
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,11 @@
+// Plex Sans 300, 400, 600
+// Plex Sans Condensed 400
+
+@use '@carbon/react' with (
+	$use-flexbox-grid: true,
+	$css--font-face: false
+);
+
+.cds--content {
+	margin-top: 3rem;
+}

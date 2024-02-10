@@ -1,0 +1,109 @@
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { SideNav, SideNavItems, SideNavMenu, SideNavMenuItem, SideNavDivider } from '@carbon/react'
+
+interface Props {
+	expanded: boolean
+}
+
+const DocsSideNav: React.FC<Props> = ({ expanded }) => (
+	<SideNav className="cds--white" aria-label="Table of contents" expanded={expanded}>
+		<p>{expanded}</p>
+		<SideNavItems>
+			<SideNavMenu title={expanded ? 'Getting started' : 'Not expanded'} defaultExpanded={true}>
+				<SideNavMenuItem as={NavLink} to="/introduction">
+					Introduction
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Installation & setup
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/anatomy">
+					Chart anatomy
+				</SideNavMenuItem>
+			</SideNavMenu>
+			<SideNavDivider />
+			<SideNavMenu title="Chart types" defaultExpanded={true}>
+				<SideNavMenuItem as={NavLink} to="/alluvial">
+					Alluvial / Sankey
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/area">
+					Area
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/area#stacked">
+					Area (stacked)
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/bar">
+					Bar
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/bar#grouped">
+					Bar (grouped)
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/bar#stacked">
+					Bar (stacked)
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/boxplot">
+					Boxplot
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/bubble">
+					Bubble
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/bullet">
+					Bullet
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/choropleth">
+					Choropleth
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/circlepack">
+					Circle pack
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/combo">
+					Combo
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/donut">
+					Donut
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/gauge">
+					Gauge
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/heatmap">
+					Heatmap
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/histogram">
+					Histogram
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/line">
+					Line
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/lollipop">
+					Lollipop
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/meter">
+					Meter
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/diagram">
+					Network diagrams
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/pie">
+					Pie
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/radar">
+					Radar / Kiviat
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/scatter">
+					Scatter
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/tree">
+					Tree
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/treemap">
+					Treemap
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/wordcloud">
+					Word cloud
+				</SideNavMenuItem>
+			</SideNavMenu>
+		</SideNavItems>
+	</SideNav>
+)
+
+export default DocsSideNav
