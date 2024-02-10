@@ -361,6 +361,10 @@ export class DOMUtils extends Service {
 			})
 	}
 
+	isFullScreenMode() {
+		return select(this.getHolder()).classed('fullscreen')
+	}
+
 	toggleFullscreen() {
 		const holder = this.getHolder()
 		const holderSelection = select(holder)
