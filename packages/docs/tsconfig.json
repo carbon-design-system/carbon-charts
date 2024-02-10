@@ -6,8 +6,6 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"lib": ["ESNext", "DOM"],
-		// "allowJs": true,
-		// "checkJs": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
@@ -15,7 +13,7 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		// "strict": true,
+		"outDir": "dist",
 
 		// Package-specific
 		"noImplicitThis": false

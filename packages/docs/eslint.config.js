@@ -1,13 +1,15 @@
-module.exports = {
+export default {
 	root: true,
+	parser: '@typescript-eslint/parser',
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:svelte/recommended',
-		'prettier'
+		'prettier',
+		'plugin:storybook/recommended'
 	],
-	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint'],
+	ignorePatterns: ['*.cjs'],
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
@@ -27,4 +29,4 @@ module.exports = {
 			}
 		}
 	]
-};
+}
