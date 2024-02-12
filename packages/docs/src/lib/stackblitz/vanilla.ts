@@ -1,6 +1,6 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
-import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
 import { objectToString } from './object-to-string'
 
 export function getVanillaProject(

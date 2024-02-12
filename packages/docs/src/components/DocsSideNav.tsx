@@ -1,17 +1,16 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { SideNav, SideNavItems, SideNavMenu, SideNavMenuItem, SideNavDivider } from '@carbon/react'
+import { SideNav, SideNavItems, SideNavMenu, SideNavMenuItem, SideNavDivider } from '@carbon/react/es'
 
 interface Props {
-	expanded: boolean
+	isSideNavExpanded: boolean
 }
 
-const DocsSideNav: React.FC<Props> = ({ expanded }) => (
-	<SideNav className="cds--white" aria-label="Table of contents" expanded={expanded}>
-		<p>{expanded}</p>
+const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
+	<SideNav expanded={isSideNavExpanded} className="cds--white" aria-label="Table of contents">
 		<SideNavItems>
-			<SideNavMenu title={expanded ? 'Getting started' : 'Not expanded'} defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/introduction">
+			<SideNavMenu title="Getting started" defaultExpanded={true}>
+				<SideNavMenuItem href="#" as={NavLink} to="/introduction">
 					Introduction
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/installation">
@@ -19,6 +18,33 @@ const DocsSideNav: React.FC<Props> = ({ expanded }) => (
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/anatomy">
 					Chart anatomy
+				</SideNavMenuItem>
+			</SideNavMenu>
+			<SideNavDivider />
+			<SideNavMenu title="Data & configuration" defaultExpanded={true}>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Chart data
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Chart display options
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					API
+				</SideNavMenuItem>
+			</SideNavMenu>
+			<SideNavDivider />
+			<SideNavMenu title="Design" defaultExpanded={true}>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Themes (dark & light)
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Axes
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Color palette
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/installation">
+					Dashboards
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
