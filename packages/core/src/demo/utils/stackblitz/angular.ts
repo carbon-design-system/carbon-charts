@@ -5,41 +5,10 @@ import { version } from '../package-versions'
 
 export function buildAngularExample(demo: Demo): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/animations': version.angular,
-		'@angular/common': version.angular,
-		'@angular/compiler': version.angular,
-		'@angular/core': version.angular,
-		'@angular/forms': version.angular,
-		'@angular/platform-browser': version.angular,
-		'@angular/router': version.angular,
-		'@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
-		'd3-sankey': version.d3Sankey,
-		rxjs: version.rxjs,
-		tslib: version.tslib,
-		'zone.js': version.zoneJs
-	}
-
-	const devDependencies: Record<string, string> = {
-		'@angular-devkit/build-angular': '~0.1100.4',
-		'@angular/cli': '~11.0.4',
-		'@angular/compiler-cli': '~11.0.4',
-		'@types/jasmine': '~3.6.0',
-		'@types/node': '^12.11.1',
-		codelyzer: '^6.0.0',
-		'jasmine-core': '~3.6.0',
-		'jasmine-spec-reporter': '~5.0.0',
-		karma: '~5.1.0',
-		'karma-chrome-launcher': '~3.1.0',
-		'karma-coverage': '~2.0.3',
-		'karma-jasmine': '~4.0.0',
-		'karma-jasmine-html-reporter': '^1.5.0',
-		protractor: '~7.0.0',
-		'ts-node': '~8.3.0',
-		tslint: '~6.1.0',
-		typescript: '~4.0.2'
+		'd3-sankey': version.d3Sankey
 	}
 
 	const indexHtml = `<!doctype html>
@@ -88,9 +57,6 @@ export class App {
 
 bootstrapApplication(App)
 `
-
-	const stylesCss = `@import '@carbon/charts/styles.css';
-  `
 
 	const angularJson = `{
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
@@ -165,39 +131,8 @@ bootstrapApplication(App)
 			lint: 'ng lint',
 			e2e: 'ng e2e'
 		},
-		dependencies,
-		devDependencies
+		dependencies
 	}
-
-	const TsConfigJson = `{
-    "compileOnSave": false,
-    "compilerOptions": {
-      "outDir": "./dist/out-tsc",
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "noImplicitOverride": true,
-      "noPropertyAccessFromIndexSignature": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "esModuleInterop": true,
-      "sourceMap": true,
-      "declaration": false,
-      "downlevelIteration": true,
-      "experimentalDecorators": true,
-      "moduleResolution": "node",
-      "importHelpers": true,
-      "target": "ES2015",
-      "module": "ES2022",
-      "useDefineForClassFields": false,
-      "lib": ["ES2022", "dom"]
-    },
-    "angularCompilerOptions": {
-      "enableI18nLegacyMessageIdFormat": false,
-      "strictInjectionParameters": true,
-      "strictInputAccessModifiers": true,
-      "strictTemplates": true
-    }
-  }`
 
 	return {
 		template: 'angular-cli' as ProjectTemplate,
@@ -208,10 +143,9 @@ bootstrapApplication(App)
 			'src/index.html': indexHtml,
 			'src/main.ts': mainTs,
 			'src/options.ts': objectToString(demo.options),
-			'src/styles.css': stylesCss,
+			'src/styles.css': `@import '@carbon/charts-angular/styles.min.css';`,
 			'angular.json': angularJson,
-			'package.json': JSON.stringify(packageJson, null, 2),
-			'tsconfig.json': TsConfigJson
+			'package.json': JSON.stringify(packageJson, null, 2)
 		}
 	}
 }
