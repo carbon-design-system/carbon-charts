@@ -15,7 +15,9 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
+		"@carbon/charts-react": "workspace:*",
 		"@carbon/react": "^1.50.0",
+		"highlight.js": "^11.9.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.22.0"

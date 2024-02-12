@@ -62,7 +62,7 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.13",
+		"storybook": "~7.6.14",
 		"typescript": "^5.3.3",
 		"vite": "^5.1.1",
 		"vite-plugin-dts": "^3.7.2"
