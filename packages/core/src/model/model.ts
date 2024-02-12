@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
