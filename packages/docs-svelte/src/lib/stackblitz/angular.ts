@@ -9,16 +9,10 @@ export function getAngularProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		// TODO: remove next line
-		'@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
-		// TODO: remove next line
-		'@carbon/styles': version.carbonStyles,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
 		'd3-sankey': version.d3Sankey,
-		// TODO: remove next line
-		sass: version.sass
 	}
 
 	const indexHtml = `<html>
@@ -64,11 +58,7 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesCss = `/* TODO: remove next line */
-@import '@carbon/styles/css/styles.css';
-/* TODO: change next line to charts-angular */
-@import '@carbon/charts/styles.css';
-`
+	const stylesCss = `@import '@carbon/charts-angular/styles.css';`
 
 	const angularJson = `{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",

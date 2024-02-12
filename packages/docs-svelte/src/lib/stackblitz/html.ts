@@ -20,9 +20,7 @@ export function getHtmlProject(
   <!-- Load Carbon Charts as Charts (UMD) and D3.js as d3 -->
   <script src="https://unpkg.com/@carbon/charts@latest/dist/umd/bundle.umd.js"></script>
 		
-  <!-- Load required stylesheets -->
-  <!--TODO: remove next line -->
-  <link href="https://unpkg.com/@carbon/styles@latest/css/styles.css" rel="stylesheet" crossorigin="anonymous" />
+  <!-- Load required stylesheet -->
   <link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
 
   <!-- Load font used by Carbon Charts -->

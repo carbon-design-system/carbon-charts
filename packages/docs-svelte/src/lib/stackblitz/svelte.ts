@@ -10,8 +10,6 @@ export function getSvelteProject(
 ): Project {
 	const devDependencies: Record<string, string> = {
 		'@carbon/charts-svelte': version.carbonCharts,
-		// TODO: remove next line
-		'@carbon/styles': version.carbonStyles,
 		'@sveltejs/vite-plugin-svelte': version.svelteVite,
 		'@tsconfig/svelte': version.svelteTsConfig,
 		d3: version.d3,
@@ -39,8 +37,6 @@ export function getSvelteProject(
 
 	const appSvelte = `<script lang="ts">
 import { ${chartComponent} } from '@carbon/charts-svelte'
-// TODO: remove next line
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts-svelte/styles.css'
 import options from './options'
 import data from './data'

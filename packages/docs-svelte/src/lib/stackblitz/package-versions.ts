@@ -4,13 +4,9 @@ import vue from '../../../../vue/package.json'
 
 export const version = {
 	carbonCharts: core.version as string,
-	// TODO: remove next line
-	carbonStyles: core.devDependencies['@carbon/styles'] as string,
 	d3: core.dependencies['d3'] as string,
 	d3Cloud: core.dependencies['d3-cloud'] as string,
 	d3Sankey: core.dependencies['d3-sankey'] as string,
-	// TODO: remove next line
-	sass: core.devDependencies['sass'] as string,
 	svelteVite: '^2.4.5' as string,
 	svelteTsConfig: '^5.0.0' as string,
 	svelte: svelte.devDependencies['svelte'] as string,

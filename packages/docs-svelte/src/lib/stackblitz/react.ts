@@ -10,13 +10,9 @@ export function getReactProject(
 ): Project {
 	const dependencies: Record<string, string> = {
 		'@carbon/charts-react': version.carbonCharts,
-		// TODO: remove next line
-		'@carbon/styles': version.carbonStyles,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
 		'd3-sankey': version.d3Sankey,
-		// TODO: remove next line
-		sass: version.sass
 	}
 
 	const indexHtml = `<!doctype html>
@@ -49,8 +45,6 @@ import ReactDOM from 'react-dom/client'
 import { ${chartType} } from '@carbon/charts-react'
 import data from './data.js'
 import options from './options.js'
-// TODO: remove next line
-import '@carbon/styles/css/styles.css'
 import '@carbon/charts-react/styles.css'
 
 class App extends React.Component {
