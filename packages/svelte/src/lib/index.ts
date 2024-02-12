@@ -24,7 +24,7 @@ import TreeChart from './TreeChart.svelte'
 import TreemapChart from './TreemapChart.svelte'
 import WordCloudChart from './WordCloudChart.svelte'
 
-// Republish essential types from core so it's not a required dependency
+// Republish essential types from core so it's not a required dependency for TypeScript projects
 export type {
 	ChartTabularData,
 	ChartOptions,
