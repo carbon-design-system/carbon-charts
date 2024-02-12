@@ -5,7 +5,6 @@ import { version } from '../package-versions'
 
 export function buildAngularExample(demo: Demo): Project {
 	const dependencies: Record<string, string> = {
-    '@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
@@ -58,9 +57,6 @@ export class App {
 
 bootstrapApplication(App)
 `
-
-	const stylesCss = `@import '@carbon/charts/styles.css';
-  `
 
 	const angularJson = `{
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
@@ -138,36 +134,6 @@ bootstrapApplication(App)
 		dependencies
 	}
 
-	const TsConfigJson = `{
-    "compileOnSave": false,
-    "compilerOptions": {
-      "outDir": "./dist/out-tsc",
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "noImplicitOverride": true,
-      "noPropertyAccessFromIndexSignature": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "esModuleInterop": true,
-      "sourceMap": true,
-      "declaration": false,
-      "downlevelIteration": true,
-      "experimentalDecorators": true,
-      "moduleResolution": "node",
-      "importHelpers": true,
-      "target": "ES2015",
-      "module": "ES2022",
-      "useDefineForClassFields": false,
-      "lib": ["ES2022", "dom"]
-    },
-    "angularCompilerOptions": {
-      "enableI18nLegacyMessageIdFormat": false,
-      "strictInjectionParameters": true,
-      "strictInputAccessModifiers": true,
-      "strictTemplates": true
-    }
-  }`
-
 	return {
 		template: 'angular-cli' as ProjectTemplate,
 		title: 'Carbon Charts Angular Example',
@@ -177,10 +143,9 @@ bootstrapApplication(App)
 			'src/index.html': indexHtml,
 			'src/main.ts': mainTs,
 			'src/options.ts': objectToString(demo.options),
-			'src/styles.css': stylesCss,
+			'src/styles.css': `@import '@carbon/charts-angular/styles.min.css';`,
 			'angular.json': angularJson,
-			'package.json': JSON.stringify(packageJson, null, 2),
-			'tsconfig.json': TsConfigJson
+			'package.json': JSON.stringify(packageJson, null, 2)
 		}
 	}
 }

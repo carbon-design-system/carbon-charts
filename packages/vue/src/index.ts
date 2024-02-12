@@ -101,7 +101,7 @@ export {
 	CcvWordCloudChart
 }
 
-// Republish essential types from core so it's not a required dependency for TypeScript projects
+// Republish essential types from core so it's not a required dependency
 export type {
 	ChartTabularData,
 	ChartOptions,

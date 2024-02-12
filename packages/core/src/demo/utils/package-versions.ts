@@ -8,6 +8,7 @@ export const version = {
 	d3: core.dependencies['d3'] as string,
 	d3Cloud: core.dependencies['d3-cloud'] as string,
 	d3Sankey: core.dependencies['d3-sankey'] as string,
+	angular: 'latest',
 	react: react.dependencies['react'] as string,
 	svelteVite: svelte.devDependencies['@sveltejs/vite-plugin-svelte'] as string,
 	svelteTsConfig: 'latest' as string,
