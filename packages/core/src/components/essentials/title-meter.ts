@@ -74,13 +74,14 @@ export class MeterTitle extends Title {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
 			//breakdownFormatter
 			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
+			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
 						})
-					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
+					: `${numberFormatter(datasetsTotal, localeCode)} ${unit} used (${numberFormatter(difference, localeCode)} ${unit} available)`
 		}
 
 		// the breakdown part to whole of the datasets to the overall total
@@ -122,9 +123,12 @@ export class MeterTitle extends Title {
 
 		// totalFormatter function
 		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 
 		const totalString =
-			totalFormatter !== null ? totalFormatter(totalValue) : `${total} ${unit} total`
+			totalFormatter !== null
+				? totalFormatter(totalValue)
+				: `${numberFormatter(total, localeCode)} ${unit} total`
 
 		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 

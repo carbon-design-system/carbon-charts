@@ -297,6 +297,21 @@ const utilityDemoGroups: DemoGroup[] = [
 				options: barDemos.simpleBarIranianLocaleOptions,
 				data: barDemos.simpleBarTurkishLocaleData,
 				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarJapaneseLocaleOptions,
+				data: barDemos.simpleBarTurkishLocaleData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarHindiLocaleOptions,
+				data: barDemos.simpleBarTurkishLocaleData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarBanglaLocaleOptions,
+				data: barDemos.simpleBarTurkishLocaleData,
+				chartType: chartTypes.SimpleBarChart
 			}
 		]
 	},

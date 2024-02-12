@@ -703,8 +703,7 @@ const radarChart: RadarChartOptions = merge({}, chart, {
 	tooltip: {
 		gridline: {
 			enabled: true
-		},
-		valueFormatter: value => (value !== null && value !== undefined ? value : 'N/A')
+		}
 	}
 } as RadarChartOptions)
 
