@@ -130,13 +130,7 @@ export class MeterTitle extends Title {
 				? totalFormatter(totalValue)
 				: `${numberFormatter(total, localeCode)} ${unit} total`
 
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
-
-		// need to check if the width is 0, and try to use the parent attribute
-		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
-		const containerWidth = containerBounds.width
-			? containerBounds.width
-			: this.parent.node().getAttribute('width')
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width
 
 		const title = svg.selectAll('text.proportional-meter-total').data([totalString])
 
@@ -166,7 +160,7 @@ export class MeterTitle extends Title {
 		const self = this
 		const svg = this.getComponentContainer()
 
-		const containerWidth = this.parent.node().getBoundingClientRect().width || 0
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width || 0
 
 		// get the status from the model
 		const status = this.model.getStatus()
@@ -268,7 +262,7 @@ export class MeterTitle extends Title {
 	protected getMaxTitleWidth() {
 		const proportional = getProperty(this.getOptions(), 'meter', 'proportional')
 
-		const containerWidth = this.parent.node().getBoundingClientRect().width
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width
 
 		if (proportional !== null) {
 			const total = DOMUtils.appendOrSelect(this.parent, 'text.proportional-meter-total').node()
