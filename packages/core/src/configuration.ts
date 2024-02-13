@@ -77,10 +77,20 @@ const standardTruncationOptions = {
  */
 const locale: Locale = {
 	code: navigator.language, // read from browser's navigator.language
-	number: (value, language = navigator.language) => value.toLocaleString(language), // based on code property if specified
-	date: (value, language = navigator.language, options = {}, preformattedLocaleValue = null) =>
+	number: (value, language = navigator?.language || 'en-US') => value.toLocaleString(language), // based on code property if specified
+	date: (
+		value,
+		language = navigator?.language || 'en-US',
+		options = {},
+		preformattedLocaleValue = null
+	) =>
 		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleDateString(language, options), // based on code property if specified
-	time: (value, language = navigator.language, options = {}, preformattedLocaleValue = null) =>
+	time: (
+		value,
+		language = navigator?.language || 'en-US',
+		options = {},
+		preformattedLocaleValue = null
+	) =>
 		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleTimeString(language, options), // based on code property if specified
 	optionsObject: {
 		'15seconds': {
