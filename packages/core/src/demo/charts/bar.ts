@@ -472,32 +472,21 @@ export const simpleBarTurkishLocaleOptions = {
 	title: 'Turkish locale',
 	axes: {
 		left: {
-			mapsTo: 'value',
-			ticks: {
-				formatter: ticks => ticks.toLocaleString('tr-TR')
-			}
+			mapsTo: 'value'
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: ScaleTypes.TIME,
-			ticks: {
-				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
-			}
+			scaleType: ScaleTypes.TIME
 		}
 	},
-	tooltip: {
-		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value')
-				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
-			if (category == 'y-value') return value.toLocaleString('tr-TR')
-			return value
-		}
+	locale: {
+		code: 'tr-TR'
 	}
 }
 
 //using locale interface to reformat everything to Arabic
 export const simpleBarArabicLocaleOptions = {
-	title: 'Arabic locale using Locale Interface',
+	title: 'Arabic locale',
 	axes: {
 		left: {
 			mapsTo: 'value'
@@ -514,7 +503,7 @@ export const simpleBarArabicLocaleOptions = {
 
 //using locale interface to reformat everything to Iranian
 export const simpleBarIranianLocaleOptions = {
-	title: 'Iranian locale using Locale Interface',
+	title: 'Iranian locale',
 	axes: {
 		left: {
 			mapsTo: 'value'
@@ -531,7 +520,7 @@ export const simpleBarIranianLocaleOptions = {
 
 //using locale interface to reformat everything to Japanese
 export const simpleBarJapaneseLocaleOptions = {
-	title: 'Japanese locale using Locale Interface',
+	title: 'Japanese locale',
 	axes: {
 		left: {
 			mapsTo: 'value'
@@ -548,7 +537,7 @@ export const simpleBarJapaneseLocaleOptions = {
 
 //using locale interface to reformat everything to Hindi
 export const simpleBarHindiLocaleOptions = {
-	title: 'Hindi locale using Locale Interface',
+	title: 'Hindi locale',
 	axes: {
 		left: {
 			mapsTo: 'value'
@@ -565,7 +554,7 @@ export const simpleBarHindiLocaleOptions = {
 
 //using locale interface to reformat everything to Bangla
 export const simpleBarBanglaLocaleOptions = {
-	title: 'Bangla locale using Locale Interface',
+	title: 'Bangla locale',
 	axes: {
 		left: {
 			mapsTo: 'value'
