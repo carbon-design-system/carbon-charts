@@ -14,7 +14,7 @@ export function buildVueExample(demo: Demo): Project {
 
 	const devDependencies: Record<string, string> = {
 		'@vitejs/plugin-vue': version.vueVitePlugin,
-		typescript: version.vueTypeScript,
+		typescript: version.typescript,
 		vite: version.vite, 
 		'vue-tsc': version.vueTsc
 	}

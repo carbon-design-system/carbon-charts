@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.14.0 (2024-02-13)
+
+### Features
+
+- **i18n:** new locale interface, and translation configs
+  ([#1710](https://github.com/carbon-design-system/carbon-charts/issues/1710))
+  ([60ef1ec](https://github.com/carbon-design-system/carbon-charts/commit/60ef1ec0003be80b3dadbeae26ceaab0327e4729))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.34 (2024-02-12)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.33 (2024-02-08)
+
+### Bug Fixes
+
+- **modal:** padding of export to csv button
+  ([#1748](https://github.com/carbon-design-system/carbon-charts/issues/1748))
+  ([aa3caba](https://github.com/carbon-design-system/carbon-charts/commit/aa3caba334a0e810b6563c4c446c53a93b36ac7f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.32 (2024-02-07)
+
+### Bug Fixes
+
+- **toolbar:** add minimized icon for fullscreen
+  ([#1744](https://github.com/carbon-design-system/carbon-charts/issues/1744))
+  ([4e43021](https://github.com/carbon-design-system/carbon-charts/commit/4e43021b51e4255b5a5ca2e887c83954f53412dc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.31 (2024-02-07)
+
+### Bug Fixes
+
+- **modal:** styles of export to csv button
+  ([#1745](https://github.com/carbon-design-system/carbon-charts/issues/1745))
+  ([75c8281](https://github.com/carbon-design-system/carbon-charts/commit/75c82810b2ce081a81ddf8815b2a6abaac19ede2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.30 (2024-02-05)
 
 ### Bug Fixes

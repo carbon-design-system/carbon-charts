@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.13.30",
+	"version": "1.14.0",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -41,8 +41,8 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.35.0",
-		"@ibm/telemetry-js": "^1.2.0",
+		"@carbon/icons-react": "^11.36.0",
+		"@ibm/telemetry-js": "^1.2.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
@@ -52,8 +52,8 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.52",
-		"@types/react-dom": "^18.2.18",
+		"@types/react": "^18.2.55",
+		"@types/react-dom": "^18.2.19",
 		"@vitejs/plugin-react": "^4.2.1",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
@@ -62,9 +62,9 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.70.0",
-		"storybook": "~7.6.12",
+		"storybook": "^7.6.14",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.12",
+		"vite": "^5.1.1",
 		"vite-plugin-dts": "^3.7.2"
 	},
 	"publishConfig": {

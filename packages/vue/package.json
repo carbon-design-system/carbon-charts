@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.13.30",
+	"version": "1.14.0",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -40,20 +40,20 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "1.2.0",
-		"vue": "^3.4.15"
+		"@ibm/telemetry-js": "^1.2.1",
+		"vue": "^3.4.18"
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
 		"@types/d3": "^7.4.3",
-		"@vitejs/plugin-vue": "^5.0.3",
+		"@vitejs/plugin-vue": "^5.0.4",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"storybook": "~7.6.12",
+		"storybook": "^7.6.14",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.12",
+		"vite": "^5.1.1",
 		"vite-plugin-dts": "^3.7.2",
 		"vue-tsc": "^1.8.27"
 	},

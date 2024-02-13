@@ -5,6 +5,7 @@
 	--#{globals.$prefix}-layout-size-height-lg: 3rem;
 	--#{globals.$prefix}-layout-size-height-max: 999999999px;
 	--#{globals.$prefix}-layout-density-padding-inline-min: 0px;
+	--#{globals.$prefix}-layout-density-padding-inline-normal: 1rem;
 	--#{globals.$prefix}-layout-density-padding-inline-max: 999999999px;
 	--#{globals.$prefix}-layout-size-height-lg: 3rem;
 
@@ -325,7 +326,7 @@
 					vertical-align: top;
 				}
 
-				.#{globals.$prefix}--btn-primary {
+				.#{globals.$prefix}--btn--primary {
 					&:hover {
 						color: var(--#{globals.$prefix}-text-on-color, #ffffff);
 						background-color: var(--#{globals.$prefix}-button-primary-hover, #0050e6);

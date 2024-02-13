@@ -355,12 +355,18 @@ export const timeScale: TimeScaleOptions = {
 	}
 }
 
-const isFullScreenEnabled =
-	typeof document !== 'undefined' &&
-	(document['fullscreenEnabled'] ||
-		document['webkitFullscreenEnabled'] ||
-		document['mozFullScreenEnabled'] ||
-		document['msFullscreenEnabled'])
+let isFullScreenEnabled = false
+
+try {
+	isFullScreenEnabled =
+		typeof document !== 'undefined' &&
+		(document['fullscreenEnabled'] ||
+			document['webkitFullscreenEnabled'] ||
+			document['mozFullScreenEnabled'] ||
+			document['msFullscreenEnabled'])
+} catch (e) { // some environments block access to fullscreenEnabled
+	console.warn('Fullscreen capabilities check failed: ', e.message)
+}
 
 /**
  * Base chart options common to any chart
