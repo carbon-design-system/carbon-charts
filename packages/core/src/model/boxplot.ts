@@ -80,8 +80,8 @@ export class BoxplotChartModel extends ChartModelCartesian {
 	getTabularDataArray() {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-
 		const boxplotData = this.getBoxplotData()
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const headers = ['Group', 'Minimum', 'Q1', 'Median', 'Q3', 'Maximum', 'IQR', 'Outlier(s)']
 		const cells = [
@@ -93,27 +93,28 @@ export class BoxplotChartModel extends ChartModelCartesian {
 				return [
 					datum[groupMapsTo],
 					getProperty(datum, 'whiskers', 'min') !== null
-						? getProperty(datum, 'whiskers', 'min').toLocaleString()
+						? numberFormatter(getProperty(datum, 'whiskers', 'min'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_25') !== null
-						? getProperty(datum, 'quartiles', 'q_25').toLocaleString()
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_25'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_50') !== null
-						? getProperty(datum, 'quartiles', 'q_50').toLocaleString()
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_50'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_75') !== null
-						? getProperty(datum, 'quartiles', 'q_75').toLocaleString()
+						? numberFormatter(getProperty(datum, 'quartiles', 'q_75'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'whiskers', 'max') !== null
-						? getProperty(datum, 'whiskers', 'max').toLocaleString()
+						? numberFormatter(getProperty(datum, 'whiskers', 'max'), localeCode)
 						: '&ndash;',
 					getProperty(datum, 'quartiles', 'q_75') !== null &&
 					getProperty(datum, 'quartiles', 'q_25') !== null
-						? (
+						? (numberFormatter(
 								getProperty(datum, 'quartiles', 'q_75') - getProperty(datum, 'quartiles', 'q_25')
-						  ).toLocaleString()
+							),
+							localeCode)
 						: '&ndash;',
-					outliers.map((d: any) => d.toLocaleString()).join(',')
+					outliers.map((d: any) => numberFormatter(d, localeCode)).join(',')
 				]
 			})
 		]

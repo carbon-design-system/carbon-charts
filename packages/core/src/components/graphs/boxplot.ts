@@ -1,5 +1,5 @@
 import { select } from 'd3'
-import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString } from '@/tools'
+import { flipDomainAndRangeBasedOnOrientation, generateSVGPathString, getProperty } from '@/tools'
 import { boxplot as boxplotConfigs } from '@/configuration'
 import { BoxplotChartModel } from '@/model/boxplot'
 import { Component } from '@/components/component'
@@ -334,7 +334,10 @@ export class Boxplot extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel,
+							label:
+								getProperty(options, 'locale', 'translations', 'group') ||
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP]
@@ -442,7 +445,10 @@ export class Boxplot extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel,
+							label:
+								getProperty(options, 'locale', 'translations', 'group') ||
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP]

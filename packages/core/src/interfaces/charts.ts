@@ -18,6 +18,7 @@ import type {
 	ToolbarOptions,
 	TooltipOptions,
 	ZoomBarsOptions,
+	Locale,
 	TabularRepCustomizationOptions
 } from './components'
 import type {
@@ -36,6 +37,10 @@ export interface BaseChartOptions {
 	 * Optionally specify a title for the chart
 	 */
 	title?: string
+	/**
+	 * Locale configuration
+	 */
+	locale?: Locale
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */

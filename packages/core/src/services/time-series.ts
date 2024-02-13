@@ -1,6 +1,6 @@
 import { min } from 'd3'
 import { format } from 'date-fns/format'
-
+import { Locale } from '../interfaces/components'
 import { getProperty } from '@/tools'
 import { TimeIntervalFormats, TimeIntervalNames, TimeScaleOptions } from '@/interfaces/axis-scales'
 
@@ -84,7 +84,8 @@ export function formatTick(
 	i: number,
 	allTicks: Array<number>,
 	interval: string,
-	timeScaleOptions: TimeScaleOptions
+	timeScaleOptions: TimeScaleOptions,
+	localeOptions?: Locale
 ): string {
 	const showDayName = timeScaleOptions.showDayName
 	const intervalConsideringAlsoShowDayNameOption =
@@ -95,7 +96,8 @@ export function formatTick(
 	]
 	const primary = getProperty(formats, 'primary')
 	const secondary = getProperty(formats, 'secondary')
-	let formatString = isTickPrimary(tick, i, allTicks, interval, showDayName) ? primary : secondary
+	const primaryTickFlag = isTickPrimary(tick, i, allTicks, interval, showDayName)
+	let formatString = primaryTickFlag ? primary : secondary
 
 	// if the interval, and the timestamp includes milliseconds value
 	if (interval === '15seconds' && date.getMilliseconds() !== 0) {
@@ -104,8 +106,25 @@ export function formatTick(
 	}
 
 	const locale = timeScaleOptions.localeObject
+	const { code: localeCode, optionsObject } = localeOptions
+	const formatterType = optionsObject[interval]['type']
+	const formatterOptions =
+		optionsObject[interval][primaryTickFlag ? 'primary' : 'secondary'][formatString]
 
-	return format(date, formatString, { locale })
+	if (interval === 'quarterly' || !formatterOptions) {
+		const formattedDate = format(date, formatString, { locale })
+		const formatArr = formattedDate.split('').map(val => {
+			let num = Number(val)
+			if (val !== ' ' && !Number.isNaN(num)) {
+				return num.toLocaleString(localeCode)
+			} else {
+				return val
+			}
+		})
+		return localeOptions[formatterType](date, localeCode, {}, formatArr.join(''))
+	} else {
+		return localeOptions[formatterType](date, localeCode, formatterOptions)
+	}
 }
 
 // Given a timestamp, return an object of useful time formats

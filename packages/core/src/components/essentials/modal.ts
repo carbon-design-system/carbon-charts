@@ -73,6 +73,8 @@ export class Modal extends Component {
 
 		const options = this.model.getOptions()
 
+		const { title, downloadAsCSV } = getProperty(options, 'locale', 'translations', 'tabularRep')
+
 		const chartprefix = getProperty(options, 'style', 'prefix')
 
 		const tableArray = this.model.getTabularDataArray()
@@ -80,7 +82,8 @@ export class Modal extends Component {
 		return `
 		<div class="cds--modal-container cds--modal-container">
 			<div class="cds--modal-header cds--modal-header">
-				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="${id}__modal-title">Tabular representation</p>
+
+				<p class="cds--modal-header__label cds--type-delta cds--modal-header__label cds--type-delta" id="modal-title">${title}</p>
 
 				<p class="cds--modal-header__heading cds--type-beta cds--modal-header__heading cds--type-beta" id="${id}__modal-description">${sanitizeText(
 					options.title
@@ -122,7 +125,7 @@ export class Modal extends Component {
 
 			<div class="cds--modal-footer cds--modal-footer">
 			  <div class="${carbonPrefix}--${chartprefix}-modal-footer-spacer"></div>
-			  <button class="cds--btn cds--btn--primary cds--btn cds--btn--primary" type="button" data-modal-primary-focus>Download as CSV</button>
+			  <button class="cds--btn cds--btn--primary cds--btn cds--btn--primary" type="button" data-modal-primary-focus>${downloadAsCSV}</button>
 			</div>
 		</div>`
 	}

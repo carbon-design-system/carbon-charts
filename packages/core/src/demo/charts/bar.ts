@@ -495,6 +495,91 @@ export const simpleBarTurkishLocaleOptions = {
 	}
 }
 
+//using locale interface to reformat everything to Arabic
+export const simpleBarArabicLocaleOptions = {
+	title: 'Arabic locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'ar-SA'
+	}
+}
+
+//using locale interface to reformat everything to Iranian
+export const simpleBarIranianLocaleOptions = {
+	title: 'Iranian locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'fa-IR'
+	}
+}
+
+//using locale interface to reformat everything to Japanese
+export const simpleBarJapaneseLocaleOptions = {
+	title: 'Japanese locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'ja-JP'
+	}
+}
+
+//using locale interface to reformat everything to Hindi
+export const simpleBarHindiLocaleOptions = {
+	title: 'Hindi locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'hi-IN'
+	}
+}
+
+//using locale interface to reformat everything to Bangla
+export const simpleBarBanglaLocaleOptions = {
+	title: 'Bangla locale using Locale Interface',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'bn-BD'
+	}
+}
+
 // Horizontal simple time series
 export const simpleHorizontalBarTimeSeriesOptions = {
 	title: 'Horizontal simple bar (time series)',

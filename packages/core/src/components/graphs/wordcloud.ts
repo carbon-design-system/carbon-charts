@@ -1,6 +1,6 @@
 import { extent, scaleLinear, select } from 'd3'
 import cloud from 'd3-cloud'
-import { debounce } from 'lodash-es'
+import { debounce, get } from 'lodash-es'
 import { Component } from '@/components/component'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { Events, ColorClassNameTypes, RenderTypes } from '@/interfaces/enums'
@@ -217,7 +217,10 @@ export class WordCloud extends Component {
 							value: datum.value
 						},
 						{
-							label: options.tooltip.groupLabel,
+							label:
+								get(options, 'locale.translations.group') ||
+								get(options, 'tooltip.groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],

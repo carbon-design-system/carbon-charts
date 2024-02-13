@@ -487,6 +487,7 @@ export class Radar extends Component {
 			.attr('transform', (key: any) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`)
 
 		// y labels (show only the min and the max labels)
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		const yLabels = DOMUtils.appendOrSelect(svg, 'g.y-labels').attr('role', Roles.GROUP)
 		const yLabelUpdate = yLabels.selectAll('text').data(extent(yTicks))
 		yLabelUpdate.join(
@@ -494,7 +495,7 @@ export class Radar extends Component {
 				enter
 					.append('text')
 					.attr('opacity', 0)
-					.text((tick: any) => tick)
+					.text((tick: any) => numberFormatter(tick, localeCode))
 					.attr(
 						'x',
 						(tick: any) => polarToCartesianCoords(-Math.PI / 2, yScale(tick), c).x + yLabelPadding

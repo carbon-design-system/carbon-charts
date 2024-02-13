@@ -159,7 +159,7 @@ export class Toolbar extends Component {
 			.classed('cds--overflow-menu-options__option--disabled', (d: any) => d.shouldBeDisabled())
 			.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 			.selectAll('button')
-			.text((d: any) => d.text)
+			.text((d: any) => d.title)
 	}
 
 	isOverflowMenuOpen() {
@@ -367,7 +367,6 @@ export class Toolbar extends Component {
 	getControlConfigs() {
 		const numberOfIcons = getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
 		const controls = getProperty(this.getOptions(), 'toolbar', 'controls')
-
 		const overflowSpecificControls: any[] = []
 		const buttonList: any[] = []
 		const overflowList: any[] = []
@@ -475,6 +474,13 @@ export class Toolbar extends Component {
 			!this.services.zoom.isEmptyState()
 
 		const displayData = this.model.getDisplayData()
+		const options = this.model.getOptions()
+		const { exportAsCSV, exportAsJPG, exportAsPNG } = getProperty(
+			options,
+			'locale',
+			'translations',
+			'toolbar'
+		)
 
 		let controlConfig: any
 		switch (controlType) {
@@ -561,7 +567,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
-					title: 'Export as CSV',
+					title: exportAsCSV,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -572,7 +578,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
-					title: 'Export as PNG',
+					title: exportAsPNG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -583,7 +589,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
-					title: 'Export as JPG',
+					title: exportAsJPG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)

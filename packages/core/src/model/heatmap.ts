@@ -236,10 +236,10 @@ export class HeatmapModel extends ChartModelCartesian {
 	 */
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-
 		const { primaryDomain, primaryRange } = this.assignRangeAndDomains()
-
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
 		let domainValueFormatter: any
+
 		const headers = [primaryDomain.label, primaryRange.label, 'Value']
 		const cells = [
 			...displayData.map((datum: any) => [
@@ -249,10 +249,8 @@ export class HeatmapModel extends ChartModelCartesian {
 						? domainValueFormatter(datum[primaryDomain.identifier])
 						: datum[primaryDomain.identifier],
 
-				datum[primaryRange.identifier] === null
-					? '&ndash;'
-					: datum[primaryRange.identifier].toLocaleString(),
-				datum['value']
+				datum[primaryRange.identifier] === null ? '&ndash;' : datum[primaryRange.identifier],
+				numberFormatter(datum['value'], localeCode)
 			])
 		]
 
