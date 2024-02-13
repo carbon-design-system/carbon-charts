@@ -76,7 +76,7 @@ const standardTruncationOptions = {
  * Locale options
  */
 const locale: Locale = {
-	code: navigator.language, // read from browser's navigator.language
+	code: navigator?.language || 'en-US', // read from browser's navigator.language
 	number: (value, language = navigator?.language || 'en-US') => value.toLocaleString(language), // based on code property if specified
 	date: (
 		value,
@@ -364,7 +364,8 @@ try {
 			document['webkitFullscreenEnabled'] ||
 			document['mozFullScreenEnabled'] ||
 			document['msFullscreenEnabled'])
-} catch (e) { // some environments block access to fullscreenEnabled
+} catch (e) {
+	// some environments block access to fullscreenEnabled
 	console.warn('Fullscreen capabilities check failed: ', e.message)
 }
 
