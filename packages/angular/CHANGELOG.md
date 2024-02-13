@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.14.0 (2024-02-13)
+
+### Features
+
+- **i18n:** new locale interface, and translation configs
+  ([#1710](https://github.com/carbon-design-system/carbon-charts/issues/1710))
+  ([60ef1ec](https://github.com/carbon-design-system/carbon-charts/commit/60ef1ec0003be80b3dadbeae26ceaab0327e4729))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.34 (2024-02-12)
 
 **Note:** Version bump only for package @carbon/charts-angular
