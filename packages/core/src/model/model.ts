@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { bin as d3Bin, scaleOrdinal, stack, stackOffsetDiverging } from 'd3'
 import { cloneDeep, fromPairs, groupBy, merge, uniq } from 'lodash-es'
 import { getProperty, updateLegendAdditionalItems } from '@/tools'
@@ -57,6 +56,11 @@ export class ChartModel {
 
 	formatTable({ headers, cells }) {
 		const options = this.getOptions()
+		const {
+			code: localeCode,
+			date: dateFormatter,
+			number: numberFormatter
+		} = getProperty(options, 'locale')
 		const tableHeadingFormatter = getProperty(options, 'tabularRepModal', 'tableHeadingFormatter')
 		const tableCellFormatter = getProperty(options, 'tabularRepModal', 'tableCellFormatter')
 		const { cartesianScales } = this.services
@@ -64,8 +68,10 @@ export class ChartModel {
 		let domainValueFormatter: any
 
 		if (domainScaleType === ScaleTypes.TIME) {
-			domainValueFormatter = (d: any) => format(d, 'MMM d, yyyy')
+			domainValueFormatter = (d: any) =>
+				dateFormatter(d, localeCode, { month: 'short', day: 'numeric', year: 'numeric' })
 		}
+
 		const result = [
 			typeof tableHeadingFormatter === 'function' ? tableHeadingFormatter(headers) : headers,
 			...(typeof tableCellFormatter === 'function'
@@ -73,6 +79,12 @@ export class ChartModel {
 				: cells.map((data: (string | number)[]) => {
 						if (domainValueFormatter) {
 							data[1] = domainValueFormatter(data[1]) as string
+						}
+						for (let i in data) {
+							let val = data[i]
+							if (typeof val === 'number') {
+								data[i] = numberFormatter(val, localeCode)
+							}
 						}
 						return data
 					}))

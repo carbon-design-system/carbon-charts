@@ -100,7 +100,10 @@ export class BinnedRuler extends Ruler {
 						...(getProperty(options, 'tooltip', 'showTotal') === true
 							? [
 									{
-										label: get(options, 'tooltip.totalLabel') || 'Total',
+										label:
+											get(options, 'locale.translations.total') ||
+											get(options, 'tooltip.totalLabel') ||
+											'Total',
 										value: activeDataGroupNames.reduce(
 											(accum: number, currentValue: any) =>
 												accum + parseFloat(get(sampleMatchData, `data.${currentValue}`)),

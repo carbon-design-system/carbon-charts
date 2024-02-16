@@ -472,26 +472,100 @@ export const simpleBarTurkishLocaleOptions = {
 	title: 'Turkish locale',
 	axes: {
 		left: {
-			mapsTo: 'value',
-			ticks: {
-				formatter: ticks => ticks.toLocaleString('tr-TR')
-			}
+			mapsTo: 'value'
 		},
 		bottom: {
 			mapsTo: 'date',
-			scaleType: ScaleTypes.TIME,
-			ticks: {
-				formatter: ticks => ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
-			}
+			scaleType: ScaleTypes.TIME
 		}
 	},
-	tooltip: {
-		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value')
-				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
-			if (category == 'y-value') return value.toLocaleString('tr-TR')
-			return value
+	locale: {
+		code: 'tr-TR'
+	}
+}
+
+//using locale interface to reformat everything to Arabic
+export const simpleBarArabicLocaleOptions = {
+	title: 'Arabic locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
 		}
+	},
+	locale: {
+		code: 'ar-SA'
+	}
+}
+
+//using locale interface to reformat everything to Iranian
+export const simpleBarIranianLocaleOptions = {
+	title: 'Iranian locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'fa-IR'
+	}
+}
+
+//using locale interface to reformat everything to Japanese
+export const simpleBarJapaneseLocaleOptions = {
+	title: 'Japanese locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'ja-JP'
+	}
+}
+
+//using locale interface to reformat everything to Hindi
+export const simpleBarHindiLocaleOptions = {
+	title: 'Hindi locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'hi-IN'
+	}
+}
+
+//using locale interface to reformat everything to Bangla
+export const simpleBarBanglaLocaleOptions = {
+	title: 'Bangla locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'bn-BD'
 	}
 }
 

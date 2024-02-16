@@ -1,6 +1,7 @@
 import { enUS as localeObject } from 'date-fns/locale'
 import { merge } from 'lodash-es'
 import { circlePack } from './configuration-non-customizable'
+
 import type {
 	AlluvialChartOptions,
 	AreaChartOptions,
@@ -52,7 +53,8 @@ import type {
 	LegendOptions,
 	StackedBarOptions,
 	ToolbarOptions,
-	ZoomBarsOptions
+	ZoomBarsOptions,
+	Locale
 } from '@/interfaces/components'
 
 /*
@@ -68,6 +70,197 @@ const standardTruncationOptions = {
 	type: TruncationTypes.END_LINE,
 	threshold: 16,
 	numCharacter: 14
+}
+
+/**
+ * Locale options
+ */
+const locale: Locale = {
+	code: navigator?.language || 'en-US', // read from browser's navigator.language
+	number: (value, language = navigator?.language || 'en-US') => value.toLocaleString(language), // based on code property if specified
+	date: (
+		value,
+		language = navigator?.language || 'en-US',
+		options = {},
+		preformattedLocaleValue = null
+	) =>
+		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleDateString(language, options), // based on code property if specified
+	time: (
+		value,
+		language = navigator?.language || 'en-US',
+		options = {},
+		preformattedLocaleValue = null
+	) =>
+		preformattedLocaleValue ? preformattedLocaleValue : value.toLocaleTimeString(language, options), // based on code property if specified
+	optionsObject: {
+		'15seconds': {
+			primary: {
+				'MMM d, pp': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					hourCycle: 'h12'
+				},
+				'MMM d, h:mm:ss.SSS a': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					fractionalSecondDigits: 3,
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				pp: {
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					hourCycle: 'h12'
+				},
+				'h:mm:ss.SSS a': {
+					hour: 'numeric',
+					minute: '2-digit',
+					fractionalSecondDigits: 3,
+					hourCycle: 'h12'
+				}
+			},
+			type: 'time'
+		},
+		minute: {
+			primary: {
+				'MMM d, p': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				p: {
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			type: 'time'
+		},
+		'30minutes': {
+			primary: {
+				'MMM d, p': {
+					month: 'short',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				p: {
+					hour: 'numeric',
+					minute: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			type: 'time'
+		},
+		hourly: {
+			primary: {
+				'MMM d, hh a': {
+					month: 'short',
+					day: 'numeric',
+					hour: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			secondary: {
+				'hh a': {
+					hour: '2-digit',
+					hourCycle: 'h12'
+				}
+			},
+			type: 'time'
+		},
+		daily: {
+			primary: {
+				'MMM d': {
+					month: 'short',
+					day: 'numeric'
+				}
+			},
+			secondary: {
+				d: {
+					day: 'numeric'
+				}
+			},
+			type: 'date'
+		},
+		weekly: {
+			primary: {
+				'eee, MMM d': {
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric'
+				}
+			},
+			secondary: {
+				eee: {
+					weekday: 'short'
+				}
+			},
+			type: 'date'
+		},
+		monthly: {
+			primary: {
+				'MMM yyyy': {
+					month: 'short',
+					year: 'numeric'
+				}
+			},
+			secondary: {
+				MMM: {
+					month: 'short'
+				}
+			},
+			type: 'date'
+		},
+		quarterly: {
+			primary: {},
+			secondary: {},
+			type: 'date'
+		},
+		yearly: {
+			primary: {
+				yyyy: {
+					year: 'numeric'
+				}
+			},
+			secondary: {
+				yyyy: {
+					year: 'numeric'
+				}
+			},
+			type: 'date'
+		}
+	},
+	translations: {
+		group: 'Group',
+		total: 'Total',
+		meter: {
+			title: '' //default is emply string as meter title is dataset label
+		},
+		tabularRep: {
+			title: 'Tabular representation',
+			downloadAsCSV: 'Download as CSV'
+		},
+		toolbar: {
+			exportAsCSV: 'Export to CSV',
+			exportAsJPG: 'Export to JPG',
+			exportAsPNG: 'Export to PNG'
+		}
+	}
 }
 
 /**
@@ -171,7 +364,8 @@ try {
 			document['webkitFullscreenEnabled'] ||
 			document['mozFullScreenEnabled'] ||
 			document['msFullscreenEnabled'])
-} catch (e) { // some environments block access to fullscreenEnabled
+} catch (e) {
+	// some environments block access to fullscreenEnabled
 	console.warn('Fullscreen capabilities check failed: ', e.message)
 }
 
@@ -185,6 +379,7 @@ const chart: BaseChartOptions = {
 	theme: ChartTheme.WHITE,
 	tooltip: baseTooltip,
 	legend,
+	locale,
 	style: {
 		prefix: 'cc'
 	},
@@ -525,8 +720,7 @@ const radarChart: RadarChartOptions = merge({}, chart, {
 	tooltip: {
 		gridline: {
 			enabled: true
-		},
-		valueFormatter: value => (value !== null && value !== undefined ? value : 'N/A')
+		}
 	}
 } as RadarChartOptions)
 

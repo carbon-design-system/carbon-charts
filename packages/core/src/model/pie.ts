@@ -1,4 +1,5 @@
 import { ChartModel } from './model'
+import { getProperty } from '@/tools'
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -29,12 +30,13 @@ export class PieChartModel extends ChartModel {
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
 		const { valueMapsTo } = options.pie
+		const { number: numberFormatter, code: localeCode } = getProperty(options, 'locale')
 
 		const headers = ['Group', 'Value']
 		const cells = [
 			...displayData.map((datum: any) => [
 				datum[groupMapsTo],
-				datum[valueMapsTo] === null ? '&ndash;' : datum[valueMapsTo].toLocaleString()
+				datum[valueMapsTo] === null ? '&ndash;' : numberFormatter(datum[valueMapsTo], localeCode)
 			])
 		]
 

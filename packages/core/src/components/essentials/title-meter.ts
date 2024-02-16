@@ -18,7 +18,7 @@ export class MeterTitle extends Title {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { groupMapsTo } = options.data
-
+		const meterTitle = options.locale.translations.meter.title
 		const proportional = getProperty(options, 'meter', 'proportional')
 
 		if (proportional) {
@@ -26,8 +26,9 @@ export class MeterTitle extends Title {
 			this.displayBreakdownTitle()
 		} else {
 			// the title for a meter, is the label for that dataset
-			const title = svg.selectAll('text.meter-title').data([dataset[groupMapsTo]])
-
+			const title = svg
+				.selectAll('text.meter-title')
+				.data(meterTitle ? [meterTitle] : [dataset[groupMapsTo]])
 			title
 				.enter()
 				.append('text')
@@ -73,13 +74,14 @@ export class MeterTitle extends Title {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
 			//breakdownFormatter
 			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
+			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
 						})
-					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
+					: `${numberFormatter(datasetsTotal, localeCode)} ${unit} used (${numberFormatter(difference, localeCode)} ${unit} available)`
 		}
 
 		// the breakdown part to whole of the datasets to the overall total
@@ -121,9 +123,12 @@ export class MeterTitle extends Title {
 
 		// totalFormatter function
 		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 
 		const totalString =
-			totalFormatter !== null ? totalFormatter(totalValue) : `${total} ${unit} total`
+			totalFormatter !== null
+				? totalFormatter(totalValue)
+				: `${numberFormatter(total, localeCode)} ${unit} total`
 
 		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
 
@@ -214,7 +219,7 @@ export class MeterTitle extends Title {
 	 */
 	appendPercentage() {
 		const dataValue = getProperty(this.model.getDisplayData(), 0, 'value')
-
+		const { code: localeCode, number: numberFormatter } = getProperty(this.getOptions(), 'locale')
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer()
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title')
@@ -237,7 +242,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage as any)
-			.text((d: any) => `${d}%`)
+			.text((d: any) => `${numberFormatter(d, localeCode)}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 

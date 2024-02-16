@@ -93,8 +93,8 @@ export class Donut extends Pie {
 		const i = interpolateFunction(currentValue, donutCenterFigure)
 
 		return (t: any) => {
-			const { numberFormatter } = options.donut.center
-			d3Ref.text(numberFormatter(i(t)))
+			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
+			d3Ref.text(numberFormatter(i(t), localeCode))
 		}
 	}
 }

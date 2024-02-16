@@ -9,6 +9,89 @@ import type { Component } from '../components'
 import type { TruncationOptions } from './truncation'
 
 /**
+ *Locale Options Interface
+ */
+export interface Locale {
+	code?: string // BCP 47 language tag
+	number?: (value: number, language: string) => string
+	date?: (
+		value: Date,
+		language: string,
+		options: Intl.DateTimeFormatOptions,
+		preformattedLocaleValue?: string
+	) => string
+	time?: (
+		value: Date,
+		language: string,
+		options: Intl.DateTimeFormatOptions,
+		preformattedLocaleValue?: string
+	) => string
+	optionsObject?: {
+		'15seconds'?: LocaleTimeScaleOptions
+		minute?: LocaleTimeScaleOptions
+		'30minutes'?: LocaleTimeScaleOptions
+		hourly?: LocaleTimeScaleOptions
+		daily?: LocaleTimeScaleOptions
+		weekly?: LocaleTimeScaleOptions
+		monthly?: LocaleTimeScaleOptions
+		quarterly?: LocaleTimeScaleOptions
+		yearly?: LocaleTimeScaleOptions
+	}
+	translations?: {
+		group?: string // used by Tooltip and Toolbar / Tabular Representation
+		total?: string // ditto
+		meter?: {
+			title?: string
+		}
+		tabularRep: {
+			title?: string
+			downloadAsCSV?: string
+		}
+		toolbar: {
+			exportAsCSV?: string
+			exportAsJPG?: string
+			exportAsPNG?: string
+		}
+	}
+}
+
+export interface LocaleTimeScaleOptions {
+	primary?: Record<
+		string,
+		{
+			month?: string
+			day?: string
+			hour?: string
+			minute?: string
+			second?: string
+			fractionalSecondDigits?: number
+			weekday?: string
+			year?: string
+			hourCycle?: string
+			hour12?: boolean
+			dayPeriod?: string
+		}
+	>
+	secondary?: Record<
+		string,
+		{
+			month?: string
+			day?: string
+			hour?: string
+			minute?: string
+			second?: string
+			fractionalSecondDigits?: number
+			weekday?: string
+			year?: string
+			hourCycle?: string
+			hour12?: boolean
+			dayPeriod?: string
+		}
+	>
+	type?: string
+}
+
+/**
  * customize the overlay contents
  */
 export interface LayoutComponentChild {

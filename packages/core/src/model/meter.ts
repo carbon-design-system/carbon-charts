@@ -73,6 +73,8 @@ export class MeterChartModel extends ChartModel {
 		const { groupMapsTo } = options.data
 		const status = this.getStatus()
 		const proportional = getProperty(options, 'meter', 'proportional')
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
+
 		let headers = []
 		let cells: ChartTabularData = []
 		let domainMax: number
@@ -81,17 +83,27 @@ export class MeterChartModel extends ChartModel {
 			domainMax = 100
 			const datum = displayData[0]
 			headers = ['Group', 'Value', ...(status ? ['Status'] : [])]
-			cells = [[datum[groupMapsTo], datum['value'], ...(status ? [status] : [])]]
+			cells = [
+				[
+					datum[groupMapsTo],
+					numberFormatter(datum['value'], localeCode),
+					...(status ? [status] : [])
+				]
+			]
 		} else {
 			const total = getProperty(proportional, 'total')
 			domainMax = total ? total : this.getMaximumDomain(displayData)
 			headers = ['Group', 'Value', 'Percentage of total']
 			cells = [
-				...displayData.map((datum: any) => [
-					datum[groupMapsTo],
-					datum['value'],
-					((datum['value'] / domainMax) * 100).toFixed(2) + ' %'
-				])
+				...displayData.map((datum: any) => {
+					const value = datum['value']
+					const percentValue = Number(((datum['value'] / domainMax) * 100).toFixed(2))
+					return [
+						datum[groupMapsTo],
+						numberFormatter(value, localeCode),
+						numberFormatter(percentValue, localeCode) + ' %'
+					]
+				})
 			]
 		}
 

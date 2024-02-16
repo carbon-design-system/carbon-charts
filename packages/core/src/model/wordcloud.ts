@@ -1,3 +1,4 @@
+import { getProperty } from '@/tools'
 import { ChartModel } from './model'
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -9,16 +10,17 @@ export class WordCloudModel extends ChartModel {
 
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
-
 		const options = this.getOptions()
 		const { fontSizeMapsTo, wordMapsTo } = options.wordCloud
 		const { groupMapsTo } = options.data
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
+
 		const headers = [options.tooltip.wordLabel, 'Group', options.tooltip.valueLabel]
 		const cells = [
 			...displayData.map((datum: any) => [
 				datum[wordMapsTo],
 				datum[groupMapsTo],
-				datum[fontSizeMapsTo]
+				numberFormatter(datum[fontSizeMapsTo], localeCode)
 			])
 		]
 

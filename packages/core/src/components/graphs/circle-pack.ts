@@ -260,7 +260,10 @@ export class CirclePack extends Component {
 						const options = self.model.getOptions()
 						totalValue = [
 							{
-								label: get(options, 'tooltip.totalLabel') || 'Total',
+								label:
+									get(options, 'locale.translations.total') ||
+									get(options, 'tooltip.totalLabel') ||
+									'Total',
 								value: datum.value,
 								bold: true
 							}

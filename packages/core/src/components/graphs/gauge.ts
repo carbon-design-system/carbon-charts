@@ -199,7 +199,7 @@ export class Gauge extends Component {
 		const fontSize = valueFontSize(radius)
 		// Add the big number
 		const valueNumberGroup = DOMUtils.appendOrSelect(numbersGroup, 'g.gauge-value-number')
-
+		const { code: localeCode, number: localeNumberFormatter } = getProperty(options, 'locale')
 		const numberFormatter = getProperty(options, 'gauge', 'numberFormatter')
 		const valueNumber = valueNumberGroup.selectAll('text.gauge-value-number').data([value])
 
@@ -210,7 +210,7 @@ export class Gauge extends Component {
 			.merge(valueNumber as any)
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
-			.text((d: any) => numberFormatter(d))
+			.text((d: any) => localeNumberFormatter(Number(numberFormatter(d)), localeCode))
 
 		// add the percentage symbol beside the valueNumber
 		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(
@@ -245,7 +245,7 @@ export class Gauge extends Component {
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 		const delta = this.getDelta()
-
+		const { code: localeCode, number: localeNumberFormatter } = getProperty(options, 'locale')
 		if (!delta) {
 			const deltaGroup = svg.select('g.gauge-delta')
 
@@ -287,7 +287,10 @@ export class Gauge extends Component {
 				.merge(deltaNumber)
 				.attr('text-anchor', 'middle')
 				.style('font-size', `${deltaFontSize(radius)}px`)
-				.text((d: any) => `${numberFormatter(d)}${gaugeSymbol}`)
+				.text(
+					(d: any) =>
+						`${localeNumberFormatter(Number(numberFormatter(d)), localeCode)}${gaugeSymbol}`
+				)
 
 			// Add the caret for the delta number
 			const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(

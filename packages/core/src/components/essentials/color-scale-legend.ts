@@ -157,8 +157,11 @@ export class ColorScaleLegend extends Legend {
 
 		// Create scale & ticks
 		const linearScale = scaleLinear().domain(domain).range([0, barWidth])
-
 		const legendAxis = axisBottom(linearScale).tickSize(0).tickValues(quant)
+
+		//translating ticks into given locale language
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
+		legendAxis.tickFormat(d => numberFormatter(d, localeCode))
 
 		let rangeStart: any // avoid unexpected lexical declaration in case block
 		switch (colorScaleType) {
