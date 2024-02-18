@@ -85,7 +85,6 @@ export class Toolbar extends Component {
 				.classed('disabled', (d: any) => d.shouldBeDisabled())
 				.attr('role', 'button')
 				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
-				.attr('role', 'button')
 				.attr('aria-label', (d: any) => d.title)
 				.html((d: any) => {
 					return `
@@ -470,9 +469,10 @@ export class Toolbar extends Component {
 
 	// special button config for overflow button
 	getOverflowButtonConfig() {
+		const { moreOptions } = getProperty(this.model.getOptions(), 'locale', 'translations', 'toolbar')
 		return {
 			id: 'toolbar-overflow-menu',
-			title: 'More options',
+			title: moreOptions,
 			shouldBeDisabled: () => false,
 			iconSVG: {
 				content: `<circle cx="16" cy="8" r="2"></circle>
@@ -491,7 +491,10 @@ export class Toolbar extends Component {
 
 		const displayData = this.model.getDisplayData()
 		const options = this.model.getOptions()
-		const { exportAsCSV, exportAsJPG, exportAsPNG } = getProperty(
+		const {
+			exportAsCSV, exportAsJPG, exportAsPNG, zoomIn, zoomOut, resetZoom,
+			makeFullScreen, exitFullScreen, showAsTable
+		} = getProperty(
 			options,
 			'locale',
 			'translations',
@@ -504,7 +507,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomIn',
-						title: 'Zoom in',
+						title: zoomIn,
 						shouldBeDisabled: () => this.services.zoom.isMinZoomDomain(),
 						iconSVG: {
 							content: this.getControlIconByType(controlType)
@@ -517,7 +520,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-zoomOut',
-						title: 'Zoom out',
+						title: zoomOut,
 						shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
 						iconSVG: {
 							content: this.getControlIconByType(controlType)
@@ -530,7 +533,7 @@ export class Toolbar extends Component {
 				if (isZoomBarEnabled) {
 					controlConfig = {
 						id: 'toolbar-resetZoom',
-						title: 'Reset zoom',
+						title: resetZoom,
 						shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
 						iconSVG: {
 							content: this.getControlIconByType(controlType)
@@ -547,7 +550,7 @@ export class Toolbar extends Component {
 						width: '15px',
 						height: '15px'
 					},
-					title: 'Make fullscreen',
+					title: makeFullScreen,
 					shouldBeDisabled: () => false,
 					clickFunction: () => {
 						this.services.domUtils.toggleFullscreen()
@@ -562,7 +565,7 @@ export class Toolbar extends Component {
 						width: '15px',
 						height: '15px'
 					},
-					title: 'Exit fullscreen',
+					title: exitFullScreen,
 					shouldBeDisabled: () => false,
 					clickFunction: () => {
 						this.services.domUtils.toggleFullscreen()
@@ -575,7 +578,7 @@ export class Toolbar extends Component {
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
 					},
-					title: 'Show as table',
+					title: showAsTable,
 					shouldBeDisabled: () => displayData.length === 0,
 					clickFunction: () => this.services.events.dispatchEvent(Events.Modal.SHOW)
 				}
