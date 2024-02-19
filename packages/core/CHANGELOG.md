@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.14.2 (2024-02-19)
+
+### Bug Fixes
+
+- **config:** add SSR guard for `window.navigator`
+  ([#1756](https://github.com/carbon-design-system/carbon-charts/issues/1756))
+  ([9625ae3](https://github.com/carbon-design-system/carbon-charts/commit/9625ae321a5bb8a3c39ad6c788f9f08450a18ff3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.14.1 (2024-02-13)
 
 **Note:** Version bump only for package @carbon/charts
