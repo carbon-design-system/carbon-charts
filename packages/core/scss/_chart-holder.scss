@@ -42,8 +42,7 @@
 	@include theme.theme(themes.$g100);
 }
 
-.#{globals.$prefix}--chart-holder.fullscreen,
-.#{globals.$prefix}--chart-holder:-webkit-full-screen {
+.#{globals.$prefix}--chart-holder.fullscreen {
 	// important used to ensure full-screen experience
 	width: 100% !important;
 	height: 100% !important;
