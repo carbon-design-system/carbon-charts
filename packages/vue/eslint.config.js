@@ -1,5 +1,5 @@
 /* eslint-env node */
-module.exports = {
+export default {
 	root: true,
 	extends: [
 		'plugin:vue/recommended',

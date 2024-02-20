@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const comboSimpleData = [
 	{ group: 'School A', date: 'Monday', value: 10000 },
 	{ group: 'School A', date: 'Tuesday', value: 65000 },
@@ -16,19 +18,19 @@ export const comboSimpleOptions = {
 	axes: {
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			title: 'USA Summer School Attendance'
 		},
 		right: {
 			mapsTo: 'temp',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			title: 'Temperature (°F)',
 			correspondingDatasets: ['Temperature']
 		},
 		bottom: {
 			title: 'Day of the Week',
 			mapsTo: 'date',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	comboChartTypes: [
@@ -66,7 +68,7 @@ export const comboSimpleFloatingOptions = {
 	axes: {
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			title: 'USA Summer School Attendance',
 			correspondingDatasets: ['School A']
 		},
@@ -77,7 +79,7 @@ export const comboSimpleFloatingOptions = {
 		bottom: {
 			title: 'Day of the Week',
 			mapsTo: 'date',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	comboChartTypes: [
@@ -98,19 +100,19 @@ export const comboHorizontalOptions = {
 	axes: {
 		top: {
 			mapsTo: 'value',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			title: 'USA Summer School Attendance'
 		},
 		bottom: {
 			mapsTo: 'temp',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			title: 'Temperature (°F)',
 			correspondingDatasets: ['Temperature']
 		},
 		left: {
 			title: 'Day of the Week',
 			mapsTo: 'date',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	},
 	comboChartTypes: [
@@ -161,7 +163,7 @@ export const comboStackedOptions = {
 		bottom: {
 			title: '2018 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		right: {
 			title: 'Temperature (°C)',
@@ -214,7 +216,7 @@ export const comboGroupedOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		right: {
@@ -265,7 +267,7 @@ export const comboGroupedHorizontalOptions = {
 			main: true
 		},
 		left: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		bottom: {
@@ -316,7 +318,7 @@ export const comboAreaLineOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		right: {
@@ -375,13 +377,13 @@ export const comboLineScatterOptions = {
 			title: 'Attendance'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		right: {
 			title: 'Temperature (°C)',
 			mapsTo: 'temp',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			correspondingDatasets: ['Avg Temperature', 'Paris', 'Marseille']
 		}
 	},
@@ -412,13 +414,13 @@ export const comboEmptyOptions = {
 			title: 'Attendance'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		right: {
 			title: 'Temperature (°C)',
 			mapsTo: 'temp',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			correspondingDatasets: ['Temperature']
 		}
 	},
@@ -444,13 +446,13 @@ export const comboLoadingOptions = {
 			title: 'Attendance'
 		},
 		bottom: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		right: {
 			title: 'Temperature (°C)',
 			mapsTo: 'temp',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			correspondingDatasets: ['Temperature']
 		}
 	},
@@ -502,12 +504,12 @@ export const comboStackedAreaLineOptions = {
 			titleOrientation: 'right'
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		right: {
 			title: 'right',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			mapsTo: 'temp',
 			correspondingDatasets: ['Temperature'],
 			titleOrientation: 'left'
@@ -561,7 +563,7 @@ export const comboAreaLineTimeSeriesOptions = {
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'key'
 		},
 		right: {

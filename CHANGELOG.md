@@ -3,6 +3,155 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.14.2 (2024-02-19)
+
+### Bug Fixes
+
+- **config:** add SSR guard for `window.navigator`
+  ([#1756](https://github.com/carbon-design-system/carbon-charts/issues/1756))
+  ([9625ae3](https://github.com/carbon-design-system/carbon-charts/commit/9625ae321a5bb8a3c39ad6c788f9f08450a18ff3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.14.1 (2024-02-13)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.14.0 (2024-02-13)
+
+### Features
+
+- **i18n:** new locale interface, and translation configs
+  ([#1710](https://github.com/carbon-design-system/carbon-charts/issues/1710))
+  ([60ef1ec](https://github.com/carbon-design-system/carbon-charts/commit/60ef1ec0003be80b3dadbeae26ceaab0327e4729))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.34 (2024-02-12)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.33 (2024-02-08)
+
+### Bug Fixes
+
+- **modal:** padding of export to csv button
+  ([#1748](https://github.com/carbon-design-system/carbon-charts/issues/1748))
+  ([aa3caba](https://github.com/carbon-design-system/carbon-charts/commit/aa3caba334a0e810b6563c4c446c53a93b36ac7f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.32 (2024-02-07)
+
+### Bug Fixes
+
+- **toolbar:** add minimized icon for fullscreen
+  ([#1744](https://github.com/carbon-design-system/carbon-charts/issues/1744))
+  ([4e43021](https://github.com/carbon-design-system/carbon-charts/commit/4e43021b51e4255b5a5ca2e887c83954f53412dc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.31 (2024-02-07)
+
+### Bug Fixes
+
+- **modal:** styles of export to csv button
+  ([#1745](https://github.com/carbon-design-system/carbon-charts/issues/1745))
+  ([75c8281](https://github.com/carbon-design-system/carbon-charts/commit/75c82810b2ce081a81ddf8815b2a6abaac19ede2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.30 (2024-02-05)
+
+### Bug Fixes
+
+- **stackblitz/vue:** workaround for stackblitz bug
+  ([#1742](https://github.com/carbon-design-system/carbon-charts/issues/1742))
+  ([def9bc5](https://github.com/carbon-design-system/carbon-charts/commit/def9bc52c785c0fc9e7cf8a82204f6f288c15c25))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.29 (2024-02-04)
+
+### Bug Fixes
+
+- **stackblitz/vue:** remove export ambiguity
+  ([#1741](https://github.com/carbon-design-system/carbon-charts/issues/1741))
+  ([19b8492](https://github.com/carbon-design-system/carbon-charts/commit/19b849287bee73ce910545a6c25f80382567de40))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.28 (2024-02-03)
+
+### Bug Fixes
+
+- **stackblitz:** env changes for angular examples to match latest StackBlitz Angular TypeScript
+  template ([#1738](https://github.com/carbon-design-system/carbon-charts/issues/1738))
+  ([2b62be8](https://github.com/carbon-design-system/carbon-charts/commit/2b62be8d329f52ae7a0ae525d54c81622fb71d22))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.27 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.26 (2024-02-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.13.25 (2024-01-29)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.13.24 (2024-01-26)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

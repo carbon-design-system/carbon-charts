@@ -5,19 +5,10 @@ import { version } from '../package-versions'
 
 export function buildAngularExample(demo: Demo): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/animations': version.angular,
-		'@angular/common': version.angular,
-		'@angular/compiler': version.angular,
-		'@angular/core': version.angular,
-		'@angular/platform-browser': version.angular,
-		'@carbon/charts': version.carbonCharts,
 		'@carbon/charts-angular': version.carbonCharts,
 		d3: version.d3,
 		'd3-cloud': version.d3Cloud,
-		'd3-sankey': version.d3Sankey,
-		rxjs: version.rxjs,
-		tslib: version.tslib,
-		'zone.js': version.zoneJs
+		'd3-sankey': version.d3Sankey
 	}
 
 	const indexHtml = `<!doctype html>
@@ -45,13 +36,13 @@ export function buildAngularExample(demo: Demo): Project {
 </body>
 </html>`
 
-	const mainTs = `import 'zone.js/dist/zone'
-import { Component } from '@angular/core'
+	const mainTs = `import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
 import { ChartsModule } from '@carbon/charts-angular'
 import options from './options'
 import data from './data'
+import 'zone.js'
 
 @Component({
   selector: 'my-app',
@@ -67,102 +58,81 @@ export class App {
 bootstrapApplication(App)
 `
 
-	const stylesCss = `@import '@carbon/charts/styles.css';
-  `
-
 	const angularJson = `{
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "demo": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
-          "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "assets": [],
-            "styles": ["src/styles.css"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "cli": {
+      "analytics": false
+    },
+    "newProjectRoot": "projects",
+    "projects": {
+      "demo": {
+        "architect": {
+          "build": {
+            "builder": "@angular-devkit/build-angular:application",
+            "configurations": {
+              "development": {
+                "extractLicenses": false,
+                "namedChunks": true,
+                "optimization": false,
+                "sourceMap": true
+              },
+              "production": {
+                "aot": true,
+                "extractLicenses": true,
+                "namedChunks": false,
+                "optimization": true,
+                "outputHashing": "all",
+                "sourceMap": false
+              }
+            },
+            "options": {
+              "assets": [],
+              "index": "src/index.html",
+              "browser": "src/main.ts",
+              "outputPath": "dist/demo",
+              "scripts": [],
+              "styles": ["src/styles.css"],
+              "tsConfig": "src/tsconfig.app.json"
             }
+          },
+          "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+              "development": {
+                "buildTarget": "demo:build:development"
+              },
+              "production": {
+                "buildTarget": "demo:build:production"
+              }
+            },
+            "defaultConfiguration": "development"
           }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "demo:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "demo:build:production"
-            }
-          }
-        }
+        "prefix": "app",
+        "projectType": "application",
+        "root": "",
+        "schematics": {},
+        "sourceRoot": "src"
       }
-    }
-  },
-  "defaultProject": "demo"
-}`
+    },
+    "version": 1
+  }`
 
 	const packageJson = {
 		name: 'carbon-charts-angular-example',
 		description: 'Carbon Charts Angular Example',
 		version: '0.0.0',
+    private: true,
 		scripts: {
 			ng: 'ng',
-			start: 'NG_CLI_ANALYTICS=false ng serve',
-			build: 'NG_CLI_ANALYTICS=false ng build'
+			start: 'ng serve',
+			build: 'ng build',
+			test: 'ng test',
+			lint: 'ng lint',
+			e2e: 'ng e2e'
 		},
 		dependencies
 	}
-
-	const TsConfigJson = `{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "resolveJsonModule": true,
-    "target": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["esnext", "dom"]
-  },
-  "angularCompilerOptions": {
-    "strictTemplates": true,
-    "strictInjectionParameters": true
-  }
-}`
 
 	return {
 		template: 'angular-cli' as ProjectTemplate,
@@ -173,10 +143,9 @@ bootstrapApplication(App)
 			'src/index.html': indexHtml,
 			'src/main.ts': mainTs,
 			'src/options.ts': objectToString(demo.options),
-			'src/styles.css': stylesCss,
+			'src/styles.css': `@import '@carbon/charts-angular/styles.min.css';`,
 			'angular.json': angularJson,
-			'package.json': JSON.stringify(packageJson, null, 2),
-			'tsconfig.json': TsConfigJson
+			'package.json': JSON.stringify(packageJson, null, 2)
 		}
 	}
 }

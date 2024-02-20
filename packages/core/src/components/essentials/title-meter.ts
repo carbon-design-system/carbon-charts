@@ -2,7 +2,7 @@ import type { Selection as D3Selection } from 'd3'
 import { getProperty } from '@/tools'
 import { meter as meterConfigs } from '@/configuration'
 import { Title } from './title'
-import { Dimensions, DOMUtils } from '@/services/essentials/dom-utils'
+import { DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes, Statuses } from '@/interfaces/enums'
 import { MeterChartModel } from '@/model/meter'
 
@@ -18,7 +18,7 @@ export class MeterTitle extends Title {
 		const options = this.getOptions()
 		const svg = this.getComponentContainer()
 		const { groupMapsTo } = options.data
-
+		const meterTitle = options.locale.translations.meter.title
 		const proportional = getProperty(options, 'meter', 'proportional')
 
 		if (proportional) {
@@ -26,8 +26,9 @@ export class MeterTitle extends Title {
 			this.displayBreakdownTitle()
 		} else {
 			// the title for a meter, is the label for that dataset
-			const title = svg.selectAll('text.meter-title').data([dataset[groupMapsTo]])
-
+			const title = svg
+				.selectAll('text.meter-title')
+				.data(meterTitle ? [meterTitle] : [dataset[groupMapsTo]])
 			title
 				.enter()
 				.append('text')
@@ -73,13 +74,14 @@ export class MeterTitle extends Title {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
 			//breakdownFormatter
 			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
+			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 			data =
 				breakdownFormatter !== null
 					? breakdownFormatter({
 							datasetsTotal: datasetsTotal,
 							total: total
 						})
-					: `${datasetsTotal} ${unit} used (${difference} ${unit} available)`
+					: `${numberFormatter(datasetsTotal, localeCode)} ${unit} used (${numberFormatter(difference, localeCode)} ${unit} available)`
 		}
 
 		// the breakdown part to whole of the datasets to the overall total
@@ -121,17 +123,14 @@ export class MeterTitle extends Title {
 
 		// totalFormatter function
 		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 
 		const totalString =
-			totalFormatter !== null ? totalFormatter(totalValue) : `${total} ${unit} total`
+			totalFormatter !== null
+				? totalFormatter(totalValue)
+				: `${numberFormatter(total, localeCode)} ${unit} total`
 
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
-
-		// need to check if the width is 0, and try to use the parent attribute
-		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
-		const containerWidth = containerBounds.width
-			? containerBounds.width
-			: this.parent.node().getAttribute('width')
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width
 
 		const title = svg.selectAll('text.proportional-meter-total').data([totalString])
 
@@ -161,13 +160,7 @@ export class MeterTitle extends Title {
 		const self = this
 		const svg = this.getComponentContainer()
 
-		const containerBounds = DOMUtils.getHTMLElementSize(
-			this.services.domUtils.getMainContainer()
-		) as Dimensions
-
-		// need to check if the width is 0, and try to use the parent attribute
-		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
-		const containerWidth = containerBounds.width ? containerBounds.width : 0
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width || 0
 
 		// get the status from the model
 		const status = this.model.getStatus()
@@ -214,7 +207,7 @@ export class MeterTitle extends Title {
 	 */
 	appendPercentage() {
 		const dataValue = getProperty(this.model.getDisplayData(), 0, 'value')
-
+		const { code: localeCode, number: numberFormatter } = getProperty(this.getOptions(), 'locale')
 		// use the title's position to append the percentage to the end
 		const svg = this.getComponentContainer()
 		const title = DOMUtils.appendOrSelect(svg, 'text.meter-title')
@@ -237,7 +230,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage as any)
-			.text((d: any) => `${d}%`)
+			.text((d: any) => `${numberFormatter(d, localeCode)}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 
@@ -267,15 +260,9 @@ export class MeterTitle extends Title {
 
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
-		// get a reference to the title elements to calculate the size the title can be
-		const containerBounds = DOMUtils.getHTMLElementSize(this.services.domUtils.getMainContainer())
-
 		const proportional = getProperty(this.getOptions(), 'meter', 'proportional')
 
-		// Use parent's width if container has no width
-		const containerWidth = containerBounds.width
-			? containerBounds.width
-			: this.parent.node().getBoundingClientRect().width // fix to ensure a number and not a percentage
+		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width
 
 		if (proportional !== null) {
 			const total = DOMUtils.appendOrSelect(this.parent, 'text.proportional-meter-total').node()

@@ -12,6 +12,13 @@ export function buildVueExample(demo: Demo): Project {
 		vue: version.vue
 	}
 
+	const devDependencies: Record<string, string> = {
+		'@vitejs/plugin-vue': version.vueVitePlugin,
+		typescript: version.typescript,
+		vite: version.vite, 
+		'vue-tsc': version.vueTsc
+	}
+
 	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,28 +35,23 @@ export function buildVueExample(demo: Demo): Project {
   </head>
   <body>
     <div id="app"></div>
+		<script type="module" src="/src/main.ts"></script>
   </body>
 </html>`
 
-	const appVue = `<template>
-<div id="app" class="p-1">
-  <${demo.chartType.vue} :data="data" :options="options" />
-</div>
-</template>
-
-<script>
-import data from './data.js';
-import options from './options.js';
-
-export default {
-  data() {
-    return {
-      data,
-      options
-    };
-  }
-};
+	const appVue = `<script setup lang="ts">
+	import { ref } from 'vue'
+	import chartData from './data.ts'
+	import chartOptions from './options.ts'
+	const data = ref(chartData)
+	const options = ref(chartOptions)
 </script>
+
+<template>
+  <div id="app" class="p-1">
+    <${demo.chartType.vue} :data :options />
+  </div>
+</template>
 
 <style>
 @import '@carbon/charts-vue/styles.css';
@@ -71,25 +73,85 @@ app.mount('#app')
 		name: 'carbon-charts-vue-example',
 		description: 'Carbon Charts Vue Example',
 		version: '0.0.0',
+		type: 'module',
 		scripts: {
-			serve: 'vue-cli-service serve',
-			build: 'vue-cli-service build',
-			lint: 'vue-cli-service lint'
+			dev: 'vite',
+			build: 'vue-tsc && vite build',
+			preview: 'vite preview'
 		},
-		dependencies
+		dependencies,
+		devDependencies
 	}
 
+	const tsConfigJson = `{
+		"compilerOptions": {
+			"target": "ES2020",
+			"useDefineForClassFields": true,
+			"module": "ESNext",
+			"lib": ["ES2020", "DOM", "DOM.Iterable"],
+			"skipLibCheck": true,
+	
+			/* Bundler mode */
+			"moduleResolution": "bundler",
+			"allowImportingTsExtensions": true,
+			"resolveJsonModule": true,
+			"isolatedModules": true,
+			"noEmit": true,
+			"jsx": "preserve",
+	
+			/* Linting */
+			"strict": true,
+			"noUnusedLocals": true,
+			"noUnusedParameters": true,
+			"noFallthroughCasesInSwitch": true,
+		},
+		"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+		"references": [{ "path": "./tsconfig.node.json" }]
+	}`
+	
+		const tsConfigNodeJson = `{
+			"compilerOptions": {
+				"composite": true,
+				"skipLibCheck": true,
+				"module": "ESNext",
+				"moduleResolution": "bundler",
+				"allowSyntheticDefaultImports": true
+			},
+			"include": ["vite.config.ts"]
+	}`
+	
+		const viteConfigTs = `import { defineConfig } from 'vite'
+		import { fileURLToPath } from 'url'
+		import vue from '@vitejs/plugin-vue'
+		
+		// https://vitejs.dev/config/
+		export default defineConfig({
+			resolve: {
+				alias: {
+					'@': fileURLToPath(new URL('./src', import.meta.url)),
+					vue: 'vue/dist/vue.esm-bundler.js'
+				}
+			},
+			plugins: [vue()],
+		})		
+	`
+
 	return {
-		template: 'vue' as ProjectTemplate,
+		template: 'node' as ProjectTemplate,
 		title: 'Carbon Charts Vue Example',
-		dependencies,
+		// dependencies,
 		files: {
-			'public/index.html': indexHtml,
+			'index.html': indexHtml,
 			'src/App.vue': appVue,
-			'src/data.js': objectToString(demo.data),
-			'src/main.js': mainJs,
-			'src/options.js': objectToString(demo.options),
-			'package.json': JSON.stringify(packageJson, null, 2)
+			'src/data.ts': objectToString(demo.data),
+			'src/main.ts': mainJs,
+			'src/options.ts': objectToString(demo.options),
+			'src/vite-env.d.ts': `/// <reference types="vite/client" />
+			`,
+			'package.json': JSON.stringify(packageJson, null, 2),
+			'tsconfig.json': tsConfigJson,
+			'tsconfig.node.json': tsConfigNodeJson,
+			'vite.config.ts': viteConfigTs
 		}
 	}
 }

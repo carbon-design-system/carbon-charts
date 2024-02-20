@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const areaTimeSeriesData = [
 	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 0 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 6), value: 57312 },
@@ -22,12 +24,12 @@ export const areaTimeSeriesOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -56,12 +58,12 @@ export const areaDiscreteDomainOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'key',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			mapsTo: 'value',
 			title: 'Conversion rate',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -118,11 +120,11 @@ export const areaTimeSeriesCurvedOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveNatural'
@@ -144,12 +146,12 @@ export const sparklineOptions = {
 			visible: false,
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			visible: false,
 			mapsTo: 'value',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	color: {
@@ -188,11 +190,11 @@ export const stackedAreaTimeSeriesOptions = {
 	axes: {
 		left: {
 			stacked: true,
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			mapsTo: 'value'
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		}
 	},
@@ -221,7 +223,7 @@ export const stackedAreaTimeSeriesUnevenDataOptions = {
 			stacked: true
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		}
 	},
@@ -239,7 +241,7 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 			}
 		},
 		bottom: {
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		}
 	},
@@ -297,11 +299,11 @@ export const boundedAreaTimeSeriesOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveNatural'
@@ -314,7 +316,7 @@ export const areaEmptyOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		}
 	}
 }
@@ -331,11 +333,11 @@ export const areaSkeletonOptions = {
 		bottom: {
 			title: '2019 Annual Sales Figures',
 			mapsTo: 'date',
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		},
 		left: {
 			mapsTo: 'value',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	},
 	curve: 'curveNatural',

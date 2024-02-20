@@ -1,3 +1,5 @@
+import { Alignments } from '@/interfaces'
+
 export const pieData = [
 	{ group: '2V2N 9KYPM version 1', value: 20000 },
 	{ group: 'L22I P66EP L22I P66EP L22I P66EP', value: 65000 },
@@ -18,10 +20,10 @@ export const pieCenteredOptions = {
 	title: 'Pie (centered)',
 	resizable: true,
 	legend: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	},
 	pie: {
-		alignment: 'center'
+		alignment: Alignments.CENTER
 	}
 }
 

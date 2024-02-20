@@ -1,4 +1,5 @@
 import { lineTimeSeriesData } from './line'
+import { ScaleTypes } from '@/interfaces'
 
 export const bubbleDoubleLinearData = [
 	{ group: 'Dataset 1', sales: 10000, profit: 32100, surplus: 50000 },
@@ -69,7 +70,7 @@ export const bubbleDiscreteOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		left: {
@@ -92,7 +93,7 @@ export const bubbleTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		left: {
@@ -176,11 +177,11 @@ export const bubbleDualDiscreteOptions = {
 	axes: {
 		bottom: {
 			title: 'Problems',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'problem'
 		},
 		left: {
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'product',
 			title: 'Products'
 		}

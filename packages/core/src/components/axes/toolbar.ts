@@ -39,7 +39,7 @@ export class Toolbar extends Component {
 	render(animate = true) {
 		const container = this.getComponentContainer()
 			.attr('role', 'toolbar')
-			.attr('aria-label', `chart-${this.services.domUtils.getChartID()} toolbar`)
+			.attr('aria-label', `chart toolbar`)
 
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
@@ -159,7 +159,7 @@ export class Toolbar extends Component {
 			.classed('cds--overflow-menu-options__option--disabled', (d: any) => d.shouldBeDisabled())
 			.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
 			.selectAll('button')
-			.text((d: any) => d.text)
+			.text((d: any) => d.title)
 	}
 
 	isOverflowMenuOpen() {
@@ -367,7 +367,6 @@ export class Toolbar extends Component {
 	getControlConfigs() {
 		const numberOfIcons = getProperty(this.getOptions(), 'toolbar', 'numberOfIcons') - 1
 		const controls = getProperty(this.getOptions(), 'toolbar', 'controls')
-
 		const overflowSpecificControls: any[] = []
 		const buttonList: any[] = []
 		const overflowList: any[] = []
@@ -388,6 +387,13 @@ export class Toolbar extends Component {
 
 				controlConfig = control
 			} else {
+				const isFullScreenMode = this.services.domUtils.isFullScreenMode()
+				// toggle fullscreen configs by current display modes
+				if (control.type === ToolbarControlTypes.MAKE_FULLSCREEN && isFullScreenMode) {
+					control.type = ToolbarControlTypes.EXIT_FULLSCREEN
+				} else if (control.type === ToolbarControlTypes.EXIT_FULLSCREEN && !isFullScreenMode) {
+					control.type = ToolbarControlTypes.MAKE_FULLSCREEN
+				}
 				controlConfig = this.getControlConfigByType(control.type)
 			}
 
@@ -468,6 +474,13 @@ export class Toolbar extends Component {
 			!this.services.zoom.isEmptyState()
 
 		const displayData = this.model.getDisplayData()
+		const options = this.model.getOptions()
+		const { exportAsCSV, exportAsJPG, exportAsPNG } = getProperty(
+			options,
+			'locale',
+			'translations',
+			'toolbar'
+		)
 
 		let controlConfig: any
 		switch (controlType) {
@@ -525,6 +538,21 @@ export class Toolbar extends Component {
 					}
 				}
 				break
+			case ToolbarControlTypes.EXIT_FULLSCREEN:
+				controlConfig = {
+					id: 'toolbar-exitfullscreen',
+					iconSVG: {
+						content: this.getControlIconByType(controlType),
+						width: '15px',
+						height: '15px'
+					},
+					title: 'Exit fullscreen',
+					shouldBeDisabled: () => false,
+					clickFunction: () => {
+						this.services.domUtils.toggleFullscreen()
+					}
+				}
+				break
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				controlConfig = {
 					id: 'toolbar-showasdatatable',
@@ -539,7 +567,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_CSV:
 				controlConfig = {
 					id: 'toolbar-export-CSV',
-					title: 'Export as CSV',
+					title: exportAsCSV,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -550,7 +578,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_PNG:
 				controlConfig = {
 					id: 'toolbar-export-PNG',
-					title: 'Export as PNG',
+					title: exportAsPNG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -561,7 +589,7 @@ export class Toolbar extends Component {
 			case ToolbarControlTypes.EXPORT_JPG:
 				controlConfig = {
 					id: 'toolbar-export-JPG',
-					title: 'Export as JPG',
+					title: exportAsJPG,
 					shouldBeDisabled: () => false,
 					iconSVG: {
 						content: this.getControlIconByType(controlType)
@@ -589,6 +617,8 @@ export class Toolbar extends Component {
 				return `<path d="M22.4478,21A10.855,10.855,0,0,0,25,14,10.99,10.99,0,0,0,6,6.4658V2H4v8h8V8H7.332a8.9768,8.9768,0,1,1-2.1,8H3.1912A11.0118,11.0118,0,0,0,14,25a10.855,10.855,0,0,0,7-2.5522L28.5859,30,30,28.5859Z"/>`
 			case ToolbarControlTypes.MAKE_FULLSCREEN:
 				return `<polygon points="21 2 21 4 26.59 4 17 13.58 18.41 15 28 5.41 28 11 30 11 30 2 21 2"/><polygon points="15 18.42 13.59 17 4 26.59 4 21 2 21 2 30 11 30 11 28 5.41 28 15 18.42"/>`
+			case ToolbarControlTypes.EXIT_FULLSCREEN:
+				return `<polygon points="4 18 4 20 10.586 20 2 28.582 3.414 30 12 21.414 12 28 14 28 14 18 4 18"/><polygon points="30 3.416 28.592 2 20 10.586 20 4 18 4 18 14 28 14 28 12 21.414 12 30 3.416"/>`
 			case ToolbarControlTypes.SHOW_AS_DATATABLE:
 				return `<rect x="4" y="6" width="18" height="2"/><rect x="4" y="12" width="18" height="2"/><rect x="4" y="18" width="18" height="2"/><rect x="4" y="24" width="18" height="2"/><rect x="26" y="6" width="2" height="2"/><rect x="26" y="12" width="2" height="2"/><rect x="26" y="18" width="2" height="2"/><rect x="26" y="24" width="2" height="2"/>`
 			case ToolbarControlTypes.EXPORT_CSV:

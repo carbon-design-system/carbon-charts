@@ -1,4 +1,5 @@
 import { lineTimeSeriesData } from './line'
+import { ScaleTypes } from '@/interfaces'
 
 export const doubleLinearScatterData = [
 	{ group: 'Dataset 1', employees: 5000, sales: 32100 },
@@ -18,12 +19,12 @@ export const doubleLinearScatterOptions = {
 		bottom: {
 			title: 'No. of employees',
 			mapsTo: 'employees',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		},
 		left: {
 			title: 'Annual sales',
 			mapsTo: 'sales',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		}
 	}
 }
@@ -56,7 +57,7 @@ export const scatterDiscreteOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		left: {
@@ -72,7 +73,7 @@ export const scatterTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		left: {
@@ -88,7 +89,7 @@ export const scatterEmptyStateOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		left: {
@@ -104,7 +105,7 @@ export const scatterSkeletonOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'time',
+			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
 		left: {
@@ -135,17 +136,17 @@ export const scatterDualAxesOptions = {
 	axes: {
 		bottom: {
 			mapsTo: 'date',
-			scaleType: 'labels'
+			scaleType: ScaleTypes.LABELS
 		},
 		left: {
 			title: 'order count',
 			mapsTo: 'orderCount',
-			scaleType: 'linear'
+			scaleType: ScaleTypes.LINEAR
 		},
 		right: {
 			title: 'product count',
 			mapsTo: 'productCount',
-			scaleType: 'linear',
+			scaleType: ScaleTypes.LINEAR,
 			correspondingDatasets: ['Products']
 		}
 	}

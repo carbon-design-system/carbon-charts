@@ -18,6 +18,7 @@ import type {
 	ToolbarOptions,
 	TooltipOptions,
 	ZoomBarsOptions,
+	Locale,
 	TabularRepCustomizationOptions
 } from './components'
 import type {
@@ -37,6 +38,10 @@ export interface BaseChartOptions {
 	 */
 	title?: string
 	/**
+	 * Locale configuration
+	 */
+	locale?: Locale
+	/**
 	 * boolean to disable animations (enabled by default)
 	 */
 	animations?: boolean
@@ -55,7 +60,7 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a theme for the chart
 	 */
-	theme?: ChartTheme
+	theme?: ChartTheme | string
 	/**
 	 * tooltip configuration
 	 */
@@ -371,7 +376,7 @@ export interface PieChartOptions extends BaseChartOptions {
 			formatter?: (data: any) => string
 			enabled?: boolean
 		}
-		alignment?: Alignments
+		alignment?: Alignments | string
 		/**
 		 * identifier for value key in your charting data
 		 * defaults to value
@@ -391,18 +396,18 @@ export interface GaugeChartOptions extends BaseChartOptions {
 	gauge?: {
 		arcWidth?: number
 		deltaArrow?: {
-			direction?: ArrowDirections
+			direction?: ArrowDirections | string
 			size?: (value: number) => number | string
 			enabled: boolean
 		}
 		showPercentageSymbol?: boolean
-		status?: Statuses
+		status?: Statuses | string
 		deltaFontSize?: (value: number) => number | string
 		numberSpacing?: number
 		numberFormatter?: (value: number) => string
 		valueFontSize?: (value: number) => number | string
-		type?: GaugeTypes
-		alignment?: Alignments
+		type?: GaugeTypes | string
+		alignment?: Alignments | string
 	}
 }
 
@@ -419,7 +424,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			titleYPosition?: (value: number) => number
 			numberFormatter?: (value: number) => string
 		}
-		alignment?: Alignments
+		alignment?: Alignments | string
 	}
 }
 
@@ -434,7 +439,7 @@ export interface MeterChartOptions extends BaseChartOptions {
 		status?: {
 			ranges: Array<{
 				range: [number, number]
-				status: Statuses
+				status: Statuses | string
 			}>
 		}
 		height?: number
@@ -467,7 +472,7 @@ export interface RadarChartOptions extends BaseChartOptions {
 			angle: string
 			value: string
 		}
-		alignment?: Alignments
+		alignment?: Alignments | string
 	}
 }
 
@@ -477,7 +482,7 @@ export interface RadarChartOptions extends BaseChartOptions {
 export interface ComboChartOptions extends AxisChartOptions {
 	axes?: AxesOptions<ComboChartAxisOptions>
 	comboChartTypes: Array<{
-		type: ChartTypes | any
+		type: ChartTypes | string
 		options?: object
 		correspondingDatasets: Array<string>
 	}>
@@ -493,7 +498,7 @@ export type TreemapChartOptions = BaseChartOptions
  */
 export interface TreeChartOptions extends BaseChartOptions {
 	tree?: {
-		type?: TreeTypes
+		type?: TreeTypes | string
 		rootTitle?: string
 	}
 }
@@ -531,7 +536,7 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 		/**
 		 * Node alignment (Default is center)
 		 */
-		nodeAlignment?: Alignments
+		nodeAlignment?: Alignments | string
 		/**
 		 * Set the node padding
 		 */
@@ -553,7 +558,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 		 * No cell divider for cell dimensions less than 16
 		 */
 		divider?: {
-			state?: DividerStatus
+			state?: DividerStatus | string
 		}
 		/**
 		 * customize color legend
@@ -565,7 +570,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 			 * Position is determined by text length
 			 */
 			title?: string
-			type: ColorLegendType
+			type: ColorLegendType | string
 		}
 	}
 }
@@ -575,7 +580,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
  */
 export interface ThematicChartOptions extends BaseChartOptions {
 	thematic: {
-		projection: Projection
+		projection: Projection | string
 	}
 }
 
@@ -594,7 +599,7 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			 * Position is determined by text length
 			 */
 			title?: string
-			type: ColorLegendType
+			type: ColorLegendType | string
 		}
 	}
 }

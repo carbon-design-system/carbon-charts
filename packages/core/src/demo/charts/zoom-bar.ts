@@ -5,6 +5,7 @@ import * as lineChart from './line'
 import * as scatterChart from './scatter'
 import * as stepChart from './step'
 import * as timeSeriesAxisChart from './time-series-axis'
+import { ScaleTypes } from '@/interfaces'
 
 const initialZoomDomain = [new Date(2020, 11, 10, 23, 59, 25), new Date(2020, 11, 11, 0, 0, 25)]
 
@@ -162,7 +163,7 @@ export const zoomBarStringDateOptions = addZoomBarToOptions({
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: 'time'
+			scaleType: ScaleTypes.TIME
 		}
 	}
 })

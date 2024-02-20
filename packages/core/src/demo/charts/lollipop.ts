@@ -1,3 +1,5 @@
+import { ScaleTypes } from '@/interfaces'
+
 export const lollipopDiscreteData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 2', key: 'More', value: 34200 },
@@ -10,7 +12,7 @@ export const lollipopDiscreteOptions = {
 	axes: {
 		bottom: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		left: {
@@ -26,7 +28,7 @@ export const lollipopDiscretePresentationOptions = {
 	axes: {
 		left: {
 			title: '2019 Annual Sales Figures',
-			scaleType: 'labels',
+			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
 		bottom: {

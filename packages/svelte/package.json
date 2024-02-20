@@ -1,9 +1,9 @@
 {
 	"name": "@carbon/charts-svelte",
-	"version": "1.13.24",
+	"version": "1.14.2",
 	"description": "Carbon Charts component library for Svelte",
 	"scripts": {
-		"postinstall": "carbon-telemetry collect --install",
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"build:package": "svelte-kit sync && svelte-package && yarn file:styles",
 		"demo:mdx:svelte": "cp ../core/src/stories/getting-started/svelte.stories.mdx src/stories",
@@ -36,33 +36,34 @@
 	},
 	"files": [
 		"dist",
-		"CHANGELOG.md"
+		"CHANGELOG.md",
+		"telemetry.yml"
 	],
 	"peerDependencies": {
 		"svelte": "^3.31.0 || ^4.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/telemetry": "~0.1.0"
+		"@ibm/telemetry-js": "^1.2.1"
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
 		"@sveltejs/adapter-auto": "^3.1.1",
-		"@sveltejs/kit": "^2.4.1",
+		"@sveltejs/kit": "^2.5.0",
 		"@sveltejs/package": "^2.2.6",
-		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@sveltejs/vite-plugin-svelte": "^3.0.2",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"eslint": "^8.56.0",
 		"publint": "^0.2.7",
-		"storybook": "~7.6.10",
-		"svelte": "^4.2.9",
-		"svelte-check": "^3.6.3",
+		"storybook": "^7.6.14",
+		"svelte": "^4.2.10",
+		"svelte-check": "^3.6.4",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.12"
+		"vite": "^5.1.1"
 	},
 	"publishConfig": {
 		"access": "public"

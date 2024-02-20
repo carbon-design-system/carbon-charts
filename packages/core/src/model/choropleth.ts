@@ -68,12 +68,14 @@ export class ChoroplethModel extends ChartModel {
 	 */
 	getTabularDataArray() {
 		const displayData = this.getDisplayData()
+		const { number: numberFormatter, code: localeCode } = getProperty(this.getOptions(), 'locale')
+
 		const headers = ['Country ID', 'Country Name', 'Value']
 		const cells = [
 			...displayData.map(datum => [
 				datum['id'] === null ? '&ndash;' : datum['id'],
 				datum['name'],
-				datum['value']
+				numberFormatter(datum['value'], localeCode)
 			])
 		]
 

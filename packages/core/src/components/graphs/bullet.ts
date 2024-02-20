@@ -325,6 +325,8 @@ export class Bullet extends Component {
 
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier()
 
+		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
+
 		this.parent
 			.selectAll('path.bar')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
@@ -348,7 +350,10 @@ export class Bullet extends Component {
 					hoveredElement,
 					items: [
 						{
-							label: options.tooltip.groupLabel || 'Group',
+							label:
+								getProperty(options, 'locale', 'translations', 'group') ||
+								getProperty(options, 'tooltip', 'groupLabel') ||
+								'Group',
 							value: datum[groupMapsTo],
 							class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
@@ -365,7 +370,7 @@ export class Bullet extends Component {
 						},
 						{
 							label: 'Percentage',
-							value: `${Math.floor((datum[rangeIdentifier] / datum.marker) * 100)}%`
+							value: `${numberFormatter(Math.floor((datum[rangeIdentifier] / datum.marker) * 100), localeCode)}%`
 						},
 						{
 							label: 'Performance',
