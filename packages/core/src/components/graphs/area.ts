@@ -216,9 +216,7 @@ export class Area extends Component {
 			if (boundsEnabled) {
 				enteringAreas
 					.attr('fill-opacity', areaConfigs.opacity.selected)
-					.style('stroke', (group: any) =>
-						self.model.getStrokeColor(group.name, undefined, group.data)
-					)
+					.style('stroke', (group: any) => self.model.getStrokeColor(group.name, null, group.data))
 					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 0.7 + 'px')
 			}

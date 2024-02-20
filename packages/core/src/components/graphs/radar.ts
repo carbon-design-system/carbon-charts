@@ -367,9 +367,9 @@ export class Radar extends Component {
 							? () => `translate(${c.x}, ${c.y}) scale(${1 + Math.random() * 0.35})`
 							: `translate(${c.x}, ${c.y})`
 					)
-					.style('fill', (group: any) => colorScale(group.name, undefined, group.data))
+					.style('fill', (group: any) => colorScale(group.name, null, group.data))
 					.style('fill-opacity', radarConfigs.opacity.selected)
-					.style('stroke', (group: any) => colorScale(group.name, undefined, group.data))
+					.style('stroke', (group: any) => colorScale(group.name, null, group.data))
 					.call((selection: any) => {
 						const selectionUpdate = selection.transition().call((t: any) =>
 							this.services.transitions.setupTransition({
@@ -398,8 +398,8 @@ export class Radar extends Component {
 							originalClassName: 'blob'
 						})
 					)
-					.style('fill', (group: any) => colorScale(group.name, undefined, group.data))
-					.style('stroke', (group: any) => colorScale(group.name, undefined, group.data))
+					.style('fill', (group: any) => colorScale(group.name, null, group.data))
+					.style('stroke', (group: any) => colorScale(group.name, null, group.data))
 				update.call((selection: any) =>
 					selection
 						.transition()
