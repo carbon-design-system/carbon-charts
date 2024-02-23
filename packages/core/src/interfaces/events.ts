@@ -30,7 +30,9 @@ export enum Model {
 export enum Toolbar {
 	SHOW_OVERFLOW_MENU = 'show-toolbar-overflow-menu',
 	HIDE_OVERFLOW_MENU = 'hide-toolbar-overflow-menu',
-	BUTTON_CLICK = 'toolbar-button-click'
+	BUTTON_CLICK = 'toolbar-button-click',
+	SHOW_TOOLTIP = 'toolbar-show-tooltip',
+	HIDE_TOOLTIP = 'toolbar-hide-tooltip',
 }
 
 /**

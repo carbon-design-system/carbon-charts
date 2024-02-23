@@ -1,5 +1,5 @@
 import { select, pointer } from 'd3'
-import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
+import Position, { PLACEMENTS, defaultPositions } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
 import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
@@ -15,6 +15,7 @@ export class Tooltip extends Component {
 
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false
+	lastTriggeredEventType = ''
 	tooltip: any
 	positionService = new Position()
 
@@ -74,6 +75,14 @@ export class Tooltip extends Component {
 
 		// Fade in
 		this.tooltip.classed('hidden', false).attr('aria-hidden', false)
+
+		// store latest triggered custom event type
+		this.lastTriggeredEventType = e.type
+	}
+
+	handleShowToolbarTooltip = (e: any) => {
+		this.handleShowTooltip(e)
+		this.positionTooltip(e)
 	}
 
 	handleHideTooltip = () => {
@@ -83,7 +92,9 @@ export class Tooltip extends Component {
 	addTooltipEventListener() {
 		// listen to move-tooltip Custom Events to move the tooltip
 		this.services.events.addEventListener(Events.Tooltip.MOVE, (e: CustomEvent) => {
-			if (this.tooltip.classed('hidden') === false) {
+			if (this.lastTriggeredEventType !== Events.Toolbar.SHOW_TOOLTIP &&
+				this.tooltip.classed('hidden') === false
+			) {
 				this.positionTooltip(e)
 			}
 		})
@@ -96,6 +107,10 @@ export class Tooltip extends Component {
 
 		// listen to chart-mouseout event to hide the tooltip
 		this.services.events.addEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
+
+		// listen to toolbar events
+		this.services.events.addEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowToolbarTooltip)
+		this.services.events.addEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
 	removeTooltipEventListener() {
@@ -110,6 +125,10 @@ export class Tooltip extends Component {
 
 		// remove the listener on chart-mouseout
 		this.services.events.removeEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
+
+		// remote the listener of the toolbar
+		this.services.events.removeEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowToolbarTooltip)
+		this.services.events.removeEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
 	getItems(e: CustomEvent) {
@@ -238,13 +257,47 @@ export class Tooltip extends Component {
 		}
 	}
 
+	getOffsetByPlacement(position: any, placement: string, offset: number) {
+		const newOffset = Object.assign({}, position)
+		if (placement == PLACEMENTS.LEFT) {
+			newOffset.left -= offset
+		} else if (placement == PLACEMENTS.RIGHT) {
+			newOffset.left += offset
+		} else if (placement == PLACEMENTS.TOP) {
+			newOffset.top -= offset
+		} else if (placement == PLACEMENTS.BOTTOM) {
+			newOffset.top += offset
+		}
+		return newOffset
+	}
+
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder()
 		const target = this.tooltip.node()
 		const options = this.getOptions()
 		const isTopZoomBarEnabled = getProperty(options, 'zoomBar', 'top', 'enabled')
 
+		let { horizontalOffset, defaultOffsetSmall } = tooltipConfigs
 		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
+		const customPlacement: PLACEMENTS | undefined | null = getProperty(e, 'detail', 'placement')
+
+		// set Tooltip based on custom placement relative to the triggered dom
+		if (customPlacement) {
+			const hovered = getProperty(e, 'detail', 'event', 'target')
+			const hoveredRect = hovered.getBoundingClientRect()
+			const position = defaultPositions[customPlacement](
+				this.getOffsetByPlacement(
+					this.services.domUtils.getElementOffset(hovered),
+					customPlacement,
+					defaultOffsetSmall
+				),
+				target,
+				hoveredRect
+			)
+			this.positionService.setElement(target, position)
+			return ;
+		}
+		// set Tooltip based on mouse position
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
@@ -288,7 +341,6 @@ export class Tooltip extends Component {
 			)
 		}
 
-		let { horizontalOffset } = tooltipConfigs
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1
 		}

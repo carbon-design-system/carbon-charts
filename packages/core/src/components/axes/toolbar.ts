@@ -85,6 +85,7 @@ export class Toolbar extends Component {
 				.classed('disabled', (d: any) => d.shouldBeDisabled())
 				.attr('role', 'button')
 				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
+				.attr('role', 'button')
 				.attr('aria-label', (d: any) => d.title)
 				.html((d: any) => {
 					return `
@@ -101,12 +102,26 @@ export class Toolbar extends Component {
 				.each(function (d: any, index: number) {
 					select(this)
 						.select('svg')
+						.style('pointer-events', 'none')
 						.style('will-change', 'transform')
 						.style('width', d.iconSVG.width !== undefined ? d.iconSVG.width : '20px')
 						.style('height', d.iconSVG.height !== undefined ? d.iconSVG.height : '20px')
 
 					select(this)
 						.select('button')
+						.on('mouseover focus', function (event: MouseEvent) {
+							const hoveredElement = select(this)
+							hoveredElement.classed('hovered', true)
+							self.services.events.dispatchEvent(Events.Toolbar.SHOW_TOOLTIP, {
+								event,
+								hoveredElement,
+								content: d.title,
+								placement: 'top'
+							})
+						})
+						.on('mouseout blur', function () {
+							self.services.events.dispatchEvent(Events.Toolbar.HIDE_TOOLTIP)
+						})
 						.on('click', (event: CustomEvent<MouseEvent>) => {
 							if (!d.shouldBeDisabled()) {
 								self.triggerFunctionAndEvent(d, event, this)
