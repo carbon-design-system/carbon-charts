@@ -210,7 +210,10 @@ export class Gauge extends Component {
 			.merge(valueNumber as any)
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
-			.text((d: any) => localeNumberFormatter(Number(numberFormatter(d)), localeCode))
+			.text((d: any) => {
+				const formattedNumber = Number(numberFormatter(d));
+				return isNaN(formattedNumber) ? numberFormatter(d) : localeNumberFormatter(formattedNumber, localeCode);
+			})
 
 		// add the percentage symbol beside the valueNumber
 		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(
@@ -287,10 +290,10 @@ export class Gauge extends Component {
 				.merge(deltaNumber)
 				.attr('text-anchor', 'middle')
 				.style('font-size', `${deltaFontSize(radius)}px`)
-				.text(
-					(d: any) =>
-						`${localeNumberFormatter(Number(numberFormatter(d)), localeCode)}${gaugeSymbol}`
-				)
+				.text((d: any) => {
+					const formattedNumber = Number(numberFormatter(d));
+					return `${isNaN(formattedNumber) ? numberFormatter(d) : localeNumberFormatter(formattedNumber, localeCode)}${gaugeSymbol}`
+				})
 
 			// Add the caret for the delta number
 			const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(
