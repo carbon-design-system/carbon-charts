@@ -145,7 +145,7 @@ export class Treemap extends Component {
 			.attr('height', (d: any) => d.y1 - d.y0)
 			.style('fill', (d: any) => {
 				while (d.depth > 1) d = d.parent
-				return this.model.getFillColor(d.data.name)
+				return this.model.getFillColor(d.data.name, null, d.data)
 			})
 
 		// Update all clip paths
@@ -252,7 +252,7 @@ export class Treemap extends Component {
 						})
 					)
 					.style('fill', (d: any) => {
-						const customColor = self.model.getFillColor(d.parent.data.name)
+						const customColor = self.model.getFillColor(d.parent.data.name, null, d.data)
 						if (customColor) {
 							fillColor = customColor
 						}
@@ -320,7 +320,7 @@ export class Treemap extends Component {
 							name: 'graph_element_mouseout_fill_update'
 						})
 					)
-					.style('fill', (d: any) => self.model.getFillColor(d.parent.data.name))
+					.style('fill', (d: any) => self.model.getFillColor(d.parent.data.name, null, d.data))
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Treemap.LEAF_MOUSEOUT, {

@@ -72,7 +72,7 @@ export class Histogram extends Component {
 					originalClassName: 'bar'
 				})
 			)
-			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => this.model.getFillColor(d[groupMapsTo], null, d))
 			.attr('d', (d: any) => {
 				const bin = get(d, 'data')
 
