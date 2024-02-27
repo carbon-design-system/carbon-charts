@@ -198,7 +198,7 @@ export class Area extends Component {
 						originalClassName: 'area'
 					})
 				)
-				.style('fill', (group: any) => self.model.getFillColor(group.name))
+				.style('fill', (group: any) => self.model.getFillColor(group.name, null, group.data))
 				.transition()
 				.call((t: any) =>
 					this.services.transitions.setupTransition({
@@ -216,7 +216,7 @@ export class Area extends Component {
 			if (boundsEnabled) {
 				enteringAreas
 					.attr('fill-opacity', areaConfigs.opacity.selected)
-					.style('stroke', (group: any) => self.model.getStrokeColor(group.name))
+					.style('stroke', (group: any) => self.model.getStrokeColor(group.name, null, group.data))
 					.style('stroke-dasharray', '2, 2')
 					.attr('stroke-width', 0.7 + 'px')
 			}

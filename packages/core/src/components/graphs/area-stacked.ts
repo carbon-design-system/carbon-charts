@@ -26,14 +26,12 @@ export class StackedArea extends Component {
 		const self = this
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
-
 		const percentage = Object.keys(options.axes).some(axis => options.axes[axis].percentage)
 
 		const stackedData = this.model.getStackedData({
 			percentage,
 			groups: this.configs.groups
 		})
-
 		const datum = getProperty(stackedData, 0, 0) as number[] // firstDatum name could not be used by getDomainAxisPosition() and getRangeAxisPosition() below
 
 		// area doesn't have to use the main range and domain axes - they can be mapped to the secondary (in the case of a combo chart)
@@ -73,7 +71,7 @@ export class StackedArea extends Component {
 					originalClassName: 'area'
 				})
 			)
-			.style('fill', (d: any) => self.model.getFillColor(getProperty(d, 0, groupMapsTo)))
+			.style('fill', (d: any) => self.model.getFillColor(getProperty(d, 0, groupMapsTo), null, d))
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'area')
 			.attr('aria-label', (d: any) => getProperty(d, 0, groupMapsTo))

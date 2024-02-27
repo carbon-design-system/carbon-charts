@@ -101,7 +101,7 @@ export class Pie extends Component {
 					originalClassName: 'slice'
 				})
 			)
-			.style('fill', (d: any) => self.model.getFillColor(d.data[groupMapsTo]))
+			.style('fill', (d: any) => self.model.getFillColor(d.data[groupMapsTo], null, d.data))
 			.attr('d', this.arc)
 
 		allPaths

@@ -94,7 +94,7 @@ export class Line extends Component {
 					originalClassName: 'line'
 				})
 			)
-			.style('stroke', (group: any) => this.model.getStrokeColor(group.name))
+			.style('stroke', (group: any) => this.model.getStrokeColor(group.name, null, group.data))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'line')

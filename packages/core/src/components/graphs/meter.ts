@@ -136,7 +136,7 @@ export class Meter extends Component {
 			.attr('width', (d: any) => {
 				return d.value > domainMax ? xScale(domainMax) : d.width
 			})
-			.style('fill', (d: any) => self.model.getFillColor(d[groupMapsTo]))
+			.style('fill', (d: any) => self.model.getFillColor(d[groupMapsTo], null, d))
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'value')
