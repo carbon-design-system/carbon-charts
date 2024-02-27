@@ -76,7 +76,7 @@ export class Tooltip extends Component {
 		// Fade in
 		this.tooltip.classed('hidden', false).attr('aria-hidden', false)
 
-		// store latest triggered custom event type
+		// Store the latest triggered custom event type
 		this.lastTriggeredEventType = e.type
 	}
 
@@ -126,7 +126,7 @@ export class Tooltip extends Component {
 		// remove the listener on chart-mouseout
 		this.services.events.removeEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
 
-		// remote the listener of the toolbar
+		// remove the listener of the toolbar
 		this.services.events.removeEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowToolbarTooltip)
 		this.services.events.removeEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
@@ -281,7 +281,7 @@ export class Tooltip extends Component {
 		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
 		const customPlacement: PLACEMENTS | undefined | null = getProperty(e, 'detail', 'placement')
 
-		// set Tooltip based on custom placement relative to the triggered dom
+		// set the tooltip based on the placement relative to the triggered dom
 		if (customPlacement) {
 			const hovered = getProperty(e, 'detail', 'event', 'target')
 			const hoveredRect = hovered.getBoundingClientRect()
@@ -297,7 +297,7 @@ export class Tooltip extends Component {
 			this.positionService.setElement(target, position)
 			return ;
 		}
-		// set Tooltip based on mouse position
+		// set the tooltip based on the mouse position
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
