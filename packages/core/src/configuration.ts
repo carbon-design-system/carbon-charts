@@ -76,7 +76,7 @@ const standardTruncationOptions = {
  * Locale options
  */
 const locale: Locale = {
-	code: typeof navigator !== 'undefined' && navigator?.language || 'en-US', // read from browser's navigator.language
+	code: (typeof navigator !== 'undefined' && navigator?.language) || 'en-US', // read from browser's navigator.language
 	number: (value, language = navigator?.language || 'en-US') => value.toLocaleString(language), // based on code property if specified
 	date: (
 		value,
@@ -677,8 +677,7 @@ const donutChart: DonutChartOptions = merge({}, pieChart, {
 		center: {
 			numberFontSize: radius => `${Math.min((radius / 100) * 24, 24)}px`,
 			titleFontSize: radius => `${Math.min((radius / 100) * 15, 15)}px`,
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
-			numberFormatter: number => Math.floor(number).toLocaleString()
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
 		},
 		alignment: Alignments.LEFT
 	}

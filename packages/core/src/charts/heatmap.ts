@@ -95,7 +95,8 @@ export class HeatmapChart extends AxisChart {
 
 		const isLegendEnabled =
 			getProperty(configs, 'legend', 'enabled') !== false &&
-			this.model.getOptions().legend.enabled !== false
+			this.model.getOptions().legend.enabled !== false &&
+			this.model.getData().length > 0
 
 		// Decide the position of the legend in reference to the chart
 		const fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE
