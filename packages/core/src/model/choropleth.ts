@@ -75,7 +75,7 @@ export class ChoroplethModel extends ChartModel {
 			...displayData.map(datum => [
 				datum['id'] === null ? '&ndash;' : datum['id'],
 				datum['name'],
-				numberFormatter(datum['value'], localeCode)
+				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], localeCode)
 			])
 		]
 

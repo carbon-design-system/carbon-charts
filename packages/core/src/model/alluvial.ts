@@ -20,7 +20,7 @@ export class AlluvialChartModel extends ChartModelCartesian {
 			...displayData.map((datum: any) => [
 				datum['source'],
 				datum['target'],
-				numberFormatter(datum['value'], localeCode)
+				datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], localeCode)
 			])
 		]
 
