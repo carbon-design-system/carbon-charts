@@ -661,10 +661,6 @@ const gaugeChart: GaugeChartOptions = merge({}, chart, {
 		numberSpacing: 10,
 		deltaFontSize: (radius: number) => radius / 8,
 		valueFontSize: (radius: number) => radius / 2.5,
-		numberFormatter: (value: number) =>
-			Number(value.toFixed(2)) % 1 !== 0
-				? value.toFixed(2).toLocaleString()
-				: value.toFixed().toLocaleString(),
 		alignment: Alignments.LEFT
 	}
 } as GaugeChartOptions)
