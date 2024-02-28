@@ -30,6 +30,10 @@
 	.content-box {
 		color: theme.$text-primary;
 
+		.title-tooltip.title-tooltip-nowrap {
+			width: max-content;
+		}
+
 		.title-tooltip {
 			width: auto;
 			padding: 4px;

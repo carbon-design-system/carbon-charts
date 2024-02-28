@@ -80,11 +80,6 @@ export class Tooltip extends Component {
 		this.lastTriggeredEventType = e.type
 	}
 
-	handleShowToolbarTooltip = (e: any) => {
-		this.handleShowTooltip(e)
-		this.positionTooltip(e)
-	}
-
 	handleHideTooltip = () => {
 		this.tooltip.classed('hidden', true).attr('aria-hidden', true)
 	}
@@ -109,7 +104,7 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
 
 		// listen to toolbar events
-		this.services.events.addEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowToolbarTooltip)
+		this.services.events.addEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowTooltip)
 		this.services.events.addEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
@@ -127,7 +122,7 @@ export class Tooltip extends Component {
 		this.services.events.removeEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
 
 		// remove the listener of the toolbar
-		this.services.events.removeEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowToolbarTooltip)
+		this.services.events.removeEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowTooltip)
 		this.services.events.removeEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
@@ -283,6 +278,7 @@ export class Tooltip extends Component {
 
 		// set the tooltip based on the placement relative to the triggered dom
 		if (customPlacement) {
+			this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', true)
 			const hovered = getProperty(e, 'detail', 'event', 'target')
 			const hoveredRect = hovered.getBoundingClientRect()
 			const position = defaultPositions[customPlacement](
@@ -297,7 +293,9 @@ export class Tooltip extends Component {
 			this.positionService.setElement(target, position)
 			return ;
 		}
+
 		// set the tooltip based on the mouse position
+		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', false)
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
