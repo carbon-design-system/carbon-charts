@@ -105,6 +105,7 @@ export class Pie extends Component {
 			.attr('d', this.arc)
 
 		allPaths
+			.style('pointer-events', 'none')
 			.transition()
 			.call((t: any) =>
 				this.services.transitions.setupTransition({
@@ -127,6 +128,11 @@ export class Pie extends Component {
 			// Tween
 			.attrTween('d', function (a: any) {
 				return arcTween.bind(this)(a, self.arc)
+			})
+			.end()
+			.finally(() => {
+				// restore mouse events after slice animation
+				allPaths.style('pointer-events', 'auto')
 			})
 
 		// Draw the slice labels
