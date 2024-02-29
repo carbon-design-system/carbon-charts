@@ -210,7 +210,19 @@ export class Gauge extends Component {
 			.merge(valueNumber as any)
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
-			.text((d: any) => localeNumberFormatter(Number(numberFormatter(d)), localeCode))
+			.text((d: any) => {
+				let value
+				if (d !== null && d !== undefined) {
+					value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+				} else {
+					value = 0
+				}
+				if (numberFormatter) {
+					return numberFormatter(value)
+				} else {
+					return localeNumberFormatter(Number(value), localeCode)
+				}
+			})
 
 		// add the percentage symbol beside the valueNumber
 		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(
@@ -287,10 +299,19 @@ export class Gauge extends Component {
 				.merge(deltaNumber)
 				.attr('text-anchor', 'middle')
 				.style('font-size', `${deltaFontSize(radius)}px`)
-				.text(
-					(d: any) =>
-						`${localeNumberFormatter(Number(numberFormatter(d)), localeCode)}${gaugeSymbol}`
-				)
+				.text((d: any) => {
+					let value
+					if (d !== null && d !== undefined) {
+						value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+					} else {
+						value = 0
+					}
+					if (numberFormatter) {
+						return `${numberFormatter(value)}${gaugeSymbol}`
+					} else {
+						return `${localeNumberFormatter(Number(value), localeCode)}${gaugeSymbol}`
+					}
+				})
 
 			// Add the caret for the delta number
 			const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(
