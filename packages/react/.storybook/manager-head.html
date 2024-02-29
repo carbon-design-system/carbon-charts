@@ -24,8 +24,36 @@
 <meta name="twitter:image" content="https://charts.carbondesignsystem.com/react/share.png" />
 <meta name="twitter:site" content="@_carbondesign" />
 
-<footer><dds-footer-container key="footer" disable-locale-button="true" size="micro" /></footer>
+<!-- Tealium/GA Set up -->
+<script type="text/javascript">
+	window._ibmAnalytics = {
+		settings: {
+			name: 'CarbonChartsReactStorybookV1',
+			isSpa: true,
+			tealiumProfileName: 'ibm-web-app'
+		},
+		onLoad: [['ibmStats.pageview', []]]
+	}
+	digitalData = {
+		page: {
+			pageInfo: {
+				ibm: {
+					siteId: 'IBM_' + _ibmAnalytics.settings.name
+				}
+			},
+			category: {
+				primaryCategory: 'PC100'
+			}
+		}
+	}
+</script>
+<script
+	src="//1.www.s81c.com/common/stats/ibm-common.js"
+	type="text/javascript"
+	async="async"></script>
 
+<!-- IBM footer -->
+<footer><dds-footer-container key="footer" disable-locale-button="true" size="micro" /></footer>
 <script
 	key="8"
 	type="module"
