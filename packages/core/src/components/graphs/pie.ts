@@ -1,5 +1,5 @@
 import { arc, interpolate, pie, select } from 'd3'
-import { debounce } from 'lodash-es'
+import { delay } from 'lodash-es'
 import { convertValueToPercentage, getProperty } from '@/tools'
 import { pie as pieConfigs } from '@/configuration'
 import { Component } from '@/components/component'
@@ -392,41 +392,22 @@ export class Pie extends Component {
 	addEventListeners() {
 		const self = this
 
-		const debouncedMouseOver = debounce((hoveredElement: any) => {
-			if (!this.isRendering) {
-				hoveredElement
-					.classed('hovered', true)
-					.transition('pie_slice_mouseover')
-					.call((t: any) =>
-						self.services.transitions.setupTransition({
-							transition: t,
-							name: 'pie_slice_mouseover'
-						})
-					)
-					.attr('d', self.hoverArc)
-			}
-		}, 120, { trailing: true })
-
-		const debouncedMouseOut = debounce((hoveredElement: any) => {
-			if (!this.isRendering) {
-				hoveredElement
-					.classed('hovered', false)
-					.transition('pie_slice_mouseout')
-					.call((t: any) =>
-						self.services.transitions.setupTransition({
-							transition: t,
-							name: 'pie_slice_mouseout'
-						})
-					)
-					.attr('d', self.arc)
-			}
-		}, 120, { trailing: true })
-
 		this.parent
 			.selectAll('path.slice')
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
-				debouncedMouseOver(hoveredElement)
+				if (!self.isRendering) {
+					hoveredElement
+						.classed('hovered', true)
+						.transition('pie_slice_mouseover')
+						.call((t: any) =>
+							self.services.transitions.setupTransition({
+								transition: t,
+								name: 'pie_slice_mouseover'
+							})
+						)
+						.attr('d', self.hoverArc)
+				}
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
@@ -474,7 +455,20 @@ export class Pie extends Component {
 			})
 			.on('mouseout', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
-				debouncedMouseOut(hoveredElement)
+				delay(() => {
+					if (!self.isRendering) {
+						hoveredElement
+							.classed('hovered', false)
+							.transition('pie_slice_mouseout')
+							.call((t: any) =>
+								self.services.transitions.setupTransition({
+									transition: t,
+									name: 'pie_slice_mouseout'
+								})
+							)
+							.attr('d', self.arc)
+					}
+				}, 100)
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
