@@ -115,7 +115,8 @@ export class Toolbar extends Component {
 								event,
 								hoveredElement,
 								content: d.title,
-								placement: 'top'
+								noWrap: true,
+								placements: ['top', 'bottom']
 							})
 						})
 						.on('mouseout blur', function () {

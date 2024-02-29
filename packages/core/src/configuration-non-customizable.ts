@@ -228,9 +228,8 @@ export const spacers = {
 }
 
 export const tooltips = {
-	horizontalOffset: 10,
-	defaultOffsetSmall: 4,
-	defaultOffsetNormal: 8,
+	defaultOffset: 4,
+	horizontalOffset: 10
 }
 
 /**

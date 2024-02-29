@@ -1,5 +1,5 @@
 import { select, pointer } from 'd3'
-import Position, { PLACEMENTS, defaultPositions } from '@carbon/utils-position' // position service
+import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
 import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
@@ -252,7 +252,7 @@ export class Tooltip extends Component {
 		}
 	}
 
-	getOffsetByPlacement(position: any, placement: string, offset: number) {
+	addOffsetByPlacement(position: any, placement: string, offset: number) {
 		const newOffset = Object.assign({}, position)
 		if (placement == PLACEMENTS.LEFT) {
 			newOffset.left -= offset
@@ -268,34 +268,54 @@ export class Tooltip extends Component {
 
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder()
+		const holderWidth = holder.offsetWidth
+		const holderHeight = holder.offsetHeight
 		const target = this.tooltip.node()
 		const options = this.getOptions()
 		const isTopZoomBarEnabled = getProperty(options, 'zoomBar', 'top', 'enabled')
+		const noWrap = !!getProperty(e, 'detail', 'noWrap')
+		const hasCustomPlacements = Array.isArray(getProperty(e, 'detail', 'placements'))
+		const placements = hasCustomPlacements ?
+			getProperty(e, 'detail', 'placements') :
+			[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
 
-		let { horizontalOffset, defaultOffsetSmall } = tooltipConfigs
-		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
-		const customPlacement: PLACEMENTS | undefined | null = getProperty(e, 'detail', 'placement')
+		let bestPlacementOption: any
+		let { horizontalOffset, defaultOffset } = tooltipConfigs
 
-		// set the tooltip based on the placement relative to the triggered dom
-		if (customPlacement) {
-			this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', true)
-			const hovered = getProperty(e, 'detail', 'event', 'target')
-			const hoveredRect = hovered.getBoundingClientRect()
-			const position = defaultPositions[customPlacement](
-				this.getOffsetByPlacement(
-					this.services.domUtils.getElementOffset(hovered),
-					customPlacement,
-					defaultOffsetSmall
-				),
+		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', noWrap)
+
+		// set tooltip based on reference element with candidate placements
+		if (hasCustomPlacements) {
+			const hoveredElement = getProperty(e, 'detail', 'event', 'target')
+			// calculate the best placement from array "placements"
+			bestPlacementOption = this.positionService.findBestPlacement(
+				hoveredElement,
 				target,
-				hoveredRect
+				placements,
+				() => ({
+					top: undefined,
+					left: undefined,
+					width: holderWidth,
+					height: holderHeight
+				})
 			)
-			this.positionService.setElement(target, position)
+			let bestPos = this.positionService.findPosition(
+				hoveredElement,
+				target,
+				bestPlacementOption,
+				() => this.services.domUtils.getElementOffset(hoveredElement)
+			)
+			bestPos = this.addOffsetByPlacement(
+				bestPos,
+				bestPlacementOption,
+				defaultOffset
+			)
+			this.positionService.setElement(target, bestPos)
 			return ;
 		}
 
-		// set the tooltip based on the mouse position
-		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', false)
+		// set tooltip based on mouse positions
+		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
 		} else {
@@ -313,10 +333,6 @@ export class Tooltip extends Component {
 			}
 		}
 
-		const holderWidth = holder.offsetWidth
-		const holderHeight = holder.offsetHeight
-
-		let bestPlacementOption: any
 		if (mouseRelativePos[0] / holderWidth > 0.9) {
 			bestPlacementOption = PLACEMENTS.LEFT
 		} else if (mouseRelativePos[0] / holderWidth < 0.1) {
@@ -329,7 +345,7 @@ export class Tooltip extends Component {
 					top: mouseRelativePos[1]
 				},
 				target,
-				[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM],
+				placements,
 				() => ({
 					top: undefined, // properties were never set to optional (probably should)
 					left: undefined, // ditto
