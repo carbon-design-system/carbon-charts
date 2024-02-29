@@ -211,7 +211,12 @@ export class Gauge extends Component {
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
 			.text((d: any) => {
-				const value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+				let value
+				if (d !== null && d !== undefined) {
+					value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+				} else {
+					value = 0
+				}
 				if (numberFormatter) {
 					return numberFormatter(value)
 				} else {
@@ -295,7 +300,12 @@ export class Gauge extends Component {
 				.attr('text-anchor', 'middle')
 				.style('font-size', `${deltaFontSize(radius)}px`)
 				.text((d: any) => {
-					const value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+					let value
+					if (d !== null && d !== undefined) {
+						value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+					} else {
+						value = 0
+					}
 					if (numberFormatter) {
 						return `${numberFormatter(value)}${gaugeSymbol}`
 					} else {
