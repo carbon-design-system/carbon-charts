@@ -241,6 +241,9 @@ export const transitions = {
 	pie_slice_mouseover: {
 		duration: 100
 	},
+	pie_slice_mouseout: {
+		duration: 100
+	},
 	pie_chart_titles: {
 		duration: 375
 	},
