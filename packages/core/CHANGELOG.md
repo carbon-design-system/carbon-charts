@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.14.8 (2024-03-01)
+
+### Bug Fixes
+
+- **pie:** distortion issues of hovered slices
+  ([#1771](https://github.com/carbon-design-system/carbon-charts/issues/1771))
+  ([65f4e8b](https://github.com/carbon-design-system/carbon-charts/commit/65f4e8bb6bac120014f7ace40872c2f3877a0694))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.14.7 (2024-02-29)
 
 **Note:** Version bump only for package @carbon/charts
