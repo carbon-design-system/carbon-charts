@@ -288,13 +288,14 @@ export class Tooltip extends Component {
 		if (hasCustomPlacements) {
 			const hoveredElement = getProperty(e, 'detail', 'event', 'target')
 			// calculate the best placement from array "placements"
-			bestPlacementOption = this.positionService.findBestPlacement(
-				hoveredElement,
+			const hoveredPos = this.services.domUtils.getElementOffset(hoveredElement, true)
+			bestPlacementOption = this.positionService.findBestPlacementAt(
+				hoveredPos,
 				target,
 				placements,
 				() => ({
-					top: undefined,
-					left: undefined,
+					top: 0,
+					left: 0,
 					width: holderWidth,
 					height: holderHeight
 				})

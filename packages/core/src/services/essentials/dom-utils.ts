@@ -230,11 +230,11 @@ export class DOMUtils extends Service {
 		return this.chartID
 	}
 
-	getElementOffset(element: HTMLElement) {
-		// get relative position { left, top } of the chart holder
+	getElementOffset(element: HTMLElement, byViewPort = false) {
+		// get relative position { left, top } based on "chart holder" OR "viewport"
 		const elementOffset = { left: 0, top: 0 }
 		const childRect = element.getBoundingClientRect()
-		const baseRect = this.getHolder().getBoundingClientRect()
+		const baseRect = byViewPort ? { left: 0, top: 0 } : this.getHolder().getBoundingClientRect()
 
 		try {
 			elementOffset.left = childRect.left - baseRect.left
