@@ -258,7 +258,14 @@ const locale: Locale = {
 		toolbar: {
 			exportAsCSV: 'Export to CSV',
 			exportAsJPG: 'Export to JPG',
-			exportAsPNG: 'Export to PNG'
+			exportAsPNG: 'Export to PNG',
+			zoomIn: 'Zoom in',
+			zoomOut: 'Zoom out',
+			resetZoom: 'Reset zoom',
+			moreOptions: 'More options',
+			makeFullScreen: 'Make fullscreen',
+			exitFullScreen: 'Exit fullscreen',
+			showAsTable: 'Show as table'
 		}
 	}
 }

@@ -15,6 +15,7 @@ export class Tooltip extends Component {
 
 	// flag for checking whether tooltip event listener is added or not
 	isEventListenerAdded = false
+	lastTriggeredEventType = ''
 	tooltip: any
 	positionService = new Position()
 
@@ -74,6 +75,9 @@ export class Tooltip extends Component {
 
 		// Fade in
 		this.tooltip.classed('hidden', false).attr('aria-hidden', false)
+
+		// Store the latest triggered custom event type
+		this.lastTriggeredEventType = e.type
 	}
 
 	handleHideTooltip = () => {
@@ -83,7 +87,9 @@ export class Tooltip extends Component {
 	addTooltipEventListener() {
 		// listen to move-tooltip Custom Events to move the tooltip
 		this.services.events.addEventListener(Events.Tooltip.MOVE, (e: CustomEvent) => {
-			if (this.tooltip.classed('hidden') === false) {
+			if (this.lastTriggeredEventType !== Events.Toolbar.SHOW_TOOLTIP &&
+				this.tooltip.classed('hidden') === false
+			) {
 				this.positionTooltip(e)
 			}
 		})
@@ -96,6 +102,10 @@ export class Tooltip extends Component {
 
 		// listen to chart-mouseout event to hide the tooltip
 		this.services.events.addEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
+
+		// listen to toolbar events
+		this.services.events.addEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowTooltip)
+		this.services.events.addEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
 	removeTooltipEventListener() {
@@ -110,6 +120,10 @@ export class Tooltip extends Component {
 
 		// remove the listener on chart-mouseout
 		this.services.events.removeEventListener(Events.Chart.MOUSEOUT, this.handleHideTooltip)
+
+		// remove the listener of the toolbar
+		this.services.events.removeEventListener(Events.Toolbar.SHOW_TOOLTIP, this.handleShowTooltip)
+		this.services.events.removeEventListener(Events.Toolbar.HIDE_TOOLTIP, this.handleHideTooltip)
 	}
 
 	getItems(e: CustomEvent) {
@@ -238,12 +252,70 @@ export class Tooltip extends Component {
 		}
 	}
 
+	addOffsetByPlacement(position: any, placement: string, offset: number) {
+		const newOffset = Object.assign({}, position)
+		if (placement == PLACEMENTS.LEFT) {
+			newOffset.left -= offset
+		} else if (placement == PLACEMENTS.RIGHT) {
+			newOffset.left += offset
+		} else if (placement == PLACEMENTS.TOP) {
+			newOffset.top -= offset
+		} else if (placement == PLACEMENTS.BOTTOM) {
+			newOffset.top += offset
+		}
+		return newOffset
+	}
+
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder()
+		const holderWidth = holder.offsetWidth
+		const holderHeight = holder.offsetHeight
 		const target = this.tooltip.node()
 		const options = this.getOptions()
 		const isTopZoomBarEnabled = getProperty(options, 'zoomBar', 'top', 'enabled')
+		const noWrap = !!getProperty(e, 'detail', 'noWrap')
+		const hasCustomPlacements = Array.isArray(getProperty(e, 'detail', 'placements'))
+		const placements = hasCustomPlacements ?
+			getProperty(e, 'detail', 'placements') :
+			[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
 
+		let bestPlacementOption: any
+		let { horizontalOffset, defaultOffset } = tooltipConfigs
+
+		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', noWrap)
+
+		// set tooltip based on reference element with candidate placements
+		if (hasCustomPlacements) {
+			const hoveredElement = getProperty(e, 'detail', 'event', 'target')
+			// calculate the best placement from array "placements"
+			const hoveredPos = this.services.domUtils.getElementOffset(hoveredElement, true)
+			bestPlacementOption = this.positionService.findBestPlacementAt(
+				hoveredPos,
+				target,
+				placements,
+				() => ({
+					top: 0,
+					left: 0,
+					width: holderWidth,
+					height: holderHeight
+				})
+			)
+			let bestPos = this.positionService.findPosition(
+				hoveredElement,
+				target,
+				bestPlacementOption,
+				() => this.services.domUtils.getElementOffset(hoveredElement)
+			)
+			bestPos = this.addOffsetByPlacement(
+				bestPos,
+				bestPlacementOption,
+				defaultOffset
+			)
+			this.positionService.setElement(target, bestPos)
+			return ;
+		}
+
+		// set tooltip based on mouse positions
 		let mouseRelativePos = getProperty(e, 'detail', 'mousePosition')
 		if (!mouseRelativePos) {
 			mouseRelativePos = pointer(getProperty(e, 'detail', 'event'), holder)
@@ -262,10 +334,6 @@ export class Tooltip extends Component {
 			}
 		}
 
-		const holderWidth = holder.offsetWidth
-		const holderHeight = holder.offsetHeight
-
-		let bestPlacementOption: any
 		if (mouseRelativePos[0] / holderWidth > 0.9) {
 			bestPlacementOption = PLACEMENTS.LEFT
 		} else if (mouseRelativePos[0] / holderWidth < 0.1) {
@@ -278,7 +346,7 @@ export class Tooltip extends Component {
 					top: mouseRelativePos[1]
 				},
 				target,
-				[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM],
+				placements,
 				() => ({
 					top: undefined, // properties were never set to optional (probably should)
 					left: undefined, // ditto
@@ -288,7 +356,6 @@ export class Tooltip extends Component {
 			)
 		}
 
-		let { horizontalOffset } = tooltipConfigs
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1
 		}
