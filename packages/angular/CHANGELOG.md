@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.15.0 (2024-03-05)
+
+### Features
+
+- **toolbar:** add tooltips
+  ([#1766](https://github.com/carbon-design-system/carbon-charts/issues/1766))
+  ([d8189d8](https://github.com/carbon-design-system/carbon-charts/commit/d8189d8f4797af6557dd998e1c2e26b985d93ff1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.14.8 (2024-03-01)
 
 ### Bug Fixes
