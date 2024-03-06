@@ -49,21 +49,21 @@
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.9.0",
 		"@sveltejs/adapter-auto": "^3.1.1",
-		"@sveltejs/kit": "^2.5.0",
-		"@sveltejs/package": "^2.2.6",
+		"@sveltejs/kit": "^2.5.2",
+		"@sveltejs/package": "^2.2.7",
 		"@sveltejs/vite-plugin-svelte": "^3.0.2",
 		"concurrently": "^8.2.2",
 		"d3": "^7.8.5",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"eslint": "^8.56.0",
+		"eslint": "^8.57.0",
 		"publint": "^0.2.7",
-		"storybook": "^7.6.14",
-		"svelte": "^4.2.10",
-		"svelte-check": "^3.6.4",
+		"storybook": "^7.6.17",
+		"svelte": "^4.2.12",
+		"svelte-check": "^3.6.6",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^5.1.1"
+		"vite": "^5.1.5"
 	},
 	"publishConfig": {
 		"access": "public"
