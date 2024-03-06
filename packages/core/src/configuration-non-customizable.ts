@@ -228,6 +228,7 @@ export const spacers = {
 }
 
 export const tooltips = {
+	defaultOffset: 4,
 	horizontalOffset: 10
 }
 
@@ -239,6 +240,9 @@ export const transitions = {
 		duration: 300
 	},
 	pie_slice_mouseover: {
+		duration: 100
+	},
+	pie_slice_mouseout: {
 		duration: 100
 	},
 	pie_chart_titles: {

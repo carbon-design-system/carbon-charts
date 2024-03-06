@@ -51,6 +51,13 @@ export interface Locale {
 			exportAsCSV?: string
 			exportAsJPG?: string
 			exportAsPNG?: string
+			zoomIn?: string
+			zoomOut?: string
+			resetZoom?: string
+			moreOptions?: string
+			makeFullScreen?: string
+			exitFullScreen?: string
+			showAsTable?: string
 		}
 	}
 }
