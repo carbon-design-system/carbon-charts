@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.15.2 (2024-03-08)
+
+### Bug Fixes
+
+- **tabular-rep:** better handling of null values
+  ([#1779](https://github.com/carbon-design-system/carbon-charts/issues/1779))
+  ([011f3b4](https://github.com/carbon-design-system/carbon-charts/commit/011f3b424c97cb22434bcb1f88d75acf6e272b9d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.1 (2024-03-06)
 
 **Note:** Version bump only for package @carbon/charts-svelte
