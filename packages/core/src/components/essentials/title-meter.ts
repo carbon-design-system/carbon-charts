@@ -230,7 +230,7 @@ export class MeterTitle extends Title {
 			.append('text')
 			.classed('percent-value', true)
 			.merge(percentage as any)
-			.text((d: any) => `${numberFormatter(d, localeCode)}%`)
+			.text((d: any) => `${d !== null && d !== undefined ? numberFormatter(d, localeCode) : 0}%`)
 			.attr('x', +title.attr('x') + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr('y', title.attr('y'))
 

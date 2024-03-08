@@ -18,7 +18,11 @@ export class TreemapChartModel extends ChartModel {
 		displayData.forEach((datum: any) => {
 			if (Array.isArray(datum.children)) {
 				datum.children.forEach((child: any) => {
-					cells.push([child.name, datum.name, numberFormatter(child.value, localeCode)])
+					cells.push([
+						child.name,
+						datum.name,
+						child.value === null ? '&ndash;' : numberFormatter(child.value, localeCode)
+					])
 				})
 			} else if (getProperty(datum.name) !== null && getProperty(datum.value)) {
 				cells.push(['–', datum.name, numberFormatter(datum.value, localeCode)])
