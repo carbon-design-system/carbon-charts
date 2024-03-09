@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.15.3 (2024-03-09)
+
+### Bug Fixes
+
+- **bar:** bleed-out for includeZero set to false
+  ([#1780](https://github.com/carbon-design-system/carbon-charts/issues/1780))
+  ([4c14db0](https://github.com/carbon-design-system/carbon-charts/commit/4c14db0571919004c8591c019b9a1c40fe2e5418))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.2 (2024-03-08)
 
 ### Bug Fixes
