@@ -134,7 +134,8 @@ export class GroupedBar extends Bar {
 				const x0 = startX
 				const x1 = startX + barWidth
 				const rangeAxis = this.services.cartesianScales.getRangeAxisPosition({ datum: d })
-				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(rangeAxis, 0)
+				const lowerBound = this.services.cartesianScales.getDomainLowerBound(rangeAxis)
+				const y0 = this.services.cartesianScales.getValueThroughAxisPosition(rangeAxis, lowerBound)
 				const y1 = this.services.cartesianScales.getRangeValue(d)
 
 				// don't show if part of bar is out of zoom domain - test zoom on bar pos, not group

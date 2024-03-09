@@ -636,6 +636,27 @@ export class CartesianScales extends Service {
 		return scale
 	}
 
+	getDomainLowerBound(position: any): number {
+		let domainRange: number[]
+		let lowerBound = 0
+
+		// get domain ranges based on orientations
+		if (this.getOrientation() === CartesianOrientations.VERTICAL) {
+			domainRange = this.getMainYScale().domain() as number[]
+		} else {
+			domainRange = this.getMainXScale().domain() as number[]
+		}
+
+		if (getProperty(this.model.getOptions(), 'axes', position, 'includeZero') === false) {
+			// get domain lowerBound if all are positive values
+			if (domainRange[0] > 0 && domainRange[1] > 0) {
+				lowerBound = domainRange[0]
+			}
+		}
+
+		return lowerBound
+	}
+
 	getHighestDomainThreshold(): null | {
 		threshold: ThresholdOptions
 		scaleValue: number
