@@ -86,7 +86,7 @@ export class MeterChartModel extends ChartModel {
 			cells = [
 				[
 					datum[groupMapsTo],
-					numberFormatter(datum['value'], localeCode),
+					datum['value'] === null ? '&ndash;' : numberFormatter(datum['value'], localeCode),
 					...(status ? [status] : [])
 				]
 			]
@@ -96,11 +96,14 @@ export class MeterChartModel extends ChartModel {
 			headers = ['Group', 'Value', 'Percentage of total']
 			cells = [
 				...displayData.map((datum: any) => {
-					const value = datum['value']
-					const percentValue = Number(((datum['value'] / domainMax) * 100).toFixed(2))
+					let value
+					datum['value'] !== null && datum['value'] !== undefined
+						? (value = Number(datum['value']))
+						: (value = 0)
+					let percentValue = Number(((datum['value'] / domainMax) * 100).toFixed(2))
 					return [
 						datum[groupMapsTo],
-						numberFormatter(value, localeCode),
+						datum['value'] === null ? '&ndash;' : numberFormatter(value, localeCode),
 						numberFormatter(percentValue, localeCode) + ' %'
 					]
 				})
