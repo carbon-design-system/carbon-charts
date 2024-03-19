@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.15.4 (2024-03-19)
+
+### Bug Fixes
+
+- **pie:** uncaught promise error
+  ([#1784](https://github.com/carbon-design-system/carbon-charts/issues/1784))
+  ([560af6f](https://github.com/carbon-design-system/carbon-charts/commit/560af6f8f7bab4300a8e4971bccf7b49288c0696))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.3 (2024-03-09)
 
 ### Bug Fixes
