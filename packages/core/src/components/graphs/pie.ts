@@ -132,8 +132,7 @@ export class Pie extends Component {
 			.attrTween('d', function (a: any) {
 				return arcTween.bind(this)(a, self.arc)
 			})
-			.end()
-			.finally(() => {
+			.on('end', () => {
 				self.isRendering = false
 			})
 
