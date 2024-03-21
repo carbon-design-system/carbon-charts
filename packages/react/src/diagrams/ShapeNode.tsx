@@ -16,6 +16,7 @@ type ShapeNodeProps = {
 	position?: CssPosition
 	bodyPosition?: CssPosition
 	stacked?: boolean
+	className?: string
 }
 
 const ShapeNode: React.FC<
@@ -24,6 +25,7 @@ const ShapeNode: React.FC<
 	shape = 'circle',
 	tag = 'div',
 	title = 'Title',
+	className,
 	subtitle,
 	description,
 	renderIcon,
@@ -41,7 +43,7 @@ const ShapeNode: React.FC<
 		[`${namespace}--stacked`]: stacked,
 		[`${namespace}--${shape}`]: shape,
 		[`${namespace}--${Component}`]: Component,
-		[rest.className as string]: rest.className
+		[className as string]: className
 	})
 
 	const titleElement = title ? <div className={`${namespace}__title`}>{title}</div> : null
