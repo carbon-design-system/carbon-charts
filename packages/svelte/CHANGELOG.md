@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.15.6 (2024-04-11)
+
+### Bug Fixes
+
+- **meter:** meter width shouldn't be smaller than 2px
+  ([#1791](https://github.com/carbon-design-system/carbon-charts/issues/1791))
+  ([3336aeb](https://github.com/carbon-design-system/carbon-charts/commit/3336aeb0ebc8afccf6d1e95d5b2fdd3274fd11bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.5 (2024-03-21)
 
 **Note:** Version bump only for package @carbon/charts-svelte
