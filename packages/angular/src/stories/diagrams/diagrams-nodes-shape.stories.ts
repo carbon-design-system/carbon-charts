@@ -6,7 +6,7 @@ import { ShapeNodeModule } from '../../'
 import { getTemplate } from './utils'
 
 const DEFAULT_THEME = ChartTheme.WHITE
-const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) })
+const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) as Record<string, string> })
 
 storiesOf('Diagrams/Nodes/Shape', module)
 	.addDecorator(

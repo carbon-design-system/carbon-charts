@@ -54,7 +54,7 @@
 		"@angular/forms": "^16.2.12",
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
-		"@carbon/icon-helpers": "~10.45.1",
+		"@carbon/icon-helpers": "~10.47.0",
 		"@carbon/icons": "^11.39.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@storybook/angular": "^7.6.17",
@@ -67,7 +67,7 @@
 		"ng-packagr": "^16.2.3",
 		"rxjs": "~7.8.1",
 		"storybook": "^7.6.17",
-		"style-loader": "^3.3.4",
+		"style-loader": "^4.0.0",
 		"typescript": "~5.1.6",
 		"zone.js": "~0.14.4"
 	},
