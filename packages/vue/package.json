@@ -40,7 +40,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.3.0",
+		"@ibm/telemetry-js": "^1.4.0",
 		"vue": "^3.4.21"
 	},
 	"devDependencies": {
@@ -52,10 +52,10 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"storybook": "^7.6.17",
-		"typescript": "^5.4.2",
-		"vite": "^5.1.6",
-		"vite-plugin-dts": "^3.7.3",
-		"vue-tsc": "^2.0.6"
+		"typescript": "^5.4.5",
+		"vite": "^5.2.8",
+		"vite-plugin-dts": "^3.8.2",
+		"vue-tsc": "^2.0.13"
 	},
 	"publishConfig": {
 		"access": "public",
