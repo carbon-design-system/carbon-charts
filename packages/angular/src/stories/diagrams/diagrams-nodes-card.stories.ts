@@ -6,10 +6,10 @@ import chevronDownIcon from '@carbon/icons/es/chevron--down/16'
 import { CardNodeModule } from '../../'
 
 const DEFAULT_THEME = ChartTheme.WHITE
-const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) })
+const screenIconStr = toString({ ...screenIcon, attrs: getAttributes(screenIcon.attrs) as Record<string, string> })
 const chevronDownIconStr = toString({
 	...chevronDownIcon,
-	attrs: getAttributes(chevronDownIcon.attrs)
+	attrs: getAttributes(chevronDownIcon.attrs) as Record<string, string>
 })
 
 const getTemplate = (content: string) => `

@@ -10,8 +10,8 @@ const DEFAULT_THEME = ChartTheme.WHITE
 const nodeHeight = 64
 const nodeWidth = 200
 const circleSize = 64
-const userIconStr = toString({ ...userIcon, attrs: getAttributes(userIcon.attrs) })
-const wikisIconStr = toString({ ...wikisIcon, attrs: getAttributes(wikisIcon.attrs) })
+const userIconStr = toString({ ...userIcon, attrs: getAttributes(userIcon.attrs) as Record<string, string> })
+const wikisIconStr = toString({ ...wikisIcon, attrs: getAttributes(wikisIcon.attrs) as Record<string, string> })
 
 const stories = storiesOf('Diagrams', module)
 stories.addDecorator(
