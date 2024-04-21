@@ -22,28 +22,28 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Data & configuration" defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/data">
 					Chart data
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/options">
 					Chart display options
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/api">
 					API
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Design" defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/themes">
 					Themes (dark & light)
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/axes">
 					Axes
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/palette">
 					Color palette
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem as={NavLink} to="/dashboards">
 					Dashboards
 				</SideNavMenuItem>
 			</SideNavMenu>
