@@ -10,6 +10,7 @@ import Themes from './Themes.tsx'
 import Axes from './Axes.tsx'
 import Palette from './Palette.tsx'
 import Dashboards from './Dashboards.tsx'
+import Alluvial from './Alluvial.tsx'
 import Bar from './Bar.tsx'
 
-export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palette, Dashboards, Bar }
+export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palette, Dashboards, Alluvial, Bar }

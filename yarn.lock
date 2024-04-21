@@ -2249,6 +2249,7 @@ __metadata:
   dependencies:
     "@carbon/charts": "workspace:*"
     "@carbon/charts-react": "workspace:*"
+    "@carbon/icons-react": "npm:^11.39.0"
     "@carbon/react": "npm:^1.50.0"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
