@@ -6,6 +6,7 @@ import Anatomy from './Anatomy.tsx'
 import Data from './Data.tsx'
 import Options from './Options.tsx'
 import Api from './Api.tsx'
+import Themes from './Themes.tsx'
 import Bar from './Bar.tsx'
 
-export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Bar }
+export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Bar }

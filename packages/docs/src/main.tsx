@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
-import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Bar } from './routes'
+import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Bar } from './routes'
 import './index.scss'
 
 const router = createBrowserRouter([
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
 			{
 				path: 'api',
 				element: <Api />
+			},
+			{
+				path: 'themes',
+				element: <Themes />
 			},
 			{
 				path: 'bar',
