@@ -39,28 +39,23 @@ export function getVueProject(
   </head>
   <body>
     <div id="app"></div>
+		<script type="module" src="/src/main.ts"></script>
   </body>
 </html>`
 
-	const appVue = `<template>
-<div id="app" class="p-1">
-  <${chartType} :data="data" :options="options" />
-</div>
-</template>
-
-<script>
-import data from './data.js';
-import options from './options.js';
-
-export default {
-  data() {
-    return {
-      data,
-      options
-    };
-  }
-};
+	const appVue = `<script setup lang="ts">
+	import { ref } from 'vue'
+	import chartData from './data.ts'
+	import chartOptions from './options.ts'
+	const data = ref(chartData)
+	const options = ref(chartOptions)
 </script>
+
+<template>
+  <div id="app" class="p-1">
+    <${chartType} :data :options />
+  </div>
+</template>
 
 <style>
 @import '@carbon/charts-vue/styles.css';
@@ -146,7 +141,7 @@ app.mount('#app')
 	`
 
 	return {
-		template: 'vue' as ProjectTemplate,
+		template: 'node' as ProjectTemplate,
 		title: 'Carbon Charts Vue Example',
 		// dependencies,
 		files: {

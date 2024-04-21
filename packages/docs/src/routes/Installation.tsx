@@ -7,6 +7,7 @@ import javascript from 'highlight.js/lib/languages/javascript'
 import {
 	CodeSnippet,
 	InlineNotification,
+	StructuredListWrapper,
 	StructuredListHead,
 	StructuredListRow,
 	StructuredListCell,
@@ -25,6 +26,8 @@ const packageExtension = ['', '-svelte', '-react', '-vue', '-angular']
 
 export default function Installation() {
 	const [selectedIndex, setSelectedIndex] = useState(0)
+	const [isChromium, setIsChromium] = useState(false)
+
 	const handleTabChange = (evt: { selectedIndex: number }) => {
 		setSelectedIndex(evt.selectedIndex)
 	}
@@ -41,6 +44,9 @@ export default function Installation() {
 	}
 
 	useEffect(() => {
+		const userAgent = window.navigator.userAgent.toLowerCase()
+		const chromiumBased = userAgent.includes("chrome") || userAgent.includes("chromium")
+		setIsChromium(chromiumBased)
 		highlightCode()
 	}, [selectedIndex])
 
@@ -124,24 +130,96 @@ export default function Installation() {
 				/>
 
 				<TabPanels>
+
 					<TabPanel>
 						<h3>Using ES modules (recommended)</h3>
 						<CodeSample framework="vanilla" chartType="SimpleBarChart" data={data} options={options}></CodeSample>
 
-					</TabPanel>
-					<TabPanel></TabPanel>
-					<TabPanel></TabPanel>
-					<TabPanel></TabPanel>
-					<TabPanel></TabPanel>
-				</TabPanels>
-			</Tabs>
-
-			<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
+						<p>Details for each file in the example above:</p>
+						<StructuredListWrapper>
+							<StructuredListHead>
+								<StructuredListRow head>
+									<StructuredListCell head>File</StructuredListCell>
+									<StructuredListCell head>Purpose</StructuredListCell>
+								</StructuredListRow>
+							</StructuredListHead>
+							<StructuredListBody>
+							<StructuredListRow>
+								<StructuredListCell noWrap>index.html</StructuredListCell>
+								<StructuredListCell>
+									The HTML file that loads the IBM Plex Sans and Sans Condensed fonts, defines a DIV
+								container for the chart with the id of "app" and loads the main JavaScript module. To
+								use different fonts, override two custom CSS properties for the CSS class that is
+								automatically associated with the chart container like this...
+								<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
   --cds-charts-font-family: Roboto;
   --cds-charts-font-family-condensed: 'Roboto Condensed';
 }`}</CodeSnippet>
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>index.js</StructuredListCell>
+									<StructuredListCell>
+										ES module that imports the SimpleBarChart class plus two modules - one for the chart
+										display options and another containing the data. This module uses the import statement
+										to import the styles necessary to display the chart in a manner that helps Vite
+										optimize hot module reloading (HMR).
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>@carbon/charts/styles.css</StructuredListCell>
+									<StructuredListCell>Imported by index.js - CSS stylesheet required for all charts. A minified version is also distributed.</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>data.js</StructuredListCell>
+									<StructuredListCell>
+										ES module containing data for the chart in <a href="/data">Tabular data format</a>.
+									</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>options.js</StructuredListCell>
+									<StructuredListCell
+										>ES module with display <a href="/options">options</a> for the chart.</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
+									<StructuredListCell noWrap>package.json</StructuredListCell>
+									<StructuredListCell>Package file with minimal required dependencies.</StructuredListCell>
+								</StructuredListRow>				
+							</StructuredListBody>
+						</StructuredListWrapper>
 
-<CodeSnippet className="language-javascript" type="multi">{`import { sveltekit } from '@sveltejs/kit/vite'
+						<h3>Using the UMD bundle in a browser environment</h3>
+
+						<CodeSample framework="html" chartType="SimpleBarChart" data={data} options={options}></CodeSample>
+
+						<p>
+							The HTML example above loads the UMD bundle and styles in the head of the document from
+							https://unpkg.com (cdnjs is also available). The fonts are loaded from Google's CDN. JavaScript executes once the
+							DOM has loaded. It gets the HTML id of the div that will contain the chart. It then passes
+							the data and options to it.
+						</p>
+					</TabPanel>
+
+					<TabPanel>
+						<p><strong>Example using SvelteKit</strong></p>
+						<CodeSample framework="svelte" chartType="SimpleBarChart" data={data} options={options}></CodeSample>
+						{!isChromium && (
+                <p>The embedded example above uses a WebContainer optimized for Chromium-based browsers. To view it in your browser, click the <strong>Fork on StackBlitz</strong> button on the bottom left.</p>
+            )}
+
+						<h3>SvelteKit Vite Configuration</h3>
+						<p>
+							Carbon Charts Svelte is unique among the component libraries because it is provided in
+							source / unbundled form. This means when you build your Svelte app using it, you are
+							compiling the source of Carbon Charts Svelte and its dependency, Carbon Charts.
+						</p>
+						<p>
+							Carbon Charts expects to run in a browser environment. This will cause an error when using
+							server-side rendering (SSR). To avoid this, configure Vite to prevent @carbon/charts from
+							being externalized for SSR.
+						</p>
+						<p><strong>vite.config.mjs</strong></p>
+						<CodeSnippet className="language-javascript" type="multi">{`import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -150,7 +228,59 @@ export default defineConfig({
 			noExternal: ${`process`}.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
 	}
 })`}</CodeSnippet>
+					</TabPanel>
 
+					<TabPanel>
+						<p><strong>Example using React</strong></p>
+						<CodeSample framework="react" chartType="SimpleBarChart" data={data} options={options}></CodeSample>
+						<p>Click <strong>Preview</strong> or <strong>Both</strong> on the lower left of the example to see the chart. The top-left icon (Project) allows you to browse all the files in the project.</p>
+					</TabPanel>
+
+					<TabPanel>
+						<p><strong>Example using Vue.js</strong></p>
+						<CodeSample framework="vue" chartType="CcvSimpleBarChart" data={data} options={options}></CodeSample>
+						{!isChromium && (
+                <p>The embedded example uses a WebContainer optimized for Chromium-based browsers. To view it in your browser, click the <strong>Fork on StackBlitz</strong> button on the bottom left.</p>
+            )}
+						<p>
+							For Vue.js 3+, use <strong>@carbon/charts-vue@next</strong>. For 2.7, use <strong>@carbon/charts-vue@latest</strong>.
+						</p>
+					</TabPanel>
+
+					<TabPanel>
+						<p><strong>Example using Angular</strong></p>
+
+						<CodeSample framework="angular" chartType="ibm-simple-bar-chart" data={data} options={options}></CodeSample>
+						<p>Click <strong>Preview</strong> or <strong>Both</strong> on the lower left of the example to see the chart. The top-left icon (Project) allows you to browse all the files in the project.</p>
+
+						<p>
+							For Angular 16+, use <strong>@carbon/charts-angular@next</strong>. For 6 to 15, use <strong>@carbon/charts-angular@latest</strong>.
+						</p>
+					</TabPanel>
+				</TabPanels>
+			</Tabs>
+
+			<h3>Fonts</h3>
+
+			<p>
+				By default, Carbon Charts uses <a
+					href="https://fonts.google.com/specimen/IBM+Plex+Sans"
+					target="_blank">IBM Plex Sans</a>&nbsp;
+				and&nbsp;
+				<a href="https://fonts.google.com/specimen/IBM+Plex+Sans+Condensed" target="_blank"
+					>IBM Plex Sans Condensed</a>&nbsp;
+				which can be loaded in your HTML template from Google's Content Distribution Network (CDN):
+				<CodeSnippet className="language-html">{`<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />`}</CodeSnippet>
+			</p>
+
+			<p>
+				To use different fonts, override two custom CSS properties for the CSS class that is automatically
+				associated with the chart container like this...
+				<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
+  --cds-charts-font-family: Roboto;
+  --cds-charts-font-family-condensed: 'Roboto Condensed';
+}`}</CodeSnippet>
+			</p>
 		</>
 	)
 }
