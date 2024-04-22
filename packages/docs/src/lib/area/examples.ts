@@ -239,32 +239,26 @@ const dataBounded: ChartTabularData = [
 
 export const examples = [
 	{
-		name: 'Time Series',
 		data,
 		options
 	},
 	{
-		name: 'Discrete Domain',
 		data: dataDiscrete,
 		options: optionsDiscrete
 	},
 	{
-		name: 'Time Series (Natural Curve)',
 		data: dataCurved,
 		options: optionsCurved
 	},
 	{
-		name: 'Time Series (Natural Curve, Bounded)',
 		data: dataBounded,
 		options: optionsBounded
 	},
 	{
-		name: 'Multiple Bounded Areas (Natural Curve)',
 		data: dataBounded,
 		options: optionsMultipleBounded
 	},
 	{
-		name: 'Time Series (Natural Curve, Bounded, Zoom Bar)',
 		data: dataBounded,
 		options: optionsZoomBar
 	},
@@ -273,5 +267,5 @@ export const examples = [
 		data: dataBounded,
 		options: optionsSkeleton
 	},
-	{ name: 'Empty State', data: [], options: optionsEmpty }
+	{ data: [], options: optionsEmpty }
 ]

@@ -10,18 +10,18 @@ export default function Introduction() {
 			<PageHeader title="Introduction" />
 
 			<p>
-				Carbon Charts is a component library of 25 charts for vanilla JavaScript, Svelte, React, Vue
+				Carbon Charts is a component library of 26 charts for vanilla JavaScript, Svelte, React, Vue
 				and Angular. Detailed documentation and StackBlitz examples are provided to get you up and
-				running quickly. Its components are highly customizable with advanced functionality such as{' '}
+				running quickly. Components are highly customizable with advanced functionality such as{' '}
 				<Link to="/themes">themes</Link>, <Link to="/axes#dual">dual axes</Link>,{' '}
-				<Link to="/color">color palettes</Link>, <Link to="/combo">combo charts</Link>, and event
+				<Link to="/palettes">color palettes</Link>, <Link to="/combo">combo charts</Link>, and event
 				handling.
 			</p>
 
 			<p>
 				To get started, go to the <Link to="/installation">Installation &amp; setup</Link> page and
-				select your preferred framework. Alternatively, jump ahead to the StackBlitz examples
-				provided for each of the chart types by clicking the icons below.
+				select your preferred framework. Alternatively, jump ahead to StackBlitz examples in various
+				frameworks provided for each of the chart types by clicking the icons below.
 			</p>
 
 			<h2>Comparisons</h2>

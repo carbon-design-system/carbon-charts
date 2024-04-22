@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
-import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palette, Dashboards, Alluvial, Area, Bar } from './routes'
+import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palettes, Dashboards, Alluvial, Area, Bar } from './routes'
 import './index.scss'
 
 const router = createBrowserRouter([
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
 				element: <Axes />
 			},
 			{
-				path: 'palette',
-				element: <Palette />
+				path: 'palettes',
+				element: <Palettes />
 			},
 			{
 				path: 'dashboards',

@@ -29,18 +29,18 @@ export default function Api() {
       </p>
 
       <CodeSnippet className="language-javascript" type="multi">{`const myChart = new PieChart({
-        data: ...,
-        options: ...
-      })
+  data: ...,
+  options: ...
+})
 
-      console.log(myChart)
+console.log(myChart)
 
-      // RESULT
-      {
-        model, // where we store charting data & options
-        services, // globalized functions that can affect charting behaviour. (e.g. event listener dispatching etc.)
-        components // internally used for arranging the charting layout, you can disregard this
-      }`}</CodeSnippet>
+// RESULT
+{
+  model, // where we store charting data & options
+  services, // globalized functions that can affect charting behaviour. (e.g. event listener dispatching etc.)
+  components // internally used for arranging the charting layout, you can disregard this
+}`}</CodeSnippet>
 
       <h2>Services and Event Handling</h2>
 

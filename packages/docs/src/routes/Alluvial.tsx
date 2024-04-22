@@ -12,20 +12,20 @@ export default function Alluvial() {
       <PageHeader title="Alluvial / Sankey Charts" />
 
       <p>
-        Alluvial, or Sankey diagrams, are a type flow diagram designed to show two indicators of a dataset
+        Alluvial, or Sankey diagrams, are a type of flow diagram designed to show two indicators of a dataset
         and how records distribute among them, highlighting correlations.
       </p>
 
       <p>
         Multiple blocks of two indicators can be placed next to each other creating a wider alluvial
-        diagram but it’s crucial to consider that this specific kind of chart does not show correlations
+        diagram but it&apos;s crucial to consider that this specific kind of chart does not show correlations
         between indicators that are not directly connected. This is usually emphasized using a different
         set of colors for each block.
       </p>
 
       <p>
-        Details on the Alluvial chart options can be found <a
-          href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AlluvialChartOptions.html"
+        Details on Alluvial chart options can be found <a
+          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AlluvialChartOptions.html"
           target="_blank">here</a>.
       </p>
 

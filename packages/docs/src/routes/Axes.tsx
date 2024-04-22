@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet, Grid, Column, Tag } from '@carbon/react/es'
@@ -36,7 +37,7 @@ export default function Axes() {
         dates. The left vertical axis shows revenue and the right vertical axis shows attendees. The left
         axis is defined as the primary axis via the <strong>main</strong> property. The left and right
         axes have a <strong>correspondingDatasets</strong> property that represents an array of
-        <a href="{base}/data">domainIdentifiers</a>.
+        <Link to="/data">domainIdentifiers</Link>.
       </p>
 
       <CodeSnippet className="language-javascript" type="multi">{`import { LineChart, type LineChartOptions, ScaleTypes } from '@carbon/charts-svelte'

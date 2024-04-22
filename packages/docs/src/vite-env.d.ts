@@ -11,7 +11,6 @@ interface ChartTypes {
 }
 
 interface Example {
-  name: string
   data: ChartTabularData
   options: ChartOptions
 }

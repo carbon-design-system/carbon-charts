@@ -30,10 +30,10 @@ export default function Options() {
       <p>
         Options for all chart types extend from <a
           href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.BaseChartOptions.html"
-          target="_blank">BaseChartOptions</a>,
+          target="_blank">BaseChartOptions</a>,&nbsp;
         <a
           href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.ScatterChartOptions.html"
-          target="_blank">ScatterChartOptions</a>, or
+          target="_blank">ScatterChartOptions</a> or&nbsp;
         <a
           href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AxisChartOptions.html"
           target="_blank">AxisChartOptions</a>. To see examples for each type of chart, navigate to <strong>Chart types</strong> on left.

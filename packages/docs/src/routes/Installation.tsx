@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import hljs from 'highlight.js/lib/core'
 import bash from 'highlight.js/lib/languages/bash'
 import css from 'highlight.js/lib/languages/css'
@@ -173,13 +174,13 @@ export default function Installation() {
 								<StructuredListRow>
 									<StructuredListCell noWrap>data.js</StructuredListCell>
 									<StructuredListCell>
-										ES module containing data for the chart in <a href="/data">Tabular data format</a>.
+										ES module containing data for the chart in <Link to="/data">Tabular data format</Link>.
 									</StructuredListCell>
 								</StructuredListRow>
 								<StructuredListRow>
 									<StructuredListCell noWrap>options.js</StructuredListCell>
 									<StructuredListCell
-										>ES module with display <a href="/options">options</a> for the chart.</StructuredListCell>
+										>ES module with display <Link to="/options">options</Link> for the chart.</StructuredListCell>
 								</StructuredListRow>
 								<StructuredListRow>
 									<StructuredListCell noWrap>package.json</StructuredListCell>

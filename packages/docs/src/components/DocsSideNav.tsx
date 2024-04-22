@@ -40,7 +40,7 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/axes">
 					Axes
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/palette">
+				<SideNavMenuItem as={NavLink} to="/palettes">
 					Color palette
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/dashboards">
@@ -53,10 +53,10 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 					Alluvial / Sankey
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/area">
-					Area (basic &amp; stacked)
+					Area (standard, stacked)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/bar">
-					Bar (basic, grouped, stacked)
+					Bar (simple, grouped, stacked)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/boxplot">
 					Boxplot

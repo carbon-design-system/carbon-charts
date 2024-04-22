@@ -23,7 +23,7 @@ export default function Data() {
       <PageHeader title="Chart data" />
 
       <p>
-        Carbon Charts uses a tabular data format. The package exports a TypeScript type called <strong>ChartTabularData</strong>. This format accomodates all types of charts. Each element in the array is a datapoint.
+        Carbon Charts uses a tabular data format. Each framework package exports a TypeScript type called <a href="https://charts.carbondesignsystem.com/documentation/types/interfaces.ChartTabularData.html" target="_blank">ChartTabularData</a>. This format accomodates all types of charts. Each element in the array is a datapoint.
       </p>
 
       <CodeSnippet className="language-javascript" type="multi">{`const simpleBarData = [

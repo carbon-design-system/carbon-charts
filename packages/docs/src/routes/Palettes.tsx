@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
 
-export default function Palette() {
+export default function Palettes() {
   const highlightCode = () => {
 		hljs.registerLanguage('javascript', javascript)
 
@@ -20,7 +21,7 @@ export default function Palette() {
 
   return (
     <>
-      <PageHeader title="Color palette" />
+      <PageHeader title="Color palettes" />
 
       <p>
         The color palette for data visualizations is a select subset of the IBM Design Language color
@@ -35,7 +36,7 @@ export default function Palette() {
 
       <p>
         Color palettes for charts are set using the <strong>color</strong> property in&nbsp;
-        <a href="/options">options</a>. By default, Carbon Charts assigns colors based on the number
+        <Link to="/options">options</Link>. By default, Carbon Charts assigns colors based on the number
         of data groups (eg. charts with four data groups will get the first of the 4-color palettes).
       </p>
 

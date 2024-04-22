@@ -170,12 +170,10 @@ const data: ChartTabularData = [
 
 export const examples = [
 	{
-		name: 'Basic',
 		data,
 		options
 	},
 	{
-		name: 'Gradient',
 		data,
 		options: {
 			...options,
@@ -200,7 +198,6 @@ export const examples = [
 		} as AlluvialChartOptions
 	},
 	{
-		name: 'Multiple Categories',
 		data: [
 			{
 				source: '1st',
@@ -292,7 +289,6 @@ export const examples = [
 		} as AlluvialChartOptions
 	},
 	{
-		name: 'Monochrome with Custom Node Padding',
 		data: [
 			{ source: 'A', target: 'X', value: 3 },
 			{ source: 'A', target: 'Y', value: 5 },
@@ -322,7 +318,6 @@ export const examples = [
 		} as AlluvialChartOptions
 	},
 	{
-		name: 'Aligned Nodes',
 		data: [
 			{ source: 'A', target: 'X', value: 3 },
 			{ source: 'A', target: 'Y', value: 7 },
@@ -348,7 +343,6 @@ export const examples = [
 		} as AlluvialChartOptions
 	},
 	{
-		name: 'Custom Colors',
 		data,
 		options: {
 			...options,

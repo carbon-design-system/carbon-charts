@@ -33,11 +33,17 @@ export default function Area() {
         patterns.
       </p>
 
+      <p>
+        Details on Area chart options can be found <a
+          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AreaChartOptions.html"
+          target="_blank">here</a>.
+      </p>
+
       <StackBlitzLauncherExplanation/>
 
       <Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
         <TabList aria-label="List of area chart types">
-          <Tab>Basic</Tab>
+          <Tab>Standard</Tab>
           <Tab>Stacked</Tab>
         </TabList>
 
