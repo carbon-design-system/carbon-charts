@@ -53,10 +53,7 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 					Alluvial / Sankey
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/area">
-					Area
-				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/area#stacked">
-					Area (stacked)
+					Area (basic &amp; stacked)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/bar">
 					Bar
