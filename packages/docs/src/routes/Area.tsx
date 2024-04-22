@@ -8,6 +8,7 @@ import {
 	Tabs } from '@carbon/react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
+import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
 import { chartTypes, examples } from '../lib/area/examples'
 import { chartTypesStacked, examplesStacked } from '../lib/area/examplesStacked'
 import '@carbon/charts-react/styles.css'
@@ -31,6 +32,8 @@ export default function Area() {
         Area charts are similar to line charts but with areas below the lines filled with colors or
         patterns.
       </p>
+
+      <StackBlitzLauncherExplanation/>
 
       <Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
         <TabList aria-label="List of area chart types">

@@ -56,13 +56,7 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 					Area (basic &amp; stacked)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/bar">
-					Bar
-				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/bar#grouped">
-					Bar (grouped)
-				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/bar#stacked">
-					Bar (stacked)
+					Bar (basic, grouped, stacked)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/boxplot">
 					Boxplot

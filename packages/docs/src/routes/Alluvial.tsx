@@ -1,6 +1,7 @@
 import { AlluvialChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
+import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
 import { chartTypes, examples } from '../lib/alluvial/examples'
 import '@carbon/charts-react/styles.css'
 import './Alluvial.scss'
@@ -28,13 +29,7 @@ export default function Alluvial() {
           target="_blank">here</a>.
       </p>
 
-      <p>
-        Each example has buttons below to open a StackBlitz project for the framework you selected. The
-        examples separate the data, options and templates to make it easier to follow. The fonts are
-        loaded in the head of the HTML template. The styles are loaded in various ways according the the
-        standards for their framework. Please note that Carbon Charts components have slightly different
-        names for the same chart type in each framework.
-      </p>
+      <StackBlitzLauncherExplanation/>
 
       <h2>Examples for supported frameworks</h2>
 
