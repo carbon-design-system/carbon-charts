@@ -29,6 +29,11 @@ export default function Bar() {
 		<>
 			<PageHeader title="Bar Charts" />
 
+      <p>
+        Bar Charts are a staple in data visualization, useful for comparing quantities across different categories.
+        This component library allows for the creation of simple, grouped, and stacked bar charts to suit various data presentation needs.
+      </p>
+
 			<p>
         Details on Bar chart options can be found <a
           href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BarChartOptions.html"
@@ -57,8 +62,8 @@ export default function Bar() {
 						<TabPanel>
 							{examplesGrouped.map((example, index) => (
                 <p key={index} className="chart">
-                  <SimpleBarChart data={example.data} options={example.options} />
-                  <StackBlitzLauncher example={example} chartTypes={chartTypes} />
+                  <GroupedBarChart data={example.data} options={example.options} />
+                  <StackBlitzLauncher example={example} chartTypes={chartTypesGrouped} />
                 </p>
               ))}
 						</TabPanel>
@@ -66,8 +71,8 @@ export default function Bar() {
 						<TabPanel>
 							{examplesStacked.map((example, index) => (
                 <p key={index} className="chart">
-                  <SimpleBarChart data={example.data} options={example.options} />
-                  <StackBlitzLauncher example={example} chartTypes={chartTypes} />
+                  <StackedBarChart data={example.data} options={example.options} />
+                  <StackBlitzLauncher example={example} chartTypes={chartTypesStacked} />
                 </p>
               ))}
 						</TabPanel>
