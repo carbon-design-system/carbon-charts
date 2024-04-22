@@ -35,7 +35,7 @@ export default function Area() {
       {examplesStacked.map((example, index) => (
         <p key={index} className="chart">
           <StackedAreaChart data={example.data} options={example.options} />
-          <StackBlitzLauncher example={example} chartTypes={chartTypes} />
+          <StackBlitzLauncher example={example} chartTypes={chartTypesStacked} />
         </p>
       ))}
     </>
