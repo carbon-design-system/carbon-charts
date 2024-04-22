@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
-import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palette, Dashboards, Alluvial, Bar } from './routes'
+import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palette, Dashboards, Alluvial, Area, Bar } from './routes'
 import './index.scss'
 
 const router = createBrowserRouter([
@@ -58,6 +58,10 @@ const router = createBrowserRouter([
 			{
 				path: 'alluvial',
 				element: <Alluvial />
+			},
+			{
+				path: 'area',
+				element: <Area />
 			},
 			{
 				path: 'bar',
