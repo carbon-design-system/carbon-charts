@@ -21,7 +21,8 @@ const stackedBarOptions: BarChartOptions = {
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 const stackedBarNegativeOptions: BarChartOptions = Object.assign({}, stackedBarOptions, {
@@ -37,7 +38,8 @@ const stackedHorizontalBarOptions: BarChartOptions = {
 		bottom: {
 			stacked: true
 		}
-	}
+	},
+	height: '400px'
 }
 
 const stackedBarTimeSeriesOptions: BarChartOptions = {
@@ -51,7 +53,8 @@ const stackedBarTimeSeriesOptions: BarChartOptions = {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		}
-	}
+	},
+	height: '400px'
 }
 
 const stackedBarShortIntervalTimeSeriesOptions: BarChartOptions = {
@@ -65,7 +68,8 @@ const stackedBarShortIntervalTimeSeriesOptions: BarChartOptions = {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		}
-	}
+	},
+	height: '400px'
 }
 
 
@@ -83,7 +87,8 @@ const stackedBarTimeSeriesOptionsCustomTicks: BarChartOptions = {
 				values: [new Date(2019, 0, 17)]
 			}
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Stacked horizontal bar (time series)
@@ -96,7 +101,8 @@ const stackedHorizontalBarTimeSeriesOptions: BarChartOptions = {
 		bottom: {
 			stacked: true
 		}
-	}
+	},
+	height: '400px'
 }
 
 // stacked bar - empty state
@@ -107,7 +113,8 @@ const stackedBarEmptyStateOptions: BarChartOptions = {
 		bottom: {
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 // stacked bar - skeleton
@@ -121,7 +128,8 @@ const stackedBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 // stacked horizontal bar - empty state
@@ -132,7 +140,8 @@ const stackedHorizontalBarEmptyStateOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
-	}
+	},
+	height: '400px'
 }
 
 // stacked horizontal bar - skeleton
@@ -146,7 +155,8 @@ const stackedHorizontalBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 const stackedBarEmptyStateData: ChartTabularData = []

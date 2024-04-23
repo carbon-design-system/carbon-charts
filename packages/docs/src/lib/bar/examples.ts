@@ -20,7 +20,8 @@ const simpleBarOptions: BarChartOptions = {
 			mapsTo: 'group',
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarColorOverrideOptions: BarChartOptions = {
@@ -42,7 +43,8 @@ const simpleBarColorOverrideOptions: BarChartOptions = {
 			Qty: '#925699',
 			Misc: '#525669'
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarCustomLegendOrderOptions: BarChartOptions = {
@@ -58,7 +60,8 @@ const simpleBarCustomLegendOrderOptions: BarChartOptions = {
 	},
 	legend: {
 		order: ['Restocking', 'Misc', 'Sold', 'Qty', 'More']
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarAdditionalLegendItemsOptions: BarChartOptions = {
@@ -103,7 +106,8 @@ const simpleBarAdditionalLegendItemsOptions: BarChartOptions = {
 				name: 'Radius'
 			}
 		]
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarOptionsCustomTicks: BarChartOptions = {
@@ -119,7 +123,8 @@ const simpleBarOptionsCustomTicks: BarChartOptions = {
 			mapsTo: 'group',
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarCenteredLegendOptions: BarChartOptions = {
@@ -135,7 +140,8 @@ const simpleBarCenteredLegendOptions: BarChartOptions = {
 	},
 	legend: {
 		alignment: Alignments.CENTER
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarFixedDomainOptions: BarChartOptions = {
@@ -149,7 +155,8 @@ const simpleBarFixedDomainOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'group'
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleHorizontalBarOptions: BarChartOptions = {
@@ -162,7 +169,8 @@ const simpleHorizontalBarOptions: BarChartOptions = {
 		bottom: {
 			mapsTo: 'value'
 		}
-	}
+	},
+	height: '400px'
 }
 
 // const simpleHorizontalBarCenteredLegendOptions: BarChartOptions = {
@@ -203,7 +211,8 @@ const simpleHorizontalBarLongLabelOptions: BarChartOptions = {
 			threshold: 15,
 			numCharacter: 12
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarTimeSeriesOptions: BarChartOptions = {
@@ -216,7 +225,8 @@ const simpleBarTimeSeriesOptions: BarChartOptions = {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		}
-	}
+	},
+	height: '400px'
 }
 
 // More complete in that it reformats everything to Turkish - both axes and tooltip
@@ -284,7 +294,8 @@ const simpleBarJapaneseLocaleOptions: BarChartOptions = {
 	},
 	locale: {
 		code: 'ja-JP'
-	}
+	},
+	height: '400px'
 }
 
 // using locale interface to reformat everything to Hindi
@@ -332,7 +343,8 @@ const simpleHorizontalBarTimeSeriesOptions: BarChartOptions = {
 		bottom: {
 			mapsTo: 'value'
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Vertical simple time series with dense data
@@ -362,7 +374,8 @@ const simpleBarTimeSeriesDenseOptions: BarChartOptions = {
 			return value
 		}
 	},
-	bars: { maxWidth: 200 }
+	bars: { maxWidth: 200 },
+	height: '400px'
 }
 
 const floatingHorizontalBarTimeSeriesOptions: BarChartOptions = {
@@ -375,7 +388,8 @@ const floatingHorizontalBarTimeSeriesOptions: BarChartOptions = {
 		bottom: {
 			mapsTo: 'value'
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarEmptyStateOptions: BarChartOptions = {
@@ -385,7 +399,8 @@ const simpleBarEmptyStateOptions: BarChartOptions = {
 		bottom: {
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 const simpleBarSkeletonOptions: BarChartOptions = {
@@ -398,7 +413,8 @@ const simpleBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 const simpleHorizontalBarEmptyStateOptions: BarChartOptions = {
@@ -421,7 +437,8 @@ const simpleHorizontalBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 const floatingBarOptions: BarChartOptions = {
@@ -435,7 +452,8 @@ const floatingBarOptions: BarChartOptions = {
 			mapsTo: 'group',
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 const floatingHorizontalBarOptions: BarChartOptions = {
@@ -449,7 +467,8 @@ const floatingHorizontalBarOptions: BarChartOptions = {
 			mapsTo: 'value',
 			includeZero: false
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Simple bar

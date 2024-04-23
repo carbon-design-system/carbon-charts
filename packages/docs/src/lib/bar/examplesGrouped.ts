@@ -23,7 +23,8 @@ const groupedBarSelectedGroupsOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		}
-	}
+	},
+	height: '400px'
 }
 
 const groupedBarOptions: BarChartOptions = {
@@ -36,7 +37,8 @@ const groupedBarOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Vertical Grouped Time Series
@@ -50,7 +52,8 @@ const groupedBarTimeSeriesOptions: BarChartOptions = {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Horizontal Grouped Time Series
@@ -64,7 +67,8 @@ const groupedBarHorizontalTimeSeriesOptions: BarChartOptions = {
 		bottom: {
 			mapsTo: 'value'
 		}
-	}
+	},
+	height: '400px'
 }
 
 // Vertical Grouped time series with dense data
@@ -78,7 +82,8 @@ const groupedBarTimeSeriesDenseOptions: BarChartOptions = {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		}
-	}
+	},
+	height: '400px'
 }
 
 // grouped bar - empty state
@@ -89,7 +94,8 @@ const groupedBarEmptyStateOptions: BarChartOptions = {
 		bottom: {
 			scaleType: ScaleTypes.LABELS
 		}
-	}
+	},
+	height: '400px'
 }
 
 // grouped bar - skeleton
@@ -103,7 +109,8 @@ const groupedBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 
@@ -115,7 +122,8 @@ const groupedHorizontalBarEmptyStateOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS
 		},
 		bottom: {}
-	}
+	},
+	height: '400px'
 }
 
 // grouped horizontal bar - skeleton
@@ -129,7 +137,8 @@ const groupedHorizontalBarSkeletonOptions: BarChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 const groupedHorizontalBarOptions: BarChartOptions = {
@@ -142,7 +151,8 @@ const groupedHorizontalBarOptions: BarChartOptions = {
 		bottom: {
 			mapsTo: 'value'
 		}
-	}
+	},
+	height: '400px'
 }
 
 const groupedBarData: ChartTabularData = [

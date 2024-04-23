@@ -35,7 +35,8 @@ const bubbleDoubleLinearOptions: BubbleChartOptions = {
 				name: 'Surplus'
 			}
 		]
-	}
+	},
+	height: '400px'
 }
 
 const bubbleDiscreteOptions: BubbleChartOptions = {
@@ -52,7 +53,8 @@ const bubbleDiscreteOptions: BubbleChartOptions = {
 	},
 	bubble: {
 		radiusMapsTo: 'surplus'
-	}
+	},
+	height: '400px'
 }
 
 const bubbleTimeSeriesOptions: BubbleChartOptions = {
@@ -69,7 +71,8 @@ const bubbleTimeSeriesOptions: BubbleChartOptions = {
 	},
 	bubble: {
 		radiusMapsTo: 'surplus'
-	}
+	},
+	height: '400px'
 }
 
 const bubbleEmptyStateOptions: BubbleChartOptions = {
@@ -88,7 +91,8 @@ const bubbleEmptyStateOptions: BubbleChartOptions = {
 	},
 	bubble: {
 		radiusMapsTo: 'surplus'
-	}
+	},
+	height: '400px'
 }
 
 const bubbleSkeletonOptions: BubbleChartOptions = {
@@ -110,7 +114,8 @@ const bubbleSkeletonOptions: BubbleChartOptions = {
 	},
 	data: {
 		loading: true
-	}
+	},
+	height: '400px'
 }
 
 const bubbleDualDiscreteOptions: BubbleChartOptions = {
@@ -129,7 +134,8 @@ const bubbleDualDiscreteOptions: BubbleChartOptions = {
 	},
 	bubble: {
 		radiusMapsTo: 'value'
-	}
+	},
+	height: '400px'
 }
 
 const bubbleDoubleLinearData: ChartTabularData = [
