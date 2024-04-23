@@ -14,5 +14,6 @@ import Alluvial from './Alluvial.tsx'
 import Area from './Area.tsx'
 import Bar from './Bar.tsx'
 import Boxplot from './Boxplot.tsx'
+import Bubble from './Bubble.tsx'
 
-export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palettes, Dashboards, Alluvial, Area, Bar, Boxplot }
+export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palettes, Dashboards, Alluvial, Area, Bar, Boxplot, Bubble }
