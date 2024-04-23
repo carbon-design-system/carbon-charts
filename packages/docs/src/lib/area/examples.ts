@@ -237,7 +237,7 @@ const dataBounded: ChartTabularData = [
 	}
 ]
 
-export const examples = [
+export const examples: Example[] = [
 	{
 		data,
 		options

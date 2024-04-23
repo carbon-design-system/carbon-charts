@@ -553,7 +553,7 @@ const floatingHorizontalBarData: ChartTabularData = [
 	{ group: 'Misc', value: [3000, 36932] }
 ]
 
-export const examples = [
+export const examples: Example[] = [
   {
     options: simpleBarOptions,
     data: simpleBarData

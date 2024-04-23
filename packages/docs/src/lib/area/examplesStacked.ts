@@ -97,19 +97,16 @@ const dataUneven: ChartTabularData = [
 	{ group: 'Dataset 3', date: new Date(2019, 0, 17), value: 25213 }
 ]
 
-export const examplesStacked = [
+export const examplesStacked: Example[] = [
 	{
-		name: 'Time Series',
 		data,
 		options
 	},
 	{
-		name: 'Time Series (Percentage)',
 		data,
 		options: optionsPercentage
 	},
 	{
-		name: 'Time Series (Uneven Data)',
 		data: dataUneven,
 		options: optionsUneven
 	}

@@ -253,7 +253,7 @@ const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData
 
 const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData
 
-export const examplesStacked = [
+export const examplesStacked: Example[] = [
   {
     options: stackedBarOptions,
     data: stackedBarData

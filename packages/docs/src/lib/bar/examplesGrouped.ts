@@ -248,7 +248,7 @@ const groupedHorizontalBarData: ChartTabularData = groupedBarData
 
 const noData: ChartTabularData = []
 
-export const examplesGrouped = [
+export const examplesGrouped: Example[] = [
   {
     options: groupedBarSelectedGroupsOptions,
     data: groupedBarSelectedGroupsData
