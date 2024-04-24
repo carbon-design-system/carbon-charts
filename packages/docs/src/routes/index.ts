@@ -29,6 +29,8 @@ import Meter from './Meter.tsx'
 import Pie from './Pie.tsx'
 import Radar from './Radar.tsx'
 import Scatter from './Scatter.tsx'
+import Tree from './Tree.tsx'
+import Treemap from './Treemap.tsx'
 
 export {
 	Root,
@@ -61,5 +63,7 @@ export {
 	Meter,
 	Pie,
 	Radar,
-	Scatter
+	Scatter,
+	Tree,
+	Treemap
 }

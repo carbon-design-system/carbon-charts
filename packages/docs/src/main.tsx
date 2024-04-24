@@ -33,7 +33,9 @@ import {
 	Meter,
 	Pie,
 	Radar,
-	Scatter
+	Scatter,
+	Tree,
+	Treemap
 } from './routes'
 import './index.scss'
 
@@ -162,6 +164,14 @@ const router = createBrowserRouter([
 			{
 				path: 'scatter',
 				element: <Scatter />
+			},
+			{
+				path: 'tree',
+				element: <Tree />
+			},
+			{
+				path: 'treemap',
+				element: <Treemap />
 			}
 		]
 	}
