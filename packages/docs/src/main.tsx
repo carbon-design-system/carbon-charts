@@ -35,7 +35,9 @@ import {
 	Radar,
 	Scatter,
 	Tree,
-	Treemap
+	Treemap,
+	WordCloud,
+	NetworkDiagram
 } from './routes'
 import './index.scss'
 
@@ -172,6 +174,14 @@ const router = createBrowserRouter([
 			{
 				path: 'treemap',
 				element: <Treemap />
+			},
+			{
+				path: 'wordcloud',
+				element: <WordCloud />
+			},
+			{
+				path: 'networkdiagram',
+				element: <NetworkDiagram />
 			}
 		]
 	}

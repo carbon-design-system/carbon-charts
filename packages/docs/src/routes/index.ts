@@ -31,6 +31,9 @@ import Radar from './Radar.tsx'
 import Scatter from './Scatter.tsx'
 import Tree from './Tree.tsx'
 import Treemap from './Treemap.tsx'
+import WordCloud from './WordCloud.tsx'
+
+import NetworkDiagram from './NetworkDiagram.tsx'
 
 export {
 	Root,
@@ -65,5 +68,7 @@ export {
 	Radar,
 	Scatter,
 	Tree,
-	Treemap
+	Treemap,
+	WordCloud,
+	NetworkDiagram
 }
