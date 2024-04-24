@@ -24,6 +24,7 @@ import Gauge from './Gauge.tsx'
 import Heatmap from './Heatmap.tsx'
 import Histogram from './Histogram.tsx'
 import Line from './Line.tsx'
+import Lollipop from './Lollipop.tsx'
 
 export {
 	Root,
@@ -51,5 +52,6 @@ export {
 	Gauge,
 	Heatmap,
 	Histogram,
-	Line
+	Line,
+	Lollipop
 }

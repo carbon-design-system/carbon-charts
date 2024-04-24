@@ -28,7 +28,8 @@ import {
 	Gauge,
 	Heatmap,
 	Histogram,
-	Line
+	Line,
+	Lollipop
 } from './routes'
 import './index.scss'
 
@@ -137,6 +138,10 @@ const router = createBrowserRouter([
 			{
 				path: 'line',
 				element: <Line />
+			},
+			{
+				path: 'lollipop',
+				element: <Lollipop />
 			}
 		]
 	}
