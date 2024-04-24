@@ -25,7 +25,8 @@ import {
 	CirclePack,
 	Combo,
 	Donut,
-	Gauge
+	Gauge,
+	Heatmap
 } from './routes'
 import './index.scss'
 
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
 			{
 				path: 'gauge',
 				element: <Gauge />
+			},
+			{
+				path: 'heatmap',
+				element: <Heatmap />
 			}
 		]
 	}

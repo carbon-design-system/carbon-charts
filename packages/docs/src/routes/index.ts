@@ -21,6 +21,7 @@ import CirclePack from './CirclePack.tsx'
 import Combo from './Combo.tsx'
 import Donut from './Donut.tsx'
 import Gauge from './Gauge.tsx'
+import Heatmap from './Heatmap.tsx'
 
 export {
 	Root,
@@ -45,5 +46,6 @@ export {
 	CirclePack,
 	Combo,
 	Donut,
-	Gauge
+	Gauge,
+	Heatmap
 }
