@@ -18,6 +18,8 @@ import Bubble from './Bubble.tsx'
 import Bullet from './Bullet.tsx'
 import Choropleth from './Choropleth.tsx'
 import CirclePack from './CirclePack.tsx'
+import Combo from './Combo.tsx'
+import Donut from './Donut.tsx'
 
 export {
 	Root,
@@ -39,5 +41,7 @@ export {
 	Bubble,
 	Bullet,
 	Choropleth,
-	CirclePack
+	CirclePack,
+	Combo,
+	Donut
 }

@@ -22,7 +22,9 @@ import {
 	Bubble,
 	Bullet,
 	Choropleth,
-	CirclePack
+	CirclePack,
+	Combo,
+	Donut
 } from './routes'
 import './index.scss'
 
@@ -107,6 +109,14 @@ const router = createBrowserRouter([
 			{
 				path: 'circlepack',
 				element: <CirclePack />
+			},
+			{
+				path: 'combo',
+				element: <Combo />
+			},
+			{
+				path: 'donut',
+				element: <Donut />
 			}
 		]
 	}
