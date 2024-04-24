@@ -1,5 +1,7 @@
 import { type AreaChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-react'
 import { addZoomBarToOptions } from '../zoombar'
+import { Scale } from '@carbon/icons-react'
+import { Chart } from '@carbon/charts'
 
 const vanilla = 'AreaChart'
 
@@ -150,6 +152,44 @@ const optionsZoomBar: AreaChartOptions = addZoomBarToOptions(
 	Object.assign({}, optionsMultipleBounded)
 )
 
+const optionsSpark: AreaChartOptions = {
+  title: 'Sparkline',
+  height: '150px',
+  grid: {
+    x: {
+      enabled: false
+    },
+    y: {
+      enabled: false
+    }
+  },
+  axes: {
+    bottom: {
+      visible: false,
+      title: '2019 Annual Sales Figures',
+      mapsTo: 'date',
+      scaleType: ScaleTypes.TIME
+    },
+    left: {
+      visible: false,
+      mapsTo: 'value',
+      scaleType: ScaleTypes.LINEAR
+    }
+  },
+  color: {
+    gradient: {
+      enabled: true
+    }
+  },
+  points: {
+    enabled: false
+  },
+  legend: {
+    enabled: false
+  },
+	height: '200px'
+}
+
 const data: ChartTabularData = [
 	{ group: 'Dataset 1', date: new Date(2023, 0, 1), value: 0 },
 	{ group: 'Dataset 1', date: new Date(2023, 0, 6), value: 57312 },
@@ -237,10 +277,167 @@ const dataBounded: ChartTabularData = [
 	}
 ]
 
+const sparkLineData: ChartTabularData = [
+  {
+    group: 'Dataset 1',
+    date: 1558453260000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453320000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453380000,
+    value: 5
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453440000,
+    value: 1
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453500000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453560000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453620000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453680000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453740000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453800000,
+    value: 0
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453860000,
+    value: 5
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453920000,
+    value: 5
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558453980000,
+    value: 6
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454040000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454100000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454160000,
+    value: 6
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454280000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454340000,
+    value: 6
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454400000,
+    value: 0
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454460000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454520000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454580000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454640000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454700000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454760000,
+    value: 2
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454820000,
+    value: 4
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454880000,
+    value: 1
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558454940000,
+    value: 1
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558455000000,
+    value: 3
+  },
+  {
+    group: 'Dataset 1',
+    date: 1558455060000,
+    value: 2
+  }
+]
+
 export const examples: Example[] = [
 	{
 		data,
 		options
+	},
+	{
+		data: sparkLineData,
+		options: optionsSpark
 	},
 	{
 		data: dataDiscrete,
@@ -263,7 +460,6 @@ export const examples: Example[] = [
 		options: optionsZoomBar
 	},
 	{
-		name: 'Skeleton',
 		data: dataBounded,
 		options: optionsSkeleton
 	},
