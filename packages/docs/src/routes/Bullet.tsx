@@ -2,7 +2,7 @@ import { BulletChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/bullet/examples'
+import { chartTypes, examples } from '../lib/bullet'
 import '@carbon/charts-react/styles.css'
 
 export default function Bullet() {

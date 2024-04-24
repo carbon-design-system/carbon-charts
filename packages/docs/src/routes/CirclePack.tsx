@@ -2,7 +2,7 @@ import { CirclePackChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/circlepack/examples'
+import { chartTypes, examples } from '../lib/circlepack'
 import '@carbon/charts-react/styles.css'
 
 export default function CirclePack() {

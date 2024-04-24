@@ -2,7 +2,7 @@ import { ExperimentalChoroplethChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/choropleth/examples'
+import { chartTypes, examples } from '../lib/choropleth'
 import '@carbon/charts-react/styles.css'
 
 export default function Choropleth() {

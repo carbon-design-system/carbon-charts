@@ -2,7 +2,7 @@ import { ComboChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/combo/examples'
+import { chartTypes, examples } from '../lib/combo'
 import '@carbon/charts-react/styles.css'
 
 export default function Combo() {

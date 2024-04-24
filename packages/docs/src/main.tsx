@@ -24,7 +24,8 @@ import {
 	Choropleth,
 	CirclePack,
 	Combo,
-	Donut
+	Donut,
+	Gauge
 } from './routes'
 import './index.scss'
 
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
 			{
 				path: 'donut',
 				element: <Donut />
+			},
+			{
+				path: 'gauge',
+				element: <Gauge />
 			}
 		]
 	}

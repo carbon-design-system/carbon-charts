@@ -2,7 +2,7 @@ import { AlluvialChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/alluvial/examples'
+import { chartTypes, examples } from '../lib/alluvial'
 import '@carbon/charts-react/styles.css'
 import './Alluvial.scss'
 

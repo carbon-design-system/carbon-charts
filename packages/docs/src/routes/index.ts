@@ -20,6 +20,7 @@ import Choropleth from './Choropleth.tsx'
 import CirclePack from './CirclePack.tsx'
 import Combo from './Combo.tsx'
 import Donut from './Donut.tsx'
+import Gauge from './Gauge.tsx'
 
 export {
 	Root,
@@ -43,5 +44,6 @@ export {
 	Choropleth,
 	CirclePack,
 	Combo,
-	Donut
+	Donut,
+	Gauge
 }

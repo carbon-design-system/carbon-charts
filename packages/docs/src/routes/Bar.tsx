@@ -9,7 +9,7 @@ import { SimpleBarChart, GroupedBarChart, StackedBarChart } from '@carbon/charts
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import { chartTypes, examples } from '../lib/bar/examples'
+import { chartTypes, examples } from '../lib/bar'
 import { chartTypesGrouped, examplesGrouped } from '../lib/bar/examplesGrouped'
 import { chartTypesStacked, examplesStacked } from '../lib/bar/examplesStacked'
 
