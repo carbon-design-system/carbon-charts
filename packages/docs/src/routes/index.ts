@@ -16,5 +16,28 @@ import Bar from './Bar.tsx'
 import Boxplot from './Boxplot.tsx'
 import Bubble from './Bubble.tsx'
 import Bullet from './Bullet.tsx'
+import Choropleth from './Choropleth.tsx'
+import CirclePack from './CirclePack.tsx'
 
-export { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palettes, Dashboards, Alluvial, Area, Bar, Boxplot, Bubble, Bullet }
+export {
+	Root,
+	ErrorPage,
+	Introduction,
+	Installation,
+	Anatomy,
+	Data,
+	Options,
+	Api,
+	Themes,
+	Axes,
+	Palettes,
+	Dashboards,
+	Alluvial,
+	Area,
+	Bar,
+	Boxplot,
+	Bubble,
+	Bullet,
+	Choropleth,
+	CirclePack
+}

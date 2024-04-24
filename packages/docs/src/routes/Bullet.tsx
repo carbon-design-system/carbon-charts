@@ -5,7 +5,7 @@ import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExpla
 import { chartTypes, examples } from '../lib/bullet/examples'
 import '@carbon/charts-react/styles.css'
 
-export default function Bubble() {
+export default function Bullet() {
   return (
     <>
       <PageHeader title="Bullet Charts" />

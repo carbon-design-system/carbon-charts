@@ -68,7 +68,7 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 					Bullet
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/choropleth">
-					Choropleth
+					Choropleth (experimental)
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/circlepack">
 					Circle pack
