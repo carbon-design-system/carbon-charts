@@ -32,7 +32,8 @@ import {
 	Lollipop,
 	Meter,
 	Pie,
-	Radar
+	Radar,
+	Scatter
 } from './routes'
 import './index.scss'
 
@@ -157,6 +158,10 @@ const router = createBrowserRouter([
 			{
 				path: 'radar',
 				element: <Radar />
+			},
+			{
+				path: 'scatter',
+				element: <Scatter />
 			}
 		]
 	}

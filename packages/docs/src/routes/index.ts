@@ -28,6 +28,7 @@ import Lollipop from './Lollipop.tsx'
 import Meter from './Meter.tsx'
 import Pie from './Pie.tsx'
 import Radar from './Radar.tsx'
+import Scatter from './Scatter.tsx'
 
 export {
 	Root,
@@ -59,5 +60,6 @@ export {
 	Lollipop,
 	Meter,
 	Pie,
-	Radar
+	Radar,
+	Scatter
 }

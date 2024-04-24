@@ -385,7 +385,7 @@ const lineSelectedGroupsData: ChartTabularData = [
 	{ group: 'Dataset 4', key: 'Misc', value: 3000, audienceSize: 10 }
 ]
 
-const lineTimeSeriesData: ChartTabularData = [
+export const lineTimeSeriesData: ChartTabularData = [
 	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 50000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
 	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: null },
