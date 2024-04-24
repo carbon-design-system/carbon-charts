@@ -26,6 +26,8 @@ import Histogram from './Histogram.tsx'
 import Line from './Line.tsx'
 import Lollipop from './Lollipop.tsx'
 import Meter from './Meter.tsx'
+import Pie from './Pie.tsx'
+import Radar from './Radar.tsx'
 
 export {
 	Root,
@@ -55,5 +57,7 @@ export {
 	Histogram,
 	Line,
 	Lollipop,
-	Meter
+	Meter,
+	Pie,
+	Radar
 }

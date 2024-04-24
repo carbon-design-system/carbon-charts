@@ -30,7 +30,9 @@ import {
 	Histogram,
 	Line,
 	Lollipop,
-	Meter
+	Meter,
+	Pie,
+	Radar
 } from './routes'
 import './index.scss'
 
@@ -147,6 +149,14 @@ const router = createBrowserRouter([
 			{
 				path: 'meter',
 				element: <Meter />
+			},
+			{
+				path: 'pie',
+				element: <Pie />
+			},
+			{
+				path: 'radar',
+				element: <Radar />
 			}
 		]
 	}
