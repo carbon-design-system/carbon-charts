@@ -2,7 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
-import { Root, ErrorPage, Introduction, Installation, Anatomy, Data, Options, Api, Themes, Axes, Palettes, Dashboards, Alluvial, Area, Bar, Boxplot, Bubble } from './routes'
+import {
+	Root,
+	ErrorPage,
+	Introduction,
+	Installation,
+	Anatomy,
+	Data,
+	Options,
+	Api,
+	Themes,
+	Axes,
+	Palettes,
+	Dashboards,
+	Alluvial,
+	Area,
+	Bar,
+	Boxplot,
+	Bubble,
+	Bullet
+} from './routes'
 import './index.scss'
 
 const router = createBrowserRouter([
@@ -74,6 +93,10 @@ const router = createBrowserRouter([
 			{
 				path: 'bubble',
 				element: <Bubble />
+			},
+			{
+				path: 'bullet',
+				element: <Bullet />
 			}
 		]
 	}
