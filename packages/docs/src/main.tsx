@@ -26,7 +26,8 @@ import {
 	Combo,
 	Donut,
 	Gauge,
-	Heatmap
+	Heatmap,
+	Histogram
 } from './routes'
 import './index.scss'
 
@@ -127,6 +128,10 @@ const router = createBrowserRouter([
 			{
 				path: 'heatmap',
 				element: <Heatmap />
+			},
+			{
+				path: 'histogram',
+				element: <Histogram />
 			}
 		]
 	}

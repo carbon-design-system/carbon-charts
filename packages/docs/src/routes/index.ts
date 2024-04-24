@@ -22,6 +22,7 @@ import Combo from './Combo.tsx'
 import Donut from './Donut.tsx'
 import Gauge from './Gauge.tsx'
 import Heatmap from './Heatmap.tsx'
+import Histogram from './Histogram.tsx'
 
 export {
 	Root,
@@ -47,5 +48,6 @@ export {
 	Combo,
 	Donut,
 	Gauge,
-	Heatmap
+	Heatmap,
+	Histogram
 }
