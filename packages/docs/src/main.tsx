@@ -29,7 +29,8 @@ import {
 	Heatmap,
 	Histogram,
 	Line,
-	Lollipop
+	Lollipop,
+	Meter
 } from './routes'
 import './index.scss'
 
@@ -142,6 +143,10 @@ const router = createBrowserRouter([
 			{
 				path: 'lollipop',
 				element: <Lollipop />
+			},
+			{
+				path: 'meter',
+				element: <Meter />
 			}
 		]
 	}
