@@ -349,7 +349,7 @@ export interface WordCloudChartTooltipOptions extends TooltipOptions {
 	valueLabel?: string
 }
 
-export interface WorldCloudChartOptions extends BaseChartOptions {
+export interface WordCloudChartOptions extends BaseChartOptions {
 	wordCloud?: {
 		/** what key in your charting data will the font sizes map to? */
 		fontSizeMapsTo?: string

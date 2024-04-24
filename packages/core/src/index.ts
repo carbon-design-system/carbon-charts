@@ -80,7 +80,7 @@ export type {
 	ThematicChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WorldCloudChartOptions,
+	WordCloudChartOptions,
 	// Component Options
 	AxesOptions,
 	AxisOptions,

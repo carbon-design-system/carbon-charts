@@ -42,7 +42,7 @@ export type {
 	ThematicChartOptions,
 	TreemapChartOptions,
 	TreeChartOptions,
-	WorldCloudChartOptions,
+	WordCloudChartOptions,
 	WordCloudChartTooltipOptions
 } from './charts'
 
