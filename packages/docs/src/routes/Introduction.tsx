@@ -66,7 +66,7 @@ export default function Introduction() {
 			<h2>Connections</h2>
 			<div className="graph-tiles">
 				<GraphTile route="/alluvial" title="Alluvial" svg="alluvial" />
-				<GraphTile route="/diagram" title="Network diagram" svg="diagram" />
+				<GraphTile route="/diagram" title="Diagrams" svg="diagram" />
 				<GraphTile route="/tree" title="Tree" svg="tree" />
 			</div>
 
