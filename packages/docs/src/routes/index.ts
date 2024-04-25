@@ -33,7 +33,7 @@ import Tree from './Tree.tsx'
 import Treemap from './Treemap.tsx'
 import WordCloud from './WordCloud.tsx'
 
-import NetworkDiagram from './NetworkDiagram.tsx'
+import Diagram from './Diagram.tsx'
 
 export {
 	Root,
@@ -70,5 +70,5 @@ export {
 	Tree,
 	Treemap,
 	WordCloud,
-	NetworkDiagram
+	Diagram
 }

@@ -76,6 +76,9 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/combo">
 					Combo
 				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/diagram">
+					Diagrams
+				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/donut">
 					Donut
 				</SideNavMenuItem>
@@ -96,9 +99,6 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/meter">
 					Meter
-				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/networkdiagram">
-					Network diagrams
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/pie">
 					Pie

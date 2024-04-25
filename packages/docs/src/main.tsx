@@ -37,7 +37,7 @@ import {
 	Tree,
 	Treemap,
 	WordCloud,
-	NetworkDiagram
+	Diagram
 } from './routes'
 import './index.scss'
 
@@ -180,8 +180,8 @@ const router = createBrowserRouter([
 				element: <WordCloud />
 			},
 			{
-				path: 'networkdiagram',
-				element: <NetworkDiagram />
+				path: 'diagram',
+				element: <Diagram />
 			}
 		]
 	}
