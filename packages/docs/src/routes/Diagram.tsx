@@ -24,9 +24,6 @@ import {
 } from '@carbon/charts-react'
 import { User } from '@carbon/icons-react'
 import PageHeader from '../components/PageHeader'
-import StackBlitzLauncher from '../components/StackBlitzLauncher'
-import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
-import DiagramSimpleStatic from '../components/DiagramSimpleStatic'
 import '@carbon/charts-react/styles.css'
 import './Diagram.scss'
 
@@ -202,7 +199,7 @@ export default function Diagram() {
 
 								<svg height={30} width={200}>
 									<defs>
-										<TeeMarker id="marker" height={10} width={10} color={'blue'} />
+										<TeeMarker id="marker" height={10} width={1} color={'blue'} />
 									</defs>
 
 									<Edge
@@ -216,7 +213,7 @@ export default function Diagram() {
 
 								<svg height={30} width={200}>
 									<defs>
-										<TeeMarker id="marker" color={'#FB4B53'} height={10} width={10} />
+										<TeeMarker id="marker" color={'#FB4B53'} height={10} width={1} />
 									</defs>
 
 									<Edge
@@ -238,7 +235,20 @@ export default function Diagram() {
 							An SVG group (g) element representing a connecting line typically between CardNodes.
 							Properties: color, markerStart (name of marker style), markerEnd, source
 							(Coordinates), target (Coordinates), path (SVG path) and variant ( 'dash-sm' |
-							'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel').
+							'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'). Manipulation of the path property
+							enables elbows and bezier curves.
+							<br />
+							<svg height="260" width="800">
+								<g transform="translate(16,16)">
+									<Edge path={'M0,0L200,0L200,200L400,200'} />
+								</g>
+							</svg>
+							<br />
+							<svg height="260" width="800">
+								<g transform="translate(16,16)">
+									<Edge path={'M0,0C150,280,150,30,400,200'} />
+								</g>
+							</svg>
 						</StructuredListCell>
 					</StructuredListRow>
 					<StructuredListRow>
