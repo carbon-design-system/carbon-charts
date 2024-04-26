@@ -186,8 +186,7 @@ const optionsSpark: AreaChartOptions = {
   },
   legend: {
     enabled: false
-  },
-	height: '200px'
+  }
 }
 
 const data: ChartTabularData = [
