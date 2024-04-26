@@ -30,7 +30,7 @@ import type {
 	TreeChartOptions,
 	TreemapChartOptions,
 	WordCloudChartTooltipOptions,
-	WorldCloudChartOptions
+	WordCloudChartOptions
 } from '@/interfaces/charts'
 import {
 	Alignments,
@@ -619,7 +619,7 @@ const histogramChart: HistogramChartOptions = merge({}, baseBarChart, {
 /*
  * options specific to word cloud charts
  */
-const wordCloudChart: WorldCloudChartOptions = merge({}, chart, {
+const wordCloudChart: WordCloudChartOptions = merge({}, chart, {
 	tooltip: merge({}, baseTooltip, {
 		wordLabel: 'Word',
 		valueLabel: 'Value'
@@ -632,7 +632,7 @@ const wordCloudChart: WorldCloudChartOptions = merge({}, chart, {
 		},
 		wordMapsTo: 'word'
 	}
-} as WorldCloudChartOptions)
+} as WordCloudChartOptions)
 
 /**
  * options specific to pie charts

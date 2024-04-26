@@ -627,4 +627,4 @@ export type ChartOptions =
 	| StackedBarChartOptions
 	| TreeChartOptions
 	| TreemapChartOptions
-	| WorldCloudChartOptions
+	| WordCloudChartOptions

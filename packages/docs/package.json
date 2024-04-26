@@ -7,6 +7,7 @@
 	"scripts": {
 		"dev": "vite",
 		"pub:api": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
+		"pub:demo": "cp -a dist/. ../../pages/docs",
 		"build:package": "vite build && yarn pub:api",
 		"preview": "vite preview",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
