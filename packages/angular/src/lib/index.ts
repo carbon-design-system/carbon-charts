@@ -75,7 +75,7 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WorldCloudChartOptions
+	WordCloudChartOptions
 } from '@carbon/charts'
 
 // Commonly-used enums
