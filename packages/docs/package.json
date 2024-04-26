@@ -17,23 +17,23 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
-		"@carbon/icons-react": "^11.39.0",
-		"@carbon/react": "^1.50.0",
+		"@carbon/icons-react": "^11.40.0",
+		"@carbon/react": "^1.56.0",
 		"highlight.js": "^11.9.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.22.0"
+		"react": "^18.3.0",
+		"react-dom": "^18.3.0",
+		"react-router-dom": "^6.23.0"
 	},
 	"devDependencies": {
-		"@types/react": "^18.2.55",
-		"@types/react-dom": "^18.2.19",
+		"@types/react": "^18.3.0",
+		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.6.0",
-		"eslint": "^8.56.0",
+		"eslint": "^9.1.1",
 		"prettier": "^3.2.5",
-		"sass": "^1.70.0",
-		"typedoc": "^0.25.8",
-		"typescript": "^5.3.3",
-		"vite": "^5.1.1"
+		"sass": "^1.75.0",
+		"typedoc": "^0.25.13",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.10"
 	},
 	"publishConfig": {
 		"access": "restricted"

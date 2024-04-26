@@ -35,7 +35,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.4.0",
+		"@ibm/telemetry-js": "^1.5.0",
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
@@ -55,7 +55,7 @@
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
 		"@carbon/icon-helpers": "~10.47.0",
-		"@carbon/icons": "^11.39.0",
+		"@carbon/icons": "^11.40.0",
 		"@stackblitz/sdk": "^1.9.0",
 		"@storybook/angular": "^7.6.17",
 		"@types/carbon__icon-helpers": "^10.7.4",
