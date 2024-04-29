@@ -14,7 +14,7 @@ const GraphTile: React.FC<Props> = ({ title, route, svg }) => {
 			<Link to={route} className="cds--tile cds--tile--clickable">
 				<div className="graph-tile-content">
 					<span className="graph-tile-title">{title}</span>
-					<img className="graph-tile-svg" src={`/${svg}.svg`} />
+					<img className="graph-tile-svg" src={`/images/${svg}.svg`} />
 				</div>
 			</Link>
 		</div>

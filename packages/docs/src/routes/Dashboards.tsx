@@ -7,7 +7,7 @@ export default function Dashboards() {
       <PageHeader title="Dashboards" />
 
       <p>
-        <img src="/dashboard.png" alt="Dashboard" className="dashboard" />
+        <img src="/images/dashboard.png" alt="Dashboard" className="dashboard" />
       </p>
 
       <p>

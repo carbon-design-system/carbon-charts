@@ -17,7 +17,7 @@ export default function Anatomy() {
 			<Grid>
 				<Column lg={8}>
 					<img className="diagram"
-						src="/chart-anatomy-rectangular.png"
+						src="/images/chart-anatomy-rectangular.png"
 						alt="Anatomy of a rectangular chart" />
 				</Column>
 				<Column lg={8}>

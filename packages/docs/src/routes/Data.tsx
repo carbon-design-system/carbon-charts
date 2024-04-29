@@ -140,11 +140,11 @@ const radarOptions = {
       </p>
 
       <CodeSnippet type="multi">{`const myChart = new PieChart({
-        data: ...,
-        options: ...
-      })
+  data: ...,
+  options: ...
+})
 
-      myChart.model.setData(...)`}</CodeSnippet>
+myChart.model.setData(...)`}</CodeSnippet>
     </>
   )
 }

@@ -36,36 +36,36 @@ export default function Axes() {
         The following example shows options for a dual axis Line chart. The horizontal axis displays
         dates. The left vertical axis shows revenue and the right vertical axis shows attendees. The left
         axis is defined as the primary axis via the <strong>main</strong> property. The left and right
-        axes have a <strong>correspondingDatasets</strong> property that represents an array of
+        axes have a <strong>correspondingDatasets</strong> property that represents an array of{' '}
         <Link to="/data">domainIdentifiers</Link>.
       </p>
 
       <CodeSnippet className="language-javascript" type="multi">{`import { LineChart, type LineChartOptions, ScaleTypes } from '@carbon/charts-svelte'
 
-      const options = <LineChartOptions>{
-        axes: {
-          bottom: {
-            mapsTo: 'month_start',
-            title: 'Date',
-            scaleType: ScaleTypes.TIME // 'time'
-          },
-          left: {
-            mapsTo: 'revenue',
-            title: 'Revenue',
-            scaleType: ScaleTypes.LINEAR, //'linear',
-            main: true,
-            correspondingDatasets: ['Revenue']
-          },
-          right: {
-            mapsTo: 'attendees',
-            title: 'Attendees',
-            scaleType: ScaleTypes.LINEAR, // 'linear',
-            correspondingDatasets: ['Attendees']
-          }
-        },
-        curve: 'curveMonotoneX',
-        height: '500px'
-      }`}</CodeSnippet>
+const options = <LineChartOptions>{
+  axes: {
+    bottom: {
+      mapsTo: 'month_start',
+      title: 'Date',
+      scaleType: ScaleTypes.TIME // 'time'
+    },
+    left: {
+      mapsTo: 'revenue',
+      title: 'Revenue',
+      scaleType: ScaleTypes.LINEAR, //'linear',
+      main: true,
+      correspondingDatasets: ['Revenue']
+    },
+    right: {
+      mapsTo: 'attendees',
+      title: 'Attendees',
+      scaleType: ScaleTypes.LINEAR, // 'linear',
+      correspondingDatasets: ['Attendees']
+    }
+  },
+  curve: 'curveMonotoneX',
+  height: '500px'
+}`}</CodeSnippet>
 
       <h2 id="dual">Starting at zero</h2>
 
@@ -87,14 +87,14 @@ export default function Axes() {
           <Column lg={8}>
             <img
               className="example"
-              src="/axislabel-zero-good.png"
+              src="/images//axislabel-zero-good.png"
               alt="Chart where it makes sense to start with zero" />
             <p><Tag type="green">good</Tag>For bar charts, the numerical axis should start at zero.</p>
           </Column>
           <Column lg={8}>
             <img
               className="example"
-              src="/axislabel-zero-bad.png"
+              src="/images/axislabel-zero-bad.png"
               alt="Chart where it does not make sense to start with zero" />
             <p>
               <Tag type="red">bad</Tag> When an axis starts at non-zero, percentage differences between bars
@@ -115,7 +115,7 @@ export default function Axes() {
       <p>
         <img
           className="example"
-          src="/axislabel-zero-good2.png"
+          src="/images/axislabel-zero-good2.png"
           alt="Chart where it makes sense to start with zero" />
       </p>
 
@@ -132,7 +132,7 @@ export default function Axes() {
       </p>
 
       <p>
-        <img className="example" src="/axislabel-gap.png" alt="Chart with gap in the data" />
+        <img className="example" src="/images/axislabel-gap.png" alt="Chart with gap in the data" />
       </p>
 
       <h2 id="labels">Breaks in axes</h2>
@@ -156,7 +156,7 @@ export default function Axes() {
       <p>
         <img
           className="example"
-          src="/axislabel-break-1.png"
+          src="/images/axislabel-break-1.png"
           alt="Chart with break in the data" />
       </p>
 
@@ -165,7 +165,7 @@ export default function Axes() {
       <p>
         <img
           className="example"
-          src="/axislabel-break-2.png"
+          src="/images/axislabel-break-2.png"
           alt="Chart with break in the data" />
       </p>
 
@@ -196,7 +196,7 @@ export default function Axes() {
       <p>
         <img
           className="example"
-          src="/axislabel-timeseries.png"
+          src="/images/axislabel-timeseries.png"
           alt="Example of a time series plotted at 15 seconds intervals" />
       </p>
 
@@ -213,25 +213,25 @@ export default function Axes() {
 
       <CodeSnippet className="language-javascript" type="multi">{`import { ScaleTypes } from '@carbon/charts-svelte'
 
-      const options = {
-        title: 'Log Axis',
-        width: '400px',
-        axes: {
-          bottom: {
-            scaleType: ScaleTypes.TIME, // 'time'
-            mapsTo: 'date'
-          },
-          left: {
-            mapsTo: 'value',
-            scaleType: ScaleTypes.LOG, // 'log'
-            includeZero: false
-          }
-        },
-        height: '400px'
-      }`}</CodeSnippet>
+const options = {
+  title: 'Log Axis',
+  width: '400px',
+  axes: {
+    bottom: {
+      scaleType: ScaleTypes.TIME, // 'time'
+      mapsTo: 'date'
+    },
+    left: {
+      mapsTo: 'value',
+      scaleType: ScaleTypes.LOG, // 'log'
+      includeZero: false
+    }
+  },
+  height: '400px'
+}`}</CodeSnippet>
 
       <p>
-        <img className="log" src="/axis-logarithmic.png" alt="Example of a logarithmic axis" />
+        <img className="log" src="/images/axis-logarithmic.png" alt="Example of a logarithmic axis" />
       </p>
 
     </>
