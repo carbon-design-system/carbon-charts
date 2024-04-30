@@ -9,7 +9,7 @@ export default defineConfig({
 		lib: {
 			entry: 'src/index.ts',
 			name: 'ChartsReact',
-			fileName: (format) => `index.${format === 'es' ? 'm' : ''}js`
+			fileName: format => `index.${format === 'es' ? 'm' : ''}js`
 		},
 		rollupOptions: {
 			external: ['react', 'react-dom'],
@@ -21,5 +21,11 @@ export default defineConfig({
 			}
 		}
 	},
-	plugins: [react(), dts()]
+
+	plugins: [
+		react({
+			jsxRuntime: 'classic'
+		}),
+		dts()
+	]
 })
