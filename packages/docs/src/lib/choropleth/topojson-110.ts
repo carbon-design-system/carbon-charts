@@ -1,5 +1,7 @@
+import type { Topology } from 'topojson-specification'
+
 /* this data is only used for demo purposes, and is not an accurate representation of the world map */
-export const worldTopoJson = {
+export const worldTopoJson: Topology = {
 	type: 'Topology',
 	arcs: [
 		[
