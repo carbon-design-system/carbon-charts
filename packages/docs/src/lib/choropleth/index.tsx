@@ -11,13 +11,11 @@ export const chartTypes: ChartTypes = {
 	vue: `ExperimentalCcvChoroplethChart`
 }
 
-
 const options: ChoroplethChartOptions = {
 	title: 'Geo data',
 	geoData: worldTopoJson,
 	experimental: true
 }
-
 
 export const missingDataOptions: ChoroplethChartOptions = {
 	title: 'Missing data',
