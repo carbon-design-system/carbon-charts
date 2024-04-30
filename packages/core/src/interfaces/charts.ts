@@ -105,6 +105,9 @@ export interface BaseChartOptions {
 		 */
 		prefix?: string
 	}
+	canvasZoom?: {
+		enabled?: boolean
+	}
 	/**
 	 * options related to charting data
 	 */
@@ -508,11 +511,11 @@ export interface TreeChartOptions extends BaseChartOptions {
  */
 export interface CirclePackChartOptions extends BaseChartOptions {
 	circlePack?: {
-		circles: {
+		circles?: {
 			fillOpacity: number
 		}
 		// depth of nodes to display
-		hierachyLevel: number
+		hierarchyLevel: number
 		padding?: {
 			outer?: number
 			inner?: number
@@ -551,7 +554,7 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 /**
  * options specific to Heatmap charts
  */
-export interface HeatmapChartOptions extends BaseChartOptions {
+export interface HeatmapChartOptions extends AxisChartOptions {
 	heatmap: {
 		/**
 		 * Divider width state - will default to auto
@@ -570,7 +573,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 			 * Position is determined by text length
 			 */
 			title?: string
-			type: ColorLegendType | string
+			type?: ColorLegendType | string
 		}
 	}
 }
@@ -601,7 +604,8 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			title?: string
 			type: ColorLegendType | string
 		}
-	}
+	},
+	geoData: any
 }
 
 export type ChartOptions =
