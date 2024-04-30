@@ -4,7 +4,7 @@ const vanilla = 'SimpleBarChart'
 
 export const chartTypes: ChartTypes = {
 	vanilla,
-	svelte: vanilla,
+	svelte: 'BarChartSimple',
 	react: vanilla,
 	angular: 'ibm-bar-chart',
 	vue: `Ccv${vanilla}`

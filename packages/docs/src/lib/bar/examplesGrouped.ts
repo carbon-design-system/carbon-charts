@@ -3,7 +3,7 @@ import { type BarChartOptions, type ChartTabularData, ScaleTypes } from '@carbon
 const vanilla = 'GroupedBarChart'
 export const chartTypesGrouped: ChartTypes = {
 	vanilla,
-	svelte: vanilla,
+	svelte: 'BarChartGrouped',
 	react: vanilla,
 	angular: 'ibm-grouped-bar-chart',
 	vue: `Ccv${vanilla}`

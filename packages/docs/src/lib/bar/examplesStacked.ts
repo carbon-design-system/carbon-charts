@@ -4,7 +4,7 @@ const vanilla = 'StackedBarChart'
 
 export const chartTypesStacked: ChartTypes = {
 	vanilla,
-	svelte: vanilla,
+	svelte: 'BarChartStacked',
 	react: vanilla,
 	angular: 'ibm-stacked-bar-chart',
 	vue: `Ccv${vanilla}`
