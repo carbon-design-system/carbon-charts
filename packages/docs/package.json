@@ -4,6 +4,11 @@
 	"version": "1.13.33",
 	"description": "Carbon Charts Documentation",
 	"type": "module",
+	"main": "src/testdata.ts",
+  "types": "src/testdata.ts",
+	"files": [
+    "src/*"
+  ],
 	"scripts": {
 		"dev": "vite",
 		"pub:api": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
