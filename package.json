@@ -25,7 +25,7 @@
   "engines": {
     "node": "^18.20.1"
   },
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "yarn@4.2.1",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
     "@nrwl/devkit": "^18.3.4",

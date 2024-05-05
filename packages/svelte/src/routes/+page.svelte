@@ -1,5 +1,15 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>
-	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
+<script lang="typescript">
+	import charts from '@carbon/charts-docs'
+	import * as ChartComponents from '$lib/index'
+	import '@carbon/charts/styles.min.css'
+</script>
+
+<h1>Carbon Charts Svelte</h1>
+<h2>Component Test Harness</h2>
+
+{#each charts as chart}
+	<h3>{chart.types.svelte}</h3>
+	{#each chart.examples as example}
+		<svelte:component this={ChartComponents[chart.types.svelte]} options={example.options} data={example.data} />
+	{/each}
+{/each}
