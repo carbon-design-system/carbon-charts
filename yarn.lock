@@ -2211,7 +2211,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     tslib: "npm:^2.6.2"
     typescript: "npm:~5.1.6"
-    zone.js: "npm:~0.14.4"
+    zone.js: "npm:~0.14.5"
   peerDependencies:
     "@angular/common": ^16.0.0 || ^17.0.0
     "@angular/core": ^16.0.0 || ^17.0.0
@@ -2229,16 +2229,16 @@ __metadata:
     "@types/react": "npm:^18.3.1"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
-    eslint: "npm:^9.1.1"
+    eslint: "npm:^9.2.0"
     highlight.js: "npm:^11.9.0"
     prettier: "npm:^3.2.5"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-router-dom: "npm:^6.23.0"
-    sass: "npm:^1.75.0"
+    sass: "npm:^1.76.0"
     typedoc: "npm:^0.25.13"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.10"
+    vite: "npm:^5.2.11"
   languageName: unknown
   linkType: soft
 
@@ -2246,7 +2246,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts-monorepo@workspace:."
   dependencies:
-    "@nrwl/devkit": "npm:^18.3.4"
+    "@nrwl/devkit": "npm:^19.0.0"
     "@storybook/addon-essentials": "npm:^7.6.18"
     "@storybook/addon-interactions": "npm:^7.6.18"
     "@storybook/addon-links": "npm:^7.6.18"
@@ -2265,7 +2265,7 @@ __metadata:
     "@vue/eslint-config-typescript": "npm:^13.0.0"
     commitizen: "npm:^4.3.0"
     cz-conventional-changelog: "npm:^3.3.0"
-    eslint: "npm:^9.1.1"
+    eslint: "npm:^9.2.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-react-hooks: "npm:^4.6.2"
@@ -2283,7 +2283,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     storybook: "npm:^7.6.18"
-    vite: "npm:^5.2.10"
+    vite: "npm:^5.2.11"
     vue: "npm:^3.4.26"
   languageName: unknown
   linkType: soft
@@ -2307,11 +2307,11 @@ __metadata:
     downlevel-dts: "npm:^0.11.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    sass: "npm:^1.75.0"
+    sass: "npm:^1.76.0"
     storybook: "npm:^7.6.18"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.10"
-    vite-plugin-dts: "npm:^3.9.0"
+    vite: "npm:^5.2.11"
+    vite-plugin-dts: "npm:^3.9.1"
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -2334,14 +2334,14 @@ __metadata:
     d3: "npm:^7.9.0"
     d3-cloud: "npm:^1.2.7"
     d3-sankey: "npm:^0.12.3"
-    eslint: "npm:^9.1.1"
+    eslint: "npm:^9.2.0"
     publint: "npm:^0.2.7"
     storybook: "npm:^7.6.18"
     svelte: "npm:^4.2.15"
-    svelte-check: "npm:^3.7.0"
+    svelte-check: "npm:^3.7.1"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.10"
+    vite: "npm:^5.2.11"
   peerDependencies:
     svelte: ^3.31.0 || ^4.0.0
   languageName: unknown
@@ -2352,6 +2352,7 @@ __metadata:
   resolution: "@carbon/charts-vue@workspace:packages/vue"
   dependencies:
     "@carbon/charts": "workspace:*"
+    "@carbon/charts-docs": "workspace:*"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@stackblitz/sdk": "npm:^1.9.0"
     "@types/d3": "npm:^7.4.3"
@@ -2362,10 +2363,10 @@ __metadata:
     d3-sankey: "npm:^0.12.3"
     storybook: "npm:^7.6.18"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.10"
-    vite-plugin-dts: "npm:^3.9.0"
+    vite: "npm:^5.2.11"
+    vite-plugin-dts: "npm:^3.9.1"
     vue: "npm:^3.4.26"
-    vue-tsc: "npm:^2.0.14"
+    vue-tsc: "npm:^2.0.16"
   peerDependencies:
     vue: ^3.4.0
   languageName: unknown
@@ -2375,6 +2376,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts@workspace:packages/core"
   dependencies:
+    "@carbon/charts-docs": "workspace:*"
     "@carbon/colors": "npm:^11.21.0"
     "@carbon/layout": "npm:^11.21.0"
     "@carbon/styles": "npm:^1.56.0"
@@ -2395,21 +2397,21 @@ __metadata:
     d3-cloud: "npm:^1.2.7"
     d3-sankey: "npm:^0.12.3"
     date-fns: "npm:^3.6.0"
-    dompurify: "npm:^3.1.1"
+    dompurify: "npm:^3.1.2"
     downlevel-dts: "npm:^0.11.0"
     html-to-image: "npm:^1.11.11"
     jsdom: "npm:^24.0.0"
     lodash-es: "npm:^4.17.21"
     resize-observer-polyfill: "npm:^1.5.1"
-    sass: "npm:^1.75.0"
+    sass: "npm:^1.76.0"
     storybook: "npm:^7.6.18"
     topojson-client: "npm:^3.1.0"
     tslib: "npm:^2.6.2"
     typedoc: "npm:^0.25.13"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.10"
-    vite-plugin-dts: "npm:^3.9.0"
-    vitest: "npm:^1.5.2"
+    vite: "npm:^5.2.11"
+    vite-plugin-dts: "npm:^3.9.1"
+    vitest: "npm:^1.6.0"
   peerDependencies:
     d3: ^7.0.0
     d3-cloud: ^1.2.5
@@ -4087,12 +4089,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:18.3.4, @nrwl/devkit@npm:^18.3.4":
+"@nrwl/devkit@npm:18.3.4":
   version: 18.3.4
   resolution: "@nrwl/devkit@npm:18.3.4"
   dependencies:
     "@nx/devkit": "npm:18.3.4"
   checksum: 10c0/ef9cb7859206c6c01ebfbeeac13ea8ca239374a2873f00154c58b6c047ff4aee77b837d6cc3bc72302e88bf6847bb2302212c3329b8ea59ea6fc1f380a1ddc23
+  languageName: node
+  linkType: hard
+
+"@nrwl/devkit@npm:19.0.0, @nrwl/devkit@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "@nrwl/devkit@npm:19.0.0"
+  dependencies:
+    "@nx/devkit": "npm:19.0.0"
+  checksum: 10c0/06693122e8d9605bf56f23b7f0ae34c3ec2bc2b869de37afd744e257750588958d0a90474861203d01fa9ec00a0512a7cb3242f3d766dad04beb23f037261987
   languageName: node
   linkType: hard
 
@@ -4150,6 +4161,25 @@ __metadata:
   peerDependencies:
     nx: ">= 16 <= 19"
   checksum: 10c0/3c6752bd1fc96bfdff1bc4d58b9fb87f33628b1db39cf4db0b4f66782a8b547aad0dd0d3f0620c0464c1d31c1ca999ebce73c7cf70f920776f965cc7dad489e7
+  languageName: node
+  linkType: hard
+
+"@nx/devkit@npm:19.0.0":
+  version: 19.0.0
+  resolution: "@nx/devkit@npm:19.0.0"
+  dependencies:
+    "@nrwl/devkit": "npm:19.0.0"
+    ejs: "npm:^3.1.7"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.3"
+    tmp: "npm:~0.2.1"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  peerDependencies:
+    nx: ">= 17 <= 20"
+  checksum: 10c0/98d86ff8167d8cd99a3e2d55c89a35ade6d73bd2ae4f82b1f934cb07388ee15cd9b2d3b76b81c007f040c3b7f4c4a400b735735da46be248127ac0fedc81d722
   languageName: node
   linkType: hard
 
@@ -11787,7 +11817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.1.1":
+"dompurify@npm:^3.1.2":
   version: 3.1.2
   resolution: "dompurify@npm:3.1.2"
   checksum: 10c0/6f072da177ba850c196184d76a277933a19831e59313edd90f094e8884579c8193b21ea105889d89059771f058f4b2e0c14fc5a58f19f7dad2a6756be807d091
@@ -12809,7 +12839,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.1.1":
+"eslint@npm:^9.2.0":
   version: 9.2.0
   resolution: "eslint@npm:9.2.0"
   dependencies:
@@ -20528,7 +20558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.55.0, sass@npm:^1.75.0":
+"sass@npm:^1.55.0, sass@npm:^1.76.0":
   version: 1.76.0
   resolution: "sass@npm:1.76.0"
   dependencies:
@@ -21450,7 +21480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-check@npm:^3.7.0":
+"svelte-check@npm:^3.7.1":
   version: 3.7.1
   resolution: "svelte-check@npm:3.7.1"
   dependencies:
@@ -22739,7 +22769,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:^3.9.0":
+"vite-plugin-dts@npm:^3.9.1":
   version: 3.9.1
   resolution: "vite-plugin-dts@npm:3.9.1"
   dependencies:
@@ -22800,7 +22830,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0, vite@npm:^5.2.10":
+"vite@npm:^5.0.0, vite@npm:^5.2.11":
   version: 5.2.11
   resolution: "vite@npm:5.2.11"
   dependencies:
@@ -22852,7 +22882,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^1.5.2":
+"vitest@npm:^1.6.0":
   version: 1.6.0
   resolution: "vitest@npm:1.6.0"
   dependencies:
@@ -23003,7 +23033,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^2.0.14":
+"vue-tsc@npm:^2.0.16":
   version: 2.0.16
   resolution: "vue-tsc@npm:2.0.16"
   dependencies:
@@ -23889,7 +23919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zone.js@npm:~0.14.4":
+"zone.js@npm:~0.14.5":
   version: 0.14.5
   resolution: "zone.js@npm:0.14.5"
   dependencies:

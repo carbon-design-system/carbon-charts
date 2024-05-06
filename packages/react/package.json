@@ -61,11 +61,11 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"sass": "^1.75.0",
+		"sass": "^1.76.0",
 		"storybook": "^7.6.18",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.10",
-		"vite-plugin-dts": "^3.9.0"
+		"vite": "^5.2.11",
+		"vite-plugin-dts": "^3.9.1"
 	},
 	"publishConfig": {
 		"access": "public"

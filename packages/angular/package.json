@@ -69,7 +69,7 @@
 		"storybook": "^7.6.18",
 		"style-loader": "^4.0.0",
 		"typescript": "~5.1.6",
-		"zone.js": "~0.14.4"
+		"zone.js": "~0.14.5"
 	},
 	"publishConfig": {
 		"tag": "next",

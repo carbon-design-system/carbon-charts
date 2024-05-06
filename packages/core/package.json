@@ -71,6 +71,7 @@
 		"test:coverage": "vitest run --coverage",
 		"lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore",
+		"dev": "vite",
 		"clean": "rm -rf dist demo/bundle",
 		"pub:demo": "cp -a demo/bundle/. ../../pages"
 	},
@@ -80,6 +81,7 @@
 		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"dependencies": {
+		"@carbon/charts-docs": "workspace:*",
 		"@carbon/colors": "^11.21.0",
 		"@carbon/utils-position": "^1.2.0",
 		"@ibm/telemetry-js": "^1.5.0",
@@ -88,7 +90,7 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"date-fns": "^3.6.0",
-		"dompurify": "^3.1.1",
+		"dompurify": "^3.1.2",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
 		"topojson-client": "^3.1.0",
@@ -123,13 +125,13 @@
 		"downlevel-dts": "^0.11.0",
 		"jsdom": "^24.0.0",
 		"resize-observer-polyfill": "^1.5.1",
-		"sass": "^1.75.0",
+		"sass": "^1.76.0",
 		"storybook": "^7.6.18",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.10",
-		"vite-plugin-dts": "^3.9.0",
-		"vitest": "^1.5.2"
+		"vite": "^5.2.11",
+		"vite-plugin-dts": "^3.9.1",
+		"vitest": "^1.6.0"
 	},
 	"publishConfig": {
 		"access": "public"

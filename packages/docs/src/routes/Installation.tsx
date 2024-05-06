@@ -172,6 +172,10 @@ export default function Installation() {
 									<StructuredListCell>Imported by index.js - CSS stylesheet required for all charts. A minified version is also distributed.</StructuredListCell>
 								</StructuredListRow>
 								<StructuredListRow>
+									<StructuredListCell noWrap>@carbon/charts/scss/index.scss</StructuredListCell>
+									<StructuredListCell>Optional SCSS styles that can be loaded via `@use`.</StructuredListCell>
+								</StructuredListRow>
+								<StructuredListRow>
 									<StructuredListCell noWrap>data.js</StructuredListCell>
 									<StructuredListCell>
 										ES module containing data for the chart in <Link to="/data">Tabular data format</Link>.
