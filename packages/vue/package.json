@@ -33,6 +33,7 @@
 		"lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
 		"format": "prettier --write src/ --ignore-path ../../.eslintignore",
 		"clean": "rm -rf dist demo/bundle",
+		"dev": "vite",
 		"pub:demo": "cp -a demo/bundle/. ../../pages/vue"
 	},
 	"peerDependencies": {
@@ -40,6 +41,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
+		"@carbon/charts-docs": "workspace:*",
 		"@ibm/telemetry-js": "^1.5.0",
 		"vue": "^3.4.26"
 	},
