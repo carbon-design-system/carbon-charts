@@ -37,6 +37,7 @@
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
 		"clean": "rm -rf dist demo/bundle",
+		"dev": "vite",
 		"pub:demo": "cp -a demo/bundle/. ../../pages/react"
 	},
 	"dependencies": {
