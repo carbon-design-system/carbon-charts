@@ -27,6 +27,7 @@
 		"lint": "eslint . --ignore-path ../../.eslintignore",
 		"format": "prettier --write src/ --ignore-path ../../.eslintignore",
 		"clean": "rm -rf dist demo/bundle",
+		"dev": "ng run charts-angular:serve-dev",
 		"pub:demo": "cp -a demo/bundle/. ../../pages/angular"
 	},
 	"peerDependencies": {
@@ -55,8 +56,8 @@
 		"@angular/forms": "^16.2.12",
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
-		"@carbon/icon-helpers": "~10.47.0",
-		"@carbon/icons": "^11.40.0",
+		"@carbon/icon-helpers": "~10.48.0",
+		"@carbon/icons": "^11.41.0",
 		"@stackblitz/sdk": "^1.10.0",
 		"@storybook/angular": "^7.6.19",
 		"@types/carbon__icon-helpers": "^10.7.4",
