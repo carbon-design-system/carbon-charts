@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.15.8 (2024-05-10)
+
+### Bug Fixes
+
+- **stacked-axis:** number labels breaking the axis
+  ([#1821](https://github.com/carbon-design-system/carbon-charts/issues/1821))
+  ([0aec1f1](https://github.com/carbon-design-system/carbon-charts/commit/0aec1f1f9a9b49694867ec2257da5ccff0926191))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.7 (2024-04-18)
 
 **Note:** Version bump only for package @carbon/charts
