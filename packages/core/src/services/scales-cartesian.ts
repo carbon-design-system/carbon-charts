@@ -27,7 +27,7 @@ import { subMinutes } from 'date-fns/subMinutes'
 import { differenceInSeconds } from 'date-fns/differenceInSeconds'
 import { subSeconds } from 'date-fns/subSeconds'
 import { addSeconds } from 'date-fns/addSeconds'
-import { flatten, uniq } from 'lodash-es'
+import { flatten, omit, uniq } from 'lodash-es'
 import { getProperty } from '@/tools'
 import { axis as axisConfigs } from '@/configuration'
 import { Service } from './service'
@@ -557,7 +557,7 @@ export class CartesianScales extends Service {
 
 				let positiveSum = 0,
 					negativeSum = 0
-				Object.values(numericalValues).forEach((value: number) => {
+				Object.values(omit(numericalValues, 'sharedStackKey')).forEach((value: number) => {
 					if (!isNaN(value)) {
 						if (value < 0) {
 							negativeSum += value
