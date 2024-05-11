@@ -7,6 +7,7 @@
       "projectType": "library",
       "root": ".",
       "sourceRoot": "src",
+      "schematics": {},
       "prefix": "ibm",
       "architect": {
         "build": {
