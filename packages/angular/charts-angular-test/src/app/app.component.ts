@@ -26,7 +26,7 @@ import {
 	TreemapChartComponent,
 	WordCloudChartComponent
 } from '../../../src/lib/charts'
-import charts from '@carbon/charts-docs'
+import charts from '../../../../docs/src/charts'
 
 @Component({
 	selector: 'app-root',

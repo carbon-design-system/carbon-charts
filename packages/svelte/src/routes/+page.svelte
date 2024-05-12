@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import charts from '@carbon/charts-docs'
+	import charts from '../../../docs/src/charts'
 	import * as ChartComponents from '$lib/index'
 	import '@carbon/charts/styles.min.css'
 </script>

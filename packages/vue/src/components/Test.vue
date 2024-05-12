@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import charts from '@carbon/charts-docs'
+  import charts from '../../../docs/src/charts'
 	import * as ChartComponents from './index'
 </script>
 

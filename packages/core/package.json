@@ -81,7 +81,6 @@
 		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"dependencies": {
-		"@carbon/charts-docs": "workspace:*",
 		"@carbon/colors": "^11.22.0",
 		"@carbon/utils-position": "^1.2.0",
 		"@ibm/telemetry-js": "^1.5.1",

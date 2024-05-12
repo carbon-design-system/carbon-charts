@@ -2194,7 +2194,6 @@ __metadata:
     "@angular/platform-browser": "npm:^16.2.12"
     "@angular/platform-browser-dynamic": "npm:^16.2.12"
     "@carbon/charts": "workspace:*"
-    "@carbon/charts-docs": "workspace:*"
     "@carbon/icon-helpers": "npm:~10.48.0"
     "@carbon/icons": "npm:^11.41.0"
     "@ibm/telemetry-js": "npm:^1.5.1"
@@ -2224,7 +2223,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/charts-docs@workspace:*, @carbon/charts-docs@workspace:packages/docs":
+"@carbon/charts-docs@workspace:packages/docs":
   version: 0.0.0-use.local
   resolution: "@carbon/charts-docs@workspace:packages/docs"
   dependencies:
@@ -2299,7 +2298,6 @@ __metadata:
   resolution: "@carbon/charts-react@workspace:packages/react"
   dependencies:
     "@carbon/charts": "workspace:*"
-    "@carbon/charts-docs": "workspace:*"
     "@carbon/icons-react": "npm:^11.41.0"
     "@ibm/telemetry-js": "npm:^1.5.1"
     "@stackblitz/sdk": "npm:1.10.0"
@@ -2330,7 +2328,6 @@ __metadata:
   resolution: "@carbon/charts-svelte@workspace:packages/svelte"
   dependencies:
     "@carbon/charts": "workspace:*"
-    "@carbon/charts-docs": "workspace:*"
     "@ibm/telemetry-js": "npm:^1.5.1"
     "@stackblitz/sdk": "npm:^1.10.0"
     "@sveltejs/adapter-auto": "npm:^3.2.0"
@@ -2359,7 +2356,6 @@ __metadata:
   resolution: "@carbon/charts-vue@workspace:packages/vue"
   dependencies:
     "@carbon/charts": "workspace:*"
-    "@carbon/charts-docs": "workspace:*"
     "@ibm/telemetry-js": "npm:^1.5.1"
     "@stackblitz/sdk": "npm:^1.10.0"
     "@types/d3": "npm:^7.4.3"
@@ -2383,7 +2379,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts@workspace:packages/core"
   dependencies:
-    "@carbon/charts-docs": "workspace:*"
     "@carbon/colors": "npm:^11.22.0"
     "@carbon/layout": "npm:^11.22.0"
     "@carbon/styles": "npm:^1.57.0"
