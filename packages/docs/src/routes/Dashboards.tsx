@@ -1,12 +1,18 @@
+import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
-import './Dashboards.scss'
+// import './Dashboards.scss'
 
 export default function Dashboards() {
-  return (
-    <>
-      <PageHeader title="Dashboards" />
-
-      <p>
+	return (
+		<>
+			<PageHeader title="Dashboards" />
+			Please see the{' '}
+			<Link to="https://carbondesignsystem.com/data-visualization/dashboards/" target='_blank'>
+				Dashboards
+			</Link>{' '}
+			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
+			more details.
+			{/* <p>
         <img src="/images/dashboard.png" alt="Dashboard" className="dashboard" />
       </p>
 
@@ -104,7 +110,7 @@ export default function Dashboards() {
         Use annotations to highlight trends, averages, peaks, and valleys to provide additional
         information. Annotations should help users interpret fluctuations in the data. Avoid annotations
         that obstruct the view of data.
-      </p>
-    </>
-  )
+      </p> */}
+		</>
+	)
 }

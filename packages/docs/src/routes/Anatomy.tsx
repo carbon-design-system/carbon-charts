@@ -1,12 +1,21 @@
+import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
-import { Grid, Column, OrderedList, ListItem } from '@carbon/react'
-import './Anatomy.scss'
+// import { Grid, Column, OrderedList, ListItem } from '@carbon/react'
+// import './Anatomy.scss'
 
 export default function Anatomy() {
 	return (
 		<>
 			<PageHeader title="Chart anatomy" />
-			<h2>Rectangular Charts</h2>
+
+			Please see the{' '}
+			<Link to="https://carbondesignsystem.com/data-visualization/chart-anatomy/" target='_blank'>
+				Charts anatomy
+			</Link>{' '}
+			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
+			more details.
+
+			{/* <h2>Rectangular Charts</h2>
 
 			<p>
 				Most data visualizations are rectangular charts, with two dimensions represented on a vertical and
@@ -54,7 +63,7 @@ export default function Anatomy() {
 				may be used to display a total sum or the individual count of a slice upon interaction. This
 				element can also be used independently on a dashboard (though please note this component is still
 				a WIP and not available outside the donut chart).
-			</p>
+			</p> */}
 		</>
 	)
 }
