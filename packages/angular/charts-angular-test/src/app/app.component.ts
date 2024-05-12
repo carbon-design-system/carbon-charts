@@ -1,39 +1,67 @@
-import { AfterViewInit, Component, Type, ViewChild } from '@angular/core'
-import * as ChartComponents from '../../../src/lib/charts'
-import { DynamicHostDirective } from './dynamic-host.directive'
-import type { BaseChartComponent } from '../../../src/lib/charts'
+import { Component, AfterViewInit, Type } from '@angular/core'
+import {
+	AlluvialChartComponent,
+	AreaChartComponent,
+	BoxplotChartComponent,
+	BubbleChartComponent,
+	BulletChartComponent,
+	CirclePackChartComponent,
+	ComboChartComponent,
+	DonutChartComponent,
+	ExperimentalChoroplethChartComponent,
+	GaugeChartComponent,
+	GroupedBarChartComponent,
+	HeatmapChartComponent,
+	HistogramChartComponent,
+	LineChartComponent,
+	LollipopChartComponent,
+	MeterChartComponent,
+	PieChartComponent,
+	RadarChartComponent,
+	ScatterChartComponent,
+	SimpleBarChartComponent,
+	StackedAreaChartComponent,
+	StackedBarChartComponent,
+	TreeChartComponent,
+	TreemapChartComponent,
+	WordCloudChartComponent
+} from '../../../src/lib/charts'
 import charts from '@carbon/charts-docs'
-
-type ChartComponentTypes = {
-	[key: string]: Type<BaseChartComponent>
-}
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	templateUrl: './app.component.html'
 })
 export class AppComponent implements AfterViewInit {
-	@ViewChild(DynamicHostDirective, { static: true }) dynamicHost!: DynamicHostDirective
 	charts = charts
-
-  constructor() {}
-
-  private loadComponents(): void {
-		const chartComponents = ChartComponents as unknown as ChartComponentTypes // Ensure type safety
-
-		for (const chart of charts) {
-			for (const example of chart.examples) {
-				const viewContainerRef = this.dynamicHost.viewContainerRef
-				const componentType = chartComponents[chart.types.angular]
-				const componentRef = viewContainerRef.createComponent(componentType)
-				componentRef.instance.data = example.data
-				componentRef.instance.options = example.options
-			}
-		}
+	selectorMap: { [key: string]: Type<any> }  = {
+		'ibm-alluvial-chart': AlluvialChartComponent,
+		'ibm-area-chart': AreaChartComponent,
+		'ibm-boxplot-chart': BoxplotChartComponent,
+		'ibm-bubble-chart': BubbleChartComponent,
+		'ibm-bullet-chart': BulletChartComponent,
+		'ibm-circle-pack-chart': CirclePackChartComponent,
+		'ibm-combo-chart': ComboChartComponent,
+		'ibm-donut-chart': DonutChartComponent,
+		'ibm-experimental-choropleth-chart': ExperimentalChoroplethChartComponent,
+		'ibm-gauge-chart': GaugeChartComponent,
+		'ibm-grouped-bar-chart': GroupedBarChartComponent,
+		'ibm-heatmap-chart': HeatmapChartComponent,
+		'ibm-histogram-chart': HistogramChartComponent,
+		'ibm-line-chart': LineChartComponent,
+		'ibm-lollipop-chart': LollipopChartComponent,
+		'ibm-meter-chart': MeterChartComponent,
+		'ibm-pie-chart': PieChartComponent,
+		'ibm-radar-chart': RadarChartComponent,
+		'ibm-scatter-chart': ScatterChartComponent,
+		'ibm-simple-bar-chart': SimpleBarChartComponent,
+		'ibm-stacked-area-chart': StackedAreaChartComponent,
+		'ibm-stacked-bar-chart': StackedBarChartComponent,
+		'ibm-tree-chart': TreeChartComponent,
+		'ibm-treemap-chart': TreemapChartComponent,
+		'ibm-wordcloud-chart': WordCloudChartComponent
 	}
 
-  ngAfterViewInit(): void {
-		this.loadComponents()
+	ngAfterViewInit() {
 	}
 }

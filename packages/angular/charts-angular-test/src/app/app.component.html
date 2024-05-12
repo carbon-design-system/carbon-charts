@@ -4,6 +4,6 @@
 <div *ngFor="let chart of charts">
   <h3>{{ chart.types.angular }}</h3>
   <div *ngFor="let example of chart.examples">
-    <ng-template dynamicHost></ng-template>
+    <ng-container *ngComponentOutlet="selectorMap[chart.types.angular]; inputs: {data: example.data, options: example.options}"></ng-container>
   </div>
 </div>
