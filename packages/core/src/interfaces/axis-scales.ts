@@ -43,7 +43,7 @@ export interface BasedAxisOptions {
 	 * Override for the orientation of the title (for vertical axes).
 	 * The title string can be overrided to be rotated left or right.
 	 */
-	titleOrientation?: AxisTitleOrientations
+	titleOrientation?: AxisTitleOrientations | string
 	/**
 	 * thresholds
 	 * @example
@@ -84,7 +84,7 @@ export interface BasedAxisOptions {
 		 */
 		formatter?: (tick: number | Date, i: number) => string
 		/**
-		 * optional custom array of tick values that is within the domain of data
+		 * optional array of tick values that is within the domain of data
 		 */
 		values?: any[]
 	}
@@ -109,6 +109,10 @@ export interface BasedAxisOptions {
 	 * axis that's being broken into bins
 	 */
 	binned?: boolean
+	/**
+	 * used to map data on the secondary axis
+	 */
+	correspondingDatasets?: Array<string>
 }
 
 /**
@@ -131,10 +135,6 @@ export interface ComboChartAxisOptions extends AxisOptions {
 	 * left axis to be the primary axis
 	 */
 	main?: boolean
-	/**
-	 * used to map data on the secondary axis
-	 */
-	correspondingDatasets?: Array<string>
 }
 
 export interface BinnedAxisOptions {

@@ -1,5 +1,6 @@
 import type {
 	LayoutGrowth,
+	LegendOrientations,
 	LegendPositions,
 	Alignments,
 	ToolbarControlTypes,
@@ -134,6 +135,7 @@ export interface LegendOptions {
 	 * customized legend items
 	 */
 	additionalItems?: LegendItem[]
+	orientation?: LegendOrientations
 }
 
 /**
@@ -190,11 +192,11 @@ export interface ThresholdOptions {
 	/**
 	 * hex threshold line color
 	 */
-	fillColor: string
+	fillColor?: string
 	/**
 	 * threshold label
 	 */
-	label: string
+	label?: string
 }
 
 export interface GridOptions {

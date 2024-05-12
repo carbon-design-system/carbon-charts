@@ -24,6 +24,22 @@ import { chartTypes as scatterTypes, examples as scatterExamples } from './lib/s
 import { chartTypes as treeTypes, examples as treeExamples } from './lib/tree'
 import { chartTypes as treemapTypes, examples as treemapExamples } from './lib/treemap'
 import { chartTypes as wordcloudTypes, examples as wordcloudExamples } from './lib/wordcloud'
+// import type { ChartTabularData, ChartOptions } from '@carbon/charts'
+
+// export type Framework = 'html' | 'vanilla' | 'svelte' | 'react' | 'vue' | 'angular'
+
+// export interface ChartTypes {
+//   vanilla: string
+//   svelte: string
+//   react: string
+//   vue: string
+//   angular: string
+// }
+
+// export interface Example {
+//   data: ChartTabularData
+//   options: ChartOptions
+// }
 
 export default [
   {

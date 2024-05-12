@@ -193,6 +193,22 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 * zoombar configuration
 	 */
 	zoomBar?: ZoomBarsOptions
+	/**
+	 * options for the points
+	 */
+	points?: {
+		/**
+		 * sets the radius of the point
+		 */
+		radius?: number
+		fillOpacity?: number
+		filled?: boolean
+		enabled?: boolean
+	}
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | { name: string }
 }
 
 /**
@@ -231,18 +247,6 @@ export interface StackedBarChartOptions extends BarChartOptions {
  * options specific to scatter charts
  */
 export interface ScatterChartOptions extends AxisChartOptions {
-	/**
-	 * options for the points
-	 */
-	points?: {
-		/**
-		 * sets the radius of the point
-		 */
-		radius: number
-		fillOpacity?: number
-		filled?: boolean
-		enabled?: boolean
-	}
 }
 
 /**
@@ -310,20 +314,12 @@ export interface HistogramChartOptions extends AxisChartOptions {
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | { name: string }
 }
 
 /**
  * options specific to area charts
  */
 export interface AreaChartOptions extends AxisChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | { name: string }
 	/**
 	 * options to bound the area of the chart
 	 */
@@ -438,6 +434,8 @@ export interface MeterChartOptions extends BaseChartOptions {
 		proportional?: {
 			total?: number
 			unit?: string
+			totalFormatter?: (total: number) => string
+			breakdownFormatter?: (x: any) => string
 		}
 		peak?: number
 		status?: {
@@ -605,7 +603,7 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			title?: string
 			type: ColorLegendType | string
 		}
-	},
+	}
 	geoData: Topology
 }
 
