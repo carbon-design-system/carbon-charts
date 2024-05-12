@@ -250,7 +250,7 @@ export class Axis extends Component {
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = (t: any) => numberFormatter(t, localeCode)
+					formatter = (t: number) => numberFormatter(t, localeCode)
 				}
 			} else {
 				formatter = userProvidedFormatter

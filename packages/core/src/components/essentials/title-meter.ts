@@ -72,7 +72,6 @@ export class MeterTitle extends Title {
 			data = null
 		} else {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
-			//breakdownFormatter
 			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
 			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 			data =
@@ -121,7 +120,6 @@ export class MeterTitle extends Title {
 			? getProperty(options, 'meter', 'proportional', 'unit')
 			: ''
 
-		// totalFormatter function
 		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
 		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 

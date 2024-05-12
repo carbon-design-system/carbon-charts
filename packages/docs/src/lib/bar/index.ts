@@ -354,15 +354,15 @@ const simpleBarTimeSeriesDenseOptions: BarChartOptions = {
 		left: {
 			mapsTo: 'value',
 			ticks: {
-				formatter: (ticks: number) => ticks.toLocaleString('tr-TR')
+				formatter: (tick: any) => tick.toLocaleString('tr-TR')
 			}
 		},
 		bottom: {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME,
 			ticks: {
-				formatter: (ticks: Date) =>
-					ticks.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
+				formatter: (tick: any) =>
+					tick.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
 			}
 		}
 	},
