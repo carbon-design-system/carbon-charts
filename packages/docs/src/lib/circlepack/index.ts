@@ -1,4 +1,4 @@
-import { type CirclePackChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
+import { type CirclePackChartOptions, type ChartTabularData } from '@carbon/charts'
 
 const vanilla = 'CirclePackChart'
 

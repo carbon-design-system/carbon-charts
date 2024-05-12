@@ -1157,7 +1157,7 @@ const heatmapMissingData: ChartTabularData = [
 
 const heatmapPositiveNegativeData = heatmapData.map(element => ({
 	...element,
-	value: (element.value / 10) * (Math.round(Math.random()) ? -1 : 1)
+	value: (element['value'] / 10) * (Math.round(Math.random()) ? -1 : 1)
 }))
 
 export const examples: Example[] = [

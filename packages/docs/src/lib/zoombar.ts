@@ -1,4 +1,4 @@
-import type { ChartOptions, ChartTabularData } from '@carbon/charts-svelte'
+import type { AxisChartOptions, ChartTabularData } from '@carbon/charts'
 
 const dataZoomBar: ChartTabularData = [
 	{ date: new Date(2019, 0, 1), value: 10000 },
@@ -14,7 +14,7 @@ const dataZoomBar: ChartTabularData = [
 ]
 
 export const addZoomBarToOptions = (
-	options: ChartOptions,
+	options: AxisChartOptions,
 	configs: any = { includeDefinedZoomBarData: false }
 ) => {
 	options['experimental'] = true

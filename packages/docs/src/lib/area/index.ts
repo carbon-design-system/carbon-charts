@@ -1,5 +1,6 @@
 import { type AreaChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-react'
 import { addZoomBarToOptions } from '../zoombar'
+import { AxisChartOptions } from '@carbon/charts'
 
 const vanilla = 'AreaChart'
 
@@ -147,7 +148,7 @@ const optionsMultipleBounded = {
 }
 
 const optionsZoomBar: AreaChartOptions = addZoomBarToOptions(
-	Object.assign({}, optionsMultipleBounded)
+	Object.assign({}, optionsMultipleBounded) as AxisChartOptions
 )
 
 const optionsSpark: AreaChartOptions = {

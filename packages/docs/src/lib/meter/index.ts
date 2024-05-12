@@ -1,4 +1,4 @@
-import { type MeterChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
+import { type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
 const vanilla = 'MeterChart'
 
 export const chartTypes: ChartTypes = {
@@ -108,7 +108,7 @@ const propMeterTruncationOptions: MeterChartOptions = {
 		proportional: {
 			total: 2000,
 			unit: 'MB',
-			totalFormatter: (total: any) => `custom total string for: ${total}`,
+			totalFormatter: (total: number) => `custom total string for: ${total}`,
 			breakdownFormatter: (x: any) =>
 				`You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 		}
