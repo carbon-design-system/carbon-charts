@@ -32,11 +32,11 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	  PKG="charts"
 	fi
 
-	# Storybook build for selected package
   echo -e "${GREEN}Creating test page for @carbon/$PKG..."
-  # npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
 	npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
 
+	# Uncommenting these lines will create a Storybook preview instead
+  # npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
 	#echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
 	#mkdir -p pages
 	#cp -a "packages/$PKG_DIR/demo/bundle/." pages
