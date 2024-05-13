@@ -2,10 +2,10 @@ set -e
 
 GREEN="\033[0;32m"
 if [ $CONTEXT == "deploy-preview" ]; then
-	echo -e "${GREEN}Deploying preview to Netlify for PR..."
+	echo -e "${GREEN}Deploying test page to ${URL} on Netlify for pull request..."
 
 	# Grab netlify app type from the netlify app URL
-	# e.g. core, angular or react (translate to ./packages/NAME
+	# e.g. core, angular or react (translate to ./packages/NAME)
 	PKG_DIR=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
 
 	# Build core package first
@@ -25,6 +25,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	# Storybook build for selected package
   echo -e "${GREEN}Running storybook build for @carbon/$PKG..."
   npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
+	npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
 
 	echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
 	mkdir -p pages
