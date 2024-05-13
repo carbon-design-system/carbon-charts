@@ -1,4 +1,5 @@
-import { type BarChartOptions, type ChartTabularData, ScaleTypes, Alignments } from '@carbon/charts-react'
+import { type BarChartOptions, type ChartTabularData, ScaleTypes, Alignments } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'SimpleBarChart'
 

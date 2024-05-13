@@ -1,4 +1,6 @@
 import { type MeterChartOptions, type ChartTabularData } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
+
 const vanilla = 'MeterChart'
 
 export const chartTypes: ChartTypes = {

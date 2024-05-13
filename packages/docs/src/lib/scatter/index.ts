@@ -1,5 +1,6 @@
 import { type ScatterChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
 import { lineTimeSeriesData } from '../line'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'ScatterChart'
 

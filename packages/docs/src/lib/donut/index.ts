@@ -1,5 +1,6 @@
 import { type DonutChartOptions, type ChartTabularData, Alignments } from '@carbon/charts'
 import { pieData, pieDataMapsTo } from '../pie'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'DonutChart'
 

@@ -2,6 +2,7 @@ import sdk from '@stackblitz/sdk'
 import { Button } from '@carbon/react/es'
 import LaunchIcon from '@carbon/icons-react/es/Launch'
 import { getProject } from '../lib/stackblitz'
+import type { ChartTypes, Example, Framework } from '../lib/types'
 import './StackBlitzLauncher.scss'
 
 export default function StackBlitzLauncher({ example, chartTypes }: { example: Example; chartTypes: ChartTypes }) {

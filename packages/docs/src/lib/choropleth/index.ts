@@ -1,5 +1,6 @@
 import { type ChoroplethChartOptions, type ChartTabularData } from '@carbon/charts'
 import { worldTopoJson } from './topojson-110'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'ExperimentalChoroplethChart'
 

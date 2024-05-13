@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import sdk from '@stackblitz/sdk'
 import type { EmbedOptions } from '@stackblitz/sdk'
-import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts'
 import { getProject } from '../lib/stackblitz'
+import type { Framework } from '../lib/types'
 
 interface Props {
 	framework: Framework

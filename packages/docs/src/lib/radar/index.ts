@@ -1,4 +1,5 @@
 import { type RadarChartOptions, type ChartTabularData, Alignments } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'RadarChart'
 

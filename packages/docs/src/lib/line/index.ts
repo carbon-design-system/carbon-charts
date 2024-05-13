@@ -1,4 +1,5 @@
 import { type LineChartOptions, type ChartTabularData, ScaleTypes, LegendPositions, LegendOrientations, TickRotations } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'LineChart'
 

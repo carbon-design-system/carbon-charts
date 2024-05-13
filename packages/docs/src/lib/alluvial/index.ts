@@ -1,4 +1,6 @@
 import type { AlluvialChartOptions, ChartTabularData } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
+
 const vanilla = 'AlluvialChart'
 
 export const chartTypes: ChartTypes = {

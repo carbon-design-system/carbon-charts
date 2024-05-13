@@ -1,4 +1,5 @@
 import { type GaugeChartOptions, type ChartTabularData } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'GaugeChart'
 

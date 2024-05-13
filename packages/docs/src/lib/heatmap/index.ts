@@ -1,4 +1,5 @@
 import { type HeatmapChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'HeatmapChart'
 

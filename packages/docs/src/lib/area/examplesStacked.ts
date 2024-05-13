@@ -2,7 +2,8 @@ import {
 	type StackedAreaChartOptions,
 	type ChartTabularData,
 	ScaleTypes
-} from '@carbon/charts-react'
+} from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'StackedAreaChart'
 export const chartTypesStacked: ChartTypes = {

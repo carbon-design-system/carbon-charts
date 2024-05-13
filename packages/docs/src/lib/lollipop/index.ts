@@ -1,4 +1,6 @@
 import { type LollipopChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
+
 const vanilla = 'LollipopChart'
 
 export const chartTypes: ChartTypes = {

@@ -1,4 +1,6 @@
 import { type BoxplotChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts'
+import type { ChartTypes, Example } from '../types'
+
 const vanilla = 'BoxplotChart'
 
 export const chartTypes: ChartTypes = {
