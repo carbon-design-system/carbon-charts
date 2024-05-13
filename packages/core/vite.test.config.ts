@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 
 export default defineConfig({
 	build: {
-		outDir: '../../pages/test/vanilla-js',
+		outDir: '../../pages',
 		rollupOptions: {
 			input: './index.html'
 		}

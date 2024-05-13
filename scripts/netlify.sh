@@ -1,7 +1,17 @@
 set -e
 
+# Generates the preview for @carbon/charts (core), @carbon/charts-react and @carbon/charts-angular
+#
+# The Netlify URL (https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.)
+# is passed to this script and CONTEXT (deploy-preview or something else).
+# If the context is "deploy-preview", the core package is built (as it's a dependency for all packages).
+# Next, if the URL is for @carbon/charts-react or @carbon/charts-angular, then one of those packages are built.
+# After that, the test page for the appropriate package is built.
+
 GREEN="\033[0;32m"
 if [ $CONTEXT == "deploy-preview" ]; then
+  # Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
+	# The URL drives which test site to 
 	echo -e "${GREEN}Deploying test page to ${URL} on Netlify for pull request..."
 
 	# Grab netlify app type from the netlify app URL
@@ -23,13 +33,13 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	fi
 
 	# Storybook build for selected package
-  echo -e "${GREEN}Running storybook build for @carbon/$PKG..."
-  npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
+  echo -e "${GREEN}Creating test page for @carbon/$PKG..."
+  # npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
 	npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
 
-	echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
-	mkdir -p pages
-	cp -a "packages/$PKG_DIR/demo/bundle/." pages
+	# echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
+	# mkdir -p pages
+	# cp -a "packages/$PKG_DIR/demo/bundle/." pages
 else
 	echo -e "${GREEN}Not a PR... nothing to do."
 fi

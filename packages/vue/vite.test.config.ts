@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
 	build: {
-		outDir: '../../pages/test/vue',
+		outDir: '../../pages/vue',
 		sourcemap: true
 	},
 	resolve: {

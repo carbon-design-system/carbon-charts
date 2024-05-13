@@ -6,7 +6,7 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			pages: '../../pages/test/svelte'
+			pages: '../../pages/svelte'
 		})
 	}
 }
