@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(container as HTMLElement)
 const Test = () =>
 (
   <>
-    <h1>Carbon Charts Svelte</h1>
+    <h1>Carbon Charts React</h1>
     <h2>Component Test Harness</h2>
     {charts.map((chart, chartIndex) => (
       <div key={chartIndex}>
