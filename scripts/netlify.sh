@@ -19,10 +19,10 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	PKG_DIR=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
 
 	# Build core package first
-	echo -e "${GREEN}Building @carbon/charts and demo dependencies (styles, data)..."
+	echo -e "${GREEN}Building @carbon/charts and styles..."
 	npx lerna run build:package --scope=@carbon/charts --concurrency=1
 
-	# Build package if not core and map APP_TYPE to PKG_DIR
+	# Build package if not core (angular or react) and map APP_TYPE to PKG_DIR
 	if [ "$PKG_DIR" != "core" ]; then
 	  PKG="charts-$PKG_DIR"
 		echo -e "${GREEN}Building @carbon/$PKG..."
@@ -37,9 +37,9 @@ if [ $CONTEXT == "deploy-preview" ]; then
   # npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
 	npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
 
-	# echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
-	# mkdir -p pages
-	# cp -a "packages/$PKG_DIR/demo/bundle/." pages
+	#echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
+	#mkdir -p pages
+	#cp -a "packages/$PKG_DIR/demo/bundle/." pages
 else
 	echo -e "${GREEN}Not a PR... nothing to do."
 fi
