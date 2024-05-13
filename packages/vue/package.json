@@ -27,6 +27,7 @@
 		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
 		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
 		"build:demo": "yarn demo:mdx && storybook build -o demo/bundle --quiet",
+		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",
 		"start": "yarn storybook",
