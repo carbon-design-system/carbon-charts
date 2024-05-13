@@ -16,6 +16,7 @@
 		"disabled:file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build:package": "ng build -c production && yarn postbundle",
+		"build:test": "ng build charts-angular-test",
 		"demo:mdx:angular": "cp ../core/src/stories/getting-started/angular.stories.mdx src/stories",
 		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
 		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",

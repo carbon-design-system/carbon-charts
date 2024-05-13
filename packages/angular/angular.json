@@ -95,7 +95,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
-            "outputPath": "dist/charts-angular-test",
+            "outputPath": "../../pages/test/angular",
             "index": "charts-angular-test/src/index.html",
             "main": "charts-angular-test/src/main.ts",
             "polyfills": [
