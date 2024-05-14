@@ -42,7 +42,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/icons-react": "^11.39.0",
-		"@ibm/telemetry-js": "^1.4.0",
+		"@ibm/telemetry-js": "^1.5.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},

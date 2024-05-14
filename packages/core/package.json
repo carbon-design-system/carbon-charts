@@ -82,7 +82,7 @@
 	"dependencies": {
 		"@carbon/colors": "^11.21.0",
 		"@carbon/utils-position": "^1.2.0",
-		"@ibm/telemetry-js": "^1.4.0",
+		"@ibm/telemetry-js": "^1.5.1",
 		"carbon-components": "^10.58.14",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
