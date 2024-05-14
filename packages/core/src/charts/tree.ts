@@ -21,6 +21,11 @@ export class TreeChart extends Chart {
 		this.init(holder, chartConfigs)
 	}
 
+	/**
+	 * Retrieves the components to be rendered inside the graph frame.
+	 *
+	 * @returns {Component[]} An array of components to be rendered.
+	 */
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: Component[] = [new Tree(this.model, this.services)]

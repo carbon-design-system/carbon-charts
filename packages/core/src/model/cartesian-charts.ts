@@ -111,7 +111,7 @@ export class ChartModelCartesian extends ChartModel {
 	}
 
 	/**
-	 * @param zoomBarData any special zoom bar data to use instead of the model data
+	 * @param newZoomBarData any special zoom bar data to use instead of the model data
 	 */
 	setZoomBarData(newZoomBarData?: any) {
 		const sanitizedData = newZoomBarData

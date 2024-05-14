@@ -238,7 +238,6 @@ export class MeterTitle extends Title {
 	/**
 	 * Uses the parent class truncate logic
 	 * @param title d3 selection of title element that will be truncated
-	 * @param titlestring the original string that needs truncation
 	 * @param maxWidth the max width the title can take
 	 */
 	truncateTitle(title: any, maxWidth: number) {
