@@ -30,7 +30,7 @@ export default function Themes() {
 
       <p>
         All chart types support the <a
-          href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.BaseChartOptions.html#theme"
+          href="/api/interfaces/interfaces.BaseChartOptions.html#theme"
           target="_blank">theme</a> property.
       </p>
 

@@ -27,11 +27,6 @@
 			"types": "./dist/components/index.d.ts",
 			"import": "./dist/components/index.mjs"
 		},
-		"./demo/styles.css": "./dist/demo/styles.css",
-		"./demo": {
-			"types": "./dist/demo/index.d.ts",
-			"import": "./dist/demo/index.mjs"
-		},
 		"./interfaces": {
 			"types": "./dist/interfaces/index.d.ts",
 			"import": "./dist/interfaces/index.mjs"
@@ -57,24 +52,15 @@
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:css:charts": "sass scss/index.scss dist/styles.css --load-path=./node_modules --load-path=../../node_modules",
 		"file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
-		"file:css:demo": "sass scss/demos.scss dist/demo/styles.css --load-path=./node_modules --load-path=../../node_modules",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "vite build && vite build -c ./vite.umd.config.ts && yarn postbundle && cp dist/styles*.css* ./",
-		"demo:docs": "typedoc ./src/index.ts --excludeExternals --out ./demo/bundle/documentation",
-		"demo:storybook": "storybook build -o demo/bundle --quiet",
-		"build:demo": "concurrently \"yarn:demo:*\"",
+		"build": "vite build && vite build -c ./vite.umd.config.ts && yarn postbundle && cp dist/styles*.css* ./",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
+		"dev": "vite",
 		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore",
-		"dev": "vite",
-		"clean": "rm -rf dist demo/bundle",
-		"pub:demo": "cp -a demo/bundle/. ../../pages"
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore"
 	},
 	"repository": {
 		"type": "git",
@@ -114,7 +100,6 @@
 		"@carbon/styles": "^1.57.0",
 		"@carbon/themes": "^11.35.0",
 		"@rollup/plugin-replace": "^5.0.5",
-		"@stackblitz/sdk": "^1.10.0",
 		"@types/d3": "^7.4.3",
 		"@types/d3-cloud": "^1.2.9",
 		"@types/d3-sankey": "^0.12.4",
@@ -126,8 +111,6 @@
 		"jsdom": "^24.0.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.77.1",
-		"storybook": "^7.6.19",
-		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vite-plugin-dts": "^3.9.1",

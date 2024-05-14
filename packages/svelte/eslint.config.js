@@ -5,8 +5,7 @@ export default {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:svelte/recommended',
-		'prettier',
-		'plugin:storybook/recommended'
+		'prettier'
 	],
 	plugins: ['@typescript-eslint'],
 	ignorePatterns: ['*.cjs'],

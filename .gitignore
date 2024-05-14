@@ -12,7 +12,7 @@
 # Lerna
 .nx/cache
 
-# Published Storybook websites for GitHub Pages
+# Documentation website for GitHub Pages
 pages/
 
 # Package-level
@@ -21,4 +21,3 @@ pages/
 **/.svelte-kit
 **/build
 **/dist
-**/demo/bundle

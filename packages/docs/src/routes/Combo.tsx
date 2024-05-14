@@ -25,7 +25,7 @@ export default function Combo() {
 			<p>
 				Details on Combo chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.ComboChartOptions.html"
+					href="/api/interfaces/interfaces.ComboChartOptions.html"
 					target="_blank">
 					here
 				</a>

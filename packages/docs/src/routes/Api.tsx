@@ -61,13 +61,13 @@ console.log(myChart)
       <p>
         Event dispatching for chart elements allows applications to trigger custom UI actions and states
         when users interact with the charts. More information on events can be found <a
-          href="https://charts.carbondesignsystem.com/api/classes/Events.html"
+          href="/api/classes/Events.html"
           target="_blank">here</a>.
       </p>
 
       <h2>Full Documentation</h2>
 
-      <iframe	title="API Documentation" className="api" src="https://charts.carbondesignsystem.com/documentation/"></iframe>
+      <iframe	title="API Documentation" className="api" src="/api"></iframe>
     </>
   )
 }

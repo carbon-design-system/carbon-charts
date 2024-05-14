@@ -27,7 +27,7 @@ export default function Radar() {
 			<p>
 				Details on Radar Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.RadarChartOptions.html"
+					href="/api/interfaces/interfaces.RadarChartOptions.html"
 					target="_blank">
 					here
 				</a>

@@ -25,7 +25,7 @@ export default function Pie() {
 			<p>
 				Details on Pie Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.PieChartOptions.html"
+					href="/api/interfaces/interfaces.PieChartOptions.html"
 					target="_blank">
 					here
 				</a>

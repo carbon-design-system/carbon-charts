@@ -25,7 +25,7 @@ export default function Bubble() {
 
       <p>
         Details on Bubble chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BubbleChartOptions.html"
+          href="/api/interfaces/interfaces.BubbleChartOptions.html"
           target="_blank">here</a>.
       </p>
 

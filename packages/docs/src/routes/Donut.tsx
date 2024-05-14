@@ -24,7 +24,7 @@ export default function Donut() {
 			<p>
 				Details on Donut chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.DonutChartOptions.html"
+					href="/api/interfaces/interfaces.DonutChartOptions.html"
 					target="_blank">
 					here
 				</a>

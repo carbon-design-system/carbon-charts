@@ -1,8 +1,7 @@
 {
   "root": true,
   "ignorePatterns": [
-    "!**/*",
-    ".storybook/**/*.html"
+    "!**/*"
   ],
   "overrides": [
     {
@@ -14,8 +13,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended",
-        "plugin:storybook/recommended"
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [

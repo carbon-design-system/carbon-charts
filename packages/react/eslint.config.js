@@ -6,8 +6,7 @@ export default {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react-hooks/recommended',
-		'prettier',
-		'plugin:storybook/recommended'
+		'prettier'
 	],
 	ignorePatterns: ['dist', '.eslintrc.cjs'],
 	parser: '@typescript-eslint/parser',

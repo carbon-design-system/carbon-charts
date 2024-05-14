@@ -32,7 +32,7 @@ export default function CirclePack() {
 			<p>
 				Details on Circle Pack chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.CirclePackChartOptions.html"
+					href="/api/interfaces/interfaces.CirclePackChartOptions.html"
 					target="_blank">
 					here
 				</a>

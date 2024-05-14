@@ -36,7 +36,7 @@ export default function Bar() {
 
 			<p>
         Details on Bar chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BarChartOptions.html"
+          href="/api/interfaces/interfaces.BarChartOptions.html"
           target="_blank">here</a>.
       </p>
 

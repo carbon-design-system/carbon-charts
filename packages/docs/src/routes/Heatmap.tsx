@@ -27,7 +27,7 @@ export default function Heatmap() {
 			<p>
 				Details on Heatmap Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.HeatmapChartOptions.html"
+					href="/api/interfaces/interfaces.HeatmapChartOptions.html"
 					target="_blank">
 					here
 				</a>

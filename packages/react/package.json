@@ -26,20 +26,11 @@
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "vite build && yarn postbundle",
-		"demo:mdx:react": "cp ../core/src/stories/getting-started/react.stories.mdx src/stories",
-		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
-		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
-		"build:demo": "yarn demo:mdx && NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet",
+		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
-		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
-		"clean": "rm -rf dist demo/bundle",
 		"dev": "vite",
-		"pub:demo": "cp -a demo/bundle/. ../../pages/react"
+		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
@@ -53,7 +44,6 @@
 		"react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "1.10.0",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react": "^4.2.1",
@@ -64,7 +54,6 @@
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
 		"sass": "^1.77.1",
-		"storybook": "^7.6.19",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vite-plugin-dts": "^3.9.1"

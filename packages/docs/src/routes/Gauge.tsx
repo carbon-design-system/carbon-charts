@@ -26,7 +26,7 @@ export default function Gauge() {
 			<p>
 				Details on Gauge Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.GaugeChartOptions.html"
+					href="/api/interfaces/interfaces.GaugeChartOptions.html"
 					target="_blank">
 					here
 				</a>

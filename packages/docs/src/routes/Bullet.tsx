@@ -24,7 +24,7 @@ export default function Bullet() {
 
       <p>
         Details on Bullet chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.BulletChartOptions.html"
+          href="/api/interfaces/interfaces.BulletChartOptions.html"
           target="_blank">here</a>.
       </p>
 

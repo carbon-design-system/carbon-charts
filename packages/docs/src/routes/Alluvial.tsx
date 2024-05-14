@@ -35,7 +35,7 @@ export default function Alluvial() {
 
       <p>
         Details on Alluvial chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.AlluvialChartOptions.html"
+          href="/api/interfaces/interfaces.AlluvialChartOptions.html"
           target="_blank">here</a>.
       </p>
 

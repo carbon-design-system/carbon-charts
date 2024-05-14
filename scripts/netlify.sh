@@ -20,13 +20,13 @@ if [ $CONTEXT == "deploy-preview" ]; then
 
 	# Build core package first
 	echo -e "${GREEN}Building @carbon/charts and styles..."
-	npx lerna run build:package --scope=@carbon/charts --concurrency=1
+	npx lerna run build --scope=@carbon/charts --concurrency=1
 
 	# Build package if not core (angular or react) and map APP_TYPE to PKG_DIR
 	if [ "$PKG_DIR" != "core" ]; then
 	  PKG="charts-$PKG_DIR"
 		echo -e "${GREEN}Building @carbon/$PKG..."
-		npx lerna run build:package --scope="@carbon/$PKG" --concurrency=1
+		npx lerna run build --scope="@carbon/$PKG" --concurrency=1
   else
 	  # Map package directory for core since name is different
 	  PKG="charts"
@@ -34,12 +34,6 @@ if [ $CONTEXT == "deploy-preview" ]; then
 
   echo -e "${GREEN}Creating test page for @carbon/$PKG..."
 	npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
-
-	# Uncommenting these lines will create a Storybook preview instead
-  # npx lerna run build:demo --scope="@carbon/$PKG" --concurrency=1
-	#echo -e "${GREEN}Copying packages/$PKG_DIR/demo/bundle to pages/..."
-	#mkdir -p pages
-	#cp -a "packages/$PKG_DIR/demo/bundle/." pages
 else
 	echo -e "${GREEN}Not a PR... nothing to do."
 fi

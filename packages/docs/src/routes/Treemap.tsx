@@ -31,7 +31,7 @@ export default function Treemap() {
 			<p>
 				Details on Treemap Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.TreemapChartOptions.html"
+					href="/api/interfaces/interfaces.TreemapChartOptions.html"
 					target="_blank">
 					here
 				</a>

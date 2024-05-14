@@ -22,7 +22,7 @@ export default function Lollipop() {
 			<p>
 				Details on Lollipop Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.LollipopChartOptions.html"
+					href="/api/interfaces/interfaces.LollipopChartOptions.html"
 					target="_blank">
 					here
 				</a>

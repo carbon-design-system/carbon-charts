@@ -33,15 +33,13 @@ We use Lerna to manage all `@carbon/charts` related packages.
 
 **These are the Node and Yarn versions we recommend:**
 - Node Version: `18.x`
-- Yarn Version: `3.5.x`
+- Yarn Version: `4.2.x`
 
 To get charts running locally on your machine:
 1. Fork this repo
 2. Git clone your fork locally
 3. Run `yarn install` (this would install all packages and get **lerna** setup)
-4. Run `yarn build` to do an initial build of the monorepo and correctly link all the packages
-
-All packages use Storybook for demos:
+4. Run `yarn build` to build all packages and the documentation website
 
 ```sh
 yarn start

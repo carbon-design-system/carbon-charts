@@ -32,7 +32,7 @@ export default function Tree() {
 			<p>
 				Details on Tree Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.TreeChartOptions.html"
+					href="/api/interfaces/interfaces.TreeChartOptions.html"
 					target="_blank">
 					here
 				</a>

@@ -25,7 +25,7 @@ export default function Choropleth() {
 
       <p>
         Details on Choropleth chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.ChoroplethChartOptions.html"
+          href="/api/interfaces/interfaces.ChoroplethChartOptions.html"
           target="_blank">here</a>.
       </p>
 

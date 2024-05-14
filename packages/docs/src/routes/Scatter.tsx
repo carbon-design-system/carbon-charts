@@ -27,7 +27,7 @@ export default function Scatter() {
 			<p>
 				Details on Scatter Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.ScatterChartOptions.html"
+					href="/api/interfaces/interfaces.ScatterChartOptions.html"
 					target="_blank">
 					here
 				</a>

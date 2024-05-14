@@ -36,40 +36,6 @@
             ]
           }
         },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "configDir": ".storybook",
-            "tsConfig": ".storybook/tsconfig.json",
-            "browserTarget": "charts-angular:build",
-            "compodoc": false,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "./"
-            ],
-            "port": 9006,
-            "quiet": true
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "configDir": ".storybook",
-            "tsConfig": ".storybook/tsconfig.json",
-            "browserTarget": "charts-angular:build",
-            "compodoc": false,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "./"
-            ],
-            "outputDir": "demo/bundle",
-            "quiet": true
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {

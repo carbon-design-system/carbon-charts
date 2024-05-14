@@ -22,7 +22,7 @@ export default function Boxplot() {
 
       <p>
         Details on Boxplot chart options can be found <a
-          href="https://charts.carbondesignsystem.com/documentation/types/interfaces.BoxplotChartOptions.html"
+          href="/api/types/interfaces.BoxplotChartOptions.html"
           target="_blank">here</a>.
       </p>
 

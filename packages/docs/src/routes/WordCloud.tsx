@@ -23,7 +23,7 @@ export default function WordCloud() {
 			<p>
 				Details on WordCloud Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.WordCloudOptions.html"
+					href="/api/interfaces/interfaces.WordCloudOptions.html"
 					target="_blank">
 					here
 				</a>

@@ -29,7 +29,7 @@ export default function Line() {
 			<p>
 				Details on Line Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.LineChartOptions.html"
+					href="/api/interfaces/interfaces.LineChartOptions.html"
 					target="_blank">
 					here
 				</a>

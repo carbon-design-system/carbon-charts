@@ -27,7 +27,7 @@ export default function Histogram() {
 			<p>
 				Details on Histogram Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.HistogramChartOptions.html"
+					href="/api/interfaces/interfaces.HistogramChartOptions.html"
 					target="_blank">
 					here
 				</a>

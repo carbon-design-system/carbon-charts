@@ -15,6 +15,6 @@
 		"useDefineForClassFields": false // Until issue above is addressed, keep false.
 	},
 	"include": ["src"],
-	"exclude": ["src/tests", "src/stories", "**/*.spec.ts"],
+	"exclude": ["src/tests", "**/*.spec.ts"],
 	"references": [{ "path": "./tsconfig.vite.json" }]
 }

@@ -25,7 +25,7 @@ export default function Meter() {
 			<p>
 				Details on Meter Chart options can be found{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/documentation/interfaces/interfaces.MeterChartOptions.html"
+					href="/api/interfaces/interfaces.MeterChartOptions.html"
 					target="_blank">
 					here
 				</a>

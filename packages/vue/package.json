@@ -22,20 +22,11 @@
 	"scripts": {
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"build:package": "vite build && yarn file:styles",
-		"demo:mdx:vue": "cp ../core/src/stories/getting-started/vue.stories.mdx src/stories",
-		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
-		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
-		"build:demo": "yarn demo:mdx && storybook build -o demo/bundle --quiet",
+		"build": "vite build && yarn file:styles",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
-		"lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
-		"format": "prettier --write src/ --ignore-path ../../.eslintignore",
-		"clean": "rm -rf dist demo/bundle",
 		"dev": "vite",
-		"pub:demo": "cp -a demo/bundle/. ../../pages/vue"
+		"lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
+		"format": "prettier --write src/ --ignore-path ../../.eslintignore"
 	},
 	"peerDependencies": {
 		"vue": "^3.4.0"
@@ -46,14 +37,12 @@
 		"vue": "^3.4.27"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "^1.10.0",
 		"@types/d3": "^7.4.3",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"storybook": "^7.6.19",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vite-plugin-dts": "^3.9.1",
