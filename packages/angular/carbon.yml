@@ -4,300 +4,312 @@ library:
   name: Carbon Charts Angular
   description:
     Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts` component library.
-  externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started/
   inherits: carbon-charts
-  navData:
-    - title: Getting started
-      items:
-        - title: Introduction
-          path: https://charts.carbondesignsystem.com/introduction
-        - title: Installation & setup
-          path: https://charts.carbondesignsystem.com/installation
-        - title: Chart anatomy
-          path: https://charts.carbondesignsystem.com/anatomy
-    - title: Data & configuration
-      items:
-        - title: Chart data
-          path: https://charts.carbondesignsystem.com/data
-        - title: Chart display options
-          path: https://charts.carbondesignsystem.com/options
-        - title: API
-          path: https://charts.carbondesignsystem.com/api
-    - title: Design
-      items:
-        - title: Themes (dark & light)
-          path: https://charts.carbondesignsystem.com/themes
-        - title: Axes
-          path: https://charts.carbondesignsystem.com/axes
-        - title: Color palette
-          path: https://charts.carbondesignsystem.com/palettes
-        - title: Dashboards
-          path: https://charts.carbondesignsystem.com/dashboards
-    - title: Chart types
-      items:
-        - title: Alluvial / Sankey
-          path: https://charts.carbondesignsystem.com/alluvial
-        - title: Area (standard, stacked)
-          path: https://charts.carbondesignsystem.com/area
-        - title: Bar (simple, grouped, stacked)
-          path: https://charts.carbondesignsystem.com/bar
-        - title: Boxplot
-          path: https://charts.carbondesignsystem.com/boxplot
-        - title: Bubble
-          path: https://charts.carbondesignsystem.com/bubble
-        - title: Bullet
-          path: https://charts.carbondesignsystem.com/bullet
-        - title: Choropleth (experimental)
-          path: https://charts.carbondesignsystem.com/choropleth
-        - title: Circle pack
-          path: https://charts.carbondesignsystem.com/circlepack
-        - title: Combo
-          path: https://charts.carbondesignsystem.com/combo
-        - title: Diagrams
-          path: https://charts.carbondesignsystem.com/diagram
-        - title: Donut
-          path: https://charts.carbondesignsystem.com/donut
-        - title: Gauge
-          path: https://charts.carbondesignsystem.com/gauge
-        - title: Heatmap
-          path: https://charts.carbondesignsystem.com/heatmap
-        - title: Histogram
-          path: https://charts.carbondesignsystem.com/histogram
-        - title: Line
-          path: https://charts.carbondesignsystem.com/line
-        - title: Lollipop
-          path: https://charts.carbondesignsystem.com/lollipop
-        - title: Meter
-          path: https://charts.carbondesignsystem.com/meter
-        - title: Pie
-          path: https://charts.carbondesignsystem.com/pie
-        - title: Radar / Kiviat
-          path: https://charts.carbondesignsystem.com/radar
-        - title: Scatter
-          path: https://charts.carbondesignsystem.com/scatter
-        - title: Tree
-          path: https://charts.carbondesignsystem.com/tree
-        - title: Treemap
-          path: https://charts.carbondesignsystem.com/treemap
-        - title: Word cloud
-          path: https://charts.carbondesignsystem.com/wordcloud
 assets:
   alluvial:
+    name: Alluvial
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#alluvialsankey-diagrams
     thumbnailPath: ../docs/public/alluvial.svg
     type: component
+    tags:
+      - data-visualization
+      - connection
     platform: web
     status: stable
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#alluvialsankey-diagrams
       usagePath: https://charts.carbondesignsystem.com/alluvial
   area-simple:
+    name: Area (simple)
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
     thumbnailPath: ../docs/public/area.svg
     type: component
+    tags:
+      - data-visualization
+      - trend
     platform: web
     status: stable
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
       usagePath: https://charts.carbondesignsystem.com/area
   area-stacked:
+    name: Area (stacked)
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
     thumbnailPath: ../docs/public/areastack.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
       usagePath: https://charts.carbondesignsystem.com/area
   bar-floating:
+    name: Bar (floating)
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
     thumbnailPath: ../docs/public/barfloating.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
       usagePath: https://charts.carbondesignsystem.com/bar
   bar-grouped:
+    name: Bar (grouped)
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
     thumbnailPath: ../docs/public/bargrouped.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
       usagePath: https://charts.carbondesignsystem.com/bar
   bar-simple:
+    name: Bar (simple)
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
     thumbnailPath: ../docs/public/bar.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
       usagePath: https://charts.carbondesignsystem.com/bar
   bar-stacked:
+    name: Bar (stacked)
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
     thumbnailPath: ../docs/public/barstack.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
       usagePath: https://charts.carbondesignsystem.com/bar
   boxplot:
+    name: Boxplot
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
     thumbnailPath: ../docs/public/boxplot.svg
     type: component
+    tags:
+      - data-visualization
+      - trend
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
       usagePath: https://charts.carbondesignsystem.com/boxplot
   bubble:
+    name: Bubble
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
     thumbnailPath: ../docs/public/bubble.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
       usagePath: https://charts.carbondesignsystem.com/bubble
   bullet:
+    name: Bullet
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
     thumbnailPath: ../docs/public/bullet.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
       usagePath: https://charts.carbondesignsystem.com/bullet
   choropleth:
-    status: experimental
+    name: Choropleth
+    status: draft
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
     thumbnailPath: ../docs/public/chorpleth.svg
     type: component
+    tags:
+      - data-visualization
+      - geographic-overlay
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
       usagePath: https://charts.carbondesignsystem.com/choropleth  
   circle-pack:
+    name: Circle pack
     status: stable
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#circle-packs
     thumbnailPath: ../docs/public/circlepack.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#circle-packs
       usagePath: https://charts.carbondesignsystem.com/circlepack
   donut:
+    name: Donut
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
     thumbnailPath: ../docs/public/donut.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
       usagePath: https://charts.carbondesignsystem.com/donut
   gauge:
+    name: Gauge
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
     thumbnailPath: ../docs/public/gauge.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
       usagePath: https://charts.carbondesignsystem.com/gauge
   heatmap:
+    name: Heat map
     status: stable
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#heat-maps
     thumbnailPath: ../docs/public/heatmap.svg
     type: component
+    tags:
+      - data-visualization
+      - correlation
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#heat-maps
       usagePath: https://charts.carbondesignsystem.com/heatmap
   histogram:
+    name: Histogram
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
     thumbnailPath: ../docs/public/histogram.svg
     type: component
+    tags:
+      - data-visualization
+      - trend
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
       usagePath: https://charts.carbondesignsystem.com/histogram
   line:
+    name: Line
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
     thumbnailPath: ../docs/public/line.svg
     type: component
+    tags:
+      - data-visualization
+      - trend
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
       usagePath: https://charts.carbondesignsystem.com/line
   lollipop:
+    name: Lollipop
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
     thumbnailPath: ../docs/public/lollipop.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
       usagePath: https://charts.carbondesignsystem.com/lollipop
   meter:
+    name: Meter
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
     thumbnailPath: ../docs/public/meter.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
       usagePath: https://charts.carbondesignsystem.com/meter
   network-diagram:
+    name: Network diagram
     status: stable
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#network-diagrams
     thumbnailPath: ../docs/public/diagram.svg
     type: component
+    tags:
+      - data-visualization
+      - connection
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#network-diagrams
       usagePath: https://charts.carbondesignsystem.com/diagram
   pie:
+    name: Pie
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
     thumbnailPath: ../docs/public/pie.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
       usagePath: https://charts.carbondesignsystem.com/pie
   radar:
+    name: Radar
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
     thumbnailPath: ../docs/public/radar.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
@@ -309,36 +321,51 @@ assets:
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
     thumbnailPath: ../docs/public/scatter.svg
     type: component
+    tags:
+      - data-visualization
+      - correlation
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
       usagePath: https://charts.carbondesignsystem.com/scatter
  tree:
+    name: Tree
     status: stable
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#tree-diagrams
     thumbnailPath: ../docs/public/tree.svg
     type: component
+    tags:
+      - data-visualization
+      - connection
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#tree-diagrams
       usagePath: https://charts.carbondesignsystem.com/tree
   treemap:
+    name: Tree map
     status: stable
     framework: angular
     externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#tree-maps
     thumbnailPath: ../docs/public/treemap.svg
     type: component
+    tags:
+      - data-visualization
+      - part-to-whole
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#tree-maps
       usagePath: https://charts.carbondesignsystem.com/treemap
   word-cloud:
+    name: Word cloud
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
     thumbnailPath: ../docs/public/wordcloud.svg
     type: component
+    tags:
+      - data-visualization
+      - comparison
     platform: web
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
