@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.16.0 (2024-05-14)
+
+### Features
+
+- **telemetry:** instrument charts packages with JS scope
+  ([#1797](https://github.com/carbon-design-system/carbon-charts/issues/1797))
+  ([c60b24e](https://github.com/carbon-design-system/carbon-charts/commit/c60b24e499d64dc991339f3abe7a4c29df2adfa2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.15.8 (2024-05-10)
 
 ### Bug Fixes
