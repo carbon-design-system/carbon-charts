@@ -3,275 +3,343 @@ library:
   id: carbon-charts-angular
   name: Carbon Charts Angular
   description:
-    Tell accurate stories around data with beautiful and accessible
-    visualizations.
+    Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts` component library.
+  externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started/
   inherits: carbon-charts
-  externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
-  demoLinks:
-    - type: storybook
-      name: Storybook
-      action: link
-      url: https://charts.carbondesignsystem.com/angular
+  navData:
+    - title: Getting started
+      items:
+        - title: Introduction
+          path: https://charts.carbondesignsystem.com/introduction
+        - title: Installation & setup
+          path: https://charts.carbondesignsystem.com/installation
+        - title: Chart anatomy
+          path: https://charts.carbondesignsystem.com/anatomy
+    - title: Data & configuration
+      items:
+        - title: Chart data
+          path: https://charts.carbondesignsystem.com/data
+        - title: Chart display options
+          path: https://charts.carbondesignsystem.com/options
+        - title: API
+          path: https://charts.carbondesignsystem.com/api
+    - title: Design
+      items:
+        - title: Themes (dark & light)
+          path: https://charts.carbondesignsystem.com/themes
+        - title: Axes
+          path: https://charts.carbondesignsystem.com/axes
+        - title: Color palette
+          path: https://charts.carbondesignsystem.com/palettes
+        - title: Dashboards
+          path: https://charts.carbondesignsystem.com/dashboards
+    - title: Chart types
+      items:
+        - title: Alluvial / Sankey
+          path: https://charts.carbondesignsystem.com/alluvial
+        - title: Area (standard, stacked)
+          path: https://charts.carbondesignsystem.com/area
+        - title: Bar (simple, grouped, stacked)
+          path: https://charts.carbondesignsystem.com/bar
+        - title: Boxplot
+          path: https://charts.carbondesignsystem.com/boxplot
+        - title: Bubble
+          path: https://charts.carbondesignsystem.com/bubble
+        - title: Bullet
+          path: https://charts.carbondesignsystem.com/bullet
+        - title: Choropleth (experimental)
+          path: https://charts.carbondesignsystem.com/choropleth
+        - title: Circle pack
+          path: https://charts.carbondesignsystem.com/circlepack
+        - title: Combo
+          path: https://charts.carbondesignsystem.com/combo
+        - title: Diagrams
+          path: https://charts.carbondesignsystem.com/diagram
+        - title: Donut
+          path: https://charts.carbondesignsystem.com/donut
+        - title: Gauge
+          path: https://charts.carbondesignsystem.com/gauge
+        - title: Heatmap
+          path: https://charts.carbondesignsystem.com/heatmap
+        - title: Histogram
+          path: https://charts.carbondesignsystem.com/histogram
+        - title: Line
+          path: https://charts.carbondesignsystem.com/line
+        - title: Lollipop
+          path: https://charts.carbondesignsystem.com/lollipop
+        - title: Meter
+          path: https://charts.carbondesignsystem.com/meter
+        - title: Pie
+          path: https://charts.carbondesignsystem.com/pie
+        - title: Radar / Kiviat
+          path: https://charts.carbondesignsystem.com/radar
+        - title: Scatter
+          path: https://charts.carbondesignsystem.com/scatter
+        - title: Tree
+          path: https://charts.carbondesignsystem.com/tree
+        - title: Treemap
+          path: https://charts.carbondesignsystem.com/treemap
+        - title: Word cloud
+          path: https://charts.carbondesignsystem.com/wordcloud
 assets:
   alluvial:
-    status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#alluvialsankey-diagrams
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/complex-charts-alluvial
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#alluvialsankey-diagrams
+    thumbnailPath: ../docs/public/alluvial.svg
+    type: component
+    platform: web
+    status: stable
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#alluvialsankey-diagrams
+      usagePath: https://charts.carbondesignsystem.com/alluvial
   area-simple:
-    status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-area-simple
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
+    thumbnailPath: ../docs/public/area.svg
+    type: component
+    platform: web
+    status: stable
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/simple-charts#area-(simple)
+      usagePath: https://charts.carbondesignsystem.com/area
   area-stacked:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-area-stacked
+    thumbnailPath: ../docs/public/areastack.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#area-(stacked)
+      usagePath: https://charts.carbondesignsystem.com/area
   bar-floating:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bar-floating
+    thumbnailPath: ../docs/public/barfloating.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(floating)
+      usagePath: https://charts.carbondesignsystem.com/bar
   bar-grouped:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bar-grouped
+    thumbnailPath: ../docs/public/bargrouped.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(grouped)
+      usagePath: https://charts.carbondesignsystem.com/bar
   bar-simple:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bar-simple
+    thumbnailPath: ../docs/public/bar.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bar-(simple)
+      usagePath: https://charts.carbondesignsystem.com/bar
   bar-stacked:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bar-stacked
+    thumbnailPath: ../docs/public/barstack.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bar-(stacked)
+      usagePath: https://charts.carbondesignsystem.com/bar
   boxplot:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-boxplot
+    thumbnailPath: ../docs/public/boxplot.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#boxplot
+      usagePath: https://charts.carbondesignsystem.com/boxplot
   bubble:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bubble
+    thumbnailPath: ../docs/public/bubble.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#bubble
+      usagePath: https://charts.carbondesignsystem.com/bubble
   bullet:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-bullet
+    thumbnailPath: ../docs/public/bullet.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#bullet
+      usagePath: https://charts.carbondesignsystem.com/bullet
+  choropleth:
+    status: experimental
+    framework: angular
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
+    thumbnailPath: ../docs/public/chorpleth.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
+      usagePath: https://charts.carbondesignsystem.com/choropleth  
   circle-pack:
     status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#circle-packs
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/complex-charts-circle-pack
-  combo:
-    status: stable
-    framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-combo
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#circle-packs
+    thumbnailPath: ../docs/public/circlepack.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#circle-packs
+      usagePath: https://charts.carbondesignsystem.com/circlepack
   donut:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-donut
+    thumbnailPath: ../docs/public/donut.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#donut
+      usagePath: https://charts.carbondesignsystem.com/donut
   gauge:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-gauge
+    thumbnailPath: ../docs/public/gauge.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#gauge
+      usagePath: https://charts.carbondesignsystem.com/gauge
   heatmap:
     status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#heat-maps
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/complex-charts-heatmap
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#heat-maps
+    thumbnailPath: ../docs/public/heatmap.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#heat-maps
+      usagePath: https://charts.carbondesignsystem.com/heatmap
   histogram:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-histogram
+    thumbnailPath: ../docs/public/histogram.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#histogram
+      usagePath: https://charts.carbondesignsystem.com/histogram
   line:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-line
+    thumbnailPath: ../docs/public/line.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#line
+      usagePath: https://charts.carbondesignsystem.com/line
   lollipop:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-lollipop
+    thumbnailPath: ../docs/public/lollipop.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#lollipop
+      usagePath: https://charts.carbondesignsystem.com/lollipop
   meter:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-meter
-  meter-proportional:
-    status: stable
-    framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-meter-proportional
+    thumbnailPath: ../docs/public/meter.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts/#meter
+      usagePath: https://charts.carbondesignsystem.com/meter
   network-diagram:
     status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#network-diagrams
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/diagrams
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#network-diagrams
+    thumbnailPath: ../docs/public/diagram.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#network-diagrams
+      usagePath: https://charts.carbondesignsystem.com/diagram
   pie:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-pie
+    thumbnailPath: ../docs/public/pie.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#pie
+      usagePath: https://charts.carbondesignsystem.com/pie
   radar:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-radar
+    thumbnailPath: ../docs/public/radar.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#radar
+      usagePath: https://charts.carbondesignsystem.com/radar
   scatter:
     name: Scatter
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-scatter
-  sparkline:
+    thumbnailPath: ../docs/public/scatter.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
+      usagePath: https://charts.carbondesignsystem.com/scatter
+ tree:
     status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-sparkline
-  step:
-    status: stable
-    framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-step
-  tree:
-    status: stable
-    framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-diagrams
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/complex-charts-tree
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/flow-charts/#tree-diagrams
+    thumbnailPath: ../docs/public/tree.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/flow-charts/#tree-diagrams
+      usagePath: https://charts.carbondesignsystem.com/tree
   treemap:
     status: stable
     framework: angular
-    externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/complex-charts#tree-maps
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/complex-charts-treemap
+    externalDocsUrl: https://carbondesignsystem.com/data-visualization/spatial-charts/#tree-maps
+    thumbnailPath: ../docs/public/treemap.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#tree-maps
+      usagePath: https://charts.carbondesignsystem.com/treemap
   word-cloud:
     status: stable
     framework: angular
     externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://charts.carbondesignsystem.com/angular/?path=/story/simple-charts-word-cloud
+    thumbnailPath: ../docs/public/wordcloud.svg
+    type: component
+    platform: web
+    docs:
+      overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#word-cloud
+      usagePath: https://charts.carbondesignsystem.com/wordcloud
