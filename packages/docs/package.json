@@ -4,8 +4,6 @@
 	"version": "1.13.33",
 	"description": "Carbon Charts Documentation",
 	"type": "module",
-	"main": "src/charts.ts",
-	"types": "src/charts.ts",
 	"files": [
 		"src/*"
 	],
@@ -45,7 +43,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/react/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
