@@ -22,7 +22,7 @@
   "packageManager": "yarn@4.2.2",
   "prettier": "./prettier.config.mjs",
   "devDependencies": {
-    "@nrwl/devkit": "^19.0.3",
+    "@nrwl/devkit": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
     "@typescript-eslint/parser": "^7.9.0",
     "@vue/eslint-config-prettier": "^9.0.0",
