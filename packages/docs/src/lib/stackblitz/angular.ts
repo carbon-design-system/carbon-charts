@@ -1,5 +1,5 @@
 import type { Project, ProjectTemplate } from '@stackblitz/sdk'
-import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts'
 import { version } from './package-versions'
 import { objectToString } from './object-to-string'
 
@@ -36,7 +36,7 @@ export function getAngularProject(
 </body>
 </html>`
 
-	const mainTs = `import 'zone.js/dist/zone'
+	const mainTs = `import 'zone.js'
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
