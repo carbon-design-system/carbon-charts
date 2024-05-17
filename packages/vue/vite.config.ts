@@ -24,12 +24,10 @@ export default defineConfig({
 	},
 	plugins: [
 		vue(),
-		dts({ // generate type declaration files in dist, not dist/src
+		dts({
 			cleanVueFileName: true,
-			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/packages/vue/src/','/dist/')
-				return { filePath, content }
-			}
+			entryRoot: 'src',
+			logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
 		})
 	]
 })

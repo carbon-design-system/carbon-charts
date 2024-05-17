@@ -21,5 +21,8 @@ export default defineConfig({
 			}
 		}
 	},
-	plugins: [react(), dts()]
+	plugins: [react(), dts({
+		entryRoot: 'src',
+		logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
+	})]
 })
