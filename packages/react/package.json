@@ -14,7 +14,9 @@
 			"require": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
-		"./styles.css": "./dist/styles.css"
+		"./styles.min": "./dist/styles.min.css"
+		"./styles.css": "./dist/styles.css",
+		"./styles": "./dist/styles.css",
 	},
 	"files": [
 		"dist",
