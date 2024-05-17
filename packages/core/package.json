@@ -12,6 +12,7 @@
 		"./styles.css": "./dist/styles.css",
 		"./styles/styles.scss": "./scss/index.scss",
 		"./scss/index.scss": "./scss/index.scss",
+		"./scss": "./scss/index.scss",
 		".": {
 			"types": "./dist/index.d.ts",
 			"browser": {
@@ -40,6 +41,7 @@
 			"import": "./dist/services/index.mjs"
 		}
 	},
+	"style": "./scss/index.scss",
 	"files": [
 		"dist",
 		"scss",
