@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
-// import './Dashboards.scss'
 
 export default function Dashboards() {
 	return (

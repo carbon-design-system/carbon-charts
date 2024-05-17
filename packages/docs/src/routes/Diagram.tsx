@@ -4,7 +4,6 @@ import {
 	StructuredListRow,
 	StructuredListCell,
 	StructuredListBody,
-	CodeSnippet,
 	Tag
 } from '@carbon/react'
 import {

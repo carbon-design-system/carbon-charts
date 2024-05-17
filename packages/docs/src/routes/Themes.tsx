@@ -23,6 +23,9 @@ export default function Themes() {
   return (
     <>
       <PageHeader title="Themes" />
+
+      <h2>Overview</h2>
+
       <p>
         Four Carbon themes (white, g10, g90 and g100) are included in the styles.css file for each
         package. The latter three represent shades of gray where g10 is 10% and g100 is 100% (black).
@@ -40,6 +43,8 @@ export default function Themes() {
         ...myChartOptions,
         theme: 'g100' // <- how to set the theme
       }`}</CodeSnippet>
+
+      <h2>Using alternative background colors</h2>
 
       <p>
         To use alternate background colors, set your options to a theme that is close in brightness to

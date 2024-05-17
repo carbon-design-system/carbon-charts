@@ -23,6 +23,8 @@ export default function Api() {
     <>
       <PageHeader title="API (Vanilla JavaScript)" />
 
+      <h2>Overview</h2>
+
       <p>
         Carbon Charts exposes the entire API allowing you to heavily customize the look and feel and
         behaviors. When a chart is instantiated, the chart object contains key properties.

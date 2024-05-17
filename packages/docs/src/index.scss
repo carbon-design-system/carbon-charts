@@ -6,10 +6,10 @@
 	$css--font-face: false
 );
 
-@import 'highlight.js/scss/sunburst.scss';
+@import 'highlight.js/scss/stackoverflow-dark.scss';
 
 h2 {
-	margin-top: 1.5rem;
+	margin-top: 3rem;
 	margin-bottom: 1rem;
 }
 
@@ -22,12 +22,21 @@ h3 {
 
 p {
 	margin: 1rem 0 1rem 0;
+	max-width: 60rem;
 }
 
 .cds--content {
 	margin-inline-start: 0!important;
 	margin-top: 3rem;
 	padding: 3rem;
+}
+
+.cds--inline-notification {
+	max-width: 60rem;
+}
+
+.cds--structured-list {
+	max-width: 60rem;
 }
 
 .cds--tabs {
@@ -43,7 +52,7 @@ p {
 }
 
 .cds--snippet {
-	max-width: unset;
+	max-width: 60rem;
 	border-radius: .25rem;
 
 	margin-top: 0.5rem;
@@ -76,4 +85,9 @@ p {
 	.cds--content {
 		margin-inline-start: 16rem!important;
 	}
+}
+
+.launch-buttons {
+	margin-left: 2px;
+	margin-bottom: 3rem;
 }

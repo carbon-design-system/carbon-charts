@@ -1,10 +1,9 @@
-import { AlluvialChart } from '@carbon/charts-react'
+import { AlluvialChart, AlluvialChartOptions } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
 import { chartTypes, examples } from '../lib/alluvial'
 import '@carbon/charts-react/styles.css'
-import './Alluvial.scss'
 
 export default function Alluvial() {
   return (
@@ -44,8 +43,8 @@ export default function Alluvial() {
       <h2>Examples for supported frameworks</h2>
 
       {examples.map((example, index) => (
-        <p key={index} className="chart">
-          <AlluvialChart data={example.data} options={example.options} />
+        <p key={index}>
+          <AlluvialChart data={example.data} options={example.options as AlluvialChartOptions} />
           <StackBlitzLauncher example={example} chartTypes={chartTypes} />
         </p>
       ))}

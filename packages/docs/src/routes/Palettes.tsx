@@ -23,6 +23,8 @@ export default function Palettes() {
     <>
       <PageHeader title="Color palettes" />
 
+      <h2>Overview</h2>
+
       <p>
         The color palette for data visualizations is a select subset of the IBM Design Language color
         palette. It is designed to maximize accessibility and harmony within a page. For additional

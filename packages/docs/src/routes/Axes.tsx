@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
-import { CodeSnippet, Grid, Column, Tag } from '@carbon/react/es'
+import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
 import './Axes.scss'
 

@@ -12,7 +12,6 @@ import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExpla
 import { chartTypes, examples } from '../lib/area'
 import { chartTypesStacked, examplesStacked } from '../lib/area/examplesStacked'
 import '@carbon/charts-react/styles.css'
-import './Area.scss'
 
 export default function Area() {
   const [selectedIndex, setSelectedIndex] = useState(0)
