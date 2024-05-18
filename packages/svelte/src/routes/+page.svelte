@@ -10,6 +10,9 @@
 {#each charts as chart}
 	<h3>{chart.types.svelte}</h3>
 	{#each chart.examples as example}
-		<svelte:component this={ChartComponents[chart.types.svelte]} options={example.options} data={example.data} />
+		<svelte:component
+			this={ChartComponents[chart.types.svelte]}
+			options={example.options}
+			data={example.data} />
 	{/each}
 {/each}

@@ -1,6 +1,13 @@
 import { defineComponent, onMounted, ref, watch, toRefs } from 'vue'
 import type { Chart, ChartTabularData, ChartOptions } from '@carbon/charts'
 
+/**
+ * A factory function to create Vue components for different types of charts.
+ * @template T - The type of the chart options.
+ * @param {any} chartType - The class or constructor function for the chart.
+ * @param {string} chartName - The name of the Vue component to be created.
+ * @returns {import('vue').DefineComponent} - The Vue component definition for the chart.
+ */
 export function chartFactory<T extends ChartOptions>(chartType: any, chartName: string) {
 	return defineComponent({
 		name: chartName,
