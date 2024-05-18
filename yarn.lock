@@ -1974,7 +1974,7 @@ __metadata:
     "@types/react": "npm:^18.3.2"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
-    eslint: "npm:^9.2.0"
+    eslint: "npm:^9.3.0"
     highlight.js: "npm:^11.9.0"
     prettier: "npm:^3.2.5"
     react: "npm:^18.3.1"
@@ -1998,7 +1998,7 @@ __metadata:
     "@vue/eslint-config-typescript": "npm:^13.0.0"
     commitizen: "npm:^4.3.0"
     cz-conventional-changelog: "npm:^3.3.0"
-    eslint: "npm:^9.2.0"
+    eslint: "npm:^9.3.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-react-hooks: "npm:^4.6.2"
@@ -2051,15 +2051,15 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.5.1"
     "@stackblitz/sdk": "npm:^1.10.0"
     "@sveltejs/adapter-static": "npm:^3.0.1"
-    "@sveltejs/kit": "npm:^2.5.8"
+    "@sveltejs/kit": "npm:^2.5.9"
     "@sveltejs/package": "npm:^2.3.1"
     "@sveltejs/vite-plugin-svelte": "npm:^3.1.0"
     concurrently: "npm:^8.2.2"
     d3: "npm:^7.9.0"
     d3-cloud: "npm:^1.2.7"
     d3-sankey: "npm:^0.12.3"
-    eslint: "npm:^9.2.0"
-    publint: "npm:^0.2.7"
+    eslint: "npm:^9.3.0"
+    publint: "npm:^0.2.8"
     svelte: "npm:^4.2.17"
     svelte-check: "npm:^3.7.1"
     tslib: "npm:^2.6.2"
@@ -3053,9 +3053,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@eslint/eslintrc@npm:3.0.2"
+"@eslint/eslintrc@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@eslint/eslintrc@npm:3.1.0"
   dependencies:
     ajv: "npm:^6.12.4"
     debug: "npm:^4.3.2"
@@ -3066,7 +3066,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     minimatch: "npm:^3.1.2"
     strip-json-comments: "npm:^3.1.1"
-  checksum: 10c0/d8c92f06bdf8e2be9fcc0eeac4a9351745174adfcc72571ef3d179101cb55e19f15f6385c2a4f4945a3ba9245802d3371208e2e1e4f00f6bcf6b8711656af85a
+  checksum: 10c0/5b7332ed781edcfc98caa8dedbbb843abfb9bda2e86538529c843473f580e40c69eb894410eddc6702f487e9ee8f8cfa8df83213d43a8fdb549f23ce06699167
   languageName: node
   linkType: hard
 
@@ -3077,10 +3077,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.2.0":
-  version: 9.2.0
-  resolution: "@eslint/js@npm:9.2.0"
-  checksum: 10c0/89632466d329d9dd68c6ec24290e407f0950ca8c4b7f3750b82457daa7f6233799ccbc956cd84231f9544efbefddd69833ee82658883ca673cfca9e4b8e0713a
+"@eslint/js@npm:9.3.0":
+  version: 9.3.0
+  resolution: "@eslint/js@npm:9.3.0"
+  checksum: 10c0/1550c68922eb17c3ce541d9ffbb687e656bc0d4e2fff2d9cb0a75101a9cdb6184b7af7378ccf46c6ca750b280d25d45cc5e7374a83a4ee89d404d3717502fd9d
   languageName: node
   linkType: hard
 
@@ -3179,10 +3179,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/retry@npm:^0.2.3":
-  version: 0.2.4
-  resolution: "@humanwhocodes/retry@npm:0.2.4"
-  checksum: 10c0/d0e3fe9c353f97fea6a9d0a4022b0f8813d68b646c0fa99718ec703b085fd66dd84154d947670291914bc1ab2d1fe77f0093d99d3a5fe9f56eef65360e7c6c86
+"@humanwhocodes/retry@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@humanwhocodes/retry@npm:0.3.0"
+  checksum: 10c0/7111ec4e098b1a428459b4e3be5a5d2a13b02905f805a2468f4fa628d072f0de2da26a27d04f65ea2846f73ba51f4204661709f05bfccff645e3cedef8781bb6
   languageName: node
   linkType: hard
 
@@ -4421,9 +4421,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.5.8":
-  version: 2.5.8
-  resolution: "@sveltejs/kit@npm:2.5.8"
+"@sveltejs/kit@npm:^2.5.9":
+  version: 2.5.9
+  resolution: "@sveltejs/kit@npm:2.5.9"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^0.6.0"
@@ -4443,7 +4443,7 @@ __metadata:
     vite: ^5.0.3
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/515f24a68c542f3965046271ab5cbf36d69dc6d80f013aab17a0e68e72b938ff3c6a0c0a8389f96e4431df60f3f9dc2a49480d5f17a5b22a5e1c9d2203ae9fbe
+  checksum: 10c0/c23540b8922a6efa6e61aaf74b7863d289bd49c144f9a702ba04bd73bc5bc1e4d0bbad659e2478aca5423a434b05c32bc8c167b8f0c1f3776188467cb441c2b2
   languageName: node
   linkType: hard
 
@@ -9706,17 +9706,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "eslint@npm:9.2.0"
+"eslint@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "eslint@npm:9.3.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
-    "@eslint/eslintrc": "npm:^3.0.2"
-    "@eslint/js": "npm:9.2.0"
+    "@eslint/eslintrc": "npm:^3.1.0"
+    "@eslint/js": "npm:9.3.0"
     "@humanwhocodes/config-array": "npm:^0.13.0"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
-    "@humanwhocodes/retry": "npm:^0.2.3"
+    "@humanwhocodes/retry": "npm:^0.3.0"
     "@nodelib/fs.walk": "npm:^1.2.8"
     ajv: "npm:^6.12.4"
     chalk: "npm:^4.0.0"
@@ -9746,7 +9746,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/eab3265100a359a486e40e1d9d4d3ecff936d2f4d952f4ab107d404e0684fffbe186ecd0fb41791af5bcb13570a27032ddf9a2e628927ed33473f64255b0037b
+  checksum: 10c0/d0cf1923408ce720f2fa0dde39094dbee6b03a71d5e6466402bbeb29c08a618713f7a1e8cfc4b4d50dbe3750ce68adf614a0e973dea6fa36ddc428dfb89d4cac
   languageName: node
   linkType: hard
 
@@ -15359,16 +15359,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"publint@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "publint@npm:0.2.7"
+"publint@npm:^0.2.8":
+  version: 0.2.8
+  resolution: "publint@npm:0.2.8"
   dependencies:
     npm-packlist: "npm:^5.1.3"
-    picocolors: "npm:^1.0.0"
+    picocolors: "npm:^1.0.1"
     sade: "npm:^1.8.1"
   bin:
     publint: lib/cli.js
-  checksum: 10c0/dfa476c77c2644de6986ef94616780cc44398bbfe6f56a790aadbfa0ec9d41a136c8a0c5a0a999ceb8bcee0d5736c3e93a5f28662c515c47ad6eba03244edea0
+  checksum: 10c0/da4157b3039004d42b8f7df048236bbbf598919d8ddb2c9387b5c4ddaf1564d81e7ab3370ed039f00b784a0c6915d0dbb523fcd1817aa3738f77aac0b955153a
   languageName: node
   linkType: hard
 
