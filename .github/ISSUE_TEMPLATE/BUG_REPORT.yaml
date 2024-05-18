@@ -6,55 +6,71 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: input
-    id: name
+        Thanks for taking the time to fill out this bug report.
+  - type: checkboxes
+    id: packages
     attributes:
-      label: Application/Team
-      description: If you are from IBM, which application/team are you from?
+      label: Relevant package(s)
+      options:
+        - label: "@carbon/charts"
+        - label: "@carbon/charts-svelte"
+        - label: "@carbon/charts-react"
+        - label: "@carbon/charts-angular"
+        - label: "@carbon/charts-vue"
+        - label: "Documentation website"
+    validations:
+      required: true
+    - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 1.16.1
+    validations:
+      required: true
+      - type: dropdown
+    id: bundler
+    attributes:
+      label: Which bundler are you using?
+      options:
+        - None (UMD)
+        - Esbuild
+        - FuseBox
+        - Parcel
+        - Rollup
+        - Snowpack
+        - Webpack
+        - Vite
     validations:
       required: true
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
-    validations:
-      required: true
-  - type: textarea
-    id: version
-    attributes:
-      label: Version
-      description: What version of our packages are you using?
-      placeholder: e.g. `@carbon/charts@1.13.28`
+      label: What happened and what did you expect to happen?
+      description: Include steps to reproduce and environmental information
     validations:
       required: true
   - type: textarea
     id: data-options
     attributes:
-      label: Data & options used
-      description: Please provide examples of the data & options that you're using
+      label: Chart data and options (automatically formatted so no need for backticks)
+      description: Please provide both
       render: js
-  - type: textarea
+    - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: js
-  - type: input
-    id: sandbox
+      label: JavaScript console or build output (if relevant)
+      description: Automatically formatted so no need for backticks
+      render: shell
+    - type: input
+    id: repro
     attributes:
-      label: StackBlitz example
-      description: >
-        Do you have a repro for this issue?
-        
-        **Get started** using the StackBlitz examples at
-        https://carbon-design-system.github.io/carbon-charts/
+      label: StackBlitz repro
+      description: Get started with StackBlitz examples at https://charts.carbondesignsystem.com
       placeholder: https://www.stackblitz.com/...
-    validations:
-      required: false
+  - type: input
+    id: name
+    attributes:
+      label: IBM Application/Team (if relevant)
   - type: dropdown
     id: priority
     attributes:

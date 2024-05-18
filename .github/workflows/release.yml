@@ -45,10 +45,10 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
           npx lerna publish from-git --yes --force-publish
 
-      - name: Deploy demos and documentation to Github Pages 🚀
+      - name: Deploy documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
-          folder: pages # The folder the action should deploy.
-          clean: true # Automatically remove deleted files from the deploy branch
+          folder: pages # Folder containing documentation website
+          clean: true # Remove deleted files from the deploy branch

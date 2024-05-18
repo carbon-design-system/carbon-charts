@@ -1,12 +1,12 @@
-name: Feature request or enhancement 💡
-description: Suggest an idea for this project
+name: Feature request / enhancement 💡
+description: Suggest an idea for Carbon Charts
 title: "[Enhancement]: "
 labels: [enhancement]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thanks for taking the time to fill out this enhancement request.
   - type: input
     id: name
     attributes:
