@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.16.0",
+	"version": "1.16.1",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -14,7 +14,9 @@
 			"require": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
-		"./styles.css": "./dist/styles.css"
+		"./styles.min": "./dist/styles.min.css",
+		"./styles.css": "./dist/styles.css",
+		"./styles": "./dist/styles.css"
 	},
 	"files": [
 		"dist",

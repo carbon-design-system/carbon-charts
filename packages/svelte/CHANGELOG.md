@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.1 (2024-05-17)
+
+### Bug Fixes
+
+- Update package.json style export
+  ([#1824](https://github.com/carbon-design-system/carbon-charts/issues/1824))
+  ([2ccb12b](https://github.com/carbon-design-system/carbon-charts/commit/2ccb12bc021b231f43c9bf6d97b1983ce788c825))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.16.0 (2024-05-14)
 
 ### Features
