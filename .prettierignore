@@ -1,6 +1,7 @@
 # Root-level only
 .git
 .yarn
+.nx
 pages
 yarn.lock
 
