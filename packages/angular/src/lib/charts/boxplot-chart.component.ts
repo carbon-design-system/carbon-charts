@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	BoxplotChart as BoxplotChartCore,
-	type ChartTabularData,
-	type BoxplotChartOptions
-} from '@carbon/charts'
+import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `BoxplotChart` in carbon charts library
@@ -20,8 +16,8 @@ export class BoxplotChartComponent extends BaseChartComponent implements AfterVi
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new BoxplotChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new BoxplotChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as BoxplotChartOptions
 		})
 

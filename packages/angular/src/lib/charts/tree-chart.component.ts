@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	TreeChart as TreeChartCore,
-	type TreemapChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { TreeChart as TreeChartCore } from '@carbon/charts'
 
 /**
  * Wrapper around `TreeChart` in carbon charts library
@@ -20,9 +16,9 @@ export class TreeChartComponent extends BaseChartComponent implements AfterViewI
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new TreeChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
-			options: this.options as TreemapChartOptions
+		this.chart = new TreeChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
+			options: this.options
 		})
 
 		Object.assign(this, this.chart)
