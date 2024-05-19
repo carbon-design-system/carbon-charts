@@ -9,6 +9,8 @@ import sveltePlugin from 'eslint-plugin-svelte'
 import svelteParser from 'svelte-eslint-parser'
 import vuePlugin from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
 
 export default [
 	{
@@ -48,6 +50,24 @@ export default [
 			'@typescript-eslint/no-var-requires': 'off',
 			'@typescript-eslint/no-this-alias': 'off',
 			'@typescript-eslint/no-shadow': 'error'
+		}
+	},
+	{
+		files: ['packages/react/src/**/*.tsx', 'packages/docs/src/**/*.tsx'],
+		languageOptions: {
+			parser: tsParser,
+			parserOptions: {
+				project: 'packages/react/tsconfig.json'
+			}
+		},
+		plugins: {
+			react: reactPlugin,
+			'react-hooks': reactHooksPlugin
+		},
+		rules: {
+			...reactPlugin.configs.recommended.rules,
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': 'warn'
 		}
 	},
 	...vuePlugin.configs['flat/recommended'],
