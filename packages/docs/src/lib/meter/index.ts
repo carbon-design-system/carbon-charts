@@ -111,7 +111,7 @@ const propMeterTruncationOptions: MeterChartOptions = {
 			total: 2000,
 			unit: 'MB',
 			totalFormatter: (total: number) => `custom total string for: ${total}`,
-			breakdownFormatter: (x: any) =>
+			breakdownFormatter: (x: { datasetsTotal: number }) =>
 				`You are using ${x.datasetsTotal} GB of the space this label is really long will need to be truncated with a tooltip Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 		}
 	}

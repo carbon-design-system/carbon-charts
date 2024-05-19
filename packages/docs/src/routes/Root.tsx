@@ -23,7 +23,7 @@ export default function Root() {
 			setVersion(fetchedVersion)
 		}
 
-		getVersion()
+		getVersion().catch(error => console.error('Error in getVersion:', error))
 	}, [])
 
 	return (

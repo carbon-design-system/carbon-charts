@@ -355,24 +355,33 @@ const simpleBarTimeSeriesDenseOptions: BarChartOptions = {
 		left: {
 			mapsTo: 'value',
 			ticks: {
-				formatter: (tick: any) => tick.toLocaleString('tr-TR')
+				formatter: (tick: number | Date) => {
+					if (typeof tick === 'number') {
+						return tick.toLocaleString('tr-TR')
+					}
+					return tick.toString() // Fallback for Date type
+				}
 			}
 		},
 		bottom: {
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME,
 			ticks: {
-				formatter: (tick: any) =>
-					tick.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
+				formatter: (tick: number | Date) => {
+					if (tick instanceof Date) {
+						return tick.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' })
+					}
+					return tick.toString() // Fallback for number type
+				}
 			}
 		}
 	},
 	tooltip: {
-		valueFormatter: (value: any, category: string) => {
-			if (category == 'x-value')
+		valueFormatter: (value: number | Date, category: string) => {
+			if (category == 'x-value' && value instanceof Date)
 				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
-			if (category == 'y-value') return value.toLocaleString('tr-TR')
-			return value
+			if (category == 'y-value' && typeof value === 'number') return value.toLocaleString('tr-TR')
+			return value.toString()
 		}
 	},
 	bars: { maxWidth: 200 },

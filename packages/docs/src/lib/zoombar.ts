@@ -15,7 +15,9 @@ const dataZoomBar: ChartTabularData = [
 
 export const addZoomBarToOptions = (
 	options: AxisChartOptions,
-	configs: any = { includeDefinedZoomBarData: false }
+	configs: { includeDefinedZoomBarData: boolean; sliderView?: boolean } = {
+		includeDefinedZoomBarData: false
+	}
 ) => {
 	options['experimental'] = true
 	if (configs.includeDefinedZoomBarData) {

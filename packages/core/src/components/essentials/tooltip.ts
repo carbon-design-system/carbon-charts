@@ -192,7 +192,11 @@ export class Tooltip extends Component {
 		)
 	}
 
-	valueFormatter(value: any, label: string) {
+	isDate(value: any): value is Date {
+		return value instanceof Date
+	}
+
+	valueFormatter(value: number | Date, label: string) {
 		const options = this.getOptions()
 		const valueFormatter = getProperty(options, 'tooltip', 'valueFormatter')
 		const {
@@ -205,7 +209,7 @@ export class Tooltip extends Component {
 			return valueFormatter(value, label)
 		}
 
-		if (typeof value.getTime === 'function') {
+		if (this.isDate(value)) {
 			return dateFormatter(value, localeCode, { month: 'short', day: 'numeric', year: 'numeric' })
 		}
 
