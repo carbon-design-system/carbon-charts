@@ -52,11 +52,9 @@
 		"@vitejs/plugin-react": "^4.2.1",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
-		"d3": "^7.9.0",
-		"d3-cloud": "^1.2.7",
-		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"sass": "^1.77.2",
+		"eslint": "^9.3.0",
+		"prettier": "^3.2.5",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vite-plugin-dts": "^3.9.1"
