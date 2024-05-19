@@ -125,4 +125,4 @@ export {
 	ZoombarEvent,
 	ZoomDomainEvent,
 	ZoomBarTypes
- } from '@carbon/charts'
+} from '@carbon/charts'

@@ -8,9 +8,11 @@ import jsdoc from 'eslint-plugin-jsdoc'
 import sveltePlugin from 'eslint-plugin-svelte'
 import svelteParser from 'svelte-eslint-parser'
 import vuePlugin from 'eslint-plugin-vue'
+import vueParser from 'vue-eslint-parser'
 
 export default [
 	{
+		// global when it's the only property
 		ignores: [
 			// default already excludes node_modules and .git
 			'.yarn/',
@@ -21,7 +23,7 @@ export default [
 			'**/build/',
 			'**/dist/',
 			'**/LICENSE.md',
-			'**/carbon.yml' // something wrong with carbon.yml files
+			'**/carbon.yml'
 		]
 	},
 	{
@@ -50,12 +52,13 @@ export default [
 	},
 	...vuePlugin.configs['flat/recommended'],
 	{
-		files: ['**/*.vue'],
+		files: ['packages/vue/src/components/**/*.vue'],
 		languageOptions: {
-			parser: tsParser,
+			parser: vueParser,
 			parserOptions: {
+				parser: tsParser,
 				extraFileExtensions: ['.vue'],
-				project: './tsconfig.json'
+				project: 'packages/vue/tsconfig.vite.json'
 			}
 		},
 		plugins: {
@@ -67,7 +70,7 @@ export default [
 	},
 	...sveltePlugin.configs['flat/prettier'],
 	{
-		files: ['**/*.svelte', '*.svelte'],
+		files: ['packages/svelte/src/**/*.svelte'],
 		languageOptions: {
 			parser: svelteParser,
 			parserOptions: {
@@ -76,14 +79,22 @@ export default [
 		}
 	},
 	{
+		// Improve typedoc output for docs website
+		files: ['packages/core/src/**/*.ts'],
 		plugins: {
-			jsdoc,
-			prettier: eslintPluginPrettier
+			jsdoc
 		},
 		rules: {
 			'jsdoc/require-description': 'warn',
-			'jsdoc/check-values': 'warn',
-			'prettier/prettier': 'error'
+			'jsdoc/check-values': 'warn'
+		}
+	},
+	{
+		plugins: {
+			prettier: eslintPluginPrettier
+		},
+		rules: {
+			'prettier/prettier': 'warn'
 		}
 	},
 	eslintConfigPrettier
