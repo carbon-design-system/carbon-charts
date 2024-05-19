@@ -1,6 +1,6 @@
 import { type AreaChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-react'
 import { addZoomBarToOptions } from '../zoombar'
-import { AxisChartOptions } from '@carbon/charts'
+import type { AxisChartOptions } from '@carbon/charts'
 import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'AreaChart'
