@@ -17,9 +17,9 @@
 		"build": "ng build -c production && yarn postbundle",
 		"build:test": "ng build charts-angular-test",
 		"dev": "ng serve",
-		"lint:angular": "ng lint --ignore-path ../../.eslintignore",
-		"lint": "eslint . --ignore-path ../../.eslintignore",
-		"format": "prettier --write src/ --ignore-path ../../.eslintignore"
+		"lint:angular": "ng lint --ignore-path ../../.prettierignore",
+		"lint": "eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
 		"@angular/common": "^16.0.0 || ^17.0.0",

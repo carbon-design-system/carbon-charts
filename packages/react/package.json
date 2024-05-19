@@ -18,6 +18,7 @@
 		"./styles.css": "./dist/styles.css",
 		"./styles": "./dist/styles.css"
 	},
+	"styles": "./dist/styles.css",
 	"files": [
 		"dist",
 		"README.md",
@@ -31,8 +32,8 @@
 		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite",
-		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore"
+		"lint": "eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
@@ -66,7 +67,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/react/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

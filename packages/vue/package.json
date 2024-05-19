@@ -5,6 +5,7 @@
 	"type": "module",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
+	"styles": "./dist/styles.css",
 	"exports": {
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css",
@@ -25,8 +26,8 @@
 		"build": "vite build && yarn file:styles",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite",
-		"lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
-		"format": "prettier --write src/ --ignore-path ../../.eslintignore"
+		"lint": "eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
 		"vue": "^3.4.0"
@@ -42,6 +43,8 @@
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
+		"eslint": "^9.3.0",
+		"prettier": "^3.2.5",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vite-plugin-dts": "^3.9.1",
@@ -54,7 +57,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/vue/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

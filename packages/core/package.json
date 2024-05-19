@@ -61,8 +61,8 @@
 		"dev": "vite",
 		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
-		"lint": "eslint . --ext .js,.cjs,.mjs,.ts --fix --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,mjs,cjs,md}\" --ignore-path ../../.eslintignore"
+		"lint": "eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"repository": {
 		"type": "git",
@@ -110,6 +110,7 @@
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
+		"eslint": "^9.3.0",
 		"jsdom": "^24.0.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.77.2",
