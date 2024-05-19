@@ -23,17 +23,15 @@ export default function CirclePack() {
 				Common applications of Circle Pack Charts include visualizing corporate structures,
 				biological classifications, or website structures. These charts are useful in any field
 				where understanding the composition and relationships within a large, complex set of data is
-				crucial. The compact and encapsulated format of Circle Pack Charts not only saves space
-				but also enhances the viewer's ability to detect patterns and anomalies across different
-				levels of data. Overall, Circle Pack Charts provide a unique and intuitive way to explore
-				and present nested data visually.
+				crucial. The compact and encapsulated format of Circle Pack Charts not only saves space but
+				also enhances the viewer's ability to detect patterns and anomalies across different levels
+				of data. Overall, Circle Pack Charts provide a unique and intuitive way to explore and
+				present nested data visually.
 			</p>
 
 			<p>
 				Details on Circle Pack chart options can be found{' '}
-				<a
-					href="/api/interfaces/interfaces.CirclePackChartOptions.html"
-					target="_blank">
+				<a href="/api/interfaces/interfaces.CirclePackChartOptions.html" target="_blank">
 					here
 				</a>
 				.

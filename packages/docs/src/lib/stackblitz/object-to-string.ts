@@ -11,7 +11,7 @@ export function objectToString(
 	if (Array.isArray(obj)) {
 		str += '[\n'
 
-		obj.forEach((item: any, index: number) => {
+		obj.forEach((item: any[] | GenericObject | Date, index: number) => {
 			str += padding + '  ' + objectToString(item, indent + 1, false)
 			if (index < obj.length - 1) str += ','
 			str += '\n'

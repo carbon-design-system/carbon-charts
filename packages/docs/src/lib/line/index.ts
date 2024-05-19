@@ -1,4 +1,11 @@
-import { type LineChartOptions, type ChartTabularData, ScaleTypes, LegendPositions, LegendOrientations, TickRotations } from '@carbon/charts'
+import {
+	type LineChartOptions,
+	type ChartTabularData,
+	ScaleTypes,
+	LegendPositions,
+	LegendOrientations,
+	TickRotations
+} from '@carbon/charts'
 import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'LineChart'
@@ -489,60 +496,60 @@ const lineTimeSeriesDualAxesData: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options: lineCustomDomainOptions,
-    data: lineData
-  },
-  {
-    options: lineTimeSeriesRotatedTicksOptions,
-    data: lineTimeSeriesDataRotatedTicks
-  },
-  {
-    options: lineLogAxisOptions,
-    data: lineLogAxisData
-  },
-  {
-    options: lineCustomColorOptions,
-    data: lineData
-  },
-  {
-    options: lineSelectedGroupsOptions,
-    data: lineSelectedGroupsData
-  },
-  {
-    options: lineOptionsLegendOrientation,
-    data: lineData
-  },
-  {
-    options: lineTimeSeriesWithThresholdsOptions,
-    data: lineTimeSeriesData
-  },
-  {
-    options: lineLongLabelOptions,
-    data: lineLongLabelData
-  },
-  {
-    options: lineOptions,
-    data: lineData
-  },
-  {
-    options: lineTimeSeriesOptions,
-    data: lineTimeSeriesData
-  },
-  {
-    options: lineTimeSeriesDenseOptions,
-    data: lineTimeSeriesDenseData
-  },
-  {
-    options: dualLine,
-    data: lineTimeSeriesDualAxesData
-  },
-  {
-    options: lineEmptyStateOptions,
-    data: lineEmptyStateData
-  },
-  {
-    options: lineSkeletonOptions,
-    data: lineSkeletonData
-  }
+	{
+		options: lineCustomDomainOptions,
+		data: lineData
+	},
+	{
+		options: lineTimeSeriesRotatedTicksOptions,
+		data: lineTimeSeriesDataRotatedTicks
+	},
+	{
+		options: lineLogAxisOptions,
+		data: lineLogAxisData
+	},
+	{
+		options: lineCustomColorOptions,
+		data: lineData
+	},
+	{
+		options: lineSelectedGroupsOptions,
+		data: lineSelectedGroupsData
+	},
+	{
+		options: lineOptionsLegendOrientation,
+		data: lineData
+	},
+	{
+		options: lineTimeSeriesWithThresholdsOptions,
+		data: lineTimeSeriesData
+	},
+	{
+		options: lineLongLabelOptions,
+		data: lineLongLabelData
+	},
+	{
+		options: lineOptions,
+		data: lineData
+	},
+	{
+		options: lineTimeSeriesOptions,
+		data: lineTimeSeriesData
+	},
+	{
+		options: lineTimeSeriesDenseOptions,
+		data: lineTimeSeriesDenseData
+	},
+	{
+		options: dualLine,
+		data: lineTimeSeriesDualAxesData
+	},
+	{
+		options: lineEmptyStateOptions,
+		data: lineEmptyStateData
+	},
+	{
+		options: lineSkeletonOptions,
+		data: lineSkeletonData
+	}
 ]

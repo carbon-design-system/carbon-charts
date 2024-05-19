@@ -54,16 +54,16 @@ const gaugeData: ChartTabularData = [
 const gaugeDataNoDelta = [{ group: 'value', value: 67 }]
 
 export const examples: Example[] = [
-  {
-    options: gaugeOptionsSemi,
-    data: gaugeData
-  },
-  {
-    options: gaugeOptionsCircular,
-    data: gaugeData
-  },
-  {
-    options: gaugeOptionsCircularNoDelta,
-    data: gaugeDataNoDelta
-  }
+	{
+		options: gaugeOptionsSemi,
+		data: gaugeData
+	},
+	{
+		options: gaugeOptionsCircular,
+		data: gaugeData
+	},
+	{
+		options: gaugeOptionsCircularNoDelta,
+		data: gaugeDataNoDelta
+	}
 ]

@@ -1,6 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { SideNav, SideNavItems, SideNavMenu, SideNavMenuItem, SideNavDivider } from '@carbon/react/es'
+import {
+	SideNav,
+	SideNavItems,
+	SideNavMenu,
+	SideNavMenuItem,
+	SideNavDivider
+} from '@carbon/react/es'
 
 interface Props {
 	isSideNavExpanded: boolean

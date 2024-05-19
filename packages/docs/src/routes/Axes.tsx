@@ -102,7 +102,7 @@ const options = {
 				/>
 			</p>
 			Please see the{' '}
-			<Link to="https://carbondesignsystem.com/data-visualization/axes-and-labels/" target='_blank'>
+			<Link to="https://carbondesignsystem.com/data-visualization/axes-and-labels/" target="_blank">
 				Axes and labels
 			</Link>{' '}
 			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for

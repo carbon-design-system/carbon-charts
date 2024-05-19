@@ -617,52 +617,52 @@ const comboAreaLineTimeSeriesData: ChartTabularData = [
 const comboHorizontalData = comboSimpleData
 
 export const examples: Example[] = [
-  {
-    options: comboSimpleOptions,
-    data: comboSimpleData
-  },
-  {
-    options: comboStackedOptions,
-    data: comboStackedData
-  },
-  {
-    options: comboGroupedOptions,
-    data: comboGroupedData
-  },
-  {
-    options: comboSimpleFloatingOptions,
-    data: comboSimpleFloatingData
-  },
-  {
-    options: comboGroupedHorizontalOptions,
-    data: comboGroupedHorizontalData
-  },
-  {
-    options: comboHorizontalOptions,
-    data: comboHorizontalData
-  },
-  {
-    options: comboAreaLineOptions,
-    data: comboAreaLineData
-  },
-  {
-    options: comboStackedAreaLineOptions,
-    data: comboStackedAreaLine
-  },
-  {
-    options: comboLineScatterOptions,
-    data: comboLineScatterData
-  },
-  {
-    options: comboAreaLineTimeSeriesOptions,
-    data: comboAreaLineTimeSeriesData
-  },
-  {
-    options: comboEmptyOptions,
-    data: comboEmptyData
-  },
-  {
-    options: comboLoadingOptions,
-    data: comboLoadingData
-  }
+	{
+		options: comboSimpleOptions,
+		data: comboSimpleData
+	},
+	{
+		options: comboStackedOptions,
+		data: comboStackedData
+	},
+	{
+		options: comboGroupedOptions,
+		data: comboGroupedData
+	},
+	{
+		options: comboSimpleFloatingOptions,
+		data: comboSimpleFloatingData
+	},
+	{
+		options: comboGroupedHorizontalOptions,
+		data: comboGroupedHorizontalData
+	},
+	{
+		options: comboHorizontalOptions,
+		data: comboHorizontalData
+	},
+	{
+		options: comboAreaLineOptions,
+		data: comboAreaLineData
+	},
+	{
+		options: comboStackedAreaLineOptions,
+		data: comboStackedAreaLine
+	},
+	{
+		options: comboLineScatterOptions,
+		data: comboLineScatterData
+	},
+	{
+		options: comboAreaLineTimeSeriesOptions,
+		data: comboAreaLineTimeSeriesData
+	},
+	{
+		options: comboEmptyOptions,
+		data: comboEmptyData
+	},
+	{
+		options: comboLoadingOptions,
+		data: comboLoadingData
+	}
 ]

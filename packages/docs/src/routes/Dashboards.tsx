@@ -6,7 +6,7 @@ export default function Dashboards() {
 		<>
 			<PageHeader title="Dashboards" />
 			Please see the{' '}
-			<Link to="https://carbondesignsystem.com/data-visualization/dashboards/" target='_blank'>
+			<Link to="https://carbondesignsystem.com/data-visualization/dashboards/" target="_blank">
 				Dashboards
 			</Link>{' '}
 			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for

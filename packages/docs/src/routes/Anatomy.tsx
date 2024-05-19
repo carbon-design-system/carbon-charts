@@ -7,14 +7,12 @@ export default function Anatomy() {
 	return (
 		<>
 			<PageHeader title="Chart anatomy" />
-
 			Please see the{' '}
-			<Link to="https://carbondesignsystem.com/data-visualization/chart-anatomy/" target='_blank'>
+			<Link to="https://carbondesignsystem.com/data-visualization/chart-anatomy/" target="_blank">
 				Charts anatomy
 			</Link>{' '}
 			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
 			more details.
-
 			{/* <h2>Rectangular Charts</h2>
 
 			<p>

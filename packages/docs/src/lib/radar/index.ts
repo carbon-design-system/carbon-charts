@@ -62,7 +62,6 @@ const radarDenseOptions: RadarChartOptions = {
 	height: '400px'
 }
 
-
 const radarData: ChartTabularData = [
 	{ product: 'Product 1', feature: 'Price', score: 60 },
 	{ product: 'Product 1', feature: 'Usability', score: 92 },
@@ -137,20 +136,20 @@ const radarDenseData: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    data: radarData,
-    options: radarOptions
-  },
-  {
-    data: radarData,
-    options: radarCenteredOptions
-  },
-  {
-    data: radarWithMissingDataData,
-    options: radarWithMissingDataOptions
-  },
-  {
-    data: radarDenseData,
-    options: radarDenseOptions
-  }
+	{
+		data: radarData,
+		options: radarOptions
+	},
+	{
+		data: radarData,
+		options: radarCenteredOptions
+	},
+	{
+		data: radarWithMissingDataData,
+		options: radarWithMissingDataOptions
+	},
+	{
+		data: radarDenseData,
+		options: radarDenseOptions
+	}
 ]

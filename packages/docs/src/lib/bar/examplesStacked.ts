@@ -73,7 +73,6 @@ const stackedBarShortIntervalTimeSeriesOptions: BarChartOptions = {
 	height: '400px'
 }
 
-
 const stackedBarTimeSeriesOptionsCustomTicks: BarChartOptions = {
 	title: 'Custom ticks (stacked bar)',
 	axes: {
@@ -265,49 +264,48 @@ const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData
 const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData
 
 export const examplesStacked: Example[] = [
-  {
-    options: stackedBarOptions,
-    data: stackedBarData
-  },
-  {
-    options: stackedBarNegativeOptions,
-    data: stackedBarNegativeData
-  },
-  {
-    options: stackedBarTimeSeriesOptions,
-    data: stackedBarTimeSeriesData
-  },
-  {
-    options: stackedBarShortIntervalTimeSeriesOptions,
-    data: stackedBarShortIntervalTimeSeriesData
-  },
-  {
-    options: stackedBarEmptyStateOptions,
-    data: stackedBarEmptyStateData
-  },
-  {
-    options: stackedBarSkeletonOptions,
-    data: stackedBarSkeletonData
-  },
-  {
-    options: stackedHorizontalBarOptions,
-    data: stackedHorizontalBarData
-  },
-  {
-    options: stackedHorizontalBarTimeSeriesOptions,
-    data: stackedHorizontalBarTimeSeriesData
-  },
-  {
-    options: stackedHorizontalBarEmptyStateOptions,
-    data: stackedHorizontalBarEmptyStateData
-  },
-  {
-    options: stackedHorizontalBarSkeletonOptions,
-    data: stackedHorizontalBarSkeletonData
-  },
-  {
-    data: stackedBarTimeSeriesDataCustomTicks,
-    options: stackedBarTimeSeriesOptionsCustomTicks
-  },
-  
+	{
+		options: stackedBarOptions,
+		data: stackedBarData
+	},
+	{
+		options: stackedBarNegativeOptions,
+		data: stackedBarNegativeData
+	},
+	{
+		options: stackedBarTimeSeriesOptions,
+		data: stackedBarTimeSeriesData
+	},
+	{
+		options: stackedBarShortIntervalTimeSeriesOptions,
+		data: stackedBarShortIntervalTimeSeriesData
+	},
+	{
+		options: stackedBarEmptyStateOptions,
+		data: stackedBarEmptyStateData
+	},
+	{
+		options: stackedBarSkeletonOptions,
+		data: stackedBarSkeletonData
+	},
+	{
+		options: stackedHorizontalBarOptions,
+		data: stackedHorizontalBarData
+	},
+	{
+		options: stackedHorizontalBarTimeSeriesOptions,
+		data: stackedHorizontalBarTimeSeriesData
+	},
+	{
+		options: stackedHorizontalBarEmptyStateOptions,
+		data: stackedHorizontalBarEmptyStateData
+	},
+	{
+		options: stackedHorizontalBarSkeletonOptions,
+		data: stackedHorizontalBarSkeletonData
+	},
+	{
+		data: stackedBarTimeSeriesDataCustomTicks,
+		options: stackedBarTimeSeriesOptionsCustomTicks
+	}
 ]

@@ -574,112 +574,112 @@ const floatingHorizontalBarData: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options: simpleBarOptions,
-    data: simpleBarData
-  },
-  {
-    options: simpleBarTimeSeriesOptions,
-    data: simpleBarTimeSeriesData
-  },
-  {
-    options: simpleBarTimeSeriesDenseOptions,
-    data: simpleBarTimeSeriesDenseData
-  },
-  {
-    options: simpleBarSkeletonOptions,
-    data: noData
-  },
-  {
-    options: simpleBarEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: simpleHorizontalBarOptions,
-    data: simpleHorizontalBarData
-  },
-  {
-    options: simpleHorizontalBarTimeSeriesOptions,
-    data: simpleHorizontalBarTimeSeriesData
-  },
-  // {
-  //   options: simpleHorizontalBarEmptyStateOptions,
-  //   data: noData
-  // },
-  // {
-  //   options: simpleHorizontalBarSkeletonOptions,
-  //   data: noData
-  // },
-  {
-    options: floatingHorizontalBarTimeSeriesOptions,
-    data: floatingHorizontalBarTimeSeriesData
-  },
-  {
-    options: floatingBarOptions,
-    data: floatingBarData
-  },
-  {
-    options: floatingHorizontalBarOptions,
-    data: floatingHorizontalBarData
-  },
+	{
+		options: simpleBarOptions,
+		data: simpleBarData
+	},
+	{
+		options: simpleBarTimeSeriesOptions,
+		data: simpleBarTimeSeriesData
+	},
+	{
+		options: simpleBarTimeSeriesDenseOptions,
+		data: simpleBarTimeSeriesDenseData
+	},
+	{
+		options: simpleBarSkeletonOptions,
+		data: noData
+	},
+	{
+		options: simpleBarEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: simpleHorizontalBarOptions,
+		data: simpleHorizontalBarData
+	},
+	{
+		options: simpleHorizontalBarTimeSeriesOptions,
+		data: simpleHorizontalBarTimeSeriesData
+	},
+	// {
+	//   options: simpleHorizontalBarEmptyStateOptions,
+	//   data: noData
+	// },
+	// {
+	//   options: simpleHorizontalBarSkeletonOptions,
+	//   data: noData
+	// },
+	{
+		options: floatingHorizontalBarTimeSeriesOptions,
+		data: floatingHorizontalBarTimeSeriesData
+	},
+	{
+		options: floatingBarOptions,
+		data: floatingBarData
+	},
+	{
+		options: floatingHorizontalBarOptions,
+		data: floatingHorizontalBarData
+	},
 	{
 		data: simpleBarDataCustomTicks,
 		options: simpleBarOptionsCustomTicks
 	},
-  {
-    data: simpleBarData,
-    options: simpleBarFixedDomainOptions
-  },
-  {
-    data: simpleBarData,
-    options: simpleBarColorOverrideOptions
-  },
-  {
-    data: simpleBarCenteredLegendData,
-    options: simpleBarCenteredLegendOptions
-  },
-  {
-    data: simpleBarData,
-    options: simpleBarCustomLegendOrderOptions
-  },
-  {
-    options: simpleBarAdditionalLegendItemsOptions,
-    data: simpleBarData
-  },
-  // {
-  //   options: simpleBarTurkishLocaleOptions,
-  //   data: simpleBarLocaleData
-  // },
-  // {
-  //   options: simpleBarArabicLocaleOptions,
-  //   data: simpleBarLocaleData
-  // },
-  // {
-  //   options: simpleBarIranianLocaleOptions,
-  //   data: simpleBarLocaleData
-  // },
-  {
-    options: simpleBarJapaneseLocaleOptions,
-    data: simpleBarLocaleData
-  },
-  // {
-  //   options: simpleBarHindiLocaleOptions,
-  //   data: simpleBarLocaleData
-  // },
-  // {
-  //   options: simpleBarBanglaLocaleOptions,
-  //   data: simpleBarLocaleData
-  // },
-  {
-    options: simpleHorizontalBarLongLabelOptions,
-    data: simpleHorizontalBarLongLabelData
-  },
-  {
-    options: simpleHorizontalBarEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: simpleHorizontalBarSkeletonOptions,
-    data: noData
-  }
+	{
+		data: simpleBarData,
+		options: simpleBarFixedDomainOptions
+	},
+	{
+		data: simpleBarData,
+		options: simpleBarColorOverrideOptions
+	},
+	{
+		data: simpleBarCenteredLegendData,
+		options: simpleBarCenteredLegendOptions
+	},
+	{
+		data: simpleBarData,
+		options: simpleBarCustomLegendOrderOptions
+	},
+	{
+		options: simpleBarAdditionalLegendItemsOptions,
+		data: simpleBarData
+	},
+	// {
+	//   options: simpleBarTurkishLocaleOptions,
+	//   data: simpleBarLocaleData
+	// },
+	// {
+	//   options: simpleBarArabicLocaleOptions,
+	//   data: simpleBarLocaleData
+	// },
+	// {
+	//   options: simpleBarIranianLocaleOptions,
+	//   data: simpleBarLocaleData
+	// },
+	{
+		options: simpleBarJapaneseLocaleOptions,
+		data: simpleBarLocaleData
+	},
+	// {
+	//   options: simpleBarHindiLocaleOptions,
+	//   data: simpleBarLocaleData
+	// },
+	// {
+	//   options: simpleBarBanglaLocaleOptions,
+	//   data: simpleBarLocaleData
+	// },
+	{
+		options: simpleHorizontalBarLongLabelOptions,
+		data: simpleHorizontalBarLongLabelData
+	},
+	{
+		options: simpleHorizontalBarEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: simpleHorizontalBarSkeletonOptions,
+		data: noData
+	}
 ]

@@ -234,8 +234,8 @@ export default function Diagram() {
 							An SVG group (g) element representing a connecting line typically between CardNodes.
 							Properties: color, markerStart (name of marker style), markerEnd, source
 							(Coordinates), target (Coordinates), path (SVG path) and variant ( 'dash-sm' |
-							'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'). Manipulation of the path property
-							enables elbows and bezier curves.
+							'dash-md' | 'dash-lg' | 'dash-xl' | 'double' | 'tunnel'). Manipulation of the path
+							property enables elbows and bezier curves.
 							<br />
 							<svg height="260" width="800">
 								<g transform="translate(16,16)">

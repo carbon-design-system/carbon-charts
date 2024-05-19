@@ -30,9 +30,7 @@ export default function Treemap() {
 
 			<p>
 				Details on Treemap Chart options can be found{' '}
-				<a
-					href="/api/interfaces/interfaces.TreemapChartOptions.html"
-					target="_blank">
+				<a href="/api/interfaces/interfaces.TreemapChartOptions.html" target="_blank">
 					here
 				</a>
 				.

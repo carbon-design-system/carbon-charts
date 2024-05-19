@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import sdk from '@stackblitz/sdk'
 import type { EmbedOptions } from '@stackblitz/sdk'
-import type { ChartOptions, ChartTabularData } from '@carbon/charts'
+import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
 import { getProject } from '../lib/stackblitz'
 import type { Framework } from '../lib/types'
 
@@ -28,7 +28,7 @@ const CodeSample: React.FC<Props> = ({ framework, chartType, data, options }) =>
 			}
 		}
 
-		embedProject()
+		embedProject().catch(error => console.error('Error in embedProject:', error))
 	}, [framework, chartType, data, options])
 
 	return <div ref={ref}></div>

@@ -26,9 +26,7 @@ export default function Scatter() {
 
 			<p>
 				Details on Scatter Chart options can be found{' '}
-				<a
-					href="/api/interfaces/interfaces.ScatterChartOptions.html"
-					target="_blank">
+				<a href="/api/interfaces/interfaces.ScatterChartOptions.html" target="_blank">
 					here
 				</a>
 				.

@@ -52,12 +52,12 @@ const lollipopDiscreteData: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options: lollipopDiscreteOptions,
-    data: lollipopDiscreteData
-  },
-  {
-    options: lollipopDiscretePresentationOptions,
-    data: lollipopDiscreteData
-  }
+	{
+		options: lollipopDiscreteOptions,
+		data: lollipopDiscreteData
+	},
+	{
+		options: lollipopDiscretePresentationOptions,
+		data: lollipopDiscreteData
+	}
 ]

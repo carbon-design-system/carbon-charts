@@ -114,7 +114,6 @@ const groupedBarSkeletonOptions: BarChartOptions = {
 	height: '400px'
 }
 
-
 // grouped horizontal bar - empty state
 const groupedHorizontalBarEmptyStateOptions: BarChartOptions = {
 	title: 'Horizontal grouped bar (empty state)',
@@ -260,44 +259,44 @@ const groupedHorizontalBarData: ChartTabularData = groupedBarData
 const noData: ChartTabularData = []
 
 export const examplesGrouped: Example[] = [
-  {
-    options: groupedBarSelectedGroupsOptions,
-    data: groupedBarSelectedGroupsData
-  },
-  {
-    options: groupedBarOptions,
-    data: groupedBarData
-  },
-  {
-    options: groupedBarTimeSeriesOptions,
-    data: groupedBarTimeSeriesData
-  },
-  {
-    options: groupedBarTimeSeriesDenseOptions,
-    data: groupedBarTimeSeriesDenseData
-  },
-  {
-    options: groupedBarEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: groupedBarSkeletonOptions,
-    data: noData
-  },
-  {
-    options: groupedHorizontalBarOptions,
-    data: groupedHorizontalBarData
-  },
-  {
-    options: groupedBarHorizontalTimeSeriesOptions,
-    data: groupedBarTimeSeriesData
-  },
-  {
-    options: groupedHorizontalBarEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: groupedHorizontalBarSkeletonOptions,
-    data: noData
-  }
+	{
+		options: groupedBarSelectedGroupsOptions,
+		data: groupedBarSelectedGroupsData
+	},
+	{
+		options: groupedBarOptions,
+		data: groupedBarData
+	},
+	{
+		options: groupedBarTimeSeriesOptions,
+		data: groupedBarTimeSeriesData
+	},
+	{
+		options: groupedBarTimeSeriesDenseOptions,
+		data: groupedBarTimeSeriesDenseData
+	},
+	{
+		options: groupedBarEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: groupedBarSkeletonOptions,
+		data: noData
+	},
+	{
+		options: groupedHorizontalBarOptions,
+		data: groupedHorizontalBarData
+	},
+	{
+		options: groupedBarHorizontalTimeSeriesOptions,
+		data: groupedBarTimeSeriesData
+	},
+	{
+		options: groupedHorizontalBarEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: groupedHorizontalBarSkeletonOptions,
+		data: noData
+	}
 ]

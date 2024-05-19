@@ -23,9 +23,7 @@ export default function Donut() {
 
 			<p>
 				Details on Donut chart options can be found{' '}
-				<a
-					href="/api/interfaces/interfaces.DonutChartOptions.html"
-					target="_blank">
+				<a href="/api/interfaces/interfaces.DonutChartOptions.html" target="_blank">
 					here
 				</a>
 				.

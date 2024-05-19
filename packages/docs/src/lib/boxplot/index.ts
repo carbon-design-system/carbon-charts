@@ -22,7 +22,7 @@ const optionsHorizontal: BoxplotChartOptions = {
 			mapsTo: 'group'
 		}
 	},
-  height: '400px'
+	height: '400px'
 }
 
 const optionsVertical: BoxplotChartOptions = {
@@ -36,7 +36,7 @@ const optionsVertical: BoxplotChartOptions = {
 			mapsTo: 'group'
 		}
 	},
-  height: '400px'
+	height: '400px'
 }
 
 const data: ChartTabularData = [
@@ -63,12 +63,12 @@ const data: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options: optionsHorizontal,
-    data
-  },
-  {
-    options: optionsVertical,
-    data
-  }
+	{
+		options: optionsHorizontal,
+		data
+	},
+	{
+		options: optionsVertical,
+		data
+	}
 ]

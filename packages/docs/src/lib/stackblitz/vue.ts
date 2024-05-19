@@ -19,7 +19,7 @@ export function getVueProject(
 	const devDependencies: Record<string, string> = {
 		'@vitejs/plugin-vue': version.vueVitePlugin,
 		typescript: version.typescript,
-		vite: version.vite, 
+		vite: version.vite,
 		'vue-tsc': version.vueTsc
 	}
 
@@ -112,8 +112,8 @@ app.mount('#app')
 		"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
 		"references": [{ "path": "./tsconfig.node.json" }]
 	}`
-	
-		const tsConfigNodeJson = `{
+
+	const tsConfigNodeJson = `{
 			"compilerOptions": {
 				"composite": true,
 				"skipLibCheck": true,
@@ -123,8 +123,8 @@ app.mount('#app')
 			},
 			"include": ["vite.config.ts"]
 	}`
-	
-		const viteConfigTs = `import { defineConfig } from 'vite'
+
+	const viteConfigTs = `import { defineConfig } from 'vite'
 		import { fileURLToPath } from 'url'
 		import vue from '@vitejs/plugin-vue'
 		

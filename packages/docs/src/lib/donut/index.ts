@@ -72,27 +72,27 @@ const donutSkeletonOptions: DonutChartOptions = {
 	height: '400px'
 }
 
-const noData: ChartTabularData= []
+const noData: ChartTabularData = []
 
 export const examples: Example[] = [
-  {
-    options: donutOptions,
-    data: pieData
-  },
-  {
-    options: donutCenteredOptions,
-    data: pieData
-  },
-  {
-    options: donutMapsToOptions,
-    data: pieDataMapsTo
-  },
-  {
-    options: donutEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: donutSkeletonOptions,
-    data: noData
-  }
+	{
+		options: donutOptions,
+		data: pieData
+	},
+	{
+		options: donutCenteredOptions,
+		data: pieData
+	},
+	{
+		options: donutMapsToOptions,
+		data: pieDataMapsTo
+	},
+	{
+		options: donutEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: donutSkeletonOptions,
+		data: noData
+	}
 ]

@@ -68,8 +68,8 @@ const data: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options,
-    data
-  }
+	{
+		options,
+		data
+	}
 ]

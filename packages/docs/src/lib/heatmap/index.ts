@@ -28,7 +28,7 @@ const heatmapOptions: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
 	},
-  height: '400px'
+	height: '400px'
 }
 
 const heatmapQuantizeLegendOption: HeatmapChartOptions = {
@@ -48,7 +48,7 @@ const heatmapQuantizeLegendOption: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title', type: 'quantize' }
 	},
-  height: '400px'
+	height: '400px'
 }
 
 const heatmapPositiveNegativeOptions = Object.assign({}, heatmapOptions, {

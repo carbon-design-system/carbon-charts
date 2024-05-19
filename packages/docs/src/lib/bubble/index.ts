@@ -228,28 +228,28 @@ const bubbleDualDiscreteData: ChartTabularData = [
 ]
 
 export const examples: Example[] = [
-  {
-    options: bubbleDoubleLinearOptions,
-    data: bubbleDoubleLinearData
-  },
-  {
-    options: bubbleTimeSeriesOptions,
-    data: bubbleTimeSeriesData
-  },
-  {
-    options: bubbleDiscreteOptions,
-    data: bubbleDiscreteData
-  },
-  {
-    options: bubbleDualDiscreteOptions,
-    data: bubbleDualDiscreteData
-  },
-  {
-    options: bubbleEmptyStateOptions,
-    data: noData
-  },
-  {
-    options: bubbleSkeletonOptions,
-    data: noData
-  }
+	{
+		options: bubbleDoubleLinearOptions,
+		data: bubbleDoubleLinearData
+	},
+	{
+		options: bubbleTimeSeriesOptions,
+		data: bubbleTimeSeriesData
+	},
+	{
+		options: bubbleDiscreteOptions,
+		data: bubbleDiscreteData
+	},
+	{
+		options: bubbleDualDiscreteOptions,
+		data: bubbleDualDiscreteData
+	},
+	{
+		options: bubbleEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: bubbleSkeletonOptions,
+		data: noData
+	}
 ]

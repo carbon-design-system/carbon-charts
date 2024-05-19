@@ -17,16 +17,14 @@ export default function Meter() {
 				represented by the line. This type of meter chart is commonly used to display values such as
 				progress towards a goal, satisfaction scores, or performance metrics. It offers a simple and
 				intuitive way to assess where a value stands in relation to predefined benchmarks or
-				targets. Meter Charts are frequently employed in dashboard design,
-				reporting, and monitoring systems to provide stakeholders with a quick and
-				easy-to-understand snapshot of key metrics or indicators.
+				targets. Meter Charts are frequently employed in dashboard design, reporting, and monitoring
+				systems to provide stakeholders with a quick and easy-to-understand snapshot of key metrics
+				or indicators.
 			</p>
 
 			<p>
 				Details on Meter Chart options can be found{' '}
-				<a
-					href="/api/interfaces/interfaces.MeterChartOptions.html"
-					target="_blank">
+				<a href="/api/interfaces/interfaces.MeterChartOptions.html" target="_blank">
 					here
 				</a>
 				.

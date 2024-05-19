@@ -249,30 +249,29 @@ const circlePackThreeLevelsMonochromeData: ChartTabularData = [
 	}
 ]
 
-
 export const examples: Example[] = [
-  {
-    options: circlePackTwoLevelCustomColorsOptions,
-    data: circlePackTwoLevelData
-  },
-  {
-    data: circlePackSingleLevelData,
-    options: circlePackSingleOptions
-  },
-  {
-    data: circlePackTwoLevelData,
-    options: circlePackTwoLevelOptions
-  },
-  {
-    data: circlePackThreeLevelData,
-    options: circlePackThreeLevelOptions
-  },
-  {
-    data: circlePackThreeLevelsMonochromeData,
-    options: circlePackThreeLevelsMonochromeOptions
-  },
-  {
-    data: circlePackThreeLevelData,
-    options: circlePackThreeLevelNoZoomOptions
-  }
+	{
+		options: circlePackTwoLevelCustomColorsOptions,
+		data: circlePackTwoLevelData
+	},
+	{
+		data: circlePackSingleLevelData,
+		options: circlePackSingleOptions
+	},
+	{
+		data: circlePackTwoLevelData,
+		options: circlePackTwoLevelOptions
+	},
+	{
+		data: circlePackThreeLevelData,
+		options: circlePackThreeLevelOptions
+	},
+	{
+		data: circlePackThreeLevelsMonochromeData,
+		options: circlePackThreeLevelsMonochromeOptions
+	},
+	{
+		data: circlePackThreeLevelData,
+		options: circlePackThreeLevelNoZoomOptions
+	}
 ]

@@ -4,20 +4,20 @@ import svelte from '../../../../svelte/package.json'
 import vue from '../../../../vue/package.json'
 
 export const version = {
-	carbonCharts: core.version as string,
-	d3: core.dependencies['d3'] as string,
-	d3Cloud: core.dependencies['d3-cloud'] as string,
-	d3Sankey: core.dependencies['d3-sankey'] as string,
+	carbonCharts: core.version,
+	d3: core.dependencies['d3'],
+	d3Cloud: core.dependencies['d3-cloud'],
+	d3Sankey: core.dependencies['d3-sankey'],
 	angular: 'latest',
-	react: react.dependencies['react'] as string,
-	svelteVite: svelte.devDependencies['@sveltejs/vite-plugin-svelte'] as string,
-	svelteTsConfig: 'latest' as string,
-	svelte: svelte.devDependencies['svelte'] as string,
-	svelteCheck: svelte.devDependencies['svelte-check'] as string,
-	tslib: svelte.devDependencies['tslib'] as string,
-	typescript: core.devDependencies['typescript'] as string,
-	vite: core.devDependencies['vite'] as string,
-	vue: vue.dependencies['vue'] as string,
-	vueTsc: vue.devDependencies['vue-tsc'] as string,
-	vueVitePlugin: vue.devDependencies['@vitejs/plugin-vue'] as string
+	react: react.dependencies['react'],
+	svelteVite: svelte.devDependencies['@sveltejs/vite-plugin-svelte'],
+	svelteTsConfig: 'latest',
+	svelte: svelte.devDependencies['svelte'],
+	svelteCheck: svelte.devDependencies['svelte-check'],
+	tslib: svelte.devDependencies['tslib'],
+	typescript: core.devDependencies['typescript'],
+	vite: core.devDependencies['vite'],
+	vue: vue.dependencies['vue'],
+	vueTsc: vue.devDependencies['vue-tsc'],
+	vueVitePlugin: vue.devDependencies['@vitejs/plugin-vue']
 }
