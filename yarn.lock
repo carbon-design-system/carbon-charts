@@ -1970,6 +1970,7 @@ __metadata:
     "@carbon/charts-react": "workspace:*"
     "@carbon/icons-react": "npm:^11.41.0"
     "@carbon/react": "npm:^1.57.0"
+    "@stackblitz/sdk": "npm:^1.10.0"
     "@types/react": "npm:^18.3.2"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
@@ -2004,7 +2005,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-svelte: "npm:^2.39.0"
     eslint-plugin-vue: "npm:^9.26.0"
-    globals: "npm:^15.2.0"
+    globals: "npm:^15.3.0"
     husky: "npm:^9.0.11"
     lerna: "npm:8.1.3"
     pinst: "npm:^3.0.0"
@@ -4413,6 +4414,13 @@ __metadata:
   version: 3.1.2
   resolution: "@socket.io/component-emitter@npm:3.1.2"
   checksum: 10c0/c4242bad66f67e6f7b712733d25b43cbb9e19a595c8701c3ad99cbeb5901555f78b095e24852f862fffb43e96f1d8552e62def885ca82ae1bb05da3668fd87d7
+  languageName: node
+  linkType: hard
+
+"@stackblitz/sdk@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@stackblitz/sdk@npm:1.10.0"
+  checksum: 10c0/a2a4c9067553b88d755a449675bdccec34b03a9f1b6335da8c35e4218c70ad4dbc1bb5f8ab466a9df55c5ff669a6c3bb748b7114bf583e4590efbab0dc6f7315
   languageName: node
   linkType: hard
 
@@ -10799,10 +10807,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.2.0":
-  version: 15.2.0
-  resolution: "globals@npm:15.2.0"
-  checksum: 10c0/ba8c34ef10fc1e65319bfde912a76dbe7654085af8b09d897974cfbe000c6d950ddcf28b4a0de372fe4144836aede32210a97b27ef184f68e1ff8bcd1a74fc5e
+"globals@npm:^15.3.0":
+  version: 15.3.0
+  resolution: "globals@npm:15.3.0"
+  checksum: 10c0/edbef1c528185d02636ed6d72a1688168b922d6176031904386214f8b59d893f1d0a28da519b95665f557d366b17ea1affb9f433ea451e7372e2808fb31079d7
   languageName: node
   linkType: hard
 
