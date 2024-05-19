@@ -13,3 +13,4 @@ yarn.lock
 **/build
 **/node_modules
 **/LICENSE.md
+**/carbon.yml
