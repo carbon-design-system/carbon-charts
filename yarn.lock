@@ -1943,8 +1943,10 @@ __metadata:
     "@carbon/icons": "npm:^11.41.0"
     "@ibm/telemetry-js": "npm:^1.5.1"
     "@types/carbon__icon-helpers": "npm:^10.7.4"
+    "@typescript-eslint/eslint-plugin": "npm:^7.9.0"
+    "@typescript-eslint/parser": "npm:^7.9.0"
     concurrently: "npm:^8.2.2"
-    eslint: "npm:^9.3.0"
+    eslint: "npm:^8.51.0"
     karma: "npm:^6.4.3"
     karma-chrome-launcher: "npm:^3.2.0"
     karma-coverage: "npm:^2.2.1"
@@ -5461,7 +5463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:7.9.0, @typescript-eslint/eslint-plugin@npm:^7.1.1":
+"@typescript-eslint/eslint-plugin@npm:7.9.0, @typescript-eslint/eslint-plugin@npm:^7.1.1, @typescript-eslint/eslint-plugin@npm:^7.9.0":
   version: 7.9.0
   resolution: "@typescript-eslint/eslint-plugin@npm:7.9.0"
   dependencies:
@@ -5484,7 +5486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:7.9.0, @typescript-eslint/parser@npm:^7.1.1":
+"@typescript-eslint/parser@npm:7.9.0, @typescript-eslint/parser@npm:^7.1.1, @typescript-eslint/parser@npm:^7.9.0":
   version: 7.9.0
   resolution: "@typescript-eslint/parser@npm:7.9.0"
   dependencies:
@@ -10012,7 +10014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.7.0":
+"eslint@npm:^8.51.0, eslint@npm:^8.7.0":
   version: 8.57.0
   resolution: "eslint@npm:8.57.0"
   dependencies:

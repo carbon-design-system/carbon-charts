@@ -17,8 +17,7 @@
 		"build": "ng build -c production && yarn postbundle",
 		"build:test": "ng build charts-angular-test",
 		"dev": "ng serve",
-		"lint:angular": "ng lint --ignore-path ../../.prettierignore",
-		"lint": "eslint",
+		"lint": "ng lint --ignore-path ../../.prettierignore",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
@@ -49,8 +48,10 @@
 		"@carbon/icon-helpers": "~10.48.0",
 		"@carbon/icons": "^11.41.0",
 		"@types/carbon__icon-helpers": "^10.7.4",
+		"@typescript-eslint/eslint-plugin": "^7.9.0",
+		"@typescript-eslint/parser": "^7.9.0",
 		"concurrently": "^8.2.2",
-		"eslint": "^9.3.0",
+		"eslint": "^8.51.0",
 		"karma": "^6.4.3",
 		"karma-chrome-launcher": "^3.2.0",
 		"karma-coverage": "^2.2.1",
