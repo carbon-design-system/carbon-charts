@@ -10,6 +10,7 @@
 		],
 		"allowJs": false, // Disallow JavaScript files
 		"composite": true,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
 		"moduleResolution": "Bundler", // Use Node module resolution
 		// Package-specific settings
