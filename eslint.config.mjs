@@ -7,8 +7,9 @@ import sveltePlugin from 'eslint-plugin-svelte'
 import svelteParser from 'svelte-eslint-parser'
 import vuePlugin from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
-import reactPlugin from 'eslint-plugin-react'
-import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import reactHooksPlugin from 'eslint-plugin-react-hooks' // must use 'next' version for compatibility
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js' // requires @eslint/compat
+import { fixupConfigRules } from '@eslint/compat' // for eslint-plugin-react which has issues
 
 export default tseslint.config(
 	// Global ignores
@@ -65,40 +66,39 @@ export default tseslint.config(
 	},
 
 	// @carbon/charts-docs and @carbon/charts-react
-	// {
-	// 	files: ['packages/docs/src/**/*.{ts,tsx}', 'packages/react/src/**/*.{ts,tsx}'],
-	// 	languageOptions: {
-	// 		parser: tseslint.parser,
-	// 		parserOptions: {
-	// 			project: true
-	// 		}
-	// 	},
-	// 	plugins: {
-	// 		react: reactPlugin
-	// 	},
-	// 	rules: {
-	// 		...reactPlugin.configs.recommended.rules
-	// 	}
-	// },
+	{
+		files: ['packages/docs/src/**/*.{ts,tsx}', 'packages/react/src/**/*.{ts,tsx}'],
+		plugins: {
+			react: reactRecommended.plugins
+		},
+		rules: {
+			...fixupConfigRules(reactRecommended).rules
+		},
+		settings: {
+			react: {
+				version: 'detect'
+			}
+		}
+	},
 
 	// @carbon/charts-docs (@charts/react doesn't use hooks)
-	// {
-	// 	files: ['packages/docs/src/**/*.tsx'],
-	// 	languageOptions: {
-	// 		parser: tseslint.parser,
-	// 		parserOptions: {
-	// 			project: true
-	// 		}
-	// 	},
-	// 	plugins: {
-	// 		'react-hooks': reactHooksPlugin
-	// 	},
-	// 	rules: {
-	// 		...reactHooksPlugin.configs.recommended.rules,
-	// 		'react-hooks/rules-of-hooks': 'error',
-	// 		'react-hooks/exhaustive-deps': 'warn'
-	// 	}
-	// },
+	{
+		files: ['packages/docs/src/**/*.tsx'],
+		languageOptions: {
+			parser: tseslint.parser,
+			parserOptions: {
+				project: true
+			}
+		},
+		plugins: {
+			'react-hooks': reactHooksPlugin
+		},
+		rules: {
+			...reactHooksPlugin.configs.recommended.rules,
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': 'warn'
+		}
+	},
 
 	// @carbon/charts - for typedoc generation by docs website
 	{
