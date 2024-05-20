@@ -24,11 +24,11 @@
 		"src/**/*.ts",
 		"src/**/*.tsx",
 		"src/**/*.d.ts",
-		"vite.config.ts" // ok to include as vite generates output - not tsc
+		"vite.config.ts", // ok to include as vite generates output - not tsc
+		"vite.test.config.ts" // ditto
 	],
 	"exclude": [
 		"node_modules",
-		"dist",
-		"src/all.test.tsx"
+		"dist"
 	]
 }
