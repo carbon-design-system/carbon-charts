@@ -29,9 +29,6 @@ export class Ruler extends Component {
 	// flag for checking whether ruler event listener is added or not
 	isEventListenerAdded = false
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
 
@@ -53,9 +50,6 @@ export class Ruler extends Component {
 		return tooltipData
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	showRuler(event: CustomEvent, [x, y]: [number, number]) {
 		const svg = this.parent
 

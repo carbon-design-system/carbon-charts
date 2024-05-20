@@ -10,9 +10,6 @@ export class MeterTitle extends Title {
 	type = 'meter-title'
 	renderType = RenderTypes.SVG
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()

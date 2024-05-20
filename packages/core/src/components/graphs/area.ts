@@ -49,7 +49,7 @@ export class Area extends Component {
 		if (!boundsEnabled && bounds) {
 			console.warn(
 				`Bounds can only be shown when having 1 single datagroup, you've supplied ${groupedData.length}`
-			) // eslint-disable-line no-console
+			)
 		}
 
 		let upperBoundRangeValue = 0

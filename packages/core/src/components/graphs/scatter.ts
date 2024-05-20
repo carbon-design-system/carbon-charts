@@ -303,10 +303,6 @@ export class Scatter extends Component {
 			.attr('opacity', 1)
 	}
 
-	// Extended in bubble graphs
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getTooltipAdditionalItems(datum: any) {
 		return null as any
 	}

@@ -11,9 +11,6 @@ export class Skeleton extends Component {
 	yScale: ScaleLinear<number, number>
 	backdrop: Selection<SVGElement | HTMLDivElement, unknown, Element, any>
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 

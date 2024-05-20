@@ -23,9 +23,6 @@ export class Alluvial extends Component {
 	private graph: any
 	gradient_id = 'gradient-id-' + Math.floor(Math.random() * 99999999999)
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
 		const svg = this.getComponentContainer({ withinChartClip: true })

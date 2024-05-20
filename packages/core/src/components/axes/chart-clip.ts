@@ -26,9 +26,6 @@ export class ChartClip extends Component {
 		this.model.set({ chartClipId: this.chartClipId }, { skipUpdate: true })
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// Create the clipPath
 		this.createClipPath()

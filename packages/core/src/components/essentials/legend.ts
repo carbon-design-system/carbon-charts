@@ -17,9 +17,6 @@ export class Legend extends Component {
 	type = 'legend'
 	renderType = RenderTypes.HTML
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')

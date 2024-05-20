@@ -76,9 +76,6 @@ export class Gauge extends Component {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
 		const options = this.getOptions()

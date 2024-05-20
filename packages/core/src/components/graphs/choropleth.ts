@@ -6,9 +6,6 @@ import { ChoroplethModel } from '@/model'
 export class Choropleth extends GeoProjection {
 	type = 'choropleth'
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		super.render()
 		const data = (this.model as ChoroplethModel).getCombinedData()
