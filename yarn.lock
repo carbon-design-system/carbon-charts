@@ -1993,8 +1993,6 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.3.0"
     "@nrwl/devkit": "npm:^19.0.4"
-    "@typescript-eslint/eslint-plugin": "npm:^7.9.0"
-    "@typescript-eslint/parser": "npm:^7.9.0"
     "@vue/eslint-config-prettier": "npm:^9.0.0"
     "@vue/eslint-config-typescript": "npm:^13.0.0"
     commitizen: "npm:^4.3.0"
@@ -2016,6 +2014,7 @@ __metadata:
     prettier-eslint: "npm:^16.3.0"
     prettier-plugin-svelte: "npm:^3.2.3"
     svelte-eslint-parser: "npm:^0.36.0"
+    typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.9.0"
     vue-eslint-parser: "npm:^9.4.2"
   languageName: unknown
@@ -5454,7 +5453,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:7.9.0, @typescript-eslint/eslint-plugin@npm:^7.1.1, @typescript-eslint/eslint-plugin@npm:^7.9.0":
+"@typescript-eslint/eslint-plugin@npm:7.9.0, @typescript-eslint/eslint-plugin@npm:^7.1.1":
   version: 7.9.0
   resolution: "@typescript-eslint/eslint-plugin@npm:7.9.0"
   dependencies:
@@ -5477,7 +5476,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:7.9.0, @typescript-eslint/parser@npm:^7.1.1, @typescript-eslint/parser@npm:^7.9.0":
+"@typescript-eslint/parser@npm:7.9.0, @typescript-eslint/parser@npm:^7.1.1":
   version: 7.9.0
   resolution: "@typescript-eslint/parser@npm:7.9.0"
   dependencies:
