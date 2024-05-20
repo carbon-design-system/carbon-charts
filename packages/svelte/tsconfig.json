@@ -3,10 +3,10 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
-		"esModuleInterop": true,
+		// "esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"outDir": "dist", // different from default
-		"resolveJsonModule": true,
+		// "resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,

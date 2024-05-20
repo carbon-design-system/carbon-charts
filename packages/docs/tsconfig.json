@@ -18,6 +18,7 @@
 		"isolatedModules": true, // Ensure each file is treated as a module
 		"noEmit": true, // Prevent emitting files
 		"jsx": "react-jsx", // Enable new JSX transform
+		"outDir": "dist",
 		"incremental": true // Enable incremental compilation
 	},
 	"include": [
