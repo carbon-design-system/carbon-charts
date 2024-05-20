@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useMemo } from 'react'
 import sdk from '@stackblitz/sdk'
 import type { EmbedOptions } from '@stackblitz/sdk'
 import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
@@ -14,7 +14,11 @@ interface Props {
 
 const CodeSample: React.FC<Props> = ({ framework, chartType, data, options }) => {
 	const ref = useRef<HTMLDivElement>(null)
-	const embedOptions: EmbedOptions = { height: 600, view: 'default', showSidebar: true }
+	const embedOptions: EmbedOptions = useMemo(
+		() => ({ height: 600, view: 'default', showSidebar: true }),
+		[]
+	)
+
 	useEffect(() => {
 		const embedProject = async () => {
 			if (ref.current) {
@@ -29,7 +33,7 @@ const CodeSample: React.FC<Props> = ({ framework, chartType, data, options }) =>
 		}
 
 		embedProject().catch(error => console.error('Error in embedProject:', error))
-	}, [framework, chartType, data, options])
+	}, [framework, chartType, data, options, embedOptions])
 
 	return <div ref={ref}></div>
 }
