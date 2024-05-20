@@ -8,7 +8,7 @@ export default defineConfig({
 			input: './index.html'
 		}
 	},
-  resolve: {
+	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url))
 		}

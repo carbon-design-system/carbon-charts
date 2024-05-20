@@ -29,9 +29,7 @@ export default defineConfig({
 		}
 	},
 	optimizeDeps: {
-		exclude: [
-			'@ibm/telemetry-js'
-		]
+		exclude: ['@ibm/telemetry-js']
 	},
 	resolve: {
 		alias: {
