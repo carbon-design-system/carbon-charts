@@ -87,7 +87,8 @@ export class Tooltip extends Component {
 	addTooltipEventListener() {
 		// listen to move-tooltip Custom Events to move the tooltip
 		this.services.events.addEventListener(Events.Tooltip.MOVE, (e: CustomEvent) => {
-			if (this.lastTriggeredEventType !== Events.Toolbar.SHOW_TOOLTIP &&
+			if (
+				this.lastTriggeredEventType !== Events.Toolbar.SHOW_TOOLTIP &&
 				this.tooltip.classed('hidden') === false
 			) {
 				this.positionTooltip(e)
@@ -279,9 +280,9 @@ export class Tooltip extends Component {
 		const isTopZoomBarEnabled = getProperty(options, 'zoomBar', 'top', 'enabled')
 		const noWrap = !!getProperty(e, 'detail', 'noWrap')
 		const hasCustomPlacements = Array.isArray(getProperty(e, 'detail', 'placements'))
-		const placements = hasCustomPlacements ?
-			getProperty(e, 'detail', 'placements') :
-			[PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
+		const placements = hasCustomPlacements
+			? getProperty(e, 'detail', 'placements')
+			: [PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
 
 		let bestPlacementOption: any
 		let { horizontalOffset, defaultOffset } = tooltipConfigs
@@ -310,13 +311,9 @@ export class Tooltip extends Component {
 				bestPlacementOption,
 				() => this.services.domUtils.getElementOffset(hoveredElement)
 			)
-			bestPos = this.addOffsetByPlacement(
-				bestPos,
-				bestPlacementOption,
-				defaultOffset
-			)
+			bestPos = this.addOffsetByPlacement(bestPos, bestPlacementOption, defaultOffset)
 			this.positionService.setElement(target, bestPos)
-			return ;
+			return
 		}
 
 		// set tooltip based on mouse positions

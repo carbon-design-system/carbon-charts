@@ -246,8 +246,7 @@ export interface StackedBarChartOptions extends BarChartOptions {
 /**
  * options specific to scatter charts
  */
-export interface ScatterChartOptions extends AxisChartOptions {
-}
+export interface ScatterChartOptions extends AxisChartOptions {}
 
 /**
  * options specific to lollipop charts
@@ -313,8 +312,7 @@ export interface HistogramChartOptions extends AxisChartOptions {
 /**
  * options specific to line charts
  */
-export interface LineChartOptions extends ScatterChartOptions {
-}
+export interface LineChartOptions extends ScatterChartOptions {}
 
 /**
  * options specific to area charts
