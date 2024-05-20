@@ -11,6 +11,8 @@
 		"allowJs": false, // Disallow JavaScript files
 		"composite": true,
 		"esModuleInterop": true,
+		"isolatedModules": true,
+		"outDir": "dist",
 		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
 		"moduleResolution": "Bundler", // Use Node module resolution
 		// Package-specific settings
@@ -28,12 +30,12 @@
 	"include": [
 		"src/**/*.ts",
 		"src/**/*.d.ts",
-		"vite.config.ts" // ok to include as vite generates output - not tsc
+		"vite.config.ts", // ok to include as vite generates output - not tsc
+		"vite.umd.config.ts",
+		"vite.test.config.ts"
 	],
 	"exclude": [
 		"node_modules",
-		"dist",
-		"src/tests",
-		"**/*.spec.ts"
+		"dist"
 	]
 }
