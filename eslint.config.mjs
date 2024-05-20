@@ -41,7 +41,7 @@ export default tseslint.config(
 		rules: jsPlugin.configs.recommended.rules
 	},
 
-	// TypeScript
+	// TypeScript - all packages
 	...tseslint.configs.recommended,
 
 	// {
@@ -99,36 +99,44 @@ export default tseslint.config(
 	// 		'react-hooks/exhaustive-deps': 'warn'
 	// 	}
 	// },
-	// ...vuePlugin.configs['flat/recommended'],
-	// {
-	// 	files: ['packages/vue/src/components/**/*.vue'],
-	// 	languageOptions: {
-	// 		parser: vueParser,
-	// 		parserOptions: {
-	// 			parser: tsParser,
-	// 			extraFileExtensions: ['.vue'],
-	// 			project: 'packages/vue/tsconfig.vite.json'
-	// 		}
-	// 	},
-	// 	plugins: {
-	// 		vue: vuePlugin
-	// 	},
-	// 	rules: {
-	// 		...vuePlugin.configs['vue3-recommended'].rules
-	// 	}
-	// },
-	// ...sveltePlugin.configs['flat/prettier'],
-	// {
-	// 	files: ['packages/svelte/src/**/*.svelte'],
-	// 	languageOptions: {
-	// 		parser: svelteParser,
-	// 		parserOptions: {
-	// 			parser: tsParser
-	// 		}
-	// 	}
-	// },
 
-	// Improve typedoc output for docs website
+	// @carbon/charts-vue
+	{
+		files: ['packages/vue/src/components/**/*.vue', 'packages/vue/src/components/**/*.ts'],
+		languageOptions: {
+			parser: vueParser,
+			parserOptions: {
+				parser: tseslint.parser,
+				extraFileExtensions: ['.vue'],
+				project: true
+			}
+		},
+		plugins: {
+			vue: vuePlugin
+		},
+		rules: {
+			...vuePlugin.configs['flat/recommended'].rules
+		}
+	},
+
+	// @carbon/charts-svelte
+	{
+		files: ['packages/svelte/src/**/*.svelte'],
+		languageOptions: {
+			parser: svelteParser,
+			parserOptions: {
+				parser: tseslint.parser
+			}
+		},
+		plugins: {
+			svelte: sveltePlugin
+		},
+		rules: {
+			...sveltePlugin.configs['flat/prettier'].rules
+		}
+	},
+
+	// @carbon/charts - for typedoc generation by docs website
 	{
 		name: 'jsdoc',
 		files: ['packages/core/src/**/*.ts'],
@@ -140,5 +148,7 @@ export default tseslint.config(
 			'jsdoc/check-values': 'warn'
 		}
 	},
+
+	// Loads last to remove any conflicting rules with prettier
 	prettierPluginRecommended
 )
