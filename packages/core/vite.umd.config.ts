@@ -10,7 +10,8 @@ export default defineConfig({
 			},
 			plugins: [
 				replace({
-					'process.env.NODE_ENV': JSON.stringify('production')
+					'process.env.NODE_ENV': JSON.stringify('production'),
+					preventAssignment: true
 				}) as Plugin
 			]
 		},

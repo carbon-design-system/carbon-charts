@@ -1,27 +1,35 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		"target": "ES2020",
-		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
-		"skipLibCheck": true,
-		/* Bundler mode */
-		"moduleResolution": "bundler",
+		"target": "ESNext", // Modern JavaScript target for best performance
+		"module": "ESNext", // Use ESNext module resolution
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		"allowJs": false, // Disallow JavaScript files
+		"skipLibCheck": true, // Skip type checking of declaration files
 		"allowImportingTsExtensions": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"jsx": "react-jsx",
-		/* Linting */
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+		"strict": true, // Enable strict type-checking options
+		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+		"moduleResolution": "Bundler", // Use Node module resolution
+		"resolveJsonModule": true, // Include modules for importing JSON files
+		"isolatedModules": true, // Ensure each file is treated as a module
+		"noEmit": true, // Prevent emitting files
+		"jsx": "react-jsx", // Enable new JSX transform
+		"incremental": true // Enable incremental compilation
 	},
-	"include": ["src"],
-	"references": [
-		{
-			"path": "./tsconfig.node.json"
-		}
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.d.ts",
+		"src/**/*.json",
+		"vite.config.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
 	]
 }

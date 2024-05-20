@@ -1,7 +1,17 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "../../tsconfig.json",
 	"compilerOptions": {
+		"target": "ESNext", // Modern JavaScript target for best performance
+		"module": "ESNext", // Use ESNext module resolution
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		"allowJs": false, // Disallow JavaScript files
+		"composite": true,
+		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+		"moduleResolution": "Bundler", // Use Node module resolution
 		// Package-specific settings
 		"baseUrl": ".",
 		"declarationDir": "dist",
@@ -9,12 +19,19 @@
 			"@/*": ["src/*"]
 		},
 		"types": ["node"],
-		"strict": false, // TODO: 1140 errors in 63 files
+		"strict": false,
 		// TODO: Add explicit initializers or declare modifier to class properties to update this project's TypeScript from 3.7 to 5.x.
 		// See https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier.
 		"useDefineForClassFields": false // Until issue above is addressed, keep false.
 	},
-	"include": ["src"],
-	"exclude": ["src/tests", "**/*.spec.ts"],
-	"references": [{ "path": "./tsconfig.vite.json" }]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"src/tests",
+		"**/*.spec.ts"
+	]
 }
