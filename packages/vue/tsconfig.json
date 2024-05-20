@@ -29,7 +29,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.vue",
-    "../../../docs/src/charts.ts"
+    "../../../docs/src/charts.ts",
+		"vite.config.ts", // ok to include as vite generates output - not tsc
+    "vite.test.config.ts" // ditto
   ],
 	"exclude": [
 		"node_modules",

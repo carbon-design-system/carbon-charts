@@ -11,7 +11,7 @@ import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 
 export default tseslint.config(
-	// Global
+	// Global ignores
 	{
 		ignores: [
 			// default already excludes node_modules and .git
@@ -31,6 +31,8 @@ export default tseslint.config(
 			'**/carbon.yml'
 		]
 	},
+
+	// Global - window and document objects
 	{
 		languageOptions: { globals: globals.browser }
 	},
@@ -41,100 +43,62 @@ export default tseslint.config(
 		rules: jsPlugin.configs.recommended.rules
 	},
 
-	// TypeScript - all packages
-	...tseslint.configs.recommended,
+	// Global - TypeScript
+	{
+		files: ['packages/**/*.{ts,tsx}'],
+		languageOptions: {
+			parser: tseslint.parser,
+			parserOptions: {
+				project: true
+			}
+		},
+		plugins: {
+			'@typescript-eslint': tseslint
+		},
+		rules: {
+			...tseslint.configs.recommendedTypeChecked.rules,
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-var-requires': 'off',
+			'@typescript-eslint/no-this-alias': 'off',
+			'no-shadow': 'error'
+		}
+	},
 
+	// @carbon/charts-docs and @carbon/charts-react
 	// {
-	// 	files: ['packages/**/*.ts', 'packages/**/*.tsx'],
+	// 	files: ['packages/docs/src/**/*.{ts,tsx}', 'packages/react/src/**/*.{ts,tsx}'],
 	// 	languageOptions: {
 	// 		parser: tseslint.parser,
 	// 		parserOptions: {
 	// 			project: true
 	// 		}
 	// 	},
-	// 	// plugins: {
-	// 	// 	'@typescript-eslint': tseslint
-	// 	// },
-	// 	rules: {
-	// 		...tseslint.configs.recommendedTypeChecked.rules,
-	// 		'@typescript-eslint/no-explicit-any': 'off',
-	// 		'@typescript-eslint/no-var-requires': 'off',
-	// 		'@typescript-eslint/no-this-alias': 'off',
-	// 		'@typescript-eslint/no-shadow': 'error'
-	// 	},
-	// },
-	// {
-	// 	files: ['packages/react/src/**/*.tsx'],
-	// 	languageOptions: {
-	// 		parser: tsParser,
-	// 		parserOptions: {
-	// 			project: 'packages/react/tsconfig.json'
-	// 		}
-	// 	},
 	// 	plugins: {
-	// 		react: reactPlugin,
-	// 		'react-hooks': reactHooksPlugin
+	// 		react: reactPlugin
 	// 	},
 	// 	rules: {
-	// 		...reactPlugin.configs.recommended.rules,
-	// 		'react-hooks/rules-of-hooks': 'error',
-	// 		'react-hooks/exhaustive-deps': 'warn'
+	// 		...reactPlugin.configs.recommended.rules
 	// 	}
 	// },
+
+	// @carbon/charts-docs (@charts/react doesn't use hooks)
 	// {
 	// 	files: ['packages/docs/src/**/*.tsx'],
 	// 	languageOptions: {
-	// 		parser: tsParser,
+	// 		parser: tseslint.parser,
 	// 		parserOptions: {
 	// 			project: true
 	// 		}
 	// 	},
 	// 	plugins: {
-	// 		react: reactPlugin,
 	// 		'react-hooks': reactHooksPlugin
 	// 	},
 	// 	rules: {
-	// 		...reactPlugin.configs.recommended.rules,
+	// 		...reactHooksPlugin.configs.recommended.rules,
 	// 		'react-hooks/rules-of-hooks': 'error',
 	// 		'react-hooks/exhaustive-deps': 'warn'
 	// 	}
 	// },
-
-	// @carbon/charts-vue
-	{
-		files: ['packages/vue/src/components/**/*.vue', 'packages/vue/src/components/**/*.ts'],
-		languageOptions: {
-			parser: vueParser,
-			parserOptions: {
-				parser: tseslint.parser,
-				extraFileExtensions: ['.vue'],
-				project: true
-			}
-		},
-		plugins: {
-			vue: vuePlugin
-		},
-		rules: {
-			...vuePlugin.configs['flat/recommended'].rules
-		}
-	},
-
-	// @carbon/charts-svelte
-	{
-		files: ['packages/svelte/src/**/*.svelte'],
-		languageOptions: {
-			parser: svelteParser,
-			parserOptions: {
-				parser: tseslint.parser
-			}
-		},
-		plugins: {
-			svelte: sveltePlugin
-		},
-		rules: {
-			...sveltePlugin.configs['flat/prettier'].rules
-		}
-	},
 
 	// @carbon/charts - for typedoc generation by docs website
 	{
@@ -146,6 +110,42 @@ export default tseslint.config(
 		rules: {
 			'jsdoc/require-description': 'warn',
 			'jsdoc/check-values': 'warn'
+		}
+	},
+
+	// @carbon/charts-svelte - only checks .svelte files. TypeScript is checked globally.
+	{
+		files: ['packages/svelte/src/**/*.svelte'],
+		languageOptions: {
+			parser: svelteParser,
+			parserOptions: {
+				parser: tseslint.parser
+			}
+		},
+		plugins: {
+			sveltePlugin
+		},
+		rules: {
+			...sveltePlugin.configs['flat/prettier'].rules
+		}
+	},
+
+	// @carbon/charts-vue - Checks .vue and .ts files.
+	{
+		files: ['packages/vue/**/*.{ts,vue}'],
+		languageOptions: {
+			parser: vueParser,
+			parserOptions: {
+				parser: tseslint.parser,
+				extraFileExtensions: ['.vue'],
+				project: true
+			}
+		},
+		plugins: {
+			vuePlugin
+		},
+		rules: {
+			...vuePlugin.configs['flat/recommended'].rules
 		}
 	},
 

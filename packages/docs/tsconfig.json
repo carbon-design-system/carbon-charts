@@ -25,7 +25,8 @@
 		"src/**/*.ts",
 		"src/**/*.tsx",
 		"src/**/*.d.ts",
-		"src/**/*.json"
+		"src/**/*.json",
+		"vite.config.ts" // ok to include as vite generates output - not tsc
 	],
 	"exclude": [
 		"node_modules",
