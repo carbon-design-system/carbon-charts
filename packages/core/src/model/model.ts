@@ -174,8 +174,13 @@ export class ChartModel {
 	}
 
 	/**
+	 * Sets the data for the current instance.
 	 *
-	 * @param newData The new raw data to be set
+	 * This method sanitizes the provided data, generates data groups,
+	 * and updates the instance's state with the sanitized data and data groups.
+	 *
+	 * @param {any} newData - The new data to be set. This data will be cloned and sanitized.
+	 * @returns {any} - The sanitized version of the provided data.
 	 */
 	setData(newData: any) {
 		const sanitizedData = this.sanitize(cloneDeep(newData))
@@ -474,7 +479,9 @@ export class ChartModel {
 	}
 
 	/**
-	 * @return {Object} The chart's options
+	 * Retrieves the current options from the instance's state.
+	 *
+	 * @returns {any} - The current options stored in the instance's state.
 	 */
 	getOptions() {
 		return this.state.options
@@ -500,8 +507,13 @@ export class ChartModel {
 	}
 
 	/**
+	 * Updates the current options for the instance.
 	 *
-	 * @param newOptions New options to be set
+	 * This method retrieves the existing options, updates the legend additional items,
+	 * and merges the new options with the existing ones. The instance's state is then updated
+	 * with the merged options.
+	 *
+	 * @param {any} newOptions - The new options to be set. These options will be merged with the existing options.
 	 */
 	setOptions(newOptions: any) {
 		const options = this.getOptions()
