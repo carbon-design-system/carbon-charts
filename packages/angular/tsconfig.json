@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     // Package-specific
     "baseUrl": "./",
@@ -8,6 +7,8 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "isolatedModules": true,
+    "moduleResolution": "NodeNext",
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

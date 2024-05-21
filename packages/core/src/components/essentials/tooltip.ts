@@ -1,5 +1,5 @@
 import { select, pointer } from 'd3'
-import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
+import { Position, PLACEMENTS } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
 import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
