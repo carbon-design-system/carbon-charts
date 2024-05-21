@@ -8,13 +8,18 @@
 			"DOM.Iterable",
 			"ESNext"
 		],
-		"allowJs": false,
-		"composite": true,
+		"declaration": true,
 		"esModuleInterop": true,
-		"isolatedModules": true,
-		"outDir": "dist",
 		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
 		"moduleResolution": "Bundler",
+		"noUnusedLocals": true,
+    "noUnusedParameters": false,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"allowJs": false,
+		"outDir": "dist",
 		"baseUrl": ".",
 		"declarationDir": "dist",
 		"paths": {
@@ -22,9 +27,11 @@
 				"src/*"
 			]
 		},
-		"strict": true
+		// "types": ["node"],
+		"strict": false,
 		// TODO: Add explicit initializers or declare modifier to class properties to update this project's TypeScript from 3.7 to 5.x.
 		// See https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier.
+		"useDefineForClassFields": false // Until issue above is addressed, keep false.
 	},
 	"include": [
 		"src/**/*.ts",
