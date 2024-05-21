@@ -1946,7 +1946,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.10.0"
     "@typescript-eslint/parser": "npm:^7.10.0"
     concurrently: "npm:^8.2.2"
-    eslint: "npm:^8.51.0"
+    eslint: "npm:^8.57.0"
     karma: "npm:^6.4.3"
     karma-chrome-launcher: "npm:^3.2.0"
     karma-coverage: "npm:^2.2.1"
@@ -10132,7 +10132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.51.0, eslint@npm:^8.7.0":
+"eslint@npm:^8.57.0, eslint@npm:^8.7.0":
   version: 8.57.0
   resolution: "eslint@npm:8.57.0"
   dependencies:
