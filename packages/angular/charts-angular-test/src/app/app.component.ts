@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Type } from '@angular/core'
+import { Component, Type } from '@angular/core'
 import {
 	AlluvialChartComponent,
 	AreaChartComponent,
@@ -32,9 +32,9 @@ import charts from '../../../../docs/src/charts'
 	selector: 'app-root',
 	templateUrl: './app.component.html'
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 	charts = charts
-	selectorMap: { [key: string]: Type<any> }  = {
+	selectorMap: { [key: string]: Type<unknown> }  = {
 		'ibm-alluvial-chart': AlluvialChartComponent,
 		'ibm-area-chart': AreaChartComponent,
 		'ibm-boxplot-chart': BoxplotChartComponent,
@@ -60,8 +60,5 @@ export class AppComponent implements AfterViewInit {
 		'ibm-tree-chart': TreeChartComponent,
 		'ibm-treemap-chart': TreemapChartComponent,
 		'ibm-wordcloud-chart': WordCloudChartComponent
-	}
-
-	ngAfterViewInit() {
 	}
 }

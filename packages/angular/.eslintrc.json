@@ -27,10 +27,11 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "ibm",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/no-output-native": "warn"
       }
     },
     {
