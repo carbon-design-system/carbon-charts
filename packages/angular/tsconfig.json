@@ -1,16 +1,32 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "target": "ESNext",
+		"module": "ESNext",
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+    "allowJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+
     // Package-specific
     "baseUrl": "./",
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
     "importHelpers": true,
-    "isolatedModules": true,
-    "moduleResolution": "bundler",
+
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
