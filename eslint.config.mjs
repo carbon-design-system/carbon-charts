@@ -46,23 +46,17 @@ export default tseslint.config(
 	},
 
 	// Global - TypeScript
+	...tseslint.configs.recommended,
+
 	{
 		files: ['packages/**/*.{ts,tsx}'],
-		languageOptions: {
-			parser: tseslint.parser,
-			parserOptions: {
-				project: true
-			}
-		},
-		plugins: {
-			'@typescript-eslint': tseslint
-		},
 		rules: {
-			...tseslint.configs.recommendedTypeChecked.rules,
-			'@typescript-eslint/no-explicit-any': 'off',
-			'@typescript-eslint/no-var-requires': 'off',
-			'@typescript-eslint/no-this-alias': 'off',
-			'no-shadow': 'error'
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'@typescript-eslint/no-this-alias': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'@typescript-eslint/no-var-requires': 'warn',
+			'no-shadow': 'off',
+			'@typescript-eslint/no-shadow': 'error'
 		}
 	},
 
