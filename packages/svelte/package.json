@@ -37,11 +37,11 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.5.1"
+		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.1",
-		"@sveltejs/kit": "^2.5.9",
+		"@sveltejs/kit": "^2.5.10",
 		"@sveltejs/package": "^2.3.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.0",
 		"concurrently": "^8.2.2",
