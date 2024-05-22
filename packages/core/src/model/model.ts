@@ -80,8 +80,8 @@ export class ChartModel {
 						if (domainValueFormatter) {
 							data[1] = domainValueFormatter(data[1]) as string
 						}
-						for (let i in data) {
-							let val = data[i]
+						for (const i in data) {
+							const val = data[i]
 							if (typeof val === 'number') {
 								data[i] = numberFormatter(val, localeCode)
 							}

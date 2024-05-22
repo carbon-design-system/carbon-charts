@@ -282,7 +282,8 @@ export class Tooltip extends Component {
 			: [PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
 
 		let bestPlacementOption: any
-		let { horizontalOffset, defaultOffset } = tooltipConfigs
+		let { horizontalOffset } = tooltipConfigs
+		const { defaultOffset } = tooltipConfigs
 
 		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', noWrap)
 

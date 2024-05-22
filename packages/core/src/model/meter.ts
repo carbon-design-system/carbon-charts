@@ -100,7 +100,7 @@ export class MeterChartModel extends ChartModel {
 					datum['value'] !== null && datum['value'] !== undefined
 						? (value = Number(datum['value']))
 						: (value = 0)
-					let percentValue = Number(((datum['value'] / domainMax) * 100).toFixed(2))
+					const percentValue = Number(((datum['value'] / domainMax) * 100).toFixed(2))
 					return [
 						datum[groupMapsTo],
 						datum['value'] === null ? '&ndash;' : numberFormatter(value, localeCode),
