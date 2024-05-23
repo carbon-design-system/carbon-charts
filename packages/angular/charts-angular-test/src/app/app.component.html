@@ -2,8 +2,12 @@
 <h2>Component Test Harness</h2>
 
 <div *ngFor="let chart of charts">
-  <h3>{{ chart.types.angular }}</h3>
-  <div *ngFor="let example of chart.examples">
-    <ng-container *ngComponentOutlet="selectorMap[chart.types.angular]; inputs: {data: example.data, options: example.options}"></ng-container>
-  </div>
+	<h3>{{ chart.types.angular }}</h3>
+	<div *ngFor="let example of chart.examples">
+		<ng-container
+			*ngComponentOutlet="
+				selectorMap[chart.types.angular];
+				inputs: { data: example.data, options: example.options }
+			"></ng-container>
+	</div>
 </div>

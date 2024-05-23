@@ -34,7 +34,7 @@ import charts from '../../../../docs/src/charts'
 })
 export class AppComponent {
 	charts = charts
-	selectorMap: { [key: string]: Type<unknown> }  = {
+	selectorMap: { [key: string]: Type<unknown> } = {
 		'ibm-alluvial-chart': AlluvialChartComponent,
 		'ibm-area-chart': AreaChartComponent,
 		'ibm-boxplot-chart': BoxplotChartComponent,

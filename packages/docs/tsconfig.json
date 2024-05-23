@@ -3,11 +3,7 @@
 	"compilerOptions": {
 		"target": "ESNext", // Modern JavaScript target for best performance
 		"module": "ESNext", // Use ESNext module resolution
-		"lib": [
-			"DOM",
-			"DOM.Iterable",
-			"ESNext"
-		],
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"allowJs": false, // Disallow JavaScript files
 		"skipLibCheck": true, // Skip type checking of declaration files
 		"allowImportingTsExtensions": true,
@@ -28,8 +24,5 @@
 		"src/**/*.json",
 		"vite.config.ts" // ok to include as vite generates output - not tsc
 	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	]
+	"exclude": ["node_modules", "dist"]
 }

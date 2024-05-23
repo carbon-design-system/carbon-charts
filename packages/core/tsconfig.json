@@ -3,18 +3,14 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
-		"lib": [
-			"DOM",
-			"DOM.Iterable",
-			"ESNext"
-		],
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"declaration": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
 		"moduleResolution": "Bundler",
 		"noUnusedLocals": true,
-    "noUnusedParameters": false,
+		"noUnusedParameters": false,
 		"noFallthroughCasesInSwitch": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
@@ -23,9 +19,7 @@
 		"baseUrl": ".",
 		"declarationDir": "dist",
 		"paths": {
-			"@/*": [
-				"src/*"
-			]
+			"@/*": ["src/*"]
 		},
 		// "types": ["node"],
 		"strict": false,
@@ -40,8 +34,5 @@
 		"vite.umd.config.ts", // ditto
 		"vite.test.config.ts" // ditto
 	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	]
+	"exclude": ["node_modules", "dist"]
 }
