@@ -2097,6 +2097,7 @@ __metadata:
     html-to-image: "npm:^1.11.11"
     jsdom: "npm:^24.0.0"
     lodash-es: "npm:^4.17.21"
+    prettier: "npm:^3.2.5"
     publint: "npm:^0.2.8"
     resize-observer-polyfill: "npm:^1.5.1"
     sass: "npm:^1.77.2"

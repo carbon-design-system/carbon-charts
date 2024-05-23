@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "build": "lerna run --stream build",
-    "postinstall": "husky install",
+    "prepare": "husky || true",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "lint": "lerna run lint",
@@ -46,11 +46,6 @@
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.10.0",
     "vue-eslint-parser": "^9.4.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "bash scripts/precommit.sh"
-    }
   },
   "release": {
     "branch": "master"
