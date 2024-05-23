@@ -3,7 +3,7 @@
 # Keep this POSIX-compliant so Windows workstations can contribute to the project
 set -e
 
-# Lint each package
+# Lint each package (supress Node deprecation warnings)
 if ! NODE_OPTIONS="--no-warnings" npx lerna run lint; then
     echo "Error: Linting failed. Please fix the lint errors and try committing again."
     exit 1
@@ -15,7 +15,7 @@ if [ -n "$(git ls-files -m | grep yarn.lock)" ]; then
     git commit -m "chore(monorepo): update yarn.lock" --no-verify
 fi
 
-# Run prettier on all packages except core (we'll do this in a separate PR)
-NODE_OPTIONS="--no-warnings" npx lerna run format --ignore @carbon/charts
+# Run prettier on all packages (supress Node deprecation warnings)
+NODE_OPTIONS="--no-warnings" npx lerna run format
 
 #exit 1 # stops push from running, good for testing
