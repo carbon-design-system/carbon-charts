@@ -2,7 +2,6 @@ import type { Project, ProjectTemplate } from '@stackblitz/sdk'
 import { version } from './package-versions'
 import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
 import { objectToString } from './object-to-string'
-// import inspect from 'object-inspect'
 
 export function getVanillaProject(
 	chartType: string,
@@ -94,7 +93,6 @@ ${isGeoDemo ? instantiateForGeo : instantiateNormally}
 		dependencies,
 		files: {
 			'data.js': objectToString(data),
-			// 'data.js': inspect(data, { indent: 2 }), // objectToString(data),
 			'index.html': indexHtml,
 			'index.js': indexJs,
 			'options.js': objectToString(options),
