@@ -4,8 +4,8 @@ Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@
 component library. This prerelease is for Angular 16 and higher and uses TypeScript 5.
 
 If you need support for older versions of Angular (or encounter problems with this module), please
-revert to `@carbon/charts-angular@latest`. Distribution tags have been added for specific Angular versions
-such as: `@carbon/charts-angular@angular15`, `@carbon/charts-angular@angular16`, etc.
+revert to `@carbon/charts-angular@latest`. Distribution tags have been added for specific Angular
+versions such as: `@carbon/charts-angular@angular15`, `@carbon/charts-angular@angular16`, etc.
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
