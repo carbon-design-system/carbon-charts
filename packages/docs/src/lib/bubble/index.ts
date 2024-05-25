@@ -44,7 +44,7 @@ const bubbleDiscreteOptions: BubbleChartOptions = {
 	title: 'Bubble (discrete)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			scaleType: ScaleTypes.LABELS,
 			mapsTo: 'key'
 		},
@@ -62,7 +62,7 @@ const bubbleTimeSeriesOptions: BubbleChartOptions = {
 	title: 'Bubble (time series)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			scaleType: ScaleTypes.TIME,
 			mapsTo: 'date'
 		},
@@ -176,26 +176,26 @@ const bubbleDiscreteData: ChartTabularData = [
 ]
 
 const lineTimeSeriesData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 50000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: null },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 49213 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 17), value: 51213 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 2), value: 0 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 6), value: 57312 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 8), value: 27432 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 15), value: 70323 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 19), value: 21300 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 1), value: 40000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 5), value: null },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 8), value: 18000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 13), value: 39213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 17), value: 61213 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 2), value: 20000 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 6), value: 37312 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 8), value: 51432 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 15), value: 25332 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 19), value: null }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 50000 },
+	{ group: 'Dataset 1', date: '2023-01-05', value: 65000 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: null },
+	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
+	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
+	{ group: 'Dataset 2', date: '2023-01-02', value: 0 },
+	{ group: 'Dataset 2', date: '2023-01-06', value: 57312 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 27432 },
+	{ group: 'Dataset 2', date: '2023-01-15', value: 70323 },
+	{ group: 'Dataset 2', date: '2023-01-19', value: 21300 },
+	{ group: 'Dataset 3', date: '2023-01-01', value: 40000 },
+	{ group: 'Dataset 3', date: '2023-01-05', value: null },
+	{ group: 'Dataset 3', date: '2023-01-08', value: 18000 },
+	{ group: 'Dataset 3', date: '2023-01-13', value: 39213 },
+	{ group: 'Dataset 3', date: '2023-01-17', value: 61213 },
+	{ group: 'Dataset 4', date: '2023-01-02', value: 20000 },
+	{ group: 'Dataset 4', date: '2023-01-06', value: 37312 },
+	{ group: 'Dataset 4', date: '2023-01-08', value: 51432 },
+	{ group: 'Dataset 4', date: '2023-01-15', value: 25332 },
+	{ group: 'Dataset 4', date: '2023-01-19', value: null }
 ]
 
 const bubbleTimeSeriesData: ChartTabularData = lineTimeSeriesData.map(datum =>

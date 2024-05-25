@@ -1,16 +1,16 @@
 import type { AxisChartOptions, ChartTabularData } from '@carbon/charts'
 
 const dataZoomBar: ChartTabularData = [
-	{ date: new Date(2019, 0, 1), value: 10000 },
-	{ date: new Date(2019, 0, 2), value: 10 },
-	{ date: new Date(2019, 0, 3), value: 75000 },
-	{ date: new Date(2019, 0, 5), value: 65000 },
-	{ date: new Date(2019, 0, 6), value: 57312 },
-	{ date: new Date(2019, 0, 8), value: 10000 },
-	{ date: new Date(2019, 0, 13), value: 49213 },
-	{ date: new Date(2019, 0, 15), value: 70323 },
-	{ date: new Date(2019, 0, 17), value: 51213 },
-	{ date: new Date(2019, 0, 19), value: 21300 }
+	{ date: '2023-01-01', value: 10000 },
+	{ date: '2023-01-02', value: 10 },
+	{ date: '2023-01-03', value: 75000 },
+	{ date: '2023-01-05', value: 65000 },
+	{ date: '2023-01-06', value: 57312 },
+	{ date: '2023-01-08', value: 10000 },
+	{ date: '2023-01-13', value: 49213 },
+	{ date: '2023-01-15', value: 70323 },
+	{ date: '2023-01-17', value: 51213 },
+	{ date: '2023-01-19', value: 21300 }
 ]
 
 export const addZoomBarToOptions = (

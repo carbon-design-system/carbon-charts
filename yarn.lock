@@ -1949,13 +1949,14 @@ __metadata:
     "@carbon/charts": "workspace:*"
     "@carbon/charts-react": "workspace:*"
     "@carbon/icons-react": "npm:^11.42.0"
-    "@carbon/react": "npm:^1.58.0"
+    "@carbon/react": "npm:^1.58.1"
     "@stackblitz/sdk": "npm:^1.10.0"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.7.0"
     eslint: "npm:^9.3.0"
     highlight.js: "npm:^11.9.0"
+    object-inspect: "npm:^1.13.1"
     prettier: "npm:^3.2.5"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
@@ -2196,9 +2197,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.58.0":
-  version: 1.58.0
-  resolution: "@carbon/react@npm:1.58.0"
+"@carbon/react@npm:^1.58.1":
+  version: 1.58.1
+  resolution: "@carbon/react@npm:1.58.1"
   dependencies:
     "@babel/runtime": "npm:^7.18.3"
     "@carbon/feature-flags": "npm:^0.20.0"
@@ -2227,7 +2228,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 10c0/b547b88e765a283fce857819c7740432d778f1694f057542a77dfc63b9d261d2fe7ad9093e833a94a262eaf46bcdc6a38e88babf928a7ed41a26b717db3b225d
+  checksum: 10c0/f837008f29a49da2f6c53ba0e789c6ff5bdd13a53ff5042c5e3cdb8b5c00bdb3cf16c52b4fc3e7d7fd08a9e6ef4a161aba3c0d200b714a35416dc29f2ce0f60e
   languageName: node
   linkType: hard
 

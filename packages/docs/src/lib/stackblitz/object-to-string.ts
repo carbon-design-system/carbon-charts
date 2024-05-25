@@ -20,7 +20,7 @@ export function objectToString(
 		str += padding + ']'
 	} else if (typeof obj === 'object' && obj !== null) {
 		if (obj instanceof Date) {
-			str += `new Date(${obj.getFullYear()}, ${obj.getMonth()}, ${obj.getDate()})`
+			str += `new Date(${obj.getFullYear()}, ${obj.getMonth()}, ${obj.getDate()}, ${obj.getHours()}, ${obj.getMinutes()}, ${obj.getSeconds()})`
 		} else {
 			str += '{\n'
 

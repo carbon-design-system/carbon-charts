@@ -525,31 +525,31 @@ const simpleHorizontalBarLongLabelData: ChartTabularData = [
 // const simpleHorizontalBarCenteredLegendData: ChartTabularData = simpleBarData
 
 const simpleBarTimeSeriesData = [
-	{ group: 'Qty', date: new Date(2019, 0, 1), value: 10000 },
-	{ group: 'More', date: new Date(2019, 0, 2), value: 65000 },
-	{ group: 'Sold', date: new Date(2019, 0, 3), value: 30000 },
-	{ group: 'Restocking', date: new Date(2019, 0, 6), value: 49213 },
-	{ group: 'Misc', date: new Date(2019, 0, 7), value: 51213 }
+	{ group: 'Qty', date: '2023-01-01', value: 10000 },
+	{ group: 'More', date: '2023-01-02', value: 65000 },
+	{ group: 'Sold', date: '2023-01-03', value: 30000 },
+	{ group: 'Restocking', date: '2023-01-06', value: 49213 },
+	{ group: 'Misc', date: '2023-01-07', value: 51213 }
 ]
 
 const simpleBarTimeSeriesDenseData: ChartTabularData = [
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 10, 0), value: 10000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 12, 4), value: 20001 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 14, 8), value: 10002 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 15, 8), value: 10062 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 17, 12), value: 30003 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 18, 16), value: 20004 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 19, 20), value: 10005 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 22, 24), value: 50006 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 24, 24), value: 20006 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 26, 28), value: 40007 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 27, 32), value: 30008 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 30, 36), value: 10000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 32, 36), value: 10000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 35, 40), value: 20000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 36, 44), value: 10000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 37, 48), value: 30000 },
-	{ group: 'data', date: new Date(2019, 1, 1, 10, 40, 52), value: 10000 }
+	{ group: 'data', date: '2023-02-01T10:10:00.000Z', value: 10000 },
+	{ group: 'data', date: '2023-02-01T10:12:04.000Z', value: 20001 },
+	{ group: 'data', date: '2023-02-01T10:14:08.000Z', value: 10002 },
+	{ group: 'data', date: '2023-02-01T10:15:08.000Z', value: 10062 },
+	{ group: 'data', date: '2023-02-01T10:17:12.000Z', value: 30003 },
+	{ group: 'data', date: '2023-02-01T10:18:16.000Z', value: 20004 },
+	{ group: 'data', date: '2023-02-01T10:19:20.000Z', value: 10005 },
+	{ group: 'data', date: '2023-02-01T10:22:24.000Z', value: 50006 },
+	{ group: 'data', date: '2023-02-01T10:24:24.000Z', value: 20006 },
+	{ group: 'data', date: '2023-02-01T10:26:28.000Z', value: 40007 },
+	{ group: 'data', date: '2023-02-01T10:27:32.000Z', value: 30008 },
+	{ group: 'data', date: '2023-02-01T10:30:36.000Z', value: 10000 },
+	{ group: 'data', date: '2023-02-01T10:32:36.000Z', value: 10000 },
+	{ group: 'data', date: '2023-02-01T10:35:40.000Z', value: 20000 },
+	{ group: 'data', date: '2023-02-01T10:36:44.000Z', value: 10000 },
+	{ group: 'data', date: '2023-02-01T10:37:48.000Z', value: 30000 },
+	{ group: 'data', date: '2023-02-01T10:40:52.000Z', value: 10000 }
 ]
 
 const simpleBarLocaleData: ChartTabularData = simpleBarTimeSeriesData
@@ -558,11 +558,11 @@ const simpleHorizontalBarTimeSeriesData: ChartTabularData = simpleBarTimeSeriesD
 
 // Horizontal floating time series
 const floatingHorizontalBarTimeSeriesData: ChartTabularData = [
-	{ group: 'Qty', date: new Date(2019, 0, 1), value: [10000, 41000] },
-	{ group: 'More', date: new Date(2019, 0, 2), value: 65000 },
-	{ group: 'Sold', date: new Date(2019, 0, 3), value: 30000 },
-	{ group: 'Restocking', date: new Date(2019, 0, 6), value: [22000, 69213] },
-	{ group: 'Misc', date: new Date(2019, 0, 7), value: [3500, 71213] }
+	{ group: 'Qty', date: '2023-01-01', value: [10000, 41000] },
+	{ group: 'More', date: '2023-01-02', value: 65000 },
+	{ group: 'Sold', date: '2023-01-03', value: 30000 },
+	{ group: 'Restocking', date: '2023-01-06', value: [22000, 69213] },
+	{ group: 'Misc', date: '2023-01-07', value: [3500, 71213] }
 ]
 
 // floating bars

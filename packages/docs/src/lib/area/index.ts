@@ -190,21 +190,21 @@ const optionsSpark: AreaChartOptions = {
 }
 
 const data: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2023, 0, 1), value: 0 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 6), value: 57312 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 8), value: 21432 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 15), value: 70323 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 19), value: 21300 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 1), value: 50000 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 5), value: 15000 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 8), value: 20000 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 13), value: 39213 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 19), value: 61213 },
-	{ group: 'Dataset 3', date: new Date(2023, 0, 2), value: 10 },
-	{ group: 'Dataset 3', date: new Date(2023, 0, 6), value: 37312 },
-	{ group: 'Dataset 3', date: new Date(2023, 0, 8), value: 51432 },
-	{ group: 'Dataset 3', date: new Date(2023, 0, 13), value: 40323 },
-	{ group: 'Dataset 3', date: new Date(2023, 0, 19), value: 31300 }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 0 },
+	{ group: 'Dataset 1', date: '2023-01-06', value: 57312 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: 21432 },
+	{ group: 'Dataset 1', date: '2023-01-15', value: 70323 },
+	{ group: 'Dataset 1', date: '2023-01-19', value: 21300 },
+	{ group: 'Dataset 2', date: '2023-01-01', value: 50000 },
+	{ group: 'Dataset 2', date: '2023-01-05', value: 15000 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-13', value: 39213 },
+	{ group: 'Dataset 2', date: '2023-01-19', value: 61213 },
+	{ group: 'Dataset 3', date: '2023-01-02', value: 10 },
+	{ group: 'Dataset 3', date: '2023-01-06', value: 37312 },
+	{ group: 'Dataset 3', date: '2023-01-08', value: 51432 },
+	{ group: 'Dataset 3', date: '2023-01-13', value: 40323 },
+	{ group: 'Dataset 3', date: '2023-01-19', value: 31300 }
 ]
 
 const dataDiscrete: ChartTabularData = [
@@ -226,50 +226,50 @@ const dataDiscrete: ChartTabularData = [
 ]
 
 const dataCurved: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2023, 0, 1), value: 0 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 6), value: -37312 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 8), value: -22392 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 15), value: -52576 },
-	{ group: 'Dataset 1', date: new Date(2023, 0, 19), value: 20135 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 1), value: 47263 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 5), value: 14178 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 8), value: 23094 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 13), value: 45281 },
-	{ group: 'Dataset 2', date: new Date(2023, 0, 19), value: -63954 }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 0 },
+	{ group: 'Dataset 1', date: '2023-01-06', value: -37312 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: -22392 },
+	{ group: 'Dataset 1', date: '2023-01-15', value: -52576 },
+	{ group: 'Dataset 1', date: '2023-01-19', value: 20135 },
+	{ group: 'Dataset 2', date: '2023-01-01', value: 47263 },
+	{ group: 'Dataset 2', date: '2023-01-05', value: 14178 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 23094 },
+	{ group: 'Dataset 2', date: '2023-01-13', value: 45281 },
+	{ group: 'Dataset 2', date: '2023-01-19', value: -63954 }
 ]
 
 const dataBounded: ChartTabularData = [
 	{
 		group: 'Dataset 1',
-		date: new Date(2023, 0, 1),
+		date: '2023-01-01',
 		value: 47263,
 		min: 40000,
 		max: 50000
 	},
 	{
 		group: 'Dataset 1',
-		date: new Date(2023, 0, 5),
+		date: '2023-01-05',
 		value: 14178,
 		min: 10000,
 		max: 20000
 	},
 	{
 		group: 'Dataset 1',
-		date: new Date(2023, 0, 8),
+		date: '2023-01-08',
 		value: 23094,
 		min: 10000,
 		max: 25000
 	},
 	{
 		group: 'Dataset 1',
-		date: new Date(2023, 0, 13),
+		date: '2023-01-13',
 		value: 45281,
 		min: 42000,
 		max: 50000
 	},
 	{
 		group: 'Dataset 1',
-		date: new Date(2023, 0, 19),
+		date: '2023-01-19',
 		value: -63954,
 		min: -70000,
 		max: -10000
@@ -277,156 +277,36 @@ const dataBounded: ChartTabularData = [
 ]
 
 const sparkLineData: ChartTabularData = [
-	{
-		group: 'Dataset 1',
-		date: 1558453260000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453320000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453380000,
-		value: 5
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453440000,
-		value: 1
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453500000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453560000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453620000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453680000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453740000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453800000,
-		value: 0
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453860000,
-		value: 5
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453920000,
-		value: 5
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558453980000,
-		value: 6
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454040000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454100000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454160000,
-		value: 6
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454280000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454340000,
-		value: 6
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454400000,
-		value: 0
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454460000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454520000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454580000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454640000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454700000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454760000,
-		value: 2
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454820000,
-		value: 4
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454880000,
-		value: 1
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558454940000,
-		value: 1
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558455000000,
-		value: 3
-	},
-	{
-		group: 'Dataset 1',
-		date: 1558455060000,
-		value: 2
-	}
+	{ group: 'Dataset 1', date: '2019-05-21T19:21:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:22:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:23:00.000Z', value: 5 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:24:00.000Z', value: 1 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:25:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:26:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:27:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:28:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:29:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:30:00.000Z', value: 0 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:31:00.000Z', value: 5 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:32:00.000Z', value: 5 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:33:00.000Z', value: 6 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:34:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:35:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:36:00.000Z', value: 6 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:38:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:39:00.000Z', value: 6 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:40:00.000Z', value: 0 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:41:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:42:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:43:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:44:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:45:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:46:00.000Z', value: 2 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:47:00.000Z', value: 4 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:48:00.000Z', value: 1 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:49:00.000Z', value: 1 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:50:00.000Z', value: 3 },
+	{ group: 'Dataset 1', date: '2019-05-21T19:51:00.000Z', value: 2 }
 ]
 
 export const examples: Example[] = [

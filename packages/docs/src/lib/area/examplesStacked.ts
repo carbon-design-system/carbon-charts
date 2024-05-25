@@ -62,36 +62,36 @@ const optionsUneven = {
 }
 
 const data: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 49213 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 17), value: 51213 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 1), value: 20000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 5), value: 25000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 8), value: 60000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 13), value: 30213 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 17), value: 55213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 1), value: 30000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 5), value: 20000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 8), value: 40000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 13), value: 60213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 17), value: 25213 }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-05', value: 65000 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
+	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
+	{ group: 'Dataset 2', date: '2023-01-01', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-05', value: 25000 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 60000 },
+	{ group: 'Dataset 2', date: '2023-01-13', value: 30213 },
+	{ group: 'Dataset 2', date: '2023-01-17', value: 55213 },
+	{ group: 'Dataset 3', date: '2023-01-01', value: 30000 },
+	{ group: 'Dataset 3', date: '2023-01-05', value: 20000 },
+	{ group: 'Dataset 3', date: '2023-01-08', value: 40000 },
+	{ group: 'Dataset 3', date: '2023-01-13', value: 60213 },
+	{ group: 'Dataset 3', date: '2023-01-17', value: 25213 }
 ]
 
 const dataUneven: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 49213 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 17), value: 51213 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 5), value: 25000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 8), value: 60000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 17), value: 55213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 1), value: 30000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 5), value: 20000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 8), value: 40000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 13), value: 60213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 17), value: 25213 }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
+	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
+	{ group: 'Dataset 2', date: '2023-01-05', value: 25000 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 60000 },
+	{ group: 'Dataset 2', date: '2023-01-17', value: 55213 },
+	{ group: 'Dataset 3', date: '2023-01-01', value: 30000 },
+	{ group: 'Dataset 3', date: '2023-01-05', value: 20000 },
+	{ group: 'Dataset 3', date: '2023-01-08', value: 40000 },
+	{ group: 'Dataset 3', date: '2023-01-13', value: 60213 },
+	{ group: 'Dataset 3', date: '2023-01-17', value: 25213 }
 ]
 
 export const examplesStacked: Example[] = [

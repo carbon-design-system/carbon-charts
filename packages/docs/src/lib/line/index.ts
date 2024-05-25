@@ -22,7 +22,7 @@ const lineOptions: LineChartOptions = {
 	title: 'Line (discrete)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		},
@@ -39,7 +39,7 @@ const lineLongLabelOptions: LineChartOptions = {
 	title: 'Truncated labels (line)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		},
@@ -56,7 +56,7 @@ const lineCustomDomainOptions: LineChartOptions = {
 	title: 'Custom domain (line)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS,
 			domain: ['Qty', 'More', 'Misc']
@@ -78,7 +78,7 @@ const lineSelectedGroupsOptions: LineChartOptions = {
 	},
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		},
@@ -95,7 +95,7 @@ const lineCustomColorOptions: LineChartOptions = {
 	title: 'Custom colors (line)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		},
@@ -120,7 +120,7 @@ const lineTimeSeriesOptions: LineChartOptions = {
 	title: 'Line (time series)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		},
@@ -138,12 +138,12 @@ const lineTimeSeriesWithThresholdsOptions: LineChartOptions = {
 	title: 'Thresholds (line)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME,
 			thresholds: [
 				{
-					value: new Date(2019, 0, 11),
+					value: new Date(2023, 0, 11),
 					label: 'Custom formatter',
 					valueFormatter: (d: Date) =>
 						new Intl.DateTimeFormat('en-CA', { month: 'short', day: '2-digit' }).format(d)
@@ -168,7 +168,7 @@ const lineTimeSeriesDenseOptions: LineChartOptions = {
 	title: 'Line (dense time series)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		},
@@ -224,7 +224,7 @@ const lineEmptyStateOptions: LineChartOptions = {
 	title: 'Line (empty state)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		},
@@ -242,7 +242,7 @@ const lineSkeletonOptions: LineChartOptions = {
 	title: 'Line (skeleton)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'date',
 			scaleType: ScaleTypes.TIME
 		},
@@ -285,7 +285,7 @@ const lineOptionsLegendOrientation: LineChartOptions = {
 	title: 'Left aligned vertical legend (line)',
 	axes: {
 		bottom: {
-			title: '2019 Annual Sales Figures',
+			title: '2023 Annual Sales Figures',
 			mapsTo: 'key',
 			scaleType: ScaleTypes.LABELS
 		},
@@ -394,105 +394,105 @@ const lineSelectedGroupsData: ChartTabularData = [
 ]
 
 export const lineTimeSeriesData: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: 50000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 65000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 8), value: null },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 49213 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 17), value: 51213 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 2), value: 0 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 6), value: 57312 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 8), value: 27432 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 15), value: 70323 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 19), value: 21300 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 1), value: 40000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 5), value: null },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 8), value: 18000 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 13), value: 39213 },
-	{ group: 'Dataset 3', date: new Date(2019, 0, 17), value: 61213 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 2), value: 20000 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 6), value: 37312 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 8), value: 51432 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 15), value: 25332 },
-	{ group: 'Dataset 4', date: new Date(2019, 0, 19), value: null }
+	{ group: 'Dataset 1', date: '2023-01-01', value: 50000 },
+	{ group: 'Dataset 1', date: '2023-01-05', value: 65000 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: null },
+	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
+	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
+	{ group: 'Dataset 2', date: '2023-01-02', value: 0 },
+	{ group: 'Dataset 2', date: '2023-01-06', value: 57312 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 27432 },
+	{ group: 'Dataset 2', date: '2023-01-15', value: 70323 },
+	{ group: 'Dataset 2', date: '2023-01-19', value: 21300 },
+	{ group: 'Dataset 3', date: '2023-01-01', value: 40000 },
+	{ group: 'Dataset 3', date: '2023-01-05', value: null },
+	{ group: 'Dataset 3', date: '2023-01-08', value: 18000 },
+	{ group: 'Dataset 3', date: '2023-01-13', value: 39213 },
+	{ group: 'Dataset 3', date: '2023-01-17', value: 61213 },
+	{ group: 'Dataset 4', date: '2023-01-02', value: 20000 },
+	{ group: 'Dataset 4', date: '2023-01-06', value: 37312 },
+	{ group: 'Dataset 4', date: '2023-01-08', value: 51432 },
+	{ group: 'Dataset 4', date: '2023-01-15', value: 25332 },
+	{ group: 'Dataset 4', date: '2023-01-19', value: null }
 ]
 
 const lineTimeSeriesDenseData: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1), value: -10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 5), value: -12000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 1, 10), value: -14000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2), value: -25000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 2, 2), value: -26000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 3), value: -10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 5), value: 10000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 3, 10), value: 12000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 5), value: 45000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 7), value: 49000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 7, 15), value: 45000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 9), value: 50000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 9, 5), value: 52000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 9, 15), value: 55000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 10), value: 50000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 12), value: 65000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 13), value: 80000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 14, 10), value: 85000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 15, 7), value: 90000 },
-	{ group: 'Dataset 1', date: new Date(2019, 0, 15, 18), value: 70000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 1), value: 20000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 3), value: 22000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 1, 16), value: 24000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 2), value: 35000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 2, 7), value: 36000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 3), value: 20000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 3, 6), value: 20000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 3, 18), value: 22000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 5), value: 62000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 6), value: 52000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 7), value: 52000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 7, 15), value: 52000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 9), value: 60000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 9, 5), value: 62000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 9, 10), value: 62000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 12), value: 65000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 14), value: 40000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 15, 5), value: 45000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 15, 10), value: 35000 },
-	{ group: 'Dataset 2', date: new Date(2019, 0, 15, 18), value: 30000 }
+	{ group: 'Dataset 1', date: '2023-01-01T00:00:00.000Z', value: -10000 },
+	{ group: 'Dataset 1', date: '2023-01-01T05:00:00.000Z', value: -12000 },
+	{ group: 'Dataset 1', date: '2023-01-01T10:00:00.000Z', value: -14000 },
+	{ group: 'Dataset 1', date: '2023-01-02T00:00:00.000Z', value: -25000 },
+	{ group: 'Dataset 1', date: '2023-01-02T02:00:00.000Z', value: -26000 },
+	{ group: 'Dataset 1', date: '2023-01-03T00:00:00.000Z', value: -10000 },
+	{ group: 'Dataset 1', date: '2023-01-03T05:00:00.000Z', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-03T10:00:00.000Z', value: 12000 },
+	{ group: 'Dataset 1', date: '2023-01-05T00:00:00.000Z', value: 45000 },
+	{ group: 'Dataset 1', date: '2023-01-07T00:00:00.000Z', value: 49000 },
+	{ group: 'Dataset 1', date: '2023-01-07T15:00:00.000Z', value: 45000 },
+	{ group: 'Dataset 1', date: '2023-01-09T00:00:00.000Z', value: 50000 },
+	{ group: 'Dataset 1', date: '2023-01-09T05:00:00.000Z', value: 52000 },
+	{ group: 'Dataset 1', date: '2023-01-09T15:00:00.000Z', value: 55000 },
+	{ group: 'Dataset 1', date: '2023-01-10T00:00:00.000Z', value: 50000 },
+	{ group: 'Dataset 1', date: '2023-01-12T00:00:00.000Z', value: 65000 },
+	{ group: 'Dataset 1', date: '2023-01-13T00:00:00.000Z', value: 80000 },
+	{ group: 'Dataset 1', date: '2023-01-14T10:00:00.000Z', value: 85000 },
+	{ group: 'Dataset 1', date: '2023-01-15T07:00:00.000Z', value: 90000 },
+	{ group: 'Dataset 1', date: '2023-01-15T18:00:00.000Z', value: 70000 },
+	{ group: 'Dataset 2', date: '2023-01-01T00:00:00.000Z', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-01T03:00:00.000Z', value: 22000 },
+	{ group: 'Dataset 2', date: '2023-01-01T16:00:00.000Z', value: 24000 },
+	{ group: 'Dataset 2', date: '2023-01-02T00:00:00.000Z', value: 35000 },
+	{ group: 'Dataset 2', date: '2023-01-02T07:00:00.000Z', value: 36000 },
+	{ group: 'Dataset 2', date: '2023-01-03T00:00:00.000Z', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-03T06:00:00.000Z', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-03T18:00:00.000Z', value: 22000 },
+	{ group: 'Dataset 2', date: '2023-01-05T00:00:00.000Z', value: 62000 },
+	{ group: 'Dataset 2', date: '2023-01-06T00:00:00.000Z', value: 52000 },
+	{ group: 'Dataset 2', date: '2023-01-07T00:00:00.000Z', value: 52000 },
+	{ group: 'Dataset 2', date: '2023-01-07T15:00:00.000Z', value: 52000 },
+	{ group: 'Dataset 2', date: '2023-01-09T00:00:00.000Z', value: 60000 },
+	{ group: 'Dataset 2', date: '2023-01-09T05:00:00.000Z', value: 62000 },
+	{ group: 'Dataset 2', date: '2023-01-09T10:00:00.000Z', value: 62000 },
+	{ group: 'Dataset 2', date: '2023-01-12T00:00:00.000Z', value: 65000 },
+	{ group: 'Dataset 2', date: '2023-01-14T00:00:00.000Z', value: 40000 },
+	{ group: 'Dataset 2', date: '2023-01-15T05:00:00.000Z', value: 45000 },
+	{ group: 'Dataset 2', date: '2023-01-15T10:00:00.000Z', value: 35000 },
+	{ group: 'Dataset 2', date: '2023-01-15T18:00:00.000Z', value: 30000 }
 ]
 
 const lineTimeSeriesDataRotatedTicks: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 11, 30), value: 32100 },
-	{ group: 'Dataset 1', date: new Date(2019, 11, 31), value: 23500 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 1), value: 53100 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 2), value: 42300 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 3), value: 12300 }
+	{ group: 'Dataset 1', date: '2023-12-30', value: 32100 },
+	{ group: 'Dataset 1', date: '2023-12-31', value: 23500 },
+	{ group: 'Dataset 1', date: '2024-01-01', value: 53100 },
+	{ group: 'Dataset 1', date: '2024-01-02', value: 42300 },
+	{ group: 'Dataset 1', date: '2024-01-03', value: 12300 }
 ]
 
 const lineLogAxisData: ChartTabularData = [
-	{ group: 'Dataset 1', date: new Date(2019, 11, 30), value: 300100 },
-	{ group: 'Dataset 1', date: new Date(2019, 11, 31), value: 235000 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 1), value: 153100 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 2), value: 142300 },
-	{ group: 'Dataset 1', date: new Date(2020, 0, 3), value: 82300 }
+	{ group: 'Dataset 1', date: '2023-12-30', value: 300100 },
+	{ group: 'Dataset 1', date: '2023-12-31', value: 235000 },
+	{ group: 'Dataset 1', date: '2024-01-01', value: 153100 },
+	{ group: 'Dataset 1', date: '2024-01-02', value: 142300 },
+	{ group: 'Dataset 1', date: '2024-01-03', value: 82300 }
 ]
 
 const lineEmptyStateData: ChartTabularData = []
 const lineSkeletonData: ChartTabularData = []
 
 const lineTimeSeriesDualAxesData: ChartTabularData = [
-	{ group: 'Temperature', date: new Date(2019, 0, 1), temp: 23 },
-	{ group: 'Temperature', date: new Date(2019, 1, 1), temp: 15 },
-	{ group: 'Temperature', date: new Date(2019, 2, 1), temp: 24 },
-	{ group: 'Temperature', date: new Date(2019, 3, 1), temp: 33 },
-	{ group: 'Temperature', date: new Date(2019, 4, 1), temp: 23 },
-	{ group: 'Temperature', date: new Date(2019, 5, 1), temp: 32 },
-	{ group: 'Temperature', date: new Date(2019, 6, 1), temp: 23 },
-	{ group: 'Rainfall', date: new Date(2019, 0, 1), rainfall: 50 },
-	{ group: 'Rainfall', date: new Date(2019, 1, 1), rainfall: 65 },
-	{ group: 'Rainfall', date: new Date(2019, 2, 1), rainfall: 35 },
-	{ group: 'Rainfall', date: new Date(2019, 3, 1), rainfall: 43 },
-	{ group: 'Rainfall', date: new Date(2019, 4, 1), rainfall: 53 },
-	{ group: 'Rainfall', date: new Date(2019, 5, 1), rainfall: 19 },
-	{ group: 'Rainfall', date: new Date(2019, 6, 1), rainfall: 13 }
+	{ group: 'Temperature', date: '2023-01-01', temp: 23 },
+	{ group: 'Temperature', date: '2023-02-01', temp: 15 },
+	{ group: 'Temperature', date: '2023-03-01', temp: 24 },
+	{ group: 'Temperature', date: '2023-04-01', temp: 33 },
+	{ group: 'Temperature', date: '2023-05-01', temp: 23 },
+	{ group: 'Temperature', date: '2023-06-01', temp: 32 },
+	{ group: 'Temperature', date: '2023-07-01', temp: 23 },
+	{ group: 'Rainfall', date: '2023-01-01', rainfall: 50 },
+	{ group: 'Rainfall', date: '2023-02-01', rainfall: 65 },
+	{ group: 'Rainfall', date: '2023-03-01', rainfall: 35 },
+	{ group: 'Rainfall', date: '2023-04-01', rainfall: 43 },
+	{ group: 'Rainfall', date: '2023-05-01', rainfall: 53 },
+	{ group: 'Rainfall', date: '2023-06-01', rainfall: 19 },
+	{ group: 'Rainfall', date: '2023-07-01', rainfall: 13 }
 ]
 
 export const examples: Example[] = [
