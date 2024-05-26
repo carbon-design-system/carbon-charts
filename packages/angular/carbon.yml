@@ -2,7 +2,9 @@
 library:
   id: carbon-charts-angular
   name: Carbon Charts Angular
-  description: Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts` component library.
+  description:
+    Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts`
+    component library.
   inherits: carbon-charts
 assets:
   alluvial:
@@ -327,7 +329,7 @@ assets:
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
       usagePath: https://charts.carbondesignsystem.com/scatter
- tree:
+  tree:
     name: Tree
     status: stable
     framework: angular

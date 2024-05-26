@@ -29,7 +29,6 @@ export default tseslint.config(
 			'**/.svelte-kit/',
 			'**/svelte/static',
 			'**/dist/',
-			'**/carbon.yml',
 			'packages/angular/'
 		]
 	},

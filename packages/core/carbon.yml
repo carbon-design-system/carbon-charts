@@ -2,7 +2,9 @@
 library:
   id: carbon-charts
   name: Carbon Charts
-  description: Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on D3.js, a peer dependency.
+  description:
+    Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on
+    D3.js, a peer dependency.
   externalDocsUrl: https://www.carbondesignsystem.com/data-visualization/getting-started
   designKits:
     data-viz-sketch:
@@ -236,7 +238,7 @@ assets:
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
-      usagePath: https://charts.carbondesignsystem.com/choropleth  
+      usagePath: https://charts.carbondesignsystem.com/choropleth
   circle-pack:
     name: Circle pack
     status: stable
@@ -405,7 +407,7 @@ assets:
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
       usagePath: https://charts.carbondesignsystem.com/scatter
- tree:
+  tree:
     name: Tree
     status: stable
     framework: vanilla

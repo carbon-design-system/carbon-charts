@@ -2,7 +2,9 @@
 library:
   id: carbon-charts-react
   name: Carbon Charts React
-  description: Carbon Charts React is a thin React wrapper around the react JavaScript `@carbon/charts` component library.
+  description:
+    Carbon Charts React is a thin React wrapper around the react JavaScript `@carbon/charts`
+    component library.
   inherits: carbon-charts
 assets:
   alluvial:
@@ -158,7 +160,7 @@ assets:
     platform: web
     docs:
       overviewPath: https://carbondesignsystem.com/data-visualization/spatial-charts/#geospatial-charts
-      usagePath: https://charts.carbondesignsystem.com/choropleth  
+      usagePath: https://charts.carbondesignsystem.com/choropleth
   circle-pack:
     name: Circle pack
     status: stable
@@ -327,7 +329,7 @@ assets:
     docs:
       overviewPath: https://www.carbondesignsystem.com/data-visualization/simple-charts#scatter
       usagePath: https://charts.carbondesignsystem.com/scatter
- tree:
+  tree:
     name: Tree
     status: stable
     framework: react
