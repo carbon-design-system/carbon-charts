@@ -1,4 +1,9 @@
 [context.deploy-preview]
   publish = "pages/"
   command = "./scripts/netlify.sh"
-  NODE_ENV = "production"
+  [context.deploy-preview.environment]
+    NODE_ENV = "production"
+    GO_VERSION = ""
+    PYTHON_VERSION = ""
+    RUBY_VERSION = ""
+    PHP_VERSION = ""
