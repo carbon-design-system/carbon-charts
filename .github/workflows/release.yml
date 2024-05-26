@@ -30,7 +30,7 @@ jobs:
           git config --global user.name "carbon-bot"
           git checkout master
 
-      - name: Create version and change logs 
+      - name: Create version and change logs
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
