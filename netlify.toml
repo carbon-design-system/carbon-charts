@@ -3,7 +3,7 @@
   command = "./scripts/netlify.sh"
   [context.deploy-preview.environment]
     NODE_ENV = "production"
-    GO_VERSION = ""
-    PYTHON_VERSION = ""
-    RUBY_VERSION = ""
-    PHP_VERSION = ""
+    GO_VERSION = "none"
+    PHP_VERSION = "none"
+    PYTHON_VERSION = "none"
+    RUBY_VERSION = "none"
