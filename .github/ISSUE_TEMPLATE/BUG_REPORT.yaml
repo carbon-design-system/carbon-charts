@@ -46,7 +46,7 @@ body:
     id: what-happened
     attributes:
       label: What happened and what did you expect to happen?
-      description: Include steps to reproduce and environmental information
+      description: Include steps to reproduce and environmental information such as your framework version (eg Angular 18.0.1)
     validations:
       required: true
   - type: textarea
