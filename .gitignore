@@ -1,23 +1,13 @@
-# Global
-**/node_modules
-**/*.log
-
-# Yarn items to not include in repo as they are rebuilt by yarn install
+# Monorepo root-level
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-
-# Lerna
 .nx/cache
-
-# Documentation website for GitHub Pages
 pages/
 
-# Package-level
+# Global
+**/node_modules
 **/.angular
 **/.DS_Store
 **/.svelte-kit
-**/build
 **/dist
