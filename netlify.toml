@@ -4,7 +4,3 @@
   [context.deploy-preview.environment]
     NODE_VERSION = "20.13.1"
     NODE_ENV = "production"
-    GO_VERSION = "0"
-    PHP_VERSION = "0"
-    PYTHON_VERSION = "0"
-    RUBY_VERSION = "0"
