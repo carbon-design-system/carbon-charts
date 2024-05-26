@@ -42,7 +42,8 @@ To get charts running locally on your machine:
 4. Run `yarn build` to build all packages and the documentation website
 
 ```sh
-yarn start
+cd packages/docs
+yarn dev
 ```
 
 ## Issue guidelines
