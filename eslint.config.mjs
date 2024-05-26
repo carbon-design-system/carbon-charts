@@ -16,7 +16,6 @@ export default tseslint.config(
 	{
 		ignores: [
 			// default already excludes node_modules and .git
-			'.github/',
 			'.husky/',
 			'.nx/',
 			'.yarn/',
