@@ -1,13 +1,13 @@
 name: Question❓
 description: Suggest an idea for Carbon Charts
-title: "[Enhancement]: "
+title: '[Enhancement]: '
 labels: [enhancement]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for submitting a question.
-        
+
         If you're an IBMer, we have a couple of Slack channels available across all IBM
         Workspaces:
 

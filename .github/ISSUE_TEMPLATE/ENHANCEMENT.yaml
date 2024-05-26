@@ -1,6 +1,6 @@
 name: Feature request / enhancement 💡
 description: Suggest an idea for Carbon Charts
-title: "[Enhancement]: "
+title: '[Enhancement]: '
 labels: [enhancement]
 body:
   - type: markdown
@@ -21,8 +21,7 @@ body:
       description: >-
         Please describe your request in one or two sentences.
 
-        Clarify if you are asking for design, development, or both design and
-        development.
+        Clarify if you are asking for design, development, or both design and development.
     validations:
       required: true
   - type: textarea
@@ -36,7 +35,9 @@ body:
     id: metrics
     attributes:
       label: Desired UX and success metrics
-      description: Describe the full user experience for this feature. Also define the metrics by which we can measure success/failure for the user.
+      description:
+        Describe the full user experience for this feature. Also define the metrics by which we can
+        measure success/failure for the user.
     validations:
       required: true
   - type: textarea
@@ -46,8 +47,8 @@ body:
       description: >-
         Highlight any "must have" needs and functionality for the request.
 
-        This should not be a full list of functionality; the Carbon team will work with
-        you to define functionality based on the desired UX.
+        This should not be a full list of functionality; the Carbon team will work with you to
+        define functionality based on the desired UX.
     validations:
       required: true
   - type: textarea
@@ -57,9 +58,8 @@ body:
       description: >-
         Do you want this work within a specific time period? Is it related to an upcoming release?
 
-        *NB: The Carbon team will try to work with your timeline, but it's not
-        guaranteed. The earlier you make a request in advance of a desired delivery
-        date, the better!*
+        *NB: The Carbon team will try to work with your timeline, but it's not guaranteed. The
+        earlier you make a request in advance of a desired delivery date, the better!*
     validations:
       required: true
   - type: textarea
@@ -69,7 +69,8 @@ body:
       description: >-
         What resources do you have to assist this effort?
 
-        *Carbon is a collaborative system. We encourage teams to build components and submit them for integration as either add-ons or core components.*
+        *Carbon is a collaborative system. We encourage teams to build components and submit them
+        for integration as either add-ons or core components.*
     validations:
       required: true
   - type: dropdown

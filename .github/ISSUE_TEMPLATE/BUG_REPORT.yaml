@@ -1,6 +1,6 @@
 name: Bug report 🐛
 description: Something isn't working as expected...
-title: "[Bug]: "
+title: '[Bug]: '
 labels: [bug 🐛]
 body:
   - type: markdown
@@ -12,22 +12,22 @@ body:
     attributes:
       label: Relevant package(s)
       options:
-        - label: "@carbon/charts"
-        - label: "@carbon/charts-svelte"
-        - label: "@carbon/charts-react"
-        - label: "@carbon/charts-angular"
-        - label: "@carbon/charts-vue"
-        - label: "Documentation website"
+        - label: '@carbon/charts'
+        - label: '@carbon/charts-svelte'
+        - label: '@carbon/charts-react'
+        - label: '@carbon/charts-angular'
+        - label: '@carbon/charts-vue'
+        - label: 'Documentation website'
     validations:
       required: true
-    - type: input
+  - type: input
     id: version
     attributes:
-      label: Version
+      label: Carbon Charts Version
       placeholder: 1.16.1
     validations:
       required: true
-      - type: dropdown
+  - type: dropdown
     id: bundler
     attributes:
       label: Which bundler are you using?
@@ -46,7 +46,9 @@ body:
     id: what-happened
     attributes:
       label: What happened and what did you expect to happen?
-      description: Include steps to reproduce and environmental information such as your framework version (eg Angular 18.0.1)
+      description:
+        Include steps to reproduce and environmental information such as your framework version (eg.
+        Angular 18.0.1)
     validations:
       required: true
   - type: textarea
@@ -55,13 +57,13 @@ body:
       label: Chart data and options (automatically formatted so no need for backticks)
       description: Please provide both
       render: js
-    - type: textarea
+  - type: textarea
     id: logs
     attributes:
       label: JavaScript console or build output (if relevant)
       description: Automatically formatted so no need for backticks
       render: shell
-    - type: input
+  - type: input
     id: repro
     attributes:
       label: StackBlitz repro
@@ -76,10 +78,10 @@ body:
     attributes:
       label: What priority level would this be in your opinion?
       options:
-        - P0
-        - P1
-        - P2
-        - P3
-        - P4
+        - P0 (Critical)
+        - P1 (High)
+        - P2 (Medium)
+        - P3 (Low)
+        - P4 (Trivial)
     validations:
       required: true
