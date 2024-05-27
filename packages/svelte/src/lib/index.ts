@@ -135,3 +135,31 @@ export {
 	TreemapChart,
 	WordCloudChart
 }
+
+export default {
+	AlluvialChart,
+	AreaChart,
+	BarChartGrouped,
+	BarChartSimple,
+	BarChartStacked,
+	BoxplotChart,
+	BubbleChart,
+	BulletChart,
+	ExperimentalChoroplethChart,
+	CirclePackChart,
+	ComboChart,
+	DonutChart,
+	GaugeChart,
+	HeatmapChart,
+	HistogramChart,
+	LineChart,
+	LollipopChart,
+	MeterChart,
+	PieChart,
+	RadarChart,
+	ScatterChart,
+	StackedAreaChart,
+	TreeChart,
+	TreemapChart,
+	WordCloudChart
+}

@@ -3,14 +3,14 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
-		// "esModuleInterop": true,
+		// "esModuleInterop": true, // should not be needed as core has this enabled and it uses CJS modules directly
 		"forceConsistentCasingInFileNames": true,
-		"outDir": "dist", // different from default
-		// "resolveJsonModule": true,
+		"outDir": "dist", // not build
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext"
+		"noImplicitAny": false, // for src/routes/+page.svelte:14
+		"module": "ESNext",
+		"moduleResolution": "Bundler"
 	}
 }

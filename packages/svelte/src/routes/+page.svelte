@@ -1,6 +1,6 @@
-<script lang="typescript">
+<script lang="ts">
 	import charts from '../../../docs/src/charts'
-	import * as ChartComponents from '$lib/index'
+	import chartComponents from '$lib'
 	import '@carbon/charts/styles.min.css'
 </script>
 
@@ -11,7 +11,7 @@
 	<h3>{chart.types.svelte}</h3>
 	{#each chart.examples as example}
 		<svelte:component
-			this={ChartComponents[chart.types.svelte]}
+			this={chartComponents[chart.types.svelte]}
 			options={example.options}
 			data={example.data} />
 	{/each}
