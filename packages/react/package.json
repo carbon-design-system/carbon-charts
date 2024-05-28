@@ -32,7 +32,8 @@
 		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3000",
-		"test:visual": "npx playwright test",
+		"test:visual": "playwright test",
+		"test:visual:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},

@@ -12,7 +12,8 @@
 		"lint": "lerna run lint",
 		"format": "lerna run format",
 		"test": "lerna run test",
-		"test:visual": "lerna run test:visual"
+		"test:visual": "lerna run test:visual --concurrency 1",
+		"test:visual:rebase": "lerna run test:visual:rebase --concurrency 1"
 	},
 	"workspaces": [
 		"packages/*"

@@ -17,7 +17,8 @@
 		"build": "ng build -c production && yarn postbundle",
 		"build:test": "ng build charts-angular-test",
 		"dev": "ng serve --port 3000",
-		"test:visual": "npx playwright test",
+		"test:visual": "playwright test",
+		"test:visual:rebase": "playwright test --update-snapshots",
 		"lint": "ng lint --ignore-path ../../.prettierignore",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},

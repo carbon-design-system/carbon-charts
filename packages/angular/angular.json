@@ -55,6 +55,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser-esbuild",
 					"options": {
+						"aot": true,
 						"outputPath": "../../pages",
 						"index": "charts-angular-test/src/index.html",
 						"main": "charts-angular-test/src/main.ts",
@@ -82,12 +83,10 @@
 							"outputHashing": "all"
 						},
 						"development": {
-							"buildOptimizer": false,
+							"buildOptimizer": true,
 							"optimization": false,
-							"vendorChunk": true,
 							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
+							"sourceMap": true
 						}
 					},
 					"defaultConfiguration": "production"

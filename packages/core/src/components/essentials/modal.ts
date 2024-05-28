@@ -1,6 +1,6 @@
 import { select, type Selection } from 'd3'
 import { get } from 'lodash-es'
-import { Modal as CarbonModalComponent } from 'carbon-components' // /es/components/modal
+import { Modal as CarbonModalComponent } from 'carbon-components'
 import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'

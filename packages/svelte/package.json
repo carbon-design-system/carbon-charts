@@ -9,7 +9,8 @@
 		"build:test": "vite build --emptyOutDir",
 		"dev": "vite --port 3000",
 		"test": "svelte-check --workspace=tests",
-		"test:visual": "npx playwright test",
+		"test:visual": "playwright test",
+		"test:visual:rebase": "playwright test --update-snapshots",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"lint": "prettier . --check --ignore-path ../../.prettierignore && eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore "
