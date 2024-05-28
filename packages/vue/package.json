@@ -26,6 +26,7 @@
 		"build": "vite build && yarn file:styles",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3000",
+		"test:visual": "npx playwright test",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
@@ -38,6 +39,7 @@
 		"vue": "^3.4.27"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.44.1",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"eslint": "^9.3.0",
 		"prettier": "^3.2.5",

@@ -11,7 +11,8 @@
 		"postpack": "pinst --enable",
 		"lint": "lerna run lint",
 		"format": "lerna run format",
-		"test": "lerna run test"
+		"test": "lerna run test",
+		"test:visual": "lerna run test:visual"
 	},
 	"workspaces": [
 		"packages/*"

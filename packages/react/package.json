@@ -32,6 +32,7 @@
 		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3000",
+		"test:visual": "npx playwright test",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
@@ -47,6 +48,7 @@
 		"react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.44.1",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.0",
