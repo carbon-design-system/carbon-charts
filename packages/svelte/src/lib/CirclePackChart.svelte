@@ -8,8 +8,8 @@
 
 	export let options: CirclePackChartOptions
 	export let data: ChartTabularData
-	export let chart: CirclePackChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: CirclePackChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

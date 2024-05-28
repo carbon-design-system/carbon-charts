@@ -8,8 +8,8 @@
 
 	export let options: ComboChartOptions
 	export let data: ChartTabularData
-	export let chart: ComboChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: ComboChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

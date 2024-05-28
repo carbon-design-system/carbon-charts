@@ -11,6 +11,7 @@
 		"strict": true,
 		"noImplicitAny": false, // for src/routes/+page.svelte:14
 		"module": "ESNext",
-		"moduleResolution": "Bundler"
+		"moduleResolution": "Bundler",
+		"allowImportingTsExtensions": true
 	}
 }

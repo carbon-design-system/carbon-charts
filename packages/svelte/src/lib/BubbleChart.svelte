@@ -8,8 +8,8 @@
 
 	export let options: BubbleChartOptions
 	export let data: ChartTabularData
-	export let chart: BubbleChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: BubbleChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

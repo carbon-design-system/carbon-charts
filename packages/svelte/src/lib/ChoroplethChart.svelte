@@ -8,8 +8,8 @@
 
 	export let options: ChoroplethChartOptions
 	export let data: ChartTabularData
-	export let chart: ChoroplethChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: ChoroplethChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart
