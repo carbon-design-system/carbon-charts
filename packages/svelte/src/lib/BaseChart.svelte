@@ -1,19 +1,19 @@
-<script lang="ts">
+<script lang="ts" generics="T extends BaseChartOptions">
+	/* eslint-disable @typescript-eslint/no-unused-vars */
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-	import type { Charts, ChartConfig, ChartOptions, ChartTabularData } from '@carbon/charts'
+	import type { Charts, ChartConfig, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
 	const chartHolderCssClass = 'cds--chart-holder'
 	export let data: ChartTabularData = []
-	export let options: ChartOptions = {} // AlluvialChartOptions, BarChartOptions, etc.
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export let Chart: new (holder: HTMLDivElement, chartConfigs: ChartConfig<any>) => Charts
-	export let chart: Charts // instance of the class passed to the Chart property
+	export let options: T = {} as T // AlluvialChartOptions, BarChartOptions, etc.
+	export let Chart: new (holder: HTMLDivElement, chartConfigs: ChartConfig<T>) => Charts
+	export let chart: Charts | undefined // instance of the class passed to the Chart property
 	export let ref: HTMLDivElement // expose to parent so the div can be manipulated, if desired
 	export let id = `chart-${Math.random().toString(36)}` // id for chart holder element
 
 	interface DispatchedEvents {
 		load: null
-		update: { data: ChartTabularData; options: ChartOptions }
+		update: { data: ChartTabularData; options: T }
 		destroy: null
 	}
 
@@ -46,8 +46,7 @@
 			// Almost the same as core's Chart.destroy() but without getting rid of the chart holder
 			chart.components.forEach(component => component.destroy())
 			chart.model.set({ destroyed: true }, { skipUpdate: true })
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			chart = undefined as any
+			chart = undefined
 		}
 	})
 </script>
