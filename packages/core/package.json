@@ -58,7 +58,7 @@
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build": "vite build && vite build -c ./vite.umd.config.ts && yarn postbundle && cp dist/styles*.css* ./ && publint",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"dev": "vite",
+		"dev": "vite --port 3000",
 		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"lint": "eslint",

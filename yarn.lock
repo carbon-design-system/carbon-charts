@@ -1961,6 +1961,7 @@ __metadata:
     "@stackblitz/sdk": "npm:^1.10.0"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
+    "@types/topojson-specification": "npm:^1.0.5"
     "@vitejs/plugin-react-swc": "npm:^3.7.0"
     eslint: "npm:^9.3.0"
     highlight.js: "npm:^11.9.0"
@@ -5383,7 +5384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/topojson-specification@npm:*":
+"@types/topojson-specification@npm:*, @types/topojson-specification@npm:^1.0.5":
   version: 1.0.5
   resolution: "@types/topojson-specification@npm:1.0.5"
   dependencies:

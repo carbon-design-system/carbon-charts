@@ -16,7 +16,7 @@
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build": "ng build -c production && yarn postbundle",
 		"build:test": "ng build charts-angular-test",
-		"dev": "ng serve",
+		"dev": "ng serve --port 3000",
 		"lint": "ng lint --ignore-path ../../.prettierignore",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},

@@ -31,7 +31,7 @@
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"dev": "vite",
+		"dev": "vite --port 3000",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
