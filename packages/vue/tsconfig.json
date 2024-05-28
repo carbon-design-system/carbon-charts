@@ -28,7 +28,8 @@
 		"../../../docs/src/charts.ts",
 		"vite.config.ts", // ok to include as vite generates output - not tsc
 		"vite.test.config.ts", // ditto
-		"playwright.config.ts"
+		"playwright.config.ts",
+		"tests/visual-regression.spec.ts"
 	],
 	"exclude": ["node_modules", "dist"]
 }
