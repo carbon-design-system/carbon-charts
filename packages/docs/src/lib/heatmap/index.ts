@@ -28,7 +28,8 @@ const heatmapOptions: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
 	},
-	height: '400px'
+	height: '400px',
+	width: '960px'
 }
 
 const heatmapQuantizeLegendOption: HeatmapChartOptions = {
@@ -48,7 +49,8 @@ const heatmapQuantizeLegendOption: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title', type: 'quantize' }
 	},
-	height: '400px'
+	height: '400px',
+	width: '960px'
 }
 
 const heatmapPositiveNegativeOptions = Object.assign({}, heatmapOptions, {
@@ -88,7 +90,9 @@ const heatmapDomainOptions: HeatmapChartOptions = {
 	},
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
-	}
+	},
+	height: '400px',
+	width: '960px'
 }
 
 const heatmapMissingDataOptions: HeatmapChartOptions = {
@@ -107,7 +111,9 @@ const heatmapMissingDataOptions: HeatmapChartOptions = {
 	},
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
-	}
+	},
+	height: '400px',
+	width: '960px'
 }
 
 const heatmapData: ChartTabularData = [
@@ -1156,10 +1162,128 @@ const heatmapMissingData: ChartTabularData = [
 	}
 ]
 
-const heatmapPositiveNegativeData = heatmapData.map(element => ({
-	...element,
-	value: (element['value'] / 10) * (Math.round(Math.random()) ? -1 : 1)
-}))
+const heatmapPositiveNegativeData = [
+	{ letter: 'A', month: 'January', value: -4.1 },
+	{ letter: 'B', month: 'January', value: 0.7 },
+	{ letter: 'C', month: 'January', value: 6.6 },
+	{ letter: 'D', month: 'January', value: -8.5 },
+	{ letter: 'E', month: 'January', value: 7 },
+	{ letter: 'F', month: 'January', value: -9.8 },
+	{ letter: 'G', month: 'January', value: 9 },
+	{ letter: 'H', month: 'January', value: -6.6 },
+	{ letter: 'I', month: 'January', value: 0 },
+	{ letter: 'J', month: 'January', value: -1.3 },
+	{ letter: 'A', month: 'February', value: -1.6 },
+	{ letter: 'B', month: 'February', value: -0.5 },
+	{ letter: 'C', month: 'February', value: -0.6 },
+	{ letter: 'D', month: 'February', value: -4.8 },
+	{ letter: 'E', month: 'February', value: -7.2 },
+	{ letter: 'F', month: 'February', value: -2.6 },
+	{ letter: 'G', month: 'February', value: 7 },
+	{ letter: 'H', month: 'February', value: -9.9 },
+	{ letter: 'I', month: 'February', value: -7.9 },
+	{ letter: 'J', month: 'February', value: 8.3 },
+	{ letter: 'A', month: 'March', value: -6.2 },
+	{ letter: 'B', month: 'March', value: -5.7 },
+	{ letter: 'C', month: 'March', value: 9 },
+	{ letter: 'D', month: 'March', value: -6.8 },
+	{ letter: 'E', month: 'March', value: -8.4 },
+	{ letter: 'F', month: 'March', value: -2.1 },
+	{ letter: 'G', month: 'March', value: -5.4 },
+	{ letter: 'H', month: 'March', value: 2.5 },
+	{ letter: 'I', month: 'March', value: 4.2 },
+	{ letter: 'J', month: 'March', value: 6.2 },
+	{ letter: 'A', month: 'April', value: -1.5 },
+	{ letter: 'B', month: 'April', value: -5.2 },
+	{ letter: 'C', month: 'April', value: 1.5 },
+	{ letter: 'D', month: 'April', value: 2.2 },
+	{ letter: 'E', month: 'April', value: 5.9 },
+	{ letter: 'F', month: 'April', value: -3.6 },
+	{ letter: 'G', month: 'April', value: 0.5 },
+	{ letter: 'H', month: 'April', value: -1.8 },
+	{ letter: 'I', month: 'April', value: -4.2 },
+	{ letter: 'J', month: 'April', value: -7.2 },
+	{ letter: 'A', month: 'May', value: -3 },
+	{ letter: 'B', month: 'May', value: 3.9 },
+	{ letter: 'C', month: 'May', value: 6.9 },
+	{ letter: 'D', month: 'May', value: 7.3 },
+	{ letter: 'E', month: 'May', value: -0.2 },
+	{ letter: 'F', month: 'May', value: -1.5 },
+	{ letter: 'G', month: 'May', value: -8.6 },
+	{ letter: 'H', month: 'May', value: -2.3 },
+	{ letter: 'I', month: 'May', value: 6.5 },
+	{ letter: 'J', month: 'May', value: 0 },
+	{ letter: 'A', month: 'June', value: 5.1 },
+	{ letter: 'B', month: 'June', value: -3 },
+	{ letter: 'C', month: 'June', value: 0.7 },
+	{ letter: 'D', month: 'June', value: -7.4 },
+	{ letter: 'E', month: 'June', value: -4.4 },
+	{ letter: 'F', month: 'June', value: -6.2 },
+	{ letter: 'G', month: 'June', value: 6.5 },
+	{ letter: 'H', month: 'June', value: 3.5 },
+	{ letter: 'I', month: 'June', value: -9.5 },
+	{ letter: 'J', month: 'June', value: 5.9 },
+	{ letter: 'A', month: 'July', value: -8.9 },
+	{ letter: 'B', month: 'July', value: 5 },
+	{ letter: 'C', month: 'July', value: -3.5 },
+	{ letter: 'D', month: 'July', value: -4.5 },
+	{ letter: 'E', month: 'July', value: 9.3 },
+	{ letter: 'F', month: 'July', value: -1.9 },
+	{ letter: 'G', month: 'July', value: 5.2 },
+	{ letter: 'H', month: 'July', value: 8.1 },
+	{ letter: 'I', month: 'July', value: 7.2 },
+	{ letter: 'J', month: 'July', value: 9.9 },
+	{ letter: 'A', month: 'August', value: 5.4 },
+	{ letter: 'B', month: 'August', value: 4.1 },
+	{ letter: 'C', month: 'August', value: 7.5 },
+	{ letter: 'D', month: 'August', value: 1 },
+	{ letter: 'E', month: 'August', value: 0 },
+	{ letter: 'F', month: 'August', value: -9.3 },
+	{ letter: 'G', month: 'August', value: -0.3 },
+	{ letter: 'H', month: 'August', value: 8 },
+	{ letter: 'I', month: 'August', value: 8.8 },
+	{ letter: 'J', month: 'August', value: 2.7 },
+	{ letter: 'A', month: 'September', value: 8.1 },
+	{ letter: 'B', month: 'September', value: -3.6 },
+	{ letter: 'C', month: 'September', value: 7.7 },
+	{ letter: 'D', month: 'September', value: -0.1 },
+	{ letter: 'E', month: 'September', value: -4.5 },
+	{ letter: 'F', month: 'September', value: 2.3 },
+	{ letter: 'G', month: 'September', value: -0.1 },
+	{ letter: 'H', month: 'September', value: 1.3 },
+	{ letter: 'I', month: 'September', value: 6.1 },
+	{ letter: 'J', month: 'September', value: 8.7 },
+	{ letter: 'A', month: 'October', value: 0.5 },
+	{ letter: 'B', month: 'October', value: -2.9 },
+	{ letter: 'C', month: 'October', value: 4.9 },
+	{ letter: 'D', month: 'October', value: 8.1 },
+	{ letter: 'E', month: 'October', value: 0.5 },
+	{ letter: 'F', month: 'October', value: 0.6 },
+	{ letter: 'G', month: 'October', value: -0.3 },
+	{ letter: 'H', month: 'October', value: -7.2 },
+	{ letter: 'I', month: 'October', value: 2.7 },
+	{ letter: 'J', month: 'October', value: 9.9 },
+	{ letter: 'A', month: 'November', value: 2.5 },
+	{ letter: 'B', month: 'November', value: -1.1 },
+	{ letter: 'C', month: 'November', value: 5.4 },
+	{ letter: 'D', month: 'November', value: 9 },
+	{ letter: 'E', month: 'November', value: -2.1 },
+	{ letter: 'F', month: 'November', value: -0.5 },
+	{ letter: 'G', month: 'November', value: -4.1 },
+	{ letter: 'H', month: 'November', value: 0.4 },
+	{ letter: 'I', month: 'November', value: -3.1 },
+	{ letter: 'J', month: 'November', value: 2.2 },
+	{ letter: 'A', month: 'December', value: 9.9 },
+	{ letter: 'B', month: 'December', value: 5.4 },
+	{ letter: 'C', month: 'December', value: -8.5 },
+	{ letter: 'D', month: 'December', value: 3.9 },
+	{ letter: 'E', month: 'December', value: -4.5 },
+	{ letter: 'F', month: 'December', value: -2.4 },
+	{ letter: 'G', month: 'December', value: 8.7 },
+	{ letter: 'H', month: 'December', value: -6.9 },
+	{ letter: 'I', month: 'December', value: -5.9 },
+	{ letter: 'J', month: 'December', value: -4.4 }
+]
 
 export const examples: Example[] = [
 	{

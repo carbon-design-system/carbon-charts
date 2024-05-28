@@ -26,7 +26,9 @@ const options: BulletChartOptions = {
 			scaleType: ScaleTypes.LABELS_RATIO,
 			mapsTo: 'title'
 		}
-	}
+	},
+	height: '251px',
+	width: '960px'
 }
 
 const data: ChartTabularData = [

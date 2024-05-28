@@ -175,34 +175,128 @@ const bubbleDiscreteData: ChartTabularData = [
 	{ group: 'Dataset 4', key: 'Misc', value: 7000, surplus: 21000 }
 ]
 
-const lineTimeSeriesData = [
-	{ group: 'Dataset 1', date: '2023-01-01', value: 50000 },
-	{ group: 'Dataset 1', date: '2023-01-05', value: 65000 },
-	{ group: 'Dataset 1', date: '2023-01-08', value: null },
-	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
-	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
-	{ group: 'Dataset 2', date: '2023-01-02', value: 0 },
-	{ group: 'Dataset 2', date: '2023-01-06', value: 57312 },
-	{ group: 'Dataset 2', date: '2023-01-08', value: 27432 },
-	{ group: 'Dataset 2', date: '2023-01-15', value: 70323 },
-	{ group: 'Dataset 2', date: '2023-01-19', value: 21300 },
-	{ group: 'Dataset 3', date: '2023-01-01', value: 40000 },
-	{ group: 'Dataset 3', date: '2023-01-05', value: null },
-	{ group: 'Dataset 3', date: '2023-01-08', value: 18000 },
-	{ group: 'Dataset 3', date: '2023-01-13', value: 39213 },
-	{ group: 'Dataset 3', date: '2023-01-17', value: 61213 },
-	{ group: 'Dataset 4', date: '2023-01-02', value: 20000 },
-	{ group: 'Dataset 4', date: '2023-01-06', value: 37312 },
-	{ group: 'Dataset 4', date: '2023-01-08', value: 51432 },
-	{ group: 'Dataset 4', date: '2023-01-15', value: 25332 },
-	{ group: 'Dataset 4', date: '2023-01-19', value: null }
+const bubbleTimeSeriesData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2023-01-01',
+		value: 50000,
+		surplus: 1108792759.4591982
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-01-05',
+		value: 65000,
+		surplus: 590247271.3872744
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-01-08',
+		value: null,
+		surplus: 9219.520929038921
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-01-13',
+		value: 49213,
+		surplus: 1144546546.5725653
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-01-17',
+		value: 51213,
+		surplus: 1206431312.2321992
+	},
+	{
+		group: 'Dataset 2',
+		date: '2023-01-02',
+		value: 0,
+		surplus: 9107.915339546651
+	},
+	{
+		group: 'Dataset 2',
+		date: '2023-01-06',
+		value: 57312,
+		surplus: 1297879289.3455367
+	},
+	{
+		group: 'Dataset 2',
+		date: '2023-01-08',
+		value: 27432,
+		surplus: 254653461.2692332
+	},
+	{
+		group: 'Dataset 2',
+		date: '2023-01-15',
+		value: 70323,
+		surplus: 791440614.5922209
+	},
+	{
+		group: 'Dataset 2',
+		date: '2023-01-19',
+		value: 21300,
+		surplus: 87235499.55803385
+	},
+	{
+		group: 'Dataset 3',
+		date: '2023-01-01',
+		value: 40000,
+		surplus: 99661858.42808129
+	},
+	{
+		group: 'Dataset 3',
+		date: '2023-01-05',
+		value: null,
+		surplus: 4582.283257286785
+	},
+	{
+		group: 'Dataset 3',
+		date: '2023-01-08',
+		value: 18000,
+		surplus: 388038660.7993739
+	},
+	{
+		group: 'Dataset 3',
+		date: '2023-01-13',
+		value: 39213,
+		surplus: 281485241.99383223
+	},
+	{
+		group: 'Dataset 3',
+		date: '2023-01-17',
+		value: 61213,
+		surplus: 77655008.12585072
+	},
+	{
+		group: 'Dataset 4',
+		date: '2023-01-02',
+		value: 20000,
+		surplus: 138468385.58061224
+	},
+	{
+		group: 'Dataset 4',
+		date: '2023-01-06',
+		value: 37312,
+		surplus: 703848952.2932228
+	},
+	{
+		group: 'Dataset 4',
+		date: '2023-01-08',
+		value: 51432,
+		surplus: 721135448.0965896
+	},
+	{
+		group: 'Dataset 4',
+		date: '2023-01-15',
+		value: 25332,
+		surplus: 524200058.75680393
+	},
+	{
+		group: 'Dataset 4',
+		date: '2023-01-19',
+		value: null,
+		surplus: 4347.704175756872
+	}
 ]
-
-const bubbleTimeSeriesData: ChartTabularData = lineTimeSeriesData.map(datum =>
-	Object.assign(datum, {
-		surplus: 50000 * Math.random() * ((datum['value'] || 1) / 2)
-	})
-)
 
 const noData: ChartTabularData = []
 
