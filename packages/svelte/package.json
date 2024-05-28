@@ -9,6 +9,7 @@
 		"build:test": "vite build --emptyOutDir",
 		"dev": "vite",
 		"test": "svelte-check --workspace=tests",
+		"test:playwright": "npx playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"lint": "prettier . --check --ignore-path ../../.prettierignore && eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore "
@@ -38,6 +39,7 @@
 		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.44.1",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/kit": "^2.5.10",
 		"@sveltejs/package": "^2.3.1",

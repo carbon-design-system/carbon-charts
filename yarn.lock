@@ -1981,6 +1981,7 @@ __metadata:
   dependencies:
     "@eslint/compat": "npm:^1.0.1"
     "@eslint/js": "npm:^9.3.0"
+    "@types/node": "npm:^20.12.12"
     "@vue/eslint-config-prettier": "npm:^9.0.0"
     "@vue/eslint-config-typescript": "npm:^13.0.0"
     commitizen: "npm:^4.3.0"
@@ -2002,7 +2003,6 @@ __metadata:
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.2.3"
     svelte-eslint-parser: "npm:^0.36.0"
-    typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.10.0"
     vue-eslint-parser: "npm:^9.4.2"
   languageName: unknown
@@ -2040,6 +2040,7 @@ __metadata:
   dependencies:
     "@carbon/charts": "workspace:*"
     "@ibm/telemetry-js": "npm:^1.5.2"
+    "@playwright/test": "npm:^1.44.1"
     "@sveltejs/adapter-static": "npm:^3.0.1"
     "@sveltejs/kit": "npm:^2.5.10"
     "@sveltejs/package": "npm:^2.3.1"
@@ -4049,6 +4050,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:^1.44.1":
+  version: 1.44.1
+  resolution: "@playwright/test@npm:1.44.1"
+  dependencies:
+    playwright: "npm:1.44.1"
+  bin:
+    playwright: cli.js
+  checksum: 10c0/f72669db3dfa83dc12d43ddbce8fbb27a69a80347b515fa00d8467ca640f8c7b7f5f5ff6d6cdfc5a1bce2c7d4b6ee62b988d682ef265f567302998de4f2a64ab
+  languageName: node
+  linkType: hard
+
 "@polka/url@npm:^1.0.0-next.24":
   version: 1.0.0-next.25
   resolution: "@polka/url@npm:1.0.0-next.25"
@@ -5218,7 +5230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^20.12.12":
   version: 20.12.12
   resolution: "@types/node@npm:20.12.12"
   dependencies:
@@ -10691,12 +10703,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:2.3.2":
+  version: 2.3.2
+  resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: "npm:latest"
+  checksum: 10c0/be78a3efa3e181cda3cf7a4637cb527bcebb0bd0ea0440105a3bb45b86f9245b307dc10a2507e8f4498a7d4ec349d1910f4d73e4d4495b16103106e07eee735b
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10c0/a1f0c44595123ed717febbc478aa952e47adfc28e2092be66b8ab1635147254ca6cfe1df792a8997f22716d4cbafc73309899ff7bfac2ac3ad8cf2e4ecc3ec60
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  dependencies:
+    node-gyp: "npm:latest"
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -15690,6 +15721,30 @@ __metadata:
     mlly: "npm:^1.7.0"
     pathe: "npm:^1.1.2"
   checksum: 10c0/c7d167935de7207479e5829086040d70bea289f31fc1331f17c83e996a4440115c9deba2aa96de839ea66e1676d083c9ca44b33886f87bffa6b49740b67b6fcb
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.44.1":
+  version: 1.44.1
+  resolution: "playwright-core@npm:1.44.1"
+  bin:
+    playwright-core: cli.js
+  checksum: 10c0/6ffa3a04822b3df86d7f47a97e4f20318c0c50868ba4311820e6626ecadaab1424fbd0a3d01f0b4228adc0c781115e44b801742a4970b88739f804d82f142d68
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.44.1":
+  version: 1.44.1
+  resolution: "playwright@npm:1.44.1"
+  dependencies:
+    fsevents: "npm:2.3.2"
+    playwright-core: "npm:1.44.1"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 10c0/de827d17746b18ae2ec67d510a640d8ceebf8ee8e3d8399bccffa83b76a967498ca377777e4e6a1daaef4b3c86cb2c44c7468de53d2d915acc61b3b89c032738
   languageName: node
   linkType: hard
 

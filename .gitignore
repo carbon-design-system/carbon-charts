@@ -5,9 +5,15 @@
 .nx/cache
 pages/
 
-# Global
+# Node modules, build artifacts
 **/node_modules
 **/.angular
 **/.DS_Store
 **/.svelte-kit
 **/dist
+
+# Playwright
+**/test-results/
+**/playwright-report/
+**/blob-report/
+**/playwright/.cache/
