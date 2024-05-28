@@ -40,7 +40,8 @@ const pieMapToOptions: PieChartOptions = {
 
 const pieEmptyStateOptions: PieChartOptions = {
 	title: 'Pie (empty state)',
-	resizable: true
+	resizable: true,
+	height: '400px'
 }
 
 const pieSkeletonOptions: PieChartOptions = {

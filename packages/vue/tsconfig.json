@@ -27,7 +27,8 @@
 		"src/**/*.vue",
 		"../../../docs/src/charts.ts",
 		"vite.config.ts", // ok to include as vite generates output - not tsc
-		"vite.test.config.ts" // ditto
+		"vite.test.config.ts", // ditto
+		"playwright.config.ts"
 	],
 	"exclude": ["node_modules", "dist"]
 }

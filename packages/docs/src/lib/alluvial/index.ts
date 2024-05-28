@@ -58,7 +58,8 @@ const options: AlluvialChartOptions = {
 			}
 		]
 	},
-	height: '600px'
+	height: '600px',
+	width: '960px'
 }
 
 // Base data
