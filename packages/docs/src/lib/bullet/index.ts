@@ -27,8 +27,7 @@ const options: BulletChartOptions = {
 			mapsTo: 'title'
 		}
 	},
-	height: '251px',
-	width: '960px'
+	height: '251px'
 }
 
 const data: ChartTabularData = [

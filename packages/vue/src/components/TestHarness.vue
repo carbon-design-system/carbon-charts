@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import charts from '../../../docs/src/charts'
 import * as ChartComponents from './index'
+import '@carbon/charts/scss'
 </script>
 
 <template>
@@ -10,7 +11,7 @@ import * as ChartComponents from './index'
 
 		<div v-for="chart in charts" :key="chart.types.vue">
 			<h3>{{ chart.types.vue }}</h3>
-			<div v-for="example in chart.examples" :key="example.options.title">
+			<div v-for="example in chart.examples" :key="example.options.title" class="example">
 				<component
 					:is="ChartComponents[chart.types.vue as keyof typeof ChartComponents]"
 					:options="example.options"
@@ -21,5 +22,7 @@ import * as ChartComponents from './index'
 </template>
 
 <style>
-@import '@carbon/charts/styles.css';
+.example {
+	margin-bottom: 5rem;
+}
 </style>

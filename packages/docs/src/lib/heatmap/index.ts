@@ -28,8 +28,7 @@ const heatmapOptions: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
 	},
-	height: '400px',
-	width: '960px'
+	height: '400px'
 }
 
 const heatmapQuantizeLegendOption: HeatmapChartOptions = {
@@ -49,8 +48,7 @@ const heatmapQuantizeLegendOption: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title', type: 'quantize' }
 	},
-	height: '400px',
-	width: '960px'
+	height: '400px'
 }
 
 const heatmapPositiveNegativeOptions = Object.assign({}, heatmapOptions, {
@@ -91,8 +89,7 @@ const heatmapDomainOptions: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
 	},
-	height: '400px',
-	width: '960px'
+	height: '400px'
 }
 
 const heatmapMissingDataOptions: HeatmapChartOptions = {
@@ -112,8 +109,7 @@ const heatmapMissingDataOptions: HeatmapChartOptions = {
 	heatmap: {
 		colorLegend: { title: 'Legend title' }
 	},
-	height: '400px',
-	width: '960px'
+	height: '400px'
 }
 
 const heatmapData: ChartTabularData = [

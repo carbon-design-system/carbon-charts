@@ -11,7 +11,6 @@ export const chartTypes: ChartTypes = {
 	vue: `Ccv${vanilla}`
 }
 
-// Base options
 const options: AlluvialChartOptions = {
 	title: 'Basic',
 	alluvial: {
@@ -58,11 +57,95 @@ const options: AlluvialChartOptions = {
 			}
 		]
 	},
-	height: '600px',
-	width: '960px'
+	height: '600px'
 }
 
-// Base data
+const optionsGradient: AlluvialChartOptions = {
+	...options,
+	title: 'Gradient',
+	color: {
+		scale: {
+			Cards: '#da1e28',
+			'About Modal': '#b28600',
+			'Create Flow': '#198038',
+			'Page Header': '#ee538b',
+			Notifications: '#08bdba',
+			'Data and AI, AI Apps': '#1192e8',
+			'Data and AI, Info Architecture': '#a56eff',
+			Security: '#009d9a',
+			Automation: '#fa4d56',
+			'Public Cloud': '#198038'
+		},
+		gradient: {
+			enabled: true
+		}
+	},
+	height: '600px'
+}
+
+const optionsMultipleCategories: AlluvialChartOptions = {
+	title: 'Multiple Categories',
+	alluvial: {
+		nodes: [
+			{ name: '1st', category: 'Class' },
+			{ name: '2nd', category: 'Class' },
+			{ name: 'Crew', category: 'Class' },
+			{ name: 'Male', category: 'Sex' },
+			{ name: 'Female', category: 'Sex' },
+			{ name: 'Child', category: 'Age' },
+			{ name: 'Adult', category: 'Age' },
+			{ name: 'Yes', category: 'Survived' },
+			{ name: 'No', category: 'Survived' }
+		]
+	},
+	height: '400px'
+}
+
+const optionsMonochrome: AlluvialChartOptions = {
+	title: 'Monochrome with Custom Node Padding',
+	alluvial: {
+		nodes: [
+			{ name: 'A', category: 'Start' },
+			{ name: 'B', category: 'Start' },
+			{ name: 'C', category: 'Start' },
+			{ name: 'X', category: 'Finish' },
+			{ name: 'Y', category: 'Finish' },
+			{ name: 'Z', category: 'Finish' }
+		],
+		monochrome: true,
+		nodePadding: 33
+	},
+	height: '400px'
+}
+
+const optionsAligned: AlluvialChartOptions = {
+	title: 'Aligned Nodes',
+	alluvial: {
+		nodes: [
+			{ name: 'A', category: 'Start' },
+			{ name: 'B', category: 'Start' },
+			{ name: 'C', category: 'Start' },
+			{ name: 'X', category: 'Middle' },
+			{ name: 'Y', category: 'Middle' },
+			{ name: 'Z', category: 'Finish' }
+		],
+		nodeAlignment: 'left'
+	},
+	height: '400px'
+}
+
+const optionsCustomColors: AlluvialChartOptions = {
+	...options,
+	title: 'Custom Colors',
+	color: {
+		scale: {
+			A: '#d12771',
+			B: '#08bdba',
+			C: '#6fdc8c'
+		}
+	}
+}
+
 const data: ChartTabularData = [
 	{
 		source: 'About Modal',
@@ -171,6 +254,100 @@ const data: ChartTabularData = [
 	}
 ]
 
+const dataMultipleCategories: ChartTabularData = [
+	{
+		source: '1st',
+		target: 'Female',
+		value: 25
+	},
+	{
+		source: '1st',
+		target: 'Male',
+		value: 35
+	},
+	{
+		source: '2nd',
+		target: 'Female',
+		value: 35
+	},
+	{
+		source: '2nd',
+		target: 'Male',
+		value: 50
+	},
+	{
+		source: 'Crew',
+		target: 'Male',
+		value: 43
+	},
+	{
+		source: 'Crew',
+		target: 'Female',
+		value: 18
+	},
+	{
+		source: 'Male',
+		target: 'Child',
+		value: 38
+	},
+	{
+		source: 'Male',
+		target: 'Adult',
+		value: 90
+	},
+	{
+		source: 'Female',
+		target: 'Adult',
+		value: 52
+	},
+	{
+		source: 'Female',
+		target: 'Child',
+		value: 26
+	},
+	{
+		source: 'Child',
+		target: 'Yes',
+		value: 58
+	},
+	{
+		source: 'Child',
+		target: 'No',
+		value: 6
+	},
+	{
+		source: 'Adult',
+		target: 'Yes',
+		value: 22
+	},
+	{
+		source: 'Adult',
+		target: 'No',
+		value: 120
+	}
+]
+
+const dataMonochrome: ChartTabularData = [
+	{ source: 'A', target: 'X', value: 3 },
+	{ source: 'A', target: 'Y', value: 5 },
+	{ source: 'A', target: 'Z', value: 8 },
+	{ source: 'B', target: 'X', value: 6 },
+	{ source: 'B', target: 'Y', value: 1 },
+	{ source: 'B', target: 'Z', value: 7 },
+	{ source: 'C', target: 'X', value: 5 },
+	{ source: 'C', target: 'Y', value: 5 },
+	{ source: 'C', target: 'Z', value: 1 }
+]
+
+const dataAligned: ChartTabularData = [
+	{ source: 'A', target: 'X', value: 3 },
+	{ source: 'A', target: 'Y', value: 7 },
+	{ source: 'B', target: 'X', value: 8 },
+	{ source: 'B', target: 'Y', value: 3 },
+	{ source: 'C', target: 'X', value: 5 },
+	{ source: 'Y', target: 'Z', value: 13 }
+]
+
 export const examples: Example[] = [
 	{
 		data,
@@ -178,185 +355,22 @@ export const examples: Example[] = [
 	},
 	{
 		data,
-		options: {
-			...options,
-			title: 'Gradient',
-			color: {
-				scale: {
-					Cards: '#da1e28',
-					'About Modal': '#b28600',
-					'Create Flow': '#198038',
-					'Page Header': '#ee538b',
-					Notifications: '#08bdba',
-					'Data and AI, AI Apps': '#1192e8',
-					'Data and AI, Info Architecture': '#a56eff',
-					Security: '#009d9a',
-					Automation: '#fa4d56',
-					'Public Cloud': '#198038'
-				},
-				gradient: {
-					enabled: true
-				}
-			}
-		} as AlluvialChartOptions
+		options: optionsGradient
 	},
 	{
-		data: [
-			{
-				source: '1st',
-				target: 'Female',
-				value: 25
-			},
-			{
-				source: '1st',
-				target: 'Male',
-				value: 35
-			},
-			{
-				source: '2nd',
-				target: 'Female',
-				value: 35
-			},
-			{
-				source: '2nd',
-				target: 'Male',
-				value: 50
-			},
-			{
-				source: 'Crew',
-				target: 'Male',
-				value: 43
-			},
-			{
-				source: 'Crew',
-				target: 'Female',
-				value: 18
-			},
-			{
-				source: 'Male',
-				target: 'Child',
-				value: 38
-			},
-			{
-				source: 'Male',
-				target: 'Adult',
-				value: 90
-			},
-			{
-				source: 'Female',
-				target: 'Adult',
-				value: 52
-			},
-			{
-				source: 'Female',
-				target: 'Child',
-				value: 26
-			},
-			{
-				source: 'Child',
-				target: 'Yes',
-				value: 58
-			},
-			{
-				source: 'Child',
-				target: 'No',
-				value: 6
-			},
-			{
-				source: 'Adult',
-				target: 'Yes',
-				value: 22
-			},
-			{
-				source: 'Adult',
-				target: 'No',
-				value: 120
-			}
-		] as ChartTabularData,
-		options: {
-			title: 'Multiple Categories',
-			height: '400px',
-			alluvial: {
-				nodes: [
-					{ name: '1st', category: 'Class' },
-					{ name: '2nd', category: 'Class' },
-					{ name: 'Crew', category: 'Class' },
-					{ name: 'Male', category: 'Sex' },
-					{ name: 'Female', category: 'Sex' },
-					{ name: 'Child', category: 'Age' },
-					{ name: 'Adult', category: 'Age' },
-					{ name: 'Yes', category: 'Survived' },
-					{ name: 'No', category: 'Survived' }
-				]
-			}
-		} as AlluvialChartOptions
+		data: dataMultipleCategories,
+		options: optionsMultipleCategories
 	},
 	{
-		data: [
-			{ source: 'A', target: 'X', value: 3 },
-			{ source: 'A', target: 'Y', value: 5 },
-			{ source: 'A', target: 'Z', value: 8 },
-			{ source: 'B', target: 'X', value: 6 },
-			{ source: 'B', target: 'Y', value: 1 },
-			{ source: 'B', target: 'Z', value: 7 },
-			{ source: 'C', target: 'X', value: 5 },
-			{ source: 'C', target: 'Y', value: 5 },
-			{ source: 'C', target: 'Z', value: 1 }
-		] as ChartTabularData,
-		options: {
-			title: 'Monochrome with Custom Node Padding',
-			height: '400px',
-			alluvial: {
-				nodes: [
-					{ name: 'A', category: 'Start' },
-					{ name: 'B', category: 'Start' },
-					{ name: 'C', category: 'Start' },
-					{ name: 'X', category: 'Finish' },
-					{ name: 'Y', category: 'Finish' },
-					{ name: 'Z', category: 'Finish' }
-				],
-				monochrome: true,
-				nodePadding: 33
-			}
-		} as AlluvialChartOptions
+		data: dataMonochrome,
+		options: optionsMonochrome
 	},
 	{
-		data: [
-			{ source: 'A', target: 'X', value: 3 },
-			{ source: 'A', target: 'Y', value: 7 },
-			{ source: 'B', target: 'X', value: 8 },
-			{ source: 'B', target: 'Y', value: 3 },
-			{ source: 'C', target: 'X', value: 5 },
-			{ source: 'Y', target: 'Z', value: 13 }
-		] as ChartTabularData,
-		options: {
-			title: 'Aligned Nodes',
-			height: '400px',
-			alluvial: {
-				nodes: [
-					{ name: 'A', category: 'Start' },
-					{ name: 'B', category: 'Start' },
-					{ name: 'C', category: 'Start' },
-					{ name: 'X', category: 'Middle' },
-					{ name: 'Y', category: 'Middle' },
-					{ name: 'Z', category: 'Finish' }
-				],
-				nodeAlignment: 'left'
-			}
-		} as AlluvialChartOptions
+		data: dataAligned,
+		options: optionsAligned
 	},
 	{
 		data,
-		options: {
-			...options,
-			title: 'Custom Colors',
-			color: {
-				scale: {
-					A: '#d12771',
-					B: '#08bdba',
-					C: '#6fdc8c'
-				}
-			}
-		} as AlluvialChartOptions
+		options: optionsCustomColors
 	}
 ]

@@ -184,7 +184,6 @@ const lineTimeSeriesDenseOptions: LineChartOptions = {
 
 const lineTimeSeriesRotatedTicksOptions: LineChartOptions = {
 	title: 'Rotated ticks (line)',
-	width: '400px',
 	axes: {
 		bottom: {
 			scaleType: ScaleTypes.TIME,
@@ -205,7 +204,6 @@ const lineTimeSeriesRotatedTicksOptions: LineChartOptions = {
 
 const lineLogAxisOptions: LineChartOptions = {
 	title: 'Log Axis',
-	width: '400px',
 	axes: {
 		bottom: {
 			scaleType: ScaleTypes.TIME,

@@ -9,21 +9,29 @@
 			rel="stylesheet"
 			crossorigin="anonymous" />
 		<link rel="stylesheet" href="scss/index.scss" />
-		<!-- Path adjusted for your SCSS -->
+		<style>
+			.container {
+				width: 60rem;
+			}
+
+			.chart-container {
+				margin-bottom: 5rem;
+			}
+		</style>
 	</head>
+
 	<body>
 		<h1>Carbon Charts Vanilla JavaScript</h1>
 		<h2>Component Test Harness</h2>
-		<div id="app"></div>
+		<div id="app" class="container"></div>
 
 		<script type="module">
 			import * as ChartComponents from './src/charts/index.ts'
-			import charts from '../docs/src/charts' // chart configuration data
+			import charts from '../docs/src/charts'
 
 			const chartHolder = document.getElementById('app')
 
 			for (const chart of charts) {
-				// Creating an h3 element for each chart type
 				const header = document.createElement('h3')
 				header.textContent = chart.types.vanilla
 				chartHolder.appendChild(header)

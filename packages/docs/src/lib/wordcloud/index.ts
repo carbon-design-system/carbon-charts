@@ -19,8 +19,7 @@ const options: WordCloudChartOptions = {
 			option: 3
 		}
 	},
-	height: '400px',
-	width: '960px'
+	height: '400px'
 }
 
 const data: ChartTabularData = [

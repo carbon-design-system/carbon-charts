@@ -15,7 +15,6 @@ const gaugeOptionsSemi: GaugeChartOptions = {
 	title: 'Gauge semicircular -- danger status',
 	resizable: true,
 	height: '250px',
-	width: '100%',
 	gauge: {
 		type: 'semi',
 		status: 'danger'

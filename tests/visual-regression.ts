@@ -5,6 +5,12 @@ export async function runVisualRegressionTest(page: Page) {
 	await page.waitForSelector('.cds--cc--wordcloud') // wait for last chart on test harness page to render
 	await expect(page).toHaveScreenshot({
 		fullPage: true,
+		clip: {
+			x: 0,
+			y: 0,
+			width: 970,
+			height: 71817
+		},
 		mask: [
 			// page.locator('h1'), // Will differ by Svelte, React, Angular, Vanilla JavaScript
 			// page.locator('h3'), // Will differ by component name
