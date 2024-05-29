@@ -31,7 +31,7 @@
 		"postbundle": "concurrently \"yarn:file:*\"",
 		"build": "vite build && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"dev": "vite --port 3000",
+		"dev": "vite --port 3002",
 		"test:visual": "playwright test",
 		"test:visual:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",

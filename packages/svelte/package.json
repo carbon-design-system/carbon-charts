@@ -7,7 +7,7 @@
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"build": "svelte-kit sync && svelte-package && yarn file:styles && publint ",
 		"build:test": "vite build --emptyOutDir",
-		"dev": "vite --port 3000",
+		"dev": "vite --port 3003",
 		"test": "svelte-check --workspace=tests",
 		"test:visual": "playwright test",
 		"test:visual:rebase": "playwright test --update-snapshots",

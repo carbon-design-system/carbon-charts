@@ -1,4 +1,4 @@
 import { defineConfig } from '@playwright/test'
-import baseConfig from '../../tests/playwright.config'
+import { buildConfig } from '../../tests/playwright.config'
 
-export default defineConfig({ ...baseConfig })
+export default defineConfig(buildConfig(3002))

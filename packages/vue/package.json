@@ -25,7 +25,7 @@
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"build": "vite build && yarn file:styles",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
-		"dev": "vite --port 3000",
+		"dev": "vite --port 3004",
 		"test:visual": "playwright test",
 		"test:visual:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",
