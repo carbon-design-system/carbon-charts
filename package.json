@@ -12,8 +12,8 @@
 		"lint": "lerna run lint",
 		"format": "lerna run format",
 		"test": "lerna run test",
-		"test:visual": "lerna run test:visual --parallel",
-		"test:visual:rebase": "lerna run test:visual:rebase --parallel"
+		"test:visual": "npx playwright install && lerna run build --scope @carbon/charts && lerna run test:visual --parallel",
+		"test:visual:rebase": "npx playwright install && lerna run build --scope @carbon/charts && lerna run test:visual:rebase --parallel"
 	},
 	"workspaces": [
 		"packages/*"
@@ -25,6 +25,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.0.1",
 		"@eslint/js": "^9.3.0",
+		"@playwright/test": "^1.44.1",
 		"@types/node": "^20.12.12",
 		"@vue/eslint-config-prettier": "^9.0.0",
 		"@vue/eslint-config-typescript": "^13.0.0",

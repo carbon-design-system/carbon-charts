@@ -1983,6 +1983,7 @@ __metadata:
   dependencies:
     "@eslint/compat": "npm:^1.0.1"
     "@eslint/js": "npm:^9.3.0"
+    "@playwright/test": "npm:^1.44.1"
     "@types/node": "npm:^20.12.12"
     "@vue/eslint-config-prettier": "npm:^9.0.0"
     "@vue/eslint-config-typescript": "npm:^13.0.0"
