@@ -44,16 +44,23 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 			/gradientTransform="translate\(([\.0-9]+),/g // skeleton charts
 		]
 
-		// Helper function to normalize dynamic parts of IDs
-		const normalizeId = (str: string): string => {
+		const replaceDynamicIds = (str: string): string => {
 			nondeterministicPatterns.forEach(pattern => {
 				str = str.replace(pattern, (match, p1) => match.replace(p1, 'VARIABLE'))
 			})
 			return str
 		}
 
-		// Normalize dynamic parts of IDs in the HTML content
-		htmlContent = normalizeId(htmlContent)
+		const roundCircleRadius = (str: string): string => {
+			const circleRadiusPattern = /<circle[^>]*r="([0-9]*\.[0-9]{4,})"[^>]*>/g
+			return str.replace(circleRadiusPattern, (match, p1) => {
+				const roundedRadius = parseFloat(p1).toFixed(0)
+				return match.replace(p1, roundedRadius)
+			})
+		}
+
+		htmlContent = replaceDynamicIds(htmlContent)
+		htmlContent = roundCircleRadius(htmlContent)
 
 		return htmlContent
 	})
@@ -65,7 +72,8 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 		printWidth: 100,
 		useTabs: true,
 		semi: false,
-		arrowParens: 'avoid'
+		arrowParens: 'avoid',
+		bracketSameLine: true
 	})
 
 	expect(formattedContent).toMatchSnapshot('charts.html')
