@@ -41,7 +41,8 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 			/["#]chart-([a-z0-9]{13})[-"]/g,
 			/\slayout-child-([a-z0-9]+)\s/g,
 			/["#]zoomBarClip-([a-z0-9]+)[\)"]/g,
-			/gradientTransform="translate\(([\.0-9]+),/g // skeleton charts
+			/gradientTransform="translate\(([\.0-9]+),/g, // skeleton charts
+			/id="chart-0\.([a-z0-9]+)"/g // svelte ids for chart holder
 		]
 
 		const replaceDynamicIds = (str: string): string => {
