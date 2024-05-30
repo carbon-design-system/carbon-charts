@@ -26,8 +26,8 @@
 		"build": "vite build && yarn file:styles",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3004",
-		"test:visual": "playwright test",
-		"test:visual:rebase": "playwright test --update-snapshots",
+		"test:dom": "playwright test",
+		"test:dom:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
