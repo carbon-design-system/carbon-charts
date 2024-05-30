@@ -1981,7 +1981,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/charts-monorepo@workspace:."
   dependencies:
-    "@eslint/compat": "npm:^1.0.1"
+    "@eslint/compat": "npm:^1.0.3"
     "@eslint/js": "npm:^9.3.0"
     "@playwright/test": "npm:^1.44.1"
     "@types/node": "npm:^20.12.13"
@@ -3047,10 +3047,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/compat@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@eslint/compat@npm:1.0.1"
-  checksum: 10c0/8af8855bc37b91fc0ce9442e48fa5f36b09c78a7c1d5386e3d7c69d16d6c4bef575106a909e2be6153e20dd76dce4aa1b857f4b2b36fa8e51f6617cab7d95b72
+"@eslint/compat@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@eslint/compat@npm:1.0.3"
+  checksum: 10c0/7d8392949c07e518dc487fb745379b08fbc22680039d52f1f370472154fb3e98197e21c4b692479b965739d7ec0c84523b376b43e03360ffbfde65b628788acf
   languageName: node
   linkType: hard
 
