@@ -1,4 +1,5 @@
 import { expect, type Page } from '@playwright/test'
+import prettier from 'prettier'
 
 export async function checkForDOMChanges(page: Page): Promise<void> {
 	await page.setViewportSize({ width: 1440, height: 720 })
@@ -57,5 +58,7 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 		return htmlContent
 	})
 
-	expect(modifiedContent).toMatchSnapshot('charts.html')
+	const formattedContent = await prettier.format(modifiedContent, { parser: 'html' })
+
+	expect(formattedContent).toMatchSnapshot('charts.html')
 }
