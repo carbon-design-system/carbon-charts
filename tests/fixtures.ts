@@ -58,7 +58,15 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 		return htmlContent
 	})
 
-	const formattedContent = await prettier.format(modifiedContent, { parser: 'html' })
+	const formattedContent = await prettier.format(modifiedContent, {
+		parser: 'html',
+		singleQuote: true,
+		trailingComma: 'none',
+		printWidth: 100,
+		useTabs: true,
+		semi: false,
+		arrowParens: 'avoid'
+	})
 
 	expect(formattedContent).toMatchSnapshot('charts.html')
 }
