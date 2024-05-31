@@ -34,7 +34,7 @@
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.3.0",
 		"prettier": "^3.2.5",
-		"sass": "^1.77.3",
+		"sass": "^1.77.4",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.12"
