@@ -38,15 +38,25 @@ export default function Data() {
   { key: 'Restocking', value: 51213 },
   { key: 'Misc', value: 16932 }
 ]`}</CodeSnippet>
+
+			<h3>Dates</h3>
+
+			<p>
+				For ChartTabularData, dates may be provided in various formats: ISO-8601 date/time stamps,
+				JavaScript Date objects and integers representing an epoch. These formats may be mixed in
+				the data for a single chart.
+			</p>
+
 			<h3>Rectangular charts</h3>
 
 			<p>
-				In the example above, the "key" property is the <em>domainIdentifier</em> which is used for
-				axis labels. The "value" property is known as the <em>rangeIdentifier</em>. The
-				domainIdentifier name defaults to the name "key" for string values and "date" for dates. The
-				default name for the rangeIdentifier is "value". While these default names may be used, the
-				best practice is to explicitly set a "mapsTo" property in the chart options for each axis as
-				shown below.
+				In the example above, the <strong>key</strong> property is the <em>domainIdentifier</em>{' '}
+				used for axis labels. The <strong>value</strong> property is known as the{' '}
+				<em>rangeIdentifier</em>. The domainIdentifier name defaults to the name{' '}
+				<strong>key</strong> for string values and <strong>date</strong> for dates. The default name
+				for the rangeIdentifier is <strong>value</strong>. While these default names may be used,
+				the best practice is to explicitly set a <strong>mapsTo</strong> property in the chart
+				options for each axis as shown below.
 			</p>
 
 			<CodeSnippet type="multi">{`const simpleBarOptions = {
