@@ -41,27 +41,42 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 			/["#]chart-([a-z0-9]{13})[-"]/g,
 			/\slayout-child-([a-z0-9]+)\s/g,
 			/["#]zoomBarClip-([a-z0-9]+)[\)"]/g,
-			/gradientTransform="translate\(([\.0-9]+),/g, // skeleton charts
-			/id="chart-0\.([a-z0-9]+)"/g // svelte ids for chart holder
+			/id="chart-0\.([a-z0-9]+)"/g, // svelte ids for chart holder
+			/gradientTransform="translate\(([-\.0-9]+),/g // for skeleton charts, values change unpredictably and cannot be rounded
+		]
+
+		// D3 causes many properties to change on a per-browser basis for each run
+		const roundPropertiesPatterns = [
+			{ regex: /<circle[^>]*r="([0-9]*\.[0-9]{4,})"[^>]*>/g, precision: 10 },
+			{ regex: /"height: ([0-9]{3})px; /g, precision: 100 },
+			{ regex: /height="([0-9]{3})">/g, precision: 100 },
+			{ regex: /transform="translate\(0, ([0-9]{3})\)"/g, precision: 100 },
+			{ regex: /currentColor"\sd="M0.5,([0-9]{3})\./g, precision: 100 }
 		]
 
 		const replaceDynamicIds = (str: string): string => {
 			nondeterministicPatterns.forEach(pattern => {
-				str = str.replace(pattern, (match, p1) => match.replace(p1, 'VARIABLE'))
+				str = str.replace(pattern, (match, p1) => match.replace(p1, 'DYNAMIC'))
 			})
 			return str
 		}
 
-		const roundCircleRadius = (str: string): string => {
-			const circleRadiusPattern = /<circle[^>]*r="([0-9]*\.[0-9]{4,})"[^>]*>/g
-			return str.replace(circleRadiusPattern, (match, p1) => {
-				const roundedRadius = parseFloat(p1).toFixed(0)
-				return match.replace(p1, roundedRadius)
+		const roundProperties = (
+			str: string,
+			patterns: { regex: RegExp; precision: number }[]
+		): string => {
+			patterns.forEach(({ regex, precision }) => {
+				str = str.replace(regex, (match, p1) => {
+					const value = parseFloat(p1)
+					const roundedValue = Math.round(value / precision) * precision
+					return match.replace(p1, roundedValue.toString())
+				})
 			})
+			return str
 		}
 
 		htmlContent = replaceDynamicIds(htmlContent)
-		htmlContent = roundCircleRadius(htmlContent)
+		htmlContent = roundProperties(htmlContent, roundPropertiesPatterns)
 
 		return htmlContent
 	})
