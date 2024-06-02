@@ -4,7 +4,6 @@
 	"description": "Carbon Charts component libraries for JavaScript, Angular, React, Svelte and Vue",
 	"type": "module",
 	"scripts": {
-		"commit": "git-cz",
 		"build": "lerna run --stream build",
 		"prepare": "husky || true",
 		"lint": "lerna run lint",

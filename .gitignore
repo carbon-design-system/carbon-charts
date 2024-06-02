@@ -11,6 +11,7 @@ pages/
 **/.DS_Store
 **/.svelte-kit
 **/dist
+**/demo
 
 # Playwright
 **/test-results/
