@@ -17,15 +17,14 @@
 		"build": "ng build -c production && yarn postbundle",
 		"build:test": "ng build charts-angular-test",
 		"dev": "ng serve --port 3001",
-		"test": "ng test",
 		"test:dom": "playwright test",
 		"test:dom:rebase": "playwright test --update-snapshots",
 		"lint": "ng lint --ignore-path ../../.prettierignore",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
-		"@angular/common": "^16.0.0 || ^17.0.0",
-		"@angular/core": "^16.0.0 || ^17.0.0"
+		"@angular/common": "^16.0.0 || ^17.0.0 || ^18.0.0",
+		"@angular/core": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
@@ -34,35 +33,25 @@
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^16.2.14",
-		"@angular/animations": "^16.2.12",
 		"@angular/cli": "^16.2.14",
 		"@angular/common": "^16.2.12",
 		"@angular/compiler": "^16.2.12",
 		"@angular/compiler-cli": "^16.2.12",
 		"@angular/core": "^16.2.12",
-		"@angular/forms": "^16.2.12",
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
 		"@carbon/icon-helpers": "~10.48.0",
 		"@carbon/icons": "^11.42.0",
 		"@playwright/test": "^1.44.1",
 		"@types/carbon__icon-helpers": "^10.7.4",
-		"@types/jasmine": "~5.1.4",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.4.0",
-		"jasmine-core": "~5.1.2",
-		"karma": "^6.4.3",
-		"karma-chrome-launcher": "^3.2.0",
-		"karma-coverage": "^2.2.1",
-		"karma-jasmine": "^5.1.0",
-		"karma-jasmine-html-reporter": "^2.1.0",
 		"ng-packagr": "^16.2.3",
 		"prettier": "^3.3.0",
-		"rxjs": "~7.8.1",
 		"typescript": "~5.1.6",
 		"typescript-eslint": "^8.0.0-alpha.20",
-		"zone.js": "~0.14.6"
+		"zone.js": "^0.14.6"
 	},
 	"publishConfig": {
 		"tag": "next",
