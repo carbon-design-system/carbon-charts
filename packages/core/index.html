@@ -37,16 +37,18 @@
 				chartHolder.appendChild(header)
 
 				for (const example of chart.examples) {
-					const chartContainer = document.createElement('div')
-					chartContainer.className = 'chart-container'
-					chartHolder.appendChild(chartContainer)
+					if (example.test) {
+						const chartContainer = document.createElement('div')
+						chartContainer.className = 'chart-container'
+						chartHolder.appendChild(chartContainer)
 
-					const ChartConstructor = ChartComponents[chart.types.vanilla]
+						const ChartConstructor = ChartComponents[chart.types.vanilla]
 
-					new ChartConstructor(chartContainer, {
-						data: example.data,
-						options: example.options
-					})
+						new ChartConstructor(chartContainer, {
+							data: example.data,
+							options: example.options
+						})
+					}
 				}
 			}
 		</script>

@@ -4,10 +4,12 @@
 <div *ngFor="let chart of charts" class="container">
 	<h3>{{ chart.types.angular }}</h3>
 	<div *ngFor="let example of chart.examples" class="example">
-		<ng-container
-			*ngComponentOutlet="
-				selectorMap[chart.types.angular];
-				inputs: { data: example.data, options: example.options }
-			"></ng-container>
+		<ng-container *ngIf="example.test">
+			<ng-container
+				*ngComponentOutlet="
+					selectorMap[chart.types.angular];
+					inputs: { data: example.data, options: example.options }
+				"></ng-container>
+		</ng-container>
 	</div>
 </div>

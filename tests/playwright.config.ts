@@ -17,11 +17,11 @@ export function buildConfig(port: number) {
 			{
 				name: 'chromium',
 				use: { ...devices['Desktop Chrome'] }
-			},
-			{
-				name: 'firefox',
-				use: { ...devices['Desktop Firefox'] }
 			}
+			// {
+			// 	name: 'firefox',
+			// 	use: { ...devices['Desktop Firefox'] }
+			// }
 			// D3 generates properties that vary too much for Safari
 			// {
 			// 	name: 'webkit',

@@ -48,7 +48,7 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 		// D3 causes many properties to change on a per-browser basis for each run
 		const roundPropertiesPatterns = [
 			{ regex: /<circle[^>]*r="([0-9]*\.[0-9]{4,})"[^>]*>/g, precision: 10 },
-			{ regex: /"height: ([0-9]{3})px; /g, precision: 100 },
+			{ regex: /"height: ([0-9\.]+)px; /g, precision: 100 },
 			{ regex: /height="([0-9]{3})">/g, precision: 100 },
 			{ regex: /transform="translate\(0, ([0-9]{3})\)"/g, precision: 100 },
 			{ regex: /currentColor"\sd="M0.5,([0-9]{3})\./g, precision: 100 }

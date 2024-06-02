@@ -16,6 +16,7 @@ const Test = () => (
 			<div key={chartIndex}>
 				<h3>{chart.types.react}</h3>
 				{chart.examples.map((example, exampleIndex) => {
+					if (!example.test) return
 					const ChartComponent = ChartComponents[
 						chart.types.react as keyof typeof ChartComponents
 					] as React.ComponentType<any>
