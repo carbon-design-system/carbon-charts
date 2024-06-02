@@ -619,43 +619,53 @@ const comboHorizontalData = comboSimpleData
 export const examples: Example[] = [
 	{
 		options: comboSimpleOptions,
-		data: comboSimpleData
+		data: comboSimpleData,
+		test: true
 	},
 	{
 		options: comboStackedOptions,
-		data: comboStackedData
+		data: comboStackedData,
+		test: true
 	},
 	{
 		options: comboGroupedOptions,
-		data: comboGroupedData
+		data: comboGroupedData,
+		test: true
 	},
 	{
 		options: comboSimpleFloatingOptions,
-		data: comboSimpleFloatingData
+		data: comboSimpleFloatingData,
+		test: true
 	},
 	{
 		options: comboGroupedHorizontalOptions,
-		data: comboGroupedHorizontalData
+		data: comboGroupedHorizontalData,
+		test: true
 	},
 	{
 		options: comboHorizontalOptions,
-		data: comboHorizontalData
+		data: comboHorizontalData,
+		test: true
 	},
 	{
 		options: comboAreaLineOptions,
-		data: comboAreaLineData
+		data: comboAreaLineData,
+		test: true
 	},
 	{
 		options: comboStackedAreaLineOptions,
-		data: comboStackedAreaLine
+		data: comboStackedAreaLine,
+		test: true
 	},
 	{
 		options: comboLineScatterOptions,
-		data: comboLineScatterData
+		data: comboLineScatterData,
+		test: true
 	},
 	{
 		options: comboAreaLineTimeSeriesOptions,
-		data: comboAreaLineTimeSeriesData
+		data: comboAreaLineTimeSeriesData,
+		test: true
 	},
 	{
 		options: comboEmptyOptions,

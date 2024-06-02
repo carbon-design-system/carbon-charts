@@ -312,19 +312,23 @@ const sparkLineData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		data,
-		options
+		options,
+		test: true
 	},
 	{
 		data: sparkLineData,
-		options: optionsSpark
+		options: optionsSpark,
+		test: true
 	},
 	{
 		data: dataDiscrete,
-		options: optionsDiscrete
+		options: optionsDiscrete,
+		test: true
 	},
 	{
 		data: dataCurved,
-		options: optionsCurved
+		options: optionsCurved,
+		test: true
 	},
 	{
 		data: dataBounded,
@@ -332,11 +336,13 @@ export const examples: Example[] = [
 	},
 	{
 		data: dataBounded,
-		options: optionsMultipleBounded
+		options: optionsMultipleBounded,
+		test: true
 	},
 	{
 		data: dataBounded,
-		options: optionsZoomBar
+		options: optionsZoomBar,
+		test: true
 	},
 	{
 		data: dataBounded,

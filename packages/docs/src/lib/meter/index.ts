@@ -134,26 +134,32 @@ const propMeterData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: meterOptionsWithStatus,
-		data: meterData
+		data: meterData,
+		test: true
 	},
 	{
 		options: meterOptionsCustomColor,
-		data: meterData
+		data: meterData,
+		test: true
 	},
 	{
 		options: meterOptionsNoStatus,
-		data: meterData
+		data: meterData,
+		test: true
 	},
 	{
 		options: propMeterOptions,
-		data: propMeterData
+		data: propMeterData,
+		test: true
 	},
 	{
 		options: propMeterStatusOptions,
-		data: propMeterData
+		data: propMeterData,
+		test: true
 	},
 	{
 		options: propMeterTruncationOptions,
-		data: propMeterData
+		data: propMeterData,
+		test: true
 	}
 ]

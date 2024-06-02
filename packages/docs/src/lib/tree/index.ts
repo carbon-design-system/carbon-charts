@@ -224,10 +224,12 @@ const treeData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		data: treeData,
-		options: dendogramOptions
+		options: dendogramOptions,
+		test: true
 	},
 	{
 		data: treeData,
-		options: treeOptions
+		options: treeOptions,
+		test: true
 	}
 ]

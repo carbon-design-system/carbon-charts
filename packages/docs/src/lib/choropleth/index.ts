@@ -1698,10 +1698,12 @@ const missingData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options,
-		data
+		data,
+		test: true
 	},
 	{
 		options: missingDataOptions,
-		data: missingData
+		data: missingData,
+		test: true
 	}
 ]

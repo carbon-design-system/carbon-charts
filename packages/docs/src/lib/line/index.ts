@@ -496,51 +496,63 @@ const lineTimeSeriesDualAxesData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: lineCustomDomainOptions,
-		data: lineData
+		data: lineData,
+		test: true
 	},
 	{
 		options: lineTimeSeriesRotatedTicksOptions,
-		data: lineTimeSeriesDataRotatedTicks
+		data: lineTimeSeriesDataRotatedTicks,
+		test: true
 	},
 	{
 		options: lineLogAxisOptions,
-		data: lineLogAxisData
+		data: lineLogAxisData,
+		test: true
 	},
 	{
 		options: lineCustomColorOptions,
-		data: lineData
+		data: lineData,
+		test: true
 	},
 	{
 		options: lineSelectedGroupsOptions,
-		data: lineSelectedGroupsData
+		data: lineSelectedGroupsData,
+		test: true
 	},
 	{
 		options: lineOptionsLegendOrientation,
-		data: lineData
+		data: lineData,
+		test: true
 	},
 	{
 		options: lineTimeSeriesWithThresholdsOptions,
-		data: lineTimeSeriesData
+		data: lineTimeSeriesData,
+		test: true
 	},
 	{
 		options: lineLongLabelOptions,
-		data: lineLongLabelData
+		data: lineLongLabelData,
+		test: true
 	},
 	{
 		options: lineOptions,
-		data: lineData
+		data: lineData,
+		test: true
 	},
 	{
 		options: lineTimeSeriesOptions,
-		data: lineTimeSeriesData
+		data: lineTimeSeriesData,
+		test: true
 	},
 	{
 		options: lineTimeSeriesDenseOptions,
-		data: lineTimeSeriesDenseData
+		data: lineTimeSeriesDenseData,
+		test: true
 	},
 	{
 		options: dualLine,
-		data: lineTimeSeriesDualAxesData
+		data: lineTimeSeriesDualAxesData,
+		test: true
 	},
 	{
 		options: lineEmptyStateOptions,

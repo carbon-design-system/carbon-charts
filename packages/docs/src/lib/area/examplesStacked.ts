@@ -97,14 +97,17 @@ const dataUneven: ChartTabularData = [
 export const examplesStacked: Example[] = [
 	{
 		data,
-		options
+		options,
+		test: true
 	},
 	{
 		data,
-		options: optionsPercentage
+		options: optionsPercentage,
+		test: true
 	},
 	{
 		data: dataUneven,
-		options: optionsUneven
+		options: optionsUneven,
+		test: true
 	}
 ]

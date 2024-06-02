@@ -266,19 +266,23 @@ const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData
 export const examplesStacked: Example[] = [
 	{
 		options: stackedBarOptions,
-		data: stackedBarData
+		data: stackedBarData,
+		test: true
 	},
 	{
 		options: stackedBarNegativeOptions,
-		data: stackedBarNegativeData
+		data: stackedBarNegativeData,
+		test: true
 	},
 	{
 		options: stackedBarTimeSeriesOptions,
-		data: stackedBarTimeSeriesData
+		data: stackedBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: stackedBarShortIntervalTimeSeriesOptions,
-		data: stackedBarShortIntervalTimeSeriesData
+		data: stackedBarShortIntervalTimeSeriesData,
+		test: true
 	},
 	{
 		options: stackedBarEmptyStateOptions,
@@ -290,11 +294,13 @@ export const examplesStacked: Example[] = [
 	},
 	{
 		options: stackedHorizontalBarOptions,
-		data: stackedHorizontalBarData
+		data: stackedHorizontalBarData,
+		test: true
 	},
 	{
 		options: stackedHorizontalBarTimeSeriesOptions,
-		data: stackedHorizontalBarTimeSeriesData
+		data: stackedHorizontalBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: stackedHorizontalBarEmptyStateOptions,

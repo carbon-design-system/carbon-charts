@@ -1284,22 +1284,27 @@ const heatmapPositiveNegativeData = [
 export const examples: Example[] = [
 	{
 		options: heatmapOptions,
-		data: heatmapData
+		data: heatmapData,
+		test: true
 	},
 	{
 		options: heatmapQuantizeLegendOption,
-		data: heatmapData
+		data: heatmapData,
+		test: true
 	},
 	{
 		options: heatmapPositiveNegativeOptions,
-		data: heatmapPositiveNegativeData
+		data: heatmapPositiveNegativeData,
+		test: true
 	},
 	{
 		options: heatmapMissingDataOptions,
-		data: heatmapMissingData
+		data: heatmapMissingData,
+		test: true
 	},
 	{
 		options: heatmapDomainOptions,
-		data: heatmapData
+		data: heatmapData,
+		test: true
 	}
 ]

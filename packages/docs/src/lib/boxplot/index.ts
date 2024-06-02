@@ -65,10 +65,12 @@ const data: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: optionsHorizontal,
-		data
+		data,
+		test: true
 	},
 	{
 		options: optionsVertical,
-		data
+		data,
+		test: true
 	}
 ]

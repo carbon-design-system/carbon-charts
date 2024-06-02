@@ -138,18 +138,22 @@ const radarDenseData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		data: radarData,
-		options: radarOptions
+		options: radarOptions,
+		test: true
 	},
 	{
 		data: radarData,
-		options: radarCenteredOptions
+		options: radarCenteredOptions,
+		test: true
 	},
 	{
 		data: radarWithMissingDataData,
-		options: radarWithMissingDataOptions
+		options: radarWithMissingDataOptions,
+		test: true
 	},
 	{
 		data: radarDenseData,
-		options: radarDenseOptions
+		options: radarDenseOptions,
+		test: true
 	}
 ]

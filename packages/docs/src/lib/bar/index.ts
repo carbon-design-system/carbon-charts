@@ -585,11 +585,13 @@ const floatingHorizontalBarData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: simpleBarOptions,
-		data: simpleBarData
+		data: simpleBarData,
+		test: true
 	},
 	{
 		options: simpleBarTimeSeriesOptions,
-		data: simpleBarTimeSeriesData
+		data: simpleBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: simpleBarTimeSeriesDenseOptions,
@@ -605,11 +607,13 @@ export const examples: Example[] = [
 	},
 	{
 		options: simpleHorizontalBarOptions,
-		data: simpleHorizontalBarData
+		data: simpleHorizontalBarData,
+		test: true
 	},
 	{
 		options: simpleHorizontalBarTimeSeriesOptions,
-		data: simpleHorizontalBarTimeSeriesData
+		data: simpleHorizontalBarTimeSeriesData,
+		test: true
 	},
 	// {
 	//   options: simpleHorizontalBarEmptyStateOptions,
@@ -621,15 +625,18 @@ export const examples: Example[] = [
 	// },
 	{
 		options: floatingHorizontalBarTimeSeriesOptions,
-		data: floatingHorizontalBarTimeSeriesData
+		data: floatingHorizontalBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: floatingBarOptions,
-		data: floatingBarData
+		data: floatingBarData,
+		test: true
 	},
 	{
 		options: floatingHorizontalBarOptions,
-		data: floatingHorizontalBarData
+		data: floatingHorizontalBarData,
+		test: true
 	},
 	{
 		data: simpleBarDataCustomTicks,
@@ -637,23 +644,28 @@ export const examples: Example[] = [
 	},
 	{
 		data: simpleBarData,
-		options: simpleBarFixedDomainOptions
+		options: simpleBarFixedDomainOptions,
+		test: true
 	},
 	{
 		data: simpleBarData,
-		options: simpleBarColorOverrideOptions
+		options: simpleBarColorOverrideOptions,
+		test: true
 	},
 	{
 		data: simpleBarCenteredLegendData,
-		options: simpleBarCenteredLegendOptions
+		options: simpleBarCenteredLegendOptions,
+		test: true
 	},
 	{
 		data: simpleBarData,
-		options: simpleBarCustomLegendOrderOptions
+		options: simpleBarCustomLegendOrderOptions,
+		test: true
 	},
 	{
 		options: simpleBarAdditionalLegendItemsOptions,
-		data: simpleBarData
+		data: simpleBarData,
+		test: true
 	},
 	// {
 	//   options: simpleBarTurkishLocaleOptions,
@@ -669,7 +681,8 @@ export const examples: Example[] = [
 	// },
 	{
 		options: simpleBarJapaneseLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		test: true
 	},
 	// {
 	//   options: simpleBarHindiLocaleOptions,
@@ -681,7 +694,8 @@ export const examples: Example[] = [
 	// },
 	{
 		options: simpleHorizontalBarLongLabelOptions,
-		data: simpleHorizontalBarLongLabelData
+		data: simpleHorizontalBarLongLabelData,
+		test: true
 	},
 	{
 		options: simpleHorizontalBarEmptyStateOptions,

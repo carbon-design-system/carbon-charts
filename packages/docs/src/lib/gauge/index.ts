@@ -55,14 +55,17 @@ const gaugeDataNoDelta = [{ group: 'value', value: 67 }]
 export const examples: Example[] = [
 	{
 		options: gaugeOptionsSemi,
-		data: gaugeData
+		data: gaugeData,
+		test: true
 	},
 	{
 		options: gaugeOptionsCircular,
-		data: gaugeData
+		data: gaugeData,
+		test: true
 	},
 	{
 		options: gaugeOptionsCircularNoDelta,
-		data: gaugeDataNoDelta
+		data: gaugeDataNoDelta,
+		test: true
 	}
 ]

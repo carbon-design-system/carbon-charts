@@ -212,14 +212,17 @@ const histogramContinueWithBinsNumberData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: histogramContinueOptions,
-		data: histogramContinueData
+		data: histogramContinueData,
+		test: true
 	},
 	{
 		options: histogramContinueWithBinsNumberOptions,
-		data: histogramContinueWithBinsNumberData
+		data: histogramContinueWithBinsNumberData,
+		test: true
 	},
 	{
 		options: histogramContinueWithBinsOptions,
-		data: histogramContinueData
+		data: histogramContinueData,
+		test: true
 	}
 ]

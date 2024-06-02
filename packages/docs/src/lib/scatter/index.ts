@@ -167,19 +167,23 @@ const noData: ChartTabularData = []
 export const examples: Example[] = [
 	{
 		options: doubleLinearScatterOptions,
-		data: doubleLinearScatterData
+		data: doubleLinearScatterData,
+		test: true
 	},
 	{
 		options: scatterTimeSeriesOptions,
-		data: lineTimeSeriesData
+		data: lineTimeSeriesData,
+		test: true
 	},
 	{
 		options: scatterDiscreteOptions,
-		data: scatterDiscreteData
+		data: scatterDiscreteData,
+		test: true
 	},
 	{
 		options: scatterDualAxesOptions,
-		data: scatterDualAxesData
+		data: scatterDualAxesData,
+		test: true
 	},
 	{
 		options: scatterEmptyStateOptions,

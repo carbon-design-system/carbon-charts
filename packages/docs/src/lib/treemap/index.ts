@@ -109,6 +109,7 @@ const data: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		data,
-		options
+		options,
+		test: true
 	}
 ]

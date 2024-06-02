@@ -77,15 +77,18 @@ const noData: ChartTabularData = []
 export const examples: Example[] = [
 	{
 		options: donutOptions,
-		data: pieData
+		data: pieData,
+		test: true
 	},
 	{
 		options: donutCenteredOptions,
-		data: pieData
+		data: pieData,
+		test: true
 	},
 	{
 		options: donutMapsToOptions,
-		data: pieDataMapsTo
+		data: pieDataMapsTo,
+		test: true
 	},
 	{
 		options: donutEmptyStateOptions,

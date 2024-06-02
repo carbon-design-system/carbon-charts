@@ -351,26 +351,32 @@ const dataAligned: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		data,
-		options
+		options,
+		test: true
 	},
 	{
 		data,
-		options: optionsGradient
+		options: optionsGradient,
+		test: true
 	},
 	{
 		data: dataMultipleCategories,
-		options: optionsMultipleCategories
+		options: optionsMultipleCategories,
+		test: true
 	},
 	{
 		data: dataMonochrome,
-		options: optionsMonochrome
+		options: optionsMonochrome,
+		test: true
 	},
 	{
 		data: dataAligned,
-		options: optionsAligned
+		options: optionsAligned,
+		test: true
 	},
 	{
 		data,
-		options: optionsCustomColors
+		options: optionsCustomColors,
+		test: true
 	}
 ]

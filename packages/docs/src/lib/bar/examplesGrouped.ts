@@ -261,15 +261,18 @@ const noData: ChartTabularData = []
 export const examplesGrouped: Example[] = [
 	{
 		options: groupedBarSelectedGroupsOptions,
-		data: groupedBarSelectedGroupsData
+		data: groupedBarSelectedGroupsData,
+		test: true
 	},
 	{
 		options: groupedBarOptions,
-		data: groupedBarData
+		data: groupedBarData,
+		test: true
 	},
 	{
 		options: groupedBarTimeSeriesOptions,
-		data: groupedBarTimeSeriesData
+		data: groupedBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: groupedBarTimeSeriesDenseOptions,
@@ -285,11 +288,13 @@ export const examplesGrouped: Example[] = [
 	},
 	{
 		options: groupedHorizontalBarOptions,
-		data: groupedHorizontalBarData
+		data: groupedHorizontalBarData,
+		test: true
 	},
 	{
 		options: groupedBarHorizontalTimeSeriesOptions,
-		data: groupedBarTimeSeriesData
+		data: groupedBarTimeSeriesData,
+		test: true
 	},
 	{
 		options: groupedHorizontalBarEmptyStateOptions,

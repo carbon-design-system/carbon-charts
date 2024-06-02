@@ -80,8 +80,8 @@ export class ComboChart extends AxisChart {
 						stacked = true
 					}
 					return graphComponentsMap[graph.type as keyof typeof graphComponentsMap].map(
-						(chartComponent: any) =>
-							new chartComponent(this.model, this.services, {
+						(Component: any) =>
+							new Component(this.model, this.services, {
 								groups: graph.correspondingDatasets,
 								id: counter++,
 								options: options,
