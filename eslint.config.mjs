@@ -22,13 +22,19 @@ export default tseslint.config(
 			'assets/',
 			'pages/',
 			'yarn.lock',
+			'**/node_modules/',
+			'**/.git/',
 			'**/.angular/',
 			'**/scss/',
 			'**/public/images',
 			'**/.svelte-kit/',
 			'**/svelte/static',
 			'**/dist/',
-			'packages/angular/'
+			'**/test-results/',
+			'**/.storybook/',
+			'**/demo/',
+			'packages/angular/',
+			'thumbnails/'
 		]
 	},
 
