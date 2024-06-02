@@ -30,21 +30,16 @@
 		"pub:demo": "cp -a demo/bundle/. ../../pages/angular"
 	},
 	"peerDependencies": {
-		"@angular/common": "^16.0.0 || ^17.0.0",
-		"@angular/core": "^16.0.0 || ^17.0.0"
+		"@angular/common": "^16.0.0 || ^17.0.0 || ^18.0.0",
+		"@angular/core": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.5.1",
+		"@ibm/telemetry-js": "^1.5.2",
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^16.2.14",
-		"@angular-eslint/builder": "^16.3.1",
-		"@angular-eslint/eslint-plugin": "^16.3.1",
-		"@angular-eslint/eslint-plugin-template": "^16.3.1",
-		"@angular-eslint/schematics": "^16.3.1",
-		"@angular-eslint/template-parser": "^16.3.1",
 		"@angular/animations": "^16.2.12",
 		"@angular/cli": "^16.2.14",
 		"@angular/common": "^16.2.12",
@@ -54,22 +49,26 @@
 		"@angular/forms": "^16.2.12",
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
-		"@carbon/icon-helpers": "~10.47.0",
-		"@carbon/icons": "^11.39.0",
-		"@stackblitz/sdk": "^1.9.0",
-		"@storybook/angular": "^7.6.17",
+		"@carbon/icon-helpers": "~10.48.0",
+		"@carbon/icons": "^11.42.0",
+		"@stackblitz/sdk": "^1.10.0",
+		"@storybook/angular": "^7.6.19",
 		"@types/carbon__icon-helpers": "^10.7.4",
+		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
+		"eslint": "^9.4.0",
 		"ng-packagr": "^16.2.3",
+		"prettier": "^3.3.0",
 		"rxjs": "~7.8.1",
-		"storybook": "^7.6.17",
+		"storybook": "^7.6.19",
 		"style-loader": "^4.0.0",
 		"typescript": "~5.1.6",
-		"zone.js": "~0.14.4"
+		"typescript-eslint": "^8.0.0-alpha.20",
+		"zone.js": "~0.14.6"
 	},
 	"publishConfig": {
 		"tag": "next",

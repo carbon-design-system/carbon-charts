@@ -14,8 +14,8 @@
 		"storybook": "storybook dev -p 9006",
 		"start": "yarn storybook",
 		"test": "svelte-check --workspace=tests",
-		"lint": "prettier --plugin-search-dir . --check . --ignore-path ../../.eslintignore && eslint . --ignore-path ../../.eslintignore",
-		"format": "prettier --plugin-search-dir . --write . --ignore-path ../../.eslintignore",
+		"lint": "prettier . --check --ignore-path ../../.prettierignore && eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore",
 		"clean": "rm -rf dist demo/bundle",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -44,26 +44,27 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.5.1"
+		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "^1.9.0",
-		"@sveltejs/adapter-auto": "^3.2.0",
-		"@sveltejs/kit": "^2.5.5",
+		"@stackblitz/sdk": "^1.10.0",
+		"@sveltejs/adapter-auto": "^3.2.1",
+		"@sveltejs/kit": "^2.5.10",
 		"@sveltejs/package": "^2.3.1",
-		"@sveltejs/vite-plugin-svelte": "^3.1.0",
+		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
-		"eslint": "^9.0.0",
-		"publint": "^0.2.7",
-		"storybook": "^7.6.17",
-		"svelte": "^4.2.14",
-		"svelte-check": "^3.6.9",
+		"eslint": "^9.4.0",
+		"prettier": "^3.3.0",
+		"publint": "^0.2.8",
+		"storybook": "^7.6.19",
+		"svelte": "^4.2.17",
+		"svelte-check": "^3.8.0",
 		"tslib": "^2.6.2",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.8"
+		"vite": "^5.2.12"
 	},
 	"publishConfig": {
 		"access": "public"
