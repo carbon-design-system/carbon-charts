@@ -33,7 +33,7 @@
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.4.0",
-		"prettier": "^3.2.5",
+		"prettier": "^3.3.0",
 		"sass": "^1.77.4",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",

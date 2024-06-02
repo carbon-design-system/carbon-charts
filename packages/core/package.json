@@ -83,7 +83,7 @@
 		"dompurify": "^3.1.5",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
-		"prettier": "^3.2.5",
+		"prettier": "^3.3.0",
 		"publint": "^0.2.8",
 		"topojson-client": "^3.1.0",
 		"tslib": "^2.6.2"

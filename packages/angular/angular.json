@@ -36,7 +36,8 @@
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": ["./**/*.ts", "./**/*.html"]
+						"lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
+						"eslintConfig": "./eslint.config.js"
 					}
 				}
 			}
@@ -123,7 +124,8 @@
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": ["charts-angular-test/**/*.ts", "charts-angular-test/**/*.html"]
+						"lintFilePatterns": ["charts-angular-test/**/*.ts", "charts-angular-test/**/*.html"],
+						"eslintConfig": "projects/charts-angular-test/eslint.config.js"
 					}
 				}
 			}
