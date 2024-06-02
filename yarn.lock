@@ -1927,8 +1927,6 @@ __metadata:
     "@playwright/test": "npm:^1.44.1"
     "@types/carbon__icon-helpers": "npm:^10.7.4"
     "@types/jasmine": "npm:~5.1.4"
-    "@typescript-eslint/eslint-plugin": "npm:^7.11.0"
-    "@typescript-eslint/parser": "npm:^7.11.0"
     angular-eslint: "npm:^18.0.1"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^9.4.0"
@@ -5395,7 +5393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:7.11.0, @typescript-eslint/eslint-plugin@npm:^7.11.0":
+"@typescript-eslint/eslint-plugin@npm:7.11.0":
   version: 7.11.0
   resolution: "@typescript-eslint/eslint-plugin@npm:7.11.0"
   dependencies:
@@ -5464,7 +5462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:7.11.0, @typescript-eslint/parser@npm:^7.11.0":
+"@typescript-eslint/parser@npm:7.11.0":
   version: 7.11.0
   resolution: "@typescript-eslint/parser@npm:7.11.0"
   dependencies:

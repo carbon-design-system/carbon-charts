@@ -48,8 +48,6 @@
 		"@playwright/test": "^1.44.1",
 		"@types/carbon__icon-helpers": "^10.7.4",
 		"@types/jasmine": "~5.1.4",
-		"@typescript-eslint/eslint-plugin": "^7.11.0",
-		"@typescript-eslint/parser": "^7.11.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.4.0",
