@@ -1,40 +1,28 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
-		"allowJs": false,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"isolatedModules": true,
-		"moduleResolution": "bundler",
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
-		"skipLibCheck": true,
-		"sourceMap": true,
+		"paths": {
+			"@carbon/charts-angular": ["./dist"],
+			"@carbon/charts-angular/*": ["./dist/*"]
+		},
+		"outDir": "./dist/out-tsc",
 		"strict": true,
-
-		// Package-specific
-		"baseUrl": "./",
-		"declaration": false,
-		"downlevelIteration": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-
 		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"noImplicitReturns": true,
-		"outDir": "./dist/out-tsc",
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"declaration": false,
+		"experimentalDecorators": true,
+		"moduleResolution": "Bundler",
+		"importHelpers": true,
+		"target": "ES2022",
+		"module": "ES2022",
 		"useDefineForClassFields": false,
-		"paths": {
-			"@carbon/charts-angular": ["dist"],
-			"@carbon/charts-angular/*": ["dist/*"]
-		}
+		"lib": ["ES2022", "dom"]
 	},
-	"include": ["src", "./package.json"],
-	"exclude": ["src/test.ts"],
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
 		"strictInjectionParameters": true,

@@ -5,6 +5,9 @@ import angular from 'angular-eslint'
 
 export default tseslint.config(
 	{
+		ignores: ['**/.angular/', '**/demo/', '**/dist/', '**/playwright-report', '**/test-results']
+	},
+	{
 		files: ['**/*.ts'],
 		extends: [
 			eslint.configs.recommended,
@@ -18,7 +21,7 @@ export default tseslint.config(
 				'error',
 				{
 					type: 'attribute',
-					prefix: 'lib',
+					prefix: 'ibm',
 					style: 'camelCase'
 				}
 			],
@@ -26,7 +29,7 @@ export default tseslint.config(
 				'error',
 				{
 					type: 'element',
-					prefix: 'lib',
+					prefix: 'ibm',
 					style: 'kebab-case'
 				}
 			]

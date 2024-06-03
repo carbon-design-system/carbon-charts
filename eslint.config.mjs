@@ -15,19 +15,20 @@ export default tseslint.config(
 	// Global ignores
 	{
 		ignores: [
-			// default already excludes node_modules and .git
 			'.husky/',
 			'.nx/',
 			'.yarn/',
 			'assets/',
 			'pages/',
 			'yarn.lock',
+			'**/.git/',
 			'**/.angular/',
 			'**/scss/',
 			'**/public/images',
 			'**/.svelte-kit/',
 			'**/svelte/static',
 			'**/dist/',
+			'**/test-results/',
 			'packages/angular/'
 		]
 	},
