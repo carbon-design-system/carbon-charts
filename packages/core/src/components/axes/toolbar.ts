@@ -470,7 +470,12 @@ export class Toolbar extends Component {
 
 	// special button config for overflow button
 	getOverflowButtonConfig() {
-		const { moreOptions } = getProperty(this.model.getOptions(), 'locale', 'translations', 'toolbar')
+		const { moreOptions } = getProperty(
+			this.model.getOptions(),
+			'locale',
+			'translations',
+			'toolbar'
+		)
 		return {
 			id: 'toolbar-overflow-menu',
 			title: moreOptions,
@@ -493,14 +498,16 @@ export class Toolbar extends Component {
 		const displayData = this.model.getDisplayData()
 		const options = this.model.getOptions()
 		const {
-			exportAsCSV, exportAsJPG, exportAsPNG, zoomIn, zoomOut, resetZoom,
-			makeFullScreen, exitFullScreen, showAsTable
-		} = getProperty(
-			options,
-			'locale',
-			'translations',
-			'toolbar'
-		)
+			exportAsCSV,
+			exportAsJPG,
+			exportAsPNG,
+			zoomIn,
+			zoomOut,
+			resetZoom,
+			makeFullScreen,
+			exitFullScreen,
+			showAsTable
+		} = getProperty(options, 'locale', 'translations', 'toolbar')
 
 		let controlConfig: any
 		switch (controlType) {
