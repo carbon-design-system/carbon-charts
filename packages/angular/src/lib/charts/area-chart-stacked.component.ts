@@ -2,14 +2,13 @@ import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
 import {
 	StackedAreaChart as StackedAreaChartCore,
-	type StackedAreaChartOptions,
-	type ChartTabularData
+	type StackedAreaChartOptions
 } from '@carbon/charts'
 
 /**
- * Wrapper around `StackedAreaChart` in carbon charts library
+ * Wrapper around `StackedAreaChart` from core.
  *
- * Most functions just call their equivalent from the chart library.
+ * Most functions from the core class are exposed.
  */
 @Component({
 	selector: 'ibm-stacked-area-chart',
@@ -20,8 +19,8 @@ export class StackedAreaChartComponent extends BaseChartComponent implements Aft
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new StackedAreaChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new StackedAreaChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as StackedAreaChartOptions
 		})
 

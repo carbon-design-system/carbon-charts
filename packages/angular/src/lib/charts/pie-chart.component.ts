@@ -1,15 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	PieChart as PieChartCore,
-	type PieChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { PieChart as PieChartCore, type PieChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `PieChart` in carbon charts library
+ * Wrapper around `PieChart` from core.
  *
- * Most functions just call their equivalent from the chart library.
+ * Most functions from the core class are exposed.
  */
 @Component({
 	selector: 'ibm-pie-chart',
@@ -20,8 +16,8 @@ export class PieChartComponent extends BaseChartComponent implements AfterViewIn
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new PieChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new PieChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as PieChartOptions
 		})
 

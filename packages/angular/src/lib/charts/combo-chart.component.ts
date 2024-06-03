@@ -1,15 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	ComboChart as ComboChartCore,
-	type ComboChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { ComboChart as ComboChartCore, type ComboChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `ComboChart` in carbon charts library
+ * Wrapper around `ComboChart` from core.
  *
- * Most functions just call their equivalent from the chart library.
+ * Most functions from the core class are exposed.
  */
 @Component({
 	selector: 'ibm-combo-chart',
@@ -20,8 +16,8 @@ export class ComboChartComponent extends BaseChartComponent implements AfterView
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new ComboChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new ComboChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as ComboChartOptions
 		})
 

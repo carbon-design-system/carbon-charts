@@ -2,14 +2,14 @@ import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
 import {
 	ExperimentalChoroplethChart as ChoroplethChartCore,
-	type ChoroplethChartOptions,
-	type ChartTabularData
+	type ChoroplethChartOptions
 } from '@carbon/charts'
 
 /**
- * Wrapper around `Choropleth` in carbon charts library
+ * Wrapper around `ExperimentalChoroplethChart` from core.
  *
- * Most functions just call their equivalent from the chart library.
+ * Most functions from the core class are exposed.
+ * @experimental
  */
 @Component({
 	selector: 'ibm-experimental-choropleth-chart',
@@ -23,8 +23,8 @@ export class ExperimentalChoroplethChartComponent
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new ChoroplethChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new ChoroplethChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as ChoroplethChartOptions
 		})
 
