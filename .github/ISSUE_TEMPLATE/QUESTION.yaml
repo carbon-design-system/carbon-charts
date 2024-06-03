@@ -1,6 +1,6 @@
 name: Question❓
-description: Suggest an idea for Carbon Charts
-title: '[Enhancement]: '
+description: Suggest a question related to Carbon Charts
+title: '[Question]: '
 labels: [enhancement]
 body:
   - type: markdown
