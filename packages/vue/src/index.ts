@@ -61,12 +61,12 @@ const components = [
 */
 export default {
 	install(app: any, options?: string[]) {
-			for (const component of components) {
-					// Check that component.name is defined and is a string
-					if (component.name && (!options || options.includes(component.name))) {
-							app.component(component.name, component);
-					}
+		for (const component of components) {
+			// Check that component.name is defined and is a string
+			if (component.name && (!options || options.includes(component.name))) {
+				app.component(component.name, component)
 			}
+		}
 	}
 }
 
@@ -128,7 +128,7 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WorldCloudChartOptions
+	WordCloudChartOptions
 } from '@carbon/charts'
 
 // Commonly-used enums
