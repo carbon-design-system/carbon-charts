@@ -81,6 +81,10 @@ export type {
 	TreeChartOptions,
 	TreemapChartOptions,
 	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WordCloudChartOptions as WorldCloudChartOptions,
 	// Component Options
 	AxesOptions,
 	AxisOptions,
