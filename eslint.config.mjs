@@ -21,7 +21,6 @@ export default tseslint.config(
 			'assets/',
 			'pages/',
 			'yarn.lock',
-			'**/.git/',
 			'**/.angular/',
 			'**/scss/',
 			'**/public/images',
@@ -29,7 +28,8 @@ export default tseslint.config(
 			'**/svelte/static',
 			'**/dist/',
 			'**/test-results/',
-			'packages/angular/'
+			'**/demo',
+			'packages/angular/' // has its own config
 		]
 	},
 

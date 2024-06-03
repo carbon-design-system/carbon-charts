@@ -33,6 +33,7 @@
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^16.2.14",
+		"@angular/animations": "^16.2.12",
 		"@angular/cli": "^16.2.14",
 		"@angular/common": "^16.2.12",
 		"@angular/compiler": "^16.2.12",
@@ -46,9 +47,13 @@
 		"@types/carbon__icon-helpers": "^10.7.4",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
+		"d3": "^7.9.0",
+		"d3-cloud": "^1.2.7",
+		"d3-sankey": "^0.12.3",
 		"eslint": "^9.4.0",
 		"ng-packagr": "^16.2.3",
 		"prettier": "^3.3.0",
+		"rxjs": "~7.8.1",
 		"typescript": "~5.1.6",
 		"typescript-eslint": "^8.0.0-alpha.20",
 		"zone.js": "^0.14.6"

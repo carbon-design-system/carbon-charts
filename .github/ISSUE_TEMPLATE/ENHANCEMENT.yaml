@@ -21,7 +21,7 @@ body:
       description: >-
         Please describe your request in one or two sentences.
 
-        Clarify if you are asking for design, development, or both design and development.
+        Clarify if you are asking for design, development or both design and development.
     validations:
       required: true
   - type: textarea

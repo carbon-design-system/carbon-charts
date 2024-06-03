@@ -1,9 +1,7 @@
 # Carbon Charts Angular
 
 Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts`
-component library. This prerelease is for Angular 16 and higher and uses TypeScript 5. Carbon Charts
-Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts` component library.
-This prerelease is for Angular 16 and higher and uses TypeScript 5.
+component library. This prerelease is for Angular 16 and higher and uses TypeScript 5.
 
 If you need support for older versions of Angular (or encounter problems with this module), please
 revert to `@carbon/charts-angular@latest`. Distribution tags have been added for specific Angular
@@ -33,5 +31,6 @@ The required styles should be imported from `@carbon/charts-angular/dist/styles.
 This package uses IBM Telemetry to collect metrics data. By installing this package as a dependency,
 you are agreeing to telemetry collection. To opt out, see
 [Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
+
 For more information on the data being collected, please see the
 [IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).

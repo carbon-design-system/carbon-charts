@@ -43,7 +43,7 @@ To get charts running locally on your machine:
 
 1. Fork this repo
 2. Git clone your fork locally
-3. Run `yarn install` (this would install all packages and get **lerna** setup)
+3. Run `yarn install`
 4. Run `yarn build` to build all packages and the documentation website
 
 ```sh
