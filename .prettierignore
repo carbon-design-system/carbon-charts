@@ -1,6 +1,7 @@
 # Root-level only
 .git
 .yarn
+.nx
 pages
 yarn.lock
 
@@ -9,9 +10,9 @@ yarn.lock
 **/.DS_Store
 **/.svelte-kit
 **/dist
-**/demo/bundle
+**/build
 **/node_modules
 **/LICENSE.md
-
-# Prettier (which shares this config) has issues with Storybook MDX files
-*.mdx
+**/demo
+**/playwright-report
+**/test-results

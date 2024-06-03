@@ -36,38 +36,40 @@
 		"build": "yarn build:package && yarn build:demo",
 		"storybook": "storybook dev -p 9006",
 		"start": "yarn storybook",
-		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.eslintignore",
-		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,cjs,mjs,md}\"  --ignore-path ../../.eslintignore",
+		"lint": "eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore",
 		"clean": "rm -rf dist demo/bundle",
 		"pub:demo": "cp -a demo/bundle/. ../../pages/react"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.39.0",
-		"@ibm/telemetry-js": "^1.5.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"@carbon/icons-react": "^11.42.0",
+		"@ibm/telemetry-js": "^1.5.2",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
 	},
 	"peerDependencies": {
 		"react": "^16.0.0 || ^17.0.0 || ^18.0.0",
 		"react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "1.9.0",
-		"@types/react": "^18.2.77",
-		"@types/react-dom": "^18.2.25",
-		"@vitejs/plugin-react": "^4.2.1",
+		"@stackblitz/sdk": "^1.10.0",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react": "^4.3.0",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"downlevel-dts": "^0.11.0",
-		"sass": "^1.75.0",
-		"storybook": "^7.6.17",
+		"eslint": "^9.4.0",
+		"prettier": "^3.3.0",
+		"sass": "^1.77.4",
+		"storybook": "^7.6.19",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.8",
-		"vite-plugin-dts": "^3.8.2"
+		"vite": "^5.2.12",
+		"vite-plugin-dts": "^3.9.1"
 	},
 	"publishConfig": {
 		"access": "public"
