@@ -281,6 +281,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular/animations@npm:^16.2.12":
+  version: 16.2.12
+  resolution: "@angular/animations@npm:16.2.12"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/core": 16.2.12
+  checksum: 10c0/ac1bf1cd4abce7b5137c068fb21e28574db6153faee7a10d9b6c6605be477b4f26a4647c8c5d1116f70926669f01491e564aa616510921dd5f44cd507a4b9d33
+  languageName: node
+  linkType: hard
+
 "@angular/cli@npm:^16.2.14":
   version: 16.2.14
   resolution: "@angular/cli@npm:16.2.14"
@@ -1886,6 +1897,7 @@ __metadata:
   resolution: "@carbon/charts-angular@workspace:packages/angular"
   dependencies:
     "@angular-devkit/build-angular": "npm:^16.2.14"
+    "@angular/animations": "npm:^16.2.12"
     "@angular/cli": "npm:^16.2.14"
     "@angular/common": "npm:^16.2.12"
     "@angular/compiler": "npm:^16.2.12"
@@ -1901,9 +1913,13 @@ __metadata:
     "@types/carbon__icon-helpers": "npm:^10.7.4"
     angular-eslint: "npm:^18.0.1"
     concurrently: "npm:^8.2.2"
+    d3: "npm:^7.9.0"
+    d3-cloud: "npm:^1.2.7"
+    d3-sankey: "npm:^0.12.3"
     eslint: "npm:^9.4.0"
     ng-packagr: "npm:^16.2.3"
     prettier: "npm:^3.3.0"
+    rxjs: "npm:~7.8.1"
     tslib: "npm:^2.6.2"
     typescript: "npm:~5.1.6"
     typescript-eslint: "npm:^8.0.0-alpha.20"
@@ -16141,7 +16157,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.8.1, rxjs@npm:^7.5.5, rxjs@npm:^7.5.6, rxjs@npm:^7.8.1":
+"rxjs@npm:7.8.1, rxjs@npm:^7.5.5, rxjs@npm:^7.5.6, rxjs@npm:^7.8.1, rxjs@npm:~7.8.1":
   version: 7.8.1
   resolution: "rxjs@npm:7.8.1"
   dependencies:

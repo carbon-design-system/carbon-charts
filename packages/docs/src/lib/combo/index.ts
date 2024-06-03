@@ -596,7 +596,7 @@ const comboStackedAreaLine: ChartTabularData = [
 ]
 
 const comboAreaLineTimeSeriesData: ChartTabularData = [
-	{ group: 'Health', key: '2018-12-30', value: 312 },
+	{ group: 'Health', key: '2022-12-30', value: 312 },
 	{ group: 'Health', key: '2023-01-06', value: 232 },
 	{ group: 'Health', key: '2023-01-08', value: 432 },
 	{ group: 'Health', key: '2023-01-15', value: 712 },
