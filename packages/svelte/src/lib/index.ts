@@ -50,7 +50,11 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WordCloudChartOptions
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WorldCloudChartOptions
 } from '@carbon/charts'
 
 // Commonly-used enums
