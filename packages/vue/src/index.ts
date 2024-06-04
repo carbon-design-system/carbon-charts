@@ -1,3 +1,5 @@
+import { App } from 'vue'
+
 import {
 	CcvAlluvialChart,
 	CcvAreaChart,
@@ -6,7 +8,8 @@ import {
 	CcvBulletChart,
 	CcvCirclePackChart,
 	CcvComboChart,
-	ExperimentalCcvChoroplethChart,
+	CcvChoroplethChart,
+	CcvChoroplethChart as ExperimentalCcvChoroplethChart,
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvGroupedBarChart,
@@ -32,6 +35,7 @@ const components = [
 	CcvBoxplotChart,
 	CcvBubbleChart,
 	CcvBulletChart,
+	CcvChoroplethChart,
 	ExperimentalCcvChoroplethChart,
 	CcvCirclePackChart,
 	CcvComboChart,
@@ -60,7 +64,7 @@ const components = [
   components unless an array of components to register is provided.
 */
 export default {
-	install(app: any, options?: string[]) {
+	install(app: App, options?: string[]) {
 		for (const component of components) {
 			// Check that component.name is defined and is a string
 			if (component.name && (!options || options.includes(component.name))) {
@@ -80,6 +84,10 @@ export {
 	CcvBoxplotChart,
 	CcvBubbleChart,
 	CcvBulletChart,
+	CcvChoroplethChart,
+	/**
+	 * @deprecated Use `CcvChoroplethChart` instead.
+	 */
 	ExperimentalCcvChoroplethChart,
 	CcvCirclePackChart,
 	CcvComboChart,

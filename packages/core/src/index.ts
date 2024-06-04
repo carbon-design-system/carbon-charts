@@ -21,7 +21,11 @@ export {
 	BubbleChart,
 	BulletChart,
 	type Charts,
-	ExperimentalChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
+	ChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

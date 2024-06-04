@@ -30,9 +30,9 @@ export default {
 		vue: 'CcvBulletChart'
 	},
 	ChoroplethChart: {
-		vanilla: 'ExperimentalChoroplethChart',
-		angular: 'ibm-experimental-choropleth-chart',
-		vue: 'ExperimentalCcvChoroplethChart'
+		vanilla: 'ChoroplethChart',
+		angular: 'ibm-choropleth-chart',
+		vue: 'CcvChoroplethChart'
 	},
 	ComboChart: {
 		vanilla: 'ComboChart',

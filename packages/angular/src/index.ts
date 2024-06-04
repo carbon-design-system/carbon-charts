@@ -11,9 +11,13 @@ export {
 	BubbleChartComponent,
 	BulletChartComponent,
 	ChartsModule, // <-- Module
+	ChoroplethChartComponent,
 	CirclePackChartComponent,
 	ComboChartComponent,
 	DonutChartComponent,
+	/**
+	 * @deprecated Use `ChoroplethChartComponent` instead.
+	 */
 	ExperimentalChoroplethChartComponent,
 	GaugeChartComponent,
 	GroupedBarChartComponent,

@@ -894,8 +894,7 @@ export const data = [
 
 export const options = {
 	title: 'Geo data',
-	geoData: worldTopoJson,
-	experimental: true
+	geoData: worldTopoJson
 }
 
 export const missingData = [
@@ -1683,6 +1682,5 @@ export const missingData = [
 
 export const missingDataOptions = {
 	title: 'Missing data',
-	geoData: worldTopoJson,
-	experimental: true
+	geoData: worldTopoJson
 }
