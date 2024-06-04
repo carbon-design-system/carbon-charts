@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	SimpleBarChart as SimpleBarChartCore,
-	type ChartTabularData,
-	type BarChartOptions
-} from '@carbon/charts'
+import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `SimpleBarChart` in carbon charts library
@@ -21,7 +17,7 @@ export class SimpleBarChartComponent extends BaseChartComponent implements After
 	 */
 	override ngAfterViewInit() {
 		this.chart = new SimpleBarChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as BarChartOptions
 		})
 

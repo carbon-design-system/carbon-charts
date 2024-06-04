@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	StackedBarChart as StackedBarChartCore,
-	type ChartTabularData,
-	type StackedBarChartOptions
-} from '@carbon/charts'
+import { StackedBarChart as StackedBarChartCore, type StackedBarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `StackedBarChart` in carbon charts library
@@ -21,7 +17,7 @@ export class StackedBarChartComponent extends BaseChartComponent implements Afte
 	 */
 	override ngAfterViewInit() {
 		this.chart = new StackedBarChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as StackedBarChartOptions
 		})
 

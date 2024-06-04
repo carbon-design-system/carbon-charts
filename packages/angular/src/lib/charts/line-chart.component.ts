@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	LineChart as LineChartCore,
-	type LineChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { LineChart as LineChartCore, type LineChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `LineChart` in carbon charts library
@@ -21,7 +17,7 @@ export class LineChartComponent extends BaseChartComponent implements AfterViewI
 	 */
 	override ngAfterViewInit() {
 		this.chart = new LineChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as LineChartOptions
 		})
 

@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	BulletChart as BulletChartCore,
-	type BulletChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { BulletChart as BulletChartCore, type BulletChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `BulletChart` in carbon charts library
@@ -21,7 +17,7 @@ export class BulletChartComponent extends BaseChartComponent implements AfterVie
 	 */
 	override ngAfterViewInit() {
 		this.chart = new BulletChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as BulletChartOptions
 		})
 

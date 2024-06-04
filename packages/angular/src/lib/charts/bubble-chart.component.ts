@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	BubbleChart as BubbleChartCore,
-	type BubbleChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { BubbleChart as BubbleChartCore, type BubbleChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `BubbleChart` in carbon charts library
@@ -21,7 +17,7 @@ export class BubbleChartComponent extends BaseChartComponent implements AfterVie
 	 */
 	override ngAfterViewInit() {
 		this.chart = new BubbleChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as BubbleChartOptions
 		})
 

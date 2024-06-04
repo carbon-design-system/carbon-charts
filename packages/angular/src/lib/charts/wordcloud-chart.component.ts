@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	WordCloudChart as WordCloudChartCore,
-	type WordCloudChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { WordCloudChart as WordCloudChartCore, type WordCloudChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `WordCloudChart` in carbon charts library
@@ -21,7 +17,7 @@ export class WordCloudChartComponent extends BaseChartComponent implements After
 	 */
 	override ngAfterViewInit() {
 		this.chart = new WordCloudChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as WordCloudChartOptions
 		})
 

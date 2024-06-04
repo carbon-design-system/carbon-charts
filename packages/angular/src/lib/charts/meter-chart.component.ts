@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	MeterChart as MeterChartCore,
-	type MeterChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { MeterChart as MeterChartCore, type MeterChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `MeterChart` in carbon charts library
@@ -21,7 +17,7 @@ export class MeterChartComponent extends BaseChartComponent implements AfterView
 	 */
 	override ngAfterViewInit() {
 		this.chart = new MeterChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as MeterChartOptions
 		})
 

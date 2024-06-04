@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	LollipopChart as LollipopChartCore,
-	type LollipopChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { LollipopChart as LollipopChartCore, type LollipopChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `LollipopChart` in carbon charts library
@@ -21,7 +17,7 @@ export class LollipopChartComponent extends BaseChartComponent implements AfterV
 	 */
 	override ngAfterViewInit() {
 		this.chart = new LollipopChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as LollipopChartOptions
 		})
 

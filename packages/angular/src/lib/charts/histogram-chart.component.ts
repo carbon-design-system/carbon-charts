@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	HistogramChart as HistogramChartCore,
-	type HistogramChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { HistogramChart as HistogramChartCore, type HistogramChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `HistogramChart` in carbon charts library
@@ -21,7 +17,7 @@ export class HistogramChartComponent extends BaseChartComponent implements After
 	 */
 	override ngAfterViewInit() {
 		this.chart = new HistogramChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as HistogramChartOptions
 		})
 

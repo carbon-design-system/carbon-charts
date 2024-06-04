@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	ChoroplethChart as ChoroplethChartCore,
-	type ChoroplethChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `Choropleth` in carbon charts library
@@ -21,7 +17,7 @@ export class ChoroplethChartComponent extends BaseChartComponent implements Afte
 	 */
 	override ngAfterViewInit() {
 		this.chart = new ChoroplethChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as ChoroplethChartOptions
 		})
 

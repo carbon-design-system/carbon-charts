@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	HeatmapChart as HeatmapChartCore,
-	type HeatmapChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `Heatmap` in carbon charts library
@@ -21,7 +17,7 @@ export class HeatmapChartComponent extends BaseChartComponent implements AfterVi
 	 */
 	override ngAfterViewInit() {
 		this.chart = new HeatmapChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as HeatmapChartOptions
 		})
 

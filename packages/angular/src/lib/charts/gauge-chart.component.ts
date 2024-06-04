@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	GaugeChart as GaugeChartCore,
-	type GaugeChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { GaugeChart as GaugeChartCore, type GaugeChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `GaugeChart` in carbon charts library
@@ -21,7 +17,7 @@ export class GaugeChartComponent extends BaseChartComponent implements AfterView
 	 */
 	override ngAfterViewInit() {
 		this.chart = new GaugeChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as GaugeChartOptions
 		})
 

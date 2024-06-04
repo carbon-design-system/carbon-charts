@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	PieChart as PieChartCore,
-	type PieChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { PieChart as PieChartCore, type PieChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `PieChart` in carbon charts library
@@ -21,7 +17,7 @@ export class PieChartComponent extends BaseChartComponent implements AfterViewIn
 	 */
 	override ngAfterViewInit() {
 		this.chart = new PieChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as PieChartOptions
 		})
 

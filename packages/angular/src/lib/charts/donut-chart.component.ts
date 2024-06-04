@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	DonutChart as DonutChartCore,
-	type DonutChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { DonutChart as DonutChartCore, type DonutChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `DonutChart` in carbon charts library
@@ -21,7 +17,7 @@ export class DonutChartComponent extends BaseChartComponent implements AfterView
 	 */
 	override ngAfterViewInit() {
 		this.chart = new DonutChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as DonutChartOptions
 		})
 

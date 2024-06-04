@@ -2,8 +2,7 @@ import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
 import {
 	StackedAreaChart as StackedAreaChartCore,
-	type StackedAreaChartOptions,
-	type ChartTabularData
+	type StackedAreaChartOptions
 } from '@carbon/charts'
 
 /**
@@ -21,7 +20,7 @@ export class StackedAreaChartComponent extends BaseChartComponent implements Aft
 	 */
 	override ngAfterViewInit() {
 		this.chart = new StackedAreaChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+			data: this.data,
 			options: this.options as StackedAreaChartOptions
 		})
 
