@@ -16,7 +16,7 @@ export class MeterChartComponent extends BaseChartComponent implements AfterView
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new MeterChartCore(this.elementRef.nativeElement, {
+		this.chart = new MeterChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as MeterChartOptions
 		})

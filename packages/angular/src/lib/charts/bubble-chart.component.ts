@@ -16,7 +16,7 @@ export class BubbleChartComponent extends BaseChartComponent implements AfterVie
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new BubbleChartCore(this.elementRef.nativeElement, {
+		this.chart = new BubbleChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as BubbleChartOptions
 		})

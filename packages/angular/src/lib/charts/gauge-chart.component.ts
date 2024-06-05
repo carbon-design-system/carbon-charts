@@ -16,7 +16,7 @@ export class GaugeChartComponent extends BaseChartComponent implements AfterView
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new GaugeChartCore(this.elementRef.nativeElement, {
+		this.chart = new GaugeChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as GaugeChartOptions
 		})

@@ -16,7 +16,7 @@ export class WordCloudChartComponent extends BaseChartComponent implements After
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new WordCloudChartCore(this.elementRef.nativeElement, {
+		this.chart = new WordCloudChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as WordCloudChartOptions
 		})

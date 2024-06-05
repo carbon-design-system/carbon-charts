@@ -16,7 +16,7 @@ export class BoxplotChartComponent extends BaseChartComponent implements AfterVi
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new BoxplotChartCore(this.elementRef.nativeElement, {
+		this.chart = new BoxplotChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as BoxplotChartOptions
 		})

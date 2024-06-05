@@ -19,7 +19,7 @@ export class StackedAreaChartComponent extends BaseChartComponent implements Aft
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new StackedAreaChartCore(this.elementRef.nativeElement, {
+		this.chart = new StackedAreaChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as StackedAreaChartOptions
 		})

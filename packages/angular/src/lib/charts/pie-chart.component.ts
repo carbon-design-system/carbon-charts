@@ -16,7 +16,7 @@ export class PieChartComponent extends BaseChartComponent implements AfterViewIn
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new PieChartCore(this.elementRef.nativeElement, {
+		this.chart = new PieChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as PieChartOptions
 		})

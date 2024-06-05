@@ -16,7 +16,7 @@ export class AlluvialChartComponent extends BaseChartComponent implements AfterV
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new AlluvialChartCore(this.elementRef.nativeElement, {
+		this.chart = new AlluvialChartCore(this.elementRef.nativeElement as HTMLDivElement, {
 			data: this.data,
 			options: this.options as AlluvialChartOptions
 		})
