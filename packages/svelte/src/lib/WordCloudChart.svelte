@@ -9,8 +9,8 @@
 
 	export let options: WordCloudChartOptions | WorldCloudChartOptions
 	export let data: ChartTabularData
-	export let chart: WordCloudChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: WordCloudChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

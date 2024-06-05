@@ -8,8 +8,8 @@
 
 	export let options: StackedAreaChartOptions
 	export let data: ChartTabularData
-	export let chart: StackedAreaChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: StackedAreaChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart
