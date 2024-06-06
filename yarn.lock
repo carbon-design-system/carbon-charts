@@ -2271,7 +2271,7 @@ __metadata:
     lint-staged: "npm:^15.2.5"
     prettier: "npm:^3.3.1"
     prettier-config-carbon: "npm:^0.11.0"
-    prettier-plugin-svelte: "npm:^3.2.3"
+    prettier-plugin-svelte: "npm:^3.2.4"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     storybook: "npm:^7.6.19"
@@ -2331,7 +2331,7 @@ __metadata:
     prettier: "npm:^3.3.1"
     publint: "npm:^0.2.8"
     storybook: "npm:^7.6.19"
-    svelte: "npm:^4.2.17"
+    svelte: "npm:^4.2.18"
     svelte-check: "npm:^3.8.0"
     tslib: "npm:^2.6.3"
     typescript: "npm:^5.4.5"
@@ -19147,13 +19147,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-svelte@npm:^3.2.3":
-  version: 3.2.3
-  resolution: "prettier-plugin-svelte@npm:3.2.3"
+"prettier-plugin-svelte@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "prettier-plugin-svelte@npm:3.2.4"
   peerDependencies:
     prettier: ^3.0.0
     svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
-  checksum: 10c0/9905bc1c719b73c1241719b5b6ce487dd64a6e527274a903cb390ddca431ae1712e03a8ad009b2f0bbfbbaadee6c998a4ddcace7a125b4c1668f919b825ba8e1
+  checksum: 10c0/88eb82a2c87741165e7f50a7441d36bd9155097efe12ab1634d934def867e177a19dd8118b8f7e0eead0c77f7b4f7d9a238e03f79636044b25b277eb594cc988
   languageName: node
   linkType: hard
 
@@ -21708,9 +21708,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^4.2.17":
-  version: 4.2.17
-  resolution: "svelte@npm:4.2.17"
+"svelte@npm:^4.2.18":
+  version: 4.2.18
+  resolution: "svelte@npm:4.2.18"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.1"
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
@@ -21726,7 +21726,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.4"
     periscopic: "npm:^3.1.0"
-  checksum: 10c0/cebf70a608fc5d7a00d230c80f0ec1a9168eb6a4838f74d2e5fd9dd607107b6200732f5c7918ac1850044fcec907f43f9bf7751f485cdabe183e9cffd6e48c83
+  checksum: 10c0/33cb321b59d0d29730f44054e442adcfdb6f6b51968c60e4027a2d2aa59cba2e2360aa42b4c61b0223350eacfe8dbeb3b724476d03fffb89a3c87021edbb1562
   languageName: node
   linkType: hard
 
