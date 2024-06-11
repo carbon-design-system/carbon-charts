@@ -62,7 +62,7 @@
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^9.4.0",
 		"ng-packagr": "^16.2.3",
-		"prettier": "^3.3.1",
+		"prettier": "^3.3.2",
 		"rxjs": "~7.8.1",
 		"storybook": "^7.6.19",
 		"style-loader": "^4.0.0",

@@ -20,7 +20,7 @@
 	"engines": {
 		"node": "^18.20.3 ^20.13.1 ^22.2.0"
 	},
-	"packageManager": "yarn@4.2.2",
+	"packageManager": "yarn@4.3.0",
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
 		"@commitlint/config-conventional": "^19.2.2",
@@ -52,8 +52,8 @@
 		"globals": "^15.4.0",
 		"husky": "^9.0.11",
 		"lerna": "8.1.4",
-		"lint-staged": "^15.2.5",
-		"prettier": "^3.3.1",
+		"lint-staged": "^15.2.6",
+		"prettier": "^3.3.2",
 		"prettier-config-carbon": "^0.11.0",
 		"prettier-plugin-svelte": "^3.2.4",
 		"react": "^18.3.1",
