@@ -53,7 +53,7 @@
 		"@carbon/icons": "^11.43.0",
 		"@stackblitz/sdk": "^1.10.0",
 		"@storybook/angular": "^7.6.19",
-		"@types/carbon__icon-helpers": "^10.7.4",
+		"@types/carbon__icon-helpers": "^10.45.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
@@ -68,7 +68,7 @@
 		"style-loader": "^4.0.0",
 		"typescript": "~5.1.6",
 		"typescript-eslint": "^8.0.0-alpha.28",
-		"zone.js": "~0.14.6"
+		"zone.js": "~0.14.7"
 	},
 	"publishConfig": {
 		"tag": "next",
