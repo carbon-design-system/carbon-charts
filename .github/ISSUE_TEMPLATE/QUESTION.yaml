@@ -1,5 +1,5 @@
 name: Question❓
-description: Suggest a question related to Carbon Charts
+description: Suggest a question
 title: '[Question]: '
 labels: [enhancement]
 body:

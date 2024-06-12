@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-chart.component'
 import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `Heatmap` in carbon charts library
+ * Wrapper around `HeatmapChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-chart.component'
 import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `Alluvial` in carbon charts library
+ * Wrapper around `AlluvialChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

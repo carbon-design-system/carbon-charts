@@ -6,7 +6,7 @@ import BarChartStacked from './BarChartStacked.svelte'
 import BoxplotChart from './BoxplotChart.svelte'
 import BubbleChart from './BubbleChart.svelte'
 import BulletChart from './BulletChart.svelte'
-import ExperimentalChoroplethChart from './ChoroplethChart.svelte'
+import ChoroplethChart from './ChoroplethChart.svelte'
 import CirclePackChart from './CirclePackChart.svelte'
 import ComboChart from './ComboChart.svelte'
 import DonutChart from './DonutChart.svelte'
@@ -24,7 +24,7 @@ import TreeChart from './TreeChart.svelte'
 import TreemapChart from './TreemapChart.svelte'
 import WordCloudChart from './WordCloudChart.svelte'
 
-// Republish essential types from core so it's not a required dependency for TypeScript projects
+// Republish essential types from core so it's not a required dependency
 export type {
 	ChartTabularData,
 	ChartOptions,
@@ -50,63 +50,15 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WordCloudChartOptions
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WorldCloudChartOptions
 } from '@carbon/charts'
 
-// All enums
-export {
-	Alignments,
-	AreaEvent,
-	ArrowDirections,
-	AxisEvent,
-	AxisFlavor,
-	AxisPositions,
-	AxisTitleOrientations,
-	BarEvent,
-	BoxplotEvent,
-	CalloutDirections,
-	CanvasZoomEvent,
-	CartesianOrientations,
-	ChartEvent,
-	ChartTheme,
-	ChartTypes,
-	ColorClassNameTypes,
-	ColorLegendType,
-	DividerStatus,
-	DominantBaseline,
-	GaugeEvent,
-	GaugeTypes,
-	LayoutAlignItems,
-	LayoutDirection,
-	LayoutGrowth,
-	LegendItemType,
-	LegendOrientations,
-	LegendPositions,
-	LineEvent,
-	ModalEvent,
-	ModelEvent,
-	PieEvent,
-	Projection,
-	RadarEvent,
-	RenderTypes,
-	ScaleTypes,
-	ScatterEvent,
-	Skeletons,
-	Statuses,
-	TextAnchor,
-	ThresholdEvent,
-	TickRotations,
-	ToolbarControlTypes,
-	TooltipEvent,
-	TruncationTypes,
-	TreeEvent,
-	TreemapEvent,
-	TreeTypes,
-	WordCloudEvent,
-	ZoombarEvent,
-	ZoomDomainEvent,
-	ZoomBarTypes
-} from '@carbon/charts'
+// Commonly-used enums
+export { Alignments, ChartTheme, ScaleTypes } from '@carbon/charts'
 
 export {
 	AlluvialChart,
@@ -117,35 +69,11 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
-	CirclePackChart,
-	ComboChart,
-	DonutChart,
-	GaugeChart,
-	HeatmapChart,
-	HistogramChart,
-	LineChart,
-	LollipopChart,
-	MeterChart,
-	PieChart,
-	RadarChart,
-	ScatterChart,
-	StackedAreaChart,
-	TreeChart,
-	TreemapChart,
-	WordCloudChart
-}
-
-export default {
-	AlluvialChart,
-	AreaChart,
-	BarChartGrouped,
-	BarChartSimple,
-	BarChartStacked,
-	BoxplotChart,
-	BubbleChart,
-	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

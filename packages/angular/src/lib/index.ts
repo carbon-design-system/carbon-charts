@@ -6,6 +6,7 @@ export {
 	BubbleChartComponent,
 	BulletChartComponent,
 	ChartsModule,
+	ChoroplethChartComponent,
 	CirclePackChartComponent,
 	ComboChartComponent,
 	DonutChartComponent,

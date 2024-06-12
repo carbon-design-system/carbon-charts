@@ -17,13 +17,13 @@ Please direct all questions regarding support, bug fixes and feature requests to
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte d3 d3-cloud d3-sankey
+npm install -D @carbon/charts-svelte
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte d3 d3-cloud d3-sankey
+yarn add -D @carbon/charts-svelte
 ```
 
 The required styles should be imported from `@carbon/charts-svelte/styles.css`.
@@ -57,7 +57,7 @@ You may see circular dependency warnings for `d3` packages. These can be safely 
 
 ## Usage
 
-Styles must be imported from `@carbon/charts-svelte/styles.css`.
+Styles must be imported from `@carbon/charts-svelte/styles.css` or `@carbon/charts-svelte/scss`.
 
 ```js
 import '@carbon/charts-svelte/styles.css'

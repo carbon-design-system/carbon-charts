@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {
-		ExperimentalChoroplethChart as ChoroplethChartCore,
+		ChoroplethChart as ChoroplethChartCore,
 		type ChoroplethChartOptions,
 		type ChartTabularData
 	} from '@carbon/charts'

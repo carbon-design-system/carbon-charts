@@ -7,7 +7,11 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
 	DonutChart,
 	GaugeChart,
 	HistogramChart,
@@ -69,7 +73,11 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WordCloudChartOptions
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WorldCloudChartOptions
 } from '@carbon/charts'
 
 // All enums

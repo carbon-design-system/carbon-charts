@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.16.3",
+	"version": "1.16.4",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
@@ -29,7 +29,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@ibm/telemetry-js": "^1.5.2",
-		"tslib": "^2.6.2"
+		"tslib": "^2.6.3"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^16.2.14",
@@ -42,9 +42,9 @@
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
 		"@carbon/icon-helpers": "~10.48.0",
-		"@carbon/icons": "^11.42.0",
+		"@carbon/icons": "^11.43.0",
 		"@playwright/test": "^1.44.1",
-		"@types/carbon__icon-helpers": "^10.7.4",
+		"@types/carbon__icon-helpers": "^10.45.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
@@ -52,11 +52,11 @@
 		"d3-sankey": "^0.12.3",
 		"eslint": "^9.4.0",
 		"ng-packagr": "^16.2.3",
-		"prettier": "^3.3.0",
+		"prettier": "^3.3.2",
 		"rxjs": "~7.8.1",
 		"typescript": "~5.1.6",
-		"typescript-eslint": "^8.0.0-alpha.20",
-		"zone.js": "^0.14.6"
+		"typescript-eslint": "^8.0.0-alpha.28",
+		"zone.js": "~0.14.7"
 	},
 	"publishConfig": {
 		"tag": "next",

@@ -8,7 +8,8 @@ import {
 	CcvBulletChart,
 	CcvCirclePackChart,
 	CcvComboChart,
-	ExperimentalCcvChoroplethChart,
+	CcvChoroplethChart,
+	CcvChoroplethChart as ExperimentalCcvChoroplethChart,
 	CcvDonutChart,
 	CcvGaugeChart,
 	CcvGroupedBarChart,
@@ -34,6 +35,7 @@ const components = [
 	CcvBoxplotChart,
 	CcvBubbleChart,
 	CcvBulletChart,
+	CcvChoroplethChart,
 	ExperimentalCcvChoroplethChart,
 	CcvCirclePackChart,
 	CcvComboChart,
@@ -82,6 +84,10 @@ export {
 	CcvBoxplotChart,
 	CcvBubbleChart,
 	CcvBulletChart,
+	CcvChoroplethChart,
+	/**
+	 * @deprecated Use `CcvChoroplethChart` instead.
+	 */
 	ExperimentalCcvChoroplethChart,
 	CcvCirclePackChart,
 	CcvComboChart,
@@ -130,7 +136,11 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WordCloudChartOptions
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WordCloudChartOptions as WorldCloudChartOptions
 } from '@carbon/charts'
 
 // All enums

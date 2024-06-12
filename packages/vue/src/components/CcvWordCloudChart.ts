@@ -1,4 +1,11 @@
-import { WordCloudChart, type WordCloudChartOptions } from '@carbon/charts'
+import {
+	WordCloudChart,
+	type WordCloudChartOptions,
+	type WorldCloudChartOptions
+} from '@carbon/charts'
 import { chartFactory } from './chartFactory'
 
-export default chartFactory<WordCloudChartOptions>(WordCloudChart, 'CcvWordCloudChart')
+export default chartFactory<WordCloudChartOptions | WorldCloudChartOptions>(
+	WordCloudChart,
+	'CcvWordCloudChart'
+)

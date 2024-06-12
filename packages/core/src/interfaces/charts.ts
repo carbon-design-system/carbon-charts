@@ -605,6 +605,8 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 	geoData: Topology
 }
 
+export type WorldCloudChartOptions = WordCloudChartOptions
+
 export type ChartOptions =
 	| AlluvialChartOptions
 	| AreaChartOptions
@@ -629,3 +631,4 @@ export type ChartOptions =
 	| TreeChartOptions
 	| TreemapChartOptions
 	| WordCloudChartOptions
+	| WorldCloudChartOptions

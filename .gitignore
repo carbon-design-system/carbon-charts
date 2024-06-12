@@ -2,7 +2,7 @@
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
-.nx/cache
+.nx/
 pages/
 
 # Node modules, build artifacts

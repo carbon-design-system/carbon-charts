@@ -15,7 +15,7 @@ import { Spacer } from '@/components/layout/spacer'
 import { Toolbar } from '@/components/axes/toolbar'
 import { Tooltip } from '@/components/essentials/tooltip'
 
-export class ExperimentalChoroplethChart extends Chart {
+export class ChoroplethChart extends Chart {
 	model = new ChoroplethModel(this.services)
 
 	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<ChoroplethChartOptions>) {

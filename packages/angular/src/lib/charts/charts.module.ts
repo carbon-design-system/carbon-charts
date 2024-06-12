@@ -11,6 +11,7 @@ import {
 	CirclePackChartComponent,
 	ComboChartComponent,
 	DonutChartComponent,
+	ChoroplethChartComponent,
 	ExperimentalChoroplethChartComponent,
 	GaugeChartComponent,
 	GroupedBarChartComponent,
@@ -42,6 +43,7 @@ import {
 		BoxplotChartComponent,
 		BubbleChartComponent,
 		BulletChartComponent,
+		ChoroplethChartComponent,
 		DonutChartComponent,
 		ExperimentalChoroplethChartComponent,
 		GaugeChartComponent,
@@ -71,7 +73,11 @@ import {
 		BoxplotChartComponent,
 		BubbleChartComponent,
 		BulletChartComponent,
+		ChoroplethChartComponent,
 		DonutChartComponent,
+		/**
+		 * @deprecated Use `ChoroplethChartComponent` instead.
+		 */
 		ExperimentalChoroplethChartComponent,
 		GaugeChartComponent,
 		HeatmapChartComponent,
