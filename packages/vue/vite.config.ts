@@ -26,10 +26,11 @@ export default defineConfig({
 	},
 	plugins: [
 		vue(),
-		dts({ // generate type declaration files in dist, not dist/src
+		dts({
+			// generate type declaration files in dist, not dist/src
 			cleanVueFileName: true,
 			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/packages/vue/src/','/dist/')
+				filePath = filePath.replace('/dist/packages/vue/src/', '/dist/')
 				return { filePath, content }
 			}
 		})
