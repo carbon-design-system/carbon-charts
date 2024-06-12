@@ -4,6 +4,7 @@ import { mergeDefaultChartOptions } from '@/tools'
 import { WordCloudModel } from '@/model/wordcloud'
 import type { ChartConfig } from '@/interfaces/model'
 import type { WordCloudChartOptions } from '@/interfaces/charts'
+import type { WorldCloudChartOptions } from '@/interfaces'
 import { Skeletons } from '@/interfaces/enums'
 import type { Component } from '@/components/component'
 import { Skeleton } from '@/components/graphs/skeleton'
@@ -12,7 +13,10 @@ import { WordCloud } from '@/components/graphs/wordcloud'
 export class WordCloudChart extends Chart {
 	model = new WordCloudModel(this.services)
 
-	constructor(holder: HTMLDivElement, chartConfigs: ChartConfig<WordCloudChartOptions>) {
+	constructor(
+		holder: HTMLDivElement,
+		chartConfigs: ChartConfig<WordCloudChartOptions | WorldCloudChartOptions>
+	) {
 		super(holder, chartConfigs)
 
 		// Merge the default options for this chart
