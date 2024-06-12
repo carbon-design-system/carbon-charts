@@ -3,7 +3,7 @@ import AreaChart from './AreaChart'
 import BoxplotChart from './BoxplotChart'
 import BubbleChart from './BubbleChart'
 import BulletChart from './BulletChart'
-import ExperimentalChoroplethChart from './ChoroplethChart'
+import ChoroplethChart from './ChoroplethChart'
 import CirclePackChart from './CirclePackChart'
 import ComboChart from './ComboChart'
 import DonutChart from './DonutChart'
@@ -30,7 +30,11 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

@@ -52,12 +52,12 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"eslint": "^9.4.0",
-		"prettier": "^3.3.0",
+		"prettier": "^3.3.2",
 		"storybook": "^7.6.19",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.12",
+		"vite": "^5.2.13",
 		"vite-plugin-dts": "^3.9.1",
-		"vue-tsc": "^2.0.19"
+		"vue-tsc": "^2.0.21"
 	},
 	"publishConfig": {
 		"access": "public",

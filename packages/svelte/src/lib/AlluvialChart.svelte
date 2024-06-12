@@ -8,8 +8,8 @@
 
 	export let options: AlluvialChartOptions
 	export let data: ChartTabularData
-	export let chart: AlluvialChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: AlluvialChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

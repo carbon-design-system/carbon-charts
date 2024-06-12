@@ -3,7 +3,7 @@ import { AreaChart } from './area'
 import { BoxplotChart } from './boxplot'
 import { BubbleChart } from './bubble'
 import { BulletChart } from './bullet'
-import { ExperimentalChoroplethChart } from './choropleth'
+import { ChoroplethChart } from './choropleth'
 import { CirclePackChart } from './circle-pack'
 import { ComboChart } from './combo'
 import { DonutChart } from './donut'
@@ -30,7 +30,7 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,
@@ -58,7 +58,7 @@ export type Charts =
 	| BoxplotChart
 	| BubbleChart
 	| BulletChart
-	| ExperimentalChoroplethChart
+	| ChoroplethChart
 	| CirclePackChart
 	| ComboChart
 	| DonutChart

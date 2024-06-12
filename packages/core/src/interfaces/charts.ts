@@ -349,7 +349,7 @@ export interface WordCloudChartTooltipOptions extends TooltipOptions {
 	valueLabel?: string
 }
 
-export interface WorldCloudChartOptions extends BaseChartOptions {
+export interface WordCloudChartOptions extends BaseChartOptions {
 	wordCloud?: {
 		/** what key in your charting data will the font sizes map to? */
 		fontSizeMapsTo?: string
@@ -604,6 +604,8 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 	}
 }
 
+export type WorldCloudChartOptions = WordCloudChartOptions
+
 export type ChartOptions =
 	| AlluvialChartOptions
 	| AreaChartOptions
@@ -627,4 +629,5 @@ export type ChartOptions =
 	| StackedBarChartOptions
 	| TreeChartOptions
 	| TreemapChartOptions
+	| WordCloudChartOptions
 	| WorldCloudChartOptions

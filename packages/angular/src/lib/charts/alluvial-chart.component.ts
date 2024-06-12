@@ -1,13 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	AlluvialChart as AlluvialChartCore,
-	type AlluvialChartOptions,
-	type ChartTabularData
-} from '@carbon/charts'
+import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `Alluvial` in carbon charts library
+ * Wrapper around `AlluvialChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */
@@ -20,8 +16,8 @@ export class AlluvialChartComponent extends BaseChartComponent implements AfterV
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new AlluvialChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new AlluvialChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as AlluvialChartOptions
 		})
 

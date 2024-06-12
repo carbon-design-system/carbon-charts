@@ -8,8 +8,8 @@
 
 	export let options: MeterChartOptions
 	export let data: ChartTabularData
-	export let chart: MeterChartCore | null = null
-	export let ref: HTMLDivElement | null = null
+	export let chart: MeterChartCore
+	export let ref: HTMLDivElement
 </script>
 
 <BaseChart

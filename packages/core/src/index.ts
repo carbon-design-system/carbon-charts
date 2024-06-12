@@ -21,7 +21,11 @@ export {
 	BubbleChart,
 	BulletChart,
 	type Charts,
-	ExperimentalChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
+	ChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,
@@ -80,7 +84,11 @@ export type {
 	ThematicChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WorldCloudChartOptions,
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WordCloudChartOptions as WorldCloudChartOptions,
 	// Component Options
 	AxesOptions,
 	AxisOptions,

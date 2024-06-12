@@ -9,7 +9,11 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

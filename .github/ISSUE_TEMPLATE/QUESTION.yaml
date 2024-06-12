@@ -1,12 +1,12 @@
 name: Question❓
-description: Suggest an idea for this project
-title: '[Enhancement]: '
+description: Suggest a question
+title: '[Question]: '
 labels: [enhancement]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thanks for taking the time to submit a question.
 
         If you're an IBMer, we have a couple of Slack channels available across all IBM
         Workspaces:

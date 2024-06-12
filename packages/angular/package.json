@@ -36,7 +36,7 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@ibm/telemetry-js": "^1.5.2",
-		"tslib": "^2.6.2"
+		"tslib": "^2.6.3"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^16.2.14",
@@ -50,10 +50,10 @@
 		"@angular/platform-browser": "^16.2.12",
 		"@angular/platform-browser-dynamic": "^16.2.12",
 		"@carbon/icon-helpers": "~10.48.0",
-		"@carbon/icons": "^11.42.0",
+		"@carbon/icons": "^11.43.0",
 		"@stackblitz/sdk": "^1.10.0",
 		"@storybook/angular": "^7.6.19",
-		"@types/carbon__icon-helpers": "^10.7.4",
+		"@types/carbon__icon-helpers": "^10.45.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"d3": "^7.9.0",
@@ -62,13 +62,13 @@
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^9.4.0",
 		"ng-packagr": "^16.2.3",
-		"prettier": "^3.3.0",
+		"prettier": "^3.3.2",
 		"rxjs": "~7.8.1",
 		"storybook": "^7.6.19",
 		"style-loader": "^4.0.0",
 		"typescript": "~5.1.6",
-		"typescript-eslint": "^8.0.0-alpha.20",
-		"zone.js": "~0.14.6"
+		"typescript-eslint": "^8.0.0-alpha.28",
+		"zone.js": "~0.14.7"
 	},
 	"publishConfig": {
 		"tag": "next",

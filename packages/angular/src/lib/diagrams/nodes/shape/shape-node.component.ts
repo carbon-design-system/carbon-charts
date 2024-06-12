@@ -99,7 +99,6 @@ export class ShapeNodeComponent implements OnInit {
 	@Input() position = 'fixed'
 	@Input() bodyPosition = 'absolute'
 
-	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseEnter: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseOver: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()

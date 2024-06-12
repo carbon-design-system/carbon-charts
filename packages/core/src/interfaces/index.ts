@@ -42,6 +42,10 @@ export type {
 	ThematicChartOptions,
 	TreemapChartOptions,
 	TreeChartOptions,
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
 	WorldCloudChartOptions,
 	WordCloudChartTooltipOptions
 } from './charts'

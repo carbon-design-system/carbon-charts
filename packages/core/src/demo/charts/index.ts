@@ -1150,7 +1150,7 @@ const simpleChartDemos: DemoGroup[] = [
 
 const complexChartDemos = [
 	{
-		title: 'Choropleth (experimental)',
+		title: 'Choropleth',
 		configs: {
 			excludeColorPaletteControl: true,
 			includeProjectionControl: true

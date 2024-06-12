@@ -6,7 +6,7 @@ import BarChartStacked from './BarChartStacked.svelte'
 import BoxplotChart from './BoxplotChart.svelte'
 import BubbleChart from './BubbleChart.svelte'
 import BulletChart from './BulletChart.svelte'
-import ExperimentalChoroplethChart from './ChoroplethChart.svelte'
+import ChoroplethChart from './ChoroplethChart.svelte'
 import CirclePackChart from './CirclePackChart.svelte'
 import ComboChart from './ComboChart.svelte'
 import DonutChart from './DonutChart.svelte'
@@ -50,6 +50,10 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
 	WorldCloudChartOptions
 } from '@carbon/charts'
 
@@ -65,7 +69,11 @@ export {
 	BoxplotChart,
 	BubbleChart,
 	BulletChart,
-	ExperimentalChoroplethChart,
+	ChoroplethChart,
+	/**
+	 * @deprecated Use `ChoroplethChart` instead.
+	 */
+	ChoroplethChart as ExperimentalChoroplethChart,
 	CirclePackChart,
 	ComboChart,
 	DonutChart,

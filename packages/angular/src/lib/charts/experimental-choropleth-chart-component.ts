@@ -3,15 +3,19 @@ import { BaseChartComponent } from './base-chart.component'
 import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } from '@carbon/charts'
 
 /**
- * Wrapper around `ChoroplethChart` in carbon charts library
+ * @deprecated
+ * Wrapper around `ChoroplethChart` in carbon charts library for deprecated selector.
  *
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-choropleth-chart',
+	selector: 'ibm-experimental-choropleth-chart',
 	template: ``
 })
-export class ChoroplethChartComponent extends BaseChartComponent implements AfterViewInit {
+export class ExperimentalChoroplethChartComponent
+	extends BaseChartComponent
+	implements AfterViewInit
+{
 	/**
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */

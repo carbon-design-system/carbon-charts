@@ -11,9 +11,13 @@ export {
 	BubbleChartComponent,
 	BulletChartComponent,
 	ChartsModule, // <-- Module
+	ChoroplethChartComponent,
 	CirclePackChartComponent,
 	ComboChartComponent,
 	DonutChartComponent,
+	/**
+	 * @deprecated Use `ChoroplethChartComponent` instead.
+	 */
 	ExperimentalChoroplethChartComponent,
 	GaugeChartComponent,
 	GroupedBarChartComponent,
@@ -78,7 +82,11 @@ export type {
 	StackedAreaChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
-	WorldCloudChartOptions
+	WordCloudChartOptions,
+	/**
+	 * @deprecated Use `WordCloudChartOptions` instead.
+	 */
+	WordCloudChartOptions as WorldCloudChartOptions
 } from '@carbon/charts'
 
 // Commonly-used enums

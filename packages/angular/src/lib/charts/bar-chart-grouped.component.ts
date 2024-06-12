@@ -1,10 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'
 import { BaseChartComponent } from './base-chart.component'
-import {
-	GroupedBarChart as GroupedBarChartCore,
-	type ChartTabularData,
-	type BarChartOptions
-} from '@carbon/charts'
+import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions } from '@carbon/charts'
 
 /**
  * Wrapper around `GroupedBarChart` in carbon charts library
@@ -20,8 +16,8 @@ export class GroupedBarChartComponent extends BaseChartComponent implements Afte
 	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	override ngAfterViewInit() {
-		this.chart = new GroupedBarChartCore(this.elementRef.nativeElement, {
-			data: this.data as ChartTabularData,
+		this.chart = new GroupedBarChartCore(this.elementRef.nativeElement as HTMLDivElement, {
+			data: this.data,
 			options: this.options as BarChartOptions
 		})
 
