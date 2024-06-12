@@ -3,6 +3,7 @@ import { BaseChartComponent } from './base-chart.component'
 import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } from '@carbon/charts'
 
 /**
+ * @deprecated
  * Wrapper around `ChoroplethChart` in carbon charts library for deprecated selector.
  *
  * Most functions just call their equivalent from the chart library.
