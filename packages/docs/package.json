@@ -19,8 +19,8 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
-		"@carbon/icons-react": "^11.42.0",
-		"@carbon/react": "^1.58.1",
+		"@carbon/icons-react": "^11.43.0",
+		"@carbon/react": "^1.59.0",
 		"@stackblitz/sdk": "^1.10.0",
 		"highlight.js": "^11.9.0",
 		"react": "^18.3.1",
@@ -28,16 +28,17 @@
 		"react-router-dom": "^6.23.1"
 	},
 	"devDependencies": {
+		"@carbon/icon-helpers": "^10.48.0",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.4.0",
-		"prettier": "^3.3.0",
-		"sass": "^1.77.4",
+		"prettier": "^3.3.2",
+		"sass": "^1.77.5",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.12"
+		"vite": "^5.2.13"
 	},
 	"publishConfig": {
 		"access": "restricted"
