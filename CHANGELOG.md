@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.4 (2024-06-12)
+
+### Bug Fixes
+
+- **wordcloud,choropleth:** provide corrected names, deprecate old names
+  ([#1832](https://github.com/carbon-design-system/carbon-charts/issues/1832))
+  ([230ce7c](https://github.com/carbon-design-system/carbon-charts/commit/230ce7c3bdce8e03e70b8188e06a1d65ee90b2be))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.3 (2024-06-03)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
