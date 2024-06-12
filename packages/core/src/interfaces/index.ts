@@ -46,7 +46,7 @@ export type {
 	/**
 	 * @deprecated Use `WordCloudChartOptions` instead.
 	 */
-	WordCloudChartOptions as WorldCloudChartOptions,
+	WorldCloudChartOptions,
 	WordCloudChartTooltipOptions
 } from './charts'
 
