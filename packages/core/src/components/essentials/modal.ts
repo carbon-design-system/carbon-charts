@@ -130,6 +130,9 @@ export class Modal extends Component {
 		</div>`
 	}
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.model.getOptions() as ChartOptions
 		if (!this.isEventListenerAdded) {

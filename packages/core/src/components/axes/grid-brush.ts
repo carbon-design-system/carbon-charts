@@ -15,6 +15,9 @@ export class ChartBrush extends Component {
 
 	frontSelectionSelector = 'rect.frontSelection' // needs to match the class name in _grid-brush.scss
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		const svg = this.parent
 
