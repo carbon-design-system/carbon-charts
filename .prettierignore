@@ -13,6 +13,6 @@ yarn.lock
 **/build
 **/node_modules
 **/LICENSE.md
+**/demo
 **/playwright-report
 **/test-results
-**/demo
