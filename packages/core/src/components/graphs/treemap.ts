@@ -177,6 +177,9 @@ export class Treemap extends Component {
 							return new URL(`#${leafID}`, windowLocation) + ''
 						})
 				},
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				(update: any) => null as any,
 				(exit: any) => exit.remove()
 			)
