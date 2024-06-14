@@ -552,6 +552,7 @@ export interface AlluvialChartOptions extends BaseChartOptions {
  * options specific to Heatmap charts
  */
 export interface HeatmapChartOptions extends BaseChartOptions {
+	axes?: AxesOptions<ComboChartAxisOptions>
 	heatmap: {
 		/**
 		 * Divider width state - will default to auto
