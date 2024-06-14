@@ -8,8 +8,8 @@
 
 	export let options: AreaChartOptions
 	export let data: ChartTabularData
-	export let chart: AreaChartCore
-	export let ref: HTMLDivElement
+	export let chart: AreaChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart
