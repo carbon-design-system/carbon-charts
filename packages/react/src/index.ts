@@ -71,6 +71,7 @@ export type {
 	RadarChartOptions,
 	ScatterChartOptions,
 	StackedAreaChartOptions,
+	StackedBarChartOptions,
 	TreeChartOptions,
 	TreemapChartOptions,
 	WordCloudChartOptions,
