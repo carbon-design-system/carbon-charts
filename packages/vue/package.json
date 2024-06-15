@@ -44,7 +44,6 @@
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.10.0",
-		"@types/d3": "^7.4.3",
 		"@vitejs/plugin-vue": "^5.0.5",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.5.0",
