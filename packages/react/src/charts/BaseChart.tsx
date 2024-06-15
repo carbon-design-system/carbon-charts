@@ -13,6 +13,10 @@ export default class BaseChart<
 	chart?: BaseChartCore
 	chartRef = React.createRef<HTMLDivElement>()
 
+	// TODO: add abstract keyword once React 16 support no longer needed then remove the next 3 comments
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	createChart(chartRef: HTMLDivElement, data: ChartTabularData, options: Options): BaseChartCore {
 		throw new Error('Method not implemented.')
 	}
