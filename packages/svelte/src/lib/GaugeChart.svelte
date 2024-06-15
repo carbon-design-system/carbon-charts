@@ -8,8 +8,8 @@
 
 	export let options: GaugeChartOptions
 	export let data: ChartTabularData
-	export let chart: GaugeChartCore
-	export let ref: HTMLDivElement
+	export let chart: GaugeChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart

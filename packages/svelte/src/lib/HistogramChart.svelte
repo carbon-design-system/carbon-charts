@@ -8,8 +8,8 @@
 
 	export let options: HistogramChartOptions
 	export let data: ChartTabularData
-	export let chart: HistogramChartCore
-	export let ref: HTMLDivElement
+	export let chart: HistogramChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart

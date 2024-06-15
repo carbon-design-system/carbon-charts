@@ -8,8 +8,8 @@
 
 	export let options: DonutChartOptions
 	export let data: ChartTabularData
-	export let chart: DonutChartCore
-	export let ref: HTMLDivElement
+	export let chart: DonutChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart
