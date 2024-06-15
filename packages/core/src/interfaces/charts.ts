@@ -1,3 +1,4 @@
+import type { Topology } from 'topojson-specification'
 import type {
 	Alignments,
 	ArrowDirections,
@@ -570,7 +571,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
 			 * Position is determined by text length
 			 */
 			title?: string
-			type: ColorLegendType | string
+			type?: ColorLegendType | string
 		}
 	}
 }
@@ -579,7 +580,7 @@ export interface HeatmapChartOptions extends BaseChartOptions {
  * Options common to any thematic chart
  */
 export interface ThematicChartOptions extends BaseChartOptions {
-	thematic: {
+	thematic?: {
 		projection: Projection | string
 	}
 }
@@ -588,7 +589,7 @@ export interface ThematicChartOptions extends BaseChartOptions {
  * Options common to any thematic chart
  */
 export interface ChoroplethChartOptions extends ThematicChartOptions {
-	choropleth: {
+	choropleth?: {
 		/**
 		 * customize color legend
 		 * enabled by default on select charts
@@ -601,6 +602,7 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			title?: string
 			type: ColorLegendType | string
 		}
+		geoData: Topology
 	}
 }
 

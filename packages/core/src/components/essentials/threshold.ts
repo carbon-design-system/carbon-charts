@@ -1,5 +1,5 @@
 import { select, pointer, type ScaleBand } from 'd3'
-import Position, { PLACEMENTS } from '@carbon/utils-position' // position services
+import { Position, PLACEMENTS } from '@carbon/utils-position' // position services
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'

@@ -113,12 +113,14 @@ export class GeoProjection extends Component {
 	}
 
 	/**
-	 * @info
-	 * Depending on projection, we may need to provide additional configuration
-	 * e.g. sizing
+	 * Retrieves the D3 geographic projection based on the options provided.
 	 *
-	 * In such case, function can be refactored so that
-	 * projection should return an object with the configuraiton & function
+	 * This method selects a geographic projection from the available D3 projections
+	 * based on the `projection` property in the `thematic` options. If the projection
+	 * is not supported or is missing, an error is thrown.
+	 *
+	 * @returns {d3.GeoProjection} - The D3 geographic projection corresponding to the selected option.
+	 * @throws {Error} If the projection is not supported or is missing.
 	 */
 	getProjection() {
 		let projection = null

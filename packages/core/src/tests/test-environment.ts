@@ -1,8 +1,26 @@
 import { ScatterChart } from '@/charts'
-import type { ScatterChartOptions } from '@/interfaces/charts'
+import type { BarChartOptions, ScatterChartOptions } from '@/interfaces/charts'
 import { createChartHolder } from './tools'
-import { ChartTabularData } from '@/interfaces/model'
-import { groupedBarData, groupedBarOptions } from '@/demo/charts/bar'
+import { type ChartTabularData } from '@/interfaces/model'
+import { ScaleTypes } from '@/interfaces/enums'
+
+const groupedBarData: ChartTabularData = []
+const groupedBarOptions: BarChartOptions = {
+	title: 'Pre-selected groups (grouped bar)',
+	data: {
+		selectedGroups: ['Dataset 1', 'Dataset 3']
+	},
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			scaleType: ScaleTypes.LABELS,
+			mapsTo: 'key'
+		}
+	},
+	height: '400px'
+}
 
 type ChartOptionsUpdater = (options: ScatterChartOptions) => ScatterChartOptions
 

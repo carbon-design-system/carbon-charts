@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url'
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import replace from '@rollup/plugin-replace'
 
 export default defineConfig({
@@ -10,8 +10,9 @@ export default defineConfig({
 			},
 			plugins: [
 				replace({
-					'process.env.NODE_ENV': JSON.stringify('production')
-				}) as Plugin
+					'process.env.NODE_ENV': JSON.stringify('production'),
+					preventAssignment: false
+				}) as PluginOption
 			]
 		},
 		outDir: 'dist/umd',

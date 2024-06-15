@@ -9,6 +9,7 @@ export enum Chart {
 	// CLICK = "chart-click",
 	MOUSEOUT = 'chart-mouseout'
 }
+
 /**
  * enum of all events related to the overlay modal
  */

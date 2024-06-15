@@ -40,23 +40,19 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.5.2",
-		"vue": "^3.4.29"
+		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
 		"@stackblitz/sdk": "^1.10.0",
-		"@types/d3": "^7.4.3",
 		"@vitejs/plugin-vue": "^5.0.5",
 		"concurrently": "^8.2.2",
-		"d3": "^7.9.0",
-		"d3-cloud": "^1.2.7",
-		"d3-sankey": "^0.12.3",
 		"eslint": "^9.5.0",
 		"prettier": "^3.3.2",
 		"storybook": "^7.6.19",
 		"typescript": "^5.4.5",
 		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1",
+		"vue": "^3.4.29",
 		"vue-tsc": "^2.0.21"
 	},
 	"publishConfig": {
