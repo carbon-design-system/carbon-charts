@@ -75,6 +75,11 @@ export class Chart {
 		this.update()
 	}
 
+	/**
+	 * Retrieves the components to be rendered inside the graph frame.
+	 *
+	 * @returns {Component[]} An array of components to be rendered.
+	 */
 	getComponents(): Component[] {
 		console.error('getComponents() method is not implemented')
 

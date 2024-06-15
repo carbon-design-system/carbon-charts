@@ -27,7 +27,6 @@ export class TreemapChart extends Chart {
 	 * @returns {Component[]} An array of components to be rendered.
 	 */
 	getComponents() {
-		// Specify what to render inside the graph-frame
 		const graphFrameComponents: Component[] = [new Treemap(this.model, this.services)]
 
 		// get the base chart components and export with tooltip

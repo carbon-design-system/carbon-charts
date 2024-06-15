@@ -33,7 +33,6 @@ export class WordCloudChart extends Chart {
 	 * @returns {Component[]} An array of components to be rendered.
 	 */
 	getComponents() {
-		// Specify what to render inside the graph-frame
 		const graphFrameComponents: Component[] = [
 			new WordCloud(this.model, this.services),
 			new Skeleton(this.model, this.services, {

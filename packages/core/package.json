@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.16.4",
+	"version": "1.16.5",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -116,12 +116,12 @@
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.4.0",
+		"eslint": "^9.5.0",
 		"jsdom": "^24.1.0",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.77.5",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.13",
+		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1",
 		"vitest": "^1.6.0"
 	},

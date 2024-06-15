@@ -147,8 +147,12 @@ export class ChoroplethChart extends Chart {
 		]
 	}
 
+	/**
+	 * Retrieves the components to be rendered inside the graph frame.
+	 *
+	 * @returns {Component[]} An array of components to be rendered.
+	 */
 	getComponents() {
-		// Specify what to render inside the graph-frame
 		const graphFrameComponents: Component[] = [new Choropleth(this.model, this.services)]
 
 		const components: Component[] = this.getChartComponents(graphFrameComponents)
