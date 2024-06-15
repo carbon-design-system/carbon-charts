@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thanks for taking the time to fill out this enhancement request.
   - type: input
     id: name
     attributes:
@@ -21,7 +21,7 @@ body:
       description: >-
         Please describe your request in one or two sentences.
 
-        Clarify if you are asking for design, development, or both design and development.
+        Clarify if you are asking for design, development or both design and development.
     validations:
       required: true
   - type: textarea

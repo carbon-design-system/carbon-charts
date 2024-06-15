@@ -31,6 +31,11 @@ export class MeterChart extends Chart {
 		this.init(holder, chartConfigs)
 	}
 
+	/**
+	 * Retrieves the components to be rendered inside the graph frame.
+	 *
+	 * @returns {Component[]} An array of components to be rendered.
+	 */
 	getComponents() {
 		const showLabels = getProperty(this.model.getOptions(), 'meter', 'showLabels')
 		const meterComponents = [

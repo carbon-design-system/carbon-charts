@@ -111,7 +111,13 @@ export class ChartModelCartesian extends ChartModel {
 	}
 
 	/**
-	 * @param zoomBarData any special zoom bar data to use instead of the model data
+	 * Sets the zoom bar data for the current instance.
+	 *
+	 * This method sanitizes the provided zoom bar data or uses the display data if no explicit
+	 * zoom data is provided. It normalizes the zoom bar data by aggregating values based on unique
+	 * dates and updates the instance's state with the normalized data.
+	 *
+	 * @param {any} [newZoomBarData] - The new zoom bar data to be set. If not provided, the display data will be used.
 	 */
 	setZoomBarData(newZoomBarData?: any) {
 		const sanitizedData = newZoomBarData

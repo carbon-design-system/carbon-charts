@@ -146,11 +146,12 @@ export class CirclePackChartModel extends ChartModel {
 
 	/**
 	 * Recursively determine the relationship between all the nested elements in the child
-	 * @param children: Object
-	 * @param parent: String
-	 * @param result: Array<Object>
-	 * @param totalSum: number
-	 * @returns: number
+	 * @private
+	 * @param {any} children - The children nodes to process.
+	 * @param {any} parent - The parent node associated with the children.
+	 * @param {string[][]} [result=[]] - An array to accumulate the resulting data.
+	 * @param {number} [totalSum=0] - The running total sum of values processed.
+	 * @returns {number} Sum.
 	 */
 	private getChildrenDatums(children: any, parent: any, result: string[][] = [], totalSum = 0) {
 		const grandParent = parent
