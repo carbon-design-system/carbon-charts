@@ -43,7 +43,7 @@ export interface BasedAxisOptions {
 	 * Override for the orientation of the title (for vertical axes).
 	 * The title string can be overrided to be rotated left or right.
 	 */
-	titleOrientation?: AxisTitleOrientations
+	titleOrientation?: AxisTitleOrientations | string
 	/**
 	 * thresholds
 	 * @example
@@ -82,9 +82,9 @@ export interface BasedAxisOptions {
 		/**
 		 * function to format the ticks
 		 */
-		formatter?: (tick: number | Date, i: number) => string
+		formatter?: ((tick: number | Date, i: number) => string) | ((tick: number | Date) => string)
 		/**
-		 * optional custom array of tick values that is within the domain of data
+		 * optional array of tick values that is within the domain of data
 		 */
 		values?: any[]
 	}
