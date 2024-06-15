@@ -7,7 +7,6 @@ import { ScatterChart } from '@/charts/scatter'
 import { options } from './configuration'
 import { Events } from '@/interfaces/enums'
 
-const prefix = 'bx'
 global.ResizeObserver = ResizeObserver
 let chart: ScatterChart
 let testEnvironment: TestEnvironment

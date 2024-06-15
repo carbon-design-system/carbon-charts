@@ -24,7 +24,7 @@ body:
     id: version
     attributes:
       label: Carbon Charts Version
-      placeholder: 1.16.1
+      placeholder: 1.16.8
     validations:
       required: true
   - type: dropdown
