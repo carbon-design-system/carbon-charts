@@ -1,4 +1,4 @@
-import { type WordCloudChartOptions, type ChartTabularData } from '@carbon/charts'
+import type { WordCloudChartOptions, ChartTabularData } from '@carbon/charts'
 import type { ChartTypes, Example } from '../types'
 
 const vanilla = 'WordCloudChart'

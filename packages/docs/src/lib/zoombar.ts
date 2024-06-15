@@ -19,7 +19,6 @@ export const addZoomBarToOptions = (
 		includeDefinedZoomBarData: false
 	}
 ) => {
-	options['experimental'] = true
 	if (configs.includeDefinedZoomBarData) {
 		options.title += ' - Defined zoom bar enabled'
 		options.zoomBar = {

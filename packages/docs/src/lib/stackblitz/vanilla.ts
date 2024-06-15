@@ -60,7 +60,7 @@ async function loadTopoData() {
 loadTopoData()
 `
 
-	const isGeoDemo = chartType == 'ExperimentalChoropleth'
+	const isGeoDemo = chartType == 'ChoroplethChart'
 
 	const instantiateNormally = `const chartHolder = document.getElementById('app')
 new ${chartType}(chartHolder, {

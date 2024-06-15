@@ -2,26 +2,24 @@ import { type ChoroplethChartOptions, type ChartTabularData } from '@carbon/char
 import { worldTopoJson } from './topojson-110'
 import type { ChartTypes, Example } from '../types'
 
-const vanilla = 'ExperimentalChoroplethChart'
+const vanilla = 'ChoroplethChart'
 
 export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-experimental-choropleth-chart',
-	vue: `ExperimentalCcvChoroplethChart`
+	angular: 'ibm-choropleth-chart',
+	vue: `CcvChoroplethChart`
 }
 
 const options: ChoroplethChartOptions = {
 	title: 'Geo data',
-	geoData: worldTopoJson,
-	experimental: true
+	geoData: worldTopoJson
 }
 
 export const missingDataOptions: ChoroplethChartOptions = {
 	title: 'Missing data',
-	geoData: worldTopoJson,
-	experimental: true
+	geoData: worldTopoJson
 }
 
 const data: ChartTabularData = [

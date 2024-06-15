@@ -1,4 +1,4 @@
-import { ExperimentalChoroplethChart } from '@carbon/charts-react'
+import { ChoroplethChart, type ChoroplethChartOptions } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'
 import StackBlitzLauncherExplanation from '../components/StackBlitzLauncherExplanation'
@@ -39,7 +39,10 @@ export default function Choropleth() {
 
 			{examples.map((example, index) => (
 				<p key={index} className="chart">
-					<ExperimentalChoroplethChart data={example.data} options={example.options} />
+					<ChoroplethChart
+						data={example.data}
+						options={example.options as ChoroplethChartOptions}
+					/>
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
 				</p>
 			))}
