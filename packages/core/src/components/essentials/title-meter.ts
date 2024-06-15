@@ -72,7 +72,6 @@ export class MeterTitle extends Title {
 			data = null
 		} else {
 			const difference = total !== null ? total - datasetsTotal : datasetsTotal
-			//breakdownFormatter
 			const breakdownFormatter = getProperty(options, 'meter', 'proportional', 'breakdownFormatter')
 			const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 			data =
@@ -121,7 +120,6 @@ export class MeterTitle extends Title {
 			? getProperty(options, 'meter', 'proportional', 'unit')
 			: ''
 
-		// totalFormatter function
 		const totalFormatter = getProperty(options, 'meter', 'proportional', 'totalFormatter')
 		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 
@@ -240,7 +238,6 @@ export class MeterTitle extends Title {
 	/**
 	 * Uses the parent class truncate logic
 	 * @param title d3 selection of title element that will be truncated
-	 * @param titlestring the original string that needs truncation
 	 * @param maxWidth the max width the title can take
 	 */
 	truncateTitle(title: any, maxWidth: number) {

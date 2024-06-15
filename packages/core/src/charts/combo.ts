@@ -103,6 +103,11 @@ export class ComboChart extends AxisChart {
 		return flatten(graphComponents)
 	}
 
+	/**
+	 * Retrieves the components to be rendered inside the graph frame.
+	 *
+	 * @returns {Component[]} An array of components to be rendered.
+	 */
 	getComponents() {
 		const { comboChartTypes } = this.model.getOptions()
 		// don't add the regular ruler if stacked ruler is added

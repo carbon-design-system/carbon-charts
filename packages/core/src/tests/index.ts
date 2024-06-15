@@ -1,2 +1,2 @@
 export { data, options, TestEnvironment } from './test-environment'
-export const prefix = 'bx'
+export const prefix: string = 'bx'
