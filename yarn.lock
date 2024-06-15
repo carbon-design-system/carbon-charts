@@ -2226,7 +2226,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     tslib: "npm:^2.6.3"
     typescript: "npm:~5.1.6"
-    typescript-eslint: "npm:^8.0.0-alpha.28"
+    typescript-eslint: "npm:^8.0.0-alpha.30"
     zone.js: "npm:~0.14.7"
   peerDependencies:
     "@angular/common": ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -22734,7 +22734,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.0.0-alpha.28":
+"typescript-eslint@npm:^8.0.0-alpha.30":
   version: 8.0.0-alpha.30
   resolution: "typescript-eslint@npm:8.0.0-alpha.30"
   dependencies:
