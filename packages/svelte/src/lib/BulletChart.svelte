@@ -8,8 +8,8 @@
 
 	export let options: BulletChartOptions
 	export let data: ChartTabularData
-	export let chart: BulletChartCore
-	export let ref: HTMLDivElement
+	export let chart: BulletChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart
