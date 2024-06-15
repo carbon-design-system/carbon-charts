@@ -94,8 +94,8 @@ export class Radar extends Component {
 			.nice(yTicksNumber)
 		const yTicks = yScale.ticks(yTicksNumber)
 
-		const colorScale = (group: string, key?: any, data?: any): string =>
-			this.model.getFillColor(group, key, data)
+		const colorScale = (group: string, key?: any, dataForColorScale?: any): string =>
+			this.model.getFillColor(group, key, dataForColorScale)
 
 		// constructs a new radial line generator
 		// the angle accessor returns the angle in radians with 0° at -y (12 o’clock)
