@@ -10,9 +10,6 @@ export function getVueProject(
 ): Project {
 	const dependencies: Record<string, string> = {
 		'@carbon/charts-vue': version.carbonCharts,
-		d3: version.d3,
-		'd3-cloud': version.d3Cloud,
-		'd3-sankey': version.d3Sankey,
 		vue: version.vue
 	}
 

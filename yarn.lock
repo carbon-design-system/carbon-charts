@@ -1920,16 +1920,13 @@ __metadata:
     "@playwright/test": "npm:^1.44.1"
     angular-eslint: "npm:^18.0.1"
     concurrently: "npm:^8.2.2"
-    d3: "npm:^7.9.0"
-    d3-cloud: "npm:^1.2.7"
-    d3-sankey: "npm:^0.12.3"
     eslint: "npm:^9.5.0"
     ng-packagr: "npm:^16.2.3"
     prettier: "npm:^3.3.2"
     rxjs: "npm:~7.8.1"
     tslib: "npm:^2.6.3"
     typescript: "npm:~5.1.6"
-    typescript-eslint: "npm:^8.0.0-alpha.30"
+    typescript-eslint: "npm:^8.0.0-0"
     zone.js: "npm:~0.14.7"
   peerDependencies:
     "@angular/common": ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -2019,8 +2016,8 @@ __metadata:
     vite: "npm:^5.3.1"
     vite-plugin-dts: "npm:^3.9.1"
   peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.6 || ^17.0.1 || ^18.2.0
+    react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
   languageName: unknown
   linkType: soft
 
@@ -2109,15 +2106,6 @@ __metadata:
     vite: "npm:^5.3.1"
     vite-plugin-dts: "npm:^3.9.1"
     vitest: "npm:^1.6.0"
-  peerDependencies:
-    d3: ^7.0.0
-    d3-cloud: ^1.2.5
-    d3-sankey: ^0.12.3
-  peerDependenciesMeta:
-    d3-cloud:
-      optional: true
-    d3-sankey:
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -17879,7 +17867,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.0.0-alpha.30":
+"typescript-eslint@npm:^8.0.0-0":
   version: 8.0.0-alpha.30
   resolution: "typescript-eslint@npm:8.0.0-alpha.30"
   dependencies:

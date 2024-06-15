@@ -1,7 +1,7 @@
 # Carbon Charts React
 
 Carbon Charts React is a thin React wrapper around the vanilla JavaScript `@carbon/charts` component
-library. The charts are based on D3.js, a peer dependency.
+library.
 
 **[Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)**
 
@@ -10,13 +10,13 @@ library. The charts are based on D3.js, a peer dependency.
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts-react d3 d3-cloud d3-sankey
+npm install -S @carbon/charts-react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts-react d3 d3-cloud d3-sankey
+yarn add @carbon/charts-react
 ```
 
 The required styles should be imported from `@carbon/charts-react/dist/styles.css`.

@@ -1,7 +1,6 @@
 # Carbon Charts
 
-Carbon Charts is a component library for vanilla JavaScript. Chart visualizations are based on
-D3.js, a peer dependency.
+Carbon Charts is a component library for vanilla JavaScript.
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
@@ -10,13 +9,13 @@ D3.js, a peer dependency.
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts d3 d3-cloud d3-sankey
+npm install -S @carbon/charts
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts d3 d3-cloud d3-sankey
+yarn add @carbon/charts
 ```
 
 The required styles should be imported from `@carbon/charts/dist/styles.css`.

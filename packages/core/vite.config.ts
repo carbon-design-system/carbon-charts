@@ -21,7 +21,6 @@ export default defineConfig({
 			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['d3', 'd3-cloud', 'd3-sankey'], // latter two not included in d3
 			output: {
 				entryFileNames: '[name].mjs',
 				chunkFileNames: '[name]-[hash].mjs'

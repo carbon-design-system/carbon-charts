@@ -5,11 +5,8 @@ import vue from '../../../../vue/package.json'
 
 export const version = {
 	carbonCharts: core.version,
-	d3: core.dependencies['d3'],
-	d3Cloud: core.dependencies['d3-cloud'],
-	d3Sankey: core.dependencies['d3-sankey'],
 	angular: 'latest',
-	react: react.dependencies['react'],
+	react: react.devDependencies['react'],
 	svelteVite: svelte.devDependencies['@sveltejs/vite-plugin-svelte'],
 	svelteTsConfig: 'latest',
 	svelte: svelte.devDependencies['svelte'],

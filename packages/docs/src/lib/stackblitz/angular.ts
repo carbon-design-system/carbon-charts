@@ -9,10 +9,7 @@ export function getAngularProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@carbon/charts-angular': version.carbonCharts,
-		d3: version.d3,
-		'd3-cloud': version.d3Cloud,
-		'd3-sankey': version.d3Sankey
+		'@carbon/charts-angular': version.carbonCharts
 	}
 
 	const indexHtml = `<html>

@@ -17,7 +17,7 @@ export function getHtmlProject(
   <title>Carbon Charts Vanilla JavaScript Example</title>
   <meta charset="UTF-8" />
 
-  <!-- Load Carbon Charts as Charts (UMD) and D3.js as d3 -->
+  <!-- Load Carbon Charts as Charts (UMD) -->
   <script src="https://unpkg.com/@carbon/charts@latest/dist/umd/bundle.umd.js"></script>
 		
   <!-- Load required stylesheet -->

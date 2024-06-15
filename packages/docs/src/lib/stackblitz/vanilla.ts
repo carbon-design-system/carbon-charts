@@ -9,10 +9,7 @@ export function getVanillaProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@carbon/charts': version.carbonCharts,
-		d3: version.d3,
-		'd3-cloud': version.d3Cloud,
-		'd3-sankey': version.d3Sankey
+		'@carbon/charts': version.carbonCharts
 	}
 
 	const indexHtml = `<html>

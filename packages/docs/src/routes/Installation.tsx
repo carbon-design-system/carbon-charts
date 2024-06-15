@@ -7,7 +7,6 @@ import javascript from 'highlight.js/lib/languages/javascript'
 
 import {
 	CodeSnippet,
-	InlineNotification,
 	StructuredListWrapper,
 	StructuredListHead,
 	StructuredListRow,
@@ -52,8 +51,8 @@ export default function Installation() {
 	}, [selectedIndex])
 
 	const packageSuffix = packageExtension[selectedIndex]
-	const yarnCommand = `yarn add @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey`
-	const npmCommand = `npm install -S @carbon/charts${packageSuffix} d3 d3-cloud d3-sankey`
+	const yarnCommand = `yarn add @carbon/charts${packageSuffix}`
+	const npmCommand = `npm install -S @carbon/charts${packageSuffix}`
 
 	const data: ChartTabularData = [
 		{
@@ -121,14 +120,6 @@ export default function Installation() {
 						</TabPanel>
 					</TabPanels>
 				</Tabs>
-
-				<InlineNotification
-					title="Note:"
-					subtitle={`The last two packages are optional except for these situations: d3-cloud (for Alluvial Charts) and d3-word (for Word Cloud Charts).`}
-					lowContrast
-					kind="info-square"
-					hideCloseButton
-				/>
 
 				<TabPanels>
 					<TabPanel>

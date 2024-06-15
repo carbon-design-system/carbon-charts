@@ -1,7 +1,7 @@
 # Carbon Charts Angular
 
 Carbon Charts Angular is a thin Angular wrapper around the vanilla JavaScript `@carbon/charts`
-component library. This prerelease is for Angular 16 and higher and uses TypeScript 5.
+component library. This prerelease is for Angular 16 and higher.
 
 If you need support for older versions of Angular (or encounter problems with this module), please
 revert to `@carbon/charts-angular@latest`. Distribution tags have been added for specific Angular
@@ -14,14 +14,14 @@ versions such as: `@carbon/charts-angular@angular15`, `@carbon/charts-angular@an
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts-angular@next d3 d3-cloud d3-sankey
+npm install -S @carbon/charts-angular@next
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead: If you prefer
 [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @carbon/charts-angular@next d3 d3-cloud d3-sankey
+yarn add @carbon/charts-angular@next
 ```
 
 The required styles should be imported from `@carbon/charts-angular/dist/styles.css`.
