@@ -179,8 +179,14 @@ export class HeatmapModel extends ChartModelCartesian {
 	}
 
 	/**
+	 * Sets the data for the current instance.
 	 *
-	 * @param newData The new raw data to be set
+	 * This method sanitizes the provided data, generates data groups,
+	 * and updates the instance's state with the sanitized data and data groups.
+	 * It also resets the `_domains`, `_ranges`, and `_matrix` attributes to their empty states.
+	 *
+	 * @param {any} newData - The new data to be set. This data will be cloned and sanitized.
+	 * @returns {any} - The sanitized version of the provided data.
 	 */
 	setData(newData: any) {
 		const sanitizedData = this.sanitize(cloneDeep(newData))
