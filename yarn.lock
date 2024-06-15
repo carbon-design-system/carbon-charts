@@ -1988,7 +1988,7 @@ __metadata:
     prettier: "npm:^3.3.2"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.2.4"
-    svelte-eslint-parser: "npm:^0.37.0"
+    svelte-eslint-parser: "npm:^0.38.0"
     typescript-eslint: "npm:^7.13.0"
     vue-eslint-parser: "npm:^9.4.3"
   languageName: unknown
@@ -4464,90 +4464,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-darwin-arm64@npm:1.5.29"
+"@swc/core-darwin-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-darwin-arm64@npm:1.6.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-darwin-x64@npm:1.5.29"
+"@swc/core-darwin-x64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-darwin-x64@npm:1.6.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.5.29"
+"@swc/core-linux-arm-gnueabihf@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.6.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.5.29"
+"@swc/core-linux-arm64-gnu@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.6.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-linux-arm64-musl@npm:1.5.29"
+"@swc/core-linux-arm64-musl@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-linux-arm64-musl@npm:1.6.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-linux-x64-gnu@npm:1.5.29"
+"@swc/core-linux-x64-gnu@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-linux-x64-gnu@npm:1.6.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-linux-x64-musl@npm:1.5.29"
+"@swc/core-linux-x64-musl@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-linux-x64-musl@npm:1.6.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.5.29"
+"@swc/core-win32-arm64-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.6.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.5.29"
+"@swc/core-win32-ia32-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.6.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.5.29":
-  version: 1.5.29
-  resolution: "@swc/core-win32-x64-msvc@npm:1.5.29"
+"@swc/core-win32-x64-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@swc/core-win32-x64-msvc@npm:1.6.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
 "@swc/core@npm:^1.5.7":
-  version: 1.5.29
-  resolution: "@swc/core@npm:1.5.29"
+  version: 1.6.0
+  resolution: "@swc/core@npm:1.6.0"
   dependencies:
-    "@swc/core-darwin-arm64": "npm:1.5.29"
-    "@swc/core-darwin-x64": "npm:1.5.29"
-    "@swc/core-linux-arm-gnueabihf": "npm:1.5.29"
-    "@swc/core-linux-arm64-gnu": "npm:1.5.29"
-    "@swc/core-linux-arm64-musl": "npm:1.5.29"
-    "@swc/core-linux-x64-gnu": "npm:1.5.29"
-    "@swc/core-linux-x64-musl": "npm:1.5.29"
-    "@swc/core-win32-arm64-msvc": "npm:1.5.29"
-    "@swc/core-win32-ia32-msvc": "npm:1.5.29"
-    "@swc/core-win32-x64-msvc": "npm:1.5.29"
+    "@swc/core-darwin-arm64": "npm:1.6.0"
+    "@swc/core-darwin-x64": "npm:1.6.0"
+    "@swc/core-linux-arm-gnueabihf": "npm:1.6.0"
+    "@swc/core-linux-arm64-gnu": "npm:1.6.0"
+    "@swc/core-linux-arm64-musl": "npm:1.6.0"
+    "@swc/core-linux-x64-gnu": "npm:1.6.0"
+    "@swc/core-linux-x64-musl": "npm:1.6.0"
+    "@swc/core-win32-arm64-msvc": "npm:1.6.0"
+    "@swc/core-win32-ia32-msvc": "npm:1.6.0"
+    "@swc/core-win32-x64-msvc": "npm:1.6.0"
     "@swc/counter": "npm:^0.1.3"
     "@swc/types": "npm:^0.1.8"
   peerDependencies:
@@ -4576,7 +4576,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: 10c0/30fa18e27bb40c86ced2beafcb1d3a19f8e3fff1865096d9373bdb867933c1aac27a6ea919c1368c97a1f159e2cbc30bad09c821416124a757ede27546f9f9ce
+  checksum: 10c0/95290d676cc1bf90d2be3cb3f4524f22b9c8aaaaecf63f4190953e68bf1460379d074811d6c9f8b2a8dfb79cf4311bf08a302a05b00c23086944d916ca0c62a8
   languageName: node
   linkType: hard
 
@@ -17227,6 +17227,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svelte-eslint-parser@npm:^0.38.0":
+  version: 0.38.0
+  resolution: "svelte-eslint-parser@npm:0.38.0"
+  dependencies:
+    eslint-scope: "npm:^7.2.2"
+    eslint-visitor-keys: "npm:^3.4.3"
+    espree: "npm:^9.6.1"
+    postcss: "npm:^8.4.38"
+    postcss-scss: "npm:^4.0.9"
+  peerDependencies:
+    svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.115
+  peerDependenciesMeta:
+    svelte:
+      optional: true
+  checksum: 10c0/1a7412074830dedd827a91c10157826b1a67a0d4bc128ca687cb615b947391ced1400cfd8f857ab894e675168a4ed68cae079db231b928285b82dbc1e0301300
+  languageName: node
+  linkType: hard
+
 "svelte-hmr@npm:^0.16.0":
   version: 0.16.0
   resolution: "svelte-hmr@npm:0.16.0"
@@ -17902,12 +17920,12 @@ __metadata:
   linkType: hard
 
 "typescript@npm:next":
-  version: 5.6.0-dev.20240614
-  resolution: "typescript@npm:5.6.0-dev.20240614"
+  version: 5.6.0-dev.20240615
+  resolution: "typescript@npm:5.6.0-dev.20240615"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/f35d7905ef1a04ff031a001a2d5de51d6f4f8c1a2bafbcd75b2d79c2b69aa55420cbc72eaf3e42cf7877837ed1ba482042686d97c34ac142e95503e4989b2824
+  checksum: 10c0/9d01f53a72893c41cf52bde88aa088ae46684ddb557f1bdb92663e91cbb07aac9358eaa50a7842f0d09b11eb508939aa6cc3af359282ad59f9bb2e11086b6e6a
   languageName: node
   linkType: hard
 
@@ -17942,12 +17960,12 @@ __metadata:
   linkType: hard
 
 "typescript@patch:typescript@npm%3Anext#optional!builtin<compat/typescript>":
-  version: 5.6.0-dev.20240614
-  resolution: "typescript@patch:typescript@npm%3A5.6.0-dev.20240614#optional!builtin<compat/typescript>::version=5.6.0-dev.20240614&hash=b45daf"
+  version: 5.6.0-dev.20240615
+  resolution: "typescript@patch:typescript@npm%3A5.6.0-dev.20240615#optional!builtin<compat/typescript>::version=5.6.0-dev.20240615&hash=b45daf"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/da24ffb3dd779056fe7d2fb471008a22ec5ba871fe7c3afc6acd47d3d50f9c348760badefb5f9d88c8f038136f29662a52432973a823f15e54aa788c6adae092
+  checksum: 10c0/0feb31b3da10d1d3017522055ad2920985afc5295301fed016b10a0d4f715ac146b14296a342e8f20ac02cdefd2f94e3a801bcffc99ab219573ce575821d2771
   languageName: node
   linkType: hard
 

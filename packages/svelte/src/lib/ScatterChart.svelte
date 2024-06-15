@@ -8,8 +8,8 @@
 
 	export let options: ScatterChartOptions
 	export let data: ChartTabularData
-	export let chart: ScatterChartCore
-	export let ref: HTMLDivElement
+	export let chart: ScatterChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart

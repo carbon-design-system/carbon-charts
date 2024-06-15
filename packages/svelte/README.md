@@ -1,7 +1,7 @@
 # Carbon Charts Svelte
 
 Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@carbon/charts`
-component library. The charts are based on D3.js, a peer dependency.
+component library.
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 

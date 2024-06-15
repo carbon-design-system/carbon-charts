@@ -601,6 +601,7 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			title?: string
 			type: ColorLegendType | string
 		}
+		geoData: Topology
 	}
 	geoData: Topology
 }

@@ -8,8 +8,8 @@
 
 	export let options: LollipopChartOptions
 	export let data: ChartTabularData
-	export let chart: LollipopChartCore
-	export let ref: HTMLDivElement
+	export let chart: LollipopChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart
