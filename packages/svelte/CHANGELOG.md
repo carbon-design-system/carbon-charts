@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.7 (2024-06-15)
+
+### Bug Fixes
+
+- **all packages:** missing options, package.json and lint fixes
+  ([#1849](https://github.com/carbon-design-system/carbon-charts/issues/1849))
+  ([a43f0eb](https://github.com/carbon-design-system/carbon-charts/commit/a43f0eb3a9d09178ac613bc34de32816a4e0e4be))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.6 (2024-06-15)
 
 **Note:** Version bump only for package @carbon/charts-svelte
