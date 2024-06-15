@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2024-06-15)
+
+### Bug Fixes
+
+- **1850:** redefined variables violated no-shadow rule
+  ([#1851](https://github.com/carbon-design-system/carbon-charts/issues/1851))
+  ([58f64bc](https://github.com/carbon-design-system/carbon-charts/commit/58f64bc950de537ca1fba82b15b1e3af65b3fafb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.7 (2024-06-15)
 
 ### Bug Fixes
