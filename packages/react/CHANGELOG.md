@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.9 (2024-06-16)
+
+### Bug Fixes
+
+- **1852:** fix property issues with interfaces used by demos
+  ([#1853](https://github.com/carbon-design-system/carbon-charts/issues/1853))
+  ([cb0705b](https://github.com/carbon-design-system/carbon-charts/commit/cb0705b016f53a7df2c44eb7eb3b712b819c8edc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.8 (2024-06-15)
 
 ### Bug Fixes
