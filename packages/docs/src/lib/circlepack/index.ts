@@ -13,6 +13,9 @@ export const chartTypes: ChartTypes = {
 
 const circlePackTwoLevelOptions: CirclePackChartOptions = {
 	title: 'Two Levels Hierarchy',
+	circlePack: {
+		depth: 2
+	},
 	canvasZoom: {
 		enabled: true
 	},
@@ -21,6 +24,9 @@ const circlePackTwoLevelOptions: CirclePackChartOptions = {
 
 const circlePackTwoLevelCustomColorsOptions: CirclePackChartOptions = {
 	title: 'Custom colors (circle pack)',
+	circlePack: {
+		depth: 3
+	},
 	canvasZoom: {
 		enabled: true
 	},
@@ -45,6 +51,9 @@ const circlePackSingleOptions: CirclePackChartOptions = {
 
 const circlePackThreeLevelsMonochromeOptions: CirclePackChartOptions = {
 	title: 'Three Levels Hierarchy (monchromatic)',
+	circlePack: {
+		depth: 3
+	},
 	canvasZoom: {
 		enabled: true
 	},
@@ -64,6 +73,9 @@ const circlePackThreeLevelNoZoomOptions: CirclePackChartOptions = {
 
 const circlePackThreeLevelOptions: CirclePackChartOptions = {
 	title: 'Three Levels Hierarchy',
+	circlePack: {
+		depth: 3
+	},
 	canvasZoom: {
 		enabled: true
 	}
