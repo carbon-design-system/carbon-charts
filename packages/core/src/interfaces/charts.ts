@@ -106,6 +106,9 @@ export interface BaseChartOptions {
 		 */
 		prefix?: string
 	}
+	canvasZoom?: {
+		enabled?: boolean
+	}
 	/**
 	 * options related to charting data
 	 */
@@ -190,6 +193,22 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 * zoombar configuration
 	 */
 	zoomBar?: ZoomBarsOptions
+	/**
+	 * options for the points
+	 */
+	points?: {
+		/**
+		 * sets the radius of the point
+		 */
+		radius?: number
+		fillOpacity?: number
+		filled?: boolean
+		enabled?: boolean
+	}
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | { name: string }
 }
 
 /**
@@ -227,20 +246,7 @@ export interface StackedBarChartOptions extends BarChartOptions {
 /**
  * options specific to scatter charts
  */
-export interface ScatterChartOptions extends AxisChartOptions {
-	/**
-	 * options for the points
-	 */
-	points?: {
-		/**
-		 * sets the radius of the point
-		 */
-		radius: number
-		fillOpacity?: number
-		filled?: boolean
-		enabled?: boolean
-	}
-}
+export interface ScatterChartOptions extends AxisChartOptions {}
 
 /**
  * options specific to lollipop charts
@@ -306,21 +312,12 @@ export interface HistogramChartOptions extends AxisChartOptions {
 /**
  * options specific to line charts
  */
-export interface LineChartOptions extends ScatterChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | { name: string }
-}
+export interface LineChartOptions extends ScatterChartOptions {}
 
 /**
  * options specific to area charts
  */
 export interface AreaChartOptions extends AxisChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | { name: string }
 	/**
 	 * options to bound the area of the chart
 	 */
@@ -435,6 +432,8 @@ export interface MeterChartOptions extends BaseChartOptions {
 		proportional?: {
 			total?: number
 			unit?: string
+			totalFormatter?: (total: number) => string
+			breakdownFormatter?: (x: any) => string
 		}
 		peak?: number
 		status?: {
@@ -509,11 +508,11 @@ export interface TreeChartOptions extends BaseChartOptions {
  */
 export interface CirclePackChartOptions extends BaseChartOptions {
 	circlePack?: {
-		circles: {
+		circles?: {
 			fillOpacity: number
 		}
 		// depth of nodes to display
-		hierachyLevel: number
+		depth: number
 		padding?: {
 			outer?: number
 			inner?: number
@@ -552,7 +551,7 @@ export interface AlluvialChartOptions extends BaseChartOptions {
 /**
  * options specific to Heatmap charts
  */
-export interface HeatmapChartOptions extends BaseChartOptions {
+export interface HeatmapChartOptions extends AxisChartOptions {
 	heatmap: {
 		/**
 		 * Divider width state - will default to auto
@@ -602,8 +601,8 @@ export interface ChoroplethChartOptions extends ThematicChartOptions {
 			title?: string
 			type: ColorLegendType | string
 		}
-		geoData: Topology
 	}
+	geoData: Topology
 }
 
 export type WorldCloudChartOptions = WordCloudChartOptions

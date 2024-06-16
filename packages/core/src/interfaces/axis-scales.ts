@@ -109,6 +109,10 @@ export interface BasedAxisOptions {
 	 * axis that's being broken into bins
 	 */
 	binned?: boolean
+	/**
+	 * used to map data on the secondary axis
+	 */
+	correspondingDatasets?: Array<string>
 }
 
 /**
@@ -131,10 +135,6 @@ export interface ComboChartAxisOptions extends AxisOptions {
 	 * left axis to be the primary axis
 	 */
 	main?: boolean
-	/**
-	 * used to map data on the secondary axis
-	 */
-	correspondingDatasets?: Array<string>
 }
 
 export interface BinnedAxisOptions {
