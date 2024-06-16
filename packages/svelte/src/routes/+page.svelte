@@ -1,6 +1,6 @@
 <script lang="ts">
 	import charts from '../../../docs/src/charts'
-	import chartComponents from '$lib'
+	import * as chartComponents from '$lib'
 	import '@carbon/charts/scss'
 </script>
 
