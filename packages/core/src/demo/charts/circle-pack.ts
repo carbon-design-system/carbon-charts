@@ -224,7 +224,7 @@ export const circlePackThreeLevelsMonochromeData = [
 export const circlePackThreeLevelNoZoomOptions = {
 	title: 'Three Levels Hierarchy (No Zoom)',
 	circlePack: {
-		hierarchyLevel: 3
+		depth: 3
 	},
 	canvasZoom: {
 		enabled: false
