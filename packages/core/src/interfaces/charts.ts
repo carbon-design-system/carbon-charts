@@ -512,7 +512,7 @@ export interface CirclePackChartOptions extends BaseChartOptions {
 			fillOpacity: number
 		}
 		// depth of nodes to display
-		hierarchyLevel: number
+		depth: number
 		padding?: {
 			outer?: number
 			inner?: number

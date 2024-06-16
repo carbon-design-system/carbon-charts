@@ -28,7 +28,7 @@ export class CirclePackChartModel extends ChartModel {
 		updateLegendAdditionalItems(options, zoomOptions)
 
 		const depth = this.getHierarchyLevel()
-		const userProvidedDepth = getProperty(options, 'circlePack', 'hierarchyLevel')
+		const userProvidedDepth = getProperty(options, 'circlePack', 'depth')
 
 		this.set({
 			options: merge(options, zoomOptions),

@@ -54,7 +54,7 @@ const circlePackThreeLevelsMonochromeOptions: CirclePackChartOptions = {
 const circlePackThreeLevelNoZoomOptions: CirclePackChartOptions = {
 	title: 'Three Levels Hierarchy (No Zoom)',
 	circlePack: {
-		hierarchyLevel: 3
+		depth: 3
 	},
 	canvasZoom: {
 		enabled: false
