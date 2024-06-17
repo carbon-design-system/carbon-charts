@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.10 (2024-06-17)
+
+### Bug Fixes
+
+- **1856:** add cjs to umd bundles and update package.json exports
+  ([#1857](https://github.com/carbon-design-system/carbon-charts/issues/1857))
+  ([42a2b12](https://github.com/carbon-design-system/carbon-charts/commit/42a2b12cc7cb1ed49a48ab1e74af9cdca383ae00))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.9 (2024-06-16)
 
 ### Bug Fixes
