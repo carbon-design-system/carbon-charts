@@ -1,5 +1,5 @@
 import { select } from 'd3'
-import Position from '@carbon/utils-position' // position service
+import { Position } from '@carbon/utils-position' // position service
 import { flipDomainAndRangeBasedOnOrientation, getProperty } from '@/tools'
 import { Component } from '@/components/component'
 import type { ChartModel } from '@/model/model'

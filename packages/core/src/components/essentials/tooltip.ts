@@ -1,5 +1,5 @@
 import { select, pointer } from 'd3'
-import Position, { PLACEMENTS } from '@carbon/utils-position' // position service
+import { Position, PLACEMENTS } from '@carbon/utils-position' // position service
 import { getProperty, truncateLabel } from '@/tools'
 import { zoomBar as zoomBarConfigs, tooltips as tooltipConfigs } from '@/configuration'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
@@ -193,7 +193,11 @@ export class Tooltip extends Component {
 		)
 	}
 
-	valueFormatter(value: any, label: string) {
+	isDate(value: any): value is Date {
+		return value instanceof Date
+	}
+
+	valueFormatter(value: number | Date, label: string) {
 		const options = this.getOptions()
 		const valueFormatter = getProperty(options, 'tooltip', 'valueFormatter')
 		const {
@@ -206,7 +210,7 @@ export class Tooltip extends Component {
 			return valueFormatter(value, label)
 		}
 
-		if (typeof value.getTime === 'function') {
+		if (this.isDate(value)) {
 			return dateFormatter(value, localeCode, { month: 'short', day: 'numeric', year: 'numeric' })
 		}
 
@@ -281,7 +285,8 @@ export class Tooltip extends Component {
 			: [PLACEMENTS.RIGHT, PLACEMENTS.LEFT, PLACEMENTS.TOP, PLACEMENTS.BOTTOM]
 
 		let bestPlacementOption: any
-		let { horizontalOffset, defaultOffset } = tooltipConfigs
+		let { horizontalOffset } = tooltipConfigs
+		const { defaultOffset } = tooltipConfigs
 
 		this.tooltip.select('div.title-tooltip').classed('title-tooltip-nowrap', noWrap)
 

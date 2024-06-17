@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.9 (2024-06-16)
+
+### Bug Fixes
+
+- **1852:** fix property issues with interfaces used by demos
+  ([#1853](https://github.com/carbon-design-system/carbon-charts/issues/1853))
+  ([cb0705b](https://github.com/carbon-design-system/carbon-charts/commit/cb0705b016f53a7df2c44eb7eb3b712b819c8edc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.16.8 (2024-06-15)
+
+### Bug Fixes
+
+- **1850:** redefined variables violated no-shadow rule
+  ([#1851](https://github.com/carbon-design-system/carbon-charts/issues/1851))
+  ([58f64bc](https://github.com/carbon-design-system/carbon-charts/commit/58f64bc950de537ca1fba82b15b1e3af65b3fafb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.16.7 (2024-06-15)
+
+### Bug Fixes
+
+- **all packages:** missing options, package.json and lint fixes
+  ([#1849](https://github.com/carbon-design-system/carbon-charts/issues/1849))
+  ([a43f0eb](https://github.com/carbon-design-system/carbon-charts/commit/a43f0eb3a9d09178ac613bc34de32816a4e0e4be))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.16.6 (2024-06-15)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.16.5 (2024-06-15)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.4 (2024-06-12)
 
 ### Bug Fixes

@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to submit a question.
+        Thanks for submitting a question.
 
         If you're an IBMer, we have a couple of Slack channels available across all IBM
         Workspaces:

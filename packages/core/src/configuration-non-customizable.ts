@@ -44,7 +44,7 @@ export const circlePack = {
 		mainGroup: 4,
 		children: 2
 	},
-	hierarchyLevel: 2
+	depth: 2
 }
 
 export const color = {

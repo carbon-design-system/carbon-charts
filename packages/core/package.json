@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.16.4",
+	"version": "1.16.9",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -94,19 +94,6 @@
 		"topojson-client": "^3.1.0",
 		"tslib": "^2.6.3"
 	},
-	"peerDependencies": {
-		"d3": "^7.0.0",
-		"d3-cloud": "^1.2.5",
-		"d3-sankey": "^0.12.3"
-	},
-	"peerDependenciesMeta": {
-		"d3-cloud": {
-			"optional": true
-		},
-		"d3-sankey": {
-			"optional": true
-		}
-	},
 	"devDependencies": {
 		"@carbon/layout": "^11.22.0",
 		"@carbon/styles": "^1.59.0",
@@ -121,15 +108,15 @@
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.4.0",
+		"eslint": "^9.5.0",
 		"jsdom": "^24.1.0",
 		"prettier": "^3.3.2",
 		"resize-observer-polyfill": "^1.5.1",
-		"sass": "^1.77.4",
+		"sass": "^1.77.5",
 		"storybook": "^7.6.19",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.13",
+		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1",
 		"vitest": "^1.6.0"
 	},

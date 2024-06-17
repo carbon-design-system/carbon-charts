@@ -8,8 +8,8 @@
 
 	export let options: MeterChartOptions
 	export let data: ChartTabularData
-	export let chart: MeterChartCore
-	export let ref: HTMLDivElement
+	export let chart: MeterChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart

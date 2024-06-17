@@ -211,16 +211,16 @@ export class Gauge extends Component {
 			.style('font-size', `${fontSize}px`)
 			.attr('text-anchor', 'middle')
 			.text((d: any) => {
-				let value
+				let numericValue: number
 				if (d !== null && d !== undefined) {
-					value = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
+					numericValue = Number(d.toFixed(2)) % 1 !== 0 ? d.toFixed(2) : d.toFixed()
 				} else {
-					value = 0
+					numericValue = 0
 				}
 				if (numberFormatter) {
-					return numberFormatter(value)
+					return numberFormatter(numericValue)
 				} else {
-					return localeNumberFormatter(Number(value), localeCode)
+					return localeNumberFormatter(Number(numericValue), localeCode)
 				}
 			})
 

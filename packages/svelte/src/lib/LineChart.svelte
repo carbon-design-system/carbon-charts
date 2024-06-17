@@ -8,8 +8,8 @@
 
 	export let options: LineChartOptions
 	export let data: ChartTabularData
-	export let chart: LineChartCore
-	export let ref: HTMLDivElement
+	export let chart: LineChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart

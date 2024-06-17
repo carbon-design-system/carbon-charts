@@ -114,7 +114,7 @@ export function formatTick(
 	if (interval === 'quarterly' || !formatterOptions) {
 		const formattedDate = format(date, formatString, { locale })
 		const formatArr = formattedDate.split('').map(val => {
-			let num = Number(val)
+			const num = Number(val)
 			if (val !== ' ' && !Number.isNaN(num)) {
 				return num.toLocaleString(localeCode)
 			} else {

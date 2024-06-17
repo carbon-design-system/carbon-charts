@@ -8,8 +8,8 @@
 
 	export let options: PieChartOptions
 	export let data: ChartTabularData
-	export let chart: PieChartCore
-	export let ref: HTMLDivElement
+	export let chart: PieChartCore | undefined = undefined
+	export let ref: HTMLDivElement | undefined = undefined
 </script>
 
 <BaseChart
