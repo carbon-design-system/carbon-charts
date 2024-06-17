@@ -6,7 +6,7 @@ export default defineConfig({
 	build: {
 		rollupOptions: {
 			output: {
-				entryFileNames: 'bundle.umd.js'
+				entryFileNames: 'bundle.umd.cjs'
 			},
 			plugins: [
 				replace({
