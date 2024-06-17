@@ -4,7 +4,7 @@
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
-	"main": "./dist/umd/bundle.umd.js",
+	"main": "./dist/umd/bundle.umd.cjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
@@ -16,11 +16,11 @@
 			"types": "./dist/index.d.ts",
 			"browser": {
 				"import": "./dist/index.mjs",
-				"require": "./dist/umd/bundle.umd.js"
+				"require": "./dist/umd/bundle.umd.cjs"
 			},
 			"node": {
 				"import": "./dist/index.mjs",
-				"require": "./dist/umd/bundle.umd.js"
+				"require": "./dist/umd/bundle.umd.cjs"
 			}
 		},
 		"./components": {
