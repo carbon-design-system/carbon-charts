@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.16.10",
+	"version": "1.16.11",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -29,7 +29,7 @@
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
-		"build": "vite build && yarn postbundle",
+		"build": "vite build && cp dist/index.umd.cjs dist/index.umd.js && yarn postbundle",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3002",
 		"test:dom": "playwright test",

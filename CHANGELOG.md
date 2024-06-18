@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.11 (2024-06-18)
+
+### Bug Fixes
+
+- **umd:** duplicate umd.cjs file to umd.js to prevent breaking change
+  ([#1858](https://github.com/carbon-design-system/carbon-charts/issues/1858))
+  ([e1f896c](https://github.com/carbon-design-system/carbon-charts/commit/e1f896cf8754390fd0ca2ff46affbadfa75e9f65))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.16.10 (2024-06-17)
 
 ### Bug Fixes
