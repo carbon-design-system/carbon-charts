@@ -1,3 +1,11 @@
 {
-	"editor.defaultFormatter": "esbenp.prettier-vscode"
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/pages": true,
+		"**/demo": true,
+		"**/dist": true,
+		"**/.angular": true,
+		"**/.svelte-kit": true
+	}
 }
