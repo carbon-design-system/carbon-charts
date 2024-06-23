@@ -83,8 +83,6 @@
 		"dompurify": "^3.1.5",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
-		"prettier": "^3.3.2",
-		"publint": "^0.2.8",
 		"topojson-client": "^3.1.0",
 		"tslib": "^2.6.3"
 	},
@@ -105,6 +103,8 @@
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^9.5.0",
 		"jsdom": "^24.1.0",
+		"prettier": "^3.3.2",
+		"publint": "^0.2.8",
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.77.6",
 		"typescript": "^5.4.5",
