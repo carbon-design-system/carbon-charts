@@ -52,7 +52,6 @@ export function getAngularProject(
 </html>`
 
 	const mainTs = `import { Component } from '@angular/core'
-// import { CommonModule } from '@angular/common'
 import { bootstrapApplication } from '@angular/platform-browser'
 import 'zone.js'
 import { ChartsModule } from '@carbon/charts-angular'
@@ -62,7 +61,7 @@ import data from './data'
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [/*CommonModule,*/ChartsModule],
+  imports: [ChartsModule],
 	template: '<${chartType} [data]="data" [options]="options"></${chartType}>'
 })
 export class App {
