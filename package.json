@@ -18,7 +18,7 @@
 	"engines": {
 		"node": "^18.20.3 ^20.13.1 ^22.2.0"
 	},
-	"packageManager": "yarn@4.3.0",
+	"packageManager": "yarn@4.3.1",
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
 		"@commitlint/config-conventional": "^19.2.2",
