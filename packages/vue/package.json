@@ -24,7 +24,7 @@
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"build": "vite build && yarn file:styles",
-		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
+		"build:test": "vue-tsc --noEmit && vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3004",
 		"test:dom": "playwright test",
 		"test:dom:rebase": "playwright test --update-snapshots",
@@ -43,11 +43,11 @@
 		"@vitejs/plugin-vue": "^5.0.5",
 		"eslint": "^9.5.0",
 		"prettier": "^3.3.2",
-		"typescript": "^5.4.5",
+		"typescript": "^5.5.2",
 		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1",
-		"vue": "^3.4.29",
-		"vue-tsc": "^2.0.21"
+		"vue": "^3.4.30",
+		"vue-tsc": "^2.0.22"
 	},
 	"publishConfig": {
 		"access": "public",
