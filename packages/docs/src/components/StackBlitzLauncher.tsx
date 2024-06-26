@@ -24,7 +24,7 @@ export default function StackBlitzLauncher({
 				onClick={() => openStackBlitz('vanilla', chartTypes.vanilla)}
 				renderIcon={LaunchIcon}
 				iconDescription="StackBlitz"
-				size="md"
+				size="lg"
 				kind="secondary">
 				JavaScript
 			</Button>
@@ -32,7 +32,7 @@ export default function StackBlitzLauncher({
 				onClick={() => openStackBlitz('svelte', chartTypes.svelte)}
 				renderIcon={LaunchIcon}
 				iconDescription="StackBlitz"
-				size="md"
+				size="lg"
 				kind="secondary">
 				Svelte
 			</Button>
@@ -40,7 +40,7 @@ export default function StackBlitzLauncher({
 				onClick={() => openStackBlitz('react', chartTypes.react)}
 				renderIcon={LaunchIcon}
 				iconDescription="StackBlitz"
-				size="md"
+				size="lg"
 				kind="secondary">
 				React
 			</Button>
@@ -48,7 +48,7 @@ export default function StackBlitzLauncher({
 				onClick={() => openStackBlitz('vue', chartTypes.vue)}
 				renderIcon={LaunchIcon}
 				iconDescription="StackBlitz"
-				size="md"
+				size="lg"
 				kind="secondary">
 				Vue.js
 			</Button>
@@ -56,10 +56,11 @@ export default function StackBlitzLauncher({
 				onClick={() => openStackBlitz('angular', chartTypes.angular)}
 				renderIcon={LaunchIcon}
 				iconDescription="StackBlitz"
-				size="md"
+				size="lg"
 				kind="secondary">
 				Angular
 			</Button>
+			<div className="cds--btn cds--layout--size-lg cds--btn--secondary last-one">&nbsp;</div>
 		</div>
 	)
 }
