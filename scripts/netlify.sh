@@ -13,6 +13,14 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 	  echo -e "Deploying docs site"
 
+		# Build core package first
+		echo -e "${GREEN}Building @carbon/charts and styles..."
+		npx lerna run build --scope=@carbon/charts --concurrency=1
+
+		# Build react package
+		echo -e "${GREEN}Building @carbon/charts-react and styles..."
+		npx lerna run build --scope=@carbon/charts-react --concurrency=1
+	
 		cd ./packages/docs
 		yarn build:netlify-dp
 	else
