@@ -21,8 +21,9 @@ if [ $CONTEXT == "deploy-preview" ]; then
 		echo -e "${GREEN}Building @carbon/charts-react and styles..."
 		npx lerna run build --scope=@carbon/charts-react --concurrency=1
 	
-		cd ./packages/docs
-		yarn build
+		# Build docs package
+		echo -e "${GREEN}Building @carbon/charts-docs and styles..."
+		npx lerna run build --scope=@carbon/charts-docs --concurrency=1
 	else
 	  # Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
 		# The URL drives which test site to 
