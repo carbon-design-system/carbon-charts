@@ -1,4 +1,5 @@
 import {
+	InlineNotification,
 	StructuredListWrapper,
 	StructuredListHead,
 	StructuredListRow,
@@ -37,9 +38,11 @@ export default function Diagram() {
 				using the Carbon Design System styling.
 			</p>
 
-			<p>
-				<strong>NOTE: Network Diagrams are ONLY available for Angular and React.</strong>
-			</p>
+			<InlineNotification
+				title="Note"
+				kind="info-square"
+				subtitle="Network Diagrams are ONLY available for Angular and React."
+			/>
 
 			<p>These include:</p>
 			<StructuredListWrapper>
