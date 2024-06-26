@@ -1,7 +1,7 @@
 {
 	"name": "@carbon/charts-docs",
 	"private": true,
-	"version": "1.13.33",
+	"version": "1.17.0",
 	"description": "Carbon Charts Documentation",
 	"type": "module",
 	"files": [
