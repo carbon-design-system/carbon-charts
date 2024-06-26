@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 15treemap</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Data-vis-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dataviz-overview-1-Copy-2" transform="translate(48, 96)">
+            <g id="Group-15">
+                <g id="Group-14">
+                    <polygon id="Rectangle-2" fill="#97C1FF" points="68 37 148 37 148 102 68 102"></polygon>
+                    <polygon id="Rectangle-2" fill="#0062FF" points="68 0 148 0 148 36 68 36"></polygon>
+                    <rect id="Rectangle-2" fill="#6EA6FF" x="0" y="0" width="67" height="50"></rect>
+                    <polygon id="Rectangle-2" fill="#408BFC"
+                        points="-4.94374787e-15 51 49 51 49 102 -4.94374787e-15 102"></polygon>
+                    <polygon id="Rectangle-2" fill="#C9DEFF" points="50 51 67 51 67 102 50 102"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="239px" height="239px" viewBox="0 0 239 239" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>circle_pack</title>
+    <g id="circle_pack" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5">
+            <g id="Group-4" transform="translate(47.000000, 93.000000)" fill="#0062FF"
+                fill-opacity="0.3" stroke="#0062FF" stroke-width="1.5">
+                <ellipse id="Oval-Copy-126" cx="45" cy="46" rx="44.25" ry="45.25"></ellipse>
+                <ellipse id="Oval-Copy-126" cx="30.2222222" cy="46.7301587" rx="24.6847826"
+                    ry="25.25"></ellipse>
+                <ellipse id="Oval-Copy-127" cx="70.1428571" cy="36.2380952" rx="12.8214286"
+                    ry="13.1230159"></ellipse>
+                <ellipse id="Oval-Copy-128" cx="63.9371981" cy="58.5714286" rx="7.07608696"
+                    ry="7.25"></ellipse>
+            </g>
+            <g id="Group-3" transform="translate(122.000000, 72.000000)" fill="#0062FF"
+                fill-opacity="0.3" stroke="#0062FF" stroke-width="1.5">
+                <ellipse id="Oval-Copy-133" cx="21.5217391" cy="22" rx="20.7717391" ry="21.25"></ellipse>
+                <ellipse id="Oval-Copy-129" cx="11.886646" cy="17.6111111" rx="6.09782609" ry="6.25"></ellipse>
+                <ellipse id="Oval-Copy-131" cx="24.9736025" cy="12.6111111" rx="3.65217391"
+                    ry="3.75"></ellipse>
+                <ellipse id="Oval-Copy-130" cx="26.3540373" cy="28.1111111" rx="8.05434783"
+                    ry="8.25"></ellipse>
+            </g>
+            <g id="Group" transform="translate(126.510870, 163.000000)" fill="#0062FF"
+                fill-opacity="0.3" stroke="#0062FF" stroke-width="1.5">
+                <ellipse id="Oval-Copy-139" cx="14.673913" cy="15" rx="13.923913" ry="14.25"></ellipse>
+                <ellipse id="Oval-Copy-140" cx="10.7778091" cy="11.0700534" rx="4.14130435"
+                    ry="4.25"></ellipse>
+                <ellipse id="Oval-Copy-141" cx="19.8005014" cy="8.50220367" rx="1.91519924"
+                    ry="1.97442589"></ellipse>
+                <ellipse id="Oval-Copy-142" cx="19.9974243" cy="16.9677569" rx="3.16304348"
+                    ry="3.25"></ellipse>
+                <ellipse id="Oval-Copy-143" cx="11.3820117" cy="21.1848759" rx="3.16304348"
+                    ry="3.25"></ellipse>
+            </g>
+            <g id="Group-2" transform="translate(138.000000, 112.000000)" fill="#0062FF"
+                fill-opacity="0.3" stroke="#0062FF" stroke-width="1.5">
+                <ellipse id="Oval-Copy-134" cx="27.3913043" cy="28" rx="26.6413043" ry="27.25"></ellipse>
+                <ellipse id="Oval-Copy-132" cx="26.4192547" cy="11.1111111" rx="5.11956522"
+                    ry="5.25"></ellipse>
+                <ellipse id="Oval-Copy-136" cx="37.9301242" cy="18.6111111" rx="5.11956522"
+                    ry="5.25"></ellipse>
+                <ellipse id="Oval-Copy-135" cx="20.2888199" cy="31.1111111" rx="11.9673913"
+                    ry="12.25"></ellipse>
+                <ellipse id="Oval-Copy-137" cx="41.4192547" cy="34.1111111" rx="6.09782609"
+                    ry="6.25"></ellipse>
+                <ellipse id="Oval-Copy-138" cx="33.9736025" cy="45.6111111" rx="3.65217391"
+                    ry="3.75"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

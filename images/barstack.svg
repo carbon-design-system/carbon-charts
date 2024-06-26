@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="321px" height="320px" viewBox="0 0 321 320" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>radar copy 5</title>
+    <g id="radar-copy-5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-99-Copy" transform="translate(50.000000, 121.000000)">
+            <g id="Group-98" transform="translate(0.692000, 0.394000)">
+                <rect id="Rectangle" fill="#0F62FE" x="0" y="0" width="150.742" height="10.672"></rect>
+                <rect id="Rectangle-Copy-105" fill="#A6C8FF" x="150.742" y="0" width="68.034"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-106" fill="#A6C8FF" x="48.024" y="36.018" width="25.346"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-107" fill="#A6C8FF" x="77.372" y="72.036" width="89.378"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-108" fill="#A6C8FF" x="154.744" y="108.054" width="36.018"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-103" fill="#0F62FE" x="0" y="72.036" width="77.372"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-102" fill="#0F62FE" x="0" y="36.018" width="48.024"
+                    height="10.672"></rect>
+                <rect id="Rectangle-Copy-104" fill="#0F62FE" x="0" y="108.054" width="158.746"
+                    height="10.672"></rect>
+            </g>
+            <line x1="151.434" y1="0.394" x2="151.434" y2="16.402" id="Path-21" stroke="#FFFFFF"
+                stroke-width="2.001"></line>
+            <line x1="48.716" y1="36.412" x2="48.716" y2="52.42" id="Path-21-Copy-4"
+                stroke="#FFFFFF" stroke-width="2.001"></line>
+            <line x1="78.064" y1="71.096" x2="78.064" y2="87.104" id="Path-21-Copy-5"
+                stroke="#FFFFFF" stroke-width="2.001"></line>
+            <line x1="159.438" y1="103.112" x2="159.438" y2="119.12" id="Path-21-Copy-6"
+                stroke="#FFFFFF" stroke-width="2.001"></line>
+        </g>
+    </g>
+</svg>
