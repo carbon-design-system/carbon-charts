@@ -23,8 +23,8 @@
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
-		"@angular/common": "^16.0.0 || ^17.0.0 || ^18.0.0",
-		"@angular/core": "^16.0.0 || ^17.0.0 || ^18.0.0"
+		"@angular/common": "^18.0.0",
+		"@angular/core": "^18.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
@@ -32,22 +32,22 @@
 		"tslib": "^2.6.3"
 	},
 	"devDependencies": {
-		"@angular-devkit/build-angular": "^16.2.14",
-		"@angular/cli": "^16.2.14",
-		"@angular/common": "^16.2.12",
-		"@angular/compiler": "^16.2.12",
-		"@angular/compiler-cli": "^16.2.12",
-		"@angular/core": "^16.2.12",
-		"@angular/platform-browser": "^16.2.12",
-		"@angular/platform-browser-dynamic": "^16.2.12",
+		"@angular-devkit/build-angular": "^18.0.6",
+		"@angular/cli": "^18.0.6",
+		"@angular/common": "^18.0.4",
+		"@angular/compiler": "^18.0.4",
+		"@angular/compiler-cli": "^18.0.4",
+		"@angular/core": "^18.0.4",
+		"@angular/platform-browser": "^18.0.4",
+		"@angular/platform-browser-dynamic": "^18.0.4",
 		"@carbon/icons": "^11.44.1",
 		"@playwright/test": "^1.45.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.5.0",
-		"ng-packagr": "^16.2.3",
+		"ng-packagr": "^18.0.0",
 		"prettier": "^3.3.2",
-		"typescript": "~5.1.6",
+		"typescript": "~5.4.5",
 		"typescript-eslint": "^8.0.0-0",
 		"zone.js": "~0.14.7"
 	},
