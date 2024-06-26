@@ -34,7 +34,7 @@ export default function Histogram() {
 
 			<StackBlitzLauncherExplanation />
 
-			<h2>Examples for supported frameworks</h2>
+			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
 				<p key={index} className="chart">

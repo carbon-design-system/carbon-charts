@@ -13,7 +13,10 @@ interface Props {
 }
 
 const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
-	<SideNav expanded={isSideNavExpanded} className="cds--white" aria-label="Table of contents">
+	<SideNav
+		expanded={isSideNavExpanded}
+		className="cds--white pb-200"
+		aria-label="Table of contents">
 		<SideNavItems>
 			<SideNavMenu title="Getting started" defaultExpanded={true}>
 				<SideNavMenuItem href="#" as={NavLink} to="/introduction">
@@ -82,9 +85,6 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/combo">
 					Combo
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/diagram">
-					Diagrams
-				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/donut">
 					Donut
 				</SideNavMenuItem>
@@ -106,11 +106,14 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/meter">
 					Meter
 				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/diagram">
+					Network Diagrams
+				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/pie">
 					Pie
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/radar">
-					Radar / Kiviat
+					Radar
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/scatter">
 					Scatter

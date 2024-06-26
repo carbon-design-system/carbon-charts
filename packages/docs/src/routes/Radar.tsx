@@ -8,7 +8,7 @@ import '@carbon/charts-react/styles.css'
 export default function Radar() {
 	return (
 		<>
-			<PageHeader title="Radar / Kiviat Charts" />
+			<PageHeader title="Radar Charts" />
 
 			<p>
 				Radar Charts, also known as spider or Kiviat charts, are graphical representations of
@@ -34,7 +34,7 @@ export default function Radar() {
 
 			<StackBlitzLauncherExplanation />
 
-			<h2>Examples for supported frameworks</h2>
+			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
 				<p key={index} className="chart">

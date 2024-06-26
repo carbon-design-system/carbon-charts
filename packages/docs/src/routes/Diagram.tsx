@@ -29,12 +29,16 @@ import './Diagram.scss'
 export default function Diagram() {
 	return (
 		<>
-			<PageHeader title="Diagrams" />
+			<PageHeader title="Network Diagrams" />
 
 			<p>
 				Carbon Charts Diagrams for <Tag type="blue">React</Tag> and{' '}
 				<Tag type="magenta">Angular</Tag> includes components that enable you to create diagrams
 				using the Carbon Design System styling.
+			</p>
+
+			<p>
+				<strong>NOTE: Network Diagrams are ONLY available for Angular and React.</strong>
 			</p>
 
 			<p>These include:</p>

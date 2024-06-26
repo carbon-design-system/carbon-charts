@@ -32,7 +32,7 @@ export default function Introduction() {
 				<GraphTile title="Bar (horizontal floating)" route="/bar#horizontal" svg="barfloating" />
 				<GraphTile title="Lollipop" route="/lollipop" svg="lollipop" />
 				<GraphTile route="/bubble" title="Bubble" svg="bubble" />
-				<GraphTile route="/radar" title="Radar / kiviat" svg="radar" />
+				<GraphTile route="/radar" title="Radar" svg="radar" />
 				<GraphTile route="/wordcloud" title="Word cloud" svg="wordcloud" />
 			</div>
 

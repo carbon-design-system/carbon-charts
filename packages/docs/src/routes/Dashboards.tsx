@@ -5,12 +5,14 @@ export default function Dashboards() {
 	return (
 		<>
 			<PageHeader title="Dashboards" />
-			Please see the{' '}
-			<Link to="https://carbondesignsystem.com/data-visualization/dashboards/" target="_blank">
-				Dashboards
-			</Link>{' '}
-			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
-			more details.
+			<div className={'page-content'}>
+				Please see the{' '}
+				<Link to="https://carbondesignsystem.com/data-visualization/dashboards/" target="_blank">
+					Dashboards
+				</Link>{' '}
+				page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
+				more details.
+			</div>
 			{/* <p>
         <img src="/images/dashboard.png" alt="Dashboard" className="dashboard" />
       </p>
