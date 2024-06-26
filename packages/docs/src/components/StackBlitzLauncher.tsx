@@ -60,7 +60,6 @@ export default function StackBlitzLauncher({
 				kind="secondary">
 				Angular
 			</Button>
-			<div className="cds--btn cds--layout--size-lg cds--btn--secondary last-one">&nbsp;</div>
 		</div>
 	)
 }
