@@ -39,7 +39,7 @@
 		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.44.1",
+		"@playwright/test": "^1.45.0",
 		"@vitejs/plugin-vue": "^5.0.5",
 		"eslint": "^9.5.0",
 		"prettier": "^3.3.2",
