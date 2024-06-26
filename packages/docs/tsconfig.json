@@ -1,0 +1,28 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"target": "ESNext", // Modern JavaScript target for best performance
+		"module": "ESNext", // Use ESNext module resolution
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false, // Disallow JavaScript files
+		"skipLibCheck": true, // Skip type checking of declaration files
+		"allowImportingTsExtensions": true,
+		"strict": true, // Enable strict type-checking options
+		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+		"moduleResolution": "Bundler", // Use Node module resolution
+		"resolveJsonModule": true, // Include modules for importing JSON files
+		"isolatedModules": true, // Ensure each file is treated as a module
+		"noEmit": true, // Prevent emitting files
+		"jsx": "react-jsx", // Enable new JSX transform
+		"outDir": "dist",
+		"incremental": true // Enable incremental compilation
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.d.ts",
+		"src/**/*.json",
+		"vite.config.ts" // ok to include as vite generates output - not tsc
+	],
+	"exclude": ["node_modules", "dist"]
+}

@@ -8,5 +8,5 @@
 		"inlineSources": true,
 		"types": []
 	},
-	"exclude": ["src/stories", "**/*.spec.ts"]
+	"exclude": ["**/*.spec.ts"]
 }

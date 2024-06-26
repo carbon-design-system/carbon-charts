@@ -1,9 +1,0 @@
-{
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "../../tsconfig.vite.json",
-	"compilerOptions": {
-		// Package-specific stuff goes here
-	},
-	"include": ["vite.config.ts"],
-	"exclude": ["src/tests"]
-}

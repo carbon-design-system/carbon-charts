@@ -5,62 +5,53 @@
 	"scripts": {
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"build:package": "svelte-kit sync && svelte-package && yarn file:styles",
-		"demo:mdx:svelte": "cp ../core/src/stories/getting-started/svelte.stories.mdx src/stories",
-		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
-		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
-		"build:demo": "yarn demo:mdx && storybook build -o demo/bundle --quiet",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
+		"build": "svelte-kit sync && svelte-package && yarn file:styles && publint",
+		"build:test": "vite build --emptyOutDir",
+		"dev": "vite --port 3003",
 		"test": "svelte-check --workspace=tests",
-		"lint": "prettier . --check --ignore-path ../../.prettierignore && eslint",
-		"format": "prettier . --write --ignore-path ../../.prettierignore",
-		"clean": "rm -rf dist demo/bundle",
-		"preview": "vite preview",
+		"test:dom": "playwright test",
+		"test:dom:rebase": "playwright test --update-snapshots",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"pub:demo": "cp -a demo/bundle/. ../../pages/svelte"
+		"lint": "prettier . --check --ignore-path ../../.prettierignore && eslint",
+		"format": "prettier . --write --ignore-path ../../.prettierignore "
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"svelte": "./dist/index.js",
-	"module": "./dist/index.js",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js",
-			"import": "./dist/index.js"
+			"svelte": "./dist/index.js"
 		},
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
 	},
+	"styles": "./dist/styles.css",
 	"files": [
 		"dist",
 		"CHANGELOG.md",
 		"telemetry.yml"
 	],
 	"peerDependencies": {
-		"svelte": "^3.31.0 || ^4.0.0"
+		"svelte": "^4.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "^1.10.0",
-		"@sveltejs/adapter-auto": "^3.2.2",
-		"@sveltejs/kit": "^2.5.16",
+		"@playwright/test": "^1.45.0",
+		"@sveltejs/adapter-static": "^3.0.2",
+		"@sveltejs/kit": "^2.5.17",
 		"@sveltejs/package": "^2.3.2",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
-		"concurrently": "^8.2.2",
 		"eslint": "^9.5.0",
 		"prettier": "^3.3.2",
 		"publint": "^0.2.8",
-		"storybook": "^7.6.19",
 		"svelte": "^4.2.18",
-		"svelte-check": "^3.8.1",
+		"svelte-check": "^3.8.3",
 		"tslib": "^2.6.3",
-		"typescript": "^5.4.5",
+		"typescript": "^5.5.2",
 		"vite": "^5.3.1"
 	},
 	"publishConfig": {
@@ -69,7 +60,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/svelte/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"bugs": {
 		"url": "https://github.com/carbon-design-system/carbon-charts/issues"

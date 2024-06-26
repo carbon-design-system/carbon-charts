@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://charts.carbondesignsystem.com/">
-		<img src="packages/core/.storybook/assets/share.png" alt="Carbon Charts" />
+		<img src="./assets/hero.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
@@ -17,6 +17,14 @@
 	</p>
 </p>
 
+## Documentation
+
+Includes StackBlitz examples of each chart type for Vanilla JavaScript, Svelte, React, Angular and Vue.js.
+
+<a href="https://charts.carbondesignsystem.com/" target="_blank">
+  <img src="./assets/dashboard.png" width=700 />
+</a>
+
 ## Packages
 
 - [Vanilla JavaScript](./packages/core)
@@ -28,19 +36,6 @@
 <a href="https://www.netlify.com" target="_blank">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
 </a>
-
-## Demos
-
-Visit [the demo website](https://charts.carbondesignsystem.com/?path=/story/docs--welcome)
-
-## Design specifications
-
-<a href="https://www.carbondesignsystem.com/data-visualization/getting-started" target="_blank">
-  <img src="./assets/dv_dark_theme.png" width=700 />
-</a>
-
-Carbon data visualization design specifications can be found
-[here](https://www.carbondesignsystem.com/data-visualization/getting-started).
 
 ## CHANGELOG
 

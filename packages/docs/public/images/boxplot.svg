@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="239px" height="239px" viewBox="0 0 239 239" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>boxplot</title>
+	<g id="boxplot" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="Group-22" transform="translate(47.000000, 89.000000)" stroke="#0062FF">
+			<g id="Group-19" transform="translate(16.000000, 0.000000)">
+				<g id="Group-23" transform="translate(0.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="0.5" y1="2.5" x2="16.5" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<g id="Group-21-Copy" transform="translate(104.500000, 3.500000) scale(-1, 1) translate(-104.500000, -3.500000) translate(94.000000, 1.000000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="1.48039216" y1="2.5" x2="20.7058824" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<rect id="Rectangle" stroke-width="1.5" fill="#D9E8FE" x="17" y="0" width="38" height="8"></rect>
+				<rect id="Rectangle-Copy-12" stroke-width="1.5" fill="#D9E8FE" x="56" y="0" width="38" height="8"></rect>
+			</g>
+			<g id="Group-19-Copy" transform="translate(0.000000, 32.000000)">
+				<g id="Group-21" transform="translate(0.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="0.5" y1="2.5" x2="29.5" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<g id="Group-21-Copy" transform="translate(131.000000, 4.000000) scale(-1, 1) translate(-131.000000, -4.000000) translate(116.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="0.5" y1="2.5" x2="29.5" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<rect id="Rectangle" stroke-width="1.5" fill="#D9E8FE" x="19" y="0" width="43" height="8"></rect>
+				<rect id="Rectangle-Copy-12" stroke-width="1.5" fill="#D9E8FE" x="63" y="0" width="53" height="8"></rect>
+			</g>
+			<g id="Group-19-Copy-2" transform="translate(51.000000, 64.000000)">
+				<g id="Group-21" transform="translate(0.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="0.5" y1="2.5" x2="29.5" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<g id="Group-21-Copy" transform="translate(73.033333, 4.000000) scale(-1, 1) translate(-73.033333, -4.000000) translate(71.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.0666666667" y1="0.5" x2="0.0666666667" y2="4.5" id="Line-2"></line>
+					<line x1="0.133333333" y1="2.5" x2="4" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<rect id="Rectangle" stroke-width="1.5" fill="#D9E8FE" x="30" y="0" width="27" height="8"></rect>
+				<rect id="Rectangle-Copy-12" stroke-width="1.5" fill="#D9E8FE" x="58" y="0" width="13" height="8"></rect>
+			</g>
+			<g id="Group-19-Copy-4" transform="translate(24.000000, 97.000000)">
+				<g id="Group-21" transform="translate(0.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.5" y1="0.5" x2="0.5" y2="4.5" id="Line-2"></line>
+					<line x1="0.5" y1="2.5" x2="20.5" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<g id="Group-21-Copy" transform="translate(88.000000, 4.000000) scale(-1, 1) translate(-88.000000, -4.000000) translate(80.000000, 1.500000)" stroke-linecap="square">
+					<line x1="0.262295082" y1="0.5" x2="0.262295082" y2="4.5" id="Line-2"></line>
+					<line x1="0.524590164" y1="2.5" x2="15.7377049" y2="2.5" id="Line-2-Copy"></line>
+				</g>
+				<rect id="Rectangle" stroke-width="1.5" fill="#D9E8FE" x="20" y="0" width="37" height="8"></rect>
+				<rect id="Rectangle-Copy-12" stroke-width="1.5" fill="#D9E8FE" x="58" y="0" width="22" height="8"></rect>
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1,18 +1,35 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "../../tsconfig.json",
 	"compilerOptions": {
+		"target": "ESNext", // Modern JavaScript target for best performance
+		"module": "ESNext", // Use ESNext module resolution
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false, // Disallow JavaScript files
+		"skipLibCheck": true, // Skip type checking of declaration files
+		"strict": true, // Enable strict type-checking options
+		"forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+		"moduleResolution": "Bundler", // Use Node module resolution
+		"isolatedModules": true, // Ensure each file is treated as a module
 		// Package-specific
 		"declaration": true,
 		"allowImportingTsExtensions": true,
 		"baseUrl": ".",
-		"jsx": "preserve",
+		// "jsx": "preserve",
 		"paths": {
 			"@/*": ["src/*"]
 		},
 		"noEmit": true,
 		"useDefineForClassFields": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-	"references": [{ "path": "./tsconfig.vite.json" }]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.vue",
+		"../../../docs/src/charts.ts",
+		"vite.config.ts", // ok to include as vite generates output - not tsc
+		"vite.test.config.ts", // ditto
+		"playwright.config.ts",
+		"tests/dom-regression.spec.ts"
+	],
+	"exclude": ["node_modules", "dist"]
 }

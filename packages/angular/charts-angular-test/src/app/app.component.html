@@ -1,0 +1,15 @@
+<h1>Carbon Charts Angular</h1>
+<h2>Component Test Harness</h2>
+
+<div *ngFor="let chart of charts" class="container">
+	<h3>{{ chart.types.angular }}</h3>
+	<div *ngFor="let example of chart.examples" class="example">
+		<ng-container *ngIf="example.test">
+			<ng-container
+				*ngComponentOutlet="
+					selectorMap[chart.types.angular];
+					inputs: { data: example.data, options: example.options }
+				"></ng-container>
+		</ng-container>
+	</div>
+</div>

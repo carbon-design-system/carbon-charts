@@ -1,0 +1,109 @@
+// Plex Sans 300, 400, 600
+// Plex Sans Condensed 400
+
+@use '@carbon/react' with (
+	$use-flexbox-grid: true,
+	$css--font-face: false
+);
+
+@import 'highlight.js/scss/stackoverflow-dark.scss';
+
+h2 {
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-top: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+p {
+	margin: 1rem 0 1rem 0;
+	max-width: 60rem;
+}
+
+.cds--content {
+	margin-inline-start: 0 !important;
+	margin-top: 3rem;
+	padding: 3rem;
+}
+
+.cds--inline-notification {
+	max-width: 60rem;
+}
+
+.cds--structured-list {
+	max-width: 60rem;
+}
+
+.cds--tabs {
+	margin-bottom: 1rem;
+}
+
+.cds--tabs__nav-item {
+	min-width: 10rem;
+}
+
+.cds--tab-content {
+	padding: 0;
+}
+
+.cds--snippet {
+	max-width: 60rem;
+	border-radius: 0.25rem;
+
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
+	color: #fff;
+	background-color: black;
+	width: 100%;
+}
+
+.cds--copy-btn {
+	background-color: black;
+	color: #fff;
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
+}
+
+.cds--copy-btn:hover {
+	background-color: #393939;
+}
+
+.cds--snippet__icon {
+	fill: #fff !important;
+}
+
+.cds--snippet--multi .cds--snippet-container pre {
+	padding-bottom: 0;
+}
+
+@media (min-width: 65.98rem) {
+	.cds--content {
+		margin-inline-start: 16rem !important;
+	}
+}
+
+.launch-buttons {
+	margin-bottom: 3rem;
+}
+
+.page-content {
+	min-height: 100vh;
+}
+
+.pb-200 {
+	padding-bottom: 200px;
+}
+
+.chart {
+	max-width: 800px;
+	background-color: #fff;
+
+	.chart-holder {
+		padding: 30px;
+	}
+}

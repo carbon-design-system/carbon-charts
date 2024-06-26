@@ -12,7 +12,7 @@ export default defineConfig({
 				replace({
 					'process.env.NODE_ENV': JSON.stringify('production'),
 					preventAssignment: false
-				}) as PluginOption
+				}) as unknown as PluginOption
 			]
 		},
 		outDir: 'dist/umd',

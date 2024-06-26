@@ -5,6 +5,7 @@
 	"type": "module",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
+	"styles": "./dist/styles.css",
 	"exports": {
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css",
@@ -22,18 +23,13 @@
 	"scripts": {
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"build:package": "vite build && yarn file:styles",
-		"demo:mdx:vue": "cp ../core/src/stories/getting-started/vue.stories.mdx src/stories",
-		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
-		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
-		"build:demo": "yarn demo:mdx && storybook build -o demo/bundle --quiet",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
+		"build": "vite build && yarn file:styles",
+		"build:test": "vue-tsc --noEmit && vite build --config vite.test.config.ts --emptyOutDir",
+		"dev": "vite --port 3004",
+		"test:dom": "playwright test",
+		"test:dom:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",
-		"format": "prettier . --write --ignore-path ../../.prettierignore",
-		"clean": "rm -rf dist demo/bundle",
-		"pub:demo": "cp -a demo/bundle/. ../../pages/vue"
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
 		"vue": "^3.4.0"
@@ -43,17 +39,15 @@
 		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "^1.10.0",
+		"@playwright/test": "^1.45.0",
 		"@vitejs/plugin-vue": "^5.0.5",
-		"concurrently": "^8.2.2",
 		"eslint": "^9.5.0",
 		"prettier": "^3.3.2",
-		"storybook": "^7.6.19",
-		"typescript": "^5.4.5",
+		"typescript": "^5.5.2",
 		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1",
-		"vue": "^3.4.29",
-		"vue-tsc": "^2.0.21"
+		"vue": "^3.4.30",
+		"vue-tsc": "^2.0.22"
 	},
 	"publishConfig": {
 		"access": "public",
@@ -62,7 +56,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/vue/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

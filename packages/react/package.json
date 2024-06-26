@@ -18,6 +18,7 @@
 		"./styles.css": "./dist/styles.css",
 		"./styles": "./dist/styles.css"
 	},
+	"styles": "./dist/styles.css",
 	"files": [
 		"dist",
 		"README.md",
@@ -28,22 +29,17 @@
 		"file:styles": "cp ../core/dist/styles.* dist",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
-		"build:package": "vite build && cp dist/index.umd.cjs dist/index.umd.js && yarn postbundle",
-		"demo:mdx:react": "cp ../core/src/stories/getting-started/react.stories.mdx src/stories",
-		"demo:mdx:tutorials": "cp ../core/src/stories/tutorials/* src/stories",
-		"demo:mdx": "concurrently \"yarn:demo:mdx:*\"",
-		"build:demo": "yarn demo:mdx && NODE_OPTIONS=--max_old_space_size=9126 storybook build -o demo/bundle --quiet",
-		"build": "yarn build:package && yarn build:demo",
-		"storybook": "storybook dev -p 9006",
-		"start": "yarn storybook",
+		"build": "vite build && cp dist/index.umd.cjs dist/index.umd.js && yarn postbundle",
+		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
+		"dev": "vite --port 3002",
+		"test:dom": "playwright test",
+		"test:dom:rebase": "playwright test --update-snapshots",
 		"lint": "eslint",
-		"format": "prettier . --write --ignore-path ../../.prettierignore",
-		"clean": "rm -rf dist demo/bundle",
-		"pub:demo": "cp -a demo/bundle/. ../../pages/react"
+		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.43.0",
+		"@carbon/icons-react": "^11.44.1",
 		"@ibm/telemetry-js": "^1.5.2"
 	},
 	"peerDependencies": {
@@ -51,10 +47,10 @@
 		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
 	},
 	"devDependencies": {
-		"@stackblitz/sdk": "^1.10.0",
+		"@playwright/test": "^1.45.0",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
-		"@vitejs/plugin-react": "^4.3.1",
+		"@vitejs/plugin-react-swc": "^3.7.0",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
@@ -62,9 +58,7 @@
 		"prettier": "^3.3.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"sass": "^1.77.6",
-		"storybook": "^7.6.19",
-		"typescript": "^5.4.5",
+		"typescript": "^5.5.2",
 		"vite": "^5.3.1",
 		"vite-plugin-dts": "^3.9.1"
 	},
@@ -74,7 +68,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/react/"
+		"homepage": "https://charts.carbondesignsystem.com/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

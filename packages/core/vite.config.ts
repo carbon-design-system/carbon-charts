@@ -16,8 +16,7 @@ export default defineConfig({
 				'components/index': 'src/components/index.ts',
 				'interfaces/index': 'src/interfaces/index.ts',
 				'model/index': 'src/model/index.ts',
-				'services/index': 'src/services/index.ts',
-				'demo/index': 'src/demo/index.ts'
+				'services/index': 'src/services/index.ts'
 			},
 			formats: ['es']
 		},
@@ -29,9 +28,7 @@ export default defineConfig({
 		}
 	},
 	optimizeDeps: {
-		exclude: [
-			'@ibm/telemetry-js' // prevent Storybook issue
-		]
+		exclude: ['@ibm/telemetry-js']
 	},
 	resolve: {
 		alias: {

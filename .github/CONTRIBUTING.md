@@ -46,10 +46,9 @@ To get charts running locally on your machine:
 3. Run `yarn install`
 4. Run `yarn build` to build all packages and the documentation website
 
-All packages use Storybook for demos:
-
 ```sh
-yarn storybook
+cd packages/docs
+yarn dev
 ```
 
 ## Issue guidelines

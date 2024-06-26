@@ -1,4 +1,3 @@
-import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import vue from '@vitejs/plugin-vue'
@@ -20,19 +19,15 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url)),
 			vue: 'vue/dist/vue.esm-bundler.js'
 		}
 	},
 	plugins: [
 		vue(),
 		dts({
-			// generate type declaration files in dist, not dist/src
 			cleanVueFileName: true,
-			beforeWriteFile: (filePath: string, content: string) => {
-				filePath = filePath.replace('/dist/packages/vue/src/', '/dist/')
-				return { filePath, content }
-			}
+			entryRoot: 'src',
+			logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
 		})
 	]
 })

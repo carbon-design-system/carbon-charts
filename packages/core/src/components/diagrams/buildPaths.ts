@@ -3,13 +3,9 @@ import type { Coordinates } from '@/interfaces/layout'
 
 /**
  * Returns a path string for a straight path
- * @param source - The source coordinates
- * @param source.x - The source's x coordinate
- * @param source.y - The source's y coordinate
- * @param target - The target coordinates
- * @param target.x - The target's x coordinate
- * @param target.y - The target's y coordinate
- * @return The path string
+ * @param {Coordinates} source - The source coordinates
+ * @param {Coordinates} target - The target coordinates
+ * @return {string} The path string
  */
 const buildStraightPathString = (source: Coordinates, target: Coordinates) => {
 	const sx = source.x as number
@@ -27,14 +23,10 @@ const buildStraightPathString = (source: Coordinates, target: Coordinates) => {
 
 /**
  * Returns a path string for an elbow path with a bend point
- * @param  source - The source coordinates
- * @param  source.x - The source's x coordinate
- * @param  source.y - The source's y coordinate
- * @param  target - The target coordinates
- * @param  target.x - The target's x coordinate
- * @param  target.y - The target's y coordinate
- * @param  percent - Where the bend point should appear between the source and target
- * @return The path string
+ * @param {Coordinates} source - The source coordinates
+ * @param {Coordinates} target - The target coordinates
+ * @param {number} percent - Where the bend point should appear between the source and target
+ * @return {string} The path string
  */
 const buildElbowPathString = (source: Coordinates, target: Coordinates, percent = 0.5) => {
 	const sx = source.x
@@ -53,18 +45,14 @@ const buildElbowPathString = (source: Coordinates, target: Coordinates, percent 
 }
 
 /**
- * Returns a path string for an path with a custom bezier curve
- * @param source - The source coordinates
- * @param source.x - The source's x coordinate
- * @param source.y - The source's y coordinate
- * @param target - The target coordinates
- * @param target.x - The target's x coordinate
- * @param target.y - The target's y coordinate
- * @param cpx1 - X coordinate for the first control point
- * @param cpy1 - Y coordinate for the first control point
- * @param cpx2 - X coordinate for the second control point
- * @param cpy2 - Y coordinate for the second control point
- * @return The path string
+ * Returns a path string for a path with a custom bezier curve.
+ * @param {Coordinates} source - The source coordinates.
+ * @param {Coordinates} target - The target coordinates.
+ * @param {number} cpx1 - X coordinate for the first control point.
+ * @param {number} cpy1 - Y coordinate for the first control point.
+ * @param {number} cpx2 - X coordinate for the second control point.
+ * @param {number} cpy2 - Y coordinate for the second control point.
+ * @returns {string} The path string.
  */
 const buildBezierPathString = (
 	source: Coordinates,

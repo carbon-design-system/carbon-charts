@@ -7,6 +7,7 @@
 			"projectType": "library",
 			"root": ".",
 			"sourceRoot": "src",
+			"schematics": {},
 			"prefix": "ibm",
 			"architect": {
 				"build": {
@@ -24,34 +25,87 @@
 					},
 					"defaultConfiguration": "production"
 				},
-				"storybook": {
-					"builder": "@storybook/angular:start-storybook",
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"configDir": ".storybook",
-						"tsConfig": ".storybook/tsconfig.json",
-						"browserTarget": "charts-angular:build",
-						"compodoc": false,
-						"compodocArgs": ["-e", "json", "-d", "./"],
-						"port": 9006,
-						"quiet": true
+						"lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
+						"eslintConfig": "./eslint.config.mjs"
 					}
-				},
-				"build-storybook": {
-					"builder": "@storybook/angular:build-storybook",
+				}
+			}
+		},
+		"charts-angular-test": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "charts-angular-test",
+			"sourceRoot": "charts-angular-test/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser-esbuild",
 					"options": {
-						"configDir": ".storybook",
-						"tsConfig": ".storybook/tsconfig.json",
-						"browserTarget": "charts-angular:build",
-						"compodoc": false,
-						"compodocArgs": ["-e", "json", "-d", "./"],
-						"outputDir": "demo/bundle",
-						"quiet": true
+						"aot": true,
+						"outputPath": "../../pages",
+						"index": "charts-angular-test/src/index.html",
+						"main": "charts-angular-test/src/main.ts",
+						"polyfills": ["zone.js"],
+						"tsConfig": "charts-angular-test/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": ["charts-angular-test/src/favicon.ico", "charts-angular-test/src/assets"],
+						"styles": ["charts-angular-test/src/styles.scss"],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"buildOptimizer": true,
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "charts-angular-test:build:production"
+						},
+						"development": {
+							"browserTarget": "charts-angular-test:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "charts-angular-test:build"
 					}
 				},
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": ["./**/*.ts", "./**/*.html"],
+						"lintFilePatterns": ["charts-angular-test/**/*.ts", "charts-angular-test/**/*.html"],
 						"eslintConfig": "./eslint.config.mjs"
 					}
 				}

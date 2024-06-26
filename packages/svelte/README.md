@@ -1,11 +1,9 @@
 # Carbon Charts Svelte
 
 Carbon Charts Svelte is a thin Svelte wrapper around the vanilla JavaScript `@carbon/charts`
-component library. Documentation is provided below and in the Storybook demos.
+component library.
 
-**[Storybook demos](https://charts.carbondesignsystem.com/svelte)**
-
-**[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
+## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
 ## Maintenance & support
 
@@ -27,6 +25,8 @@ If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead
 ```bash
 yarn add -D @carbon/charts-svelte
 ```
+
+The required styles should be imported from `@carbon/charts-svelte/styles.css`.
 
 ### SvelteKit
 
@@ -185,28 +185,6 @@ hovering over a bar.
 		}
 	}} />
 ```
-
-## StackBlitz examples
-
-[Sample use cases can be seen here](https://charts.carbondesignsystem.com/svelte).
-
-**When opening the link above**, click on the **Edit on StackBlitz** button for each demo to see an
-isolated project showing you how to reproduce the demo.
-
-## Charting data & options
-
-Although new charts will be introduced in the future (such as a choropleth), data and options follow
-the same model for all charts with minor exceptions. For example, in the case of a donut chart,
-you're able to pass in an additional field called `center` in your options to configure the donut
-center.
-
-[Instructions for using the **tabular data format**](https://charts.carbondesignsystem.com/svelte/?path=/docs/docs-tutorials-tabular-data-format--docs)
-
-Additional options are available depending on the chart type being used,
-[see our demo examples here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/demo/charts).
-
-Customizable options (specific to chart type) can be found
-[here](https://charts.carbondesignsystem.com/documentation/modules/interfaces.html)
 
 ## TypeScript support
 

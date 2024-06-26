@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
 	build: {
@@ -21,5 +21,11 @@ export default defineConfig({
 			}
 		}
 	},
-	plugins: [react(), dts()]
+	plugins: [
+		react(),
+		dts({
+			entryRoot: 'src',
+			logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
+		})
+	]
 })

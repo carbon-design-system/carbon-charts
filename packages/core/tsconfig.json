@@ -1,20 +1,38 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		// Package-specific settings
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"declaration": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"moduleResolution": "Bundler",
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"allowJs": false,
+		"outDir": "dist",
 		"baseUrl": ".",
 		"declarationDir": "dist",
 		"paths": {
 			"@/*": ["src/*"]
 		},
-		"types": ["node"],
-		"strict": false, // TODO: 1140 errors in 63 files
+		// "types": ["node"],
+		"strict": false,
 		// TODO: Add explicit initializers or declare modifier to class properties to update this project's TypeScript from 3.7 to 5.x.
 		// See https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier.
 		"useDefineForClassFields": false // Until issue above is addressed, keep false.
 	},
-	"include": ["src"],
-	"exclude": ["src/tests", "src/stories", "**/*.spec.ts"],
-	"references": [{ "path": "./tsconfig.vite.json" }]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"vite.config.ts", // ok to include as vite generates output - not tsc
+		"vite.umd.config.ts", // ditto
+		"vite.test.config.ts" // ditto
+	],
+	"exclude": ["node_modules", "dist"]
 }

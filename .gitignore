@@ -11,10 +11,10 @@ pages/
 **/.DS_Store
 **/.svelte-kit
 **/dist
+**/demo
 
 # Playwright
 **/test-results/
 **/playwright-report/
 **/blob-report/
 **/playwright/.cache/
-**/demo/
