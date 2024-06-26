@@ -22,7 +22,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 		npx lerna run build --scope=@carbon/charts-react --concurrency=1
 	
 		cd ./packages/docs
-		yarn build:netlify-dp
+		yarn build
 	else
 	  # Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
 		# The URL drives which test site to 
