@@ -13,11 +13,8 @@ interface Props {
 }
 
 const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
-	<SideNav
-		expanded={isSideNavExpanded}
-		className="cds--white pb-200"
-		aria-label="Table of contents">
-		<SideNavItems>
+	<SideNav expanded={isSideNavExpanded} className="cds--white" aria-label="Table of contents">
+		<SideNavItems className="pb-200">
 			<SideNavMenu title="Getting started" defaultExpanded={true}>
 				<SideNavMenuItem href="#" as={NavLink} to="/introduction">
 					Introduction
