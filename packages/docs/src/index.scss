@@ -88,7 +88,6 @@ p {
 }
 
 .launch-buttons {
-	margin-left: 2px;
 	margin-bottom: 3rem;
 }
 
@@ -102,4 +101,8 @@ p {
 
 .chart {
 	background-color: #fff;
+
+	.chart-holder {
+		padding: 30px;
+	}
 }
