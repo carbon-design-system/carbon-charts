@@ -3,11 +3,9 @@
   command = "./scripts/netlify.sh"
 
 [context.production.environment]
-	NODE_VERSION = "20.13.1"
 	NODE_ENV = "production"
 
 [context.deploy-preview.environment]
-	NODE_VERSION = "20.13.1"
 	NODE_ENV = "production"
 
 [[redirects]]
