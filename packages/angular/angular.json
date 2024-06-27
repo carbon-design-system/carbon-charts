@@ -46,12 +46,14 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser-esbuild",
+					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"aot": true,
-						"outputPath": "../../pages",
+						"outputPath": {
+							"base": "../../pages",
+							"browser": ""
+						},
 						"index": "charts-angular-test/src/index.html",
-						"main": "charts-angular-test/src/main.ts",
+						"browser": "charts-angular-test/src/main.ts",
 						"polyfills": ["zone.js"],
 						"tsConfig": "charts-angular-test/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
@@ -64,8 +66,8 @@
 							"budgets": [
 								{
 									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
+									"maximumWarning": "2mb",
+									"maximumError": "3mb"
 								},
 								{
 									"type": "anyComponentStyle",
@@ -76,7 +78,6 @@
 							"outputHashing": "all"
 						},
 						"development": {
-							"buildOptimizer": true,
 							"optimization": false,
 							"extractLicenses": false,
 							"sourceMap": true
@@ -88,19 +89,16 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "charts-angular-test:build:production"
+							"buildTarget": "charts-angular-test:build:production"
 						},
 						"development": {
-							"browserTarget": "charts-angular-test:build:development"
+							"buildTarget": "charts-angular-test:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "charts-angular-test:build"
-					}
+					"builder": "@angular-devkit/build-angular:extract-i18n"
 				},
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
