@@ -1,6 +1,6 @@
-[context.deploy-preview]
+[context]
   publish = "pages/"
   command = "./scripts/netlify.sh"
-  [context.deploy-preview.environment]
+  [context.environment]
     NODE_VERSION = "20.13.1"
     NODE_ENV = "production"
