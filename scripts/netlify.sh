@@ -9,8 +9,7 @@ set -e
 # After that, the test page for the appropriate package is built.
 
 GREEN="\033[0;32m"
-if [ $CONTEXT == "deploy-preview" ]; then
-	if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
+if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 	  echo -e "Deploying docs site"
 
 		# Build core package first
@@ -24,8 +23,9 @@ if [ $CONTEXT == "deploy-preview" ]; then
 		# Build docs package
 		echo -e "${GREEN}Building @carbon/charts-docs and styles..."
 		npx lerna run build --scope=@carbon/charts-docs --concurrency=1
-	else
-	  # Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
+else
+	if [ $CONTEXT == "deploy-preview" ]; then
+		# Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
 		# The URL drives which test site to 
 		echo -e "${GREEN}Deploying test page to ${URL} on Netlify for pull request..."
 	
@@ -39,17 +39,17 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	
 		# Build package if not core (angular or react) and map APP_TYPE to PKG_DIR
 		if [ "$PKG_DIR" != "core" ]; then
-		  PKG="charts-$PKG_DIR"
+			PKG="charts-$PKG_DIR"
 			echo -e "${GREEN}Building @carbon/$PKG..."
 			npx lerna run build --scope="@carbon/$PKG" --concurrency=1
-	  else
-		  # Map package directory for core since name is different
-		  PKG="charts"
+		else
+			# Map package directory for core since name is different
+			PKG="charts"
 		fi
 	
-	  echo -e "${GREEN}Creating test page for @carbon/$PKG..."
+		echo -e "${GREEN}Creating test page for @carbon/$PKG..."
 		npx lerna run build:test --scope="@carbon/$PKG" --concurrency=1
+	else
+		echo -e "${GREEN}Not a PR... nothing to do."
 	fi
-else
-	echo -e "${GREEN}Not a PR... nothing to do."
 fi
