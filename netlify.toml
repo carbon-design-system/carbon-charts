@@ -1,6 +1,17 @@
-[context]
+[build]
   publish = "pages/"
   command = "./scripts/netlify.sh"
-  [context.environment]
-    NODE_VERSION = "20.13.1"
-    NODE_ENV = "production"
+
+[context.production.environment]
+	NODE_VERSION = "20.13.1"
+	NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+	NODE_VERSION = "20.13.1"
+	NODE_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
