@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.17.2 (2024-06-27)
+
+### Bug Fixes
+
+- **docs:** scroll to top when navigating with left navbar
+  ([#1862](https://github.com/carbon-design-system/carbon-charts/issues/1862))
+  ([d46d3de](https://github.com/carbon-design-system/carbon-charts/commit/d46d3de30051d966cb15af6ff40deba229abcf40))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.17.1 (2024-06-27)
 
 **Note:** Version bump only for package @carbon/charts-vue
