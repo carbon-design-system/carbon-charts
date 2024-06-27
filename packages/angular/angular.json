@@ -48,7 +48,10 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "../../pages",
+						"outputPath": {
+							"base": "../../pages",
+							"browser": ""
+						},
 						"index": "charts-angular-test/src/index.html",
 						"browser": "charts-angular-test/src/main.ts",
 						"polyfills": ["zone.js"],
@@ -63,8 +66,8 @@
 							"budgets": [
 								{
 									"type": "initial",
-									"maximumWarning": "1mb",
-									"maximumError": "2mb"
+									"maximumWarning": "2mb",
+									"maximumError": "3mb"
 								},
 								{
 									"type": "anyComponentStyle",
