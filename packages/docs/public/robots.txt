@@ -1,0 +1,3 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+sitemap: https://charts.carbondesignsystem.com/sitemap.xml
