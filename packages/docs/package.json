@@ -33,12 +33,12 @@
 		"@types/react-dom": "^18.3.0",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
-		"eslint": "^9.5.0",
+		"eslint": "^9.6.0",
 		"prettier": "^3.3.2",
 		"sass": "^1.77.6",
-		"typedoc": "^0.26.2",
+		"typedoc": "^0.26.3",
 		"typescript": "^5.5.2",
-		"vite": "^5.3.1"
+		"vite": "^5.3.2"
 	},
 	"publishConfig": {
 		"access": "restricted"

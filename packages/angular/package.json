@@ -44,7 +44,7 @@
 		"@playwright/test": "^1.45.0",
 		"angular-eslint": "^18.0.1",
 		"concurrently": "^8.2.2",
-		"eslint": "^9.5.0",
+		"eslint": "^9.6.0",
 		"ng-packagr": "^18.0.0",
 		"prettier": "^3.3.2",
 		"typescript": "~5.4.5",
