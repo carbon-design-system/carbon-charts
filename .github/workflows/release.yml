@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v20.13.1
+    name: Create release - Node.js v20.15.0
     runs-on: ubuntu-latest
 
     steps:
@@ -16,10 +16,10 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 20.13.1
+      - name: Use Node.js 20.15.0
         uses: actions/setup-node@v4
         with:
-          node-version: '20.13.1'
+          node-version: '20.15.0'
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
@@ -35,7 +35,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
-      - name: Rebuild packages and demos for publication and deployment 🔧
+      - name: Rebuild packages and documentation 🔧
         run: |
           yarn build
           node scripts/update-angular-dependency-version.mjs
