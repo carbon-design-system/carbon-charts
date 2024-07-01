@@ -42,7 +42,7 @@
 		"@angular/platform-browser-dynamic": "^18.0.5",
 		"@carbon/icons": "^11.44.1",
 		"@playwright/test": "^1.45.0",
-		"angular-eslint": "^18.0.1",
+		"angular-eslint": "^18.1.0",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.6.0",
 		"ng-packagr": "^18.0.0",

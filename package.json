@@ -46,7 +46,7 @@
 		"svelte": "^4.2.18",
 		"svelte-eslint-parser": "^0.39.2",
 		"typescript": "5.5.2",
-		"typescript-eslint": "^7.14.1",
+		"typescript-eslint": "^7.15.0",
 		"vue-eslint-parser": "^9.4.3"
 	},
 	"release": {
