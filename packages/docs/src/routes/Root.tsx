@@ -44,14 +44,15 @@ export default function Root() {
 								Charts {version}
 							</HeaderName>
 							<HeaderGlobalBar>
-								<ExpandableSearch
+								{/* <ExpandableSearch
 									size="lg"
 									labelText="Search"
 									closeButtonLabelText="Clear search input"
 									id="search-expandable-1"
 									onChange={() => {}}
 									onKeyDown={() => {}}
-								/>
+								/> */}
+
 								<HeaderGlobalAction
 									aria-label="GitHub"
 									as="a"
