@@ -1,4 +1,5 @@
-/// <reference types="vitest" />
+import './vite-env'
+
 import { fileURLToPath } from 'url'
 import { defineConfig, type PluginOption } from 'vite'
 import dts from 'vite-plugin-dts'
