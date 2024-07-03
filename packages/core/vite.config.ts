@@ -1,4 +1,4 @@
-import './vite-env'
+import './vite-env.d.ts'
 
 import { fileURLToPath } from 'url'
 import { defineConfig, type PluginOption } from 'vite'
