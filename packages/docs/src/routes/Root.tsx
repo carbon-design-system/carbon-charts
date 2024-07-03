@@ -8,7 +8,8 @@ import {
 	HeaderName,
 	HeaderMenuButton,
 	HeaderGlobalBar,
-	HeaderGlobalAction
+	HeaderGlobalAction,
+	ExpandableSearch
 } from '@carbon/react/es'
 import { LogoGithub } from '@carbon/react/icons'
 import DocsSideNav from '../components/DocsSideNav'
@@ -43,6 +44,15 @@ export default function Root() {
 								Charts {version}
 							</HeaderName>
 							<HeaderGlobalBar>
+								{/* <ExpandableSearch
+									size="lg"
+									labelText="Search"
+									closeButtonLabelText="Clear search input"
+									id="search-expandable-1"
+									onChange={() => {}}
+									onKeyDown={() => {}}
+								/> */}
+
 								<HeaderGlobalAction
 									aria-label="GitHub"
 									as="a"

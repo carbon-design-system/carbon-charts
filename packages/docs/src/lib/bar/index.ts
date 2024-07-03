@@ -231,55 +231,55 @@ const simpleBarTimeSeriesOptions: BarChartOptions = {
 }
 
 // More complete in that it reformats everything to Turkish - both axes and tooltip
-// const simpleBarTurkishLocaleOptions: BarChartOptions = {
-// 	title: 'Turkish locale',
-// 	axes: {
-// 		left: {
-// 			mapsTo: 'value'
-// 		},
-// 		bottom: {
-// 			mapsTo: 'date',
-// 			scaleType: ScaleTypes.TIME
-// 		}
-// 	},
-// 	locale: {
-// 		code: 'tr-TR'
-// 	}
-// }
+const simpleBarTurkishLocaleOptions: BarChartOptions = {
+	title: 'Turkish locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'tr-TR'
+	}
+}
 
 // using locale interface to reformat everything to Arabic
-// const simpleBarArabicLocaleOptions: BarChartOptions = {
-// 	title: 'Arabic locale',
-// 	axes: {
-// 		left: {
-// 			mapsTo: 'value'
-// 		},
-// 		bottom: {
-// 			mapsTo: 'date',
-// 			scaleType: ScaleTypes.TIME
-// 		}
-// 	},
-// 	locale: {
-// 		code: 'ar-SA'
-// 	}
-// }
+const simpleBarArabicLocaleOptions: BarChartOptions = {
+	title: 'Arabic locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'ar-SA'
+	}
+}
 
 // using locale interface to reformat everything to Iranian
-// const simpleBarIranianLocaleOptions: BarChartOptions = {
-// 	title: 'Iranian locale',
-// 	axes: {
-// 		left: {
-// 			mapsTo: 'value'
-// 		},
-// 		bottom: {
-// 			mapsTo: 'date',
-// 			scaleType: ScaleTypes.TIME
-// 		}
-// 	},
-// 	locale: {
-// 		code: 'fa-IR'
-// 	}
-// }
+const simpleBarIranianLocaleOptions: BarChartOptions = {
+	title: 'Iranian locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'fa-IR'
+	}
+}
 
 // using locale interface to reformat everything to Japanese
 const simpleBarJapaneseLocaleOptions: BarChartOptions = {
@@ -300,38 +300,38 @@ const simpleBarJapaneseLocaleOptions: BarChartOptions = {
 }
 
 // using locale interface to reformat everything to Hindi
-// const simpleBarHindiLocaleOptions: BarChartOptions = {
-// 	title: 'Hindi locale',
-// 	axes: {
-// 		left: {
-// 			mapsTo: 'value'
-// 		},
-// 		bottom: {
-// 			mapsTo: 'date',
-// 			scaleType: ScaleTypes.TIME
-// 		}
-// 	},
-// 	locale: {
-// 		code: 'hi-IN'
-// 	}
-// }
+const simpleBarHindiLocaleOptions: BarChartOptions = {
+	title: 'Hindi locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'hi-IN'
+	}
+}
 
 // using locale interface to reformat everything to Bangla
-// const simpleBarBanglaLocaleOptions: BarChartOptions = {
-// 	title: 'Bangla locale',
-// 	axes: {
-// 		left: {
-// 			mapsTo: 'value'
-// 		},
-// 		bottom: {
-// 			mapsTo: 'date',
-// 			scaleType: ScaleTypes.TIME
-// 		}
-// 	},
-// 	locale: {
-// 		code: 'bn-BD'
-// 	}
-// }
+const simpleBarBanglaLocaleOptions: BarChartOptions = {
+	title: 'Bangla locale',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	locale: {
+		code: 'bn-BD'
+	}
+}
 
 // Horizontal simple time series
 const simpleHorizontalBarTimeSeriesOptions: BarChartOptions = {
@@ -615,14 +615,14 @@ export const examples: Example[] = [
 		data: simpleHorizontalBarTimeSeriesData,
 		test: true
 	},
-	// {
-	//   options: simpleHorizontalBarEmptyStateOptions,
-	//   data: noData
-	// },
-	// {
-	//   options: simpleHorizontalBarSkeletonOptions,
-	//   data: noData
-	// },
+	{
+		options: simpleHorizontalBarEmptyStateOptions,
+		data: noData
+	},
+	{
+		options: simpleHorizontalBarSkeletonOptions,
+		data: noData
+	},
 	{
 		options: floatingHorizontalBarTimeSeriesOptions,
 		data: floatingHorizontalBarTimeSeriesData,
@@ -667,31 +667,31 @@ export const examples: Example[] = [
 		data: simpleBarData,
 		test: true
 	},
-	// {
-	//   options: simpleBarTurkishLocaleOptions,
-	//   data: simpleBarLocaleData
-	// },
-	// {
-	//   options: simpleBarArabicLocaleOptions,
-	//   data: simpleBarLocaleData
-	// },
-	// {
-	//   options: simpleBarIranianLocaleOptions,
-	//   data: simpleBarLocaleData
-	// },
+	{
+		options: simpleBarTurkishLocaleOptions,
+		data: simpleBarLocaleData
+	},
+	{
+		options: simpleBarArabicLocaleOptions,
+		data: simpleBarLocaleData
+	},
+	{
+		options: simpleBarIranianLocaleOptions,
+		data: simpleBarLocaleData
+	},
 	{
 		options: simpleBarJapaneseLocaleOptions,
 		data: simpleBarLocaleData,
 		test: true
 	},
-	// {
-	//   options: simpleBarHindiLocaleOptions,
-	//   data: simpleBarLocaleData
-	// },
-	// {
-	//   options: simpleBarBanglaLocaleOptions,
-	//   data: simpleBarLocaleData
-	// },
+	{
+		options: simpleBarHindiLocaleOptions,
+		data: simpleBarLocaleData
+	},
+	{
+		options: simpleBarBanglaLocaleOptions,
+		data: simpleBarLocaleData
+	},
 	{
 		options: simpleHorizontalBarLongLabelOptions,
 		data: simpleHorizontalBarLongLabelData,
