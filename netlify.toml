@@ -8,6 +8,9 @@
 [context.deploy-preview.environment]
 	NODE_ENV = "production"
 
+[functions]
+  directory = packages/docs/netlify/functions"
+
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/ssr"
