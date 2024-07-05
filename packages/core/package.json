@@ -80,7 +80,7 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"date-fns": "^3.6.0",
-		"dompurify": "^3.1.5",
+		"dompurify": "^3.1.6",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
 		"topojson-client": "^3.1.0",
@@ -88,7 +88,7 @@
 	},
 	"devDependencies": {
 		"@carbon/layout": "^11.23.1",
-		"@carbon/styles": "^1.60.1",
+		"@carbon/styles": "^1.61.0",
 		"@carbon/themes": "^11.37.1",
 		"@playwright/test": "^1.45.1",
 		"@rollup/plugin-replace": "^5.0.7",

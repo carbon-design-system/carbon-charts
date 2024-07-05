@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.44.1",
+		"@carbon/icons-react": "^11.45.0",
 		"@ibm/telemetry-js": "^1.6.0"
 	},
 	"peerDependencies": {
