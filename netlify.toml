@@ -9,7 +9,7 @@
 	NODE_ENV = "production"
 
 [functions]
-  directory = packages/docs/netlify/functions"
+  directory = "packages/docs/netlify/functions"
 
 [[redirects]]
   from = "/*"
