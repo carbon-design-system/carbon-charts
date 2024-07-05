@@ -1,5 +1,5 @@
 [build]
-  publish = "pages/"
+  publish = "pages"
   command = "./scripts/netlify.sh"
 
 [context.production.environment]
@@ -10,6 +10,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/ssr"
   status = 200
-  force = true

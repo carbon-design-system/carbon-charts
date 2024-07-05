@@ -9,8 +9,8 @@
 	],
 	"scripts": {
 		"build:api:docs": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
-		"build:docs": "vite build --emptyOutDir --outDir ../../pages",
-		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
+		"build:docs": "vite build",
+		"build:netlify-dp": "vite build --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
 		"files:pages": "touch ../../pages/.nojekyll && echo 'charts.carbondesignsystem.com' > ../../pages/CNAME",
 		"build": "yarn build:docs && yarn files:pages && yarn build:api:docs",
 		"dev": "vite --port 3000",

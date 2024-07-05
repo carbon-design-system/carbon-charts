@@ -9,6 +9,7 @@ set -e
 # After that, the test page for the appropriate package is built.
 
 GREEN="\033[0;32m"
+
 if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 	  echo -e "Deploying docs site"
 
@@ -23,6 +24,10 @@ if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 		# Build docs package
 		echo -e "${GREEN}Building @carbon/charts-docs and styles..."
 		npx lerna run build --scope=@carbon/charts-docs --concurrency=1
+
+		# Build Netlify functions for SSR
+    echo -e "${GREEN}Building Netlify functions for SSR..."
+    npx netlify-lambda build packages/docs/netlify/functions
 else
 	if [ $CONTEXT == "deploy-preview" ]; then
 		# Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
