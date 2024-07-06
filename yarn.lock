@@ -1925,6 +1925,7 @@ __metadata:
     "@vitejs/plugin-react-swc": "npm:^3.7.0"
     eslint: "npm:^9.6.0"
     highlight.js: "npm:^11.9.0"
+    jsdom: "npm:^24.1.0"
     prettier: "npm:^3.3.2"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"

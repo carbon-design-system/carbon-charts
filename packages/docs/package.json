@@ -34,6 +34,7 @@
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.6.0",
+		"jsdom": "^24.1.0",
 		"prettier": "^3.3.2",
 		"sass": "^1.77.6",
 		"typedoc": "^0.26.3",
