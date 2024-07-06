@@ -10,6 +10,7 @@
 
 [functions]
   directory = "packages/docs/netlify/functions"
+  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/*"
