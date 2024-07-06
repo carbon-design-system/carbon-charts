@@ -1,4 +1,10 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status.
 set -e
+
+# Print commands and their arguments as they are executed.
+# set -x
 
 # Generates the preview for @carbon/charts (core), @carbon/charts-react and @carbon/charts-angular
 #
@@ -24,10 +30,6 @@ if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 		# Build docs package
 		echo -e "${GREEN}Building @carbon/charts-docs and styles..."
 		npx lerna run build --scope=@carbon/charts-docs --concurrency=1
-
-		# Build Netlify functions for SSR
-    echo -e "${GREEN}Building Netlify functions for SSR..."
-    npx netlify-lambda build packages/docs/netlify/functions
 else
 	if [ $CONTEXT == "deploy-preview" ]; then
 		# Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
