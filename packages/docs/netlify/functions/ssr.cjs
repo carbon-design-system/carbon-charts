@@ -1,12 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { render } from '../../../../pages/server/entry-server'
+const fs = require('fs')
+const path = require('path')
+const { render } = require('../../../../pages/server/entry-server')
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-export async function handler(event) {
+exports.handler = async function (event) {
 	const url = event.path
 
 	const appHtml = render(url)
