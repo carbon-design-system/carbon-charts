@@ -22,6 +22,7 @@
 		"src/**/*.tsx",
 		"src/**/*.d.ts",
 		"src/**/*.json",
+		"netlify/functions/*.ts",
 		"vite.config.ts" // ok to include as vite generates output - not tsc
 	],
 	"exclude": ["node_modules", "dist"]
