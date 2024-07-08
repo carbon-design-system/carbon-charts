@@ -267,48 +267,52 @@ export const examplesStacked: Example[] = [
 	{
 		options: stackedBarOptions,
 		data: stackedBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedBarNegativeOptions,
 		data: stackedBarNegativeData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedBarTimeSeriesOptions,
 		data: stackedBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedBarShortIntervalTimeSeriesOptions,
 		data: stackedBarShortIntervalTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedBarEmptyStateOptions,
-		data: stackedBarEmptyStateData
+		data: stackedBarEmptyStateData,
+		tags: ['empty']
 	},
 	{
 		options: stackedBarSkeletonOptions,
-		data: stackedBarSkeletonData
+		data: stackedBarSkeletonData,
+		tags: ['skeleton']
 	},
 	{
 		options: stackedHorizontalBarOptions,
 		data: stackedHorizontalBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedHorizontalBarTimeSeriesOptions,
 		data: stackedHorizontalBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: stackedHorizontalBarEmptyStateOptions,
-		data: stackedHorizontalBarEmptyStateData
+		data: stackedHorizontalBarEmptyStateData,
+		tags: ['empty']
 	},
 	{
 		options: stackedHorizontalBarSkeletonOptions,
-		data: stackedHorizontalBarSkeletonData
+		data: stackedHorizontalBarSkeletonData,
+		tags: ['skeleton']
 	},
 	{
 		data: stackedBarTimeSeriesDataCustomTicks,

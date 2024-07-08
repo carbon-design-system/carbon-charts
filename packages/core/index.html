@@ -37,7 +37,7 @@
 				chartHolder.appendChild(header)
 
 				for (const example of chart.examples) {
-					if (example.test) {
+					if (example.tags && example.tags.includes('test')) {
 						const chartContainer = document.createElement('div')
 						chartContainer.className = 'chart-container'
 						chartHolder.appendChild(chartContainer)

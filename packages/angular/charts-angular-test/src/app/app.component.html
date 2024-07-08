@@ -4,7 +4,7 @@
 <div *ngFor="let chart of charts" class="container">
 	<h3>{{ chart.types.angular }}</h3>
 	<div *ngFor="let example of chart.examples" class="example">
-		<ng-container *ngIf="example.test">
+		<ng-container *ngIf="example.tags?.includes('test')">
 			<ng-container
 				*ngComponentOutlet="
 					selectorMap[chart.types.angular];

@@ -265,31 +265,31 @@ export const examples: Example[] = [
 	{
 		options: circlePackTwoLevelCustomColorsOptions,
 		data: circlePackTwoLevelData,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: circlePackSingleLevelData,
 		options: circlePackSingleOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: circlePackTwoLevelData,
 		options: circlePackTwoLevelOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: circlePackThreeLevelData,
 		options: circlePackThreeLevelOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: circlePackThreeLevelsMonochromeData,
 		options: circlePackThreeLevelsMonochromeOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: circlePackThreeLevelData,
 		options: circlePackThreeLevelNoZoomOptions,
-		test: true
+		tags: ['test']
 	}
 ]

@@ -168,22 +168,22 @@ export const examples: Example[] = [
 	{
 		options: doubleLinearScatterOptions,
 		data: doubleLinearScatterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: scatterTimeSeriesOptions,
 		data: lineTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: scatterDiscreteOptions,
 		data: scatterDiscreteData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: scatterDualAxesOptions,
 		data: scatterDualAxesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: scatterEmptyStateOptions,

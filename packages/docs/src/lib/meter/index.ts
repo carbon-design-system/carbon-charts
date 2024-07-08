@@ -135,31 +135,31 @@ export const examples: Example[] = [
 	{
 		options: meterOptionsWithStatus,
 		data: meterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: meterOptionsCustomColor,
 		data: meterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: meterOptionsNoStatus,
 		data: meterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: propMeterOptions,
 		data: propMeterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: propMeterStatusOptions,
 		data: propMeterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: propMeterTruncationOptions,
 		data: propMeterData,
-		test: true
+		tags: ['test']
 	}
 ]

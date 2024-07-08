@@ -56,16 +56,16 @@ export const examples: Example[] = [
 	{
 		options: gaugeOptionsSemi,
 		data: gaugeData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: gaugeOptionsCircular,
 		data: gaugeData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: gaugeOptionsCircularNoDelta,
 		data: gaugeDataNoDelta,
-		test: true
+		tags: ['test']
 	}
 ]

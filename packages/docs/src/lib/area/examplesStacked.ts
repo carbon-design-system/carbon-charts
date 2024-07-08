@@ -98,16 +98,16 @@ export const examplesStacked: Example[] = [
 	{
 		data,
 		options,
-		test: true
+		tags: ['test']
 	},
 	{
 		data,
 		options: optionsPercentage,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataUneven,
 		options: optionsUneven,
-		test: true
+		tags: ['test']
 	}
 ]

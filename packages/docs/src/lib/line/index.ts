@@ -497,62 +497,62 @@ export const examples: Example[] = [
 	{
 		options: lineCustomDomainOptions,
 		data: lineData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineTimeSeriesRotatedTicksOptions,
 		data: lineTimeSeriesDataRotatedTicks,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineLogAxisOptions,
 		data: lineLogAxisData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineCustomColorOptions,
 		data: lineData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineSelectedGroupsOptions,
 		data: lineSelectedGroupsData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineOptionsLegendOrientation,
 		data: lineData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineTimeSeriesWithThresholdsOptions,
 		data: lineTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineLongLabelOptions,
 		data: lineLongLabelData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineOptions,
 		data: lineData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineTimeSeriesOptions,
 		data: lineTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineTimeSeriesDenseOptions,
 		data: lineTimeSeriesDenseData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: dualLine,
 		data: lineTimeSeriesDualAxesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lineEmptyStateOptions,

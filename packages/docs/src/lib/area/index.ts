@@ -313,22 +313,22 @@ export const examples: Example[] = [
 	{
 		data,
 		options,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: sparkLineData,
 		options: optionsSpark,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataDiscrete,
 		options: optionsDiscrete,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataCurved,
 		options: optionsCurved,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataBounded,
@@ -337,16 +337,17 @@ export const examples: Example[] = [
 	{
 		data: dataBounded,
 		options: optionsMultipleBounded,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataBounded,
 		options: optionsZoomBar,
-		test: true
+		tags: ['test', 'zoombar']
 	},
 	{
 		data: dataBounded,
-		options: optionsSkeleton
+		options: optionsSkeleton,
+		tags: ['test', 'skeleton']
 	},
-	{ data: [], options: optionsEmpty }
+	{ data: [], tags: ['empty'], options: optionsEmpty }
 ]

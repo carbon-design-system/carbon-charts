@@ -72,6 +72,6 @@ export const examples: Example[] = [
 	{
 		options,
 		data,
-		test: true
+		tags: ['test']
 	}
 ]

@@ -262,17 +262,17 @@ export const examplesGrouped: Example[] = [
 	{
 		options: groupedBarSelectedGroupsOptions,
 		data: groupedBarSelectedGroupsData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: groupedBarOptions,
 		data: groupedBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: groupedBarTimeSeriesOptions,
 		data: groupedBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: groupedBarTimeSeriesDenseOptions,
@@ -280,28 +280,32 @@ export const examplesGrouped: Example[] = [
 	},
 	{
 		options: groupedBarEmptyStateOptions,
-		data: noData
+		data: noData,
+		tags: ['empty']
 	},
 	{
 		options: groupedBarSkeletonOptions,
-		data: noData
+		data: noData,
+		tags: ['skeleton']
 	},
 	{
 		options: groupedHorizontalBarOptions,
 		data: groupedHorizontalBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: groupedBarHorizontalTimeSeriesOptions,
 		data: groupedBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: groupedHorizontalBarEmptyStateOptions,
-		data: noData
+		data: noData,
+		tags: ['empty']
 	},
 	{
 		options: groupedHorizontalBarSkeletonOptions,
-		data: noData
+		data: noData,
+		tags: ['skeleton']
 	}
 ]

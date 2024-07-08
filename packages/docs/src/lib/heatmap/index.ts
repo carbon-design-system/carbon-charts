@@ -1285,26 +1285,26 @@ export const examples: Example[] = [
 	{
 		options: heatmapOptions,
 		data: heatmapData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: heatmapQuantizeLegendOption,
 		data: heatmapData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: heatmapPositiveNegativeOptions,
 		data: heatmapPositiveNegativeData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: heatmapMissingDataOptions,
 		data: heatmapMissingData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: heatmapDomainOptions,
 		data: heatmapData,
-		test: true
+		tags: ['test']
 	}
 ]
