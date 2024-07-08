@@ -26,13 +26,15 @@
 		"highlight.js": "^11.10.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-router-dom": "^6.24.1"
+		"react-router-dom": "^6.24.1",
+		"styled-components": "^6.1.11"
 	},
 	"devDependencies": {
 		"@netlify/functions": "^2.8.1",
 		"@types/jsdom": "^21.1.7",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
+		"@types/styled-components": "^5.1.34",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.6.0",

@@ -8,6 +8,10 @@
 
 @import 'highlight.js/scss/stackoverflow-dark.scss';
 
+.hljs {
+	background-color: unset !important;
+}
+
 h2 {
 	margin-top: 3rem;
 	margin-bottom: 1rem;
@@ -81,6 +85,18 @@ p {
 	padding-bottom: 0;
 }
 
+.cds--snippet-btn--expand {
+	background-color: darkgray;
+}
+
+.cds--chart-holder {
+	min-height: 200px;
+}
+
+.cds--header__name {
+	width: 16rem;
+}
+
 @media (min-width: 65.98rem) {
 	.cds--content {
 		margin-inline-start: 16rem !important;
@@ -106,20 +122,4 @@ p {
 	.chart-holder {
 		padding: 30px;
 	}
-}
-
-.hljs {
-	background-color: unset !important;
-}
-
-.cds--snippet-btn--expand {
-	background-color: darkgray;
-}
-
-.cds--chart-holder {
-	min-height: 200px;
-}
-
-.cds--header__name {
-	width: 16rem;
 }

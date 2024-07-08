@@ -24,8 +24,22 @@ import {
 } from '@carbon/charts-react'
 import { User } from '@carbon/icons-react'
 import PageHeader from '../components/PageHeader'
+import styled from 'styled-components'
+
 import '@carbon/charts-react/styles.css'
-import './Diagram.scss'
+
+const ExampleDiv = styled.div`
+	margin-top: 0.25rem;
+	width: 500px;
+`
+
+const StyledIframe = styled.iframe`
+	width: 100%;
+	height: 47rem;
+	margin-top: 1em;
+	border: 0;
+	border-radius: 0.25rem;
+`
 
 export default function Diagram() {
 	return (
@@ -62,7 +76,7 @@ export default function Diagram() {
 							Properties: tag ('div' | 'a' | 'button'), href (only for tag = 'a'), stacked, color
 							and position. This example uses CardNode and its child components: CardNodeColumn,
 							CardNodeTitle, CardNodeSubtitle and CardNodeLabel.
-							<div className="example">
+							<ExampleDiv>
 								<CardNode onClick={() => console.log('CardNode was clicked')}>
 									<CardNodeColumn>
 										<User size={20} />
@@ -73,7 +87,7 @@ export default function Diagram() {
 										<CardNodeLabel>Label</CardNodeLabel>
 									</CardNodeColumn>
 								</CardNode>
-							</div>
+							</ExampleDiv>
 						</StructuredListCell>
 					</StructuredListRow>
 					<StructuredListRow>
@@ -131,7 +145,7 @@ export default function Diagram() {
 							</a>{' '}
 							for more details about the properties. Examples of Markers used with variants of the
 							Edge component:
-							<div className="example">
+							<ExampleDiv>
 								<svg height={30} width={200}>
 									<defs>
 										<ArrowLeftMarker id="marker" height={8} width={7.5} />
@@ -230,7 +244,7 @@ export default function Diagram() {
 										variant={'tunnel'}
 									/>
 								</svg>
-							</div>
+							</ExampleDiv>
 						</StructuredListCell>
 					</StructuredListRow>
 					<StructuredListRow>
@@ -291,15 +305,7 @@ export default function Diagram() {
 
 			<h3>Putting it all together</h3>
 
-			<iframe
-				src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-				style={{
-					width: '100%',
-					height: '47rem',
-					marginTop: '1em',
-					border: 0,
-					borderRadius: '.25rem'
-				}}></iframe>
+			<StyledIframe src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"></StyledIframe>
 		</>
 	)
 }

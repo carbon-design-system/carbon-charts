@@ -4,7 +4,18 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
-import './Axes.scss'
+import styled from 'styled-components'
+
+// const ExampleImage = styled.img`
+// 	width: 100%;
+// `
+
+const LogImage = styled.img`
+	margin-top: 1rem;
+	width: 50%;
+`
+
+// import './Axes.scss'
 
 export default function Axes() {
 	const highlightCode = () => {
@@ -95,11 +106,7 @@ const options = {
   height: '400px'
 }`}</CodeSnippet>
 			<p>
-				<img
-					className="log"
-					src="/images/axis-logarithmic.png"
-					alt="Example of a logarithmic axis"
-				/>
+				<LogImage src="/images/axis-logarithmic.png" alt="Example of a logarithmic axis" />
 			</p>
 			Please see the{' '}
 			<Link to="https://carbondesignsystem.com/data-visualization/axes-and-labels/" target="_blank">

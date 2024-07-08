@@ -10,5 +10,8 @@ export default defineConfig({
 		rollupOptions: {
 			input: 'src/main.tsx'
 		}
+	},
+	ssr: {
+		noExternal: ['react', 'react-dom', 'react-router-dom']
 	}
 })

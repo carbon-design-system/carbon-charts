@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import GraphTile from '../components/GraphTile'
+import styled from 'styled-components'
 
-import './Introduction.scss'
+const GraphTilesContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`
 
 export default function Introduction() {
 	return (
@@ -26,7 +30,7 @@ export default function Introduction() {
 
 			<h2>Comparisons</h2>
 
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile title="Bar (vertical)" route="/bar#vertical" svg="bar" />
 				<GraphTile title="Bar (grouped)" route="/bar#grouped" svg="bargrouped" />
 				<GraphTile title="Bar (horizontal floating)" route="/bar#horizontal" svg="barfloating" />
@@ -34,18 +38,18 @@ export default function Introduction() {
 				<GraphTile route="/bubble" title="Bubble" svg="bubble" />
 				<GraphTile route="/radar" title="Radar" svg="radar" />
 				<GraphTile route="/wordcloud" title="Word cloud" svg="wordcloud" />
-			</div>
+			</GraphTilesContainer>
 
 			<h2>Trends</h2>
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile route="/area" title="Area" svg="area" />
 				<GraphTile route="/boxplot" title="Boxplot" svg="boxplot" />
 				<GraphTile route="/histogram" title="Histogram" svg="histogram" />
 				<GraphTile route="/line" title="line" svg="line" />
-			</div>
+			</GraphTilesContainer>
 
 			<h2>Part-to-whole</h2>
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile route="/area#stacked" title="Area (stacked)" svg="areastack" />
 				<GraphTile route="/bar#stacked" title="Bar (stacked)" svg="barstack" />
 				<GraphTile route="/bullet" title="Bullet" svg="bullet" />
@@ -55,25 +59,25 @@ export default function Introduction() {
 				<GraphTile route="/meter" title="Meter" svg="meter" />
 				<GraphTile route="/pie" title="Pie" svg="pie" />
 				<GraphTile route="/treemap" title="Treemap" svg="treemap" />
-			</div>
+			</GraphTilesContainer>
 
 			<h2>Correlations</h2>
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile route="/heatmap" title="Heatmap" svg="heatmap" />
 				<GraphTile route="/scatter" title="Scatter" svg="scatter" />
-			</div>
+			</GraphTilesContainer>
 
 			<h2>Connections</h2>
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile route="/alluvial" title="Alluvial" svg="alluvial" />
 				<GraphTile route="/diagram" title="Diagrams" svg="diagram" />
 				<GraphTile route="/tree" title="Tree" svg="tree" />
-			</div>
+			</GraphTilesContainer>
 
 			<h2>Geospatial</h2>
-			<div className="graph-tiles">
+			<GraphTilesContainer>
 				<GraphTile route="/choropleth" title="Choropleth" svg="choropleth" />
-			</div>
+			</GraphTilesContainer>
 		</>
 	)
 }
