@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
-import App from './main' // Ensure this path points to your main.tsx
+import App from './main'
 
 const { window } = new JSDOM(`<!DOCTYPE html><html><body></body></html>`)
 global.window = window
