@@ -2,7 +2,7 @@ import { Context } from '@netlify/functions'
 import * as fs from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
-import { render } from '../../src/entry-server'
+import { render } from '../../../../pages/server/entry-server'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
