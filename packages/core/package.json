@@ -80,7 +80,7 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"date-fns": "^3.6.0",
-		"dompurify": "^3.1.5",
+		"dompurify": "^3.1.6",
 		"html-to-image": "^1.11.11",
 		"lodash-es": "^4.17.21",
 		"topojson-client": "^3.1.0",
@@ -88,7 +88,7 @@
 	},
 	"devDependencies": {
 		"@carbon/layout": "^11.23.1",
-		"@carbon/styles": "^1.60.1",
+		"@carbon/styles": "^1.61.0",
 		"@carbon/themes": "^11.37.1",
 		"@playwright/test": "^1.45.1",
 		"@rollup/plugin-replace": "^5.0.7",
@@ -97,7 +97,7 @@
 		"@types/d3-sankey": "^0.12.4",
 		"@types/dompurify": "^3.0.5",
 		"@types/lodash-es": "^4.17.12",
-		"@types/node": "^20.14.9",
+		"@types/node": "^20.14.10",
 		"@types/topojson": "^3.2.6",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
@@ -110,7 +110,7 @@
 		"typescript": "^5.5.3",
 		"vite": "^5.3.3",
 		"vite-plugin-dts": "^3.9.1",
-		"vitest": "^1.6.0"
+		"vitest": "^2.0.1"
 	},
 	"publishConfig": {
 		"access": "public"
