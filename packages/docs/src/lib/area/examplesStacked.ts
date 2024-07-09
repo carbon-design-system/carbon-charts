@@ -35,7 +35,7 @@ const optionsPercentage: StackedAreaChartOptions = {
 			stacked: true,
 			percentage: true,
 			ticks: {
-				formatter: (d: number) => `${d}%`
+				formatter: (tick: number | Date) => `${tick as number}%`
 			}
 		},
 		bottom: {
