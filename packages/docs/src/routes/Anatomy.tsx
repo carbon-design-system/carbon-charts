@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 // import { Grid, Column, OrderedList, ListItem } from '@carbon/react'
-// import './Anatomy.scss'
+// import styled from 'styled-components'
+
+// const DiagramImage = styled.img`
+// 	width: 100%;
+// `
 
 export default function Anatomy() {
 	return (
@@ -25,7 +29,7 @@ export default function Anatomy() {
 
 			<Grid>
 				<Column lg={8}>
-					<img className="diagram"
+					<DiagramImage
 						src="/images/chart-anatomy-rectangular.png"
 						alt="Anatomy of a rectangular chart" />
 				</Column>

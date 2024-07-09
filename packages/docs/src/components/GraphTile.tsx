@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './GraphTile.scss'
+import styled from 'styled-components'
 
 interface Props {
 	title: string
@@ -8,16 +8,42 @@ interface Props {
 	svg: string
 }
 
+const GraphTileContainer = styled.div`
+	margin-right: 1px;
+	margin-bottom: 1px;
+`
+
+const GraphTileLink = styled(Link)`
+	display: block;
+	text-decoration: none;
+`
+
+const GraphTileContent = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+`
+
+const GraphTileTitle = styled.span`
+	font-size: 0.75rem;
+	color: black;
+`
+
+const GraphTileSvg = styled.img`
+	height: 15rem;
+	width: 15rem;
+`
+
 const GraphTile: React.FC<Props> = ({ title, route, svg }) => {
 	return (
-		<div className="graph-tile">
-			<Link to={route} className="cds--tile cds--tile--clickable">
-				<div className="graph-tile-content">
-					<span className="graph-tile-title">{title}</span>
-					<img className="graph-tile-svg" src={`/images/${svg}.svg`} />
-				</div>
-			</Link>
-		</div>
+		<GraphTileContainer>
+			<GraphTileLink to={route} className="cds--tile cds--tile--clickable">
+				<GraphTileContent>
+					<GraphTileTitle>{title}</GraphTileTitle>
+					<GraphTileSvg src={`/images/${svg}.svg`} />
+				</GraphTileContent>
+			</GraphTileLink>
+		</GraphTileContainer>
 	)
 }
 

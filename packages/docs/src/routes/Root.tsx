@@ -15,6 +15,11 @@ import { LogoGithub } from '@carbon/react/icons'
 import DocsSideNav from '../components/DocsSideNav'
 import { fetchVersion } from '../lib/fetchVersion'
 
+interface HeaderContainerRenderProps {
+	isSideNavExpanded: boolean
+	onClickSideNavExpand: () => void
+}
+
 export default function Root() {
 	const [version, setVersion] = useState('...')
 
@@ -30,7 +35,7 @@ export default function Root() {
 	return (
 		<>
 			<HeaderContainer
-				render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+				render={({ isSideNavExpanded, onClickSideNavExpand }: HeaderContainerRenderProps) => (
 					<>
 						<Header aria-label="Carbon Charts" className="cds--g100">
 							<SkipToContent />
@@ -40,7 +45,7 @@ export default function Root() {
 								isActive={isSideNavExpanded}
 								aria-expanded={isSideNavExpanded}
 							/>
-							<HeaderName as={Link} to="/" prefix="Carbon">
+							<HeaderName element={Link} to="/" prefix="Carbon">
 								Charts {version}
 							</HeaderName>
 							<HeaderGlobalBar>

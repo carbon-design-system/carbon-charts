@@ -3,7 +3,12 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
-import './Api.scss'
+import styled from 'styled-components'
+
+const ApiContainer = styled.iframe`
+	width: 100%;
+	height: 1000px;
+`
 
 export default function Api() {
 	const highlightCode = () => {
@@ -71,7 +76,7 @@ console.log(myChart)
 
 			<h2>Full Documentation</h2>
 
-			<iframe title="API Documentation" className="api" src="/api"></iframe>
+			<ApiContainer title="API Documentation" src="/api" />
 		</>
 	)
 }

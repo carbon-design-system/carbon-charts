@@ -3,7 +3,16 @@ import { Button } from '@carbon/react/es'
 import LaunchIcon from '@carbon/icons-react/es/Launch'
 import { getProject } from '../lib/stackblitz'
 import type { ChartTypes, Example, Framework } from '../lib/types'
-import './StackBlitzLauncher.scss'
+import styled from 'styled-components'
+
+const LaunchButtons = styled.div`
+	background-color: black;
+	button {
+		background-color: black;
+	}
+	margin-left: 2px;
+	margin-right: 2px;
+`
 
 export default function StackBlitzLauncher({
 	example,
@@ -19,7 +28,7 @@ export default function StackBlitzLauncher({
 	}
 
 	return (
-		<div className="launch-buttons">
+		<LaunchButtons>
 			<Button
 				onClick={() => openStackBlitz('vanilla', chartTypes.vanilla)}
 				renderIcon={LaunchIcon}
@@ -60,6 +69,6 @@ export default function StackBlitzLauncher({
 				kind="secondary">
 				Angular
 			</Button>
-		</div>
+		</LaunchButtons>
 	)
 }
