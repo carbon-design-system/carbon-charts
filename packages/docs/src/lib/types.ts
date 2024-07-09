@@ -12,5 +12,5 @@ export interface ChartTypes {
 export interface Example {
 	data: ChartTabularData
 	options: ChartOptions
-	test?: boolean
+	tags?: string[]
 }

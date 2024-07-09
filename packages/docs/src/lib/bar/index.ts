@@ -586,12 +586,12 @@ export const examples: Example[] = [
 	{
 		options: simpleBarOptions,
 		data: simpleBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: simpleBarTimeSeriesOptions,
 		data: simpleBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: simpleBarTimeSeriesDenseOptions,
@@ -599,110 +599,122 @@ export const examples: Example[] = [
 	},
 	{
 		options: simpleBarSkeletonOptions,
-		data: noData
+		data: noData,
+		tags: ['skeleton']
 	},
 	{
 		options: simpleBarEmptyStateOptions,
-		data: noData
+		data: noData,
+		tags: ['empty']
 	},
 	{
 		options: simpleHorizontalBarOptions,
 		data: simpleHorizontalBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: simpleHorizontalBarTimeSeriesOptions,
 		data: simpleHorizontalBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: simpleHorizontalBarEmptyStateOptions,
-		data: noData
+		data: noData,
+		tags: ['empty']
 	},
 	{
 		options: simpleHorizontalBarSkeletonOptions,
-		data: noData
+		data: noData,
+		tags: ['skeleton']
 	},
 	{
 		options: floatingHorizontalBarTimeSeriesOptions,
 		data: floatingHorizontalBarTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: floatingBarOptions,
 		data: floatingBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: floatingHorizontalBarOptions,
 		data: floatingHorizontalBarData,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: simpleBarDataCustomTicks,
-		options: simpleBarOptionsCustomTicks
+		options: simpleBarOptionsCustomTicks,
+		tags: ['axes']
 	},
 	{
 		data: simpleBarData,
 		options: simpleBarFixedDomainOptions,
-		test: true
+		tags: ['test', 'axes']
 	},
 	{
 		data: simpleBarData,
 		options: simpleBarColorOverrideOptions,
-		test: true
+		tags: ['test', 'colors']
 	},
 	{
 		data: simpleBarCenteredLegendData,
 		options: simpleBarCenteredLegendOptions,
-		test: true
+		tags: ['test', 'legend']
 	},
 	{
 		data: simpleBarData,
 		options: simpleBarCustomLegendOrderOptions,
-		test: true
+		tags: ['test', 'legend']
 	},
 	{
 		options: simpleBarAdditionalLegendItemsOptions,
 		data: simpleBarData,
-		test: true
+		tags: ['test', 'legend']
 	},
 	{
 		options: simpleBarTurkishLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		tags: ['locale']
 	},
 	{
 		options: simpleBarArabicLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		tags: ['locale']
 	},
 	{
 		options: simpleBarIranianLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		tags: ['locale']
 	},
 	{
 		options: simpleBarJapaneseLocaleOptions,
 		data: simpleBarLocaleData,
-		test: true
+		tags: ['test', 'locale']
 	},
 	{
 		options: simpleBarHindiLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		tags: ['locale']
 	},
 	{
 		options: simpleBarBanglaLocaleOptions,
-		data: simpleBarLocaleData
+		data: simpleBarLocaleData,
+		tags: ['locale']
 	},
 	{
 		options: simpleHorizontalBarLongLabelOptions,
 		data: simpleHorizontalBarLongLabelData,
-		test: true
+		tags: ['test', 'truncation']
 	},
 	{
 		options: simpleHorizontalBarEmptyStateOptions,
-		data: noData
+		data: noData,
+		tags: ['empty']
 	},
 	{
 		options: simpleHorizontalBarSkeletonOptions,
-		data: noData
+		data: noData,
+		tags: ['skeleton']
 	}
 ]

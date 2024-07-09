@@ -34,7 +34,7 @@ import { chartTypes as treeTypes, examples as treeExamples } from './lib/tree'
 import { chartTypes as treemapTypes, examples as treemapExamples } from './lib/treemap'
 import { chartTypes as wordcloudTypes, examples as wordcloudExamples } from './lib/wordcloud'
 
-export default [
+const charts = [
 	{
 		types: alluvialTypes,
 		examples: alluvialExamples
@@ -136,3 +136,14 @@ export default [
 		examples: wordcloudExamples
 	}
 ]
+
+export default charts
+
+export function filterByTag(tag: string) {
+	return charts
+		.map(chart => ({
+			...chart,
+			examples: chart.examples.filter(example => example.tags && example.tags.includes(tag))
+		}))
+		.filter(chart => chart.examples.length > 0)
+}

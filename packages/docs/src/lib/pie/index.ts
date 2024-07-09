@@ -77,17 +77,17 @@ export const examples: Example[] = [
 	{
 		options: pieOptions,
 		data: pieData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: pieCenteredOptions,
 		data: pieData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: pieMapToOptions,
 		data: pieDataMapsTo,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: pieEmptyStateOptions,

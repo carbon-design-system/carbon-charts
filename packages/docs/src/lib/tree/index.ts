@@ -225,11 +225,11 @@ export const examples: Example[] = [
 	{
 		data: treeData,
 		options: dendogramOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: treeData,
 		options: treeOptions,
-		test: true
+		tags: ['test']
 	}
 ]

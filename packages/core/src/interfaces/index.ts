@@ -8,9 +8,10 @@ export type {
 	ComboChartAxisOptions,
 	TickFormats,
 	TimeIntervalFormats,
-	TimeIntervalNames,
 	TimeScaleOptions
 } from './axis-scales'
+
+export { TimeIntervalNames } from './axis-scales'
 
 export type {
 	AlluvialChartOptions,

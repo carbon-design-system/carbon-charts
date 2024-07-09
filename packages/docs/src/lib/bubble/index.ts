@@ -325,22 +325,22 @@ export const examples: Example[] = [
 	{
 		options: bubbleDoubleLinearOptions,
 		data: bubbleDoubleLinearData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: bubbleTimeSeriesOptions,
 		data: bubbleTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: bubbleDiscreteOptions,
 		data: bubbleDiscreteData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: bubbleDualDiscreteOptions,
 		data: bubbleDualDiscreteData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: bubbleEmptyStateOptions,

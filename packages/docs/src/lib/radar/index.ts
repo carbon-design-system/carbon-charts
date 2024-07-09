@@ -139,21 +139,21 @@ export const examples: Example[] = [
 	{
 		data: radarData,
 		options: radarOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: radarData,
 		options: radarCenteredOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: radarWithMissingDataData,
 		options: radarWithMissingDataOptions,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: radarDenseData,
 		options: radarDenseOptions,
-		test: true
+		tags: ['test']
 	}
 ]

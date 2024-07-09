@@ -11,7 +11,7 @@
 	{#each charts as chart}
 		<h3>{chart.types.svelte}</h3>
 		{#each chart.examples as example}
-			{#if example.test}
+			{#if example.tags?.includes('test')}
 				<div class="example">
 					<svelte:component
 						this={chartComponents[chart.types.svelte]}

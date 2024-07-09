@@ -55,11 +55,11 @@ export const examples: Example[] = [
 	{
 		options: lollipopDiscreteOptions,
 		data: lollipopDiscreteData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: lollipopDiscretePresentationOptions,
 		data: lollipopDiscreteData,
-		test: true
+		tags: ['test']
 	}
 ]

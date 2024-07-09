@@ -16,7 +16,7 @@ import '@carbon/charts/scss'
 					:is="ChartComponents[chart.types.vue as keyof typeof ChartComponents]"
 					:options="example.options"
 					:data="example.data"
-					v-if="example.test"></component>
+					v-if="example.tags?.includes('test')"></component>
 			</div>
 		</div>
 	</div>

@@ -38,7 +38,14 @@ import {
 	Tree,
 	Treemap,
 	WordCloud,
-	Diagram
+	Diagram,
+	Zoombar,
+	Truncation,
+	Toolbar,
+	Highlights,
+	Thresholds,
+	Locales,
+	Legends
 } from './routes'
 import './index.scss'
 
@@ -53,9 +60,16 @@ const App: React.FC = () => (
 				<Route path="anatomy" element={<Anatomy />} />
 				<Route path="data" element={<Data />} />
 				<Route path="options" element={<Options />} />
+				<Route path="highlights" element={<Highlights />} />
+				<Route path="locales" element={<Locales />} />
+				<Route path="thresholds" element={<Thresholds />} />
+				<Route path="toolbar" element={<Toolbar />} />
+				<Route path="truncation" element={<Truncation />} />
+				<Route path="zoombar" element={<Zoombar />} />
 				<Route path="api" element={<Api />} />
 				<Route path="themes" element={<Themes />} />
 				<Route path="axes" element={<Axes />} />
+				<Route path="legends" element={<Legends />} />
 				<Route path="palettes" element={<Palettes />} />
 				<Route path="dashboards" element={<Dashboards />} />
 				<Route path="alluvial" element={<Alluvial />} />
@@ -74,13 +88,14 @@ const App: React.FC = () => (
 				<Route path="line" element={<Line />} />
 				<Route path="lollipop" element={<Lollipop />} />
 				<Route path="meter" element={<Meter />} />
+				<Route path="diagram" element={<Diagram />} />
 				<Route path="pie" element={<Pie />} />
 				<Route path="radar" element={<Radar />} />
 				<Route path="scatter" element={<Scatter />} />
 				<Route path="tree" element={<Tree />} />
 				<Route path="treemap" element={<Treemap />} />
 				<Route path="wordcloud" element={<WordCloud />} />
-				<Route path="diagram" element={<Diagram />} />
+
 				<Route path="*" element={<ErrorPage />} />
 			</Route>
 		</Routes>
