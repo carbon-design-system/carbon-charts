@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.18.0 (2024-07-09)
+
+### Features
+
+- **docs:** add utility examples
+  ([#1867](https://github.com/carbon-design-system/carbon-charts/issues/1867))
+  ([026e12a](https://github.com/carbon-design-system/carbon-charts/commit/026e12a1dadd966a2e35feb122f586f7c525b4cb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.17.3 (2024-07-03)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
