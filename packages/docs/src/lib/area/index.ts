@@ -332,17 +332,18 @@ export const examples: Example[] = [
 	},
 	{
 		data: dataBounded,
-		options: optionsBounded
+		options: optionsBounded,
+		tags: ['bounded', 'time']
 	},
 	{
 		data: dataBounded,
 		options: optionsMultipleBounded,
-		tags: ['test']
+		tags: ['test', 'highlights', 'bounded']
 	},
 	{
 		data: dataBounded,
 		options: optionsZoomBar,
-		tags: ['test', 'zoombar']
+		tags: ['test', 'highlights', 'zoombar']
 	},
 	{
 		data: dataBounded,

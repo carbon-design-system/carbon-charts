@@ -265,7 +265,7 @@ export const examples: Example[] = [
 	{
 		options: circlePackTwoLevelCustomColorsOptions,
 		data: circlePackTwoLevelData,
-		tags: ['test']
+		tags: ['test', 'colors']
 	},
 	{
 		data: circlePackSingleLevelData,

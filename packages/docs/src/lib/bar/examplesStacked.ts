@@ -316,6 +316,7 @@ export const examplesStacked: Example[] = [
 	},
 	{
 		data: stackedBarTimeSeriesDataCustomTicks,
-		options: stackedBarTimeSeriesOptionsCustomTicks
+		options: stackedBarTimeSeriesOptionsCustomTicks,
+		tags: ['axes']
 	}
 ]

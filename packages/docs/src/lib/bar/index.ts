@@ -644,12 +644,13 @@ export const examples: Example[] = [
 	},
 	{
 		data: simpleBarDataCustomTicks,
-		options: simpleBarOptionsCustomTicks
+		options: simpleBarOptionsCustomTicks,
+		tags: ['axes']
 	},
 	{
 		data: simpleBarData,
 		options: simpleBarFixedDomainOptions,
-		tags: ['test']
+		tags: ['test', 'axes']
 	},
 	{
 		data: simpleBarData,
@@ -659,17 +660,17 @@ export const examples: Example[] = [
 	{
 		data: simpleBarCenteredLegendData,
 		options: simpleBarCenteredLegendOptions,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		data: simpleBarData,
 		options: simpleBarCustomLegendOrderOptions,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		options: simpleBarAdditionalLegendItemsOptions,
 		data: simpleBarData,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		options: simpleBarTurkishLocaleOptions,
@@ -704,7 +705,7 @@ export const examples: Example[] = [
 	{
 		options: simpleHorizontalBarLongLabelOptions,
 		data: simpleHorizontalBarLongLabelData,
-		tags: ['test']
+		tags: ['test', 'truncation']
 	},
 	{
 		options: simpleHorizontalBarEmptyStateOptions,

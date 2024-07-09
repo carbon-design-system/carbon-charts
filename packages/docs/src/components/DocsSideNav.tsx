@@ -34,6 +34,24 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/options">
 					Chart display options
 				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/highlights">
+					Highlights
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/locales">
+					Locales
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/thresholds">
+					Thresholds
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/toolbar">
+					Toolbar customization
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/truncation">
+					Truncation
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/zoombar">
+					Zoombar
+				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/api">
 					API
 				</SideNavMenuItem>
@@ -51,6 +69,9 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/dashboards">
 					Dashboards
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/legends">
+					Legends
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />

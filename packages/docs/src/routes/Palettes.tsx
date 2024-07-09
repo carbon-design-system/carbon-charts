@@ -4,6 +4,7 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
+import ConfigExamples from '../components/ConfigExamples'
 
 export default function Palettes() {
 	const highlightCode = () => {
@@ -103,6 +104,7 @@ const lineOptions = {
     } // chart only has 2 data groups
   }
 }`}</CodeSnippet>
+			<ConfigExamples tag="colors" />
 		</>
 	)
 }

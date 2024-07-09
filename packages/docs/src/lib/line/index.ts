@@ -4,7 +4,8 @@ import {
 	ScaleTypes,
 	LegendPositions,
 	LegendOrientations,
-	TickRotations
+	TickRotations,
+	TimeIntervalNames
 } from '@carbon/charts'
 import type { ChartTypes, Example } from '../types'
 
@@ -300,6 +301,910 @@ const lineOptionsLegendOrientation: LineChartOptions = {
 	height: '400px'
 }
 
+const lineTimeSeriesFrenchLocale: LineChartOptions = {
+	title: 'Line (time series) - Time interval monthly with French locale',
+	axes: {
+		left: {
+			ticks: {},
+			mapsTo: 'value'
+		},
+		bottom: {
+			scaleType: ScaleTypes.TIME,
+			ticks: {},
+			mapsTo: 'date'
+		}
+	},
+	tooltip: {},
+	legend: {
+		clickable: false
+	},
+	height: '400px',
+	locale: {
+		code: 'fr-FR'
+	}
+}
+
+const lineOptionsTimeSeries15secs: LineChartOptions = {
+	title: 'Line (time series) - 15 second interval',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesMinute: LineChartOptions = {
+	title: 'Line (time series) - Time interval minute',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeries30mins: LineChartOptions = {
+	title: 'Line (time series) - Time interval 30minutes',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesHourlyWithDefaultTicks: LineChartOptions = {
+	title:
+		"Line (time series) - Time interval hourly with default ticks formats ('MMM d, hh a' and 'hh a')",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesHourlyWithCustomTicks: LineChartOptions = {
+	title:
+		"Line (time series) - Time interval hourly with custom ticks formats ('MMM d, HH:mm' and 'HH:mm')",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		timeIntervalFormats: {
+			hourly: {
+				primary: 'MMM d, HH:mm',
+				secondary: 'HH:mm'
+			}
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesDaily: LineChartOptions = {
+	title: 'Line (time series) - Time interval daily',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesWeekly: LineChartOptions = {
+	title: 'Line (time series) - Time interval weekly',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		showDayName: true
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesMonthly: LineChartOptions = {
+	title: 'Line (time series) - Time interval monthly',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesQuarterly: LineChartOptions = {
+	title: 'Line (time series) - Time interval quarterly',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesOverride: LineChartOptions = {
+	title: 'Line (time series) - Time interval override',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		timeInterval: TimeIntervalNames.monthly
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesYearly: LineChartOptions = {
+	title: 'Line (time series) - Time interval yearly',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesSingleDatum: LineChartOptions = {
+	title: 'Line (time series) - Single datum',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesEdgeSpaceZero: LineChartOptions = {
+	title: 'Line (time series) - addSpaceOnEdges = 0',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesTwoIdenticalLabels: LineChartOptions = {
+	title: 'Line (time series) - Two identical labels',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineTimeSeriesZoomTwoIcons: LineChartOptions = {
+	title: 'Line (time series) - two icons',
+	axes: {
+		bottom: {
+			title: '2019 Annual Sales Figures',
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		},
+		left: {
+			mapsTo: 'value',
+			title: 'Conversion rate',
+			scaleType: ScaleTypes.LINEAR
+		}
+	},
+	curve: 'curveMonotoneX',
+	toolbar: {
+		enabled: true,
+		numberOfIcons: 2,
+		controls: [
+			{
+				type: 'Reset zoom'
+			},
+			{
+				type: 'Zoom in'
+			},
+			{
+				type: 'Zoom out'
+			}
+		]
+	},
+	zoomBar: {
+		top: {
+			enabled: true
+		}
+	},
+	height: '400px'
+}
+
+const lineTimeSeriesZoomTwoIconsData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2019-01-01T05:00:00.000Z',
+		value: 50000,
+		surplus: 776202545.2043447
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-05T05:00:00.000Z',
+		value: 65000,
+		surplus: 1185729357.0244992
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-08T05:00:00.000Z',
+		value: null,
+		surplus: 11613.75907479044
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-13T05:00:00.000Z',
+		value: 49213,
+		surplus: 847080513.346657
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-17T05:00:00.000Z',
+		value: 51213,
+		surplus: 1211892509.000086
+	},
+	{
+		group: 'Dataset 2',
+		date: '2019-01-02T05:00:00.000Z',
+		value: 0,
+		surplus: 6102.7727993504
+	},
+	{
+		group: 'Dataset 2',
+		date: '2019-01-06T05:00:00.000Z',
+		value: 57312,
+		surplus: 261556941.96214834
+	},
+	{
+		group: 'Dataset 2',
+		date: '2019-01-08T05:00:00.000Z',
+		value: 27432,
+		surplus: 14178837.917517675
+	},
+	{
+		group: 'Dataset 2',
+		date: '2019-01-15T05:00:00.000Z',
+		value: 70323,
+		surplus: 295263282.23943055
+	},
+	{
+		group: 'Dataset 2',
+		date: '2019-01-19T05:00:00.000Z',
+		value: 21300,
+		surplus: 133872100.36457807
+	},
+	{
+		group: 'Dataset 3',
+		date: '2019-01-01T05:00:00.000Z',
+		value: 40000,
+		surplus: 302619995.3236921
+	},
+	{
+		group: 'Dataset 3',
+		date: '2019-01-05T05:00:00.000Z',
+		value: null,
+		surplus: 19518.355960758956
+	},
+	{
+		group: 'Dataset 3',
+		date: '2019-01-08T05:00:00.000Z',
+		value: 18000,
+		surplus: 431282259.09100664
+	},
+	{
+		group: 'Dataset 3',
+		date: '2019-01-13T05:00:00.000Z',
+		value: 39213,
+		surplus: 788505803.1662132
+	},
+	{
+		group: 'Dataset 3',
+		date: '2019-01-17T05:00:00.000Z',
+		value: 61213,
+		surplus: 1273123736.0033627
+	},
+	{
+		group: 'Dataset 4',
+		date: '2019-01-02T05:00:00.000Z',
+		value: 20000,
+		surplus: 466576638.7877422
+	},
+	{
+		group: 'Dataset 4',
+		date: '2019-01-06T05:00:00.000Z',
+		value: 37312,
+		surplus: 368228069.08366436
+	},
+	{
+		group: 'Dataset 4',
+		date: '2019-01-08T05:00:00.000Z',
+		value: 51432,
+		surplus: 240908388.9062717
+	},
+	{
+		group: 'Dataset 4',
+		date: '2019-01-15T05:00:00.000Z',
+		value: 25332,
+		surplus: 422842585.96060365
+	},
+	{
+		group: 'Dataset 4',
+		date: '2019-01-19T05:00:00.000Z',
+		value: null,
+		surplus: 24964.179219263424
+	}
+]
+
+const lineOptionsTimeSeriesLabelsInPrimaryFormat: LineChartOptions = {
+	title: 'Line (time series) - All labels in primary format',
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: ScaleTypes.TIME
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	},
+	legend: {
+		clickable: false
+	},
+	height: '400px'
+}
+
+const lineOptionsTimeSeriesLabelsInPrimaryFormatData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-01-23T06:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-29T06:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesTwoIdenticalLabelsData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-01-24T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-02-10T04:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesEdgeSpaceZeroData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2019-12-30T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-12-31T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-02T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-03T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-04T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-05T05:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesSingleDatumData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-01-06T19:43:16.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesYearlyData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '1977-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1978-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1979-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1980-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1981-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1982-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '1983-01-01T05:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesOverrideData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2018-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-04-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-07-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-10-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-04-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-07-01T04:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesQuarterlyData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2018-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-04-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-07-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2018-10-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-04-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-07-01T04:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesMonthlyData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2019-10-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-11-01T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-12-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-02-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-03-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-04-01T04:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesWeeklyData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2019-12-30T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-12-31T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-02T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-03T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-04T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-05T05:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesDailyData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2019-12-30T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-12-31T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-01T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-02T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-03T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-04T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-01-05T05:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesHourlyWithCustomTicksData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T03:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T06:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T07:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T08:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T09:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesHourlyWithDefaultTicksData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T03:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T06:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T07:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T08:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T09:00:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeries30minsData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:30:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:30:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T06:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T06:30:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeriesMinuteData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T03:40:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T03:50:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T03:55:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T04:00:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T04:05:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T04:07:00.000Z',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-05-22T04:10:00.000Z',
+		value: 10
+	}
+]
+
+const lineOptionsTimeSeries15secsData = [
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:59:15.000Z',
+		value: 15
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:59:30.000Z',
+		value: 15
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T04:59:45.000Z',
+		value: 7
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:00.000Z',
+		value: 2
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:15.000Z',
+		value: 9
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:30.000Z',
+		value: 13
+	},
+	{
+		group: 'Dataset 1',
+		date: '2020-12-11T05:00:45.000Z',
+		value: 8
+	}
+]
+
 const lineData: ChartTabularData = [
 	{ group: 'Dataset 1', key: 'Qty', value: 34200 },
 	{ group: 'Dataset 1', key: 'More', value: 23500 },
@@ -457,6 +1362,44 @@ const lineTimeSeriesDenseData: ChartTabularData = [
 	{ group: 'Dataset 2', date: '2023-01-15T18:00:00.000Z', value: 30000 }
 ]
 
+const lineTimeSeriesFrenchLocaleData: ChartTabularData = [
+	{
+		group: 'Dataset 1',
+		date: '2023-10-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-11-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2023-12-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2024-01-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2024-02-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2024-03-01',
+		value: 10
+	},
+	{
+		group: 'Dataset 1',
+		date: '2019-04-01',
+		value: 10
+	}
+]
+
 const lineTimeSeriesDataRotatedTicks: ChartTabularData = [
 	{ group: 'Dataset 1', date: '2023-12-30', value: 32100 },
 	{ group: 'Dataset 1', date: '2023-12-31', value: 23500 },
@@ -497,42 +1440,108 @@ export const examples: Example[] = [
 	{
 		options: lineCustomDomainOptions,
 		data: lineData,
-		tags: ['test']
+		tags: ['test', 'axes']
 	},
 	{
 		options: lineTimeSeriesRotatedTicksOptions,
 		data: lineTimeSeriesDataRotatedTicks,
-		tags: ['test']
+		tags: ['test', 'axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeries15secs,
+		data: lineOptionsTimeSeries15secsData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesMinute,
+		data: lineOptionsTimeSeriesMinuteData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeries30mins,
+		data: lineOptionsTimeSeries30minsData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesHourlyWithDefaultTicks,
+		data: lineOptionsTimeSeriesHourlyWithDefaultTicksData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesHourlyWithCustomTicks,
+		data: lineOptionsTimeSeriesHourlyWithCustomTicksData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesDaily,
+		data: lineOptionsTimeSeriesDailyData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesWeekly,
+		data: lineOptionsTimeSeriesWeeklyData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesMonthly,
+		data: lineOptionsTimeSeriesMonthlyData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesQuarterly,
+		data: lineOptionsTimeSeriesQuarterlyData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesYearly,
+		data: lineOptionsTimeSeriesYearlyData,
+		tags: ['axes', 'time']
+	},
+
+	{
+		options: lineOptionsTimeSeriesOverride,
+		data: lineOptionsTimeSeriesOverrideData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineTimeSeriesFrenchLocale,
+		data: lineTimeSeriesFrenchLocaleData,
+		tags: ['test', 'axes', 'time', 'locale']
 	},
 	{
 		options: lineLogAxisOptions,
 		data: lineLogAxisData,
-		tags: ['test']
+		tags: ['test', 'axes']
 	},
 	{
 		options: lineCustomColorOptions,
 		data: lineData,
-		tags: ['test']
+		tags: ['test', 'colors']
 	},
 	{
 		options: lineSelectedGroupsOptions,
 		data: lineSelectedGroupsData,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		options: lineOptionsLegendOrientation,
 		data: lineData,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		options: lineTimeSeriesWithThresholdsOptions,
 		data: lineTimeSeriesData,
-		tags: ['test']
+		tags: ['test', 'axes', 'time', 'thresholds']
+	},
+	{
+		options: lineOptionsTimeSeriesSingleDatum,
+		data: lineOptionsTimeSeriesSingleDatumData,
+		tags: ['axes', 'time']
 	},
 	{
 		options: lineLongLabelOptions,
 		data: lineLongLabelData,
-		tags: ['test']
+		tags: ['test', 'truncation']
 	},
 	{
 		options: lineOptions,
@@ -542,24 +1551,46 @@ export const examples: Example[] = [
 	{
 		options: lineTimeSeriesOptions,
 		data: lineTimeSeriesData,
-		tags: ['test']
+		tags: ['test', 'axes', 'time']
 	},
 	{
 		options: lineTimeSeriesDenseOptions,
 		data: lineTimeSeriesDenseData,
-		tags: ['test']
+		tags: ['test', 'axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesEdgeSpaceZero,
+		data: lineOptionsTimeSeriesEdgeSpaceZeroData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineOptionsTimeSeriesTwoIdenticalLabels,
+		data: lineOptionsTimeSeriesTwoIdenticalLabelsData,
+		tags: ['axes', 'time']
 	},
 	{
 		options: dualLine,
 		data: lineTimeSeriesDualAxesData,
-		tags: ['test']
+		tags: ['test', 'axes', 'time', 'dual']
+	},
+	{
+		options: lineOptionsTimeSeriesLabelsInPrimaryFormat,
+		data: lineOptionsTimeSeriesLabelsInPrimaryFormatData,
+		tags: ['axes', 'time']
+	},
+	{
+		options: lineTimeSeriesZoomTwoIcons,
+		data: lineTimeSeriesZoomTwoIconsData,
+		tags: ['time', 'zoombar', 'toolbar']
 	},
 	{
 		options: lineEmptyStateOptions,
-		data: lineEmptyStateData
+		data: lineEmptyStateData,
+		tags: ['empty']
 	},
 	{
 		options: lineSkeletonOptions,
-		data: lineSkeletonData
+		data: lineSkeletonData,
+		tags: ['skeleton']
 	}
 ]

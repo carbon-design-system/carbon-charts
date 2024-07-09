@@ -262,7 +262,7 @@ export const examplesGrouped: Example[] = [
 	{
 		options: groupedBarSelectedGroupsOptions,
 		data: groupedBarSelectedGroupsData,
-		tags: ['test']
+		tags: ['test', 'legend']
 	},
 	{
 		options: groupedBarOptions,
