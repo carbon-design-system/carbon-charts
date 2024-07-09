@@ -213,16 +213,16 @@ export const examples: Example[] = [
 	{
 		options: histogramContinueOptions,
 		data: histogramContinueData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: histogramContinueWithBinsNumberOptions,
 		data: histogramContinueWithBinsNumberData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: histogramContinueWithBinsOptions,
 		data: histogramContinueData,
-		test: true
+		tags: ['test']
 	}
 ]

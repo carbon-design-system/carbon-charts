@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.17.3",
+	"version": "1.18.0",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
@@ -34,13 +34,13 @@
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^18.0.7",
 		"@angular/cli": "^18.0.7",
-		"@angular/common": "^18.0.5",
-		"@angular/compiler": "^18.0.5",
-		"@angular/compiler-cli": "^18.0.5",
-		"@angular/core": "^18.0.5",
-		"@angular/platform-browser": "^18.0.5",
-		"@angular/platform-browser-dynamic": "^18.0.5",
-		"@carbon/icons": "^11.44.1",
+		"@angular/common": "^18.0.6",
+		"@angular/compiler": "^18.0.6",
+		"@angular/compiler-cli": "^18.0.6",
+		"@angular/core": "^18.0.6",
+		"@angular/platform-browser": "^18.0.6",
+		"@angular/platform-browser-dynamic": "^18.0.6",
+		"@carbon/icons": "^11.45.0",
 		"@playwright/test": "^1.45.1",
 		"angular-eslint": "^18.1.0",
 		"concurrently": "^8.2.2",

@@ -620,52 +620,52 @@ export const examples: Example[] = [
 	{
 		options: comboSimpleOptions,
 		data: comboSimpleData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboStackedOptions,
 		data: comboStackedData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboGroupedOptions,
 		data: comboGroupedData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboSimpleFloatingOptions,
 		data: comboSimpleFloatingData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboGroupedHorizontalOptions,
 		data: comboGroupedHorizontalData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboHorizontalOptions,
 		data: comboHorizontalData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboAreaLineOptions,
 		data: comboAreaLineData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboStackedAreaLineOptions,
 		data: comboStackedAreaLine,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboLineScatterOptions,
 		data: comboLineScatterData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboAreaLineTimeSeriesOptions,
 		data: comboAreaLineTimeSeriesData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: comboEmptyOptions,

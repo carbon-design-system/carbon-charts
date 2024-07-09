@@ -66,11 +66,11 @@ export const examples: Example[] = [
 	{
 		options: optionsHorizontal,
 		data,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: optionsVertical,
 		data,
-		test: true
+		tags: ['test']
 	}
 ]

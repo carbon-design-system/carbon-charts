@@ -78,17 +78,17 @@ export const examples: Example[] = [
 	{
 		options: donutOptions,
 		data: pieData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: donutCenteredOptions,
 		data: pieData,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: donutMapsToOptions,
 		data: pieDataMapsTo,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: donutEmptyStateOptions,

@@ -114,7 +114,6 @@ export type {
 	// Formats
 	TickFormats,
 	TimeIntervalFormats,
-	TimeIntervalNames,
 	// Other
 	Coordinates,
 	LegendItem,
@@ -166,6 +165,7 @@ export {
 	TextAnchor,
 	ThresholdEvent,
 	TickRotations,
+	TimeIntervalNames,
 	ToolbarControlTypes,
 	TooltipEvent,
 	TruncationTypes,

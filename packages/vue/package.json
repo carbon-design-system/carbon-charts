@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.17.3",
+	"version": "1.18.0",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -47,7 +47,7 @@
 		"vite": "^5.3.3",
 		"vite-plugin-dts": "^3.9.1",
 		"vue": "^3.4.31",
-		"vue-tsc": "^2.0.24"
+		"vue-tsc": "^2.0.26"
 	},
 	"publishConfig": {
 		"access": "public",

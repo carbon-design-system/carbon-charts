@@ -1697,11 +1697,11 @@ export const examples: Example[] = [
 	{
 		options,
 		data,
-		test: true
+		tags: ['test']
 	},
 	{
 		options: missingDataOptions,
 		data: missingData,
-		test: true
+		tags: ['test']
 	}
 ]

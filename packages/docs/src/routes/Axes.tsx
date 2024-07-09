@@ -4,6 +4,8 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
+import ConfigExamples from '../components/ConfigExamples'
+
 import './Axes.scss'
 
 export default function Axes() {
@@ -107,6 +109,7 @@ const options = {
 			</Link>{' '}
 			page on the <Link to="https://carbondesignsystem.com">Carbon Design System</Link> site for
 			more details.
+			<ConfigExamples tag="axes" />
 			{/*       
 			<h2 id="dual">Starting at zero</h2>
 			<p>

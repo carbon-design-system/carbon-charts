@@ -110,6 +110,6 @@ export const examples: Example[] = [
 	{
 		data,
 		options,
-		test: true
+		tags: ['test']
 	}
 ]

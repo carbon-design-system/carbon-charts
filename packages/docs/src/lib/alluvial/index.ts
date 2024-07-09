@@ -352,31 +352,31 @@ export const examples: Example[] = [
 	{
 		data,
 		options,
-		test: true
+		tags: ['test']
 	},
 	{
 		data,
 		options: optionsGradient,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataMultipleCategories,
 		options: optionsMultipleCategories,
-		test: true
+		tags: ['test']
 	},
 	{
 		data: dataMonochrome,
 		options: optionsMonochrome,
-		test: true
+		tags: ['test', 'colors']
 	},
 	{
 		data: dataAligned,
 		options: optionsAligned,
-		test: true
+		tags: ['test']
 	},
 	{
 		data,
 		options: optionsCustomColors,
-		test: true
+		tags: ['test', 'colors']
 	}
 ]
