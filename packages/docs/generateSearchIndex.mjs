@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { exec } from 'child_process'
 import { JSDOM } from 'jsdom'
 
 // Define the path to the main.tsx file and the routes directory
@@ -89,8 +90,23 @@ const pages = routes
 		return { path: route.path, title, text: textContent, charts }
 	})
 
-// Write the output to a JSON file
-const outputFilePath = path.resolve('public/searchindex.json')
-fs.writeFileSync(outputFilePath, JSON.stringify(pages, null, 2))
+// Write the output to a JSON string and add `export default` in front of it
+const outputFilePath = path.resolve('src/searchIndex.ts')
+const jsonContent = JSON.stringify(pages, null, 2)
+const outputContent = `export default ${jsonContent}\n`
 
-console.log('JSON file generated successfully:', outputFilePath)
+fs.writeFileSync(outputFilePath, outputContent)
+
+console.log('Search index file generated successfully:', outputFilePath)
+
+// Run Prettier to format the file
+exec(`npx prettier --write ${outputFilePath}`, (error, stdout, stderr) => {
+	if (error) {
+		console.error(`Error running Prettier: ${error.message}`)
+		return
+	}
+	if (stderr) {
+		console.error(`Prettier stderr: ${stderr}`)
+		return
+	}
+})
