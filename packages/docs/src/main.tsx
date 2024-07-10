@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
-
 import {
 	Root,
 	ErrorPage,
@@ -47,6 +46,7 @@ import {
 	Locales,
 	Legends
 } from './routes'
+
 import './index.scss'
 
 const App: React.FC = () => (
