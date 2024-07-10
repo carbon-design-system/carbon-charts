@@ -10,9 +10,10 @@
 	"scripts": {
 		"build:api:docs": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
 		"build:docs": "vite build --emptyOutDir --outDir ../../pages",
+		"build:search": "node generateSearchIndex.mjs",
 		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
 		"files:pages": "touch ../../pages/.nojekyll && echo 'charts.carbondesignsystem.com' > ../../pages/CNAME",
-		"build": "yarn build:docs && yarn files:pages && yarn build:api:docs",
+		"build": "yarn build:search && yarn build:docs && yarn files:pages && yarn build:api:docs",
 		"dev": "vite --port 3000",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"

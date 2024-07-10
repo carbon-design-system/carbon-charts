@@ -90,7 +90,7 @@ const pages = routes
 	})
 
 // Write the output to a JSON file
-const outputFilePath = path.resolve('searchindex.json')
+const outputFilePath = path.resolve('public/searchindex.json')
 fs.writeFileSync(outputFilePath, JSON.stringify(pages, null, 2))
 
 console.log('JSON file generated successfully:', outputFilePath)
