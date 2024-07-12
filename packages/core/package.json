@@ -56,7 +56,7 @@
 		"file:css:min:charts": "sass scss/index.scss dist/styles.min.css --style=compressed --load-path=./node_modules --load-path=../../node_modules",
 		"file:downlevel:dts": "downlevel-dts dist dist",
 		"postbundle": "concurrently \"yarn:file:*\"",
-		"build": "vite build --base=/ && vite build -c ./vite.umd.config.ts && cp dist/umd/bundle.umd.cjs dist/umd/bundle.umd.js && yarn postbundle && cp dist/styles*.css* ./ && publint",
+		"build": "vite build && vite build -c ./vite.umd.config.ts && cp dist/umd/bundle.umd.cjs dist/umd/bundle.umd.js && yarn postbundle && cp dist/styles*.css* ./ && publint",
 		"build:test": "vite build --config vite.test.config.ts --emptyOutDir",
 		"dev": "vite --port 3000",
 		"test": "vitest",
