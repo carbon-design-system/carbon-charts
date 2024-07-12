@@ -10,9 +10,10 @@
 	"scripts": {
 		"build:api:docs": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
 		"build:docs": "vite build --emptyOutDir --outDir ../../pages",
+		"build:search": "node generateSearchIndex.mjs",
 		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
 		"files:pages": "touch ../../pages/.nojekyll && echo 'charts.carbondesignsystem.com' > ../../pages/CNAME",
-		"build": "yarn build:docs && yarn files:pages && yarn build:api:docs",
+		"build": "yarn build:search && yarn build:docs && yarn files:pages && yarn build:api:docs",
 		"dev": "vite --port 3000",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
@@ -23,10 +24,12 @@
 		"@carbon/icons-react": "^11.45.0",
 		"@carbon/react": "^1.61.0",
 		"@stackblitz/sdk": "^1.11.0",
+		"fuse.js": "^7.0.0",
 		"highlight.js": "^11.10.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-router-dom": "^6.24.1"
+		"react-router-dom": "^6.24.1",
+		"styled-components": "^6.1.11"
 	},
 	"devDependencies": {
 		"@types/react": "^18.3.3",
@@ -34,9 +37,10 @@
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"eslint": "^9.6.0",
+		"jsdom": "^24.1.0",
 		"prettier": "^3.3.2",
-		"sass": "^1.77.6",
-		"typedoc": "^0.26.3",
+		"sass": "^1.77.8",
+		"typedoc": "^0.26.4",
 		"typescript": "^5.5.3",
 		"vite": "^5.3.3"
 	},

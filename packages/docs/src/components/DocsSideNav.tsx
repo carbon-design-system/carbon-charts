@@ -16,133 +16,133 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 	<SideNav expanded={isSideNavExpanded} className="cds--white" aria-label="Table of contents">
 		<SideNavItems className="pb-200">
 			<SideNavMenu title="Getting started" defaultExpanded={true}>
-				<SideNavMenuItem href="#" as={NavLink} to="/introduction">
+				<SideNavMenuItem href="#" element={NavLink} to="/introduction">
 					Introduction
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/installation">
+				<SideNavMenuItem element={NavLink} to="/installation">
 					Installation & setup
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/anatomy">
+				<SideNavMenuItem element={NavLink} to="/anatomy">
 					Chart anatomy
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Data & configuration" defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/data">
+				<SideNavMenuItem element={NavLink} to="/data">
 					Chart data
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/options">
+				<SideNavMenuItem element={NavLink} to="/options">
 					Chart display options
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/highlights">
+				<SideNavMenuItem element={NavLink} to="/highlights">
 					Highlights
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/locales">
+				<SideNavMenuItem element={NavLink} to="/locales">
 					Locales
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/thresholds">
+				<SideNavMenuItem element={NavLink} to="/thresholds">
 					Thresholds
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/toolbar">
+				<SideNavMenuItem element={NavLink} to="/toolbar">
 					Toolbar customization
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/truncation">
+				<SideNavMenuItem element={NavLink} to="/truncation">
 					Truncation
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/zoombar">
+				<SideNavMenuItem element={NavLink} to="/zoombar">
 					Zoombar
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/api">
+				<SideNavMenuItem element={NavLink} to="/api">
 					API
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Design" defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/themes">
+				<SideNavMenuItem element={NavLink} to="/themes">
 					Themes (dark & light)
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/axes">
+				<SideNavMenuItem element={NavLink} to="/axes">
 					Axes
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/palettes">
+				<SideNavMenuItem element={NavLink} to="/palettes">
 					Color palette
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/dashboards">
+				<SideNavMenuItem element={NavLink} to="/dashboards">
 					Dashboards
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/legends">
+				<SideNavMenuItem element={NavLink} to="/legends">
 					Legends
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Chart types" defaultExpanded={true}>
-				<SideNavMenuItem as={NavLink} to="/alluvial">
+				<SideNavMenuItem element={NavLink} to="/alluvial">
 					Alluvial / Sankey
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/area">
+				<SideNavMenuItem element={NavLink} to="/area">
 					Area (standard, stacked)
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/bar">
+				<SideNavMenuItem element={NavLink} to="/bar">
 					Bar (simple, grouped, stacked)
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/boxplot">
+				<SideNavMenuItem element={NavLink} to="/boxplot">
 					Boxplot
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/bubble">
+				<SideNavMenuItem element={NavLink} to="/bubble">
 					Bubble
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/bullet">
+				<SideNavMenuItem element={NavLink} to="/bullet">
 					Bullet
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/choropleth">
+				<SideNavMenuItem element={NavLink} to="/choropleth">
 					Choropleth
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/circlepack">
+				<SideNavMenuItem element={NavLink} to="/circlepack">
 					Circle pack
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/combo">
+				<SideNavMenuItem element={NavLink} to="/combo">
 					Combo
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/donut">
+				<SideNavMenuItem element={NavLink} to="/donut">
 					Donut
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/gauge">
+				<SideNavMenuItem element={NavLink} to="/gauge">
 					Gauge
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/heatmap">
+				<SideNavMenuItem element={NavLink} to="/heatmap">
 					Heatmap
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/histogram">
+				<SideNavMenuItem element={NavLink} to="/histogram">
 					Histogram
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/line">
+				<SideNavMenuItem element={NavLink} to="/line">
 					Line
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/lollipop">
+				<SideNavMenuItem element={NavLink} to="/lollipop">
 					Lollipop
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/meter">
+				<SideNavMenuItem element={NavLink} to="/meter">
 					Meter
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/diagram">
+				<SideNavMenuItem element={NavLink} to="/diagram">
 					Network Diagrams
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/pie">
+				<SideNavMenuItem element={NavLink} to="/pie">
 					Pie
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/radar">
+				<SideNavMenuItem element={NavLink} to="/radar">
 					Radar
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/scatter">
+				<SideNavMenuItem element={NavLink} to="/scatter">
 					Scatter
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/tree">
+				<SideNavMenuItem element={NavLink} to="/tree">
 					Tree
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/treemap">
+				<SideNavMenuItem element={NavLink} to="/treemap">
 					Treemap
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/wordcloud">
+				<SideNavMenuItem element={NavLink} to="/wordcloud">
 					Word cloud
 				</SideNavMenuItem>
 			</SideNavMenu>
