@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.19.0 (2024-07-12)
+
+### Features
+
+- **search:** add search capability to docs site
+  ([#1868](https://github.com/carbon-design-system/carbon-charts/issues/1868))
+  ([48db5a8](https://github.com/carbon-design-system/carbon-charts/commit/48db5a8f9571f00e526708ffc01cd043b8d2aee5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.18.0 (2024-07-09)
 
 ### Features
