@@ -43,22 +43,6 @@
 		}
 
 		.#{globals.$prefix}--modal-container {
-			@media (min-width: 42rem) {
-				position: static;
-				width: 84%;
-				height: auto;
-				max-height: 90%;
-			}
-
-			@media (min-width: 66rem) {
-				width: 60%;
-				max-height: 84%;
-			}
-
-			@media (min-width: 82rem) {
-				width: 48%;
-			}
-
 			position: fixed;
 			top: 0;
 			display: grid;
@@ -74,6 +58,22 @@
 			transform: translate3d(0, -24px, 0);
 			transform-origin: top center;
 			transition: transform 0.24s cubic-bezier(0.4, 0.14, 1, 1);
+
+			@media (min-width: 42rem) {
+				position: static;
+				width: 84%;
+				height: auto;
+				max-height: 90%;
+			}
+
+			@media (min-width: 66rem) {
+				width: 60%;
+				max-height: 84%;
+			}
+
+			@media (min-width: 82rem) {
+				width: 48%;
+			}
 
 			.#{globals.$prefix}--modal-header {
 				padding-top: 1rem;
@@ -127,15 +127,6 @@
 				}
 
 				.#{globals.$prefix}--modal-close {
-					&:hover {
-						background-color: var(--#{globals.$prefix}-layer-hover);
-					}
-
-					&:focus {
-						border-color: var(--cds-focus, #0f62fe);
-						outline: none;
-					}
-
 					position: absolute;
 					z-index: 2;
 					top: 0;
@@ -153,6 +144,15 @@
 					margin: 0;
 					border-radius: 0;
 					font-family: inherit;
+
+					&:hover {
+						background-color: var(--#{globals.$prefix}-layer-hover);
+					}
+
+					&:focus {
+						border-color: var(--cds-focus, #0f62fe);
+						outline: none;
+					}
 
 					&__icon {
 						width: 1.25rem;
@@ -221,14 +221,14 @@
 						width: 100%;
 
 						tr {
-							&:hover {
-								background: var(--#{globals.$prefix}-layer-hover) !important;
-							}
-
 							transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
 							width: 100;
 							height: 3rem;
 							border: none;
+
+							&:hover {
+								background: var(--#{globals.$prefix}-layer-hover) !important;
+							}
 
 							td {
 								transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
@@ -327,6 +327,12 @@
 				}
 
 				.#{globals.$prefix}--btn--primary {
+					border-width: 1px;
+					border-style: solid;
+					border-color: transparent;
+					background-color: var(--#{globals.$prefix}-button-primary, #0f62fe);
+					color: var(--#{globals.$prefix}-text-on-color, #ffffff);
+
 					&:hover {
 						color: var(--#{globals.$prefix}-text-on-color, #ffffff);
 						background-color: var(--#{globals.$prefix}-button-primary-hover, #0050e6);
@@ -338,12 +344,6 @@
 							inset 0 0 0 1px var(--cds-button-focus-color, var(--cds-focus, #0f62fe)),
 							inset 0 0 0 2px var(--cds-background, #ffffff);
 					}
-
-					border-width: 1px;
-					border-style: solid;
-					border-color: transparent;
-					background-color: var(--#{globals.$prefix}-button-primary, #0f62fe);
-					color: var(--#{globals.$prefix}-text-on-color, #ffffff);
 				}
 			}
 		}
