@@ -23,7 +23,12 @@ const SearchResultsContainer = styled.div`
 	}
 
 	a {
+		text-decoration: none;
 		color: #fff;
+	}
+
+	.cds--contained-list-item:hover {
+		background-color: #353535;
 	}
 `
 
