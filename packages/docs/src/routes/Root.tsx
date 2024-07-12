@@ -8,11 +8,11 @@ import {
 	HeaderName,
 	HeaderMenuButton,
 	HeaderGlobalBar,
-	HeaderGlobalAction,
-	ExpandableSearch
+	HeaderGlobalAction
 } from '@carbon/react/es'
 import { LogoGithub } from '@carbon/react/icons'
 import DocsSideNav from '../components/DocsSideNav'
+import Search from '../components/Search'
 import { fetchVersion } from '../lib/fetchVersion'
 
 interface HeaderContainerRenderProps {
@@ -49,15 +49,7 @@ export default function Root() {
 								Charts {version}
 							</HeaderName>
 							<HeaderGlobalBar>
-								<ExpandableSearch
-									size="lg"
-									labelText="Search"
-									closeButtonLabelText="Clear search input"
-									id="search-expandable-1"
-									onChange={() => {}}
-									onKeyDown={() => {}}
-								/>
-
+								<Search />
 								<HeaderGlobalAction
 									aria-label="GitHub"
 									as="a"
@@ -68,9 +60,7 @@ export default function Root() {
 								</HeaderGlobalAction>
 							</HeaderGlobalBar>
 						</Header>
-
 						<DocsSideNav isSideNavExpanded={isSideNavExpanded} />
-
 						<Content className="cds--g10">
 							<Outlet />
 						</Content>
