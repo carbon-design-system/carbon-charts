@@ -23,6 +23,8 @@ if [[ "$SITE_NAME" == "carbon-charts-docs" ]]; then
 		# Build docs package
 		echo -e "${GREEN}Building @carbon/charts-docs and styles..."
 		npx lerna run build --scope=@carbon/charts-docs --concurrency=1
+
+  	echo "/* /index.html 200" >> ./pages/_redirects
 else
 	if [ $CONTEXT == "deploy-preview" ]; then
 		# Netlify URL examples: https://carbon-charts-core.netlify.app, https://carbon-charts-react.netlify.app, etc.
