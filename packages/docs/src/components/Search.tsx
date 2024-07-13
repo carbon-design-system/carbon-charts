@@ -6,7 +6,9 @@ import Fuse from 'fuse.js'
 import searchIndex from '../searchIndex'
 
 const SearchContainer = styled.div`
-	position: relative;
+	.cds--search--expanded {
+		min-width: 400px;
+	}
 `
 
 const SearchResultsContainer = styled.div`
