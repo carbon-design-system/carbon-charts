@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.19.1 (2024-07-15)
+
+### Bug Fixes
+
+- **toolbar:** remove aria-label as it's not readable
+  ([#1870](https://github.com/carbon-design-system/carbon-charts/issues/1870))
+  ([bb5b9d4](https://github.com/carbon-design-system/carbon-charts/commit/bb5b9d475c92bbfc13de19b78d385717792fcb1e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.19.0 (2024-07-12)
 
 ### Features
