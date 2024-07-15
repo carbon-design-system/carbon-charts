@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.19.2 (2024-07-15)
+
+### Bug Fixes
+
+- **docs:** media breakpoints for PageHeaderTitle
+  ([#1869](https://github.com/carbon-design-system/carbon-charts/issues/1869))
+  ([6cdb564](https://github.com/carbon-design-system/carbon-charts/commit/6cdb564f4cdd605cc69f728d86921977b584ebd7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.19.1 (2024-07-15)
 
 ### Bug Fixes
