@@ -46,7 +46,7 @@ export default function Root() {
 								aria-expanded={isSideNavExpanded}
 							/>
 							<HeaderName as={Link} to="/" prefix="Carbon">
-								Charts {version}
+								Charts<span className="hide-at-sm"> {version}</span>
 							</HeaderName>
 							<HeaderGlobalBar>
 								<Search />

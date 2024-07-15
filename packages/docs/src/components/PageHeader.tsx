@@ -21,6 +21,18 @@ const PageHeaderContainer = styled.div`
 const PageHeaderTitle = styled.h1`
 	margin-top: 8rem;
 	font-size: 4.5rem;
+	@media (max-width: 1200px) {
+		font-size: 4rem;
+	}
+	@media (max-width: 992px) {
+		font-size: 3.5rem;
+	}
+	@media (max-width: 768px) {
+		font-size: 3rem;
+	}
+	@media (max-width: 576px) {
+		font-size: 2.5rem;
+	}
 `
 
 const PageHeader: React.FC<Props> = ({ title }) => {

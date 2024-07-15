@@ -6,6 +6,8 @@
 	$css--font-face: false
 );
 
+@use '@carbon/react/scss/utilities/hide-at-breakpoint';
+
 @import 'highlight.js/scss/stackoverflow-dark.scss';
 
 h2 {
@@ -122,4 +124,8 @@ p {
 
 .cds--header__name {
 	width: 16rem;
+}
+
+.hide-at-sm {
+	@include hide-at-breakpoint.hide-at-sm();
 }
