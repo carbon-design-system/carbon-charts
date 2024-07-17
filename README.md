@@ -4,13 +4,13 @@
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
-		A reusable framework-agnostic D3 charting library.
+		A component library of 26 charts for [vanilla JavaScript](./packages/core), [Svelte](./packages/svelte), [React](./packages/react), [Vue.js](./packages/vue) and [Angular](./packages/angular).
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+20k%2Fweek-green" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+60k%2Fweek-green" />
 		<a href="https://discord.gg/J7JEUEkTRX">
 	    		<img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
 	  	</a>
@@ -19,61 +19,15 @@
 
 ## Documentation
 
-Includes StackBlitz examples of each chart type for Vanilla JavaScript, Svelte, React, Angular and Vue.js.
+Includes StackBlitz examples of each chart type for supported frameworks.
 
 <a href="https://charts.carbondesignsystem.com/" target="_blank">
   <img src="./assets/dashboard.png" width=700 />
 </a>
 
-## Packages
-
-- [Vanilla JavaScript](./packages/core)
-- [React](./packages/react)
-- [Angular](./packages/angular)
-- [Svelte](./packages/svelte)
-- [Vue](./packages/vue)
-
-<a href="https://www.netlify.com" target="_blank">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
-</a>
-
 ## CHANGELOG
 
-Read the release change logs [here](https://github.com/carbon-design-system/carbon-charts/releases)
-
-## Component status
-
-:white_check_mark: Stable :hourglass_flowing_sand: In progress
-
-| Component            | Vanilla                  | Angular                  | React                    | Vue                      | Svelte                   |
-| -------------------- | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| Simple Bar           | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Grouped Bar          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Stacked Bar          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Floating Bar         | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Donut                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Line                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Curved Line          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Pie                  | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Step                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Scatter              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Radar                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Area                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Gauge                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Meter                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Sparkline            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Treemap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Combo                | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Wordcloud            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Bullet               | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Circle Pack          | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Network diagrams     | —                        | :white_check_mark:       | :white_check_mark:       | —                        | —                        |
-| Proportional meter   | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Histogram            | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Tree                 | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Alluvial             | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Heatmap              | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
-| Choropleth           | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       | :white_check_mark:       |
+Release change logs can be found [here](https://github.com/carbon-design-system/carbon-charts/releases).
 
 ## Bugs and feature requests
 
@@ -96,10 +50,6 @@ Get updates on Charts' development and chat with the core team and community. --
 
 We use the **semantic-release** library to automatically version our releases within the guidelines
 of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
-
-See our
-[release change logs](https://github.com/carbon-design-system/carbon-charts/blob/master/CHANGELOG.md)
-for the changelog of each version of Charts.
 
 ## Core team
 
@@ -178,3 +128,7 @@ for the changelog of each version of Charts.
 ## Code of Conduct
 
 Read our code of conduct [here](.github/CODE_OF_CONDUCT.md)
+
+<a href="https://www.netlify.com" target="_blank">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
+</a>
