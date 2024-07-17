@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
-		A component library of 26 charts for [vanilla JavaScript](./packages/core), [Svelte](./packages/svelte), [React](./packages/react), [Vue.js](./packages/vue) and [Angular](./packages/angular).
+		A component library of 26 charts for <a href="./packages/core" target="_blank">vanilla JavaScript</a>, <<a href="./packages/svelte" target="_blank">Svelte</a>, <a href="./packages/react" target="_blank">React</a>, <a href="./packages/vue" target="_blank">Vue.js</a> and <a href="./packages/angular" target="_blank">Angular</a>.
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
