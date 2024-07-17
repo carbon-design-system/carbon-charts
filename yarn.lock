@@ -1906,7 +1906,7 @@ __metadata:
     "@carbon/charts": "workspace:*"
     "@carbon/charts-react": "workspace:*"
     "@carbon/icons-react": "npm:^11.45.0"
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@stackblitz/sdk": "npm:^1.11.0"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
@@ -1919,9 +1919,9 @@ __metadata:
     prettier: "npm:^3.3.3"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-router-dom: "npm:^6.25.0"
+    react-router-dom: "npm:^6.25.1"
     sass: "npm:^1.77.8"
-    styled-components: "npm:^6.1.11"
+    styled-components: "npm:^6.1.12"
     typedoc: "npm:^0.26.4"
     typescript: "npm:^5.5.3"
     vite: "npm:^5.3.4"
@@ -1949,7 +1949,7 @@ __metadata:
     eslint-plugin-svelte: "npm:^2.42.0"
     eslint-plugin-vue: "npm:^9.27.0"
     globals: "npm:^15.8.0"
-    husky: "npm:^9.0.11"
+    husky: "npm:^9.1.0"
     lerna: "npm:^8.1.6"
     lint-staged: "npm:^15.2.7"
     prettier: "npm:^3.3.3"
@@ -2155,9 +2155,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.61.0":
-  version: 1.61.0
-  resolution: "@carbon/react@npm:1.61.0"
+"@carbon/react@npm:^1.62.0":
+  version: 1.62.0
+  resolution: "@carbon/react@npm:1.62.0"
   dependencies:
     "@babel/runtime": "npm:^7.18.3"
     "@carbon/feature-flags": "npm:^0.20.0"
@@ -2185,7 +2185,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 10c0/3a8ad11c47664beb0f3a7a7acc09bef933eb9fa5cd35cfd5152dcd2643f3378008899d4c2ad5dc8d5169f88cafa2d12d7abb8161578f46d75c09fcf5881763e3
+  checksum: 10c0/6532879de7d9242cff555c6b080df190a13583b8a212066601d5d0737fc0184630976257766dc675cc1f29a73a5b0bd99db5a85b63d78f5a6e89b152c29cf856
   languageName: node
   linkType: hard
 
@@ -9367,11 +9367,11 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-react-hooks@npm:next":
-  version: 5.1.0-rc-01172397-20240716
-  resolution: "eslint-plugin-react-hooks@npm:5.1.0-rc-01172397-20240716"
+  version: 5.1.0-rc-163365a0-20240717
+  resolution: "eslint-plugin-react-hooks@npm:5.1.0-rc-163365a0-20240717"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
-  checksum: 10c0/6efea85765ae26f27663cce99c77524ad77ebd0d288d3e78f36371e23026772e7245f0175410953ab6490943e78ae660831fe51a6046025fbc99770c87344b66
+  checksum: 10c0/563c70e4f6f4f2ecc3afeb3c3a6f1884ee8912fca99fb487f55dafb9f9d8fe7a278b579c0bedec21d2314f10991d68a96d37e3b6173dfb478992c851c7396970
   languageName: node
   linkType: hard
 
@@ -10864,12 +10864,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.0.11":
-  version: 9.0.11
-  resolution: "husky@npm:9.0.11"
+"husky@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "husky@npm:9.1.0"
   bin:
-    husky: bin.mjs
-  checksum: 10c0/2c787dcf74a837fc9a4fea7da907509d4bd9a289f4ea10ecc9d86279e4d4542b0f5f6443a619bccae19e265f2677172cc2b86aae5c932a35a330cc227d914605
+    husky: bin.js
+  checksum: 10c0/2d2d202cbad1fdd32112270391d04006b52232b0ab8314176b7352c58727725275d783bbc76d79b2868aa658d90e0164479ca241e09c3e445dd1dc1d11ce4bcc
   languageName: node
   linkType: hard
 
@@ -14957,27 +14957,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.25.0":
-  version: 6.25.0
-  resolution: "react-router-dom@npm:6.25.0"
+"react-router-dom@npm:^6.25.1":
+  version: 6.25.1
+  resolution: "react-router-dom@npm:6.25.1"
   dependencies:
     "@remix-run/router": "npm:1.18.0"
-    react-router: "npm:6.25.0"
+    react-router: "npm:6.25.1"
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 10c0/a837686f3ce9a12224d97e9b200a0e38575f32a568c80d5d8470e8f14208986ab266c1d6ec95e903ab3b1c3d1273cfe886401c33bdef393aa2c7eef4d6987692
+  checksum: 10c0/15e2b5bf89a26db9a108d19a4e0e2054180bfb1f5f62662dd93ad697ee1bdc91a8041efd762d552c95e65fc06ca0cb0c1e88acdeeaf03aba37f7a29e470c7cc4
   languageName: node
   linkType: hard
 
-"react-router@npm:6.25.0":
-  version: 6.25.0
-  resolution: "react-router@npm:6.25.0"
+"react-router@npm:6.25.1":
+  version: 6.25.1
+  resolution: "react-router@npm:6.25.1"
   dependencies:
     "@remix-run/router": "npm:1.18.0"
   peerDependencies:
     react: ">=16.8"
-  checksum: 10c0/82a7e9de69f444c57bbece2904518f1279a8ef80563172fff36cec3b74d854ae5702c560b6f9e02a5439b756f884dc16b81996ba613b3b6c0b31cd16bd1bc189
+  checksum: 10c0/a7e824c1f6d9641beabc23111865ddd2525b3794403e07b297fc2bdd4cddec93e166aacdb9d2602768864d70f3bf490f59eeab8474a04ae1f13a832f305eeec3
   languageName: node
   linkType: hard
 
@@ -16581,9 +16581,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.1.11":
-  version: 6.1.11
-  resolution: "styled-components@npm:6.1.11"
+"styled-components@npm:^6.1.12":
+  version: 6.1.12
+  resolution: "styled-components@npm:6.1.12"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.2.2"
     "@emotion/unitless": "npm:0.8.1"
@@ -16597,7 +16597,7 @@ __metadata:
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 10c0/1d149a51d24f779bba700c8c23ec0538b2d2b57745ccd49d1cfdc2dfce8bcea21e8ff81fed1143d1b35d127cc591717a398da72ea6671abbf705432b13e59e56
+  checksum: 10c0/1ad728aea763a26dbce5ede380ef54b0aacae177166d19346eed97eab8e46935b8797d3ba8e1db689605175d5f9c9892a60d91d2e797e2ea61901fb7f58ed1a5
   languageName: node
   linkType: hard
 
