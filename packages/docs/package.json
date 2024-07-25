@@ -22,7 +22,7 @@
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
 		"@carbon/icons-react": "^11.45.0",
-		"@carbon/react": "^1.62.0",
+		"@carbon/react": "^1.62.1",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.0.0",
 		"highlight.js": "^11.10.0",
@@ -41,8 +41,8 @@
 		"prettier": "^3.3.3",
 		"sass": "^1.77.8",
 		"typedoc": "^0.26.5",
-		"typescript": "^5.5.3",
-		"vite": "^5.3.4"
+		"typescript": "^5.5.4",
+		"vite": "^5.3.5"
 	},
 	"publishConfig": {
 		"access": "restricted"

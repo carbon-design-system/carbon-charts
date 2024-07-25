@@ -24,8 +24,8 @@
 		"@commitlint/config-conventional": "^19.2.2",
 		"@eslint/compat": "^1.1.1",
 		"@eslint/js": "^9.7.0",
-		"@playwright/test": "^1.45.2",
-		"@types/node": "^20.14.11",
+		"@playwright/test": "^1.45.3",
+		"@types/node": "^20.14.12",
 		"@vue/eslint-config-prettier": "^9.0.0",
 		"@vue/eslint-config-typescript": "^13.0.0",
 		"eslint": "^9.7.0",
@@ -45,8 +45,8 @@
 		"prettier-plugin-svelte": "^3.2.6",
 		"svelte": "^4.2.18",
 		"svelte-eslint-parser": "^0.41.0",
-		"typescript": "^5.5.3",
-		"typescript-eslint": "^7.16.1",
+		"typescript": "^5.5.4",
+		"typescript-eslint": "^7.17.0",
 		"vue-eslint-parser": "^9.4.3"
 	},
 	"release": {
