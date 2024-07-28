@@ -40,8 +40,8 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.45.3",
-		"@vitejs/plugin-vue": "^5.1.0",
-		"eslint": "^9.7.0",
+		"@vitejs/plugin-vue": "^5.1.1",
+		"eslint": "^9.8.0",
 		"prettier": "^3.3.3",
 		"typescript": "^5.5.4",
 		"vite": "^5.3.5",
