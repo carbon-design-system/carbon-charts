@@ -16,7 +16,7 @@
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
-		"postinstall": "bash build-vendor.sh"
+		"postinstall": "bash build-vendor.sh && ibmtelemetry --config=telemetry.yml"
 	},
 	"repository": {
 		"type": "git",
@@ -51,6 +51,7 @@
 		"@carbon/colors": "10.29.0",
 		"@carbon/telemetry": "0.1.0",
 		"@carbon/utils-position": "1.1.1",
+		"@ibm/telemetry-js": "^1.6.0",
 		"carbon-components": "10.56.0",
 		"d3-cloud": "1.2.5",
 		"d3-sankey": "0.12.3",
