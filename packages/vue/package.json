@@ -12,11 +12,13 @@
 		"ci-check": "yarn format:diff",
 		"format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
 		"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"postinstall": "ibmtelemetry --config=telemetry.yml"
 	},
 	"dependencies": {
 		"@carbon/charts": "^0.58.1",
 		"@carbon/telemetry": "0.1.0",
+		"@ibm/telemetry-js": "^1.6.0",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {
