@@ -7,6 +7,7 @@
 	"svelte": "./src/index.js",
 	"types": "./types/index.d.ts",
 	"scripts": {
+		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
@@ -50,7 +51,8 @@
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
 		"@carbon/charts": "^0.58.1",
-		"@carbon/telemetry": "0.1.0"
+		"@carbon/telemetry": "0.1.0",
+		"@ibm/telemetry-js": "^1.6.0"
 	},
 	"peerDependencies": {
 		"svelte": "^3.31.x"
