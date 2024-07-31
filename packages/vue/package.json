@@ -46,7 +46,7 @@
 		"typescript": "^5.5.4",
 		"vite": "^5.3.5",
 		"vite-plugin-dts": "^3.9.1",
-		"vue": "^3.4.34",
+		"vue": "^3.4.35",
 		"vue-tsc": "^2.0.29"
 	},
 	"publishConfig": {
