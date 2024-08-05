@@ -51,7 +51,6 @@
 	"dependencies": {
 		"@carbon/charts": "^0.58.1",
 		"@carbon/icons-react": "^10.49.0",
-		"@carbon/telemetry": "0.1.0",
 		"@ibm/telemetry-js": "^1.6.0"
 	},
 	"peerDependencies": {
