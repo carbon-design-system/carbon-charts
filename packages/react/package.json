@@ -11,7 +11,8 @@
 		"format": "prettier . --write \"**/*.{scss,css,js,ts,tsx,md}\"",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets",
 		"demo:build": "yarn build && build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
-		"clean": "rm -rf dist demo/bundle"
+		"clean": "rm -rf dist demo/bundle",
+		"postinstall": "ibmtelemetry --config=telemetry.yml"
 	},
 	"repository": {
 		"type": "git",
@@ -50,7 +51,7 @@
 	"dependencies": {
 		"@carbon/charts": "^0.58.1",
 		"@carbon/icons-react": "^10.49.0",
-		"@carbon/telemetry": "0.1.0"
+		"@ibm/telemetry-js": "^1.6.0"
 	},
 	"peerDependencies": {
 		"react": "^16.0.0 || ^17.0.0 || ^18.0.0",

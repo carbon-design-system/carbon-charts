@@ -8,7 +8,8 @@
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet -s ./.storybook/assets",
 		"clean": "rm -rf dist demo/bundle",
-		"start": "yarn storybook"
+		"start": "yarn storybook",
+		"postinstall": "ibmtelemetry --config=telemetry.yml"
 	},
 	"repository": {
 		"type": "git",
@@ -42,7 +43,7 @@
 	],
 	"dependencies": {
 		"@carbon/charts": "^0.58.1",
-		"@carbon/telemetry": "0.1.0"
+		"@ibm/telemetry-js": "^1.6.0"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0",
