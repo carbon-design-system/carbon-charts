@@ -1,6 +1,21 @@
-# Carbon Charts
-
-Carbon Charts is a component library for vanilla JavaScript.
+<p align="center">
+	<a href="https://charts.carbondesignsystem.com/">
+		<img src="../../assets/dashboard.png" alt="Carbon Charts" />
+	</a>
+	<h3 align="center">Carbon Charts</h3>
+	<p align="center">
+		A component library of 26 charts for vanilla JavaScript.
+		<br /><br />
+		<a href="https://www.npmjs.com/package/@carbon/charts">
+			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
+		</a>
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+60k%2Fweek-green" />
+		<a href="https://discord.gg/J7JEUEkTRX">
+	    		<img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
+	  	</a>
+	</p>
+</p>
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
