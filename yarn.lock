@@ -2008,9 +2008,9 @@ __metadata:
     "@carbon/charts": "workspace:*"
     "@ibm/telemetry-js": "npm:^1.6.0"
     "@playwright/test": "npm:^1.46.0"
-    "@sveltejs/adapter-static": "npm:^3.0.3"
-    "@sveltejs/kit": "npm:^2.5.21"
-    "@sveltejs/package": "npm:^2.3.3"
+    "@sveltejs/adapter-static": "npm:^3.0.4"
+    "@sveltejs/kit": "npm:^2.5.22"
+    "@sveltejs/package": "npm:^2.3.4"
     "@sveltejs/vite-plugin-svelte": "npm:^3.1.1"
     eslint: "npm:^9.9.0"
     prettier: "npm:^3.3.3"
@@ -4548,18 +4548,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-static@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "@sveltejs/adapter-static@npm:3.0.3"
+"@sveltejs/adapter-static@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@sveltejs/adapter-static@npm:3.0.4"
   peerDependencies:
     "@sveltejs/kit": ^2.0.0
-  checksum: 10c0/dbffe72ddf5705ef296065cfe598d4f83490dfccb1196a90a5a90cde4b1139ad5acefd1b216a9fbe1484449df3caa48c38550ec2ed7ae2d6767b8ce65c234a83
+  checksum: 10c0/c44a44df376cca05df949540941545faf5c39524443e04421b91b1566109f56a4777c537fffd3c4ff146bdd153fb8b9d44cad480cefa0cf486f075ff177f09df
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.5.21":
-  version: 2.5.21
-  resolution: "@sveltejs/kit@npm:2.5.21"
+"@sveltejs/kit@npm:^2.5.22":
+  version: 2.5.22
+  resolution: "@sveltejs/kit@npm:2.5.22"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^0.6.0"
@@ -4579,13 +4579,13 @@ __metadata:
     vite: ^5.0.3
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/2a86e17956e605b7e712729537b27c271629296961c28f5c8f966d24b0ad806309d846b42e74cb79235e0bbec8730595ccd4c15e9d80aaeafd7f8b8a8e1261bf
+  checksum: 10c0/d8b22665d2b25771b889cbd693dbdcc126dcc881c9c4205299bc14027c64141ceabb455ec4d1f8f711af8de310bbefd44c110ef1f8995b293dde1d3a34c87131
   languageName: node
   linkType: hard
 
-"@sveltejs/package@npm:^2.3.3":
-  version: 2.3.3
-  resolution: "@sveltejs/package@npm:2.3.3"
+"@sveltejs/package@npm:^2.3.4":
+  version: 2.3.4
+  resolution: "@sveltejs/package@npm:2.3.4"
   dependencies:
     chokidar: "npm:^3.6.0"
     kleur: "npm:^4.1.5"
@@ -4596,7 +4596,7 @@ __metadata:
     svelte: ^3.44.0 || ^4.0.0 || ^5.0.0-next.1
   bin:
     svelte-package: svelte-package.js
-  checksum: 10c0/720ea4f0ecf59be067e6768ad1a64366ebe2d8ab6e6ccf8fd5eaa52a349134e733e6d55584427e0b1c5565297a62766a2d640c0f367b79ae3e9565f155870642
+  checksum: 10c0/887d268fe946985fd1b9059fc8821acc4d2ed206743088f8897d5135e622569a8e22c37e257e548fb991815ab1691233f2ce9eea909a66aaba7afc76b891d48d
   languageName: node
   linkType: hard
 
