@@ -16,7 +16,7 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "^18.20.3 ^20.16.0 ^22.2.0"
+		"node": "^20.16.0 ^22.2.0"
 	},
 	"packageManager": "yarn@4.3.1",
 	"devDependencies": {
