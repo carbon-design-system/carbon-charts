@@ -16994,8 +16994,8 @@ __metadata:
   linkType: hard
 
 "terser@npm:^5.26.0":
-  version: 5.31.5
-  resolution: "terser@npm:5.31.5"
+  version: 5.31.6
+  resolution: "terser@npm:5.31.6"
   dependencies:
     "@jridgewell/source-map": "npm:^0.3.3"
     acorn: "npm:^8.8.2"
@@ -17003,7 +17003,7 @@ __metadata:
     source-map-support: "npm:~0.5.20"
   bin:
     terser: bin/terser
-  checksum: 10c0/6e7c66c1f4062ee098bff3dc3c396819ebf5f1740f0615be9de39b675a78c732d199f4dcfdcd15bd65f354e37c45bb944360f532a36fe7f7d22f800ca53c2d02
+  checksum: 10c0/b17d02b65a52a5041430572b3c514475820f5e7590fa93773c0f5b4be601ccf3f6d745bf5a79f3ee58187cf85edf61c24ddf4345783839fccb44c9c8fa9b427e
   languageName: node
   linkType: hard
 
@@ -17449,12 +17449,12 @@ __metadata:
   linkType: hard
 
 "typescript@npm:next":
-  version: 5.6.0-dev.20240812
-  resolution: "typescript@npm:5.6.0-dev.20240812"
+  version: 5.6.0-dev.20240813
+  resolution: "typescript@npm:5.6.0-dev.20240813"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/34cf1ccd4cbc72ab29f9035d8d92e7107840141b0fcd5ff72dcbf09f1c09cdc773f138f45fdec2921c383e0999e3cfbf1f56460ce8e655e6c6eeb83ab7f9e4fb
+  checksum: 10c0/37538b79f680414197668e3ddb92f345c9b31dd026f79e13c74fe723558b285ebda729e0bc5c33a963e656afca0625fc47d5dd16ced31593fe0b07cdf7208dca
   languageName: node
   linkType: hard
 
@@ -17479,12 +17479,12 @@ __metadata:
   linkType: hard
 
 "typescript@patch:typescript@npm%3Anext#optional!builtin<compat/typescript>":
-  version: 5.6.0-dev.20240812
-  resolution: "typescript@patch:typescript@npm%3A5.6.0-dev.20240812#optional!builtin<compat/typescript>::version=5.6.0-dev.20240812&hash=379a07"
+  version: 5.6.0-dev.20240813
+  resolution: "typescript@patch:typescript@npm%3A5.6.0-dev.20240813#optional!builtin<compat/typescript>::version=5.6.0-dev.20240813&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/6486d8a656f47ec25129664b4a84b240952fa74151d02255987e1a8357cd93eb0d9ad013ce4904217aaf637b754c898dc17431cf773a90681189654a19530059
+  checksum: 10c0/c98801a7b7f99f0f4839b66e045e0244a38fc1a9f5d4932e0c5f31aa1c6a372d811f2576a45448dd37211ab87a70ed3f56c8610aa9e8f6bb6b79f5924ffda61c
   languageName: node
   linkType: hard
 
