@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.6.0"
+		"@ibm/telemetry-js": "^1.6.1"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.46.0",
@@ -44,9 +44,9 @@
 		"eslint": "^9.9.0",
 		"prettier": "^3.3.3",
 		"typescript": "^5.5.4",
-		"vite": "^5.4.0",
-		"vite-plugin-dts": "^4.0.2",
-		"vue": "^3.4.37",
+		"vite": "^5.4.1",
+		"vite-plugin-dts": "^4.0.3",
+		"vue": "^3.4.38",
 		"vue-tsc": "^2.0.29"
 	},
 	"publishConfig": {

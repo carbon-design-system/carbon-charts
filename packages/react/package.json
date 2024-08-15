@@ -39,8 +39,8 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.46.0",
-		"@ibm/telemetry-js": "^1.6.0"
+		"@carbon/icons-react": "^11.47.0",
+		"@ibm/telemetry-js": "^1.6.1"
 	},
 	"peerDependencies": {
 		"react": "^16.8.6 || ^17.0.1 || ^18.2.0",
@@ -59,8 +59,8 @@
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"typescript": "^5.5.4",
-		"vite": "^5.4.0",
-		"vite-plugin-dts": "^4.0.2"
+		"vite": "^5.4.1",
+		"vite-plugin-dts": "^4.0.3"
 	},
 	"publishConfig": {
 		"access": "public"
