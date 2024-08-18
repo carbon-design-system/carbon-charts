@@ -57,6 +57,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
@@ -65,7 +66,6 @@
 	"bugs": {
 		"url": "https://github.com/carbon-design-system/carbon-charts/issues"
 	},
-	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"maintainers": [
 		{
 			"name": "Eric Liu",

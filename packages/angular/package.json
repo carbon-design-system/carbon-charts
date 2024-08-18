@@ -56,6 +56,7 @@
 		"directory": "dist",
 		"access": "public"
 	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
