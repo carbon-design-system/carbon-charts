@@ -40,7 +40,7 @@
 		"@ibm/telemetry-js": "^1.6.1"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.46.0",
+		"@playwright/test": "^1.46.1",
 		"@sveltejs/adapter-static": "^3.0.4",
 		"@sveltejs/kit": "^2.5.22",
 		"@sveltejs/package": "^2.3.4",
@@ -59,8 +59,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/svelte"
 	},
 	"bugs": {
 		"url": "https://github.com/carbon-design-system/carbon-charts/issues"

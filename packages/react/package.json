@@ -47,7 +47,7 @@
 		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.46.0",
+		"@playwright/test": "^1.46.1",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.0",
@@ -67,8 +67,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/react"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

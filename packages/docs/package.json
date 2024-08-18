@@ -49,8 +49,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/docs"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

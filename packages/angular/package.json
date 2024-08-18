@@ -41,7 +41,7 @@
 		"@angular/platform-browser": "^18.2.0",
 		"@angular/platform-browser-dynamic": "^18.2.0",
 		"@carbon/icons": "^11.47.0",
-		"@playwright/test": "^1.46.0",
+		"@playwright/test": "^1.46.1",
 		"angular-eslint": "^18.3.0",
 		"concurrently": "^8.2.2",
 		"eslint": "^9.9.0",
@@ -58,8 +58,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/angular/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/angular"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
