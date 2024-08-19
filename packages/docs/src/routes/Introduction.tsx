@@ -8,6 +8,14 @@ const GraphTilesContainer = styled.div`
 	flex-wrap: wrap;
 `
 
+const StyledFooter = styled.footer`
+	background-color: black;
+	margin: -3rem;
+	margin-top: 3rem;
+	padding: 3rem;
+	padding-bottom: 7rem;
+`
+
 export default function Introduction() {
 	return (
 		<>
@@ -78,6 +86,15 @@ export default function Introduction() {
 			<GraphTilesContainer>
 				<GraphTile route="/choropleth" title="Choropleth" svg="choropleth" />
 			</GraphTilesContainer>
+
+			<StyledFooter>
+				<a href="https://www.netlify.com">
+					<img
+						src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg"
+						alt="Deploys by Netlify"
+					/>
+				</a>
+			</StyledFooter>
 		</>
 	)
 }

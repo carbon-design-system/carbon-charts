@@ -16,19 +16,19 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "^20.16.0 ^22.2.0"
+		"node": "^20.17.0 ^22.2.0"
 	},
-	"packageManager": "yarn@4.4.0",
+	"packageManager": "yarn@4.4.1",
 	"devDependencies": {
-		"@commitlint/cli": "^19.4.0",
-		"@commitlint/config-conventional": "^19.2.2",
+		"@commitlint/cli": "^19.4.1",
+		"@commitlint/config-conventional": "^19.4.1",
 		"@eslint/compat": "^1.1.1",
-		"@eslint/js": "^9.9.0",
+		"@eslint/js": "^9.9.1",
 		"@playwright/test": "^1.46.1",
-		"@types/node": "^22.4.0",
+		"@types/node": "^22.5.1",
 		"@vue/eslint-config-prettier": "^9.0.0",
 		"@vue/eslint-config-typescript": "^13.0.0",
-		"eslint": "^9.9.0",
+		"eslint": "^9.9.1",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-jsdoc": "^50.2.2",
 		"eslint-plugin-prettier": "^5.2.1",
@@ -37,16 +37,16 @@
 		"eslint-plugin-svelte": "^2.43.0",
 		"eslint-plugin-vue": "^9.27.0",
 		"globals": "^15.9.0",
-		"husky": "^9.1.4",
+		"husky": "^9.1.5",
 		"lerna": "^8.1.8",
 		"lint-staged": "^15.2.9",
 		"prettier": "^3.3.3",
 		"prettier-config-carbon": "^0.11.0",
 		"prettier-plugin-svelte": "^3.2.6",
-		"svelte": "^4.2.18",
+		"svelte": "^4.2.19",
 		"svelte-eslint-parser": "^0.41.0",
 		"typescript": "^5.5.4",
-		"typescript-eslint": "^8.1.0",
+		"typescript-eslint": "^8.3.0",
 		"vue-eslint-parser": "^9.4.3"
 	},
 	"release": {

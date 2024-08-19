@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://charts.carbondesignsystem.com/">
-		<img src="../../assets/dashboard.png" alt="Carbon Charts" />
+		<img src="../../carbon-charts/HEAD/assets/dashboard.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts Angular</h3>
 	<p align="center">
