@@ -16,45 +16,46 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "^18.20.3 ^20.15.0 ^22.2.0"
+		"node": "^20.16.0 ^22.2.0"
 	},
-	"packageManager": "yarn@4.3.1",
+	"packageManager": "yarn@4.4.0",
 	"devDependencies": {
-		"@commitlint/cli": "^19.3.0",
+		"@commitlint/cli": "^19.4.0",
 		"@commitlint/config-conventional": "^19.2.2",
 		"@eslint/compat": "^1.1.1",
-		"@eslint/js": "^9.7.0",
-		"@playwright/test": "^1.45.1",
-		"@types/node": "^20.14.10",
+		"@eslint/js": "^9.9.0",
+		"@playwright/test": "^1.46.1",
+		"@types/node": "^22.4.0",
 		"@vue/eslint-config-prettier": "^9.0.0",
 		"@vue/eslint-config-typescript": "^13.0.0",
-		"eslint": "^9.7.0",
+		"eslint": "^9.9.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-jsdoc": "^48.7.0",
-		"eslint-plugin-prettier": "^5.1.3",
-		"eslint-plugin-react": "^7.34.3",
+		"eslint-plugin-jsdoc": "^50.2.2",
+		"eslint-plugin-prettier": "^5.2.1",
+		"eslint-plugin-react": "^7.35.0",
 		"eslint-plugin-react-hooks": "next",
-		"eslint-plugin-svelte": "^2.42.0",
+		"eslint-plugin-svelte": "^2.43.0",
 		"eslint-plugin-vue": "^9.27.0",
-		"globals": "^15.8.0",
-		"husky": "^9.0.11",
-		"lerna": "^8.1.6",
-		"lint-staged": "^15.2.7",
+		"globals": "^15.9.0",
+		"husky": "^9.1.4",
+		"lerna": "^8.1.8",
+		"lint-staged": "^15.2.9",
 		"prettier": "^3.3.3",
 		"prettier-config-carbon": "^0.11.0",
-		"prettier-plugin-svelte": "^3.2.5",
+		"prettier-plugin-svelte": "^3.2.6",
 		"svelte": "^4.2.18",
-		"svelte-eslint-parser": "^0.40.0",
-		"typescript": "^5.5.3",
-		"typescript-eslint": "^7.16.0",
+		"svelte-eslint-parser": "^0.41.0",
+		"typescript": "^5.5.4",
+		"typescript-eslint": "^8.1.0",
 		"vue-eslint-parser": "^9.4.3"
 	},
 	"release": {
 		"branch": "master"
 	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git"
 	},
 	"keywords": [
 		"charts",

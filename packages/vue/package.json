@@ -36,27 +36,28 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.6.0"
+		"@ibm/telemetry-js": "^1.6.1"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.45.1",
-		"@vitejs/plugin-vue": "^5.0.5",
-		"eslint": "^9.7.0",
+		"@playwright/test": "^1.46.1",
+		"@vitejs/plugin-vue": "^5.1.2",
+		"eslint": "^9.9.0",
 		"prettier": "^3.3.3",
-		"typescript": "^5.5.3",
-		"vite": "^5.3.3",
-		"vite-plugin-dts": "^3.9.1",
-		"vue": "^3.4.31",
-		"vue-tsc": "^2.0.26"
+		"typescript": "^5.5.4",
+		"vite": "^5.4.1",
+		"vite-plugin-dts": "^4.0.3",
+		"vue": "^3.4.38",
+		"vue-tsc": "^2.0.29"
 	},
 	"publishConfig": {
 		"access": "public",
 		"tag": "next"
 	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/vue"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

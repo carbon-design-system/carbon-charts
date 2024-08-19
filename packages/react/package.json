@@ -39,36 +39,37 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.45.0",
-		"@ibm/telemetry-js": "^1.6.0"
+		"@carbon/icons-react": "^11.47.0",
+		"@ibm/telemetry-js": "^1.6.1"
 	},
 	"peerDependencies": {
 		"react": "^16.8.6 || ^17.0.1 || ^18.2.0",
 		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.45.1",
+		"@playwright/test": "^1.46.1",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"classnames": "^2.5.1",
 		"concurrently": "^8.2.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.7.0",
+		"eslint": "^9.9.0",
 		"prettier": "^3.3.3",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"typescript": "^5.5.3",
-		"vite": "^5.3.3",
-		"vite-plugin-dts": "^3.9.1"
+		"typescript": "^5.5.4",
+		"vite": "^5.4.1",
+		"vite-plugin-dts": "^4.0.3"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:carbon-design-system/carbon-charts.git",
-		"homepage": "https://charts.carbondesignsystem.com/"
+		"url": "git+https://github.com/carbon-design-system/carbon-charts.git",
+		"directory": "packages/react"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -104,7 +105,6 @@
 	"bugs": {
 		"url": "https://github.com/carbon-design-system/carbon-charts/issues"
 	},
-	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"maintainers": [
 		{
 			"name": "Eliad Moosavi",
