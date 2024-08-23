@@ -27,6 +27,7 @@ export class Tooltip extends Component {
 
 	handleShowTooltip = (e: any) => {
 		const data = e.detail.data || e.detail.items
+		const datum = select(e.detail.event.target).datum()
 
 		let defaultHTML: any
 		const formattedItems = this.formatItems(this.getItems(e))
@@ -49,7 +50,7 @@ export class Tooltip extends Component {
 			} else {
 				tooltipTextContainer.html(
 					`<div class="title-tooltip"><p>${sanitizeHtml(
-						this.model.getOptions().tooltip.customHTML(data, defaultHTML)
+						this.model.getOptions().tooltip.customHTML(data, defaultHTML, datum)
 					)}</p></div>`
 				)
 			}

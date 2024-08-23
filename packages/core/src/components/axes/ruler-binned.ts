@@ -86,6 +86,7 @@ export class BinnedRuler extends Ruler {
 
 			if (thereIsMatchingData) {
 				this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					event,
 					mousePosition: [x, y],
 					hoveredElement: rulerLine,
 					items: [

@@ -159,6 +159,7 @@ export class Ruler extends Component {
 			this.elementsToHighlight = elementsToHighlight
 
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				event,
 				mousePosition: [x, y],
 				hoveredElement: rulerLine,
 				data: this.formatTooltipData(tooltipData)
