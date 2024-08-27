@@ -25,14 +25,15 @@ const findColorShade = (hex: string) => {
 	return null
 }
 
-const textFillColor = function () {
-	const correspondingLeaf = select(this.parentNode).select('rect.leaf') as any
-	const correspondingLeafFill = getComputedStyle(correspondingLeaf.node(), null).getPropertyValue(
-		'fill'
-	)
-	const cl = d3Color(correspondingLeafFill) as any
+const textFillColor = function (data) {
+	const correspondingLeaf = select(this.parentNode).select('rect.leaf')
+	const correspondingLeafFill: string =
+		data.backgroundColor ??
+		getComputedStyle(correspondingLeaf.node() as Element, null).getPropertyValue('fill')
+	const cl = d3Color(correspondingLeafFill)
 
 	let colorShade: any
+
 	if (cl) {
 		colorShade = findColorShade(cl ? cl.hex() : null)
 	}
@@ -199,7 +200,7 @@ export class Treemap extends Component {
 					return [
 						{
 							text: d.data.name,
-							color: color.l < 0.5 ? 'white' : 'black'
+							backgroundColor: color
 						}
 					]
 				},
