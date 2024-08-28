@@ -21,12 +21,12 @@ const customColorOptions: TreemapChartOptions = {
 	height: '600px',
 	color: {
 		scale: {
-			Oceania: '#d9fbfb',
-			Europe: '#9ef0f0',
-			America: '#3ddbd9',
-			Australia: '#08bdba',
-			Africa: '#009d9a',
-			Asia: '#081a1c'
+			Oceania: '#3ddbd9',
+			Europe: '#08bdba',
+			America: '#009d9a',
+			Australia: '#007d79',
+			Africa: '#005d5d',
+			Asia: '#004144'
 		}
 	}
 }
