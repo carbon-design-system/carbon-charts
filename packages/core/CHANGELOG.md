@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.20.0 (2024-08-28)
+
+### Features
+
+- **tooltip:** pass datum to customHTML callback function
+  ([#1879](https://github.com/carbon-design-system/carbon-charts/issues/1879))
+  ([9a76784](https://github.com/carbon-design-system/carbon-charts/commit/9a767848c5d9f34d51b2616b904393f496c0f5fd)),
+  closes [#1518](https://github.com/carbon-design-system/carbon-charts/issues/1518)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.19.3 (2024-08-19)
 
 **Note:** Version bump only for package @carbon/charts
