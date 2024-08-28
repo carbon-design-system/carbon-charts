@@ -159,9 +159,10 @@ export interface TooltipOptions {
 	valueFormatter?: (value: any, label: string) => string
 	/**
 	 * custom function for returning tooltip HTML
-	 * passed an array or object with the data, and then the default tooltip markup
+	 * passed an array or object with the data, the default tooltip markup
+	 * and the corresponding datum of the hovered element
 	 */
-	customHTML?: (data: any, defaultHTML: string) => string
+	customHTML?: (data: any, defaultHTML: string, datum: any) => string
 	/**
 	 * customizes the `Group` label shown inside tooltips
 	 */
