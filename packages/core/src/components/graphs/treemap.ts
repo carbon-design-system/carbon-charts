@@ -196,11 +196,11 @@ export class Treemap extends Component {
 
 					let parent = d
 					while (parent.depth > 1) parent = parent.parent
-					const color = hsl(this.model.getFillColor(parent.data.name))
+
 					return [
 						{
 							text: d.data.name,
-							backgroundColor: color
+							backgroundColor: this.model.getFillColor(parent.data.name)
 						}
 					]
 				},
