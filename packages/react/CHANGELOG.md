@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.20.1 (2024-08-29)
+
+### Bug Fixes
+
+- **treemap:** assign leaf text color based on custom colors
+  ([#1881](https://github.com/carbon-design-system/carbon-charts/issues/1881))
+  ([f8b10b4](https://github.com/carbon-design-system/carbon-charts/commit/f8b10b433db004752ea5663aa638a8a14d3491ee)),
+  closes [#1880](https://github.com/carbon-design-system/carbon-charts/issues/1880)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.20.0 (2024-08-28)
 
 ### Features
