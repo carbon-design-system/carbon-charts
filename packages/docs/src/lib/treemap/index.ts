@@ -16,6 +16,21 @@ const options: TreemapChartOptions = {
 	height: '600px'
 }
 
+const customColorOptions: TreemapChartOptions = {
+	title: 'Treemap (Custom colors)',
+	height: '600px',
+	color: {
+		scale: {
+			Oceania: '#3ddbd9',
+			Europe: '#08bdba',
+			America: '#009d9a',
+			Australia: '#007d79',
+			Africa: '#005d5d',
+			Asia: '#004144'
+		}
+	}
+}
+
 const data: ChartTabularData = [
 	{
 		name: 'Oceania',
@@ -110,6 +125,11 @@ export const examples: Example[] = [
 	{
 		data,
 		options,
+		tags: ['test']
+	},
+	{
+		data,
+		options: customColorOptions,
 		tags: ['test']
 	}
 ]
