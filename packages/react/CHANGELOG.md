@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.21.0 (2024-09-02)
+
+### Features
+
+- **netlify:** add logo to intro page
+  ([#1878](https://github.com/carbon-design-system/carbon-charts/issues/1878))
+  ([24feeae](https://github.com/carbon-design-system/carbon-charts/commit/24feeaef3f7ff33e4cdc3600fa7b867384af6db2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.20.1 (2024-08-29)
 
 ### Bug Fixes
