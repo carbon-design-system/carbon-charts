@@ -501,7 +501,7 @@ export default [
 		path: 'treemap',
 		title: 'Treemap Charts',
 		text: 'Treemap charts are hierarchical visualizations that represent hierarchical data structures using nested rectangles. Each rectangle, or "tile," in the treemap represents a hierarchical level, with the size of the tile proportional to a specific metric, such as the relative weight or value of each category or subcategory. The hierarchical structure is depicted by nesting smaller rectangles within larger ones, with each level representing a different category or subcategory. Treemap charts are particularly effective for visualizing and comparing the distribution of data across hierarchical levels. They provide an intuitive way to identify patterns, trends, and outliers within large and complex datasets. Treemap charts are commonly used in fields such as finance, market research, and data analysis for tasks such as visualizing portfolio allocations, analyzing website traffic, and exploring the composition of product sales. They offer a powerful tool for gaining insights into the hierarchical structure of data and making data-driven decisions based on observed patterns and relationships. Details on Treemap Chart options can be found here.',
-		charts: ['Treemap']
+		charts: ['Treemap', 'Treemap (Custom colors)']
 	},
 	{
 		path: 'wordcloud',
