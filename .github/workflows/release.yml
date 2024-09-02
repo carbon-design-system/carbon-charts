@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v20.16.0
+    name: Create release - Node.js v20.17.0
     runs-on: ubuntu-latest
 
     steps:
@@ -16,10 +16,10 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 20.16.0
+      - name: Use Node.js 20.17.0
         uses: actions/setup-node@v4
         with:
-          node-version: '20.16.0'
+          node-version: '20.17.0'
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
@@ -39,6 +39,16 @@ jobs:
         run: |
           yarn build
           node scripts/update-angular-dependency-version.mjs
+
+      - name: Commit and push changes (if there are any)
+        run: |
+          git add .
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "skip-release - chore(build): updated search index for docs"
+            git push origin master
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish to npmjs registry and Github
         run: |

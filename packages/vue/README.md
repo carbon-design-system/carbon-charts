@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://charts.carbondesignsystem.com/">
-		<img src="../../assets/dashboard.png" alt="Carbon Charts" />
+		<img src="../../carbon-charts/HEAD/assets/dashboard.png" alt="Carbon Charts" />
 	</a>
 	<h3 align="center">Carbon Charts Vue</h3>
 	<p align="center">
@@ -17,8 +17,7 @@
 	</p>
 </p>
 
-For Vue.js 2.x support, please use
-`@carbon/charts-vue@latest`.
+For Vue.js 2.x support, please use `@carbon/charts-vue@latest`.
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
