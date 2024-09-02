@@ -40,16 +40,6 @@ jobs:
           yarn build
           node scripts/update-angular-dependency-version.mjs
 
-      - name: Commit and push changes (if there are any)
-        run: |
-          git add .
-          if ! git diff-index --quiet HEAD; then
-            git commit -m "skip-release - chore(build): updated search index for docs"
-            git push origin master
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
       - name: Publish to npmjs registry and Github
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
