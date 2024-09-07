@@ -13,8 +13,8 @@
 		"build:search": "node generateSearchIndex.mjs",
 		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
 		"files:pages": "touch ../../pages/.nojekyll && echo 'charts.carbondesignsystem.com' > ../../pages/CNAME",
-		"build": "yarn build:search && yarn build:docs && yarn files:pages && yarn build:api:docs",
-		"dev": "vite --port 3000",
+		"build": "yarn build:docs && yarn files:pages && yarn build:api:docs",
+		"dev": "yarn build:search && vite --port 3000",
 		"lint": "eslint",
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
@@ -36,13 +36,13 @@
 		"@types/react-dom": "^18.3.0",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.7.0",
-		"eslint": "^9.9.1",
+		"eslint": "^9.10.0",
 		"jsdom": "^25.0.0",
 		"prettier": "^3.3.3",
-		"sass": "^1.77.8",
+		"sass": "^1.78.0",
 		"typedoc": "^0.26.6",
 		"typescript": "^5.5.4",
-		"vite": "^5.4.2"
+		"vite": "^5.4.3"
 	},
 	"publishConfig": {
 		"access": "restricted"

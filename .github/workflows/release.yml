@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - master
+
 jobs:
   build:
     if: github.actor != 'carbon-bot' &&	!startsWith(github.event.head_commit.message, 'skip-release')
-    name: Create release - Node.js v20.17.0
+    name: Create release
     runs-on: ubuntu-latest
 
     steps:
@@ -16,44 +17,38 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 20.17.0
+      - name: Set git user to carbon-bot
+        run: |
+          git config --global user.email "carbon@us.ibm.com"
+          git config --global user.name "carbon-bot"
+
+      - name: Use Node.js 20.x LTS
         uses: actions/setup-node@v4
         with:
-          node-version: '20.17.0'
+          node-version: '20.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org/'
+          always-auth: true
+          auth-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
 
-      - name: Set git user and get git into the right state
-        run: |
-          git config --global user.email "carbon@us.ibm.com"
-          git config --global user.name "carbon-bot"
-          git checkout master
+      - name: Generate search index for docs website
+        run: lerna run build:search --scope @carbon/charts-docs # should be committed in next step
 
-      - name: Create version and change logs
+      - name: Create version and change logs and commit to master
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
-      - name: Rebuild packages and documentation 🔧
+      - name: Build latest version's packages (including angular/dist) 🔧
         run: |
           yarn build
           node scripts/update-angular-dependency-version.mjs
 
-      - name: Commit and push changes (if there are any)
-        run: |
-          git add .
-          if ! git diff-index --quiet HEAD; then
-            git commit -m "skip-release - chore(build): updated search index for docs"
-            git push origin master
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
       - name: Publish to npmjs registry and Github
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
-          npx lerna publish from-git --yes --force-publish
+        run: npx lerna publish from-git --yes --force-publish
 
       - name: Deploy documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
