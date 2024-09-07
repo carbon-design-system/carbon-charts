@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.21.1 (2024-09-07)
+
+### Bug Fixes
+
+- **release:** separate docs search index generation
+  ([#1884](https://github.com/carbon-design-system/carbon-charts/issues/1884))
+  ([2d1f84e](https://github.com/carbon-design-system/carbon-charts/commit/2d1f84ed9aea3a47f99d5fee74d96db52108d163))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.21.0 (2024-09-02)
 
 ### Features
