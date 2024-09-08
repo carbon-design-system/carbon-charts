@@ -27,15 +27,12 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'yarn'
-          registry-url: 'https://registry.npmjs.org/'
-          always-auth: true
-          auth-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
 
       - name: Generate search index for docs website
-        run: lerna run build:search --scope @carbon/charts-docs # should be committed in next step
+        run: lerna run build:search --scope @carbon/charts-docs # committed when version revised
 
       - name: Create version and change logs and commit to master
         env:
@@ -47,7 +44,9 @@ jobs:
           yarn build
           node scripts/update-angular-dependency-version.mjs
 
-      - name: Publish to npmjs registry and Github
+      - name: Publish to npmjs registry and create Github release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx lerna publish from-git --yes --force-publish
 
       - name: Deploy documentation to Github Pages 🚀
