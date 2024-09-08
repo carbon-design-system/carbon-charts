@@ -43,7 +43,7 @@
 		"@carbon/icons": "^11.48.0",
 		"@playwright/test": "^1.47.0",
 		"angular-eslint": "^18.3.0",
-		"concurrently": "^8.2.2",
+		"concurrently": "^9.0.0",
 		"eslint": "^9.10.0",
 		"ng-packagr": "^18.2.1",
 		"prettier": "^3.3.3",
