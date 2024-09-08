@@ -48,7 +48,9 @@ jobs:
           node scripts/update-angular-dependency-version.mjs
 
       - name: Publish to npmjs registry and create Github release
-        run: npx lerna publish from-git --yes --force-publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
+          npx lerna publish from-git --yes --force-publish
 
       - name: Deploy documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
