@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.21.2 (2024-09-08)
+
+### Bug Fixes
+
+- **release:** remove auth-token from actions/setup-node@v4 and use env for publish
+  ([#1888](https://github.com/carbon-design-system/carbon-charts/issues/1888))
+  ([5bcb140](https://github.com/carbon-design-system/carbon-charts/commit/5bcb140f2ff099fca4b82209efef60f0a896c574))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.21.1 (2024-09-07)
 
 ### Bug Fixes
