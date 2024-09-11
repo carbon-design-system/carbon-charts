@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.21.3 (2024-09-11)
+
+### Bug Fixes
+
+- **lerna:** not using env, set explicitly
+  ([#1889](https://github.com/carbon-design-system/carbon-charts/issues/1889))
+  ([c47634a](https://github.com/carbon-design-system/carbon-charts/commit/c47634ac75c77493995519e19d1c49d1f571853f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.21.2 (2024-09-08)
 
 ### Bug Fixes
