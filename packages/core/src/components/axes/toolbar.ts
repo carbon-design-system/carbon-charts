@@ -39,8 +39,7 @@ export class Toolbar extends Component {
 	render(animate = true) {
 		const container = this.getComponentContainer({
 			ariaLabel: 'toolbar'
-		})
-			.attr('role', 'toolbar')
+		}).attr('role', 'group')
 
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
