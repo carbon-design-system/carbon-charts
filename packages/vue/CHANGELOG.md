@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.22.0 (2024-09-16)
+
+### Features
+
+- **a11y:** add aria-label to <svg> elements
+  ([#1892](https://github.com/carbon-design-system/carbon-charts/issues/1892))
+  ([65d40e5](https://github.com/carbon-design-system/carbon-charts/commit/65d40e5397336bc9f42f6f008017eebe7bc36c00))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.21.4 (2024-09-16)
 
 **Note:** Version bump only for package @carbon/charts-vue
