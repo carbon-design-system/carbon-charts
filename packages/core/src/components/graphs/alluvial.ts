@@ -28,7 +28,7 @@ export class Alluvial extends Component {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'alluvial graphs', withinChartClip: true })
 		svg.html('')
 
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {

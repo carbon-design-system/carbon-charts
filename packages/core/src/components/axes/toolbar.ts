@@ -37,7 +37,9 @@ export class Toolbar extends Component {
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
-		const container = this.getComponentContainer()
+		const container = this.getComponentContainer({
+			ariaLabel: 'toolbar'
+		})
 			.attr('role', 'toolbar')
 
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')

@@ -46,7 +46,9 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'radar graph'
+		})
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})

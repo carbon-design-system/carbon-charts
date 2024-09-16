@@ -19,7 +19,9 @@ export class ZeroLine extends Component {
 			(minDomainValue > 0 && maxDomainValue < 0) || (minDomainValue < 0 && maxDomainValue > 0)
 
 		// Grab container SVG
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			isPresentational: true
+		})
 
 		// show zero line only if is necessary, otherwise make sure tto remove zero line if the chart
 		// previously had a domain that went into negatives

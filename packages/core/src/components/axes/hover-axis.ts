@@ -18,7 +18,9 @@ export class HoverAxis extends Axis {
 		super.destroy()
 
 		const axisPosition = this.configs.position as 'left' | 'right' | 'top' | 'bottom'
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'axes'
+		})
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 
 		const self = this

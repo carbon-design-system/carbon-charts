@@ -34,6 +34,15 @@ import type {
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
+	/*
+	 * aria-labels and other accessibility options
+	 */
+	accessibility?: {
+		// aria-label for the SVG element
+		svgAriaLabel?: string
+		// aria-label for the <div role="toolbar" /> element
+		toolbarAriaLabel?: string
+	}
 	/**
 	 * Optionally specify a title for the chart
 	 */

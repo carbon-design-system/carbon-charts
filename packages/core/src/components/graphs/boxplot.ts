@@ -12,7 +12,7 @@ export class Boxplot extends Component {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'box plots', withinChartClip: true })
 
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data

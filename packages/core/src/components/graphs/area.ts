@@ -22,7 +22,7 @@ export class Area extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'area graphs', withinChartClip: true })
 		const options = this.getOptions()
 		let domain = [0, 0]
 

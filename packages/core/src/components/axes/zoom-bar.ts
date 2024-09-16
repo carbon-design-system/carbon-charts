@@ -47,7 +47,9 @@ export class ZoomBar extends Component {
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'zoom bar'
+		})
 
 		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading(AxisPositions.TOP)
 		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked(AxisPositions.TOP)

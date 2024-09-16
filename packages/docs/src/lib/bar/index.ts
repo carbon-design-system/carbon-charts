@@ -22,7 +22,10 @@ const simpleBarOptions: BarChartOptions = {
 			scaleType: ScaleTypes.LABELS
 		}
 	},
-	height: '400px'
+	height: '400px',
+	accessibility: {
+		svgAriaLabel: 'Simple bar chart',
+	}
 }
 
 const simpleBarColorOverrideOptions: BarChartOptions = {

@@ -91,7 +91,13 @@ export class Component {
 		return this.parent
 	}
 
-	getComponentContainer(configs = { withinChartClip: false }) {
+	getComponentContainer(
+		configs: {
+			ariaLabel?: string | null
+			isPresentational?: boolean
+			withinChartClip?: boolean
+		} = { ariaLabel: null, isPresentational: false, withinChartClip: false }
+	) {
 		if (this.type) {
 			const chartprefix = getProperty(this.model.getOptions(), 'style', 'prefix')
 
@@ -102,6 +108,14 @@ export class Component {
 					this.renderType === RenderTypes.SVG ? 'svg' : 'div'
 				}${idSelector}.${carbonPrefix}--${chartprefix}--${this.type}`
 			)
+
+			if (configs.ariaLabel) {
+				container.attr('aria-label', configs.ariaLabel)
+			}
+
+			if (configs.isPresentational) {
+				container.attr('role', 'presentation')
+			}
 
 			if (configs.withinChartClip) {
 				// get unique chartClipId int this chart from model
@@ -126,6 +140,7 @@ export class Component {
 
 			return container.attr('width', '100%').attr('height', '100%')
 		}
+
 		return this.parent
 	}
 

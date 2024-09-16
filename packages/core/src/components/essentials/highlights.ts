@@ -39,7 +39,9 @@ export class Highlight extends Component {
 		})
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ 
+			ariaLabel: 'highlight areas',
+			withinChartClip: true })
 
 		// Update data on all axis highlight groups
 		const highlightAxisGroups = svg

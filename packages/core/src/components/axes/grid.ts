@@ -219,7 +219,10 @@ export class Grid extends Component {
 		const [yScaleEnd, yScaleStart] = mainYScale.range()
 
 		// Get height from the grid
-		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop')
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-grid-backdrop').attr(
+			'role',
+			'presentation'
+		)
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
 			isXGridEnabled || isYGridEnabled

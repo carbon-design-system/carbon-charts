@@ -42,7 +42,10 @@ export class Threshold extends Component {
 		})
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'threshold lines',
+			withinChartClip: true
+		})
 
 		// Update data on all axis threshold groups
 		const thresholdAxisGroups = svg

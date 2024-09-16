@@ -22,7 +22,10 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'stacked area graphs',
+			withinChartClip: true
+		})
 		const self = this
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data

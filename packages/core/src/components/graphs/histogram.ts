@@ -21,7 +21,9 @@ export class Histogram extends Component {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'histogram bars'
+		})
 
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions()

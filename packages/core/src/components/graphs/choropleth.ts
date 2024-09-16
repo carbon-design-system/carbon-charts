@@ -12,7 +12,7 @@ export class Choropleth extends GeoProjection {
 	render(animate = true) {
 		super.render()
 		const data = (this.model as ChoroplethModel).getCombinedData()
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'map', withinChartClip: true })
 
 		const geo = svg.select('g.geo')
 		geo

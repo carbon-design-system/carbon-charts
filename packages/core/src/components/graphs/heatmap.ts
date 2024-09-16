@@ -39,7 +39,7 @@ export class Heatmap extends Component {
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'heatmap', withinChartClip: true })
 		// Lower the chart so the axes are always visible
 		svg.lower()
 

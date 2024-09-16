@@ -17,11 +17,20 @@ export class Donut extends Pie {
 		// if there are no data, remove the center content
 		// that is the old one and do nothing
 		if (this.model.isDataEmpty()) {
-			this.getComponentContainer().select('g.center').remove()
+			this.getComponentContainer({
+				ariaLabel: 'donut graph'
+			})
+				.select('g.center')
+				.remove()
 			return
 		}
 
-		const svg = DOMUtils.appendOrSelect(this.getComponentContainer(), 'g.center')
+		const svg = DOMUtils.appendOrSelect(
+			this.getComponentContainer({
+				ariaLabel: 'donut graph'
+			}),
+			'g.center'
+		)
 		const options = this.getOptions()
 
 		// Compute the outer radius needed
