@@ -83,7 +83,9 @@ export class ColorScaleLegend extends Legend {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const options = this.getOptions()
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'legend'
+		})
 		const { width } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})

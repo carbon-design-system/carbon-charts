@@ -18,7 +18,10 @@ export class CirclePack extends Component {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
 		// svg and container widths
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'circle packs',
+			withinChartClip: true
+		})
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent as any, {
 			useAttrs: true
 		})

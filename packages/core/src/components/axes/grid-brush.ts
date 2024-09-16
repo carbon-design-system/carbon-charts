@@ -22,7 +22,9 @@ export class ChartBrush extends Component {
 		const svg = this.parent
 
 		// use this area to display selection above all graphs
-		const frontSelectionArea = this.getComponentContainer()
+		const frontSelectionArea = this.getComponentContainer({
+			isPresentational: true
+		})
 		if (!svg) throw new Error('SVG was not defined')
 		const backdrop = DOMUtils.appendOrSelect(
 			svg as Selection<SVGGraphicsElement, any, HTMLElement, any>,

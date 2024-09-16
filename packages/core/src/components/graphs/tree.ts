@@ -51,7 +51,9 @@ export class Tree extends Component {
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'tree diagram'
+		})
 
 		// Empty out the svg before rendering the tree
 		svg.html('')

@@ -23,7 +23,10 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'bar graphs',
+			withinChartClip: true
+		})
 
 		const data = this.model.getDisplayData(this.configs.groups)
 

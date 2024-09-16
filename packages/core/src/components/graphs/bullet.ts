@@ -25,7 +25,7 @@ export class Bullet extends Component {
 		const { groupMapsTo } = options.data
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'bullet graphs', withinChartClip: true })
 
 		const data = this.model.getDisplayData(this.configs.groups)
 

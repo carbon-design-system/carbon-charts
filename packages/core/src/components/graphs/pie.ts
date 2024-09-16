@@ -50,7 +50,9 @@ export class Pie extends Component {
 
 	render(animate = true) {
 		const self = this
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'pie graph'
+		})
 
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data

@@ -80,7 +80,9 @@ export class Gauge extends Component {
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = true) {
-		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
+		const svg = this.getComponentContainer({
+			ariaLabel: 'gauge graph'
+		}).attr('width', '100%').attr('height', '100%')
 		const options = this.getOptions()
 
 		const value = this.getValue()

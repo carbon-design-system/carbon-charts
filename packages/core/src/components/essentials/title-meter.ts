@@ -16,7 +16,9 @@ export class MeterTitle extends Title {
 	render(animate = false) {
 		const dataset = getProperty(this.model.getDisplayData(), 0)
 		const options = this.getOptions()
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'meter title'
+		})
 		const { groupMapsTo } = options.data
 		const meterTitle = options.locale.translations.meter.title
 		const proportional = getProperty(options, 'meter', 'proportional')

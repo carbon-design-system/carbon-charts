@@ -21,7 +21,9 @@ export class WordCloud extends Component {
 
 	render(animate = true) {
 		const self = this
-		const svg = this.getComponentContainer().attr('width', '100%').attr('height', '100%')
+		const svg = this.getComponentContainer({
+			ariaLabel: 'word cloud'
+		}).attr('width', '100%').attr('height', '100%')
 
 		const displayData = this.model.getDisplayData()
 		const fontSizeScale = this.getFontSizeScale(displayData)

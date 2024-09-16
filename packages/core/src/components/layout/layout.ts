@@ -71,6 +71,8 @@ export class LayoutComponent extends Component {
 	}
 
 	render(animate = true) {
+		const options = this.model.getOptions()
+
 		// Get parent element to render inside of
 		const parent = this.parent
 
@@ -126,6 +128,11 @@ export class LayoutComponent extends Component {
 									.attr('height', '100%')
 							: selection
 					)
+
+					// if parent is missing aria-label, set it to the title of the parent
+					if (isRenderingSVG && !selection.select('svg.layout-svg-wrapper').attr('aria-label')) {
+						selection.select('svg.layout-svg-wrapper').attr('aria-label', options?.accessibility?.svgAriaLabel || options?.title)
+					}
 
 					// Render preffered & fixed items
 					const growth = getProperty(d, 'growth')

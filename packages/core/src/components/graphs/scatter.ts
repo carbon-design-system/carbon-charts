@@ -82,7 +82,7 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'scatter points', withinChartClip: true })
 
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data

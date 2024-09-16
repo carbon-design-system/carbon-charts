@@ -56,12 +56,9 @@ export class Axis extends Component {
 		const options = this.getOptions()
 		const isAxisVisible = getProperty(options, 'axes', axisPosition, 'visible')
 
-		const svg = this.getComponentContainer() as D3Selection<
-			SVGGraphicsElement,
-			any,
-			HTMLElement,
-			any
-		>
+		const svg = this.getComponentContainer({
+			ariaLabel: 'axes'
+		}) as D3Selection<SVGGraphicsElement, any, HTMLElement, any>
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
 			useAttrs: true
 		})

@@ -17,7 +17,7 @@ export class Lollipop extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ withinChartClip: true })
+		const svg = this.getComponentContainer({ ariaLabel: 'lines', withinChartClip: true })
 
 		const options = this.model.getOptions()
 

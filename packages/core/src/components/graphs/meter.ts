@@ -36,7 +36,9 @@ export class Meter extends Component {
 
 	render(animate = true) {
 		const self = this
-		const svg = this.getComponentContainer()
+		const svg = this.getComponentContainer({
+			ariaLabel: 'meter lines'
+		})
 		const options = this.getOptions()
 		const proportional = getProperty(options, 'meter', 'proportional')
 		const data = this.model.getDisplayData()
