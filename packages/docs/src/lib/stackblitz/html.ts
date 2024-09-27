@@ -23,8 +23,9 @@ export function getHtmlProject(
   <!-- Load required stylesheet -->
   <link href="https://unpkg.com/@carbon/charts@latest/dist/styles.css" rel="stylesheet" crossorigin="anonymous" />
 
-  <!-- Load font used by Carbon Charts -->
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />
+  <!-- Load Plex fonts -->
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />
 
   <style>
     .p-1 {

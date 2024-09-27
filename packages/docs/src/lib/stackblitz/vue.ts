@@ -27,12 +27,8 @@ export function getVueProject(
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carbon Charts Vue Example</title>
-    <link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400%7CIBM+Plex+Sans:400,600&display=swap"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+	<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />
   </head>
   <body>
     <div id="app"></div>
