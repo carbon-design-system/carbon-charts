@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.1 (2024-09-27)
+
+### Bug Fixes
+
+- **docs:** switch fonts to s81c cdn
+  ([#1898](https://github.com/carbon-design-system/carbon-charts/issues/1898))
+  ([cdfc980](https://github.com/carbon-design-system/carbon-charts/commit/cdfc980596365c90f08e35e91e49cbc2f491fd09))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.22.0 (2024-09-16)
 
 ### Features
