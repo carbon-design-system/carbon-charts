@@ -406,11 +406,11 @@ export class Axis extends Component {
 				.data(axis.tickValues(), scale)
 				.order()
 				.select('text')
-			ticks.style('font-weight', (tick: number, i: number) => {
-				return isTickPrimary(tick, i, axis.tickValues(), timeInterval, showDayName)
-					? 'bold'
-					: 'normal'
-			})
+			ticks.attr('class', (tick: number, i: number) =>
+				isTickPrimary(tick, i, axis.tickValues(), timeInterval, showDayName)
+					? 'primary-tick-label'
+					: 'tick-label'
+			)
 		} else {
 			if (!animate || !axisRefExists) {
 				axisRef = axisRef.call(axis)
