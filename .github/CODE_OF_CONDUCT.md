@@ -32,4 +32,4 @@ If you are subjected to or witness unacceptable behavior, or have any other conc
 If you have suggestions to improve this Code of Conduct, please submit an issue or PR.
 
 
-This Code of Conduct was adopted from the [Angular Project](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md) and [Todo Open Code of Conduct](http://todogroup.org/opencodeofconduct/).
+This Code of Conduct was adopted from the [Angular Project](https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md) and [Todo Open Code of Conduct](http://todogroup.org/opencodeofconduct/).
