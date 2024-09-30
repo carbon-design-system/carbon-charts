@@ -17,6 +17,9 @@ export class Legend extends Component {
 	type = 'legend'
 	renderType = RenderTypes.HTML
 
+	// flag for checking if event listener is added
+	isEventListenerAdded = false
+
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -159,8 +162,9 @@ export class Legend extends Component {
 		// Remove old elements as needed.
 		legendItems.exit().on('mouseover', null).on('click', null).on('mouseout', null).remove()
 
-		if (legendClickable && addedLegendItems.size() > 1) {
+		if (!this.isEventListenerAdded) {
 			this.addEventListeners()
+			this.isEventListenerAdded = true
 		}
 	}
 
