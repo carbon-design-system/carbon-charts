@@ -32,6 +32,14 @@
 		g.tick text {
 			fill: theme.$text-secondary;
 			font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
+
+			&.tick-label--primary {
+				font-weight: bold;
+			}
+
+			&.tick-label {
+				font-weight: normal;
+			}
 		}
 
 		g.tick line {
