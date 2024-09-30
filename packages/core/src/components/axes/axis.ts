@@ -408,7 +408,7 @@ export class Axis extends Component {
 				.select('text')
 			ticks.attr('class', (tick: number, i: number) =>
 				isTickPrimary(tick, i, axis.tickValues(), timeInterval, showDayName)
-					? 'primary-tick-label'
+					? 'tick-label--primary'
 					: 'tick-label'
 			)
 		} else {

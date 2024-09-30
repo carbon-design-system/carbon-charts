@@ -33,7 +33,7 @@
 			fill: theme.$text-secondary;
 			font-family: var(--#{globals.$prefix}-charts-font-family-condensed);
 
-			&.primary-tick-label {
+			&.tick-label--primary {
 				font-weight: bold;
 			}
 
