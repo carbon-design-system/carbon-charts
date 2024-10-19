@@ -16,14 +16,14 @@
 	export let options: T = {} as T // Specific chart option type, default is empty
 	export let Chart: CoreChartClass // Used to instantiate next property
 	export let chart: Charts | undefined // Instance of the chart class
-	export let ref: HTMLDivElement // Binding to chart 'holder' in template below
+	export let ref: HTMLDivElement | undefined // Binding to chart 'holder' in template below
 	export let id = `chart-${Math.random().toString(36)}` // id for chart holder element
 
 	const dispatch = createEventDispatcher<DispatchedEvents>()
 
 	onMount(() => {
 		try {
-			chart = new Chart(ref, { data, options })
+			chart = new Chart(ref as HTMLDivElement, { data, options })
 			dispatch('load')
 		} catch (error) {
 			console.error('Failed to initialize chart:', error)
@@ -53,4 +53,4 @@
 	})
 </script>
 
-<div {id} bind:this={ref} class={chartHolderCssClass} {...$$restProps} />
+<div {id} bind:this={ref} class={chartHolderCssClass} {...$$restProps}></div>
