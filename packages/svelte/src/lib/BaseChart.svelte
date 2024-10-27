@@ -53,4 +53,4 @@
 	})
 </script>
 
-<div {id} bind:this={ref} class={chartHolderCssClass} {...$$restProps} />
+<div {id} bind:this={ref} class={chartHolderCssClass} {...$$restProps}></div>
