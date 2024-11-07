@@ -1,7 +1,7 @@
 export const fetchVersion = async (): Promise<string> => {
 	try {
 		const response = await fetch(
-			'https://raw.githubusercontent.com/carbon-design-system/carbon-charts/master/packages/react/package.json'
+			'https://raw.githubusercontent.com/carbon-design-system/carbon-charts/main/packages/react/package.json'
 		)
 		if (!response.ok) throw new Error('Network response was not ok')
 
