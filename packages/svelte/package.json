@@ -33,26 +33,26 @@
 		"telemetry.yml"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"svelte": "^4.0.0 || ^5.1.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.6.1"
+		"@ibm/telemetry-js": "^1.8.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.47.1",
-		"@sveltejs/adapter-static": "^3.0.4",
-		"@sveltejs/kit": "^2.5.27",
-		"@sveltejs/package": "^2.3.5",
-		"@sveltejs/vite-plugin-svelte": "^3.1.2",
-		"eslint": "^9.10.0",
+		"@playwright/test": "^1.48.2",
+		"@sveltejs/adapter-static": "^3.0.6",
+		"@sveltejs/kit": "^2.8.0",
+		"@sveltejs/package": "^2.3.7",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"eslint": "^9.14.0",
 		"prettier": "^3.3.3",
-		"publint": "^0.2.10",
-		"svelte": "^4.2.19",
-		"svelte-check": "^4.0.2",
-		"tslib": "^2.7.0",
-		"typescript": "^5.6.2",
-		"vite": "^5.4.5"
+		"publint": "^0.2.12",
+		"svelte": "^5.1.12",
+		"svelte-check": "^4.0.5",
+		"tslib": "^2.8.1",
+		"typescript": "^5.6.3",
+		"vite": "^5.4.10"
 	},
 	"publishConfig": {
 		"access": "public"
