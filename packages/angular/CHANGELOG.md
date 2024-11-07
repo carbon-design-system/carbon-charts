@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.2 (2024-11-07)
+
+### Bug Fixes
+
+- **yarn:** bundle because CI lacks corepack
+  ([#1911](https://github.com/carbon-design-system/carbon-charts/issues/1911))
+  ([513e779](https://github.com/carbon-design-system/carbon-charts/commit/513e7798007f807d1463a25efe7d140d5b038b8e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.1 (2024-09-27)
 
 ### Bug Fixes
