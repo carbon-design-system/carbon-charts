@@ -178,7 +178,7 @@ export interface TimeScaleOptions {
 	/**
 	 * locale object, for more information see https://date-fns.org/v2.11.0/docs/Locale.
 	 * example: `import { fr as localeObject } from 'date-fns/locale'`.
-	 * available locale objects are: https://github.com/date-fns/date-fns/tree/master/src/locale
+	 * available locale objects are: https://github.com/date-fns/date-fns/tree/main/src/locale
 	 */
 	localeObject?: Locale
 }

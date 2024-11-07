@@ -8,7 +8,7 @@
 | 0.x    | :white_check_mark: |
 
 Please review the
-[release schedule](https://github.com/carbon-design-system/carbon-charts/blob/master/.github/release-schedule.md)
+[release schedule](https://github.com/carbon-design-system/carbon-charts/blob/main/.github/release-schedule.md)
 for full details on what release phase versions are in and the level of support
 provided for each.
 

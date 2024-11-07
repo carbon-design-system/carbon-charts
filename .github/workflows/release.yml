@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
       - name: Generate search index for docs website
         run: lerna run build:search --scope @carbon/charts-docs # committed by lerna version
 
-      - name: Create version and change logs and commit to master
+      - name: Create version and change logs and commit to main
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
       - name: Build latest version's packages (including angular/dist) 🔧
