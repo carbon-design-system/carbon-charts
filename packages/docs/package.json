@@ -21,8 +21,8 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
-		"@carbon/icons-react": "^11.52.0",
-		"@carbon/react": "^1.70.0",
+		"@carbon/icons-react": "^11.53.0",
+		"@carbon/react": "^1.71.0",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.0.0",
 		"highlight.js": "^11.10.0",
