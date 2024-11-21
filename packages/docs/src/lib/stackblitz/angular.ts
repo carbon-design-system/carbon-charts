@@ -9,24 +9,24 @@ export function getAngularProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/common': '^18.0.0',
-		'@angular/compiler': '^18.0.0',
-		'@angular/core': '^18.0.0',
-		'@angular/platform-browser': '^18.0.0',
+		'@angular/common': '^18.1.0',
+		'@angular/compiler': '^18.1.0',
+		'@angular/core': '^18.1.0',
+		'@angular/platform-browser': '^18.1.0',
 		'@carbon/charts-angular': version.carbonCharts,
 		tslib: '^2.5.0',
 		'zone.js': '~0.14.0'
 	}
 
 	const devDependencies = {
-		'@angular-devkit/build-angular': '^18.0.0',
-		'@angular/cli': '^18.0.1',
-		'@angular/compiler-cli': '^18.0.0',
+		'@angular-devkit/build-angular': '^18.1.0',
+		'@angular/cli': '^18.1.0',
+		'@angular/compiler-cli': '^18.1.0',
 		'@types/d3': '^7.4.3',
 		'@types/d3-cloud': '^1.2.9',
 		'@types/d3-sankey': '^0.12.4',
 		'@types/topojson-client': '^3.1.0',
-		typescript: '~5.4.0'
+		typescript: '~5.5.0'
 	}
 
 	const indexHtml = `<html>
@@ -50,7 +50,6 @@ export function getAngularProject(
 
 	const mainTs = `import { Component } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser'
-import 'zone.js'
 import { ChartsModule } from '@carbon/charts-angular'
 import options from './options'
 import data from './data'
@@ -103,6 +102,7 @@ bootstrapApplication(App)
             "index": "src/index.html",
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
+            "polyfills": ["zone.js"],
             "scripts": [],
             "styles": ["src/styles.css"],
             "tsConfig": "tsconfig.app.json"
@@ -172,7 +172,7 @@ bootstrapApplication(App)
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2015",
+    "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"]
