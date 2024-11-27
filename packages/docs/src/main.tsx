@@ -66,7 +66,7 @@ const App: React.FC = () => (
 				<Route path="toolbar" element={<Toolbar />} />
 				<Route path="truncation" element={<Truncation />} />
 				<Route path="zoombar" element={<Zoombar />} />
-				<Route path="api" element={<Api />} />
+				<Route path="apidocs" element={<Api />} />
 				<Route path="themes" element={<Themes />} />
 				<Route path="axes" element={<Axes />} />
 				<Route path="legends" element={<Legends />} />

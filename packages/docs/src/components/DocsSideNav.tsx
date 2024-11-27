@@ -52,7 +52,7 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/zoombar">
 					Zoombar
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/api">
+				<SideNavMenuItem as={NavLink} to="/apidocs">
 					API
 				</SideNavMenuItem>
 			</SideNavMenu>
