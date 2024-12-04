@@ -1,6 +1,5 @@
 import { select, type Selection } from 'd3'
 import { get } from 'lodash-es'
-import { Modal as CarbonModalComponent } from 'carbon-components'
 import { getProperty } from '@/tools'
 import { carbonPrefix } from '@/configuration-non-customizable' // CSS prefix
 import { Component } from '@/components/component'
@@ -33,17 +32,32 @@ export class Modal extends Component {
 			.attr('aria-labelledby', `${id}__modal-title`)
 			.attr('aria-describedby', `${id}__modal-description`)
 			.attr('tabindex', -1)
+			.style('opacity', 1)
+			.style('visibility', 'visible')
 
 		this.modal.html(this.getModalHTML())
 		this.modal
 			.select('div.cds--modal-footer button.cds--btn')
 			.on('click', () => this.model.exportToCSV())
 
-		const modalInstance = CarbonModalComponent.create(this.modal.node())
-		modalInstance.show()
+		// hide modal when modal background is clicked
+		this.modal.on('click', this.handleHideModal)
+		this.modal.select('.cds--modal-container').on('click', event => {
+			event.stopPropagation()
+		})
+		// hide modal when close button is clicked
+		this.modal.select('.cds--modal-close').on('click', this.handleHideModal)
 
-		//catches when modal gets closed
-		document.addEventListener('modal-hidden', this.handleHideModal)
+		if (typeof window !== 'undefined') {
+			// hide modal when ESC key is pressed on window
+			window.addEventListener('keydown', this.handleEscapeKey)
+		}
+	}
+
+	handleEscapeKey = event => {
+		if (event.key === 'Escape') {
+			this.handleHideModal()
+		}
 	}
 
 	handleHideModal = () => {
@@ -53,9 +67,16 @@ export class Modal extends Component {
 			.attr('aria-labelledby', null)
 			.attr('aria-describedby', null)
 			.attr('tabindex', null)
+			.style('opacity', 0)
+			.style('visibility', 'hidden')
 
-		//removes event listener when modal is closed
-		document.removeEventListener('modal-hidden', this.handleHideModal)
+		// remove event listeners
+		this.modal.on('click', null)
+		this.modal.select('.cds--modal-container').on('click', null)
+		this.modal.select('.cds--modal-close').on('click', null)
+		if (typeof window !== 'undefined') {
+			window.removeEventListener('keydown', this.handleEscapeKey)
+		}
 	}
 
 	addEventListeners() {

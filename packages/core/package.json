@@ -78,7 +78,6 @@
 		"@ibm/telemetry-js": "^1.8.0",
 		"@types/d3": "^7.4.3",
 		"@types/topojson": "^3.2.6",
-		"carbon-components": "^10.59.0",
 		"d3": "^7.9.0",
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",

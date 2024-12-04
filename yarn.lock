@@ -2050,7 +2050,6 @@ __metadata:
     "@types/lodash-es": "npm:^4.17.12"
     "@types/node": "npm:^22.10.0"
     "@types/topojson": "npm:^3.2.6"
-    carbon-components: "npm:^10.59.0"
     concurrently: "npm:^9.1.0"
     d3: "npm:^7.9.0"
     d3-cloud: "npm:^1.2.7"
@@ -2212,15 +2211,6 @@ __metadata:
     sass:
       optional: true
   checksum: 10c0/020d94f3c34d95695b05e26556648ee5e155fe796c862048e6c8db3d5529dab4a079d050c03962ab20243161b542bc42389ffebd23f6ca0e11baf0308c867974
-  languageName: node
-  linkType: hard
-
-"@carbon/telemetry@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@carbon/telemetry@npm:0.1.0"
-  bin:
-    carbon-telemetry: bin/carbon-telemetry.js
-  checksum: 10c0/63ccb4de06beab043d8366da6391ba30e11e86479d84e58f3c486695cde5d93a5615034b3e5c802c50a54b18fe916cdcad075859d29510ea985b175974603c9e
   languageName: node
   linkType: hard
 
@@ -7763,18 +7753,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@npm:^10.59.0":
-  version: 10.59.0
-  resolution: "carbon-components@npm:10.59.0"
-  dependencies:
-    "@carbon/telemetry": "npm:0.1.0"
-    flatpickr: "npm:4.6.1"
-    lodash.debounce: "npm:^4.0.8"
-    warning: "npm:^3.0.0"
-  checksum: 10c0/ac2769774148c13dd1b3fef4442afd24d5339bb989bccaf11f6e1963559d41558bfc67ab44cf82938b1aac55b8211b8c1720760aca6aaa8aced479106f98b12a
-  languageName: node
-  linkType: hard
-
 "chai@npm:^5.1.2":
   version: 5.1.2
   resolution: "chai@npm:5.1.2"
@@ -10810,13 +10788,6 @@ __metadata:
   bin:
     flat: cli.js
   checksum: 10c0/f178b13482f0cd80c7fede05f4d10585b1f2fdebf26e12edc138e32d3150c6ea6482b7f12813a1091143bad52bb6d3596bca51a162257a21163c0ff438baa5fe
-  languageName: node
-  linkType: hard
-
-"flatpickr@npm:4.6.1":
-  version: 4.6.1
-  resolution: "flatpickr@npm:4.6.1"
-  checksum: 10c0/b2beaaffdbf81c63db4f22f6ab7a3844d9b98b14929a9b0c1a4d8c10e1e8e0932deeaf89598e58cadda9931815f96acc538aa060b363ce1a205b4c50d0bb34d2
   languageName: node
   linkType: hard
 
@@ -18737,15 +18708,6 @@ __metadata:
   version: 3.0.1
   resolution: "walk-up-path@npm:3.0.1"
   checksum: 10c0/3184738e0cf33698dd58b0ee4418285b9c811e58698f52c1f025435a85c25cbc5a63fee599f1a79cb29ca7ef09a44ec9417b16bfd906b1a37c305f7aa20ee5bc
-  languageName: node
-  linkType: hard
-
-"warning@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "warning@npm:3.0.0"
-  dependencies:
-    loose-envify: "npm:^1.0.0"
-  checksum: 10c0/6a2a56ab3139d3927193d926a027e74e1449fa47cc692feea95f8a81a4bb5b7f10c312def94cce03f3b58cb26ba3247858e75d17d596451d2c483a62e8204705
   languageName: node
   linkType: hard
 
