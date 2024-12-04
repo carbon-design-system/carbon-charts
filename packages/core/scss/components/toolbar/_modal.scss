@@ -59,6 +59,10 @@
 			transform-origin: top center;
 			transition: transform 0.24s cubic-bezier(0.4, 0.14, 1, 1);
 
+			@media (max-width: 671px) {
+				transform: none;
+			}
+
 			@media (min-width: 42rem) {
 				position: static;
 				width: 84%;
