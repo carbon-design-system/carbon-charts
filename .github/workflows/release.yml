@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -42,7 +42,7 @@ jobs:
       - name: Stage generated search index
         run: git add packages/docs/src/searchIndex.ts
 
-      - name: Create version and change logs and commit to master
+      - name: Create version and change logs and commit to main
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
       - name: Build latest version's packages (including angular/dist) 🔧

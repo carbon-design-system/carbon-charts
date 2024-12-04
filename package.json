@@ -50,7 +50,7 @@
 		"vue-eslint-parser": "^9.4.3"
 	},
 	"release": {
-		"branch": "master"
+		"branch": "main"
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
