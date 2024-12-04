@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.7 (2024-12-04)
+
+### Bug Fixes
+
+- **meter:** incorrect peak value showing
+  ([#1926](https://github.com/carbon-design-system/carbon-charts/issues/1926))
+  ([bd44d25](https://github.com/carbon-design-system/carbon-charts/commit/bd44d25075eef6b9c07e970ef42428e7a2a1aa18))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.6 (2024-12-04)
 
 **Note:** Version bump only for package @carbon/charts-docs
