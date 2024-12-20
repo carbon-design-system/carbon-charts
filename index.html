@@ -14,7 +14,61 @@
 		<meta property="og:image" content="https://charts.carbondesignsystem.com/images/hero.png" />
 		<meta property="og:url" content="https://charts.carbondesignsystem.com" />
 		<meta property="og:type" content="website" />
-		<script type="module" crossorigin src="/assets/index-CX7_iHp1.js"></script>
+
+		<!-- Tealium/GA Set up -->
+		<script type="text/javascript">
+			window._ibmAnalytics = {
+				settings: {
+					name: 'CarbonChartsDocsV1',
+					isSpa: true,
+					tealiumProfileName: 'ibm-web-app'
+				},
+				onLoad: [['ibmStats.pageview', []]]
+			}
+			digitalData = {
+				page: {
+					pageInfo: {
+						ibm: {
+							siteId: 'IBM_' + _ibmAnalytics.settings.name
+						}
+					},
+					category: {
+						primaryCategory: 'PC100'
+					}
+				}
+			}
+		</script>
+		<script
+			src="//1.www.s81c.com/common/stats/ibm-common.js"
+			type="text/javascript"
+			async="async"></script>
+
+		<!-- IBM footer -->
+		<footer><dds-footer-container key="footer" disable-locale-button="true" size="micro" /></footer>
+		<script
+			key="8"
+			type="module"
+			src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"></script>
+
+		<style>
+			body > footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				z-index: 99999;
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 1px;
+					background-color: #525252;
+				}
+			}
+		</style>
+		<script type="module" crossorigin src="/assets/index-C6qv9oq5.js"></script>
 		<link rel="stylesheet" crossorigin href="/assets/index-Dvw_iUZQ.css">
 	</head>
 
