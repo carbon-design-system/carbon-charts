@@ -32,13 +32,13 @@ Release change logs can be found [here](https://github.com/carbon-design-system/
 ## Bugs and feature requests
 
 Please read the
-[issue guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md#issue-guidelines)
+[issue guidelines](https://github.com/carbon-design-system/carbon-charts/blob/main/CONTRIBUTING.md#issue-guidelines)
 and search for existing and closed issues. If your problem or idea has not been addressed, [submit a bug report](https://github.com/carbon-design-system/carbon-charts/issues/new?assignees=&labels=bug+🐛&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+) or [feature enhancement request](https://github.com/carbon-design-system/carbon-charts/issues/new?assignees=&labels=enhancement&projects=&template=ENHANCEMENT.yaml&title=%5BEnhancement%5D%3A+).
 
 ## Contributing
 
 See our
-[contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/.github/CONTRIBUTING.md) - instructions for opening issues, coding guidelines, and submitting pull requests.
+[contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/main/.github/CONTRIBUTING.md) - instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
 

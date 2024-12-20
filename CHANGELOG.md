@@ -3857,7 +3857,7 @@ All notable changes to this project will be documented in this file. See
 - **build:** add github credentials
   ([#225](https://github.com/carbon-design-system/carbon-charts/issues/225))
   ([118196a](https://github.com/carbon-design-system/carbon-charts/commit/118196a))
-- **build:** checkout master to rejoin head
+- **build:** checkout main to rejoin head
   ([#224](https://github.com/carbon-design-system/carbon-charts/issues/224))
   ([bdbe0ca](https://github.com/carbon-design-system/carbon-charts/commit/bdbe0ca))
 - **build:** refactor deploy and update package.jsons
