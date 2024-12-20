@@ -37,7 +37,10 @@ jobs:
         run: yarn install --immutable --check-cache
 
       - name: Generate search index for docs website
-        run: lerna run build:search --scope @carbon/charts-docs # committed by lerna version
+        run: npx lerna run build:search --scope @carbon/charts-docs
+
+      - name: Stage generated search index
+        run: git add packages/docs/src/searchIndex.ts
 
       - name: Create version and change logs and commit to main
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
