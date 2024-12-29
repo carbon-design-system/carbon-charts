@@ -43,12 +43,12 @@
 		"@carbon/icons": "^11.53.0",
 		"@playwright/test": "^1.49.1",
 		"angular-eslint": "^18.4.3",
-		"concurrently": "^9.1.0",
+		"concurrently": "^9.1.1",
 		"eslint": "^9.17.0",
 		"ng-packagr": "^18.2.1",
 		"prettier": "^3.4.2",
 		"typescript": "<5.6.0",
-		"typescript-eslint": "^8.18.1",
+		"typescript-eslint": "^8.18.2",
 		"zone.js": "~0.15.0"
 	},
 	"publishConfig": {

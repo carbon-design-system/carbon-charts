@@ -25,10 +25,10 @@
 		"@carbon/react": "^1.72.0",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.0.0",
-		"highlight.js": "^11.11.0",
+		"highlight.js": "^11.11.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-router-dom": "^7.1.0",
+		"react-router-dom": "^7.1.1",
 		"styled-components": "^6.1.13"
 	},
 	"devDependencies": {
@@ -40,9 +40,9 @@
 		"jsdom": "^25.0.1",
 		"prettier": "^3.4.2",
 		"sass": "^1.83.0",
-		"typedoc": "^0.27.5",
+		"typedoc": "^0.27.6",
 		"typescript": "^5.7.2",
-		"vite": "^6.0.5"
+		"vite": "^6.0.6"
 	},
 	"publishConfig": {
 		"access": "restricted"

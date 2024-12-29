@@ -44,10 +44,10 @@
 		"eslint": "^9.17.0",
 		"prettier": "^3.4.2",
 		"typescript": "^5.7.2",
-		"vite": "^6.0.5",
+		"vite": "^6.0.6",
 		"vite-plugin-dts": "^4.4.0",
 		"vue": "^3.5.13",
-		"vue-tsc": "^2.1.10"
+		"vue-tsc": "^2.2.0"
 	},
 	"publishConfig": {
 		"access": "public",
