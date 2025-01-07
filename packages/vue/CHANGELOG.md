@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.10 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** only externalize jsx-runtime
+  ([#1937](https://github.com/carbon-design-system/carbon-charts/issues/1937))
+  ([5edea11](https://github.com/carbon-design-system/carbon-charts/commit/5edea11945a9ef744839fa84cb0be4966e3c5471))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.9 (2025-01-07)
 
 ### Bug Fixes
