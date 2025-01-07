@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.9 (2025-01-07)
+
+### Bug Fixes
+
+- exclude jsx-runtime from bundle
+  ([#1928](https://github.com/carbon-design-system/carbon-charts/issues/1928))
+  ([89a1966](https://github.com/carbon-design-system/carbon-charts/commit/89a19665189f6a292dad415787e86853a27814a2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.8 (2024-12-20)
 
 **Note:** Version bump only for package @carbon/charts-react
