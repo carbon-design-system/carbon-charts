@@ -12,7 +12,6 @@ export default defineConfig({
 			fileName: format => `index.${format === 'es' ? 'm' : 'umd.c'}js`
 		},
 		rollupOptions: {
-			external: ['react/jsx-runtime'],
 			output: {
 				globals: {
 					react: 'React'
