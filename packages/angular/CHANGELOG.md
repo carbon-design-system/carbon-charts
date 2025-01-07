@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.11 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** remove all react externals
+  ([#1940](https://github.com/carbon-design-system/carbon-charts/issues/1940))
+  ([c75f93f](https://github.com/carbon-design-system/carbon-charts/commit/c75f93fab78eb4d14a13e32e759ecb3b2e4aa2ad))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.10 (2025-01-07)
 
 ### Bug Fixes
