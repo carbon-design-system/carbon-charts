@@ -9,6 +9,7 @@ import { MeterChart as MeterChartCore, type MeterChartOptions } from '@carbon/ch
  */
 @Component({
 	selector: 'ibm-meter-chart',
+	standalone: true,
 	template: ``
 })
 export class MeterChartComponent extends BaseChartComponent implements AfterViewInit {

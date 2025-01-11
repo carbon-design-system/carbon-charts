@@ -9,6 +9,7 @@ import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions } from '@car
  */
 @Component({
 	selector: 'ibm-simple-bar-chart',
+	standalone: true,
 	template: ``
 })
 export class SimpleBarChartComponent extends BaseChartComponent implements AfterViewInit {

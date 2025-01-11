@@ -13,6 +13,7 @@ import {
  */
 @Component({
 	selector: 'ibm-wordcloud-chart',
+	standalone: true,
 	template: ``
 })
 export class WordCloudChartComponent extends BaseChartComponent implements AfterViewInit {

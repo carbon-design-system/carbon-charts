@@ -9,6 +9,7 @@ import { GaugeChart as GaugeChartCore, type GaugeChartOptions } from '@carbon/ch
  */
 @Component({
 	selector: 'ibm-gauge-chart',
+	standalone: true,
 	template: ``
 })
 export class GaugeChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -9,6 +9,7 @@ import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions } from '@car
  */
 @Component({
 	selector: 'ibm-heatmap-chart',
+	standalone: true,
 	template: ``
 })
 export class HeatmapChartComponent extends BaseChartComponent implements AfterViewInit {

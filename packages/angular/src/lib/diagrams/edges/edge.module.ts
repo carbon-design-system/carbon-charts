@@ -4,8 +4,8 @@ import { EdgeComponent } from './edge.component'
 export { EdgeComponent } from './edge.component'
 
 @NgModule({
-	declarations: [EdgeComponent],
-	imports: [CommonModule],
+	declarations: [],
+	imports: [CommonModule, EdgeComponent],
 	exports: [EdgeComponent]
 })
 export class EdgeModule {}
