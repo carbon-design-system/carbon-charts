@@ -9,6 +9,7 @@ import { DonutChart as DonutChartCore, type DonutChartOptions } from '@carbon/ch
  */
 @Component({
 	selector: 'ibm-donut-chart',
+	standalone: true,
 	template: ``
 })
 export class DonutChartComponent extends BaseChartComponent implements AfterViewInit {

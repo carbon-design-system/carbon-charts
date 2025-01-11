@@ -13,14 +13,15 @@ export {
 	CardNodeTitleComponent
 }
 @NgModule({
-	declarations: [
+	declarations: [],
+	imports: [
+		CommonModule,
 		CardNodeComponent,
 		CardNodeColumnComponent,
 		CardNodeLabelComponent,
 		CardNodeSubtitleComponent,
 		CardNodeTitleComponent
 	],
-	imports: [CommonModule],
 	exports: [
 		CardNodeComponent,
 		CardNodeColumnComponent,

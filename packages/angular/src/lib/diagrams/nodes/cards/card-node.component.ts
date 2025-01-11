@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { carbonPrefix } from '../../config'
+import { CommonModule } from '@angular/common'
 
 @Component({
 	selector: 'ibm-diagram-card-node',
+	imports: [CommonModule],
 	template: `
 		<ng-container [ngSwitch]="component">
 			<xhtml:div
@@ -67,7 +69,8 @@ import { carbonPrefix } from '../../config'
 		<ng-template #nodeTemplate>
 			<ng-content></ng-content>
 		</ng-template>
-	`
+	`,
+	standalone: true
 })
 export class CardNodeComponent implements OnInit {
 	@Input() as = 'div'
@@ -76,6 +79,7 @@ export class CardNodeComponent implements OnInit {
 	@Input() stacked = false
 	@Input() position = 'static'
 
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseEnter: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 	@Output() mouseOver: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()

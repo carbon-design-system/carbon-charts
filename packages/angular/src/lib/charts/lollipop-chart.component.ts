@@ -9,6 +9,7 @@ import { LollipopChart as LollipopChartCore, type LollipopChartOptions } from '@
  */
 @Component({
 	selector: 'ibm-lollipop-chart',
+	standalone: true,
 	template: ``
 })
 export class LollipopChartComponent extends BaseChartComponent implements AfterViewInit {

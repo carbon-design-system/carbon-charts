@@ -20,7 +20,9 @@ export {
 	MarkerTeeComponent
 }
 @NgModule({
-	declarations: [
+	declarations: [],
+	imports: [
+		CommonModule,
 		MarkerComponent,
 		MarkerArrowLeftComponent,
 		MarkerArrowRightComponent,
@@ -29,7 +31,6 @@ export {
 		MarkerSquareComponent,
 		MarkerTeeComponent
 	],
-	imports: [CommonModule],
 	exports: [
 		MarkerComponent,
 		MarkerArrowLeftComponent,

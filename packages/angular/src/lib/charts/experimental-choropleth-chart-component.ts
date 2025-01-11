@@ -10,6 +10,7 @@ import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } f
  */
 @Component({
 	selector: 'ibm-experimental-choropleth-chart',
+	standalone: true,
 	template: ``
 })
 export class ExperimentalChoroplethChartComponent

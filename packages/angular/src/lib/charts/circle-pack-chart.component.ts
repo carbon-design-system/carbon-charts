@@ -9,6 +9,7 @@ import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions } f
  */
 @Component({
 	selector: 'ibm-circle-pack-chart',
+	standalone: true,
 	template: ``
 })
 export class CirclePackChartComponent extends BaseChartComponent implements AfterViewInit {
