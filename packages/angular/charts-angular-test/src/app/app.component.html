@@ -1,15 +1,19 @@
 <h1>Carbon Charts Angular</h1>
 <h2>Component Test Harness</h2>
 
-<div *ngFor="let chart of charts" class="container">
-	<h3>{{ chart.types.angular }}</h3>
-	<div *ngFor="let example of chart.examples" class="example">
-		<ng-container *ngIf="example.tags?.includes('test')">
-			<ng-container
-				*ngComponentOutlet="
-					selectorMap[chart.types.angular];
-					inputs: { data: example.data, options: example.options }
-				"></ng-container>
-		</ng-container>
+@for (chart of charts; track $index) {
+	<div class="container">
+		<h3>{{ chart.types.angular }}</h3>
+		@for (example of chart.examples; track $index) {
+			<div class="example">
+				@if (example.tags?.includes('test')) {
+					<ng-container
+						*ngComponentOutlet="
+							selectorMap[chart.types.angular];
+							inputs: { data: example.data, options: example.options }
+						"></ng-container>
+				}
+			</div>
+		}
 	</div>
-</div>
+}

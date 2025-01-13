@@ -30,11 +30,11 @@ import charts from '../../../../docs/src/charts'
 import { CommonModule } from '@angular/common'
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
-	imports: [CommonModule],
-	standalone: true
+	imports: [CommonModule]
 })
 export class AppComponent {
 	charts = charts
