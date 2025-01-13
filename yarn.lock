@@ -1933,7 +1933,7 @@ __metadata:
     "@vue/eslint-config-prettier": "npm:^10.1.0"
     "@vue/eslint-config-typescript": "npm:^14.2.0"
     eslint: "npm:^9.18.0"
-    eslint-config-prettier: "npm:^9.1.0"
+    eslint-config-prettier: "npm:^10.0.1"
     eslint-plugin-jsdoc: "npm:^50.6.1"
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-react: "npm:^7.37.4"
@@ -1947,7 +1947,7 @@ __metadata:
     prettier: "npm:^3.4.2"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.3.3"
-    svelte: "npm:^5.17.3"
+    svelte: "npm:^5.17.4"
     svelte-eslint-parser: "npm:^0.43.0"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.20.0"
@@ -1996,7 +1996,7 @@ __metadata:
     eslint: "npm:^9.18.0"
     prettier: "npm:^3.4.2"
     publint: "npm:^0.3.2"
-    svelte: "npm:^5.17.3"
+    svelte: "npm:^5.17.4"
     svelte-check: "npm:^4.1.4"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.7.3"
@@ -10240,6 +10240,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-prettier@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "eslint-config-prettier@npm:10.0.1"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: build/bin/cli.js
+  checksum: 10c0/e2434931669d211663c0493f2c1640a670a02ba4503a68f056a7eda133f383acbbb983a4a7bd0ad6cb3b2bc4d5731c3be8b32fe28e35087a76fea45f7061ae70
+  languageName: node
+  linkType: hard
+
 "eslint-config-prettier@npm:^9.1.0":
   version: 9.1.0
   resolution: "eslint-config-prettier@npm:9.1.0"
@@ -10513,7 +10524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^1.3.2":
+"esrap@npm:^1.4.2":
   version: 1.4.2
   resolution: "esrap@npm:1.4.2"
   dependencies:
@@ -17909,9 +17920,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.17.3":
-  version: 5.17.3
-  resolution: "svelte@npm:5.17.3"
+"svelte@npm:^5.17.4":
+  version: 5.17.4
+  resolution: "svelte@npm:5.17.4"
   dependencies:
     "@ampproject/remapping": "npm:^2.3.0"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -17922,12 +17933,12 @@ __metadata:
     axobject-query: "npm:^4.1.0"
     clsx: "npm:^2.1.1"
     esm-env: "npm:^1.2.1"
-    esrap: "npm:^1.3.2"
+    esrap: "npm:^1.4.2"
     is-reference: "npm:^3.0.3"
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/ca80ca7b8ef7aea07188f3c5c698b0d19ac5ea7ee1adafcb9c3f1ec210be04a69a0711ce7dfe2017ec6f7892b098fb60b07150483274de73d85b7bc7c20c5e23
+  checksum: 10c0/81d798a0d0ffb9e0fe22d4801e4807137438c5ddffbf28c54fafb7e62e9410583f8a641325497d6a8e4e320f8941dc87169a6efdffe731ac72a3c20a6be647f6
   languageName: node
   linkType: hard
 
