@@ -9,7 +9,6 @@ import { PieChart as PieChartCore, type PieChartOptions } from '@carbon/charts'
  */
 @Component({
 	selector: 'ibm-pie-chart',
-	standalone: true,
 	template: ``
 })
 export class PieChartComponent extends BaseChartComponent implements AfterViewInit {

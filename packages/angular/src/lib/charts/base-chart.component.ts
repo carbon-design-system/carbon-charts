@@ -8,7 +8,6 @@ import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
  */
 @Component({
 	selector: 'ibm-base-chart',
-	standalone: true,
 	template: ``
 })
 export class BaseChartComponent implements AfterViewInit, OnInit {

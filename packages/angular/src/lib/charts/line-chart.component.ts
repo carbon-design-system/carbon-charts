@@ -9,7 +9,6 @@ import { LineChart as LineChartCore, type LineChartOptions } from '@carbon/chart
  */
 @Component({
 	selector: 'ibm-line-chart',
-	standalone: true,
 	template: ``
 })
 export class LineChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -9,7 +9,6 @@ import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions } from '@c
  */
 @Component({
 	selector: 'ibm-grouped-bar-chart',
-	standalone: true,
 	template: ``
 })
 export class GroupedBarChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -12,7 +12,6 @@ import {
  */
 @Component({
 	selector: 'ibm-stacked-area-chart',
-	standalone: true,
 	template: ``
 })
 export class StackedAreaChartComponent extends BaseChartComponent implements AfterViewInit {
