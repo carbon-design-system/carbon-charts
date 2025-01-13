@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core'
+import { Component, Input, OnInit, AfterViewInit, ElementRef, input } from '@angular/core'
 import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
 
 /**
@@ -46,16 +46,17 @@ export class BaseChartComponent implements AfterViewInit, OnInit {
 	get options() {
 		return this._options
 	}
+	
 
 	/**
 	 * Chart width
 	 */
-	@Input() width?: string
+	width = input<string>();
 
 	/**
 	 * Chart height
 	 */
-	@Input() height?: string
+	height = input<string>();
 
 	/**
 	 * Chart object instance
@@ -73,12 +74,12 @@ export class BaseChartComponent implements AfterViewInit, OnInit {
 	ngOnInit() {
 		// Width prop is mandatory for the wrappers
 		if (this.width) {
-			this.options.width = this.width
+			this.options.width = this.width()
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (this.height) {
-			this.options.height = this.height
+			this.options.height = this.height()
 		}
 	}
 
