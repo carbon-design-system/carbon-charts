@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 
 import {
 	AlluvialChartComponent,
@@ -32,7 +31,9 @@ import {
 } from './index'
 
 @NgModule({
-	declarations: [
+	declarations: [],
+	imports: [
+		WordCloudChartComponent,
 		BaseChartComponent,
 		AlluvialChartComponent,
 		AreaChartComponent,
@@ -58,10 +59,8 @@ import {
 		ComboChartComponent,
 		TreeChartComponent,
 		TreemapChartComponent,
-		CirclePackChartComponent,
-		WordCloudChartComponent
+		CirclePackChartComponent
 	],
-	imports: [CommonModule],
 	exports: [
 		BaseChartComponent,
 		AlluvialChartComponent,

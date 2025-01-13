@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core'
 import { buildStraightPathString } from '@carbon/charts'
 
 import { carbonPrefix } from '../config'
+import { CommonModule } from '@angular/common'
 
 interface Coordinates {
 	x: number
@@ -9,6 +10,7 @@ interface Coordinates {
 }
 @Component({
 	selector: 'ibm-graph-edge, [ibm-graph-edge]',
+	imports: [CommonModule],
 	template: `
 		<svg:g [ngClass]="[namespace, variant ? namespace + '--' + variant : '']">
 			<svg:path
@@ -24,7 +26,8 @@ interface Coordinates {
 				[attr.marker-start]="markerStart ? 'url(#' + markerStart + ')' : ''"
 				[attr.marker-end]="markerEnd ? 'url(#' + markerEnd + ')' : ''" />
 		</svg:g>
-	`
+	`,
+	standalone: true
 })
 export class EdgeComponent {
 	@Input() color = ''
