@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.12 (2025-01-13)
+
+### Bug Fixes
+
+- **vite-react:** externalize ['react', 'react-dom', 'react/jsx-runtime']
+  ([#1943](https://github.com/carbon-design-system/carbon-charts/issues/1943))
+  ([feb0092](https://github.com/carbon-design-system/carbon-charts/commit/feb0092f68410f8e97f9da1af22690f3bea086b7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.11 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** remove all react externals
+  ([#1940](https://github.com/carbon-design-system/carbon-charts/issues/1940))
+  ([c75f93f](https://github.com/carbon-design-system/carbon-charts/commit/c75f93fab78eb4d14a13e32e759ecb3b2e4aa2ad))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.10 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** only externalize jsx-runtime
+  ([#1937](https://github.com/carbon-design-system/carbon-charts/issues/1937))
+  ([5edea11](https://github.com/carbon-design-system/carbon-charts/commit/5edea11945a9ef744839fa84cb0be4966e3c5471))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.9 (2025-01-07)
 
 ### Bug Fixes
