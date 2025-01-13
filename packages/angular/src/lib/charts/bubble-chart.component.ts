@@ -9,7 +9,6 @@ import { BubbleChart as BubbleChartCore, type BubbleChartOptions } from '@carbon
  */
 @Component({
 	selector: 'ibm-bubble-chart',
-	standalone: true,
 	template: ``
 })
 export class BubbleChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -9,7 +9,6 @@ import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions } from '@car
  */
 @Component({
 	selector: 'ibm-boxplot-chart',
-	standalone: true,
 	template: ``
 })
 export class BoxplotChartComponent extends BaseChartComponent implements AfterViewInit {

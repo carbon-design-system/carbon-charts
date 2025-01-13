@@ -9,7 +9,6 @@ import { ScatterChart as ScatterChartCore, type ScatterChartOptions } from '@car
  */
 @Component({
 	selector: 'ibm-scatter-chart',
-	standalone: true,
 	template: ``
 })
 export class ScatterChartComponent extends BaseChartComponent implements AfterViewInit {

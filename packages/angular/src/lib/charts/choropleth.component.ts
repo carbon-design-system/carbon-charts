@@ -9,7 +9,6 @@ import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } f
  */
 @Component({
 	selector: 'ibm-choropleth-chart',
-	standalone: true,
 	template: ``
 })
 export class ChoroplethChartComponent extends BaseChartComponent implements AfterViewInit {
