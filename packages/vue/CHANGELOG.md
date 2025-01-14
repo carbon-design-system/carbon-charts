@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.13 (2025-01-13)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.12 (2025-01-13)
+
+### Bug Fixes
+
+- **vite-react:** externalize ['react', 'react-dom', 'react/jsx-runtime']
+  ([#1943](https://github.com/carbon-design-system/carbon-charts/issues/1943))
+  ([feb0092](https://github.com/carbon-design-system/carbon-charts/commit/feb0092f68410f8e97f9da1af22690f3bea086b7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.11 (2025-01-07)
 
 ### Bug Fixes
