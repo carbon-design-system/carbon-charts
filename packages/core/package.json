@@ -104,7 +104,7 @@
 		"prettier": "^3.4.2",
 		"publint": "^0.3.2",
 		"resize-observer-polyfill": "^1.5.1",
-		"sass": "^1.83.1",
+		"sass": "^1.83.4",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.7",
 		"vite-plugin-dts": "^4.5.0",
