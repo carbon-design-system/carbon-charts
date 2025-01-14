@@ -43,24 +43,24 @@
 		"@ibm/telemetry-js": "^1.8.0"
 	},
 	"peerDependencies": {
-		"react": "^16.8.6 || ^17.0.1 || ^18.2.0",
-		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
+		"react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.49.0",
-		"@types/react": "^18.3.12",
-		"@types/react-dom": "^18.3.1",
+		"@playwright/test": "^1.49.1",
+		"@types/react": "^18.3.18",
+		"@types/react-dom": "^18.3.5",
 		"@vitejs/plugin-react-swc": "^3.7.2",
 		"classnames": "^2.5.1",
-		"concurrently": "^9.1.0",
+		"concurrently": "^9.1.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.15.0",
-		"prettier": "^3.4.1",
+		"eslint": "^9.18.0",
+		"prettier": "^3.4.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"typescript": "^5.7.2",
-		"vite": "^5.4.11",
-		"vite-plugin-dts": "^4.3.0"
+		"typescript": "^5.7.3",
+		"vite": "^6.0.7",
+		"vite-plugin-dts": "^4.5.0"
 	},
 	"publishConfig": {
 		"access": "public"
