@@ -10,7 +10,6 @@ export {
 	BoxplotChartComponent,
 	BubbleChartComponent,
 	BulletChartComponent,
-	ChartsModule, // <-- Module
 	ChoroplethChartComponent,
 	CirclePackChartComponent,
 	ComboChartComponent,
