@@ -27,15 +27,18 @@ import {
 	WordCloudChartComponent
 } from '../../../src/lib/charts'
 import charts from '../../../../docs/src/charts'
+import { CommonModule } from '@angular/common'
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	styleUrls: ['./app.component.scss'],
+	imports: [CommonModule]
 })
 export class AppComponent {
 	charts = charts
-	selectorMap: { [key: string]: Type<unknown> } = {
+	selectorMap: Record<string, Type<unknown>> = {
 		'ibm-alluvial-chart': AlluvialChartComponent,
 		'ibm-area-chart': AreaChartComponent,
 		'ibm-boxplot-chart': BoxplotChartComponent,
