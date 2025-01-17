@@ -5,19 +5,15 @@ export {
 	MarkerShapeNodeComponent,
 	MarkerDiamondComponent,
 	MarkerSquareComponent,
-	MarkerTeeComponent,
-	MarkerModule
-} from './edges/marker/marker.module'
+	MarkerTeeComponent
+} from './edges/marker/marker.component'
 
-export { EdgeComponent, EdgeModule } from './edges/edge.module'
+export { EdgeComponent } from './edges/edge.component'
 
-export {
-	CardNodeComponent,
-	CardNodeColumnComponent,
-	CardNodeLabelComponent,
-	CardNodeSubtitleComponent,
-	CardNodeTitleComponent,
-	CardNodeModule
-} from './nodes/cards/card-node.module'
+export { CardNodeComponent } from './nodes/cards/card-node.component'
+export { CardNodeColumnComponent } from './nodes/cards/card-node-column.component'
+export { CardNodeLabelComponent } from './nodes/cards/card-node-label.component'
+export { CardNodeTitleComponent } from './nodes/cards/card-node-title.component'
+export { CardNodeSubtitleComponent } from './nodes/cards/card-node-subtitle.component'
 
-export { ShapeNodeComponent, ShapeNodeModule } from './nodes/shape/shape-node.module'
+export { ShapeNodeComponent } from './nodes/shape/shape-node.component'

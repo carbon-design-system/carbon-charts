@@ -131,7 +131,9 @@ export class LayoutComponent extends Component {
 
 					// if parent is missing aria-label, set it to the title of the parent
 					if (isRenderingSVG && !selection.select('svg.layout-svg-wrapper').attr('aria-label')) {
-						selection.select('svg.layout-svg-wrapper').attr('aria-label', options?.accessibility?.svgAriaLabel || options?.title)
+						selection
+							.select('svg.layout-svg-wrapper')
+							.attr('aria-label', options?.accessibility?.svgAriaLabel || options?.title)
 					}
 
 					// Render preffered & fixed items

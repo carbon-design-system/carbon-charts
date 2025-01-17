@@ -36,7 +36,10 @@ export class GroupedBar extends Bar {
 		this.setGroupScale()
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ ariaLabel: 'grouped bar graphs', withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'grouped bar graphs',
+			withinChartClip: true
+		})
 
 		const allDataLabels = uniq(
 			displayData.map((datum: any) => {

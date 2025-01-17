@@ -61,7 +61,7 @@ export class Treemap extends Component {
 
 	render(animate = true) {
 		const svg = this.getComponentContainer({
-			ariaLabel: 'treemap',
+			ariaLabel: 'treemap'
 		})
 
 		this.model.getData()

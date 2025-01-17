@@ -40,19 +40,15 @@ export {
 	CardNodeLabelComponent,
 	CardNodeSubtitleComponent,
 	CardNodeTitleComponent,
-	CardNodeModule, // <-- Module
 	EdgeComponent,
-	EdgeModule, // <-- Module
 	MarkerArrowLeftComponent,
 	MarkerArrowRightComponent,
 	MarkerComponent,
 	MarkerDiamondComponent,
-	MarkerModule, // <-- Module
 	MarkerShapeNodeComponent,
 	MarkerSquareComponent,
 	MarkerTeeComponent,
-	ShapeNodeComponent,
-	ShapeNodeModule // <-- Module
+	ShapeNodeComponent
 } from './lib'
 
 // Republish essential types from core so it's not a required dependency

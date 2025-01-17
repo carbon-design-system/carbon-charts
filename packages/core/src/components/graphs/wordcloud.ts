@@ -23,7 +23,9 @@ export class WordCloud extends Component {
 		const self = this
 		const svg = this.getComponentContainer({
 			ariaLabel: 'word cloud'
-		}).attr('width', '100%').attr('height', '100%')
+		})
+			.attr('width', '100%')
+			.attr('height', '100%')
 
 		const displayData = this.model.getDisplayData()
 		const fontSizeScale = this.getFontSizeScale(displayData)
