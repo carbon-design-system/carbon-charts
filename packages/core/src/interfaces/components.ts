@@ -44,11 +44,11 @@ export interface Locale {
 		meter?: {
 			title?: string
 		}
-		tabularRep: {
+		tabularRep?: {
 			title?: string
 			downloadAsCSV?: string
 		}
-		toolbar: {
+		toolbar?: {
 			exportAsCSV?: string
 			exportAsJPG?: string
 			exportAsPNG?: string
