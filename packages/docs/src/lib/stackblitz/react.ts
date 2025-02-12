@@ -9,7 +9,9 @@ export function getReactProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@carbon/charts-react': version.carbonCharts
+		'@carbon/charts-react': version.carbonCharts,
+		'react': '^19.0.0',
+    'react-dom': '^19.0.0'
 	}
 
 	const indexHtml = `<!doctype html>

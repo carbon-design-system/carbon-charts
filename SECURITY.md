@@ -5,7 +5,7 @@
 | Version | Supported          |
 | ------- | ------------------ |
 | 1.x    | :white_check_mark: |
-| 0.x    | :white_check_mark: |
+| 0.x    | ❌ EOL |
 
 Please review the
 [release schedule](https://github.com/carbon-design-system/carbon-charts/blob/main/.github/release-schedule.md)
