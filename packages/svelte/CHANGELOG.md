@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.17 (2025-02-12)
+
+### Bug Fixes
+
+- **stackblitz:** react examples
+  ([#1957](https://github.com/carbon-design-system/carbon-charts/issues/1957))
+  ([1427786](https://github.com/carbon-design-system/carbon-charts/commit/14277866a0933eb99b1097818d4611cc140b9da2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.16 (2025-02-10)
 
 **Note:** Version bump only for package @carbon/charts-svelte
