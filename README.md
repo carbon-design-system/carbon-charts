@@ -25,6 +25,18 @@ Includes StackBlitz examples of each chart type for supported frameworks.
   <img src="./assets/dashboard.png" width=700 />
 </a>
 
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x    | :white_check_mark: |
+| 0.x    | ❌ EOL |
+
+Please review the
+[release schedule](https://github.com/carbon-design-system/carbon-charts/blob/main/.github/release-schedule.md)
+for full details on what release phase versions are in and the level of support
+provided for each.
+
 ## CHANGELOG
 
 Release change logs can be found [here](https://github.com/carbon-design-system/carbon-charts/releases).
