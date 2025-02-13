@@ -11,13 +11,14 @@ import {
 	StructuredListHead,
 	StructuredListRow,
 	StructuredListCell,
-	StructuredListBody,
-	Tab,
-	TabList,
-	TabPanel,
-	TabPanels,
-	Tabs
+	StructuredListBody
+	// Tab, // leave these imports here for future use
+	// TabList,
+	// TabPanel,
+	// TabPanels,
+	// Tabs
 } from '@carbon/react/es'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { type ChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-react'
 import CodeSample from '../components/CodeSample'
 import PageHeader from '../components/PageHeader'
@@ -107,7 +108,7 @@ export default function Installation() {
 				<h3>Installing with package managers</h3>
 				<Tabs>
 					<TabList aria-label="List of package managers">
-						<Tab>yarn</Tab>
+						<Tab className="foo">yarn</Tab>
 						<Tab>npm</Tab>
 					</TabList>
 

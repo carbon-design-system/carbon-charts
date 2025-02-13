@@ -129,3 +129,51 @@ p {
 .hide-at-sm {
 	@include hide-at-breakpoint.hide-at-sm();
 }
+
+.chart {
+	margin-bottom: 2rem;
+}
+
+// Style @reach/tabs like @carbon/react tabs as the latter are not React 19-compatible
+
+$carbon-gray-20:   #e0e0e0;  // light gray border
+$carbon-gray-60:   #6f6f6f;  // unselected tab text
+$carbon-gray-100:  #161616;  // selected/active tab text
+$carbon-blue-60:   #0f62fe;  // active tab indicator & focus ring
+$carbon-spacing-04: 1rem;     // vertical & horizontal padding (inner)
+$carbon-spacing-05: 1.5rem;   // extra horizontal padding
+$carbon-font-size-05: 1rem;   // font size
+$carbon-font-family: 'IBM Plex Sans', sans-serif;
+
+[role="tablist"][data-reach-tab-list] {
+  display: flex;
+  border-bottom: 1px solid $carbon-gray-20;
+  margin-bottom: $carbon-spacing-04;
+}
+
+[role="tab"][data-reach-tab] {
+  background: none;
+  border: none;
+  padding: $carbon-spacing-04 $carbon-spacing-05;
+  font-size: $carbon-font-size-05;
+  font-family: $carbon-font-family;
+  color: $carbon-gray-60;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: $carbon-gray-100;
+  }
+
+  &:focus {
+    outline: 2px solid $carbon-blue-60;
+    outline-offset: 2px;
+  }
+
+  &[aria-selected="true"] {
+    color: $carbon-gray-100;
+    border-bottom-color: $carbon-blue-60;
+    font-weight: 600;
+  }
+}
