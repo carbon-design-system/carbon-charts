@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 // import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react' // leave these imports here for future use
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { SimpleBarChart, GroupedBarChart, StackedBarChart } from '@carbon/charts-react'
@@ -12,14 +11,6 @@ import { chartTypesStacked, examplesStacked } from '../lib/bar/examplesStacked'
 import '@carbon/charts-react/styles.css'
 
 export default function Bar() {
-	const [selectedIndex, setSelectedIndex] = useState(0)
-
-	const handleTabChange = (evt: { selectedIndex: number }) => {
-		setSelectedIndex(evt.selectedIndex)
-	}
-
-	useEffect(() => {}, [selectedIndex])
-
 	return (
 		<>
 			<PageHeader title="Bar Charts" />
@@ -40,7 +31,7 @@ export default function Bar() {
 
 			<StackBlitzLauncherExplanation />
 
-			<Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
+			<Tabs>
 				<TabList aria-label="List of bart chart types">
 					<Tab>Vertical &amp; Horizontal</Tab>
 					<Tab>Grouped</Tab>

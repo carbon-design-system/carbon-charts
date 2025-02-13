@@ -29,8 +29,14 @@ export default function Installation() {
 	const [selectedIndex, setSelectedIndex] = useState(0)
 	const [isChromium, setIsChromium] = useState(false)
 
-	const handleTabChange = (evt: { selectedIndex: number }) => {
-		setSelectedIndex(evt.selectedIndex)
+	// @carbon/react Tabs approach
+	// const handleTabChange = (evt: { selectedIndex: number }) => {
+	// 	setSelectedIndex(evt.selectedIndex)
+	// }
+
+	// @reach/tabs Tabs approach
+	const handleTabChange = (index: number) => {
+		setSelectedIndex(index)
 	}
 
 	const highlightCode = () => {
@@ -96,7 +102,8 @@ export default function Installation() {
 		<>
 			<PageHeader title="Installation & setup" />
 			<h2>Select your development framework</h2>
-			<Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
+			{/* @carbon/react way: <Tabs selectedIndex={selectedIndex} onChange={handleTabChange}> */}
+			<Tabs index={selectedIndex} onChange={handleTabChange}>
 				<TabList aria-label="List of frameworks">
 					<Tab>Vanilla JavaScript</Tab>
 					<Tab>Svelte</Tab>
@@ -108,7 +115,7 @@ export default function Installation() {
 				<h3>Installing with package managers</h3>
 				<Tabs>
 					<TabList aria-label="List of package managers">
-						<Tab className="foo">yarn</Tab>
+						<Tab>yarn</Tab>
 						<Tab>npm</Tab>
 					</TabList>
 

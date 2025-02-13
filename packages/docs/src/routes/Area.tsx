@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { AreaChart, StackedAreaChart } from '@carbon/charts-react'
 // import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react' // leave these imports here for future use
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
@@ -10,14 +9,6 @@ import { chartTypesStacked, examplesStacked } from '../lib/area/examplesStacked'
 import '@carbon/charts-react/styles.css'
 
 export default function Area() {
-	const [selectedIndex, setSelectedIndex] = useState(0)
-
-	const handleTabChange = (evt: { selectedIndex: number }) => {
-		setSelectedIndex(evt.selectedIndex)
-	}
-
-	useEffect(() => {}, [selectedIndex])
-
 	return (
 		<>
 			<PageHeader title="Area Charts" />
@@ -60,7 +51,7 @@ export default function Area() {
 
 			<StackBlitzLauncherExplanation />
 
-			<Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
+			<Tabs>
 				<TabList aria-label="List of area chart types">
 					<Tab>Standard</Tab>
 					<Tab>Stacked</Tab>
