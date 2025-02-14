@@ -1,5 +1,4 @@
 <script lang="ts" generics="T extends BaseChartOptions">
-	/* eslint-disable @typescript-eslint/no-unused-vars */
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
 	import type { Charts, ChartConfig, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
@@ -45,7 +44,7 @@
 	onDestroy(() => {
 		if (chart) {
 			dispatch('destroy')
-			// Like core's Chart.destroy() but keeps div chart holder bound to ref as it's part of the template below
+			// Like core's Chart.destroy() but keeps div chart holder bound to ref as it's part of this template
 			chart.components.forEach(component => component.destroy())
 			chart.model.set({ destroyed: true }, { skipUpdate: true })
 			chart = undefined

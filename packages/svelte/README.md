@@ -42,6 +42,8 @@ yarn add -D @carbon/charts-svelte
 
 The required styles should be imported from `@carbon/charts-svelte/styles.css`.
 
+A release in the near future will move components to runes mode for Svelte 5 and beyond. As this would be a breaking change because event handlers will change to component properties, this version will be published with the distribution tag `next`. Please check <a href="https://www.npmjs.com/package/@carbon/charts-svelte?activeTab=versions">here</a> to see if a version for `latest` has been published.
+
 ### SvelteKit
 
 While this component library can be used with any build environments for Svelte,
@@ -200,9 +202,9 @@ hovering over a bar.
 	}} />
 ```
 
-## TypeScript support
+## Svelte and TypeScript support
 
-Svelte version 3.31 or greater is required to use this library with TypeScript. Svelte 4.x+ is
+Svelte 4 or greater is required to use this library with TypeScript. Svelte 5 is
 recommended.
 
 ### Enums and types
