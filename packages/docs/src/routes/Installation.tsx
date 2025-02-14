@@ -11,14 +11,13 @@ import {
 	StructuredListHead,
 	StructuredListRow,
 	StructuredListCell,
-	StructuredListBody
-	// Tab, // leave these imports here for future use
-	// TabList,
-	// TabPanel,
-	// TabPanels,
-	// Tabs
+	StructuredListBody,
+	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
+	Tabs
 } from '@carbon/react/es'
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { type ChartOptions, type ChartTabularData, ScaleTypes } from '@carbon/charts-react'
 import CodeSample from '../components/CodeSample'
 import PageHeader from '../components/PageHeader'
@@ -29,14 +28,8 @@ export default function Installation() {
 	const [selectedIndex, setSelectedIndex] = useState(0)
 	const [isChromium, setIsChromium] = useState(false)
 
-	// @carbon/react Tabs approach
-	// const handleTabChange = (evt: { selectedIndex: number }) => {
-	// 	setSelectedIndex(evt.selectedIndex)
-	// }
-
-	// @reach/tabs Tabs approach
-	const handleTabChange = (index: number) => {
-		setSelectedIndex(index)
+	const handleTabChange = (evt: { selectedIndex: number }) => {
+		setSelectedIndex(evt.selectedIndex)
 	}
 
 	const highlightCode = () => {
@@ -102,8 +95,7 @@ export default function Installation() {
 		<>
 			<PageHeader title="Installation & setup" />
 			<h2>Select your development framework</h2>
-			{/* @carbon/react way: <Tabs selectedIndex={selectedIndex} onChange={handleTabChange}> */}
-			<Tabs index={selectedIndex} onChange={handleTabChange}>
+			<Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
 				<TabList aria-label="List of frameworks">
 					<Tab>Vanilla JavaScript</Tab>
 					<Tab>Svelte</Tab>

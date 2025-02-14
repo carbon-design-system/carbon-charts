@@ -1,5 +1,4 @@
-// import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react' // leave these imports here for future use
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react'
 import { SimpleBarChart, GroupedBarChart, StackedBarChart } from '@carbon/charts-react'
 import PageHeader from '../components/PageHeader'
 import StackBlitzLauncher from '../components/StackBlitzLauncher'

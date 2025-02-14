@@ -19,6 +19,9 @@
 		"node": "^20.18.3 ^22.13.1"
 	},
 	"packageManager": "yarn@4.6.0",
+	"resolutions": {
+		"react-is": "19.0.0"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-conventional": "^19.7.1",
