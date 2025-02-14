@@ -25,7 +25,7 @@
 		"@eslint/compat": "^1.2.6",
 		"@eslint/js": "^9.20.0",
 		"@playwright/test": "^1.50.1",
-		"@types/node": "^22.13.2",
+		"@types/node": "^22.13.4",
 		"@vue/eslint-config-prettier": "^10.2.0",
 		"@vue/eslint-config-typescript": "^14.4.0",
 		"eslint": "^9.20.1",
