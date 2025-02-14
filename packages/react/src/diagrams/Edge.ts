@@ -43,18 +43,18 @@ const Edge: React.FC<EdgeProps & EdgeSVGProps> = ({
 
 	if (!d) throw Error('Missing parameters for Edge component: path or source and target.')
 
-	return (
-		<g className={pathClasses} {...rest}>
-			<path d={d} className={`${namespace}__container`} />
-			<path d={d} className={`${namespace}__outer`} />
-			<path
-				d={d}
-				className={`${namespace}__inner`}
-				markerEnd={`url(#${markerEnd})`}
-				markerStart={`url(#${markerStart})`}
-				style={{ stroke: color }}
-			/>
-		</g>
+	return React.createElement(
+		'g',
+		{ className: pathClasses, ...rest },
+		React.createElement('path', { d: d, className: `${namespace}__container` }),
+		React.createElement('path', { d: d, className: `${namespace}__outer` }),
+		React.createElement('path', {
+			d: d,
+			className: `${namespace}__inner`,
+			markerEnd: `url(#${markerEnd})`,
+			markerStart: `url(#${markerStart})`,
+			style: { stroke: color }
+		})
 	)
 }
 

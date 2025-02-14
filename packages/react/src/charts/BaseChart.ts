@@ -38,6 +38,6 @@ export default class BaseChart<
 	}
 
 	render() {
-		return <div ref={this.chartRef} className="chart-holder"></div>
+		return React.createElement('div', { ref: this.chartRef, className: 'chart-holder' })
 	}
 }

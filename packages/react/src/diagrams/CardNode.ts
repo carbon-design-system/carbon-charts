@@ -26,14 +26,15 @@ const CardNode: React.FC<
 		[className as string]: className
 	})
 
-	return (
-		<Component
-			className={cardClasses}
-			style={{ borderColor: color, position }}
-			tabIndex={0}
-			{...rest}>
-			{children}
-		</Component>
+	return React.createElement(
+		Component,
+		{
+			className: cardClasses,
+			style: { borderColor: color, position },
+			tabIndex: 0,
+			...rest
+		},
+		children
 	)
 }
 
