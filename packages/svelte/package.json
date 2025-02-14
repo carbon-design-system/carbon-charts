@@ -26,6 +26,7 @@
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
 	},
+	"sideEffects": ["**/*.css"],
 	"styles": "./dist/styles.css",
 	"files": [
 		"dist",
@@ -33,7 +34,7 @@
 		"telemetry.yml"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0 || ^5.17.0"
+		"svelte": "^4.0.0 || ^5.20.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
