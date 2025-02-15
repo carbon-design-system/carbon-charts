@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		BoxplotChart as BoxplotChartCore,
 		type BoxplotChartOptions,

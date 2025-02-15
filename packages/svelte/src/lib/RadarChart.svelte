@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		RadarChart as RadarChartCore,
 		type RadarChartOptions,

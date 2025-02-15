@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		MeterChart as MeterChartCore,
 		type MeterChartOptions,

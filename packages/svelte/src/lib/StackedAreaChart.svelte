@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		StackedAreaChart as StackedAreaChartCore,
 		type StackedAreaChartOptions,

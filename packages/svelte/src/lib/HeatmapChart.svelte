@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		HeatmapChart as HeatmapChartCore,
 		type HeatmapChartOptions,

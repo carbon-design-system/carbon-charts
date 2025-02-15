@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		StackedBarChart as StackedBarChartCore,
 		type BarChartOptions,

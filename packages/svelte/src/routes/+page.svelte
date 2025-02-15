@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import charts from '../../../docs/src/charts'
 	import * as chartComponents from '$lib'
 	import '@carbon/charts/scss'

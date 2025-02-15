@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends BaseChartOptions">
+<script lang="typescript" generics="T extends BaseChartOptions">
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
 	import type { Charts, ChartConfig, BaseChartOptions, ChartTabularData } from '@carbon/charts'
 
