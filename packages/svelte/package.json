@@ -5,7 +5,7 @@
 	"scripts": {
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"build": "svelte-kit sync && svelte-package && yarn file:styles && publint",
+		"build": "svelte-kit sync && svelte-package && yarn file:styles && prettier ./dist --write && publint",
 		"build:test": "vite build --emptyOutDir",
 		"dev": "vite --port 3003",
 		"test": "svelte-check --workspace=tests",
