@@ -204,7 +204,7 @@ hovering over a bar.
 
 ## Svelte and TypeScript support
 
-Svelte 4 or greater is required to use this library with TypeScript. Svelte 5 is
+Svelte 3.31 or greater is required to use this library with TypeScript. Svelte 5.20+ is
 recommended.
 
 ### Enums and types
