@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		AreaChart as AreaChartCore,
 		type AreaChartOptions,

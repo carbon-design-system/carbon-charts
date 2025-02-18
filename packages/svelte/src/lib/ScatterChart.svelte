@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		ScatterChart as ScatterChartCore,
 		type ScatterChartOptions,

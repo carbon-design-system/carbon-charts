@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		CirclePackChart as CirclePackChartCore,
 		type CirclePackChartOptions,

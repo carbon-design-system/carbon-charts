@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		ChoroplethChart as ChoroplethChartCore,
 		type ChoroplethChartOptions,

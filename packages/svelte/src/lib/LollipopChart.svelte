@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		LollipopChart as LollipopChartCore,
 		type LollipopChartOptions,

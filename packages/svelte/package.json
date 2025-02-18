@@ -5,7 +5,7 @@
 	"scripts": {
 		"postinstall": "ibmtelemetry --config=telemetry.yml",
 		"file:styles": "cp ../core/dist/styles.* dist",
-		"build": "svelte-kit sync && svelte-package && yarn file:styles && publint",
+		"build": "svelte-kit sync && svelte-package && yarn file:styles && prettier ./dist --write && publint",
 		"build:test": "vite build --emptyOutDir",
 		"dev": "vite --port 3003",
 		"test": "svelte-check --workspace=tests",
@@ -26,6 +26,9 @@
 		"./styles.min.css": "./dist/styles.min.css",
 		"./styles.css": "./dist/styles.css"
 	},
+	"sideEffects": [
+		"**/*.css"
+	],
 	"styles": "./dist/styles.css",
 	"files": [
 		"dist",
@@ -33,7 +36,7 @@
 		"telemetry.yml"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0 || ^5.17.0"
+		"svelte": "^3.31.0 || ^4.0.0 || ^5.20.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
@@ -42,14 +45,15 @@
 	"devDependencies": {
 		"@playwright/test": "^1.50.1",
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.17.1",
+		"@sveltejs/kit": "^2.17.2",
 		"@sveltejs/package": "^2.3.10",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
-		"eslint": "^9.20.0",
-		"prettier": "^3.4.2",
-		"publint": "^0.3.4",
-		"svelte": "^5.19.9",
+		"eslint": "^9.20.1",
+		"prettier": "^3.5.1",
+		"publint": "^0.3.5",
+		"svelte": "^5.20.1",
 		"svelte-check": "^4.1.4",
+		"svelte-preprocess": "^6.0.3",
 		"tslib": "^2.8.1",
 		"typescript": "^5.7.3",
 		"vite": "^6.1.0"

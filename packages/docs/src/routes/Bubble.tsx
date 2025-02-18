@@ -37,10 +37,10 @@ export default function Bubble() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<BubbleChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

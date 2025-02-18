@@ -334,18 +334,18 @@ export default defineConfig({
 					IBM Plex Sans Condensed
 				</a>
 				:
-				<CodeSnippet className="language-html">{`<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />`}</CodeSnippet>
 			</p>
+			<CodeSnippet className="language-html">{`<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />`}</CodeSnippet>
 
 			<p>
 				To use different fonts, override two custom CSS properties for the CSS class that is
 				automatically associated with the chart container like this...
-				<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
+			</p>
+			<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
   --cds-charts-font-family: Roboto;
   --cds-charts-font-family-condensed: 'Roboto Condensed';
 }`}</CodeSnippet>
-			</p>
 		</>
 	)
 }

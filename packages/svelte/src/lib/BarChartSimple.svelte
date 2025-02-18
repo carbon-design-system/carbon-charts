@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		SimpleBarChart as SimpleBarChartCore,
 		type BarChartOptions,

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		WordCloudChart as WordCloudChartCore,
 		type WordCloudChartOptions,

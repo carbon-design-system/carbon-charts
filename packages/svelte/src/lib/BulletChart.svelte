@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
 	import {
 		BulletChart as BulletChartCore,
 		type BulletChartOptions,
