@@ -21,7 +21,10 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getComponentContainer({ ariaLabel: 'stacked bar graphs', withinChartClip: true })
+		const svg = this.getComponentContainer({
+			ariaLabel: 'stacked bar graphs',
+			withinChartClip: true
+		})
 
 		// Chart options mixed with the internal configurations
 		const options = this.getOptions()
