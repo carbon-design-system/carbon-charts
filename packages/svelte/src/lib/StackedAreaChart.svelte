@@ -1,5 +1,8 @@
-<script lang="typescript">
-	import { StackedAreaChart as StackedAreaChartCore, type StackedAreaChartOptions } from '@carbon/charts'
+<script lang="ts">
+	import {
+		StackedAreaChart as StackedAreaChartCore,
+		type StackedAreaChartOptions
+	} from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
 	import { ScatterChart as ScatterChartCore, type ScatterChartOptions } from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'

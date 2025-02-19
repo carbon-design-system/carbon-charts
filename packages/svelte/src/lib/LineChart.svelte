@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
 	import { LineChart as LineChartCore, type LineChartOptions } from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'

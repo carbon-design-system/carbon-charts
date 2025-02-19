@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
 	import { HeatmapChart as HeatmapChartCore, type HeatmapChartOptions } from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'

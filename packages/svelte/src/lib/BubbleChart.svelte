@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
 	import { BubbleChart as BubbleChartCore, type BubbleChartOptions } from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'

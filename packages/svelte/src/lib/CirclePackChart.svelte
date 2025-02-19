@@ -1,5 +1,8 @@
-<script lang="typescript">
-	import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions } from '@carbon/charts'
+<script lang="ts">
+	import {
+		CirclePackChart as CirclePackChartCore,
+		type CirclePackChartOptions
+	} from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 

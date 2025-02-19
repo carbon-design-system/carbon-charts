@@ -1,6 +1,4 @@
-<script
-	lang="typescript"
-	generics="ChartType extends Charts, ChartOptionType extends BaseChartOptions">
+<script lang="ts" generics="ChartType extends Charts, ChartOptionType extends BaseChartOptions">
 	import { onMount, onDestroy } from 'svelte'
 	import type { Charts, BaseChartOptions } from '@carbon/charts'
 	import type { BaseChartProps } from './interfaces'

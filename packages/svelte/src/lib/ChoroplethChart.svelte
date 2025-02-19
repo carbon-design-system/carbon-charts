@@ -1,5 +1,8 @@
-<script lang="typescript">
-	import { ChoroplethChart as ChoroplethChartCore, type ChoroplethChartOptions } from '@carbon/charts'
+<script lang="ts">
+	import {
+		ChoroplethChart as ChoroplethChartCore,
+		type ChoroplethChartOptions
+	} from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 

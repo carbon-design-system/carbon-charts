@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
 	import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions } from '@carbon/charts'
 	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
