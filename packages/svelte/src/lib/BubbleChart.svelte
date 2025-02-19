@@ -1,24 +1,27 @@
 <script lang="typescript">
-	import {
-		BubbleChart as BubbleChartCore,
-		type BubbleChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { BubbleChart as BubbleChartCore, type BubbleChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: BubbleChartOptions
-	export let data: ChartTabularData
-	export let chart: BubbleChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<BubbleChartCore, BubbleChartOptions> = $props()
 </script>
 
 <BaseChart
-	{...$$restProps}
 	Chart={BubbleChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

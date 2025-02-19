@@ -1,24 +1,27 @@
 <script lang="typescript">
-	import {
-		RadarChart as RadarChartCore,
-		type RadarChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { RadarChart as RadarChartCore, type RadarChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: RadarChartOptions
-	export let data: ChartTabularData
-	export let chart: RadarChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<RadarChartCore, RadarChartOptions> = $props()
 </script>
 
 <BaseChart
-	{...$$restProps}
 	Chart={RadarChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

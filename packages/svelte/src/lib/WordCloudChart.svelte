@@ -1,25 +1,27 @@
 <script lang="typescript">
-	import {
-		WordCloudChart as WordCloudChartCore,
-		type WordCloudChartOptions,
-		type WorldCloudChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { WordCloudChart as WordCloudChartCore, type WordCloudChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: WordCloudChartOptions | WorldCloudChartOptions
-	export let data: ChartTabularData
-	export let chart: WordCloudChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<WordCloudChartCore, WordCloudChartOptions> = $props()
 </script>
 
 <BaseChart
-	{...$$restProps}
 	Chart={WordCloudChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />
