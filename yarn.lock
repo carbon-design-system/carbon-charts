@@ -1691,7 +1691,7 @@ __metadata:
     styled-components: "npm:^6.1.15"
     typedoc: "npm:^0.27.7"
     typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
+    vite: "npm:^6.1.1"
   languageName: unknown
   linkType: soft
 
@@ -1717,12 +1717,12 @@ __metadata:
     eslint-plugin-vue: "npm:^9.32.0"
     globals: "npm:^15.15.0"
     husky: "npm:^9.1.7"
-    lerna: "npm:^8.1.9"
+    lerna: "npm:^8.2.0"
     lint-staged: "npm:^15.4.3"
     prettier: "npm:^3.5.1"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.3.3"
-    svelte: "npm:^5.20.1"
+    svelte: "npm:^5.20.2"
     svelte-eslint-parser: "npm:^0.43.0"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.24.1"
@@ -1749,7 +1749,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
+    vite: "npm:^6.1.1"
     vite-plugin-dts: "npm:^4.5.0"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
@@ -1771,14 +1771,14 @@ __metadata:
     eslint: "npm:^9.20.1"
     prettier: "npm:^3.5.1"
     publint: "npm:^0.3.5"
-    svelte: "npm:^5.20.1"
+    svelte: "npm:^5.20.2"
     svelte-check: "npm:^4.1.4"
     svelte-preprocess: "npm:^6.0.3"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
+    vite: "npm:^6.1.1"
   peerDependencies:
-    svelte: ^3.31.0 || ^4.0.0 || ^5.20.0
+    svelte: ^5.20.2
   languageName: unknown
   linkType: soft
 
@@ -1793,7 +1793,7 @@ __metadata:
     eslint: "npm:^9.20.1"
     prettier: "npm:^3.5.1"
     typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
+    vite: "npm:^6.1.1"
     vite-plugin-dts: "npm:^4.5.0"
     vue: "npm:^3.5.13"
     vue-tsc: "npm:^2.2.2"
@@ -1837,7 +1837,7 @@ __metadata:
     topojson-client: "npm:^3.1.0"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
+    vite: "npm:^6.1.1"
     vite-plugin-dts: "npm:^4.5.0"
     vitest: "npm:^3.0.6"
   languageName: unknown
@@ -3155,9 +3155,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lerna/create@npm:8.1.9":
-  version: 8.1.9
-  resolution: "@lerna/create@npm:8.1.9"
+"@lerna/create@npm:8.2.0":
+  version: 8.2.0
+  resolution: "@lerna/create@npm:8.2.0"
   dependencies:
     "@npmcli/arborist": "npm:7.5.4"
     "@npmcli/package-json": "npm:5.2.0"
@@ -3217,7 +3217,6 @@ __metadata:
     slash: "npm:^3.0.0"
     ssri: "npm:^10.0.6"
     string-width: "npm:^4.2.3"
-    strip-ansi: "npm:^6.0.1"
     strong-log-transformer: "npm:2.1.0"
     tar: "npm:6.2.1"
     temp-dir: "npm:1.0.0"
@@ -3230,7 +3229,7 @@ __metadata:
     write-pkg: "npm:4.0.0"
     yargs: "npm:17.7.2"
     yargs-parser: "npm:21.1.1"
-  checksum: 10c0/f050e79c0bd982c6fdf9b7347275a94cc80f7a6599094f1cf114c10d5373c21afac9bd1a5c0b2ca400e6aaf18da883c384dfd6e5c84a186a2c09c912bf9b2238
+  checksum: 10c0/6da8d2ec143246f2ca47dfce07cf9bd86175b66b4612aad3ddcf3f215044388d5b85a886a35a2357843e56d5e2960e9a6ac3b36c795a83fe4eeb64cd961dd288
   languageName: node
   linkType: hard
 
@@ -12234,11 +12233,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:^8.1.9":
-  version: 8.1.9
-  resolution: "lerna@npm:8.1.9"
+"lerna@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "lerna@npm:8.2.0"
   dependencies:
-    "@lerna/create": "npm:8.1.9"
+    "@lerna/create": "npm:8.2.0"
     "@npmcli/arborist": "npm:7.5.4"
     "@npmcli/package-json": "npm:5.2.0"
     "@npmcli/run-script": "npm:8.1.0"
@@ -12305,7 +12304,6 @@ __metadata:
     slash: "npm:3.0.0"
     ssri: "npm:^10.0.6"
     string-width: "npm:^4.2.3"
-    strip-ansi: "npm:^6.0.1"
     strong-log-transformer: "npm:2.1.0"
     tar: "npm:6.2.1"
     temp-dir: "npm:1.0.0"
@@ -12321,7 +12319,7 @@ __metadata:
     yargs-parser: "npm:21.1.1"
   bin:
     lerna: dist/cli.js
-  checksum: 10c0/e3362d66324f5ee9606dbdb332a6b09eeb2df6378177e36a1bbcf532927d921beb4d25dbcc717c4adf3a7dcd67e0bcee67bedf81fdbe7e78bbecce310358d762
+  checksum: 10c0/60e2bc71877d7b04881854484f8ceec5a198e8114d11be757be866b28f66fa65cae1b94f53e802f10f031234522fe2a771afa0e9bf58f5eb14bfeedc9592a123
   languageName: node
   linkType: hard
 
@@ -15059,6 +15057,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.5.2":
+  version: 8.5.3
+  resolution: "postcss@npm:8.5.3"
+  dependencies:
+    nanoid: "npm:^3.3.8"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/b75510d7b28c3ab728c8733dd01538314a18c52af426f199a3c9177e63eb08602a3938bfb66b62dc01350b9aed62087eabbf229af97a1659eb8d3513cec823b3
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -17150,9 +17159,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.20.1":
-  version: 5.20.1
-  resolution: "svelte@npm:5.20.1"
+"svelte@npm:^5.20.2":
+  version: 5.20.2
+  resolution: "svelte@npm:5.20.2"
   dependencies:
     "@ampproject/remapping": "npm:^2.3.0"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -17168,7 +17177,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/e975beb9a74e98cc9abca7926822045de7b5f77b400d102feb444927a1789f1f961718ab05cb8d930380c12f11af4ca211744dd04ca2988d0adcb6e9af7c7b1f
+  checksum: 10c0/b7c8825bc0c6fab6452664f3e688da97738171c85534a3ab8b77c645ca304966406e0afd3b91625656a8ec1995fbce84ca835d91f3df25f83507ef26e89e5f30
   languageName: node
   linkType: hard
 
@@ -18145,7 +18154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0 || ^6.0.0, vite@npm:^6.1.0":
+"vite@npm:^5.0.0 || ^6.0.0":
   version: 6.1.0
   resolution: "vite@npm:6.1.0"
   dependencies:
@@ -18194,6 +18203,58 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/e1cad1cfbd29923a37d2dbd60f7387901ed8356758073a0226cbe844fd032425ba3bf41651332cab4965d5c54d0b51d208889ff32ce81bd282d230c0c9f0f8f1
+  languageName: node
+  linkType: hard
+
+"vite@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "vite@npm:6.1.1"
+  dependencies:
+    esbuild: "npm:^0.24.2"
+    fsevents: "npm:~2.3.3"
+    postcss: "npm:^8.5.2"
+    rollup: "npm:^4.30.1"
+  peerDependencies:
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
+    jiti: ">=1.21.0"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/4ec5ddc9436951a68b213cd59c2a157663ef423658c387400774582ea33da40dcae18e55f3adb3b629173e2183b10d49db8370bc51a0aa89797e4ca5a34702a0
   languageName: node
   linkType: hard
 
