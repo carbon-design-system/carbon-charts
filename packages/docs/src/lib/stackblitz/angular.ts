@@ -9,24 +9,24 @@ export function getAngularProject(
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/common': '^18.1.0',
-		'@angular/compiler': '^18.1.0',
-		'@angular/core': '^18.1.0',
-		'@angular/platform-browser': '^18.1.0',
+		'@angular/common': '^19.0.0',
+		'@angular/compiler': '^19.0.0',
+		'@angular/core': '^19.0.0',
+		'@angular/platform-browser': '^19.0.0',
 		'@carbon/charts-angular': version.carbonCharts,
 		tslib: '^2.5.0',
-		'zone.js': '~0.14.0'
+		'zone.js': '~0.15.0'
 	}
 
 	const devDependencies = {
-		'@angular-devkit/build-angular': '^18.1.0',
-		'@angular/cli': '^18.1.0',
-		'@angular/compiler-cli': '^18.1.0',
+		'@angular-devkit/build-angular': '^19.0.0',
+		'@angular/cli': '^19.0.0',
+		'@angular/compiler-cli': '^19.0.0',
 		'@types/d3': '^7.4.3',
 		'@types/d3-cloud': '^1.2.9',
 		'@types/d3-sankey': '^0.12.4',
 		'@types/topojson-client': '^3.1.0',
-		typescript: '~5.5.0'
+		typescript: '^5.6.3'
 	}
 
 	const indexHtml = `<html>
@@ -48,16 +48,49 @@ export function getAngularProject(
 </body>
 </html>`
 
+	const selectorMap: Record<string, string> = {
+		'ibm-alluvial-chart': 'AlluvialChartComponent',
+		'ibm-area-chart': 'AreaChartComponent',
+		'ibm-boxplot-chart': 'BoxplotChartComponent',
+		'ibm-bubble-chart': 'BubbleChartComponent',
+		'ibm-bullet-chart': 'BulletChartComponent',
+		'ibm-circle-pack-chart': 'CirclePackChartComponent',
+		'ibm-choropleth-chart': 'ChoroplethChartComponent',
+		'ibm-combo-chart': 'ComboChartComponent',
+		'ibm-donut-chart': 'DonutChartComponent',
+		'ibm-experimental-choropleth-chart': 'ChoroplethChartComponent',
+		'ibm-gauge-chart': 'GaugeChartComponent',
+		'ibm-grouped-bar-chart': 'GroupedBarChartComponent',
+		'ibm-heatmap-chart': 'HeatmapChartComponent',
+		'ibm-histogram-chart': 'HistogramChartComponent',
+		'ibm-line-chart': 'LineChartComponent',
+		'ibm-lollipop-chart': 'LollipopChartComponent',
+		'ibm-meter-chart': 'MeterChartComponent',
+		'ibm-pie-chart': 'PieChartComponent',
+		'ibm-radar-chart': 'RadarChartComponent',
+		'ibm-scatter-chart': 'ScatterChartComponent',
+		'ibm-simple-bar-chart': 'SimpleBarChartComponent',
+		'ibm-stacked-area-chart': 'StackedAreaChartComponent',
+		'ibm-stacked-bar-chart': 'StackedBarChartComponent',
+		'ibm-tree-chart': 'TreeChartComponent',
+		'ibm-treemap-chart': 'TreemapChartComponent',
+		'ibm-wordcloud-chart': 'WordCloudChartComponent'
+	}
+
 	const mainTs = `import { Component } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser'
-import { ChartsModule } from '@carbon/charts-angular'
+import { 
+	${selectorMap[chartType]}
+ } from '@carbon/charts-angular'
 import options from './options'
 import data from './data'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ChartsModule],
+  imports: [
+		${selectorMap[chartType]}
+		],
 	template: '<${chartType} [data]="data" [options]="options"></${chartType}>'
 })
 export class App {
