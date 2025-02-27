@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts Svelte</h3>
 	<p align="center">
-		A component library of 26 charts for Svelte and SvelteKit.
+		A component library of 26 charts for Svelte 5.20+ and SvelteKit (optionally).
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
@@ -21,7 +21,7 @@
 
 ## Maintenance & support
 
-These Svelte wrappers were developed by Eric Liu.
+These Svelte components were developed by Eric Liu and Nate Stuyvesant.
 
 Please direct all questions regarding support, bug fixes and feature requests to
 [@nstuyvesant](https://github.com/nstuyvesant) and [@metonym](https://github.com/metonym).
@@ -31,40 +31,42 @@ Please direct all questions regarding support, bug fixes and feature requests to
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -D @carbon/charts-svelte
+npm install -D @carbon/charts-svelte@next
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add -D @carbon/charts-svelte
+yarn add -D @carbon/charts-svelte@next
 ```
 
 The required styles should be imported from `@carbon/charts-svelte/styles.css`.
 
-A release in the near future will move components to runes mode for Svelte 5 and beyond. As this would be a breaking change because event handlers will change to component properties, this version will be published with the distribution tag `next`. Please check <a href="https://www.npmjs.com/package/@carbon/charts-svelte?activeTab=versions">here</a> to see if a version for `latest` has been published.
+## Breaking Change
+
+This release is for Svelte 5.20+ ONLY as it uses runes mode and passing of callback functions as
+properties in place of event handlers. If you need support for Svelte 3 or 4, please use the
+`latest`.
 
 ### SvelteKit
 
 While this component library can be used with any build environments for Svelte,
 [SvelteKit](https://kit.svelte.dev) is the official framework for building Svelte apps supporting
-client-side and server-side rendering (SSR). SvelteKit is powered by [Vite](https://vitejs.dev).
+client and server-side rendering (SSR). SvelteKit is powered by [Vite](https://vitejs.dev).
 
 The module `@carbon/charts` should not be externalized for SSR when building for production.
 
 ```js
-// vite.config.mjs
+// vite.config.ts
 import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
 	plugins: [sveltekit()],
 	ssr: {
 		noExternal: process.env.NODE_ENV === 'production' ? ['@carbon/charts'] : []
 	}
-}
-
-export default config
+})
 ```
 
 #### Circular dependency warnings
@@ -106,39 +108,38 @@ import '@carbon/charts-svelte/styles.css'
 	}} />
 ```
 
-### Dispatched events
+### Lifecycle callbacks
 
-Each Svelte chart component dispatches the following events:
+Chart components fire the following callbacks:
 
-- **on:load**: fired when the chart is instantiated
-- **on:update**: fired when `data` or `options` are updated
-- **on:destroy**: fired when the component is unmounted and the chart is destroyed
+- **onload**: When the chart is instantiated
+- **onupdate**: When `data` or `options` are updated
+- **ondestroy**: When the component is unmounted and the chart is destroyed
 
 ```svelte
-<BarChartSimple {data} {options} on:load on:update on:destroy />
+<BarChartSimple {data} {options} {onload} {onupdate} {ondestroy} />
 ```
 
 ### Dynamic import
 
-Dynamically import a chart and instantiate it using the
-[svelte:component API](https://svelte.dev/docs/special-elements#svelte-component). By importing
-`@carbon/charts` within `onMount()`, you avoid problems with server-side rendering.
+Dynamically importing a chart within `onMount()` avoids issues with server-side rendering (SSR). The
+reason `@carbon/charts-svelte` does not work with SRR is because its dependency `@carbon/charts`
+expects the window object to be present for fullscreen display.
 
 ```svelte
 <script>
 	import '@carbon/charts-svelte/styles.css'
 	import { onMount } from 'svelte'
 
-	let chart
+	let Chart = $state()
 
 	onMount(async () => {
 		const charts = await import('@carbon/charts-svelte')
-		chart = charts.BarChartSimple
+		Chart = charts.BarChartSimple
 	})
 </script>
 
-<svelte:component
-	this={chart}
+<Chart
 	data={[
 		{ group: 'Qty', value: 65000 },
 		{ group: 'More', value: 29123 },
@@ -168,7 +169,7 @@ hovering over a bar.
 	import { onMount } from 'svelte'
 	import { BarChartSimple } from '@carbon/charts-svelte'
 
-	let chart
+	let chart = $state()
 
 	function barMouseOver(e) {
 		console.log(e.detail)
@@ -202,11 +203,6 @@ hovering over a bar.
 	}} />
 ```
 
-## Svelte and TypeScript support
-
-Svelte 3.31 or greater is required to use this library with TypeScript. Svelte 5.20+ is
-recommended.
-
 ### Enums and types
 
 For your convenience, enums and types from `@carbon/charts` are re-exported from
@@ -228,22 +224,6 @@ const options: BarChartOptions = {
 }
 ```
 
-### Component type
-
-Use the `ComponentType` utility type from `svelte` to extract the component type for chart
-components.
-
-```ts
-import { onMount, type ComponentType } from 'svelte'
-import type { BarChartSimple } from '@carbon/charts-svelte'
-
-let component: ComponentType<BarChartSimple> = null
-
-onMount(async () => {
-	component = (await import('@carbon/charts-svelte')).BarChartSimple
-})
-```
-
 ### Component props
 
 Use the `ComponentProps` utility type from `svelte` to extract the props for chart components.
@@ -253,20 +233,19 @@ You can then use an
 extract types for individual properties.
 
 ```ts
-import { type ComponentProps } from 'svelte'
+import type { ComponentProps } from 'svelte'
 import { BarChartSimple } from '@carbon/charts-svelte'
+import { options } from './options'
+import { data } from './data'
 
-type ChartProps = ComponentProps<BarChartSimple>
-
-// Indexed access type to access the type of the `chart` property
-let chart: ChartProps['chart'] = null
+// Errors if these aren't the correct props expected by BarChartSimple
+const props: ComponentProps<typeof BarChartSimple> = { options, data }
 ```
 
 ## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
 
-This package uses IBM Telemetry to collect de-identified and anonymized metrics
-data. By installing this package as a dependency you are agreeing to telemetry
-collection. To opt out, see
+This package uses IBM Telemetry to collect de-identified and anonymized metrics data. By installing
+this package as a dependency you are agreeing to telemetry collection. To opt out, see
 [Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
 For more information on the data being collected, please see the
 [IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).
