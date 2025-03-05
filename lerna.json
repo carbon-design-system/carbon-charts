@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
-	"version": "1.22.19",
+	"version": "1.22.20",
 	"npmClient": "yarn",
 	"command": {
 		"publish": {
