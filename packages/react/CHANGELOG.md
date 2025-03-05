@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.23.0 (2025-03-05)
+
+### Features
+
+- **docs:** add analytics instrumentation doc
+  ([#1966](https://github.com/carbon-design-system/carbon-charts/issues/1966))
+  ([f0da6ae](https://github.com/carbon-design-system/carbon-charts/commit/f0da6aef3d6d51b49235069c863d92bbd5b9e310))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.21 (2025-03-05)
 
 ### Bug Fixes

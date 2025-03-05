@@ -72,6 +72,12 @@ export default [
 		charts: []
 	},
 	{
+		path: 'analytics-instrumentation',
+		title: 'Instrumenting Telemetry & Analytics',
+		text: 'Carbon Charts provides an events service that can be leveraged to track user interactions and send telemetry data to analytics platforms like Amplitude. Below are examples of how to instrument your charts to gather user behavior data. To track interactions with your chart, use a reference to the chart to add event listeners for the dispatched events. The following example shows how to track legend clicks: Here are examples of events that could provide valuable user interaction data: For events that may fire frequently, such as tooltips or mouse movements, debouncing could be used to prevent overwhelming your analytics platform: When using Carbon Charts with React, you can set up event listeners using refs and useEffect: Event-based telemetry allows applications to gather valuable user behavior data without disrupting the user experience. More information on available event listeners can be found here.',
+		charts: []
+	},
+	{
 		path: 'event-listeners',
 		title: 'Event Listeners',
 		text: 'Services are globalized functions. General tasks such as event dispatching, transition handling, DOM-related activities etc. are handled by services. For example, event listeners can be added through the events service To listen for event just use a reference to the chart to add an event listener for one of the dispatched events above. This is an example for adding an event listener for a mouseover event on bar chart rects. Event dispatching for chart elements allows applications to trigger custom UI actions and states when users interact with the charts. More information on events can be found here.',
