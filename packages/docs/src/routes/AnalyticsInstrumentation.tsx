@@ -35,7 +35,7 @@ export default function AnalyticsInstrumentation() {
 				for the dispatched events. The following example shows how to track legend clicks:
 			</p>
 
-			<CodeSnippet className="language-javascript">{`// Initialize Amplitude
+			<CodeSnippet className="language-javascript" type="multi">{`// Initialize Amplitude
 amplitude.init("YOUR_AMPLITUDE_API_KEY")
 
 // Track legend interactions
@@ -50,7 +50,7 @@ chart.services.events.addEventListener("legend-item-onclick", ({ detail }) => {
 
 			<p>Here are examples of events that could provide valuable user interaction data:</p>
 
-			<CodeSnippet className="language-javascript">{`// Track bar clicks
+			<CodeSnippet className="language-javascript" type="multi">{`// Track bar clicks
 chart.services.events.addEventListener("bar-click", ({ detail }) => {
   amplitude.track("Chart_BarClick", {
     group: detail.datum.group,
@@ -79,7 +79,7 @@ chart.services.events.addEventListener("show-tooltip", ({ detail }) => {
 				be used to prevent overwhelming your analytics platform:
 			</p>
 
-			<CodeSnippet className="language-javascript">{`import { debounce } from "lodash"
+			<CodeSnippet className="language-javascript" type="multi">{`import { debounce } from "lodash"
 
 // Create debounced tracking function
 const debouncedTrack = debounce((eventName, eventData) => {
@@ -100,7 +100,9 @@ chart.services.events.addEventListener("show-tooltip", ({ detail }) => {
 				useEffect:
 			</p>
 
-			<CodeSnippet className="language-javascript">{`import { BarChart } from "@carbon/charts-react"
+			<CodeSnippet
+				className="language-javascript"
+				type="multi">{`import { BarChart } from "@carbon/charts-react"
 import { useRef, useEffect } from "react"
 import amplitude from "amplitude-js"
 
