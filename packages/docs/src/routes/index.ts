@@ -6,6 +6,7 @@ import Anatomy from './Anatomy.tsx'
 import Data from './Data.tsx'
 import Options from './Options.tsx'
 import Api from './Api.tsx'
+import AnalyticsInstrumentation from './AnalyticsInstrumentation'
 import Themes from './Themes.tsx'
 import Axes from './Axes.tsx'
 import Palettes from './Palettes.tsx'
@@ -20,6 +21,7 @@ import Choropleth from './Choropleth.tsx'
 import CirclePack from './CirclePack.tsx'
 import Combo from './Combo.tsx'
 import Donut from './Donut.tsx'
+import EventListeners from './EventListeners'
 import Gauge from './Gauge.tsx'
 import Heatmap from './Heatmap.tsx'
 import Histogram from './Histogram.tsx'
@@ -50,6 +52,7 @@ export {
 	Data,
 	Options,
 	Api,
+	AnalyticsInstrumentation,
 	Themes,
 	Axes,
 	Palettes,
@@ -64,6 +67,7 @@ export {
 	CirclePack,
 	Combo,
 	Donut,
+	EventListeners,
 	Gauge,
 	Heatmap,
 	Histogram,
