@@ -42,12 +42,12 @@
 		"@playwright/test": "^1.50.1",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"eslint": "^9.21.0",
-		"prettier": "^3.5.2",
-		"typescript": "^5.7.3",
+		"prettier": "^3.5.3",
+		"typescript": "^5.8.2",
 		"vite": "^6.2.0",
-		"vite-plugin-dts": "^4.5.0",
+		"vite-plugin-dts": "^4.5.3",
 		"vue": "^3.5.13",
-		"vue-tsc": "^2.2.4"
+		"vue-tsc": "^2.2.8"
 	},
 	"publishConfig": {
 		"access": "public",
