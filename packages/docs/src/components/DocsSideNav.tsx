@@ -34,6 +34,9 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/options">
 					Chart display options
 				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/event-listeners">
+					Event Listeners
+				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/highlights">
 					Highlights
 				</SideNavMenuItem>
