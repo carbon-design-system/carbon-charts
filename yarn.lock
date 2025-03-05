@@ -1667,7 +1667,7 @@ __metadata:
     prettier: "npm:^3.5.3"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.3.3"
-    svelte: "npm:^5.22.3"
+    svelte: "npm:^5.22.4"
     svelte-eslint-parser: "npm:^1.0.1"
     typescript: "npm:^5.8.2"
     typescript-eslint: "npm:^8.26.0"
@@ -1716,7 +1716,7 @@ __metadata:
     eslint: "npm:^9.21.0"
     prettier: "npm:^3.5.3"
     publint: "npm:^0.3.8"
-    svelte: "npm:^5.22.3"
+    svelte: "npm:^5.22.4"
     svelte-check: "npm:^4.1.4"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
@@ -16987,7 +16987,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.22.3":
+"svelte@npm:^5.22.4":
   version: 5.22.4
   resolution: "svelte@npm:5.22.4"
   dependencies:
