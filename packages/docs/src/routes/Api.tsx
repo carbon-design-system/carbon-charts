@@ -74,6 +74,27 @@ console.log(myChart)
 				.
 			</p>
 
+			<h3>Event Listener Code Examples</h3>
+			<ul>
+				<li>
+					<a
+						href="https://stackblitz.com/edit/751z9aet?file=index.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						vanilla
+					</a>
+				</li>
+
+				<li>
+					<a
+						href="https://stackblitz.com/edit/react-uwtozmsz?file=src%2Findex.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						React
+					</a>
+				</li>
+			</ul>
+
 			<h2>Full Documentation</h2>
 
 			<ApiContainer title="API Documentation" src="/api" />

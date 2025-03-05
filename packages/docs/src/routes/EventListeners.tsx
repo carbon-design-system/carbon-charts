@@ -44,6 +44,27 @@ export default function EventListeners() {
 				</a>
 				.
 			</p>
+
+			<h3>Code Examples</h3>
+			<ul>
+				<li>
+					<a
+						href="https://stackblitz.com/edit/751z9aet?file=index.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						vanilla
+					</a>
+				</li>
+
+				<li>
+					<a
+						href="https://stackblitz.com/edit/react-uwtozmsz?file=src%2Findex.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						React
+					</a>
+				</li>
+			</ul>
 		</>
 	)
 }
