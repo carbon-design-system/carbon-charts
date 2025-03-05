@@ -68,7 +68,7 @@ console.log(myChart)
 			<p>
 				Event dispatching for chart elements allows applications to trigger custom UI actions and
 				states when users interact with the charts. More information on events can be found{' '}
-				<a href="/api/classes/Events.html" target="_blank">
+				<a href="/api/modules/interfaces.events" target="_blank">
 					here
 				</a>
 				.

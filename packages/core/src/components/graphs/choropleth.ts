@@ -2,6 +2,7 @@ import { select } from 'd3'
 import * as Events from '@/interfaces/events'
 import { GeoProjection } from '@/components/essentials/geo-projection'
 import { ChoroplethModel } from '@/model'
+import { getProperty } from '@/tools'
 
 export class Choropleth extends GeoProjection {
 	type = 'choropleth'
@@ -14,6 +15,9 @@ export class Choropleth extends GeoProjection {
 		const data = (this.model as ChoroplethModel).getCombinedData()
 		const svg = this.getComponentContainer({ ariaLabel: 'map', withinChartClip: true })
 
+		const colorOptions = getProperty(this.getOptions(), 'color')
+		const customColors = getProperty(colorOptions, 'gradient', 'colors')
+
 		const geo = svg.select('g.geo')
 		geo
 			.selectAll('path')
@@ -23,6 +27,15 @@ export class Choropleth extends GeoProjection {
 					value: data[d.properties.NAME].value,
 					originalClassName: `border`
 				})
+			})
+			.attr('style', (d: any) => {
+				if (customColors) {
+					return `fill: ${this.model.getColorClassName({
+						value: data[d.properties.NAME].value
+					})}`
+				}
+
+				return null
 			})
 
 		this.addCountryAreaEventListener()

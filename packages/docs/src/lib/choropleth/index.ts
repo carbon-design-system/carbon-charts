@@ -22,6 +22,16 @@ export const missingDataOptions: ChoroplethChartOptions = {
 	geoData: worldTopoJson
 }
 
+export const customColorsOptions: ChoroplethChartOptions = {
+	title: 'Custom colors',
+	color: {
+		gradient: {
+			colors: ['#0f62fe', '#ffc2c5', '#8d8d8d']
+		}
+	},
+	geoData: worldTopoJson
+}
+
 const data: ChartTabularData = [
 	{
 		name: 'Fiji',
@@ -1702,6 +1712,11 @@ export const examples: Example[] = [
 	{
 		options: missingDataOptions,
 		data: missingData,
+		tags: ['test']
+	},
+	{
+		options: customColorsOptions,
+		data,
 		tags: ['test']
 	}
 ]
