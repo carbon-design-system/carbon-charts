@@ -72,6 +72,12 @@ export default [
 		charts: []
 	},
 	{
+		path: 'event-listeners',
+		title: 'Event Listeners',
+		text: 'Services are globalized functions. General tasks such as event dispatching, transition handling, DOM-related activities etc. are handled by services. For example, event listeners can be added through the events service To listen for event just use a reference to the chart to add an event listener for one of the dispatched events above. This is an example for adding an event listener for a mouseover event on bar chart rects. Event dispatching for chart elements allows applications to trigger custom UI actions and states when users interact with the charts. More information on events can be found here.',
+		charts: []
+	},
+	{
 		path: 'themes',
 		title: 'Themes',
 		text: 'Four Carbon themes (white, g10, g90 and g100) are included in the styles.css file for each package. The latter three represent shades of gray where g10 is 10% and g100 is 100% (black). All chart types support the theme property. To use alternate background colors, set your options to a theme that is close in brightness to your background color such as g90 then override global CSS classes as shown below.',

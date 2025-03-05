@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.22.21 (2025-03-05)
+
+### Bug Fixes
+
+- **Choropleth:** issues with custom color usage
+  ([#1965](https://github.com/carbon-design-system/carbon-charts/issues/1965))
+  ([290e6eb](https://github.com/carbon-design-system/carbon-charts/commit/290e6eb84951dd7d658334c9bcf7c75560405b72))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.22.20 (2025-03-05)
 
 **Note:** Version bump only for package @carbon/charts-react
