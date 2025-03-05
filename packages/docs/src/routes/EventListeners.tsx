@@ -3,14 +3,8 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { CodeSnippet } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
-import styled from 'styled-components'
 
-const ApiContainer = styled.iframe`
-	width: 100%;
-	height: 1000px;
-`
-
-export default function Api() {
+export default function EventListeners() {
 	const highlightCode = () => {
 		hljs.registerLanguage('javascript', javascript)
 
@@ -26,30 +20,7 @@ export default function Api() {
 
 	return (
 		<>
-			<PageHeader title="API (Vanilla JavaScript)" />
-
-			<h2>Overview</h2>
-
-			<p>
-				Carbon Charts exposes the entire API allowing you to heavily customize the look and feel and
-				behaviors. When a chart is instantiated, the chart object contains key properties.
-			</p>
-
-			<CodeSnippet className="language-javascript" type="multi">{`const myChart = new PieChart({
-  data: ...,
-  options: ...
-})
-
-console.log(myChart)
-
-// RESULT
-{
-  model, // where we store charting data & options
-  services, // globalized functions that can affect charting behaviour. (e.g. event listener dispatching etc.)
-  components // internally used for arranging the charting layout, you can disregard this
-}`}</CodeSnippet>
-
-			<h2>Services and Event Handling</h2>
+			<PageHeader title="Event Listeners" />
 
 			<p>
 				Services are globalized functions. General tasks such as event dispatching, transition
@@ -73,10 +44,6 @@ console.log(myChart)
 				</a>
 				.
 			</p>
-
-			<h2>Full Documentation</h2>
-
-			<ApiContainer title="API Documentation" src="/api" />
 		</>
 	)
 }

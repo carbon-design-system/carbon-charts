@@ -234,7 +234,7 @@ export default [
 		path: 'choropleth',
 		title: 'Choropleth Charts',
 		text: 'Choropleth Charts are specialized maps that use variations in shading, coloring, or patterning within predefined areas to represent the magnitude of a statistical variable. This type of chart is particularly effective for visualizing geographic data distributions, allowing for easy comparisons across different regions or territories. Commonly used to represent variables such as population density, economic metrics, or election results, Choropleth Charts provide a clear visual distinction between different data intensities. They are invaluable in fields such as demographics, public policy, and epidemiology, where geographic patterns play a crucial role in data analysis. The intuitive nature of these charts makes complex data sets accessible and understandable, highlighting spatial relationships and trends that might not be as apparent in other forms of data representation. Choropleth Charts are a fundamental tool in the visualization toolkit for anyone looking to convey geographic data insights effectively. Details on Choropleth chart options can be found here.',
-		charts: ['Geo data', 'Missing data']
+		charts: ['Geo data', 'Missing data', 'Custom colors']
 	},
 	{
 		path: 'circlepack',

@@ -48,6 +48,7 @@ import {
 } from './routes'
 
 import './index.scss'
+import EventListeners from './routes/EventListeners'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -67,6 +68,7 @@ const App: React.FC = () => (
 				<Route path="truncation" element={<Truncation />} />
 				<Route path="zoombar" element={<Zoombar />} />
 				<Route path="apidocs" element={<Api />} />
+				<Route path="event-listeners" element={<EventListeners />} />
 				<Route path="themes" element={<Themes />} />
 				<Route path="axes" element={<Axes />} />
 				<Route path="legends" element={<Legends />} />
