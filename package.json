@@ -16,19 +16,16 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "^20.18.3 ^22.13.1"
+		"node": "^22.14.0"
 	},
-	"packageManager": "yarn@4.6.0",
-	"resolutions": {
-		"react-is": "19.0.0"
-	},
+	"packageManager": "yarn@4.7.0",
 	"devDependencies": {
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-conventional": "^19.7.1",
 		"@eslint/compat": "^1.2.7",
 		"@eslint/js": "^9.21.0",
 		"@playwright/test": "^1.50.1",
-		"@types/node": "^22.13.5",
+		"@types/node": "^22.13.9",
 		"@vue/eslint-config-prettier": "^10.2.0",
 		"@vue/eslint-config-typescript": "^14.4.0",
 		"eslint": "^9.21.0",
@@ -36,21 +33,21 @@
 		"eslint-plugin-jsdoc": "^50.6.3",
 		"eslint-plugin-prettier": "^5.2.3",
 		"eslint-plugin-react": "^7.37.4",
-		"eslint-plugin-react-hooks": "^5.1.0",
-		"eslint-plugin-svelte": "^3.0.2",
-		"eslint-plugin-vue": "^9.32.0",
+		"eslint-plugin-react-hooks": "^5.2.0",
+		"eslint-plugin-svelte": "^3.0.3",
+		"eslint-plugin-vue": "^10.0.0",
 		"globals": "^16.0.0",
 		"husky": "^9.1.7",
-		"lerna": "^8.2.0",
+		"lerna": "^8.2.1",
 		"lint-staged": "^15.4.3",
-		"prettier": "^3.5.2",
+		"prettier": "^3.5.3",
 		"prettier-config-carbon": "^0.11.0",
 		"prettier-plugin-svelte": "^3.3.3",
-		"svelte": "^5.20.5",
-		"svelte-eslint-parser": "^1.0.0",
-		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.25.0",
-		"vue-eslint-parser": "^9.4.3"
+		"svelte": "^5.22.4",
+		"svelte-eslint-parser": "^1.0.1",
+		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.26.0",
+		"vue-eslint-parser": "^10.1.1"
 	},
 	"release": {
 		"branch": "main"
