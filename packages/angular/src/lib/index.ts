@@ -5,7 +5,6 @@ export {
 	BoxplotChartComponent,
 	BubbleChartComponent,
 	BulletChartComponent,
-	ChartsModule,
 	ChoroplethChartComponent,
 	CirclePackChartComponent,
 	ComboChartComponent,
@@ -35,17 +34,13 @@ export {
 	CardNodeLabelComponent,
 	CardNodeSubtitleComponent,
 	CardNodeTitleComponent,
-	CardNodeModule,
 	EdgeComponent,
-	EdgeModule,
 	MarkerArrowLeftComponent,
 	MarkerArrowRightComponent,
 	MarkerComponent,
 	MarkerDiamondComponent,
-	MarkerModule,
 	MarkerShapeNodeComponent,
 	MarkerSquareComponent,
 	MarkerTeeComponent,
-	ShapeNodeComponent,
-	ShapeNodeModule
+	ShapeNodeComponent
 } from './diagrams'

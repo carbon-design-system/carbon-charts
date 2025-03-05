@@ -82,7 +82,9 @@ export class Gauge extends Component {
 	render(animate = true) {
 		const svg = this.getComponentContainer({
 			ariaLabel: 'gauge graph'
-		}).attr('width', '100%').attr('height', '100%')
+		})
+			.attr('width', '100%')
+			.attr('height', '100%')
 		const options = this.getOptions()
 
 		const value = this.getValue()
