@@ -22,7 +22,7 @@
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
 		"@carbon/icons-react": "^11.57.0",
-		"@carbon/react": "^1.78.0",
+		"@carbon/react": "^1.78.2",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.1.0",
 		"highlight.js": "^11.11.1",
@@ -30,20 +30,20 @@
 		"react-dom": "^19.0.0",
 		"react-is": "^19.0.0",
 		"react-router-dom": "^7.3.0",
-		"styled-components": "^6.1.15"
+		"styled-components": "^6.1.16"
 	},
 	"devDependencies": {
-		"@types/react": "^19.0.10",
+		"@types/react": "^19.0.11",
 		"@types/react-dom": "^19.0.4",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.8.0",
 		"eslint": "^9.22.0",
 		"jsdom": "^26.0.0",
 		"prettier": "^3.5.3",
-		"sass": "^1.85.1",
-		"typedoc": "^0.27.9",
+		"sass": "^1.86.0",
+		"typedoc": "^0.28.0",
 		"typescript": "^5.8.2",
-		"vite": "^6.2.1"
+		"vite": "^6.2.2"
 	},
 	"publishConfig": {
 		"access": "restricted"
