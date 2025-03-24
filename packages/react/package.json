@@ -48,18 +48,18 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.51.1",
-		"@types/react": "^19.0.11",
+		"@types/react": "^19.0.12",
 		"@types/react-dom": "^19.0.4",
-		"@vitejs/plugin-react-swc": "^3.8.0",
+		"@vitejs/plugin-react-swc": "^3.8.1",
 		"classnames": "^2.5.1",
 		"concurrently": "^9.1.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.22.0",
+		"eslint": "^9.23.0",
 		"prettier": "^3.5.3",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"typescript": "^5.8.2",
-		"vite": "^6.2.2",
+		"vite": "^6.2.3",
 		"vite-plugin-dts": "^4.5.3"
 	},
 	"publishConfig": {
