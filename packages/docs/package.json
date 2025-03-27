@@ -22,7 +22,7 @@
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
 		"@carbon/icons-react": "^11.57.0",
-		"@carbon/react": "^1.78.2",
+		"@carbon/react": "^1.79.0",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.1.0",
 		"highlight.js": "^11.11.1",
