@@ -56,8 +56,8 @@
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^9.23.0",
 		"prettier": "^3.5.3",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
 		"typescript": "^5.8.2",
 		"vite": "^6.2.3",
 		"vite-plugin-dts": "^4.5.3"
