@@ -15,6 +15,8 @@
 	}: ChartProps<AreaChartCore, AreaChartOptions> = $props()
 </script>
 
+<!-- @component Area chart component. -->
+
 <BaseChart
 	Chart={AreaChartCore}
 	{options}

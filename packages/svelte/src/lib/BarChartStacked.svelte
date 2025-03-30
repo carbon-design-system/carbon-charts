@@ -15,6 +15,8 @@
 	}: ChartProps<StackedBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Stacked bar chart component. -->
+
 <BaseChart
 	Chart={StackedBarChartCore}
 	{options}

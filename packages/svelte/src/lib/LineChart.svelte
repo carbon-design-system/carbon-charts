@@ -15,6 +15,8 @@
 	}: ChartProps<LineChartCore, LineChartOptions> = $props()
 </script>
 
+<!-- @component Line chart component. -->
+
 <BaseChart
 	Chart={LineChartCore}
 	{options}

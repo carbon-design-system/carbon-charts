@@ -18,6 +18,8 @@
 	}: ChartProps<StackedAreaChartCore, StackedAreaChartOptions> = $props()
 </script>
 
+<!-- @component Stacked area chart component. -->
+
 <BaseChart
 	Chart={StackedAreaChartCore}
 	{options}

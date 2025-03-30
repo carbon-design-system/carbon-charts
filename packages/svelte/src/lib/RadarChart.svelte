@@ -15,6 +15,8 @@
 	}: ChartProps<RadarChartCore, RadarChartOptions> = $props()
 </script>
 
+<!-- @component Radar / kiviat chart component. -->
+
 <BaseChart
 	Chart={RadarChartCore}
 	{options}

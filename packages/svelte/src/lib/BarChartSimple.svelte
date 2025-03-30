@@ -15,6 +15,8 @@
 	}: ChartProps<SimpleBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Bar chart component. -->
+
 <BaseChart
 	Chart={SimpleBarChartCore}
 	{options}

@@ -15,6 +15,8 @@
 	}: ChartProps<GaugeChartCore, GaugeChartOptions> = $props()
 </script>
 
+<!-- @component Guage chart component. -->
+
 <BaseChart
 	Chart={GaugeChartCore}
 	{options}

@@ -15,6 +15,8 @@
 	}: ChartProps<TreemapChartCore, TreemapChartOptions> = $props()
 </script>
 
+<!-- @component Treemap chart component. -->
+
 <BaseChart
 	Chart={TreemapChartCore}
 	{options}

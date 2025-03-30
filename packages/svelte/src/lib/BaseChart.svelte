@@ -45,4 +45,8 @@
 	})
 </script>
 
+<!--
+@component Base chart component from which all charts are derived.
+-->
+
 <div {id} bind:this={ref} class={chartHolderCssClass} {...rest}></div>

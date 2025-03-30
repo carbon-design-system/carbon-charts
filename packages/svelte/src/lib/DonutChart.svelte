@@ -15,6 +15,8 @@
 	}: ChartProps<DonutChartCore, DonutChartOptions> = $props()
 </script>
 
+<!-- @component Donut chart component. -->
+
 <BaseChart
 	Chart={DonutChartCore}
 	{options}

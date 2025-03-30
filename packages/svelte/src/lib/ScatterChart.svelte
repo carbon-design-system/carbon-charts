@@ -15,6 +15,8 @@
 	}: ChartProps<ScatterChartCore, ScatterChartOptions> = $props()
 </script>
 
+<!-- @component Scatter chart component. -->
+
 <BaseChart
 	Chart={ScatterChartCore}
 	{options}

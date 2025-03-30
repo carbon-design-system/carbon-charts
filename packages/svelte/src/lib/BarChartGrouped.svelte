@@ -15,6 +15,8 @@
 	}: ChartProps<GroupedBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Grouped bar chart component. -->
+
 <BaseChart
 	Chart={GroupedBarChartCore}
 	{options}

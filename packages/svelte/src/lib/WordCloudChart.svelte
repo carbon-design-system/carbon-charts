@@ -15,6 +15,8 @@
 	}: ChartProps<WordCloudChartCore, WordCloudChartOptions> = $props()
 </script>
 
+<!-- @component Word cloud chart component. -->
+
 <BaseChart
 	Chart={WordCloudChartCore}
 	{options}
