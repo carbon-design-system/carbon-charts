@@ -1719,7 +1719,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.5"
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.2.0"
-    eslint-plugin-svelte: "npm:^3.3.3"
+    eslint-plugin-svelte: "npm:^3.4.0"
     eslint-plugin-vue: "npm:^10.0.0"
     globals: "npm:^16.0.0"
     husky: "npm:^9.1.7"
@@ -9711,9 +9711,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-svelte@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "eslint-plugin-svelte@npm:3.3.3"
+"eslint-plugin-svelte@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "eslint-plugin-svelte@npm:3.4.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.1"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -9724,14 +9724,14 @@ __metadata:
     postcss-load-config: "npm:^3.1.4"
     postcss-safe-parser: "npm:^7.0.0"
     semver: "npm:^7.6.3"
-    svelte-eslint-parser: "npm:^1.0.1"
+    svelte-eslint-parser: "npm:^1.1.1"
   peerDependencies:
     eslint: ^8.57.1 || ^9.0.0
     svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
   peerDependenciesMeta:
     svelte:
       optional: true
-  checksum: 10c0/404fedf48baa542666e8c502c27dce56403cd7d374a4e8dba05e8b3c0554f9da716e706ddc37dbfb37c9d24383394c58803a617557ec0ac8405dbaa495daa914
+  checksum: 10c0/93fc272fb2356f8d9fb692f3192cea146032a2a05add3dc0d676cea503abaa60d2c945c598dda04173a6528c0ca9c593e764a0bd70936f518333e6cae85c9d39
   languageName: node
   linkType: hard
 
@@ -17175,25 +17175,6 @@ __metadata:
   bin:
     svelte-check: bin/svelte-check
   checksum: 10c0/d6e3e60d58345294d38da17ebf431416f67995f3a180f80883820540c2dbd1994a36952bb89d5b54a4f3f3a1b431b4a1d75e8cb2e808682d38c3ecaf40641b29
-  languageName: node
-  linkType: hard
-
-"svelte-eslint-parser@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "svelte-eslint-parser@npm:1.0.1"
-  dependencies:
-    eslint-scope: "npm:^8.2.0"
-    eslint-visitor-keys: "npm:^4.0.0"
-    espree: "npm:^10.0.0"
-    postcss: "npm:^8.4.49"
-    postcss-scss: "npm:^4.0.9"
-    postcss-selector-parser: "npm:^7.0.0"
-  peerDependencies:
-    svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
-  peerDependenciesMeta:
-    svelte:
-      optional: true
-  checksum: 10c0/699bcce40ed9a4fe9ca17d5ef6da5050d317aae4b56164c76dbee4abee355de6b1b346b6ce0e245ec69448770f74e9c37837757a9e3a24f42fe13e3df372e509
   languageName: node
   linkType: hard
 
