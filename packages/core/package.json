@@ -106,9 +106,9 @@
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.86.0",
 		"typescript": "^5.8.2",
-		"vite": "^6.2.3",
+		"vite": "^6.2.4",
 		"vite-plugin-dts": "^4.5.3",
-		"vitest": "^3.0.9"
+		"vitest": "^3.1.1"
 	},
 	"publishConfig": {
 		"access": "public"
