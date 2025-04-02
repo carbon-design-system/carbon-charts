@@ -48,8 +48,8 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.51.1",
-		"@types/react": "^19.0.12",
-		"@types/react-dom": "^19.0.4",
+		"@types/react": "^19.1.0",
+		"@types/react-dom": "^19.1.1",
 		"@vitejs/plugin-react-swc": "^3.8.1",
 		"classnames": "^2.5.1",
 		"concurrently": "^9.1.2",

@@ -1659,7 +1659,7 @@ __metadata:
     angular-eslint: "npm:^19.3.0"
     concurrently: "npm:^9.1.2"
     eslint: "npm:^9.23.0"
-    ng-packagr: "npm:^19.2.0"
+    ng-packagr: "npm:^19.2.1"
     prettier: "npm:^3.5.3"
     tslib: "npm:^2.8.1"
     typescript: "npm:>=5.5.0 <5.9.0"
@@ -1680,8 +1680,8 @@ __metadata:
     "@carbon/icons-react": "npm:^11.57.0"
     "@carbon/react": "npm:^1.79.0"
     "@stackblitz/sdk": "npm:^1.11.0"
-    "@types/react": "npm:^19.0.12"
-    "@types/react-dom": "npm:^19.0.4"
+    "@types/react": "npm:^19.1.0"
+    "@types/react-dom": "npm:^19.1.1"
     "@types/topojson-specification": "npm:^1.0.5"
     "@vitejs/plugin-react-swc": "npm:^3.8.1"
     eslint: "npm:^9.23.0"
@@ -1693,7 +1693,7 @@ __metadata:
     react-dom: "npm:^19.1.0"
     react-is: "npm:^19.1.0"
     react-router-dom: "npm:^7.4.1"
-    sass: "npm:^1.86.0"
+    sass: "npm:^1.86.1"
     styled-components: "npm:^6.1.16"
     typedoc: "npm:^0.28.1"
     typescript: "npm:^5.8.2"
@@ -1707,10 +1707,10 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^19.8.0"
     "@commitlint/config-conventional": "npm:^19.8.0"
-    "@eslint/compat": "npm:^1.2.7"
+    "@eslint/compat": "npm:^1.2.8"
     "@eslint/js": "npm:^9.23.0"
     "@playwright/test": "npm:^1.51.1"
-    "@types/node": "npm:^22.13.14"
+    "@types/node": "npm:^22.13.17"
     "@vue/eslint-config-prettier": "npm:^10.2.0"
     "@vue/eslint-config-typescript": "npm:^14.5.0"
     eslint: "npm:^9.23.0"
@@ -1719,7 +1719,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.5"
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.2.0"
-    eslint-plugin-svelte: "npm:^3.4.1"
+    eslint-plugin-svelte: "npm:^3.5.0"
     eslint-plugin-vue: "npm:^10.0.0"
     globals: "npm:^16.0.0"
     husky: "npm:^9.1.7"
@@ -1728,7 +1728,7 @@ __metadata:
     prettier: "npm:^3.5.3"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.3.3"
-    svelte: "npm:^5.25.3"
+    svelte: "npm:^5.25.6"
     svelte-eslint-parser: "npm:^1.1.1"
     typescript: "npm:^5.8.2"
     typescript-eslint: "npm:^8.29.0"
@@ -1744,8 +1744,8 @@ __metadata:
     "@carbon/icons-react": "npm:^11.57.0"
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@playwright/test": "npm:^1.51.1"
-    "@types/react": "npm:^19.0.12"
-    "@types/react-dom": "npm:^19.0.4"
+    "@types/react": "npm:^19.1.0"
+    "@types/react-dom": "npm:^19.1.1"
     "@vitejs/plugin-react-swc": "npm:^3.8.1"
     classnames: "npm:^2.5.1"
     concurrently: "npm:^9.1.2"
@@ -1771,13 +1771,13 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@playwright/test": "npm:^1.51.1"
     "@sveltejs/adapter-static": "npm:^3.0.8"
-    "@sveltejs/kit": "npm:^2.20.2"
+    "@sveltejs/kit": "npm:^2.20.3"
     "@sveltejs/package": "npm:^2.3.10"
     "@sveltejs/vite-plugin-svelte": "npm:^5.0.3"
     eslint: "npm:^9.23.0"
     prettier: "npm:^3.5.3"
     publint: "npm:^0.3.9"
-    svelte: "npm:^5.25.3"
+    svelte: "npm:^5.25.6"
     svelte-check: "npm:^4.1.5"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
@@ -1822,7 +1822,7 @@ __metadata:
     "@types/d3": "npm:^7.4.3"
     "@types/dompurify": "npm:^3.2.0"
     "@types/lodash-es": "npm:^4.17.12"
-    "@types/node": "npm:^22.13.14"
+    "@types/node": "npm:^22.13.17"
     "@types/topojson": "npm:^3.2.6"
     concurrently: "npm:^9.1.2"
     d3: "npm:^7.9.0"
@@ -1838,7 +1838,7 @@ __metadata:
     prettier: "npm:^3.5.3"
     publint: "npm:^0.3.9"
     resize-observer-polyfill: "npm:^1.5.1"
-    sass: "npm:^1.86.0"
+    sass: "npm:^1.86.1"
     topojson-client: "npm:^3.1.0"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
@@ -2518,15 +2518,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/compat@npm:^1.2.7":
-  version: 1.2.7
-  resolution: "@eslint/compat@npm:1.2.7"
+"@eslint/compat@npm:^1.2.8":
+  version: 1.2.8
+  resolution: "@eslint/compat@npm:1.2.8"
   peerDependencies:
     eslint: ^9.10.0
   peerDependenciesMeta:
     eslint:
       optional: true
-  checksum: 10c0/df89a0396750748c3748eb5fc582bd6cb89be6599d88ed1c5cc60ae0d13f77d4bf5fb30fabdb6c9ce16dda35745ef2e6417fa82548cde7d2b3fa5a896da02c8e
+  checksum: 10c0/1e004c6917220ff1731fdc562ada9ddcbcecc6f3ba2e4b0433fb6d8eddf2a443e009f1f9796b78128b78a0a588c723b78021319055ac6e5dda55c0ace346496b
   languageName: node
   linkType: hard
 
@@ -4901,9 +4901,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.20.2":
-  version: 2.20.2
-  resolution: "@sveltejs/kit@npm:2.20.2"
+"@sveltejs/kit@npm:^2.20.3":
+  version: 2.20.3
+  resolution: "@sveltejs/kit@npm:2.20.3"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^0.6.0"
@@ -4922,7 +4922,7 @@ __metadata:
     vite: ^5.0.3 || ^6.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/bd5e5008390d1c967566c29d41597cd7aa607dbed0eebf7c4697e2a8f763bd64bbae08da921b4047ad3fac7bb495124285f3fd97aa06d83268fc6305ca39e5c0
+  checksum: 10c0/222101aa89872c33b57eed5daf592b8b2f1877f312201fa294abbec6d18a7fdefd3e6f1660967e017011c4df99d1568b52fc908243c54cb7ea6e842444f226e5
   languageName: node
   linkType: hard
 
@@ -5652,12 +5652,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.13.14":
-  version: 22.13.14
-  resolution: "@types/node@npm:22.13.14"
+"@types/node@npm:^22.13.17":
+  version: 22.13.17
+  resolution: "@types/node@npm:22.13.17"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/fa2ab5b8277bfbcc86c42e46a3ea9871b0d559894cc9d955685d17178c9499f0b1bf03d1d1ea8d92ef2dda818988f4035acb8abf9dc15423a998fa56173ab804
+  checksum: 10c0/77a052fec0fe02f60557e1c5f3f28eb09cd9bee426be88328a94689150a3c0df5b4b6b69fad28157fb34521693dad0b311ecd7f613845d681ff973991310c20e
   languageName: node
   linkType: hard
 
@@ -5682,21 +5682,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19.0.4":
-  version: 19.0.4
-  resolution: "@types/react-dom@npm:19.0.4"
+"@types/react-dom@npm:^19.1.1":
+  version: 19.1.1
+  resolution: "@types/react-dom@npm:19.1.1"
   peerDependencies:
     "@types/react": ^19.0.0
-  checksum: 10c0/4e71853919b94df9e746a4bd73f8180e9ae13016333ce9c543dcba9f4f4c8fe6e28b038ca6ee61c24e291af8e03ca3bc5ded17c46dee938fcb32d71186fda7a3
+  checksum: 10c0/83833af502f501a372b370fdeb7cf933dfc8780903fe0e0d6e6a76b4ea3adbe5316159a62a0388d8afdd409afd76a40959e2ce82fbb788f57d32c786a63601ee
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.0.12":
-  version: 19.0.12
-  resolution: "@types/react@npm:19.0.12"
+"@types/react@npm:^19.1.0":
+  version: 19.1.0
+  resolution: "@types/react@npm:19.1.0"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/c814b6af5c0fbcf5c65d031b1c9bf98c5b857e015254d95811f2851b27b869c3d31c6f35dab127dc6921a3dbda0b0622c6323d493a14b31b231a6a58c41c5e84
+  checksum: 10c0/632fd20ee176e55801a61c5f854141b043571a3e363ef106b047b766a813a12735cbb37abb3d61d126346979f530f2ed269a60c8ef3cdee54e5e9fe4174e5dad
   languageName: node
   linkType: hard
 
@@ -9711,9 +9711,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-svelte@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "eslint-plugin-svelte@npm:3.4.1"
+"eslint-plugin-svelte@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "eslint-plugin-svelte@npm:3.5.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.1"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -9731,7 +9731,7 @@ __metadata:
   peerDependenciesMeta:
     svelte:
       optional: true
-  checksum: 10c0/db484c3f25cec3807db69d027ecfbc381f39e9877ae4f723d8a68be9e578c80eb81765004015034f6f4cf0f6ea120622f63bf15ce66fa6522c30ce9de415fd29
+  checksum: 10c0/fba26b30442276781635b75045ca186a9bcaf71c14f360013fcb41b42c6abd82a3c546c264018827bb6815840b47f133995edf8112011f8e9f84b5ebf3fd1d5e
   languageName: node
   linkType: hard
 
@@ -9873,12 +9873,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^1.4.3":
-  version: 1.4.5
-  resolution: "esrap@npm:1.4.5"
+"esrap@npm:^1.4.6":
+  version: 1.4.6
+  resolution: "esrap@npm:1.4.6"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
-  checksum: 10c0/7dd93c2481bcee8e53f1a9b15094ebba2724a0fa17c864aa728d5cfc3db9aca1640293cdb873243eb981c2cad5eb0bfed6e7f3cf427e5467e698042b3cc0ec3b
+  checksum: 10c0/3fb4fcc301c0d8d97e5b2fed0154b3da57b33325f783b8ed893c3082b835d83cb25b079156d659769862e803b8c22f59094e3ccf97972bb52cfba51528fec27d
   languageName: node
   linkType: hard
 
@@ -13613,9 +13613,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-packagr@npm:^19.2.0":
-  version: 19.2.0
-  resolution: "ng-packagr@npm:19.2.0"
+"ng-packagr@npm:^19.2.1":
+  version: 19.2.1
+  resolution: "ng-packagr@npm:19.2.1"
   dependencies:
     "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/wasm-node": "npm:^4.24.0"
@@ -13651,7 +13651,7 @@ __metadata:
       optional: true
   bin:
     ng-packagr: cli/main.js
-  checksum: 10c0/69fec8f09c5d4da4889332f0f7a1816f290a13cdf2c91cdabcbf6366a764da580fbfcd33280e38179c59f251d1196572918acece20fd2c57548b5bab125a90e7
+  checksum: 10c0/18580b7ddd67feb94fe1dce4230f04ad6404be837edb54385d3eab700affe3e8263b48fe6ce332b4bb777e5713b37d20d998c27fc683540819b6f7bfa88cffe7
   languageName: node
   linkType: hard
 
@@ -16220,9 +16220,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.86.0":
-  version: 1.86.0
-  resolution: "sass@npm:1.86.0"
+"sass@npm:^1.86.1":
+  version: 1.86.1
+  resolution: "sass@npm:1.86.1"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^4.0.0"
@@ -16233,7 +16233,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10c0/921caea1fd8a450d4a986e5570ce13c4ca7b2a57da390811add3d2087ad8f46f53b34652ddcb237d8bdaad49c560b8d6eee130c733c787d058bc5a71a914c139
+  checksum: 10c0/16733c7cd7ebb180d12c7aa8fdf4647de857901ab55c369f810b3654aa1c4cd61bb0274981d7792f0ccdfb29755aab17afc13c9daad69d8ffc4d761a8314c93a
   languageName: node
   linkType: hard
 
@@ -17210,9 +17210,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.25.3":
-  version: 5.25.3
-  resolution: "svelte@npm:5.25.3"
+"svelte@npm:^5.25.6":
+  version: 5.25.6
+  resolution: "svelte@npm:5.25.6"
   dependencies:
     "@ampproject/remapping": "npm:^2.3.0"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -17223,12 +17223,12 @@ __metadata:
     axobject-query: "npm:^4.1.0"
     clsx: "npm:^2.1.1"
     esm-env: "npm:^1.2.1"
-    esrap: "npm:^1.4.3"
+    esrap: "npm:^1.4.6"
     is-reference: "npm:^3.0.3"
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/e5e8cc43a9a11fd84b5fe699207f3bc2dc86fb77c0be597b4fcf28b2ab62832272ae20bf272c6d91a30e8dc7686947197991692b7d95761659cc80461b903d7c
+  checksum: 10c0/ca8628610f1f012451b60298296f46a87d2256634a9d79270d1a216357bd4d8d818c0d16b3b05decee7876f331a64e237ad6e4a03aeb54eae2479ace88bc08f2
   languageName: node
   linkType: hard
 

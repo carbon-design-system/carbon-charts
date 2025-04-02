@@ -33,14 +33,14 @@
 		"styled-components": "^6.1.16"
 	},
 	"devDependencies": {
-		"@types/react": "^19.0.12",
-		"@types/react-dom": "^19.0.4",
+		"@types/react": "^19.1.0",
+		"@types/react-dom": "^19.1.1",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.8.1",
 		"eslint": "^9.23.0",
 		"jsdom": "^26.0.0",
 		"prettier": "^3.5.3",
-		"sass": "^1.86.0",
+		"sass": "^1.86.1",
 		"typedoc": "^0.28.1",
 		"typescript": "^5.8.2",
 		"vite": "^6.2.4"
