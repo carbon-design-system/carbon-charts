@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: 'BarChartSimple',
 	react: vanilla,
-	angular: 'ibm-bar-chart',
+	angular: 'ibm-simple-bar-chart',
 	vue: `Ccv${vanilla}`
 }
 
@@ -24,7 +24,7 @@ const simpleBarOptions: BarChartOptions = {
 	},
 	height: '400px',
 	accessibility: {
-		svgAriaLabel: 'Simple bar chart',
+		svgAriaLabel: 'Simple bar chart'
 	}
 }
 

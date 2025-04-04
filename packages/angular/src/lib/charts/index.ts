@@ -25,5 +25,3 @@ export { StackedBarChartComponent } from './bar-chart-stacked.component'
 export { TreeChartComponent } from './tree-chart.component'
 export { TreemapChartComponent } from './treemap-chart.component'
 export { WordCloudChartComponent } from './wordcloud-chart.component'
-
-export { ChartsModule } from './charts.module'
