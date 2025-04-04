@@ -15,6 +15,8 @@
 	}: ChartProps<MeterChartCore, MeterChartOptions> = $props()
 </script>
 
+<!-- @component Meter chart component. -->
+
 <BaseChart
 	Chart={MeterChartCore}
 	{options}

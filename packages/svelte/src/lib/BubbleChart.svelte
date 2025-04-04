@@ -15,6 +15,8 @@
 	}: ChartProps<BubbleChartCore, BubbleChartOptions> = $props()
 </script>
 
+<!-- @component Bubble chart component. -->
+
 <BaseChart
 	Chart={BubbleChartCore}
 	{options}

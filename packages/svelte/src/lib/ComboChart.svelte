@@ -15,6 +15,8 @@
 	}: ChartProps<ComboChartCore, ComboChartOptions> = $props()
 </script>
 
+<!-- @component Combo chart component - supports mixing types such as bar and line charts. -->
+
 <BaseChart
 	Chart={ComboChartCore}
 	{options}

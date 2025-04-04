@@ -15,6 +15,8 @@
 	}: ChartProps<PieChartCore, PieChartOptions> = $props()
 </script>
 
+<!-- @component Pie chart component. -->
+
 <BaseChart
 	Chart={PieChartCore}
 	{options}

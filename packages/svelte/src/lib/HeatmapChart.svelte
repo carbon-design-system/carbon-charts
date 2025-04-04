@@ -15,6 +15,8 @@
 	}: ChartProps<HeatmapChartCore, HeatmapChartOptions> = $props()
 </script>
 
+<!-- @component Heatmap chart component. -->
+
 <BaseChart
 	Chart={HeatmapChartCore}
 	{options}

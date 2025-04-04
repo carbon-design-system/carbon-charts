@@ -15,6 +15,8 @@
 	}: ChartProps<TreeChartCore, TreeChartOptions> = $props()
 </script>
 
+<!-- @component Tree chart component. -->
+
 <BaseChart
 	Chart={TreeChartCore}
 	{options}

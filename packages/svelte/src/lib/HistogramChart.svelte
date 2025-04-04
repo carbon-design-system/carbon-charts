@@ -15,6 +15,8 @@
 	}: ChartProps<HistogramChartCore, HistogramChartOptions> = $props()
 </script>
 
+<!-- @component Histogram chart component. -->
+
 <BaseChart
 	Chart={HistogramChartCore}
 	{options}

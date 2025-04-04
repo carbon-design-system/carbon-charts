@@ -15,6 +15,8 @@
 	}: ChartProps<BulletChartCore, BulletChartOptions> = $props()
 </script>
 
+<!-- @component Bullet chart component. -->
+
 <BaseChart
 	Chart={BulletChartCore}
 	{options}

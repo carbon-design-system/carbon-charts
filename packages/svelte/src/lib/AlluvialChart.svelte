@@ -15,6 +15,8 @@
 	}: ChartProps<AlluvialChartCore, AlluvialChartOptions> = $props()
 </script>
 
+<!-- @component Alluvial chart component. -->
+
 <BaseChart
 	Chart={AlluvialChartCore}
 	{options}

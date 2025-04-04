@@ -18,6 +18,8 @@
 	}: ChartProps<ChoroplethChartCore, ChoroplethChartOptions> = $props()
 </script>
 
+<!-- @component Choropleth / geographic chart component. -->
+
 <BaseChart
 	Chart={ChoroplethChartCore}
 	{options}

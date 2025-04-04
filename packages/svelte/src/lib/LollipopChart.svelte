@@ -15,6 +15,8 @@
 	}: ChartProps<LollipopChartCore, LollipopChartOptions> = $props()
 </script>
 
+<!-- @component Lollipop chart component. -->
+
 <BaseChart
 	Chart={LollipopChartCore}
 	{options}

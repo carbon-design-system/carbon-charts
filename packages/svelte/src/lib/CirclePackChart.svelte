@@ -18,6 +18,8 @@
 	}: ChartProps<CirclePackChartCore, CirclePackChartOptions> = $props()
 </script>
 
+<!-- @component Circle pack chart component. -->
+
 <BaseChart
 	Chart={CirclePackChartCore}
 	{options}

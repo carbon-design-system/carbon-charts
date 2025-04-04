@@ -15,6 +15,8 @@
 	}: ChartProps<BoxplotChartCore, BoxplotChartOptions> = $props()
 </script>
 
+<!-- @component Boxplot chart component. -->
+
 <BaseChart
 	Chart={BoxplotChartCore}
 	{options}
