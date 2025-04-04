@@ -1751,7 +1751,7 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@playwright/test": "npm:^1.51.1"
     "@sveltejs/adapter-static": "npm:^3.0.8"
-    "@sveltejs/kit": "npm:^2.20.3"
+    "@sveltejs/kit": "npm:^2.20.4"
     "@sveltejs/package": "npm:^2.3.10"
     "@sveltejs/vite-plugin-svelte": "npm:^5.0.3"
     eslint: "npm:^9.23.0"
@@ -5092,9 +5092,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.20.3":
-  version: 2.20.3
-  resolution: "@sveltejs/kit@npm:2.20.3"
+"@sveltejs/kit@npm:^2.20.4":
+  version: 2.20.4
+  resolution: "@sveltejs/kit@npm:2.20.4"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^0.6.0"
@@ -5113,7 +5113,7 @@ __metadata:
     vite: ^5.0.3 || ^6.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/222101aa89872c33b57eed5daf592b8b2f1877f312201fa294abbec6d18a7fdefd3e6f1660967e017011c4df99d1568b52fc908243c54cb7ea6e842444f226e5
+  checksum: 10c0/9a141b5f026c6e4f6a62e582b5e719103a1222131d2071948366d07eff90695f6a52cf4ffb311591f392f28c6e391c8496b48e841a9f9b0e41f7e0a892dfbb00
   languageName: node
   linkType: hard
 
