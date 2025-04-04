@@ -1673,7 +1673,7 @@ __metadata:
     react-dom: "npm:^19.1.0"
     react-is: "npm:^19.1.0"
     react-router-dom: "npm:^7.4.1"
-    sass: "npm:^1.86.2"
+    sass: "npm:^1.86.3"
     styled-components: "npm:^6.1.17"
     typedoc: "npm:^0.28.1"
     typescript: "npm:^5.8.2"
@@ -1699,7 +1699,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.6"
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^5.2.0"
-    eslint-plugin-svelte: "npm:^3.5.0"
+    eslint-plugin-svelte: "npm:^3.5.1"
     eslint-plugin-vue: "npm:^10.0.0"
     globals: "npm:^16.0.0"
     husky: "npm:^9.1.7"
@@ -1712,7 +1712,7 @@ __metadata:
     svelte-eslint-parser: "npm:^1.1.2"
     typescript: "npm:^5.8.2"
     typescript-eslint: "npm:^8.29.0"
-    vue-eslint-parser: "npm:^10.1.1"
+    vue-eslint-parser: "npm:^10.1.2"
   languageName: unknown
   linkType: soft
 
@@ -1818,7 +1818,7 @@ __metadata:
     prettier: "npm:^3.5.3"
     publint: "npm:^0.3.10"
     resize-observer-polyfill: "npm:^1.5.1"
-    sass: "npm:^1.86.2"
+    sass: "npm:^1.86.3"
     topojson-client: "npm:^3.1.0"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
@@ -9753,17 +9753,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-compat-utils@npm:^0.6.4":
-  version: 0.6.5
-  resolution: "eslint-compat-utils@npm:0.6.5"
-  dependencies:
-    semver: "npm:^7.5.4"
-  peerDependencies:
-    eslint: ">=6.0.0"
-  checksum: 10c0/f3519e1460ec82c6967c4b0132801924bf5c17328999014f444ec12f075b151e992d1ebf378cb8eb0b2e00b3d04e0eaac80897209121fd115f857598b4588393
-  languageName: node
-  linkType: hard
-
 "eslint-config-prettier@npm:^10.0.1, eslint-config-prettier@npm:^10.1.1":
   version: 10.1.1
   resolution: "eslint-config-prettier@npm:10.1.1"
@@ -9853,13 +9842,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-svelte@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "eslint-plugin-svelte@npm:3.5.0"
+"eslint-plugin-svelte@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "eslint-plugin-svelte@npm:3.5.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.1"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
-    eslint-compat-utils: "npm:^0.6.4"
     esutils: "npm:^2.0.3"
     known-css-properties: "npm:^0.35.0"
     postcss: "npm:^8.4.49"
@@ -9873,7 +9861,7 @@ __metadata:
   peerDependenciesMeta:
     svelte:
       optional: true
-  checksum: 10c0/fba26b30442276781635b75045ca186a9bcaf71c14f360013fcb41b42c6abd82a3c546c264018827bb6815840b47f133995edf8112011f8e9f84b5ebf3fd1d5e
+  checksum: 10c0/e45932db371b88fdbc3dfa74af8b3aed0d9c383354e555da724facc2fa6eba3253ebc4c9021d558ec6a67c402ad184677ced4db9efeee35cbfad385dc7996e05
   languageName: node
   linkType: hard
 
@@ -16347,7 +16335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.81.0, sass@npm:^1.86.2":
+"sass@npm:^1.81.0":
   version: 1.86.2
   resolution: "sass@npm:1.86.2"
   dependencies:
@@ -16361,6 +16349,23 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 10c0/fe40b63a19e867f460369d495bcdc979598c0b105c9d52164a7e9cc4e12ab91c27337702a1b58575f7da8fd08256b85fd2f34cc8275eb7c57699bfc5029f54a3
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.86.3":
+  version: 1.86.3
+  resolution: "sass@npm:1.86.3"
+  dependencies:
+    "@parcel/watcher": "npm:^2.4.1"
+    chokidar: "npm:^4.0.0"
+    immutable: "npm:^5.0.2"
+    source-map-js: "npm:>=0.6.2 <2.0.0"
+  dependenciesMeta:
+    "@parcel/watcher":
+      optional: true
+  bin:
+    sass: sass.js
+  checksum: 10c0/ba819a0828f732adf7a94cd8ca017bce92bc299ffb878836ed1da80a30612bfbbf56a5e42d6dff3ad80d919c2025afb42948fc7b54a7bc61a9a2d58e1e0c558a
   languageName: node
   linkType: hard
 
@@ -18449,6 +18454,23 @@ __metadata:
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
   checksum: 10c0/dabf59cbc072df9aae50b8e768fc9e1c53b2c86b4e9813c08775771f77758986e008fe8d10346745a7bf3e46f4e508c1c2c6f5ea2e6b3c4694ff896e42d83197
+  languageName: node
+  linkType: hard
+
+"vue-eslint-parser@npm:^10.1.2":
+  version: 10.1.2
+  resolution: "vue-eslint-parser@npm:10.1.2"
+  dependencies:
+    debug: "npm:^4.4.0"
+    eslint-scope: "npm:^8.2.0"
+    eslint-visitor-keys: "npm:^4.2.0"
+    espree: "npm:^10.3.0"
+    esquery: "npm:^1.6.0"
+    lodash: "npm:^4.17.21"
+    semver: "npm:^7.6.3"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0
+  checksum: 10c0/30196de27603ad46d479771a816b7b2a75946a55f2fc7e1894b10ddecbc0d0670d18a833cf30dbf61e6f5eeb36a018de2661ad31badf9b7a5493bdc52e64219e
   languageName: node
   linkType: hard
 
