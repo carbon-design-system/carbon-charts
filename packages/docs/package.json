@@ -8,7 +8,7 @@
 		"src/*"
 	],
 	"scripts": {
-		"build:api:docs": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
+		"build:api:docs": "./typedoc.buildScript.sh",
 		"build:docs": "vite build --emptyOutDir --outDir ../../pages",
 		"build:search": "node generateSearchIndex.mjs",
 		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
