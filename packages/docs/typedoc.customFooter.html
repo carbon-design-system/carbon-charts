@@ -1,0 +1,49 @@
+<!-- Tealium/GA Set up -->
+<script type="text/javascript">
+	window._ibmAnalytics = {
+		settings: {
+			name: 'CarbonChartsApiDocsV1',
+			isSpa: true,
+			tealiumProfileName: 'ibm-web-app'
+		},
+		onLoad: [['ibmStats.pageview', []]]
+	}
+	digitalData = {
+		page: {
+			pageInfo: {
+				ibm: {
+					siteId: 'IBM_' + _ibmAnalytics.settings.name
+				}
+			},
+			category: {
+				primaryCategory: 'PC100'
+			}
+		}
+	}
+</script>
+<script
+	src="//1.www.s81c.com/common/stats/ibm-common.js"
+	type="text/javascript"
+	async="async"></script>
+
+<!-- IBM footer -->
+<footer style="padding: 0" class="footer">
+	<dds-footer-container key="footer" disable-locale-button="true" size="micro" />
+</footer>
+<script
+	key="8"
+	type="module"
+	src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"></script>
+
+<style>
+	footer {
+		border: none !important;
+	}
+
+	footer.footer {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 99999;
+	}
+</style>
