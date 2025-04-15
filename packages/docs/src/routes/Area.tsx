@@ -42,7 +42,7 @@ export default function Area() {
 
 			<p>
 				Details on Area chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.AreaChartOptions.html" target="_blank">
+				<a href="/api/interfaces/AreaChartOptions.html" target="_blank">
 					here
 				</a>
 				.

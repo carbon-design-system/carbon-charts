@@ -27,7 +27,7 @@ export default function Choropleth() {
 
 			<p>
 				Details on Choropleth chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.ChoroplethChartOptions.html" target="_blank">
+				<a href="/api/interfaces/ChoroplethChartOptions.html" target="_blank">
 					here
 				</a>
 				.

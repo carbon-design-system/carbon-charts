@@ -25,7 +25,7 @@ export default function Gauge() {
 
 			<p>
 				Details on Gauge Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.GaugeChartOptions.html" target="_blank">
+				<a href="/api/interfaces/GaugeChartOptions.html" target="_blank">
 					here
 				</a>
 				.

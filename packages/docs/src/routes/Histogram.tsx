@@ -26,7 +26,7 @@ export default function Histogram() {
 
 			<p>
 				Details on Histogram Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.HistogramChartOptions.html" target="_blank">
+				<a href="/api/interfaces/HistogramChartOptions.html" target="_blank">
 					here
 				</a>
 				.

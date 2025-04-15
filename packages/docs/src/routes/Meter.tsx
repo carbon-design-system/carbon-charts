@@ -24,7 +24,7 @@ export default function Meter() {
 
 			<p>
 				Details on Meter Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.MeterChartOptions.html" target="_blank">
+				<a href="/api/interfaces/MeterChartOptions.html" target="_blank">
 					here
 				</a>
 				.

@@ -26,7 +26,7 @@ export default function Bullet() {
 
 			<p>
 				Details on Bullet chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.BulletChartOptions.html" target="_blank">
+				<a href="/api/interfaces/BulletChartOptions.html" target="_blank">
 					here
 				</a>
 				.

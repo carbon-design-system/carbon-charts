@@ -28,7 +28,7 @@ export default function Line() {
 
 			<p>
 				Details on Line Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.LineChartOptions.html" target="_blank">
+				<a href="/api/interfaces/LineChartOptions.html" target="_blank">
 					here
 				</a>
 				.

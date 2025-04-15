@@ -31,7 +31,7 @@ export default function CirclePack() {
 
 			<p>
 				Details on Circle Pack chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.CirclePackChartOptions.html" target="_blank">
+				<a href="/api/interfaces/CirclePackChartOptions.html" target="_blank">
 					here
 				</a>
 				.

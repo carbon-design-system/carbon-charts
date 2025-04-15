@@ -22,7 +22,7 @@ export default function Bar() {
 
 			<p>
 				Details on Bar chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.BarChartOptions.html" target="_blank">
+				<a href="/api/interfaces/BarChartOptions.html" target="_blank">
 					here
 				</a>
 				.

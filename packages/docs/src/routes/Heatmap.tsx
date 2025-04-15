@@ -26,7 +26,7 @@ export default function Heatmap() {
 
 			<p>
 				Details on Heatmap Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.HeatmapChartOptions.html" target="_blank">
+				<a href="/api/interfaces/HeatmapChartOptions.html" target="_blank">
 					here
 				</a>
 				.
