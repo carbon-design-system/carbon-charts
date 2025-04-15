@@ -24,7 +24,7 @@ export default function Combo() {
 
 			<p>
 				Details on Combo chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.ComboChartOptions.html" target="_blank">
+				<a href="/api/interfaces/ComboChartOptions.html" target="_blank">
 					here
 				</a>
 				.

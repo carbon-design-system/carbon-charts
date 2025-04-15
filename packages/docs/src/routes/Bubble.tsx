@@ -26,7 +26,7 @@ export default function Bubble() {
 
 			<p>
 				Details on Bubble chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.BubbleChartOptions.html" target="_blank">
+				<a href="/api/interfaces/BubbleChartOptions.html" target="_blank">
 					here
 				</a>
 				.

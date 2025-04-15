@@ -31,7 +31,7 @@ export default function Tree() {
 
 			<p>
 				Details on Tree Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.TreeChartOptions.html" target="_blank">
+				<a href="/api/interfaces/TreeChartOptions.html" target="_blank">
 					here
 				</a>
 				.

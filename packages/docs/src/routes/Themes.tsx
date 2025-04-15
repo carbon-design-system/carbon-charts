@@ -34,7 +34,7 @@ export default function Themes() {
 
 			<p>
 				All chart types support the{' '}
-				<a href="/api/interfaces/interfaces.BaseChartOptions.html#theme" target="_blank">
+				<a href="/api/interfaces/BaseChartOptions.html#theme" target="_blank">
 					theme
 				</a>{' '}
 				property.

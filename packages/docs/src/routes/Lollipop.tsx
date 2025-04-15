@@ -21,7 +21,7 @@ export default function Lollipop() {
 
 			<p>
 				Details on Lollipop Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.LollipopChartOptions.html" target="_blank">
+				<a href="/api/interfaces/LollipopChartOptions.html" target="_blank">
 					here
 				</a>
 				.

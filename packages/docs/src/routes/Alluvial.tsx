@@ -37,7 +37,7 @@ export default function Alluvial() {
 
 			<p>
 				Details on Alluvial chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.AlluvialChartOptions.html" target="_blank">
+				<a href="/api/interfaces/AlluvialChartOptions.html" target="_blank">
 					here
 				</a>
 				.

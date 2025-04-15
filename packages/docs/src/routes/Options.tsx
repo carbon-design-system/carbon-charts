@@ -30,15 +30,15 @@ export default function Options() {
 			</p>
 			<p>
 				Options for all chart types extend from{' '}
-				<a href="/api/interfaces/interfaces.BaseChartOptions.html" target="_blank">
+				<a href="/api/interfaces/BaseChartOptions.html" target="_blank">
 					BaseChartOptions
 				</a>
 				,&nbsp;
-				<a href="/api/interfaces/interfaces.ScatterChartOptions.html" target="_blank">
+				<a href="/api/interfaces/ScatterChartOptions.html" target="_blank">
 					ScatterChartOptions
 				</a>{' '}
 				or&nbsp;
-				<a href="/api/interfaces/interfaces.AxisChartOptions.html" target="_blank">
+				<a href="/api/interfaces/AxisChartOptions.html" target="_blank">
 					AxisChartOptions
 				</a>
 				. To see examples for each type of chart, navigate to <strong>Chart types</strong> on left.
