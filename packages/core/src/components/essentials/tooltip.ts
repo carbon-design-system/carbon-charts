@@ -153,7 +153,7 @@ export class Tooltip extends Component {
 				// get width of the label icon if it exists
 				const labelIconSize = item.labelIcon ? 12 : 0
 
-				item.value = item.value ? this.valueFormatter(item.value, item.label) : item.value
+				item.value = this.valueFormatter(item.value, item.label)
 				if (item.label && item.label.length + labelIconSize > truncationThreshold) {
 					item.label = truncateLabel(item.label, truncationType, truncationNumCharacter)
 				}
@@ -166,7 +166,7 @@ export class Tooltip extends Component {
 			})
 		} else {
 			return items.map((item: any) => {
-				item.value = item.value ? this.valueFormatter(item.value, item.label) : item.value
+				item.value = this.valueFormatter(item.value, item.label)
 				return item
 			})
 		}
@@ -198,7 +198,7 @@ export class Tooltip extends Component {
 		return value instanceof Date
 	}
 
-	valueFormatter(value: number | Date, label: string) {
+	valueFormatter(value: number | Date | null | undefined, label: string) {
 		const options = this.getOptions()
 		const valueFormatter = getProperty(options, 'tooltip', 'valueFormatter')
 		const {
