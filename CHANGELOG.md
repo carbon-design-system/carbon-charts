@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.4 (2025-04-15)
+
+### Bug Fixes
+
+- **Skeleton:** add role=presentation
+  ([#1979](https://github.com/carbon-design-system/carbon-charts/issues/1979))
+  ([d9b0aa5](https://github.com/carbon-design-system/carbon-charts/commit/d9b0aa510e1587be03c459e8c5e02bb8d8273c88))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.3 (2025-04-15)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
