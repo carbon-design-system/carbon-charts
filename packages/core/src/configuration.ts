@@ -77,7 +77,7 @@ const standardTruncationOptions = {
  */
 const locale: Locale = {
 	code: (typeof navigator !== 'undefined' && navigator?.language) || 'en-US', // read from browser's navigator.language
-	number: (value, language = navigator?.language || 'en-US') => value.toLocaleString(language), // based on code property if specified
+	number: (value, language = navigator?.language || 'en-US') => value?.toLocaleString?.(language), // based on code property if specified
 	date: (
 		value,
 		language = navigator?.language || 'en-US',

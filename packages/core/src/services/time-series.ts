@@ -116,7 +116,7 @@ export function formatTick(
 		const formatArr = formattedDate.split('').map(val => {
 			const num = Number(val)
 			if (val !== ' ' && !Number.isNaN(num)) {
-				return num.toLocaleString(localeCode)
+				return num?.toLocaleString?.(localeCode)
 			} else {
 				return val
 			}
