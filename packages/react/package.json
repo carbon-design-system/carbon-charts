@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.23.4",
+	"version": "1.23.5",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"module": "./dist/index.mjs",

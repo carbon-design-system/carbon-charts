@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.5 (2025-04-15)
+
+### Bug Fixes
+
+- **Tooltip:** formatter not called when value is falsey
+  ([#1980](https://github.com/carbon-design-system/carbon-charts/issues/1980))
+  ([2734886](https://github.com/carbon-design-system/carbon-charts/commit/27348863ede9f15f82ba4a1517e6b2c5aee439b4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.4 (2025-04-15)
 
 ### Bug Fixes
