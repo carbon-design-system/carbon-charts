@@ -95,6 +95,7 @@ export class Skeleton extends Component {
 		})
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
+			.attr('role', 'presentation')
 			.attr('width', width)
 			.attr('height', height)
 
