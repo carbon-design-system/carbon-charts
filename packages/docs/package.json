@@ -37,10 +37,10 @@
 		"@types/react-dom": "^19.1.2",
 		"@types/topojson-specification": "^1.0.5",
 		"@vitejs/plugin-react-swc": "^3.9.0",
-		"eslint": "^9.25.0",
+		"eslint": "^9.25.1",
 		"jsdom": "^26.1.0",
 		"prettier": "^3.5.3",
-		"sass": "^1.86.3",
+		"sass": "^1.87.0",
 		"typedoc": "^0.28.3",
 		"typescript": "^5.8.3",
 		"vite": "^6.3.2"
