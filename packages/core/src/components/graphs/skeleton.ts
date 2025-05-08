@@ -184,6 +184,7 @@ export class Skeleton extends Component {
 		const container = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton')
 			.attr('width', width)
 			.attr('height', height)
+			.attr('role', 'presentation')
 
 		const optionName = innerRadius === 0 ? 'pie' : 'donut'
 
