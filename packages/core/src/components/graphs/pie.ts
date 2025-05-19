@@ -128,7 +128,7 @@ export class Pie extends Component {
 				(d: any) =>
 					`${d[valueMapsTo]}, ${
 						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
-					}`
+					}  ${d.data[groupMapsTo]}`
 			)
 			// Tween
 			.attrTween('d', function (a: any) {
