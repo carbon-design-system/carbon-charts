@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useMemo } from 'react'
+import React from 'react'
 import sdk from '@stackblitz/sdk'
-import type { EmbedOptions } from '@stackblitz/sdk'
 import type { ChartOptions, ChartTabularData } from '@carbon/charts-react'
 import { getProject } from '../lib/stackblitz'
 import type { Framework } from '../lib/types'
@@ -13,29 +12,27 @@ interface Props {
 }
 
 const CodeSample: React.FC<Props> = ({ framework, chartType, data, options }) => {
-	const ref = useRef<HTMLDivElement>(null)
-	const embedOptions: EmbedOptions = useMemo(
-		() => ({ height: 600, view: 'default', showSidebar: true }),
-		[]
-	)
+	const handleOpenInStackBlitz = async () => {
+		const project = getProject[framework](chartType, data, options)
 
-	useEffect(() => {
-		const embedProject = async () => {
-			if (ref.current) {
-				const project = getProject[framework](chartType, data, options)
-				try {
-					const vm = await sdk.embedProject(ref.current, project, embedOptions)
-					console.log('StackBlitz project successfully created:', vm)
-				} catch (error) {
-					console.error('Error embedding StackBlitz project:', error)
-				}
-			}
+		try {
+			await sdk.openProject(project)
+		} catch (error) {
+			console.error('Error opening StackBlitz project:', error)
 		}
+	}
 
-		embedProject().catch(error => console.error('Error in embedProject:', error))
-	}, [framework, chartType, data, options, embedOptions])
+	return (
+		<a
+			href="#"
+			onClick={e => {
+				e.preventDefault()
 
-	return <div ref={ref}></div>
+				handleOpenInStackBlitz()
+			}}>
+			Open demo in StackBlitz
+		</a>
+	)
 }
 
 export default CodeSample

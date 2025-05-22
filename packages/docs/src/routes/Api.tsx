@@ -95,8 +95,9 @@ console.log(myChart)
 			</UnorderedList>
 
 			<h2>Full Documentation</h2>
-
-			<ApiContainer title="API Documentation" src="/api" />
+			<a href="/api" target="_blank" rel="noopener noreferrer">
+				Open API documentation site
+			</a>
 		</>
 	)
 }
