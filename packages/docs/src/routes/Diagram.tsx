@@ -301,9 +301,9 @@ export default function Diagram() {
 			</StructuredListWrapper>
 			<h3>Putting it all together</h3>
 			<div style={{ marginBottom: '60px' }}>
-				Open demo in
+				Open demo in{' '}
 				<a
-					href="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+					href="https://codesandbox.io/p/sandbox/carbon-charts-react-elkjs-diagram-b9xyp"
 					target="_blank"
 					rel="noopener noreferrer">
 					CodeSandbox

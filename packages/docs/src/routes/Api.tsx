@@ -95,9 +95,11 @@ console.log(myChart)
 			</UnorderedList>
 
 			<h2>Full Documentation</h2>
-			<a href="/api" target="_blank" rel="noopener noreferrer">
-				Open API documentation site
-			</a>
+			<div style={{ marginBottom: '60px' }}>
+				<a href="/api" target="_blank" rel="noopener noreferrer">
+					Open API documentation site
+				</a>
+			</div>
 		</>
 	)
 }
