@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.58.0",
+		"@carbon/icons-react": "^11.60.0",
 		"@ibm/telemetry-js": "^1.9.1"
 	},
 	"peerDependencies": {
@@ -48,19 +48,19 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.52.0",
-		"@types/react": "^19.1.2",
-		"@types/react-dom": "^19.1.2",
+		"@types/react": "^19.1.5",
+		"@types/react-dom": "^19.1.5",
 		"@vitejs/plugin-react-swc": "^3.9.0",
 		"classnames": "^2.5.1",
 		"concurrently": "^9.1.2",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.25.1",
+		"eslint": "^9.27.0",
 		"prettier": "^3.5.3",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"typescript": "^5.8.3",
-		"vite": "^6.3.2",
-		"vite-plugin-dts": "^4.5.3"
+		"vite": "^6.3.5",
+		"vite-plugin-dts": "^4.5.4"
 	},
 	"publishConfig": {
 		"access": "public"

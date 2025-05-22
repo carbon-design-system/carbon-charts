@@ -45,17 +45,17 @@
 	"devDependencies": {
 		"@playwright/test": "^1.52.0",
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.20.7",
+		"@sveltejs/kit": "^2.21.1",
 		"@sveltejs/package": "^2.3.11",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
-		"eslint": "^9.25.1",
+		"eslint": "^9.27.0",
 		"prettier": "^3.5.3",
 		"publint": "^0.3.12",
-		"svelte": "^5.28.2",
-		"svelte-check": "^4.1.6",
+		"svelte": "^5.32.1",
+		"svelte-check": "^4.2.1",
 		"tslib": "^2.8.1",
 		"typescript": "^5.8.3",
-		"vite": "^6.3.2"
+		"vite": "^6.3.5"
 	},
 	"publishConfig": {
 		"access": "public",
