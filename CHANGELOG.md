@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.9 (2025-05-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.8 (2025-05-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.7 (2025-05-08)
+
+### Bug Fixes
+
+- add presentation role for pie n donut chart skeleton
+  ([#1986](https://github.com/carbon-design-system/carbon-charts/issues/1986))
+  ([ad144ec](https://github.com/carbon-design-system/carbon-charts/commit/ad144ecdb3d35fb91f223fef9ad45305431fd119))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.6 (2025-04-22)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
