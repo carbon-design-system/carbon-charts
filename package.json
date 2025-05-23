@@ -16,7 +16,7 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "^22.14.0"
+		"node": "^22.16.0"
 	},
 	"packageManager": "yarn@4.9.1",
 	"devDependencies": {
@@ -43,7 +43,7 @@
 		"prettier": "^3.5.3",
 		"prettier-config-carbon": "^0.11.0",
 		"prettier-plugin-svelte": "^3.4.0",
-		"svelte": "^5.32.1",
+		"svelte": "^5.33.1",
 		"svelte-eslint-parser": "^1.2.0",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.32.1",

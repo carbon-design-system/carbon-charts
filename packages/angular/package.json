@@ -49,7 +49,7 @@
 		"prettier": "^3.5.3",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.32.1",
-		"zone.js": "~0.15.0"
+		"zone.js": "~0.15.1"
 	},
 	"publishConfig": {
 		"tag": "next",
