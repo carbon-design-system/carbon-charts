@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-combo-chart',
+	angular: 'ComboChartComponent',
 	vue: `Ccv${vanilla}`
 }
 

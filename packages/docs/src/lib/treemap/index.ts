@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-treemap-chart',
+	angular: 'TreemapChartComponent',
 	vue: `Ccv${vanilla}`
 }
 

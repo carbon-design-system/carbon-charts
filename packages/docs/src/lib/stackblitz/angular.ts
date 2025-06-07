@@ -50,17 +50,18 @@ export function getAngularProject(
 
 	const mainTs = `import { Component } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser'
-import { ChartsModule } from '@carbon/charts-angular'
+import { ${chartType} } from '@carbon/charts-angular' // Needs to be Chart class not the module
 import options from './options'
 import data from './data'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ChartsModule],
-	template: '<${chartType} [data]="data" [options]="options"></${chartType}>'
+  imports: [NgComponentOutlet, ${chartType}],
+	template: '<ng-container ngComponentOutlet="chart;inputs: { data: data, options: options }"></ng-container>'
 })
-export class App {
+class App {
+  chart = ${chartType}
 	options = options
 	data = data
 }
