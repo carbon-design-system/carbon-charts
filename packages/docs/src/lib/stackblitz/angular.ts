@@ -59,7 +59,7 @@ import data from './data'
   selector: 'app-root',
   standalone: true,
   imports: [NgComponentOutlet, ${chartType}],
-	template: '<ng-container ngComponentOutlet="chart;inputs: { data: data, options: options }"></ng-container>'
+	template: '<ng-container *ngComponentOutlet="chart;inputs: { data: data, options: options }"></ng-container>'
 })
 class App {
   chart = ${chartType}
