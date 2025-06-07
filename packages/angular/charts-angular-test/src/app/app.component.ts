@@ -25,7 +25,7 @@ for (const [exportName, value] of Object.entries(ChartBarrel)) {
 	 2️⃣  Stand-alone root component
 ------------------------------------------------------------------- */
 @Component({
-	selector: 'app-root',
+	selector: 'ibm-app-root',
 	standalone: true,
 	//  Angular must “know” any component you will create dynamically,
 	//  so we spread the full list into `imports`.
