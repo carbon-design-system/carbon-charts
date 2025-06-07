@@ -1,68 +1,42 @@
 import { Component, Type } from '@angular/core'
-import {
-	AlluvialChartComponent,
-	AreaChartComponent,
-	BoxplotChartComponent,
-	BubbleChartComponent,
-	BulletChartComponent,
-	CirclePackChartComponent,
-	ComboChartComponent,
-	DonutChartComponent,
-	ChoroplethChartComponent,
-	GaugeChartComponent,
-	GroupedBarChartComponent,
-	HeatmapChartComponent,
-	HistogramChartComponent,
-	LineChartComponent,
-	LollipopChartComponent,
-	MeterChartComponent,
-	PieChartComponent,
-	RadarChartComponent,
-	ScatterChartComponent,
-	SimpleBarChartComponent,
-	StackedAreaChartComponent,
-	StackedBarChartComponent,
-	TreeChartComponent,
-	TreemapChartComponent,
-	WordCloudChartComponent
-} from '../../../src/lib/charts'
-import charts from '../../../../docs/src/charts'
-import { CommonModule } from '@angular/common'
+import { NgComponentOutlet } from '@angular/common'
 
+import chartsDoc from '../../../../docs/src/charts'   // ← your JSON/TS examples
+
+/* ------------------------------------------------------------------
+	 1️⃣  Pull every export from the barrel.  Anything that has Ivy’s
+			 static ɵcmp metadata is an Angular component, so we keep it.
+------------------------------------------------------------------- */
+import * as ChartBarrel from '../../../src/lib/charts'
+
+type ChartCmp = Type<unknown>
+
+const CHART_COMPONENTS: ChartCmp[] = []
+const CLASS_MAP: Record<string, ChartCmp> = {}
+
+for (const [exportName, value] of Object.entries(ChartBarrel)) {
+	if ((value as any)?.ɵcmp) {            // true for every @Component class
+		CHART_COMPONENTS.push(value as ChartCmp)
+		CLASS_MAP[exportName] = value as ChartCmp   // e.g. 'SimpleBarChartComponent'
+	}
+}
+
+/* ------------------------------------------------------------------
+	 2️⃣  Stand-alone root component
+------------------------------------------------------------------- */
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'app-root',
-	templateUrl: './app.component.html',
+	standalone: true,
+	//  Angular must “know” any component you will create dynamically,
+	//  so we spread the full list into `imports`.
+	imports: [NgComponentOutlet, ...CHART_COMPONENTS],
 	styleUrls: ['./app.component.scss'],
-	imports: [CommonModule]
+	templateUrl: './app.component.html'
 })
 export class AppComponent {
-	charts = charts
-	selectorMap: Record<string, Type<unknown>> = {
-		'ibm-alluvial-chart': AlluvialChartComponent,
-		'ibm-area-chart': AreaChartComponent,
-		'ibm-boxplot-chart': BoxplotChartComponent,
-		'ibm-bubble-chart': BubbleChartComponent,
-		'ibm-bullet-chart': BulletChartComponent,
-		'ibm-circle-pack-chart': CirclePackChartComponent,
-		'ibm-combo-chart': ComboChartComponent,
-		'ibm-donut-chart': DonutChartComponent,
-		'ibm-experimental-choropleth-chart': ChoroplethChartComponent,
-		'ibm-gauge-chart': GaugeChartComponent,
-		'ibm-grouped-bar-chart': GroupedBarChartComponent,
-		'ibm-heatmap-chart': HeatmapChartComponent,
-		'ibm-histogram-chart': HistogramChartComponent,
-		'ibm-line-chart': LineChartComponent,
-		'ibm-lollipop-chart': LollipopChartComponent,
-		'ibm-meter-chart': MeterChartComponent,
-		'ibm-pie-chart': PieChartComponent,
-		'ibm-radar-chart': RadarChartComponent,
-		'ibm-scatter-chart': ScatterChartComponent,
-		'ibm-simple-bar-chart': SimpleBarChartComponent,
-		'ibm-stacked-area-chart': StackedAreaChartComponent,
-		'ibm-stacked-bar-chart': StackedBarChartComponent,
-		'ibm-tree-chart': TreeChartComponent,
-		'ibm-treemap-chart': TreemapChartComponent,
-		'ibm-wordcloud-chart': WordCloudChartComponent
-	}
+	/* Augment each docs entry with the real component class */
+	charts = chartsDoc.map(c => ({
+		...c,
+		component: CLASS_MAP[c.types.angular]   // className → class object
+	}));
 }
