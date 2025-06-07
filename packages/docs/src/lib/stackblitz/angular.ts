@@ -50,7 +50,8 @@ export function getAngularProject(
 
 	const mainTs = `import { Component } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser'
-import { ${chartType} } from '@carbon/charts-angular' // Needs to be Chart class not the module
+import { ${chartType} } from '@carbon/charts-angular'
+import { NgComponentOutlet } from '@angular/common'
 import options from './options'
 import data from './data'
 
