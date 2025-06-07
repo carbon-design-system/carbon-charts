@@ -605,8 +605,8 @@ __metadata:
     typescript-eslint: "npm:^8.33.1"
     zone.js: "npm:~0.15.1"
   peerDependencies:
-    "@angular/common": ^19.0.6
-    "@angular/core": ^19.0.6
+    "@angular/common": ^20.0.0
+    "@angular/core": ^20.0.0
   languageName: unknown
   linkType: soft
 
