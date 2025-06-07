@@ -8,7 +8,7 @@ import { BulletChart as BulletChartCore, type BulletChartOptions } from '@carbon
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-bullet-chart',
+	selector: 'ibm-bullet-chart, cc-bullet',
 	template: ``
 })
 export class BulletChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-alluvial-chart',
+	angular: ['AlluvialChartComponent', 'ibm-alluvial-chart'],
 	vue: `Ccv${vanilla}`
 }
 

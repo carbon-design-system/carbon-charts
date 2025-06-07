@@ -8,7 +8,7 @@ import { ScatterChart as ScatterChartCore, type ScatterChartOptions } from '@car
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-scatter-chart',
+	selector: 'ibm-scatter-chart, cc-scatter',
 	template: ``
 })
 export class ScatterChartComponent extends BaseChartComponent implements AfterViewInit {

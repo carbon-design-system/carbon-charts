@@ -8,7 +8,7 @@ import { StackedBarChart as StackedBarChartCore, type StackedBarChartOptions } f
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-stacked-bar-chart',
+	selector: 'ibm-stacked-bar-chart, cc-bar-stacked',
 	template: ``
 })
 export class StackedBarChartComponent extends BaseChartComponent implements AfterViewInit {

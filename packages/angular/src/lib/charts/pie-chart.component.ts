@@ -8,7 +8,7 @@ import { PieChart as PieChartCore, type PieChartOptions } from '@carbon/charts'
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-pie-chart',
+	selector: 'ibm-pie-chart, cc-pie',
 	template: ``
 })
 export class PieChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -8,7 +8,7 @@ import { BubbleChart as BubbleChartCore, type BubbleChartOptions } from '@carbon
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-bubble-chart',
+	selector: 'ibm-bubble-chart, cc-bubble',
 	template: ``
 })
 export class BubbleChartComponent extends BaseChartComponent implements AfterViewInit {

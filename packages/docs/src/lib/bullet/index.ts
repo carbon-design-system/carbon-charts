@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-bullet-chart',
+	angular: ['BulletChartComponent', 'ibm-bullet-chart'],
 	vue: `Ccv${vanilla}`
 }
 

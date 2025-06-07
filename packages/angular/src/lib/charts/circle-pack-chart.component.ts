@@ -8,7 +8,7 @@ import { CirclePackChart as CirclePackChartCore, type CirclePackChartOptions } f
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-circle-pack-chart',
+	selector: 'ibm-circle-pack-chart, cc-circle-pack',
 	template: ``
 })
 export class CirclePackChartComponent extends BaseChartComponent implements AfterViewInit {

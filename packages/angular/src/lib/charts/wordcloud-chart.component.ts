@@ -12,7 +12,7 @@ import {
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-wordcloud-chart',
+	selector: 'ibm-wordcloud-chart, cc-wordcloud',
 	template: ``
 })
 export class WordCloudChartComponent extends BaseChartComponent implements AfterViewInit {
