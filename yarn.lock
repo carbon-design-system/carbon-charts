@@ -1812,7 +1812,7 @@ __metadata:
     vue: "npm:^3.5.16"
     vue-tsc: "npm:^2.2.10"
   peerDependencies:
-    vue: ^3.4.0
+    vue: ^3.5.16
   languageName: unknown
   linkType: soft
 
