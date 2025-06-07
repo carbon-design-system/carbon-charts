@@ -80,7 +80,7 @@ bootstrapApplication(App)
     "demo": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "configurations": {
             "development": {
               "extractLicenses": false,
@@ -109,7 +109,7 @@ bootstrapApplication(App)
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
               "buildTarget": "demo:build:development"
@@ -168,9 +168,8 @@ bootstrapApplication(App)
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
