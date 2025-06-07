@@ -32,7 +32,7 @@
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
-		"vue": "^3.4.0"
+		"vue": "^3.5.16"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
