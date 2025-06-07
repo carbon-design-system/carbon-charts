@@ -8,7 +8,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-donut-chart',
+	angular: 'DonutChartComponent',
 	vue: `Ccv${vanilla}`
 }
 
