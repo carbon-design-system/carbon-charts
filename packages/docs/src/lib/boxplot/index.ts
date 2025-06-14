@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-boxplot-chart',
+	angular: 'BoxplotChartComponent',
 	vue: `Ccv${vanilla}`
 }
 

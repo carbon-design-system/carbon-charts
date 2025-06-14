@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts Angular</h3>
 	<p align="center">
-		A component library of 26 charts for Angular 18.
+		A component library of 26 charts for Angular 20.
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />

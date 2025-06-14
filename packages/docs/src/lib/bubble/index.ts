@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-bubble-chart',
+	angular: 'BubbleChartComponent',
 	vue: `Ccv${vanilla}`
 }
 
