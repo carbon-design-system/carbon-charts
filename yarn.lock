@@ -663,11 +663,11 @@ __metadata:
     globals: "npm:^16.2.0"
     husky: "npm:^9.1.7"
     lerna: "npm:^8.2.2"
-    lint-staged: "npm:^16.1.1"
+    lint-staged: "npm:^16.1.2"
     prettier: "npm:^3.5.3"
     prettier-config-carbon: "npm:^0.11.0"
     prettier-plugin-svelte: "npm:^3.4.0"
-    svelte: "npm:^5.34.2"
+    svelte: "npm:^5.34.3"
     svelte-eslint-parser: "npm:^1.2.0"
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.34.0"
@@ -716,7 +716,7 @@ __metadata:
     eslint: "npm:^9.29.0"
     prettier: "npm:^3.5.3"
     publint: "npm:^0.3.12"
-    svelte: "npm:^5.34.2"
+    svelte: "npm:^5.34.3"
     svelte-check: "npm:^4.2.1"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.3"
@@ -10180,9 +10180,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^16.1.1":
-  version: 16.1.1
-  resolution: "lint-staged@npm:16.1.1"
+"lint-staged@npm:^16.1.2":
+  version: 16.1.2
+  resolution: "lint-staged@npm:16.1.2"
   dependencies:
     chalk: "npm:^5.4.1"
     commander: "npm:^14.0.0"
@@ -10196,7 +10196,7 @@ __metadata:
     yaml: "npm:^2.8.0"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10c0/80b1945b4e7c9d6c2e08f05bd2c175465f7b8b08a7f512582027ef7da5f2e961b96d4db3e50f9946d4d11a8068658d8fd2ac946655b30883a0adaf64acbc5613
+  checksum: 10c0/2a299fc0d56e0a64ed0af8caf937e00eac47cb270df2917e2d4b939074eaa63ecd7f16d3b70b7e5e57bff75ffbbbf8aae5768dedf3dfd45e3ca1b9caaf7740cc
   languageName: node
   linkType: hard
 
@@ -14177,9 +14177,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.34.2":
-  version: 5.34.2
-  resolution: "svelte@npm:5.34.2"
+"svelte@npm:^5.34.3":
+  version: 5.34.3
+  resolution: "svelte@npm:5.34.3"
   dependencies:
     "@ampproject/remapping": "npm:^2.3.0"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -14195,7 +14195,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/ed52869799c1edfa11a7e9166d808ddf4b50df14f9f27e1316cdc8cbcd4847e473d8327b83233e406f4e9b32f23fa25ea518618a1874a4d7e259a476c8378b8b
+  checksum: 10c0/78f7befb176bc5a9cb24343d644b8cb7f2d02d78e6ed6a2410760fca3019b31ded1dd70b2bc8fc6805435dce3a36787308c1730974d0511cc3aaf0d80cd471d2
   languageName: node
   linkType: hard
 
