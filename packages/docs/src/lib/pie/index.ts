@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-pie-chart',
+	angular: 'PieChartComponent',
 	vue: `Ccv${vanilla}`
 }
 
