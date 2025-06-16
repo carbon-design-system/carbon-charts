@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.11 (2025-06-16)
+
+### Bug Fixes
+
+- **Line graph:** zoom issues in firefox
+  ([#2004](https://github.com/carbon-design-system/carbon-charts/issues/2004))
+  ([17d6f13](https://github.com/carbon-design-system/carbon-charts/commit/17d6f1307a88c94d08a2bb2fa720c7b15451a0f1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.10 (2025-05-26)
 
 **Note:** Version bump only for package @carbon/charts
