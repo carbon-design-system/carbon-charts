@@ -15,6 +15,12 @@ export const chartTypes: ChartTypes = {
 const donutOptions: DonutChartOptions = {
 	title: 'Donut',
 	resizable: true,
+	legend: {
+		position: 'left',
+		truncation: {
+			type: 'none'
+		}
+	},
 	donut: {
 		center: {
 			label: 'Browsers'
@@ -27,7 +33,10 @@ const donutCenteredOptions: DonutChartOptions = {
 	title: 'Donut (centered)',
 	resizable: true,
 	legend: {
-		alignment: Alignments.CENTER
+		position: 'right',
+		truncation: {
+			type: 'none'
+		}
 	},
 	donut: {
 		center: {
