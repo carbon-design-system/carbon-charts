@@ -45,19 +45,16 @@ export default function Diagram() {
 	return (
 		<>
 			<PageHeader title="Network Diagrams" />
-
 			<p>
 				Carbon Charts Diagrams for <Tag type="blue">React</Tag> and{' '}
 				<Tag type="magenta">Angular</Tag> includes components that enable you to create diagrams
 				using the Carbon Design System styling.
 			</p>
-
 			<InlineNotification
 				title="Note"
 				kind="info-square"
 				subtitle="Network Diagrams are ONLY available for Angular and React."
 			/>
-
 			<p>These include:</p>
 			<StructuredListWrapper>
 				<StructuredListHead>
@@ -302,10 +299,16 @@ export default function Diagram() {
 					</StructuredListRow>
 				</StructuredListBody>
 			</StructuredListWrapper>
-
 			<h3>Putting it all together</h3>
-
-			<StyledIframe src="https://codesandbox.io/embed/carbon-charts-react-elkjs-diagram-b9xyp?fontsize=14&hidenavigation=1&theme=dark&view=preview"></StyledIframe>
+			<div style={{ marginBottom: '60px' }}>
+				Open demo in{' '}
+				<a
+					href="https://codesandbox.io/p/sandbox/carbon-charts-react-elkjs-diagram-b9xyp"
+					target="_blank"
+					rel="noopener noreferrer">
+					CodeSandbox
+				</a>
+			</div>
 		</>
 	)
 }
