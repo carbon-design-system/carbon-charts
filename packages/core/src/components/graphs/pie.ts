@@ -126,9 +126,9 @@ export class Pie extends Component {
 			.attr(
 				'aria-label',
 				(d: any) =>
-					`${d[valueMapsTo]}, ${
+					`${d[valueMapsTo] ?? null}, ${
 						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
-					}  ${d.data[groupMapsTo]}`
+					}  ${d.data[groupMapsTo] ?? null}`
 			)
 			// Tween
 			.attrTween('d', function (a: any) {
