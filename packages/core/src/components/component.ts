@@ -126,14 +126,17 @@ export class Component {
 					const chartClipRectSelection = chartClipSelection.select('rect')
 
 					/*
-					 * these checks are needed because of a chrome bug
+					 * these checks are needed because of some browser bug
 					 * related to the rendering of the clip path
 					 */
-					if (
-						chartClipRectSelection.size() !== 0 &&
-						parseFloat(chartClipRectSelection.attr('height')) > 0
-					) {
-						container.attr('clip-path', `url(#${chartClipId})`)
+					if (chartClipRectSelection.size() !== 0) {
+						const height = parseFloat(chartClipRectSelection.attr('height'))
+						const width = parseFloat(chartClipRectSelection.attr('width'))
+
+						// Ensure both width and height are valid and greater than 0
+						if (!isNaN(height) && !isNaN(width) && height > 0 && width > 0) {
+							container.attr('clip-path', `url(#${chartClipId})`)
+						}
 					}
 				}
 			}

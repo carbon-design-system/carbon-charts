@@ -260,6 +260,6 @@ export const examplesStacked: Example[] = [
 	{
 		data: areaStackedToolbarChangesData,
 		options: areaStackedToolbarChanges,
-		tags: ['toolbar', 'time', 'zoombar']
+		tags: ['test', 'toolbar', 'time', 'zoombar']
 	}
 ]
