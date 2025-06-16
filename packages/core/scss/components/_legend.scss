@@ -86,6 +86,7 @@ div.#{globals.$prefix}--#{globals.$charts-prefix}--legend {
 		div.legend-item {
 			margin-right: 0;
 			margin-bottom: 10px;
+			white-space: nowrap;
 		}
 	}
 

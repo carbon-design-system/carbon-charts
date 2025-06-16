@@ -668,6 +668,16 @@ export const examples: Example[] = [
 		tags: ['test']
 	},
 	{
+		options: {
+			...comboStackedAreaLineOptions,
+			legend: {
+				position: 'right'
+			}
+		},
+		data: comboStackedAreaLine,
+		tags: ['test']
+	},
+	{
 		options: comboLineScatterOptions,
 		data: comboLineScatterData,
 		tags: ['test']
