@@ -19,7 +19,16 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getComponentContainer({ ariaLabel: 'lines', withinChartClip: true })
+		// Browser detection for Firefox specific handling
+		const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+		const isZoomBarEnabled = this.model.get('zoomDomain') !== undefined
+
+		// For Firefox with zoombar, use alternative container approach
+		const svg =
+			isFirefox && isZoomBarEnabled
+				? this.getComponentContainer({ ariaLabel: 'lines', withinChartClip: false })
+				: this.getComponentContainer({ ariaLabel: 'lines', withinChartClip: true })
+
 		const { cartesianScales, curves } = this.services
 
 		const getDomainValue = (d: any) => cartesianScales.getDomainValue(d)
@@ -84,7 +93,7 @@ export class Line extends Component {
 		const enteringLines = lines.enter().append('path').classed('line', true).attr('opacity', 0)
 
 		// Apply styles and datum
-		enteringLines
+		const allLines = enteringLines
 			.merge(lines as any)
 			.data(data, (group: any) => group.name)
 			.attr('class', (group: any) =>
@@ -107,6 +116,24 @@ export class Line extends Component {
 					})
 					.join(',')
 			})
+
+		// For Firefox with zoombar, apply manual clipping using CSS clip
+		if (isFirefox && isZoomBarEnabled) {
+			const mainXScale = cartesianScales.getMainXScale()
+			const mainYScale = cartesianScales.getMainYScale()
+
+			if (mainXScale && mainYScale) {
+				const [xScaleStart, xScaleEnd] = mainXScale.range()
+				const [yScaleEnd, yScaleStart] = mainYScale.range()
+
+				// Apply manual clipping using CSS clip property (Firefox-specific workaround)
+				svg
+					.style('overflow', 'hidden')
+					.style('clip', `rect(${yScaleStart}px, ${xScaleEnd}px, ${yScaleEnd}px, ${xScaleStart}px)`)
+			}
+		}
+
+		allLines
 			// Transition
 			.transition()
 			.call((t: any) =>
