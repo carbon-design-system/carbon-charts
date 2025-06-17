@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.12 (2025-06-17)
+
+### Bug Fixes
+
+- **Legend:** handling of longer labels in vertical orientation
+  ([#2005](https://github.com/carbon-design-system/carbon-charts/issues/2005))
+  ([9a5c567](https://github.com/carbon-design-system/carbon-charts/commit/9a5c567ee0b5f8cd8b3c8812d3d2e7882731a518))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.11 (2025-06-16)
 
 ### Bug Fixes
