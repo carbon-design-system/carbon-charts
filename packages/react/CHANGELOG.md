@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.13 (2025-06-20)
+
+### Bug Fixes
+
+- add field name in aria label for pie and donut chart
+  ([#1993](https://github.com/carbon-design-system/carbon-charts/issues/1993))
+  ([418fbe9](https://github.com/carbon-design-system/carbon-charts/commit/418fbe9132b86864833a0e146d34acce2901ac56))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.12 (2025-06-17)
 
 ### Bug Fixes
