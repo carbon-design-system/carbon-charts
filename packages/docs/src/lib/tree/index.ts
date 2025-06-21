@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-tree-chart',
+	angular: ['TreeChartComponent', 'ibm-tree-chart'],
 	vue: `Ccv${vanilla}`
 }
 

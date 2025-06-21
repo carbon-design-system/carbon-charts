@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-histogram-chart',
+	angular: ['HistogramChartComponent', 'ibm-histogram-chart'],
 	vue: `Ccv${vanilla}`
 }
 

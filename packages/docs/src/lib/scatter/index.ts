@@ -8,7 +8,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-scatter-chart',
+	angular: ['ScatterChartComponent', 'ibm-scatter-chart'],
 	vue: `Ccv${vanilla}`
 }
 

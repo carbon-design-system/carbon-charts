@@ -6,7 +6,7 @@ export interface ChartTypes {
 	svelte: string
 	react: string
 	vue: string
-	angular: string
+	angular: string[]
 }
 
 export interface Example {

@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-lollipop-chart',
+	angular: ['LollipopChartComponent', 'ibm-lollipop-chart'],
 	vue: `Ccv${vanilla}`
 }
 
