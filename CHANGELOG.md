@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.13 (2025-06-20)
+
+### Bug Fixes
+
+- add field name in aria label for pie and donut chart
+  ([#1993](https://github.com/carbon-design-system/carbon-charts/issues/1993))
+  ([418fbe9](https://github.com/carbon-design-system/carbon-charts/commit/418fbe9132b86864833a0e146d34acce2901ac56))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.12 (2025-06-17)
+
+### Bug Fixes
+
+- **Legend:** handling of longer labels in vertical orientation
+  ([#2005](https://github.com/carbon-design-system/carbon-charts/issues/2005))
+  ([9a5c567](https://github.com/carbon-design-system/carbon-charts/commit/9a5c567ee0b5f8cd8b3c8812d3d2e7882731a518))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.11 (2025-06-16)
+
+### Bug Fixes
+
+- **Line graph:** zoom issues in firefox
+  ([#2004](https://github.com/carbon-design-system/carbon-charts/issues/2004))
+  ([17d6f13](https://github.com/carbon-design-system/carbon-charts/commit/17d6f1307a88c94d08a2bb2fa720c7b15451a0f1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.10 (2025-05-26)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

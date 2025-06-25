@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.23.10",
+	"version": "1.23.13",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",

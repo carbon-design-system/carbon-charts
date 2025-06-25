@@ -123,13 +123,15 @@ export class Pie extends Component {
 			// a11y
 			.attr('role', Roles.GRAPHICS_SYMBOL)
 			.attr('aria-roledescription', 'slice')
-			.attr(
-				'aria-label',
-				(d: any) =>
-					`${d[valueMapsTo]}, ${
-						convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%'
-					}`
-			)
+			.attr('aria-label', (d: any) => {
+				return [
+					d[valueMapsTo],
+					convertValueToPercentage(d.data[valueMapsTo], displayData, valueMapsTo) + '%',
+					d.data[groupMapsTo]
+				]
+					.filter(Boolean)
+					.join(', ')
+			})
 			// Tween
 			.attrTween('d', function (a: any) {
 				return arcTween.bind(this)(a, self.arc)
