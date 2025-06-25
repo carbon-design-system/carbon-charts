@@ -8,7 +8,7 @@ import { ComboChart as ComboChartCore, type ComboChartOptions } from '@carbon/ch
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-combo-chart',
+	selector: 'ibm-combo-chart, cc-combo',
 	template: ``
 })
 export class ComboChartComponent extends BaseChartComponent implements AfterViewInit {

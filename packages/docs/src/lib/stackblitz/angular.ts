@@ -4,29 +4,29 @@ import { version } from './package-versions'
 import { objectToString } from './object-to-string'
 
 export function getAngularProject(
-	chartType: string,
+	chartType: string[],
 	data: ChartTabularData,
 	options: ChartOptions
 ): Project {
 	const dependencies: Record<string, string> = {
-		'@angular/common': '^18.1.0',
-		'@angular/compiler': '^18.1.0',
-		'@angular/core': '^18.1.0',
-		'@angular/platform-browser': '^18.1.0',
+		'@angular/common': '^20.0.0',
+		'@angular/compiler': '^20.0.0',
+		'@angular/core': '^20.0.0',
+		'@angular/platform-browser': '^20.0.0',
 		'@carbon/charts-angular': version.carbonCharts,
 		tslib: '^2.5.0',
-		'zone.js': '~0.14.0'
+		'zone.js': '~0.15.0'
 	}
 
 	const devDependencies = {
-		'@angular-devkit/build-angular': '^18.1.0',
-		'@angular/cli': '^18.1.0',
-		'@angular/compiler-cli': '^18.1.0',
+		'@angular/build': '^20.0.0',
+		'@angular/cli': '^20.0.0',
+		'@angular/compiler-cli': '^20.0.0',
 		'@types/d3': '^7.4.3',
 		'@types/d3-cloud': '^1.2.9',
 		'@types/d3-sankey': '^0.12.4',
 		'@types/topojson-client': '^3.1.0',
-		typescript: '~5.5.0'
+		typescript: '5.8.2'
 	}
 
 	const indexHtml = `<html>
@@ -50,17 +50,17 @@ export function getAngularProject(
 
 	const mainTs = `import { Component } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser'
-import { ChartsModule } from '@carbon/charts-angular'
+import { ${chartType[0]} } from '@carbon/charts-angular'
 import options from './options'
 import data from './data'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ChartsModule],
-	template: '<${chartType} [data]="data" [options]="options"></${chartType}>'
+  imports: [${chartType[0]}],
+	template: '<${chartType[1]} [options]="options" [data]="data"></${chartType[1]}>',
 })
-export class App {
+class App {
 	options = options
 	data = data
 }
@@ -80,7 +80,7 @@ bootstrapApplication(App)
     "demo": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "configurations": {
             "development": {
               "extractLicenses": false,
@@ -109,7 +109,7 @@ bootstrapApplication(App)
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
               "buildTarget": "demo:build:development"
@@ -168,9 +168,8 @@ bootstrapApplication(App)
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

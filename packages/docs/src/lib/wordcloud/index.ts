@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-wordcloud-chart',
+	angular: ['WordCloudChartComponent', 'ibm-wordcloud-chart'],
 	vue: `Ccv${vanilla}`
 }
 

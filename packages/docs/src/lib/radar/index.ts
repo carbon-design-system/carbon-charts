@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-radar-chart',
+	angular: ['RadarChartComponent', 'ibm-radar-chart'],
 	vue: `Ccv${vanilla}`
 }
 

@@ -7,7 +7,7 @@ export const chartTypesStacked: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-stacked-area-chart',
+	angular: ['StackedAreaChartComponent', 'ibm-stacked-area-chart'],
 	vue: `Ccv${vanilla}`
 }
 

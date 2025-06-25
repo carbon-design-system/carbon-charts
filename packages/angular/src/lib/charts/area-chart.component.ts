@@ -8,7 +8,7 @@ import { AreaChart as AreaChartCore, type AreaChartOptions } from '@carbon/chart
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-area-chart',
+	selector: 'ibm-area-chart, cc-area',
 	template: ``
 })
 export class AreaChartComponent extends BaseChartComponent implements AfterViewInit {

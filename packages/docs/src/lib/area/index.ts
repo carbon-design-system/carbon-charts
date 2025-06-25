@@ -9,7 +9,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-area-chart',
+	angular: ['AreaChartComponent', 'ibm-area-chart'],
 	vue: `Ccv${vanilla}`
 }
 

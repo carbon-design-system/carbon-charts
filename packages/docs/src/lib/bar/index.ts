@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: 'BarChartSimple',
 	react: vanilla,
-	angular: 'ibm-bar-chart',
+	angular: ['SimpleBarChartComponent', 'ibm-simple-bar-chart'],
 	vue: `Ccv${vanilla}`
 }
 
