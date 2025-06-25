@@ -52,14 +52,14 @@
 		"@types/react-dom": "^19.1.6",
 		"@vitejs/plugin-react-swc": "^3.10.2",
 		"classnames": "^2.5.1",
-		"concurrently": "^9.1.2",
+		"concurrently": "^9.2.0",
 		"downlevel-dts": "^0.11.0",
 		"eslint": "^9.29.0",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"typescript": "^5.8.3",
-		"vite": "^6.3.5",
+		"vite": "^7.0.0",
 		"vite-plugin-dts": "^4.5.4"
 	},
 	"publishConfig": {

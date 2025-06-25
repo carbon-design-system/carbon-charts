@@ -22,7 +22,7 @@
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
 		"@carbon/icons-react": "^11.62.0",
-		"@carbon/react": "^1.85.0",
+		"@carbon/react": "^1.85.1",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.1.0",
 		"highlight.js": "^11.11.1",
@@ -39,11 +39,11 @@
 		"@vitejs/plugin-react-swc": "^3.10.2",
 		"eslint": "^9.29.0",
 		"jsdom": "^26.1.0",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.1",
 		"sass": "^1.89.2",
 		"typedoc": "^0.28.5",
 		"typescript": "^5.8.3",
-		"vite": "^6.3.5"
+		"vite": "^7.0.0"
 	},
 	"publishConfig": {
 		"access": "restricted"
