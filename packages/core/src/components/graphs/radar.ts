@@ -489,10 +489,11 @@ export class Radar extends Component {
 			.style('fill-opacity', 0)
 			.attr('transform', (key: any) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`)
 
-		// y labels (show only the min and the max labels)
+		// y labels
+		const showAllLabels = getProperty(options, 'radar', 'showAllLabels')
 		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
 		const yLabels = DOMUtils.appendOrSelect(svg, 'g.y-labels').attr('role', Roles.GROUP)
-		const yLabelUpdate = yLabels.selectAll('text').data(extent(yTicks))
+		const yLabelUpdate = yLabels.selectAll('text').data(showAllLabels ? yTicks : extent(yTicks))
 		yLabelUpdate.join(
 			(enter: any) =>
 				enter
