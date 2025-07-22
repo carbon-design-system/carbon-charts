@@ -48,7 +48,7 @@
 		"ng-packagr": "^20.1.0",
 		"prettier": "^3.6.2",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.37.0",
+		"typescript-eslint": "^8.38.0",
 		"zone.js": "~0.15.1"
 	},
 	"publishConfig": {
