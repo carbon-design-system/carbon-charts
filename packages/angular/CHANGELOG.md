@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.14 (2025-07-22)
+
+### Bug Fixes
+
+- **Toolbar:** add `type=button` to buttons
+  ([#2016](https://github.com/carbon-design-system/carbon-charts/issues/2016))
+  ([1e0e7fe](https://github.com/carbon-design-system/carbon-charts/commit/1e0e7fe89b14236b0dbaf8061d07ff78d816cfb1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.13 (2025-06-20)
 
 ### Bug Fixes
