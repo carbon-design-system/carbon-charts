@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.15 (2025-07-25)
+
+### Bug Fixes
+
+- **Legend:** add `img` role to additional items
+  ([#2017](https://github.com/carbon-design-system/carbon-charts/issues/2017))
+  ([f5b898f](https://github.com/carbon-design-system/carbon-charts/commit/f5b898f3f61e5600d25e60f19ccdf803a5543e62))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.14 (2025-07-22)
 
 ### Bug Fixes
